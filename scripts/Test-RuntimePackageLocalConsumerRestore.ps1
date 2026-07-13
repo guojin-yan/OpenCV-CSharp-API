@@ -205,6 +205,7 @@ function New-TemporaryConsumerProject {
     <TargetFramework>net8.0</TargetFramework>
     <RuntimeIdentifier>$rid</RuntimeIdentifier>
     <SelfContained>false</SelfContained>
+    <UseAppHost>false</UseAppHost>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -453,9 +454,14 @@ foreach ($directory in $repoSensitiveDirectories) {
 
 if ($violations.Count -gt 0) {
     Write-Host "Runtime package local consumer restore guard failed with $($violations.Count) violation(s)."
-    $violations |
-        Sort-Object Path, Issue |
-        Format-Table Path, Issue, Text -AutoSize
+    foreach ($violation in ($violations | Sort-Object Path, Issue)) {
+        Write-Host "Path: $($violation.Path)"
+        Write-Host "Issue: $($violation.Issue)"
+        if (-not [string]::IsNullOrWhiteSpace($violation.Text)) {
+            Write-Host "Text: $($violation.Text)"
+        }
+    }
+
     exit 1
 }
 
