@@ -6,11 +6,6 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$primaryManagedPackageId = "JYPPX.OpenCV.CSharp.API"
-$primaryManagedAssemblyName = "JYPPX.OpenCV.CSharp.API"
-$primaryManagedRootNamespace = "OpenCvSharp"
-$runtimePackagePrefix = "JYPPX.OpenCV.runtime"
-$primaryNativeLoader = "JYPPX.OpenCV.Native"
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
 
 function Get-RepositoryRelativePath {
@@ -52,6 +47,20 @@ function Read-XmlProject {
 
     [xml]$xml = [System.IO.File]::ReadAllText($path)
     return $xml
+}
+
+function Read-RequiredText {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RelativePath
+    )
+
+    $path = Join-Path $repo $RelativePath
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "Required file was not found: $path"
+    }
+
+    return [System.IO.File]::ReadAllText($path)
 }
 
 function Get-XmlTextValue {
@@ -109,6 +118,96 @@ function Get-ProjectPropertyValues {
     return @($values)
 }
 
+function Resolve-PropertyReferences {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Value,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties
+    )
+
+    $resolved = $Value
+    for ($i = 0; $i -lt 8; $i++) {
+        $previous = $resolved
+        $resolved = [regex]::Replace(
+            $resolved,
+            '\$\((?<name>[A-Za-z_][A-Za-z0-9_.-]*)\)',
+            {
+                param($match)
+                $name = $match.Groups["name"].Value
+                if ($Properties.ContainsKey($name)) {
+                    return [string]$Properties[$name]
+                }
+
+                return $match.Value
+            })
+
+        if ($resolved.Equals($previous, [System.StringComparison]::Ordinal)) {
+            break
+        }
+    }
+
+    return $resolved
+}
+
+function Get-DirectoryBuildProperties {
+    param(
+        [Parameter(Mandatory = $true)]
+        [xml]$Project
+    )
+
+    $properties = [ordered]@{}
+    foreach ($propertyGroup in $Project.Project.PropertyGroup) {
+        if ($null -eq $propertyGroup) {
+            continue
+        }
+
+        foreach ($child in $propertyGroup.ChildNodes) {
+            if ($child.NodeType -ne [System.Xml.XmlNodeType]::Element) {
+                continue
+            }
+
+            if ([string]::IsNullOrWhiteSpace($child.InnerText)) {
+                continue
+            }
+
+            $properties[$child.Name] = $child.InnerText
+        }
+    }
+
+    foreach ($key in @($properties.Keys)) {
+        $properties[$key] = Resolve-PropertyReferences -Value ([string]$properties[$key]) -Properties $properties
+    }
+
+    return $properties
+}
+
+function Get-RequiredDirectoryBuildProperty {
+    param(
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    if (-not $Properties.ContainsKey($Name) -or [string]::IsNullOrWhiteSpace([string]$Properties[$Name])) {
+        throw "Required Directory.Build.props metadata property was not found: $Name"
+    }
+
+    return [string]$Properties[$Name]
+}
+
+function Resolve-ProjectPropertyValues {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$Values,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties
+    )
+
+    return @($Values | ForEach-Object { Resolve-PropertyReferences -Value $_ -Properties $Properties })
+}
+
 function Test-FourPartVersion {
     param(
         [AllowNull()]
@@ -129,29 +228,23 @@ function Test-ContainsText {
     return $Text.IndexOf($Needle, [System.StringComparison]::Ordinal) -ge 0
 }
 
-function Read-RequiredText {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$RelativePath
-    )
-
-    $path = Join-Path $repo $RelativePath
-    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-        throw "Required file was not found: $path"
-    }
-
-    return [System.IO.File]::ReadAllText($path)
-}
+$directoryBuildProps = Read-XmlProject -RelativePath "Directory.Build.props"
+$centralProperties = Get-DirectoryBuildProperties -Project $directoryBuildProps
+$primaryManagedPackageId = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpManagedPackageId"
+$primaryManagedAssemblyName = $primaryManagedPackageId
+$primaryManagedRootNamespace = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRootNamespace"
+$runtimePackagePrefix = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRuntimePackageIdPrefix"
+$primaryNativeLoader = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCurrentNativeLibraryName"
 
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $managedProjectPath = "src/OpenCvSharp/OpenCvSharp.csproj"
 $managedProject = Read-XmlProject -RelativePath $managedProjectPath
-$managedPackageIds = @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageId")
-$managedAssemblyNames = @(Get-ProjectPropertyValues -Project $managedProject -Name "AssemblyName")
-$managedRootNamespaces = @(Get-ProjectPropertyValues -Project $managedProject -Name "RootNamespace")
-$managedVersions = @(Get-ProjectPropertyValues -Project $managedProject -Name "Version")
-$managedPackageVersions = @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageVersion")
+$managedPackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageId") -Properties $centralProperties)
+$managedAssemblyNames = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "AssemblyName") -Properties $centralProperties)
+$managedRootNamespaces = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "RootNamespace") -Properties $centralProperties)
+$managedVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "Version") -Properties $centralProperties)
+$managedPackageVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageVersion") -Properties $centralProperties)
 
 if ($managedPackageIds.Count -ne 1 -or $managedPackageIds[0] -ne $primaryManagedPackageId) {
     Add-Violation $violations $managedProjectPath "Managed project PackageId must be $primaryManagedPackageId"
@@ -166,11 +259,11 @@ if ($managedRootNamespaces.Count -ne 1 -or $managedRootNamespaces[0] -ne $primar
 }
 
 if ($managedVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $managedVersions[0])) {
-    Add-Violation $violations $managedProjectPath "Managed project Version must be four numeric parts"
+    Add-Violation $violations $managedProjectPath "Managed project Version must resolve to four numeric parts"
 }
 
 if ($managedPackageVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $managedPackageVersions[0])) {
-    Add-Violation $violations $managedProjectPath "Managed project PackageVersion must be four numeric parts"
+    Add-Violation $violations $managedProjectPath "Managed project PackageVersion must resolve to four numeric parts"
 }
 
 if ($managedVersions.Count -eq 1 -and $managedPackageVersions.Count -eq 1 -and $managedVersions[0] -ne $managedPackageVersions[0]) {
@@ -190,14 +283,14 @@ if ($runtimeProjectFiles.Count -eq 0) {
 foreach ($runtimeProjectFile in $runtimeProjectFiles) {
     $relativePath = Get-RepositoryRelativePath -Path $runtimeProjectFile.FullName
     [xml]$runtimeProject = [System.IO.File]::ReadAllText($runtimeProjectFile.FullName)
-    $runtimePackageIds = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageId")
-    $runtimeVersions = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "Version")
-    $runtimePackageVersions = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageVersion")
+    $runtimePackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageId") -Properties $centralProperties)
+    $runtimeVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "Version") -Properties $centralProperties)
+    $runtimePackageVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageVersion") -Properties $centralProperties)
     $runtimeRidValues = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "RuntimePackageRid")
     $runtimeProfileValues = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "RuntimePackageProfile")
 
     if ($runtimePackageIds.Count -ne 1 -or $runtimePackageIds[0] -ne "$runtimePackagePrefix.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)") {
-        Add-Violation $violations $relativePath "Runtime PackageId must be $runtimePackagePrefix.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)"
+        Add-Violation $violations $relativePath "Runtime PackageId must resolve to $runtimePackagePrefix.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)"
     }
 
     if ($runtimeRidValues.Count -lt 1) {
@@ -209,11 +302,11 @@ foreach ($runtimeProjectFile in $runtimeProjectFiles) {
     }
 
     if ($runtimeVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $runtimeVersions[0])) {
-        Add-Violation $violations $relativePath "Runtime project Version must be four numeric parts"
+        Add-Violation $violations $relativePath "Runtime project Version must resolve to four numeric parts"
     }
 
     if ($runtimePackageVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $runtimePackageVersions[0])) {
-        Add-Violation $violations $relativePath "Runtime project PackageVersion must be four numeric parts"
+        Add-Violation $violations $relativePath "Runtime project PackageVersion must resolve to four numeric parts"
     }
 
     if ($runtimeVersions.Count -eq 1 -and $runtimePackageVersions.Count -eq 1 -and $runtimeVersions[0] -ne $runtimePackageVersions[0]) {
@@ -263,12 +356,12 @@ if (-not (Test-ContainsText -Text $packRuntimeText -Needle "`"-p:PackageId=`$run
     Add-Violation $violations $packRuntimePath "Pack-Runtime must pass the derived neutral runtime package ID to dotnet pack"
 }
 
-if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"JYPPX.OpenCV.Native.dll`"")) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name JYPPX.OpenCV.Native.dll as the Windows primary loader"
+if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"$primaryNativeLoader.dll`"")) {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name $primaryNativeLoader.dll as the Windows primary loader"
 }
 
-if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"libJYPPX.OpenCV.Native.so`"")) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name libJYPPX.OpenCV.Native.so as the non-Windows primary loader"
+if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"lib$primaryNativeLoader.so`"")) {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name lib$primaryNativeLoader.so as the non-Windows primary loader"
 }
 
 if (-not (Test-ContainsText -Text $packManagedText -Needle "PackageVersion carries OpenCV runtime identity as version metadata")) {

@@ -4,9 +4,9 @@
     <RuntimePackageRid Condition="'$(RuntimePackageRid)' == ''">win-x64</RuntimePackageRid>
     <RuntimePackageProfile Condition="'$(RuntimePackageProfile)' == ''">full</RuntimePackageProfile>
     <RuntimePackageProfileSuffix Condition="'$(RuntimePackageProfile)' != '' and '$(RuntimePackageProfile)' != 'full'">.$(RuntimePackageProfile)</RuntimePackageProfileSuffix>
-    <PackageId>JYPPX.OpenCV.runtime.$(RuntimePackageRid)$(RuntimePackageProfileSuffix)</PackageId>
-    <Version>5.0.0.0</Version>
-    <PackageVersion>5.0.0.0</PackageVersion>
+    <PackageId>$(OpenCvCSharpRuntimePackageIdPrefix).$(RuntimePackageRid)$(RuntimePackageProfileSuffix)</PackageId>
+    <Version>$(OpenCvCSharpPackageVersion)</Version>
+    <PackageVersion>$(OpenCvCSharpPackageVersion)</PackageVersion>
     <Authors>guojin-yan</Authors>
     <Description>Native runtime package for OpenCV CSharp API ($(RuntimePackageRid), $(RuntimePackageProfile)).</Description>
     <PackageTags>opencv;runtime;native;$(RuntimePackageRid);$(RuntimePackageProfile)</PackageTags>

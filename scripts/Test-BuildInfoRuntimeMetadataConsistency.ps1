@@ -289,15 +289,15 @@ if (-not (Test-ContainsText -Text $buildInfoText -Needle "public const string Na
     Add-Violation $violations $buildInfoPath "OpenCvSharpBuildInfo.NativeLibraryName must forward to LegacyNativeLibraryName"
 }
 
-Assert-Equals $violations $managedProjectPath "Managed project AssemblyName" (Get-SingleProjectProperty $managedProject "AssemblyName") $expectedManagedPackageId
-Assert-Equals $violations $managedProjectPath "Managed project PackageId" (Get-SingleProjectProperty $managedProject "PackageId") $expectedManagedPackageId
-Assert-Equals $violations $managedProjectPath "Managed project RootNamespace" (Get-SingleProjectProperty $managedProject "RootNamespace") $expectedRootNamespace
-Assert-Equals $violations $managedProjectPath "Managed project Version" (Get-SingleProjectProperty $managedProject "Version") $expectedPackageVersion
-Assert-Equals $violations $managedProjectPath "Managed project PackageVersion" (Get-SingleProjectProperty $managedProject "PackageVersion") $expectedPackageVersion
+Assert-Equals $violations $managedProjectPath "Managed project AssemblyName" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $managedProject "AssemblyName") -Properties $centralProperties) $expectedManagedPackageId
+Assert-Equals $violations $managedProjectPath "Managed project PackageId" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $managedProject "PackageId") -Properties $centralProperties) $expectedManagedPackageId
+Assert-Equals $violations $managedProjectPath "Managed project RootNamespace" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $managedProject "RootNamespace") -Properties $centralProperties) $expectedRootNamespace
+Assert-Equals $violations $managedProjectPath "Managed project Version" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $managedProject "Version") -Properties $centralProperties) $expectedPackageVersion
+Assert-Equals $violations $managedProjectPath "Managed project PackageVersion" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $managedProject "PackageVersion") -Properties $centralProperties) $expectedPackageVersion
 
-Assert-Equals $violations $runtimeProjectPath "Runtime project Version" (Get-SingleProjectProperty $runtimeProject "Version") $expectedPackageVersion
-Assert-Equals $violations $runtimeProjectPath "Runtime project PackageVersion" (Get-SingleProjectProperty $runtimeProject "PackageVersion") $expectedPackageVersion
-$runtimePackageId = Get-SingleProjectProperty $runtimeProject "PackageId"
+Assert-Equals $violations $runtimeProjectPath "Runtime project Version" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $runtimeProject "Version") -Properties $centralProperties) $expectedPackageVersion
+Assert-Equals $violations $runtimeProjectPath "Runtime project PackageVersion" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $runtimeProject "PackageVersion") -Properties $centralProperties) $expectedPackageVersion
+$runtimePackageId = Resolve-PropertyReferences -Value (Get-SingleProjectProperty $runtimeProject "PackageId") -Properties $centralProperties
 if (-not $runtimePackageId.StartsWith("$expectedRuntimePackagePrefix.", [System.StringComparison]::Ordinal)) {
     Add-Violation $violations $runtimeProjectPath "Runtime project PackageId must start with '$expectedRuntimePackagePrefix.'. Actual: '$runtimePackageId'"
 }

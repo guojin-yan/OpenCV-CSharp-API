@@ -125,8 +125,8 @@ foreach ($projectFile in $runtimeProjectFiles) {
     $relativePath = Get-RepositoryRelativePath -Path $projectFile.FullName
     $text = [System.IO.File]::ReadAllText($projectFile.FullName)
 
-    if ($text -notmatch "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>") {
-        Add-Violation $violations $relativePath "Runtime package project PackageId must be JYPPX.OpenCV.runtime.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)"
+    if ($text -notmatch "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>") {
+        Add-Violation $violations $relativePath "Runtime package project PackageId must be JYPPX.OpenCV.runtime.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix) or `$(OpenCvCSharpRuntimePackageIdPrefix).`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)"
     }
 
     if ($text -notmatch "<RuntimePackageRid\b[^>]*>\s*win-x64\s*</RuntimePackageRid>") {

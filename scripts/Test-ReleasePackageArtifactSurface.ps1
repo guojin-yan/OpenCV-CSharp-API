@@ -171,7 +171,7 @@ Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRunt
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "Runtime staging directory:" -Issue "Stage-Runtime must print staging directory evidence"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "Runtime package project directory:" -Issue "Stage-Runtime must print runtime package mirror evidence"
 
-Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID/profile-derived and version-neutral"
+Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID/profile-derived and version-neutral"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle "<PackageReadmeFile>README.md</PackageReadmeFile>" -Issue "Runtime package project must package README.md"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes/$(RuntimePackageRid)/native/**/*"' -Issue "Runtime package project must include RID native runtime files"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="licenses/**/*"' -Issue "Runtime package project must include generated license files"

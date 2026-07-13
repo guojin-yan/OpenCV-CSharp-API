@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net46;net461;net462;net47;net471;net472;net48;net481;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
-    <AssemblyName>JYPPX.OpenCV.CSharp.API</AssemblyName>
-    <RootNamespace>OpenCvSharp</RootNamespace>
-    <PackageId>JYPPX.OpenCV.CSharp.API</PackageId>
-    <Version>5.0.0.0</Version>
-    <PackageVersion>5.0.0.0</PackageVersion>
+    <AssemblyName>$(OpenCvCSharpManagedPackageId)</AssemblyName>
+    <RootNamespace>$(OpenCvCSharpRootNamespace)</RootNamespace>
+    <PackageId>$(OpenCvCSharpManagedPackageId)</PackageId>
+    <Version>$(OpenCvCSharpPackageVersion)</Version>
+    <PackageVersion>$(OpenCvCSharpPackageVersion)</PackageVersion>
     <Authors>guojin-yan</Authors>
     <Description>OpenCV C# API binding through a stable native C ABI.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

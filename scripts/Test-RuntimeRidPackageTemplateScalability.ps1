@@ -169,7 +169,7 @@ foreach ($requiredProfile in @("full", "mini")) {
 
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<RuntimePackageRid\b[^>]*>\s*$currentExampleRid\s*</RuntimePackageRid>" -Issue "Runtime package project may keep win-x64 only as its current default RuntimePackageRid"
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<RuntimePackageProfile\b[^>]*>\s*full\s*</RuntimePackageProfile>" -Issue "Runtime package project must define RuntimePackageProfile"
-Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must be derived from RuntimePackageRid and RuntimePackageProfile"
+Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must be derived from RuntimePackageRid and RuntimePackageProfile"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes/$(RuntimePackageRid)/native/**/*"' -Issue "Runtime package project must pack RID-driven native payloads"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'PackagePath="runtimes/$(RuntimePackageRid)/native"' -Issue "Runtime package project PackagePath must be RID-driven"
 
