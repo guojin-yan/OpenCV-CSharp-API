@@ -87,7 +87,7 @@ function Get-ScannableFiles {
     )
 
     $fullPath = [System.IO.Path]::GetFullPath($Path)
-    $fullPath = $fullPath -replace '([/\\])\.github\.', '$1.github'
+    $fullPath = $fullPath.Replace('.github.', '.github')
     $alternateFullPath = $fullPath -replace '\.+$', ''
     if ($alternateFullPath -ne $fullPath -and (Test-Path -LiteralPath $alternateFullPath)) {
         $fullPath = $alternateFullPath
