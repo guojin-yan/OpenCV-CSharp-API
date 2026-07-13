@@ -91,7 +91,8 @@ function Get-ScannableFiles {
         return
     }
 
-    $item = Get-Item -LiteralPath $resolvedPath.Path
+    $resolvedProviderPath = @($resolvedPath)[0].ProviderPath
+    $item = Get-Item -LiteralPath $resolvedProviderPath
     if (-not $item.PSIsContainer) {
         if (-not (Test-IsIgnoredPath -Path $item.FullName)) {
             $item
