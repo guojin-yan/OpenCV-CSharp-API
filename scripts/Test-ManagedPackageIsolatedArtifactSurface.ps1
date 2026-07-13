@@ -201,8 +201,8 @@ $repoSensitiveDirectories = @(
     (Join-Path $repo "artifacts/packages"),
     (Join-Path $repo "artifacts/runtime"),
     (Join-Path $repo "artifacts/staging"),
-    (Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/runtimes"),
-    (Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/licenses")
+    (Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime/runtimes"),
+    (Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime/licenses")
 )
 
 $preexistingSensitiveDirectories = @{}

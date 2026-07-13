@@ -71,12 +71,16 @@ $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
 $packRuntimeText = Read-RequiredText -RelativePath $packRuntimePath
 $packManagedText = Read-RequiredText -RelativePath $packManagedPath
 
-if (-not (Test-Contains -Text $stageRuntimeText -Needle "`$primaryNativeLoaderFileName = `"$primaryNativeLoader`"")) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name $primaryNativeLoader as the primary loader"
+if (-not (Test-Contains -Text $stageRuntimeText -Needle "`"$primaryNativeLoader`"")) {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name $primaryNativeLoader as the Windows primary loader"
 }
 
-if (-not (Test-Contains -Text $stageRuntimeText -Needle "`$compatibilityNativeLoaderCopyFileName = `"$compatibilityNativeLoader`"")) {
+if (-not (Test-Contains -Text $stageRuntimeText -Needle '"Cv5Sharp.Native" # compatibility loader')) {
     Add-Violation $violations $stageRuntimePath "Stage-Runtime must keep $compatibilityNativeLoader only as an explicit compatibility copy"
+}
+
+if (-not (Test-Contains -Text $stageRuntimeText -Needle '"libJYPPX.OpenCV.Native.so"')) {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name libJYPPX.OpenCV.Native.so as the non-Windows primary loader"
 }
 
 foreach ($needle in @(
@@ -91,7 +95,7 @@ if ($stageRuntimeText -match "OpenCv5Sharp\.runtime|opencv5sharp\.runtime") {
     Add-Violation $violations $stageRuntimePath "Stage-Runtime must not use a fixed-major runtime package identity"
 }
 
-if (-not (Test-Contains -Text $packRuntimeText -Needle "`$runtimePackageId = `"$runtimePackagePrefix.`$Rid`"")) {
+if (-not (Test-Contains -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"')) {
     Add-Violation $violations $packRuntimePath "Pack-Runtime must derive runtime package ID from $runtimePackagePrefix"
 }
 
@@ -121,16 +125,16 @@ foreach ($projectFile in $runtimeProjectFiles) {
     $relativePath = Get-RepositoryRelativePath -Path $projectFile.FullName
     $text = [System.IO.File]::ReadAllText($projectFile.FullName)
 
-    if ($text -notmatch "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\s*</PackageId>") {
-        Add-Violation $violations $relativePath "Runtime package project PackageId must be JYPPX.OpenCV.runtime.`$(RuntimePackageRid)"
+    if ($text -notmatch "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>") {
+        Add-Violation $violations $relativePath "Runtime package project PackageId must be JYPPX.OpenCV.runtime.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)"
     }
 
     if ($text -notmatch "<RuntimePackageRid\b[^>]*>\s*win-x64\s*</RuntimePackageRid>") {
         Add-Violation $violations $relativePath "Runtime package project should define a default RuntimePackageRid"
     }
 
-    if ($text -notmatch "runtimes\\\$\(RuntimePackageRid\)\\native\\\*\*\\\*") {
-        Add-Violation $violations $relativePath "Runtime package project must pack runtimes\\`$(RuntimePackageRid)\\native\\**\\*"
+    if ($text -notmatch "runtimes/\$\(RuntimePackageRid\)/native/\*\*/\*") {
+        Add-Violation $violations $relativePath "Runtime package project must pack runtimes/`$(RuntimePackageRid)/native/**/*"
     }
 
     if ($text -match "OpenCv5Sharp|opencv5sharp") {

@@ -21,6 +21,12 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="bin\**;obj\**" />
+    <EmbeddedResource Remove="bin\**;obj\**" />
+    <None Remove="bin\**;obj\**" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>

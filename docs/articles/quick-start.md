@@ -4,17 +4,17 @@ Install the managed package and a matching runtime package:
 
 安装 managed 主包和对应平台 runtime 包：
 
-Runtime package IDs use `JYPPX.OpenCV.runtime.<rid>`. Choose the package that matches your target RID when available; the command below uses `JYPPX.OpenCV.runtime.win-x64` as the current Windows x64 example.
+Runtime package IDs use `JYPPX.OpenCV.runtime.<rid>` for full builds and `JYPPX.OpenCV.runtime.<rid>.mini` for mini builds. Choose the package that matches your target RID and size profile; the commands below use `win-x64` as an example.
 
-runtime package ID 使用 `JYPPX.OpenCV.runtime.<rid>`。当对应包可用时，请选择与目标 target RID 匹配的 runtime 包；下方命令使用 `JYPPX.OpenCV.runtime.win-x64` 作为当前 Windows x64 示例。
+runtime package ID 对 full build 使用 `JYPPX.OpenCV.runtime.<rid>`，对 mini build 使用 `JYPPX.OpenCV.runtime.<rid>.mini`。请选择与目标 target RID 和 size profile 匹配的 runtime 包；下方命令使用 `win-x64` 示例。
 
-Currently tracked runtime package project: `JYPPX.OpenCV.runtime.win-x64`. If no matching runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then use `OpenCvNativeRuntimeDir` for local builds or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` for packaging.
+Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. Full packages use `JYPPX.OpenCV.runtime.<rid>` and mini packages use `JYPPX.OpenCV.runtime.<rid>.mini`. If no matching runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then use `OpenCvNativeRuntimeDir` for local builds or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` for packaging.
 
-当前仓库跟踪的 runtime package project：`JYPPX.OpenCV.runtime.win-x64`。如果 no matching runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后在本地构建中使用 `OpenCvNativeRuntimeDir`，或用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
+runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。full package 使用 `JYPPX.OpenCV.runtime.<rid>`，mini package 使用 `JYPPX.OpenCV.runtime.<rid>.mini`。如果 no matching runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后在本地构建中使用 `OpenCvNativeRuntimeDir`，或用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
 
-For deeper runtime setup, fallback, smoke, and license details, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the current concrete [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md).
+For deeper runtime setup, fallback, smoke, and license details, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及当前具体 [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md)。
+更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 ```powershell
 dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0.0

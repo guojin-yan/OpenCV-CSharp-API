@@ -1,0 +1,133 @@
+{
+  "description": "Runtime package validation and release matrix for OpenCV CSharp API 5.x. Package IDs stay version-neutral; OpenCV 5.x is carried by package version metadata and this branch name.",
+  "rids": [
+    {
+      "rid": "win-x64",
+      "runner": "windows-latest",
+      "opencvRid": "windows-x64",
+      "nativeExtension": ".dll",
+      "notes": "Windows 10/11 x64 and compatible Windows x64 hosts."
+    },
+    {
+      "rid": "win-x86",
+      "runner": "windows-latest",
+      "opencvRid": "windows-x86",
+      "nativeExtension": ".dll",
+      "notes": "Windows x86, covering the requested x86 surface."
+    },
+    {
+      "rid": "win-arm64",
+      "runner": "windows-latest",
+      "opencvRid": "windows-arm64",
+      "nativeExtension": ".dll",
+      "notes": "Windows ARM64 package surface."
+    },
+    {
+      "rid": "linux-x64",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "linux-x64",
+      "nativeExtension": ".so",
+      "notes": "Portable Linux x64 RID, including common Ubuntu x64 deployments."
+    },
+    {
+      "rid": "linux-arm64",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "linux-arm64",
+      "nativeExtension": ".so",
+      "notes": "Portable Linux ARM64 RID, including Ubuntu ARM64 deployments."
+    },
+    {
+      "rid": "android-arm64",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "android-arm64",
+      "nativeExtension": ".so",
+      "notes": "Android arm64-v8a package surface."
+    },
+    {
+      "rid": "android-arm",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "android-arm",
+      "nativeExtension": ".so",
+      "notes": "Android armeabi-v7a package surface."
+    },
+    {
+      "rid": "android-x64",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "android-x64",
+      "nativeExtension": ".so",
+      "notes": "Android x64 emulator package surface."
+    },
+    {
+      "rid": "android-x86",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "android-x86",
+      "nativeExtension": ".so",
+      "notes": "Android x86 emulator package surface."
+    }
+  ],
+  "profiles": [
+    {
+      "name": "full",
+      "packageIdSuffix": "",
+      "buildList": "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud",
+      "modules": [
+        "core",
+        "imgcodecs",
+        "imgproc",
+        "videoio",
+        "flann",
+        "geometry",
+        "calib",
+        "stereo",
+        "dnn",
+        "objdetect",
+        "photo",
+        "features",
+        "video",
+        "highgui",
+        "stitching",
+        "ptcloud"
+      ],
+      "optionalModules": [
+        "xfeatures2d",
+        "xobjdetect",
+        "quality",
+        "xphoto",
+        "ml",
+        "img_hash",
+        "ximgproc",
+        "optflow",
+        "bgsegm",
+        "tracking",
+        "face",
+        "saliency",
+        "plot",
+        "shape",
+        "line_descriptor",
+        "phase_unwrapping",
+        "structured_light",
+        "intensity_transform",
+        "fuzzy",
+        "hfs",
+        "reg",
+        "surface_matching",
+        "rapid",
+        "alphamat",
+        "bioinspired",
+        "xstereo"
+      ]
+    },
+    {
+      "name": "mini",
+      "packageIdSuffix": ".mini",
+      "buildList": "core,imgproc,imgcodecs,videoio",
+      "modules": [
+        "core",
+        "imgproc",
+        "imgcodecs",
+        "videoio"
+      ],
+      "optionalModules": []
+    }
+  ]
+}

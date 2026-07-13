@@ -6,7 +6,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$runtimeReadmeRelativePath = "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md"
+$runtimeReadmeRelativePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $oldRootIdentity = "OpenCV-CSharp-API-opencv" + "5.x"
 
 function Add-Violation {

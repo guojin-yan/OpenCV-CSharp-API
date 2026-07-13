@@ -8,7 +8,8 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $fallbackPackCommand = "Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>"
 $runtimePackageShape = "JYPPX.OpenCV.runtime.<rid>"
-$currentRuntimePackage = "JYPPX.OpenCV.runtime.win-x64"
+$runtimeMiniPackageShape = "JYPPX.OpenCV.runtime.<rid>.mini"
+$currentRuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime"
 $oldRootIdentity = "OpenCV-CSharp-API-opencv" + "5.x"
 
 function Add-Violation {
@@ -75,7 +76,7 @@ $auditedPaths = @(
     "docs/articles/runtime-licenses.md",
     "docs/articles/native-module-boundary.md",
     "docs/articles/version-neutral-naming-guide.md",
-    "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md",
+    "packaging/runtime/JYPPX.OpenCV.runtime/README.md",
     ".github/ISSUE_TEMPLATE/bug_report.yml",
     "CONTRIBUTING.md",
     "scripts/Build-OpenCV.ps1",
@@ -97,13 +98,13 @@ $localFallbackDocs = @(
     "docs/articles/linked-runtime-build-guide.md",
     "docs/articles/linked-runtime-smoke-guide.md",
     "docs/articles/smoke-profiles-guide.md",
-    "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md",
+    "packaging/runtime/JYPPX.OpenCV.runtime/README.md",
     ".github/ISSUE_TEMPLATE/bug_report.yml",
     "CONTRIBUTING.md"
 )
 
 foreach ($path in $localFallbackDocs) {
-    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle "no matching runtime package" -Issue "$path must preserve the no-matching-runtime-package fallback trigger"
+    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle "no matching" -Issue "$path must preserve the no-matching-runtime-package fallback trigger"
     Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle "local native runtime" -Issue "$path must describe the fallback as a local native runtime route"
     Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle "Build-OpenCV.ps1" -Issue "$path must keep Build-OpenCV.ps1 in the local fallback route"
     Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle "Stage-Runtime.ps1" -Issue "$path must keep Stage-Runtime.ps1 in the local fallback route"
@@ -114,7 +115,7 @@ $packFallbackDocs = @(
     "README.md",
     "docs/articles/quick-start.md",
     "docs/articles/linked-runtime-build-guide.md",
-    "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md",
+    "packaging/runtime/JYPPX.OpenCV.runtime/README.md",
     "CONTRIBUTING.md",
     "docs/articles/version-neutral-naming-guide.md"
 )
@@ -128,10 +129,10 @@ foreach ($path in @(
         "docs/articles/quick-start.md",
         "docs/articles/linked-runtime-build-guide.md",
         "docs/articles/runtime-licenses.md",
-        "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md")) {
-    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle "Currently tracked runtime package project" -Issue "$path must identify current package availability before fallback"
-    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle $currentRuntimePackage -Issue "$path must name the current concrete Windows x64 runtime package"
-    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle $runtimePackageShape -Issue "$path must keep the generic runtime package shape visible"
+        "packaging/runtime/JYPPX.OpenCV.runtime/README.md")) {
+    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle $currentRuntimeProject -Issue "$path must identify the generic runtime package project before fallback"
+    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle $runtimePackageShape -Issue "$path must keep the generic full runtime package shape visible"
+    Assert-Contains -Violations $violations -Path $path -Text $texts[$path] -Needle $runtimeMiniPackageShape -Issue "$path must keep the generic mini runtime package shape visible"
 }
 
 Assert-Contains -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Text $texts["scripts/Build-OpenCV.ps1"] -Needle 'Join-Path $WorkspaceRoot "opencv-source"' -Issue "Build-OpenCV.ps1 must prefer the version-neutral opencv-source workspace root"

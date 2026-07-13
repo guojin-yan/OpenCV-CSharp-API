@@ -133,7 +133,7 @@ $rid = "win-x64"
 $openCvBinarySuffix = "500"
 
 $repoRuntimeOutputRoot = Join-Path $repo "artifacts/runtime"
-$repoRuntimeProjectRoot = Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime.win-x64"
+$repoRuntimeProjectRoot = Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime"
 $repoSensitiveDirectories = @(
     $repoRuntimeOutputRoot,
     (Join-Path $repoRuntimeProjectRoot "runtimes"),

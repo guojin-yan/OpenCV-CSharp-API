@@ -7,14 +7,17 @@ param(
     [string]$OpenCvRuntimeVersionSuffix = "",
     [string]$OpenCvSourceRoot = "",
     [string]$OpenCvInstallRoot = "",
-    [string]$OutputDir = "artifacts\packages",
+    [string]$OutputDir = "artifacts/packages",
     [string]$StageOutputRoot = "",
-    [string]$RuntimeProject = "packaging\runtime\JYPPX.OpenCV.runtime.win-x64\JYPPX.OpenCV.runtime.win-x64.csproj",
+    [string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj",
+    [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
+    [string]$RuntimeProfile = "full",
     [string]$OpenCvNativeRuntimeDir = "",
     [string]$NativeRuntimeDir = "",
     [string]$OpenCvRuntimeDir = "",
     [string]$OpenCvInstallDir = "",
     [string]$OpenCvSourceDir = "",
+    [string[]]$OpenCvModules = @(),
     [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"),
     [switch]$StageRuntime,
     [switch]$NoBuild,
@@ -24,6 +27,45 @@ param(
 $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+
+function Get-RuntimeProfileSpec {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$MatrixPath,
+        [Parameter(Mandatory = $true)]
+        [string]$Profile
+    )
+
+    $matrixCandidate = if ([System.IO.Path]::IsPathRooted($MatrixPath)) {
+        $MatrixPath
+    }
+    else {
+        Join-Path $repoRoot $MatrixPath
+    }
+
+    if (-not (Test-Path -LiteralPath $matrixCandidate -PathType Leaf)) {
+        throw "Runtime package matrix was not found: $matrixCandidate"
+    }
+
+    $matrix = Get-Content -LiteralPath $matrixCandidate -Raw | ConvertFrom-Json
+    $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $Profile } | Select-Object -First 1)
+    if ($profileSpec.Count -eq 0) {
+        throw "Runtime profile '$Profile' was not found in runtime package matrix: $matrixCandidate"
+    }
+
+    return $profileSpec[0]
+}
+
+$profileSpec = Get-RuntimeProfileSpec -MatrixPath $RuntimePackageMatrix -Profile $RuntimeProfile
+if (-not $PSBoundParameters.ContainsKey("OpenCvModules")) {
+    $OpenCvModules = @($profileSpec.modules)
+}
+
+if (-not $PSBoundParameters.ContainsKey("OptionalOpenCvModules")) {
+    $OptionalOpenCvModules = @($profileSpec.optionalModules)
+}
+
+$runtimePackageSuffix = [string]$profileSpec.packageIdSuffix
 $runtimeProjectCandidate = if ([System.IO.Path]::IsPathRooted($RuntimeProject)) {
     $RuntimeProject
 }
@@ -94,6 +136,9 @@ if ($StageRuntime) {
         OpenCvNativeRuntimeDir = $OpenCvNativeRuntimeDir
         OpenCvVersion = $OpenCvVersion
         RuntimeProject = $runtimeProjectDirectory
+        RuntimePackageMatrix = $RuntimePackageMatrix
+        RuntimeProfile = $RuntimeProfile
+        OpenCvModules = $OpenCvModules
         OptionalOpenCvModules = $OptionalOpenCvModules
     }
 
@@ -135,7 +180,8 @@ if ($StageRuntime) {
 
 New-Item -ItemType Directory -Force $outputFullPath | Out-Null
 
-$runtimePackageId = "JYPPX.OpenCV.runtime.$Rid"
+$runtimePackagePrefix = "JYPPX.OpenCV.runtime"
+$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"
 $packageFileVersion = Get-NuGetPackageFileVersion -Version $PackageVersion
 $packagePath = Join-Path $outputFullPath "$runtimePackageId.$packageFileVersion.nupkg"
 if (Test-Path -LiteralPath $packagePath) {
@@ -150,6 +196,7 @@ $arguments = @(
     "-o",
     $outputFullPath,
     "-p:RuntimePackageRid=$Rid",
+    "-p:RuntimePackageProfile=$RuntimeProfile",
     "-p:Version=$PackageVersion",
     "-p:PackageVersion=$PackageVersion",
     "-p:PackageId=$runtimePackageId"
@@ -163,7 +210,7 @@ if ($NoRestore) {
     $arguments += "--no-restore"
 }
 
-Write-Host "Packing runtime package $runtimePackageId $PackageVersion"
+Write-Host "Packing runtime package $runtimePackageId $PackageVersion ($RuntimeProfile)"
 & dotnet @arguments
 if ($LASTEXITCODE -ne 0) {
     throw "dotnet pack failed with exit code $LASTEXITCODE"

@@ -9,6 +9,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $runtimePackageShape = "$runtimePackagePrefix.<rid>"
+$runtimeMiniPackageShape = "$runtimePackagePrefix.<rid>.mini"
 $currentWindowsRuntimePackage = "$runtimePackagePrefix.win-x64"
 $examplePackageVersion = "5.0.0.0"
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
@@ -110,7 +111,7 @@ $linkedRuntimeSmokeGuidePath = "docs/articles/linked-runtime-smoke-guide.md"
 $smokeProfilesGuidePath = "docs/articles/smoke-profiles-guide.md"
 $versionNeutralGuidePath = "docs/articles/version-neutral-naming-guide.md"
 $bugTemplatePath = ".github/ISSUE_TEMPLATE/bug_report.yml"
-$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md"
+$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $sampleProjectPath = "samples/ConsoleSamples/ConsoleSamples.csproj"
 $testProjectPath = "tests/OpenCvSharp.Tests/OpenCvSharp.Tests.csproj"
 
@@ -129,9 +130,10 @@ $testProjectText = Read-RequiredText -RelativePath $testProjectPath
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --version $examplePackageVersion" -Issue "Quick Start must install the neutral managed package"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $currentWindowsRuntimePackage --version $examplePackageVersion" -Issue "Quick Start may keep win-x64 only as the current Windows x64 runtime package example"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle $runtimePackageShape -Issue "Quick Start must describe generic runtime package selection as JYPPX.OpenCV.runtime.<rid>"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle $runtimeMiniPackageShape -Issue "Quick Start must describe mini runtime package selection as JYPPX.OpenCV.runtime.<rid>.mini"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "target RID" -Issue "Quick Start must tell consumers to choose the runtime package for their target RID"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "when available" -Issue "Quick Start must avoid implying every target RID runtime package already exists"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "current Windows x64 example" -Issue "Quick Start must label win-x64 as the current Windows x64 example"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "no matching" -Issue "Quick Start must keep no-matching-runtime-package fallback guidance visible"
+Assert-Matches -Violations $violations -Path $quickStartPath -Text $quickStartText -Pattern "win-x64.*example|example.*win-x64" -Issue "Quick Start must label win-x64 as an example RID"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same four-part package version metadata" -Issue "Quick Start must explain managed/runtime package version alignment"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
@@ -163,6 +165,7 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $bugTemplatePath; Text = $bugTemplateText },
         [pscustomobject]@{ Path = $runtimeReadmePath; Text = $runtimeReadmeText })) {
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $runtimePackageShape -Issue "$($doc.Path) must keep generic runtime package shape visible to consumers"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $runtimeMiniPackageShape -Issue "$($doc.Path) must keep mini runtime package shape visible to consumers"
 }
 
 foreach ($doc in @(
@@ -172,7 +175,7 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $smokeProfilesGuidePath; Text = $smokeProfilesGuideText },
         [pscustomobject]@{ Path = $bugTemplatePath; Text = $bugTemplateText })) {
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "target RID" -Issue "$($doc.Path) must tell consumers to choose the runtime package for their target RID"
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "when available" -Issue "$($doc.Path) must avoid implying every target RID runtime package already exists"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "profile" -Issue "$($doc.Path) must keep runtime profile selection visible"
 }
 
 Assert-Contains -Violations $violations -Path $bugTemplatePath -Text $bugTemplateText -Needle "current Windows x64 example" -Issue "Bug template must label the runtime package placeholder as the current Windows x64 example"
@@ -225,4 +228,4 @@ if ($violations.Count -gt 0) {
 Write-Host "Runtime RID consumer selection surface guard passed."
 Write-Host "Consumer RID files checked: $($consumerRidFiles.Count)."
 Write-Host "Runtime package shape: $runtimePackageShape."
-Write-Host "Current Windows x64 example: $currentWindowsRuntimePackage."
+Write-Host "Mini runtime package shape: $runtimeMiniPackageShape."

@@ -113,8 +113,8 @@ $packWorkflowPath = ".github/workflows/pack.yml"
 $packManagedPath = "scripts/Pack-Managed.ps1"
 $packRuntimePath = "scripts/Pack-Runtime.ps1"
 $stageRuntimePath = "scripts/Stage-Runtime.ps1"
-$runtimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/JYPPX.OpenCV.runtime.win-x64.csproj"
-$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md"
+$runtimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"
+$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $readmePath = "README.md"
 $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
@@ -154,27 +154,27 @@ Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManage
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "Managed package artifact was not found" -Issue "Pack-Managed must verify the expected package artifact after packing"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "PackageVersion carries OpenCV runtime identity as version metadata" -Issue "Pack-Managed must document PackageVersion as metadata, not package identity"
 
-Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$OutputDir = "artifacts\packages"' -Issue "Pack-Runtime default output directory must be artifacts\packages"
-Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$RuntimeProject = "packaging\runtime\JYPPX.OpenCV.runtime.win-x64\JYPPX.OpenCV.runtime.win-x64.csproj"' -Issue "Pack-Runtime default project path must be the neutral runtime package project"
-Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle "`$runtimePackageId = `"$runtimePackagePrefix.`$Rid`"" -Issue "Pack-Runtime package ID must be derived from neutral runtime package prefix"
+Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$OutputDir = "artifacts/packages"' -Issue "Pack-Runtime default output directory must be artifacts/packages"
+Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"' -Issue "Pack-Runtime default project path must be the neutral runtime package project"
+Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"' -Issue "Pack-Runtime package ID must be derived from neutral runtime package prefix, RID, and profile suffix"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$packagePath = Join-Path $outputFullPath "$runtimePackageId.$packageFileVersion.nupkg"' -Issue "Pack-Runtime package artifact file must be derived from neutral package ID plus normalized version"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '"-p:PackageId=$runtimePackageId"' -Issue "Pack-Runtime must pass the derived neutral package ID to dotnet pack"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle "Remove-Item -LiteralPath `$packagePath -Force" -Issue "Pack-Runtime must remove stale expected package artifacts before packing"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle "Runtime package artifact was not found" -Issue "Pack-Runtime must verify the expected package artifact after packing"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle "PackageVersion carries OpenCV runtime identity as version metadata" -Issue "Pack-Runtime must document PackageVersion as metadata, not package identity"
 
-Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '[string]$OutputRoot = "artifacts\runtime"' -Issue "Stage-Runtime default staging output root must be artifacts\runtime"
-Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '[string]$RuntimeProject = "packaging\runtime\JYPPX.OpenCV.runtime.win-x64"' -Issue "Stage-Runtime default runtime project root must use the neutral runtime package identity"
-Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "`$primaryNativeLoaderFileName = `"$primaryNativeLoader`"" -Issue "Stage-Runtime must stage the neutral primary native loader"
-Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "`$compatibilityNativeLoaderCopyFileName = `"$compatibilityNativeLoader`"" -Issue "Stage-Runtime must keep the fixed-major native loader only as a compatibility copy"
+Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '[string]$OutputRoot = "artifacts/runtime"' -Issue "Stage-Runtime default staging output root must be artifacts/runtime"
+Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime"' -Issue "Stage-Runtime default runtime project root must use the neutral runtime package identity"
+Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "JYPPX.OpenCV.Native.dll" -Issue "Stage-Runtime must stage the neutral primary native loader"
+Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '$compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers' -Issue "Stage-Runtime must keep the fixed-major native loader only as a compatibility copy"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "compatibility loader copy for already-compiled consumers" -Issue "Stage-Runtime must label the fixed-major loader copy as compatibility-scoped"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "Runtime staging directory:" -Issue "Stage-Runtime must print staging directory evidence"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "Runtime package project directory:" -Issue "Stage-Runtime must print runtime package mirror evidence"
 
-Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID-derived and version-neutral"
+Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*JYPPX\.OpenCV\.runtime\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID/profile-derived and version-neutral"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle "<PackageReadmeFile>README.md</PackageReadmeFile>" -Issue "Runtime package project must package README.md"
-Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes\$(RuntimePackageRid)\native\**\*"' -Issue "Runtime package project must include RID native runtime files"
-Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="licenses\**\*"' -Issue "Runtime package project must include generated license files"
+Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes/$(RuntimePackageRid)/native/**/*"' -Issue "Runtime package project must include RID native runtime files"
+Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="licenses/**/*"' -Issue "Runtime package project must include generated license files"
 
 foreach ($requiredText in @(
         "The package ID is version-neutral",
@@ -201,7 +201,7 @@ foreach ($doc in @(
 }
 
 foreach ($requiredText in @(
-        "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/licenses/opencv-3rdparty",
+        "packaging/runtime/JYPPX.OpenCV.runtime/licenses/opencv-3rdparty",
         "CI packaging should always stage from the produced OpenCV install tree")) {
     Assert-Contains -Violations $violations -Path $runtimeLicensesPath -Text $runtimeLicensesText -Needle $requiredText -Issue "Runtime license guide must document '$requiredText'"
 }
@@ -210,8 +210,8 @@ foreach ($requiredText in @(
         "artifacts/",
         "*.nupkg",
         "*.snupkg",
-        "packaging/runtime/JYPPX.OpenCV.runtime.*/runtimes/",
-        "packaging/runtime/JYPPX.OpenCV.runtime.*/licenses/")) {
+        "packaging/runtime/JYPPX.OpenCV.runtime/runtimes/",
+        "packaging/runtime/JYPPX.OpenCV.runtime/licenses/")) {
     Assert-Contains -Violations $violations -Path $gitignorePath -Text $gitignoreText -Needle $requiredText -Issue ".gitignore must ignore generated package/release artifact path '$requiredText'"
 }
 

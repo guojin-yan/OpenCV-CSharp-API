@@ -194,13 +194,18 @@ foreach ($runtimeProjectFile in $runtimeProjectFiles) {
     $runtimeVersions = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "Version")
     $runtimePackageVersions = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageVersion")
     $runtimeRidValues = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "RuntimePackageRid")
+    $runtimeProfileValues = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "RuntimePackageProfile")
 
-    if ($runtimePackageIds.Count -ne 1 -or $runtimePackageIds[0] -ne "$runtimePackagePrefix.`$(RuntimePackageRid)") {
-        Add-Violation $violations $relativePath "Runtime PackageId must be $runtimePackagePrefix.`$(RuntimePackageRid)"
+    if ($runtimePackageIds.Count -ne 1 -or $runtimePackageIds[0] -ne "$runtimePackagePrefix.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)") {
+        Add-Violation $violations $relativePath "Runtime PackageId must be $runtimePackagePrefix.`$(RuntimePackageRid)`$(RuntimePackageProfileSuffix)"
     }
 
     if ($runtimeRidValues.Count -lt 1) {
         Add-Violation $violations $relativePath "Runtime package project must define RuntimePackageRid"
+    }
+
+    if ($runtimeProfileValues.Count -lt 1) {
+        Add-Violation $violations $relativePath "Runtime package project must define RuntimePackageProfile"
     }
 
     if ($runtimeVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $runtimeVersions[0])) {
@@ -250,7 +255,7 @@ if (-not (Test-ContainsText -Text $packManagedText -Needle "`$managedPackageId =
     Add-Violation $violations $packManagedPath "Pack-Managed must use the version-neutral managed package ID"
 }
 
-if (-not (Test-ContainsText -Text $packRuntimeText -Needle "`$runtimePackageId = `"$runtimePackagePrefix.`$Rid`"")) {
+if (-not (Test-ContainsText -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"')) {
     Add-Violation $violations $packRuntimePath "Pack-Runtime must derive runtime package ID from $runtimePackagePrefix"
 }
 
@@ -258,8 +263,12 @@ if (-not (Test-ContainsText -Text $packRuntimeText -Needle "`"-p:PackageId=`$run
     Add-Violation $violations $packRuntimePath "Pack-Runtime must pass the derived neutral runtime package ID to dotnet pack"
 }
 
-if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`$primaryNativeLoaderFileName = `"$primaryNativeLoader.dll`"")) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name $primaryNativeLoader.dll as the primary loader"
+if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"JYPPX.OpenCV.Native.dll`"")) {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name JYPPX.OpenCV.Native.dll as the Windows primary loader"
+}
+
+if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"libJYPPX.OpenCV.Native.so`"")) {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must name libJYPPX.OpenCV.Native.so as the non-Windows primary loader"
 }
 
 if (-not (Test-ContainsText -Text $packManagedText -Needle "PackageVersion carries OpenCV runtime identity as version metadata")) {

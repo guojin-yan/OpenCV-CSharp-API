@@ -15,9 +15,9 @@ The scripts accept version-neutral path variables such as `-OpenCvSourceRoot`, `
 
 脚本接受 `-OpenCvSourceRoot`、`-OpenCvInstallRoot` 和 `-OpenCvRuntimeVersionSuffix` 等版本中立路径变量。省略 `-OpenCvSourceRoot` 时，默认 source root 会优先使用 workspace 下版本中立的 `opencv-source` 目录；若不存在，则只 fallback 到根据 `-OpenCvVersion` 推导的既有本地/事实性 major-version 目录，例如 OpenCV 5.0.0 对应 `opencv5-source code`。
 
-Currently tracked runtime package project: `JYPPX.OpenCV.runtime.win-x64`. Generic RID-specific package IDs should use `JYPPX.OpenCV.runtime.<rid>` when package projects and release artifacts exist. If no matching runtime package is available yet, this guide is the local native runtime fallback: run `Build-OpenCV.ps1`, run `Stage-Runtime.ps1`, and pass the staged native output through `OpenCvNativeRuntimeDir` or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
+Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. Full packages use `JYPPX.OpenCV.runtime.<rid>` and mini packages use `JYPPX.OpenCV.runtime.<rid>.mini` for the configured runtime package matrix. If no matching published runtime package is available yet, this guide is the local native runtime fallback: run `Build-OpenCV.ps1`, run `Stage-Runtime.ps1`, and pass the staged native output through `OpenCvNativeRuntimeDir` or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
 
-当前仓库跟踪的 runtime package project：`JYPPX.OpenCV.runtime.win-x64`。当对应 package project 与 release artifact 存在时，通用 RID 专用包 ID 应使用 `JYPPX.OpenCV.runtime.<rid>`。如果 no matching runtime package is available yet，本指南就是 local native runtime fallback：运行 `Build-OpenCV.ps1`，运行 `Stage-Runtime.ps1`，并通过 `OpenCvNativeRuntimeDir` 或 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 使用暂存的 native 输出。
+runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。full package 使用 `JYPPX.OpenCV.runtime.<rid>`，mini package 使用 `JYPPX.OpenCV.runtime.<rid>.mini`，并覆盖配置好的 runtime matrix。如果 no matching published runtime package is available yet，本指南就是 local native runtime fallback：运行 `Build-OpenCV.ps1`，运行 `Stage-Runtime.ps1`，并通过 `OpenCvNativeRuntimeDir` 或 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 使用暂存的 native 输出。
 
 ## Pack Runtime / 打包 Runtime
 
@@ -31,17 +31,17 @@ Runtime package `.csproj` files and package README files are trackable metadata.
 
 runtime package 的 `.csproj` 和包 README 是可跟踪元数据。runtime project 下的 `runtimes/` 与 `licenses/` 目录是被忽略的生成镜像；`Stage-Runtime.ps1` 会在打包前根据当前 runtime 输入重新生成它们，不应提交或手动编辑这些镜像内容。
 
-`Pack-Runtime.ps1 -Rid <rid>` derives runtime package IDs as `JYPPX.OpenCV.runtime.<rid>` and forwards `RuntimePackageRid` into the runtime package project. The `win-x64` project is the current concrete RID example and default, not a hard-coded limit on future runtime packages.
+`Pack-Runtime.ps1 -Rid <rid>` derives full runtime package IDs as `JYPPX.OpenCV.runtime.<rid>`; `-RuntimeProfile mini` derives mini package IDs as `JYPPX.OpenCV.runtime.<rid>.mini`. The script forwards `RuntimePackageRid` and `RuntimePackageProfile` into the generic runtime package project.
 
 `Stage-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package directory used for generated `runtimes/<rid>/native` and `licenses/` mirrors. `Pack-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package `.csproj` file path used by `dotnet pack`. When `Pack-Runtime.ps1 -StageRuntime` is used, the selected `.csproj` directory is forwarded to `Stage-Runtime.ps1`; use `-StageOutputRoot` to forward a separate staging root without changing package `-OutputDir`.
 
-The pack workflow exposes a `rid` input whose current default is `win-x64`; it forwards `${{ inputs.rid }}` to `Pack-Runtime.ps1`, uploads neutral `nupkg` artifacts from `artifacts/packages`, and is not a multi-RID release matrix until additional runtime package projects and release artifacts are added.
+The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured full/mini multi-RID matrix; targeted RID/profile packaging is supported. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, validates package shape with synthetic runtime inputs by default, and rejects publishing when synthetic inputs are enabled.
 
-`Pack-Runtime.ps1 -Rid <rid>` 会把 runtime package ID 推导为 `JYPPX.OpenCV.runtime.<rid>`，并把 `RuntimePackageRid` 转发给 runtime package project。`win-x64` 项目是当前具体 RID 示例和默认值，不是未来 runtime 包的硬编码上限。
+`Pack-Runtime.ps1 -Rid <rid>` 会把 full runtime package ID 推导为 `JYPPX.OpenCV.runtime.<rid>`；`-RuntimeProfile mini` 会推导 mini package ID `JYPPX.OpenCV.runtime.<rid>.mini`。脚本会把 `RuntimePackageRid` 和 `RuntimePackageProfile` 转发给通用 runtime package project。
 
 `Stage-Runtime.ps1 -RuntimeProject` 是仓库相对或绝对 runtime package 目录，用于生成 `runtimes/<rid>/native` 和 `licenses/` 镜像；`Pack-Runtime.ps1 -RuntimeProject` 是供 `dotnet pack` 使用的仓库相对或绝对 runtime package `.csproj` 文件路径。使用 `Pack-Runtime.ps1 -StageRuntime` 时，所选 `.csproj` 所在目录会转发给 `Stage-Runtime.ps1`；可用 `-StageOutputRoot` 转发单独的 staging root，且不改变 package `-OutputDir`。
 
-pack workflow 暴露 `rid` 输入，当前默认值为 `win-x64`；它会把 `${{ inputs.rid }}` 转发给 `Pack-Runtime.ps1`，从 `artifacts/packages` 上传中性的 `nupkg` 产物，并且在新增 runtime package projects 与 release artifacts 之前 not a multi-RID release matrix。
+pack workflow 暴露 `rid` 和 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也支持定向 RID/profile 打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，默认用 synthetic runtime inputs 验证 package shape，并在启用 synthetic inputs 时拒绝发布。
 
 To stage fresh runtime files and then pack in one command, use `-StageRuntime` and provide the native wrapper output directory:
 
@@ -77,9 +77,9 @@ Use the managed package `JYPPX.OpenCV.CSharp.API` and the matching runtime packa
 
 managed 主包 `JYPPX.OpenCV.CSharp.API` 和匹配的 runtime 包 `JYPPX.OpenCV.runtime.<rid>` 应使用相同的四段 package version 元数据，以保持 OpenCV runtime 身份一致。
 
-Start with the [Quick Start](quick-start.md) for consumer install commands. After building or staging a local runtime, validate it with the [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md) and [Smoke Profiles Guide](smoke-profiles-guide.md). Runtime package license layout is covered by [Runtime Licenses](runtime-licenses.md) and the current concrete [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md).
+Start with the [Quick Start](quick-start.md) for consumer install commands. After building or staging a local runtime, validate it with the [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md) and [Smoke Profiles Guide](smoke-profiles-guide.md). Runtime package license layout is covered by [Runtime Licenses](runtime-licenses.md) and the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-consumer 安装命令先看 [Quick Start](quick-start.md)。构建或暂存 local runtime 后，请用 [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md) 和 [Smoke Profiles Guide](smoke-profiles-guide.md) 验证。runtime package license 布局见 [Runtime Licenses](runtime-licenses.md) 和当前具体 [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md)。
+consumer 安装命令先看 [Quick Start](quick-start.md)。构建或暂存 local runtime 后，请用 [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md) 和 [Smoke Profiles Guide](smoke-profiles-guide.md) 验证。runtime package license 布局见 [Runtime Licenses](runtime-licenses.md) 和[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 Before packing, and before invoking `dotnet pack`, the scripts remove the expected normalized package file from the output directory when it already exists. This avoids accepting stale package artifacts from earlier runs as release evidence.
 

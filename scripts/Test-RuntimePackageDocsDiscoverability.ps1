@@ -71,7 +71,7 @@ $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $nativeModuleBoundaryPath = "docs/articles/native-module-boundary.md"
 $versionNeutralGuidePath = "docs/articles/version-neutral-naming-guide.md"
 $tocPath = "docs/toc.yml"
-$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md"
+$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $bugTemplatePath = ".github/ISSUE_TEMPLATE/bug_report.yml"
 $contributingPath = "CONTRIBUTING.md"
 
@@ -93,7 +93,8 @@ foreach ($path in @(
 }
 
 $runtimePackageShape = "JYPPX.OpenCV.runtime.<rid>"
-$currentRuntimePackage = "JYPPX.OpenCV.runtime.win-x64"
+$runtimeMiniPackageShape = "JYPPX.OpenCV.runtime.<rid>.mini"
+$currentRuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime"
 
 foreach ($entry in @(
         [pscustomobject]@{ Text = "href: articles/quick-start.md"; Issue = "Docs TOC must expose Quick Start" },
@@ -107,13 +108,13 @@ foreach ($entry in @(
 }
 
 foreach ($entry in @(
-        [pscustomobject]@{ Path = $readmePath; Needles = @("docs/articles/quick-start.md", "docs/articles/linked-runtime-build-guide.md", "docs/articles/linked-runtime-smoke-guide.md", "docs/articles/smoke-profiles-guide.md", "docs/articles/runtime-licenses.md", "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md") },
-        [pscustomobject]@{ Path = $quickStartPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md") },
-        [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Needles = @("quick-start.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md") },
+        [pscustomobject]@{ Path = $readmePath; Needles = @("docs/articles/quick-start.md", "docs/articles/linked-runtime-build-guide.md", "docs/articles/linked-runtime-smoke-guide.md", "docs/articles/smoke-profiles-guide.md", "docs/articles/runtime-licenses.md", "packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $quickStartPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Needles = @("quick-start.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
         [pscustomobject]@{ Path = $linkedRuntimeSmokeGuidePath; Needles = @("linked-runtime-build-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md") },
         [pscustomobject]@{ Path = $smokeProfilesGuidePath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md") },
-        [pscustomobject]@{ Path = $runtimeLicensesPath; Needles = @("quick-start.md", "linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md") },
-        [pscustomobject]@{ Path = $nativeModuleBoundaryPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md") },
+        [pscustomobject]@{ Path = $runtimeLicensesPath; Needles = @("quick-start.md", "linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $nativeModuleBoundaryPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
         [pscustomobject]@{ Path = $runtimeReadmePath; Needles = @("../../../docs/articles/quick-start.md", "../../../docs/articles/linked-runtime-build-guide.md", "../../../docs/articles/linked-runtime-smoke-guide.md", "../../../docs/articles/smoke-profiles-guide.md", "../../../docs/articles/runtime-licenses.md") },
         [pscustomobject]@{ Path = $versionNeutralGuidePath; Needles = @("Test-RuntimePackageDocsDiscoverability.ps1", "linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "runtime-licenses.md") })) {
     foreach ($needle in $entry.Needles) {
@@ -128,8 +129,16 @@ foreach ($entry in @(
         [pscustomobject]@{ Path = $smokeProfilesGuidePath },
         [pscustomobject]@{ Path = $runtimeLicensesPath },
         [pscustomobject]@{ Path = $runtimeReadmePath })) {
-    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle $runtimePackageShape -Issue "$($entry.Path) must keep generic runtime package shape discoverable"
-    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle $currentRuntimePackage -Issue "$($entry.Path) must identify the current concrete Windows x64 runtime package context"
+    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle $runtimePackageShape -Issue "$($entry.Path) must keep generic full runtime package shape discoverable"
+    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle $runtimeMiniPackageShape -Issue "$($entry.Path) must keep generic mini runtime package shape discoverable"
+}
+
+foreach ($entry in @(
+        [pscustomobject]@{ Path = $quickStartPath },
+        [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath },
+        [pscustomobject]@{ Path = $runtimeLicensesPath },
+        [pscustomobject]@{ Path = $runtimeReadmePath })) {
+    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle $currentRuntimeProject -Issue "$($entry.Path) must identify the generic runtime package project"
 }
 
 foreach ($entry in @(
@@ -138,7 +147,7 @@ foreach ($entry in @(
         [pscustomobject]@{ Path = $linkedRuntimeSmokeGuidePath },
         [pscustomobject]@{ Path = $smokeProfilesGuidePath },
         [pscustomobject]@{ Path = $bugTemplatePath })) {
-    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle "no matching runtime package" -Issue "$($entry.Path) must preserve local native runtime fallback discoverability"
+    Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle "no matching" -Issue "$($entry.Path) must preserve local native runtime fallback discoverability"
     Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle "Build-OpenCV.ps1" -Issue "$($entry.Path) must point fallback users to Build-OpenCV.ps1"
     Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle "Stage-Runtime.ps1" -Issue "$($entry.Path) must point fallback users to Stage-Runtime.ps1"
     Assert-Contains -Violations $violations -Path $entry.Path -Text $texts[$entry.Path] -Needle "OpenCvNativeRuntimeDir" -Issue "$($entry.Path) must point fallback users to OpenCvNativeRuntimeDir"
@@ -159,4 +168,4 @@ if ($violations.Count -gt 0) {
 Write-Host "Runtime package docs discoverability guard passed."
 Write-Host "Runtime docs entry points checked: $($texts.Count)."
 Write-Host "Runtime package shape: $runtimePackageShape."
-Write-Host "Current Windows x64 runtime package context: $currentRuntimePackage."
+Write-Host "Mini runtime package shape: $runtimeMiniPackageShape."

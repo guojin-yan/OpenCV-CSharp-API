@@ -8,7 +8,10 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $runtimePackageShape = "$runtimePackagePrefix.<rid>"
-$currentRuntimePackage = "$runtimePackagePrefix.win-x64"
+$runtimeMiniPackageShape = "$runtimePackagePrefix.<rid>.mini"
+$currentRuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime"
+$runtimePackageMatrixPath = "packaging/runtime/runtime-package-matrix.json"
+$runtimeMatrixPhrase = "runtime package matrix"
 
 function Add-Violation {
     param(
@@ -61,27 +64,40 @@ function Assert-Contains {
     )
 
     if ($Text.IndexOf($Needle, [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
-        Add-Violation -Violations $Violations -Path $Path -Issue $Issue
+        Add-Violation -Violations $Violations -Path $Path -Issue $Issue -Text $Needle
     }
 }
 
 $violations = [System.Collections.Generic.List[object]]::new()
 
-$runtimeRoot = Join-Path $repo "packaging/runtime"
-if (-not (Test-Path -LiteralPath $runtimeRoot -PathType Container)) {
-    throw "Runtime package root was not found: packaging/runtime"
+$runtimeProjectFullPath = Join-Path $repo $currentRuntimeProject
+if (-not (Test-Path -LiteralPath $runtimeProjectFullPath -PathType Container)) {
+    Add-Violation -Violations $violations -Path $currentRuntimeProject -Issue "Generic runtime package project must exist before claiming runtime package availability"
 }
 
-$runtimePackageProjects = @(
-    Get-ChildItem -LiteralPath $runtimeRoot -Directory |
-        Where-Object { $_.Name.StartsWith("$runtimePackagePrefix.", [System.StringComparison]::OrdinalIgnoreCase) } |
-        Select-Object -ExpandProperty Name
-)
-if ($runtimePackageProjects.Count -eq 0) {
-    Add-Violation -Violations $violations -Path "packaging/runtime" -Issue "At least one tracked runtime package project must exist before claiming runtime package availability"
+$runtimeMatrixText = Read-RequiredText -RelativePath $runtimePackageMatrixPath
+$runtimeMatrix = $null
+try {
+    $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
 }
-if ($runtimePackageProjects -notcontains $currentRuntimePackage) {
-    Add-Violation -Violations $violations -Path "packaging/runtime" -Issue "Current Windows x64 runtime package project must remain tracked until availability docs change"
+catch {
+    Add-Violation -Violations $violations -Path $runtimePackageMatrixPath -Issue "Runtime package matrix must be valid JSON" -Text $_.Exception.Message
+}
+
+if ($null -ne $runtimeMatrix) {
+    foreach ($requiredRid in @("win-x64", "win-x86", "win-arm64", "linux-x64", "linux-arm64", "android-arm64", "android-arm", "android-x64", "android-x86")) {
+        $ridSpec = @($runtimeMatrix.rids | Where-Object { $_.rid -eq $requiredRid } | Select-Object -First 1)
+        if ($ridSpec.Count -eq 0) {
+            Add-Violation -Violations $violations -Path $runtimePackageMatrixPath -Issue "Runtime package matrix must include RID $requiredRid"
+        }
+    }
+
+    foreach ($requiredProfile in @("full", "mini")) {
+        $profileSpec = @($runtimeMatrix.profiles | Where-Object { $_.name -eq $requiredProfile } | Select-Object -First 1)
+        if ($profileSpec.Count -eq 0) {
+            Add-Violation -Violations $violations -Path $runtimePackageMatrixPath -Issue "Runtime package matrix must include profile $requiredProfile"
+        }
+    }
 }
 
 $readmePath = "README.md"
@@ -93,7 +109,7 @@ $smokeProfilesGuidePath = "docs/articles/smoke-profiles-guide.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $versionNeutralGuidePath = "docs/articles/version-neutral-naming-guide.md"
 $bugTemplatePath = ".github/ISSUE_TEMPLATE/bug_report.yml"
-$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md"
+$runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 
 $readmeText = Read-RequiredText -RelativePath $readmePath
 $contributingText = Read-RequiredText -RelativePath $contributingPath
@@ -112,9 +128,17 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Text = $linkedRuntimeBuildGuideText },
         [pscustomobject]@{ Path = $runtimeLicensesPath; Text = $runtimeLicensesText },
         [pscustomobject]@{ Path = $runtimeReadmePath; Text = $runtimeReadmeText })) {
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "Currently tracked runtime package project" -Issue "$($doc.Path) must identify the currently tracked runtime package project"
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $currentRuntimePackage -Issue "$($doc.Path) must name the current Windows x64 runtime package"
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $runtimePackageShape -Issue "$($doc.Path) must keep the generic runtime package shape visible"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $currentRuntimeProject -Issue "$($doc.Path) must identify the generic runtime package project"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $runtimePackageShape -Issue "$($doc.Path) must keep the generic full runtime package shape visible"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $runtimeMiniPackageShape -Issue "$($doc.Path) must keep the generic mini runtime package shape visible"
+}
+
+foreach ($doc in @(
+        [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
+        [pscustomobject]@{ Path = $contributingPath; Text = $contributingText },
+        [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Text = $linkedRuntimeBuildGuideText },
+        [pscustomobject]@{ Path = $runtimeReadmePath; Text = $runtimeReadmeText })) {
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $runtimeMatrixPhrase -Issue "$($doc.Path) must describe the runtime package matrix"
 }
 
 foreach ($doc in @(
@@ -124,7 +148,7 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $linkedRuntimeSmokeGuidePath; Text = $linkedRuntimeSmokeGuideText },
         [pscustomobject]@{ Path = $smokeProfilesGuidePath; Text = $smokeProfilesGuideText },
         [pscustomobject]@{ Path = $bugTemplatePath; Text = $bugTemplateText })) {
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "If no matching runtime package is available yet" -Issue "$($doc.Path) must provide a no-matching-runtime-package fallback"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "no matching" -Issue "$($doc.Path) must provide a no-matching-runtime-package fallback"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "local native runtime" -Issue "$($doc.Path) must describe the fallback as local native runtime usage"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "Build-OpenCV.ps1" -Issue "$($doc.Path) must point fallback users to Build-OpenCV.ps1"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "Stage-Runtime.ps1" -Issue "$($doc.Path) must point fallback users to Stage-Runtime.ps1"
@@ -140,41 +164,29 @@ foreach ($doc in @(
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "-OpenCvNativeRuntimeDir" -Issue "$($doc.Path) must document the neutral pack/stage fallback parameter"
 }
 
-Assert-Contains -Violations $violations -Path $contributingPath -Text $contributingText -Needle "do not describe future RID packages as published" -Issue "CONTRIBUTING must prevent overclaiming future RID package availability"
-Assert-Contains -Violations $violations -Path $contributingPath -Text $contributingText -Needle "package project and release artifact exist" -Issue "CONTRIBUTING must require package project and release artifact evidence before future RID availability claims"
+Assert-Contains -Violations $violations -Path $contributingPath -Text $contributingText -Needle "runtime package matrix" -Issue "CONTRIBUTING must require runtime availability docs to track the runtime package matrix"
+Assert-Contains -Violations $violations -Path $contributingPath -Text $contributingText -Needle "real publishing requires native wrapper plus OpenCV runtime outputs" -Issue "CONTRIBUTING must require real runtime output evidence before publishing claims"
+Assert-Contains -Violations $violations -Path $contributingPath -Text $contributingText -Needle "synthetic runtime inputs are package-surface validation only" -Issue "CONTRIBUTING must prevent publishing synthetic runtime validation artifacts"
 Assert-Contains -Violations $violations -Path $versionNeutralGuidePath -Text $versionNeutralGuideText -Needle "Test-RuntimePackageAvailabilityFallbackGuidance.ps1" -Issue "Version-neutral naming guide must list the availability/fallback guard"
 
-$availabilityFiles = @(
-    $readmePath,
-    $contributingPath,
-    $quickStartPath,
-    $linkedRuntimeBuildGuidePath,
-    $linkedRuntimeSmokeGuidePath,
-    $smokeProfilesGuidePath,
-    $runtimeLicensesPath,
-    $versionNeutralGuidePath,
-    $bugTemplatePath,
-    $runtimeReadmePath
-)
-$futureRidRegex = [System.Text.RegularExpressions.Regex]::new(
-    "\b(?:linux-x64|linux-arm64|osx-x64|osx-arm64|win-arm64)\b",
-    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-$futureRidContextRegex = [System.Text.RegularExpressions.Regex]::new(
-    "future|planned|when available|when added|not currently tracked|no matching runtime package|target RID|未来|计划|可用时|尚未|目标",
-    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-
-foreach ($relativePath in $availabilityFiles) {
+foreach ($relativePath in @(
+        $readmePath,
+        $contributingPath,
+        $quickStartPath,
+        $linkedRuntimeBuildGuidePath,
+        $linkedRuntimeSmokeGuidePath,
+        $smokeProfilesGuidePath,
+        $runtimeLicensesPath,
+        $versionNeutralGuidePath,
+        $bugTemplatePath,
+        $runtimeReadmePath)) {
     $path = Join-Path $repo $relativePath
     $lineNumber = 0
     foreach ($line in [System.IO.File]::ReadLines($path)) {
         $lineNumber++
-        if ($futureRidRegex.IsMatch($line) -and -not $futureRidContextRegex.IsMatch($line)) {
-            Add-Violation `
-                -Violations $violations `
-                -Path $relativePath `
-                -Line $lineNumber `
-                -Issue "Non-win-x64 RID mentions must be future/planned/when-available or target-RID scoped unless a runtime package project exists" `
-                -Text $line
+        $oldFixedRidRuntimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime." + "win-x64"
+        if ($line.IndexOf($oldFixedRidRuntimeProjectPath, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+            Add-Violation -Violations $violations -Path $relativePath -Line $lineNumber -Issue "Runtime docs must not point to the old fixed-RID runtime project directory" -Text $line
         }
     }
 }
@@ -188,6 +200,6 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Runtime package availability/fallback guidance guard passed."
-Write-Host "Tracked runtime package projects: $($runtimePackageProjects -join ', ')."
+Write-Host "Runtime package matrix: $runtimePackageMatrixPath."
 Write-Host "Runtime package shape: $runtimePackageShape."
-Write-Host "Current Windows x64 runtime package: $currentRuntimePackage."
+Write-Host "Mini runtime package shape: $runtimeMiniPackageShape."

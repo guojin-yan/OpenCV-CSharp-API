@@ -155,7 +155,7 @@ function New-TemporaryRuntimeProject {
     )
 
     New-Item -ItemType Directory -Force -Path $RuntimeProjectDirectory | Out-Null
-    $projectPath = Join-Path $RuntimeProjectDirectory "JYPPX.OpenCV.runtime.win-x64.csproj"
+    $projectPath = Join-Path $RuntimeProjectDirectory "JYPPX.OpenCV.runtime.csproj"
     $projectText = @'
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -195,13 +195,13 @@ $openCvInstallDir = Join-Path $temporaryRoot "opencv-install"
 $stageOutputRoot = Join-Path $temporaryRoot "stage-output"
 $packageOutputDir = Join-Path $temporaryRoot "package-output"
 $runtimeProjectDir = Join-Path $temporaryRoot "runtime-package-project"
-$runtimeProjectPath = Join-Path $runtimeProjectDir "JYPPX.OpenCV.runtime.win-x64.csproj"
+$runtimeProjectPath = Join-Path $runtimeProjectDir "JYPPX.OpenCV.runtime.csproj"
 $rid = "win-x64"
 $openCvBinarySuffix = "500"
 
 $repoRuntimeOutputRoot = Join-Path $repo "artifacts/runtime"
 $repoPackageOutputRoot = Join-Path $repo "artifacts/packages"
-$repoRuntimeProjectRoot = Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime.win-x64"
+$repoRuntimeProjectRoot = Join-Path $repo "packaging/runtime/JYPPX.OpenCV.runtime"
 $repoSensitiveDirectories = @(
     $repoRuntimeOutputRoot,
     $repoPackageOutputRoot,

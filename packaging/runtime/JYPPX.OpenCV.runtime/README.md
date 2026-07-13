@@ -1,12 +1,12 @@
-# JYPPX.OpenCV.runtime.win-x64 - current concrete RID example
+# JYPPX.OpenCV.runtime - runtime package template
 
-Windows x64 runtime package staging project for OpenCV CSharp API. This is the current concrete `win-x64` RID example; generic runtime package IDs use `JYPPX.OpenCV.runtime.<rid>`, and additional RID projects should reuse the same `RuntimePackageRid`-driven layout instead of hard-coding a new package identity pattern. Runtime packages live under `packaging/runtime` so native distribution metadata stays separate from source projects under `src`.
+Runtime package staging template for OpenCV CSharp API. Template project path: `packaging/runtime/JYPPX.OpenCV.runtime`. Full package IDs use `JYPPX.OpenCV.runtime.<rid>`, mini package IDs use `JYPPX.OpenCV.runtime.<rid>.mini`, and both reuse the same `RuntimePackageRid`/`RuntimePackageProfile`-driven layout. Runtime packages live under `packaging/runtime` so native distribution metadata stays separate from source projects under `src`.
 
-OpenCV CSharp API 的 Windows x64 runtime 包预留项目。这是当前具体 `win-x64` RID 示例；通用 runtime package ID 使用 `JYPPX.OpenCV.runtime.<rid>`，其他 RID 项目应复用同一套由 `RuntimePackageRid` 驱动的布局，而不是硬编码新的包身份模式。runtime 包统一放在 `packaging/runtime` 下，避免把 native 分发元数据混入 `src` 源码项目目录。
+OpenCV CSharp API 的 runtime 包模板项目。模板项目路径为 `packaging/runtime/JYPPX.OpenCV.runtime`。full package ID 使用 `JYPPX.OpenCV.runtime.<rid>`，mini package ID 使用 `JYPPX.OpenCV.runtime.<rid>.mini`，二者复用同一套由 `RuntimePackageRid`/`RuntimePackageProfile` 驱动的布局。runtime 包统一放在 `packaging/runtime` 下，避免把 native 分发元数据混入 `src` 源码项目目录。
 
-Currently tracked runtime package project: `JYPPX.OpenCV.runtime.win-x64`. Future RID-specific package projects should use the `JYPPX.OpenCV.runtime.<rid>` shape when package projects and release artifacts exist. If no matching runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then use `OpenCvNativeRuntimeDir` for local builds or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` for packaging.
+The runtime package matrix in `../runtime-package-matrix.json` covers `win-x64`, `win-x86`, `win-arm64`, `linux-x64`, `linux-arm64`, `android-arm64`, `android-arm`, `android-x64`, and `android-x86` for both full and mini profiles. Actions can validate package shape with synthetic runtime inputs, but real publishing requires native wrapper and OpenCV runtime outputs for the selected RID/profile. If no matching published runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then use `OpenCvNativeRuntimeDir` for local builds or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` for packaging.
 
-当前仓库跟踪的 runtime package project：`JYPPX.OpenCV.runtime.win-x64`。未来 RID 专用 package project 在 package project 与 release artifact 存在时应使用 `JYPPX.OpenCV.runtime.<rid>` 形状。如果 no matching runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后在本地构建中使用 `OpenCvNativeRuntimeDir`，或用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
+`../runtime-package-matrix.json` 中的当前矩阵覆盖 `win-x64`、`win-x86`、`win-arm64`、`linux-x64`、`linux-arm64`、`android-arm64`、`android-arm`、`android-x64` 和 `android-x86` 的 full/mini profiles。Actions 可以用 synthetic runtime inputs 验证 package shape，但真实发布必须提供所选 RID/profile 的 native wrapper 与 OpenCV runtime 输出。如果 no matching published runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后在本地构建中使用 `OpenCvNativeRuntimeDir`，或用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
 
 Consumer package selection starts in the [Quick Start](../../../docs/articles/quick-start.md). Local native runtime fallback and staging are covered by the [Linked Runtime Build Guide](../../../docs/articles/linked-runtime-build-guide.md), linked validation is covered by the [Linked Runtime Smoke Guide](../../../docs/articles/linked-runtime-smoke-guide.md) and [Smoke Profiles Guide](../../../docs/articles/smoke-profiles-guide.md), and license layout is summarized in [Runtime Licenses](../../../docs/articles/runtime-licenses.md).
 
@@ -28,7 +28,7 @@ Runtime files are staged under:
 runtimes/<rid>/native
 ```
 
-For the current concrete `win-x64` example, `RuntimePackageRid=win-x64` resolves that generic layout to `runtimes/win-x64/native`.
+For example, `RuntimePackageRid=win-x64` resolves that generic layout to `runtimes/win-x64/native`, while `RuntimePackageRid=linux-x64` resolves it to `runtimes/linux-x64/native`.
 
 License files are staged under:
 

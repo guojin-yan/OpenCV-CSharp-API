@@ -11,9 +11,11 @@ param(
     [string]$OpenCvRuntimeDir = "",
     [string]$OpenCvInstallDir = "",
     [string]$OpenCvSourceDir = "",
-    [string]$OutputRoot = "artifacts\runtime",
-    [string]$RuntimeProject = "packaging\runtime\JYPPX.OpenCV.runtime.win-x64",
-    [string[]]$OpenCvModules = @("core", "imgcodecs", "imgproc", "videoio", "flann", "geometry", "calib", "stereo", "dnn", "objdetect", "photo", "features", "video", "highgui", "stitching", "ptcloud"),
+    [string]$OutputRoot = "artifacts/runtime",
+    [string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime",
+    [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
+    [string]$RuntimeProfile = "full",
+    [string[]]$OpenCvModules = @(),
     [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo")
 )
 
@@ -21,6 +23,96 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")
 $workspaceRoot = Resolve-Path -LiteralPath (Join-Path $repoRoot "..")
+
+function Get-RuntimeProfileSpec {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$MatrixPath,
+        [Parameter(Mandatory = $true)]
+        [string]$Profile
+    )
+
+    $matrixCandidate = if ([System.IO.Path]::IsPathRooted($MatrixPath)) {
+        $MatrixPath
+    }
+    else {
+        Join-Path $repoRoot $MatrixPath
+    }
+
+    if (-not (Test-Path -LiteralPath $matrixCandidate -PathType Leaf)) {
+        throw "Runtime package matrix was not found: $matrixCandidate"
+    }
+
+    $matrix = Get-Content -LiteralPath $matrixCandidate -Raw | ConvertFrom-Json
+    $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $Profile } | Select-Object -First 1)
+    if ($profileSpec.Count -eq 0) {
+        throw "Runtime profile '$Profile' was not found in runtime package matrix: $matrixCandidate"
+    }
+
+    return $profileSpec[0]
+}
+
+function Test-WindowsRid {
+    param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
+    return $RuntimeIdentifier.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Get-NativeLoaderFileNames {
+    param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
+
+    $compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers
+    if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
+        return @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll")
+    }
+
+    return @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")
+}
+
+function Resolve-OpenCvModuleRuntimeFile {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeDirectory,
+        [Parameter(Mandatory = $true)]
+        [string]$Module,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeIdentifier,
+        [Parameter(Mandatory = $true)]
+        [string]$BinarySuffix,
+        [Parameter(Mandatory = $true)]
+        [string]$Version
+    )
+
+    if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
+        return Join-Path $RuntimeDirectory "opencv_$Module$BinarySuffix.dll"
+    }
+
+    $candidates = @(
+        (Join-Path $RuntimeDirectory "libopencv_$Module.so"),
+        (Join-Path $RuntimeDirectory "libopencv_$Module.so.$Version")
+    )
+
+    foreach ($candidate in $candidates) {
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+            return $candidate
+        }
+    }
+
+    $globbed = @(Get-ChildItem -LiteralPath $RuntimeDirectory -Filter "libopencv_$Module.so*" -File -ErrorAction SilentlyContinue | Sort-Object Name | Select-Object -First 1)
+    if ($globbed.Count -gt 0) {
+        return $globbed[0].FullName
+    }
+
+    return $candidates[1]
+}
+
+$profileSpec = Get-RuntimeProfileSpec -MatrixPath $RuntimePackageMatrix -Profile $RuntimeProfile
+if (-not $PSBoundParameters.ContainsKey("OpenCvModules")) {
+    $OpenCvModules = @($profileSpec.modules)
+}
+
+if (-not $PSBoundParameters.ContainsKey("OptionalOpenCvModules")) {
+    $OptionalOpenCvModules = @($profileSpec.optionalModules)
+}
 
 function Get-DefaultOpenCvSourceRoot {
     param(
@@ -172,8 +264,8 @@ $nativeRuntimePath = Resolve-RepoPath $OpenCvNativeRuntimeDir
 $openCvRuntimePath = Resolve-Path -LiteralPath $OpenCvRuntimeDir
 $openCvSourcePath = Resolve-Path -LiteralPath $OpenCvSourceDir
 $openCvInstallPath = if ([string]::IsNullOrWhiteSpace($OpenCvInstallDir)) { $null } else { Resolve-Path -LiteralPath $OpenCvInstallDir }
-$stagingNativeDir = Join-Path $outputRootFullPath (Join-Path $Rid "native")
-$runtimeProjectNativeDir = Join-Path $runtimeProjectRootFullPath (Join-Path "runtimes\$Rid" "native")
+$stagingNativeDir = Join-Path (Join-Path $outputRootFullPath $Rid) "native"
+$runtimeProjectNativeDir = Join-Path (Join-Path (Join-Path $runtimeProjectRootFullPath "runtimes") $Rid) "native"
 $runtimeProjectLicenseDir = Join-Path $runtimeProjectRootFullPath "licenses"
 $runtimeProjectOpenCvLicenseDir = Join-Path $runtimeProjectLicenseDir "opencv-3rdparty"
 
@@ -190,12 +282,13 @@ Get-ChildItem -LiteralPath $runtimeProjectNativeDir -Force | Remove-Item -Recurs
 Get-ChildItem -LiteralPath $runtimeProjectLicenseDir -Force | Remove-Item -Recurse -Force
 New-Item -ItemType Directory -Force $runtimeProjectOpenCvLicenseDir | Out-Null
 
-# Derived only for factual upstream OpenCV runtime DLL names such as opencv_core500.dll.
+# Derived only for factual upstream OpenCV runtime names such as opencv_core500.dll or libopencv_core.so.5.0.0.
 $openCvBinarySuffix = (($OpenCvVersion -split "\.") | Select-Object -First 3) -join ""
-# JYPPX.OpenCV.Native.dll is the version-neutral primary loader.
-# OpenCv5Sharp.Native.dll remains a compatibility loader copy for already-compiled consumers.
-$primaryNativeLoaderFileName = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoaderCopyFileName = "OpenCv5Sharp.Native.dll"
+# JYPPX.OpenCV.Native is the version-neutral primary loader.
+# OpenCv5Sharp.Native remains a compatibility loader copy for already-compiled consumers.
+$nativeLoaderFileNames = Get-NativeLoaderFileNames -RuntimeIdentifier $Rid
+$primaryNativeLoaderFileName = $nativeLoaderFileNames[0]
+$compatibilityNativeLoaderCopyFileName = $nativeLoaderFileNames[1]
 $runtimeFiles = @(
     (Join-Path $nativeRuntimePath $primaryNativeLoaderFileName),
     (Join-Path $nativeRuntimePath $compatibilityNativeLoaderCopyFileName)
@@ -206,7 +299,7 @@ foreach ($module in $OpenCvModules) {
         continue
     }
 
-    $runtimeFiles += (Join-Path $openCvRuntimePath "opencv_$module$openCvBinarySuffix.dll")
+    $runtimeFiles += Resolve-OpenCvModuleRuntimeFile -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion
 }
 
 $optionalRuntimeFiles = @()
@@ -215,7 +308,7 @@ foreach ($module in $OptionalOpenCvModules) {
         continue
     }
 
-    $optionalFile = Join-Path $openCvRuntimePath "opencv_$module$openCvBinarySuffix.dll"
+    $optionalFile = Resolve-OpenCvModuleRuntimeFile -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion
     if (Test-Path -LiteralPath $optionalFile) {
         $optionalRuntimeFiles += $optionalFile
     }
@@ -250,7 +343,7 @@ if ($optionalRuntimeFiles.Count -gt 0) {
 $licenseFiles = @(
     (Join-Path $repoRoot "LICENSE"),
     (Join-Path $openCvSourcePath "LICENSE"),
-    (Join-Path $openCvSourcePath "3rdparty\ippicv\readme.htm")
+    (Join-Path (Join-Path (Join-Path $openCvSourcePath "3rdparty") "ippicv") "readme.htm")
 )
 
 foreach ($file in $licenseFiles) {

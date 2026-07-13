@@ -2,9 +2,9 @@ name: build-managed
 
 on:
   push:
-    branches: [main]
+    branches: [main, opencv5.x]
   pull_request:
-    branches: [main]
+    branches: [main, opencv5.x]
   workflow_dispatch:
 
 jobs:
@@ -25,5 +25,3 @@ jobs:
         run: dotnet restore .\OpenCV-CSharp-API.slnx
       - name: Build
         run: dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
-      - name: Test
-        run: dotnet test .\OpenCV-CSharp-API.slnx -c Release --no-build

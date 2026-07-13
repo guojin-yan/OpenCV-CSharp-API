@@ -12,11 +12,35 @@ on:
         required: true
         default: "0"
       rid:
-        description: Runtime identifier to pack; win-x64 is the current default until additional runtime package projects and release artifacts exist
+        description: Runtime identifier to pack; use all for the configured matrix
         required: true
-        default: win-x64
+        default: all
+      runtime_profile:
+        description: Runtime profile to pack; use all for full and mini
+        required: true
+        default: all
+      validate_synthetic_runtime:
+        description: Use synthetic runtime inputs for package-surface validation only
+        required: true
+        default: "true"
+      native_runtime_dir:
+        description: Real native wrapper runtime directory when synthetic validation is false
+        required: false
+        default: ""
+      opencv_runtime_dir:
+        description: Real OpenCV runtime directory when synthetic validation is false
+        required: false
+        default: ""
+      opencv_source_dir:
+        description: Real OpenCV source directory when synthetic validation is false
+        required: false
+        default: ""
+      opencv_install_dir:
+        description: Real OpenCV install directory when synthetic validation is false
+        required: false
+        default: ""
       publish_github_packages:
-        description: Publish packages to GitHub Packages
+        description: Publish packages to GitHub Packages; requires real runtime inputs
         required: true
         default: "false"
 
@@ -25,7 +49,7 @@ permissions:
   packages: write
 
 jobs:
-  pack:
+  validate:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,40 +61,188 @@ jobs:
             8.0.x
       - name: Check project invariants
         shell: pwsh
-        run: pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+
+  pack-managed:
+    needs: validate
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
       - name: Restore
-        run: dotnet restore .\OpenCV-CSharp-API.slnx
+        run: dotnet restore ./OpenCV-CSharp-API.slnx
       - name: Build
-        run: dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
+        run: dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore
       - name: Pack managed API
         shell: pwsh
         run: |
           $packageRevision = [int]'${{ inputs.package_revision }}'
-          pwsh -NoProfile -File .\scripts\Pack-Managed.ps1 `
+          pwsh -NoProfile -File ./scripts/Pack-Managed.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -PackageRevision $packageRevision `
             -NoBuild `
             -NoRestore
-      - name: Pack runtime shell
-        shell: pwsh
-        run: |
-          $packageRevision = [int]'${{ inputs.package_revision }}'
-          pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 `
-            -Rid '${{ inputs.rid }}' `
-            -OpenCvVersion '${{ inputs.opencv_version }}' `
-            -PackageRevision $packageRevision `
-            -NoBuild `
-            -NoRestore
-      - name: Upload NuGet packages
+      - name: Upload managed package
         uses: actions/upload-artifact@v4
         with:
-          name: nupkg
+          name: nupkg-managed
           path: artifacts/packages/*.nupkg
-      - name: Publish to GitHub Packages
+          if-no-files-found: error
+      - name: Publish managed package
         if: inputs.publish_github_packages == 'true'
         shell: pwsh
         run: |
-          dotnet nuget push .\artifacts\packages\*.nupkg `
+          dotnet nuget push ./artifacts/packages/*.nupkg `
+            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
+            --api-key "${{ secrets.GITHUB_TOKEN }}" `
+            --skip-duplicate
+
+  pack-runtime:
+    needs: validate
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            profile: full
+            os: windows-latest
+          - rid: win-x64
+            profile: mini
+            os: windows-latest
+          - rid: win-x86
+            profile: full
+            os: windows-latest
+          - rid: win-x86
+            profile: mini
+            os: windows-latest
+          - rid: win-arm64
+            profile: full
+            os: windows-latest
+          - rid: win-arm64
+            profile: mini
+            os: windows-latest
+          - rid: linux-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: linux-x64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: linux-arm64
+            profile: full
+            os: ubuntu-24.04
+          - rid: linux-arm64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: android-arm64
+            profile: full
+            os: ubuntu-24.04
+          - rid: android-arm64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: android-arm
+            profile: full
+            os: ubuntu-24.04
+          - rid: android-arm
+            profile: mini
+            os: ubuntu-24.04
+          - rid: android-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: android-x64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: android-x86
+            profile: full
+            os: ubuntu-24.04
+          - rid: android-x86
+            profile: mini
+            os: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Reject synthetic publish
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
+        shell: pwsh
+        run: throw "Synthetic runtime inputs validate package shape only and must not be published."
+      - name: Skip unmatched matrix entry
+        if: ${{ !((inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile)) }}
+        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
+      - name: Create synthetic runtime inputs
+        id: synthetic
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.validate_synthetic_runtime == 'true' }}
+        shell: pwsh
+        run: |
+          $result = pwsh -NoProfile -File ./scripts/New-SyntheticRuntimeInputs.ps1 `
+            -Rid '${{ matrix.rid }}' `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' | ConvertFrom-Json
+          "native_runtime_dir=$($result.NativeWrapperDir)" >> $env:GITHUB_OUTPUT
+          "opencv_runtime_dir=$($result.OpenCvRuntimeDir)" >> $env:GITHUB_OUTPUT
+          "opencv_source_dir=$($result.OpenCvSourceDir)" >> $env:GITHUB_OUTPUT
+          "opencv_install_dir=$($result.OpenCvInstallDir)" >> $env:GITHUB_OUTPUT
+      - name: Pack runtime package
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
+        shell: pwsh
+        run: |
+          $packageRevision = [int]'${{ inputs.package_revision }}'
+          $nativeRuntimeDir = '${{ steps.synthetic.outputs.native_runtime_dir }}'
+          $openCvRuntimeDir = '${{ steps.synthetic.outputs.opencv_runtime_dir }}'
+          $openCvSourceDir = '${{ steps.synthetic.outputs.opencv_source_dir }}'
+          $openCvInstallDir = '${{ steps.synthetic.outputs.opencv_install_dir }}'
+
+          if ('${{ inputs.validate_synthetic_runtime }}' -ne 'true') {
+            $nativeRuntimeDir = '${{ inputs.native_runtime_dir }}'
+            $openCvRuntimeDir = '${{ inputs.opencv_runtime_dir }}'
+            $openCvSourceDir = '${{ inputs.opencv_source_dir }}'
+            $openCvInstallDir = '${{ inputs.opencv_install_dir }}'
+          }
+
+          if ([string]::IsNullOrWhiteSpace($nativeRuntimeDir) -or
+              [string]::IsNullOrWhiteSpace($openCvRuntimeDir) -or
+              [string]::IsNullOrWhiteSpace($openCvSourceDir)) {
+            throw "Runtime packaging requires native_runtime_dir, opencv_runtime_dir, and opencv_source_dir when synthetic validation is disabled."
+          }
+
+          $packArgs = @(
+            '-Rid', '${{ matrix.rid }}',
+            '-RuntimeProfile', '${{ matrix.profile }}',
+            '-OpenCvVersion', '${{ inputs.opencv_version }}',
+            '-PackageRevision', $packageRevision,
+            '-StageRuntime',
+            '-OpenCvNativeRuntimeDir', $nativeRuntimeDir,
+            '-OpenCvRuntimeDir', $openCvRuntimeDir,
+            '-OpenCvSourceDir', $openCvSourceDir,
+            '-RuntimeProject', './packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj'
+          )
+
+          if (-not [string]::IsNullOrWhiteSpace($openCvInstallDir)) {
+            $packArgs += @('-OpenCvInstallDir', $openCvInstallDir)
+          }
+
+          pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 @packArgs
+      - name: Upload runtime package
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkg-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/packages/*.nupkg
+          if-no-files-found: error
+      - name: Publish runtime package
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.publish_github_packages == 'true' }}
+        shell: pwsh
+        run: |
+          dotnet nuget push ./artifacts/packages/*.nupkg `
             --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
             --api-key "${{ secrets.GITHUB_TOKEN }}" `
             --skip-duplicate

@@ -4,9 +4,9 @@ This guide describes the supported smoke profiles for the OpenCV CSharp API test
 
 本文说明 OpenCV CSharp API 测试与样例套件支持的 smoke profile。新增 profile 开关使用版本中立的 `OPENCV_CSHARP_*` 名称；旧的 `OPENCV5SHARP_*` 名称仍仅作为既有 smoke workflow 的兼容别名接受。
 
-Linked smoke profiles assume the managed package `JYPPX.OpenCV.CSharp.API` and the matching runtime package `JYPPX.OpenCV.runtime.<rid>` use the same four-part package version metadata. Choose the runtime package for the target RID under smoke when available; `JYPPX.OpenCV.runtime.win-x64` is only the current Windows x64 example.
+Linked smoke profiles assume the managed package `JYPPX.OpenCV.CSharp.API` and the matching full `JYPPX.OpenCV.runtime.<rid>` or mini `JYPPX.OpenCV.runtime.<rid>.mini` package use the same four-part package version metadata. Choose the runtime package for the target RID/profile under smoke.
 
-linked smoke profile 默认 managed 主包 `JYPPX.OpenCV.CSharp.API` 与匹配的 runtime 包 `JYPPX.OpenCV.runtime.<rid>` 使用相同的四段 package version 元数据。当对应包可用时，请选择 smoke 目标 target RID 对应的 runtime 包；`JYPPX.OpenCV.runtime.win-x64` 仅是当前 Windows x64 示例。
+linked smoke profile 默认 managed 主包 `JYPPX.OpenCV.CSharp.API` 与匹配的 full `JYPPX.OpenCV.runtime.<rid>` 或 mini `JYPPX.OpenCV.runtime.<rid>.mini` 包使用相同的四段 package version 元数据。请选择 smoke 目标 target RID/profile 对应的 runtime 包。
 
 If no matching runtime package is available yet, use `Build-OpenCV.ps1` and `Stage-Runtime.ps1` to prepare a local native runtime, then pass that output to tests or samples with `OpenCvNativeRuntimeDir`.
 

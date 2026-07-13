@@ -11,7 +11,8 @@ Thanks for helping build OpenCV CSharp API.
 - Keep samples, docs, and snippets on `OpenCvSharp.*`, `JYPPX.OpenCV.*`, and `OPENCV_CSHARP_*`; fixed-major names in consumer-facing files must be explicitly labelled as compatibility or legacy aliases.
 - Keep install commands neutral-first: `dotnet add package JYPPX.OpenCV.CSharp.API --version <four-part-version>` plus the matching `JYPPX.OpenCV.runtime.<rid>` runtime package on the same four-part package version metadata.
 - When install snippets show `JYPPX.OpenCV.runtime.win-x64`, label it as the current Windows x64 example and also mention choosing `JYPPX.OpenCV.runtime.<rid>` for the consumer's target RID when available; it is not the only supported runtime package.
-- For availability docs, do not describe future RID packages as published until a package project and release artifact exist; if no matching runtime package is available yet, point consumers to the local native runtime fallback using `Build-OpenCV.ps1`, `Stage-Runtime.ps1`, `OpenCvNativeRuntimeDir`, and `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
+- For availability docs, describe the current runtime package matrix from `packaging/runtime/runtime-package-matrix.json`: full packages use `JYPPX.OpenCV.runtime.<rid>`, mini packages use `JYPPX.OpenCV.runtime.<rid>.mini`, and real publishing requires native wrapper plus OpenCV runtime outputs for the selected RID/profile.
+- If no matching runtime package is available yet, keep the local native runtime fallback visible: run `Build-OpenCV.ps1`, run `Stage-Runtime.ps1`, use `OpenCvNativeRuntimeDir`, and package with `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` when needed.
 - Keep sample/test local runtime copy targets on `OpenCvNativeRuntimeDir`; `OpenCv5SharpNativeRuntimeDir` may appear only as an explicit compatibility alias bridge for existing build scripts, and copy-target dry-runs must use synthetic DLLs outside project `bin`/`obj`.
 - Keep runtime package docs cross-linked across README, Quick Start, linked runtime build/smoke guides, smoke profiles, runtime licenses, issue templates, and runtime package README files so users can find package selection, fallback, validation, and license guidance without treating `win-x64` as the only/final package identity.
 - Keep package metadata version-neutral: managed package ID and assembly name stay `JYPPX.OpenCV.CSharp.API`, runtime package IDs stay `JYPPX.OpenCV.runtime.<rid>`, and OpenCV runtime identity belongs in package versions.
@@ -21,9 +22,10 @@ Thanks for helping build OpenCV CSharp API.
 - Keep pack-stage dry-runs isolated: `Pack-Runtime.ps1 -StageRuntime` must forward the selected runtime project directory and `StageOutputRoot` to staging, package from temporary inputs when tested, and avoid creating repo runtime/package mirrors.
 - Keep local runtime package consumer dry-runs isolated: restore/build temporary consumers from local package sources and temporary NuGet caches, verify RID native assets are selected, and remove all consumer/package outputs afterwards.
 - Keep managed/runtime package-pair dry-runs version-aligned: temporary consumers must reference `JYPPX.OpenCV.CSharp.API` and `JYPPX.OpenCV.runtime.<rid>` with matching four-part package version metadata and isolated build/cache outputs.
-- Keep pack workflow release availability honest: the `rid` input may default to the current default `win-x64`, but workflow/release docs must say it is not a multi-RID release matrix until additional runtime package projects and release artifacts exist.
+- Keep pack workflow release availability honest: `rid=all` and `runtime_profile=all` validate the configured full/mini multi-RID package matrix; synthetic runtime inputs are package-surface validation only and must not be published.
 - Keep DocFX configuration and generated API documentation surfaces on `OpenCvSharp.*`, `src/OpenCvSharp/OpenCvSharp.csproj`, `docs/api`, and `docs/_site`.
 - Keep managed, pack, docs, and native CI workflows wired to `scripts/Test-ProjectInvariants.ps1` before restore, build, pack, DocFX, or CMake work begins.
+- Keep the `build-managed` workflow native-free: its aggregate invariant step runs the representative managed package consumer compile guard before build outputs exist, and the workflow must not run the full native-dependent `dotnet test` suite unless native runtime assets are explicitly staged.
 - Keep new generic build variables, package metadata, and docs version-neutral unless they describe a concrete runtime fact.
 - Keep new repository paths version-neutral; only the generated `src/OpenCvSharp.Native/include/open_cv_5_sharp` compatibility include tree may keep a fixed-major path name.
 - Keep fixed-version source/install/cache path text explicitly labelled as factual, upstream, cache, fallback, or compatibility context.
@@ -53,3 +55,5 @@ dotnet restore .\OpenCV-CSharp-API.slnx
 dotnet build .\OpenCV-CSharp-API.slnx -c Release
 dotnet test .\OpenCV-CSharp-API.slnx -c Release --no-build
 ```
+
+The GitHub `build-managed` workflow intentionally relies on the native-free representative package consumer compile guard inside `scripts/Test-ProjectInvariants.ps1`. Run full `dotnet test` locally or in CI only with matching native runtime assets staged.

@@ -4,9 +4,9 @@ This smoke path checks that the linked runtime for the current packaged OpenCV r
 
 此 smoke 流程用于检查当前打包 OpenCV runtime 身份 OpenCV 5.0.0 对应的 linked runtime 能执行代表性模块调用，同时默认不要求摄像头、窗口或下载模型。
 
-Run linked smoke with the managed package `JYPPX.OpenCV.CSharp.API` and the matching runtime package `JYPPX.OpenCV.runtime.<rid>` on the same four-part package version metadata. Choose the runtime package for the target RID under test when available; `JYPPX.OpenCV.runtime.win-x64` is only the current Windows x64 example.
+Run linked smoke with the managed package `JYPPX.OpenCV.CSharp.API` and the matching full `JYPPX.OpenCV.runtime.<rid>` or mini `JYPPX.OpenCV.runtime.<rid>.mini` package on the same four-part package version metadata. Choose the runtime package for the target RID/profile under test.
 
-运行 linked smoke 时，managed 主包 `JYPPX.OpenCV.CSharp.API` 与匹配的 runtime 包 `JYPPX.OpenCV.runtime.<rid>` 应使用相同的四段 package version 元数据。当对应包可用时，请选择被测 target RID 对应的 runtime 包；`JYPPX.OpenCV.runtime.win-x64` 仅是当前 Windows x64 示例。
+运行 linked smoke 时，managed 主包 `JYPPX.OpenCV.CSharp.API` 与匹配的 full `JYPPX.OpenCV.runtime.<rid>` 或 mini `JYPPX.OpenCV.runtime.<rid>.mini` 包应使用相同的四段 package version 元数据。请选择被测 target RID/profile 对应的 runtime 包。
 
 If no matching runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then run linked smoke with `OpenCvNativeRuntimeDir` pointing at that local native output.
 

@@ -101,7 +101,7 @@ $violations = [System.Collections.Generic.List[object]]::new()
 $workflowRequirements = @(
     [pscustomobject]@{
         Path = ".github/workflows/build-managed.yml"
-        MustRunBefore = @("dotnet restore", "dotnet build", "dotnet test")
+        MustRunBefore = @("dotnet restore", "dotnet build")
     },
     [pscustomobject]@{
         Path = ".github/workflows/pack.yml"
@@ -139,6 +139,22 @@ foreach ($requirement in $workflowRequirements) {
             }
         }
     }
+}
+
+$buildManagedWorkflowPath = ".github/workflows/build-managed.yml"
+$buildManagedWorkflowText = Read-RequiredText -RelativePath $buildManagedWorkflowPath
+if ((Get-TokenIndex -Text $buildManagedWorkflowText -Token "dotnet test") -ge 0) {
+    Add-Violation `
+        -Violations $violations `
+        -Path $buildManagedWorkflowPath `
+        -Issue "Build-managed workflow must not run the full test suite without staged native runtime assets"
+}
+
+if ((Get-TokenIndex -Text (Read-RequiredText -RelativePath $aggregateScriptToken) -Token "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1") -lt 0) {
+    Add-Violation `
+        -Violations $violations `
+        -Path $aggregateScriptToken `
+        -Issue "Aggregate invariant suite must verify the representative managed package consumer compile surface used by build-managed"
 }
 
 $prTemplateText = Read-RequiredText -RelativePath ".github/pull_request_template.md"

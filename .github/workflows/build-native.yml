@@ -1,6 +1,10 @@
 name: build-native
 
 on:
+  push:
+    branches: [opencv5.x]
+  pull_request:
+    branches: [opencv5.x]
   workflow_dispatch:
     inputs:
       opencv_version:

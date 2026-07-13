@@ -864,10 +864,10 @@ Current staged native files:
 - factual OpenCV 5.0.0 runtime artifact `opencv_quality500.dll` when the OpenCV contrib build includes the optional `quality` module
 - factual OpenCV 5.0.0 runtime artifact `opencv_xphoto500.dll` when the OpenCV contrib build includes the optional `xphoto` module
 
-Runtime packages are named generically as `JYPPX.OpenCV.runtime.<rid>`. The current concrete runtime package skeleton is located at `packaging/runtime/JYPPX.OpenCV.runtime.win-x64`.
+Runtime packages are named generically as `JYPPX.OpenCV.runtime.<rid>` for full builds and `JYPPX.OpenCV.runtime.<rid>.mini` for mini builds. The current concrete runtime package skeleton is located at `packaging/runtime/JYPPX.OpenCV.runtime`.
 
-runtime 包使用通用命名 `JYPPX.OpenCV.runtime.<rid>`。当前具体 runtime 包骨架位于 `packaging/runtime/JYPPX.OpenCV.runtime.win-x64`。
+runtime 包使用通用命名：full build 为 `JYPPX.OpenCV.runtime.<rid>`，mini build 为 `JYPPX.OpenCV.runtime.<rid>.mini`。当前具体 runtime 包骨架位于 `packaging/runtime/JYPPX.OpenCV.runtime`。
 
-For runtime package selection, local native runtime fallback, linked validation, and license layout, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Runtime Licenses](runtime-licenses.md), and current concrete [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md).
+For runtime package selection, local native runtime fallback, linked validation, and license layout, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Runtime Licenses](runtime-licenses.md), and [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-runtime package 选择、local native runtime fallback、linked 验证和 license 布局见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及当前具体 [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md)。
+runtime package 选择、local native runtime fallback、linked 验证和 license 布局见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。

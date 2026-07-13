@@ -20,13 +20,13 @@ License source inputs are the repository `LICENSE`, the OpenCV source `LICENSE`,
 
 许可证源输入包括仓库 `LICENSE`、OpenCV 源码 `LICENSE`、OpenCV 源码 `3rdparty/ippicv/readme.htm`，以及 OpenCV install `etc/licenses` 目录中的第三方许可证文件。
 
-Generated package license layout lives under `licenses/`; OpenCV third-party license files are copied into `licenses/opencv-3rdparty`. Runtime package IDs are generic as `JYPPX.OpenCV.runtime.<rid>`, with `win-x64` kept as the current concrete RID example.
+Generated package license layout lives under `licenses/`; OpenCV third-party license files are copied into `licenses/opencv-3rdparty`. Full runtime package IDs are `JYPPX.OpenCV.runtime.<rid>` and mini runtime package IDs are `JYPPX.OpenCV.runtime.<rid>.mini`.
 
-生成包的 license 布局位于 `licenses/`；OpenCV 第三方许可证文件会复制到 `licenses/opencv-3rdparty`。runtime package ID 通用写法为 `JYPPX.OpenCV.runtime.<rid>`，`win-x64` 仅作为当前具体 RID 示例保留。
+生成包的 license 布局位于 `licenses/`；OpenCV 第三方许可证文件会复制到 `licenses/opencv-3rdparty`。full runtime package ID 为 `JYPPX.OpenCV.runtime.<rid>`，mini runtime package ID 为 `JYPPX.OpenCV.runtime.<rid>.mini`。
 
-Currently tracked runtime package project: `JYPPX.OpenCV.runtime.win-x64`. Future RID-specific package projects should keep this same license layout under `JYPPX.OpenCV.runtime.<rid>` when package projects and release artifacts exist.
+Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. Full and mini runtime packages keep the same generated license layout for every configured RID/profile.
 
-当前仓库跟踪的 runtime package project：`JYPPX.OpenCV.runtime.win-x64`。未来 RID 专用 package project 在 package project 与 release artifact 存在时，应在 `JYPPX.OpenCV.runtime.<rid>` 下保持同一 license 布局。
+runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。full 与 mini runtime packages 会为每个配置好的 RID/profile 保持相同的生成 license 布局。
 
 For OpenCV install-tree third-party licenses, the script looks for:
 
@@ -44,15 +44,15 @@ and stages those third-party license files under:
 packaging/runtime/JYPPX.OpenCV.runtime.<rid>/licenses/opencv-3rdparty
 ```
 
-For the current concrete `win-x64` example, that generic path resolves to `packaging/runtime/JYPPX.OpenCV.runtime.win-x64/licenses/opencv-3rdparty`.
+That generic path resolves inside the template project to `packaging/runtime/JYPPX.OpenCV.runtime/licenses/opencv-3rdparty` for the selected staged RID/profile.
 
-For package-local license layout and source-input details, see the current concrete `packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md`.
+For package-local license layout and source-input details, see the `packaging/runtime/JYPPX.OpenCV.runtime/README.md`.
 
-包内 license 布局和源输入细节见当前具体 `packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md`。
+包内 license 布局和源输入细节见`packaging/runtime/JYPPX.OpenCV.runtime/README.md`。
 
-Consumer install and package selection start in the [Quick Start](quick-start.md). Local native runtime fallback and staging are covered by the [Linked Runtime Build Guide](linked-runtime-build-guide.md), linked validation is covered by the [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), and package-local metadata is documented in the current concrete [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md).
+Consumer install and package selection start in the [Quick Start](quick-start.md). Local native runtime fallback and staging are covered by the [Linked Runtime Build Guide](linked-runtime-build-guide.md), linked validation is covered by the [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), and package-local metadata is documented in the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-consumer 安装和 package 选择从 [Quick Start](quick-start.md) 开始。local native runtime fallback 与 staging 见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)，linked 验证见 [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)，包内元数据见当前具体 [win-x64 runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime.win-x64/README.md)。
+consumer 安装和 package 选择从 [Quick Start](quick-start.md) 开始。local native runtime fallback 与 staging 见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)，linked 验证见 [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)，包内元数据见[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 ## Image Codec Dependencies
 
