@@ -3,7 +3,7 @@ param(
     [string]$ArtifactRoot,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
     [string]$ExpectedPackageVersion = "",
-    [bool]$ExpectedSyntheticRuntimeInputs = $true
+    [string]$ExpectedSyntheticRuntimeInputs = "true"
 )
 
 Set-StrictMode -Version Latest
@@ -233,6 +233,7 @@ if ([string]::IsNullOrWhiteSpace($ExpectedPackageVersion)) {
 
 $normalizedPackageVersion = Get-NormalizedPackageFileVersion -VersionText $ExpectedPackageVersion
 $expectedOpenCvVersion = (($ExpectedPackageVersion -split "\.") | Select-Object -First 3) -join "."
+$expectedSyntheticRuntimeInputsValue = [bool]::Parse($ExpectedSyntheticRuntimeInputs)
 $matrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $matrix = $matrixText | ConvertFrom-Json
 $violations = [System.Collections.Generic.List[object]]::new()
@@ -374,7 +375,7 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record selected RID/profile" -Text "$($manifest.Rid) / $($manifest.RuntimeProfile)"
             }
 
-            if ([bool]$manifest.SyntheticRuntimeInputs -ne $ExpectedSyntheticRuntimeInputs) {
+            if ([bool]$manifest.SyntheticRuntimeInputs -ne $expectedSyntheticRuntimeInputsValue) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must distinguish synthetic validation inputs from real runtime inputs" -Text $manifest.SyntheticRuntimeInputs
             }
 

@@ -271,7 +271,7 @@ jobs:
         shell: pwsh
         run: |
           $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
-          $expectedSyntheticRuntimeInputs = [bool]::Parse('${{ inputs.validate_synthetic_runtime }}')
+          $expectedSyntheticRuntimeInputs = '${{ inputs.validate_synthetic_runtime }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-download `
             -ExpectedPackageVersion $packageVersion `
