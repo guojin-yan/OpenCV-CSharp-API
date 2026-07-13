@@ -80,44 +80,33 @@ function Test-IsIgnoredPath {
     return $false
 }
 
-function Get-ScannableFiles {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Path
-    )
+function Get-ScannableFilesFromGit {
+    $relativeFiles = [System.Collections.Generic.List[string]]::new()
 
-    $normalizedPath = $Path.Replace('/.github.', '/.github').Replace('\.github.', '\.github')
-    $fullPath = [System.IO.Path]::GetFullPath($normalizedPath)
-    $normalizedFullPath = $fullPath.Replace('/.github.', '/.github').Replace('\.github.', '\.github')
-    $candidatePaths = @($normalizedPath, $normalizedFullPath, $fullPath) |
-        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
-        Select-Object -Unique
-
-    $resolvedPath = $null
-    foreach ($candidatePath in $candidatePaths) {
-        $resolved = Resolve-Path -LiteralPath $candidatePath -ErrorAction SilentlyContinue
-        if ($null -ne $resolved) {
-            $resolvedPath = $resolved[0].ProviderPath
-            break
-        }
+    $trackedFiles = & git -C $repo ls-files -- $scanRelativePaths
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed to enumerate tracked consumer-facing files."
     }
 
-    if ($null -eq $resolvedPath) {
-        return
+    foreach ($trackedFile in $trackedFiles) {
+        $relativeFiles.Add($trackedFile)
     }
 
-    $item = Get-Item -LiteralPath $resolvedPath
-    if (-not $item.PSIsContainer) {
-        if (-not (Test-IsIgnoredPath -Path $item.FullName)) {
-            $item
-        }
-
-        return
+    $untrackedFiles = & git -C $repo ls-files --others --exclude-standard -- $scanRelativePaths
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed to enumerate untracked consumer-facing files."
     }
 
-    foreach ($child in Get-ChildItem -LiteralPath $item.FullName -Recurse -File) {
-        if (-not (Test-IsIgnoredPath -Path $child.FullName)) {
-            $child
+    foreach ($untrackedFile in $untrackedFiles) {
+        $relativeFiles.Add($untrackedFile)
+    }
+
+    foreach ($relativeFile in ($relativeFiles | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)) {
+        $normalizedRelativeFile = $relativeFile -replace "/", [System.IO.Path]::DirectorySeparatorChar
+        $fullName = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($repo, $normalizedRelativeFile))
+
+        if ([System.IO.File]::Exists($fullName) -and -not (Test-IsIgnoredPath -Path $fullName)) {
+            [System.IO.FileInfo]::new($fullName)
         }
     }
 }
@@ -157,18 +146,8 @@ $compatibilityContextRegex = [System.Text.RegularExpressions.Regex]::new($compat
 
 $violations = [System.Collections.Generic.List[object]]::new()
 $files = [System.Collections.Generic.List[object]]::new()
-
-foreach ($relativePath in $scanRelativePaths) {
-    $path = if ($relativePath -eq ".github") {
-        "$repo/.github"
-    }
-    else {
-        Join-Path $repo $relativePath
-    }
-
-    foreach ($file in Get-ScannableFiles -Path $path) {
-        $files.Add($file)
-    }
+foreach ($file in Get-ScannableFilesFromGit) {
+    $files.Add($file)
 }
 
 $files = $files |
