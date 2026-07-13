@@ -31,6 +31,7 @@ Thanks for helping build OpenCV CSharp API.
 - Keep the `build-managed` workflow native-free: its aggregate invariant step runs the representative managed package consumer compile guard before build outputs exist, and the workflow must not run the full native-dependent `dotnet test` suite unless native runtime assets are explicitly staged.
 - Keep new generic build variables, package metadata, and docs version-neutral unless they describe a concrete runtime fact.
 - Keep new repository paths version-neutral; only the generated `src/OpenCvSharp.Native/include/open_cv_5_sharp` compatibility include tree may keep a fixed-major path name.
+- Keep current native source and examples on `#include "open_cv_sharp/..."`; `#include "open_cv_5_sharp/..."` belongs only to generated compatibility wrappers and the legacy source-compatibility smoke test.
 - Keep fixed-version source/install/cache path text explicitly labelled as factual, upstream, cache, fallback, or compatibility context.
 - Keep runtime packages and staging scripts neutral-first: `JYPPX.OpenCV.runtime.<rid>` and `JYPPX.OpenCV.Native.dll` are primary, while `OpenCv5Sharp.Native.dll` is only an explicit compatibility copy.
 - Keep C# public API names close to OpenCV C++ names while following .NET naming conventions.

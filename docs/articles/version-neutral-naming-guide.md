@@ -13,7 +13,7 @@ The currently packaged runtime is OpenCV 5.0.0. That version is a package/runtim
 | Public namespace | `OpenCvSharp.*` | Current source, tests, samples, and generated API docs use this namespace. |
 | Runtime package | `JYPPX.OpenCV.runtime.<rid>` | Keep the package ID stable; distinguish OpenCV runtimes with package versions. |
 | Native loader | `JYPPX.OpenCV.Native.dll` | Current managed P/Invoke declarations load this file. |
-| Native include tree | `open_cv_sharp` | Primary include path for wrapper headers. |
+| Native include tree | `open_cv_sharp` | Primary include path for current wrapper headers and examples. |
 | Native ABI | `jyppx_ocv_*` | Current headers, definitions, and managed entry points use the neutral prefix. |
 | Native status | `OPENCV_CSHARP_STATUS_*` | Current implementation code uses neutral status constants. |
 | Build variables | `OPENCV_CSHARP_*`, `OpenCvNativeRuntimeDir` | New scripts, tests, and build instructions use neutral names. |

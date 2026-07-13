@@ -44,6 +44,10 @@ The primary native ABI uses `jyppx_ocv_*` exports and `OPENCV_CSHARP_STATUS_*` s
 
 主 native ABI 使用 `jyppx_ocv_*` 导出和 `OPENCV_CSHARP_STATUS_*` 状态常量。生成的兼容 translation unit 会把每个公开 `jyppx_ocv5_*` 导出转发到中性实现，source-compatible include 树则为既有 native 代码继续提供旧 wrapper-header 标识。
 
+Current native source and examples should include wrapper headers through `open_cv_sharp/...`. The generated `open_cv_5_sharp/...` tree is retained only as a source-compatibility wrapper surface for existing native code.
+
+当前 native 源码和示例应通过 `open_cv_sharp/...` include wrapper headers。生成的 `open_cv_5_sharp/...` 树仅作为既有 native 代码的源码兼容 wrapper surface 保留。
+
 The canonical outer workspace root is version-neutral, for example `OpenCV-CSharp-API-workspace`. Generic repository, plan, diary, source-cache, and artifact-root directories do not encode an OpenCV major. Versioned names remain valid below factual dependency caches such as `artifacts/opencv-install/opencv-5.0.0-windows-x64`.
 
 正式的外层工作区根目录保持版本中立，例如 `OpenCV-CSharp-API-workspace`。通用的仓库、计划、日记、源码缓存和产物根目录均不编码 OpenCV major；事实性依赖缓存内部仍可使用版本目录，例如 `artifacts/opencv-install/opencv-5.0.0-windows-x64`。
