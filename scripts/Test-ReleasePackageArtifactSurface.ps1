@@ -148,7 +148,8 @@ foreach ($check in @(
 
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle '[string]$OutputDir = "artifacts\packages"' -Issue "Pack-Managed default output directory must be artifacts\packages"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle '[string]$ProjectPath = "src\OpenCvSharp\OpenCvSharp.csproj"' -Issue "Pack-Managed default project path must be the neutral managed project"
-Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "`$managedPackageId = `"$managedPackageId`"" -Issue "Pack-Managed must use the neutral managed package ID"
+Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "OpenCvCSharpManagedPackageId" -Issue "Pack-Managed must derive the neutral managed package ID from Directory.Build.props"
+Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "`$managedPackageId = Get-RequiredDirectoryBuildProperty" -Issue "Pack-Managed must assign the neutral managed package ID from the central metadata property"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle '$packagePath = Join-Path $outputFullPath "$managedPackageId.$packageFileVersion.nupkg"' -Issue "Pack-Managed package artifact file must be derived from neutral package ID plus normalized version"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "Remove-Item -LiteralPath `$packagePath -Force" -Issue "Pack-Managed must remove stale expected package artifacts before packing"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "Managed package artifact was not found" -Issue "Pack-Managed must verify the expected package artifact after packing"

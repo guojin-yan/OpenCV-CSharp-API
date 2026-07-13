@@ -323,12 +323,29 @@ foreach ($scriptPath in @(
         "scripts/Build-OpenCV.ps1",
         "scripts/Generate-MatTypeConstants.ps1",
         "scripts/New-SyntheticRuntimeInputs.ps1",
-        "scripts/Pack-Managed.ps1",
-        "scripts/Pack-Runtime.ps1",
         "scripts/Stage-Runtime.ps1")) {
     $scriptText = Read-RequiredText -RelativePath $scriptPath
     $defaultOpenCvVersion = Get-RegexValue $scriptText '\[string\]\$OpenCvVersion\s*=\s*"(?<value>[^"]+)"'
     Assert-Equals $violations $scriptPath "Default OpenCvVersion" $defaultOpenCvVersion $expectedOpenCvVersion
+}
+
+foreach ($scriptPath in @(
+        "scripts/Pack-Managed.ps1",
+        "scripts/Pack-Runtime.ps1")) {
+    $scriptText = Read-RequiredText -RelativePath $scriptPath
+    $defaultOpenCvVersion = Get-RegexValue $scriptText '\[string\]\$OpenCvVersion\s*=\s*"(?<value>[^"]*)"'
+    if ($defaultOpenCvVersion.Length -ne 0) {
+        Add-Violation $violations $scriptPath "Pack script OpenCvVersion default must be empty so Directory.Build.props supplies the default. Actual: '$defaultOpenCvVersion'"
+    }
+
+    foreach ($requiredProperty in @(
+            "OpenCvCSharpOpenCvVersion",
+            "OpenCvCSharpPackageRevision",
+            "OpenCvCSharpPackageVersion")) {
+        if (-not (Test-ContainsText -Text $scriptText -Needle $requiredProperty)) {
+            Add-Violation $violations $scriptPath "Pack script must derive $requiredProperty from Directory.Build.props"
+        }
+    }
 }
 
 if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"$expectedCurrentNativeLibraryName.dll`"")) {

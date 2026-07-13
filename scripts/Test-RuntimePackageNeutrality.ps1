@@ -107,8 +107,9 @@ if ($packRuntimeText -match "OpenCv5Sharp\.runtime|opencv5sharp\.runtime") {
     Add-Violation $violations $packRuntimePath "Pack-Runtime must not use a fixed-major runtime package identity"
 }
 
-if (-not (Test-Contains -Text $packManagedText -Needle "`$managedPackageId = `"$primaryManagedPackageId`"")) {
-    Add-Violation $violations $packManagedPath "Pack-Managed must use the version-neutral managed package ID"
+if (-not (Test-Contains -Text $packManagedText -Needle "OpenCvCSharpManagedPackageId") -or
+    -not (Test-Contains -Text $packManagedText -Needle "`$managedPackageId = Get-RequiredDirectoryBuildProperty")) {
+    Add-Violation $violations $packManagedPath "Pack-Managed must derive the version-neutral managed package ID from Directory.Build.props"
 }
 
 $runtimeProjectFiles = @(

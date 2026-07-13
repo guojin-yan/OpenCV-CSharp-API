@@ -344,8 +344,32 @@ $packManagedText = Read-RequiredText -RelativePath $packManagedPath
 $packRuntimeText = Read-RequiredText -RelativePath $packRuntimePath
 $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
 
-if (-not (Test-ContainsText -Text $packManagedText -Needle "`$managedPackageId = `"$primaryManagedPackageId`"")) {
-    Add-Violation $violations $packManagedPath "Pack-Managed must use the version-neutral managed package ID"
+if (-not (Test-ContainsText -Text $packManagedText -Needle "OpenCvCSharpManagedPackageId") -or
+    -not (Test-ContainsText -Text $packManagedText -Needle "`$managedPackageId = Get-RequiredDirectoryBuildProperty")) {
+    Add-Violation $violations $packManagedPath "Pack-Managed must derive the version-neutral managed package ID from Directory.Build.props"
+}
+
+foreach ($requiredProperty in @(
+        "OpenCvCSharpOpenCvVersion",
+        "OpenCvCSharpPackageRevision",
+        "OpenCvCSharpPackageVersion")) {
+    if (-not (Test-ContainsText -Text $packManagedText -Needle $requiredProperty)) {
+        Add-Violation $violations $packManagedPath "Pack-Managed must derive $requiredProperty from Directory.Build.props"
+    }
+}
+
+if (-not (Test-ContainsText -Text $packRuntimeText -Needle "OpenCvCSharpRuntimePackageIdPrefix") -or
+    -not (Test-ContainsText -Text $packRuntimeText -Needle "`$runtimePackagePrefix = Get-RequiredDirectoryBuildProperty")) {
+    Add-Violation $violations $packRuntimePath "Pack-Runtime must derive the version-neutral runtime package prefix from Directory.Build.props"
+}
+
+foreach ($requiredProperty in @(
+        "OpenCvCSharpOpenCvVersion",
+        "OpenCvCSharpPackageRevision",
+        "OpenCvCSharpPackageVersion")) {
+    if (-not (Test-ContainsText -Text $packRuntimeText -Needle $requiredProperty)) {
+        Add-Violation $violations $packRuntimePath "Pack-Runtime must derive $requiredProperty from Directory.Build.props"
+    }
 }
 
 if (-not (Test-ContainsText -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"')) {

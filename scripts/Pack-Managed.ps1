@@ -1,7 +1,7 @@
 param(
     [string]$Configuration = "Release",
-    [string]$OpenCvVersion = "5.0.0",
-    [int]$PackageRevision = 0,
+    [string]$OpenCvVersion = "",
+    [int]$PackageRevision = -1,
     [string]$PackageVersion = "",
     [string]$OutputDir = "artifacts\packages",
     [string]$ProjectPath = "src\OpenCvSharp\OpenCvSharp.csproj",
@@ -15,6 +15,106 @@ param(
 $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+
+function Resolve-PropertyReferences {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Value,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties
+    )
+
+    $resolved = $Value
+    for ($i = 0; $i -lt 8; $i++) {
+        $previous = $resolved
+        $resolved = [regex]::Replace(
+            $resolved,
+            '\$\((?<name>[A-Za-z_][A-Za-z0-9_.-]*)\)',
+            {
+                param($match)
+                $name = $match.Groups["name"].Value
+                if ($Properties.ContainsKey($name)) {
+                    return [string]$Properties[$name]
+                }
+
+                return $match.Value
+            })
+
+        if ($resolved.Equals($previous, [System.StringComparison]::Ordinal)) {
+            break
+        }
+    }
+
+    return $resolved
+}
+
+function Get-DirectoryBuildProperties {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RepositoryRoot
+    )
+
+    $propsPath = Join-Path $RepositoryRoot "Directory.Build.props"
+    if (-not (Test-Path -LiteralPath $propsPath -PathType Leaf)) {
+        throw "Directory.Build.props was not found: $propsPath"
+    }
+
+    [xml]$project = [System.IO.File]::ReadAllText($propsPath)
+    $properties = [ordered]@{}
+    foreach ($propertyGroup in $project.Project.PropertyGroup) {
+        if ($null -eq $propertyGroup) {
+            continue
+        }
+
+        foreach ($child in $propertyGroup.ChildNodes) {
+            if ($child.NodeType -ne [System.Xml.XmlNodeType]::Element) {
+                continue
+            }
+
+            if ([string]::IsNullOrWhiteSpace($child.InnerText)) {
+                continue
+            }
+
+            $properties[$child.Name] = $child.InnerText
+        }
+    }
+
+    foreach ($key in @($properties.Keys)) {
+        $properties[$key] = Resolve-PropertyReferences -Value ([string]$properties[$key]) -Properties $properties
+    }
+
+    return $properties
+}
+
+function Get-RequiredDirectoryBuildProperty {
+    param(
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    if (-not $Properties.ContainsKey($Name) -or [string]::IsNullOrWhiteSpace([string]$Properties[$Name])) {
+        throw "Required Directory.Build.props metadata property was not found: $Name"
+    }
+
+    return [string]$Properties[$Name]
+}
+
+$centralProperties = Get-DirectoryBuildProperties -RepositoryRoot $repoRoot
+$managedPackageId = Get-RequiredDirectoryBuildProperty -Properties $centralProperties -Name "OpenCvCSharpManagedPackageId"
+$centralOpenCvVersion = Get-RequiredDirectoryBuildProperty -Properties $centralProperties -Name "OpenCvCSharpOpenCvVersion"
+$centralPackageRevision = [int](Get-RequiredDirectoryBuildProperty -Properties $centralProperties -Name "OpenCvCSharpPackageRevision")
+$centralPackageVersion = Get-RequiredDirectoryBuildProperty -Properties $centralProperties -Name "OpenCvCSharpPackageVersion"
+
+if ([string]::IsNullOrWhiteSpace($OpenCvVersion)) {
+    $OpenCvVersion = $centralOpenCvVersion
+}
+
+if ($PackageRevision -lt 0) {
+    $PackageRevision = $centralPackageRevision
+}
+
 $projectPathCandidate = if ([System.IO.Path]::IsPathRooted($ProjectPath)) {
     $ProjectPath
 }
@@ -62,7 +162,12 @@ if (-not [string]::IsNullOrWhiteSpace($RestorePackagesPath)) {
 
 if ([string]::IsNullOrWhiteSpace($PackageVersion)) {
     # PackageVersion carries OpenCV runtime identity as version metadata; it is not a package ID or naming surface.
-    $PackageVersion = "$OpenCvVersion.$PackageRevision"
+    if ($OpenCvVersion -eq $centralOpenCvVersion -and $PackageRevision -eq $centralPackageRevision) {
+        $PackageVersion = $centralPackageVersion
+    }
+    else {
+        $PackageVersion = "$OpenCvVersion.$PackageRevision"
+    }
 }
 
 if ($PackageVersion -notmatch '^\d+\.\d+\.\d+\.\d+$') {
@@ -93,7 +198,6 @@ function Get-NuGetPackageFileVersion {
 
 New-Item -ItemType Directory -Force $outputFullPath | Out-Null
 
-$managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $packageFileVersion = Get-NuGetPackageFileVersion -Version $PackageVersion
 $packagePath = Join-Path $outputFullPath "$managedPackageId.$packageFileVersion.nupkg"
 if (Test-Path -LiteralPath $packagePath) {
