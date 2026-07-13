@@ -2,7 +2,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ArtifactRoot,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
-    [string]$ExpectedPackageVersion = ""
+    [string]$ExpectedPackageVersion = "",
+    [bool]$ExpectedSyntheticRuntimeInputs = $true
 )
 
 Set-StrictMode -Version Latest
@@ -14,6 +15,7 @@ $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
 $directoryBuildPropsPath = "Directory.Build.props"
+$runtimeProvenanceManifestEntry = "build/JYPPX.OpenCV.runtime.provenance.json"
 
 function Add-Violation {
     param(
@@ -167,6 +169,52 @@ function Read-NupkgInfo {
     }
 }
 
+function Read-NupkgJsonEntry {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [string]$EntryName,
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations
+    )
+
+    $zip = [System.IO.Compression.ZipFile]::OpenRead($Path)
+    try {
+        $entry = $zip.GetEntry($EntryName)
+        if ($null -eq $entry) {
+            Add-Violation -Violations $Violations -Path (Split-Path -Leaf $Path) -Issue "Runtime package must include provenance manifest" -Text $EntryName
+            return $null
+        }
+
+        $stream = $entry.Open()
+        try {
+            $reader = [System.IO.StreamReader]::new($stream)
+            try {
+                $jsonText = $reader.ReadToEnd()
+            }
+            finally {
+                $reader.Dispose()
+            }
+        }
+        finally {
+            $stream.Dispose()
+        }
+
+        try {
+            return $jsonText | ConvertFrom-Json
+        }
+        catch {
+            Add-Violation -Violations $Violations -Path (Split-Path -Leaf $Path) -Issue "Runtime provenance manifest must be valid JSON" -Text $_.Exception.Message
+            return $null
+        }
+    }
+    finally {
+        $zip.Dispose()
+    }
+}
+
 function Test-ContainsFixedMajorIdentity {
     param(
         [Parameter(Mandatory = $true)]
@@ -184,6 +232,7 @@ if ([string]::IsNullOrWhiteSpace($ExpectedPackageVersion)) {
 }
 
 $normalizedPackageVersion = Get-NormalizedPackageFileVersion -VersionText $ExpectedPackageVersion
+$expectedOpenCvVersion = (($ExpectedPackageVersion -split "\.") | Select-Object -First 3) -join "."
 $matrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $matrix = $matrixText | ConvertFrom-Json
 $violations = [System.Collections.Generic.List[object]]::new()
@@ -277,10 +326,12 @@ foreach ($ridSpec in @($matrix.rids)) {
                 (Get-EntryFileName -EntryName $_) -match "^(opencv_|libopencv_)"
             })
         $expectedModuleCount = @($profileSpec.modules).Count
+        $expectedRequiredModules = @($profileSpec.modules | ForEach-Object { [string]$_ })
         $primaryLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "JYPPX.OpenCV.Native.dll" } else { "libJYPPX.OpenCV.Native.so" }
         $compatibilityLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "OpenCv5Sharp.Native.dll" } else { "libOpenCv5Sharp.Native.so" }
         $hasPrimaryLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $primaryLoaderName }).Count -gt 0
         $hasCompatibilityLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $compatibilityLoaderName }).Count -gt 0
+        $manifest = Read-NupkgJsonEntry -Path $info.Path -EntryName $runtimeProvenanceManifestEntry -Violations $violations
 
         if ($info.FileName -ne $expectedFileName) {
             Add-Violation -Violations $violations -Path $artifactName -Issue "Runtime package file name must match neutral package ID plus normalized version" -Text $info.FileName
@@ -310,6 +361,38 @@ foreach ($ridSpec in @($matrix.rids)) {
             Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package must include the explicit compatibility native loader copy" -Text $compatibilityLoaderName
         }
 
+        if ($null -ne $manifest) {
+            if ($manifest.PackageId -ne $expectedId -or $manifest.PackageVersion -ne $ExpectedPackageVersion) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record package identity and four-part version metadata" -Text "$($manifest.PackageId) / $($manifest.PackageVersion)"
+            }
+
+            if ($manifest.OpenCvVersion -ne $expectedOpenCvVersion) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record OpenCV runtime version" -Text $manifest.OpenCvVersion
+            }
+
+            if ($manifest.Rid -ne $rid -or $manifest.RuntimeProfile -ne $profile) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record selected RID/profile" -Text "$($manifest.Rid) / $($manifest.RuntimeProfile)"
+            }
+
+            if ([bool]$manifest.SyntheticRuntimeInputs -ne $ExpectedSyntheticRuntimeInputs) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must distinguish synthetic validation inputs from real runtime inputs" -Text $manifest.SyntheticRuntimeInputs
+            }
+
+            if ($manifest.PrimaryNativeLoaderName -ne $primaryLoaderName -or $manifest.CompatibilityNativeLoaderName -ne $compatibilityLoaderName) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record primary and compatibility native loader names" -Text "$($manifest.PrimaryNativeLoaderName) / $($manifest.CompatibilityNativeLoaderName)"
+            }
+
+            $manifestRequiredModules = @($manifest.RequiredModules | ForEach-Object { [string]$_ })
+            if ($manifestRequiredModules.Count -ne $expectedModuleCount -or (($manifestRequiredModules -join ",") -ne ($expectedRequiredModules -join ","))) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest required modules must match selected runtime profile" -Text "Found $($manifestRequiredModules -join ','), expected $($expectedRequiredModules -join ',')"
+            }
+
+            $manifestRuntimeFiles = @($manifest.RuntimeFiles)
+            if ($manifestRuntimeFiles.Count -lt ($expectedModuleCount + 2)) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must list staged native loader and OpenCV runtime files" -Text "Found $($manifestRuntimeFiles.Count), expected at least $($expectedModuleCount + 2)"
+            }
+        }
+
         foreach ($entry in @($info.Entries)) {
             if (Test-ContainsFixedMajorIdentity -Text $entry) {
                 $entryFileName = Get-EntryFileName -EntryName $entry
@@ -330,6 +413,7 @@ foreach ($ridSpec in @($matrix.rids)) {
             ExpectedModuleCount = $expectedModuleCount
             HasPrimaryLoader = $hasPrimaryLoader
             HasCompatibilityLoader = $hasCompatibilityLoader
+            HasProvenanceManifest = $null -ne $manifest
         })
     }
 }

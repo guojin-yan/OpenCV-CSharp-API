@@ -15,8 +15,11 @@ param(
     [string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
     [string]$RuntimeProfile = "full",
+    [string]$RuntimePackageId = "",
+    [string]$PackageVersion = "",
     [string[]]$OpenCvModules = @(),
-    [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo")
+    [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"),
+    [switch]$SyntheticRuntimeInputs
 )
 
 $ErrorActionPreference = "Stop"
@@ -200,6 +203,103 @@ function Resolve-RepoPath {
     return Resolve-Path -LiteralPath (Join-Path $repoRoot $Path)
 }
 
+function Resolve-PropertyReferences {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Value,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties
+    )
+
+    $resolved = $Value
+    for ($i = 0; $i -lt 8; $i++) {
+        $previous = $resolved
+        $resolved = [regex]::Replace(
+            $resolved,
+            '\$\((?<name>[A-Za-z_][A-Za-z0-9_.-]*)\)',
+            {
+                param($match)
+                $name = $match.Groups["name"].Value
+                if ($Properties.ContainsKey($name)) {
+                    return [string]$Properties[$name]
+                }
+
+                return $match.Value
+            })
+
+        if ($resolved.Equals($previous, [System.StringComparison]::Ordinal)) {
+            break
+        }
+    }
+
+    return $resolved
+}
+
+function Get-DirectoryBuildProperties {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RepositoryRoot
+    )
+
+    $propsPath = Join-Path $RepositoryRoot "Directory.Build.props"
+    if (-not (Test-Path -LiteralPath $propsPath -PathType Leaf)) {
+        throw "Directory.Build.props was not found: $propsPath"
+    }
+
+    [xml]$project = [System.IO.File]::ReadAllText($propsPath)
+    $properties = [ordered]@{}
+    foreach ($propertyGroup in $project.Project.PropertyGroup) {
+        if ($null -eq $propertyGroup) {
+            continue
+        }
+
+        foreach ($child in $propertyGroup.ChildNodes) {
+            if ($child.NodeType -ne [System.Xml.XmlNodeType]::Element) {
+                continue
+            }
+
+            if ([string]::IsNullOrWhiteSpace($child.InnerText)) {
+                continue
+            }
+
+            $properties[$child.Name] = $child.InnerText
+        }
+    }
+
+    foreach ($key in @($properties.Keys)) {
+        $properties[$key] = Resolve-PropertyReferences -Value ([string]$properties[$key]) -Properties $properties
+    }
+
+    return $properties
+}
+
+function Get-RequiredDirectoryBuildProperty {
+    param(
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    if (-not $Properties.ContainsKey($Name) -or [string]::IsNullOrWhiteSpace([string]$Properties[$Name])) {
+        throw "Required Directory.Build.props metadata property was not found: $Name"
+    }
+
+    return [string]$Properties[$Name]
+}
+
+$centralProperties = Get-DirectoryBuildProperties -RepositoryRoot $repoRoot
+$runtimePackagePrefix = Get-RequiredDirectoryBuildProperty -Properties $centralProperties -Name "OpenCvCSharpRuntimePackageIdPrefix"
+$centralPackageVersion = Get-RequiredDirectoryBuildProperty -Properties $centralProperties -Name "OpenCvCSharpPackageVersion"
+
+if ([string]::IsNullOrWhiteSpace($RuntimePackageId)) {
+    $RuntimePackageId = "$runtimePackagePrefix.$Rid$([string]$profileSpec.packageIdSuffix)"
+}
+
+if ([string]::IsNullOrWhiteSpace($PackageVersion)) {
+    $PackageVersion = $centralPackageVersion
+}
+
 if ([string]::IsNullOrWhiteSpace($OpenCvSourceDir)) {
     # Upstream OpenCV source leaf directory includes the selected version as factual source artifact identity.
     $OpenCvSourceDir = Join-Path $OpenCvSourceRoot "opencv-$OpenCvVersion"
@@ -273,11 +373,14 @@ $stagingNativeDir = Join-Path (Join-Path $outputRootFullPath $Rid) "native"
 $runtimeProjectNativeDir = Join-Path (Join-Path (Join-Path $runtimeProjectRootFullPath "runtimes") $Rid) "native"
 $runtimeProjectLicenseDir = Join-Path $runtimeProjectRootFullPath "licenses"
 $runtimeProjectOpenCvLicenseDir = Join-Path $runtimeProjectLicenseDir "opencv-3rdparty"
+$runtimeProjectBuildDir = Join-Path $runtimeProjectRootFullPath "build"
+$runtimeProvenanceManifestPath = Join-Path $runtimeProjectBuildDir "JYPPX.OpenCV.runtime.provenance.json"
 
 New-Item -ItemType Directory -Force $stagingNativeDir | Out-Null
 New-Item -ItemType Directory -Force $runtimeProjectNativeDir | Out-Null
 New-Item -ItemType Directory -Force $runtimeProjectLicenseDir | Out-Null
 New-Item -ItemType Directory -Force $runtimeProjectOpenCvLicenseDir | Out-Null
+New-Item -ItemType Directory -Force $runtimeProjectBuildDir | Out-Null
 
 # Regenerate staging mirrors from the current runtime inputs only. This avoids
 # preserving stale DLLs, license files, or nested generated content when modules
@@ -285,6 +388,9 @@ New-Item -ItemType Directory -Force $runtimeProjectOpenCvLicenseDir | Out-Null
 Get-ChildItem -LiteralPath $stagingNativeDir -Force | Remove-Item -Recurse -Force
 Get-ChildItem -LiteralPath $runtimeProjectNativeDir -Force | Remove-Item -Recurse -Force
 Get-ChildItem -LiteralPath $runtimeProjectLicenseDir -Force | Remove-Item -Recurse -Force
+if (Test-Path -LiteralPath $runtimeProvenanceManifestPath -PathType Leaf) {
+    Remove-Item -LiteralPath $runtimeProvenanceManifestPath -Force
+}
 New-Item -ItemType Directory -Force $runtimeProjectOpenCvLicenseDir | Out-Null
 
 # Derived only for factual upstream OpenCV runtime names such as opencv_core500.dll or libopencv_core.so.5.0.0.
@@ -308,6 +414,7 @@ foreach ($module in $OpenCvModules) {
 }
 
 $optionalRuntimeFiles = @()
+$optionalModulesStaged = @()
 foreach ($module in $OptionalOpenCvModules) {
     if ([string]::IsNullOrWhiteSpace($module)) {
         continue
@@ -316,6 +423,7 @@ foreach ($module in $OptionalOpenCvModules) {
     $optionalFile = Resolve-OpenCvModuleRuntimeFile -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion
     if (Test-Path -LiteralPath $optionalFile) {
         $optionalRuntimeFiles += $optionalFile
+        $optionalModulesStaged += $module
     }
     else {
         Write-Warning "Optional OpenCV runtime module was not found and will be skipped: $optionalFile"
@@ -366,6 +474,58 @@ if ($null -ne $openCvInstallPath) {
     }
 }
 
+$runtimeFileEntries = @($runtimeFiles | ForEach-Object {
+        [pscustomobject]@{
+            FileName = Split-Path $_ -Leaf
+            SourcePath = [System.IO.Path]::GetFullPath($_)
+        }
+    })
+
+$licenseEntries = @()
+if (Test-Path -LiteralPath $runtimeProjectLicenseDir -PathType Container) {
+    $licenseEntries = @(Get-ChildItem -LiteralPath $runtimeProjectLicenseDir -Recurse -File | ForEach-Object {
+            [pscustomobject]@{
+                PackagePath = ([System.IO.Path]::GetRelativePath($runtimeProjectRootFullPath, $_.FullName) -replace "\\", "/")
+                SourcePath = $_.FullName
+            }
+        })
+}
+
+$provenance = [ordered]@{
+    SchemaVersion = 1
+    PackageId = $RuntimePackageId
+    PackageVersion = $PackageVersion
+    OpenCvVersion = $OpenCvVersion
+    Rid = $Rid
+    RuntimeProfile = $RuntimeProfile
+    SyntheticRuntimeInputs = [bool]$SyntheticRuntimeInputs.IsPresent
+    PrimaryNativeLoaderName = $primaryNativeLoaderFileName
+    CompatibilityNativeLoaderName = $compatibilityNativeLoaderCopyFileName
+    RequiredModules = @($OpenCvModules)
+    OptionalModulesRequested = @($OptionalOpenCvModules)
+    OptionalModulesStaged = @($optionalModulesStaged)
+    RuntimeFiles = @($runtimeFileEntries)
+    LicenseFiles = @($licenseEntries)
+    InputRoots = [ordered]@{
+        NativeWrapperRuntimeDir = $nativeRuntimePath.Path
+        OpenCvRuntimeDir = $openCvRuntimePath.Path
+        OpenCvSourceDir = $openCvSourcePath.Path
+        OpenCvInstallDir = if ($null -ne $openCvInstallPath) { $openCvInstallPath.Path } else { "" }
+    }
+    OutputRoots = [ordered]@{
+        StageOutputRoot = $outputRootFullPath
+        RuntimeProjectRoot = $runtimeProjectRootFullPath
+        RuntimeProjectNativeDir = $runtimeProjectNativeDir
+        RuntimeProjectLicenseDir = $runtimeProjectLicenseDir
+        PackageManifestPath = "build/JYPPX.OpenCV.runtime.provenance.json"
+    }
+}
+
+$json = ($provenance | ConvertTo-Json -Depth 8) + [System.Environment]::NewLine
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+[System.IO.File]::WriteAllText($runtimeProvenanceManifestPath, $json, $utf8NoBom)
+
 Write-Host "Runtime staging directory: $stagingNativeDir"
 Write-Host "Runtime package project directory: $runtimeProjectNativeDir"
 Write-Host "Runtime license directory: $runtimeProjectLicenseDir"
+Write-Host "Runtime provenance manifest: $runtimeProvenanceManifestPath"

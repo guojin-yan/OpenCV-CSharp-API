@@ -234,6 +234,10 @@ jobs:
             $packArgs += @('-OpenCvInstallDir', $openCvInstallDir)
           }
 
+          if ('${{ inputs.validate_synthetic_runtime }}' -eq 'true') {
+            $packArgs += @('-SyntheticRuntimeInputs')
+          }
+
           pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 @packArgs
       - name: Upload runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
@@ -265,7 +269,13 @@ jobs:
           path: artifacts/pack-download
       - name: Verify package artifact matrix
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 -ArtifactRoot ./artifacts/pack-download
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $expectedSyntheticRuntimeInputs = [bool]::Parse('${{ inputs.validate_synthetic_runtime }}')
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-download `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs $expectedSyntheticRuntimeInputs
 
   verify-consumers:
     needs:
@@ -286,4 +296,8 @@ jobs:
           path: artifacts/pack-download
       - name: Verify package consumer restore
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 -ArtifactRoot ./artifacts/pack-download
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-download `
+            -ExpectedPackageVersion $packageVersion

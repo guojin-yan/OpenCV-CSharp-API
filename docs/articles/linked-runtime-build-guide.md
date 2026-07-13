@@ -27,9 +27,9 @@ If runtime files are already staged in the runtime package project, pack them di
 pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0
 ```
 
-Runtime package `.csproj` files and package README files are trackable metadata. The runtime project `runtimes/` and `licenses/` directories are ignored generated mirrors; `Stage-Runtime.ps1` regenerates them from current runtime inputs before packaging, and those mirror contents should not be committed or manually edited.
+Runtime package `.csproj` files and package README files are trackable metadata. The runtime project `runtimes/`, `licenses/`, and `build/` directories are ignored generated mirrors; `Stage-Runtime.ps1` regenerates them from current runtime inputs before packaging, and those mirror contents should not be committed or manually edited.
 
-runtime package 的 `.csproj` 和包 README 是可跟踪元数据。runtime project 下的 `runtimes/` 与 `licenses/` 目录是被忽略的生成镜像；`Stage-Runtime.ps1` 会在打包前根据当前 runtime 输入重新生成它们，不应提交或手动编辑这些镜像内容。
+runtime package 的 `.csproj` 和包 README 是可跟踪元数据。runtime project 下的 `runtimes/`、`licenses/` 与 `build/` 目录是被忽略的生成镜像；`Stage-Runtime.ps1` 会在打包前根据当前 runtime 输入重新生成它们，不应提交或手动编辑这些镜像内容。
 
 `Pack-Runtime.ps1 -Rid <rid>` derives full runtime package IDs as `JYPPX.OpenCV.runtime.<rid>`; `-RuntimeProfile mini` derives mini package IDs as `JYPPX.OpenCV.runtime.<rid>.mini`. The script forwards `RuntimePackageRid` and `RuntimePackageProfile` into the generic runtime package project.
 
@@ -45,13 +45,15 @@ pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 -Artifa
 pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 -ArtifactRoot <artifact-root>
 ```
 
-The artifact guard checks the managed package plus every configured full/mini runtime RID package, including neutral package IDs, normalized package filenames, `runtimes/<rid>/native` payload paths, and full versus mini module counts. The consumer restore guard uses the downloaded packages as a temporary local NuGet source, restores/builds temporary consumers for every configured RID/profile pair, and verifies managed compile assets plus selected RID native assets without executing native binaries. Keep downloaded artifacts outside the repository or remove them after validation.
+The artifact guard checks the managed package plus every configured full/mini runtime RID package, including neutral package IDs, normalized package filenames, `runtimes/<rid>/native` payload paths, full versus mini module counts, and `build/JYPPX.OpenCV.runtime.provenance.json`. The provenance manifest records package ID/version, OpenCV version, RID/profile, loader names, required and optional module evidence, runtime and license file sources, input/output roots, and `SyntheticRuntimeInputs`; synthetic validation manifests are non-release evidence, while real release candidates must be marked `SyntheticRuntimeInputs=false`. The consumer restore guard uses the downloaded packages as a temporary local NuGet source, restores/builds temporary consumers for every configured RID/profile pair, and verifies managed compile assets plus selected RID native assets without executing native binaries. Keep downloaded artifacts outside the repository or remove them after validation.
 
 `Pack-Runtime.ps1 -Rid <rid>` 会把 full runtime package ID 推导为 `JYPPX.OpenCV.runtime.<rid>`；`-RuntimeProfile mini` 会推导 mini package ID `JYPPX.OpenCV.runtime.<rid>.mini`。脚本会把 `RuntimePackageRid` 和 `RuntimePackageProfile` 转发给通用 runtime package project。
 
 `Stage-Runtime.ps1 -RuntimeProject` 是仓库相对或绝对 runtime package 目录，用于生成 `runtimes/<rid>/native` 和 `licenses/` 镜像；`Pack-Runtime.ps1 -RuntimeProject` 是供 `dotnet pack` 使用的仓库相对或绝对 runtime package `.csproj` 文件路径。使用 `Pack-Runtime.ps1 -StageRuntime` 时，所选 `.csproj` 所在目录会转发给 `Stage-Runtime.ps1`；可用 `-StageOutputRoot` 转发单独的 staging root，且不改变 package `-OutputDir`。
 
 pack workflow 暴露 `rid` 和 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也支持定向 RID/profile 打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，先用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts，再用 `Test-GitHubPackConsumerRestoreSurface.ps1` 验证 consumer restore/build；默认用 synthetic runtime inputs 验证 package shape，并在启用 synthetic inputs 时拒绝发布。
+
+artifact guard 会检查 managed package 以及每个已配置 full/mini runtime RID 包，包括中性 package ID、规范化 package 文件名、`runtimes/<rid>/native` payload 路径、full 与 mini module count，以及 `build/JYPPX.OpenCV.runtime.provenance.json`。provenance manifest 会记录 package ID/version、OpenCV version、RID/profile、loader 名称、required/optional module 证据、runtime 和 license 文件来源、输入/输出根目录，以及 `SyntheticRuntimeInputs`；synthetic validation manifest 不是发布证据，真实 release candidate 必须标记为 `SyntheticRuntimeInputs=false`。
 
 To stage fresh runtime files and then pack in one command, use `-StageRuntime` and provide the native wrapper output directory:
 

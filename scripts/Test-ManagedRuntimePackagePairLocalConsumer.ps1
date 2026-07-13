@@ -191,6 +191,7 @@ function New-TemporaryRuntimeProject {
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="build\JYPPX.OpenCV.runtime.provenance.json" Condition="Exists('build\JYPPX.OpenCV.runtime.provenance.json')" Pack="true" PackagePath="build" />
     <None Include="runtimes\$(RuntimePackageRid)\native\**\*" Pack="true" PackagePath="runtimes\$(RuntimePackageRid)\native" />
     <None Include="licenses\**\*" Pack="true" PackagePath="licenses" />
   </ItemGroup>
@@ -351,6 +352,7 @@ try {
         "-OpenCvVersion", "5.0.0",
         "-PackageRevision", "0",
         "-StageRuntime",
+        "-SyntheticRuntimeInputs",
         "-OpenCvNativeRuntimeDir", $nativeWrapperRuntimeDir,
         "-OpenCvRuntimeDir", $openCvRuntimeDir,
         "-OpenCvSourceDir", $openCvSourceDir,
@@ -440,6 +442,19 @@ try {
             -Violations $violations `
             -Path (Join-Path $runtimePackageInstallRoot "runtimes/$rid/native/$runtimeFile") `
             -Issue "Isolated NuGet package cache did not contain expected RID native asset"
+    }
+
+    $manifestPath = Join-Path $runtimePackageInstallRoot "build/JYPPX.OpenCV.runtime.provenance.json"
+    Assert-FileExists -Violations $violations -Path $manifestPath -Issue "Isolated NuGet package cache did not contain runtime provenance manifest"
+    if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
+        $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+        if ($manifest.PackageId -ne $runtimePackageId -or $manifest.PackageVersion -ne $packageVersion) {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Runtime provenance manifest must record restored package identity and version" -Text "$($manifest.PackageId) / $($manifest.PackageVersion)"
+        }
+
+        if ($manifest.Rid -ne $rid -or -not [bool]$manifest.SyntheticRuntimeInputs) {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Synthetic runtime provenance manifest must record selected RID and synthetic input status" -Text "$($manifest.Rid) / $($manifest.SyntheticRuntimeInputs)"
+        }
     }
 
     $consumerOutputFiles = @{}

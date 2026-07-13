@@ -175,6 +175,7 @@ function New-TemporaryRuntimeProject {
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="build\JYPPX.OpenCV.runtime.provenance.json" Condition="Exists('build\JYPPX.OpenCV.runtime.provenance.json')" Pack="true" PackagePath="build" />
     <None Include="runtimes\$(RuntimePackageRid)\native\**\*" Pack="true" PackagePath="runtimes\$(RuntimePackageRid)\native" />
     <None Include="licenses\**\*" Pack="true" PackagePath="licenses" />
   </ItemGroup>
@@ -247,6 +248,7 @@ try {
         "-OpenCvVersion", "5.0.0",
         "-PackageRevision", "0",
         "-StageRuntime",
+        "-SyntheticRuntimeInputs",
         "-OpenCvNativeRuntimeDir", $nativeWrapperRuntimeDir,
         "-OpenCvRuntimeDir", $openCvRuntimeDir,
         "-OpenCvSourceDir", $openCvSourceDir,
@@ -278,6 +280,7 @@ try {
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "LICENSE") -Issue "Pack-Runtime stage forwarding did not populate runtime project license layout"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "readme.htm") -Issue "Pack-Runtime stage forwarding did not populate OpenCV 3rdparty readme.htm"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "opencv-3rdparty/synthetic-3rdparty.txt") -Issue "Pack-Runtime stage forwarding did not populate OpenCV third-party license layout"
+    Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectDir "build/JYPPX.OpenCV.runtime.provenance.json") -Issue "Pack-Runtime stage forwarding did not populate runtime provenance manifest"
 
     $packagePath = Join-Path $packageOutputDir $packageFileName
     Assert-FileExists -Violations $violations -Path $packagePath -Issue "Runtime package artifact was not produced in the temporary package output directory"
@@ -292,6 +295,7 @@ try {
             }
 
             Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "$runtimePackageId.nuspec" -PackagePath $packagePath -Issue "Runtime package did not contain the expected neutral nuspec"
+            Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "build/JYPPX.OpenCV.runtime.provenance.json" -PackagePath $packagePath -Issue "Runtime package did not contain provenance manifest"
             foreach ($runtimeFile in $expectedRuntimeFiles) {
                 Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "runtimes/$rid/native/$runtimeFile" -PackagePath $packagePath -Issue "Runtime package did not contain staged native DLL"
             }
@@ -301,6 +305,33 @@ try {
                     "licenses/readme.htm",
                     "licenses/opencv-3rdparty/synthetic-3rdparty.txt")) {
                 Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry $licenseEntry -PackagePath $packagePath -Issue "Runtime package did not contain staged license file"
+            }
+
+            $manifestEntry = $zip.GetEntry("build/JYPPX.OpenCV.runtime.provenance.json")
+            if ($null -ne $manifestEntry) {
+                $reader = [System.IO.StreamReader]::new($manifestEntry.Open())
+                try {
+                    $manifest = $reader.ReadToEnd() | ConvertFrom-Json
+                }
+                finally {
+                    $reader.Dispose()
+                }
+
+                if ($manifest.PackageId -ne $runtimePackageId -or $manifest.PackageVersion -ne "5.0.0.0") {
+                    Add-Violation -Violations $violations -Path $packagePath -Issue "Runtime package provenance manifest must record package ID and version metadata" -Text "$($manifest.PackageId) / $($manifest.PackageVersion)"
+                }
+
+                if ($manifest.Rid -ne $rid -or $manifest.RuntimeProfile -ne "full") {
+                    Add-Violation -Violations $violations -Path $packagePath -Issue "Runtime package provenance manifest must record selected RID/profile" -Text "$($manifest.Rid) / $($manifest.RuntimeProfile)"
+                }
+
+                if (-not [bool]$manifest.SyntheticRuntimeInputs) {
+                    Add-Violation -Violations $violations -Path $packagePath -Issue "Synthetic pack-stage provenance manifest must be marked synthetic"
+                }
+
+                if (@($manifest.RequiredModules).Count -ne $requiredOpenCvModules.Count) {
+                    Add-Violation -Violations $violations -Path $packagePath -Issue "Runtime package provenance manifest required module count must match selected profile" -Text "Found $(@($manifest.RequiredModules).Count), expected $($requiredOpenCvModules.Count)"
+                }
             }
 
             $nuspecEntry = $zip.GetEntry("$runtimePackageId.nuspec")

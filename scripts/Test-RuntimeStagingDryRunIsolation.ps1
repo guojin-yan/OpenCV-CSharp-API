@@ -178,7 +178,8 @@ try {
         "-OpenCvSourceDir", $openCvSourceDir,
         "-OpenCvInstallDir", $openCvInstallDir,
         "-OutputRoot", $outputRoot,
-        "-RuntimeProject", $runtimeProjectDir
+        "-RuntimeProject", $runtimeProjectDir,
+        "-SyntheticRuntimeInputs"
     )
 
     $stageOutput = & $pwsh.Source @stageArguments 2>&1
@@ -203,6 +204,35 @@ try {
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "LICENSE") -Issue "Runtime project license layout did not include LICENSE"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "readme.htm") -Issue "Runtime project license layout did not include OpenCV 3rdparty readme.htm"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "opencv-3rdparty/synthetic-3rdparty.txt") -Issue "Runtime project license layout did not include OpenCV install third-party license"
+
+    $manifestPath = Join-Path $runtimeProjectDir "build/JYPPX.OpenCV.runtime.provenance.json"
+    Assert-FileExists -Violations $violations -Path $manifestPath -Issue "Runtime project build layout did not include provenance manifest"
+    if (Test-Path -LiteralPath $manifestPath -PathType Leaf) {
+        $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+        if ($manifest.PackageId -ne "JYPPX.OpenCV.runtime.$rid") {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest PackageId must match neutral runtime package ID" -Text $manifest.PackageId
+        }
+
+        if ($manifest.PackageVersion -ne "5.0.0.0") {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest PackageVersion must carry OpenCV runtime identity as version metadata" -Text $manifest.PackageVersion
+        }
+
+        if ($manifest.Rid -ne $rid -or $manifest.RuntimeProfile -ne "full") {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest must record selected RID/profile" -Text "$($manifest.Rid)/$($manifest.RuntimeProfile)"
+        }
+
+        if (-not [bool]$manifest.SyntheticRuntimeInputs) {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Synthetic dry-run provenance manifest must be marked synthetic"
+        }
+
+        if (@($manifest.RequiredModules).Count -ne $requiredOpenCvModules.Count) {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest required module count must match staged profile" -Text "Found $(@($manifest.RequiredModules).Count), expected $($requiredOpenCvModules.Count)"
+        }
+
+        if ($manifest.PrimaryNativeLoaderName -ne $primaryNativeLoader -or $manifest.CompatibilityNativeLoaderName -ne $compatibilityNativeLoader) {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest must record primary and compatibility loader names" -Text "$($manifest.PrimaryNativeLoaderName) / $($manifest.CompatibilityNativeLoaderName)"
+        }
+    }
 
     if ($stageOutputText.IndexOf("Optional OpenCV runtime module was not found and will be skipped", [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
         Add-Violation -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Issue "Missing optional OpenCV modules must warn and continue during staging dry-run" -Text $stageOutputText

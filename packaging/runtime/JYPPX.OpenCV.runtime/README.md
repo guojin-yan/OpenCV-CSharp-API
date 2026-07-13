@@ -12,9 +12,13 @@ Consumer package selection starts in the [Quick Start](../../../docs/articles/qu
 
 consumer package 选择从 [Quick Start](../../../docs/articles/quick-start.md) 开始。local native runtime fallback 与 staging 见 [Linked Runtime Build Guide](../../../docs/articles/linked-runtime-build-guide.md)，linked 验证见 [Linked Runtime Smoke Guide](../../../docs/articles/linked-runtime-smoke-guide.md) 和 [Smoke Profiles Guide](../../../docs/articles/smoke-profiles-guide.md)，license 布局见 [Runtime Licenses](../../../docs/articles/runtime-licenses.md)。
 
-The trackable package metadata in this directory is the `.csproj` and this `README.md`. The `runtimes/` and `licenses/` directories are ignored generated mirrors; `Stage-Runtime.ps1` regenerates them from current runtime inputs before packaging, so do not commit or hand-edit those mirror contents.
+The trackable package metadata in this directory is the `.csproj` and this `README.md`. The `runtimes/`, `licenses/`, and `build/` directories are ignored generated mirrors; `Stage-Runtime.ps1` regenerates them from current runtime inputs before packaging, so do not commit or hand-edit those mirror contents.
 
-该目录中可跟踪的包元数据是 `.csproj` 和本 `README.md`。`runtimes/` 与 `licenses/` 目录是被忽略的生成镜像；`Stage-Runtime.ps1` 会在打包前根据当前 runtime 输入重新生成它们，因此不要提交或手动编辑这些镜像内容。
+该目录中可跟踪的包元数据是 `.csproj` 和本 `README.md`。`runtimes/`、`licenses/` 与 `build/` 目录是被忽略的生成镜像；`Stage-Runtime.ps1` 会在打包前根据当前 runtime 输入重新生成它们，因此不要提交或手动编辑这些镜像内容。
+
+`Stage-Runtime.ps1` also generates `build/JYPPX.OpenCV.runtime.provenance.json`, and the runtime package includes it under the same `build/` path. That manifest records the package ID/version, OpenCV version, RID, runtime profile, primary and compatibility loader names, required and optional module lists, runtime file sources, license file sources, input/output roots, and whether the staged inputs were synthetic validation inputs. Synthetic manifests are package-shape evidence only; real release candidates must carry the same manifest with `SyntheticRuntimeInputs=false`.
+
+`Stage-Runtime.ps1` 还会生成 `build/JYPPX.OpenCV.runtime.provenance.json`，runtime 包会把它包含在同样的 `build/` 路径下。该 manifest 记录 package ID/version、OpenCV version、RID、runtime profile、主 loader 与兼容 loader 名称、required/optional module 列表、runtime 文件来源、license 文件来源、输入/输出根目录，以及暂存输入是否为 synthetic validation inputs。synthetic manifest 只作为 package-shape 证据；真实 release candidate 必须携带同一 manifest 且 `SyntheticRuntimeInputs=false`。
 
 The package ID is version-neutral; the OpenCV runtime identity and package revision are expressed by package version metadata, for example `5.0.0.0`, and by the actual staged upstream DLL names. `JYPPX.OpenCV.Native.dll` is the primary loader and `OpenCv5Sharp.Native.dll` is the compatibility loader copy kept stable for already-compiled consumers. The `500` suffix in factual OpenCV 5.0.0 runtime artifacts named `opencv_*500.dll` is the current OpenCV 5.0.0 binary naming fact, not a naming pattern for new project concepts.
 

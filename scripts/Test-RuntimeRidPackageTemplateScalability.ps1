@@ -172,10 +172,12 @@ Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeP
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must be derived from RuntimePackageRid and RuntimePackageProfile"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes/$(RuntimePackageRid)/native/**/*"' -Issue "Runtime package project must pack RID-driven native payloads"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'PackagePath="runtimes/$(RuntimePackageRid)/native"' -Issue "Runtime package project PackagePath must be RID-driven"
+Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="build/JYPPX.OpenCV.runtime.provenance.json"' -Issue "Runtime package project must pack the generated provenance manifest without RID-specific project copies"
 
 foreach ($requiredText in @(
         "packaging/runtime/JYPPX.OpenCV.runtime/runtimes/",
-        "packaging/runtime/JYPPX.OpenCV.runtime/licenses/")) {
+        "packaging/runtime/JYPPX.OpenCV.runtime/licenses/",
+        "packaging/runtime/JYPPX.OpenCV.runtime/build/")) {
     Assert-Contains -Violations $violations -Path $gitignorePath -Text $gitignoreText -Needle $requiredText -Issue ".gitignore must ignore generated mirrors for every runtime RID package project"
 }
 

@@ -20,6 +20,7 @@ param(
     [string[]]$OpenCvModules = @(),
     [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"),
     [switch]$StageRuntime,
+    [switch]$SyntheticRuntimeInputs,
     [switch]$NoBuild,
     [switch]$NoRestore
 )
@@ -205,6 +206,8 @@ if (-not $PackageVersion.StartsWith("$OpenCvVersion.", [System.StringComparison]
     throw "PackageVersion must start with the OpenCV version '$OpenCvVersion.'. Actual: $PackageVersion"
 }
 
+$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"
+
 function Get-NuGetPackageFileVersion {
     param(
         [Parameter(Mandatory = $true)]
@@ -242,8 +245,14 @@ if ($StageRuntime) {
         RuntimeProject = $runtimeProjectDirectory
         RuntimePackageMatrix = $RuntimePackageMatrix
         RuntimeProfile = $RuntimeProfile
+        RuntimePackageId = $runtimePackageId
+        PackageVersion = $PackageVersion
         OpenCvModules = $OpenCvModules
         OptionalOpenCvModules = $OptionalOpenCvModules
+    }
+
+    if ($SyntheticRuntimeInputs) {
+        $stageParameters.SyntheticRuntimeInputs = $true
     }
 
     if (-not [string]::IsNullOrWhiteSpace($StageOutputRoot)) {
@@ -284,7 +293,6 @@ if ($StageRuntime) {
 
 New-Item -ItemType Directory -Force $outputFullPath | Out-Null
 
-$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"
 $packageFileVersion = Get-NuGetPackageFileVersion -Version $PackageVersion
 $packagePath = Join-Path $outputFullPath "$runtimePackageId.$packageFileVersion.nupkg"
 if (Test-Path -LiteralPath $packagePath) {
