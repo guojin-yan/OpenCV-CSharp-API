@@ -35,22 +35,23 @@ runtime package 的 `.csproj` 和包 README 是可跟踪元数据。runtime proj
 
 `Stage-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package directory used for generated `runtimes/<rid>/native` and `licenses/` mirrors. `Pack-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package `.csproj` file path used by `dotnet pack`. When `Pack-Runtime.ps1 -StageRuntime` is used, the selected `.csproj` directory is forwarded to `Stage-Runtime.ps1`; use `-StageOutputRoot` to forward a separate staging root without changing package `-OutputDir`.
 
-The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured full/mini multi-RID matrix; targeted RID/profile packaging is supported. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, self-validates the full matrix artifacts with `Test-GitHubPackArtifactMatrixSurface.ps1`, validates package shape with synthetic runtime inputs by default, and rejects publishing when synthetic inputs are enabled.
+The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured full/mini multi-RID matrix; targeted RID/profile packaging is supported. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, self-validates the full matrix artifacts with `Test-GitHubPackArtifactMatrixSurface.ps1`, verifies consumer restore/build behavior with `Test-GitHubPackConsumerRestoreSurface.ps1`, validates package shape with synthetic runtime inputs by default, and rejects publishing when synthetic inputs are enabled.
 
 After a successful GitHub `pack.yml` run, download the workflow artifacts and validate the package matrix offline before using the run as release evidence:
 
 ```powershell
 gh run download <run-id> -D <artifact-root>
 pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 -ArtifactRoot <artifact-root>
+pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 -ArtifactRoot <artifact-root>
 ```
 
-The artifact guard checks the managed package plus every configured full/mini runtime RID package, including neutral package IDs, normalized package filenames, `runtimes/<rid>/native` payload paths, and full versus mini module counts. Keep downloaded artifacts outside the repository or remove them after validation.
+The artifact guard checks the managed package plus every configured full/mini runtime RID package, including neutral package IDs, normalized package filenames, `runtimes/<rid>/native` payload paths, and full versus mini module counts. The consumer restore guard uses the downloaded packages as a temporary local NuGet source, restores/builds temporary consumers for every configured RID/profile pair, and verifies managed compile assets plus selected RID native assets without executing native binaries. Keep downloaded artifacts outside the repository or remove them after validation.
 
 `Pack-Runtime.ps1 -Rid <rid>` 会把 full runtime package ID 推导为 `JYPPX.OpenCV.runtime.<rid>`；`-RuntimeProfile mini` 会推导 mini package ID `JYPPX.OpenCV.runtime.<rid>.mini`。脚本会把 `RuntimePackageRid` 和 `RuntimePackageProfile` 转发给通用 runtime package project。
 
 `Stage-Runtime.ps1 -RuntimeProject` 是仓库相对或绝对 runtime package 目录，用于生成 `runtimes/<rid>/native` 和 `licenses/` 镜像；`Pack-Runtime.ps1 -RuntimeProject` 是供 `dotnet pack` 使用的仓库相对或绝对 runtime package `.csproj` 文件路径。使用 `Pack-Runtime.ps1 -StageRuntime` 时，所选 `.csproj` 所在目录会转发给 `Stage-Runtime.ps1`；可用 `-StageOutputRoot` 转发单独的 staging root，且不改变 package `-OutputDir`。
 
-pack workflow 暴露 `rid` 和 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也支持定向 RID/profile 打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，并用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts；默认用 synthetic runtime inputs 验证 package shape，并在启用 synthetic inputs 时拒绝发布。
+pack workflow 暴露 `rid` 和 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也支持定向 RID/profile 打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，先用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts，再用 `Test-GitHubPackConsumerRestoreSurface.ps1` 验证 consumer restore/build；默认用 synthetic runtime inputs 验证 package shape，并在启用 synthetic inputs 时拒绝发布。
 
 To stage fresh runtime files and then pack in one command, use `-StageRuntime` and provide the native wrapper output directory:
 

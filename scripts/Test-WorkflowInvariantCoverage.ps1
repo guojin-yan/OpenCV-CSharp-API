@@ -160,8 +160,10 @@ if ((Get-TokenIndex -Text (Read-RequiredText -RelativePath $aggregateScriptToken
 $packWorkflowText = Read-RequiredText -RelativePath ".github/workflows/pack.yml"
 foreach ($token in @(
         "verify-artifacts:",
+        "verify-consumers:",
         "actions/download-artifact@v4",
         "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
+        "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
         "artifacts/pack-download",
         "inputs.rid == 'all' && inputs.runtime_profile == 'all'")) {
     if ((Get-TokenIndex -Text $packWorkflowText -Token $token) -lt 0) {

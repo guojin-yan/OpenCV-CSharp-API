@@ -262,3 +262,24 @@ jobs:
       - name: Verify package artifact matrix
         shell: pwsh
         run: pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 -ArtifactRoot ./artifacts/pack-download
+
+  verify-consumers:
+    needs:
+      - verify-artifacts
+    if: ${{ inputs.rid == 'all' && inputs.runtime_profile == 'all' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Download package artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/pack-download
+      - name: Verify package consumer restore
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 -ArtifactRoot ./artifacts/pack-download

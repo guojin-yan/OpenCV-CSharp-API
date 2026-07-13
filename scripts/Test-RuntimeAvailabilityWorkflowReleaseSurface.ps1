@@ -136,8 +136,10 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "dotnet nuget push ./artifacts/packages/*.nupkg" -Issue "Pack workflow publish step must push from neutral package output root"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle $aggregateScript -Issue "Pack workflow must run aggregate invariant checks before pack work" -NormalizeSlashes
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "verify-artifacts:" -Issue "Pack workflow must keep a full-matrix artifact self-validation job"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "verify-consumers:" -Issue "Pack workflow must keep a full-matrix consumer restore verification job"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "actions/download-artifact@v4" -Issue "Pack workflow artifact self-validation must download current-run artifacts"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "scripts/Test-GitHubPackArtifactMatrixSurface.ps1" -Issue "Pack workflow must run the offline GitHub pack artifact matrix guard"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "scripts/Test-GitHubPackConsumerRestoreSurface.ps1" -Issue "Pack workflow must run the offline GitHub pack consumer restore guard"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "artifacts/pack-download" -Issue "Pack workflow must download package artifacts into an isolated generated directory"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "inputs.rid == 'all' && inputs.runtime_profile == 'all'" -Issue "Pack workflow artifact self-validation must run only for full RID/profile matrix inputs"
 
@@ -160,6 +162,7 @@ foreach ($doc in @(
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "multi-RID" -Issue "$($doc.Path) must document the active multi-RID runtime matrix"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "full/mini" -Issue "$($doc.Path) must document full/mini runtime profiles"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "synthetic" -Issue "$($doc.Path) must document synthetic package-surface validation boundary"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "consumer restore" -Issue "$($doc.Path) must document GitHub package consumer restore validation"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "artifacts/packages" -Issue "$($doc.Path) must keep package output rooted under artifacts/packages"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "nupkg" -Issue "$($doc.Path) must keep workflow artifact labels neutral"
 }
