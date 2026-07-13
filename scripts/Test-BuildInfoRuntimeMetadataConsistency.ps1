@@ -6,13 +6,6 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$expectedManagedPackageId = "JYPPX.OpenCV.CSharp.API"
-$expectedRuntimePackagePrefix = "JYPPX.OpenCV.runtime"
-$expectedRootNamespace = "OpenCvSharp"
-$expectedOpenCvVersion = "5.0.0"
-$expectedPackageVersion = "5.0.0.0"
-$expectedCurrentNativeLibraryName = "JYPPX.OpenCV.Native"
-$expectedCompatibilityNativeLibraryName = "OpenCv5Sharp.Native"
 
 function Get-RepositoryRelativePath {
     param(
@@ -124,6 +117,85 @@ function Get-SingleProjectProperty {
     return $uniqueValues[0]
 }
 
+function Get-DirectoryBuildProperties {
+    param(
+        [Parameter(Mandatory = $true)]
+        [xml]$Project
+    )
+
+    $properties = [ordered]@{}
+    foreach ($propertyGroup in $Project.Project.PropertyGroup) {
+        if ($null -eq $propertyGroup) {
+            continue
+        }
+
+        foreach ($child in $propertyGroup.ChildNodes) {
+            if ($child.NodeType -ne [System.Xml.XmlNodeType]::Element) {
+                continue
+            }
+
+            if ([string]::IsNullOrWhiteSpace($child.InnerText)) {
+                continue
+            }
+
+            $properties[$child.Name] = $child.InnerText
+        }
+    }
+
+    foreach ($key in @($properties.Keys)) {
+        $properties[$key] = Resolve-PropertyReferences -Value ([string]$properties[$key]) -Properties $properties
+    }
+
+    return $properties
+}
+
+function Resolve-PropertyReferences {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Value,
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties
+    )
+
+    $resolved = $Value
+    for ($i = 0; $i -lt 8; $i++) {
+        $previous = $resolved
+        $resolved = [regex]::Replace(
+            $resolved,
+            '\$\((?<name>[A-Za-z_][A-Za-z0-9_.-]*)\)',
+            {
+                param($match)
+                $name = $match.Groups["name"].Value
+                if ($Properties.ContainsKey($name)) {
+                    return [string]$Properties[$name]
+                }
+
+                return $match.Value
+            })
+
+        if ($resolved.Equals($previous, [System.StringComparison]::Ordinal)) {
+            break
+        }
+    }
+
+    return $resolved
+}
+
+function Get-RequiredDirectoryBuildProperty {
+    param(
+        [Parameter(Mandatory = $true)]
+        [hashtable]$Properties,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    if (-not $Properties.ContainsKey($Name) -or [string]::IsNullOrWhiteSpace([string]$Properties[$Name])) {
+        throw "Required Directory.Build.props metadata property was not found: $Name"
+    }
+
+    return [string]$Properties[$Name]
+}
+
 function Get-RegexValue {
     param(
         [Parameter(Mandatory = $true)]
@@ -175,6 +247,7 @@ $violations = [System.Collections.Generic.List[object]]::new()
 
 $managedProjectPath = "src/OpenCvSharp/OpenCvSharp.csproj"
 $runtimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"
+$directoryBuildPropsPath = "Directory.Build.props"
 $buildInfoPath = "src/OpenCvSharp/OpenCvSharpBuildInfo.cs"
 $nativeLibraryNamesPath = "src/OpenCvSharp/Internal/Interop/NativeLibraryNames.cs"
 $nativeCMakePath = "src/OpenCvSharp.Native/CMakeLists.txt"
@@ -183,6 +256,15 @@ $stageRuntimePath = "scripts/Stage-Runtime.ps1"
 
 $managedProject = Read-RequiredXml -RelativePath $managedProjectPath
 $runtimeProject = Read-RequiredXml -RelativePath $runtimeProjectPath
+$directoryBuildProps = Read-RequiredXml -RelativePath $directoryBuildPropsPath
+$centralProperties = Get-DirectoryBuildProperties -Project $directoryBuildProps
+$expectedManagedPackageId = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpManagedPackageId"
+$expectedRuntimePackagePrefix = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRuntimePackageIdPrefix"
+$expectedRootNamespace = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRootNamespace"
+$expectedOpenCvVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpOpenCvVersion"
+$expectedPackageVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpPackageVersion"
+$expectedCurrentNativeLibraryName = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCurrentNativeLibraryName"
+$expectedCompatibilityNativeLibraryName = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCompatibilityNativeLibraryName"
 $buildInfoText = Read-RequiredText -RelativePath $buildInfoPath
 $nativeLibraryNamesText = Read-RequiredText -RelativePath $nativeLibraryNamesPath
 $nativeCMakeText = Read-RequiredText -RelativePath $nativeCMakePath
