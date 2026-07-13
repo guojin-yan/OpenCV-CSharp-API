@@ -4,7 +4,7 @@ param(
     [string]$OpenCvNativeRuntimeDir = "",
     [string]$NativeRuntimeDir = "",
     [string]$OpenCvVersion = "5.0.0",
-    [string]$OpenCvRid = "windows-x64",
+    [string]$OpenCvRid = "",
     [string]$OpenCvRuntimeVersionSuffix = "",
     [string]$OpenCvSourceRoot = "",
     [string]$OpenCvInstallRoot = "",
@@ -55,9 +55,65 @@ function Get-RuntimeProfileSpec {
     return $profileSpec[0]
 }
 
+function Get-RuntimeRidSpec {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$MatrixPath,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeIdentifier
+    )
+
+    $matrixCandidate = if ([System.IO.Path]::IsPathRooted($MatrixPath)) {
+        $MatrixPath
+    }
+    else {
+        Join-Path $repoRoot $MatrixPath
+    }
+
+    if (-not (Test-Path -LiteralPath $matrixCandidate -PathType Leaf)) {
+        throw "Runtime package matrix was not found: $matrixCandidate"
+    }
+
+    $matrix = Get-Content -LiteralPath $matrixCandidate -Raw | ConvertFrom-Json
+    $ridSpec = @($matrix.rids | Where-Object { $_.rid -eq $RuntimeIdentifier -or $_.opencvRid -eq $RuntimeIdentifier } | Select-Object -First 1)
+    if ($ridSpec.Count -eq 0) {
+        throw "RID '$RuntimeIdentifier' was not found in runtime package matrix: $matrixCandidate"
+    }
+
+    return $ridSpec[0]
+}
+
 function Test-WindowsRid {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
     return $RuntimeIdentifier.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Test-AndroidRid {
+    param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
+    return $RuntimeIdentifier.StartsWith("android-", [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Get-WindowsOpenCvArchFolder {
+    param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
+
+    switch ($RuntimeIdentifier) {
+        "win-x64" { return "x64" }
+        "win-x86" { return "x86" }
+        "win-arm64" { return "ARM64" }
+        default { return "x64" }
+    }
+}
+
+function Get-AndroidAbi {
+    param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
+
+    switch ($RuntimeIdentifier) {
+        "android-arm64" { return "arm64-v8a" }
+        "android-arm" { return "armeabi-v7a" }
+        "android-x64" { return "x86_64" }
+        "android-x86" { return "x86" }
+        default { return "" }
+    }
 }
 
 function Get-NativeLoaderFileNames {
@@ -108,7 +164,103 @@ function Resolve-OpenCvModuleRuntimeFile {
     return $candidates[1]
 }
 
+function Test-OpenCvRuntimeDirectory {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Directory,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeIdentifier,
+        [Parameter(Mandatory = $true)]
+        [string]$BinarySuffix,
+        [Parameter(Mandatory = $true)]
+        [string]$Version
+    )
+
+    if (-not (Test-Path -LiteralPath $Directory -PathType Container)) {
+        return $false
+    }
+
+    if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
+        return Test-Path -LiteralPath (Join-Path $Directory "opencv_core$BinarySuffix.dll") -PathType Leaf
+    }
+
+    foreach ($candidate in @(
+            (Join-Path $Directory "libopencv_core.so"),
+            (Join-Path $Directory "libopencv_core.so.$Version"))) {
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+            return $true
+        }
+    }
+
+    return @(Get-ChildItem -LiteralPath $Directory -Filter "libopencv_core.so*" -File -ErrorAction SilentlyContinue | Select-Object -First 1).Count -gt 0
+}
+
+function Get-OpenCvRuntimeDirectoryCandidates {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$InstallDirectory,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeIdentifier,
+        [Parameter(Mandatory = $true)]
+        [string]$Configuration
+    )
+
+    if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
+        $archFolder = Get-WindowsOpenCvArchFolder -RuntimeIdentifier $RuntimeIdentifier
+        return @(
+            (Join-Path $InstallDirectory "bin"),
+            (Join-Path $InstallDirectory "bin\$Configuration"),
+            (Join-Path $InstallDirectory "$archFolder\vc18\bin"),
+            (Join-Path $InstallDirectory "$archFolder\vc18\bin\$Configuration")
+        )
+    }
+
+    if (Test-AndroidRid -RuntimeIdentifier $RuntimeIdentifier) {
+        $abi = Get-AndroidAbi -RuntimeIdentifier $RuntimeIdentifier
+        return @(
+            (Join-Path $InstallDirectory "sdk\native\libs\$abi"),
+            (Join-Path $InstallDirectory "lib\$abi"),
+            (Join-Path $InstallDirectory "lib"),
+            (Join-Path $InstallDirectory "bin")
+        )
+    }
+
+    return @(
+        (Join-Path $InstallDirectory "lib"),
+        (Join-Path $InstallDirectory "bin")
+    )
+}
+
+function Get-DefaultOpenCvRuntimeDirectory {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$WorkspaceRoot,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeVersionSuffix,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeIdentifier,
+        [Parameter(Mandatory = $true)]
+        [string]$Configuration
+    )
+
+    if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
+        return Join-Path $WorkspaceRoot "artifacts\opencv-build\opencv-$RuntimeVersionSuffix\bin\$Configuration"
+    }
+
+    if (Test-AndroidRid -RuntimeIdentifier $RuntimeIdentifier) {
+        $abi = Get-AndroidAbi -RuntimeIdentifier $RuntimeIdentifier
+        return Join-Path $WorkspaceRoot "artifacts\opencv-install\opencv-$RuntimeVersionSuffix\sdk\native\libs\$abi"
+    }
+
+    return Join-Path $WorkspaceRoot "artifacts\opencv-install\opencv-$RuntimeVersionSuffix\lib"
+}
+
 $profileSpec = Get-RuntimeProfileSpec -MatrixPath $RuntimePackageMatrix -Profile $RuntimeProfile
+$ridSpec = Get-RuntimeRidSpec -MatrixPath $RuntimePackageMatrix -RuntimeIdentifier $Rid
+if (-not $PSBoundParameters.ContainsKey("OpenCvRid") -or [string]::IsNullOrWhiteSpace($OpenCvRid)) {
+    $OpenCvRid = [string]$ridSpec.opencvRid
+}
+
 if (-not $PSBoundParameters.ContainsKey("OpenCvModules")) {
     $OpenCvModules = @($profileSpec.modules)
 }
@@ -316,18 +468,15 @@ if ([string]::IsNullOrWhiteSpace($OpenCvInstallDir)) {
 if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeDir)) {
     if (-not [string]::IsNullOrWhiteSpace($OpenCvInstallDir)) {
         $resolvedInstallDir = (Resolve-Path -LiteralPath $OpenCvInstallDir).Path
-        # Derived only for factual upstream OpenCV runtime DLL probe names such as opencv_core500.dll.
+        # Derived only for factual upstream OpenCV runtime probe names such as opencv_core500.dll or libopencv_core.so.
         $openCvBinarySuffix = (($OpenCvVersion -split "\.") | Select-Object -First 3) -join ""
-        $installRuntimeCandidates = @(
-            (Join-Path $resolvedInstallDir "bin"),
-            (Join-Path $resolvedInstallDir "bin\$Configuration"),
-            (Join-Path $resolvedInstallDir "x64\vc18\bin"),
-            (Join-Path $resolvedInstallDir "x64\vc18\bin\$Configuration")
-        )
+        $installRuntimeCandidates = Get-OpenCvRuntimeDirectoryCandidates `
+            -InstallDirectory $resolvedInstallDir `
+            -RuntimeIdentifier $Rid `
+            -Configuration $Configuration
 
         foreach ($candidate in $installRuntimeCandidates) {
-            $coreCandidate = Join-Path $candidate "opencv_core$openCvBinarySuffix.dll"
-            if (Test-Path -LiteralPath $coreCandidate) {
+            if (Test-OpenCvRuntimeDirectory -Directory $candidate -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion) {
                 $OpenCvRuntimeDir = (Resolve-Path -LiteralPath $candidate).Path
                 break
             }
@@ -337,20 +486,29 @@ if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeDir)) {
             $installLeafName = Split-Path $resolvedInstallDir -Leaf
             if ($installLeafName.StartsWith("opencv-$OpenCvVersion-", [System.StringComparison]::OrdinalIgnoreCase)) {
                 # Reuse the factual local build leaf that matches the selected install artifact identity.
-                $OpenCvRuntimeDir = Join-Path $workspaceRoot "artifacts\opencv-build\$installLeafName\bin\$Configuration"
+                $OpenCvRuntimeDir = Get-DefaultOpenCvRuntimeDirectory `
+                    -WorkspaceRoot $workspaceRoot `
+                    -RuntimeVersionSuffix ($installLeafName.Substring("opencv-".Length)) `
+                    -RuntimeIdentifier $Rid `
+                    -Configuration $Configuration
             }
         }
     }
 
     if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeDir)) {
         # Default local OpenCV build runtime path is factual artifact metadata derived from version-neutral parameters.
-        $OpenCvRuntimeDir = Join-Path $workspaceRoot "artifacts\opencv-build\opencv-$OpenCvRuntimeVersionSuffix\bin\$Configuration"
+        $OpenCvRuntimeDir = Get-DefaultOpenCvRuntimeDirectory `
+            -WorkspaceRoot $workspaceRoot `
+            -RuntimeVersionSuffix $OpenCvRuntimeVersionSuffix `
+            -RuntimeIdentifier $Rid `
+            -Configuration $Configuration
     }
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvInstallDir)) {
     $runtimeCandidate = Resolve-Path -LiteralPath $OpenCvRuntimeDir
     $openCvInstallCandidates = @(
+        (Join-Path $runtimeCandidate "..\..\..\.."),
         (Join-Path $runtimeCandidate "..\..\.."),
         (Join-Path $runtimeCandidate "..\.."),
         (Join-Path $runtimeCandidate "..")
@@ -496,6 +654,7 @@ $provenance = [ordered]@{
     PackageId = $RuntimePackageId
     PackageVersion = $PackageVersion
     OpenCvVersion = $OpenCvVersion
+    OpenCvRid = $OpenCvRid
     Rid = $Rid
     RuntimeProfile = $RuntimeProfile
     SyntheticRuntimeInputs = [bool]$SyntheticRuntimeInputs.IsPresent

@@ -155,6 +155,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Real native runtime build matrix coverage"
+        Script = Join-Path $repo "scripts/Test-RealNativeRuntimeBuildMatrixCoverage.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime package docs discoverability"
         Script = Join-Path $repo "scripts/Test-RuntimePackageDocsDiscoverability.ps1"
         Arguments = @("-RepositoryRoot", $repo)

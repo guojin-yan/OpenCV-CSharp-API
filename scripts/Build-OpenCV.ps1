@@ -4,18 +4,23 @@ param(
     [string]$OpenCvSourceRoot = "",
     [string]$OpenCvInstallRoot = "",
     [string]$OpenCvRuntimeVersionSuffix = "",
-    [string]$Rid = "windows-x64",
+    [string]$Rid = "win-x64",
     [string]$Configuration = "Release",
-    [string]$Generator = "Visual Studio 18 2026",
-    [string]$Platform = "x64",
+    [string]$Generator = "",
+    [string]$Platform = "",
     [string]$BuildList = "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud",
     [string]$ExtraCMakeArgs = "",
     [string]$EigenIncludePath = "",
+    [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
+    [string]$AndroidNdkRoot = "",
+    [string]$AndroidApiLevel = "24",
     [switch]$WithContrib,
-    [switch]$Build
+    [switch]$Build,
+    [switch]$DescribeOnly
 )
 
 $ErrorActionPreference = "Stop"
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 
 function Invoke-CheckedCommand {
     param(
@@ -75,6 +80,189 @@ function Get-DefaultOpenCvSourceRoot {
     return $neutralSourceRoot
 }
 
+function Get-RuntimeMatrix {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RepositoryRoot,
+        [Parameter(Mandatory = $true)]
+        [string]$MatrixPath
+    )
+
+    $matrixCandidate = if ([System.IO.Path]::IsPathRooted($MatrixPath)) {
+        $MatrixPath
+    }
+    else {
+        Join-Path $RepositoryRoot $MatrixPath
+    }
+
+    if (-not (Test-Path -LiteralPath $matrixCandidate -PathType Leaf)) {
+        throw "Runtime package matrix was not found: $matrixCandidate"
+    }
+
+    return Get-Content -LiteralPath $matrixCandidate -Raw | ConvertFrom-Json
+}
+
+function Get-AndroidAbi {
+    param([Parameter(Mandatory = $true)][string]$PackageRid)
+
+    switch ($PackageRid) {
+        "android-arm64" { return "arm64-v8a" }
+        "android-arm" { return "armeabi-v7a" }
+        "android-x64" { return "x86_64" }
+        "android-x86" { return "x86" }
+        default { return "" }
+    }
+}
+
+function Get-WindowsOpenCvArchFolder {
+    param([Parameter(Mandatory = $true)][string]$PackageRid)
+
+    switch ($PackageRid) {
+        "win-x64" { return "x64" }
+        "win-x86" { return "x86" }
+        "win-arm64" { return "ARM64" }
+        default { return "" }
+    }
+}
+
+function Get-OpenCvBuildTarget {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RequestedRid,
+        [Parameter(Mandatory = $true)]
+        [object]$Matrix,
+        [Parameter(Mandatory = $true)]
+        [string]$Configuration,
+        [Parameter(Mandatory = $true)]
+        [string]$OpenCvVersion,
+        [string]$GeneratorOverride = "",
+        [string]$PlatformOverride = ""
+    )
+
+    $ridSpec = @($Matrix.rids | Where-Object {
+            $_.rid -eq $RequestedRid -or $_.opencvRid -eq $RequestedRid
+        } | Select-Object -First 1)
+    if ($ridSpec.Count -eq 0) {
+        throw "RID '$RequestedRid' was not found in runtime package matrix."
+    }
+
+    $packageRid = [string]$ridSpec[0].rid
+    $openCvRid = [string]$ridSpec[0].opencvRid
+    $platformFamily = if ($packageRid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        "windows"
+    }
+    elseif ($packageRid.StartsWith("linux-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        "linux"
+    }
+    elseif ($packageRid.StartsWith("android-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        "android"
+    }
+    else {
+        throw "RID '$packageRid' is not mapped to a real OpenCV build target family."
+    }
+
+    $resolvedGenerator = $GeneratorOverride
+    $resolvedPlatform = $PlatformOverride
+    $buildSystem = "single-config"
+    $installTarget = "install"
+    $androidAbi = ""
+    $requiresAndroidNdk = $false
+    $openCvMajorMatch = [regex]::Match($OpenCvVersion, "^(\d+)(?:\.|$)")
+    if (-not $openCvMajorMatch.Success) {
+        throw "OpenCvVersion must start with a numeric major version: $OpenCvVersion"
+    }
+
+    $openCvMajor = $openCvMajorMatch.Groups[1].Value
+    $openCvConfigCandidates = @("lib/OpenCVConfig.cmake", "OpenCVConfig.cmake")
+    $runtimeDirCandidates = @("bin", "lib")
+
+    if ($platformFamily -eq "windows") {
+        if ([string]::IsNullOrWhiteSpace($resolvedGenerator)) {
+            $resolvedGenerator = "Visual Studio 18 2026"
+        }
+
+        if ([string]::IsNullOrWhiteSpace($resolvedPlatform)) {
+            $resolvedPlatform = switch ($packageRid) {
+                "win-x64" { "x64" }
+                "win-x86" { "Win32" }
+                "win-arm64" { "ARM64" }
+            }
+        }
+
+        $archFolder = Get-WindowsOpenCvArchFolder -PackageRid $packageRid
+        $buildSystem = "multi-config"
+        $installTarget = "INSTALL"
+        $openCvConfigCandidates = @(
+            "$archFolder/vc18/lib/OpenCVConfig.cmake",
+            "lib/OpenCVConfig.cmake",
+            "OpenCVConfig.cmake"
+        )
+        $runtimeDirCandidates = @(
+            "$archFolder/vc18/bin",
+            "$archFolder/vc18/bin/$Configuration",
+            "bin",
+            "bin/$Configuration"
+        )
+    }
+    elseif ($platformFamily -eq "linux") {
+        if ([string]::IsNullOrWhiteSpace($resolvedGenerator)) {
+            $resolvedGenerator = "Ninja"
+        }
+
+        $openCvConfigCandidates = @(
+            "lib/cmake/opencv$openCvMajor/OpenCVConfig.cmake",
+            "lib/OpenCVConfig.cmake",
+            "OpenCVConfig.cmake"
+        )
+        $runtimeDirCandidates = @("lib", "bin")
+    }
+    elseif ($platformFamily -eq "android") {
+        if ([string]::IsNullOrWhiteSpace($resolvedGenerator)) {
+            $resolvedGenerator = "Ninja"
+        }
+
+        $androidAbi = Get-AndroidAbi -PackageRid $packageRid
+        $requiresAndroidNdk = $true
+        $openCvConfigCandidates = @(
+            "sdk/native/jni/OpenCVConfig.cmake",
+            "lib/$androidAbi/OpenCVConfig.cmake",
+            "OpenCVConfig.cmake"
+        )
+        $runtimeDirCandidates = @(
+            "sdk/native/libs/$androidAbi",
+            "lib/$androidAbi",
+            "lib"
+        )
+    }
+
+    return [pscustomobject]@{
+        PackageRid = $packageRid
+        OpenCvRid = $openCvRid
+        PlatformFamily = $platformFamily
+        Generator = $resolvedGenerator
+        Platform = $resolvedPlatform
+        BuildSystem = $buildSystem
+        InstallTarget = $installTarget
+        AndroidAbi = $androidAbi
+        RequiresAndroidNdk = $requiresAndroidNdk
+        OpenCvConfigCandidates = @($openCvConfigCandidates)
+        RuntimeDirCandidates = @($runtimeDirCandidates)
+    }
+}
+
+$runtimeMatrix = Get-RuntimeMatrix -RepositoryRoot $repoRoot -MatrixPath $RuntimePackageMatrix
+$buildTarget = Get-OpenCvBuildTarget `
+    -RequestedRid $Rid `
+    -Matrix $runtimeMatrix `
+    -Configuration $Configuration `
+    -OpenCvVersion $OpenCvVersion `
+    -GeneratorOverride $Generator `
+    -PlatformOverride $Platform
+$Rid = $buildTarget.PackageRid
+$openCvRid = $buildTarget.OpenCvRid
+$Generator = $buildTarget.Generator
+$Platform = $buildTarget.Platform
+
 if ([string]::IsNullOrWhiteSpace($OpenCvSourceRoot)) {
     $OpenCvSourceRoot = Get-DefaultOpenCvSourceRoot -WorkspaceRoot $WorkspaceRoot -OpenCvVersion $OpenCvVersion
 }
@@ -85,7 +273,7 @@ if ([string]::IsNullOrWhiteSpace($OpenCvInstallRoot)) {
 
 if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeVersionSuffix)) {
     # The suffix carries factual local build/install artifact identity, not a package ID or generic project naming surface.
-    $OpenCvRuntimeVersionSuffix = "$OpenCvVersion-$Rid"
+    $OpenCvRuntimeVersionSuffix = "$OpenCvVersion-$openCvRid"
 }
 
 # Upstream source leaf directories include the selected OpenCV version as factual source artifact identity.
@@ -97,20 +285,11 @@ $buildRoot = Join-Path $WorkspaceRoot "artifacts\opencv-build"
 $installRoot = Join-Path $OpenCvInstallRoot "opencv-$OpenCvRuntimeVersionSuffix"
 $buildDir = Join-Path $buildRoot "opencv-$OpenCvRuntimeVersionSuffix"
 
-if (-not (Test-Path $opencvSource)) {
-    throw "OpenCV source directory was not found: $opencvSource"
-}
-
-New-Item -ItemType Directory -Force $buildDir | Out-Null
-New-Item -ItemType Directory -Force $installRoot | Out-Null
-
 $cmakeArgs = @(
     "-S", $opencvSource,
     "-B", $buildDir,
     "-G", $Generator,
-    "-A", $Platform,
     "-DCMAKE_INSTALL_PREFIX=$installRoot",
-    "-DCMAKE_CONFIGURATION_TYPES=$Configuration",
     "-DBUILD_SHARED_LIBS=ON",
     "-DBUILD_TESTS=OFF",
     "-DBUILD_PERF_TESTS=OFF",
@@ -122,14 +301,50 @@ $cmakeArgs = @(
     "-DBUILD_opencv_python_tests=OFF",
     "-DWITH_IPP=OFF",
     "-DWITH_OPENCL=OFF",
-    "-DWITH_FFMPEG=OFF",
-    "-DWITH_MSMF=OFF",
-    "-DWITH_DSHOW=OFF"
+    "-DWITH_FFMPEG=OFF"
 )
+
+if (-not [string]::IsNullOrWhiteSpace($Platform)) {
+    $cmakeArgs += @("-A", $Platform)
+}
+
+if ($buildTarget.BuildSystem -eq "multi-config") {
+    $cmakeArgs += "-DCMAKE_CONFIGURATION_TYPES=$Configuration"
+}
+else {
+    $cmakeArgs += "-DCMAKE_BUILD_TYPE=$Configuration"
+}
+
+if ($buildTarget.PlatformFamily -eq "windows") {
+    $cmakeArgs += @("-DWITH_MSMF=OFF", "-DWITH_DSHOW=OFF")
+}
+
+if ($buildTarget.PlatformFamily -eq "android") {
+    if ([string]::IsNullOrWhiteSpace($AndroidNdkRoot)) {
+        if (-not $DescribeOnly) {
+            throw "Android OpenCV builds require -AndroidNdkRoot for RID '$Rid'. Use -DescribeOnly to inspect the required plan without configuring."
+        }
+
+        $AndroidNdkRoot = "<ANDROID_NDK_ROOT>"
+    }
+
+    $androidToolchainFile = Join-Path $AndroidNdkRoot "build\cmake\android.toolchain.cmake"
+    if (-not $DescribeOnly -and -not (Test-Path -LiteralPath $androidToolchainFile -PathType Leaf)) {
+        throw "Android NDK toolchain file was not found: $androidToolchainFile"
+    }
+
+    $cmakeArgs += @(
+        "-DCMAKE_TOOLCHAIN_FILE=$androidToolchainFile",
+        "-DANDROID_ABI=$($buildTarget.AndroidAbi)",
+        "-DANDROID_PLATFORM=android-$AndroidApiLevel"
+    )
+}
 
 if ($WithContrib) {
     if (-not (Test-Path $contribSource)) {
-        throw "OpenCV contrib source directory was not found: $contribSource"
+        if (-not $DescribeOnly) {
+            throw "OpenCV contrib source directory was not found: $contribSource"
+        }
     }
 
     if ([string]::IsNullOrWhiteSpace($EigenIncludePath)) {
@@ -196,28 +411,71 @@ if (-not [string]::IsNullOrWhiteSpace($ExtraCMakeArgs)) {
     $cmakeArgs += $ExtraCMakeArgs.Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
 }
 
+$expectedConfigCandidates = @($buildTarget.OpenCvConfigCandidates | ForEach-Object {
+        Join-Path $installRoot $_
+    })
+$expectedConfigCandidates += (Join-Path $buildDir "OpenCVConfig.cmake")
+$expectedRuntimeDirCandidates = @($buildTarget.RuntimeDirCandidates | ForEach-Object {
+        Join-Path $installRoot $_
+    })
+
+if ($DescribeOnly) {
+    [pscustomobject]@{
+        PackageRid = $buildTarget.PackageRid
+        OpenCvRid = $buildTarget.OpenCvRid
+        PlatformFamily = $buildTarget.PlatformFamily
+        Generator = $Generator
+        Platform = $Platform
+        BuildSystem = $buildTarget.BuildSystem
+        InstallTarget = $buildTarget.InstallTarget
+        AndroidAbi = $buildTarget.AndroidAbi
+        RequiresAndroidNdk = [bool]$buildTarget.RequiresAndroidNdk
+        AndroidApiLevel = if ($buildTarget.PlatformFamily -eq "android") { $AndroidApiLevel } else { "" }
+        OpenCvVersion = $OpenCvVersion
+        RuntimeVersionSuffix = $OpenCvRuntimeVersionSuffix
+        BuildList = $BuildList
+        Source = $opencvSource
+        ContribSource = $contribSource
+        BuildDir = $buildDir
+        InstallRoot = $installRoot
+        ExpectedOpenCvConfigCMake = @($expectedConfigCandidates)
+        ExpectedRuntimeDirs = @($expectedRuntimeDirCandidates)
+        CMakeArgs = @($cmakeArgs)
+    } | ConvertTo-Json -Depth 6
+    return
+}
+
+if (-not (Test-Path $opencvSource)) {
+    throw "OpenCV source directory was not found: $opencvSource"
+}
+
+New-Item -ItemType Directory -Force $buildDir | Out-Null
+New-Item -ItemType Directory -Force $installRoot | Out-Null
+
 Write-Host "Configuring OpenCV $OpenCvVersion"
+Write-Host "RID:     $Rid ($($buildTarget.OpenCvRid))"
+Write-Host "Target:  $($buildTarget.PlatformFamily)"
 Write-Host "Source:  $opencvSource"
 Write-Host "Build:   $buildDir"
 Write-Host "Install: $installRoot"
 Write-Host "Modules: $BuildList"
-Write-Host "Expected OpenCVConfig.cmake: $(Join-Path $installRoot "x64\vc18\lib\OpenCVConfig.cmake")"
-Write-Host "Expected runtime bin:      $(Join-Path $installRoot "x64\vc18\bin")"
+Write-Host "Expected OpenCVConfig.cmake candidates:"
+foreach ($candidate in $expectedConfigCandidates) {
+    Write-Host " - $candidate"
+}
+Write-Host "Expected runtime directory candidates:"
+foreach ($candidate in $expectedRuntimeDirCandidates) {
+    Write-Host " - $candidate"
+}
 
 Invoke-CheckedCommand cmake @cmakeArgs
 
 if ($Build) {
     Write-Host "Building OpenCV $OpenCvVersion ($Configuration)"
-    Invoke-CheckedCommand cmake --build $buildDir --config $Configuration --target INSTALL
+    Invoke-CheckedCommand cmake --build $buildDir --config $Configuration --target $buildTarget.InstallTarget
 }
 
-$configCandidates = @(
-    (Join-Path $installRoot "x64\vc18\lib\OpenCVConfig.cmake"),
-    (Join-Path $installRoot "lib\OpenCVConfig.cmake"),
-    (Join-Path $buildDir "OpenCVConfig.cmake")
-)
-
-foreach ($candidate in $configCandidates) {
+foreach ($candidate in $expectedConfigCandidates) {
     if (Test-Path $candidate) {
         Write-Host "OpenCVConfig.cmake: $candidate"
         return
