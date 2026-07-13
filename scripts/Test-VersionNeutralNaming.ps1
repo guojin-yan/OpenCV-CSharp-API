@@ -23,62 +23,110 @@ $ignoredRelativePrefixes = @(
     "docs/api"
 )
 
+$fixedMajorManagedIdentity = "OpenCv" + "5Sharp"
+$fixedMajorOpenCvShorthand = "opencv" + "5"
+$fixedMajorRetiredRootPattern = "OpenCV-CSharp-API-opencv" + "5\.x"
+$fixedMajorIncludeTree = "open_cv_" + "5_sharp"
+$fixedMajorAbiPrefix = "jyppx_ocv" + "5_"
+
 $checks = @(
     [pscustomobject]@{
         Name = "Managed package ID must stay version-neutral"
-        Pattern = "<PackageId>\s*OpenCv5Sharp"
+        Pattern = "<PackageId>\s*$fixedMajorManagedIdentity"
     },
     [pscustomobject]@{
         Name = "Managed assembly name must stay version-neutral"
-        Pattern = "<AssemblyName>\s*OpenCv5Sharp"
+        Pattern = "<AssemblyName>\s*$fixedMajorManagedIdentity"
     },
     [pscustomobject]@{
         Name = "Package references must use neutral package identity"
-        Pattern = ("Package" + "Reference.*Open" + "Cv5Sharp")
+        Pattern = "PackageReference.*$fixedMajorManagedIdentity"
     },
     [pscustomobject]@{
         Name = "Install docs must not recommend fixed-major OpenCv5Sharp package identity"
-        Pattern = "dotnet\s+add\s+package\s+OpenCv5Sharp"
+        Pattern = "dotnet\s+add\s+package\s+$fixedMajorManagedIdentity"
     },
     [pscustomobject]@{
         Name = "Runtime package identity must stay version-neutral"
-        Pattern = "OpenCv5Sharp\.runtime|opencv5sharp\.runtime"
+        Pattern = "$fixedMajorManagedIdentity\.runtime|$fixedMajorOpenCvShorthand" + "sharp\.runtime"
     },
     [pscustomobject]@{
         Name = "Repository/workspace paths must not use the retired fixed-major root"
-        Pattern = "OpenCV-CSharp-API-opencv5\.x"
+        Pattern = $fixedMajorRetiredRootPattern
+    }
+)
+
+$activeContentChecks = @(
+    [pscustomobject]@{
+        Name = "Active content must not import the retired OpenCv5Sharp namespace"
+        Pattern = "(^|[`'\s])using\s+$fixedMajorManagedIdentity(?:[.;])"
+        AllowCompatibilityPaths = $false
+    },
+    [pscustomobject]@{
+        Name = "Active content must not declare the retired OpenCv5Sharp namespace"
+        Pattern = "(^|[`'\s])namespace\s+$fixedMajorManagedIdentity(?:[.;\s{])"
+        AllowCompatibilityPaths = $false
+    },
+    [pscustomobject]@{
+        Name = "Active content must not reference retired OpenCv5Sharp module namespaces"
+        Pattern = "$fixedMajorManagedIdentity\.(Core|ImgProc|ImgCodecs|Videoio|VideoIO|HighGui)\b"
+        AllowCompatibilityPaths = $false
+    },
+    [pscustomobject]@{
+        Name = "Active content must not introduce concrete fixed-major native ABI calls outside compatibility generation/tests"
+        Pattern = "\b$fixedMajorAbiPrefix[A-Za-z0-9_]+"
+        AllowCompatibilityPaths = $true
+    }
+)
+
+$contextualFixedMajorContentChecks = @(
+    [pscustomobject]@{
+        Name = "Fixed-major native include tree references must be compatibility/generated/include-tree context only"
+        Pattern = [System.Text.RegularExpressions.Regex]::Escape($fixedMajorIncludeTree)
     }
 )
 
 $pathChecks = @(
     [pscustomobject]@{
         Name = "Repository paths must not use fixed-major managed identity"
-        Pattern = "(^|/)OpenCv5Sharp($|[._/-])"
+        Pattern = "(^|/)$fixedMajorManagedIdentity($|[._/-])"
     },
     [pscustomobject]@{
         Name = "Repository paths must not use fixed-major OpenCV 5 shorthand"
-        Pattern = "(^|/)opencv5(?:\.x)?($|[._/-])"
+        Pattern = "(^|/)$fixedMajorOpenCvShorthand(?:\.x)?($|[._/-])"
     },
     [pscustomobject]@{
         Name = "Repository paths must not use fixed-major native include identity"
-        Pattern = "(^|/)open_cv_5_sharp($|/)"
+        Pattern = "(^|/)" + [System.Text.RegularExpressions.Regex]::Escape($fixedMajorIncludeTree) + "($|/)"
     },
     [pscustomobject]@{
         Name = "Repository paths must not use fixed-major native ABI identity"
-        Pattern = "(^|/)jyppx_ocv5[^/]*($|/)"
+        Pattern = "(^|/)$fixedMajorAbiPrefix" + "[^/]*($|/)"
     }
 )
 
 $allowedFixedMajorRelativePathPrefixes = @(
     # Source-compatible include tree for existing native code that includes old wrapper headers.
-    "src/OpenCvSharp.Native/include/open_cv_5_sharp"
+    "src/OpenCvSharp.Native/include/$fixedMajorIncludeTree"
 )
 
 $contentScanIgnoredRelativePrefixes = @(
     # Generated compatibility files are covered by ABI-specific tests and can contain many intentional legacy names.
     "src/OpenCvSharp.Native/generated",
-    "src/OpenCvSharp.Native/include/open_cv_5_sharp"
+    "src/OpenCvSharp.Native/include/$fixedMajorIncludeTree"
 )
+
+$allowedFixedMajorContentRelativePaths = @(
+    # Compatibility generator and verification code intentionally contains legacy ABI/include spellings.
+    "scripts/Generate-NativeAbiCompatibility.ps1",
+    "scripts/Test-ManagedNativeInteropNeutrality.ps1",
+    "scripts/Test-NativeAbiExports.ps1",
+    "scripts/Test-NativeLegacyIncludeParity.ps1",
+    "src/OpenCvSharp.Native/tests/legacy_source_compat_smoke.cpp"
+)
+
+$fixedMajorCompatibilityContextPattern = "compatib|legacy|existing|older|already-compiled|source-compatible|historical|retired|alias|facade|generated|include tree|allowlist|保留|兼容|旧|既有|已编译|历史|别名|生成"
+$fixedMajorCompatibilityContextRegex = [System.Text.RegularExpressions.Regex]::new($fixedMajorCompatibilityContextPattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
 function Get-RepositoryRelativePath {
     param(
@@ -146,6 +194,30 @@ function Test-IsIgnoredContentPath {
     return $false
 }
 
+function Test-IsAllowedFixedMajorContentPath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RelativePath
+    )
+
+    foreach ($allowedPath in $allowedFixedMajorContentRelativePaths) {
+        if ($RelativePath.Equals($allowedPath, [System.StringComparison]::OrdinalIgnoreCase)) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
+function Test-HasFixedMajorCompatibilityContext {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Line
+    )
+
+    return $fixedMajorCompatibilityContextRegex.IsMatch($Line)
+}
+
 $violations = [System.Collections.Generic.List[object]]::new()
 $regexOptions = [System.Text.RegularExpressions.RegexOptions]::IgnoreCase
 $compiledChecks = foreach ($check in $checks) {
@@ -156,6 +228,21 @@ $compiledChecks = foreach ($check in $checks) {
 }
 
 $compiledPathChecks = foreach ($check in $pathChecks) {
+    [pscustomobject]@{
+        Name = $check.Name
+        Regex = [System.Text.RegularExpressions.Regex]::new($check.Pattern, $regexOptions)
+    }
+}
+
+$compiledActiveContentChecks = foreach ($check in $activeContentChecks) {
+    [pscustomobject]@{
+        Name = $check.Name
+        Regex = [System.Text.RegularExpressions.Regex]::new($check.Pattern, $regexOptions)
+        AllowCompatibilityPaths = $check.AllowCompatibilityPaths
+    }
+}
+
+$compiledContextualFixedMajorContentChecks = foreach ($check in $contextualFixedMajorContentChecks) {
     [pscustomobject]@{
         Name = $check.Name
         Regex = [System.Text.RegularExpressions.Regex]::new($check.Pattern, $regexOptions)
@@ -223,6 +310,8 @@ foreach ($item in $pathItems) {
 }
 
 $files = Get-ScannableFiles -Directory $repo
+$activeContentMatchCount = 0
+$contextualFixedMajorContentReferenceCount = 0
 
 foreach ($file in $files) {
     $relativePath = Get-RepositoryRelativePath -Path $file.FullName
@@ -244,6 +333,45 @@ foreach ($file in $files) {
                         Text = "$($check.Name): $($line.Trim())"
                     })
                 }
+            }
+
+            foreach ($check in $compiledActiveContentChecks) {
+                $lineMatch = $check.Regex.Match($line)
+                if (-not $lineMatch.Success) {
+                    continue
+                }
+
+                $activeContentMatchCount++
+                if ($check.AllowCompatibilityPaths -and (Test-IsAllowedFixedMajorContentPath -RelativePath $relativePath)) {
+                    continue
+                }
+
+                $violations.Add([pscustomobject]@{
+                    Path = $relativePath
+                    Line = $lineNumber
+                    Match = $lineMatch.Value
+                    Text = "$($check.Name): $($line.Trim())"
+                })
+            }
+
+            foreach ($check in $compiledContextualFixedMajorContentChecks) {
+                $lineMatch = $check.Regex.Match($line)
+                if (-not $lineMatch.Success) {
+                    continue
+                }
+
+                $contextualFixedMajorContentReferenceCount++
+                if ((Test-IsAllowedFixedMajorContentPath -RelativePath $relativePath) -or
+                    (Test-HasFixedMajorCompatibilityContext -Line $line)) {
+                    continue
+                }
+
+                $violations.Add([pscustomobject]@{
+                    Path = $relativePath
+                    Line = $lineNumber
+                    Match = $lineMatch.Value
+                    Text = "$($check.Name): $($line.Trim())"
+                })
             }
         }
     }
@@ -267,3 +395,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Version-neutral naming guard passed. Suspicious fixed-major content/path identity patterns: 0."
+Write-Host "Allowed compatibility fixed-major active-content references: $activeContentMatchCount."
+Write-Host "Contextual fixed-major include-tree references: $contextualFixedMajorContentReferenceCount."
