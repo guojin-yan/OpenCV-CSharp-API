@@ -83,6 +83,12 @@ Native CTest and local build output names are neutral-first. The primary smoke a
 
 native CTest 和本地 build output 名称保持 neutral-first。主 smoke 与 audit tests 从 `JYPPX.OpenCV.Native` 派生，包括 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit`。`OpenCv5Sharp.Native` loader file 仅作为既有 binary consumers 的兼容副本保留。
 
+## Runtime Root/PATH Copy Boundary / Runtime Root/PATH Copy 边界
+
+Windows linked CMake builds use `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT` for the discovered OpenCV runtime directory, copy it into `$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>`, and put that target output directory first in CTest `PATH`. The `opencv*.dll` names remain factual upstream artifacts for the linked OpenCV build, not project identities.
+
+Windows linked CMake build 使用 `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT` 表示已发现的 OpenCV runtime directory，把它复制到 `$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>`，并把该 target output directory 放在 CTest `PATH` 首位。`opencv*.dll` 名称仍是 linked OpenCV build 的事实性上游产物，不是项目身份。
+
 ## OpenCV Linking / OpenCV 链接方式
 
 The native project supports two build modes:

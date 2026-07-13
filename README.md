@@ -60,6 +60,10 @@ Native CTest and local build output names are neutral-first. CTest names derive 
 
 native CTest 和本地 build output 名称保持 neutral-first。CTest 名称从主 target 派生，包括 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit`；`OpenCv5Sharp.Native` loader file 仅作为兼容副本保留。
 
+Native CMake runtime-root/PATH copy is neutral-first. Windows linked builds discover `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT`, copy factual upstream `opencv*.dll` files into `$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>`, and put that target output directory first in CTest `PATH`; the copied `opencv*.dll` names remain factual upstream artifacts, not project identities.
+
+native CMake runtime-root/PATH copy 保持 neutral-first。Windows linked build 会发现 `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT`，把事实性上游 `opencv*.dll` 文件复制到 `$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>`，并把该 target output directory 放在 CTest `PATH` 首位；复制的 `opencv*.dll` 名称仍是事实性上游产物，不是项目身份。
+
 The canonical outer workspace root is version-neutral, for example `OpenCV-CSharp-API-workspace`. Generic repository, plan, diary, source-cache, and artifact-root directories do not encode an OpenCV major. Versioned names remain valid below factual dependency caches such as `artifacts/opencv-install/opencv-5.0.0-windows-x64`.
 
 正式的外层工作区根目录保持版本中立，例如 `OpenCV-CSharp-API-workspace`。通用的仓库、计划、日记、源码缓存和产物根目录均不编码 OpenCV major；事实性依赖缓存内部仍可使用版本目录，例如 `artifacts/opencv-install/opencv-5.0.0-windows-x64`。

@@ -185,6 +185,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Native runtime-root/PATH copy boundary"
+        Script = Join-Path $repo "scripts/Test-NativeRuntimeRootPathCopyBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime doc link integrity"
         Script = Join-Path $repo "scripts/Test-RuntimeDocLinkIntegrity.ps1"
         Arguments = @("-RepositoryRoot", $repo)
