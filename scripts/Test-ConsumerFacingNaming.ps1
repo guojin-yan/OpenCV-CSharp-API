@@ -86,18 +86,27 @@ function Get-ScannableFiles {
         [string]$Path
     )
 
-    $fullPath = [System.IO.Path]::GetFullPath($Path)
-    $fullPath = $fullPath.Replace('.github.', '.github')
-    $alternateFullPath = $fullPath -replace '\.+$', ''
-    if ($alternateFullPath -ne $fullPath -and (Test-Path -LiteralPath $alternateFullPath)) {
-        $fullPath = $alternateFullPath
+    $normalizedPath = $Path.Replace('/.github.', '/.github').Replace('\.github.', '\.github')
+    $fullPath = [System.IO.Path]::GetFullPath($normalizedPath)
+    $normalizedFullPath = $fullPath.Replace('/.github.', '/.github').Replace('\.github.', '\.github')
+    $candidatePaths = @($normalizedPath, $normalizedFullPath, $fullPath) |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        Select-Object -Unique
+
+    $resolvedPath = $null
+    foreach ($candidatePath in $candidatePaths) {
+        $resolved = Resolve-Path -LiteralPath $candidatePath -ErrorAction SilentlyContinue
+        if ($null -ne $resolved) {
+            $resolvedPath = $resolved[0].ProviderPath
+            break
+        }
     }
 
-    if (-not (Test-Path -LiteralPath $fullPath)) {
+    if ($null -eq $resolvedPath) {
         return
     }
 
-    $item = Get-Item -LiteralPath $fullPath
+    $item = Get-Item -LiteralPath $resolvedPath
     if (-not $item.PSIsContainer) {
         if (-not (Test-IsIgnoredPath -Path $item.FullName)) {
             $item
@@ -150,7 +159,13 @@ $violations = [System.Collections.Generic.List[object]]::new()
 $files = [System.Collections.Generic.List[object]]::new()
 
 foreach ($relativePath in $scanRelativePaths) {
-    $path = Join-Path $repo $relativePath
+    $path = if ($relativePath -eq ".github") {
+        "$repo/.github"
+    }
+    else {
+        Join-Path $repo $relativePath
+    }
+
     foreach ($file in Get-ScannableFiles -Path $path) {
         $files.Add($file)
     }
