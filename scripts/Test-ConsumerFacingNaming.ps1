@@ -86,13 +86,12 @@ function Get-ScannableFiles {
         [string]$Path
     )
 
-    $resolvedPath = Resolve-Path -LiteralPath $Path -ErrorAction SilentlyContinue
-    if ($null -eq $resolvedPath) {
+    $fullPath = [System.IO.Path]::GetFullPath($Path)
+    if (-not (Test-Path -LiteralPath $fullPath)) {
         return
     }
 
-    $resolvedProviderPath = @($resolvedPath)[0].ProviderPath
-    $item = Get-Item -LiteralPath $resolvedProviderPath
+    $item = Get-Item -LiteralPath $fullPath
     if (-not $item.PSIsContainer) {
         if (-not (Test-IsIgnoredPath -Path $item.FullName)) {
             $item
