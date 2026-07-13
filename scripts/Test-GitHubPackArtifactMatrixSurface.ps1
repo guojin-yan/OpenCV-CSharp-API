@@ -337,7 +337,10 @@ if ($violations.Count -gt 0) {
     Write-Host "GitHub pack artifact matrix surface guard failed with $($violations.Count) violation(s)."
     $violations |
         Sort-Object Path, Issue |
-        Format-Table Path, Issue, Text -AutoSize
+        ForEach-Object {
+            $text = if ([string]::IsNullOrWhiteSpace($_.Text)) { "" } else { " :: $($_.Text)" }
+            Write-Host "$($_.Path) :: $($_.Issue)$text"
+        }
     exit 1
 }
 
