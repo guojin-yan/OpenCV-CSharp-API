@@ -36,6 +36,10 @@ Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. The 
 
 runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。矩阵定义在 `packaging/runtime/runtime-package-matrix.json`；Actions 默认使用 synthetic runtime inputs 验证 full/mini package surface，真实发布则必须提供所选 RID/profile 的 native wrapper 与 OpenCV runtime 输出。如果 no matching published runtime package is available yet，请用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后通过 `OpenCvNativeRuntimeDir` 指向本地样例/测试，或使用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
 
+`pack.yml` does not currently build or download real runtime inputs; when `validate_synthetic_runtime=false`, real input paths must already exist on the selected runner or be produced by a future artifact handoff. Synthetic runtime inputs are package-surface validation only; real publishable runtime packages require `SyntheticRuntimeInputs=false` provenance and release preflight.
+
+`pack.yml` 当前不会构建或下载真实 runtime 输入；当 `validate_synthetic_runtime=false` 时，真实输入路径必须已经存在于 selected runner，或由后续 artifact handoff 先生成。synthetic runtime inputs 只用于 package-surface validation；真实可发布 runtime 包必须带有 `SyntheticRuntimeInputs=false` provenance 并通过 release preflight。
+
 Naming policy: package IDs, managed assembly, public namespaces, project paths, and primary native loader stay version-neutral. The current packaged OpenCV runtime identity is expressed through package version metadata and factual runtime filenames. `OpenCv5Sharp.Native.dll` and `jyppx_ocv5_*` remain only as explicit compatibility contracts for already-compiled consumers.
 
 命名策略：包 ID、managed 程序集、公开命名空间、项目路径和主 native loader 都保持版本中立。当前打包的 OpenCV runtime 身份通过 package version 元数据和事实性 runtime 文件名表达。`OpenCv5Sharp.Native.dll` 与 `jyppx_ocv5_*` 仅作为供已编译消费者使用的明确兼容契约保留。
@@ -127,6 +131,8 @@ For isolated validation or local package-source dry-runs, `Pack-Managed.ps1` als
 
 The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured multi-RID matrix for full and mini profiles; individual RID/profile selections are supported for targeted packaging. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, self-validates the full matrix artifacts with `Test-GitHubPackArtifactMatrixSurface.ps1`, then verifies consumer restore/build behavior with `Test-GitHubPackConsumerRestoreSurface.ps1` against the same downloaded artifacts. Synthetic runtime inputs are only for non-publishing package-surface validation, and publishing is rejected when synthetic inputs are enabled.
 
+For real non-synthetic workflow runs, `native_runtime_dir`, `opencv_runtime_dir`, and `opencv_source_dir` are existing directories on the selected runner, and `opencv_install_dir` is an optional existing directory when provided. The current workflow validates those paths before packaging but does not create them.
+
 ```powershell
 pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0 -StageRuntime -OpenCvNativeRuntimeDir ./build/native-opencv-core/Release
 ```
@@ -150,6 +156,8 @@ The pack scripts derive the four-part package version from `-OpenCvVersion` plus
 `Stage-Runtime.ps1 -RuntimeProject` 是仓库相对或绝对 runtime package 目录，用于生成 `runtimes/<rid>/native` 和 `licenses/` 镜像；`Pack-Runtime.ps1 -RuntimeProject` 是供 `dotnet pack` 使用的仓库相对或绝对 runtime package `.csproj` 文件路径。
 
 pack workflow 暴露 `rid` 与 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也可以选择单个 RID/profile 做定向打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，先用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts，再用 `Test-GitHubPackConsumerRestoreSurface.ps1` 针对同一批下载产物验证 consumer restore/build。默认仅使用 synthetic runtime inputs 验证 package surface，并在启用 synthetic inputs 时拒绝发布。
+
+对于真实 non-synthetic workflow run，`native_runtime_dir`、`opencv_runtime_dir` 和 `opencv_source_dir` 必须是 selected runner 上已存在的目录，`opencv_install_dir` 在提供时也必须已存在。当前 workflow 会在打包前验证这些路径，但不会创建这些路径。
 
 Absolute `-ProjectPath` and `-RuntimeProject` values are accepted as-is and can point outside the repository when the caller chooses that layout.
 

@@ -145,6 +145,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Real runtime pack input boundary"
+        Script = Join-Path $repo "scripts/Test-RealRuntimePackInputBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime package local consumer restore"
         Script = Join-Path $repo "scripts/Test-RuntimePackageLocalConsumerRestore.ps1"
         Arguments = @("-RepositoryRoot", $repo)
