@@ -133,8 +133,13 @@ function Get-DefaultOpenCvSourceRoot {
         throw "OpenCvVersion must start with a numeric major version: $OpenCvVersion"
     }
 
-    # Keep the major-version source directory only as a current local fallback.
-    return Join-Path $WorkspaceRoot "opencv$($versionMatch.Groups[1].Value)-source code"
+    # Use the major-version source directory only when an existing local checkout still uses that older layout.
+    $legacyMajorSourceRoot = Join-Path $WorkspaceRoot "opencv$($versionMatch.Groups[1].Value)-source code"
+    if (Test-Path -LiteralPath $legacyMajorSourceRoot) {
+        return $legacyMajorSourceRoot
+    }
+
+    return $neutralSourceRoot
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeVersionSuffix)) {

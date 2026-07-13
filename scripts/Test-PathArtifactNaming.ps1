@@ -213,11 +213,8 @@ foreach ($file in $contentFiles) {
                 Add-Violation $violations $relativePath $lineNumber "Content must not reference fixed-major runtime package identities" $line
             }
 
-            if ($line -match "opencv" + "5-source code") {
-                $contextualFixedPathReferenceCount++
-                if (-not (Test-HasRequiredContext -Line $line)) {
-                    Add-Violation $violations $relativePath $lineNumber "The local opencv5-source code fallback must be explicitly labelled existing/local/factual/fallback" $line
-                }
+            if ($line -match "opencv" + "\d+-source code") {
+                Add-Violation $violations $relativePath $lineNumber "Content must not name a concrete major-version local source-root fallback; describe the compatibility fallback generically or use opencv-source" $line
             }
 
             if ($line -match "opencv(?:_contrib)?-5\.0\.0") {

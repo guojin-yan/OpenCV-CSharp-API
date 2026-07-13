@@ -11,9 +11,9 @@ pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 -WithContrib -Build
 pwsh -NoProfile -File ./scripts/Stage-Runtime.ps1
 ```
 
-The scripts accept version-neutral path variables such as `-OpenCvSourceRoot`, `-OpenCvInstallRoot`, and `-OpenCvRuntimeVersionSuffix`. When `-OpenCvSourceRoot` is omitted, the default source root prefers the version-neutral `opencv-source` workspace directory when it exists and falls back only to an existing local/factual major-version directory derived from `-OpenCvVersion`, such as `opencv5-source code` for OpenCV 5.0.0.
+The scripts accept version-neutral path variables such as `-OpenCvSourceRoot`, `-OpenCvInstallRoot`, and `-OpenCvRuntimeVersionSuffix`. When `-OpenCvSourceRoot` is omitted, the default source root is the version-neutral `opencv-source` workspace directory. Existing local major-version source directories derived from `-OpenCvVersion` are used only when that older checkout path already exists.
 
-脚本接受 `-OpenCvSourceRoot`、`-OpenCvInstallRoot` 和 `-OpenCvRuntimeVersionSuffix` 等版本中立路径变量。省略 `-OpenCvSourceRoot` 时，默认 source root 会优先使用 workspace 下版本中立的 `opencv-source` 目录；若不存在，则只 fallback 到根据 `-OpenCvVersion` 推导的既有本地/事实性 major-version 目录，例如 OpenCV 5.0.0 对应 `opencv5-source code`。
+脚本接受 `-OpenCvSourceRoot`、`-OpenCvInstallRoot` 和 `-OpenCvRuntimeVersionSuffix` 等版本中立路径变量。省略 `-OpenCvSourceRoot` 时，默认 source root 是 workspace 下版本中立的 `opencv-source` 目录；只有既有本地 major-version 源码目录已经存在时，才会使用由 `-OpenCvVersion` 推导出的旧 checkout 路径。
 
 Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. Full packages use `JYPPX.OpenCV.runtime.<rid>` and mini packages use `JYPPX.OpenCV.runtime.<rid>.mini` for the configured runtime package matrix. If no matching published runtime package is available yet, this guide is the local native runtime fallback: run `Build-OpenCV.ps1`, run `Stage-Runtime.ps1`, and pass the staged native output through `OpenCvNativeRuntimeDir` or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
 

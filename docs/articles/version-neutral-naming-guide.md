@@ -69,12 +69,12 @@ Keep fixed-major text when it names the actual runtime being packaged or an upst
 - `OpenCV 5.0.0` in build output, release notes, and package version metadata.
 - `opencv_*500.dll` because those are the real upstream OpenCV 5.0.0 runtime filenames.
 - `opencv-5.0.0` source/install directory names when referring to a specific upstream checkout.
-- The local `opencv5-source code` path only as an existing local/factual fallback; generic automation should prefer `opencv-source`.
+- Existing local major-version source directories derived from `-OpenCvVersion` only as compatibility fallbacks when the older checkout path already exists; generic automation should use `opencv-source`.
 
 - 构建输出、发行说明和 package version 元数据中的 `OpenCV 5.0.0`。
 - `opencv_*500.dll`，因为它们是 OpenCV 5.0.0 上游 runtime 的真实文件名。
 - 指向特定事实性上游 checkout 时使用的 `opencv-5.0.0` 源码或安装目录名。
-- 本地 `opencv5-source code` 路径只作为既有本地/事实性 fallback；通用自动化应优先使用 `opencv-source`。
+- 由 `-OpenCvVersion` 推导出的既有本地 major-version 源码目录只在旧 checkout 路径已经存在时作为兼容 fallback；通用自动化应使用 `opencv-source`。
 
 ## Rules / 规则
 
