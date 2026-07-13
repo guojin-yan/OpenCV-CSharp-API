@@ -133,8 +133,24 @@ foreach ($required in @(
             Issue = "pack.yml must validate real runtime input paths before real packaging"
         },
         [pscustomobject]@{
-            Needle = "pack.yml does not build or download real runtime inputs; provide paths that already exist on the selected runner or add an artifact handoff before disabling synthetic validation."
-            Issue = "pack.yml must explain the real-runtime input handoff gap"
+            Needle = "real_runtime_artifact_run_id"
+            Issue = "pack.yml must expose a real runtime artifact handoff run-id input"
+        },
+        [pscustomobject]@{
+            Needle = "Download real runtime input artifact"
+            Issue = "pack.yml must download explicit real runtime input handoff artifacts"
+        },
+        [pscustomobject]@{
+            Needle = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'
+            Issue = "pack.yml must use deterministic neutral real runtime input artifact names"
+        },
+        [pscustomobject]@{
+            Needle = 'artifacts/real-runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}'
+            Issue = "pack.yml must download real runtime input artifacts into an isolated generated root"
+        },
+        [pscustomobject]@{
+            Needle = 'pack.yml does not build real runtime inputs; provide paths that already exist on the selected runner or set real_runtime_artifact_run_id to download runtime-input-${{ matrix.rid }}-${{ matrix.profile }} before disabling synthetic validation.'
+            Issue = "pack.yml must explain the real-runtime input artifact handoff boundary"
         },
         [pscustomobject]@{
             Needle = "Real runtime packaging requires native_runtime_dir to be an existing directory on the selected runner"
@@ -161,11 +177,23 @@ foreach ($required in @(
             Issue = "pack.yml must switch to workflow-dispatch real runtime path inputs when synthetic validation is disabled"
         },
         [pscustomobject]@{
+            Needle = 'steps.real.outputs.native_runtime_dir'
+            Issue = "pack.yml must pass resolved real input paths from validation to Pack-Runtime"
+        },
+        [pscustomobject]@{
             Needle = "'-RequireReleasePreflight'"
             Issue = "pack.yml must pass release preflight before publish-capable runtime package pushes"
         })) {
     Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle $required.Needle -Issue $required.Issue
 }
+
+Assert-TextOrder `
+    -Violations $violations `
+    -Path $packWorkflowPath `
+    -Text $packWorkflowText `
+    -Earlier "Download real runtime input artifact" `
+    -Later "Validate real runtime input paths" `
+    -Issue "pack.yml must download real runtime input artifacts before validating real runtime paths"
 
 Assert-TextOrder `
     -Violations $violations `
@@ -239,8 +267,9 @@ foreach ($requiredGuardText in @(
 }
 
 $docNeedles = @(
-    '`pack.yml` does not currently build or download real runtime inputs',
-    'real input paths must already exist on the selected runner',
+    '`pack.yml` does not build real runtime inputs',
+    'real input paths must already exist on the selected runner or come from `real_runtime_artifact_run_id`',
+    '`runtime-input-<rid>-<profile>`',
     'synthetic runtime inputs are package-surface validation only',
     'real publishable runtime packages require `SyntheticRuntimeInputs=false`'
 )
@@ -277,4 +306,4 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Real runtime pack input boundary guard passed."
 Write-Host "Synthetic validation remains non-publishing package-surface evidence only."
-Write-Host "Real runtime package inputs must already exist on the selected runner until an artifact handoff is added."
+Write-Host "Real runtime package inputs must already exist on the selected runner or come from an explicit artifact handoff."

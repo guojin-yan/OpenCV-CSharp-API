@@ -39,12 +39,17 @@ on:
         description: Optional existing real OpenCV install directory on the selected runner when synthetic validation is false
         required: false
         default: ""
+      real_runtime_artifact_run_id:
+        description: Optional workflow run id containing runtime-input-<rid>-<profile> artifact handoffs when synthetic validation is false
+        required: false
+        default: ""
       publish_github_packages:
         description: Publish packages to GitHub Packages; requires real runtime inputs
         required: true
         default: "false"
 
 permissions:
+  actions: read
   contents: read
   packages: write
 
@@ -195,30 +200,61 @@ jobs:
           "opencv_runtime_dir=$($result.OpenCvRuntimeDir)" >> $env:GITHUB_OUTPUT
           "opencv_source_dir=$($result.OpenCvSourceDir)" >> $env:GITHUB_OUTPUT
           "opencv_install_dir=$($result.OpenCvInstallDir)" >> $env:GITHUB_OUTPUT
+      - name: Download real runtime input artifact
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.validate_synthetic_runtime != 'true' && inputs.real_runtime_artifact_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.real_runtime_artifact_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/real-runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
       - name: Validate real runtime input paths
+        id: real
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
         run: |
-          $missingGuidance = "pack.yml does not build or download real runtime inputs; provide paths that already exist on the selected runner or add an artifact handoff before disabling synthetic validation."
+          $missingGuidance = "pack.yml does not build real runtime inputs; provide paths that already exist on the selected runner or set real_runtime_artifact_run_id to download runtime-input-${{ matrix.rid }}-${{ matrix.profile }} before disabling synthetic validation."
           $nativeRuntimeDir = '${{ inputs.native_runtime_dir }}'
+          $openCvRuntimeDir = '${{ inputs.opencv_runtime_dir }}'
+          $openCvSourceDir = '${{ inputs.opencv_source_dir }}'
+          $openCvInstallDir = '${{ inputs.opencv_install_dir }}'
+          $artifactRunId = '${{ inputs.real_runtime_artifact_run_id }}'
+
+          if (-not [string]::IsNullOrWhiteSpace($artifactRunId)) {
+            $artifactRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/real-runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}'
+            $nativeRuntimeDir = Join-Path $artifactRoot 'native-wrapper'
+            $openCvRuntimeDir = Join-Path $artifactRoot 'opencv-runtime'
+            $openCvSourceDir = Join-Path $artifactRoot 'opencv-source'
+
+            $artifactInstallDir = Join-Path $artifactRoot 'opencv-install'
+            if (Test-Path -LiteralPath $artifactInstallDir -PathType Container) {
+              $openCvInstallDir = $artifactInstallDir
+            }
+            else {
+              $openCvInstallDir = ''
+            }
+          }
+
           if ([string]::IsNullOrWhiteSpace($nativeRuntimeDir) -or -not (Test-Path -LiteralPath $nativeRuntimeDir -PathType Container)) {
             throw "Real runtime packaging requires native_runtime_dir to be an existing directory on the selected runner. $missingGuidance"
           }
 
-          $openCvRuntimeDir = '${{ inputs.opencv_runtime_dir }}'
           if ([string]::IsNullOrWhiteSpace($openCvRuntimeDir) -or -not (Test-Path -LiteralPath $openCvRuntimeDir -PathType Container)) {
             throw "Real runtime packaging requires opencv_runtime_dir to be an existing directory on the selected runner. $missingGuidance"
           }
 
-          $openCvSourceDir = '${{ inputs.opencv_source_dir }}'
           if ([string]::IsNullOrWhiteSpace($openCvSourceDir) -or -not (Test-Path -LiteralPath $openCvSourceDir -PathType Container)) {
             throw "Real runtime packaging requires opencv_source_dir to be an existing directory on the selected runner. $missingGuidance"
           }
 
-          $openCvInstallDir = '${{ inputs.opencv_install_dir }}'
           if (-not [string]::IsNullOrWhiteSpace($openCvInstallDir) -and -not (Test-Path -LiteralPath $openCvInstallDir -PathType Container)) {
             throw "Real runtime packaging requires opencv_install_dir to be an existing directory when provided. $missingGuidance"
           }
+
+          "native_runtime_dir=$nativeRuntimeDir" >> $env:GITHUB_OUTPUT
+          "opencv_runtime_dir=$openCvRuntimeDir" >> $env:GITHUB_OUTPUT
+          "opencv_source_dir=$openCvSourceDir" >> $env:GITHUB_OUTPUT
+          "opencv_install_dir=$openCvInstallDir" >> $env:GITHUB_OUTPUT
       - name: Pack runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
         shell: pwsh
@@ -230,10 +266,10 @@ jobs:
           $openCvInstallDir = '${{ steps.synthetic.outputs.opencv_install_dir }}'
 
           if ('${{ inputs.validate_synthetic_runtime }}' -ne 'true') {
-            $nativeRuntimeDir = '${{ inputs.native_runtime_dir }}'
-            $openCvRuntimeDir = '${{ inputs.opencv_runtime_dir }}'
-            $openCvSourceDir = '${{ inputs.opencv_source_dir }}'
-            $openCvInstallDir = '${{ inputs.opencv_install_dir }}'
+            $nativeRuntimeDir = '${{ steps.real.outputs.native_runtime_dir }}'
+            $openCvRuntimeDir = '${{ steps.real.outputs.opencv_runtime_dir }}'
+            $openCvSourceDir = '${{ steps.real.outputs.opencv_source_dir }}'
+            $openCvInstallDir = '${{ steps.real.outputs.opencv_install_dir }}'
           }
 
           if ([string]::IsNullOrWhiteSpace($nativeRuntimeDir) -or
