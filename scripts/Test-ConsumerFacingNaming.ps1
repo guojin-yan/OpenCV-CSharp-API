@@ -87,13 +87,13 @@ function Get-ScannableFiles {
     )
 
     $fullPath = [System.IO.Path]::GetFullPath($Path)
-    if (-not (Test-Path -LiteralPath $fullPath)) {
-        $alternateFullPath = $fullPath.TrimEnd(".")
-        if ([string]::IsNullOrWhiteSpace($alternateFullPath) -or -not (Test-Path -LiteralPath $alternateFullPath)) {
-            return
-        }
-
+    $alternateFullPath = $fullPath -replace '\.+$', ''
+    if ($alternateFullPath -ne $fullPath -and (Test-Path -LiteralPath $alternateFullPath)) {
         $fullPath = $alternateFullPath
+    }
+
+    if (-not (Test-Path -LiteralPath $fullPath)) {
+        return
     }
 
     $item = Get-Item -LiteralPath $fullPath
