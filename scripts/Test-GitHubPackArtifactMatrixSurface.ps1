@@ -119,7 +119,8 @@ function Get-EntryFileName {
         [string]$EntryName
     )
 
-    return [System.IO.Path]::GetFileName($EntryName.Replace("/", "\"))
+    $normalized = $EntryName.Replace("\", "/")
+    return ($normalized -split "/")[-1]
 }
 
 function Read-NupkgInfo {
