@@ -91,6 +91,22 @@ function Test-IsAllowedCompatibilityType {
     return $false
 }
 
+function Test-IsAllowedCompatibilityLoaderLiteral {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RelativePath,
+        [Parameter(Mandatory = $true)]
+        [string]$Line
+    )
+
+    if (-not $Line.Contains('"OpenCv5Sharp.Native"', [System.StringComparison]::Ordinal)) {
+        return $false
+    }
+
+    return $RelativePath.Equals("src/OpenCvSharp/Internal/Interop/NativeLibraryNames.cs", [System.StringComparison]::Ordinal) -or
+        $RelativePath.Equals("src/OpenCvSharp/OpenCvSharpBuildInfo.cs", [System.StringComparison]::Ordinal)
+}
+
 function Add-Violation {
     param(
         [Parameter(Mandatory = $true)]
@@ -159,7 +175,8 @@ foreach ($file in $files) {
             }
         }
 
-        if ($line -match "\bOpenCv5Sharp\.") {
+        if ($line -match "\bOpenCv5Sharp\." -and
+            -not (Test-IsAllowedCompatibilityLoaderLiteral -RelativePath $relativePath -Line $line)) {
             Add-Violation `
                 -Violations $violations `
                 -Path $relativePath `

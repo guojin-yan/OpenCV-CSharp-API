@@ -11,6 +11,7 @@ $manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_man
 $nativeLibraryNamesPath = Join-Path $managedRoot "Internal/Interop/NativeLibraryNames.cs"
 $buildInfoPath = Join-Path $managedRoot "OpenCvSharpBuildInfo.cs"
 $currentNativeLibraryName = "JYPPX.OpenCV.Native"
+$compatibilityNativeLibraryName = "OpenCv5Sharp.Native"
 $currentNativeLibraryExpression = "NativeLibraryNames.CurrentNativeLibrary"
 $neutralEntryPointPrefix = "jyppx_ocv_"
 $fixedMajorEntryPointPrefix = "jyppx_ocv5_"
@@ -67,6 +68,16 @@ function Get-LineNumber {
     return (($Text.Substring(0, $Index) -split "`n").Count)
 }
 
+function Test-IsAllowedCompatibilityLoaderMetadata {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RelativePath
+    )
+
+    return $RelativePath.Equals("src/OpenCvSharp/Internal/Interop/NativeLibraryNames.cs", [System.StringComparison]::Ordinal) -or
+        $RelativePath.Equals("src/OpenCvSharp/OpenCvSharpBuildInfo.cs", [System.StringComparison]::Ordinal)
+}
+
 $violations = [System.Collections.Generic.List[object]]::new()
 $entryPoints = [System.Collections.Generic.List[string]]::new()
 $importCount = 0
@@ -86,11 +97,12 @@ foreach ($file in $csFiles) {
     $text = [System.IO.File]::ReadAllText($file.FullName)
     $relativePath = Get-RepositoryRelativePath -Path $file.FullName
 
-    if ($text.Contains("OpenCv5Sharp.Native")) {
+    if ($text.Contains($compatibilityNativeLibraryName) -and
+        -not (Test-IsAllowedCompatibilityLoaderMetadata -RelativePath $relativePath)) {
         $violations.Add([pscustomobject]@{
             Path = $relativePath
             Line = 0
-            Issue = "Managed source must not use fixed-major loader name OpenCv5Sharp.Native"
+            Issue = "Managed source must not use fixed-major loader name $compatibilityNativeLibraryName outside compatibility metadata"
         })
     }
 
@@ -164,12 +176,28 @@ if (-not $nativeLibraryNamesText.Contains("CurrentNativeLibrary = `"$currentNati
     })
 }
 
+if (-not $nativeLibraryNamesText.Contains("LegacyNativeLibrary = `"$compatibilityNativeLibraryName`"")) {
+    $violations.Add([pscustomobject]@{
+        Path = Get-RepositoryRelativePath -Path $nativeLibraryNamesPath
+        Line = 0
+        Issue = "NativeLibraryNames.LegacyNativeLibrary must stay '$compatibilityNativeLibraryName' as compatibility metadata only"
+    })
+}
+
 $buildInfoText = [System.IO.File]::ReadAllText($buildInfoPath)
 if (-not $buildInfoText.Contains("CurrentNativeLibraryName = `"$currentNativeLibraryName`"")) {
     $violations.Add([pscustomobject]@{
         Path = Get-RepositoryRelativePath -Path $buildInfoPath
         Line = 0
         Issue = "OpenCvSharpBuildInfo.CurrentNativeLibraryName must stay '$currentNativeLibraryName'"
+    })
+}
+
+if (-not $buildInfoText.Contains("LegacyNativeLibraryName = `"$compatibilityNativeLibraryName`"")) {
+    $violations.Add([pscustomobject]@{
+        Path = Get-RepositoryRelativePath -Path $buildInfoPath
+        Line = 0
+        Issue = "OpenCvSharpBuildInfo.LegacyNativeLibraryName must stay '$compatibilityNativeLibraryName' as compatibility metadata only"
     })
 }
 

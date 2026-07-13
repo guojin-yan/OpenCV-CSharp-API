@@ -39,15 +39,15 @@ namespace OpenCvSharp
         public const string CurrentNativeLibraryName = "JYPPX.OpenCV.Native";
 
         /// <summary>
-        /// Gets the compatibility native library name retained for assemblies compiled against previous package versions.
-        /// 获取为旧版包所编译程序集保留的 compatibility native 库名称。
+        /// Gets the compatibility native library copy name retained for earlier fixed-major consumers.
+        /// 获取为早期固定大版本消费者保留的 compatibility native 库副本名称。
         /// </summary>
-        public const string LegacyNativeLibraryName = "OpenCvSharp.Native";
+        public const string LegacyNativeLibraryName = "OpenCv5Sharp.Native";
 
         /// <summary>
-        /// Gets the historical build-info property value.
+        /// Gets the existing-caller build-info property value.
         /// New code should prefer <see cref="CurrentNativeLibraryName"/>.
-        /// 获取历史 build-info 属性值。
+        /// 获取既有调用方 build-info 属性值。
         /// 新增代码应优先使用 <see cref="CurrentNativeLibraryName"/>。
         /// </summary>
         public const string NativeLibraryName = LegacyNativeLibraryName;
@@ -148,15 +148,15 @@ namespace OpenCvSharp
         public const string CurrentNativeLibraryName = OpenCvSharpBuildInfo.CurrentNativeLibraryName;
 
         /// <summary>
-        /// Gets the compatibility native library name retained for assemblies compiled against previous package versions.
-        /// 获取为旧版包所编译程序集保留的 compatibility native 库名称。
+        /// Gets the compatibility native library copy name retained for earlier fixed-major consumers.
+        /// 获取为早期固定大版本消费者保留的 compatibility native 库副本名称。
         /// </summary>
         public const string LegacyNativeLibraryName = OpenCvSharpBuildInfo.LegacyNativeLibraryName;
 
         /// <summary>
-        /// Gets the historical build-info property value.
+        /// Gets the existing-caller build-info property value.
         /// New code should prefer <see cref="CurrentNativeLibraryName"/>.
-        /// 获取历史 build-info 属性值。
+        /// 获取既有调用方 build-info 属性值。
         /// 新增代码应优先使用 <see cref="CurrentNativeLibraryName"/>。
         /// </summary>
         public const string NativeLibraryName = OpenCvSharpBuildInfo.NativeLibraryName;

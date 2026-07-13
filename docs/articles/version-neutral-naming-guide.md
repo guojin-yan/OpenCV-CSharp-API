@@ -38,16 +38,16 @@ These names remain only for existing compiled consumers, existing automation/bui
 
 - `OpenCv5Sharp.Native.dll`: explicit compatibility loader copy for managed assemblies compiled against earlier package revisions.
 - `OpenCv5SharpBuildInfo`: build-info facade for existing callers; new code uses `OpenCvSharpBuildInfo`.
-- `OpenCvSharp.Native`: legacy interop/build-info loader name kept for earlier managed declarations.
-- `NativeLibraryName`: historical build-info value; new code uses `CurrentNativeLibraryName`.
+- `OpenCv5Sharp.Native`: compatibility loader copy kept for earlier fixed-major managed consumers.
+- `NativeLibraryName`: existing-caller build-info value; new code uses `CurrentNativeLibraryName`.
 - `OPENCV5SHARP_*` and `OpenCv5SharpNativeRuntimeDir`: accepted compatibility variables for existing automation, existing build scripts, and existing native include guards.
 - `open_cv_5_sharp`: source-compatible include tree for existing native code that includes old wrapper headers.
 - `jyppx_ocv5_*` and `OPENCV5SHARP_STATUS_*`: existing exported ABI/status names preserved for compiled and native consumers.
 
 - `OpenCv5Sharp.Native.dll`：供按早期包修订版编译的 managed 程序集使用的明确兼容 loader 副本。
 - `OpenCv5SharpBuildInfo`：供既有调用方使用的 build-info facade；新代码使用 `OpenCvSharpBuildInfo`。
-- `OpenCvSharp.Native`：为早期 managed 声明保留的 legacy interop/build-info loader 名称。
-- `NativeLibraryName`：历史 build-info 值；新代码使用 `CurrentNativeLibraryName`。
+- `OpenCv5Sharp.Native`：为早期固定大版本 managed 消费者保留的 compatibility loader 副本。
+- `NativeLibraryName`：既有调用方 build-info 值；新代码使用 `CurrentNativeLibraryName`。
 - `OPENCV5SHARP_*` 与 `OpenCv5SharpNativeRuntimeDir`：为既有自动化、既有构建脚本和既有 native include guard 保留的兼容变量。
 - `open_cv_5_sharp`：供包含旧 wrapper header 的既有 native 代码使用的 source-compatible include 树。
 - `jyppx_ocv5_*` 与 `OPENCV5SHARP_STATUS_*`：为已编译消费者和 native 消费者保留的既有导出 ABI/status 名称。

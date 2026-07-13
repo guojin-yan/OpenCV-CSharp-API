@@ -17,8 +17,8 @@ namespace OpenCvSharp.Tests.Core
             Assert.Equal("JYPPX.OpenCV.CSharp.API", OpenCvSharpBuildInfo.ManagedPackageId);
             Assert.Equal("JYPPX.OpenCV.runtime", OpenCvSharpBuildInfo.RuntimePackageIdPrefix);
             Assert.Equal("JYPPX.OpenCV.Native", OpenCvSharpBuildInfo.CurrentNativeLibraryName);
-            Assert.Equal("OpenCvSharp.Native", OpenCvSharpBuildInfo.LegacyNativeLibraryName);
-            // NativeLibraryName preserves the historical build-info value.
+            Assert.Equal("OpenCv5Sharp.Native", OpenCvSharpBuildInfo.LegacyNativeLibraryName);
+            // NativeLibraryName preserves the existing-caller compatibility loader value.
             Assert.Equal(OpenCvSharpBuildInfo.LegacyNativeLibraryName, OpenCvSharpBuildInfo.NativeLibraryName);
         }
 
