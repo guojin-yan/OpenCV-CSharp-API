@@ -56,6 +56,10 @@ The native CMake project is currently source-tree build only and does not curren
 
 native CMake 项目当前只作为 source-tree build surface 使用，当前不 install 或 export 可复用的 CMake package / SDK target。`JYPPX.OpenCV.Native` CMake target 是主目标；`OpenCv5Sharp.Native` 仅作为既有构建脚本和 loader 的兼容 alias 保留。
 
+Native CTest and local build output names are neutral-first. CTest names derive from the primary target, including `JYPPX.OpenCV.NativeSmoke`, `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`, `JYPPX.OpenCV.NativeAbiGeneratedCheck`, `JYPPX.OpenCV.NativeLegacyIncludeParity`, and `JYPPX.OpenCV.NativeAbiExportAudit`; the `OpenCv5Sharp.Native` loader file remains only a compatibility copy.
+
+native CTest 和本地 build output 名称保持 neutral-first。CTest 名称从主 target 派生，包括 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit`；`OpenCv5Sharp.Native` loader file 仅作为兼容副本保留。
+
 The canonical outer workspace root is version-neutral, for example `OpenCV-CSharp-API-workspace`. Generic repository, plan, diary, source-cache, and artifact-root directories do not encode an OpenCV major. Versioned names remain valid below factual dependency caches such as `artifacts/opencv-install/opencv-5.0.0-windows-x64`.
 
 正式的外层工作区根目录保持版本中立，例如 `OpenCV-CSharp-API-workspace`。通用的仓库、计划、日记、源码缓存和产物根目录均不编码 OpenCV major；事实性依赖缓存内部仍可使用版本目录，例如 `artifacts/opencv-install/opencv-5.0.0-windows-x64`。

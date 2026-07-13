@@ -180,6 +180,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Native CTest/output naming boundary"
+        Script = Join-Path $repo "scripts/Test-NativeCTestOutputNamingBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime doc link integrity"
         Script = Join-Path $repo "scripts/Test-RuntimeDocLinkIntegrity.ps1"
         Arguments = @("-RepositoryRoot", $repo)

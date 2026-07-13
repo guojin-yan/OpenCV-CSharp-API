@@ -411,6 +411,7 @@ set_target_properties(${OPENCV_CSHARP_NATIVE_TARGET} PROPERTIES
     OUTPUT_NAME "${OPENCV_CSHARP_NATIVE_TARGET}"
 )
 
+# Compatibility loader copy keeps existing binary consumers working; the primary build output remains JYPPX.OpenCV.Native.
 set(
     OPENCV_CSHARP_COMPATIBILITY_NATIVE_FILE_NAME
     "${CMAKE_SHARED_LIBRARY_PREFIX}${OPENCV_CSHARP_COMPATIBILITY_NATIVE_TARGET}${CMAKE_SHARED_LIBRARY_SUFFIX}"
@@ -425,6 +426,7 @@ add_custom_command(TARGET ${OPENCV_CSHARP_NATIVE_TARGET} POST_BUILD
 
 enable_testing()
 
+# Smoke/CTest target names derive from the neutral primary target; compatibility source smoke verifies legacy includes without introducing fixed-major test target names.
 add_executable(${OPENCV_CSHARP_NATIVE_SMOKE_TARGET}
     tests/native_smoke.cpp
 )

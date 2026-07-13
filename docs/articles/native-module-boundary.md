@@ -77,6 +77,12 @@ The native CMake project is currently source-tree build only. It builds the prim
 
 native CMake 项目当前只作为 source-tree build surface 使用。它为本地 wrapper build 构建主 `JYPPX.OpenCV.Native` target，当前不 install 或 export 可复用的 CMake package / SDK target。`OpenCv5Sharp.Native` CMake target name 仅作为指向主目标的兼容 alias 保留给既有构建脚本和 loader。
 
+## CTest/Output Naming Boundary / CTest/Output 命名边界
+
+Native CTest and local build output names are neutral-first. The primary smoke and audit tests derive from `JYPPX.OpenCV.Native`, including `JYPPX.OpenCV.NativeSmoke`, `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`, `JYPPX.OpenCV.NativeAbiGeneratedCheck`, `JYPPX.OpenCV.NativeLegacyIncludeParity`, and `JYPPX.OpenCV.NativeAbiExportAudit`. The `OpenCv5Sharp.Native` loader file remains only the compatibility copy for existing binary consumers.
+
+native CTest 和本地 build output 名称保持 neutral-first。主 smoke 与 audit tests 从 `JYPPX.OpenCV.Native` 派生，包括 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit`。`OpenCv5Sharp.Native` loader file 仅作为既有 binary consumers 的兼容副本保留。
+
 ## OpenCV Linking / OpenCV 链接方式
 
 The native project supports two build modes:

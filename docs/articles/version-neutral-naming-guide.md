@@ -14,6 +14,7 @@ The currently packaged runtime is OpenCV 5.0.0. That version is a package/runtim
 | Runtime package | `JYPPX.OpenCV.runtime.<rid>` | Keep the package ID stable; distinguish OpenCV runtimes with package versions. |
 | Native loader | `JYPPX.OpenCV.Native.dll` | Current managed P/Invoke declarations load this file. |
 | Native CMake target | `JYPPX.OpenCV.Native` | Current source-tree build target; not a public install/export package surface. |
+| Native CTest/output names | `JYPPX.OpenCV.Native*` | Local CTest smoke/audit targets and primary native output names are neutral-first. |
 | Native include tree | `open_cv_sharp` | Primary include path for current wrapper headers and examples. |
 | Native ABI | `jyppx_ocv_*` | Current headers, definitions, and managed entry points use the neutral prefix. |
 | Native status | `OPENCV_CSHARP_STATUS_*` | Current implementation code uses neutral status constants. |
@@ -27,6 +28,7 @@ The currently packaged runtime is OpenCV 5.0.0. That version is a package/runtim
 | Runtime 包 | `JYPPX.OpenCV.runtime.<rid>` | 包 ID 保持稳定，通过 package version 区分 OpenCV runtime。 |
 | Native loader | `JYPPX.OpenCV.Native.dll` | 当前 managed P/Invoke 声明加载该文件。 |
 | Native CMake target | `JYPPX.OpenCV.Native` | 当前 source-tree build target；不是 public install/export package surface。 |
+| Native CTest/output names | `JYPPX.OpenCV.Native*` | 本地 CTest smoke/audit targets 和主 native output 名称保持 neutral-first。 |
 | Native include 树 | `open_cv_sharp` | wrapper headers 的主 include 路径。 |
 | Native ABI | `jyppx_ocv_*` | 当前 headers、definitions 与 managed entry points 使用中性前缀。 |
 | Native status | `OPENCV_CSHARP_STATUS_*` | 当前实现代码使用中性状态常量。 |
@@ -61,6 +63,10 @@ native headers 当前是 source-tree 和 advanced native build surface，不是 
 The native CMake project is also source-tree build only today. It builds `JYPPX.OpenCV.Native` as the primary target, keeps `OpenCv5Sharp.Native` only as a compatibility alias, and is not a public install/export package surface.
 
 native CMake 项目当前同样只作为 source-tree build surface 使用。它把 `JYPPX.OpenCV.Native` 作为主 target，只把 `OpenCv5Sharp.Native` 保留为兼容 alias，不作为 public install/export package surface。
+
+Native CTest/output names are neutral-first. Local tests use names such as `JYPPX.OpenCV.NativeSmoke`, `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`, `JYPPX.OpenCV.NativeAbiGeneratedCheck`, `JYPPX.OpenCV.NativeLegacyIncludeParity`, and `JYPPX.OpenCV.NativeAbiExportAudit`; the compatibility loader copy remains `OpenCv5Sharp.Native`.
+
+native CTest/output names 保持 neutral-first。本地测试使用 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit` 等名称；兼容 loader copy 仍为 `OpenCv5Sharp.Native`。
 
 The compatibility ABI is generated, not hand-maintained. `scripts/Generate-NativeAbiCompatibility.ps1` parses every public neutral declaration, writes `generated/legacy_abi.cpp`, writes the `open_cv_5_sharp/legacy_names.h` source aliases, and records the expected symbol pairs in `generated/legacy_abi_manifest.txt`. CTest verifies generated-file freshness, checks neutral/legacy include-tree parity, and loads every neutral export and its generated compatibility counterpart from the built library.
 
@@ -122,6 +128,7 @@ Keep fixed-major text when it names the actual runtime being packaged or an upst
 - Run `scripts/Test-RuntimePackageDocsDiscoverability.ps1`; it verifies runtime package docs stay cross-linked through [Quick Start](quick-start.md), [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md) without hiding `JYPPX.OpenCV.runtime.<rid>`, `JYPPX.OpenCV.runtime.<rid>.mini`, or the no-matching-runtime-package fallback.
 - Run `scripts/Test-NativeHeaderPackageBoundary.ps1`; it verifies runtime package metadata remains header-free, documents the source-tree `open_cv_sharp` header surface, and keeps `open_cv_5_sharp` compatibility-only.
 - Run `scripts/Test-NativeCMakeTargetExportBoundary.ps1`; it verifies the native CMake wrapper stays source-tree build only, keeps `JYPPX.OpenCV.Native` primary, keeps `OpenCv5Sharp.Native` compatibility-only, and prevents accidental install/export package surface.
+- Run `scripts/Test-NativeCTestOutputNamingBoundary.ps1`; it verifies native CTest/output names stay neutral-first, primary smoke/audit targets derive from `JYPPX.OpenCV.Native`, and `OpenCv5Sharp.Native` remains only the compatibility loader copy.
 - Run `scripts/Test-RuntimeDocLinkIntegrity.ps1`; it verifies runtime docs Markdown links, docs/toc runtime `href` entries, package README back-links, docs/articles package README links, and issue-template plain docs paths resolve from their source locations without using the old fixed-major repository root.
 
 - 不要新增包含 OpenCV major 的通用目录、文件、类、target、程序集、loader 或变量。
@@ -158,6 +165,7 @@ Keep fixed-major text when it names the actual runtime being packaged or an upst
 - 运行 `scripts/Test-RuntimePackageDocsDiscoverability.ps1`；它会校验 runtime package docs 是否通过 [Quick Start](quick-start.md)、[Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 和[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md) 保持交叉链接，同时不隐藏 `JYPPX.OpenCV.runtime.<rid>`、`JYPPX.OpenCV.runtime.<rid>.mini` 或 no-matching-runtime-package fallback。
 - 运行 `scripts/Test-NativeHeaderPackageBoundary.ps1`；它会校验 runtime package metadata 保持 header-free，文档说明 source-tree `open_cv_sharp` header surface，并确保 `open_cv_5_sharp` 只作为兼容项保留。
 - 运行 `scripts/Test-NativeCMakeTargetExportBoundary.ps1`；它会校验 native CMake wrapper 保持 source-tree build only、`JYPPX.OpenCV.Native` 为主 target、`OpenCv5Sharp.Native` 只作为兼容项，并防止意外新增 install/export package surface。
+- 运行 `scripts/Test-NativeCTestOutputNamingBoundary.ps1`；它会校验 native CTest/output names 保持 neutral-first，主 smoke/audit targets 从 `JYPPX.OpenCV.Native` 派生，且 `OpenCv5Sharp.Native` 仅作为兼容 loader copy 保留。
 - 运行 `scripts/Test-RuntimeDocLinkIntegrity.ps1`；它会校验 runtime docs 的 Markdown links、docs/toc runtime `href` entries、package README back-links、docs/articles package README links 以及 issue-template plain docs paths 是否能从各自源位置解析，并避免使用旧的固定 major repository root。
 
 Future OpenCV 4 or OpenCV 6 runtime packages should reuse the same managed package, assembly, namespace, loader, project, and script identities. Runtime differences belong in package versions, native build inputs, and factual runtime filenames.
