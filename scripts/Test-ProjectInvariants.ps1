@@ -45,6 +45,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Build-info/runtime metadata consistency"
+        Script = Join-Path $repo "scripts/Test-BuildInfoRuntimeMetadataConsistency.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Public API namespace neutrality"
         Script = Join-Path $repo "scripts/Test-PublicApiNamespaceNeutrality.ps1"
         Arguments = @("-RepositoryRoot", $repo)
