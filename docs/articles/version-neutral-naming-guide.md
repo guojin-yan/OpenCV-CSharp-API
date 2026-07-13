@@ -13,6 +13,7 @@ The currently packaged runtime is OpenCV 5.0.0. That version is a package/runtim
 | Public namespace | `OpenCvSharp.*` | Current source, tests, samples, and generated API docs use this namespace. |
 | Runtime package | `JYPPX.OpenCV.runtime.<rid>` | Keep the package ID stable; distinguish OpenCV runtimes with package versions. |
 | Native loader | `JYPPX.OpenCV.Native.dll` | Current managed P/Invoke declarations load this file. |
+| Native CMake target | `JYPPX.OpenCV.Native` | Current source-tree build target; not a public install/export package surface. |
 | Native include tree | `open_cv_sharp` | Primary include path for current wrapper headers and examples. |
 | Native ABI | `jyppx_ocv_*` | Current headers, definitions, and managed entry points use the neutral prefix. |
 | Native status | `OPENCV_CSHARP_STATUS_*` | Current implementation code uses neutral status constants. |
@@ -25,6 +26,7 @@ The currently packaged runtime is OpenCV 5.0.0. That version is a package/runtim
 | 公开命名空间 | `OpenCvSharp.*` | 当前源码、测试、样例与生成 API 文档统一使用该命名空间。 |
 | Runtime 包 | `JYPPX.OpenCV.runtime.<rid>` | 包 ID 保持稳定，通过 package version 区分 OpenCV runtime。 |
 | Native loader | `JYPPX.OpenCV.Native.dll` | 当前 managed P/Invoke 声明加载该文件。 |
+| Native CMake target | `JYPPX.OpenCV.Native` | 当前 source-tree build target；不是 public install/export package surface。 |
 | Native include 树 | `open_cv_sharp` | wrapper headers 的主 include 路径。 |
 | Native ABI | `jyppx_ocv_*` | 当前 headers、definitions 与 managed entry points 使用中性前缀。 |
 | Native status | `OPENCV_CSHARP_STATUS_*` | 当前实现代码使用中性状态常量。 |
@@ -38,7 +40,7 @@ These names remain only for existing compiled consumers, existing automation/bui
 
 - `OpenCv5Sharp.Native.dll`: explicit compatibility loader copy for managed assemblies compiled against earlier package revisions.
 - `OpenCv5SharpBuildInfo`: build-info facade for existing callers; new code uses `OpenCvSharpBuildInfo`.
-- `OpenCv5Sharp.Native`: compatibility loader copy kept for earlier fixed-major managed consumers.
+- `OpenCv5Sharp.Native`: compatibility native loader/target name kept for earlier fixed-major managed consumers and existing build scripts.
 - `NativeLibraryName`: existing-caller build-info value; new code uses `CurrentNativeLibraryName`.
 - `OPENCV5SHARP_*` and `OpenCv5SharpNativeRuntimeDir`: accepted compatibility variables for existing automation, existing build scripts, and existing native include guards.
 - `open_cv_5_sharp`: source-compatible include tree for existing native code that includes old wrapper headers.
@@ -46,7 +48,7 @@ These names remain only for existing compiled consumers, existing automation/bui
 
 - `OpenCv5Sharp.Native.dll`：供按早期包修订版编译的 managed 程序集使用的明确兼容 loader 副本。
 - `OpenCv5SharpBuildInfo`：供既有调用方使用的 build-info facade；新代码使用 `OpenCvSharpBuildInfo`。
-- `OpenCv5Sharp.Native`：为早期固定大版本 managed 消费者保留的 compatibility loader 副本。
+- `OpenCv5Sharp.Native`：为早期固定大版本 managed 消费者和既有构建脚本保留的 compatibility native loader/target name。
 - `NativeLibraryName`：既有调用方 build-info 值；新代码使用 `CurrentNativeLibraryName`。
 - `OPENCV5SHARP_*` 与 `OpenCv5SharpNativeRuntimeDir`：为既有自动化、既有构建脚本和既有 native include guard 保留的兼容变量。
 - `open_cv_5_sharp`：供包含旧 wrapper header 的既有 native 代码使用的 source-compatible include 树。
@@ -55,6 +57,10 @@ These names remain only for existing compiled consumers, existing automation/bui
 Native headers are currently a source-tree and advanced native build surface, not a runtime package payload. The source-tree header surface is `src/OpenCvSharp.Native/include/open_cv_sharp`; runtime NuGet packages do not distribute native C headers today. `src/OpenCvSharp.Native/include/open_cv_5_sharp` remains only as a compatibility wrapper tree for existing native source includes.
 
 native headers 当前是 source-tree 和 advanced native build surface，不是 runtime package payload。source-tree header surface 是 `src/OpenCvSharp.Native/include/open_cv_sharp`；runtime NuGet 包当前不分发 native C headers。`src/OpenCvSharp.Native/include/open_cv_5_sharp` 仅作为既有 native source include 的兼容 wrapper tree 保留。
+
+The native CMake project is also source-tree build only today. It builds `JYPPX.OpenCV.Native` as the primary target, keeps `OpenCv5Sharp.Native` only as a compatibility alias, and is not a public install/export package surface.
+
+native CMake 项目当前同样只作为 source-tree build surface 使用。它把 `JYPPX.OpenCV.Native` 作为主 target，只把 `OpenCv5Sharp.Native` 保留为兼容 alias，不作为 public install/export package surface。
 
 The compatibility ABI is generated, not hand-maintained. `scripts/Generate-NativeAbiCompatibility.ps1` parses every public neutral declaration, writes `generated/legacy_abi.cpp`, writes the `open_cv_5_sharp/legacy_names.h` source aliases, and records the expected symbol pairs in `generated/legacy_abi_manifest.txt`. CTest verifies generated-file freshness, checks neutral/legacy include-tree parity, and loads every neutral export and its generated compatibility counterpart from the built library.
 
@@ -115,6 +121,7 @@ Keep fixed-major text when it names the actual runtime being packaged or an upst
 - Run `scripts/Test-RealNativeRuntimeBuildMatrixCoverage.ps1`; it verifies `Build-OpenCV.ps1 -DescribeOnly` maps every runtime package RID/profile to an explicit real OpenCV build plan, and checks RID-aware staging defaults for representative Windows, Linux, and Android runtime inputs.
 - Run `scripts/Test-RuntimePackageDocsDiscoverability.ps1`; it verifies runtime package docs stay cross-linked through [Quick Start](quick-start.md), [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md) without hiding `JYPPX.OpenCV.runtime.<rid>`, `JYPPX.OpenCV.runtime.<rid>.mini`, or the no-matching-runtime-package fallback.
 - Run `scripts/Test-NativeHeaderPackageBoundary.ps1`; it verifies runtime package metadata remains header-free, documents the source-tree `open_cv_sharp` header surface, and keeps `open_cv_5_sharp` compatibility-only.
+- Run `scripts/Test-NativeCMakeTargetExportBoundary.ps1`; it verifies the native CMake wrapper stays source-tree build only, keeps `JYPPX.OpenCV.Native` primary, keeps `OpenCv5Sharp.Native` compatibility-only, and prevents accidental install/export package surface.
 - Run `scripts/Test-RuntimeDocLinkIntegrity.ps1`; it verifies runtime docs Markdown links, docs/toc runtime `href` entries, package README back-links, docs/articles package README links, and issue-template plain docs paths resolve from their source locations without using the old fixed-major repository root.
 
 - 不要新增包含 OpenCV major 的通用目录、文件、类、target、程序集、loader 或变量。
@@ -150,6 +157,7 @@ Keep fixed-major text when it names the actual runtime being packaged or an upst
 - 运行 `scripts/Test-RealNativeRuntimeBuildMatrixCoverage.ps1`；它会校验 `Build-OpenCV.ps1 -DescribeOnly` 是否把每个 runtime package RID/profile 映射到明确的真实 OpenCV build plan，并抽样检查 Windows、Linux 和 Android runtime 输入的 RID-aware staging 默认值。
 - 运行 `scripts/Test-RuntimePackageDocsDiscoverability.ps1`；它会校验 runtime package docs 是否通过 [Quick Start](quick-start.md)、[Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 和[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md) 保持交叉链接，同时不隐藏 `JYPPX.OpenCV.runtime.<rid>`、`JYPPX.OpenCV.runtime.<rid>.mini` 或 no-matching-runtime-package fallback。
 - 运行 `scripts/Test-NativeHeaderPackageBoundary.ps1`；它会校验 runtime package metadata 保持 header-free，文档说明 source-tree `open_cv_sharp` header surface，并确保 `open_cv_5_sharp` 只作为兼容项保留。
+- 运行 `scripts/Test-NativeCMakeTargetExportBoundary.ps1`；它会校验 native CMake wrapper 保持 source-tree build only、`JYPPX.OpenCV.Native` 为主 target、`OpenCv5Sharp.Native` 只作为兼容项，并防止意外新增 install/export package surface。
 - 运行 `scripts/Test-RuntimeDocLinkIntegrity.ps1`；它会校验 runtime docs 的 Markdown links、docs/toc runtime `href` entries、package README back-links、docs/articles package README links 以及 issue-template plain docs paths 是否能从各自源位置解析，并避免使用旧的固定 major repository root。
 
 Future OpenCV 4 or OpenCV 6 runtime packages should reuse the same managed package, assembly, namespace, loader, project, and script identities. Runtime differences belong in package versions, native build inputs, and factual runtime filenames.

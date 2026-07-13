@@ -175,6 +175,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Native CMake target/export boundary"
+        Script = Join-Path $repo "scripts/Test-NativeCMakeTargetExportBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime doc link integrity"
         Script = Join-Path $repo "scripts/Test-RuntimeDocLinkIntegrity.ps1"
         Arguments = @("-RepositoryRoot", $repo)

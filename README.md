@@ -52,6 +52,10 @@ Runtime NuGet packages do not currently distribute native C headers. The current
 
 runtime NuGet 包当前不分发 native C headers。当前 advanced/source-tree native build surface 是 `src/OpenCvSharp.Native/include/open_cv_sharp`；`src/OpenCvSharp.Native/include/open_cv_5_sharp` 仅作为既有 native source include 的兼容 wrapper tree 保留。
 
+The native CMake project is currently source-tree build only and does not currently install or export a reusable CMake package or SDK target. The `JYPPX.OpenCV.Native` CMake target is primary; `OpenCv5Sharp.Native` remains only a compatibility alias for existing build scripts and loaders.
+
+native CMake 项目当前只作为 source-tree build surface 使用，当前不 install 或 export 可复用的 CMake package / SDK target。`JYPPX.OpenCV.Native` CMake target 是主目标；`OpenCv5Sharp.Native` 仅作为既有构建脚本和 loader 的兼容 alias 保留。
+
 The canonical outer workspace root is version-neutral, for example `OpenCV-CSharp-API-workspace`. Generic repository, plan, diary, source-cache, and artifact-root directories do not encode an OpenCV major. Versioned names remain valid below factual dependency caches such as `artifacts/opencv-install/opencv-5.0.0-windows-x64`.
 
 正式的外层工作区根目录保持版本中立，例如 `OpenCV-CSharp-API-workspace`。通用的仓库、计划、日记、源码缓存和产物根目录均不编码 OpenCV major；事实性依赖缓存内部仍可使用版本目录，例如 `artifacts/opencv-install/opencv-5.0.0-windows-x64`。
@@ -79,9 +83,9 @@ dotnet restore .\OpenCV-CSharp-API.slnx
 dotnet build .\OpenCV-CSharp-API.slnx -c Release
 ```
 
-For native CMake configuration, prefer version-neutral cache variables such as `OPENCV_CSHARP_OPENCV_DIR`, `OPENCV_CSHARP_OPENCV_BUILD_LIST`, and `OPENCV_CSHARP_BUILD_WITH_OPENCV`. Older `OPENCV5SHARP_*` CMake variables remain accepted only as existing-build-script compatibility aliases.
+For native CMake configuration, prefer version-neutral cache variables such as `OPENCV_CSHARP_OPENCV_DIR`, `OPENCV_CSHARP_OPENCV_BUILD_LIST`, and `OPENCV_CSHARP_BUILD_WITH_OPENCV`. Older `OPENCV5SHARP_*` CMake variables remain accepted only as existing-build-script compatibility aliases, not as public CMake package variables.
 
-native CMake 配置优先使用版本中立的 cache 变量，例如 `OPENCV_CSHARP_OPENCV_DIR`、`OPENCV_CSHARP_OPENCV_BUILD_LIST` 和 `OPENCV_CSHARP_BUILD_WITH_OPENCV`。旧的 `OPENCV5SHARP_*` CMake 变量仍仅作为既有构建脚本的兼容别名接受。
+native CMake 配置优先使用版本中立的 cache 变量，例如 `OPENCV_CSHARP_OPENCV_DIR`、`OPENCV_CSHARP_OPENCV_BUILD_LIST` 和 `OPENCV_CSHARP_BUILD_WITH_OPENCV`。旧的 `OPENCV5SHARP_*` CMake 变量仍仅作为既有构建脚本的兼容别名接受，不作为 public CMake package variables。
 
 ## Smoke Switches / Smoke 开关
 

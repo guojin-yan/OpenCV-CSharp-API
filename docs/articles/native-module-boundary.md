@@ -71,6 +71,12 @@ Rules:
 - STL containers never cross the C ABI.
 - UTF-8 is the default string encoding.
 
+## CMake Target/Export Boundary / CMake Target/Export 边界
+
+The native CMake project is currently source-tree build only. It builds the primary `JYPPX.OpenCV.Native` target for local wrapper builds and does not install or export a reusable CMake package or SDK target today. The `OpenCv5Sharp.Native` CMake target name is only a compatibility alias to the primary target for existing build scripts and loaders.
+
+native CMake 项目当前只作为 source-tree build surface 使用。它为本地 wrapper build 构建主 `JYPPX.OpenCV.Native` target，当前不 install 或 export 可复用的 CMake package / SDK target。`OpenCv5Sharp.Native` CMake target name 仅作为指向主目标的兼容 alias 保留给既有构建脚本和 loader。
+
 ## OpenCV Linking / OpenCV 链接方式
 
 The native project supports two build modes:
