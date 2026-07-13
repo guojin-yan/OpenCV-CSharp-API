@@ -227,6 +227,10 @@ function Get-NuGetPackageFileVersion {
     return "{0}.{1}.{2}.{3}" -f $parts[0], $parts[1], $parts[2], $parts[3]
 }
 
+if ($RequireReleasePreflight -and $SyntheticRuntimeInputs) {
+    throw "Release-candidate runtime packages require real native runtime inputs; synthetic runtime inputs validate package shape only."
+}
+
 if ($StageRuntime) {
     if ([string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
         # OpenCvNativeRuntimeDir is the preferred version-neutral runtime path/staging parameter.
@@ -293,10 +297,6 @@ if ($StageRuntime) {
 }
 
 if ($RequireReleasePreflight) {
-    if ($SyntheticRuntimeInputs) {
-        throw "Release-candidate runtime packages require real native runtime inputs; synthetic runtime inputs validate package shape only."
-    }
-
     $preflightParameters = @{
         RepositoryRoot = $repoRoot
         RuntimeProject = $runtimeProjectFullPath
