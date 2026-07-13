@@ -157,6 +157,21 @@ if ((Get-TokenIndex -Text (Read-RequiredText -RelativePath $aggregateScriptToken
         -Issue "Aggregate invariant suite must verify the representative managed package consumer compile surface used by build-managed"
 }
 
+$packWorkflowText = Read-RequiredText -RelativePath ".github/workflows/pack.yml"
+foreach ($token in @(
+        "verify-artifacts:",
+        "actions/download-artifact@v4",
+        "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
+        "artifacts/pack-download",
+        "inputs.rid == 'all' && inputs.runtime_profile == 'all'")) {
+    if ((Get-TokenIndex -Text $packWorkflowText -Token $token) -lt 0) {
+        Add-Violation `
+            -Violations $violations `
+            -Path ".github/workflows/pack.yml" `
+            -Issue "Pack workflow must keep full-matrix artifact self-validation wired through '$token'"
+    }
+}
+
 $prTemplateText = Read-RequiredText -RelativePath ".github/pull_request_template.md"
 [void](Assert-ContainsAggregateGate -Violations $violations -RelativePath ".github/pull_request_template.md" -Text $prTemplateText)
 

@@ -105,7 +105,7 @@ For isolated validation or local package-source dry-runs, `Pack-Managed.ps1` als
 
 `Stage-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package directory used for generated `runtimes/<rid>/native` and `licenses/` mirrors. `Pack-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package `.csproj` file path used by `dotnet pack`.
 
-The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured multi-RID matrix for full and mini profiles; individual RID/profile selections are supported for targeted packaging. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, uses synthetic runtime inputs only for non-publishing package-surface validation, and rejects publishing when synthetic inputs are enabled.
+The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured multi-RID matrix for full and mini profiles; individual RID/profile selections are supported for targeted packaging. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, self-validates the full matrix artifacts with `Test-GitHubPackArtifactMatrixSurface.ps1`, uses synthetic runtime inputs only for non-publishing package-surface validation, and rejects publishing when synthetic inputs are enabled.
 
 ```powershell
 pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0 -StageRuntime -OpenCvNativeRuntimeDir ./build/native-opencv-core/Release
@@ -129,7 +129,7 @@ The pack scripts derive the four-part package version from `-OpenCvVersion` plus
 
 `Stage-Runtime.ps1 -RuntimeProject` 是仓库相对或绝对 runtime package 目录，用于生成 `runtimes/<rid>/native` 和 `licenses/` 镜像；`Pack-Runtime.ps1 -RuntimeProject` 是供 `dotnet pack` 使用的仓库相对或绝对 runtime package `.csproj` 文件路径。
 
-pack workflow 暴露 `rid` 与 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也可以选择单个 RID/profile 做定向打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，默认仅使用 synthetic runtime inputs 验证 package surface，并在启用 synthetic inputs 时拒绝发布。
+pack workflow 暴露 `rid` 与 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也可以选择单个 RID/profile 做定向打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，并用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts；默认仅使用 synthetic runtime inputs 验证 package surface，并在启用 synthetic inputs 时拒绝发布。
 
 Absolute `-ProjectPath` and `-RuntimeProject` values are accepted as-is and can point outside the repository when the caller chooses that layout.
 

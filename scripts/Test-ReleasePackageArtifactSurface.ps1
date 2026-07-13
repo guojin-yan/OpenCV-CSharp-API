@@ -136,6 +136,8 @@ foreach ($check in @(
         [pscustomobject]@{ Needle = "scripts/Pack-Runtime.ps1"; Issue = "Pack workflow must invoke the runtime pack script" },
         [pscustomobject]@{ Needle = "name: $uploadArtifactName"; Issue = "Pack workflow upload artifact name must stay neutral" },
         [pscustomobject]@{ Needle = "path: $packageOutputRoot/*.nupkg"; Issue = "Pack workflow must upload neutral package output artifacts" },
+        [pscustomobject]@{ Needle = "actions/download-artifact@v4"; Issue = "Pack workflow must download package artifacts for full-matrix self-validation" },
+        [pscustomobject]@{ Needle = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"; Issue = "Pack workflow must verify downloaded package artifacts with the offline artifact guard" },
         [pscustomobject]@{ Needle = "dotnet nuget push ./artifacts/packages/*.nupkg"; Issue = "Pack workflow publish step must push from neutral package output root" })) {
     Assert-Contains `
         -Violations $violations `
@@ -239,6 +241,7 @@ $releaseSurfaceFiles = @(
     $runtimeReadmePath,
     $readmePath,
     "CONTRIBUTING.md",
+    "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
     $linkedRuntimeGuidePath,
     $runtimeLicensesPath
 )

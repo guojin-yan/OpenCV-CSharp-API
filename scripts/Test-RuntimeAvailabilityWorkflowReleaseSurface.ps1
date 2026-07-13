@@ -135,6 +135,11 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "path: artifacts/packages/*.nupkg" -Issue "Pack workflow must upload neutral package output artifacts"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "dotnet nuget push ./artifacts/packages/*.nupkg" -Issue "Pack workflow publish step must push from neutral package output root"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle $aggregateScript -Issue "Pack workflow must run aggregate invariant checks before pack work" -NormalizeSlashes
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "verify-artifacts:" -Issue "Pack workflow must keep a full-matrix artifact self-validation job"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "actions/download-artifact@v4" -Issue "Pack workflow artifact self-validation must download current-run artifacts"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "scripts/Test-GitHubPackArtifactMatrixSurface.ps1" -Issue "Pack workflow must run the offline GitHub pack artifact matrix guard"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "artifacts/pack-download" -Issue "Pack workflow must download package artifacts into an isolated generated directory"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "inputs.rid == 'all' && inputs.runtime_profile == 'all'" -Issue "Pack workflow artifact self-validation must run only for full RID/profile matrix inputs"
 
 foreach ($workflow in @(
         [pscustomobject]@{ Path = $buildNativeWorkflowPath; Text = $buildNativeWorkflowText },

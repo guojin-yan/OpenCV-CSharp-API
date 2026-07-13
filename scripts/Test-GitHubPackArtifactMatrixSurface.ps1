@@ -172,7 +172,7 @@ function Test-ContainsFixedMajorIdentity {
         [string]$Text
     )
 
-    return $Text -match "OpenCv5Sharp|opencv5sharp"
+    return $Text -match "OpenCv5Sharp|opencv5sharp" # Detect fixed-major compatibility names outside allowed compatibility entries.
 }
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
