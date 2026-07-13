@@ -170,6 +170,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Native header package boundary"
+        Script = Join-Path $repo "scripts/Test-NativeHeaderPackageBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime doc link integrity"
         Script = Join-Path $repo "scripts/Test-RuntimeDocLinkIntegrity.ps1"
         Arguments = @("-RepositoryRoot", $repo)

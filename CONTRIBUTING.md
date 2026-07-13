@@ -32,6 +32,7 @@ Thanks for helping build OpenCV CSharp API.
 - Keep new generic build variables, package metadata, and docs version-neutral unless they describe a concrete runtime fact.
 - Keep new repository paths version-neutral; only the generated `src/OpenCvSharp.Native/include/open_cv_5_sharp` compatibility include tree may keep a fixed-major path name.
 - Keep current native source and examples on `#include "open_cv_sharp/..."`; `#include "open_cv_5_sharp/..."` belongs only to generated compatibility wrappers and the legacy source-compatibility smoke test.
+- Runtime packages must remain header-free unless a separately reviewed native header SDK is introduced; document `src/OpenCvSharp.Native/include/open_cv_sharp` as the current source-tree header surface and `src/OpenCvSharp.Native/include/open_cv_5_sharp` only as compatibility.
 - Keep fixed-version source/install/cache path text explicitly labelled as factual, upstream, cache, fallback, or compatibility context.
 - Keep runtime packages and staging scripts neutral-first: `JYPPX.OpenCV.runtime.<rid>` and `JYPPX.OpenCV.Native.dll` are primary, while `OpenCv5Sharp.Native.dll` is only an explicit compatibility copy.
 - Keep C# public API names close to OpenCV C++ names while following .NET naming conventions.

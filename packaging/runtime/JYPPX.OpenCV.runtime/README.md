@@ -24,6 +24,10 @@ The package ID is version-neutral; the OpenCV runtime identity and package revis
 
 包 ID 保持版本中立；OpenCV runtime 身份和包修订号通过 package version 元数据（例如 `5.0.0.0`）以及实际暂存的上游 DLL 名称表达。`JYPPX.OpenCV.Native.dll` 是主 loader，`OpenCv5Sharp.Native.dll` 是为已编译消费者保持稳定的兼容 loader 副本。事实性 OpenCV 5.0.0 runtime 产物 `opencv_*500.dll` 中的 `500` 后缀是当前 OpenCV 5.0.0 二进制命名事实，不是新增项目概念的命名模式。
 
+Runtime packages do not currently distribute native C headers and are not native C header SDK packages. Advanced native builds should use the source-tree header surface under `src/OpenCvSharp.Native/include/open_cv_sharp`; `src/OpenCvSharp.Native/include/open_cv_5_sharp` remains only as a compatibility wrapper tree for existing native source includes.
+
+runtime 包当前不分发 native C headers，也不是 native C header SDK package。advanced native build 应使用 source-tree header surface `src/OpenCvSharp.Native/include/open_cv_sharp`；`src/OpenCvSharp.Native/include/open_cv_5_sharp` 仅作为既有 native source include 的兼容 wrapper tree 保留。
+
 ## Generated Package Layout / 生成包布局
 
 Runtime files are staged under:

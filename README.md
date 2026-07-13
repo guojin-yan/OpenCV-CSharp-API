@@ -48,6 +48,10 @@ Current native source and examples should include wrapper headers through `open_
 
 当前 native 源码和示例应通过 `open_cv_sharp/...` include wrapper headers。生成的 `open_cv_5_sharp/...` 树仅作为既有 native 代码的源码兼容 wrapper surface 保留。
 
+Runtime NuGet packages do not currently distribute native C headers. The current advanced/source-tree native build surface is `src/OpenCvSharp.Native/include/open_cv_sharp`; `src/OpenCvSharp.Native/include/open_cv_5_sharp` remains only as a compatibility wrapper tree for existing native source includes.
+
+runtime NuGet 包当前不分发 native C headers。当前 advanced/source-tree native build surface 是 `src/OpenCvSharp.Native/include/open_cv_sharp`；`src/OpenCvSharp.Native/include/open_cv_5_sharp` 仅作为既有 native source include 的兼容 wrapper tree 保留。
+
 The canonical outer workspace root is version-neutral, for example `OpenCV-CSharp-API-workspace`. Generic repository, plan, diary, source-cache, and artifact-root directories do not encode an OpenCV major. Versioned names remain valid below factual dependency caches such as `artifacts/opencv-install/opencv-5.0.0-windows-x64`.
 
 正式的外层工作区根目录保持版本中立，例如 `OpenCV-CSharp-API-workspace`。通用的仓库、计划、日记、源码缓存和产物根目录均不编码 OpenCV major；事实性依赖缓存内部仍可使用版本目录，例如 `artifacts/opencv-install/opencv-5.0.0-windows-x64`。
