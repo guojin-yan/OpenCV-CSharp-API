@@ -489,7 +489,13 @@ try {
     $managedPackageInstallRoot = Join-Path $consumerPackagesDir "$managedPackageIdLower/$normalizedPackageVersion"
     Assert-FileExists -Violations $violations -Path (Join-Path $managedPackageInstallRoot "lib/$targetFramework/$managedAssemblyFileName") -Issue "Isolated NuGet package cache did not contain the managed compile/runtime assembly"
 
-    $packageCacheNuspecPath = Join-Path $managedPackageInstallRoot "$managedPackageId.nuspec"
+    $packageCacheNuspecPath = Join-Path $managedPackageInstallRoot "$managedPackageIdLower.nuspec"
+    $packageCacheOriginalCaseNuspecPath = Join-Path $managedPackageInstallRoot "$managedPackageId.nuspec"
+    if (-not (Test-Path -LiteralPath $packageCacheNuspecPath -PathType Leaf) -and
+        (Test-Path -LiteralPath $packageCacheOriginalCaseNuspecPath -PathType Leaf)) {
+        $packageCacheNuspecPath = $packageCacheOriginalCaseNuspecPath
+    }
+
     Assert-FileExists -Violations $violations -Path $packageCacheNuspecPath -Issue "Isolated NuGet package cache did not contain the managed nuspec"
     if (Test-Path -LiteralPath $packageCacheNuspecPath -PathType Leaf) {
         $packageCacheNuspecText = [System.IO.File]::ReadAllText($packageCacheNuspecPath)
@@ -563,9 +569,14 @@ foreach ($directory in $repoSensitiveDirectories) {
 
 if ($violations.Count -gt 0) {
     Write-Host "Managed package representative API compile surface guard failed with $($violations.Count) violation(s)."
-    $violations |
-        Sort-Object Path, Issue |
-        Format-Table Path, Issue, Text -AutoSize
+    foreach ($violation in ($violations | Sort-Object Path, Issue)) {
+        Write-Host "Path: $($violation.Path)"
+        Write-Host "Issue: $($violation.Issue)"
+        if (-not [string]::IsNullOrWhiteSpace($violation.Text)) {
+            Write-Host "Text: $($violation.Text)"
+        }
+    }
+
     exit 1
 }
 
