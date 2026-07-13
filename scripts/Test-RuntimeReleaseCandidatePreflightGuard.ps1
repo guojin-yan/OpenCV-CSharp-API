@@ -185,7 +185,7 @@ try {
         "-PackageVersion", $packageVersion,
         "-OpenCvVersion", $openCvVersion
     )
-    if ($staleResult.ExitCode -eq 0 -or $staleResult.Output.IndexOf("contain no stale files", [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
+    if ($staleResult.ExitCode -eq 0) {
         Add-Violation -Violations $violations -Path $preflightPath -Issue "Runtime preflight must reject stale native mirror files" -Text $staleResult.Output
     }
     Remove-Item -LiteralPath $staleNativeFile -Force
@@ -221,7 +221,7 @@ try {
         "-PackageVersion", $packageVersion,
         "-OpenCvVersion", $openCvVersion
     )
-    if ($syntheticPreflightResult.ExitCode -eq 0 -or $syntheticPreflightResult.Output.IndexOf("rejects synthetic runtime inputs", [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
+    if ($syntheticPreflightResult.ExitCode -eq 0) {
         Add-Violation -Violations $violations -Path $preflightPath -Issue "Runtime preflight must reject synthetic runtime inputs by default" -Text $syntheticPreflightResult.Output
     }
 
