@@ -59,6 +59,10 @@ jobs:
             10.0.x
             9.0.x
             8.0.x
+      - name: Reject synthetic publish inputs
+        if: ${{ inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
+        shell: pwsh
+        run: throw "Publishing packages requires real native runtime inputs; synthetic runtime inputs validate package shape only."
       - name: Check project invariants
         shell: pwsh
         run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
@@ -94,7 +98,7 @@ jobs:
           path: artifacts/packages/*.nupkg
           if-no-files-found: error
       - name: Publish managed package
-        if: inputs.publish_github_packages == 'true'
+        if: inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime != 'true'
         shell: pwsh
         run: |
           dotnet nuget push ./artifacts/packages/*.nupkg `
@@ -239,7 +243,7 @@ jobs:
           path: artifacts/packages/*.nupkg
           if-no-files-found: error
       - name: Publish runtime package
-        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.publish_github_packages == 'true' }}
+        if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
         run: |
           dotnet nuget push ./artifacts/packages/*.nupkg `

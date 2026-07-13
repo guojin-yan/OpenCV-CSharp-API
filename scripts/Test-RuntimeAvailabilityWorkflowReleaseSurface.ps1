@@ -92,6 +92,30 @@ function Assert-NotContains {
     }
 }
 
+function Assert-TextOrder {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations,
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [string]$Text,
+        [Parameter(Mandatory = $true)]
+        [string]$Earlier,
+        [Parameter(Mandatory = $true)]
+        [string]$Later,
+        [Parameter(Mandatory = $true)]
+        [string]$Issue
+    )
+
+    $earlierIndex = $Text.IndexOf($Earlier, [System.StringComparison]::OrdinalIgnoreCase)
+    $laterIndex = $Text.IndexOf($Later, [System.StringComparison]::OrdinalIgnoreCase)
+    if ($earlierIndex -lt 0 -or $laterIndex -lt 0 -or $earlierIndex -ge $laterIndex) {
+        Add-Violation -Violations $Violations -Path $Path -Issue $Issue -Text "$Earlier before $Later"
+    }
+}
+
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $packWorkflowPath = ".github/workflows/pack.yml"
@@ -130,6 +154,13 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "'-RuntimeProfile', '`${{ matrix.profile }}'" -Issue "Pack workflow must forward the matrix runtime profile to Pack-Runtime"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "validate_synthetic_runtime" -Issue "Pack workflow must expose synthetic runtime package-surface validation"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "Reject synthetic publish" -Issue "Pack workflow must prevent publishing synthetic runtime package validation artifacts"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "Reject synthetic publish inputs" -Issue "Pack workflow must reject synthetic publish inputs before any package publish job can start"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "Publishing packages requires real native runtime inputs" -Issue "Pack workflow must explain that publish requires real native runtime inputs"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true'" -Issue "Pack workflow must fail validation when publish is requested with synthetic runtime inputs"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "if: inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime != 'true'" -Issue "Managed package publish step must require real runtime inputs, not synthetic validation"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime != 'true' }}" -Issue "Runtime package publish step must require real runtime inputs, not synthetic validation"
+Assert-TextOrder -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Earlier "Reject synthetic publish inputs" -Later "pack-managed:" -Issue "Pack workflow must reject synthetic publish before managed package publishing can start"
+Assert-TextOrder -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Earlier "Reject synthetic publish inputs" -Later "pack-runtime:" -Issue "Pack workflow must reject synthetic publish before runtime package publishing can start"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "strategy:" -Issue "Pack workflow must run a runtime matrix"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "name: nupkg-" -Issue "Pack workflow artifact names must stay neutral and matrix-scoped"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "path: artifacts/packages/*.nupkg" -Issue "Pack workflow must upload neutral package output artifacts"
