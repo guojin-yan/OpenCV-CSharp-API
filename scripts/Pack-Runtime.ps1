@@ -21,6 +21,7 @@ param(
     [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"),
     [switch]$StageRuntime,
     [switch]$SyntheticRuntimeInputs,
+    [switch]$RequireReleasePreflight,
     [switch]$NoBuild,
     [switch]$NoRestore
 )
@@ -288,6 +289,30 @@ if ($StageRuntime) {
     }
     catch {
         throw "Stage-Runtime.ps1 failed: $($_.Exception.Message)"
+    }
+}
+
+if ($RequireReleasePreflight) {
+    if ($SyntheticRuntimeInputs) {
+        throw "Release-candidate runtime packages require real native runtime inputs; synthetic runtime inputs validate package shape only."
+    }
+
+    $preflightParameters = @{
+        RepositoryRoot = $repoRoot
+        RuntimeProject = $runtimeProjectFullPath
+        RuntimePackageMatrix = $RuntimePackageMatrix
+        Rid = $Rid
+        RuntimeProfile = $RuntimeProfile
+        RuntimePackageId = $runtimePackageId
+        PackageVersion = $PackageVersion
+        OpenCvVersion = $OpenCvVersion
+    }
+
+    try {
+        & (Join-Path $PSScriptRoot "Test-RuntimeReleaseCandidatePreflight.ps1") @preflightParameters
+    }
+    catch {
+        throw "Runtime release-candidate preflight failed: $($_.Exception.Message)"
     }
 }
 

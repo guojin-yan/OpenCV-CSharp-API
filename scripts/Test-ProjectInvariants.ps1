@@ -140,6 +140,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Runtime release-candidate preflight"
+        Script = Join-Path $repo "scripts/Test-RuntimeReleaseCandidatePreflightGuard.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime package local consumer restore"
         Script = Join-Path $repo "scripts/Test-RuntimePackageLocalConsumerRestore.ps1"
         Arguments = @("-RepositoryRoot", $repo)

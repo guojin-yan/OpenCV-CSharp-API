@@ -113,6 +113,8 @@ $packWorkflowPath = ".github/workflows/pack.yml"
 $packManagedPath = "scripts/Pack-Managed.ps1"
 $packRuntimePath = "scripts/Pack-Runtime.ps1"
 $stageRuntimePath = "scripts/Stage-Runtime.ps1"
+$runtimeReleasePreflightPath = "scripts/Test-RuntimeReleaseCandidatePreflight.ps1"
+$runtimeReleasePreflightGuardPath = "scripts/Test-RuntimeReleaseCandidatePreflightGuard.ps1"
 $runtimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"
 $runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $readmePath = "README.md"
@@ -126,6 +128,8 @@ $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowPath
 $packManagedText = Read-RequiredText -RelativePath $packManagedPath
 $packRuntimeText = Read-RequiredText -RelativePath $packRuntimePath
 $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
+$runtimeReleasePreflightText = Read-RequiredText -RelativePath $runtimeReleasePreflightPath
+$runtimeReleasePreflightGuardText = Read-RequiredText -RelativePath $runtimeReleasePreflightGuardPath
 $runtimeProjectText = Read-RequiredText -RelativePath $runtimeProjectPath
 $runtimeReadmeText = Read-RequiredText -RelativePath $runtimeReadmePath
 $readmeText = Read-RequiredText -RelativePath $readmePath
@@ -170,6 +174,8 @@ Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntim
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle "Runtime package artifact was not found" -Issue "Pack-Runtime must verify the expected package artifact after packing"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle "PackageVersion carries OpenCV runtime identity as version metadata" -Issue "Pack-Runtime must document PackageVersion as metadata, not package identity"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[switch]$SyntheticRuntimeInputs' -Issue "Pack-Runtime must expose synthetic runtime provenance marking"
+Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[switch]$RequireReleasePreflight' -Issue "Pack-Runtime must expose release-candidate runtime preflight"
+Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle 'Test-RuntimeReleaseCandidatePreflight.ps1' -Issue "Pack-Runtime must invoke release-candidate runtime preflight when requested"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle 'RuntimePackageId = $runtimePackageId' -Issue "Pack-Runtime must forward derived package ID to runtime staging provenance"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle 'PackageVersion = $PackageVersion' -Issue "Pack-Runtime must forward package version metadata to runtime staging provenance"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$stageParameters.SyntheticRuntimeInputs = $true' -Issue "Pack-Runtime must forward synthetic runtime input status to staging provenance"
@@ -186,6 +192,11 @@ Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRunt
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle 'RequiredModules = @($OpenCvModules)' -Issue "Stage-Runtime provenance manifest must record required OpenCV modules"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle 'Runtime provenance manifest:' -Issue "Stage-Runtime must print runtime provenance manifest evidence"
 
+Assert-Contains -Violations $violations -Path $runtimeReleasePreflightPath -Text $runtimeReleasePreflightText -Needle 'Release candidate preflight rejects synthetic runtime inputs' -Issue "Runtime release preflight must reject synthetic runtime inputs by default"
+Assert-Contains -Violations $violations -Path $runtimeReleasePreflightPath -Text $runtimeReleasePreflightText -Needle 'contain no stale files' -Issue "Runtime release preflight must reject stale native/license/build mirrors"
+Assert-Contains -Violations $violations -Path $runtimeReleasePreflightPath -Text $runtimeReleasePreflightText -Needle 'Runtime provenance required modules must match selected profile' -Issue "Runtime release preflight must validate profile module provenance"
+Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath -Text $runtimeReleasePreflightGuardText -Needle 'Release-shaped manifests pass; synthetic manifests and stale mirrors are rejected by default.' -Issue "Runtime release preflight guard must cover positive and negative preflight cases"
+
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID/profile-derived and version-neutral"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle "<PackageReadmeFile>README.md</PackageReadmeFile>" -Issue "Runtime package project must package README.md"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes/$(RuntimePackageRid)/native/**/*"' -Issue "Runtime package project must include RID native runtime files"
@@ -193,6 +204,7 @@ Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtime
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="build/JYPPX.OpenCV.runtime.provenance.json"' -Issue "Runtime package project must include the generated provenance manifest"
 
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle '-SyntheticRuntimeInputs' -Issue "Pack workflow must mark synthetic runtime validation packages in provenance"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle '-RequireReleasePreflight' -Issue "Pack workflow must require runtime release preflight before publish-capable runtime package pushes"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle '-ExpectedPackageVersion $packageVersion' -Issue "Pack workflow artifact verifier must validate workflow-derived package version metadata"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle '-ExpectedSyntheticRuntimeInputs $expectedSyntheticRuntimeInputs' -Issue "Pack workflow artifact verifier must validate synthetic runtime provenance status"
 
@@ -263,6 +275,8 @@ $releaseSurfaceFiles = @(
     $runtimeReadmePath,
     $readmePath,
     "CONTRIBUTING.md",
+    $runtimeReleasePreflightPath,
+    $runtimeReleasePreflightGuardPath,
     $githubPackArtifactGuardPath,
     $githubPackConsumerGuardPath,
     $linkedRuntimeGuidePath,

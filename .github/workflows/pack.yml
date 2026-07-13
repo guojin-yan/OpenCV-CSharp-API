@@ -238,6 +238,10 @@ jobs:
             $packArgs += @('-SyntheticRuntimeInputs')
           }
 
+          if ('${{ inputs.publish_github_packages }}' -eq 'true') {
+            $packArgs += @('-RequireReleasePreflight')
+          }
+
           pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 @packArgs
       - name: Upload runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
