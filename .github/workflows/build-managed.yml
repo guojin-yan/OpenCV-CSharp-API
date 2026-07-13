@@ -1,0 +1,29 @@
+name: build-managed
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
+      - name: Restore
+        run: dotnet restore .\OpenCV-CSharp-API.slnx
+      - name: Build
+        run: dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
+      - name: Test
+        run: dotnet test .\OpenCV-CSharp-API.slnx -c Release --no-build

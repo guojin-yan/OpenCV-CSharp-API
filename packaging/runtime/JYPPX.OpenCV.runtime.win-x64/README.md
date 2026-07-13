@@ -1,0 +1,173 @@
+# JYPPX.OpenCV.runtime.win-x64 - current concrete RID example
+
+Windows x64 runtime package staging project for OpenCV CSharp API. This is the current concrete `win-x64` RID example; generic runtime package IDs use `JYPPX.OpenCV.runtime.<rid>`, and additional RID projects should reuse the same `RuntimePackageRid`-driven layout instead of hard-coding a new package identity pattern. Runtime packages live under `packaging/runtime` so native distribution metadata stays separate from source projects under `src`.
+
+OpenCV CSharp API 的 Windows x64 runtime 包预留项目。这是当前具体 `win-x64` RID 示例；通用 runtime package ID 使用 `JYPPX.OpenCV.runtime.<rid>`，其他 RID 项目应复用同一套由 `RuntimePackageRid` 驱动的布局，而不是硬编码新的包身份模式。runtime 包统一放在 `packaging/runtime` 下，避免把 native 分发元数据混入 `src` 源码项目目录。
+
+Currently tracked runtime package project: `JYPPX.OpenCV.runtime.win-x64`. Future RID-specific package projects should use the `JYPPX.OpenCV.runtime.<rid>` shape when package projects and release artifacts exist. If no matching runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then use `OpenCvNativeRuntimeDir` for local builds or `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` for packaging.
+
+当前仓库跟踪的 runtime package project：`JYPPX.OpenCV.runtime.win-x64`。未来 RID 专用 package project 在 package project 与 release artifact 存在时应使用 `JYPPX.OpenCV.runtime.<rid>` 形状。如果 no matching runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后在本地构建中使用 `OpenCvNativeRuntimeDir`，或用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
+
+Consumer package selection starts in the [Quick Start](../../../docs/articles/quick-start.md). Local native runtime fallback and staging are covered by the [Linked Runtime Build Guide](../../../docs/articles/linked-runtime-build-guide.md), linked validation is covered by the [Linked Runtime Smoke Guide](../../../docs/articles/linked-runtime-smoke-guide.md) and [Smoke Profiles Guide](../../../docs/articles/smoke-profiles-guide.md), and license layout is summarized in [Runtime Licenses](../../../docs/articles/runtime-licenses.md).
+
+consumer package 选择从 [Quick Start](../../../docs/articles/quick-start.md) 开始。local native runtime fallback 与 staging 见 [Linked Runtime Build Guide](../../../docs/articles/linked-runtime-build-guide.md)，linked 验证见 [Linked Runtime Smoke Guide](../../../docs/articles/linked-runtime-smoke-guide.md) 和 [Smoke Profiles Guide](../../../docs/articles/smoke-profiles-guide.md)，license 布局见 [Runtime Licenses](../../../docs/articles/runtime-licenses.md)。
+
+The trackable package metadata in this directory is the `.csproj` and this `README.md`. The `runtimes/` and `licenses/` directories are ignored generated mirrors; `Stage-Runtime.ps1` regenerates them from current runtime inputs before packaging, so do not commit or hand-edit those mirror contents.
+
+该目录中可跟踪的包元数据是 `.csproj` 和本 `README.md`。`runtimes/` 与 `licenses/` 目录是被忽略的生成镜像；`Stage-Runtime.ps1` 会在打包前根据当前 runtime 输入重新生成它们，因此不要提交或手动编辑这些镜像内容。
+
+The package ID is version-neutral; the OpenCV runtime identity and package revision are expressed by package version metadata, for example `5.0.0.0`, and by the actual staged upstream DLL names. `JYPPX.OpenCV.Native.dll` is the primary loader and `OpenCv5Sharp.Native.dll` is the compatibility loader copy kept stable for already-compiled consumers. The `500` suffix in factual OpenCV 5.0.0 runtime artifacts named `opencv_*500.dll` is the current OpenCV 5.0.0 binary naming fact, not a naming pattern for new project concepts.
+
+包 ID 保持版本中立；OpenCV runtime 身份和包修订号通过 package version 元数据（例如 `5.0.0.0`）以及实际暂存的上游 DLL 名称表达。`JYPPX.OpenCV.Native.dll` 是主 loader，`OpenCv5Sharp.Native.dll` 是为已编译消费者保持稳定的兼容 loader 副本。事实性 OpenCV 5.0.0 runtime 产物 `opencv_*500.dll` 中的 `500` 后缀是当前 OpenCV 5.0.0 二进制命名事实，不是新增项目概念的命名模式。
+
+## Generated Package Layout / 生成包布局
+
+Runtime files are staged under:
+
+```text
+runtimes/<rid>/native
+```
+
+For the current concrete `win-x64` example, `RuntimePackageRid=win-x64` resolves that generic layout to `runtimes/win-x64/native`.
+
+License files are staged under:
+
+```text
+licenses
+licenses/opencv-3rdparty
+```
+
+The runtime package license expression is `MIT AND Apache-2.0`: this project's native wrapper pieces are covered by MIT, and the OpenCV runtime is covered by Apache-2.0. Additional third-party license texts exported by the OpenCV install tree are included under `licenses/opencv-3rdparty`; the exact list depends on the OpenCV build configuration.
+
+License source inputs are the repository `LICENSE`, the OpenCV source `LICENSE`, the OpenCV source `3rdparty/ippicv/readme.htm`, and third-party license files from the OpenCV install `etc/licenses` directory. `Stage-Runtime.ps1` copies those inputs into the generated package layout shown above.
+
+许可证文件暂存在：
+
+```text
+licenses
+licenses/opencv-3rdparty
+```
+
+runtime 包的 license expression 为 `MIT AND Apache-2.0`：本项目 native wrapper 使用 MIT 许可，OpenCV runtime 使用 Apache-2.0 许可。OpenCV install tree 导出的其他第三方许可证文本会包含在 `licenses/opencv-3rdparty` 下；具体列表取决于 OpenCV 构建配置。
+
+许可证源输入包括仓库 `LICENSE`、OpenCV 源码 `LICENSE`、OpenCV 源码 `3rdparty/ippicv/readme.htm`，以及 OpenCV install `etc/licenses` 目录中的第三方许可证文件。`Stage-Runtime.ps1` 会把这些输入复制到上方所示的生成包布局中。
+
+The staged package should include the primary `JYPPX.OpenCV.Native.dll`, the compatibility loader copy `OpenCv5Sharp.Native.dll` kept stable for already-compiled consumers, and the factual OpenCV 5.0.0 runtime artifacts used by the wrapper. `opencv_videoio500.dll` is required by `VideoCapture`, `VideoWriter`, and `VideoIORegistry`; actual codec support also depends on platform backends such as FFmpeg, GStreamer, Microsoft Media Foundation, DirectShow, AVFoundation, or Android MediaNDK. `opencv_video500.dll` is required by the `OpenCvSharp.Video` motion-analysis APIs, including optical flow, `.flo` optical-flow file IO, mean-shift/CamShift, background subtractors, and `KalmanFilter`. `opencv_highgui500.dll` is required by `OpenCvSharp.HighGui` window/key/property/trackbar/callback helpers and may also require platform GUI dependencies. `opencv_stitching500.dll` is required by `OpenCvSharp.Stitching.Stitcher` for high-level panorama stitching, transform estimation, panorama composition, component/camera output, result masks, and work-scale queries; real panorama success still depends on enough overlapping image content and feature quality. `opencv_ptcloud500.dll` is required by `OpenCvSharp.PtCloud` depth/RGB-D helpers including depth registration, depth-to-3D conversion, frame warping, plane finding, and `RgbdNormals`; real output depends on camera intrinsics, depth units, and input matrix type. `opencv_geometry500.dll`, `opencv_calib500.dll`, `opencv_stereo500.dll`, and `opencv_objdetect500.dll` are required by the current Calib3D package, including `SolvePnP`, `SolvePnPGeneric`, PnP refinement, homography/fundamental/essential matrix estimation, pose recovery, triangulation, rectification maps, full camera/stereo calibration, chessboard/circles-grid detection, calibrated and uncalibrated stereo rectification, `Rectify3Collinear`, camera-matrix utilities, and `StereoBM`. The main ObjDetect package requires `opencv_objdetect500.dll` for QR, barcode, ArUco QR, QR encoder, ArUco dictionary/detector/grid-board/ChArUco, ArUco refine, and MCC checker APIs; its `FaceDetectorYN` and `FaceRecognizerSF` wrappers also require `opencv_dnn500.dll` and user-supplied DNN model files. The `OpenCvSharp.Dnn` package requires `opencv_dnn500.dll` for `Net`, blob helpers, model loading, single and multi-output forward passes, metadata/profile/FLOPS helpers, and real model execution. The Photo package requires `opencv_photo500.dll` for inpainting, single-frame and multi-frame denoising, decolor, seamless/editing, edge-preserving/sketch/stylization, and tonemap APIs. When the OpenCV build includes the optional `features` module, `opencv_features500.dll` is staged as well and enables `ORB`, `SIFT`, `FastFeatureDetector`, `GFTTDetector`, `MSER`, `SimpleBlobDetector`, `BFMatcher`, `FlannBasedMatcher`, `Feature2D` batch detection, and `DescriptorMatcher` base-type workflows. When the contrib `xfeatures2d` module is available, staging also copies `opencv_xfeatures2d500.dll` and enables `BRISK`, `KAZE`, `AKAZE`, plus their typed `AffineFeature` backends. When contrib `xobjdetect` is available, staging copies `opencv_xobjdetect500.dll` and enables `CascadeClassifier` and `HOGDescriptor`. When contrib `quality` is available, staging copies `opencv_quality500.dll` and `opencv_ml500.dll` for `QualityMSE`, `QualityPSNR`, `QualitySSIM`, `QualityGMSD`, and BRISQUE model/range-file scoring. `opencv_ml500.dll` is also required by `OpenCvSharp.ML` for `TrainData`, `ParamGrid`, `KNearest`, `SVM`, and `NormalBayesClassifier`. When contrib `img_hash` is available, staging copies `opencv_img_hash500.dll` and enables `AverageHash`, `PHash`, `BlockMeanHash`, `ColorMomentHash`, `MarrHildrethHash`, `RadialVarianceHash`, and one-shot hash helpers. When contrib `ximgproc` is available, staging copies `opencv_ximgproc500.dll` and enables `OpenCvSharp.XImgProc` local thresholding, thinning, edge-aware filters, superpixels, FastLineDetector, disparity WLS helpers, sparse interpolation, EdgeDrawing, EdgeBoxes, ridge/gradient utilities, Fourier descriptors, run-length morphology, ScanSegment, GraphSegmentation, Selective Search, and covariance estimation; fast bilateral solver calls also depend on EIGEN support in the OpenCV build. When contrib `optflow` is available, staging copies `opencv_optflow500.dll` and enables `OpenCvSharp.OptFlow` dense/sparse flow, RLOF, SparseToDense/SimpleFlow, and motion-template helpers. When contrib `bgsegm` is available, staging copies `opencv_bgsegm500.dll` and enables `BackgroundSubtractorMOG`, `BackgroundSubtractorGMG`, `BackgroundSubtractorCNT`, and `SyntheticSequenceGenerator`. When contrib `tracking` is available, staging copies `opencv_tracking500.dll` and enables modern `TrackerKCF`/`TrackerCSRT`, legacy MOSSE/MIL/MedianFlow, and `MultiTracker`; tracking depends on `opencv_video500.dll`, `opencv_imgproc500.dll`, and `opencv_core500.dll`, while tiny smoke only checks call paths and output shape. When contrib `face` is available, staging copies `opencv_face500.dll` and enables traditional `OpenCvSharp.Face` Eigen/Fisher/LBPH recognizers, `StandardCollector`, `BIF`, `FacemarkLBF`, and `MACE`; facemark real fitting needs caller model/training data. When contrib `saliency` is available, staging copies `opencv_saliency500.dll` and enables `OpenCvSharp.Saliency` static and motion saliency objects plus `ObjectnessBING`; saliency depends on `opencv_imgproc500.dll` and the related `opencv_features500.dll` staged by the local build, and BING real proposals need caller training data. When contrib `xphoto` is available, staging copies `opencv_xphoto500.dll` and enables `WhiteBalancer`, `SimpleWB`, `GrayworldWB`, `LearningBasedWB`, channel gains, DCT/BM3D denoising, and oil painting. `opencv_plot500.dll` is also staged when the contrib `plot` module is built and supports `OpenCvSharp.Plot.Plot2d` render paths. `opencv_shape500.dll` is also staged when the contrib `shape` module is built and supports `OpenCvSharp.Shape` histogram cost and distance extractors. `opencv_line_descriptor500.dll` is also staged when the contrib `line_descriptor` module is built and supports `OpenCvSharp.LineDescriptor` binary descriptor, matcher, and drawing paths. `opencv_phase_unwrapping500.dll` is also staged when the contrib `phase_unwrapping` module is built and supports `OpenCvSharp.PhaseUnwrapping` histogram unwrap and reliability-map paths. `opencv_structured_light500.dll` is also staged when the contrib `structured_light` module is built and supports `OpenCvSharp.StructuredLight` Gray-code and sinusoidal generated-pattern paths. `opencv_intensity_transform500.dll` is also staged when the contrib `intensity_transform` module is built and supports `OpenCvSharp.IntensityTransform` log/gamma/autoscale/contrast/BIMEF paths; BIMEF also depends on OpenCV EIGEN support. `opencv_fuzzy500.dll` is also staged when the contrib `fuzzy` module is built and supports `OpenCvSharp.Fuzzy` kernel, inpaint/filter, and F-transform paths. `opencv_hfs500.dll` is also staged when the contrib `hfs` module is built and supports `OpenCvSharp.Hfs` HFS segmentation paths. `opencv_reg500.dll` is also staged when the contrib `reg` module is built and supports `OpenCvSharp.Reg` map and mapper paths. `opencv_surface_matching500.dll` is also staged when the contrib `surface_matching` module is built and supports `OpenCvSharp.SurfaceMatching` ICP and PPF detector paths. `opencv_rapid500.dll` is also staged when the contrib `rapid` module is built and supports `OpenCvSharp.Rapid` helper and tracker paths.
+
+暂存包应包含主 loader `JYPPX.OpenCV.Native.dll`、为已编译消费者保持稳定的兼容 loader 副本 `OpenCv5Sharp.Native.dll`，以及封装层使用到的事实性 OpenCV 5.0.0 runtime 产物。`VideoCapture`、`VideoWriter` 和 `VideoIORegistry` 需要 `opencv_videoio500.dll`；实际编解码支持还取决于 FFmpeg、GStreamer、Microsoft Media Foundation、DirectShow、AVFoundation 或 Android MediaNDK 等平台后端。`OpenCvSharp.Video` 运动分析 API 需要 `opencv_video500.dll`，包括光流、`.flo` 光流文件读写、mean-shift/CamShift、背景减除器和 `KalmanFilter`。`OpenCvSharp.HighGui` 窗口/key/属性/trackbar/回调辅助需要 `opencv_highgui500.dll`，并可能依赖平台 GUI 组件。`OpenCvSharp.Stitching.Stitcher` 高层全景拼接能力需要 `opencv_stitching500.dll`，包括变换估计、全景合成、component/camera 输出、result mask 和 work scale 查询；真实拼接成功仍取决于图像重叠、特征质量和 OpenCV stitching pipeline。`OpenCvSharp.PtCloud` 深度/RGB-D helper 需要 `opencv_ptcloud500.dll`，包括深度注册、depth-to-3D、frame warp、plane finding 和 `RgbdNormals`；真实输出取决于相机内参、深度单位和输入矩阵类型。当前 Calib3D 能力需要 `opencv_geometry500.dll`、`opencv_calib500.dll`、`opencv_stereo500.dll` 和 `opencv_objdetect500.dll`，包括 `SolvePnP`、`SolvePnPGeneric`、PnP 细化、单应/基础/本质矩阵估计、位姿恢复、三角化、校正映射、完整相机/双目标定、棋盘格/圆点阵列检测、已标定和未标定双目校正、`Rectify3Collinear`、相机矩阵工具和 `StereoBM`。主线 ObjDetect 包需要 `opencv_objdetect500.dll` 来支持二维码、条形码、ArUco 二维码、二维码编码器、ArUco 字典/检测器/网格板/ChArUco、ArUco refine 和 MCC checker API；其中 `FaceDetectorYN` 与 `FaceRecognizerSF` 封装还需要 `opencv_dnn500.dll` 以及用户提供的 DNN 模型文件。`OpenCvSharp.Dnn` 包需要 `opencv_dnn500.dll` 来支持 `Net`、blob 辅助、模型加载、单输出和多输出 forward、元数据/profile/FLOPS helper 和真实模型执行。Photo 包需要 `opencv_photo500.dll` 来支持图像修复、单帧和多帧去噪、decolor、seamless/editing、edge-preserving/sketch/stylization 和 tone mapping API。当 OpenCV 构建包含可选 `features` 模块时，也会暂存 `opencv_features500.dll`，并启用 `ORB`、`SIFT`、`FastFeatureDetector`、`GFTTDetector`、`MSER`、`SimpleBlobDetector`、`BFMatcher`、`FlannBasedMatcher`、`Feature2D` 批量检测和 `DescriptorMatcher` 基类工作流。当 contrib `xfeatures2d` 模块可用时，staging 也会复制 `opencv_xfeatures2d500.dll`，并启用 `BRISK`、`KAZE`、`AKAZE` 及其 typed `AffineFeature` 后端。当 contrib `xobjdetect` 可用时，staging 会复制 `opencv_xobjdetect500.dll`，并启用 `CascadeClassifier` 与 `HOGDescriptor`。当 contrib `quality` 可用时，staging 会复制 `opencv_quality500.dll` 和 `opencv_ml500.dll`，并启用 `QualityMSE`、`QualityPSNR`、`QualitySSIM`、`QualityGMSD` 和 BRISQUE model/range 文件评分。`OpenCvSharp.ML` 也需要 `opencv_ml500.dll` 来支持 `TrainData`、`ParamGrid`、`KNearest`、`SVM` 和 `NormalBayesClassifier`。当 contrib `img_hash` 可用时，staging 会复制 `opencv_img_hash500.dll`，并启用 `AverageHash`、`PHash`、`BlockMeanHash`、`ColorMomentHash`、`MarrHildrethHash`、`RadialVarianceHash` 和一次性 hash helper。当 contrib `ximgproc` 可用时，staging 会复制 `opencv_ximgproc500.dll`，并启用 `OpenCvSharp.XImgProc` 局部阈值、细化、edge-aware filter、超像素、FastLineDetector、disparity WLS helper、稀疏插值、EdgeDrawing、EdgeBoxes、ridge/gradient 工具、Fourier descriptor、run-length morphology、ScanSegment、GraphSegmentation、Selective Search 和 covariance estimation；fast bilateral solver 调用还依赖 OpenCV 构建中的 EIGEN 支持。当 contrib `optflow` 可用时，staging 会复制 `opencv_optflow500.dll`，并启用 `OpenCvSharp.OptFlow` 的 dense/sparse 光流、RLOF、SparseToDense/SimpleFlow 与 motion-template helper。当 contrib `bgsegm` 可用时，staging 会复制 `opencv_bgsegm500.dll`，并启用 `BackgroundSubtractorMOG`、`BackgroundSubtractorGMG`、`BackgroundSubtractorCNT` 和 `SyntheticSequenceGenerator`。当 contrib `tracking` 可用时，staging 会复制 `opencv_tracking500.dll`，并启用 modern `TrackerKCF`/`TrackerCSRT`、legacy MOSSE/MIL/MedianFlow 和 `MultiTracker`；tracking 依赖 `opencv_video500.dll`、`opencv_imgproc500.dll` 和 `opencv_core500.dll`，tiny smoke 只检查调用路径和输出形状。当 contrib `face` 可用时，staging 会复制 `opencv_face500.dll`，并启用 `OpenCvSharp.Face` 传统 Eigen/Fisher/LBPH 识别器、`StandardCollector`、`BIF`、`FacemarkLBF` 和 `MACE`；facemark 真实拟合需要调用方提供模型/训练数据。当 contrib `saliency` 可用时，staging 会复制 `opencv_saliency500.dll`，并启用 `OpenCvSharp.Saliency` 静态/运动显著性对象和 `ObjectnessBING`；saliency 依赖 `opencv_imgproc500.dll` 以及当前本地构建暂存的相关 `opencv_features500.dll`，BING 真实 proposal 需要调用方提供训练数据。当 contrib `xphoto` 可用时，staging 会复制 `opencv_xphoto500.dll`，并启用 `WhiteBalancer`、`SimpleWB`、`GrayworldWB`、`LearningBasedWB`、channel gains、DCT/BM3D 去噪和 oil painting。`opencv_plot500.dll` 也会在构建 contrib `plot` 模块时暂存，并支持 `OpenCvSharp.Plot.Plot2d` 渲染。`opencv_shape500.dll` 也会在构建 contrib `shape` 模块时暂存，并支持 `OpenCvSharp.Shape` 直方图代价和距离提取器。`opencv_line_descriptor500.dll` 也会在构建 contrib `line_descriptor` 模块时暂存，并支持 `OpenCvSharp.LineDescriptor` 二进制描述子、匹配器和绘图路径。构建 contrib `phase_unwrapping` 模块时也会暂存 `opencv_phase_unwrapping500.dll`，并支持 `OpenCvSharp.PhaseUnwrapping` histogram unwrap 与 reliability-map 路径。构建 contrib `structured_light` 模块时也会暂存 `opencv_structured_light500.dll`，并支持 `OpenCvSharp.StructuredLight` Gray-code 与正弦 generated-pattern 路径。构建 contrib `intensity_transform`、`fuzzy`、`hfs`、`reg`、`surface_matching` 和 `rapid` 模块时，也会分别暂存 `opencv_intensity_transform500.dll`、`opencv_fuzzy500.dll`、`opencv_hfs500.dll`、`opencv_reg500.dll`、`opencv_surface_matching500.dll` 和 `opencv_rapid500.dll`，并支持对应的 IntensityTransform、Fuzzy、HFS、Reg、SurfaceMatching 和 Rapid wrapper。
+
+`OpenCvSharp.PhaseUnwrapping` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_phase_unwrapping500.dll` for histogram phase unwrapping and inverse reliability-map output. `OpenCvSharp.StructuredLight` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_structured_light500.dll` for Gray-code and sinusoidal pattern generation plus selected shadow-mask, projector-pixel, phase-map, and data-modulation helpers.
+
+`OpenCvSharp.IntensityTransform` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_intensity_transform500.dll` for log transform, gamma correction, autoscaling, contrast stretching, and BIMEF. BIMEF can still require EIGEN support from the OpenCV build. `OpenCvSharp.Fuzzy` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_fuzzy500.dll` for fuzzy kernels, inpaint/filter helpers, and F0/F1 transform helpers. `OpenCvSharp.Hfs` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_hfs500.dll` for HFS CPU/GPU segmentation wrappers.
+
+`OpenCvSharp.Reg` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_reg500.dll` for registration maps, gradient mappers, and pyramid mapper wrappers. `OpenCvSharp.SurfaceMatching` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_surface_matching500.dll` for ICP and PPF 3D detector wrappers. `OpenCvSharp.Rapid` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_rapid500.dll` for RAPID helper and tracker wrappers. `OpenCvSharp.AlphaMat` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_alphamat500.dll` for information-flow alpha matting. `OpenCvSharp.BioInspired` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_bioinspired500.dll` for Retina, fast tone mapping, and transient segmentation. `OpenCvSharp.XStereo` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_xstereo500.dll` for census descriptors, binary stereo matchers, and quasi-dense stereo.
+
+`OpenCvSharp.XImgProc` is a first-class consumer of the factual OpenCV 5.0.0 runtime artifact `opencv_ximgproc500.dll` for local thresholding, thinning, edge-aware filters, superpixels, FastLineDetector, disparity WLS helpers, sparse interpolation, EdgeDrawing, EdgeBoxes, ridge/gradient utilities, Fourier descriptors, run-length morphology, ScanSegment, GraphSegmentation, Selective Search, and covariance estimation. The same staged DLL can also support related OptFlow algorithms when those paths are used.
+
+`OpenCvSharp.PhaseUnwrapping` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_phase_unwrapping500.dll` 的一等使用方，用于 histogram phase unwrapping 和 inverse reliability-map 输出。`OpenCvSharp.StructuredLight` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_structured_light500.dll` 的一等使用方，用于 Gray-code 与正弦图案生成，以及部分 shadow-mask、projector-pixel、phase-map 和 data-modulation helper。
+
+`OpenCvSharp.IntensityTransform` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_intensity_transform500.dll` 的一等使用方，用于 log transform、gamma correction、autoscaling、contrast stretching 和 BIMEF；BIMEF 仍可能需要 OpenCV 构建启用 EIGEN。`OpenCvSharp.Fuzzy` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_fuzzy500.dll` 的一等使用方，用于 fuzzy kernel、inpaint/filter helper 和 F0/F1 transform helper。`OpenCvSharp.Hfs` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_hfs500.dll` 的一等使用方，用于 HFS CPU/GPU 分割 wrapper。
+
+`OpenCvSharp.Reg` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_reg500.dll` 的一等使用方，用于 registration map、gradient mapper 和 pyramid mapper wrapper。`OpenCvSharp.SurfaceMatching` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_surface_matching500.dll` 的一等使用方，用于 ICP 与 PPF 3D detector wrapper。`OpenCvSharp.Rapid` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_rapid500.dll` 的一等使用方，用于 RAPID helper 与 tracker wrapper。`OpenCvSharp.AlphaMat` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_alphamat500.dll` 的一等使用方，用于 information-flow alpha matting。`OpenCvSharp.BioInspired` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_bioinspired500.dll` 的一等使用方，用于 Retina、fast tone mapping 和 transient segmentation。`OpenCvSharp.XStereo` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_xstereo500.dll` 的一等使用方，用于 census descriptor、binary stereo matcher 和 quasi-dense stereo。
+
+`OpenCvSharp.XImgProc` 是事实性 OpenCV 5.0.0 runtime 产物 `opencv_ximgproc500.dll` 的一等使用方，覆盖局部阈值、细化、edge-aware filter、超像素、FastLineDetector、disparity WLS helper、稀疏插值、EdgeDrawing、EdgeBoxes、ridge/gradient 工具、Fourier descriptor、run-length morphology、ScanSegment、GraphSegmentation、Selective Search 和 covariance estimation。同一个已暂存 DLL 也可在相关 OptFlow 算法路径中被复用。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_features500.dll` is not present, the managed API shape remains stable, but feature APIs throw a clear `OpenCvException` with a `NOT_LINKED` message.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_features500.dll`，managed API 形状仍保持稳定，但特征 API 会抛出带有明确 `NOT_LINKED` 信息的 `OpenCvException`。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_features500.dll` is present but the factual OpenCV 5.0.0 runtime artifact `opencv_xfeatures2d500.dll` is not present, `BRISK`, `KAZE`, and `AKAZE` keep the same managed API shape and report the same defined `NOT_LINKED` boundary.
+
+如果存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_features500.dll` 但不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_xfeatures2d500.dll`，`BRISK`、`KAZE` 和 `AKAZE` 仍保持相同 managed API 形状，并返回同样明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_xobjdetect500.dll` is not present, `CascadeClassifier` and `HOGDescriptor` keep the same managed API shape and report the defined `NOT_LINKED` boundary.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_xobjdetect500.dll`，`CascadeClassifier` 和 `HOGDescriptor` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_stitching500.dll` is not present, `OpenCvSharp.Stitching.Stitcher` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_stitching500.dll`，`OpenCvSharp.Stitching.Stitcher` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_ptcloud500.dll` is not present, `OpenCvSharp.PtCloud` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_ptcloud500.dll`，`OpenCvSharp.PtCloud` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_quality500.dll` or its factual OpenCV 5.0.0 runtime artifact dependency `opencv_ml500.dll` is not present, `OpenCvSharp.Quality` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. BRISQUE scoring still requires user-provided model and range files.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_quality500.dll` 或其事实性 OpenCV 5.0.0 runtime 产物依赖 `opencv_ml500.dll`，`OpenCvSharp.Quality` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。BRISQUE 评分仍需要用户提供 model 和 range 文件。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_ml500.dll` is not present, `OpenCvSharp.ML` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_ml500.dll`，`OpenCvSharp.ML` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_img_hash500.dll` is not present, `OpenCvSharp.ImgHash` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_img_hash500.dll`，`OpenCvSharp.ImgHash` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_ximgproc500.dll` is not present, `OpenCvSharp.XImgProc` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Tiny smoke checks shape and call paths only; real quality depends on input type, scale, and algorithm parameters across filters, Fourier descriptors, RLE morphology, segmentation, Selective Search, and covariance estimation. `FastBilateralSolverFilter` can also be unavailable when OpenCV was built without EIGEN support, even when the factual OpenCV 5.0.0 runtime artifact `opencv_ximgproc500.dll` is present.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_ximgproc500.dll`，`OpenCvSharp.XImgProc` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。tiny smoke 只检查形状和调用路径；filter、Fourier descriptor、RLE morphology、segmentation、Selective Search 和 covariance estimation 的真实质量取决于输入类型、尺度和算法参数。即使存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_ximgproc500.dll`，当 OpenCV 未启用 EIGEN 支持时，`FastBilateralSolverFilter` 也可能不可用。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_optflow500.dll` is not present, `OpenCvSharp.OptFlow` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Dense flow outputs are commonly `CV_32FC2`; tiny smoke checks shape and call paths only.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_optflow500.dll`，`OpenCvSharp.OptFlow` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。密集光流输出常见为 `CV_32FC2`；tiny smoke 只检查形状和调用路径。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_bgsegm500.dll` is not present, `OpenCvSharp.BgSegm` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Background modeling needs a frame sequence; tiny smoke does not imply stable segmentation quality.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_bgsegm500.dll`，`OpenCvSharp.BgSegm` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。背景建模需要帧序列；tiny smoke 不代表稳定分割质量。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_tracking500.dll` is not present, `OpenCvSharp.Tracking` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Tiny tracker smoke proves only call-path and output shape.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_tracking500.dll`，`OpenCvSharp.Tracking` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。tiny tracker smoke 只证明调用路径和输出形状。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_face500.dll` is not present, `OpenCvSharp.Face` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Traditional recognizers need grayscale, same-size training images; FacemarkLBF real fitting needs caller-supplied model/training data and a cascade XML path for training-sample detection; MACE real quality depends on same-size caller examples.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_face500.dll`，`OpenCvSharp.Face` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。传统识别器需要灰度、同尺寸训练图像；FacemarkLBF 真实拟合需要调用方提供模型/训练数据，并为训练样本检测提供 cascade XML 路径；MACE 真实质量取决于调用方提供的同尺寸样本。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_saliency500.dll` is not present, `OpenCvSharp.Saliency` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. `ObjectnessBING` is included, but real proposal computation needs caller-supplied BING training data paths.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_saliency500.dll`，`OpenCvSharp.Saliency` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。`ObjectnessBING` 已纳入封装，但真实 proposal 计算需要调用方提供 BING 训练数据路径。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_alphamat500.dll`, the factual OpenCV 5.0.0 runtime artifact `opencv_bioinspired500.dll`, or the factual OpenCV 5.0.0 runtime artifact `opencv_xstereo500.dll` is not present, `OpenCvSharp.AlphaMat`, `OpenCvSharp.BioInspired`, and `OpenCvSharp.XStereo` keep the same managed API shape and report the defined `NOT_LINKED` boundary. Tiny smoke checks generated image/trimap/frame/stereo-pair call paths and output shape only.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_alphamat500.dll`、事实性 OpenCV 5.0.0 runtime 产物 `opencv_bioinspired500.dll` 或事实性 OpenCV 5.0.0 runtime 产物 `opencv_xstereo500.dll`，`OpenCvSharp.AlphaMat`、`OpenCvSharp.BioInspired` 和 `OpenCvSharp.XStereo` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。tiny smoke 只检查生成图像、trimap、帧和 stereo pair 的调用路径与输出形状。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_xphoto500.dll` is not present, `OpenCvSharp.XPhoto` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_xphoto500.dll`，`OpenCvSharp.XPhoto` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_plot500.dll` is not present, `OpenCvSharp.Plot` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. OpenCV 5.0.0 `Plot2d` expects `CV_64FC1` input vectors and clamps small render sizes to at least 400 by 300 pixels.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_plot500.dll`，`OpenCvSharp.Plot` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。OpenCV 5.0.0 `Plot2d` 期望 `CV_64FC1` 输入向量，并会把较小渲染尺寸夹到至少 400 x 300 像素。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_shape500.dll` is not present, `OpenCvSharp.Shape` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Tiny smoke checks call paths and output shape only; real matching quality depends on caller descriptors, signatures, and contours.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_shape500.dll`，`OpenCvSharp.Shape` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。tiny smoke 只检查调用路径和输出形状；真实匹配质量取决于调用方构造的 descriptors、signatures 与 contours。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_line_descriptor500.dll` is not present, `OpenCvSharp.LineDescriptor` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary for linked binary descriptor, matcher, and drawing calls.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_line_descriptor500.dll`，`OpenCvSharp.LineDescriptor` 仍保持相同 managed API 形状，并在 linked 二进制描述子、匹配器和绘图调用上返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_phase_unwrapping500.dll` is not present, `OpenCvSharp.PhaseUnwrapping` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary for linked histogram phase-unwrapping calls.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_phase_unwrapping500.dll`，`OpenCvSharp.PhaseUnwrapping` 仍保持相同 managed API 形状，并在 linked histogram phase-unwrapping 调用上返回定义明确的 `NOT_LINKED` 边界。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_structured_light500.dll` is not present, `OpenCvSharp.StructuredLight` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary for linked Gray-code and sinusoidal pattern calls. Real projector-camera workflows need caller-captured pattern images.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_structured_light500.dll`，`OpenCvSharp.StructuredLight` 仍保持相同 managed API 形状，并在 linked Gray-code 和正弦图案调用上返回定义明确的 `NOT_LINKED` 边界。真实投影仪-相机工作流需要调用方采集的图案图像。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_intensity_transform500.dll` is not present, `OpenCvSharp.IntensityTransform` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. `Bimef` can also report an Eigen-required OpenCV exception when the factual OpenCV 5.0.0 runtime artifact is present but OpenCV was built without EIGEN.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_intensity_transform500.dll`，`OpenCvSharp.IntensityTransform` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。当事实性 OpenCV 5.0.0 runtime 产物存在但 OpenCV 未启用 EIGEN 时，`Bimef` 也可能返回需要 Eigen 的 OpenCV 异常。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_fuzzy500.dll` is not present, `OpenCvSharp.Fuzzy` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Tiny smoke checks call paths and output shape only.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_fuzzy500.dll`，`OpenCvSharp.Fuzzy` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。tiny smoke 只检查调用路径和输出形状。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_hfs500.dll` is not present, `OpenCvSharp.Hfs` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Default smoke uses CPU segmentation only; GPU segmentation depends on the local OpenCV runtime build.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_hfs500.dll`，`OpenCvSharp.Hfs` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。默认 smoke 只使用 CPU 分割；GPU 分割取决于本地 OpenCV runtime 构建。
+
+If the factual OpenCV 5.0.0 runtime artifact `opencv_reg500.dll`, the factual OpenCV 5.0.0 runtime artifact `opencv_surface_matching500.dll`, or the factual OpenCV 5.0.0 runtime artifact `opencv_rapid500.dll` is not present, the corresponding `OpenCvSharp.Reg`, `OpenCvSharp.SurfaceMatching`, or `OpenCvSharp.Rapid` namespace keeps the same managed API shape and reports the defined `NOT_LINKED` boundary. Tiny SurfaceMatching and Rapid smoke data may also hit OpenCV assertion or numeric boundaries because the real algorithms expect richer geometry.
+
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_reg500.dll`、事实性 OpenCV 5.0.0 runtime 产物 `opencv_surface_matching500.dll` 或事实性 OpenCV 5.0.0 runtime 产物 `opencv_rapid500.dll`，对应的 `OpenCvSharp.Reg`、`OpenCvSharp.SurfaceMatching` 或 `OpenCvSharp.Rapid` 命名空间仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。SurfaceMatching 与 Rapid 的 tiny smoke 数据也可能触发 OpenCV 断言或数值边界，因为真实算法通常需要更丰富的几何输入。

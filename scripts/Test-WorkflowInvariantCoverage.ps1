@@ -1,0 +1,182 @@
+param(
+    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+$repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
+$aggregateScriptToken = "scripts/Test-ProjectInvariants.ps1"
+
+function Get-RepositoryRelativePath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path
+    )
+
+    return ([System.IO.Path]::GetRelativePath($repo, $Path)) -replace "\\", "/"
+}
+
+function Add-Violation {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations,
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [int]$Line = 0,
+        [Parameter(Mandatory = $true)]
+        [string]$Issue,
+        [string]$Text = ""
+    )
+
+    $Violations.Add([pscustomobject]@{
+        Path = $Path
+        Line = $Line
+        Issue = $Issue
+        Text = $Text.Trim()
+    })
+}
+
+function Read-RequiredText {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$RelativePath
+    )
+
+    $path = Join-Path $repo $RelativePath
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "Required CI/release gate surface was not found: $RelativePath"
+    }
+
+    return [System.IO.File]::ReadAllText($path)
+}
+
+function Normalize-CiText {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Text
+    )
+
+    return $Text.Replace("\", "/")
+}
+
+function Get-TokenIndex {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Text,
+        [Parameter(Mandatory = $true)]
+        [string]$Token
+    )
+
+    $normalizedText = Normalize-CiText -Text $Text
+    $normalizedToken = (Normalize-CiText -Text $Token).TrimStart("./".ToCharArray())
+    return $normalizedText.IndexOf($normalizedToken, [System.StringComparison]::OrdinalIgnoreCase)
+}
+
+function Assert-ContainsAggregateGate {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations,
+        [Parameter(Mandatory = $true)]
+        [string]$RelativePath,
+        [Parameter(Mandatory = $true)]
+        [string]$Text
+    )
+
+    $gateIndex = Get-TokenIndex -Text $Text -Token $aggregateScriptToken
+    if ($gateIndex -lt 0) {
+        Add-Violation `
+            -Violations $Violations `
+            -Path $RelativePath `
+            -Issue "Workflow or PR surface must reference $aggregateScriptToken"
+    }
+
+    return $gateIndex
+}
+
+$violations = [System.Collections.Generic.List[object]]::new()
+
+$workflowRequirements = @(
+    [pscustomobject]@{
+        Path = ".github/workflows/build-managed.yml"
+        MustRunBefore = @("dotnet restore", "dotnet build", "dotnet test")
+    },
+    [pscustomobject]@{
+        Path = ".github/workflows/pack.yml"
+        MustRunBefore = @("dotnet restore", "dotnet build", "scripts/Pack-Managed.ps1", "scripts/Pack-Runtime.ps1")
+    },
+    [pscustomobject]@{
+        Path = ".github/workflows/docs.yml"
+        MustRunBefore = @("dotnet restore", "dotnet build", "docfx ./docs/docfx.json", "upload-pages-artifact", "path: docs/_site")
+    },
+    [pscustomobject]@{
+        Path = ".github/workflows/build-native.yml"
+        MustRunBefore = @("cmakeArgs = @(", "& `$cmakeExe @cmakeArgs", "cmake --build", "ctest --test-dir")
+    }
+)
+
+foreach ($requirement in $workflowRequirements) {
+    $text = Read-RequiredText -RelativePath $requirement.Path
+    $gateIndex = Assert-ContainsAggregateGate -Violations $violations -RelativePath $requirement.Path -Text $text
+
+    if ($gateIndex -ge 0) {
+        if ((Get-TokenIndex -Text $text -Token "Check project invariants") -lt 0) {
+            Add-Violation `
+                -Violations $violations `
+                -Path $requirement.Path `
+                -Issue "Workflow invariant step should be named 'Check project invariants'"
+        }
+
+        foreach ($token in $requirement.MustRunBefore) {
+            $tokenIndex = Get-TokenIndex -Text $text -Token $token
+            if ($tokenIndex -ge 0 -and $gateIndex -gt $tokenIndex) {
+                Add-Violation `
+                    -Violations $violations `
+                    -Path $requirement.Path `
+                    -Issue "Project invariant gate must run before '$token'"
+            }
+        }
+    }
+}
+
+$prTemplateText = Read-RequiredText -RelativePath ".github/pull_request_template.md"
+[void](Assert-ContainsAggregateGate -Violations $violations -RelativePath ".github/pull_request_template.md" -Text $prTemplateText)
+
+$fixedMajorReleaseSurfaceRegex = [System.Text.RegularExpressions.Regex]::new(
+    "OpenCv5Sharp|opencv5sharp|OpenCV-CSharp-API-opencv5\.x",
+    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+
+$githubPath = Join-Path $repo ".github"
+$githubFiles = Get-ChildItem -LiteralPath $githubPath -Recurse -File |
+    Where-Object { $_.Extension -in @(".yml", ".yaml", ".md") } |
+    Sort-Object FullName
+
+foreach ($file in $githubFiles) {
+    $relativePath = Get-RepositoryRelativePath -Path $file.FullName
+    $lineNumber = 0
+    foreach ($line in [System.IO.File]::ReadLines($file.FullName)) {
+        $lineNumber++
+        if ($fixedMajorReleaseSurfaceRegex.IsMatch($line)) {
+            Add-Violation `
+                -Violations $violations `
+                -Path $relativePath `
+                -Line $lineNumber `
+                -Issue "GitHub workflow, PR, issue, and release surfaces must not use fixed-major project identities" `
+                -Text $line
+        }
+    }
+}
+
+if ($violations.Count -gt 0) {
+    Write-Host "Workflow invariant coverage guard failed with $($violations.Count) violation(s)."
+    $violations |
+        Sort-Object Path, Line, Issue |
+        Format-Table Path, Line, Issue, Text -AutoSize
+    exit 1
+}
+
+Write-Host "Workflow invariant coverage guard passed."
+Write-Host "Workflow gates checked: $($workflowRequirements.Count)."
+Write-Host "GitHub surface files scanned: $($githubFiles.Count)."

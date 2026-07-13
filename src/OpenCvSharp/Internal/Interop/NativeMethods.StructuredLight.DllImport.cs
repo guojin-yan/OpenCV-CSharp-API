@@ -1,0 +1,49 @@
+#if !NET7_0_OR_GREATER
+using System;
+using System.Runtime.InteropServices;
+
+namespace OpenCvSharp.Internal.Interop
+{
+    internal static unsafe partial class NativeMethods
+    {
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_gray_code_pattern_create")]
+        internal static extern int StructuredLightGrayCodePatternCreate(int width, int height, out IntPtr pattern);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_sinusoidal_pattern_create")]
+        internal static extern int StructuredLightSinusoidalPatternCreate(int width, int height, int nbrOfPeriods, float shiftValue, int methodId, int nbrOfPixelsBetweenMarkers, int horizontal, int setMarkers, NativeStructuredLightPoint2f* markers, int markerCount, out IntPtr pattern);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_pattern_release")]
+        internal static extern void StructuredLightPatternRelease(IntPtr pattern);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_pattern_generate_count")]
+        internal static extern int StructuredLightPatternGenerateCount(IntPtr pattern, out int imageCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_pattern_generate_fill")]
+        internal static extern int StructuredLightPatternGenerateFill(IntPtr pattern, IntPtr* images, int imageCapacity, out int imageCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_gray_code_pattern_get_number_of_pattern_images")]
+        internal static extern int StructuredLightGrayCodePatternGetNumberOfPatternImages(IntPtr pattern, out int imageCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_gray_code_pattern_set_white_threshold")]
+        internal static extern int StructuredLightGrayCodePatternSetWhiteThreshold(IntPtr pattern, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_gray_code_pattern_set_black_threshold")]
+        internal static extern int StructuredLightGrayCodePatternSetBlackThreshold(IntPtr pattern, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_gray_code_pattern_get_images_for_shadow_masks")]
+        internal static extern int StructuredLightGrayCodePatternGetImagesForShadowMasks(IntPtr pattern, IntPtr blackImage, IntPtr whiteImage);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_gray_code_pattern_get_proj_pixel")]
+        internal static extern int StructuredLightGrayCodePatternGetProjPixel(IntPtr pattern, IntPtr* patternImages, int imageCount, int x, int y, out int found, out int projX, out int projY);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_sinusoidal_pattern_compute_phase_map")]
+        internal static extern int StructuredLightSinusoidalPatternComputePhaseMap(IntPtr pattern, IntPtr* patternImages, int imageCount, IntPtr wrappedPhaseMap, IntPtr shadowMask, IntPtr fundamental);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_sinusoidal_pattern_unwrap_phase_map")]
+        internal static extern int StructuredLightSinusoidalPatternUnwrapPhaseMap(IntPtr pattern, IntPtr wrappedPhaseMap, IntPtr unwrappedPhaseMap, int camWidth, int camHeight, IntPtr shadowMask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_structured_light_sinusoidal_pattern_compute_data_modulation_term")]
+        internal static extern int StructuredLightSinusoidalPatternComputeDataModulationTerm(IntPtr pattern, IntPtr* patternImages, int imageCount, IntPtr dataModulationTerm, IntPtr shadowMask);
+    }
+}
+#endif

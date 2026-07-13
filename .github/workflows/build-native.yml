@@ -1,0 +1,49 @@
+name: build-native
+
+on:
+  workflow_dispatch:
+    inputs:
+      opencv_version:
+        description: OpenCV version to package
+        required: true
+        default: 5.0.0
+      opencv_dir:
+        description: Optional OpenCVConfig.cmake directory for a linked native build
+        required: false
+        default: ""
+      build_list:
+        description: Optional OpenCV main-module build list label for future packaging runs
+        required: false
+        default: "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud"
+jobs:
+  configure:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-22.04, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Configure native ABI shell
+        shell: pwsh
+        run: |
+          $cmakeArgs = @(
+            '-S', 'src/OpenCvSharp.Native',
+            '-B', 'build/native',
+            "-DOPENCV_VERSION=${{ inputs.opencv_version }}",
+            "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=${{ inputs.build_list }}"
+          )
+
+          if (-not [string]::IsNullOrWhiteSpace('${{ inputs.opencv_dir }}')) {
+            $cmakeArgs += "-DOPENCV_CSHARP_OPENCV_DIR=${{ inputs.opencv_dir }}"
+          }
+
+          Write-Host "Requested build list: ${{ inputs.build_list }}"
+          $cmakeExe = 'cmake'
+          & $cmakeExe @cmakeArgs
+      - name: Build native ABI shell
+        run: cmake --build build/native --config Release
+      - name: Test native ABI shell
+        run: ctest --test-dir build/native -C Release --output-on-failure

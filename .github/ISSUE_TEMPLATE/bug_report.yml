@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened?
+    validations:
+      required: true
+  - type: input
+    id: managed_package_version
+    attributes:
+      label: Managed package version
+      description: Version of JYPPX.OpenCV.CSharp.API.
+      placeholder: JYPPX.OpenCV.CSharp.API 5.0.0.0
+  - type: input
+    id: runtime_package_version
+    attributes:
+      label: Runtime package version
+      description: Runtime package ID and version, if a native runtime package is installed. Use JYPPX.OpenCV.runtime.<rid> for the target RID when available; the placeholder is the current Windows x64 example. If no matching runtime package is available yet, include the local native runtime path from Build-OpenCV.ps1 / Stage-Runtime.ps1 and any OpenCvNativeRuntimeDir value used. See docs/articles/linked-runtime-build-guide.md and docs/articles/linked-runtime-smoke-guide.md.
+      placeholder: JYPPX.OpenCV.runtime.win-x64 5.0.0.0
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Minimal code or steps to reproduce.
+    validations:
+      required: true
+  - type: input
+    id: framework
+    attributes:
+      label: Target framework
+      placeholder: net8.0
+  - type: input
+    id: os
+    attributes:
+      label: OS / RID
+      placeholder: Windows 11 / win-x64

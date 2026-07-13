@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="10.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\OpenCvSharp\OpenCvSharp.csproj" />
+  </ItemGroup>
+
+  <!-- OpenCvNativeRuntimeDir is the version-neutral runtime copy property; OpenCv5SharpNativeRuntimeDir remains only as an existing-test-build-script compatibility alias. -->
+  <PropertyGroup>
+    <OpenCvNativeRuntimeDir Condition="'$(OpenCvNativeRuntimeDir)' == '' and '$(OpenCv5SharpNativeRuntimeDir)' != ''">$(OpenCv5SharpNativeRuntimeDir)</OpenCvNativeRuntimeDir><!-- compatibility alias bridge -->
+  </PropertyGroup>
+
+  <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">
+    <ItemGroup>
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\*.dll" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(OpenCvNativeRuntimeFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
+  </Target>
+</Project>

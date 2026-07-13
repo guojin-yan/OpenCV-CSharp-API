@@ -1,0 +1,32 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using VideoCv2 = OpenCvSharp.Video.Cv2;
+
+namespace OpenCvSharp.Tests.Video
+{
+    public sealed class MotionTemplateTests
+    {
+        [Fact]
+        public void MotionTemplateApiIsNotExposedWhenLocalOpenCvPublicHeadersDoNotDeclareIt()
+        {
+            string[] motionTemplateNames =
+            {
+                "UpdateMotionHistory",
+                "CalcMotionGradient",
+                "CalcGlobalOrientation",
+                "SegmentMotion"
+            };
+
+            string[] publicMethodNames = typeof(VideoCv2)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Select(method => method.Name)
+                .ToArray();
+
+            for (int i = 0; i < motionTemplateNames.Length; i++)
+            {
+                Assert.DoesNotContain(motionTemplateNames[i], publicMethodNames);
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest a new wrapper, module, or workflow improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this feature useful?
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: Proposed API
+      description: Include the matching OpenCV C++ API when possible.
+  - type: dropdown
+    id: module
+    attributes:
+      label: OpenCV module
+      options:
+        - core
+        - imgproc
+        - imgcodecs
+        - highgui
+        - videoio
+        - calib3d
+        - features2d
+        - dnn
+        - contrib
+        - other
+

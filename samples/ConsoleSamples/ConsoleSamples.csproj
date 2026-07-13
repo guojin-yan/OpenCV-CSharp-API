@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\OpenCvSharp\OpenCvSharp.csproj" />
+  </ItemGroup>
+
+  <!-- OpenCvNativeRuntimeDir is the version-neutral runtime copy property; OpenCv5SharpNativeRuntimeDir remains only as an existing-sample-build-script compatibility alias. -->
+  <PropertyGroup>
+    <OpenCvNativeRuntimeDir Condition="'$(OpenCvNativeRuntimeDir)' == '' and '$(OpenCv5SharpNativeRuntimeDir)' != ''">$(OpenCv5SharpNativeRuntimeDir)</OpenCvNativeRuntimeDir><!-- compatibility alias bridge -->
+  </PropertyGroup>
+
+  <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">
+    <ItemGroup>
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\*.dll" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(OpenCvNativeRuntimeFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
+  </Target>
+</Project>

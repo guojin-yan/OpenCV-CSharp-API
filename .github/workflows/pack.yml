@@ -1,0 +1,76 @@
+name: pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      opencv_version:
+        description: OpenCV version aligned with package version
+        required: true
+        default: 5.0.0
+      package_revision:
+        description: Package revision for this OpenCV version
+        required: true
+        default: "0"
+      rid:
+        description: Runtime identifier to pack; win-x64 is the current default until additional runtime package projects and release artifacts exist
+        required: true
+        default: win-x64
+      publish_github_packages:
+        description: Publish packages to GitHub Packages
+        required: true
+        default: "false"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  pack:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
+      - name: Restore
+        run: dotnet restore .\OpenCV-CSharp-API.slnx
+      - name: Build
+        run: dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
+      - name: Pack managed API
+        shell: pwsh
+        run: |
+          $packageRevision = [int]'${{ inputs.package_revision }}'
+          pwsh -NoProfile -File .\scripts\Pack-Managed.ps1 `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -PackageRevision $packageRevision `
+            -NoBuild `
+            -NoRestore
+      - name: Pack runtime shell
+        shell: pwsh
+        run: |
+          $packageRevision = [int]'${{ inputs.package_revision }}'
+          pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 `
+            -Rid '${{ inputs.rid }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -PackageRevision $packageRevision `
+            -NoBuild `
+            -NoRestore
+      - name: Upload NuGet packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: artifacts/packages/*.nupkg
+      - name: Publish to GitHub Packages
+        if: inputs.publish_github_packages == 'true'
+        shell: pwsh
+        run: |
+          dotnet nuget push .\artifacts\packages\*.nupkg `
+            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
+            --api-key "${{ secrets.GITHUB_TOKEN }}" `
+            --skip-duplicate

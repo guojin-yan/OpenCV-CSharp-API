@@ -1,0 +1,55 @@
+# Contributing / 贡献指南
+
+Thanks for helping build OpenCV CSharp API.
+
+感谢参与 OpenCV CSharp API 项目。
+
+## Development Rules / 开发规则
+
+- Keep all public managed APIs under the `OpenCvSharp` namespace.
+- Keep fixed-major public managed names out of current APIs; `OpenCv5SharpBuildInfo` is the only documented/tested existing-caller compatibility facade.
+- Keep samples, docs, and snippets on `OpenCvSharp.*`, `JYPPX.OpenCV.*`, and `OPENCV_CSHARP_*`; fixed-major names in consumer-facing files must be explicitly labelled as compatibility or legacy aliases.
+- Keep install commands neutral-first: `dotnet add package JYPPX.OpenCV.CSharp.API --version <four-part-version>` plus the matching `JYPPX.OpenCV.runtime.<rid>` runtime package on the same four-part package version metadata.
+- When install snippets show `JYPPX.OpenCV.runtime.win-x64`, label it as the current Windows x64 example and also mention choosing `JYPPX.OpenCV.runtime.<rid>` for the consumer's target RID when available; it is not the only supported runtime package.
+- For availability docs, do not describe future RID packages as published until a package project and release artifact exist; if no matching runtime package is available yet, point consumers to the local native runtime fallback using `Build-OpenCV.ps1`, `Stage-Runtime.ps1`, `OpenCvNativeRuntimeDir`, and `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
+- Keep sample/test local runtime copy targets on `OpenCvNativeRuntimeDir`; `OpenCv5SharpNativeRuntimeDir` may appear only as an explicit compatibility alias bridge for existing build scripts, and copy-target dry-runs must use synthetic DLLs outside project `bin`/`obj`.
+- Keep runtime package docs cross-linked across README, Quick Start, linked runtime build/smoke guides, smoke profiles, runtime licenses, issue templates, and runtime package README files so users can find package selection, fallback, validation, and license guidance without treating `win-x64` as the only/final package identity.
+- Keep package metadata version-neutral: managed package ID and assembly name stay `JYPPX.OpenCV.CSharp.API`, runtime package IDs stay `JYPPX.OpenCV.runtime.<rid>`, and OpenCV runtime identity belongs in package versions.
+- Keep release package artifact labels neutral: package output stays under `artifacts/packages`, workflow uploads use `nupkg`, and `.nupkg` filenames are derived from neutral package IDs plus package version metadata.
+- Keep managed package artifact dry-runs isolated: use temporary target framework, build output, restore cache, and package output paths, then verify the neutral nuspec, root README, and `lib/net8.0` assembly without creating repo `bin`/`obj` or package outputs.
+- Keep standalone managed package consumer dry-runs isolated: restore/build temporary consumers from a local package source with only `JYPPX.OpenCV.CSharp.API`, compile representative managed API references across core and selected module namespaces, and avoid requiring runtime packages or native assets for compile-only usage.
+- Keep pack-stage dry-runs isolated: `Pack-Runtime.ps1 -StageRuntime` must forward the selected runtime project directory and `StageOutputRoot` to staging, package from temporary inputs when tested, and avoid creating repo runtime/package mirrors.
+- Keep local runtime package consumer dry-runs isolated: restore/build temporary consumers from local package sources and temporary NuGet caches, verify RID native assets are selected, and remove all consumer/package outputs afterwards.
+- Keep managed/runtime package-pair dry-runs version-aligned: temporary consumers must reference `JYPPX.OpenCV.CSharp.API` and `JYPPX.OpenCV.runtime.<rid>` with matching four-part package version metadata and isolated build/cache outputs.
+- Keep pack workflow release availability honest: the `rid` input may default to the current default `win-x64`, but workflow/release docs must say it is not a multi-RID release matrix until additional runtime package projects and release artifacts exist.
+- Keep DocFX configuration and generated API documentation surfaces on `OpenCvSharp.*`, `src/OpenCvSharp/OpenCvSharp.csproj`, `docs/api`, and `docs/_site`.
+- Keep managed, pack, docs, and native CI workflows wired to `scripts/Test-ProjectInvariants.ps1` before restore, build, pack, DocFX, or CMake work begins.
+- Keep new generic build variables, package metadata, and docs version-neutral unless they describe a concrete runtime fact.
+- Keep new repository paths version-neutral; only the generated `src/OpenCvSharp.Native/include/open_cv_5_sharp` compatibility include tree may keep a fixed-major path name.
+- Keep fixed-version source/install/cache path text explicitly labelled as factual, upstream, cache, fallback, or compatibility context.
+- Keep runtime packages and staging scripts neutral-first: `JYPPX.OpenCV.runtime.<rid>` and `JYPPX.OpenCV.Native.dll` are primary, while `OpenCv5Sharp.Native.dll` is only an explicit compatibility copy.
+- Keep C# public API names close to OpenCV C++ names while following .NET naming conventions.
+- Do not copy source code from OpenCvSharp, Emgu CV, or other projects.
+- Do not use top-level statements in applications, samples, tests, or tools.
+- Add bilingual XML documentation for public APIs.
+- Keep old framework compatibility and modern .NET fast paths separated with conditional compilation or partial implementations.
+- Keep managed P/Invoke declarations on `NativeLibraryNames.CurrentNativeLibrary` with neutral `jyppx_ocv_*` entry points.
+
+## Native ABI / Native 接口
+
+- Export primary C functions with the version-neutral `jyppx_ocv_` prefix.
+- Keep the generated `jyppx_ocv5_` forwarding ABI only for already-compiled binaries and existing native source includes.
+- Catch all C++ exceptions at the native boundary.
+- Use opaque handles for C++ objects.
+- Avoid exposing STL types across the C ABI.
+
+## Tests / 测试
+
+Before submitting a pull request, run:
+
+```powershell
+pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
+dotnet restore .\OpenCV-CSharp-API.slnx
+dotnet build .\OpenCV-CSharp-API.slnx -c Release
+dotnet test .\OpenCV-CSharp-API.slnx -c Release --no-build
+```

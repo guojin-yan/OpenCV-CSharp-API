@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+[*.{cs,csx}]
+dotnet_sort_system_directives_first = true
+dotnet_style_qualification_for_event = false:suggestion
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+csharp_style_namespace_declarations = file_scoped:suggestion
+csharp_style_prefer_top_level_statements = false:error
+csharp_prefer_braces = true:suggestion
+
+[*.{csproj,props,targets,xml,yml,json,md}]
+indent_size = 2
+

@@ -1,0 +1,52 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-docs:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
+      - name: Restore
+        run: dotnet restore .\OpenCV-CSharp-API.slnx
+      - name: Build managed API
+        run: dotnet build .\src\OpenCvSharp\OpenCvSharp.csproj -c Release --no-restore
+      - name: Install docfx
+        run: dotnet tool update -g docfx
+      - name: Build docfx site
+        run: docfx .\docs\docfx.json
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_site
+
+  deploy-pages:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    needs: build-docs
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
