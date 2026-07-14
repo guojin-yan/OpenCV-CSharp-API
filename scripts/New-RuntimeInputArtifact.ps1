@@ -58,6 +58,22 @@ function Get-RuntimeMatrix {
     return Get-Content -LiteralPath $matrixCandidate -Raw | ConvertFrom-Json
 }
 
+function Get-OptionalStringProperty {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$InputObject,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    $property = $InputObject.PSObject.Properties[$Name]
+    if ($null -eq $property -or $null -eq $property.Value) {
+        return ""
+    }
+
+    return [string]$property.Value
+}
+
 function Test-WindowsRid {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
     return $RuntimeIdentifier.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
@@ -147,6 +163,8 @@ if ($profileSpec.Count -eq 0) {
     throw "Runtime profile '$RuntimeProfile' was not found in runtime package matrix."
 }
 
+$ridDefinition = $ridSpec[0]
+$profileDefinition = $profileSpec[0]
 $nativeRuntimePath = Resolve-InputDirectory -Name "NativeRuntimeDir" -Value $NativeRuntimeDir
 $openCvRuntimePath = Resolve-InputDirectory -Name "OpenCvRuntimeDir" -Value $OpenCvRuntimeDir
 $openCvSourcePath = Resolve-InputDirectory -Name "OpenCvSourceDir" -Value $OpenCvSourceDir
@@ -258,8 +276,14 @@ if (-not [string]::IsNullOrWhiteSpace($openCvInstallPath)) {
 $manifest = [ordered]@{
     SchemaVersion = 1
     Rid = $Rid
-    OpenCvRid = [string]$ridSpec[0].opencvRid
+    OpenCvRid = [string]$ridDefinition.opencvRid
+    PlatformFamily = Get-OptionalStringProperty -InputObject $ridDefinition -Name "platformFamily"
+    Distro = Get-OptionalStringProperty -InputObject $ridDefinition -Name "distro"
+    DistroVersion = Get-OptionalStringProperty -InputObject $ridDefinition -Name "distroVersion"
+    MatrixRunner = Get-OptionalStringProperty -InputObject $ridDefinition -Name "runner"
     RuntimeProfile = $RuntimeProfile
+    RuntimeProfilePackageIdSuffix = Get-OptionalStringProperty -InputObject $profileDefinition -Name "packageIdSuffix"
+    BuildList = Get-OptionalStringProperty -InputObject $profileDefinition -Name "buildList"
     OpenCvVersion = $OpenCvVersion
     SyntheticRuntimeInputs = $false
     ArtifactLayout = [ordered]@{
@@ -268,7 +292,7 @@ $manifest = [ordered]@{
         OpenCvSource = "opencv-source"
         OpenCvInstall = if ([string]::IsNullOrWhiteSpace($openCvInstallPath)) { "" } else { "opencv-install" }
     }
-    RequiredModules = @($profileSpec.modules)
+    RequiredModules = @($profileDefinition.modules)
     InputRoots = [ordered]@{
         NativeRuntimeDir = $nativeRuntimePath
         OpenCvRuntimeDir = $openCvRuntimePath

@@ -9,6 +9,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $producerWorkflowPath = ".github/workflows/runtime-input.yml"
 $runtimeInputScriptPath = "scripts/New-RuntimeInputArtifact.ps1"
 $packWorkflowPath = ".github/workflows/pack.yml"
+$runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
 $readmePath = "README.md"
 $linkedRuntimeBuildGuidePath = "docs/articles/linked-runtime-build-guide.md"
 $versionNeutralGuidePath = "docs/articles/version-neutral-naming-guide.md"
@@ -120,11 +121,181 @@ function Write-FixtureFile {
     [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
 }
 
+function Convert-YamlScalar {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Value
+    )
+
+    $trimmed = ($Value -replace "\s+#.*$", "").Trim()
+    if ($trimmed.Length -ge 2) {
+        $first = $trimmed[0]
+        $last = $trimmed[$trimmed.Length - 1]
+        if (($first -eq '"' -and $last -eq '"') -or ($first -eq "'" -and $last -eq "'")) {
+            return $trimmed.Substring(1, $trimmed.Length - 2)
+        }
+    }
+
+    return $trimmed
+}
+
+function Get-RuntimeInputProducerTargets {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Text
+    )
+
+    $targets = [System.Collections.Generic.List[object]]::new()
+    $lines = [System.Text.RegularExpressions.Regex]::Split($Text, "\r?\n")
+    $inProduceJob = $false
+    $current = $null
+
+    for ($index = 0; $index -lt $lines.Count; $index++) {
+        $line = $lines[$index]
+
+        if (-not $inProduceJob) {
+            if ($line -match "^\s{2}produce:\s*$") {
+                $inProduceJob = $true
+            }
+
+            continue
+        }
+
+        if ($line -match "^\s{2}[A-Za-z0-9_-]+:\s*$" -and
+            $line -notmatch "^\s{2}produce:\s*$") {
+            break
+        }
+
+        if ($line -match "^\s{10}-\s+rid:\s*(.+?)\s*$") {
+            if ($null -ne $current) {
+                $targets.Add($current)
+            }
+
+            $current = [pscustomobject]@{
+                Rid = Convert-YamlScalar -Value $Matches[1]
+                Profile = ""
+                Runner = ""
+            }
+            continue
+        }
+
+        if ($null -ne $current) {
+            if ($line -match "^\s{12}profile:\s*(.+?)\s*$") {
+                $current.Profile = Convert-YamlScalar -Value $Matches[1]
+                continue
+            }
+
+            if ($line -match "^\s{12}os:\s*(.+?)\s*$") {
+                $current.Runner = Convert-YamlScalar -Value $Matches[1]
+                continue
+            }
+        }
+    }
+
+    if ($null -ne $current) {
+        $targets.Add($current)
+    }
+
+    return @($targets)
+}
+
+function Assert-RealProducerTargets {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations,
+        [Parameter(Mandatory = $true)]
+        [string]$ProducerWorkflowText,
+        [Parameter(Mandatory = $true)]
+        [string]$ProducerWorkflowPath,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeMatrixText,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeMatrixPath
+    )
+
+    $expectedTargets = @(
+        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04" },
+        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04" }
+    )
+    $expectedByKey = @{}
+    foreach ($target in $expectedTargets) {
+        $expectedByKey["$($target.Rid)|$($target.Profile)"] = $target
+    }
+
+    $workflowTargets = @(Get-RuntimeInputProducerTargets -Text $ProducerWorkflowText)
+    if ($workflowTargets.Count -eq 0) {
+        Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow must declare explicit real producer target matrix entries"
+        return
+    }
+
+    $seenByKey = @{}
+    foreach ($target in $workflowTargets) {
+        $key = "$($target.Rid)|$($target.Profile)"
+        if ([string]::IsNullOrWhiteSpace([string]$target.Rid) -or
+            [string]::IsNullOrWhiteSpace([string]$target.Profile) -or
+            [string]::IsNullOrWhiteSpace([string]$target.Runner)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Every real producer target must declare rid, profile, and os" -Text "$key|$($target.Runner)"
+            continue
+        }
+
+        if ($seenByKey.ContainsKey($key)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow contains duplicate real producer target $key" -Text $target.Runner
+            continue
+        }
+
+        $seenByKey[$key] = $target
+        if (-not $expectedByKey.ContainsKey($key)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow advertises unsupported real producer target" -Text "$key on $($target.Runner)"
+            continue
+        }
+
+        $expected = $expectedByKey[$key]
+        if (-not ([string]$target.Runner).Equals([string]$expected.Runner, [System.StringComparison]::Ordinal)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow target runner must match the approved real producer host" -Text "$key workflow=$($target.Runner); expected=$($expected.Runner)"
+        }
+    }
+
+    foreach ($expected in $expectedTargets) {
+        $key = "$($expected.Rid)|$($expected.Profile)"
+        if (-not $seenByKey.ContainsKey($key)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow is missing approved real producer target $key" -Text $expected.Runner
+        }
+    }
+
+    $matrix = $RuntimeMatrixText | ConvertFrom-Json
+    foreach ($target in $expectedTargets) {
+        $ridSpec = @($matrix.rids | Where-Object { $_.rid -eq $target.Rid } | Select-Object -First 1)
+        if ($ridSpec.Count -eq 0) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved real producer target RID is missing from runtime package matrix" -Text $target.Rid
+            continue
+        }
+
+        if (-not ([string]$ridSpec[0].runner).Equals($target.Runner, [System.StringComparison]::Ordinal)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved real producer runner must match runtime package matrix runner" -Text "$($target.Rid): producer=$($target.Runner); matrix=$($ridSpec[0].runner)"
+        }
+
+        if (-not ([string]$ridSpec[0].platformFamily).Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must remain a Linux runtime package RID" -Text $target.Rid
+        }
+
+        if (-not ([string]$ridSpec[0].distro).Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Current real producer target may only claim Ubuntu distro-native coverage" -Text $target.Rid
+        }
+
+        $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $target.Profile } | Select-Object -First 1)
+        if ($profileSpec.Count -eq 0) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved real producer target profile is missing from runtime package matrix" -Text $target.Profile
+        }
+    }
+}
+
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $producerWorkflowText = Read-RequiredText -RelativePath $producerWorkflowPath
 $runtimeInputScriptText = Read-RequiredText -RelativePath $runtimeInputScriptPath
 $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowPath
+$runtimeMatrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $readmeText = Read-RequiredText -RelativePath $readmePath
 $linkedRuntimeBuildGuideText = Read-RequiredText -RelativePath $linkedRuntimeBuildGuidePath
 $versionNeutralGuideText = Read-RequiredText -RelativePath $versionNeutralGuidePath
@@ -134,8 +305,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "workflow_dispatch:"; Issue = "Producer workflow must be manually dispatched until real build cost is proven" },
         [pscustomobject]@{ Needle = "default: ubuntu.24.04-x64"; Issue = "Producer workflow must start with the first real Ubuntu 24.04 x64 target" },
         [pscustomobject]@{ Needle = "default: full"; Issue = "Producer workflow must start with the full profile until mini linked-component support is split" },
+        [pscustomobject]@{ Needle = "validate-target:"; Issue = "Producer workflow must reject unsupported real producer targets before matrix work starts" },
+        [pscustomobject]@{ Needle = "runs-on: `${{ matrix.os }}"; Issue = "Producer workflow must run real target builds on the target matrix runner" },
+        [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
-        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
+        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full and runtime-input-ubuntu.22.04-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
@@ -144,10 +318,17 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "cmake --build build/native-linked"; Issue = "Producer workflow must build the linked native wrapper" },
         [pscustomobject]@{ Needle = "ctest --test-dir build/native-linked"; Issue = "Producer workflow must test the linked native wrapper" },
         [pscustomobject]@{ Needle = "./scripts/New-RuntimeInputArtifact.ps1"; Issue = "Producer workflow must assemble the agreed handoff layout" },
-        [pscustomobject]@{ Needle = 'runtime-input-${{ inputs.rid }}-${{ inputs.runtime_profile }}'; Issue = "Producer workflow must upload neutral runtime-input artifact names" },
-        [pscustomobject]@{ Needle = 'artifacts/runtime-inputs/${{ inputs.rid }}-${{ inputs.runtime_profile }}'; Issue = "Producer workflow must upload the agreed runtime-input layout root" })) {
+        [pscustomobject]@{ Needle = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Issue = "Producer workflow must upload neutral runtime-input artifact names" },
+        [pscustomobject]@{ Needle = 'artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}'; Issue = "Producer workflow must upload the agreed runtime-input layout root" })) {
     Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle $required.Needle -Issue $required.Issue
 }
+
+Assert-RealProducerTargets `
+    -Violations $violations `
+    -ProducerWorkflowText $producerWorkflowText `
+    -ProducerWorkflowPath $producerWorkflowPath `
+    -RuntimeMatrixText $runtimeMatrixText `
+    -RuntimeMatrixPath $runtimeMatrixPath
 
 Assert-TextOrder -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Earlier "Build OpenCV runtime" -Later "Configure linked native wrapper" -Issue "Producer workflow must build OpenCV before configuring the linked native wrapper"
 Assert-TextOrder -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Earlier "Build linked native wrapper" -Later "Create runtime input artifact layout" -Issue "Producer workflow must build native wrapper before assembling the artifact"
@@ -165,6 +346,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "opencv-install"; Issue = "Runtime input artifact script must create optional opencv-install layout" },
         [pscustomobject]@{ Needle = "SyntheticRuntimeInputs = `$false"; Issue = "Runtime input artifact provenance must mark produced handoff as non-synthetic" },
         [pscustomobject]@{ Needle = "runtime-input.provenance.json"; Issue = "Runtime input artifact script must write handoff provenance" },
+        [pscustomobject]@{ Needle = "PlatformFamily = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record platform family from the runtime matrix" },
+        [pscustomobject]@{ Needle = "Distro = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record distro from the runtime matrix" },
+        [pscustomobject]@{ Needle = "DistroVersion = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record distro version from the runtime matrix" },
+        [pscustomobject]@{ Needle = "MatrixRunner = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the matrix runner from the runtime matrix" },
+        [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = '"Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers'; Issue = "Runtime input artifact script must keep compatibility loader explicitly scoped" },
         [pscustomobject]@{ Needle = "OpenCV source LICENSE was not found"; Issue = "Runtime input artifact script must require OpenCV source license evidence" },
@@ -183,6 +369,7 @@ foreach ($doc in @(
     foreach ($needle in @(
             '`runtime-input.yml`',
             '`runtime-input-ubuntu.24.04-x64-full`',
+            '`runtime-input-ubuntu.22.04-x64-full`',
             '`runtime-input-<rid>-<profile>`',
             '`native-wrapper/`',
             '`opencv-runtime/`',
@@ -218,32 +405,54 @@ if ($violations.Count -eq 0) {
             Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir "libopencv_$module.so.5.0.0")
         }
 
-        & (Join-Path $repo $runtimeInputScriptPath) `
-            -Rid "ubuntu.24.04-x64" `
-            -RuntimeProfile "full" `
-            -OpenCvVersion "5.0.0" `
-            -NativeRuntimeDir $fixtureNativeDir `
-            -OpenCvRuntimeDir $fixtureRuntimeDir `
-            -OpenCvSourceDir $fixtureSourceDir `
-            -OpenCvInstallDir $fixtureInstallDir `
-            -OutputRoot $fixtureOutputRoot
+        foreach ($producerTarget in @(Get-RuntimeInputProducerTargets -Text $producerWorkflowText)) {
+            & (Join-Path $repo $runtimeInputScriptPath) `
+                -Rid ([string]$producerTarget.Rid) `
+                -RuntimeProfile ([string]$producerTarget.Profile) `
+                -OpenCvVersion "5.0.0" `
+                -NativeRuntimeDir $fixtureNativeDir `
+                -OpenCvRuntimeDir $fixtureRuntimeDir `
+                -OpenCvSourceDir $fixtureSourceDir `
+                -OpenCvInstallDir $fixtureInstallDir `
+                -OutputRoot $fixtureOutputRoot
 
-        $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "ubuntu.24.04-x64-full") "runtime-input.provenance.json"
-        if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
-            throw "Fixture runtime input provenance was not written: $manifestPath"
-        }
+            $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "$($producerTarget.Rid)-$($producerTarget.Profile)") "runtime-input.provenance.json"
+            if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
+                throw "Fixture runtime input provenance was not written: $manifestPath"
+            }
 
-        $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-        if ($manifest.SyntheticRuntimeInputs -ne $false) {
-            throw "Fixture provenance did not mark SyntheticRuntimeInputs=false."
-        }
+            $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+            if ($manifest.SyntheticRuntimeInputs -ne $false) {
+                throw "Fixture provenance did not mark SyntheticRuntimeInputs=false for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
 
-        if (@($manifest.NativeLoaderFiles).Count -lt 2) {
-            throw "Fixture provenance did not include both native loader files."
-        }
+            if (-not ([string]$manifest.PlatformFamily).Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Fixture provenance did not record linux PlatformFamily for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
 
-        if (@($manifest.RuntimeFiles).Count -lt @($fullProfile[0].modules).Count) {
-            throw "Fixture provenance did not include the full runtime module set."
+            if (-not ([string]$manifest.Distro).Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Fixture provenance did not record ubuntu Distro for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if ([string]::IsNullOrWhiteSpace([string]$manifest.DistroVersion)) {
+                throw "Fixture provenance did not record DistroVersion for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if (-not ([string]$manifest.MatrixRunner).Equals([string]$producerTarget.Runner, [System.StringComparison]::Ordinal)) {
+                throw "Fixture provenance MatrixRunner did not match producer target runner for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if ([string]::IsNullOrWhiteSpace([string]$manifest.BuildList)) {
+                throw "Fixture provenance did not record BuildList for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if (@($manifest.NativeLoaderFiles).Count -lt 2) {
+                throw "Fixture provenance did not include both native loader files for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if (@($manifest.RuntimeFiles).Count -lt @($fullProfile[0].modules).Count) {
+                throw "Fixture provenance did not include the full runtime module set for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
         }
     }
     catch {
@@ -265,5 +474,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "First producer artifact: runtime-input-ubuntu.24.04-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

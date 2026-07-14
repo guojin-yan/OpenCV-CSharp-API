@@ -8,11 +8,11 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: First real producer target; currently ubuntu.24.04-x64 only
+        description: Real producer target; currently ubuntu.24.04-x64 or ubuntu.22.04-x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
-        description: First real producer profile; currently full only
+        description: Real producer profile; currently full only
         required: true
         default: full
 
@@ -20,47 +20,76 @@ permissions:
   contents: read
 
 jobs:
-  produce:
+  validate-target:
     runs-on: ubuntu-24.04
     steps:
+      - name: Validate real producer target
+        shell: pwsh
+        run: |
+          $supportedTargets = @(
+            'ubuntu.24.04-x64/full',
+            'ubuntu.22.04-x64/full'
+          )
+          $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
+          if ($supportedTargets -notcontains $selectedTarget) {
+            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full and runtime-input-ubuntu.22.04-x64-full. Mini and non-Ubuntu distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+          }
+
+  produce:
+    needs: validate-target
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: ubuntu.24.04-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: ubuntu.22.04-x64
+            profile: full
+            os: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Skip unmatched producer target
+        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
+        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
       - uses: actions/checkout@v4
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
       - uses: actions/setup-dotnet@v4
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         with:
           dotnet-version: |
             10.0.x
             9.0.x
             8.0.x
       - name: Check project invariants
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
-      - name: Validate first real producer target
-        shell: pwsh
-        run: |
-          if ('${{ inputs.rid }}' -ne 'ubuntu.24.04-x64' -or '${{ inputs.runtime_profile }}' -ne 'full') {
-            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full. Mini and additional distro RIDs need a separate linked-component producer step before being advertised as real runtime inputs."
-          }
       - name: Install native build tools
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         run: |
           sudo apt-get update
           sudo apt-get install -y ninja-build
       - name: Resolve runtime profile build list
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: profile
         shell: pwsh
         run: |
           $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
-          $rid = @($matrix.rids | Where-Object { $_.rid -eq '${{ inputs.rid }}' } | Select-Object -First 1)
+          $rid = @($matrix.rids | Where-Object { $_.rid -eq '${{ matrix.rid }}' } | Select-Object -First 1)
           if ($rid.Count -eq 0) {
-            throw "Runtime RID was not found: ${{ inputs.rid }}"
+            throw "Runtime RID was not found: ${{ matrix.rid }}"
           }
 
-          $profile = @($matrix.profiles | Where-Object { $_.name -eq '${{ inputs.runtime_profile }}' } | Select-Object -First 1)
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq '${{ matrix.profile }}' } | Select-Object -First 1)
           if ($profile.Count -eq 0) {
-            throw "Runtime profile was not found: ${{ inputs.runtime_profile }}"
+            throw "Runtime profile was not found: ${{ matrix.profile }}"
           }
 
           "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
           "opencv_rid=$($rid[0].opencvRid)" >> $env:GITHUB_OUTPUT
       - name: Fetch OpenCV source
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: |
           $sourceRoot = Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'
@@ -68,6 +97,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
           git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv.git $sourceDir
       - name: Build OpenCV runtime
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         env:
           CMAKE_BUILD_PARALLEL_LEVEL: 2
@@ -76,10 +106,11 @@ jobs:
           pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -WorkspaceRoot $workspaceRoot `
-            -Rid '${{ inputs.rid }}' `
+            -Rid '${{ matrix.rid }}' `
             -BuildList '${{ steps.profile.outputs.build_list }}' `
             -Build
       - name: Configure linked native wrapper
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
@@ -96,10 +127,13 @@ jobs:
             "-DOPENCV_CSHARP_OPENCV_DIR=$openCvDir" `
             "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=${{ steps.profile.outputs.build_list }}"
       - name: Build linked native wrapper
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         run: cmake --build build/native-linked --config Release
       - name: Test linked native wrapper
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         run: ctest --test-dir build/native-linked -C Release --output-on-failure
       - name: Create runtime input artifact layout
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
@@ -108,8 +142,8 @@ jobs:
           $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
 
           pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 `
-            -Rid '${{ inputs.rid }}' `
-            -RuntimeProfile '${{ inputs.runtime_profile }}' `
+            -Rid '${{ matrix.rid }}' `
+            -RuntimeProfile '${{ matrix.profile }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -NativeRuntimeDir ./build/native-linked `
             -OpenCvRuntimeDir $openCvRuntimeDir `
@@ -117,8 +151,9 @@ jobs:
             -OpenCvInstallDir $openCvInstallDir `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload runtime input artifact
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         uses: actions/upload-artifact@v4
         with:
-          name: runtime-input-${{ inputs.rid }}-${{ inputs.runtime_profile }}
-          path: artifacts/runtime-inputs/${{ inputs.rid }}-${{ inputs.runtime_profile }}
+          name: runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
           if-no-files-found: error
