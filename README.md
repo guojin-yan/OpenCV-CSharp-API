@@ -40,6 +40,10 @@ runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。矩�
 
 `pack.yml` 当前不会构建真实 runtime 输入；当 `validate_synthetic_runtime=false` 时，真实输入路径必须已经存在于 selected runner，或来自 `real_runtime_artifact_run_id`；该 run 必须包含中性的 `runtime-input-<rid>-<profile>` artifact，并带有 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 与可选 `opencv-install/` 目录。synthetic runtime inputs 只用于 package-surface validation；真实可发布 runtime 包必须带有 `SyntheticRuntimeInputs=false` provenance 并通过 release preflight。
 
+`runtime-input.yml` is the first real producer workflow for that handoff. It currently produces only `runtime-input-linux-x64-full`: it fetches factual OpenCV source, builds OpenCV, links/tests `JYPPX.OpenCV.Native`, and uploads the agreed `runtime-input-<rid>-<profile>` layout. Mini and additional RID producers stay disabled until their linked-component boundaries are implemented and verified.
+
+`runtime-input.yml` 是该 handoff 的第一条真实 producer workflow。当前它只生产 `runtime-input-linux-x64-full`：它会获取事实性 OpenCV 源码、构建 OpenCV、链接并测试 `JYPPX.OpenCV.Native`，然后上传约定的 `runtime-input-<rid>-<profile>` layout。mini 和其它 RID producer 会保持禁用，直到对应 linked-component 边界完成并通过验证。
+
 Naming policy: package IDs, managed assembly, public namespaces, project paths, and primary native loader stay version-neutral. The current packaged OpenCV runtime identity is expressed through package version metadata and factual runtime filenames. `OpenCv5Sharp.Native.dll` and `jyppx_ocv5_*` remain only as explicit compatibility contracts for already-compiled consumers.
 
 命名策略：包 ID、managed 程序集、公开命名空间、项目路径和主 native loader 都保持版本中立。当前打包的 OpenCV runtime 身份通过 package version 元数据和事实性 runtime 文件名表达。`OpenCv5Sharp.Native.dll` 与 `jyppx_ocv5_*` 仅作为供已编译消费者使用的明确兼容契约保留。
@@ -133,6 +137,8 @@ The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the con
 
 For real non-synthetic workflow runs, `native_runtime_dir`, `opencv_runtime_dir`, and `opencv_source_dir` are existing directories on the selected runner unless `real_runtime_artifact_run_id` is provided. With artifact handoff, `pack.yml` downloads `runtime-input-<rid>-<profile>` into `artifacts/real-runtime-inputs/<rid>-<profile>` and resolves `native-wrapper/`, `opencv-runtime/`, `opencv-source/`, and optional `opencv-install/` before packaging. The workflow validates resolved paths before packaging but does not build them.
 
+To try the first producer/consumer chain, dispatch `runtime-input.yml` with `rid=linux-x64` and `runtime_profile=full`, then dispatch `pack.yml` with `rid=linux-x64`, `runtime_profile=full`, `validate_synthetic_runtime=false`, `publish_github_packages=false`, and `real_runtime_artifact_run_id=<runtime-input-run-id>`.
+
 ```powershell
 pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0 -StageRuntime -OpenCvNativeRuntimeDir ./build/native-opencv-core/Release
 ```
@@ -158,6 +164,8 @@ The pack scripts derive the four-part package version from `-OpenCvVersion` plus
 pack workflow 暴露 `rid` 与 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也可以选择单个 RID/profile 做定向打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，先用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts，再用 `Test-GitHubPackConsumerRestoreSurface.ps1` 针对同一批下载产物验证 consumer restore/build。默认仅使用 synthetic runtime inputs 验证 package surface，并在启用 synthetic inputs 时拒绝发布。
 
 对于真实 non-synthetic workflow run，除非提供 `real_runtime_artifact_run_id`，否则 `native_runtime_dir`、`opencv_runtime_dir` 和 `opencv_source_dir` 必须是 selected runner 上已存在的目录。使用 artifact handoff 时，`pack.yml` 会把 `runtime-input-<rid>-<profile>` 下载到 `artifacts/real-runtime-inputs/<rid>-<profile>`，并解析 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 和可选 `opencv-install/` 后再打包。workflow 会在打包前验证解析后的路径，但不会构建这些路径。
+
+要试跑第一条 producer/consumer 链路，请先 dispatch `runtime-input.yml`，使用 `rid=linux-x64` 和 `runtime_profile=full`；然后 dispatch `pack.yml`，使用 `rid=linux-x64`、`runtime_profile=full`、`validate_synthetic_runtime=false`、`publish_github_packages=false` 和 `real_runtime_artifact_run_id=<runtime-input-run-id>`。
 
 Absolute `-ProjectPath` and `-RuntimeProject` values are accepted as-is and can point outside the repository when the caller chooses that layout.
 

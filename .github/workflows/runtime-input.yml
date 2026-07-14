@@ -1,0 +1,118 @@
+name: runtime-input
+
+on:
+  workflow_dispatch:
+    inputs:
+      opencv_version:
+        description: OpenCV version used for real runtime input production
+        required: true
+        default: 5.0.0
+      rid:
+        description: First real producer target; currently linux-x64 only
+        required: true
+        default: linux-x64
+      runtime_profile:
+        description: First real producer profile; currently full only
+        required: true
+        default: full
+
+permissions:
+  contents: read
+
+jobs:
+  produce:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Validate first real producer target
+        shell: pwsh
+        run: |
+          if ('${{ inputs.rid }}' -ne 'linux-x64' -or '${{ inputs.runtime_profile }}' -ne 'full') {
+            throw "runtime-input.yml currently produces only runtime-input-linux-x64-full. Mini and additional RIDs need a separate linked-component producer step before being advertised as real runtime inputs."
+          }
+      - name: Install native build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+      - name: Resolve runtime profile build list
+        id: profile
+        shell: pwsh
+        run: |
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq '${{ inputs.runtime_profile }}' } | Select-Object -First 1)
+          if ($profile.Count -eq 0) {
+            throw "Runtime profile was not found: ${{ inputs.runtime_profile }}"
+          }
+
+          "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
+      - name: Fetch OpenCV source
+        shell: pwsh
+        run: |
+          $sourceRoot = Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'
+          $sourceDir = Join-Path $sourceRoot "opencv-${{ inputs.opencv_version }}"
+          New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv.git $sourceDir
+      - name: Build OpenCV runtime
+        shell: pwsh
+        env:
+          CMAKE_BUILD_PARALLEL_LEVEL: 2
+        run: |
+          $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
+          pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -WorkspaceRoot $workspaceRoot `
+            -Rid '${{ inputs.rid }}' `
+            -BuildList '${{ steps.profile.outputs.build_list }}' `
+            -Build
+      - name: Configure linked native wrapper
+        shell: pwsh
+        run: |
+          $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
+          $openCvDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-linux-x64/lib/cmake/opencv5"
+          if (-not (Test-Path -LiteralPath (Join-Path $openCvDir 'OpenCVConfig.cmake') -PathType Leaf)) {
+            throw "OpenCVConfig.cmake was not found for linked native wrapper build: $openCvDir"
+          }
+
+          cmake `
+            -S src/OpenCvSharp.Native `
+            -B build/native-linked `
+            -G Ninja `
+            "-DOPENCV_VERSION=${{ inputs.opencv_version }}" `
+            "-DOPENCV_CSHARP_OPENCV_DIR=$openCvDir" `
+            "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=${{ steps.profile.outputs.build_list }}"
+      - name: Build linked native wrapper
+        run: cmake --build build/native-linked --config Release
+      - name: Test linked native wrapper
+        run: ctest --test-dir build/native-linked -C Release --output-on-failure
+      - name: Create runtime input artifact layout
+        shell: pwsh
+        run: |
+          $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
+          $openCvInstallDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-linux-x64"
+          $openCvRuntimeDir = Join-Path $openCvInstallDir 'lib'
+          $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
+
+          pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 `
+            -Rid '${{ inputs.rid }}' `
+            -RuntimeProfile '${{ inputs.runtime_profile }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -NativeRuntimeDir ./build/native-linked `
+            -OpenCvRuntimeDir $openCvRuntimeDir `
+            -OpenCvSourceDir $openCvSourceDir `
+            -OpenCvInstallDir $openCvInstallDir `
+            -OutputRoot ./artifacts/runtime-inputs
+      - name: Upload runtime input artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-input-${{ inputs.rid }}-${{ inputs.runtime_profile }}
+          path: artifacts/runtime-inputs/${{ inputs.rid }}-${{ inputs.runtime_profile }}
+          if-no-files-found: error

@@ -150,6 +150,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Real runtime input producer surface"
+        Script = Join-Path $repo "scripts/Test-RealRuntimeInputProducerSurface.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime package local consumer restore"
         Script = Join-Path $repo "scripts/Test-RuntimePackageLocalConsumerRestore.ps1"
         Arguments = @("-RepositoryRoot", $repo)
