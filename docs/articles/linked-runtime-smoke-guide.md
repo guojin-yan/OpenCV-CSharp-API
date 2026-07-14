@@ -8,6 +8,10 @@ Run linked smoke with the managed package `JYPPX.OpenCV.CSharp.API` and the matc
 
 运行 linked smoke 时，managed 主包 `JYPPX.OpenCV.CSharp.API` 与匹配的 full `JYPPX.OpenCV.runtime.<rid>` 或 mini `JYPPX.OpenCV.runtime.<rid>.mini` 包应使用相同的四段 package version 元数据。请选择被测 target RID/profile 对应的 runtime 包。
 
+Linux package smoke should use distro-specific Linux RID package IDs such as `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`, `JYPPX.OpenCV.runtime.ubuntu.24.04-x64`, `JYPPX.OpenCV.runtime.debian.12-x64`, or `JYPPX.OpenCV.runtime.alpine.3.20-x64`; do not substitute generic `linux-x64` package IDs for distro-built runtime outputs. For external consumer projects, configure `RuntimeIdentifierGraphPath` to `packaging/runtime/runtime-distro-rid-graph.json` or an equivalent copied graph before restore when the selected distro RID is project-defined.
+
+Linux package smoke 应使用 distro-specific Linux RID package ID，例如 `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`、`JYPPX.OpenCV.runtime.ubuntu.24.04-x64`、`JYPPX.OpenCV.runtime.debian.12-x64` 或 `JYPPX.OpenCV.runtime.alpine.3.20-x64`；不要用通用 `linux-x64` package ID 替代按发行版构建的 runtime 输出。外部 consumer project 使用项目自定义 distro RID 时，如果 SDK 默认不认识所选 RID，请在 restore 前把 `RuntimeIdentifierGraphPath` 指向 `packaging/runtime/runtime-distro-rid-graph.json` 或复制后的等效 graph。
+
 If no matching runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then run linked smoke with `OpenCvNativeRuntimeDir` pointing at that local native output.
 
 如果 no matching runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后用 `OpenCvNativeRuntimeDir` 指向该本地 native 输出运行 linked smoke。

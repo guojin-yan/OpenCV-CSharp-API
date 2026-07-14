@@ -12,13 +12,17 @@ Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. Full
 
 runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。full package 使用 `JYPPX.OpenCV.runtime.<rid>`，mini package 使用 `JYPPX.OpenCV.runtime.<rid>.mini`。如果 no matching runtime package is available yet，请使用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后在本地构建中使用 `OpenCvNativeRuntimeDir`，或用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
 
+Linux runtime packages use distro-specific Linux RID package IDs, for example `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`, `JYPPX.OpenCV.runtime.ubuntu.24.04-x64`, `JYPPX.OpenCV.runtime.debian.12-x64`, and `JYPPX.OpenCV.runtime.alpine.3.20-x64`; they are not generic `linux-x64` packages. External consumers using these project-defined distro RIDs should set `RuntimeIdentifierGraphPath` to `packaging/runtime/runtime-distro-rid-graph.json` or an equivalent copied RID graph before restore when the .NET SDK does not recognize the selected RID.
+
+Linux runtime package 使用 distro-specific Linux RID package ID，例如 `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`、`JYPPX.OpenCV.runtime.ubuntu.24.04-x64`、`JYPPX.OpenCV.runtime.debian.12-x64` 和 `JYPPX.OpenCV.runtime.alpine.3.20-x64`；它们不是通用 `linux-x64` 包。外部 consumer 使用这些项目自定义 distro RID 时，如果 .NET SDK 默认不认识所选 RID，应在 restore 前把 `RuntimeIdentifierGraphPath` 指向 `packaging/runtime/runtime-distro-rid-graph.json`，或指向复制到 consumer project 的等效 RID graph。
+
 For deeper runtime setup, fallback, smoke, and license details, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
 更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 ```powershell
 dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0.0
-dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0.0
+dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0.0 # current example package; replace win-x64 with your target RID package
 ```
 
 Keep the managed and runtime packages on the same four-part package version metadata; the package IDs and public namespace stay version-neutral.

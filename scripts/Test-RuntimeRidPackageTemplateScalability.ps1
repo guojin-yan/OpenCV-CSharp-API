@@ -107,6 +107,209 @@ function Assert-Matches {
     }
 }
 
+function Convert-YamlScalar {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Value
+    )
+
+    $trimmed = ($Value -replace "\s+#.*$", "").Trim()
+    if ($trimmed.Length -ge 2) {
+        $first = $trimmed[0]
+        $last = $trimmed[$trimmed.Length - 1]
+        if (($first -eq '"' -and $last -eq '"') -or ($first -eq "'" -and $last -eq "'")) {
+            return $trimmed.Substring(1, $trimmed.Length - 2)
+        }
+    }
+
+    return $trimmed
+}
+
+function Get-PackWorkflowRuntimeMatrixEntries {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Text
+    )
+
+    $entries = [System.Collections.Generic.List[object]]::new()
+    $lines = [System.Text.RegularExpressions.Regex]::Split($Text, "\r?\n")
+    $inPackRuntimeJob = $false
+    $current = $null
+
+    for ($index = 0; $index -lt $lines.Count; $index++) {
+        $line = $lines[$index]
+        $lineNumber = $index + 1
+
+        if (-not $inPackRuntimeJob) {
+            if ($line -match "^\s{2}pack-runtime:\s*$") {
+                $inPackRuntimeJob = $true
+            }
+
+            continue
+        }
+
+        if ($line -match "^\s{2}[A-Za-z0-9_-]+:\s*$" -and
+            $line -notmatch "^\s{2}pack-runtime:\s*$") {
+            break
+        }
+
+        if ($line -match "^\s{10}-\s+rid:\s*(.+?)\s*$") {
+            if ($null -ne $current) {
+                $entries.Add($current)
+            }
+
+            $current = [pscustomobject]@{
+                Rid = Convert-YamlScalar -Value $Matches[1]
+                Profile = ""
+                Runner = ""
+                Line = $lineNumber
+            }
+            continue
+        }
+
+        if ($null -ne $current) {
+            if ($line -match "^\s{12}profile:\s*(.+?)\s*$") {
+                $current.Profile = Convert-YamlScalar -Value $Matches[1]
+                continue
+            }
+
+            if ($line -match "^\s{12}os:\s*(.+?)\s*$") {
+                $current.Runner = Convert-YamlScalar -Value $Matches[1]
+                continue
+            }
+        }
+    }
+
+    if ($null -ne $current) {
+        $entries.Add($current)
+    }
+
+    return @($entries)
+}
+
+function Assert-PackWorkflowRuntimeMatrixMatchesJson {
+    param(
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeMatrixText,
+        [Parameter(Mandatory = $true)]
+        [string]$PackWorkflowText,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeMatrixPath,
+        [Parameter(Mandatory = $true)]
+        [string]$PackWorkflowPath
+    )
+
+    $matrix = $RuntimeMatrixText | ConvertFrom-Json
+    $expectedByKey = [System.Collections.Generic.Dictionary[string, object]]::new([System.StringComparer]::Ordinal)
+    $seenByKey = [System.Collections.Generic.Dictionary[string, object]]::new([System.StringComparer]::Ordinal)
+
+    foreach ($ridSpec in @($matrix.rids)) {
+        $rid = [string]$ridSpec.rid
+        $runner = [string]$ridSpec.runner
+
+        if ([string]::IsNullOrWhiteSpace($rid)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime package matrix RID entries must have non-empty rid values"
+            continue
+        }
+
+        if ([string]::IsNullOrWhiteSpace($runner)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime package matrix RID $rid must declare the GitHub Actions runner"
+            continue
+        }
+
+        foreach ($profileSpec in @($matrix.profiles)) {
+            $profile = [string]$profileSpec.name
+            if ([string]::IsNullOrWhiteSpace($profile)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime package matrix profiles must have non-empty names"
+                continue
+            }
+
+            $key = "$rid|$profile"
+            if ($expectedByKey.ContainsKey($key)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime package matrix contains duplicate RID/profile pair $key"
+                continue
+            }
+
+            $expectedByKey.Add($key, [pscustomobject]@{
+                Rid = $rid
+                Profile = $profile
+                Runner = $runner
+            })
+        }
+    }
+
+    $workflowEntries = @(Get-PackWorkflowRuntimeMatrixEntries -Text $PackWorkflowText)
+    if ($workflowEntries.Count -eq 0) {
+        Add-Violation -Violations $Violations -Path $PackWorkflowPath -Issue "Pack workflow must declare pack-runtime strategy.matrix.include entries"
+        return
+    }
+
+    foreach ($entry in $workflowEntries) {
+        $rid = [string]$entry.Rid
+        $profile = [string]$entry.Profile
+        $runner = [string]$entry.Runner
+
+        if ([string]::IsNullOrWhiteSpace($rid) -or
+            [string]::IsNullOrWhiteSpace($profile) -or
+            [string]::IsNullOrWhiteSpace($runner)) {
+            Add-Violation `
+                -Violations $Violations `
+                -Path $PackWorkflowPath `
+                -Line ([int]$entry.Line) `
+                -Issue "Each pack-runtime workflow matrix entry must declare rid, profile, and os" `
+                -Text "rid=$rid; profile=$profile; os=$runner"
+            continue
+        }
+
+        $key = "$rid|$profile"
+        if ($seenByKey.ContainsKey($key)) {
+            Add-Violation `
+                -Violations $Violations `
+                -Path $PackWorkflowPath `
+                -Line ([int]$entry.Line) `
+                -Issue "Pack workflow matrix contains duplicate RID/profile pair $key" `
+                -Text "os=$runner"
+            continue
+        }
+
+        $seenByKey.Add($key, $entry)
+
+        if (-not $expectedByKey.ContainsKey($key)) {
+            Add-Violation `
+                -Violations $Violations `
+                -Path $PackWorkflowPath `
+                -Line ([int]$entry.Line) `
+                -Issue "Pack workflow matrix contains RID/profile pair not present in runtime-package-matrix.json" `
+                -Text "$key on $runner"
+            continue
+        }
+
+        $expected = $expectedByKey[$key]
+        if (-not $runner.Equals([string]$expected.Runner, [System.StringComparison]::Ordinal)) {
+            Add-Violation `
+                -Violations $Violations `
+                -Path $PackWorkflowPath `
+                -Line ([int]$entry.Line) `
+                -Issue "Pack workflow runner must match runtime-package-matrix.json for RID/profile pair $key" `
+                -Text "workflow=$runner; matrix=$($expected.Runner)"
+        }
+    }
+
+    foreach ($expectedKey in ($expectedByKey.Keys | Sort-Object)) {
+        if (-not $seenByKey.ContainsKey($expectedKey)) {
+            $expected = $expectedByKey[$expectedKey]
+            Add-Violation `
+                -Violations $Violations `
+                -Path $PackWorkflowPath `
+                -Issue "Pack workflow matrix is missing RID/profile pair from runtime-package-matrix.json" `
+                -Text "$expectedKey on $($expected.Runner)"
+        }
+    }
+}
+
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $packRuntimePath = "scripts/Pack-Runtime.ps1"
@@ -118,7 +321,10 @@ $runtimeMatrixPath = $runtimePackageMatrixPath
 $runtimeGraphPath = $runtimeDistroRidGraphPath
 $gitignorePath = ".gitignore"
 $readmePath = "README.md"
+$quickStartPath = "docs/articles/quick-start.md"
 $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
+$linkedRuntimeSmokeGuidePath = "docs/articles/linked-runtime-smoke-guide.md"
+$smokeProfilesGuidePath = "docs/articles/smoke-profiles-guide.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $nativeBoundaryPath = "docs/articles/native-module-boundary.md"
 $versionNeutralGuidePath = "docs/articles/version-neutral-naming-guide.md"
@@ -132,7 +338,10 @@ $runtimeMatrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $runtimeGraphText = Read-RequiredText -RelativePath $runtimeGraphPath
 $gitignoreText = Read-RequiredText -RelativePath $gitignorePath
 $readmeText = Read-RequiredText -RelativePath $readmePath
+$quickStartText = Read-RequiredText -RelativePath $quickStartPath
 $linkedRuntimeGuideText = Read-RequiredText -RelativePath $linkedRuntimeGuidePath
+$linkedRuntimeSmokeGuideText = Read-RequiredText -RelativePath $linkedRuntimeSmokeGuidePath
+$smokeProfilesGuideText = Read-RequiredText -RelativePath $smokeProfilesGuidePath
 $runtimeLicensesText = Read-RequiredText -RelativePath $runtimeLicensesPath
 $nativeBoundaryText = Read-RequiredText -RelativePath $nativeBoundaryPath
 $versionNeutralGuideText = Read-RequiredText -RelativePath $versionNeutralGuidePath
@@ -160,6 +369,13 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "validate_synthetic_runtime" -Issue "Pack workflow must expose synthetic runtime validation mode"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "Reject synthetic publish" -Issue "Pack workflow must reject publishing synthetic runtime validation packages"
 
+Assert-PackWorkflowRuntimeMatrixMatchesJson `
+    -Violations $violations `
+    -RuntimeMatrixText $runtimeMatrixText `
+    -PackWorkflowText $packWorkflowText `
+    -RuntimeMatrixPath $runtimeMatrixPath `
+    -PackWorkflowPath $packWorkflowPath
+
 $requiredRuntimeRids = @(
     "win-x64",
     "win-x86",
@@ -179,6 +395,23 @@ $requiredRuntimeRids = @(
     "android-x64",
     "android-x86"
 )
+
+foreach ($disallowedPublishableLinuxRid in @("linux-x64", "linux-arm64")) {
+    $escapedRid = [System.Text.RegularExpressions.Regex]::Escape($disallowedPublishableLinuxRid)
+    if ($runtimeMatrixText -match "(?m)`"rid`"\s*:\s*`"$escapedRid`"") {
+        Add-Violation `
+            -Violations $violations `
+            -Path $runtimeMatrixPath `
+            -Issue "Runtime package matrix must not use generic Linux RID $disallowedPublishableLinuxRid as a publishable package identity"
+    }
+
+    if ($packWorkflowText -match "(?m)^\s*-\s+rid:\s*$escapedRid\s*$") {
+        Add-Violation `
+            -Violations $violations `
+            -Path $packWorkflowPath `
+            -Issue "Pack workflow matrix must not use generic Linux RID $disallowedPublishableLinuxRid as a publishable package identity"
+    }
+}
 
 foreach ($requiredRid in $requiredRuntimeRids) {
     Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "`"rid`": `"$requiredRid`"" -Issue "Runtime package matrix must include RID $requiredRid"
@@ -227,6 +460,9 @@ Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeM
 foreach ($doc in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
         [pscustomobject]@{ Path = $linkedRuntimeGuidePath; Text = $linkedRuntimeGuideText },
+        [pscustomobject]@{ Path = $linkedRuntimeSmokeGuidePath; Text = $linkedRuntimeSmokeGuideText },
+        [pscustomobject]@{ Path = $smokeProfilesGuidePath; Text = $smokeProfilesGuideText },
+        [pscustomobject]@{ Path = $quickStartPath; Text = $quickStartText },
         [pscustomobject]@{ Path = $runtimeReadmePath; Text = $runtimeReadmeText })) {
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "distro-specific Linux RID" -Issue "$($doc.Path) must explain Linux packages use distro-specific RIDs"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "ubuntu.22.04-x64" -Issue "$($doc.Path) must show Ubuntu distro-specific runtime package IDs"
@@ -247,7 +483,10 @@ $ridSurfaceFiles = @(
     $runtimeProjectPath,
     $runtimeReadmePath,
     $readmePath,
+    $quickStartPath,
     $linkedRuntimeGuidePath,
+    $linkedRuntimeSmokeGuidePath,
+    $smokeProfilesGuidePath,
     $runtimeLicensesPath,
     $nativeBoundaryPath,
     $versionNeutralGuidePath
@@ -256,7 +495,10 @@ $ridSurfaceFiles = @(
 $fixedMajorContextFiles = @(
     $runtimeReadmePath,
     $readmePath,
+    $quickStartPath,
     $linkedRuntimeGuidePath,
+    $linkedRuntimeSmokeGuidePath,
+    $smokeProfilesGuidePath,
     $runtimeLicensesPath,
     $nativeBoundaryPath,
     $versionNeutralGuidePath
@@ -295,4 +537,4 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Runtime RID package template scalability guard passed."
 Write-Host "RID/package files checked: $($ridSurfaceFiles.Count)."
-Write-Host "Runtime package matrix checked: full and mini profiles across configured RIDs."
+Write-Host "Runtime package matrix checked: full and mini profiles across configured RIDs; pack.yml RID/profile/runner entries match JSON exactly."
