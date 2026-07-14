@@ -226,7 +226,8 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = "" },
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12" },
-        [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40" }
+        [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40" },
+        [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9" }
     )
     $expectedByKey = @{}
     foreach ($target in $expectedTargets) {
@@ -308,9 +309,7 @@ function Assert-RealProducerTargets {
                 Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Non-Ubuntu real producer targets must declare a distro-native container image" -Text $target.Rid
             }
 
-            if (-not ([string]$target.ContainerImage).StartsWith("$distro`:", [System.StringComparison]::OrdinalIgnoreCase)) {
-                Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Non-Ubuntu real producer container image must match the runtime matrix distro" -Text "$($target.Rid): distro=$distro; image=$($target.ContainerImage)"
-            }
+            # Exact approved image matching above handles registries whose repository name differs from /etc/os-release ID, such as rockylinux:9 with ID=rocky.
         }
 
         $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $target.Profile } | Select-Object -First 1)
@@ -340,10 +339,15 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
         [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
-        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, and runtime-input-fedora.40-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
+        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, and runtime-input-rocky.9-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
         [pscustomobject]@{ Needle = "container_image: debian:12"; Issue = "Producer workflow must declare the Debian 12 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: fedora:40"; Issue = "Producer workflow must declare the Fedora 40 container-native boundary" },
+        [pscustomobject]@{ Needle = "container_image: rockylinux:9"; Issue = "Producer workflow must declare the Rocky Linux 9 container-native boundary" },
+        [pscustomobject]@{ Needle = "fedora|rocky)"; Issue = "Producer workflow must install RHEL-family build dependencies for Rocky Linux" },
         [pscustomobject]@{ Needle = "docker run --rm"; Issue = "Producer workflow must execute non-Ubuntu producer work inside the distro container" },
+        [pscustomobject]@{ Needle = "EXPECTED_DISTRO_VERSION"; Issue = "Producer workflow must carry runtime matrix distro version into the container boundary" },
+        [pscustomobject]@{ Needle = "Container distro mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro does not match the runtime RID matrix" },
+        [pscustomobject]@{ Needle = "Container distro version mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro version does not match the runtime RID matrix" },
         [pscustomobject]@{ Needle = "getconf GNU_LIBC_VERSION"; Issue = "Producer workflow must record libc evidence for container-native Linux outputs" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
@@ -414,6 +418,7 @@ foreach ($doc in @(
             '`runtime-input-ubuntu.22.04-x64-full`',
             '`runtime-input-debian.12-x64-full`',
             '`runtime-input-fedora.40-x64-full`',
+            '`runtime-input-rocky.9-x64-full`',
             '`runtime-input-<rid>-<profile>`',
             '`native-wrapper/`',
             '`opencv-runtime/`',
@@ -563,5 +568,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rocky.9-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."
