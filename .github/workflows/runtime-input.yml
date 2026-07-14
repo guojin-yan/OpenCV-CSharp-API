@@ -300,6 +300,11 @@ jobs:
                   apt-get install -y --no-install-recommends powershell
                   ;;
                 fedora|rocky)
+                  if [ "${ID:-}" = "rocky" ]; then
+                    dnf install -y dnf-plugins-core
+                    dnf config-manager --set-enabled crb
+                  fi
+
                   dnf install -y \
                     ca-certificates \
                     cmake \
