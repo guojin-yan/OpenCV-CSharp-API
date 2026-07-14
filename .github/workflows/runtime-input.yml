@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, or debian.12-x64
+        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, debian.12-x64, or fedora.40-x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -29,11 +29,12 @@ jobs:
           $supportedTargets = @(
             'ubuntu.24.04-x64/full',
             'ubuntu.22.04-x64/full',
-            'debian.12-x64/full'
+            'debian.12-x64/full',
+            'fedora.40-x64/full'
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, and runtime-input-debian.12-x64-full. Mini and other distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, and runtime-input-fedora.40-x64-full. Mini and remaining distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -170,6 +171,10 @@ jobs:
             profile: full
             os: ubuntu-24.04
             container_image: debian:12
+          - rid: fedora.40-x64
+            profile: full
+            os: ubuntu-24.04
+            container_image: fedora:40
     runs-on: ${{ matrix.os }}
     steps:
       - name: Skip unmatched container producer target
@@ -237,30 +242,62 @@ jobs:
             "$CONTAINER_IMAGE" \
             bash -lc '
               set -euo pipefail
-              export DEBIAN_FRONTEND=noninteractive
-
-              apt-get update
-              apt-get install -y --no-install-recommends \
-                apt-transport-https \
-                ca-certificates \
-                cmake \
-                curl \
-                g++ \
-                git \
-                gnupg \
-                make \
-                ninja-build \
-                pkg-config
-
-              install -d -m 0755 /etc/apt/keyrings
-              curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
-              chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
               . /etc/os-release
-              echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
-              apt-get update
-              apt-get install -y --no-install-recommends powershell
+              case "${ID:-}" in
+                debian|ubuntu)
+                  export DEBIAN_FRONTEND=noninteractive
 
-              . /etc/os-release
+                  apt-get update
+                  apt-get install -y --no-install-recommends \
+                    apt-transport-https \
+                    ca-certificates \
+                    cmake \
+                    curl \
+                    g++ \
+                    git \
+                    gnupg \
+                    make \
+                    ninja-build \
+                    pkg-config
+
+                  install -d -m 0755 /etc/apt/keyrings
+                  curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
+                  chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
+                  if [ "${ID:-}" = "ubuntu" ]; then
+                    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/ubuntu/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+                  else
+                    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+                  fi
+                  apt-get update
+                  apt-get install -y --no-install-recommends powershell
+                  ;;
+                fedora)
+                  dnf install -y \
+                    ca-certificates \
+                    cmake \
+                    curl \
+                    findutils \
+                    gcc-c++ \
+                    git \
+                    glibc-common \
+                    gnupg2 \
+                    gzip \
+                    make \
+                    ninja-build \
+                    pkgconf-pkg-config \
+                    tar \
+                    unzip
+
+                  rpm --import https://packages.microsoft.com/keys/microsoft.asc
+                  curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
+                  dnf install -y powershell
+                  ;;
+                *)
+                  echo "Unsupported container distro for runtime input producer: ${ID:-unknown}" >&2
+                  exit 1
+                  ;;
+              esac
+
               container_distro="${ID:-debian}"
               container_distro_version="${VERSION_ID:-12}"
               container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
