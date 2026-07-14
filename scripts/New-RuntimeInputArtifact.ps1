@@ -118,6 +118,7 @@ function Copy-RequiredFile {
         [Parameter(Mandatory = $true)]
         [string]$DestinationDirectory,
         [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
         [System.Collections.Generic.List[object]]$Entries
     )
 

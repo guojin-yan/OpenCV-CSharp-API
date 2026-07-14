@@ -107,6 +107,19 @@ function Assert-TextOrder {
     }
 }
 
+function Write-FixtureFile {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [string]$Text = "fixture"
+    )
+
+    $parent = Split-Path -Parent $Path
+    New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+    [System.IO.File]::WriteAllText($Path, $Text, $utf8NoBom)
+}
+
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $producerWorkflowText = Read-RequiredText -RelativePath $producerWorkflowPath
@@ -179,6 +192,69 @@ foreach ($doc in @(
 }
 
 Assert-Contains -Violations $violations -Path $versionNeutralGuidePath -Text $versionNeutralGuideText -Needle "Test-RealRuntimeInputProducerSurface.ps1" -Issue "Version-neutral guide must list the real runtime input producer guard"
+
+if ($violations.Count -eq 0) {
+    $fixtureRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("opencv-csharp-runtime-input-fixture-" + [System.Guid]::NewGuid().ToString("N"))
+    try {
+        $fixtureNativeDir = Join-Path $fixtureRoot "native"
+        $fixtureRuntimeDir = Join-Path $fixtureRoot "opencv-runtime"
+        $fixtureSourceDir = Join-Path $fixtureRoot "opencv-source"
+        $fixtureInstallDir = Join-Path $fixtureRoot "opencv-install"
+        $fixtureOutputRoot = Join-Path $fixtureRoot "out"
+
+        Write-FixtureFile -Path (Join-Path $fixtureNativeDir "libJYPPX.OpenCV.Native.so")
+        Write-FixtureFile -Path (Join-Path $fixtureNativeDir "libOpenCv5Sharp.Native.so")
+        Write-FixtureFile -Path (Join-Path $fixtureSourceDir "LICENSE") -Text "OpenCV license fixture"
+        Write-FixtureFile -Path (Join-Path (Join-Path (Join-Path $fixtureSourceDir "3rdparty") "ippicv") "readme.htm") -Text "ippicv fixture"
+        Write-FixtureFile -Path (Join-Path (Join-Path $fixtureInstallDir "etc/licenses") "opencv-license.txt") -Text "install license fixture"
+
+        $matrix = Get-Content -LiteralPath (Join-Path $repo "packaging/runtime/runtime-package-matrix.json") -Raw | ConvertFrom-Json
+        $fullProfile = @($matrix.profiles | Where-Object { $_.name -eq "full" } | Select-Object -First 1)
+        if ($fullProfile.Count -eq 0) {
+            throw "Full runtime profile was not found in fixture matrix."
+        }
+
+        foreach ($module in @($fullProfile[0].modules)) {
+            Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir "libopencv_$module.so.5.0.0")
+        }
+
+        & (Join-Path $repo $runtimeInputScriptPath) `
+            -Rid "linux-x64" `
+            -RuntimeProfile "full" `
+            -OpenCvVersion "5.0.0" `
+            -NativeRuntimeDir $fixtureNativeDir `
+            -OpenCvRuntimeDir $fixtureRuntimeDir `
+            -OpenCvSourceDir $fixtureSourceDir `
+            -OpenCvInstallDir $fixtureInstallDir `
+            -OutputRoot $fixtureOutputRoot
+
+        $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "linux-x64-full") "runtime-input.provenance.json"
+        if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
+            throw "Fixture runtime input provenance was not written: $manifestPath"
+        }
+
+        $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+        if ($manifest.SyntheticRuntimeInputs -ne $false) {
+            throw "Fixture provenance did not mark SyntheticRuntimeInputs=false."
+        }
+
+        if (@($manifest.NativeLoaderFiles).Count -lt 2) {
+            throw "Fixture provenance did not include both native loader files."
+        }
+
+        if (@($manifest.RuntimeFiles).Count -lt @($fullProfile[0].modules).Count) {
+            throw "Fixture provenance did not include the full runtime module set."
+        }
+    }
+    catch {
+        Add-Violation -Violations $violations -Path $runtimeInputScriptPath -Issue "Runtime input artifact script must run against a minimal real-layout fixture" -Text $_.Exception.Message
+    }
+    finally {
+        if (Test-Path -LiteralPath $fixtureRoot) {
+            Remove-Item -LiteralPath $fixtureRoot -Recurse -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
 
 if ($violations.Count -gt 0) {
     Write-Host "Real runtime input producer surface guard failed with $($violations.Count) violation(s)."
