@@ -346,6 +346,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "fedora|rocky)"; Issue = "Producer workflow must install RHEL-family build dependencies for Rocky Linux" },
         [pscustomobject]@{ Needle = "dnf config-manager --set-enabled crb"; Issue = "Producer workflow must enable Rocky Linux CRB before installing ninja-build" },
         [pscustomobject]@{ Needle = 'curl_package="curl-minimal"'; Issue = "Producer workflow must preserve Rocky Linux curl-minimal instead of requesting the conflicting curl package" },
+        [pscustomobject]@{ Needle = "as --version"; Issue = "Producer workflow must install and report the distro assembler used for OpenCV CPU-dispatch code" },
         [pscustomobject]@{ Needle = "docker run --rm"; Issue = "Producer workflow must execute non-Ubuntu producer work inside the distro container" },
         [pscustomobject]@{ Needle = "EXPECTED_DISTRO_VERSION"; Issue = "Producer workflow must carry runtime matrix distro version into the container boundary" },
         [pscustomobject]@{ Needle = "Container distro mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro does not match the runtime RID matrix" },

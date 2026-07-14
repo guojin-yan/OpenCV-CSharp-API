@@ -308,6 +308,7 @@ jobs:
                   fi
 
                   dnf install -y \
+                    binutils \
                     ca-certificates \
                     cmake \
                     "$curl_package" \
@@ -322,6 +323,8 @@ jobs:
                     pkgconf-pkg-config \
                     tar \
                     unzip
+
+                  as --version
 
                   rpm --import https://packages.microsoft.com/keys/microsoft.asc
                   curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
