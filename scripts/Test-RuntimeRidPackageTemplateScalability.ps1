@@ -194,6 +194,16 @@ foreach ($doc in @(
 Assert-Contains -Violations $violations -Path $readmePath -Text $readmeText -Needle "runtime package matrix" -Issue "README must describe the runtime package matrix"
 Assert-Contains -Violations $violations -Path $linkedRuntimeGuidePath -Text $linkedRuntimeGuideText -Needle "multi-RID matrix" -Issue "Linked runtime guide must describe the workflow runtime matrix"
 Assert-Contains -Violations $violations -Path $runtimeReadmePath -Text $runtimeReadmeText -Needle "runtime-package-matrix.json" -Issue "Runtime README must link the matrix definition"
+Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "Portable glibc Linux x64 RID" -Issue "Runtime matrix must identify linux-x64 as a portable glibc Linux RID, not a distro package identity"
+Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "linux-musl RID package" -Issue "Runtime matrix must keep Alpine/musl as a separate Linux runtime family"
+foreach ($doc in @(
+        [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
+        [pscustomobject]@{ Path = $linkedRuntimeGuidePath; Text = $linkedRuntimeGuideText },
+        [pscustomobject]@{ Path = $runtimeReadmePath; Text = $runtimeReadmeText })) {
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "portable .NET glibc RID" -Issue "$($doc.Path) must explain Linux packages use portable .NET glibc RIDs"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "Ubuntu, Debian, Fedora" -Issue "$($doc.Path) must point Linux distro coverage to validation, not package identity"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "linux-musl-*" -Issue "$($doc.Path) must reserve musl/Alpine for separate linux-musl runtime packages"
+}
 
 Assert-Contains -Violations $violations -Path $runtimeReadmePath -Text $runtimeReadmeText -Needle "runtimes/<rid>/native" -Issue "Runtime README must document the generic RID-native package layout"
 Assert-Contains -Violations $violations -Path $runtimeReadmePath -Text $runtimeReadmeText -Needle "RuntimePackageRid" -Issue "Runtime README must document the RuntimePackageRid-driven package project"

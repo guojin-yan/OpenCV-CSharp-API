@@ -27,14 +27,14 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "linux-x64",
       "nativeExtension": ".so",
-      "notes": "Portable Linux x64 RID, including common Ubuntu x64 deployments."
+      "notes": "Portable glibc Linux x64 RID. Keep the NuGet package ID portable; validate Ubuntu, Debian, Fedora, and RHEL-like hosts separately. Alpine/musl requires a linux-musl RID package."
     },
     {
       "rid": "linux-arm64",
       "runner": "ubuntu-24.04",
       "opencvRid": "linux-arm64",
       "nativeExtension": ".so",
-      "notes": "Portable Linux ARM64 RID, including Ubuntu ARM64 deployments."
+      "notes": "Portable glibc Linux ARM64 RID. Keep the NuGet package ID portable; validate Ubuntu, Debian, Fedora, and RHEL-like hosts separately. Alpine/musl requires a linux-musl RID package."
     },
     {
       "rid": "android-arm64",
