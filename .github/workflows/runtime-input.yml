@@ -8,9 +8,9 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: First real producer target; currently linux-x64 only
+        description: First real producer target; currently ubuntu.24.04-x64 only
         required: true
-        default: linux-x64
+        default: ubuntu.24.04-x64
       runtime_profile:
         description: First real producer profile; currently full only
         required: true
@@ -36,8 +36,8 @@ jobs:
       - name: Validate first real producer target
         shell: pwsh
         run: |
-          if ('${{ inputs.rid }}' -ne 'linux-x64' -or '${{ inputs.runtime_profile }}' -ne 'full') {
-            throw "runtime-input.yml currently produces only runtime-input-linux-x64-full. Mini and additional RIDs need a separate linked-component producer step before being advertised as real runtime inputs."
+          if ('${{ inputs.rid }}' -ne 'ubuntu.24.04-x64' -or '${{ inputs.runtime_profile }}' -ne 'full') {
+            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full. Mini and additional distro RIDs need a separate linked-component producer step before being advertised as real runtime inputs."
           }
       - name: Install native build tools
         run: |
@@ -48,12 +48,18 @@ jobs:
         shell: pwsh
         run: |
           $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $rid = @($matrix.rids | Where-Object { $_.rid -eq '${{ inputs.rid }}' } | Select-Object -First 1)
+          if ($rid.Count -eq 0) {
+            throw "Runtime RID was not found: ${{ inputs.rid }}"
+          }
+
           $profile = @($matrix.profiles | Where-Object { $_.name -eq '${{ inputs.runtime_profile }}' } | Select-Object -First 1)
           if ($profile.Count -eq 0) {
             throw "Runtime profile was not found: ${{ inputs.runtime_profile }}"
           }
 
           "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
+          "opencv_rid=$($rid[0].opencvRid)" >> $env:GITHUB_OUTPUT
       - name: Fetch OpenCV source
         shell: pwsh
         run: |
@@ -77,7 +83,7 @@ jobs:
         shell: pwsh
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
-          $openCvDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-linux-x64/lib/cmake/opencv5"
+          $openCvDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}/lib/cmake/opencv5"
           if (-not (Test-Path -LiteralPath (Join-Path $openCvDir 'OpenCVConfig.cmake') -PathType Leaf)) {
             throw "OpenCVConfig.cmake was not found for linked native wrapper build: $openCvDir"
           }
@@ -97,7 +103,7 @@ jobs:
         shell: pwsh
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
-          $openCvInstallDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-linux-x64"
+          $openCvInstallDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
           $openCvRuntimeDir = Join-Path $openCvInstallDir 'lib'
           $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
 

@@ -12,6 +12,7 @@ $currentExampleRid = "win-x64"
 $currentRuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime"
 $currentRuntimeProjectFile = "$currentRuntimeProject/JYPPX.OpenCV.runtime.csproj"
 $runtimePackageMatrixPath = "packaging/runtime/runtime-package-matrix.json"
+$runtimeDistroRidGraphPath = "packaging/runtime/runtime-distro-rid-graph.json"
 
 function Add-Violation {
     param(
@@ -114,6 +115,7 @@ $packWorkflowPath = ".github/workflows/pack.yml"
 $runtimeProjectPath = $currentRuntimeProjectFile
 $runtimeReadmePath = "$currentRuntimeProject/README.md"
 $runtimeMatrixPath = $runtimePackageMatrixPath
+$runtimeGraphPath = $runtimeDistroRidGraphPath
 $gitignorePath = ".gitignore"
 $readmePath = "README.md"
 $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
@@ -127,6 +129,7 @@ $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowPath
 $runtimeProjectText = Read-RequiredText -RelativePath $runtimeProjectPath
 $runtimeReadmeText = Read-RequiredText -RelativePath $runtimeReadmePath
 $runtimeMatrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
+$runtimeGraphText = Read-RequiredText -RelativePath $runtimeGraphPath
 $gitignoreText = Read-RequiredText -RelativePath $gitignorePath
 $readmeText = Read-RequiredText -RelativePath $readmePath
 $linkedRuntimeGuideText = Read-RequiredText -RelativePath $linkedRuntimeGuidePath
@@ -157,9 +160,33 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "validate_synthetic_runtime" -Issue "Pack workflow must expose synthetic runtime validation mode"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "Reject synthetic publish" -Issue "Pack workflow must reject publishing synthetic runtime validation packages"
 
-foreach ($requiredRid in @("win-x64", "win-x86", "win-arm64", "linux-x64", "linux-arm64", "android-arm64", "android-arm", "android-x64", "android-x86")) {
+$requiredRuntimeRids = @(
+    "win-x64",
+    "win-x86",
+    "win-arm64",
+    "ubuntu.22.04-x64",
+    "ubuntu.22.04-arm64",
+    "ubuntu.24.04-x64",
+    "ubuntu.24.04-arm64",
+    "debian.12-x64",
+    "debian.12-arm64",
+    "fedora.40-x64",
+    "rhel.9-x64",
+    "rocky.9-x64",
+    "alpine.3.20-x64",
+    "android-arm64",
+    "android-arm",
+    "android-x64",
+    "android-x86"
+)
+
+foreach ($requiredRid in $requiredRuntimeRids) {
     Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "`"rid`": `"$requiredRid`"" -Issue "Runtime package matrix must include RID $requiredRid"
     Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "rid: $requiredRid" -Issue "Pack workflow matrix must include RID $requiredRid"
+}
+
+foreach ($requiredLinuxRid in @("ubuntu.22.04-x64", "ubuntu.24.04-x64", "debian.12-x64", "fedora.40-x64", "rhel.9-x64", "rocky.9-x64", "alpine.3.20-x64")) {
+    Assert-Contains -Violations $violations -Path $runtimeGraphPath -Text $runtimeGraphText -Needle "`"$requiredLinuxRid`"" -Issue "Runtime distro RID graph must include custom Linux RID $requiredLinuxRid"
 }
 
 foreach ($requiredProfile in @("full", "mini")) {
@@ -172,6 +199,7 @@ Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeP
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must be derived from RuntimePackageRid and RuntimePackageProfile"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="runtimes/$(RuntimePackageRid)/native/**/*"' -Issue "Runtime package project must pack RID-driven native payloads"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'PackagePath="runtimes/$(RuntimePackageRid)/native"' -Issue "Runtime package project PackagePath must be RID-driven"
+Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'runtime-distro-rid-graph.json' -Issue "Runtime package project must pack the custom distro RID graph for traceability"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle 'Include="build/JYPPX.OpenCV.runtime.provenance.json"' -Issue "Runtime package project must pack the generated provenance manifest without RID-specific project copies"
 
 foreach ($requiredText in @(
@@ -194,15 +222,15 @@ foreach ($doc in @(
 Assert-Contains -Violations $violations -Path $readmePath -Text $readmeText -Needle "runtime package matrix" -Issue "README must describe the runtime package matrix"
 Assert-Contains -Violations $violations -Path $linkedRuntimeGuidePath -Text $linkedRuntimeGuideText -Needle "multi-RID matrix" -Issue "Linked runtime guide must describe the workflow runtime matrix"
 Assert-Contains -Violations $violations -Path $runtimeReadmePath -Text $runtimeReadmeText -Needle "runtime-package-matrix.json" -Issue "Runtime README must link the matrix definition"
-Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "Portable glibc Linux x64 RID" -Issue "Runtime matrix must identify linux-x64 as a portable glibc Linux RID, not a distro package identity"
-Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "linux-musl RID package" -Issue "Runtime matrix must keep Alpine/musl as a separate Linux runtime family"
+Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "Ubuntu 22.04 x64 glibc runtime package surface" -Issue "Runtime matrix must identify Ubuntu 22.04 x64 as a distro-specific Linux package identity"
+Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "Alpine 3.20 x64 musl runtime package surface" -Issue "Runtime matrix must keep Alpine/musl as a distro-specific Linux package identity"
 foreach ($doc in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
         [pscustomobject]@{ Path = $linkedRuntimeGuidePath; Text = $linkedRuntimeGuideText },
         [pscustomobject]@{ Path = $runtimeReadmePath; Text = $runtimeReadmeText })) {
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "portable .NET glibc RID" -Issue "$($doc.Path) must explain Linux packages use portable .NET glibc RIDs"
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "Ubuntu, Debian, Fedora" -Issue "$($doc.Path) must point Linux distro coverage to validation, not package identity"
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "linux-musl-*" -Issue "$($doc.Path) must reserve musl/Alpine for separate linux-musl runtime packages"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "distro-specific Linux RID" -Issue "$($doc.Path) must explain Linux packages use distro-specific RIDs"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "ubuntu.22.04-x64" -Issue "$($doc.Path) must show Ubuntu distro-specific runtime package IDs"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "RuntimeIdentifierGraphPath" -Issue "$($doc.Path) must document custom distro RID graph usage for consumer restore"
 }
 
 Assert-Contains -Violations $violations -Path $runtimeReadmePath -Text $runtimeReadmeText -Needle "runtimes/<rid>/native" -Issue "Runtime README must document the generic RID-native package layout"

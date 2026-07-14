@@ -132,10 +132,10 @@ $versionNeutralGuideText = Read-RequiredText -RelativePath $versionNeutralGuideP
 foreach ($required in @(
         [pscustomobject]@{ Needle = "name: runtime-input"; Issue = "Producer workflow must have a neutral runtime-input name" },
         [pscustomobject]@{ Needle = "workflow_dispatch:"; Issue = "Producer workflow must be manually dispatched until real build cost is proven" },
-        [pscustomobject]@{ Needle = "default: linux-x64"; Issue = "Producer workflow must start with the first real linux-x64 target" },
+        [pscustomobject]@{ Needle = "default: ubuntu.24.04-x64"; Issue = "Producer workflow must start with the first real Ubuntu 24.04 x64 target" },
         [pscustomobject]@{ Needle = "default: full"; Issue = "Producer workflow must start with the full profile until mini linked-component support is split" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
-        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-linux-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
+        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
@@ -182,7 +182,7 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Text = $linkedRuntimeBuildGuideText })) {
     foreach ($needle in @(
             '`runtime-input.yml`',
-            '`runtime-input-linux-x64-full`',
+            '`runtime-input-ubuntu.24.04-x64-full`',
             '`runtime-input-<rid>-<profile>`',
             '`native-wrapper/`',
             '`opencv-runtime/`',
@@ -219,7 +219,7 @@ if ($violations.Count -eq 0) {
         }
 
         & (Join-Path $repo $runtimeInputScriptPath) `
-            -Rid "linux-x64" `
+            -Rid "ubuntu.24.04-x64" `
             -RuntimeProfile "full" `
             -OpenCvVersion "5.0.0" `
             -NativeRuntimeDir $fixtureNativeDir `
@@ -228,7 +228,7 @@ if ($violations.Count -eq 0) {
             -OpenCvInstallDir $fixtureInstallDir `
             -OutputRoot $fixtureOutputRoot
 
-        $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "linux-x64-full") "runtime-input.provenance.json"
+        $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "ubuntu.24.04-x64-full") "runtime-input.provenance.json"
         if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
             throw "Fixture runtime input provenance was not written: $manifestPath"
         }
@@ -265,5 +265,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "First producer artifact: runtime-input-linux-x64-full."
+Write-Host "First producer artifact: runtime-input-ubuntu.24.04-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

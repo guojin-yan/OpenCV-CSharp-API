@@ -281,7 +281,9 @@ function New-TemporaryConsumerProject {
         [Parameter(Mandatory = $true)]
         [string]$RuntimePackageId,
         [Parameter(Mandatory = $true)]
-        [string]$PackageVersion
+        [string]$PackageVersion,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeIdentifierGraphPath
     )
 
     New-Item -ItemType Directory -Force -Path $ConsumerDirectory | Out-Null
@@ -292,6 +294,7 @@ function New-TemporaryConsumerProject {
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <RuntimeIdentifier>$Rid</RuntimeIdentifier>
+    <RuntimeIdentifierGraphPath>$RuntimeIdentifierGraphPath</RuntimeIdentifierGraphPath>
     <SelfContained>false</SelfContained>
     <UseAppHost>false</UseAppHost>
     <ImplicitUsings>disable</ImplicitUsings>
@@ -391,6 +394,7 @@ $nugetHttpCacheDir = Join-Path $temporaryRoot "nuget-http-cache"
 $nugetScratchDir = Join-Path $temporaryRoot "nuget-scratch"
 $nugetPluginsCacheDir = Join-Path $temporaryRoot "nuget-plugin-cache"
 $nugetConfigPath = Join-Path $temporaryRoot "NuGet.config"
+$runtimeIdentifierGraphPath = Join-Path $temporaryRoot "runtime-distro-rid-graph.json"
 
 $oldNuGetPackages = $env:NUGET_PACKAGES
 $oldNuGetHttpCache = $env:NUGET_HTTP_CACHE_PATH
@@ -407,6 +411,8 @@ try {
             $nugetPluginsCacheDir)) {
         New-Item -ItemType Directory -Force -Path $directory | Out-Null
     }
+
+    Copy-Item -LiteralPath (Join-Path $repo "packaging/runtime/runtime-distro-rid-graph.json") -Destination $runtimeIdentifierGraphPath -Force
 
     $artifactPackages = @(Get-ChildItem -LiteralPath $artifactRootFullPath -Recurse -Filter "*.nupkg" -File)
     if ($artifactPackages.Count -eq 0) {
@@ -454,7 +460,8 @@ try {
                 -ConsumerDirectory $consumerDir `
                 -Rid $rid `
                 -RuntimePackageId $runtimePackageId `
-                -PackageVersion $ExpectedPackageVersion
+                -PackageVersion $ExpectedPackageVersion `
+                -RuntimeIdentifierGraphPath $runtimeIdentifierGraphPath
             $nativeNames = Get-NativeFileNames -Rid $rid -Modules $modules -OpenCvVersion $openCvVersion -OpenCvBinarySuffix $openCvBinarySuffix
 
             $restoreArguments = @(

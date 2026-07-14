@@ -129,6 +129,30 @@ function Get-WindowsArchFolder {
     }
 }
 
+function Get-PlatformFamily {
+    param([Parameter(Mandatory = $true)][object]$RidSpec)
+
+    $rid = [string]$RidSpec.rid
+    if ($null -ne $RidSpec.PSObject.Properties["platformFamily"] -and
+        -not [string]::IsNullOrWhiteSpace([string]$RidSpec.platformFamily)) {
+        return ([string]$RidSpec.platformFamily).ToLowerInvariant()
+    }
+
+    if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        return "windows"
+    }
+
+    if ($rid.StartsWith("linux-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        return "linux"
+    }
+
+    if ($rid.StartsWith("android-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        return "android"
+    }
+
+    return ""
+}
+
 function Invoke-BuildPlan {
     param(
         [Parameter(Mandatory = $true)]
@@ -268,6 +292,7 @@ $ridCount = @($matrix.rids).Count
 foreach ($ridSpec in @($matrix.rids)) {
     $rid = [string]$ridSpec.rid
     $openCvRid = [string]$ridSpec.opencvRid
+    $platformFamily = Get-PlatformFamily -RidSpec $ridSpec
 
     foreach ($profileSpec in @($matrix.profiles)) {
         $profile = [string]$profileSpec.name
@@ -287,7 +312,7 @@ foreach ($ridSpec in @($matrix.rids)) {
             Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Build-OpenCV -DescribeOnly must preserve selected runtime profile build list" -Text "$rid/$profile"
         }
 
-        if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        if ($platformFamily -eq "windows") {
             $expectedPlatform = Get-WindowsPlatform -Rid $rid
             $expectedArchFolder = Get-WindowsArchFolder -Rid $rid
             if ($plan.PlatformFamily -ne "windows" -or $plan.BuildSystem -ne "multi-config" -or $plan.InstallTarget -ne "INSTALL") {
@@ -303,7 +328,7 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Windows RID build plan must expose arch-specific OpenCV runtime directory candidates" -Text "$rid :: $runtimeDirs"
             }
         }
-        elseif ($rid.StartsWith("linux-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        elseif ($platformFamily -eq "linux") {
             if ($plan.PlatformFamily -ne "linux" -or $plan.Generator -ne "Ninja" -or $plan.BuildSystem -ne "single-config") {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux RID build plans must be Ninja single-config plans" -Text "$rid :: $($plan.PlatformFamily) / $($plan.Generator) / $($plan.BuildSystem)"
             }
@@ -317,7 +342,7 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux OpenCVConfig.cmake candidate must derive the OpenCV major from version metadata" -Text "$rid :: $configCandidates"
             }
         }
-        elseif ($rid.StartsWith("android-", [System.StringComparison]::OrdinalIgnoreCase)) {
+        elseif ($platformFamily -eq "android") {
             $expectedAbi = Get-AndroidAbi -Rid $rid
             if ($plan.PlatformFamily -ne "android" -or -not [bool]$plan.RequiresAndroidNdk -or $plan.AndroidAbi -ne $expectedAbi) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Android RID build plans must require NDK and select matching Android ABI" -Text "$rid :: $($plan.PlatformFamily) / $($plan.RequiresAndroidNdk) / $($plan.AndroidAbi)"
@@ -334,11 +359,14 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Android RID build plan must expose ABI-specific runtime directory candidates" -Text "$rid :: $runtimeDirs"
             }
         }
+        else {
+            Add-Violation -Violations $violations -Path "packaging/runtime/runtime-package-matrix.json" -Issue "Runtime RID must declare or infer a supported platformFamily" -Text $rid
+        }
     }
 }
 
 Invoke-StageCase -Rid "win-x86" -OpenCvRid "windows-x86" -PlatformFamily "windows" -RuntimeSubdir "x86/vc18/bin" -Violations $violations
-Invoke-StageCase -Rid "linux-x64" -OpenCvRid "linux-x64" -PlatformFamily "linux" -RuntimeSubdir "lib" -Violations $violations
+Invoke-StageCase -Rid "ubuntu.24.04-x64" -OpenCvRid "ubuntu.24.04-x64" -PlatformFamily "linux" -RuntimeSubdir "lib" -Violations $violations
 Invoke-StageCase -Rid "android-arm64" -OpenCvRid "android-arm64" -PlatformFamily "android" -RuntimeSubdir "sdk/native/libs/arm64-v8a" -Violations $violations
 
 if ($violations.Count -gt 0) {
@@ -352,4 +380,4 @@ if ($violations.Count -gt 0) {
 Write-Host "Real native runtime build matrix coverage guard passed."
 Write-Host "RID build plans checked: $ridCount."
 Write-Host "Runtime profiles checked per RID: $profileCount."
-Write-Host "RID-aware staging default probes checked: win-x86, linux-x64, android-arm64."
+Write-Host "RID-aware staging default probes checked: win-x86, ubuntu.24.04-x64, android-arm64."

@@ -83,6 +83,7 @@ $allowedPackedIncludes = [System.Collections.Generic.HashSet[string]]::new(
     [System.StringComparer]::OrdinalIgnoreCase)
 foreach ($allowed in @(
         "README.md",
+        "../runtime-distro-rid-graph.json",
         "build/JYPPX.OpenCV.runtime.provenance.json",
         "runtimes/`$(RuntimePackageRid)/native/**/*",
         "licenses/**/*")) {

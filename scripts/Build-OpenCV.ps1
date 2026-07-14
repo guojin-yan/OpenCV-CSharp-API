@@ -146,9 +146,15 @@ function Get-OpenCvBuildTarget {
         throw "RID '$RequestedRid' was not found in runtime package matrix."
     }
 
-    $packageRid = [string]$ridSpec[0].rid
-    $openCvRid = [string]$ridSpec[0].opencvRid
-    $platformFamily = if ($packageRid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) {
+    $ridDefinition = $ridSpec[0]
+    $packageRid = [string]$ridDefinition.rid
+    $openCvRid = [string]$ridDefinition.opencvRid
+    $platformFamily = if (
+        $null -ne $ridDefinition.PSObject.Properties["platformFamily"] -and
+        -not [string]::IsNullOrWhiteSpace([string]$ridDefinition.platformFamily)) {
+        [string]$ridDefinition.platformFamily
+    }
+    elseif ($packageRid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) {
         "windows"
     }
     elseif ($packageRid.StartsWith("linux-", [System.StringComparison]::OrdinalIgnoreCase)) {
@@ -159,6 +165,11 @@ function Get-OpenCvBuildTarget {
     }
     else {
         throw "RID '$packageRid' is not mapped to a real OpenCV build target family."
+    }
+
+    $platformFamily = $platformFamily.ToLowerInvariant()
+    if (@("windows", "linux", "android") -notcontains $platformFamily) {
+        throw "RID '$packageRid' has unsupported platformFamily '$platformFamily'."
     }
 
     $resolvedGenerator = $GeneratorOverride

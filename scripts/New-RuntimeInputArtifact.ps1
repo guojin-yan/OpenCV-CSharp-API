@@ -1,5 +1,5 @@
 param(
-    [string]$Rid = "linux-x64",
+    [string]$Rid = "ubuntu.24.04-x64",
     [string]$RuntimeProfile = "full",
     [string]$OpenCvVersion = "5.0.0",
     [string]$NativeRuntimeDir,

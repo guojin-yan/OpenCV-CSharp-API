@@ -28,9 +28,9 @@ net5.0;net6.0;net7.0;net8.0;net9.0;net10.0
 - Runtime packages: `JYPPX.OpenCV.runtime.<rid>` for full builds and `JYPPX.OpenCV.runtime.<rid>.mini` for mini builds
 - Package version metadata: `OpenCV major.minor.patch.packageRevision`, for example `5.0.0.0`
 
-Use the managed and runtime packages together on the same four-part package version metadata. Consumers should choose the full `JYPPX.OpenCV.runtime.<rid>` package or the smaller `JYPPX.OpenCV.runtime.<rid>.mini` package that matches their target RID. The current runtime package matrix covers `win-x64`, `win-x86`, `win-arm64`, `linux-x64`, `linux-arm64`, `android-arm64`, `android-arm`, `android-x64`, and `android-x86`. Linux package IDs use portable .NET glibc RIDs such as `linux-x64`; Ubuntu runner labels are CI/build hosts, not package identities. Ubuntu, Debian, Fedora, and RHEL-like hosts need explicit compatibility validation, while Alpine/musl requires a separate `linux-musl-*` runtime package surface.
+Use the managed and runtime packages together on the same four-part package version metadata. Consumers should choose the full `JYPPX.OpenCV.runtime.<rid>` package or the smaller `JYPPX.OpenCV.runtime.<rid>.mini` package that matches their exact target RID. The current runtime package matrix covers `win-x64`, `win-x86`, `win-arm64`, distro-specific Linux RID package IDs such as `ubuntu.22.04-x64`, `ubuntu.24.04-x64`, `debian.12-x64`, `fedora.40-x64`, `rhel.9-x64`, `rocky.9-x64`, and `alpine.3.20-x64`, plus `android-arm64`, `android-arm`, `android-x64`, and `android-x86`. Linux runtime packages are built and named per distro/runtime family, so `JYPPX.OpenCV.runtime.ubuntu.22.04-x64` and `JYPPX.OpenCV.runtime.alpine.3.20-x64` are separate package identities. For custom distro-specific Linux RID restore, set `RuntimeIdentifierGraphPath` to `packaging/runtime/runtime-distro-rid-graph.json` or copy that graph into the consuming project before restore.
 
-managed 主包和 runtime 包应使用相同的四段 package version 元数据。消费者应选择与目标 target RID 匹配的 full `JYPPX.OpenCV.runtime.<rid>` 包，或更小的 `JYPPX.OpenCV.runtime.<rid>.mini` 包。当前 runtime package matrix 覆盖 `win-x64`、`win-x86`、`win-arm64`、`linux-x64`、`linux-arm64`、`android-arm64`、`android-arm`、`android-x64` 和 `android-x86`。Linux package ID 使用 .NET portable glibc RID，例如 `linux-x64`；Ubuntu runner label 是 CI/build host，不是 package 身份。Ubuntu、Debian、Fedora 和 RHEL-like host 需要单独的兼容性验证；Alpine/musl 则需要单独的 `linux-musl-*` runtime package surface。
+managed 主包和 runtime 包应使用相同的四段 package version 元数据。消费者应选择与精确 target RID 匹配的 full `JYPPX.OpenCV.runtime.<rid>` 包，或更小的 `JYPPX.OpenCV.runtime.<rid>.mini` 包。当前 runtime package matrix 覆盖 `win-x64`、`win-x86`、`win-arm64`，以及 `ubuntu.22.04-x64`、`ubuntu.24.04-x64`、`debian.12-x64`、`fedora.40-x64`、`rhel.9-x64`、`rocky.9-x64`、`alpine.3.20-x64` 等 distro-specific Linux RID package IDs，并覆盖 `android-arm64`、`android-arm`、`android-x64` 和 `android-x86`。Linux runtime 包按发行版/runtime family 分别构建和命名，因此 `JYPPX.OpenCV.runtime.ubuntu.22.04-x64` 与 `JYPPX.OpenCV.runtime.alpine.3.20-x64` 是不同包身份。使用自定义 distro-specific Linux RID restore 时，请把 `RuntimeIdentifierGraphPath` 指向 `packaging/runtime/runtime-distro-rid-graph.json`，或在 restore 前把该 graph 复制到 consumer project。
 
 Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. The matrix lives in `packaging/runtime/runtime-package-matrix.json`; Actions validate the full/mini package surface with synthetic runtime inputs by default, while real publishing requires native wrapper and OpenCV runtime outputs for the selected RID/profile. If no matching published runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then point local samples/tests at it with `OpenCvNativeRuntimeDir` or package it with `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
 
@@ -40,9 +40,9 @@ runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。矩�
 
 `pack.yml` 当前不会构建真实 runtime 输入；当 `validate_synthetic_runtime=false` 时，真实输入路径必须已经存在于 selected runner，或来自 `real_runtime_artifact_run_id`；该 run 必须包含中性的 `runtime-input-<rid>-<profile>` artifact，并带有 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 与可选 `opencv-install/` 目录。synthetic runtime inputs 只用于 package-surface validation；真实可发布 runtime 包必须带有 `SyntheticRuntimeInputs=false` provenance 并通过 release preflight。
 
-`runtime-input.yml` is the first real producer workflow for that handoff. It currently produces only `runtime-input-linux-x64-full`: it fetches factual OpenCV source, builds OpenCV, links/tests `JYPPX.OpenCV.Native`, and uploads the agreed `runtime-input-<rid>-<profile>` layout. Mini and additional RID producers stay disabled until their linked-component boundaries are implemented and verified.
+`runtime-input.yml` is the first real producer workflow for that handoff. It currently produces only `runtime-input-ubuntu.24.04-x64-full`: it fetches factual OpenCV source, builds OpenCV, links/tests `JYPPX.OpenCV.Native`, and uploads the agreed `runtime-input-<rid>-<profile>` layout. Mini and additional distro-specific Linux RID producers stay disabled until their linked-component boundaries are implemented and verified.
 
-`runtime-input.yml` 是该 handoff 的第一条真实 producer workflow。当前它只生产 `runtime-input-linux-x64-full`：它会获取事实性 OpenCV 源码、构建 OpenCV、链接并测试 `JYPPX.OpenCV.Native`，然后上传约定的 `runtime-input-<rid>-<profile>` layout。mini 和其它 RID producer 会保持禁用，直到对应 linked-component 边界完成并通过验证。
+`runtime-input.yml` 是该 handoff 的第一条真实 producer workflow。当前它只生产 `runtime-input-ubuntu.24.04-x64-full`：它会获取事实性 OpenCV 源码、构建 OpenCV、链接并测试 `JYPPX.OpenCV.Native`，然后上传约定的 `runtime-input-<rid>-<profile>` layout。mini 和其它 distro-specific Linux RID producer 会保持禁用，直到对应 linked-component 边界完成并通过验证。
 
 Naming policy: package IDs, managed assembly, public namespaces, project paths, and primary native loader stay version-neutral. The current packaged OpenCV runtime identity is expressed through package version metadata and factual runtime filenames. `OpenCv5Sharp.Native.dll` and `jyppx_ocv5_*` remain only as explicit compatibility contracts for already-compiled consumers.
 
@@ -114,7 +114,7 @@ Default tests and samples avoid downloads, cameras, GUI windows, real models, an
 ```powershell
 pwsh -NoProfile -File .\scripts\Pack-Managed.ps1 -OpenCvVersion 5.0.0 -PackageRevision 0
 pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0
-pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 -Rid linux-x64 -RuntimeProfile mini -OpenCvVersion 5.0.0 -PackageRevision 0
+pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 -Rid ubuntu.22.04-x64 -RuntimeProfile mini -OpenCvVersion 5.0.0 -PackageRevision 0
 ```
 
 `Pack-Managed.ps1` accepts `-ProjectPath` as either a repository-relative or absolute project path. Its default is the version-neutral managed project `src\OpenCvSharp\OpenCvSharp.csproj`, and another managed project layout can be selected without changing the script. Its neutral `-OutputDir` parameter also accepts a repository-relative or absolute package output directory; the default remains `artifacts\packages`.
@@ -137,7 +137,7 @@ The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the con
 
 For real non-synthetic workflow runs, `native_runtime_dir`, `opencv_runtime_dir`, and `opencv_source_dir` are existing directories on the selected runner unless `real_runtime_artifact_run_id` is provided. With artifact handoff, `pack.yml` downloads `runtime-input-<rid>-<profile>` into `artifacts/real-runtime-inputs/<rid>-<profile>` and resolves `native-wrapper/`, `opencv-runtime/`, `opencv-source/`, and optional `opencv-install/` before packaging. The workflow validates resolved paths before packaging but does not build them.
 
-To try the first producer/consumer chain, dispatch `runtime-input.yml` with `rid=linux-x64` and `runtime_profile=full`, then dispatch `pack.yml` with `rid=linux-x64`, `runtime_profile=full`, `validate_synthetic_runtime=false`, `publish_github_packages=false`, and `real_runtime_artifact_run_id=<runtime-input-run-id>`.
+To try the first producer/consumer chain, dispatch `runtime-input.yml` with `rid=ubuntu.24.04-x64` and `runtime_profile=full`, then dispatch `pack.yml` with `rid=ubuntu.24.04-x64`, `runtime_profile=full`, `validate_synthetic_runtime=false`, `publish_github_packages=false`, and `real_runtime_artifact_run_id=<runtime-input-run-id>`.
 
 ```powershell
 pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0 -StageRuntime -OpenCvNativeRuntimeDir ./build/native-opencv-core/Release
@@ -165,7 +165,7 @@ pack workflow 暴露 `rid` 与 `runtime_profile` 输入。`all` 会运行配置�
 
 对于真实 non-synthetic workflow run，除非提供 `real_runtime_artifact_run_id`，否则 `native_runtime_dir`、`opencv_runtime_dir` 和 `opencv_source_dir` 必须是 selected runner 上已存在的目录。使用 artifact handoff 时，`pack.yml` 会把 `runtime-input-<rid>-<profile>` 下载到 `artifacts/real-runtime-inputs/<rid>-<profile>`，并解析 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 和可选 `opencv-install/` 后再打包。workflow 会在打包前验证解析后的路径，但不会构建这些路径。
 
-要试跑第一条 producer/consumer 链路，请先 dispatch `runtime-input.yml`，使用 `rid=linux-x64` 和 `runtime_profile=full`；然后 dispatch `pack.yml`，使用 `rid=linux-x64`、`runtime_profile=full`、`validate_synthetic_runtime=false`、`publish_github_packages=false` 和 `real_runtime_artifact_run_id=<runtime-input-run-id>`。
+要试跑第一条 producer/consumer 链路，请先 dispatch `runtime-input.yml`，使用 `rid=ubuntu.24.04-x64` 和 `runtime_profile=full`；然后 dispatch `pack.yml`，使用 `rid=ubuntu.24.04-x64`、`runtime_profile=full`、`validate_synthetic_runtime=false`、`publish_github_packages=false` 和 `real_runtime_artifact_run_id=<runtime-input-run-id>`。
 
 Absolute `-ProjectPath` and `-RuntimeProject` values are accepted as-is and can point outside the repository when the caller chooses that layout.
 

@@ -85,7 +85,7 @@ catch {
 }
 
 if ($null -ne $runtimeMatrix) {
-    foreach ($requiredRid in @("win-x64", "win-x86", "win-arm64", "linux-x64", "linux-arm64", "android-arm64", "android-arm", "android-x64", "android-x86")) {
+    foreach ($requiredRid in @("win-x64", "win-x86", "win-arm64", "ubuntu.22.04-x64", "ubuntu.24.04-x64", "debian.12-x64", "fedora.40-x64", "rhel.9-x64", "rocky.9-x64", "alpine.3.20-x64", "android-arm64", "android-arm", "android-x64", "android-x86")) {
         $ridSpec = @($runtimeMatrix.rids | Where-Object { $_.rid -eq $requiredRid } | Select-Object -First 1)
         if ($ridSpec.Count -eq 0) {
             Add-Violation -Violations $violations -Path $runtimePackageMatrixPath -Issue "Runtime package matrix must include RID $requiredRid"

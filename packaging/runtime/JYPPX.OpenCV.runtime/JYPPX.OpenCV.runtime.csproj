@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="../runtime-distro-rid-graph.json" Pack="true" PackagePath="build" />
     <None Include="build/JYPPX.OpenCV.runtime.provenance.json" Condition="Exists('build/JYPPX.OpenCV.runtime.provenance.json')" Pack="true" PackagePath="build" />
     <None Include="runtimes/$(RuntimePackageRid)/native/**/*" Pack="true" PackagePath="runtimes/$(RuntimePackageRid)/native" />
     <None Include="licenses/**/*" Pack="true" PackagePath="licenses" />

@@ -135,16 +135,64 @@ jobs:
           - rid: win-arm64
             profile: mini
             os: windows-latest
-          - rid: linux-x64
+          - rid: ubuntu.22.04-x64
+            profile: full
+            os: ubuntu-22.04
+          - rid: ubuntu.22.04-x64
+            profile: mini
+            os: ubuntu-22.04
+          - rid: ubuntu.22.04-arm64
+            profile: full
+            os: ubuntu-22.04
+          - rid: ubuntu.22.04-arm64
+            profile: mini
+            os: ubuntu-22.04
+          - rid: ubuntu.24.04-x64
             profile: full
             os: ubuntu-24.04
-          - rid: linux-x64
+          - rid: ubuntu.24.04-x64
             profile: mini
             os: ubuntu-24.04
-          - rid: linux-arm64
+          - rid: ubuntu.24.04-arm64
             profile: full
             os: ubuntu-24.04
-          - rid: linux-arm64
+          - rid: ubuntu.24.04-arm64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: debian.12-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: debian.12-x64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: debian.12-arm64
+            profile: full
+            os: ubuntu-24.04
+          - rid: debian.12-arm64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: fedora.40-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: fedora.40-x64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: rhel.9-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: rhel.9-x64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: rocky.9-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: rocky.9-x64
+            profile: mini
+            os: ubuntu-24.04
+          - rid: alpine.3.20-x64
+            profile: full
+            os: ubuntu-24.04
+          - rid: alpine.3.20-x64
             profile: mini
             os: ubuntu-24.04
           - rid: android-arm64

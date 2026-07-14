@@ -3,6 +3,7 @@
   "rids": [
     {
       "rid": "win-x64",
+      "platformFamily": "windows",
       "runner": "windows-latest",
       "opencvRid": "windows-x64",
       "nativeExtension": ".dll",
@@ -10,6 +11,7 @@
     },
     {
       "rid": "win-x86",
+      "platformFamily": "windows",
       "runner": "windows-latest",
       "opencvRid": "windows-x86",
       "nativeExtension": ".dll",
@@ -17,27 +19,115 @@
     },
     {
       "rid": "win-arm64",
+      "platformFamily": "windows",
       "runner": "windows-latest",
       "opencvRid": "windows-arm64",
       "nativeExtension": ".dll",
       "notes": "Windows ARM64 package surface."
     },
     {
-      "rid": "linux-x64",
-      "runner": "ubuntu-24.04",
-      "opencvRid": "linux-x64",
+      "rid": "ubuntu.22.04-x64",
+      "platformFamily": "linux",
+      "distro": "ubuntu",
+      "distroVersion": "22.04",
+      "runner": "ubuntu-22.04",
+      "opencvRid": "ubuntu.22.04-x64",
       "nativeExtension": ".so",
-      "notes": "Portable glibc Linux x64 RID. Keep the NuGet package ID portable; validate Ubuntu, Debian, Fedora, and RHEL-like hosts separately. Alpine/musl requires a linux-musl RID package."
+      "notes": "Ubuntu 22.04 x64 glibc runtime package surface; build and publish from an Ubuntu 22.04 x64 native runtime."
     },
     {
-      "rid": "linux-arm64",
-      "runner": "ubuntu-24.04",
-      "opencvRid": "linux-arm64",
+      "rid": "ubuntu.22.04-arm64",
+      "platformFamily": "linux",
+      "distro": "ubuntu",
+      "distroVersion": "22.04",
+      "runner": "ubuntu-22.04",
+      "opencvRid": "ubuntu.22.04-arm64",
       "nativeExtension": ".so",
-      "notes": "Portable glibc Linux ARM64 RID. Keep the NuGet package ID portable; validate Ubuntu, Debian, Fedora, and RHEL-like hosts separately. Alpine/musl requires a linux-musl RID package."
+      "notes": "Ubuntu 22.04 ARM64 glibc runtime package surface; build and publish from an Ubuntu 22.04 ARM64 native runtime."
+    },
+    {
+      "rid": "ubuntu.24.04-x64",
+      "platformFamily": "linux",
+      "distro": "ubuntu",
+      "distroVersion": "24.04",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "ubuntu.24.04-x64",
+      "nativeExtension": ".so",
+      "notes": "Ubuntu 24.04 x64 glibc runtime package surface; build and publish from an Ubuntu 24.04 x64 native runtime."
+    },
+    {
+      "rid": "ubuntu.24.04-arm64",
+      "platformFamily": "linux",
+      "distro": "ubuntu",
+      "distroVersion": "24.04",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "ubuntu.24.04-arm64",
+      "nativeExtension": ".so",
+      "notes": "Ubuntu 24.04 ARM64 glibc runtime package surface; build and publish from an Ubuntu 24.04 ARM64 native runtime."
+    },
+    {
+      "rid": "debian.12-x64",
+      "platformFamily": "linux",
+      "distro": "debian",
+      "distroVersion": "12",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "debian.12-x64",
+      "nativeExtension": ".so",
+      "notes": "Debian 12 x64 glibc runtime package surface; build and publish from a Debian 12 x64 native runtime."
+    },
+    {
+      "rid": "debian.12-arm64",
+      "platformFamily": "linux",
+      "distro": "debian",
+      "distroVersion": "12",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "debian.12-arm64",
+      "nativeExtension": ".so",
+      "notes": "Debian 12 ARM64 glibc runtime package surface; build and publish from a Debian 12 ARM64 native runtime."
+    },
+    {
+      "rid": "fedora.40-x64",
+      "platformFamily": "linux",
+      "distro": "fedora",
+      "distroVersion": "40",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "fedora.40-x64",
+      "nativeExtension": ".so",
+      "notes": "Fedora 40 x64 glibc runtime package surface; build and publish from a Fedora 40 x64 native runtime."
+    },
+    {
+      "rid": "rhel.9-x64",
+      "platformFamily": "linux",
+      "distro": "rhel",
+      "distroVersion": "9",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "rhel.9-x64",
+      "nativeExtension": ".so",
+      "notes": "RHEL 9 x64 glibc runtime package surface; build and publish from a RHEL 9 x64 compatible native runtime."
+    },
+    {
+      "rid": "rocky.9-x64",
+      "platformFamily": "linux",
+      "distro": "rocky",
+      "distroVersion": "9",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "rocky.9-x64",
+      "nativeExtension": ".so",
+      "notes": "Rocky Linux 9 x64 glibc runtime package surface; build and publish from a Rocky Linux 9 x64 native runtime."
+    },
+    {
+      "rid": "alpine.3.20-x64",
+      "platformFamily": "linux",
+      "distro": "alpine",
+      "distroVersion": "3.20",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "alpine.3.20-x64",
+      "nativeExtension": ".so",
+      "notes": "Alpine 3.20 x64 musl runtime package surface; build and publish from an Alpine 3.20 x64 native runtime."
     },
     {
       "rid": "android-arm64",
+      "platformFamily": "android",
       "runner": "ubuntu-24.04",
       "opencvRid": "android-arm64",
       "nativeExtension": ".so",
@@ -45,6 +135,7 @@
     },
     {
       "rid": "android-arm",
+      "platformFamily": "android",
       "runner": "ubuntu-24.04",
       "opencvRid": "android-arm",
       "nativeExtension": ".so",
@@ -52,6 +143,7 @@
     },
     {
       "rid": "android-x64",
+      "platformFamily": "android",
       "runner": "ubuntu-24.04",
       "opencvRid": "android-x64",
       "nativeExtension": ".so",
@@ -59,6 +151,7 @@
     },
     {
       "rid": "android-x86",
+      "platformFamily": "android",
       "runner": "ubuntu-24.04",
       "opencvRid": "android-x86",
       "nativeExtension": ".so",
