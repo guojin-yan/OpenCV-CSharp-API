@@ -300,15 +300,17 @@ jobs:
                   apt-get install -y --no-install-recommends powershell
                   ;;
                 fedora|rocky)
+                  curl_package="curl"
                   if [ "${ID:-}" = "rocky" ]; then
                     dnf install -y dnf-plugins-core
                     dnf config-manager --set-enabled crb
+                    curl_package="curl-minimal"
                   fi
 
                   dnf install -y \
                     ca-certificates \
                     cmake \
-                    curl \
+                    "$curl_package" \
                     findutils \
                     gcc-c++ \
                     git \
