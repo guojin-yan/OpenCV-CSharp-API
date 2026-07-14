@@ -350,6 +350,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
         [pscustomobject]@{ Needle = "-Build"; Issue = "Producer workflow must run the OpenCV build/install target, not only describe it" },
         [pscustomobject]@{ Needle = "OPENCV_CSHARP_OPENCV_DIR"; Issue = "Producer workflow must link native wrapper against produced OpenCV config" },
+        [pscustomobject]@{ Needle = "lib64/cmake/opencv5"; Issue = "Producer workflow must probe lib64 OpenCVConfig.cmake for Fedora-style Linux installs" },
+        [pscustomobject]@{ Needle = "open_cv_install_dir/lib64"; Issue = "Producer workflow must probe lib64 runtime directories for Fedora-style Linux installs" },
         [pscustomobject]@{ Needle = "cmake --build build/native-linked"; Issue = "Producer workflow must build the linked native wrapper" },
         [pscustomobject]@{ Needle = "ctest --test-dir build/native-linked"; Issue = "Producer workflow must test the linked native wrapper" },
         [pscustomobject]@{ Needle = "./scripts/New-RuntimeInputArtifact.ps1"; Issue = "Producer workflow must assemble the agreed handoff layout" },

@@ -227,6 +227,7 @@ function Get-OpenCvRuntimeDirectoryCandidates {
 
     return @(
         (Join-Path $InstallDirectory "lib"),
+        (Join-Path $InstallDirectory "lib64"),
         (Join-Path $InstallDirectory "bin")
     )
 }

@@ -116,10 +116,16 @@ jobs:
         shell: pwsh
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
-          $openCvDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}/lib/cmake/opencv5"
-          if (-not (Test-Path -LiteralPath (Join-Path $openCvDir 'OpenCVConfig.cmake') -PathType Leaf)) {
-            throw "OpenCVConfig.cmake was not found for linked native wrapper build: $openCvDir"
+          $openCvInstallDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
+          $openCvDirCandidates = @(
+            (Join-Path $openCvInstallDir 'lib/cmake/opencv5'),
+            (Join-Path $openCvInstallDir 'lib64/cmake/opencv5')
+          )
+          $openCvDirMatches = @($openCvDirCandidates | Where-Object { Test-Path -LiteralPath (Join-Path $_ 'OpenCVConfig.cmake') -PathType Leaf } | Select-Object -First 1)
+          if ($openCvDirMatches.Count -eq 0) {
+            throw "OpenCVConfig.cmake was not found for linked native wrapper build. Checked: $($openCvDirCandidates -join ', ')"
           }
+          $openCvDir = [string]$openCvDirMatches[0]
 
           cmake `
             -S src/OpenCvSharp.Native `
@@ -140,7 +146,16 @@ jobs:
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
           $openCvInstallDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
-          $openCvRuntimeDir = Join-Path $openCvInstallDir 'lib'
+          $openCvRuntimeDirCandidates = @(
+            (Join-Path $openCvInstallDir 'lib'),
+            (Join-Path $openCvInstallDir 'lib64'),
+            (Join-Path $openCvInstallDir 'bin')
+          )
+          $openCvRuntimeDirMatches = @($openCvRuntimeDirCandidates | Where-Object { Test-Path -LiteralPath $_ -PathType Container } | Select-Object -First 1)
+          if ($openCvRuntimeDirMatches.Count -eq 0) {
+            throw "OpenCV runtime directory was not found for artifact layout. Checked: $($openCvRuntimeDirCandidates -join ', ')"
+          }
+          $openCvRuntimeDir = [string]$openCvRuntimeDirMatches[0]
           $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
 
           pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 `
@@ -316,9 +331,18 @@ jobs:
                 -BuildList "$BUILD_LIST" \
                 -Build
 
-              open_cv_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID/lib/cmake/opencv5"
-              if [ ! -f "$open_cv_dir/OpenCVConfig.cmake" ]; then
-                echo "OpenCVConfig.cmake was not found for linked native wrapper build: $open_cv_dir" >&2
+              open_cv_install_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID"
+              open_cv_dir=""
+              for candidate in \
+                "$open_cv_install_dir/lib/cmake/opencv5" \
+                "$open_cv_install_dir/lib64/cmake/opencv5"; do
+                if [ -f "$candidate/OpenCVConfig.cmake" ]; then
+                  open_cv_dir="$candidate"
+                  break
+                fi
+              done
+              if [ -z "$open_cv_dir" ]; then
+                echo "OpenCVConfig.cmake was not found for linked native wrapper build under $open_cv_install_dir/lib or $open_cv_install_dir/lib64" >&2
                 exit 1
               fi
 
@@ -333,8 +357,20 @@ jobs:
               cmake --build build/native-linked --config Release
               ctest --test-dir build/native-linked -C Release --output-on-failure
 
-              open_cv_install_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID"
-              open_cv_runtime_dir="$open_cv_install_dir/lib"
+              open_cv_runtime_dir=""
+              for candidate in \
+                "$open_cv_install_dir/lib" \
+                "$open_cv_install_dir/lib64" \
+                "$open_cv_install_dir/bin"; do
+                if [ -d "$candidate" ]; then
+                  open_cv_runtime_dir="$candidate"
+                  break
+                fi
+              done
+              if [ -z "$open_cv_runtime_dir" ]; then
+                echo "OpenCV runtime directory was not found under $open_cv_install_dir/lib, $open_cv_install_dir/lib64, or $open_cv_install_dir/bin" >&2
+                exit 1
+              fi
 
               pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 \
                 -Rid "$PRODUCER_RID" \

@@ -222,10 +222,12 @@ function Get-OpenCvBuildTarget {
 
         $openCvConfigCandidates = @(
             "lib/cmake/opencv$openCvMajor/OpenCVConfig.cmake",
+            "lib64/cmake/opencv$openCvMajor/OpenCVConfig.cmake",
             "lib/OpenCVConfig.cmake",
+            "lib64/OpenCVConfig.cmake",
             "OpenCVConfig.cmake"
         )
-        $runtimeDirCandidates = @("lib", "bin")
+        $runtimeDirCandidates = @("lib", "lib64", "bin")
     }
     elseif ($platformFamily -eq "android") {
         if ([string]::IsNullOrWhiteSpace($resolvedGenerator)) {

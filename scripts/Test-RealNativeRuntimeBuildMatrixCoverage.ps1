@@ -341,6 +341,15 @@ foreach ($ridSpec in @($matrix.rids)) {
             if (-not (Test-ContainsText -Text $configCandidates -Needle "lib/cmake/opencv$openCvMajor/OpenCVConfig.cmake")) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux OpenCVConfig.cmake candidate must derive the OpenCV major from version metadata" -Text "$rid :: $configCandidates"
             }
+
+            if (-not (Test-ContainsText -Text $configCandidates -Needle "lib64/cmake/opencv$openCvMajor/OpenCVConfig.cmake")) {
+                Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux OpenCVConfig.cmake candidates must include lib64 for Fedora-style installs" -Text "$rid :: $configCandidates"
+            }
+
+            $runtimeDirs = ConvertTo-NormalizedPathText ((@($plan.ExpectedRuntimeDirs) -join "|"))
+            if (-not (Test-ContainsText -Text $runtimeDirs -Needle "lib64")) {
+                Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux runtime directory candidates must include lib64 for Fedora-style installs" -Text "$rid :: $runtimeDirs"
+            }
         }
         elseif ($platformFamily -eq "android") {
             $expectedAbi = Get-AndroidAbi -Rid $rid
@@ -367,6 +376,7 @@ foreach ($ridSpec in @($matrix.rids)) {
 
 Invoke-StageCase -Rid "win-x86" -OpenCvRid "windows-x86" -PlatformFamily "windows" -RuntimeSubdir "x86/vc18/bin" -Violations $violations
 Invoke-StageCase -Rid "ubuntu.24.04-x64" -OpenCvRid "ubuntu.24.04-x64" -PlatformFamily "linux" -RuntimeSubdir "lib" -Violations $violations
+Invoke-StageCase -Rid "fedora.40-x64" -OpenCvRid "fedora.40-x64" -PlatformFamily "linux" -RuntimeSubdir "lib64" -Violations $violations
 Invoke-StageCase -Rid "android-arm64" -OpenCvRid "android-arm64" -PlatformFamily "android" -RuntimeSubdir "sdk/native/libs/arm64-v8a" -Violations $violations
 
 if ($violations.Count -gt 0) {
@@ -380,4 +390,4 @@ if ($violations.Count -gt 0) {
 Write-Host "Real native runtime build matrix coverage guard passed."
 Write-Host "RID build plans checked: $ridCount."
 Write-Host "Runtime profiles checked per RID: $profileCount."
-Write-Host "RID-aware staging default probes checked: win-x86, ubuntu.24.04-x64, android-arm64."
+Write-Host "RID-aware staging default probes checked: win-x86, ubuntu.24.04-x64, fedora.40-x64, android-arm64."
