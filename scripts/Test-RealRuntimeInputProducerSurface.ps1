@@ -153,17 +153,19 @@ function Get-RuntimeInputProducerTargets {
     for ($index = 0; $index -lt $lines.Count; $index++) {
         $line = $lines[$index]
 
-        if (-not $inProduceJob) {
-            if ($line -match "^\s{2}produce:\s*$") {
-                $inProduceJob = $true
+        if ($line -match "^\s{2}([A-Za-z0-9_-]+):\s*$") {
+            if ($null -ne $current) {
+                $targets.Add($current)
+                $current = $null
             }
 
+            $jobName = [string]$Matches[1]
+            $inProduceJob = $jobName.StartsWith("produce", [System.StringComparison]::Ordinal)
             continue
         }
 
-        if ($line -match "^\s{2}[A-Za-z0-9_-]+:\s*$" -and
-            $line -notmatch "^\s{2}produce:\s*$") {
-            break
+        if (-not $inProduceJob) {
+            continue
         }
 
         if ($line -match "^\s{10}-\s+rid:\s*(.+?)\s*$") {
@@ -175,6 +177,7 @@ function Get-RuntimeInputProducerTargets {
                 Rid = Convert-YamlScalar -Value $Matches[1]
                 Profile = ""
                 Runner = ""
+                ContainerImage = ""
             }
             continue
         }
@@ -187,6 +190,11 @@ function Get-RuntimeInputProducerTargets {
 
             if ($line -match "^\s{12}os:\s*(.+?)\s*$") {
                 $current.Runner = Convert-YamlScalar -Value $Matches[1]
+                continue
+            }
+
+            if ($line -match "^\s{12}container_image:\s*(.+?)\s*$") {
+                $current.ContainerImage = Convert-YamlScalar -Value $Matches[1]
                 continue
             }
         }
@@ -215,8 +223,9 @@ function Assert-RealProducerTargets {
     )
 
     $expectedTargets = @(
-        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04" },
-        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04" }
+        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "" },
+        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = "" },
+        [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12" }
     )
     $expectedByKey = @{}
     foreach ($target in $expectedTargets) {
@@ -254,6 +263,10 @@ function Assert-RealProducerTargets {
         if (-not ([string]$target.Runner).Equals([string]$expected.Runner, [System.StringComparison]::Ordinal)) {
             Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow target runner must match the approved real producer host" -Text "$key workflow=$($target.Runner); expected=$($expected.Runner)"
         }
+
+        if (-not ([string]$target.ContainerImage).Equals([string]$expected.ContainerImage, [System.StringComparison]::Ordinal)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow target container image must match the approved real producer boundary" -Text "$key workflow=$($target.ContainerImage); expected=$($expected.ContainerImage)"
+        }
     }
 
     foreach ($expected in $expectedTargets) {
@@ -279,8 +292,24 @@ function Assert-RealProducerTargets {
             Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must remain a Linux runtime package RID" -Text $target.Rid
         }
 
-        if (-not ([string]$ridSpec[0].distro).Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
-            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Current real producer target may only claim Ubuntu distro-native coverage" -Text $target.Rid
+        $distro = [string]$ridSpec[0].distro
+        if ([string]::IsNullOrWhiteSpace($distro)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must record a distro in the runtime matrix" -Text $target.Rid
+        }
+
+        if ($distro.Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
+            if (-not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Ubuntu real producer targets should remain hosted-runner native until deliberately converted" -Text "$($target.Rid): $($target.ContainerImage)"
+            }
+        }
+        else {
+            if ([string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Non-Ubuntu real producer targets must declare a distro-native container image" -Text $target.Rid
+            }
+
+            if (-not ([string]$target.ContainerImage).StartsWith("$distro`:", [System.StringComparison]::OrdinalIgnoreCase)) {
+                Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Non-Ubuntu real producer container image must match the runtime matrix distro" -Text "$($target.Rid): distro=$distro; image=$($target.ContainerImage)"
+            }
         }
 
         $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $target.Profile } | Select-Object -First 1)
@@ -308,8 +337,12 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "validate-target:"; Issue = "Producer workflow must reject unsupported real producer targets before matrix work starts" },
         [pscustomobject]@{ Needle = "runs-on: `${{ matrix.os }}"; Issue = "Producer workflow must run real target builds on the target matrix runner" },
         [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
+        [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
-        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full and runtime-input-ubuntu.22.04-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
+        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, and runtime-input-debian.12-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
+        [pscustomobject]@{ Needle = "container_image: debian:12"; Issue = "Producer workflow must declare the Debian 12 container-native boundary" },
+        [pscustomobject]@{ Needle = "docker run --rm"; Issue = "Producer workflow must execute non-Ubuntu producer work inside the distro container" },
+        [pscustomobject]@{ Needle = "getconf GNU_LIBC_VERSION"; Issue = "Producer workflow must record libc evidence for container-native Linux outputs" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
@@ -350,6 +383,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Distro = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record distro from the runtime matrix" },
         [pscustomobject]@{ Needle = "DistroVersion = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record distro version from the runtime matrix" },
         [pscustomobject]@{ Needle = "MatrixRunner = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the matrix runner from the runtime matrix" },
+        [pscustomobject]@{ Needle = "HostedRunner = `$HostedRunner"; Issue = "Runtime input artifact provenance must record the hosted runner used by the producer workflow" },
+        [pscustomobject]@{ Needle = "ContainerImage = `$ContainerImage"; Issue = "Runtime input artifact provenance must record the container image for container-native producers" },
+        [pscustomobject]@{ Needle = "ContainerDistro = `$ContainerDistro"; Issue = "Runtime input artifact provenance must record actual container distro evidence" },
+        [pscustomobject]@{ Needle = "ContainerDistroVersion = `$ContainerDistroVersion"; Issue = "Runtime input artifact provenance must record actual container distro version evidence" },
+        [pscustomobject]@{ Needle = "ContainerLibc = `$ContainerLibc"; Issue = "Runtime input artifact provenance must record libc evidence for Linux container builds" },
         [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = '"Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers'; Issue = "Runtime input artifact script must keep compatibility loader explicitly scoped" },
@@ -370,6 +408,7 @@ foreach ($doc in @(
             '`runtime-input.yml`',
             '`runtime-input-ubuntu.24.04-x64-full`',
             '`runtime-input-ubuntu.22.04-x64-full`',
+            '`runtime-input-debian.12-x64-full`',
             '`runtime-input-<rid>-<profile>`',
             '`native-wrapper/`',
             '`opencv-runtime/`',
@@ -406,6 +445,17 @@ if ($violations.Count -eq 0) {
         }
 
         foreach ($producerTarget in @(Get-RuntimeInputProducerTargets -Text $producerWorkflowText)) {
+            $ridSpec = @($matrix.rids | Where-Object { $_.rid -eq $producerTarget.Rid } | Select-Object -First 1)
+            if ($ridSpec.Count -eq 0) {
+                throw "Fixture producer target RID was not found in runtime matrix: $($producerTarget.Rid)"
+            }
+
+            $expectedDistro = [string]$ridSpec[0].distro
+            $expectedDistroVersion = [string]$ridSpec[0].distroVersion
+            $containerDistro = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistro }
+            $containerDistroVersion = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistroVersion }
+            $containerLibc = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { "glibc fixture" }
+
             & (Join-Path $repo $runtimeInputScriptPath) `
                 -Rid ([string]$producerTarget.Rid) `
                 -RuntimeProfile ([string]$producerTarget.Profile) `
@@ -414,6 +464,11 @@ if ($violations.Count -eq 0) {
                 -OpenCvRuntimeDir $fixtureRuntimeDir `
                 -OpenCvSourceDir $fixtureSourceDir `
                 -OpenCvInstallDir $fixtureInstallDir `
+                -HostedRunner ([string]$producerTarget.Runner) `
+                -ContainerImage ([string]$producerTarget.ContainerImage) `
+                -ContainerDistro $containerDistro `
+                -ContainerDistroVersion $containerDistroVersion `
+                -ContainerLibc $containerLibc `
                 -OutputRoot $fixtureOutputRoot
 
             $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "$($producerTarget.Rid)-$($producerTarget.Profile)") "runtime-input.provenance.json"
@@ -430,16 +485,45 @@ if ($violations.Count -eq 0) {
                 throw "Fixture provenance did not record linux PlatformFamily for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
-            if (-not ([string]$manifest.Distro).Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
-                throw "Fixture provenance did not record ubuntu Distro for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            if (-not ([string]$manifest.Distro).Equals($expectedDistro, [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Fixture provenance Distro did not match runtime matrix for $($producerTarget.Rid)/$($producerTarget.Profile). Expected $expectedDistro, got $($manifest.Distro)."
             }
 
-            if ([string]::IsNullOrWhiteSpace([string]$manifest.DistroVersion)) {
-                throw "Fixture provenance did not record DistroVersion for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            if (-not ([string]$manifest.DistroVersion).Equals($expectedDistroVersion, [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Fixture provenance DistroVersion did not match runtime matrix for $($producerTarget.Rid)/$($producerTarget.Profile). Expected $expectedDistroVersion, got $($manifest.DistroVersion)."
             }
 
             if (-not ([string]$manifest.MatrixRunner).Equals([string]$producerTarget.Runner, [System.StringComparison]::Ordinal)) {
                 throw "Fixture provenance MatrixRunner did not match producer target runner for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if (-not ([string]$manifest.HostedRunner).Equals([string]$producerTarget.Runner, [System.StringComparison]::Ordinal)) {
+                throw "Fixture provenance HostedRunner did not match producer target runner for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if (-not ([string]$manifest.ContainerImage).Equals([string]$producerTarget.ContainerImage, [System.StringComparison]::Ordinal)) {
+                throw "Fixture provenance ContainerImage did not match producer target container image for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) {
+                if (-not [string]::IsNullOrWhiteSpace([string]$manifest.ContainerDistro) -or
+                    -not [string]::IsNullOrWhiteSpace([string]$manifest.ContainerDistroVersion) -or
+                    -not [string]::IsNullOrWhiteSpace([string]$manifest.ContainerLibc)) {
+                    throw "Fixture provenance should not record container-only fields for hosted producer $($producerTarget.Rid)/$($producerTarget.Profile)."
+                }
+            }
+            else {
+                if (-not ([string]$manifest.ContainerDistro).Equals($expectedDistro, [System.StringComparison]::OrdinalIgnoreCase)) {
+                    throw "Fixture provenance ContainerDistro did not match runtime matrix for $($producerTarget.Rid)/$($producerTarget.Profile)."
+                }
+
+                if (-not ([string]$manifest.ContainerDistroVersion).Equals($expectedDistroVersion, [System.StringComparison]::OrdinalIgnoreCase)) {
+                    throw "Fixture provenance ContainerDistroVersion did not match runtime matrix for $($producerTarget.Rid)/$($producerTarget.Profile)."
+                }
+
+                if ([string]::IsNullOrWhiteSpace([string]$manifest.ContainerLibc)) {
+                    throw "Fixture provenance did not record ContainerLibc for $($producerTarget.Rid)/$($producerTarget.Profile)."
+                }
             }
 
             if ([string]::IsNullOrWhiteSpace([string]$manifest.BuildList)) {
@@ -474,5 +558,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

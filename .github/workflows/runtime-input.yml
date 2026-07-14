@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently ubuntu.24.04-x64 or ubuntu.22.04-x64
+        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, or debian.12-x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -28,11 +28,12 @@ jobs:
         run: |
           $supportedTargets = @(
             'ubuntu.24.04-x64/full',
-            'ubuntu.22.04-x64/full'
+            'ubuntu.22.04-x64/full',
+            'debian.12-x64/full'
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full and runtime-input-ubuntu.22.04-x64-full. Mini and non-Ubuntu distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, and runtime-input-debian.12-x64-full. Mini and other distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -149,7 +150,170 @@ jobs:
             -OpenCvRuntimeDir $openCvRuntimeDir `
             -OpenCvSourceDir $openCvSourceDir `
             -OpenCvInstallDir $openCvInstallDir `
+            -HostedRunner '${{ matrix.os }}' `
             -OutputRoot ./artifacts/runtime-inputs
+      - name: Upload runtime input artifact
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
+          if-no-files-found: error
+
+  produce-container:
+    needs: validate-target
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: debian.12-x64
+            profile: full
+            os: ubuntu-24.04
+            container_image: debian:12
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Skip unmatched container producer target
+        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
+        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
+      - uses: actions/checkout@v4
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+      - uses: actions/setup-dotnet@v4
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Resolve runtime profile build list
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        id: profile
+        shell: pwsh
+        run: |
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $rid = @($matrix.rids | Where-Object { $_.rid -eq '${{ matrix.rid }}' } | Select-Object -First 1)
+          if ($rid.Count -eq 0) {
+            throw "Runtime RID was not found: ${{ matrix.rid }}"
+          }
+
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq '${{ matrix.profile }}' } | Select-Object -First 1)
+          if ($profile.Count -eq 0) {
+            throw "Runtime profile was not found: ${{ matrix.profile }}"
+          }
+
+          "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
+          "opencv_rid=$($rid[0].opencvRid)" >> $env:GITHUB_OUTPUT
+      - name: Run distro container producer
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: bash
+        env:
+          CMAKE_BUILD_PARALLEL_LEVEL: 2
+          CONTAINER_IMAGE: ${{ matrix.container_image }}
+          HOSTED_RUNNER: ${{ matrix.os }}
+          OPENCV_RID: ${{ steps.profile.outputs.opencv_rid }}
+          OPENCV_VERSION: ${{ inputs.opencv_version }}
+          PRODUCER_RID: ${{ matrix.rid }}
+          RUNTIME_PROFILE: ${{ matrix.profile }}
+          BUILD_LIST: ${{ steps.profile.outputs.build_list }}
+        run: |
+          set -euo pipefail
+          workspace_root="$(dirname "$GITHUB_WORKSPACE")"
+          repo_name="$(basename "$GITHUB_WORKSPACE")"
+
+          docker run --rm \
+            -e CMAKE_BUILD_PARALLEL_LEVEL="$CMAKE_BUILD_PARALLEL_LEVEL" \
+            -e CONTAINER_IMAGE="$CONTAINER_IMAGE" \
+            -e HOSTED_RUNNER="$HOSTED_RUNNER" \
+            -e OPENCV_RID="$OPENCV_RID" \
+            -e OPENCV_VERSION="$OPENCV_VERSION" \
+            -e PRODUCER_RID="$PRODUCER_RID" \
+            -e RUNTIME_PROFILE="$RUNTIME_PROFILE" \
+            -e BUILD_LIST="$BUILD_LIST" \
+            -v "$workspace_root:/workspace" \
+            -w "/workspace/$repo_name" \
+            "$CONTAINER_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              export DEBIAN_FRONTEND=noninteractive
+
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                apt-transport-https \
+                ca-certificates \
+                cmake \
+                curl \
+                g++ \
+                git \
+                gnupg \
+                make \
+                ninja-build \
+                pkg-config
+
+              install -d -m 0755 /etc/apt/keyrings
+              curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
+              chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
+              . /etc/os-release
+              echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+              apt-get update
+              apt-get install -y --no-install-recommends powershell
+
+              . /etc/os-release
+              container_distro="${ID:-debian}"
+              container_distro_version="${VERSION_ID:-12}"
+              container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
+
+              source_root="/workspace/opencv-source"
+              source_dir="$source_root/opencv-$OPENCV_VERSION"
+              mkdir -p "$source_root"
+              if [ ! -d "$source_dir/.git" ]; then
+                git -c advice.detachedHead=false clone --depth 1 --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git "$source_dir"
+              fi
+
+              pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 \
+                -OpenCvVersion "$OPENCV_VERSION" \
+                -WorkspaceRoot /workspace \
+                -Rid "$PRODUCER_RID" \
+                -BuildList "$BUILD_LIST" \
+                -Build
+
+              open_cv_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID/lib/cmake/opencv5"
+              if [ ! -f "$open_cv_dir/OpenCVConfig.cmake" ]; then
+                echo "OpenCVConfig.cmake was not found for linked native wrapper build: $open_cv_dir" >&2
+                exit 1
+              fi
+
+              cmake \
+                -S src/OpenCvSharp.Native \
+                -B build/native-linked \
+                -G Ninja \
+                "-DOPENCV_VERSION=$OPENCV_VERSION" \
+                "-DOPENCV_CSHARP_OPENCV_DIR=$open_cv_dir" \
+                "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=$BUILD_LIST"
+
+              cmake --build build/native-linked --config Release
+              ctest --test-dir build/native-linked -C Release --output-on-failure
+
+              open_cv_install_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID"
+              open_cv_runtime_dir="$open_cv_install_dir/lib"
+
+              pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 \
+                -Rid "$PRODUCER_RID" \
+                -RuntimeProfile "$RUNTIME_PROFILE" \
+                -OpenCvVersion "$OPENCV_VERSION" \
+                -NativeRuntimeDir ./build/native-linked \
+                -OpenCvRuntimeDir "$open_cv_runtime_dir" \
+                -OpenCvSourceDir "$source_dir" \
+                -OpenCvInstallDir "$open_cv_install_dir" \
+                -HostedRunner "$HOSTED_RUNNER" \
+                -ContainerImage "$CONTAINER_IMAGE" \
+                -ContainerDistro "$container_distro" \
+                -ContainerDistroVersion "$container_distro_version" \
+                -ContainerLibc "$container_libc" \
+                -OutputRoot ./artifacts/runtime-inputs
+            '
       - name: Upload runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         uses: actions/upload-artifact@v4

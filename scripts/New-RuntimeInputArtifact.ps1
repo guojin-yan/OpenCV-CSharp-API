@@ -6,6 +6,11 @@ param(
     [string]$OpenCvRuntimeDir,
     [string]$OpenCvSourceDir,
     [string]$OpenCvInstallDir = "",
+    [string]$HostedRunner = "",
+    [string]$ContainerImage = "",
+    [string]$ContainerDistro = "",
+    [string]$ContainerDistroVersion = "",
+    [string]$ContainerLibc = "",
     [string]$OutputRoot = "artifacts/runtime-inputs",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json"
 )
@@ -281,6 +286,11 @@ $manifest = [ordered]@{
     Distro = Get-OptionalStringProperty -InputObject $ridDefinition -Name "distro"
     DistroVersion = Get-OptionalStringProperty -InputObject $ridDefinition -Name "distroVersion"
     MatrixRunner = Get-OptionalStringProperty -InputObject $ridDefinition -Name "runner"
+    HostedRunner = $HostedRunner
+    ContainerImage = $ContainerImage
+    ContainerDistro = $ContainerDistro
+    ContainerDistroVersion = $ContainerDistroVersion
+    ContainerLibc = $ContainerLibc
     RuntimeProfile = $RuntimeProfile
     RuntimeProfilePackageIdSuffix = Get-OptionalStringProperty -InputObject $profileDefinition -Name "packageIdSuffix"
     BuildList = Get-OptionalStringProperty -InputObject $profileDefinition -Name "buildList"
