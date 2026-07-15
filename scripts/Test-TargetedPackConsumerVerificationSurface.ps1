@@ -101,6 +101,7 @@ foreach ($expectation in @(
         @($consumerGuardPath, $consumerGuardText, "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio", "Consumer must execute every supported wrapper module"),
         @($consumerGuardPath, $consumerGuardText, "NATIVE_LOADER_OR_SONAME_MISSING", "Consumer diagnostics must distinguish loader or SONAME failure"),
         @($consumerGuardPath, $consumerGuardText, "SUPPORTED_MINI_ENTRYPOINT_MISSING", "Consumer diagnostics must distinguish a missing supported entrypoint"),
+        @($consumerGuardPath, $consumerGuardText, "-EchoOutputOnSuccess", "Successful targeted native smoke output must remain visible in GitHub logs"),
         @($consumerGuardPath, $consumerGuardText, '"run",', "Consumer guard must execute the restored package application"),
         @($cmakePath, $cmakeText, "BUILD_WITH_INSTALL_RPATH TRUE", "Linux loader must use package RPATH in producer output"),
         @($cmakePath, $cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linux loader must resolve adjacent packaged dependencies"),

@@ -220,7 +220,8 @@ function Invoke-CheckedCommand {
         [Parameter(Mandatory = $true)]
         [string]$FilePath,
         [Parameter(Mandatory = $true)]
-        [string[]]$Arguments
+        [string[]]$Arguments,
+        [switch]$EchoOutputOnSuccess
     )
 
     $output = & $FilePath @Arguments 2>&1
@@ -228,6 +229,10 @@ function Invoke-CheckedCommand {
     if ($LASTEXITCODE -ne 0) {
         Add-Violation -Violations $Violations -Path $Path -Issue $Issue -Text $outputText
         return $false
+    }
+
+    if ($EchoOutputOnSuccess -and -not [string]::IsNullOrWhiteSpace($outputText)) {
+        Write-Host $outputText
     }
 
     return $true
@@ -626,7 +631,8 @@ try {
                     -Path $consumerProjectPath `
                     -Issue "Targeted GitHub artifact consumer native smoke failed; inspect loader, SONAME, RID selection, and supported mini entrypoint diagnostics" `
                     -FilePath $dotnet.Source `
-                    -Arguments $runArguments
+                    -Arguments $runArguments `
+                    -EchoOutputOnSuccess
             }
 
             $assetsPath = Join-Path $consumerDir "obj/project.assets.json"
