@@ -105,12 +105,12 @@ if ($miniProfile.Count -ne 1 -or $fullProfile.Count -ne 1) {
     Add-Violation "Runtime matrix must contain exactly one full and one mini profile."
 }
 else {
-    $expectedMiniModules = @("core", "imgproc", "imgcodecs", "videoio", "geometry")
+    $expectedMiniModules = @("core", "imgproc", "imgcodecs", "videoio", "geometry", "flann")
     if ([string]$miniProfile[0].buildList -cne ($expectedMiniModules -join ",")) {
         Add-Violation "Mini runtime buildList must be exactly $($expectedMiniModules -join ',')."
     }
     if ((Compare-Object -ReferenceObject $expectedMiniModules -DifferenceObject @($miniProfile[0].modules) -SyncWindow 0)) {
-        Add-Violation "Mini runtime modules must remain exactly core,imgproc,imgcodecs,videoio,geometry in order."
+        Add-Violation "Mini runtime modules must remain exactly core,imgproc,imgcodecs,videoio,geometry,flann in order."
     }
     if (@($miniProfile[0].optionalModules).Count -ne 0) {
         Add-Violation "Mini runtime profile must not declare optional full-only modules."
@@ -128,8 +128,8 @@ $nativeSmokeText = [System.IO.File]::ReadAllText($nativeSmokePath)
 foreach ($expectation in @(
         @($cmakeText, 'set(OPENCV_CSHARP_RUNTIME_PROFILE "full" CACHE STRING', "CMake must expose a version-neutral runtime profile input"),
         @($cmakeText, 'set_property(CACHE OPENCV_CSHARP_RUNTIME_PROFILE PROPERTY STRINGS full mini)', "CMake must constrain runtime profile values"),
-        @($cmakeText, 'set(OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST "core,imgproc,imgcodecs,videoio,geometry")', "CMake must pin the mini OpenCV build list"),
-        @($cmakeText, 'find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs videoio geometry)', "Mini CMake must require only mini OpenCV components and the OpenCV 5 imgproc geometry dependency"),
+        @($cmakeText, 'set(OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST "core,imgproc,imgcodecs,videoio,geometry,flann")', "CMake must pin the mini OpenCV build list including transitive runtime dependencies"),
+        @($cmakeText, 'find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs videoio geometry flann)', "Mini CMake must require only mini OpenCV components plus the OpenCV 5 geometry/flann dependency chain"),
         @($cmakeText, 'OPENCV_CSHARP_HAS_OPENCV_GEOMETRY=1', "Mini/full CMake must expose OpenCV 5 geometry-backed imgproc APIs"),
         @($cmakeText, 'OPENCV_CSHARP_HAS_OPENCV_FEATURES=1', "Full CMake must explicitly expose OpenCV 5 features-backed imgproc APIs"),
         @($cmakeText, 'set(OPENCV_CSHARP_NATIVE_ABI_SOURCE generated/legacy_abi_mini.cpp)', "Mini CMake must select the reduced compatibility ABI"),
@@ -166,7 +166,7 @@ $expectedMiniSources = @(
     "src/imgproc.cpp"
 )
 if (Compare-Object -ReferenceObject $expectedMiniSources -DifferenceObject $miniSources) {
-    Add-Violation "CMake mini native sources must remain common infrastructure plus core/imgproc/imgcodecs/videoio wrappers; geometry is an OpenCV dependency without a separate wrapper source."
+    Add-Violation "CMake mini native sources must remain common infrastructure plus core/imgproc/imgcodecs/videoio wrappers; geometry and flann are OpenCV dependencies without separate wrapper sources."
 }
 
 $diskSources = @(

@@ -202,7 +202,7 @@ function Invoke-StageCase {
         $runtimeDir = Join-Path $installDir $RuntimeSubdir
         $outputRoot = Join-Path $temporaryRoot "stage-output"
         $runtimeProject = Join-Path $temporaryRoot "runtime-project"
-        $modules = @("core", "imgproc", "imgcodecs", "videoio", "geometry")
+        $modules = @("core", "imgproc", "imgcodecs", "videoio", "geometry", "flann")
 
         New-Item -ItemType Directory -Force -Path `
             $nativeRuntimeDir,
@@ -269,6 +269,9 @@ function Invoke-StageCase {
 
         if (@($manifest.RequiredModules).Count -ne $modules.Count) {
             Add-Violation -Violations $Violations -Path $manifestPath -Issue "Mini staging provenance must use mini module count" -Text "Found $(@($manifest.RequiredModules).Count), expected $($modules.Count)"
+        }
+        elseif (Compare-Object -ReferenceObject $modules -DifferenceObject @($manifest.RequiredModules) -SyncWindow 0) {
+            Add-Violation -Violations $Violations -Path $manifestPath -Issue "Mini staging provenance must record the exact mini module sequence" -Text "$(@($manifest.RequiredModules) -join ',')"
         }
 
         $runtimeInputRoot = ConvertTo-NormalizedPathText ([string]$manifest.InputRoots.OpenCvRuntimeDir)
