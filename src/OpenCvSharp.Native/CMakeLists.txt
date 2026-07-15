@@ -513,24 +513,6 @@ set(
     ${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET}
 )
 
-if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV AND TARGET opencv_core)
-    get_target_property(OPENCV_CSHARP_OPENCV_CORE_RUNTIME opencv_core IMPORTED_LOCATION_RELEASE)
-    if(NOT OPENCV_CSHARP_OPENCV_CORE_RUNTIME)
-        get_target_property(OPENCV_CSHARP_OPENCV_CORE_RUNTIME opencv_core IMPORTED_LOCATION)
-    endif()
-
-    if(OPENCV_CSHARP_OPENCV_CORE_RUNTIME)
-        get_filename_component(
-            OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY
-            "${OPENCV_CSHARP_OPENCV_CORE_RUNTIME}"
-            DIRECTORY
-        )
-        set_tests_properties(${OPENCV_CSHARP_NATIVE_RUNTIME_TESTS} PROPERTIES
-            ENVIRONMENT "LD_LIBRARY_PATH=${OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY}:$ENV{LD_LIBRARY_PATH}"
-        )
-    endif()
-endif()
-
 find_program(OPENCV_CSHARP_PWSH_EXECUTABLE NAMES pwsh)
 if(OPENCV_CSHARP_PWSH_EXECUTABLE)
     add_test(
@@ -575,6 +557,24 @@ if(OPENCV_CSHARP_PWSH_EXECUTABLE)
     )
 else()
     message(WARNING "pwsh was not found. Native ABI generation, legacy include parity, and export checks are disabled.")
+endif()
+
+if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV AND TARGET opencv_core)
+    get_target_property(OPENCV_CSHARP_OPENCV_CORE_RUNTIME opencv_core IMPORTED_LOCATION_RELEASE)
+    if(NOT OPENCV_CSHARP_OPENCV_CORE_RUNTIME)
+        get_target_property(OPENCV_CSHARP_OPENCV_CORE_RUNTIME opencv_core IMPORTED_LOCATION)
+    endif()
+
+    if(OPENCV_CSHARP_OPENCV_CORE_RUNTIME)
+        get_filename_component(
+            OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY
+            "${OPENCV_CSHARP_OPENCV_CORE_RUNTIME}"
+            DIRECTORY
+        )
+        set_tests_properties(${OPENCV_CSHARP_NATIVE_RUNTIME_TESTS} PROPERTIES
+            ENVIRONMENT "LD_LIBRARY_PATH=${OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY}:$ENV{LD_LIBRARY_PATH}"
+        )
+    endif()
 endif()
 
 if(WIN32)

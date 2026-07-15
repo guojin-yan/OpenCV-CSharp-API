@@ -45,6 +45,22 @@ function Assert-NotContains {
     }
 }
 
+function Assert-Matches {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Text,
+        [Parameter(Mandatory = $true)][string]$Pattern,
+        [Parameter(Mandatory = $true)][string]$Issue
+    )
+
+    if (-not [System.Text.RegularExpressions.Regex]::IsMatch(
+            $Text,
+            $Pattern,
+            [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
+        $violations.Add([pscustomobject]@{ Path = $Path; Issue = $Issue; Text = $Pattern })
+    }
+}
+
 $workflowPath = ".github/workflows/pack.yml"
 $artifactGuardPath = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"
 $consumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
@@ -98,6 +114,12 @@ Assert-NotContains `
     -Text $consumerGuardText `
     -Needle "LD_LIBRARY_PATH" `
     -Issue "Packaged native consumer must not mask loader RUNPATH defects with an environment override"
+
+Assert-Matches `
+    -Path $cmakePath `
+    -Text $cmakeText `
+    -Pattern 'list\s*\(\s*APPEND\s+OPENCV_CSHARP_NATIVE_RUNTIME_TESTS\s+\$\{OPENCV_CSHARP_NATIVE_ABI_EXPORT_TEST\}\s*\).*LD_LIBRARY_PATH=\$\{OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY\}' `
+    -Issue "Producer Linux runtime environment must be applied after the ABI export audit joins the runtime test list"
 
 if ($violations.Count -gt 0) {
     Write-Host "Targeted real pack consumer verification surface guard failed with $($violations.Count) violation(s)."
