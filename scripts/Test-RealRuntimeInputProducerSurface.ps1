@@ -178,6 +178,7 @@ function Get-RuntimeInputProducerTargets {
                 Profile = ""
                 Runner = ""
                 ContainerImage = ""
+                OpenCvExtraCMakeArgs = ""
             }
             continue
         }
@@ -195,6 +196,11 @@ function Get-RuntimeInputProducerTargets {
 
             if ($line -match "^\s{12}container_image:\s*(.+?)\s*$") {
                 $current.ContainerImage = Convert-YamlScalar -Value $Matches[1]
+                continue
+            }
+
+            if ($line -match "^\s{12}opencv_extra_cmake_args:\s*(.*?)\s*$") {
+                $current.OpenCvExtraCMakeArgs = Convert-YamlScalar -Value $Matches[1]
                 continue
             }
         }
@@ -223,11 +229,11 @@ function Assert-RealProducerTargets {
     )
 
     $expectedTargets = @(
-        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "" },
-        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = "" },
-        [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12" },
-        [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40" },
-        [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9" }
+        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" }
     )
     $expectedByKey = @{}
     foreach ($target in $expectedTargets) {
@@ -268,6 +274,10 @@ function Assert-RealProducerTargets {
 
         if (-not ([string]$target.ContainerImage).Equals([string]$expected.ContainerImage, [System.StringComparison]::Ordinal)) {
             Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow target container image must match the approved real producer boundary" -Text "$key workflow=$($target.ContainerImage); expected=$($expected.ContainerImage)"
+        }
+
+        if (-not ([string]$target.OpenCvExtraCMakeArgs).Equals([string]$expected.OpenCvExtraCMakeArgs, [System.StringComparison]::Ordinal)) {
+            Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow target OpenCV CMake arguments must match the approved distro toolchain boundary" -Text "$key workflow=$($target.OpenCvExtraCMakeArgs); expected=$($expected.OpenCvExtraCMakeArgs)"
         }
     }
 
@@ -347,6 +357,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "dnf config-manager --set-enabled crb"; Issue = "Producer workflow must enable Rocky Linux CRB before installing ninja-build" },
         [pscustomobject]@{ Needle = 'curl_package="curl-minimal"'; Issue = "Producer workflow must preserve Rocky Linux curl-minimal instead of requesting the conflicting curl package" },
         [pscustomobject]@{ Needle = "as --version"; Issue = "Producer workflow must install and report the distro assembler used for OpenCV CPU-dispatch code" },
+        [pscustomobject]@{ Needle = 'opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"'; Issue = "Producer workflow must disable only the unsupported Rocky GCC 11 AVX-VNNI DNN path" },
+        [pscustomobject]@{ Needle = '-ExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS"'; Issue = "Producer workflow must pass distro-specific OpenCV CMake arguments into the real build" },
         [pscustomobject]@{ Needle = "docker run --rm"; Issue = "Producer workflow must execute non-Ubuntu producer work inside the distro container" },
         [pscustomobject]@{ Needle = "EXPECTED_DISTRO_VERSION"; Issue = "Producer workflow must carry runtime matrix distro version into the container boundary" },
         [pscustomobject]@{ Needle = "Container distro mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro does not match the runtime RID matrix" },
@@ -399,6 +411,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "ContainerDistro = `$ContainerDistro"; Issue = "Runtime input artifact provenance must record actual container distro evidence" },
         [pscustomobject]@{ Needle = "ContainerDistroVersion = `$ContainerDistroVersion"; Issue = "Runtime input artifact provenance must record actual container distro version evidence" },
         [pscustomobject]@{ Needle = "ContainerLibc = `$ContainerLibc"; Issue = "Runtime input artifact provenance must record libc evidence for Linux container builds" },
+        [pscustomobject]@{ Needle = "OpenCvExtraCMakeArgs = `$OpenCvExtraCMakeArgs"; Issue = "Runtime input artifact provenance must record distro-specific OpenCV CMake arguments" },
         [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = '"Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers'; Issue = "Runtime input artifact script must keep compatibility loader explicitly scoped" },
@@ -482,6 +495,7 @@ if ($violations.Count -eq 0) {
                 -ContainerDistro $containerDistro `
                 -ContainerDistroVersion $containerDistroVersion `
                 -ContainerLibc $containerLibc `
+                -OpenCvExtraCMakeArgs ([string]$producerTarget.OpenCvExtraCMakeArgs) `
                 -OutputRoot $fixtureOutputRoot
 
             $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "$($producerTarget.Rid)-$($producerTarget.Profile)") "runtime-input.provenance.json"
@@ -516,6 +530,10 @@ if ($violations.Count -eq 0) {
 
             if (-not ([string]$manifest.ContainerImage).Equals([string]$producerTarget.ContainerImage, [System.StringComparison]::Ordinal)) {
                 throw "Fixture provenance ContainerImage did not match producer target container image for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if (-not ([string]$manifest.OpenCvExtraCMakeArgs).Equals([string]$producerTarget.OpenCvExtraCMakeArgs, [System.StringComparison]::Ordinal)) {
+                throw "Fixture provenance OpenCvExtraCMakeArgs did not match producer target build arguments for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
             if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) {

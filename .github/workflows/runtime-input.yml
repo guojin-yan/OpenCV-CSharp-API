@@ -189,14 +189,17 @@ jobs:
             profile: full
             os: ubuntu-24.04
             container_image: debian:12
+            opencv_extra_cmake_args: ""
           - rid: fedora.40-x64
             profile: full
             os: ubuntu-24.04
             container_image: fedora:40
+            opencv_extra_cmake_args: ""
           - rid: rocky.9-x64
             profile: full
             os: ubuntu-24.04
             container_image: rockylinux:9
+            opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
     runs-on: ${{ matrix.os }}
     steps:
       - name: Skip unmatched container producer target
@@ -244,6 +247,7 @@ jobs:
           HOSTED_RUNNER: ${{ matrix.os }}
           OPENCV_RID: ${{ steps.profile.outputs.opencv_rid }}
           OPENCV_VERSION: ${{ inputs.opencv_version }}
+          OPENCV_EXTRA_CMAKE_ARGS: ${{ matrix.opencv_extra_cmake_args }}
           PRODUCER_RID: ${{ matrix.rid }}
           RUNTIME_PROFILE: ${{ matrix.profile }}
           BUILD_LIST: ${{ steps.profile.outputs.build_list }}
@@ -260,6 +264,7 @@ jobs:
             -e HOSTED_RUNNER="$HOSTED_RUNNER" \
             -e OPENCV_RID="$OPENCV_RID" \
             -e OPENCV_VERSION="$OPENCV_VERSION" \
+            -e OPENCV_EXTRA_CMAKE_ARGS="$OPENCV_EXTRA_CMAKE_ARGS" \
             -e PRODUCER_RID="$PRODUCER_RID" \
             -e RUNTIME_PROFILE="$RUNTIME_PROFILE" \
             -e BUILD_LIST="$BUILD_LIST" \
@@ -363,6 +368,7 @@ jobs:
                 -WorkspaceRoot /workspace \
                 -Rid "$PRODUCER_RID" \
                 -BuildList "$BUILD_LIST" \
+                -ExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS" \
                 -Build
 
               open_cv_install_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID"
@@ -419,6 +425,7 @@ jobs:
                 -ContainerDistro "$container_distro" \
                 -ContainerDistroVersion "$container_distro_version" \
                 -ContainerLibc "$container_libc" \
+                -OpenCvExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS" \
                 -OutputRoot ./artifacts/runtime-inputs
             '
       - name: Upload runtime input artifact

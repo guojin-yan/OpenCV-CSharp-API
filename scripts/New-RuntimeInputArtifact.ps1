@@ -11,6 +11,7 @@ param(
     [string]$ContainerDistro = "",
     [string]$ContainerDistroVersion = "",
     [string]$ContainerLibc = "",
+    [string]$OpenCvExtraCMakeArgs = "",
     [string]$OutputRoot = "artifacts/runtime-inputs",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json"
 )
@@ -291,6 +292,7 @@ $manifest = [ordered]@{
     ContainerDistro = $ContainerDistro
     ContainerDistroVersion = $ContainerDistroVersion
     ContainerLibc = $ContainerLibc
+    OpenCvExtraCMakeArgs = $OpenCvExtraCMakeArgs
     RuntimeProfile = $RuntimeProfile
     RuntimeProfilePackageIdSuffix = Get-OptionalStringProperty -InputObject $profileDefinition -Name "packageIdSuffix"
     BuildList = Get-OptionalStringProperty -InputObject $profileDefinition -Name "buildList"
