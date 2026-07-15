@@ -104,6 +104,7 @@ foreach ($expectation in @(
         @($consumerGuardPath, $consumerGuardText, '"run",', "Consumer guard must execute the restored package application"),
         @($cmakePath, $cmakeText, "BUILD_WITH_INSTALL_RPATH TRUE", "Linux loader must use package RPATH in producer output"),
         @($cmakePath, $cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linux loader must resolve adjacent packaged dependencies"),
+        @($cmakePath, $cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linux mini loader must retain the complete six-module closure as direct dependencies"),
         @($readmePath, $readmeText, "exact 20-file six-module payload", "README must document the targeted real payload verification"),
         @($guidePath, $guideText, "exact 20-file six-module SONAME payload", "Linked runtime guide must document the targeted real payload verification"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
