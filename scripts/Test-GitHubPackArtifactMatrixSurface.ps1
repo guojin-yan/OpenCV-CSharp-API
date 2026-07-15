@@ -3,7 +3,9 @@ param(
     [string]$ArtifactRoot,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
     [string]$ExpectedPackageVersion = "",
-    [string]$ExpectedSyntheticRuntimeInputs = "true"
+    [string]$ExpectedSyntheticRuntimeInputs = "true",
+    [string]$SelectedRid = "",
+    [string]$SelectedRuntimeProfile = ""
 )
 
 Set-StrictMode -Version Latest
@@ -237,12 +239,27 @@ $expectedSyntheticRuntimeInputsValue = [bool]::Parse($ExpectedSyntheticRuntimeIn
 $matrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $matrix = $matrixText | ConvertFrom-Json
 $violations = [System.Collections.Generic.List[object]]::new()
+$selectedMode = -not [string]::IsNullOrWhiteSpace($SelectedRid) -or -not [string]::IsNullOrWhiteSpace($SelectedRuntimeProfile)
+if ($selectedMode -and ([string]::IsNullOrWhiteSpace($SelectedRid) -or [string]::IsNullOrWhiteSpace($SelectedRuntimeProfile))) {
+    throw "SelectedRid and SelectedRuntimeProfile must be provided together."
+}
+
+$selectedRidSpecs = @($matrix.rids | Where-Object { $_.rid -eq $SelectedRid })
+$selectedProfileSpecs = @($matrix.profiles | Where-Object { $_.name -eq $SelectedRuntimeProfile })
+if ($selectedMode -and ($selectedRidSpecs.Count -ne 1 -or $selectedProfileSpecs.Count -ne 1)) {
+    throw "Selected RID/profile was not found exactly once in the runtime matrix: $SelectedRid / $SelectedRuntimeProfile"
+}
+
 $artifactDirs = @(Get-ChildItem -LiteralPath $artifactRootFullPath -Directory | Sort-Object Name)
 $artifactNames = @($artifactDirs | ForEach-Object { $_.Name })
 $expectedArtifacts = @("nupkg-managed")
 
 foreach ($ridSpec in @($matrix.rids)) {
     foreach ($profileSpec in @($matrix.profiles)) {
+        if ($selectedMode -and ($ridSpec.rid -ne $SelectedRid -or $profileSpec.name -ne $SelectedRuntimeProfile)) {
+            continue
+        }
+
         $expectedArtifacts += "nupkg-$($ridSpec.rid)-$($profileSpec.name)"
     }
 }
@@ -303,6 +320,10 @@ foreach ($ridSpec in @($matrix.rids)) {
     foreach ($profileSpec in @($matrix.profiles)) {
         $rid = [string]$ridSpec.rid
         $profile = [string]$profileSpec.name
+        if ($selectedMode -and ($rid -ne $SelectedRid -or $profile -ne $SelectedRuntimeProfile)) {
+            continue
+        }
+
         $artifactName = "nupkg-$rid-$profile"
         $artifactDir = Join-Path $artifactRootFullPath $artifactName
         if (-not (Test-Path -LiteralPath $artifactDir -PathType Container)) {
@@ -328,8 +349,35 @@ foreach ($ridSpec in @($matrix.rids)) {
             })
         $expectedModuleCount = @($profileSpec.modules).Count
         $expectedRequiredModules = @($profileSpec.modules | ForEach-Object { [string]$_ })
+        $expectedModuleFileCount = $expectedModuleCount
+        $expectedNativeFileNames = @()
         $primaryLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "JYPPX.OpenCV.Native.dll" } else { "libJYPPX.OpenCV.Native.so" }
         $compatibilityLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "OpenCv5Sharp.Native.dll" } else { "libOpenCv5Sharp.Native.so" }
+        if ($selectedMode) {
+            $expectedNativeFileNames = @($primaryLoaderName, $compatibilityLoaderName)
+            if ($ridSpec.platformFamily -eq "linux" -and -not $expectedSyntheticRuntimeInputsValue) {
+                $openCvBinarySuffix = ([System.Version]::Parse($expectedOpenCvVersion).Major.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Minor.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Build.ToString())
+                foreach ($module in $expectedRequiredModules) {
+                    $expectedNativeFileNames += @(
+                        "libopencv_$module.so",
+                        "libopencv_$module.so.$openCvBinarySuffix",
+                        "libopencv_$module.so.$expectedOpenCvVersion"
+                    )
+                }
+                $expectedModuleFileCount = $expectedModuleCount * 3
+            }
+            elseif ($ridSpec.platformFamily -eq "windows") {
+                $openCvBinarySuffix = ([System.Version]::Parse($expectedOpenCvVersion).Major.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Minor.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Build.ToString())
+                foreach ($module in $expectedRequiredModules) {
+                    $expectedNativeFileNames += "opencv_$module$openCvBinarySuffix.dll"
+                }
+            }
+            else {
+                foreach ($module in $expectedRequiredModules) {
+                    $expectedNativeFileNames += "libopencv_$module.so.$expectedOpenCvVersion"
+                }
+            }
+        }
         $hasPrimaryLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $primaryLoaderName }).Count -gt 0
         $hasCompatibilityLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $compatibilityLoaderName }).Count -gt 0
         $manifest = Read-NupkgJsonEntry -Path $info.Path -EntryName $runtimeProvenanceManifestEntry -Violations $violations
@@ -350,8 +398,16 @@ foreach ($ridSpec in @($matrix.rids)) {
             Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package must include selected RID native payload path" -Text $nativePrefix
         }
 
-        if ($moduleEntries.Count -ne $expectedModuleCount) {
-            Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package OpenCV module count must match selected runtime profile" -Text "Found $($moduleEntries.Count), expected $expectedModuleCount"
+        if ($moduleEntries.Count -ne $expectedModuleFileCount) {
+            Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package OpenCV module file count must match selected runtime profile and provenance mode" -Text "Found $($moduleEntries.Count), expected $expectedModuleFileCount"
+        }
+
+        if ($selectedMode) {
+            $nativeFileNames = @($nativeEntries | ForEach-Object { Get-EntryFileName -EntryName $_ } | Sort-Object)
+            $expectedNativeFileNames = @($expectedNativeFileNames | Sort-Object)
+            if (($nativeFileNames -join "|") -ne ($expectedNativeFileNames -join "|")) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Targeted runtime package native payload must exactly match the selected RID/profile contract" -Text "Found $($nativeFileNames -join ','), expected $($expectedNativeFileNames -join ',')"
+            }
         }
 
         if (-not $hasPrimaryLoader) {
@@ -392,6 +448,17 @@ foreach ($ridSpec in @($matrix.rids)) {
             if ($manifestRuntimeFiles.Count -lt ($expectedModuleCount + 2)) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must list staged native loader and OpenCV runtime files" -Text "Found $($manifestRuntimeFiles.Count), expected at least $($expectedModuleCount + 2)"
             }
+
+            if ($selectedMode) {
+                $manifestRuntimeFileNames = @($manifestRuntimeFiles | ForEach-Object { [string]$_.FileName } | Sort-Object)
+                if (($manifestRuntimeFileNames -join "|") -ne ($expectedNativeFileNames -join "|")) {
+                    Add-Violation -Violations $violations -Path $info.FileName -Issue "Targeted runtime provenance files must exactly match the packaged native payload" -Text "Found $($manifestRuntimeFileNames -join ','), expected $($expectedNativeFileNames -join ',')"
+                }
+
+                if ($profile -eq "mini" -and @($manifest.OptionalModulesStaged).Count -ne 0) {
+                    Add-Violation -Violations $violations -Path $info.FileName -Issue "Targeted mini runtime provenance must not stage optional/full-only modules" -Text (@($manifest.OptionalModulesStaged) -join ',')
+                }
+            }
         }
 
         foreach ($entry in @($info.Entries)) {
@@ -411,7 +478,7 @@ foreach ($ridSpec in @($matrix.rids)) {
             Profile = $profile
             NativePayloadFiles = $nativeEntries.Count
             ModuleCount = $moduleEntries.Count
-            ExpectedModuleCount = $expectedModuleCount
+            ExpectedModuleCount = $expectedModuleFileCount
             HasPrimaryLoader = $hasPrimaryLoader
             HasCompatibilityLoader = $hasCompatibilityLoader
             HasProvenanceManifest = $null -ne $manifest
@@ -445,6 +512,9 @@ Write-Host "GitHub pack artifact matrix surface guard passed."
 Write-Host "Artifact directories checked: $($artifactDirs.Count)."
 Write-Host "Managed package artifact: $($managedInfo.FileName)."
 Write-Host "Runtime packages checked: $($runtimeResults.Count)."
+if ($selectedMode) {
+    Write-Host "Selected runtime package: $SelectedRid / $SelectedRuntimeProfile."
+}
 foreach ($profileSummary in @($runtimeByProfile)) {
     Write-Host "$($profileSummary.Profile) runtime packages: $($profileSummary.Count), module counts: $($profileSummary.ModuleCounts)."
 }

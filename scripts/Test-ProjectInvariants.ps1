@@ -170,6 +170,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Targeted real pack consumer verification"
+        Script = Join-Path $repo "scripts/Test-TargetedPackConsumerVerificationSurface.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime availability workflow/release surface"
         Script = Join-Path $repo "scripts/Test-RuntimeAvailabilityWorkflowReleaseSurface.ps1"
         Arguments = @("-RepositoryRoot", $repo)

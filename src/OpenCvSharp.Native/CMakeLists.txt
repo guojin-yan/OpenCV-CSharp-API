@@ -461,6 +461,14 @@ set_target_properties(${OPENCV_CSHARP_NATIVE_TARGET} PROPERTIES
     OUTPUT_NAME "${OPENCV_CSHARP_NATIVE_TARGET}"
 )
 
+if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV)
+    # Runtime NuGet packages place OpenCV dependencies beside the loader.
+    set_target_properties(${OPENCV_CSHARP_NATIVE_TARGET} PROPERTIES
+        BUILD_WITH_INSTALL_RPATH TRUE
+        INSTALL_RPATH "\$ORIGIN"
+    )
+endif()
+
 # Compatibility loader copy keeps existing binary consumers working; the primary build output remains JYPPX.OpenCV.Native.
 set(
     OPENCV_CSHARP_COMPATIBILITY_NATIVE_FILE_NAME
@@ -504,6 +512,24 @@ set(
     ${OPENCV_CSHARP_NATIVE_SMOKE_TARGET}
     ${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET}
 )
+
+if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV AND TARGET opencv_core)
+    get_target_property(OPENCV_CSHARP_OPENCV_CORE_RUNTIME opencv_core IMPORTED_LOCATION_RELEASE)
+    if(NOT OPENCV_CSHARP_OPENCV_CORE_RUNTIME)
+        get_target_property(OPENCV_CSHARP_OPENCV_CORE_RUNTIME opencv_core IMPORTED_LOCATION)
+    endif()
+
+    if(OPENCV_CSHARP_OPENCV_CORE_RUNTIME)
+        get_filename_component(
+            OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY
+            "${OPENCV_CSHARP_OPENCV_CORE_RUNTIME}"
+            DIRECTORY
+        )
+        set_tests_properties(${OPENCV_CSHARP_NATIVE_RUNTIME_TESTS} PROPERTIES
+            ENVIRONMENT "LD_LIBRARY_PATH=${OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY}:$ENV{LD_LIBRARY_PATH}"
+        )
+    endif()
+endif()
 
 find_program(OPENCV_CSHARP_PWSH_EXECUTABLE NAMES pwsh)
 if(OPENCV_CSHARP_PWSH_EXECUTABLE)

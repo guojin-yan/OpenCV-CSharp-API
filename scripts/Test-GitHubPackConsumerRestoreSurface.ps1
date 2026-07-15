@@ -2,7 +2,12 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ArtifactRoot,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
-    [string]$ExpectedPackageVersion = ""
+    [string]$ExpectedPackageVersion = "",
+    [string]$ExpectedSyntheticRuntimeInputs = "true",
+    [string]$SelectedRid = "",
+    [string]$SelectedRuntimeProfile = "",
+    [switch]$CompileNativeSmoke,
+    [switch]$RunNativeSmoke
 )
 
 Set-StrictMode -Version Latest
@@ -18,7 +23,7 @@ $directoryBuildPropsPath = "Directory.Build.props"
 
 $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
 if ($null -eq $dotnet) {
-    throw "dotnet was not found. GitHub pack consumer restore validation requires dotnet restore/build."
+    throw "dotnet was not found. GitHub pack consumer validation requires dotnet restore/build/run."
 }
 
 function Add-Violation {
@@ -245,11 +250,15 @@ function Get-NativeFileNames {
         [Parameter(Mandatory = $true)]
         [string]$Rid,
         [Parameter(Mandatory = $true)]
+        [string]$PlatformFamily,
+        [Parameter(Mandatory = $true)]
         [string[]]$Modules,
         [Parameter(Mandatory = $true)]
         [string]$OpenCvVersion,
         [Parameter(Mandatory = $true)]
-        [string]$OpenCvBinarySuffix
+        [string]$OpenCvBinarySuffix,
+        [Parameter(Mandatory = $true)]
+        [bool]$SyntheticRuntimeInputs
     )
 
     $ridIsWindows = $Rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
@@ -258,6 +267,13 @@ function Get-NativeFileNames {
     $moduleFileNames = foreach ($module in $Modules) {
         if ($ridIsWindows) {
             "opencv_$module$OpenCvBinarySuffix.dll"
+        }
+        elseif ($PlatformFamily -eq "linux" -and -not $SyntheticRuntimeInputs) {
+            @(
+                "libopencv_$module.so",
+                "libopencv_$module.so.$OpenCvBinarySuffix",
+                "libopencv_$module.so.$OpenCvVersion"
+            )
         }
         else {
             "libopencv_$module.so.$OpenCvVersion"
@@ -283,7 +299,8 @@ function New-TemporaryConsumerProject {
         [Parameter(Mandatory = $true)]
         [string]$PackageVersion,
         [Parameter(Mandatory = $true)]
-        [string]$RuntimeIdentifierGraphPath
+        [string]$RuntimeIdentifierGraphPath,
+        [switch]$RunNativeSmoke
     )
 
     New-Item -ItemType Directory -Force -Path $ConsumerDirectory | Out-Null
@@ -309,7 +326,74 @@ function New-TemporaryConsumerProject {
 "@
     [System.IO.File]::WriteAllText($projectPath, $projectText)
 
-    $programText = @'
+    if ($RunNativeSmoke) {
+        $programText = @'
+using System;
+using OpenCvSharp;
+using OpenCvSharp.Core;
+
+namespace PackageConsumer;
+
+internal static class Program
+{
+    private static int Main()
+    {
+        try
+        {
+            using var source = new Mat(3, 4, MatType.CV_8UC3, new Scalar(10, 20, 30));
+            using var gray = new Mat();
+            OpenCvSharp.ImgProc.Cv2.CvtColor(source, gray, OpenCvSharp.ImgProc.ColorConversionCodes.BGR2GRAY);
+            if (source.Empty || source.Rows != 3 || source.Cols != 4 || source.Channels != 3)
+            {
+                Console.Error.WriteLine("CORE_SMOKE_FAILED");
+                return 10;
+            }
+
+            if (gray.Empty || gray.Rows != 3 || gray.Cols != 4 || gray.Channels != 1)
+            {
+                Console.Error.WriteLine("IMGPROC_SMOKE_FAILED");
+                return 11;
+            }
+
+            byte[] encoded = OpenCvSharp.ImgCodecs.Cv2.ImEncode(".png", gray);
+            using var decoded = OpenCvSharp.ImgCodecs.Cv2.ImDecode(encoded, OpenCvSharp.ImgCodecs.ImreadModes.Grayscale);
+            if (encoded.Length == 0 || decoded.Empty || decoded.Rows != 3 || decoded.Cols != 4 || decoded.Channels != 1)
+            {
+                Console.Error.WriteLine("IMGCODECS_SMOKE_FAILED");
+                return 12;
+            }
+
+            using var capture = new OpenCvSharp.VideoIO.VideoCapture();
+            if (capture.IsOpened)
+            {
+                Console.Error.WriteLine("VIDEOIO_SMOKE_FAILED");
+                return 13;
+            }
+
+            Console.WriteLine("TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio");
+            return 0;
+        }
+        catch (DllNotFoundException exception)
+        {
+            Console.Error.WriteLine("NATIVE_LOADER_OR_SONAME_MISSING: " + exception.Message);
+            return 20;
+        }
+        catch (EntryPointNotFoundException exception)
+        {
+            Console.Error.WriteLine("SUPPORTED_MINI_ENTRYPOINT_MISSING: " + exception.Message);
+            return 21;
+        }
+        catch (OpenCvException exception)
+        {
+            Console.Error.WriteLine("SUPPORTED_MINI_OPENCV_FAILURE: " + exception.Message);
+            return 22;
+        }
+    }
+}
+'@
+    }
+    else {
+        $programText = @'
 using OpenCvSharp;
 
 namespace PackageConsumer;
@@ -324,6 +408,7 @@ internal static class Program
     }
 }
 '@
+    }
     [System.IO.File]::WriteAllText((Join-Path $ConsumerDirectory "Program.cs"), $programText)
 
     return $projectPath
@@ -381,6 +466,21 @@ $matrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $matrix = $matrixText | ConvertFrom-Json
 $violations = [System.Collections.Generic.List[object]]::new()
 $consumerResults = [System.Collections.Generic.List[object]]::new()
+$expectedSyntheticRuntimeInputsValue = [bool]::Parse($ExpectedSyntheticRuntimeInputs)
+$selectedMode = -not [string]::IsNullOrWhiteSpace($SelectedRid) -or -not [string]::IsNullOrWhiteSpace($SelectedRuntimeProfile)
+if ($selectedMode -and ([string]::IsNullOrWhiteSpace($SelectedRid) -or [string]::IsNullOrWhiteSpace($SelectedRuntimeProfile))) {
+    throw "SelectedRid and SelectedRuntimeProfile must be provided together."
+}
+
+$selectedRidSpecs = @($matrix.rids | Where-Object { $_.rid -eq $SelectedRid })
+$selectedProfileSpecs = @($matrix.profiles | Where-Object { $_.name -eq $SelectedRuntimeProfile })
+if ($selectedMode -and ($selectedRidSpecs.Count -ne 1 -or $selectedProfileSpecs.Count -ne 1)) {
+    throw "Selected RID/profile was not found exactly once in the runtime matrix: $SelectedRid / $SelectedRuntimeProfile"
+}
+
+if (($CompileNativeSmoke -or $RunNativeSmoke) -and (-not $selectedMode -or $expectedSyntheticRuntimeInputsValue)) {
+    throw "CompileNativeSmoke and RunNativeSmoke require one selected non-synthetic RID/profile package pair."
+}
 
 $managedArtifactDir = Join-Path $artifactRootFullPath "nupkg-managed"
 $managedPackagePath = Join-Path $managedArtifactDir "$managedPackageId.$normalizedPackageVersion.nupkg"
@@ -444,6 +544,10 @@ try {
         foreach ($profileSpec in @($matrix.profiles)) {
             $rid = [string]$ridSpec.rid
             $profile = [string]$profileSpec.name
+            if ($selectedMode -and ($rid -ne $SelectedRid -or $profile -ne $SelectedRuntimeProfile)) {
+                continue
+            }
+
             $modules = @($profileSpec.modules | ForEach-Object { [string]$_ })
             $runtimePackageId = Get-RuntimePackageId -Rid $rid -Profile $profile
             $artifactName = "nupkg-$rid-$profile"
@@ -461,8 +565,15 @@ try {
                 -Rid $rid `
                 -RuntimePackageId $runtimePackageId `
                 -PackageVersion $ExpectedPackageVersion `
-                -RuntimeIdentifierGraphPath $runtimeIdentifierGraphPath
-            $nativeNames = Get-NativeFileNames -Rid $rid -Modules $modules -OpenCvVersion $openCvVersion -OpenCvBinarySuffix $openCvBinarySuffix
+                -RuntimeIdentifierGraphPath $runtimeIdentifierGraphPath `
+                -RunNativeSmoke:($CompileNativeSmoke -or $RunNativeSmoke)
+            $nativeNames = Get-NativeFileNames `
+                -Rid $rid `
+                -PlatformFamily ([string]$ridSpec.platformFamily) `
+                -Modules $modules `
+                -OpenCvVersion $openCvVersion `
+                -OpenCvBinarySuffix $openCvBinarySuffix `
+                -SyntheticRuntimeInputs $expectedSyntheticRuntimeInputsValue
 
             $restoreArguments = @(
                 "restore",
@@ -499,6 +610,25 @@ try {
                     -Arguments $buildArguments
             }
 
+            $nativeSmokeSucceeded = $null
+            if ($RunNativeSmoke -and $buildSucceeded) {
+                $runArguments = @(
+                    "run",
+                    "--project", $consumerProjectPath,
+                    "-c", "Release",
+                    "-r", $rid,
+                    "--no-build",
+                    "--no-restore",
+                    "-p:RestorePackagesPath=$nugetPackagesDir"
+                )
+                $nativeSmokeSucceeded = Invoke-CheckedCommand `
+                    -Violations $violations `
+                    -Path $consumerProjectPath `
+                    -Issue "Targeted GitHub artifact consumer native smoke failed; inspect loader, SONAME, RID selection, and supported mini entrypoint diagnostics" `
+                    -FilePath $dotnet.Source `
+                    -Arguments $runArguments
+            }
+
             $assetsPath = Join-Path $consumerDir "obj/project.assets.json"
             Assert-FileExists -Violations $violations -Path $assetsPath -Issue "Temporary GitHub artifact consumer restore did not create project.assets.json"
             if (Test-Path -LiteralPath $assetsPath -PathType Leaf) {
@@ -531,8 +661,8 @@ try {
                 $restoredModuleFiles = @(Get-ChildItem -LiteralPath $nativeCacheDirectory -File | Where-Object {
                         $_.Name -match "^(opencv_|libopencv_)"
                     })
-                if ($restoredModuleFiles.Count -ne $modules.Count) {
-                    Add-Violation -Violations $violations -Path $nativeCacheDirectory -Issue "Restored runtime package module count must match selected runtime profile" -Text "Found $($restoredModuleFiles.Count), expected $($modules.Count)"
+                if ($restoredModuleFiles.Count -ne @($nativeNames.Modules).Count) {
+                    Add-Violation -Violations $violations -Path $nativeCacheDirectory -Issue "Restored runtime package module file count must match selected runtime profile and provenance mode" -Text "Found $($restoredModuleFiles.Count), expected $(@($nativeNames.Modules).Count)"
                 }
 
                 Assert-FixedMajorEntriesAreCompatibilityLoaders -Violations $violations -Root $nativeCacheDirectory -CompatibilityLoaderName $nativeNames.CompatibilityLoader
@@ -588,6 +718,7 @@ try {
                 RuntimePackage = $runtimePackageId
                 RestoreSucceeded = $restoreSucceeded
                 BuildSucceeded = $buildSucceeded
+                NativeSmokeSucceeded = $nativeSmokeSucceeded
                 ExpectedModuleCount = $modules.Count
                 NativeAssetCount = @($nativeNames.All).Count
             })
@@ -632,6 +763,9 @@ $runtimeByProfile = $consumerResults |
 Write-Host "GitHub pack consumer restore guard passed."
 Write-Host "Temporary local NuGet source and package cache stayed outside the repository and were cleaned."
 Write-Host "Consumer package pairs checked: $($consumerResults.Count)."
+if ($selectedMode) {
+    Write-Host "Selected consumer package pair: $SelectedRid / $SelectedRuntimeProfile."
+}
 foreach ($profileSummary in @($runtimeByProfile)) {
     Write-Host "$($profileSummary.Profile) consumer package pairs: $($profileSummary.Count), module counts: $($profileSummary.ModuleCounts)."
 }

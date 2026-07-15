@@ -413,3 +413,49 @@ jobs:
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-download `
             -ExpectedPackageVersion $packageVersion
+
+  verify-targeted-real-mini:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'ubuntu.24.04-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted/nupkg-managed
+      - name: Download selected runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-ubuntu.24.04-x64-mini
+          path: artifacts/pack-targeted/nupkg-ubuntu.24.04-x64-mini
+      - name: Verify selected real package artifacts
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid ubuntu.24.04-x64 `
+            -SelectedRuntimeProfile mini
+      - name: Restore, build, and run selected real package consumer
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid ubuntu.24.04-x64 `
+            -SelectedRuntimeProfile mini `
+            -RunNativeSmoke
