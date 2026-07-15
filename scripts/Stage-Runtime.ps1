@@ -127,7 +127,7 @@ function Get-NativeLoaderFileNames {
     return @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")
 }
 
-function Resolve-OpenCvModuleRuntimeFile {
+function Resolve-OpenCvModuleRuntimeFiles {
     param(
         [Parameter(Mandatory = $true)]
         [string]$RuntimeDirectory,
@@ -142,26 +142,17 @@ function Resolve-OpenCvModuleRuntimeFile {
     )
 
     if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
-        return Join-Path $RuntimeDirectory "opencv_$Module$BinarySuffix.dll"
+        return ,(Join-Path $RuntimeDirectory "opencv_$Module$BinarySuffix.dll")
     }
 
-    $candidates = @(
-        (Join-Path $RuntimeDirectory "libopencv_$Module.so"),
-        (Join-Path $RuntimeDirectory "libopencv_$Module.so.$Version")
-    )
-
-    foreach ($candidate in $candidates) {
-        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
-            return $candidate
-        }
-    }
-
-    $globbed = @(Get-ChildItem -LiteralPath $RuntimeDirectory -Filter "libopencv_$Module.so*" -File -ErrorAction SilentlyContinue | Sort-Object Name | Select-Object -First 1)
+    # Linux OpenCV libraries carry versioned DT_NEEDED/SONAME entries. Keep the
+    # unversioned linker name and every versioned companion in the runtime package.
+    $globbed = @(Get-ChildItem -LiteralPath $RuntimeDirectory -Filter "libopencv_$Module.so*" -File -ErrorAction SilentlyContinue | Sort-Object Name)
     if ($globbed.Count -gt 0) {
-        return $globbed[0].FullName
+        return @($globbed.FullName)
     }
 
-    return $candidates[1]
+    return ,(Join-Path $RuntimeDirectory "libopencv_$Module.so.$Version")
 }
 
 function Test-OpenCvRuntimeDirectory {
@@ -569,7 +560,7 @@ foreach ($module in $OpenCvModules) {
         continue
     }
 
-    $runtimeFiles += Resolve-OpenCvModuleRuntimeFile -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion
+    $runtimeFiles += @(Resolve-OpenCvModuleRuntimeFiles -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion)
 }
 
 $optionalRuntimeFiles = @()
@@ -579,17 +570,19 @@ foreach ($module in $OptionalOpenCvModules) {
         continue
     }
 
-    $optionalFile = Resolve-OpenCvModuleRuntimeFile -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion
-    if (Test-Path -LiteralPath $optionalFile) {
-        $optionalRuntimeFiles += $optionalFile
+    $optionalCandidates = @(Resolve-OpenCvModuleRuntimeFiles -RuntimeDirectory $openCvRuntimePath -Module $module -RuntimeIdentifier $Rid -BinarySuffix $openCvBinarySuffix -Version $OpenCvVersion)
+    $existingOptionalFiles = @($optionalCandidates | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf })
+    if ($existingOptionalFiles.Count -gt 0) {
+        $optionalRuntimeFiles += $existingOptionalFiles
         $optionalModulesStaged += $module
     }
     else {
-        Write-Warning "Optional OpenCV runtime module was not found and will be skipped: $optionalFile"
+        Write-Warning "Optional OpenCV runtime module was not found and will be skipped: $($optionalCandidates -join ', ')"
     }
 }
 
 $runtimeFiles += $optionalRuntimeFiles
+$runtimeFiles = @($runtimeFiles | Select-Object -Unique)
 
 foreach ($file in $runtimeFiles) {
     if (-not (Test-Path -LiteralPath $file)) {

@@ -16,6 +16,10 @@ Linux runtime package IDs use distro-specific Linux RID package identities, for 
 
 Linux runtime package ID 使用 distro-specific Linux RID package identity，例如 `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`、`JYPPX.OpenCV.runtime.ubuntu.24.04-x64` 和 `JYPPX.OpenCV.runtime.alpine.3.20-x64`。`../runtime-distro-rid-graph.json` 记录 tests 与 consumers 使用的 custom RID graph；当 SDK 默认不认识所选 distro RID 时，请在 restore 前把 `RuntimeIdentifierGraphPath` 指向该 graph。
 
+Linux staging preserves every available `libopencv_<module>.so*` companion, including the unversioned linker name and versioned SONAME files such as `.so.500` and `.so.5.0.0`. The native wrapper records versioned `DT_NEEDED` entries, so dropping those companion names would produce a package that restores but cannot load.
+
+Linux staging 会保留每个模块所有可用的 `libopencv_<module>.so*` companion，包括无版本 linker name，以及 `.so.500`、`.so.5.0.0` 等版本化 SONAME 文件。native wrapper 会记录版本化 `DT_NEEDED` 条目，因此丢失这些 companion 名称会导致包可以 restore 却无法加载。
+
 `pack.yml` does not build real runtime inputs. With `validate_synthetic_runtime=false`, real input paths must already exist on the selected runner or come from `real_runtime_artifact_run_id`; that run must contain a neutral `runtime-input-<rid>-<profile>` artifact with `native-wrapper/`, `opencv-runtime/`, `opencv-source/`, and optional `opencv-install/` directories. Synthetic runtime inputs are package-surface validation only, and real publishable runtime packages require `SyntheticRuntimeInputs=false` provenance plus release preflight.
 
 `pack.yml` 当前不会构建真实 runtime 输入。使用 `validate_synthetic_runtime=false` 时，真实输入路径必须在 packaging 开始前已经存在于 selected runner，或来自 `real_runtime_artifact_run_id`；该 run 必须包含中性的 `runtime-input-<rid>-<profile>` artifact，并带有 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 与可选 `opencv-install/` 目录。synthetic runtime inputs 只用于 package-surface validation，真实可发布 runtime 包必须带有 `SyntheticRuntimeInputs=false` provenance 并通过 release preflight。

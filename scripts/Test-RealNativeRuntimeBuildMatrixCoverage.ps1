@@ -222,13 +222,24 @@ function Invoke-StageCase {
                 Write-SyntheticBinary -Path (Join-Path $runtimeDir "opencv_$module`500.dll") -Kind "windows"
             }
         }
+        elseif ($PlatformFamily -eq "linux") {
+            foreach ($loaderName in @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")) {
+                Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir $loaderName) -Kind "elf"
+            }
+
+            foreach ($module in $modules) {
+                foreach ($suffix in @(".so", ".so.5.0.0", ".so.500")) {
+                    Write-SyntheticBinary -Path (Join-Path $runtimeDir "libopencv_$module$suffix") -Kind "elf"
+                }
+            }
+        }
         else {
             foreach ($loaderName in @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")) {
                 Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir $loaderName) -Kind "elf"
             }
 
             foreach ($module in $modules) {
-                Write-SyntheticBinary -Path (Join-Path $runtimeDir "libopencv_$module.so.5.0.0") -Kind "elf"
+                Write-SyntheticBinary -Path (Join-Path $runtimeDir "libopencv_$module.so") -Kind "elf"
             }
         }
 
@@ -272,6 +283,23 @@ function Invoke-StageCase {
         }
         elseif (Compare-Object -ReferenceObject $modules -DifferenceObject @($manifest.RequiredModules) -SyncWindow 0) {
             Add-Violation -Violations $Violations -Path $manifestPath -Issue "Mini staging provenance must record the exact mini module sequence" -Text "$(@($manifest.RequiredModules) -join ',')"
+        }
+
+        $expectedRuntimeFileNames = if ($PlatformFamily -eq "windows") {
+            @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll") + @($modules | ForEach-Object { "opencv_$_`500.dll" })
+        }
+        elseif ($PlatformFamily -eq "linux") {
+            @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so") + @($modules | ForEach-Object {
+                    $module = $_
+                    @("libopencv_$module.so", "libopencv_$module.so.5.0.0", "libopencv_$module.so.500")
+                })
+        }
+        else {
+            @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so") + @($modules | ForEach-Object { "libopencv_$_.so" })
+        }
+        $actualRuntimeFileNames = @($manifest.RuntimeFiles | ForEach-Object { [string]$_.FileName })
+        if (Compare-Object -ReferenceObject @($expectedRuntimeFileNames | Sort-Object) -DifferenceObject @($actualRuntimeFileNames | Sort-Object)) {
+            Add-Violation -Violations $Violations -Path $manifestPath -Issue "Staging provenance must retain the exact platform runtime file set, including Linux SONAME companions" -Text "Found $($actualRuntimeFileNames -join ','), expected $($expectedRuntimeFileNames -join ',')"
         }
 
         $runtimeInputRoot = ConvertTo-NormalizedPathText ([string]$manifest.InputRoots.OpenCvRuntimeDir)
