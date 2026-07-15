@@ -155,6 +155,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Native runtime profile boundary"
+        Script = Join-Path $repo "scripts/Test-NativeRuntimeProfileBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Runtime package local consumer restore"
         Script = Join-Path $repo "scripts/Test-RuntimePackageLocalConsumerRestore.ps1"
         Arguments = @("-RepositoryRoot", $repo)

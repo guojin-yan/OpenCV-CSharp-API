@@ -722,6 +722,39 @@ namespace
 
         return 0;
     }
+
+    int run_mini_excluded_features_smoke()
+    {
+#if defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+        NativeMatHandle image;
+        if (jyppx_ocv_mat_create(4, 4, 0, image.out()) != OPENCV_CSHARP_STATUS_OK || image.get() == nullptr)
+        {
+            return 341;
+        }
+
+        int corner_count = -1;
+        const int status = jyppx_ocv_imgproc_good_features_to_track_count(
+            image.get(),
+            nullptr,
+            8,
+            0.01,
+            1.0,
+            3,
+            3,
+            0,
+            0.04,
+            &corner_count);
+        if (status != OPENCV_CSHARP_STATUS_NOT_LINKED || corner_count != 0)
+        {
+            return 342;
+        }
+
+        const char* error = jyppx_ocv_get_last_error();
+        return error != nullptr && std::strlen(error) > 0 ? 0 : 343;
+#else
+        return 0;
+#endif
+    }
 }
 
 int main()
@@ -810,6 +843,12 @@ int main()
         if (filter_transform_status != 0)
         {
             return filter_transform_status;
+        }
+
+        int mini_excluded_features_status = run_mini_excluded_features_smoke();
+        if (mini_excluded_features_status != 0)
+        {
+            return mini_excluded_features_status;
         }
 
         jyppx_ocv_mat* src_color = nullptr;

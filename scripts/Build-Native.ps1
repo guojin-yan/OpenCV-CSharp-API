@@ -4,7 +4,9 @@ param(
     [string]$NativeWrapperSourceDir = "src\OpenCvSharp.Native",
     [string]$BuildDir = "build\native",
     [string]$Generator = "Visual Studio 18 2026",
-    [string]$Platform = "x64"
+    [string]$Platform = "x64",
+    [ValidateSet("full", "mini")]
+    [string]$RuntimeProfile = "full"
 )
 
 $ErrorActionPreference = "Stop"
@@ -48,12 +50,20 @@ else {
 }
 
 $nativeBuild = [System.IO.Path]::GetFullPath($nativeBuildCandidate)
+$runtimeMatrixPath = Join-Path $repoRoot "packaging/runtime/runtime-package-matrix.json"
+$runtimeMatrix = Get-Content -LiteralPath $runtimeMatrixPath -Raw | ConvertFrom-Json
+$profileSpec = @($runtimeMatrix.profiles | Where-Object { $_.name -eq $RuntimeProfile } | Select-Object -First 1)
+if ($profileSpec.Count -eq 0) {
+    throw "Runtime profile was not found in ${runtimeMatrixPath}: $RuntimeProfile"
+}
 
 $cmakeArgs = @(
     "-S", $nativeSource,
     "-B", $nativeBuild,
     "-G", $Generator,
-    "-A", $Platform
+    "-A", $Platform,
+    "-DOPENCV_CSHARP_RUNTIME_PROFILE=$RuntimeProfile",
+    "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=$($profileSpec[0].buildList)"
 )
 
 if (-not [string]::IsNullOrWhiteSpace($OpenCvDir)) {

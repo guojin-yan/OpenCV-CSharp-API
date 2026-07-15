@@ -202,7 +202,7 @@ function Invoke-StageCase {
         $runtimeDir = Join-Path $installDir $RuntimeSubdir
         $outputRoot = Join-Path $temporaryRoot "stage-output"
         $runtimeProject = Join-Path $temporaryRoot "runtime-project"
-        $modules = @("core", "imgproc", "imgcodecs", "videoio")
+        $modules = @("core", "imgproc", "imgcodecs", "videoio", "geometry")
 
         New-Item -ItemType Directory -Force -Path `
             $nativeRuntimeDir,

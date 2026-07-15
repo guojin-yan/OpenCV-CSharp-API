@@ -230,6 +230,7 @@ function Assert-RealProducerTargets {
 
     $expectedTargets = @(
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
@@ -343,13 +344,13 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "name: runtime-input"; Issue = "Producer workflow must have a neutral runtime-input name" },
         [pscustomobject]@{ Needle = "workflow_dispatch:"; Issue = "Producer workflow must be manually dispatched until real build cost is proven" },
         [pscustomobject]@{ Needle = "default: ubuntu.24.04-x64"; Issue = "Producer workflow must start with the first real Ubuntu 24.04 x64 target" },
-        [pscustomobject]@{ Needle = "default: full"; Issue = "Producer workflow must start with the full profile until mini linked-component support is split" },
+        [pscustomobject]@{ Needle = "default: full"; Issue = "Producer workflow must keep full as the default while mini remains an explicit target" },
         [pscustomobject]@{ Needle = "validate-target:"; Issue = "Producer workflow must reject unsupported real producer targets before matrix work starts" },
         [pscustomobject]@{ Needle = "runs-on: `${{ matrix.os }}"; Issue = "Producer workflow must run real target builds on the target matrix runner" },
         [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
         [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
-        [pscustomobject]@{ Needle = "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, and runtime-input-rocky.9-x64-full"; Issue = "Producer workflow must explicitly reject unsupported real producer targets" },
+        [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
         [pscustomobject]@{ Needle = "container_image: debian:12"; Issue = "Producer workflow must declare the Debian 12 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: fedora:40"; Issue = "Producer workflow must declare the Fedora 40 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: rockylinux:9"; Issue = "Producer workflow must declare the Rocky Linux 9 container-native boundary" },
@@ -369,6 +370,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
         [pscustomobject]@{ Needle = "-Build"; Issue = "Producer workflow must run the OpenCV build/install target, not only describe it" },
         [pscustomobject]@{ Needle = "OPENCV_CSHARP_OPENCV_DIR"; Issue = "Producer workflow must link native wrapper against produced OpenCV config" },
+        [pscustomobject]@{ Needle = "OPENCV_CSHARP_RUNTIME_PROFILE"; Issue = "Producer workflow must pass the selected runtime profile to native CMake" },
         [pscustomobject]@{ Needle = "lib64/cmake/opencv5"; Issue = "Producer workflow must probe lib64 OpenCVConfig.cmake for Fedora-style Linux installs" },
         [pscustomobject]@{ Needle = "open_cv_install_dir/lib64"; Issue = "Producer workflow must probe lib64 runtime directories for Fedora-style Linux installs" },
         [pscustomobject]@{ Needle = "cmake --build build/native-linked"; Issue = "Producer workflow must build the linked native wrapper" },
@@ -431,6 +433,7 @@ foreach ($doc in @(
     foreach ($needle in @(
             '`runtime-input.yml`',
             '`runtime-input-ubuntu.24.04-x64-full`',
+            '`runtime-input-ubuntu.24.04-x64-mini`',
             '`runtime-input-ubuntu.22.04-x64-full`',
             '`runtime-input-debian.12-x64-full`',
             '`runtime-input-fedora.40-x64-full`',
@@ -449,7 +452,6 @@ if ($violations.Count -eq 0) {
     $fixtureRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("opencv-csharp-runtime-input-fixture-" + [System.Guid]::NewGuid().ToString("N"))
     try {
         $fixtureNativeDir = Join-Path $fixtureRoot "native"
-        $fixtureRuntimeDir = Join-Path $fixtureRoot "opencv-runtime"
         $fixtureSourceDir = Join-Path $fixtureRoot "opencv-source"
         $fixtureInstallDir = Join-Path $fixtureRoot "opencv-install"
         $fixtureOutputRoot = Join-Path $fixtureRoot "out"
@@ -461,15 +463,6 @@ if ($violations.Count -eq 0) {
         Write-FixtureFile -Path (Join-Path (Join-Path $fixtureInstallDir "etc/licenses") "opencv-license.txt") -Text "install license fixture"
 
         $matrix = Get-Content -LiteralPath (Join-Path $repo "packaging/runtime/runtime-package-matrix.json") -Raw | ConvertFrom-Json
-        $fullProfile = @($matrix.profiles | Where-Object { $_.name -eq "full" } | Select-Object -First 1)
-        if ($fullProfile.Count -eq 0) {
-            throw "Full runtime profile was not found in fixture matrix."
-        }
-
-        foreach ($module in @($fullProfile[0].modules)) {
-            Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir "libopencv_$module.so.5.0.0")
-        }
-
         foreach ($producerTarget in @(Get-RuntimeInputProducerTargets -Text $producerWorkflowText)) {
             $ridSpec = @($matrix.rids | Where-Object { $_.rid -eq $producerTarget.Rid } | Select-Object -First 1)
             if ($ridSpec.Count -eq 0) {
@@ -481,6 +474,15 @@ if ($violations.Count -eq 0) {
             $containerDistro = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistro }
             $containerDistroVersion = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistroVersion }
             $containerLibc = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { "glibc fixture" }
+            $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
+            if ($profileSpec.Count -eq 0) {
+                throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
+            }
+
+            $fixtureRuntimeDir = Join-Path $fixtureRoot "opencv-runtime-$($producerTarget.Rid)-$($producerTarget.Profile)"
+            foreach ($module in @($profileSpec[0].modules)) {
+                Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir "libopencv_$module.so.5.0.0")
+            }
 
             & (Join-Path $repo $runtimeInputScriptPath) `
                 -Rid ([string]$producerTarget.Rid) `
@@ -561,12 +563,16 @@ if ($violations.Count -eq 0) {
                 throw "Fixture provenance did not record BuildList for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
+            if (-not ([string]$manifest.BuildList).Equals([string]$profileSpec[0].buildList, [System.StringComparison]::Ordinal)) {
+                throw "Fixture provenance BuildList did not match runtime matrix for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
             if (@($manifest.NativeLoaderFiles).Count -lt 2) {
                 throw "Fixture provenance did not include both native loader files for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
-            if (@($manifest.RuntimeFiles).Count -lt @($fullProfile[0].modules).Count) {
-                throw "Fixture provenance did not include the full runtime module set for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            if (@($manifest.RuntimeFiles).Count -ne @($profileSpec[0].modules).Count) {
+                throw "Fixture provenance runtime file count did not match the exact profile module set for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
         }
     }
@@ -589,5 +595,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rocky.9-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rocky.9-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

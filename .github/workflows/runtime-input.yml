@@ -12,7 +12,7 @@ on:
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
-        description: Real producer profile; currently full only
+        description: Real producer profile; full for all targets, mini currently for ubuntu.24.04-x64 only
         required: true
         default: full
 
@@ -28,6 +28,7 @@ jobs:
         run: |
           $supportedTargets = @(
             'ubuntu.24.04-x64/full',
+            'ubuntu.24.04-x64/mini',
             'ubuntu.22.04-x64/full',
             'debian.12-x64/full',
             'fedora.40-x64/full',
@@ -35,7 +36,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces only runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, and runtime-input-rocky.9-x64-full. Mini and remaining distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, and runtime-input-rocky.9-x64-full. Remaining mini and distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -46,6 +47,9 @@ jobs:
         include:
           - rid: ubuntu.24.04-x64
             profile: full
+            os: ubuntu-24.04
+          - rid: ubuntu.24.04-x64
+            profile: mini
             os: ubuntu-24.04
           - rid: ubuntu.22.04-x64
             profile: full
@@ -136,7 +140,8 @@ jobs:
             -G Ninja `
             "-DOPENCV_VERSION=${{ inputs.opencv_version }}" `
             "-DOPENCV_CSHARP_OPENCV_DIR=$openCvDir" `
-            "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=${{ steps.profile.outputs.build_list }}"
+            "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=${{ steps.profile.outputs.build_list }}" `
+            "-DOPENCV_CSHARP_RUNTIME_PROFILE=${{ matrix.profile }}"
       - name: Build linked native wrapper
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         run: cmake --build build/native-linked --config Release
@@ -392,7 +397,8 @@ jobs:
                 -G Ninja \
                 "-DOPENCV_VERSION=$OPENCV_VERSION" \
                 "-DOPENCV_CSHARP_OPENCV_DIR=$open_cv_dir" \
-                "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=$BUILD_LIST"
+                "-DOPENCV_CSHARP_OPENCV_BUILD_LIST=$BUILD_LIST" \
+                "-DOPENCV_CSHARP_RUNTIME_PROFILE=$RUNTIME_PROFILE"
 
               cmake --build build/native-linked --config Release
               ctest --test-dir build/native-linked -C Release --output-on-failure

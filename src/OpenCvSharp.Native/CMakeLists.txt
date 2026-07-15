@@ -5,6 +5,13 @@ project(OpenCvCSharpNative VERSION 5.0.0 LANGUAGES CXX)
 set(OPENCV_CSHARP_OPENCV_DIR_DESCRIPTION "Directory containing OpenCVConfig.cmake.")
 set(OPENCV_CSHARP_OPENCV_BUILD_LIST_DEFAULT "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud")
 set(OPENCV_CSHARP_OPENCV_BUILD_LIST_DESCRIPTION "OpenCV main-module build list used by packaging automation. Contrib modules such as ml, img_hash, xfeatures2d, xobjdetect, quality, xphoto, optflow, bgsegm, tracking, plot, shape, line_descriptor, phase_unwrapping, structured_light, intensity_transform, fuzzy, hfs, reg, surface_matching, rapid, alphamat, bioinspired, and xstereo are added by scripts/Build-OpenCV.ps1 when -WithContrib is set.")
+set(OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST "core,imgproc,imgcodecs,videoio,geometry")
+set(OPENCV_CSHARP_RUNTIME_PROFILE "full" CACHE STRING "Native runtime profile: full or mini.")
+set_property(CACHE OPENCV_CSHARP_RUNTIME_PROFILE PROPERTY STRINGS full mini)
+string(TOLOWER "${OPENCV_CSHARP_RUNTIME_PROFILE}" OPENCV_CSHARP_RUNTIME_PROFILE)
+if(NOT OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "full" AND NOT OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
+    message(FATAL_ERROR "OPENCV_CSHARP_RUNTIME_PROFILE must be full or mini, got '${OPENCV_CSHARP_RUNTIME_PROFILE}'.")
+endif()
 
 set(OPENCV_CSHARP_BUILD_WITH_OPENCV_WAS_DEFINED FALSE)
 if(DEFINED OPENCV_CSHARP_BUILD_WITH_OPENCV)
@@ -37,6 +44,16 @@ if(NOT OPENCV_CSHARP_OPENCV_BUILD_LIST_WAS_DEFINED AND DEFINED OPENCV5SHARP_OPEN
     set(OPENCV_CSHARP_OPENCV_BUILD_LIST "${OPENCV5SHARP_OPENCV_BUILD_LIST}" CACHE STRING "${OPENCV_CSHARP_OPENCV_BUILD_LIST_DESCRIPTION}" FORCE)
 endif()
 
+if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
+    if(NOT OPENCV_CSHARP_OPENCV_BUILD_LIST_WAS_DEFINED AND (NOT DEFINED OPENCV5SHARP_OPENCV_BUILD_LIST OR "${OPENCV5SHARP_OPENCV_BUILD_LIST}" STREQUAL ""))
+        set(OPENCV_CSHARP_OPENCV_BUILD_LIST "${OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST}" CACHE STRING "${OPENCV_CSHARP_OPENCV_BUILD_LIST_DESCRIPTION}" FORCE)
+    endif()
+
+    if(NOT OPENCV_CSHARP_OPENCV_BUILD_LIST STREQUAL OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST)
+        message(FATAL_ERROR "The mini native profile requires OPENCV_CSHARP_OPENCV_BUILD_LIST=${OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST}.")
+    endif()
+endif()
+
 if(OPENCV_CSHARP_OPENCV_DIR)
     set(OpenCV_DIR "${OPENCV_CSHARP_OPENCV_DIR}" CACHE PATH "${OPENCV_CSHARP_OPENCV_DIR_DESCRIPTION}" FORCE)
     set(OPENCV_CSHARP_BUILD_WITH_OPENCV ON CACHE BOOL "Link against an installed OpenCV package." FORCE)
@@ -54,13 +71,18 @@ set(OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET "${OPENCV_CSHARP_NATIVE_TARG
 # JYPPX.OpenCV.Native is the version-neutral primary native target/output.
 # OpenCv5Sharp.Native remains only as a compatibility target and copied loader filename.
 # Keep OPENCV_CSHARP_* variables primary and OPENCV5SHARP_* variables only as existing-build-script compatibility aliases.
-add_library(${OPENCV_CSHARP_NATIVE_TARGET} SHARED
-    generated/legacy_abi.cpp
+set(OPENCV_CSHARP_MINI_NATIVE_SOURCES
     src/error_state.cpp
     src/version.cpp
     src/core/mat.cpp
     src/core/decomp.cpp
     src/core/operations.cpp
+    src/videoio/videoio.cpp
+    src/imgcodecs.cpp
+    src/imgproc.cpp
+)
+
+set(OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES
     src/calib3d.cpp
     src/stereo/stereo.cpp
     src/objdetect/objdetect.cpp
@@ -95,12 +117,27 @@ add_library(${OPENCV_CSHARP_NATIVE_TARGET} SHARED
     src/quality/quality.cpp
     src/xphoto/xphoto.cpp
     src/img_hash/img_hash.cpp
-    src/videoio/videoio.cpp
     src/photo/photo.cpp
     src/features2d/features2d.cpp
     src/features2d/features2d_extra.cpp
-    src/imgcodecs.cpp
-    src/imgproc.cpp
+)
+
+if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
+    set(OPENCV_CSHARP_NATIVE_ABI_SOURCE generated/legacy_abi_mini.cpp)
+    set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/legacy_abi_mini_manifest.txt)
+    set(OPENCV_CSHARP_NATIVE_SOURCES ${OPENCV_CSHARP_MINI_NATIVE_SOURCES})
+else()
+    set(OPENCV_CSHARP_NATIVE_ABI_SOURCE generated/legacy_abi.cpp)
+    set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/legacy_abi_manifest.txt)
+    set(OPENCV_CSHARP_NATIVE_SOURCES
+        ${OPENCV_CSHARP_MINI_NATIVE_SOURCES}
+        ${OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES}
+    )
+endif()
+
+add_library(${OPENCV_CSHARP_NATIVE_TARGET} SHARED
+    ${OPENCV_CSHARP_NATIVE_ABI_SOURCE}
+    ${OPENCV_CSHARP_NATIVE_SOURCES}
 )
 
 add_library(${OPENCV_CSHARP_COMPATIBILITY_NATIVE_TARGET} ALIAS ${OPENCV_CSHARP_NATIVE_TARGET})
@@ -117,8 +154,19 @@ target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET}
         OPENCV_CSHARP_NATIVE_EXPORTS
 )
 
+if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
+    target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE OPENCV_CSHARP_RUNTIME_PROFILE_MINI=1)
+else()
+    target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE OPENCV_CSHARP_RUNTIME_PROFILE_FULL=1)
+endif()
+
 if(OPENCV_CSHARP_BUILD_WITH_OPENCV)
-    find_package(OpenCV REQUIRED COMPONENTS core calib dnn geometry highgui imgcodecs imgproc objdetect photo stereo video videoio OPTIONAL_COMPONENTS features flann stitching ptcloud ml xfeatures2d xobjdetect quality xphoto img_hash optflow bgsegm ximgproc tracking face saliency plot shape line_descriptor phase_unwrapping structured_light intensity_transform fuzzy hfs reg surface_matching rapid alphamat bioinspired xstereo)
+    if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
+        find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs videoio geometry)
+    else()
+        find_package(OpenCV REQUIRED COMPONENTS core calib dnn geometry highgui imgcodecs imgproc objdetect photo stereo video videoio OPTIONAL_COMPONENTS features flann stitching ptcloud ml xfeatures2d xobjdetect quality xphoto img_hash optflow bgsegm ximgproc tracking face saliency plot shape line_descriptor phase_unwrapping structured_light intensity_transform fuzzy hfs reg surface_matching rapid alphamat bioinspired xstereo)
+    endif()
+    target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE OPENCV_CSHARP_HAS_OPENCV_GEOMETRY=1)
     target_link_libraries(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE ${OpenCV_LIBS})
     target_include_directories(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE ${OpenCV_INCLUDE_DIRS})
     target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE
@@ -127,10 +175,11 @@ if(OPENCV_CSHARP_BUILD_WITH_OPENCV)
         
     )
 
-    # OpenCV 5.0.0 renamed the old features2d module surface to the opencv_features target.
+    if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "full")
+        # OpenCV 5.0.0 renamed the old features2d module surface to the opencv_features target.
     if(TARGET opencv_features)
         target_link_libraries(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE opencv_features)
-        target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE OPENCV_CSHARP_HAS_OPENCV_FEATURES2D=1 )
+        target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE OPENCV_CSHARP_HAS_OPENCV_FEATURES=1 OPENCV_CSHARP_HAS_OPENCV_FEATURES2D=1 )
         message(STATUS "${OPENCV_CSHARP_NATIVE_TARGET_DISPLAY_NAME} features2d support is enabled through opencv_features")
     else()
         message(WARNING "opencv_features target was not found. features2d APIs will report NOT_LINKED.")
@@ -359,6 +408,7 @@ if(OPENCV_CSHARP_BUILD_WITH_OPENCV)
     else()
         message(STATUS "opencv_xstereo target was not found. xstereo APIs will report NOT_LINKED.")
     endif()
+    endif()
 
     message(STATUS "${OPENCV_CSHARP_NATIVE_TARGET_DISPLAY_NAME} is linked with OpenCV ${OpenCV_VERSION}")
 
@@ -433,6 +483,9 @@ add_executable(${OPENCV_CSHARP_NATIVE_SMOKE_TARGET}
 
 target_link_libraries(${OPENCV_CSHARP_NATIVE_SMOKE_TARGET} PRIVATE ${OPENCV_CSHARP_NATIVE_TARGET})
 target_include_directories(${OPENCV_CSHARP_NATIVE_SMOKE_TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
+    target_compile_definitions(${OPENCV_CSHARP_NATIVE_SMOKE_TARGET} PRIVATE OPENCV_CSHARP_RUNTIME_PROFILE_MINI=1)
+endif()
 
 add_test(NAME ${OPENCV_CSHARP_NATIVE_SMOKE_TARGET} COMMAND ${OPENCV_CSHARP_NATIVE_SMOKE_TARGET})
 
@@ -488,7 +541,7 @@ if(OPENCV_CSHARP_PWSH_EXECUTABLE)
             -LibraryPath
             $<TARGET_FILE:${OPENCV_CSHARP_NATIVE_TARGET}>
             -ManifestPath
-            ${CMAKE_CURRENT_SOURCE_DIR}/generated/legacy_abi_manifest.txt
+            ${CMAKE_CURRENT_SOURCE_DIR}/${OPENCV_CSHARP_NATIVE_ABI_MANIFEST}
     )
     list(APPEND
         OPENCV_CSHARP_NATIVE_RUNTIME_TESTS

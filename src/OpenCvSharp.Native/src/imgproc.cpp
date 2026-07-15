@@ -10,11 +10,12 @@
 #include <vector>
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
-#include <opencv2/geometry/2d.hpp>
 #include <opencv2/imgproc.hpp>
-#if __has_include(<opencv2/features.hpp>)
+#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
+#include <opencv2/geometry/2d.hpp>
+#endif
+#if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES)
 #include <opencv2/features.hpp>
-#define OPENCV_CSHARP_HAS_OPENCV_FEATURES 1
 #endif
 #endif
 
@@ -518,6 +519,7 @@ namespace
         return approx_curve;
     }
 
+#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
     std::vector<cv::Point2f> get_approx_poly_n_points(
         const int* curve_xy,
         int point_count,
@@ -530,6 +532,7 @@ namespace
         cv::approxPolyN(curve, approx_curve, nsides, epsilon_percentage, ensure_convex != 0);
         return approx_curve;
     }
+#endif
 
     std::vector<cv::Point> get_convex_hull_points(
         const int* points_xy,
@@ -6268,7 +6271,7 @@ int jyppx_ocv_imgproc_approx_poly_n_count(
             return opencv_csharp_native::set_invalid_argument(api_name, "approx_point_count");
         }
 
-#if defined(OPENCV_CSHARP_HAS_OPENCV)
+#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
         const std::vector<cv::Point2f> approx_curve = get_approx_poly_n_points(curve_xy, point_count, nsides, epsilon_percentage, ensure_convex);
         *approx_point_count = static_cast<int>(approx_curve.size());
         return OPENCV_CSHARP_STATUS_OK;
@@ -6331,7 +6334,7 @@ int jyppx_ocv_imgproc_approx_poly_n_fill(
             return opencv_csharp_native::set_invalid_argument(api_name, "approx_point_count");
         }
 
-#if defined(OPENCV_CSHARP_HAS_OPENCV)
+#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
         const std::vector<cv::Point2f> approx_curve = get_approx_poly_n_points(curve_xy, point_count, nsides, epsilon_percentage, ensure_convex);
         const int actual_count = static_cast<int>(approx_curve.size());
         if (approx_point_capacity < actual_count)
@@ -7444,7 +7447,7 @@ int jyppx_ocv_imgproc_get_closest_ellipse_points(
             return opencv_csharp_native::set_invalid_argument(api_name, "closest_point_capacity");
         }
 
-#if defined(OPENCV_CSHARP_HAS_OPENCV)
+#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
         const cv::RotatedRect ellipse = get_rotated_rect(center_x, center_y, width, height, angle);
         const std::vector<cv::Point> points = get_points_from_xy(points_xy, point_count);
         std::vector<cv::Point2f> closest_points;
@@ -7571,7 +7574,7 @@ int jyppx_ocv_imgproc_min_enclosing_convex_polygon(
             return opencv_csharp_native::set_invalid_argument(api_name, "area");
         }
 
-#if defined(OPENCV_CSHARP_HAS_OPENCV)
+#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
         const std::vector<cv::Point> points = get_points_from_xy(points_xy, point_count);
         std::vector<cv::Point2f> polygon;
 
