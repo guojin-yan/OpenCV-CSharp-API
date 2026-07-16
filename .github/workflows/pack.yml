@@ -731,3 +731,103 @@ jobs:
             -SelectedRid rocky.9-x64 `
             -SelectedRuntimeProfile full `
             -RunNativeSmoke
+
+  verify-targeted-real-rhel:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04
+    container: registry.access.redhat.com/ubi9/ubi:9.8
+    steps:
+      - name: Verify RHEL 9 UBI container and install tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat /etc/os-release
+          . /etc/os-release
+          if [ "${ID:-}" != "rhel" ]; then
+            echo "Expected a Red Hat Enterprise Linux UBI container, got ${ID:-unknown}." >&2
+            exit 1
+          fi
+          case "${VERSION_ID:-}" in
+            9|9.*) ;;
+            *)
+              echo "Expected Red Hat Enterprise Linux 9, got ${VERSION_ID:-unknown}." >&2
+              exit 1
+              ;;
+          esac
+          if [ "${PLATFORM_ID:-}" != "platform:el9" ]; then
+            echo "Expected platform:el9, got ${PLATFORM_ID:-unknown}." >&2
+            exit 1
+          fi
+          container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
+          echo "RHEL_9_UBI_CONTAINER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=$PLATFORM_ID LIBC=$container_libc"
+
+          enabled_repositories="$(dnf repolist --enabled)"
+          for repository in ubi-9-baseos-rpms ubi-9-appstream-rpms ubi-9-codeready-builder-rpms; do
+            grep -q "^${repository}" <<< "$enabled_repositories"
+          done
+          echo "RHEL_9_UBI_REPOSITORY_EVIDENCE ubi-9-baseos-rpms,ubi-9-appstream-rpms,ubi-9-codeready-builder-rpms"
+          dnf install -y \
+            binutils \
+            ca-certificates \
+            curl-minimal \
+            findutils \
+            git \
+            glibc-common \
+            gnupg2 \
+            gzip \
+            krb5-libs \
+            libgcc \
+            libicu \
+            libstdc++ \
+            openssl-libs \
+            tar \
+            tzdata \
+            zlib
+          assembler="$(as --version | head -n 1)"
+          echo "RHEL_9_UBI_ASSEMBLER_EVIDENCE $assembler"
+          rpm --import https://packages.microsoft.com/keys/microsoft.asc
+          # Microsoft's RHEL 9 feed matches this RHEL UBI container and supplies tooling only.
+          curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
+          dnf install -y powershell
+          pwsh --version
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-rhel/nupkg-managed
+      - name: Download RHEL runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-rhel.9-x64-full
+          path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-full
+      - name: Verify selected real RHEL package artifacts
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-rhel `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid rhel.9-x64 `
+            -SelectedRuntimeProfile full
+      - name: Restore, build, and run selected real RHEL package consumer
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-rhel `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid rhel.9-x64 `
+            -SelectedRuntimeProfile full `
+            -RunNativeSmoke

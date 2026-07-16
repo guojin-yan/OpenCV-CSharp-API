@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, debian.12-x64, fedora.40-x64, or rocky.9-x64
+        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, debian.12-x64, fedora.40-x64, rhel.9-x64, or rocky.9-x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -32,11 +32,12 @@ jobs:
             'ubuntu.22.04-x64/full',
             'debian.12-x64/full',
             'fedora.40-x64/full',
+            'rhel.9-x64/full',
             'rocky.9-x64/full'
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, and runtime-input-rocky.9-x64-full. Remaining mini and distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, and runtime-input-rocky.9-x64-full. Remaining mini and distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -200,6 +201,11 @@ jobs:
             os: ubuntu-24.04
             container_image: fedora:40
             opencv_extra_cmake_args: ""
+          - rid: rhel.9-x64
+            profile: full
+            os: ubuntu-24.04
+            container_image: registry.access.redhat.com/ubi9/ubi:9.8
+            opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
           - rid: rocky.9-x64
             profile: full
             os: ubuntu-24.04
@@ -310,11 +316,18 @@ jobs:
                   apt-get update
                   apt-get install -y --no-install-recommends powershell
                   ;;
-                fedora|rocky)
+                fedora|rhel|rocky)
                   curl_package="curl"
                   if [ "${ID:-}" = "rocky" ]; then
                     dnf install -y dnf-plugins-core
                     dnf config-manager --set-enabled crb
+                    curl_package="curl-minimal"
+                  elif [ "${ID:-}" = "rhel" ]; then
+                    enabled_repositories="$(dnf repolist --enabled)"
+                    for repository in ubi-9-baseos-rpms ubi-9-appstream-rpms ubi-9-codeready-builder-rpms; do
+                      grep -q "^${repository}" <<< "$enabled_repositories"
+                    done
+                    echo "RHEL_9_UBI_REPOSITORY_EVIDENCE ubi-9-baseos-rpms,ubi-9-appstream-rpms,ubi-9-codeready-builder-rpms"
                     curl_package="curl-minimal"
                   fi
 
