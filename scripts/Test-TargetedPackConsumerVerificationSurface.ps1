@@ -61,6 +61,61 @@ function Assert-Matches {
     }
 }
 
+function Assert-ExactLine {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Text,
+        [Parameter(Mandatory = $true)][string]$ExpectedLine,
+        [Parameter(Mandatory = $true)][string]$Issue
+    )
+
+    if (-not (($Text -split "\r?\n") -ccontains $ExpectedLine)) {
+        $violations.Add([pscustomobject]@{ Path = $Path; Issue = $Issue; Text = $ExpectedLine })
+    }
+}
+
+function Assert-OccurrenceCount {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Text,
+        [Parameter(Mandatory = $true)][string]$Needle,
+        [Parameter(Mandatory = $true)][int]$ExpectedCount,
+        [Parameter(Mandatory = $true)][string]$Issue
+    )
+
+    $count = 0
+    $offset = 0
+    while (($offset = $Text.IndexOf($Needle, $offset, [System.StringComparison]::Ordinal)) -ge 0) {
+        $count++
+        $offset += $Needle.Length
+    }
+
+    if ($count -ne $ExpectedCount) {
+        $violations.Add([pscustomobject]@{
+            Path = $Path
+            Issue = $Issue
+            Text = "$Needle (expected $ExpectedCount, found $count)"
+        })
+    }
+}
+
+function Get-WorkflowJobText {
+    param([Parameter(Mandatory = $true)][string]$JobName)
+
+    $pattern = "(?ms)^  $([System.Text.RegularExpressions.Regex]::Escape($JobName)):\r?\n.*?(?=^  [A-Za-z0-9_-]+:\r?\n|\z)"
+    $match = [System.Text.RegularExpressions.Regex]::Match($workflowText, $pattern)
+    if (-not $match.Success) {
+        $violations.Add([pscustomobject]@{
+            Path = $workflowPath
+            Issue = "Required targeted verification job was not found"
+            Text = $JobName
+        })
+        return ""
+    }
+
+    return $match.Value
+}
+
 $workflowPath = ".github/workflows/pack.yml"
 $artifactGuardPath = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"
 $consumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
@@ -77,6 +132,8 @@ $readmeText = Read-RequiredText $readmePath
 $guideText = Read-RequiredText $guidePath
 $runtimeMatrixText = Read-RequiredText $runtimeMatrixPath
 $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
+$ubuntuJobText = Get-WorkflowJobText -JobName "verify-targeted-real"
+$debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
 
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
@@ -92,19 +149,40 @@ foreach ($expectedTarget in @(
 }
 
 foreach ($expectation in @(
-        @($workflowPath, $workflowText, "verify-targeted-real:", "Pack workflow must keep the targeted real Ubuntu verification job"),
-        @($workflowPath, $workflowText, "((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Targeted verification must use the exact three-target non-synthetic non-publishing allowlist"),
-        @($workflowPath, $workflowText, "runs-on: `${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}", "Targeted verification must execute each proven RID on its matching Ubuntu runner"),
-        @($workflowPath, $workflowText, "name: nupkg-managed", "Targeted verification must download the same-run managed artifact explicitly"),
-        @($workflowPath, $workflowText, 'name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Targeted verification must download the exact selected RID/profile artifact"),
-        @($workflowPath, $workflowText, "path: artifacts/pack-targeted/nupkg-managed", "Targeted managed artifact must use an isolated exact path"),
-        @($workflowPath, $workflowText, 'path: artifacts/pack-targeted/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Targeted runtime artifact must use an isolated selected RID/profile path"),
-        @($workflowPath, $workflowText, '$runtimeRid = ''${{ inputs.rid }}''', "Targeted guards must receive the selected RID instead of a hardcoded distro"),
-        @($workflowPath, $workflowText, '$runtimeProfile = ''${{ inputs.runtime_profile }}''', "Targeted guards must receive the selected profile instead of a hardcoded mini value"),
-        @($workflowPath, $workflowText, "-ExpectedSyntheticRuntimeInputs false", "Targeted artifact and consumer checks must require real provenance"),
-        @($workflowPath, $workflowText, "-SelectedRid `$runtimeRid", "Targeted checks must forward the selected proven distro RID"),
-        @($workflowPath, $workflowText, "-SelectedRuntimeProfile `$runtimeProfile", "Targeted checks must forward the selected proven profile"),
-        @($workflowPath, $workflowText, "-RunNativeSmoke", "Targeted consumer verification must execute native calls"),
+        @($workflowPath, $ubuntuJobText, "verify-targeted-real:", "Pack workflow must keep the targeted real Ubuntu verification job"),
+        @($workflowPath, $ubuntuJobText, "((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Hosted targeted verification must keep the exact three-target non-synthetic non-publishing allowlist"),
+        @($workflowPath, $ubuntuJobText, "runs-on: `${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}", "Hosted targeted verification must execute each proven RID on its matching Ubuntu runner"),
+        @($workflowPath, $ubuntuJobText, "name: nupkg-managed", "Hosted targeted verification must download the same-run managed artifact explicitly"),
+        @($workflowPath, $ubuntuJobText, 'name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Hosted targeted verification must download the exact selected RID/profile artifact"),
+        @($workflowPath, $ubuntuJobText, "path: artifacts/pack-targeted/nupkg-managed", "Hosted targeted managed artifact must use an isolated exact path"),
+        @($workflowPath, $ubuntuJobText, 'path: artifacts/pack-targeted/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Hosted targeted runtime artifact must use an isolated selected RID/profile path"),
+        @($workflowPath, $ubuntuJobText, '$runtimeRid = ''${{ inputs.rid }}''', "Hosted targeted guards must receive the selected RID instead of a hardcoded distro"),
+        @($workflowPath, $ubuntuJobText, '$runtimeProfile = ''${{ inputs.runtime_profile }}''', "Hosted targeted guards must receive the selected profile instead of a hardcoded mini value"),
+        @($workflowPath, $ubuntuJobText, "-ExpectedSyntheticRuntimeInputs false", "Hosted targeted artifact and consumer checks must require real provenance"),
+        @($workflowPath, $ubuntuJobText, "-SelectedRid `$runtimeRid", "Hosted targeted checks must forward the selected proven distro RID"),
+        @($workflowPath, $ubuntuJobText, "-SelectedRuntimeProfile `$runtimeProfile", "Hosted targeted checks must forward the selected proven profile"),
+        @($workflowPath, $ubuntuJobText, "-RunNativeSmoke", "Hosted targeted consumer verification must execute native calls"),
+        @($workflowPath, $debianJobText, "verify-targeted-real-debian:", "Pack workflow must keep a separate Debian container verification job"),
+        @($workflowPath, $debianJobText, "inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $debianJobText, "runs-on: ubuntu-24.04", "Debian container verification must use the supported hosted runner"),
+        @($workflowPath, $debianJobText, "container: debian:12", "Debian verification must execute in the Debian 12 job container"),
+        @($workflowPath, $debianJobText, "cat /etc/os-release", "Debian verification must expose container distro evidence"),
+        @($workflowPath, $debianJobText, 'if [ "${ID:-}" != "debian" ]', "Debian verification must require the Debian distro identity"),
+        @($workflowPath, $debianJobText, '12|12.*) ;;', "Debian verification must require Debian version 12 or 12.x"),
+        @($workflowPath, $debianJobText, "getconf GNU_LIBC_VERSION", "Debian verification must record the container libc identity"),
+        @($workflowPath, $debianJobText, "DEBIAN_12_CONTAINER_EVIDENCE", "Debian verification must emit an explicit container evidence marker"),
+        @($workflowPath, $debianJobText, "apt-get install -y --no-install-recommends powershell", "Debian verification must install PowerShell before invoking repository guards"),
+        @($workflowPath, $debianJobText, "10.0.x", "Debian verification must install .NET 10"),
+        @($workflowPath, $debianJobText, "9.0.x", "Debian verification must install .NET 9"),
+        @($workflowPath, $debianJobText, "8.0.x", "Debian verification must install .NET 8"),
+        @($workflowPath, $debianJobText, "name: nupkg-managed", "Debian verification must download the same-run managed artifact explicitly"),
+        @($workflowPath, $debianJobText, "name: nupkg-debian.12-x64-full", "Debian verification must download only the exact Debian full runtime artifact"),
+        @($workflowPath, $debianJobText, "path: artifacts/pack-targeted-debian/nupkg-managed", "Debian managed artifact must use its isolated exact path"),
+        @($workflowPath, $debianJobText, "path: artifacts/pack-targeted-debian/nupkg-debian.12-x64-full", "Debian runtime artifact must use its isolated exact path"),
+        @($workflowPath, $debianJobText, "-ExpectedSyntheticRuntimeInputs false", "Debian artifact and consumer checks must require real provenance"),
+        @($workflowPath, $debianJobText, "-SelectedRid debian.12-x64", "Debian checks must select only the proven Debian RID"),
+        @($workflowPath, $debianJobText, "-SelectedRuntimeProfile full", "Debian checks must select only the full profile"),
+        @($workflowPath, $debianJobText, "-RunNativeSmoke", "Debian consumer verification must execute native calls inside the container"),
         @($workflowPath, $workflowText, "inputs.rid == 'all' && inputs.runtime_profile == 'all'", "Full-matrix artifact and restore verification condition must remain"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRid = ""', "Artifact guard must support an explicit selected RID"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRuntimeProfile = ""', "Artifact guard must support an explicit selected profile"),
@@ -133,11 +211,53 @@ foreach ($expectation in @(
         @($cmakePath, $cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linux loader must resolve adjacent packaged dependencies"),
         @($cmakePath, $cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linux full and mini loaders must retain their complete declared closures as direct dependencies"),
         @($readmePath, $readmeText, "matrix-required modules plus provenance-recorded staged optional modules", "README must document provenance-derived full payload verification"),
-        @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact targeted native-execution allowlist"),
+        @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact hosted targeted native-execution allowlist"),
+        @($readmePath, $readmeText, 'Debian 12 full runs in a separate `debian:12` job container', "README must document Debian container-native consumer execution"),
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
-        @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact targeted native-execution allowlist"))) {
+        @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact hosted targeted native-execution allowlist"),
+        @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
 }
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $ubuntuJobText `
+    -ExpectedLine "    if: `${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Hosted targeted verification condition must remain exactly the three proven targets"
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Debian targeted verification condition must remain exactly Debian 12 x64 full"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Debian container job must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Debian container job must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "-SelectedRid debian.12-x64" `
+    -ExpectedCount 2 `
+    -Issue "Both Debian guards must select the exact Debian RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Debian guards must select only the full profile"
 
 Assert-NotContains `
     -Path $consumerGuardPath `
@@ -147,7 +267,25 @@ Assert-NotContains `
 
 Assert-NotContains `
     -Path $workflowPath `
-    -Text $workflowText `
+    -Text $ubuntuJobText `
+    -Needle "debian.12-x64" `
+    -Issue "Debian must not be folded into the hosted Ubuntu verification allowlist"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "runtime_profile == 'mini'" `
+    -Issue "Debian mini must not enter the container-native verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "LD_LIBRARY_PATH" `
+    -Issue "Debian container verification must not mask loader RUNPATH defects with an environment override"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $ubuntuJobText `
     -Needle "verify-targeted-real-mini:" `
     -Issue "Targeted verification job name must not claim mini-only behavior after adding the proven full path"
 
@@ -188,5 +326,6 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; non-synthetic and non-publishing."
+Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full."
+Write-Host "Container target: debian.12-x64/full in debian:12; non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."
