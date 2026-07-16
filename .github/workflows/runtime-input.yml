@@ -76,7 +76,7 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build
+          sudo apt-get install -y binutils ninja-build
       - name: Resolve runtime profile build list
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: profile
@@ -288,6 +288,7 @@ jobs:
                   apt-get update
                   apt-get install -y --no-install-recommends \
                     apt-transport-https \
+                    binutils \
                     ca-certificates \
                     cmake \
                     curl \

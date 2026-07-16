@@ -375,6 +375,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "open_cv_install_dir/lib64"; Issue = "Producer workflow must probe lib64 runtime directories for Fedora-style Linux installs" },
         [pscustomobject]@{ Needle = "cmake --build build/native-linked"; Issue = "Producer workflow must build the linked native wrapper" },
         [pscustomobject]@{ Needle = "ctest --test-dir build/native-linked"; Issue = "Producer workflow must test the linked native wrapper" },
+        [pscustomobject]@{ Needle = "sudo apt-get install -y binutils ninja-build"; Issue = "Hosted Linux producers must install readelf for runtime dynamic-path auditing" },
         [pscustomobject]@{ Needle = "./scripts/New-RuntimeInputArtifact.ps1"; Issue = "Producer workflow must assemble the agreed handoff layout" },
         [pscustomobject]@{ Needle = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Issue = "Producer workflow must upload neutral runtime-input artifact names" },
         [pscustomobject]@{ Needle = 'artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}'; Issue = "Producer workflow must upload the agreed runtime-input layout root" })) {
@@ -418,6 +419,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = '"Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers'; Issue = "Runtime input artifact script must keep compatibility loader explicitly scoped" },
         [pscustomobject]@{ Needle = "OpenCV source LICENSE was not found"; Issue = "Runtime input artifact script must require OpenCV source license evidence" },
+        [pscustomobject]@{ Needle = "Assert-NoAbsoluteElfRuntimePaths"; Issue = "Runtime input artifact script must audit real Linux ELF dynamic paths" },
+        [pscustomobject]@{ Needle = 'ELF runtime contains an absolute RPATH/RUNPATH entry'; Issue = "Runtime input artifact script must reject producer absolute dynamic paths" },
         [pscustomobject]@{ Needle = "Runtime input artifact name: runtime-input-`$Rid-`$RuntimeProfile"; Issue = "Runtime input artifact script must print the neutral artifact name" })) {
     Assert-Contains -Violations $violations -Path $runtimeInputScriptPath -Text $runtimeInputScriptText -Needle $required.Needle -Issue $required.Issue
 }

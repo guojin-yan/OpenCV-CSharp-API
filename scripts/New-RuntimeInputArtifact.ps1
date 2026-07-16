@@ -85,6 +85,76 @@ function Test-WindowsRid {
     return $RuntimeIdentifier.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
 }
 
+function Test-ElfBinary {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    $stream = [System.IO.File]::OpenRead($Path)
+    try {
+        if ($stream.Length -lt 4) {
+            return $false
+        }
+
+        $magic = [byte[]]::new(4)
+        $bytesRead = $stream.Read($magic, 0, $magic.Length)
+        return $bytesRead -eq 4 -and
+            $magic[0] -eq 0x7f -and
+            $magic[1] -eq 0x45 -and
+            $magic[2] -eq 0x4c -and
+            $magic[3] -eq 0x46
+    }
+    finally {
+        $stream.Dispose()
+    }
+}
+
+function Assert-NoAbsoluteElfRuntimePaths {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$PlatformFamily,
+        [Parameter(Mandatory = $true)]
+        [string[]]$Directories
+    )
+
+    if (-not $PlatformFamily.Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
+        return
+    }
+
+    $elfFiles = @(
+        $Directories |
+            ForEach-Object { Get-ChildItem -LiteralPath $_ -File -ErrorAction SilentlyContinue } |
+            Where-Object { Test-ElfBinary -Path $_.FullName }
+    )
+    if ($elfFiles.Count -eq 0) {
+        return
+    }
+
+    $readElf = @(Get-Command -Name "readelf" -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1)
+    if ($readElf.Count -eq 0) {
+        throw "readelf is required to audit real Linux runtime-input ELF dynamic paths."
+    }
+
+    foreach ($file in $elfFiles) {
+        $dynamicSection = @(& $readElf[0].Source -d -- $file.FullName 2>&1)
+        if ($LASTEXITCODE -ne 0) {
+            throw "readelf failed while auditing runtime-input ELF file: $($file.FullName)"
+        }
+
+        foreach ($line in $dynamicSection) {
+            $match = [regex]::Match([string]$line, '\((?:RPATH|RUNPATH)\).*\[(?<paths>[^\]]*)\]')
+            if (-not $match.Success) {
+                continue
+            }
+
+            foreach ($dynamicPath in @($match.Groups["paths"].Value.Split(":", [System.StringSplitOptions]::RemoveEmptyEntries))) {
+                $candidate = $dynamicPath.Trim()
+                if ($candidate.StartsWith("/", [System.StringComparison]::Ordinal) -or $candidate -match '^[A-Za-z]:[\\/]') {
+                    throw "ELF runtime contains an absolute RPATH/RUNPATH entry: $($file.Name) -> $candidate"
+                }
+            }
+        }
+    }
+}
+
 function Get-NativeLoaderFileNames {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
 
@@ -238,6 +308,10 @@ foreach ($pattern in $runtimeCopyPatterns) {
         }
     }
 }
+
+Assert-NoAbsoluteElfRuntimePaths `
+    -PlatformFamily (Get-OptionalStringProperty -InputObject $ridDefinition -Name "platformFamily") `
+    -Directories @($nativeArtifactDir, $openCvRuntimeArtifactDir)
 
 $openCvLicense = Join-Path $openCvSourcePath "LICENSE"
 if (-not (Test-Path -LiteralPath $openCvLicense -PathType Leaf)) {

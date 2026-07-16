@@ -317,6 +317,10 @@ $cmakeArgs = @(
     "-DWITH_FFMPEG=OFF"
 )
 
+if ($buildTarget.PlatformFamily -eq "linux") {
+    $cmakeArgs += '-DCMAKE_INSTALL_RPATH=$ORIGIN'
+}
+
 if (-not [string]::IsNullOrWhiteSpace($Platform)) {
     $cmakeArgs += @("-A", $Platform)
 }

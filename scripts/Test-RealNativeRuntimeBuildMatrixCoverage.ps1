@@ -368,6 +368,10 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux RID build plans must use CMAKE_BUILD_TYPE for single-config builds" -Text $rid
             }
 
+            if (-not (Test-SequenceContains -Values @($plan.CMakeArgs) -Needle '-DCMAKE_INSTALL_RPATH=$ORIGIN')) {
+                Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux OpenCV install libraries must resolve adjacent package dependencies without producer paths" -Text $rid
+            }
+
             $configCandidates = ConvertTo-NormalizedPathText ((@($plan.ExpectedOpenCvConfigCMake) -join "|"))
             if (-not (Test-ContainsText -Text $configCandidates -Needle "lib/cmake/opencv$openCvMajor/OpenCVConfig.cmake")) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Linux OpenCVConfig.cmake candidate must derive the OpenCV major from version metadata" -Text "$rid :: $configCandidates"
