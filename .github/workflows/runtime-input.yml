@@ -351,7 +351,10 @@ jobs:
 
                   musl_loader="/lib/ld-musl-x86_64.so.1"
                   test -x "$musl_loader"
-                  musl_version="$("$musl_loader" 2>&1 | sed -n "s/^Version //p" | head -n 1)"
+                  musl_status=0
+                  musl_banner="$("$musl_loader" 2>&1)" || musl_status=$?
+                  test "$musl_status" -eq 1
+                  musl_version="$(printf "%s\n" "$musl_banner" | sed -n "s/^Version //p" | head -n 1)"
                   test -n "$musl_version"
                   echo "ALPINE_3_20_MUSL_EVIDENCE ID=${ID:-unknown} VERSION_ID=${VERSION_ID:-unknown} ARCH=$(uname -m) LIBC=musl $musl_version"
 

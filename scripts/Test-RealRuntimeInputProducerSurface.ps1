@@ -360,6 +360,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "container_image: alpine:3.20"; Issue = "Producer workflow must declare the exact Alpine 3.20 musl boundary" },
         [pscustomobject]@{ Needle = 'container_shell="sh"'; Issue = "Alpine producer must bootstrap with the base image's available POSIX shell" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_REPOSITORY_EVIDENCE"; Issue = "Alpine producer must require factual v3.20 main/community repository evidence" },
+        [pscustomobject]@{ Needle = 'musl_banner="$("$musl_loader" 2>&1)" || musl_status=$?'; Issue = "Alpine producer must tolerate only the musl loader's expected version-banner exit path" },
+        [pscustomobject]@{ Needle = 'test "$musl_status" -eq 1'; Issue = "Alpine producer must assert the musl loader version-banner exit code before parsing evidence" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_MUSL_EVIDENCE"; Issue = "Alpine producer must emit actual distro/version/architecture/musl evidence" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_ASSEMBLER_EVIDENCE"; Issue = "Alpine producer must report its independently audited assembler" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_AVXVNNI_EVIDENCE supported with no OpenCV CMake workaround"; Issue = "Alpine producer must prove its own AVX-VNNI path without copying the RPM-family workaround" },
