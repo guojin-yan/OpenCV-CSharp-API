@@ -135,6 +135,7 @@ $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
 $ubuntuJobText = Get-WorkflowJobText -JobName "verify-targeted-real"
 $debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
 $fedoraJobText = Get-WorkflowJobText -JobName "verify-targeted-real-fedora"
+$rockyJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rocky"
 
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
@@ -206,6 +207,31 @@ foreach ($expectation in @(
         @($workflowPath, $fedoraJobText, "-SelectedRid fedora.40-x64", "Fedora checks must select only the proven Fedora RID"),
         @($workflowPath, $fedoraJobText, "-SelectedRuntimeProfile full", "Fedora checks must select only the full profile"),
         @($workflowPath, $fedoraJobText, "-RunNativeSmoke", "Fedora consumer verification must execute native calls inside the container"),
+        @($workflowPath, $rockyJobText, "verify-targeted-real-rocky:", "Pack workflow must keep a separate Rocky container verification job"),
+        @($workflowPath, $rockyJobText, "inputs.rid == 'rocky.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Rocky verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $rockyJobText, "runs-on: ubuntu-24.04", "Rocky container verification must use the supported hosted runner"),
+        @($workflowPath, $rockyJobText, "container: rockylinux:9", "Rocky verification must execute in the Rocky Linux 9 job container"),
+        @($workflowPath, $rockyJobText, "cat /etc/os-release", "Rocky verification must expose container distro evidence"),
+        @($workflowPath, $rockyJobText, 'if [ "${ID:-}" != "rocky" ]', "Rocky verification must require the Rocky distro identity"),
+        @($workflowPath, $rockyJobText, '9|9.*) ;;', "Rocky verification must require Rocky Linux version 9 or 9.x"),
+        @($workflowPath, $rockyJobText, "getconf GNU_LIBC_VERSION", "Rocky verification must record the container libc identity"),
+        @($workflowPath, $rockyJobText, "ROCKY_9_CONTAINER_EVIDENCE", "Rocky verification must emit an explicit container evidence marker"),
+        @($workflowPath, $rockyJobText, "ROCKY_9_ASSEMBLER_EVIDENCE", "Rocky verification must retain assembler evidence for the producer workaround context"),
+        @($workflowPath, $rockyJobText, "dnf config-manager --set-enabled crb", "Rocky verification must enable CRB for its native tooling boundary"),
+        @($workflowPath, $rockyJobText, "curl-minimal", "Rocky verification must preserve the distro's non-conflicting curl package"),
+        @($workflowPath, $rockyJobText, "dnf install -y powershell", "Rocky verification must install PowerShell before invoking repository guards"),
+        @($workflowPath, $rockyJobText, "Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path", "Rocky verifier must explain the factual PowerShell feed path without changing distro identity"),
+        @($workflowPath, $rockyJobText, "10.0.x", "Rocky verification must install .NET 10"),
+        @($workflowPath, $rockyJobText, "9.0.x", "Rocky verification must install .NET 9"),
+        @($workflowPath, $rockyJobText, "8.0.x", "Rocky verification must install .NET 8"),
+        @($workflowPath, $rockyJobText, "name: nupkg-managed", "Rocky verification must download the same-run managed artifact explicitly"),
+        @($workflowPath, $rockyJobText, "name: nupkg-rocky.9-x64-full", "Rocky verification must download only the exact Rocky full runtime artifact"),
+        @($workflowPath, $rockyJobText, "path: artifacts/pack-targeted-rocky/nupkg-managed", "Rocky managed artifact must use its isolated exact path"),
+        @($workflowPath, $rockyJobText, "path: artifacts/pack-targeted-rocky/nupkg-rocky.9-x64-full", "Rocky runtime artifact must use its isolated exact path"),
+        @($workflowPath, $rockyJobText, "-ExpectedSyntheticRuntimeInputs false", "Rocky artifact and consumer checks must require real provenance"),
+        @($workflowPath, $rockyJobText, "-SelectedRid rocky.9-x64", "Rocky checks must select only the proven Rocky RID"),
+        @($workflowPath, $rockyJobText, "-SelectedRuntimeProfile full", "Rocky checks must select only the full profile"),
+        @($workflowPath, $rockyJobText, "-RunNativeSmoke", "Rocky consumer verification must execute native calls inside the container"),
         @($workflowPath, $workflowText, "inputs.rid == 'all' && inputs.runtime_profile == 'all'", "Full-matrix artifact and restore verification condition must remain"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRid = ""', "Artifact guard must support an explicit selected RID"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRuntimeProfile = ""', "Artifact guard must support an explicit selected profile"),
@@ -237,10 +263,12 @@ foreach ($expectation in @(
         @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact hosted targeted native-execution allowlist"),
         @($readmePath, $readmeText, 'Debian 12 full runs in a separate `debian:12` job container', "README must document Debian container-native consumer execution"),
         @($readmePath, $readmeText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "README must document Fedora container-native consumer execution"),
+        @($readmePath, $readmeText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "README must document Rocky container-native consumer execution"),
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
         @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact hosted targeted native-execution allowlist"),
         @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"),
-        @($guidePath, $guideText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "Linked runtime guide must document Fedora container-native consumer execution"))) {
+        @($guidePath, $guideText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "Linked runtime guide must document Fedora container-native consumer execution"),
+        @($guidePath, $guideText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "Linked runtime guide must document Rocky container-native consumer execution"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
 }
 
@@ -261,6 +289,12 @@ Assert-ExactLine `
     -Text $fedoraJobText `
     -ExpectedLine "    if: `${{ inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
     -Issue "Fedora targeted verification condition must remain exactly Fedora 40 x64 full"
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'rocky.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Rocky targeted verification condition must remain exactly Rocky 9 x64 full"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -318,6 +352,34 @@ Assert-OccurrenceCount `
     -ExpectedCount 2 `
     -Issue "Both Fedora guards must select only the full profile"
 
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Rocky container job must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Rocky container job must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "-SelectedRid rocky.9-x64" `
+    -ExpectedCount 2 `
+    -Issue "Both Rocky guards must select the exact Rocky RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Rocky guards must select only the full profile"
+
 Assert-NotContains `
     -Path $consumerGuardPath `
     -Text $consumerGuardText `
@@ -344,6 +406,24 @@ Assert-NotContains `
 
 Assert-NotContains `
     -Path $workflowPath `
+    -Text $ubuntuJobText `
+    -Needle "rocky.9-x64" `
+    -Issue "Rocky must not be folded into the hosted Ubuntu verification allowlist"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "rocky.9-x64" `
+    -Issue "Rocky must not be folded into the Debian container verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "rocky.9-x64" `
+    -Issue "Rocky must not be folded into the Fedora container verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
     -Text $debianJobText `
     -Needle "runtime_profile == 'mini'" `
     -Issue "Debian mini must not enter the container-native verification job"
@@ -365,6 +445,30 @@ Assert-NotContains `
     -Text $fedoraJobText `
     -Needle "LD_LIBRARY_PATH" `
     -Issue "Fedora container verification must not mask loader RUNPATH defects with an environment override"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "runtime_profile == 'mini'" `
+    -Issue "Rocky mini must not enter the container-native verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "LD_LIBRARY_PATH" `
+    -Issue "Rocky container verification must not mask loader RUNPATH defects with an environment override"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "inputs.rid == 'rhel.9-x64'" `
+    -Issue "Rocky container verification must not be relabelled as a RHEL RID"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $rockyJobText `
+    -Needle "-SelectedRid rhel.9-x64" `
+    -Issue "Rocky selected package guards must not consume the separate RHEL package identity"
 
 Assert-NotContains `
     -Path $workflowPath `
@@ -410,6 +514,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full."
-Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40."
+Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."
