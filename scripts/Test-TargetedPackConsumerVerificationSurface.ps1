@@ -67,6 +67,7 @@ $consumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
 $cmakePath = "src/OpenCvSharp.Native/CMakeLists.txt"
 $readmePath = "README.md"
 $guidePath = "docs/articles/linked-runtime-build-guide.md"
+$runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
 
 $workflowText = Read-RequiredText $workflowPath
 $artifactGuardText = Read-RequiredText $artifactGuardPath
@@ -74,17 +75,34 @@ $consumerGuardText = Read-RequiredText $consumerGuardPath
 $cmakeText = Read-RequiredText $cmakePath
 $readmeText = Read-RequiredText $readmePath
 $guideText = Read-RequiredText $guidePath
+$runtimeMatrixText = Read-RequiredText $runtimeMatrixPath
+$runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
+
+foreach ($expectedTarget in @(
+        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
+        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Runner = "ubuntu-24.04" })) {
+    $ridSpecs = @($runtimeMatrix.rids | Where-Object { $_.rid -eq $expectedTarget.Rid })
+    if ($ridSpecs.Count -ne 1 -or [string]$ridSpecs[0].runner -ne $expectedTarget.Runner) {
+        $violations.Add([pscustomobject]@{
+            Path = $runtimeMatrixPath
+            Issue = "Targeted native execution RID must map to its matching Ubuntu runner"
+            Text = "$($expectedTarget.Rid) -> $($expectedTarget.Runner)"
+        })
+    }
+}
 
 foreach ($expectation in @(
-        @($workflowPath, $workflowText, "verify-targeted-real:", "Pack workflow must keep the targeted real full/mini verification job"),
-        @($workflowPath, $workflowText, "inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Targeted verification must be limited to the proven non-synthetic non-publishing Ubuntu profiles"),
+        @($workflowPath, $workflowText, "verify-targeted-real:", "Pack workflow must keep the targeted real Ubuntu verification job"),
+        @($workflowPath, $workflowText, "((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Targeted verification must use the exact three-target non-synthetic non-publishing allowlist"),
+        @($workflowPath, $workflowText, "runs-on: `${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}", "Targeted verification must execute each proven RID on its matching Ubuntu runner"),
         @($workflowPath, $workflowText, "name: nupkg-managed", "Targeted verification must download the same-run managed artifact explicitly"),
-        @($workflowPath, $workflowText, 'name: nupkg-ubuntu.24.04-x64-${{ inputs.runtime_profile }}', "Targeted verification must download the exact selected runtime profile artifact"),
+        @($workflowPath, $workflowText, 'name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Targeted verification must download the exact selected RID/profile artifact"),
         @($workflowPath, $workflowText, "path: artifacts/pack-targeted/nupkg-managed", "Targeted managed artifact must use an isolated exact path"),
-        @($workflowPath, $workflowText, 'path: artifacts/pack-targeted/nupkg-ubuntu.24.04-x64-${{ inputs.runtime_profile }}', "Targeted runtime artifact must use an isolated selected-profile path"),
+        @($workflowPath, $workflowText, 'path: artifacts/pack-targeted/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Targeted runtime artifact must use an isolated selected RID/profile path"),
+        @($workflowPath, $workflowText, '$runtimeRid = ''${{ inputs.rid }}''', "Targeted guards must receive the selected RID instead of a hardcoded distro"),
         @($workflowPath, $workflowText, '$runtimeProfile = ''${{ inputs.runtime_profile }}''', "Targeted guards must receive the selected profile instead of a hardcoded mini value"),
         @($workflowPath, $workflowText, "-ExpectedSyntheticRuntimeInputs false", "Targeted artifact and consumer checks must require real provenance"),
-        @($workflowPath, $workflowText, "-SelectedRid ubuntu.24.04-x64", "Targeted checks must select the proven distro RID"),
+        @($workflowPath, $workflowText, "-SelectedRid `$runtimeRid", "Targeted checks must forward the selected proven distro RID"),
         @($workflowPath, $workflowText, "-SelectedRuntimeProfile `$runtimeProfile", "Targeted checks must forward the selected proven profile"),
         @($workflowPath, $workflowText, "-RunNativeSmoke", "Targeted consumer verification must execute native calls"),
         @($workflowPath, $workflowText, "inputs.rid == 'all' && inputs.runtime_profile == 'all'", "Full-matrix artifact and restore verification condition must remain"),
@@ -115,7 +133,9 @@ foreach ($expectation in @(
         @($cmakePath, $cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linux loader must resolve adjacent packaged dependencies"),
         @($cmakePath, $cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linux full and mini loaders must retain their complete declared closures as direct dependencies"),
         @($readmePath, $readmeText, "matrix-required modules plus provenance-recorded staged optional modules", "README must document provenance-derived full payload verification"),
-        @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"))) {
+        @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact targeted native-execution allowlist"),
+        @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
+        @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact targeted native-execution allowlist"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
 }
 
@@ -134,8 +154,20 @@ Assert-NotContains `
 Assert-NotContains `
     -Path $workflowPath `
     -Text $workflowText `
-    -Needle "name: nupkg-ubuntu.24.04-x64-mini" `
-    -Issue "Targeted runtime artifact download must follow the selected proven profile"
+    -Needle "name: nupkg-ubuntu.24.04-x64-" `
+    -Issue "Targeted runtime artifact download must follow the selected proven RID/profile"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $workflowText `
+    -Needle "-SelectedRid ubuntu.24.04-x64" `
+    -Issue "Targeted guards must not hardcode Ubuntu 24.04 after adding Ubuntu 22.04 full"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $workflowText `
+    -Needle "inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')" `
+    -Issue "Ubuntu 22.04 mini must not enter the targeted native-execution allowlist"
 
 Assert-Matches `
     -Path $cmakePath `
@@ -156,5 +188,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Targets: ubuntu.24.04-x64 / full or mini / non-synthetic / non-publishing."
+Write-Host "Targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."
