@@ -113,7 +113,7 @@ foreach ($expectation in @(
         @($consumerGuardPath, $consumerGuardText, '"run",', "Consumer guard must execute the restored package application"),
         @($cmakePath, $cmakeText, "BUILD_WITH_INSTALL_RPATH TRUE", "Linux loader must use package RPATH in producer output"),
         @($cmakePath, $cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linux loader must resolve adjacent packaged dependencies"),
-        @($cmakePath, $cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linux mini loader must retain the complete six-module closure as direct dependencies"),
+        @($cmakePath, $cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linux full and mini loaders must retain their complete declared closures as direct dependencies"),
         @($readmePath, $readmeText, "matrix-required modules plus provenance-recorded staged optional modules", "README must document provenance-derived full payload verification"),
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
@@ -142,6 +142,12 @@ Assert-Matches `
     -Text $cmakeText `
     -Pattern 'list\s*\(\s*APPEND\s+OPENCV_CSHARP_NATIVE_RUNTIME_TESTS\s+\$\{OPENCV_CSHARP_NATIVE_ABI_EXPORT_TEST\}\s*\).*LD_LIBRARY_PATH=\$\{OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY\}' `
     -Issue "Producer Linux runtime environment must be applied after the ABI export audit joins the runtime test list"
+
+Assert-Matches `
+    -Path $cmakePath `
+    -Text $cmakeText `
+    -Pattern 'if\(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV\).*INSTALL_RPATH "\\\$ORIGIN"\s*\).*target_link_options\(\$\{OPENCV_CSHARP_NATIVE_TARGET\} PRIVATE "LINKER:--no-as-needed"\)\s*endif\(\)' `
+    -Issue "Linux no-as-needed closure must apply to both full and mini profiles inside the packaged RUNPATH block"
 
 if ($violations.Count -gt 0) {
     Write-Host "Targeted real pack consumer verification surface guard failed with $($violations.Count) violation(s)."

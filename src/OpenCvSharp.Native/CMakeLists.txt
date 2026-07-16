@@ -468,11 +468,9 @@ if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV)
         INSTALL_RPATH "\$ORIGIN"
     )
 
-    if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
-        # Keep the declared mini closure in DT_NEEDED so $ORIGIN resolves flann
-        # directly instead of relying on a non-transitive RUNPATH via geometry.
-        target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")
-    endif()
+    # Keep the declared profile closure in DT_NEEDED so $ORIGIN resolves each
+    # packaged module directly instead of relying on non-transitive RUNPATH.
+    target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")
 endif()
 
 # Compatibility loader copy keeps existing binary consumers working; the primary build output remains JYPPX.OpenCV.Native.

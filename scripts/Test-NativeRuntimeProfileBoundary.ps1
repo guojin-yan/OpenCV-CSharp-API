@@ -136,7 +136,7 @@ foreach ($expectation in @(
         @($cmakeText, 'set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/legacy_abi_mini_manifest.txt)', "Mini CTest must select the reduced export manifest"),
         @($cmakeText, 'BUILD_WITH_INSTALL_RPATH TRUE', "Linked Linux native wrapper must use its package runtime RPATH during the producer build"),
         @($cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linked Linux native wrapper must resolve packaged OpenCV dependencies beside the loader"),
-        @($cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linked Linux mini wrapper must keep the six-module runtime closure as direct loader dependencies"),
+        @($cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linked Linux full and mini wrappers must keep their declared runtime closures as direct loader dependencies"),
         @($cmakeText, 'LD_LIBRARY_PATH=${OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY}', "Producer CTest must resolve OpenCV from the factual install tree without changing the packaged loader RPATH"),
         @($generatorText, 'generated/legacy_abi_mini.cpp', "ABI generator must own the mini forwarding unit"),
         @($generatorText, 'generated/legacy_abi_mini_manifest.txt', "ABI generator must own the mini manifest"),
