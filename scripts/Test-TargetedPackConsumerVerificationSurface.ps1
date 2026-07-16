@@ -134,6 +134,7 @@ $runtimeMatrixText = Read-RequiredText $runtimeMatrixPath
 $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
 $ubuntuJobText = Get-WorkflowJobText -JobName "verify-targeted-real"
 $debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
+$fedoraJobText = Get-WorkflowJobText -JobName "verify-targeted-real-fedora"
 
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
@@ -183,6 +184,28 @@ foreach ($expectation in @(
         @($workflowPath, $debianJobText, "-SelectedRid debian.12-x64", "Debian checks must select only the proven Debian RID"),
         @($workflowPath, $debianJobText, "-SelectedRuntimeProfile full", "Debian checks must select only the full profile"),
         @($workflowPath, $debianJobText, "-RunNativeSmoke", "Debian consumer verification must execute native calls inside the container"),
+        @($workflowPath, $fedoraJobText, "verify-targeted-real-fedora:", "Pack workflow must keep a separate Fedora container verification job"),
+        @($workflowPath, $fedoraJobText, "inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Fedora verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $fedoraJobText, "runs-on: ubuntu-24.04", "Fedora container verification must use the supported hosted runner"),
+        @($workflowPath, $fedoraJobText, "container: fedora:40", "Fedora verification must execute in the Fedora 40 job container"),
+        @($workflowPath, $fedoraJobText, "cat /etc/os-release", "Fedora verification must expose container distro evidence"),
+        @($workflowPath, $fedoraJobText, 'if [ "${ID:-}" != "fedora" ]', "Fedora verification must require the Fedora distro identity"),
+        @($workflowPath, $fedoraJobText, '40|40.*) ;;', "Fedora verification must require Fedora version 40 or 40.x"),
+        @($workflowPath, $fedoraJobText, "getconf GNU_LIBC_VERSION", "Fedora verification must record the container libc identity"),
+        @($workflowPath, $fedoraJobText, "FEDORA_40_CONTAINER_EVIDENCE", "Fedora verification must emit an explicit container evidence marker"),
+        @($workflowPath, $fedoraJobText, "dnf install -y powershell", "Fedora verification must install PowerShell before invoking repository guards"),
+        @($workflowPath, $fedoraJobText, "Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path", "Fedora verifier must explain the factual PowerShell feed path without changing distro identity"),
+        @($workflowPath, $fedoraJobText, "10.0.x", "Fedora verification must install .NET 10"),
+        @($workflowPath, $fedoraJobText, "9.0.x", "Fedora verification must install .NET 9"),
+        @($workflowPath, $fedoraJobText, "8.0.x", "Fedora verification must install .NET 8"),
+        @($workflowPath, $fedoraJobText, "name: nupkg-managed", "Fedora verification must download the same-run managed artifact explicitly"),
+        @($workflowPath, $fedoraJobText, "name: nupkg-fedora.40-x64-full", "Fedora verification must download only the exact Fedora full runtime artifact"),
+        @($workflowPath, $fedoraJobText, "path: artifacts/pack-targeted-fedora/nupkg-managed", "Fedora managed artifact must use its isolated exact path"),
+        @($workflowPath, $fedoraJobText, "path: artifacts/pack-targeted-fedora/nupkg-fedora.40-x64-full", "Fedora runtime artifact must use its isolated exact path"),
+        @($workflowPath, $fedoraJobText, "-ExpectedSyntheticRuntimeInputs false", "Fedora artifact and consumer checks must require real provenance"),
+        @($workflowPath, $fedoraJobText, "-SelectedRid fedora.40-x64", "Fedora checks must select only the proven Fedora RID"),
+        @($workflowPath, $fedoraJobText, "-SelectedRuntimeProfile full", "Fedora checks must select only the full profile"),
+        @($workflowPath, $fedoraJobText, "-RunNativeSmoke", "Fedora consumer verification must execute native calls inside the container"),
         @($workflowPath, $workflowText, "inputs.rid == 'all' && inputs.runtime_profile == 'all'", "Full-matrix artifact and restore verification condition must remain"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRid = ""', "Artifact guard must support an explicit selected RID"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRuntimeProfile = ""', "Artifact guard must support an explicit selected profile"),
@@ -213,9 +236,11 @@ foreach ($expectation in @(
         @($readmePath, $readmeText, "matrix-required modules plus provenance-recorded staged optional modules", "README must document provenance-derived full payload verification"),
         @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact hosted targeted native-execution allowlist"),
         @($readmePath, $readmeText, 'Debian 12 full runs in a separate `debian:12` job container', "README must document Debian container-native consumer execution"),
+        @($readmePath, $readmeText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "README must document Fedora container-native consumer execution"),
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
         @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact hosted targeted native-execution allowlist"),
-        @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"))) {
+        @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"),
+        @($guidePath, $guideText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "Linked runtime guide must document Fedora container-native consumer execution"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
 }
 
@@ -230,6 +255,12 @@ Assert-ExactLine `
     -Text $debianJobText `
     -ExpectedLine "    if: `${{ inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
     -Issue "Debian targeted verification condition must remain exactly Debian 12 x64 full"
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Fedora targeted verification condition must remain exactly Fedora 40 x64 full"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -259,6 +290,34 @@ Assert-OccurrenceCount `
     -ExpectedCount 2 `
     -Issue "Both Debian guards must select only the full profile"
 
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Fedora container job must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Fedora container job must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "-SelectedRid fedora.40-x64" `
+    -ExpectedCount 2 `
+    -Issue "Both Fedora guards must select the exact Fedora RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Fedora guards must select only the full profile"
+
 Assert-NotContains `
     -Path $consumerGuardPath `
     -Text $consumerGuardText `
@@ -273,6 +332,18 @@ Assert-NotContains `
 
 Assert-NotContains `
     -Path $workflowPath `
+    -Text $ubuntuJobText `
+    -Needle "fedora.40-x64" `
+    -Issue "Fedora must not be folded into the hosted Ubuntu verification allowlist"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianJobText `
+    -Needle "fedora.40-x64" `
+    -Issue "Fedora must not be folded into the Debian container verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
     -Text $debianJobText `
     -Needle "runtime_profile == 'mini'" `
     -Issue "Debian mini must not enter the container-native verification job"
@@ -282,6 +353,18 @@ Assert-NotContains `
     -Text $debianJobText `
     -Needle "LD_LIBRARY_PATH" `
     -Issue "Debian container verification must not mask loader RUNPATH defects with an environment override"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "runtime_profile == 'mini'" `
+    -Issue "Fedora mini must not enter the container-native verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $fedoraJobText `
+    -Needle "LD_LIBRARY_PATH" `
+    -Issue "Fedora container verification must not mask loader RUNPATH defects with an environment override"
 
 Assert-NotContains `
     -Path $workflowPath `
@@ -327,5 +410,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full."
-Write-Host "Container target: debian.12-x64/full in debian:12; non-synthetic and non-publishing."
+Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40."
+Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."

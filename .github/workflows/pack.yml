@@ -550,3 +550,91 @@ jobs:
             -SelectedRid debian.12-x64 `
             -SelectedRuntimeProfile full `
             -RunNativeSmoke
+
+  verify-targeted-real-fedora:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04
+    container: fedora:40
+    steps:
+      - name: Verify Fedora 40 container and install tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat /etc/os-release
+          . /etc/os-release
+          if [ "${ID:-}" != "fedora" ]; then
+            echo "Expected Fedora container, got ${ID:-unknown}." >&2
+            exit 1
+          fi
+          case "${VERSION_ID:-}" in
+            40|40.*) ;;
+            *)
+              echo "Expected Fedora 40 container, got ${VERSION_ID:-unknown}." >&2
+              exit 1
+              ;;
+          esac
+          container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
+          echo "FEDORA_40_CONTAINER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID LIBC=$container_libc"
+
+          dnf install -y \
+            ca-certificates \
+            curl-minimal \
+            findutils \
+            git \
+            gnupg2 \
+            gzip \
+            krb5-libs \
+            libgcc \
+            libicu \
+            libstdc++ \
+            libunwind \
+            openssl-libs \
+            tar \
+            tzdata \
+            zlib
+          rpm --import https://packages.microsoft.com/keys/microsoft.asc
+          # Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path.
+          curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
+          dnf install -y powershell
+          pwsh --version
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-fedora/nupkg-managed
+      - name: Download Fedora runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-fedora.40-x64-full
+          path: artifacts/pack-targeted-fedora/nupkg-fedora.40-x64-full
+      - name: Verify selected real Fedora package artifacts
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-fedora `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid fedora.40-x64 `
+            -SelectedRuntimeProfile full
+      - name: Restore, build, and run selected real Fedora package consumer
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-fedora `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid fedora.40-x64 `
+            -SelectedRuntimeProfile full `
+            -RunNativeSmoke
