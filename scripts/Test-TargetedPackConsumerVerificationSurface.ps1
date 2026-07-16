@@ -137,6 +137,7 @@ $debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
 $fedoraJobText = Get-WorkflowJobText -JobName "verify-targeted-real-fedora"
 $rockyJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rocky"
 $rhelJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rhel"
+$alpineJobText = Get-WorkflowJobText -JobName "verify-targeted-real-alpine"
 
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
@@ -262,6 +263,30 @@ foreach ($expectation in @(
         @($workflowPath, $rhelJobText, "-SelectedRid rhel.9-x64", "RHEL checks must select only the proven RHEL RID"),
         @($workflowPath, $rhelJobText, "-SelectedRuntimeProfile full", "RHEL checks must select only the full profile"),
         @($workflowPath, $rhelJobText, "-RunNativeSmoke", "RHEL consumer verification must execute native calls inside the UBI container"),
+        @($workflowPath, $alpineJobText, "verify-targeted-real-alpine:", "Pack workflow must keep a separate Alpine musl verification job"),
+        @($workflowPath, $alpineJobText, "inputs.rid == 'alpine.3.20-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Alpine verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $alpineJobText, "runs-on: ubuntu-24.04", "Alpine verification must use a supported Docker host"),
+        @($workflowPath, $alpineJobText, "docker run --rm", "Alpine native execution must occur inside an explicit Alpine container while actions stay on the host"),
+        @($workflowPath, $alpineJobText, "alpine:3.20", "Alpine verification must execute against the exact Alpine 3.20 image"),
+        @($workflowPath, $alpineJobText, "-w /tmp", "Alpine net8 consumer must run outside the repository working directory so the repository .NET 10 global.json does not override the audited Alpine SDK"),
+        @($workflowPath, $alpineJobText, "/workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1", "Alpine verification must invoke the repository guard explicitly from its isolated working directory"),
+        @($workflowPath, $alpineJobText, "cat /etc/os-release", "Alpine verification must expose actual distro evidence"),
+        @($workflowPath, $alpineJobText, 'if [ "${ID:-}" != "alpine" ]', "Alpine verification must require the Alpine distro identity"),
+        @($workflowPath, $alpineJobText, '3.20|3.20.*) ;;', "Alpine verification must require Alpine version 3.20 or 3.20.x"),
+        @($workflowPath, $alpineJobText, '"$(uname -m)" != "x86_64"', "Alpine verification must require the x86_64 architecture"),
+        @($workflowPath, $alpineJobText, "/lib/ld-musl-x86_64.so.1", "Alpine verification must derive libc evidence from the musl loader"),
+        @($workflowPath, $alpineJobText, "ALPINE_3_20_CONTAINER_EVIDENCE", "Alpine verification must emit explicit distro/version/architecture/musl evidence"),
+        @($workflowPath, $alpineJobText, "ALPINE_3_20_REPOSITORY_EVIDENCE", "Alpine verification must require the exact v3.20 repositories"),
+        @($workflowPath, $alpineJobText, "dotnet8-sdk", "Alpine verification must use the official Alpine .NET 8 SDK package for its net8 consumer"),
+        @($workflowPath, $alpineJobText, "powershell", "Alpine verification must use the official Alpine PowerShell package"),
+        @($workflowPath, $alpineJobText, "name: nupkg-managed", "Alpine verification must download the same-run managed artifact explicitly"),
+        @($workflowPath, $alpineJobText, "name: nupkg-alpine.3.20-x64-full", "Alpine verification must download only the exact Alpine full runtime artifact"),
+        @($workflowPath, $alpineJobText, "path: artifacts/pack-targeted-alpine/nupkg-managed", "Alpine managed artifact must use its isolated exact path"),
+        @($workflowPath, $alpineJobText, "path: artifacts/pack-targeted-alpine/nupkg-alpine.3.20-x64-full", "Alpine runtime artifact must use its isolated exact path"),
+        @($workflowPath, $alpineJobText, "-ExpectedSyntheticRuntimeInputs false", "Alpine artifact and consumer checks must require real provenance"),
+        @($workflowPath, $alpineJobText, "-SelectedRid alpine.3.20-x64", "Alpine checks must select only the proven musl RID"),
+        @($workflowPath, $alpineJobText, "-SelectedRuntimeProfile full", "Alpine checks must select only the full profile"),
+        @($workflowPath, $alpineJobText, "-RunNativeSmoke", "Alpine consumer verification must execute native and deterministic DNN calls inside Alpine"),
         @($workflowPath, $workflowText, "inputs.rid == 'all' && inputs.runtime_profile == 'all'", "Full-matrix artifact and restore verification condition must remain"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRid = ""', "Artifact guard must support an explicit selected RID"),
         @($artifactGuardPath, $artifactGuardText, '[string]$SelectedRuntimeProfile = ""', "Artifact guard must support an explicit selected profile"),
@@ -295,12 +320,14 @@ foreach ($expectation in @(
         @($readmePath, $readmeText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "README must document Fedora container-native consumer execution"),
         @($readmePath, $readmeText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "README must document Rocky container-native consumer execution"),
         @($readmePath, $readmeText, 'RHEL 9 full runs in a fifth separate official Red Hat UBI 9 job container', "README must document factual RHEL UBI container-native consumer execution"),
+        @($readmePath, $readmeText, 'Alpine 3.20 full runs through a separate host-orchestrated `docker run alpine:3.20` verifier', "README must document host-orchestrated Alpine musl consumer execution"),
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
         @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact hosted targeted native-execution allowlist"),
         @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"),
         @($guidePath, $guideText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "Linked runtime guide must document Fedora container-native consumer execution"),
         @($guidePath, $guideText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "Linked runtime guide must document Rocky container-native consumer execution"),
-        @($guidePath, $guideText, 'RHEL 9 full runs in a fifth separate official Red Hat UBI 9 job container', "Linked runtime guide must document factual RHEL UBI container-native consumer execution"))) {
+        @($guidePath, $guideText, 'RHEL 9 full runs in a fifth separate official Red Hat UBI 9 job container', "Linked runtime guide must document factual RHEL UBI container-native consumer execution"),
+        @($guidePath, $guideText, 'Alpine 3.20 full runs through a separate host-orchestrated `docker run alpine:3.20` verifier', "Linked runtime guide must document host-orchestrated Alpine musl consumer execution"))) {
     Assert-Contains -Path $expectation[0] -Text $expectation[1] -Needle $expectation[2] -Issue $expectation[3]
 }
 
@@ -333,6 +360,12 @@ Assert-ExactLine `
     -Text $rhelJobText `
     -ExpectedLine "    if: `${{ inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
     -Issue "RHEL targeted verification condition must remain exactly RHEL 9 x64 full"
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'alpine.3.20-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Alpine targeted verification condition must remain exactly Alpine 3.20 x64 full"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -445,6 +478,34 @@ Assert-OccurrenceCount `
     -Needle "-SelectedRuntimeProfile full" `
     -ExpectedCount 2 `
     -Issue "Both RHEL guards must select only the full profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Alpine verifier must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Alpine verifier must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "-SelectedRid alpine.3.20-x64" `
+    -ExpectedCount 2 `
+    -Issue "Both Alpine guards must select the exact Alpine RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Alpine guards must select only the full profile"
 
 Assert-NotContains `
     -Path $consumerGuardPath `
@@ -580,6 +641,36 @@ Assert-NotContains `
 
 Assert-NotContains `
     -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "runtime_profile == 'mini'" `
+    -Issue "Alpine mini must not enter the musl verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "LD_LIBRARY_PATH" `
+    -Issue "Alpine verification must not mask package dynamic-path defects with an environment override"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "container: alpine:3.20" `
+    -Issue "Node-based GitHub actions must stay on the glibc host rather than run directly in the musl job container"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "glibc" `
+    -Issue "Alpine verification must not relabel glibc evidence as musl"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $alpineJobText `
+    -Needle "CV_AVXVNNI_AVAILABLE=0" `
+    -Issue "Alpine verification must not inherit the independently scoped Rocky/RHEL AVX-VNNI workaround"
+
+Assert-NotContains `
+    -Path $workflowPath `
     -Text $ubuntuJobText `
     -Needle "verify-targeted-real-mini:" `
     -Issue "Targeted verification job name must not claim mini-only behavior after adding the proven full path"
@@ -622,6 +713,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full."
-Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8."
+Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."

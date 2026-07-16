@@ -831,3 +831,84 @@ jobs:
             -SelectedRid rhel.9-x64 `
             -SelectedRuntimeProfile full `
             -RunNativeSmoke
+
+  verify-targeted-real-alpine:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'alpine.3.20-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-alpine/nupkg-managed
+      - name: Download Alpine runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-alpine.3.20-x64-full
+          path: artifacts/pack-targeted-alpine/nupkg-alpine.3.20-x64-full
+      - name: Verify and run selected real Alpine package inside Alpine 3.20
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            -e PACKAGE_VERSION="$PACKAGE_VERSION" \
+            -v "$GITHUB_WORKSPACE:/workspace:ro" \
+            -w /tmp \
+            alpine:3.20 \
+            sh -ec '
+              set -eu
+              cat /etc/os-release
+              . /etc/os-release
+              if [ "${ID:-}" != "alpine" ]; then
+                echo "Expected Alpine Linux container, got ${ID:-unknown}." >&2
+                exit 1
+              fi
+              case "${VERSION_ID:-}" in
+                3.20|3.20.*) ;;
+                *)
+                  echo "Expected Alpine Linux 3.20, got ${VERSION_ID:-unknown}." >&2
+                  exit 1
+                  ;;
+              esac
+              if [ "$(uname -m)" != "x86_64" ]; then
+                echo "Expected Alpine x86_64, got $(uname -m)." >&2
+                exit 1
+              fi
+              grep -q "/v3.20/main" /etc/apk/repositories
+              grep -q "/v3.20/community" /etc/apk/repositories
+              echo "ALPINE_3_20_REPOSITORY_EVIDENCE v3.20/main,v3.20/community"
+
+              apk add --no-cache \
+                ca-certificates \
+                dotnet8-sdk \
+                powershell
+
+              musl_loader="/lib/ld-musl-x86_64.so.1"
+              test -x "$musl_loader"
+              musl_version="$("$musl_loader" 2>&1 | sed -n "s/^Version //p" | head -n 1)"
+              test -n "$musl_version"
+              echo "ALPINE_3_20_CONTAINER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID ARCH=$(uname -m) LIBC=musl $musl_version"
+              pwsh --version
+              dotnet --info
+
+              pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackArtifactMatrixSurface.ps1 \
+                -ArtifactRoot /workspace/artifacts/pack-targeted-alpine \
+                -ExpectedPackageVersion "$PACKAGE_VERSION" \
+                -ExpectedSyntheticRuntimeInputs false \
+                -SelectedRid alpine.3.20-x64 \
+                -SelectedRuntimeProfile full
+
+              pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1 \
+                -ArtifactRoot /workspace/artifacts/pack-targeted-alpine \
+                -ExpectedPackageVersion "$PACKAGE_VERSION" \
+                -ExpectedSyntheticRuntimeInputs false \
+                -SelectedRid alpine.3.20-x64 \
+                -SelectedRuntimeProfile full \
+                -RunNativeSmoke
+            '

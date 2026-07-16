@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, debian.12-x64, fedora.40-x64, rhel.9-x64, or rocky.9-x64
+        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, debian.12-x64, fedora.40-x64, rhel.9-x64, rocky.9-x64, or alpine.3.20-x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -33,11 +33,12 @@ jobs:
             'debian.12-x64/full',
             'fedora.40-x64/full',
             'rhel.9-x64/full',
-            'rocky.9-x64/full'
+            'rocky.9-x64/full',
+            'alpine.3.20-x64/full'
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, and runtime-input-rocky.9-x64-full. Remaining mini and distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Remaining mini and distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -211,6 +212,11 @@ jobs:
             os: ubuntu-24.04
             container_image: rockylinux:9
             opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
+          - rid: alpine.3.20-x64
+            profile: full
+            os: ubuntu-24.04
+            container_image: alpine:3.20
+            opencv_extra_cmake_args: ""
     runs-on: ${{ matrix.os }}
     steps:
       - name: Skip unmatched container producer target
@@ -268,6 +274,10 @@ jobs:
           set -euo pipefail
           workspace_root="$(dirname "$GITHUB_WORKSPACE")"
           repo_name="$(basename "$GITHUB_WORKSPACE")"
+          container_shell="bash"
+          if [ "$CONTAINER_IMAGE" = "alpine:3.20" ]; then
+            container_shell="sh"
+          fi
 
           docker run --rm \
             -e CMAKE_BUILD_PARALLEL_LEVEL="$CMAKE_BUILD_PARALLEL_LEVEL" \
@@ -284,9 +294,10 @@ jobs:
             -v "$workspace_root:/workspace" \
             -w "/workspace/$repo_name" \
             "$CONTAINER_IMAGE" \
-            bash -lc '
+            "$container_shell" -lc '
               set -euo pipefail
               . /etc/os-release
+              musl_version=""
               case "${ID:-}" in
                 debian|ubuntu)
                   export DEBIAN_FRONTEND=noninteractive
@@ -316,6 +327,46 @@ jobs:
                   apt-get update
                   apt-get install -y --no-install-recommends powershell
                   ;;
+                alpine)
+                  grep -q "/v3.20/main" /etc/apk/repositories
+                  grep -q "/v3.20/community" /etc/apk/repositories
+                  echo "ALPINE_3_20_REPOSITORY_EVIDENCE v3.20/main,v3.20/community"
+
+                  apk add --no-cache \
+                    bash \
+                    binutils \
+                    build-base \
+                    ca-certificates \
+                    cmake \
+                    curl \
+                    git \
+                    gzip \
+                    linux-headers \
+                    make \
+                    pkgconf \
+                    powershell \
+                    samurai \
+                    tar \
+                    unzip
+
+                  musl_loader="/lib/ld-musl-x86_64.so.1"
+                  test -x "$musl_loader"
+                  musl_version="$("$musl_loader" 2>&1 | sed -n "s/^Version //p" | head -n 1)"
+                  test -n "$musl_version"
+                  echo "ALPINE_3_20_MUSL_EVIDENCE ID=${ID:-unknown} VERSION_ID=${VERSION_ID:-unknown} ARCH=$(uname -m) LIBC=musl $musl_version"
+
+                  assembler="$(as --version | head -n 1)"
+                  echo "ALPINE_3_20_ASSEMBLER_EVIDENCE $assembler"
+                  printf "%s\n" \
+                    "#include <immintrin.h>" \
+                    "#pragma GCC target(\"avxvnni\")" \
+                    "__m256i probe(__m256i d, __m256i a, __m256i b) { return _mm256_dpbusd_epi32(d, a, b); }" \
+                    "int main() { return 0; }" \
+                    > /tmp/opencv-alpine-avxvnni.cpp
+                  g++ -c -O2 /tmp/opencv-alpine-avxvnni.cpp -o /tmp/opencv-alpine-avxvnni.o
+                  objdump -d /tmp/opencv-alpine-avxvnni.o | grep -q "vpdpbusd"
+                  echo "ALPINE_3_20_AVXVNNI_EVIDENCE supported with no OpenCV CMake workaround"
+                  ;;
                 fedora|rhel|rocky)
                   curl_package="curl"
                   if [ "${ID:-}" = "rocky" ]; then
@@ -325,7 +376,7 @@ jobs:
                   elif [ "${ID:-}" = "rhel" ]; then
                     enabled_repositories="$(dnf repolist --enabled)"
                     for repository in ubi-9-baseos-rpms ubi-9-appstream-rpms ubi-9-codeready-builder-rpms; do
-                      grep -q "^${repository}" <<< "$enabled_repositories"
+                      printf "%s\n" "$enabled_repositories" | grep -q "^${repository}"
                     done
                     echo "RHEL_9_UBI_REPOSITORY_EVIDENCE ubi-9-baseos-rpms,ubi-9-appstream-rpms,ubi-9-codeready-builder-rpms"
                     curl_package="curl-minimal"
@@ -362,7 +413,11 @@ jobs:
 
               container_distro="${ID:-debian}"
               container_distro_version="${VERSION_ID:-12}"
-              container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
+              if [ "$container_distro" = "alpine" ]; then
+                container_libc="musl $musl_version"
+              else
+                container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
+              fi
               if [ "$container_distro" != "$EXPECTED_DISTRO" ]; then
                 echo "Container distro mismatch for $PRODUCER_RID: expected $EXPECTED_DISTRO, got $container_distro" >&2
                 exit 1
@@ -416,6 +471,41 @@ jobs:
 
               cmake --build build/native-linked --config Release
               ctest --test-dir build/native-linked -C Release --output-on-failure
+
+              if [ "$container_distro" = "alpine" ]; then
+                alpine_elf_count=0
+                alpine_origin_count=0
+                compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" | head -n 1)" # compatibility loader for already-compiled consumers
+                test -n "$compatibility_loader"
+                for elf in \
+                  build/native-linked/libJYPPX.OpenCV.Native.so \
+                  "$compatibility_loader" \
+                  "$open_cv_install_dir"/lib/libopencv_*.so."$OPENCV_VERSION"; do
+                  test -f "$elf"
+                  alpine_elf_count=$((alpine_elf_count + 1))
+                  dynamic_paths="$(readelf -d "$elf" | grep -E "\((RPATH|RUNPATH)\)" || true)"
+                  printf "%s\n" "$dynamic_paths"
+                  if ! printf "%s\n" "$dynamic_paths" | grep -Fq "\$ORIGIN"; then
+                    echo "Alpine producer ELF is missing a dollar-ORIGIN dynamic path: $elf" >&2
+                    exit 1
+                  fi
+                  if printf "%s\n" "$dynamic_paths" | grep -Eq "\[(/[A-Za-z0-9]|[A-Za-z]:)"; then
+                    echo "Alpine producer ELF retained an absolute dynamic path: $elf" >&2
+                    exit 1
+                  fi
+                  alpine_origin_count=$((alpine_origin_count + 1))
+                done
+                if [ "$alpine_elf_count" -ne 18 ] || [ "$alpine_origin_count" -ne 18 ]; then
+                  echo "Expected two Alpine loaders plus 16 canonical OpenCV ELF files with dollar-ORIGIN paths; got $alpine_elf_count / $alpine_origin_count." >&2
+                  exit 1
+                fi
+                alpine_direct_opencv_dependencies="$(readelf -d build/native-linked/libJYPPX.OpenCV.Native.so | grep NEEDED | grep -c "libopencv_.*so.500")"
+                if [ "$alpine_direct_opencv_dependencies" -ne 16 ]; then
+                  echo "Expected 16 direct Alpine OpenCV loader dependencies, got $alpine_direct_opencv_dependencies." >&2
+                  exit 1
+                fi
+                echo "ALPINE_3_20_PRODUCER_ELF_EVIDENCE files=18 origin=18 direct_opencv=16"
+              fi
 
               open_cv_runtime_dir=""
               for candidate in \

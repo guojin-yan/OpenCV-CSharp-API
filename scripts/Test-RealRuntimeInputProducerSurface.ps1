@@ -235,7 +235,8 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "rhel.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "registry.access.redhat.com/ubi9/ubi:9.8"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
-        [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" }
+        [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
+        [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20"; OpenCvExtraCMakeArgs = "" }
     )
     $expectedByKey = @{}
     foreach ($target in $expectedTargets) {
@@ -356,6 +357,15 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "container_image: fedora:40"; Issue = "Producer workflow must declare the Fedora 40 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: registry.access.redhat.com/ubi9/ubi:9.8"; Issue = "Producer workflow must declare the official RHEL UBI 9.8 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: rockylinux:9"; Issue = "Producer workflow must declare the Rocky Linux 9 container-native boundary" },
+        [pscustomobject]@{ Needle = "container_image: alpine:3.20"; Issue = "Producer workflow must declare the exact Alpine 3.20 musl boundary" },
+        [pscustomobject]@{ Needle = 'container_shell="sh"'; Issue = "Alpine producer must bootstrap with the base image's available POSIX shell" },
+        [pscustomobject]@{ Needle = "ALPINE_3_20_REPOSITORY_EVIDENCE"; Issue = "Alpine producer must require factual v3.20 main/community repository evidence" },
+        [pscustomobject]@{ Needle = "ALPINE_3_20_MUSL_EVIDENCE"; Issue = "Alpine producer must emit actual distro/version/architecture/musl evidence" },
+        [pscustomobject]@{ Needle = "ALPINE_3_20_ASSEMBLER_EVIDENCE"; Issue = "Alpine producer must report its independently audited assembler" },
+        [pscustomobject]@{ Needle = "ALPINE_3_20_AVXVNNI_EVIDENCE supported with no OpenCV CMake workaround"; Issue = "Alpine producer must prove its own AVX-VNNI path without copying the RPM-family workaround" },
+        [pscustomobject]@{ Needle = "linux-headers"; Issue = "Alpine producer must install Linux headers required by OpenCV core" },
+        [pscustomobject]@{ Needle = "samurai"; Issue = "Alpine producer must install the audited Ninja-compatible build tool" },
+        [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_ELF_EVIDENCE files=18 origin=18 direct_opencv=16"; Issue = "Alpine producer must audit both loaders and the full canonical ELF closure before upload" },
         [pscustomobject]@{ Needle = "fedora|rhel|rocky)"; Issue = "Producer workflow must install the audited RPM-family build dependencies" },
         [pscustomobject]@{ Needle = "dnf config-manager --set-enabled crb"; Issue = "Producer workflow must enable Rocky Linux CRB before installing ninja-build" },
         [pscustomobject]@{ Needle = "RHEL_9_UBI_REPOSITORY_EVIDENCE"; Issue = "Producer workflow must require the audited UBI BaseOS, AppStream, and CodeReady Builder repositories" },
@@ -392,6 +402,8 @@ Assert-RealProducerTargets `
     -ProducerWorkflowPath $producerWorkflowPath `
     -RuntimeMatrixText $runtimeMatrixText `
     -RuntimeMatrixPath $runtimeMatrixPath
+
+Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "Alpine 3.20 standard support ended on 2026-04-01 and fixes are now on request" -Issue "Alpine runtime matrix guidance must preserve the factual upstream lifecycle boundary"
 
 Assert-TextOrder -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Earlier "Build OpenCV runtime" -Later "Configure linked native wrapper" -Issue "Producer workflow must build OpenCV before configuring the linked native wrapper"
 Assert-TextOrder -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Earlier "Build linked native wrapper" -Later "Create runtime input artifact layout" -Issue "Producer workflow must build native wrapper before assembling the artifact"
@@ -446,6 +458,7 @@ foreach ($doc in @(
             '`runtime-input-fedora.40-x64-full`',
             '`runtime-input-rhel.9-x64-full`',
             '`runtime-input-rocky.9-x64-full`',
+            '`runtime-input-alpine.3.20-x64-full`',
             '`runtime-input-<rid>-<profile>`',
             '`native-wrapper/`',
             '`opencv-runtime/`',
@@ -481,7 +494,15 @@ if ($violations.Count -eq 0) {
             $expectedDistroVersion = [string]$ridSpec[0].distroVersion
             $containerDistro = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistro }
             $containerDistroVersion = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistroVersion }
-            $containerLibc = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { "glibc fixture" }
+            $containerLibc = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) {
+                ""
+            }
+            elseif ($expectedDistro.Equals("alpine", [System.StringComparison]::OrdinalIgnoreCase)) {
+                "musl fixture"
+            }
+            else {
+                "glibc fixture"
+            }
             $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
             if ($profileSpec.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
@@ -603,5 +624,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."
