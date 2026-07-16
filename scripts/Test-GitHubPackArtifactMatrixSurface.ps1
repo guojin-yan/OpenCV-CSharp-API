@@ -337,6 +337,7 @@ foreach ($ridSpec in @($matrix.rids)) {
         }
 
         $info = Read-NupkgInfo -Path $packages[0].FullName
+        $manifest = Read-NupkgJsonEntry -Path $info.Path -EntryName $runtimeProvenanceManifestEntry -Violations $violations
         $profileSuffix = if ($profile -eq "mini") { ".mini" } else { "" }
         $expectedId = "$runtimePackagePrefix.$rid$profileSuffix"
         $expectedFileName = "$expectedId.$normalizedPackageVersion.nupkg"
@@ -349,7 +350,18 @@ foreach ($ridSpec in @($matrix.rids)) {
             })
         $expectedModuleCount = @($profileSpec.modules).Count
         $expectedRequiredModules = @($profileSpec.modules | ForEach-Object { [string]$_ })
-        $expectedModuleFileCount = $expectedModuleCount
+        $expectedOptionalModules = @($profileSpec.optionalModules | ForEach-Object { [string]$_ })
+        $manifestOptionalModulesStaged = @()
+        if ($null -ne $manifest -and $null -ne $manifest.PSObject.Properties["OptionalModulesStaged"]) {
+            $manifestOptionalModulesStaged = @($manifest.OptionalModulesStaged | ForEach-Object { [string]$_ })
+        }
+
+        $expectedStagedModules = @($expectedRequiredModules)
+        if ($selectedMode) {
+            $expectedStagedModules += $manifestOptionalModulesStaged
+        }
+
+        $expectedModuleFileCount = $expectedStagedModules.Count
         $expectedNativeFileNames = @()
         $primaryLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "JYPPX.OpenCV.Native.dll" } else { "libJYPPX.OpenCV.Native.so" }
         $compatibilityLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "OpenCv5Sharp.Native.dll" } else { "libOpenCv5Sharp.Native.so" }
@@ -357,30 +369,29 @@ foreach ($ridSpec in @($matrix.rids)) {
             $expectedNativeFileNames = @($primaryLoaderName, $compatibilityLoaderName)
             if ($ridSpec.platformFamily -eq "linux" -and -not $expectedSyntheticRuntimeInputsValue) {
                 $openCvBinarySuffix = ([System.Version]::Parse($expectedOpenCvVersion).Major.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Minor.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Build.ToString())
-                foreach ($module in $expectedRequiredModules) {
+                foreach ($module in $expectedStagedModules) {
                     $expectedNativeFileNames += @(
                         "libopencv_$module.so",
                         "libopencv_$module.so.$openCvBinarySuffix",
                         "libopencv_$module.so.$expectedOpenCvVersion"
                     )
                 }
-                $expectedModuleFileCount = $expectedModuleCount * 3
+                $expectedModuleFileCount = $expectedStagedModules.Count * 3
             }
             elseif ($ridSpec.platformFamily -eq "windows") {
                 $openCvBinarySuffix = ([System.Version]::Parse($expectedOpenCvVersion).Major.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Minor.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Build.ToString())
-                foreach ($module in $expectedRequiredModules) {
+                foreach ($module in $expectedStagedModules) {
                     $expectedNativeFileNames += "opencv_$module$openCvBinarySuffix.dll"
                 }
             }
             else {
-                foreach ($module in $expectedRequiredModules) {
+                foreach ($module in $expectedStagedModules) {
                     $expectedNativeFileNames += "libopencv_$module.so.$expectedOpenCvVersion"
                 }
             }
         }
         $hasPrimaryLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $primaryLoaderName }).Count -gt 0
         $hasCompatibilityLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $compatibilityLoaderName }).Count -gt 0
-        $manifest = Read-NupkgJsonEntry -Path $info.Path -EntryName $runtimeProvenanceManifestEntry -Violations $violations
 
         if ($info.FileName -ne $expectedFileName) {
             Add-Violation -Violations $violations -Path $artifactName -Issue "Runtime package file name must match neutral package ID plus normalized version" -Text $info.FileName
@@ -444,9 +455,19 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest required modules must match selected runtime profile" -Text "Found $($manifestRequiredModules -join ','), expected $($expectedRequiredModules -join ',')"
             }
 
+            $manifestOptionalModulesRequested = @($manifest.OptionalModulesRequested | ForEach-Object { [string]$_ })
+            if ($manifestOptionalModulesRequested.Count -ne $expectedOptionalModules.Count -or (($manifestOptionalModulesRequested -join ",") -ne ($expectedOptionalModules -join ","))) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest optional modules must match selected runtime profile" -Text "Found $($manifestOptionalModulesRequested -join ','), expected $($expectedOptionalModules -join ',')"
+            }
+
+            $expectedOptionalModulesStaged = @($expectedOptionalModules | Where-Object { $manifestOptionalModulesStaged -contains $_ })
+            if ($manifestOptionalModulesStaged.Count -ne $expectedOptionalModulesStaged.Count -or (($manifestOptionalModulesStaged -join ",") -ne ($expectedOptionalModulesStaged -join ","))) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance staged optional modules must be an ordered unique subset of the selected runtime profile" -Text "Found $($manifestOptionalModulesStaged -join ','), allowed $($expectedOptionalModules -join ',')"
+            }
+
             $manifestRuntimeFiles = @($manifest.RuntimeFiles)
-            if ($manifestRuntimeFiles.Count -lt ($expectedModuleCount + 2)) {
-                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must list staged native loader and OpenCV runtime files" -Text "Found $($manifestRuntimeFiles.Count), expected at least $($expectedModuleCount + 2)"
+            if ($manifestRuntimeFiles.Count -lt ($expectedStagedModules.Count + 2)) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must list staged native loader and OpenCV runtime files" -Text "Found $($manifestRuntimeFiles.Count), expected at least $($expectedStagedModules.Count + 2)"
             }
 
             if ($selectedMode) {
@@ -455,8 +476,8 @@ foreach ($ridSpec in @($matrix.rids)) {
                     Add-Violation -Violations $violations -Path $info.FileName -Issue "Targeted runtime provenance files must exactly match the packaged native payload" -Text "Found $($manifestRuntimeFileNames -join ','), expected $($expectedNativeFileNames -join ',')"
                 }
 
-                if ($profile -eq "mini" -and @($manifest.OptionalModulesStaged).Count -ne 0) {
-                    Add-Violation -Violations $violations -Path $info.FileName -Issue "Targeted mini runtime provenance must not stage optional/full-only modules" -Text (@($manifest.OptionalModulesStaged) -join ',')
+                if ($profile -eq "mini" -and $manifestOptionalModulesStaged.Count -ne 0) {
+                    Add-Violation -Violations $violations -Path $info.FileName -Issue "Targeted mini runtime provenance must not stage optional/full-only modules" -Text ($manifestOptionalModulesStaged -join ',')
                 }
             }
         }

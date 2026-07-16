@@ -414,11 +414,11 @@ jobs:
             -ArtifactRoot ./artifacts/pack-download `
             -ExpectedPackageVersion $packageVersion
 
-  verify-targeted-real-mini:
+  verify-targeted-real:
     needs:
       - pack-managed
       - pack-runtime
-    if: ${{ inputs.rid == 'ubuntu.24.04-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    if: ${{ inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -436,26 +436,28 @@ jobs:
       - name: Download selected runtime package artifact
         uses: actions/download-artifact@v4
         with:
-          name: nupkg-ubuntu.24.04-x64-mini
-          path: artifacts/pack-targeted/nupkg-ubuntu.24.04-x64-mini
+          name: nupkg-ubuntu.24.04-x64-${{ inputs.runtime_profile }}
+          path: artifacts/pack-targeted/nupkg-ubuntu.24.04-x64-${{ inputs.runtime_profile }}
       - name: Verify selected real package artifacts
         shell: pwsh
         run: |
           $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $runtimeProfile = '${{ inputs.runtime_profile }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted `
             -ExpectedPackageVersion $packageVersion `
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid ubuntu.24.04-x64 `
-            -SelectedRuntimeProfile mini
+            -SelectedRuntimeProfile $runtimeProfile
       - name: Restore, build, and run selected real package consumer
         shell: pwsh
         run: |
           $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $runtimeProfile = '${{ inputs.runtime_profile }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted `
             -ExpectedPackageVersion $packageVersion `
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid ubuntu.24.04-x64 `
-            -SelectedRuntimeProfile mini `
+            -SelectedRuntimeProfile $runtimeProfile `
             -RunNativeSmoke

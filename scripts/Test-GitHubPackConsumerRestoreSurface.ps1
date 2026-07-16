@@ -20,6 +20,7 @@ $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $managedAssemblyName = "$managedPackageId.dll"
 $runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
 $directoryBuildPropsPath = "Directory.Build.props"
+$runtimeProvenanceManifestEntry = "build/JYPPX.OpenCV.runtime.provenance.json"
 
 $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
 if ($null -eq $dotnet) {
@@ -238,6 +239,46 @@ function Invoke-CheckedCommand {
     return $true
 }
 
+function Read-NupkgRuntimeProvenance {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [AllowEmptyCollection()]
+        [System.Collections.Generic.List[object]]$Violations
+    )
+
+    $zip = [System.IO.Compression.ZipFile]::OpenRead($Path)
+    try {
+        $entry = $zip.GetEntry($runtimeProvenanceManifestEntry)
+        if ($null -eq $entry) {
+            Add-Violation -Violations $Violations -Path $Path -Issue "Runtime package must include provenance before consumer native asset validation" -Text $runtimeProvenanceManifestEntry
+            return $null
+        }
+
+        $stream = $entry.Open()
+        try {
+            $reader = [System.IO.StreamReader]::new($stream)
+            try {
+                return ($reader.ReadToEnd() | ConvertFrom-Json)
+            }
+            finally {
+                $reader.Dispose()
+            }
+        }
+        finally {
+            $stream.Dispose()
+        }
+    }
+    catch {
+        Add-Violation -Violations $Violations -Path $Path -Issue "Runtime package provenance must be readable JSON for consumer validation" -Text $_.Exception.Message
+        return $null
+    }
+    finally {
+        $zip.Dispose()
+    }
+}
+
 function Get-RuntimePackageId {
     param(
         [Parameter(Mandatory = $true)]
@@ -305,6 +346,8 @@ function New-TemporaryConsumerProject {
         [string]$PackageVersion,
         [Parameter(Mandatory = $true)]
         [string]$RuntimeIdentifierGraphPath,
+        [Parameter(Mandatory = $true)]
+        [string]$RuntimeProfile,
         [switch]$RunNativeSmoke
     )
 
@@ -375,7 +418,8 @@ internal static class Program
                 return 13;
             }
 
-            Console.WriteLine("TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio");
+__PROFILE_SPECIFIC_NATIVE_SMOKE__
+            Console.WriteLine("__TARGETED_NATIVE_SMOKE_SUCCESS__");
             return 0;
         }
         catch (DllNotFoundException exception)
@@ -385,17 +429,39 @@ internal static class Program
         }
         catch (EntryPointNotFoundException exception)
         {
-            Console.Error.WriteLine("SUPPORTED_MINI_ENTRYPOINT_MISSING: " + exception.Message);
+            Console.Error.WriteLine("SUPPORTED_PROFILE_ENTRYPOINT_MISSING: " + exception.Message);
             return 21;
         }
         catch (OpenCvException exception)
         {
-            Console.Error.WriteLine("SUPPORTED_MINI_OPENCV_FAILURE: " + exception.Message);
+            Console.Error.WriteLine("SUPPORTED_PROFILE_OPENCV_FAILURE: " + exception.Message);
             return 22;
         }
     }
 }
 '@
+
+        $profileSpecificNativeSmoke = ""
+        $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio"
+        if ($RuntimeProfile -eq "full") {
+            $profileSpecificNativeSmoke = @'
+            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(source, 1.0, new Size(4, 3)))
+            {
+                if (blob.Empty || blob.Dims != 4)
+                {
+                    Console.Error.WriteLine("FULL_DNN_SMOKE_FAILED");
+                    return 14;
+                }
+            }
+'@
+            $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn profile=full"
+        }
+        elseif ($RuntimeProfile -ne "mini") {
+            throw "Targeted native smoke supports only full or mini profiles, got '$RuntimeProfile'."
+        }
+
+        $programText = $programText.Replace("__PROFILE_SPECIFIC_NATIVE_SMOKE__", $profileSpecificNativeSmoke)
+        $programText = $programText.Replace("__TARGETED_NATIVE_SMOKE_SUCCESS__", $successMarker)
     }
     else {
         $programText = @'
@@ -483,8 +549,12 @@ if ($selectedMode -and ($selectedRidSpecs.Count -ne 1 -or $selectedProfileSpecs.
     throw "Selected RID/profile was not found exactly once in the runtime matrix: $SelectedRid / $SelectedRuntimeProfile"
 }
 
-if (($CompileNativeSmoke -or $RunNativeSmoke) -and (-not $selectedMode -or $expectedSyntheticRuntimeInputsValue)) {
-    throw "CompileNativeSmoke and RunNativeSmoke require one selected non-synthetic RID/profile package pair."
+if ($CompileNativeSmoke -and -not $selectedMode) {
+    throw "CompileNativeSmoke requires one selected RID/profile package pair."
+}
+
+if ($RunNativeSmoke -and (-not $selectedMode -or $expectedSyntheticRuntimeInputsValue)) {
+    throw "RunNativeSmoke requires one selected non-synthetic RID/profile package pair."
 }
 
 $managedArtifactDir = Join-Path $artifactRootFullPath "nupkg-managed"
@@ -553,7 +623,8 @@ try {
                 continue
             }
 
-            $modules = @($profileSpec.modules | ForEach-Object { [string]$_ })
+            $requiredModules = @($profileSpec.modules | ForEach-Object { [string]$_ })
+            $expectedOptionalModules = @($profileSpec.optionalModules | ForEach-Object { [string]$_ })
             $runtimePackageId = Get-RuntimePackageId -Rid $rid -Profile $profile
             $artifactName = "nupkg-$rid-$profile"
             $artifactDir = Join-Path $artifactRootFullPath $artifactName
@@ -563,6 +634,19 @@ try {
                 continue
             }
 
+            $runtimeManifest = Read-NupkgRuntimeProvenance -Path $runtimePackagePath -Violations $violations
+            $optionalModulesStaged = @()
+            if ($null -ne $runtimeManifest -and $null -ne $runtimeManifest.PSObject.Properties["OptionalModulesStaged"]) {
+                $optionalModulesStaged = @($runtimeManifest.OptionalModulesStaged | ForEach-Object { [string]$_ })
+            }
+
+            $expectedOptionalModulesStaged = @($expectedOptionalModules | Where-Object { $optionalModulesStaged -contains $_ })
+            if ($optionalModulesStaged.Count -ne $expectedOptionalModulesStaged.Count -or (($optionalModulesStaged -join ",") -ne ($expectedOptionalModulesStaged -join ","))) {
+                Add-Violation -Violations $violations -Path $runtimePackagePath -Issue "Consumer runtime provenance staged optional modules must be an ordered unique subset of the selected runtime profile" -Text "Found $($optionalModulesStaged -join ','), allowed $($expectedOptionalModules -join ',')"
+            }
+
+            $modules = @($requiredModules) + @($optionalModulesStaged)
+
             $consumerName = "$rid-$profile"
             $consumerDir = Join-Path $consumerRoot $consumerName
             $consumerProjectPath = New-TemporaryConsumerProject `
@@ -571,6 +655,7 @@ try {
                 -RuntimePackageId $runtimePackageId `
                 -PackageVersion $ExpectedPackageVersion `
                 -RuntimeIdentifierGraphPath $runtimeIdentifierGraphPath `
+                -RuntimeProfile $profile `
                 -RunNativeSmoke:($CompileNativeSmoke -or $RunNativeSmoke)
             $nativeNames = Get-NativeFileNames `
                 -Rid $rid `
@@ -629,7 +714,7 @@ try {
                 $nativeSmokeSucceeded = Invoke-CheckedCommand `
                     -Violations $violations `
                     -Path $consumerProjectPath `
-                    -Issue "Targeted GitHub artifact consumer native smoke failed; inspect loader, SONAME, RID selection, and supported mini entrypoint diagnostics" `
+                    -Issue "Targeted GitHub artifact consumer native smoke failed; inspect loader, SONAME, RID selection, and supported profile entrypoint diagnostics" `
                     -FilePath $dotnet.Source `
                     -Arguments $runArguments `
                     -EchoOutputOnSuccess
