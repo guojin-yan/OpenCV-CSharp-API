@@ -1,0 +1,220 @@
+name: runtime-ubuntu2204-arm64-audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-host-docker:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants on the native ARM64 host
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Probe official Ubuntu 22.04 ARM64 through host Docker
+        shell: bash
+        env:
+          POWERSHELL_VERSION: 7.4.17
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          test "$(docker info --format '{{.Architecture}}')" = "aarch64"
+          docker pull ubuntu:22.04
+          test "$(docker image inspect ubuntu:22.04 --format '{{.Architecture}}')" = "arm64"
+          image_id="$(docker image inspect ubuntu:22.04 --format '{{.Id}}')"
+          repo_digests="$(docker image inspect ubuntu:22.04 --format '{{join .RepoDigests ","}}')"
+
+          {
+            echo "UBUNTU_22_04_ARM64_HOST_EVIDENCE ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} UNAME=$(uname -m) DOCKER_ARCH=$(docker info --format '{{.Architecture}}') DISK_AVAILABLE_BYTES=$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+            echo "UBUNTU_22_04_ARM64_IMAGE_EVIDENCE IMAGE_ID=$image_id REPO_DIGESTS=$repo_digests ARCH=$(docker image inspect ubuntu:22.04 --format '{{.Architecture}}') OS=$(docker image inspect ubuntu:22.04 --format '{{.Os}}')"
+            docker version
+            df -h /
+            df -B1 /
+          } | tee ubuntu2204-arm64-host-docker-audit.txt
+
+          docker run --rm \
+            -e POWERSHELL_VERSION="$POWERSHELL_VERSION" \
+            -e POWERSHELL_SHA256="$POWERSHELL_SHA256" \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w /workspace \
+            ubuntu:22.04 \
+            bash -lc '
+              set -euo pipefail
+              . /etc/os-release
+              test "${ID:-}" = "ubuntu"
+              test "${VERSION_ID:-}" = "22.04"
+              test "$(uname -m)" = "aarch64"
+              test "$(dpkg --print-architecture)" = "arm64"
+
+              export DEBIAN_FRONTEND=noninteractive
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                binutils \
+                build-essential \
+                ca-certificates \
+                cmake \
+                curl \
+                git \
+                gzip \
+                libicu70 \
+                libssl3 \
+                libunwind8 \
+                ninja-build \
+                pkg-config \
+                tar \
+                zlib1g
+
+              powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
+              curl -fsSL "https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz" -o "$powershell_archive"
+              echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -
+              install -d /opt/microsoft/powershell/7
+              tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
+              chmod +x /opt/microsoft/powershell/7/pwsh
+              ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+
+              curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+              bash /tmp/dotnet-install.sh --channel 8.0 --architecture arm64 --install-dir /usr/share/dotnet
+              ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+              printf "%s\n" \
+                "#include <arm_neon.h>" \
+                "uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }" \
+                "int main() { return 0; }" \
+                > /tmp/opencv-ubuntu2204-arm64-neon.cpp
+              g++ -c -O2 /tmp/opencv-ubuntu2204-arm64-neon.cpp -o /tmp/opencv-ubuntu2204-arm64-neon.o
+              readelf -h /tmp/opencv-ubuntu2204-arm64-neon.o | grep -q "Machine:.*AArch64"
+
+              {
+                cat /etc/os-release
+                echo "UBUNTU_22_04_ARM64_CONTAINER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$(getconf GNU_LIBC_VERSION)"
+                lscpu
+                cmake --version
+                gcc --version
+                g++ --version
+                as --version
+                ninja --version
+                pwsh --version
+                dotnet --info
+                echo "UBUNTU_22_04_ARM64_CONTAINER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+              } | tee -a /workspace/ubuntu2204-arm64-host-docker-audit.txt
+            '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-ubuntu2204-arm64-host-docker-audit
+          path: ubuntu2204-arm64-host-docker-audit.txt
+          if-no-files-found: error
+
+  probe-job-container:
+    runs-on: ubuntu-24.04-arm
+    container: ubuntu:22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native Ubuntu 22.04 ARM64 audit tools and PowerShell
+        shell: bash
+        env:
+          POWERSHELL_VERSION: 7.4.17
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
+        run: |
+          set -euo pipefail
+          . /etc/os-release
+          test "${ID:-}" = "ubuntu"
+          test "${VERSION_ID:-}" = "22.04"
+          test "$(uname -m)" = "aarch64"
+          test "$(dpkg --print-architecture)" = "arm64"
+
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            binutils \
+            build-essential \
+            ca-certificates \
+            cmake \
+            curl \
+            git \
+            gzip \
+            libicu70 \
+            libssl3 \
+            libunwind8 \
+            ninja-build \
+            pkg-config \
+            tar \
+            zlib1g
+
+          powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
+          curl -fsSL "https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz" -o "$powershell_archive"
+          echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -
+          install -d /opt/microsoft/powershell/7
+          tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
+          chmod +x /opt/microsoft/powershell/7/pwsh
+          ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+
+          printf '%s\n' \
+            '#include <arm_neon.h>' \
+            'uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }' \
+            'int main() { return 0; }' \
+            > /tmp/opencv-ubuntu2204-arm64-neon.cpp
+          g++ -c -O2 /tmp/opencv-ubuntu2204-arm64-neon.cpp -o /tmp/opencv-ubuntu2204-arm64-neon.o
+          readelf -h /tmp/opencv-ubuntu2204-arm64-neon.o | grep -q 'Machine:.*AArch64'
+
+          {
+            cat /etc/os-release
+            echo "UBUNTU_22_04_ARM64_JOB_CONTAINER_EVIDENCE HostRunner=ubuntu-24.04-arm ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$(getconf GNU_LIBC_VERSION)"
+            lscpu
+            cmake --version
+            gcc --version
+            g++ --version
+            as --version
+            ninja --version
+            pwsh --version
+            echo "UBUNTU_22_04_ARM64_JOB_CONTAINER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+          } | tee ubuntu2204-arm64-job-container-audit.txt
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants inside Ubuntu 22.04 ARM64
+        shell: pwsh
+        run: |
+          dotnet --info | Tee-Object -FilePath ubuntu2204-arm64-job-container-dotnet.txt
+          Get-Content ubuntu2204-arm64-job-container-dotnet.txt | Add-Content ubuntu2204-arm64-job-container-audit.txt
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-ubuntu2204-arm64-job-container-audit
+          path: ubuntu2204-arm64-job-container-audit.txt
+          if-no-files-found: error
+
+  verify-artifacts:
+    needs:
+      - probe-host-docker
+      - probe-job-container
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: runtime-ubuntu2204-arm64-*-audit
+          path: audit-download
+      - name: Verify Ubuntu 22.04 ARM64 audit evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          grep -R -q 'UBUNTU_22_04_ARM64_HOST_EVIDENCE.*UNAME=aarch64.*DOCKER_ARCH=aarch64' audit-download
+          grep -R -q 'UBUNTU_22_04_ARM64_IMAGE_EVIDENCE.*ARCH=arm64.*OS=linux' audit-download
+          grep -R -q 'UBUNTU_22_04_ARM64_CONTAINER_EVIDENCE.*ID=ubuntu.*VERSION_ID=22.04.*UNAME=aarch64.*DPKG_ARCH=arm64.*LIBC=glibc' audit-download
+          grep -R -q 'UBUNTU_22_04_ARM64_CONTAINER_NEON_EVIDENCE machine=AArch64 neon_compile=success' audit-download
+          grep -R -q 'UBUNTU_22_04_ARM64_JOB_CONTAINER_EVIDENCE.*ID=ubuntu.*VERSION_ID=22.04.*UNAME=aarch64.*DPKG_ARCH=arm64.*LIBC=glibc' audit-download
+          grep -R -q 'UBUNTU_22_04_ARM64_JOB_CONTAINER_NEON_EVIDENCE machine=AArch64 neon_compile=success' audit-download
+          grep -R -q 'Architecture: arm64' audit-download
