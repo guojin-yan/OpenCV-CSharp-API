@@ -235,6 +235,7 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "debian.12-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "rhel.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "registry.access.redhat.com/ubi9/ubi:9.8"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
         [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
@@ -361,7 +362,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
-        [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
+         [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
+         [pscustomobject]@{ Needle = "runtime-input-debian.12-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Debian 12 ARM64 full target" },
         [pscustomobject]@{ Needle = "os: ubuntu-24.04-arm"; Issue = "Ubuntu 24.04 ARM64 producer must use the native GitHub-hosted ARM64 runner" },
         [pscustomobject]@{ Needle = "container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited official multi-architecture image digest" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record the native AArch64 Docker host" },
@@ -372,7 +374,16 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must retain factual OpenCV CPU configuration" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Ubuntu 22.04 ARM64 producer must require linked CTest 5/5" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"; Issue = "Ubuntu 22.04 ARM64 producer must audit its canonical AArch64 ELF closure" },
-        [pscustomobject]@{ Needle = "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited PowerShell 7.4.17 ARM64 archive hash" },
+         [pscustomobject]@{ Needle = "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited PowerShell 7.4.17 ARM64 archive hash" },
+         [pscustomobject]@{ Needle = "container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; Issue = "Debian 12 ARM64 producer must pin the audited official multi-architecture image digest" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record the native AArch64 Docker host" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_IMAGE_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record the official image identity and digest" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_CONTAINER_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record factual target userspace identity" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_POWERSHELL_EVIDENCE version=`$POWERSHELL_VERSION archive_sha256=`$POWERSHELL_SHA256 architecture=arm64"; Issue = "Debian 12 ARM64 producer must verify its native PowerShell archive" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"; Issue = "Debian 12 ARM64 producer must compile and audit a native NEON object" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_OPENCV_CPU_EVIDENCE"; Issue = "Debian 12 ARM64 producer must retain factual OpenCV CPU configuration" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Debian 12 ARM64 producer must require linked CTest 5/5" },
+         [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"; Issue = "Debian 12 ARM64 producer must audit its canonical AArch64 ELF closure" },
         [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_RUNNER_EVIDENCE"; Issue = "Ubuntu ARM64 producer must emit actual runner image, distro, architecture, libc, CPU, and disk evidence" },
         [pscustomobject]@{ Needle = 'test "$(uname -m)" = "aarch64"'; Issue = "Ubuntu ARM64 producer must reject non-AArch64 execution" },
         [pscustomobject]@{ Needle = 'test "$(dpkg --print-architecture)" = "arm64"'; Issue = "Ubuntu ARM64 producer must require the native Debian arm64 architecture" },
@@ -555,24 +566,26 @@ if ($violations.Count -eq 0) {
             else {
                 "glibc fixture"
             }
-            $isUbuntuArm64 = $producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.24.04-arm64", "ubuntu.22.04-arm64")
+            $isArm64Hosted = $producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.24.04-arm64", "ubuntu.22.04-arm64", "debian.12-arm64")
+            $isArm64Container = $producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.22.04-arm64", "debian.12-arm64")
             $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -eq "full"
-            $runnerImage = if ($isUbuntuArm64) { "ubuntu24-arm64" } else { "" }
-            $runnerImageVersion = if ($isUbuntuArm64) { "fixture" } else { "" }
-            $hostedDistro = if ($isUbuntuArm64) { "ubuntu" } else { "" }
-            $hostedDistroVersion = if ($isUbuntuArm64) { "24.04" } else { "" }
-            $hostedArchitecture = if ($isUbuntuArm64) { "aarch64" } else { "" }
-            $hostedPackageArchitecture = if ($isUbuntuArm64) { "arm64" } else { "" }
-            $hostedLibc = if ($isUbuntuArm64) { "glibc fixture" } else { "" }
-            $hostedCpuModel = if ($isUbuntuArm64) { "Neoverse fixture" } else { "" }
-            $hostedDiskAvailableBytes = if ($isUbuntuArm64) { "1" } else { "" }
-            $openCvCpuConfiguration = if ($isUbuntuArm64) { "CPU_BASELINE=NEON" } else { "" }
-            $containerImageId = if ($isUbuntu2204Arm64) { "sha256:fixture" } else { "" }
-            $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } else { "" }
-            $containerArchitecture = if ($isUbuntu2204Arm64) { "aarch64" } else { "" }
-            $containerPackageArchitecture = if ($isUbuntu2204Arm64) { "arm64" } else { "" }
-            $powerShellVersion = if ($isUbuntu2204Arm64) { "7.4.17" } else { "" }
-            $powerShellArchiveSha256 = if ($isUbuntu2204Arm64) { "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c" } else { "" }
+            $isDebian1204Arm64 = $producerTarget.Rid -eq "debian.12-arm64" -and $producerTarget.Profile -eq "full"
+            $runnerImage = if ($isArm64Hosted) { "ubuntu24-arm64" } else { "" }
+            $runnerImageVersion = if ($isArm64Hosted) { "fixture" } else { "" }
+            $hostedDistro = if ($isArm64Hosted) { "ubuntu" } else { "" }
+            $hostedDistroVersion = if ($isArm64Hosted) { "24.04" } else { "" }
+            $hostedArchitecture = if ($isArm64Hosted) { "aarch64" } else { "" }
+            $hostedPackageArchitecture = if ($isArm64Hosted) { "arm64" } else { "" }
+            $hostedLibc = if ($isArm64Hosted) { "glibc fixture" } else { "" }
+            $hostedCpuModel = if ($isArm64Hosted) { "Neoverse fixture" } else { "" }
+            $hostedDiskAvailableBytes = if ($isArm64Hosted) { "1" } else { "" }
+            $openCvCpuConfiguration = if ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
+            $containerImageId = if ($isArm64Container) { "sha256:fixture" } else { "" }
+            $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } else { "" }
+            $containerArchitecture = if ($isArm64Container) { "aarch64" } else { "" }
+            $containerPackageArchitecture = if ($isArm64Container) { "arm64" } else { "" }
+            $powerShellVersion = if ($isArm64Container) { "7.4.17" } else { "" }
+            $powerShellArchiveSha256 = if ($isArm64Container) { "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c" } else { "" }
             $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
             if ($profileSpec.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
@@ -645,7 +658,7 @@ if ($violations.Count -eq 0) {
                 throw "Fixture provenance HostedRunner did not match producer target runner for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
-            if ($isUbuntuArm64) {
+            if ($isArm64Hosted) {
                 if (-not ([string]$manifest.RunnerImage).Equals($runnerImage, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.RunnerImageVersion).Equals($runnerImageVersion, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedDistro).Equals($hostedDistro, [System.StringComparison]::Ordinal) -or
@@ -656,7 +669,7 @@ if ($violations.Count -eq 0) {
                     -not ([string]$manifest.HostedCpuModel).Equals($hostedCpuModel, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedDiskAvailableBytes).Equals($hostedDiskAvailableBytes, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.OpenCvCpuConfiguration).Equals($openCvCpuConfiguration, [System.StringComparison]::Ordinal)) {
-                    throw "Fixture provenance did not retain the complete Ubuntu ARM64 hosted evidence."
+                throw "Fixture provenance did not retain the complete ARM64 hosted evidence."
                 }
             }
 
@@ -664,14 +677,14 @@ if ($violations.Count -eq 0) {
                 throw "Fixture provenance ContainerImage did not match producer target container image for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
-            if ($isUbuntu2204Arm64) {
+            if ($isArm64Container) {
                 if (-not ([string]$manifest.ContainerImageId).Equals($containerImageId, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.ContainerImageDigest).Equals($containerImageDigest, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.ContainerArchitecture).Equals($containerArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.ContainerPackageArchitecture).Equals($containerPackageArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.PowerShellVersion).Equals($powerShellVersion, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.PowerShellArchiveSha256).Equals($powerShellArchiveSha256, [System.StringComparison]::Ordinal)) {
-                    throw "Fixture provenance did not retain the complete Ubuntu 22.04 ARM64 container and PowerShell evidence."
+                    throw "Fixture provenance did not retain the complete ARM64 container and PowerShell evidence."
                 }
             }
 
@@ -742,5 +755,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

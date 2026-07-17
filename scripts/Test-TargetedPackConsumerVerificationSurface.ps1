@@ -136,6 +136,7 @@ $ubuntuJobText = Get-WorkflowJobText -JobName "verify-targeted-real"
 $ubuntuArm64JobText = Get-WorkflowJobText -JobName "verify-targeted-real-ubuntu-arm64"
 $ubuntu2204Arm64JobText = Get-WorkflowJobText -JobName "verify-targeted-real-ubuntu2204-arm64"
 $debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
+$debianArm64JobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian-arm64"
 $fedoraJobText = Get-WorkflowJobText -JobName "verify-targeted-real-fedora"
 $rockyJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rocky"
 $rhelJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rhel"
@@ -144,6 +145,7 @@ $alpineJobText = Get-WorkflowJobText -JobName "verify-targeted-real-alpine"
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Runner = "ubuntu-24.04-arm" },
+        [pscustomobject]@{ Rid = "debian.12-arm64"; Runner = "ubuntu-24.04-arm" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Runner = "ubuntu-24.04" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Runner = "ubuntu-24.04-arm" })) {
     $ridSpecs = @($runtimeMatrix.rids | Where-Object { $_.rid -eq $expectedTarget.Rid })
@@ -230,6 +232,28 @@ foreach ($expectation in @(
         @($workflowPath, $debianJobText, "-SelectedRid debian.12-x64", "Debian checks must select only the proven Debian RID"),
         @($workflowPath, $debianJobText, "-SelectedRuntimeProfile full", "Debian checks must select only the full profile"),
         @($workflowPath, $debianJobText, "-RunNativeSmoke", "Debian consumer verification must execute native calls inside the container"),
+        @($workflowPath, $debianArm64JobText, "verify-targeted-real-debian-arm64:", "Pack workflow must keep a separate native Debian 12 ARM64 verification job"),
+        @($workflowPath, $debianArm64JobText, "inputs.rid == 'debian.12-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian ARM64 verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $debianArm64JobText, "runs-on: ubuntu-24.04-arm", "Debian ARM64 verification must use the native AArch64 Docker host"),
+        @($workflowPath, $debianArm64JobText, "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc", "Debian ARM64 verification must pin the audited official image digest"),
+        @($workflowPath, $debianArm64JobText, 'test "$(uname -m)" = "aarch64"', "Debian ARM64 verification must reject non-AArch64 host and container execution"),
+        @($workflowPath, $debianArm64JobText, 'test "$(dpkg --print-architecture)" = "arm64"', "Debian ARM64 verification must require native arm64 package architecture"),
+        @($workflowPath, $debianArm64JobText, 'test "$(docker info --format ''{{.Architecture}}'')" = "aarch64"', "Debian ARM64 verification must require a native AArch64 Docker server"),
+        @($workflowPath, $debianArm64JobText, 'test "${ID:-}" = "debian"', "Debian ARM64 verification must require Debian userspace"),
+        @($workflowPath, $debianArm64JobText, '12|12.*) ;;', "Debian ARM64 verification must require exact Debian 12 userspace"),
+        @($workflowPath, $debianArm64JobText, "DEBIAN_12_ARM64_CONSUMER_HOST_EVIDENCE", "Debian ARM64 verification must distinguish its host boundary"),
+        @($workflowPath, $debianArm64JobText, "DEBIAN_12_ARM64_CONSUMER_IMAGE_EVIDENCE", "Debian ARM64 verification must retain official image evidence"),
+        @($workflowPath, $debianArm64JobText, "DEBIAN_12_ARM64_CONSUMER_EVIDENCE", "Debian ARM64 verification must emit factual container evidence"),
+        @($workflowPath, $debianArm64JobText, "DEBIAN_12_ARM64_POWERSHELL_EVIDENCE", "Debian ARM64 verification must verify native PowerShell"),
+        @($workflowPath, $debianArm64JobText, "--channel 8.0 --architecture arm64", "Debian ARM64 verification must install a native ARM64 .NET 8 SDK"),
+        @($workflowPath, $debianArm64JobText, "name: nupkg-managed", "Debian ARM64 verification must download the same-run managed artifact"),
+        @($workflowPath, $debianArm64JobText, "name: nupkg-debian.12-arm64-full", "Debian ARM64 verification must download only its exact runtime artifact"),
+        @($workflowPath, $debianArm64JobText, "path: artifacts/pack-targeted-debian-arm64/nupkg-managed", "Debian ARM64 managed artifact must use an isolated path"),
+        @($workflowPath, $debianArm64JobText, "path: artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-full", "Debian ARM64 runtime artifact must use an isolated path"),
+        @($workflowPath, $debianArm64JobText, "-ExpectedSyntheticRuntimeInputs false", "Debian ARM64 guards must require real provenance"),
+        @($workflowPath, $debianArm64JobText, "-SelectedRid debian.12-arm64", "Debian ARM64 guards must select the exact distro RID"),
+        @($workflowPath, $debianArm64JobText, "-SelectedRuntimeProfile full", "Debian ARM64 guards must select only full"),
+        @($workflowPath, $debianArm64JobText, "-RunNativeSmoke", "Debian ARM64 consumer must execute native and deterministic DNN calls"),
         @($workflowPath, $fedoraJobText, "verify-targeted-real-fedora:", "Pack workflow must keep a separate Fedora container verification job"),
         @($workflowPath, $fedoraJobText, "inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Fedora verification must use the exact full-only non-synthetic non-publishing gate"),
         @($workflowPath, $fedoraJobText, "runs-on: ubuntu-24.04", "Fedora container verification must use the supported hosted runner"),
@@ -510,6 +534,40 @@ Assert-OccurrenceCount `
     -ExpectedCount 2 `
     -Issue "Both Debian guards must select only the full profile"
 
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'debian.12-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Debian ARM64 targeted verification condition must remain exactly Debian 12 ARM64 full"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Debian ARM64 verifier must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Debian ARM64 verifier must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "-SelectedRid debian.12-arm64" `
+    -ExpectedCount 2 `
+    -Issue "Both Debian ARM64 guards must select the exact Debian ARM64 RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Debian ARM64 guards must select only the full profile"
+
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $fedoraJobText `
@@ -660,6 +718,22 @@ foreach ($forbiddenUbuntu2204Arm64Text in @(
         -Issue "Ubuntu 22.04 ARM64 verification must remain native, full-only, same-run, and free of loader overrides or emulation: $forbiddenUbuntu2204Arm64Text"
 }
 
+foreach ($forbiddenDebianArm64Text in @(
+        "runtime_profile == 'mini'",
+        "LD_LIBRARY_PATH",
+        "x86_64",
+        "qemu",
+        "--platform",
+        "container:",
+        "run-id:",
+        "repository:")) {
+    Assert-NotContains `
+        -Path $workflowPath `
+        -Text $debianArm64JobText `
+        -Needle $forbiddenDebianArm64Text `
+        -Issue "Debian 12 ARM64 verification must remain native, full-only, same-run, and free of loader overrides or emulation: $forbiddenDebianArm64Text"
+}
+
 Assert-NotContains `
     -Path $workflowPath `
     -Text $ubuntuJobText `
@@ -719,6 +793,24 @@ Assert-NotContains `
     -Text $debianJobText `
     -Needle "runtime_profile == 'mini'" `
     -Issue "Debian mini must not enter the container-native verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "debian.12-x64" `
+    -Issue "Debian ARM64 verification must not consume the Debian x64 package"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "runtime_profile == 'mini'" `
+    -Issue "Debian ARM64 mini must not enter the container-native verification job"
+
+Assert-NotContains `
+    -Path $workflowPath `
+    -Text $debianArm64JobText `
+    -Needle "LD_LIBRARY_PATH" `
+    -Issue "Debian ARM64 verification must not mask loader RUNPATH defects with an environment override"
 
 Assert-NotContains `
     -Path $workflowPath `
@@ -860,6 +952,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
-Write-Host "Container targets: ubuntu.22.04-arm64/full through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
+Write-Host "Container targets: ubuntu.22.04-arm64/full through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."

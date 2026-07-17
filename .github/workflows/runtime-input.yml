@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently Ubuntu 24.04 x64/ARM64, Ubuntu 22.04 x64/ARM64, Debian 12 x64, Fedora 40 x64, RHEL 9 x64, Rocky 9 x64, or Alpine 3.20 x64
+        description: Real producer target; currently Ubuntu 24.04 x64/ARM64, Ubuntu 22.04 x64/ARM64, Debian 12 x64/ARM64, Fedora 40 x64, RHEL 9 x64, Rocky 9 x64, or Alpine 3.20 x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -33,6 +33,7 @@ jobs:
             'ubuntu.22.04-x64/full',
             'ubuntu.22.04-arm64/full',
             'debian.12-x64/full',
+            'debian.12-arm64/full',
             'fedora.40-x64/full',
             'rhel.9-x64/full',
             'rocky.9-x64/full',
@@ -40,7 +41,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Ubuntu ARM64 mini and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Ubuntu and Debian ARM64 mini and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -354,6 +355,11 @@ jobs:
             os: ubuntu-24.04-arm
             container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
             opencv_extra_cmake_args: ""
+          - rid: debian.12-arm64
+            profile: full
+            os: ubuntu-24.04-arm
+            container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+            opencv_extra_cmake_args: ""
           - rid: debian.12-x64
             profile: full
             os: ubuntu-24.04
@@ -454,7 +460,7 @@ jobs:
           hosted_disk_available_bytes=""
           container_image_id=""
           container_image_digest=""
-          if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+          if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
             . /etc/os-release
             test "${ID:-}" = "ubuntu"
             test "${VERSION_ID:-}" = "24.04"
@@ -465,7 +471,11 @@ jobs:
             test "$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}')" = "arm64"
             container_image_id="$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Id}}')"
             container_image_digest="$(docker image inspect "$CONTAINER_IMAGE" --format '{{join .RepoDigests ","}}')"
-            printf '%s\n' "$container_image_digest" | grep -Fq 'ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982'
+            if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+              printf '%s\n' "$container_image_digest" | grep -Fq 'ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982'
+            else
+              printf '%s\n' "$container_image_digest" | grep -Fq 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
+            fi
 
             hosted_runner_image="${ImageOS:-unknown}"
             hosted_runner_image_version="${ImageVersion:-unknown}"
@@ -480,8 +490,13 @@ jobs:
             test "$hosted_runner_image_version" != "unknown"
             test -n "$hosted_cpu_model"
             test "$hosted_disk_available_bytes" -gt 0
-            echo "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
-            echo "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+            if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+              echo "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
+              echo "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+            else
+              echo "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
+              echo "DEBIAN_12_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+            fi
           fi
 
           docker run --rm \
@@ -536,13 +551,25 @@ jobs:
 
                   package_architecture="$(dpkg --print-architecture)"
                   if [ "$package_architecture" = "arm64" ]; then
-                    test "${ID:-}" = "ubuntu"
-                    test "${VERSION_ID:-}" = "22.04"
-                    test "$PRODUCER_RID" = "ubuntu.22.04-arm64"
+                    if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                      test "${ID:-}" = "ubuntu"
+                      test "${VERSION_ID:-}" = "22.04"
+                      extra_arm64_packages="libicu70"
+                    elif [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
+                      test "${ID:-}" = "debian"
+                      case "${VERSION_ID:-}" in
+                        12|12.*) ;;
+                        *) exit 1 ;;
+                      esac
+                      extra_arm64_packages="libicu72"
+                    else
+                      echo "Unsupported ARM64 Debian-family producer target: $PRODUCER_RID" >&2
+                      exit 1
+                    fi
                     test "$(uname -m)" = "aarch64"
                     apt-get install -y --no-install-recommends \
                       gzip \
-                      libicu70 \
+                      $extra_arm64_packages \
                       libssl3 \
                       libunwind8 \
                       tar \
@@ -554,7 +581,11 @@ jobs:
                     tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
                     chmod +x /opt/microsoft/powershell/7/pwsh
                     ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
-                    echo "UBUNTU_22_04_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
+                    if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                      echo "UBUNTU_22_04_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
+                    else
+                      echo "DEBIAN_12_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
+                    fi
                   else
                     test "$package_architecture" = "amd64"
                     install -d -m 0755 /etc/apt/keyrings
@@ -679,9 +710,17 @@ jobs:
               container_package_architecture=""
               provenance_powershell_version=""
               provenance_powershell_sha256=""
-              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                test "$container_distro" = "ubuntu"
-                test "$container_distro_version" = "22.04"
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
+                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                  test "$container_distro" = "ubuntu"
+                  test "$container_distro_version" = "22.04"
+                else
+                  test "$container_distro" = "debian"
+                  case "$container_distro_version" in
+                    12|12.*) ;;
+                    *) exit 1 ;;
+                  esac
+                fi
                 test "$(uname -m)" = "aarch64"
                 test "$(dpkg --print-architecture)" = "arm64"
                 container_architecture="$(uname -m)"
@@ -689,15 +728,21 @@ jobs:
                 provenance_powershell_version="$POWERSHELL_VERSION"
                 provenance_powershell_sha256="$POWERSHELL_SHA256"
 
+                neon_source="/tmp/opencv-$PRODUCER_RID-neon.cpp"
+                neon_object="/tmp/opencv-$PRODUCER_RID-neon.o"
                 printf "%s\n" \
                   "#include <arm_neon.h>" \
                   "uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }" \
                   "int main() { return 0; }" \
-                  > /tmp/opencv-ubuntu2204-arm64-neon.cpp
-                g++ -c -O2 /tmp/opencv-ubuntu2204-arm64-neon.cpp -o /tmp/opencv-ubuntu2204-arm64-neon.o
-                readelf -h /tmp/opencv-ubuntu2204-arm64-neon.o | grep -q "Machine:.*AArch64"
+                  > "$neon_source"
+                g++ -c -O2 "$neon_source" -o "$neon_object"
+                readelf -h "$neon_object" | grep -q "Machine:.*AArch64"
 
-                echo "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
+                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                  echo "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
+                else
+                  echo "DEBIAN_12_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
+                fi
                 lscpu
                 cmake --version
                 gcc --version
@@ -705,7 +750,11 @@ jobs:
                 as --version
                 ninja --version
                 pwsh --version
-                echo "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                  echo "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+                else
+                  echo "DEBIAN_12_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+                fi
               fi
 
               source_root="/workspace/opencv-source"
@@ -724,7 +773,7 @@ jobs:
                 -Build
 
               opencv_cpu_configuration=""
-              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                 open_cv_build_dir="/workspace/artifacts/opencv-build/opencv-$OPENCV_VERSION-$OPENCV_RID"
                 open_cv_cache="$open_cv_build_dir/CMakeCache.txt"
                 open_cv_cpu_config="$(find "$open_cv_build_dir" -type f -name cv_cpu_config.h -print -quit)"
@@ -736,7 +785,11 @@ jobs:
                 } | tr "\n" ";")"
                 test -n "$opencv_cpu_configuration"
                 printf "%s\n" "$opencv_cpu_configuration" | grep -q "NEON"
-                echo "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
+                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                  echo "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
+                else
+                  echo "DEBIAN_12_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
+                fi
               fi
 
               open_cv_install_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID"
@@ -765,9 +818,13 @@ jobs:
 
               cmake --build build/native-linked --config Release
               ctest --test-dir build/native-linked -C Release --output-on-failure | tee build/native-linked/ctest-output.txt
-              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                 grep -Fq "100% tests passed, 0 tests failed out of 5" build/native-linked/ctest-output.txt
-                echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
+                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                  echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
+                else
+                  echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
+                fi
               fi
 
               if [ "$container_distro" = "alpine" ]; then
@@ -805,7 +862,7 @@ jobs:
                 echo "ALPINE_3_20_PRODUCER_ELF_EVIDENCE files=18 origin=18 direct_opencv=16"
               fi
 
-              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                 open_cv_runtime_audit_dir=""
                 for candidate in "$open_cv_install_dir/lib" "$open_cv_install_dir/lib64"; do
                   if [ -d "$candidate" ]; then
@@ -815,7 +872,7 @@ jobs:
                 done
                 test -n "$open_cv_runtime_audit_dir"
 
-                audit_dir="build/native-ubuntu2204-arm64-audit"
+                audit_dir="build/native-$PRODUCER_RID-audit"
                 rm -rf "$audit_dir"
                 mkdir -p "$audit_dir"
                 cp -a "$open_cv_runtime_audit_dir"/libopencv_*.so* "$audit_dir/"
@@ -858,7 +915,11 @@ jobs:
                 test "$producer_path_count" -eq 0
                 test "$direct_opencv_dependencies" -eq 16
                 test "$missing_dependency_count" -eq 0
-                echo "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
+                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                  echo "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
+                else
+                  echo "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
+                fi
               fi
 
               open_cv_runtime_dir=""

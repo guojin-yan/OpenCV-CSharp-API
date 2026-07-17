@@ -167,10 +167,10 @@ jobs:
             os: ubuntu-24.04
           - rid: debian.12-arm64
             profile: full
-            os: ubuntu-24.04
+            os: ubuntu-24.04-arm
           - rid: debian.12-arm64
             profile: mini
-            os: ubuntu-24.04
+            os: ubuntu-24.04-arm
           - rid: fedora.40-x64
             profile: full
             os: ubuntu-24.04
@@ -707,6 +707,108 @@ jobs:
             -SelectedRid debian.12-x64 `
             -SelectedRuntimeProfile full `
             -RunNativeSmoke
+
+  verify-targeted-real-debian-arm64:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'debian.12-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-debian-arm64/nupkg-managed
+      - name: Download Debian 12 ARM64 runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-debian.12-arm64-full
+          path: artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-full
+      - name: Verify and run selected real Debian 12 ARM64 package
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+          POWERSHELL_VERSION: 7.4.17
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
+          DEBIAN_12_ARM64_IMAGE: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          test "$(dpkg --print-architecture)" = "arm64"
+          test "$(docker info --format '{{.Architecture}}')" = "aarch64"
+          docker pull "$DEBIAN_12_ARM64_IMAGE"
+          test "$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Architecture}}')" = "arm64"
+          image_id="$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Id}}')"
+          image_digests="$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{join .RepoDigests ","}}')"
+          printf '%s\n' "$image_digests" | grep -Fq 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
+          echo "DEBIAN_12_ARM64_CONSUMER_HOST_EVIDENCE ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) DOCKER_ARCH=$(docker info --format '{{.Architecture}}')"
+          echo "DEBIAN_12_ARM64_CONSUMER_IMAGE_EVIDENCE IMAGE=$DEBIAN_12_ARM64_IMAGE IMAGE_ID=$image_id REPO_DIGESTS=$image_digests ARCH=$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Os}}')"
+
+          docker run --rm \
+            -e PACKAGE_VERSION="$PACKAGE_VERSION" \
+            -e POWERSHELL_VERSION="$POWERSHELL_VERSION" \
+            -e POWERSHELL_SHA256="$POWERSHELL_SHA256" \
+            -v "$GITHUB_WORKSPACE:/workspace:ro" \
+            -w /tmp \
+            "$DEBIAN_12_ARM64_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              . /etc/os-release
+              test "${ID:-}" = "debian"
+              case "${VERSION_ID:-}" in
+                12|12.*) ;;
+                *) exit 1 ;;
+              esac
+              test "$(uname -m)" = "aarch64"
+              test "$(dpkg --print-architecture)" = "arm64"
+
+              export DEBIAN_FRONTEND=noninteractive
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                ca-certificates \
+                curl \
+                gzip \
+                libicu72 \
+                libssl3 \
+                libunwind8 \
+                tar \
+                zlib1g
+
+              powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
+              curl -fsSL "https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz" -o "$powershell_archive"
+              echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -
+              install -d /opt/microsoft/powershell/7
+              tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
+              chmod +x /opt/microsoft/powershell/7/pwsh
+              ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+
+              curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+              bash /tmp/dotnet-install.sh --channel 8.0 --architecture arm64 --install-dir /usr/share/dotnet
+              ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+              libc="$(getconf GNU_LIBC_VERSION)"
+              echo "DEBIAN_12_ARM64_CONSUMER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc POWERSHELL_VERSION=$POWERSHELL_VERSION POWERSHELL_SHA256=$POWERSHELL_SHA256"
+              echo "DEBIAN_12_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
+              pwsh --version
+              dotnet --info
+
+              pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackArtifactMatrixSurface.ps1 \
+                -ArtifactRoot /workspace/artifacts/pack-targeted-debian-arm64 \
+                -ExpectedPackageVersion "$PACKAGE_VERSION" \
+                -ExpectedSyntheticRuntimeInputs false \
+                -SelectedRid debian.12-arm64 \
+                -SelectedRuntimeProfile full
+
+              pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1 \
+                -ArtifactRoot /workspace/artifacts/pack-targeted-debian-arm64 \
+                -ExpectedPackageVersion "$PACKAGE_VERSION" \
+                -ExpectedSyntheticRuntimeInputs false \
+                -SelectedRid debian.12-arm64 \
+                -SelectedRuntimeProfile full \
+                -RunNativeSmoke
+            '
 
   verify-targeted-real-fedora:
     needs:
