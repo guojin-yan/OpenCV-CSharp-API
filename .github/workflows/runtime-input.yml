@@ -516,7 +516,7 @@ jobs:
           $genericCompilerDirectorySet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
           foreach ($tool in $genericCompilerNames) {
             foreach ($command in @(Get-Command -Name $tool -CommandType Application -All -ErrorAction SilentlyContinue)) {
-              $commandDirectory = Split-Path -LiteralPath $command.Source -Parent
+              $commandDirectory = [System.IO.Path]::GetDirectoryName([string]$command.Source)
               [void]$genericCompilerDirectorySet.Add($commandDirectory)
             }
           }
