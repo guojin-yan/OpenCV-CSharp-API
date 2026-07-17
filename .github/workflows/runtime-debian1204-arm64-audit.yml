@@ -1,0 +1,143 @@
+name: runtime-debian1204-arm64-audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-host-docker:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants on the native ARM64 host
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Probe official Debian 12 ARM64 through host Docker
+        shell: bash
+        env:
+          DEBIAN_12_ARM64_IMAGE: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+          POWERSHELL_VERSION: 7.4.17
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          test "$(docker info --format '{{.Architecture}}')" = "aarch64"
+          docker pull "$DEBIAN_12_ARM64_IMAGE"
+          test "$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Architecture}}')" = "arm64"
+          image_id="$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Id}}')"
+          repo_digests="$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{join .RepoDigests ","}}')"
+          printf '%s\n' "$repo_digests" | grep -Fq 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
+
+          {
+            echo "DEBIAN_12_ARM64_HOST_EVIDENCE ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} UNAME=$(uname -m) DOCKER_ARCH=$(docker info --format '{{.Architecture}}') DISK_AVAILABLE_BYTES=$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+            echo "DEBIAN_12_ARM64_IMAGE_EVIDENCE IMAGE=$DEBIAN_12_ARM64_IMAGE IMAGE_ID=$image_id REPO_DIGESTS=$repo_digests ARCH=$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$DEBIAN_12_ARM64_IMAGE" --format '{{.Os}}')"
+            docker version
+            df -h /
+            df -B1 /
+          } | tee debian1204-arm64-host-docker-audit.txt
+
+          workspace_root="$(dirname "$GITHUB_WORKSPACE")"
+          repo_name="$(basename "$GITHUB_WORKSPACE")"
+          docker run --rm \
+            -e DEBIAN_12_ARM64_IMAGE="$DEBIAN_12_ARM64_IMAGE" \
+            -e POWERSHELL_VERSION="$POWERSHELL_VERSION" \
+            -e POWERSHELL_SHA256="$POWERSHELL_SHA256" \
+            -v "$workspace_root:/workspace" \
+            -w "/workspace/$repo_name" \
+            "$DEBIAN_12_ARM64_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              . /etc/os-release
+              test "${ID:-}" = "debian"
+              case "${VERSION_ID:-}" in
+                12|12.*) ;;
+                *) exit 1 ;;
+              esac
+              test "$(uname -m)" = "aarch64"
+              test "$(dpkg --print-architecture)" = "arm64"
+
+              export DEBIAN_FRONTEND=noninteractive
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                binutils \
+                build-essential \
+                ca-certificates \
+                cmake \
+                curl \
+                git \
+                gzip \
+                libicu72 \
+                libssl3 \
+                libunwind8 \
+                ninja-build \
+                pkg-config \
+                tar \
+                zlib1g
+
+              powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
+              curl -fsSL "https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz" -o "$powershell_archive"
+              echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -
+              install -d /opt/microsoft/powershell/7
+              tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
+              chmod +x /opt/microsoft/powershell/7/pwsh
+              ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+
+              curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+              bash /tmp/dotnet-install.sh --channel 8.0 --architecture arm64 --install-dir /usr/share/dotnet
+              ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+              printf "%s\n" \
+                "#include <arm_neon.h>" \
+                "uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }" \
+                "int main() { return 0; }" \
+                > /tmp/opencv-debian1204-arm64-neon.cpp
+              g++ -c -O2 /tmp/opencv-debian1204-arm64-neon.cpp -o /tmp/opencv-debian1204-arm64-neon.o
+              readelf -h /tmp/opencv-debian1204-arm64-neon.o | grep -q "Machine:.*AArch64"
+
+              {
+                cat /etc/os-release
+                echo "DEBIAN_12_ARM64_CONTAINER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$(getconf GNU_LIBC_VERSION)"
+                echo "DEBIAN_12_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
+                lscpu
+                cmake --version
+                gcc --version
+                g++ --version
+                as --version
+                ninja --version
+                pwsh --version
+                dotnet --info
+                echo "DEBIAN_12_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+              } | tee -a /workspace/$repo_name/debian1204-arm64-host-docker-audit.txt
+            '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-debian1204-arm64-host-docker-audit
+          path: debian1204-arm64-host-docker-audit.txt
+          if-no-files-found: error
+
+  verify-artifacts:
+    needs: probe-host-docker
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: runtime-debian1204-arm64-host-docker-audit
+          path: audit-download
+      - name: Verify Debian 12 ARM64 audit evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          grep -R -q 'DEBIAN_12_ARM64_HOST_EVIDENCE.*UNAME=aarch64.*DOCKER_ARCH=aarch64' audit-download
+          grep -R -q 'DEBIAN_12_ARM64_IMAGE_EVIDENCE.*ARCH=arm64.*OS=linux.*debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc' audit-download
+          grep -R -q 'DEBIAN_12_ARM64_CONTAINER_EVIDENCE.*ID=debian.*VERSION_ID=12.*UNAME=aarch64.*DPKG_ARCH=arm64.*LIBC=glibc' audit-download
+          grep -R -q 'DEBIAN_12_ARM64_POWERSHELL_EVIDENCE.*architecture=arm64' audit-download
+          grep -R -q 'DEBIAN_12_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success' audit-download
