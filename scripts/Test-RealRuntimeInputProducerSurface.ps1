@@ -383,7 +383,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Get-Command -Name `$tool -CommandType Application -All"; Issue = "Windows producer must remove every PATH directory that exposes a CMake generic compiler candidate, including bundled Strawberry GCC" },
         [pscustomobject]@{ Needle = "`$genericCompilerDirectorySet.Contains"; Issue = "Windows producer PATH sanitization must use the factual generic compiler directory set" },
         [pscustomobject]@{ Needle = "Remove-Item Env:ASM"; Issue = "Windows producer must clear an inherited generic ASM compiler override before OpenCV configuration" },
-        [pscustomobject]@{ Needle = "CMAKE_ASM_COMPILER-NOTFOUND"; Issue = "Windows producer must require the factual generic-ASM fallback under MSVC" },
+        [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_ASM_CACHE_EVIDENCE"; Issue = "Windows producer must emit the factual generic-ASM and MLAS cache values" },
+        [pscustomobject]@{ Needle = "Groups[1].Value -ne 'NOTFOUND'"; Issue = "Windows producer must require the CMake CheckLanguage literal generic-ASM fallback value" },
         [pscustomobject]@{ Needle = "OPENCV_DNN_MLAS_ENABLED:INTERNAL"; Issue = "Windows producer must verify that unsupported GNU-assembly MLAS is not retained in the MSVC build" },
         [pscustomobject]@{ Needle = "'-lpthread', '.dll.a', 'mingw', 'msys', 'cygwin'"; Issue = "Windows producer must reject foreign linker and import-library tokens from generated MSVC projects" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record generator, SDK, build list, and CPU configuration" },
@@ -577,7 +578,7 @@ Assert-NotContains -Violations $violations -Path $runtimeInputScriptPath -Text $
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "real_runtime_artifact_run_id" -Issue "Pack workflow must keep consuming producer run ids"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}' -Issue "Pack workflow must consume the same neutral producer artifact names"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "provenance.ExcludedForeignToolDirectories | ConvertFrom-Json" -Issue "Windows pack validation must parse and constrain producer PATH exclusion evidence"
-Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "provenance.OpenCvAsmConfiguration -notmatch '^CMAKE_ASM_COMPILER=CMAKE_ASM_COMPILER-NOTFOUND" -Issue "Windows pack validation must require the pure-MSVC generic-ASM and MLAS fallback evidence"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "provenance.OpenCvAsmConfiguration -notmatch '^CMAKE_ASM_COMPILER=NOTFOUND" -Issue "Windows pack validation must require the pure-MSVC generic-ASM and MLAS fallback evidence"
 
 foreach ($doc in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -675,7 +676,7 @@ if ($violations.Count -eq 0) {
             $peAuditEvidence = if ($isWindowsTarget) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=full files=18 machine=AMD64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=15 opencv_import_edges=32 missing_opencv_imports=0 loader_equal=true" } else { "" }
             $openCvCpuConfiguration = if ($isWindowsTarget) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
             $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
-            $openCvAsmConfiguration = if ($isWindowsTarget) { "CMAKE_ASM_COMPILER=CMAKE_ASM_COMPILER-NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
+            $openCvAsmConfiguration = if ($isWindowsTarget) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
             $containerImageId = if ($isArm64Container) { "sha256:fixture" } else { "" }
             $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } else { "" }
             $containerArchitecture = if ($isArm64Container) { "aarch64" } else { "" }

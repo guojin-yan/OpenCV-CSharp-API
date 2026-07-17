@@ -575,8 +575,9 @@ jobs:
           $asmCompilerMatch = [regex]::Match($cache, '(?m)^CMAKE_ASM_COMPILER:FILEPATH=([^\r\n]+)\r?$')
           $mlasEnabledMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_ENABLED:INTERNAL=([^\r\n]+)\r?$')
           $mlasSkipReasonMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_SKIP_REASON:INTERNAL=([^\r\n]+)\r?$')
+          Write-Host "WINDOWS_X64_OPENCV_ASM_CACHE_EVIDENCE CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value) OPENCV_DNN_MLAS_ENABLED=$($mlasEnabledMatch.Groups[1].Value) OPENCV_DNN_MLAS_SKIP_REASON=$($mlasSkipReasonMatch.Groups[1].Value)"
           if (-not $asmCompilerMatch.Success -or
-              $asmCompilerMatch.Groups[1].Value -ne 'CMAKE_ASM_COMPILER-NOTFOUND' -or
+              $asmCompilerMatch.Groups[1].Value -ne 'NOTFOUND' -or
               -not $mlasEnabledMatch.Success -or
               $mlasEnabledMatch.Groups[1].Value -ne '0' -or
               -not $mlasSkipReasonMatch.Success -or

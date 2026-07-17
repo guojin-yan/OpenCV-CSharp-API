@@ -391,7 +391,7 @@ jobs:
               $provenance.CMakeGenerator -ne 'Visual Studio 18 2026' -or
               $provenance.CMakePlatform -ne 'x64' -or
               $provenance.BuildConfiguration -ne 'Release' -or
-              $provenance.OpenCvAsmConfiguration -notmatch '^CMAKE_ASM_COMPILER=CMAKE_ASM_COMPILER-NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$' -or
+              $provenance.OpenCvAsmConfiguration -notmatch '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$' -or
               $provenance.PeAuditEvidence -notmatch '^WINDOWS_PE_AUDIT_OK rid=win-x64 profile=full files=18 machine=AMD64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ .*missing_opencv_imports=0 loader_equal=true$') {
             throw "Windows runtime-input provenance host, build, or PE evidence is not factual win-x64/full."
           }
