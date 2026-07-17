@@ -363,9 +363,23 @@ jobs:
               [string]$provenance.CMakeVersion,
               [string]$provenance.CompilerPath,
               [string]$provenance.OpenCvCMakeArguments,
-              [string]$provenance.OpenCvCpuConfiguration)) {
+              [string]$provenance.OpenCvCpuConfiguration,
+              [string]$provenance.ExcludedForeignToolDirectories,
+              [string]$provenance.OpenCvAsmConfiguration)) {
             if ([string]::IsNullOrWhiteSpace($requiredValue)) {
               throw "Windows runtime-input provenance is missing required host/toolchain evidence."
+            }
+          }
+
+          try {
+            $excludedForeignToolDirectories = @(([string]$provenance.ExcludedForeignToolDirectories | ConvertFrom-Json))
+          }
+          catch {
+            throw "Windows runtime-input provenance contains invalid excluded foreign tool directory JSON."
+          }
+          foreach ($excludedDirectory in $excludedForeignToolDirectories) {
+            if ([string]$excludedDirectory -notmatch '(?i)(?:^|[\\/])(?:mingw(?:32|64)?|msys(?:2|64)?|cygwin(?:64)?)(?:[\\/]|$)') {
+              throw "Windows runtime-input provenance contains a non-foreign excluded PATH directory: $excludedDirectory"
             }
           }
 
@@ -376,6 +390,7 @@ jobs:
               $provenance.CMakeGenerator -ne 'Visual Studio 18 2026' -or
               $provenance.CMakePlatform -ne 'x64' -or
               $provenance.BuildConfiguration -ne 'Release' -or
+              $provenance.OpenCvAsmConfiguration -notmatch '^CMAKE_ASM_COMPILER=CMAKE_ASM_COMPILER-NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$' -or
               $provenance.PeAuditEvidence -notmatch '^WINDOWS_PE_AUDIT_OK rid=win-x64 profile=full files=18 machine=AMD64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ .*missing_opencv_imports=0 loader_equal=true$') {
             throw "Windows runtime-input provenance host, build, or PE evidence is not factual win-x64/full."
           }

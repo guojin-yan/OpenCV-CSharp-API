@@ -378,12 +378,20 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Windows x64 production must remain in a separate hosted Windows job" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_HOST_EVIDENCE"; Issue = "Windows producer must record actual host, architecture, CPU, and disk evidence" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_TOOLCHAIN_EVIDENCE"; Issue = "Windows producer must record the actual VS/MSVC/CMake toolchain" },
+        [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_PATH_SANITIZED"; Issue = "Windows producer must record its build-scoped foreign tool PATH exclusions" },
+        [pscustomobject]@{ Needle = "`$foreignToolPattern = '(?i)(?:^|[\\/])(?:mingw(?:32|64)?|msys(?:2|64)?|cygwin(?:64)?)(?:[\\/]|`$)'"; Issue = "Windows producer must exclude only MinGW, MSYS, and Cygwin tool directories from the OpenCV build PATH" },
+        [pscustomobject]@{ Needle = "Remove-Item Env:ASM"; Issue = "Windows producer must clear an inherited generic ASM compiler override before OpenCV configuration" },
+        [pscustomobject]@{ Needle = "CMAKE_ASM_COMPILER-NOTFOUND"; Issue = "Windows producer must require the factual generic-ASM fallback under MSVC" },
+        [pscustomobject]@{ Needle = "OPENCV_DNN_MLAS_ENABLED:INTERNAL"; Issue = "Windows producer must verify that unsupported GNU-assembly MLAS is not retained in the MSVC build" },
+        [pscustomobject]@{ Needle = "'-lpthread', '.dll.a', 'mingw', 'msys', 'cygwin'"; Issue = "Windows producer must reject foreign linker and import-library tokens from generated MSVC projects" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record generator, SDK, build list, and CPU configuration" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Windows producer must require all five linked CTests" },
         [pscustomobject]@{ Needle = "Test-WindowsRuntimePeClosure.ps1"; Issue = "Windows producer must run the reusable PE closure guard before upload" },
         [pscustomobject]@{ Needle = "-HostedProcessArchitecture"; Issue = "Windows producer provenance must record actual process architecture" },
         [pscustomobject]@{ Needle = "-WindowsSdkVersion"; Issue = "Windows producer provenance must record the selected Windows SDK" },
         [pscustomobject]@{ Needle = "-PeAuditEvidence"; Issue = "Windows producer provenance must retain the PE closure marker" },
+        [pscustomobject]@{ Needle = "-ExcludedForeignToolDirectories"; Issue = "Windows producer provenance must retain the build-scoped PATH exclusions" },
+        [pscustomobject]@{ Needle = "-OpenCvAsmConfiguration"; Issue = "Windows producer provenance must retain the generic-ASM and MLAS fallback configuration" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
          [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
@@ -539,6 +547,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "OpenCvCMakeArguments = `$OpenCvCMakeArguments"; Issue = "Runtime input artifact provenance must record the factual OpenCV CMake arguments" },
         [pscustomobject]@{ Needle = "PeAuditEvidence = `$PeAuditEvidence"; Issue = "Runtime input artifact provenance must record the Windows PE audit marker" },
         [pscustomobject]@{ Needle = "OpenCvCpuConfiguration = `$OpenCvCpuConfiguration"; Issue = "Runtime input artifact provenance must record factual OpenCV CPU configuration" },
+        [pscustomobject]@{ Needle = "ExcludedForeignToolDirectories = `$ExcludedForeignToolDirectories"; Issue = "Runtime input artifact provenance must record Windows build-scoped PATH exclusions" },
+        [pscustomobject]@{ Needle = "OpenCvAsmConfiguration = `$OpenCvAsmConfiguration"; Issue = "Runtime input artifact provenance must record the Windows generic-ASM fallback" },
         [pscustomobject]@{ Needle = "ContainerImage = `$ContainerImage"; Issue = "Runtime input artifact provenance must record the container image for container-native producers" },
         [pscustomobject]@{ Needle = "ContainerImageId = `$ContainerImageId"; Issue = "Runtime input artifact provenance must record the resolved container image ID" },
         [pscustomobject]@{ Needle = "ContainerImageDigest = `$ContainerImageDigest"; Issue = "Runtime input artifact provenance must record the resolved container image digest" },
@@ -564,6 +574,8 @@ Assert-NotContains -Violations $violations -Path $runtimeInputScriptPath -Text $
 
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "real_runtime_artifact_run_id" -Issue "Pack workflow must keep consuming producer run ids"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}' -Issue "Pack workflow must consume the same neutral producer artifact names"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "provenance.ExcludedForeignToolDirectories | ConvertFrom-Json" -Issue "Windows pack validation must parse and constrain producer PATH exclusion evidence"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "provenance.OpenCvAsmConfiguration -notmatch '^CMAKE_ASM_COMPILER=CMAKE_ASM_COMPILER-NOTFOUND" -Issue "Windows pack validation must require the pure-MSVC generic-ASM and MLAS fallback evidence"
 
 foreach ($doc in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -660,6 +672,8 @@ if ($violations.Count -eq 0) {
             $openCvCMakeArguments = if ($isWindowsTarget) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
             $peAuditEvidence = if ($isWindowsTarget) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=full files=18 machine=AMD64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=15 opencv_import_edges=32 missing_opencv_imports=0 loader_equal=true" } else { "" }
             $openCvCpuConfiguration = if ($isWindowsTarget) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
+            $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
+            $openCvAsmConfiguration = if ($isWindowsTarget) { "CMAKE_ASM_COMPILER=CMAKE_ASM_COMPILER-NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
             $containerImageId = if ($isArm64Container) { "sha256:fixture" } else { "" }
             $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } else { "" }
             $containerArchitecture = if ($isArm64Container) { "aarch64" } else { "" }
@@ -710,6 +724,8 @@ if ($violations.Count -eq 0) {
                 -OpenCvCMakeArguments $openCvCMakeArguments `
                 -PeAuditEvidence $peAuditEvidence `
                 -OpenCvCpuConfiguration $openCvCpuConfiguration `
+                -ExcludedForeignToolDirectories $excludedForeignToolDirectories `
+                -OpenCvAsmConfiguration $openCvAsmConfiguration `
                 -ContainerImage ([string]$producerTarget.ContainerImage) `
                 -ContainerImageId $containerImageId `
                 -ContainerImageDigest $containerImageDigest `
@@ -783,6 +799,8 @@ if ($violations.Count -eq 0) {
                     -not ([string]$manifest.CMakeGenerator).Equals($cmakeGenerator, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.CMakePlatform).Equals($cmakePlatform, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.BuildConfiguration).Equals($buildConfiguration, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.ExcludedForeignToolDirectories).Equals($excludedForeignToolDirectories, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.OpenCvAsmConfiguration).Equals($openCvAsmConfiguration, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.PeAuditEvidence).Equals($peAuditEvidence, [System.StringComparison]::Ordinal)) {
                     throw "Fixture provenance did not retain the complete Windows hosted, toolchain, build, and PE evidence."
                 }

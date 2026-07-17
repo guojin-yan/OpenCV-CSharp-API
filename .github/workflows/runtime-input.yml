@@ -499,10 +499,47 @@ jobs:
           }
       - name: Build Windows x64 OpenCV runtime
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        id: windows_build
         shell: pwsh
         env:
           CMAKE_BUILD_PARALLEL_LEVEL: 2
         run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = "Stop"
+
+          $foreignToolPattern = '(?i)(?:^|[\\/])(?:mingw(?:32|64)?|msys(?:2|64)?|cygwin(?:64)?)(?:[\\/]|$)'
+          $pathEntries = @(
+            $env:Path -split [System.IO.Path]::PathSeparator |
+              Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+          )
+          $excludedForeignToolDirectories = @(
+            $pathEntries |
+              Where-Object { $_ -match $foreignToolPattern } |
+              Sort-Object -Unique
+          )
+          $sanitizedPathEntries = @($pathEntries | Where-Object { $_ -notmatch $foreignToolPattern })
+          if ($sanitizedPathEntries.Count -eq 0) {
+            throw "Windows producer PATH sanitization removed every PATH entry."
+          }
+
+          $env:Path = $sanitizedPathEntries -join [System.IO.Path]::PathSeparator
+          Remove-Item Env:ASM -ErrorAction SilentlyContinue
+          foreach ($tool in @('cc.exe', 'gcc.exe', 'g++.exe', 'c++.exe')) {
+            $foreignTool = Get-Command -Name $tool -CommandType Application -ErrorAction SilentlyContinue
+            if ($null -ne $foreignTool) {
+              throw "Foreign generic compiler remained in the Windows OpenCV producer PATH after sanitization: $($foreignTool.Source)"
+            }
+          }
+          foreach ($requiredTool in @('cmake.exe', 'pwsh.exe')) {
+            if ($null -eq (Get-Command -Name $requiredTool -CommandType Application -ErrorAction SilentlyContinue)) {
+              throw "Required Windows producer tool was lost during PATH sanitization: $requiredTool"
+            }
+          }
+
+          $excludedForeignToolDirectoriesJson = ConvertTo-Json -InputObject ([object[]]$excludedForeignToolDirectories) -Compress
+          Write-Host "WINDOWS_X64_OPENCV_PATH_SANITIZED excluded_foreign_tool_directories=$excludedForeignToolDirectoriesJson generic_gnu_compilers=absent asm_environment=cleared"
+          "excluded_foreign_tool_directories=$excludedForeignToolDirectoriesJson" >> $env:GITHUB_OUTPUT
+
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
           pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
@@ -524,9 +561,30 @@ jobs:
             throw "OpenCV CMake cache did not retain the audited VS 18 x64 boundary."
           }
 
+          $asmCompilerMatch = [regex]::Match($cache, '(?m)^CMAKE_ASM_COMPILER:FILEPATH=([^\r\n]+)\r?$')
+          $mlasEnabledMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_ENABLED:INTERNAL=([^\r\n]+)\r?$')
+          $mlasSkipReasonMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_SKIP_REASON:INTERNAL=([^\r\n]+)\r?$')
+          if (-not $asmCompilerMatch.Success -or
+              $asmCompilerMatch.Groups[1].Value -ne 'CMAKE_ASM_COMPILER-NOTFOUND' -or
+              -not $mlasEnabledMatch.Success -or
+              $mlasEnabledMatch.Groups[1].Value -ne '0' -or
+              -not $mlasSkipReasonMatch.Success -or
+              $mlasSkipReasonMatch.Groups[1].Value -notmatch '^no ASM compiler available for (?:AMD64|amd64)$') {
+            throw "Windows OpenCV build did not retain the pure-MSVC generic-ASM fallback boundary."
+          }
+          if ($cache -match '(?i)(?:mingw|msys|cygwin)') {
+            throw "Windows OpenCV CMake cache retained a foreign GNU toolchain path."
+          }
+
           $coreProject = Get-ChildItem -LiteralPath $buildDir -Recurse -File -Filter opencv_core.vcxproj | Select-Object -First 1
           if ($null -eq $coreProject) {
             throw "Generated opencv_core.vcxproj was not found."
+          }
+          $coreProjectText = Get-Content -LiteralPath $coreProject.FullName -Raw
+          foreach ($foreignLinkToken in @('-lpthread', '.dll.a', 'mingw', 'msys', 'cygwin')) {
+            if ($coreProjectText.IndexOf($foreignLinkToken, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+              throw "Generated OpenCV MSVC project retained foreign linker/toolchain token '$foreignLinkToken'."
+            }
           }
           [xml]$project = Get-Content -LiteralPath $coreProject.FullName -Raw
           $sdkVersions = @(
@@ -547,9 +605,11 @@ jobs:
             throw "OpenCV CPU baseline/dispatch configuration was not recorded."
           }
 
-          Write-Host "WINDOWS_X64_OPENCV_BUILD_EVIDENCE Generator=${{ steps.profile.outputs.generator }} Platform=${{ steps.profile.outputs.platform }} Configuration=${{ steps.profile.outputs.configuration }} WindowsSDK=$($sdkVersions[0]) BuildList=${{ steps.profile.outputs.build_list }} CPU=$cpuConfiguration"
+          $asmConfiguration = "CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value);OPENCV_DNN_MLAS_ENABLED=$($mlasEnabledMatch.Groups[1].Value);OPENCV_DNN_MLAS_SKIP_REASON=$($mlasSkipReasonMatch.Groups[1].Value)"
+          Write-Host "WINDOWS_X64_OPENCV_BUILD_EVIDENCE Generator=${{ steps.profile.outputs.generator }} Platform=${{ steps.profile.outputs.platform }} Configuration=${{ steps.profile.outputs.configuration }} WindowsSDK=$($sdkVersions[0]) BuildList=${{ steps.profile.outputs.build_list }} CPU=$cpuConfiguration ASM=$asmConfiguration"
           "windows_sdk_version=$($sdkVersions[0])" >> $env:GITHUB_OUTPUT
           "opencv_cpu_configuration=$cpuConfiguration" >> $env:GITHUB_OUTPUT
+          "opencv_asm_configuration=$asmConfiguration" >> $env:GITHUB_OUTPUT
       - name: Resolve Windows OpenCV install layout
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: opencv
@@ -678,6 +738,8 @@ jobs:
             -OpenCvCMakeArguments '${{ steps.profile.outputs.cmake_arguments }}' `
             -PeAuditEvidence '${{ steps.pe.outputs.pe_audit }}' `
             -OpenCvCpuConfiguration '${{ steps.opencv_build.outputs.opencv_cpu_configuration }}' `
+            -ExcludedForeignToolDirectories '${{ steps.windows_build.outputs.excluded_foreign_tool_directories }}' `
+            -OpenCvAsmConfiguration '${{ steps.opencv_build.outputs.opencv_asm_configuration }}' `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload Windows runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}

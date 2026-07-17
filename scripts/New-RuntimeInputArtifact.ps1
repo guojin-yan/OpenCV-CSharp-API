@@ -31,6 +31,8 @@ param(
     [string]$OpenCvCMakeArguments = "",
     [string]$PeAuditEvidence = "",
     [string]$OpenCvCpuConfiguration = "",
+    [string]$ExcludedForeignToolDirectories = "",
+    [string]$OpenCvAsmConfiguration = "",
     [string]$ContainerImage = "",
     [string]$ContainerImageId = "",
     [string]$ContainerImageDigest = "",
@@ -416,6 +418,8 @@ $manifest = [ordered]@{
     OpenCvCMakeArguments = $OpenCvCMakeArguments
     PeAuditEvidence = $PeAuditEvidence
     OpenCvCpuConfiguration = $OpenCvCpuConfiguration
+    ExcludedForeignToolDirectories = $ExcludedForeignToolDirectories
+    OpenCvAsmConfiguration = $OpenCvAsmConfiguration
     ContainerImage = $ContainerImage
     ContainerImageId = $ContainerImageId
     ContainerImageDigest = $ContainerImageDigest
