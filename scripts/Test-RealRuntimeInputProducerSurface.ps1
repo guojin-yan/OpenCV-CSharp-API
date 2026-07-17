@@ -518,6 +518,7 @@ foreach ($doc in @(
             '`runtime-input-ubuntu.22.04-x64-full`',
             '`runtime-input-ubuntu.22.04-arm64-full`',
             '`runtime-input-debian.12-x64-full`',
+            '`runtime-input-debian.12-arm64-full`',
             '`runtime-input-fedora.40-x64-full`',
             '`runtime-input-rhel.9-x64-full`',
             '`runtime-input-rocky.9-x64-full`',
