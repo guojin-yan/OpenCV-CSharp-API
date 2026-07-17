@@ -1,0 +1,176 @@
+name: runtime-windows-x64-audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Probe Windows x64 host and PE toolchain
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = "Stop"
+
+          $osArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+          $processArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
+          if ($env:PROCESSOR_ARCHITECTURE -ne "AMD64" -or
+              $osArchitecture -ne "X64" -or
+              $processArchitecture -ne "X64" -or
+              -not [Environment]::Is64BitProcess) {
+            throw "Windows x64 audit requires an actual AMD64 host and x64 process."
+          }
+
+          $os = Get-CimInstance Win32_OperatingSystem
+          $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+          $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='D:'"
+          if ($null -eq $disk -or [long]$disk.FreeSpace -le 0) {
+            throw "Windows hosted workspace disk evidence was not available."
+          }
+          if ([string]::IsNullOrWhiteSpace($env:ImageOS) -or [string]::IsNullOrWhiteSpace($env:ImageVersion)) {
+            throw "GitHub runner image evidence was not available."
+          }
+
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio/Installer/vswhere.exe"
+          if (-not (Test-Path -LiteralPath $vswhere -PathType Leaf)) {
+            throw "vswhere.exe was not found."
+          }
+          $instances = @(& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -format json | ConvertFrom-Json)
+          if ($instances.Count -ne 1) {
+            throw "Exactly one latest Visual Studio instance with x64 C++ tools was expected."
+          }
+          $visualStudio = $instances[0]
+          if (-not ([string]$visualStudio.installationVersion).StartsWith("18.", [System.StringComparison]::Ordinal)) {
+            throw "Visual Studio 18 is required by the current Windows OpenCV build plan."
+          }
+
+          $cl = Get-ChildItem -LiteralPath (Join-Path $visualStudio.installationPath "VC/Tools/MSVC") -Recurse -File -Filter cl.exe |
+            Where-Object { $_.FullName -match '[\\/]bin[\\/]Hostx64[\\/]x64[\\/]cl\.exe$' } |
+            Sort-Object FullName -Descending |
+            Select-Object -First 1
+          if ($null -eq $cl) {
+            throw "Native Hostx64/x64 cl.exe was not found."
+          }
+          $dumpbin = Join-Path $cl.DirectoryName "dumpbin.exe"
+          if (-not (Test-Path -LiteralPath $dumpbin -PathType Leaf)) {
+            throw "dumpbin.exe was not found beside the selected x64 compiler."
+          }
+          $msvcVersion = [regex]::Match($cl.FullName, '[\\/]MSVC[\\/]([^\\/]+)[\\/]bin[\\/]').Groups[1].Value
+          if ([string]::IsNullOrWhiteSpace($msvcVersion)) {
+            throw "MSVC version could not be derived from the selected compiler path."
+          }
+
+          $cmakeVersion = (& cmake --version | Select-Object -First 1).Trim()
+          $ninjaVersion = (& ninja --version | Select-Object -First 1).Trim()
+          $powerShellVersion = $PSVersionTable.PSVersion.ToString()
+          $dotnetInfo = & dotnet --info
+          if ($LASTEXITCODE -ne 0) {
+            throw "dotnet --info failed."
+          }
+
+          $probeRoot = Join-Path $env:RUNNER_TEMP "opencv-windows-x64-probe"
+          $sourceRoot = Join-Path $probeRoot "src"
+          $buildRoot = Join-Path $probeRoot "build"
+          New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          [System.IO.File]::WriteAllText(
+            (Join-Path $sourceRoot "probe.cpp"),
+            'extern "C" __declspec(dllexport) int opencv_windows_x64_probe() { return 42; }',
+            [System.Text.UTF8Encoding]::new($false))
+          [System.IO.File]::WriteAllText(
+            (Join-Path $sourceRoot "CMakeLists.txt"),
+            "cmake_minimum_required(VERSION 3.20)`nproject(OpenCvWindowsX64Probe LANGUAGES CXX)`nadd_library(opencv_windows_x64_probe SHARED probe.cpp)`n",
+            [System.Text.UTF8Encoding]::new($false))
+
+          & cmake -S $sourceRoot -B $buildRoot -G "Visual Studio 18 2026" -A x64
+          if ($LASTEXITCODE -ne 0) {
+            throw "Visual Studio 18 x64 CMake configuration failed."
+          }
+          & cmake --build $buildRoot --config Release
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows x64 probe build failed."
+          }
+
+          $cache = Get-Content -LiteralPath (Join-Path $buildRoot "CMakeCache.txt") -Raw
+          if ($cache -notmatch '(?m)^CMAKE_GENERATOR:INTERNAL=Visual Studio 18 2026\r?$' -or
+              $cache -notmatch '(?m)^CMAKE_GENERATOR_PLATFORM:INTERNAL=x64\r?$') {
+            throw "CMake did not retain the exact Visual Studio 18 x64 generator boundary."
+          }
+          $sdkVersion = [regex]::Match($cache, '(?m)^CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION:STRING=([^\r\n]+)$').Groups[1].Value
+          if ([string]::IsNullOrWhiteSpace($sdkVersion)) {
+            throw "CMake did not record the selected Windows SDK version."
+          }
+
+          $probeDll = Join-Path $buildRoot "Release/opencv_windows_x64_probe.dll"
+          if (-not (Test-Path -LiteralPath $probeDll -PathType Leaf)) {
+            throw "Windows x64 probe DLL was not produced."
+          }
+          $headers = (& $dumpbin /headers $probeDll) -join "`n"
+          if ($LASTEXITCODE -ne 0 -or $headers -notmatch '(?im)^\s*8664 machine \(x64\)\s*$') {
+            throw "Probe DLL is not an AMD64 PE image."
+          }
+          $dependents = (& $dumpbin /dependents $probeDll) -join "`n"
+          if ($LASTEXITCODE -ne 0) {
+            throw "dumpbin dependency audit failed."
+          }
+
+          $describe = & pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
+            -OpenCvVersion 5.0.0 `
+            -Rid win-x64 `
+            -BuildList "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud" `
+            -DescribeOnly | ConvertFrom-Json
+          if ($describe.Generator -ne "Visual Studio 18 2026" -or
+              $describe.Platform -ne "x64" -or
+              $describe.BuildSystem -ne "multi-config") {
+            throw "Repository Windows x64 OpenCV build plan does not match the audited hosted toolchain."
+          }
+
+          $evidence = @(
+            "WINDOWS_X64_HOST_EVIDENCE ImageOS=$($env:ImageOS) ImageVersion=$($env:ImageVersion) Caption=$($os.Caption) OSVersion=$($os.Version) BuildNumber=$($os.BuildNumber) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) CPU=$($cpu.Name) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)",
+            "WINDOWS_X64_TOOLCHAIN_EVIDENCE VisualStudioVersion=$($visualStudio.installationVersion) VisualStudioPath=$($visualStudio.installationPath) MSVCVersion=$msvcVersion Compiler=$($cl.FullName) Generator=$($describe.Generator) Platform=$($describe.Platform) BuildSystem=$($describe.BuildSystem) WindowsSDK=$sdkVersion CMake=$cmakeVersion Ninja=$ninjaVersion PowerShell=$powerShellVersion",
+            "WINDOWS_X64_DOTNET_EVIDENCE $((@($dotnetInfo | Select-String -Pattern 'Version:|Architecture:|RID:') | ForEach-Object { $_.Line.Trim() }) -join ';')",
+            "WINDOWS_X64_PE_EVIDENCE file=$probeDll machine=AMD64 dumpbin=$dumpbin",
+            "WINDOWS_X64_DEPENDENCY_EVIDENCE $((@($dependents | Select-String -Pattern '\.dll') | ForEach-Object { $_.Line.Trim() }) -join ',')"
+          )
+          $evidence | ForEach-Object { Write-Host $_ }
+          [System.IO.File]::WriteAllLines(
+            (Join-Path $env:GITHUB_WORKSPACE "windows-x64-audit.txt"),
+            $evidence,
+            [System.Text.UTF8Encoding]::new($false))
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-windows-x64-audit
+          path: windows-x64-audit.txt
+          if-no-files-found: error
+
+  verify-artifact:
+    needs: probe
+    runs-on: windows-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: runtime-windows-x64-audit
+          path: audit-download
+      - name: Verify Windows x64 audit evidence
+        shell: pwsh
+        run: |
+          $text = Get-Content -LiteralPath ./audit-download/windows-x64-audit.txt -Raw
+          foreach ($pattern in @(
+              'WINDOWS_X64_HOST_EVIDENCE.*PROCESSOR_ARCHITECTURE=AMD64.*OSArchitecture=X64.*ProcessArchitecture=X64.*Is64BitProcess=True',
+              'WINDOWS_X64_TOOLCHAIN_EVIDENCE.*VisualStudioVersion=18\..*MSVCVersion=.*Generator=Visual Studio 18 2026.*Platform=x64.*BuildSystem=multi-config.*WindowsSDK=',
+              'WINDOWS_X64_DOTNET_EVIDENCE.*Architecture:\s*x64.*RID:\s*win-x64',
+              'WINDOWS_X64_PE_EVIDENCE.*machine=AMD64')) {
+            if ($text -notmatch $pattern) {
+              throw "Windows x64 audit evidence did not match: $pattern"
+            }
+          }
