@@ -133,6 +133,7 @@ $guideText = Read-RequiredText $guidePath
 $runtimeMatrixText = Read-RequiredText $runtimeMatrixPath
 $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
 $ubuntuJobText = Get-WorkflowJobText -JobName "verify-targeted-real"
+$ubuntuArm64JobText = Get-WorkflowJobText -JobName "verify-targeted-real-ubuntu-arm64"
 $debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
 $fedoraJobText = Get-WorkflowJobText -JobName "verify-targeted-real-fedora"
 $rockyJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rocky"
@@ -141,7 +142,8 @@ $alpineJobText = Get-WorkflowJobText -JobName "verify-targeted-real-alpine"
 
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
-        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Runner = "ubuntu-24.04" })) {
+        [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Runner = "ubuntu-24.04" },
+        [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Runner = "ubuntu-24.04-arm" })) {
     $ridSpecs = @($runtimeMatrix.rids | Where-Object { $_.rid -eq $expectedTarget.Rid })
     if ($ridSpecs.Count -ne 1 -or [string]$ridSpecs[0].runner -ne $expectedTarget.Runner) {
         $violations.Add([pscustomobject]@{
@@ -166,6 +168,23 @@ foreach ($expectation in @(
         @($workflowPath, $ubuntuJobText, "-SelectedRid `$runtimeRid", "Hosted targeted checks must forward the selected proven distro RID"),
         @($workflowPath, $ubuntuJobText, "-SelectedRuntimeProfile `$runtimeProfile", "Hosted targeted checks must forward the selected proven profile"),
         @($workflowPath, $ubuntuJobText, "-RunNativeSmoke", "Hosted targeted consumer verification must execute native calls"),
+        @($workflowPath, $ubuntuArm64JobText, "verify-targeted-real-ubuntu-arm64:", "Pack workflow must keep a separate native Ubuntu ARM64 verification job"),
+        @($workflowPath, $ubuntuArm64JobText, "inputs.rid == 'ubuntu.24.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Ubuntu ARM64 verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $ubuntuArm64JobText, "runs-on: ubuntu-24.04-arm", "Ubuntu ARM64 verification must execute on the native GitHub-hosted ARM64 runner"),
+        @($workflowPath, $ubuntuArm64JobText, 'test "$(uname -m)" = "aarch64"', "Ubuntu ARM64 verification must reject non-AArch64 execution"),
+        @($workflowPath, $ubuntuArm64JobText, 'test "$(dpkg --print-architecture)" = "arm64"', "Ubuntu ARM64 verification must require the native Debian arm64 architecture"),
+        @($workflowPath, $ubuntuArm64JobText, 'test "${ID:-}" = "ubuntu"', "Ubuntu ARM64 verification must require the Ubuntu distro identity"),
+        @($workflowPath, $ubuntuArm64JobText, 'test "${VERSION_ID:-}" = "24.04"', "Ubuntu ARM64 verification must require Ubuntu 24.04"),
+        @($workflowPath, $ubuntuArm64JobText, "getconf GNU_LIBC_VERSION", "Ubuntu ARM64 verification must report actual glibc evidence"),
+        @($workflowPath, $ubuntuArm64JobText, "UBUNTU_24_04_ARM64_CONSUMER_EVIDENCE", "Ubuntu ARM64 verification must emit explicit native consumer evidence"),
+        @($workflowPath, $ubuntuArm64JobText, "name: nupkg-managed", "Ubuntu ARM64 verification must download the same-run managed artifact explicitly"),
+        @($workflowPath, $ubuntuArm64JobText, "name: nupkg-ubuntu.24.04-arm64-full", "Ubuntu ARM64 verification must download only the exact full runtime artifact"),
+        @($workflowPath, $ubuntuArm64JobText, "path: artifacts/pack-targeted-ubuntu-arm64/nupkg-managed", "Ubuntu ARM64 managed artifact must use its isolated exact path"),
+        @($workflowPath, $ubuntuArm64JobText, "path: artifacts/pack-targeted-ubuntu-arm64/nupkg-ubuntu.24.04-arm64-full", "Ubuntu ARM64 runtime artifact must use its isolated exact path"),
+        @($workflowPath, $ubuntuArm64JobText, "-ExpectedSyntheticRuntimeInputs false", "Ubuntu ARM64 artifact and consumer checks must require real provenance"),
+        @($workflowPath, $ubuntuArm64JobText, "-SelectedRid ubuntu.24.04-arm64", "Ubuntu ARM64 checks must select only the proven distro-specific RID"),
+        @($workflowPath, $ubuntuArm64JobText, "-SelectedRuntimeProfile full", "Ubuntu ARM64 checks must select only the full profile"),
+        @($workflowPath, $ubuntuArm64JobText, "-RunNativeSmoke", "Ubuntu ARM64 consumer verification must execute native and deterministic DNN calls"),
         @($workflowPath, $debianJobText, "verify-targeted-real-debian:", "Pack workflow must keep a separate Debian container verification job"),
         @($workflowPath, $debianJobText, "inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian verification must use the exact full-only non-synthetic non-publishing gate"),
         @($workflowPath, $debianJobText, "runs-on: ubuntu-24.04", "Debian container verification must use the supported hosted runner"),
@@ -316,6 +335,7 @@ foreach ($expectation in @(
         @($cmakePath, $cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linux full and mini loaders must retain their complete declared closures as direct dependencies"),
         @($readmePath, $readmeText, "matrix-required modules plus provenance-recorded staged optional modules", "README must document provenance-derived full payload verification"),
         @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact hosted targeted native-execution allowlist"),
+        @($readmePath, $readmeText, 'Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm`', "README must document the exact native Ubuntu ARM64 consumer boundary"),
         @($readmePath, $readmeText, 'Debian 12 full runs in a separate `debian:12` job container', "README must document Debian container-native consumer execution"),
         @($readmePath, $readmeText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "README must document Fedora container-native consumer execution"),
         @($readmePath, $readmeText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "README must document Rocky container-native consumer execution"),
@@ -323,6 +343,7 @@ foreach ($expectation in @(
         @($readmePath, $readmeText, 'Alpine 3.20 full runs through a separate host-orchestrated `docker run alpine:3.20` verifier', "README must document host-orchestrated Alpine musl consumer execution"),
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
         @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact hosted targeted native-execution allowlist"),
+        @($guidePath, $guideText, 'Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm`', "Linked runtime guide must document the exact native Ubuntu ARM64 consumer boundary"),
         @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"),
         @($guidePath, $guideText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "Linked runtime guide must document Fedora container-native consumer execution"),
         @($guidePath, $guideText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "Linked runtime guide must document Rocky container-native consumer execution"),
@@ -336,6 +357,40 @@ Assert-ExactLine `
     -Text $ubuntuJobText `
     -ExpectedLine "    if: `${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
     -Issue "Hosted targeted verification condition must remain exactly the three proven targets"
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $ubuntuArm64JobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'ubuntu.24.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Ubuntu ARM64 targeted verification condition must remain exactly native Ubuntu 24.04 ARM64 full"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntuArm64JobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Ubuntu ARM64 verification job must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntuArm64JobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Ubuntu ARM64 verification job must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntuArm64JobText `
+    -Needle "-SelectedRid ubuntu.24.04-arm64" `
+    -ExpectedCount 2 `
+    -Issue "Both Ubuntu ARM64 guards must select the exact distro-specific RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntuArm64JobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Ubuntu ARM64 guards must select only the full profile"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -512,6 +567,22 @@ Assert-NotContains `
     -Text $consumerGuardText `
     -Needle "LD_LIBRARY_PATH" `
     -Issue "Packaged native consumer must not mask loader RUNPATH defects with an environment override"
+
+foreach ($forbiddenArm64Text in @(
+        "runtime_profile == 'mini'",
+        "LD_LIBRARY_PATH",
+        "x86_64",
+        "qemu",
+        "docker run",
+        "container:",
+        "run-id:",
+        "repository:")) {
+    Assert-NotContains `
+        -Path $workflowPath `
+        -Text $ubuntuArm64JobText `
+        -Needle $forbiddenArm64Text `
+        -Issue "Ubuntu ARM64 verification must remain native, full-only, same-run, and free of loader overrides: $forbiddenArm64Text"
+}
 
 Assert-NotContains `
     -Path $workflowPath `
@@ -712,7 +783,7 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full."
+Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
 Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."

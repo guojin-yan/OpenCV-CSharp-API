@@ -231,6 +231,7 @@ function Assert-RealProducerTargets {
     $expectedTargets = @(
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
@@ -353,6 +354,17 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
+        [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
+        [pscustomobject]@{ Needle = "os: ubuntu-24.04-arm"; Issue = "Ubuntu 24.04 ARM64 producer must use the native GitHub-hosted ARM64 runner" },
+        [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_RUNNER_EVIDENCE"; Issue = "Ubuntu ARM64 producer must emit actual runner image, distro, architecture, libc, CPU, and disk evidence" },
+        [pscustomobject]@{ Needle = 'test "$(uname -m)" = "aarch64"'; Issue = "Ubuntu ARM64 producer must reject non-AArch64 execution" },
+        [pscustomobject]@{ Needle = 'test "$(dpkg --print-architecture)" = "arm64"'; Issue = "Ubuntu ARM64 producer must require the native Debian arm64 architecture" },
+        [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success"; Issue = "Ubuntu ARM64 producer must compile and audit an actual NEON AArch64 object" },
+        [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_OPENCV_CPU_EVIDENCE"; Issue = "Ubuntu ARM64 producer must report factual OpenCV CPU configuration" },
+        [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Ubuntu ARM64 producer must require all five linked CTests" },
+        [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"; Issue = "Ubuntu ARM64 producer must audit the complete canonical AArch64 ELF closure" },
+        [pscustomobject]@{ Needle = 'readelf -h "$elf" | grep -q ''Machine:.*AArch64'''; Issue = "Ubuntu ARM64 producer must inspect every canonical ELF machine type" },
+        [pscustomobject]@{ Needle = 'missing="$(ldd "$elf" | grep ''not found'' || true)"'; Issue = "Ubuntu ARM64 producer must reject unresolved native dependencies without an environment override" },
         [pscustomobject]@{ Needle = "container_image: debian:12"; Issue = "Producer workflow must declare the Debian 12 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: fedora:40"; Issue = "Producer workflow must declare the Fedora 40 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: registry.access.redhat.com/ubi9/ubi:9.8"; Issue = "Producer workflow must declare the official RHEL UBI 9.8 container-native boundary" },
@@ -414,6 +426,8 @@ Assert-TextOrder -Violations $violations -Path $producerWorkflowPath -Text $prod
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "New-SyntheticRuntimeInputs.ps1" -Issue "Producer workflow must not use synthetic runtime input generation"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "publish_github_packages" -Issue "Producer workflow must not publish packages"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "dotnet nuget push" -Issue "Producer workflow must not push packages"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu ARM64 mini must remain outside the real producer allowlist"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
 
 foreach ($required in @(
         [pscustomobject]@{ Needle = '[string]$OutputRoot = "artifacts/runtime-inputs"'; Issue = "Runtime input artifact script must use a neutral generated output root" },
@@ -428,6 +442,16 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "DistroVersion = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record distro version from the runtime matrix" },
         [pscustomobject]@{ Needle = "MatrixRunner = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the matrix runner from the runtime matrix" },
         [pscustomobject]@{ Needle = "HostedRunner = `$HostedRunner"; Issue = "Runtime input artifact provenance must record the hosted runner used by the producer workflow" },
+        [pscustomobject]@{ Needle = "RunnerImage = `$RunnerImage"; Issue = "Runtime input artifact provenance must record the actual hosted runner image" },
+        [pscustomobject]@{ Needle = "RunnerImageVersion = `$RunnerImageVersion"; Issue = "Runtime input artifact provenance must record the actual hosted runner image version" },
+        [pscustomobject]@{ Needle = "HostedDistro = `$HostedDistro"; Issue = "Runtime input artifact provenance must record the actual hosted distro" },
+        [pscustomobject]@{ Needle = "HostedDistroVersion = `$HostedDistroVersion"; Issue = "Runtime input artifact provenance must record the actual hosted distro version" },
+        [pscustomobject]@{ Needle = "HostedArchitecture = `$HostedArchitecture"; Issue = "Runtime input artifact provenance must record the actual hosted machine architecture" },
+        [pscustomobject]@{ Needle = "HostedPackageArchitecture = `$HostedPackageArchitecture"; Issue = "Runtime input artifact provenance must record the actual hosted package architecture" },
+        [pscustomobject]@{ Needle = "HostedLibc = `$HostedLibc"; Issue = "Runtime input artifact provenance must record the actual hosted libc" },
+        [pscustomobject]@{ Needle = "HostedCpuModel = `$HostedCpuModel"; Issue = "Runtime input artifact provenance must record the actual hosted CPU model" },
+        [pscustomobject]@{ Needle = "HostedDiskAvailableBytes = `$HostedDiskAvailableBytes"; Issue = "Runtime input artifact provenance must record factual available disk evidence" },
+        [pscustomobject]@{ Needle = "OpenCvCpuConfiguration = `$OpenCvCpuConfiguration"; Issue = "Runtime input artifact provenance must record factual OpenCV CPU configuration" },
         [pscustomobject]@{ Needle = "ContainerImage = `$ContainerImage"; Issue = "Runtime input artifact provenance must record the container image for container-native producers" },
         [pscustomobject]@{ Needle = "ContainerDistro = `$ContainerDistro"; Issue = "Runtime input artifact provenance must record actual container distro evidence" },
         [pscustomobject]@{ Needle = "ContainerDistroVersion = `$ContainerDistroVersion"; Issue = "Runtime input artifact provenance must record actual container distro version evidence" },
@@ -455,6 +479,7 @@ foreach ($doc in @(
             '`runtime-input.yml`',
             '`runtime-input-ubuntu.24.04-x64-full`',
             '`runtime-input-ubuntu.24.04-x64-mini`',
+            '`runtime-input-ubuntu.24.04-arm64-full`',
             '`runtime-input-ubuntu.22.04-x64-full`',
             '`runtime-input-debian.12-x64-full`',
             '`runtime-input-fedora.40-x64-full`',
@@ -505,6 +530,17 @@ if ($violations.Count -eq 0) {
             else {
                 "glibc fixture"
             }
+            $isUbuntuArm64 = $producerTarget.Rid -eq "ubuntu.24.04-arm64" -and $producerTarget.Profile -eq "full"
+            $runnerImage = if ($isUbuntuArm64) { "ubuntu24-arm64" } else { "" }
+            $runnerImageVersion = if ($isUbuntuArm64) { "fixture" } else { "" }
+            $hostedDistro = if ($isUbuntuArm64) { "ubuntu" } else { "" }
+            $hostedDistroVersion = if ($isUbuntuArm64) { "24.04" } else { "" }
+            $hostedArchitecture = if ($isUbuntuArm64) { "aarch64" } else { "" }
+            $hostedPackageArchitecture = if ($isUbuntuArm64) { "arm64" } else { "" }
+            $hostedLibc = if ($isUbuntuArm64) { "glibc fixture" } else { "" }
+            $hostedCpuModel = if ($isUbuntuArm64) { "Neoverse fixture" } else { "" }
+            $hostedDiskAvailableBytes = if ($isUbuntuArm64) { "1" } else { "" }
+            $openCvCpuConfiguration = if ($isUbuntuArm64) { "CPU_BASELINE=NEON" } else { "" }
             $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
             if ($profileSpec.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
@@ -524,6 +560,16 @@ if ($violations.Count -eq 0) {
                 -OpenCvSourceDir $fixtureSourceDir `
                 -OpenCvInstallDir $fixtureInstallDir `
                 -HostedRunner ([string]$producerTarget.Runner) `
+                -RunnerImage $runnerImage `
+                -RunnerImageVersion $runnerImageVersion `
+                -HostedDistro $hostedDistro `
+                -HostedDistroVersion $hostedDistroVersion `
+                -HostedArchitecture $hostedArchitecture `
+                -HostedPackageArchitecture $hostedPackageArchitecture `
+                -HostedLibc $hostedLibc `
+                -HostedCpuModel $hostedCpuModel `
+                -HostedDiskAvailableBytes $hostedDiskAvailableBytes `
+                -OpenCvCpuConfiguration $openCvCpuConfiguration `
                 -ContainerImage ([string]$producerTarget.ContainerImage) `
                 -ContainerDistro $containerDistro `
                 -ContainerDistroVersion $containerDistroVersion `
@@ -559,6 +605,21 @@ if ($violations.Count -eq 0) {
 
             if (-not ([string]$manifest.HostedRunner).Equals([string]$producerTarget.Runner, [System.StringComparison]::Ordinal)) {
                 throw "Fixture provenance HostedRunner did not match producer target runner for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            if ($isUbuntuArm64) {
+                if (-not ([string]$manifest.RunnerImage).Equals($runnerImage, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.RunnerImageVersion).Equals($runnerImageVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedDistro).Equals($hostedDistro, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedDistroVersion).Equals($hostedDistroVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedArchitecture).Equals($hostedArchitecture, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedPackageArchitecture).Equals($hostedPackageArchitecture, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedLibc).Equals($hostedLibc, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedCpuModel).Equals($hostedCpuModel, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedDiskAvailableBytes).Equals($hostedDiskAvailableBytes, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.OpenCvCpuConfiguration).Equals($openCvCpuConfiguration, [System.StringComparison]::Ordinal)) {
+                    throw "Fixture provenance did not retain the complete Ubuntu ARM64 hosted evidence."
+                }
             }
 
             if (-not ([string]$manifest.ContainerImage).Equals([string]$producerTarget.ContainerImage, [System.StringComparison]::Ordinal)) {
@@ -626,5 +687,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

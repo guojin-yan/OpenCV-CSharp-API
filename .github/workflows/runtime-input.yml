@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently ubuntu.24.04-x64, ubuntu.22.04-x64, debian.12-x64, fedora.40-x64, rhel.9-x64, rocky.9-x64, or alpine.3.20-x64
+        description: Real producer target; currently Ubuntu 24.04 x64/ARM64, Ubuntu 22.04 x64, Debian 12 x64, Fedora 40 x64, RHEL 9 x64, Rocky 9 x64, or Alpine 3.20 x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -29,6 +29,7 @@ jobs:
           $supportedTargets = @(
             'ubuntu.24.04-x64/full',
             'ubuntu.24.04-x64/mini',
+            'ubuntu.24.04-arm64/full',
             'ubuntu.22.04-x64/full',
             'debian.12-x64/full',
             'fedora.40-x64/full',
@@ -38,7 +39,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Remaining mini and distro RIDs need separate linked-component or distro-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Ubuntu ARM64 mini and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -53,6 +54,9 @@ jobs:
           - rid: ubuntu.24.04-x64
             profile: mini
             os: ubuntu-24.04
+          - rid: ubuntu.24.04-arm64
+            profile: full
+            os: ubuntu-24.04-arm
           - rid: ubuntu.22.04-x64
             profile: full
             os: ubuntu-22.04
@@ -79,6 +83,60 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y binutils ninja-build
+      - name: Record Ubuntu ARM64 runner evidence
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' && matrix.profile == 'full' }}
+        id: arm64_runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat /etc/os-release
+          . /etc/os-release
+          test "${ID:-}" = "ubuntu"
+          test "${VERSION_ID:-}" = "24.04"
+          test "$(uname -m)" = "aarch64"
+          test "$(dpkg --print-architecture)" = "arm64"
+
+          runner_image="${ImageOS:-unknown}"
+          runner_image_version="${ImageVersion:-unknown}"
+          libc="$(getconf GNU_LIBC_VERSION)"
+          cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | head -n 1)"
+          disk_available_bytes="$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+          test "$runner_image" != "unknown"
+          test "$runner_image_version" != "unknown"
+          test -n "$cpu_model"
+          test "$disk_available_bytes" -gt 0
+
+          printf '%s\n' \
+            '#include <arm_neon.h>' \
+            'uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }' \
+            'int main() { return 0; }' \
+            > /tmp/opencv-arm64-neon.cpp
+          g++ -c -O2 /tmp/opencv-arm64-neon.cpp -o /tmp/opencv-arm64-neon.o
+          readelf -h /tmp/opencv-arm64-neon.o | grep -q 'Machine:.*AArch64'
+
+          echo "UBUNTU_24_04_ARM64_RUNNER_EVIDENCE ImageOS=$runner_image ImageVersion=$runner_image_version ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc CPU=$cpu_model DISK_AVAILABLE_BYTES=$disk_available_bytes"
+          lscpu
+          df -h /
+          df -B1 /
+          cmake --version
+          gcc --version
+          g++ --version
+          as --version
+          pwsh --version
+          dotnet --info
+          echo "UBUNTU_24_04_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+
+          {
+            echo "runner_image=$runner_image"
+            echo "runner_image_version=$runner_image_version"
+            echo "hosted_distro=$ID"
+            echo "hosted_distro_version=$VERSION_ID"
+            echo "hosted_architecture=$(uname -m)"
+            echo "hosted_package_architecture=$(dpkg --print-architecture)"
+            echo "hosted_libc=$libc"
+            echo "hosted_cpu_model=$cpu_model"
+            echo "hosted_disk_available_bytes=$disk_available_bytes"
+          } >> "$GITHUB_OUTPUT"
       - name: Resolve runtime profile build list
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: profile
@@ -120,6 +178,27 @@ jobs:
             -Rid '${{ matrix.rid }}' `
             -BuildList '${{ steps.profile.outputs.build_list }}' `
             -Build
+      - name: Record OpenCV ARM64 CPU configuration
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' && matrix.profile == 'full' }}
+        id: arm64_opencv
+        shell: bash
+        run: |
+          set -euo pipefail
+          workspace_root="$(dirname "$GITHUB_WORKSPACE")"
+          build_dir="$workspace_root/artifacts/opencv-build/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
+          cache="$build_dir/CMakeCache.txt"
+          cpu_config="$(find "$build_dir" -type f -name cv_cpu_config.h -print -quit)"
+          test -f "$cache"
+          test -n "$cpu_config"
+
+          cpu_evidence="$({
+            grep -E '^(CPU_BASELINE|CPU_DISPATCH|CV_DISABLE_OPTIMIZATION):' "$cache" || true
+            grep -E '^#define CV_CPU_(COMPILE|BASELINE|DISPATCH).*' "$cpu_config" || true
+          } | tr '\n' ';')"
+          test -n "$cpu_evidence"
+          printf '%s\n' "$cpu_evidence" | grep -q 'NEON'
+          echo "UBUNTU_24_04_ARM64_OPENCV_CPU_EVIDENCE $cpu_evidence"
+          echo "opencv_cpu_configuration=$cpu_evidence" >> "$GITHUB_OUTPUT"
       - name: Configure linked native wrapper
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
@@ -149,7 +228,74 @@ jobs:
         run: cmake --build build/native-linked --config Release
       - name: Test linked native wrapper
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
-        run: ctest --test-dir build/native-linked -C Release --output-on-failure
+        shell: bash
+        run: |
+          set -euo pipefail
+          ctest --test-dir build/native-linked -C Release --output-on-failure | tee build/native-linked/ctest-output.txt
+          if [ '${{ matrix.rid }}' = 'ubuntu.24.04-arm64' ] && [ '${{ matrix.profile }}' = 'full' ]; then
+            grep -Fq '100% tests passed, 0 tests failed out of 5' build/native-linked/ctest-output.txt
+            echo 'UBUNTU_24_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5'
+          fi
+      - name: Audit Ubuntu ARM64 producer ELF closure
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' && matrix.profile == 'full' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          workspace_root="$(dirname "$GITHUB_WORKSPACE")"
+          open_cv_install_dir="$workspace_root/artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
+          open_cv_runtime_dir=""
+          for candidate in "$open_cv_install_dir/lib" "$open_cv_install_dir/lib64"; do
+            if [ -d "$candidate" ]; then
+              open_cv_runtime_dir="$candidate"
+              break
+            fi
+          done
+          test -n "$open_cv_runtime_dir"
+
+          audit_dir="$GITHUB_WORKSPACE/build/native-arm64-audit"
+          rm -rf "$audit_dir"
+          mkdir -p "$audit_dir"
+          cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
+          cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
+          compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name 'lib*.Native.so' ! -name 'libJYPPX.OpenCV.Native.so' -print -quit)"
+          test -n "$compatibility_loader"
+          cp "$compatibility_loader" "$audit_dir/"
+          compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
+
+          mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name 'libopencv_*.so.${{ inputs.opencv_version }}' | sort)
+          test "${#opencv_elfs[@]}" -eq 16
+          elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          test "${#elf_files[@]}" -eq 18
+
+          machine_count=0
+          origin_count=0
+          producer_path_count=0
+          missing_dependency_count=0
+          for elf in "${elf_files[@]}"; do
+            test -f "$elf"
+            readelf -h "$elf" | grep -q 'Machine:.*AArch64'
+            machine_count=$((machine_count + 1))
+            dynamic_paths="$(readelf -d "$elf" | grep -E '\((RPATH|RUNPATH)\)' || true)"
+            printf '%s\n' "$dynamic_paths"
+            printf '%s\n' "$dynamic_paths" | grep -Fq "\$ORIGIN"
+            origin_count=$((origin_count + 1))
+            if printf '%s\n' "$dynamic_paths" | grep -Eq '(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)'; then
+              producer_path_count=$((producer_path_count + 1))
+            fi
+            missing="$(ldd "$elf" | grep 'not found' || true)"
+            if [ -n "$missing" ]; then
+              printf '%s\n' "$missing" >&2
+              missing_dependency_count=$((missing_dependency_count + 1))
+            fi
+          done
+
+          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
+          test "$machine_count" -eq 18
+          test "$origin_count" -eq 18
+          test "$producer_path_count" -eq 0
+          test "$direct_opencv_dependencies" -eq 16
+          test "$missing_dependency_count" -eq 0
+          echo "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
       - name: Create runtime input artifact layout
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
@@ -177,6 +323,16 @@ jobs:
             -OpenCvSourceDir $openCvSourceDir `
             -OpenCvInstallDir $openCvInstallDir `
             -HostedRunner '${{ matrix.os }}' `
+            -RunnerImage '${{ steps.arm64_runner.outputs.runner_image }}' `
+            -RunnerImageVersion '${{ steps.arm64_runner.outputs.runner_image_version }}' `
+            -HostedDistro '${{ steps.arm64_runner.outputs.hosted_distro }}' `
+            -HostedDistroVersion '${{ steps.arm64_runner.outputs.hosted_distro_version }}' `
+            -HostedArchitecture '${{ steps.arm64_runner.outputs.hosted_architecture }}' `
+            -HostedPackageArchitecture '${{ steps.arm64_runner.outputs.hosted_package_architecture }}' `
+            -HostedLibc '${{ steps.arm64_runner.outputs.hosted_libc }}' `
+            -HostedCpuModel '${{ steps.arm64_runner.outputs.hosted_cpu_model }}' `
+            -HostedDiskAvailableBytes '${{ steps.arm64_runner.outputs.hosted_disk_available_bytes }}' `
+            -OpenCvCpuConfiguration '${{ steps.arm64_opencv.outputs.opencv_cpu_configuration }}' `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}

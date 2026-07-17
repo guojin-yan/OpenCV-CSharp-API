@@ -155,10 +155,10 @@ jobs:
             os: ubuntu-24.04
           - rid: ubuntu.24.04-arm64
             profile: full
-            os: ubuntu-24.04
+            os: ubuntu-24.04-arm
           - rid: ubuntu.24.04-arm64
             profile: mini
-            os: ubuntu-24.04
+            os: ubuntu-24.04-arm
           - rid: debian.12-x64
             profile: full
             os: ubuntu-24.04
@@ -462,6 +462,65 @@ jobs:
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid $runtimeRid `
             -SelectedRuntimeProfile $runtimeProfile `
+            -RunNativeSmoke
+
+  verify-targeted-real-ubuntu-arm64:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'ubuntu.24.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Verify native Ubuntu ARM64 consumer boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat /etc/os-release
+          . /etc/os-release
+          test "${ID:-}" = "ubuntu"
+          test "${VERSION_ID:-}" = "24.04"
+          test "$(uname -m)" = "aarch64"
+          test "$(dpkg --print-architecture)" = "arm64"
+          libc="$(getconf GNU_LIBC_VERSION)"
+          echo "UBUNTU_24_04_ARM64_CONSUMER_EVIDENCE ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc"
+          dotnet --info
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-ubuntu-arm64/nupkg-managed
+      - name: Download Ubuntu ARM64 runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-ubuntu.24.04-arm64-full
+          path: artifacts/pack-targeted-ubuntu-arm64/nupkg-ubuntu.24.04-arm64-full
+      - name: Verify selected real Ubuntu ARM64 package artifacts
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-ubuntu-arm64 `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid ubuntu.24.04-arm64 `
+            -SelectedRuntimeProfile full
+      - name: Restore, build, and run selected real Ubuntu ARM64 package consumer
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-ubuntu-arm64 `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid ubuntu.24.04-arm64 `
+            -SelectedRuntimeProfile full `
             -RunNativeSmoke
 
   verify-targeted-real-debian:
