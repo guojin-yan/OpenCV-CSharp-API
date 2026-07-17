@@ -685,7 +685,8 @@ jobs:
           $exitCode = $LASTEXITCODE
           $output | ForEach-Object { Write-Host $_ }
           $text = $output -join [System.Environment]::NewLine
-          if ($exitCode -ne 0 -or $text -notmatch '100% tests passed, 0 tests failed out of 5') {
+          $successSummaryPattern = '(?m)^100% tests passed(?:, 0 tests failed)? out of 5\r?$'
+          if ($exitCode -ne 0 -or $text -notmatch $successSummaryPattern) {
             throw "Linked Windows native wrapper did not pass all five CTests."
           }
           Write-Host 'WINDOWS_X64_LINKED_CTEST_EVIDENCE passed=5 total=5'

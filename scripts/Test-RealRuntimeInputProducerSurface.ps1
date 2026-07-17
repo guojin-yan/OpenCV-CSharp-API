@@ -388,6 +388,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "OPENCV_DNN_MLAS_ENABLED:INTERNAL"; Issue = "Windows producer must verify that unsupported GNU-assembly MLAS is not retained in the MSVC build" },
         [pscustomobject]@{ Needle = "'-lpthread', '.dll.a', 'mingw', 'msys', 'cygwin'"; Issue = "Windows producer must reject foreign linker and import-library tokens from generated MSVC projects" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record generator, SDK, build list, and CPU configuration" },
+        [pscustomobject]@{ Needle = "100% tests passed(?:, 0 tests failed)? out of 5"; Issue = "Windows producer must accept the audited CTest 4.4 success summary while retaining the older equivalent format" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Windows producer must require all five linked CTests" },
         [pscustomobject]@{ Needle = "Test-WindowsRuntimePeClosure.ps1"; Issue = "Windows producer must run the reusable PE closure guard before upload" },
         [pscustomobject]@{ Needle = "-HostedProcessArchitecture"; Issue = "Windows producer provenance must record actual process architecture" },
