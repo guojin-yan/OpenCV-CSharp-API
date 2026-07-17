@@ -115,7 +115,7 @@ jobs:
                 pwsh --version
                 dotnet --info
                 echo "DEBIAN_12_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success"
-              } | tee -a /workspace/$repo_name/debian1204-arm64-host-docker-audit.txt
+              } | tee -a debian1204-arm64-host-docker-audit.txt
             '
       - uses: actions/upload-artifact@v4
         with:
