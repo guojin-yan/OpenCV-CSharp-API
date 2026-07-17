@@ -147,7 +147,7 @@ jobs:
             "WINDOWS_X64_TOOLCHAIN_EVIDENCE VisualStudioVersion=$($visualStudio.installationVersion) VisualStudioPath=$($visualStudio.installationPath) MSVCVersion=$msvcVersion Compiler=$($cl.FullName) Generator=$($describe.Generator) Platform=$($describe.Platform) BuildSystem=$($describe.BuildSystem) WindowsSDK=$sdkVersion CMake=$cmakeVersion Ninja=$ninjaVersion PowerShell=$powerShellVersion",
             "WINDOWS_X64_DOTNET_EVIDENCE $((@($dotnetInfo | Select-String -Pattern 'Version:|Architecture:|RID:') | ForEach-Object { $_.Line.Trim() }) -join ';')",
             "WINDOWS_X64_PE_EVIDENCE file=$probeDll machine=AMD64 dumpbin=$dumpbin",
-            "WINDOWS_X64_DEPENDENCY_EVIDENCE $((@($dependents | Select-String -Pattern '\.dll') | ForEach-Object { $_.Line.Trim() }) -join ',')"
+            "WINDOWS_X64_DEPENDENCY_EVIDENCE $((@($dependents -split '\r?\n' | Where-Object { $_ -match '^\s*[^ ]+\.dll\s*$' }) | ForEach-Object { $_.Trim() }) -join ',')"
           )
           $evidence | ForEach-Object { Write-Host $_ }
           [System.IO.File]::WriteAllLines(
@@ -175,7 +175,8 @@ jobs:
           foreach ($pattern in @(
               'WINDOWS_X64_HOST_EVIDENCE.*PROCESSOR_ARCHITECTURE=AMD64.*OSArchitecture=X64.*ProcessArchitecture=X64.*Is64BitProcess=True',
               'WINDOWS_X64_TOOLCHAIN_EVIDENCE.*VisualStudioVersion=18\..*MSVCVersion=.*Generator=Visual Studio 18 2026.*Platform=x64.*BuildSystem=multi-config.*WindowsSDK=',
-              'WINDOWS_X64_DOTNET_EVIDENCE.*Architecture:\s*x64.*RID:\s*win-x64',
+              'WINDOWS_X64_DOTNET_EVIDENCE.*Architecture:\s*x64',
+              'WINDOWS_X64_DOTNET_EVIDENCE.*RID:\s*win-x64',
               'WINDOWS_X64_PE_EVIDENCE.*machine=AMD64')) {
             if ($text -notmatch $pattern) {
               throw "Windows x64 audit evidence did not match: $pattern"
