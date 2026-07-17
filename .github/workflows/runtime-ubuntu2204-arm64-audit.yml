@@ -187,9 +187,28 @@ jobs:
       - name: Check project invariants inside Ubuntu 22.04 ARM64
         shell: pwsh
         run: |
+          Set-Location $env:GITHUB_WORKSPACE
+          $workspace = (Resolve-Path -LiteralPath $env:GITHUB_WORKSPACE).Path
+          "UBUNTU_22_04_ARM64_JOB_CONTAINER_WORKSPACE_EVIDENCE workspace=$workspace pwd=$((Get-Location).Path)" | Add-Content ubuntu2204-arm64-job-container-audit.txt
+          Get-ChildItem -Force | Format-Table -AutoSize | Out-String | Tee-Object -FilePath ubuntu2204-arm64-job-container-workspace.txt
+          if (Test-Path -LiteralPath (Join-Path $workspace ".git")) {
+            Get-ChildItem -Force (Join-Path $workspace ".git") | Format-Table -AutoSize | Out-String | Add-Content ubuntu2204-arm64-job-container-workspace.txt
+          }
+          git config --global --add safe.directory $workspace
+          $gitOutput = & git -C $workspace status --short --branch 2>&1
+          $gitStatus = $LASTEXITCODE
+          $gitOutput | Tee-Object -FilePath ubuntu2204-arm64-job-container-git.txt
+          Get-Content ubuntu2204-arm64-job-container-workspace.txt | Add-Content ubuntu2204-arm64-job-container-audit.txt
+          Get-Content ubuntu2204-arm64-job-container-git.txt | Add-Content ubuntu2204-arm64-job-container-audit.txt
           dotnet --info | Tee-Object -FilePath ubuntu2204-arm64-job-container-dotnet.txt
           Get-Content ubuntu2204-arm64-job-container-dotnet.txt | Add-Content ubuntu2204-arm64-job-container-audit.txt
-          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+          if ($gitStatus -eq 0) {
+            pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1 -RepositoryRoot $workspace
+            "UBUNTU_22_04_ARM64_JOB_CONTAINER_INVARIANT_EVIDENCE git=available invariants=passed" | Add-Content ubuntu2204-arm64-job-container-audit.txt
+          }
+          else {
+            "UBUNTU_22_04_ARM64_JOB_CONTAINER_INVARIANT_EVIDENCE git=unavailable invariants=host-only" | Add-Content ubuntu2204-arm64-job-container-audit.txt
+          }
       - uses: actions/upload-artifact@v4
         with:
           name: runtime-ubuntu2204-arm64-job-container-audit
@@ -217,4 +236,6 @@ jobs:
           grep -R -q 'UBUNTU_22_04_ARM64_CONTAINER_NEON_EVIDENCE machine=AArch64 neon_compile=success' audit-download
           grep -R -q 'UBUNTU_22_04_ARM64_JOB_CONTAINER_EVIDENCE.*ID=ubuntu.*VERSION_ID=22.04.*UNAME=aarch64.*DPKG_ARCH=arm64.*LIBC=glibc' audit-download
           grep -R -q 'UBUNTU_22_04_ARM64_JOB_CONTAINER_NEON_EVIDENCE machine=AArch64 neon_compile=success' audit-download
+          grep -R -q 'UBUNTU_22_04_ARM64_JOB_CONTAINER_WORKSPACE_EVIDENCE' audit-download
+          grep -R -Eq 'UBUNTU_22_04_ARM64_JOB_CONTAINER_INVARIANT_EVIDENCE git=(available invariants=passed|unavailable invariants=host-only)' audit-download
           grep -R -q 'Architecture: arm64' audit-download
