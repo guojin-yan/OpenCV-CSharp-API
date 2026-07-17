@@ -378,8 +378,9 @@ jobs:
             throw "Windows runtime-input provenance contains invalid excluded foreign tool directory JSON."
           }
           foreach ($excludedDirectory in $excludedForeignToolDirectories) {
-            if ([string]$excludedDirectory -notmatch '(?i)(?:^|[\\/])(?:mingw(?:32|64)?|msys(?:2|64)?|cygwin(?:64)?)(?:[\\/]|$)') {
-              throw "Windows runtime-input provenance contains a non-foreign excluded PATH directory: $excludedDirectory"
+            if ([string]::IsNullOrWhiteSpace([string]$excludedDirectory) -or
+                -not [System.IO.Path]::IsPathRooted([string]$excludedDirectory)) {
+              throw "Windows runtime-input provenance contains an invalid excluded PATH directory: $excludedDirectory"
             }
           }
 

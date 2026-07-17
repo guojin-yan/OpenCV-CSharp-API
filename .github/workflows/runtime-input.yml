@@ -512,19 +512,30 @@ jobs:
             $env:Path -split [System.IO.Path]::PathSeparator |
               Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
           )
+          $genericCompilerNames = @('cc.exe', 'gcc.exe', 'g++.exe', 'c++.exe')
+          $genericCompilerDirectorySet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+          foreach ($tool in $genericCompilerNames) {
+            foreach ($command in @(Get-Command -Name $tool -CommandType Application -All -ErrorAction SilentlyContinue)) {
+              $commandDirectory = Split-Path -LiteralPath $command.Source -Parent
+              [void]$genericCompilerDirectorySet.Add($commandDirectory)
+            }
+          }
           $excludedForeignToolDirectories = @(
             $pathEntries |
-              Where-Object { $_ -match $foreignToolPattern } |
+              Where-Object {
+                $_ -match $foreignToolPattern -or
+                  $genericCompilerDirectorySet.Contains($_.TrimEnd([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar))
+              } |
               Sort-Object -Unique
           )
-          $sanitizedPathEntries = @($pathEntries | Where-Object { $_ -notmatch $foreignToolPattern })
+          $sanitizedPathEntries = @($pathEntries | Where-Object { $excludedForeignToolDirectories -notcontains $_ })
           if ($sanitizedPathEntries.Count -eq 0) {
             throw "Windows producer PATH sanitization removed every PATH entry."
           }
 
           $env:Path = $sanitizedPathEntries -join [System.IO.Path]::PathSeparator
           Remove-Item Env:ASM -ErrorAction SilentlyContinue
-          foreach ($tool in @('cc.exe', 'gcc.exe', 'g++.exe', 'c++.exe')) {
+          foreach ($tool in $genericCompilerNames) {
             $foreignTool = Get-Command -Name $tool -CommandType Application -ErrorAction SilentlyContinue
             if ($null -ne $foreignTool) {
               throw "Foreign generic compiler remained in the Windows OpenCV producer PATH after sanitization: $($foreignTool.Source)"
