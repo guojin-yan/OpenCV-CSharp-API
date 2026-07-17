@@ -1,0 +1,88 @@
+name: runtime-arm64-audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record base ARM64 runner evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "RUNNER_IMAGE_EVIDENCE ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown}"
+            cat /etc/os-release
+            . /etc/os-release
+            test "${ID:-}" = "ubuntu"
+            test "${VERSION_ID:-}" = "24.04"
+            test "$(uname -m)" = "aarch64"
+            test "$(dpkg --print-architecture)" = "arm64"
+            echo "ARM64_RUNNER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$(getconf GNU_LIBC_VERSION)"
+            lscpu
+            df -h /
+            df -B1 /
+            cmake --version
+            gcc --version
+            g++ --version
+            as --version
+            pwsh --version
+            dotnet --info
+          } | tee arm64-audit.txt
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: ./scripts/Test-ProjectInvariants.ps1
+      - name: Probe AArch64 toolchain and NEON
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y binutils ninja-build
+          cat >/tmp/opencv-arm64-neon.cpp <<'CPP'
+          #include <arm_neon.h>
+          uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }
+          int main() { return 0; }
+          CPP
+          g++ -c -O2 /tmp/opencv-arm64-neon.cpp -o /tmp/opencv-arm64-neon.o
+          readelf -h /tmp/opencv-arm64-neon.o | tee -a arm64-audit.txt
+          readelf -h /tmp/opencv-arm64-neon.o | grep -q 'Machine:.*AArch64'
+          {
+            ninja --version
+            pwsh --version
+            dotnet --info
+            df -h /
+            df -B1 /
+            echo "ARM64_NEON_TOOLCHAIN_EVIDENCE machine=AArch64 neon_compile=success"
+          } | tee -a arm64-audit.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-arm64-audit-evidence
+          path: arm64-audit.txt
+          if-no-files-found: error
+
+  verify-artifact:
+    needs: probe
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: runtime-arm64-audit-evidence
+          path: audit-download
+      - name: Verify downloaded ARM64 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          grep -q 'ARM64_RUNNER_EVIDENCE.*UNAME=aarch64.*DPKG_ARCH=arm64' audit-download/arm64-audit.txt
+          grep -q 'ARM64_NEON_TOOLCHAIN_EVIDENCE machine=AArch64 neon_compile=success' audit-download/arm64-audit.txt
