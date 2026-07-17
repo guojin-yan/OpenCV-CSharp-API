@@ -106,10 +106,17 @@ jobs:
               $cache -notmatch '(?m)^CMAKE_GENERATOR_PLATFORM:INTERNAL=x64\r?$') {
             throw "CMake did not retain the exact Visual Studio 18 x64 generator boundary."
           }
-          $sdkVersion = [regex]::Match($cache, '(?m)^CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION:[^=\r\n]+=([^\r\n]+)$').Groups[1].Value
-          if ([string]::IsNullOrWhiteSpace($sdkVersion)) {
-            throw "CMake did not record the selected Windows SDK version."
+          [xml]$probeProject = Get-Content -LiteralPath (Join-Path $buildRoot "opencv_windows_x64_probe.vcxproj") -Raw
+          $sdkVersions = @(
+            $probeProject.SelectNodes("//*[local-name()='WindowsTargetPlatformVersion']") |
+              ForEach-Object { $_.InnerText.Trim() } |
+              Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+              Sort-Object -Unique
+          )
+          if ($sdkVersions.Count -ne 1) {
+            throw "The generated Visual Studio project did not record exactly one Windows SDK version."
           }
+          $sdkVersion = $sdkVersions[0]
 
           $probeDll = Join-Path $buildRoot "Release/opencv_windows_x64_probe.dll"
           if (-not (Test-Path -LiteralPath $probeDll -PathType Leaf)) {
