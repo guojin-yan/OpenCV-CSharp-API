@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently Ubuntu 24.04 x64/ARM64, Ubuntu 22.04 x64, Debian 12 x64, Fedora 40 x64, RHEL 9 x64, Rocky 9 x64, or Alpine 3.20 x64
+        description: Real producer target; currently Ubuntu 24.04 x64/ARM64, Ubuntu 22.04 x64/ARM64, Debian 12 x64, Fedora 40 x64, RHEL 9 x64, Rocky 9 x64, or Alpine 3.20 x64
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -31,6 +31,7 @@ jobs:
             'ubuntu.24.04-x64/mini',
             'ubuntu.24.04-arm64/full',
             'ubuntu.22.04-x64/full',
+            'ubuntu.22.04-arm64/full',
             'debian.12-x64/full',
             'fedora.40-x64/full',
             'rhel.9-x64/full',
@@ -39,7 +40,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Ubuntu ARM64 mini and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Ubuntu ARM64 mini and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -348,6 +349,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - rid: ubuntu.22.04-arm64
+            profile: full
+            os: ubuntu-24.04-arm
+            container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
+            opencv_extra_cmake_args: ""
           - rid: debian.12-x64
             profile: full
             os: ubuntu-24.04
@@ -426,6 +432,8 @@ jobs:
           BUILD_LIST: ${{ steps.profile.outputs.build_list }}
           EXPECTED_DISTRO: ${{ steps.profile.outputs.distro }}
           EXPECTED_DISTRO_VERSION: ${{ steps.profile.outputs.distro_version }}
+          POWERSHELL_VERSION: 7.4.17
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
         run: |
           set -euo pipefail
           workspace_root="$(dirname "$GITHUB_WORKSPACE")"
@@ -435,13 +443,67 @@ jobs:
             container_shell="sh"
           fi
 
+          hosted_runner_image=""
+          hosted_runner_image_version=""
+          hosted_distro=""
+          hosted_distro_version=""
+          hosted_architecture=""
+          hosted_package_architecture=""
+          hosted_libc=""
+          hosted_cpu_model=""
+          hosted_disk_available_bytes=""
+          container_image_id=""
+          container_image_digest=""
+          if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+            . /etc/os-release
+            test "${ID:-}" = "ubuntu"
+            test "${VERSION_ID:-}" = "24.04"
+            test "$(uname -m)" = "aarch64"
+            test "$(dpkg --print-architecture)" = "arm64"
+            test "$(docker info --format '{{.Architecture}}')" = "aarch64"
+            docker pull "$CONTAINER_IMAGE"
+            test "$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}')" = "arm64"
+            container_image_id="$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Id}}')"
+            container_image_digest="$(docker image inspect "$CONTAINER_IMAGE" --format '{{join .RepoDigests ","}}')"
+            printf '%s\n' "$container_image_digest" | grep -Fq 'ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982'
+
+            hosted_runner_image="${ImageOS:-unknown}"
+            hosted_runner_image_version="${ImageVersion:-unknown}"
+            hosted_distro="$ID"
+            hosted_distro_version="$VERSION_ID"
+            hosted_architecture="$(uname -m)"
+            hosted_package_architecture="$(dpkg --print-architecture)"
+            hosted_libc="$(getconf GNU_LIBC_VERSION)"
+            hosted_cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | head -n 1)"
+            hosted_disk_available_bytes="$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+            test "$hosted_runner_image" != "unknown"
+            test "$hosted_runner_image_version" != "unknown"
+            test -n "$hosted_cpu_model"
+            test "$hosted_disk_available_bytes" -gt 0
+            echo "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
+            echo "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+          fi
+
           docker run --rm \
             -e CMAKE_BUILD_PARALLEL_LEVEL="$CMAKE_BUILD_PARALLEL_LEVEL" \
             -e CONTAINER_IMAGE="$CONTAINER_IMAGE" \
+            -e CONTAINER_IMAGE_ID="$container_image_id" \
+            -e CONTAINER_IMAGE_DIGEST="$container_image_digest" \
             -e HOSTED_RUNNER="$HOSTED_RUNNER" \
+            -e HOSTED_RUNNER_IMAGE="$hosted_runner_image" \
+            -e HOSTED_RUNNER_IMAGE_VERSION="$hosted_runner_image_version" \
+            -e HOSTED_DISTRO="$hosted_distro" \
+            -e HOSTED_DISTRO_VERSION="$hosted_distro_version" \
+            -e HOSTED_ARCHITECTURE="$hosted_architecture" \
+            -e HOSTED_PACKAGE_ARCHITECTURE="$hosted_package_architecture" \
+            -e HOSTED_LIBC="$hosted_libc" \
+            -e HOSTED_CPU_MODEL="$hosted_cpu_model" \
+            -e HOSTED_DISK_AVAILABLE_BYTES="$hosted_disk_available_bytes" \
             -e OPENCV_RID="$OPENCV_RID" \
             -e OPENCV_VERSION="$OPENCV_VERSION" \
             -e OPENCV_EXTRA_CMAKE_ARGS="$OPENCV_EXTRA_CMAKE_ARGS" \
+            -e POWERSHELL_VERSION="$POWERSHELL_VERSION" \
+            -e POWERSHELL_SHA256="$POWERSHELL_SHA256" \
             -e PRODUCER_RID="$PRODUCER_RID" \
             -e RUNTIME_PROFILE="$RUNTIME_PROFILE" \
             -e BUILD_LIST="$BUILD_LIST" \
@@ -472,16 +534,40 @@ jobs:
                     ninja-build \
                     pkg-config
 
-                  install -d -m 0755 /etc/apt/keyrings
-                  curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
-                  chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
-                  if [ "${ID:-}" = "ubuntu" ]; then
-                    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/ubuntu/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+                  package_architecture="$(dpkg --print-architecture)"
+                  if [ "$package_architecture" = "arm64" ]; then
+                    test "${ID:-}" = "ubuntu"
+                    test "${VERSION_ID:-}" = "22.04"
+                    test "$PRODUCER_RID" = "ubuntu.22.04-arm64"
+                    test "$(uname -m)" = "aarch64"
+                    apt-get install -y --no-install-recommends \
+                      gzip \
+                      libicu70 \
+                      libssl3 \
+                      libunwind8 \
+                      tar \
+                      zlib1g
+                    powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
+                    curl -fsSL "https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz" -o "$powershell_archive"
+                    echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -
+                    install -d /opt/microsoft/powershell/7
+                    tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
+                    chmod +x /opt/microsoft/powershell/7/pwsh
+                    ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+                    echo "UBUNTU_22_04_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
                   else
-                    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+                    test "$package_architecture" = "amd64"
+                    install -d -m 0755 /etc/apt/keyrings
+                    curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
+                    chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
+                    if [ "${ID:-}" = "ubuntu" ]; then
+                      echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/ubuntu/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+                    else
+                      echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/${VERSION_ID}/prod ${VERSION_CODENAME} main" > /etc/apt/sources.list.d/microsoft-prod.list
+                    fi
+                    apt-get update
+                    apt-get install -y --no-install-recommends powershell
                   fi
-                  apt-get update
-                  apt-get install -y --no-install-recommends powershell
                   ;;
                 alpine)
                   grep -q "/v3.20/main" /etc/apk/repositories
@@ -589,6 +675,39 @@ jobs:
                   ;;
               esac
 
+              container_architecture=""
+              container_package_architecture=""
+              provenance_powershell_version=""
+              provenance_powershell_sha256=""
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                test "$container_distro" = "ubuntu"
+                test "$container_distro_version" = "22.04"
+                test "$(uname -m)" = "aarch64"
+                test "$(dpkg --print-architecture)" = "arm64"
+                container_architecture="$(uname -m)"
+                container_package_architecture="$(dpkg --print-architecture)"
+                provenance_powershell_version="$POWERSHELL_VERSION"
+                provenance_powershell_sha256="$POWERSHELL_SHA256"
+
+                printf "%s\n" \
+                  "#include <arm_neon.h>" \
+                  "uint8x16_t probe(unsigned char value) { return vdupq_n_u8(value); }" \
+                  "int main() { return 0; }" \
+                  > /tmp/opencv-ubuntu2204-arm64-neon.cpp
+                g++ -c -O2 /tmp/opencv-ubuntu2204-arm64-neon.cpp -o /tmp/opencv-ubuntu2204-arm64-neon.o
+                readelf -h /tmp/opencv-ubuntu2204-arm64-neon.o | grep -q "Machine:.*AArch64"
+
+                echo "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
+                lscpu
+                cmake --version
+                gcc --version
+                g++ --version
+                as --version
+                ninja --version
+                pwsh --version
+                echo "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+              fi
+
               source_root="/workspace/opencv-source"
               source_dir="$source_root/opencv-$OPENCV_VERSION"
               mkdir -p "$source_root"
@@ -603,6 +722,22 @@ jobs:
                 -BuildList "$BUILD_LIST" \
                 -ExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS" \
                 -Build
+
+              opencv_cpu_configuration=""
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                open_cv_build_dir="/workspace/artifacts/opencv-build/opencv-$OPENCV_VERSION-$OPENCV_RID"
+                open_cv_cache="$open_cv_build_dir/CMakeCache.txt"
+                open_cv_cpu_config="$(find "$open_cv_build_dir" -type f -name cv_cpu_config.h -print -quit)"
+                test -f "$open_cv_cache"
+                test -n "$open_cv_cpu_config"
+                opencv_cpu_configuration="$({
+                  grep -E "^(CPU_BASELINE|CPU_DISPATCH|CV_DISABLE_OPTIMIZATION):" "$open_cv_cache" || true
+                  grep -E "^#define CV_CPU_(COMPILE|BASELINE|DISPATCH).*" "$open_cv_cpu_config" || true
+                } | tr "\n" ";")"
+                test -n "$opencv_cpu_configuration"
+                printf "%s\n" "$opencv_cpu_configuration" | grep -q "NEON"
+                echo "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
+              fi
 
               open_cv_install_dir="/workspace/artifacts/opencv-install/opencv-$OPENCV_VERSION-$OPENCV_RID"
               open_cv_dir=""
@@ -629,7 +764,11 @@ jobs:
                 "-DOPENCV_CSHARP_RUNTIME_PROFILE=$RUNTIME_PROFILE"
 
               cmake --build build/native-linked --config Release
-              ctest --test-dir build/native-linked -C Release --output-on-failure
+              ctest --test-dir build/native-linked -C Release --output-on-failure | tee build/native-linked/ctest-output.txt
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                grep -Fq "100% tests passed, 0 tests failed out of 5" build/native-linked/ctest-output.txt
+                echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
+              fi
 
               if [ "$container_distro" = "alpine" ]; then
                 alpine_elf_count=0
@@ -666,6 +805,62 @@ jobs:
                 echo "ALPINE_3_20_PRODUCER_ELF_EVIDENCE files=18 origin=18 direct_opencv=16"
               fi
 
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                open_cv_runtime_audit_dir=""
+                for candidate in "$open_cv_install_dir/lib" "$open_cv_install_dir/lib64"; do
+                  if [ -d "$candidate" ]; then
+                    open_cv_runtime_audit_dir="$candidate"
+                    break
+                  fi
+                done
+                test -n "$open_cv_runtime_audit_dir"
+
+                audit_dir="build/native-ubuntu2204-arm64-audit"
+                rm -rf "$audit_dir"
+                mkdir -p "$audit_dir"
+                cp -a "$open_cv_runtime_audit_dir"/libopencv_*.so* "$audit_dir/"
+                cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
+                compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
+                test -n "$compatibility_loader"
+                cp "$compatibility_loader" "$audit_dir/"
+                compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
+
+                mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
+                test "${#opencv_elfs[@]}" -eq 16
+                elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+                test "${#elf_files[@]}" -eq 18
+
+                machine_count=0
+                origin_count=0
+                producer_path_count=0
+                missing_dependency_count=0
+                for elf in "${elf_files[@]}"; do
+                  test -f "$elf"
+                  readelf -h "$elf" | grep -q "Machine:.*AArch64"
+                  machine_count=$((machine_count + 1))
+                  dynamic_paths="$(readelf -d "$elf" | grep -E "\((RPATH|RUNPATH)\)" || true)"
+                  printf "%s\n" "$dynamic_paths"
+                  printf "%s\n" "$dynamic_paths" | grep -Fq "\$ORIGIN"
+                  origin_count=$((origin_count + 1))
+                  if printf "%s\n" "$dynamic_paths" | grep -Eq "(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)"; then
+                    producer_path_count=$((producer_path_count + 1))
+                  fi
+                  missing="$(ldd "$elf" | grep "not found" || true)"
+                  if [ -n "$missing" ]; then
+                    printf "%s\n" "$missing" >&2
+                    missing_dependency_count=$((missing_dependency_count + 1))
+                  fi
+                done
+
+                direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
+                test "$machine_count" -eq 18
+                test "$origin_count" -eq 18
+                test "$producer_path_count" -eq 0
+                test "$direct_opencv_dependencies" -eq 16
+                test "$missing_dependency_count" -eq 0
+                echo "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
+              fi
+
               open_cv_runtime_dir=""
               for candidate in \
                 "$open_cv_install_dir/lib" \
@@ -690,10 +885,26 @@ jobs:
                 -OpenCvSourceDir "$source_dir" \
                 -OpenCvInstallDir "$open_cv_install_dir" \
                 -HostedRunner "$HOSTED_RUNNER" \
+                -RunnerImage "$HOSTED_RUNNER_IMAGE" \
+                -RunnerImageVersion "$HOSTED_RUNNER_IMAGE_VERSION" \
+                -HostedDistro "$HOSTED_DISTRO" \
+                -HostedDistroVersion "$HOSTED_DISTRO_VERSION" \
+                -HostedArchitecture "$HOSTED_ARCHITECTURE" \
+                -HostedPackageArchitecture "$HOSTED_PACKAGE_ARCHITECTURE" \
+                -HostedLibc "$HOSTED_LIBC" \
+                -HostedCpuModel "$HOSTED_CPU_MODEL" \
+                -HostedDiskAvailableBytes "$HOSTED_DISK_AVAILABLE_BYTES" \
+                -OpenCvCpuConfiguration "$opencv_cpu_configuration" \
                 -ContainerImage "$CONTAINER_IMAGE" \
+                -ContainerImageId "$CONTAINER_IMAGE_ID" \
+                -ContainerImageDigest "$CONTAINER_IMAGE_DIGEST" \
                 -ContainerDistro "$container_distro" \
                 -ContainerDistroVersion "$container_distro_version" \
+                -ContainerArchitecture "$container_architecture" \
+                -ContainerPackageArchitecture "$container_package_architecture" \
                 -ContainerLibc "$container_libc" \
+                -PowerShellVersion "$provenance_powershell_version" \
+                -PowerShellArchiveSha256 "$provenance_powershell_sha256" \
                 -OpenCvExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS" \
                 -OutputRoot ./artifacts/runtime-inputs
             '

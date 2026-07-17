@@ -143,10 +143,10 @@ jobs:
             os: ubuntu-22.04
           - rid: ubuntu.22.04-arm64
             profile: full
-            os: ubuntu-22.04
+            os: ubuntu-24.04-arm
           - rid: ubuntu.22.04-arm64
             profile: mini
-            os: ubuntu-22.04
+            os: ubuntu-24.04-arm
           - rid: ubuntu.24.04-x64
             profile: full
             os: ubuntu-24.04
@@ -522,6 +522,104 @@ jobs:
             -SelectedRid ubuntu.24.04-arm64 `
             -SelectedRuntimeProfile full `
             -RunNativeSmoke
+
+  verify-targeted-real-ubuntu2204-arm64:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'ubuntu.22.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-managed
+      - name: Download Ubuntu 22.04 ARM64 runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-ubuntu.22.04-arm64-full
+          path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-ubuntu.22.04-arm64-full
+      - name: Verify and run selected real Ubuntu 22.04 ARM64 package
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+          POWERSHELL_VERSION: 7.4.17
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
+          UBUNTU_2204_ARM64_IMAGE: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "aarch64"
+          test "$(dpkg --print-architecture)" = "arm64"
+          test "$(docker info --format '{{.Architecture}}')" = "aarch64"
+          docker pull "$UBUNTU_2204_ARM64_IMAGE"
+          test "$(docker image inspect "$UBUNTU_2204_ARM64_IMAGE" --format '{{.Architecture}}')" = "arm64"
+          image_id="$(docker image inspect "$UBUNTU_2204_ARM64_IMAGE" --format '{{.Id}}')"
+          image_digests="$(docker image inspect "$UBUNTU_2204_ARM64_IMAGE" --format '{{join .RepoDigests ","}}')"
+          printf '%s\n' "$image_digests" | grep -Fq 'ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982'
+          echo "UBUNTU_22_04_ARM64_CONSUMER_HOST_EVIDENCE ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) DOCKER_ARCH=$(docker info --format '{{.Architecture}}')"
+          echo "UBUNTU_22_04_ARM64_CONSUMER_IMAGE_EVIDENCE IMAGE=$UBUNTU_2204_ARM64_IMAGE IMAGE_ID=$image_id REPO_DIGESTS=$image_digests ARCH=$(docker image inspect "$UBUNTU_2204_ARM64_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$UBUNTU_2204_ARM64_IMAGE" --format '{{.Os}}')"
+
+          docker run --rm \
+            -e PACKAGE_VERSION="$PACKAGE_VERSION" \
+            -e POWERSHELL_VERSION="$POWERSHELL_VERSION" \
+            -e POWERSHELL_SHA256="$POWERSHELL_SHA256" \
+            -v "$GITHUB_WORKSPACE:/workspace:ro" \
+            -w /tmp \
+            "$UBUNTU_2204_ARM64_IMAGE" \
+            bash -lc '
+              set -euo pipefail
+              . /etc/os-release
+              test "${ID:-}" = "ubuntu"
+              test "${VERSION_ID:-}" = "22.04"
+              test "$(uname -m)" = "aarch64"
+              test "$(dpkg --print-architecture)" = "arm64"
+
+              export DEBIAN_FRONTEND=noninteractive
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                ca-certificates \
+                curl \
+                gzip \
+                libicu70 \
+                libssl3 \
+                libunwind8 \
+                tar \
+                zlib1g
+
+              powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
+              curl -fsSL "https://github.com/PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz" -o "$powershell_archive"
+              echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -
+              install -d /opt/microsoft/powershell/7
+              tar -xzf "$powershell_archive" -C /opt/microsoft/powershell/7
+              chmod +x /opt/microsoft/powershell/7/pwsh
+              ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
+
+              curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+              bash /tmp/dotnet-install.sh --channel 8.0 --architecture arm64 --install-dir /usr/share/dotnet
+              ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+              libc="$(getconf GNU_LIBC_VERSION)"
+              echo "UBUNTU_22_04_ARM64_CONSUMER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc POWERSHELL_VERSION=$POWERSHELL_VERSION POWERSHELL_SHA256=$POWERSHELL_SHA256"
+              pwsh --version
+              dotnet --info
+
+              pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackArtifactMatrixSurface.ps1 \
+                -ArtifactRoot /workspace/artifacts/pack-targeted-ubuntu2204-arm64 \
+                -ExpectedPackageVersion "$PACKAGE_VERSION" \
+                -ExpectedSyntheticRuntimeInputs false \
+                -SelectedRid ubuntu.22.04-arm64 \
+                -SelectedRuntimeProfile full
+
+              pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1 \
+                -ArtifactRoot /workspace/artifacts/pack-targeted-ubuntu2204-arm64 \
+                -ExpectedPackageVersion "$PACKAGE_VERSION" \
+                -ExpectedSyntheticRuntimeInputs false \
+                -SelectedRid ubuntu.22.04-arm64 \
+                -SelectedRuntimeProfile full \
+                -RunNativeSmoke
+            '
 
   verify-targeted-real-debian:
     needs:

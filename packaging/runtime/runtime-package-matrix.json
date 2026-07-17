@@ -40,10 +40,10 @@
       "platformFamily": "linux",
       "distro": "ubuntu",
       "distroVersion": "22.04",
-      "runner": "ubuntu-22.04",
+      "runner": "ubuntu-24.04-arm",
       "opencvRid": "ubuntu.22.04-arm64",
       "nativeExtension": ".so",
-      "notes": "Ubuntu 22.04 ARM64 glibc runtime package surface; build and publish from an Ubuntu 22.04 ARM64 native runtime."
+      "notes": "Ubuntu 22.04 ARM64 glibc runtime package surface; full production and consumption use official Ubuntu 22.04 ARM64 userspace through Docker on the native AArch64 ubuntu-24.04-arm host. Mini remains package-surface-only until separately proven."
     },
     {
       "rid": "ubuntu.24.04-x64",

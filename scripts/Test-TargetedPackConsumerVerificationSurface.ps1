@@ -134,6 +134,7 @@ $runtimeMatrixText = Read-RequiredText $runtimeMatrixPath
 $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
 $ubuntuJobText = Get-WorkflowJobText -JobName "verify-targeted-real"
 $ubuntuArm64JobText = Get-WorkflowJobText -JobName "verify-targeted-real-ubuntu-arm64"
+$ubuntu2204Arm64JobText = Get-WorkflowJobText -JobName "verify-targeted-real-ubuntu2204-arm64"
 $debianJobText = Get-WorkflowJobText -JobName "verify-targeted-real-debian"
 $fedoraJobText = Get-WorkflowJobText -JobName "verify-targeted-real-fedora"
 $rockyJobText = Get-WorkflowJobText -JobName "verify-targeted-real-rocky"
@@ -142,6 +143,7 @@ $alpineJobText = Get-WorkflowJobText -JobName "verify-targeted-real-alpine"
 
 foreach ($expectedTarget in @(
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Runner = "ubuntu-22.04" },
+        [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Runner = "ubuntu-24.04-arm" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Runner = "ubuntu-24.04" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Runner = "ubuntu-24.04-arm" })) {
     $ridSpecs = @($runtimeMatrix.rids | Where-Object { $_.rid -eq $expectedTarget.Rid })
@@ -185,6 +187,28 @@ foreach ($expectation in @(
         @($workflowPath, $ubuntuArm64JobText, "-SelectedRid ubuntu.24.04-arm64", "Ubuntu ARM64 checks must select only the proven distro-specific RID"),
         @($workflowPath, $ubuntuArm64JobText, "-SelectedRuntimeProfile full", "Ubuntu ARM64 checks must select only the full profile"),
         @($workflowPath, $ubuntuArm64JobText, "-RunNativeSmoke", "Ubuntu ARM64 consumer verification must execute native and deterministic DNN calls"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "verify-targeted-real-ubuntu2204-arm64:", "Pack workflow must keep a separate Ubuntu 22.04 ARM64 verification job"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "inputs.rid == 'ubuntu.22.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Ubuntu 22.04 ARM64 verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "runs-on: ubuntu-24.04-arm", "Ubuntu 22.04 ARM64 verification must use the native AArch64 Docker host"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982", "Ubuntu 22.04 ARM64 verification must pin the audited official image digest"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'test "$(uname -m)" = "aarch64"', "Ubuntu 22.04 ARM64 verification must reject non-AArch64 host and container execution"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'test "$(dpkg --print-architecture)" = "arm64"', "Ubuntu 22.04 ARM64 verification must require native Debian arm64 package architecture"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'test "$(docker info --format ''{{.Architecture}}'')" = "aarch64"', "Ubuntu 22.04 ARM64 verification must require a native AArch64 Docker server"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'test "${ID:-}" = "ubuntu"', "Ubuntu 22.04 ARM64 verification must require Ubuntu userspace"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'test "${VERSION_ID:-}" = "22.04"', "Ubuntu 22.04 ARM64 verification must require exact Ubuntu 22.04 userspace"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "UBUNTU_22_04_ARM64_CONSUMER_HOST_EVIDENCE", "Ubuntu 22.04 ARM64 verification must distinguish its host boundary"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "UBUNTU_22_04_ARM64_CONSUMER_IMAGE_EVIDENCE", "Ubuntu 22.04 ARM64 verification must retain official image evidence"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "UBUNTU_22_04_ARM64_CONSUMER_EVIDENCE", "Ubuntu 22.04 ARM64 verification must emit factual container evidence"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c", "Ubuntu 22.04 ARM64 verification must pin the audited PowerShell ARM64 archive hash"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "--channel 8.0 --architecture arm64", "Ubuntu 22.04 ARM64 verification must install a native ARM64 .NET 8 SDK"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "name: nupkg-managed", "Ubuntu 22.04 ARM64 verification must download the same-run managed artifact"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "name: nupkg-ubuntu.22.04-arm64-full", "Ubuntu 22.04 ARM64 verification must download only its exact runtime artifact"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-managed", "Ubuntu 22.04 ARM64 managed artifact must use an isolated path"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-ubuntu.22.04-arm64-full", "Ubuntu 22.04 ARM64 runtime artifact must use an isolated path"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "-ExpectedSyntheticRuntimeInputs false", "Ubuntu 22.04 ARM64 guards must require real provenance"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "-SelectedRid ubuntu.22.04-arm64", "Ubuntu 22.04 ARM64 guards must select the exact distro RID"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "-SelectedRuntimeProfile full", "Ubuntu 22.04 ARM64 guards must select only full"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "-RunNativeSmoke", "Ubuntu 22.04 ARM64 consumer must execute native and deterministic DNN calls"),
         @($workflowPath, $debianJobText, "verify-targeted-real-debian:", "Pack workflow must keep a separate Debian container verification job"),
         @($workflowPath, $debianJobText, "inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian verification must use the exact full-only non-synthetic non-publishing gate"),
         @($workflowPath, $debianJobText, "runs-on: ubuntu-24.04", "Debian container verification must use the supported hosted runner"),
@@ -336,6 +360,7 @@ foreach ($expectation in @(
         @($readmePath, $readmeText, "matrix-required modules plus provenance-recorded staged optional modules", "README must document provenance-derived full payload verification"),
         @($readmePath, $readmeText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "README must document the exact hosted targeted native-execution allowlist"),
         @($readmePath, $readmeText, 'Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm`', "README must document the exact native Ubuntu ARM64 consumer boundary"),
+        @($readmePath, $readmeText, 'Ubuntu 22.04 ARM64 full runs through a separate host-orchestrated `docker run` verifier', "README must document the exact Ubuntu 22.04 ARM64 container consumer boundary"),
         @($readmePath, $readmeText, 'Debian 12 full runs in a separate `debian:12` job container', "README must document Debian container-native consumer execution"),
         @($readmePath, $readmeText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "README must document Fedora container-native consumer execution"),
         @($readmePath, $readmeText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "README must document Rocky container-native consumer execution"),
@@ -344,6 +369,7 @@ foreach ($expectation in @(
         @($guidePath, $guideText, "matrix-required modules plus the ordered staged-optional subset recorded in provenance", "Linked runtime guide must document provenance-derived full payload verification"),
         @($guidePath, $guideText, "Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full", "Linked runtime guide must document the exact hosted targeted native-execution allowlist"),
         @($guidePath, $guideText, 'Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm`', "Linked runtime guide must document the exact native Ubuntu ARM64 consumer boundary"),
+        @($guidePath, $guideText, 'Ubuntu 22.04 ARM64 full runs through a separate host-orchestrated `docker run` verifier', "Linked runtime guide must document the exact Ubuntu 22.04 ARM64 container consumer boundary"),
         @($guidePath, $guideText, 'Debian 12 full runs in a separate `debian:12` job container', "Linked runtime guide must document Debian container-native consumer execution"),
         @($guidePath, $guideText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "Linked runtime guide must document Fedora container-native consumer execution"),
         @($guidePath, $guideText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "Linked runtime guide must document Rocky container-native consumer execution"),
@@ -391,6 +417,40 @@ Assert-OccurrenceCount `
     -Needle "-SelectedRuntimeProfile full" `
     -ExpectedCount 2 `
     -Issue "Both Ubuntu ARM64 guards must select only the full profile"
+
+Assert-ExactLine `
+    -Path $workflowPath `
+    -Text $ubuntu2204Arm64JobText `
+    -ExpectedLine "    if: `${{ inputs.rid == 'ubuntu.22.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Ubuntu 22.04 ARM64 targeted verification condition must remain exact, full-only, non-synthetic, and non-publishing"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntu2204Arm64JobText `
+    -Needle "inputs.rid ==" `
+    -ExpectedCount 1 `
+    -Issue "Ubuntu 22.04 ARM64 verifier must gate on exactly one RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntu2204Arm64JobText `
+    -Needle "inputs.runtime_profile ==" `
+    -ExpectedCount 1 `
+    -Issue "Ubuntu 22.04 ARM64 verifier must gate on exactly one runtime profile"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntu2204Arm64JobText `
+    -Needle "-SelectedRid ubuntu.22.04-arm64" `
+    -ExpectedCount 2 `
+    -Issue "Both Ubuntu 22.04 ARM64 guards must select the exact distro RID"
+
+Assert-OccurrenceCount `
+    -Path $workflowPath `
+    -Text $ubuntu2204Arm64JobText `
+    -Needle "-SelectedRuntimeProfile full" `
+    -ExpectedCount 2 `
+    -Issue "Both Ubuntu 22.04 ARM64 guards must select only full"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -582,6 +642,22 @@ foreach ($forbiddenArm64Text in @(
         -Text $ubuntuArm64JobText `
         -Needle $forbiddenArm64Text `
         -Issue "Ubuntu ARM64 verification must remain native, full-only, same-run, and free of loader overrides: $forbiddenArm64Text"
+}
+
+foreach ($forbiddenUbuntu2204Arm64Text in @(
+        "runtime_profile == 'mini'",
+        "LD_LIBRARY_PATH",
+        "x86_64",
+        "qemu",
+        "--platform",
+        "container:",
+        "run-id:",
+        "repository:")) {
+    Assert-NotContains `
+        -Path $workflowPath `
+        -Text $ubuntu2204Arm64JobText `
+        -Needle $forbiddenUbuntu2204Arm64Text `
+        -Issue "Ubuntu 22.04 ARM64 verification must remain native, full-only, same-run, and free of loader overrides or emulation: $forbiddenUbuntu2204Arm64Text"
 }
 
 Assert-NotContains `
@@ -784,6 +860,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
-Write-Host "Container targets: debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
+Write-Host "Container targets: ubuntu.22.04-arm64/full through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."
