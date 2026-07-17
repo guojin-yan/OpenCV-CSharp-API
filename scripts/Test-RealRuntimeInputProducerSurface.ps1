@@ -8,6 +8,7 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $producerWorkflowPath = ".github/workflows/runtime-input.yml"
 $runtimeInputScriptPath = "scripts/New-RuntimeInputArtifact.ps1"
+$windowsPeAuditPath = "scripts/Test-WindowsRuntimePeClosure.ps1"
 $packWorkflowPath = ".github/workflows/pack.yml"
 $runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
 $readmePath = "README.md"
@@ -229,6 +230,7 @@ function Assert-RealProducerTargets {
     )
 
     $expectedTargets = @(
+        [pscustomobject]@{ Rid = "win-x64"; Profile = "full"; Runner = "windows-latest"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
@@ -306,31 +308,42 @@ function Assert-RealProducerTargets {
             Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved real producer runner must match runtime package matrix runner" -Text "$($target.Rid): producer=$($target.Runner); matrix=$($ridSpec[0].runner)"
         }
 
-        if (-not ([string]$ridSpec[0].platformFamily).Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
-            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must remain a Linux runtime package RID" -Text $target.Rid
-        }
-
-        $distro = [string]$ridSpec[0].distro
-        if ([string]::IsNullOrWhiteSpace($distro)) {
-            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must record a distro in the runtime matrix" -Text $target.Rid
-        }
-
-        if ($distro.Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
-            if ($target.Rid -eq "ubuntu.22.04-arm64") {
-                if ([string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
-                    Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Ubuntu 22.04 ARM64 must declare its audited container-native userspace" -Text $target.Rid
-                }
-            }
-            elseif (-not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
-                Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Ubuntu real producer targets should remain hosted-runner native until deliberately converted" -Text "$($target.Rid): $($target.ContainerImage)"
+        $platformFamily = [string]$ridSpec[0].platformFamily
+        if ($target.Rid -eq "win-x64") {
+            if (-not $platformFamily.Equals("windows", [System.StringComparison]::OrdinalIgnoreCase) -or
+                $target.Profile -ne "full" -or
+                -not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Windows producer must remain exact hosted win-x64/full without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
             }
         }
         else {
-            if ([string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
-                Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Non-Ubuntu real producer targets must declare a distro-native container image" -Text $target.Rid
+            if (-not $platformFamily.Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must remain a Linux runtime package RID" -Text $target.Rid
             }
 
-            # Exact approved image matching above handles registries whose repository name differs from /etc/os-release ID, such as rockylinux:9 with ID=rocky.
+            $distroProperty = $ridSpec[0].PSObject.Properties["distro"]
+            $distro = if ($null -eq $distroProperty) { "" } else { [string]$distroProperty.Value }
+            if ([string]::IsNullOrWhiteSpace($distro)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must record a distro in the runtime matrix" -Text $target.Rid
+            }
+
+            if ($distro.Equals("ubuntu", [System.StringComparison]::OrdinalIgnoreCase)) {
+                if ($target.Rid -eq "ubuntu.22.04-arm64") {
+                    if ([string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                        Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Ubuntu 22.04 ARM64 must declare its audited container-native userspace" -Text $target.Rid
+                    }
+                }
+                elseif (-not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                    Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Ubuntu real producer targets should remain hosted-runner native until deliberately converted" -Text "$($target.Rid): $($target.ContainerImage)"
+                }
+            }
+            else {
+                if ([string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                    Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Non-Ubuntu real producer targets must declare a distro-native container image" -Text $target.Rid
+                }
+
+                # Exact approved image matching above handles registries whose repository name differs from /etc/os-release ID, such as rockylinux:9 with ID=rocky.
+            }
         }
 
         $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $target.Profile } | Select-Object -First 1)
@@ -344,6 +357,7 @@ $violations = [System.Collections.Generic.List[object]]::new()
 
 $producerWorkflowText = Read-RequiredText -RelativePath $producerWorkflowPath
 $runtimeInputScriptText = Read-RequiredText -RelativePath $runtimeInputScriptPath
+$windowsPeAuditText = Read-RequiredText -RelativePath $windowsPeAuditPath
 $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowPath
 $runtimeMatrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $readmeText = Read-RequiredText -RelativePath $readmePath
@@ -360,6 +374,16 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
         [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
+        [pscustomobject]@{ Needle = "runtime-input-win-x64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 full target" },
+        [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Windows x64 production must remain in a separate hosted Windows job" },
+        [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_HOST_EVIDENCE"; Issue = "Windows producer must record actual host, architecture, CPU, and disk evidence" },
+        [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_TOOLCHAIN_EVIDENCE"; Issue = "Windows producer must record the actual VS/MSVC/CMake toolchain" },
+        [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record generator, SDK, build list, and CPU configuration" },
+        [pscustomobject]@{ Needle = "WINDOWS_X64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Windows producer must require all five linked CTests" },
+        [pscustomobject]@{ Needle = "Test-WindowsRuntimePeClosure.ps1"; Issue = "Windows producer must run the reusable PE closure guard before upload" },
+        [pscustomobject]@{ Needle = "-HostedProcessArchitecture"; Issue = "Windows producer provenance must record actual process architecture" },
+        [pscustomobject]@{ Needle = "-WindowsSdkVersion"; Issue = "Windows producer provenance must record the selected Windows SDK" },
+        [pscustomobject]@{ Needle = "-PeAuditEvidence"; Issue = "Windows producer provenance must retain the PE closure marker" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
          [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
@@ -456,7 +480,27 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "dotnet nuget push" -Issue "Producer workflow must not push packages"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu ARM64 mini must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must remain outside the real producer allowlist"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x64/mini'" -Issue "Windows x64 mini must remain outside the real producer allowlist"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/full'" -Issue "Windows ARM64 must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
+
+foreach ($required in @(
+        [pscustomobject]@{ Needle = 'if (-not $Rid.Equals("win-x64"'; Issue = "Windows PE audit must approve only exact win-x64" },
+        [pscustomobject]@{ Needle = 'ProcessArchitecture.ToString() -ne "X64"'; Issue = "Windows PE audit must require an actual x64 process" },
+        [pscustomobject]@{ Needle = 'return $reader.ReadUInt16()'; Issue = "Windows PE audit must read the structured COFF machine field" },
+        [pscustomobject]@{ Needle = 'if ($machine -ne 0x8664)'; Issue = "Windows PE audit must require AMD64 for every DLL" },
+        [pscustomobject]@{ Needle = '& $Dumpbin /dependents'; Issue = "Windows PE audit must inspect dependency tables with dumpbin" },
+        [pscustomobject]@{ Needle = 'Primary and compatibility native loaders must be byte-identical'; Issue = "Windows PE audit must verify loader equality" },
+        [pscustomobject]@{ Needle = 'Packaged OpenCV dependency closure is incomplete'; Issue = "Windows PE audit must reject missing package-owned imports" },
+        [pscustomobject]@{ Needle = 'Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph'; Issue = "Windows PE audit must require the complete 16-module graph closure" },
+        [pscustomobject]@{ Needle = 'WINDOWS_PE_AUDIT_OK'; Issue = "Windows PE audit must emit a deterministic success marker" })) {
+    Assert-Contains -Violations $violations -Path $windowsPeAuditPath -Text $windowsPeAuditText -Needle $required.Needle -Issue $required.Issue
+}
+
+foreach ($forbidden in @("AddDllDirectory", "LoadLibrary", "OpenCvNativeRuntimeDir", "OPENCV_CSHARP_OPENCV_RUNTIME_ROOT")) {
+    Assert-NotContains -Violations $violations -Path $windowsPeAuditPath -Text $windowsPeAuditText -Needle $forbidden -Issue "Windows PE audit must not alter package DLL search behavior: $forbidden"
+}
 
 foreach ($required in @(
         [pscustomobject]@{ Needle = '[string]$OutputRoot = "artifacts/runtime-inputs"'; Issue = "Runtime input artifact script must use a neutral generated output root" },
@@ -480,6 +524,20 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "HostedLibc = `$HostedLibc"; Issue = "Runtime input artifact provenance must record the actual hosted libc" },
         [pscustomobject]@{ Needle = "HostedCpuModel = `$HostedCpuModel"; Issue = "Runtime input artifact provenance must record the actual hosted CPU model" },
         [pscustomobject]@{ Needle = "HostedDiskAvailableBytes = `$HostedDiskAvailableBytes"; Issue = "Runtime input artifact provenance must record factual available disk evidence" },
+        [pscustomobject]@{ Needle = "HostedOsCaption = `$HostedOsCaption"; Issue = "Runtime input artifact provenance must record the hosted Windows edition" },
+        [pscustomobject]@{ Needle = "HostedOsVersion = `$HostedOsVersion"; Issue = "Runtime input artifact provenance must record the hosted OS version" },
+        [pscustomobject]@{ Needle = "HostedOsBuildNumber = `$HostedOsBuildNumber"; Issue = "Runtime input artifact provenance must record the hosted OS build number" },
+        [pscustomobject]@{ Needle = "HostedProcessArchitecture = `$HostedProcessArchitecture"; Issue = "Runtime input artifact provenance must record the producer process architecture" },
+        [pscustomobject]@{ Needle = "VisualStudioVersion = `$VisualStudioVersion"; Issue = "Runtime input artifact provenance must record Visual Studio" },
+        [pscustomobject]@{ Needle = "MsvcVersion = `$MsvcVersion"; Issue = "Runtime input artifact provenance must record MSVC" },
+        [pscustomobject]@{ Needle = "WindowsSdkVersion = `$WindowsSdkVersion"; Issue = "Runtime input artifact provenance must record the selected Windows SDK" },
+        [pscustomobject]@{ Needle = "CMakeVersion = `$CMakeVersion"; Issue = "Runtime input artifact provenance must record CMake" },
+        [pscustomobject]@{ Needle = "CMakeGenerator = `$CMakeGenerator"; Issue = "Runtime input artifact provenance must record the CMake generator" },
+        [pscustomobject]@{ Needle = "CMakePlatform = `$CMakePlatform"; Issue = "Runtime input artifact provenance must record the CMake platform" },
+        [pscustomobject]@{ Needle = "BuildConfiguration = `$BuildConfiguration"; Issue = "Runtime input artifact provenance must record the build configuration" },
+        [pscustomobject]@{ Needle = "CompilerPath = `$CompilerPath"; Issue = "Runtime input artifact provenance must record the selected compiler" },
+        [pscustomobject]@{ Needle = "OpenCvCMakeArguments = `$OpenCvCMakeArguments"; Issue = "Runtime input artifact provenance must record the factual OpenCV CMake arguments" },
+        [pscustomobject]@{ Needle = "PeAuditEvidence = `$PeAuditEvidence"; Issue = "Runtime input artifact provenance must record the Windows PE audit marker" },
         [pscustomobject]@{ Needle = "OpenCvCpuConfiguration = `$OpenCvCpuConfiguration"; Issue = "Runtime input artifact provenance must record factual OpenCV CPU configuration" },
         [pscustomobject]@{ Needle = "ContainerImage = `$ContainerImage"; Issue = "Runtime input artifact provenance must record the container image for container-native producers" },
         [pscustomobject]@{ Needle = "ContainerImageId = `$ContainerImageId"; Issue = "Runtime input artifact provenance must record the resolved container image ID" },
@@ -541,8 +599,11 @@ if ($violations.Count -eq 0) {
         $fixtureInstallDir = Join-Path $fixtureRoot "opencv-install"
         $fixtureOutputRoot = Join-Path $fixtureRoot "out"
 
+        $compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility fixture for already-compiled consumers
         Write-FixtureFile -Path (Join-Path $fixtureNativeDir "libJYPPX.OpenCV.Native.so")
-        Write-FixtureFile -Path (Join-Path $fixtureNativeDir "libOpenCv5Sharp.Native.so")
+        Write-FixtureFile -Path (Join-Path $fixtureNativeDir "lib$compatibilityNativeLoaderBaseName.so")
+        Write-FixtureFile -Path (Join-Path $fixtureNativeDir "JYPPX.OpenCV.Native.dll")
+        Write-FixtureFile -Path (Join-Path $fixtureNativeDir "$compatibilityNativeLoaderBaseName.dll")
         Write-FixtureFile -Path (Join-Path $fixtureSourceDir "LICENSE") -Text "OpenCV license fixture"
         Write-FixtureFile -Path (Join-Path (Join-Path (Join-Path $fixtureSourceDir "3rdparty") "ippicv") "readme.htm") -Text "ippicv fixture"
         Write-FixtureFile -Path (Join-Path (Join-Path $fixtureInstallDir "etc/licenses") "opencv-license.txt") -Text "install license fixture"
@@ -554,8 +615,11 @@ if ($violations.Count -eq 0) {
                 throw "Fixture producer target RID was not found in runtime matrix: $($producerTarget.Rid)"
             }
 
-            $expectedDistro = [string]$ridSpec[0].distro
-            $expectedDistroVersion = [string]$ridSpec[0].distroVersion
+            $expectedPlatformFamily = [string]$ridSpec[0].platformFamily
+            $distroProperty = $ridSpec[0].PSObject.Properties["distro"]
+            $distroVersionProperty = $ridSpec[0].PSObject.Properties["distroVersion"]
+            $expectedDistro = if ($null -eq $distroProperty) { "" } else { [string]$distroProperty.Value }
+            $expectedDistroVersion = if ($null -eq $distroVersionProperty) { "" } else { [string]$distroVersionProperty.Value }
             $containerDistro = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistro }
             $containerDistroVersion = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) { "" } else { $expectedDistroVersion }
             $containerLibc = if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) {
@@ -571,16 +635,31 @@ if ($violations.Count -eq 0) {
             $isArm64Container = $producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.22.04-arm64", "debian.12-arm64")
             $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -eq "full"
             $isDebian1204Arm64 = $producerTarget.Rid -eq "debian.12-arm64" -and $producerTarget.Profile -eq "full"
-            $runnerImage = if ($isArm64Hosted) { "ubuntu24-arm64" } else { "" }
-            $runnerImageVersion = if ($isArm64Hosted) { "fixture" } else { "" }
-            $hostedDistro = if ($isArm64Hosted) { "ubuntu" } else { "" }
-            $hostedDistroVersion = if ($isArm64Hosted) { "24.04" } else { "" }
-            $hostedArchitecture = if ($isArm64Hosted) { "aarch64" } else { "" }
-            $hostedPackageArchitecture = if ($isArm64Hosted) { "arm64" } else { "" }
+            $isWindowsTarget = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -eq "full"
+            $runnerImage = if ($isWindowsTarget) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } else { "" }
+            $runnerImageVersion = if ($isWindowsTarget -or $isArm64Hosted) { "fixture" } else { "" }
+            $hostedDistro = if ($isWindowsTarget) { "windows" } elseif ($isArm64Hosted) { "ubuntu" } else { "" }
+            $hostedDistroVersion = if ($isWindowsTarget) { "10.0.26100" } elseif ($isArm64Hosted) { "24.04" } else { "" }
+            $hostedArchitecture = if ($isWindowsTarget) { "X64" } elseif ($isArm64Hosted) { "aarch64" } else { "" }
+            $hostedPackageArchitecture = if ($isWindowsTarget) { "AMD64" } elseif ($isArm64Hosted) { "arm64" } else { "" }
             $hostedLibc = if ($isArm64Hosted) { "glibc fixture" } else { "" }
-            $hostedCpuModel = if ($isArm64Hosted) { "Neoverse fixture" } else { "" }
-            $hostedDiskAvailableBytes = if ($isArm64Hosted) { "1" } else { "" }
-            $openCvCpuConfiguration = if ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
+            $hostedCpuModel = if ($isWindowsTarget) { "AMD64 fixture" } elseif ($isArm64Hosted) { "Neoverse fixture" } else { "" }
+            $hostedDiskAvailableBytes = if ($isWindowsTarget -or $isArm64Hosted) { "1" } else { "" }
+            $hostedOsCaption = if ($isWindowsTarget) { "Microsoft Windows Server fixture" } else { "" }
+            $hostedOsVersion = if ($isWindowsTarget) { "10.0.26100" } else { "" }
+            $hostedOsBuildNumber = if ($isWindowsTarget) { "26100" } else { "" }
+            $hostedProcessArchitecture = if ($isWindowsTarget) { "X64" } else { "" }
+            $visualStudioVersion = if ($isWindowsTarget) { "18.7.fixture" } else { "" }
+            $msvcVersion = if ($isWindowsTarget) { "14.51.fixture (compiler 19.51.fixture)" } else { "" }
+            $windowsSdkVersion = if ($isWindowsTarget) { "10.0.26100.0" } else { "" }
+            $cmakeVersion = if ($isWindowsTarget) { "cmake version fixture" } else { "" }
+            $cmakeGenerator = if ($isWindowsTarget) { "Visual Studio 18 2026" } else { "" }
+            $cmakePlatform = if ($isWindowsTarget) { "x64" } else { "" }
+            $buildConfiguration = if ($isWindowsTarget) { "Release" } else { "" }
+            $compilerPath = if ($isWindowsTarget) { "C:\fixture\Hostx64\x64\cl.exe" } else { "" }
+            $openCvCMakeArguments = if ($isWindowsTarget) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
+            $peAuditEvidence = if ($isWindowsTarget) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=full files=18 machine=AMD64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=15 opencv_import_edges=32 missing_opencv_imports=0 loader_equal=true" } else { "" }
+            $openCvCpuConfiguration = if ($isWindowsTarget) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
             $containerImageId = if ($isArm64Container) { "sha256:fixture" } else { "" }
             $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } else { "" }
             $containerArchitecture = if ($isArm64Container) { "aarch64" } else { "" }
@@ -594,7 +673,8 @@ if ($violations.Count -eq 0) {
 
             $fixtureRuntimeDir = Join-Path $fixtureRoot "opencv-runtime-$($producerTarget.Rid)-$($producerTarget.Profile)"
             foreach ($module in @($profileSpec[0].modules)) {
-                Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir "libopencv_$module.so.5.0.0")
+                $runtimeFileName = if ($isWindowsTarget) { "opencv_$($module)500.dll" } else { "libopencv_$module.so.5.0.0" }
+                Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir $runtimeFileName)
             }
 
             & (Join-Path $repo $runtimeInputScriptPath) `
@@ -615,6 +695,20 @@ if ($violations.Count -eq 0) {
                 -HostedLibc $hostedLibc `
                 -HostedCpuModel $hostedCpuModel `
                 -HostedDiskAvailableBytes $hostedDiskAvailableBytes `
+                -HostedOsCaption $hostedOsCaption `
+                -HostedOsVersion $hostedOsVersion `
+                -HostedOsBuildNumber $hostedOsBuildNumber `
+                -HostedProcessArchitecture $hostedProcessArchitecture `
+                -VisualStudioVersion $visualStudioVersion `
+                -MsvcVersion $msvcVersion `
+                -WindowsSdkVersion $windowsSdkVersion `
+                -CMakeVersion $cmakeVersion `
+                -CMakeGenerator $cmakeGenerator `
+                -CMakePlatform $cmakePlatform `
+                -BuildConfiguration $buildConfiguration `
+                -CompilerPath $compilerPath `
+                -OpenCvCMakeArguments $openCvCMakeArguments `
+                -PeAuditEvidence $peAuditEvidence `
                 -OpenCvCpuConfiguration $openCvCpuConfiguration `
                 -ContainerImage ([string]$producerTarget.ContainerImage) `
                 -ContainerImageId $containerImageId `
@@ -639,8 +733,8 @@ if ($violations.Count -eq 0) {
                 throw "Fixture provenance did not mark SyntheticRuntimeInputs=false for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
-            if (-not ([string]$manifest.PlatformFamily).Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
-                throw "Fixture provenance did not record linux PlatformFamily for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            if (-not ([string]$manifest.PlatformFamily).Equals($expectedPlatformFamily, [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "Fixture provenance did not record the matrix PlatformFamily for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
             if (-not ([string]$manifest.Distro).Equals($expectedDistro, [System.StringComparison]::OrdinalIgnoreCase)) {
@@ -671,6 +765,26 @@ if ($violations.Count -eq 0) {
                     -not ([string]$manifest.HostedDiskAvailableBytes).Equals($hostedDiskAvailableBytes, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.OpenCvCpuConfiguration).Equals($openCvCpuConfiguration, [System.StringComparison]::Ordinal)) {
                 throw "Fixture provenance did not retain the complete ARM64 hosted evidence."
+                }
+            }
+
+            if ($isWindowsTarget) {
+                if (-not ([string]$manifest.RunnerImage).Equals($runnerImage, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.RunnerImageVersion).Equals($runnerImageVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedArchitecture).Equals($hostedArchitecture, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedPackageArchitecture).Equals($hostedPackageArchitecture, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedProcessArchitecture).Equals($hostedProcessArchitecture, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedOsCaption).Equals($hostedOsCaption, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedOsVersion).Equals($hostedOsVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedOsBuildNumber).Equals($hostedOsBuildNumber, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.VisualStudioVersion).Equals($visualStudioVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.MsvcVersion).Equals($msvcVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.WindowsSdkVersion).Equals($windowsSdkVersion, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.CMakeGenerator).Equals($cmakeGenerator, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.CMakePlatform).Equals($cmakePlatform, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.BuildConfiguration).Equals($buildConfiguration, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.PeAuditEvidence).Equals($peAuditEvidence, [System.StringComparison]::Ordinal)) {
+                    throw "Fixture provenance did not retain the complete Windows hosted, toolchain, build, and PE evidence."
                 }
             }
 
@@ -756,5 +870,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

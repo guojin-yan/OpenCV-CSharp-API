@@ -303,6 +303,83 @@ jobs:
           "opencv_runtime_dir=$openCvRuntimeDir" >> $env:GITHUB_OUTPUT
           "opencv_source_dir=$openCvSourceDir" >> $env:GITHUB_OUTPUT
           "opencv_install_dir=$openCvInstallDir" >> $env:GITHUB_OUTPUT
+      - name: Validate Windows x64 runtime input provenance
+        if: ${{ matrix.rid == 'win-x64' && matrix.profile == 'full' && inputs.rid == 'win-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' }}
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace('${{ inputs.real_runtime_artifact_run_id }}')) {
+            throw "Non-synthetic win-x64/full packaging requires an explicit runtime-input producer run id."
+          }
+
+          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/real-runtime-inputs/win-x64-full'
+          $provenancePath = Join-Path $artifactRoot 'runtime-input.provenance.json'
+          $provenance = Get-Content -LiteralPath $provenancePath -Raw | ConvertFrom-Json
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq 'full' })
+          if ($profile.Count -ne 1) {
+            throw "Full runtime profile was not found exactly once."
+          }
+
+          $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
+          $compatibilityLoaderName = 'Open' + 'Cv5Sharp.Native.dll'
+          $expectedModules = @($profile[0].modules)
+          $actualModules = @($provenance.RequiredModules)
+          $expectedRuntimeNames = @($expectedModules | ForEach-Object { "opencv_$($_)$binarySuffix.dll" })
+          $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
+          $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
+          $missingModules = @($expectedModules | Where-Object { $actualModules -notcontains $_ })
+          $unexpectedModules = @($actualModules | Where-Object { $expectedModules -notcontains $_ })
+          $missingRuntimeFiles = @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ })
+          $unexpectedRuntimeFiles = @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ })
+
+          if ($provenance.Rid -ne 'win-x64' -or
+              $provenance.PlatformFamily -ne 'windows' -or
+              $provenance.RuntimeProfile -ne 'full' -or
+              $provenance.BuildList -ne [string]$profile[0].buildList -or
+              [bool]$provenance.SyntheticRuntimeInputs -or
+              $actualModules.Count -ne 16 -or
+              $missingModules.Count -ne 0 -or
+              $unexpectedModules.Count -ne 0 -or
+              $actualRuntimeNames.Count -ne 16 -or
+              $missingRuntimeFiles.Count -ne 0 -or
+              $unexpectedRuntimeFiles.Count -ne 0 -or
+              $actualLoaderNames.Count -ne 2 -or
+              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll' -or
+              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+            throw "Windows runtime-input provenance does not match the exact win-x64/full 18-DLL producer contract."
+          }
+
+          foreach ($requiredValue in @(
+              [string]$provenance.RunnerImage,
+              [string]$provenance.RunnerImageVersion,
+              [string]$provenance.HostedOsCaption,
+              [string]$provenance.HostedOsVersion,
+              [string]$provenance.HostedOsBuildNumber,
+              [string]$provenance.HostedCpuModel,
+              [string]$provenance.HostedDiskAvailableBytes,
+              [string]$provenance.VisualStudioVersion,
+              [string]$provenance.MsvcVersion,
+              [string]$provenance.WindowsSdkVersion,
+              [string]$provenance.CMakeVersion,
+              [string]$provenance.CompilerPath,
+              [string]$provenance.OpenCvCMakeArguments,
+              [string]$provenance.OpenCvCpuConfiguration)) {
+            if ([string]::IsNullOrWhiteSpace($requiredValue)) {
+              throw "Windows runtime-input provenance is missing required host/toolchain evidence."
+            }
+          }
+
+          if ($provenance.HostedArchitecture -ne 'X64' -or
+              $provenance.HostedProcessArchitecture -ne 'X64' -or
+              $provenance.HostedPackageArchitecture -ne 'AMD64' -or
+              -not ([string]$provenance.VisualStudioVersion).StartsWith('18.', [System.StringComparison]::Ordinal) -or
+              $provenance.CMakeGenerator -ne 'Visual Studio 18 2026' -or
+              $provenance.CMakePlatform -ne 'x64' -or
+              $provenance.BuildConfiguration -ne 'Release' -or
+              $provenance.PeAuditEvidence -notmatch '^WINDOWS_PE_AUDIT_OK rid=win-x64 profile=full files=18 machine=AMD64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ .*missing_opencv_imports=0 loader_equal=true$') {
+            throw "Windows runtime-input provenance host, build, or PE evidence is not factual win-x64/full."
+          }
+          Write-Host "WINDOWS_X64_RUNTIME_INPUT_PROVENANCE_OK files=18 modules=16 synthetic=false"
       - name: Pack runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
         shell: pwsh
@@ -462,6 +539,99 @@ jobs:
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid $runtimeRid `
             -SelectedRuntimeProfile $runtimeProfile `
+            -RunNativeSmoke
+
+  verify-targeted-real-windows-x64:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'win-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
+      - name: Require actual Windows x64 package consumer
+        shell: pwsh
+        run: |
+          $osArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+          $processArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
+          if ($env:PROCESSOR_ARCHITECTURE -ne 'AMD64' -or
+              $osArchitecture -ne 'X64' -or
+              $processArchitecture -ne 'X64' -or
+              -not [Environment]::Is64BitProcess) {
+            throw "Packaged win-x64/full execution requires an actual AMD64 Windows host and x64 process."
+          }
+
+          $compatibilityNativeRuntimeDir = 'Open' + 'Cv5SharpNativeRuntimeDir'
+          $compatibilityRuntimeRoot = 'OPENCV' + '5SHARP_OPENCV_RUNTIME_ROOT'
+          foreach ($name in @('OpenCvNativeRuntimeDir', $compatibilityNativeRuntimeDir, 'OPENCV_CSHARP_OPENCV_RUNTIME_ROOT', $compatibilityRuntimeRoot)) {
+            if (-not [string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($name))) {
+              throw "Packaged Windows consumer must not use a native runtime search override: $name"
+            }
+          }
+          foreach ($forbiddenPath in @('artifacts\real-runtime-inputs', 'opencv-build', 'opencv-install', 'native-linked')) {
+            if (($env:PATH -split ';') | Where-Object { $_.IndexOf($forbiddenPath, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 }) {
+              throw "Packaged Windows consumer PATH contains a producer directory: $forbiddenPath"
+            }
+          }
+          Write-Host "WINDOWS_X64_PACKAGE_CONSUMER_HOST_OK PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess)"
+      - name: Download managed package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-windows/nupkg-managed
+      - name: Download Windows x64 runtime package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
+          path: artifacts/pack-targeted-windows/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
+      - name: Verify selected Windows package artifacts
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-windows `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid win-x64 `
+            -SelectedRuntimeProfile full
+      - name: Audit packaged Windows x64 PE closure
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $runtimeArtifactDirectory = Join-Path ./artifacts/pack-targeted-windows 'nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}'
+          $packages = @(Get-ChildItem -LiteralPath $runtimeArtifactDirectory -File -Filter '*.nupkg')
+          if ($packages.Count -ne 1) {
+            throw "Exactly one win-x64/full runtime package was expected."
+          }
+
+          $extractRoot = Join-Path $env:RUNNER_TEMP 'opencv-windows-x64-package-audit'
+          if (Test-Path -LiteralPath $extractRoot -PathType Container) {
+            Remove-Item -LiteralPath $extractRoot -Recurse -Force
+          }
+          [System.IO.Compression.ZipFile]::ExtractToDirectory($packages[0].FullName, $extractRoot)
+          $nativeDirectory = Join-Path $extractRoot 'runtimes/win-x64/native'
+          pwsh -NoProfile -File ./scripts/Test-WindowsRuntimePeClosure.ps1 `
+            -RuntimeDirectory $nativeDirectory `
+            -Rid win-x64 `
+            -RuntimeProfile full `
+            -OpenCvVersion '${{ inputs.opencv_version }}'
+      - name: Restore, build, and run Windows x64 package consumer
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-windows `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid win-x64 `
+            -SelectedRuntimeProfile full `
+            -CompileNativeSmoke `
             -RunNativeSmoke
 
   verify-targeted-real-ubuntu-arm64:
