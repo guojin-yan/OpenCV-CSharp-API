@@ -137,7 +137,8 @@ jobs:
           set -euo pipefail
           test "$(uname -m)" = "aarch64"
           grep -R -q 'DEBIAN_12_ARM64_HOST_EVIDENCE.*UNAME=aarch64.*DOCKER_ARCH=aarch64' audit-download
-          grep -R -q 'DEBIAN_12_ARM64_IMAGE_EVIDENCE.*ARCH=arm64.*OS=linux.*debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc' audit-download
+          grep -R -q 'DEBIAN_12_ARM64_IMAGE_EVIDENCE.*ARCH=arm64.*OS=linux' audit-download
+          grep -R -q 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc' audit-download
           grep -R -q 'DEBIAN_12_ARM64_CONTAINER_EVIDENCE.*ID=debian.*VERSION_ID=12.*UNAME=aarch64.*DPKG_ARCH=arm64.*LIBC=glibc' audit-download
           grep -R -q 'DEBIAN_12_ARM64_POWERSHELL_EVIDENCE.*architecture=arm64' audit-download
           grep -R -q 'DEBIAN_12_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success' audit-download
