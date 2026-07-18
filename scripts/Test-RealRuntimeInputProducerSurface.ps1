@@ -503,6 +503,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'return $reader.ReadUInt16()'; Issue = "Windows PE audit must read the structured COFF machine field" },
         [pscustomobject]@{ Needle = 'if ($machine -ne 0x8664)'; Issue = "Windows PE audit must require AMD64 for every DLL" },
         [pscustomobject]@{ Needle = '& $Dumpbin /dependents'; Issue = "Windows PE audit must inspect dependency tables with dumpbin" },
+        [pscustomobject]@{ Needle = 'param([string]$ExplicitPath = "")'; Issue = "Windows PE audit must allow package consumers to discover Hostx64/x64 dumpbin without a producer path" },
         [pscustomobject]@{ Needle = 'Primary and compatibility native loaders must be byte-identical'; Issue = "Windows PE audit must verify loader equality" },
         [pscustomobject]@{ Needle = 'Packaged OpenCV dependency closure is incomplete'; Issue = "Windows PE audit must reject missing package-owned imports" },
         [pscustomobject]@{ Needle = 'Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph'; Issue = "Windows PE audit must require the complete 16-module graph closure" },

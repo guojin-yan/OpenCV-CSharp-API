@@ -42,7 +42,7 @@ function Resolve-InputDirectory {
 }
 
 function Resolve-Dumpbin {
-    param([Parameter(Mandatory = $true)][string]$ExplicitPath)
+    param([string]$ExplicitPath = "")
 
     if (-not [string]::IsNullOrWhiteSpace($ExplicitPath)) {
         if (-not (Test-Path -LiteralPath $ExplicitPath -PathType Leaf)) {
