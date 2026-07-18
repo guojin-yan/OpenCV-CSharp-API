@@ -475,7 +475,7 @@ jobs:
           $profileName = '${{ matrix.profile }}'
           $extraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
 
-          $plan = & pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
+          $plan = & ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -Rid '${{ matrix.rid }}' `
             -BuildList ([string]$profile[0].buildList) `
@@ -604,7 +604,7 @@ jobs:
           "excluded_foreign_tool_directories=$excludedForeignToolDirectoriesJson" >> $env:GITHUB_OUTPUT
 
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
-          pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
+          & ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -WorkspaceRoot $workspaceRoot `
             -Rid '${{ matrix.rid }}' `

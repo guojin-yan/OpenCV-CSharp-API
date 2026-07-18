@@ -381,6 +381,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_HOST_EVIDENCE"; Issue = "Windows producer must record actual host, architecture, CPU, and disk evidence" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_TOOLCHAIN_EVIDENCE"; Issue = "Windows producer must record the actual VS/MSVC/CMake toolchain" },
         [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_PATH_SANITIZED"; Issue = "Windows producer must record its build-scoped foreign tool PATH exclusions" },
+        [pscustomobject]@{ Needle = "`$plan = & ./scripts/Build-OpenCV.ps1"; Issue = "Windows profile plan must bind leading-hyphen CMake arguments directly in the current PowerShell process" },
+        [pscustomobject]@{ Needle = "& ./scripts/Build-OpenCV.ps1"; Issue = "Windows OpenCV build must bind profile-specific CMake arguments directly in the current PowerShell process" },
         [pscustomobject]@{ Needle = "`$foreignToolPattern = '(?i)(?:^|[\\/])(?:mingw(?:32|64)?|msys(?:2|64)?|cygwin(?:64)?)(?:[\\/]|`$)'"; Issue = "Windows producer must exclude named MinGW, MSYS, and Cygwin tool directories from the OpenCV build PATH" },
         [pscustomobject]@{ Needle = "Get-Command -Name `$tool -CommandType Application -All"; Issue = "Windows producer must remove every PATH directory that exposes a CMake generic compiler candidate, including bundled Strawberry GCC" },
         [pscustomobject]@{ Needle = "`$genericCompilerDirectorySet.Contains"; Issue = "Windows producer PATH sanitization must use the factual generic compiler directory set" },
