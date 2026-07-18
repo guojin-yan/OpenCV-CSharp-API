@@ -183,10 +183,21 @@ jobs:
               $cache -notmatch '(?m)^CMAKE_GENERATOR_PLATFORM:INTERNAL=ARM64\r?$') {
             throw "CMake did not retain the exact Visual Studio 18 ARM64 generator boundary."
           }
-          $sdkVersion = [regex]::Match($cache, '(?m)^CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION:STRING=([^\r\n]+)$').Groups[1].Value
-          if ([string]::IsNullOrWhiteSpace($sdkVersion)) {
-            throw "CMake did not record the selected Windows SDK version."
+          $probeProject = Get-ChildItem -LiteralPath $buildRoot -Recurse -File -Filter opencv_windows_arm64_probe.vcxproj | Select-Object -First 1
+          if ($null -eq $probeProject) {
+            throw "Generated Windows ARM64 probe project was not found."
           }
+          [xml]$project = Get-Content -LiteralPath $probeProject.FullName -Raw
+          $sdkVersions = @(
+            $project.SelectNodes("//*[local-name()='WindowsTargetPlatformVersion']") |
+              ForEach-Object { $_.InnerText.Trim() } |
+              Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+              Sort-Object -Unique
+          )
+          if ($sdkVersions.Count -ne 1) {
+            throw "Generated Windows ARM64 probe project did not record exactly one Windows SDK version."
+          }
+          $sdkVersion = $sdkVersions[0]
 
           $probeDll = Join-Path $buildRoot "Release/opencv_windows_arm64_probe.dll"
           $probeExe = Join-Path $buildRoot "Release/opencv_windows_arm64_probe_host.exe"
