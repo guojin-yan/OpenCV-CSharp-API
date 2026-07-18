@@ -67,11 +67,14 @@ jobs:
           $os = Get-CimInstance Win32_OperatingSystem
           $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
           $computer = Get-CimInstance Win32_ComputerSystem
-          $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='D:'"
+          $workspaceDrive = [System.IO.Path]::GetPathRoot($env:GITHUB_WORKSPACE).TrimEnd(
+            [System.IO.Path]::DirectorySeparatorChar,
+            [System.IO.Path]::AltDirectorySeparatorChar)
+          $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='$workspaceDrive'"
           if ($null -eq $cpu -or $null -eq $computer -or $null -eq $disk) {
             throw "Windows ARM64 hosted CPU, memory, or workspace disk evidence was not available."
           }
-          Write-Host "WINDOWS_ARM64_RESOURCE_PROBE CPU=$($cpu.Name) CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)"
+          Write-Host "WINDOWS_ARM64_RESOURCE_PROBE WORKSPACE_DRIVE=$workspaceDrive CPU=$($cpu.Name) CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)"
           if ([long]$disk.FreeSpace -lt 4GB -or [long]$computer.TotalPhysicalMemory -lt 8GB) {
             throw "Windows ARM64 hosted resources are below the minimum audit boundary: memory=$($computer.TotalPhysicalMemory), disk=$($disk.FreeSpace)."
           }
@@ -217,7 +220,7 @@ jobs:
           }
 
           $evidence = @(
-            "WINDOWS_ARM64_HOST_EVIDENCE ImageOS=$($env:ImageOS) ImageVersion=$($env:ImageVersion) Caption=$($os.Caption) OSVersion=$($os.Version) BuildNumber=$($os.BuildNumber) RUNNER_ARCH=$($env:RUNNER_ARCH) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) PROCESSOR_ARCHITEW6432=$($env:PROCESSOR_ARCHITEW6432) CPU=$($cpu.Name) CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)",
+            "WINDOWS_ARM64_HOST_EVIDENCE ImageOS=$($env:ImageOS) ImageVersion=$($env:ImageVersion) Caption=$($os.Caption) OSVersion=$($os.Version) BuildNumber=$($os.BuildNumber) RUNNER_ARCH=$($env:RUNNER_ARCH) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) PROCESSOR_ARCHITEW6432=$($env:PROCESSOR_ARCHITEW6432) WORKSPACE_DRIVE=$workspaceDrive CPU=$($cpu.Name) CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)",
             "WINDOWS_ARM64_TOOLCHAIN_EVIDENCE VisualStudioVersion=$($visualStudio.installationVersion) VisualStudioPath=$($visualStudio.installationPath) MSVCToolsetVersion=$msvcToolsetVersion MSVCCompilerVersion=$msvcCompilerVersion Compiler=$($cl.FullName) Linker=$link Dumpbin=$dumpbin Generator=$($describe.Generator) Platform=$($describe.Platform) BuildSystem=$($describe.BuildSystem) WindowsSDK=$sdkVersion CMake=$cmakeVersion CMakePath=$cmakePath Ninja=$ninjaVersion PowerShell=$powerShellVersion PowerShellPath=$pwshPath DotNetPath=$dotnetPath",
             "WINDOWS_ARM64_DOTNET_EVIDENCE $((@($dotnetInfo | Select-String -Pattern 'Version:|Architecture:|RID:') | ForEach-Object { $_.Line.Trim() }) -join ';')",
             "WINDOWS_ARM64_PE_EVIDENCE dll=$probeDll exe=$probeExe machine=ARM64 machine_hex=0xAA64 loader_execution=success value=42"
