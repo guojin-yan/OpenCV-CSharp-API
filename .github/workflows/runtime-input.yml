@@ -115,7 +115,8 @@ jobs:
           process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
           compiler_path="$(command -v g++)"
           compiler_version="$(g++ --version | sed -n '1p') target=$(g++ -dumpmachine)"
-          assembler_version="$(as --version | tr '\n' ';')"
+          assembler_target="$(as --version | sed -n '$p' | tr -cd '[:alnum:]_.+-')"
+          assembler_version="$(as --version | sed -n '1p') target=$assembler_target"
           cmake_version="$(cmake --version | head -n 1)"
           ninja_version="$(ninja --version)"
           powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
@@ -128,6 +129,7 @@ jobs:
           test "$process_architecture" = "Arm64"
           test -x "$compiler_path"
           test -n "$compiler_version"
+          test -n "$assembler_target"
           test -n "$assembler_version"
           test -n "$cmake_version"
           test -n "$ninja_version"
@@ -439,6 +441,34 @@ jobs:
       - name: Create runtime input artifact layout
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
+        env:
+          PRODUCER_RUNNER_IMAGE: ${{ steps.arm64_runner.outputs.runner_image }}
+          PRODUCER_RUNNER_IMAGE_VERSION: ${{ steps.arm64_runner.outputs.runner_image_version }}
+          PRODUCER_HOSTED_DISTRO: ${{ steps.arm64_runner.outputs.hosted_distro }}
+          PRODUCER_HOSTED_DISTRO_VERSION: ${{ steps.arm64_runner.outputs.hosted_distro_version }}
+          PRODUCER_HOSTED_ARCHITECTURE: ${{ steps.arm64_runner.outputs.hosted_architecture }}
+          PRODUCER_HOSTED_PACKAGE_ARCHITECTURE: ${{ steps.arm64_runner.outputs.hosted_package_architecture }}
+          PRODUCER_HOSTED_LIBC: ${{ steps.arm64_runner.outputs.hosted_libc }}
+          PRODUCER_HOSTED_CPU_MODEL: ${{ steps.arm64_runner.outputs.hosted_cpu_model }}
+          PRODUCER_HOSTED_MEMORY_BYTES: ${{ steps.arm64_runner.outputs.hosted_memory_bytes }}
+          PRODUCER_HOSTED_DISK_AVAILABLE_BYTES: ${{ steps.arm64_runner.outputs.hosted_disk_available_bytes }}
+          PRODUCER_HOSTED_PROCESS_ARCHITECTURE: ${{ steps.arm64_runner.outputs.hosted_process_architecture }}
+          PRODUCER_CMAKE_VERSION: ${{ steps.arm64_runner.outputs.cmake_version }}
+          PRODUCER_CMAKE_GENERATOR: ${{ steps.profile.outputs.generator }}
+          PRODUCER_BUILD_CONFIGURATION: ${{ steps.profile.outputs.configuration }}
+          PRODUCER_COMPILER_PATH: ${{ steps.arm64_runner.outputs.compiler_path }}
+          PRODUCER_COMPILER_VERSION: ${{ steps.arm64_runner.outputs.compiler_version }}
+          PRODUCER_ASSEMBLER_VERSION: ${{ steps.arm64_runner.outputs.assembler_version }}
+          PRODUCER_NINJA_VERSION: ${{ steps.arm64_runner.outputs.ninja_version }}
+          PRODUCER_DOTNET_VERSION: ${{ steps.arm64_runner.outputs.dotnet_version }}
+          PRODUCER_POWERSHELL_VERSION: ${{ steps.arm64_runner.outputs.powershell_version }}
+          PRODUCER_OPENCV_CMAKE_ARGUMENTS: ${{ steps.profile.outputs.cmake_arguments }}
+          PRODUCER_ELF_AUDIT_EVIDENCE: ${{ steps.arm64_elf.outputs.elf_audit_evidence }}
+          PRODUCER_OPENCV_CPU_CONFIGURATION: ${{ steps.arm64_opencv.outputs.opencv_cpu_configuration }}
+          PRODUCER_NATIVE_WRAPPER_SOURCES: ${{ steps.profile.outputs.native_wrapper_sources }}
+          PRODUCER_NATIVE_WRAPPER_SOURCE_COUNT: ${{ steps.profile.outputs.native_wrapper_source_count }}
+          PRODUCER_NATIVE_ABI_FUNCTION_COUNT: ${{ steps.profile.outputs.native_abi_function_count }}
+          PRODUCER_OPENCV_EXTRA_CMAKE_ARGS: ${{ steps.profile.outputs.opencv_extra_cmake_args }}
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
           $openCvInstallDir = Join-Path $workspaceRoot "artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
@@ -454,7 +484,7 @@ jobs:
           $openCvRuntimeDir = [string]$openCvRuntimeDirMatches[0]
           $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
 
-          pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 `
+          & ./scripts/New-RuntimeInputArtifact.ps1 `
             -Rid '${{ matrix.rid }}' `
             -RuntimeProfile '${{ matrix.profile }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
@@ -463,33 +493,33 @@ jobs:
             -OpenCvSourceDir $openCvSourceDir `
             -OpenCvInstallDir $openCvInstallDir `
             -HostedRunner '${{ matrix.os }}' `
-            -RunnerImage '${{ steps.arm64_runner.outputs.runner_image }}' `
-            -RunnerImageVersion '${{ steps.arm64_runner.outputs.runner_image_version }}' `
-            -HostedDistro '${{ steps.arm64_runner.outputs.hosted_distro }}' `
-            -HostedDistroVersion '${{ steps.arm64_runner.outputs.hosted_distro_version }}' `
-            -HostedArchitecture '${{ steps.arm64_runner.outputs.hosted_architecture }}' `
-            -HostedPackageArchitecture '${{ steps.arm64_runner.outputs.hosted_package_architecture }}' `
-            -HostedLibc '${{ steps.arm64_runner.outputs.hosted_libc }}' `
-            -HostedCpuModel '${{ steps.arm64_runner.outputs.hosted_cpu_model }}' `
-            -HostedMemoryBytes '${{ steps.arm64_runner.outputs.hosted_memory_bytes }}' `
-            -HostedDiskAvailableBytes '${{ steps.arm64_runner.outputs.hosted_disk_available_bytes }}' `
-            -HostedProcessArchitecture '${{ steps.arm64_runner.outputs.hosted_process_architecture }}' `
-            -CMakeVersion '${{ steps.arm64_runner.outputs.cmake_version }}' `
-            -CMakeGenerator '${{ steps.profile.outputs.generator }}' `
-            -BuildConfiguration '${{ steps.profile.outputs.configuration }}' `
-            -CompilerPath '${{ steps.arm64_runner.outputs.compiler_path }}' `
-            -CompilerVersion '${{ steps.arm64_runner.outputs.compiler_version }}' `
-            -AssemblerVersion '${{ steps.arm64_runner.outputs.assembler_version }}' `
-            -NinjaVersion '${{ steps.arm64_runner.outputs.ninja_version }}' `
-            -DotNetVersion '${{ steps.arm64_runner.outputs.dotnet_version }}' `
-            -PowerShellVersion '${{ steps.arm64_runner.outputs.powershell_version }}' `
-            -OpenCvCMakeArguments '${{ steps.profile.outputs.cmake_arguments }}' `
-            -ElfAuditEvidence '${{ steps.arm64_elf.outputs.elf_audit_evidence }}' `
-            -OpenCvCpuConfiguration '${{ steps.arm64_opencv.outputs.opencv_cpu_configuration }}' `
-            -NativeWrapperSources '${{ steps.profile.outputs.native_wrapper_sources }}' `
-            -NativeWrapperSourceCount '${{ steps.profile.outputs.native_wrapper_source_count }}' `
-            -NativeAbiFunctionCount '${{ steps.profile.outputs.native_abi_function_count }}' `
-            -OpenCvExtraCMakeArgs '${{ steps.profile.outputs.opencv_extra_cmake_args }}' `
+            -RunnerImage $env:PRODUCER_RUNNER_IMAGE `
+            -RunnerImageVersion $env:PRODUCER_RUNNER_IMAGE_VERSION `
+            -HostedDistro $env:PRODUCER_HOSTED_DISTRO `
+            -HostedDistroVersion $env:PRODUCER_HOSTED_DISTRO_VERSION `
+            -HostedArchitecture $env:PRODUCER_HOSTED_ARCHITECTURE `
+            -HostedPackageArchitecture $env:PRODUCER_HOSTED_PACKAGE_ARCHITECTURE `
+            -HostedLibc $env:PRODUCER_HOSTED_LIBC `
+            -HostedCpuModel $env:PRODUCER_HOSTED_CPU_MODEL `
+            -HostedMemoryBytes $env:PRODUCER_HOSTED_MEMORY_BYTES `
+            -HostedDiskAvailableBytes $env:PRODUCER_HOSTED_DISK_AVAILABLE_BYTES `
+            -HostedProcessArchitecture $env:PRODUCER_HOSTED_PROCESS_ARCHITECTURE `
+            -CMakeVersion $env:PRODUCER_CMAKE_VERSION `
+            -CMakeGenerator $env:PRODUCER_CMAKE_GENERATOR `
+            -BuildConfiguration $env:PRODUCER_BUILD_CONFIGURATION `
+            -CompilerPath $env:PRODUCER_COMPILER_PATH `
+            -CompilerVersion $env:PRODUCER_COMPILER_VERSION `
+            -AssemblerVersion $env:PRODUCER_ASSEMBLER_VERSION `
+            -NinjaVersion $env:PRODUCER_NINJA_VERSION `
+            -DotNetVersion $env:PRODUCER_DOTNET_VERSION `
+            -PowerShellVersion $env:PRODUCER_POWERSHELL_VERSION `
+            -OpenCvCMakeArguments $env:PRODUCER_OPENCV_CMAKE_ARGUMENTS `
+            -ElfAuditEvidence $env:PRODUCER_ELF_AUDIT_EVIDENCE `
+            -OpenCvCpuConfiguration $env:PRODUCER_OPENCV_CPU_CONFIGURATION `
+            -NativeWrapperSources $env:PRODUCER_NATIVE_WRAPPER_SOURCES `
+            -NativeWrapperSourceCount $env:PRODUCER_NATIVE_WRAPPER_SOURCE_COUNT `
+            -NativeAbiFunctionCount $env:PRODUCER_NATIVE_ABI_FUNCTION_COUNT `
+            -OpenCvExtraCMakeArgs $env:PRODUCER_OPENCV_EXTRA_CMAKE_ARGS `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
