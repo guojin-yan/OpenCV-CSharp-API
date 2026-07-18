@@ -587,6 +587,7 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Text = $linkedRuntimeBuildGuideText })) {
     foreach ($needle in @(
             '`runtime-input.yml`',
+            '`runtime-input-win-x64-full`',
             '`runtime-input-ubuntu.24.04-x64-full`',
             '`runtime-input-ubuntu.24.04-x64-mini`',
             '`runtime-input-ubuntu.24.04-arm64-full`',
@@ -603,6 +604,15 @@ foreach ($doc in @(
             '`opencv-runtime/`',
             '`opencv-source/`')) {
         Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $needle -Issue "$($doc.Path) must document real runtime input producer text '$needle'"
+    }
+
+    foreach ($needle in @(
+            '`CMAKE_ASM_COMPILER=NOTFOUND`',
+            '`OPENCV_DNN_MLAS_ENABLED=0`',
+            '`opencv_<module>500.dll`',
+            '18 AMD64 DLL',
+            'Linux SONAME')) {
+        Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $needle -Issue "$($doc.Path) must keep factual Windows runtime evidence distinct from Linux payload evidence"
     }
 }
 
