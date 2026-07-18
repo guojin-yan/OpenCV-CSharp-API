@@ -233,6 +233,7 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "win-x64"; Profile = "full"; Runner = "windows-latest"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "win-x64"; Profile = "mini"; Runner = "windows-latest"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "win-arm64"; Profile = "full"; Runner = "windows-11-vs2026-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "win-arm64"; Profile = "mini"; Runner = "windows-11-vs2026-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
@@ -314,9 +315,9 @@ function Assert-RealProducerTargets {
         if ($target.Rid -in @("win-x64", "win-arm64")) {
             if (-not $platformFamily.Equals("windows", [System.StringComparison]::OrdinalIgnoreCase) -or
                 ($target.Rid -eq "win-x64" -and $target.Profile -notin @("full", "mini")) -or
-                ($target.Rid -eq "win-arm64" -and $target.Profile -ne "full") -or
+                ($target.Rid -eq "win-arm64" -and $target.Profile -notin @("full", "mini")) -or
                 -not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
-                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Windows producer must remain exact hosted win-x64 full/mini or win-arm64 full without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Windows producer must remain exact hosted win-x64 or win-arm64 full/mini without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
             }
         }
         else {
@@ -380,6 +381,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "runtime-input-win-x64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 full target" },
         [pscustomobject]@{ Needle = "runtime-input-win-x64-mini"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 mini target" },
         [pscustomobject]@{ Needle = "runtime-input-win-arm64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows ARM64 full target" },
+        [pscustomobject]@{ Needle = "runtime-input-win-arm64-mini"; Issue = "Producer workflow must explicitly advertise the Windows ARM64 mini target" },
         [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Native Windows production must remain in a separate hosted Windows job" },
         [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_X64"; Issue = "Windows producer matrix must retain the x64 evidence branch" },
         [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_ARM64"; Issue = "Windows producer matrix must retain the ARM64 evidence branch" },
@@ -518,7 +520,7 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu ARM64 mini must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
-Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must remain outside the real producer allowlist"
+Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
 
 foreach ($required in @(
@@ -701,9 +703,9 @@ if ($violations.Count -eq 0) {
             $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -eq "full"
             $isDebian1204Arm64 = $producerTarget.Rid -eq "debian.12-arm64" -and $producerTarget.Profile -eq "full"
             $isWindowsX64 = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -in @("full", "mini")
-            $isWindowsArm64 = $producerTarget.Rid -eq "win-arm64" -and $producerTarget.Profile -eq "full"
+            $isWindowsArm64 = $producerTarget.Rid -eq "win-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isWindowsTarget = $isWindowsX64 -or $isWindowsArm64
-            $isWindowsMini = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -eq "mini"
+            $isWindowsMini = $isWindowsTarget -and $producerTarget.Profile -eq "mini"
             $runnerImage = if ($isWindowsArm64) { "win11-vs2026-arm64" } elseif ($isWindowsX64) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } else { "" }
             $runnerImageVersion = if ($isWindowsTarget -or $isArm64Hosted) { "fixture" } else { "" }
             $hostedDistro = if ($isWindowsTarget) { "windows" } elseif ($isArm64Hosted) { "ubuntu" } else { "" }
@@ -742,9 +744,9 @@ if ($violations.Count -eq 0) {
             else {
                 ""
             }
-            $openCvCMakeArguments = if ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
+            $openCvCMakeArguments = if ($isWindowsArm64 -and $isWindowsMini) { '["-G","Visual Studio 18 2026","-A","ARM64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
             $expectedModuleCount = @($profileSpec[0].modules).Count
-            $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=full files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
+            $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
             $openCvCpuConfiguration = if ($isWindowsArm64) { "CPU_BASELINE:NEON;CPU_DISPATCH:" } elseif ($isWindowsX64) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
             $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
             $openCvAsmConfiguration = if ($isWindowsMini) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile" } elseif ($isWindowsArm64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for ARM64" } elseif ($isWindowsX64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
@@ -972,5 +974,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

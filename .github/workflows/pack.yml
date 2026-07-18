@@ -438,46 +438,49 @@ jobs:
             throw "Windows runtime-input provenance host, build, or PE evidence is not factual win-x64/$profileName."
           }
           Write-Host "WINDOWS_X64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedRuntimeFileCount synthetic=false"
-      - name: Validate Windows ARM64 full runtime input provenance
-        if: ${{ matrix.rid == 'win-arm64' && matrix.profile == 'full' && inputs.rid == 'win-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' }}
+      - name: Validate Windows ARM64 runtime input provenance
+        if: ${{ matrix.rid == 'win-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
         run: |
+          $profileName = '${{ matrix.profile }}'
           if ([string]::IsNullOrWhiteSpace('${{ inputs.real_runtime_artifact_run_id }}')) {
-            throw "Non-synthetic win-arm64/full packaging requires an explicit runtime-input producer run id."
+            throw "Non-synthetic win-arm64/$profileName packaging requires an explicit runtime-input producer run id."
           }
 
-          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/real-runtime-inputs/win-arm64-full'
+          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE "artifacts/real-runtime-inputs/win-arm64-$profileName"
           $provenancePath = Join-Path $artifactRoot 'runtime-input.provenance.json'
           $provenance = Get-Content -LiteralPath $provenancePath -Raw | ConvertFrom-Json
           $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
-          $profile = @($matrix.profiles | Where-Object { $_.name -eq 'full' })
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq $profileName })
           if ($profile.Count -ne 1) {
-            throw "The full runtime profile was not found exactly once."
+            throw "Selected Windows ARM64 runtime profile was not found exactly once: $profileName"
           }
 
           $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
           $compatibilityLoaderName = 'Open' + 'Cv5Sharp.Native.dll'
           $expectedModules = @($profile[0].modules)
+          $expectedRuntimeFileCount = $expectedModules.Count
+          $expectedPayloadFileCount = $expectedModules.Count + 2
           $expectedRuntimeNames = @($expectedModules | ForEach-Object { "opencv_$($_)$binarySuffix.dll" })
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
           if ($provenance.Rid -ne 'win-arm64' -or
               $provenance.PlatformFamily -ne 'windows' -or
-              $provenance.RuntimeProfile -ne 'full' -or
-              $provenance.RuntimeProfilePackageIdSuffix -ne '' -or
+              $provenance.RuntimeProfile -ne $profileName -or
+              $provenance.RuntimeProfilePackageIdSuffix -ne [string]$profile[0].packageIdSuffix -or
               $provenance.BuildList -ne [string]$profile[0].buildList -or
               [bool]$provenance.SyntheticRuntimeInputs -or
-              $actualModules.Count -ne 16 -or
+              $actualModules.Count -ne $expectedRuntimeFileCount -or
               @($expectedModules | Where-Object { $actualModules -notcontains $_ }).Count -ne 0 -or
               @($actualModules | Where-Object { $expectedModules -notcontains $_ }).Count -ne 0 -or
-              $actualRuntimeNames.Count -ne 16 -or
+              $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
               $actualLoaderNames.Count -ne 2 -or
               $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll' -or
               $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "Windows ARM64 runtime-input provenance does not match the exact 18-DLL full producer contract."
+            throw "Windows ARM64 runtime-input provenance does not match the exact win-arm64/$profileName $expectedPayloadFileCount-DLL producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -535,17 +538,20 @@ jobs:
                 ForEach-Object { $_.Groups[1].Value }
             )
           }
-          $expectedSources = @(
-            @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES') +
-            @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
-          )
-          if ([int]$provenance.NativeWrapperSourceCount -ne 45 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 1966 -or
-              $nativeWrapperSources.Count -ne 45 -or
+          $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
+          $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
+          $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $expectedExtraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
+          if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
+              [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
+              $nativeWrapperSources.Count -ne $expectedSourceCount -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
-              -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
-            throw "Windows ARM64 provenance does not retain the exact 45-source/1966-ABI full profile."
+              [string]$provenance.OpenCvExtraCMakeArgs -ne $expectedExtraCMakeArgs -or
+              ($profileName -eq 'mini' -and ([string]$provenance.OpenCvCMakeArguments).IndexOf($expectedExtraCMakeArgs, [System.StringComparison]::Ordinal) -lt 0)) {
+            throw "Windows ARM64 provenance does not retain the exact $expectedSourceCount-source/$expectedAbiFunctionCount-ABI $profileName profile."
           }
           foreach ($excludedDirectory in $excludedForeignToolDirectories) {
             if ([string]::IsNullOrWhiteSpace([string]$excludedDirectory) -or
@@ -554,8 +560,14 @@ jobs:
             }
           }
 
-          $expectedPePattern = '^WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=full files=18 machine=ARM64 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0 loader_equal=true$'
-          $expectedAsmPattern = '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:ARM64|arm64)$'
+          $peProfile = [regex]::Escape($profileName)
+          $expectedPePattern = "^WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$peProfile files=$expectedPayloadFileCount machine=ARM64 packaged_modules=$expectedRuntimeFileCount reachable_modules=$expectedRuntimeFileCount loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0 loader_equal=true$"
+          $expectedAsmPattern = if ($profileName -eq 'mini') {
+            '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile$'
+          }
+          else {
+            '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:ARM64|arm64)$'
+          }
           $compilerPattern = '(?i)[\\/]bin[\\/]Hostarm64[\\/]arm64[\\/]cl\.exe$'
           if ($provenance.HostedRunner -ne 'windows-11-vs2026-arm' -or
               $provenance.RunnerImage -ne 'win11-vs2026-arm64' -or
@@ -572,7 +584,7 @@ jobs:
               $provenance.OpenCvAsmConfiguration -notmatch $expectedAsmPattern -or
               $provenance.PeAuditEvidence -notmatch $expectedPePattern -or
               $provenance.OpenCvCpuConfiguration -match '(?i)(?:SSE|AVX)') {
-            throw "Windows ARM64 runtime-input provenance host, build, CPU, ASM, or PE evidence is not factual win-arm64/full."
+            throw "Windows ARM64 runtime-input provenance host, build, CPU, ASM, or PE evidence is not factual win-arm64/$profileName."
           }
 
           $forbiddenEvidence = @(
@@ -588,7 +600,7 @@ jobs:
               throw "Windows ARM64 provenance retained forbidden x64, cross-build, or foreign-link evidence: $forbiddenToken"
             }
           }
-          Write-Host 'WINDOWS_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=45 abi_functions=1966 synthetic=false'
+          Write-Host "WINDOWS_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedRuntimeFileCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false"
       - name: Pack runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
         shell: pwsh
@@ -847,7 +859,7 @@ jobs:
     needs:
       - pack-managed
       - pack-runtime
-    if: ${{ inputs.rid == 'win-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    if: ${{ inputs.rid == 'win-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: windows-11-vs2026-arm
     steps:
       - uses: actions/checkout@v4
@@ -868,7 +880,7 @@ jobs:
               $processArchitecture -ne 'Arm64' -or
               -not [Environment]::Is64BitProcess -or
               -not [string]::IsNullOrWhiteSpace($env:PROCESSOR_ARCHITEW6432)) {
-            throw "Packaged win-arm64/full execution requires actual ARM64 Windows hardware and a native ARM64 process without compatibility translation."
+            throw "Packaged win-arm64/${{ inputs.runtime_profile }} execution requires actual ARM64 Windows hardware and a native ARM64 process without compatibility translation."
           }
 
           $compatibilityNativeRuntimeDir = 'Open' + 'Cv5SharpNativeRuntimeDir'
@@ -892,8 +904,8 @@ jobs:
       - name: Download Windows ARM64 runtime package artifact
         uses: actions/download-artifact@v4
         with:
-          name: nupkg-win-arm64-full
-          path: artifacts/pack-targeted-windows-arm64/nupkg-win-arm64-full
+          name: nupkg-win-arm64-${{ inputs.runtime_profile }}
+          path: artifacts/pack-targeted-windows-arm64/nupkg-win-arm64-${{ inputs.runtime_profile }}
       - name: Verify selected Windows ARM64 package artifacts
         shell: pwsh
         run: |
@@ -903,15 +915,15 @@ jobs:
             -ExpectedPackageVersion $packageVersion `
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid win-arm64 `
-            -SelectedRuntimeProfile full
+            -SelectedRuntimeProfile '${{ inputs.runtime_profile }}'
       - name: Audit packaged Windows ARM64 PE closure
         shell: pwsh
         run: |
           Add-Type -AssemblyName System.IO.Compression.FileSystem
-          $runtimeArtifactDirectory = Join-Path ./artifacts/pack-targeted-windows-arm64 'nupkg-win-arm64-full'
+          $runtimeArtifactDirectory = Join-Path ./artifacts/pack-targeted-windows-arm64 'nupkg-win-arm64-${{ inputs.runtime_profile }}'
           $packages = @(Get-ChildItem -LiteralPath $runtimeArtifactDirectory -File -Filter '*.nupkg')
           if ($packages.Count -ne 1) {
-            throw "Exactly one win-arm64/full runtime package was expected."
+            throw "Exactly one win-arm64/${{ inputs.runtime_profile }} runtime package was expected."
           }
 
           $extractRoot = Join-Path $env:RUNNER_TEMP 'opencv-windows-arm64-package-audit'
@@ -923,7 +935,7 @@ jobs:
           pwsh -NoProfile -File ./scripts/Test-WindowsRuntimePeClosure.ps1 `
             -RuntimeDirectory $nativeDirectory `
             -Rid win-arm64 `
-            -RuntimeProfile full `
+            -RuntimeProfile '${{ inputs.runtime_profile }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}'
       - name: Restore, build, and run Windows ARM64 package consumer
         shell: pwsh
@@ -934,7 +946,7 @@ jobs:
             -ExpectedPackageVersion $packageVersion `
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid win-arm64 `
-            -SelectedRuntimeProfile full `
+            -SelectedRuntimeProfile '${{ inputs.runtime_profile }}' `
             -CompileNativeSmoke `
             -RunNativeSmoke
 

@@ -377,6 +377,7 @@ function New-TemporaryConsumerProject {
     if ($RunNativeSmoke) {
         $programText = @'
 using System;
+using System.Runtime.InteropServices;
 using OpenCvSharp;
 using OpenCvSharp.Core;
 
@@ -384,6 +385,19 @@ namespace PackageConsumer;
 
 internal static class Program
 {
+    [DllImport("JYPPX.OpenCV.Native", EntryPoint = "jyppx_ocv_imgproc_good_features_to_track_count", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int GoodFeaturesToTrackCount(
+        IntPtr image,
+        IntPtr mask,
+        int maxCorners,
+        double qualityLevel,
+        double minDistance,
+        int blockSize,
+        int gradientSize,
+        int useHarrisDetector,
+        double k,
+        out int cornerCount);
+
     private static int Main()
     {
         try
@@ -456,7 +470,19 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
 '@
             $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn profile=full"
         }
-        elseif ($RuntimeProfile -ne "mini") {
+        elseif ($RuntimeProfile -eq "mini") {
+            $profileSpecificNativeSmoke = @'
+            int cornerCount = -1;
+            int status = GoodFeaturesToTrackCount(IntPtr.Zero, IntPtr.Zero, 8, 0.01, 1.0, 3, 3, 0, 0.04, out cornerCount);
+            if (status != -100 || cornerCount != 0)
+            {
+                Console.Error.WriteLine("MINI_NOT_LINKED_SMOKE_FAILED status=" + status + " cornerCount=" + cornerCount);
+                return 15;
+            }
+'@
+            $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini"
+        }
+        else {
             throw "Targeted native smoke supports only full or mini profiles, got '$RuntimeProfile'."
         }
 

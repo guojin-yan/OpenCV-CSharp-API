@@ -8,11 +8,11 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; exact Windows x64 full/mini, Windows ARM64 full, approved Linux full targets, and Ubuntu 24.04 x64 mini
+        description: Real producer target; exact Windows x64/ARM64 full/mini, approved Linux full targets, and Ubuntu 24.04 x64 mini
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
-        description: Real producer profile; full for all targets, mini for win-x64 and ubuntu.24.04-x64
+        description: Real producer profile; full for all targets, mini for win-x64, win-arm64, and ubuntu.24.04-x64
         required: true
         default: full
 
@@ -30,6 +30,7 @@ jobs:
             'win-x64/full',
             'win-x64/mini',
             'win-arm64/full',
+            'win-arm64/mini',
             'ubuntu.24.04-x64/full',
             'ubuntu.24.04-x64/mini',
             'ubuntu.24.04-arm64/full',
@@ -44,7 +45,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86, Windows ARM64 mini, Ubuntu and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86, Ubuntu and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -389,6 +390,18 @@ jobs:
             tool_target: arm64
             opencv_arch_folder: ARM64
             evidence_prefix: WINDOWS_ARM64
+          - rid: win-arm64
+            profile: mini
+            os: windows-11-vs2026-arm
+            processor_architecture: ARM64
+            runtime_architecture: Arm64
+            package_architecture: ARM64
+            platform: ARM64
+            tool_component: Microsoft.VisualStudio.Component.VC.Tools.ARM64
+            tool_host: Hostarm64
+            tool_target: arm64
+            opencv_arch_folder: ARM64
+            evidence_prefix: WINDOWS_ARM64
     runs-on: ${{ matrix.os }}
     steps:
       - name: Skip unmatched Windows producer target
@@ -425,7 +438,7 @@ jobs:
           }
           if ('${{ matrix.rid }}' -eq 'win-arm64' -and
               (-not [string]::IsNullOrWhiteSpace($env:PROCESSOR_ARCHITEW6432) -or $env:RUNNER_ARCH -ne 'ARM64')) {
-            throw "win-arm64/full production must not run through x64 compatibility translation."
+            throw "win-arm64/${{ matrix.profile }} production must not run through x64 compatibility translation."
           }
           if ([string]::IsNullOrWhiteSpace($env:ImageOS) -or [string]::IsNullOrWhiteSpace($env:ImageVersion)) {
             throw "GitHub hosted Windows image evidence was not available."
@@ -518,7 +531,7 @@ jobs:
           }
 
           $profileName = '${{ matrix.profile }}'
-          $extraCMakeArgs = if ('${{ matrix.rid }}' -eq 'win-x64' -and $profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
+          $extraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
 
           $plan = & ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
@@ -595,7 +608,7 @@ jobs:
             throw "OpenCV source clone failed."
           }
       - name: Apply audited Windows ARM64 OpenCV MLAS processor patch
-        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'win-arm64' && matrix.profile == 'full' }}
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'win-arm64' }}
         id: arm64_patch
         shell: pwsh
         run: |
@@ -726,9 +739,8 @@ jobs:
               $asmCompilerMatch.Groups[1].Value -ne 'NOTFOUND') {
             throw "Windows OpenCV build did not retain the pure-MSVC generic-ASM fallback boundary."
           }
-          if ($ridName -eq 'win-arm64') {
-            if ($profileName -ne 'full' -or
-                -not $mlasEnabledMatch.Success -or
+          if ($ridName -eq 'win-arm64' -and $profileName -eq 'full') {
+            if (-not $mlasEnabledMatch.Success -or
                 $mlasEnabledMatch.Groups[1].Value -ne '0' -or
                 -not $mlasSkipReasonMatch.Success -or
                 $mlasSkipReasonMatch.Groups[1].Value -notmatch '^no ASM compiler available for (?:ARM64|arm64)$') {

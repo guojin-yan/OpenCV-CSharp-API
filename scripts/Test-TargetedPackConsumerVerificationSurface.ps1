@@ -183,7 +183,7 @@ foreach ($expectation in @(
         @($workflowPath, $windowsJobText, "-RunNativeSmoke", "Windows verifier must run package-output profile-specific native calls"),
         @($workflowPath, $windowsJobText, "artifacts\real-runtime-inputs", "Windows verifier must explicitly reject producer artifact directories in PATH"),
         @($workflowPath, $windowsArm64JobText, "verify-targeted-real-windows-arm64:", "Pack workflow must keep a separate Windows ARM64 verification job"),
-        @($workflowPath, $windowsArm64JobText, "inputs.rid == 'win-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Windows ARM64 verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $windowsArm64JobText, "inputs.rid == 'win-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Windows ARM64 verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $windowsArm64JobText, "runs-on: windows-11-vs2026-arm", "Windows ARM64 verification must run on the audited native hosted ARM64 image"),
         @($workflowPath, $windowsArm64JobText, "RUNNER_ARCH -ne 'ARM64'", "Windows ARM64 verification must require the GitHub ARM64 runner architecture"),
         @($workflowPath, $windowsArm64JobText, "PROCESSOR_ARCHITECTURE -ne 'ARM64'", "Windows ARM64 verification must require an actual ARM64 host"),
@@ -192,17 +192,17 @@ foreach ($expectation in @(
         @($workflowPath, $windowsArm64JobText, "PROCESSOR_ARCHITEW6432", "Windows ARM64 verification must reject compatibility translation"),
         @($workflowPath, $windowsArm64JobText, "WINDOWS_ARM64_PACKAGE_CONSUMER_HOST_OK", "Windows ARM64 verification must emit factual native host/process evidence"),
         @($workflowPath, $windowsArm64JobText, "name: nupkg-managed", "Windows ARM64 verification must download the same-run managed package"),
-        @($workflowPath, $windowsArm64JobText, "name: nupkg-win-arm64-full", "Windows ARM64 verification must download only the exact full runtime artifact"),
+        @($workflowPath, $windowsArm64JobText, 'name: nupkg-win-arm64-${{ inputs.runtime_profile }}', "Windows ARM64 verification must download only the exact selected full/mini runtime artifact"),
         @($workflowPath, $windowsArm64JobText, "path: artifacts/pack-targeted-windows-arm64/nupkg-managed", "Windows ARM64 managed artifact must use an isolated path"),
-        @($workflowPath, $windowsArm64JobText, "path: artifacts/pack-targeted-windows-arm64/nupkg-win-arm64-full", "Windows ARM64 runtime artifact must use an isolated path"),
+        @($workflowPath, $windowsArm64JobText, 'path: artifacts/pack-targeted-windows-arm64/nupkg-win-arm64-${{ inputs.runtime_profile }}', "Windows ARM64 runtime artifact must use an isolated selected path"),
         @($workflowPath, $windowsArm64JobText, "-ExpectedSyntheticRuntimeInputs false", "Windows ARM64 artifact and consumer guards must require real provenance"),
         @($workflowPath, $windowsArm64JobText, "-SelectedRid win-arm64", "Windows ARM64 guards must select exact win-arm64"),
-        @($workflowPath, $windowsArm64JobText, "-SelectedRuntimeProfile full", "Windows ARM64 guards must select only full"),
+        @($workflowPath, $windowsArm64JobText, "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'", "Windows ARM64 guards must select the exact selected full/mini profile"),
         @($workflowPath, $windowsArm64JobText, "Test-WindowsRuntimePeClosure.ps1", "Windows ARM64 package must pass the reusable architecture-aware PE closure audit"),
         @($workflowPath, $windowsArm64JobText, "-CompileNativeSmoke", "Windows ARM64 verifier must compile the package consumer natively"),
-        @($workflowPath, $windowsArm64JobText, "-RunNativeSmoke", "Windows ARM64 verifier must execute package-output full native calls"),
+        @($workflowPath, $windowsArm64JobText, "-RunNativeSmoke", "Windows ARM64 verifier must execute package-output profile-specific native calls"),
         @($workflowPath, $windowsArm64JobText, "artifacts\real-runtime-inputs", "Windows ARM64 verifier must explicitly reject producer artifact directories in PATH"),
-        @($workflowPath, $workflowText, "WINDOWS_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=45 abi_functions=1966 synthetic=false", "Pack runtime job must validate exact real Windows ARM64 provenance before packaging"),
+        @($workflowPath, $workflowText, 'WINDOWS_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedRuntimeFileCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false', "Pack runtime job must validate profile-derived real Windows ARM64 provenance before packaging"),
         @($workflowPath, $workflowText, "OpenCvSourcePatchEvidence", "Pack runtime job must require Windows ARM64 OpenCV source-patch provenance"),
         @($workflowPath, $workflowText, "windows-arm64-mlas-processor-case.patch", "Pack runtime job must verify the repository-owned Windows ARM64 OpenCV patch"),
         @($workflowPath, $workflowText, "Windows ARM64 provenance does not retain the audited OpenCV MLAS processor-case patch", "Pack runtime job must reject absent or changed Windows ARM64 OpenCV patch evidence"),
@@ -509,8 +509,8 @@ foreach ($forbiddenWindowsText in @(
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $windowsArm64JobText `
-    -ExpectedLine "    if: `${{ inputs.rid == 'win-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "Windows ARM64 targeted verification condition must remain exact, full-only, non-synthetic, and non-publishing"
+    -ExpectedLine "    if: `${{ inputs.rid == 'win-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Windows ARM64 targeted verification condition must remain exact, full/mini, non-synthetic, and non-publishing"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -523,8 +523,8 @@ Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $windowsArm64JobText `
     -Needle "inputs.runtime_profile ==" `
-    -ExpectedCount 1 `
-    -Issue "Windows ARM64 verifier must gate on exactly the full runtime profile"
+    -ExpectedCount 2 `
+    -Issue "Windows ARM64 verifier must gate on exactly the full and mini runtime profiles"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -536,14 +536,13 @@ Assert-OccurrenceCount `
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $windowsArm64JobText `
-    -Needle "-SelectedRuntimeProfile full" `
+    -Needle "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'" `
     -ExpectedCount 2 `
-    -Issue "Both Windows ARM64 package guards must select only full"
+    -Issue "Both Windows ARM64 package guards must select the exact chosen full/mini profile"
 
 foreach ($forbiddenWindowsArm64Text in @(
         "win-x64",
         "win-x86",
-        "inputs.runtime_profile == 'mini'",
         "run-id:",
         "repository:",
         "docker run",
@@ -556,7 +555,7 @@ foreach ($forbiddenWindowsArm64Text in @(
         -Path $workflowPath `
         -Text $windowsArm64JobText `
         -Needle $forbiddenWindowsArm64Text `
-        -Issue "Windows ARM64 package verification must remain native, same-run, full-only, and free of DLL search overrides: $forbiddenWindowsArm64Text"
+        -Issue "Windows ARM64 package verification must remain native, same-run, full/mini-only, and free of DLL search overrides: $forbiddenWindowsArm64Text"
 }
 
 foreach ($forbiddenConsumerText in @("AddDllDirectory", "SetDllDirectory", "OpenCvNativeRuntimeDir", "OPENCV_CSHARP_OPENCV_RUNTIME_ROOT")) {
@@ -565,6 +564,17 @@ foreach ($forbiddenConsumerText in @("AddDllDirectory", "SetDllDirectory", "Open
         -Text $consumerGuardText `
         -Needle $forbiddenConsumerText `
         -Issue "Package consumer guard must not introduce a native DLL search override: $forbiddenConsumerText"
+}
+
+foreach ($miniNotLinkedNeedle in @(
+        'EntryPoint = "jyppx_ocv_imgproc_good_features_to_track_count"',
+        'status != -100 || cornerCount != 0',
+        'TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini')) {
+    Assert-Contains `
+        -Path $consumerGuardPath `
+        -Text $consumerGuardText `
+        -Needle $miniNotLinkedNeedle `
+        -Issue "Package consumer guard must prove the mini NOT_LINKED compatibility boundary: $miniNotLinkedNeedle"
 }
 
 Assert-ExactLine `
@@ -1116,7 +1126,7 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full in its separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
+Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
 Write-Host "Container targets: ubuntu.22.04-arm64/full through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
-Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."
+Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."
