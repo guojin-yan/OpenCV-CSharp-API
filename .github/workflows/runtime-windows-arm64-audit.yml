@@ -1,0 +1,253 @@
+name: runtime-windows-arm64-audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: windows-11-vs2026-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Check project invariants
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Probe native Windows ARM64 host and PE toolchain
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = "Stop"
+
+          function Get-PeMachine {
+            param([Parameter(Mandatory = $true)][string]$Path)
+
+            $stream = [System.IO.File]::OpenRead($Path)
+            try {
+              $reader = [System.IO.BinaryReader]::new($stream)
+              try {
+                if ($stream.Length -lt 0x40) {
+                  throw "PE file is too short: $Path"
+                }
+                $stream.Position = 0x3c
+                $peOffset = $reader.ReadUInt32()
+                if ($peOffset + 6 -gt $stream.Length) {
+                  throw "PE header offset is invalid: $Path"
+                }
+                $stream.Position = $peOffset
+                if ($reader.ReadUInt32() -ne 0x00004550) {
+                  throw "PE signature is invalid: $Path"
+                }
+                return $reader.ReadUInt16()
+              }
+              finally {
+                $reader.Dispose()
+              }
+            }
+            finally {
+              $stream.Dispose()
+            }
+          }
+
+          $osArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+          $processArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
+          if ($env:RUNNER_ARCH -ne "ARM64" -or
+              $env:PROCESSOR_ARCHITECTURE -ne "ARM64" -or
+              $osArchitecture -ne "Arm64" -or
+              $processArchitecture -ne "Arm64" -or
+              -not [Environment]::Is64BitProcess -or
+              -not [string]::IsNullOrWhiteSpace($env:PROCESSOR_ARCHITEW6432)) {
+            throw "Windows ARM64 audit requires actual ARM64 hardware and a native 64-bit ARM64 process without compatibility translation."
+          }
+
+          $os = Get-CimInstance Win32_OperatingSystem
+          $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+          $computer = Get-CimInstance Win32_ComputerSystem
+          $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='D:'"
+          if ($null -eq $cpu -or $null -eq $computer -or $null -eq $disk -or
+              [long]$disk.FreeSpace -lt 10GB -or [long]$computer.TotalPhysicalMemory -lt 12GB) {
+            throw "Windows ARM64 hosted CPU, memory, or workspace disk evidence is insufficient for a full OpenCV build."
+          }
+          if ([int]$cpu.AddressWidth -ne 64 -or [int]$cpu.Architecture -ne 12) {
+            throw "Win32_Processor did not report a 64-bit ARM architecture."
+          }
+          if ([string]::IsNullOrWhiteSpace($env:ImageOS) -or [string]::IsNullOrWhiteSpace($env:ImageVersion)) {
+            throw "GitHub runner image evidence was not available."
+          }
+
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio/Installer/vswhere.exe"
+          if (-not (Test-Path -LiteralPath $vswhere -PathType Leaf)) {
+            throw "vswhere.exe was not found."
+          }
+          $instances = @(& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.ARM64 -format json | ConvertFrom-Json)
+          if ($instances.Count -ne 1) {
+            throw "Exactly one latest Visual Studio instance with native ARM64 C++ tools was expected."
+          }
+          $visualStudio = $instances[0]
+          if (-not ([string]$visualStudio.installationVersion).StartsWith("18.", [System.StringComparison]::Ordinal)) {
+            throw "Visual Studio 18 is required by the current Windows ARM64 OpenCV build plan."
+          }
+
+          $cl = Get-ChildItem -LiteralPath (Join-Path $visualStudio.installationPath "VC/Tools/MSVC") -Recurse -File -Filter cl.exe |
+            Where-Object { $_.FullName -match '[\\/]bin[\\/]Hostarm64[\\/]arm64[\\/]cl\.exe$' } |
+            Sort-Object FullName -Descending |
+            Select-Object -First 1
+          if ($null -eq $cl) {
+            throw "Native Hostarm64/arm64 cl.exe was not found."
+          }
+          $link = Join-Path $cl.DirectoryName "link.exe"
+          $dumpbin = Join-Path $cl.DirectoryName "dumpbin.exe"
+          foreach ($tool in @($cl.FullName, $link, $dumpbin)) {
+            if (-not (Test-Path -LiteralPath $tool -PathType Leaf)) {
+              throw "Required native ARM64 MSVC tool was not found: $tool"
+            }
+            if ((Get-PeMachine -Path $tool) -ne 0xAA64) {
+              throw "MSVC tool is not a native ARM64 PE image: $tool"
+            }
+          }
+          $msvcToolsetVersion = [regex]::Match($cl.FullName, '[\\/]MSVC[\\/]([^\\/]+)[\\/]bin[\\/]').Groups[1].Value
+          $msvcCompilerVersion = $cl.VersionInfo.ProductVersion
+          if ([string]::IsNullOrWhiteSpace($msvcToolsetVersion) -or [string]::IsNullOrWhiteSpace($msvcCompilerVersion)) {
+            throw "MSVC toolset/compiler versions could not be resolved."
+          }
+
+          $pwshPath = (Get-Process -Id $PID).Path
+          $dotnetPath = (Get-Command dotnet.exe -CommandType Application | Select-Object -First 1).Source
+          $cmakePath = (Get-Command cmake.exe -CommandType Application | Select-Object -First 1).Source
+          foreach ($nativeHostTool in @($pwshPath, $dotnetPath, $cmakePath)) {
+            if ((Get-PeMachine -Path $nativeHostTool) -ne 0xAA64) {
+              throw "Required host tool is not a native ARM64 PE image: $nativeHostTool"
+            }
+          }
+
+          $cmakeVersion = (& cmake --version | Select-Object -First 1).Trim()
+          $ninjaVersion = (& ninja --version | Select-Object -First 1).Trim()
+          $powerShellVersion = $PSVersionTable.PSVersion.ToString()
+          $dotnetInfo = & dotnet --info
+          if ($LASTEXITCODE -ne 0) {
+            throw "dotnet --info failed."
+          }
+          $dotnetText = $dotnetInfo -join "`n"
+          if ($dotnetText -notmatch '(?im)^\s*Architecture:\s*arm64\s*$' -or
+              $dotnetText -notmatch '(?im)^\s*RID:\s*win-arm64\s*$') {
+            throw ".NET did not report a native win-arm64 execution boundary."
+          }
+
+          $probeRoot = Join-Path $env:RUNNER_TEMP "opencv-windows-arm64-probe"
+          $sourceRoot = Join-Path $probeRoot "src"
+          $buildRoot = Join-Path $probeRoot "build"
+          New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          [System.IO.File]::WriteAllText(
+            (Join-Path $sourceRoot "probe.cpp"),
+            'extern "C" __declspec(dllexport) int opencv_windows_arm64_probe() { return 42; }',
+            [System.Text.UTF8Encoding]::new($false))
+          $hostSource = @'
+          #include <cstdio>
+          extern "C" __declspec(dllimport) int opencv_windows_arm64_probe();
+          int main() {
+            const int value = opencv_windows_arm64_probe();
+            std::printf("WINDOWS_ARM64_PROBE_EXECUTION_OK value=%d\n", value);
+            return value == 42 ? 0 : 1;
+          }
+          '@
+          [System.IO.File]::WriteAllText(
+            (Join-Path $sourceRoot "host.cpp"),
+            $hostSource,
+            [System.Text.UTF8Encoding]::new($false))
+          [System.IO.File]::WriteAllText(
+            (Join-Path $sourceRoot "CMakeLists.txt"),
+            "cmake_minimum_required(VERSION 3.20)`nproject(OpenCvWindowsArm64Probe LANGUAGES CXX)`nadd_library(opencv_windows_arm64_probe SHARED probe.cpp)`nadd_executable(opencv_windows_arm64_probe_host host.cpp)`ntarget_link_libraries(opencv_windows_arm64_probe_host PRIVATE opencv_windows_arm64_probe)`n",
+            [System.Text.UTF8Encoding]::new($false))
+
+          & cmake -S $sourceRoot -B $buildRoot -G "Visual Studio 18 2026" -A ARM64
+          if ($LASTEXITCODE -ne 0) {
+            throw "Visual Studio 18 native ARM64 CMake configuration failed."
+          }
+          & cmake --build $buildRoot --config Release
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows ARM64 probe build failed."
+          }
+
+          $cache = Get-Content -LiteralPath (Join-Path $buildRoot "CMakeCache.txt") -Raw
+          if ($cache -notmatch '(?m)^CMAKE_GENERATOR:INTERNAL=Visual Studio 18 2026\r?$' -or
+              $cache -notmatch '(?m)^CMAKE_GENERATOR_PLATFORM:INTERNAL=ARM64\r?$') {
+            throw "CMake did not retain the exact Visual Studio 18 ARM64 generator boundary."
+          }
+          $sdkVersion = [regex]::Match($cache, '(?m)^CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION:STRING=([^\r\n]+)$').Groups[1].Value
+          if ([string]::IsNullOrWhiteSpace($sdkVersion)) {
+            throw "CMake did not record the selected Windows SDK version."
+          }
+
+          $probeDll = Join-Path $buildRoot "Release/opencv_windows_arm64_probe.dll"
+          $probeExe = Join-Path $buildRoot "Release/opencv_windows_arm64_probe_host.exe"
+          foreach ($probeBinary in @($probeDll, $probeExe)) {
+            if (-not (Test-Path -LiteralPath $probeBinary -PathType Leaf) -or
+                (Get-PeMachine -Path $probeBinary) -ne 0xAA64) {
+              throw "Probe binary is missing or is not an ARM64 PE image: $probeBinary"
+            }
+            $headers = (& $dumpbin /headers $probeBinary) -join "`n"
+            if ($LASTEXITCODE -ne 0 -or $headers -notmatch '(?im)^\s*AA64 machine \(ARM64\)\s*$') {
+              throw "dumpbin did not identify the probe binary as ARM64: $probeBinary"
+            }
+          }
+          $probeOutput = @(& $probeExe 2>&1)
+          $probeExitCode = $LASTEXITCODE
+          $probeOutput | ForEach-Object { Write-Host $_ }
+          if ($probeExitCode -ne 0 -or ($probeOutput -join "`n") -notmatch 'WINDOWS_ARM64_PROBE_EXECUTION_OK value=42') {
+            throw "Native Windows ARM64 probe execution failed."
+          }
+
+          $describe = & pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
+            -OpenCvVersion 5.0.0 `
+            -Rid win-arm64 `
+            -BuildList "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud" `
+            -DescribeOnly | ConvertFrom-Json
+          if ($describe.Generator -ne "Visual Studio 18 2026" -or
+              $describe.Platform -ne "ARM64" -or
+              $describe.BuildSystem -ne "multi-config" -or
+              $describe.InstallTarget -ne "INSTALL") {
+            throw "Repository Windows ARM64 OpenCV build plan does not match the audited hosted toolchain."
+          }
+
+          $evidence = @(
+            "WINDOWS_ARM64_HOST_EVIDENCE ImageOS=$($env:ImageOS) ImageVersion=$($env:ImageVersion) Caption=$($os.Caption) OSVersion=$($os.Version) BuildNumber=$($os.BuildNumber) RUNNER_ARCH=$($env:RUNNER_ARCH) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) PROCESSOR_ARCHITEW6432=$($env:PROCESSOR_ARCHITEW6432) CPU=$($cpu.Name) CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)",
+            "WINDOWS_ARM64_TOOLCHAIN_EVIDENCE VisualStudioVersion=$($visualStudio.installationVersion) VisualStudioPath=$($visualStudio.installationPath) MSVCToolsetVersion=$msvcToolsetVersion MSVCCompilerVersion=$msvcCompilerVersion Compiler=$($cl.FullName) Linker=$link Dumpbin=$dumpbin Generator=$($describe.Generator) Platform=$($describe.Platform) BuildSystem=$($describe.BuildSystem) WindowsSDK=$sdkVersion CMake=$cmakeVersion CMakePath=$cmakePath Ninja=$ninjaVersion PowerShell=$powerShellVersion PowerShellPath=$pwshPath DotNetPath=$dotnetPath",
+            "WINDOWS_ARM64_DOTNET_EVIDENCE $((@($dotnetInfo | Select-String -Pattern 'Version:|Architecture:|RID:') | ForEach-Object { $_.Line.Trim() }) -join ';')",
+            "WINDOWS_ARM64_PE_EVIDENCE dll=$probeDll exe=$probeExe machine=ARM64 machine_hex=0xAA64 loader_execution=success value=42"
+          )
+          $evidence | ForEach-Object { Write-Host $_ }
+          [System.IO.File]::WriteAllLines(
+            (Join-Path $env:GITHUB_WORKSPACE "windows-arm64-audit.txt"),
+            $evidence,
+            [System.Text.UTF8Encoding]::new($false))
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-windows-arm64-audit
+          path: windows-arm64-audit.txt
+          if-no-files-found: error
+
+  verify-artifact:
+    needs: probe
+    runs-on: windows-11-vs2026-arm
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: runtime-windows-arm64-audit
+          path: audit-download
+      - name: Verify Windows ARM64 audit evidence
+        shell: pwsh
+        run: |
+          $text = Get-Content -LiteralPath ./audit-download/windows-arm64-audit.txt -Raw
+          foreach ($pattern in @(
+              'WINDOWS_ARM64_HOST_EVIDENCE.*RUNNER_ARCH=ARM64.*PROCESSOR_ARCHITECTURE=ARM64.*OSArchitecture=Arm64.*ProcessArchitecture=Arm64.*Is64BitProcess=True.*PROCESSOR_ARCHITEW6432=.*CPUArchitecture=12.*AddressWidth=64',
+              'WINDOWS_ARM64_TOOLCHAIN_EVIDENCE.*VisualStudioVersion=18\..*Compiler=.*Hostarm64[\\/]arm64[\\/]cl\.exe.*Generator=Visual Studio 18 2026.*Platform=ARM64.*BuildSystem=multi-config.*WindowsSDK=',
+              'WINDOWS_ARM64_DOTNET_EVIDENCE.*Architecture:\s*arm64.*RID:\s*win-arm64',
+              'WINDOWS_ARM64_PE_EVIDENCE.*machine=ARM64.*machine_hex=0xAA64.*loader_execution=success.*value=42')) {
+            if ($text -notmatch $pattern) {
+              throw "Windows ARM64 audit evidence did not match: $pattern"
+            }
+          }
