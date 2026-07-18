@@ -789,7 +789,7 @@ jobs:
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
           $openCvSourceDir = Join-Path $workspaceRoot 'opencv-source/opencv-${{ inputs.opencv_version }}'
-          pwsh -NoProfile -File ./scripts/New-RuntimeInputArtifact.ps1 `
+          & ./scripts/New-RuntimeInputArtifact.ps1 `
             -Rid '${{ matrix.rid }}' `
             -RuntimeProfile '${{ matrix.profile }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
