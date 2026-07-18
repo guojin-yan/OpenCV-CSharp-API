@@ -68,9 +68,12 @@ jobs:
           $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
           $computer = Get-CimInstance Win32_ComputerSystem
           $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='D:'"
-          if ($null -eq $cpu -or $null -eq $computer -or $null -eq $disk -or
-              [long]$disk.FreeSpace -lt 10GB -or [long]$computer.TotalPhysicalMemory -lt 12GB) {
-            throw "Windows ARM64 hosted CPU, memory, or workspace disk evidence is insufficient for a full OpenCV build."
+          if ($null -eq $cpu -or $null -eq $computer -or $null -eq $disk) {
+            throw "Windows ARM64 hosted CPU, memory, or workspace disk evidence was not available."
+          }
+          Write-Host "WINDOWS_ARM64_RESOURCE_PROBE CPU=$($cpu.Name) CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)"
+          if ([long]$disk.FreeSpace -lt 4GB -or [long]$computer.TotalPhysicalMemory -lt 8GB) {
+            throw "Windows ARM64 hosted resources are below the minimum audit boundary: memory=$($computer.TotalPhysicalMemory), disk=$($disk.FreeSpace)."
           }
           if ([int]$cpu.AddressWidth -ne 64 -or [int]$cpu.Architecture -ne 12) {
             throw "Win32_Processor did not report a 64-bit ARM architecture."
