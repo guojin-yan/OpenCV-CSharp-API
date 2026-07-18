@@ -232,6 +232,7 @@ function Assert-RealProducerTargets {
     $expectedTargets = @(
         [pscustomobject]@{ Rid = "win-x64"; Profile = "full"; Runner = "windows-latest"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "win-x64"; Profile = "mini"; Runner = "windows-latest"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "win-arm64"; Profile = "full"; Runner = "windows-11-vs2026-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
@@ -310,11 +311,12 @@ function Assert-RealProducerTargets {
         }
 
         $platformFamily = [string]$ridSpec[0].platformFamily
-        if ($target.Rid -eq "win-x64") {
+        if ($target.Rid -in @("win-x64", "win-arm64")) {
             if (-not $platformFamily.Equals("windows", [System.StringComparison]::OrdinalIgnoreCase) -or
-                $target.Profile -notin @("full", "mini") -or
+                ($target.Rid -eq "win-x64" -and $target.Profile -notin @("full", "mini")) -or
+                ($target.Rid -eq "win-arm64" -and $target.Profile -ne "full") -or
                 -not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
-                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Windows producer must remain exact hosted win-x64 full/mini without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Windows producer must remain exact hosted win-x64 full/mini or win-arm64 full without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
             }
         }
         else {
@@ -377,10 +379,13 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
         [pscustomobject]@{ Needle = "runtime-input-win-x64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 full target" },
         [pscustomobject]@{ Needle = "runtime-input-win-x64-mini"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 mini target" },
-        [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Windows x64 production must remain in a separate hosted Windows job" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_HOST_EVIDENCE"; Issue = "Windows producer must record actual host, architecture, CPU, and disk evidence" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_PRODUCER_TOOLCHAIN_EVIDENCE"; Issue = "Windows producer must record the actual VS/MSVC/CMake toolchain" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_PATH_SANITIZED"; Issue = "Windows producer must record its build-scoped foreign tool PATH exclusions" },
+        [pscustomobject]@{ Needle = "runtime-input-win-arm64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows ARM64 full target" },
+        [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Native Windows production must remain in a separate hosted Windows job" },
+        [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_X64"; Issue = "Windows producer matrix must retain the x64 evidence branch" },
+        [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_ARM64"; Issue = "Windows producer matrix must retain the ARM64 evidence branch" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_PRODUCER_HOST_EVIDENCE"; Issue = "Windows producer must record actual host, process, CPU, memory, and disk evidence" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_PRODUCER_TOOLCHAIN_EVIDENCE"; Issue = "Windows producer must record the architecture-specific VS/MSVC/CMake toolchain" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_OPENCV_PATH_SANITIZED"; Issue = "Windows producer must record its build-scoped foreign tool PATH exclusions" },
         [pscustomobject]@{ Needle = "`$plan = & ./scripts/Build-OpenCV.ps1"; Issue = "Windows profile plan must bind leading-hyphen CMake arguments directly in the current PowerShell process" },
         [pscustomobject]@{ Needle = "& ./scripts/Build-OpenCV.ps1"; Issue = "Windows OpenCV build must bind profile-specific CMake arguments directly in the current PowerShell process" },
         [pscustomobject]@{ Needle = "& ./scripts/New-RuntimeInputArtifact.ps1"; Issue = "Windows runtime artifact creation must bind leading-hyphen CMake evidence directly in the current PowerShell process" },
@@ -388,18 +393,20 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Get-Command -Name `$tool -CommandType Application -All"; Issue = "Windows producer must remove every PATH directory that exposes a CMake generic compiler candidate, including bundled Strawberry GCC" },
         [pscustomobject]@{ Needle = "`$genericCompilerDirectorySet.Contains"; Issue = "Windows producer PATH sanitization must use the factual generic compiler directory set" },
         [pscustomobject]@{ Needle = "Remove-Item Env:ASM"; Issue = "Windows producer must clear an inherited generic ASM compiler override before OpenCV configuration" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_ASM_CACHE_EVIDENCE"; Issue = "Windows producer must emit the factual generic-ASM and MLAS cache values" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_OPENCV_ASM_CACHE_EVIDENCE"; Issue = "Windows producer must emit the architecture-specific generic-ASM and MLAS cache values" },
         [pscustomobject]@{ Needle = "Groups[1].Value -ne 'NOTFOUND'"; Issue = "Windows producer must require the CMake CheckLanguage literal generic-ASM fallback value" },
         [pscustomobject]@{ Needle = "OPENCV_DNN_MLAS_ENABLED:INTERNAL"; Issue = "Windows producer must verify that unsupported GNU-assembly MLAS is not retained in the MSVC build" },
         [pscustomobject]@{ Needle = "'-lpthread', '.dll.a', 'mingw', 'msys', 'cygwin'"; Issue = "Windows producer must reject foreign linker and import-library tokens from generated MSVC projects" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record generator, SDK, build list, and CPU configuration" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_NATIVE_PROFILE_EVIDENCE"; Issue = "Windows producer must record profile-specific wrapper source and ABI counts" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record architecture-specific generator, SDK, build list, and CPU configuration" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_NATIVE_PROFILE_EVIDENCE"; Issue = "Windows producer must record profile-specific wrapper source and ABI counts" },
         [pscustomobject]@{ Needle = "expectedSourceCount = if (`$profileName -eq 'mini') { 8 } else { 45 }"; Issue = "Windows producer must lock exact mini/full wrapper source counts" },
         [pscustomobject]@{ Needle = "expectedAbiFunctionCount = if (`$profileName -eq 'mini') { 304 } else { 1966 }"; Issue = "Windows producer must lock exact mini/full ABI counts" },
         [pscustomobject]@{ Needle = "Windows mini OpenCV build unexpectedly configured full-only DNN MLAS"; Issue = "Windows mini producer must reject full-only DNN MLAS configuration" },
         [pscustomobject]@{ Needle = "Windows mini OpenCV build unexpectedly generated the full-only DNN project"; Issue = "Windows mini producer must reject a generated DNN project" },
         [pscustomobject]@{ Needle = "100% tests passed(?:, 0 tests failed)? out of 5"; Issue = "Windows producer must accept the audited CTest 4.4 success summary while retaining the older equivalent format" },
-        [pscustomobject]@{ Needle = "WINDOWS_X64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Windows producer must require all five linked CTests" },
+        [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Windows producer must require all five linked CTests on the selected native architecture" },
+        [pscustomobject]@{ Needle = "Windows ARM64 full OpenCV build did not retain its factual pure-MSVC MLAS fallback boundary"; Issue = "Windows ARM64 producer must verify its own ASM/MLAS boundary independently from x64" },
+        [pscustomobject]@{ Needle = "Generated Windows ARM64 OpenCV project retained x64 compiler or machine evidence"; Issue = "Windows ARM64 producer must reject generated x64 compiler and machine evidence" },
         [pscustomobject]@{ Needle = "Test-WindowsRuntimePeClosure.ps1"; Issue = "Windows producer must run the reusable PE closure guard before upload" },
         [pscustomobject]@{ Needle = "-HostedProcessArchitecture"; Issue = "Windows producer provenance must record actual process architecture" },
         [pscustomobject]@{ Needle = "-WindowsSdkVersion"; Issue = "Windows producer provenance must record the selected Windows SDK" },
@@ -506,16 +513,23 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu ARM64 mini must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
-Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/full'" -Issue "Windows ARM64 must remain outside the real producer allowlist"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must remain outside the real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
 
 foreach ($required in @(
-        [pscustomobject]@{ Needle = 'if (-not $Rid.Equals("win-x64"'; Issue = "Windows PE audit must approve only exact win-x64" },
-        [pscustomobject]@{ Needle = 'ProcessArchitecture.ToString() -ne "X64"'; Issue = "Windows PE audit must require an actual x64 process" },
+        [pscustomobject]@{ Needle = '$architectureSpec = switch ($Rid)'; Issue = "Windows PE audit must derive architecture expectations from exact RID" },
+        [pscustomobject]@{ Needle = '"win-x64"'; Issue = "Windows PE audit must retain the exact win-x64 branch" },
+        [pscustomobject]@{ Needle = '"win-arm64"'; Issue = "Windows PE audit must retain the exact win-arm64 branch" },
+        [pscustomobject]@{ Needle = 'RuntimeArchitecture = "X64"'; Issue = "Windows PE audit must require an actual x64 process for win-x64" },
+        [pscustomobject]@{ Needle = 'RuntimeArchitecture = "Arm64"'; Issue = "Windows PE audit must require an actual ARM64 process for win-arm64" },
         [pscustomobject]@{ Needle = 'return $reader.ReadUInt16()'; Issue = "Windows PE audit must read the structured COFF machine field" },
-        [pscustomobject]@{ Needle = 'if ($machine -ne 0x8664)'; Issue = "Windows PE audit must require AMD64 for every DLL" },
+        [pscustomobject]@{ Needle = 'Machine = 0x8664'; Issue = "Windows PE audit must map win-x64 to AMD64 machine 0x8664" },
+        [pscustomobject]@{ Needle = 'Machine = 0xAA64'; Issue = "Windows PE audit must map win-arm64 to ARM64 machine 0xAA64" },
+        [pscustomobject]@{ Needle = 'if ($machine -ne $architectureSpec.Machine)'; Issue = "Windows PE audit must reject mixed or wrong machine values for every DLL" },
         [pscustomobject]@{ Needle = '& $Dumpbin /dependents'; Issue = "Windows PE audit must inspect dependency tables with dumpbin" },
-        [pscustomobject]@{ Needle = 'param([string]$ExplicitPath = "")'; Issue = "Windows PE audit must allow package consumers to discover Hostx64/x64 dumpbin without a producer path" },
+        [pscustomobject]@{ Needle = 'Where-Object { $_.Source -match $dumpbinPattern }'; Issue = "Windows PE audit must reject PATH dumpbin candidates for the wrong host or target architecture" },
+        [pscustomobject]@{ Needle = 'Explicit dumpbin.exe path did not match the native'; Issue = "Windows PE audit must reject an explicit dumpbin from the wrong host or target architecture" },
+        [pscustomobject]@{ Needle = 'Resolve-Dumpbin -ExplicitPath $DumpbinPath -TargetRid $Rid'; Issue = "Windows PE audit must discover architecture-specific dumpbin without a producer path" },
         [pscustomobject]@{ Needle = 'Primary and compatibility native loaders must be byte-identical'; Issue = "Windows PE audit must verify loader equality" },
         [pscustomobject]@{ Needle = 'Packaged OpenCV dependency closure is incomplete'; Issue = "Windows PE audit must reject missing package-owned imports" },
         [pscustomobject]@{ Needle = 'Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph'; Issue = "Windows PE audit must require the complete 16-module graph closure" },
@@ -548,6 +562,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "HostedPackageArchitecture = `$HostedPackageArchitecture"; Issue = "Runtime input artifact provenance must record the actual hosted package architecture" },
         [pscustomobject]@{ Needle = "HostedLibc = `$HostedLibc"; Issue = "Runtime input artifact provenance must record the actual hosted libc" },
         [pscustomobject]@{ Needle = "HostedCpuModel = `$HostedCpuModel"; Issue = "Runtime input artifact provenance must record the actual hosted CPU model" },
+        [pscustomobject]@{ Needle = "HostedMemoryBytes = `$HostedMemoryBytes"; Issue = "Runtime input artifact provenance must record factual hosted memory evidence" },
         [pscustomobject]@{ Needle = "HostedDiskAvailableBytes = `$HostedDiskAvailableBytes"; Issue = "Runtime input artifact provenance must record factual available disk evidence" },
         [pscustomobject]@{ Needle = "HostedOsCaption = `$HostedOsCaption"; Issue = "Runtime input artifact provenance must record the hosted Windows edition" },
         [pscustomobject]@{ Needle = "HostedOsVersion = `$HostedOsVersion"; Issue = "Runtime input artifact provenance must record the hosted OS version" },
@@ -679,40 +694,43 @@ if ($violations.Count -eq 0) {
             $isArm64Container = $producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.22.04-arm64", "debian.12-arm64")
             $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -eq "full"
             $isDebian1204Arm64 = $producerTarget.Rid -eq "debian.12-arm64" -and $producerTarget.Profile -eq "full"
-            $isWindowsTarget = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -in @("full", "mini")
+            $isWindowsX64 = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -in @("full", "mini")
+            $isWindowsArm64 = $producerTarget.Rid -eq "win-arm64" -and $producerTarget.Profile -eq "full"
+            $isWindowsTarget = $isWindowsX64 -or $isWindowsArm64
             $isWindowsMini = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -eq "mini"
-            $runnerImage = if ($isWindowsTarget) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } else { "" }
+            $runnerImage = if ($isWindowsArm64) { "win11-vs2026-arm64" } elseif ($isWindowsX64) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } else { "" }
             $runnerImageVersion = if ($isWindowsTarget -or $isArm64Hosted) { "fixture" } else { "" }
             $hostedDistro = if ($isWindowsTarget) { "windows" } elseif ($isArm64Hosted) { "ubuntu" } else { "" }
-            $hostedDistroVersion = if ($isWindowsTarget) { "10.0.26100" } elseif ($isArm64Hosted) { "24.04" } else { "" }
-            $hostedArchitecture = if ($isWindowsTarget) { "X64" } elseif ($isArm64Hosted) { "aarch64" } else { "" }
-            $hostedPackageArchitecture = if ($isWindowsTarget) { "AMD64" } elseif ($isArm64Hosted) { "arm64" } else { "" }
+            $hostedDistroVersion = if ($isWindowsArm64) { "10.0.26200" } elseif ($isWindowsX64) { "10.0.26100" } elseif ($isArm64Hosted) { "24.04" } else { "" }
+            $hostedArchitecture = if ($isWindowsArm64) { "Arm64" } elseif ($isWindowsX64) { "X64" } elseif ($isArm64Hosted) { "aarch64" } else { "" }
+            $hostedPackageArchitecture = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "AMD64" } elseif ($isArm64Hosted) { "arm64" } else { "" }
             $hostedLibc = if ($isArm64Hosted) { "glibc fixture" } else { "" }
-            $hostedCpuModel = if ($isWindowsTarget) { "AMD64 fixture" } elseif ($isArm64Hosted) { "Neoverse fixture" } else { "" }
+            $hostedCpuModel = if ($isWindowsArm64) { "Cobalt 100 fixture" } elseif ($isWindowsX64) { "AMD64 fixture" } elseif ($isArm64Hosted) { "Neoverse fixture" } else { "" }
+            $hostedMemoryBytes = if ($isWindowsTarget) { "17169428480" } else { "" }
             $hostedDiskAvailableBytes = if ($isWindowsTarget -or $isArm64Hosted) { "1" } else { "" }
-            $hostedOsCaption = if ($isWindowsTarget) { "Microsoft Windows Server fixture" } else { "" }
-            $hostedOsVersion = if ($isWindowsTarget) { "10.0.26100" } else { "" }
-            $hostedOsBuildNumber = if ($isWindowsTarget) { "26100" } else { "" }
-            $hostedProcessArchitecture = if ($isWindowsTarget) { "X64" } else { "" }
+            $hostedOsCaption = if ($isWindowsArm64) { "Microsoft Windows 11 Enterprise fixture" } elseif ($isWindowsX64) { "Microsoft Windows Server fixture" } else { "" }
+            $hostedOsVersion = if ($isWindowsArm64) { "10.0.26200" } elseif ($isWindowsX64) { "10.0.26100" } else { "" }
+            $hostedOsBuildNumber = if ($isWindowsArm64) { "26200" } elseif ($isWindowsX64) { "26100" } else { "" }
+            $hostedProcessArchitecture = if ($isWindowsArm64) { "Arm64" } elseif ($isWindowsX64) { "X64" } else { "" }
             $visualStudioVersion = if ($isWindowsTarget) { "18.7.fixture" } else { "" }
             $msvcVersion = if ($isWindowsTarget) { "14.51.fixture (compiler 19.51.fixture)" } else { "" }
             $windowsSdkVersion = if ($isWindowsTarget) { "10.0.26100.0" } else { "" }
             $cmakeVersion = if ($isWindowsTarget) { "cmake version fixture" } else { "" }
             $cmakeGenerator = if ($isWindowsTarget) { "Visual Studio 18 2026" } else { "" }
-            $cmakePlatform = if ($isWindowsTarget) { "x64" } else { "" }
+            $cmakePlatform = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "x64" } else { "" }
             $buildConfiguration = if ($isWindowsTarget) { "Release" } else { "" }
-            $compilerPath = if ($isWindowsTarget) { "C:\fixture\Hostx64\x64\cl.exe" } else { "" }
+            $compilerPath = if ($isWindowsArm64) { "C:\fixture\Hostarm64\arm64\cl.exe" } elseif ($isWindowsX64) { "C:\fixture\Hostx64\x64\cl.exe" } else { "" }
             $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
             if ($profileSpec.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
             }
             $openCvExtraCMakeArgs = if ($isWindowsMini) { "-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND" } else { [string]$producerTarget.OpenCvExtraCMakeArgs }
-            $openCvCMakeArguments = if ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsTarget) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
+            $openCvCMakeArguments = if ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
             $expectedModuleCount = @($profileSpec[0].modules).Count
-            $peAuditEvidence = if ($isWindowsTarget) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
-            $openCvCpuConfiguration = if ($isWindowsTarget) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
+            $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=full files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
+            $openCvCpuConfiguration = if ($isWindowsArm64) { "CPU_BASELINE:NEON;CPU_DISPATCH:" } elseif ($isWindowsX64) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
             $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
-            $openCvAsmConfiguration = if ($isWindowsMini) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile" } elseif ($isWindowsTarget) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
+            $openCvAsmConfiguration = if ($isWindowsMini) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile" } elseif ($isWindowsArm64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for ARM64" } elseif ($isWindowsX64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
             $nativeWrapperSources = if ($isWindowsMini) { '["src/error_state.cpp","src/version.cpp","src/core/mat.cpp","src/core/decomp.cpp","src/core/operations.cpp","src/videoio/videoio.cpp","src/imgcodecs.cpp","src/imgproc.cpp"]' } elseif ($isWindowsTarget) { '["full-source-fixture"]' } else { "" }
             $nativeWrapperSourceCount = if ($isWindowsMini) { "8" } elseif ($isWindowsTarget) { "45" } else { "" }
             $nativeAbiFunctionCount = if ($isWindowsMini) { "304" } elseif ($isWindowsTarget) { "1966" } else { "" }
@@ -745,6 +763,7 @@ if ($violations.Count -eq 0) {
                 -HostedPackageArchitecture $hostedPackageArchitecture `
                 -HostedLibc $hostedLibc `
                 -HostedCpuModel $hostedCpuModel `
+                -HostedMemoryBytes $hostedMemoryBytes `
                 -HostedDiskAvailableBytes $hostedDiskAvailableBytes `
                 -HostedOsCaption $hostedOsCaption `
                 -HostedOsVersion $hostedOsVersion `
@@ -829,6 +848,7 @@ if ($violations.Count -eq 0) {
                     -not ([string]$manifest.RunnerImageVersion).Equals($runnerImageVersion, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedArchitecture).Equals($hostedArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedPackageArchitecture).Equals($hostedPackageArchitecture, [System.StringComparison]::Ordinal) -or
+                    -not ([string]$manifest.HostedMemoryBytes).Equals($hostedMemoryBytes, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedProcessArchitecture).Equals($hostedProcessArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedOsCaption).Equals($hostedOsCaption, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedOsVersion).Equals($hostedOsVersion, [System.StringComparison]::Ordinal) -or
@@ -931,5 +951,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

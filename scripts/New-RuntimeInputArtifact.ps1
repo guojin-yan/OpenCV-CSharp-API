@@ -15,6 +15,7 @@ param(
     [string]$HostedPackageArchitecture = "",
     [string]$HostedLibc = "",
     [string]$HostedCpuModel = "",
+    [string]$HostedMemoryBytes = "",
     [string]$HostedDiskAvailableBytes = "",
     [string]$HostedOsCaption = "",
     [string]$HostedOsVersion = "",
@@ -405,6 +406,7 @@ $manifest = [ordered]@{
     HostedPackageArchitecture = $HostedPackageArchitecture
     HostedLibc = $HostedLibc
     HostedCpuModel = $HostedCpuModel
+    HostedMemoryBytes = $HostedMemoryBytes
     HostedDiskAvailableBytes = $HostedDiskAvailableBytes
     HostedOsCaption = $HostedOsCaption
     HostedOsVersion = $HostedOsVersion

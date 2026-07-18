@@ -42,39 +42,69 @@ function Resolve-InputDirectory {
 }
 
 function Resolve-Dumpbin {
-    param([string]$ExplicitPath = "")
+    param(
+        [string]$ExplicitPath = "",
+        [Parameter(Mandatory = $true)]
+        [string]$TargetRid
+    )
+
+    $toolSpec = switch ($TargetRid) {
+        "win-x64" {
+            [pscustomobject]@{
+                Component = "Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
+                Host = "Hostx64"
+                Target = "x64"
+            }
+        }
+        "win-arm64" {
+            [pscustomobject]@{
+                Component = "Microsoft.VisualStudio.Component.VC.Tools.ARM64"
+                Host = "Hostarm64"
+                Target = "arm64"
+            }
+        }
+        default { throw "Unsupported Windows RID while resolving dumpbin.exe: $TargetRid" }
+    }
+    $dumpbinPattern = '[\\/]bin[\\/]' + [regex]::Escape($toolSpec.Host) + '[\\/]' + [regex]::Escape($toolSpec.Target) + '[\\/]dumpbin\.exe$'
 
     if (-not [string]::IsNullOrWhiteSpace($ExplicitPath)) {
         if (-not (Test-Path -LiteralPath $ExplicitPath -PathType Leaf)) {
             throw "dumpbin.exe was not found: $ExplicitPath"
         }
 
-        return (Resolve-Path -LiteralPath $ExplicitPath).Path
+        $resolvedExplicitPath = (Resolve-Path -LiteralPath $ExplicitPath).Path
+        if ($resolvedExplicitPath -notmatch $dumpbinPattern) {
+            throw "Explicit dumpbin.exe path did not match the native $($toolSpec.Host)/$($toolSpec.Target) tool boundary: $resolvedExplicitPath"
+        }
+        return $resolvedExplicitPath
     }
 
-    $fromPath = @(Get-Command dumpbin.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1)
+    $fromPath = @(
+        Get-Command dumpbin.exe -CommandType Application -All -ErrorAction SilentlyContinue |
+            Where-Object { $_.Source -match $dumpbinPattern }
+    )
     if ($fromPath.Count -gt 0) {
         return $fromPath[0].Source
     }
 
     $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio/Installer/vswhere.exe"
     if (-not (Test-Path -LiteralPath $vswhere -PathType Leaf)) {
-        throw "vswhere.exe was not found while resolving Hostx64/x64 dumpbin.exe."
+        throw "vswhere.exe was not found while resolving native $($toolSpec.Host)/$($toolSpec.Target) dumpbin.exe."
     }
 
-    $installationPath = (& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath).Trim()
+    $installationPath = (& $vswhere -latest -products * -requires $toolSpec.Component -property installationPath).Trim()
     if ([string]::IsNullOrWhiteSpace($installationPath)) {
-        throw "A Visual Studio installation with native x64 C++ tools was not found."
+        throw "A Visual Studio installation with native $($toolSpec.Target) C++ tools was not found."
     }
 
     $matches = @(
         Get-ChildItem -LiteralPath (Join-Path $installationPath "VC/Tools/MSVC") -Recurse -File -Filter dumpbin.exe |
-            Where-Object { $_.FullName -match '[\\/]bin[\\/]Hostx64[\\/]x64[\\/]dumpbin\.exe$' } |
+            Where-Object { $_.FullName -match $dumpbinPattern } |
             Sort-Object FullName -Descending |
             Select-Object -First 1
     )
     if ($matches.Count -ne 1) {
-        throw "Exactly one latest Hostx64/x64 dumpbin.exe was expected."
+        throw "Exactly one latest $($toolSpec.Host)/$($toolSpec.Target) dumpbin.exe was expected."
     }
 
     return $matches[0].FullName
@@ -156,18 +186,38 @@ function Get-PeDependencies {
     return @($dependencies)
 }
 
-if (-not $Rid.Equals("win-x64", [System.StringComparison]::Ordinal)) {
-    throw "This factual PE closure audit currently approves only exact RID win-x64, got '$Rid'."
+$architectureSpec = switch ($Rid) {
+    "win-x64" {
+        [pscustomobject]@{
+            ProcessorArchitecture = "AMD64"
+            RuntimeArchitecture = "X64"
+            Machine = 0x8664
+            MachineName = "AMD64"
+        }
+    }
+    "win-arm64" {
+        [pscustomobject]@{
+            ProcessorArchitecture = "ARM64"
+            RuntimeArchitecture = "Arm64"
+            Machine = 0xAA64
+            MachineName = "ARM64"
+        }
+    }
+    default { throw "This factual PE closure audit approves only exact RIDs win-x64 and win-arm64, got '$Rid'." }
 }
 
 if (-not [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)) {
     throw "Windows PE closure audit must run on Windows."
 }
 
-if ([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString() -ne "X64" -or
-    [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString() -ne "X64" -or
+if ($env:PROCESSOR_ARCHITECTURE -ne $architectureSpec.ProcessorArchitecture -or
+    [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString() -ne $architectureSpec.RuntimeArchitecture -or
+    [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString() -ne $architectureSpec.RuntimeArchitecture -or
     -not [Environment]::Is64BitProcess) {
-    throw "Windows PE closure audit requires an actual x64 OS and x64 process."
+    throw "Windows PE closure audit requires an actual $($architectureSpec.ProcessorArchitecture) OS and native $($architectureSpec.RuntimeArchitecture) process for $Rid."
+}
+if ($Rid -eq "win-arm64" -and -not [string]::IsNullOrWhiteSpace($env:PROCESSOR_ARCHITEW6432)) {
+    throw "Windows ARM64 PE closure audit must not run through x64 compatibility translation."
 }
 
 $singleDirectoryMode = -not [string]::IsNullOrWhiteSpace($RuntimeDirectory)
@@ -236,14 +286,14 @@ if ($primaryHash -ne $compatibilityHash) {
     throw "Primary and compatibility native loaders must be byte-identical."
 }
 
-$dumpbin = Resolve-Dumpbin -ExplicitPath $DumpbinPath
+$dumpbin = Resolve-Dumpbin -ExplicitPath $DumpbinPath -TargetRid $Rid
 $dependenciesByName = [System.Collections.Generic.Dictionary[string, string[]]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $opencvImportEdges = 0
 foreach ($fileName in $expectedFileNames) {
     $file = $filesByName[$fileName]
     $machine = Get-PeMachine -Path $file.FullName
-    if ($machine -ne 0x8664) {
-        throw "Runtime DLL is not an AMD64 PE image: $fileName machine=0x$($machine.ToString('X4'))"
+    if ($machine -ne $architectureSpec.Machine) {
+        throw "Runtime DLL is not a $($architectureSpec.MachineName) PE image: $fileName machine=0x$($machine.ToString('X4'))"
     }
 
     $dependencies = @(Get-PeDependencies -Path $file.FullName -Dumpbin $dumpbin)
@@ -282,4 +332,4 @@ if ($unreachableModules.Count -gt 0 -or $reachableModules.Count -ne $moduleFileN
     throw "Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph. Unreachable: $($unreachableModules -join ', ')."
 }
 
-Write-Host "WINDOWS_PE_AUDIT_OK rid=$Rid profile=$RuntimeProfile files=$($filesByName.Count) machine=AMD64 packaged_modules=$($moduleFileNames.Count) reachable_modules=$($reachableModules.Count) loader_opencv_imports=$($primaryOpenCvImports.Count) opencv_import_edges=$opencvImportEdges missing_opencv_imports=0 loader_equal=true"
+Write-Host "WINDOWS_PE_AUDIT_OK rid=$Rid profile=$RuntimeProfile files=$($filesByName.Count) machine=$($architectureSpec.MachineName) packaged_modules=$($moduleFileNames.Count) reachable_modules=$($reachableModules.Count) loader_opencv_imports=$($primaryOpenCvImports.Count) opencv_import_edges=$opencvImportEdges missing_opencv_imports=0 loader_equal=true"

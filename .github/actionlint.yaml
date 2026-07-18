@@ -1,0 +1,13 @@
+# actionlint 1.7.12 predates GitHub's official windows-11-vs2026-arm preview label.
+self-hosted-runner:
+  labels: []
+
+config-variables: null
+
+paths:
+  .github/workflows/runtime-input.yml:
+    ignore:
+      - 'label "windows-11-vs2026-arm" is unknown'
+  .github/workflows/pack.yml:
+    ignore:
+      - 'label "windows-11-vs2026-arm" is unknown'

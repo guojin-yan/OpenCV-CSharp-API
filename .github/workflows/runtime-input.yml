@@ -8,7 +8,7 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; exact Windows x64 full/mini plus the approved Linux full targets and Ubuntu 24.04 x64 mini
+        description: Real producer target; exact Windows x64 full/mini, Windows ARM64 full, approved Linux full targets, and Ubuntu 24.04 x64 mini
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
@@ -29,6 +29,7 @@ jobs:
           $supportedTargets = @(
             'win-x64/full',
             'win-x64/mini',
+            'win-arm64/full',
             'ubuntu.24.04-x64/full',
             'ubuntu.24.04-x64/mini',
             'ubuntu.24.04-arm64/full',
@@ -43,7 +44,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86/ARM64, Ubuntu and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86, Windows ARM64 mini, Ubuntu and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -355,9 +356,39 @@ jobs:
           - rid: win-x64
             profile: full
             os: windows-latest
+            processor_architecture: AMD64
+            runtime_architecture: X64
+            package_architecture: AMD64
+            platform: x64
+            tool_component: Microsoft.VisualStudio.Component.VC.Tools.x86.x64
+            tool_host: Hostx64
+            tool_target: x64
+            opencv_arch_folder: x64
+            evidence_prefix: WINDOWS_X64
           - rid: win-x64
             profile: mini
             os: windows-latest
+            processor_architecture: AMD64
+            runtime_architecture: X64
+            package_architecture: AMD64
+            platform: x64
+            tool_component: Microsoft.VisualStudio.Component.VC.Tools.x86.x64
+            tool_host: Hostx64
+            tool_target: x64
+            opencv_arch_folder: x64
+            evidence_prefix: WINDOWS_X64
+          - rid: win-arm64
+            profile: full
+            os: windows-11-vs2026-arm
+            processor_architecture: ARM64
+            runtime_architecture: Arm64
+            package_architecture: ARM64
+            platform: ARM64
+            tool_component: Microsoft.VisualStudio.Component.VC.Tools.ARM64
+            tool_host: Hostarm64
+            tool_target: arm64
+            opencv_arch_folder: ARM64
+            evidence_prefix: WINDOWS_ARM64
     runs-on: ${{ matrix.os }}
     steps:
       - name: Skip unmatched Windows producer target
@@ -376,7 +407,7 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
-      - name: Record Windows x64 runner and toolchain evidence
+      - name: Record native Windows runner and toolchain evidence
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: windows
         shell: pwsh
@@ -386,11 +417,15 @@ jobs:
 
           $osArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
           $processArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
-          if ($env:PROCESSOR_ARCHITECTURE -ne "AMD64" -or
-              $osArchitecture -ne "X64" -or
-              $processArchitecture -ne "X64" -or
+          if ($env:PROCESSOR_ARCHITECTURE -ne '${{ matrix.processor_architecture }}' -or
+              $osArchitecture -ne '${{ matrix.runtime_architecture }}' -or
+              $processArchitecture -ne '${{ matrix.runtime_architecture }}' -or
               -not [Environment]::Is64BitProcess) {
-            throw "win-x64/${{ matrix.profile }} production requires an actual AMD64 Windows host and x64 process."
+            throw "${{ matrix.rid }}/${{ matrix.profile }} production requires an actual ${{ matrix.processor_architecture }} Windows host and native ${{ matrix.runtime_architecture }} process."
+          }
+          if ('${{ matrix.rid }}' -eq 'win-arm64' -and
+              (-not [string]::IsNullOrWhiteSpace($env:PROCESSOR_ARCHITEW6432) -or $env:RUNNER_ARCH -ne 'ARM64')) {
+            throw "win-arm64/full production must not run through x64 compatibility translation."
           }
           if ([string]::IsNullOrWhiteSpace($env:ImageOS) -or [string]::IsNullOrWhiteSpace($env:ImageVersion)) {
             throw "GitHub hosted Windows image evidence was not available."
@@ -398,34 +433,43 @@ jobs:
 
           $os = Get-CimInstance Win32_OperatingSystem
           $cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
-          $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='D:'"
+          $computer = Get-CimInstance Win32_ComputerSystem
+          $workspaceDrive = [System.IO.Path]::GetPathRoot($env:GITHUB_WORKSPACE).TrimEnd(
+            [System.IO.Path]::DirectorySeparatorChar,
+            [System.IO.Path]::AltDirectorySeparatorChar)
+          $disk = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='$workspaceDrive'"
           if ($null -eq $cpu -or $null -eq $disk -or [long]$disk.FreeSpace -le 0) {
-            throw "Windows x64 CPU or workspace disk evidence was not available."
+            throw "Native Windows CPU or workspace disk evidence was not available."
+          }
+          if ('${{ matrix.rid }}' -eq 'win-arm64' -and
+              ([int]$cpu.Architecture -ne 12 -or [int]$cpu.AddressWidth -ne 64 -or [long]$computer.TotalPhysicalMemory -lt 8GB)) {
+            throw "Windows ARM64 CPU or memory evidence did not match the audited native host boundary."
           }
 
           $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio/Installer/vswhere.exe"
           if (-not (Test-Path -LiteralPath $vswhere -PathType Leaf)) {
             throw "vswhere.exe was not found."
           }
-          $instances = @(& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -format json | ConvertFrom-Json)
+          $instances = @(& $vswhere -latest -products * -requires '${{ matrix.tool_component }}' -format json | ConvertFrom-Json)
           if ($instances.Count -ne 1) {
-            throw "Exactly one latest Visual Studio instance with native x64 C++ tools was expected."
+            throw "Exactly one latest Visual Studio instance with native ${{ matrix.tool_target }} C++ tools was expected."
           }
           $visualStudio = $instances[0]
           if (-not ([string]$visualStudio.installationVersion).StartsWith("18.", [System.StringComparison]::Ordinal)) {
-            throw "Visual Studio 18 is required by the audited win-x64 build plan."
+            throw "Visual Studio 18 is required by the audited native Windows build plan."
           }
 
+          $compilerPattern = '[\\/]bin[\\/]' + [regex]::Escape('${{ matrix.tool_host }}') + '[\\/]' + [regex]::Escape('${{ matrix.tool_target }}') + '[\\/]cl\.exe$'
           $cl = Get-ChildItem -LiteralPath (Join-Path $visualStudio.installationPath "VC/Tools/MSVC") -Recurse -File -Filter cl.exe |
-            Where-Object { $_.FullName -match '[\\/]bin[\\/]Hostx64[\\/]x64[\\/]cl\.exe$' } |
+            Where-Object { $_.FullName -match $compilerPattern } |
             Sort-Object FullName -Descending |
             Select-Object -First 1
           if ($null -eq $cl) {
-            throw "Native Hostx64/x64 cl.exe was not found."
+            throw "Native ${{ matrix.tool_host }}/${{ matrix.tool_target }} cl.exe was not found."
           }
           $dumpbin = Join-Path $cl.DirectoryName "dumpbin.exe"
           if (-not (Test-Path -LiteralPath $dumpbin -PathType Leaf)) {
-            throw "dumpbin.exe was not found beside Hostx64/x64 cl.exe."
+            throw "dumpbin.exe was not found beside the selected native compiler."
           }
 
           $msvcToolsetVersion = [regex]::Match($cl.FullName, '[\\/]MSVC[\\/]([^\\/]+)[\\/]bin[\\/]').Groups[1].Value
@@ -443,8 +487,8 @@ jobs:
 
           $cpuName = $cpu.Name.Trim()
           $msvcVersion = "$msvcToolsetVersion (compiler $msvcCompilerVersion)"
-          Write-Host "WINDOWS_X64_PRODUCER_HOST_EVIDENCE ImageOS=$($env:ImageOS) ImageVersion=$($env:ImageVersion) Caption=$($os.Caption) OSVersion=$($os.Version) BuildNumber=$($os.BuildNumber) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) CPU=$cpuName DISK_AVAILABLE_BYTES=$($disk.FreeSpace)"
-          Write-Host "WINDOWS_X64_PRODUCER_TOOLCHAIN_EVIDENCE VisualStudioVersion=$($visualStudio.installationVersion) VisualStudioPath=$($visualStudio.installationPath) MSVCVersion=$msvcVersion Compiler=$($cl.FullName) Dumpbin=$dumpbin CMake=$cmakeVersion PowerShell=$powerShellVersion DotNet=$dotnetVersion"
+          Write-Host "${{ matrix.evidence_prefix }}_PRODUCER_HOST_EVIDENCE ImageOS=$($env:ImageOS) ImageVersion=$($env:ImageVersion) Caption=$($os.Caption) OSVersion=$($os.Version) BuildNumber=$($os.BuildNumber) RUNNER_ARCH=$($env:RUNNER_ARCH) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) PROCESSOR_ARCHITEW6432=$($env:PROCESSOR_ARCHITEW6432) WORKSPACE_DRIVE=$workspaceDrive CPU=$cpuName CPUArchitecture=$($cpu.Architecture) AddressWidth=$($cpu.AddressWidth) MEMORY_BYTES=$($computer.TotalPhysicalMemory) DISK_AVAILABLE_BYTES=$($disk.FreeSpace)"
+          Write-Host "${{ matrix.evidence_prefix }}_PRODUCER_TOOLCHAIN_EVIDENCE VisualStudioVersion=$($visualStudio.installationVersion) VisualStudioPath=$($visualStudio.installationPath) MSVCVersion=$msvcVersion Compiler=$($cl.FullName) Dumpbin=$dumpbin CMake=$cmakeVersion PowerShell=$powerShellVersion DotNet=$dotnetVersion"
 
           "runner_image=$($env:ImageOS)" >> $env:GITHUB_OUTPUT
           "runner_image_version=$($env:ImageVersion)" >> $env:GITHUB_OUTPUT
@@ -454,6 +498,7 @@ jobs:
           "os_architecture=$osArchitecture" >> $env:GITHUB_OUTPUT
           "process_architecture=$processArchitecture" >> $env:GITHUB_OUTPUT
           "cpu_model=$cpuName" >> $env:GITHUB_OUTPUT
+          "memory_bytes=$($computer.TotalPhysicalMemory)" >> $env:GITHUB_OUTPUT
           "disk_available_bytes=$($disk.FreeSpace)" >> $env:GITHUB_OUTPUT
           "visual_studio_version=$($visualStudio.installationVersion)" >> $env:GITHUB_OUTPUT
           "msvc_version=$msvcVersion" >> $env:GITHUB_OUTPUT
@@ -473,7 +518,7 @@ jobs:
           }
 
           $profileName = '${{ matrix.profile }}'
-          $extraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
+          $extraCMakeArgs = if ('${{ matrix.rid }}' -eq 'win-x64' -and $profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
 
           $plan = & ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
@@ -482,10 +527,10 @@ jobs:
             -ExtraCMakeArgs $extraCMakeArgs `
             -DescribeOnly | ConvertFrom-Json
           if ($plan.Generator -ne 'Visual Studio 18 2026' -or
-              $plan.Platform -ne 'x64' -or
+              $plan.Platform -ne '${{ matrix.platform }}' -or
               $plan.BuildSystem -ne 'multi-config' -or
               $plan.InstallTarget -ne 'INSTALL') {
-            throw "Windows OpenCV build plan did not match the audited VS 18 x64 multi-config boundary."
+            throw "Windows OpenCV build plan did not match the audited VS 18 ${{ matrix.platform }} multi-config boundary."
           }
 
           $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
@@ -526,7 +571,7 @@ jobs:
             }
           }
           $nativeSourcesJson = ConvertTo-Json -InputObject ([object[]]$nativeSources) -Compress
-          Write-Host "WINDOWS_X64_NATIVE_PROFILE_EVIDENCE profile=$profileName sources=$($nativeSources.Count) abi_functions=$abiFunctionCount build_list=$($profile[0].buildList)"
+          Write-Host "${{ matrix.evidence_prefix }}_NATIVE_PROFILE_EVIDENCE profile=$profileName sources=$($nativeSources.Count) abi_functions=$abiFunctionCount build_list=$($profile[0].buildList)"
 
           "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
           "opencv_extra_cmake_args=$extraCMakeArgs" >> $env:GITHUB_OUTPUT
@@ -549,7 +594,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) {
             throw "OpenCV source clone failed."
           }
-      - name: Build Windows x64 OpenCV runtime
+      - name: Build native Windows OpenCV runtime
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: windows_build
         shell: pwsh
@@ -600,7 +645,7 @@ jobs:
           }
 
           $excludedForeignToolDirectoriesJson = ConvertTo-Json -InputObject ([object[]]$excludedForeignToolDirectories) -Compress
-          Write-Host "WINDOWS_X64_OPENCV_PATH_SANITIZED excluded_foreign_tool_directories=$excludedForeignToolDirectoriesJson generic_gnu_compilers=absent asm_environment=cleared"
+          Write-Host "${{ matrix.evidence_prefix }}_OPENCV_PATH_SANITIZED excluded_foreign_tool_directories=$excludedForeignToolDirectoriesJson generic_gnu_compilers=absent asm_environment=cleared"
           "excluded_foreign_tool_directories=$excludedForeignToolDirectoriesJson" >> $env:GITHUB_OUTPUT
 
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
@@ -621,20 +666,32 @@ jobs:
           $cachePath = Join-Path $buildDir 'CMakeCache.txt'
           $cache = Get-Content -LiteralPath $cachePath -Raw
           if ($cache -notmatch '(?m)^CMAKE_GENERATOR:INTERNAL=Visual Studio 18 2026\r?$' -or
-              $cache -notmatch '(?m)^CMAKE_GENERATOR_PLATFORM:INTERNAL=x64\r?$') {
-            throw "OpenCV CMake cache did not retain the audited VS 18 x64 boundary."
+              $cache -notmatch '(?m)^CMAKE_GENERATOR_PLATFORM:INTERNAL=${{ matrix.platform }}\r?$') {
+            throw "OpenCV CMake cache did not retain the audited VS 18 ${{ matrix.platform }} boundary."
           }
 
+          $ridName = '${{ matrix.rid }}'
           $profileName = '${{ matrix.profile }}'
           $asmCompilerMatch = [regex]::Match($cache, '(?m)^CMAKE_ASM_COMPILER:[^=]+=([^\r\n]+)\r?$')
           $mlasEnabledMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_ENABLED:INTERNAL=([^\r\n]+)\r?$')
           $mlasSkipReasonMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_SKIP_REASON:INTERNAL=([^\r\n]+)\r?$')
-          Write-Host "WINDOWS_X64_OPENCV_ASM_CACHE_EVIDENCE CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value) OPENCV_DNN_MLAS_ENABLED=$($mlasEnabledMatch.Groups[1].Value) OPENCV_DNN_MLAS_SKIP_REASON=$($mlasSkipReasonMatch.Groups[1].Value)"
+          Write-Host "${{ matrix.evidence_prefix }}_OPENCV_ASM_CACHE_EVIDENCE CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value) OPENCV_DNN_MLAS_ENABLED=$($mlasEnabledMatch.Groups[1].Value) OPENCV_DNN_MLAS_SKIP_REASON=$($mlasSkipReasonMatch.Groups[1].Value)"
           if (-not $asmCompilerMatch.Success -or
               $asmCompilerMatch.Groups[1].Value -ne 'NOTFOUND') {
             throw "Windows OpenCV build did not retain the pure-MSVC generic-ASM fallback boundary."
           }
-          if ($profileName -eq 'full') {
+          if ($ridName -eq 'win-arm64') {
+            if ($profileName -ne 'full' -or
+                -not $mlasEnabledMatch.Success -or
+                $mlasEnabledMatch.Groups[1].Value -ne '0' -or
+                -not $mlasSkipReasonMatch.Success -or
+                $mlasSkipReasonMatch.Groups[1].Value -notmatch '^no ASM compiler available for (?:ARM64|arm64)$') {
+              throw "Windows ARM64 full OpenCV build did not retain its factual pure-MSVC MLAS fallback boundary."
+            }
+            $mlasEnabled = $mlasEnabledMatch.Groups[1].Value
+            $mlasSkipReason = $mlasSkipReasonMatch.Groups[1].Value
+          }
+          elseif ($profileName -eq 'full') {
             if (-not $mlasEnabledMatch.Success -or
                 $mlasEnabledMatch.Groups[1].Value -ne '0' -or
                 -not $mlasSkipReasonMatch.Success -or
@@ -668,6 +725,13 @@ jobs:
               throw "Generated OpenCV MSVC project retained foreign linker/toolchain token '$foreignLinkToken'."
             }
           }
+          if ($ridName -eq 'win-arm64') {
+            foreach ($x64Token in @('Hostx64\x64', '<Platform>x64</Platform>', 'MachineX64', '/machine:x64', '-mavx')) {
+              if ($coreProjectText.IndexOf($x64Token, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+                throw "Generated Windows ARM64 OpenCV project retained x64 compiler or machine evidence '$x64Token'."
+              }
+            }
+          }
           [xml]$project = Get-Content -LiteralPath $coreProject.FullName -Raw
           $sdkVersions = @(
             $project.SelectNodes("//*[local-name()='WindowsTargetPlatformVersion']") |
@@ -686,9 +750,12 @@ jobs:
           if ([string]::IsNullOrWhiteSpace($cpuConfiguration)) {
             throw "OpenCV CPU baseline/dispatch configuration was not recorded."
           }
+          if ($ridName -eq 'win-arm64' -and $cpuConfiguration -match '(?i)(?:SSE|AVX)') {
+            throw "Windows ARM64 OpenCV CPU configuration retained x86/x64 SIMD evidence: $cpuConfiguration"
+          }
 
           $asmConfiguration = "CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value);OPENCV_DNN_MLAS_ENABLED=$mlasEnabled;OPENCV_DNN_MLAS_SKIP_REASON=$mlasSkipReason"
-          Write-Host "WINDOWS_X64_OPENCV_BUILD_EVIDENCE Generator=${{ steps.profile.outputs.generator }} Platform=${{ steps.profile.outputs.platform }} Configuration=${{ steps.profile.outputs.configuration }} WindowsSDK=$($sdkVersions[0]) BuildList=${{ steps.profile.outputs.build_list }} CPU=$cpuConfiguration ASM=$asmConfiguration"
+          Write-Host "${{ matrix.evidence_prefix }}_OPENCV_BUILD_EVIDENCE Generator=${{ steps.profile.outputs.generator }} Platform=${{ steps.profile.outputs.platform }} Configuration=${{ steps.profile.outputs.configuration }} WindowsSDK=$($sdkVersions[0]) BuildList=${{ steps.profile.outputs.build_list }} CPU=$cpuConfiguration ASM=$asmConfiguration"
           "windows_sdk_version=$($sdkVersions[0])" >> $env:GITHUB_OUTPUT
           "opencv_cpu_configuration=$cpuConfiguration" >> $env:GITHUB_OUTPUT
           "opencv_asm_configuration=$asmConfiguration" >> $env:GITHUB_OUTPUT
@@ -701,14 +768,14 @@ jobs:
           $installDir = Join-Path $workspaceRoot 'artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}'
           $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
           $configCandidates = @(
-            (Join-Path $installDir 'x64/vc18/lib'),
+            (Join-Path $installDir '${{ matrix.opencv_arch_folder }}/vc18/lib'),
             (Join-Path $installDir 'lib/cmake/opencv5'),
             (Join-Path $installDir 'lib'),
             $installDir
           )
           $runtimeCandidates = @(
-            (Join-Path $installDir 'x64/vc18/bin'),
-            (Join-Path $installDir 'x64/vc18/bin/Release'),
+            (Join-Path $installDir '${{ matrix.opencv_arch_folder }}/vc18/bin'),
+            (Join-Path $installDir '${{ matrix.opencv_arch_folder }}/vc18/bin/Release'),
             (Join-Path $installDir 'bin'),
             (Join-Path $installDir 'bin/Release')
           )
@@ -759,8 +826,8 @@ jobs:
           if ($exitCode -ne 0 -or $text -notmatch $successSummaryPattern) {
             throw "Linked Windows native wrapper did not pass all five CTests."
           }
-          Write-Host 'WINDOWS_X64_LINKED_CTEST_EVIDENCE passed=5 total=5'
-      - name: Audit Windows x64 producer PE closure
+          Write-Host '${{ matrix.evidence_prefix }}_LINKED_CTEST_EVIDENCE passed=5 total=5'
+      - name: Audit native Windows producer PE closure
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: pe
         shell: pwsh
@@ -776,11 +843,11 @@ jobs:
           $exitCode = $LASTEXITCODE
           $output | ForEach-Object { Write-Host $_ }
           if ($exitCode -ne 0) {
-            throw "Windows x64 producer PE closure audit failed."
+            throw "${{ matrix.rid }} producer PE closure audit failed."
           }
           $markers = @($output | Where-Object { ([string]$_).StartsWith('WINDOWS_PE_AUDIT_OK ', [System.StringComparison]::Ordinal) })
           if ($markers.Count -ne 1) {
-            throw "Windows x64 producer PE audit emitted no unique success marker."
+            throw "${{ matrix.rid }} producer PE audit emitted no unique success marker."
           }
           "pe_audit=$($markers[0])" >> $env:GITHUB_OUTPUT
       - name: Create Windows runtime input artifact layout
@@ -803,8 +870,9 @@ jobs:
             -HostedDistro 'windows' `
             -HostedDistroVersion '${{ steps.windows.outputs.os_version }}' `
             -HostedArchitecture '${{ steps.windows.outputs.os_architecture }}' `
-            -HostedPackageArchitecture 'AMD64' `
+            -HostedPackageArchitecture '${{ matrix.package_architecture }}' `
             -HostedCpuModel '${{ steps.windows.outputs.cpu_model }}' `
+            -HostedMemoryBytes '${{ steps.windows.outputs.memory_bytes }}' `
             -HostedDiskAvailableBytes '${{ steps.windows.outputs.disk_available_bytes }}' `
             -HostedOsCaption '${{ steps.windows.outputs.os_caption }}' `
             -HostedOsVersion '${{ steps.windows.outputs.os_version }}' `
