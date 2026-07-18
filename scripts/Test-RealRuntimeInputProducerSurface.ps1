@@ -407,12 +407,17 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Windows producer must require all five linked CTests on the selected native architecture" },
         [pscustomobject]@{ Needle = "Windows ARM64 full OpenCV build did not retain its factual pure-MSVC MLAS fallback boundary"; Issue = "Windows ARM64 producer must verify its own ASM/MLAS boundary independently from x64" },
         [pscustomobject]@{ Needle = "Generated Windows ARM64 OpenCV project retained x64 compiler or machine evidence"; Issue = "Windows ARM64 producer must reject generated x64 compiler and machine evidence" },
+        [pscustomobject]@{ Needle = "Apply audited Windows ARM64 OpenCV MLAS processor patch"; Issue = "Windows ARM64 producer must apply the audited OpenCV processor-case fix before building DNN" },
+        [pscustomobject]@{ Needle = "git -C `$sourceDir apply --check `$patchPath"; Issue = "Windows ARM64 producer must prove the exact OpenCV patch applies cleanly" },
+        [pscustomobject]@{ Needle = "WINDOWS_ARM64_OPENCV_SOURCE_PATCH_OK"; Issue = "Windows ARM64 producer must emit hashed source-patch evidence" },
+        [pscustomobject]@{ Needle = "packaging/runtime/patches/windows-arm64-mlas-processor-case.patch"; Issue = "Windows ARM64 producer must use the repository-owned audited OpenCV patch" },
         [pscustomobject]@{ Needle = "Test-WindowsRuntimePeClosure.ps1"; Issue = "Windows producer must run the reusable PE closure guard before upload" },
         [pscustomobject]@{ Needle = "-HostedProcessArchitecture"; Issue = "Windows producer provenance must record actual process architecture" },
         [pscustomobject]@{ Needle = "-WindowsSdkVersion"; Issue = "Windows producer provenance must record the selected Windows SDK" },
         [pscustomobject]@{ Needle = "-PeAuditEvidence"; Issue = "Windows producer provenance must retain the PE closure marker" },
         [pscustomobject]@{ Needle = "-ExcludedForeignToolDirectories"; Issue = "Windows producer provenance must retain the build-scoped PATH exclusions" },
         [pscustomobject]@{ Needle = "-OpenCvAsmConfiguration"; Issue = "Windows producer provenance must retain the generic-ASM and MLAS fallback configuration" },
+        [pscustomobject]@{ Needle = "-OpenCvSourcePatchEvidence"; Issue = "Windows ARM64 producer provenance must retain the audited OpenCV source patch" },
         [pscustomobject]@{ Needle = "-NativeWrapperSources"; Issue = "Windows producer provenance must retain the exact wrapper source list" },
         [pscustomobject]@{ Needle = "-NativeWrapperSourceCount"; Issue = "Windows producer provenance must retain the wrapper source count" },
         [pscustomobject]@{ Needle = "-NativeAbiFunctionCount"; Issue = "Windows producer provenance must retain the ABI function count" },
@@ -595,6 +600,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "PowerShellVersion = `$PowerShellVersion"; Issue = "Runtime input artifact provenance must record an explicitly bootstrapped PowerShell version" },
         [pscustomobject]@{ Needle = "PowerShellArchiveSha256 = `$PowerShellArchiveSha256"; Issue = "Runtime input artifact provenance must record an explicitly verified PowerShell archive hash" },
         [pscustomobject]@{ Needle = "OpenCvExtraCMakeArgs = `$OpenCvExtraCMakeArgs"; Issue = "Runtime input artifact provenance must record distro-specific OpenCV CMake arguments" },
+        [pscustomobject]@{ Needle = "OpenCvSourcePatchEvidence = `$OpenCvSourcePatchEvidence"; Issue = "Runtime input artifact provenance must record audited OpenCV source patch evidence" },
         [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = '"Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers'; Issue = "Runtime input artifact script must keep compatibility loader explicitly scoped" },
@@ -725,6 +731,17 @@ if ($violations.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
             }
             $openCvExtraCMakeArgs = if ($isWindowsMini) { "-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND" } else { [string]$producerTarget.OpenCvExtraCMakeArgs }
+            $openCvSourcePatchEvidence = if ($isWindowsArm64) {
+                [ordered]@{
+                    Path = "packaging/runtime/patches/windows-arm64-mlas-processor-case.patch"
+                    Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "packaging/runtime/patches/windows-arm64-mlas-processor-case.patch") -Algorithm SHA256).Hash
+                    Target = "3rdparty/mlas/CMakeLists.txt"
+                    Reason = "accept-uppercase-cmake-arm64-for-mlas-detection"
+                } | ConvertTo-Json -Compress
+            }
+            else {
+                ""
+            }
             $openCvCMakeArguments = if ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } else { "" }
             $expectedModuleCount = @($profileSpec[0].modules).Count
             $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=full files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
@@ -796,6 +813,7 @@ if ($violations.Count -eq 0) {
                 -PowerShellVersion $powerShellVersion `
                 -PowerShellArchiveSha256 $powerShellArchiveSha256 `
                 -OpenCvExtraCMakeArgs $openCvExtraCMakeArgs `
+                -OpenCvSourcePatchEvidence $openCvSourcePatchEvidence `
                 -OutputRoot $fixtureOutputRoot
 
             $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "$($producerTarget.Rid)-$($producerTarget.Profile)") "runtime-input.provenance.json"
@@ -886,6 +904,9 @@ if ($violations.Count -eq 0) {
 
             if (-not ([string]$manifest.OpenCvExtraCMakeArgs).Equals($openCvExtraCMakeArgs, [System.StringComparison]::Ordinal)) {
                 throw "Fixture provenance OpenCvExtraCMakeArgs did not match producer target build arguments for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+            if (-not ([string]$manifest.OpenCvSourcePatchEvidence).Equals($openCvSourcePatchEvidence, [System.StringComparison]::Ordinal)) {
+                throw "Fixture provenance OpenCvSourcePatchEvidence did not match producer source patch evidence for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
             if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) {

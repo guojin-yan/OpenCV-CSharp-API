@@ -1,0 +1,11 @@
+diff --git a/3rdparty/mlas/CMakeLists.txt b/3rdparty/mlas/CMakeLists.txt
+--- a/3rdparty/mlas/CMakeLists.txt
++++ b/3rdparty/mlas/CMakeLists.txt
+@@ -42,6 +42,6 @@ set(MLAS_WASM        FALSE CACHE INTERNAL "" FORCE)
+ if (CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+   set(MLAS_WASM TRUE CACHE INTERNAL "" FORCE)
+-elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^arm64.*")
++elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm64|ARM64).*")
+   set(MLAS_ARM64 TRUE CACHE INTERNAL "" FORCE)
+ elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^aarch64.*")
+   set(MLAS_ARM64 TRUE CACHE INTERNAL "" FORCE)

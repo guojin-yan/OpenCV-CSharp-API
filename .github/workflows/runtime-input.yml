@@ -594,6 +594,52 @@ jobs:
           if ($LASTEXITCODE -ne 0) {
             throw "OpenCV source clone failed."
           }
+      - name: Apply audited Windows ARM64 OpenCV MLAS processor patch
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'win-arm64' && matrix.profile == 'full' }}
+        id: arm64_patch
+        shell: pwsh
+        run: |
+          $relativePatchPath = 'packaging/runtime/patches/windows-arm64-mlas-processor-case.patch'
+          $relativeTargetPath = '3rdparty/mlas/CMakeLists.txt'
+          $patchPath = Join-Path $env:GITHUB_WORKSPACE $relativePatchPath
+          $sourceDir = Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source/opencv-${{ inputs.opencv_version }}'
+          $targetPath = Join-Path $sourceDir $relativeTargetPath
+          if (-not (Test-Path -LiteralPath $patchPath -PathType Leaf) -or
+              -not (Test-Path -LiteralPath $targetPath -PathType Leaf)) {
+            throw "Windows ARM64 OpenCV MLAS processor patch input was not found."
+          }
+
+          git -C $sourceDir apply --check $patchPath
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows ARM64 OpenCV MLAS processor patch did not apply cleanly to the selected source."
+          }
+          git -C $sourceDir apply $patchPath
+          if ($LASTEXITCODE -ne 0) {
+            throw "Windows ARM64 OpenCV MLAS processor patch failed."
+          }
+          git -C $sourceDir diff --check
+          if ($LASTEXITCODE -ne 0) {
+            throw "Patched Windows ARM64 OpenCV source failed git diff --check."
+          }
+
+          $changedFiles = @(git -C $sourceDir diff --name-only)
+          $targetText = Get-Content -LiteralPath $targetPath -Raw
+          if ($changedFiles.Count -ne 1 -or
+              $changedFiles[0] -ne $relativeTargetPath -or
+              $targetText -notmatch 'CMAKE_SYSTEM_PROCESSOR MATCHES "\^\(arm64\|ARM64\)\.\*"' -or
+              $targetText -match 'CMAKE_SYSTEM_PROCESSOR MATCHES "\^arm64\.\*"') {
+            throw "Windows ARM64 OpenCV patch did not retain the exact MLAS processor-case change."
+          }
+
+          $patchSha256 = (Get-FileHash -LiteralPath $patchPath -Algorithm SHA256).Hash
+          $evidence = [ordered]@{
+            Path = $relativePatchPath
+            Sha256 = $patchSha256
+            Target = $relativeTargetPath
+            Reason = 'accept-uppercase-cmake-arm64-for-mlas-detection'
+          } | ConvertTo-Json -Compress
+          Write-Host "WINDOWS_ARM64_OPENCV_SOURCE_PATCH_OK path=$relativePatchPath sha256=$patchSha256 target=$relativeTargetPath"
+          "source_patch_evidence=$evidence" >> $env:GITHUB_OUTPUT
       - name: Build native Windows OpenCV runtime
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: windows_build
@@ -895,6 +941,7 @@ jobs:
             -NativeWrapperSourceCount '${{ steps.profile.outputs.native_wrapper_source_count }}' `
             -NativeAbiFunctionCount '${{ steps.profile.outputs.native_abi_function_count }}' `
             -OpenCvExtraCMakeArgs '${{ steps.profile.outputs.opencv_extra_cmake_args }}' `
+            -OpenCvSourcePatchEvidence '${{ steps.arm64_patch.outputs.source_patch_evidence }}' `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload Windows runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}

@@ -498,6 +498,7 @@ jobs:
               [string]$provenance.OpenCvCpuConfiguration,
               [string]$provenance.ExcludedForeignToolDirectories,
               [string]$provenance.OpenCvAsmConfiguration,
+              [string]$provenance.OpenCvSourcePatchEvidence,
               [string]$provenance.NativeWrapperSources,
               [string]$provenance.PeAuditEvidence)) {
             if ([string]::IsNullOrWhiteSpace($requiredValue)) {
@@ -508,9 +509,20 @@ jobs:
           try {
             $nativeWrapperSources = @(([string]$provenance.NativeWrapperSources | ConvertFrom-Json))
             $excludedForeignToolDirectories = @(([string]$provenance.ExcludedForeignToolDirectories | ConvertFrom-Json))
+            $sourcePatchEvidence = [string]$provenance.OpenCvSourcePatchEvidence | ConvertFrom-Json
           }
           catch {
-            throw "Windows ARM64 runtime-input provenance contains invalid source or PATH evidence JSON."
+            throw "Windows ARM64 runtime-input provenance contains invalid source, PATH, or OpenCV patch evidence JSON."
+          }
+          $expectedPatchPath = 'packaging/runtime/patches/windows-arm64-mlas-processor-case.patch'
+          $expectedPatchTarget = '3rdparty/mlas/CMakeLists.txt'
+          $expectedPatchReason = 'accept-uppercase-cmake-arm64-for-mlas-detection'
+          $expectedPatchSha256 = (Get-FileHash -LiteralPath $expectedPatchPath -Algorithm SHA256).Hash
+          if ($sourcePatchEvidence.Path -ne $expectedPatchPath -or
+              $sourcePatchEvidence.Target -ne $expectedPatchTarget -or
+              $sourcePatchEvidence.Reason -ne $expectedPatchReason -or
+              $sourcePatchEvidence.Sha256 -ne $expectedPatchSha256) {
+            throw "Windows ARM64 provenance does not retain the audited OpenCV MLAS processor-case patch."
           }
           $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
           function Get-NativeSourceList([string]$variableName) {
@@ -568,7 +580,8 @@ jobs:
             [string]$provenance.OpenCvCMakeArguments,
             [string]$provenance.PeAuditEvidence,
             [string]$provenance.OpenCvCpuConfiguration,
-            [string]$provenance.OpenCvAsmConfiguration
+            [string]$provenance.OpenCvAsmConfiguration,
+            [string]$provenance.OpenCvSourcePatchEvidence
           ) -join "`n"
           foreach ($forbiddenToken in @('Hostx64', 'AMD64', 'machine=x64', '-A;x64', 'QEMU', 'emulation', 'cross-compile', '-lpthread', '.dll.a')) {
             if ($forbiddenEvidence.IndexOf($forbiddenToken, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {

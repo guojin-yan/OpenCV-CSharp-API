@@ -48,6 +48,7 @@ param(
     [string]$PowerShellVersion = "",
     [string]$PowerShellArchiveSha256 = "",
     [string]$OpenCvExtraCMakeArgs = "",
+    [string]$OpenCvSourcePatchEvidence = "",
     [string]$OutputRoot = "artifacts/runtime-inputs",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json"
 )
@@ -439,6 +440,7 @@ $manifest = [ordered]@{
     PowerShellVersion = $PowerShellVersion
     PowerShellArchiveSha256 = $PowerShellArchiveSha256
     OpenCvExtraCMakeArgs = $OpenCvExtraCMakeArgs
+    OpenCvSourcePatchEvidence = $OpenCvSourcePatchEvidence
     RuntimeProfile = $RuntimeProfile
     RuntimeProfilePackageIdSuffix = Get-OptionalStringProperty -InputObject $profileDefinition -Name "packageIdSuffix"
     BuildList = Get-OptionalStringProperty -InputObject $profileDefinition -Name "buildList"
