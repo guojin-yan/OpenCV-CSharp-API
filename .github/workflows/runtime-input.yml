@@ -8,11 +8,11 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; currently exact Windows x64 full plus the approved Linux full targets and Ubuntu 24.04 x64 mini
+        description: Real producer target; exact Windows x64 full/mini plus the approved Linux full targets and Ubuntu 24.04 x64 mini
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
-        description: Real producer profile; full for all targets, mini currently for ubuntu.24.04-x64 only
+        description: Real producer profile; full for all targets, mini for win-x64 and ubuntu.24.04-x64
         required: true
         default: full
 
@@ -28,6 +28,7 @@ jobs:
         run: |
           $supportedTargets = @(
             'win-x64/full',
+            'win-x64/mini',
             'ubuntu.24.04-x64/full',
             'ubuntu.24.04-x64/mini',
             'ubuntu.24.04-arm64/full',
@@ -42,7 +43,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows mini/x86/ARM64, Ubuntu and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86/ARM64, Ubuntu and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -354,6 +355,9 @@ jobs:
           - rid: win-x64
             profile: full
             os: windows-latest
+          - rid: win-x64
+            profile: mini
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - name: Skip unmatched Windows producer target
@@ -386,7 +390,7 @@ jobs:
               $osArchitecture -ne "X64" -or
               $processArchitecture -ne "X64" -or
               -not [Environment]::Is64BitProcess) {
-            throw "win-x64/full production requires an actual AMD64 Windows host and x64 process."
+            throw "win-x64/${{ matrix.profile }} production requires an actual AMD64 Windows host and x64 process."
           }
           if ([string]::IsNullOrWhiteSpace($env:ImageOS) -or [string]::IsNullOrWhiteSpace($env:ImageVersion)) {
             throw "GitHub hosted Windows image evidence was not available."
@@ -456,7 +460,7 @@ jobs:
           "compiler_path=$($cl.FullName)" >> $env:GITHUB_OUTPUT
           "dumpbin_path=$dumpbin" >> $env:GITHUB_OUTPUT
           "cmake_version=$cmakeVersion" >> $env:GITHUB_OUTPUT
-      - name: Resolve Windows full runtime build plan
+      - name: Resolve Windows runtime build plan and native profile evidence
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: profile
         shell: pwsh
@@ -468,24 +472,72 @@ jobs:
             throw "Windows runtime RID/profile was not found exactly once in the matrix."
           }
 
+          $profileName = '${{ matrix.profile }}'
+          $extraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
+
           $plan = & pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -Rid '${{ matrix.rid }}' `
             -BuildList ([string]$profile[0].buildList) `
+            -ExtraCMakeArgs $extraCMakeArgs `
             -DescribeOnly | ConvertFrom-Json
           if ($plan.Generator -ne 'Visual Studio 18 2026' -or
               $plan.Platform -ne 'x64' -or
               $plan.BuildSystem -ne 'multi-config' -or
               $plan.InstallTarget -ne 'INSTALL') {
-            throw "Windows full OpenCV build plan did not match the audited VS 18 x64 multi-config boundary."
+            throw "Windows OpenCV build plan did not match the audited VS 18 x64 multi-config boundary."
           }
 
+          $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
+          function Get-NativeSourceList([string]$variableName) {
+            $match = [regex]::Match($cmakeText, "(?s)set\($variableName(?<body>.*?)\)")
+            if (-not $match.Success) {
+              throw "Native CMake source list was not found: $variableName"
+            }
+
+            return @(
+              [regex]::Matches($match.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
+                ForEach-Object { $_.Groups[1].Value }
+            )
+          }
+
+          $miniSources = @(Get-NativeSourceList -variableName 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
+          $fullOnlySources = @(Get-NativeSourceList -variableName 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
+          $nativeSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $abiManifest = if ($profileName -eq 'mini') {
+            './src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt'
+          }
+          else {
+            './src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt'
+          }
+          $abiFunctionLine = Get-Content -LiteralPath $abiManifest | Where-Object { $_ -match '^function-count=' }
+          if (@($abiFunctionLine).Count -ne 1) {
+            throw "Native ABI manifest did not contain exactly one function-count value for profile $profileName."
+          }
+          $abiFunctionCount = [int](([string]$abiFunctionLine) -replace '^function-count=', '')
+          if ($nativeSources.Count -ne $expectedSourceCount -or $abiFunctionCount -ne $expectedAbiFunctionCount) {
+            throw "Windows native profile evidence mismatch for ${profileName}: sources=$($nativeSources.Count), ABI=$abiFunctionCount."
+          }
+          foreach ($source in $nativeSources) {
+            if (-not (Test-Path -LiteralPath (Join-Path ./src/OpenCvSharp.Native $source) -PathType Leaf)) {
+              throw "Windows native profile source was not found: $source"
+            }
+          }
+          $nativeSourcesJson = ConvertTo-Json -InputObject ([object[]]$nativeSources) -Compress
+          Write-Host "WINDOWS_X64_NATIVE_PROFILE_EVIDENCE profile=$profileName sources=$($nativeSources.Count) abi_functions=$abiFunctionCount build_list=$($profile[0].buildList)"
+
           "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
+          "opencv_extra_cmake_args=$extraCMakeArgs" >> $env:GITHUB_OUTPUT
           "opencv_rid=$($rid[0].opencvRid)" >> $env:GITHUB_OUTPUT
           "generator=$($plan.Generator)" >> $env:GITHUB_OUTPUT
           "platform=$($plan.Platform)" >> $env:GITHUB_OUTPUT
           "configuration=Release" >> $env:GITHUB_OUTPUT
           "cmake_arguments=$($plan.CMakeArgs | ConvertTo-Json -Compress)" >> $env:GITHUB_OUTPUT
+          "native_wrapper_sources=$nativeSourcesJson" >> $env:GITHUB_OUTPUT
+          "native_wrapper_source_count=$($nativeSources.Count)" >> $env:GITHUB_OUTPUT
+          "native_abi_function_count=$abiFunctionCount" >> $env:GITHUB_OUTPUT
       - name: Fetch OpenCV source
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
@@ -557,6 +609,7 @@ jobs:
             -WorkspaceRoot $workspaceRoot `
             -Rid '${{ matrix.rid }}' `
             -BuildList '${{ steps.profile.outputs.build_list }}' `
+            -ExtraCMakeArgs '${{ steps.profile.outputs.opencv_extra_cmake_args }}' `
             -Build
       - name: Record Windows OpenCV build evidence
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
@@ -572,17 +625,34 @@ jobs:
             throw "OpenCV CMake cache did not retain the audited VS 18 x64 boundary."
           }
 
-          $asmCompilerMatch = [regex]::Match($cache, '(?m)^CMAKE_ASM_COMPILER:FILEPATH=([^\r\n]+)\r?$')
+          $profileName = '${{ matrix.profile }}'
+          $asmCompilerMatch = [regex]::Match($cache, '(?m)^CMAKE_ASM_COMPILER:[^=]+=([^\r\n]+)\r?$')
           $mlasEnabledMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_ENABLED:INTERNAL=([^\r\n]+)\r?$')
           $mlasSkipReasonMatch = [regex]::Match($cache, '(?m)^OPENCV_DNN_MLAS_SKIP_REASON:INTERNAL=([^\r\n]+)\r?$')
           Write-Host "WINDOWS_X64_OPENCV_ASM_CACHE_EVIDENCE CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value) OPENCV_DNN_MLAS_ENABLED=$($mlasEnabledMatch.Groups[1].Value) OPENCV_DNN_MLAS_SKIP_REASON=$($mlasSkipReasonMatch.Groups[1].Value)"
           if (-not $asmCompilerMatch.Success -or
-              $asmCompilerMatch.Groups[1].Value -ne 'NOTFOUND' -or
-              -not $mlasEnabledMatch.Success -or
-              $mlasEnabledMatch.Groups[1].Value -ne '0' -or
-              -not $mlasSkipReasonMatch.Success -or
-              $mlasSkipReasonMatch.Groups[1].Value -notmatch '^no ASM compiler available for (?:AMD64|amd64)$') {
+              $asmCompilerMatch.Groups[1].Value -ne 'NOTFOUND') {
             throw "Windows OpenCV build did not retain the pure-MSVC generic-ASM fallback boundary."
+          }
+          if ($profileName -eq 'full') {
+            if (-not $mlasEnabledMatch.Success -or
+                $mlasEnabledMatch.Groups[1].Value -ne '0' -or
+                -not $mlasSkipReasonMatch.Success -or
+                $mlasSkipReasonMatch.Groups[1].Value -notmatch '^no ASM compiler available for (?:AMD64|amd64)$') {
+              throw "Windows full OpenCV build did not retain the audited MLAS fallback boundary."
+            }
+            $mlasEnabled = $mlasEnabledMatch.Groups[1].Value
+            $mlasSkipReason = $mlasSkipReasonMatch.Groups[1].Value
+          }
+          else {
+            if ($mlasEnabledMatch.Success -or $mlasSkipReasonMatch.Success) {
+              throw "Windows mini OpenCV build unexpectedly configured full-only DNN MLAS."
+            }
+            if (Get-ChildItem -LiteralPath $buildDir -Recurse -File -Filter opencv_dnn.vcxproj | Select-Object -First 1) {
+              throw "Windows mini OpenCV build unexpectedly generated the full-only DNN project."
+            }
+            $mlasEnabled = 'NOT_BUILT'
+            $mlasSkipReason = 'dnn excluded by mini profile'
           }
           if ($cache -match '(?i)(?:mingw|msys|cygwin)') {
             throw "Windows OpenCV CMake cache retained a foreign GNU toolchain path."
@@ -617,7 +687,7 @@ jobs:
             throw "OpenCV CPU baseline/dispatch configuration was not recorded."
           }
 
-          $asmConfiguration = "CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value);OPENCV_DNN_MLAS_ENABLED=$($mlasEnabledMatch.Groups[1].Value);OPENCV_DNN_MLAS_SKIP_REASON=$($mlasSkipReasonMatch.Groups[1].Value)"
+          $asmConfiguration = "CMAKE_ASM_COMPILER=$($asmCompilerMatch.Groups[1].Value);OPENCV_DNN_MLAS_ENABLED=$mlasEnabled;OPENCV_DNN_MLAS_SKIP_REASON=$mlasSkipReason"
           Write-Host "WINDOWS_X64_OPENCV_BUILD_EVIDENCE Generator=${{ steps.profile.outputs.generator }} Platform=${{ steps.profile.outputs.platform }} Configuration=${{ steps.profile.outputs.configuration }} WindowsSDK=$($sdkVersions[0]) BuildList=${{ steps.profile.outputs.build_list }} CPU=$cpuConfiguration ASM=$asmConfiguration"
           "windows_sdk_version=$($sdkVersions[0])" >> $env:GITHUB_OUTPUT
           "opencv_cpu_configuration=$cpuConfiguration" >> $env:GITHUB_OUTPUT
@@ -753,6 +823,10 @@ jobs:
             -OpenCvCpuConfiguration '${{ steps.opencv_build.outputs.opencv_cpu_configuration }}' `
             -ExcludedForeignToolDirectories '${{ steps.windows_build.outputs.excluded_foreign_tool_directories }}' `
             -OpenCvAsmConfiguration '${{ steps.opencv_build.outputs.opencv_asm_configuration }}' `
+            -NativeWrapperSources '${{ steps.profile.outputs.native_wrapper_sources }}' `
+            -NativeWrapperSourceCount '${{ steps.profile.outputs.native_wrapper_source_count }}' `
+            -NativeAbiFunctionCount '${{ steps.profile.outputs.native_abi_function_count }}' `
+            -OpenCvExtraCMakeArgs '${{ steps.profile.outputs.opencv_extra_cmake_args }}' `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload Windows runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}

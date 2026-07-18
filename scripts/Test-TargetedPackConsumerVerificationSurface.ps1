@@ -164,7 +164,7 @@ foreach ($expectedTarget in @(
 
 foreach ($expectation in @(
         @($workflowPath, $windowsJobText, "verify-targeted-real-windows-x64:", "Pack workflow must keep a separate Windows x64 verification job"),
-        @($workflowPath, $windowsJobText, "inputs.rid == 'win-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Windows verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $windowsJobText, "inputs.rid == 'win-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Windows verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $windowsJobText, "runs-on: windows-latest", "Windows verification must run on the audited hosted Windows image"),
         @($workflowPath, $windowsJobText, "PROCESSOR_ARCHITECTURE -ne 'AMD64'", "Windows verification must require an actual AMD64 host"),
         @($workflowPath, $windowsJobText, "ProcessArchitecture.ToString()", "Windows verification must require an actual x64 process"),
@@ -175,10 +175,10 @@ foreach ($expectation in @(
         @($workflowPath, $windowsJobText, 'path: artifacts/pack-targeted-windows/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Windows runtime artifact must use an isolated selected path"),
         @($workflowPath, $windowsJobText, "-ExpectedSyntheticRuntimeInputs false", "Windows artifact and consumer guards must require real provenance"),
         @($workflowPath, $windowsJobText, "-SelectedRid win-x64", "Windows guards must select exact win-x64"),
-        @($workflowPath, $windowsJobText, "-SelectedRuntimeProfile full", "Windows guards must select only full"),
+        @($workflowPath, $windowsJobText, "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'", "Windows guards must select the exact selected full/mini profile"),
         @($workflowPath, $windowsJobText, "Test-WindowsRuntimePeClosure.ps1", "Windows package must pass the reusable PE closure audit"),
         @($workflowPath, $windowsJobText, "-CompileNativeSmoke", "Windows verifier must compile the package consumer"),
-        @($workflowPath, $windowsJobText, "-RunNativeSmoke", "Windows verifier must run package-output native and DNN calls"),
+        @($workflowPath, $windowsJobText, "-RunNativeSmoke", "Windows verifier must run package-output profile-specific native calls"),
         @($workflowPath, $windowsJobText, "artifacts\real-runtime-inputs", "Windows verifier must explicitly reject producer artifact directories in PATH"),
         @($workflowPath, $ubuntuJobText, "verify-targeted-real:", "Pack workflow must keep the targeted real Ubuntu verification job"),
         @($workflowPath, $ubuntuJobText, "((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Hosted targeted verification must keep the exact three-target non-synthetic non-publishing allowlist"),
@@ -431,8 +431,8 @@ foreach ($expectation in @(
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $windowsJobText `
-    -ExpectedLine "    if: `${{ inputs.rid == 'win-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "Windows x64 targeted verification condition must remain exact, full-only, non-synthetic, and non-publishing"
+    -ExpectedLine "    if: `${{ inputs.rid == 'win-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Windows x64 targeted verification condition must remain exact, full/mini, non-synthetic, and non-publishing"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -445,8 +445,8 @@ Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $windowsJobText `
     -Needle "inputs.runtime_profile ==" `
-    -ExpectedCount 1 `
-    -Issue "Windows x64 verifier must gate on exactly one runtime profile"
+    -ExpectedCount 2 `
+    -Issue "Windows x64 verifier must gate on exactly the full and mini runtime profiles"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -458,12 +458,11 @@ Assert-OccurrenceCount `
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $windowsJobText `
-    -Needle "-SelectedRuntimeProfile full" `
+    -Needle "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'" `
     -ExpectedCount 2 `
-    -Issue "Both Windows package guards must select only full"
+    -Issue "Both Windows package guards must select the exact chosen full/mini profile"
 
 foreach ($forbiddenWindowsText in @(
-        "runtime_profile == 'mini'",
         "win-x86",
         "win-arm64",
         "run-id:",
@@ -478,7 +477,7 @@ foreach ($forbiddenWindowsText in @(
         -Path $workflowPath `
         -Text $windowsJobText `
         -Needle $forbiddenWindowsText `
-        -Issue "Windows package verification must remain native, same-run, full-only, and free of DLL search overrides: $forbiddenWindowsText"
+        -Issue "Windows package verification must remain native, same-run, full/mini-only, and free of DLL search overrides: $forbiddenWindowsText"
 }
 
 foreach ($forbiddenConsumerText in @("AddDllDirectory", "SetDllDirectory", "OpenCvNativeRuntimeDir", "OPENCV_CSHARP_OPENCV_RUNTIME_ROOT")) {
@@ -1038,7 +1037,7 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Hosted targets: win-x64/full on actual Windows x64; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
+Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full runs in its separate native ARM64 verifier."
 Write-Host "Container targets: ubuntu.22.04-arm64/full through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio; full adds dnn."
