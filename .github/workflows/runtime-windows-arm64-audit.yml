@@ -262,7 +262,8 @@ jobs:
           foreach ($pattern in @(
               'WINDOWS_ARM64_HOST_EVIDENCE.*RUNNER_ARCH=ARM64.*PROCESSOR_ARCHITECTURE=ARM64.*OSArchitecture=Arm64.*ProcessArchitecture=Arm64.*Is64BitProcess=True.*PROCESSOR_ARCHITEW6432=.*CPUArchitecture=12.*AddressWidth=64',
               'WINDOWS_ARM64_TOOLCHAIN_EVIDENCE.*VisualStudioVersion=18\..*Compiler=.*Hostarm64[\\/]arm64[\\/]cl\.exe.*Generator=Visual Studio 18 2026.*Platform=ARM64.*BuildSystem=multi-config.*WindowsSDK=',
-              'WINDOWS_ARM64_DOTNET_EVIDENCE.*Architecture:\s*arm64.*RID:\s*win-arm64',
+              'WINDOWS_ARM64_DOTNET_EVIDENCE.*RID:\s*win-arm64',
+              'WINDOWS_ARM64_DOTNET_EVIDENCE.*Architecture:\s*arm64',
               'WINDOWS_ARM64_PE_EVIDENCE.*machine=ARM64.*machine_hex=0xAA64.*loader_execution=success.*value=42')) {
             if ($text -notmatch $pattern) {
               throw "Windows ARM64 audit evidence did not match: $pattern"
