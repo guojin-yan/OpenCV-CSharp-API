@@ -8,11 +8,11 @@ on:
         required: true
         default: 5.0.0
       rid:
-        description: Real producer target; exact Windows x64/ARM64 full/mini, approved Linux full targets, and Ubuntu 24.04 x64/ARM64 mini
+        description: Real producer target; exact Windows x64/ARM64 full/mini, approved Linux full targets, Ubuntu 24.04 x64/ARM64 mini, and Ubuntu 22.04 ARM64 mini
         required: true
         default: ubuntu.24.04-x64
       runtime_profile:
-        description: Real producer profile; full for all targets, mini for win-x64, win-arm64, ubuntu.24.04-x64, and ubuntu.24.04-arm64
+        description: Real producer profile; full for all targets, mini for win-x64, win-arm64, ubuntu.24.04-x64, ubuntu.24.04-arm64, and ubuntu.22.04-arm64
         required: true
         default: full
 
@@ -37,6 +37,7 @@ jobs:
             'ubuntu.24.04-arm64/mini',
             'ubuntu.22.04-x64/full',
             'ubuntu.22.04-arm64/full',
+            'ubuntu.22.04-arm64/mini',
             'debian.12-x64/full',
             'debian.12-arm64/full',
             'fedora.40-x64/full',
@@ -46,7 +47,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86, Ubuntu 22.04 and Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86, Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -1155,6 +1156,11 @@ jobs:
             os: ubuntu-24.04-arm
             container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
             opencv_extra_cmake_args: ""
+          - rid: ubuntu.22.04-arm64
+            profile: mini
+            os: ubuntu-24.04-arm
+            container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
+            opencv_extra_cmake_args: ""
           - rid: debian.12-arm64
             profile: full
             os: ubuntu-24.04-arm
@@ -1219,10 +1225,66 @@ jobs:
             throw "Runtime profile was not found: ${{ matrix.profile }}"
           }
 
+          $profileName = '${{ matrix.profile }}'
+          $plan = & ./scripts/Build-OpenCV.ps1 `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -Rid '${{ matrix.rid }}' `
+            -BuildList ([string]$profile[0].buildList) `
+            -ExtraCMakeArgs '${{ matrix.opencv_extra_cmake_args }}' `
+            -DescribeOnly | ConvertFrom-Json
+          if ($plan.Generator -ne 'Ninja' -or
+              $plan.BuildSystem -ne 'single-config' -or
+              $plan.InstallTarget -ne 'install') {
+            throw "Container OpenCV build plan did not match the audited Ninja single-config boundary."
+          }
+
+          $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
+          function Get-NativeSourceList([string]$variableName) {
+            $match = [regex]::Match($cmakeText, "(?s)set\($variableName(?<body>.*?)\)")
+            if (-not $match.Success) {
+              throw "Native CMake source list was not found: $variableName"
+            }
+            return @(
+              [regex]::Matches($match.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
+                ForEach-Object { $_.Groups[1].Value }
+            )
+          }
+
+          $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
+          $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
+          $nativeSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $abiManifest = if ($profileName -eq 'mini') {
+            './src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt'
+          }
+          else {
+            './src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt'
+          }
+          $abiFunctionLine = @(Get-Content -LiteralPath $abiManifest | Where-Object { $_ -match '^function-count=' })
+          if ($abiFunctionLine.Count -ne 1) {
+            throw "Native ABI manifest did not contain exactly one function-count value for profile $profileName."
+          }
+          $abiFunctionCount = [int](([string]$abiFunctionLine[0]) -replace '^function-count=', '')
+          if ($nativeSources.Count -ne $expectedSourceCount -or $abiFunctionCount -ne $expectedAbiFunctionCount) {
+            throw "Container native profile evidence mismatch for ${profileName}: sources=$($nativeSources.Count), ABI=$abiFunctionCount."
+          }
+          foreach ($source in $nativeSources) {
+            if (-not (Test-Path -LiteralPath (Join-Path ./src/OpenCvSharp.Native $source) -PathType Leaf)) {
+              throw "Container native profile source was not found: $source"
+            }
+          }
+          $nativeSourcesJson = ConvertTo-Json -InputObject ([object[]]$nativeSources) -Compress
+          Write-Host "LINUX_CONTAINER_NATIVE_PROFILE_EVIDENCE rid=${{ matrix.rid }} profile=$profileName sources=$($nativeSources.Count) abi_functions=$abiFunctionCount build_list=$($profile[0].buildList)"
+
           "build_list=$($profile[0].buildList)" >> $env:GITHUB_OUTPUT
           "opencv_rid=$($rid[0].opencvRid)" >> $env:GITHUB_OUTPUT
           "distro=$($rid[0].distro)" >> $env:GITHUB_OUTPUT
           "distro_version=$($rid[0].distroVersion)" >> $env:GITHUB_OUTPUT
+          "cmake_arguments=$($plan.CMakeArgs | ConvertTo-Json -Compress)" >> $env:GITHUB_OUTPUT
+          "native_wrapper_sources=$nativeSourcesJson" >> $env:GITHUB_OUTPUT
+          "native_wrapper_source_count=$($nativeSources.Count)" >> $env:GITHUB_OUTPUT
+          "native_abi_function_count=$abiFunctionCount" >> $env:GITHUB_OUTPUT
       - name: Run distro container producer
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: bash
@@ -1236,6 +1298,10 @@ jobs:
           PRODUCER_RID: ${{ matrix.rid }}
           RUNTIME_PROFILE: ${{ matrix.profile }}
           BUILD_LIST: ${{ steps.profile.outputs.build_list }}
+          OPENCV_CMAKE_ARGUMENTS: ${{ steps.profile.outputs.cmake_arguments }}
+          NATIVE_WRAPPER_SOURCES: ${{ steps.profile.outputs.native_wrapper_sources }}
+          NATIVE_WRAPPER_SOURCE_COUNT: ${{ steps.profile.outputs.native_wrapper_source_count }}
+          NATIVE_ABI_FUNCTION_COUNT: ${{ steps.profile.outputs.native_abi_function_count }}
           EXPECTED_DISTRO: ${{ steps.profile.outputs.distro }}
           EXPECTED_DISTRO_VERSION: ${{ steps.profile.outputs.distro_version }}
           POWERSHELL_VERSION: 7.4.17
@@ -1257,7 +1323,10 @@ jobs:
           hosted_package_architecture=""
           hosted_libc=""
           hosted_cpu_model=""
+          hosted_memory_bytes=""
           hosted_disk_available_bytes=""
+          hosted_process_architecture=""
+          hosted_dotnet_version=""
           container_image_id=""
           container_image_digest=""
           if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
@@ -1285,14 +1354,20 @@ jobs:
             hosted_package_architecture="$(dpkg --print-architecture)"
             hosted_libc="$(getconf GNU_LIBC_VERSION)"
             hosted_cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | head -n 1)"
+            hosted_memory_bytes="$(awk '/^MemTotal:/ { printf "%.0f", $2 * 1024 }' /proc/meminfo)"
             hosted_disk_available_bytes="$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+            hosted_process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+            hosted_dotnet_version="$(dotnet --version)"
             test "$hosted_runner_image" != "unknown"
             test "$hosted_runner_image_version" != "unknown"
             test -n "$hosted_cpu_model"
+            test "$hosted_memory_bytes" -gt 0
             test "$hosted_disk_available_bytes" -gt 0
+            test "$hosted_process_architecture" = "Arm64"
+            test -n "$hosted_dotnet_version"
             if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-              echo "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
-              echo "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+              echo "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE profile=$RUNTIME_PROFILE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture PROCESS_ARCH=$hosted_process_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model MEMORY_BYTES=$hosted_memory_bytes DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes DOTNET=$hosted_dotnet_version"
+              echo "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE profile=$RUNTIME_PROFILE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
             else
               echo "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
               echo "DEBIAN_12_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
@@ -1313,7 +1388,10 @@ jobs:
             -e HOSTED_PACKAGE_ARCHITECTURE="$hosted_package_architecture" \
             -e HOSTED_LIBC="$hosted_libc" \
             -e HOSTED_CPU_MODEL="$hosted_cpu_model" \
+            -e HOSTED_MEMORY_BYTES="$hosted_memory_bytes" \
             -e HOSTED_DISK_AVAILABLE_BYTES="$hosted_disk_available_bytes" \
+            -e HOSTED_PROCESS_ARCHITECTURE="$hosted_process_architecture" \
+            -e HOSTED_DOTNET_VERSION="$hosted_dotnet_version" \
             -e OPENCV_RID="$OPENCV_RID" \
             -e OPENCV_VERSION="$OPENCV_VERSION" \
             -e OPENCV_EXTRA_CMAKE_ARGS="$OPENCV_EXTRA_CMAKE_ARGS" \
@@ -1322,6 +1400,10 @@ jobs:
             -e PRODUCER_RID="$PRODUCER_RID" \
             -e RUNTIME_PROFILE="$RUNTIME_PROFILE" \
             -e BUILD_LIST="$BUILD_LIST" \
+            -e OPENCV_CMAKE_ARGUMENTS="$OPENCV_CMAKE_ARGUMENTS" \
+            -e NATIVE_WRAPPER_SOURCES="$NATIVE_WRAPPER_SOURCES" \
+            -e NATIVE_WRAPPER_SOURCE_COUNT="$NATIVE_WRAPPER_SOURCE_COUNT" \
+            -e NATIVE_ABI_FUNCTION_COUNT="$NATIVE_ABI_FUNCTION_COUNT" \
             -e EXPECTED_DISTRO="$EXPECTED_DISTRO" \
             -e EXPECTED_DISTRO_VERSION="$EXPECTED_DISTRO_VERSION" \
             -v "$workspace_root:/workspace" \
@@ -1539,7 +1621,7 @@ jobs:
                 readelf -h "$neon_object" | grep -q "Machine:.*AArch64"
 
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  echo "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
+                  echo "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE profile=$RUNTIME_PROFILE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
                 else
                   echo "DEBIAN_12_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
                 fi
@@ -1551,7 +1633,7 @@ jobs:
                 ninja --version
                 pwsh --version
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  echo "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+                  echo "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE profile=$RUNTIME_PROFILE machine=AArch64 neon_compile=success"
                 else
                   echo "DEBIAN_12_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
                 fi
@@ -1559,6 +1641,21 @@ jobs:
 
               source_root="/workspace/opencv-source"
               source_dir="$source_root/opencv-$OPENCV_VERSION"
+              compiler_path="$(command -v g++)"
+              compiler_version="$(g++ --version | head -n 1) target=$(g++ -dumpmachine)"
+              assembler_target="$(as --version | sed -n "s/^This assembler was configured for a target of //p" | tr -cd "[:alnum:]_.-" | head -n 1)"
+              assembler_version="$(as --version | head -n 1) target=$assembler_target"
+              cmake_version="$(cmake --version | head -n 1)"
+              ninja_version="$(ninja --version 2>/dev/null || samu --version 2>/dev/null)"
+              test -n "$compiler_path"
+              test -n "$compiler_version"
+              test -n "$assembler_target"
+              test -n "$assembler_version"
+              test -n "$cmake_version"
+              test -n "$ninja_version"
+              if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
+                echo "UBUNTU_22_04_ARM64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$POWERSHELL_VERSION HOST_DOTNET=$HOSTED_DOTNET_VERSION"
+              fi
               mkdir -p "$source_root"
               if [ ! -d "$source_dir/.git" ]; then
                 git -c advice.detachedHead=false clone --depth 1 --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git "$source_dir"
@@ -1586,7 +1683,7 @@ jobs:
                 test -n "$opencv_cpu_configuration"
                 printf "%s\n" "$opencv_cpu_configuration" | grep -q "NEON"
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  echo "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
+                  echo "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
                 else
                   echo "DEBIAN_12_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
                 fi
@@ -1621,7 +1718,7 @@ jobs:
               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                 grep -Fq "100% tests passed, 0 tests failed out of 5" build/native-linked/ctest-output.txt
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
+                  echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
                 else
                   echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
                 fi
@@ -1662,7 +1759,33 @@ jobs:
                 echo "ALPINE_3_20_PRODUCER_ELF_EVIDENCE files=18 origin=18 direct_opencv=16"
               fi
 
+              elf_audit_evidence=""
               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
+                case "$RUNTIME_PROFILE" in
+                  full)
+                    modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
+                    expected_opencv_count=16
+                    expected_canonical_count=18
+                    expected_runtime_file_count=50
+                    expected_direct_opencv=16
+                    ;;
+                  mini)
+                    if [ "$PRODUCER_RID" != "ubuntu.22.04-arm64" ]; then
+                      echo "Mini is not approved for container producer target $PRODUCER_RID." >&2
+                      exit 1
+                    fi
+                    modules=(core imgproc imgcodecs videoio geometry flann)
+                    expected_opencv_count=6
+                    expected_canonical_count=8
+                    expected_runtime_file_count=20
+                    expected_direct_opencv=6
+                    ;;
+                  *)
+                    echo "Unsupported ARM64 container runtime profile: $RUNTIME_PROFILE" >&2
+                    exit 1
+                    ;;
+                esac
+
                 open_cv_runtime_audit_dir=""
                 for candidate in "$open_cv_install_dir/lib" "$open_cv_install_dir/lib64"; do
                   if [ -d "$candidate" ]; then
@@ -1682,10 +1805,25 @@ jobs:
                 cp "$compatibility_loader" "$audit_dir/"
                 compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
 
+                expected_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-expected-runtime-files.txt"
+                actual_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-actual-runtime-files.txt"
+                printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+                for module in "${modules[@]}"; do
+                  printf "%s\n" \
+                    "libopencv_${module}.so" \
+                    "libopencv_${module}.so.500" \
+                    "libopencv_${module}.so.$OPENCV_VERSION" \
+                    >> "$expected_names"
+                done
+                sort -o "$expected_names" "$expected_names"
+                find "$audit_dir" -mindepth 1 -maxdepth 1 \( -type f -o -type l \) -printf "%f\n" | sort > "$actual_names"
+                test "$(wc -l < "$actual_names")" -eq "$expected_runtime_file_count"
+                diff -u "$expected_names" "$actual_names"
+
                 mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
-                test "${#opencv_elfs[@]}" -eq 16
+                test "${#opencv_elfs[@]}" -eq "$expected_opencv_count"
                 elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
-                test "${#elf_files[@]}" -eq 18
+                test "${#elf_files[@]}" -eq "$expected_canonical_count"
 
                 machine_count=0
                 origin_count=0
@@ -1710,13 +1848,15 @@ jobs:
                 done
 
                 direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
-                test "$machine_count" -eq 18
-                test "$origin_count" -eq 18
+                test "$machine_count" -eq "$expected_canonical_count"
+                test "$origin_count" -eq "$expected_canonical_count"
                 test "$producer_path_count" -eq 0
-                test "$direct_opencv_dependencies" -eq 16
+                test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
                 test "$missing_dependency_count" -eq 0
+                cmp -s "$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  echo "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
+                  elf_audit_evidence="UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  echo "$elf_audit_evidence"
                 else
                   echo "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
                 fi
@@ -1754,8 +1894,23 @@ jobs:
                 -HostedPackageArchitecture "$HOSTED_PACKAGE_ARCHITECTURE" \
                 -HostedLibc "$HOSTED_LIBC" \
                 -HostedCpuModel "$HOSTED_CPU_MODEL" \
+                -HostedMemoryBytes "$HOSTED_MEMORY_BYTES" \
                 -HostedDiskAvailableBytes "$HOSTED_DISK_AVAILABLE_BYTES" \
+                -HostedProcessArchitecture "$HOSTED_PROCESS_ARCHITECTURE" \
+                -CMakeVersion "$cmake_version" \
+                -CMakeGenerator "Ninja" \
+                -BuildConfiguration "Release" \
+                -CompilerPath "$compiler_path" \
+                -CompilerVersion "$compiler_version" \
+                -AssemblerVersion "$assembler_version" \
+                -NinjaVersion "$ninja_version" \
+                -DotNetVersion "$HOSTED_DOTNET_VERSION" \
+                -OpenCvCMakeArguments "$OPENCV_CMAKE_ARGUMENTS" \
+                -ElfAuditEvidence "$elf_audit_evidence" \
                 -OpenCvCpuConfiguration "$opencv_cpu_configuration" \
+                -NativeWrapperSources "$NATIVE_WRAPPER_SOURCES" \
+                -NativeWrapperSourceCount "$NATIVE_WRAPPER_SOURCE_COUNT" \
+                -NativeAbiFunctionCount "$NATIVE_ABI_FUNCTION_COUNT" \
                 -ContainerImage "$CONTAINER_IMAGE" \
                 -ContainerImageId "$CONTAINER_IMAGE_ID" \
                 -ContainerImageDigest "$CONTAINER_IMAGE_DIGEST" \

@@ -240,6 +240,7 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "mini"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Profile = "mini"; Runner = "ubuntu-24.04-arm"; ContainerImage = "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
@@ -428,6 +429,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-mini"; Issue = "Producer workflow must explicitly advertise the native Ubuntu 24.04 ARM64 mini target" },
          [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
+         [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-mini"; Issue = "Producer workflow must advertise the exact container-native Ubuntu 22.04 ARM64 mini target" },
          [pscustomobject]@{ Needle = "runtime-input-debian.12-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Debian 12 ARM64 full target" },
         [pscustomobject]@{ Needle = "os: ubuntu-24.04-arm"; Issue = "Ubuntu 24.04 ARM64 producer must use the native GitHub-hosted ARM64 runner" },
         [pscustomobject]@{ Needle = "container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited official multi-architecture image digest" },
@@ -435,10 +437,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record the official image identity and digest" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record factual target userspace identity" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_POWERSHELL_EVIDENCE version=`$POWERSHELL_VERSION archive_sha256=`$POWERSHELL_SHA256 architecture=arm64"; Issue = "Ubuntu 22.04 ARM64 producer must verify its native PowerShell archive" },
-        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"; Issue = "Ubuntu 22.04 ARM64 producer must compile and audit a native NEON object" },
+        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE profile=`$RUNTIME_PROFILE machine=AArch64 neon_compile=success"; Issue = "Ubuntu 22.04 ARM64 producer must compile and audit a profile-specific native NEON object" },
+        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_TOOLCHAIN_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Ubuntu 22.04 ARM64 producer must retain target compiler, assembler, CMake, Ninja, PowerShell, and host .NET evidence" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must retain factual OpenCV CPU configuration" },
-        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"; Issue = "Ubuntu 22.04 ARM64 producer must require linked CTest 5/5" },
-        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"; Issue = "Ubuntu 22.04 ARM64 producer must audit its canonical AArch64 ELF closure" },
+        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE profile=`$RUNTIME_PROFILE passed=5 total=5"; Issue = "Ubuntu 22.04 ARM64 producer must require profile-specific linked CTest 5/5" },
+        [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=`$RUNTIME_PROFILE files=`$expected_canonical_count runtime_files=`$expected_runtime_file_count machine=AArch64 origin=`$expected_canonical_count producer_paths=0 direct_opencv=`$expected_direct_opencv missing_dependencies=0 loader_equal=true"; Issue = "Ubuntu 22.04 ARM64 producer must audit its exact profile-derived AArch64 ELF closure" },
          [pscustomobject]@{ Needle = "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited PowerShell 7.4.17 ARM64 archive hash" },
          [pscustomobject]@{ Needle = "container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; Issue = "Debian 12 ARM64 producer must pin the audited official multi-architecture image digest" },
          [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record the native AArch64 Docker host" },
@@ -527,7 +530,7 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "publish_github_packages" -Issue "Producer workflow must not publish packages"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "dotnet nuget push" -Issue "Producer workflow must not push packages"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu 24.04 ARM64 mini must be present in the exact real producer allowlist"
-Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must remain outside the real producer allowlist"
+Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
@@ -637,6 +640,7 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "NativeAbiFunctionCount -ne 304" -Issue "Windows pack validation must require the exact mini ABI count"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle 'UBUNTU_24_04_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false' -Issue "Pack runtime job must validate profile-derived real Ubuntu ARM64 provenance before packaging"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "provenance.ElfAuditEvidence -notmatch `$expectedElfPattern" -Issue "Pack runtime job must require exact Ubuntu ARM64 producer ELF evidence"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle 'UBUNTU_22_04_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false' -Issue "Pack runtime job must validate profile-derived Ubuntu 22.04 ARM64 host/container provenance before packaging"
 
 foreach ($doc in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -715,10 +719,10 @@ if ($violations.Count -eq 0) {
                 "glibc fixture"
             }
             $isDirectUbuntuArm64 = $producerTarget.Rid -eq "ubuntu.24.04-arm64" -and $producerTarget.Profile -in @("full", "mini")
-            $isArm64Hosted = $isDirectUbuntuArm64 -or ($producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.22.04-arm64", "debian.12-arm64"))
-            $isArm64Container = $producerTarget.Profile -eq "full" -and $producerTarget.Rid -in @("ubuntu.22.04-arm64", "debian.12-arm64")
-            $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -eq "full"
+            $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isDebian1204Arm64 = $producerTarget.Rid -eq "debian.12-arm64" -and $producerTarget.Profile -eq "full"
+            $isArm64Container = $isUbuntu2204Arm64 -or $isDebian1204Arm64
+            $isArm64Hosted = $isDirectUbuntuArm64 -or $isArm64Container
             $isWindowsX64 = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -in @("full", "mini")
             $isWindowsArm64 = $producerTarget.Rid -eq "win-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isWindowsTarget = $isWindowsX64 -or $isWindowsArm64
@@ -731,24 +735,24 @@ if ($violations.Count -eq 0) {
             $hostedPackageArchitecture = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "AMD64" } elseif ($isArm64Hosted) { "arm64" } else { "" }
             $hostedLibc = if ($isArm64Hosted) { "glibc fixture" } else { "" }
             $hostedCpuModel = if ($isWindowsArm64) { "Cobalt 100 fixture" } elseif ($isWindowsX64) { "AMD64 fixture" } elseif ($isArm64Hosted) { "Neoverse fixture" } else { "" }
-            $hostedMemoryBytes = if ($isWindowsTarget -or $isDirectUbuntuArm64) { "17169428480" } else { "" }
+            $hostedMemoryBytes = if ($isWindowsTarget -or $isArm64Hosted) { "17169428480" } else { "" }
             $hostedDiskAvailableBytes = if ($isWindowsTarget -or $isArm64Hosted) { "1" } else { "" }
             $hostedOsCaption = if ($isWindowsArm64) { "Microsoft Windows 11 Enterprise fixture" } elseif ($isWindowsX64) { "Microsoft Windows Server fixture" } else { "" }
             $hostedOsVersion = if ($isWindowsArm64) { "10.0.26200" } elseif ($isWindowsX64) { "10.0.26100" } else { "" }
             $hostedOsBuildNumber = if ($isWindowsArm64) { "26200" } elseif ($isWindowsX64) { "26100" } else { "" }
-            $hostedProcessArchitecture = if ($isWindowsArm64 -or $isDirectUbuntuArm64) { "Arm64" } elseif ($isWindowsX64) { "X64" } else { "" }
+            $hostedProcessArchitecture = if ($isWindowsArm64 -or $isArm64Hosted) { "Arm64" } elseif ($isWindowsX64) { "X64" } else { "" }
             $visualStudioVersion = if ($isWindowsTarget) { "18.7.fixture" } else { "" }
             $msvcVersion = if ($isWindowsTarget) { "14.51.fixture (compiler 19.51.fixture)" } else { "" }
             $windowsSdkVersion = if ($isWindowsTarget) { "10.0.26100.0" } else { "" }
-            $cmakeVersion = if ($isWindowsTarget -or $isDirectUbuntuArm64) { "cmake version fixture" } else { "" }
-            $cmakeGenerator = if ($isWindowsTarget) { "Visual Studio 18 2026" } elseif ($isDirectUbuntuArm64) { "Ninja" } else { "" }
+            $cmakeVersion = if ($isWindowsTarget -or $isArm64Hosted) { "cmake version fixture" } else { "" }
+            $cmakeGenerator = if ($isWindowsTarget) { "Visual Studio 18 2026" } elseif ($isArm64Hosted) { "Ninja" } else { "" }
             $cmakePlatform = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "x64" } else { "" }
-            $buildConfiguration = if ($isWindowsTarget -or $isDirectUbuntuArm64) { "Release" } else { "" }
-            $compilerPath = if ($isWindowsArm64) { "C:\fixture\Hostarm64\arm64\cl.exe" } elseif ($isWindowsX64) { "C:\fixture\Hostx64\x64\cl.exe" } elseif ($isDirectUbuntuArm64) { "/usr/bin/g++" } else { "" }
-            $compilerVersion = if ($isDirectUbuntuArm64) { "g++ fixture aarch64" } else { "" }
-            $assemblerVersion = if ($isDirectUbuntuArm64) { "GNU assembler fixture aarch64" } else { "" }
-            $ninjaVersion = if ($isDirectUbuntuArm64) { "1.13.2" } else { "" }
-            $dotNetVersion = if ($isDirectUbuntuArm64) { "8.0.fixture" } else { "" }
+            $buildConfiguration = if ($isWindowsTarget -or $isArm64Hosted) { "Release" } else { "" }
+            $compilerPath = if ($isWindowsArm64) { "C:\fixture\Hostarm64\arm64\cl.exe" } elseif ($isWindowsX64) { "C:\fixture\Hostx64\x64\cl.exe" } elseif ($isArm64Hosted) { "/usr/bin/g++" } else { "" }
+            $compilerVersion = if ($isArm64Hosted) { "g++ fixture aarch64" } else { "" }
+            $assemblerVersion = if ($isArm64Hosted) { "GNU assembler fixture aarch64" } else { "" }
+            $ninjaVersion = if ($isArm64Hosted) { "1.13.2" } else { "" }
+            $dotNetVersion = if ($isArm64Hosted) { "8.0.fixture" } else { "" }
             $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
             if ($profileSpec.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
@@ -765,17 +769,17 @@ if ($violations.Count -eq 0) {
             else {
                 ""
             }
-            $openCvCMakeArguments = if ($isWindowsArm64 -and $isWindowsMini) { '["-G","Visual Studio 18 2026","-A","ARM64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } elseif ($isDirectUbuntuArm64) { "[`"-G`",`"Ninja`",`"-DBUILD_LIST=$([string]$profileSpec[0].buildList)`"]" } else { "" }
+            $openCvCMakeArguments = if ($isWindowsArm64 -and $isWindowsMini) { '["-G","Visual Studio 18 2026","-A","ARM64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } elseif ($isArm64Hosted) { "[`"-G`",`"Ninja`",`"-DBUILD_LIST=$([string]$profileSpec[0].buildList)`"]" } else { "" }
             $expectedModuleCount = @($profileSpec[0].modules).Count
             $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
             $expectedCanonicalCount = $expectedModuleCount + 2
             $expectedLinuxPayloadCount = ($expectedModuleCount * 3) + 2
-            $elfAuditEvidence = if ($isDirectUbuntuArm64) { "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } else { "" }
+            $elfAuditEvidence = if ($isDirectUbuntuArm64) { "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isUbuntu2204Arm64) { "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } else { "" }
             $openCvCpuConfiguration = if ($isWindowsArm64) { "CPU_BASELINE:NEON;CPU_DISPATCH:" } elseif ($isWindowsX64) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } else { "" }
             $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
             $openCvAsmConfiguration = if ($isWindowsMini) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile" } elseif ($isWindowsArm64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for ARM64" } elseif ($isWindowsX64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
-            $hasMiniProfileEvidence = $isWindowsMini -or ($isDirectUbuntuArm64 -and $producerTarget.Profile -eq "mini")
-            $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or ($isDirectUbuntuArm64 -and $producerTarget.Profile -eq "full")
+            $hasMiniProfileEvidence = $isWindowsMini -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64) -and $producerTarget.Profile -eq "mini")
+            $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64) -and $producerTarget.Profile -eq "full")
             $nativeWrapperSources = if ($hasMiniProfileEvidence) { '["src/error_state.cpp","src/version.cpp","src/core/mat.cpp","src/core/decomp.cpp","src/core/operations.cpp","src/videoio/videoio.cpp","src/imgcodecs.cpp","src/imgproc.cpp"]' } elseif ($hasFullProfileEvidence) { '["full-source-fixture"]' } else { "" }
             $nativeWrapperSourceCount = if ($hasMiniProfileEvidence) { "8" } elseif ($hasFullProfileEvidence) { "45" } else { "" }
             $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "304" } elseif ($hasFullProfileEvidence) { "1966" } else { "" }
@@ -1026,5 +1030,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

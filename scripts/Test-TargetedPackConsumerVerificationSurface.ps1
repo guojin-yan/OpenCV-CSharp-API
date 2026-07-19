@@ -243,7 +243,7 @@ foreach ($expectation in @(
         @($workflowPath, $ubuntuArm64JobText, "-RunNativeSmoke", "Ubuntu ARM64 consumer verification must execute full DNN or mini NOT_LINKED native calls"),
         @($workflowPath, $workflowText, 'UBUNTU_24_04_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false', "Pack runtime job must validate profile-derived real Ubuntu ARM64 provenance"),
         @($workflowPath, $ubuntu2204Arm64JobText, "verify-targeted-real-ubuntu2204-arm64:", "Pack workflow must keep a separate Ubuntu 22.04 ARM64 verification job"),
-        @($workflowPath, $ubuntu2204Arm64JobText, "inputs.rid == 'ubuntu.22.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Ubuntu 22.04 ARM64 verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "inputs.rid == 'ubuntu.22.04-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Ubuntu 22.04 ARM64 verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $ubuntu2204Arm64JobText, "runs-on: ubuntu-24.04-arm", "Ubuntu 22.04 ARM64 verification must use the native AArch64 Docker host"),
         @($workflowPath, $ubuntu2204Arm64JobText, "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982", "Ubuntu 22.04 ARM64 verification must pin the audited official image digest"),
         @($workflowPath, $ubuntu2204Arm64JobText, 'test "$(uname -m)" = "aarch64"', "Ubuntu 22.04 ARM64 verification must reject non-AArch64 host and container execution"),
@@ -257,13 +257,19 @@ foreach ($expectation in @(
         @($workflowPath, $ubuntu2204Arm64JobText, "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c", "Ubuntu 22.04 ARM64 verification must pin the audited PowerShell ARM64 archive hash"),
         @($workflowPath, $ubuntu2204Arm64JobText, "--channel 8.0 --architecture arm64", "Ubuntu 22.04 ARM64 verification must install a native ARM64 .NET 8 SDK"),
         @($workflowPath, $ubuntu2204Arm64JobText, "name: nupkg-managed", "Ubuntu 22.04 ARM64 verification must download the same-run managed artifact"),
-        @($workflowPath, $ubuntu2204Arm64JobText, "name: nupkg-ubuntu.22.04-arm64-full", "Ubuntu 22.04 ARM64 verification must download only its exact runtime artifact"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'name: nupkg-ubuntu.22.04-arm64-${{ inputs.runtime_profile }}', "Ubuntu 22.04 ARM64 verification must download only its exact selected full/mini runtime artifact"),
         @($workflowPath, $ubuntu2204Arm64JobText, "path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-managed", "Ubuntu 22.04 ARM64 managed artifact must use an isolated path"),
-        @($workflowPath, $ubuntu2204Arm64JobText, "path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-ubuntu.22.04-arm64-full", "Ubuntu 22.04 ARM64 runtime artifact must use an isolated path"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-ubuntu.22.04-arm64-${{ inputs.runtime_profile }}', "Ubuntu 22.04 ARM64 runtime artifact must use an isolated selected path"),
         @($workflowPath, $ubuntu2204Arm64JobText, "-ExpectedSyntheticRuntimeInputs false", "Ubuntu 22.04 ARM64 guards must require real provenance"),
         @($workflowPath, $ubuntu2204Arm64JobText, "-SelectedRid ubuntu.22.04-arm64", "Ubuntu 22.04 ARM64 guards must select the exact distro RID"),
-        @($workflowPath, $ubuntu2204Arm64JobText, "-SelectedRuntimeProfile full", "Ubuntu 22.04 ARM64 guards must select only full"),
-        @($workflowPath, $ubuntu2204Arm64JobText, "-RunNativeSmoke", "Ubuntu 22.04 ARM64 consumer must execute native and deterministic DNN calls"),
+        @($workflowPath, $ubuntu2204Arm64JobText, '-SelectedRuntimeProfile "$RUNTIME_PROFILE"', "Ubuntu 22.04 ARM64 guards must select the exact full/mini profile"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "UBUNTU_22_04_ARM64_PACKAGE_ELF_EVIDENCE", "Ubuntu 22.04 ARM64 package must pass the exact profile-derived target-container ELF closure audit"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "expected_runtime_file_count=20", "Ubuntu 22.04 ARM64 mini package audit must require exactly 20 runtime files"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "expected_canonical_count=8", "Ubuntu 22.04 ARM64 mini package audit must require exactly eight canonical ELFs"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "expected_direct_opencv=6", "Ubuntu 22.04 ARM64 mini package audit must require exactly six direct OpenCV dependencies"),
+        @($workflowPath, $ubuntu2204Arm64JobText, 'readelf -h "$elf"', "Ubuntu 22.04 ARM64 package audit must inspect every canonical ELF machine type"),
+        @($workflowPath, $workflowText, 'UBUNTU_22_04_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false', "Pack runtime job must validate exact Ubuntu 22.04 ARM64 host/container provenance"),
+        @($workflowPath, $ubuntu2204Arm64JobText, "-RunNativeSmoke", "Ubuntu 22.04 ARM64 consumer must execute full DNN or mini NOT_LINKED native calls"),
         @($workflowPath, $debianJobText, "verify-targeted-real-debian:", "Pack workflow must keep a separate Debian container verification job"),
         @($workflowPath, $debianJobText, "inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian verification must use the exact full-only non-synthetic non-publishing gate"),
         @($workflowPath, $debianJobText, "runs-on: ubuntu-24.04", "Debian container verification must use the supported hosted runner"),
@@ -626,8 +632,8 @@ Assert-OccurrenceCount `
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $ubuntu2204Arm64JobText `
-    -ExpectedLine "    if: `${{ inputs.rid == 'ubuntu.22.04-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "Ubuntu 22.04 ARM64 targeted verification condition must remain exact, full-only, non-synthetic, and non-publishing"
+    -ExpectedLine "    if: `${{ inputs.rid == 'ubuntu.22.04-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Ubuntu 22.04 ARM64 targeted verification condition must remain exact, full/mini, non-synthetic, and non-publishing"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -640,8 +646,8 @@ Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $ubuntu2204Arm64JobText `
     -Needle "inputs.runtime_profile ==" `
-    -ExpectedCount 1 `
-    -Issue "Ubuntu 22.04 ARM64 verifier must gate on exactly one runtime profile"
+    -ExpectedCount 2 `
+    -Issue "Ubuntu 22.04 ARM64 verifier must gate on exactly full and mini"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -653,9 +659,9 @@ Assert-OccurrenceCount `
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $ubuntu2204Arm64JobText `
-    -Needle "-SelectedRuntimeProfile full" `
+    -Needle '-SelectedRuntimeProfile "$RUNTIME_PROFILE"' `
     -ExpectedCount 2 `
-    -Issue "Both Ubuntu 22.04 ARM64 guards must select only full"
+    -Issue "Both Ubuntu 22.04 ARM64 guards must select the exact full/mini profile"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -883,7 +889,6 @@ foreach ($forbiddenArm64Text in @(
 }
 
 foreach ($forbiddenUbuntu2204Arm64Text in @(
-        "runtime_profile == 'mini'",
         "LD_LIBRARY_PATH",
         "x86_64",
         "qemu",
@@ -895,7 +900,7 @@ foreach ($forbiddenUbuntu2204Arm64Text in @(
         -Path $workflowPath `
         -Text $ubuntu2204Arm64JobText `
         -Needle $forbiddenUbuntu2204Arm64Text `
-        -Issue "Ubuntu 22.04 ARM64 verification must remain native, full-only, same-run, and free of loader overrides or emulation: $forbiddenUbuntu2204Arm64Text"
+        -Issue "Ubuntu 22.04 ARM64 verification must remain native, full/mini-only, same-run, and free of loader overrides or emulation: $forbiddenUbuntu2204Arm64Text"
 }
 
 foreach ($forbiddenDebianArm64Text in @(
@@ -1132,6 +1137,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
-Write-Host "Container targets: ubuntu.22.04-arm64/full through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
+Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."
