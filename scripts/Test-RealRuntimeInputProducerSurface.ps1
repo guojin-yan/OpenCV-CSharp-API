@@ -247,7 +247,8 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "rhel.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "registry.access.redhat.com/ubi9/ubi:9.8"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
         [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
-        [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20"; OpenCvExtraCMakeArgs = "" }
+        [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"; OpenCvExtraCMakeArgs = "" }
     )
     $expectedByKey = @{}
     foreach ($target in $expectedTargets) {
@@ -483,9 +484,14 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "ALPINE_3_20_MUSL_EVIDENCE"; Issue = "Alpine producer must emit actual distro/version/architecture/musl evidence" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_ASSEMBLER_EVIDENCE"; Issue = "Alpine producer must report its independently audited assembler" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_AVXVNNI_EVIDENCE supported with no OpenCV CMake workaround"; Issue = "Alpine producer must prove its own AVX-VNNI path without copying the RPM-family workaround" },
+        [pscustomobject]@{ Needle = 'test "$(docker info --format ''{{.Architecture}}'')" = "x86_64"'; Issue = "Alpine producer must require the factual x86_64 Docker host architecture" },
         [pscustomobject]@{ Needle = "linux-headers"; Issue = "Alpine producer must install Linux headers required by OpenCV core" },
         [pscustomobject]@{ Needle = "samurai"; Issue = "Alpine producer must install the audited Ninja-compatible build tool" },
-        [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_ELF_EVIDENCE files=18 origin=18 direct_opencv=16"; Issue = "Alpine producer must audit both loaders and the full canonical ELF closure before upload" },
+          [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_ELF_EVIDENCE profile=`$RUNTIME_PROFILE files=`$expected_canonical_count runtime_files=`$expected_runtime_file_count machine=X86-64 origin=`$expected_canonical_count producer_paths=0 direct_opencv=`$expected_direct_opencv missing_dependencies=0 loader_equal=true"; Issue = "Alpine producer must audit the exact profile-derived canonical ELF closure before upload" },
+          [pscustomobject]@{ Needle = "ALPINE_3_20_LINKED_CTEST_EVIDENCE profile=`$RUNTIME_PROFILE passed=5 total=5"; Issue = "Alpine producer must require profile-specific linked CTest 5/5" },
+          [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_CONTAINER_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record target container and musl evidence" },
+          [pscustomobject]@{ Needle = "ALPINE_3_20_TOOLCHAIN_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record profile-specific toolchain evidence" },
+          [pscustomobject]@{ Needle = "expected_runtime_file_count=20"; Issue = "Alpine mini producer must require the exact 20-file Linux payload" },
         [pscustomobject]@{ Needle = "fedora|rhel|rocky)"; Issue = "Producer workflow must install the audited RPM-family build dependencies" },
         [pscustomobject]@{ Needle = "dnf config-manager --set-enabled crb"; Issue = "Producer workflow must enable Rocky Linux CRB before installing ninja-build" },
         [pscustomobject]@{ Needle = "RHEL_9_UBI_REPOSITORY_EVIDENCE"; Issue = "Producer workflow must require the audited UBI BaseOS, AppStream, and CodeReady Builder repositories" },
@@ -1033,5 +1039,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."
