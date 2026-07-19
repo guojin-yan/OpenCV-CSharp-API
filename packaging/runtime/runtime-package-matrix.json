@@ -83,7 +83,7 @@
       "runner": "ubuntu-24.04-arm",
       "opencvRid": "debian.12-arm64",
       "nativeExtension": ".so",
-      "notes": "Debian 12 ARM64 glibc runtime package surface; full production and consumption use official Debian 12 ARM64 userspace through Docker on the native AArch64 ubuntu-24.04-arm host. Mini remains package-surface-only until separately proven."
+      "notes": "Debian 12 ARM64 glibc runtime package surface; full and mini production/consumption use official digest-pinned Debian 12 ARM64 userspace through Docker on the native AArch64 ubuntu-24.04-arm host. Both profiles are separately proven and retain distinct module, source, ABI, payload, and smoke contracts."
     },
     {
       "rid": "fedora.40-x64",
