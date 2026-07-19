@@ -40,6 +40,7 @@ jobs:
             'ubuntu.22.04-arm64/mini',
             'debian.12-x64/full',
             'debian.12-arm64/full',
+            'debian.12-arm64/mini',
             'fedora.40-x64/full',
             'rhel.9-x64/full',
             'rocky.9-x64/full',
@@ -47,7 +48,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86, Debian ARM64 mini, and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, and runtime-input-alpine.3.20-x64-full. Windows x86 and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -1166,6 +1167,11 @@ jobs:
             os: ubuntu-24.04-arm
             container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
             opencv_extra_cmake_args: ""
+          - rid: debian.12-arm64
+            profile: mini
+            os: ubuntu-24.04-arm
+            container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+            opencv_extra_cmake_args: ""
           - rid: debian.12-x64
             profile: full
             os: ubuntu-24.04
@@ -1369,8 +1375,8 @@ jobs:
               echo "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE profile=$RUNTIME_PROFILE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture PROCESS_ARCH=$hosted_process_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model MEMORY_BYTES=$hosted_memory_bytes DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes DOTNET=$hosted_dotnet_version"
               echo "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE profile=$RUNTIME_PROFILE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
             else
-              echo "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes"
-              echo "DEBIAN_12_ARM64_PRODUCER_IMAGE_EVIDENCE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+              echo "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE profile=$RUNTIME_PROFILE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture PROCESS_ARCH=$hosted_process_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model MEMORY_BYTES=$hosted_memory_bytes DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes DOTNET=$hosted_dotnet_version"
+              echo "DEBIAN_12_ARM64_PRODUCER_IMAGE_EVIDENCE profile=$RUNTIME_PROFILE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
             fi
           fi
 
@@ -1623,7 +1629,7 @@ jobs:
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
                   echo "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE profile=$RUNTIME_PROFILE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
                 else
-                  echo "DEBIAN_12_ARM64_PRODUCER_CONTAINER_EVIDENCE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
+                  echo "DEBIAN_12_ARM64_PRODUCER_CONTAINER_EVIDENCE profile=$RUNTIME_PROFILE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture DPKG_ARCH=$container_package_architecture LIBC=$container_libc"
                 fi
                 lscpu
                 cmake --version
@@ -1635,7 +1641,7 @@ jobs:
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
                   echo "UBUNTU_22_04_ARM64_PRODUCER_NEON_EVIDENCE profile=$RUNTIME_PROFILE machine=AArch64 neon_compile=success"
                 else
-                  echo "DEBIAN_12_ARM64_PRODUCER_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+                  echo "DEBIAN_12_ARM64_PRODUCER_NEON_EVIDENCE profile=$RUNTIME_PROFILE machine=AArch64 neon_compile=success"
                 fi
               fi
 
@@ -1655,6 +1661,8 @@ jobs:
               test -n "$ninja_version"
               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
                 echo "UBUNTU_22_04_ARM64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$POWERSHELL_VERSION HOST_DOTNET=$HOSTED_DOTNET_VERSION"
+              elif [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
+                echo "DEBIAN_12_ARM64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$POWERSHELL_VERSION HOST_DOTNET=$HOSTED_DOTNET_VERSION"
               fi
               mkdir -p "$source_root"
               if [ ! -d "$source_dir/.git" ]; then
@@ -1685,7 +1693,7 @@ jobs:
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
                   echo "UBUNTU_22_04_ARM64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
                 else
-                  echo "DEBIAN_12_ARM64_OPENCV_CPU_EVIDENCE $opencv_cpu_configuration"
+                  echo "DEBIAN_12_ARM64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
                 fi
               fi
 
@@ -1720,7 +1728,7 @@ jobs:
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
                   echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
                 else
-                  echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE passed=5 total=5"
+                  echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
                 fi
               fi
 
@@ -1770,10 +1778,6 @@ jobs:
                     expected_direct_opencv=16
                     ;;
                   mini)
-                    if [ "$PRODUCER_RID" != "ubuntu.22.04-arm64" ]; then
-                      echo "Mini is not approved for container producer target $PRODUCER_RID." >&2
-                      exit 1
-                    fi
                     modules=(core imgproc imgcodecs videoio geometry flann)
                     expected_opencv_count=6
                     expected_canonical_count=8
@@ -1858,7 +1862,8 @@ jobs:
                   elf_audit_evidence="UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
                   echo "$elf_audit_evidence"
                 else
-                  echo "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE files=18 machine=AArch64 origin=18 producer_paths=0 direct_opencv=16 missing_dependencies=0"
+                  elf_audit_evidence="DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  echo "$elf_audit_evidence"
                 fi
               fi
 

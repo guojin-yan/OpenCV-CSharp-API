@@ -945,6 +945,186 @@ jobs:
             throw "Ubuntu 22.04 ARM64 provenance retained forbidden x86 CPU configuration evidence."
           }
           Write-Host "UBUNTU_22_04_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false"
+      - name: Validate Debian 12 ARM64 runtime input provenance
+        if: ${{ matrix.rid == 'debian.12-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'debian.12-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
+        shell: pwsh
+        run: |
+          $profileName = '${{ matrix.profile }}'
+          if ([string]::IsNullOrWhiteSpace('${{ inputs.real_runtime_artifact_run_id }}')) {
+            throw "Non-synthetic debian.12-arm64/$profileName packaging requires an explicit runtime-input producer run id."
+          }
+
+          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE "artifacts/real-runtime-inputs/debian.12-arm64-$profileName"
+          $provenancePath = Join-Path $artifactRoot 'runtime-input.provenance.json'
+          $provenance = Get-Content -LiteralPath $provenancePath -Raw | ConvertFrom-Json
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq $profileName })
+          if ($profile.Count -ne 1) {
+            throw "Selected Debian 12 ARM64 runtime profile was not found exactly once: $profileName"
+          }
+
+          $expectedModules = @($profile[0].modules)
+          $expectedModuleCount = $expectedModules.Count
+          $expectedCanonicalCount = $expectedModuleCount + 2
+          $expectedRuntimeFileCount = $expectedModuleCount * 3
+          $expectedPayloadFileCount = $expectedRuntimeFileCount + 2
+          $expectedRuntimeNames = @($expectedModules | ForEach-Object {
+              "libopencv_$_.so"
+              "libopencv_$_.so.500"
+              "libopencv_$_.so.${{ inputs.opencv_version }}"
+            })
+          $actualModules = @($provenance.RequiredModules)
+          $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
+          $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
+          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
+          if ($provenance.Rid -ne 'debian.12-arm64' -or
+              $provenance.PlatformFamily -ne 'linux' -or
+              $provenance.Distro -ne 'debian' -or
+              $provenance.DistroVersion -ne '12' -or
+              $provenance.RuntimeProfile -ne $profileName -or
+              $provenance.RuntimeProfilePackageIdSuffix -ne [string]$profile[0].packageIdSuffix -or
+              $provenance.BuildList -ne [string]$profile[0].buildList -or
+              [bool]$provenance.SyntheticRuntimeInputs -or
+              $actualModules.Count -ne $expectedModuleCount -or
+              @($expectedModules | Where-Object { $actualModules -notcontains $_ }).Count -ne 0 -or
+              @($actualModules | Where-Object { $expectedModules -notcontains $_ }).Count -ne 0 -or
+              $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
+              @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              $actualLoaderNames.Count -ne 2 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
+              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+            throw "Debian 12 ARM64 runtime-input provenance does not match the exact debian.12-arm64/$profileName $expectedPayloadFileCount-file producer contract."
+          }
+
+          foreach ($requiredValue in @(
+              [string]$provenance.RunnerImage,
+              [string]$provenance.RunnerImageVersion,
+              [string]$provenance.HostedDistro,
+              [string]$provenance.HostedDistroVersion,
+              [string]$provenance.HostedArchitecture,
+              [string]$provenance.HostedProcessArchitecture,
+              [string]$provenance.HostedPackageArchitecture,
+              [string]$provenance.HostedLibc,
+              [string]$provenance.HostedCpuModel,
+              [string]$provenance.HostedMemoryBytes,
+              [string]$provenance.HostedDiskAvailableBytes,
+              [string]$provenance.CMakeVersion,
+              [string]$provenance.CMakeGenerator,
+              [string]$provenance.BuildConfiguration,
+              [string]$provenance.CompilerPath,
+              [string]$provenance.CompilerVersion,
+              [string]$provenance.AssemblerVersion,
+              [string]$provenance.NinjaVersion,
+              [string]$provenance.DotNetVersion,
+              [string]$provenance.OpenCvCMakeArguments,
+              [string]$provenance.ElfAuditEvidence,
+              [string]$provenance.OpenCvCpuConfiguration,
+              [string]$provenance.NativeWrapperSources,
+              [string]$provenance.ContainerImage,
+              [string]$provenance.ContainerImageId,
+              [string]$provenance.ContainerImageDigest,
+              [string]$provenance.ContainerDistro,
+              [string]$provenance.ContainerDistroVersion,
+              [string]$provenance.ContainerArchitecture,
+              [string]$provenance.ContainerPackageArchitecture,
+              [string]$provenance.ContainerLibc,
+              [string]$provenance.PowerShellVersion,
+              [string]$provenance.PowerShellArchiveSha256)) {
+            if ([string]::IsNullOrWhiteSpace($requiredValue)) {
+              throw "Debian 12 ARM64 runtime-input provenance is missing required host, target container, toolchain, profile, or ELF evidence."
+            }
+          }
+
+          try {
+            $nativeWrapperSources = @(([string]$provenance.NativeWrapperSources | ConvertFrom-Json))
+            $openCvCMakeArguments = @(([string]$provenance.OpenCvCMakeArguments | ConvertFrom-Json))
+          }
+          catch {
+            throw "Debian 12 ARM64 runtime-input provenance contains invalid source or OpenCV CMake argument JSON."
+          }
+          $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
+          function Get-NativeSourceList([string]$variableName) {
+            $match = [regex]::Match($cmakeText, "(?s)set\($variableName(?<body>.*?)\)")
+            if (-not $match.Success) {
+              throw "Native CMake source list was not found: $variableName"
+            }
+            return @(
+              [regex]::Matches($match.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
+                ForEach-Object { $_.Groups[1].Value }
+            )
+          }
+          $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
+          $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
+          $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
+              [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
+              $nativeWrapperSources.Count -ne $expectedSourceCount -or
+              @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
+              @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
+              -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
+            throw "Debian 12 ARM64 provenance does not retain the exact $expectedSourceCount-source/$expectedAbiFunctionCount-ABI $profileName profile and empty extra CMake arguments."
+          }
+
+          $cmakeArgumentText = $openCvCMakeArguments -join "`n"
+          $expectedBuildListArgument = "-DBUILD_LIST=$([string]$profile[0].buildList)"
+          $elfProfile = [regex]::Escape($profileName)
+          $expectedElfPattern = "^DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true$"
+          $expectedImage = 'debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
+          $expectedImageDigest = 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
+          if ($provenance.HostedRunner -ne 'ubuntu-24.04-arm' -or
+              $provenance.RunnerImage -ne 'ubuntu24-arm64' -or
+              $provenance.HostedDistro -ne 'ubuntu' -or
+              $provenance.HostedDistroVersion -ne '24.04' -or
+              $provenance.HostedArchitecture -ne 'aarch64' -or
+              $provenance.HostedProcessArchitecture -ne 'Arm64' -or
+              $provenance.HostedPackageArchitecture -ne 'arm64' -or
+              $provenance.HostedLibc -notmatch '^glibc ' -or
+              [long]$provenance.HostedMemoryBytes -le 0 -or
+              [long]$provenance.HostedDiskAvailableBytes -le 0 -or
+              $provenance.ContainerImage -ne $expectedImage -or
+              $provenance.ContainerImageId -notmatch '^sha256:' -or
+              $provenance.ContainerImageDigest.IndexOf($expectedImageDigest, [System.StringComparison]::Ordinal) -lt 0 -or
+              $provenance.ContainerDistro -ne 'debian' -or
+              $provenance.ContainerDistroVersion -notmatch '^12(?:\..*)?$' -or
+              $provenance.ContainerArchitecture -ne 'aarch64' -or
+              $provenance.ContainerPackageArchitecture -ne 'arm64' -or
+              $provenance.ContainerLibc -notmatch '^glibc 2\.36$' -or
+              $provenance.PowerShellVersion -ne '7.4.17' -or
+              $provenance.PowerShellArchiveSha256 -ne '68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c' -or
+              $provenance.CMakeVersion -notmatch '^cmake version ' -or
+              $provenance.CMakeGenerator -ne 'Ninja' -or
+              $provenance.BuildConfiguration -ne 'Release' -or
+              $provenance.CompilerPath -notmatch '(?i)(?:^|/)g\+\+$' -or
+              $provenance.CompilerVersion -notmatch 'aarch64' -or
+              $provenance.AssemblerVersion -notmatch 'aarch64' -or
+              $cmakeArgumentText.IndexOf('-G', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf('Ninja', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf($expectedBuildListArgument, [System.StringComparison]::Ordinal) -lt 0 -or
+              $provenance.OpenCvCpuConfiguration -notmatch 'NEON' -or
+              $provenance.ElfAuditEvidence -notmatch $expectedElfPattern) {
+            throw "Debian 12 ARM64 runtime-input provenance host, target container, toolchain, CPU, profile, or ELF evidence is not factual debian.12-arm64/$profileName."
+          }
+
+          $forbiddenEvidence = @(
+            [string]$provenance.CompilerPath,
+            [string]$provenance.CompilerVersion,
+            [string]$provenance.AssemblerVersion,
+            [string]$provenance.OpenCvCMakeArguments,
+            [string]$provenance.OpenCvCpuConfiguration,
+            [string]$provenance.ElfAuditEvidence,
+            [string]$provenance.OpenCvExtraCMakeArgs) -join "`n"
+          foreach ($forbiddenToken in @('x86_64', 'AMD64', 'QEMU', 'emulation', 'cross-compile', '--platform', 'CV_AVXVNNI_AVAILABLE')) {
+            if ($forbiddenEvidence.IndexOf($forbiddenToken, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+              throw "Debian 12 ARM64 provenance retained forbidden x64, emulation, cross-build, or foreign workaround evidence: $forbiddenToken"
+            }
+          }
+          if ($forbiddenEvidence -match '(?i)\b(?:SSE|AVX)') {
+            throw "Debian 12 ARM64 provenance retained forbidden x86 CPU configuration evidence."
+          }
+          Write-Host "DEBIAN_12_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false"
       - name: Pack runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
         shell: pwsh
@@ -1714,7 +1894,7 @@ jobs:
     needs:
       - pack-managed
       - pack-runtime
-    if: ${{ inputs.rid == 'debian.12-arm64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    if: ${{ inputs.rid == 'debian.12-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
@@ -1726,12 +1906,14 @@ jobs:
       - name: Download Debian 12 ARM64 runtime package artifact
         uses: actions/download-artifact@v4
         with:
-          name: nupkg-debian.12-arm64-full
-          path: artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-full
+          name: nupkg-debian.12-arm64-${{ inputs.runtime_profile }}
+          path: artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-${{ inputs.runtime_profile }}
       - name: Verify and run selected real Debian 12 ARM64 package
         shell: bash
         env:
           PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+          OPENCV_VERSION: ${{ inputs.opencv_version }}
+          RUNTIME_PROFILE: ${{ inputs.runtime_profile }}
           POWERSHELL_VERSION: 7.4.17
           POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
           DEBIAN_12_ARM64_IMAGE: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
@@ -1750,6 +1932,8 @@ jobs:
 
           docker run --rm \
             -e PACKAGE_VERSION="$PACKAGE_VERSION" \
+            -e OPENCV_VERSION="$OPENCV_VERSION" \
+            -e RUNTIME_PROFILE="$RUNTIME_PROFILE" \
             -e POWERSHELL_VERSION="$POWERSHELL_VERSION" \
             -e POWERSHELL_SHA256="$POWERSHELL_SHA256" \
             -v "$GITHUB_WORKSPACE:/workspace:ro" \
@@ -1770,12 +1954,14 @@ jobs:
               apt-get update
               apt-get install -y --no-install-recommends \
                 ca-certificates \
+                binutils \
                 curl \
                 gzip \
                 libicu72 \
                 libssl3 \
                 libunwind8 \
                 tar \
+                unzip \
                 zlib1g
 
               powershell_archive="/tmp/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz"
@@ -1791,7 +1977,7 @@ jobs:
               ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
 
               libc="$(getconf GNU_LIBC_VERSION)"
-              echo "DEBIAN_12_ARM64_CONSUMER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc POWERSHELL_VERSION=$POWERSHELL_VERSION POWERSHELL_SHA256=$POWERSHELL_SHA256"
+              echo "DEBIAN_12_ARM64_CONSUMER_EVIDENCE profile=$RUNTIME_PROFILE ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc POWERSHELL_VERSION=$POWERSHELL_VERSION POWERSHELL_SHA256=$POWERSHELL_SHA256"
               echo "DEBIAN_12_ARM64_POWERSHELL_EVIDENCE version=$POWERSHELL_VERSION archive_sha256=$POWERSHELL_SHA256 architecture=arm64"
               pwsh --version
               dotnet --info
@@ -1801,14 +1987,93 @@ jobs:
                 -ExpectedPackageVersion "$PACKAGE_VERSION" \
                 -ExpectedSyntheticRuntimeInputs false \
                 -SelectedRid debian.12-arm64 \
-                -SelectedRuntimeProfile full
+                -SelectedRuntimeProfile "$RUNTIME_PROFILE"
+
+              case "$RUNTIME_PROFILE" in
+                full)
+                  modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
+                  expected_canonical_count=18
+                  expected_runtime_file_count=50
+                  expected_direct_opencv=16
+                  ;;
+                mini)
+                  modules=(core imgproc imgcodecs videoio geometry flann)
+                  expected_canonical_count=8
+                  expected_runtime_file_count=20
+                  expected_direct_opencv=6
+                  ;;
+                *)
+                  echo "Unsupported Debian 12 ARM64 package profile: $RUNTIME_PROFILE" >&2
+                  exit 1
+                  ;;
+              esac
+
+              runtime_artifact_dir="/workspace/artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-$RUNTIME_PROFILE"
+              mapfile -t packages < <(find "$runtime_artifact_dir" -maxdepth 1 -type f -name "*.nupkg" | sort)
+              test "${#packages[@]}" -eq 1
+              extract_root="/tmp/opencv-debian12-arm64-package-audit-$RUNTIME_PROFILE"
+              rm -rf "$extract_root"
+              mkdir -p "$extract_root"
+              unzip -q "${packages[0]}" -d "$extract_root"
+              native_dir="$extract_root/runtimes/debian.12-arm64/native"
+              test -d "$native_dir"
+
+              compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
+              test -n "$compatibility_loader"
+              expected_names="/tmp/debian12-arm64-$RUNTIME_PROFILE-expected-runtime-files.txt"
+              actual_names="/tmp/debian12-arm64-$RUNTIME_PROFILE-actual-runtime-files.txt"
+              printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+              for module in "${modules[@]}"; do
+                printf "%s\n" \
+                  "libopencv_${module}.so" \
+                  "libopencv_${module}.so.500" \
+                  "libopencv_${module}.so.$OPENCV_VERSION" \
+                  >> "$expected_names"
+              done
+              sort -o "$expected_names" "$expected_names"
+              find "$native_dir" -mindepth 1 -maxdepth 1 -type f -printf "%f\n" | sort > "$actual_names"
+              test "$(wc -l < "$actual_names")" -eq "$expected_runtime_file_count"
+              diff -u "$expected_names" "$actual_names"
+
+              mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
+              test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
+              elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+              test "${#elf_files[@]}" -eq "$expected_canonical_count"
+              machine_count=0
+              origin_count=0
+              producer_path_count=0
+              missing_dependency_count=0
+              for elf in "${elf_files[@]}"; do
+                test -f "$elf"
+                readelf -h "$elf" | grep -q "Machine:.*AArch64"
+                machine_count=$((machine_count + 1))
+                dynamic_paths="$(readelf -d "$elf" | grep -E "\((RPATH|RUNPATH)\)" || true)"
+                printf "%s\n" "$dynamic_paths" | grep -Fq "\$ORIGIN"
+                origin_count=$((origin_count + 1))
+                if printf "%s\n" "$dynamic_paths" | grep -Eq "(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)"; then
+                  producer_path_count=$((producer_path_count + 1))
+                fi
+                missing="$(ldd "$elf" | grep "not found" || true)"
+                if [ -n "$missing" ]; then
+                  printf "%s\n" "$missing" >&2
+                  missing_dependency_count=$((missing_dependency_count + 1))
+                fi
+              done
+              direct_opencv_dependencies="$(readelf -d "$native_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
+              test "$machine_count" -eq "$expected_canonical_count"
+              test "$origin_count" -eq "$expected_canonical_count"
+              test "$producer_path_count" -eq 0
+              test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
+              test "$missing_dependency_count" -eq 0
+              cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
+              echo "DEBIAN_12_ARM64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
 
               pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1 \
                 -ArtifactRoot /workspace/artifacts/pack-targeted-debian-arm64 \
                 -ExpectedPackageVersion "$PACKAGE_VERSION" \
                 -ExpectedSyntheticRuntimeInputs false \
                 -SelectedRid debian.12-arm64 \
-                -SelectedRuntimeProfile full \
+                -SelectedRuntimeProfile "$RUNTIME_PROFILE" \
                 -RunNativeSmoke
             '
 
