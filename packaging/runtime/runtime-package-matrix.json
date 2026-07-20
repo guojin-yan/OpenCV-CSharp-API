@@ -123,7 +123,7 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "alpine.3.20-x64",
       "nativeExtension": ".so",
-      "notes": "Alpine 3.20 x64 musl runtime package surface for exact compatibility; build only from an exact Alpine 3.20 x64 native runtime. Alpine 3.20 standard support ended on 2026-04-01 and fixes are now on request."
+      "notes": "Alpine 3.20 x64 musl runtime package surface for exact compatibility; full and mini production/consumption use digest-pinned official Alpine 3.20 x86_64/musl userspace through Docker on the Ubuntu x64 host. Both profiles are separately proven and retain distinct module, source, ABI, payload, and smoke contracts. Alpine 3.20 standard support ended on 2026-04-01 and fixes are now on request."
     },
     {
       "rid": "android-arm64",
