@@ -303,6 +303,170 @@ jobs:
           "opencv_runtime_dir=$openCvRuntimeDir" >> $env:GITHUB_OUTPUT
           "opencv_source_dir=$openCvSourceDir" >> $env:GITHUB_OUTPUT
           "opencv_install_dir=$openCvInstallDir" >> $env:GITHUB_OUTPUT
+      - name: Validate Ubuntu 22.04 x64 mini runtime input provenance
+        if: ${{ matrix.rid == 'ubuntu.22.04-x64' && matrix.profile == 'mini' && inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace('${{ inputs.real_runtime_artifact_run_id }}')) {
+            throw "Non-synthetic ubuntu.22.04-x64/mini packaging requires an explicit runtime-input producer run id."
+          }
+
+          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/real-runtime-inputs/ubuntu.22.04-x64-mini'
+          $provenance = Get-Content -LiteralPath (Join-Path $artifactRoot 'runtime-input.provenance.json') -Raw | ConvertFrom-Json
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq 'mini' })
+          if ($profile.Count -ne 1) {
+            throw "Selected mini runtime profile was not found exactly once."
+          }
+
+          $expectedModules = @($profile[0].modules)
+          $expectedModuleCount = 6
+          $expectedOpenCvFileCount = 18
+          $expectedPayloadFileCount = 20
+          if ($expectedModules.Count -ne $expectedModuleCount) {
+            throw "Mini runtime matrix must retain exactly six OpenCV modules."
+          }
+          $expectedRuntimeNames = @($expectedModules | ForEach-Object {
+              "libopencv_$_.so"
+              "libopencv_$_.so.500"
+              "libopencv_$_.so.${{ inputs.opencv_version }}"
+            })
+          $actualModules = @($provenance.RequiredModules)
+          $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
+          $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
+          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
+          if ($provenance.Rid -ne 'ubuntu.22.04-x64' -or
+              $provenance.OpenCvRid -ne 'ubuntu.22.04-x64' -or
+              $provenance.PlatformFamily -ne 'linux' -or
+              $provenance.Distro -ne 'ubuntu' -or
+              $provenance.DistroVersion -ne '22.04' -or
+              $provenance.RuntimeProfile -ne 'mini' -or
+              $provenance.RuntimeProfilePackageIdSuffix -ne '.mini' -or
+              $provenance.BuildList -ne 'core,imgproc,imgcodecs,videoio,geometry,flann' -or
+              [bool]$provenance.SyntheticRuntimeInputs -or
+              $actualModules.Count -ne $expectedModuleCount -or
+              @($expectedModules | Where-Object { $actualModules -notcontains $_ }).Count -ne 0 -or
+              @($actualModules | Where-Object { $expectedModules -notcontains $_ }).Count -ne 0 -or
+              $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
+              @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              $actualLoaderNames.Count -ne 2 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
+              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+            throw "Ubuntu 22.04 x64 mini provenance does not match the exact six-module 20-file producer contract."
+          }
+
+          foreach ($requiredValue in @(
+              [string]$provenance.RunnerImage,
+              [string]$provenance.RunnerImageVersion,
+              [string]$provenance.HostedDistro,
+              [string]$provenance.HostedDistroVersion,
+              [string]$provenance.HostedArchitecture,
+              [string]$provenance.HostedProcessArchitecture,
+              [string]$provenance.HostedPackageArchitecture,
+              [string]$provenance.HostedLibc,
+              [string]$provenance.HostedCpuModel,
+              [string]$provenance.HostedMemoryBytes,
+              [string]$provenance.HostedDiskAvailableBytes,
+              [string]$provenance.CMakeVersion,
+              [string]$provenance.CMakeGenerator,
+              [string]$provenance.BuildConfiguration,
+              [string]$provenance.CompilerPath,
+              [string]$provenance.CompilerVersion,
+              [string]$provenance.AssemblerVersion,
+              [string]$provenance.NinjaVersion,
+              [string]$provenance.PowerShellVersion,
+              [string]$provenance.DotNetVersion,
+              [string]$provenance.OpenCvCMakeArguments,
+              [string]$provenance.OpenCvCpuConfiguration,
+              [string]$provenance.NativeWrapperSources,
+              [string]$provenance.ElfAuditEvidence)) {
+            if ([string]::IsNullOrWhiteSpace($requiredValue)) {
+              throw "Ubuntu 22.04 x64 mini provenance is missing required runner, toolchain, profile, or ELF evidence."
+            }
+          }
+
+          try {
+            $nativeWrapperSources = @(([string]$provenance.NativeWrapperSources | ConvertFrom-Json))
+            $openCvCMakeArguments = @(([string]$provenance.OpenCvCMakeArguments | ConvertFrom-Json))
+          }
+          catch {
+            throw "Ubuntu 22.04 x64 mini provenance contains invalid source or OpenCV CMake argument JSON."
+          }
+          $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
+          $miniMatch = [regex]::Match($cmakeText, '(?s)set\(OPENCV_CSHARP_MINI_NATIVE_SOURCES(?<body>.*?)\)')
+          if (-not $miniMatch.Success) {
+            throw "Native mini CMake source list was not found."
+          }
+          $expectedSources = @(
+            [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
+              ForEach-Object { $_.Groups[1].Value }
+          )
+          if ($expectedSources.Count -ne 8 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
+              $nativeWrapperSources.Count -ne 8 -or
+              @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
+              @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
+              -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
+            throw "Ubuntu 22.04 x64 mini provenance does not retain the exact 8-source/304-ABI profile and empty extra CMake arguments."
+          }
+
+          foreach ($containerValue in @(
+              [string]$provenance.ContainerImage,
+              [string]$provenance.ContainerImageId,
+              [string]$provenance.ContainerImageDigest,
+              [string]$provenance.ContainerDistro,
+              [string]$provenance.ContainerDistroVersion,
+              [string]$provenance.ContainerArchitecture,
+              [string]$provenance.ContainerPackageArchitecture,
+              [string]$provenance.ContainerLibc,
+              [string]$provenance.PowerShellArchiveSha256)) {
+            if (-not [string]::IsNullOrWhiteSpace($containerValue)) {
+              throw "Ubuntu 22.04 x64 hosted provenance must not contain container-only evidence."
+            }
+          }
+
+          $cmakeArgumentText = $openCvCMakeArguments -join "`n"
+          $expectedElfPattern = '^UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          if ($provenance.MatrixRunner -ne 'ubuntu-22.04' -or
+              $provenance.HostedRunner -ne 'ubuntu-22.04' -or
+              $provenance.RunnerImage -ne 'ubuntu22' -or
+              $provenance.HostedDistro -ne 'ubuntu' -or
+              $provenance.HostedDistroVersion -ne '22.04' -or
+              $provenance.HostedArchitecture -ne 'x86_64' -or
+              $provenance.HostedProcessArchitecture -ne 'X64' -or
+              $provenance.HostedPackageArchitecture -ne 'amd64' -or
+              $provenance.HostedLibc -notmatch '^glibc 2\.35(?:$|\.)' -or
+              [long]$provenance.HostedMemoryBytes -le 0 -or
+              [long]$provenance.HostedDiskAvailableBytes -le 0 -or
+              $provenance.CMakeVersion -notmatch '^cmake version ' -or
+              $provenance.CMakeGenerator -ne 'Ninja' -or
+              $provenance.BuildConfiguration -ne 'Release' -or
+              $provenance.CompilerPath -notmatch '(?i)(?:^|/)g\+\+$' -or
+              $provenance.CompilerVersion -notmatch 'x86_64' -or
+              $provenance.AssemblerVersion -notmatch 'x86_64' -or
+              $cmakeArgumentText.IndexOf('-G', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf('Ninja', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf('-DBUILD_LIST=core,imgproc,imgcodecs,videoio,geometry,flann', [System.StringComparison]::Ordinal) -lt 0 -or
+              $provenance.OpenCvCpuConfiguration -notmatch '(?i)(?:SSE|AVX)' -or
+              $provenance.ElfAuditEvidence -notmatch $expectedElfPattern) {
+            throw "Ubuntu 22.04 x64 mini provenance runner, toolchain, CPU, profile, or ELF evidence is not factual."
+          }
+
+          $forbiddenEvidence = @(
+            [string]$provenance.CompilerVersion,
+            [string]$provenance.AssemblerVersion,
+            [string]$provenance.OpenCvCMakeArguments,
+            [string]$provenance.OpenCvCpuConfiguration,
+            [string]$provenance.ElfAuditEvidence
+          ) -join "`n"
+          foreach ($forbiddenToken in @('AArch64', 'arm64', 'QEMU', 'emulation', 'cross-compile', '--platform', 'CV_AVXVNNI_AVAILABLE=0')) {
+            if ($forbiddenEvidence.IndexOf($forbiddenToken, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+              throw "Ubuntu 22.04 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
+            }
+          }
+          Write-Host "UBUNTU_22_04_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false"
       - name: Validate Windows x64 runtime input provenance
         if: ${{ matrix.rid == 'win-x64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-x64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1400,7 +1564,7 @@ jobs:
     needs:
       - pack-managed
       - pack-runtime
-    if: ${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    if: ${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini'))) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
     steps:
       - uses: actions/checkout@v4
@@ -1410,6 +1574,40 @@ jobs:
             10.0.x
             9.0.x
             8.0.x
+      - name: Record hosted Ubuntu x64 consumer evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat /etc/os-release
+          . /etc/os-release
+          test "${ID:-}" = "ubuntu"
+          test "$(uname -m)" = "x86_64"
+          test "$(dpkg --print-architecture)" = "amd64"
+          process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$process_architecture" = "X64"
+          runner_image="${ImageOS:-unknown}"
+          runner_image_version="${ImageVersion:-unknown}"
+          test "$runner_image_version" != "unknown"
+          libc="$(getconf GNU_LIBC_VERSION)"
+
+          case '${{ inputs.rid }}' in
+            ubuntu.22.04-x64)
+              test "${VERSION_ID:-}" = "22.04"
+              test "$runner_image" = "ubuntu22"
+              printf '%s\n' "$libc" | grep -Eq '^glibc 2\.35($|\.)'
+              echo "UBUNTU_22_04_X64_CONSUMER_EVIDENCE profile=${{ inputs.runtime_profile }} ImageOS=$runner_image ImageVersion=$runner_image_version ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc"
+              ;;
+            ubuntu.24.04-x64)
+              test "${VERSION_ID:-}" = "24.04"
+              test "$runner_image" = "ubuntu24"
+              printf '%s\n' "$libc" | grep -Eq '^glibc 2\.39($|\.)'
+              echo "UBUNTU_24_04_X64_CONSUMER_EVIDENCE profile=${{ inputs.runtime_profile }} ImageOS=$runner_image ImageVersion=$runner_image_version ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc"
+              ;;
+            *)
+              echo "Unsupported hosted Ubuntu x64 consumer RID: ${{ inputs.rid }}" >&2
+              exit 1
+              ;;
+          esac
       - name: Download managed package artifact
         uses: actions/download-artifact@v4
         with:

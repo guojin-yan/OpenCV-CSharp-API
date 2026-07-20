@@ -207,8 +207,10 @@ foreach ($expectation in @(
         @($workflowPath, $workflowText, "windows-arm64-mlas-processor-case.patch", "Pack runtime job must verify the repository-owned Windows ARM64 OpenCV patch"),
         @($workflowPath, $workflowText, "Windows ARM64 provenance does not retain the audited OpenCV MLAS processor-case patch", "Pack runtime job must reject absent or changed Windows ARM64 OpenCV patch evidence"),
         @($workflowPath, $ubuntuJobText, "verify-targeted-real:", "Pack workflow must keep the targeted real Ubuntu verification job"),
-        @($workflowPath, $ubuntuJobText, "((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Hosted targeted verification must keep the exact three-target non-synthetic non-publishing allowlist"),
+        @($workflowPath, $ubuntuJobText, "((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini'))) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Hosted targeted verification must keep the exact four-target non-synthetic non-publishing allowlist"),
         @($workflowPath, $ubuntuJobText, "runs-on: `${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}", "Hosted targeted verification must execute each proven RID on its matching Ubuntu runner"),
+        @($workflowPath, $ubuntuJobText, "UBUNTU_22_04_X64_CONSUMER_EVIDENCE", "Ubuntu 22.04 x64 consumer must record matching hosted runner evidence before package execution"),
+        @($workflowPath, $workflowText, 'UBUNTU_22_04_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false', "Pack runtime job must validate exact Ubuntu 22.04 x64 mini producer provenance"),
         @($workflowPath, $ubuntuJobText, "name: nupkg-managed", "Hosted targeted verification must download the same-run managed artifact explicitly"),
         @($workflowPath, $ubuntuJobText, 'name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}', "Hosted targeted verification must download the exact selected RID/profile artifact"),
         @($workflowPath, $ubuntuJobText, "path: artifacts/pack-targeted/nupkg-managed", "Hosted targeted managed artifact must use an isolated exact path"),
@@ -604,8 +606,8 @@ foreach ($miniNotLinkedNeedle in @(
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $ubuntuJobText `
-    -ExpectedLine "    if: `${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && inputs.runtime_profile == 'full')) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "Hosted targeted verification condition must remain exactly the three proven targets"
+    -ExpectedLine "    if: `${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini'))) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Hosted targeted verification condition must remain exactly the four proven targets"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -1116,12 +1118,6 @@ Assert-NotContains `
     -Needle "-SelectedRid ubuntu.24.04-x64" `
     -Issue "Targeted guards must not hardcode Ubuntu 24.04 after adding Ubuntu 22.04 full"
 
-Assert-NotContains `
-    -Path $workflowPath `
-    -Text $workflowText `
-    -Needle "inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')" `
-    -Issue "Ubuntu 22.04 mini must not enter the targeted native-execution allowlist"
-
 Assert-Matches `
     -Path $cmakePath `
     -Text $cmakeText `
@@ -1141,7 +1137,7 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
+Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full, ubuntu.22.04-x64/mini; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
 Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."

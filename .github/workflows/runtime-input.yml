@@ -36,6 +36,7 @@ jobs:
             'ubuntu.24.04-arm64/full',
             'ubuntu.24.04-arm64/mini',
             'ubuntu.22.04-x64/full',
+            'ubuntu.22.04-x64/mini',
             'ubuntu.22.04-arm64/full',
             'ubuntu.22.04-arm64/mini',
             'debian.12-x64/full',
@@ -49,7 +50,7 @@ jobs:
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, and runtime-input-alpine.3.20-x64-mini. Windows x86 and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, and runtime-input-alpine.3.20-x64-mini. Windows x86 and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -72,6 +73,9 @@ jobs:
             os: ubuntu-24.04-arm
           - rid: ubuntu.22.04-x64
             profile: full
+            os: ubuntu-22.04
+          - rid: ubuntu.22.04-x64
+            profile: mini
             os: ubuntu-22.04
     runs-on: ${{ matrix.os }}
     steps:
@@ -159,6 +163,89 @@ jobs:
           pwsh --version
           dotnet --info
           echo "UBUNTU_24_04_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success"
+
+          {
+            echo "runner_image=$runner_image"
+            echo "runner_image_version=$runner_image_version"
+            echo "hosted_distro=$ID"
+            echo "hosted_distro_version=$VERSION_ID"
+            echo "hosted_architecture=$(uname -m)"
+            echo "hosted_package_architecture=$(dpkg --print-architecture)"
+            echo "hosted_libc=$libc"
+            echo "hosted_cpu_model=$cpu_model"
+            echo "hosted_memory_bytes=$memory_bytes"
+            echo "hosted_disk_available_bytes=$disk_available_bytes"
+            echo "hosted_process_architecture=$process_architecture"
+            echo "compiler_path=$compiler_path"
+            echo "compiler_version=$compiler_version"
+            echo "assembler_version=$assembler_version"
+            echo "cmake_version=$cmake_version"
+            echo "ninja_version=$ninja_version"
+            echo "powershell_version=$powershell_version"
+            echo "dotnet_version=$dotnet_version"
+          } >> "$GITHUB_OUTPUT"
+      - name: Record Ubuntu 22.04 x64 runner evidence
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.22.04-x64' && matrix.profile == 'mini' }}
+        id: ubuntu2204_x64_runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat /etc/os-release
+          . /etc/os-release
+          test "${ID:-}" = "ubuntu"
+          test "${VERSION_ID:-}" = "22.04"
+          test "$(uname -m)" = "x86_64"
+          test "$(dpkg --print-architecture)" = "amd64"
+
+          runner_image="${ImageOS:-unknown}"
+          runner_image_version="${ImageVersion:-unknown}"
+          libc="$(getconf GNU_LIBC_VERSION)"
+          cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | head -n 1)"
+          memory_bytes="$(( $(awk '/^MemTotal:/ { print $2 }' /proc/meminfo) * 1024 ))"
+          disk_available_bytes="$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+          process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          compiler_path="$(command -v g++)"
+          compiler_version="$(g++ --version | sed -n '1p') target=$(g++ -dumpmachine)"
+          assembler_target="$(as --version | sed -n '$p' | tr -cd '[:alnum:]_.+-')"
+          assembler_version="$(as --version | sed -n '1p') target=$assembler_target"
+          cmake_version="$(cmake --version | head -n 1)"
+          ninja_version="$(ninja --version)"
+          powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
+          dotnet_version="$(dotnet --version)"
+          test "$runner_image" = "ubuntu22"
+          test "$runner_image_version" != "unknown"
+          printf '%s\n' "$libc" | grep -Eq '^glibc 2\.35($|\.)'
+          test -n "$cpu_model"
+          test "$memory_bytes" -gt 0
+          test "$disk_available_bytes" -gt 0
+          test "$process_architecture" = "X64"
+          test -x "$compiler_path"
+          test -n "$compiler_version"
+          test -n "$assembler_target"
+          test -n "$assembler_version"
+          test -n "$cmake_version"
+          test -n "$ninja_version"
+          test -n "$powershell_version"
+          test -n "$dotnet_version"
+
+          printf '%s\n' \
+            'int probe(void) { return 22; }' \
+            > /tmp/opencv-ubuntu2204-x64-probe.cpp
+          g++ -c -O2 /tmp/opencv-ubuntu2204-x64-probe.cpp -o /tmp/opencv-ubuntu2204-x64-probe.o
+          readelf -h /tmp/opencv-ubuntu2204-x64-probe.o | grep -q 'Machine:.*Advanced Micro Devices X86-64'
+
+          echo "UBUNTU_22_04_X64_RUNNER_EVIDENCE profile=mini ImageOS=$runner_image ImageVersion=$runner_image_version ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc CPU=$cpu_model MEMORY_BYTES=$memory_bytes DISK_AVAILABLE_BYTES=$disk_available_bytes"
+          echo "UBUNTU_22_04_X64_TOOLCHAIN_EVIDENCE profile=mini COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$powershell_version DOTNET=$dotnet_version"
+          echo "UBUNTU_22_04_X64_COMPILER_EVIDENCE profile=mini machine=X86-64 compile=success"
+          lscpu
+          df -h /
+          df -B1 /
+          cmake --version
+          gcc --version
+          g++ --version
+          as --version
+          pwsh --version
+          dotnet --info
 
           {
             echo "runner_image=$runner_image"
@@ -300,6 +387,27 @@ jobs:
           printf '%s\n' "$cpu_evidence" | grep -q 'NEON'
           echo "UBUNTU_24_04_ARM64_OPENCV_CPU_EVIDENCE $cpu_evidence"
           echo "opencv_cpu_configuration=$cpu_evidence" >> "$GITHUB_OUTPUT"
+      - name: Record Ubuntu 22.04 x64 OpenCV CPU configuration
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.22.04-x64' && matrix.profile == 'mini' }}
+        id: ubuntu2204_x64_opencv
+        shell: bash
+        run: |
+          set -euo pipefail
+          workspace_root="$(dirname "$GITHUB_WORKSPACE")"
+          build_dir="$workspace_root/artifacts/opencv-build/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
+          cache="$build_dir/CMakeCache.txt"
+          cpu_config="$(find "$build_dir" -type f -name cv_cpu_config.h -print -quit)"
+          test -f "$cache"
+          test -n "$cpu_config"
+
+          cpu_evidence="$({
+            grep -E '^(CPU_BASELINE|CPU_DISPATCH|CV_DISABLE_OPTIMIZATION):' "$cache" || true
+            grep -E '^#define CV_CPU_(COMPILE|BASELINE|DISPATCH).*' "$cpu_config" || true
+          } | tr '\n' ';')"
+          test -n "$cpu_evidence"
+          printf '%s\n' "$cpu_evidence" | grep -Eq 'SSE|AVX'
+          echo "UBUNTU_22_04_X64_OPENCV_CPU_EVIDENCE profile=mini $cpu_evidence"
+          echo "opencv_cpu_configuration=$cpu_evidence" >> "$GITHUB_OUTPUT"
       - name: Configure linked native wrapper
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
@@ -336,6 +444,9 @@ jobs:
           if [ '${{ matrix.rid }}' = 'ubuntu.24.04-arm64' ]; then
             grep -Fq '100% tests passed, 0 tests failed out of 5' build/native-linked/ctest-output.txt
             echo 'UBUNTU_24_04_ARM64_LINKED_CTEST_EVIDENCE profile=${{ matrix.profile }} passed=5 total=5'
+          elif [ '${{ matrix.rid }}' = 'ubuntu.22.04-x64' ] && [ '${{ matrix.profile }}' = 'mini' ]; then
+            grep -Fq '100% tests passed, 0 tests failed out of 5' build/native-linked/ctest-output.txt
+            echo 'UBUNTU_22_04_X64_LINKED_CTEST_EVIDENCE profile=mini passed=5 total=5'
           fi
       - name: Audit Ubuntu ARM64 producer ELF closure
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' }}
@@ -441,33 +552,118 @@ jobs:
           audit_evidence="UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
           echo "$audit_evidence"
           echo "elf_audit_evidence=$audit_evidence" >> "$GITHUB_OUTPUT"
+      - name: Audit Ubuntu 22.04 x64 mini producer ELF closure
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.22.04-x64' && matrix.profile == 'mini' }}
+        id: ubuntu2204_x64_elf
+        shell: bash
+        run: |
+          set -euo pipefail
+          IFS=',' read -r -a required_modules <<< '${{ steps.profile.outputs.build_list }}'
+          test "${#required_modules[@]}" -eq 6
+
+          workspace_root="$(dirname "$GITHUB_WORKSPACE")"
+          open_cv_install_dir="$workspace_root/artifacts/opencv-install/opencv-${{ inputs.opencv_version }}-${{ steps.profile.outputs.opencv_rid }}"
+          open_cv_runtime_dir=""
+          for candidate in "$open_cv_install_dir/lib" "$open_cv_install_dir/lib64"; do
+            if [ -d "$candidate" ]; then
+              open_cv_runtime_dir="$candidate"
+              break
+            fi
+          done
+          test -n "$open_cv_runtime_dir"
+
+          audit_dir="$GITHUB_WORKSPACE/build/native-ubuntu2204-x64-audit"
+          rm -rf "$audit_dir"
+          mkdir -p "$audit_dir"
+          cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
+          cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
+          compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name 'lib*.Native.so' ! -name 'libJYPPX.OpenCV.Native.so' -print -quit)"
+          test -n "$compatibility_loader"
+          cp "$compatibility_loader" "$audit_dir/"
+          compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
+
+          expected_names="$audit_dir/expected-runtime-files.txt"
+          actual_names="$audit_dir/actual-runtime-files.txt"
+          printf '%s\n' 'libJYPPX.OpenCV.Native.so' "$(basename "$compatibility_loader")" > "$expected_names"
+          for module in "${required_modules[@]}"; do
+            printf '%s\n' \
+              "libopencv_${module}.so" \
+              "libopencv_${module}.so.500" \
+              "libopencv_${module}.so.${{ inputs.opencv_version }}" \
+              >> "$expected_names"
+          done
+          find "$audit_dir" -mindepth 1 -maxdepth 1 \( -type f -o -type l \) \
+            ! -name 'expected-runtime-files.txt' \
+            ! -name 'actual-runtime-files.txt' \
+            -printf '%f\n' | sort > "$actual_names"
+          sort -o "$expected_names" "$expected_names"
+          test "$(wc -l < "$actual_names")" -eq 20
+          diff -u "$expected_names" "$actual_names"
+
+          mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name 'libopencv_*.so.${{ inputs.opencv_version }}' | sort)
+          test "${#opencv_elfs[@]}" -eq 6
+          elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          test "${#elf_files[@]}" -eq 8
+
+          machine_count=0
+          origin_count=0
+          producer_path_count=0
+          missing_dependency_count=0
+          for elf in "${elf_files[@]}"; do
+            test -f "$elf"
+            readelf -h "$elf" | grep -q 'Machine:.*Advanced Micro Devices X86-64'
+            machine_count=$((machine_count + 1))
+            dynamic_paths="$(readelf -d "$elf" | grep -E '\((RPATH|RUNPATH)\)' || true)"
+            printf '%s\n' "$dynamic_paths"
+            printf '%s\n' "$dynamic_paths" | grep -Fq "\$ORIGIN"
+            origin_count=$((origin_count + 1))
+            if printf '%s\n' "$dynamic_paths" | grep -Eq '(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)'; then
+              producer_path_count=$((producer_path_count + 1))
+            fi
+            missing="$(ldd "$elf" | grep 'not found' || true)"
+            if [ -n "$missing" ]; then
+              printf '%s\n' "$missing" >&2
+              missing_dependency_count=$((missing_dependency_count + 1))
+            fi
+          done
+
+          direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
+          test "$machine_count" -eq 8
+          test "$origin_count" -eq 8
+          test "$producer_path_count" -eq 0
+          test "$direct_opencv_dependencies" -eq 6
+          test "$missing_dependency_count" -eq 0
+          cmp -s "$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
+          audit_evidence="UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true"
+          echo "$audit_evidence"
+          echo "elf_audit_evidence=$audit_evidence" >> "$GITHUB_OUTPUT"
       - name: Create runtime input artifact layout
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         env:
-          PRODUCER_RUNNER_IMAGE: ${{ steps.arm64_runner.outputs.runner_image }}
-          PRODUCER_RUNNER_IMAGE_VERSION: ${{ steps.arm64_runner.outputs.runner_image_version }}
-          PRODUCER_HOSTED_DISTRO: ${{ steps.arm64_runner.outputs.hosted_distro }}
-          PRODUCER_HOSTED_DISTRO_VERSION: ${{ steps.arm64_runner.outputs.hosted_distro_version }}
-          PRODUCER_HOSTED_ARCHITECTURE: ${{ steps.arm64_runner.outputs.hosted_architecture }}
-          PRODUCER_HOSTED_PACKAGE_ARCHITECTURE: ${{ steps.arm64_runner.outputs.hosted_package_architecture }}
-          PRODUCER_HOSTED_LIBC: ${{ steps.arm64_runner.outputs.hosted_libc }}
-          PRODUCER_HOSTED_CPU_MODEL: ${{ steps.arm64_runner.outputs.hosted_cpu_model }}
-          PRODUCER_HOSTED_MEMORY_BYTES: ${{ steps.arm64_runner.outputs.hosted_memory_bytes }}
-          PRODUCER_HOSTED_DISK_AVAILABLE_BYTES: ${{ steps.arm64_runner.outputs.hosted_disk_available_bytes }}
-          PRODUCER_HOSTED_PROCESS_ARCHITECTURE: ${{ steps.arm64_runner.outputs.hosted_process_architecture }}
-          PRODUCER_CMAKE_VERSION: ${{ steps.arm64_runner.outputs.cmake_version }}
+          PRODUCER_RUNNER_IMAGE: ${{ steps.ubuntu2204_x64_runner.outputs.runner_image || steps.arm64_runner.outputs.runner_image }}
+          PRODUCER_RUNNER_IMAGE_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.runner_image_version || steps.arm64_runner.outputs.runner_image_version }}
+          PRODUCER_HOSTED_DISTRO: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_distro || steps.arm64_runner.outputs.hosted_distro }}
+          PRODUCER_HOSTED_DISTRO_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_distro_version || steps.arm64_runner.outputs.hosted_distro_version }}
+          PRODUCER_HOSTED_ARCHITECTURE: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_architecture || steps.arm64_runner.outputs.hosted_architecture }}
+          PRODUCER_HOSTED_PACKAGE_ARCHITECTURE: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_package_architecture || steps.arm64_runner.outputs.hosted_package_architecture }}
+          PRODUCER_HOSTED_LIBC: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_libc || steps.arm64_runner.outputs.hosted_libc }}
+          PRODUCER_HOSTED_CPU_MODEL: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_cpu_model || steps.arm64_runner.outputs.hosted_cpu_model }}
+          PRODUCER_HOSTED_MEMORY_BYTES: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_memory_bytes || steps.arm64_runner.outputs.hosted_memory_bytes }}
+          PRODUCER_HOSTED_DISK_AVAILABLE_BYTES: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_disk_available_bytes || steps.arm64_runner.outputs.hosted_disk_available_bytes }}
+          PRODUCER_HOSTED_PROCESS_ARCHITECTURE: ${{ steps.ubuntu2204_x64_runner.outputs.hosted_process_architecture || steps.arm64_runner.outputs.hosted_process_architecture }}
+          PRODUCER_CMAKE_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.cmake_version || steps.arm64_runner.outputs.cmake_version }}
           PRODUCER_CMAKE_GENERATOR: ${{ steps.profile.outputs.generator }}
           PRODUCER_BUILD_CONFIGURATION: ${{ steps.profile.outputs.configuration }}
-          PRODUCER_COMPILER_PATH: ${{ steps.arm64_runner.outputs.compiler_path }}
-          PRODUCER_COMPILER_VERSION: ${{ steps.arm64_runner.outputs.compiler_version }}
-          PRODUCER_ASSEMBLER_VERSION: ${{ steps.arm64_runner.outputs.assembler_version }}
-          PRODUCER_NINJA_VERSION: ${{ steps.arm64_runner.outputs.ninja_version }}
-          PRODUCER_DOTNET_VERSION: ${{ steps.arm64_runner.outputs.dotnet_version }}
-          PRODUCER_POWERSHELL_VERSION: ${{ steps.arm64_runner.outputs.powershell_version }}
+          PRODUCER_COMPILER_PATH: ${{ steps.ubuntu2204_x64_runner.outputs.compiler_path || steps.arm64_runner.outputs.compiler_path }}
+          PRODUCER_COMPILER_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.compiler_version || steps.arm64_runner.outputs.compiler_version }}
+          PRODUCER_ASSEMBLER_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.assembler_version || steps.arm64_runner.outputs.assembler_version }}
+          PRODUCER_NINJA_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.ninja_version || steps.arm64_runner.outputs.ninja_version }}
+          PRODUCER_DOTNET_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.dotnet_version || steps.arm64_runner.outputs.dotnet_version }}
+          PRODUCER_POWERSHELL_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.powershell_version || steps.arm64_runner.outputs.powershell_version }}
           PRODUCER_OPENCV_CMAKE_ARGUMENTS: ${{ steps.profile.outputs.cmake_arguments }}
-          PRODUCER_ELF_AUDIT_EVIDENCE: ${{ steps.arm64_elf.outputs.elf_audit_evidence }}
-          PRODUCER_OPENCV_CPU_CONFIGURATION: ${{ steps.arm64_opencv.outputs.opencv_cpu_configuration }}
+          PRODUCER_ELF_AUDIT_EVIDENCE: ${{ steps.ubuntu2204_x64_elf.outputs.elf_audit_evidence || steps.arm64_elf.outputs.elf_audit_evidence }}
+          PRODUCER_OPENCV_CPU_CONFIGURATION: ${{ steps.ubuntu2204_x64_opencv.outputs.opencv_cpu_configuration || steps.arm64_opencv.outputs.opencv_cpu_configuration }}
           PRODUCER_NATIVE_WRAPPER_SOURCES: ${{ steps.profile.outputs.native_wrapper_sources }}
           PRODUCER_NATIVE_WRAPPER_SOURCE_COUNT: ${{ steps.profile.outputs.native_wrapper_source_count }}
           PRODUCER_NATIVE_ABI_FUNCTION_COUNT: ${{ steps.profile.outputs.native_abi_function_count }}

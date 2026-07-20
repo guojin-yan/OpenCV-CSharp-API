@@ -239,6 +239,7 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.24.04-arm64"; Profile = "mini"; Runner = "ubuntu-24.04-arm"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "full"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "ubuntu.22.04-x64"; Profile = "mini"; Runner = "ubuntu-22.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "ubuntu.22.04-arm64"; Profile = "mini"; Runner = "ubuntu-24.04-arm"; ContainerImage = "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "debian:12"; OpenCvExtraCMakeArgs = "" },
@@ -430,6 +431,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
         [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-mini"; Issue = "Producer workflow must explicitly advertise the native Ubuntu 24.04 ARM64 mini target" },
+        [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the native Ubuntu 22.04 x64 mini target" },
          [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
          [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-mini"; Issue = "Producer workflow must advertise the exact container-native Ubuntu 22.04 ARM64 mini target" },
          [pscustomobject]@{ Needle = "runtime-input-debian.12-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Debian 12 ARM64 full target" },
@@ -458,7 +460,7 @@ foreach ($required in @(
           [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=`$RUNTIME_PROFILE files=`$expected_canonical_count runtime_files=`$expected_runtime_file_count machine=AArch64 origin=`$expected_canonical_count producer_paths=0 direct_opencv=`$expected_direct_opencv missing_dependencies=0 loader_equal=true"; Issue = "Debian 12 ARM64 producer must audit its exact profile-derived AArch64 ELF closure" },
         [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_RUNNER_EVIDENCE"; Issue = "Ubuntu ARM64 producer must emit actual runner image, distro, architecture, libc, CPU, and disk evidence" },
         [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_TOOLCHAIN_EVIDENCE"; Issue = "Ubuntu ARM64 producer must emit native compiler, assembler, CMake, Ninja, PowerShell, and .NET evidence" },
-        [pscustomobject]@{ Needle = 'PRODUCER_ASSEMBLER_VERSION: ${{ steps.arm64_runner.outputs.assembler_version }}'; Issue = "Ubuntu ARM64 producer must transport factual assembler evidence without interpolating tool output into PowerShell source" },
+        [pscustomobject]@{ Needle = 'PRODUCER_ASSEMBLER_VERSION: ${{ steps.ubuntu2204_x64_runner.outputs.assembler_version || steps.arm64_runner.outputs.assembler_version }}'; Issue = "Hosted Ubuntu producers must transport factual assembler evidence without interpolating tool output into PowerShell source" },
         [pscustomobject]@{ Needle = '-AssemblerVersion $env:PRODUCER_ASSEMBLER_VERSION'; Issue = "Ubuntu ARM64 artifact creation must bind assembler evidence through the step environment" },
         [pscustomobject]@{ Needle = 'test "$(uname -m)" = "aarch64"'; Issue = "Ubuntu ARM64 producer must reject non-AArch64 execution" },
         [pscustomobject]@{ Needle = 'test "$(dpkg --print-architecture)" = "arm64"'; Issue = "Ubuntu ARM64 producer must require the native Debian arm64 architecture" },
@@ -469,6 +471,12 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'expected_runtime_file_count=20'; Issue = "Ubuntu ARM64 mini producer must require the exact 20-file Linux payload" },
         [pscustomobject]@{ Needle = 'expected_direct_opencv=6'; Issue = "Ubuntu ARM64 mini producer must require exactly six direct OpenCV dependencies" },
         [pscustomobject]@{ Needle = 'UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true'; Issue = "Ubuntu ARM64 producer must emit profile-derived complete canonical AArch64 ELF closure evidence" },
+        [pscustomobject]@{ Needle = 'UBUNTU_22_04_X64_RUNNER_EVIDENCE profile=mini'; Issue = "Ubuntu 22.04 x64 mini producer must record the matching hosted runner" },
+        [pscustomobject]@{ Needle = 'UBUNTU_22_04_X64_TOOLCHAIN_EVIDENCE profile=mini'; Issue = "Ubuntu 22.04 x64 mini producer must record its native toolchain" },
+        [pscustomobject]@{ Needle = 'UBUNTU_22_04_X64_COMPILER_EVIDENCE profile=mini machine=X86-64 compile=success'; Issue = "Ubuntu 22.04 x64 mini producer must compile a native x86-64 object" },
+        [pscustomobject]@{ Needle = 'UBUNTU_22_04_X64_OPENCV_CPU_EVIDENCE profile=mini'; Issue = "Ubuntu 22.04 x64 mini producer must record factual SSE or AVX OpenCV CPU evidence" },
+        [pscustomobject]@{ Needle = 'UBUNTU_22_04_X64_LINKED_CTEST_EVIDENCE profile=mini passed=5 total=5'; Issue = "Ubuntu 22.04 x64 mini producer must require linked CTest 5/5" },
+        [pscustomobject]@{ Needle = 'UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true'; Issue = "Ubuntu 22.04 x64 mini producer must emit its exact ELF closure evidence" },
         [pscustomobject]@{ Needle = 'LINUX_NATIVE_PROFILE_EVIDENCE rid=${{ matrix.rid }} profile=$profileName sources=$($nativeSources.Count) abi_functions=$abiFunctionCount'; Issue = "Linux producer must record exact wrapper source and ABI evidence" },
         [pscustomobject]@{ Needle = 'readelf -h "$elf" | grep -q ''Machine:.*AArch64'''; Issue = "Ubuntu ARM64 producer must inspect every canonical ELF machine type" },
         [pscustomobject]@{ Needle = 'missing="$(ldd "$elf" | grep ''not found'' || true)"'; Issue = "Ubuntu ARM64 producer must reject unresolved native dependencies without an environment override" },
@@ -541,6 +549,7 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "publish_github_packages" -Issue "Producer workflow must not publish packages"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "dotnet nuget push" -Issue "Producer workflow must not push packages"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu 24.04 ARM64 mini must be present in the exact real producer allowlist"
+Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-x64/mini'" -Issue "Ubuntu 22.04 x64 mini must be present in the exact real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must be present in the exact real producer allowlist"
@@ -1042,5 +1051,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."
