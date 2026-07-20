@@ -493,7 +493,7 @@ foreach ($required in @(
           [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_CONTAINER_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record target container and musl evidence" },
           [pscustomobject]@{ Needle = "ALPINE_3_20_TOOLCHAIN_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record profile-specific toolchain evidence" },
           [pscustomobject]@{ Needle = "expected_runtime_file_count=20"; Issue = "Alpine mini producer must require the exact 20-file Linux payload" },
-          [pscustomobject]@{ Needle = 'opencv_elf_count="$(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | wc -l | tr -d '' '')"'; Issue = "Shared container producer ELF audit must remain POSIX-compatible for Alpine sh" },
+          [pscustomobject]@{ Needle = 'opencv_elf_count="$(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | wc -l | tr -d " ")"'; Issue = "Shared container producer ELF audit must remain POSIX-compatible and outer-shell quote-safe for Alpine sh" },
         [pscustomobject]@{ Needle = "fedora|rhel|rocky)"; Issue = "Producer workflow must install the audited RPM-family build dependencies" },
         [pscustomobject]@{ Needle = "dnf config-manager --set-enabled crb"; Issue = "Producer workflow must enable Rocky Linux CRB before installing ninja-build" },
         [pscustomobject]@{ Needle = "RHEL_9_UBI_REPOSITORY_EVIDENCE"; Issue = "Producer workflow must require the audited UBI BaseOS, AppStream, and CodeReady Builder repositories" },

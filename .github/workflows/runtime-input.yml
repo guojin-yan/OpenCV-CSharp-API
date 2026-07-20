@@ -1965,7 +1965,7 @@ jobs:
                 test "$(wc -l < "$actual_names")" -eq "$expected_runtime_file_count"
                 diff -u "$expected_names" "$actual_names"
 
-                opencv_elf_count="$(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | wc -l | tr -d ' ')"
+                opencv_elf_count="$(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | wc -l | tr -d " ")"
                 test "$opencv_elf_count" -eq "$expected_opencv_count"
 
                 machine_count=0
