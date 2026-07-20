@@ -487,6 +487,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'test "$(docker info --format ''{{.Architecture}}'')" = "x86_64"'; Issue = "Alpine producer must require the factual x86_64 Docker host architecture" },
         [pscustomobject]@{ Needle = "linux-headers"; Issue = "Alpine producer must install Linux headers required by OpenCV core" },
         [pscustomobject]@{ Needle = "samurai"; Issue = "Alpine producer must install the audited Ninja-compatible build tool" },
+        [pscustomobject]@{ Needle = "util-linux-misc"; Issue = "Alpine producer must install the exact package that provides factual lscpu CPU evidence" },
           [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_ELF_EVIDENCE profile=`$RUNTIME_PROFILE files=`$expected_canonical_count runtime_files=`$expected_runtime_file_count machine=X86-64 origin=`$expected_canonical_count producer_paths=0 direct_opencv=`$expected_direct_opencv missing_dependencies=0 loader_equal=true"; Issue = "Alpine producer must audit the exact profile-derived canonical ELF closure before upload" },
           [pscustomobject]@{ Needle = "ALPINE_3_20_LINKED_CTEST_EVIDENCE profile=`$RUNTIME_PROFILE passed=5 total=5"; Issue = "Alpine producer must require profile-specific linked CTest 5/5" },
           [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_CONTAINER_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record target container and musl evidence" },
