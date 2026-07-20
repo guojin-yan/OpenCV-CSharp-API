@@ -493,6 +493,7 @@ foreach ($required in @(
           [pscustomobject]@{ Needle = "ALPINE_3_20_PRODUCER_CONTAINER_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record target container and musl evidence" },
           [pscustomobject]@{ Needle = "ALPINE_3_20_TOOLCHAIN_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Alpine producer must record profile-specific toolchain evidence" },
           [pscustomobject]@{ Needle = "expected_runtime_file_count=20"; Issue = "Alpine mini producer must require the exact 20-file Linux payload" },
+          [pscustomobject]@{ Needle = 'opencv_elf_count="$(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | wc -l | tr -d '' '')"'; Issue = "Shared container producer ELF audit must remain POSIX-compatible for Alpine sh" },
         [pscustomobject]@{ Needle = "fedora|rhel|rocky)"; Issue = "Producer workflow must install the audited RPM-family build dependencies" },
         [pscustomobject]@{ Needle = "dnf config-manager --set-enabled crb"; Issue = "Producer workflow must enable Rocky Linux CRB before installing ninja-build" },
         [pscustomobject]@{ Needle = "RHEL_9_UBI_REPOSITORY_EVIDENCE"; Issue = "Producer workflow must require the audited UBI BaseOS, AppStream, and CodeReady Builder repositories" },
@@ -544,6 +545,7 @@ Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $produ
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "modules=(" -Issue "Shared container producer script must not retain Bash-only module arrays that Alpine sh cannot parse"
 
 foreach ($required in @(
         [pscustomobject]@{ Needle = '$architectureSpec = switch ($Rid)'; Issue = "Windows PE audit must derive architecture expectations from exact RID" },

@@ -1912,14 +1912,14 @@ jobs:
                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                 case "$RUNTIME_PROFILE" in
                   full)
-                    modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
+                    modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
                     expected_opencv_count=16
                     expected_canonical_count=18
                     expected_runtime_file_count=50
                     expected_direct_opencv=16
                     ;;
                   mini)
-                    modules=(core imgproc imgcodecs videoio geometry flann)
+                    modules="core imgproc imgcodecs videoio geometry flann"
                     expected_opencv_count=6
                     expected_canonical_count=8
                     expected_runtime_file_count=20
@@ -1953,7 +1953,7 @@ jobs:
                 expected_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-expected-runtime-files.txt"
                 actual_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-actual-runtime-files.txt"
                 printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
-                for module in "${modules[@]}"; do
+                for module in $modules; do
                   printf "%s\n" \
                     "libopencv_${module}.so" \
                     "libopencv_${module}.so.500" \
@@ -1965,16 +1965,17 @@ jobs:
                 test "$(wc -l < "$actual_names")" -eq "$expected_runtime_file_count"
                 diff -u "$expected_names" "$actual_names"
 
-                mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
-                test "${#opencv_elfs[@]}" -eq "$expected_opencv_count"
-                elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
-                test "${#elf_files[@]}" -eq "$expected_canonical_count"
+                opencv_elf_count="$(find "$audit_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | wc -l | tr -d ' ')"
+                test "$opencv_elf_count" -eq "$expected_opencv_count"
 
                 machine_count=0
                 origin_count=0
                 producer_path_count=0
                 missing_dependency_count=0
-                for elf in "${elf_files[@]}"; do
+                for elf in \
+                  "$audit_dir/libJYPPX.OpenCV.Native.so" \
+                  "$compatibility_loader" \
+                  "$audit_dir"/libopencv_*.so."$OPENCV_VERSION"; do
                   test -f "$elf"
                   readelf -h "$elf" | grep -q "Machine:.*AArch64"
                   machine_count=$((machine_count + 1))
