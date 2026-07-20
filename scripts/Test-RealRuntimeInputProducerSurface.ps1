@@ -673,6 +673,7 @@ foreach ($doc in @(
             '`runtime-input-ubuntu.24.04-x64-mini`',
             '`runtime-input-ubuntu.24.04-arm64-full`',
             '`runtime-input-ubuntu.22.04-x64-full`',
+            '`runtime-input-ubuntu.22.04-x64-mini`',
             '`runtime-input-ubuntu.22.04-arm64-full`',
             '`runtime-input-debian.12-x64-full`',
             '`runtime-input-debian.12-arm64-full`',
