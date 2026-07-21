@@ -330,27 +330,43 @@ foreach ($expectation in @(
         @($workflowPath, $workflowText, 'DEBIAN_12_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false', "Pack runtime job must validate exact Debian 12 ARM64 host/container provenance"),
         @($workflowPath, $debianArm64JobText, "-RunNativeSmoke", "Debian ARM64 consumer must execute native and deterministic DNN or mini NOT_LINKED calls"),
         @($workflowPath, $fedoraJobText, "verify-targeted-real-fedora:", "Pack workflow must keep a separate Fedora container verification job"),
-        @($workflowPath, $fedoraJobText, "inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Fedora verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $fedoraJobText, "inputs.rid == 'fedora.40-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Fedora verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $fedoraJobText, "runs-on: ubuntu-24.04", "Fedora container verification must use the supported hosted runner"),
         @($workflowPath, $fedoraJobText, "container: fedora:40", "Fedora verification must execute in the Fedora 40 job container"),
         @($workflowPath, $fedoraJobText, "cat /etc/os-release", "Fedora verification must expose container distro evidence"),
         @($workflowPath, $fedoraJobText, 'if [ "${ID:-}" != "fedora" ]', "Fedora verification must require the Fedora distro identity"),
         @($workflowPath, $fedoraJobText, '40|40.*) ;;', "Fedora verification must require Fedora version 40 or 40.x"),
-        @($workflowPath, $fedoraJobText, "getconf GNU_LIBC_VERSION", "Fedora verification must record the container libc identity"),
-        @($workflowPath, $fedoraJobText, "FEDORA_40_CONTAINER_EVIDENCE", "Fedora verification must emit an explicit container evidence marker"),
+        @($workflowPath, $fedoraJobText, 'test "${SUPPORT_END:-}" = "2025-05-13"', "Fedora verification must lock the exact ended-support boundary"),
+        @($workflowPath, $fedoraJobText, 'test "$(uname -m)" = "x86_64"', "Fedora verification must require native x86-64 execution"),
+        @($workflowPath, $fedoraJobText, 'test "$(rpm --eval ''%{_arch}'')" = "x86_64"', "Fedora verification must require native RPM x86_64 package architecture"),
+        @($workflowPath, $fedoraJobText, 'test "$process_architecture" = "X64"', "Fedora verification must require a native x64 PowerShell process"),
+        @($workflowPath, $fedoraJobText, '^glibc 2\.39($|\.)', "Fedora verification must require the Fedora 40 glibc 2.39 boundary"),
+        @($workflowPath, $fedoraJobText, '/fedora-archive/fedora/linux/releases/40/Everything/x86_64/os/', "Fedora verification must require the archived Fedora 40 release repository"),
+        @($workflowPath, $fedoraJobText, '/fedora-archive/fedora/linux/updates/40/Everything/x86_64/', "Fedora verification must require the archived Fedora 40 updates repository"),
+        @($workflowPath, $fedoraJobText, "FEDORA_40_REPOSITORY_EVIDENCE", "Fedora verification must emit exact lifecycle and archive repository evidence"),
+        @($workflowPath, $fedoraJobText, "FEDORA_40_CONTAINER_EVIDENCE profile=", "Fedora verification must preserve its profile-aware container evidence marker"),
+        @($workflowPath, $fedoraJobText, "binutils", "Fedora package verification must install readelf for ELF closure auditing"),
+        @($workflowPath, $fedoraJobText, "unzip", "Fedora package verification must install unzip for exact package inspection"),
         @($workflowPath, $fedoraJobText, "dnf install -y powershell", "Fedora verification must install PowerShell before invoking repository guards"),
         @($workflowPath, $fedoraJobText, "Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path", "Fedora verifier must explain the factual PowerShell feed path without changing distro identity"),
         @($workflowPath, $fedoraJobText, "10.0.x", "Fedora verification must install .NET 10"),
         @($workflowPath, $fedoraJobText, "9.0.x", "Fedora verification must install .NET 9"),
         @($workflowPath, $fedoraJobText, "8.0.x", "Fedora verification must install .NET 8"),
         @($workflowPath, $fedoraJobText, "name: nupkg-managed", "Fedora verification must download the same-run managed artifact explicitly"),
-        @($workflowPath, $fedoraJobText, "name: nupkg-fedora.40-x64-full", "Fedora verification must download only the exact Fedora full runtime artifact"),
+        @($workflowPath, $fedoraJobText, 'name: nupkg-fedora.40-x64-${{ inputs.runtime_profile }}', "Fedora verification must download only the exact selected Fedora full/mini runtime artifact"),
         @($workflowPath, $fedoraJobText, "path: artifacts/pack-targeted-fedora/nupkg-managed", "Fedora managed artifact must use its isolated exact path"),
-        @($workflowPath, $fedoraJobText, "path: artifacts/pack-targeted-fedora/nupkg-fedora.40-x64-full", "Fedora runtime artifact must use its isolated exact path"),
+        @($workflowPath, $fedoraJobText, 'path: artifacts/pack-targeted-fedora/nupkg-fedora.40-x64-${{ inputs.runtime_profile }}', "Fedora runtime artifact must use its isolated selected path"),
         @($workflowPath, $fedoraJobText, "-ExpectedSyntheticRuntimeInputs false", "Fedora artifact and consumer checks must require real provenance"),
         @($workflowPath, $fedoraJobText, "-SelectedRid fedora.40-x64", "Fedora checks must select only the proven Fedora RID"),
-        @($workflowPath, $fedoraJobText, "-SelectedRuntimeProfile full", "Fedora checks must select only the full profile"),
-        @($workflowPath, $fedoraJobText, "-RunNativeSmoke", "Fedora consumer verification must execute native calls inside the container"),
+        @($workflowPath, $fedoraJobText, '-SelectedRuntimeProfile ''${{ inputs.runtime_profile }}''', "Fedora checks must select the exact full/mini profile"),
+        @($workflowPath, $fedoraJobText, "FEDORA_40_X64_PACKAGE_ELF_EVIDENCE", "Fedora package must pass a profile-derived x86-64 ELF closure audit"),
+        @($workflowPath, $fedoraJobText, "expected_runtime_file_count=20", "Fedora mini package audit must require exactly 20 runtime files"),
+        @($workflowPath, $fedoraJobText, "expected_canonical_count=8", "Fedora mini package audit must require exactly eight canonical ELFs"),
+        @($workflowPath, $fedoraJobText, "expected_direct_opencv=6", "Fedora mini package audit must require exactly six direct OpenCV dependencies"),
+        @($workflowPath, $fedoraJobText, 'readelf -h "$elf"', "Fedora package audit must inspect every canonical ELF machine type"),
+        @($workflowPath, $fedoraJobText, 'grep -Fq "\$ORIGIN"', "Fedora package audit must require adjacent-library RUNPATH on every canonical ELF"),
+        @($workflowPath, $workflowText, 'FEDORA_40_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false', "Pack runtime job must validate the exact Fedora 40 x64 mini producer provenance"),
+        @($workflowPath, $fedoraJobText, "-RunNativeSmoke", "Fedora consumer verification must execute full DNN or mini NOT_LINKED native calls inside the container"),
         @($workflowPath, $rockyJobText, "verify-targeted-real-rocky:", "Pack workflow must keep a separate Rocky container verification job"),
         @($workflowPath, $rockyJobText, "inputs.rid == 'rocky.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Rocky verification must use the exact full-only non-synthetic non-publishing gate"),
         @($workflowPath, $rockyJobText, "runs-on: ubuntu-24.04", "Rocky container verification must use the supported hosted runner"),
@@ -694,8 +710,8 @@ Assert-ExactLine `
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $fedoraJobText `
-    -ExpectedLine "    if: `${{ inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "Fedora targeted verification condition must remain exactly Fedora 40 x64 full"
+    -ExpectedLine "    if: `${{ inputs.rid == 'fedora.40-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Fedora targeted verification condition must remain exactly Fedora 40 x64 full/mini"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -788,8 +804,8 @@ Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $fedoraJobText `
     -Needle "inputs.runtime_profile ==" `
-    -ExpectedCount 1 `
-    -Issue "Fedora container job must gate on exactly one runtime profile"
+    -ExpectedCount 2 `
+    -Issue "Fedora container job must gate on exactly full and mini"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -801,9 +817,9 @@ Assert-OccurrenceCount `
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $fedoraJobText `
-    -Needle "-SelectedRuntimeProfile full" `
+    -Needle "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'" `
     -ExpectedCount 2 `
-    -Issue "Both Fedora guards must select only the full profile"
+    -Issue "Both Fedora guards must select the exact full/mini profile"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -1012,11 +1028,11 @@ Assert-NotContains `
     -Needle "LD_LIBRARY_PATH" `
     -Issue "Debian container verification must not mask loader RUNPATH defects with an environment override"
 
-Assert-NotContains `
+Assert-Contains `
     -Path $workflowPath `
     -Text $fedoraJobText `
     -Needle "runtime_profile == 'mini'" `
-    -Issue "Fedora mini must not enter the container-native verification job"
+    -Issue "Fedora mini must enter the exact container-native verification job"
 
 Assert-NotContains `
     -Path $workflowPath `
@@ -1140,6 +1156,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full, ubuntu.22.04-x64/mini; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
-Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
+Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full and fedora.40-x64/mini in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."

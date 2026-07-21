@@ -109,6 +109,27 @@ function Assert-TextOrder {
     }
 }
 
+function Get-ContainerNativeScript {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Text
+    )
+
+    $startMarker = '"$container_shell" -lc '''
+    $start = $Text.IndexOf($startMarker, [System.StringComparison]::Ordinal)
+    if ($start -lt 0) {
+        return ""
+    }
+
+    $start += $startMarker.Length
+    $end = $Text.IndexOf("`n            '`n", $start, [System.StringComparison]::Ordinal)
+    if ($end -lt 0) {
+        return ""
+    }
+
+    return $Text.Substring($start, $end - $start)
+}
+
 function Write-FixtureFile {
     param(
         [Parameter(Mandatory = $true)]
@@ -247,6 +268,7 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "debian.12-arm64"; Profile = "full"; Runner = "ubuntu-24.04-arm"; ContainerImage = "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "debian.12-arm64"; Profile = "mini"; Runner = "ubuntu-24.04-arm"; ContainerImage = "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "fedora.40-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = "fedora:40"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "rhel.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "registry.access.redhat.com/ubi9/ubi:9.8"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
         [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
         [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"; OpenCvExtraCMakeArgs = "" },
@@ -491,6 +513,18 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'missing="$(ldd "$elf" | grep ''not found'' || true)"'; Issue = "Ubuntu ARM64 producer must reject unresolved native dependencies without an environment override" },
         [pscustomobject]@{ Needle = "container_image: debian:12"; Issue = "Producer workflow must declare the Debian 12 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: fedora:40"; Issue = "Producer workflow must declare the Fedora 40 container-native boundary" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_HOST_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record its Ubuntu 24.04 x64 Docker host" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_IMAGE_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record the resolved Fedora image identity and digest" },
+        [pscustomobject]@{ Needle = 'test "${SUPPORT_END:-}" = "2025-05-13"'; Issue = "Fedora producer must lock the ended-support compatibility boundary" },
+        [pscustomobject]@{ Needle = '/fedora-archive/fedora/linux/releases/40/Everything/x86_64/os/'; Issue = "Fedora producer must require the archived Fedora 40 release repository" },
+        [pscustomobject]@{ Needle = '/fedora-archive/fedora/linux/updates/40/Everything/x86_64/'; Issue = "Fedora producer must require the archived Fedora 40 updates repository" },
+        [pscustomobject]@{ Needle = "FEDORA_40_REPOSITORY_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must emit exact lifecycle and archive repository evidence" },
+        [pscustomobject]@{ Needle = 'test "$(rpm --eval "%{_arch}")" = "x86_64"'; Issue = "Fedora producer must require native RPM x86_64 package architecture" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_CONTAINER_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record exact target-container architecture, libc, and PowerShell evidence" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_TOOLCHAIN_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record its native x86-64 toolchain" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_OPENCV_CPU_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record factual SSE or AVX OpenCV CPU evidence" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_LINKED_CTEST_EVIDENCE profile=`$RUNTIME_PROFILE passed=5 total=5"; Issue = "Fedora producer must require profile-specific linked CTest 5/5" },
+        [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=`$RUNTIME_PROFILE files=`$expected_canonical_count runtime_files=`$expected_runtime_file_count machine=X86-64 origin=`$expected_canonical_count producer_paths=0 direct_opencv=`$expected_direct_opencv missing_dependencies=0 loader_equal=true"; Issue = "Fedora producer must audit the exact profile-derived x86-64 ELF closure" },
         [pscustomobject]@{ Needle = "container_image: registry.access.redhat.com/ubi9/ubi:9.8"; Issue = "Producer workflow must declare the official RHEL UBI 9.8 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: rockylinux:9"; Issue = "Producer workflow must declare the Rocky Linux 9 container-native boundary" },
         [pscustomobject]@{ Needle = "container_image: alpine:3.20"; Issue = "Producer workflow must declare the exact Alpine 3.20 musl boundary" },
@@ -561,10 +595,19 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu 24.04 ARM64 mini must be present in the exact real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-x64/mini'" -Issue "Ubuntu 22.04 x64 mini must be present in the exact real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must be present in the exact real producer allowlist"
+Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'fedora.40-x64/mini'" -Issue "Fedora 40 x64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 must remain outside the real producer allowlist"
 Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "modules=(" -Issue "Shared container producer script must not retain Bash-only module arrays that Alpine sh cannot parse"
+
+$containerNativeScript = Get-ContainerNativeScript -Text $producerWorkflowText
+if ([string]::IsNullOrWhiteSpace($containerNativeScript)) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Container-native producer must retain one extractable fixed shell script argument"
+}
+else {
+    Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $containerNativeScript -Needle "'" -Issue "Container-native producer script must not contain a single quote that splits the outer shell argument"
+}
 
 foreach ($required in @(
         [pscustomobject]@{ Needle = '$architectureSpec = switch ($Rid)'; Issue = "Windows PE audit must derive architecture expectations from exact RID" },
@@ -754,27 +797,28 @@ if ($violations.Count -eq 0) {
             $isUbuntu2204Arm64 = $producerTarget.Rid -eq "ubuntu.22.04-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isDebian1204Arm64 = $producerTarget.Rid -eq "debian.12-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isDebian1204X64 = $producerTarget.Rid -eq "debian.12-x64" -and $producerTarget.Profile -in @("full", "mini")
+            $isFedora40X64 = $producerTarget.Rid -eq "fedora.40-x64" -and $producerTarget.Profile -in @("full", "mini")
             $isArm64Container = $isUbuntu2204Arm64 -or $isDebian1204Arm64
             $isArm64Hosted = $isDirectUbuntuArm64 -or $isArm64Container
-            $hasDetailedLinuxEvidence = $isArm64Hosted -or $isDebian1204X64
+            $hasDetailedLinuxEvidence = $isArm64Hosted -or $isDebian1204X64 -or $isFedora40X64
             $isWindowsX64 = $producerTarget.Rid -eq "win-x64" -and $producerTarget.Profile -in @("full", "mini")
             $isWindowsArm64 = $producerTarget.Rid -eq "win-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isWindowsTarget = $isWindowsX64 -or $isWindowsArm64
             $isWindowsMini = $isWindowsTarget -and $producerTarget.Profile -eq "mini"
-            $runnerImage = if ($isWindowsArm64) { "win11-vs2026-arm64" } elseif ($isWindowsX64) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } elseif ($isDebian1204X64) { "ubuntu24" } else { "" }
+            $runnerImage = if ($isWindowsArm64) { "win11-vs2026-arm64" } elseif ($isWindowsX64) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } elseif ($isDebian1204X64 -or $isFedora40X64) { "ubuntu24" } else { "" }
             $runnerImageVersion = if ($isWindowsTarget -or $hasDetailedLinuxEvidence) { "fixture" } else { "" }
             $hostedDistro = if ($isWindowsTarget) { "windows" } elseif ($hasDetailedLinuxEvidence) { "ubuntu" } else { "" }
             $hostedDistroVersion = if ($isWindowsArm64) { "10.0.26200" } elseif ($isWindowsX64) { "10.0.26100" } elseif ($hasDetailedLinuxEvidence) { "24.04" } else { "" }
-            $hostedArchitecture = if ($isWindowsArm64) { "Arm64" } elseif ($isWindowsX64) { "X64" } elseif ($isArm64Hosted) { "aarch64" } elseif ($isDebian1204X64) { "x86_64" } else { "" }
-            $hostedPackageArchitecture = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "AMD64" } elseif ($isArm64Hosted) { "arm64" } elseif ($isDebian1204X64) { "amd64" } else { "" }
+            $hostedArchitecture = if ($isWindowsArm64) { "Arm64" } elseif ($isWindowsX64) { "X64" } elseif ($isArm64Hosted) { "aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64) { "x86_64" } else { "" }
+            $hostedPackageArchitecture = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "AMD64" } elseif ($isArm64Hosted) { "arm64" } elseif ($isDebian1204X64 -or $isFedora40X64) { "amd64" } else { "" }
             $hostedLibc = if ($hasDetailedLinuxEvidence) { "glibc fixture" } else { "" }
-            $hostedCpuModel = if ($isWindowsArm64) { "Cobalt 100 fixture" } elseif ($isWindowsX64) { "AMD64 fixture" } elseif ($isArm64Hosted) { "Neoverse fixture" } elseif ($isDebian1204X64) { "x86-64 fixture" } else { "" }
+            $hostedCpuModel = if ($isWindowsArm64) { "Cobalt 100 fixture" } elseif ($isWindowsX64) { "AMD64 fixture" } elseif ($isArm64Hosted) { "Neoverse fixture" } elseif ($isDebian1204X64 -or $isFedora40X64) { "x86-64 fixture" } else { "" }
             $hostedMemoryBytes = if ($isWindowsTarget -or $hasDetailedLinuxEvidence) { "17169428480" } else { "" }
             $hostedDiskAvailableBytes = if ($isWindowsTarget -or $hasDetailedLinuxEvidence) { "1" } else { "" }
             $hostedOsCaption = if ($isWindowsArm64) { "Microsoft Windows 11 Enterprise fixture" } elseif ($isWindowsX64) { "Microsoft Windows Server fixture" } else { "" }
             $hostedOsVersion = if ($isWindowsArm64) { "10.0.26200" } elseif ($isWindowsX64) { "10.0.26100" } else { "" }
             $hostedOsBuildNumber = if ($isWindowsArm64) { "26200" } elseif ($isWindowsX64) { "26100" } else { "" }
-            $hostedProcessArchitecture = if ($isWindowsArm64 -or $isArm64Hosted) { "Arm64" } elseif ($isWindowsX64 -or $isDebian1204X64) { "X64" } else { "" }
+            $hostedProcessArchitecture = if ($isWindowsArm64 -or $isArm64Hosted) { "Arm64" } elseif ($isWindowsX64 -or $isDebian1204X64 -or $isFedora40X64) { "X64" } else { "" }
             $visualStudioVersion = if ($isWindowsTarget) { "18.7.fixture" } else { "" }
             $msvcVersion = if ($isWindowsTarget) { "14.51.fixture (compiler 19.51.fixture)" } else { "" }
             $windowsSdkVersion = if ($isWindowsTarget) { "10.0.26100.0" } else { "" }
@@ -783,8 +827,8 @@ if ($violations.Count -eq 0) {
             $cmakePlatform = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX64) { "x64" } else { "" }
             $buildConfiguration = if ($isWindowsTarget -or $hasDetailedLinuxEvidence) { "Release" } else { "" }
             $compilerPath = if ($isWindowsArm64) { "C:\fixture\Hostarm64\arm64\cl.exe" } elseif ($isWindowsX64) { "C:\fixture\Hostx64\x64\cl.exe" } elseif ($hasDetailedLinuxEvidence) { "/usr/bin/g++" } else { "" }
-            $compilerVersion = if ($isArm64Hosted) { "g++ fixture aarch64" } elseif ($isDebian1204X64) { "g++ fixture x86_64" } else { "" }
-            $assemblerVersion = if ($isArm64Hosted) { "GNU assembler fixture aarch64" } elseif ($isDebian1204X64) { "GNU assembler fixture x86_64" } else { "" }
+            $compilerVersion = if ($isArm64Hosted) { "g++ fixture aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64) { "g++ fixture x86_64" } else { "" }
+            $assemblerVersion = if ($isArm64Hosted) { "GNU assembler fixture aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64) { "GNU assembler fixture x86_64" } else { "" }
             $ninjaVersion = if ($hasDetailedLinuxEvidence) { "1.13.2" } else { "" }
             $dotNetVersion = if ($hasDetailedLinuxEvidence) { "8.0.fixture" } else { "" }
             $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $producerTarget.Profile } | Select-Object -First 1)
@@ -808,20 +852,20 @@ if ($violations.Count -eq 0) {
             $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
             $expectedCanonicalCount = $expectedModuleCount + 2
             $expectedLinuxPayloadCount = ($expectedModuleCount * 3) + 2
-            $elfAuditEvidence = if ($isDirectUbuntuArm64) { "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isUbuntu2204Arm64) { "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204Arm64) { "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204X64) { "DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } else { "" }
-            $openCvCpuConfiguration = if ($isWindowsArm64) { "CPU_BASELINE:NEON;CPU_DISPATCH:" } elseif ($isWindowsX64) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } elseif ($isDebian1204X64) { "CPU_BASELINE=SSE3;CPU_DISPATCH=AVX2" } else { "" }
+            $elfAuditEvidence = if ($isDirectUbuntuArm64) { "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isUbuntu2204Arm64) { "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204Arm64) { "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204X64) { "DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isFedora40X64) { "FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } else { "" }
+            $openCvCpuConfiguration = if ($isWindowsArm64) { "CPU_BASELINE:NEON;CPU_DISPATCH:" } elseif ($isWindowsX64) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } elseif ($isDebian1204X64 -or $isFedora40X64) { "CPU_BASELINE=SSE3;CPU_DISPATCH=AVX2" } else { "" }
             $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
             $openCvAsmConfiguration = if ($isWindowsMini) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile" } elseif ($isWindowsArm64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for ARM64" } elseif ($isWindowsX64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
-            $hasMiniProfileEvidence = $isWindowsMini -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64) -and $producerTarget.Profile -eq "mini")
-            $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64) -and $producerTarget.Profile -eq "full")
+            $hasMiniProfileEvidence = $isWindowsMini -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64) -and $producerTarget.Profile -eq "mini")
+            $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64) -and $producerTarget.Profile -eq "full")
             $nativeWrapperSources = if ($hasMiniProfileEvidence) { '["src/error_state.cpp","src/version.cpp","src/core/mat.cpp","src/core/decomp.cpp","src/core/operations.cpp","src/videoio/videoio.cpp","src/imgcodecs.cpp","src/imgproc.cpp"]' } elseif ($hasFullProfileEvidence) { '["full-source-fixture"]' } else { "" }
             $nativeWrapperSourceCount = if ($hasMiniProfileEvidence) { "8" } elseif ($hasFullProfileEvidence) { "45" } else { "" }
             $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "304" } elseif ($hasFullProfileEvidence) { "1966" } else { "" }
-            $containerImageId = if ($isArm64Container -or $isDebian1204X64) { "sha256:fixture" } else { "" }
-            $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } elseif ($isDebian1204X64) { "debian@sha256:fixture" } else { "" }
-            $containerArchitecture = if ($isArm64Container) { "aarch64" } elseif ($isDebian1204X64) { "x86_64" } else { "" }
-            $containerPackageArchitecture = if ($isArm64Container) { "arm64" } elseif ($isDebian1204X64) { "amd64" } else { "" }
-            $powerShellVersion = if ($isArm64Container) { "7.4.17" } elseif ($isDirectUbuntuArm64 -or $isDebian1204X64) { "7.6.fixture" } else { "" }
+            $containerImageId = if ($isArm64Container -or $isDebian1204X64 -or $isFedora40X64) { "sha256:fixture" } else { "" }
+            $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } elseif ($isDebian1204X64) { "debian@sha256:fixture" } elseif ($isFedora40X64) { "fedora@sha256:fixture" } else { "" }
+            $containerArchitecture = if ($isArm64Container) { "aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64) { "x86_64" } else { "" }
+            $containerPackageArchitecture = if ($isArm64Container) { "arm64" } elseif ($isDebian1204X64) { "amd64" } elseif ($isFedora40X64) { "x86_64" } else { "" }
+            $powerShellVersion = if ($isArm64Container) { "7.4.17" } elseif ($isDirectUbuntuArm64 -or $isDebian1204X64 -or $isFedora40X64) { "7.6.fixture" } else { "" }
             $powerShellArchiveSha256 = if ($isArm64Container) { "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c" } else { "" }
             $fixtureRuntimeDir = Join-Path $fixtureRoot "opencv-runtime-$($producerTarget.Rid)-$($producerTarget.Profile)"
             foreach ($module in @($profileSpec[0].modules)) {
@@ -953,7 +997,7 @@ if ($violations.Count -eq 0) {
                 }
             }
 
-            if ($isDebian1204X64) {
+            if ($isDebian1204X64 -or $isFedora40X64) {
                 if (-not ([string]$manifest.HostedMemoryBytes).Equals($hostedMemoryBytes, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.HostedProcessArchitecture).Equals($hostedProcessArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.CMakeVersion).Equals($cmakeVersion, [System.StringComparison]::Ordinal) -or
@@ -970,7 +1014,7 @@ if ($violations.Count -eq 0) {
                     -not ([string]$manifest.NativeWrapperSources).Equals($nativeWrapperSources, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.NativeWrapperSourceCount).Equals($nativeWrapperSourceCount, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.NativeAbiFunctionCount).Equals($nativeAbiFunctionCount, [System.StringComparison]::Ordinal)) {
-                    throw "Fixture provenance did not retain the complete Debian 12 x64 toolchain, profile, and ELF evidence."
+                    throw "Fixture provenance did not retain the complete x64 glibc container toolchain, profile, and ELF evidence."
                 }
             }
 
@@ -1015,14 +1059,14 @@ if ($violations.Count -eq 0) {
                 }
             }
 
-            if ($isDebian1204X64) {
+            if ($isDebian1204X64 -or $isFedora40X64) {
                 if (-not ([string]$manifest.ContainerImageId).Equals($containerImageId, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.ContainerImageDigest).Equals($containerImageDigest, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.ContainerArchitecture).Equals($containerArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.ContainerPackageArchitecture).Equals($containerPackageArchitecture, [System.StringComparison]::Ordinal) -or
                     -not ([string]$manifest.PowerShellVersion).Equals($powerShellVersion, [System.StringComparison]::Ordinal) -or
                     -not [string]::IsNullOrWhiteSpace([string]$manifest.PowerShellArchiveSha256)) {
-                    throw "Fixture provenance did not retain the complete Debian 12 x64 container and package-installed PowerShell evidence."
+                    throw "Fixture provenance did not retain the complete x64 glibc container and package-installed PowerShell evidence."
                 }
             }
 
@@ -1096,5 +1140,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-fedora.40-x64-mini, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."
