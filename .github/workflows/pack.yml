@@ -2897,8 +2897,9 @@ jobs:
           container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
           printf '%s\n' "$container_libc" | grep -Eq '^glibc 2\.39($|\.)'
           repository_evidence="$(dnf repolist --enabled -v)"
-          printf '%s\n' "$repository_evidence" | grep -Fq '/fedora-archive/fedora/linux/releases/40/Everything/x86_64/os/'
-          printf '%s\n' "$repository_evidence" | grep -Fq '/fedora-archive/fedora/linux/updates/40/Everything/x86_64/'
+          printf '%s\n' "$repository_evidence"
+          printf '%s\n' "$repository_evidence" | grep -Eq 'Repo-baseurl[[:space:]]*:.*(archive\.fedoraproject\.org|fedora-archive).*/fedora/linux/releases/40/Everything/x86_64/os/'
+          printf '%s\n' "$repository_evidence" | grep -Eq 'Repo-baseurl[[:space:]]*:.*(archive\.fedoraproject\.org|fedora-archive).*/fedora/linux/updates/40/Everything/x86_64/'
           echo "FEDORA_40_REPOSITORY_EVIDENCE profile=${{ inputs.runtime_profile }} support_end=$SUPPORT_END repos=fedora,updates release_archive=true updates_archive=true"
 
           dnf install -y \
