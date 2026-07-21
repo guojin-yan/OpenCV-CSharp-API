@@ -273,26 +273,34 @@ foreach ($expectation in @(
         @($workflowPath, $workflowText, 'UBUNTU_22_04_ARM64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedModuleCount sources=$expectedSourceCount abi_functions=$expectedAbiFunctionCount synthetic=false', "Pack runtime job must validate exact Ubuntu 22.04 ARM64 host/container provenance"),
         @($workflowPath, $ubuntu2204Arm64JobText, "-RunNativeSmoke", "Ubuntu 22.04 ARM64 consumer must execute full DNN or mini NOT_LINKED native calls"),
         @($workflowPath, $debianJobText, "verify-targeted-real-debian:", "Pack workflow must keep a separate Debian container verification job"),
-        @($workflowPath, $debianJobText, "inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $debianJobText, "inputs.rid == 'debian.12-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $debianJobText, "runs-on: ubuntu-24.04", "Debian container verification must use the supported hosted runner"),
         @($workflowPath, $debianJobText, "container: debian:12", "Debian verification must execute in the Debian 12 job container"),
         @($workflowPath, $debianJobText, "cat /etc/os-release", "Debian verification must expose container distro evidence"),
         @($workflowPath, $debianJobText, 'if [ "${ID:-}" != "debian" ]', "Debian verification must require the Debian distro identity"),
         @($workflowPath, $debianJobText, '12|12.*) ;;', "Debian verification must require Debian version 12 or 12.x"),
         @($workflowPath, $debianJobText, "getconf GNU_LIBC_VERSION", "Debian verification must record the container libc identity"),
-        @($workflowPath, $debianJobText, "DEBIAN_12_CONTAINER_EVIDENCE", "Debian verification must emit an explicit container evidence marker"),
+        @($workflowPath, $debianJobText, 'test "$(uname -m)" = "x86_64"', "Debian verification must require native x86-64 execution"),
+        @($workflowPath, $debianJobText, 'test "$(dpkg --print-architecture)" = "amd64"', "Debian verification must require native amd64 package architecture"),
+        @($workflowPath, $debianJobText, 'test "$process_architecture" = "X64"', "Debian verification must require a native x64 PowerShell process"),
+        @($workflowPath, $debianJobText, "DEBIAN_12_X64_CONTAINER_EVIDENCE", "Debian verification must emit an explicit profile-aware container evidence marker"),
         @($workflowPath, $debianJobText, "apt-get install -y --no-install-recommends powershell", "Debian verification must install PowerShell before invoking repository guards"),
         @($workflowPath, $debianJobText, "10.0.x", "Debian verification must install .NET 10"),
         @($workflowPath, $debianJobText, "9.0.x", "Debian verification must install .NET 9"),
         @($workflowPath, $debianJobText, "8.0.x", "Debian verification must install .NET 8"),
         @($workflowPath, $debianJobText, "name: nupkg-managed", "Debian verification must download the same-run managed artifact explicitly"),
-        @($workflowPath, $debianJobText, "name: nupkg-debian.12-x64-full", "Debian verification must download only the exact Debian full runtime artifact"),
+        @($workflowPath, $debianJobText, 'name: nupkg-debian.12-x64-${{ inputs.runtime_profile }}', "Debian verification must download only the exact selected Debian full/mini runtime artifact"),
         @($workflowPath, $debianJobText, "path: artifacts/pack-targeted-debian/nupkg-managed", "Debian managed artifact must use its isolated exact path"),
-        @($workflowPath, $debianJobText, "path: artifacts/pack-targeted-debian/nupkg-debian.12-x64-full", "Debian runtime artifact must use its isolated exact path"),
+        @($workflowPath, $debianJobText, 'path: artifacts/pack-targeted-debian/nupkg-debian.12-x64-${{ inputs.runtime_profile }}', "Debian runtime artifact must use its isolated selected path"),
         @($workflowPath, $debianJobText, "-ExpectedSyntheticRuntimeInputs false", "Debian artifact and consumer checks must require real provenance"),
         @($workflowPath, $debianJobText, "-SelectedRid debian.12-x64", "Debian checks must select only the proven Debian RID"),
-        @($workflowPath, $debianJobText, "-SelectedRuntimeProfile full", "Debian checks must select only the full profile"),
-        @($workflowPath, $debianJobText, "-RunNativeSmoke", "Debian consumer verification must execute native calls inside the container"),
+        @($workflowPath, $debianJobText, '-SelectedRuntimeProfile ''${{ inputs.runtime_profile }}''', "Debian checks must select the exact full/mini profile"),
+        @($workflowPath, $debianJobText, "DEBIAN_12_X64_PACKAGE_ELF_EVIDENCE", "Debian package must pass a profile-derived x86-64 ELF closure audit"),
+        @($workflowPath, $debianJobText, "expected_runtime_file_count=20", "Debian mini package audit must require exactly 20 runtime files"),
+        @($workflowPath, $debianJobText, "expected_canonical_count=8", "Debian mini package audit must require exactly eight canonical ELFs"),
+        @($workflowPath, $debianJobText, "expected_direct_opencv=6", "Debian mini package audit must require exactly six direct OpenCV dependencies"),
+        @($workflowPath, $workflowText, 'DEBIAN_12_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false', "Pack runtime job must validate the exact Debian 12 x64 mini producer provenance"),
+        @($workflowPath, $debianJobText, "-RunNativeSmoke", "Debian consumer verification must execute full DNN or mini NOT_LINKED native calls inside the container"),
         @($workflowPath, $debianArm64JobText, "verify-targeted-real-debian-arm64:", "Pack workflow must keep a separate native Debian 12 ARM64 verification job"),
         @($workflowPath, $debianArm64JobText, "inputs.rid == 'debian.12-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Debian ARM64 verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $debianArm64JobText, "runs-on: ubuntu-24.04-arm", "Debian ARM64 verification must use the native AArch64 Docker host"),
@@ -680,8 +688,8 @@ Assert-OccurrenceCount `
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $debianJobText `
-    -ExpectedLine "    if: `${{ inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "Debian targeted verification condition must remain exactly Debian 12 x64 full"
+    -ExpectedLine "    if: `${{ inputs.rid == 'debian.12-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "Debian targeted verification condition must remain exactly Debian 12 x64 full/mini"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -718,8 +726,8 @@ Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $debianJobText `
     -Needle "inputs.runtime_profile ==" `
-    -ExpectedCount 1 `
-    -Issue "Debian container job must gate on exactly one runtime profile"
+    -ExpectedCount 2 `
+    -Issue "Debian container job must gate on exactly full and mini"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -731,9 +739,9 @@ Assert-OccurrenceCount `
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $debianJobText `
-    -Needle "-SelectedRuntimeProfile full" `
+    -Needle "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'" `
     -ExpectedCount 2 `
-    -Issue "Both Debian guards must select only the full profile"
+    -Issue "Both Debian guards must select the exact full/mini profile"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -988,12 +996,6 @@ Assert-NotContains `
 
 Assert-NotContains `
     -Path $workflowPath `
-    -Text $debianJobText `
-    -Needle "runtime_profile == 'mini'" `
-    -Issue "Debian mini must not enter the container-native verification job"
-
-Assert-NotContains `
-    -Path $workflowPath `
     -Text $debianArm64JobText `
     -Needle "debian.12-x64" `
     -Issue "Debian ARM64 verification must not consume the Debian x64 package"
@@ -1138,6 +1140,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full, ubuntu.22.04-x64/mini; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
-Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
+Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full in fedora:40; rocky.9-x64/full in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."
