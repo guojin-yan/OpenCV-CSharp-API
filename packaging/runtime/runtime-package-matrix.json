@@ -73,7 +73,7 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "debian.12-x64",
       "nativeExtension": ".so",
-      "notes": "Debian 12 x64 glibc runtime package surface; build and publish from a Debian 12 x64 native runtime."
+      "notes": "Debian 12 x64 glibc runtime package surface; full and mini production/consumption use official Debian 12 x86-64 userspace through Docker on the Ubuntu x64 host. Both profiles are separately proven and retain distinct module, source, ABI, payload, ELF-closure, and smoke contracts."
     },
     {
       "rid": "debian.12-arm64",
