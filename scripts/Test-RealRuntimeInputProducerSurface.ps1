@@ -520,6 +520,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = '(archive\\.fedoraproject\\.org|fedora-archive).*/fedora/linux/releases/40/Everything/x86_64/os/'; Issue = "Fedora producer must require an archive mirror serving the exact Fedora 40 release repository path" },
         [pscustomobject]@{ Needle = '(archive\\.fedoraproject\\.org|fedora-archive).*/fedora/linux/updates/40/Everything/x86_64/'; Issue = "Fedora producer must require an archive mirror serving the exact Fedora 40 updates repository path" },
         [pscustomobject]@{ Needle = "FEDORA_40_REPOSITORY_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must emit exact lifecycle and archive repository evidence" },
+        [pscustomobject]@{ Needle = "diffutils"; Issue = "Fedora producer must install diff for exact runtime payload comparison" },
         [pscustomobject]@{ Needle = 'test "$(rpm --eval "%{_arch}")" = "x86_64"'; Issue = "Fedora producer must require native RPM x86_64 package architecture" },
         [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_CONTAINER_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record exact target-container architecture, libc, and PowerShell evidence" },
         [pscustomobject]@{ Needle = "FEDORA_40_X64_TOOLCHAIN_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record its native x86-64 toolchain" },

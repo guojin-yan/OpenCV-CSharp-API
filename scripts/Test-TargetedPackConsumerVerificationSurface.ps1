@@ -346,6 +346,7 @@ foreach ($expectation in @(
         @($workflowPath, $fedoraJobText, "FEDORA_40_REPOSITORY_EVIDENCE", "Fedora verification must emit exact lifecycle and archive repository evidence"),
         @($workflowPath, $fedoraJobText, "FEDORA_40_CONTAINER_EVIDENCE profile=", "Fedora verification must preserve its profile-aware container evidence marker"),
         @($workflowPath, $fedoraJobText, "binutils", "Fedora package verification must install readelf for ELF closure auditing"),
+        @($workflowPath, $fedoraJobText, "diffutils", "Fedora package verification must install diff for exact runtime payload comparison"),
         @($workflowPath, $fedoraJobText, "unzip", "Fedora package verification must install unzip for exact package inspection"),
         @($workflowPath, $fedoraJobText, "dnf install -y powershell", "Fedora verification must install PowerShell before invoking repository guards"),
         @($workflowPath, $fedoraJobText, "Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path", "Fedora verifier must explain the factual PowerShell feed path without changing distro identity"),
