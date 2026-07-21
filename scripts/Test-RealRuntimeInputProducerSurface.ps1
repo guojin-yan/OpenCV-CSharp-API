@@ -115,19 +115,20 @@ function Get-ContainerNativeScript {
         [string]$Text
     )
 
+    $normalizedText = $Text.Replace("`r`n", "`n").Replace("`r", "`n")
     $startMarker = '"$container_shell" -lc '''
-    $start = $Text.IndexOf($startMarker, [System.StringComparison]::Ordinal)
+    $start = $normalizedText.IndexOf($startMarker, [System.StringComparison]::Ordinal)
     if ($start -lt 0) {
         return ""
     }
 
     $start += $startMarker.Length
-    $end = $Text.IndexOf("`n            '`n", $start, [System.StringComparison]::Ordinal)
+    $end = $normalizedText.IndexOf("`n            '`n", $start, [System.StringComparison]::Ordinal)
     if ($end -lt 0) {
         return ""
     }
 
-    return $Text.Substring($start, $end - $start)
+    return $normalizedText.Substring($start, $end - $start)
 }
 
 function Write-FixtureFile {
@@ -607,6 +608,11 @@ if ([string]::IsNullOrWhiteSpace($containerNativeScript)) {
 }
 else {
     Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $containerNativeScript -Needle "'" -Issue "Container-native producer script must not contain a single quote that splits the outer shell argument"
+}
+
+$crlfProducerWorkflowText = $producerWorkflowText.Replace("`r`n", "`n").Replace("`r", "`n").Replace("`n", "`r`n")
+if ([string]::IsNullOrWhiteSpace((Get-ContainerNativeScript -Text $crlfProducerWorkflowText))) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Container-native producer script extraction must be stable after a Windows CRLF checkout"
 }
 
 foreach ($required in @(
