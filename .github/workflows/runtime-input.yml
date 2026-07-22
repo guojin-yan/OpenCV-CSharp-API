@@ -47,12 +47,13 @@ jobs:
             'fedora.40-x64/mini',
             'rhel.9-x64/full',
             'rocky.9-x64/full',
+            'rocky.9-x64/mini',
             'alpine.3.20-x64/full',
             'alpine.3.20-x64/mini'
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-fedora.40-x64-mini, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-alpine.3.20-x64-full, and runtime-input-alpine.3.20-x64-mini. Windows x86 and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-fedora.40-x64-mini, runtime-input-rhel.9-x64-full, runtime-input-rocky.9-x64-full, runtime-input-rocky.9-x64-mini, runtime-input-alpine.3.20-x64-full, and runtime-input-alpine.3.20-x64-mini. Windows x86 and remaining mini/distro RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
           }
 
   produce:
@@ -1401,6 +1402,11 @@ jobs:
             os: ubuntu-24.04
             container_image: rockylinux:9
             opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
+          - rid: rocky.9-x64
+            profile: mini
+            os: ubuntu-24.04
+            container_image: rockylinux:9
+            opencv_extra_cmake_args: ""
           - rid: alpine.3.20-x64
             profile: full
             os: ubuntu-24.04
@@ -1664,6 +1670,42 @@ jobs:
              test -n "$hosted_dotnet_version"
              echo "FEDORA_40_X64_PRODUCER_HOST_EVIDENCE profile=$RUNTIME_PROFILE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture PROCESS_ARCH=$hosted_process_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model MEMORY_BYTES=$hosted_memory_bytes DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes DOTNET=$hosted_dotnet_version"
              echo "FEDORA_40_X64_PRODUCER_IMAGE_EVIDENCE profile=$RUNTIME_PROFILE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
+           fi
+
+           if [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
+             . /etc/os-release
+             test "${ID:-}" = "ubuntu"
+             test "${VERSION_ID:-}" = "24.04"
+             test "$(uname -m)" = "x86_64"
+             test "$(dpkg --print-architecture)" = "amd64"
+             test "$(docker info --format '{{.Architecture}}')" = "x86_64"
+             docker pull "$CONTAINER_IMAGE"
+             test "$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}')" = "amd64"
+             container_image_id="$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Id}}')"
+             container_image_digest="$(docker image inspect "$CONTAINER_IMAGE" --format '{{join .RepoDigests ","}}')"
+             printf '%s\n' "$container_image_digest" | grep -Fq 'rockylinux@sha256:'
+
+             hosted_runner_image="${ImageOS:-unknown}"
+             hosted_runner_image_version="${ImageVersion:-unknown}"
+             hosted_distro="$ID"
+             hosted_distro_version="$VERSION_ID"
+             hosted_architecture="$(uname -m)"
+             hosted_package_architecture="$(dpkg --print-architecture)"
+             hosted_libc="$(getconf GNU_LIBC_VERSION)"
+             hosted_cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | head -n 1)"
+             hosted_memory_bytes="$(awk '/^MemTotal:/ { printf "%.0f", $2 * 1024 }' /proc/meminfo)"
+             hosted_disk_available_bytes="$(df --output=avail -B1 / | tail -n 1 | tr -d ' ')"
+             hosted_process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+             hosted_dotnet_version="$(dotnet --version)"
+             test "$hosted_runner_image" = "ubuntu24"
+             test "$hosted_runner_image_version" != "unknown"
+             test "$hosted_process_architecture" = "X64"
+             test -n "$hosted_cpu_model"
+             test "$hosted_memory_bytes" -gt 0
+             test "$hosted_disk_available_bytes" -gt 0
+             test -n "$hosted_dotnet_version"
+             echo "ROCKY_9_X64_PRODUCER_HOST_EVIDENCE profile=$RUNTIME_PROFILE ImageOS=$hosted_runner_image ImageVersion=$hosted_runner_image_version ID=$hosted_distro VERSION_ID=$hosted_distro_version UNAME=$hosted_architecture PROCESS_ARCH=$hosted_process_architecture DPKG_ARCH=$hosted_package_architecture LIBC=$hosted_libc DOCKER_ARCH=$(docker info --format '{{.Architecture}}') CPU=$hosted_cpu_model MEMORY_BYTES=$hosted_memory_bytes DISK_AVAILABLE_BYTES=$hosted_disk_available_bytes DOTNET=$hosted_dotnet_version"
+             echo "ROCKY_9_X64_PRODUCER_IMAGE_EVIDENCE profile=$RUNTIME_PROFILE IMAGE=$CONTAINER_IMAGE IMAGE_ID=$container_image_id REPO_DIGESTS=$container_image_digest ARCH=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Architecture}}') OS=$(docker image inspect "$CONTAINER_IMAGE" --format '{{.Os}}')"
            fi
 
            if [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
@@ -2012,6 +2054,36 @@ jobs:
                  pwsh --version
                fi
 
+               if [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
+                 test "$container_distro" = "rocky"
+                 case "$container_distro_version" in
+                   9|9.*) ;;
+                   *) echo "Expected Rocky Linux 9, got $container_distro_version" >&2; exit 1 ;;
+                 esac
+                 test "$(uname -m)" = "x86_64"
+                 test "$(rpm --eval "%{_arch}")" = "x86_64"
+                 container_architecture="$(uname -m)"
+                 container_package_architecture="$(rpm --eval "%{_arch}")"
+                 provenance_powershell_version="$(pwsh --version | sed -n "s/^PowerShell //p")"
+                 test -n "$provenance_powershell_version"
+                 if [ "$RUNTIME_PROFILE" = "mini" ]; then
+                   test -z "$OPENCV_EXTRA_CMAKE_ARGS"
+                 elif [ "$RUNTIME_PROFILE" = "full" ]; then
+                   test "$OPENCV_EXTRA_CMAKE_ARGS" = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
+                 else
+                   echo "Unsupported Rocky runtime profile: $RUNTIME_PROFILE" >&2
+                   exit 1
+                 fi
+                 echo "ROCKY_9_X64_PRODUCER_CONTAINER_EVIDENCE profile=$RUNTIME_PROFILE ID=$container_distro VERSION_ID=$container_distro_version UNAME=$container_architecture RPM_ARCH=$container_package_architecture LIBC=$container_libc POWERSHELL=$provenance_powershell_version"
+                 lscpu
+                 cmake --version
+                 gcc --version
+                 g++ --version
+                 as --version
+                 ninja --version
+                 pwsh --version
+               fi
+
                if [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
                  test "$container_distro" = "fedora"
                  case "$container_distro_version" in
@@ -2086,6 +2158,8 @@ jobs:
                 echo "DEBIAN_12_X64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$provenance_powershell_version HOST_DOTNET=$HOSTED_DOTNET_VERSION"
               elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
                 echo "FEDORA_40_X64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$provenance_powershell_version HOST_DOTNET=$HOSTED_DOTNET_VERSION"
+              elif [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
+                echo "ROCKY_9_X64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$provenance_powershell_version HOST_DOTNET=$HOSTED_DOTNET_VERSION"
               fi
               mkdir -p "$source_root"
               if [ ! -d "$source_dir/.git" ]; then
@@ -2101,7 +2175,7 @@ jobs:
                 -Build
 
                opencv_cpu_configuration=""
-               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
+               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "rocky.9-x64" ] || [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
                 open_cv_build_dir="/workspace/artifacts/opencv-build/opencv-$OPENCV_VERSION-$OPENCV_RID"
                 open_cv_cache="$open_cv_build_dir/CMakeCache.txt"
                 open_cv_cpu_config="$(find "$open_cv_build_dir" -type f -name cv_cpu_config.h -print -quit)"
@@ -2120,10 +2194,13 @@ jobs:
                  elif [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                    printf "%s\n" "$opencv_cpu_configuration" | grep -q "NEON"
                    echo "DEBIAN_12_ARM64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
-                 elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
-                   printf "%s\n" "$opencv_cpu_configuration" | grep -Eq "SSE|AVX"
-                   echo "FEDORA_40_X64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
-                 else
+                  elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
+                    printf "%s\n" "$opencv_cpu_configuration" | grep -Eq "SSE|AVX"
+                    echo "FEDORA_40_X64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
+                  elif [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
+                    printf "%s\n" "$opencv_cpu_configuration" | grep -Eq "SSE|AVX"
+                    echo "ROCKY_9_X64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
+                  else
                    printf "%s\n" "$opencv_cpu_configuration" | grep -Eq "SSE|AVX"
                    echo "DEBIAN_12_X64_OPENCV_CPU_EVIDENCE profile=$RUNTIME_PROFILE $opencv_cpu_configuration"
                  fi
@@ -2155,7 +2232,7 @@ jobs:
 
               cmake --build build/native-linked --config Release
               ctest --test-dir build/native-linked -C Release --output-on-failure | tee build/native-linked/ctest-output.txt
-               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
+               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "rocky.9-x64" ] || [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
                  grep -Fq "100% tests passed, 0 tests failed out of 5" build/native-linked/ctest-output.txt
                  if [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
                    echo "ALPINE_3_20_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
@@ -2165,6 +2242,8 @@ jobs:
                   echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
                 elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
                   echo "FEDORA_40_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                elif [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
+                  echo "ROCKY_9_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
                 else
                   echo "DEBIAN_12_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
                 fi
@@ -2264,7 +2343,7 @@ jobs:
                  echo "$elf_audit_evidence"
                fi
 
-               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
+               if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
                 case "$RUNTIME_PROFILE" in
                   full)
                     modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
@@ -2333,7 +2412,7 @@ jobs:
                   "$audit_dir"/libopencv_*.so."$OPENCV_VERSION"; do
                   test -f "$elf"
                   expected_machine="AArch64"
-                  if [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ]; then expected_machine="X86-64"; fi
+                  if [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "rocky.9-x64" ]; then expected_machine="X86-64"; fi
                   readelf -h "$elf" | grep -q "Machine:.*$expected_machine"
                   machine_count=$((machine_count + 1))
                   dynamic_paths="$(readelf -d "$elf" | grep -E "\((RPATH|RUNPATH)\)" || true)"
@@ -2365,6 +2444,9 @@ jobs:
                   echo "$elf_audit_evidence"
                 elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
                   elf_audit_evidence="FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  echo "$elf_audit_evidence"
+                elif [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
+                  elf_audit_evidence="ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
                   echo "$elf_audit_evidence"
                 else
                   elf_audit_evidence="DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
