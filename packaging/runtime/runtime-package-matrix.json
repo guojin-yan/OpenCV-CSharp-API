@@ -103,7 +103,7 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "rhel.9-x64",
       "nativeExtension": ".so",
-      "notes": "RHEL 9 x64 glibc runtime package surface; build and publish from a RHEL 9 x64 compatible native runtime."
+      "notes": "RHEL 9 x64 glibc runtime package surface; full and mini production/consumption are separately proven inside official Red Hat UBI 9.8 x86-64 userspace. Full retains its independently audited DNN AVX-VNNI workaround, while mini keeps empty extra OpenCV CMake arguments and a distinct six-module, 8-source, 304-function, 20-file contract."
     },
     {
       "rid": "rocky.9-x64",
