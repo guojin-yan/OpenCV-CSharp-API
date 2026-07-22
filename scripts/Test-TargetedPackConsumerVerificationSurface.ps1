@@ -405,7 +405,7 @@ foreach ($expectation in @(
         @($workflowPath, $workflowText, 'ROCKY_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false extra_cmake_args=empty', "Pack runtime job must validate exact Rocky 9 x64 mini producer provenance"),
         @($workflowPath, $rockyJobText, "-RunNativeSmoke", "Rocky consumer verification must execute full DNN or mini NOT_LINKED native calls inside the container"),
         @($workflowPath, $rhelJobText, "verify-targeted-real-rhel:", "Pack workflow must keep a separate RHEL UBI container verification job"),
-        @($workflowPath, $rhelJobText, "inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "RHEL verification must use the exact full-only non-synthetic non-publishing gate"),
+        @($workflowPath, $rhelJobText, "inputs.rid == 'rhel.9-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "RHEL verification must use the exact full/mini non-synthetic non-publishing gate"),
         @($workflowPath, $rhelJobText, "runs-on: ubuntu-24.04", "RHEL UBI verification must use the supported hosted runner as Docker host"),
         @($workflowPath, $rhelJobText, "container: registry.access.redhat.com/ubi9/ubi:9.8", "RHEL verification must execute in the audited official UBI 9.8 job container"),
         @($workflowPath, $rhelJobText, "cat /etc/os-release", "RHEL verification must expose container distro evidence"),
@@ -419,19 +419,24 @@ foreach ($expectation in @(
         @($workflowPath, $rhelJobText, "ubi-9-appstream-rpms", "RHEL verifier must require UBI AppStream"),
         @($workflowPath, $rhelJobText, "ubi-9-codeready-builder-rpms", "RHEL verifier must require UBI CodeReady Builder"),
         @($workflowPath, $rhelJobText, "curl-minimal", "RHEL verifier must preserve the UBI non-conflicting curl package"),
-        @($workflowPath, $rhelJobText, "RHEL_9_UBI_ASSEMBLER_EVIDENCE", "RHEL verification must retain assembler evidence for its producer workaround"),
+        @($workflowPath, $rhelJobText, "RHEL_9_UBI_ASSEMBLER_EVIDENCE", "RHEL verification must retain assembler evidence for the separate full-profile producer workaround"),
         @($workflowPath, $rhelJobText, "Microsoft's RHEL 9 feed matches this RHEL UBI container and supplies tooling only", "RHEL verifier must describe the Microsoft feed as tooling rather than runtime evidence"),
         @($workflowPath, $rhelJobText, "dnf install -y powershell", "RHEL verification must install PowerShell before invoking repository guards"),
         @($workflowPath, $rhelJobText, "10.0.x", "RHEL verification must install .NET 10"),
         @($workflowPath, $rhelJobText, "9.0.x", "RHEL verification must install .NET 9"),
         @($workflowPath, $rhelJobText, "8.0.x", "RHEL verification must install .NET 8"),
         @($workflowPath, $rhelJobText, "name: nupkg-managed", "RHEL verification must download the same-run managed artifact explicitly"),
-        @($workflowPath, $rhelJobText, "name: nupkg-rhel.9-x64-full", "RHEL verification must download only the exact RHEL full runtime artifact"),
+        @($workflowPath, $rhelJobText, 'name: nupkg-rhel.9-x64-${{ inputs.runtime_profile }}', "RHEL verification must download only the exact selected RHEL full/mini runtime artifact"),
         @($workflowPath, $rhelJobText, "path: artifacts/pack-targeted-rhel/nupkg-managed", "RHEL managed artifact must use its isolated exact path"),
-        @($workflowPath, $rhelJobText, "path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-full", "RHEL runtime artifact must use its isolated exact path"),
+        @($workflowPath, $rhelJobText, 'path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-${{ inputs.runtime_profile }}', "RHEL runtime artifact must use its isolated exact profile path"),
         @($workflowPath, $rhelJobText, "-ExpectedSyntheticRuntimeInputs false", "RHEL artifact and consumer checks must require real provenance"),
         @($workflowPath, $rhelJobText, "-SelectedRid rhel.9-x64", "RHEL checks must select only the proven RHEL RID"),
-        @($workflowPath, $rhelJobText, "-SelectedRuntimeProfile full", "RHEL checks must select only the full profile"),
+        @($workflowPath, $rhelJobText, '-SelectedRuntimeProfile ''${{ inputs.runtime_profile }}''', "RHEL checks must select the exact full/mini profile"),
+        @($workflowPath, $rhelJobText, "expected_runtime_file_count=20", "RHEL mini package audit must require exactly 20 runtime files"),
+        @($workflowPath, $rhelJobText, "expected_canonical_count=8", "RHEL mini package audit must require exactly eight canonical ELFs"),
+        @($workflowPath, $rhelJobText, "expected_direct_opencv=6", "RHEL mini package audit must require exactly six direct OpenCV dependencies"),
+        @($workflowPath, $rhelJobText, "RHEL_9_X64_PACKAGE_ELF_EVIDENCE", "RHEL package must pass a profile-derived x86-64 ELF closure audit"),
+        @($workflowPath, $workflowText, 'RHEL_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false extra_cmake_args=empty', "Pack runtime job must validate exact RHEL 9 x64 mini producer provenance"),
         @($workflowPath, $rhelJobText, "-RunNativeSmoke", "RHEL consumer verification must execute native calls inside the UBI container"),
         @($workflowPath, $alpineJobText, "verify-targeted-real-alpine:", "Pack workflow must keep a separate Alpine musl verification job"),
         @($workflowPath, $alpineJobText, "inputs.rid == 'alpine.3.20-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'", "Alpine verification must use the exact full/mini non-synthetic non-publishing gate"),
@@ -734,8 +739,8 @@ Assert-ExactLine `
 Assert-ExactLine `
     -Path $workflowPath `
     -Text $rhelJobText `
-    -ExpectedLine "    if: `${{ inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
-    -Issue "RHEL targeted verification condition must remain exactly RHEL 9 x64 full"
+    -ExpectedLine "    if: `${{ inputs.rid == 'rhel.9-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}" `
+    -Issue "RHEL targeted verification condition must remain exactly RHEL 9 x64 full/mini"
 
 Assert-ExactLine `
     -Path $workflowPath `
@@ -872,8 +877,8 @@ Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $rhelJobText `
     -Needle "inputs.runtime_profile ==" `
-    -ExpectedCount 1 `
-    -Issue "RHEL UBI container job must gate on exactly one runtime profile"
+    -ExpectedCount 2 `
+    -Issue "RHEL UBI container job must gate on exactly full and mini"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -885,9 +890,9 @@ Assert-OccurrenceCount `
 Assert-OccurrenceCount `
     -Path $workflowPath `
     -Text $rhelJobText `
-    -Needle "-SelectedRuntimeProfile full" `
+    -Needle "-SelectedRuntimeProfile '`${{ inputs.runtime_profile }}'" `
     -ExpectedCount 2 `
-    -Issue "Both RHEL guards must select only the full profile"
+    -Issue "Both RHEL guards must select the exact full/mini profile"
 
 Assert-OccurrenceCount `
     -Path $workflowPath `
@@ -1076,11 +1081,11 @@ Assert-NotContains `
     -Needle "-SelectedRid rhel.9-x64" `
     -Issue "Rocky selected package guards must not consume the separate RHEL package identity"
 
-Assert-NotContains `
+Assert-Contains `
     -Path $workflowPath `
     -Text $rhelJobText `
     -Needle "runtime_profile == 'mini'" `
-    -Issue "RHEL mini must not enter the UBI container-native verification job"
+    -Issue "RHEL mini must enter the exact UBI container-native verification job"
 
 Assert-NotContains `
     -Path $workflowPath `
@@ -1168,6 +1173,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
 Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full, ubuntu.22.04-x64/mini; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
-Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full and fedora.40-x64/mini in fedora:40; rocky.9-x64/full and rocky.9-x64/mini in rockylinux:9; rhel.9-x64/full in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
+Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full and fedora.40-x64/mini in fedora:40; rocky.9-x64/full and rocky.9-x64/mini in rockylinux:9; rhel.9-x64/full and rhel.9-x64/mini in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
 Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."

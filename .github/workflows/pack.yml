@@ -969,6 +969,173 @@ jobs:
             }
           }
           Write-Host "ROCKY_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false extra_cmake_args=empty"
+      - name: Validate RHEL 9 x64 mini runtime input provenance
+        if: ${{ matrix.rid == 'rhel.9-x64' && matrix.profile == 'mini' && inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace('${{ inputs.real_runtime_artifact_run_id }}')) {
+            throw "Non-synthetic rhel.9-x64/mini packaging requires an explicit runtime-input producer run id."
+          }
+
+          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/real-runtime-inputs/rhel.9-x64-mini'
+          $provenance = Get-Content -LiteralPath (Join-Path $artifactRoot 'runtime-input.provenance.json') -Raw | ConvertFrom-Json
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq 'mini' })
+          if ($profile.Count -ne 1) {
+            throw "Selected RHEL 9 x64 mini runtime profile was not found exactly once."
+          }
+
+          $expectedModules = @($profile[0].modules)
+          $expectedModuleCount = 6
+          $expectedOpenCvFileCount = 18
+          $expectedPayloadFileCount = 20
+          if ($expectedModules.Count -ne $expectedModuleCount) {
+            throw "Mini runtime matrix must retain exactly six OpenCV modules."
+          }
+          $expectedRuntimeNames = @($expectedModules | ForEach-Object {
+              "libopencv_$_.so"
+              "libopencv_$_.so.500"
+              "libopencv_$_.so.${{ inputs.opencv_version }}"
+            })
+          $actualModules = @($provenance.RequiredModules)
+          $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
+          $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
+          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
+          if ($provenance.Rid -ne 'rhel.9-x64' -or
+              $provenance.OpenCvRid -ne 'rhel.9-x64' -or
+              $provenance.PlatformFamily -ne 'linux' -or
+              $provenance.Distro -ne 'rhel' -or
+              $provenance.DistroVersion -ne '9' -or
+              $provenance.RuntimeProfile -ne 'mini' -or
+              $provenance.RuntimeProfilePackageIdSuffix -ne '.mini' -or
+              $provenance.BuildList -ne 'core,imgproc,imgcodecs,videoio,geometry,flann' -or
+              [bool]$provenance.SyntheticRuntimeInputs -or
+              $actualModules.Count -ne $expectedModuleCount -or
+              @($expectedModules | Where-Object { $actualModules -notcontains $_ }).Count -ne 0 -or
+              @($actualModules | Where-Object { $expectedModules -notcontains $_ }).Count -ne 0 -or
+              $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
+              @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              $actualLoaderNames.Count -ne 2 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
+              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+            throw "RHEL 9 x64 mini provenance does not match the exact six-module 20-file producer contract."
+          }
+
+          foreach ($requiredValue in @(
+              [string]$provenance.RunnerImage,
+              [string]$provenance.RunnerImageVersion,
+              [string]$provenance.HostedDistro,
+              [string]$provenance.HostedDistroVersion,
+              [string]$provenance.HostedArchitecture,
+              [string]$provenance.HostedProcessArchitecture,
+              [string]$provenance.HostedPackageArchitecture,
+              [string]$provenance.HostedLibc,
+              [string]$provenance.HostedCpuModel,
+              [string]$provenance.HostedMemoryBytes,
+              [string]$provenance.HostedDiskAvailableBytes,
+              [string]$provenance.CMakeVersion,
+              [string]$provenance.CMakeGenerator,
+              [string]$provenance.BuildConfiguration,
+              [string]$provenance.CompilerPath,
+              [string]$provenance.CompilerVersion,
+              [string]$provenance.AssemblerVersion,
+              [string]$provenance.NinjaVersion,
+              [string]$provenance.DotNetVersion,
+              [string]$provenance.OpenCvCMakeArguments,
+              [string]$provenance.OpenCvCpuConfiguration,
+              [string]$provenance.NativeWrapperSources,
+              [string]$provenance.ElfAuditEvidence,
+              [string]$provenance.ContainerImage,
+              [string]$provenance.ContainerImageId,
+              [string]$provenance.ContainerImageDigest,
+              [string]$provenance.ContainerDistro,
+              [string]$provenance.ContainerDistroVersion,
+              [string]$provenance.ContainerArchitecture,
+              [string]$provenance.ContainerPackageArchitecture,
+              [string]$provenance.ContainerLibc,
+              [string]$provenance.PowerShellVersion)) {
+            if ([string]::IsNullOrWhiteSpace($requiredValue)) {
+              throw "RHEL 9 x64 mini provenance is missing required host, target container, toolchain, profile, or ELF evidence."
+            }
+          }
+
+          try {
+            $nativeWrapperSources = @(([string]$provenance.NativeWrapperSources | ConvertFrom-Json))
+            $openCvCMakeArguments = @(([string]$provenance.OpenCvCMakeArguments | ConvertFrom-Json))
+          }
+          catch {
+            throw "RHEL 9 x64 mini provenance contains invalid source or OpenCV CMake argument JSON."
+          }
+          $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
+          $miniMatch = [regex]::Match($cmakeText, '(?s)set\(OPENCV_CSHARP_MINI_NATIVE_SOURCES(?<body>.*?)\)')
+          if (-not $miniMatch.Success) {
+            throw "Native mini CMake source list was not found."
+          }
+          $expectedSources = @(
+            [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
+              ForEach-Object { $_.Groups[1].Value }
+          )
+          if ($expectedSources.Count -ne 8 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
+              $nativeWrapperSources.Count -ne 8 -or
+              @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
+              @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
+              -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
+              -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
+            throw "RHEL 9 x64 mini provenance does not retain the exact 8-source/304-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+          }
+
+          $cmakeArgumentText = $openCvCMakeArguments -join "`n"
+          $expectedElfPattern = '^RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
+              $provenance.HostedRunner -ne 'ubuntu-24.04' -or
+              $provenance.RunnerImage -ne 'ubuntu24' -or
+              $provenance.HostedDistro -ne 'ubuntu' -or
+              $provenance.HostedDistroVersion -ne '24.04' -or
+              $provenance.HostedArchitecture -ne 'x86_64' -or
+              $provenance.HostedProcessArchitecture -ne 'X64' -or
+              $provenance.HostedPackageArchitecture -ne 'amd64' -or
+              $provenance.HostedLibc -notmatch '^glibc ' -or
+              [long]$provenance.HostedMemoryBytes -le 0 -or
+              [long]$provenance.HostedDiskAvailableBytes -le 0 -or
+              $provenance.ContainerImage -ne 'registry.access.redhat.com/ubi9/ubi:9.8' -or
+              $provenance.ContainerImageId -notmatch '^sha256:' -or
+              $provenance.ContainerImageDigest -notmatch '(^|,)registry\.access\.redhat\.com/ubi9/ubi@sha256:' -or
+              $provenance.ContainerDistro -ne 'rhel' -or
+              $provenance.ContainerDistroVersion -notmatch '^9\.8(?:\..*)?$' -or
+              $provenance.ContainerArchitecture -ne 'x86_64' -or
+              $provenance.ContainerPackageArchitecture -ne 'x86_64' -or
+              $provenance.ContainerLibc -notmatch '^glibc 2\.34$' -or
+              $provenance.PowerShellVersion -notmatch '^7\.' -or
+              $provenance.CMakeVersion -notmatch '^cmake version ' -or
+              $provenance.CMakeGenerator -ne 'Ninja' -or
+              $provenance.BuildConfiguration -ne 'Release' -or
+              $provenance.CompilerPath -notmatch '(?i)(?:^|/)g\+\+$' -or
+              $provenance.CompilerVersion -notmatch 'x86_64' -or
+              $provenance.AssemblerVersion -notmatch 'x86_64' -or
+              $cmakeArgumentText.IndexOf('-G', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf('Ninja', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf('-DBUILD_LIST=core,imgproc,imgcodecs,videoio,geometry,flann', [System.StringComparison]::Ordinal) -lt 0 -or
+              $provenance.OpenCvCpuConfiguration -notmatch '(?i)(?:SSE|AVX)' -or
+              $provenance.ElfAuditEvidence -notmatch $expectedElfPattern) {
+            throw "RHEL 9 x64 mini provenance host, official UBI target, toolchain, CPU, profile, or ELF evidence is not factual."
+          }
+
+          $forbiddenEvidence = @(
+            [string]$provenance.CompilerVersion,
+            [string]$provenance.AssemblerVersion,
+            [string]$provenance.OpenCvCMakeArguments,
+            [string]$provenance.OpenCvCpuConfiguration,
+            [string]$provenance.ElfAuditEvidence,
+            [string]$provenance.OpenCvExtraCMakeArgs) -join "`n"
+          foreach ($forbiddenToken in @('AArch64', 'arm64', 'QEMU', 'emulation', 'cross-compile', '--platform', 'CV_AVXVNNI_AVAILABLE=0', 'debian', 'fedora', 'rocky', 'alpine')) {
+            if ($forbiddenEvidence.IndexOf($forbiddenToken, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+              throw "RHEL 9 x64 mini provenance retained forbidden foreign or full-profile workaround evidence: $forbiddenToken"
+            }
+          }
+          Write-Host "RHEL_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false extra_cmake_args=empty"
       - name: Validate Windows x64 runtime input provenance
         if: ${{ matrix.rid == 'win-x64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-x64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -3421,7 +3588,7 @@ jobs:
     needs:
       - pack-managed
       - pack-runtime
-    if: ${{ inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    if: ${{ inputs.rid == 'rhel.9-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
     container: registry.access.redhat.com/ubi9/ubi:9.8
     steps:
@@ -3446,8 +3613,10 @@ jobs:
             echo "Expected platform:el9, got ${PLATFORM_ID:-unknown}." >&2
             exit 1
           fi
+          test "$(uname -m)" = "x86_64"
+          test "$(rpm --eval '%{_arch}')" = "x86_64"
           container_libc="$(getconf GNU_LIBC_VERSION 2>/dev/null || ldd --version | head -n 1)"
-          echo "RHEL_9_UBI_CONTAINER_EVIDENCE ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=$PLATFORM_ID LIBC=$container_libc"
+          printf '%s\n' "$container_libc" | grep -Eq '^glibc 2\.34($|\.)'
 
           enabled_repositories="$(dnf repolist --enabled)"
           for repository in ubi-9-baseos-rpms ubi-9-appstream-rpms ubi-9-codeready-builder-rpms; do
@@ -3458,6 +3627,7 @@ jobs:
             binutils \
             ca-certificates \
             curl-minimal \
+            diffutils \
             findutils \
             git \
             glibc-common \
@@ -3470,6 +3640,7 @@ jobs:
             openssl-libs \
             tar \
             tzdata \
+            unzip \
             zlib
           assembler="$(as --version | head -n 1)"
           echo "RHEL_9_UBI_ASSEMBLER_EVIDENCE $assembler"
@@ -3477,6 +3648,9 @@ jobs:
           # Microsoft's RHEL 9 feed matches this RHEL UBI container and supplies tooling only.
           curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
           dnf install -y powershell
+          process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$process_architecture" = "X64"
+          echo "RHEL_9_UBI_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=$PLATFORM_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -3493,8 +3667,8 @@ jobs:
       - name: Download RHEL runtime package artifact
         uses: actions/download-artifact@v4
         with:
-          name: nupkg-rhel.9-x64-full
-          path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-full
+          name: nupkg-rhel.9-x64-${{ inputs.runtime_profile }}
+          path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-${{ inputs.runtime_profile }}
       - name: Verify selected real RHEL package artifacts
         shell: pwsh
         run: |
@@ -3504,7 +3678,96 @@ jobs:
             -ExpectedPackageVersion $packageVersion `
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid rhel.9-x64 `
-            -SelectedRuntimeProfile full
+            -SelectedRuntimeProfile '${{ inputs.runtime_profile }}'
+      - name: Audit selected RHEL package ELF closure
+        shell: bash
+        env:
+          OPENCV_VERSION: ${{ inputs.opencv_version }}
+          RUNTIME_PROFILE: ${{ inputs.runtime_profile }}
+        run: |
+          set -euo pipefail
+          case "$RUNTIME_PROFILE" in
+            full)
+              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
+              expected_canonical_count=18
+              expected_runtime_file_count=50
+              expected_direct_opencv=16
+              ;;
+            mini)
+              modules=(core imgproc imgcodecs videoio geometry flann)
+              expected_canonical_count=8
+              expected_runtime_file_count=20
+              expected_direct_opencv=6
+              ;;
+            *)
+              echo "Unsupported RHEL 9 x64 package profile: $RUNTIME_PROFILE" >&2
+              exit 1
+              ;;
+          esac
+
+          runtime_artifact_dir="$GITHUB_WORKSPACE/artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-$RUNTIME_PROFILE"
+          mapfile -t packages < <(find "$runtime_artifact_dir" -maxdepth 1 -type f -name "*.nupkg" | sort)
+          test "${#packages[@]}" -eq 1
+          extract_root="/tmp/opencv-rhel9-x64-package-audit-$RUNTIME_PROFILE"
+          rm -rf "$extract_root"
+          mkdir -p "$extract_root"
+          unzip -q "${packages[0]}" -d "$extract_root"
+          native_dir="$extract_root/runtimes/rhel.9-x64/native"
+          test -d "$native_dir"
+
+          compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
+          test -n "$compatibility_loader"
+          expected_names="/tmp/rhel9-x64-$RUNTIME_PROFILE-expected-runtime-files.txt"
+          actual_names="/tmp/rhel9-x64-$RUNTIME_PROFILE-actual-runtime-files.txt"
+          printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+          for module in "${modules[@]}"; do
+            printf "%s\n" \
+              "libopencv_${module}.so" \
+              "libopencv_${module}.so.500" \
+              "libopencv_${module}.so.$OPENCV_VERSION" \
+              >> "$expected_names"
+          done
+          sort -o "$expected_names" "$expected_names"
+          find "$native_dir" -mindepth 1 -maxdepth 1 -type f -printf "%f\n" | sort > "$actual_names"
+          test "$(wc -l < "$actual_names")" -eq "$expected_runtime_file_count"
+          diff -u "$expected_names" "$actual_names"
+
+          mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
+          test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
+          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          test "${#elf_files[@]}" -eq "$expected_canonical_count"
+          machine_count=0
+          origin_count=0
+          producer_path_count=0
+          missing_dependency_count=0
+          for elf in "${elf_files[@]}"; do
+            test -f "$elf"
+            readelf -h "$elf" | grep -q "Machine:.*X86-64"
+            machine_count=$((machine_count + 1))
+            dynamic_paths="$(readelf -d "$elf" | grep -E "\((RPATH|RUNPATH)\)" || true)"
+            printf "%s\n" "$dynamic_paths" | grep -Fq "\$ORIGIN"
+            origin_count=$((origin_count + 1))
+            if printf "%s\n" "$dynamic_paths" | grep -Eq "(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)"; then
+              producer_path_count=$((producer_path_count + 1))
+            fi
+            missing="$(ldd "$elf" | grep "not found" || true)"
+            if [ -n "$missing" ]; then
+              printf "%s\n" "$missing" >&2
+              missing_dependency_count=$((missing_dependency_count + 1))
+            fi
+          done
+          for module in "${modules[@]}"; do
+            cmp -s "$native_dir/libopencv_${module}.so" "$native_dir/libopencv_${module}.so.500"
+            cmp -s "$native_dir/libopencv_${module}.so.500" "$native_dir/libopencv_${module}.so.$OPENCV_VERSION"
+          done
+          direct_opencv_dependencies="$(readelf -d "$native_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
+          test "$machine_count" -eq "$expected_canonical_count"
+          test "$origin_count" -eq "$expected_canonical_count"
+          test "$producer_path_count" -eq 0
+          test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
+          test "$missing_dependency_count" -eq 0
+          cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
+          echo "RHEL_9_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true triplets_equal=true"
       - name: Restore, build, and run selected real RHEL package consumer
         shell: pwsh
         run: |
@@ -3514,7 +3777,7 @@ jobs:
             -ExpectedPackageVersion $packageVersion `
             -ExpectedSyntheticRuntimeInputs false `
             -SelectedRid rhel.9-x64 `
-            -SelectedRuntimeProfile full `
+            -SelectedRuntimeProfile '${{ inputs.runtime_profile }}' `
             -RunNativeSmoke
 
   verify-targeted-real-alpine:
