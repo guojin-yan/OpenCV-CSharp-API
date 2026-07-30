@@ -99,14 +99,11 @@ function Get-SourceSet {
 function Get-FileEvidence {
     param([Parameter(Mandatory)][string]$RelativePath)
 
-    $path = Join-Path $repo ($RelativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
-    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-        throw "Closeout evidence file is missing: $RelativePath"
-    }
-    [pscustomobject]@{
-        Path = $RelativePath
-        Sha256 = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
-        Length = (Get-Item -LiteralPath $path).Length
+    $logicalRecord = Get-LogicalFileRecord -RelativePath $RelativePath
+    return [pscustomobject]@{
+        Path = $logicalRecord.Path
+        Sha256 = $logicalRecord.Sha256
+        Length = $logicalRecord.Length
     }
 }
 

@@ -9,6 +9,10 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $recordRelativePath = "packaging/release/local-release-candidate-closeout.json"
 $recordPath = Join-Path $repo ($recordRelativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
 $violations = [System.Collections.Generic.List[object]]::new()
+$textExtensions = @(
+    ".c", ".cc", ".cpp", ".cs", ".cmake", ".csproj", ".h", ".hpp", ".json", ".md", ".props", ".ps1", ".slnx", ".targets", ".txt", ".yml", ".yaml", ".xml"
+)
+$textFileNames = @("CMakeLists.txt", ".gitignore", "global.json")
 
 function Add-Violation {
     param(
@@ -34,6 +38,24 @@ function Assert-True {
 function Normalize-Text {
     param([Parameter(Mandatory)][AllowEmptyString()][string]$Text)
     return (($Text -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd() + "`n"
+}
+
+function Get-LogicalFileEvidence {
+    param([Parameter(Mandatory)][string]$Path)
+
+    $extension = [IO.Path]::GetExtension($Path).ToLowerInvariant()
+    $name = [IO.Path]::GetFileName($Path)
+    if ($extension -in $textExtensions -or $name -in $textFileNames) {
+        $bytes = [Text.UTF8Encoding]::new($false).GetBytes((Normalize-Text ([IO.File]::ReadAllText($Path))))
+    }
+    else {
+        $bytes = [IO.File]::ReadAllBytes($Path)
+    }
+
+    return [pscustomobject]@{
+        Sha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
+        Length = $bytes.Length
+    }
 }
 
 function Get-OrdinalSorted {
@@ -239,7 +261,8 @@ function Test-Record {
         $path = Join-Path $repo ($evidence.Path -replace '/', [IO.Path]::DirectorySeparatorChar)
         Assert-True -List $List -Condition (Test-Path -LiteralPath $path -PathType Leaf) -Issue "Final closeout evidence file is missing" -Text $evidence.Path
         if (Test-Path -LiteralPath $path -PathType Leaf) {
-            Assert-True -List $List -Condition ($evidence.Sha256 -eq (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant() -and [int]$evidence.Length -eq (Get-Item -LiteralPath $path).Length) -Issue "Final closeout evidence hash or length drifted" -Text $evidence.Path
+            $logicalEvidence = Get-LogicalFileEvidence -Path $path
+            Assert-True -List $List -Condition ($evidence.Sha256 -eq $logicalEvidence.Sha256 -and [int]$evidence.Length -eq $logicalEvidence.Length) -Issue "Final closeout evidence hash or length drifted" -Text $evidence.Path
         }
     }
 
