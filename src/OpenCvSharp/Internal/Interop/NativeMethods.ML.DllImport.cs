@@ -188,6 +188,75 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed")]
         internal static extern int MlAnnMlpSetAnnealEnergySeed(IntPtr model, ulong seed);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_create")]
+        internal static extern int MlDTreesCreate(out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_load")]
+        internal static extern int MlDTreesLoad(byte[] filepath, byte[] nodeName, out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_get_int")]
+        internal static extern int MlDTreesGetInt(IntPtr model, int propertyId, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_set_int")]
+        internal static extern int MlDTreesSetInt(IntPtr model, int propertyId, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_get_regression_accuracy")]
+        internal static extern int MlDTreesGetRegressionAccuracy(IntPtr model, out float value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_set_regression_accuracy")]
+        internal static extern int MlDTreesSetRegressionAccuracy(IntPtr model, float value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_get_priors")]
+        internal static extern int MlDTreesGetPriors(IntPtr model, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_dtrees_set_priors")]
+        internal static extern int MlDTreesSetPriors(IntPtr model, IntPtr priors);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_create")]
+        internal static extern int MlRTreesCreate(out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_load")]
+        internal static extern int MlRTreesLoad(byte[] filepath, byte[] nodeName, out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_get_int")]
+        internal static extern int MlRTreesGetInt(IntPtr model, int propertyId, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_set_int")]
+        internal static extern int MlRTreesSetInt(IntPtr model, int propertyId, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_get_term_criteria")]
+        internal static extern int MlRTreesGetTermCriteria(IntPtr model, out int type, out int maxCount, out double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_set_term_criteria")]
+        internal static extern int MlRTreesSetTermCriteria(IntPtr model, int type, int maxCount, double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_get_var_importance")]
+        internal static extern int MlRTreesGetVarImportance(IntPtr model, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_get_votes")]
+        internal static extern int MlRTreesGetVotes(IntPtr model, IntPtr samples, IntPtr results, int flags);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_rtrees_get_oob_error")]
+        internal static extern int MlRTreesGetOobError(IntPtr model, out double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_create")]
+        internal static extern int MlBoostCreate(out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_load")]
+        internal static extern int MlBoostLoad(byte[] filepath, byte[] nodeName, out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_get_int")]
+        internal static extern int MlBoostGetInt(IntPtr model, int propertyId, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_set_int")]
+        internal static extern int MlBoostSetInt(IntPtr model, int propertyId, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_get_weight_trim_rate")]
+        internal static extern int MlBoostGetWeightTrimRate(IntPtr model, out double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_set_weight_trim_rate")]
+        internal static extern int MlBoostSetWeightTrimRate(IntPtr model, double value);
     }
 }
 #endif

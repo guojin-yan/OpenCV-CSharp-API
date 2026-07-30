@@ -257,6 +257,9 @@ internal static class Program
     private static readonly Action<Mat, Mat, Mat, Size, int, int> CorrectChromaticAberration = PhotoCv2.CorrectChromaticAberration;
     private static readonly Func<FileNode, OpenCvSharp.Photo.ChromaticAberrationParameters> LoadChromaticAberrationParams = PhotoCv2.LoadChromaticAberrationParams;
     private static readonly Func<OpenCvSharp.ML.ANN_MLP> CreateAnnMlp = OpenCvSharp.ML.ANN_MLP.Create;
+    private static readonly Func<OpenCvSharp.ML.DTrees> CreateDTrees = OpenCvSharp.ML.DTrees.Create;
+    private static readonly Func<OpenCvSharp.ML.RTrees> CreateRTrees = OpenCvSharp.ML.RTrees.Create;
+    private static readonly Func<OpenCvSharp.ML.Boost> CreateBoost = OpenCvSharp.ML.Boost.Create;
 
     private static readonly Type[] RepresentativeTypes =
     {
@@ -305,6 +308,11 @@ internal static class Program
         typeof(OpenCvSharp.VideoIO.VideoWriter),
         typeof(OpenCvSharp.ML.SVM),
         typeof(OpenCvSharp.ML.ANN_MLP),
+        typeof(OpenCvSharp.ML.DTrees),
+        typeof(OpenCvSharp.ML.RTrees),
+        typeof(OpenCvSharp.ML.Boost),
+        typeof(OpenCvSharp.ML.DTreesPredictionFlags),
+        typeof(OpenCvSharp.ML.BoostTypes),
         typeof(OpenCvSharp.Stitching.Stitcher),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
@@ -342,6 +350,8 @@ internal static class Program
         default(OpenCvSharp.ML.ANN_MLPTrainingMethods),
         default(OpenCvSharp.ML.ANN_MLPActivationFunctions),
         default(OpenCvSharp.ML.ANN_MLPTrainFlags),
+        default(OpenCvSharp.ML.DTreesPredictionFlags),
+        default(OpenCvSharp.ML.BoostTypes),
         default(OpenCvSharp.Stitching.StitcherMode),
         default(OpenCvSharp.Geometry.DistanceTypes)
     };
@@ -350,9 +360,10 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 46 &&
-            RepresentativeValues.Length >= 30 &&
+        return RepresentativeTypes.Length >= 52 &&
+            RepresentativeValues.Length >= 35 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
+            CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null &&
             exceptionType.Namespace == "OpenCvSharp" &&
             message.Length > 0
             ? 0

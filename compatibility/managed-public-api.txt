@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=550
-member-count=6026
+type-count=555
+member-count=6065
 namespace-count=41
 nullable-shape=included
 
@@ -100,9 +100,11 @@ TYPE|class|public;sealed|OpenCvSharp.ImgProc.Subdiv2D|base=|interfaces=System.ID
 TYPE|class|public;sealed|OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.LineDescriptor.BinaryDescriptor|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.ANN_MLP|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.ML.Boost|base=OpenCvSharp.ML.DTrees|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.KNearest|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.NormalBayesClassifier|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.ParamGrid|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.ML.RTrees|base=OpenCvSharp.ML.DTrees|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.SVM|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.TrainData|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ObjDetect.ArucoBoard|base=|interfaces=System.IDisposable
@@ -273,6 +275,7 @@ TYPE|class|public|OpenCvSharp.Face.BasicFaceRecognizer|base=OpenCvSharp.Face.Fac
 TYPE|class|public|OpenCvSharp.Face.FaceRecognizer|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Face.FacemarkTrain|base=OpenCvSharp.Face.Facemark|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Face.Facemark|base=|interfaces=System.IDisposable
+TYPE|class|public|OpenCvSharp.ML.DTrees|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.OpenCvException|base=System.Exception|interfaces=System.Runtime.Serialization.ISerializable
 TYPE|class|public|OpenCvSharp.OptFlow.DenseOpticalFlow|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.OptFlow.SparseOpticalFlow|base=|interfaces=System.IDisposable
@@ -401,6 +404,8 @@ TYPE|enum|public|OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags|base=|interfac
 TYPE|enum|public|OpenCvSharp.ML.ANN_MLPActivationFunctions|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.ANN_MLPTrainFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.ANN_MLPTrainingMethods|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.BoostTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.DTreesPredictionFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.KNearestTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlErrorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlVariableType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -3992,6 +3997,35 @@ MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Dou
 MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus
 MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep
 MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public|OpenCvSharp.ML.ANN_MLPTrainingMethods TrainingMethod
+MEMBER|OpenCvSharp.ML.BoostTypes|field|public;const|OpenCvSharp.ML.BoostTypes Discrete=0
+MEMBER|OpenCvSharp.ML.BoostTypes|field|public;const|OpenCvSharp.ML.BoostTypes Gentle=3
+MEMBER|OpenCvSharp.ML.BoostTypes|field|public;const|OpenCvSharp.ML.BoostTypes Logit=2
+MEMBER|OpenCvSharp.ML.BoostTypes|field|public;const|OpenCvSharp.ML.BoostTypes Real=1
+MEMBER|OpenCvSharp.ML.BoostTypes|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.Boost|method|public;static|OpenCvSharp.ML.Boost Create()
+MEMBER|OpenCvSharp.ML.Boost|method|public;static|OpenCvSharp.ML.Boost Load(System.String filepath,System.String? nodeName=null)
+MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|OpenCvSharp.ML.BoostTypes BoostType
+MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Double WeightTrimRate
+MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Int32 WeakCount
+MEMBER|OpenCvSharp.ML.DTreesPredictionFlags|field|public;const|OpenCvSharp.ML.DTreesPredictionFlags Auto=0
+MEMBER|OpenCvSharp.ML.DTreesPredictionFlags|field|public;const|OpenCvSharp.ML.DTreesPredictionFlags Mask=768
+MEMBER|OpenCvSharp.ML.DTreesPredictionFlags|field|public;const|OpenCvSharp.ML.DTreesPredictionFlags MaxVote=512
+MEMBER|OpenCvSharp.ML.DTreesPredictionFlags|field|public;const|OpenCvSharp.ML.DTreesPredictionFlags Sum=256
+MEMBER|OpenCvSharp.ML.DTreesPredictionFlags|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|OpenCvSharp.Core.Mat GetPriors()
+MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|System.Single Predict(OpenCvSharp.Core.Mat samples,OpenCvSharp.ML.DTreesPredictionFlags treeFlags,OpenCvSharp.Core.Mat? results=null,OpenCvSharp.ML.StatModelFlags flags=None)
+MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|System.Void GetPriors(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|System.Void SetPriors(OpenCvSharp.Core.Mat priors)
+MEMBER|OpenCvSharp.ML.DTrees|method|public;static|OpenCvSharp.ML.DTrees Create()
+MEMBER|OpenCvSharp.ML.DTrees|method|public;static|OpenCvSharp.ML.DTrees Load(System.String filepath,System.String? nodeName=null)
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean TruncatePrunedTree
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean Use1SERule
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean UseSurrogates
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 CVFolds
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxCategories
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxDepth
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MinSampleCount
+MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Single RegressionAccuracy
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;const|OpenCvSharp.ML.KNearestTypes BruteForce=1
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;const|OpenCvSharp.ML.KNearestTypes KDTree=2
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;instance|System.Int32 value__
@@ -4021,6 +4055,16 @@ MEMBER|OpenCvSharp.ML.ParamGrid|property|instance;get:public;set:public|System.D
 MEMBER|OpenCvSharp.ML.ParamGrid|property|instance;get:public;set:public|System.Double MaxVal
 MEMBER|OpenCvSharp.ML.ParamGrid|property|instance;get:public;set:public|System.Double MinVal
 MEMBER|OpenCvSharp.ML.ParamGrid|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|OpenCvSharp.Core.Mat GetVarImportance()
+MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|OpenCvSharp.Core.Mat GetVotes(OpenCvSharp.Core.Mat samples,OpenCvSharp.ML.DTreesPredictionFlags treeFlags=Auto,OpenCvSharp.ML.StatModelFlags flags=None)
+MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|System.Void GetVarImportance(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|System.Void GetVotes(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat results,OpenCvSharp.ML.DTreesPredictionFlags treeFlags=Auto,OpenCvSharp.ML.StatModelFlags flags=None)
+MEMBER|OpenCvSharp.ML.RTrees|method|public;static|OpenCvSharp.ML.RTrees Create()
+MEMBER|OpenCvSharp.ML.RTrees|method|public;static|OpenCvSharp.ML.RTrees Load(System.String filepath,System.String? nodeName=null)
+MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria
+MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Boolean CalculateVarImportance
+MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Int32 ActiveVarCount
+MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public|System.Double OobError
 MEMBER|OpenCvSharp.ML.SVMKernelTypes|field|public;const|OpenCvSharp.ML.SVMKernelTypes Chi2=4
 MEMBER|OpenCvSharp.ML.SVMKernelTypes|field|public;const|OpenCvSharp.ML.SVMKernelTypes Custom=-1
 MEMBER|OpenCvSharp.ML.SVMKernelTypes|field|public;const|OpenCvSharp.ML.SVMKernelTypes Inter=5

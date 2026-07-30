@@ -63,7 +63,10 @@ using CamShiftResult = OpenCvSharp.Video.CamShiftResult;
 using MeanShiftResult = OpenCvSharp.Video.MeanShiftResult;
 using MLKNearestObject = OpenCvSharp.ML.KNearest;
 using MLAnnMlpObject = OpenCvSharp.ML.ANN_MLP;
+using MLBoostObject = OpenCvSharp.ML.Boost;
+using MLDTreesObject = OpenCvSharp.ML.DTrees;
 using MLNormalBayesClassifierObject = OpenCvSharp.ML.NormalBayesClassifier;
+using MLRTreesObject = OpenCvSharp.ML.RTrees;
 using MLSvmObject = OpenCvSharp.ML.SVM;
 using OptFlowCv2Object = OpenCvSharp.OptFlow.OptFlowCv2;
 using OptFlowDualTVL1Object = OpenCvSharp.OptFlow.DualTVL1OpticalFlow;
@@ -733,6 +736,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunPhotoCcmDefaultSummary());
                     Console.WriteLine(RunPhotoIntelligentScissorsDefaultSummary());
                     Console.WriteLine(RunPhotoFinalCallablesDefaultSummary());
+                    Console.WriteLine(RunMLTreeModelsDefaultSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -3264,6 +3268,55 @@ namespace ConsoleSamples
                             + ", layers=2x4x1"
                             + ", weights=" + annWeights.Rows + "x" + annWeights.Cols;
                     }
+                }
+            }
+        }
+
+        private static string RunMLTreeModelsDefaultSummary()
+        {
+            using (Mat samples = CreateMLSamples())
+            using (Mat responses = CreateMLResponses())
+            using (Mat query = new Mat(1, 2, MatType.CV_32FC1))
+            using (Mat dtreesResults = new Mat())
+            using (Mat rtreesResults = new Mat())
+            using (Mat boostResults = new Mat())
+            using (MLDTreesObject dtrees = MLDTreesObject.Create())
+            using (MLRTreesObject rtrees = MLRTreesObject.Create())
+            using (MLBoostObject boost = MLBoostObject.Create())
+            {
+                query.CopyFrom<float>(new float[] { 0.1F, 0.2F });
+
+                dtrees.MaxDepth = 4;
+                dtrees.MinSampleCount = 1;
+                dtrees.CVFolds = 0;
+                bool dtreesTrained = dtrees.Train(samples, SampleTypes.RowSample, responses);
+                float dtreesPrediction = dtrees.Predict(query, dtreesResults);
+
+                CoreCv2.SetRngSeed(24680);
+                rtrees.MaxDepth = 4;
+                rtrees.MinSampleCount = 1;
+                rtrees.CalculateVarImportance = true;
+                rtrees.ActiveVarCount = 1;
+                rtrees.TermCriteria = TermCriteria.ByCount(8);
+                bool rtreesTrained = rtrees.Train(samples, SampleTypes.RowSample, responses);
+                float rtreesPrediction = rtrees.Predict(query, rtreesResults);
+
+                boost.BoostType = BoostTypes.Discrete;
+                boost.WeakCount = 8;
+                boost.WeightTrimRate = 0.9;
+                boost.MinSampleCount = 1;
+                bool boostTrained = boost.Train(samples, SampleTypes.RowSample, responses);
+                float boostPrediction = boost.Predict(query, boostResults);
+
+                using (Mat votes = rtrees.GetVotes(query, DTreesPredictionFlags.MaxVote))
+                using (Mat importance = rtrees.GetVarImportance())
+                {
+                    return "ML trees: models=DTrees/RTrees/Boost"
+                        + ", trained=" + dtreesTrained + "/" + rtreesTrained + "/" + boostTrained
+                        + ", predictions=" + dtreesPrediction + "/" + rtreesPrediction + "/" + boostPrediction
+                        + ", votes=" + votes.Rows + "x" + votes.Cols
+                        + ", importance=" + importance.Total
+                        + ", oobFinite=" + double.IsFinite(rtrees.OobError);
                 }
             }
         }

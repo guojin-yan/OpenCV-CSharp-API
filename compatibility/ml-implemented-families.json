@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 4,
-  "managedPublicMemberAdditionCount": 39,
-  "nativeEntrypointAdditionCount": 14,
+  "managedPublicTypeAdditionCount": 9,
+  "managedPublicMemberAdditionCount": 78,
+  "nativeEntrypointAdditionCount": 37,
   "families": [
     {
       "id": "ml-ann-mlp",
@@ -459,6 +459,544 @@
           "guide": "docs/articles/ml-guide.md"
         }
       ]
+    },
+    {
+      "id": "ml-tree-models",
+      "rationale": "The selected batch closes all 38 parser-emitted DTrees, RTrees, and Boost callables with upstream-compatible inheritance, typed configuration, copied matrix outputs, deterministic training coverage, persistence, and disposal validation.",
+      "declarations": [
+        {
+          "ordinal": 125,
+          "upstreamIdentity": "cv.ml.DTrees.getMaxCategories()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxCategories"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 126,
+          "upstreamIdentity": "cv.ml.DTrees.setMaxCategories(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxCategories"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 127,
+          "upstreamIdentity": "cv.ml.DTrees.getMaxDepth()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxDepth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 128,
+          "upstreamIdentity": "cv.ml.DTrees.setMaxDepth(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxDepth"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 129,
+          "upstreamIdentity": "cv.ml.DTrees.getMinSampleCount()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MinSampleCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 130,
+          "upstreamIdentity": "cv.ml.DTrees.setMinSampleCount(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MinSampleCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 131,
+          "upstreamIdentity": "cv.ml.DTrees.getCVFolds()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 CVFolds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 132,
+          "upstreamIdentity": "cv.ml.DTrees.setCVFolds(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 CVFolds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 133,
+          "upstreamIdentity": "cv.ml.DTrees.getUseSurrogates()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean UseSurrogates"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 134,
+          "upstreamIdentity": "cv.ml.DTrees.setUseSurrogates(bool val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean UseSurrogates"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 135,
+          "upstreamIdentity": "cv.ml.DTrees.getUse1SERule()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean Use1SERule"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 136,
+          "upstreamIdentity": "cv.ml.DTrees.setUse1SERule(bool val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean Use1SERule"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 137,
+          "upstreamIdentity": "cv.ml.DTrees.getTruncatePrunedTree()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean TruncatePrunedTree"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 138,
+          "upstreamIdentity": "cv.ml.DTrees.setTruncatePrunedTree(bool val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Boolean TruncatePrunedTree"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 139,
+          "upstreamIdentity": "cv.ml.DTrees.getRegressionAccuracy()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_regression_accuracy"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Single RegressionAccuracy"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 140,
+          "upstreamIdentity": "cv.ml.DTrees.setRegressionAccuracy(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_regression_accuracy"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Single RegressionAccuracy"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 141,
+          "upstreamIdentity": "cv.ml.DTrees.getPriors()-\u003Ecv::Mat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_get_priors"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|OpenCvSharp.Core.Mat GetPriors()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 142,
+          "upstreamIdentity": "cv.ml.DTrees.setPriors(Mat val[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_set_priors"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|System.Void SetPriors(OpenCvSharp.Core.Mat priors)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 143,
+          "upstreamIdentity": "cv.ml.DTrees.create()-\u003EPtr\u003CDTrees\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|method|public;static|OpenCvSharp.ML.DTrees Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 144,
+          "upstreamIdentity": "cv.ml.DTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CDTrees\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_dtrees_load"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.DTrees|method|public;static|OpenCvSharp.ML.DTrees Load(System.String filepath,System.String? nodeName=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 146,
+          "upstreamIdentity": "cv.ml.RTrees.getCalculateVarImportance()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Boolean CalculateVarImportance"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 147,
+          "upstreamIdentity": "cv.ml.RTrees.setCalculateVarImportance(bool val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Boolean CalculateVarImportance"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 148,
+          "upstreamIdentity": "cv.ml.RTrees.getActiveVarCount()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Int32 ActiveVarCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 149,
+          "upstreamIdentity": "cv.ml.RTrees.setActiveVarCount(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|System.Int32 ActiveVarCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 150,
+          "upstreamIdentity": "cv.ml.RTrees.getTermCriteria()-\u003ETermCriteria",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_get_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 151,
+          "upstreamIdentity": "cv.ml.RTrees.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_set_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 152,
+          "upstreamIdentity": "cv.ml.RTrees.getVarImportance()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_get_var_importance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|OpenCvSharp.Core.Mat GetVarImportance()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 153,
+          "upstreamIdentity": "cv.ml.RTrees.getVotes(Mat samples;Mat results[/O];int flags)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_get_votes"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|System.Void GetVotes(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat results,OpenCvSharp.ML.DTreesPredictionFlags treeFlags=Auto,OpenCvSharp.ML.StatModelFlags flags=None)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 154,
+          "upstreamIdentity": "cv.ml.RTrees.create()-\u003EPtr\u003CRTrees\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|method|public;static|OpenCvSharp.ML.RTrees Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 155,
+          "upstreamIdentity": "cv.ml.RTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CRTrees\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_rtrees_load"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.RTrees|method|public;static|OpenCvSharp.ML.RTrees Load(System.String filepath,System.String? nodeName=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 157,
+          "upstreamIdentity": "cv.ml.Boost.getBoostType()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|OpenCvSharp.ML.BoostTypes BoostType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 158,
+          "upstreamIdentity": "cv.ml.Boost.setBoostType(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|OpenCvSharp.ML.BoostTypes BoostType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 159,
+          "upstreamIdentity": "cv.ml.Boost.getWeakCount()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Int32 WeakCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 160,
+          "upstreamIdentity": "cv.ml.Boost.setWeakCount(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Int32 WeakCount"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 161,
+          "upstreamIdentity": "cv.ml.Boost.getWeightTrimRate()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_get_weight_trim_rate"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Double WeightTrimRate"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 162,
+          "upstreamIdentity": "cv.ml.Boost.setWeightTrimRate(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_set_weight_trim_rate"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|property|instance;get:public;set:public|System.Double WeightTrimRate"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 164,
+          "upstreamIdentity": "cv.ml.Boost.create()-\u003EPtr\u003CBoost\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|method|public;static|OpenCvSharp.ML.Boost Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 165,
+          "upstreamIdentity": "cv.ml.Boost.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CBoost\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_boost_load"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.Boost|method|public;static|OpenCvSharp.ML.Boost Load(System.String filepath,System.String? nodeName=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        }
+      ]
     }
   ],
   "sourceReviewedExtensions": [
@@ -471,6 +1009,17 @@
       ],
       "managedMembers": [
         "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetAnnealEnergySeed(System.UInt64 seed)"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv.ml.RTrees.getOOBError()-\u003Edouble",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "adaptation": "OpenCV 5.0.0 keeps this public virtual method outside CV_WRAP; the binding exposes its scalar return without changing ownership or training semantics.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_rtrees_get_oob_error"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.RTrees|property|instance;get:public|System.Double OobError"
       ]
     }
   ]

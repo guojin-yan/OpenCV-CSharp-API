@@ -38,6 +38,14 @@ namespace OpenCvSharp.Tests.ML
             Assert.Equal(1, (int)ANN_MLPTrainFlags.UpdateWeights);
             Assert.Equal(2, (int)ANN_MLPTrainFlags.NoInputScale);
             Assert.Equal(4, (int)ANN_MLPTrainFlags.NoOutputScale);
+            Assert.Equal(0, (int)DTreesPredictionFlags.Auto);
+            Assert.Equal(1 << 8, (int)DTreesPredictionFlags.Sum);
+            Assert.Equal(2 << 8, (int)DTreesPredictionFlags.MaxVote);
+            Assert.Equal(3 << 8, (int)DTreesPredictionFlags.Mask);
+            Assert.Equal(0, (int)BoostTypes.Discrete);
+            Assert.Equal(1, (int)BoostTypes.Real);
+            Assert.Equal(2, (int)BoostTypes.Logit);
+            Assert.Equal(3, (int)BoostTypes.Gentle);
         }
 
         [Fact]
@@ -62,6 +70,9 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentNullException>(() => SVM.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => NormalBayesClassifier.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => ANN_MLP.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => DTrees.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => RTrees.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => Boost.Load(null!));
 
                 Assert.Throws<ArgumentException>(() => TrainData.LoadFromCsv("data\0file.csv", 0));
                 Assert.Throws<ArgumentException>(() => KNearest.Load("model\0file.yml"));
@@ -69,6 +80,12 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentException>(() => NormalBayesClassifier.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => NormalBayesClassifier.Load("model.yml", "node\0name"));
                 Assert.Throws<ArgumentException>(() => ANN_MLP.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => DTrees.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => RTrees.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => Boost.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => DTrees.Load("model.yml", "node\0name"));
+                Assert.Throws<ArgumentException>(() => RTrees.Load("model.yml", "node\0name"));
+                Assert.Throws<ArgumentException>(() => Boost.Load("model.yml", "node\0name"));
             }
         }
 
@@ -179,6 +196,258 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ObjectDisposedException>(() => ann.GetLayerSizes());
                 Assert.Throws<ObjectDisposedException>(() => ann.GetWeights(0));
                 Assert.Throws<ObjectDisposedException>(() => ann.SetAnnealEnergySeed(1));
+
+                DTrees dtrees = DTrees.Create();
+                dtrees.Dispose();
+                Assert.True(dtrees.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => dtrees.MaxDepth);
+                Assert.Throws<ObjectDisposedException>(() => dtrees.GetPriors());
+
+                RTrees rtrees = RTrees.Create();
+                rtrees.Dispose();
+                Assert.True(rtrees.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => rtrees.TermCriteria);
+                Assert.Throws<ObjectDisposedException>(() => rtrees.GetVarImportance());
+                Assert.Throws<ObjectDisposedException>(() => rtrees.GetVotes(samples));
+                Assert.Throws<ObjectDisposedException>(() => rtrees.OobError);
+
+                Boost boost = Boost.Create();
+                boost.Dispose();
+                Assert.True(boost.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => boost.BoostType);
+                Assert.Throws<ObjectDisposedException>(() => boost.WeightTrimRate);
+            }
+        }
+
+        [Fact]
+        public void TreeModelDefaultsPropertiesAndPriorsRoundTripWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var dtrees = DTrees.Create())
+            using (var rtrees = RTrees.Create())
+            using (var boost = Boost.Create())
+            {
+                Assert.Equal(10, dtrees.MaxCategories);
+                Assert.Equal(int.MaxValue, dtrees.MaxDepth);
+                Assert.Equal(10, dtrees.MinSampleCount);
+                Assert.Equal(10, dtrees.CVFolds);
+                Assert.False(dtrees.UseSurrogates);
+                Assert.True(dtrees.Use1SERule);
+                Assert.True(dtrees.TruncatePrunedTree);
+                Assert.Equal(0.01F, dtrees.RegressionAccuracy, 5);
+
+                Assert.Equal(5, rtrees.MaxDepth);
+                Assert.Equal(0, rtrees.CVFolds);
+                Assert.False(rtrees.Use1SERule);
+                Assert.False(rtrees.TruncatePrunedTree);
+                Assert.False(rtrees.CalculateVarImportance);
+                Assert.Equal(0, rtrees.ActiveVarCount);
+                Assert.Equal(TermCriteriaTypes.CountOrEps, rtrees.TermCriteria.Type);
+                Assert.Equal(50, rtrees.TermCriteria.MaxCount);
+                Assert.Equal(0.1, rtrees.TermCriteria.Epsilon, 8);
+                Assert.Equal(0.0, rtrees.OobError, 8);
+
+                Assert.Equal(1, boost.MaxDepth);
+                Assert.Equal(0, boost.CVFolds);
+                Assert.Equal(BoostTypes.Real, boost.BoostType);
+                Assert.Equal(100, boost.WeakCount);
+                Assert.Equal(0.95, boost.WeightTrimRate, 8);
+
+                dtrees.MaxCategories = 12;
+                dtrees.MaxDepth = 4;
+                dtrees.MinSampleCount = 3;
+                dtrees.CVFolds = 0;
+                dtrees.UseSurrogates = true;
+                dtrees.Use1SERule = false;
+                dtrees.TruncatePrunedTree = false;
+                dtrees.RegressionAccuracy = 0.02F;
+                Assert.Equal(12, dtrees.MaxCategories);
+                Assert.Equal(4, dtrees.MaxDepth);
+                Assert.Equal(3, dtrees.MinSampleCount);
+                Assert.Equal(0, dtrees.CVFolds);
+                Assert.True(dtrees.UseSurrogates);
+                Assert.False(dtrees.Use1SERule);
+                Assert.False(dtrees.TruncatePrunedTree);
+                Assert.Equal(0.02F, dtrees.RegressionAccuracy, 5);
+                Assert.Throws<OpenCvException>(() => dtrees.MaxDepth = -1);
+                Assert.Throws<OpenCvException>(() => dtrees.RegressionAccuracy = -0.1F);
+                Assert.Throws<ArgumentOutOfRangeException>(() => dtrees.Predict(new Mat(), DTreesPredictionFlags.Mask));
+                Assert.Throws<ArgumentNullException>(() => dtrees.SetPriors(null!));
+                Assert.Throws<ArgumentNullException>(() => dtrees.GetPriors(null!));
+
+                rtrees.CalculateVarImportance = true;
+                rtrees.ActiveVarCount = 1;
+                rtrees.TermCriteria = TermCriteria.ByCountAndEpsilon(8, 0.01);
+                Assert.True(rtrees.CalculateVarImportance);
+                Assert.Equal(1, rtrees.ActiveVarCount);
+                Assert.Equal(TermCriteria.ByCountAndEpsilon(8, 0.01), rtrees.TermCriteria);
+                Assert.Throws<ArgumentNullException>(() => rtrees.GetVarImportance(null!));
+                Assert.Throws<ArgumentNullException>(() => rtrees.GetVotes(null!));
+                Assert.Throws<ArgumentNullException>(() => rtrees.GetVotes(new Mat(), null!));
+                Assert.Throws<ArgumentOutOfRangeException>(() => rtrees.GetVotes(new Mat(), DTreesPredictionFlags.Mask));
+
+                Assert.Throws<ArgumentOutOfRangeException>(() => boost.BoostType = (BoostTypes)99);
+                boost.BoostType = BoostTypes.Discrete;
+                boost.WeakCount = 12;
+                boost.WeightTrimRate = 0.8;
+                Assert.Equal(BoostTypes.Discrete, boost.BoostType);
+                Assert.Equal(12, boost.WeakCount);
+                Assert.Equal(0.8, boost.WeightTrimRate, 8);
+
+                var priors = new Mat(1, 2, MatType.CV_32FC1);
+                priors.CopyFrom<float>(new float[] { 1.0F, 2.0F });
+                dtrees.SetPriors(priors);
+                priors.CopyFrom<float>(new float[] { 2.0F, 3.0F });
+                priors.Dispose();
+
+                using (Mat first = dtrees.GetPriors())
+                {
+                    Assert.Equal(new float[] { 2.0F, 3.0F }, first.ToArray<float>());
+                    first.SetTo(new Scalar(99.0));
+                }
+
+                using (Mat second = dtrees.GetPriors())
+                using (Mat empty = new Mat())
+                {
+                    Assert.Equal(new float[] { 2.0F, 3.0F }, second.ToArray<float>());
+                    dtrees.SetPriors(empty);
+                }
+            }
+        }
+
+        [Fact]
+        public void TreeModelsTrainVotePersistAndOwnOutputsWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            string modelDir = TestEnvironment.GetMlModelDirVariable() ?? Path.GetTempPath();
+            string dtreesPath = Path.Combine(modelDir, "opencv-csharp-ml-dtrees-模型.yml");
+            string rtreesPath = Path.Combine(modelDir, "opencv-csharp-ml-rtrees-模型.yml");
+            string boostPath = Path.Combine(modelDir, "opencv-csharp-ml-boost-模型.yml");
+
+            using (var samples = CreateSamples())
+            using (var responses = CreateResponses())
+            using (var query = new Mat(1, 2, MatType.CV_32FC1))
+            using (var dtreesResults = new Mat())
+            using (var rtreesResults = new Mat())
+            using (var boostResults = new Mat())
+            using (var dtrees = DTrees.Create())
+            using (var rtrees = RTrees.Create())
+            using (var boost = Boost.Create())
+            {
+                query.CopyFrom<float>(new float[] { 0.1F, 0.2F });
+
+                dtrees.MaxDepth = 4;
+                dtrees.MinSampleCount = 1;
+                dtrees.CVFolds = 0;
+                Assert.True(dtrees.Train(samples, SampleTypes.RowSample, responses));
+                float dtreesPrediction = dtrees.Predict(query, DTreesPredictionFlags.Auto, dtreesResults);
+                Assert.True(dtreesPrediction == 0.0F || dtreesPrediction == 1.0F);
+                Assert.Equal(1, dtreesResults.Rows);
+                dtrees.Save(dtreesPath);
+
+                Cv2.SetRngSeed(12345);
+                rtrees.MaxDepth = 4;
+                rtrees.MinSampleCount = 1;
+                rtrees.CalculateVarImportance = true;
+                rtrees.ActiveVarCount = 1;
+                rtrees.TermCriteria = TermCriteria.ByCount(8);
+                Assert.True(rtrees.Train(samples, SampleTypes.RowSample, responses));
+                float rtreesPrediction = rtrees.Predict(query, rtreesResults);
+                Assert.True(rtreesPrediction == 0.0F || rtreesPrediction == 1.0F);
+                Assert.True(double.IsFinite(rtrees.OobError));
+
+                using (Mat votes = rtrees.GetVotes(query, DTreesPredictionFlags.MaxVote))
+                using (Mat sumVotes = rtrees.GetVotes(query, DTreesPredictionFlags.Sum, StatModelFlags.RawOutput))
+                using (Mat callerVotes = new Mat())
+                using (Mat importance = rtrees.GetVarImportance())
+                {
+                    rtrees.GetVotes(query, callerVotes, DTreesPredictionFlags.MaxVote);
+                    Assert.Equal(2, votes.Rows);
+                    Assert.Equal(2, votes.Cols);
+                    Assert.Equal(votes.ToArray<int>(), callerVotes.ToArray<int>());
+                    Assert.Equal(1, sumVotes.Rows);
+                    Assert.Equal(8, sumVotes.Cols);
+                    Assert.Equal((UIntPtr)2U, importance.Total);
+                    importance.SetTo(new Scalar(123.0));
+                }
+
+                using (Mat secondImportance = rtrees.GetVarImportance())
+                {
+                    Assert.DoesNotContain(123.0F, secondImportance.ToArray<float>());
+                }
+                rtrees.Save(rtreesPath);
+
+                boost.BoostType = BoostTypes.Discrete;
+                boost.WeakCount = 8;
+                boost.WeightTrimRate = 0.9;
+                boost.MinSampleCount = 1;
+                Assert.True(boost.Train(samples, SampleTypes.RowSample, responses));
+                float boostPrediction = boost.Predict(query, boostResults);
+                Assert.True(boostPrediction == 0.0F || boostPrediction == 1.0F);
+                boost.Save(boostPath);
+            }
+
+            try
+            {
+                using (var query = new Mat(1, 2, MatType.CV_32FC1))
+                using (var dtrees = DTrees.Load(dtreesPath))
+                using (var rtrees = RTrees.Load(rtreesPath))
+                using (var boost = Boost.Load(boostPath))
+                {
+                    query.CopyFrom<float>(new float[] { 0.1F, 0.2F });
+                    Assert.True(dtrees.IsTrained);
+                    Assert.True(rtrees.IsTrained);
+                    Assert.True(boost.IsTrained);
+                    Assert.True(dtrees.Predict(query) == 0.0F || dtrees.Predict(query) == 1.0F);
+                    Assert.True(rtrees.Predict(query) == 0.0F || rtrees.Predict(query) == 1.0F);
+                    Assert.True(boost.Predict(query) == 0.0F || boost.Predict(query) == 1.0F);
+                }
+            }
+            finally
+            {
+                DeleteModelFiles(dtreesPath, rtreesPath, boostPath);
+            }
+        }
+
+        [Fact]
+        public void RTreesRegressionReturnsPerTreeResponsesWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var samples = CreateRegressionSamples())
+            using (var responses = CreateRegressionResponses())
+            using (var query = new Mat(1, 2, MatType.CV_32FC1))
+            using (var results = new Mat())
+            using (var model = RTrees.Create())
+            {
+                query.CopyFrom<float>(new float[] { 2.5F, 1.0F });
+                Cv2.SetRngSeed(54321);
+                model.MaxDepth = 4;
+                model.MinSampleCount = 1;
+                model.TermCriteria = TermCriteria.ByCount(5);
+                Assert.True(model.Train(samples, SampleTypes.RowSample, responses));
+                Assert.False(model.IsClassifier);
+                float prediction = model.Predict(query, results);
+                Assert.True(float.IsFinite(prediction));
+                Assert.Equal(1, results.Rows);
+
+                using (Mat votes = model.GetVotes(query, DTreesPredictionFlags.Sum))
+                {
+                    Assert.Equal(1, votes.Rows);
+                    Assert.Equal(5, votes.Cols);
+                    Assert.All(votes.ToArray<float>(), value => Assert.True(float.IsFinite(value)));
+                }
             }
         }
 
@@ -534,6 +803,45 @@ namespace OpenCvSharp.Tests.ML
             var responses = new Mat(6, 1, MatType.CV_32FC1);
             responses.CopyFrom<float>(new float[] { -2.0F, 0.0F, 0.0F, 2.0F, 0.0F, 0.0F });
             return responses;
+        }
+
+        private static Mat CreateRegressionSamples()
+        {
+            var samples = new Mat(6, 2, MatType.CV_32FC1);
+            samples.CopyFrom<float>(new float[]
+            {
+                0.0F, 0.0F,
+                1.0F, 0.0F,
+                2.0F, 1.0F,
+                3.0F, 1.0F,
+                4.0F, 2.0F,
+                5.0F, 2.0F
+            });
+            return samples;
+        }
+
+        private static Mat CreateRegressionResponses()
+        {
+            var responses = new Mat(6, 1, MatType.CV_32FC1);
+            responses.CopyFrom<float>(new float[] { 0.0F, 1.0F, 3.0F, 4.0F, 6.0F, 7.0F });
+            return responses;
+        }
+
+        private static void DeleteModelFiles(params string[] paths)
+        {
+            foreach (string path in paths)
+            {
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (IOException)
+                {
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
+            }
         }
 
     }

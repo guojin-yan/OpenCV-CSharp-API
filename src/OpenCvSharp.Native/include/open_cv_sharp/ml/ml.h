@@ -137,6 +137,30 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_ann_mlp_load(
     const char* filepath,
     jyppx_ocv_ml_model** model);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_create(
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_create(
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_create(
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_ml_model_release_handle(
     jyppx_ocv_ml_model* model);
 
@@ -336,3 +360,83 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_ann_mlp_get_weights(
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed(
     jyppx_ocv_ml_model* model,
     unsigned long long seed);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_get_regression_accuracy(
+    const jyppx_ocv_ml_model* model,
+    float* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_set_regression_accuracy(
+    jyppx_ocv_ml_model* model,
+    float value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_get_priors(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_dtrees_set_priors(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* priors);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_get_term_criteria(
+    const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_set_term_criteria(
+    jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_get_var_importance(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_get_votes(
+    const jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    jyppx_ocv_mat* results,
+    int flags);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_rtrees_get_oob_error(
+    const jyppx_ocv_ml_model* model,
+    double* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_get_weight_trim_rate(
+    const jyppx_ocv_ml_model* model,
+    double* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_set_weight_trim_rate(
+    jyppx_ocv_ml_model* model,
+    double value);

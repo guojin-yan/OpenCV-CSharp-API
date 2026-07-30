@@ -8,13 +8,13 @@
 
 - Training data: `TrainData` from in-memory matrices or CSV files.
 - Model base: `StatModel` state, training, prediction, error calculation, save, and clear.
-- Models: `KNearest`, `SVM`, `NormalBayesClassifier`, and `ANN_MLP`.
+- Models: `KNearest`, `SVM`, `NormalBayesClassifier`, `DTrees`, `RTrees`, `Boost`, and `ANN_MLP`.
 - Parameter grids: `ParamGrid` and `SVM.GetDefaultGrid`.
 - Enums: sample layout, variable type, model flags, KNN algorithm, SVM type, SVM kernel, and SVM parameter ids.
 
 - 训练数据：从内存矩阵或 CSV 文件创建 `TrainData`。
 - 模型基类：`StatModel` 状态、训练、预测、误差计算、保存和清理。
-- 模型：`KNearest`、`SVM`、`NormalBayesClassifier` 和 `ANN_MLP`。
+- 模型：`KNearest`、`SVM`、`NormalBayesClassifier`、`DTrees`、`RTrees`、`Boost` 和 `ANN_MLP`。
 - 参数网格：`ParamGrid` 与 `SVM.GetDefaultGrid`。
 - 枚举：样本布局、变量类型、模型标志、KNN 算法、SVM 类型、SVM 核函数和 SVM 参数 id。
 
@@ -87,3 +87,30 @@ ann.Train(samples, SampleTypes.RowSample, annResponses);
 
 using Mat weights = ann.GetWeights(1);
 ```
+
+## Tree Models
+
+`DTrees` exposes the shared tree parameters and is the managed base class of `RTrees` and `Boost`, matching the OpenCV inheritance model. `RTrees` adds forest termination criteria, variable-importance calculation, per-tree responses or class-vote counts, and the source-reviewed OpenCV 5.0.0 out-of-bag error. `Boost` adds a typed boosting algorithm, weak-learner count, and weight-trimming threshold.
+
+`DTrees.GetPriors()`, `RTrees.GetVarImportance()`, and every allocating `RTrees.GetVotes()` overload return independent `Mat` values. Modifying or disposing those outputs does not mutate the model. `DTrees.SetPriors(Mat)` follows OpenCV's exact shallow `cv::Mat` assignment: the model keeps reference-counted ownership after the caller disposes its wrapper, while caller mutations to the same underlying matrix remain visible until the priors are replaced, training consumes or clears the state, or the model is disposed.
+
+`DTreesPredictionFlags.Auto`, `Sum`, and `MaxVote` are valid prediction modes. `Mask` is exposed because it is part of the upstream enum contract, but it is only a bit mask and managed prediction/vote methods reject it as a standalone mode. Combine a tree mode with `StatModelFlags.RawOutput` through the separate `flags` argument.
+
+Random-forest training uses OpenCV's current-thread global RNG. Call `OpenCvSharp.Core.Cv2.SetRngSeed` immediately before training when a repeatable local sequence is required, and do not interleave other RNG-consuming operations on that thread. Model configuration, training, clearing, and disposal are mutable lifecycle operations and must not race with prediction. After successful training, callers may coordinate concurrent read-only prediction according to their own model lifetime policy; the wrapper does not add locking.
+
+```csharp
+using RTrees forest = RTrees.Create();
+forest.MaxDepth = 4;
+forest.MinSampleCount = 1;
+forest.CalculateVarImportance = true;
+forest.ActiveVarCount = 1;
+forest.TermCriteria = TermCriteria.ByCount(32);
+
+OpenCvSharp.Core.Cv2.SetRngSeed(12345);
+forest.Train(samples, SampleTypes.RowSample, responses);
+
+using Mat votes = forest.GetVotes(samples, DTreesPredictionFlags.MaxVote);
+using Mat importance = forest.GetVarImportance();
+```
+
+OpenCV's non-`CV_WRAP` `DTrees::getRoots`, `getNodes`, `getSplits`, and `getSubsets` return borrowed internal vectors whose contents and indexes are invalidated by mutable model operations. They are intentionally not projected as borrowed managed objects. A future API may expose copied immutable snapshots only after their cross-version serialization and invalidation contract is independently established.

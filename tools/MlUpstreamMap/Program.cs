@@ -14,17 +14,23 @@ internal static class Program
             .Concat(new[] { 70, 71 })
             .Concat(Enumerable.Range(73, 20))
             .Concat(Enumerable.Range(96, 7)));
-    private static readonly HashSet<int> Selected = new(
+    private static readonly HashSet<int> AnnMlpSelected = new(
         Enumerable.Range(168, 29).Concat(Enumerable.Range(199, 3)));
+    private static readonly HashSet<int> TreeModelsSelected = new(
+        Enumerable.Range(125, 20)
+            .Concat(Enumerable.Range(146, 10))
+            .Concat(Enumerable.Range(157, 6))
+            .Concat(Enumerable.Range(164, 2)));
+    private static readonly HashSet<int> Selected = new(AnnMlpSelected.Concat(TreeModelsSelected));
     private static readonly string[] Allowed =
     {
         "implemented", "missing", "intentionally-omitted", "upstream-conditional", "unsupported", "non-callable-metadata"
     };
     private const string ClaimedSlice = "opencv2/ml/ml.hpp compatibility include measured through the parser-emitted OpenCV 5.0.0 contrib ML public source header";
     private const int NegativeFixtureCount = 17;
-    private const int ManagedTypeAdditions = 4;
-    private const int ManagedMemberAdditions = 39;
-    private const int NativeEntrypointAdditions = 14;
+    private const int ManagedTypeAdditions = 9;
+    private const int ManagedMemberAdditions = 78;
+    private const int NativeEntrypointAdditions = 37;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification, string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput, bool Initialize, bool Check);
     private sealed class RawDocument
@@ -109,7 +115,7 @@ internal static class Program
         public string FamilyInventorySha256 { get; init; } = "";
         public int SelectedFamilyCount { get; init; }
         public int SelectedDeclarationCount { get; init; }
-        public int SourceReviewedExtensionCount { get; init; } = 1;
+        public int SourceReviewedExtensionCount { get; init; } = 2;
         public int ManagedPublicTypeAdditionCount { get; init; } = ManagedTypeAdditions;
         public int ManagedPublicMemberAdditionCount { get; init; } = ManagedMemberAdditions;
         public int NativeEntrypointAdditionCount { get; init; } = NativeEntrypointAdditions;
@@ -145,10 +151,10 @@ internal static class Program
     }
     private sealed class SourceReviewedExtension
     {
-        public string UpstreamIdentity { get; init; } = "cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG& rng)->void";
+        public string UpstreamIdentity { get; init; } = "";
         public string SourceHeader { get; init; } = "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp";
-        public string Adaptation { get; init; } = "The non-CV_WRAP C++ RNG parameter is represented as a stable unsigned 64-bit seed; it is intentionally excluded from parser-derived counts.";
-        public List<string> NativeEntrypoints { get; init; } = new() { "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed" };
+        public string Adaptation { get; init; } = "";
+        public List<string> NativeEntrypoints { get; init; } = new();
         public List<string> ManagedMembers { get; init; } = new();
     }
 
@@ -188,7 +194,7 @@ internal static class Program
                 ManagedEvidenceCount = classifications.Declarations.SelectMany(x => x.ManagedMembers).Distinct(Ordinal).Count(),
                 FamilyInventoryPath = Rel(options.Repository, options.FamilyOutput),
                 FamilyInventorySha256 = Sha256(familyText),
-                SelectedFamilyCount = 1,
+                SelectedFamilyCount = 2,
                 SelectedDeclarationCount = Selected.Count,
                 RepositoryWideUpstreamParityClaimed = false
             };
@@ -254,7 +260,7 @@ internal static class Program
             {
                 row.Classification = "implemented";
                 row.Reason = Selected.Contains(declaration.Ordinal)
-                    ? "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample."
+                    ? SelectedReason(declaration.Ordinal)
                     : "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.";
                 row.NativeEntrypoints.AddRange(NativeEvidence(declaration.Ordinal, native));
                 row.ManagedMembers.AddRange(ManagedEvidence(declaration.Ordinal, managed));
@@ -267,14 +273,21 @@ internal static class Program
         return result;
     }
 
+    private static string SelectedReason(int ordinal)
+    {
+        if (AnnMlpSelected.Contains(ordinal))
+            return "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
+        if (TreeModelsSelected.Contains(ordinal))
+            return "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
+        throw new InvalidOperationException("No selected-family rationale for ordinal " + ordinal);
+    }
+
     private static string MissingReason(int ordinal)
     {
         if (ordinal is 12 or 31)
             return "This TrainData pointer-buffer callable has no current stable span or caller-buffer ABI contract and remains an explicit full-profile gap.";
         if (ordinal is >= 107 and <= 122)
             return "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.";
-        if (ordinal is >= 125 and <= 165)
-            return "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.";
         if (ordinal is >= 203 and <= 220)
             return "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.";
         if (ordinal is >= 224 and <= 240)
@@ -324,6 +337,28 @@ internal static class Program
             100 => N("jyppx_ocv_ml_svm_get_default_grid"),
             101 => N("jyppx_ocv_ml_svm_create"),
             102 => N("jyppx_ocv_ml_svm_load"),
+            125 or 127 or 129 or 131 or 133 or 135 or 137 => N("jyppx_ocv_ml_dtrees_get_int"),
+            126 or 128 or 130 or 132 or 134 or 136 or 138 => N("jyppx_ocv_ml_dtrees_set_int"),
+            139 => N("jyppx_ocv_ml_dtrees_get_regression_accuracy"),
+            140 => N("jyppx_ocv_ml_dtrees_set_regression_accuracy"),
+            141 => N("jyppx_ocv_ml_dtrees_get_priors"),
+            142 => N("jyppx_ocv_ml_dtrees_set_priors"),
+            143 => N("jyppx_ocv_ml_dtrees_create"),
+            144 => N("jyppx_ocv_ml_dtrees_load"),
+            146 or 148 => N("jyppx_ocv_ml_rtrees_get_int"),
+            147 or 149 => N("jyppx_ocv_ml_rtrees_set_int"),
+            150 => N("jyppx_ocv_ml_rtrees_get_term_criteria"),
+            151 => N("jyppx_ocv_ml_rtrees_set_term_criteria"),
+            152 => N("jyppx_ocv_ml_rtrees_get_var_importance"),
+            153 => N("jyppx_ocv_ml_rtrees_get_votes"),
+            154 => N("jyppx_ocv_ml_rtrees_create"),
+            155 => N("jyppx_ocv_ml_rtrees_load"),
+            157 or 159 => N("jyppx_ocv_ml_boost_get_int"),
+            158 or 160 => N("jyppx_ocv_ml_boost_set_int"),
+            161 => N("jyppx_ocv_ml_boost_get_weight_trim_rate"),
+            162 => N("jyppx_ocv_ml_boost_set_weight_trim_rate"),
+            164 => N("jyppx_ocv_ml_boost_create"),
+            165 => N("jyppx_ocv_ml_boost_load"),
             168 => N("jyppx_ocv_ml_ann_mlp_set_train_method"),
             169 or 195 => N("jyppx_ocv_ml_ann_mlp_get_int"),
             170 => N("jyppx_ocv_ml_ann_mlp_set_activation_function"),
@@ -423,6 +458,30 @@ internal static class Program
             100 => M(managed, "SVM", " GetDefaultGrid("),
             101 => M(managed, "SVM", " Create("),
             102 => M(managed, "SVM", " Load("),
+            125 or 126 => M(managed, "DTrees", "|property|", " MaxCategories"),
+            127 or 128 => M(managed, "DTrees", "|property|", " MaxDepth"),
+            129 or 130 => M(managed, "DTrees", "|property|", " MinSampleCount"),
+            131 or 132 => M(managed, "DTrees", "|property|", " CVFolds"),
+            133 or 134 => M(managed, "DTrees", "|property|", " UseSurrogates"),
+            135 or 136 => M(managed, "DTrees", "|property|", " Use1SERule"),
+            137 or 138 => M(managed, "DTrees", "|property|", " TruncatePrunedTree"),
+            139 or 140 => M(managed, "DTrees", "|property|", " RegressionAccuracy"),
+            141 => Exact(managed, "MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|OpenCvSharp.Core.Mat GetPriors()"),
+            142 => M(managed, "DTrees", " SetPriors("),
+            143 => M(managed, "DTrees", "|method|public;static|", " Create("),
+            144 => M(managed, "DTrees", "|method|public;static|", " Load("),
+            146 or 147 => M(managed, "RTrees", "|property|", " CalculateVarImportance"),
+            148 or 149 => M(managed, "RTrees", "|property|", " ActiveVarCount"),
+            150 or 151 => M(managed, "RTrees", "|property|", " TermCriteria"),
+            152 => Exact(managed, "MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|OpenCvSharp.Core.Mat GetVarImportance()"),
+            153 => M(managed, "RTrees", "|method|public;instance|System.Void", " GetVotes("),
+            154 => M(managed, "RTrees", "|method|public;static|", " Create("),
+            155 => M(managed, "RTrees", "|method|public;static|", " Load("),
+            157 or 158 => M(managed, "Boost", "|property|", " BoostType"),
+            159 or 160 => M(managed, "Boost", "|property|", " WeakCount"),
+            161 or 162 => M(managed, "Boost", "|property|", " WeightTrimRate"),
+            164 => M(managed, "Boost", "|method|public;static|", " Create("),
+            165 => M(managed, "Boost", "|method|public;static|", " Load("),
             168 => M(managed, "ANN_MLP", " SetTrainMethod("),
             169 => M(managed, "ANN_MLP", "|property|", " TrainingMethod"),
             170 => M(managed, "ANN_MLP", " SetActivationFunction("),
@@ -498,7 +557,7 @@ internal static class Program
                 Require(row.NativeEntrypoints.Count == 0 && row.ManagedMembers.Count == 0, "Non-implemented ML callable carries evidence at " + i);
             }
         }
-        Require(classifications.Declarations.Count(x => x.Classification == "implemented") == 119 && classifications.Declarations.Count(x => x.Classification == "missing") == 89 && classifications.Declarations.Count(x => x.Classification == "non-callable-metadata") == 33, "ML callable partition drifted.");
+        Require(classifications.Declarations.Count(x => x.Classification == "implemented") == 157 && classifications.Declarations.Count(x => x.Classification == "missing") == 51 && classifications.Declarations.Count(x => x.Classification == "non-callable-metadata") == 33, "ML callable partition drifted.");
         Require(classifications.Declarations.Count(x => x.Classification is "intentionally-omitted" or "upstream-conditional" or "unsupported") == 0, "Unexpected ML classifications were introduced.");
         Require(Existing.All(i => classifications.Declarations[i].Classification == "implemented") && Selected.All(i => classifications.Declarations[i].Classification == "implemented"), "Existing or selected ML correlation is incomplete.");
         if (verifyFiles)
@@ -524,7 +583,7 @@ internal static class Program
         b.AppendLine("callable-count=208");
         b.AppendLine("class-count=13");
         b.AppendLine("enum-count=20");
-        b.AppendLine("source-reviewed-extension-count=1");
+        b.AppendLine("source-reviewed-extension-count=2");
         b.AppendLine("repository-wide-upstream-parity-claimed=false");
         foreach (CompatibilityHeader h in raw.CompatibilityHeaders) b.AppendLine($"compatibility-header={h.Path}|{h.Sha256}|includes={h.Includes}");
         foreach (ExcludedPublicHeader h in raw.ExcludedPublicHeaders) b.AppendLine($"excluded-public-header={h.Path}|reason={h.Reason}");
@@ -538,19 +597,20 @@ internal static class Program
         }
         b.AppendLine();
         b.AppendLine("source-reviewed-extension|cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG& rng)->void|jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed|OpenCvSharp.ML.ANN_MLP.SetAnnealEnergySeed(System.UInt64)|excluded-from-parser-derived-counts");
+        b.AppendLine("source-reviewed-extension|cv.ml.RTrees.getOOBError()->double|jyppx_ocv_ml_rtrees_get_oob_error|OpenCvSharp.ML.RTrees.OobError|excluded-from-parser-derived-counts");
         return b.ToString().Replace("\r\n", "\n", StringComparison.Ordinal);
     }
 
     private static FamilyDocument BuildFamilies(RawDocument raw, ClassificationDocument classifications, string[] managed)
     {
-        var family = new FamilyRow
+        var annMlpFamily = new FamilyRow
         {
             Id = "ml-ann-mlp",
             Rationale = "The selected batch closes all 32 parser-emitted ANN_MLP callables with offline training, prediction, copied topology and weight matrices, typed configuration, persistence, and deterministic disposal."
         };
-        foreach (int i in Selected.OrderBy(x => x))
+        foreach (int i in AnnMlpSelected.OrderBy(x => x))
         {
-            family.Declarations.Add(new FamilyOperation
+            annMlpFamily.Declarations.Add(new FamilyOperation
             {
                 Ordinal = i,
                 UpstreamIdentity = raw.Declarations[i].Identity,
@@ -558,11 +618,40 @@ internal static class Program
                 ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
             });
         }
-        var extension = new SourceReviewedExtension
+        var treeModelsFamily = new FamilyRow
         {
+            Id = "ml-tree-models",
+            Rationale = "The selected batch closes all 38 parser-emitted DTrees, RTrees, and Boost callables with upstream-compatible inheritance, typed configuration, copied matrix outputs, deterministic training coverage, persistence, and disposal validation."
+        };
+        foreach (int i in TreeModelsSelected.OrderBy(x => x))
+        {
+            treeModelsFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = i,
+                UpstreamIdentity = raw.Declarations[i].Identity,
+                NativeEntrypoints = new(classifications.Declarations[i].NativeEntrypoints),
+                ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
+            });
+        }
+        var annMlpExtension = new SourceReviewedExtension
+        {
+            UpstreamIdentity = "cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG& rng)->void",
+            Adaptation = "The non-CV_WRAP C++ RNG parameter is represented as a stable unsigned 64-bit seed; it is intentionally excluded from parser-derived counts.",
+            NativeEntrypoints = new() { "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed" },
             ManagedMembers = new() { M(managed, "ANN_MLP", " SetAnnealEnergySeed(") }
         };
-        return new FamilyDocument { Families = new() { family }, SourceReviewedExtensions = new() { extension } };
+        var rtreesOobExtension = new SourceReviewedExtension
+        {
+            UpstreamIdentity = "cv.ml.RTrees.getOOBError()->double",
+            Adaptation = "OpenCV 5.0.0 keeps this public virtual method outside CV_WRAP; the binding exposes its scalar return without changing ownership or training semantics.",
+            NativeEntrypoints = new() { "jyppx_ocv_ml_rtrees_get_oob_error" },
+            ManagedMembers = new() { M(managed, "RTrees", "|property|", " OobError") }
+        };
+        return new FamilyDocument
+        {
+            Families = new() { annMlpFamily, treeModelsFamily },
+            SourceReviewedExtensions = new() { annMlpExtension, rtreesOobExtension }
+        };
     }
 
     private static void RunNegativeFixtures(RawDocument raw, ClassificationDocument classifications, Options options, string[] native, string[] managed)
