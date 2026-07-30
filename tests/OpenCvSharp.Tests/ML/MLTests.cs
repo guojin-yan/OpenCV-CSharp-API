@@ -52,6 +52,15 @@ namespace OpenCvSharp.Tests.ML
             Assert.Equal(EMCovarianceMatrixTypes.Diagonal, EMCovarianceMatrixTypes.Default);
             Assert.Equal(5, EM.DefaultClustersNumber);
             Assert.Equal(100, EM.DefaultMaxIterations);
+            Assert.Equal(-1, (int)LogisticRegressionRegularizationKinds.Disable);
+            Assert.Equal(0, (int)LogisticRegressionRegularizationKinds.L1);
+            Assert.Equal(1, (int)LogisticRegressionRegularizationKinds.L2);
+            Assert.Equal(0, (int)LogisticRegressionTrainingMethods.Batch);
+            Assert.Equal(1, (int)LogisticRegressionTrainingMethods.MiniBatch);
+            Assert.Equal(0, (int)SVMSGDTypes.Sgd);
+            Assert.Equal(1, (int)SVMSGDTypes.Asgd);
+            Assert.Equal(0, (int)SVMSGDMarginTypes.SoftMargin);
+            Assert.Equal(1, (int)SVMSGDMarginTypes.HardMargin);
 
             var prediction = new EMPredictionResult(-1.25, 1);
             Assert.Equal(-1.25, prediction.LogLikelihood);
@@ -86,6 +95,8 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentNullException>(() => RTrees.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => Boost.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => EM.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => LogisticRegression.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => SVMSGD.Load(null!));
 
                 Assert.Throws<ArgumentException>(() => TrainData.LoadFromCsv("data\0file.csv", 0));
                 Assert.Throws<ArgumentException>(() => KNearest.Load("model\0file.yml"));
@@ -97,10 +108,14 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentException>(() => RTrees.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => Boost.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => EM.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => LogisticRegression.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => SVMSGD.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => DTrees.Load("model.yml", "node\0name"));
                 Assert.Throws<ArgumentException>(() => RTrees.Load("model.yml", "node\0name"));
                 Assert.Throws<ArgumentException>(() => Boost.Load("model.yml", "node\0name"));
                 Assert.Throws<ArgumentException>(() => EM.Load("model.yml", "node\0name"));
+                Assert.Throws<ArgumentException>(() => LogisticRegression.Load("model.yml", "node\0name"));
+                Assert.Throws<ArgumentException>(() => SVMSGD.Load("model.yml", "node\0name"));
             }
         }
 
@@ -241,6 +256,20 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ObjectDisposedException>(() => em.GetCovariances());
                 Assert.Throws<ObjectDisposedException>(() => em.Predict2(samples));
                 Assert.Throws<ObjectDisposedException>(() => em.TrainEM(samples));
+
+                LogisticRegression logistic = LogisticRegression.Create();
+                logistic.Dispose();
+                Assert.True(logistic.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => logistic.LearningRate);
+                Assert.Throws<ObjectDisposedException>(() => logistic.GetLearntThetas());
+                Assert.Throws<ObjectDisposedException>(() => logistic.Predict(samples));
+
+                SVMSGD svmsgd = SVMSGD.Create();
+                svmsgd.Dispose();
+                Assert.True(svmsgd.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => svmsgd.Type);
+                Assert.Throws<ObjectDisposedException>(() => svmsgd.GetWeights());
+                Assert.Throws<ObjectDisposedException>(() => svmsgd.SetOptimalParameters());
             }
         }
 
@@ -889,6 +918,273 @@ namespace OpenCvSharp.Tests.ML
         }
 
         [Fact]
+        public void TrainDataSampleAndValueBuffersPreserveSelectionOrderWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var samples = CreateSamples())
+            using (var responses = CreateResponses())
+            using (var variableIndices = new Mat(1, 1, MatType.CV_32SC1))
+            using (var sampleIndices = new Mat(1, 3, MatType.CV_32SC1))
+            using (var trainData = TrainData.Create(samples, SampleTypes.RowSample, responses))
+            {
+                variableIndices.CopyFrom<int>(new[] { 1 });
+                sampleIndices.CopyFrom<int>(new[] { 1, 4, 5 });
+
+                Assert.Equal(new[] { 5.0F, 6.0F }, trainData.GetSample(4));
+                Assert.Equal(new[] { 6.0F }, trainData.GetSample(4, variableIndices));
+                Assert.Equal(new[] { 0.0F, 0.0F, 1.0F, 5.0F, 5.0F, 6.0F }, trainData.GetValues(0));
+                Assert.Equal(new[] { 0.0F, 5.0F, 6.0F }, trainData.GetValues(0, sampleIndices));
+
+                var sampleDestination = new float[1];
+                var valueDestination = new float[3];
+                trainData.GetSample(4, sampleDestination, variableIndices);
+                trainData.GetValues(0, valueDestination, sampleIndices);
+                Assert.Equal(new[] { 6.0F }, sampleDestination);
+                Assert.Equal(new[] { 0.0F, 5.0F, 6.0F }, valueDestination);
+
+                Assert.Throws<ArgumentNullException>(() => trainData.GetSample(0, (float[])null!));
+                Assert.Throws<ArgumentNullException>(() => trainData.GetValues(0, (float[])null!));
+                Assert.Throws<ArgumentException>(() => trainData.GetSample(0, Array.Empty<float>()));
+                Assert.Throws<ArgumentException>(() => trainData.GetSample(0, new float[3]));
+                Assert.Throws<ArgumentException>(() => trainData.GetValues(0, new float[5]));
+                Assert.Throws<ArgumentException>(() => trainData.GetValues(0, new float[7]));
+                Assert.Throws<OpenCvException>(() => trainData.GetSample(99));
+                Assert.Throws<OpenCvException>(() => trainData.GetValues(99));
+            }
+        }
+
+        [Fact]
+        public void LogisticRegressionDefaultsPropertiesAndArgumentsRoundTripWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var model = LogisticRegression.Create())
+            using (var dst = new Mat())
+            {
+                Assert.Equal(0.001, model.LearningRate, 12);
+                Assert.Equal(1000, model.Iterations);
+                Assert.Equal(LogisticRegressionRegularizationKinds.L2, model.Regularization);
+                Assert.Equal(LogisticRegressionTrainingMethods.Batch, model.TrainingMethod);
+                Assert.Equal(1, model.MiniBatchSize);
+                Assert.Equal(TermCriteria.ByCountAndEpsilon(1000, 0.001), model.TermCriteria);
+                Assert.True(model.IsClassifier);
+                Assert.False(model.IsTrained);
+
+                model.LearningRate = 0.01;
+                model.Iterations = 250;
+                model.Regularization = LogisticRegressionRegularizationKinds.L1;
+                model.TrainingMethod = LogisticRegressionTrainingMethods.MiniBatch;
+                model.MiniBatchSize = 2;
+                model.TermCriteria = TermCriteria.ByCountAndEpsilon(250, 1e-5);
+                Assert.Equal(0.01, model.LearningRate, 12);
+                Assert.Equal(250, model.Iterations);
+                Assert.Equal(LogisticRegressionRegularizationKinds.L1, model.Regularization);
+                Assert.Equal(LogisticRegressionTrainingMethods.MiniBatch, model.TrainingMethod);
+                Assert.Equal(2, model.MiniBatchSize);
+                Assert.Equal(TermCriteria.ByCountAndEpsilon(250, 1e-5), model.TermCriteria);
+
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.LearningRate = 0.0);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.LearningRate = double.NaN);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.Iterations = 0);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.Regularization = (LogisticRegressionRegularizationKinds)99);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.TrainingMethod = (LogisticRegressionTrainingMethods)99);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.MiniBatchSize = 0);
+                Assert.Throws<ArgumentNullException>(() => model.GetLearntThetas(null!));
+                model.GetLearntThetas(dst);
+                Assert.True(dst.Empty);
+            }
+        }
+
+        [Fact]
+        public void LogisticRegressionBatchMiniBatchOwnOutputsAndPersistWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            string modelDir = TestEnvironment.GetMlModelDirVariable() ?? Path.GetTempPath();
+            string modelPath = Path.Combine(modelDir, "opencv-csharp-ml-logistic-regression.yml");
+            using (var samples = CreateLinearClassifierSamples())
+            using (var responses = CreateLogisticResponses())
+            using (var negativeQuery = CreateLinearClassifierQuery(-2.5F))
+            using (var positiveQuery = CreateLinearClassifierQuery(2.5F))
+            using (var batch = LogisticRegression.Create())
+            using (var miniBatch = LogisticRegression.Create())
+            {
+                batch.LearningRate = 0.05;
+                batch.Iterations = 1000;
+                batch.Regularization = LogisticRegressionRegularizationKinds.L2;
+                batch.TrainingMethod = LogisticRegressionTrainingMethods.Batch;
+                batch.TermCriteria = TermCriteria.ByCountAndEpsilon(1000, 1e-6);
+                Assert.True(batch.Train(samples, SampleTypes.RowSample, responses));
+                Assert.Equal(0.0F, batch.Predict(negativeQuery));
+                Assert.Equal(1.0F, batch.Predict(positiveQuery));
+
+                miniBatch.LearningRate = 0.05;
+                miniBatch.Iterations = 1000;
+                miniBatch.Regularization = LogisticRegressionRegularizationKinds.Disable;
+                miniBatch.TrainingMethod = LogisticRegressionTrainingMethods.MiniBatch;
+                miniBatch.MiniBatchSize = 2;
+                miniBatch.TermCriteria = TermCriteria.ByCountAndEpsilon(1000, 1e-6);
+                Assert.True(miniBatch.Train(samples, SampleTypes.RowSample, responses));
+                Assert.Equal(0.0F, miniBatch.Predict(negativeQuery));
+                Assert.Equal(1.0F, miniBatch.Predict(positiveQuery));
+
+                using (Mat thetas = batch.GetLearntThetas())
+                using (Mat filledThetas = new Mat())
+                {
+                    batch.GetLearntThetas(filledThetas);
+                    float[] expected = thetas.ToArray<float>();
+                    Assert.NotEmpty(expected);
+                    Assert.Equal(expected, filledThetas.ToArray<float>());
+                    thetas.SetTo(new Scalar(0.0));
+                    using (Mat copiedThetas = batch.GetLearntThetas())
+                    {
+                        Assert.Equal(expected, copiedThetas.ToArray<float>());
+                    }
+                }
+
+                batch.Save(modelPath);
+            }
+
+            try
+            {
+                using (var positiveQuery = CreateLinearClassifierQuery(2.5F))
+                using (var loaded = LogisticRegression.Load(modelPath))
+                {
+                    Assert.True(loaded.IsTrained);
+                    Assert.Equal(1.0F, loaded.Predict(positiveQuery));
+                    using (Mat thetas = loaded.GetLearntThetas())
+                    {
+                        Assert.False(thetas.Empty);
+                    }
+                }
+            }
+            finally
+            {
+                DeleteModelFiles(modelPath);
+            }
+        }
+
+        [Fact]
+        public void SVMSGDDefaultsPropertiesAndArgumentsRoundTripWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var model = SVMSGD.Create())
+            using (var dst = new Mat())
+            {
+                Assert.Equal(SVMSGDTypes.Asgd, model.Type);
+                Assert.Equal(SVMSGDMarginTypes.SoftMargin, model.MarginType);
+                Assert.Equal(0.00001F, model.MarginRegularization, 7);
+                Assert.Equal(0.05F, model.InitialStepSize, 7);
+                Assert.Equal(0.75F, model.StepDecreasingPower, 7);
+                Assert.Equal(TermCriteriaTypes.CountOrEps, model.TermCriteria.Type);
+                Assert.Equal(100000, model.TermCriteria.MaxCount);
+                Assert.Equal(0.00001, model.TermCriteria.Epsilon, 12);
+                Assert.True(model.IsClassifier);
+                Assert.False(model.IsTrained);
+
+                model.Type = SVMSGDTypes.Sgd;
+                model.MarginType = SVMSGDMarginTypes.HardMargin;
+                model.MarginRegularization = 0.001F;
+                model.InitialStepSize = 0.1F;
+                model.StepDecreasingPower = 0.5F;
+                model.TermCriteria = TermCriteria.ByCountAndEpsilon(500, 1e-6);
+                Assert.Equal(SVMSGDTypes.Sgd, model.Type);
+                Assert.Equal(SVMSGDMarginTypes.HardMargin, model.MarginType);
+                Assert.Equal(0.001F, model.MarginRegularization, 7);
+                Assert.Equal(0.1F, model.InitialStepSize, 7);
+                Assert.Equal(0.5F, model.StepDecreasingPower, 7);
+                Assert.Equal(TermCriteria.ByCountAndEpsilon(500, 1e-6), model.TermCriteria);
+
+                model.SetOptimalParameters();
+                Assert.Equal(SVMSGDTypes.Asgd, model.Type);
+                Assert.Equal(SVMSGDMarginTypes.SoftMargin, model.MarginType);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.Type = (SVMSGDTypes)99);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.MarginType = (SVMSGDMarginTypes)99);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.MarginRegularization = 0.0F);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.InitialStepSize = float.NaN);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.StepDecreasingPower = -0.1F);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.SetOptimalParameters((SVMSGDTypes)99));
+                Assert.Throws<ArgumentNullException>(() => model.GetWeights(null!));
+                model.GetWeights(dst);
+                Assert.True(dst.Empty);
+            }
+        }
+
+        [Fact]
+        public void SVMSGDTrainPredictOwnOutputsAndPersistWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            string modelDir = TestEnvironment.GetMlModelDirVariable() ?? Path.GetTempPath();
+            string modelPath = Path.Combine(modelDir, "opencv-csharp-ml-svmsgd.yml");
+            using (var samples = CreateLinearClassifierSamples())
+            using (var responses = CreateSVMSGDResponses())
+            using (var negativeQuery = CreateLinearClassifierQuery(-2.5F))
+            using (var positiveQuery = CreateLinearClassifierQuery(2.5F))
+            using (var model = SVMSGD.Create())
+            {
+                model.SetOptimalParameters(SVMSGDTypes.Asgd, SVMSGDMarginTypes.SoftMargin);
+                model.TermCriteria = TermCriteria.ByCountAndEpsilon(10000, 1e-6);
+                Assert.True(model.Train(samples, SampleTypes.RowSample, responses));
+                Assert.Equal(-1.0F, model.Predict(negativeQuery));
+                Assert.Equal(1.0F, model.Predict(positiveQuery));
+                Assert.True(float.IsFinite(model.Shift));
+
+                using (Mat weights = model.GetWeights())
+                using (Mat filledWeights = new Mat())
+                {
+                    model.GetWeights(filledWeights);
+                    float[] expected = weights.ToArray<float>();
+                    Assert.NotEmpty(expected);
+                    Assert.Equal(expected, filledWeights.ToArray<float>());
+                    weights.SetTo(new Scalar(0.0));
+                    using (Mat copiedWeights = model.GetWeights())
+                    {
+                        Assert.Equal(expected, copiedWeights.ToArray<float>());
+                    }
+                }
+
+                model.Save(modelPath);
+            }
+
+            try
+            {
+                using (var positiveQuery = CreateLinearClassifierQuery(2.5F))
+                using (var loaded = SVMSGD.Load(modelPath))
+                {
+                    Assert.True(loaded.IsTrained);
+                    Assert.Equal(1.0F, loaded.Predict(positiveQuery));
+                    Assert.True(float.IsFinite(loaded.Shift));
+                    using (Mat weights = loaded.GetWeights())
+                    {
+                        Assert.False(weights.Empty);
+                    }
+                }
+            }
+            finally
+            {
+                DeleteModelFiles(modelPath);
+            }
+        }
+
+        [Fact]
         public void KNearestSvmAndBayesSmokeRunWhenNativeSmokeIsEnabled()
         {
             if (!TestEnvironment.IsNativeSmokeEnabled())
@@ -1012,6 +1308,44 @@ namespace OpenCvSharp.Tests.ML
             var responses = new Mat(6, 1, MatType.CV_32SC1);
             responses.CopyFrom<int>(new int[] { 0, 0, 0, 1, 1, 1 });
             return responses;
+        }
+
+        private static Mat CreateLinearClassifierSamples()
+        {
+            var samples = new Mat(8, 2, MatType.CV_32FC1);
+            samples.CopyFrom<float>(new float[]
+            {
+                -4.0F, -1.0F,
+                -3.0F, 0.0F,
+                -2.0F, -0.5F,
+                -1.0F, 0.5F,
+                1.0F, -0.5F,
+                2.0F, 0.5F,
+                3.0F, 0.0F,
+                4.0F, 1.0F
+            });
+            return samples;
+        }
+
+        private static Mat CreateLogisticResponses()
+        {
+            var responses = new Mat(8, 1, MatType.CV_32FC1);
+            responses.CopyFrom<float>(new float[] { 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F });
+            return responses;
+        }
+
+        private static Mat CreateSVMSGDResponses()
+        {
+            var responses = new Mat(8, 1, MatType.CV_32FC1);
+            responses.CopyFrom<float>(new float[] { -1.0F, -1.0F, -1.0F, -1.0F, 1.0F, 1.0F, 1.0F, 1.0F });
+            return responses;
+        }
+
+        private static Mat CreateLinearClassifierQuery(float x)
+        {
+            var query = new Mat(1, 2, MatType.CV_32FC1);
+            query.CopyFrom<float>(new[] { x, 0.0F });
+            return query;
         }
 
         private static Mat CreateAnnSamples()

@@ -325,7 +325,7 @@ Quick install and minimal usage are covered by the [Quick Start](docs/articles/q
 - `PtCloud`: main OpenCV depth/RGB-D package with `RescaleDepth`, `DepthTo3d`, `DepthTo3dSparse`, `RegisterDepth`, `WarpFrame`, `FindPlanes`, `RgbdNormals`, and depth/plane method enums.
 - `Quality`: optional contrib quality package with `QualityMSE`, `QualityPSNR`, `QualitySSIM`, `QualityGMSD`, `QualityBRISQUE`, quality-map output, scalar score helpers, BRISQUE feature extraction, and model/range-file guarded smoke paths.
 - `XPhoto`: optional contrib xphoto package with `WhiteBalancer`, `SimpleWB`, `GrayworldWB`, `LearningBasedWB`, channel gains, DCT denoising, BM3D denoising, oil painting, and BM3D enum wrappers.
-- `ML`: contrib-backed OpenCV machine-learning package with `TrainData`, `ParamGrid`, common `StatModel` operations, `KNearest`, `SVM`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, `ANN_MLP`, model save/load paths, and tiny-matrix smoke coverage.
+- `ML`: contrib-backed OpenCV machine-learning package with `TrainData` scalar-buffer extraction, `ParamGrid`, common `StatModel` operations, `KNearest`, `SVM`, `SVMSGD`, `LogisticRegression`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, `ANN_MLP`, model save/load paths, and tiny-matrix smoke coverage.
 - `ImgHash`: optional contrib perceptual-hash package with `ImgHashBase`, `AverageHash`, `PHash`, `BlockMeanHash`, `ColorMomentHash`, `MarrHildrethHash`, `RadialVarianceHash`, and matching one-shot helpers.
 - `Plot`: optional contrib plot package with `Plot2d`, Y-series and X/Y-series factories, styling setters, and `Mat` render output.
 - `Shape`: optional contrib model-free shape package with `EMDL1`, histogram cost extractors, `ShapeContextDistanceExtractor`, and `HausdorffDistanceExtractor` for tiny descriptor and contour smoke coverage.
@@ -364,7 +364,7 @@ Quick install and minimal usage are covered by the [Quick Start](docs/articles/q
 - `PtCloud`：OpenCV 主线 depth/RGB-D 能力包，包含 `RescaleDepth`、`DepthTo3d`、`DepthTo3dSparse`、`RegisterDepth`、`WarpFrame`、`FindPlanes`、`RgbdNormals` 和 depth/plane 方法枚举。
 - `Quality`：可选 contrib 图像质量能力包，包含 `QualityMSE`、`QualityPSNR`、`QualitySSIM`、`QualityGMSD`、`QualityBRISQUE`、质量图输出、标量评分 helper、BRISQUE 特征提取，以及由模型/range 文件环境变量保护的 smoke 路径。
 - `XPhoto`：可选 contrib xphoto 能力包，包含 `WhiteBalancer`、`SimpleWB`、`GrayworldWB`、`LearningBasedWB`、channel gains、DCT 去噪、BM3D 去噪、oil painting 和 BM3D 枚举封装。
-- `ML`：由 contrib 支撑的 OpenCV 机器学习能力包，包含 `TrainData`、`ParamGrid`、通用 `StatModel` 操作、`KNearest`、`SVM`、`NormalBayesClassifier`、`EM`、`DTrees`、`RTrees`、`Boost`、`ANN_MLP`、模型保存/加载路径和 tiny matrix smoke 覆盖。
+- `ML`：由 contrib 支撑的 OpenCV 机器学习能力包，包含 `TrainData` 标量缓冲提取、`ParamGrid`、通用 `StatModel` 操作、`KNearest`、`SVM`、`SVMSGD`、`LogisticRegression`、`NormalBayesClassifier`、`EM`、`DTrees`、`RTrees`、`Boost`、`ANN_MLP`、模型保存/加载路径和 tiny matrix smoke 覆盖。
 - `ImgHash`：可选 contrib 感知哈希能力包，包含 `ImgHashBase`、`AverageHash`、`PHash`、`BlockMeanHash`、`ColorMomentHash`、`MarrHildrethHash`、`RadialVarianceHash` 以及对应一次性 helper。
 - `Plot`：可选 contrib plot 能力包，包含 `Plot2d`、Y 序列与 X/Y 序列工厂、样式 setter，以及渲染到 `Mat` 的输出路径。
 - `Shape`：可选 contrib 无模型 shape 能力包，包含 `EMDL1`、直方图代价提取器、`ShapeContextDistanceExtractor` 与 `HausdorffDistanceExtractor`，覆盖 tiny descriptor 与 contour smoke。

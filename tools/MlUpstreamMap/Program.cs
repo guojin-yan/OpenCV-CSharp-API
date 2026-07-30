@@ -22,16 +22,26 @@ internal static class Program
             .Concat(Enumerable.Range(146, 10))
             .Concat(Enumerable.Range(157, 6))
             .Concat(Enumerable.Range(164, 2)));
-    private static readonly HashSet<int> Selected = new(AnnMlpSelected.Concat(EmSelected).Concat(TreeModelsSelected));
+    private static readonly HashSet<int> TrainDataBuffersSelected = new(new[] { 12, 31 });
+    private static readonly HashSet<int> LogisticRegressionSelected = new(
+        Enumerable.Range(203, 12).Concat(Enumerable.Range(217, 4)));
+    private static readonly HashSet<int> SVMSGDSelected = new(Enumerable.Range(224, 17));
+    private static readonly HashSet<int> Selected = new(
+        AnnMlpSelected
+            .Concat(EmSelected)
+            .Concat(TreeModelsSelected)
+            .Concat(TrainDataBuffersSelected)
+            .Concat(LogisticRegressionSelected)
+            .Concat(SVMSGDSelected));
     private static readonly string[] Allowed =
     {
         "implemented", "missing", "intentionally-omitted", "upstream-conditional", "unsupported", "non-callable-metadata"
     };
     private const string ClaimedSlice = "opencv2/ml/ml.hpp compatibility include measured through the parser-emitted OpenCV 5.0.0 contrib ML public source header";
     private const int NegativeFixtureCount = 17;
-    private const int ManagedTypeAdditions = 12;
-    private const int ManagedMemberAdditions = 108;
-    private const int NativeEntrypointAdditions = 51;
+    private const int ManagedTypeAdditions = 18;
+    private const int ManagedMemberAdditions = 147;
+    private const int NativeEntrypointAdditions = 75;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification, string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput, bool Initialize, bool Check);
     private sealed class RawDocument
@@ -195,7 +205,7 @@ internal static class Program
                 ManagedEvidenceCount = classifications.Declarations.SelectMany(x => x.ManagedMembers).Distinct(Ordinal).Count(),
                 FamilyInventoryPath = Rel(options.Repository, options.FamilyOutput),
                 FamilyInventorySha256 = Sha256(familyText),
-                SelectedFamilyCount = 3,
+                SelectedFamilyCount = 6,
                 SelectedDeclarationCount = Selected.Count,
                 RepositoryWideUpstreamParityClaimed = false
             };
@@ -282,6 +292,12 @@ internal static class Program
             return "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
         if (TreeModelsSelected.Contains(ordinal))
             return "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
+        if (TrainDataBuffersSelected.Contains(ordinal))
+            return "The selected TrainData buffer batch copies sample and variable values through exact-length count/fill C ABI operations with ordered optional indexes, native smoke, and net8/net10 managed tests.";
+        if (LogisticRegressionSelected.Contains(ordinal))
+            return "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
+        if (SVMSGDSelected.Contains(ordinal))
+            return "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
         throw new InvalidOperationException("No selected-family rationale for ordinal " + ordinal);
     }
 
@@ -302,7 +318,9 @@ internal static class Program
         {
             4 => N("jyppx_ocv_ml_param_grid_create"),
             >= 6 and <= 11 or 28 or 33 => N("jyppx_ocv_ml_train_data_get_int"),
+            12 => N("jyppx_ocv_ml_train_data_get_sample_count", "jyppx_ocv_ml_train_data_get_sample_fill"),
             >= 13 and <= 30 or 32 or >= 34 and <= 36 or 40 => N("jyppx_ocv_ml_train_data_get_mat"),
+            31 => N("jyppx_ocv_ml_train_data_get_values_count", "jyppx_ocv_ml_train_data_get_values_fill"),
             37 => N("jyppx_ocv_ml_train_data_set_train_test_split"),
             38 => N("jyppx_ocv_ml_train_data_set_train_test_split_ratio"),
             39 => N("jyppx_ocv_ml_train_data_shuffle_train_test"),
@@ -387,6 +405,27 @@ internal static class Program
             199 => N("jyppx_ocv_ml_ann_mlp_get_weights"),
             200 => N("jyppx_ocv_ml_ann_mlp_create"),
             201 => N("jyppx_ocv_ml_ann_mlp_load"),
+            203 => N("jyppx_ocv_ml_logistic_regression_get_learning_rate"),
+            204 => N("jyppx_ocv_ml_logistic_regression_set_learning_rate"),
+            205 or 207 or 209 or 211 => N("jyppx_ocv_ml_logistic_regression_get_int"),
+            206 or 208 or 210 or 212 => N("jyppx_ocv_ml_logistic_regression_set_int"),
+            213 => N("jyppx_ocv_ml_logistic_regression_get_term_criteria"),
+            214 => N("jyppx_ocv_ml_logistic_regression_set_term_criteria"),
+            217 => N("jyppx_ocv_ml_stat_model_predict"),
+            218 => N("jyppx_ocv_ml_logistic_regression_get_learnt_thetas"),
+            219 => N("jyppx_ocv_ml_logistic_regression_create"),
+            220 => N("jyppx_ocv_ml_logistic_regression_load"),
+            224 => N("jyppx_ocv_ml_svmsgd_get_weights"),
+            225 => N("jyppx_ocv_ml_svmsgd_get_shift"),
+            226 => N("jyppx_ocv_ml_svmsgd_create"),
+            227 => N("jyppx_ocv_ml_svmsgd_load"),
+            228 => N("jyppx_ocv_ml_svmsgd_set_optimal_parameters"),
+            229 or 231 => N("jyppx_ocv_ml_svmsgd_get_int"),
+            230 or 232 => N("jyppx_ocv_ml_svmsgd_set_int"),
+            233 or 235 or 237 => N("jyppx_ocv_ml_svmsgd_get_float"),
+            234 or 236 or 238 => N("jyppx_ocv_ml_svmsgd_set_float"),
+            239 => N("jyppx_ocv_ml_svmsgd_get_term_criteria"),
+            240 => N("jyppx_ocv_ml_svmsgd_set_term_criteria"),
             _ => throw new InvalidOperationException("No native evidence mapping for ordinal " + ordinal)
         };
         var nativeSet = new HashSet<string>(native, Ordinal);
@@ -405,6 +444,7 @@ internal static class Program
             9 => M(managed, "TrainData", "|property|", " NSamples"),
             10 => M(managed, "TrainData", "|property|", " NVars"),
             11 => M(managed, "TrainData", "|property|", " NAllVars"),
+            12 => Exact(managed, "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetSample(System.Int32 sampleIndex,OpenCvSharp.Core.Mat? variableIndices=null)"),
             13 => M(managed, "TrainData", " GetSamples("),
             14 => M(managed, "TrainData", " GetMissing("),
             15 => M(managed, "TrainData", " GetTrainSamples("),
@@ -423,6 +463,7 @@ internal static class Program
             28 => M(managed, "TrainData", "|property|", " ResponseType"),
             29 => M(managed, "TrainData", " GetTrainSampleIdx("),
             30 => M(managed, "TrainData", " GetTestSampleIdx("),
+            31 => Exact(managed, "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetValues(System.Int32 variableIndex,OpenCvSharp.Core.Mat? sampleIndices=null)"),
             32 => M(managed, "TrainData", " GetDefaultSubstValues("),
             33 => M(managed, "TrainData", " GetCatCount("),
             34 => M(managed, "TrainData", " GetClassLabels("),
@@ -530,6 +571,27 @@ internal static class Program
             199 => M(managed, "ANN_MLP", " GetWeights(System.Int32 layerIndex)"),
             200 => M(managed, "ANN_MLP", " Create("),
             201 => M(managed, "ANN_MLP", " Load("),
+            203 or 204 => M(managed, "LogisticRegression", "|property|", " LearningRate"),
+            205 or 206 => M(managed, "LogisticRegression", "|property|", " Iterations"),
+            207 or 208 => M(managed, "LogisticRegression", "|property|", " Regularization"),
+            209 or 210 => M(managed, "LogisticRegression", "|property|", " TrainingMethod"),
+            211 or 212 => M(managed, "LogisticRegression", "|property|", " MiniBatchSize"),
+            213 or 214 => M(managed, "LogisticRegression", "|property|", " TermCriteria"),
+            217 => M(managed, "StatModel", " Predict("),
+            218 => Exact(managed, "MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;instance|OpenCvSharp.Core.Mat GetLearntThetas()"),
+            219 => M(managed, "LogisticRegression", "|method|public;static|", " Create("),
+            220 => M(managed, "LogisticRegression", "|method|public;static|", " Load("),
+            224 => Exact(managed, "MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"),
+            225 => M(managed, "SVMSGD", "|property|", " Shift"),
+            226 => M(managed, "SVMSGD", "|method|public;static|", " Create("),
+            227 => M(managed, "SVMSGD", "|method|public;static|", " Load("),
+            228 => M(managed, "SVMSGD", " SetOptimalParameters("),
+            229 or 230 => M(managed, "SVMSGD", "|property|", " Type"),
+            231 or 232 => M(managed, "SVMSGD", "|property|", " MarginType"),
+            233 or 234 => M(managed, "SVMSGD", "|property|", " MarginRegularization"),
+            235 or 236 => M(managed, "SVMSGD", "|property|", " InitialStepSize"),
+            237 or 238 => M(managed, "SVMSGD", "|property|", " StepDecreasingPower"),
+            239 or 240 => M(managed, "SVMSGD", "|property|", " TermCriteria"),
             _ => throw new InvalidOperationException("No managed evidence mapping for ordinal " + ordinal)
         };
         return new() { member };
@@ -585,7 +647,7 @@ internal static class Program
                 Require(row.NativeEntrypoints.Count == 0 && row.ManagedMembers.Count == 0, "Non-implemented ML callable carries evidence at " + i);
             }
         }
-        Require(classifications.Declarations.Count(x => x.Classification == "implemented") == 173 && classifications.Declarations.Count(x => x.Classification == "missing") == 35 && classifications.Declarations.Count(x => x.Classification == "non-callable-metadata") == 33, "ML callable partition drifted.");
+        Require(classifications.Declarations.Count(x => x.Classification == "implemented") == 208 && classifications.Declarations.Count(x => x.Classification == "missing") == 0 && classifications.Declarations.Count(x => x.Classification == "non-callable-metadata") == 33, "ML callable partition drifted.");
         Require(classifications.Declarations.Count(x => x.Classification is "intentionally-omitted" or "upstream-conditional" or "unsupported") == 0, "Unexpected ML classifications were introduced.");
         Require(Existing.All(i => classifications.Declarations[i].Classification == "implemented") && Selected.All(i => classifications.Declarations[i].Classification == "implemented"), "Existing or selected ML correlation is incomplete.");
         if (verifyFiles)
@@ -676,6 +738,51 @@ internal static class Program
                 ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
             });
         }
+        var trainDataBuffersFamily = new FamilyRow
+        {
+            Id = "ml-train-data-buffers",
+            Rationale = "The selected batch closes both parser-emitted TrainData pointer-buffer callables through exact-length count/fill C ABI pairs, ordered optional indexes, caller-owned managed arrays, and native plus net8/net10 tests."
+        };
+        foreach (int i in TrainDataBuffersSelected.OrderBy(x => x))
+        {
+            trainDataBuffersFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = i,
+                UpstreamIdentity = raw.Declarations[i].Identity,
+                NativeEntrypoints = new(classifications.Declarations[i].NativeEntrypoints),
+                ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
+            });
+        }
+        var logisticRegressionFamily = new FamilyRow
+        {
+            Id = "ml-logistic-regression",
+            Rationale = "The selected batch closes all 16 parser-emitted LogisticRegression callables with typed configuration, batch and mini-batch training, inherited prediction, copied learned parameters, persistence, and deterministic disposal."
+        };
+        foreach (int i in LogisticRegressionSelected.OrderBy(x => x))
+        {
+            logisticRegressionFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = i,
+                UpstreamIdentity = raw.Declarations[i].Identity,
+                NativeEntrypoints = new(classifications.Declarations[i].NativeEntrypoints),
+                ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
+            });
+        }
+        var svmsgdFamily = new FamilyRow
+        {
+            Id = "ml-svmsgd",
+            Rationale = "The selected batch closes all 17 parser-emitted SVMSGD callables with typed optimizer and margin configuration, recommended parameters, inherited prediction, copied weights, decision shift, persistence, and deterministic disposal."
+        };
+        foreach (int i in SVMSGDSelected.OrderBy(x => x))
+        {
+            svmsgdFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = i,
+                UpstreamIdentity = raw.Declarations[i].Identity,
+                NativeEntrypoints = new(classifications.Declarations[i].NativeEntrypoints),
+                ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
+            });
+        }
         var annMlpExtension = new SourceReviewedExtension
         {
             UpstreamIdentity = "cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG& rng)->void",
@@ -692,7 +799,7 @@ internal static class Program
         };
         return new FamilyDocument
         {
-            Families = new() { annMlpFamily, emFamily, treeModelsFamily },
+            Families = new() { annMlpFamily, emFamily, treeModelsFamily, trainDataBuffersFamily, logisticRegressionFamily, svmsgdFamily },
             SourceReviewedExtensions = new() { annMlpExtension, rtreesOobExtension }
         };
     }

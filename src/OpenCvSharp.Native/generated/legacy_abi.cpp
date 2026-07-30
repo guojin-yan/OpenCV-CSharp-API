@@ -12539,6 +12539,66 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_knearest_set_int(jypp
     return jyppx_ocv_ml_knearest_set_int(model, property_id, value);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_create(jyppx_ocv_ml_model** model)
+{
+    return jyppx_ocv_ml_logistic_regression_create(model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_get_int(const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_ml_logistic_regression_get_int(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_get_learning_rate(const jyppx_ocv_ml_model* model,
+    double* value)
+{
+    return jyppx_ocv_ml_logistic_regression_get_learning_rate(model, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_get_learnt_thetas(const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_ml_logistic_regression_get_learnt_thetas(model, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_get_term_criteria(const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon)
+{
+    return jyppx_ocv_ml_logistic_regression_get_term_criteria(model, type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_load(const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model)
+{
+    return jyppx_ocv_ml_logistic_regression_load(filepath, node_name, model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_set_int(jyppx_ocv_ml_model* model,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_ml_logistic_regression_set_int(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_set_learning_rate(jyppx_ocv_ml_model* model,
+    double value)
+{
+    return jyppx_ocv_ml_logistic_regression_set_learning_rate(model, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_logistic_regression_set_term_criteria(jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon)
+{
+    return jyppx_ocv_ml_logistic_regression_set_term_criteria(model, type, max_count, epsilon);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_ml_model_release_handle(jyppx_ocv_ml_model* model)
 {
     jyppx_ocv_ml_model_release_handle(model);
@@ -12821,6 +12881,81 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svm_train_auto(jyppx_
     return jyppx_ocv_ml_svm_train_auto(model, samples, layout, responses, k_fold, c_grid, gamma_grid, p_grid, nu_grid, coeff_grid, degree_grid, balanced, result);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_create(jyppx_ocv_ml_model** model)
+{
+    return jyppx_ocv_ml_svmsgd_create(model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_get_float(const jyppx_ocv_ml_model* model,
+    int property_id,
+    float* value)
+{
+    return jyppx_ocv_ml_svmsgd_get_float(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_get_int(const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_ml_svmsgd_get_int(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_get_shift(const jyppx_ocv_ml_model* model,
+    float* value)
+{
+    return jyppx_ocv_ml_svmsgd_get_shift(model, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_get_term_criteria(const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon)
+{
+    return jyppx_ocv_ml_svmsgd_get_term_criteria(model, type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_get_weights(const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_ml_svmsgd_get_weights(model, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_load(const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model)
+{
+    return jyppx_ocv_ml_svmsgd_load(filepath, node_name, model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_set_float(jyppx_ocv_ml_model* model,
+    int property_id,
+    float value)
+{
+    return jyppx_ocv_ml_svmsgd_set_float(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_set_int(jyppx_ocv_ml_model* model,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_ml_svmsgd_set_int(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_set_optimal_parameters(jyppx_ocv_ml_model* model,
+    int svmsgd_type,
+    int margin_type)
+{
+    return jyppx_ocv_ml_svmsgd_set_optimal_parameters(model, svmsgd_type, margin_type);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_svmsgd_set_term_criteria(jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon)
+{
+    return jyppx_ocv_ml_svmsgd_set_term_criteria(model, type, max_count, epsilon);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_create(const jyppx_ocv_mat* samples,
     int layout,
     const jyppx_ocv_mat* responses,
@@ -12869,6 +13004,23 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_names_
     return jyppx_ocv_ml_train_data_get_names_fill(train_data, offsets, offset_capacity, buffer, buffer_capacity, string_count, byte_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_sample_count(const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* variable_indices,
+    int* count)
+{
+    return jyppx_ocv_ml_train_data_get_sample_count(train_data, variable_indices, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_sample_fill(const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* variable_indices,
+    int sample_index,
+    float* values,
+    int value_capacity,
+    int* count)
+{
+    return jyppx_ocv_ml_train_data_get_sample_fill(train_data, variable_indices, sample_index, values, value_capacity, count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_sub_matrix(const jyppx_ocv_mat* matrix,
     const jyppx_ocv_mat* idx,
     int layout,
@@ -12882,6 +13034,23 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_sub_ve
     jyppx_ocv_mat* dst)
 {
     return jyppx_ocv_ml_train_data_get_sub_vector(vec, idx, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_values_count(const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* sample_indices,
+    int* count)
+{
+    return jyppx_ocv_ml_train_data_get_values_count(train_data, sample_indices, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_get_values_fill(const jyppx_ocv_ml_train_data* train_data,
+    int variable_index,
+    const jyppx_ocv_mat* sample_indices,
+    float* values,
+    int value_capacity,
+    int* count)
+{
+    return jyppx_ocv_ml_train_data_get_values_fill(train_data, variable_index, sample_indices, values, value_capacity, count);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_train_data_load_csv(const char* filename,

@@ -299,6 +299,78 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_train_m")]
         internal static partial int MlEMTrainM(IntPtr model, IntPtr samples, IntPtr initialProbabilities, IntPtr logLikelihoods, IntPtr labels, IntPtr probabilities, out int result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_train_data_get_sample_count")]
+        internal static partial int MlTrainDataGetSampleCount(IntPtr trainData, IntPtr variableIndices, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_train_data_get_sample_fill")]
+        internal static unsafe partial int MlTrainDataGetSampleFill(IntPtr trainData, IntPtr variableIndices, int sampleIndex, float* values, int valueCapacity, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_train_data_get_values_count")]
+        internal static partial int MlTrainDataGetValuesCount(IntPtr trainData, IntPtr sampleIndices, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_train_data_get_values_fill")]
+        internal static unsafe partial int MlTrainDataGetValuesFill(IntPtr trainData, int variableIndex, IntPtr sampleIndices, float* values, int valueCapacity, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_create")]
+        internal static partial int MlLogisticRegressionCreate(out IntPtr model);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_load")]
+        internal static partial int MlLogisticRegressionLoad(byte[] filepath, byte[] nodeName, out IntPtr model);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_get_learning_rate")]
+        internal static partial int MlLogisticRegressionGetLearningRate(IntPtr model, out double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_set_learning_rate")]
+        internal static partial int MlLogisticRegressionSetLearningRate(IntPtr model, double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_get_int")]
+        internal static partial int MlLogisticRegressionGetInt(IntPtr model, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_set_int")]
+        internal static partial int MlLogisticRegressionSetInt(IntPtr model, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_get_term_criteria")]
+        internal static partial int MlLogisticRegressionGetTermCriteria(IntPtr model, out int type, out int maxCount, out double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_set_term_criteria")]
+        internal static partial int MlLogisticRegressionSetTermCriteria(IntPtr model, int type, int maxCount, double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_logistic_regression_get_learnt_thetas")]
+        internal static partial int MlLogisticRegressionGetLearntThetas(IntPtr model, IntPtr dst);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_create")]
+        internal static partial int MlSVMSGDCreate(out IntPtr model);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_load")]
+        internal static partial int MlSVMSGDLoad(byte[] filepath, byte[] nodeName, out IntPtr model);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_get_weights")]
+        internal static partial int MlSVMSGDGetWeights(IntPtr model, IntPtr dst);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_get_shift")]
+        internal static partial int MlSVMSGDGetShift(IntPtr model, out float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_set_optimal_parameters")]
+        internal static partial int MlSVMSGDSetOptimalParameters(IntPtr model, int svmsgdType, int marginType);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_get_int")]
+        internal static partial int MlSVMSGDGetInt(IntPtr model, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_set_int")]
+        internal static partial int MlSVMSGDSetInt(IntPtr model, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_get_float")]
+        internal static partial int MlSVMSGDGetFloat(IntPtr model, int propertyId, out float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_set_float")]
+        internal static partial int MlSVMSGDSetFloat(IntPtr model, int propertyId, float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_get_term_criteria")]
+        internal static partial int MlSVMSGDGetTermCriteria(IntPtr model, out int type, out int maxCount, out double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_svmsgd_set_term_criteria")]
+        internal static partial int MlSVMSGDSetTermCriteria(IntPtr model, int type, int maxCount, double epsilon);
     }
 }
 #endif

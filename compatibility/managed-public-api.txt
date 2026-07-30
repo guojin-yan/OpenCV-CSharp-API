@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=558
-member-count=6095
+type-count=564
+member-count=6134
 namespace-count=41
 nullable-shape=included
 
@@ -103,9 +103,11 @@ TYPE|class|public;sealed|OpenCvSharp.ML.ANN_MLP|base=OpenCvSharp.ML.StatModel|in
 TYPE|class|public;sealed|OpenCvSharp.ML.Boost|base=OpenCvSharp.ML.DTrees|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.EM|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.KNearest|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.ML.LogisticRegression|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.NormalBayesClassifier|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.ParamGrid|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.RTrees|base=OpenCvSharp.ML.DTrees|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.ML.SVMSGD|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.SVM|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.TrainData|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ObjDetect.ArucoBoard|base=|interfaces=System.IDisposable
@@ -409,10 +411,14 @@ TYPE|enum|public|OpenCvSharp.ML.BoostTypes|base=|interfaces=System.IComparable,S
 TYPE|enum|public|OpenCvSharp.ML.DTreesPredictionFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.EMCovarianceMatrixTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.KNearestTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.LogisticRegressionRegularizationKinds|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.LogisticRegressionTrainingMethods|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlErrorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlVariableType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.SVMKernelTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.SVMParamTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.SVMSGDMarginTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.SVMSGDTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.SVMTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.SampleTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.StatModelFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -4069,6 +4075,23 @@ MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|OpenCvSha
 MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Boolean IsClassifierModel
 MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 DefaultK
 MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 Emax
+MEMBER|OpenCvSharp.ML.LogisticRegressionRegularizationKinds|field|public;const|OpenCvSharp.ML.LogisticRegressionRegularizationKinds Disable=-1
+MEMBER|OpenCvSharp.ML.LogisticRegressionRegularizationKinds|field|public;const|OpenCvSharp.ML.LogisticRegressionRegularizationKinds L1=0
+MEMBER|OpenCvSharp.ML.LogisticRegressionRegularizationKinds|field|public;const|OpenCvSharp.ML.LogisticRegressionRegularizationKinds L2=1
+MEMBER|OpenCvSharp.ML.LogisticRegressionRegularizationKinds|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.LogisticRegressionTrainingMethods|field|public;const|OpenCvSharp.ML.LogisticRegressionTrainingMethods Batch=0
+MEMBER|OpenCvSharp.ML.LogisticRegressionTrainingMethods|field|public;const|OpenCvSharp.ML.LogisticRegressionTrainingMethods MiniBatch=1
+MEMBER|OpenCvSharp.ML.LogisticRegressionTrainingMethods|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;instance|OpenCvSharp.Core.Mat GetLearntThetas()
+MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;instance|System.Void GetLearntThetas(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;static|OpenCvSharp.ML.LogisticRegression Create()
+MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;static|OpenCvSharp.ML.LogisticRegression Load(System.String filepath,System.String? nodeName=null)
+MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria
+MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.ML.LogisticRegressionRegularizationKinds Regularization
+MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.ML.LogisticRegressionTrainingMethods TrainingMethod
+MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Double LearningRate
+MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 Iterations
+MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 MiniBatchSize
 MEMBER|OpenCvSharp.ML.MlErrorType|field|public;const|OpenCvSharp.ML.MlErrorType TestError=0
 MEMBER|OpenCvSharp.ML.MlErrorType|field|public;const|OpenCvSharp.ML.MlErrorType TrainError=1
 MEMBER|OpenCvSharp.ML.MlErrorType|field|public;instance|System.Int32 value__
@@ -4113,6 +4136,24 @@ MEMBER|OpenCvSharp.ML.SVMParamTypes|field|public;const|OpenCvSharp.ML.SVMParamTy
 MEMBER|OpenCvSharp.ML.SVMParamTypes|field|public;const|OpenCvSharp.ML.SVMParamTypes Nu=3
 MEMBER|OpenCvSharp.ML.SVMParamTypes|field|public;const|OpenCvSharp.ML.SVMParamTypes P=2
 MEMBER|OpenCvSharp.ML.SVMParamTypes|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.SVMSGDMarginTypes|field|public;const|OpenCvSharp.ML.SVMSGDMarginTypes HardMargin=1
+MEMBER|OpenCvSharp.ML.SVMSGDMarginTypes|field|public;const|OpenCvSharp.ML.SVMSGDMarginTypes SoftMargin=0
+MEMBER|OpenCvSharp.ML.SVMSGDMarginTypes|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.SVMSGDTypes|field|public;const|OpenCvSharp.ML.SVMSGDTypes Asgd=1
+MEMBER|OpenCvSharp.ML.SVMSGDTypes|field|public;const|OpenCvSharp.ML.SVMSGDTypes Sgd=0
+MEMBER|OpenCvSharp.ML.SVMSGDTypes|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|OpenCvSharp.Core.Mat GetWeights()
+MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|System.Void GetWeights(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|System.Void SetOptimalParameters(OpenCvSharp.ML.SVMSGDTypes type=Asgd,OpenCvSharp.ML.SVMSGDMarginTypes marginType=SoftMargin)
+MEMBER|OpenCvSharp.ML.SVMSGD|method|public;static|OpenCvSharp.ML.SVMSGD Create()
+MEMBER|OpenCvSharp.ML.SVMSGD|method|public;static|OpenCvSharp.ML.SVMSGD Load(System.String filepath,System.String? nodeName=null)
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.ML.SVMSGDMarginTypes MarginType
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.ML.SVMSGDTypes Type
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single InitialStepSize
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single MarginRegularization
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single StepDecreasingPower
+MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public|System.Single Shift
 MEMBER|OpenCvSharp.ML.SVMTypes|field|public;const|OpenCvSharp.ML.SVMTypes CSvc=100
 MEMBER|OpenCvSharp.ML.SVMTypes|field|public;const|OpenCvSharp.ML.SVMTypes EpsSvr=103
 MEMBER|OpenCvSharp.ML.SVMTypes|field|public;const|OpenCvSharp.ML.SVMTypes NuSvc=101
@@ -4185,7 +4226,11 @@ MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetV
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetVarSymbolFlags()
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetVarType()
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Int32 GetCatCount(System.Int32 variableIndex)
+MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetSample(System.Int32 sampleIndex,OpenCvSharp.Core.Mat? variableIndices=null)
+MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetValues(System.Int32 variableIndex,OpenCvSharp.Core.Mat? sampleIndices=null)
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.String[] GetNames()
+MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void GetSample(System.Int32 sampleIndex,System.Single[] destination,OpenCvSharp.Core.Mat? variableIndices=null)
+MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void GetValues(System.Int32 variableIndex,System.Single[] destination,OpenCvSharp.Core.Mat? sampleIndices=null)
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void SetTrainTestSplit(System.Int32 count,System.Boolean shuffle=true)
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void SetTrainTestSplitRatio(System.Double ratio,System.Boolean shuffle=true)
 MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void ShuffleTrainTest()

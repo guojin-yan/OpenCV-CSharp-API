@@ -168,6 +168,12 @@ namespace
         ~NativeMlModelHandle() { jyppx_ocv_ml_model_release_handle(value); }
     };
 
+    struct NativeMlTrainDataHandle
+    {
+        jyppx_ocv_ml_train_data* value = nullptr;
+        ~NativeMlTrainDataHandle() { jyppx_ocv_ml_train_data_release_handle(value); }
+    };
+
     struct NativeAnnIndexHandle
     {
         jyppx_ocv_features2d_ann_index* value = nullptr;
@@ -3928,6 +3934,226 @@ namespace
 
         return 0;
     }
+
+    int run_ml_remaining_callables_smoke()
+    {
+        NativeMatHandle samples;
+        NativeMatHandle logistic_responses;
+        NativeMatHandle svmsgd_responses;
+        NativeMatHandle negative_query;
+        NativeMatHandle positive_query;
+        NativeMatHandle variable_indices;
+        NativeMatHandle sample_indices;
+        NativeMatHandle results;
+        NativeMatHandle thetas;
+        NativeMatHandle weights;
+        if (jyppx_ocv_mat_create(8, 2, 5, samples.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(8, 1, 5, logistic_responses.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(8, 1, 5, svmsgd_responses.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 2, 5, negative_query.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 2, 5, positive_query.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 1, 4, variable_indices.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 3, 4, sample_indices.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(results.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(thetas.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(weights.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 849;
+        }
+
+        const float sample_values[] = {
+            -4.0F, -1.0F, -3.0F, 0.0F, -2.0F, -0.5F, -1.0F, 0.5F,
+             1.0F, -0.5F,  2.0F, 0.5F,  3.0F,  0.0F,  4.0F, 1.0F
+        };
+        const float logistic_values[] = { 0.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F, 1.0F };
+        const float svmsgd_values[] = { -1.0F, -1.0F, -1.0F, -1.0F, 1.0F, 1.0F, 1.0F, 1.0F };
+        const float negative_query_values[] = { -2.5F, 0.0F };
+        const float positive_query_values[] = { 2.5F, 0.0F };
+        const int variable_index_values[] = { 1 };
+        const int sample_index_values[] = { 1, 4, 5 };
+        unsigned char* bytes = nullptr;
+#define COPY_ML_REMAINING_VALUES(HANDLE, VALUES, CODE) \
+        if (jyppx_ocv_mat_data((HANDLE).get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr) { return CODE; } \
+        std::memcpy(bytes, VALUES, sizeof(VALUES))
+        COPY_ML_REMAINING_VALUES(samples, sample_values, 850);
+        COPY_ML_REMAINING_VALUES(logistic_responses, logistic_values, 850);
+        COPY_ML_REMAINING_VALUES(svmsgd_responses, svmsgd_values, 850);
+        COPY_ML_REMAINING_VALUES(negative_query, negative_query_values, 850);
+        COPY_ML_REMAINING_VALUES(positive_query, positive_query_values, 850);
+        COPY_ML_REMAINING_VALUES(variable_indices, variable_index_values, 850);
+        COPY_ML_REMAINING_VALUES(sample_indices, sample_index_values, 850);
+#undef COPY_ML_REMAINING_VALUES
+
+        NativeMlTrainDataHandle train_data;
+        if (jyppx_ocv_ml_train_data_create(
+                samples.get(), 0, logistic_responses.get(), nullptr, nullptr, nullptr, nullptr, &train_data.value) != OPENCV_CSHARP_STATUS_OK ||
+            train_data.value == nullptr)
+        {
+            return 851;
+        }
+
+        int count = -1;
+        float sample_buffer[2] = {};
+        float value_buffer[3] = {};
+        if (jyppx_ocv_ml_train_data_get_sample_count(train_data.value, nullptr, &count) != OPENCV_CSHARP_STATUS_OK || count != 2 ||
+            jyppx_ocv_ml_train_data_get_sample_count(train_data.value, variable_indices.get(), &count) != OPENCV_CSHARP_STATUS_OK || count != 1 ||
+            jyppx_ocv_ml_train_data_get_sample_fill(train_data.value, nullptr, 4, sample_buffer, 2, &count) != OPENCV_CSHARP_STATUS_OK ||
+            count != 2 || std::fabs(sample_buffer[0] - 1.0F) > 1e-6F || std::fabs(sample_buffer[1] + 0.5F) > 1e-6F)
+        {
+            return 852;
+        }
+        if (jyppx_ocv_ml_train_data_get_values_count(train_data.value, nullptr, &count) != OPENCV_CSHARP_STATUS_OK || count != 8 ||
+            jyppx_ocv_ml_train_data_get_values_count(train_data.value, sample_indices.get(), &count) != OPENCV_CSHARP_STATUS_OK || count != 3 ||
+            jyppx_ocv_ml_train_data_get_values_fill(train_data.value, 0, sample_indices.get(), value_buffer, 3, &count) != OPENCV_CSHARP_STATUS_OK ||
+            count != 3 || std::fabs(value_buffer[0] + 3.0F) > 1e-6F || std::fabs(value_buffer[1] - 1.0F) > 1e-6F ||
+            std::fabs(value_buffer[2] - 2.0F) > 1e-6F)
+        {
+            return 853;
+        }
+        if (jyppx_ocv_ml_train_data_get_sample_fill(
+                train_data.value, variable_indices.get(), 0, sample_buffer, 2, &count) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            return 854;
+        }
+
+        NativeMlModelHandle logistic;
+        if (jyppx_ocv_ml_logistic_regression_create(&logistic.value) != OPENCV_CSHARP_STATUS_OK || logistic.value == nullptr)
+        {
+            return 855;
+        }
+        double learning_rate = 0.0;
+        int int_value = -1;
+        int criteria_type = 0;
+        int criteria_count = 0;
+        double criteria_epsilon = 0.0;
+        if (jyppx_ocv_ml_logistic_regression_get_learning_rate(logistic.value, &learning_rate) != OPENCV_CSHARP_STATUS_OK ||
+            std::fabs(learning_rate - 0.001) > 1e-15 ||
+            jyppx_ocv_ml_logistic_regression_get_int(logistic.value, 0, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 1000 ||
+            jyppx_ocv_ml_logistic_regression_get_int(logistic.value, 1, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 1 ||
+            jyppx_ocv_ml_logistic_regression_get_int(logistic.value, 2, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 0 ||
+            jyppx_ocv_ml_logistic_regression_get_int(logistic.value, 3, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 1 ||
+            jyppx_ocv_ml_logistic_regression_get_term_criteria(
+                logistic.value, &criteria_type, &criteria_count, &criteria_epsilon) != OPENCV_CSHARP_STATUS_OK ||
+            criteria_type != 3 || criteria_count != 1000 || std::fabs(criteria_epsilon - 0.001) > 1e-15)
+        {
+            return 856;
+        }
+        if (jyppx_ocv_ml_logistic_regression_set_learning_rate(logistic.value, 0.05) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_logistic_regression_set_int(logistic.value, 0, 1000) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_logistic_regression_set_int(logistic.value, 1, -1) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_logistic_regression_set_int(logistic.value, 2, 1) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_logistic_regression_set_int(logistic.value, 3, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_logistic_regression_set_term_criteria(logistic.value, 3, 1000, 1e-6) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 857;
+        }
+        int trained = 0;
+        float prediction = 0.0F;
+        if (jyppx_ocv_ml_stat_model_train_samples(
+                logistic.value, samples.get(), 0, logistic_responses.get(), &trained) != OPENCV_CSHARP_STATUS_OK || trained != 1 ||
+            jyppx_ocv_ml_stat_model_predict(logistic.value, negative_query.get(), results.get(), 0, &prediction) != OPENCV_CSHARP_STATUS_OK || prediction != 0.0F ||
+            jyppx_ocv_ml_stat_model_predict(logistic.value, positive_query.get(), results.get(), 0, &prediction) != OPENCV_CSHARP_STATUS_OK || prediction != 1.0F ||
+            jyppx_ocv_ml_logistic_regression_get_learnt_thetas(logistic.value, thetas.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 858;
+        }
+        size_t total = 0;
+        if (jyppx_ocv_mat_total(thetas.get(), &total) != OPENCV_CSHARP_STATUS_OK || total == 0)
+        {
+            return 859;
+        }
+
+        const char* logistic_path = "opencv-csharp-native-logistic-regression-smoke.yml";
+        std::remove(logistic_path);
+        if (jyppx_ocv_ml_stat_model_save(logistic.value, logistic_path) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 860;
+        }
+        NativeMlModelHandle loaded_logistic;
+        if (jyppx_ocv_ml_logistic_regression_load(logistic_path, nullptr, &loaded_logistic.value) != OPENCV_CSHARP_STATUS_OK ||
+            loaded_logistic.value == nullptr ||
+            jyppx_ocv_ml_stat_model_predict(loaded_logistic.value, positive_query.get(), results.get(), 0, &prediction) != OPENCV_CSHARP_STATUS_OK ||
+            prediction != 1.0F)
+        {
+            std::remove(logistic_path);
+            return 861;
+        }
+        std::remove(logistic_path);
+
+        NativeMlModelHandle svmsgd;
+        if (jyppx_ocv_ml_svmsgd_create(&svmsgd.value) != OPENCV_CSHARP_STATUS_OK || svmsgd.value == nullptr)
+        {
+            return 862;
+        }
+        float float_value = 0.0F;
+        if (jyppx_ocv_ml_svmsgd_get_int(svmsgd.value, 0, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 1 ||
+            jyppx_ocv_ml_svmsgd_get_int(svmsgd.value, 1, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 0 ||
+            jyppx_ocv_ml_svmsgd_get_float(svmsgd.value, 0, &float_value) != OPENCV_CSHARP_STATUS_OK || std::fabs(float_value - 0.00001F) > 1e-9F ||
+            jyppx_ocv_ml_svmsgd_get_float(svmsgd.value, 1, &float_value) != OPENCV_CSHARP_STATUS_OK || std::fabs(float_value - 0.05F) > 1e-7F ||
+            jyppx_ocv_ml_svmsgd_get_float(svmsgd.value, 2, &float_value) != OPENCV_CSHARP_STATUS_OK || std::fabs(float_value - 0.75F) > 1e-7F ||
+            jyppx_ocv_ml_svmsgd_get_term_criteria(
+                svmsgd.value, &criteria_type, &criteria_count, &criteria_epsilon) != OPENCV_CSHARP_STATUS_OK ||
+            criteria_type != 3 || criteria_count != 100000 || std::fabs(criteria_epsilon - 0.00001) > 1e-15)
+        {
+            return 863;
+        }
+        if (jyppx_ocv_ml_svmsgd_set_int(svmsgd.value, 0, 0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_svmsgd_set_int(svmsgd.value, 1, 1) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_svmsgd_set_float(svmsgd.value, 0, 0.001F) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_svmsgd_set_float(svmsgd.value, 1, 0.1F) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_svmsgd_set_float(svmsgd.value, 2, 0.5F) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_svmsgd_set_optimal_parameters(svmsgd.value, 1, 0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_svmsgd_set_term_criteria(svmsgd.value, 3, 10000, 1e-6) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 864;
+        }
+        float shift = 0.0F;
+        if (jyppx_ocv_ml_stat_model_train_samples(
+                svmsgd.value, samples.get(), 0, svmsgd_responses.get(), &trained) != OPENCV_CSHARP_STATUS_OK || trained != 1)
+        {
+            return 865;
+        }
+        if (jyppx_ocv_ml_stat_model_predict(
+                svmsgd.value, negative_query.get(), nullptr, 0, &prediction) != OPENCV_CSHARP_STATUS_OK || prediction != -1.0F)
+        {
+            return 866;
+        }
+        if (jyppx_ocv_ml_stat_model_predict(
+                svmsgd.value, positive_query.get(), nullptr, 0, &prediction) != OPENCV_CSHARP_STATUS_OK || prediction != 1.0F)
+        {
+            return 867;
+        }
+        if (jyppx_ocv_ml_svmsgd_get_weights(svmsgd.value, weights.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 868;
+        }
+        if (jyppx_ocv_ml_svmsgd_get_shift(svmsgd.value, &shift) != OPENCV_CSHARP_STATUS_OK || !std::isfinite(shift))
+        {
+            return 869;
+        }
+        if (jyppx_ocv_mat_total(weights.get(), &total) != OPENCV_CSHARP_STATUS_OK || total != 2)
+        {
+            return 870;
+        }
+
+        const char* svmsgd_path = "opencv-csharp-native-svmsgd-smoke.yml";
+        std::remove(svmsgd_path);
+        if (jyppx_ocv_ml_stat_model_save(svmsgd.value, svmsgd_path) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 871;
+        }
+        NativeMlModelHandle loaded_svmsgd;
+        if (jyppx_ocv_ml_svmsgd_load(svmsgd_path, nullptr, &loaded_svmsgd.value) != OPENCV_CSHARP_STATUS_OK ||
+            loaded_svmsgd.value == nullptr ||
+            jyppx_ocv_ml_stat_model_predict(loaded_svmsgd.value, positive_query.get(), nullptr, 0, &prediction) != OPENCV_CSHARP_STATUS_OK ||
+            prediction != 1.0F)
+        {
+            std::remove(svmsgd_path);
+            return 872;
+        }
+        std::remove(svmsgd_path);
+        return 0;
+    }
 #endif
 }
 
@@ -4029,6 +4255,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return ml_em_status;
+        }
+
+        int ml_remaining_callables_status = run_ml_remaining_callables_smoke();
+        if (ml_remaining_callables_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return ml_remaining_callables_status;
         }
 #endif
 
@@ -5407,6 +5640,15 @@ int main()
         {
             jyppx_ocv_ml_model_release_handle(em);
             return 848;
+        }
+        jyppx_ocv_ml_model* logistic = nullptr;
+        jyppx_ocv_ml_model* svmsgd = nullptr;
+        if (jyppx_ocv_ml_logistic_regression_create(&logistic) != OPENCV_CSHARP_STATUS_NOT_LINKED || logistic != nullptr ||
+            jyppx_ocv_ml_svmsgd_create(&svmsgd) != OPENCV_CSHARP_STATUS_NOT_LINKED || svmsgd != nullptr)
+        {
+            jyppx_ocv_ml_model_release_handle(logistic);
+            jyppx_ocv_ml_model_release_handle(svmsgd);
+            return 870;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

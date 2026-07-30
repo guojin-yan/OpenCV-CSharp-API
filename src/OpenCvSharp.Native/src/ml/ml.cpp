@@ -21,6 +21,8 @@ namespace
     constexpr int MODEL_KIND_RTREES = 6;
     constexpr int MODEL_KIND_BOOST = 7;
     constexpr int MODEL_KIND_EM = 8;
+    constexpr int MODEL_KIND_LOGISTIC_REGRESSION = 9;
+    constexpr int MODEL_KIND_SVMSGD = 10;
 
     constexpr int TRAIN_DATA_INT_LAYOUT = 0;
     constexpr int TRAIN_DATA_INT_N_TRAIN_SAMPLES = 1;
@@ -105,6 +107,18 @@ namespace
     constexpr int EM_INT_CLUSTERS_NUMBER = 0;
     constexpr int EM_INT_COVARIANCE_MATRIX_TYPE = 1;
 
+    constexpr int LOGISTIC_REGRESSION_INT_ITERATIONS = 0;
+    constexpr int LOGISTIC_REGRESSION_INT_REGULARIZATION = 1;
+    constexpr int LOGISTIC_REGRESSION_INT_TRAIN_METHOD = 2;
+    constexpr int LOGISTIC_REGRESSION_INT_MINI_BATCH_SIZE = 3;
+
+    constexpr int SVMSGD_INT_TYPE = 0;
+    constexpr int SVMSGD_INT_MARGIN_TYPE = 1;
+
+    constexpr int SVMSGD_FLOAT_MARGIN_REGULARIZATION = 0;
+    constexpr int SVMSGD_FLOAT_INITIAL_STEP_SIZE = 1;
+    constexpr int SVMSGD_FLOAT_STEP_DECREASING_POWER = 2;
+
     int validate_mat(const char* api_name, const jyppx_ocv_mat* mat, const char* argument_name)
     {
         return mat == nullptr
@@ -157,6 +171,22 @@ namespace
     int validate_string(const char* api_name, const char* value, const char* argument_name)
     {
         if (value == nullptr || value[0] == '\0')
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+        }
+
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_float_buffer(
+        const char* api_name,
+        const float* values,
+        int value_capacity,
+        int required_capacity,
+        const char* argument_name)
+    {
+        if (value_capacity < 0 || value_capacity != required_capacity ||
+            (required_capacity > 0 && values == nullptr))
         {
             return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
         }
@@ -315,6 +345,18 @@ namespace
     cv::Ptr<cv::ml::EM> as_em_ptr(const jyppx_ocv_ml_model* model)
     {
         return model == nullptr ? cv::Ptr<cv::ml::EM>() : model->value.dynamicCast<cv::ml::EM>();
+    }
+
+    cv::Ptr<cv::ml::LogisticRegression> as_logistic_regression_ptr(const jyppx_ocv_ml_model* model)
+    {
+        return model == nullptr
+            ? cv::Ptr<cv::ml::LogisticRegression>()
+            : model->value.dynamicCast<cv::ml::LogisticRegression>();
+    }
+
+    cv::Ptr<cv::ml::SVMSGD> as_svmsgd_ptr(const jyppx_ocv_ml_model* model)
+    {
+        return model == nullptr ? cv::Ptr<cv::ml::SVMSGD>() : model->value.dynamicCast<cv::ml::SVMSGD>();
     }
 
     cv::Ptr<cv::ml::ParamGrid> make_grid_ptr(const jyppx_ocv_ml_param_grid* grid, int param_id)
@@ -688,6 +730,192 @@ int jyppx_ocv_ml_train_data_get_mat(
         return OPENCV_CSHARP_STATUS_OK;
 #else
         (void)property_id; (void)layout; (void)compress_samples; (void)compress_vars;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_train_data_get_sample_count(
+    const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* variable_indices,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_train_data_get_sample_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_train_data(api_name, train_data);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, count, "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        int required = train_data->value->getNAllVars();
+        if (variable_indices != nullptr)
+        {
+            int selected = variable_indices->value.checkVector(1, CV_32S);
+            if (selected < 0)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "variable_indices");
+            }
+            required = selected;
+        }
+        *count = required;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)variable_indices;
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_train_data_get_sample_fill(
+    const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* variable_indices,
+    int sample_index,
+    float* values,
+    int value_capacity,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_train_data_get_sample_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_train_data(api_name, train_data);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, count, "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        int required = train_data->value->getNAllVars();
+        if (variable_indices != nullptr)
+        {
+            int selected = variable_indices->value.checkVector(1, CV_32S);
+            if (selected < 0)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "variable_indices");
+            }
+            required = selected;
+        }
+        *count = required;
+        status = validate_float_buffer(api_name, values, value_capacity, required, "values");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (variable_indices == nullptr)
+        {
+            std::vector<int> indices(static_cast<size_t>(required));
+            for (int i = 0; i < required; ++i) { indices[static_cast<size_t>(i)] = i; }
+            train_data->value->getSample(indices, sample_index, values);
+        }
+        else
+        {
+            train_data->value->getSample(variable_indices->value, sample_index, values);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)variable_indices; (void)sample_index; (void)values; (void)value_capacity;
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_train_data_get_values_count(
+    const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* sample_indices,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_train_data_get_values_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_train_data(api_name, train_data);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, count, "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        int required = train_data->value->getNSamples();
+        if (sample_indices != nullptr)
+        {
+            int selected = sample_indices->value.checkVector(1, CV_32S);
+            if (selected < 0)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "sample_indices");
+            }
+            required = selected;
+        }
+        *count = required;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)sample_indices;
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_train_data_get_values_fill(
+    const jyppx_ocv_ml_train_data* train_data,
+    int variable_index,
+    const jyppx_ocv_mat* sample_indices,
+    float* values,
+    int value_capacity,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_train_data_get_values_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_train_data(api_name, train_data);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, count, "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        int required = train_data->value->getNSamples();
+        if (sample_indices != nullptr)
+        {
+            int selected = sample_indices->value.checkVector(1, CV_32S);
+            if (selected < 0)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "sample_indices");
+            }
+            required = selected;
+        }
+        *count = required;
+        status = validate_float_buffer(api_name, values, value_capacity, required, "values");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (sample_indices == nullptr)
+        {
+            std::vector<int> indices(static_cast<size_t>(required));
+            for (int i = 0; i < required; ++i) { indices[static_cast<size_t>(i)] = i; }
+            train_data->value->getValues(variable_index, indices, values);
+        }
+        else
+        {
+            train_data->value->getValues(variable_index, sample_indices->value, values);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)variable_index; (void)sample_indices; (void)values; (void)value_capacity;
+        *count = 0;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }
@@ -1215,6 +1443,102 @@ int jyppx_ocv_ml_em_load(const char* filepath, const char* node_name, jyppx_ocv_
             api_name,
             cv::ml::EM::load(filepath, node_name == nullptr ? cv::String() : cv::String(node_name)),
             MODEL_KIND_EM,
+            model);
+#else
+        (void)node_name;
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_create(jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(api_name, cv::ml::LogisticRegression::create(), MODEL_KIND_LOGISTIC_REGRESSION, model);
+#else
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_load";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_string(api_name, filepath, "filepath");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(
+            api_name,
+            cv::ml::LogisticRegression::load(filepath, node_name == nullptr ? cv::String() : cv::String(node_name)),
+            MODEL_KIND_LOGISTIC_REGRESSION,
+            model);
+#else
+        (void)node_name;
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_create(jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(api_name, cv::ml::SVMSGD::create(), MODEL_KIND_SVMSGD, model);
+#else
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_load";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_string(api_name, filepath, "filepath");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(
+            api_name,
+            cv::ml::SVMSGD::load(filepath, node_name == nullptr ? cv::String() : cv::String(node_name)),
+            MODEL_KIND_SVMSGD,
             model);
 #else
         (void)node_name;
@@ -3208,6 +3532,491 @@ int jyppx_ocv_ml_em_train_m(
 #else
         (void)log_likelihoods; (void)labels; (void)probabilities;
         *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_get_learning_rate(
+    const jyppx_ocv_ml_model* model,
+    double* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_get_learning_rate";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        *value = native->getLearningRate();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *value = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_set_learning_rate(jyppx_ocv_ml_model* model, double value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_set_learning_rate";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setLearningRate(value);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_get_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case LOGISTIC_REGRESSION_INT_ITERATIONS: *value = native->getIterations(); return OPENCV_CSHARP_STATUS_OK;
+        case LOGISTIC_REGRESSION_INT_REGULARIZATION: *value = native->getRegularization(); return OPENCV_CSHARP_STATUS_OK;
+        case LOGISTIC_REGRESSION_INT_TRAIN_METHOD: *value = native->getTrainMethod(); return OPENCV_CSHARP_STATUS_OK;
+        case LOGISTIC_REGRESSION_INT_MINI_BATCH_SIZE: *value = native->getMiniBatchSize(); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id;
+        *value = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_set_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case LOGISTIC_REGRESSION_INT_ITERATIONS: native->setIterations(value); return OPENCV_CSHARP_STATUS_OK;
+        case LOGISTIC_REGRESSION_INT_REGULARIZATION: native->setRegularization(value); return OPENCV_CSHARP_STATUS_OK;
+        case LOGISTIC_REGRESSION_INT_TRAIN_METHOD: native->setTrainMethod(value); return OPENCV_CSHARP_STATUS_OK;
+        case LOGISTIC_REGRESSION_INT_MINI_BATCH_SIZE: native->setMiniBatchSize(value); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id; (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_get_term_criteria(
+    const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_get_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, type, "type");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, max_count, "max_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, epsilon, "epsilon");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        cv::TermCriteria criteria = native->getTermCriteria();
+        *type = criteria.type;
+        *max_count = criteria.maxCount;
+        *epsilon = criteria.epsilon;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *type = 0; *max_count = 0; *epsilon = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_set_term_criteria(
+    jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_set_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setTermCriteria(cv::TermCriteria(type, max_count, epsilon));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; (void)max_count; (void)epsilon;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_logistic_regression_get_learnt_thetas(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_logistic_regression_get_learnt_thetas";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::LogisticRegression> native = as_logistic_regression_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        copy_mat_to_output(native->get_learnt_thetas(), dst);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_get_weights(const jyppx_ocv_ml_model* model, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_get_weights";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        copy_mat_to_output(native->getWeights(), dst);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_get_shift(const jyppx_ocv_ml_model* model, float* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_get_shift";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_float(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        *value = native->getShift();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *value = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_set_optimal_parameters(
+    jyppx_ocv_ml_model* model,
+    int svmsgd_type,
+    int margin_type)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_set_optimal_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setOptimalParameters(svmsgd_type, margin_type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)svmsgd_type; (void)margin_type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_get_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case SVMSGD_INT_TYPE: *value = native->getSvmsgdType(); return OPENCV_CSHARP_STATUS_OK;
+        case SVMSGD_INT_MARGIN_TYPE: *value = native->getMarginType(); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id;
+        *value = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_set_int(jyppx_ocv_ml_model* model, int property_id, int value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_set_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case SVMSGD_INT_TYPE: native->setSvmsgdType(value); return OPENCV_CSHARP_STATUS_OK;
+        case SVMSGD_INT_MARGIN_TYPE: native->setMarginType(value); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id; (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_get_float(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    float* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_get_float";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_float(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case SVMSGD_FLOAT_MARGIN_REGULARIZATION: *value = native->getMarginRegularization(); return OPENCV_CSHARP_STATUS_OK;
+        case SVMSGD_FLOAT_INITIAL_STEP_SIZE: *value = native->getInitialStepSize(); return OPENCV_CSHARP_STATUS_OK;
+        case SVMSGD_FLOAT_STEP_DECREASING_POWER: *value = native->getStepDecreasingPower(); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id;
+        *value = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_set_float(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    float value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_set_float";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case SVMSGD_FLOAT_MARGIN_REGULARIZATION: native->setMarginRegularization(value); return OPENCV_CSHARP_STATUS_OK;
+        case SVMSGD_FLOAT_INITIAL_STEP_SIZE: native->setInitialStepSize(value); return OPENCV_CSHARP_STATUS_OK;
+        case SVMSGD_FLOAT_STEP_DECREASING_POWER: native->setStepDecreasingPower(value); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id; (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_get_term_criteria(
+    const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_get_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, type, "type");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, max_count, "max_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, epsilon, "epsilon");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        cv::TermCriteria criteria = native->getTermCriteria();
+        *type = criteria.type;
+        *max_count = criteria.maxCount;
+        *epsilon = criteria.epsilon;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *type = 0; *max_count = 0; *epsilon = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_svmsgd_set_term_criteria(
+    jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_svmsgd_set_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::SVMSGD> native = as_svmsgd_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setTermCriteria(cv::TermCriteria(type, max_count, epsilon));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; (void)max_count; (void)epsilon;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

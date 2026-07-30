@@ -202,7 +202,7 @@ foreach ($expectation in @(
         @($workflowPath, $windowsX86JobText, "-NativeExecutionHost '`${{ steps.dotnet_x86.outputs.host_path }}'", "Windows x86 consumer must execute through the explicit x86 .NET host"),
         @($workflowPath, $windowsX86JobText, "-CompileNativeSmoke", "Windows x86 verifier must compile the package consumer"),
         @($workflowPath, $windowsX86JobText, "-RunNativeSmoke", "Windows x86 verifier must execute package-output full native calls"),
-        @($workflowPath, $workflowText, "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=49 abi_functions=2489 synthetic=false machine=I386 wow64=true", "Pack runtime job must validate exact Windows x86 full provenance"),
+        @($workflowPath, $workflowText, "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=49 abi_functions=2513 synthetic=false machine=I386 wow64=true", "Pack runtime job must validate exact Windows x86 full provenance"),
         @($consumerGuardPath, $consumerGuardText, "WINDOWS_X86_PACKAGE_CONSUMER_PROCESS_OK", "Package consumer must emit process-local X86/WoW64 evidence before native calls"),
         @($consumerGuardPath, $consumerGuardText, "RuntimeInformation.ProcessArchitecture != Architecture.X86", "Package consumer must reject a non-X86 process for win-x86"),
         @($consumerGuardPath, $consumerGuardText, "Environment.Is64BitProcess", "Package consumer must reject a 64-bit win-x86 process"),

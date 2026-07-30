@@ -144,11 +144,16 @@
     {
       "ordinal": 12,
       "identity": "cv.ml.TrainData.getSample(Mat varIdx;int sidx;float* buf)-\u003Evoid",
-      "classification": "missing",
-      "reason": "This TrainData pointer-buffer callable has no current stable span or caller-buffer ABI contract and remains an explicit full-profile gap.",
+      "classification": "implemented",
+      "reason": "The selected TrainData buffer batch copies sample and variable values through exact-length count/fill C ABI operations with ordered optional indexes, native smoke, and net8/net10 managed tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_sample_count",
+        "jyppx_ocv_ml_train_data_get_sample_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetSample(System.Int32 sampleIndex,OpenCvSharp.Core.Mat? variableIndices=null)"
+      ]
     },
     {
       "ordinal": 13,
@@ -387,11 +392,16 @@
     {
       "ordinal": 31,
       "identity": "cv.ml.TrainData.getValues(int vi;Mat sidx;float* values)-\u003Evoid",
-      "classification": "missing",
-      "reason": "This TrainData pointer-buffer callable has no current stable span or caller-buffer ABI contract and remains an explicit full-profile gap.",
+      "classification": "implemented",
+      "reason": "The selected TrainData buffer batch copies sample and variable values through exact-length count/fill C ABI operations with ordered optional indexes, native smoke, and net8/net10 managed tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_values_count",
+        "jyppx_ocv_ml_train_data_get_values_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetValues(System.Int32 variableIndex,OpenCvSharp.Core.Mat? sampleIndices=null)"
+      ]
     },
     {
       "ordinal": 32,
@@ -2529,110 +2539,158 @@
     {
       "ordinal": 203,
       "identity": "cv.ml.LogisticRegression.getLearningRate()-\u003Edouble",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_learning_rate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Double LearningRate"
+      ]
     },
     {
       "ordinal": 204,
       "identity": "cv.ml.LogisticRegression.setLearningRate(double val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_learning_rate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Double LearningRate"
+      ]
     },
     {
       "ordinal": 205,
       "identity": "cv.ml.LogisticRegression.getIterations()-\u003Eint",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 Iterations"
+      ]
     },
     {
       "ordinal": 206,
       "identity": "cv.ml.LogisticRegression.setIterations(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 Iterations"
+      ]
     },
     {
       "ordinal": 207,
       "identity": "cv.ml.LogisticRegression.getRegularization()-\u003Eint",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.ML.LogisticRegressionRegularizationKinds Regularization"
+      ]
     },
     {
       "ordinal": 208,
       "identity": "cv.ml.LogisticRegression.setRegularization(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.ML.LogisticRegressionRegularizationKinds Regularization"
+      ]
     },
     {
       "ordinal": 209,
       "identity": "cv.ml.LogisticRegression.getTrainMethod()-\u003Eint",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.ML.LogisticRegressionTrainingMethods TrainingMethod"
+      ]
     },
     {
       "ordinal": 210,
       "identity": "cv.ml.LogisticRegression.setTrainMethod(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.ML.LogisticRegressionTrainingMethods TrainingMethod"
+      ]
     },
     {
       "ordinal": 211,
       "identity": "cv.ml.LogisticRegression.getMiniBatchSize()-\u003Eint",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 MiniBatchSize"
+      ]
     },
     {
       "ordinal": 212,
       "identity": "cv.ml.LogisticRegression.setMiniBatchSize(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|System.Int32 MiniBatchSize"
+      ]
     },
     {
       "ordinal": 213,
       "identity": "cv.ml.LogisticRegression.getTermCriteria()-\u003ETermCriteria",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
     },
     {
       "ordinal": 214,
       "identity": "cv.ml.LogisticRegression.setTermCriteria(TermCriteria val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
     },
     {
       "ordinal": 215,
@@ -2655,38 +2713,54 @@
     {
       "ordinal": 217,
       "identity": "cv.ml.LogisticRegression.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? results=null,OpenCvSharp.ML.StatModelFlags flags=None)"
+      ]
     },
     {
       "ordinal": 218,
       "identity": "cv.ml.LogisticRegression.get_learnt_thetas()-\u003EMat",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_get_learnt_thetas"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;instance|OpenCvSharp.Core.Mat GetLearntThetas()"
+      ]
     },
     {
       "ordinal": 219,
       "identity": "cv.ml.LogisticRegression.create()-\u003EPtr\u003CLogisticRegression\u003E",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;static|OpenCvSharp.ML.LogisticRegression Create()"
+      ]
     },
     {
       "ordinal": 220,
       "identity": "cv.ml.LogisticRegression.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CLogisticRegression\u003E",
-      "classification": "missing",
-      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected LogisticRegression batch provides an owned StatModel handle, typed optimizer configuration, copied learned-theta output, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_logistic_regression_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;static|OpenCvSharp.ML.LogisticRegression Load(System.String filepath,System.String? nodeName=null)"
+      ]
     },
     {
       "ordinal": 221,
@@ -2718,155 +2792,223 @@
     {
       "ordinal": 224,
       "identity": "cv.ml.SVMSGD.getWeights()-\u003EMat",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"
+      ]
     },
     {
       "ordinal": 225,
       "identity": "cv.ml.SVMSGD.getShift()-\u003Efloat",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public|System.Single Shift"
+      ]
     },
     {
       "ordinal": 226,
       "identity": "cv.ml.SVMSGD.create()-\u003EPtr\u003CSVMSGD\u003E",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|method|public;static|OpenCvSharp.ML.SVMSGD Create()"
+      ]
     },
     {
       "ordinal": 227,
       "identity": "cv.ml.SVMSGD.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CSVMSGD\u003E",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|method|public;static|OpenCvSharp.ML.SVMSGD Load(System.String filepath,System.String? nodeName=null)"
+      ]
     },
     {
       "ordinal": 228,
       "identity": "cv.ml.SVMSGD.setOptimalParameters(int svmsgdType=SVMSGD::ASGD;int marginType=SVMSGD::SOFT_MARGIN)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_optimal_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|System.Void SetOptimalParameters(OpenCvSharp.ML.SVMSGDTypes type=Asgd,OpenCvSharp.ML.SVMSGDMarginTypes marginType=SoftMargin)"
+      ]
     },
     {
       "ordinal": 229,
       "identity": "cv.ml.SVMSGD.getSvmsgdType()-\u003Eint",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.ML.SVMSGDTypes Type"
+      ]
     },
     {
       "ordinal": 230,
       "identity": "cv.ml.SVMSGD.setSvmsgdType(int svmsgdType)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.ML.SVMSGDTypes Type"
+      ]
     },
     {
       "ordinal": 231,
       "identity": "cv.ml.SVMSGD.getMarginType()-\u003Eint",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.ML.SVMSGDMarginTypes MarginType"
+      ]
     },
     {
       "ordinal": 232,
       "identity": "cv.ml.SVMSGD.setMarginType(int marginType)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.ML.SVMSGDMarginTypes MarginType"
+      ]
     },
     {
       "ordinal": 233,
       "identity": "cv.ml.SVMSGD.getMarginRegularization()-\u003Efloat",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single MarginRegularization"
+      ]
     },
     {
       "ordinal": 234,
       "identity": "cv.ml.SVMSGD.setMarginRegularization(float marginRegularization)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single MarginRegularization"
+      ]
     },
     {
       "ordinal": 235,
       "identity": "cv.ml.SVMSGD.getInitialStepSize()-\u003Efloat",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single InitialStepSize"
+      ]
     },
     {
       "ordinal": 236,
       "identity": "cv.ml.SVMSGD.setInitialStepSize(float InitialStepSize)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single InitialStepSize"
+      ]
     },
     {
       "ordinal": 237,
       "identity": "cv.ml.SVMSGD.getStepDecreasingPower()-\u003Efloat",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_float"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single StepDecreasingPower"
+      ]
     },
     {
       "ordinal": 238,
       "identity": "cv.ml.SVMSGD.setStepDecreasingPower(float stepDecreasingPower)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_float"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|System.Single StepDecreasingPower"
+      ]
     },
     {
       "ordinal": 239,
       "identity": "cv.ml.SVMSGD.getTermCriteria()-\u003ETermCriteria",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
     },
     {
       "ordinal": 240,
       "identity": "cv.ml.SVMSGD.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected SVMSGD batch provides an owned StatModel handle, typed optimizer and margin configuration, copied weight output, decision shift, prediction, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svmsgd_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVMSGD|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
     }
   ]
 }

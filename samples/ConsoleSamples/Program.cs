@@ -66,9 +66,11 @@ using MLAnnMlpObject = OpenCvSharp.ML.ANN_MLP;
 using MLBoostObject = OpenCvSharp.ML.Boost;
 using MLDTreesObject = OpenCvSharp.ML.DTrees;
 using MLEMObject = OpenCvSharp.ML.EM;
+using MLLogisticRegressionObject = OpenCvSharp.ML.LogisticRegression;
 using MLNormalBayesClassifierObject = OpenCvSharp.ML.NormalBayesClassifier;
 using MLRTreesObject = OpenCvSharp.ML.RTrees;
 using MLSvmObject = OpenCvSharp.ML.SVM;
+using MLSVMSGDObject = OpenCvSharp.ML.SVMSGD;
 using OptFlowCv2Object = OpenCvSharp.OptFlow.OptFlowCv2;
 using OptFlowDualTVL1Object = OpenCvSharp.OptFlow.DualTVL1OpticalFlow;
 using OptFlowRLOFParameterObject = OpenCvSharp.OptFlow.RLOFOpticalFlowParameter;
@@ -739,6 +741,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunPhotoFinalCallablesDefaultSummary());
                     Console.WriteLine(RunMLTreeModelsDefaultSummary());
                     Console.WriteLine(RunMLEMDefaultSummary());
+                    Console.WriteLine(RunMLRemainingCallablesDefaultSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -3357,6 +3360,52 @@ namespace ConsoleSamples
                     finally
                     {
                         DisposeAll(covariances);
+                    }
+                }
+            }
+        }
+
+        private static string RunMLRemainingCallablesDefaultSummary()
+        {
+            using (Mat samples = CreateMLSamples())
+            using (Mat logisticResponses = new Mat(6, 1, MatType.CV_32FC1))
+            using (Mat svmsgdResponses = new Mat(6, 1, MatType.CV_32FC1))
+            using (Mat negativeQuery = new Mat(1, 2, MatType.CV_32FC1))
+            using (Mat positiveQuery = new Mat(1, 2, MatType.CV_32FC1))
+            {
+                logisticResponses.CopyFrom<float>(new[] { 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F });
+                svmsgdResponses.CopyFrom<float>(new[] { -1.0F, -1.0F, -1.0F, 1.0F, 1.0F, 1.0F });
+                negativeQuery.CopyFrom<float>(new[] { 0.1F, 0.2F });
+                positiveQuery.CopyFrom<float>(new[] { 5.2F, 5.1F });
+
+                using (TrainData data = TrainData.Create(samples, SampleTypes.RowSample, logisticResponses))
+                using (MLLogisticRegressionObject logistic = MLLogisticRegressionObject.Create())
+                using (MLSVMSGDObject svmsgd = MLSVMSGDObject.Create())
+                {
+                    float[] sample = data.GetSample(4);
+                    float[] firstVariable = data.GetValues(0);
+
+                    logistic.LearningRate = 0.05;
+                    logistic.Iterations = 1000;
+                    logistic.TrainingMethod = LogisticRegressionTrainingMethods.MiniBatch;
+                    logistic.MiniBatchSize = 2;
+                    logistic.TermCriteria = TermCriteria.ByCountAndEpsilon(1000, 1e-6);
+                    bool logisticTrained = logistic.Train(samples, SampleTypes.RowSample, logisticResponses);
+
+                    svmsgd.SetOptimalParameters();
+                    svmsgd.TermCriteria = TermCriteria.ByCountAndEpsilon(10000, 1e-6);
+                    bool svmsgdTrained = svmsgd.Train(samples, SampleTypes.RowSample, svmsgdResponses);
+
+                    using (Mat thetas = logistic.GetLearntThetas())
+                    using (Mat weights = svmsgd.GetWeights())
+                    {
+                        return "ML remaining: sample=" + string.Join(",", sample)
+                            + ", values=" + firstVariable.Length
+                            + ", logistic=" + logisticTrained + "/" + logistic.Predict(negativeQuery) + "/" + logistic.Predict(positiveQuery)
+                            + ", thetas=" + thetas.Rows + "x" + thetas.Cols
+                            + ", svmsgd=" + svmsgdTrained + "/" + svmsgd.Predict(negativeQuery) + "/" + svmsgd.Predict(positiveQuery)
+                            + ", weights=" + weights.Rows + "x" + weights.Cols
+                            + ", shiftFinite=" + float.IsFinite(svmsgd.Shift);
                     }
                 }
             }

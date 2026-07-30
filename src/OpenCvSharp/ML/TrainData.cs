@@ -299,6 +299,66 @@ namespace OpenCvSharp.ML
             return GetInt(PropertyCatCount, variableIndex);
         }
 
+        /// <summary>Returns one sample, optionally restricted to selected variable indexes.</summary>
+        public float[] GetSample(int sampleIndex, Mat? variableIndices = null)
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.MlTrainDataGetSampleCount(NativeHandle, OptionalHandle(variableIndices), out int count));
+            var result = new float[count];
+            GetSample(sampleIndex, result, variableIndices);
+            return result;
+        }
+
+        /// <summary>Copies one sample into an exactly sized caller-owned array.</summary>
+        public unsafe void GetSample(int sampleIndex, float[] destination, Mat? variableIndices = null)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(destination, nameof(destination));
+            NativeException.ThrowIfError(NativeMethods.MlTrainDataGetSampleCount(NativeHandle, OptionalHandle(variableIndices), out int count));
+            ValidateDestinationLength(destination.Length, count, nameof(destination));
+            fixed (float* destinationPtr = destination)
+            {
+                NativeException.ThrowIfError(NativeMethods.MlTrainDataGetSampleFill(
+                    NativeHandle,
+                    OptionalHandle(variableIndices),
+                    sampleIndex,
+                    destinationPtr,
+                    destination.Length,
+                    out int written));
+                ValidateWrittenCount(written, count);
+            }
+        }
+
+        /// <summary>Returns one variable across all or selected sample indexes.</summary>
+        public float[] GetValues(int variableIndex, Mat? sampleIndices = null)
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.MlTrainDataGetValuesCount(NativeHandle, OptionalHandle(sampleIndices), out int count));
+            var result = new float[count];
+            GetValues(variableIndex, result, sampleIndices);
+            return result;
+        }
+
+        /// <summary>Copies one variable into an exactly sized caller-owned array.</summary>
+        public unsafe void GetValues(int variableIndex, float[] destination, Mat? sampleIndices = null)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(destination, nameof(destination));
+            NativeException.ThrowIfError(NativeMethods.MlTrainDataGetValuesCount(NativeHandle, OptionalHandle(sampleIndices), out int count));
+            ValidateDestinationLength(destination.Length, count, nameof(destination));
+            fixed (float* destinationPtr = destination)
+            {
+                NativeException.ThrowIfError(NativeMethods.MlTrainDataGetValuesFill(
+                    NativeHandle,
+                    variableIndex,
+                    OptionalHandle(sampleIndices),
+                    destinationPtr,
+                    destination.Length,
+                    out int written));
+                ValidateWrittenCount(written, count);
+            }
+        }
+
         /// <summary>Sets the train/test split by count. 按数量设置训练/测试划分。</summary>
         public void SetTrainTestSplit(int count, bool shuffle = true)
         {
@@ -453,6 +513,22 @@ namespace OpenCvSharp.ML
         private static IntPtr OptionalHandle(Mat? mat)
         {
             return mat == null ? IntPtr.Zero : mat.NativeHandle;
+        }
+
+        private static void ValidateDestinationLength(int actual, int expected, string parameterName)
+        {
+            if (actual != expected)
+            {
+                throw new ArgumentException("The destination length must match the required element count.", parameterName);
+            }
+        }
+
+        private static void ValidateWrittenCount(int actual, int expected)
+        {
+            if (actual != expected)
+            {
+                throw new OpenCvException("The native ML buffer element count changed during retrieval.");
+            }
         }
 
         private void ThrowIfDisposed()

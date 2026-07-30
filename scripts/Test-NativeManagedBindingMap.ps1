@@ -125,7 +125,7 @@ function Test-BindingMapDocument {
 
     $actualEntrypoints = @($entrypoints)
     $sortedEntrypoints = @(Get-OrdinalSorted -Values $actualEntrypoints)
-    Assert-True -List $List -Condition ($bindingLines.Count -eq 2489 -and $actualEntrypoints.Count -eq 2489) -Path $Path -Issue "Binding-map native entry count drifted" -Text "actual=$($actualEntrypoints.Count) expected=2489"
+    Assert-True -List $List -Condition ($bindingLines.Count -eq 2513 -and $actualEntrypoints.Count -eq 2513) -Path $Path -Issue "Binding-map native entry count drifted" -Text "actual=$($actualEntrypoints.Count) expected=2513"
     Assert-True -List $List -Condition (($actualEntrypoints -join "`n") -ceq ($sortedEntrypoints -join "`n")) -Path $Path -Issue "Binding-map entries must use ordinal entrypoint ordering"
     $uniqueEntrypoints = @($actualEntrypoints | Sort-Object -Unique)
     Assert-True -List $List -Condition ($actualEntrypoints.Count -eq $uniqueEntrypoints.Count) -Path $Path -Issue "Binding-map contains duplicate entrypoints"
@@ -140,7 +140,7 @@ function Test-BindingMapDocument {
     Assert-True -List $List -Condition ($Summary.schemaVersion -eq 1 -and $Summary.generator -eq "tools/NativeManagedBindingMap" -and $Summary.assemblyName -eq "JYPPX.OpenCV.CSharp.API" -and $Summary.targetFramework -eq ".NETCoreApp,Version=v10.0") -Path $Path -Issue "Binding-map summary identity drifted"
     Assert-True -List $List -Condition ($Summary.nativeManifestPath -eq "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt" -and $Summary.managedSourceRoot -eq "src/OpenCvSharp/Internal/Interop" -and $Summary.mappingPath -eq "compatibility/native-managed-binding-map.txt") -Path $Path -Issue "Binding-map summary paths drifted"
     Assert-True -List $List -Condition ($Summary.mappingSha256 -eq $mappingHash) -Path $Path -Issue "Binding-map SHA256 does not match its summary" -Text "actual=$mappingHash summary=$($Summary.mappingSha256)"
-    Assert-True -List $List -Condition ([int]$Summary.nativeFunctionCount -eq 2489 -and [int]$Summary.managedEntryPointCount -eq 2489 -and [int]$Summary.managedBoundCount -eq 2489) -Path $Path -Issue "Binding-map summary parity counts drifted"
+    Assert-True -List $List -Condition ([int]$Summary.nativeFunctionCount -eq 2513 -and [int]$Summary.managedEntryPointCount -eq 2513 -and [int]$Summary.managedBoundCount -eq 2513) -Path $Path -Issue "Binding-map summary parity counts drifted"
     Assert-True -List $List -Condition ([int]$Summary.managedImportMethodCount -eq $methodCount -and [int]$Summary.managedSourceDeclarationCount -eq $sourceCount) -Path $Path -Issue "Binding-map summary method/source counts drifted" -Text "methods=$methodCount sources=$sourceCount"
     Assert-True -List $List -Condition ([int]$Summary.nativeInfrastructureCount -eq 0 -and [int]$Summary.compatibilityOnlyCount -eq 0 -and [int]$Summary.unboundCount -eq 0 -and [int]$Summary.managedOnlyCount -eq 0) -Path $Path -Issue "Binding-map summary must retain zero unbound, managed-only, or classified exceptions"
 }
@@ -260,5 +260,5 @@ if ($violations.Count -gt 0) {
     exit 1
 }
 
-Write-Host "NATIVE_MANAGED_BINDING_MAP_CONTRACT_OK native=2489 bound=2489 unbound=0 managed_only=0 imports=$($summary.managedImportMethodCount) sha256=$($summary.mappingSha256)"
+Write-Host "NATIVE_MANAGED_BINDING_MAP_CONTRACT_OK native=2513 bound=2513 unbound=0 managed_only=0 imports=$($summary.managedImportMethodCount) sha256=$($summary.mappingSha256)"
 Write-Host "Negative fixtures rejected: missing, duplicate, reorder, entrypoint drift, fixed-major identity, stale hash, undocumented classification, nondeterministic source ordering."

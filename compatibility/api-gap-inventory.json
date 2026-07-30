@@ -6,17 +6,17 @@
                       "managed":  {
                                       "path":  "compatibility/managed-public-api.txt",
                                       "summaryPath":  "compatibility/managed-public-api-summary.json",
-                                      "sha256":  "504b369eaf7138f0a42fd299782c61f613681e71450f9c3d3c443cdac555422a",
-                                      "typeCount":  558,
-                                      "memberCount":  6095,
+                                      "sha256":  "3441f75d985f71be1835fd854871c76c4f1d8ffcc0dae3e8bca844dc9f7e24be",
+                                      "typeCount":  564,
+                                      "memberCount":  6134,
                                       "namespaceCount":  41,
                                       "targetFramework":  "net8.0",
                                       "nullableShape":  "included"
                                   },
                       "nativeFull":  {
                                          "path":  "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
-                                         "sha256":  "e8de64559dce973b900a9fafb399e7f91d3423d40c6f76f89308d36b65287372",
-                                         "functionCount":  2489,
+                                         "sha256":  "6e21c8e42d8a933ac5188a31fe64d10de8610ea76fdbab34864e3039f90f1a1c",
+                                         "functionCount":  2513,
                                          "primaryPrefix":  "jyppx_ocv_"
                                      },
                       "nativeMini":  {
@@ -28,9 +28,9 @@
                       "nativeManagedBindingMap":  {
                                                       "path":  "compatibility/native-managed-binding-map.txt",
                                                       "summaryPath":  "compatibility/native-managed-binding-summary.json",
-                                                      "sha256":  "51acb78554e976d5c91096164746ffe1f97da2818a0ff7d2805a9c60f12adb2b",
-                                                      "nativeFunctionCount":  2489,
-                                                      "managedBoundCount":  2489,
+                                                      "sha256":  "f13ab82bbfc4304c21efaf7825e8f202e5ba3939115aafc16c550c950ef220a2",
+                                                      "nativeFunctionCount":  2513,
+                                                      "managedBoundCount":  2513,
                                                       "unboundCount":  0,
                                                       "managedOnlyCount":  0
                                                   },
@@ -215,24 +215,24 @@
                                             "classificationPath":  "compatibility/ml-upstream-classifications.json",
                                             "familyInventoryPath":  "compatibility/ml-implemented-families.json",
                                             "rawExtractionPath":  "compatibility/ml-upstream-raw.json",
-                                            "sha256":  "177b050674409babc62a0741538325ee28038ab154af623e8c9b25224cf0d5d4",
+                                            "sha256":  "fe47d7ad50741c31ba441ff3494b06e6ef99e1d089a8eb103379e6f614cbe93d",
                                             "rawSha256":  "b7c850093e07b04739bff28a81b0248d3a646933f1d51bf6cc25fcab47ab1001",
                                             "declarationCount":  241,
                                             "callableCount":  208,
-                                            "implementedCount":  173,
-                                            "missingCount":  35,
+                                            "implementedCount":  208,
+                                            "missingCount":  0,
                                             "intentionallyOmittedCount":  0,
                                             "unsupportedCount":  0,
                                             "upstreamConditionalCount":  0,
-                                            "selectedFamilyCount":  3,
-                                            "selectedDeclarationCount":  86,
+                                            "selectedFamilyCount":  6,
+                                            "selectedDeclarationCount":  121,
                                             "sourceHeaderCount":  1,
                                             "compatibilityHeaderCount":  1,
                                             "excludedPublicHeaderCount":  1,
                                             "sourceReviewedExtensionCount":  2,
-                                            "managedPublicTypeAdditionCount":  12,
-                                            "managedPublicMemberAdditionCount":  108,
-                                            "nativeEntrypointAdditionCount":  51
+                                            "managedPublicTypeAdditionCount":  18,
+                                            "managedPublicMemberAdditionCount":  147,
+                                            "nativeEntrypointAdditionCount":  75
                                         },
                       "videoUpstreamMap":  {
                                                "path":  "compatibility/video-upstream-map.txt",
@@ -284,14 +284,14 @@
                           "id":  "managed-upstream-parity-map",
                           "status":  "ongoing",
                           "evidence":  "compatibility/imgproc-upstream-summary.json; compatibility/imgcodecs-upstream-summary.json; compatibility/videoio-upstream-summary.json; compatibility/videoio-registry-surface.json; compatibility/calib3d-upstream-summary.json; compatibility/core-upstream-summary.json; compatibility/dnn-upstream-summary.json; compatibility/features-upstream-summary.json; compatibility/objdetect-upstream-summary.json; compatibility/photo-upstream-summary.json; compatibility/ml-upstream-summary.json; compatibility/video-upstream-summary.json",
-                          "result":  "The exact OpenCV 5.0.0 parser slices now also measure contrib ML at 241 declarations/173 implemented callables/35 explicit missing callables/zero omissions plus source-reviewed ANN_MLP RNG and RTrees OOB extensions. Existing measured module slices remain governed independently, and repository-wide parity remains unmeasured.",
+                          "result":  "The exact OpenCV 5.0.0 contrib ML parser slice now has all 208 callable declarations implemented with zero missing or omitted callables, plus source-reviewed ANN_MLP RNG and RTrees OOB extensions. Existing measured module slices remain governed independently, and repository-wide parity remains unmeasured.",
                           "nextEvidence":  "Extend the structured upstream mapping method to the next prioritized OpenCV module."
                       },
                       {
                           "id":  "native-to-managed-binding-map",
                           "status":  "closed",
                           "evidence":  "compatibility/native-managed-binding-summary.json",
-                          "result":  "All 2,475 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
+                          "result":  "All 2,513 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
                       },
                       {
                           "id":  "ownership-error-marshalling-audit",

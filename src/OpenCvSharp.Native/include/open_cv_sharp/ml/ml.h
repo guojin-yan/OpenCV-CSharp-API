@@ -524,3 +524,124 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_train_m(
     jyppx_ocv_mat* labels,
     jyppx_ocv_mat* probabilities,
     int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_train_data_get_sample_count(
+    const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* variable_indices,
+    int* count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_train_data_get_sample_fill(
+    const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* variable_indices,
+    int sample_index,
+    float* values,
+    int value_capacity,
+    int* count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_train_data_get_values_count(
+    const jyppx_ocv_ml_train_data* train_data,
+    const jyppx_ocv_mat* sample_indices,
+    int* count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_train_data_get_values_fill(
+    const jyppx_ocv_ml_train_data* train_data,
+    int variable_index,
+    const jyppx_ocv_mat* sample_indices,
+    float* values,
+    int value_capacity,
+    int* count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_create(
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_get_learning_rate(
+    const jyppx_ocv_ml_model* model,
+    double* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_set_learning_rate(
+    jyppx_ocv_ml_model* model,
+    double value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_get_term_criteria(
+    const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_set_term_criteria(
+    jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_logistic_regression_get_learnt_thetas(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_create(
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_get_weights(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_get_shift(
+    const jyppx_ocv_ml_model* model,
+    float* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_set_optimal_parameters(
+    jyppx_ocv_ml_model* model,
+    int svmsgd_type,
+    int margin_type);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_get_float(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    float* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_set_float(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    float value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_get_term_criteria(
+    const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_svmsgd_set_term_criteria(
+    jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon);

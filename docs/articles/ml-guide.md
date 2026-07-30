@@ -8,13 +8,13 @@
 
 - Training data: `TrainData` from in-memory matrices or CSV files.
 - Model base: `StatModel` state, training, prediction, error calculation, save, and clear.
-- Models: `KNearest`, `SVM`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, and `ANN_MLP`.
+- Models: `KNearest`, `SVM`, `SVMSGD`, `LogisticRegression`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, and `ANN_MLP`.
 - Parameter grids: `ParamGrid` and `SVM.GetDefaultGrid`.
 - Enums: sample layout, variable type, model flags, KNN algorithm, SVM type, SVM kernel, SVM parameter ids, and EM covariance constraints.
 
 - 训练数据：从内存矩阵或 CSV 文件创建 `TrainData`。
 - 模型基类：`StatModel` 状态、训练、预测、误差计算、保存和清理。
-- 模型：`KNearest`、`SVM`、`NormalBayesClassifier`、`EM`、`DTrees`、`RTrees`、`Boost` 和 `ANN_MLP`。
+- 模型：`KNearest`、`SVM`、`SVMSGD`、`LogisticRegression`、`NormalBayesClassifier`、`EM`、`DTrees`、`RTrees`、`Boost` 和 `ANN_MLP`。
 - 参数网格：`ParamGrid` 与 `SVM.GetDefaultGrid`。
 - 枚举：样本布局、变量类型、模型标志、KNN 算法、SVM 类型、SVM 核函数、SVM 参数 id 和 EM 协方差约束。
 
@@ -33,6 +33,8 @@ OpenCV ML training samples usually use `CV_32F`. For row samples, every row is o
 OpenCV ML 训练样本通常使用 `CV_32F`。使用 row samples 时，每一行是一条样本，每一列是一个变量。`responses` 类型以及分类/回归设置会影响训练行为，因此要让响应数据与模型类型保持一致。
 
 `TrainData` exposes the stable data surface that can be represented through this C ABI. String and vector-like outputs stay inside native code and are copied through count/fill style APIs.
+
+`GetSample` and `GetValues` return new `float[]` instances or fill caller-owned arrays. Caller-owned arrays must have exactly the required length; undersized and oversized arrays are both rejected before native memory is written. Optional `CV_32S` index vectors preserve caller order, while omitted indexes select every variable or sample.
 
 `TrainData` 只暴露可通过当前 C ABI 稳定表达的数据面。字符串和类似 vector 的输出留在 native 内部，并通过 count/fill 风格 API 复制出来。
 
@@ -63,6 +65,34 @@ knn.Train(samples, SampleTypes.RowSample, responses);
 using Mat query = new Mat(1, 2, MatType.CV_32FC1);
 query.CopyFrom<float>(new[] { 0.1F, 0.2F });
 float predicted = knn.Predict(query);
+```
+
+## LogisticRegression and SVMSGD
+
+`LogisticRegression` exposes learning rate, iteration count, regularization, batch or mini-batch training, mini-batch size, and termination criteria. Training samples and responses must use `CV_32F`; classifier responses use `0` and `1`. `GetLearntThetas()` and its caller-owned overload always deep-copy the learned parameter matrix.
+
+`SVMSGD` exposes SGD/ASGD and soft/hard-margin configuration, regularization and step parameters, recommended-parameter initialization, termination criteria, decision shift, and copied weights. Training samples and responses use `CV_32F`; signed classifier responses should include negative and positive values. `GetWeights()` and its caller-owned overload return independent matrices.
+
+Both types inherit `StatModel`, including training, prediction, state, clear, save, and load. OpenCV's SVMSGD implementation returns the direct `-1/+1` label when a single-sample prediction omits the results matrix. When a results matrix is supplied it writes labels there and the upstream scalar return is `0`; this binding preserves that behavior.
+
+```csharp
+using Mat binaryResponses = new Mat(4, 1, MatType.CV_32FC1);
+binaryResponses.CopyFrom<float>(new[] { 0.0F, 0.0F, 1.0F, 1.0F });
+
+using LogisticRegression logistic = LogisticRegression.Create();
+logistic.LearningRate = 0.05;
+logistic.TrainingMethod = LogisticRegressionTrainingMethods.MiniBatch;
+logistic.MiniBatchSize = 2;
+logistic.Train(samples, SampleTypes.RowSample, binaryResponses);
+using Mat thetas = logistic.GetLearntThetas();
+
+using Mat signedResponses = new Mat(4, 1, MatType.CV_32FC1);
+signedResponses.CopyFrom<float>(new[] { -1.0F, -1.0F, 1.0F, 1.0F });
+
+using SVMSGD svmsgd = SVMSGD.Create();
+svmsgd.SetOptimalParameters();
+svmsgd.Train(samples, SampleTypes.RowSample, signedResponses);
+using Mat weights = svmsgd.GetWeights();
 ```
 
 ## ANN_MLP
