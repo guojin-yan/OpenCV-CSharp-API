@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   build-docs:
+    if: github.repository == 'grape-yan/OpenCV-CSharp-API' || (github.repository == 'guojin-yan/OpenCV-CSharp-API' && github.event_name == 'workflow_dispatch')
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -40,7 +41,7 @@ jobs:
           path: docs/_site
 
   deploy-pages:
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.repository == 'guojin-yan/OpenCV-CSharp-API' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     needs: build-docs
     runs-on: ubuntu-latest
     permissions:

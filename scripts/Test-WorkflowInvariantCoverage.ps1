@@ -186,6 +186,25 @@ if ((Get-TokenIndex -Text $attributesText -Token '* text=auto eol=lf') -lt 0) {
     Add-Violation -Violations $violations -Path $attributesPath -Issue "Hosted checkouts must retain canonical LF text bytes" -Text '* text=auto eol=lf'
 }
 
+$dailyCompileCondition = "if: github.repository == 'grape-yan/OpenCV-CSharp-API' || (github.repository == 'guojin-yan/OpenCV-CSharp-API' && github.event_name == 'workflow_dispatch')"
+foreach ($workflowPath in @(
+        ".github/workflows/build-managed.yml",
+        ".github/workflows/build-native.yml",
+        ".github/workflows/docs.yml")) {
+    $workflowText = Normalize-CiText -Text (Read-RequiredText -RelativePath $workflowPath)
+    $conditionCount = [regex]::Matches($workflowText, [regex]::Escape($dailyCompileCondition), [Text.RegularExpressions.RegexOptions]::IgnoreCase).Count
+    if ($conditionCount -ne 1) {
+        Add-Violation -Violations $violations -Path $workflowPath -Issue "Daily compilation must run on the mirror while authoritative compilation requires explicit dispatch" -Text $dailyCompileCondition
+    }
+}
+
+$docsWorkflowText = Normalize-CiText -Text (Read-RequiredText -RelativePath ".github/workflows/docs.yml")
+$authoritativePagesCondition = "if: github.repository == 'guojin-yan/OpenCV-CSharp-API' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'"
+$pagesConditionCount = [regex]::Matches($docsWorkflowText, [regex]::Escape($authoritativePagesCondition), [Text.RegularExpressions.RegexOptions]::IgnoreCase).Count
+if ($pagesConditionCount -ne 1) {
+    Add-Violation -Violations $violations -Path ".github/workflows/docs.yml" -Issue "Pages deployment must remain authoritative-only and explicitly dispatched from main" -Text $authoritativePagesCondition
+}
+
 $buildManagedWorkflowPath = ".github/workflows/build-managed.yml"
 $buildManagedWorkflowText = Read-RequiredText -RelativePath $buildManagedWorkflowPath
 if ((Get-TokenIndex -Text $buildManagedWorkflowText -Token "dotnet test") -ge 0) {
