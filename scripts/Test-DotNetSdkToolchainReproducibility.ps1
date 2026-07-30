@@ -14,7 +14,7 @@ $expectedSdkVersions = @("10.0.302", "9.0.316", "8.0.423")
 $setupDotNetSha = "67a3573c9a986a3f9c594539f4ab511d57bb3ce9"
 $expectedWorkflowSetupCounts = [ordered]@{
     ".github/workflows/build-managed.yml" = 1
-    ".github/workflows/build-native.yml" = 0
+    ".github/workflows/build-native.yml" = 1
     ".github/workflows/docs.yml" = 1
     ".github/workflows/pack.yml" = 13
     ".github/workflows/runtime-input.yml" = 3
@@ -347,11 +347,11 @@ foreach ($workflowRelativePath in $expectedWorkflowPaths) {
     }
 }
 
-if ($totalSetupCount -ne 18 -or $totalDotnetVersionDeclarationCount -ne 18) {
+if ($totalSetupCount -ne 19 -or $totalDotnetVersionDeclarationCount -ne 19) {
     Add-Violation `
         -Violations $violations `
         -Path ".github/workflows" `
-        -Issue "Repository workflow SDK setup surface must remain exactly 18 bound blocks" `
+        -Issue "Repository workflow SDK setup surface must remain exactly 19 bound blocks" `
         -Text "setups=$totalSetupCount declarations=$totalDotnetVersionDeclarationCount"
 }
 if ($directSdkInstallCount -ne 2) {

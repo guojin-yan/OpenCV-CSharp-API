@@ -119,7 +119,8 @@ internal static class Program
             string summaryText = JsonSerializer.Serialize(summary, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
+                WriteIndented = true,
+                NewLine = "\n"
             }) + "\n";
 
             WriteOrCheck(outputPath, mappingText, options.Check);
@@ -364,7 +365,7 @@ internal static class Program
     {
         if (check)
         {
-            if (!File.Exists(path) || File.ReadAllText(path) != content)
+            if (!File.Exists(path) || NormalizeNewLines(File.ReadAllText(path)) != NormalizeNewLines(content))
             {
                 throw new InvalidDataException("Generated binding-map file is out of date: " + path);
             }
@@ -373,5 +374,10 @@ internal static class Program
 
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         File.WriteAllText(path, content, new UTF8Encoding(false));
+    }
+
+    private static string NormalizeNewLines(string value)
+    {
+        return value.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n');
     }
 }
