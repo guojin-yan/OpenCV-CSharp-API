@@ -109,12 +109,12 @@ foreach ($entry in @(
 
 foreach ($entry in @(
         [pscustomobject]@{ Path = $readmePath; Needles = @("docs/articles/quick-start.md", "docs/articles/linked-runtime-build-guide.md", "docs/articles/linked-runtime-smoke-guide.md", "docs/articles/smoke-profiles-guide.md", "docs/articles/runtime-licenses.md", "packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
-        [pscustomobject]@{ Path = $quickStartPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
-        [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Needles = @("quick-start.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $quickStartPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $linkedRuntimeBuildGuidePath; Needles = @("quick-start.md", "linked-runtime-smoke-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md", "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
         [pscustomobject]@{ Path = $linkedRuntimeSmokeGuidePath; Needles = @("linked-runtime-build-guide.md", "smoke-profiles-guide.md", "runtime-licenses.md") },
         [pscustomobject]@{ Path = $smokeProfilesGuidePath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md") },
-        [pscustomobject]@{ Path = $runtimeLicensesPath; Needles = @("quick-start.md", "linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
-        [pscustomobject]@{ Path = $nativeModuleBoundaryPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "runtime-licenses.md", "../../packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $runtimeLicensesPath; Needles = @("quick-start.md", "linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
+        [pscustomobject]@{ Path = $nativeModuleBoundaryPath; Needles = @("linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "runtime-licenses.md", "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md") },
         [pscustomobject]@{ Path = $runtimeReadmePath; Needles = @("../../../docs/articles/quick-start.md", "../../../docs/articles/linked-runtime-build-guide.md", "../../../docs/articles/linked-runtime-smoke-guide.md", "../../../docs/articles/smoke-profiles-guide.md", "../../../docs/articles/runtime-licenses.md") },
         [pscustomobject]@{ Path = $versionNeutralGuidePath; Needles = @("Test-RuntimePackageDocsDiscoverability.ps1", "linked-runtime-build-guide.md", "linked-runtime-smoke-guide.md", "runtime-licenses.md") })) {
     foreach ($needle in $entry.Needles) {

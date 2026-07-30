@@ -165,6 +165,7 @@ $expectedMiniSources = @(
     "src/core/mat.cpp",
     "src/core/decomp.cpp",
     "src/core/operations.cpp",
+    "src/core/persistence.cpp",
     "src/videoio/videoio.cpp",
     "src/imgcodecs.cpp",
     "src/imgproc.cpp"
@@ -196,6 +197,8 @@ $allowedMiniHeaders = @(
     "core/decomp.h",
     "core/mat.h",
     "core/operations.h",
+    "core/persistence.h",
+    "core/utility.h",
     "error.h",
     "imgcodecs.h",
     "imgproc.h",

@@ -94,6 +94,41 @@ namespace OpenCvSharp.ObjDetect
             return this;
         }
 
+        /// <summary>Gets marker detector parameters.</summary>
+        public ArucoDetectorParameters GetDetectorParameters()
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.ArucoCharucoDetectorGetDetectorParameters(NativeHandle, out NativeMethods.ArucoDetectorParamsNative parameters));
+            return ArucoDetectorParameters.FromNative(parameters);
+        }
+
+        /// <summary>Sets marker detector parameters.</summary>
+        public CharucoDetector SetDetectorParameters(ArucoDetectorParameters parameters)
+        {
+            ThrowIfDisposed();
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+            NativeMethods.ArucoDetectorParamsNative native = parameters.ToNative();
+            NativeException.ThrowIfError(NativeMethods.ArucoCharucoDetectorSetDetectorParameters(NativeHandle, ref native));
+            return this;
+        }
+
+        /// <summary>Gets marker refinement parameters.</summary>
+        public ArucoRefineParameters GetRefineParameters()
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.ArucoCharucoDetectorGetRefineParameters(NativeHandle, out NativeMethods.ArucoRefineParamsNative parameters));
+            return ArucoRefineParameters.FromNative(parameters);
+        }
+
+        /// <summary>Sets marker refinement parameters.</summary>
+        public CharucoDetector SetRefineParameters(ArucoRefineParameters parameters)
+        {
+            ThrowIfDisposed();
+            NativeMethods.ArucoRefineParamsNative native = parameters.ToNative();
+            NativeException.ThrowIfError(NativeMethods.ArucoCharucoDetectorSetRefineParameters(NativeHandle, ref native));
+            return this;
+        }
+
         /// <summary>Detects ArUco markers and interpolates ChArUco corners. 检测 ArUco marker 并插值 ChArUco 角点。</summary>
         public CharucoDetectionResult DetectBoard(Mat image)
         {
@@ -194,6 +229,122 @@ namespace OpenCvSharp.ObjDetect
                 Trim(outputMarkerIds, safeMarkerCount));
         }
 
+        /// <summary>Detects ChArUco diamonds and the marker observations used to form them.</summary>
+        public CharucoDiamondDetectionResult DetectDiamonds(Mat image)
+        {
+            return DetectDiamonds(image, Array.Empty<Point2f[]>(), Array.Empty<int>());
+        }
+
+        /// <summary>Detects ChArUco diamonds from supplied marker observations.</summary>
+        public CharucoDiamondDetectionResult DetectDiamonds(Mat image, Point2f[][] markerCorners, int[] markerIds)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(image, nameof(image));
+            if (markerCorners == null) throw new ArgumentNullException(nameof(markerCorners));
+            if (markerIds == null) throw new ArgumentNullException(nameof(markerIds));
+            if (markerCorners.Length != markerIds.Length) throw new ArgumentException("Marker corner group count must match marker id count.", nameof(markerIds));
+            PointSetMarshaller.FlattenPoint2fGroups(markerCorners, nameof(markerCorners), out int[] inputOffsets, out Point2f[] inputPoints);
+            NativeMethods.Point2fNative[] inputNativePoints = ToNative(inputPoints);
+
+            int diamondCount;
+            int diamondPointCount;
+            int markerCount;
+            int markerPointCount;
+            fixed (int* inputOffsetsPtr = inputOffsets)
+            fixed (NativeMethods.Point2fNative* inputPointsPtr = inputNativePoints)
+            fixed (int* inputIdsPtr = markerIds)
+            {
+                NativeException.ThrowIfError(NativeMethods.ArucoCharucoDetectorDetectDiamondsCount(
+                    NativeHandle, image.NativeHandle,
+                    inputOffsetsPtr, markerCorners.Length, inputPointsPtr, inputNativePoints.Length, inputIdsPtr, markerIds.Length,
+                    out diamondCount, out diamondPointCount, out markerCount, out markerPointCount));
+            }
+            ValidateCount(diamondCount, nameof(diamondCount));
+            ValidateCount(diamondPointCount, nameof(diamondPointCount));
+            ValidateCount(markerCount, nameof(markerCount));
+            ValidateCount(markerPointCount, nameof(markerPointCount));
+
+            var diamondOffsets = new int[checked(diamondCount + 1)];
+            var diamondPoints = new NativeMethods.Point2fNative[diamondPointCount];
+            var diamondIds = new int[checked(diamondCount * 4)];
+            var outputMarkerOffsets = new int[checked(markerCount + 1)];
+            var outputMarkerPoints = new NativeMethods.Point2fNative[markerPointCount];
+            var outputMarkerIds = new int[markerCount];
+            fixed (int* inputOffsetsPtr = inputOffsets)
+            fixed (NativeMethods.Point2fNative* inputPointsPtr = inputNativePoints)
+            fixed (int* inputIdsPtr = markerIds)
+            fixed (int* diamondOffsetsPtr = diamondOffsets)
+            fixed (NativeMethods.Point2fNative* diamondPointsPtr = diamondPoints)
+            fixed (int* diamondIdsPtr = diamondIds)
+            fixed (int* outputMarkerOffsetsPtr = outputMarkerOffsets)
+            fixed (NativeMethods.Point2fNative* outputMarkerPointsPtr = outputMarkerPoints)
+            fixed (int* outputMarkerIdsPtr = outputMarkerIds)
+            {
+                NativeException.ThrowIfError(NativeMethods.ArucoCharucoDetectorDetectDiamondsFill(
+                    NativeHandle, image.NativeHandle,
+                    inputOffsetsPtr, markerCorners.Length, inputPointsPtr, inputNativePoints.Length, inputIdsPtr, markerIds.Length,
+                    diamondOffsetsPtr, diamondOffsets.Length, diamondPointsPtr, diamondPoints.Length, diamondIdsPtr, diamondIds.Length,
+                    outputMarkerOffsetsPtr, outputMarkerOffsets.Length, outputMarkerPointsPtr, outputMarkerPoints.Length, outputMarkerIdsPtr, outputMarkerIds.Length,
+                    out int writtenDiamonds, out int writtenDiamondPoints, out int writtenMarkers, out int writtenMarkerPoints));
+                if (writtenDiamonds != diamondCount || writtenDiamondPoints != diamondPointCount || writtenMarkers != markerCount || writtenMarkerPoints != markerPointCount)
+                    throw new OpenCvException("ChArUco diamond counts changed during count/fill.");
+            }
+
+            var managedDiamondIds = new Vec4i[diamondCount];
+            for (int i = 0; i < diamondCount; i++)
+                managedDiamondIds[i] = new Vec4i(diamondIds[i * 4], diamondIds[i * 4 + 1], diamondIds[i * 4 + 2], diamondIds[i * 4 + 3]);
+            return new CharucoDiamondDetectionResult(
+                PointSetMarshaller.ToPoint2fGroups(diamondOffsets, ToPoint2fArray(diamondPoints, diamondPoints.Length), diamondCount),
+                managedDiamondIds,
+                PointSetMarshaller.ToPoint2fGroups(outputMarkerOffsets, ToPoint2fArray(outputMarkerPoints, outputMarkerPoints.Length), markerCount),
+                outputMarkerIds);
+        }
+
+        /// <summary>Draws detected ChArUco corners and optional identifiers into an image.</summary>
+        public static void DrawDetectedCorners(Mat image, Point2f[] corners, int[]? ids = null, Scalar cornerColor = default)
+        {
+            ValidateNotNull(image, nameof(image));
+            if (corners == null) throw new ArgumentNullException(nameof(corners));
+            ids ??= Array.Empty<int>();
+            if (ids.Length != 0 && ids.Length != corners.Length) throw new ArgumentException("The id count must be zero or match the corner count.", nameof(ids));
+            NativeMethods.Point2fNative[] nativeCorners = ToNative(corners);
+            Scalar color = cornerColor.Equals(default(Scalar)) ? new Scalar(255, 0, 0, 0) : cornerColor;
+            fixed (NativeMethods.Point2fNative* cornersPtr = nativeCorners)
+            fixed (int* idsPtr = ids)
+            {
+                NativeException.ThrowIfError(NativeMethods.ArucoDrawDetectedCornersCharuco(
+                    image.NativeHandle, cornersPtr, nativeCorners.Length, idsPtr, ids.Length,
+                    color.V0, color.V1, color.V2, color.V3));
+            }
+        }
+
+        /// <summary>Draws detected ChArUco diamonds and optional four-part identifiers into an image.</summary>
+        public static void DrawDetectedDiamonds(Mat image, Point2f[][] diamondCorners, Vec4i[]? diamondIds = null, Scalar borderColor = default)
+        {
+            ValidateNotNull(image, nameof(image));
+            PointSetMarshaller.FlattenPoint2fGroups(diamondCorners, nameof(diamondCorners), out int[] offsets, out Point2f[] flatPoints);
+            diamondIds ??= Array.Empty<Vec4i>();
+            if (diamondIds.Length != 0 && diamondIds.Length != diamondCorners.Length) throw new ArgumentException("The id count must be zero or match the diamond count.", nameof(diamondIds));
+            NativeMethods.Point2fNative[] nativePoints = ToNative(flatPoints);
+            var flatIds = new int[checked(diamondIds.Length * 4)];
+            for (int i = 0; i < diamondIds.Length; i++)
+            {
+                flatIds[i * 4] = diamondIds[i].V0;
+                flatIds[i * 4 + 1] = diamondIds[i].V1;
+                flatIds[i * 4 + 2] = diamondIds[i].V2;
+                flatIds[i * 4 + 3] = diamondIds[i].V3;
+            }
+            Scalar color = borderColor.Equals(default(Scalar)) ? new Scalar(0, 0, 255, 0) : borderColor;
+            fixed (int* offsetsPtr = offsets)
+            fixed (NativeMethods.Point2fNative* pointsPtr = nativePoints)
+            fixed (int* idsPtr = flatIds)
+            {
+                NativeException.ThrowIfError(NativeMethods.ArucoDrawDetectedDiamonds(
+                    image.NativeHandle, offsetsPtr, diamondCorners.Length, pointsPtr, nativePoints.Length,
+                    idsPtr, flatIds.Length, color.V0, color.V1, color.V2, color.V3));
+            }
+        }
+
         /// <summary>Releases the native detector. 释放 native 检测器。</summary>
         public void Dispose()
         {
@@ -252,6 +403,11 @@ namespace OpenCvSharp.ObjDetect
             var result = new int[count];
             Array.Copy(values, result, count);
             return result;
+        }
+
+        private static void ValidateCount(int count, string name)
+        {
+            if (count < 0) throw new OpenCvException("Native " + name + " is negative.");
         }
 
         private void Dispose(bool disposing)

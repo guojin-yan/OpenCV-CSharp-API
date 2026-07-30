@@ -2,6 +2,7 @@
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES2D)
 #include <opencv2/features.hpp>
+#include <filesystem>
 #endif
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D)
@@ -124,6 +125,29 @@ struct jyppx_ocv_features2d_affine
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES2D)
     cv::Ptr<cv::AffineFeature> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_features2d_ann_index
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES2D)
+    cv::Ptr<cv::ANNIndex> value;
+    int dimension;
+    cv::ANNIndex::Distance distance;
+    std::filesystem::path temporary_path;
+    std::filesystem::path on_disk_target_path;
+
+    ~jyppx_ocv_features2d_ann_index()
+    {
+        value.release();
+        if (!temporary_path.empty())
+        {
+            std::error_code ignored;
+            std::filesystem::remove(temporary_path, ignored);
+        }
+    }
 #else
     int placeholder;
 #endif

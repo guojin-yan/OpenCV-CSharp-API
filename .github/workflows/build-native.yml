@@ -19,6 +19,9 @@ on:
         description: Optional OpenCV main-module build list label for future packaging runs
         required: false
         default: "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud"
+permissions:
+  contents: read
+
 jobs:
   configure:
     strategy:
@@ -26,7 +29,7 @@ jobs:
         os: [windows-latest, ubuntu-22.04, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Check project invariants
         shell: pwsh
         run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1

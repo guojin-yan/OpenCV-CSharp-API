@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using OpenCvSharp.Core;
 using OpenCvSharp.Internal.Interop;
 
@@ -9,14 +8,13 @@ namespace OpenCvSharp.Dnn
     /// Deep neural network object compatible with OpenCV <c>cv::dnn::Net</c>.
     /// 与 OpenCV <c>cv::dnn::Net</c> 兼容的深度神经网络对象。
     /// </summary>
-    public sealed unsafe class Net : IDisposable
+    public sealed unsafe partial class Net : IDisposable
     {
         private delegate int StringArrayCount(IntPtr net, out int stringCount, out int byteCount);
 
         private delegate int StringArrayFill(IntPtr net, int[] offsets, int offsetCapacity, byte[] buffer, int bufferCapacity, out int stringCount, out int byteCount);
 
-        private NativeDnnNetHandle handle;
-        private bool disposed;
+        private readonly NativeDnnNetHandle handle;
 
         private Net(IntPtr nativeHandle)
         {
@@ -29,7 +27,7 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public bool IsDisposed
         {
-            get { return disposed; }
+            get { return handle.IsClosed; }
         }
 
         /// <summary>
@@ -40,18 +38,11 @@ namespace OpenCvSharp.Dnn
         {
             get
             {
-                ThrowIfDisposed();
-                NativeException.ThrowIfError(NativeMethods.DnnNetEmpty(NativeHandle, out int empty));
-                return empty != 0;
-            }
-        }
-
-        internal IntPtr NativeHandle
-        {
-            get
-            {
-                ThrowIfDisposed();
-                return handle.DangerousGetHandle();
+                return WithNativeHandle(nativeHandle =>
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnNetEmpty(nativeHandle, out int empty));
+                    return empty != 0;
+                });
             }
         }
 
@@ -91,6 +82,42 @@ namespace OpenCvSharp.Dnn
             return new Net(nativeHandle);
         }
 
+        /// <summary>Reads an ONNX network from an in-memory buffer.</summary>
+        public static Net ReadNetFromOnnx(byte[] modelBuffer, DnnEngine engine = DnnEngine.Auto)
+        {
+            ValidateEngine(engine, nameof(engine));
+            ValidateBuffer(modelBuffer, nameof(modelBuffer));
+            unsafe
+            {
+                fixed (byte* modelPtr = modelBuffer)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromOnnxBuffer(modelPtr, modelBuffer.Length, (int)engine, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Reads an ONNX network from a span-backed in-memory buffer.</summary>
+        /// <param name="modelBuffer">Complete non-empty ONNX model bytes. The span is borrowed only for the native call.</param>
+        /// <param name="engine">Requested OpenCV DNN engine.</param>
+        /// <returns>An independently owned network.</returns>
+        /// <remarks>OpenCV copies or parses the bytes before this method returns; no managed interior pointer is retained.</remarks>
+        public static Net ReadNetFromOnnx(ReadOnlySpan<byte> modelBuffer, DnnEngine engine = DnnEngine.Auto)
+        {
+            ValidateEngine(engine, nameof(engine));
+            if (modelBuffer.Length == 0) throw new ArgumentException("Model buffer cannot be empty.", nameof(modelBuffer));
+            unsafe
+            {
+                fixed (byte* modelPtr = modelBuffer)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromOnnxBuffer(modelPtr, modelBuffer.Length, (int)engine, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+#endif
+
         /// <summary>
         /// Reads a TensorFlow network from model/config file paths.
         /// 从模型/配置文件路径读取 TensorFlow 网络。
@@ -104,6 +131,65 @@ namespace OpenCvSharp.Dnn
             return new Net(nativeHandle);
         }
 
+        /// <summary>Reads a TensorFlow network from paths and explicitly named extra outputs.</summary>
+        public static Net ReadNetFromTensorflow(string model, string config, DnnEngine engine, string[] extraOutputs)
+        {
+            ValidateEngine(engine, nameof(engine));
+            ValidateStringArray(extraOutputs, nameof(extraOutputs), true);
+            PackStringArray(extraOutputs, out byte[] buffer, out int[] offsets);
+            byte[] nativeModel = DnnStringConvert.ToNullTerminatedUtf8(model, nameof(model));
+            byte[] nativeConfig = DnnStringConvert.ToNullTerminatedUtf8(config ?? string.Empty, nameof(config));
+            NativeException.ThrowIfError(NativeMethods.DnnReadNetFromTensorflowEx(nativeModel, nativeConfig, (int)engine, buffer, offsets, extraOutputs.Length, out IntPtr nativeHandle));
+            return new Net(nativeHandle);
+        }
+
+        /// <summary>Reads a TensorFlow network from in-memory model/config buffers.</summary>
+        public static Net ReadNetFromTensorflow(byte[] modelBuffer, byte[]? configBuffer = null, DnnEngine engine = DnnEngine.Auto, string[]? extraOutputs = null)
+        {
+            ValidateEngine(engine, nameof(engine));
+            ValidateBuffer(modelBuffer, nameof(modelBuffer));
+            byte[] config = configBuffer ?? Array.Empty<byte>();
+            string[] outputs = extraOutputs ?? Array.Empty<string>();
+            ValidateStringArray(outputs, nameof(extraOutputs), true);
+            PackStringArray(outputs, out byte[] names, out int[] offsets);
+            unsafe
+            {
+                fixed (byte* modelPtr = modelBuffer)
+                fixed (byte* configPtr = config)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromTensorflowBuffer(modelPtr, modelBuffer.Length, configPtr, config.Length, (int)engine, names, offsets, outputs.Length, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Reads a TensorFlow network from span-backed model/config buffers.</summary>
+        /// <param name="modelBuffer">Complete non-empty TensorFlow model bytes.</param>
+        /// <param name="configBuffer">Optional text graph/configuration bytes; an empty span is valid.</param>
+        /// <param name="engine">Requested OpenCV DNN engine.</param>
+        /// <param name="extraOutputs">Optional UTF-8 output names retained by the imported graph.</param>
+        /// <returns>An independently owned network.</returns>
+        /// <remarks>All spans and pinned pointers are borrowed only for the native call.</remarks>
+        public static Net ReadNetFromTensorflow(ReadOnlySpan<byte> modelBuffer, ReadOnlySpan<byte> configBuffer, DnnEngine engine = DnnEngine.Auto, string[]? extraOutputs = null)
+        {
+            ValidateEngine(engine, nameof(engine));
+            if (modelBuffer.Length == 0) throw new ArgumentException("Model buffer cannot be empty.", nameof(modelBuffer));
+            string[] outputs = extraOutputs ?? Array.Empty<string>();
+            ValidateStringArray(outputs, nameof(extraOutputs), true);
+            PackStringArray(outputs, out byte[] names, out int[] offsets);
+            unsafe
+            {
+                fixed (byte* modelPtr = modelBuffer)
+                fixed (byte* configPtr = configBuffer)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromTensorflowBuffer(modelPtr, modelBuffer.Length, configPtr, configBuffer.Length, (int)engine, names, offsets, outputs.Length, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+#endif
+
         /// <summary>
         /// Reads a TensorFlow Lite network from a file path.
         /// 从文件路径读取 TensorFlow Lite 网络。
@@ -116,6 +202,42 @@ namespace OpenCvSharp.Dnn
             return new Net(nativeHandle);
         }
 
+        /// <summary>Reads a TensorFlow Lite network from an in-memory buffer.</summary>
+        public static Net ReadNetFromTFLite(byte[] modelBuffer, DnnEngine engine = DnnEngine.Auto)
+        {
+            ValidateEngine(engine, nameof(engine));
+            ValidateBuffer(modelBuffer, nameof(modelBuffer));
+            unsafe
+            {
+                fixed (byte* modelPtr = modelBuffer)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromTFLiteBuffer(modelPtr, modelBuffer.Length, (int)engine, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Reads a TensorFlow Lite network from a span-backed buffer.</summary>
+        /// <param name="modelBuffer">Complete non-empty TensorFlow Lite model bytes.</param>
+        /// <param name="engine">Requested OpenCV DNN engine.</param>
+        /// <returns>An independently owned network.</returns>
+        /// <remarks>The span is borrowed only for the native call.</remarks>
+        public static Net ReadNetFromTFLite(ReadOnlySpan<byte> modelBuffer, DnnEngine engine = DnnEngine.Auto)
+        {
+            ValidateEngine(engine, nameof(engine));
+            if (modelBuffer.Length == 0) throw new ArgumentException("Model buffer cannot be empty.", nameof(modelBuffer));
+            unsafe
+            {
+                fixed (byte* modelPtr = modelBuffer)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromTFLiteBuffer(modelPtr, modelBuffer.Length, (int)engine, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+#endif
+
         /// <summary>
         /// Reads an OpenVINO Model Optimizer network from XML/bin paths.
         /// 从 XML/bin 路径读取 OpenVINO Model Optimizer 网络。
@@ -127,6 +249,41 @@ namespace OpenCvSharp.Dnn
             NativeException.ThrowIfError(NativeMethods.DnnReadNetFromModelOptimizer(nativeXml, nativeBin, out IntPtr nativeHandle));
             return new Net(nativeHandle);
         }
+
+        /// <summary>Reads an OpenVINO Model Optimizer network from XML and weights buffers.</summary>
+        public static Net ReadNetFromModelOptimizer(byte[] modelConfigBuffer, byte[] weightsBuffer)
+        {
+            ValidateBuffer(modelConfigBuffer, nameof(modelConfigBuffer));
+            ValidateBuffer(weightsBuffer, nameof(weightsBuffer));
+            unsafe
+            {
+                fixed (byte* modelPtr = modelConfigBuffer)
+                fixed (byte* weightsPtr = weightsBuffer)
+                {
+                    NativeException.ThrowIfError(NativeMethods.DnnReadNetFromModelOptimizerBuffer(modelPtr, modelConfigBuffer.Length, weightsPtr, weightsBuffer.Length, out IntPtr nativeHandle));
+                    return new Net(nativeHandle);
+                }
+            }
+        }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Reads an OpenVINO Model Optimizer network from span-backed XML and weights buffers.</summary>
+        /// <param name="modelConfigBuffer">Complete non-empty XML model bytes.</param>
+        /// <param name="weightsBuffer">Complete non-empty binary weight bytes.</param>
+        /// <returns>An independently owned network.</returns>
+        /// <remarks>Both spans are borrowed only for the native call; no managed interior pointer is retained.</remarks>
+        public static Net ReadNetFromModelOptimizer(ReadOnlySpan<byte> modelConfigBuffer, ReadOnlySpan<byte> weightsBuffer)
+        {
+            if (modelConfigBuffer.Length == 0) throw new ArgumentException("Model config buffer cannot be empty.", nameof(modelConfigBuffer));
+            if (weightsBuffer.Length == 0) throw new ArgumentException("Weights buffer cannot be empty.", nameof(weightsBuffer));
+            fixed (byte* modelPtr = modelConfigBuffer)
+            fixed (byte* weightsPtr = weightsBuffer)
+            {
+                NativeException.ThrowIfError(NativeMethods.DnnReadNetFromModelOptimizerBuffer(modelPtr, modelConfigBuffer.Length, weightsPtr, weightsBuffer.Length, out IntPtr nativeHandle));
+                return new Net(nativeHandle);
+            }
+        }
+#endif
 
         /// <summary>
         /// Reads a network from in-memory model/config buffers.
@@ -152,6 +309,12 @@ namespace OpenCvSharp.Dnn
         /// Reads a network from span-backed model/config buffers.
         /// 从 Span 支持的模型/配置缓冲区读取网络。
         /// </summary>
+        /// <param name="framework">Framework name encoded as UTF-8 for OpenCV.</param>
+        /// <param name="modelBuffer">Complete non-empty model bytes.</param>
+        /// <param name="configBuffer">Optional configuration bytes; an empty span is valid.</param>
+        /// <param name="engine">Requested OpenCV DNN engine.</param>
+        /// <returns>An independently owned network.</returns>
+        /// <remarks>Both spans are borrowed only for the native call.</remarks>
         public static Net ReadNet(string framework, ReadOnlySpan<byte> modelBuffer, ReadOnlySpan<byte> configBuffer, DnnEngine engine = DnnEngine.Auto)
         {
             ValidateEngine(engine, nameof(engine));
@@ -176,9 +339,9 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public Net SetPreferableBackend(DnnBackend backend)
         {
-            ThrowIfDisposed();
             ValidateBackend(backend, nameof(backend));
-            NativeException.ThrowIfError(NativeMethods.DnnNetSetPreferableBackend(NativeHandle, (int)backend));
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetSetPreferableBackend(nativeHandle, (int)backend)));
             return this;
         }
 
@@ -188,9 +351,9 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public Net SetPreferableTarget(DnnTarget target)
         {
-            ThrowIfDisposed();
             ValidateTarget(target, nameof(target));
-            NativeException.ThrowIfError(NativeMethods.DnnNetSetPreferableTarget(NativeHandle, (int)target));
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetSetPreferableTarget(nativeHandle, (int)target)));
             return this;
         }
 
@@ -200,11 +363,12 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public Net SetInput(Mat blob, string name = "", double scaleFactor = 1.0, Scalar? mean = null)
         {
-            ThrowIfDisposed();
             ValidateNotNull(blob, nameof(blob));
             Scalar actualMean = mean ?? new Scalar(0.0);
             byte[] nativeName = DnnStringConvert.ToNullTerminatedUtf8(name ?? string.Empty, nameof(name));
-            NativeException.ThrowIfError(NativeMethods.DnnNetSetInput(NativeHandle, blob.NativeHandle, nativeName, scaleFactor, actualMean.V0, actualMean.V1, actualMean.V2, actualMean.V3));
+            IntPtr blobHandle = blob.NativeHandle;
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetSetInput(nativeHandle, blobHandle, nativeName, scaleFactor, actualMean.V0, actualMean.V1, actualMean.V2, actualMean.V3)));
             return this;
         }
 
@@ -214,10 +378,11 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public void Forward(Mat output, string outputName = "")
         {
-            ThrowIfDisposed();
             ValidateNotNull(output, nameof(output));
             byte[] nativeOutputName = DnnStringConvert.ToNullTerminatedUtf8(outputName ?? string.Empty, nameof(outputName));
-            NativeException.ThrowIfError(NativeMethods.DnnNetForward(NativeHandle, nativeOutputName, output.NativeHandle));
+            IntPtr outputHandle = output.NativeHandle;
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetForward(nativeHandle, nativeOutputName, outputHandle)));
         }
 
         /// <summary>
@@ -245,18 +410,24 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public Mat[] Forward(string[] outputNames)
         {
-            ThrowIfDisposed();
             ValidateStringArray(outputNames, nameof(outputNames), allowEmpty: false);
             PackStringArray(outputNames, out byte[] buffer, out int[] offsets);
             var handles = new IntPtr[outputNames.Length];
-            NativeException.ThrowIfError(NativeMethods.DnnNetForwardMany(
-                NativeHandle,
-                buffer,
-                offsets,
-                outputNames.Length,
-                handles,
-                handles.Length,
-                out int outputCount));
+            int outputCount = 0;
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetForwardMany(
+                    nativeHandle,
+                    buffer,
+                    offsets,
+                    outputNames.Length,
+                    handles,
+                    handles.Length,
+                    out outputCount)));
+            if (outputCount != handles.Length)
+            {
+                ReleaseMatHandles(handles);
+                throw new OpenCvException("Native DNN output count changed during retrieval.");
+            }
             return ToMatArray(handles, outputCount);
         }
 
@@ -266,10 +437,12 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public int GetLayerId(string layerName)
         {
-            ThrowIfDisposed();
             byte[] nativeLayerName = DnnStringConvert.ToNullTerminatedUtf8(layerName, nameof(layerName));
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetLayerId(NativeHandle, nativeLayerName, out int layerId));
-            return layerId;
+            return WithNativeHandle(nativeHandle =>
+            {
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetLayerId(nativeHandle, nativeLayerName, out int layerId));
+                return layerId;
+            });
         }
 
         /// <summary>
@@ -278,16 +451,20 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public int[] GetUnconnectedOutLayers()
         {
-            ThrowIfDisposed();
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetUnconnectedOutLayersCount(NativeHandle, out int layerCount));
-            if (layerCount <= 0)
+            return WithNativeHandle(nativeHandle =>
             {
-                return Array.Empty<int>();
-            }
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetUnconnectedOutLayersCount(nativeHandle, out int layerCount));
+                ValidateCount(layerCount, "Native DNN layer count");
+                if (layerCount == 0)
+                {
+                    return Array.Empty<int>();
+                }
 
-            var layers = new int[layerCount];
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetUnconnectedOutLayersFill(NativeHandle, layers, layers.Length, out int written));
-            return TrimArray(layers, written);
+                var layers = new int[layerCount];
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetUnconnectedOutLayersFill(nativeHandle, layers, layers.Length, out int written));
+                if (written != layerCount) throw new OpenCvException("Native DNN layer count changed during retrieval.");
+                return TrimArray(layers, written);
+            });
         }
 
         /// <summary>
@@ -296,10 +473,10 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public Net SetInputsNames(string[] inputBlobNames)
         {
-            ThrowIfDisposed();
             ValidateStringArray(inputBlobNames, nameof(inputBlobNames), allowEmpty: true);
             PackStringArray(inputBlobNames, out byte[] buffer, out int[] offsets);
-            NativeException.ThrowIfError(NativeMethods.DnnNetSetInputsNames(NativeHandle, buffer, offsets, inputBlobNames.Length));
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetSetInputsNames(nativeHandle, buffer, offsets, inputBlobNames.Length)));
             return this;
         }
 
@@ -309,10 +486,10 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public Net SetInputShape(string inputName, int[] shape)
         {
-            ThrowIfDisposed();
-            ValidateNotNull(shape, nameof(shape));
+            ValidateShape(shape, nameof(shape));
             byte[] nativeInputName = DnnStringConvert.ToNullTerminatedUtf8(inputName, nameof(inputName));
-            NativeException.ThrowIfError(NativeMethods.DnnNetSetInputShape(NativeHandle, nativeInputName, shape, shape.Length));
+            WithNativeHandle(nativeHandle =>
+                NativeException.ThrowIfError(NativeMethods.DnnNetSetInputShape(nativeHandle, nativeInputName, shape, shape.Length)));
             return this;
         }
 
@@ -322,10 +499,13 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public long GetFLOPS(int[] inputShape, int inputType = MatType.CV_32F)
         {
-            ThrowIfDisposed();
-            ValidateNotNull(inputShape, nameof(inputShape));
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetFLOPS(NativeHandle, inputShape, inputShape.Length, inputType, out long flops));
-            return flops;
+            ValidateShape(inputShape, nameof(inputShape));
+            ValidateMatType(inputType, nameof(inputType));
+            return WithNativeHandle(nativeHandle =>
+            {
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetFLOPS(nativeHandle, inputShape, inputShape.Length, inputType, out long flops));
+                return flops;
+            });
         }
 
         /// <summary>
@@ -334,10 +514,14 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public long GetLayerFLOPS(int layerId, int[] inputShape, int inputType = MatType.CV_32F)
         {
-            ThrowIfDisposed();
-            ValidateNotNull(inputShape, nameof(inputShape));
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetLayerFLOPS(NativeHandle, layerId, inputShape, inputShape.Length, inputType, out long flops));
-            return flops;
+            ValidateLayerId(layerId, nameof(layerId));
+            ValidateShape(inputShape, nameof(inputShape));
+            ValidateMatType(inputType, nameof(inputType));
+            return WithNativeHandle(nativeHandle =>
+            {
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetLayerFLOPS(nativeHandle, layerId, inputShape, inputShape.Length, inputType, out long flops));
+                return flops;
+            });
         }
 
         /// <summary>
@@ -346,11 +530,15 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public DnnPerfProfile GetPerfProfile()
         {
-            ThrowIfDisposed();
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetPerfProfileCount(NativeHandle, out int timingCount));
-            var timings = new double[Math.Max(timingCount, 0)];
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetPerfProfileFill(NativeHandle, timings, timings.Length, out int written, out long tickCount));
-            return new DnnPerfProfile(tickCount, TrimArray(timings, written));
+            return WithNativeHandle(nativeHandle =>
+            {
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetPerfProfileCount(nativeHandle, out int timingCount));
+                ValidateCount(timingCount, "Native DNN timing count");
+                var timings = new double[timingCount];
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetPerfProfileFill(nativeHandle, timings, timings.Length, out int written, out long tickCount));
+                if (written != timingCount) throw new OpenCvException("Native DNN timing count changed during retrieval.");
+                return new DnnPerfProfile(tickCount, TrimArray(timings, written));
+            });
         }
 
         /// <summary>
@@ -359,7 +547,6 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public string[] GetLayerNames()
         {
-            ThrowIfDisposed();
             return GetStringArray(NativeMethods.DnnNetGetLayerNamesCount, NativeMethods.DnnNetGetLayerNamesFill);
         }
 
@@ -369,7 +556,6 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public string[] GetUnconnectedOutLayersNames()
         {
-            ThrowIfDisposed();
             return GetStringArray(NativeMethods.DnnNetGetUnconnectedOutLayersNamesCount, NativeMethods.DnnNetGetUnconnectedOutLayersNamesFill);
         }
 
@@ -379,7 +565,6 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public string[] GetLayerTypes()
         {
-            ThrowIfDisposed();
             return GetStringArray(NativeMethods.DnnNetGetLayerTypesCount, NativeMethods.DnnNetGetLayerTypesFill);
         }
 
@@ -389,10 +574,13 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public int GetLayersCountByType(string layerType)
         {
-            ThrowIfDisposed();
             byte[] nativeLayerType = DnnStringConvert.ToNullTerminatedUtf8(layerType, nameof(layerType));
-            NativeException.ThrowIfError(NativeMethods.DnnNetGetLayersCountByType(NativeHandle, nativeLayerType, out int layerCount));
-            return layerCount;
+            return WithNativeHandle(nativeHandle =>
+            {
+                NativeException.ThrowIfError(NativeMethods.DnnNetGetLayersCountByType(nativeHandle, nativeLayerType, out int layerCount));
+                ValidateCount(layerCount, "Native DNN layer count");
+                return layerCount;
+            });
         }
 
         /// <summary>
@@ -401,37 +589,31 @@ namespace OpenCvSharp.Dnn
         /// </summary>
         public void Dispose()
         {
-            if (!disposed)
-            {
-                handle.Dispose();
-                disposed = true;
-                GC.SuppressFinalize(this);
-            }
+            handle.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         private string[] GetStringArray(
             StringArrayCount count,
             StringArrayFill fill)
         {
-            NativeException.ThrowIfError(count(NativeHandle, out int stringCount, out int byteCount));
-            if (stringCount <= 0)
+            return WithNativeHandle(nativeHandle =>
             {
-                return Array.Empty<string>();
-            }
+                NativeException.ThrowIfError(count(nativeHandle, out int stringCount, out int byteCount));
+                ValidateCount(stringCount, "Native DNN string count");
+                ValidateCount(byteCount, "Native DNN string byte count");
+                if (stringCount == 0)
+                {
+                    return Array.Empty<string>();
+                }
 
-            var offsets = new int[stringCount + 1];
-            var buffer = new byte[Math.Max(byteCount, 0)];
-            NativeException.ThrowIfError(fill(NativeHandle, offsets, offsets.Length, buffer, buffer.Length, out int writtenStrings, out int writtenBytes));
-            int resultCount = Math.Max(0, Math.Min(writtenStrings, stringCount));
-            var result = new string[resultCount];
-            for (int i = 0; i < result.Length; i++)
-            {
-                int start = Math.Max(0, Math.Min(offsets[i], buffer.Length));
-                int end = Math.Max(start, Math.Min(offsets[i + 1], Math.Min(writtenBytes, buffer.Length)));
-                result[i] = DnnStringConvert.FromUtf8Bytes(buffer, start, end - start);
-            }
-
-            return result;
+                var offsets = new int[checked(stringCount + 1)];
+                var buffer = new byte[byteCount];
+                NativeException.ThrowIfError(fill(nativeHandle, offsets, offsets.Length, buffer, buffer.Length, out int writtenStrings, out int writtenBytes));
+                if (writtenStrings != stringCount || writtenBytes != byteCount)
+                    throw new OpenCvException("Native DNN string data changed during count/fill retrieval.");
+                return DecodePackedStrings(offsets, writtenStrings, buffer, writtenBytes);
+            });
         }
 
         private static void PackStringArray(string[] values, out byte[] buffer, out int[] offsets)
@@ -440,7 +622,7 @@ namespace OpenCvSharp.Dnn
             int byteCount = 0;
             for (int i = 0; i < values.Length; i++)
             {
-                byteCount += Encoding.UTF8.GetByteCount(values[i]);
+                byteCount = checked(byteCount + DnnStringConvert.ToUtf8Bytes(values[i], nameof(values), true).Length);
                 offsets[i + 1] = byteCount;
             }
 
@@ -448,20 +630,43 @@ namespace OpenCvSharp.Dnn
             int cursor = 0;
             for (int i = 0; i < values.Length; i++)
             {
-                cursor += Encoding.UTF8.GetBytes(values[i], 0, values[i].Length, buffer, cursor);
+                byte[] encoded = DnnStringConvert.ToUtf8Bytes(values[i], nameof(values), true);
+                Array.Copy(encoded, 0, buffer, cursor, encoded.Length);
+                cursor = checked(cursor + encoded.Length);
             }
         }
 
         private static Mat[] ToMatArray(IntPtr[] handles, int outputCount)
         {
-            int count = Math.Max(0, Math.Min(outputCount, handles.Length));
-            var result = new Mat[count];
-            for (int i = 0; i < result.Length; i++)
+            Mat[]? result = null;
+            int created = 0;
+            try
             {
-                result[i] = new Mat(handles[i]);
-            }
+                ValidateWrittenCount(outputCount, handles.Length, "Native DNN Mat count");
+                result = new Mat[outputCount];
+                for (; created < result.Length; created++)
+                {
+                    if (handles[created] == IntPtr.Zero)
+                    {
+                        throw new OpenCvException("Native DNN Mat handle is null.");
+                    }
 
-            return result;
+                    result[created] = new Mat(handles[created]);
+                    handles[created] = IntPtr.Zero;
+                }
+
+                return result;
+            }
+            catch
+            {
+                if (result != null)
+                    for (int i = 0; i < created; i++) result[i]?.Dispose();
+                throw;
+            }
+            finally
+            {
+                ReleaseMatHandles(handles);
+            }
         }
 
         private static int[] TrimArray(int[] values, int count)
@@ -490,9 +695,102 @@ namespace OpenCvSharp.Dnn
             return result;
         }
 
+        private void WithNativeHandle(Action<IntPtr> action)
+        {
+            WithNativeHandle(nativeHandle =>
+            {
+                action(nativeHandle);
+                return true;
+            });
+        }
+
+        private T WithNativeHandle<T>(Func<IntPtr, T> action)
+        {
+            bool addedReference = false;
+            try
+            {
+                handle.DangerousAddRef(ref addedReference);
+                if (handle.IsInvalid) throw new ObjectDisposedException(nameof(Net));
+                return action(handle.DangerousGetHandle());
+            }
+            finally
+            {
+                if (addedReference) handle.DangerousRelease();
+            }
+        }
+
+        internal IntPtr NativeHandle
+        {
+            get
+            {
+                ThrowIfDisposed();
+                return handle.DangerousGetHandle();
+            }
+        }
+
+        private static string[] DecodePackedStrings(int[] offsets, int stringCount, byte[] buffer, int byteCount)
+        {
+            if (offsets == null || buffer == null || stringCount < 0 || byteCount < 0 ||
+                offsets.Length < checked(stringCount + 1) || byteCount > buffer.Length)
+                throw new OpenCvException("Native DNN packed string metadata is invalid.");
+            if (offsets[0] != 0 || offsets[stringCount] != byteCount)
+                throw new OpenCvException("Native DNN packed string offsets are invalid.");
+            var result = new string[stringCount];
+            for (int i = 0; i < stringCount; i++)
+            {
+                int start = offsets[i];
+                int end = offsets[i + 1];
+                if (start < 0 || end < start || end > byteCount)
+                    throw new OpenCvException("Native DNN packed string offsets are invalid.");
+                result[i] = DnnStringConvert.FromUtf8Bytes(buffer, start, end - start);
+            }
+            return result;
+        }
+
+        private static void ReleaseMatHandles(IntPtr[] handles)
+        {
+            for (int i = 0; i < handles.Length; i++)
+            {
+                if (handles[i] == IntPtr.Zero) continue;
+                NativeMethods.MatRelease(handles[i]);
+                handles[i] = IntPtr.Zero;
+            }
+        }
+
+        private static void ValidateCount(int value, string description)
+        {
+            if (value < 0) throw new OpenCvException(description + " is negative.");
+        }
+
+        private static void ValidateWrittenCount(int value, int capacity, string description)
+        {
+            if (value < 0 || value > capacity) throw new OpenCvException(description + " exceeds the supplied capacity.");
+        }
+
+        private static void ValidateOffsets(int[] offsets, int valueCount, string description)
+        {
+            if (offsets == null || offsets.Length == 0 || valueCount < 0 || offsets[0] != 0 || offsets[offsets.Length - 1] != valueCount)
+                throw new OpenCvException(description + " are invalid.");
+            for (int i = 0; i + 1 < offsets.Length; i++)
+                if (offsets[i] < 0 || offsets[i + 1] < offsets[i] || offsets[i + 1] > valueCount)
+                    throw new OpenCvException(description + " are invalid.");
+        }
+
+        private static void ValidateShape(int[] value, string parameterName)
+        {
+            ValidateNotNull(value, parameterName);
+            if (value.Length > 10) throw new ArgumentException("DNN shapes cannot contain more than 10 dimensions.", parameterName);
+        }
+
+        private static void ValidateMatType(int value, string parameterName)
+        {
+            if (value < 0 || (value & ~MatType.MatrixTypeMask) != 0 || MatType.Depth(value) >= 13)
+                throw new ArgumentOutOfRangeException(parameterName, "Value is not a supported OpenCV matrix type.");
+        }
+
         private void ThrowIfDisposed()
         {
-            if (disposed)
+            if (handle.IsClosed || handle.IsInvalid)
             {
                 throw new ObjectDisposedException(nameof(Net));
             }
@@ -515,13 +813,20 @@ namespace OpenCvSharp.Dnn
             }
         }
 
+        private static void ValidateBuffer(byte[] value, string parameterName)
+        {
+            ValidateNotNull(value, parameterName);
+            ValidateNotEmpty(value, parameterName);
+        }
+
         private static void ValidateEngine(DnnEngine value, string parameterName)
         {
             if (value != DnnEngine.Auto
                 && value != DnnEngine.Classic
-                && value != DnnEngine.New)
+                && value != DnnEngine.New
+                && value != DnnEngine.Ort)
             {
-                throw new ArgumentOutOfRangeException(parameterName, "DNN engine must be Auto, Classic, or New.");
+                throw new ArgumentOutOfRangeException(parameterName, "DNN engine must be Auto, Classic, New, or Ort.");
             }
         }
 
@@ -572,6 +877,8 @@ namespace OpenCvSharp.Dnn
                 {
                     throw new ArgumentNullException(parameterName);
                 }
+
+                DnnStringConvert.ToUtf8Bytes(values[i], parameterName, true);
             }
         }
     }

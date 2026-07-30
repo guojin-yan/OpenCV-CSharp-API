@@ -27,6 +27,15 @@ struct jyppx_ocv_aruco_detector
 #endif
 };
 
+struct jyppx_ocv_aruco_board
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::aruco::Board value;
+#else
+    int placeholder;
+#endif
+};
+
 struct jyppx_ocv_aruco_grid_board
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV)

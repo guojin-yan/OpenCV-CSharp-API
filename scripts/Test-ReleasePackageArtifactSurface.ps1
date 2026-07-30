@@ -115,10 +115,41 @@ $packRuntimePath = "scripts/Pack-Runtime.ps1"
 $stageRuntimePath = "scripts/Stage-Runtime.ps1"
 $runtimeReleasePreflightPath = "scripts/Test-RuntimeReleaseCandidatePreflight.ps1"
 $runtimeReleasePreflightGuardPath = "scripts/Test-RuntimeReleaseCandidatePreflightGuard.ps1"
+$releaseCandidateProvenancePath = "scripts/Test-ReleaseCandidateProvenance.ps1"
+$releaseReadinessContractPath = "scripts/Test-ReleaseReadinessContract.ps1"
+$releaseSigningBoundaryPath = "scripts/Test-ReleaseSigningBoundary.ps1"
+$releaseSupportContractPath = "scripts/Test-ReleaseSupportContract.ps1"
+$publicFeedVerificationContractPath = "scripts/Test-PublicFeedVerificationContract.ps1"
+$releaseChangeControlPath = "scripts/Test-ReleaseChangeControlRecord.ps1"
+$apiAbiBaselinePath = "scripts/Test-ApiAbiBaselineContract.ps1"
+$bindingMapGuardPath = "scripts/Test-NativeManagedBindingMap.ps1"
+$bindingMapGeneratorPath = "scripts/Generate-NativeManagedBindingMap.ps1"
+$bindingMapToolProjectPath = "tools/NativeManagedBindingMap/NativeManagedBindingMap.csproj"
+$bindingMapToolProgramPath = "tools/NativeManagedBindingMap/Program.cs"
+$bindingMapPath = "compatibility/native-managed-binding-map.txt"
+$bindingMapSummaryPath = "compatibility/native-managed-binding-summary.json"
+$imgProcMapGuardPath = "scripts/Test-ImgProcUpstreamMap.ps1"
+$imgProcMapGeneratorPath = "scripts/Generate-ImgProcUpstreamMap.ps1"
+$imgProcMapToolPath = "tools/ImgProcUpstreamMap/Program.cs"
+$imgProcMapPath = "compatibility/imgproc-upstream-map.txt"
+$imgProcMapSummaryPath = "compatibility/imgproc-upstream-summary.json"
+$imgProcFamilyPath = "compatibility/imgproc-implemented-families.json"
+$imgCodecsMapGuardPath = "scripts/Test-ImgCodecsUpstreamMap.ps1"
+$imgCodecsMapGeneratorPath = "scripts/Generate-ImgCodecsUpstreamMap.ps1"
+$imgCodecsMapToolPath = "tools/ImgCodecsUpstreamMap/Program.cs"
+$imgCodecsMapPath = "compatibility/imgcodecs-upstream-map.txt"
+$imgCodecsMapSummaryPath = "compatibility/imgcodecs-upstream-summary.json"
+$imgCodecsFamilyPath = "compatibility/imgcodecs-implemented-families.json"
+$imgCodecsExtensionsPath = "compatibility/imgcodecs-source-reviewed-extensions.json"
+$finalCloseoutPath = "scripts/Test-ReleaseCandidateFinalCloseout.ps1"
+$finalCloseoutRecordPath = "packaging/release/local-release-candidate-closeout.json"
 $runtimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"
 $runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $readmePath = "README.md"
 $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
+$apiAbiPolicyPath = "docs/articles/api-abi-compatibility-policy.md"
+$supportLifecyclePolicyPath = "docs/articles/support-lifecycle-policy.md"
+$releaseCloseoutDocPath = "docs/articles/release-candidate-closeout.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $githubPackArtifactGuardPath = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"
 $githubPackConsumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
@@ -130,10 +161,41 @@ $packRuntimeText = Read-RequiredText -RelativePath $packRuntimePath
 $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
 $runtimeReleasePreflightText = Read-RequiredText -RelativePath $runtimeReleasePreflightPath
 $runtimeReleasePreflightGuardText = Read-RequiredText -RelativePath $runtimeReleasePreflightGuardPath
+$releaseCandidateProvenanceText = Read-RequiredText -RelativePath $releaseCandidateProvenancePath
+$releaseReadinessContractText = Read-RequiredText -RelativePath $releaseReadinessContractPath
+$releaseSigningBoundaryText = Read-RequiredText -RelativePath $releaseSigningBoundaryPath
+$releaseSupportContractText = Read-RequiredText -RelativePath $releaseSupportContractPath
+$publicFeedVerificationContractText = Read-RequiredText -RelativePath $publicFeedVerificationContractPath
+$releaseChangeControlText = Read-RequiredText -RelativePath $releaseChangeControlPath
+$apiAbiBaselineText = Read-RequiredText -RelativePath $apiAbiBaselinePath
+$bindingMapGuardText = Read-RequiredText -RelativePath $bindingMapGuardPath
+$bindingMapGeneratorText = Read-RequiredText -RelativePath $bindingMapGeneratorPath
+$bindingMapToolProjectText = Read-RequiredText -RelativePath $bindingMapToolProjectPath
+$bindingMapToolProgramText = Read-RequiredText -RelativePath $bindingMapToolProgramPath
+$bindingMapText = Read-RequiredText -RelativePath $bindingMapPath
+$bindingMapSummaryText = Read-RequiredText -RelativePath $bindingMapSummaryPath
+$imgProcMapGuardText = Read-RequiredText -RelativePath $imgProcMapGuardPath
+$imgProcMapGeneratorText = Read-RequiredText -RelativePath $imgProcMapGeneratorPath
+$imgProcMapToolText = Read-RequiredText -RelativePath $imgProcMapToolPath
+$imgProcMapText = Read-RequiredText -RelativePath $imgProcMapPath
+$imgProcMapSummaryText = Read-RequiredText -RelativePath $imgProcMapSummaryPath
+$imgProcFamilyText = Read-RequiredText -RelativePath $imgProcFamilyPath
+$imgCodecsMapGuardText = Read-RequiredText -RelativePath $imgCodecsMapGuardPath
+$imgCodecsMapGeneratorText = Read-RequiredText -RelativePath $imgCodecsMapGeneratorPath
+$imgCodecsMapToolText = Read-RequiredText -RelativePath $imgCodecsMapToolPath
+$imgCodecsMapText = Read-RequiredText -RelativePath $imgCodecsMapPath
+$imgCodecsMapSummaryText = Read-RequiredText -RelativePath $imgCodecsMapSummaryPath
+$imgCodecsFamilyText = Read-RequiredText -RelativePath $imgCodecsFamilyPath
+$imgCodecsExtensionsText = Read-RequiredText -RelativePath $imgCodecsExtensionsPath
+$finalCloseoutText = Read-RequiredText -RelativePath $finalCloseoutPath
+$finalCloseoutRecordText = Read-RequiredText -RelativePath $finalCloseoutRecordPath
 $runtimeProjectText = Read-RequiredText -RelativePath $runtimeProjectPath
 $runtimeReadmeText = Read-RequiredText -RelativePath $runtimeReadmePath
 $readmeText = Read-RequiredText -RelativePath $readmePath
 $linkedRuntimeGuideText = Read-RequiredText -RelativePath $linkedRuntimeGuidePath
+$apiAbiPolicyText = Read-RequiredText -RelativePath $apiAbiPolicyPath
+$supportLifecyclePolicyText = Read-RequiredText -RelativePath $supportLifecyclePolicyPath
+$releaseCloseoutDocText = Read-RequiredText -RelativePath $releaseCloseoutDocPath
 $runtimeLicensesText = Read-RequiredText -RelativePath $runtimeLicensesPath
 $githubPackArtifactGuardText = Read-RequiredText -RelativePath $githubPackArtifactGuardPath
 $gitignoreText = Read-RequiredText -RelativePath $gitignorePath
@@ -143,7 +205,7 @@ foreach ($check in @(
         [pscustomobject]@{ Needle = "scripts/Pack-Runtime.ps1"; Issue = "Pack workflow must invoke the runtime pack script" },
         [pscustomobject]@{ Needle = "name: $uploadArtifactName"; Issue = "Pack workflow upload artifact name must stay neutral" },
         [pscustomobject]@{ Needle = "path: $packageOutputRoot/*.nupkg"; Issue = "Pack workflow must upload neutral package output artifacts" },
-        [pscustomobject]@{ Needle = "actions/download-artifact@v4"; Issue = "Pack workflow must download package artifacts for full-matrix self-validation" },
+        [pscustomobject]@{ Needle = "uses: actions/download-artifact@"; Issue = "Pack workflow must download package artifacts for full-matrix self-validation" },
         [pscustomobject]@{ Needle = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"; Issue = "Pack workflow must verify downloaded package artifacts with the offline artifact guard" },
         [pscustomobject]@{ Needle = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"; Issue = "Pack workflow must verify downloaded package artifacts with the offline consumer restore guard" },
         [pscustomobject]@{ Needle = "dotnet nuget push ./artifacts/packages/*.nupkg"; Issue = "Pack workflow publish step must push from neutral package output root" })) {
@@ -166,6 +228,36 @@ Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManage
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "PackageVersion carries OpenCV runtime identity as version metadata" -Issue "Pack-Managed must document PackageVersion as metadata, not package identity"
 
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$OutputDir = "artifacts/packages"' -Issue "Pack-Runtime default output directory must be artifacts/packages"
+Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'managed-public-api.txt' -Issue "Release artifact surface must register the managed API baseline"
+Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'legacy_abi_mini_manifest.txt' -Issue "Release artifact surface must register the mini ABI baseline"
+Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'Generate-NativeManagedBindingMap.ps1' -Issue "Release artifact surface must freshness-check the native-to-managed binding map"
+Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'native=2438 bound=2438 unbound=0 managed_only=0' -Issue "Native-to-managed binding guard must emit complete parity evidence"
+Assert-Contains -Violations $violations -Path $bindingMapGeneratorPath -Text $bindingMapGeneratorText -Needle 'tools/NativeManagedBindingMap/NativeManagedBindingMap.csproj' -Issue "Binding-map generator must invoke its checked-in tool project"
+Assert-Contains -Violations $violations -Path $bindingMapToolProjectPath -Text $bindingMapToolProjectText -Needle '<TargetFramework>net10.0</TargetFramework>' -Issue "Binding-map tool must retain its exact modern target framework"
+Assert-Contains -Violations $violations -Path $bindingMapToolProgramPath -Text $bindingMapToolProgramText -Needle 'NATIVE_MANAGED_BINDING_MAP_OK' -Issue "Binding-map tool must emit deterministic parity evidence"
+Assert-Contains -Violations $violations -Path $bindingMapPath -Text $bindingMapText -Needle '[managed-only]' -Issue "Release artifact surface must include the complete native-to-managed mapping output"
+Assert-Contains -Violations $violations -Path $bindingMapSummaryPath -Text $bindingMapSummaryText -Needle '"managedBoundCount": 2438' -Issue "Binding-map summary must record all native functions as managed-bound"
+Assert-Contains -Violations $violations -Path $bindingMapSummaryPath -Text $bindingMapSummaryText -Needle '"unboundCount": 0' -Issue "Binding-map summary must record zero unbound native functions"
+Assert-Contains -Violations $violations -Path $imgProcMapGuardPath -Text $imgProcMapGuardText -Needle 'Generate-ImgProcUpstreamMap.ps1' -Issue "Release artifact surface must freshness-check the ImgProc upstream map"
+Assert-Contains -Violations $violations -Path $imgProcMapGeneratorPath -Text $imgProcMapGeneratorText -Needle '-RegenerateRaw requires -PythonPath' -Issue "ImgProc raw extraction must require an explicit Python path"
+Assert-Contains -Violations $violations -Path $imgProcMapToolPath -Text $imgProcMapToolText -Needle 'RepositoryWideUpstreamParityClaimed = false' -Issue "ImgProc map tool must retain the exact non-repository-wide claim boundary"
+Assert-Contains -Violations $violations -Path $imgProcMapPath -Text $imgProcMapText -Needle 'repository-wide-upstream-parity=false' -Issue "Release artifact surface must include the bounded ImgProc mapping output"
+Assert-Contains -Violations $violations -Path $imgProcMapSummaryPath -Text $imgProcMapSummaryText -Needle '"declarationCount": 203' -Issue "ImgProc map summary must record the exact declaration count"
+Assert-Contains -Violations $violations -Path $imgProcMapSummaryPath -Text $imgProcMapSummaryText -Needle '"implemented": 161' -Issue "ImgProc map summary must record implemented callable evidence"
+Assert-Contains -Violations $violations -Path $imgProcFamilyPath -Text $imgProcFamilyText -Needle '"managedPublicMemberAdditionCount": 174' -Issue "ImgProc family inventory must record the reviewed managed API addition count"
+Assert-Contains -Violations $violations -Path $imgCodecsMapGuardPath -Text $imgCodecsMapGuardText -Needle 'Generate-ImgCodecsUpstreamMap.ps1' -Issue "Release artifact surface must freshness-check the ImgCodecs upstream map"
+Assert-Contains -Violations $violations -Path $imgCodecsMapGeneratorPath -Text $imgCodecsMapGeneratorText -Needle '-RegenerateRaw requires -PythonPath' -Issue "ImgCodecs raw extraction must require an explicit Python path"
+Assert-Contains -Violations $violations -Path $imgCodecsMapToolPath -Text $imgCodecsMapToolText -Needle 'RepositoryWideUpstreamParityClaimed = false' -Issue "ImgCodecs map tool must retain the exact non-repository-wide claim boundary"
+Assert-Contains -Violations $violations -Path $imgCodecsMapPath -Text $imgCodecsMapText -Needle 'repository-wide-upstream-parity=false' -Issue "Release artifact surface must include the bounded ImgCodecs mapping output"
+Assert-Contains -Violations $violations -Path $imgCodecsMapSummaryPath -Text $imgCodecsMapSummaryText -Needle '"declarationCount": 39' -Issue "ImgCodecs map summary must record the exact declaration count"
+Assert-Contains -Violations $violations -Path $imgCodecsMapSummaryPath -Text $imgCodecsMapSummaryText -Needle '"implemented": 22' -Issue "ImgCodecs map summary must record all callable evidence"
+Assert-Contains -Violations $violations -Path $imgCodecsFamilyPath -Text $imgCodecsFamilyText -Needle '"managedPublicMemberAdditionCount": 168' -Issue "ImgCodecs family inventory must record the reviewed managed API addition count"
+Assert-Contains -Violations $violations -Path $imgCodecsExtensionsPath -Text $imgCodecsExtensionsText -Needle '"identity": "cv::ImageCollection"' -Issue "ImgCodecs source-reviewed extension inventory must retain ImageCollection evidence"
+Assert-Contains -Violations $violations -Path $finalCloseoutPath -Text $finalCloseoutText -Needle 'local-release-candidate-closeout.json' -Issue "Release artifact surface must register the final closeout record"
+Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $finalCloseoutRecordText -Needle 'local-release-candidate-closeout' -Issue "Final closeout record must identify its record kind"
+Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"
+Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '24' -Issue "Support lifecycle policy must expose the real-support count"
+Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"' -Issue "Pack-Runtime default project path must be the neutral runtime package project"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"' -Issue "Pack-Runtime package ID must be derived from neutral runtime package prefix, RID, and profile suffix"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$packagePath = Join-Path $outputFullPath "$runtimePackageId.$packageFileVersion.nupkg"' -Issue "Pack-Runtime package artifact file must be derived from neutral package ID plus normalized version"
@@ -198,6 +290,32 @@ Assert-Contains -Violations $violations -Path $runtimeReleasePreflightPath -Text
 Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath -Text $runtimeReleasePreflightGuardText -Needle 'Pack-Runtime -RequireReleasePreflight integration should pass for release-shaped staged inputs' -Issue "Runtime release preflight guard must exercise the actual Pack-Runtime -RequireReleasePreflight path"
 Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath -Text $runtimeReleasePreflightGuardText -Needle 'Synthetic release-preflight negative path must not produce a runtime package' -Issue "Runtime release preflight guard must prove synthetic preflight integration does not produce packages"
 Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath -Text $runtimeReleasePreflightGuardText -Needle 'Pack-Runtime -RequireReleasePreflight produces a package only for non-synthetic staged inputs.' -Issue "Runtime release preflight guard must cover positive and negative pack integration cases"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'Deterministic package manifest' -Issue "Release candidate provenance guard must produce deterministic package manifest evidence"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "SignatureStatus = 'not-ready'" -Issue "Release candidate provenance guard must keep local signing readiness explicit"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "SbomStatus = 'not-ready'" -Issue "Release candidate provenance guard must keep local SBOM readiness explicit"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'PublicationAllowed = $false' -Issue "Release candidate provenance guard must remain non-publishing"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "local-preflight-only; no remote mutation" -Issue "Release candidate provenance guard must record rollback abort metadata"
+Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'Signature/SBOM state machine' -Issue "Release readiness contract must validate signing and SBOM state transitions"
+Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'Private key material must never be present' -Issue "Release readiness contract must reject private key material"
+Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'pending-hosted-evidence' -Issue "Release readiness contract must keep hosted Windows x86 promotion pending"
+Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'read-only-fixture' -Issue "Release readiness contract must keep public feed verification read-only"
+Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'RELEASE_SIGNING_BOUNDARY_OK' -Issue "Release signing boundary must emit normalized-input evidence"
+Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'PostSigningPackageSha256' -Issue "Release signing boundary must bind post-signing package bytes"
+Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'SPDX-2.3' -Issue "Release signing boundary must bind SPDX-2.3 SBOM provenance"
+Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'RemoteMutationAllowed' -Issue "Release signing boundary must keep approval unable to mutate remote state"
+Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'dotnet nuget sign' -Issue "Release signing boundary must reject direct workflow signing"
+Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'RELEASE_SUPPORT_CONTRACT_OK' -Issue "Release support contract must emit explicit matrix/support classification"
+Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'packageSurfaceIsSupport' -Issue "Release support contract must separate package surface from real support"
+Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'NUGET_PUBLIC_FEED_READ_ONLY_OK' -Issue "Public feed contract must emit read-only verification evidence"
+Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'https_only=true' -Issue "Public feed contract must require HTTPS-only verification"
+Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'upload_attempted=false' -Issue "Public feed contract must reject upload during verification"
+Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'api.nuget.org/v3-flatcontainer' -Issue "Public feed contract must use the exact NuGet flat-container path"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'SigningHandoff' -Issue "Release provenance must carry the signing handoff contract"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'SbomHandoff' -Issue "Release provenance must carry the SBOM handoff contract"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'RELEASE_CHANGE_CONTROL_OK' -Issue "Release change-control guard must emit deterministic review evidence"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle "Decision = 'do-not-publish'" -Issue "Release change-control guard must default to non-publishing"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle "Status = 'not-approved'" -Issue "Release change-control guard must require explicit approval"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'hosted-evidence-pending' -Issue "Release change-control guard must keep win-x86/full pending"
 
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID/profile-derived and version-neutral"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle "<PackageReadmeFile>README.md</PackageReadmeFile>" -Issue "Runtime package project must package README.md"
@@ -279,10 +397,20 @@ $releaseSurfaceFiles = @(
     "CONTRIBUTING.md",
     $runtimeReleasePreflightPath,
     $runtimeReleasePreflightGuardPath,
+    $apiAbiBaselinePath,
+    $bindingMapGuardPath,
+    $bindingMapGeneratorPath,
+    $bindingMapToolProjectPath,
+    $bindingMapToolProgramPath,
+    $finalCloseoutPath,
+    $finalCloseoutRecordPath,
     $githubPackArtifactGuardPath,
     $githubPackConsumerGuardPath,
     $linkedRuntimeGuidePath,
-    $runtimeLicensesPath
+    $runtimeLicensesPath,
+    $apiAbiPolicyPath,
+    $supportLifecyclePolicyPath,
+    $releaseCloseoutDocPath
 )
 
 foreach ($relativePath in $releaseSurfaceFiles) {

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "scope": "Source-visible ImgCodecs declarations not emitted by OpenCV hdr_parser.py",
+  "reviewStatus": "implemented-verified",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp",
+  "headerSha256": "680ba3f356806553c70928856cef0ff8b0a2f6ad0d98db55f9e22e6ea124d5e1",
+  "implementationPath": "opencv-source/opencv-5.0.0/modules/imgcodecs/src/loadsave.cpp",
+  "implementationSha256": "9d41c15539ea66448a99e42bed5f8eb76f33d20d857c93fdfc061e1c7d45dfd7",
+  "extensions": [
+    {
+      "identity": "cv::ImageCollection",
+      "headerLines": "747-780",
+      "implementationLines": "1753-1966",
+      "parserDisposition": "not-emitted because the class and members are not marked CV_WRAP",
+      "managedType": "OpenCvSharp.ImgCodecs.ImageCollection",
+      "ownership": "SafeHandle owns the native collection; indexed access returns an independent Mat clone; non-ASCII paths use a collection-lifetime temporary copy that is deleted on reinitialization or disposal.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_image_collection_clone_at",
+        "jyppx_ocv_imgcodecs_image_collection_create",
+        "jyppx_ocv_imgcodecs_image_collection_create_file",
+        "jyppx_ocv_imgcodecs_image_collection_init",
+        "jyppx_ocv_imgcodecs_image_collection_release",
+        "jyppx_ocv_imgcodecs_image_collection_release_cache",
+        "jyppx_ocv_imgcodecs_image_collection_size"
+      ],
+      "managedMembers": [
+        ".ctor()",
+        ".ctor(string, ImreadModes)",
+        "Count",
+        "Item[int]",
+        "Initialize(string, ImreadModes)",
+        "ReleaseCache(int)",
+        "Dispose()"
+      ],
+      "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+      "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp"
+    }
+  ],
+  "extensionCount": 1,
+  "repositoryWideUpstreamParityClaimed": false
+}

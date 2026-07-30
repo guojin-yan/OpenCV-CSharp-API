@@ -737,6 +737,39 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_flann_matcher_radius_match_train_fill")]
         internal static partial int Features2DFlannMatcherRadiusMatchTrainFill(IntPtr matcher, IntPtr queryDescriptors, float maxDistance, int compactResult, int* offsets, int offsetCapacity, NativeDMatch* matches, int matchCapacity, out int groupCount, out int totalMatchCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_create")]
+        internal static partial int Features2DAnnIndexCreate(int dimension, int distance, out IntPtr index);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_release")]
+        internal static partial void Features2DAnnIndexRelease(IntPtr index);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_add_items")]
+        internal static partial int Features2DAnnIndexAddItems(IntPtr index, IntPtr features);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_build")]
+        internal static partial int Features2DAnnIndexBuild(IntPtr index, int trees);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_knn_search")]
+        internal static partial int Features2DAnnIndexKnnSearch(IntPtr index, IntPtr query, IntPtr indices, IntPtr distances, int knn, int searchK);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_save")]
+        internal static partial int Features2DAnnIndexSave(IntPtr index, byte[] filenameUtf8, int filenameByteLength, int prefault);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_load")]
+        internal static partial int Features2DAnnIndexLoad(IntPtr index, byte[] filenameUtf8, int filenameByteLength, int prefault);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_get_tree_number")]
+        internal static partial int Features2DAnnIndexGetTreeNumber(IntPtr index, out int treeNumber);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_get_item_number")]
+        internal static partial int Features2DAnnIndexGetItemNumber(IntPtr index, out int itemNumber);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_set_on_disk_build")]
+        internal static partial int Features2DAnnIndexSetOnDiskBuild(IntPtr index, byte[] filenameUtf8, int filenameByteLength, out int enabled);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_set_seed")]
+        internal static partial int Features2DAnnIndexSetSeed(IntPtr index, int seed);
     }
 }
 #endif

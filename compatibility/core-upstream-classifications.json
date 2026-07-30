@@ -1,0 +1,3145 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/core.hpp public compatibility include closure across 11 parser-reviewed contributing headers",
+  "reviewStatus": "reviewed",
+  "limitation": "Parser identities preserve header order, overloads, defaults, direction metadata, and build definitions; classifications do not claim repository-wide OpenCV parity.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.DecompTypes[const cv.DECOMP_LU=0;const cv.DECOMP_SVD=1;const cv.DECOMP_EIG=2;const cv.DECOMP_CHOLESKY=3;const cv.DECOMP_QR=4;const cv.DECOMP_NORMAL=16]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.NormTypes[const cv.NORM_INF=1;const cv.NORM_L1=2;const cv.NORM_L2=4;const cv.NORM_L2SQR=5;const cv.NORM_HAMMING=6;const cv.NORM_HAMMING2=7;const cv.NORM_TYPE_MASK=7;const cv.NORM_RELATIVE=8;const cv.NORM_MINMAX=32]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.CmpTypes[const cv.CMP_EQ=0;const cv.CMP_GT=1;const cv.CMP_GE=2;const cv.CMP_LT=3;const cv.CMP_LE=4;const cv.CMP_NE=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.GemmFlags[const cv.GEMM_1_T=1;const cv.GEMM_2_T=2;const cv.GEMM_3_T=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.DftFlags[const cv.DFT_INVERSE=1;const cv.DFT_SCALE=2;const cv.DFT_ROWS=4;const cv.DFT_COMPLEX_OUTPUT=16;const cv.DFT_REAL_OUTPUT=32;const cv.DFT_COMPLEX_INPUT=64;const cv.DCT_INVERSE=DFT_INVERSE;const cv.DCT_ROWS=DFT_ROWS]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "enum cv.BorderTypes[const cv.BORDER_CONSTANT=0;const cv.BORDER_REPLICATE=1;const cv.BORDER_REFLECT=2;const cv.BORDER_WRAP=3;const cv.BORDER_REFLECT_101=4;const cv.BORDER_TRANSPARENT=5;const cv.BORDER_REFLECT101=BORDER_REFLECT_101;const cv.BORDER_DEFAULT=BORDER_REFLECT_101;const cv.BORDER_ISOLATED=16]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.cubeRoot(float val)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_cube_root"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Single CubeRoot(System.Single value)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.fastAtan2(float y;float x)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_fast_atan2"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Single FastAtan2(System.Single y,System.Single x)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.ipp.useIPP()-\u003Ebool",
+      "classification": "upstream-conditional",
+      "reason": "IPP controls and version strings are backend-conditional and are not exposed as a production support contract by this build.",
+      "buildCondition": "IPP-dependent-runtime-capability",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.ipp.setUseIPP(bool flag)-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "IPP controls and version strings are backend-conditional and are not exposed as a production support contract by this build.",
+      "buildCondition": "IPP-dependent-runtime-capability",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.ipp.getIppVersion()-\u003EString",
+      "classification": "upstream-conditional",
+      "reason": "IPP controls and version strings are backend-conditional and are not exposed as a production support contract by this build.",
+      "buildCondition": "IPP-dependent-runtime-capability",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.ipp.useIPP_NotExact()-\u003Ebool",
+      "classification": "upstream-conditional",
+      "reason": "IPP controls and version strings are backend-conditional and are not exposed as a production support contract by this build.",
+      "buildCondition": "IPP-dependent-runtime-capability",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ipp.setUseIPP_NotExact(bool flag)-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "IPP controls and version strings are backend-conditional and are not exposed as a production support contract by this build.",
+      "buildCondition": "IPP-dependent-runtime-capability",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "class cv.RotatedRect",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.RotatedRect.RotatedRect()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.RotatedRect.RotatedRect(Point2f center[/C,/Ref];Size2f size[/C,/Ref];float angle)-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.RotatedRect.RotatedRect(Point2f point1[/C,/Ref];Point2f point2[/C,/Ref];Point2f point3[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.RotatedRect.points(vector_Point2f pts[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.RotatedRect.boundingRect()-\u003ERect",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.RotatedRect.boundingRect2f()-\u003ERect2f",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "class cv.KeyPoint",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.KeyPoint.KeyPoint()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.KeyPoint.KeyPoint(float x;float y;float size;float angle=-1;float response=0;int octave=0;int class_id=-1)-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.KeyPoint.convert(vector_KeyPoint keypoints[/C,/Ref];vector_Point2f points2f[/O,/Ref];vector_int keypointIndexes=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.KeyPoint.convert(vector_Point2f points2f[/C,/Ref];vector_KeyPoint keypoints[/O,/Ref];float size=1;float response=1;int octave=0;int class_id=-1)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.KeyPoint.overlap(KeyPoint kp1[/C,/Ref];KeyPoint kp2[/C,/Ref])-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "class cv.DMatch",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.DMatch.DMatch()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.DMatch.DMatch(int _queryIdx;int _trainIdx;float _distance)-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.DMatch.DMatch(int _queryIdx;int _trainIdx;int _imgIdx;float _distance)-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This value-semantic C\u002B\u002B convenience callable is projected through managed value types or adjacent modules without exposing C\u002B\u002B layout through the C ABI.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "enum cv.TermCriteria.Type[const cv.TermCriteria.COUNT=1;const cv.TermCriteria.MAX_ITER=COUNT;const cv.TermCriteria.EPS=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "class cv.Moments",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.rectangleIntersectionArea(Rect2d a[/C,/Ref];Rect2d b[/C,/Ref])-\u003Edouble",
+      "classification": "unsupported",
+      "reason": "Source-reviewed Core callable is outside the implemented family batch; no production ABI/managed evidence is claimed and its next priority remains explicit in the Core guide.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "identity": "enum cv.AccessFlag[const cv.ACCESS_READ=1\u003C\u003C24;const cv.ACCESS_WRITE=1\u003C\u003C25;const cv.ACCESS_RW=3\u003C\u003C24;const cv.ACCESS_MASK=ACCESS_RW;const cv.ACCESS_FAST=1\u003C\u003C26]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "identity": "enum cv.DataLayout[const cv.DATA_LAYOUT_UNKNOWN=0;const cv.DATA_LAYOUT_ND=1;const cv.DATA_LAYOUT_NCHW=2;const cv.DATA_LAYOUT_NCDHW=3;const cv.DATA_LAYOUT_NHWC=4;const cv.DATA_LAYOUT_NDHWC=5;const cv.DATA_LAYOUT_PLANAR=6;const cv.DATA_LAYOUT_BLOCK=7;const cv.DNN_LAYOUT_UNKNOWN=0;const cv.DNN_LAYOUT_ND=1;const cv.DNN_LAYOUT_NCHW=2;const cv.DNN_LAYOUT_NCDHW=3;const cv.DNN_LAYOUT_NHWC=4;const cv.DNN_LAYOUT_NDHWC=5;const cv.DNN_LAYOUT_PLANAR=6;const cv.DNN_LAYOUT_BLOCK=7]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "identity": "class cv.MatShape",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "enum cv.MatShape.\u003Cunnamed\u003E[const cv.MatShape.MAX_DIMS=10]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.MatShape.empty()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.MatShape.isScalar()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.MatShape.clear()-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.MatShape.erase(int* where)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.MatShape.channels()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.MatShape.hasSymbols()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.MatShape.expand(MatShape another[/C,/Ref])-\u003EMatShape",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.MatShape.toLayout(DataLayout newLayout;int C0=0)-\u003EMatShape",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "enum cv._InputArray.KindFlag[const cv._InputArray.KIND_SHIFT=16;const cv._InputArray.FIXED_TYPE=0x8000 \u003C\u003C KIND_SHIFT;const cv._InputArray.FIXED_SIZE=0x4000 \u003C\u003C KIND_SHIFT;const cv._InputArray.KIND_MASK=31 \u003C\u003C KIND_SHIFT;const cv._InputArray.NONE=0 \u003C\u003C KIND_SHIFT;const cv._InputArray.MAT=1 \u003C\u003C KIND_SHIFT;const cv._InputArray.MATX=2 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_VECTOR=3 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_VECTOR_VECTOR=4 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_VECTOR_MAT=5 \u003C\u003C KIND_SHIFT;const cv._InputArray.OPENGL_BUFFER=7 \u003C\u003C KIND_SHIFT;const cv._InputArray.CUDA_HOST_MEM=8 \u003C\u003C KIND_SHIFT;const cv._InputArray.CUDA_GPU_MAT=9 \u003C\u003C KIND_SHIFT;const cv._InputArray.UMAT=10 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_VECTOR_UMAT=11 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_BOOL_VECTOR=12 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_VECTOR_CUDA_GPU_MAT=13 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_ARRAY_MAT=15 \u003C\u003C KIND_SHIFT;const cv._InputArray.CUDA_GPU_MATND=16 \u003C\u003C KIND_SHIFT;const cv._InputArray.STD_VECTOR_CUDA_GPU_MAT_ND=17 \u003C\u003C KIND_SHIFT]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "enum cv._OutputArray.DepthMask[const cv._OutputArray.DEPTH_MASK_8U=1 \u003C\u003C CV_8U;const cv._OutputArray.DEPTH_MASK_8S=1 \u003C\u003C CV_8S;const cv._OutputArray.DEPTH_MASK_16U=1 \u003C\u003C CV_16U;const cv._OutputArray.DEPTH_MASK_16S=1 \u003C\u003C CV_16S;const cv._OutputArray.DEPTH_MASK_32S=1 \u003C\u003C CV_32S;const cv._OutputArray.DEPTH_MASK_32F=1 \u003C\u003C CV_32F;const cv._OutputArray.DEPTH_MASK_64F=1 \u003C\u003C CV_64F;const cv._OutputArray.DEPTH_MASK_16F=1 \u003C\u003C CV_16F;const cv._OutputArray.DEPTH_MASK_16BF=1 \u003C\u003C CV_16BF;const cv._OutputArray.DEPTH_MASK_BOOL=1 \u003C\u003C CV_Bool;const cv._OutputArray.DEPTH_MASK_64U=1 \u003C\u003C CV_64U;const cv._OutputArray.DEPTH_MASK_64S=1 \u003C\u003C CV_64S;const cv._OutputArray.DEPTH_MASK_32U=1 \u003C\u003C CV_32U;const cv._OutputArray.DEPTH_MASK_ALL=(1 \u003C\u003C CV_DEPTH_CURR_MAX)-1;const cv._OutputArray.DEPTH_MASK_ALL_BUT_8S=DEPTH_MASK_ALL \u0026 ~DEPTH_MASK_8S;const cv._OutputArray.DEPTH_MASK_ALL_16F=DEPTH_MASK_ALL;const cv._OutputArray.DEPTH_MASK_FLT=DEPTH_MASK_32F \u002B DEPTH_MASK_64F]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "enum cv.UMatUsageFlags[const cv.USAGE_DEFAULT=0;const cv.USAGE_ALLOCATE_HOST_MEMORY=1 \u003C\u003C 0;const cv.USAGE_ALLOCATE_DEVICE_MEMORY=1 \u003C\u003C 1;const cv.USAGE_ALLOCATE_SHARED_MEMORY=1 \u003C\u003C 2;const cv.__UMAT_USAGE_FLAGS_32BIT=0x7fffffff]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "identity": "enum cv.UMatData.MemoryFlag[const cv.UMatData.COPY_ON_MAP=1;const cv.UMatData.HOST_COPY_OBSOLETE=2;const cv.UMatData.DEVICE_COPY_OBSOLETE=4;const cv.UMatData.TEMP_UMAT=8;const cv.UMatData.TEMP_COPIED_UMAT=24;const cv.UMatData.USER_ALLOCATED=32;const cv.UMatData.DEVICE_MEM_MAPPED=64;const cv.UMatData.ASYNC_CLEANUP=128]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "identity": "enum cv.Mat.\u003Cunnamed\u003E[const cv.Mat.MAGIC_VAL=0x42FF0000;const cv.Mat.AUTO_STEP=0;const cv.Mat.CONTINUOUS_FLAG=CV_MAT_CONT_FLAG;const cv.Mat.SUBMATRIX_FLAG=CV_SUBMAT_FLAG]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "identity": "enum cv.Mat.\u003Cunnamed\u003E[const cv.Mat.MAGIC_MASK=0xFFFF0000;const cv.Mat.TYPE_MASK=0x00000FFF;const cv.Mat.DEPTH_MASK=7]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "enum cv.UMat.\u003Cunnamed\u003E[const cv.UMat.MAGIC_VAL=0x42FF0000;const cv.UMat.AUTO_STEP=0;const cv.UMat.CONTINUOUS_FLAG=CV_MAT_CONT_FLAG;const cv.UMat.SUBMATRIX_FLAG=CV_SUBMAT_FLAG]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "identity": "enum cv.UMat.\u003Cunnamed\u003E[const cv.UMat.MAGIC_MASK=0xFFFF0000;const cv.UMat.TYPE_MASK=0x00000FFF;const cv.UMat.DEPTH_MASK=7]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "enum cv.SparseMat.\u003Cunnamed\u003E[const cv.SparseMat.MAGIC_VAL=0x42FD0000;const cv.SparseMat.MAX_DIM=32;const cv.SparseMat.HASH_SCALE=0x5bd1e995;const cv.SparseMat.HASH_BIT=0x80000000]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "class cv.FileStorage",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "enum cv.FileStorage.Mode[const cv.FileStorage.READ=0;const cv.FileStorage.WRITE=1;const cv.FileStorage.APPEND=2;const cv.FileStorage.MEMORY=4;const cv.FileStorage.FORMAT_MASK=(7\u003C\u003C3);const cv.FileStorage.FORMAT_AUTO=0;const cv.FileStorage.FORMAT_XML=(1\u003C\u003C3);const cv.FileStorage.FORMAT_YAML=(2\u003C\u003C3);const cv.FileStorage.FORMAT_JSON=(3\u003C\u003C3);const cv.FileStorage.FORMAT_YAML_1_0=(4\u003C\u003C3);const cv.FileStorage.BASE64=64;const cv.FileStorage.WRITE_BASE64=BASE64 | WRITE]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "enum cv.FileStorage.State[const cv.FileStorage.UNDEFINED=0;const cv.FileStorage.VALUE_EXPECTED=1;const cv.FileStorage.NAME_EXPECTED=2;const cv.FileStorage.INSIDE_MAP=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.FileStorage.FileStorage()-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_create",
+        "jyppx_ocv_core_file_storage_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.FileStorage.FileStorage(String filename[/C,/Ref,/PATH];int flags;String encoding=String()[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_create",
+        "jyppx_ocv_core_file_storage_open",
+        "jyppx_ocv_core_file_storage_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor(System.String source,OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.FileStorage.open(String filename[/C,/Ref,/PATH];int flags;String encoding=String()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_open"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Boolean Open(System.String source,OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.FileStorage.isOpened()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_is_opened"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|property|instance;get:public|System.Boolean IsOpened"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.FileStorage.release()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Release()"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.FileStorage.releaseAndGetString()-\u003EString",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_release_and_get_string",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.String ReleaseAndGetString()"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.FileStorage.getFirstTopLevelNode()-\u003EFileNode",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_release",
+        "jyppx_ocv_core_file_storage_get_first_top_level_node"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileNode GetFirstTopLevelNode()"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.FileStorage.root(int streamidx=0)-\u003EFileNode",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_release",
+        "jyppx_ocv_core_file_storage_root"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileNode Root(System.Int32 streamIndex=0)"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.FileStorage.operator[](c_string nodename[/C])-\u003EFileNode",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_release",
+        "jyppx_ocv_core_file_storage_get_node"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.String name]"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int32 value)"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_bool"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Boolean value)"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];int64_t val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_int64"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int64 value)"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];String val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_string"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.String value)"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];Mat val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,OpenCvSharp.Core.Mat value)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.FileStorage.write(String name[/C,/Ref];vector_String val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_string_vector"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E values)"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.FileStorage.writeComment(String comment[/C,/Ref];bool append=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_write_comment"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void WriteComment(System.String comment,System.Boolean append=false)"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.FileStorage.startWriteStruct(String name[/C,/Ref];int flags;String typeName=String()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_start_write_struct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void StartWriteStruct(System.String name,OpenCvSharp.Core.FileNodeTypes flags,System.String? typeName=null)"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.FileStorage.endWriteStruct()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_end_write_struct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void EndWriteStruct()"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.FileStorage.getFormat()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_storage_get_format"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileStorageModes GetFormat()"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "class cv.FileNode",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "enum cv.FileNode.\u003Cunnamed\u003E[const cv.FileNode.NONE=0;const cv.FileNode.INT=1;const cv.FileNode.REAL=2;const cv.FileNode.FLOAT=REAL;const cv.FileNode.STR=3;const cv.FileNode.STRING=STR;const cv.FileNode.SEQ=4;const cv.FileNode.MAP=5;const cv.FileNode.TYPE_MASK=7;const cv.FileNode.FLOW=8;const cv.FileNode.UNIFORM=8;const cv.FileNode.EMPTY=16;const cv.FileNode.NAMED=32]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.FileNode.FileNode()-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_create",
+        "jyppx_ocv_core_file_node_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.FileNode.operator[](c_string nodename[/C])-\u003EFileNode",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_get_node",
+        "jyppx_ocv_core_file_node_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.String name]"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.FileNode.operator[](int i)-\u003EFileNode",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_at",
+        "jyppx_ocv_core_file_node_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.Int32 index]"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.FileNode.keys()-\u003Estd::vector\u003CString\u003E",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_keys",
+        "jyppx_ocv_core_string_list_count",
+        "jyppx_ocv_core_string_list_get",
+        "jyppx_ocv_core_string_list_release",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String[] Keys"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.FileNode.type()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNodeTypes Type"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.FileNode.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean Empty"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.FileNode.isNone()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNone"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.FileNode.isSeq()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsSequence"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.FileNode.isMap()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsMap"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.FileNode.isInt()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsInteger"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.FileNode.isReal()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsReal"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.FileNode.isString()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsString"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.FileNode.isNamed()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_name",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNamed"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.FileNode.name()-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_name",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String Name"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.FileNode.size()-\u003Esize_t",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Int32 Size"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.FileNode.rawSize()-\u003Esize_t",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_raw_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.UInt64 RawSize"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.FileNode.real()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_real"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Double Real"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.FileNode.string()-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_string",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String String"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.FileNode.mat()-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_file_node_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.FileNode|method|public;instance|OpenCvSharp.Core.Mat ToMat()"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "enum cv.SortFlags[const cv.SORT_EVERY_ROW=0;const cv.SORT_EVERY_COLUMN=1;const cv.SORT_ASCENDING=0;const cv.SORT_DESCENDING=16]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 99,
+      "identity": "enum cv.CovarFlags[const cv.COVAR_SCRAMBLED=0;const cv.COVAR_NORMAL=1;const cv.COVAR_USE_AVG=2;const cv.COVAR_SCALE=4;const cv.COVAR_ROWS=8;const cv.COVAR_COLS=16]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 100,
+      "identity": "enum cv.ReduceTypes[const cv.REDUCE_SUM=0;const cv.REDUCE_AVG=1;const cv.REDUCE_MAX=2;const cv.REDUCE_MIN=3;const cv.REDUCE_SUM2=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.borderInterpolate(int p;int len;int borderType)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_border_interpolate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 BorderInterpolate(System.Int32 p,System.Int32 len,OpenCvSharp.ImgProc.BorderTypes borderType)"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.copyMakeBorder(Mat src;Mat dst[/O];int top;int bottom;int left;int right;int borderType;Scalar value=Scalar()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_copy_make_border"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat CopyMakeBorder(OpenCvSharp.Core.Mat src,System.Int32 top,System.Int32 bottom,System.Int32 left,System.Int32 right,OpenCvSharp.ImgProc.BorderTypes borderType,OpenCvSharp.Core.Scalar? value=null)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CopyMakeBorder(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 top,System.Int32 bottom,System.Int32 left,System.Int32 right,OpenCvSharp.ImgProc.BorderTypes borderType,OpenCvSharp.Core.Scalar? value=null)"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.add(Mat src1[/AOS];Mat src2[/AOS];Mat dst[/O];Mat mask=Mat()[/AOS];int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_add"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Add(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar value,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Add(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Add(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar value,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Add(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.subtract(Mat src1[/AOS];Mat src2[/AOS];Mat dst[/O];Mat mask=Mat()[/AOS];int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_subtract"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Subtract(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar value,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Subtract(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Subtract(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar value,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Subtract(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.multiply(Mat src1[/AOS];Mat src2[/AOS];Mat dst[/O];double scale=1;int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_multiply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Multiply(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double scale=1,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Multiply(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,System.Double scale=1,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.divide(Mat src1[/AOS];Mat src2[/AOS];Mat dst[/O];double scale=1;int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_divide"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Divide(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double scale=1,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Divide(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,System.Double scale=1,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.divide(double scale;Mat src2[/AOS];Mat dst[/O];int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_divide"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Divide(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double scale=1,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Divide(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,System.Double scale=1,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.scaleAdd(Mat src1;double alpha;Mat src2;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_scale_add"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ScaleAdd(OpenCvSharp.Core.Mat src1,System.Double alpha,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ScaleAdd(OpenCvSharp.Core.Mat src1,System.Double alpha,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.addWeighted(Mat src1;double alpha;Mat src2;double beta;double gamma;Mat dst[/O];int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_add_weighted"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat AddWeighted(OpenCvSharp.Core.Mat src1,System.Double alpha,OpenCvSharp.Core.Mat src2,System.Double beta,System.Double gamma,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void AddWeighted(OpenCvSharp.Core.Mat src1,System.Double alpha,OpenCvSharp.Core.Mat src2,System.Double beta,System.Double gamma,OpenCvSharp.Core.Mat dst,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.convertScaleAbs(Mat src;Mat dst[/O];double alpha=1;double beta=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_convert_scale_abs"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertScaleAbs(OpenCvSharp.Core.Mat src,System.Double alpha=1,System.Double beta=0)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ConvertScaleAbs(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double alpha=1,System.Double beta=0)"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.LUT(Mat src;Mat lut;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_lut"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Lut(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat lut)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Lut(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat lut,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.sum(Mat src)-\u003EScalar",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_sum"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Scalar Sum(OpenCvSharp.Core.Mat src)"
+      ]
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.hasNonZero(Mat src)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_has_non_zero"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean HasNonZero(OpenCvSharp.Core.Mat src)"
+      ]
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.countNonZero(Mat src)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_count_non_zero"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 CountNonZero(OpenCvSharp.Core.Mat src)"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.findNonZero(Mat src;Mat idx[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_find_non_zero"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat FindNonZero(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void FindNonZero(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.mean(Mat src;Mat mask=Mat())-\u003EScalar",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_mean"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Scalar Mean(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.meanStdDev(Mat src;Mat mean[/O];Mat stddev[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_mean_std_dev"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.MeanStdDevResult MeanStdDev(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.norm(Mat src1;int normType=NORM_L2;Mat mask=Mat())-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_norm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Norm(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.NormTypes normType=L2,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Norm(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.NormTypes normType=L2,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.norm(Mat src1;Mat src2;int normType=NORM_L2;Mat mask=Mat())-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_norm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Norm(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.NormTypes normType=L2,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Norm(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.NormTypes normType=L2,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.PSNR(Mat src1;Mat src2;double R=255.)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_psnr"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Psnr(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double maxValue=255)"
+      ]
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.batchDistance(Mat src1;Mat src2;Mat dist[/O];int dtype;Mat nidx[/O];int normType=NORM_L2;int K=0;Mat mask=Mat();int update=0;bool crosscheck=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_batch_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void BatchDistance(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat distances,System.Int32 dtype=-1,OpenCvSharp.Core.Mat? indices=null,OpenCvSharp.Core.NormTypes normType=L2,System.Int32 k=0,OpenCvSharp.Core.Mat? mask=null,System.Int32 update=0,System.Boolean crosscheck=false)"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.normalize(Mat src;Mat dst[/IO];double alpha=1;double beta=0;int norm_type=NORM_L2;int dtype=-1;Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_normalize"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Normalize(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double alpha=1,System.Double beta=0,OpenCvSharp.Core.NormTypes normType=L2,System.Int32 dtype=-1,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.minMaxLoc(Mat src;double* minVal[/O];double* maxVal=0[/O];Point* minLoc=0[/O];Point* maxLoc=0[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_min_max_loc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.MinMaxLocResult MinMaxLoc(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.reduceArgMin(Mat src;Mat dst[/O];int axis;bool lastIndex=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_reduce_arg_min"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ReduceArgMin(OpenCvSharp.Core.Mat src,System.Int32 axis,System.Boolean lastIndex=false)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ReduceArgMin(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 axis,System.Boolean lastIndex=false)"
+      ]
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.reduceArgMax(Mat src;Mat dst[/O];int axis;bool lastIndex=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_reduce_arg_max"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ReduceArgMax(OpenCvSharp.Core.Mat src,System.Int32 axis,System.Boolean lastIndex=false)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ReduceArgMax(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 axis,System.Boolean lastIndex=false)"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.reduce(Mat src;Mat dst[/O];int dim;int rtype;int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_reduce"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Reduce(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 dim,OpenCvSharp.Core.ReduceTypes rtype,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.merge(vector_Mat mv;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_merge"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Merge(OpenCvSharp.Core.Mat[] src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Merge(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.split(Mat m;vector_Mat mv[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_split_count",
+        "jyppx_ocv_core_split_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat[] Split(OpenCvSharp.Core.Mat src)"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.mixChannels(vector_Mat src;vector_Mat dst[/IO];vector_int fromTo[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_mix_channels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void MixChannels(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst,System.Int32[] fromTo)"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.extractChannel(Mat src;Mat dst[/O];int coi)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_extract_channel"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ExtractChannel(OpenCvSharp.Core.Mat src,System.Int32 coi)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ExtractChannel(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 coi)"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.insertChannel(Mat src;Mat dst[/IO];int coi)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_insert_channel"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void InsertChannel(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 coi)"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.flip(Mat src;Mat dst[/O];int flipCode)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_flip"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Flip(OpenCvSharp.Core.Mat src,System.Int32 flipCode)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Flip(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 flipCode)"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.flipND(Mat src;Mat dst[/O];int axis)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_flip_nd"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat FlipND(OpenCvSharp.Core.Mat src,System.Int32 axis)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void FlipND(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 axis)"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.broadcast(Mat src;Mat shape;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_broadcast"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Broadcast(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat shape)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Broadcast(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat shape,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "identity": "enum cv.RotateFlags[const cv.ROTATE_90_CLOCKWISE=0;const cv.ROTATE_180=1;const cv.ROTATE_90_COUNTERCLOCKWISE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.rotate(Mat src;Mat dst[/O];int rotateCode)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_rotate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Rotate(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.RotateFlags rotateCode)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Rotate(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.RotateFlags rotateCode)"
+      ]
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.repeat(Mat src;int ny;int nx;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_repeat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Repeat(OpenCvSharp.Core.Mat src,System.Int32 ny,System.Int32 nx)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Repeat(OpenCvSharp.Core.Mat src,System.Int32 ny,System.Int32 nx,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.hconcat(vector_Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_hconcat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat HConcat(OpenCvSharp.Core.Mat[] src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat HConcat(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void HConcat(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void HConcat(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.vconcat(vector_Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_vconcat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat VConcat(OpenCvSharp.Core.Mat[] src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat VConcat(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void VConcat(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void VConcat(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.bitwise_and(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_bitwise_and"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat BitwiseAnd(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void BitwiseAnd(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.bitwise_or(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_bitwise_or"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat BitwiseOr(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void BitwiseOr(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.bitwise_xor(Mat src1;Mat src2;Mat dst[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_bitwise_xor"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat BitwiseXor(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void BitwiseXor(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.bitwise_not(Mat src;Mat dst[/O];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_bitwise_not"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat BitwiseNot(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void BitwiseNot(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.absdiff(Mat src1[/AOS];Mat src2[/AOS];Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_absdiff"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat AbsDiff(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar value)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat AbsDiff(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void AbsDiff(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar value,OpenCvSharp.Core.Mat dst)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void AbsDiff(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.copyTo(Mat src;Mat dst[/O];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_copy_to_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CopyTo(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.inRange(Mat src;Mat lowerb;Mat upperb;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_in_range"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat InRange(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar lowerb,OpenCvSharp.Core.Scalar upperb)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void InRange(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Scalar lowerb,OpenCvSharp.Core.Scalar upperb,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.compare(Mat src1;Mat src2;Mat dst[/O];int cmpop)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_compare"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Compare(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.CmpTypes cmpop)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Compare(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.CmpTypes cmpop)"
+      ]
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.min(Mat src1;Mat src2;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_min"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Min(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Min(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.max(Mat src1;Mat src2;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_max"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Max(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Max(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.sqrt(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_sqrt"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Sqrt(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Sqrt(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.pow(Mat src;double power;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pow"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Pow(OpenCvSharp.Core.Mat src,System.Double power)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Pow(OpenCvSharp.Core.Mat src,System.Double power,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.exp(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_exp"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Exp(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Exp(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.log(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_log"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Log(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Log(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.polarToCart(Mat magnitude;Mat angle;Mat x[/O];Mat y[/O];bool angleInDegrees=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_polar_to_cart"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PolarToCart(OpenCvSharp.Core.Mat magnitude,OpenCvSharp.Core.Mat angle,OpenCvSharp.Core.Mat x,OpenCvSharp.Core.Mat y,System.Boolean angleInDegrees=false)"
+      ]
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.cartToPolar(Mat x;Mat y;Mat magnitude[/O];Mat angle[/O];bool angleInDegrees=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_cart_to_polar"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CartToPolar(OpenCvSharp.Core.Mat x,OpenCvSharp.Core.Mat y,OpenCvSharp.Core.Mat magnitude,OpenCvSharp.Core.Mat angle,System.Boolean angleInDegrees=false)"
+      ]
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.phase(Mat x;Mat y;Mat angle[/O];bool angleInDegrees=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_phase"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Phase(OpenCvSharp.Core.Mat x,OpenCvSharp.Core.Mat y,System.Boolean angleInDegrees=false)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Phase(OpenCvSharp.Core.Mat x,OpenCvSharp.Core.Mat y,OpenCvSharp.Core.Mat angle,System.Boolean angleInDegrees=false)"
+      ]
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.magnitude(Mat x;Mat y;Mat magnitude[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_magnitude"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Magnitude(OpenCvSharp.Core.Mat x,OpenCvSharp.Core.Mat y)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Magnitude(OpenCvSharp.Core.Mat x,OpenCvSharp.Core.Mat y,OpenCvSharp.Core.Mat magnitude)"
+      ]
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.checkRange(Mat a;bool quiet=true;Point* pos=0[/O];double minVal=-DBL_MAX;double maxVal=DBL_MAX)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_check_range"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.CheckRangeResult CheckRange(OpenCvSharp.Core.Mat src,System.Double minValue=-1.7976931348623157E\u002B308,System.Double maxValue=1.7976931348623157E\u002B308)"
+      ]
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.patchNaNs(Mat a[/IO];double val=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_patch_nans"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PatchNaNs(OpenCvSharp.Core.Mat src,System.Double value=0)"
+      ]
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.finiteMask(Mat src;Mat mask[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_finite_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat FiniteMask(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void FiniteMask(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.gemm(Mat src1;Mat src2;double alpha;Mat src3;double beta;Mat dst[/O];int flags=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_gemm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Gemm(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double alpha=1,OpenCvSharp.Core.Mat? src3=null,System.Double beta=0,OpenCvSharp.Core.GemmFlags flags=None)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Gemm(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double alpha,OpenCvSharp.Core.Mat? src3,System.Double beta,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.GemmFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.mulTransposed(Mat src;Mat dst[/O];bool aTa;Mat delta=Mat();double scale=1;int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_mul_transposed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat MulTransposed(OpenCvSharp.Core.Mat src,System.Boolean aTa,OpenCvSharp.Core.Mat? delta=null,System.Double scale=1,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void MulTransposed(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Boolean aTa,OpenCvSharp.Core.Mat? delta=null,System.Double scale=1,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.transpose(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_transpose"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Transpose(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Transpose(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.transposeND(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_transpose_nd"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat TransposeND(OpenCvSharp.Core.Mat src,System.Int32[] order)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void TransposeND(OpenCvSharp.Core.Mat src,System.Int32[] order,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.transform(Mat src;Mat dst[/O];Mat m)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Transform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat m)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Transform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat m)"
+      ]
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.perspectiveTransform(Mat src;Mat dst[/O];Mat m)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_perspective_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat PerspectiveTransform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat m)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PerspectiveTransform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat m)"
+      ]
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.completeSymm(Mat m[/IO];bool lowerToUpper=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_complete_symm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CompleteSymm(OpenCvSharp.Core.Mat mat,System.Boolean lowerToUpper=true)"
+      ]
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.setIdentity(Mat mtx[/IO];Scalar s=Scalar(1)[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_set_identity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetIdentity(OpenCvSharp.Core.Mat mat)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetIdentity(OpenCvSharp.Core.Mat mat,OpenCvSharp.Core.Scalar value)"
+      ]
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.determinant(Mat mtx)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_determinant"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Determinant(OpenCvSharp.Core.Mat src)"
+      ]
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.trace(Mat mtx)-\u003EScalar",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_trace"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Scalar Trace(OpenCvSharp.Core.Mat src)"
+      ]
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.invert(Mat src;Mat dst[/O];int flags=DECOMP_LU)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_invert"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Invert(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.DecompTypes flags=LU)"
+      ]
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.solve(Mat src1;Mat src2;Mat dst[/O];int flags=DECOMP_LU)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_solve"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean Solve(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.DecompTypes flags=LU)"
+      ]
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.sort(Mat src;Mat dst[/O];int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_sort"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Sort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.SortFlags flags=EveryRow)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Sort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.SortFlags flags=EveryRow)"
+      ]
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.sortIdx(Mat src;Mat dst[/O];int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_sort_idx"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat SortIdx(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.SortFlags flags=EveryRow)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SortIdx(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.SortFlags flags=EveryRow)"
+      ]
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.solveCubic(Mat coeffs;Mat roots[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_solve_cubic"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 SolveCubic(OpenCvSharp.Core.Mat coeffs,OpenCvSharp.Core.Mat roots)"
+      ]
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.solvePoly(Mat coeffs;Mat roots[/O];int maxIters=300)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_solve_poly"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double SolvePoly(OpenCvSharp.Core.Mat coeffs,OpenCvSharp.Core.Mat roots,System.Int32 maxIters=300)"
+      ]
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.eigen(Mat src;Mat eigenvalues[/O];Mat eigenvectors=Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_eigen"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean Eigen(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat eigenvalues,OpenCvSharp.Core.Mat eigenvectors)"
+      ]
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.eigenNonSymmetric(Mat src;Mat eigenvalues[/O];Mat eigenvectors[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_eigen_non_symmetric"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void EigenNonSymmetric(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat eigenvalues,OpenCvSharp.Core.Mat eigenvectors)"
+      ]
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.calcCovarMatrix(Mat samples;Mat covar[/O];Mat mean[/IO];int flags;int ctype=CV_64F)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_calc_covar_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CalcCovarMatrix(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat covar,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.CovarFlags flags,System.Int32 ctype=6)"
+      ]
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];int maxComponents=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pca_compute_max_components"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,System.Int32 maxComponents=0)"
+      ]
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];Mat eigenvalues[/O];int maxComponents=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pca_compute_max_components"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat eigenvalues,System.Int32 maxComponents=0)"
+      ]
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];double retainedVariance)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pca_compute_retained_variance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,System.Double retainedVariance)"
+      ]
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];Mat eigenvalues[/O];double retainedVariance)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pca_compute_retained_variance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat eigenvalues,System.Double retainedVariance)"
+      ]
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.PCAProject(Mat data;Mat mean;Mat eigenvectors;Mat result[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pca_project"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat PcaProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat result)"
+      ]
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.PCABackProject(Mat data;Mat mean;Mat eigenvectors;Mat result[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_pca_back_project"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat PcaBackProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaBackProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat result)"
+      ]
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.SVDecomp(Mat src;Mat w[/O];Mat u[/O];Mat vt[/O];int flags=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_svd_static_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Svd|method|public;static|System.Void Compute(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat w,OpenCvSharp.Core.Mat u,OpenCvSharp.Core.Mat vt,OpenCvSharp.Core.SvdFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.SVBackSubst(Mat w;Mat u;Mat vt;Mat rhs;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_svd_static_back_subst"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Svd|method|public;static|System.Void BackSubst(OpenCvSharp.Core.Mat w,OpenCvSharp.Core.Mat u,OpenCvSharp.Core.Mat vt,OpenCvSharp.Core.Mat rhs,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.Mahalanobis(Mat v1;Mat v2;Mat icovar)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_mahalanobis"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Mahalanobis(OpenCvSharp.Core.Mat v1,OpenCvSharp.Core.Mat v2,OpenCvSharp.Core.Mat icovar)"
+      ]
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.dft(Mat src;Mat dst[/O];int flags=0;int nonzeroRows=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_dft"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Dft(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.DftFlags flags=None,System.Int32 nonzeroRows=0)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Dft(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.DftFlags flags=None,System.Int32 nonzeroRows=0)"
+      ]
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.idft(Mat src;Mat dst[/O];int flags=0;int nonzeroRows=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_idft"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Idft(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.DftFlags flags=None,System.Int32 nonzeroRows=0)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Idft(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.DftFlags flags=None,System.Int32 nonzeroRows=0)"
+      ]
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.dct(Mat src;Mat dst[/O];int flags=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_dct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Dct(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.DctFlags flags=None)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Dct(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.DctFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.idct(Mat src;Mat dst[/O];int flags=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_idct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Idct(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.DctFlags flags=None)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Idct(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.DctFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.mulSpectrums(Mat a;Mat b;Mat c[/O];int flags;bool conjB=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_mul_spectrums"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat MulSpectrums(OpenCvSharp.Core.Mat a,OpenCvSharp.Core.Mat b,OpenCvSharp.Core.MulSpectrumsFlags flags=None,System.Boolean conjB=false)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void MulSpectrums(OpenCvSharp.Core.Mat a,OpenCvSharp.Core.Mat b,OpenCvSharp.Core.Mat c,OpenCvSharp.Core.MulSpectrumsFlags flags=None,System.Boolean conjB=false)"
+      ]
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.divSpectrums(Mat a;Mat b;Mat c[/O];int flags;bool conjB=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_div_spectrums"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat DivSpectrums(OpenCvSharp.Core.Mat a,OpenCvSharp.Core.Mat b,OpenCvSharp.Core.MulSpectrumsFlags flags=None,System.Boolean conjB=false)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void DivSpectrums(OpenCvSharp.Core.Mat a,OpenCvSharp.Core.Mat b,OpenCvSharp.Core.Mat c,OpenCvSharp.Core.MulSpectrumsFlags flags=None,System.Boolean conjB=false)"
+      ]
+    },
+    {
+      "ordinal": 195,
+      "identity": "cv.getOptimalDFTSize(int vecsize)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_optimal_dft_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetOptimalDftSize(System.Int32 vecSize)"
+      ]
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.setRNGSeed(int seed)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_set_rng_seed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetRngSeed(System.Int32 seed)"
+      ]
+    },
+    {
+      "ordinal": 197,
+      "identity": "cv.randu(Mat dst[/IO];Mat low;Mat high)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_randu_mat",
+        "jyppx_ocv_core_randu_scalar"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randu(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat low,OpenCvSharp.Core.Mat high)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randu(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Scalar low,OpenCvSharp.Core.Scalar high)"
+      ]
+    },
+    {
+      "ordinal": 198,
+      "identity": "cv.randn(Mat dst[/IO];Mat mean;Mat stddev)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_randn_mat",
+        "jyppx_ocv_core_randn_scalar"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randn(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat stddev)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randn(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Scalar mean,OpenCvSharp.Core.Scalar stddev)"
+      ]
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.randShuffle(Mat dst[/IO];double iterFactor=1.;RNG* rng=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_rand_shuffle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void RandShuffle(OpenCvSharp.Core.Mat dst,System.Double iterFactor=1,OpenCvSharp.Core.Rng? rng=null)"
+      ]
+    },
+    {
+      "ordinal": 200,
+      "identity": "enum cv.PCA.Flags[const cv.PCA.DATA_AS_ROW=0;const cv.PCA.DATA_AS_COL=1;const cv.PCA.USE_AVG=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 201,
+      "identity": "enum cv.SVD.Flags[const cv.SVD.MODIFY_A=1;const cv.SVD.NO_UV=2;const cv.SVD.FULL_UV=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 202,
+      "identity": "enum cv.RNG.\u003Cunnamed\u003E[const cv.RNG.UNIFORM=0;const cv.RNG.NORMAL=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 203,
+      "identity": "enum cv.KmeansFlags[const cv.KMEANS_RANDOM_CENTERS=0;const cv.KMEANS_PP_CENTERS=2;const cv.KMEANS_USE_INITIAL_LABELS=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 204,
+      "identity": "cv.kmeans(Mat data;int K;Mat bestLabels[/IO];TermCriteria criteria;int attempts;int flags;Mat centers=Mat()[/O])-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_kmeans"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double KMeans(OpenCvSharp.Core.Mat data,System.Int32 k,OpenCvSharp.Core.Mat bestLabels,OpenCvSharp.Core.Mat centers)",
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double KMeans(OpenCvSharp.Core.Mat data,System.Int32 k,OpenCvSharp.Core.Mat bestLabels,OpenCvSharp.Core.TermCriteria criteria,System.Int32 attempts,OpenCvSharp.Core.KMeansFlags flags,OpenCvSharp.Core.Mat centers)"
+      ]
+    },
+    {
+      "ordinal": 205,
+      "identity": "enum cv.Formatter.FormatType[const cv.Formatter.FMT_DEFAULT=0;const cv.Formatter.FMT_MATLAB=1;const cv.Formatter.FMT_CSV=2;const cv.Formatter.FMT_PYTHON=3;const cv.Formatter.FMT_NUMPY=4;const cv.Formatter.FMT_C=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 206,
+      "identity": "class cv.Algorithm",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 207,
+      "identity": "cv.Algorithm.clear()-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 208,
+      "identity": "cv.Algorithm.write(FileStorage fs[/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 209,
+      "identity": "cv.Algorithm.write(FileStorage fs[/Ref];String name[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 210,
+      "identity": "cv.Algorithm.read(FileNode fn[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 211,
+      "identity": "cv.Algorithm.empty()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 212,
+      "identity": "cv.Algorithm.save(String filename[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 213,
+      "identity": "cv.Algorithm.getDefaultName()-\u003EString",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B convenience/stateful object lacks the dedicated neutral ownership model selected for this batch and remains explicitly deferred.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 214,
+      "identity": "enum struct cv.Param[const cv.Param.INT=0;const cv.Param.BOOLEAN=1;const cv.Param.REAL=2;const cv.Param.STRING=3;const cv.Param.MAT=4;const cv.Param.MAT_VECTOR=5;const cv.Param.ALGORITHM=6;const cv.Param.FLOAT=7;const cv.Param.UNSIGNED_INT=8;const cv.Param.UINT64=9;const cv.Param.UCHAR=11;const cv.Param.SCALAR=12]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 215,
+      "identity": "cv.setNumThreads(int nthreads)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_set_num_threads"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetNumThreads(System.Int32 threadCount)"
+      ]
+    },
+    {
+      "ordinal": 216,
+      "identity": "cv.getNumThreads()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_num_threads"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumThreads()"
+      ]
+    },
+    {
+      "ordinal": 217,
+      "identity": "cv.getThreadNum()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_thread_num"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetThreadNum()"
+      ]
+    },
+    {
+      "ordinal": 218,
+      "identity": "cv.getBuildInformation()-\u003EString",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_build_information",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetBuildInformation()"
+      ]
+    },
+    {
+      "ordinal": 219,
+      "identity": "cv.getVersionString()-\u003EString",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_get_version_string"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.String GetNativeOpenCvVersion()"
+      ]
+    },
+    {
+      "ordinal": 220,
+      "identity": "cv.getVersionMajor()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_get_version_major"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMajor()"
+      ]
+    },
+    {
+      "ordinal": 221,
+      "identity": "cv.getVersionMinor()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_get_version_minor"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMinor()"
+      ]
+    },
+    {
+      "ordinal": 222,
+      "identity": "cv.getVersionRevision()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_get_version_revision"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionRevision()"
+      ]
+    },
+    {
+      "ordinal": 223,
+      "identity": "cv.getTickCount()-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_tick_count"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetTickCount()"
+      ]
+    },
+    {
+      "ordinal": 224,
+      "identity": "cv.getTickFrequency()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_tick_frequency"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double GetTickFrequency()"
+      ]
+    },
+    {
+      "ordinal": 225,
+      "identity": "class cv.TickMeter",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 226,
+      "identity": "cv.TickMeter.TickMeter()-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_create",
+        "jyppx_ocv_core_tick_meter_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 227,
+      "identity": "cv.TickMeter.start()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_start"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Start()"
+      ]
+    },
+    {
+      "ordinal": 228,
+      "identity": "cv.TickMeter.stop()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_stop"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Stop()"
+      ]
+    },
+    {
+      "ordinal": 229,
+      "identity": "cv.TickMeter.getTimeTicks()-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_time_ticks"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 TimeTicks"
+      ]
+    },
+    {
+      "ordinal": 230,
+      "identity": "cv.TickMeter.getTimeMicro()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_time_micro"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMicroseconds"
+      ]
+    },
+    {
+      "ordinal": 231,
+      "identity": "cv.TickMeter.getTimeMilli()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_time_milli"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMilliseconds"
+      ]
+    },
+    {
+      "ordinal": 232,
+      "identity": "cv.TickMeter.getTimeSec()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_time_sec"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeSeconds"
+      ]
+    },
+    {
+      "ordinal": 233,
+      "identity": "cv.TickMeter.getLastTimeTicks()-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_last_time_ticks"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 LastTimeTicks"
+      ]
+    },
+    {
+      "ordinal": 234,
+      "identity": "cv.TickMeter.getLastTimeMicro()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_last_time_micro"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMicroseconds"
+      ]
+    },
+    {
+      "ordinal": 235,
+      "identity": "cv.TickMeter.getLastTimeMilli()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_last_time_milli"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMilliseconds"
+      ]
+    },
+    {
+      "ordinal": 236,
+      "identity": "cv.TickMeter.getLastTimeSec()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_last_time_sec"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeSeconds"
+      ]
+    },
+    {
+      "ordinal": 237,
+      "identity": "cv.TickMeter.getCounter()-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_counter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 Counter"
+      ]
+    },
+    {
+      "ordinal": 238,
+      "identity": "cv.TickMeter.getFPS()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_fps"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double FramesPerSecond"
+      ]
+    },
+    {
+      "ordinal": 239,
+      "identity": "cv.TickMeter.getAvgTimeSec()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_avg_time_sec"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeSeconds"
+      ]
+    },
+    {
+      "ordinal": 240,
+      "identity": "cv.TickMeter.getAvgTimeMilli()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_get_avg_time_milli"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeMilliseconds"
+      ]
+    },
+    {
+      "ordinal": 241,
+      "identity": "cv.TickMeter.reset()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_tick_meter_reset"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Reset()"
+      ]
+    },
+    {
+      "ordinal": 242,
+      "identity": "cv.getCPUTickCount()-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_cpu_tick_count"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetCpuTickCount()"
+      ]
+    },
+    {
+      "ordinal": 243,
+      "identity": "cv.checkHardwareSupport(int feature)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_check_hardware_support"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean CheckHardwareSupport(OpenCvSharp.Core.CpuFeatures feature)"
+      ]
+    },
+    {
+      "ordinal": 244,
+      "identity": "cv.getHardwareFeatureName(int feature)-\u003EString",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_hardware_feature_name",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetHardwareFeatureName(OpenCvSharp.Core.CpuFeatures feature)"
+      ]
+    },
+    {
+      "ordinal": 245,
+      "identity": "cv.getCPUFeaturesLine()-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_cpu_features_line",
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetCpuFeaturesLine()"
+      ]
+    },
+    {
+      "ordinal": 246,
+      "identity": "cv.getNumberOfCPUs()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_number_of_cpus"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumberOfCpus()"
+      ]
+    },
+    {
+      "ordinal": 247,
+      "identity": "enum cv.AlgorithmHint[const cv.ALGO_HINT_DEFAULT=0;const cv.ALGO_HINT_ACCURATE=1;const cv.ALGO_HINT_APPROX=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 248,
+      "identity": "cv.getDefaultAlgorithmHint()-\u003EAlgorithmHint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_get_default_algorithm_hint"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.AlgorithmHint GetDefaultAlgorithmHint()"
+      ]
+    },
+    {
+      "ordinal": 249,
+      "identity": "cv.setUseOptimized(bool onoff)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_set_use_optimized"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetUseOptimized(System.Boolean enabled)"
+      ]
+    },
+    {
+      "ordinal": 250,
+      "identity": "cv.useOptimized()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_use_optimized"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean UseOptimized()"
+      ]
+    },
+    {
+      "ordinal": 251,
+      "identity": "cv.samples.findFile(String relative_path[/C,/Ref];bool required=true;bool silentMode=false)-\u003Ecv::String",
+      "classification": "unsupported",
+      "reason": "OpenCV sample-data search paths are development conveniences and are outside the packaged runtime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 252,
+      "identity": "cv.samples.findFileOrKeep(String relative_path[/C,/Ref];bool silentMode=false)-\u003Ecv::String",
+      "classification": "unsupported",
+      "reason": "OpenCV sample-data search paths are development conveniences and are outside the packaged runtime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 253,
+      "identity": "cv.samples.addSamplesDataSearchPath(String path[/C,/Ref])-\u003Evoid",
+      "classification": "unsupported",
+      "reason": "OpenCV sample-data search paths are development conveniences and are outside the packaged runtime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 254,
+      "identity": "cv.samples.addSamplesDataSearchSubDirectory(String subdir[/C,/Ref])-\u003Evoid",
+      "classification": "unsupported",
+      "reason": "OpenCV sample-data search paths are development conveniences and are outside the packaged runtime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 255,
+      "identity": "enum cv.SolveLPResult[const cv.SOLVELP_LOST=-3;const cv.SOLVELP_UNBOUNDED=-2;const cv.SOLVELP_UNFEASIBLE=-1;const cv.SOLVELP_SINGLE=0;const cv.SOLVELP_MULTI=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum/class/struct metadata is reviewed as type or constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 256,
+      "identity": "cv.solveLP(Mat Func;Mat Constr;Mat z[/O];double constr_eps[/C])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_solve_lp"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.SolveLpResult SolveLp(OpenCvSharp.Core.Mat objective,OpenCvSharp.Core.Mat constraints,OpenCvSharp.Core.Mat solution,System.Double constraintEpsilon=1E-12)"
+      ]
+    },
+    {
+      "ordinal": 257,
+      "identity": "cv.solveLP(Mat Func;Mat Constr;Mat z[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated stable neutral C ABI and managed public API evidence was found for this callable identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_solve_lp"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.SolveLpResult SolveLp(OpenCvSharp.Core.Mat objective,OpenCvSharp.Core.Mat constraints,OpenCvSharp.Core.Mat solution,System.Double constraintEpsilon=1E-12)"
+      ]
+    }
+  ]
+}

@@ -21,6 +21,8 @@ $miniHeaderPaths = @(
     "core/decomp.h"
     "core/mat.h"
     "core/operations.h"
+    "core/persistence.h"
+    "core/utility.h"
     "error.h"
     "imgcodecs.h"
     "imgproc.h"
@@ -35,6 +37,30 @@ function Normalize-NewLines {
     param([Parameter(Mandatory)][string]$Text)
 
     return ($Text -replace "`r`n", "`n" -replace "`r", "`n")
+}
+
+function Get-OrdinalSortedObjects {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Values,
+        [Parameter(Mandatory)][string]$Property
+    )
+
+    $copy = [object[]]$Values.Clone()
+    $keys = [string[]]@($copy | ForEach-Object { [string]$_.$Property })
+    [Array]::Sort[string, object]($keys, $copy, [StringComparer]::Ordinal)
+    return $copy
+}
+
+function Get-OrdinalUniqueStrings {
+    param([Parameter(Mandatory)][AllowEmptyCollection()][string[]]$Values)
+
+    $unique = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($value in $Values) {
+        [void]$unique.Add($value)
+    }
+    $copy = [string[]]@($unique)
+    [Array]::Sort($copy, [StringComparer]::Ordinal)
+    return $copy
 }
 
 function Write-GeneratedText {
@@ -237,10 +263,9 @@ if (-not (Test-Path -LiteralPath $headerRoot)) {
     throw "Primary native header tree was not found: $headerRoot"
 }
 
-$headers = @(
-    Get-ChildItem -LiteralPath $headerRoot -Recurse -File -Filter "*.h" |
-        Sort-Object FullName
-)
+$headers = @(Get-OrdinalSortedObjects -Values @(
+        Get-ChildItem -LiteralPath $headerRoot -Recurse -File -Filter "*.h"
+    ) -Property "FullName")
 $declarations = @(
     Get-PublicDeclarations -Headers $headers -Prefix $PrimaryPrefix
 )
@@ -256,9 +281,8 @@ if ($miniDeclarations.Count -eq 0) {
     throw "No mini-profile declarations using prefix '$PrimaryPrefix' were found."
 }
 
-$missingMiniHeaders = @(
-    $miniHeaderPaths | Where-Object { $_ -notin @($miniDeclarations.Header | Sort-Object -Unique) }
-)
+$miniDeclarationHeaders = @(Get-OrdinalUniqueStrings -Values @($miniDeclarations.Header))
+$missingMiniHeaders = @($miniHeaderPaths | Where-Object { $_ -notin $miniDeclarationHeaders })
 if ($missingMiniHeaders.Count -gt 0) {
     throw "Mini-profile headers contain no exported declarations: $($missingMiniHeaders -join ', ')"
 }
@@ -274,24 +298,21 @@ if ($duplicateFunctions.Count -gt 0) {
 }
 
 $supportedReturnTypes = @("int", "void", "const char*")
-$unsupportedReturnTypes = @(
-    $declarations.ReturnType |
-        Sort-Object -Unique |
-        Where-Object { $_ -notin $supportedReturnTypes }
-)
+$unsupportedReturnTypes = @(Get-OrdinalUniqueStrings -Values @($declarations.ReturnType) |
+    Where-Object { $_ -notin $supportedReturnTypes })
 if ($unsupportedReturnTypes.Count -gt 0) {
     throw "Unsupported exported return types: $($unsupportedReturnTypes -join ', ')"
 }
 
 $identifierPattern = "\b$([regex]::Escape($PrimaryPrefix))[A-Za-z0-9_]+\b"
-$primaryIdentifiers = @(
+$primaryIdentifiers = @(Get-OrdinalUniqueStrings -Values @(
     foreach ($header in $headers) {
         $text = [System.IO.File]::ReadAllText($header.FullName)
         [regex]::Matches($text, $identifierPattern) |
             ForEach-Object Value
     }
-) | Sort-Object -Unique
-$miniPrimaryIdentifiers = @(
+))
+$miniPrimaryIdentifiers = @(Get-OrdinalUniqueStrings -Values @(
     foreach ($header in $headers) {
         $relativeHeader = [System.IO.Path]::GetRelativePath($headerRoot, $header.FullName).Replace("\", "/")
         if ($relativeHeader -notin $miniHeaderPaths) {
@@ -302,18 +323,15 @@ $miniPrimaryIdentifiers = @(
         [regex]::Matches($text, $identifierPattern) |
             ForEach-Object Value
     }
-) | Sort-Object -Unique
+))
 
-$headerCounts = @(
-    $declarations |
-        Group-Object Header |
-        Sort-Object Name
-)
-$returnTypeCounts = @(
-    $declarations |
-        Group-Object ReturnType |
-        Sort-Object Name
-)
+$headerCounts = @(Get-OrdinalSortedObjects -Values @(
+        $declarations | Group-Object Header
+    ) -Property "Name")
+$returnTypeCounts = @(Get-OrdinalSortedObjects -Values @(
+        $declarations | Group-Object ReturnType
+    ) -Property "Name")
+$sortedDeclarations = @(Get-OrdinalSortedObjects -Values $declarations -Property "Name")
 
 Write-Host "Parsed $($declarations.Count) public declarations from $($headerCounts.Count) headers."
 Write-Host "Found $($primaryIdentifiers.Count) unique public identifiers using '$PrimaryPrefix'."
@@ -335,7 +353,7 @@ $includeLines = @(
         ForEach-Object { "#include `"open_cv_sharp/$_`"" }
 )
 $wrapperLines = [System.Collections.Generic.List[string]]::new()
-foreach ($declaration in ($declarations | Sort-Object Name)) {
+foreach ($declaration in $sortedDeclarations) {
     $compatibilityName = $compatibilityExportPrefix + $declaration.Name.Substring($PrimaryPrefix.Length)
     $parameters = if ($declaration.ParameterText.Length -eq 0) {
         "void"
@@ -391,8 +409,7 @@ $manifestLines = @(
     "identifier-count=$($primaryIdentifiers.Count)"
     ""
     "[functions]"
-    $declarations |
-        Sort-Object Name |
+    $sortedDeclarations |
         ForEach-Object {
             $compatibilityName = $compatibilityExportPrefix + $_.Name.Substring($PrimaryPrefix.Length)
             "$($_.Name)|$compatibilityName|$($_.ReturnType)|$($_.ParameterCount)|$($_.Header)"
@@ -403,17 +420,16 @@ Write-GeneratedText -Path $compatibilityAbiPath -Content $compatibilityAbiConten
 Write-GeneratedText -Path $compatibilityAliasHeaderPath -Content $compatibilityAliasHeaderContent
 Write-GeneratedText -Path $compatibilityManifestPath -Content ($manifestLines -join "`n")
 
-$miniHeaderCounts = @(
-    $miniDeclarations |
-        Group-Object Header |
-        Sort-Object Name
-)
+$miniHeaderCounts = @(Get-OrdinalSortedObjects -Values @(
+        $miniDeclarations | Group-Object Header
+    ) -Property "Name")
+$sortedMiniDeclarations = @(Get-OrdinalSortedObjects -Values $miniDeclarations -Property "Name")
 $miniIncludeLines = @(
     $miniHeaderCounts.Name |
         ForEach-Object { "#include `"open_cv_sharp/$_`"" }
 )
 $miniWrapperLines = [System.Collections.Generic.List[string]]::new()
-foreach ($declaration in ($miniDeclarations | Sort-Object Name)) {
+foreach ($declaration in $sortedMiniDeclarations) {
     $compatibilityName = $compatibilityExportPrefix + $declaration.Name.Substring($PrimaryPrefix.Length)
     $parameters = if ($declaration.ParameterText.Length -eq 0) {
         "void"
@@ -454,8 +470,7 @@ $miniManifestLines = @(
     "identifier-count=$($miniPrimaryIdentifiers.Count)"
     ""
     "[functions]"
-    $miniDeclarations |
-        Sort-Object Name |
+    $sortedMiniDeclarations |
         ForEach-Object {
             $compatibilityName = $compatibilityExportPrefix + $_.Name.Substring($PrimaryPrefix.Length)
             "$($_.Name)|$compatibilityName|$($_.ReturnType)|$($_.ParameterCount)|$($_.Header)"

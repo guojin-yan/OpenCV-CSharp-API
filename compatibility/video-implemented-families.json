@@ -1,0 +1,1195 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 13,
+  "managedPublicMemberAdditionCount": 110,
+  "nativeEntrypointAdditionCount": 45,
+  "families": [
+    {
+      "id": "video-optical-flow-objects",
+      "rationale": "The selected batch closes the parser-emitted Dense/Sparse OpticalFlow bases plus Farneback, VariationalRefinement, DIS, and SparsePyrLK factories, operations, typed properties, and owned lifetimes with deterministic offline inputs.",
+      "declarations": [
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.DenseOpticalFlow.calc(Mat I0;Mat I1;Mat flow[/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dense_optical_flow_calc"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DenseOpticalFlow|method|public;instance;virtual|System.Void Calc(OpenCvSharp.Core.Mat first,OpenCvSharp.Core.Mat second,OpenCvSharp.Core.Mat flow)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.DenseOpticalFlow.collectGarbage()-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dense_optical_flow_collect_garbage"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DenseOpticalFlow|method|public;instance|System.Void CollectGarbage()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.SparseOpticalFlow.calc(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err=cv::Mat()[/O])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_optical_flow_calc"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparseOpticalFlow|method|public;instance|OpenCvSharp.Core.Point2f[] Calc(OpenCvSharp.Core.Mat previousImage,OpenCvSharp.Core.Mat nextImage,OpenCvSharp.Core.Point2f[] previousPoints,OpenCvSharp.Core.Point2f[] initialNextPoints,out System.Byte[] status,out System.Single[] error)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getNumLevels()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setNumLevels(int numLevels)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getPyrScale()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setPyrScale(double pyrScale)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getFastPyramids()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_bool_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setFastPyramids(bool fastPyramids)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_bool_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getWinSize()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setWinSize(int winSize)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getNumIters()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setNumIters(int numIters)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getPolyN()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setPolyN(int polyN)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getPolySigma()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setPolySigma(double polySigma)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 41,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.getFlags()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.setFlags(int flags)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_farneback_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 43,
+          "upstreamIdentity": "cv.FarnebackOpticalFlow.create(int numLevels=5;double pyrScale=0.5;bool fastPyramids=false;int winSize=13;int numIters=10;int polyN=5;double polySigma=1.1;int flags=0)-\u003EPtr\u003CFarnebackOpticalFlow\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dense_optical_flow_release_handle",
+            "jyppx_ocv_farneback_optical_flow_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|method|public;static|OpenCvSharp.Video.FarnebackOpticalFlow Create(System.Int32 numLevels=5,System.Double pyrScale=0.5,System.Boolean fastPyramids=false,System.Int32 winSize=13,System.Int32 numIterations=10,System.Int32 polyN=5,System.Double polySigma=1.1,OpenCvSharp.Video.OpticalFlowFlags flags=None)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 45,
+          "upstreamIdentity": "cv.VariationalRefinement.calcUV(Mat I0;Mat I1;Mat flow_u[/IO];Mat flow_v[/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_calc_uv"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|method|public;instance|System.Void CalcUV(OpenCvSharp.Core.Mat first,OpenCvSharp.Core.Mat second,OpenCvSharp.Core.Mat flowU,OpenCvSharp.Core.Mat flowV)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.VariationalRefinement.getFixedPointIterations()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.VariationalRefinement.setFixedPointIterations(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.VariationalRefinement.getSorIterations()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.VariationalRefinement.setSorIterations(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.VariationalRefinement.getOmega()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.VariationalRefinement.setOmega(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.VariationalRefinement.getAlpha()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.VariationalRefinement.setAlpha(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.VariationalRefinement.getDelta()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.VariationalRefinement.setDelta(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.VariationalRefinement.getGamma()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.VariationalRefinement.setGamma(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.VariationalRefinement.getEpsilon()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.VariationalRefinement.setEpsilon(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_variational_refinement_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.VariationalRefinement.create()-\u003EPtr\u003CVariationalRefinement\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dense_optical_flow_release_handle",
+            "jyppx_ocv_variational_refinement_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.VariationalRefinement|method|public;static|OpenCvSharp.Video.VariationalRefinement Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.DISOpticalFlow.getFinestScale()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.DISOpticalFlow.setFinestScale(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.DISOpticalFlow.setCoarsestScale(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 66,
+          "upstreamIdentity": "cv.DISOpticalFlow.getCoarsestScale()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.DISOpticalFlow.getPatchSize()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 68,
+          "upstreamIdentity": "cv.DISOpticalFlow.setPatchSize(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 69,
+          "upstreamIdentity": "cv.DISOpticalFlow.getPatchStride()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 70,
+          "upstreamIdentity": "cv.DISOpticalFlow.setPatchStride(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 71,
+          "upstreamIdentity": "cv.DISOpticalFlow.getGradientDescentIterations()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 72,
+          "upstreamIdentity": "cv.DISOpticalFlow.setGradientDescentIterations(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 73,
+          "upstreamIdentity": "cv.DISOpticalFlow.getVariationalRefinementIterations()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 74,
+          "upstreamIdentity": "cv.DISOpticalFlow.setVariationalRefinementIterations(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 75,
+          "upstreamIdentity": "cv.DISOpticalFlow.getVariationalRefinementAlpha()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 76,
+          "upstreamIdentity": "cv.DISOpticalFlow.setVariationalRefinementAlpha(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 77,
+          "upstreamIdentity": "cv.DISOpticalFlow.getVariationalRefinementDelta()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 78,
+          "upstreamIdentity": "cv.DISOpticalFlow.setVariationalRefinementDelta(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 79,
+          "upstreamIdentity": "cv.DISOpticalFlow.getVariationalRefinementGamma()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 80,
+          "upstreamIdentity": "cv.DISOpticalFlow.setVariationalRefinementGamma(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 81,
+          "upstreamIdentity": "cv.DISOpticalFlow.getVariationalRefinementEpsilon()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 82,
+          "upstreamIdentity": "cv.DISOpticalFlow.setVariationalRefinementEpsilon(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_float_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 83,
+          "upstreamIdentity": "cv.DISOpticalFlow.getUseMeanNormalization()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_bool_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 84,
+          "upstreamIdentity": "cv.DISOpticalFlow.setUseMeanNormalization(bool val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_bool_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 85,
+          "upstreamIdentity": "cv.DISOpticalFlow.getUseSpatialPropagation()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_get_bool_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 86,
+          "upstreamIdentity": "cv.DISOpticalFlow.setUseSpatialPropagation(bool val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dis_optical_flow_set_bool_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 87,
+          "upstreamIdentity": "cv.DISOpticalFlow.create(int preset=DISOpticalFlow::PRESET_FAST)-\u003EPtr\u003CDISOpticalFlow\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dense_optical_flow_release_handle",
+            "jyppx_ocv_dis_optical_flow_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.DisOpticalFlow|method|public;static|OpenCvSharp.Video.DisOpticalFlow Create(OpenCvSharp.Video.DisOpticalFlowPreset preset=Fast)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 89,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.getWinSize()-\u003ESize",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_get_size_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.Size WinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 90,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.setWinSize(Size winSize)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_set_size_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.Size WinSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 91,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.getMaxLevel()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 92,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.setMaxLevel(int maxLevel)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 93,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.getTermCriteria()-\u003ETermCriteria",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_get_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria Criteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 94,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.setTermCriteria(TermCriteria crit[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_set_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria Criteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 95,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.getFlags()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 96,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.setFlags(int flags)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 97,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.getMinEigThreshold()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_get_min_eig_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 98,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.setMinEigThreshold(double minEigThreshold)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_set_min_eig_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 99,
+          "upstreamIdentity": "cv.SparsePyrLKOpticalFlow.create(Size winSize=Size(21, 21);int maxLevel=3;TermCriteria crit=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 30, 0.01);int flags=0;double minEigThreshold=1e-4)-\u003EPtr\u003CSparsePyrLKOpticalFlow\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_sparse_optical_flow_release_handle",
+            "jyppx_ocv_sparse_pyr_lk_optical_flow_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|method|public;static|OpenCvSharp.Video.SparsePyrLkOpticalFlow Create(OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Video.OpticalFlowFlags flags=None,System.Double minEigThreshold=0.0001)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "video-ecc-registration",
+      "rationale": "The ECC batch closes correlation, single- and dual-mask registration, multiscale parameters, caller-owned warp updates, and independently owned result matrices.",
+      "declarations": [
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.computeECC(Mat templateImage;Mat inputImage;Mat inputMask=Mat())-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_compute_ecc"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double ComputeECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat? inputMask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.findTransformECC(Mat templateImage;Mat inputImage;Mat warpMatrix[/IO];int motionType;TermCriteria criteria;Mat inputMask;int gaussFiltSize)-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_find_transform_ecc"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.findTransformECC(Mat templateImage;Mat inputImage;Mat warpMatrix[/IO];int motionType=MOTION_AFFINE;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 50, 0.001);Mat inputMask=Mat())-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_find_transform_ecc"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.findTransformECCWithMask(Mat templateImage;Mat inputImage;Mat templateMask;Mat inputMask;Mat warpMatrix[/IO];int motionType=MOTION_AFFINE;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 50, 1e-6);int gaussFiltSize=5)-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_find_transform_ecc_with_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCWithMask(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat templateMask,OpenCvSharp.Core.Mat inputMask,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32 gaussianFilterSize=5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.ECCParameters.ECCParameters()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_ecc_parameters_get_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.ECCParameters|constructor|public;instance|.ctor(OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32[]? iterationsPerLevel=null,System.Int32 gaussianFilterSize=5,System.Int32 levelCount=4,OpenCvSharp.ImgProc.InterpolationFlags interpolation=Linear)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.findTransformECCMultiScale(Mat reference;Mat sample;Mat warpMatrix[/IO];ECCParameters eccParams=ECCParameters()[/C,/Ref];Mat referenceMask=Mat();Mat sampleMask=Mat())-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_find_transform_ecc_multi_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCMultiScale(OpenCvSharp.Core.Mat referenceImage,OpenCvSharp.Core.Mat sampleImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.ECCParameters? parameters=null,OpenCvSharp.Core.Mat? referenceMask=null,OpenCvSharp.Core.Mat? sampleMask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "video-tracker-mil",
+      "rationale": "The main Video TrackerMIL batch closes default and copied parameters, factory ownership, initialization, update, tracking-score, and disposal semantics independently of contrib Tracking wrappers.",
+      "declarations": [
+        {
+          "ordinal": 101,
+          "upstreamIdentity": "cv.Tracker.init(Mat image;Rect boundingBox[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_tracker_init"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Tracker|method|public;instance|System.Void Init(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect boundingBox)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 102,
+          "upstreamIdentity": "cv.Tracker.update(Mat image;Rect boundingBox[/O,/Ref])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_tracker_update"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Tracker|method|public;instance|System.Boolean Update(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Core.Rect boundingBox)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 103,
+          "upstreamIdentity": "cv.Tracker.getTrackingScore()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_tracker_get_tracking_score"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.Tracker|property|instance;get:public|System.Single TrackingScore"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 106,
+          "upstreamIdentity": "cv.TrackerMIL.Params.Params()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_tracker_mil_get_default_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.TrackerMILParams|property|static;get:public|OpenCvSharp.Video.TrackerMILParams Default"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 107,
+          "upstreamIdentity": "cv.TrackerMIL.create(TrackerMIL_Params parameters=TrackerMIL::Params()[/C,/Ref])-\u003EPtr\u003CTrackerMIL\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_video_tracker_mil_create",
+            "jyppx_ocv_video_tracker_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Video.TrackerMIL|method|public;static|OpenCvSharp.Video.TrackerMIL Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/video-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

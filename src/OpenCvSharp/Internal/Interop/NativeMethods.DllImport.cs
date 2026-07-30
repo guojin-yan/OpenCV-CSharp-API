@@ -15,6 +15,15 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_version_string")]
         internal static extern IntPtr GetVersionStringPointer();
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_version_major")]
+        internal static extern int GetVersionMajor();
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_version_minor")]
+        internal static extern int GetVersionMinor();
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_version_revision")]
+        internal static extern int GetVersionRevision();
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mat_create_empty")]
         internal static extern int MatCreateEmpty(out IntPtr mat);
 
@@ -165,6 +174,15 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_patch_nans")]
         internal static extern int CorePatchNaNs(IntPtr src, double value);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_cube_root")]
+        internal static extern int CoreCubeRoot(float value, out float result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_fast_atan2")]
+        internal static extern int CoreFastAtan2(float y, float x, out float degrees);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_batch_distance")]
+        internal static extern int CoreBatchDistance(IntPtr src1, IntPtr src2, IntPtr distances, int dtype, IntPtr indices, int normType, int k, IntPtr mask, int update, int crosscheck);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_count_non_zero")]
         internal static extern int CoreCountNonZero(IntPtr src, out int count);
 
@@ -311,6 +329,129 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imwrite_with_params")]
         internal static extern unsafe int ImgCodecsImWriteWithParams(byte[] filename, IntPtr image, int* parameters, UIntPtr parametersLength, out int written);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imread_into")]
+        internal static extern int ImgCodecsImReadInto(byte[] filename, int flags, IntPtr image);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imread_multi")]
+        internal static extern int ImgCodecsImReadMulti(byte[] filename, int flags, int hasRange, int start, int count, out IntPtr images, out int success);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imdecode_multi")]
+        internal static extern int ImgCodecsImDecodeMulti(byte[] buffer, UIntPtr bufferLength, int flags, int hasRange, int start, int end, out IntPtr images, out int success);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imwrite_multi")]
+        internal static extern int ImgCodecsImWriteMulti(byte[] filename, IntPtr images, UIntPtr imageCount, IntPtr parameters, UIntPtr parametersLength, out int written);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imencode_multi", CharSet = CharSet.Ansi)]
+        internal static extern int ImgCodecsImEncodeMulti(string ext, IntPtr images, UIntPtr imageCount, IntPtr parameters, UIntPtr parametersLength, out IntPtr buffer);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imcount")]
+        internal static extern int ImgCodecsImCount(byte[] filename, int flags, out UIntPtr count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_have_image_reader")]
+        internal static extern int ImgCodecsHaveImageReader(byte[] filename, out int available);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_have_image_writer")]
+        internal static extern int ImgCodecsHaveImageWriter(byte[] filenameOrExtension, out int available);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_mat_vector_count")]
+        internal static extern int ImgCodecsMatVectorCount(IntPtr images, out UIntPtr count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_mat_vector_clone_at")]
+        internal static extern int ImgCodecsMatVectorCloneAt(IntPtr images, UIntPtr index, out IntPtr image);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_mat_vector_release")]
+        internal static extern void ImgCodecsMatVectorRelease(IntPtr images);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imread_with_metadata")]
+        internal static extern int ImgCodecsImReadWithMetadata(byte[] filename, int flags, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imdecode_with_metadata")]
+        internal static extern int ImgCodecsImDecodeWithMetadata(byte[] buffer, UIntPtr bufferLength, int flags, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imwrite_with_metadata")]
+        internal static extern int ImgCodecsImWriteWithMetadata(byte[] filename, IntPtr image, IntPtr metadataTypes, IntPtr metadata, UIntPtr metadataCount, IntPtr parameters, UIntPtr parametersLength, out int written);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imencode_with_metadata", CharSet = CharSet.Ansi)]
+        internal static extern int ImgCodecsImEncodeWithMetadata(string ext, IntPtr image, IntPtr metadataTypes, IntPtr metadata, UIntPtr metadataCount, IntPtr parameters, UIntPtr parametersLength, out IntPtr buffer);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_metadata_result_image_clone")]
+        internal static extern int ImgCodecsMetadataResultImageClone(IntPtr result, out IntPtr image);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_metadata_result_count")]
+        internal static extern int ImgCodecsMetadataResultCount(IntPtr result, out UIntPtr count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_metadata_result_clone_at")]
+        internal static extern int ImgCodecsMetadataResultCloneAt(IntPtr result, UIntPtr index, out int type, out IntPtr metadata);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_metadata_result_release")]
+        internal static extern void ImgCodecsMetadataResultRelease(IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_create")]
+        internal static extern int ImgCodecsAnimationCreate(int loopCount, double bg0, double bg1, double bg2, double bg3, out IntPtr animation);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_release")]
+        internal static extern void ImgCodecsAnimationRelease(IntPtr animation);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_get_loop_count")]
+        internal static extern int ImgCodecsAnimationGetLoopCount(IntPtr animation, out int loopCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_set_loop_count")]
+        internal static extern int ImgCodecsAnimationSetLoopCount(IntPtr animation, int loopCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_get_background_color")]
+        internal static extern int ImgCodecsAnimationGetBackgroundColor(IntPtr animation, out double bg0, out double bg1, out double bg2, out double bg3);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_set_background_color")]
+        internal static extern int ImgCodecsAnimationSetBackgroundColor(IntPtr animation, double bg0, double bg1, double bg2, double bg3);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_set_frames")]
+        internal static extern int ImgCodecsAnimationSetFrames(IntPtr animation, IntPtr frames, IntPtr durations, UIntPtr frameCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_frame_count")]
+        internal static extern int ImgCodecsAnimationFrameCount(IntPtr animation, out UIntPtr count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_frame_clone_at")]
+        internal static extern int ImgCodecsAnimationFrameCloneAt(IntPtr animation, UIntPtr index, out IntPtr frame, out int duration);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_still_image_clone")]
+        internal static extern int ImgCodecsAnimationStillImageClone(IntPtr animation, out IntPtr image);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_animation_set_still_image")]
+        internal static extern int ImgCodecsAnimationSetStillImage(IntPtr animation, IntPtr image);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imread_animation")]
+        internal static extern int ImgCodecsImReadAnimation(byte[] filename, int start, int count, IntPtr animation, out int success);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imdecode_animation")]
+        internal static extern int ImgCodecsImDecodeAnimation(byte[] buffer, UIntPtr bufferLength, int start, int count, IntPtr animation, out int success);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imwrite_animation")]
+        internal static extern int ImgCodecsImWriteAnimation(byte[] filename, IntPtr animation, IntPtr parameters, UIntPtr parametersLength, out int written);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_imencode_animation", CharSet = CharSet.Ansi)]
+        internal static extern int ImgCodecsImEncodeAnimation(string ext, IntPtr animation, IntPtr parameters, UIntPtr parametersLength, out IntPtr buffer);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_create")]
+        internal static extern int ImgCodecsImageCollectionCreate(out IntPtr collection);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_create_file")]
+        internal static extern int ImgCodecsImageCollectionCreateFile(byte[] filename, int flags, out IntPtr collection);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_release")]
+        internal static extern void ImgCodecsImageCollectionRelease(IntPtr collection);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_init")]
+        internal static extern int ImgCodecsImageCollectionInit(IntPtr collection, byte[] filename, int flags);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_size")]
+        internal static extern int ImgCodecsImageCollectionSize(IntPtr collection, out UIntPtr size);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_clone_at")]
+        internal static extern int ImgCodecsImageCollectionCloneAt(IntPtr collection, int index, out IntPtr image);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgcodecs_image_collection_release_cache")]
+        internal static extern int ImgCodecsImageCollectionReleaseCache(IntPtr collection, int index);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_encoded_buffer_size")]
         internal static extern int EncodedBufferSize(IntPtr buffer, out UIntPtr size);
@@ -1715,6 +1856,332 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_line_segment_detector_compare_segments_array")]
         internal static extern int ImgProcLineSegmentDetectorCompareSegmentsArray(IntPtr detector, int width, int height, float[] lines1, int line1Count, float[] lines2, int line2Count, IntPtr image, out int mismatchCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_ballard_create")]
+        internal static extern int ImgProcGeneralizedHoughBallardCreate(out IntPtr hough);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_guil_create")]
+        internal static extern int ImgProcGeneralizedHoughGuilCreate(out IntPtr hough);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_release")]
+        internal static extern void ImgProcGeneralizedHoughRelease(IntPtr hough);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_set_template")]
+        internal static extern int ImgProcGeneralizedHoughSetTemplate(IntPtr hough, IntPtr templ, int centerX, int centerY);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_set_template_edges")]
+        internal static extern int ImgProcGeneralizedHoughSetTemplateEdges(IntPtr hough, IntPtr edges, IntPtr dx, IntPtr dy, int centerX, int centerY);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_detect")]
+        internal static extern int ImgProcGeneralizedHoughDetect(IntPtr hough, IntPtr image, IntPtr positions, IntPtr votes);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_detect_edges")]
+        internal static extern int ImgProcGeneralizedHoughDetectEdges(IntPtr hough, IntPtr edges, IntPtr dx, IntPtr dy, IntPtr positions, IntPtr votes);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_get_int_property")]
+        internal static extern int ImgProcGeneralizedHoughGetIntProperty(IntPtr hough, int property, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_set_int_property")]
+        internal static extern int ImgProcGeneralizedHoughSetIntProperty(IntPtr hough, int property, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_get_double_property")]
+        internal static extern int ImgProcGeneralizedHoughGetDoubleProperty(IntPtr hough, int property, out double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_generalized_hough_set_double_property")]
+        internal static extern int ImgProcGeneralizedHoughSetDoubleProperty(IntPtr hough, int property, double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_cvt_color_two_plane")]
+        internal static extern int ImgProcCvtColorTwoPlane(IntPtr src1, IntPtr src2, IntPtr dst, int code);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_demosaicing")]
+        internal static extern int ImgProcDemosaicing(IntPtr src, IntPtr dst, int code, int dstCn);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_apply_color_map")]
+        internal static extern int ImgProcApplyColorMap(IntPtr src, IntPtr dst, int colormap);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_apply_color_map_user")]
+        internal static extern int ImgProcApplyColorMapUser(IntPtr src, IntPtr dst, IntPtr userColor);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_blend_linear")]
+        internal static extern int ImgProcBlendLinear(IntPtr src1, IntPtr src2, IntPtr weights1, IntPtr weights2, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_stack_blur")]
+        internal static extern int ImgProcStackBlur(IntPtr src, IntPtr dst, int width, int height);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_spatial_gradient")]
+        internal static extern int ImgProcSpatialGradient(IntPtr src, IntPtr dx, IntPtr dy, int ksize, int borderType);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_threshold_with_mask")]
+        internal static extern int ImgProcThresholdWithMask(IntPtr src, IntPtr dst, IntPtr mask, double thresh, double maxval, int type, out double result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_draw_marker")]
+        internal static extern int ImgProcDrawMarker(IntPtr image, int positionX, int positionY, double colorV0, double colorV1, double colorV2, double colorV3, int markerType, int markerSize, int thickness, int lineType);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_fill_convex_poly")]
+        internal static extern int ImgProcFillConvexPoly(IntPtr image, int[] pointsXy, int pointCount, double colorV0, double colorV1, double colorV2, double colorV3, int lineType, int shift);
+
+#if NETCOREAPP3_1_OR_GREATER
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_fill_convex_poly")]
+        internal static unsafe extern int ImgProcFillConvexPolyPtr(IntPtr image, int* pointsXy, int pointCount, double colorV0, double colorV1, double colorV2, double colorV3, int lineType, int shift);
+#endif
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_get_font_scale_from_height")]
+        internal static extern int ImgProcGetFontScaleFromHeight(int fontFace, int pixelHeight, int thickness, out double result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_undistort")]
+        internal static extern int ImgProcUndistort(IntPtr src, IntPtr dst, IntPtr cameraMatrix, IntPtr distCoeffs, IntPtr newCameraMatrix);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_init_inverse_rectification_map")]
+        internal static extern int ImgProcInitInverseRectificationMap(IntPtr cameraMatrix, IntPtr distCoeffs, IntPtr r, IntPtr newCameraMatrix, int sizeWidth, int sizeHeight, int m1type, IntPtr map1, IntPtr map2);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_fisheye_undistort_image")]
+        internal static extern int ImgProcFisheyeUndistortImage(IntPtr distorted, IntPtr undistorted, IntPtr cameraMatrix, IntPtr distCoeffs, IntPtr newCameraMatrix, int newSizeWidth, int newSizeHeight);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_get_rect_sub_pix")]
+        internal static extern int ImgProcGetRectSubPix(IntPtr image, int patchWidth, int patchHeight, float centerX, float centerY, IntPtr patch, int patchType);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_warp_polar")]
+        internal static extern int ImgProcWarpPolar(IntPtr src, IntPtr dst, int width, int height, float centerX, float centerY, double maxRadius, int flags);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_accumulate")]
+        internal static extern int ImgProcAccumulate(IntPtr src, IntPtr dst, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_accumulate_square")]
+        internal static extern int ImgProcAccumulateSquare(IntPtr src, IntPtr dst, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_accumulate_product")]
+        internal static extern int ImgProcAccumulateProduct(IntPtr src1, IntPtr src2, IntPtr dst, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_accumulate_weighted")]
+        internal static extern int ImgProcAccumulateWeighted(IntPtr src, IntPtr dst, double alpha, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_phase_correlate")]
+        internal static extern int ImgProcPhaseCorrelate(IntPtr src1, IntPtr src2, IntPtr window, out double shiftX, out double shiftY, out double response);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_phase_correlate_iterative")]
+        internal static extern int ImgProcPhaseCorrelateIterative(IntPtr src1, IntPtr src2, int l2Size, int maxIters, out double shiftX, out double shiftY);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_create_hanning_window")]
+        internal static extern int ImgProcCreateHanningWindow(IntPtr dst, int width, int height, int type);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_emd")]
+        internal static extern int ImgProcEmd(IntPtr signature1, IntPtr signature2, int distanceType, IntPtr cost, int hasLowerBound, ref float lowerBound, IntPtr flow, out float distance);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_watershed")]
+        internal static extern int ImgProcWatershed(IntPtr image, IntPtr markers);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_pyr_mean_shift_filtering")]
+        internal static extern int ImgProcPyrMeanShiftFiltering(IntPtr src, IntPtr dst, double spatialRadius, double colorRadius, int maxLevel, int criteriaType, int criteriaMaxCount, double criteriaEpsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_grab_cut")]
+        internal static extern int ImgProcGrabCut(IntPtr image, IntPtr mask, int rectX, int rectY, int rectWidth, int rectHeight, IntPtr backgroundModel, IntPtr foregroundModel, int iterationCount, int mode);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_match_template")]
+        internal static extern int ImgProcMatchTemplate(IntPtr image, IntPtr templ, IntPtr result, int method, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_find_contours_link_runs_count")]
+        internal static extern int ImgProcFindContoursLinkRunsCount(IntPtr image, int includeHierarchy, out int contourCount, out int totalPointCount, out int hierarchyCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_find_contours_link_runs_fill")]
+        internal static extern int ImgProcFindContoursLinkRunsFill(IntPtr image, int includeHierarchy, int[] contoursXy, int pointCapacity, int[] contourLengths, int contourCapacity, int[] hierarchyValues, int hierarchyCapacity, out int writtenContourCount, out int writtenPointCount, out int writtenHierarchyCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_draw_frame_axes")]
+        internal static extern int ImgProcDrawFrameAxes(IntPtr image, IntPtr cameraMatrix, IntPtr distCoeffs, IntPtr rotationVector, IntPtr translationVector, float length, int thickness);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_create_default")]
+        internal static extern int ImgProcFontFaceCreateDefault(out IntPtr fontFace);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_create")]
+        internal static extern int ImgProcFontFaceCreate(byte[] fontPathOrNameUtf8, out IntPtr fontFace);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_release")]
+        internal static extern void ImgProcFontFaceRelease(IntPtr fontFace);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_set")]
+        internal static extern int ImgProcFontFaceSet(IntPtr fontFace, byte[] fontPathOrNameUtf8, out int result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_get_name_size")]
+        internal static extern int ImgProcFontFaceGetNameSize(IntPtr fontFace, out int byteCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_get_name_fill")]
+        internal static extern int ImgProcFontFaceGetNameFill(IntPtr fontFace, byte[] buffer, int bufferCapacity, out int bytesWritten);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_set_instance")]
+        internal static extern int ImgProcFontFaceSetInstance(IntPtr fontFace, int[] parameters, int parameterCount, out int result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_get_instance_count")]
+        internal static extern int ImgProcFontFaceGetInstanceCount(IntPtr fontFace, out int parameterCount, out int result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_font_face_get_instance_fill")]
+        internal static extern int ImgProcFontFaceGetInstanceFill(IntPtr fontFace, int[] parameters, int parameterCapacity, out int parametersWritten, out int result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_put_text_font_face")]
+        internal static extern int ImgProcPutTextFontFace(IntPtr image, byte[] textUtf8, int originX, int originY, double colorV0, double colorV1, double colorV2, double colorV3, IntPtr fontFace, int size, int weight, int flags, int hasWrap, int wrapStart, int wrapEnd, out int nextX, out int nextY);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_imgproc_get_text_size_font_face")]
+        internal static extern int ImgProcGetTextSizeFontFace(int imageWidth, int imageHeight, byte[] textUtf8, int originX, int originY, IntPtr fontFace, int size, int weight, int flags, int hasWrap, int wrapStart, int wrapEnd, out int resultX, out int resultY, out int resultWidth, out int resultHeight);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_border_interpolate")]
+        internal static extern int CoreBorderInterpolate(int p, int len, int borderType, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_copy_make_border")]
+        internal static extern int CoreCopyMakeBorder(IntPtr src, IntPtr dst, int top, int bottom, int left, int right, int borderType, double v0, double v1, double v2, double v3);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_has_non_zero")]
+        internal static extern int CoreHasNonZero(IntPtr src, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_find_non_zero")]
+        internal static extern int CoreFindNonZero(IntPtr src, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_psnr")]
+        internal static extern int CorePsnr(IntPtr src1, IntPtr src2, double maxValue, out double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_reduce_arg_min")]
+        internal static extern int CoreReduceArgMin(IntPtr src, IntPtr dst, int axis, int lastIndex);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_reduce_arg_max")]
+        internal static extern int CoreReduceArgMax(IntPtr src, IntPtr dst, int axis, int lastIndex);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_flip_nd")]
+        internal static extern int CoreFlipNd(IntPtr src, IntPtr dst, int axis);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_broadcast")]
+        internal static extern int CoreBroadcast(IntPtr src, IntPtr shape, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_copy_to_mask")]
+        internal static extern int CoreCopyToMask(IntPtr src, IntPtr dst, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_check_range")]
+        internal static extern int CoreCheckRange(IntPtr src, double minValue, double maxValue, out int valid, out int x, out int y);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_finite_mask")]
+        internal static extern int CoreFiniteMask(IntPtr src, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_transpose_nd")]
+        internal static extern int CoreTransposeNd(IntPtr src, int[] order, int orderCount, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_sort")]
+        internal static extern int CoreSort(IntPtr src, IntPtr dst, int flags);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_sort_idx")]
+        internal static extern int CoreSortIdx(IntPtr src, IntPtr dst, int flags);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_create")]
+        internal static extern int CoreFileStorageCreate(out IntPtr storage);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_release_handle")]
+        internal static extern void CoreFileStorageReleaseHandle(IntPtr storage);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_open")]
+        internal static extern int CoreFileStorageOpen(IntPtr storage, byte[] sourceUtf8, int sourceByteLength, int flags, byte[] encodingUtf8, int encodingByteLength, out int opened);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_is_opened")]
+        internal static extern int CoreFileStorageIsOpened(IntPtr storage, out int opened);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_release")]
+        internal static extern int CoreFileStorageRelease(IntPtr storage);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_release_and_get_string")]
+        internal static extern int CoreFileStorageReleaseAndGetString(IntPtr storage, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_get_first_top_level_node")]
+        internal static extern int CoreFileStorageGetFirstTopLevelNode(IntPtr storage, out IntPtr node);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_root")]
+        internal static extern int CoreFileStorageRoot(IntPtr storage, int streamIndex, out IntPtr node);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_get_node")]
+        internal static extern int CoreFileStorageGetNode(IntPtr storage, byte[] nameUtf8, int nameByteLength, out IntPtr node);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_int")]
+        internal static extern int CoreFileStorageWriteInt(IntPtr storage, byte[] nameUtf8, int nameByteLength, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_bool")]
+        internal static extern int CoreFileStorageWriteBool(IntPtr storage, byte[] nameUtf8, int nameByteLength, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_int64")]
+        internal static extern int CoreFileStorageWriteInt64(IntPtr storage, byte[] nameUtf8, int nameByteLength, long value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_double")]
+        internal static extern int CoreFileStorageWriteDouble(IntPtr storage, byte[] nameUtf8, int nameByteLength, double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_string")]
+        internal static extern int CoreFileStorageWriteString(IntPtr storage, byte[] nameUtf8, int nameByteLength, byte[] valueUtf8, int valueByteLength);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_mat")]
+        internal static extern int CoreFileStorageWriteMat(IntPtr storage, byte[] nameUtf8, int nameByteLength, IntPtr value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_string_vector")]
+        internal static extern int CoreFileStorageWriteStringVector(IntPtr storage, byte[] nameUtf8, int nameByteLength, byte[] valuesUtf8, int valuesByteLength, int[] valueOffsets, int[] valueLengths, int valueCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_write_comment")]
+        internal static extern int CoreFileStorageWriteComment(IntPtr storage, byte[] commentUtf8, int commentByteLength, int append);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_start_write_struct")]
+        internal static extern int CoreFileStorageStartWriteStruct(IntPtr storage, byte[] nameUtf8, int nameByteLength, int flags, byte[] typeNameUtf8, int typeNameByteLength);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_end_write_struct")]
+        internal static extern int CoreFileStorageEndWriteStruct(IntPtr storage);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_storage_get_format")]
+        internal static extern int CoreFileStorageGetFormat(IntPtr storage, out int format);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_create")]
+        internal static extern int CoreFileNodeCreate(out IntPtr node);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_release")]
+        internal static extern void CoreFileNodeRelease(IntPtr node);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_get_node")]
+        internal static extern int CoreFileNodeGetNode(IntPtr node, byte[] nameUtf8, int nameByteLength, out IntPtr child);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_at")]
+        internal static extern int CoreFileNodeAt(IntPtr node, int index, out IntPtr child);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_keys")]
+        internal static extern int CoreFileNodeKeys(IntPtr node, out IntPtr keys);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_type")]
+        internal static extern int CoreFileNodeType(IntPtr node, out int type);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_empty")]
+        internal static extern int CoreFileNodeEmpty(IntPtr node, out int empty);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_name")]
+        internal static extern int CoreFileNodeName(IntPtr node, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_size")]
+        internal static extern int CoreFileNodeSize(IntPtr node, out UIntPtr size);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_raw_size")]
+        internal static extern int CoreFileNodeRawSize(IntPtr node, out UIntPtr size);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_real")]
+        internal static extern int CoreFileNodeReal(IntPtr node, out double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_string")]
+        internal static extern int CoreFileNodeString(IntPtr node, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_file_node_mat")]
+        internal static extern int CoreFileNodeMat(IntPtr node, IntPtr mat);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_string_list_count")]
+        internal static extern int CoreStringListCount(IntPtr values, out UIntPtr count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_string_list_get")]
+        internal static extern int CoreStringListGet(IntPtr values, UIntPtr index, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_string_list_release")]
+        internal static extern void CoreStringListRelease(IntPtr values);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_utf8_result_size")]
+        internal static extern int CoreUtf8ResultSize(IntPtr result, out UIntPtr size);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_utf8_result_data")]
+        internal static extern int CoreUtf8ResultData(IntPtr result, out IntPtr data);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_utf8_result_release")]
+        internal static extern void CoreUtf8ResultRelease(IntPtr result);
     }
 }
 #endif

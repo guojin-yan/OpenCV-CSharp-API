@@ -176,6 +176,9 @@ namespace OpenCvSharp.Internal.Interop
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_disparity_wls_filter_release_handle")]
         internal static partial void XImgProcDisparityWLSFilterReleaseHandle(IntPtr filter);
 
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_disparity_filter_filter")]
+        internal static partial int XImgProcDisparityFilterFilter(IntPtr filter, IntPtr disparityMapLeft, IntPtr leftView, IntPtr filteredDisparityMap, IntPtr disparityMapRight, ref XImgProcRectNative roi, IntPtr rightView);
+
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_disparity_wls_filter_filter")]
         internal static partial int XImgProcDisparityWLSFilterFilter(IntPtr filter, IntPtr disparityMapLeft, IntPtr leftView, IntPtr filteredDisparityMap, IntPtr disparityMapRight, ref XImgProcRectNative roi, IntPtr rightView);
 
@@ -241,6 +244,9 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_ric_interpolator_release_handle")]
         internal static partial void XImgProcRICInterpolatorReleaseHandle(IntPtr interpolator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_sparse_match_interpolator_interpolate")]
+        internal static partial int XImgProcSparseMatchInterpolatorInterpolate(IntPtr interpolator, IntPtr fromImage, IntPtr fromPoints, IntPtr toImage, IntPtr toPoints, IntPtr denseFlow);
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ximgproc_edge_aware_interpolator_interpolate")]
         internal static partial int XImgProcEdgeAwareInterpolatorInterpolate(IntPtr interpolator, IntPtr fromImage, IntPtr fromPoints, IntPtr toImage, IntPtr toPoints, IntPtr denseFlow);

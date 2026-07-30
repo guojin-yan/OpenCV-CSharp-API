@@ -1,0 +1,1707 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 11,
+  "managedPublicMemberAdditionCount": 226,
+  "families": [
+    {
+      "id": "core-array-reductions-transforms",
+      "rationale": "Closes the adjacent OpenCV 5 Core array, reduction, shape, finite-value, border, masked-copy, and ordering operations selected by the measured gap review.",
+      "declarations": [
+        {
+          "ordinal": 101,
+          "upstreamIdentity": "cv.borderInterpolate(int p;int len;int borderType)-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_border_interpolate"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 BorderInterpolate(System.Int32 p,System.Int32 len,OpenCvSharp.ImgProc.BorderTypes borderType)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 102,
+          "upstreamIdentity": "cv.copyMakeBorder(Mat src;Mat dst[/O];int top;int bottom;int left;int right;int borderType;Scalar value=Scalar()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_copy_make_border"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat CopyMakeBorder(OpenCvSharp.Core.Mat src,System.Int32 top,System.Int32 bottom,System.Int32 left,System.Int32 right,OpenCvSharp.ImgProc.BorderTypes borderType,OpenCvSharp.Core.Scalar? value=null)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CopyMakeBorder(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 top,System.Int32 bottom,System.Int32 left,System.Int32 right,OpenCvSharp.ImgProc.BorderTypes borderType,OpenCvSharp.Core.Scalar? value=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 113,
+          "upstreamIdentity": "cv.hasNonZero(Mat src)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_has_non_zero"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean HasNonZero(OpenCvSharp.Core.Mat src)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 115,
+          "upstreamIdentity": "cv.findNonZero(Mat src;Mat idx[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_find_non_zero"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat FindNonZero(OpenCvSharp.Core.Mat src)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void FindNonZero(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 120,
+          "upstreamIdentity": "cv.PSNR(Mat src1;Mat src2;double R=255.)-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_psnr"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double Psnr(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Double maxValue=255)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 124,
+          "upstreamIdentity": "cv.reduceArgMin(Mat src;Mat dst[/O];int axis;bool lastIndex=false)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_reduce_arg_min"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ReduceArgMin(OpenCvSharp.Core.Mat src,System.Int32 axis,System.Boolean lastIndex=false)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ReduceArgMin(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 axis,System.Boolean lastIndex=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 125,
+          "upstreamIdentity": "cv.reduceArgMax(Mat src;Mat dst[/O];int axis;bool lastIndex=false)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_reduce_arg_max"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat ReduceArgMax(OpenCvSharp.Core.Mat src,System.Int32 axis,System.Boolean lastIndex=false)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void ReduceArgMax(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 axis,System.Boolean lastIndex=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 133,
+          "upstreamIdentity": "cv.flipND(Mat src;Mat dst[/O];int axis)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_flip_nd"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat FlipND(OpenCvSharp.Core.Mat src,System.Int32 axis)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void FlipND(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 axis)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 134,
+          "upstreamIdentity": "cv.broadcast(Mat src;Mat shape;Mat dst[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_broadcast"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Broadcast(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat shape)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Broadcast(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat shape,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 145,
+          "upstreamIdentity": "cv.copyTo(Mat src;Mat dst[/O];Mat mask)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_copy_to_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CopyTo(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 158,
+          "upstreamIdentity": "cv.checkRange(Mat a;bool quiet=true;Point* pos=0[/O];double minVal=-DBL_MAX;double maxVal=DBL_MAX)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_check_range"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.CheckRangeResult CheckRange(OpenCvSharp.Core.Mat src,System.Double minValue=-1.7976931348623157E\u002B308,System.Double maxValue=1.7976931348623157E\u002B308)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 160,
+          "upstreamIdentity": "cv.finiteMask(Mat src;Mat mask[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_finite_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat FiniteMask(OpenCvSharp.Core.Mat src)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void FiniteMask(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 164,
+          "upstreamIdentity": "cv.transposeND(Mat src;vector_int order[/C,/Ref];Mat dst[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_transpose_nd"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat TransposeND(OpenCvSharp.Core.Mat src,System.Int32[] order)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void TransposeND(OpenCvSharp.Core.Mat src,System.Int32[] order,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 173,
+          "upstreamIdentity": "cv.sort(Mat src;Mat dst[/O];int flags)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_sort"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat Sort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.SortFlags flags=EveryRow)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Sort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.SortFlags flags=EveryRow)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 174,
+          "upstreamIdentity": "cv.sortIdx(Mat src;Mat dst[/O];int flags)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_sort_idx"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat SortIdx(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.SortFlags flags=EveryRow)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SortIdx(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.SortFlags flags=EveryRow)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "core-persistence-utf8-ownership",
+      "rationale": "Closes every parser-emitted FileStorage/FileNode callable with opaque shared-state handles, generation invalidation, explicit-length UTF-8, owned result/list handles, and indexed collection access.",
+      "declarations": [
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.FileStorage.FileStorage()-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_create",
+            "jyppx_ocv_core_file_storage_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.FileStorage.FileStorage(String filename[/C,/Ref,/PATH];int flags;String encoding=String()[/C,/Ref])-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_create",
+            "jyppx_ocv_core_file_storage_open",
+            "jyppx_ocv_core_file_storage_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor(System.String source,OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.FileStorage.open(String filename[/C,/Ref,/PATH];int flags;String encoding=String()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_open"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Boolean Open(System.String source,OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.FileStorage.isOpened()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_is_opened"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|property|instance;get:public|System.Boolean IsOpened"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.FileStorage.release()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_release"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Release()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.FileStorage.releaseAndGetString()-\u003EString",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_release_and_get_string",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.String ReleaseAndGetString()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.FileStorage.getFirstTopLevelNode()-\u003EFileNode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_release",
+            "jyppx_ocv_core_file_storage_get_first_top_level_node"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileNode GetFirstTopLevelNode()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.FileStorage.root(int streamidx=0)-\u003EFileNode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_release",
+            "jyppx_ocv_core_file_storage_root"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileNode Root(System.Int32 streamIndex=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.FileStorage.operator[](c_string nodename[/C])-\u003EFileNode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_release",
+            "jyppx_ocv_core_file_storage_get_node"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.String name]"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 66,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];int val)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int32 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];bool val)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_bool"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Boolean value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 68,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];int64_t val)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_int64"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int64 value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 69,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];double val)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Double value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 70,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];String val[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_string"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.String value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 71,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];Mat val[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_mat"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,OpenCvSharp.Core.Mat value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 72,
+          "upstreamIdentity": "cv.FileStorage.write(String name[/C,/Ref];vector_String val[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_string_vector"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E values)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 73,
+          "upstreamIdentity": "cv.FileStorage.writeComment(String comment[/C,/Ref];bool append=false)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_write_comment"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void WriteComment(System.String comment,System.Boolean append=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 74,
+          "upstreamIdentity": "cv.FileStorage.startWriteStruct(String name[/C,/Ref];int flags;String typeName=String()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_start_write_struct"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void StartWriteStruct(System.String name,OpenCvSharp.Core.FileNodeTypes flags,System.String? typeName=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 75,
+          "upstreamIdentity": "cv.FileStorage.endWriteStruct()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_end_write_struct"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void EndWriteStruct()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 76,
+          "upstreamIdentity": "cv.FileStorage.getFormat()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_storage_get_format"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileStorageModes GetFormat()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 79,
+          "upstreamIdentity": "cv.FileNode.FileNode()-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_create",
+            "jyppx_ocv_core_file_node_release"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 80,
+          "upstreamIdentity": "cv.FileNode.operator[](c_string nodename[/C])-\u003EFileNode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_get_node",
+            "jyppx_ocv_core_file_node_release"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.String name]"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 81,
+          "upstreamIdentity": "cv.FileNode.operator[](int i)-\u003EFileNode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_at",
+            "jyppx_ocv_core_file_node_release"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.Int32 index]"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 82,
+          "upstreamIdentity": "cv.FileNode.keys()-\u003Estd::vector\u003CString\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_keys",
+            "jyppx_ocv_core_string_list_count",
+            "jyppx_ocv_core_string_list_get",
+            "jyppx_ocv_core_string_list_release",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String[] Keys"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 83,
+          "upstreamIdentity": "cv.FileNode.type()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNodeTypes Type"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 84,
+          "upstreamIdentity": "cv.FileNode.empty()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 85,
+          "upstreamIdentity": "cv.FileNode.isNone()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNone"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 86,
+          "upstreamIdentity": "cv.FileNode.isSeq()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsSequence"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 87,
+          "upstreamIdentity": "cv.FileNode.isMap()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsMap"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 88,
+          "upstreamIdentity": "cv.FileNode.isInt()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsInteger"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 89,
+          "upstreamIdentity": "cv.FileNode.isReal()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsReal"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 90,
+          "upstreamIdentity": "cv.FileNode.isString()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsString"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 91,
+          "upstreamIdentity": "cv.FileNode.isNamed()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_name",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNamed"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 92,
+          "upstreamIdentity": "cv.FileNode.name()-\u003Estd::string",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_name",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String Name"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 93,
+          "upstreamIdentity": "cv.FileNode.size()-\u003Esize_t",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Int32 Size"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 94,
+          "upstreamIdentity": "cv.FileNode.rawSize()-\u003Esize_t",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_raw_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.UInt64 RawSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 95,
+          "upstreamIdentity": "cv.FileNode.real()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_real"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Double Real"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 96,
+          "upstreamIdentity": "cv.FileNode.string()-\u003Estd::string",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_string",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String String"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 97,
+          "upstreamIdentity": "cv.FileNode.mat()-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_file_node_mat"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.FileNode|method|public;instance|OpenCvSharp.Core.Mat ToMat()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "core-numerical-collection-solver",
+      "rationale": "Closes the measured scalar, pairwise-distance, channel collection, NaN mutation, covariance/PCA/SVD, random generation, shuffle, and linear-programming callables with explicit shape, state, and output ownership contracts.",
+      "declarations": [
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "cv.cubeRoot(float val)-\u003Efloat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_cube_root"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Single CubeRoot(System.Single value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.fastAtan2(float y;float x)-\u003Efloat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_fast_atan2"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Single FastAtan2(System.Single y,System.Single x)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 121,
+          "upstreamIdentity": "cv.batchDistance(Mat src1;Mat src2;Mat dist[/O];int dtype;Mat nidx[/O];int normType=NORM_L2;int K=0;Mat mask=Mat();int update=0;bool crosscheck=false)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_batch_distance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void BatchDistance(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat distances,System.Int32 dtype=-1,OpenCvSharp.Core.Mat? indices=null,OpenCvSharp.Core.NormTypes normType=L2,System.Int32 k=0,OpenCvSharp.Core.Mat? mask=null,System.Int32 update=0,System.Boolean crosscheck=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 128,
+          "upstreamIdentity": "cv.split(Mat m;vector_Mat mv[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_split_count",
+            "jyppx_ocv_core_split_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat[] Split(OpenCvSharp.Core.Mat src)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 159,
+          "upstreamIdentity": "cv.patchNaNs(Mat a[/IO];double val=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_patch_nans"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PatchNaNs(OpenCvSharp.Core.Mat src,System.Double value=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 179,
+          "upstreamIdentity": "cv.calcCovarMatrix(Mat samples;Mat covar[/O];Mat mean[/IO];int flags;int ctype=CV_64F)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_calc_covar_matrix"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void CalcCovarMatrix(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat covar,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.CovarFlags flags,System.Int32 ctype=6)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 180,
+          "upstreamIdentity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];int maxComponents=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_pca_compute_max_components"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,System.Int32 maxComponents=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 181,
+          "upstreamIdentity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];Mat eigenvalues[/O];int maxComponents=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_pca_compute_max_components"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat eigenvalues,System.Int32 maxComponents=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 182,
+          "upstreamIdentity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];double retainedVariance)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_pca_compute_retained_variance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,System.Double retainedVariance)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 183,
+          "upstreamIdentity": "cv.PCACompute(Mat data;Mat mean[/IO];Mat eigenvectors[/O];Mat eigenvalues[/O];double retainedVariance)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_pca_compute_retained_variance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat eigenvalues,System.Double retainedVariance)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 184,
+          "upstreamIdentity": "cv.PCAProject(Mat data;Mat mean;Mat eigenvectors;Mat result[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_pca_project"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat PcaProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat result)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 185,
+          "upstreamIdentity": "cv.PCABackProject(Mat data;Mat mean;Mat eigenvectors;Mat result[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_pca_back_project"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.Mat PcaBackProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaBackProject(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat result)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 186,
+          "upstreamIdentity": "cv.SVDecomp(Mat src;Mat w[/O];Mat u[/O];Mat vt[/O];int flags=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_svd_static_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Svd|method|public;static|System.Void Compute(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat w,OpenCvSharp.Core.Mat u,OpenCvSharp.Core.Mat vt,OpenCvSharp.Core.SvdFlags flags=None)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 187,
+          "upstreamIdentity": "cv.SVBackSubst(Mat w;Mat u;Mat vt;Mat rhs;Mat dst[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_svd_static_back_subst"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Svd|method|public;static|System.Void BackSubst(OpenCvSharp.Core.Mat w,OpenCvSharp.Core.Mat u,OpenCvSharp.Core.Mat vt,OpenCvSharp.Core.Mat rhs,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 196,
+          "upstreamIdentity": "cv.setRNGSeed(int seed)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_set_rng_seed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetRngSeed(System.Int32 seed)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 197,
+          "upstreamIdentity": "cv.randu(Mat dst[/IO];Mat low;Mat high)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_randu_mat",
+            "jyppx_ocv_core_randu_scalar"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randu(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat low,OpenCvSharp.Core.Mat high)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randu(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Scalar low,OpenCvSharp.Core.Scalar high)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 198,
+          "upstreamIdentity": "cv.randn(Mat dst[/IO];Mat mean;Mat stddev)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_randn_mat",
+            "jyppx_ocv_core_randn_scalar"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randn(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat stddev)",
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void Randn(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Scalar mean,OpenCvSharp.Core.Scalar stddev)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 199,
+          "upstreamIdentity": "cv.randShuffle(Mat dst[/IO];double iterFactor=1.;RNG* rng=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_rand_shuffle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void RandShuffle(OpenCvSharp.Core.Mat dst,System.Double iterFactor=1,OpenCvSharp.Core.Rng? rng=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 256,
+          "upstreamIdentity": "cv.solveLP(Mat Func;Mat Constr;Mat z[/O];double constr_eps[/C])-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_solve_lp"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.SolveLpResult SolveLp(OpenCvSharp.Core.Mat objective,OpenCvSharp.Core.Mat constraints,OpenCvSharp.Core.Mat solution,System.Double constraintEpsilon=1E-12)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 257,
+          "upstreamIdentity": "cv.solveLP(Mat Func;Mat Constr;Mat z[/O])-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_solve_lp"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.SolveLpResult SolveLp(OpenCvSharp.Core.Mat objective,OpenCvSharp.Core.Mat constraints,OpenCvSharp.Core.Mat solution,System.Double constraintEpsilon=1E-12)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "core-runtime-diagnostics-timing",
+      "rationale": "Closes the measured threading, version/build, clocks, CPU capability, optimization-state, algorithm-hint, and TickMeter callables with owned UTF-8 results, opaque timer ownership, and failure-safe global-state restoration.",
+      "declarations": [
+        {
+          "ordinal": 215,
+          "upstreamIdentity": "cv.setNumThreads(int nthreads)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_set_num_threads"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetNumThreads(System.Int32 threadCount)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 216,
+          "upstreamIdentity": "cv.getNumThreads()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_num_threads"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumThreads()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 217,
+          "upstreamIdentity": "cv.getThreadNum()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_thread_num"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetThreadNum()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 218,
+          "upstreamIdentity": "cv.getBuildInformation()-\u003EString",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_build_information",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetBuildInformation()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 219,
+          "upstreamIdentity": "cv.getVersionString()-\u003EString",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_get_version_string"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.String GetNativeOpenCvVersion()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 220,
+          "upstreamIdentity": "cv.getVersionMajor()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_get_version_major"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMajor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 221,
+          "upstreamIdentity": "cv.getVersionMinor()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_get_version_minor"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMinor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 222,
+          "upstreamIdentity": "cv.getVersionRevision()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_get_version_revision"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionRevision()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 223,
+          "upstreamIdentity": "cv.getTickCount()-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_tick_count"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetTickCount()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 224,
+          "upstreamIdentity": "cv.getTickFrequency()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_tick_frequency"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double GetTickFrequency()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 226,
+          "upstreamIdentity": "cv.TickMeter.TickMeter()-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_create",
+            "jyppx_ocv_core_tick_meter_release"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 227,
+          "upstreamIdentity": "cv.TickMeter.start()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_start"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Start()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 228,
+          "upstreamIdentity": "cv.TickMeter.stop()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_stop"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Stop()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 229,
+          "upstreamIdentity": "cv.TickMeter.getTimeTicks()-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_time_ticks"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 TimeTicks"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 230,
+          "upstreamIdentity": "cv.TickMeter.getTimeMicro()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_time_micro"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMicroseconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 231,
+          "upstreamIdentity": "cv.TickMeter.getTimeMilli()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_time_milli"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMilliseconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 232,
+          "upstreamIdentity": "cv.TickMeter.getTimeSec()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_time_sec"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeSeconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 233,
+          "upstreamIdentity": "cv.TickMeter.getLastTimeTicks()-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_last_time_ticks"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 LastTimeTicks"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 234,
+          "upstreamIdentity": "cv.TickMeter.getLastTimeMicro()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_last_time_micro"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMicroseconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 235,
+          "upstreamIdentity": "cv.TickMeter.getLastTimeMilli()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_last_time_milli"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMilliseconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 236,
+          "upstreamIdentity": "cv.TickMeter.getLastTimeSec()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_last_time_sec"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeSeconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 237,
+          "upstreamIdentity": "cv.TickMeter.getCounter()-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_counter"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 Counter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 238,
+          "upstreamIdentity": "cv.TickMeter.getFPS()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_fps"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double FramesPerSecond"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 239,
+          "upstreamIdentity": "cv.TickMeter.getAvgTimeSec()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_avg_time_sec"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeSeconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 240,
+          "upstreamIdentity": "cv.TickMeter.getAvgTimeMilli()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_get_avg_time_milli"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeMilliseconds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 241,
+          "upstreamIdentity": "cv.TickMeter.reset()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_tick_meter_reset"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Reset()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 242,
+          "upstreamIdentity": "cv.getCPUTickCount()-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_cpu_tick_count"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetCpuTickCount()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 243,
+          "upstreamIdentity": "cv.checkHardwareSupport(int feature)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_check_hardware_support"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean CheckHardwareSupport(OpenCvSharp.Core.CpuFeatures feature)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 244,
+          "upstreamIdentity": "cv.getHardwareFeatureName(int feature)-\u003EString",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_hardware_feature_name",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetHardwareFeatureName(OpenCvSharp.Core.CpuFeatures feature)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 245,
+          "upstreamIdentity": "cv.getCPUFeaturesLine()-\u003Estd::string",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_cpu_features_line",
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetCpuFeaturesLine()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 246,
+          "upstreamIdentity": "cv.getNumberOfCPUs()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_number_of_cpus"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumberOfCpus()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 248,
+          "upstreamIdentity": "cv.getDefaultAlgorithmHint()-\u003EAlgorithmHint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_get_default_algorithm_hint"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.AlgorithmHint GetDefaultAlgorithmHint()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 249,
+          "upstreamIdentity": "cv.setUseOptimized(bool onoff)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_set_use_optimized"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetUseOptimized(System.Boolean enabled)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 250,
+          "upstreamIdentity": "cv.useOptimized()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_use_optimized"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean UseOptimized()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/core-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Photo Guide
 
-`OpenCvSharp.Photo` exposes OpenCV `photo` module functions and objects: inpainting, single-frame and multi-frame fast non-local means denoising, seamless editing, edge-preserving stylization, and tonemap operators. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_photo500.dll`.
+`OpenCvSharp.Photo` exposes OpenCV `photo` module functions and objects: inpainting, fast non-local means and TV-L1 denoising, chromatic-aberration correction, seamless editing, edge-preserving stylization, tonemap operators, the main HDR align/calibrate/merge workflow, CPU color correction models, and stateful live-wire contours. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_photo500.dll`. See [Photo HDR Workflow Guide](photo-hdr-workflow-guide.md), [Photo Color Correction Model Guide](photo-ccm-guide.md), [Photo Intelligent Scissors Guide](photo-intelligent-scissors-guide.md), and [Photo TV-L1 And Chromatic Aberration Guide](photo-tvl1-chromatic-aberration-guide.md) for ownership, state, and data contracts.
 
 `OpenCvSharp.Photo` 暴露 OpenCV `photo` 模块函数和对象：图像修复、单帧和多帧 fast non-local means 去噪、seamless editing、边缘保持风格化，以及 tone mapping 对象。这些 API 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_photo500.dll`。
 
@@ -11,6 +11,9 @@
 - `PhotoCv2.FastNlMeansDenoisingMulti`
 - `PhotoCv2.FastNlMeansDenoisingColored`
 - `PhotoCv2.FastNlMeansDenoisingColoredMulti`
+- `PhotoCv2.DenoiseTvl1`
+- `PhotoCv2.CorrectChromaticAberration`
+- `PhotoCv2.LoadChromaticAberrationParams` and `ChromaticAberrationParameters`
 - `PhotoCv2.Decolor`
 - `PhotoCv2.SeamlessClone`
 - `PhotoCv2.ColorChange`
@@ -21,6 +24,11 @@
 - `PhotoCv2.PencilSketch`
 - `PhotoCv2.Stylization`
 - `Tonemap`, `TonemapDrago`, `TonemapReinhard`, and `TonemapMantiuk`
+- `AlignMTB`, `CalibrateDebevec`, and `CalibrateRobertson`
+- `MergeDebevec`, `MergeMertens`, and `MergeRobertson`
+- `PhotoCv2.GammaCorrection` and `ColorCorrectionModel`
+- `IntelligentScissorsMB`
+- `CcmType`, `InitialMethodType`, `ColorCheckerType`, `ColorSpace`, `LinearizationType`, and `DistanceType`
 - `InpaintMethod`
 - `SeamlessCloneFlags`, `EdgePreservingFilterFlags`
 

@@ -9,7 +9,7 @@ namespace OpenCvSharp.Video
     /// OpenCV video tracking and motion-analysis functions.
     /// OpenCV video 跟踪与运动分析函数。
     /// </summary>
-    public static unsafe class Cv2
+    public static unsafe partial class Cv2
     {
         private static readonly TermCriteria DefaultLkCriteria = TermCriteria.ByCountAndEpsilon(30, 0.01);
         private static readonly TermCriteria DefaultShiftCriteria = TermCriteria.ByCountAndEpsilon(10, 1.0);

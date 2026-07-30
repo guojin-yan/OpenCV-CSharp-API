@@ -1,3 +1,8 @@
+using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using OpenCvSharp.Internal.Interop;
+
 namespace OpenCvSharp
 {
     /// <summary>
@@ -105,6 +110,84 @@ namespace OpenCvSharp
         {
             return "OpenCV CSharp API " + PackageVersion + " for OpenCV " + OpenCvVersion + " (" + TargetFramework + ")";
         }
+
+        /// <summary>
+        /// Gets the major version reported by the loaded native OpenCV runtime.
+        /// 获取已加载 native OpenCV runtime 报告的主版本号。
+        /// </summary>
+        /// <returns>The native OpenCV major version. native OpenCV 主版本号。</returns>
+        public static int GetNativeOpenCvVersionMajor()
+        {
+            return NativeMethods.GetVersionMajor();
+        }
+
+        /// <summary>
+        /// Gets the minor version reported by the loaded native OpenCV runtime.
+        /// 获取已加载 native OpenCV runtime 报告的次版本号。
+        /// </summary>
+        /// <returns>The native OpenCV minor version. native OpenCV 次版本号。</returns>
+        public static int GetNativeOpenCvVersionMinor()
+        {
+            return NativeMethods.GetVersionMinor();
+        }
+
+        /// <summary>
+        /// Gets the revision reported by the loaded native OpenCV runtime.
+        /// 获取已加载 native OpenCV runtime 报告的修订版本号。
+        /// </summary>
+        /// <returns>The native OpenCV revision. native OpenCV 修订版本号。</returns>
+        public static int GetNativeOpenCvVersionRevision()
+        {
+            return NativeMethods.GetVersionRevision();
+        }
+
+        /// <summary>
+        /// Gets the version reported by the loaded native OpenCV runtime.
+        /// 获取已加载 native OpenCV runtime 报告的版本。
+        /// </summary>
+        /// <returns>The native OpenCV version string. native OpenCV 版本字符串。</returns>
+        /// <exception cref="OpenCvException">Thrown when native numeric and string version probes disagree. 当 native 数字版本与字符串版本探针不一致时抛出。</exception>
+        public static string GetNativeOpenCvVersion()
+        {
+            int major = GetNativeOpenCvVersionMajor();
+            int minor = GetNativeOpenCvVersionMinor();
+            int revision = GetNativeOpenCvVersionRevision();
+            string numericVersion = string.Format(CultureInfo.InvariantCulture, "{0}.{1}.{2}", major, minor, revision);
+            IntPtr versionPointer = NativeMethods.GetVersionStringPointer();
+            string? versionString = versionPointer == IntPtr.Zero ? null : Marshal.PtrToStringAnsi(versionPointer);
+            if (versionString == null || versionString.Length == 0 ||
+                !versionString.StartsWith(numericVersion, StringComparison.Ordinal))
+            {
+                throw new OpenCvException("Native OpenCV version probes are inconsistent.");
+            }
+
+            return versionString;
+        }
+
+        /// <summary>
+        /// Gets whether the loaded native OpenCV runtime exactly matches the managed package target version.
+        /// 获取已加载 native OpenCV runtime 是否与 managed 包目标版本完全匹配。
+        /// </summary>
+        public static bool IsNativeOpenCvVersionCompatible()
+        {
+            return string.Equals(GetNativeOpenCvVersion(), OpenCvVersion, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Verifies that the loaded native OpenCV runtime exactly matches the managed package target version.
+        /// 验证已加载 native OpenCV runtime 与 managed 包目标版本完全匹配。
+        /// </summary>
+        /// <exception cref="OpenCvException">Thrown when the loaded native runtime version does not match <see cref="OpenCvVersion"/>. 当已加载 native runtime 版本与 <see cref="OpenCvVersion"/> 不一致时抛出。</exception>
+        public static void VerifyNativeOpenCvVersionCompatibility()
+        {
+            string nativeVersion = GetNativeOpenCvVersion();
+            if (!string.Equals(nativeVersion, OpenCvVersion, StringComparison.Ordinal))
+            {
+                throw new OpenCvException(
+                    "Native OpenCV runtime version " + nativeVersion +
+                    " does not match managed target version " + OpenCvVersion + ".");
+            }
+        }
     }
 
     /// <summary>
@@ -178,6 +261,24 @@ namespace OpenCvSharp
         public static string GetDisplayString()
         {
             return OpenCvSharpBuildInfo.GetDisplayString();
+        }
+
+        /// <summary>Gets the loaded native OpenCV runtime version through the compatibility facade. 通过 compatibility facade 获取已加载 native OpenCV runtime 版本。</summary>
+        public static string GetNativeOpenCvVersion()
+        {
+            return OpenCvSharpBuildInfo.GetNativeOpenCvVersion();
+        }
+
+        /// <summary>Gets native runtime compatibility through the compatibility facade. 通过 compatibility facade 获取 native runtime 兼容性。</summary>
+        public static bool IsNativeOpenCvVersionCompatible()
+        {
+            return OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible();
+        }
+
+        /// <summary>Verifies native runtime compatibility through the compatibility facade. 通过 compatibility facade 验证 native runtime 兼容性。</summary>
+        public static void VerifyNativeOpenCvVersionCompatibility()
+        {
+            OpenCvSharpBuildInfo.VerifyNativeOpenCvVersionCompatibility();
         }
     }
 }

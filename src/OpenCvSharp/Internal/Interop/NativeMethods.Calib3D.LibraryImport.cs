@@ -21,6 +21,44 @@ namespace OpenCvSharp.Internal.Interop
             internal float Z;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Calib3DVec4fNative
+        {
+            internal float V0;
+            internal float V1;
+            internal float V2;
+            internal float V3;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Calib3DVec6fNative
+        {
+            internal float V0;
+            internal float V1;
+            internal float V2;
+            internal float V3;
+            internal float V4;
+            internal float V5;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Calib3DUsacParamsNative
+        {
+            internal double Confidence;
+            internal int IsParallel;
+            internal int LoIterations;
+            internal int LoMethod;
+            internal int LoSampleSize;
+            internal int MaxIterations;
+            internal int NeighborsSearch;
+            internal int RandomGeneratorState;
+            internal int Sampler;
+            internal int Score;
+            internal double Threshold;
+            internal int FinalPolisher;
+            internal int FinalPolisherIterations;
+        }
+
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_rodrigues")]
         internal static partial int Calib3DRodrigues(IntPtr src, IntPtr dst, IntPtr jacobian);
 
@@ -209,6 +247,18 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_chessboard_corners")]
         internal static partial int Calib3DFindChessboardCorners(IntPtr image, int patternWidth, int patternHeight, IntPtr corners, int flags, out int found);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_chessboard_corners_sb")]
+        internal static partial int Calib3DFindChessboardCornersSB(IntPtr image, int patternWidth, int patternHeight, IntPtr corners, int flags, out int found);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta")]
+        internal static partial int Calib3DFindChessboardCornersSBWithMeta(IntPtr image, int patternWidth, int patternHeight, IntPtr corners, int flags, IntPtr meta, out int found);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_estimate_chessboard_sharpness")]
+        internal static partial int Calib3DEstimateChessboardSharpness(IntPtr image, int patternWidth, int patternHeight, IntPtr corners, float riseDistance, int vertical, IntPtr sharpness, out double value0, out double value1, out double value2, out double value3);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_4_quad_corner_subpix")]
+        internal static partial int Calib3DFind4QuadCornerSubpix(IntPtr image, IntPtr corners, int regionWidth, int regionHeight, out int found);
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_check_chessboard")]
         internal static partial int Calib3DCheckChessboard(IntPtr image, int patternWidth, int patternHeight, out int found);
@@ -494,6 +544,102 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stereo_matcher_set_disp12_max_diff")]
         internal static partial int StereoMatcherSetDisp12MaxDiff(IntPtr stereoMatcher, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_create")]
+        internal static partial int Calib3DSubdiv2DCreate(out IntPtr subdiv);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_create_rect")]
+        internal static partial int Calib3DSubdiv2DCreateRect(int x, int y, int width, int height, out IntPtr subdiv);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_create_rect2f")]
+        internal static partial int Calib3DSubdiv2DCreateRect2f(float x, float y, float width, float height, out IntPtr subdiv);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_release")]
+        internal static partial void Calib3DSubdiv2DRelease(IntPtr subdiv);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_init_delaunay")]
+        internal static partial int Calib3DSubdiv2DInitDelaunay(IntPtr subdiv, int x, int y, int width, int height);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f")]
+        internal static partial int Calib3DSubdiv2DInitDelaunayRect2f(IntPtr subdiv, float x, float y, float width, float height);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_insert")]
+        internal static partial int Calib3DSubdiv2DInsert(IntPtr subdiv, float x, float y, out int vertex);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_insert_points")]
+        internal static partial int Calib3DSubdiv2DInsertPoints(IntPtr subdiv, Calib3DPoint2fNative* points, int pointCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_locate")]
+        internal static partial int Calib3DSubdiv2DLocate(IntPtr subdiv, float x, float y, out int location, out int edge, out int vertex);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_find_nearest")]
+        internal static partial int Calib3DSubdiv2DFindNearest(IntPtr subdiv, float x, float y, out int vertex, out float nearestX, out float nearestY);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_edge_list_count")]
+        internal static partial int Calib3DSubdiv2DGetEdgeListCount(IntPtr subdiv, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill")]
+        internal static partial int Calib3DSubdiv2DGetEdgeListFill(IntPtr subdiv, Calib3DVec4fNative* values, int capacity);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_count")]
+        internal static partial int Calib3DSubdiv2DGetLeadingEdgeListCount(IntPtr subdiv, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_fill")]
+        internal static partial int Calib3DSubdiv2DGetLeadingEdgeListFill(IntPtr subdiv, int* values, int capacity);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_triangle_list_count")]
+        internal static partial int Calib3DSubdiv2DGetTriangleListCount(IntPtr subdiv, out int count);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_triangle_list_fill")]
+        internal static partial int Calib3DSubdiv2DGetTriangleListFill(IntPtr subdiv, Calib3DVec6fNative* values, int capacity);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_count")]
+        internal static partial int Calib3DSubdiv2DGetVoronoiFacetListCount(IntPtr subdiv, int* indices, int indexCount, out int facetCount, out int pointCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_fill")]
+        internal static partial int Calib3DSubdiv2DGetVoronoiFacetListFill(IntPtr subdiv, int* indices, int indexCount, int* facetOffsets, int facetOffsetCapacity, Calib3DPoint2fNative* points, int pointCapacity, Calib3DPoint2fNative* centers, int centerCapacity);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_vertex")]
+        internal static partial int Calib3DSubdiv2DGetVertex(IntPtr subdiv, int vertex, out float x, out float y, out int firstEdge);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_get_edge")]
+        internal static partial int Calib3DSubdiv2DGetEdge(IntPtr subdiv, int edge, int nextEdgeType, out int relatedEdge);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_next_edge")]
+        internal static partial int Calib3DSubdiv2DNextEdge(IntPtr subdiv, int edge, out int nextEdge);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_rotate_edge")]
+        internal static partial int Calib3DSubdiv2DRotateEdge(IntPtr subdiv, int edge, int rotate, out int rotatedEdge);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_sym_edge")]
+        internal static partial int Calib3DSubdiv2DSymEdge(IntPtr subdiv, int edge, out int symmetricEdge);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_edge_org")]
+        internal static partial int Calib3DSubdiv2DEdgeOrg(IntPtr subdiv, int edge, out int vertex, out float x, out float y);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_subdiv2d_edge_dst")]
+        internal static partial int Calib3DSubdiv2DEdgeDst(IntPtr subdiv, int edge, out int vertex, out float x, out float y);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_usac_params_get_default")]
+        internal static partial int Calib3DUsacParamsGetDefault(out Calib3DUsacParamsNative parameters);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_homography_usac")]
+        internal static partial int Calib3DFindHomographyUsac(IntPtr srcPoints, IntPtr dstPoints, IntPtr mask, Calib3DUsacParamsNative* parameters, out IntPtr homography);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_solve_pnp_ransac_usac")]
+        internal static partial int Calib3DSolvePnPRansacUsac(IntPtr objectPoints, IntPtr imagePoints, IntPtr cameraMatrix, IntPtr distCoeffs, IntPtr rvec, IntPtr tvec, IntPtr inliers, Calib3DUsacParamsNative* parameters, out int solved);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_fundamental_mat_usac")]
+        internal static partial int Calib3DFindFundamentalMatUsac(IntPtr points1, IntPtr points2, IntPtr mask, Calib3DUsacParamsNative* parameters, out IntPtr fundamental);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_find_essential_mat_usac")]
+        internal static partial int Calib3DFindEssentialMatUsac(IntPtr points1, IntPtr points2, IntPtr cameraMatrix1, IntPtr cameraMatrix2, IntPtr distCoeffs1, IntPtr distCoeffs2, IntPtr mask, Calib3DUsacParamsNative* parameters, out IntPtr essential);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_estimate_affine_2d_usac")]
+        internal static partial int Calib3DEstimateAffine2DUsac(IntPtr source, IntPtr destination, IntPtr transform, IntPtr inliers, Calib3DUsacParamsNative* parameters);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_calib3d_fisheye_stereo_rectify")]
+        internal static partial int Calib3DFisheyeStereoRectify(IntPtr cameraMatrix1, IntPtr distCoeffs1, IntPtr cameraMatrix2, IntPtr distCoeffs2, int imageWidth, int imageHeight, IntPtr r, IntPtr t, IntPtr r1, IntPtr r2, IntPtr p1, IntPtr p2, IntPtr q, int flags, int newImageWidth, int newImageHeight, double balance, double fovScale);
     }
 }
 #endif

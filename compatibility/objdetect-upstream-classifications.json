@@ -1,0 +1,2403 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/objdetect.hpp and opencv2/objdetect/objdetect.hpp compatibility headers implemented by the nine parser-emitted OpenCV 5.0.0 ObjDetect public source headers",
+  "reviewStatus": "source-reviewed",
+  "limitation": "The map covers the exact OpenCV 5.0.0 ObjDetect compatibility include closure. Two advanced CirclesGridFinderParameters callables and eight polymorphic persistence callables are intentionally omitted; optional contrib modules and repository-wide parity are not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.aruco.Dictionary",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.aruco.Dictionary.Dictionary()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.aruco.Dictionary.Dictionary(Mat bytesList[/C,/Ref];int _markerSize;int maxcorr=0)-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_create_from_bytes_list"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|constructor|public;instance|.ctor(OpenCvSharp.Core.Mat bytesList,System.Int32 markerSize,System.Int32 maxCorrectionBits=0)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.aruco.Dictionary.readDictionary(FileNode fn[/C,/Ref])-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.aruco.Dictionary.writeDictionary(FileStorage fs[/Ref];String name=String()[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.aruco.Dictionary.identify(Mat onlyBits[/C,/Ref];int idx[/O,/Ref];int rotation[/O,/Ref];double maxCorrectionRate)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_identify"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;instance|OpenCvSharp.ObjDetect.ArucoIdentificationResult Identify(OpenCvSharp.Core.Mat bits,System.Double maxCorrectionRate)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.aruco.Dictionary.identify(Mat onlyCellPixelRatio[/C,/Ref];int idx[/O,/Ref];int rotation[/O,/Ref];double maxCorrectionRate;float validBitIdThreshold)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_identify_with_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;instance|OpenCvSharp.ObjDetect.ArucoIdentificationResult Identify(OpenCvSharp.Core.Mat bits,System.Double maxCorrectionRate)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.aruco.Dictionary.getDistanceToId(Mat bits;int id;bool allRotations=true)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_get_distance_to_id"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;instance|System.Int32 GetDistanceToId(OpenCvSharp.Core.Mat bits,System.Int32 id,System.Boolean allRotations=true)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.aruco.Dictionary.generateImageMarker(int id;int sidePixels;Mat _img[/O];int borderBits=1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_generate_image_marker"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;instance|OpenCvSharp.Core.Mat GenerateImageMarker(System.Int32 id,System.Int32 sidePixels,System.Int32 borderBits=1)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.aruco.Dictionary.getByteListFromBits(Mat bits[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_get_byte_list_from_bits"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|OpenCvSharp.Core.Mat GetByteListFromBits(OpenCvSharp.Core.Mat bits)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.aruco.Dictionary.getBitsFromByteList(Mat byteList[/C,/Ref];int markerSize;int rotationId=0)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_get_bits_from_byte_list"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|OpenCvSharp.Core.Mat GetBitsFromByteList(OpenCvSharp.Core.Mat byteList,System.Int32 markerSize,System.Int32 rotationId=0)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.aruco.Dictionary.getMarkerBits(int markerId;int rotationId=0)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_get_marker_bits"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;instance|OpenCvSharp.Core.Mat GetMarkerBits(System.Int32 markerId,System.Int32 rotationId=0)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "enum cv.aruco.PredefinedDictionaryType[const cv.aruco.DICT_4X4_50=0;const cv.aruco.DICT_4X4_100=0\u002B1;const cv.aruco.DICT_4X4_250=0\u002B2;const cv.aruco.DICT_4X4_1000=0\u002B3;const cv.aruco.DICT_5X5_50=0\u002B4;const cv.aruco.DICT_5X5_100=0\u002B5;const cv.aruco.DICT_5X5_250=0\u002B6;const cv.aruco.DICT_5X5_1000=0\u002B7;const cv.aruco.DICT_6X6_50=0\u002B8;const cv.aruco.DICT_6X6_100=0\u002B9;const cv.aruco.DICT_6X6_250=0\u002B10;const cv.aruco.DICT_6X6_1000=0\u002B11;const cv.aruco.DICT_7X7_50=0\u002B12;const cv.aruco.DICT_7X7_100=0\u002B13;const cv.aruco.DICT_7X7_250=0\u002B14;const cv.aruco.DICT_7X7_1000=0\u002B15;const cv.aruco.DICT_ARUCO_ORIGINAL=0\u002B16;const cv.aruco.DICT_APRILTAG_16h5=0\u002B17;const cv.aruco.DICT_APRILTAG_25h9=0\u002B18;const cv.aruco.DICT_APRILTAG_36h10=0\u002B19;const cv.aruco.DICT_APRILTAG_36h11=0\u002B20;const cv.aruco.DICT_ARUCO_MIP_36h12=0\u002B21]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.aruco.getPredefinedDictionary(int dict)-\u003EDictionary",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_create_predefined"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|OpenCvSharp.ObjDetect.ArucoDictionary GetPredefinedDictionary(OpenCvSharp.ObjDetect.PredefinedDictionaryType dictionaryType)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.aruco.extendDictionary(int nMarkers;int markerSize;Dictionary baseDictionary=Dictionary()[/C,/Ref];int randomSeed=0)-\u003EDictionary",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_extend"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|OpenCvSharp.ObjDetect.ArucoDictionary Extend(System.Int32 markerCount,System.Int32 markerSize,OpenCvSharp.ObjDetect.ArucoDictionary? baseDictionary=null,System.Int32 randomSeed=0)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.aruco.Board",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.aruco.Board.Board(vector_Mat objPoints;Dictionary dictionary[/C,/Ref];Mat ids)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|constructor|public;instance|.ctor(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.ObjDetect.ArucoDictionary dictionary,System.Int32[] ids)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.aruco.Board.getDictionary()-\u003EDictionary",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_get_dictionary"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.ObjDetect.ArucoDictionary Dictionary"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.aruco.Board.getObjPoints()-\u003Estd::vector\u003Cstd::vector\u003CPoint3f\u003E \u003E",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_get_object_points_count",
+        "jyppx_ocv_aruco_board_get_object_points_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.Core.Point3f[][] ObjectPoints"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.aruco.Board.getIds()-\u003Estd::vector\u003Cint\u003E",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_get_ids_count",
+        "jyppx_ocv_aruco_board_get_ids_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|System.Int32[] Ids"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.aruco.Board.getRightBottomCorner()-\u003EPoint3f",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_get_right_bottom_corner"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.Core.Point3f RightBottomCorner"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.aruco.Board.matchImagePoints(vector_Mat detectedCorners;Mat detectedIds;Mat objPoints[/O];Mat imgPoints[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_match_image_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|System.Void MatchImagePoints(OpenCvSharp.Core.Point2f[][] detectedCorners,System.Int32[] detectedIds,OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.aruco.Board.generateImage(Size outSize;Mat img[/O];int marginSize=0;int borderBits=1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_board_generate_image"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|OpenCvSharp.Core.Mat GenerateImage(OpenCvSharp.Core.Size outSize,System.Int32 marginSize=0,System.Int32 borderBits=1)"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "class cv.aruco.GridBoard",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.aruco.GridBoard.GridBoard(Size size[/C,/Ref];float markerLength;float markerSeparation;Dictionary dictionary[/C,/Ref];Mat ids=Mat())-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_grid_board_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoGridBoard|constructor|public;instance|.ctor(OpenCvSharp.Core.Size gridSize,System.Single markerLength,System.Single markerSeparation,OpenCvSharp.ObjDetect.ArucoDictionary dictionary)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.aruco.GridBoard.getGridSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_grid_board_get_grid_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoGridBoard|property|instance;get:public|OpenCvSharp.Core.Size GridSize"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.aruco.GridBoard.getMarkerLength()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_grid_board_get_marker_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoGridBoard|property|instance;get:public|System.Single MarkerLength"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.aruco.GridBoard.getMarkerSeparation()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_grid_board_get_marker_separation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoGridBoard|property|instance;get:public|System.Single MarkerSeparation"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "class cv.aruco.CharucoBoard",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.aruco.CharucoBoard.CharucoBoard(Size size[/C,/Ref];float squareLength;float markerLength;Dictionary dictionary[/C,/Ref];Mat ids=Mat())-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|constructor|public;instance|.ctor(OpenCvSharp.Core.Size chessboardSize,System.Single squareLength,System.Single markerLength,OpenCvSharp.ObjDetect.ArucoDictionary dictionary)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.aruco.CharucoBoard.setLegacyPattern(bool legacyPattern)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_set_legacy_pattern"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|property|instance;get:public;set:public|System.Boolean LegacyPattern"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.aruco.CharucoBoard.getLegacyPattern()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_get_legacy_pattern"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|property|instance;get:public;set:public|System.Boolean LegacyPattern"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.aruco.CharucoBoard.getChessboardSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_get_chessboard_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|property|instance;get:public|OpenCvSharp.Core.Size ChessboardSize"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.aruco.CharucoBoard.getSquareLength()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_get_square_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|property|instance;get:public|System.Single SquareLength"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.aruco.CharucoBoard.getMarkerLength()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_get_marker_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|property|instance;get:public|System.Single MarkerLength"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.aruco.CharucoBoard.getChessboardCorners()-\u003Estd::vector\u003CPoint3f\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_get_chessboard_corners_count",
+        "jyppx_ocv_aruco_charuco_board_get_chessboard_corners_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|method|public;instance|OpenCvSharp.Core.Point3f[] GetChessboardCorners()"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.aruco.CharucoBoard.checkCharucoCornersCollinear(Mat charucoIds)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_board_check_corners_collinear"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoBoard|method|public;instance|System.Boolean CheckCharucoCornersCollinear(System.Int32[] charucoIds)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "enum cv.aruco.CornerRefineMethod[const cv.aruco.CORNER_REFINE_NONE=0;const cv.aruco.CORNER_REFINE_SUBPIX=1;const cv.aruco.CORNER_REFINE_CONTOUR=2;const cv.aruco.CORNER_REFINE_APRILTAG=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "class cv.aruco.DetectorParameters",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.aruco.DetectorParameters.DetectorParameters()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetectorParameters|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.aruco.DetectorParameters.readDetectorParameters(FileNode fn[/C,/Ref])-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.aruco.DetectorParameters.writeDetectorParameters(FileStorage fs[/Ref];String name=String()[/C,/Ref])-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "class cv.aruco.RefineParameters",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.aruco.RefineParameters.RefineParameters(float minRepDistance=10.f;float errorCorrectionRate=3.f;bool checkAllOrders=true)-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_refine_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoRefineParameters|constructor|public;instance|.ctor(System.Single minRepDistance,System.Single errorCorrectionRate,System.Boolean checkAllOrders)"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.aruco.RefineParameters.readRefineParameters(FileNode fn[/C,/Ref])-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.aruco.RefineParameters.writeRefineParameters(FileStorage fs[/Ref];String name=String()[/C,/Ref])-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "class cv.aruco.ArucoDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.aruco.ArucoDetector.ArucoDetector(Dictionary dictionary=getPredefinedDictionary(cv::aruco::DICT_4X4_50)[/C,/Ref];DetectorParameters detectorParams=DetectorParameters()[/C,/Ref];RefineParameters refineParams=RefineParameters()[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|constructor|public;instance|.ctor(OpenCvSharp.ObjDetect.ArucoDictionary dictionary,OpenCvSharp.ObjDetect.ArucoDetectorParameters? detectorParameters=null,OpenCvSharp.ObjDetect.ArucoRefineParameters? refineParameters=null)"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.aruco.ArucoDetector.ArucoDetector(vector_Dictionary dictionaries[/C,/Ref];DetectorParameters detectorParams=DetectorParameters()[/C,/Ref];RefineParameters refineParams=RefineParameters()[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_create_multi_dictionary"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|OpenCvSharp.ObjDetect.ArucoDetector Create(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries,OpenCvSharp.ObjDetect.ArucoDetectorParameters? detectorParameters=null,OpenCvSharp.ObjDetect.ArucoRefineParameters? refineParameters=null)"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.aruco.ArucoDetector.detectMarkers(Mat image;vector_Mat corners[/O];Mat ids[/O];vector_Mat rejectedImgPoints=vector_Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_detect_markers_count",
+        "jyppx_ocv_aruco_detector_detect_markers_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectionResult DetectMarkers(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.aruco.ArucoDetector.detectMarkersWithConfidence(Mat image;vector_Mat corners[/O];Mat ids[/O];Mat markersConfidence[/O];vector_Mat rejectedImgPoints=vector_Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_detect_markers_with_confidence_count",
+        "jyppx_ocv_aruco_detector_detect_markers_with_confidence_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectionResult DetectMarkersWithConfidence(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.aruco.ArucoDetector.refineDetectedMarkers(Mat image;Board board[/C,/Ref];vector_Mat detectedCorners[/IO];Mat detectedIds[/IO];vector_Mat rejectedCorners[/IO];Mat cameraMatrix=Mat();Mat distCoeffs=Mat();Mat recoveredIdxs=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_refine_detected_markers_count",
+        "jyppx_ocv_aruco_detector_refine_detected_markers_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoRefineResult RefineDetectedMarkers(OpenCvSharp.Core.Mat image,OpenCvSharp.ObjDetect.ArucoGridBoard board,OpenCvSharp.Core.Point2f[][] detectedCorners,System.Int32[] detectedIds,OpenCvSharp.Core.Point2f[][] rejectedCandidates,OpenCvSharp.Core.Mat? cameraMatrix=null,OpenCvSharp.Core.Mat? distCoeffs=null)"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.aruco.ArucoDetector.detectMarkersMultiDict(Mat image;vector_Mat corners[/O];Mat ids[/O];vector_Mat rejectedImgPoints=vector_Mat()[/O];Mat dictIndices=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count",
+        "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoMultiDictionaryDetectionResult DetectMarkersMultiDictionary(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.aruco.ArucoDetector.getDictionary()-\u003EDictionary",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_get_dictionary"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDictionary GetDictionary()"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.aruco.ArucoDetector.setDictionary(Dictionary dictionary[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_set_dictionary"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetector SetDictionary(OpenCvSharp.ObjDetect.ArucoDictionary dictionary)"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.aruco.ArucoDetector.getDictionaries()-\u003Estd::vector\u003CDictionary\u003E",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_get_dictionaries_count",
+        "jyppx_ocv_aruco_detector_get_dictionary_at"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDictionary[] GetDictionaries()"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.aruco.ArucoDetector.setDictionaries(vector_Dictionary dictionaries[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_set_dictionaries"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetector SetDictionaries(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries)"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.aruco.ArucoDetector.getDetectorParameters()-\u003EDetectorParameters",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_get_detector_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetDetectorParameters()"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.aruco.ArucoDetector.setDetectorParameters(DetectorParameters detectorParameters[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_set_detector_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetector SetDetectorParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.aruco.ArucoDetector.getRefineParameters()-\u003ERefineParameters",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_get_refine_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoRefineParameters GetRefineParameters()"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.aruco.ArucoDetector.setRefineParameters(RefineParameters refineParameters[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_detector_set_refine_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetector SetRefineParameters(OpenCvSharp.ObjDetect.ArucoRefineParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.aruco.ArucoDetector.write(FileStorage fs[/Ref];String name[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.aruco.ArucoDetector.read(FileNode fn[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until ObjDetect objects can consume the shared FileStorage and FileNode ownership contract without casting private module handles.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.aruco.drawDetectedMarkers(Mat image[/IO];vector_Mat corners;Mat ids=Mat();Scalar borderColor=Scalar(0, 255, 0))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_draw_detected_markers"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|System.Void DrawDetectedMarkers(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[][] corners,System.Int32[]? ids=null,OpenCvSharp.Core.Scalar borderColor=null)"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.aruco.generateImageMarker(Dictionary dictionary[/C,/Ref];int id;int sidePixels;Mat img[/O];int borderBits=1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_generate_image_marker"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;instance|OpenCvSharp.Core.Mat GenerateImageMarker(System.Int32 id,System.Int32 sidePixels,System.Int32 borderBits=1)"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "class cv.GraphicalCodeDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.GraphicalCodeDetector.detect(Mat img;Mat points[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.Core.Mat Detect(OpenCvSharp.Core.Mat image,out System.Boolean detected)"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.GraphicalCodeDetector.decode(Mat img;Mat points;Mat straight_code=Mat()[/O])-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_decode_fill",
+        "jyppx_ocv_qrcode_detector_decode_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.String Decode(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points,OpenCvSharp.Core.Mat? straightQRCode=null)"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.GraphicalCodeDetector.detectAndDecode(Mat img;Mat points=Mat()[/O];Mat straight_code=Mat()[/O])-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect_and_decode_fill",
+        "jyppx_ocv_qrcode_detector_detect_and_decode_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.String DetectAndDecode(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null,OpenCvSharp.Core.Mat? straightQRCode=null)"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.GraphicalCodeDetector.detectMulti(Mat img;Mat points[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.Core.Mat DetectMulti(OpenCvSharp.Core.Mat image,out System.Boolean detected)"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.GraphicalCodeDetector.decodeMulti(Mat img;Mat points;vector_string decoded_info[/O,/Ref];vector_Mat straight_code=vector_Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_decode_multi_count",
+        "jyppx_ocv_qrcode_detector_decode_multi_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult DecodeMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points)"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.GraphicalCodeDetector.detectAndDecodeMulti(Mat img;vector_string decoded_info[/O,/Ref];Mat points=Mat()[/O];vector_Mat straight_code=vector_Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect_and_decode_multi_count",
+        "jyppx_ocv_qrcode_detector_detect_and_decode_multi_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult DetectAndDecodeMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.GraphicalCodeDetector.detectAndDecode(Mat img;Mat points=Mat()[/O];Mat straight_code=Mat()[/O])-\u003ENativeByteArray",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect_and_decode_fill",
+        "jyppx_ocv_qrcode_detector_detect_and_decode_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DetectAndDecodeBytes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null,OpenCvSharp.Core.Mat? straightQRCode=null)"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.GraphicalCodeDetector.decode(Mat img;Mat points;Mat straight_code=Mat()[/O])-\u003ENativeByteArray",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_decode_fill",
+        "jyppx_ocv_qrcode_detector_decode_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DecodeBytes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points,OpenCvSharp.Core.Mat? straightQRCode=null)"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.GraphicalCodeDetector.decodeMulti(Mat img;Mat points;vector_NativeByteArray decoded_info[/O,/Ref];vector_Mat straight_code=vector_Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_decode_multi_count",
+        "jyppx_ocv_qrcode_detector_decode_multi_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DecodeBytesMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points)"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.GraphicalCodeDetector.detectAndDecodeMulti(Mat img;vector_NativeByteArray decoded_info[/O,/Ref];Mat points=Mat()[/O];vector_Mat straight_code=vector_Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect_and_decode_multi_count",
+        "jyppx_ocv_qrcode_detector_detect_and_decode_multi_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DetectAndDecodeBytesMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null)"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "enum cv.mcc.ColorChart[const cv.mcc.MCC24=0;const cv.mcc.SG140=0\u002B1;const cv.mcc.VINYL18=0\u002B2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 77,
+      "identity": "class cv.mcc.CChecker",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.mcc.CChecker.create()-\u003EPtr\u003CCChecker\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.mcc.CChecker.setTarget(ColorChart _target)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_set_target"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|property|instance;get:public;set:public|OpenCvSharp.ObjDetect.ColorChart Target"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.mcc.CChecker.setBox(vector_Point2f _box)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_set_box"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.ObjDetect.CChecker SetBox(OpenCvSharp.Core.Point2f[] points)"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.mcc.CChecker.setChartsRGB(Mat _chartsRGB)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_set_charts_rgb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.ObjDetect.CChecker SetChartsRGB(OpenCvSharp.Core.Mat chartsRGB)"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.mcc.CChecker.setChartsYCbCr(Mat _chartsYCbCr)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_set_charts_ycbcr"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.ObjDetect.CChecker SetChartsYCbCr(OpenCvSharp.Core.Mat chartsYCbCr)"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.mcc.CChecker.setCost(float _cost)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_set_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|property|instance;get:public;set:public|System.Single Cost"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.mcc.CChecker.setCenter(Point2f _center)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_set_center"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|property|instance;get:public;set:public|OpenCvSharp.Core.Point2f Center"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.mcc.CChecker.getTarget()-\u003EColorChart",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_target"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|property|instance;get:public;set:public|OpenCvSharp.ObjDetect.ColorChart Target"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.mcc.CChecker.getBox()-\u003Estd::vector\u003CPoint2f\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_box_count",
+        "jyppx_ocv_mcc_checker_get_box_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.Core.Point2f[] GetBox()"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.mcc.CChecker.getColorCharts()-\u003Estd::vector\u003CPoint2f\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_color_charts_count",
+        "jyppx_ocv_mcc_checker_get_color_charts_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.Core.Point2f[] GetColorCharts()"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.mcc.CChecker.getChartsRGB(bool getStats=true)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_charts_rgb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.Core.Mat GetChartsRGB(System.Boolean getStats=true)"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.mcc.CChecker.getChartsYCbCr()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_charts_ycbcr"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|method|public;instance|OpenCvSharp.Core.Mat GetChartsYCbCr()"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.mcc.CChecker.getCost()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_cost"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|property|instance;get:public;set:public|System.Single Cost"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.mcc.CChecker.getCenter()-\u003EPoint2f",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_get_center"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CChecker|property|instance;get:public;set:public|OpenCvSharp.Core.Point2f Center"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "class cv.mcc.DetectorParametersMCC",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.mcc.DetectorParametersMCC.DetectorParametersMCC()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_detector_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.DetectorParametersMCC|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "class cv.mcc.CCheckerDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.mcc.CCheckerDetector.process(Mat image;vector_Rect regionsOfInterest[/C,/Ref];int nc=1[/C])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_process_with_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|System.Boolean Process(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect[] regionsOfInterest,System.Int32 nc=1)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.mcc.CCheckerDetector.process(Mat image;int nc=1[/C])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|System.Boolean Process(OpenCvSharp.Core.Mat image,System.Int32 nc=1)"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.mcc.CCheckerDetector.getBestColorChecker()-\u003EPtr\u003Cmcc::CChecker\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_get_best_color_checker"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|OpenCvSharp.ObjDetect.CChecker? GetBestColorChecker()"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.mcc.CCheckerDetector.getListColorChecker()-\u003Estd::vector\u003CPtr\u003CCChecker\u003E\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_get_list_color_checker_count",
+        "jyppx_ocv_mcc_checker_detector_get_list_color_checker_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|OpenCvSharp.ObjDetect.CChecker[] GetListColorChecker()"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.mcc.CCheckerDetector.create()-\u003EPtr\u003CCCheckerDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.mcc.CCheckerDetector.create(dnn_Net net[/C,/Ref])-\u003EPtr\u003CCCheckerDetector\u003E",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_create_from_net"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|constructor|public;instance|.ctor(OpenCvSharp.Dnn.Net net)"
+      ]
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.mcc.CCheckerDetector.draw(vector_Ptr_CChecker checkers[/Ref];Mat img[/IO];Scalar color=CV_RGB(0,250,0)[/C];int thickness=2[/C])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_draw"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|System.Void Draw(OpenCvSharp.ObjDetect.CChecker[] checkers,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Scalar color=null,System.Int32 thickness=2)"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.mcc.CCheckerDetector.getRefColors()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_get_ref_colors"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|OpenCvSharp.Core.Mat GetRefColors()"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.mcc.CCheckerDetector.setDetectionParams(DetectorParametersMCC params[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_set_detection_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|OpenCvSharp.ObjDetect.CCheckerDetector SetDetectionParams(OpenCvSharp.ObjDetect.DetectorParametersMCC parameters)"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.mcc.CCheckerDetector.setColorChartType(ColorChart chartType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_set_color_chart_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|OpenCvSharp.ObjDetect.ColorChart ColorChartType"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.mcc.CCheckerDetector.setUseDnnModel(bool useDnn)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_set_use_dnn_model"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.mcc.CCheckerDetector.getUseDnnModel()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_get_use_dnn_model"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.mcc.CCheckerDetector.getDetectionParams()-\u003EDetectorParametersMCC",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_get_detection_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|method|public;instance|OpenCvSharp.ObjDetect.DetectorParametersMCC GetDetectionParams()"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.mcc.CCheckerDetector.getColorChartType()-\u003EColorChart",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_mcc_checker_detector_get_color_chart_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|OpenCvSharp.ObjDetect.ColorChart ColorChartType"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "identity": "class cv.QRCodeEncoder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "enum cv.QRCodeEncoder.EncodeMode[const cv.QRCodeEncoder.MODE_AUTO=-1;const cv.QRCodeEncoder.MODE_NUMERIC=1;const cv.QRCodeEncoder.MODE_ALPHANUMERIC=2;const cv.QRCodeEncoder.MODE_BYTE=4;const cv.QRCodeEncoder.MODE_ECI=7;const cv.QRCodeEncoder.MODE_KANJI=8;const cv.QRCodeEncoder.MODE_STRUCTURED_APPEND=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "enum cv.QRCodeEncoder.CorrectionLevel[const cv.QRCodeEncoder.CORRECT_LEVEL_L=0;const cv.QRCodeEncoder.CORRECT_LEVEL_M=1;const cv.QRCodeEncoder.CORRECT_LEVEL_Q=2;const cv.QRCodeEncoder.CORRECT_LEVEL_H=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "enum cv.QRCodeEncoder.ECIEncodings[const cv.QRCodeEncoder.ECI_SHIFT_JIS=20;const cv.QRCodeEncoder.ECI_UTF8=26]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "class cv.QRCodeEncoder.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.QRCodeEncoder.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_encoder_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeEncoderParams|constructor|public;instance|.ctor(System.Int32 version,OpenCvSharp.ObjDetect.QRCodeEncoderCorrectionLevel correctionLevel,OpenCvSharp.ObjDetect.QRCodeEncoderEncodeMode mode,System.Int32 structureNumber)"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.QRCodeEncoder.create(QRCodeEncoder_Params parameters=QRCodeEncoder::Params()[/C,/Ref])-\u003EPtr\u003CQRCodeEncoder\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_encoder_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeEncoder|method|public;static|OpenCvSharp.ObjDetect.QRCodeEncoder Create()"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.QRCodeEncoder.encode(String encoded_info[/C,/Ref];Mat qrcode[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_encoder_encode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeEncoder|method|public;instance|OpenCvSharp.Core.Mat Encode(System.String encodedInfo)"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.QRCodeEncoder.encodeStructuredAppend(String encoded_info[/C,/Ref];vector_Mat qrcodes[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_encoder_encode_structured_append_count",
+        "jyppx_ocv_qrcode_encoder_encode_structured_append_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeEncoder|method|public;instance|OpenCvSharp.Core.Mat[] EncodeStructuredAppend(System.String encodedInfo)"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "identity": "class cv.QRCodeDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.QRCodeDetector.QRCodeDetector()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.QRCodeDetector.setEpsX(double epsX)-\u003EQRCodeDetector",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_set_eps_x"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetector SetEpsX(System.Double epsX)"
+      ]
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.QRCodeDetector.setEpsY(double epsY)-\u003EQRCodeDetector",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_set_eps_y"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetector SetEpsY(System.Double epsY)"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.QRCodeDetector.setUseAlignmentMarkers(bool useAlignmentMarkers)-\u003EQRCodeDetector",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_set_use_alignment_markers"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetector SetUseAlignmentMarkers(System.Boolean useAlignmentMarkers)"
+      ]
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.QRCodeDetector.decodeCurved(Mat img;Mat points;Mat straight_qrcode=Mat()[/O])-\u003Ecv::String",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_decode_curved_fill",
+        "jyppx_ocv_qrcode_detector_decode_curved_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.String DecodeCurved(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points,OpenCvSharp.Core.Mat? straightQRCode=null)"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.QRCodeDetector.detectAndDecodeCurved(Mat img;Mat points=Mat()[/O];Mat straight_qrcode=Mat()[/O])-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_detect_and_decode_curved_fill",
+        "jyppx_ocv_qrcode_detector_detect_and_decode_curved_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.String DetectAndDecodeCurved(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null,OpenCvSharp.Core.Mat? straightQRCode=null)"
+      ]
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.QRCodeDetector.getEncoding(int codeIdx=0)-\u003EQRCodeEncoder::ECIEncodings",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_get_encoding"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeEncoderECIEncodings GetEncoding(System.Int32 codeIndex=0)"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "identity": "class cv.QRCodeDetectorAruco",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.QRCodeDetectorAruco.QRCodeDetectorAruco()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "class cv.QRCodeDetectorAruco.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.QRCodeDetectorAruco.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorArucoParams|constructor|public;instance|.ctor(System.Single minModuleSizeInPyramid,System.Single maxRotation,System.Single maxModuleSizeMismatch,System.Single maxTimingPatternMismatch,System.Single maxPenalties,System.Single maxColorsMismatch,System.Single scaleTimingPatternScore)"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.QRCodeDetectorAruco.QRCodeDetectorAruco(QRCodeDetectorAruco_Params params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_create_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|constructor|public;instance|.ctor(OpenCvSharp.ObjDetect.QRCodeDetectorArucoParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.QRCodeDetectorAruco.getDetectorParameters()-\u003EQRCodeDetectorAruco::Params",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_get_detector_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetectorArucoParams GetDetectorParameters()"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.QRCodeDetectorAruco.setDetectorParameters(QRCodeDetectorAruco_Params params[/C,/Ref])-\u003EQRCodeDetectorAruco",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_set_detector_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetectorAruco SetDetectorParameters(OpenCvSharp.ObjDetect.QRCodeDetectorArucoParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.QRCodeDetectorAruco.getArucoParameters()-\u003Earuco::DetectorParameters",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetArucoParameters()"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.QRCodeDetectorAruco.setArucoParameters(aruco_DetectorParameters params[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetectorAruco SetArucoParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CALIB_CB_ADAPTIVE_THRESH=1;const cv.CALIB_CB_NORMALIZE_IMAGE=2;const cv.CALIB_CB_FILTER_QUADS=4;const cv.CALIB_CB_FAST_CHECK=8;const cv.CALIB_CB_EXHAUSTIVE=16;const cv.CALIB_CB_ACCURACY=32;const cv.CALIB_CB_LARGER=64;const cv.CALIB_CB_MARKER=128;const cv.CALIB_CB_PLAIN=256]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CALIB_CB_SYMMETRIC_GRID=1;const cv.CALIB_CB_ASYMMETRIC_GRID=2;const cv.CALIB_CB_CLUSTERING=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.findChessboardCorners(Mat image;Size patternSize;Mat corners[/O];int flags=CALIB_CB_ADAPTIVE_THRESH \u002B CALIB_CB_NORMALIZE_IMAGE)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_chessboard_corners"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCorners(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Calib3D.ChessboardFlags flags,out OpenCvSharp.Core.Mat corners)"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.checkChessboard(Mat img;Size size)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_check_chessboard"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean CheckChessboard(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize)"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.findChessboardCornersSB(Mat image;Size patternSize;Mat corners[/O];int flags;Mat meta[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,OpenCvSharp.Core.Mat meta,OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
+      ]
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.findChessboardCornersSB(Mat image;Size patternSize;Mat corners[/O];int flags=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_chessboard_corners_sb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
+      ]
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.estimateChessboardSharpness(Mat image;Size patternSize;Mat corners;float rise_distance=0.8F;bool vertical=false;Mat sharpness=Mat()[/O])-\u003EScalar",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_chessboard_sharpness"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Scalar EstimateChessboardSharpness(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,System.Single riseDistance=0.8,System.Boolean vertical=false,OpenCvSharp.Core.Mat? sharpness=null)"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.find4QuadCornerSubpix(Mat img;Mat corners[/IO];Size region_size)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_4_quad_corner_subpix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean Find4QuadCornerSubpix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat corners,OpenCvSharp.Core.Size regionSize)"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.drawChessboardCorners(Mat image[/IO];Size patternSize;Mat corners;bool patternWasFound)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_draw_chessboard_corners"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void DrawChessboardCorners(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,System.Boolean patternWasFound)"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "class cv.CirclesGridFinderParameters",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.CirclesGridFinderParameters.CirclesGridFinderParameters()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "CirclesGridFinderParameters and its dedicated overload require a complete parameter value object plus Feature2D blob-detector ownership; the existing flags overload is not treated as equivalent.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "enum cv.CirclesGridFinderParameters.GridType[const cv.CirclesGridFinderParameters.SYMMETRIC_GRID=0;const cv.CirclesGridFinderParameters.ASYMMETRIC_GRID=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.findCirclesGrid(Mat image;Size patternSize;Mat centers[/O];int flags;Ptr_FeatureDetector blobDetector[/C,/Ref];CirclesGridFinderParameters parameters[/C,/Ref])-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "CirclesGridFinderParameters and its dedicated overload require a complete parameter value object plus Feature2D blob-detector ownership; the existing flags overload is not treated as equivalent.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.findCirclesGrid(Mat image;Size patternSize;Mat centers[/O];int flags=CALIB_CB_SYMMETRIC_GRID;Ptr_FeatureDetector blobDetector=cv::SimpleBlobDetector::create()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_CALIB3D; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_circles_grid"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindCirclesGrid(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Calib3D.CirclesGridFlags flags,out OpenCvSharp.Core.Mat centers)"
+      ]
+    },
+    {
+      "ordinal": 149,
+      "identity": "class cv.FaceDetectorYN",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.FaceDetectorYN.setInputSize(Size input_size[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_set_input_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|OpenCvSharp.Core.Size InputSize"
+      ]
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.FaceDetectorYN.getInputSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_get_input_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|OpenCvSharp.Core.Size InputSize"
+      ]
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.FaceDetectorYN.setScoreThreshold(float score_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_set_score_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|System.Single ScoreThreshold"
+      ]
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.FaceDetectorYN.getScoreThreshold()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_get_score_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|System.Single ScoreThreshold"
+      ]
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.FaceDetectorYN.setNMSThreshold(float nms_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_set_nms_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|System.Single NMSThreshold"
+      ]
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.FaceDetectorYN.getNMSThreshold()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_get_nms_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|System.Single NMSThreshold"
+      ]
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.FaceDetectorYN.setTopK(int top_k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_set_top_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|System.Int32 TopK"
+      ]
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.FaceDetectorYN.getTopK()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_get_top_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|property|instance;get:public;set:public|System.Int32 TopK"
+      ]
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.FaceDetectorYN.detect(Mat image;Mat faces[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_detect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|method|public;instance|OpenCvSharp.Core.Mat Detect(OpenCvSharp.Core.Mat image,out System.Int32 result)"
+      ]
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.FaceDetectorYN.create(String model[/PATH,/C,/Ref];String config[/PATH,/C,/Ref];Size input_size[/C,/Ref];float score_threshold=0.9f;float nms_threshold=0.3f;int top_k=5000;int backend_id=0;int target_id=0)-\u003EPtr\u003CFaceDetectorYN\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|method|public;static|OpenCvSharp.ObjDetect.FaceDetectorYN Create(System.String model,System.String config,OpenCvSharp.Core.Size inputSize,System.Single scoreThreshold=0.9,System.Single nmsThreshold=0.3,System.Int32 topK=5000,OpenCvSharp.ObjDetect.DnnBackend backendId=Default,OpenCvSharp.ObjDetect.DnnTarget targetId=Cpu)"
+      ]
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.FaceDetectorYN.create(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig[/C,/Ref];Size input_size[/C,/Ref];float score_threshold=0.9f;float nms_threshold=0.3f;int top_k=5000;int backend_id=0;int target_id=0)-\u003EPtr\u003CFaceDetectorYN\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_detector_yn_create_from_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceDetectorYN|method|public;static|OpenCvSharp.ObjDetect.FaceDetectorYN Create(System.String framework,System.Byte[] modelBuffer,System.Byte[]? configBuffer,OpenCvSharp.Core.Size inputSize,System.Single scoreThreshold=0.9,System.Single nmsThreshold=0.3,System.Int32 topK=5000,OpenCvSharp.ObjDetect.DnnBackend backendId=Default,OpenCvSharp.ObjDetect.DnnTarget targetId=Cpu)"
+      ]
+    },
+    {
+      "ordinal": 161,
+      "identity": "class cv.FaceRecognizerSF",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "enum cv.FaceRecognizerSF.DisType[const cv.FaceRecognizerSF.FR_COSINE=0;const cv.FaceRecognizerSF.FR_NORM_L2=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.FaceRecognizerSF.alignCrop(Mat src_img;Mat face_box;Mat aligned_img[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_sf_align_crop"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceRecognizerSF|method|public;instance|OpenCvSharp.Core.Mat AlignCrop(OpenCvSharp.Core.Mat sourceImage,OpenCvSharp.Core.Mat faceBox)"
+      ]
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.FaceRecognizerSF.feature(Mat aligned_img;Mat face_feature[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_sf_feature"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceRecognizerSF|method|public;instance|OpenCvSharp.Core.Mat Feature(OpenCvSharp.Core.Mat alignedImage)"
+      ]
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.FaceRecognizerSF.match(Mat face_feature1;Mat face_feature2;int dis_type=FaceRecognizerSF::FR_COSINE)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_sf_match"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceRecognizerSF|method|public;instance|System.Double Match(OpenCvSharp.Core.Mat faceFeature1,OpenCvSharp.Core.Mat faceFeature2,OpenCvSharp.ObjDetect.FaceRecognizerSFDistanceType distanceType=Cosine)"
+      ]
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.FaceRecognizerSF.create(String model[/PATH,/C,/Ref];String config[/PATH,/C,/Ref];int backend_id=0;int target_id=0)-\u003EPtr\u003CFaceRecognizerSF\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_sf_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceRecognizerSF|method|public;static|OpenCvSharp.ObjDetect.FaceRecognizerSF Create(System.String model,System.String config,OpenCvSharp.ObjDetect.DnnBackend backendId=Default,OpenCvSharp.ObjDetect.DnnTarget targetId=Cpu)"
+      ]
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.FaceRecognizerSF.create(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig[/C,/Ref];int backend_id=0;int target_id=0)-\u003EPtr\u003CFaceRecognizerSF\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_face_recognizer_sf_create_from_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.FaceRecognizerSF|method|public;static|OpenCvSharp.ObjDetect.FaceRecognizerSF Create(System.String framework,System.Byte[] modelBuffer,System.Byte[]? configBuffer,OpenCvSharp.ObjDetect.DnnBackend backendId=Default,OpenCvSharp.ObjDetect.DnnTarget targetId=Cpu)"
+      ]
+    },
+    {
+      "ordinal": 168,
+      "identity": "class cv.aruco.CharucoParameters",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.aruco.CharucoParameters.CharucoParameters()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoParameters|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 170,
+      "identity": "class cv.aruco.CharucoDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.aruco.CharucoDetector.CharucoDetector(CharucoBoard board[/C,/Ref];CharucoParameters charucoParams=CharucoParameters()[/C,/Ref];DetectorParameters detectorParams=DetectorParameters()[/C,/Ref];RefineParameters refineParams=RefineParameters()[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|constructor|public;instance|.ctor(OpenCvSharp.ObjDetect.CharucoBoard board,OpenCvSharp.ObjDetect.CharucoParameters? charucoParameters=null,OpenCvSharp.ObjDetect.ArucoDetectorParameters? detectorParameters=null,OpenCvSharp.ObjDetect.ArucoRefineParameters? refineParameters=null)"
+      ]
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.aruco.CharucoDetector.getBoard()-\u003ECharucoBoard",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_get_board"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoBoard GetBoard()"
+      ]
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.aruco.CharucoDetector.setBoard(CharucoBoard board[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_set_board"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetBoard(OpenCvSharp.ObjDetect.CharucoBoard board)"
+      ]
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.aruco.CharucoDetector.getCharucoParameters()-\u003ECharucoParameters",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_get_charuco_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoParameters GetCharucoParameters()"
+      ]
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.aruco.CharucoDetector.setCharucoParameters(CharucoParameters charucoParameters[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_set_charuco_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetCharucoParameters(OpenCvSharp.ObjDetect.CharucoParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.aruco.CharucoDetector.getDetectorParameters()-\u003EDetectorParameters",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_get_detector_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetDetectorParameters()"
+      ]
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.aruco.CharucoDetector.setDetectorParameters(DetectorParameters detectorParameters[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_set_detector_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetDetectorParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.aruco.CharucoDetector.getRefineParameters()-\u003ERefineParameters",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_get_refine_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoRefineParameters GetRefineParameters()"
+      ]
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.aruco.CharucoDetector.setRefineParameters(RefineParameters refineParameters[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_set_refine_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetRefineParameters(OpenCvSharp.ObjDetect.ArucoRefineParameters parameters)"
+      ]
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.aruco.CharucoDetector.detectBoard(Mat image;Mat charucoCorners[/O];Mat charucoIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_detect_board_count",
+        "jyppx_ocv_aruco_charuco_detector_detect_board_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetectionResult DetectBoard(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.aruco.CharucoDetector.detectDiamonds(Mat image;vector_Mat diamondCorners[/O];Mat diamondIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_charuco_detector_detect_diamonds_count",
+        "jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDiamondDetectionResult DetectDiamonds(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.aruco.drawDetectedCornersCharuco(Mat image[/IO];Mat charucoCorners;Mat charucoIds=Mat();Scalar cornerColor=Scalar(255, 0, 0))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_draw_detected_corners_charuco"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedCorners(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[] corners,System.Int32[]? ids=null,OpenCvSharp.Core.Scalar cornerColor=null)"
+      ]
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.aruco.drawDetectedDiamonds(Mat image[/IO];vector_Mat diamondCorners;Mat diamondIds=Mat();Scalar borderColor=Scalar(0, 0, 255))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected structured-parity batch has a version-neutral native ABI or exact existing buffer ABI, deterministic ownership, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_draw_detected_diamonds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedDiamonds(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[][] diamondCorners,OpenCvSharp.Core.Vec4i[]? diamondIds=null,OpenCvSharp.Core.Scalar borderColor=null)"
+      ]
+    },
+    {
+      "ordinal": 184,
+      "identity": "class cv.barcode.BarcodeDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.barcode.BarcodeDetector.BarcodeDetector()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.barcode.BarcodeDetector.BarcodeDetector(string super_resolution_model_path[/PATH,/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_create_with_super_resolution"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|constructor|public;instance|.ctor(System.String superResolutionModelPath)"
+      ]
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.barcode.BarcodeDetector.decodeWithType(Mat img;Mat points;vector_string decoded_info[/O,/Ref];vector_string decoded_type[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_decode_with_type_count",
+        "jyppx_ocv_barcode_detector_decode_with_type_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|method|public;instance|OpenCvSharp.ObjDetect.BarcodeDecodeResult DecodeWithType(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points)"
+      ]
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.barcode.BarcodeDetector.detectAndDecodeWithType(Mat img;vector_string decoded_info[/O,/Ref];vector_string decoded_type[/O,/Ref];Mat points=Mat()[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_detect_and_decode_with_type_count",
+        "jyppx_ocv_barcode_detector_detect_and_decode_with_type_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|method|public;instance|OpenCvSharp.ObjDetect.BarcodeDecodeResult DetectAndDecodeWithType(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null)"
+      ]
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.barcode.BarcodeDetector.getDownsamplingThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_get_downsampling_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|property|instance;get:public;set:public|System.Double DownsamplingThreshold"
+      ]
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.barcode.BarcodeDetector.setDownsamplingThreshold(double thresh)-\u003EBarcodeDetector",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_set_downsampling_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|property|instance;get:public;set:public|System.Double DownsamplingThreshold"
+      ]
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.barcode.BarcodeDetector.getDetectorScales(vector_float sizes[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_get_detector_scales_count",
+        "jyppx_ocv_barcode_detector_get_detector_scales_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|method|public;instance|System.Single[] GetDetectorScales()"
+      ]
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.barcode.BarcodeDetector.setDetectorScales(vector_float sizes[/C,/Ref])-\u003EBarcodeDetector",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_set_detector_scales"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|method|public;instance|OpenCvSharp.ObjDetect.BarcodeDetector SetDetectorScales(System.ReadOnlySpan\u003CSystem.Single\u003E scales)"
+      ]
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.barcode.BarcodeDetector.getGradientThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_get_gradient_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|property|instance;get:public;set:public|System.Double GradientThreshold"
+      ]
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.barcode.BarcodeDetector.setGradientThreshold(double thresh)-\u003EBarcodeDetector",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ObjDetect or Calib3D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_OBJDETECT; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_barcode_detector_set_gradient_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ObjDetect.BarcodeDetector|property|instance;get:public;set:public|System.Double GradientThreshold"
+      ]
+    }
+  ]
+}

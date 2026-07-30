@@ -1,0 +1,4260 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/VideoUpstreamMap/extract_video.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video.hpp",
+  "headerSha256": "5c1d80d5edbb3c681d4c17e01d34c541fa341f0a270ccd427e59601c5a4ed625",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video.hpp",
+      "sha256": "5c1d80d5edbb3c681d4c17e01d34c541fa341f0a270ccd427e59601c5a4ed625",
+      "includes": "tracking.hpp and background_segm.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/video.hpp",
+      "sha256": "67e31defa256825bb977d4126d7b00f53c90cb49638b8a9e43ec121568167e36",
+      "includes": "compatibility header with no parser-emitted declarations"
+    }
+  ],
+  "excludedPublicHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/legacy/constants_c.h",
+      "reason": "Legacy C constants are compatibility metadata, not part of the C++ parser-derived callable closure."
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/detail/tracking.private.hpp",
+      "reason": "Private implementation header is not public API."
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "sha256": "7ad962f7ff1c6e5a952d3014f95ef21e81dfc3d8bb3b5e73b01f16868919039e",
+      "startOrdinal": 0,
+      "declarationCount": 120
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "sha256": "f544ebb11d693ebc3a22fad5df5b55185821e33c40080fd675bd7899d43ecfed",
+      "startOrdinal": 120,
+      "declarationCount": 48
+    }
+  ],
+  "declarationCount": 168,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "enum",
+      "name": "cv.<unnamed>",
+      "identity": "enum cv.<unnamed>[const cv.OPTFLOW_USE_INITIAL_FLOW=4;const cv.OPTFLOW_LK_GET_MIN_EIGENVALS=8;const cv.OPTFLOW_FARNEBACK_GAUSSIAN=256]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.OPTFLOW_USE_INITIAL_FLOW",
+          "value": "4"
+        },
+        {
+          "name": "const cv.OPTFLOW_LK_GET_MIN_EIGENVALS",
+          "value": "8"
+        },
+        {
+          "name": "const cv.OPTFLOW_FARNEBACK_GAUSSIAN",
+          "value": "256"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.CamShift",
+      "identity": "cv.CamShift(Mat probImage;Rect window[/IO,/Ref];TermCriteria criteria)->RotatedRect",
+      "returnType": "RotatedRect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "probImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect",
+          "name": "window",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds an object center, size, and orientation.\n\n@param probImage Back projection of the object histogram. See calcBackProject.\n@param window Initial search window.\n@param criteria Stop criteria for the underlying meanShift.\nreturns\n(in old interfaces) Number of iterations CAMSHIFT took to converge\nThe function implements the CAMSHIFT object tracking algorithm @cite Bradski98 . First, it finds an\nobject center using meanShift and then adjusts the window size and finds the optimal rotation. The\nfunction returns the rotated rectangle structure that includes the object position, size, and\norientation. The next position of the search window can be obtained with RotatedRect::boundingRect()\n\nSee the OpenCV sample camshiftdemo.c that tracks colored objects.\n\n@note\n-   (Python) A sample explaining the camshift tracking algorithm can be found at\n    opencv_source_code/samples/python/snippets/camshift.py"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.meanShift",
+      "identity": "cv.meanShift(Mat probImage;Rect window[/IO,/Ref];TermCriteria criteria)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "probImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect",
+          "name": "window",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds an object on a back projection image.\n\n@param probImage Back projection of the object histogram. See calcBackProject for details.\n@param window Initial search window.\n@param criteria Stop criteria for the iterative search algorithm.\nreturns\n:   Number of iterations CAMSHIFT took to converge.\nThe function implements the iterative object search algorithm. It takes the input back projection of\nan object and the initial position. The mass center in window of the back projection image is\ncomputed and the search window center shifts to the mass center. The procedure is repeated until the\nspecified number of iterations criteria.maxCount is done or until the window center shifts by less\nthan criteria.epsilon. The algorithm is used inside CamShift and, unlike CamShift , the search\nwindow size or orientation do not change during the search. You can simply pass the output of\ncalcBackProject to this function. But better results can be obtained if you pre-filter the back\nprojection and remove the noise. For example, you can do this by retrieving connected components\nwith findContours , throwing away contours with small area ( contourArea ), and rendering the\nremaining contours with drawContours."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.buildOpticalFlowPyramid",
+      "identity": "cv.buildOpticalFlowPyramid(Mat img;vector_Mat pyramid[/O];Size winSize;int maxLevel;bool withDerivatives=true;int pyrBorder=BORDER_REFLECT_101;int derivBorder=BORDER_CONSTANT;bool tryReuseInputImage=true)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "pyramid",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "winSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxLevel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "withDerivatives",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "pyrBorder",
+          "default": "BORDER_REFLECT_101",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "derivBorder",
+          "default": "BORDER_CONSTANT",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "tryReuseInputImage",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructs the image pyramid which can be passed to calcOpticalFlowPyrLK.\n\n@param img 8-bit input image.\n@param pyramid output pyramid.\n@param winSize window size of optical flow algorithm. Must be not less than winSize argument of\ncalcOpticalFlowPyrLK. It is needed to calculate required padding for pyramid levels.\n@param maxLevel 0-based maximal pyramid level number.\n@param withDerivatives set to precompute gradients for the every pyramid level. If pyramid is\nconstructed without the gradients then calcOpticalFlowPyrLK will calculate them internally.\n@param pyrBorder the border mode for pyramid layers.\n@param derivBorder the border mode for gradients.\n@param tryReuseInputImage put ROI of input image into the pyramid if possible. You can pass false\nto force data copying.\n@return number of levels in constructed pyramid. Can be less than maxLevel."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.calcOpticalFlowPyrLK",
+      "identity": "cv.calcOpticalFlowPyrLK(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err[/O];Size winSize=Size(21,21);int maxLevel=3;TermCriteria criteria=TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 0.01);int flags=0;double minEigThreshold=1e-4)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "prevImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "nextImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "prevPts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "nextPts",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "status",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "err",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "winSize",
+          "default": "Size(21,21)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxLevel",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 0.01)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minEigThreshold",
+          "default": "1e-4",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates an optical flow for a sparse feature set using the iterative Lucas-Kanade method with\npyramids.\n\n@param prevImg first 8-bit input image or pyramid constructed by buildOpticalFlowPyramid.\n@param nextImg second input image or pyramid of the same size and the same type as prevImg.\n@param prevPts vector of 2D points for which the flow needs to be found; point coordinates must be\nsingle-precision floating-point numbers.\n@param nextPts output vector of 2D points (with single-precision floating-point coordinates)\ncontaining the calculated new positions of input features in the second image; when\nOPTFLOW_USE_INITIAL_FLOW flag is passed, the vector must have the same size as in the input.\n@param status output status vector (of unsigned chars); each element of the vector is set to 1 if\nthe flow for the corresponding features has been found, otherwise, it is set to 0.\n@param err output vector of errors; each element of the vector is set to an error for the\ncorresponding feature, type of the error measure can be set in flags parameter; if the flow wasn't\nfound then the error is not defined (use the status parameter to find such cases).\n@param winSize size of the search window at each pyramid level.\n@param maxLevel 0-based maximal pyramid level number; if set to 0, pyramids are not used (single\nlevel), if set to 1, two levels are used, and so on; if pyramids are passed to input then\nalgorithm will use as many levels as pyramids have but no more than maxLevel.\n@param criteria parameter, specifying the termination criteria of the iterative search algorithm\n(after the specified maximum number of iterations criteria.maxCount or when the search window\nmoves by less than criteria.epsilon.\n@param flags operation flags:\n -   **OPTFLOW_USE_INITIAL_FLOW** uses initial estimations, stored in nextPts; if the flag is\n     not set, then prevPts is copied to nextPts and is considered the initial estimate.\n -   **OPTFLOW_LK_GET_MIN_EIGENVALS** use minimum eigen values as an error measure (see\n     minEigThreshold description); if the flag is not set, then L1 distance between patches\n     around the original and a moved point, divided by number of pixels in a window, is used as a\n     error measure.\n@param minEigThreshold the algorithm calculates the minimum eigen value of a 2x2 normal matrix of\noptical flow equations (this matrix is called a spatial gradient matrix in @cite Bouguet00), divided\nby number of pixels in a window; if this value is less than minEigThreshold, then a corresponding\nfeature is filtered out and its flow is not processed, so it allows to remove bad points and get a\nperformance boost.\n\nThe function implements a sparse iterative version of the Lucas-Kanade optical flow in pyramids. See\n@cite Bouguet00 . The function is parallelized with the TBB library.\n\n@note Some examples:\n\n-   An example using the Lucas-Kanade optical flow algorithm can be found at\n    opencv_source_code/samples/cpp/lkdemo.cpp\n-   (Python) An example using the Lucas-Kanade optical flow algorithm can be found at\n    opencv_source_code/samples/python/lk_track.py\n-   (Python) An example using the Lucas-Kanade tracker for homography matching can be found at\n    opencv_source_code/samples/python/lk_homography.py"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.calcOpticalFlowFarneback",
+      "identity": "cv.calcOpticalFlowFarneback(Mat prev;Mat next;Mat flow[/IO];double pyr_scale;int levels;int winsize;int iterations;int poly_n;double poly_sigma;int flags)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "prev",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "next",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "flow",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "pyr_scale",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "levels",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "winsize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "iterations",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "poly_n",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "poly_sigma",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a dense optical flow using the Gunnar Farneback's algorithm.\n\n@param prev first 8-bit single-channel input image.\n@param next second input image of the same size and the same type as prev.\n@param flow computed flow image that has the same size as prev and type CV_32FC2.\n@param pyr_scale parameter, specifying the image scale (\\<1) to build pyramids for each image;\npyr_scale=0.5 means a classical pyramid, where each next layer is twice smaller than the previous\none.\n@param levels number of pyramid layers including the initial image; levels=1 means that no extra\nlayers are created and only the original images are used.\n@param winsize averaging window size; larger values increase the algorithm robustness to image\nnoise and give more chances for fast motion detection, but yield more blurred motion field.\n@param iterations number of iterations the algorithm does at each pyramid level.\n@param poly_n size of the pixel neighborhood used to find polynomial expansion in each pixel;\nlarger values mean that the image will be approximated with smoother surfaces, yielding more\nrobust algorithm and more blurred motion field, typically poly_n =5 or 7.\n@param poly_sigma standard deviation of the Gaussian that is used to smooth derivatives used as a\nbasis for the polynomial expansion; for poly_n=5, you can set poly_sigma=1.1, for poly_n=7, a\ngood value would be poly_sigma=1.5.\n@param flags operation flags that can be a combination of the following:\n -   **OPTFLOW_USE_INITIAL_FLOW** uses the input flow as an initial flow approximation.\n -   **OPTFLOW_FARNEBACK_GAUSSIAN** uses the Gaussian \\f$\\texttt{winsize}\\times\\texttt{winsize}\\f$\n     filter instead of a box filter of the same size for optical flow estimation; usually, this\n     option gives z more accurate flow than with a box filter, at the cost of lower speed;\n     normally, winsize for a Gaussian window should be set to a larger value to achieve the same\n     level of robustness.\n\nThe function finds an optical flow for each prev pixel using the @cite Farneback2003 algorithm so that\n\n\\f[\\texttt{prev} (y,x)  \\sim \\texttt{next} ( y + \\texttt{flow} (y,x)[1],  x + \\texttt{flow} (y,x)[0])\\f]\n\n@note Some examples:\n\n-   An example using the optical flow algorithm described by Gunnar Farneback can be found at\n    opencv_source_code/samples/cpp/fback.cpp\n-   (Python) An example using the optical flow algorithm described by Gunnar Farneback can be\n    found at opencv_source_code/samples/python/opt_flow.py"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "enum",
+      "name": "cv.<unnamed>",
+      "identity": "enum cv.<unnamed>[const cv.MOTION_TRANSLATION=0;const cv.MOTION_EUCLIDEAN=1;const cv.MOTION_AFFINE=2;const cv.MOTION_HOMOGRAPHY=3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.MOTION_TRANSLATION",
+          "value": "0"
+        },
+        {
+          "name": "const cv.MOTION_EUCLIDEAN",
+          "value": "1"
+        },
+        {
+          "name": "const cv.MOTION_AFFINE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.MOTION_HOMOGRAPHY",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.computeECC",
+      "identity": "cv.computeECC(Mat templateImage;Mat inputImage;Mat inputMask=Mat())->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "templateImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputMask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the Enhanced Correlation Coefficient (ECC) value between two images\n\nThe Enhanced Correlation Coefficient (ECC) is a normalized measure of similarity between two images @cite EP08.\nThe result lies in the range [-1, 1], where 1 corresponds to perfect similarity (modulo affine shift and scale),\n0 indicates no correlation, and -1 indicates perfect negative correlation.\n\nFor single-channel images, the ECC is defined as:\n\n\\f[\n\\mathrm{ECC}(I, T) = \\frac{\\sum_{x} (I(x) - \\mu_I)(T(x) - \\mu_T)}\n{\\sqrt{\\sum_{x} (I(x) - \\mu_I)^2} \\cdot \\sqrt{\\sum_{x} (T(x) - \\mu_T)^2}}\n\\f]\n\nFor multi-channel images (e.g., 3-channel RGB), the formula generalizes to:\n\n\\f[\n\\mathrm{ECC}(I, T) =\n\\frac{\\sum_{x} \\sum_{c=1}^{C} (I_c(x) - \\mu_{I_c})(T_c(x) - \\mu_{T_c})}\n{\\sqrt{\\sum_{x} \\sum_{c=1}^{C} (I_c(x) - \\mu_{I_c})^2} \\cdot\n \\sqrt{\\sum_{x} \\sum_{c=1}^{C} (T_c(x) - \\mu_{T_c})^2}}\n\\f]\n\nWhere:\n- \\f$I_c(x), T_c(x)\\f$ are the values of channel \\f$c\\f$ at spatial location \\f$x\\f$,\n- \\f$\\mu_{I_c}, \\mu_{T_c}\\f$ are the mean values of channel \\f$c\\f$ over the masked region (if provided),\n- \\f$C\\f$ is the number of channels (only 1 and 3 are currently supported),\n- The sums run over all pixels \\f$x\\f$ in the image domain (optionally restricted by mask).\n\n@param templateImage Input template image; must have either 1 or 3 channels and be of type CV_8U, CV_16U, CV_32F, or CV_64F.\n@param inputImage Input image to be compared with the template; must have the same type and number of channels as templateImage.\n@param inputMask Optional single-channel mask to specify the valid region of interest in inputImage and templateImage.\n\n@return The ECC similarity coefficient in the range [-1, 1].\n\n@sa findTransformECC"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.findTransformECC",
+      "identity": "cv.findTransformECC(Mat templateImage;Mat inputImage;Mat warpMatrix[/IO];int motionType;TermCriteria criteria;Mat inputMask;int gaussFiltSize)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "templateImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "warpMatrix",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "motionType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "gaussFiltSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the geometric transform (warp) between two images in terms of the ECC criterion @cite EP08 .\n\n@param templateImage 1 or 3 channel template image; CV_8U, CV_16U, CV_32F, CV_64F type.\n@param inputImage input image which should be warped with the final warpMatrix in\norder to provide an image similar to templateImage, same type as templateImage.\n@param warpMatrix floating-point \\f$2\\times 3\\f$ or \\f$3\\times 3\\f$ mapping matrix (warp).\n@param motionType parameter, specifying the type of motion:\n -   **MOTION_TRANSLATION** sets a translational motion model; warpMatrix is \\f$2\\times 3\\f$ with\n     the first \\f$2\\times 2\\f$ part being the unity matrix and the rest two parameters being\n     estimated.\n -   **MOTION_EUCLIDEAN** sets a Euclidean (rigid) transformation as motion model; three\n     parameters are estimated; warpMatrix is \\f$2\\times 3\\f$.\n -   **MOTION_AFFINE** sets an affine motion model (DEFAULT); six parameters are estimated;\n     warpMatrix is \\f$2\\times 3\\f$.\n -   **MOTION_HOMOGRAPHY** sets a homography as a motion model; eight parameters are\n     estimated;\\`warpMatrix\\` is \\f$3\\times 3\\f$.\n@param criteria parameter, specifying the termination criteria of the ECC algorithm;\ncriteria.epsilon defines the threshold of the increment in the correlation coefficient between two\niterations (a negative criteria.epsilon makes criteria.maxcount the only termination criterion).\nDefault values are shown in the declaration above.\n@param inputMask An optional single channel mask to indicate valid values of inputImage.\n@param gaussFiltSize An optional value indicating size of gaussian blur filter; (DEFAULT: 5)\n\nThe function estimates the optimum transformation (warpMatrix) with respect to ECC criterion\n(@cite EP08), that is\n\n\\f[\\texttt{warpMatrix} = \\arg\\max_{W} \\texttt{ECC}(\\texttt{templateImage}(x,y),\\texttt{inputImage}(x',y'))\\f]\n\nwhere\n\n\\f[\\begin{bmatrix} x' \\\\ y' \\end{bmatrix} = W \\cdot \\begin{bmatrix} x \\\\ y \\\\ 1 \\end{bmatrix}\\f]\n\n(the equation holds with homogeneous coordinates for homography). It returns the final enhanced\ncorrelation coefficient, that is the correlation coefficient between the template image and the\nfinal warped input image. When a \\f$3\\times 3\\f$ matrix is given with motionType =0, 1 or 2, the third\nrow is ignored.\n\nUnlike findHomography and estimateRigidTransform, the function findTransformECC implements an\narea-based alignment that builds on intensity similarities. In essence, the function updates the\ninitial transformation that roughly aligns the images. If this information is missing, the identity\nwarp (unity matrix) is used as an initialization. Note that if images undergo strong\ndisplacements/rotations, an initial transformation that roughly aligns the images is necessary\n(e.g., a simple euclidean/similarity transform that allows for the images showing the same image\ncontent approximately). Use inverse warping in the second image to take an image close to the first\none, i.e. use the flag WARP_INVERSE_MAP with warpAffine or warpPerspective. See also the OpenCV\nsample image_alignment.cpp that demonstrates the use of the function. Note that the function throws\nan exception if algorithm does not converges.\n\n@sa\ncomputeECC, estimateAffine2D, estimateAffinePartial2D, findHomography"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.findTransformECC",
+      "identity": "cv.findTransformECC(Mat templateImage;Mat inputImage;Mat warpMatrix[/IO];int motionType=MOTION_AFFINE;TermCriteria criteria=TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 50, 0.001);Mat inputMask=Mat())->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "templateImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "warpMatrix",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "motionType",
+          "default": "MOTION_AFFINE",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 50, 0.001)",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputMask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.findTransformECCWithMask",
+      "identity": "cv.findTransformECCWithMask(Mat templateImage;Mat inputImage;Mat templateMask;Mat inputMask;Mat warpMatrix[/IO];int motionType=MOTION_AFFINE;TermCriteria criteria=TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 50, 1e-6);int gaussFiltSize=5)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "templateImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputImage",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "templateMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inputMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "warpMatrix",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "motionType",
+          "default": "MOTION_AFFINE",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 50, 1e-6)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "gaussFiltSize",
+          "default": "5",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the geometric transform (warp) between two images in terms of the ECC criterion @cite EP08\nusing validity masks for both the template and the input images.\n\nThis function extends findTransformECC() by adding a mask for the template image.\nThe Enhanced Correlation Coefficient is evaluated only over pixels that are valid in both images:\non each iteration inputMask is warped into the template frame and combined with templateMask, and\nonly the intersection of these masks contributes to the objective function.\n\n@param templateImage 1 or 3 channel template image; CV_8U, CV_16U, CV_32F, CV_64F type.\n@param inputImage input image which should be warped with the final warpMatrix in\norder to provide an image similar to templateImage, same type as templateImage.\n@param templateMask single-channel 8-bit mask for templateImage indicating valid pixels\nto be used in the alignment. Must have the same size as templateImage.\n@param inputMask single-channel 8-bit mask for inputImage indicating valid pixels\nbefore warping. Must have the same size as inputImage.\n@param warpMatrix floating-point \\f$2\\times 3\\f$ or \\f$3\\times 3\\f$ mapping matrix (warp).\n@param motionType parameter, specifying the type of motion:\n -   **MOTION_TRANSLATION** sets a translational motion model; warpMatrix is \\f$2\\times 3\\f$ with\n     the first \\f$2\\times 2\\f$ part being the unity matrix and the rest two parameters being\n     estimated.\n -   **MOTION_EUCLIDEAN** sets a Euclidean (rigid) transformation as motion model; three\n     parameters are estimated; warpMatrix is \\f$2\\times 3\\f$.\n -   **MOTION_AFFINE** sets an affine motion model (DEFAULT); six parameters are estimated;\n     warpMatrix is \\f$2\\times 3\\f$.\n -   **MOTION_HOMOGRAPHY** sets a homography as a motion model; eight parameters are\n     estimated; warpMatrix is \\f$3\\times 3\\f$.\n@param criteria parameter, specifying the termination criteria of the ECC algorithm;\ncriteria.epsilon defines the threshold of the increment in the correlation coefficient between two\niterations (a negative criteria.epsilon makes criteria.maxcount the only termination criterion).\nDefault values are shown in the declaration above.\n@param gaussFiltSize size of the Gaussian blur filter used for smoothing images and masks\nbefore computing the alignment (DEFAULT: 5).\n\n@sa\nfindTransformECC, computeECC, estimateAffine2D, estimateAffinePartial2D, findHomography"
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.ECCParameters",
+      "identity": "class cv.ECCParameters",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "motionType",
+          "default": " MOTION_AFFINE",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "TermCriteria",
+          "name": "criteria",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "itersPerLevel",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "gaussFiltSize",
+          "default": " 5",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": " 4",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "interpolation",
+          "default": " INTER_LINEAR",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief struct ECCParameters is used by findTransformECCMultiScale\n\n@param motionType parameter, specifying the type of motion:\n -   **MOTION_TRANSLATION** sets a translational motion model; warpMatrix is \\f$2\\times 3\\f$ with\n     the first \\f$2\\times 2\\f$ part being the unity matrix and the rest two parameters being\n     estimated.\n -   **MOTION_EUCLIDEAN** sets a Euclidean (rigid) transformation as motion model; three\n     parameters are estimated; warpMatrix is \\f$2\\times 3\\f$.\n -   **MOTION_AFFINE** sets an affine motion model (DEFAULT); six parameters are estimated;\n     warpMatrix is \\f$2\\times 3\\f$.\n -   **MOTION_HOMOGRAPHY** sets a homography as a motion model; eight parameters are\n     estimated;\\`warpMatrix\\` is \\f$3\\times 3\\f$.\n@param criteria parameter, specifying the termination criteria of the ECC algorithm;\ncriteria.epsilon defines the threshold of the increment in the correlation coefficient between two\niterations (a negative criteria.epsilon makes criteria.maxcount the only termination criterion).\nDefault values are shown in the declaration above.\n@param itersPerLevel Criterion extension: distribution of iterations limit over pyramid levels.\nCan be empty, in this case, this algorithm will use criteria.maxCount on each level.\n@param gaussFiltSize An optional value indicating size of gaussian blur filter; (DEFAULT: 5)\n@param nlevels An optional value indicating amount of levels in the pyramid; (DEFAULT: 4)\n@param interpolation Type of warp interpolation. Possible values are INTER_NEAREST and INTER_LINEAR.\nAffects accuracy, especially when motionType == MOTION_TRANSLATION. (DEFAULT: INTER_LINEAR)"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.ECCParameters.ECCParameters",
+      "identity": "cv.ECCParameters.ECCParameters()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.findTransformECCMultiScale",
+      "identity": "cv.findTransformECCMultiScale(Mat reference;Mat sample;Mat warpMatrix[/IO];ECCParameters eccParams=ECCParameters()[/C,/Ref];Mat referenceMask=Mat();Mat sampleMask=Mat())->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "reference",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sample",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "warpMatrix",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "ECCParameters",
+          "name": "eccParams",
+          "default": "ECCParameters()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "referenceMask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sampleMask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the geometric transform (warp) between two images in terms of the ECC criterion @cite EP08. Uses pyramids.\n\n@param reference Single channel reference image; CV_8U, CV_16U, CV_32F, CV_64F type.\n@param sample sample image which should be warped with the final warpMatrix in\norder to provide an image similar to reference, same type as reference.\n@param warpMatrix floating-point \\f$2\\times 3\\f$ or \\f$3\\times 3\\f$ mapping matrix (warp).\n@param eccParams List of the algorithm parameters. See ECCParameters for details.\n@param referenceMask An optional single channel mask to indicate valid values of reference.\n@param sampleMask An optional single channel mask to indicate valid values of sample.\n\nThe function estimates the optimum transformation (warpMatrix) with respect to ECC criterion\n(@cite EP08), that is\n\n\\f[\\texttt{warpMatrix} = \\arg\\max_{W} \\texttt{ECC}(\\texttt{templateImage}(x,y),\\texttt{inputImage}(x',y'))\\f]\n\nwhere\n\n\\f[\\begin{bmatrix} x' \\\\ y' \\end{bmatrix} = W \\cdot \\begin{bmatrix} x \\\\ y \\\\ 1 \\end{bmatrix}\\f]\n\n(the equation holds with homogeneous coordinates for homography). It returns the final enhanced\ncorrelation coefficient, that is the correlation coefficient between the template image and the\nfinal warped input image. When a \\f$3\\times 3\\f$ matrix is given with motionType =0, 1 or 2, the third\nrow is ignored.\n\nUnlike findHomography and estimateRigidTransform, the function findTransformECCMultiScale implements\nan area-based alignment that builds on intensity similarities. In essence, the function updates the\ninitial transformation that roughly aligns the images. If this information is missing, the identity\nwarp (unity matrix) is used as an initialization. Note that if images undergo strong\ndisplacements/rotations, an initial transformation that roughly aligns the images is necessary\n(e.g., a simple euclidean/similarity transform that allows for the images showing the same image\ncontent approximately). Use inverse warping in the second image to take an image close to the first\none, i.e. use the flag WARP_INVERSE_MAP with warpAffine or warpPerspective. See also the OpenCV\nsample image_alignment.cpp that demonstrates the use of the function. Note that the function throws\nan exception if algorithm does not converges.\nUnlike findTransformECC, the findTransformECCMultiScale uses pyramids, making function more stable\nand able to handle correctly more sophisticated cases.\n\n@sa\ncomputeECC, estimateAffine2D, estimateAffinePartial2D, findHomography"
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.KalmanFilter",
+      "identity": "class cv.KalmanFilter",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "statePre",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "statePost",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "transitionMatrix",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "controlMatrix",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "measurementMatrix",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "processNoiseCov",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "measurementNoiseCov",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "errorCovPre",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "gain",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "errorCovPost",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Kalman filter class.\n\nThe class implements a standard Kalman filter <http://en.wikipedia.org/wiki/Kalman_filter>,\n@cite Welch95 . However, you can modify transitionMatrix, controlMatrix, and measurementMatrix to get\nan extended Kalman filter functionality.\n@note In C API when CvKalman\\* kalmanFilter structure is not needed anymore, it should be released\nwith cvReleaseKalman(&kalmanFilter)"
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.KalmanFilter.KalmanFilter",
+      "identity": "cv.KalmanFilter.KalmanFilter()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.KalmanFilter.KalmanFilter",
+      "identity": "cv.KalmanFilter.KalmanFilter(int dynamParams;int measureParams;int controlParams=0;int type=CV_32F)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "dynamParams",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "measureParams",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "controlParams",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "type",
+          "default": "CV_32F",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param dynamParams Dimensionality of the state.\n    @param measureParams Dimensionality of the measurement.\n    @param controlParams Dimensionality of the control vector.\n    @param type Type of the created matrices that should be CV_32F or CV_64F."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.KalmanFilter.predict",
+      "identity": "cv.KalmanFilter.predict(Mat control=Mat()[/C,/Ref])->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "control",
+          "default": "Mat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a predicted state.\n\n    @param control The optional input control"
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.KalmanFilter.correct",
+      "identity": "cv.KalmanFilter.correct(Mat measurement[/C,/Ref])->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "measurement",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Updates the predicted state from the measurement.\n\n    @param measurement The measured system parameters"
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.readOpticalFlow",
+      "identity": "cv.readOpticalFlow(String path[/C,/Ref])->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Read a .flo file\n\n @param path Path to the file to be loaded\n\n The function readOpticalFlow loads a flow field from a file and returns it as a single matrix.\n Resulting Mat has a type CV_32FC2 - floating-point, 2-channel. First channel corresponds to the\n flow in the horizontal direction (u), second - vertical (v)."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.writeOpticalFlow",
+      "identity": "cv.writeOpticalFlow(String path[/C,/Ref];Mat flow)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "path",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "flow",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Write a .flo to disk\n\n @param path Path to the file to be written\n @param flow Flow field to be stored\n\n The function stores a flow field in a file, returns true on success, false otherwise.\n The flow field must be a 2-channel, floating-point matrix (CV_32FC2). First channel corresponds\n to the flow in the horizontal direction (u), second - vertical (v)."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.DenseOpticalFlow",
+      "identity": "class cv.DenseOpticalFlow",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "Base class for dense optical flow algorithms"
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DenseOpticalFlow.calc",
+      "identity": "cv.DenseOpticalFlow.calc(Mat I0;Mat I1;Mat flow[/IO])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "I0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "I1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "flow",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates an optical flow.\n\n    @param I0 first 8-bit single-channel input image.\n    @param I1 second input image of the same size and the same type as prev.\n    @param flow computed flow image that has the same size as prev and type CV_32FC2."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DenseOpticalFlow.collectGarbage",
+      "identity": "cv.DenseOpticalFlow.collectGarbage()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Releases all inner buffers."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.SparseOpticalFlow",
+      "identity": "class cv.SparseOpticalFlow",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base interface for sparse optical flow algorithms."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparseOpticalFlow.calc",
+      "identity": "cv.SparseOpticalFlow.calc(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err=cv::Mat()[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "prevImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "nextImg",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "prevPts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "nextPts",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "status",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "err",
+          "default": "cv::Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates a sparse optical flow.\n\n    @param prevImg First input image.\n    @param nextImg Second input image of the same size and the same type as prevImg.\n    @param prevPts Vector of 2D points for which the flow needs to be found.\n    @param nextPts Output vector of 2D points containing the calculated new positions of input features in the second image.\n    @param status Output status vector. Each element of the vector is set to 1 if the\n                  flow for the corresponding features has been found. Otherwise, it is set to 0.\n    @param err Optional output vector that contains error response for each point (inverse confidence)."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.FarnebackOpticalFlow",
+      "identity": "class cv.FarnebackOpticalFlow",
+      "returnType": ": cv::DenseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::DenseOpticalFlow",
+      "documentation": "@brief Class computing a dense optical flow using the Gunnar Farneback's algorithm."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getNumLevels",
+      "identity": "cv.FarnebackOpticalFlow.getNumLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setNumLevels",
+      "identity": "cv.FarnebackOpticalFlow.setNumLevels(int numLevels)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "numLevels",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getPyrScale",
+      "identity": "cv.FarnebackOpticalFlow.getPyrScale()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setPyrScale",
+      "identity": "cv.FarnebackOpticalFlow.setPyrScale(double pyrScale)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "pyrScale",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getFastPyramids",
+      "identity": "cv.FarnebackOpticalFlow.getFastPyramids()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setFastPyramids",
+      "identity": "cv.FarnebackOpticalFlow.setFastPyramids(bool fastPyramids)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "fastPyramids",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getWinSize",
+      "identity": "cv.FarnebackOpticalFlow.getWinSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setWinSize",
+      "identity": "cv.FarnebackOpticalFlow.setWinSize(int winSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "winSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getNumIters",
+      "identity": "cv.FarnebackOpticalFlow.getNumIters()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setNumIters",
+      "identity": "cv.FarnebackOpticalFlow.setNumIters(int numIters)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "numIters",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getPolyN",
+      "identity": "cv.FarnebackOpticalFlow.getPolyN()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setPolyN",
+      "identity": "cv.FarnebackOpticalFlow.setPolyN(int polyN)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "polyN",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getPolySigma",
+      "identity": "cv.FarnebackOpticalFlow.getPolySigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setPolySigma",
+      "identity": "cv.FarnebackOpticalFlow.setPolySigma(double polySigma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "polySigma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.getFlags",
+      "identity": "cv.FarnebackOpticalFlow.getFlags()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.setFlags",
+      "identity": "cv.FarnebackOpticalFlow.setFlags(int flags)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.FarnebackOpticalFlow.create",
+      "identity": "cv.FarnebackOpticalFlow.create(int numLevels=5;double pyrScale=0.5;bool fastPyramids=false;int winSize=13;int numIters=10;int polyN=5;double polySigma=1.1;int flags=0)->Ptr<FarnebackOpticalFlow>",
+      "returnType": "Ptr<FarnebackOpticalFlow>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "numLevels",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "pyrScale",
+          "default": "0.5",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "fastPyramids",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "winSize",
+          "default": "13",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "numIters",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "polyN",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "polySigma",
+          "default": "1.1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.VariationalRefinement",
+      "identity": "class cv.VariationalRefinement",
+      "returnType": ": cv::DenseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::DenseOpticalFlow",
+      "documentation": "@brief Variational optical flow refinement\n\nThis class implements variational refinement of the input flow field, i.e.\nit uses input flow to initialize the minimization of the following functional:\n\\f$E(U) = \\int_{\\Omega} \\delta \\Psi(E_I) + \\gamma \\Psi(E_G) + \\alpha \\Psi(E_S) \\f$,\nwhere \\f$E_I,E_G,E_S\\f$ are color constancy, gradient constancy and smoothness terms\nrespectively. \\f$\\Psi(s^2)=\\sqrt{s^2+\\epsilon^2}\\f$ is a robust penalizer to limit the\ninfluence of outliers. A complete formulation and a description of the minimization\nprocedure can be found in @cite Brox2004"
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.calcUV",
+      "identity": "cv.VariationalRefinement.calcUV(Mat I0;Mat I1;Mat flow_u[/IO];Mat flow_v[/IO])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "I0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "I1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "flow_u",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "flow_v",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief @ref calc function overload to handle separate horizontal (u) and vertical (v) flow components\n(to avoid extra splits/merges)"
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getFixedPointIterations",
+      "identity": "cv.VariationalRefinement.getFixedPointIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Number of outer (fixed-point) iterations in the minimization procedure.\n@see setFixedPointIterations"
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setFixedPointIterations",
+      "identity": "cv.VariationalRefinement.setFixedPointIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getFixedPointIterations @see getFixedPointIterations"
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getSorIterations",
+      "identity": "cv.VariationalRefinement.getSorIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Number of inner successive over-relaxation (SOR) iterations\n        in the minimization procedure to solve the respective linear system.\n@see setSorIterations"
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setSorIterations",
+      "identity": "cv.VariationalRefinement.setSorIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getSorIterations @see getSorIterations"
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getOmega",
+      "identity": "cv.VariationalRefinement.getOmega()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Relaxation factor in SOR\n@see setOmega"
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setOmega",
+      "identity": "cv.VariationalRefinement.setOmega(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getOmega @see getOmega"
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getAlpha",
+      "identity": "cv.VariationalRefinement.getAlpha()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Weight of the smoothness term\n@see setAlpha"
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setAlpha",
+      "identity": "cv.VariationalRefinement.setAlpha(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAlpha @see getAlpha"
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getDelta",
+      "identity": "cv.VariationalRefinement.getDelta()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Weight of the color constancy term\n@see setDelta"
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setDelta",
+      "identity": "cv.VariationalRefinement.setDelta(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getDelta @see getDelta"
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getGamma",
+      "identity": "cv.VariationalRefinement.getGamma()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Weight of the gradient constancy term\n@see setGamma"
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setGamma",
+      "identity": "cv.VariationalRefinement.setGamma(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGamma @see getGamma"
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.getEpsilon",
+      "identity": "cv.VariationalRefinement.getEpsilon()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Norm value shift for robust penalizer\n@see setEpsilon"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.setEpsilon",
+      "identity": "cv.VariationalRefinement.setEpsilon(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getEpsilon @see getEpsilon"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.VariationalRefinement.create",
+      "identity": "cv.VariationalRefinement.create()->Ptr<VariationalRefinement>",
+      "returnType": "Ptr<VariationalRefinement>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of VariationalRefinement"
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.DISOpticalFlow",
+      "identity": "class cv.DISOpticalFlow",
+      "returnType": ": cv::DenseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::DenseOpticalFlow",
+      "documentation": "@brief DIS optical flow algorithm.\n\nThis class implements the Dense Inverse Search (DIS) optical flow algorithm. More\ndetails about the algorithm can be found at @cite Kroeger2016 . Includes three presets with preselected\nparameters to provide reasonable trade-off between speed and quality. However, even the slowest preset is\nstill relatively fast, use DeepFlow if you need better quality and don't care about speed.\n\nThis implementation includes several additional features compared to the algorithm described in the paper,\nincluding spatial propagation of flow vectors (@ref getUseSpatialPropagation), as well as an option to\nutilize an initial flow approximation passed to @ref calc (which is, essentially, temporal propagation,\nif the previous frame's flow field is passed)."
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "enum",
+      "name": "cv.DISOpticalFlow.<unnamed>",
+      "identity": "enum cv.DISOpticalFlow.<unnamed>[const cv.DISOpticalFlow.PRESET_ULTRAFAST=0;const cv.DISOpticalFlow.PRESET_FAST=1;const cv.DISOpticalFlow.PRESET_MEDIUM=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.DISOpticalFlow.PRESET_ULTRAFAST",
+          "value": "0"
+        },
+        {
+          "name": "const cv.DISOpticalFlow.PRESET_FAST",
+          "value": "1"
+        },
+        {
+          "name": "const cv.DISOpticalFlow.PRESET_MEDIUM",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getFinestScale",
+      "identity": "cv.DISOpticalFlow.getFinestScale()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finest level of the Gaussian pyramid on which the flow is computed (zero level\n        corresponds to the original image resolution). The final flow is obtained by bilinear upscaling.\n@see setFinestScale"
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setFinestScale",
+      "identity": "cv.DISOpticalFlow.setFinestScale(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getFinestScale @see getFinestScale"
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setCoarsestScale",
+      "identity": "cv.DISOpticalFlow.setCoarsestScale(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the coarsest scale\n    @param val Coarsest level of the Gaussian pyramid on which the flow is computed.\n    If set to -1, the auto-computed coarsest scale will be used."
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getCoarsestScale",
+      "identity": "cv.DISOpticalFlow.getCoarsestScale()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Gets the coarsest scale"
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getPatchSize",
+      "identity": "cv.DISOpticalFlow.getPatchSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Size of an image patch for matching (in pixels). Normally, default 8x8 patches work well\n        enough in most cases.\n@see setPatchSize"
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setPatchSize",
+      "identity": "cv.DISOpticalFlow.setPatchSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getPatchSize @see getPatchSize"
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getPatchStride",
+      "identity": "cv.DISOpticalFlow.getPatchStride()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Stride between neighbor patches. Must be less than patch size. Lower values correspond\n        to higher flow quality.\n@see setPatchStride"
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setPatchStride",
+      "identity": "cv.DISOpticalFlow.setPatchStride(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getPatchStride @see getPatchStride"
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getGradientDescentIterations",
+      "identity": "cv.DISOpticalFlow.getGradientDescentIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Maximum number of gradient descent iterations in the patch inverse search stage. Higher values\n        may improve quality in some cases.\n@see setGradientDescentIterations"
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setGradientDescentIterations",
+      "identity": "cv.DISOpticalFlow.setGradientDescentIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGradientDescentIterations @see getGradientDescentIterations"
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getVariationalRefinementIterations",
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Number of fixed point iterations of variational refinement per scale. Set to zero to\n        disable variational refinement completely. Higher values will typically result in more smooth and\n        high-quality flow.\n@see setGradientDescentIterations"
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setVariationalRefinementIterations",
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGradientDescentIterations @see getGradientDescentIterations"
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getVariationalRefinementAlpha",
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementAlpha()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Weight of the smoothness term\n@see setVariationalRefinementAlpha"
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setVariationalRefinementAlpha",
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementAlpha(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getVariationalRefinementAlpha @see getVariationalRefinementAlpha"
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getVariationalRefinementDelta",
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementDelta()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Weight of the color constancy term\n@see setVariationalRefinementDelta"
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setVariationalRefinementDelta",
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementDelta(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getVariationalRefinementDelta @see getVariationalRefinementDelta"
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getVariationalRefinementGamma",
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementGamma()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Weight of the gradient constancy term\n@see setVariationalRefinementGamma"
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setVariationalRefinementGamma",
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementGamma(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getVariationalRefinementGamma @see getVariationalRefinementGamma"
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getVariationalRefinementEpsilon",
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementEpsilon()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Norm value shift for robust penalizer\n@see setVariationalRefinementEpsilon"
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setVariationalRefinementEpsilon",
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementEpsilon(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getVariationalRefinementEpsilon @see getVariationalRefinementEpsilon"
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getUseMeanNormalization",
+      "identity": "cv.DISOpticalFlow.getUseMeanNormalization()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Whether to use mean-normalization of patches when computing patch distance. It is turned on\n        by default as it typically provides a noticeable quality boost because of increased robustness to\n        illumination variations. Turn it off if you are certain that your sequence doesn't contain any changes\n        in illumination.\n@see setUseMeanNormalization"
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setUseMeanNormalization",
+      "identity": "cv.DISOpticalFlow.setUseMeanNormalization(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getUseMeanNormalization @see getUseMeanNormalization"
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.getUseSpatialPropagation",
+      "identity": "cv.DISOpticalFlow.getUseSpatialPropagation()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Whether to use spatial propagation of good optical flow vectors. This option is turned on by\n        default, as it tends to work better on average and can sometimes help recover from major errors\n        introduced by the coarse-to-fine scheme employed by the DIS optical flow algorithm. Turning this\n        option off can make the output flow field a bit smoother, however.\n@see setUseSpatialPropagation"
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.setUseSpatialPropagation",
+      "identity": "cv.DISOpticalFlow.setUseSpatialPropagation(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getUseSpatialPropagation @see getUseSpatialPropagation"
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.DISOpticalFlow.create",
+      "identity": "cv.DISOpticalFlow.create(int preset=DISOpticalFlow::PRESET_FAST)->Ptr<DISOpticalFlow>",
+      "returnType": "Ptr<DISOpticalFlow>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "preset",
+          "default": "DISOpticalFlow::PRESET_FAST",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of DISOpticalFlow\n\n    @param preset one of PRESET_ULTRAFAST, PRESET_FAST and PRESET_MEDIUM"
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.SparsePyrLKOpticalFlow",
+      "identity": "class cv.SparsePyrLKOpticalFlow",
+      "returnType": ": cv::SparseOpticalFlow",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::SparseOpticalFlow",
+      "documentation": "@brief Class used for calculating a sparse optical flow.\n\nThe class can calculate an optical flow for a sparse feature set using the\niterative Lucas-Kanade method with pyramids.\n\n@sa calcOpticalFlowPyrLK"
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.getWinSize",
+      "identity": "cv.SparsePyrLKOpticalFlow.getWinSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.setWinSize",
+      "identity": "cv.SparsePyrLKOpticalFlow.setWinSize(Size winSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "winSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.getMaxLevel",
+      "identity": "cv.SparsePyrLKOpticalFlow.getMaxLevel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.setMaxLevel",
+      "identity": "cv.SparsePyrLKOpticalFlow.setMaxLevel(int maxLevel)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxLevel",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.getTermCriteria",
+      "identity": "cv.SparsePyrLKOpticalFlow.getTermCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.setTermCriteria",
+      "identity": "cv.SparsePyrLKOpticalFlow.setTermCriteria(TermCriteria crit[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "crit",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.getFlags",
+      "identity": "cv.SparsePyrLKOpticalFlow.getFlags()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.setFlags",
+      "identity": "cv.SparsePyrLKOpticalFlow.setFlags(int flags)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.getMinEigThreshold",
+      "identity": "cv.SparsePyrLKOpticalFlow.getMinEigThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.setMinEigThreshold",
+      "identity": "cv.SparsePyrLKOpticalFlow.setMinEigThreshold(double minEigThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "minEigThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.SparsePyrLKOpticalFlow.create",
+      "identity": "cv.SparsePyrLKOpticalFlow.create(Size winSize=Size(21, 21);int maxLevel=3;TermCriteria crit=TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 0.01);int flags=0;double minEigThreshold=1e-4)->Ptr<SparsePyrLKOpticalFlow>",
+      "returnType": "Ptr<SparsePyrLKOpticalFlow>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "winSize",
+          "default": "Size(21, 21)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "maxLevel",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "TermCriteria",
+          "name": "crit",
+          "default": "TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 30, 0.01)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minEigThreshold",
+          "default": "1e-4",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.Tracker",
+      "identity": "class cv.Tracker",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base abstract class for the long-term tracker"
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.Tracker.init",
+      "identity": "cv.Tracker.init(Mat image;Rect boundingBox[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect",
+          "name": "boundingBox",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Initialize the tracker with a known bounding box that surrounded the target\n    @param image The initial frame\n    @param boundingBox The initial bounding box"
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.Tracker.update",
+      "identity": "cv.Tracker.update(Mat image;Rect boundingBox[/O,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect",
+          "name": "boundingBox",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Update the tracker, find the new most likely bounding box for the target\n    @param image The current frame\n    @param boundingBox The bounding box that represent the new target location, if true was returned, not\n    modified otherwise\n\n    @return True means that target was located and false means that tracker cannot locate target in\n    current frame. Note, that latter *does not* imply that tracker has failed, maybe target is indeed\n    missing from the frame (say, out of sight)"
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.Tracker.getTrackingScore",
+      "identity": "cv.Tracker.getTrackingScore()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Return tracking score"
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerMIL",
+      "identity": "class cv.TrackerMIL",
+      "returnType": ": cv::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tracker",
+      "documentation": "@brief The MIL algorithm trains a classifier in an online manner to separate the object from the\nbackground.\n\nMultiple Instance Learning avoids the drift problem for a robust tracking. The implementation is\nbased on @cite MIL .\n\nOriginal code can be found here <http://vision.ucsd.edu/~bbabenko/project_miltrack.shtml>"
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerMIL.Params",
+      "identity": "class cv.TrackerMIL.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "samplerInitInRadius",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "samplerInitMaxNegNum",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "samplerSearchWinSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "samplerTrackInRadius",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "samplerTrackMaxPosNum",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "samplerTrackMaxNegNum",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "featureSetNumFeatures",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerMIL.Params.Params",
+      "identity": "cv.TrackerMIL.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerMIL.create",
+      "identity": "cv.TrackerMIL.create(TrackerMIL_Params parameters=TrackerMIL::Params()[/C,/Ref])->Ptr<TrackerMIL>",
+      "returnType": "Ptr<TrackerMIL>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "TrackerMIL_Params",
+          "name": "parameters",
+          "default": "TrackerMIL::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create MIL tracker instance\n     *  @param parameters MIL parameters TrackerMIL::Params"
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerDaSiamRPN",
+      "identity": "class cv.TrackerDaSiamRPN",
+      "returnType": ": cv::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tracker",
+      "documentation": ""
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerDaSiamRPN.Params",
+      "identity": "class cv.TrackerDaSiamRPN.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "string",
+          "name": "model",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "string",
+          "name": "kernel_cls1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "string",
+          "name": "kernel_r1",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "backend",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "target",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerDaSiamRPN.Params.Params",
+      "identity": "cv.TrackerDaSiamRPN.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerDaSiamRPN.create",
+      "identity": "cv.TrackerDaSiamRPN.create(TrackerDaSiamRPN_Params parameters=TrackerDaSiamRPN::Params()[/C,/Ref])->Ptr<TrackerDaSiamRPN>",
+      "returnType": "Ptr<TrackerDaSiamRPN>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "TrackerDaSiamRPN_Params",
+          "name": "parameters",
+          "default": "TrackerDaSiamRPN::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters DaSiamRPN parameters TrackerDaSiamRPN::Params"
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerNano",
+      "identity": "class cv.TrackerNano",
+      "returnType": ": cv::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tracker",
+      "documentation": "@brief the Nano tracker is a super lightweight dnn-based general object tracking.\n *\n *  Nano tracker is much faster and extremely lightweight due to special model structure, the whole model size is about 1.9 MB.\n *  Nano tracker needs two models: one for feature extraction (backbone) and the another for localization (neckhead).\n *  Model download link: https://github.com/HonglinChu/SiamTrackers/tree/master/NanoTrack/models/nanotrackv2\n *  Original repo is here: https://github.com/HonglinChu/NanoTrack\n *  Author: HongLinChu, 1628464345@qq.com"
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerNano.Params",
+      "identity": "class cv.TrackerNano.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "string",
+          "name": "backbone",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "string",
+          "name": "neckhead",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "backend",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "target",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerNano.Params.Params",
+      "identity": "cv.TrackerNano.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerNano.create",
+      "identity": "cv.TrackerNano.create(TrackerNano_Params parameters=TrackerNano::Params()[/C,/Ref])->Ptr<TrackerNano>",
+      "returnType": "Ptr<TrackerNano>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "TrackerNano_Params",
+          "name": "parameters",
+          "default": "TrackerNano::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters NanoTrack parameters TrackerNano::Params"
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerVit",
+      "identity": "class cv.TrackerVit",
+      "returnType": ": cv::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tracker",
+      "documentation": "@brief the VIT tracker is a super lightweight dnn-based general object tracking.\n *\n *  VIT tracker is much faster and extremely lightweight due to special model structure, the model file is about 767KB.\n *  Model download link: https://github.com/opencv/opencv_zoo/tree/main/models/object_tracking_vittrack\n *  Author: PengyuLiu, 1872918507@qq.com"
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerVit.Params",
+      "identity": "class cv.TrackerVit.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "string",
+          "name": "net",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "backend",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "target",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "meanvalue",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "stdvalue",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "tracking_score_threshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerVit.Params.Params",
+      "identity": "cv.TrackerVit.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerVit.create",
+      "identity": "cv.TrackerVit.create(TrackerVit_Params parameters=TrackerVit::Params()[/C,/Ref])->Ptr<TrackerVit>",
+      "returnType": "Ptr<TrackerVit>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "TrackerVit_Params",
+          "name": "parameters",
+          "default": "TrackerVit::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters vit tracker parameters TrackerVit::Params"
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "class",
+      "name": "cv.BackgroundSubtractor",
+      "identity": "class cv.BackgroundSubtractor",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for background/foreground segmentation. :\n\nThe class is only used to define the common interface for the whole family of background/foreground\nsegmentation algorithms."
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractor.apply",
+      "identity": "cv.BackgroundSubtractor.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask.\n\n    @param image Next video frame.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame."
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractor.apply",
+      "identity": "cv.BackgroundSubtractor.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask with known foreground mask input.\n\n    @param image Next video frame. Floating point frame will be used without scaling and should be in range \\f$[0,255]\\f$.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param knownForegroundMask The mask for inputting already known foreground, allows model to ignore pixels.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame.\n\n    @note This method has a default virtual implementation that throws a \"not impemented\" error.\n    Foreground masking may not be supported by all background subtractors."
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractor.getBackgroundImage",
+      "identity": "cv.BackgroundSubtractor.getBackgroundImage(Mat backgroundImage[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "backgroundImage",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a background image.\n\n    @param backgroundImage The output background image.\n\n    @note Sometimes the background image can be very blurry, as it contain the average background\n    statistics."
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "class",
+      "name": "cv.BackgroundSubtractorMOG2",
+      "identity": "class cv.BackgroundSubtractorMOG2",
+      "returnType": ": cv::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::BackgroundSubtractor",
+      "documentation": "@brief Gaussian Mixture-based Background/Foreground Segmentation Algorithm.\n\nThe class implements the Gaussian mixture model background subtraction described in @cite Zivkovic2004\nand @cite Zivkovic2006 ."
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getHistory",
+      "identity": "cv.BackgroundSubtractorMOG2.getHistory()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of last frames that affect the background model"
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setHistory",
+      "identity": "cv.BackgroundSubtractorMOG2.setHistory(int history)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the number of last frames that affect the background model"
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getNMixtures",
+      "identity": "cv.BackgroundSubtractorMOG2.getNMixtures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of gaussian components in the background model"
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setNMixtures",
+      "identity": "cv.BackgroundSubtractorMOG2.setNMixtures(int nmixtures)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nmixtures",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the number of gaussian components in the background model.\n\n    The model needs to be reinitialized to reserve memory."
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getBackgroundRatio",
+      "identity": "cv.BackgroundSubtractorMOG2.getBackgroundRatio()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the \"background ratio\" parameter of the algorithm\n\n    If a foreground pixel keeps semi-constant value for about backgroundRatio\\*history frames, it's\n    considered background and added to the model as a center of a new component. It corresponds to TB\n    parameter in the paper."
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setBackgroundRatio",
+      "identity": "cv.BackgroundSubtractorMOG2.setBackgroundRatio(double ratio)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "ratio",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the \"background ratio\" parameter of the algorithm"
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getVarThreshold",
+      "identity": "cv.BackgroundSubtractorMOG2.getVarThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the variance threshold for the pixel-model match\n\n    The main threshold on the squared Mahalanobis distance to decide if the sample is well described by\n    the background model or not. Related to Cthr from the paper."
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setVarThreshold",
+      "identity": "cv.BackgroundSubtractorMOG2.setVarThreshold(double varThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "varThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the variance threshold for the pixel-model match"
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getVarThresholdGen",
+      "identity": "cv.BackgroundSubtractorMOG2.getVarThresholdGen()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the variance threshold for the pixel-model match used for new mixture component generation\n\n    Threshold for the squared Mahalanobis distance that helps decide when a sample is close to the\n    existing components (corresponds to Tg in the paper). If a pixel is not close to any component, it\n    is considered foreground or added as a new component. 3 sigma =\\> Tg=3\\*3=9 is default. A smaller Tg\n    value generates more components. A higher Tg value may result in a small number of components but\n    they can grow too large."
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setVarThresholdGen",
+      "identity": "cv.BackgroundSubtractorMOG2.setVarThresholdGen(double varThresholdGen)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "varThresholdGen",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the variance threshold for the pixel-model match used for new mixture component generation"
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getVarInit",
+      "identity": "cv.BackgroundSubtractorMOG2.getVarInit()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the initial variance of each gaussian component"
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setVarInit",
+      "identity": "cv.BackgroundSubtractorMOG2.setVarInit(double varInit)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "varInit",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the initial variance of each gaussian component"
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getVarMin",
+      "identity": "cv.BackgroundSubtractorMOG2.getVarMin()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setVarMin",
+      "identity": "cv.BackgroundSubtractorMOG2.setVarMin(double varMin)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "varMin",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getVarMax",
+      "identity": "cv.BackgroundSubtractorMOG2.getVarMax()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setVarMax",
+      "identity": "cv.BackgroundSubtractorMOG2.setVarMax(double varMax)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "varMax",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getComplexityReductionThreshold",
+      "identity": "cv.BackgroundSubtractorMOG2.getComplexityReductionThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the complexity reduction threshold\n\n    This parameter defines the number of samples needed to accept to prove the component exists. CT=0.05\n    is a default value for all the samples. By setting CT=0 you get an algorithm very similar to the\n    standard Stauffer&Grimson algorithm."
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setComplexityReductionThreshold",
+      "identity": "cv.BackgroundSubtractorMOG2.setComplexityReductionThreshold(double ct)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "ct",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the complexity reduction threshold"
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getDetectShadows",
+      "identity": "cv.BackgroundSubtractorMOG2.getDetectShadows()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the shadow detection flag\n\n    If true, the algorithm detects shadows and marks them. See createBackgroundSubtractorMOG2 for\n    details."
+    },
+    {
+      "ordinal": 144,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setDetectShadows",
+      "identity": "cv.BackgroundSubtractorMOG2.setDetectShadows(bool detectShadows)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "detectShadows",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Enables or disables shadow detection"
+    },
+    {
+      "ordinal": 145,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getShadowValue",
+      "identity": "cv.BackgroundSubtractorMOG2.getShadowValue()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the shadow value\n\n    Shadow value is the value used to mark shadows in the foreground mask. Default value is 127. Value 0\n    in the mask always means background, 255 means foreground."
+    },
+    {
+      "ordinal": 146,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setShadowValue",
+      "identity": "cv.BackgroundSubtractorMOG2.setShadowValue(int value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the shadow value"
+    },
+    {
+      "ordinal": 147,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.getShadowThreshold",
+      "identity": "cv.BackgroundSubtractorMOG2.getShadowThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the shadow threshold\n\n    A shadow is detected if pixel is a darker version of the background. The shadow threshold (Tau in\n    the paper) is a threshold defining how much darker the shadow can be. Tau= 0.5 means that if a pixel\n    is more than twice darker then it is not shadow. See Prati, Mikic, Trivedi and Cucchiara,\n    *Detecting Moving Shadows...*, IEEE PAMI,2003."
+    },
+    {
+      "ordinal": 148,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.setShadowThreshold",
+      "identity": "cv.BackgroundSubtractorMOG2.setShadowThreshold(double threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the shadow threshold"
+    },
+    {
+      "ordinal": 149,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.apply",
+      "identity": "cv.BackgroundSubtractorMOG2.apply(Mat image;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask.\n\n    @param image Next video frame. Floating point frame will be used without scaling and should be in range \\f$[0,255]\\f$.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame."
+    },
+    {
+      "ordinal": 150,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorMOG2.apply",
+      "identity": "cv.BackgroundSubtractorMOG2.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "knownForegroundMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "fgmask",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "learningRate",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes a foreground mask and skips known foreground in evaluation.\n\n    @param image Next video frame. Floating point frame will be used without scaling and should be in range \\f$[0,255]\\f$.\n    @param fgmask The output foreground mask as an 8-bit binary image.\n    @param knownForegroundMask The mask for inputting already known foreground, allows model to ignore pixels.\n    @param learningRate The value between 0 and 1 that indicates how fast the background model is\n    learnt. Negative parameter value makes the algorithm to use some automatically chosen learning\n    rate. 0 means that the background model is not updated at all, 1 means that the background model\n    is completely reinitialized from the last frame."
+    },
+    {
+      "ordinal": 151,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.createBackgroundSubtractorMOG2",
+      "identity": "cv.createBackgroundSubtractorMOG2(int history=500;double varThreshold=16;bool detectShadows=true)->Ptr<BackgroundSubtractorMOG2>",
+      "returnType": "Ptr<BackgroundSubtractorMOG2>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "500",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "varThreshold",
+          "default": "16",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "detectShadows",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates MOG2 Background Subtractor\n\n@param history Length of the history.\n@param varThreshold Threshold on the squared Mahalanobis distance between the pixel and the model\nto decide whether a pixel is well described by the background model. This parameter does not\naffect the background update.\n@param detectShadows If true, the algorithm will detect shadows and mark them. It decreases the\nspeed a bit, so if you do not need this feature, set the parameter to false."
+    },
+    {
+      "ordinal": 152,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "class",
+      "name": "cv.BackgroundSubtractorKNN",
+      "identity": "class cv.BackgroundSubtractorKNN",
+      "returnType": ": cv::BackgroundSubtractor",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::BackgroundSubtractor",
+      "documentation": "@brief K-nearest neighbours - based Background/Foreground Segmentation Algorithm.\n\nThe class implements the K-nearest neighbours background subtraction described in @cite Zivkovic2006 .\nVery efficient if number of foreground pixels is low."
+    },
+    {
+      "ordinal": 153,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getHistory",
+      "identity": "cv.BackgroundSubtractorKNN.getHistory()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of last frames that affect the background model"
+    },
+    {
+      "ordinal": 154,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setHistory",
+      "identity": "cv.BackgroundSubtractorKNN.setHistory(int history)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the number of last frames that affect the background model"
+    },
+    {
+      "ordinal": 155,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getNSamples",
+      "identity": "cv.BackgroundSubtractorKNN.getNSamples()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of data samples in the background model"
+    },
+    {
+      "ordinal": 156,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setNSamples",
+      "identity": "cv.BackgroundSubtractorKNN.setNSamples(int _nN)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_nN",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the number of data samples in the background model.\n\n    The model needs to be reinitialized to reserve memory."
+    },
+    {
+      "ordinal": 157,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getDist2Threshold",
+      "identity": "cv.BackgroundSubtractorKNN.getDist2Threshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the threshold on the squared distance between the pixel and the sample\n\n    The threshold on the squared distance between the pixel and the sample to decide whether a pixel is\n    close to a data sample."
+    },
+    {
+      "ordinal": 158,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setDist2Threshold",
+      "identity": "cv.BackgroundSubtractorKNN.setDist2Threshold(double _dist2Threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "_dist2Threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the threshold on the squared distance"
+    },
+    {
+      "ordinal": 159,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getkNNSamples",
+      "identity": "cv.BackgroundSubtractorKNN.getkNNSamples()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of neighbours, the k in the kNN.\n\n    K is the number of samples that need to be within dist2Threshold in order to decide that that\n    pixel is matching the kNN background model."
+    },
+    {
+      "ordinal": 160,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setkNNSamples",
+      "identity": "cv.BackgroundSubtractorKNN.setkNNSamples(int _nkNN)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "_nkNN",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the k in the kNN. How many nearest neighbours need to match."
+    },
+    {
+      "ordinal": 161,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getDetectShadows",
+      "identity": "cv.BackgroundSubtractorKNN.getDetectShadows()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the shadow detection flag\n\n    If true, the algorithm detects shadows and marks them. See createBackgroundSubtractorKNN for\n    details."
+    },
+    {
+      "ordinal": 162,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setDetectShadows",
+      "identity": "cv.BackgroundSubtractorKNN.setDetectShadows(bool detectShadows)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "detectShadows",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Enables or disables shadow detection"
+    },
+    {
+      "ordinal": 163,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getShadowValue",
+      "identity": "cv.BackgroundSubtractorKNN.getShadowValue()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the shadow value\n\n    Shadow value is the value used to mark shadows in the foreground mask. Default value is 127. Value 0\n    in the mask always means background, 255 means foreground."
+    },
+    {
+      "ordinal": 164,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setShadowValue",
+      "identity": "cv.BackgroundSubtractorKNN.setShadowValue(int value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the shadow value"
+    },
+    {
+      "ordinal": 165,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.getShadowThreshold",
+      "identity": "cv.BackgroundSubtractorKNN.getShadowThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the shadow threshold\n\n    A shadow is detected if pixel is a darker version of the background. The shadow threshold (Tau in\n    the paper) is a threshold defining how much darker the shadow can be. Tau= 0.5 means that if a pixel\n    is more than twice darker then it is not shadow. See Prati, Mikic, Trivedi and Cucchiara,\n    *Detecting Moving Shadows...*, IEEE PAMI,2003."
+    },
+    {
+      "ordinal": 166,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.BackgroundSubtractorKNN.setShadowThreshold",
+      "identity": "cv.BackgroundSubtractorKNN.setShadowThreshold(double threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the shadow threshold"
+    },
+    {
+      "ordinal": 167,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/video/include/opencv2/video/background_segm.hpp",
+      "kind": "callable",
+      "name": "cv.createBackgroundSubtractorKNN",
+      "identity": "cv.createBackgroundSubtractorKNN(int history=500;double dist2Threshold=400.0;bool detectShadows=true)->Ptr<BackgroundSubtractorKNN>",
+      "returnType": "Ptr<BackgroundSubtractorKNN>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "history",
+          "default": "500",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "dist2Threshold",
+          "default": "400.0",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "detectShadows",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates KNN Background Subtractor\n\n@param history Length of the history.\n@param dist2Threshold Threshold on the squared distance between the pixel and the sample to decide\nwhether a pixel is close to that sample. This parameter does not affect the background update.\n@param detectShadows If true, the algorithm will detect shadows and mark them. It decreases the\nspeed a bit, so if you do not need this feature, set the parameter to false."
+    }
+  ]
+}

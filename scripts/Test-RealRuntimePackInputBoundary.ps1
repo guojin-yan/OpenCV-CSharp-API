@@ -107,6 +107,42 @@ $linkedRuntimeBuildGuideText = Read-RequiredText -RelativePath $linkedRuntimeBui
 $versionNeutralGuideText = Read-RequiredText -RelativePath $versionNeutralGuidePath
 $runtimePackageReadmeText = Read-RequiredText -RelativePath $runtimePackageReadmePath
 
+$dispatchInputMatch = [regex]::Match(
+    $packWorkflowText,
+    '(?ms)^  workflow_dispatch:\r?\n    inputs:\r?\n(?<body>.*?)(?=^permissions:)')
+if (-not $dispatchInputMatch.Success) {
+    Add-Violation `
+        -Violations $violations `
+        -Path $packWorkflowPath `
+        -Issue "pack.yml must expose a parseable workflow_dispatch input section"
+}
+else {
+    $dispatchInputNames = @(
+        [regex]::Matches($dispatchInputMatch.Groups["body"].Value, '(?m)^      (?<name>[A-Za-z0-9_-]+):\s*$') |
+            ForEach-Object { $_.Groups["name"].Value }
+    )
+    $expectedDispatchInputNames = @(
+        "opencv_version",
+        "package_revision",
+        "rid",
+        "runtime_profile",
+        "validate_synthetic_runtime",
+        "native_runtime_dir",
+        "opencv_runtime_dir",
+        "opencv_source_dir",
+        "real_runtime_artifact_run_id",
+        "publish_github_packages"
+    )
+    if ($dispatchInputNames.Count -ne 10 -or
+        (Compare-Object -ReferenceObject $expectedDispatchInputNames -DifferenceObject $dispatchInputNames)) {
+        Add-Violation `
+            -Violations $violations `
+            -Path $packWorkflowPath `
+            -Issue "pack.yml workflow_dispatch must retain exactly the ten supported inputs allowed by GitHub"
+            -Text ($dispatchInputNames -join ", ")
+    }
+}
+
 foreach ($required in @(
         [pscustomobject]@{
             Needle = "Existing real native wrapper runtime directory on the selected runner when synthetic validation is false"
@@ -121,8 +157,8 @@ foreach ($required in @(
             Issue = "pack.yml must describe opencv_source_dir as an existing real runner directory"
         },
         [pscustomobject]@{
-            Needle = "Optional existing real OpenCV install directory on the selected runner when synthetic validation is false"
-            Issue = "pack.yml must describe opencv_install_dir as an optional existing real runner directory"
+            Needle = "`$openCvInstallDir = ''"
+            Issue = "pack.yml direct-path mode must leave the optional OpenCV install directory empty so workflow_dispatch stays within ten inputs"
         },
         [pscustomobject]@{
             Needle = "Reject synthetic publish inputs"

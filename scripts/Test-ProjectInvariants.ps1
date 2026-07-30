@@ -95,8 +95,58 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Documentation toolchain reproducibility"
+        Script = Join-Path $repo "scripts/Test-DocumentationToolchainReproducibility.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = ".NET SDK toolchain reproducibility"
+        Script = Join-Path $repo "scripts/Test-DotNetSdkToolchainReproducibility.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = ".NET installer supply-chain boundary"
+        Script = Join-Path $repo "scripts/Test-DotNetInstallerSupplyChainBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Workflow container image supply-chain boundary"
+        Script = Join-Path $repo "scripts/Test-WorkflowContainerImageSupplyChainBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Microsoft package-feed trust boundary"
+        Script = Join-Path $repo "scripts/Test-MicrosoftPackageFeedTrustBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "PowerShell toolchain reproducibility"
+        Script = Join-Path $repo "scripts/Test-PowerShellToolchainReproducibility.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Workflow invariant coverage"
         Script = Join-Path $repo "scripts/Test-WorkflowInvariantCoverage.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "GitHub Action supply-chain boundary"
+        Script = Join-Path $repo "scripts/Test-GitHubActionSupplyChainBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "GitHub workflow permissions"
+        Script = Join-Path $repo "scripts/Test-GitHubWorkflowPermissions.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Workflow PowerShell syntax"
+        Script = Join-Path $repo "scripts/Test-WorkflowPowerShellSyntax.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Workflow Bash syntax"
+        Script = Join-Path $repo "scripts/Test-WorkflowBashSyntax.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
@@ -142,6 +192,111 @@ $guards = @(
     [pscustomobject]@{
         Name = "Runtime release-candidate preflight"
         Script = Join-Path $repo "scripts/Test-RuntimeReleaseCandidatePreflightGuard.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release support contract"
+        Script = Join-Path $repo "scripts/Test-ReleaseSupportContract.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "API/ABI baseline contract"
+        Script = Join-Path $repo "scripts/Test-ApiAbiBaselineContract.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Native-to-managed binding map"
+        Script = Join-Path $repo "scripts/Test-NativeManagedBindingMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "ImgProc upstream map"
+        Script = Join-Path $repo "scripts/Test-ImgProcUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "ImgCodecs upstream map"
+        Script = Join-Path $repo "scripts/Test-ImgCodecsUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "VideoIO upstream map"
+        Script = Join-Path $repo "scripts/Test-VideoIOUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "VideoIO registry surface"
+        Script = Join-Path $repo "scripts/Test-VideoIORegistrySurface.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Calib3D upstream map"
+        Script = Join-Path $repo "scripts/Test-Calib3DUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Core upstream map"
+        Script = Join-Path $repo "scripts/Test-CoreUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "DNN upstream map"
+        Script = Join-Path $repo "scripts/Test-DnnUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Features upstream map"
+        Script = Join-Path $repo "scripts/Test-FeaturesUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "ObjDetect upstream map"
+        Script = Join-Path $repo "scripts/Test-ObjDetectUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Photo upstream map"
+        Script = Join-Path $repo "scripts/Test-PhotoUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Video upstream map"
+        Script = Join-Path $repo "scripts/Test-VideoUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release candidate provenance"
+        Script = Join-Path $repo "scripts/Test-ReleaseCandidateProvenance.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release readiness contract"
+        Script = Join-Path $repo "scripts/Test-ReleaseReadinessContract.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release signing boundary"
+        Script = Join-Path $repo "scripts/Test-ReleaseSigningBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Public feed verification contract"
+        Script = Join-Path $repo "scripts/Test-PublicFeedVerificationContract.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release change-control record"
+        Script = Join-Path $repo "scripts/Test-ReleaseChangeControlRecord.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Final release candidate closeout"
+        Script = Join-Path $repo "scripts/Test-ReleaseCandidateFinalCloseout.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release package reproducibility"
+        Script = Join-Path $repo "scripts/Test-ReleasePackageReproducibility.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
@@ -202,6 +357,11 @@ $guards = @(
     [pscustomobject]@{
         Name = "Native CTest/output naming boundary"
         Script = Join-Path $repo "scripts/Test-NativeCTestOutputNamingBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Native ABI export audit boundary"
+        Script = Join-Path $repo "scripts/Test-NativeAbiExportAuditBoundary.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{

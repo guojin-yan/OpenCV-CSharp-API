@@ -1,9 +1,12 @@
 #include "open_cv_sharp/photo/photo.h"
 
 #include "../core/mat_handle.h"
+#include "../core/persistence_handle_access.h"
 #include "../error_state.h"
 #include "photo_handles.h"
 
+#include <cmath>
+#include <limits>
 #include <new>
 #include <vector>
 
@@ -66,6 +69,13 @@ namespace
         }
 
         return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_output_int(const char* api_name, const int* value, const char* argument_name)
+    {
+        return value == nullptr
+            ? opencv_csharp_native::set_invalid_argument(api_name, argument_name)
+            : OPENCV_CSHARP_STATUS_OK;
     }
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
@@ -434,6 +444,185 @@ int jyppx_ocv_photo_fast_nl_means_denoising_colored_multi(
         (void)h_color;
         (void)template_window_size;
         (void)search_window_size;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_photo_denoise_tvl1(
+    const jyppx_ocv_mat* const* observations,
+    int observation_count,
+    jyppx_ocv_mat* result,
+    double lambda,
+    int niters)
+{
+    constexpr const char* api_name = "jyppx_ocv_photo_denoise_tvl1";
+
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+
+        int status = validate_mat_array(api_name, observations, observation_count, "observations");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, result, "result");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (observation_count <= 0 || !(lambda > 0.0) || niters <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "observations/lambda/niters");
+        }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Mat& first = opencv_csharp_native::mat_value(observations[0]);
+        if (first.empty() || first.dims != 2 || first.type() != CV_8UC1)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "observations");
+        }
+
+        std::vector<cv::Mat> native_observations;
+        native_observations.reserve(static_cast<size_t>(observation_count));
+        for (int i = 0; i < observation_count; ++i)
+        {
+            const cv::Mat& current = opencv_csharp_native::mat_value(observations[i]);
+            if (current.empty() || current.dims != 2 || current.type() != CV_8UC1 ||
+                current.rows != first.rows || current.cols != first.cols)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "observations");
+            }
+            native_observations.push_back(current);
+        }
+
+        cv::denoise_TVL1(
+            native_observations,
+            opencv_csharp_native::mat_value(result),
+            lambda,
+            niters);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)lambda;
+        (void)niters;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_photo_correct_chromatic_aberration(
+    const jyppx_ocv_mat* input_image,
+    const jyppx_ocv_mat* coefficients,
+    jyppx_ocv_mat* output_image,
+    int calibration_width,
+    int calibration_height,
+    int calibration_degree,
+    int bayer_pattern)
+{
+    constexpr const char* api_name = "jyppx_ocv_photo_correct_chromatic_aberration";
+
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+
+        int status = validate_mat(api_name, input_image, "input_image");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, coefficients, "coefficients");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, output_image, "output_image");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (calibration_width <= 0 || calibration_height <= 0 || calibration_degree < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "calibration_size/degree");
+        }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Mat& image = opencv_csharp_native::mat_value(input_image);
+        const cv::Mat& coeff_mat = opencv_csharp_native::mat_value(coefficients);
+        if (image.empty() || image.dims != 2 || (image.channels() != 1 && image.channels() != 3))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "input_image");
+        }
+        if (image.cols != calibration_width || image.rows != calibration_height)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "calibration_size");
+        }
+        if (coeff_mat.empty() || coeff_mat.dims != 2 || coeff_mat.type() != CV_32F || coeff_mat.rows != 4)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "coefficients");
+        }
+
+        const long long degree = static_cast<long long>(calibration_degree);
+        const long long expected_terms = (degree + 1LL) * (degree + 2LL) / 2LL;
+        if (expected_terms > std::numeric_limits<int>::max() ||
+            coeff_mat.cols != static_cast<int>(expected_terms))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "coefficients/degree");
+        }
+
+        cv::correctChromaticAberration(
+            image,
+            coeff_mat,
+            opencv_csharp_native::mat_value(output_image),
+            cv::Size(calibration_width, calibration_height),
+            calibration_degree,
+            bayer_pattern);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)calibration_width;
+        (void)calibration_height;
+        (void)calibration_degree;
+        (void)bayer_pattern;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_photo_load_chromatic_aberration_params(
+    const jyppx_ocv_core_file_node* node,
+    jyppx_ocv_mat* coefficients,
+    int* calibration_width,
+    int* calibration_height,
+    int* degree)
+{
+    constexpr const char* api_name = "jyppx_ocv_photo_load_chromatic_aberration_params";
+
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+
+        int status = validate_output_int(api_name, calibration_width, "calibration_width");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, calibration_height, "calibration_height");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, degree, "degree");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, coefficients, "coefficients");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::FileNode* file_node = nullptr;
+        status = opencv_csharp_native::access_core_file_node(api_name, node, &file_node);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+        cv::Mat loaded_coefficients;
+        cv::Size loaded_size;
+        int loaded_degree = 0;
+        cv::loadChromaticAberrationParams(*file_node, loaded_coefficients, loaded_size, loaded_degree);
+        loaded_coefficients.copyTo(opencv_csharp_native::mat_value(coefficients));
+        *calibration_width = loaded_size.width;
+        *calibration_height = loaded_size.height;
+        *degree = loaded_degree;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)node;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }
@@ -1320,4 +1509,3 @@ int jyppx_ocv_tonemap_mantiuk_set_saturation(jyppx_ocv_tonemap* tonemap, float s
         return opencv_csharp_native::translate_current_exception(api_name);
     }
 }
-

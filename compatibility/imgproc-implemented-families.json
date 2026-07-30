@@ -1,0 +1,1422 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 11,
+  "managedPublicMemberAdditionCount": 174,
+  "families": [
+    {
+      "id": "generalized-hough-object-model",
+      "rationale": "Complete the Ballard and Guil generalized Hough lifecycle, template, detection, and property hierarchy.",
+      "declarations": [
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "class cv.GeneralizedHough",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.GeneralizedHough.setTemplate(Mat templ;Point templCenter=Point(-1, -1))-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property",
+            "jyppx_ocv_imgproc_generalized_hough_set_template",
+            "jyppx_ocv_imgproc_generalized_hough_set_template_edges"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Point? templateCenter=null)",
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat template,OpenCvSharp.Core.Point? templateCenter=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.GeneralizedHough.setTemplate(Mat edges;Mat dx;Mat dy;Point templCenter=Point(-1, -1))-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property",
+            "jyppx_ocv_imgproc_generalized_hough_set_template",
+            "jyppx_ocv_imgproc_generalized_hough_set_template_edges"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Point? templateCenter=null)",
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat template,OpenCvSharp.Core.Point? templateCenter=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.GeneralizedHough.detect(Mat image;Mat positions[/O];Mat votes=Mat()[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_detect",
+            "jyppx_ocv_imgproc_generalized_hough_detect_edges"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|OpenCvSharp.Core.Mat Detect(OpenCvSharp.Core.Mat image)",
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)",
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.GeneralizedHough.detect(Mat edges;Mat dx;Mat dy;Mat positions[/O];Mat votes=Mat()[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_detect",
+            "jyppx_ocv_imgproc_generalized_hough_detect_edges"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|OpenCvSharp.Core.Mat Detect(OpenCvSharp.Core.Mat image)",
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)",
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.GeneralizedHough.setCannyLowThresh(int cannyLowThresh)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyLowThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.GeneralizedHough.getCannyLowThresh()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyLowThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.GeneralizedHough.setCannyHighThresh(int cannyHighThresh)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyHighThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.GeneralizedHough.getCannyHighThresh()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyHighThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.GeneralizedHough.setMinDist(double minDist)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double MinDistance"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.GeneralizedHough.getMinDist()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double MinDistance"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.GeneralizedHough.setDp(double dp)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double Dp"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.GeneralizedHough.getDp()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double Dp"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.GeneralizedHough.setMaxBufferSize(int maxBufferSize)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 MaxBufferSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.GeneralizedHough.getMaxBufferSize()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 MaxBufferSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "class cv.GeneralizedHoughBallard",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 41,
+          "upstreamIdentity": "cv.GeneralizedHoughBallard.setLevels(int levels)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 Levels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.GeneralizedHoughBallard.getLevels()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 Levels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 43,
+          "upstreamIdentity": "cv.GeneralizedHoughBallard.setVotesThreshold(int votesThreshold)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 VotesThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 44,
+          "upstreamIdentity": "cv.GeneralizedHoughBallard.getVotesThreshold()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 VotesThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 45,
+          "upstreamIdentity": "class cv.GeneralizedHoughGuil",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setXi(double xi)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double Xi"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getXi()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double Xi"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setLevels(int levels)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 Levels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getLevels()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 Levels"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setAngleEpsilon(double angleEpsilon)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleEpsilon"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getAngleEpsilon()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleEpsilon"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setMinAngle(double minAngle)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinAngle"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getMinAngle()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinAngle"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setMaxAngle(double maxAngle)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxAngle"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getMaxAngle()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxAngle"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setAngleStep(double angleStep)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getAngleStep()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setAngleThresh(int angleThresh)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 AngleThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getAngleThresh()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 AngleThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setMinScale(double minScale)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getMinScale()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setMaxScale(double maxScale)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getMaxScale()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setScaleStep(double scaleStep)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double ScaleStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getScaleStep()-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double ScaleStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 66,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setScaleThresh(int scaleThresh)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 ScaleThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getScaleThresh()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 ScaleThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 68,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.setPosThresh(int posThresh)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 PositionThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 69,
+          "upstreamIdentity": "cv.GeneralizedHoughGuil.getPosThresh()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 PositionThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 170,
+          "upstreamIdentity": "cv.createGeneralizedHoughBallard()-\u003EPtr\u003CGeneralizedHoughBallard\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_ballard_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.GeneralizedHoughBallard CreateGeneralizedHoughBallard()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 171,
+          "upstreamIdentity": "cv.createGeneralizedHoughGuil()-\u003EPtr\u003CGeneralizedHoughGuil\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_generalized_hough_guil_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.GeneralizedHoughGuil CreateGeneralizedHoughGuil()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "color-conversion-and-visualization",
+      "rationale": "Connect two-plane YUV conversion, Bayer demosaicing, weighted blending, and built-in or user color maps.",
+      "declarations": [
+        {
+          "ordinal": 157,
+          "upstreamIdentity": "cv.blendLinear(Mat src1;Mat src2;Mat weights1;Mat weights2;Mat dst[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_blend_linear"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat BlendLinear(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat weights1,OpenCvSharp.Core.Mat weights2)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void BlendLinear(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat weights1,OpenCvSharp.Core.Mat weights2,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 159,
+          "upstreamIdentity": "cv.cvtColorTwoPlane(Mat src1;Mat src2;Mat dst[/O];int code;AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+          "upstreamClassification": "intentionally-omitted",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_cvt_color_two_plane"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat CvtColorTwoPlane(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.ImgProc.ColorConversionCodes code)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CvtColorTwoPlane(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColorConversionCodes code)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 160,
+          "upstreamIdentity": "cv.demosaicing(Mat src;Mat dst[/O];int code;int dstCn=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_demosaicing"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat Demosaicing(OpenCvSharp.Core.Mat src,OpenCvSharp.ImgProc.ColorConversionCodes code,System.Int32 dstCn=0)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Demosaicing(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColorConversionCodes code,System.Int32 dstCn=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 172,
+          "upstreamIdentity": "enum cv.ColormapTypes",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 173,
+          "upstreamIdentity": "cv.applyColorMap(Mat src;Mat dst[/O];int colormap)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_apply_color_map",
+            "jyppx_ocv_imgproc_apply_color_map_user"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat userColor)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.ImgProc.ColormapTypes colormap)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat userColor)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColormapTypes colormap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 174,
+          "upstreamIdentity": "cv.applyColorMap(Mat src;Mat dst[/O];Mat userColor)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_apply_color_map",
+            "jyppx_ocv_imgproc_apply_color_map_user"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat userColor)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.ImgProc.ColormapTypes colormap)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat userColor)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColormapTypes colormap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "filter-gradient-and-masked-threshold",
+      "rationale": "Complete an image-preparation workflow with stack blur, spatial derivatives, and masked thresholding.",
+      "declarations": [
+        {
+          "ordinal": 94,
+          "upstreamIdentity": "cv.stackBlur(Mat src;Mat dst[/O];Size ksize)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_stack_blur"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat StackBlur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Size ksize)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void StackBlur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size ksize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 100,
+          "upstreamIdentity": "cv.spatialGradient(Mat src;Mat dx[/O];Mat dy[/O];int ksize=3;int borderType=BORDER_DEFAULT)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_spatial_gradient"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void SpatialGradient(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,System.Int32 ksize=3,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 141,
+          "upstreamIdentity": "cv.thresholdWithMask(Mat src;Mat dst[/IO];Mat mask;double thresh;double maxval;int type)-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_threshold_with_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double ThresholdWithMask(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mask,System.Double thresh,System.Double maxval,OpenCvSharp.ImgProc.ThresholdTypes type)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "drawing-markers-polygons-and-text-scale",
+      "rationale": "Complete common overlay primitives with marker shapes, convex filling, and pixel-height font scaling.",
+      "declarations": [
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "enum cv.MarkerTypes",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 183,
+          "upstreamIdentity": "cv.drawMarker(Mat img[/IO];Point position;Scalar color[/C,/Ref];int markerType=MARKER_CROSS;int markerSize=20;int thickness=1;int line_type=8)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_draw_marker"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DrawMarker(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point position,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.MarkerTypes markerType=Cross,System.Int32 markerSize=20,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 184,
+          "upstreamIdentity": "cv.fillConvexPoly(Mat img[/IO];Mat points;Scalar color[/C,/Ref];int lineType=LINE_8;int shift=0)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_fill_convex_poly"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FillConvexPoly(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point[] points,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FillConvexPoly(OpenCvSharp.Core.Mat image,System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 192,
+          "upstreamIdentity": "cv.getFontScaleFromHeight(int fontFace[/C];int pixelHeight[/C];int thickness=1[/C])-\u003Edouble",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_get_font_scale_from_height"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double GetFontScaleFromHeight(OpenCvSharp.ImgProc.HersheyFonts fontFace,System.Int32 pixelHeight,System.Int32 thickness=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "calibration-sampling-and-coordinate-workflows",
+      "rationale": "Connect image undistortion, inverse rectification, sub-pixel sampling, polar remapping, and camera-axis overlays.",
+      "declarations": [
+        {
+          "ordinal": 123,
+          "upstreamIdentity": "cv.undistort(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;Mat newCameraMatrix=Mat())-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_undistort"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat Undistort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null)",
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void Undistort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 125,
+          "upstreamIdentity": "cv.initInverseRectificationMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_init_inverse_rectification_map"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.UndistortRectifyMapResult InitInverseRectificationMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type)",
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void InitInverseRectificationMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type,OpenCvSharp.Core.Mat map1,OpenCvSharp.Core.Mat map2)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 127,
+          "upstreamIdentity": "cv.fisheye.undistortImage(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat Knew=cv::Mat();Size new_size=Size()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_fisheye_undistort_image"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeUndistortImage(OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null,OpenCvSharp.Core.Size? newSize=null)",
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeUndistortImage(OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null,OpenCvSharp.Core.Size? newSize=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 128,
+          "upstreamIdentity": "cv.getRectSubPix(Mat image;Size patchSize;Point2f center;Mat patch[/O];int patchType=-1)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_get_rect_sub_pix"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetRectSubPix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patchSize,OpenCvSharp.Core.Point2f center,System.Int32 patchType=-1)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void GetRectSubPix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patchSize,OpenCvSharp.Core.Point2f center,OpenCvSharp.Core.Mat patch,System.Int32 patchType=-1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 129,
+          "upstreamIdentity": "cv.warpPolar(Mat src;Mat dst[/O];Size dsize;Point2f center;double maxRadius;int flags)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_warp_polar"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat WarpPolar(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Size dsize,OpenCvSharp.Core.Point2f center,System.Double maxRadius,OpenCvSharp.ImgProc.InterpolationFlags flags,OpenCvSharp.ImgProc.WarpPolarMode mode=Linear)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void WarpPolar(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size dsize,OpenCvSharp.Core.Point2f center,System.Double maxRadius,OpenCvSharp.ImgProc.InterpolationFlags flags,OpenCvSharp.ImgProc.WarpPolarMode mode=Linear)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 177,
+          "upstreamIdentity": "cv.drawFrameAxes(Mat image[/IO];Mat cameraMatrix;Mat distCoeffs;Mat rvec;Mat tvec;float length;int thickness=3)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_draw_frame_axes"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void DrawFrameAxes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rotationVector,OpenCvSharp.Core.Mat translationVector,System.Single length,System.Int32 thickness=3)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "accumulation-registration-and-matching-workflows",
+      "rationale": "Connect temporal accumulators, phase correlation, Hanning windows, earth mover distance, and template matching.",
+      "declarations": [
+        {
+          "ordinal": 133,
+          "upstreamIdentity": "cv.accumulate(Mat src;Mat dst[/IO];Mat mask=Mat())-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_accumulate"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Accumulate(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 134,
+          "upstreamIdentity": "cv.accumulateSquare(Mat src;Mat dst[/IO];Mat mask=Mat())-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_accumulate_square"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AccumulateSquare(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 135,
+          "upstreamIdentity": "cv.accumulateProduct(Mat src1;Mat src2;Mat dst[/IO];Mat mask=Mat())-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_accumulate_product"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AccumulateProduct(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 136,
+          "upstreamIdentity": "cv.accumulateWeighted(Mat src;Mat dst[/IO];double alpha;Mat mask=Mat())-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_accumulate_weighted"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AccumulateWeighted(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double alpha,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 137,
+          "upstreamIdentity": "cv.phaseCorrelate(Mat src1;Mat src2;Mat window=Mat();double* response=0[/O])-\u003EPoint2d",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_phase_correlate"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2d PhaseCorrelate(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat? window,out System.Double response)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2d PhaseCorrelate(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat? window=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 138,
+          "upstreamIdentity": "cv.phaseCorrelateIterative(Mat src1;Mat src2;int L2size=7;int maxIters=10)-\u003EPoint2d",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_phase_correlate_iterative"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2d PhaseCorrelateIterative(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Int32 l2Size=7,System.Int32 maxIters=10)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 139,
+          "upstreamIdentity": "cv.createHanningWindow(Mat dst[/O];Size winSize;int type)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_create_hanning_window"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat CreateHanningWindow(OpenCvSharp.Core.Size winSize,System.Int32 type)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CreateHanningWindow(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size winSize,System.Int32 type)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 150,
+          "upstreamIdentity": "cv.wrapperEMD(Mat signature1;Mat signature2;int distType;Mat cost=Mat();Ptr_float lowerBound=Ptr\u003Cfloat\u003E()[/IO];Mat flow=Mat()[/O])-\u003Efloat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_emd"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Single EMD(OpenCvSharp.Core.Mat signature1,OpenCvSharp.Core.Mat signature2,OpenCvSharp.Geometry.DistanceTypes distanceType,OpenCvSharp.Core.Mat? cost=null,OpenCvSharp.Core.Mat? flow=null)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Single EMD(OpenCvSharp.Core.Mat signature1,OpenCvSharp.Core.Mat signature2,OpenCvSharp.Geometry.DistanceTypes distanceType,ref System.Single lowerBound,OpenCvSharp.Core.Mat? cost=null,OpenCvSharp.Core.Mat? flow=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 162,
+          "upstreamIdentity": "cv.matchTemplate(Mat image;Mat templ;Mat result[/O];int method;Mat mask=Mat())-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_match_template"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat MatchTemplate(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat templ,OpenCvSharp.ImgProc.TemplateMatchModes method,OpenCvSharp.Core.Mat? mask=null)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void MatchTemplate(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat templ,OpenCvSharp.Core.Mat result,OpenCvSharp.ImgProc.TemplateMatchModes method,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "segmentation-and-link-runs-workflows",
+      "rationale": "Connect watershed, pyramid mean shift, GrabCut, and both link-runs contour overloads with owned managed outputs.",
+      "declarations": [
+        {
+          "ordinal": 151,
+          "upstreamIdentity": "cv.watershed(Mat image;Mat markers[/IO])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_watershed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Watershed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat markers)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 152,
+          "upstreamIdentity": "cv.pyrMeanShiftFiltering(Mat src;Mat dst[/O];double sp;double sr;int maxLevel=1;TermCriteria termcrit=TermCriteria(TermCriteria::MAX_ITER\u002BTermCriteria::EPS,5,1))-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_pyr_mean_shift_filtering"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat PyrMeanShiftFiltering(OpenCvSharp.Core.Mat src,System.Double spatialRadius,System.Double colorRadius,System.Int32 maxLevel=1,OpenCvSharp.Core.TermCriteria? criteria=null)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void PyrMeanShiftFiltering(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double spatialRadius,System.Double colorRadius,System.Int32 maxLevel=1,OpenCvSharp.Core.TermCriteria? criteria=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 153,
+          "upstreamIdentity": "cv.grabCut(Mat img;Mat mask[/IO];Rect rect;Mat bgdModel[/IO];Mat fgdModel[/IO];int iterCount;int mode=GC_EVAL)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_grab_cut"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void GrabCut(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Rect rect,OpenCvSharp.Core.Mat backgroundModel,OpenCvSharp.Core.Mat foregroundModel,System.Int32 iterationCount,OpenCvSharp.ImgProc.GrabCutModes mode=Eval)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 168,
+          "upstreamIdentity": "cv.findContoursLinkRuns(Mat image;vector_Mat contours[/O];Mat hierarchy[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_find_contours_link_runs_count",
+            "jyppx_ocv_imgproc_find_contours_link_runs_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FindContoursLinkRuns(OpenCvSharp.Core.Mat image,out OpenCvSharp.Core.Point[][] contours,out OpenCvSharp.Core.Vec4i[] hierarchy)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 169,
+          "upstreamIdentity": "cv.findContoursLinkRuns(Mat image;vector_Mat contours[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_find_contours_link_runs_count",
+            "jyppx_ocv_imgproc_find_contours_link_runs_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[][] FindContoursLinkRuns(OpenCvSharp.Core.Mat image)",
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FindContoursLinkRuns(OpenCvSharp.Core.Mat image,out OpenCvSharp.Core.Point[][] contours)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "font-face-object-and-rendering",
+      "rationale": "Complete the OpenCV 5 FontFace lifecycle, variable-font instance transfer, and custom-font text measurement and rendering.",
+      "declarations": [
+        {
+          "ordinal": 193,
+          "upstreamIdentity": "class cv.FontFace",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 194,
+          "upstreamIdentity": "cv.FontFace.FontFace()-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_font_face_create_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 195,
+          "upstreamIdentity": "cv.FontFace.FontFace(String fontPathOrName[/C,/Ref])-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_font_face_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|constructor|public;instance|.ctor(System.String fontPathOrName)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 196,
+          "upstreamIdentity": "cv.FontFace.set(String fontPathOrName[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_font_face_set"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean Set(System.String fontPathOrName)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 197,
+          "upstreamIdentity": "cv.FontFace.getName()-\u003EString",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_font_face_get_name_fill",
+            "jyppx_ocv_imgproc_font_face_get_name_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.String GetName()",
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|property|instance;get:public|System.String Name"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 198,
+          "upstreamIdentity": "cv.FontFace.setInstance(vector_int params[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_font_face_set_instance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean SetInstance(System.Int32[] parameters)",
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean SetInstance(System.ReadOnlySpan\u003CSystem.Int32\u003E parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 199,
+          "upstreamIdentity": "cv.FontFace.getInstance(vector_int params[/O,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_font_face_get_instance_count",
+            "jyppx_ocv_imgproc_font_face_get_instance_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean GetInstance(out System.Int32[] parameters)",
+            "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Int32[] GetInstance()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 200,
+          "upstreamIdentity": "enum cv.PutTextFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 201,
+          "upstreamIdentity": "cv.putText(Mat img[/IO];String text[/C,/Ref];Point org;Scalar color;FontFace fface[/Ref];int size;int weight=0;PutTextFlags flags=PUT_TEXT_ALIGN_LEFT;Range wrap=Range())-\u003EPoint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_put_text_font_face"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point PutText(OpenCvSharp.Core.Mat image,System.String text,OpenCvSharp.Core.Point origin,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.FontFace fontFace,System.Int32 size,System.Int32 weight=0,OpenCvSharp.ImgProc.PutTextFlags flags=AlignLeft,OpenCvSharp.ImgProc.TextWrapRange? wrap=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 202,
+          "upstreamIdentity": "cv.getTextSize(Size imgsize;String text[/C,/Ref];Point org;FontFace fface[/Ref];int size;int weight=0;PutTextFlags flags=PUT_TEXT_ALIGN_LEFT;Range wrap=Range())-\u003ERect",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgproc_get_text_size_font_face"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Rect GetTextSize(OpenCvSharp.Core.Size imageSize,System.String text,OpenCvSharp.Core.Point origin,OpenCvSharp.ImgProc.FontFace fontFace,System.Int32 size,System.Int32 weight=0,OpenCvSharp.ImgProc.PutTextFlags flags=AlignLeft,OpenCvSharp.ImgProc.TextWrapRange? wrap=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgproc-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

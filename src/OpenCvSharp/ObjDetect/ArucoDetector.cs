@@ -34,6 +34,18 @@ namespace OpenCvSharp.ObjDetect
         {
         }
 
+        /// <summary>Initializes a detector that searches multiple dictionaries in one pass.</summary>
+        private ArucoDetector(ArucoDictionary[] dictionaries, ArucoDetectorParameters? detectorParameters, ArucoRefineParameters? refineParameters, bool multiDictionary)
+        {
+            _ = multiDictionary;
+            IntPtr[] nativeDictionaries = ToNativeHandles(dictionaries, nameof(dictionaries));
+            NativeMethods.ArucoDetectorParamsNative nativeDetector = (detectorParameters ?? new ArucoDetectorParameters()).ToNative();
+            NativeMethods.ArucoRefineParamsNative nativeRefine = (refineParameters ?? ArucoRefineParameters.Default).ToNative();
+            NativeException.ThrowIfError(NativeMethods.ArucoDetectorCreateMultiDictionary(
+                nativeDictionaries, nativeDictionaries.Length, ref nativeDetector, ref nativeRefine, out IntPtr nativeHandle));
+            handle = NativeArucoDetectorHandle.FromNativePointer(nativeHandle);
+        }
+
         private ArucoDetector(ArucoDictionary dictionary, ArucoDetectorParameters? detectorParameters, ArucoRefineParameters? refineParameters, bool ownsDictionary)
         {
             ValidateNotNull(dictionary, nameof(dictionary));
@@ -74,6 +86,12 @@ namespace OpenCvSharp.ObjDetect
             return new ArucoDetector();
         }
 
+        /// <summary>Creates a detector that searches multiple dictionaries in one pass.</summary>
+        public static ArucoDetector Create(ArucoDictionary[] dictionaries, ArucoDetectorParameters? detectorParameters = null, ArucoRefineParameters? refineParameters = null)
+        {
+            return new ArucoDetector(dictionaries, detectorParameters, refineParameters, multiDictionary: true);
+        }
+
         /// <summary>Gets a copy of the detector dictionary. 获取检测器字典副本。</summary>
         public ArucoDictionary GetDictionary()
         {
@@ -88,6 +106,38 @@ namespace OpenCvSharp.ObjDetect
             ThrowIfDisposed();
             ValidateNotNull(dictionary, nameof(dictionary));
             NativeException.ThrowIfError(NativeMethods.ArucoDetectorSetDictionary(NativeHandle, dictionary.NativeHandle));
+            return this;
+        }
+
+        /// <summary>Gets independent copies of all dictionaries searched by this detector.</summary>
+        public ArucoDictionary[] GetDictionaries()
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.ArucoDetectorGetDictionariesCount(NativeHandle, out int count));
+            if (count < 0) throw new OpenCvException("Native dictionary count is negative.");
+            var result = new ArucoDictionary[count];
+            try
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    NativeException.ThrowIfError(NativeMethods.ArucoDetectorGetDictionaryAt(NativeHandle, i, out IntPtr dictionary));
+                    result[i] = new ArucoDictionary(dictionary);
+                }
+                return result;
+            }
+            catch
+            {
+                for (int i = 0; i < result.Length; i++) result[i]?.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>Replaces all dictionaries searched by this detector.</summary>
+        public ArucoDetector SetDictionaries(ArucoDictionary[] dictionaries)
+        {
+            ThrowIfDisposed();
+            IntPtr[] nativeDictionaries = ToNativeHandles(dictionaries, nameof(dictionaries));
+            NativeException.ThrowIfError(NativeMethods.ArucoDetectorSetDictionaries(NativeHandle, nativeDictionaries, nativeDictionaries.Length));
             return this;
         }
 
@@ -140,6 +190,69 @@ namespace OpenCvSharp.ObjDetect
             ThrowIfDisposed();
             ValidateNotNull(image, nameof(image));
             return DetectCore(image, withConfidence: true);
+        }
+
+        /// <summary>Detects markers and reports the dictionary index used for each result.</summary>
+        public ArucoMultiDictionaryDetectionResult DetectMarkersMultiDictionary(Mat image)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(image, nameof(image));
+            NativeException.ThrowIfError(NativeMethods.ArucoDetectorDetectMarkersMultiDictionaryCount(
+                NativeHandle, image.NativeHandle,
+                out int markerCount, out int cornerPointCount, out int rejectedCount, out int rejectedPointCount));
+            ValidateNativeCount(markerCount, nameof(markerCount));
+            ValidateNativeCount(cornerPointCount, nameof(cornerPointCount));
+            ValidateNativeCount(rejectedCount, nameof(rejectedCount));
+            ValidateNativeCount(rejectedPointCount, nameof(rejectedPointCount));
+
+            var cornerOffsets = new int[checked(markerCount + 1)];
+            var corners = new NativeMethods.Point2fNative[cornerPointCount];
+            var ids = new int[markerCount];
+            var dictionaryIndices = new int[markerCount];
+            var rejectedOffsets = new int[checked(rejectedCount + 1)];
+            var rejected = new NativeMethods.Point2fNative[rejectedPointCount];
+            fixed (int* cornerOffsetsPtr = cornerOffsets)
+            fixed (NativeMethods.Point2fNative* cornersPtr = corners)
+            fixed (int* idsPtr = ids)
+            fixed (int* dictionaryIndicesPtr = dictionaryIndices)
+            fixed (int* rejectedOffsetsPtr = rejectedOffsets)
+            fixed (NativeMethods.Point2fNative* rejectedPtr = rejected)
+            {
+                NativeException.ThrowIfError(NativeMethods.ArucoDetectorDetectMarkersMultiDictionaryFill(
+                    NativeHandle, image.NativeHandle,
+                    cornerOffsetsPtr, cornerOffsets.Length, cornersPtr, corners.Length,
+                    idsPtr, ids.Length, dictionaryIndicesPtr, dictionaryIndices.Length,
+                    rejectedOffsetsPtr, rejectedOffsets.Length, rejectedPtr, rejected.Length,
+                    out int writtenMarkers, out int writtenCorners, out int writtenRejected, out int writtenRejectedPoints));
+                if (writtenMarkers != markerCount || writtenCorners != cornerPointCount || writtenRejected != rejectedCount || writtenRejectedPoints != rejectedPointCount)
+                    throw new OpenCvException("Aruco multi-dictionary detection counts changed during count/fill.");
+            }
+
+            var detection = new ArucoDetectionResult(
+                PointSetMarshaller.ToPoint2fGroups(cornerOffsets, ToPoint2fArray(corners, corners.Length), markerCount),
+                ids,
+                PointSetMarshaller.ToPoint2fGroups(rejectedOffsets, ToPoint2fArray(rejected, rejected.Length), rejectedCount),
+                Array.Empty<float>());
+            return new ArucoMultiDictionaryDetectionResult(detection, dictionaryIndices);
+        }
+
+        /// <summary>Draws detected marker borders and optional identifiers into an image.</summary>
+        public static void DrawDetectedMarkers(Mat image, Point2f[][] corners, int[]? ids = null, Scalar borderColor = default)
+        {
+            ValidateNotNull(image, nameof(image));
+            PointSetMarshaller.FlattenPoint2fGroups(corners, nameof(corners), out int[] offsets, out Point2f[] flatCorners);
+            ids ??= Array.Empty<int>();
+            if (ids.Length != 0 && ids.Length != corners.Length) throw new ArgumentException("The id count must be zero or match the marker count.", nameof(ids));
+            var nativeCorners = ToNativePoint2fArray(flatCorners);
+            Scalar color = borderColor.Equals(default(Scalar)) ? new Scalar(0, 255, 0, 0) : borderColor;
+            fixed (int* offsetsPtr = offsets)
+            fixed (NativeMethods.Point2fNative* cornersPtr = nativeCorners)
+            fixed (int* idsPtr = ids)
+            {
+                NativeException.ThrowIfError(NativeMethods.ArucoDrawDetectedMarkers(
+                    image.NativeHandle, offsetsPtr, corners.Length, cornersPtr, nativeCorners.Length,
+                    idsPtr, ids.Length, color.V0, color.V1, color.V2, color.V3));
+            }
         }
 
         /// <summary>
@@ -385,6 +498,24 @@ namespace OpenCvSharp.ObjDetect
             }
 
             return result;
+        }
+
+        private static IntPtr[] ToNativeHandles(ArucoDictionary[] dictionaries, string parameterName)
+        {
+            if (dictionaries == null) throw new ArgumentNullException(parameterName);
+            if (dictionaries.Length == 0) throw new ArgumentException("At least one dictionary is required.", parameterName);
+            var result = new IntPtr[dictionaries.Length];
+            for (int i = 0; i < dictionaries.Length; i++)
+            {
+                if (dictionaries[i] == null) throw new ArgumentException("Dictionaries cannot contain null elements.", parameterName);
+                result[i] = dictionaries[i].NativeHandle;
+            }
+            return result;
+        }
+
+        private static void ValidateNativeCount(int value, string name)
+        {
+            if (value < 0) throw new OpenCvException("Native " + name + " is negative.");
         }
 
         private static int[] Trim(int[] values, int count)

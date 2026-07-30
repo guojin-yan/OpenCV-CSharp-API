@@ -1,0 +1,1971 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/dnn.hpp compatibility include closure: parser-emitted dict.hpp, dnn.hpp, and utils/inference_engine.hpp declarations",
+  "reviewStatus": "reviewed",
+  "limitation": "Parser identities preserve include order, overloads, defaults, direction metadata, and build conditions; this module map does not claim repository-wide OpenCV parity.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "class cv.dnn.DictValue",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.dnn.DictValue.DictValue(int i)-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.dnn.DictValue.DictValue(double p)-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.dnn.DictValue.DictValue(String s[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.dnn.DictValue.isInt()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.dnn.DictValue.isString()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.dnn.DictValue.isReal()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.dnn.DictValue.getIntValue(int idx=-1)-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.dnn.DictValue.getRealValue(int idx=-1)-\u003Edouble",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.dnn.DictValue.getStringValue(int idx=-1)-\u003EString",
+      "classification": "intentionally-omitted",
+      "reason": "DictValue requires a separately designed discriminated scalar/array ownership model and is deferred with LayerParams rather than exposing C\u002B\u002B storage.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "enum cv.dnn.Backend[const cv.dnn.DNN_BACKEND_DEFAULT=0;const cv.dnn.DNN_BACKEND_INFERENCE_ENGINE=2;const cv.dnn.DNN_BACKEND_OPENCV=2\u002B1;const cv.dnn.DNN_BACKEND_VKCOM=2\u002B2;const cv.dnn.DNN_BACKEND_CUDA=2\u002B3;const cv.dnn.DNN_BACKEND_WEBNN=2\u002B4;const cv.dnn.DNN_BACKEND_TIMVX=2\u002B5;const cv.dnn.DNN_BACKEND_CANN=2\u002B6]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "enum cv.dnn.Target[const cv.dnn.DNN_TARGET_CPU=0;const cv.dnn.DNN_TARGET_OPENCL=0\u002B1;const cv.dnn.DNN_TARGET_OPENCL_FP16=0\u002B2;const cv.dnn.DNN_TARGET_MYRIAD=0\u002B3;const cv.dnn.DNN_TARGET_VULKAN=0\u002B4;const cv.dnn.DNN_TARGET_FPGA=0\u002B5;const cv.dnn.DNN_TARGET_CUDA=0\u002B6;const cv.dnn.DNN_TARGET_CUDA_FP16=0\u002B7;const cv.dnn.DNN_TARGET_HDDL=0\u002B8;const cv.dnn.DNN_TARGET_NPU=0\u002B9;const cv.dnn.DNN_TARGET_CPU_FP16=0\u002B10]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "enum cv.dnn.TracingMode[const cv.dnn.DNN_TRACE_NONE=0;const cv.dnn.DNN_TRACE_ALL=1;const cv.dnn.DNN_TRACE_OP=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "enum cv.dnn.ProfilingMode[const cv.dnn.DNN_PROFILE_NONE=0;const cv.dnn.DNN_PROFILE_SUMMARY=1;const cv.dnn.DNN_PROFILE_DETAILED=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "enum cv.dnn.ModelFormat[const cv.dnn.DNN_MODEL_GENERIC=0;const cv.dnn.DNN_MODEL_ONNX=1;const cv.dnn.DNN_MODEL_TF=2;const cv.dnn.DNN_MODEL_TFLITE=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.dnn.getAvailableTargets(dnn_Backend be)-\u003Estd::vector\u003CTarget\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_get_available_targets_count",
+        "jyppx_ocv_dnn_get_available_targets_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Dnn.DnnTarget[] GetAvailableTargets(OpenCvSharp.Dnn.DnnBackend backend)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.dnn.ArgKind[const cv.dnn.DNN_ARG_EMPTY=0;const cv.dnn.DNN_ARG_CONST=1;const cv.dnn.DNN_ARG_INPUT=2;const cv.dnn.DNN_ARG_OUTPUT=3;const cv.dnn.DNN_ARG_TEMP=4;const cv.dnn.DNN_ARG_PATTERN=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "class cv.dnn.Layer",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.dnn.Layer.finalize(vector_Mat inputs;vector_Mat outputs[/O])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Direct virtual Layer execution/finalization, including the deprecated run overload, is deferred because backend-owned input/output/internal buffers require an independent lifetime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.dnn.Layer.run(vector_Mat inputs[/C,/Ref];vector_Mat outputs[/O,/Ref];vector_Mat internals[/IO,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Direct virtual Layer execution/finalization, including the deprecated run overload, is deferred because backend-owned input/output/internal buffers require an independent lifetime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.dnn.Layer.outputNameToIndex(String outputName[/C,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_layer_output_name_to_index",
+        "jyppx_ocv_dnn_layer_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Layer|method|public;instance|System.Int32 OutputNameToIndex(System.String outputName)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "class cv.dnn.Net",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.dnn.Net.Net()-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_create_empty",
+        "jyppx_ocv_dnn_net_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net CreateEmpty()"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.dnn.Net.readFromModelOptimizer(String xml[/PATH,/C,/Ref];String bin[/PATH,/C,/Ref])-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_model_optimizer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.String xml,System.String bin=\u0022\u0022)"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.dnn.Net.readFromModelOptimizer(vector_uchar bufferModelConfig[/C,/Ref];vector_uchar bufferWeights[/C,/Ref])-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_model_optimizer_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.Byte[] modelConfigBuffer,System.Byte[] weightsBuffer)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.dnn.Net.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|property|instance;get:public|System.Boolean Empty"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.dnn.Net.dump()-\u003EString",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_core_utf8_result_data",
+        "jyppx_ocv_core_utf8_result_release",
+        "jyppx_ocv_core_utf8_result_size",
+        "jyppx_ocv_dnn_net_dump"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String Dump()"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.dnn.Net.dumpToFile(String path[/PATH,/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_dump_to_file"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Void DumpToFile(System.String path)"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.dnn.Net.dumpToPbtxt(String path[/PATH,/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_dump_to_pbtxt"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Void DumpToPbtxt(System.String path)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.dnn.Net.addLayer(String name[/C,/Ref];String type[/C,/Ref];int dtype[/C,/Ref];LayerParams params[/Ref])-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "Programmatic layer construction depends on the deferred LayerParams/DictValue graph-building object model.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.dnn.Net.addLayerToPrev(String name[/C,/Ref];String type[/C,/Ref];int dtype[/C,/Ref];LayerParams params[/Ref])-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "Programmatic layer construction depends on the deferred LayerParams/DictValue graph-building object model.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.dnn.Net.getLayerId(String layer[/C,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_layer_id"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32 GetLayerId(System.String layerName)"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.dnn.Net.getLayerNames()-\u003Estd::vector\u003CString\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_layer_names_count",
+        "jyppx_ocv_dnn_net_get_layer_names_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String[] GetLayerNames()"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.dnn.Net.getLayer(int layerId)-\u003EPtr\u003CLayer\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_layer_release_handle",
+        "jyppx_ocv_dnn_net_get_layer_by_id"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Layer GetLayer(System.Int32 layerId)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.dnn.Net.getLayer(String layerName[/C,/Ref])-\u003EPtr\u003CLayer\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_layer_release_handle",
+        "jyppx_ocv_dnn_net_get_layer_by_name"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Layer GetLayer(System.String layerName)"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.dnn.Net.getLayer(LayerId layerId[/C,/Ref])-\u003EPtr\u003CLayer\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The C\u002B\u002B LayerId convenience overload is projected through the selected numeric-id and string-name overloads without exposing its implementation-specific representation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.dnn.Net.connect(String outPin;String inpPin)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_connect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net Connect(System.String outputPin,System.String inputPin)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.dnn.Net.registerOutput(string outputName[/C,/Ref];int layerId;int outputPort)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_register_output"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32 RegisterOutput(System.String outputName,System.Int32 layerId,System.Int32 outputPort)"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.dnn.Net.setInputsNames(vector_String inputBlobNames[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_inputs_names"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetInputsNames(System.String[] inputBlobNames)"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.dnn.Net.setInputShape(String inputName[/C,/Ref];MatShape shape[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_input_shape"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetInputShape(System.String inputName,System.Int32[] shape)"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.dnn.Net.forward(String outputName=String()[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_forward"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat Forward(System.String outputName=\u0022\u0022)"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.dnn.Net.forwardAsync(String outputName=String()[/C,/Ref])-\u003EAsyncArray",
+      "classification": "unsupported",
+      "reason": "AsyncArray completion, backend thread origin, exception propagation, cancellation, and lifetime do not yet have a stable cross-platform managed ownership contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];String outputName=String()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_forward"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Void Forward(OpenCvSharp.Core.Mat output,System.String outputName=\u0022\u0022)"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_forward_many"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat[] Forward(System.String[] outputNames)"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.dnn.Net.forward(vector_vector_Mat outputBlobs[/O,/Ref];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_mat_groups_get_counts",
+        "jyppx_ocv_dnn_mat_groups_get_group_offsets",
+        "jyppx_ocv_dnn_mat_groups_release_handle",
+        "jyppx_ocv_dnn_mat_groups_take_mats",
+        "jyppx_ocv_dnn_net_forward_and_retrieve"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat[][] ForwardAndRetrieve(System.String[] outputNames)"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.dnn.Net.setPreferableBackend(int backendId)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_preferable_backend"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetPreferableBackend(OpenCvSharp.Dnn.DnnBackend backend)"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.dnn.Net.setPreferableTarget(int targetId)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_preferable_target"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetPreferableTarget(OpenCvSharp.Dnn.DnnTarget target)"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.dnn.Net.finalizeNet()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_finalize"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net FinalizeNetwork()"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.dnn.Net.setTracingMode(TracingMode tracingMode)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_tracing_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetTracingMode(OpenCvSharp.Dnn.DnnTracingMode mode)"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.dnn.Net.getTracingMode()-\u003ETracingMode",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_tracing_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnTracingMode GetTracingMode()"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.dnn.Net.setProfilingMode(ProfilingMode profilingMode)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_profiling_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetProfilingMode(OpenCvSharp.Dnn.DnnProfilingMode mode)"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.dnn.Net.getProfilingMode()-\u003EProfilingMode",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_profiling_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnProfilingMode GetProfilingMode()"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.dnn.Net.getModelFormat()-\u003EModelFormat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_model_format"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|property|instance;get:public|OpenCvSharp.Dnn.DnnModelFormat ModelFormat"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.dnn.Net.setInput(Mat blob[/ND];String name=\u0022\u0022[/C,/Ref];double scalefactor=1.0;Scalar mean=Scalar()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_input"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetInput(OpenCvSharp.Core.Mat blob,System.String name=\u0022\u0022,System.Double scaleFactor=1,OpenCvSharp.Core.Scalar? mean=null)"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.dnn.Net.setParam(int layer;int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_param_by_id"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetParam(System.Int32 layerId,System.Int32 parameterIndex,OpenCvSharp.Core.Mat value)"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.dnn.Net.setParam(String layerName[/C,/Ref];int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_set_param_by_name"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetParam(System.String layerName,System.Int32 parameterIndex,OpenCvSharp.Core.Mat value)"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.dnn.Net.getParam(int layer;int numParam=0)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_param_by_id"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat GetParam(System.Int32 layerId,System.Int32 parameterIndex=0)"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.dnn.Net.getParam(String layerName[/C,/Ref];int numParam=0)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_param_by_name"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat GetParam(System.String layerName,System.Int32 parameterIndex=0)"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.dnn.Net.getUnconnectedOutLayers()-\u003Estd::vector\u003Cint\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_unconnected_out_layers_count",
+        "jyppx_ocv_dnn_net_get_unconnected_out_layers_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32[] GetUnconnectedOutLayers()"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.dnn.Net.getUnconnectedOutLayersNames()-\u003Estd::vector\u003CString\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_unconnected_out_layers_names_count",
+        "jyppx_ocv_dnn_net_get_unconnected_out_layers_names_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String[] GetUnconnectedOutLayersNames()"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.dnn.Net.getLayerShapes(vector_MatShape netInputShapes[/C,/Ref];vector_int netInputTypes[/C,/Ref];int layerId[/C];vector_MatShape inLayerShapes[/O,/Ref];vector_MatShape outLayerShapes[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_layer_shapes_count",
+        "jyppx_ocv_dnn_net_get_layer_shapes_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnLayerShapes GetLayerShapes(System.Int32[][] inputShapes,System.Int32[] inputTypes,System.Int32 layerId)"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.dnn.Net.getFLOPS(vector_MatShape netInputShapes[/C,/Ref];vector_int netInputTypes[/C,/Ref])-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_flops_many"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int64 GetFLOPS(System.Int32[] inputShape,System.Int32 inputType=5)",
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int64 GetFLOPS(System.Int32[][] inputShapes,System.Int32[] inputTypes)"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.dnn.Net.getLayerTypes(vector_String layersTypes[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_layer_types_count",
+        "jyppx_ocv_dnn_net_get_layer_types_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String[] GetLayerTypes()"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.dnn.Net.getLayersCount(String layerType[/C,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_layers_count_by_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32 GetLayersCountByType(System.String layerType)"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.dnn.Net.getMemoryConsumption(vector_MatShape netInputShapes[/C,/Ref];vector_int netInputTypes[/C,/Ref];size_t weights[/O,/Ref];size_t blobs[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_memory_consumption"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnMemoryConsumption GetMemoryConsumption(System.Int32[][] inputShapes,System.Int32[] inputTypes)"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.dnn.Net.enableFusion(bool fusion)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_enable_fusion"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net EnableFusion(System.Boolean enabled)"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.dnn.Net.enableWinograd(bool useWinograd)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_enable_winograd"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net EnableWinograd(System.Boolean enabled)"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.dnn.Net.getPerfProfile(vector_double timings[/O,/Ref])-\u003Eint64",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_perf_profile_count",
+        "jyppx_ocv_dnn_net_get_perf_profile_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnPerfProfile GetPerfProfile()"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.dnn.Net.enableKVCache()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_enable_kv_cache"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net EnableKvCache()"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.dnn.Net.disableKVCache()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_disable_kv_cache"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net DisableKvCache()"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.dnn.Net.resetKVCache()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_reset_kv_cache"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net ResetKvCache()"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.dnn.Net.getPerfProfile(vector_string names[/O,/Ref];vector_string timems[/O,/Ref];vector_string counts[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_get_detailed_perf_profile_count",
+        "jyppx_ocv_dnn_net_get_detailed_perf_profile_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnDetailedPerfProfile GetDetailedPerfProfile()"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.dnn.Net.printPerfProfile()-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "printPerfProfile writes process stdout; structured profile retrieval is selected instead so callers retain output ownership and formatting control.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "enum cv.dnn.EngineType[const cv.dnn.ENGINE_CLASSIC=1;const cv.dnn.ENGINE_NEW=2;const cv.dnn.ENGINE_AUTO=3;const cv.dnn.ENGINE_ORT=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.dnn.readNetFromTensorflow(String model[/PATH,/C,/Ref];String config=String()[/PATH,/C,/Ref];int engine=ENGINE_AUTO;vector_String extraOutputs=std::vector\u003CString\u003E()[/C,/Ref])-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_tensorflow_ex"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTensorflow(System.String model,System.String config,OpenCvSharp.Dnn.DnnEngine engine,System.String[] extraOutputs)",
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTensorflow(System.String model,System.String config=\u0022\u0022,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.dnn.readNetFromTensorflow(vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO;vector_String extraOutputs=std::vector\u003CString\u003E()[/C,/Ref])-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_tensorflow_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTensorflow(System.Byte[] modelBuffer,System.Byte[]? configBuffer=null,OpenCvSharp.Dnn.DnnEngine engine=Auto,System.String[]? extraOutputs=null)"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.dnn.readNetFromTFLite(String model[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_tflite"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTFLite(System.String model,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.dnn.readNetFromTFLite(vector_uchar bufferModel[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_tflite_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTFLite(System.Byte[] modelBuffer,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.dnn.readNet(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref];String framework=\u0022\u0022[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNet(System.String model,System.String config=\u0022\u0022,System.String framework=\u0022\u0022,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.dnn.readNet(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNet(System.String framework,System.Byte[] modelBuffer,System.Byte[]? configBuffer=null,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.dnn.readNetFromModelOptimizer(String xml[/PATH,/C,/Ref];String bin=\u0022\u0022[/PATH,/C,/Ref])-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_model_optimizer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.String xml,System.String bin=\u0022\u0022)"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.dnn.readNetFromModelOptimizer(vector_uchar bufferModelConfig[/C,/Ref];vector_uchar bufferWeights[/C,/Ref])-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_model_optimizer_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.Byte[] modelConfigBuffer,System.Byte[] weightsBuffer)"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.dnn.readNetFromONNX(String onnxFile[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_onnx"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromOnnx(System.String model,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.dnn.readNetFromONNX(vector_uchar buffer[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_net_release_handle",
+        "jyppx_ocv_dnn_read_net_from_onnx_buffer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromOnnx(System.Byte[] modelBuffer,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.dnn.readTensorFromONNX(String path[/PATH,/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_read_tensor_from_onnx"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat ReadTensorFromOnnx(System.String path)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void ReadTensorFromOnnx(System.String path,OpenCvSharp.Core.Mat output)"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.dnn.blobFromImage(Mat image;double scalefactor=1.0;Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_image"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImage(OpenCvSharp.Core.Mat image,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.dnn.blobFromImages(vector_Mat images;double scalefactor=1.0;Size size=Size();Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_images"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImages(OpenCvSharp.Core.Mat[] images,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E images,OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "enum cv.dnn.ImagePaddingMode[const cv.dnn.DNN_PMODE_NULL=0;const cv.dnn.DNN_PMODE_CROP_CENTER=1;const cv.dnn.DNN_PMODE_LETTERBOX=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 88,
+      "identity": "class cv.dnn.Image2BlobParams",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.dnn.Image2BlobParams.Image2BlobParams()-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_image_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.dnn.Image2BlobParams.Image2BlobParams(Scalar scalefactor[/C,/Ref];Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;int ddepth=CV_32F;DataLayout datalayout=DNN_LAYOUT_NCHW;ImagePaddingMode mode=dnn::DNN_PMODE_NULL;Scalar borderValue=0.0)-\u003E",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_image_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|constructor|public;instance|.ctor(OpenCvSharp.Core.Scalar scaleFactor,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Int32 ddepth=5,OpenCvSharp.Dnn.DnnDataLayout dataLayout=Nchw,OpenCvSharp.Dnn.DnnImagePaddingMode paddingMode=None,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.dnn.Image2BlobParams.blobRectToImageRect(Rect rBlob[/C,/Ref];Size size[/C,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_rect_to_image_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|method|public;instance|OpenCvSharp.Core.Rect BlobRectToImageRect(OpenCvSharp.Core.Rect blobRect,OpenCvSharp.Core.Size imageSize)"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.dnn.Image2BlobParams.blobRectsToImageRects(vector_Rect rBlob[/C,/Ref];vector_Rect rImg[/O,/Ref];Size size[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_rects_to_image_rects"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|method|public;instance|OpenCvSharp.Core.Rect[] BlobRectsToImageRects(OpenCvSharp.Core.Rect[] blobRects,OpenCvSharp.Core.Size imageSize)"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.dnn.blobFromImageWithParams(Mat image;Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_image_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.dnn.blobFromImageWithParams(Mat image;Mat blob[/O];Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_image_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.dnn.blobFromImagesWithParams(vector_Mat images;Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_images_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.dnn.blobFromImagesWithParams(vector_Mat images;Mat blob[/O];Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_blob_from_images_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.dnn.imagesFromBlob(Mat blob_[/C,/Ref];vector_Mat images_[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Correlated neutral C ABI and managed public evidence implements this selected DNN parser identity.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_images_from_blob_count",
+        "jyppx_ocv_dnn_images_from_blob_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat[] ImagesFromBlob(OpenCvSharp.Core.Mat blob)"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.dnn.writeTextGraph(String model[/PATH,/C,/Ref];String output[/PATH,/C,/Ref])-\u003Evoid",
+      "classification": "unsupported",
+      "reason": "writeTextGraph is a development-time model conversion helper with filesystem side effects and is outside the packaged inference runtime contract.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.dnn.NMSBoxes(vector_Rect2d bboxes[/C,/Ref];vector_float scores[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.dnn.NMSBoxes(vector_RotatedRect bboxes[/C,/Ref];vector_float scores[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.dnn.NMSBoxesBatched(vector_Rect2d bboxes[/C,/Ref];vector_float scores[/C,/Ref];vector_int class_ids[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 102,
+      "identity": "enum class cv.dnn.SoftNMSMethod[const cv.dnn.SoftNMSMethod.SOFTNMS_LINEAR=1;const cv.dnn.SoftNMSMethod.SOFTNMS_GAUSSIAN=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.dnn.softNMSBoxes(vector_Rect bboxes[/C,/Ref];vector_float scores[/C,/Ref];vector_float updated_scores[/O,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];size_t top_k=0;float sigma=0.5[/C];SoftNMSMethod method=SoftNMSMethod::SOFTNMS_GAUSSIAN)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "class cv.dnn.Model",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.dnn.Model.Model(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.dnn.Model.Model(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.dnn.Model.setInputSize(Size size[/C,/Ref])-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.dnn.Model.setInputSize(int width;int height)-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.dnn.Model.setInputMean(Scalar mean[/C,/Ref])-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.dnn.Model.setInputScale(Scalar scale[/C,/Ref])-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.dnn.Model.setInputCrop(bool crop)-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.dnn.Model.setInputSwapRB(bool swapRB)-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.dnn.Model.setOutputNames(vector_String outNames[/C,/Ref])-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.dnn.Model.setInputParams(double scale=1.0;Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.dnn.Model.predict(Mat frame;vector_Mat outs[/O])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.dnn.Model.setPreferableBackend(dnn_Backend backendId)-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.dnn.Model.setPreferableTarget(dnn_Target targetId)-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.dnn.Model.enableWinograd(bool useWinograd)-\u003EModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "class cv.dnn.ClassificationModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.dnn.ClassificationModel.ClassificationModel(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.dnn.ClassificationModel.ClassificationModel(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.dnn.ClassificationModel.setEnableSoftmaxPostProcessing(bool enable)-\u003EClassificationModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.dnn.ClassificationModel.getEnableSoftmaxPostProcessing()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.dnn.ClassificationModel.classify(Mat frame;int classId[/O,/Ref];float conf[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "class cv.dnn.KeypointsModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.dnn.KeypointsModel.KeypointsModel(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.dnn.KeypointsModel.KeypointsModel(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.dnn.KeypointsModel.estimate(Mat frame;float thresh=0.5)-\u003Estd::vector\u003CPoint2f\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "class cv.dnn.SegmentationModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.dnn.SegmentationModel.SegmentationModel(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.dnn.SegmentationModel.SegmentationModel(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.dnn.SegmentationModel.segment(Mat frame;Mat mask[/O])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "class cv.dnn.DetectionModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.dnn.DetectionModel.DetectionModel(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.dnn.DetectionModel.DetectionModel(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.dnn.DetectionModel.setNmsAcrossClasses(bool value)-\u003EDetectionModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.dnn.DetectionModel.getNmsAcrossClasses()-\u003Ebool",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.dnn.DetectionModel.detect(Mat frame;vector_int classIds[/O,/Ref];vector_float confidences[/O,/Ref];vector_Rect boxes[/O,/Ref];float confThreshold=0.5f;float nmsThreshold=0.0f)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "identity": "class cv.dnn.TextRecognitionModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.dnn.TextRecognitionModel.TextRecognitionModel(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.dnn.TextRecognitionModel.TextRecognitionModel(string model[/PATH,/C,/Ref];string config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.dnn.TextRecognitionModel.setDecodeType(string decodeType[/C,/Ref])-\u003ETextRecognitionModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.dnn.TextRecognitionModel.getDecodeType()-\u003Estd::string",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.dnn.TextRecognitionModel.setDecodeOptsCTCPrefixBeamSearch(int beamSize;int vocPruneSize=0)-\u003ETextRecognitionModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.dnn.TextRecognitionModel.setVocabulary(vector_string vocabulary[/C,/Ref])-\u003ETextRecognitionModel",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.dnn.TextRecognitionModel.getVocabulary()-\u003Estd::vector\u003Cstd::string\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.dnn.TextRecognitionModel.recognize(Mat frame)-\u003Estd::string",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.dnn.TextRecognitionModel.recognize(Mat frame;vector_Mat roiRects;vector_string results[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "class cv.dnn.TextDetectionModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.dnn.TextDetectionModel.detect(Mat frame;vector_vector_Point detections[/O,/Ref];vector_float confidences[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.dnn.TextDetectionModel.detect(Mat frame;vector_vector_Point detections[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.dnn.TextDetectionModel.detectTextRectangles(Mat frame;vector_RotatedRect detections[/O,/Ref];vector_float confidences[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.dnn.TextDetectionModel.detectTextRectangles(Mat frame;vector_RotatedRect detections[/O,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "identity": "class cv.dnn.TextDetectionModel_EAST",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.dnn.TextDetectionModel_EAST.TextDetectionModel_EAST(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.dnn.TextDetectionModel_EAST.TextDetectionModel_EAST(string model[/PATH,/C,/Ref];string config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.dnn.TextDetectionModel_EAST.setConfidenceThreshold(float confThreshold)-\u003ETextDetectionModel_EAST",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.dnn.TextDetectionModel_EAST.getConfidenceThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.dnn.TextDetectionModel_EAST.setNMSThreshold(float nmsThreshold)-\u003ETextDetectionModel_EAST",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.dnn.TextDetectionModel_EAST.getNMSThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "identity": "class cv.dnn.TextDetectionModel_DB",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.dnn.TextDetectionModel_DB.TextDetectionModel_DB(Net network[/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.dnn.TextDetectionModel_DB.TextDetectionModel_DB(string model[/PATH,/C,/Ref];string config=\u0022\u0022[/PATH,/C,/Ref])-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.dnn.TextDetectionModel_DB.setBinaryThreshold(float binaryThreshold)-\u003ETextDetectionModel_DB",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.dnn.TextDetectionModel_DB.getBinaryThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.dnn.TextDetectionModel_DB.setPolygonThreshold(float polygonThreshold)-\u003ETextDetectionModel_DB",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.dnn.TextDetectionModel_DB.getPolygonThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.dnn.TextDetectionModel_DB.setUnclipRatio(double unclipRatio)-\u003ETextDetectionModel_DB",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.dnn.TextDetectionModel_DB.getUnclipRatio()-\u003Edouble",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.dnn.TextDetectionModel_DB.setMaxCandidates(int maxCandidates)-\u003ETextDetectionModel_DB",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.dnn.TextDetectionModel_DB.getMaxCandidates()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "High-level Model and task-specific derived wrappers form a separate model-backed object family requiring independent handles, deterministic fixtures, and result ownership tests.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 172,
+      "identity": "class cv.dnn.Tokenizer",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted enum or class metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.dnn.Tokenizer.load(string model_config[/PATH,/C,/Ref])-\u003ETokenizer",
+      "classification": "intentionally-omitted",
+      "reason": "Tokenizer loading and UTF-8 token conversion form a separate external-model object family and are deferred to a dedicated ownership batch.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.dnn.Tokenizer.encode(string text[/C,/Ref])-\u003Estd::vector\u003Cint\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "Tokenizer loading and UTF-8 token conversion form a separate external-model object family and are deferred to a dedicated ownership batch.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.dnn.Tokenizer.decode(vector_int tokens[/C,/Ref])-\u003Estd::string",
+      "classification": "intentionally-omitted",
+      "reason": "Tokenizer loading and UTF-8 token conversion form a separate external-model object family and are deferred to a dedicated ownership batch.",
+      "buildCondition": "unconditional-parser-surface",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.dnn.getInferenceEngineBackendType()-\u003Ecv::String",
+      "classification": "upstream-conditional",
+      "reason": "The deprecated Inference Engine device/plugin control requires optional external OpenVINO, VPU, or HDDL runtime state and is not a portable locally supported contract.",
+      "buildCondition": "deprecated-inference-engine-device-or-plugin-runtime",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.dnn.setInferenceEngineBackendType(String newBackendType[/C,/Ref])-\u003Ecv::String",
+      "classification": "upstream-conditional",
+      "reason": "The deprecated Inference Engine device/plugin control requires optional external OpenVINO, VPU, or HDDL runtime state and is not a portable locally supported contract.",
+      "buildCondition": "deprecated-inference-engine-device-or-plugin-runtime",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.dnn.resetMyriadDevice()-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "The deprecated Inference Engine device/plugin control requires optional external OpenVINO, VPU, or HDDL runtime state and is not a portable locally supported contract.",
+      "buildCondition": "deprecated-inference-engine-device-or-plugin-runtime",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.dnn.getInferenceEngineVPUType()-\u003Ecv::String",
+      "classification": "upstream-conditional",
+      "reason": "The deprecated Inference Engine device/plugin control requires optional external OpenVINO, VPU, or HDDL runtime state and is not a portable locally supported contract.",
+      "buildCondition": "deprecated-inference-engine-device-or-plugin-runtime",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.dnn.getInferenceEngineCPUType()-\u003Ecv::String",
+      "classification": "upstream-conditional",
+      "reason": "The deprecated Inference Engine device/plugin control requires optional external OpenVINO, VPU, or HDDL runtime state and is not a portable locally supported contract.",
+      "buildCondition": "deprecated-inference-engine-device-or-plugin-runtime",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.dnn.releaseHDDLPlugin()-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "The deprecated Inference Engine device/plugin control requires optional external OpenVINO, VPU, or HDDL runtime state and is not a portable locally supported contract.",
+      "buildCondition": "deprecated-inference-engine-device-or-plugin-runtime",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

@@ -37,9 +37,46 @@ struct jyppx_ocv_line_segment_detector
 #endif
 };
 
+struct jyppx_ocv_generalized_hough
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::Ptr<cv::GeneralizedHough> value;
+    cv::Ptr<cv::GeneralizedHoughBallard> ballard;
+    cv::Ptr<cv::GeneralizedHoughGuil> guil;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_font_face
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::FontFace value;
+
+    jyppx_ocv_font_face() = default;
+
+    explicit jyppx_ocv_font_face(const char* font_path_or_name)
+        : value(font_path_or_name)
+    {
+    }
+#else
+    int placeholder;
+#endif
+};
+
 namespace
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::InputArray input_or_no_array(const jyppx_ocv_mat* mat)
+    {
+        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+    }
+
+    cv::OutputArray output_or_no_array(jyppx_ocv_mat* mat)
+    {
+        return mat == nullptr ? cv::noArray() : cv::OutputArray(opencv_csharp_native::mat_value(mat));
+    }
+
     cv::Point2f get_point2f(float x, float y)
     {
         return cv::Point2f(x, y);
@@ -280,6 +317,16 @@ namespace
         if (detector->value.empty())
         {
             return opencv_csharp_native::set_invalid_argument(api_name, "detector");
+        }
+
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_generalized_hough(const char* api_name, const jyppx_ocv_generalized_hough* hough)
+    {
+        if (hough == nullptr || hough->value.empty())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "hough");
         }
 
         return OPENCV_CSHARP_STATUS_OK;
@@ -863,6 +910,30 @@ namespace
             mode,
             method,
             cv::Point(offset_x, offset_y));
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int find_contours_link_runs_core(
+        const char* api_name,
+        const jyppx_ocv_mat* image,
+        int include_hierarchy,
+        std::vector<std::vector<cv::Point>>& contours,
+        std::vector<cv::Vec4i>& hierarchy)
+    {
+        if (image == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "image");
+        }
+
+        if (include_hierarchy != 0)
+        {
+            cv::findContoursLinkRuns(opencv_csharp_native::mat_value(image), contours, hierarchy);
+        }
+        else
+        {
+            cv::findContoursLinkRuns(opencv_csharp_native::mat_value(image), contours);
+        }
+
         return OPENCV_CSHARP_STATUS_OK;
     }
 
@@ -7575,12 +7646,13 @@ int jyppx_ocv_imgproc_min_enclosing_convex_polygon(
         }
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)
-        const std::vector<cv::Point> points = get_points_from_xy(points_xy, point_count);
+        const std::vector<cv::Point> integer_points = get_points_from_xy(points_xy, point_count);
+        const std::vector<cv::Point2f> points = get_point2f_points(integer_points);
         std::vector<cv::Point2f> polygon;
 
         if (point_count == k)
         {
-            polygon = get_point2f_points(points);
+            polygon = points;
             *area = static_cast<double>(cv::contourArea(points, false));
         }
         else
@@ -8185,6 +8257,1995 @@ int jyppx_ocv_imgproc_get_text_size(
         (void)font_face;
         (void)font_scale;
         (void)thickness;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_ballard_create(jyppx_ocv_generalized_hough** hough)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_ballard_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (hough == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "hough");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Ptr<cv::GeneralizedHoughBallard> value = cv::createGeneralizedHoughBallard();
+        auto result = new (std::nothrow) jyppx_ocv_generalized_hough{};
+        if (result == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        result->value = value;
+        result->ballard = value;
+        *hough = result;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *hough = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_guil_create(jyppx_ocv_generalized_hough** hough)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_guil_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (hough == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "hough");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Ptr<cv::GeneralizedHoughGuil> value = cv::createGeneralizedHoughGuil();
+        auto result = new (std::nothrow) jyppx_ocv_generalized_hough{};
+        if (result == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        result->value = value;
+        result->guil = value;
+        *hough = result;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *hough = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_imgproc_generalized_hough_release(jyppx_ocv_generalized_hough* hough)
+{
+    delete hough;
+}
+
+int jyppx_ocv_imgproc_generalized_hough_set_template(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* templ,
+    int center_x,
+    int center_y)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_set_template";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (templ == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "templ");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        hough->value->setTemplate(opencv_csharp_native::mat_value(templ), cv::Point(center_x, center_y));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)center_x;
+        (void)center_y;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_set_template_edges(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* edges,
+    const jyppx_ocv_mat* dx,
+    const jyppx_ocv_mat* dy,
+    int center_x,
+    int center_y)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_set_template_edges";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (edges == nullptr || dx == nullptr || dy == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, edges == nullptr ? "edges" : dx == nullptr ? "dx" : "dy");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        hough->value->setTemplate(
+            opencv_csharp_native::mat_value(edges),
+            opencv_csharp_native::mat_value(dx),
+            opencv_csharp_native::mat_value(dy),
+            cv::Point(center_x, center_y));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)center_x;
+        (void)center_y;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_detect(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* positions,
+    jyppx_ocv_mat* votes)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_detect";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || positions == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, image == nullptr ? "image" : "positions");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        cv::OutputArray votes_output = votes == nullptr ? cv::noArray() : cv::OutputArray(opencv_csharp_native::mat_value(votes));
+        hough->value->detect(opencv_csharp_native::mat_value(image), opencv_csharp_native::mat_value(positions), votes_output);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)votes;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_detect_edges(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* edges,
+    const jyppx_ocv_mat* dx,
+    const jyppx_ocv_mat* dy,
+    jyppx_ocv_mat* positions,
+    jyppx_ocv_mat* votes)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_detect_edges";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (edges == nullptr || dx == nullptr || dy == nullptr || positions == nullptr)
+        {
+            const char* parameter = edges == nullptr ? "edges" : dx == nullptr ? "dx" : dy == nullptr ? "dy" : "positions";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        cv::OutputArray votes_output = votes == nullptr ? cv::noArray() : cv::OutputArray(opencv_csharp_native::mat_value(votes));
+        hough->value->detect(
+            opencv_csharp_native::mat_value(edges),
+            opencv_csharp_native::mat_value(dx),
+            opencv_csharp_native::mat_value(dy),
+            opencv_csharp_native::mat_value(positions),
+            votes_output);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)votes;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_get_int_property(
+    const jyppx_ocv_generalized_hough* hough,
+    int property,
+    int* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_get_int_property";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (value == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "value");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        switch (property)
+        {
+        case 0: *value = hough->value->getCannyLowThresh(); break;
+        case 1: *value = hough->value->getCannyHighThresh(); break;
+        case 2: *value = hough->value->getMaxBufferSize(); break;
+        case 3:
+            if (!hough->ballard.empty()) *value = hough->ballard->getLevels();
+            else if (!hough->guil.empty()) *value = hough->guil->getLevels();
+            else return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            break;
+        case 4:
+            if (hough->ballard.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            *value = hough->ballard->getVotesThreshold();
+            break;
+        case 5:
+            if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            *value = hough->guil->getAngleThresh();
+            break;
+        case 6:
+            if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            *value = hough->guil->getScaleThresh();
+            break;
+        case 7:
+            if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            *value = hough->guil->getPosThresh();
+            break;
+        default:
+            return opencv_csharp_native::set_invalid_argument(api_name, "property");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)property;
+        *value = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_set_int_property(
+    jyppx_ocv_generalized_hough* hough,
+    int property,
+    int value)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_set_int_property";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        switch (property)
+        {
+        case 0: hough->value->setCannyLowThresh(value); break;
+        case 1: hough->value->setCannyHighThresh(value); break;
+        case 2: hough->value->setMaxBufferSize(value); break;
+        case 3:
+            if (!hough->ballard.empty()) hough->ballard->setLevels(value);
+            else if (!hough->guil.empty()) hough->guil->setLevels(value);
+            else return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            break;
+        case 4:
+            if (hough->ballard.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            hough->ballard->setVotesThreshold(value);
+            break;
+        case 5:
+            if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            hough->guil->setAngleThresh(value);
+            break;
+        case 6:
+            if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            hough->guil->setScaleThresh(value);
+            break;
+        case 7:
+            if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property");
+            hough->guil->setPosThresh(value);
+            break;
+        default:
+            return opencv_csharp_native::set_invalid_argument(api_name, "property");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)property;
+        (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_get_double_property(
+    const jyppx_ocv_generalized_hough* hough,
+    int property,
+    double* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_get_double_property";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (value == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "value");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        switch (property)
+        {
+        case 0: *value = hough->value->getMinDist(); break;
+        case 1: *value = hough->value->getDp(); break;
+        case 2: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getXi(); break;
+        case 3: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getAngleEpsilon(); break;
+        case 4: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getMinAngle(); break;
+        case 5: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getMaxAngle(); break;
+        case 6: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getAngleStep(); break;
+        case 7: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getMinScale(); break;
+        case 8: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getMaxScale(); break;
+        case 9: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); *value = hough->guil->getScaleStep(); break;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)property;
+        *value = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_generalized_hough_set_double_property(
+    jyppx_ocv_generalized_hough* hough,
+    int property,
+    double value)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_generalized_hough_set_double_property";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_generalized_hough(api_name, hough);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        switch (property)
+        {
+        case 0: hough->value->setMinDist(value); break;
+        case 1: hough->value->setDp(value); break;
+        case 2: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setXi(value); break;
+        case 3: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setAngleEpsilon(value); break;
+        case 4: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setMinAngle(value); break;
+        case 5: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setMaxAngle(value); break;
+        case 6: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setAngleStep(value); break;
+        case 7: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setMinScale(value); break;
+        case 8: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setMaxScale(value); break;
+        case 9: if (hough->guil.empty()) return opencv_csharp_native::set_invalid_argument(api_name, "property"); hough->guil->setScaleStep(value); break;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)hough;
+        (void)property;
+        (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_cvt_color_two_plane(const jyppx_ocv_mat* src1, const jyppx_ocv_mat* src2, jyppx_ocv_mat* dst, int code)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_cvt_color_two_plane";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src1 == nullptr || src2 == nullptr || dst == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src1 == nullptr ? "src1" : src2 == nullptr ? "src2" : "dst");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::cvtColorTwoPlane(opencv_csharp_native::mat_value(src1), opencv_csharp_native::mat_value(src2), opencv_csharp_native::mat_value(dst), code);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)code;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_demosaicing(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, int code, int dst_cn)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_demosaicing";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : "dst");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::demosaicing(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dst), code, dst_cn);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)code;
+        (void)dst_cn;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_apply_color_map(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, int colormap)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_apply_color_map";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : "dst");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::applyColorMap(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dst), colormap);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)colormap;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_apply_color_map_user(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, const jyppx_ocv_mat* user_color)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_apply_color_map_user";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr || user_color == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : dst == nullptr ? "dst" : "user_color");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::applyColorMap(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dst), opencv_csharp_native::mat_value(user_color));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_blend_linear(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    const jyppx_ocv_mat* weights1,
+    const jyppx_ocv_mat* weights2,
+    jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_blend_linear";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src1 == nullptr || src2 == nullptr || weights1 == nullptr || weights2 == nullptr || dst == nullptr)
+        {
+            const char* parameter = src1 == nullptr ? "src1" : src2 == nullptr ? "src2" : weights1 == nullptr ? "weights1" : weights2 == nullptr ? "weights2" : "dst";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::blendLinear(
+            opencv_csharp_native::mat_value(src1),
+            opencv_csharp_native::mat_value(src2),
+            opencv_csharp_native::mat_value(weights1),
+            opencv_csharp_native::mat_value(weights2),
+            opencv_csharp_native::mat_value(dst));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_stack_blur(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, int width, int height)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_stack_blur";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : "dst");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::stackBlur(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dst), cv::Size(width, height));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)width;
+        (void)height;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_spatial_gradient(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dx,
+    jyppx_ocv_mat* dy,
+    int ksize,
+    int border_type)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_spatial_gradient";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dx == nullptr || dy == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : dx == nullptr ? "dx" : "dy");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::spatialGradient(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dx), opencv_csharp_native::mat_value(dy), ksize, border_type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)ksize;
+        (void)border_type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_threshold_with_mask(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask,
+    double thresh,
+    double maxval,
+    int type,
+    double* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_threshold_with_mask";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr || mask == nullptr || result == nullptr)
+        {
+            const char* parameter = src == nullptr ? "src" : dst == nullptr ? "dst" : mask == nullptr ? "mask" : "result";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *result = cv::thresholdWithMask(
+            opencv_csharp_native::mat_value(src),
+            opencv_csharp_native::mat_value(dst),
+            opencv_csharp_native::mat_value(mask),
+            thresh,
+            maxval,
+            type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)thresh;
+        (void)maxval;
+        (void)type;
+        *result = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_draw_marker(
+    jyppx_ocv_mat* image,
+    int position_x,
+    int position_y,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    int marker_type,
+    int marker_size,
+    int thickness,
+    int line_type)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_draw_marker";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "image");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::drawMarker(
+            opencv_csharp_native::mat_value(image),
+            cv::Point(position_x, position_y),
+            cv::Scalar(color_v0, color_v1, color_v2, color_v3),
+            marker_type,
+            marker_size,
+            thickness,
+            line_type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)position_x;
+        (void)position_y;
+        (void)color_v0;
+        (void)color_v1;
+        (void)color_v2;
+        (void)color_v3;
+        (void)marker_type;
+        (void)marker_size;
+        (void)thickness;
+        (void)line_type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_fill_convex_poly(
+    jyppx_ocv_mat* image,
+    const int* points_xy,
+    int point_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    int line_type,
+    int shift)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_fill_convex_poly";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || points_xy == nullptr || point_count < 3)
+        {
+            const char* parameter = image == nullptr ? "image" : points_xy == nullptr ? "points_xy" : "point_count";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const std::vector<cv::Point> points = get_points_from_xy(points_xy, point_count);
+        cv::fillConvexPoly(
+            opencv_csharp_native::mat_value(image),
+            points,
+            cv::Scalar(color_v0, color_v1, color_v2, color_v3),
+            line_type,
+            shift);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)color_v0;
+        (void)color_v1;
+        (void)color_v2;
+        (void)color_v3;
+        (void)line_type;
+        (void)shift;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_get_font_scale_from_height(int font_face, int pixel_height, int thickness, double* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_get_font_scale_from_height";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (result == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "result");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *result = cv::getFontScaleFromHeight(font_face, pixel_height, thickness);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)font_face;
+        (void)pixel_height;
+        (void)thickness;
+        *result = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_undistort(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* new_camera_matrix)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_undistort";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr || camera_matrix == nullptr || dist_coeffs == nullptr)
+        {
+            const char* parameter = src == nullptr ? "src" : dst == nullptr ? "dst" : camera_matrix == nullptr ? "camera_matrix" : "dist_coeffs";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::undistort(
+            opencv_csharp_native::mat_value(src),
+            opencv_csharp_native::mat_value(dst),
+            opencv_csharp_native::mat_value(camera_matrix),
+            opencv_csharp_native::mat_value(dist_coeffs),
+            input_or_no_array(new_camera_matrix));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)new_camera_matrix;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_init_inverse_rectification_map(
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* r,
+    const jyppx_ocv_mat* new_camera_matrix,
+    int size_width,
+    int size_height,
+    int m1type,
+    jyppx_ocv_mat* map1,
+    jyppx_ocv_mat* map2)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_init_inverse_rectification_map";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (camera_matrix == nullptr || dist_coeffs == nullptr || r == nullptr || new_camera_matrix == nullptr || map1 == nullptr || map2 == nullptr || size_width <= 0 || size_height <= 0)
+        {
+            const char* parameter = camera_matrix == nullptr ? "camera_matrix"
+                : dist_coeffs == nullptr ? "dist_coeffs"
+                : r == nullptr ? "r"
+                : new_camera_matrix == nullptr ? "new_camera_matrix"
+                : map1 == nullptr ? "map1"
+                : map2 == nullptr ? "map2"
+                : size_width <= 0 ? "size_width" : "size_height";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::initInverseRectificationMap(
+            opencv_csharp_native::mat_value(camera_matrix),
+            opencv_csharp_native::mat_value(dist_coeffs),
+            opencv_csharp_native::mat_value(r),
+            opencv_csharp_native::mat_value(new_camera_matrix),
+            cv::Size(size_width, size_height),
+            m1type,
+            opencv_csharp_native::mat_value(map1),
+            opencv_csharp_native::mat_value(map2));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)m1type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_fisheye_undistort_image(
+    const jyppx_ocv_mat* distorted,
+    jyppx_ocv_mat* undistorted,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* new_camera_matrix,
+    int new_size_width,
+    int new_size_height)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_fisheye_undistort_image";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (distorted == nullptr || undistorted == nullptr || camera_matrix == nullptr || dist_coeffs == nullptr || new_size_width < 0 || new_size_height < 0)
+        {
+            const char* parameter = distorted == nullptr ? "distorted"
+                : undistorted == nullptr ? "undistorted"
+                : camera_matrix == nullptr ? "camera_matrix"
+                : dist_coeffs == nullptr ? "dist_coeffs"
+                : new_size_width < 0 ? "new_size_width" : "new_size_height";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::fisheye::undistortImage(
+            opencv_csharp_native::mat_value(distorted),
+            opencv_csharp_native::mat_value(undistorted),
+            opencv_csharp_native::mat_value(camera_matrix),
+            opencv_csharp_native::mat_value(dist_coeffs),
+            input_or_no_array(new_camera_matrix),
+            cv::Size(new_size_width, new_size_height));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)new_camera_matrix;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_get_rect_sub_pix(
+    const jyppx_ocv_mat* image,
+    int patch_width,
+    int patch_height,
+    float center_x,
+    float center_y,
+    jyppx_ocv_mat* patch,
+    int patch_type)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_get_rect_sub_pix";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || patch == nullptr || patch_width <= 0 || patch_height <= 0)
+        {
+            const char* parameter = image == nullptr ? "image" : patch == nullptr ? "patch" : patch_width <= 0 ? "patch_width" : "patch_height";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::getRectSubPix(
+            opencv_csharp_native::mat_value(image),
+            cv::Size(patch_width, patch_height),
+            cv::Point2f(center_x, center_y),
+            opencv_csharp_native::mat_value(patch),
+            patch_type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)center_x;
+        (void)center_y;
+        (void)patch_type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_warp_polar(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int width,
+    int height,
+    float center_x,
+    float center_y,
+    double max_radius,
+    int flags)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_warp_polar";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr || width < 0 || height < 0 || !(max_radius > 0.0))
+        {
+            const char* parameter = src == nullptr ? "src" : dst == nullptr ? "dst" : width < 0 ? "width" : height < 0 ? "height" : "max_radius";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::warpPolar(
+            opencv_csharp_native::mat_value(src),
+            opencv_csharp_native::mat_value(dst),
+            cv::Size(width, height),
+            cv::Point2f(center_x, center_y),
+            max_radius,
+            flags);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)center_x;
+        (void)center_y;
+        (void)flags;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_accumulate(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_accumulate";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : "dst");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::accumulate(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dst), input_or_no_array(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)mask;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_accumulate_square(const jyppx_ocv_mat* src, jyppx_ocv_mat* dst, const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_accumulate_square";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, src == nullptr ? "src" : "dst");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::accumulateSquare(opencv_csharp_native::mat_value(src), opencv_csharp_native::mat_value(dst), input_or_no_array(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)mask;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_accumulate_product(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_accumulate_product";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src1 == nullptr || src2 == nullptr || dst == nullptr)
+        {
+            const char* parameter = src1 == nullptr ? "src1" : src2 == nullptr ? "src2" : "dst";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::accumulateProduct(
+            opencv_csharp_native::mat_value(src1),
+            opencv_csharp_native::mat_value(src2),
+            opencv_csharp_native::mat_value(dst),
+            input_or_no_array(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)mask;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_accumulate_weighted(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double alpha,
+    const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_accumulate_weighted";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr || alpha < 0.0 || alpha > 1.0)
+        {
+            const char* parameter = src == nullptr ? "src" : dst == nullptr ? "dst" : "alpha";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::accumulateWeighted(
+            opencv_csharp_native::mat_value(src),
+            opencv_csharp_native::mat_value(dst),
+            alpha,
+            input_or_no_array(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)mask;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_phase_correlate(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    const jyppx_ocv_mat* window,
+    double* shift_x,
+    double* shift_y,
+    double* response)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_phase_correlate";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src1 == nullptr || src2 == nullptr || shift_x == nullptr || shift_y == nullptr || response == nullptr)
+        {
+            const char* parameter = src1 == nullptr ? "src1" : src2 == nullptr ? "src2" : shift_x == nullptr ? "shift_x" : shift_y == nullptr ? "shift_y" : "response";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Point2d shift = cv::phaseCorrelate(
+            opencv_csharp_native::mat_value(src1),
+            opencv_csharp_native::mat_value(src2),
+            input_or_no_array(window),
+            response);
+        *shift_x = shift.x;
+        *shift_y = shift.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)window;
+        *shift_x = 0.0;
+        *shift_y = 0.0;
+        *response = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_phase_correlate_iterative(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    int l2_size,
+    int max_iters,
+    double* shift_x,
+    double* shift_y)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_phase_correlate_iterative";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src1 == nullptr || src2 == nullptr || shift_x == nullptr || shift_y == nullptr || l2_size <= 0 || max_iters <= 0)
+        {
+            const char* parameter = src1 == nullptr ? "src1" : src2 == nullptr ? "src2" : shift_x == nullptr ? "shift_x" : shift_y == nullptr ? "shift_y" : l2_size <= 0 ? "l2_size" : "max_iters";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Point2d shift = cv::phaseCorrelateIterative(
+            opencv_csharp_native::mat_value(src1),
+            opencv_csharp_native::mat_value(src2),
+            l2_size,
+            max_iters);
+        *shift_x = shift.x;
+        *shift_y = shift.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *shift_x = 0.0;
+        *shift_y = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_create_hanning_window(jyppx_ocv_mat* dst, int width, int height, int type)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_create_hanning_window";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (dst == nullptr || width <= 1 || height <= 1)
+        {
+            const char* parameter = dst == nullptr ? "dst" : width <= 1 ? "width" : "height";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::createHanningWindow(opencv_csharp_native::mat_value(dst), cv::Size(width, height), type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_emd(
+    const jyppx_ocv_mat* signature1,
+    const jyppx_ocv_mat* signature2,
+    int distance_type,
+    const jyppx_ocv_mat* cost,
+    int has_lower_bound,
+    float* lower_bound,
+    jyppx_ocv_mat* flow,
+    float* distance)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_emd";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (signature1 == nullptr || signature2 == nullptr || distance == nullptr || (has_lower_bound != 0 && lower_bound == nullptr))
+        {
+            const char* parameter = signature1 == nullptr ? "signature1" : signature2 == nullptr ? "signature2" : distance == nullptr ? "distance" : "lower_bound";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *distance = cv::EMD(
+            opencv_csharp_native::mat_value(signature1),
+            opencv_csharp_native::mat_value(signature2),
+            distance_type,
+            input_or_no_array(cost),
+            has_lower_bound != 0 ? lower_bound : nullptr,
+            output_or_no_array(flow));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)distance_type;
+        (void)cost;
+        (void)flow;
+        *distance = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_watershed(const jyppx_ocv_mat* image, jyppx_ocv_mat* markers)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_watershed";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || markers == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, image == nullptr ? "image" : "markers");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::watershed(opencv_csharp_native::mat_value(image), opencv_csharp_native::mat_value(markers));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_pyr_mean_shift_filtering(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double spatial_radius,
+    double color_radius,
+    int max_level,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_pyr_mean_shift_filtering";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (src == nullptr || dst == nullptr || !(spatial_radius > 0.0) || !(color_radius > 0.0) || max_level < 0)
+        {
+            const char* parameter = src == nullptr ? "src" : dst == nullptr ? "dst" : !(spatial_radius > 0.0) ? "spatial_radius" : !(color_radius > 0.0) ? "color_radius" : "max_level";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::pyrMeanShiftFiltering(
+            opencv_csharp_native::mat_value(src),
+            opencv_csharp_native::mat_value(dst),
+            spatial_radius,
+            color_radius,
+            max_level,
+            cv::TermCriteria(criteria_type, criteria_max_count, criteria_epsilon));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)criteria_type;
+        (void)criteria_max_count;
+        (void)criteria_epsilon;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_grab_cut(
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* mask,
+    int rect_x,
+    int rect_y,
+    int rect_width,
+    int rect_height,
+    jyppx_ocv_mat* background_model,
+    jyppx_ocv_mat* foreground_model,
+    int iteration_count,
+    int mode)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_grab_cut";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || mask == nullptr || background_model == nullptr || foreground_model == nullptr || iteration_count < 0 || rect_width < 0 || rect_height < 0)
+        {
+            const char* parameter = image == nullptr ? "image"
+                : mask == nullptr ? "mask"
+                : background_model == nullptr ? "background_model"
+                : foreground_model == nullptr ? "foreground_model"
+                : iteration_count < 0 ? "iteration_count"
+                : rect_width < 0 ? "rect_width" : "rect_height";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::grabCut(
+            opencv_csharp_native::mat_value(image),
+            opencv_csharp_native::mat_value(mask),
+            cv::Rect(rect_x, rect_y, rect_width, rect_height),
+            opencv_csharp_native::mat_value(background_model),
+            opencv_csharp_native::mat_value(foreground_model),
+            iteration_count,
+            mode);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)rect_x;
+        (void)rect_y;
+        (void)mode;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_match_template(
+    const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* templ,
+    jyppx_ocv_mat* result,
+    int method,
+    const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_match_template";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || templ == nullptr || result == nullptr)
+        {
+            const char* parameter = image == nullptr ? "image" : templ == nullptr ? "templ" : "result";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::matchTemplate(
+            opencv_csharp_native::mat_value(image),
+            opencv_csharp_native::mat_value(templ),
+            opencv_csharp_native::mat_value(result),
+            method,
+            input_or_no_array(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)method;
+        (void)mask;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_find_contours_link_runs_count(
+    const jyppx_ocv_mat* image,
+    int include_hierarchy,
+    int* contour_count,
+    int* total_point_count,
+    int* hierarchy_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_find_contours_link_runs_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (contour_count == nullptr || total_point_count == nullptr || hierarchy_count == nullptr || (include_hierarchy != 0 && include_hierarchy != 1))
+        {
+            const char* parameter = contour_count == nullptr ? "contour_count" : total_point_count == nullptr ? "total_point_count" : hierarchy_count == nullptr ? "hierarchy_count" : "include_hierarchy";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<std::vector<cv::Point>> contours;
+        std::vector<cv::Vec4i> hierarchy;
+        const int status = find_contours_link_runs_core(api_name, image, include_hierarchy, contours, hierarchy);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        int total_points = 0;
+        for (const std::vector<cv::Point>& contour : contours)
+        {
+            total_points += static_cast<int>(contour.size());
+        }
+        *contour_count = static_cast<int>(contours.size());
+        *total_point_count = total_points;
+        *hierarchy_count = include_hierarchy != 0 ? static_cast<int>(hierarchy.size()) : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)image;
+        *contour_count = 0;
+        *total_point_count = 0;
+        *hierarchy_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_find_contours_link_runs_fill(
+    const jyppx_ocv_mat* image,
+    int include_hierarchy,
+    int* contours_xy,
+    int point_capacity,
+    int* contour_lengths,
+    int contour_capacity,
+    int* hierarchy_values,
+    int hierarchy_capacity,
+    int* written_contour_count,
+    int* written_point_count,
+    int* written_hierarchy_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_find_contours_link_runs_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if ((point_capacity > 0 && contours_xy == nullptr)
+            || (contour_capacity > 0 && contour_lengths == nullptr)
+            || (hierarchy_capacity > 0 && hierarchy_values == nullptr)
+            || point_capacity < 0
+            || contour_capacity < 0
+            || hierarchy_capacity < 0
+            || written_contour_count == nullptr
+            || written_point_count == nullptr
+            || written_hierarchy_count == nullptr
+            || (include_hierarchy != 0 && include_hierarchy != 1))
+        {
+            const char* parameter = point_capacity > 0 && contours_xy == nullptr ? "contours_xy"
+                : contour_capacity > 0 && contour_lengths == nullptr ? "contour_lengths"
+                : hierarchy_capacity > 0 && hierarchy_values == nullptr ? "hierarchy_values"
+                : point_capacity < 0 ? "point_capacity"
+                : contour_capacity < 0 ? "contour_capacity"
+                : hierarchy_capacity < 0 ? "hierarchy_capacity"
+                : written_contour_count == nullptr ? "written_contour_count"
+                : written_point_count == nullptr ? "written_point_count"
+                : written_hierarchy_count == nullptr ? "written_hierarchy_count" : "include_hierarchy";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<std::vector<cv::Point>> contours;
+        std::vector<cv::Vec4i> hierarchy;
+        const int status = find_contours_link_runs_core(api_name, image, include_hierarchy, contours, hierarchy);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+        int total_points = 0;
+        for (const std::vector<cv::Point>& contour : contours)
+        {
+            total_points += static_cast<int>(contour.size());
+        }
+        const int actual_contours = static_cast<int>(contours.size());
+        const int actual_hierarchy = include_hierarchy != 0 ? static_cast<int>(hierarchy.size()) : 0;
+        if (point_capacity < total_points || contour_capacity < actual_contours || hierarchy_capacity < actual_hierarchy)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "capacity");
+        }
+        int point_offset = 0;
+        for (int contour_index = 0; contour_index < actual_contours; ++contour_index)
+        {
+            const std::vector<cv::Point>& contour = contours[static_cast<size_t>(contour_index)];
+            contour_lengths[contour_index] = static_cast<int>(contour.size());
+            for (const cv::Point& point : contour)
+            {
+                contours_xy[point_offset * 2] = point.x;
+                contours_xy[point_offset * 2 + 1] = point.y;
+                ++point_offset;
+            }
+        }
+        for (int index = 0; index < actual_hierarchy; ++index)
+        {
+            const cv::Vec4i& value = hierarchy[static_cast<size_t>(index)];
+            hierarchy_values[index * 4] = value[0];
+            hierarchy_values[index * 4 + 1] = value[1];
+            hierarchy_values[index * 4 + 2] = value[2];
+            hierarchy_values[index * 4 + 3] = value[3];
+        }
+        *written_contour_count = actual_contours;
+        *written_point_count = total_points;
+        *written_hierarchy_count = actual_hierarchy;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)image;
+        (void)contours_xy;
+        (void)contour_lengths;
+        (void)hierarchy_values;
+        *written_contour_count = 0;
+        *written_point_count = 0;
+        *written_hierarchy_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_draw_frame_axes(
+    jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* rotation_vector,
+    const jyppx_ocv_mat* translation_vector,
+    float length,
+    int thickness)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_draw_frame_axes";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || camera_matrix == nullptr || dist_coeffs == nullptr || rotation_vector == nullptr || translation_vector == nullptr || !(length > 0.0F) || thickness <= 0)
+        {
+            const char* parameter = image == nullptr ? "image"
+                : camera_matrix == nullptr ? "camera_matrix"
+                : dist_coeffs == nullptr ? "dist_coeffs"
+                : rotation_vector == nullptr ? "rotation_vector"
+                : translation_vector == nullptr ? "translation_vector"
+                : !(length > 0.0F) ? "length" : "thickness";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::drawFrameAxes(
+            opencv_csharp_native::mat_value(image),
+            opencv_csharp_native::mat_value(camera_matrix),
+            opencv_csharp_native::mat_value(dist_coeffs),
+            opencv_csharp_native::mat_value(rotation_vector),
+            opencv_csharp_native::mat_value(translation_vector),
+            length,
+            thickness);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_create_default(jyppx_ocv_font_face** font_face)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "font_face");
+        }
+        *font_face = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        jyppx_ocv_font_face* result = new (std::nothrow) jyppx_ocv_font_face();
+        if (result == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        *font_face = result;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_create(
+    const unsigned char* font_path_or_name_utf8,
+    jyppx_ocv_font_face** font_face)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_path_or_name_utf8 == nullptr || font_face == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, font_path_or_name_utf8 == nullptr ? "font_path_or_name_utf8" : "font_face");
+        }
+        *font_face = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        jyppx_ocv_font_face* result = new (std::nothrow) jyppx_ocv_font_face(reinterpret_cast<const char*>(font_path_or_name_utf8));
+        if (result == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        *font_face = result;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_imgproc_font_face_release(jyppx_ocv_font_face* font_face)
+{
+    delete font_face;
+}
+
+int jyppx_ocv_imgproc_font_face_set(
+    jyppx_ocv_font_face* font_face,
+    const unsigned char* font_path_or_name_utf8,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_set";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr || font_path_or_name_utf8 == nullptr || result == nullptr)
+        {
+            const char* parameter = font_face == nullptr ? "font_face" : font_path_or_name_utf8 == nullptr ? "font_path_or_name_utf8" : "result";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *result = font_face->value.set(reinterpret_cast<const char*>(font_path_or_name_utf8)) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_get_name_size(const jyppx_ocv_font_face* font_face, int* byte_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_get_name_size";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr || byte_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, font_face == nullptr ? "font_face" : "byte_count");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *byte_count = static_cast<int>(font_face->value.getName().size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *byte_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_get_name_fill(
+    const jyppx_ocv_font_face* font_face,
+    unsigned char* buffer,
+    int buffer_capacity,
+    int* bytes_written)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_get_name_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr || buffer_capacity < 0 || (buffer_capacity > 0 && buffer == nullptr) || bytes_written == nullptr)
+        {
+            const char* parameter = font_face == nullptr ? "font_face" : buffer_capacity < 0 ? "buffer_capacity" : buffer_capacity > 0 && buffer == nullptr ? "buffer" : "bytes_written";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::String name = font_face->value.getName();
+        const int required = static_cast<int>(name.size());
+        if (buffer_capacity < required)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "buffer_capacity");
+        }
+        if (required > 0)
+        {
+            std::memcpy(buffer, name.data(), static_cast<size_t>(required));
+        }
+        *bytes_written = required;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *bytes_written = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_set_instance(
+    jyppx_ocv_font_face* font_face,
+    const int* parameters,
+    int parameter_count,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_set_instance";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr || parameter_count < 0 || (parameter_count > 0 && parameters == nullptr) || parameter_count % 2 != 0 || result == nullptr)
+        {
+            const char* parameter = font_face == nullptr ? "font_face"
+                : parameter_count < 0 || parameter_count % 2 != 0 ? "parameter_count"
+                : parameter_count > 0 && parameters == nullptr ? "parameters" : "result";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> values;
+        if (parameter_count > 0)
+        {
+            values.assign(parameters, parameters + parameter_count);
+        }
+        *result = font_face->value.setInstance(values) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_get_instance_count(
+    const jyppx_ocv_font_face* font_face,
+    int* parameter_count,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_get_instance_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr || parameter_count == nullptr || result == nullptr)
+        {
+            const char* parameter = font_face == nullptr ? "font_face" : parameter_count == nullptr ? "parameter_count" : "result";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> values;
+        const bool success = font_face->value.getInstance(values);
+        *parameter_count = static_cast<int>(values.size());
+        *result = success ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *parameter_count = 0;
+        *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_font_face_get_instance_fill(
+    const jyppx_ocv_font_face* font_face,
+    int* parameters,
+    int parameter_capacity,
+    int* parameters_written,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_font_face_get_instance_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (font_face == nullptr || parameter_capacity < 0 || (parameter_capacity > 0 && parameters == nullptr) || parameters_written == nullptr || result == nullptr)
+        {
+            const char* parameter = font_face == nullptr ? "font_face"
+                : parameter_capacity < 0 ? "parameter_capacity"
+                : parameter_capacity > 0 && parameters == nullptr ? "parameters"
+                : parameters_written == nullptr ? "parameters_written" : "result";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> values;
+        const bool success = font_face->value.getInstance(values);
+        const int required = static_cast<int>(values.size());
+        if (parameter_capacity < required)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "parameter_capacity");
+        }
+        if (required > 0)
+        {
+            std::memcpy(parameters, values.data(), static_cast<size_t>(required) * sizeof(int));
+        }
+        *parameters_written = required;
+        *result = success ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *parameters_written = 0;
+        *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_put_text_font_face(
+    jyppx_ocv_mat* image,
+    const unsigned char* text_utf8,
+    int origin_x,
+    int origin_y,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    jyppx_ocv_font_face* font_face,
+    int size,
+    int weight,
+    int flags,
+    int has_wrap,
+    int wrap_start,
+    int wrap_end,
+    int* next_x,
+    int* next_y)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_put_text_font_face";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image == nullptr || text_utf8 == nullptr || font_face == nullptr || size <= 0 || weight < 0 || next_x == nullptr || next_y == nullptr || (has_wrap != 0 && wrap_end < wrap_start))
+        {
+            const char* parameter = image == nullptr ? "image"
+                : text_utf8 == nullptr ? "text_utf8"
+                : font_face == nullptr ? "font_face"
+                : size <= 0 ? "size"
+                : weight < 0 ? "weight"
+                : next_x == nullptr ? "next_x"
+                : next_y == nullptr ? "next_y" : "wrap";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Point next = cv::putText(
+            opencv_csharp_native::mat_value(image),
+            reinterpret_cast<const char*>(text_utf8),
+            cv::Point(origin_x, origin_y),
+            cv::Scalar(color_v0, color_v1, color_v2, color_v3),
+            font_face->value,
+            size,
+            weight,
+            static_cast<cv::PutTextFlags>(flags),
+            has_wrap != 0 ? cv::Range(wrap_start, wrap_end) : cv::Range());
+        *next_x = next.x;
+        *next_y = next.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)origin_x;
+        (void)origin_y;
+        (void)color_v0;
+        (void)color_v1;
+        (void)color_v2;
+        (void)color_v3;
+        (void)flags;
+        *next_x = 0;
+        *next_y = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_imgproc_get_text_size_font_face(
+    int image_width,
+    int image_height,
+    const unsigned char* text_utf8,
+    int origin_x,
+    int origin_y,
+    jyppx_ocv_font_face* font_face,
+    int size,
+    int weight,
+    int flags,
+    int has_wrap,
+    int wrap_start,
+    int wrap_end,
+    int* result_x,
+    int* result_y,
+    int* result_width,
+    int* result_height)
+{
+    constexpr const char* api_name = "jyppx_ocv_imgproc_get_text_size_font_face";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (image_width < 0 || image_height < 0 || text_utf8 == nullptr || font_face == nullptr || size <= 0 || weight < 0 || result_x == nullptr || result_y == nullptr || result_width == nullptr || result_height == nullptr || (has_wrap != 0 && wrap_end < wrap_start))
+        {
+            const char* parameter = image_width < 0 ? "image_width"
+                : image_height < 0 ? "image_height"
+                : text_utf8 == nullptr ? "text_utf8"
+                : font_face == nullptr ? "font_face"
+                : size <= 0 ? "size"
+                : weight < 0 ? "weight"
+                : result_x == nullptr ? "result_x"
+                : result_y == nullptr ? "result_y"
+                : result_width == nullptr ? "result_width"
+                : result_height == nullptr ? "result_height" : "wrap";
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter);
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Rect result = cv::getTextSize(
+            cv::Size(image_width, image_height),
+            reinterpret_cast<const char*>(text_utf8),
+            cv::Point(origin_x, origin_y),
+            font_face->value,
+            size,
+            weight,
+            static_cast<cv::PutTextFlags>(flags),
+            has_wrap != 0 ? cv::Range(wrap_start, wrap_end) : cv::Range());
+        *result_x = result.x;
+        *result_y = result.y;
+        *result_width = result.width;
+        *result_height = result.height;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)origin_x;
+        (void)origin_y;
+        (void)flags;
+        *result_x = 0;
+        *result_y = 0;
+        *result_width = 0;
+        *result_height = 0;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

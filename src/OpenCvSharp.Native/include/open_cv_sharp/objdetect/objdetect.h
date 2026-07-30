@@ -10,6 +10,7 @@ typedef struct jyppx_ocv_qrcode_detector_aruco jyppx_ocv_qrcode_detector_aruco;
 typedef struct jyppx_ocv_qrcode_encoder jyppx_ocv_qrcode_encoder;
 typedef struct jyppx_ocv_face_detector_yn jyppx_ocv_face_detector_yn;
 typedef struct jyppx_ocv_face_recognizer_sf jyppx_ocv_face_recognizer_sf;
+typedef struct jyppx_ocv_aruco_detector_params jyppx_ocv_aruco_detector_params;
 
 typedef struct jyppx_ocv_qrcode_detector_aruco_params
 {
@@ -332,6 +333,14 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_qrcode_detector_aruco_get
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_qrcode_detector_aruco_set_detector_parameters(
     jyppx_ocv_qrcode_detector_aruco* detector,
     const jyppx_ocv_qrcode_detector_aruco_params* params);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters(
+    const jyppx_ocv_qrcode_detector_aruco* detector,
+    jyppx_ocv_aruco_detector_params* params);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters(
+    jyppx_ocv_qrcode_detector_aruco* detector,
+    const jyppx_ocv_aruco_detector_params* params);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_qrcode_detector_aruco_detect(
     const jyppx_ocv_qrcode_detector_aruco* detector,

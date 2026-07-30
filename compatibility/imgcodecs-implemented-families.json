@@ -1,0 +1,578 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 16,
+  "managedPublicMemberAdditionCount": 168,
+  "families": [
+    {
+      "id": "file-buffer-and-codec-capabilities",
+      "rationale": "Cover basic file and memory coding, caller-owned destination reuse, and factual reader/writer probes.",
+      "declarations": [
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.imread(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imread"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImRead(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,OpenCvSharp.Core.Mat destination,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.imread(String filename[/C,/Ref,/PATH];Mat dst[/O];int flags=IMREAD_COLOR_BGR)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imread_into"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImRead(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,OpenCvSharp.Core.Mat destination,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imwrite",
+            "jyppx_ocv_imgcodecs_imwrite_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,OpenCvSharp.Core.Mat image)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,OpenCvSharp.Core.Mat image,System.Int32[] parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.imdecode(Mat buf;int flags)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imdecode"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan\u003CSystem.Byte\u003E buffer,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.imencode(String ext[/C,/Ref];Mat img;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imencode",
+            "jyppx_ocv_imgcodecs_imencode_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,OpenCvSharp.Core.Mat image)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,OpenCvSharp.Core.Mat image,System.Int32[] parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.haveImageReader(String filename[/C,/Ref,/PATH])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_have_image_reader"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageReader(System.String filename)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.haveImageWriter(String filename[/C,/Ref,/PATH])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_have_image_writer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageWriter(System.String filenameOrExtension)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "multi-page-workflows",
+      "rationale": "Cover complete and ranged multi-page file and memory coding plus page counting.",
+      "declarations": [
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int flags=IMREAD_COLOR_BGR)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imread_multi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int start;int count;int flags=IMREAD_ANYCOLOR)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imread_multi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.imcount(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)-\u003Esize_t",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imcount"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Int32 ImCount(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.imwritemulti(String filename[/C,/Ref,/PATH];vector_Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imwrite_multi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteMulti(System.String filename,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.Core.Mat\u003E images,System.Int32[]? parameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.imdecodemulti(Mat buf;int flags;vector_Mat mats[/O,/Ref];Range range=Range::all()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imdecode_multi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeMulti(System.Byte[] buffer,System.Int32 start,System.Int32 end,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeMulti(System.Byte[] buffer,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.imencodemulti(String ext[/C,/Ref];vector_Mat imgs;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imencode_multi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeMulti(System.String ext,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.Core.Mat\u003E images,System.Int32[]? parameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "metadata-workflows",
+      "rationale": "Cover typed metadata extraction and insertion for file and memory operations.",
+      "declarations": [
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "enum cv.ImageMetadataType",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.imreadWithMetadata(String filename[/C,/Ref,/PATH];vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imread_with_metadata"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.ImgCodecs.ImageMetadataResult ImReadWithMetadata(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.imwriteWithMetadata(String filename[/C,/Ref,/PATH];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata[/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imwrite_with_metadata"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteWithMetadata(System.String filename,OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.ImgCodecs.ImageMetadataChunk\u003E metadata,System.Int32[]? parameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.imdecodeWithMetadata(Mat buf;vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imdecode_with_metadata"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.ImgCodecs.ImageMetadataResult ImDecodeWithMetadata(System.Byte[] buffer,OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 35,
+          "upstreamIdentity": "cv.imencodeWithMetadata(String ext[/C,/Ref];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imencode_with_metadata"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.ImgCodecs.ImageMetadataChunk\u003E metadata,System.Int32[]? parameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "animation-object-and-codecs",
+      "rationale": "Cover the owned animation object, file and memory decode, and file and memory encode.",
+      "declarations": [
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "class cv.Animation",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.Animation.Animation(int loopCount=0;Scalar bgColor=Scalar())-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_animation_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Animation|constructor|public;instance|.ctor(System.Int32 loopCount,OpenCvSharp.Core.Scalar backgroundColor)",
+            "MEMBER|OpenCvSharp.ImgCodecs.Animation|constructor|public;instance|.ctor(System.Int32 loopCount=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.imreadanimation(String filename[/C,/Ref,/PATH];Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imread_animation"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadAnimation(System.String filename,OpenCvSharp.ImgCodecs.Animation animation,System.Int32 start=0,System.Int32 count=32767)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.imdecodeanimation(Mat buf;Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imdecode_animation"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeAnimation(System.Byte[] buffer,OpenCvSharp.ImgCodecs.Animation animation,System.Int32 start=0,System.Int32 count=32767)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.imwriteanimation(String filename[/C,/Ref,/PATH];Animation animation[/C,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imwrite_animation"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteAnimation(System.String filename,OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.imencodeanimation(String ext[/C,/Ref];Animation animation[/C,/Ref];vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_imgcodecs_imencode_animation"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeAnimation(System.String ext,OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "codec-parameter-enums",
+      "rationale": "Preserve every parser-emitted OpenCV 5 ImgCodecs enum value without claiming that every optional codec is built.",
+      "declarations": [
+        {
+          "ordinal": 0,
+          "upstreamIdentity": "enum cv.ImreadModes",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 1,
+          "upstreamIdentity": "enum cv.ImwriteFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 2,
+          "upstreamIdentity": "enum cv.ImwriteJPEGSamplingFactorParams",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 3,
+          "upstreamIdentity": "enum cv.ImwriteTiffCompressionFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 4,
+          "upstreamIdentity": "enum cv.ImwriteTiffPredictorFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 5,
+          "upstreamIdentity": "enum cv.ImwriteTiffResolutionUnitFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 6,
+          "upstreamIdentity": "enum cv.ImwriteEXRTypeFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "enum cv.ImwriteEXRCompressionFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "enum cv.ImwritePNGFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "enum cv.ImwritePNGFilterFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "enum cv.ImwritePAMFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "enum cv.ImwriteWEBPLosslessMode",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "enum cv.ImwriteHDRCompressionFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "enum cv.ImwriteBMPCompressionFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "enum cv.ImwriteGIFCompressionFlags",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "enum cv.ImageMetadataType",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImgCodecsUpstreamParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/imgcodecs-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

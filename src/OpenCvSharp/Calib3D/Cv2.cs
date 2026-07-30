@@ -1473,6 +1473,53 @@ namespace OpenCvSharp.Calib3D
             return found != 0;
         }
 
+        /// <summary>Finds chessboard corners using the sector-based detector.</summary>
+        public static bool FindChessboardCornersSB(Mat image, Size patternSize, Mat corners, ChessboardFlags flags = (ChessboardFlags)0)
+        {
+            ThrowIfNull(image, nameof(image));
+            ThrowIfNull(corners, nameof(corners));
+            ValidatePatternSize(patternSize, nameof(patternSize));
+            NativeException.ThrowIfError(NativeMethods.Calib3DFindChessboardCornersSB(
+                image.NativeHandle, patternSize.Width, patternSize.Height, corners.NativeHandle, (int)flags, out int found));
+            return found != 0;
+        }
+
+        /// <summary>Finds chessboard corners and writes sector-detector metadata.</summary>
+        public static bool FindChessboardCornersSB(Mat image, Size patternSize, Mat corners, Mat meta, ChessboardFlags flags = (ChessboardFlags)0)
+        {
+            ThrowIfNull(image, nameof(image));
+            ThrowIfNull(corners, nameof(corners));
+            ThrowIfNull(meta, nameof(meta));
+            ValidatePatternSize(patternSize, nameof(patternSize));
+            NativeException.ThrowIfError(NativeMethods.Calib3DFindChessboardCornersSBWithMeta(
+                image.NativeHandle, patternSize.Width, patternSize.Height, corners.NativeHandle, (int)flags, meta.NativeHandle, out int found));
+            return found != 0;
+        }
+
+        /// <summary>Estimates chessboard edge sharpness and optionally writes per-edge profiles.</summary>
+        public static Scalar EstimateChessboardSharpness(Mat image, Size patternSize, Mat corners, float riseDistance = 0.8F, bool vertical = false, Mat? sharpness = null)
+        {
+            ThrowIfNull(image, nameof(image));
+            ThrowIfNull(corners, nameof(corners));
+            ValidatePatternSize(patternSize, nameof(patternSize));
+            NativeException.ThrowIfError(NativeMethods.Calib3DEstimateChessboardSharpness(
+                image.NativeHandle, patternSize.Width, patternSize.Height, corners.NativeHandle,
+                riseDistance, vertical ? 1 : 0, sharpness?.NativeHandle ?? IntPtr.Zero,
+                out double value0, out double value1, out double value2, out double value3));
+            return new Scalar(value0, value1, value2, value3);
+        }
+
+        /// <summary>Refines a four-quad chessboard corner set in place.</summary>
+        public static bool Find4QuadCornerSubpix(Mat image, Mat corners, Size regionSize)
+        {
+            ThrowIfNull(image, nameof(image));
+            ThrowIfNull(corners, nameof(corners));
+            ValidatePatternSize(regionSize, nameof(regionSize));
+            NativeException.ThrowIfError(NativeMethods.Calib3DFind4QuadCornerSubpix(
+                image.NativeHandle, corners.NativeHandle, regionSize.Width, regionSize.Height, out int found));
+            return found != 0;
+        }
+
         /// <summary>
         /// Finds centers of a circles-grid calibration pattern.
         /// 查找圆点阵列标定图案的圆心。

@@ -206,8 +206,8 @@ foreach ($path in @(
         -Violations $violations `
         -Path $path `
         -Text $texts[$path] `
-        -Needle "../../$runtimeReadmeRelativePath" `
-        -Issue "$path must link to the runtime package README using the docs/articles relative prefix"
+        -Needle "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/$runtimeReadmeRelativePath" `
+        -Issue "$path must link to the canonical runtime package README source"
 }
 
 foreach ($needle in @(

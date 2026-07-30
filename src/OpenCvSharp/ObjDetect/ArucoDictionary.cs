@@ -126,6 +126,20 @@ namespace OpenCvSharp.ObjDetect
             return new ArucoDictionary(nativeHandle);
         }
 
+        /// <summary>Creates a dictionary with the requested marker count, optionally extending an existing dictionary.</summary>
+        public static ArucoDictionary Extend(int markerCount, int markerSize, ArucoDictionary? baseDictionary = null, int randomSeed = 0)
+        {
+            if (markerCount < 0) throw new ArgumentOutOfRangeException(nameof(markerCount));
+            if (markerSize <= 0) throw new ArgumentOutOfRangeException(nameof(markerSize));
+            NativeException.ThrowIfError(NativeMethods.ArucoDictionaryExtend(
+                markerCount,
+                markerSize,
+                baseDictionary == null ? IntPtr.Zero : baseDictionary.NativeHandle,
+                randomSeed,
+                out IntPtr nativeHandle));
+            return new ArucoDictionary(nativeHandle);
+        }
+
         /// <summary>Identifies marker bits against this dictionary. 在此字典中识别 marker bits。</summary>
         public ArucoIdentificationResult Identify(Mat bits, double maxCorrectionRate)
         {

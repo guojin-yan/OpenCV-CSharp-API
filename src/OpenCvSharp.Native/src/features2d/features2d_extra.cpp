@@ -4,8 +4,14 @@
 #include "../error_state.h"
 #include "feature_handles.h"
 
+#include <algorithm>
+#include <atomic>
+#include <chrono>
+#include <cstdint>
 #include <cstring>
+#include <filesystem>
 #include <new>
+#include <string>
 #include <vector>
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES2D)
@@ -19,9 +25,174 @@
 namespace
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES2D)
+    bool valid_utf8(const unsigned char* data, int length)
+    {
+        int index = 0;
+        while (index < length)
+        {
+            const unsigned char first = data[index++];
+            if (first <= 0x7f)
+            {
+                continue;
+            }
+
+            int continuation_count;
+            std::uint32_t code_point;
+            std::uint32_t minimum;
+            if ((first & 0xe0) == 0xc0)
+            {
+                continuation_count = 1;
+                code_point = first & 0x1f;
+                minimum = 0x80;
+            }
+            else if ((first & 0xf0) == 0xe0)
+            {
+                continuation_count = 2;
+                code_point = first & 0x0f;
+                minimum = 0x800;
+            }
+            else if ((first & 0xf8) == 0xf0)
+            {
+                continuation_count = 3;
+                code_point = first & 0x07;
+                minimum = 0x10000;
+            }
+            else
+            {
+                return false;
+            }
+
+            if (continuation_count > length - index)
+            {
+                return false;
+            }
+            for (int i = 0; i < continuation_count; ++i)
+            {
+                const unsigned char next = data[index++];
+                if ((next & 0xc0) != 0x80)
+                {
+                    return false;
+                }
+                code_point = (code_point << 6) | (next & 0x3f);
+            }
+
+            if (code_point < minimum || code_point > 0x10ffff ||
+                (code_point >= 0xd800 && code_point <= 0xdfff))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    int read_path(
+        const char* api_name,
+        const unsigned char* data,
+        int length,
+        std::string& value)
+    {
+        if (data == nullptr || length <= 0 ||
+            std::find(data, data + length, static_cast<unsigned char>(0)) != data + length ||
+            !valid_utf8(data, length))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "filename_utf8");
+        }
+
+        value.assign(reinterpret_cast<const char*>(data), static_cast<size_t>(length));
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    std::filesystem::path path_from_utf8(const std::string& value)
+    {
+        return std::filesystem::u8path(value);
+    }
+
+#if defined(_WIN32)
+    std::filesystem::path make_ann_temporary_path()
+    {
+        static std::atomic<unsigned long long> sequence{0};
+        const auto timestamp = std::chrono::steady_clock::now().time_since_epoch().count();
+        return std::filesystem::temp_directory_path() /
+            ("jyppx-opencv-ann-" + std::to_string(timestamp) + "-" +
+             std::to_string(sequence.fetch_add(1)) + ".ann");
+    }
+
+    int copy_ann_file(
+        const char* api_name,
+        const std::filesystem::path& source,
+        const std::filesystem::path& destination)
+    {
+        std::error_code error;
+        std::filesystem::copy_file(
+            source,
+            destination,
+            std::filesystem::copy_options::overwrite_existing,
+            error);
+        if (error)
+        {
+            return opencv_csharp_native::set_last_error(
+                OPENCV_CSHARP_STATUS_NATIVE_EXCEPTION,
+                std::string(api_name) + " failed: " + error.message());
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    void remove_ann_temporary_path(std::filesystem::path& path)
+    {
+        if (!path.empty())
+        {
+            std::error_code ignored;
+            std::filesystem::remove(path, ignored);
+            path.clear();
+        }
+    }
+#endif
+
     int validate_mat(const char* api_name, const jyppx_ocv_mat* mat, const char* parameter_name)
     {
         if (mat == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, parameter_name);
+        }
+
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_ann_index(
+        const char* api_name,
+        const jyppx_ocv_features2d_ann_index* index)
+    {
+        if (index == nullptr || index->value.empty())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "index");
+        }
+
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int ann_feature_type(const jyppx_ocv_features2d_ann_index* index)
+    {
+        return index->distance == cv::ANNIndex::DIST_HAMMING ? CV_8UC1 : CV_32FC1;
+    }
+
+    int validate_ann_features(
+        const char* api_name,
+        const jyppx_ocv_features2d_ann_index* index,
+        const jyppx_ocv_mat* features,
+        const char* parameter_name,
+        bool require_continuous)
+    {
+        int status = validate_mat(api_name, features, parameter_name);
+        if (status != OPENCV_CSHARP_STATUS_OK)
+        {
+            return status;
+        }
+
+        const cv::Mat& value = opencv_csharp_native::mat_value(features);
+        if (value.empty() || value.dims != 2 || value.rows <= 0 ||
+            value.cols != index->dimension || value.type() != ann_feature_type(index) ||
+            (require_continuous && !value.isContinuous()))
         {
             return opencv_csharp_native::set_invalid_argument(api_name, parameter_name);
         }
@@ -2500,6 +2671,287 @@ int jyppx_ocv_features2d_affine_get_view_params_fill(
     } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
 
+int jyppx_ocv_features2d_ann_index_create(
+    int dimension,
+    int distance,
+    jyppx_ocv_features2d_ann_index** index)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_create")
+        if (index == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "index");
+        }
+        *index = nullptr;
+        if (dimension <= 0 || distance < static_cast<int>(cv::ANNIndex::DIST_EUCLIDEAN) ||
+            distance > static_cast<int>(cv::ANNIndex::DIST_DOTPRODUCT))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, dimension <= 0 ? "dimension" : "distance");
+        }
+
+        const auto native_distance = static_cast<cv::ANNIndex::Distance>(distance);
+        auto result = new (std::nothrow) jyppx_ocv_features2d_ann_index{
+            cv::ANNIndex::create(dimension, native_distance),
+            dimension,
+            native_distance,
+            {},
+            {}
+        };
+        if (result == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        if (result->value.empty())
+        {
+            delete result;
+            return opencv_csharp_native::set_invalid_argument(api_name, "distance");
+        }
+
+        *index = result;
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+    catch (...)
+    {
+        if (index != nullptr)
+        {
+            *index = nullptr;
+        }
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_features2d_ann_index_release(jyppx_ocv_features2d_ann_index* index)
+{
+    delete index;
+}
+
+int jyppx_ocv_features2d_ann_index_add_items(
+    jyppx_ocv_features2d_ann_index* index,
+    const jyppx_ocv_mat* features)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_add_items")
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_ann_features(api_name, index, features, "features", false);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        index->value->addItems(opencv_csharp_native::mat_value(features));
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_build(
+    jyppx_ocv_features2d_ann_index* index,
+    int trees)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_build")
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (trees == 0 || trees < -1)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "trees");
+        }
+        index->value->build(trees);
+#if defined(_WIN32)
+        if (!index->on_disk_target_path.empty())
+        {
+            status = copy_ann_file(api_name, index->temporary_path, index->on_disk_target_path);
+            if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        }
+#endif
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_knn_search(
+    const jyppx_ocv_features2d_ann_index* index,
+    const jyppx_ocv_mat* query,
+    jyppx_ocv_mat* indices,
+    jyppx_ocv_mat* distances,
+    int knn,
+    int search_k)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_knn_search")
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_ann_features(api_name, index, query, "query", true);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (indices == nullptr || distances == nullptr || query == indices || query == distances || indices == distances)
+        {
+            return opencv_csharp_native::set_invalid_argument(
+                api_name,
+                indices == nullptr ? "indices" : distances == nullptr ? "distances" : "output_alias");
+        }
+        if (knn <= 0 || knn > index->value->getItemNumber())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "knn");
+        }
+        if (search_k == 0 || search_k < -1)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "search_k");
+        }
+
+        index->value->knnSearch(
+            opencv_csharp_native::mat_value(query),
+            opencv_csharp_native::mat_value(indices),
+            opencv_csharp_native::mat_value(distances),
+            knn,
+            search_k);
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_save(
+    jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int prefault)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_save")
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (prefault != 0 && prefault != 1)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "prefault");
+        }
+        std::string filename;
+        status = read_path(api_name, filename_utf8, filename_byte_length, filename);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(_WIN32)
+        const std::filesystem::path temporary_path = make_ann_temporary_path();
+        const std::string temporary_name = temporary_path.string();
+        index->value->save(temporary_name, prefault != 0);
+        remove_ann_temporary_path(index->temporary_path);
+        index->temporary_path = temporary_path;
+        index->on_disk_target_path.clear();
+        return copy_ann_file(api_name, temporary_path, path_from_utf8(filename));
+#else
+        index->value->save(filename, prefault != 0);
+        return OPENCV_CSHARP_STATUS_OK;
+#endif
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_load(
+    jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int prefault)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_load")
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (prefault != 0 && prefault != 1)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "prefault");
+        }
+        std::string filename;
+        status = read_path(api_name, filename_utf8, filename_byte_length, filename);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(_WIN32)
+        const std::filesystem::path temporary_path = make_ann_temporary_path();
+        status = copy_ann_file(api_name, path_from_utf8(filename), temporary_path);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        try
+        {
+            index->value->load(temporary_path.string(), prefault != 0);
+        }
+        catch (...)
+        {
+            std::error_code ignored;
+            std::filesystem::remove(temporary_path, ignored);
+            throw;
+        }
+        remove_ann_temporary_path(index->temporary_path);
+        index->temporary_path = temporary_path;
+        index->on_disk_target_path.clear();
+#else
+        index->value->load(filename, prefault != 0);
+#endif
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_get_tree_number(
+    const jyppx_ocv_features2d_ann_index* index,
+    int* tree_number)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_get_tree_number")
+        if (tree_number == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "tree_number");
+        }
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *tree_number = index->value->getTreeNumber();
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_get_item_number(
+    const jyppx_ocv_features2d_ann_index* index,
+    int* item_number)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_get_item_number")
+        if (item_number == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "item_number");
+        }
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *item_number = index->value->getItemNumber();
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_set_on_disk_build(
+    jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int* enabled)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_set_on_disk_build")
+        if (enabled == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "enabled");
+        }
+        *enabled = 0;
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        std::string filename;
+        status = read_path(api_name, filename_utf8, filename_byte_length, filename);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(_WIN32)
+        const std::filesystem::path temporary_path = make_ann_temporary_path();
+        *enabled = index->value->setOnDiskBuild(temporary_path.string()) ? 1 : 0;
+        if (*enabled != 0)
+        {
+            remove_ann_temporary_path(index->temporary_path);
+            index->temporary_path = temporary_path;
+            index->on_disk_target_path = path_from_utf8(filename);
+        }
+        else
+        {
+            std::error_code ignored;
+            std::filesystem::remove(temporary_path, ignored);
+        }
+#else
+        *enabled = index->value->setOnDiskBuild(filename) ? 1 : 0;
+#endif
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_features2d_ann_index_set_seed(
+    jyppx_ocv_features2d_ann_index* index,
+    int seed)
+{
+    OCV_CSHARP_TRY_BEGIN("jyppx_ocv_features2d_ann_index_set_seed")
+        int status = validate_ann_index(api_name, index);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        index->value->setSeed(seed);
+        return OPENCV_CSHARP_STATUS_OK;
+    } catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
 #undef OCV_CSHARP_AFFINE_CREATE_FROM_BACKEND
 #undef OCV_CSHARP_FLANN_MATCH_CORE
 #undef OCV_CSHARP_GFTT_SET_DOUBLE
@@ -2715,6 +3167,18 @@ OCV_CSHARP_STUB_FEATURE(jyppx_ocv_features2d_affine, jyppx_ocv_features2d_affine
 int jyppx_ocv_features2d_affine_set_view_params(jyppx_ocv_features2d_affine*, const float*, int, const float*, int) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_affine_set_view_params"); }
 int jyppx_ocv_features2d_affine_get_view_params_count(const jyppx_ocv_features2d_affine*, int* tilts, int* rolls) { set_zero(tilts); set_zero(rolls); OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_affine_get_view_params_count"); }
 int jyppx_ocv_features2d_affine_get_view_params_fill(const jyppx_ocv_features2d_affine*, float*, int, float*, int, int* tilts, int* rolls) { set_zero(tilts); set_zero(rolls); OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_affine_get_view_params_fill"); }
+
+int jyppx_ocv_features2d_ann_index_create(int, int, jyppx_ocv_features2d_ann_index** index) { if (index != nullptr) { *index = nullptr; } OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_create"); }
+void jyppx_ocv_features2d_ann_index_release(jyppx_ocv_features2d_ann_index* index) { delete index; }
+int jyppx_ocv_features2d_ann_index_add_items(jyppx_ocv_features2d_ann_index*, const jyppx_ocv_mat*) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_add_items"); }
+int jyppx_ocv_features2d_ann_index_build(jyppx_ocv_features2d_ann_index*, int) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_build"); }
+int jyppx_ocv_features2d_ann_index_knn_search(const jyppx_ocv_features2d_ann_index*, const jyppx_ocv_mat*, jyppx_ocv_mat*, jyppx_ocv_mat*, int, int) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_knn_search"); }
+int jyppx_ocv_features2d_ann_index_save(jyppx_ocv_features2d_ann_index*, const unsigned char*, int, int) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_save"); }
+int jyppx_ocv_features2d_ann_index_load(jyppx_ocv_features2d_ann_index*, const unsigned char*, int, int) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_load"); }
+int jyppx_ocv_features2d_ann_index_get_tree_number(const jyppx_ocv_features2d_ann_index*, int* value) { set_zero(value); OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_get_tree_number"); }
+int jyppx_ocv_features2d_ann_index_get_item_number(const jyppx_ocv_features2d_ann_index*, int* value) { set_zero(value); OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_get_item_number"); }
+int jyppx_ocv_features2d_ann_index_set_on_disk_build(jyppx_ocv_features2d_ann_index*, const unsigned char*, int, int* enabled) { set_zero(enabled); OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_set_on_disk_build"); }
+int jyppx_ocv_features2d_ann_index_set_seed(jyppx_ocv_features2d_ann_index*, int) { OCV_CSHARP_STUB_BODY("jyppx_ocv_features2d_ann_index_set_seed"); }
 
 OCV_CSHARP_STUB_INT_OUT(jyppx_ocv_features2d_flann_matcher_is_mask_supported, jyppx_ocv_features2d_flann_matcher)
 OCV_CSHARP_STUB_INT_OUT(jyppx_ocv_features2d_flann_matcher_empty, jyppx_ocv_features2d_flann_matcher)

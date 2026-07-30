@@ -8,6 +8,8 @@
 #include "open_cv_sharp/core/decomp.h"
 #include "open_cv_sharp/core/mat.h"
 #include "open_cv_sharp/core/operations.h"
+#include "open_cv_sharp/core/persistence.h"
+#include "open_cv_sharp/core/utility.h"
 #include "open_cv_sharp/dnn/dnn.h"
 #include "open_cv_sharp/error.h"
 #include "open_cv_sharp/face/face.h"
@@ -45,11 +47,181 @@
 #include "open_cv_sharp/xphoto/xphoto.h"
 #include "open_cv_sharp/xstereo/xstereo.h"
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_calculate_shift(jyppx_ocv_align_mtb* aligner,
+    const jyppx_ocv_mat* img0,
+    const jyppx_ocv_mat* img1,
+    int* shift_x,
+    int* shift_y)
+{
+    return jyppx_ocv_align_mtb_calculate_shift(aligner, img0, img1, shift_x, shift_y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_compute_bitmaps(jyppx_ocv_align_mtb* aligner,
+    const jyppx_ocv_mat* img,
+    jyppx_ocv_mat* threshold_bitmap,
+    jyppx_ocv_mat* exclude_bitmap)
+{
+    return jyppx_ocv_align_mtb_compute_bitmaps(aligner, img, threshold_bitmap, exclude_bitmap);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_create(int max_bits,
+    int exclude_range,
+    int cut,
+    jyppx_ocv_align_mtb** aligner)
+{
+    return jyppx_ocv_align_mtb_create(max_bits, exclude_range, cut, aligner);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_get_cut(const jyppx_ocv_align_mtb* aligner,
+    int* cut)
+{
+    return jyppx_ocv_align_mtb_get_cut(aligner, cut);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_get_exclude_range(const jyppx_ocv_align_mtb* aligner,
+    int* exclude_range)
+{
+    return jyppx_ocv_align_mtb_get_exclude_range(aligner, exclude_range);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_get_max_bits(const jyppx_ocv_align_mtb* aligner,
+    int* max_bits)
+{
+    return jyppx_ocv_align_mtb_get_max_bits(aligner, max_bits);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_process(jyppx_ocv_align_mtb* aligner,
+    const jyppx_ocv_mat* const* src_images,
+    jyppx_ocv_mat* const* dst_images,
+    int image_count,
+    const jyppx_ocv_mat* times,
+    const jyppx_ocv_mat* response,
+    int use_extra_inputs)
+{
+    return jyppx_ocv_align_mtb_process(aligner, src_images, dst_images, image_count, times, response, use_extra_inputs);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_align_mtb_release_handle(jyppx_ocv_align_mtb* aligner)
+{
+    jyppx_ocv_align_mtb_release_handle(aligner);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_set_cut(jyppx_ocv_align_mtb* aligner,
+    int cut)
+{
+    return jyppx_ocv_align_mtb_set_cut(aligner, cut);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_set_exclude_range(jyppx_ocv_align_mtb* aligner,
+    int exclude_range)
+{
+    return jyppx_ocv_align_mtb_set_exclude_range(aligner, exclude_range);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_set_max_bits(jyppx_ocv_align_mtb* aligner,
+    int max_bits)
+{
+    return jyppx_ocv_align_mtb_set_max_bits(aligner, max_bits);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_align_mtb_shift_mat(jyppx_ocv_align_mtb* aligner,
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int shift_x,
+    int shift_y)
+{
+    return jyppx_ocv_align_mtb_shift_mat(aligner, src, dst, shift_x, shift_y);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_alphamat_info_flow(const jyppx_ocv_mat* image,
     const jyppx_ocv_mat* trimap,
     jyppx_ocv_mat* result)
 {
     return jyppx_ocv_alphamat_info_flow(image, trimap, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_create(const int* object_point_offsets,
+    int marker_count,
+    const jyppx_ocv_point3f* object_points,
+    int object_point_count,
+    const jyppx_ocv_aruco_dictionary* dictionary,
+    const int* ids,
+    int id_count,
+    jyppx_ocv_aruco_board** board)
+{
+    return jyppx_ocv_aruco_board_create(object_point_offsets, marker_count, object_points, object_point_count, dictionary, ids, id_count, board);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_generate_image(const jyppx_ocv_aruco_board* board,
+    int width,
+    int height,
+    jyppx_ocv_mat* image,
+    int margin_size,
+    int border_bits)
+{
+    return jyppx_ocv_aruco_board_generate_image(board, width, height, image, margin_size, border_bits);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_get_dictionary(const jyppx_ocv_aruco_board* board,
+    jyppx_ocv_aruco_dictionary** dictionary)
+{
+    return jyppx_ocv_aruco_board_get_dictionary(board, dictionary);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_get_ids_count(const jyppx_ocv_aruco_board* board,
+    int* id_count)
+{
+    return jyppx_ocv_aruco_board_get_ids_count(board, id_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_get_ids_fill(const jyppx_ocv_aruco_board* board,
+    int* ids,
+    int id_capacity,
+    int* id_count)
+{
+    return jyppx_ocv_aruco_board_get_ids_fill(board, ids, id_capacity, id_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_get_object_points_count(const jyppx_ocv_aruco_board* board,
+    int* marker_count,
+    int* object_point_count)
+{
+    return jyppx_ocv_aruco_board_get_object_points_count(board, marker_count, object_point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_get_object_points_fill(const jyppx_ocv_aruco_board* board,
+    int* offsets,
+    int offset_capacity,
+    jyppx_ocv_point3f* points,
+    int point_capacity,
+    int* marker_count,
+    int* object_point_count)
+{
+    return jyppx_ocv_aruco_board_get_object_points_fill(board, offsets, offset_capacity, points, point_capacity, marker_count, object_point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_get_right_bottom_corner(const jyppx_ocv_aruco_board* board,
+    jyppx_ocv_point3f* corner)
+{
+    return jyppx_ocv_aruco_board_get_right_bottom_corner(board, corner);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_board_match_image_points(const jyppx_ocv_aruco_board* board,
+    const int* detected_offsets,
+    int detected_group_count,
+    const jyppx_ocv_point2f* detected_points,
+    int detected_point_count,
+    const int* detected_ids,
+    int detected_id_count,
+    jyppx_ocv_mat* object_points,
+    jyppx_ocv_mat* image_points)
+{
+    return jyppx_ocv_aruco_board_match_image_points(board, detected_offsets, detected_group_count, detected_points, detected_point_count, detected_ids, detected_id_count, object_points, image_points);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_aruco_board_release_handle(jyppx_ocv_aruco_board* board)
+{
+    jyppx_ocv_aruco_board_release_handle(board);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_board_check_corners_collinear(const jyppx_ocv_aruco_charuco_board* board,
@@ -188,6 +360,50 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_d
     return jyppx_ocv_aruco_charuco_detector_detect_board_fill(detector, image, input_marker_offsets, input_marker_group_count, input_marker_points, input_marker_point_count, input_marker_ids, input_marker_id_count, charuco_corners, charuco_corner_capacity, charuco_ids, charuco_id_capacity, marker_offsets, marker_offset_capacity, marker_corners, marker_corner_capacity, marker_ids, marker_id_capacity, charuco_count, marker_count, marker_point_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_detect_diamonds_count(const jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_mat* image,
+    const int* input_marker_offsets,
+    int input_marker_count,
+    const jyppx_ocv_point2f* input_marker_points,
+    int input_marker_point_count,
+    const int* input_marker_ids,
+    int input_marker_id_count,
+    int* diamond_count,
+    int* diamond_point_count,
+    int* marker_count,
+    int* marker_point_count)
+{
+    return jyppx_ocv_aruco_charuco_detector_detect_diamonds_count(detector, image, input_marker_offsets, input_marker_count, input_marker_points, input_marker_point_count, input_marker_ids, input_marker_id_count, diamond_count, diamond_point_count, marker_count, marker_point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_detect_diamonds_fill(const jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_mat* image,
+    const int* input_marker_offsets,
+    int input_marker_count,
+    const jyppx_ocv_point2f* input_marker_points,
+    int input_marker_point_count,
+    const int* input_marker_ids,
+    int input_marker_id_count,
+    int* diamond_offsets,
+    int diamond_offset_capacity,
+    jyppx_ocv_point2f* diamond_points,
+    int diamond_point_capacity,
+    int* diamond_ids,
+    int diamond_id_capacity,
+    int* marker_offsets,
+    int marker_offset_capacity,
+    jyppx_ocv_point2f* marker_points,
+    int marker_point_capacity,
+    int* marker_ids,
+    int marker_id_capacity,
+    int* diamond_count,
+    int* diamond_point_count,
+    int* marker_count,
+    int* marker_point_count)
+{
+    return jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill(detector, image, input_marker_offsets, input_marker_count, input_marker_points, input_marker_point_count, input_marker_ids, input_marker_id_count, diamond_offsets, diamond_offset_capacity, diamond_points, diamond_point_capacity, diamond_ids, diamond_id_capacity, marker_offsets, marker_offset_capacity, marker_points, marker_point_capacity, marker_ids, marker_id_capacity, diamond_count, diamond_point_count, marker_count, marker_point_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_get_board(const jyppx_ocv_aruco_charuco_detector* detector,
     jyppx_ocv_aruco_charuco_board** board)
 {
@@ -200,6 +416,18 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_g
     jyppx_ocv_mat** dist_coeffs)
 {
     return jyppx_ocv_aruco_charuco_detector_get_charuco_parameters(detector, params, camera_matrix, dist_coeffs);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_get_detector_parameters(const jyppx_ocv_aruco_charuco_detector* detector,
+    jyppx_ocv_aruco_detector_params* params)
+{
+    return jyppx_ocv_aruco_charuco_detector_get_detector_parameters(detector, params);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_get_refine_parameters(const jyppx_ocv_aruco_charuco_detector* detector,
+    jyppx_ocv_aruco_refine_params* params)
+{
+    return jyppx_ocv_aruco_charuco_detector_get_refine_parameters(detector, params);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_aruco_charuco_detector_release_handle(jyppx_ocv_aruco_charuco_detector* detector)
@@ -221,12 +449,33 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_s
     return jyppx_ocv_aruco_charuco_detector_set_charuco_parameters(detector, params, camera_matrix, dist_coeffs);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_set_detector_parameters(jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_aruco_detector_params* params)
+{
+    return jyppx_ocv_aruco_charuco_detector_set_detector_parameters(detector, params);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_charuco_detector_set_refine_parameters(jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_aruco_refine_params* params)
+{
+    return jyppx_ocv_aruco_charuco_detector_set_refine_parameters(detector, params);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_create(const jyppx_ocv_aruco_dictionary* dictionary,
     const jyppx_ocv_aruco_detector_params* detector_params,
     const jyppx_ocv_aruco_refine_params* refine_params,
     jyppx_ocv_aruco_detector** detector)
 {
     return jyppx_ocv_aruco_detector_create(dictionary, detector_params, refine_params, detector);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_create_multi_dictionary(const jyppx_ocv_aruco_dictionary* const* dictionaries,
+    int dictionary_count,
+    const jyppx_ocv_aruco_detector_params* detector_params,
+    const jyppx_ocv_aruco_refine_params* refine_params,
+    jyppx_ocv_aruco_detector** detector)
+{
+    return jyppx_ocv_aruco_detector_create_multi_dictionary(dictionaries, dictionary_count, detector_params, refine_params, detector);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_default_params(jyppx_ocv_aruco_detector_params* params)
@@ -262,6 +511,38 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_detect_ma
     int* rejected_point_count)
 {
     return jyppx_ocv_aruco_detector_detect_markers_fill(detector, image, corner_offsets, corner_offset_capacity, corners, corner_capacity, ids, id_capacity, rejected_offsets, rejected_offset_capacity, rejected_points, rejected_point_capacity, marker_count, corner_point_count, rejected_count, rejected_point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_detect_markers_multi_dictionary_count(const jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_mat* image,
+    int* marker_count,
+    int* corner_point_count,
+    int* rejected_count,
+    int* rejected_point_count)
+{
+    return jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count(detector, image, marker_count, corner_point_count, rejected_count, rejected_point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_detect_markers_multi_dictionary_fill(const jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_mat* image,
+    int* corner_offsets,
+    int corner_offset_capacity,
+    jyppx_ocv_point2f* corners,
+    int corner_capacity,
+    int* ids,
+    int id_capacity,
+    int* dictionary_indices,
+    int dictionary_index_capacity,
+    int* rejected_offsets,
+    int rejected_offset_capacity,
+    jyppx_ocv_point2f* rejected_points,
+    int rejected_point_capacity,
+    int* marker_count,
+    int* corner_point_count,
+    int* rejected_count,
+    int* rejected_point_count)
+{
+    return jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill(detector, image, corner_offsets, corner_offset_capacity, corners, corner_capacity, ids, id_capacity, dictionary_indices, dictionary_index_capacity, rejected_offsets, rejected_offset_capacity, rejected_points, rejected_point_capacity, marker_count, corner_point_count, rejected_count, rejected_point_count);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_detect_markers_with_confidence_count(const jyppx_ocv_aruco_detector* detector,
@@ -302,10 +583,23 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_get_detec
     return jyppx_ocv_aruco_detector_get_detector_parameters(detector, params);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_get_dictionaries_count(const jyppx_ocv_aruco_detector* detector,
+    int* dictionary_count)
+{
+    return jyppx_ocv_aruco_detector_get_dictionaries_count(detector, dictionary_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_get_dictionary(const jyppx_ocv_aruco_detector* detector,
     jyppx_ocv_aruco_dictionary** dictionary)
 {
     return jyppx_ocv_aruco_detector_get_dictionary(detector, dictionary);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_get_dictionary_at(const jyppx_ocv_aruco_detector* detector,
+    int dictionary_index,
+    jyppx_ocv_aruco_dictionary** dictionary)
+{
+    return jyppx_ocv_aruco_detector_get_dictionary_at(detector, dictionary_index, dictionary);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_get_refine_parameters(const jyppx_ocv_aruco_detector* detector,
@@ -385,6 +679,13 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_set_detec
     return jyppx_ocv_aruco_detector_set_detector_parameters(detector, params);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_set_dictionaries(jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_aruco_dictionary* const* dictionaries,
+    int dictionary_count)
+{
+    return jyppx_ocv_aruco_detector_set_dictionaries(detector, dictionaries, dictionary_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_detector_set_dictionary(jyppx_ocv_aruco_detector* detector,
     const jyppx_ocv_aruco_dictionary* dictionary)
 {
@@ -414,6 +715,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_dictionary_create_
     jyppx_ocv_aruco_dictionary** dictionary)
 {
     return jyppx_ocv_aruco_dictionary_create_predefined(dictionary_id, dictionary);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_dictionary_extend(int marker_count,
+    int marker_size,
+    const jyppx_ocv_aruco_dictionary* base_dictionary,
+    int random_seed,
+    jyppx_ocv_aruco_dictionary** dictionary)
+{
+    return jyppx_ocv_aruco_dictionary_extend(marker_count, marker_size, base_dictionary, random_seed, dictionary);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_dictionary_generate_image_marker(const jyppx_ocv_aruco_dictionary* dictionary,
@@ -516,6 +826,49 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_dictionary_set_max
     int max_correction_bits)
 {
     return jyppx_ocv_aruco_dictionary_set_max_correction_bits(dictionary, max_correction_bits);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_draw_detected_corners_charuco(jyppx_ocv_mat* image,
+    const jyppx_ocv_point2f* corners,
+    int corner_count,
+    const int* ids,
+    int id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3)
+{
+    return jyppx_ocv_aruco_draw_detected_corners_charuco(image, corners, corner_count, ids, id_count, color_v0, color_v1, color_v2, color_v3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_draw_detected_diamonds(jyppx_ocv_mat* image,
+    const int* diamond_offsets,
+    int diamond_count,
+    const jyppx_ocv_point2f* diamond_points,
+    int diamond_point_count,
+    const int* diamond_ids,
+    int diamond_id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3)
+{
+    return jyppx_ocv_aruco_draw_detected_diamonds(image, diamond_offsets, diamond_count, diamond_points, diamond_point_count, diamond_ids, diamond_id_count, color_v0, color_v1, color_v2, color_v3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_draw_detected_markers(jyppx_ocv_mat* image,
+    const int* corner_offsets,
+    int marker_count,
+    const jyppx_ocv_point2f* corners,
+    int corner_point_count,
+    const int* ids,
+    int id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3)
+{
+    return jyppx_ocv_aruco_draw_detected_markers(image, corner_offsets, marker_count, corners, corner_point_count, ids, id_count, color_v0, color_v1, color_v2, color_v3);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_aruco_grid_board_create(int markers_x,
@@ -1631,6 +1984,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_estimate_affine_
     return jyppx_ocv_calib3d_estimate_affine_2d(source, destination, transform, inliers, method, ransac_reproj_threshold, max_iters, confidence, refine_iters);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_estimate_affine_2d_usac(const jyppx_ocv_mat* source,
+    const jyppx_ocv_mat* destination,
+    jyppx_ocv_mat* transform,
+    jyppx_ocv_mat* inliers,
+    const jyppx_ocv_calib3d_usac_params* params)
+{
+    return jyppx_ocv_calib3d_estimate_affine_2d_usac(source, destination, transform, inliers, params);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_estimate_affine_3d_ransac(const jyppx_ocv_mat* source,
     const jyppx_ocv_mat* destination,
     jyppx_ocv_mat* transform,
@@ -1662,6 +2024,21 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_estimate_affine_
     int refine_iters)
 {
     return jyppx_ocv_calib3d_estimate_affine_partial_2d(source, destination, transform, inliers, method, ransac_reproj_threshold, max_iters, confidence, refine_iters);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_estimate_chessboard_sharpness(const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    const jyppx_ocv_mat* corners,
+    float rise_distance,
+    int vertical,
+    jyppx_ocv_mat* sharpness,
+    double* value0,
+    double* value1,
+    double* value2,
+    double* value3)
+{
+    return jyppx_ocv_calib3d_estimate_chessboard_sharpness(image, pattern_width, pattern_height, corners, rise_distance, vertical, sharpness, value0, value1, value2, value3);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_estimate_translation_2d(const jyppx_ocv_mat* source,
@@ -1710,6 +2087,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_filter_speckles(
     return jyppx_ocv_calib3d_filter_speckles(image, new_value, max_speckle_size, max_difference, buffer);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_4_quad_corner_subpix(const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* corners,
+    int region_width,
+    int region_height,
+    int* found)
+{
+    return jyppx_ocv_calib3d_find_4_quad_corner_subpix(image, corners, region_width, region_height, found);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_chessboard_corners(const jyppx_ocv_mat* image,
     int pattern_width,
     int pattern_height,
@@ -1718,6 +2104,27 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_chessboard_
     int* found)
 {
     return jyppx_ocv_calib3d_find_chessboard_corners(image, pattern_width, pattern_height, corners, flags, found);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_chessboard_corners_sb(const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    jyppx_ocv_mat* corners,
+    int flags,
+    int* found)
+{
+    return jyppx_ocv_calib3d_find_chessboard_corners_sb(image, pattern_width, pattern_height, corners, flags, found);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_chessboard_corners_sb_with_meta(const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    jyppx_ocv_mat* corners,
+    int flags,
+    jyppx_ocv_mat* meta,
+    int* found)
+{
+    return jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta(image, pattern_width, pattern_height, corners, flags, meta, found);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_circles_grid(const jyppx_ocv_mat* image,
@@ -1773,6 +2180,19 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_essential_m
     return jyppx_ocv_calib3d_find_essential_mat_two_cameras(points1, points2, camera_matrix1, dist_coeffs1, camera_matrix2, dist_coeffs2, method, prob, threshold, mask, essential);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_essential_mat_usac(const jyppx_ocv_mat* points1,
+    const jyppx_ocv_mat* points2,
+    const jyppx_ocv_mat* camera_matrix1,
+    const jyppx_ocv_mat* camera_matrix2,
+    const jyppx_ocv_mat* dist_coeffs1,
+    const jyppx_ocv_mat* dist_coeffs2,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** essential)
+{
+    return jyppx_ocv_calib3d_find_essential_mat_usac(points1, points2, camera_matrix1, camera_matrix2, dist_coeffs1, dist_coeffs2, mask, params, essential);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_fundamental_mat(const jyppx_ocv_mat* points1,
     const jyppx_ocv_mat* points2,
     int method,
@@ -1785,6 +2205,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_fundamental
     return jyppx_ocv_calib3d_find_fundamental_mat(points1, points2, method, ransac_reproj_threshold, confidence, max_iters, mask, fundamental);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_fundamental_mat_usac(const jyppx_ocv_mat* points1,
+    const jyppx_ocv_mat* points2,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** fundamental)
+{
+    return jyppx_ocv_calib3d_find_fundamental_mat_usac(points1, points2, mask, params, fundamental);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_homography(const jyppx_ocv_mat* src_points,
     const jyppx_ocv_mat* dst_points,
     int method,
@@ -1795,6 +2224,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_homography(
     jyppx_ocv_mat** homography)
 {
     return jyppx_ocv_calib3d_find_homography(src_points, dst_points, method, ransac_reproj_threshold, mask, max_iters, confidence, homography);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_find_homography_usac(const jyppx_ocv_mat* src_points,
+    const jyppx_ocv_mat* dst_points,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** homography)
+{
+    return jyppx_ocv_calib3d_find_homography_usac(src_points, dst_points, mask, params, homography);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_fisheye_calibrate(const int* object_point_offsets,
@@ -1959,6 +2397,28 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_fisheye_stereo_c
     double* reprojection_error)
 {
     return jyppx_ocv_calib3d_fisheye_stereo_calibrate_extended(object_point_offsets, object_point_group_count, object_points, object_point_count, image_point1_offsets, image_point1_group_count, image_points1, image_point1_count, image_point2_offsets, image_point2_group_count, image_points2, image_point2_count, camera_matrix1, dist_coeffs1, camera_matrix2, dist_coeffs2, image_width, image_height, r, t, rvecs, tvecs, flags, criteria_type, criteria_max_count, criteria_epsilon, reprojection_error);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_fisheye_stereo_rectify(const jyppx_ocv_mat* camera_matrix1,
+    const jyppx_ocv_mat* dist_coeffs1,
+    const jyppx_ocv_mat* camera_matrix2,
+    const jyppx_ocv_mat* dist_coeffs2,
+    int image_width,
+    int image_height,
+    const jyppx_ocv_mat* r,
+    const jyppx_ocv_mat* t,
+    jyppx_ocv_mat* r1,
+    jyppx_ocv_mat* r2,
+    jyppx_ocv_mat* p1,
+    jyppx_ocv_mat* p2,
+    jyppx_ocv_mat* q,
+    int flags,
+    int new_image_width,
+    int new_image_height,
+    double balance,
+    double fov_scale)
+{
+    return jyppx_ocv_calib3d_fisheye_stereo_rectify(camera_matrix1, dist_coeffs1, camera_matrix2, dist_coeffs2, image_width, image_height, r, t, r1, r2, p1, p2, q, flags, new_image_width, new_image_height, balance, fov_scale);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_fisheye_undistort_points(const jyppx_ocv_mat* distorted,
@@ -2374,6 +2834,19 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_solve_pnp_ransac
     return jyppx_ocv_calib3d_solve_pnp_ransac(object_points, image_points, camera_matrix, dist_coeffs, rvec, tvec, use_extrinsic_guess, iterations_count, reprojection_error, confidence, inliers, flags, solved);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_solve_pnp_ransac_usac(const jyppx_ocv_mat* object_points,
+    const jyppx_ocv_mat* image_points,
+    jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    jyppx_ocv_mat* rvec,
+    jyppx_ocv_mat* tvec,
+    jyppx_ocv_mat* inliers,
+    const jyppx_ocv_calib3d_usac_params* params,
+    int* solved)
+{
+    return jyppx_ocv_calib3d_solve_pnp_ransac_usac(object_points, image_points, camera_matrix, dist_coeffs, rvec, tvec, inliers, params, solved);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_solve_pnp_refine_lm(const jyppx_ocv_mat* object_points,
     const jyppx_ocv_mat* image_points,
     const jyppx_ocv_mat* camera_matrix,
@@ -2508,6 +2981,139 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_stereo_rectify_u
     return jyppx_ocv_calib3d_stereo_rectify_uncalibrated(points1, points2, fundamental, image_width, image_height, h1, h2, threshold, success);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_create(jyppx_ocv_calib3d_subdiv2d** subdiv)
+{
+    return jyppx_ocv_calib3d_subdiv2d_create(subdiv);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_create_rect(int x, int y, int width, int height, jyppx_ocv_calib3d_subdiv2d** subdiv)
+{
+    return jyppx_ocv_calib3d_subdiv2d_create_rect(x, y, width, height, subdiv);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_create_rect2f(float x, float y, float width, float height, jyppx_ocv_calib3d_subdiv2d** subdiv)
+{
+    return jyppx_ocv_calib3d_subdiv2d_create_rect2f(x, y, width, height, subdiv);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_edge_dst(const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* vertex, float* x, float* y)
+{
+    return jyppx_ocv_calib3d_subdiv2d_edge_dst(subdiv, edge, vertex, x, y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_edge_org(const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* vertex, float* x, float* y)
+{
+    return jyppx_ocv_calib3d_subdiv2d_edge_org(subdiv, edge, vertex, x, y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_find_nearest(jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, int* vertex, float* nearest_x, float* nearest_y)
+{
+    return jyppx_ocv_calib3d_subdiv2d_find_nearest(subdiv, x, y, vertex, nearest_x, nearest_y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_edge(const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int next_edge_type, int* related_edge)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_edge(subdiv, edge, next_edge_type, related_edge);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_edge_list_count(const jyppx_ocv_calib3d_subdiv2d* subdiv, int* count)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_edge_list_count(subdiv, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_edge_list_fill(const jyppx_ocv_calib3d_subdiv2d* subdiv, jyppx_ocv_calib3d_vec4f* values, int capacity)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill(subdiv, values, capacity);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_leading_edge_list_count(const jyppx_ocv_calib3d_subdiv2d* subdiv, int* count)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_count(subdiv, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_leading_edge_list_fill(const jyppx_ocv_calib3d_subdiv2d* subdiv, int* values, int capacity)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_fill(subdiv, values, capacity);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_triangle_list_count(const jyppx_ocv_calib3d_subdiv2d* subdiv, int* count)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_triangle_list_count(subdiv, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_triangle_list_fill(const jyppx_ocv_calib3d_subdiv2d* subdiv, jyppx_ocv_calib3d_vec6f* values, int capacity)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_triangle_list_fill(subdiv, values, capacity);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_vertex(const jyppx_ocv_calib3d_subdiv2d* subdiv, int vertex, float* x, float* y, int* first_edge)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_vertex(subdiv, vertex, x, y, first_edge);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_voronoi_facet_list_count(jyppx_ocv_calib3d_subdiv2d* subdiv, const int* indices, int index_count, int* facet_count, int* point_count)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_count(subdiv, indices, index_count, facet_count, point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_get_voronoi_facet_list_fill(jyppx_ocv_calib3d_subdiv2d* subdiv,
+    const int* indices,
+    int index_count,
+    int* facet_offsets,
+    int facet_offset_capacity,
+    jyppx_ocv_calib3d_point2f* points,
+    int point_capacity,
+    jyppx_ocv_calib3d_point2f* centers,
+    int center_capacity)
+{
+    return jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_fill(subdiv, indices, index_count, facet_offsets, facet_offset_capacity, points, point_capacity, centers, center_capacity);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_init_delaunay(jyppx_ocv_calib3d_subdiv2d* subdiv, int x, int y, int width, int height)
+{
+    return jyppx_ocv_calib3d_subdiv2d_init_delaunay(subdiv, x, y, width, height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_init_delaunay_rect2f(jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, float width, float height)
+{
+    return jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f(subdiv, x, y, width, height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_insert(jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, int* vertex)
+{
+    return jyppx_ocv_calib3d_subdiv2d_insert(subdiv, x, y, vertex);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_insert_points(jyppx_ocv_calib3d_subdiv2d* subdiv, const jyppx_ocv_calib3d_point2f* points, int point_count)
+{
+    return jyppx_ocv_calib3d_subdiv2d_insert_points(subdiv, points, point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_locate(jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, int* location, int* edge, int* vertex)
+{
+    return jyppx_ocv_calib3d_subdiv2d_locate(subdiv, x, y, location, edge, vertex);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_next_edge(const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* next_edge)
+{
+    return jyppx_ocv_calib3d_subdiv2d_next_edge(subdiv, edge, next_edge);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_calib3d_subdiv2d_release(jyppx_ocv_calib3d_subdiv2d* subdiv)
+{
+    jyppx_ocv_calib3d_subdiv2d_release(subdiv);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_rotate_edge(const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int rotate, int* rotated_edge)
+{
+    return jyppx_ocv_calib3d_subdiv2d_rotate_edge(subdiv, edge, rotate, rotated_edge);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_subdiv2d_sym_edge(const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* symmetric_edge)
+{
+    return jyppx_ocv_calib3d_subdiv2d_sym_edge(subdiv, edge, symmetric_edge);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_triangulate_points(const jyppx_ocv_mat* proj_matr1,
     const jyppx_ocv_mat* proj_matr2,
     const jyppx_ocv_mat* proj_points1,
@@ -2541,6 +3147,11 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_undistort_points
     return jyppx_ocv_calib3d_undistort_points(src, dst, camera_matrix, dist_coeffs, r, p, criteria_type, criteria_max_count, criteria_epsilon);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_usac_params_get_default(jyppx_ocv_calib3d_usac_params* params)
+{
+    return jyppx_ocv_calib3d_usac_params_get_default(params);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_validate_disparity(jyppx_ocv_mat* disparity,
     const jyppx_ocv_mat* cost,
     int min_disparity,
@@ -2548,6 +3159,101 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calib3d_validate_dispari
     int disp12_max_difference)
 {
     return jyppx_ocv_calib3d_validate_disparity(disparity, cost, min_disparity, number_of_disparities, disp12_max_difference);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_crf_process(jyppx_ocv_calibrate_crf* calibrator,
+    const jyppx_ocv_mat* const* src_images,
+    int image_count,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* times)
+{
+    return jyppx_ocv_calibrate_crf_process(calibrator, src_images, image_count, dst, times);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_calibrate_crf_release_handle(jyppx_ocv_calibrate_crf* calibrator)
+{
+    jyppx_ocv_calibrate_crf_release_handle(calibrator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_create(int samples,
+    float lambda,
+    int random,
+    jyppx_ocv_calibrate_crf** calibrator)
+{
+    return jyppx_ocv_calibrate_debevec_create(samples, lambda, random, calibrator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_get_lambda(const jyppx_ocv_calibrate_crf* calibrator,
+    float* lambda)
+{
+    return jyppx_ocv_calibrate_debevec_get_lambda(calibrator, lambda);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_get_random(const jyppx_ocv_calibrate_crf* calibrator,
+    int* random)
+{
+    return jyppx_ocv_calibrate_debevec_get_random(calibrator, random);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_get_samples(const jyppx_ocv_calibrate_crf* calibrator,
+    int* samples)
+{
+    return jyppx_ocv_calibrate_debevec_get_samples(calibrator, samples);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_set_lambda(jyppx_ocv_calibrate_crf* calibrator,
+    float lambda)
+{
+    return jyppx_ocv_calibrate_debevec_set_lambda(calibrator, lambda);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_set_random(jyppx_ocv_calibrate_crf* calibrator,
+    int random)
+{
+    return jyppx_ocv_calibrate_debevec_set_random(calibrator, random);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_debevec_set_samples(jyppx_ocv_calibrate_crf* calibrator,
+    int samples)
+{
+    return jyppx_ocv_calibrate_debevec_set_samples(calibrator, samples);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_robertson_create(int max_iter,
+    float threshold,
+    jyppx_ocv_calibrate_crf** calibrator)
+{
+    return jyppx_ocv_calibrate_robertson_create(max_iter, threshold, calibrator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_robertson_get_max_iter(const jyppx_ocv_calibrate_crf* calibrator,
+    int* max_iter)
+{
+    return jyppx_ocv_calibrate_robertson_get_max_iter(calibrator, max_iter);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_robertson_get_radiance(const jyppx_ocv_calibrate_crf* calibrator,
+    jyppx_ocv_mat* radiance)
+{
+    return jyppx_ocv_calibrate_robertson_get_radiance(calibrator, radiance);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_robertson_get_threshold(const jyppx_ocv_calibrate_crf* calibrator,
+    float* threshold)
+{
+    return jyppx_ocv_calibrate_robertson_get_threshold(calibrator, threshold);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_robertson_set_max_iter(jyppx_ocv_calibrate_crf* calibrator,
+    int max_iter)
+{
+    return jyppx_ocv_calibrate_robertson_set_max_iter(calibrator, max_iter);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_calibrate_robertson_set_threshold(jyppx_ocv_calibrate_crf* calibrator,
+    float threshold)
+{
+    return jyppx_ocv_calibrate_robertson_set_threshold(calibrator, threshold);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_create(jyppx_ocv_cascade_classifier** classifier)
@@ -2559,36 +3265,6 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_creat
     jyppx_ocv_cascade_classifier** classifier)
 {
     return jyppx_ocv_cascade_classifier_create_from_file(filename, classifier);
-}
-
-OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_detect_multi_scale_count(jyppx_ocv_cascade_classifier* classifier,
-    const jyppx_ocv_mat* image,
-    double scale_factor,
-    int min_neighbors,
-    int flags,
-    int min_width,
-    int min_height,
-    int max_width,
-    int max_height,
-    int* count)
-{
-    return jyppx_ocv_cascade_classifier_detect_multi_scale_count(classifier, image, scale_factor, min_neighbors, flags, min_width, min_height, max_width, max_height, count);
-}
-
-OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_detect_multi_scale_fill(jyppx_ocv_cascade_classifier* classifier,
-    const jyppx_ocv_mat* image,
-    double scale_factor,
-    int min_neighbors,
-    int flags,
-    int min_width,
-    int min_height,
-    int max_width,
-    int max_height,
-    int* rectangles,
-    int rectangle_capacity,
-    int* count)
-{
-    return jyppx_ocv_cascade_classifier_detect_multi_scale_fill(classifier, image, scale_factor, min_neighbors, flags, min_width, min_height, max_width, max_height, rectangles, rectangle_capacity, count);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_detect_multi_scale2_count(jyppx_ocv_cascade_classifier* classifier,
@@ -2657,6 +3333,36 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_detec
     int* count)
 {
     return jyppx_ocv_cascade_classifier_detect_multi_scale3_fill(classifier, image, scale_factor, min_neighbors, flags, min_width, min_height, max_width, max_height, output_reject_levels, rectangles, rectangle_capacity, reject_levels, reject_level_capacity, level_weights, level_weight_capacity, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_detect_multi_scale_count(jyppx_ocv_cascade_classifier* classifier,
+    const jyppx_ocv_mat* image,
+    double scale_factor,
+    int min_neighbors,
+    int flags,
+    int min_width,
+    int min_height,
+    int max_width,
+    int max_height,
+    int* count)
+{
+    return jyppx_ocv_cascade_classifier_detect_multi_scale_count(classifier, image, scale_factor, min_neighbors, flags, min_width, min_height, max_width, max_height, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_detect_multi_scale_fill(jyppx_ocv_cascade_classifier* classifier,
+    const jyppx_ocv_mat* image,
+    double scale_factor,
+    int min_neighbors,
+    int flags,
+    int min_width,
+    int min_height,
+    int max_width,
+    int max_height,
+    int* rectangles,
+    int rectangle_capacity,
+    int* count)
+{
+    return jyppx_ocv_cascade_classifier_detect_multi_scale_fill(classifier, image, scale_factor, min_neighbors, flags, min_width, min_height, max_width, max_height, rectangles, rectangle_capacity, count);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_cascade_classifier_empty(const jyppx_ocv_cascade_classifier* classifier,
@@ -2750,6 +3456,20 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_add_weighted(const 
     return jyppx_ocv_core_add_weighted(src1, alpha, src2, beta, gamma, dst, dtype);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_batch_distance(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* distances,
+    int dtype,
+    jyppx_ocv_mat* indices,
+    int norm_type,
+    int k,
+    const jyppx_ocv_mat* mask,
+    int update,
+    int crosscheck)
+{
+    return jyppx_ocv_core_batch_distance(src1, src2, distances, dtype, indices, norm_type, k, mask, update, crosscheck);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_bitwise_and(const jyppx_ocv_mat* src1,
     const jyppx_ocv_mat* src2,
     jyppx_ocv_mat* dst,
@@ -2781,6 +3501,30 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_bitwise_xor(const j
     return jyppx_ocv_core_bitwise_xor(src1, src2, dst, mask);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_border_interpolate(int p,
+    int len,
+    int border_type,
+    int* out_value)
+{
+    return jyppx_ocv_core_border_interpolate(p, len, border_type, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_broadcast(const jyppx_ocv_mat* src,
+    const jyppx_ocv_mat* shape,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_core_broadcast(src, shape, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_calc_covar_matrix(const jyppx_ocv_mat* samples,
+    jyppx_ocv_mat* covar,
+    jyppx_ocv_mat* mean,
+    int flags,
+    int ctype)
+{
+    return jyppx_ocv_core_calc_covar_matrix(samples, covar, mean, flags, ctype);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_cart_to_polar(const jyppx_ocv_mat* x,
     const jyppx_ocv_mat* y,
     jyppx_ocv_mat* magnitude,
@@ -2788,6 +3532,22 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_cart_to_polar(const
     int angle_in_degrees)
 {
     return jyppx_ocv_core_cart_to_polar(x, y, magnitude, angle, angle_in_degrees);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_check_hardware_support(int feature,
+    int* out_supported)
+{
+    return jyppx_ocv_core_check_hardware_support(feature, out_supported);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_check_range(const jyppx_ocv_mat* src,
+    double min_value,
+    double max_value,
+    int* out_valid,
+    int* out_x,
+    int* out_y)
+{
+    return jyppx_ocv_core_check_range(src, min_value, max_value, out_valid, out_x, out_y);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_compare(const jyppx_ocv_mat* src1,
@@ -2812,10 +3572,38 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_convert_scale_abs(c
     return jyppx_ocv_core_convert_scale_abs(src, dst, alpha, beta);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_copy_make_border(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int top,
+    int bottom,
+    int left,
+    int right,
+    int border_type,
+    double v0,
+    double v1,
+    double v2,
+    double v3)
+{
+    return jyppx_ocv_core_copy_make_border(src, dst, top, bottom, left, right, border_type, v0, v1, v2, v3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_copy_to_mask(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_core_copy_to_mask(src, dst, mask);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_count_non_zero(const jyppx_ocv_mat* src,
     int* out_count)
 {
     return jyppx_ocv_core_count_non_zero(src, out_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_cube_root(float value,
+    float* out_value)
+{
+    return jyppx_ocv_core_cube_root(value, out_value);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_dct(const jyppx_ocv_mat* src,
@@ -2885,11 +3673,265 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_extract_channel(con
     return jyppx_ocv_core_extract_channel(src, dst, coi);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_fast_atan2(float y,
+    float x,
+    float* out_degrees)
+{
+    return jyppx_ocv_core_fast_atan2(y, x, out_degrees);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_at(const jyppx_ocv_core_file_node* node,
+    int index,
+    jyppx_ocv_core_file_node** out_node)
+{
+    return jyppx_ocv_core_file_node_at(node, index, out_node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_create(jyppx_ocv_core_file_node** out_node)
+{
+    return jyppx_ocv_core_file_node_create(out_node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_empty(const jyppx_ocv_core_file_node* node,
+    int* out_empty)
+{
+    return jyppx_ocv_core_file_node_empty(node, out_empty);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_get_node(const jyppx_ocv_core_file_node* node,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    jyppx_ocv_core_file_node** out_node)
+{
+    return jyppx_ocv_core_file_node_get_node(node, name_utf8, name_byte_length, out_node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_keys(const jyppx_ocv_core_file_node* node,
+    jyppx_ocv_core_string_list** out_keys)
+{
+    return jyppx_ocv_core_file_node_keys(node, out_keys);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_mat(const jyppx_ocv_core_file_node* node,
+    jyppx_ocv_mat* out_mat)
+{
+    return jyppx_ocv_core_file_node_mat(node, out_mat);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_name(const jyppx_ocv_core_file_node* node,
+    jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_file_node_name(node, out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_raw_size(const jyppx_ocv_core_file_node* node,
+    size_t* out_size)
+{
+    return jyppx_ocv_core_file_node_raw_size(node, out_size);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_real(const jyppx_ocv_core_file_node* node,
+    double* out_value)
+{
+    return jyppx_ocv_core_file_node_real(node, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_core_file_node_release(jyppx_ocv_core_file_node* node)
+{
+    jyppx_ocv_core_file_node_release(node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_size(const jyppx_ocv_core_file_node* node,
+    size_t* out_size)
+{
+    return jyppx_ocv_core_file_node_size(node, out_size);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_string(const jyppx_ocv_core_file_node* node,
+    jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_file_node_string(node, out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_node_type(const jyppx_ocv_core_file_node* node,
+    int* out_type)
+{
+    return jyppx_ocv_core_file_node_type(node, out_type);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_create(jyppx_ocv_core_file_storage** out_storage)
+{
+    return jyppx_ocv_core_file_storage_create(out_storage);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_end_write_struct(jyppx_ocv_core_file_storage* storage)
+{
+    return jyppx_ocv_core_file_storage_end_write_struct(storage);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_get_first_top_level_node(const jyppx_ocv_core_file_storage* storage,
+    jyppx_ocv_core_file_node** out_node)
+{
+    return jyppx_ocv_core_file_storage_get_first_top_level_node(storage, out_node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_get_format(const jyppx_ocv_core_file_storage* storage,
+    int* out_format)
+{
+    return jyppx_ocv_core_file_storage_get_format(storage, out_format);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_get_node(const jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    jyppx_ocv_core_file_node** out_node)
+{
+    return jyppx_ocv_core_file_storage_get_node(storage, name_utf8, name_byte_length, out_node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_is_opened(const jyppx_ocv_core_file_storage* storage,
+    int* out_opened)
+{
+    return jyppx_ocv_core_file_storage_is_opened(storage, out_opened);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_open(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* source_utf8,
+    int source_byte_length,
+    int flags,
+    const unsigned char* encoding_utf8,
+    int encoding_byte_length,
+    int* out_opened)
+{
+    return jyppx_ocv_core_file_storage_open(storage, source_utf8, source_byte_length, flags, encoding_utf8, encoding_byte_length, out_opened);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_release(jyppx_ocv_core_file_storage* storage)
+{
+    return jyppx_ocv_core_file_storage_release(storage);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_release_and_get_string(jyppx_ocv_core_file_storage* storage,
+    jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_file_storage_release_and_get_string(storage, out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_core_file_storage_release_handle(jyppx_ocv_core_file_storage* storage)
+{
+    jyppx_ocv_core_file_storage_release_handle(storage);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_root(const jyppx_ocv_core_file_storage* storage,
+    int stream_index,
+    jyppx_ocv_core_file_node** out_node)
+{
+    return jyppx_ocv_core_file_storage_root(storage, stream_index, out_node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_start_write_struct(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    int flags,
+    const unsigned char* type_name_utf8,
+    int type_name_byte_length)
+{
+    return jyppx_ocv_core_file_storage_start_write_struct(storage, name_utf8, name_byte_length, flags, type_name_utf8, type_name_byte_length);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_bool(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    int value)
+{
+    return jyppx_ocv_core_file_storage_write_bool(storage, name_utf8, name_byte_length, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_comment(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* comment_utf8,
+    int comment_byte_length,
+    int append)
+{
+    return jyppx_ocv_core_file_storage_write_comment(storage, comment_utf8, comment_byte_length, append);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_double(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    double value)
+{
+    return jyppx_ocv_core_file_storage_write_double(storage, name_utf8, name_byte_length, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_int(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    int value)
+{
+    return jyppx_ocv_core_file_storage_write_int(storage, name_utf8, name_byte_length, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_int64(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    int64_t value)
+{
+    return jyppx_ocv_core_file_storage_write_int64(storage, name_utf8, name_byte_length, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_mat(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    const jyppx_ocv_mat* value)
+{
+    return jyppx_ocv_core_file_storage_write_mat(storage, name_utf8, name_byte_length, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_string(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    const unsigned char* value_utf8,
+    int value_byte_length)
+{
+    return jyppx_ocv_core_file_storage_write_string(storage, name_utf8, name_byte_length, value_utf8, value_byte_length);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_file_storage_write_string_vector(jyppx_ocv_core_file_storage* storage,
+    const unsigned char* name_utf8,
+    int name_byte_length,
+    const unsigned char* values_utf8,
+    int values_byte_length,
+    const int* value_offsets,
+    const int* value_lengths,
+    int value_count)
+{
+    return jyppx_ocv_core_file_storage_write_string_vector(storage, name_utf8, name_byte_length, values_utf8, values_byte_length, value_offsets, value_lengths, value_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_find_non_zero(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_core_find_non_zero(src, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_finite_mask(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_core_finite_mask(src, dst);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_flip(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int flip_code)
 {
     return jyppx_ocv_core_flip(src, dst, flip_code);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_flip_nd(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int axis)
+{
+    return jyppx_ocv_core_flip_nd(src, dst, axis);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_gemm(const jyppx_ocv_mat* src1,
@@ -2903,10 +3945,67 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_gemm(const jyppx_oc
     return jyppx_ocv_core_gemm(src1, src2, alpha, src3, beta, dst, flags);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_build_information(jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_get_build_information(out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_cpu_features_line(jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_get_cpu_features_line(out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_cpu_tick_count(int64_t* out_tick_count)
+{
+    return jyppx_ocv_core_get_cpu_tick_count(out_tick_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_default_algorithm_hint(int* out_hint)
+{
+    return jyppx_ocv_core_get_default_algorithm_hint(out_hint);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_hardware_feature_name(int feature,
+    jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_get_hardware_feature_name(feature, out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_num_threads(int* out_thread_count)
+{
+    return jyppx_ocv_core_get_num_threads(out_thread_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_number_of_cpus(int* out_cpu_count)
+{
+    return jyppx_ocv_core_get_number_of_cpus(out_cpu_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_optimal_dft_size(int vec_size,
     int* out_size)
 {
     return jyppx_ocv_core_get_optimal_dft_size(vec_size, out_size);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_thread_num(int* out_thread_number)
+{
+    return jyppx_ocv_core_get_thread_num(out_thread_number);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_tick_count(int64_t* out_tick_count)
+{
+    return jyppx_ocv_core_get_tick_count(out_tick_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_get_tick_frequency(double* out_tick_frequency)
+{
+    return jyppx_ocv_core_get_tick_frequency(out_tick_frequency);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_has_non_zero(const jyppx_ocv_mat* src,
+    int* out_value)
+{
+    return jyppx_ocv_core_has_non_zero(src, out_value);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_hconcat(const jyppx_ocv_mat* const* src,
@@ -3125,6 +4224,40 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_patch_nans(jyppx_oc
     return jyppx_ocv_core_patch_nans(src, value);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_pca_back_project(const jyppx_ocv_mat* data,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* result)
+{
+    return jyppx_ocv_core_pca_back_project(data, mean, eigenvectors, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_pca_compute_max_components(const jyppx_ocv_mat* data,
+    jyppx_ocv_mat* mean,
+    jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* eigenvalues,
+    int max_components)
+{
+    return jyppx_ocv_core_pca_compute_max_components(data, mean, eigenvectors, eigenvalues, max_components);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_pca_compute_retained_variance(const jyppx_ocv_mat* data,
+    jyppx_ocv_mat* mean,
+    jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* eigenvalues,
+    double retained_variance)
+{
+    return jyppx_ocv_core_pca_compute_retained_variance(data, mean, eigenvectors, eigenvalues, retained_variance);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_pca_project(const jyppx_ocv_mat* data,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* result)
+{
+    return jyppx_ocv_core_pca_project(data, mean, eigenvectors, result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_perspective_transform(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     const jyppx_ocv_mat* m)
@@ -3156,6 +4289,61 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_pow(const jyppx_ocv
     return jyppx_ocv_core_pow(src, power, dst);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_psnr(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    double max_value,
+    double* out_value)
+{
+    return jyppx_ocv_core_psnr(src1, src2, max_value, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_rand_shuffle(jyppx_ocv_mat* dst,
+    double iter_factor,
+    jyppx_ocv_rng* rng)
+{
+    return jyppx_ocv_core_rand_shuffle(dst, iter_factor, rng);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_randn_mat(jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* stddev)
+{
+    return jyppx_ocv_core_randn_mat(dst, mean, stddev);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_randn_scalar(jyppx_ocv_mat* dst,
+    double mean_v0,
+    double mean_v1,
+    double mean_v2,
+    double mean_v3,
+    double stddev_v0,
+    double stddev_v1,
+    double stddev_v2,
+    double stddev_v3)
+{
+    return jyppx_ocv_core_randn_scalar(dst, mean_v0, mean_v1, mean_v2, mean_v3, stddev_v0, stddev_v1, stddev_v2, stddev_v3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_randu_mat(jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* low,
+    const jyppx_ocv_mat* high)
+{
+    return jyppx_ocv_core_randu_mat(dst, low, high);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_randu_scalar(jyppx_ocv_mat* dst,
+    double low_v0,
+    double low_v1,
+    double low_v2,
+    double low_v3,
+    double high_v0,
+    double high_v1,
+    double high_v2,
+    double high_v3)
+{
+    return jyppx_ocv_core_randu_scalar(dst, low_v0, low_v1, low_v2, low_v3, high_v0, high_v1, high_v2, high_v3);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_reduce(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int dim,
@@ -3163,6 +4351,22 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_reduce(const jyppx_
     int dtype)
 {
     return jyppx_ocv_core_reduce(src, dst, dim, rtype, dtype);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_reduce_arg_max(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int axis,
+    int last_index)
+{
+    return jyppx_ocv_core_reduce_arg_max(src, dst, axis, last_index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_reduce_arg_min(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int axis,
+    int last_index)
+{
+    return jyppx_ocv_core_reduce_arg_min(src, dst, axis, last_index);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_repeat(const jyppx_ocv_mat* src,
@@ -3278,6 +4482,21 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_set_identity(jyppx_
     return jyppx_ocv_core_set_identity(mat, v0, v1, v2, v3);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_set_num_threads(int thread_count)
+{
+    return jyppx_ocv_core_set_num_threads(thread_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_set_rng_seed(int seed)
+{
+    return jyppx_ocv_core_set_rng_seed(seed);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_set_use_optimized(int enabled)
+{
+    return jyppx_ocv_core_set_use_optimized(enabled);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_solve(const jyppx_ocv_mat* src1,
     const jyppx_ocv_mat* src2,
     jyppx_ocv_mat* dst,
@@ -3294,12 +4513,35 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_solve_cubic(const j
     return jyppx_ocv_core_solve_cubic(coeffs, roots, out_root_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_solve_lp(const jyppx_ocv_mat* objective,
+    const jyppx_ocv_mat* constraints,
+    jyppx_ocv_mat* solution,
+    double constraint_epsilon,
+    int* out_result)
+{
+    return jyppx_ocv_core_solve_lp(objective, constraints, solution, constraint_epsilon, out_result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_solve_poly(const jyppx_ocv_mat* coeffs,
     jyppx_ocv_mat* roots,
     int max_iters,
     double* out_error)
 {
     return jyppx_ocv_core_solve_poly(coeffs, roots, max_iters, out_error);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_sort(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int flags)
+{
+    return jyppx_ocv_core_sort(src, dst, flags);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_sort_idx(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int flags)
+{
+    return jyppx_ocv_core_sort_idx(src, dst, flags);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_split_count(const jyppx_ocv_mat* src,
@@ -3320,6 +4562,24 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_sqrt(const jyppx_oc
     jyppx_ocv_mat* dst)
 {
     return jyppx_ocv_core_sqrt(src, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_string_list_count(const jyppx_ocv_core_string_list* values,
+    size_t* out_count)
+{
+    return jyppx_ocv_core_string_list_count(values, out_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_string_list_get(const jyppx_ocv_core_string_list* values,
+    size_t index,
+    jyppx_ocv_core_utf8_result** out_result)
+{
+    return jyppx_ocv_core_string_list_get(values, index, out_result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_core_string_list_release(jyppx_ocv_core_string_list* values)
+{
+    jyppx_ocv_core_string_list_release(values);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_subtract(const jyppx_ocv_mat* src1,
@@ -3430,6 +4690,103 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_svd_static_compute_
     return jyppx_ocv_core_svd_static_compute_values(src, w, flags);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_create(jyppx_ocv_core_tick_meter** out_meter)
+{
+    return jyppx_ocv_core_tick_meter_create(out_meter);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_avg_time_milli(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_avg_time_milli(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_avg_time_sec(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_avg_time_sec(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_counter(const jyppx_ocv_core_tick_meter* meter,
+    int64_t* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_counter(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_fps(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_fps(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_last_time_micro(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_last_time_micro(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_last_time_milli(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_last_time_milli(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_last_time_sec(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_last_time_sec(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_last_time_ticks(const jyppx_ocv_core_tick_meter* meter,
+    int64_t* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_last_time_ticks(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_time_micro(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_time_micro(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_time_milli(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_time_milli(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_time_sec(const jyppx_ocv_core_tick_meter* meter,
+    double* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_time_sec(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_get_time_ticks(const jyppx_ocv_core_tick_meter* meter,
+    int64_t* out_value)
+{
+    return jyppx_ocv_core_tick_meter_get_time_ticks(meter, out_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_core_tick_meter_release(jyppx_ocv_core_tick_meter* meter)
+{
+    jyppx_ocv_core_tick_meter_release(meter);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_reset(jyppx_ocv_core_tick_meter* meter)
+{
+    return jyppx_ocv_core_tick_meter_reset(meter);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_start(jyppx_ocv_core_tick_meter* meter)
+{
+    return jyppx_ocv_core_tick_meter_start(meter);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_tick_meter_stop(jyppx_ocv_core_tick_meter* meter)
+{
+    return jyppx_ocv_core_tick_meter_stop(meter);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_trace(const jyppx_ocv_mat* src,
     double* out_values,
     int out_values_length)
@@ -3450,11 +4807,107 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_transpose(const jyp
     return jyppx_ocv_core_transpose(src, dst);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_transpose_nd(const jyppx_ocv_mat* src,
+    const int* order,
+    int order_count,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_core_transpose_nd(src, order, order_count, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_use_optimized(int* out_enabled)
+{
+    return jyppx_ocv_core_use_optimized(out_enabled);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_utf8_result_data(const jyppx_ocv_core_utf8_result* result,
+    const unsigned char** out_data)
+{
+    return jyppx_ocv_core_utf8_result_data(result, out_data);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_core_utf8_result_release(jyppx_ocv_core_utf8_result* result)
+{
+    jyppx_ocv_core_utf8_result_release(result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_utf8_result_size(const jyppx_ocv_core_utf8_result* result,
+    size_t* out_size)
+{
+    return jyppx_ocv_core_utf8_result_size(result, out_size);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_core_vconcat(const jyppx_ocv_mat* const* src,
     int src_count,
     jyppx_ocv_mat* dst)
 {
     return jyppx_ocv_core_vconcat(src, src_count, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dense_optical_flow_calc(jyppx_ocv_dense_optical_flow* optical_flow,
+    const jyppx_ocv_mat* first,
+    const jyppx_ocv_mat* second,
+    jyppx_ocv_mat* flow)
+{
+    return jyppx_ocv_dense_optical_flow_calc(optical_flow, first, second, flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dense_optical_flow_collect_garbage(jyppx_ocv_dense_optical_flow* optical_flow)
+{
+    return jyppx_ocv_dense_optical_flow_collect_garbage(optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_dense_optical_flow_release_handle(jyppx_ocv_dense_optical_flow* optical_flow)
+{
+    jyppx_ocv_dense_optical_flow_release_handle(optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_create(int preset,
+    jyppx_ocv_dense_optical_flow** optical_flow)
+{
+    return jyppx_ocv_dis_optical_flow_create(preset, optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_get_bool_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_dis_optical_flow_get_bool_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_get_float_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    float* value)
+{
+    return jyppx_ocv_dis_optical_flow_get_float_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_get_int_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_dis_optical_flow_get_int_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_set_bool_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_dis_optical_flow_set_bool_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_set_float_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    float value)
+{
+    return jyppx_ocv_dis_optical_flow_set_float_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dis_optical_flow_set_int_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_dis_optical_flow_set_int_property(optical_flow, property_id, value);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_from_image(const jyppx_ocv_mat* image,
@@ -3471,6 +4924,13 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_from_image(cons
     int ddepth)
 {
     return jyppx_ocv_dnn_blob_from_image(image, blob, scale_factor, size_width, size_height, mean_v0, mean_v1, mean_v2, mean_v3, swap_rb, crop, ddepth);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_from_image_with_params(const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* blob,
+    const jyppx_ocv_dnn_image2blob_params* parameters)
+{
+    return jyppx_ocv_dnn_blob_from_image_with_params(image, blob, parameters);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_from_images(const jyppx_ocv_mat* const* images,
@@ -3490,6 +4950,49 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_from_images(con
     return jyppx_ocv_dnn_blob_from_images(images, image_count, blob, scale_factor, size_width, size_height, mean_v0, mean_v1, mean_v2, mean_v3, swap_rb, crop, ddepth);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_from_images_with_params(const jyppx_ocv_mat* const* images,
+    int image_count,
+    jyppx_ocv_mat* blob,
+    const jyppx_ocv_dnn_image2blob_params* parameters)
+{
+    return jyppx_ocv_dnn_blob_from_images_with_params(images, image_count, blob, parameters);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_rect_to_image_rect(const jyppx_ocv_dnn_image2blob_params* parameters,
+    const jyppx_ocv_dnn_rect* blob_rect,
+    int image_width,
+    int image_height,
+    jyppx_ocv_dnn_rect* image_rect)
+{
+    return jyppx_ocv_dnn_blob_rect_to_image_rect(parameters, blob_rect, image_width, image_height, image_rect);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_blob_rects_to_image_rects(const jyppx_ocv_dnn_image2blob_params* parameters,
+    const jyppx_ocv_dnn_rect* blob_rects,
+    int blob_rect_count,
+    int image_width,
+    int image_height,
+    jyppx_ocv_dnn_rect* image_rects,
+    int image_rect_capacity,
+    int* image_rect_count)
+{
+    return jyppx_ocv_dnn_blob_rects_to_image_rects(parameters, blob_rects, blob_rect_count, image_width, image_height, image_rects, image_rect_capacity, image_rect_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_get_available_targets_count(int backend_id,
+    int* target_count)
+{
+    return jyppx_ocv_dnn_get_available_targets_count(backend_id, target_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_get_available_targets_fill(int backend_id,
+    int* targets,
+    int target_capacity,
+    int* target_count)
+{
+    return jyppx_ocv_dnn_get_available_targets_fill(backend_id, targets, target_capacity, target_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_images_from_blob_count(const jyppx_ocv_mat* blob,
     int* image_count)
 {
@@ -3504,9 +5007,79 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_images_from_blob_fil
     return jyppx_ocv_dnn_images_from_blob_fill(blob, images, image_capacity, image_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_layer_output_name_to_index(jyppx_ocv_dnn_layer* layer,
+    const char* output_name,
+    int* output_index)
+{
+    return jyppx_ocv_dnn_layer_output_name_to_index(layer, output_name, output_index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_dnn_layer_release_handle(jyppx_ocv_dnn_layer* layer)
+{
+    jyppx_ocv_dnn_layer_release_handle(layer);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_mat_groups_get_counts(const jyppx_ocv_dnn_mat_groups* result,
+    int* group_count,
+    int* mat_count)
+{
+    return jyppx_ocv_dnn_mat_groups_get_counts(result, group_count, mat_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_mat_groups_get_group_offsets(const jyppx_ocv_dnn_mat_groups* result,
+    int* offsets,
+    int offset_capacity,
+    int* group_count)
+{
+    return jyppx_ocv_dnn_mat_groups_get_group_offsets(result, offsets, offset_capacity, group_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_dnn_mat_groups_release_handle(jyppx_ocv_dnn_mat_groups* result)
+{
+    jyppx_ocv_dnn_mat_groups_release_handle(result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_mat_groups_take_mats(const jyppx_ocv_dnn_mat_groups* result,
+    jyppx_ocv_mat** mats,
+    int mat_capacity,
+    int* mat_count)
+{
+    return jyppx_ocv_dnn_mat_groups_take_mats(result, mats, mat_capacity, mat_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_connect(jyppx_ocv_dnn_net* net,
+    const char* output_pin,
+    const char* input_pin)
+{
+    return jyppx_ocv_dnn_net_connect(net, output_pin, input_pin);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_create_empty(jyppx_ocv_dnn_net** net)
 {
     return jyppx_ocv_dnn_net_create_empty(net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_disable_kv_cache(jyppx_ocv_dnn_net* net)
+{
+    return jyppx_ocv_dnn_net_disable_kv_cache(net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_dump(jyppx_ocv_dnn_net* net,
+    jyppx_ocv_core_utf8_result** result)
+{
+    return jyppx_ocv_dnn_net_dump(net, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_dump_to_file(jyppx_ocv_dnn_net* net,
+    const char* path)
+{
+    return jyppx_ocv_dnn_net_dump_to_file(net, path);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_dump_to_pbtxt(jyppx_ocv_dnn_net* net,
+    const char* path)
+{
+    return jyppx_ocv_dnn_net_dump_to_pbtxt(net, path);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_empty(const jyppx_ocv_dnn_net* net, int* empty)
@@ -3514,11 +5087,40 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_empty(const jypp
     return jyppx_ocv_dnn_net_empty(net, empty);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_enable_fusion(jyppx_ocv_dnn_net* net, int enabled)
+{
+    return jyppx_ocv_dnn_net_enable_fusion(net, enabled);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_enable_kv_cache(jyppx_ocv_dnn_net* net)
+{
+    return jyppx_ocv_dnn_net_enable_kv_cache(net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_enable_winograd(jyppx_ocv_dnn_net* net, int enabled)
+{
+    return jyppx_ocv_dnn_net_enable_winograd(net, enabled);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_finalize(jyppx_ocv_dnn_net* net)
+{
+    return jyppx_ocv_dnn_net_finalize(net);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_forward(jyppx_ocv_dnn_net* net,
     const char* output_name,
     jyppx_ocv_mat* output)
 {
     return jyppx_ocv_dnn_net_forward(net, output_name, output);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_forward_and_retrieve(jyppx_ocv_dnn_net* net,
+    const char* names_buffer,
+    const int* name_offsets,
+    int name_count,
+    jyppx_ocv_dnn_mat_groups** result)
+{
+    return jyppx_ocv_dnn_net_forward_and_retrieve(net, names_buffer, name_offsets, name_count, result);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_forward_many(jyppx_ocv_dnn_net* net,
@@ -3532,6 +5134,36 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_forward_many(jyp
     return jyppx_ocv_dnn_net_forward_many(net, names_buffer, name_offsets, name_count, outputs, output_capacity, output_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_detailed_perf_profile_count(const jyppx_ocv_dnn_net* net,
+    int* row_count,
+    int* name_byte_count,
+    int* time_byte_count,
+    int* invocation_byte_count)
+{
+    return jyppx_ocv_dnn_net_get_detailed_perf_profile_count(net, row_count, name_byte_count, time_byte_count, invocation_byte_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_detailed_perf_profile_fill(const jyppx_ocv_dnn_net* net,
+    int* name_offsets,
+    int name_offset_capacity,
+    char* names,
+    int name_capacity,
+    int* time_offsets,
+    int time_offset_capacity,
+    char* times,
+    int time_capacity,
+    int* invocation_offsets,
+    int invocation_offset_capacity,
+    char* invocations,
+    int invocation_capacity,
+    int* row_count,
+    int* name_byte_count,
+    int* time_byte_count,
+    int* invocation_byte_count)
+{
+    return jyppx_ocv_dnn_net_get_detailed_perf_profile_fill(net, name_offsets, name_offset_capacity, names, name_capacity, time_offsets, time_offset_capacity, times, time_capacity, invocation_offsets, invocation_offset_capacity, invocations, invocation_capacity, row_count, name_byte_count, time_byte_count, invocation_byte_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_flops(const jyppx_ocv_dnn_net* net,
     const int* input_shape,
     int input_shape_count,
@@ -3539,6 +5171,32 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_flops(const 
     long long* flops)
 {
     return jyppx_ocv_dnn_net_get_flops(net, input_shape, input_shape_count, input_type, flops);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_flops_many(const jyppx_ocv_dnn_net* net,
+    const int* input_shape_offsets,
+    int input_shape_count,
+    const int* input_shape_values,
+    int input_value_count,
+    const int* input_types,
+    int input_type_count,
+    int64_t* flops)
+{
+    return jyppx_ocv_dnn_net_get_flops_many(net, input_shape_offsets, input_shape_count, input_shape_values, input_value_count, input_types, input_type_count, flops);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_by_id(const jyppx_ocv_dnn_net* net,
+    int layer_id,
+    jyppx_ocv_dnn_layer** layer)
+{
+    return jyppx_ocv_dnn_net_get_layer_by_id(net, layer_id, layer);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_by_name(const jyppx_ocv_dnn_net* net,
+    const char* layer_name,
+    jyppx_ocv_dnn_layer** layer)
+{
+    return jyppx_ocv_dnn_net_get_layer_by_name(net, layer_name, layer);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_flops(const jyppx_ocv_dnn_net* net,
@@ -3576,6 +5234,46 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_names_
     return jyppx_ocv_dnn_net_get_layer_names_fill(net, offsets, offset_capacity, buffer, buffer_capacity, string_count, byte_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_shapes_count(const jyppx_ocv_dnn_net* net,
+    const int* input_shape_offsets,
+    int input_shape_count,
+    const int* input_shape_values,
+    int input_value_count,
+    const int* input_types,
+    int input_type_count,
+    int layer_id,
+    int* input_layer_shape_count,
+    int* input_layer_value_count,
+    int* output_layer_shape_count,
+    int* output_layer_value_count)
+{
+    return jyppx_ocv_dnn_net_get_layer_shapes_count(net, input_shape_offsets, input_shape_count, input_shape_values, input_value_count, input_types, input_type_count, layer_id, input_layer_shape_count, input_layer_value_count, output_layer_shape_count, output_layer_value_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_shapes_fill(const jyppx_ocv_dnn_net* net,
+    const int* input_shape_offsets,
+    int input_shape_count,
+    const int* input_shape_values,
+    int input_value_count,
+    const int* input_types,
+    int input_type_count,
+    int layer_id,
+    int* input_layer_offsets,
+    int input_layer_offset_capacity,
+    int* input_layer_values,
+    int input_layer_value_capacity,
+    int* output_layer_offsets,
+    int output_layer_offset_capacity,
+    int* output_layer_values,
+    int output_layer_value_capacity,
+    int* input_layer_shape_count,
+    int* input_layer_value_count,
+    int* output_layer_shape_count,
+    int* output_layer_value_count)
+{
+    return jyppx_ocv_dnn_net_get_layer_shapes_fill(net, input_shape_offsets, input_shape_count, input_shape_values, input_value_count, input_types, input_type_count, layer_id, input_layer_offsets, input_layer_offset_capacity, input_layer_values, input_layer_value_capacity, output_layer_offsets, output_layer_offset_capacity, output_layer_values, output_layer_value_capacity, input_layer_shape_count, input_layer_value_count, output_layer_shape_count, output_layer_value_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layer_types_count(const jyppx_ocv_dnn_net* net,
     int* string_count,
     int* byte_count)
@@ -3601,6 +5299,40 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_layers_count
     return jyppx_ocv_dnn_net_get_layers_count_by_type(net, layer_type, layer_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_memory_consumption(const jyppx_ocv_dnn_net* net,
+    const int* input_shape_offsets,
+    int input_shape_count,
+    const int* input_shape_values,
+    int input_value_count,
+    const int* input_types,
+    int input_type_count,
+    uint64_t* weights_bytes,
+    uint64_t* blob_bytes)
+{
+    return jyppx_ocv_dnn_net_get_memory_consumption(net, input_shape_offsets, input_shape_count, input_shape_values, input_value_count, input_types, input_type_count, weights_bytes, blob_bytes);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_model_format(const jyppx_ocv_dnn_net* net, int* format)
+{
+    return jyppx_ocv_dnn_net_get_model_format(net, format);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_param_by_id(const jyppx_ocv_dnn_net* net,
+    int layer_id,
+    int parameter_index,
+    jyppx_ocv_mat* value)
+{
+    return jyppx_ocv_dnn_net_get_param_by_id(net, layer_id, parameter_index, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_param_by_name(const jyppx_ocv_dnn_net* net,
+    const char* layer_name,
+    int parameter_index,
+    jyppx_ocv_mat* value)
+{
+    return jyppx_ocv_dnn_net_get_param_by_name(net, layer_name, parameter_index, value);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_perf_profile_count(jyppx_ocv_dnn_net* net,
     int* timing_count)
 {
@@ -3614,6 +5346,16 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_perf_profile
     long long* tick_count)
 {
     return jyppx_ocv_dnn_net_get_perf_profile_fill(net, timings, timing_capacity, timing_count, tick_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_profiling_mode(const jyppx_ocv_dnn_net* net, int* mode)
+{
+    return jyppx_ocv_dnn_net_get_profiling_mode(net, mode);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_tracing_mode(const jyppx_ocv_dnn_net* net, int* mode)
+{
+    return jyppx_ocv_dnn_net_get_tracing_mode(net, mode);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_unconnected_out_layers_count(const jyppx_ocv_dnn_net* net,
@@ -3648,9 +5390,23 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_get_unconnected_
     return jyppx_ocv_dnn_net_get_unconnected_out_layers_names_fill(net, offsets, offset_capacity, buffer, buffer_capacity, string_count, byte_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_register_output(jyppx_ocv_dnn_net* net,
+    const char* output_name,
+    int layer_id,
+    int output_port,
+    int* registered_layer_id)
+{
+    return jyppx_ocv_dnn_net_register_output(net, output_name, layer_id, output_port, registered_layer_id);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_dnn_net_release_handle(jyppx_ocv_dnn_net* net)
 {
     jyppx_ocv_dnn_net_release_handle(net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_reset_kv_cache(jyppx_ocv_dnn_net* net)
+{
+    return jyppx_ocv_dnn_net_reset_kv_cache(net);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_input(jyppx_ocv_dnn_net* net,
@@ -3681,6 +5437,22 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_inputs_names
     return jyppx_ocv_dnn_net_set_inputs_names(net, names_buffer, name_offsets, name_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_param_by_id(jyppx_ocv_dnn_net* net,
+    int layer_id,
+    int parameter_index,
+    const jyppx_ocv_mat* value)
+{
+    return jyppx_ocv_dnn_net_set_param_by_id(net, layer_id, parameter_index, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_param_by_name(jyppx_ocv_dnn_net* net,
+    const char* layer_name,
+    int parameter_index,
+    const jyppx_ocv_mat* value)
+{
+    return jyppx_ocv_dnn_net_set_param_by_name(net, layer_name, parameter_index, value);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_preferable_backend(jyppx_ocv_dnn_net* net, int backend_id)
 {
     return jyppx_ocv_dnn_net_set_preferable_backend(net, backend_id);
@@ -3689,6 +5461,16 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_preferable_b
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_preferable_target(jyppx_ocv_dnn_net* net, int target_id)
 {
     return jyppx_ocv_dnn_net_set_preferable_target(net, target_id);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_profiling_mode(jyppx_ocv_dnn_net* net, int mode)
+{
+    return jyppx_ocv_dnn_net_set_profiling_mode(net, mode);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_net_set_tracing_mode(jyppx_ocv_dnn_net* net, int mode)
+{
+    return jyppx_ocv_dnn_net_set_tracing_mode(net, mode);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net(const char* model,
@@ -3718,11 +5500,28 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_model_
     return jyppx_ocv_dnn_read_net_from_model_optimizer(xml, bin, net);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_model_optimizer_buffer(const unsigned char* model_config_buffer,
+    int model_config_buffer_size,
+    const unsigned char* weights_buffer,
+    int weights_buffer_size,
+    jyppx_ocv_dnn_net** net)
+{
+    return jyppx_ocv_dnn_read_net_from_model_optimizer_buffer(model_config_buffer, model_config_buffer_size, weights_buffer, weights_buffer_size, net);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_onnx(const char* model,
     int engine,
     jyppx_ocv_dnn_net** net)
 {
     return jyppx_ocv_dnn_read_net_from_onnx(model, engine, net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_onnx_buffer(const unsigned char* model_buffer,
+    int model_buffer_size,
+    int engine,
+    jyppx_ocv_dnn_net** net)
+{
+    return jyppx_ocv_dnn_read_net_from_onnx_buffer(model_buffer, model_buffer_size, engine, net);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_tensorflow(const char* model,
@@ -3733,11 +5532,49 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_tensor
     return jyppx_ocv_dnn_read_net_from_tensorflow(model, config, engine, net);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_tensorflow_buffer(const unsigned char* model_buffer,
+    int model_buffer_size,
+    const unsigned char* config_buffer,
+    int config_buffer_size,
+    int engine,
+    const char* extra_outputs_buffer,
+    const int* extra_output_offsets,
+    int extra_output_count,
+    jyppx_ocv_dnn_net** net)
+{
+    return jyppx_ocv_dnn_read_net_from_tensorflow_buffer(model_buffer, model_buffer_size, config_buffer, config_buffer_size, engine, extra_outputs_buffer, extra_output_offsets, extra_output_count, net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_tensorflow_ex(const char* model,
+    const char* config,
+    int engine,
+    const char* extra_outputs_buffer,
+    const int* extra_output_offsets,
+    int extra_output_count,
+    jyppx_ocv_dnn_net** net)
+{
+    return jyppx_ocv_dnn_read_net_from_tensorflow_ex(model, config, engine, extra_outputs_buffer, extra_output_offsets, extra_output_count, net);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_tflite(const char* model,
     int engine,
     jyppx_ocv_dnn_net** net)
 {
     return jyppx_ocv_dnn_read_net_from_tflite(model, engine, net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_net_from_tflite_buffer(const unsigned char* model_buffer,
+    int model_buffer_size,
+    int engine,
+    jyppx_ocv_dnn_net** net)
+{
+    return jyppx_ocv_dnn_read_net_from_tflite_buffer(model_buffer, model_buffer_size, engine, net);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_dnn_read_tensor_from_onnx(const char* path,
+    jyppx_ocv_mat* output)
+{
+    return jyppx_ocv_dnn_read_tensor_from_onnx(path, output);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_encoded_buffer_data(const jyppx_ocv_encoded_buffer* buffer,
@@ -4392,6 +6229,61 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_face_standard_collector
     jyppx_ocv_face_standard_collector_release_handle(collector);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_create(int num_levels,
+    double pyramid_scale,
+    int fast_pyramids,
+    int window_size,
+    int num_iterations,
+    int polynomial_neighborhood,
+    double polynomial_sigma,
+    int flags,
+    jyppx_ocv_dense_optical_flow** optical_flow)
+{
+    return jyppx_ocv_farneback_optical_flow_create(num_levels, pyramid_scale, fast_pyramids, window_size, num_iterations, polynomial_neighborhood, polynomial_sigma, flags, optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_get_bool_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_farneback_optical_flow_get_bool_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_get_double_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    double* value)
+{
+    return jyppx_ocv_farneback_optical_flow_get_double_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_get_int_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_farneback_optical_flow_get_int_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_set_bool_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_farneback_optical_flow_set_bool_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_set_double_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    double value)
+{
+    return jyppx_ocv_farneback_optical_flow_set_double_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_farneback_optical_flow_set_int_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_farneback_optical_flow_set_int_property(optical_flow, property_id, value);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_affine_clear(jyppx_ocv_features2d_affine* affine)
 {
     return jyppx_ocv_features2d_affine_clear(affine);
@@ -4703,6 +6595,82 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_akaze_set_n_o
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_akaze_set_threshold(jyppx_ocv_features2d_akaze* akaze, double value)
 {
     return jyppx_ocv_features2d_akaze_set_threshold(akaze, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_add_items(jyppx_ocv_features2d_ann_index* index,
+    const jyppx_ocv_mat* features)
+{
+    return jyppx_ocv_features2d_ann_index_add_items(index, features);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_build(jyppx_ocv_features2d_ann_index* index,
+    int trees)
+{
+    return jyppx_ocv_features2d_ann_index_build(index, trees);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_create(int dimension,
+    int distance,
+    jyppx_ocv_features2d_ann_index** index)
+{
+    return jyppx_ocv_features2d_ann_index_create(dimension, distance, index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_get_item_number(const jyppx_ocv_features2d_ann_index* index,
+    int* item_number)
+{
+    return jyppx_ocv_features2d_ann_index_get_item_number(index, item_number);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_get_tree_number(const jyppx_ocv_features2d_ann_index* index,
+    int* tree_number)
+{
+    return jyppx_ocv_features2d_ann_index_get_tree_number(index, tree_number);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_knn_search(const jyppx_ocv_features2d_ann_index* index,
+    const jyppx_ocv_mat* query,
+    jyppx_ocv_mat* indices,
+    jyppx_ocv_mat* distances,
+    int knn,
+    int search_k)
+{
+    return jyppx_ocv_features2d_ann_index_knn_search(index, query, indices, distances, knn, search_k);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_load(jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int prefault)
+{
+    return jyppx_ocv_features2d_ann_index_load(index, filename_utf8, filename_byte_length, prefault);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_features2d_ann_index_release(jyppx_ocv_features2d_ann_index* index)
+{
+    jyppx_ocv_features2d_ann_index_release(index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_save(jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int prefault)
+{
+    return jyppx_ocv_features2d_ann_index_save(index, filename_utf8, filename_byte_length, prefault);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_set_on_disk_build(jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int* enabled)
+{
+    return jyppx_ocv_features2d_ann_index_set_on_disk_build(index, filename_utf8, filename_byte_length, enabled);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_ann_index_set_seed(jyppx_ocv_features2d_ann_index* index,
+    int seed)
+{
+    return jyppx_ocv_features2d_ann_index_set_seed(index, seed);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_features2d_bf_matcher_add(jyppx_ocv_features2d_bf_matcher* matcher,
@@ -7121,6 +9089,147 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_img_hash_release_handle
     jyppx_ocv_img_hash_release_handle(hash);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_create(int loop_count,
+    double bg0,
+    double bg1,
+    double bg2,
+    double bg3,
+    jyppx_ocv_imgcodecs_animation** out_animation)
+{
+    return jyppx_ocv_imgcodecs_animation_create(loop_count, bg0, bg1, bg2, bg3, out_animation);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_frame_clone_at(const jyppx_ocv_imgcodecs_animation* animation,
+    size_t index,
+    jyppx_ocv_mat** out_frame,
+    int* out_duration)
+{
+    return jyppx_ocv_imgcodecs_animation_frame_clone_at(animation, index, out_frame, out_duration);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_frame_count(const jyppx_ocv_imgcodecs_animation* animation,
+    size_t* out_count)
+{
+    return jyppx_ocv_imgcodecs_animation_frame_count(animation, out_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_get_background_color(const jyppx_ocv_imgcodecs_animation* animation,
+    double* out_bg0,
+    double* out_bg1,
+    double* out_bg2,
+    double* out_bg3)
+{
+    return jyppx_ocv_imgcodecs_animation_get_background_color(animation, out_bg0, out_bg1, out_bg2, out_bg3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_get_loop_count(const jyppx_ocv_imgcodecs_animation* animation,
+    int* out_loop_count)
+{
+    return jyppx_ocv_imgcodecs_animation_get_loop_count(animation, out_loop_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_imgcodecs_animation_release(jyppx_ocv_imgcodecs_animation* animation)
+{
+    jyppx_ocv_imgcodecs_animation_release(animation);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_set_background_color(jyppx_ocv_imgcodecs_animation* animation,
+    double bg0,
+    double bg1,
+    double bg2,
+    double bg3)
+{
+    return jyppx_ocv_imgcodecs_animation_set_background_color(animation, bg0, bg1, bg2, bg3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_set_frames(jyppx_ocv_imgcodecs_animation* animation,
+    const jyppx_ocv_mat* const* frames,
+    const int* durations,
+    size_t frame_count)
+{
+    return jyppx_ocv_imgcodecs_animation_set_frames(animation, frames, durations, frame_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_set_loop_count(jyppx_ocv_imgcodecs_animation* animation,
+    int loop_count)
+{
+    return jyppx_ocv_imgcodecs_animation_set_loop_count(animation, loop_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_set_still_image(jyppx_ocv_imgcodecs_animation* animation,
+    const jyppx_ocv_mat* image)
+{
+    return jyppx_ocv_imgcodecs_animation_set_still_image(animation, image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_animation_still_image_clone(const jyppx_ocv_imgcodecs_animation* animation,
+    jyppx_ocv_mat** out_image)
+{
+    return jyppx_ocv_imgcodecs_animation_still_image_clone(animation, out_image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_have_image_reader(const char* filename,
+    int* out_available)
+{
+    return jyppx_ocv_imgcodecs_have_image_reader(filename, out_available);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_have_image_writer(const char* filename_or_extension,
+    int* out_available)
+{
+    return jyppx_ocv_imgcodecs_have_image_writer(filename_or_extension, out_available);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_image_collection_clone_at(jyppx_ocv_imgcodecs_image_collection* collection,
+    int index,
+    jyppx_ocv_mat** out_image)
+{
+    return jyppx_ocv_imgcodecs_image_collection_clone_at(collection, index, out_image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_image_collection_create(jyppx_ocv_imgcodecs_image_collection** out_collection)
+{
+    return jyppx_ocv_imgcodecs_image_collection_create(out_collection);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_image_collection_create_file(const char* filename,
+    int flags,
+    jyppx_ocv_imgcodecs_image_collection** out_collection)
+{
+    return jyppx_ocv_imgcodecs_image_collection_create_file(filename, flags, out_collection);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_image_collection_init(jyppx_ocv_imgcodecs_image_collection* collection,
+    const char* filename,
+    int flags)
+{
+    return jyppx_ocv_imgcodecs_image_collection_init(collection, filename, flags);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_imgcodecs_image_collection_release(jyppx_ocv_imgcodecs_image_collection* collection)
+{
+    jyppx_ocv_imgcodecs_image_collection_release(collection);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_image_collection_release_cache(jyppx_ocv_imgcodecs_image_collection* collection,
+    int index)
+{
+    return jyppx_ocv_imgcodecs_image_collection_release_cache(collection, index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_image_collection_size(const jyppx_ocv_imgcodecs_image_collection* collection,
+    size_t* out_size)
+{
+    return jyppx_ocv_imgcodecs_image_collection_size(collection, out_size);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imcount(const char* filename,
+    int flags,
+    size_t* out_count)
+{
+    return jyppx_ocv_imgcodecs_imcount(filename, flags, out_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imdecode(const unsigned char* buffer,
     size_t buffer_length,
     int flags,
@@ -7129,11 +9238,72 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imdecode(const
     return jyppx_ocv_imgcodecs_imdecode(buffer, buffer_length, flags, out_image);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imdecode_animation(const unsigned char* buffer,
+    size_t buffer_length,
+    int start,
+    int count,
+    jyppx_ocv_imgcodecs_animation* animation,
+    int* out_success)
+{
+    return jyppx_ocv_imgcodecs_imdecode_animation(buffer, buffer_length, start, count, animation, out_success);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imdecode_multi(const unsigned char* buffer,
+    size_t buffer_length,
+    int flags,
+    int has_range,
+    int start,
+    int end,
+    jyppx_ocv_imgcodecs_mat_vector** out_images,
+    int* out_success)
+{
+    return jyppx_ocv_imgcodecs_imdecode_multi(buffer, buffer_length, flags, has_range, start, end, out_images, out_success);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imdecode_with_metadata(const unsigned char* buffer,
+    size_t buffer_length,
+    int flags,
+    jyppx_ocv_imgcodecs_metadata_result** out_result)
+{
+    return jyppx_ocv_imgcodecs_imdecode_with_metadata(buffer, buffer_length, flags, out_result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imencode(const char* ext,
     const jyppx_ocv_mat* image,
     jyppx_ocv_encoded_buffer** out_buffer)
 {
     return jyppx_ocv_imgcodecs_imencode(ext, image, out_buffer);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imencode_animation(const char* ext,
+    const jyppx_ocv_imgcodecs_animation* animation,
+    const int* params,
+    size_t params_length,
+    jyppx_ocv_encoded_buffer** out_buffer)
+{
+    return jyppx_ocv_imgcodecs_imencode_animation(ext, animation, params, params_length, out_buffer);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imencode_multi(const char* ext,
+    const jyppx_ocv_mat* const* images,
+    size_t image_count,
+    const int* params,
+    size_t params_length,
+    jyppx_ocv_encoded_buffer** out_buffer)
+{
+    return jyppx_ocv_imgcodecs_imencode_multi(ext, images, image_count, params, params_length, out_buffer);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imencode_with_metadata(const char* ext,
+    const jyppx_ocv_mat* image,
+    const int* metadata_types,
+    const jyppx_ocv_mat* const* metadata,
+    size_t metadata_count,
+    const int* params,
+    size_t params_length,
+    jyppx_ocv_encoded_buffer** out_buffer)
+{
+    return jyppx_ocv_imgcodecs_imencode_with_metadata(ext, image, metadata_types, metadata, metadata_count, params, params_length, out_buffer);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imencode_with_params(const char* ext,
@@ -7152,11 +9322,76 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imread(const c
     return jyppx_ocv_imgcodecs_imread(filename, flags, out_image);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imread_animation(const char* filename,
+    int start,
+    int count,
+    jyppx_ocv_imgcodecs_animation* animation,
+    int* out_success)
+{
+    return jyppx_ocv_imgcodecs_imread_animation(filename, start, count, animation, out_success);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imread_into(const char* filename,
+    int flags,
+    jyppx_ocv_mat* image)
+{
+    return jyppx_ocv_imgcodecs_imread_into(filename, flags, image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imread_multi(const char* filename,
+    int flags,
+    int has_range,
+    int start,
+    int count,
+    jyppx_ocv_imgcodecs_mat_vector** out_images,
+    int* out_success)
+{
+    return jyppx_ocv_imgcodecs_imread_multi(filename, flags, has_range, start, count, out_images, out_success);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imread_with_metadata(const char* filename,
+    int flags,
+    jyppx_ocv_imgcodecs_metadata_result** out_result)
+{
+    return jyppx_ocv_imgcodecs_imread_with_metadata(filename, flags, out_result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imwrite(const char* filename,
     const jyppx_ocv_mat* image,
     int* out_written)
 {
     return jyppx_ocv_imgcodecs_imwrite(filename, image, out_written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imwrite_animation(const char* filename,
+    const jyppx_ocv_imgcodecs_animation* animation,
+    const int* params,
+    size_t params_length,
+    int* out_written)
+{
+    return jyppx_ocv_imgcodecs_imwrite_animation(filename, animation, params, params_length, out_written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imwrite_multi(const char* filename,
+    const jyppx_ocv_mat* const* images,
+    size_t image_count,
+    const int* params,
+    size_t params_length,
+    int* out_written)
+{
+    return jyppx_ocv_imgcodecs_imwrite_multi(filename, images, image_count, params, params_length, out_written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imwrite_with_metadata(const char* filename,
+    const jyppx_ocv_mat* image,
+    const int* metadata_types,
+    const jyppx_ocv_mat* const* metadata,
+    size_t metadata_count,
+    const int* params,
+    size_t params_length,
+    int* out_written)
+{
+    return jyppx_ocv_imgcodecs_imwrite_with_metadata(filename, image, metadata_types, metadata, metadata_count, params, params_length, out_written);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imwrite_with_params(const char* filename,
@@ -7168,6 +9403,79 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_imwrite_with_p
     return jyppx_ocv_imgcodecs_imwrite_with_params(filename, image, params, params_length, out_written);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_mat_vector_clone_at(const jyppx_ocv_imgcodecs_mat_vector* images,
+    size_t index,
+    jyppx_ocv_mat** out_image)
+{
+    return jyppx_ocv_imgcodecs_mat_vector_clone_at(images, index, out_image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_mat_vector_count(const jyppx_ocv_imgcodecs_mat_vector* images,
+    size_t* out_count)
+{
+    return jyppx_ocv_imgcodecs_mat_vector_count(images, out_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_imgcodecs_mat_vector_release(jyppx_ocv_imgcodecs_mat_vector* images)
+{
+    jyppx_ocv_imgcodecs_mat_vector_release(images);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_metadata_result_clone_at(const jyppx_ocv_imgcodecs_metadata_result* result,
+    size_t index,
+    int* out_type,
+    jyppx_ocv_mat** out_metadata)
+{
+    return jyppx_ocv_imgcodecs_metadata_result_clone_at(result, index, out_type, out_metadata);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_metadata_result_count(const jyppx_ocv_imgcodecs_metadata_result* result,
+    size_t* out_count)
+{
+    return jyppx_ocv_imgcodecs_metadata_result_count(result, out_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgcodecs_metadata_result_image_clone(const jyppx_ocv_imgcodecs_metadata_result* result,
+    jyppx_ocv_mat** out_image)
+{
+    return jyppx_ocv_imgcodecs_metadata_result_image_clone(result, out_image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_imgcodecs_metadata_result_release(jyppx_ocv_imgcodecs_metadata_result* result)
+{
+    jyppx_ocv_imgcodecs_metadata_result_release(result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_accumulate(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_imgproc_accumulate(src, dst, mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_accumulate_product(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_imgproc_accumulate_product(src1, src2, dst, mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_accumulate_square(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_imgproc_accumulate_square(src, dst, mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_accumulate_weighted(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double alpha,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_imgproc_accumulate_weighted(src, dst, alpha, mask);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_adaptive_threshold(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     double max_value,
@@ -7177,6 +9485,20 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_adaptive_thresho
     double c)
 {
     return jyppx_ocv_imgproc_adaptive_threshold(src, dst, max_value, adaptive_method, threshold_type, block_size, c);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_apply_color_map(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int colormap)
+{
+    return jyppx_ocv_imgproc_apply_color_map(src, dst, colormap);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_apply_color_map_user(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* user_color)
+{
+    return jyppx_ocv_imgproc_apply_color_map_user(src, dst, user_color);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_approx_poly_dp_count(const int* curve_xy,
@@ -7254,6 +9576,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_bilateral_filter
     int border_type)
 {
     return jyppx_ocv_imgproc_bilateral_filter(src, dst, d, sigma_color, sigma_space, border_type);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_blend_linear(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    const jyppx_ocv_mat* weights1,
+    const jyppx_ocv_mat* weights2,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_imgproc_blend_linear(src1, src2, weights1, weights2, dst);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_blur(const jyppx_ocv_mat* src,
@@ -7604,12 +9935,36 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_corner_sub_pix(c
     return jyppx_ocv_imgproc_corner_sub_pix(image, corners_xy, corner_count, win_width, win_height, zero_zone_width, zero_zone_height, criteria_type, criteria_max_count, criteria_epsilon);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_create_hanning_window(jyppx_ocv_mat* dst,
+    int width,
+    int height,
+    int type)
+{
+    return jyppx_ocv_imgproc_create_hanning_window(dst, width, height, type);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_cvt_color(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int code,
     int dst_cn)
 {
     return jyppx_ocv_imgproc_cvt_color(src, dst, code, dst_cn);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_cvt_color_two_plane(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* dst,
+    int code)
+{
+    return jyppx_ocv_imgproc_cvt_color_two_plane(src1, src2, dst, code);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_demosaicing(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int code,
+    int dst_cn)
+{
+    return jyppx_ocv_imgproc_demosaicing(src, dst, code, dst_cn);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_dilate(const jyppx_ocv_mat* src,
@@ -7667,6 +10022,32 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_draw_contours(jy
     return jyppx_ocv_imgproc_draw_contours(image, contours_xy, contour_lengths, contour_count, contour_index, color_v0, color_v1, color_v2, color_v3, thickness, line_type, hierarchy, has_hierarchy, max_level, offset_x, offset_y);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_draw_frame_axes(jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* rotation_vector,
+    const jyppx_ocv_mat* translation_vector,
+    float length,
+    int thickness)
+{
+    return jyppx_ocv_imgproc_draw_frame_axes(image, camera_matrix, dist_coeffs, rotation_vector, translation_vector, length, thickness);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_draw_marker(jyppx_ocv_mat* image,
+    int position_x,
+    int position_y,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    int marker_type,
+    int marker_size,
+    int thickness,
+    int line_type)
+{
+    return jyppx_ocv_imgproc_draw_marker(image, position_x, position_y, color_v0, color_v1, color_v2, color_v3, marker_type, marker_size, thickness, line_type);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_ellipse(jyppx_ocv_mat* img,
     int center_x,
     int center_y,
@@ -7714,6 +10095,18 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_ellipse2_poly_fi
     return jyppx_ocv_imgproc_ellipse2_poly_fill(center_x, center_y, axes_width, axes_height, angle, arc_start, arc_end, delta, points_xy, point_capacity, point_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_emd(const jyppx_ocv_mat* signature1,
+    const jyppx_ocv_mat* signature2,
+    int distance_type,
+    const jyppx_ocv_mat* cost,
+    int has_lower_bound,
+    float* lower_bound,
+    jyppx_ocv_mat* flow,
+    float* distance)
+{
+    return jyppx_ocv_imgproc_emd(signature1, signature2, distance_type, cost, has_lower_bound, lower_bound, flow, distance);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_equalize_hist(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst)
 {
@@ -7734,6 +10127,19 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_erode(const jypp
     double border_value_v3)
 {
     return jyppx_ocv_imgproc_erode(src, dst, kernel, anchor_x, anchor_y, iterations, border_type, has_border_value, border_value_v0, border_value_v1, border_value_v2, border_value_v3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_fill_convex_poly(jyppx_ocv_mat* image,
+    const int* points_xy,
+    int point_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    int line_type,
+    int shift)
+{
+    return jyppx_ocv_imgproc_fill_convex_poly(image, points_xy, point_count, color_v0, color_v1, color_v2, color_v3, line_type, shift);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_fill_poly(jyppx_ocv_mat* img,
@@ -7789,6 +10195,41 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_find_contours_fi
     int* total_point_count)
 {
     return jyppx_ocv_imgproc_find_contours_fill(image, mode, method, offset_x, offset_y, contours_xy, point_capacity, contour_lengths, contour_capacity, hierarchy, hierarchy_capacity, contour_count, total_point_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_find_contours_link_runs_count(const jyppx_ocv_mat* image,
+    int include_hierarchy,
+    int* contour_count,
+    int* total_point_count,
+    int* hierarchy_count)
+{
+    return jyppx_ocv_imgproc_find_contours_link_runs_count(image, include_hierarchy, contour_count, total_point_count, hierarchy_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_find_contours_link_runs_fill(const jyppx_ocv_mat* image,
+    int include_hierarchy,
+    int* contours_xy,
+    int point_capacity,
+    int* contour_lengths,
+    int contour_capacity,
+    int* hierarchy_values,
+    int hierarchy_capacity,
+    int* written_contour_count,
+    int* written_point_count,
+    int* written_hierarchy_count)
+{
+    return jyppx_ocv_imgproc_find_contours_link_runs_fill(image, include_hierarchy, contours_xy, point_capacity, contour_lengths, contour_capacity, hierarchy_values, hierarchy_capacity, written_contour_count, written_point_count, written_hierarchy_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_fisheye_undistort_image(const jyppx_ocv_mat* distorted,
+    jyppx_ocv_mat* undistorted,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* new_camera_matrix,
+    int new_size_width,
+    int new_size_height)
+{
+    return jyppx_ocv_imgproc_fisheye_undistort_image(distorted, undistorted, camera_matrix, dist_coeffs, new_camera_matrix, new_size_width, new_size_height);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_fit_ellipse(const int* points_xy,
@@ -7889,6 +10330,67 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_flood_fill_mask(
     return jyppx_ocv_imgproc_flood_fill_mask(image, mask, seed_x, seed_y, new_value_v0, new_value_v1, new_value_v2, new_value_v3, rect_x, rect_y, rect_width, rect_height, lo_diff_v0, lo_diff_v1, lo_diff_v2, lo_diff_v3, up_diff_v0, up_diff_v1, up_diff_v2, up_diff_v3, flags, filled_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_create(const unsigned char* font_path_or_name_utf8,
+    jyppx_ocv_font_face** font_face)
+{
+    return jyppx_ocv_imgproc_font_face_create(font_path_or_name_utf8, font_face);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_create_default(jyppx_ocv_font_face** font_face)
+{
+    return jyppx_ocv_imgproc_font_face_create_default(font_face);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_get_instance_count(const jyppx_ocv_font_face* font_face,
+    int* parameter_count,
+    int* result)
+{
+    return jyppx_ocv_imgproc_font_face_get_instance_count(font_face, parameter_count, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_get_instance_fill(const jyppx_ocv_font_face* font_face,
+    int* parameters,
+    int parameter_capacity,
+    int* parameters_written,
+    int* result)
+{
+    return jyppx_ocv_imgproc_font_face_get_instance_fill(font_face, parameters, parameter_capacity, parameters_written, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_get_name_fill(const jyppx_ocv_font_face* font_face,
+    unsigned char* buffer,
+    int buffer_capacity,
+    int* bytes_written)
+{
+    return jyppx_ocv_imgproc_font_face_get_name_fill(font_face, buffer, buffer_capacity, bytes_written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_get_name_size(const jyppx_ocv_font_face* font_face,
+    int* byte_count)
+{
+    return jyppx_ocv_imgproc_font_face_get_name_size(font_face, byte_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_imgproc_font_face_release(jyppx_ocv_font_face* font_face)
+{
+    jyppx_ocv_imgproc_font_face_release(font_face);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_set(jyppx_ocv_font_face* font_face,
+    const unsigned char* font_path_or_name_utf8,
+    int* result)
+{
+    return jyppx_ocv_imgproc_font_face_set(font_face, font_path_or_name_utf8, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_font_face_set_instance(jyppx_ocv_font_face* font_face,
+    const int* parameters,
+    int parameter_count,
+    int* result)
+{
+    return jyppx_ocv_imgproc_font_face_set_instance(font_face, parameters, parameter_count, result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_gaussian_blur(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int width,
@@ -7898,6 +10400,85 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_gaussian_blur(co
     int border_type)
 {
     return jyppx_ocv_imgproc_gaussian_blur(src, dst, width, height, sigma_x, sigma_y, border_type);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_ballard_create(jyppx_ocv_generalized_hough** hough)
+{
+    return jyppx_ocv_imgproc_generalized_hough_ballard_create(hough);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_detect(jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* positions,
+    jyppx_ocv_mat* votes)
+{
+    return jyppx_ocv_imgproc_generalized_hough_detect(hough, image, positions, votes);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_detect_edges(jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* edges,
+    const jyppx_ocv_mat* dx,
+    const jyppx_ocv_mat* dy,
+    jyppx_ocv_mat* positions,
+    jyppx_ocv_mat* votes)
+{
+    return jyppx_ocv_imgproc_generalized_hough_detect_edges(hough, edges, dx, dy, positions, votes);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_get_double_property(const jyppx_ocv_generalized_hough* hough,
+    int property,
+    double* value)
+{
+    return jyppx_ocv_imgproc_generalized_hough_get_double_property(hough, property, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_get_int_property(const jyppx_ocv_generalized_hough* hough,
+    int property,
+    int* value)
+{
+    return jyppx_ocv_imgproc_generalized_hough_get_int_property(hough, property, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_guil_create(jyppx_ocv_generalized_hough** hough)
+{
+    return jyppx_ocv_imgproc_generalized_hough_guil_create(hough);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_imgproc_generalized_hough_release(jyppx_ocv_generalized_hough* hough)
+{
+    jyppx_ocv_imgproc_generalized_hough_release(hough);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_set_double_property(jyppx_ocv_generalized_hough* hough,
+    int property,
+    double value)
+{
+    return jyppx_ocv_imgproc_generalized_hough_set_double_property(hough, property, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_set_int_property(jyppx_ocv_generalized_hough* hough,
+    int property,
+    int value)
+{
+    return jyppx_ocv_imgproc_generalized_hough_set_int_property(hough, property, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_set_template(jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* templ,
+    int center_x,
+    int center_y)
+{
+    return jyppx_ocv_imgproc_generalized_hough_set_template(hough, templ, center_x, center_y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_generalized_hough_set_template_edges(jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* edges,
+    const jyppx_ocv_mat* dx,
+    const jyppx_ocv_mat* dy,
+    int center_x,
+    int center_y)
+{
+    return jyppx_ocv_imgproc_generalized_hough_set_template_edges(hough, edges, dx, dy, center_x, center_y);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_affine_transform(const float* src_xy,
@@ -7931,6 +10512,14 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_deriv_kernel
     return jyppx_ocv_imgproc_get_deriv_kernels(kx, ky, dx, dy, ksize, normalize, ktype);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_font_scale_from_height(int font_face,
+    int pixel_height,
+    int thickness,
+    double* result)
+{
+    return jyppx_ocv_imgproc_get_font_scale_from_height(font_face, pixel_height, thickness, result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_gabor_kernel(int width,
     int height,
     double sigma,
@@ -7958,6 +10547,17 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_perspective_
     jyppx_ocv_mat** out_transform)
 {
     return jyppx_ocv_imgproc_get_perspective_transform(src_xy, dst_xy, solve_method, out_transform);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_rect_sub_pix(const jyppx_ocv_mat* image,
+    int patch_width,
+    int patch_height,
+    float center_x,
+    float center_y,
+    jyppx_ocv_mat* patch,
+    int patch_type)
+{
+    return jyppx_ocv_imgproc_get_rect_sub_pix(image, patch_width, patch_height, center_x, center_y, patch, patch_type);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_rotation_matrix2d(float center_x,
@@ -7990,6 +10590,26 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_text_size(co
     return jyppx_ocv_imgproc_get_text_size(text, font_face, font_scale, thickness, width, height, base_line);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_get_text_size_font_face(int image_width,
+    int image_height,
+    const unsigned char* text_utf8,
+    int origin_x,
+    int origin_y,
+    jyppx_ocv_font_face* font_face,
+    int size,
+    int weight,
+    int flags,
+    int has_wrap,
+    int wrap_start,
+    int wrap_end,
+    int* result_x,
+    int* result_y,
+    int* result_width,
+    int* result_height)
+{
+    return jyppx_ocv_imgproc_get_text_size_font_face(image_width, image_height, text_utf8, origin_x, origin_y, font_face, size, weight, flags, has_wrap, wrap_start, wrap_end, result_x, result_y, result_width, result_height);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_good_features_to_track_count(const jyppx_ocv_mat* image,
     const jyppx_ocv_mat* mask,
     int max_corners,
@@ -8018,6 +10638,20 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_good_features_to
     int* corner_count)
 {
     return jyppx_ocv_imgproc_good_features_to_track_fill(image, mask, max_corners, quality_level, min_distance, block_size, gradient_size, use_harris_detector, k, corners_xy, corner_capacity, corner_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_grab_cut(const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* mask,
+    int rect_x,
+    int rect_y,
+    int rect_width,
+    int rect_height,
+    jyppx_ocv_mat* background_model,
+    jyppx_ocv_mat* foreground_model,
+    int iteration_count,
+    int mode)
+{
+    return jyppx_ocv_imgproc_grab_cut(image, mask, rect_x, rect_y, rect_width, rect_height, background_model, foreground_model, iteration_count, mode);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_hough_circles_count(const jyppx_ocv_mat* image,
@@ -8140,6 +10774,19 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_hu_moments(const
     int hu_capacity)
 {
     return jyppx_ocv_imgproc_hu_moments(moments_values, value_count, hu_values, hu_capacity);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_init_inverse_rectification_map(const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* r,
+    const jyppx_ocv_mat* new_camera_matrix,
+    int size_width,
+    int size_height,
+    int m1type,
+    jyppx_ocv_mat* map1,
+    jyppx_ocv_mat* map2)
+{
+    return jyppx_ocv_imgproc_init_inverse_rectification_map(camera_matrix, dist_coeffs, r, new_camera_matrix, size_width, size_height, m1type, map1, map2);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_integral(const jyppx_ocv_mat* src,
@@ -8326,6 +10973,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_match_shapes(con
     return jyppx_ocv_imgproc_match_shapes(contour1_xy, contour1_point_count, contour2_xy, contour2_point_count, method, parameter, result);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_match_template(const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* templ,
+    jyppx_ocv_mat* result,
+    int method,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_imgproc_match_template(image, templ, result, method, mask);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_median_blur(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int ksize)
@@ -8407,6 +11063,26 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_morphology_ex(co
     return jyppx_ocv_imgproc_morphology_ex(src, dst, op, kernel, anchor_x, anchor_y, iterations, border_type, has_border_value, border_value_v0, border_value_v1, border_value_v2, border_value_v3);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_phase_correlate(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    const jyppx_ocv_mat* window,
+    double* shift_x,
+    double* shift_y,
+    double* response)
+{
+    return jyppx_ocv_imgproc_phase_correlate(src1, src2, window, shift_x, shift_y, response);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_phase_correlate_iterative(const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    int l2_size,
+    int max_iters,
+    double* shift_x,
+    double* shift_y)
+{
+    return jyppx_ocv_imgproc_phase_correlate_iterative(src1, src2, l2_size, max_iters, shift_x, shift_y);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_point_polygon_test(const int* contour_xy,
     int point_count,
     float point_x,
@@ -8457,6 +11133,27 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_put_text(jyppx_o
     return jyppx_ocv_imgproc_put_text(img, text, org_x, org_y, font_face, font_scale, color_v0, color_v1, color_v2, color_v3, thickness, line_type, bottom_left_origin);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_put_text_font_face(jyppx_ocv_mat* image,
+    const unsigned char* text_utf8,
+    int origin_x,
+    int origin_y,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    jyppx_ocv_font_face* font_face,
+    int size,
+    int weight,
+    int flags,
+    int has_wrap,
+    int wrap_start,
+    int wrap_end,
+    int* next_x,
+    int* next_y)
+{
+    return jyppx_ocv_imgproc_put_text_font_face(image, text_utf8, origin_x, origin_y, color_v0, color_v1, color_v2, color_v3, font_face, size, weight, flags, has_wrap, wrap_start, wrap_end, next_x, next_y);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_pyr_down(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int width,
@@ -8464,6 +11161,18 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_pyr_down(const j
     int border_type)
 {
     return jyppx_ocv_imgproc_pyr_down(src, dst, width, height, border_type);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_pyr_mean_shift_filtering(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double spatial_radius,
+    double color_radius,
+    int max_level,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon)
+{
+    return jyppx_ocv_imgproc_pyr_mean_shift_filtering(src, dst, spatial_radius, color_radius, max_level, criteria_type, criteria_max_count, criteria_epsilon);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_pyr_up(const jyppx_ocv_mat* src,
@@ -8604,6 +11313,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_sobel(const jypp
     return jyppx_ocv_imgproc_sobel(src, dst, ddepth, dx, dy, ksize, scale, delta, border_type);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_spatial_gradient(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dx,
+    jyppx_ocv_mat* dy,
+    int ksize,
+    int border_type)
+{
+    return jyppx_ocv_imgproc_spatial_gradient(src, dx, dy, ksize, border_type);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_sqr_box_filter(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     int ddepth,
@@ -8617,6 +11335,14 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_sqr_box_filter(c
     return jyppx_ocv_imgproc_sqr_box_filter(src, dst, ddepth, width, height, anchor_x, anchor_y, normalize, border_type);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_stack_blur(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int width,
+    int height)
+{
+    return jyppx_ocv_imgproc_stack_blur(src, dst, width, height);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_threshold(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* dst,
     double thresh,
@@ -8625,6 +11351,26 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_threshold(const 
     double* out_threshold)
 {
     return jyppx_ocv_imgproc_threshold(src, dst, thresh, maxval, type, out_threshold);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_threshold_with_mask(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask,
+    double thresh,
+    double maxval,
+    int type,
+    double* result)
+{
+    return jyppx_ocv_imgproc_threshold_with_mask(src, dst, mask, thresh, maxval, type, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_undistort(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* new_camera_matrix)
+{
+    return jyppx_ocv_imgproc_undistort(src, dst, camera_matrix, dist_coeffs, new_camera_matrix);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_warp_affine(const jyppx_ocv_mat* src,
@@ -8655,6 +11401,24 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_warp_perspective
     double border_value_v3)
 {
     return jyppx_ocv_imgproc_warp_perspective(src, dst, transform, width, height, flags, border_mode, border_value_v0, border_value_v1, border_value_v2, border_value_v3);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_warp_polar(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int width,
+    int height,
+    float center_x,
+    float center_y,
+    double max_radius,
+    int flags)
+{
+    return jyppx_ocv_imgproc_warp_polar(src, dst, width, height, center_x, center_y, max_radius, flags);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_imgproc_watershed(const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* markers)
+{
+    return jyppx_ocv_imgproc_watershed(image, markers);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_intensity_transform_autoscaling(const jyppx_ocv_mat* src,
@@ -9162,6 +11926,12 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_cre
     return jyppx_ocv_mcc_checker_detector_create(detector);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_create_from_net(const jyppx_ocv_dnn_net* net,
+    jyppx_ocv_mcc_checker_detector** detector)
+{
+    return jyppx_ocv_mcc_checker_detector_create_from_net(net, detector);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_draw(jyppx_ocv_mcc_checker_detector* detector,
     const jyppx_ocv_mcc_checker* const* checkers,
     int checker_count,
@@ -9214,6 +11984,12 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_get
     return jyppx_ocv_mcc_checker_detector_get_ref_colors(detector, ref_colors);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_get_use_dnn_model(const jyppx_ocv_mcc_checker_detector* detector,
+    int* use_dnn_model)
+{
+    return jyppx_ocv_mcc_checker_detector_get_use_dnn_model(detector, use_dnn_model);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_process(jyppx_ocv_mcc_checker_detector* detector,
     const jyppx_ocv_mat* image,
     int nc,
@@ -9247,6 +12023,12 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_set
     const jyppx_ocv_mcc_detector_params* params)
 {
     return jyppx_ocv_mcc_checker_detector_set_detection_params(detector, params);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_detector_set_use_dnn_model(jyppx_ocv_mcc_checker_detector* detector,
+    int use_dnn_model)
+{
+    return jyppx_ocv_mcc_checker_detector_set_use_dnn_model(detector, use_dnn_model);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_get_box_count(const jyppx_ocv_mcc_checker* checker,
@@ -9353,6 +12135,76 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_checker_set_target(j
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_mcc_detector_default_params(jyppx_ocv_mcc_detector_params* params)
 {
     return jyppx_ocv_mcc_detector_default_params(params);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_debevec_create(jyppx_ocv_merge_exposures** merger)
+{
+    return jyppx_ocv_merge_debevec_create(merger);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_exposures_process(jyppx_ocv_merge_exposures* merger,
+    const jyppx_ocv_mat* const* src_images,
+    int image_count,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* times,
+    const jyppx_ocv_mat* response,
+    int input_mode)
+{
+    return jyppx_ocv_merge_exposures_process(merger, src_images, image_count, dst, times, response, input_mode);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_merge_exposures_release_handle(jyppx_ocv_merge_exposures* merger)
+{
+    jyppx_ocv_merge_exposures_release_handle(merger);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_create(float contrast_weight,
+    float saturation_weight,
+    float exposure_weight,
+    jyppx_ocv_merge_exposures** merger)
+{
+    return jyppx_ocv_merge_mertens_create(contrast_weight, saturation_weight, exposure_weight, merger);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_get_contrast_weight(const jyppx_ocv_merge_exposures* merger,
+    float* contrast_weight)
+{
+    return jyppx_ocv_merge_mertens_get_contrast_weight(merger, contrast_weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_get_exposure_weight(const jyppx_ocv_merge_exposures* merger,
+    float* exposure_weight)
+{
+    return jyppx_ocv_merge_mertens_get_exposure_weight(merger, exposure_weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_get_saturation_weight(const jyppx_ocv_merge_exposures* merger,
+    float* saturation_weight)
+{
+    return jyppx_ocv_merge_mertens_get_saturation_weight(merger, saturation_weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_set_contrast_weight(jyppx_ocv_merge_exposures* merger,
+    float contrast_weight)
+{
+    return jyppx_ocv_merge_mertens_set_contrast_weight(merger, contrast_weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_set_exposure_weight(jyppx_ocv_merge_exposures* merger,
+    float exposure_weight)
+{
+    return jyppx_ocv_merge_mertens_set_exposure_weight(merger, exposure_weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_mertens_set_saturation_weight(jyppx_ocv_merge_exposures* merger,
+    float saturation_weight)
+{
+    return jyppx_ocv_merge_mertens_set_saturation_weight(merger, saturation_weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_robertson_create(jyppx_ocv_merge_exposures** merger)
+{
+    return jyppx_ocv_merge_robertson_create(merger);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_knearest_create(jyppx_ocv_ml_model** model)
@@ -10110,6 +12962,188 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_phase_unwrapping_unwrap_
     return jyppx_ocv_phase_unwrapping_unwrap_phase_map(phase_unwrapping, wrapped_phase_map, unwrapped_phase_map, shadow_mask);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_compute(jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_mat* color_correction_matrix)
+{
+    return jyppx_ocv_photo_ccm_compute(model, color_correction_matrix);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_correct_image(const jyppx_ocv_color_correction_model* model,
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int is_linear)
+{
+    return jyppx_ocv_photo_ccm_correct_image(model, src, dst, is_linear);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_create(jyppx_ocv_color_correction_model** model)
+{
+    return jyppx_ocv_photo_ccm_create(model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_create_color_checker(const jyppx_ocv_mat* src,
+    int color_checker,
+    jyppx_ocv_color_correction_model** model)
+{
+    return jyppx_ocv_photo_ccm_create_color_checker(src, color_checker, model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_create_reference_colors(const jyppx_ocv_mat* src,
+    const jyppx_ocv_mat* colors,
+    int reference_color_space,
+    jyppx_ocv_color_correction_model** model)
+{
+    return jyppx_ocv_photo_ccm_create_reference_colors(src, colors, reference_color_space, model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_create_reference_colors_masked(const jyppx_ocv_mat* src,
+    const jyppx_ocv_mat* colors,
+    int reference_color_space,
+    const jyppx_ocv_mat* colored_patches_mask,
+    jyppx_ocv_color_correction_model** model)
+{
+    return jyppx_ocv_photo_ccm_create_reference_colors_masked(src, colors, reference_color_space, colored_patches_mask, model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_gamma_correction(const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double gamma)
+{
+    return jyppx_ocv_photo_ccm_gamma_correction(src, dst, gamma);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_get_color_correction_matrix(const jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_mat* color_correction_matrix)
+{
+    return jyppx_ocv_photo_ccm_get_color_correction_matrix(model, color_correction_matrix);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_get_loss(const jyppx_ocv_color_correction_model* model,
+    double* loss)
+{
+    return jyppx_ocv_photo_ccm_get_loss(model, loss);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_get_mask(const jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_photo_ccm_get_mask(model, mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_get_ref_linear_rgb(const jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_mat* ref_linear_rgb)
+{
+    return jyppx_ocv_photo_ccm_get_ref_linear_rgb(model, ref_linear_rgb);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_get_src_linear_rgb(const jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_mat* src_linear_rgb)
+{
+    return jyppx_ocv_photo_ccm_get_src_linear_rgb(model, src_linear_rgb);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_get_weights(const jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_mat* weights)
+{
+    return jyppx_ocv_photo_ccm_get_weights(model, weights);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_read(jyppx_ocv_color_correction_model* model,
+    const jyppx_ocv_core_file_node* node)
+{
+    return jyppx_ocv_photo_ccm_read(model, node);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_photo_ccm_release_handle(jyppx_ocv_color_correction_model* model)
+{
+    jyppx_ocv_photo_ccm_release_handle(model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_ccm_type(jyppx_ocv_color_correction_model* model,
+    int ccm_type)
+{
+    return jyppx_ocv_photo_ccm_set_ccm_type(model, ccm_type);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_color_space(jyppx_ocv_color_correction_model* model,
+    int color_space)
+{
+    return jyppx_ocv_photo_ccm_set_color_space(model, color_space);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_distance(jyppx_ocv_color_correction_model* model,
+    int distance)
+{
+    return jyppx_ocv_photo_ccm_set_distance(model, distance);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_epsilon(jyppx_ocv_color_correction_model* model,
+    double epsilon)
+{
+    return jyppx_ocv_photo_ccm_set_epsilon(model, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_initial_method(jyppx_ocv_color_correction_model* model,
+    int initial_method)
+{
+    return jyppx_ocv_photo_ccm_set_initial_method(model, initial_method);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_linearization(jyppx_ocv_color_correction_model* model,
+    int linearization)
+{
+    return jyppx_ocv_photo_ccm_set_linearization(model, linearization);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_linearization_degree(jyppx_ocv_color_correction_model* model,
+    int degree)
+{
+    return jyppx_ocv_photo_ccm_set_linearization_degree(model, degree);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_linearization_gamma(jyppx_ocv_color_correction_model* model,
+    double gamma)
+{
+    return jyppx_ocv_photo_ccm_set_linearization_gamma(model, gamma);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_max_count(jyppx_ocv_color_correction_model* model,
+    int max_count)
+{
+    return jyppx_ocv_photo_ccm_set_max_count(model, max_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_rgb(jyppx_ocv_color_correction_model* model,
+    int rgb)
+{
+    return jyppx_ocv_photo_ccm_set_rgb(model, rgb);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_saturated_threshold(jyppx_ocv_color_correction_model* model,
+    double lower,
+    double upper)
+{
+    return jyppx_ocv_photo_ccm_set_saturated_threshold(model, lower, upper);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_weight_coeff(jyppx_ocv_color_correction_model* model,
+    double weight_coeff)
+{
+    return jyppx_ocv_photo_ccm_set_weight_coeff(model, weight_coeff);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_set_weights_list(jyppx_ocv_color_correction_model* model,
+    const jyppx_ocv_mat* weights_list)
+{
+    return jyppx_ocv_photo_ccm_set_weights_list(model, weights_list);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_ccm_write(const jyppx_ocv_color_correction_model* model,
+    jyppx_ocv_core_file_storage* storage)
+{
+    return jyppx_ocv_photo_ccm_write(model, storage);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_color_change(const jyppx_ocv_mat* src,
     const jyppx_ocv_mat* mask,
     jyppx_ocv_mat* dst,
@@ -10120,11 +13154,31 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_color_change(const
     return jyppx_ocv_photo_color_change(src, mask, dst, red_mul, green_mul, blue_mul);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_correct_chromatic_aberration(const jyppx_ocv_mat* input_image,
+    const jyppx_ocv_mat* coefficients,
+    jyppx_ocv_mat* output_image,
+    int calibration_width,
+    int calibration_height,
+    int calibration_degree,
+    int bayer_pattern)
+{
+    return jyppx_ocv_photo_correct_chromatic_aberration(input_image, coefficients, output_image, calibration_width, calibration_height, calibration_degree, bayer_pattern);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_decolor(const jyppx_ocv_mat* src,
     jyppx_ocv_mat* grayscale,
     jyppx_ocv_mat* color_boost)
 {
     return jyppx_ocv_photo_decolor(src, grayscale, color_boost);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_denoise_tvl1(const jyppx_ocv_mat* const* observations,
+    int observation_count,
+    jyppx_ocv_mat* result,
+    double lambda,
+    int niters)
+{
+    return jyppx_ocv_photo_denoise_tvl1(observations, observation_count, result, lambda, niters);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_detail_enhance(const jyppx_ocv_mat* src,
@@ -10229,6 +13283,85 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_inpaint(const jypp
     int flags)
 {
     return jyppx_ocv_photo_inpaint(src, inpaint_mask, dst, inpaint_radius, flags);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_apply_image(jyppx_ocv_intelligent_scissors_mb* scissors,
+    const jyppx_ocv_mat* image)
+{
+    return jyppx_ocv_photo_intelligent_scissors_apply_image(scissors, image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_apply_image_features(jyppx_ocv_intelligent_scissors_mb* scissors,
+    const jyppx_ocv_mat* non_edge,
+    const jyppx_ocv_mat* gradient_direction,
+    const jyppx_ocv_mat* gradient_magnitude,
+    const jyppx_ocv_mat* image)
+{
+    return jyppx_ocv_photo_intelligent_scissors_apply_image_features(scissors, non_edge, gradient_direction, gradient_magnitude, image);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_build_map(jyppx_ocv_intelligent_scissors_mb* scissors,
+    int source_x,
+    int source_y)
+{
+    return jyppx_ocv_photo_intelligent_scissors_build_map(scissors, source_x, source_y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_create(jyppx_ocv_intelligent_scissors_mb** scissors)
+{
+    return jyppx_ocv_photo_intelligent_scissors_create(scissors);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_get_contour(const jyppx_ocv_intelligent_scissors_mb* scissors,
+    int target_x,
+    int target_y,
+    jyppx_ocv_mat* contour,
+    int backward)
+{
+    return jyppx_ocv_photo_intelligent_scissors_get_contour(scissors, target_x, target_y, contour, backward);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_photo_intelligent_scissors_release_handle(jyppx_ocv_intelligent_scissors_mb* scissors)
+{
+    jyppx_ocv_photo_intelligent_scissors_release_handle(scissors);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_set_edge_feature_canny_parameters(jyppx_ocv_intelligent_scissors_mb* scissors,
+    double threshold1,
+    double threshold2,
+    int aperture_size,
+    int l2_gradient)
+{
+    return jyppx_ocv_photo_intelligent_scissors_set_edge_feature_canny_parameters(scissors, threshold1, threshold2, aperture_size, l2_gradient);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_set_edge_feature_zero_crossing_parameters(jyppx_ocv_intelligent_scissors_mb* scissors,
+    float gradient_magnitude_min_value)
+{
+    return jyppx_ocv_photo_intelligent_scissors_set_edge_feature_zero_crossing_parameters(scissors, gradient_magnitude_min_value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_set_gradient_magnitude_max_limit(jyppx_ocv_intelligent_scissors_mb* scissors,
+    float gradient_magnitude_threshold_max)
+{
+    return jyppx_ocv_photo_intelligent_scissors_set_gradient_magnitude_max_limit(scissors, gradient_magnitude_threshold_max);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_intelligent_scissors_set_weights(jyppx_ocv_intelligent_scissors_mb* scissors,
+    float weight_non_edge,
+    float weight_gradient_direction,
+    float weight_gradient_magnitude)
+{
+    return jyppx_ocv_photo_intelligent_scissors_set_weights(scissors, weight_non_edge, weight_gradient_direction, weight_gradient_magnitude);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_load_chromatic_aberration_params(const jyppx_ocv_core_file_node* node,
+    jyppx_ocv_mat* coefficients,
+    int* calibration_width,
+    int* calibration_height,
+    int* degree)
+{
+    return jyppx_ocv_photo_load_chromatic_aberration_params(node, coefficients, calibration_width, calibration_height, degree);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_photo_pencil_sketch(const jyppx_ocv_mat* src,
@@ -10596,6 +13729,12 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_qrcode_detector_aruco_de
     return jyppx_ocv_qrcode_detector_aruco_detect_multi(detector, image, points, detected);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_qrcode_detector_aruco_get_aruco_parameters(const jyppx_ocv_qrcode_detector_aruco* detector,
+    jyppx_ocv_aruco_detector_params* params)
+{
+    return jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters(detector, params);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_qrcode_detector_aruco_get_detector_parameters(const jyppx_ocv_qrcode_detector_aruco* detector,
     jyppx_ocv_qrcode_detector_aruco_params* params)
 {
@@ -10605,6 +13744,12 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_qrcode_detector_aruco_ge
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_qrcode_detector_aruco_release_handle(jyppx_ocv_qrcode_detector_aruco* detector)
 {
     jyppx_ocv_qrcode_detector_aruco_release_handle(detector);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_qrcode_detector_aruco_set_aruco_parameters(jyppx_ocv_qrcode_detector_aruco* detector,
+    const jyppx_ocv_aruco_detector_params* params)
+{
+    return jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters(detector, params);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_qrcode_detector_aruco_set_detector_parameters(jyppx_ocv_qrcode_detector_aruco* detector,
@@ -11650,6 +14795,92 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_shape_norm_histogram_cos
     return jyppx_ocv_shape_norm_histogram_cost_extractor_create(flag, n_dummies, default_cost, extractor);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_optical_flow_calc(jyppx_ocv_sparse_optical_flow* optical_flow,
+    const jyppx_ocv_mat* previous_image,
+    const jyppx_ocv_mat* next_image,
+    const jyppx_ocv_video_point2f* previous_points,
+    int point_count,
+    jyppx_ocv_video_point2f* next_points,
+    unsigned char* status,
+    float* error)
+{
+    return jyppx_ocv_sparse_optical_flow_calc(optical_flow, previous_image, next_image, previous_points, point_count, next_points, status, error);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_sparse_optical_flow_release_handle(jyppx_ocv_sparse_optical_flow* optical_flow)
+{
+    jyppx_ocv_sparse_optical_flow_release_handle(optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_create(int window_width,
+    int window_height,
+    int max_level,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon,
+    int flags,
+    double min_eigenvalue_threshold,
+    jyppx_ocv_sparse_optical_flow** optical_flow)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_create(window_width, window_height, max_level, criteria_type, criteria_max_count, criteria_epsilon, flags, min_eigenvalue_threshold, optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_get_int_property(const jyppx_ocv_sparse_optical_flow* optical_flow,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_get_min_eig_threshold(const jyppx_ocv_sparse_optical_flow* optical_flow,
+    double* value)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_get_min_eig_threshold(optical_flow, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_get_size_property(const jyppx_ocv_sparse_optical_flow* optical_flow,
+    int* width,
+    int* height)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_get_size_property(optical_flow, width, height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_get_term_criteria(const jyppx_ocv_sparse_optical_flow* optical_flow,
+    int* type,
+    int* max_count,
+    double* epsilon)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_get_term_criteria(optical_flow, type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_set_int_property(jyppx_ocv_sparse_optical_flow* optical_flow,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_set_min_eig_threshold(jyppx_ocv_sparse_optical_flow* optical_flow,
+    double value)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_set_min_eig_threshold(optical_flow, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_set_size_property(jyppx_ocv_sparse_optical_flow* optical_flow,
+    int width,
+    int height)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_set_size_property(optical_flow, width, height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_sparse_pyr_lk_optical_flow_set_term_criteria(jyppx_ocv_sparse_optical_flow* optical_flow,
+    int type,
+    int max_count,
+    double epsilon)
+{
+    return jyppx_ocv_sparse_pyr_lk_optical_flow_set_term_criteria(optical_flow, type, max_count, epsilon);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stereo_bm_compute(jyppx_ocv_stereo_bm* stereo_bm,
     const jyppx_ocv_mat* left,
     const jyppx_ocv_mat* right,
@@ -12618,6 +15849,48 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_tracker_update(
     return jyppx_ocv_tracking_tracker_update(tracker, image, bounding_box, result);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_variational_refinement_calc_uv(jyppx_ocv_dense_optical_flow* optical_flow,
+    const jyppx_ocv_mat* first,
+    const jyppx_ocv_mat* second,
+    jyppx_ocv_mat* flow_u,
+    jyppx_ocv_mat* flow_v)
+{
+    return jyppx_ocv_variational_refinement_calc_uv(optical_flow, first, second, flow_u, flow_v);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_variational_refinement_create(jyppx_ocv_dense_optical_flow** optical_flow)
+{
+    return jyppx_ocv_variational_refinement_create(optical_flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_variational_refinement_get_float_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    float* value)
+{
+    return jyppx_ocv_variational_refinement_get_float_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_variational_refinement_get_int_property(const jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_variational_refinement_get_int_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_variational_refinement_set_float_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    float value)
+{
+    return jyppx_ocv_variational_refinement_set_float_property(optical_flow, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_variational_refinement_set_int_property(jyppx_ocv_dense_optical_flow* optical_flow,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_variational_refinement_set_int_property(optical_flow, property_id, value);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_build_optical_flow_pyramid_count(const jyppx_ocv_mat* image,
     int win_width,
     int win_height,
@@ -12719,6 +15992,12 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_get(const 
     return jyppx_ocv_video_capture_get(capture, property_id, value);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_get_exception_mode(const jyppx_ocv_video_capture* capture,
+    int* enabled)
+{
+    return jyppx_ocv_video_capture_get_exception_mode(capture, enabled);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_grab(jyppx_ocv_video_capture* capture,
     int* grabbed)
 {
@@ -12739,12 +16018,42 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_open_file(
     return jyppx_ocv_video_capture_open_file(capture, filename, api_preference, opened);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_open_file_params(jyppx_ocv_video_capture* capture,
+    const char* filename,
+    int api_preference,
+    const int* parameters,
+    int parameter_count,
+    int* opened)
+{
+    return jyppx_ocv_video_capture_open_file_params(capture, filename, api_preference, parameters, parameter_count, opened);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_open_index(jyppx_ocv_video_capture* capture,
     int index,
     int api_preference,
     int* opened)
 {
     return jyppx_ocv_video_capture_open_index(capture, index, api_preference, opened);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_open_index_params(jyppx_ocv_video_capture* capture,
+    int index,
+    int api_preference,
+    const int* parameters,
+    int parameter_count,
+    int* opened)
+{
+    return jyppx_ocv_video_capture_open_index_params(capture, index, api_preference, parameters, parameter_count, opened);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_open_stream(jyppx_ocv_video_capture* capture,
+    jyppx_ocv_video_stream_reader* reader,
+    int api_preference,
+    const int* parameters,
+    int parameter_count,
+    int* opened)
+{
+    return jyppx_ocv_video_capture_open_stream(capture, reader, api_preference, parameters, parameter_count, opened);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_read(jyppx_ocv_video_capture* capture,
@@ -12780,6 +16089,89 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_set(jyppx_
     return jyppx_ocv_video_capture_set(capture, property_id, value, success);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_set_exception_mode(jyppx_ocv_video_capture* capture,
+    int enabled)
+{
+    return jyppx_ocv_video_capture_set_exception_mode(capture, enabled);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_capture_wait_any(jyppx_ocv_video_capture* const* captures,
+    int capture_count,
+    int* ready_indices,
+    int ready_capacity,
+    long long timeout_ns,
+    int* ready_count)
+{
+    return jyppx_ocv_video_capture_wait_any(captures, capture_count, ready_indices, ready_capacity, timeout_ns, ready_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_compute_ecc(const jyppx_ocv_mat* template_image,
+    const jyppx_ocv_mat* input_image,
+    const jyppx_ocv_mat* input_mask,
+    double* result)
+{
+    return jyppx_ocv_video_compute_ecc(template_image, input_image, input_mask, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_ecc_parameters_get_default(int* motion_type,
+    int* criteria_type,
+    int* criteria_max_count,
+    double* criteria_epsilon,
+    int* gaussian_filter_size,
+    int* level_count,
+    int* interpolation)
+{
+    return jyppx_ocv_video_ecc_parameters_get_default(motion_type, criteria_type, criteria_max_count, criteria_epsilon, gaussian_filter_size, level_count, interpolation);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_find_transform_ecc(const jyppx_ocv_mat* template_image,
+    const jyppx_ocv_mat* input_image,
+    jyppx_ocv_mat* warp_matrix,
+    int motion_type,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon,
+    const jyppx_ocv_mat* input_mask,
+    int gaussian_filter_size,
+    double* result)
+{
+    return jyppx_ocv_video_find_transform_ecc(template_image, input_image, warp_matrix, motion_type, criteria_type, criteria_max_count, criteria_epsilon, input_mask, gaussian_filter_size, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_find_transform_ecc_multi_scale(const jyppx_ocv_mat* reference_image,
+    const jyppx_ocv_mat* sample_image,
+    jyppx_ocv_mat* warp_matrix,
+    int motion_type,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon,
+    const int* iterations_per_level,
+    int iteration_count,
+    int gaussian_filter_size,
+    int level_count,
+    int interpolation,
+    const jyppx_ocv_mat* reference_mask,
+    const jyppx_ocv_mat* sample_mask,
+    double* result)
+{
+    return jyppx_ocv_video_find_transform_ecc_multi_scale(reference_image, sample_image, warp_matrix, motion_type, criteria_type, criteria_max_count, criteria_epsilon, iterations_per_level, iteration_count, gaussian_filter_size, level_count, interpolation, reference_mask, sample_mask, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_find_transform_ecc_with_mask(const jyppx_ocv_mat* template_image,
+    const jyppx_ocv_mat* input_image,
+    const jyppx_ocv_mat* template_mask,
+    const jyppx_ocv_mat* input_mask,
+    jyppx_ocv_mat* warp_matrix,
+    int motion_type,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon,
+    int gaussian_filter_size,
+    double* result)
+{
+    return jyppx_ocv_video_find_transform_ecc_with_mask(template_image, input_image, template_mask, input_mask, warp_matrix, motion_type, criteria_type, criteria_max_count, criteria_epsilon, gaussian_filter_size, result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_mean_shift(const jyppx_ocv_mat* prob_image,
     jyppx_ocv_video_rect* window,
     int criteria_type,
@@ -12794,6 +16186,73 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_read_optical_flow(
     jyppx_ocv_mat** flow)
 {
     return jyppx_ocv_video_read_optical_flow(path, flow);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_stream_reader_create(void* context,
+    jyppx_ocv_video_stream_reader_read_callback read_callback,
+    jyppx_ocv_video_stream_reader_seek_callback seek_callback,
+    jyppx_ocv_video_stream_reader_release_callback release_callback,
+    jyppx_ocv_video_stream_reader** reader)
+{
+    return jyppx_ocv_video_stream_reader_create(context, read_callback, seek_callback, release_callback, reader);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_stream_reader_read(jyppx_ocv_video_stream_reader* reader,
+    char* buffer,
+    long long size,
+    long long* bytes_read)
+{
+    return jyppx_ocv_video_stream_reader_read(reader, buffer, size, bytes_read);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_video_stream_reader_release_handle(jyppx_ocv_video_stream_reader* reader)
+{
+    jyppx_ocv_video_stream_reader_release_handle(reader);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_stream_reader_seek(jyppx_ocv_video_stream_reader* reader,
+    long long offset,
+    int origin,
+    long long* position)
+{
+    return jyppx_ocv_video_stream_reader_seek(reader, offset, origin, position);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_tracker_get_tracking_score(const jyppx_ocv_video_tracker* tracker,
+    float* score)
+{
+    return jyppx_ocv_video_tracker_get_tracking_score(tracker, score);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_tracker_init(jyppx_ocv_video_tracker* tracker,
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_video_rect bounding_box)
+{
+    return jyppx_ocv_video_tracker_init(tracker, image, bounding_box);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_tracker_mil_create(const jyppx_ocv_video_tracker_mil_params* parameters,
+    jyppx_ocv_video_tracker** tracker)
+{
+    return jyppx_ocv_video_tracker_mil_create(parameters, tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_tracker_mil_get_default_params(jyppx_ocv_video_tracker_mil_params* parameters)
+{
+    return jyppx_ocv_video_tracker_mil_get_default_params(parameters);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_video_tracker_release_handle(jyppx_ocv_video_tracker* tracker)
+{
+    jyppx_ocv_video_tracker_release_handle(tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_tracker_update(jyppx_ocv_video_tracker* tracker,
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_video_rect* bounding_box,
+    int* result)
+{
+    return jyppx_ocv_video_tracker_update(tracker, image, bounding_box, result);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_write_optical_flow(const char* path,
@@ -12857,6 +16316,33 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_writer_open(jyppx_
     return jyppx_ocv_video_writer_open(writer, filename, api_preference, fourcc, fps, frame_width, frame_height, is_color, opened);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_writer_open_api_params(jyppx_ocv_video_writer* writer,
+    const char* filename,
+    int api_preference,
+    int fourcc,
+    double fps,
+    int frame_width,
+    int frame_height,
+    const int* parameters,
+    int parameter_count,
+    int* opened)
+{
+    return jyppx_ocv_video_writer_open_api_params(writer, filename, api_preference, fourcc, fps, frame_width, frame_height, parameters, parameter_count, opened);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_writer_open_params(jyppx_ocv_video_writer* writer,
+    const char* filename,
+    int fourcc,
+    double fps,
+    int frame_width,
+    int frame_height,
+    const int* parameters,
+    int parameter_count,
+    int* opened)
+{
+    return jyppx_ocv_video_writer_open_params(writer, filename, fourcc, fps, frame_width, frame_height, parameters, parameter_count, opened);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_video_writer_release(jyppx_ocv_video_writer* writer)
 {
     return jyppx_ocv_video_writer_release(writer);
@@ -12906,6 +16392,86 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_bac
     int* count)
 {
     return jyppx_ocv_videoio_registry_get_backends_fill(backends, backend_capacity, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_camera_backends_count(int* count)
+{
+    return jyppx_ocv_videoio_registry_get_camera_backends_count(count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_camera_backends_fill(int* backends, int backend_capacity, int* count)
+{
+    return jyppx_ocv_videoio_registry_get_camera_backends_fill(backends, backend_capacity, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_camera_plugin_version_fill(int api, int* version_abi, int* version_api, char* buffer, int buffer_capacity, int* written)
+{
+    return jyppx_ocv_videoio_registry_get_camera_plugin_version_fill(api, version_abi, version_api, buffer, buffer_capacity, written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_camera_plugin_version_length(int api, int* version_abi, int* version_api, int* length)
+{
+    return jyppx_ocv_videoio_registry_get_camera_plugin_version_length(api, version_abi, version_api, length);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_backends_count(int* count)
+{
+    return jyppx_ocv_videoio_registry_get_stream_backends_count(count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_backends_fill(int* backends, int backend_capacity, int* count)
+{
+    return jyppx_ocv_videoio_registry_get_stream_backends_fill(backends, backend_capacity, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_buffered_backends_count(int* count)
+{
+    return jyppx_ocv_videoio_registry_get_stream_buffered_backends_count(count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_buffered_backends_fill(int* backends, int backend_capacity, int* count)
+{
+    return jyppx_ocv_videoio_registry_get_stream_buffered_backends_fill(backends, backend_capacity, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_buffered_plugin_version_fill(int api, int* version_abi, int* version_api, char* buffer, int buffer_capacity, int* written)
+{
+    return jyppx_ocv_videoio_registry_get_stream_buffered_plugin_version_fill(api, version_abi, version_api, buffer, buffer_capacity, written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_buffered_plugin_version_length(int api, int* version_abi, int* version_api, int* length)
+{
+    return jyppx_ocv_videoio_registry_get_stream_buffered_plugin_version_length(api, version_abi, version_api, length);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_plugin_version_fill(int api, int* version_abi, int* version_api, char* buffer, int buffer_capacity, int* written)
+{
+    return jyppx_ocv_videoio_registry_get_stream_plugin_version_fill(api, version_abi, version_api, buffer, buffer_capacity, written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_stream_plugin_version_length(int api, int* version_abi, int* version_api, int* length)
+{
+    return jyppx_ocv_videoio_registry_get_stream_plugin_version_length(api, version_abi, version_api, length);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_writer_backends_count(int* count)
+{
+    return jyppx_ocv_videoio_registry_get_writer_backends_count(count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_writer_backends_fill(int* backends, int backend_capacity, int* count)
+{
+    return jyppx_ocv_videoio_registry_get_writer_backends_fill(backends, backend_capacity, count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_writer_plugin_version_fill(int api, int* version_abi, int* version_api, char* buffer, int buffer_capacity, int* written)
+{
+    return jyppx_ocv_videoio_registry_get_writer_plugin_version_fill(api, version_abi, version_api, buffer, buffer_capacity, written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_get_writer_plugin_version_length(int api, int* version_abi, int* version_api, int* length)
+{
+    return jyppx_ocv_videoio_registry_get_writer_plugin_version_length(api, version_abi, version_api, length);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_videoio_registry_has_backend(int api,

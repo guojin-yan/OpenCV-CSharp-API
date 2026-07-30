@@ -1,0 +1,2518 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/imgproc.hpp declarations emitted by OpenCV hdr_parser.py",
+  "reviewStatus": "reviewed",
+  "limitation": "Declaration identities preserve parsed overload, default, direction, and type metadata. Implemented evidence correlates symbol groups across the C\u002B\u002B API, stable C ABI, and managed public API; it does not claim binary equivalence of C\u002B\u002B parameter layouts or repository-wide OpenCV parity.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.SpecialFilter",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.MorphTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.MorphShapes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.InterpolationFlags",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.WarpPolarMode",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "enum cv.InterpolationMasks",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "enum cv.DistanceTransformMasks",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "enum cv.ThresholdTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "enum cv.AdaptiveThresholdTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "enum cv.GrabCutClasses",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "enum cv.GrabCutModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "enum cv.DistanceTransformLabelTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "enum cv.FloodFillFlags",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "enum cv.ConnectedComponentsTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "enum cv.ConnectedComponentsAlgorithmsTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "enum cv.RetrievalModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.ContourApproximationModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "enum cv.ShapeMatchModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "enum cv.HoughModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "enum cv.HistCompMethods",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "enum cv.LineSegmentDetectorModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "enum cv.ColorConversionCodes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "enum cv.LineTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "enum cv.HersheyFonts",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "enum cv.MarkerTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "class cv.GeneralizedHough",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.GeneralizedHough.setTemplate(Mat templ;Point templCenter=Point(-1, -1))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property",
+        "jyppx_ocv_imgproc_generalized_hough_set_template",
+        "jyppx_ocv_imgproc_generalized_hough_set_template_edges"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Point? templateCenter=null)",
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat template,OpenCvSharp.Core.Point? templateCenter=null)"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.GeneralizedHough.setTemplate(Mat edges;Mat dx;Mat dy;Point templCenter=Point(-1, -1))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property",
+        "jyppx_ocv_imgproc_generalized_hough_set_template",
+        "jyppx_ocv_imgproc_generalized_hough_set_template_edges"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Point? templateCenter=null)",
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void SetTemplate(OpenCvSharp.Core.Mat template,OpenCvSharp.Core.Point? templateCenter=null)"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.GeneralizedHough.detect(Mat image;Mat positions[/O];Mat votes=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_detect",
+        "jyppx_ocv_imgproc_generalized_hough_detect_edges"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|OpenCvSharp.Core.Mat Detect(OpenCvSharp.Core.Mat image)",
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)",
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.GeneralizedHough.detect(Mat edges;Mat dx;Mat dy;Mat positions[/O];Mat votes=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_detect",
+        "jyppx_ocv_imgproc_generalized_hough_detect_edges"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|OpenCvSharp.Core.Mat Detect(OpenCvSharp.Core.Mat image)",
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat edges,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)",
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat positions,OpenCvSharp.Core.Mat? votes=null)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.GeneralizedHough.setCannyLowThresh(int cannyLowThresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyLowThreshold"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.GeneralizedHough.getCannyLowThresh()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyLowThreshold"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.GeneralizedHough.setCannyHighThresh(int cannyHighThresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyHighThreshold"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.GeneralizedHough.getCannyHighThresh()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 CannyHighThreshold"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.GeneralizedHough.setMinDist(double minDist)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double MinDistance"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.GeneralizedHough.getMinDist()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double MinDistance"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.GeneralizedHough.setDp(double dp)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double Dp"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.GeneralizedHough.getDp()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Double Dp"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.GeneralizedHough.setMaxBufferSize(int maxBufferSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 MaxBufferSize"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.GeneralizedHough.getMaxBufferSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHough|property|instance;get:public;set:public|System.Int32 MaxBufferSize"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "class cv.GeneralizedHoughBallard",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.GeneralizedHoughBallard.setLevels(int levels)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 Levels"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.GeneralizedHoughBallard.getLevels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 Levels"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.GeneralizedHoughBallard.setVotesThreshold(int votesThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 VotesThreshold"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.GeneralizedHoughBallard.getVotesThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughBallard|property|instance;get:public;set:public|System.Int32 VotesThreshold"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "class cv.GeneralizedHoughGuil",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.GeneralizedHoughGuil.setXi(double xi)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double Xi"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.GeneralizedHoughGuil.getXi()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double Xi"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.GeneralizedHoughGuil.setLevels(int levels)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 Levels"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.GeneralizedHoughGuil.getLevels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 Levels"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.GeneralizedHoughGuil.setAngleEpsilon(double angleEpsilon)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleEpsilon"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.GeneralizedHoughGuil.getAngleEpsilon()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleEpsilon"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.GeneralizedHoughGuil.setMinAngle(double minAngle)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinAngle"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.GeneralizedHoughGuil.getMinAngle()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinAngle"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.GeneralizedHoughGuil.setMaxAngle(double maxAngle)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxAngle"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.GeneralizedHoughGuil.getMaxAngle()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxAngle"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.GeneralizedHoughGuil.setAngleStep(double angleStep)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleStep"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.GeneralizedHoughGuil.getAngleStep()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double AngleStep"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.GeneralizedHoughGuil.setAngleThresh(int angleThresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 AngleThreshold"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.GeneralizedHoughGuil.getAngleThresh()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 AngleThreshold"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.GeneralizedHoughGuil.setMinScale(double minScale)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinScale"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.GeneralizedHoughGuil.getMinScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MinScale"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.GeneralizedHoughGuil.setMaxScale(double maxScale)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxScale"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.GeneralizedHoughGuil.getMaxScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double MaxScale"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.GeneralizedHoughGuil.setScaleStep(double scaleStep)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double ScaleStep"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.GeneralizedHoughGuil.getScaleStep()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Double ScaleStep"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.GeneralizedHoughGuil.setScaleThresh(int scaleThresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 ScaleThreshold"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.GeneralizedHoughGuil.getScaleThresh()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 ScaleThreshold"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.GeneralizedHoughGuil.setPosThresh(int posThresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 PositionThreshold"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.GeneralizedHoughGuil.getPosThresh()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.GeneralizedHoughGuil|property|instance;get:public;set:public|System.Int32 PositionThreshold"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "class cv.CLAHE",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.CLAHE.apply(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|method|public;instance|OpenCvSharp.Core.Mat Apply(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.CLAHE.setClipLimit(double clipLimit)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_set_clip_limit"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|property|instance;get:public;set:public|System.Double ClipLimit"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.CLAHE.getClipLimit()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_get_clip_limit"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|property|instance;get:public;set:public|System.Double ClipLimit"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.CLAHE.setTilesGridSize(Size tileGridSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_set_tiles_grid_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|property|instance;get:public;set:public|OpenCvSharp.Core.Size TilesGridSize"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.CLAHE.getTilesGridSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_get_tiles_grid_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|property|instance;get:public;set:public|OpenCvSharp.Core.Size TilesGridSize"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.CLAHE.setBitShift(int bitShift)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_set_bit_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|property|instance;get:public;set:public|System.Int32 BitShift"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.CLAHE.getBitShift()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_get_bit_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|property|instance;get:public;set:public|System.Int32 BitShift"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.CLAHE.collectGarbage()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_collect_garbage"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.CLAHE|method|public;instance|System.Void CollectGarbage()"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "class cv.LineSegmentDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.LineSegmentDetector.detect(Mat image;Mat lines[/O];Mat width=Mat()[/O];Mat prec=Mat()[/O];Mat nfa=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_line_segment_detector_detect",
+        "jyppx_ocv_imgproc_line_segment_detector_detect_count",
+        "jyppx_ocv_imgproc_line_segment_detector_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.LineSegmentDetector|method|public;instance|OpenCvSharp.ImgProc.LineSegment[] Detect(OpenCvSharp.Core.Mat image)",
+        "MEMBER|OpenCvSharp.ImgProc.LineSegmentDetector|method|public;instance|System.Void Detect(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat lines,OpenCvSharp.Core.Mat? width=null,OpenCvSharp.Core.Mat? prec=null,OpenCvSharp.Core.Mat? nfa=null)"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.LineSegmentDetector.drawSegments(Mat image[/IO];Mat lines)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_line_segment_detector_draw_segments",
+        "jyppx_ocv_imgproc_line_segment_detector_draw_segments_array"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.LineSegmentDetector|method|public;instance|System.Void DrawSegments(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat lines)",
+        "MEMBER|OpenCvSharp.ImgProc.LineSegmentDetector|method|public;instance|System.Void DrawSegments(OpenCvSharp.Core.Mat image,OpenCvSharp.ImgProc.LineSegment[] lines)"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.LineSegmentDetector.compareSegments(Size size[/C,/Ref];Mat lines1;Mat lines2;Mat image=Mat()[/IO])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_line_segment_detector_compare_segments",
+        "jyppx_ocv_imgproc_line_segment_detector_compare_segments_array"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.LineSegmentDetector|method|public;instance|System.Int32 CompareSegments(OpenCvSharp.Core.Size size,OpenCvSharp.Core.Mat lines1,OpenCvSharp.Core.Mat lines2,OpenCvSharp.Core.Mat? image=null)",
+        "MEMBER|OpenCvSharp.ImgProc.LineSegmentDetector|method|public;instance|System.Int32 CompareSegments(OpenCvSharp.Core.Size size,OpenCvSharp.ImgProc.LineSegment[] lines1,OpenCvSharp.ImgProc.LineSegment[] lines2,OpenCvSharp.Core.Mat? image=null)"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.createLineSegmentDetector(LineSegmentDetectorModes refine=LSD_REFINE_STD;double scale=0.8;double sigma_scale=0.6;double quant=2.0;double ang_th=22.5;double log_eps=0;double density_th=0.7;int n_bins=1024)-\u003EPtr\u003CLineSegmentDetector\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_line_segment_detector_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.LineSegmentDetector CreateLineSegmentDetector(OpenCvSharp.ImgProc.LineSegmentDetectorModes refine=Standard,System.Double scale=0.8,System.Double sigmaScale=0.6,System.Double quant=2,System.Double angTh=22.5,System.Double logEps=0,System.Double densityTh=0.7,System.Int32 nBins=1024)"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.getGaussianKernel(int ksize;double sigma;int ktype=CV_64F)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_gaussian_kernel"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetGaussianKernel(System.Int32 ksize,System.Double sigma,System.Int32 ktype=6)"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.getDerivKernels(Mat kx[/O];Mat ky[/O];int dx;int dy;int ksize;bool normalize=false;int ktype=CV_32F)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_deriv_kernels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void GetDerivKernels(OpenCvSharp.Core.Mat kx,OpenCvSharp.Core.Mat ky,System.Int32 dx,System.Int32 dy,System.Int32 ksize,System.Boolean normalize=false,System.Int32 ktype=5)"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.getGaborKernel(Size ksize;double sigma;double theta;double lambd;double gamma;double psi=CV_PI*0.5;int ktype=CV_64F)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_gabor_kernel"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetGaborKernel(OpenCvSharp.Core.Size ksize,System.Double sigma,System.Double theta,System.Double lambd,System.Double gamma,System.Double psi=1.5707963267948966,System.Int32 ktype=6)"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.getStructuringElement(int shape;Size ksize;Point anchor=Point(-1,-1))-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_structuring_element",
+        "jyppx_ocv_ximgproc_rl_get_structuring_element"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetStructuringElement(OpenCvSharp.ImgProc.MorphShapes shape,OpenCvSharp.Core.Size ksize,OpenCvSharp.Core.Point? anchor=null)"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.medianBlur(Mat src;Mat dst[/O];int ksize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_median_blur"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void MedianBlur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ksize)"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.GaussianBlur(Mat src;Mat dst[/O];Size ksize;double sigmaX;double sigmaY=0;int borderType=BORDER_DEFAULT;AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The operation is implemented with OpenCV\u0027s default AlgorithmHint; explicit hint selection is intentionally outside the stable C ABI for this declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_gaussian_blur"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void GaussianBlur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size ksize,System.Double sigmaX,System.Double sigmaY=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.bilateralFilter(Mat src;Mat dst[/O];int d;double sigmaColor;double sigmaSpace;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_bilateral_filter",
+        "jyppx_ocv_ximgproc_joint_bilateral_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void BilateralFilter(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 d,System.Double sigmaColor,System.Double sigmaSpace,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.boxFilter(Mat src;Mat dst[/O];int ddepth;Size ksize;Point anchor=Point(-1,-1);bool normalize=true;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_box_filter",
+        "jyppx_ocv_imgproc_sqr_box_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void BoxFilter(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,OpenCvSharp.Core.Size ksize,OpenCvSharp.Core.Point? anchor=null,System.Boolean normalize=true,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.sqrBoxFilter(Mat src;Mat dst[/O];int ddepth;Size ksize;Point anchor=Point(-1, -1);bool normalize=true;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_sqr_box_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void SqrBoxFilter(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,OpenCvSharp.Core.Size ksize,OpenCvSharp.Core.Point? anchor=null,System.Boolean normalize=true,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.blur(Mat src;Mat dst[/O];Size ksize;Point anchor=Point(-1,-1);int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_edge_blur_size",
+        "jyppx_ocv_features2d_mser_set_edge_blur_size",
+        "jyppx_ocv_imgproc_blur",
+        "jyppx_ocv_imgproc_gaussian_blur",
+        "jyppx_ocv_imgproc_median_blur",
+        "jyppx_ocv_imgproc_stack_blur"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Blur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size ksize,OpenCvSharp.Core.Point? anchor=null,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.stackBlur(Mat src;Mat dst[/O];Size ksize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_stack_blur"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat StackBlur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Size ksize)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void StackBlur(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size ksize)"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.filter2D(Mat src;Mat dst[/O];int ddepth;Mat kernel;Point anchor=Point(-1,-1);double delta=0;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_filter2d",
+        "jyppx_ocv_imgproc_sep_filter2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Filter2D(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,OpenCvSharp.Core.Mat kernel,OpenCvSharp.Core.Point? anchor=null,System.Double delta=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "class cv.Filter2DParams",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.filter2D(Mat src;Mat dst[/O];Mat kernel;Filter2DParams params=Filter2DParams()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_filter2d",
+        "jyppx_ocv_imgproc_sep_filter2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Filter2D(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,OpenCvSharp.Core.Mat kernel,OpenCvSharp.Core.Point? anchor=null,System.Double delta=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.sepFilter2D(Mat src;Mat dst[/O];int ddepth;Mat kernelX;Mat kernelY;Point anchor=Point(-1,-1);double delta=0;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_sep_filter2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void SepFilter2D(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,OpenCvSharp.Core.Mat kernelX,OpenCvSharp.Core.Mat kernelY,OpenCvSharp.Core.Point? anchor=null,System.Double delta=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.Sobel(Mat src;Mat dst[/O];int ddepth;int dx;int dy;int ksize=3;double scale=1;double delta=0;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_sobel"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Sobel(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,System.Int32 dx,System.Int32 dy,System.Int32 ksize=3,System.Double scale=1,System.Double delta=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.spatialGradient(Mat src;Mat dx[/O];Mat dy[/O];int ksize=3;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_spatial_gradient"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void SpatialGradient(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,System.Int32 ksize=3,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.Scharr(Mat src;Mat dst[/O];int ddepth;int dx;int dy;double scale=1;double delta=0;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_scharr"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Scharr(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,System.Int32 dx,System.Int32 dy,System.Double scale=1,System.Double delta=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.Laplacian(Mat src;Mat dst[/O];int ddepth;int ksize=1;double scale=1;double delta=0;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_laplacian"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Laplacian(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ddepth,System.Int32 ksize=1,System.Double scale=1,System.Double delta=0,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.Canny(Mat image;Mat edges[/O];double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_canny",
+        "jyppx_ocv_imgproc_canny_derivatives"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Canny(OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Mat edges,System.Double threshold1,System.Double threshold2,System.Boolean l2Gradient=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Canny(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat edges,System.Double threshold1,System.Double threshold2,System.Int32 apertureSize=3,System.Boolean l2Gradient=false)"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.Canny(Mat dx;Mat dy;Mat edges[/O];double threshold1;double threshold2;bool L2gradient=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_canny",
+        "jyppx_ocv_imgproc_canny_derivatives"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Canny(OpenCvSharp.Core.Mat dx,OpenCvSharp.Core.Mat dy,OpenCvSharp.Core.Mat edges,System.Double threshold1,System.Double threshold2,System.Boolean l2Gradient=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Canny(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat edges,System.Double threshold1,System.Double threshold2,System.Int32 apertureSize=3,System.Boolean l2Gradient=false)"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.cornerMinEigenVal(Mat src;Mat dst[/O];int blockSize;int ksize=3;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_corner_min_eigen_val"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CornerMinEigenVal(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 blockSize,System.Int32 ksize=3,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.cornerHarris(Mat src;Mat dst[/O];int blockSize;int ksize;double k;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_corner_harris"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CornerHarris(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 blockSize,System.Int32 ksize,System.Double k,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.cornerEigenValsAndVecs(Mat src;Mat dst[/O];int blockSize;int ksize;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_corner_eigen_vals_and_vecs"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CornerEigenValsAndVecs(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 blockSize,System.Int32 ksize,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.preCornerDetect(Mat src;Mat dst[/O];int ksize;int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_pre_corner_detect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void PreCornerDetect(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Int32 ksize,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.cornerSubPix(Mat image;Mat corners[/IO];Size winSize;Size zeroZone;TermCriteria criteria)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_corner_sub_pix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CornerSubPix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[] corners,OpenCvSharp.Core.Size winSize,OpenCvSharp.Core.Size zeroZone,OpenCvSharp.Core.TermCriteria criteria)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CornerSubPix(OpenCvSharp.Core.Mat image,System.Span\u003COpenCvSharp.Core.Point2f\u003E corners,OpenCvSharp.Core.Size winSize,OpenCvSharp.Core.Size zeroZone,OpenCvSharp.Core.TermCriteria criteria)"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.HoughLines(Mat image;Mat lines[/O];double rho;double theta;int threshold;double srn=0;double stn=0;double min_theta=0;double max_theta=CV_PI;bool use_edgeval=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_hough_lines_count",
+        "jyppx_ocv_imgproc_hough_lines_fill",
+        "jyppx_ocv_imgproc_hough_lines_p_count",
+        "jyppx_ocv_imgproc_hough_lines_p_fill",
+        "jyppx_ocv_imgproc_hough_lines_point_set_count",
+        "jyppx_ocv_imgproc_hough_lines_point_set_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.HoughLine[] HoughLines(OpenCvSharp.Core.Mat image,System.Double rho,System.Double theta,System.Int32 threshold,System.Double srn=0,System.Double stn=0,System.Double minTheta=0,System.Double maxTheta=3.141592653589793,System.Boolean useEdgeval=false)"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.HoughLinesP(Mat image;Mat lines[/O];double rho;double theta;int threshold;double minLineLength=0;double maxLineGap=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_hough_lines_p_count",
+        "jyppx_ocv_imgproc_hough_lines_p_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Vec4i[] HoughLinesP(OpenCvSharp.Core.Mat image,System.Double rho,System.Double theta,System.Int32 threshold,System.Double minLineLength=0,System.Double maxLineGap=0)"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.HoughLinesPointSet(Mat point;Mat lines[/O];int lines_max;int threshold;double min_rho;double max_rho;double rho_step;double min_theta;double max_theta;double theta_step)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_hough_lines_point_set_count",
+        "jyppx_ocv_imgproc_hough_lines_point_set_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.HoughLinePointSet[] HoughLinesPointSet(OpenCvSharp.Core.Point[] points,System.Int32 linesMax,System.Int32 threshold,System.Double minRho,System.Double maxRho,System.Double rhoStep,System.Double minTheta,System.Double maxTheta,System.Double thetaStep)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.HoughLinePointSet[] HoughLinesPointSet(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,System.Int32 linesMax,System.Int32 threshold,System.Double minRho,System.Double maxRho,System.Double rhoStep,System.Double minTheta,System.Double maxTheta,System.Double thetaStep)"
+      ]
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.HoughCircles(Mat image;Mat circles[/O];int method;double dp;double minDist;double param1=100;double param2=100;int minRadius=0;int maxRadius=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_hough_circles_count",
+        "jyppx_ocv_imgproc_hough_circles_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.HoughCircle[] HoughCircles(OpenCvSharp.Core.Mat image,OpenCvSharp.ImgProc.HoughModes method,System.Double dp,System.Double minDist,System.Double param1=100,System.Double param2=100,System.Int32 minRadius=0,System.Int32 maxRadius=0)"
+      ]
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.erode(Mat src;Mat dst[/O];Mat kernel;Point anchor=Point(-1,-1);int iterations=1;int borderType=BORDER_CONSTANT;Scalar borderValue=morphologyDefaultBorderValue()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_erode",
+        "jyppx_ocv_ximgproc_rl_erode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Erode(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat kernel,OpenCvSharp.Core.Point? anchor=null,System.Int32 iterations=1,OpenCvSharp.ImgProc.BorderTypes borderType=Constant,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.dilate(Mat src;Mat dst[/O];Mat kernel;Point anchor=Point(-1,-1);int iterations=1;int borderType=BORDER_CONSTANT;Scalar borderValue=morphologyDefaultBorderValue()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_dilate",
+        "jyppx_ocv_ximgproc_rl_dilate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Dilate(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat kernel,OpenCvSharp.Core.Point? anchor=null,System.Int32 iterations=1,OpenCvSharp.ImgProc.BorderTypes borderType=Constant,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.morphologyEx(Mat src;Mat dst[/O];int op;Mat kernel;Point anchor=Point(-1,-1);int iterations=1;int borderType=BORDER_CONSTANT;Scalar borderValue=morphologyDefaultBorderValue()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_morphology_ex",
+        "jyppx_ocv_ximgproc_rl_morphology_ex"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void MorphologyEx(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.MorphTypes op,OpenCvSharp.Core.Mat kernel,OpenCvSharp.Core.Point? anchor=null,System.Int32 iterations=1,OpenCvSharp.ImgProc.BorderTypes borderType=Constant,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.resize(Mat src;Mat dst[/O];Size dsize;double fx=0;double fy=0;int interpolation=INTER_LINEAR)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_resize_window",
+        "jyppx_ocv_imgproc_resize"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Resize(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size dsize,System.Double fx=0,System.Double fy=0,OpenCvSharp.ImgProc.InterpolationFlags interpolation=Linear)"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.warpAffine(Mat src;Mat dst[/O];Mat M;Size dsize;int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The operation is implemented with OpenCV\u0027s default AlgorithmHint; explicit hint selection is intentionally outside the stable C ABI for this declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_warp_affine"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void WarpAffine(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat m,OpenCvSharp.Core.Size dsize,OpenCvSharp.ImgProc.InterpolationFlags flags=Linear,OpenCvSharp.ImgProc.BorderTypes borderMode=Constant,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.warpPerspective(Mat src;Mat dst[/O];Mat M;Size dsize;int flags=INTER_LINEAR;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The operation is implemented with OpenCV\u0027s default AlgorithmHint; explicit hint selection is intentionally outside the stable C ABI for this declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_warp_perspective"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void WarpPerspective(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat m,OpenCvSharp.Core.Size dsize,OpenCvSharp.ImgProc.InterpolationFlags flags=Linear,OpenCvSharp.ImgProc.BorderTypes borderMode=Constant,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.remap(Mat src;Mat dst[/O];Mat map1;Mat map2;int interpolation;int borderMode=BORDER_CONSTANT;Scalar borderValue=Scalar()[/C,/Ref];AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The operation is implemented with OpenCV\u0027s default AlgorithmHint; explicit hint selection is intentionally outside the stable C ABI for this declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_remap"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Remap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat map1,OpenCvSharp.Core.Mat map2,OpenCvSharp.ImgProc.InterpolationFlags interpolation,OpenCvSharp.ImgProc.BorderTypes borderMode=Constant,OpenCvSharp.Core.Scalar? borderValue=null)"
+      ]
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.convertMaps(Mat map1;Mat map2;Mat dstmap1[/O];Mat dstmap2[/O];int dstmap1type;bool nninterpolation=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_convert_maps"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ConvertMaps(OpenCvSharp.Core.Mat map1,OpenCvSharp.Core.Mat map2,OpenCvSharp.Core.Mat dstmap1,OpenCvSharp.Core.Mat dstmap2,System.Int32 dstmap1type,System.Boolean nninterpolation=false)"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "identity": "enum cv.UndistortTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.undistort(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;Mat newCameraMatrix=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_undistort"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat Undistort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void Undistort(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null)"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.initUndistortRectifyMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size;int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_init_undistort_rectify_map"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.UndistortRectifyMapResult InitUndistortRectifyMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void InitUndistortRectifyMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type,OpenCvSharp.Core.Mat map1,OpenCvSharp.Core.Mat map2)"
+      ]
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.initInverseRectificationMap(Mat cameraMatrix;Mat distCoeffs;Mat R;Mat newCameraMatrix;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_init_inverse_rectification_map"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.UndistortRectifyMapResult InitInverseRectificationMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void InitInverseRectificationMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type,OpenCvSharp.Core.Mat map1,OpenCvSharp.Core.Mat map2)"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.fisheye.initUndistortRectifyMap(Mat K;Mat D;Mat R;Mat P;Size size[/C,/Ref];int m1type;Mat map1[/O];Mat map2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_init_undistort_rectify_map"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.UndistortRectifyMapResult InitUndistortRectifyMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void InitUndistortRectifyMap(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size size,System.Int32 m1type,OpenCvSharp.Core.Mat map1,OpenCvSharp.Core.Mat map2)"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.fisheye.undistortImage(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat Knew=cv::Mat();Size new_size=Size()[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fisheye_undistort_image"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeUndistortImage(OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null,OpenCvSharp.Core.Size? newSize=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeUndistortImage(OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? newCameraMatrix=null,OpenCvSharp.Core.Size? newSize=null)"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.getRectSubPix(Mat image;Size patchSize;Point2f center;Mat patch[/O];int patchType=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_rect_sub_pix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetRectSubPix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patchSize,OpenCvSharp.Core.Point2f center,System.Int32 patchType=-1)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void GetRectSubPix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patchSize,OpenCvSharp.Core.Point2f center,OpenCvSharp.Core.Mat patch,System.Int32 patchType=-1)"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.warpPolar(Mat src;Mat dst[/O];Size dsize;Point2f center;double maxRadius;int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_warp_polar"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat WarpPolar(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Size dsize,OpenCvSharp.Core.Point2f center,System.Double maxRadius,OpenCvSharp.ImgProc.InterpolationFlags flags,OpenCvSharp.ImgProc.WarpPolarMode mode=Linear)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void WarpPolar(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size dsize,OpenCvSharp.Core.Point2f center,System.Double maxRadius,OpenCvSharp.ImgProc.InterpolationFlags flags,OpenCvSharp.ImgProc.WarpPolarMode mode=Linear)"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.integral(Mat src;Mat sum[/O];Mat sqsum[/O];Mat tilted[/O];int sdepth=-1;int sqdepth=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_integral"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Integral(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat sum,OpenCvSharp.Core.Mat sqsum,System.Int32 sdepth=-1,System.Int32 sqdepth=-1)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Integral(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat sum,System.Int32 sdepth=-1)"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.integral(Mat src;Mat sum[/O];int sdepth=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_integral"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Integral(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat sum,OpenCvSharp.Core.Mat sqsum,System.Int32 sdepth=-1,System.Int32 sqdepth=-1)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Integral(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat sum,System.Int32 sdepth=-1)"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.integral(Mat src;Mat sum[/O];Mat sqsum[/O];int sdepth=-1;int sqdepth=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_integral"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Integral(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat sum,OpenCvSharp.Core.Mat sqsum,System.Int32 sdepth=-1,System.Int32 sqdepth=-1)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Integral(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat sum,System.Int32 sdepth=-1)"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.accumulate(Mat src;Mat dst[/IO];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_accumulate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Accumulate(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.accumulateSquare(Mat src;Mat dst[/IO];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_accumulate_square"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AccumulateSquare(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.accumulateProduct(Mat src1;Mat src2;Mat dst[/IO];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_accumulate_product"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AccumulateProduct(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.accumulateWeighted(Mat src;Mat dst[/IO];double alpha;Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_accumulate_weighted"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AccumulateWeighted(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double alpha,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.phaseCorrelate(Mat src1;Mat src2;Mat window=Mat();double* response=0[/O])-\u003EPoint2d",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_phase_correlate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2d PhaseCorrelate(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat? window,out System.Double response)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2d PhaseCorrelate(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat? window=null)"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.phaseCorrelateIterative(Mat src1;Mat src2;int L2size=7;int maxIters=10)-\u003EPoint2d",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_phase_correlate_iterative"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2d PhaseCorrelateIterative(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,System.Int32 l2Size=7,System.Int32 maxIters=10)"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.createHanningWindow(Mat dst[/O];Size winSize;int type)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_create_hanning_window"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat CreateHanningWindow(OpenCvSharp.Core.Size winSize,System.Int32 type)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CreateHanningWindow(OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size winSize,System.Int32 type)"
+      ]
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.threshold(Mat src;Mat dst[/O];double thresh;double maxval;int type)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_aruco_dictionary_identify_with_threshold",
+        "jyppx_ocv_barcode_detector_get_downsampling_threshold",
+        "jyppx_ocv_barcode_detector_get_gradient_threshold",
+        "jyppx_ocv_barcode_detector_set_downsampling_threshold",
+        "jyppx_ocv_barcode_detector_set_gradient_threshold",
+        "jyppx_ocv_face_detector_yn_get_nms_threshold",
+        "jyppx_ocv_face_detector_yn_get_score_threshold",
+        "jyppx_ocv_face_detector_yn_set_nms_threshold",
+        "jyppx_ocv_face_detector_yn_set_score_threshold",
+        "jyppx_ocv_face_recognizer_get_threshold",
+        "jyppx_ocv_face_recognizer_set_threshold",
+        "jyppx_ocv_features2d_akaze_get_threshold",
+        "jyppx_ocv_features2d_akaze_set_threshold",
+        "jyppx_ocv_features2d_brisk_create_pattern_with_threshold",
+        "jyppx_ocv_features2d_brisk_get_threshold",
+        "jyppx_ocv_features2d_brisk_set_threshold",
+        "jyppx_ocv_features2d_fast_get_threshold",
+        "jyppx_ocv_features2d_fast_set_threshold",
+        "jyppx_ocv_features2d_kaze_get_threshold",
+        "jyppx_ocv_features2d_kaze_set_threshold",
+        "jyppx_ocv_features2d_mser_get_area_threshold",
+        "jyppx_ocv_features2d_mser_set_area_threshold",
+        "jyppx_ocv_features2d_orb_get_edge_threshold",
+        "jyppx_ocv_features2d_orb_get_fast_threshold",
+        "jyppx_ocv_features2d_orb_set_edge_threshold",
+        "jyppx_ocv_features2d_orb_set_fast_threshold",
+        "jyppx_ocv_features2d_sift_get_contrast_threshold",
+        "jyppx_ocv_features2d_sift_get_edge_threshold",
+        "jyppx_ocv_features2d_sift_set_contrast_threshold",
+        "jyppx_ocv_features2d_sift_set_edge_threshold",
+        "jyppx_ocv_imgproc_adaptive_threshold",
+        "jyppx_ocv_imgproc_threshold",
+        "jyppx_ocv_imgproc_threshold_with_mask",
+        "jyppx_ocv_stereo_bm_get_texture_threshold",
+        "jyppx_ocv_stereo_bm_set_texture_threshold",
+        "jyppx_ocv_structured_light_gray_code_pattern_set_black_threshold",
+        "jyppx_ocv_structured_light_gray_code_pattern_set_white_threshold",
+        "jyppx_ocv_ximgproc_ni_black_threshold",
+        "jyppx_ocv_ximgproc_rl_threshold",
+        "jyppx_ocv_xphoto_grayworld_wb_get_saturation_threshold",
+        "jyppx_ocv_xphoto_grayworld_wb_set_saturation_threshold",
+        "jyppx_ocv_xphoto_learning_based_wb_get_saturation_threshold",
+        "jyppx_ocv_xphoto_learning_based_wb_set_saturation_threshold",
+        "jyppx_ocv_xstereo_binary_bm_get_texture_threshold",
+        "jyppx_ocv_xstereo_binary_bm_set_texture_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double Threshold(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double thresh,System.Double maxval,OpenCvSharp.ImgProc.ThresholdTypes type)"
+      ]
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.thresholdWithMask(Mat src;Mat dst[/IO];Mat mask;double thresh;double maxval;int type)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_threshold_with_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double ThresholdWithMask(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mask,System.Double thresh,System.Double maxval,OpenCvSharp.ImgProc.ThresholdTypes type)"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.adaptiveThreshold(Mat src;Mat dst[/O];double maxValue;int adaptiveMethod;int thresholdType;int blockSize;double C)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_adaptive_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void AdaptiveThreshold(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double maxValue,OpenCvSharp.ImgProc.AdaptiveThresholdTypes adaptiveMethod,OpenCvSharp.ImgProc.ThresholdTypes thresholdType,System.Int32 blockSize,System.Double c)"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.pyrDown(Mat src;Mat dst[/O];Size dstsize=Size()[/C,/Ref];int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_pyr_down"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void PyrDown(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size? dstsize=null,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.pyrUp(Mat src;Mat dst[/O];Size dstsize=Size()[/C,/Ref];int borderType=BORDER_DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_pyr_up"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void PyrUp(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Size? dstsize=null,OpenCvSharp.ImgProc.BorderTypes borderType=Default)"
+      ]
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.calcHist(vector_Mat images;vector_int channels[/C,/Ref];Mat mask;Mat hist[/O];vector_int histSize[/C,/Ref];vector_float ranges[/C,/Ref];bool accumulate=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_calc_hist_uniform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CalcHist(OpenCvSharp.Core.Mat image,System.Int32 channel,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Core.Mat hist,System.Int32 histSize,System.Single rangeMin,System.Single rangeMax,System.Boolean accumulate=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CalcHist(OpenCvSharp.Core.Mat image,System.Int32[] channels,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Core.Mat hist,System.Int32[] histSize,System.Single[] ranges,System.Boolean accumulate=false)"
+      ]
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.calcBackProject(vector_Mat images;vector_int channels[/C,/Ref];Mat hist;Mat dst[/O];vector_float ranges[/C,/Ref];double scale)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_calc_back_project_uniform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CalcBackProject(OpenCvSharp.Core.Mat image,System.Int32 channel,OpenCvSharp.Core.Mat hist,OpenCvSharp.Core.Mat backProject,System.Single rangeMin,System.Single rangeMax,System.Double scale=1)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CalcBackProject(OpenCvSharp.Core.Mat image,System.Int32[] channels,OpenCvSharp.Core.Mat hist,OpenCvSharp.Core.Mat backProject,System.Single[] ranges,System.Double scale=1)"
+      ]
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.compareHist(Mat H1;Mat H2;int method)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_compare_hist"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double CompareHist(OpenCvSharp.Core.Mat h1,OpenCvSharp.Core.Mat h2,OpenCvSharp.ImgProc.HistogramComparisonTypes method)"
+      ]
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.equalizeHist(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_equalize_hist"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void EqualizeHist(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.createCLAHE(double clipLimit=40.0;Size tileGridSize=Size(8, 8))-\u003EPtr\u003CCLAHE\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clahe_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.CLAHE CreateCLAHE(System.Double clipLimit=40,OpenCvSharp.Core.Size? tileGridSize=null)"
+      ]
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.wrapperEMD(Mat signature1;Mat signature2;int distType;Mat cost=Mat();Ptr_float lowerBound=Ptr\u003Cfloat\u003E()[/IO];Mat flow=Mat()[/O])-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_emd"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Single EMD(OpenCvSharp.Core.Mat signature1,OpenCvSharp.Core.Mat signature2,OpenCvSharp.Geometry.DistanceTypes distanceType,OpenCvSharp.Core.Mat? cost=null,OpenCvSharp.Core.Mat? flow=null)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Single EMD(OpenCvSharp.Core.Mat signature1,OpenCvSharp.Core.Mat signature2,OpenCvSharp.Geometry.DistanceTypes distanceType,ref System.Single lowerBound,OpenCvSharp.Core.Mat? cost=null,OpenCvSharp.Core.Mat? flow=null)"
+      ]
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.watershed(Mat image;Mat markers[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_watershed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Watershed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat markers)"
+      ]
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.pyrMeanShiftFiltering(Mat src;Mat dst[/O];double sp;double sr;int maxLevel=1;TermCriteria termcrit=TermCriteria(TermCriteria::MAX_ITER\u002BTermCriteria::EPS,5,1))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_pyr_mean_shift_filtering"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat PyrMeanShiftFiltering(OpenCvSharp.Core.Mat src,System.Double spatialRadius,System.Double colorRadius,System.Int32 maxLevel=1,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void PyrMeanShiftFiltering(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double spatialRadius,System.Double colorRadius,System.Int32 maxLevel=1,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.grabCut(Mat img;Mat mask[/IO];Rect rect;Mat bgdModel[/IO];Mat fgdModel[/IO];int iterCount;int mode=GC_EVAL)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_grab_cut"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void GrabCut(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Rect rect,OpenCvSharp.Core.Mat backgroundModel,OpenCvSharp.Core.Mat foregroundModel,System.Int32 iterationCount,OpenCvSharp.ImgProc.GrabCutModes mode=Eval)"
+      ]
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.distanceTransform(Mat src;Mat dst[/O];Mat labels[/O];int distanceType;int maskSize;int labelType=DIST_LABEL_CCOMP)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_distance_transform",
+        "jyppx_ocv_imgproc_distance_transform_with_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DistanceTransform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat labels,OpenCvSharp.Geometry.DistanceTypes distanceType,OpenCvSharp.ImgProc.DistanceTransformMasks maskSize,OpenCvSharp.ImgProc.DistanceTransformLabelTypes labelType=CComp)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DistanceTransform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Geometry.DistanceTypes distanceType,OpenCvSharp.ImgProc.DistanceTransformMasks maskSize,System.Int32 dstType=5)"
+      ]
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.distanceTransform(Mat src;Mat dst[/O];int distanceType;int maskSize;int dstType=CV_32F)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_distance_transform",
+        "jyppx_ocv_imgproc_distance_transform_with_labels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DistanceTransform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat labels,OpenCvSharp.Geometry.DistanceTypes distanceType,OpenCvSharp.ImgProc.DistanceTransformMasks maskSize,OpenCvSharp.ImgProc.DistanceTransformLabelTypes labelType=CComp)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DistanceTransform(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Geometry.DistanceTypes distanceType,OpenCvSharp.ImgProc.DistanceTransformMasks maskSize,System.Int32 dstType=5)"
+      ]
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.floodFill(Mat image[/IO];Mat mask[/IO];Point seedPoint;Scalar newVal;Rect* rect=0[/O];Scalar loDiff=Scalar();Scalar upDiff=Scalar();int flags=4)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_flood_fill",
+        "jyppx_ocv_imgproc_flood_fill_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Int32 FloodFill(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point seedPoint,OpenCvSharp.Core.Scalar newVal,out OpenCvSharp.Core.Rect rect,OpenCvSharp.Core.Scalar? loDiff=null,OpenCvSharp.Core.Scalar? upDiff=null,OpenCvSharp.ImgProc.FloodFillFlags flags=Connectivity4)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Int32 FloodFill(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point seedPoint,OpenCvSharp.Core.Scalar newVal,out OpenCvSharp.Core.Rect rect,OpenCvSharp.Core.Scalar? loDiff=null,OpenCvSharp.Core.Scalar? upDiff=null,OpenCvSharp.ImgProc.FloodFillFlags flags=Connectivity4)"
+      ]
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.blendLinear(Mat src1;Mat src2;Mat weights1;Mat weights2;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_blend_linear"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat BlendLinear(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat weights1,OpenCvSharp.Core.Mat weights2)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void BlendLinear(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat weights1,OpenCvSharp.Core.Mat weights2,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.cvtColor(Mat src;Mat dst[/O];int code;int dstCn=0;AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The operation is implemented with OpenCV\u0027s default AlgorithmHint; explicit hint selection is intentionally outside the stable C ABI for this declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_cvt_color",
+        "jyppx_ocv_imgproc_cvt_color_two_plane"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CvtColor(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColorConversionCodes code,System.Int32 dstCn=0)"
+      ]
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.cvtColorTwoPlane(Mat src1;Mat src2;Mat dst[/O];int code;AlgorithmHint hint=cv::ALGO_HINT_DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The operation is implemented with OpenCV\u0027s default AlgorithmHint; explicit hint selection is intentionally outside the stable C ABI for this declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_cvt_color_two_plane"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat CvtColorTwoPlane(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.ImgProc.ColorConversionCodes code)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void CvtColorTwoPlane(OpenCvSharp.Core.Mat src1,OpenCvSharp.Core.Mat src2,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColorConversionCodes code)"
+      ]
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.demosaicing(Mat src;Mat dst[/O];int code;int dstCn=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_demosaicing"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat Demosaicing(OpenCvSharp.Core.Mat src,OpenCvSharp.ImgProc.ColorConversionCodes code,System.Int32 dstCn=0)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Demosaicing(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColorConversionCodes code,System.Int32 dstCn=0)"
+      ]
+    },
+    {
+      "ordinal": 161,
+      "identity": "enum cv.TemplateMatchModes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.matchTemplate(Mat image;Mat templ;Mat result[/O];int method;Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_match_template"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat MatchTemplate(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat templ,OpenCvSharp.ImgProc.TemplateMatchModes method,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void MatchTemplate(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat templ,OpenCvSharp.Core.Mat result,OpenCvSharp.ImgProc.TemplateMatchModes method,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.connectedComponents(Mat image;Mat labels[/O];int connectivity;int ltype;int ccltype)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_connected_components",
+        "jyppx_ocv_imgproc_connected_components_with_algorithm",
+        "jyppx_ocv_imgproc_connected_components_with_stats",
+        "jyppx_ocv_imgproc_connected_components_with_stats_with_algorithm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Int32 ConnectedComponents(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat labels,System.Int32 connectivity=8,System.Int32 ltype=4)"
+      ]
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.connectedComponents(Mat image;Mat labels[/O];int connectivity=8;int ltype=CV_32S)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_connected_components",
+        "jyppx_ocv_imgproc_connected_components_with_algorithm",
+        "jyppx_ocv_imgproc_connected_components_with_stats",
+        "jyppx_ocv_imgproc_connected_components_with_stats_with_algorithm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Int32 ConnectedComponents(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat labels,System.Int32 connectivity=8,System.Int32 ltype=4)"
+      ]
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.connectedComponentsWithStats(Mat image;Mat labels[/O];Mat stats[/O];Mat centroids[/O];int connectivity;int ltype;int ccltype)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_connected_components_with_stats",
+        "jyppx_ocv_imgproc_connected_components_with_stats_with_algorithm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Int32 ConnectedComponentsWithStats(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat labels,OpenCvSharp.Core.Mat stats,OpenCvSharp.Core.Mat centroids,System.Int32 connectivity=8,System.Int32 ltype=4)"
+      ]
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.connectedComponentsWithStats(Mat image;Mat labels[/O];Mat stats[/O];Mat centroids[/O];int connectivity=8;int ltype=CV_32S)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_connected_components_with_stats",
+        "jyppx_ocv_imgproc_connected_components_with_stats_with_algorithm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Int32 ConnectedComponentsWithStats(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat labels,OpenCvSharp.Core.Mat stats,OpenCvSharp.Core.Mat centroids,System.Int32 connectivity=8,System.Int32 ltype=4)"
+      ]
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.findContours(Mat image;vector_Mat contours[/O];Mat hierarchy[/O];int mode;int method;Point offset=Point())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_find_contours_count",
+        "jyppx_ocv_imgproc_find_contours_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FindContours(OpenCvSharp.Core.Mat image,out OpenCvSharp.Core.Point[][] contours,out OpenCvSharp.Core.Vec4i[] hierarchy,OpenCvSharp.ImgProc.RetrievalModes mode,OpenCvSharp.ImgProc.ContourApproximationModes method,OpenCvSharp.Core.Point? offset=null)"
+      ]
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.findContoursLinkRuns(Mat image;vector_Mat contours[/O];Mat hierarchy[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_find_contours_link_runs_count",
+        "jyppx_ocv_imgproc_find_contours_link_runs_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FindContoursLinkRuns(OpenCvSharp.Core.Mat image,out OpenCvSharp.Core.Point[][] contours,out OpenCvSharp.Core.Vec4i[] hierarchy)"
+      ]
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.findContoursLinkRuns(Mat image;vector_Mat contours[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_find_contours_link_runs_count",
+        "jyppx_ocv_imgproc_find_contours_link_runs_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[][] FindContoursLinkRuns(OpenCvSharp.Core.Mat image)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FindContoursLinkRuns(OpenCvSharp.Core.Mat image,out OpenCvSharp.Core.Point[][] contours)"
+      ]
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.createGeneralizedHoughBallard()-\u003EPtr\u003CGeneralizedHoughBallard\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_ballard_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.GeneralizedHoughBallard CreateGeneralizedHoughBallard()"
+      ]
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.createGeneralizedHoughGuil()-\u003EPtr\u003CGeneralizedHoughGuil\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_generalized_hough_guil_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.GeneralizedHoughGuil CreateGeneralizedHoughGuil()"
+      ]
+    },
+    {
+      "ordinal": 172,
+      "identity": "enum cv.ColormapTypes",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.applyColorMap(Mat src;Mat dst[/O];int colormap)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_apply_color_map",
+        "jyppx_ocv_imgproc_apply_color_map_user"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat userColor)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.ImgProc.ColormapTypes colormap)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat userColor)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColormapTypes colormap)"
+      ]
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.applyColorMap(Mat src;Mat dst[/O];Mat userColor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_apply_color_map",
+        "jyppx_ocv_imgproc_apply_color_map_user"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat userColor)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.ImgProc.ColormapTypes colormap)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat userColor)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ApplyColorMap(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.ImgProc.ColormapTypes colormap)"
+      ]
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.line(Mat img[/IO];Point pt1;Point pt2;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_img_hash_radial_variance_set_num_of_angle_line",
+        "jyppx_ocv_imgproc_arrowed_line",
+        "jyppx_ocv_imgproc_clip_line_rect",
+        "jyppx_ocv_imgproc_fit_line_2d",
+        "jyppx_ocv_imgproc_line",
+        "jyppx_ocv_imgproc_line_segment_detector_compare_segments",
+        "jyppx_ocv_imgproc_line_segment_detector_compare_segments_array",
+        "jyppx_ocv_imgproc_line_segment_detector_create",
+        "jyppx_ocv_imgproc_line_segment_detector_detect",
+        "jyppx_ocv_imgproc_line_segment_detector_detect_count",
+        "jyppx_ocv_imgproc_line_segment_detector_detect_fill",
+        "jyppx_ocv_imgproc_line_segment_detector_draw_segments",
+        "jyppx_ocv_imgproc_line_segment_detector_draw_segments_array",
+        "jyppx_ocv_imgproc_line_segment_detector_release",
+        "jyppx_ocv_line_descriptor_binary_descriptor_clear",
+        "jyppx_ocv_line_descriptor_binary_descriptor_compute",
+        "jyppx_ocv_line_descriptor_binary_descriptor_create",
+        "jyppx_ocv_line_descriptor_binary_descriptor_default_norm",
+        "jyppx_ocv_line_descriptor_binary_descriptor_descriptor_size",
+        "jyppx_ocv_line_descriptor_binary_descriptor_descriptor_type",
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_and_compute_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_and_compute_fill",
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_detect_fill",
+        "jyppx_ocv_line_descriptor_binary_descriptor_empty",
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_num_of_octaves",
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_reduction_ratio",
+        "jyppx_ocv_line_descriptor_binary_descriptor_get_width_of_band",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_clear",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_create",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_empty",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_knn_match_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_knn_match_fill",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_match_count",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_match_fill",
+        "jyppx_ocv_line_descriptor_binary_descriptor_matcher_release",
+        "jyppx_ocv_line_descriptor_binary_descriptor_release",
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_num_of_octaves",
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_reduction_ratio",
+        "jyppx_ocv_line_descriptor_binary_descriptor_set_width_of_band",
+        "jyppx_ocv_line_descriptor_draw_keylines",
+        "jyppx_ocv_line_descriptor_draw_line_matches",
+        "jyppx_ocv_plot_2d_set_need_plot_line",
+        "jyppx_ocv_plot_2d_set_plot_line_color",
+        "jyppx_ocv_plot_2d_set_plot_line_width",
+        "jyppx_ocv_rapid_extract_line_bundle",
+        "jyppx_ocv_ximgproc_fast_line_detector_create",
+        "jyppx_ocv_ximgproc_fast_line_detector_detect",
+        "jyppx_ocv_ximgproc_fast_line_detector_detect_count",
+        "jyppx_ocv_ximgproc_fast_line_detector_detect_fill",
+        "jyppx_ocv_ximgproc_fast_line_detector_draw_segments",
+        "jyppx_ocv_ximgproc_fast_line_detector_draw_segments_array",
+        "jyppx_ocv_ximgproc_fast_line_detector_release_handle",
+        "jyppx_ocv_ximgproc_hough_point_to_line"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Line(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point pt1,OpenCvSharp.Core.Point pt2,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.arrowedLine(Mat img[/IO];Point pt1;Point pt2;Scalar color[/C,/Ref];int thickness=1;int line_type=8;int shift=0;double tipLength=0.1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_arrowed_line"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void ArrowedLine(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point pt1,OpenCvSharp.Core.Point pt2,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0,System.Double tipLength=0.1)"
+      ]
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.drawFrameAxes(Mat image[/IO];Mat cameraMatrix;Mat distCoeffs;Mat rvec;Mat tvec;float length;int thickness=3)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_draw_frame_axes"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void DrawFrameAxes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rotationVector,OpenCvSharp.Core.Mat translationVector,System.Single length,System.Int32 thickness=3)"
+      ]
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.rectangle(Mat img[/IO];Point pt1;Point pt2;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_rectangle",
+        "jyppx_ocv_imgproc_rectangle_by_rect",
+        "jyppx_ocv_imgproc_rotated_rectangle_intersection_count",
+        "jyppx_ocv_imgproc_rotated_rectangle_intersection_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Rectangle(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point pt1,OpenCvSharp.Core.Point pt2,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Rectangle(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Rect rect,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.rectangle(Mat img[/IO];Rect rec;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_rectangle",
+        "jyppx_ocv_imgproc_rectangle_by_rect",
+        "jyppx_ocv_imgproc_rotated_rectangle_intersection_count",
+        "jyppx_ocv_imgproc_rotated_rectangle_intersection_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Rectangle(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point pt1,OpenCvSharp.Core.Point pt2,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Rectangle(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Rect rect,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.circle(Mat img[/IO];Point center;int radius;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_circle",
+        "jyppx_ocv_imgproc_min_enclosing_circle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Circle(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point center,System.Int32 radius,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.ellipse(Mat img[/IO];Point center;Size axes;double angle;double startAngle;double endAngle;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_ellipse",
+        "jyppx_ocv_imgproc_fit_ellipse",
+        "jyppx_ocv_imgproc_fit_ellipse_ams",
+        "jyppx_ocv_imgproc_fit_ellipse_direct",
+        "jyppx_ocv_imgproc_get_closest_ellipse_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Ellipse(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point center,OpenCvSharp.Core.Size axes,System.Double angle,System.Double startAngle,System.Double endAngle,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.ellipse(Mat img[/IO];RotatedRect box[/C,/Ref];Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_ellipse",
+        "jyppx_ocv_imgproc_fit_ellipse",
+        "jyppx_ocv_imgproc_fit_ellipse_ams",
+        "jyppx_ocv_imgproc_fit_ellipse_direct",
+        "jyppx_ocv_imgproc_get_closest_ellipse_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Ellipse(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point center,OpenCvSharp.Core.Size axes,System.Double angle,System.Double startAngle,System.Double endAngle,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.drawMarker(Mat img[/IO];Point position;Scalar color[/C,/Ref];int markerType=MARKER_CROSS;int markerSize=20;int thickness=1;int line_type=8)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_draw_marker"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DrawMarker(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point position,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.MarkerTypes markerType=Cross,System.Int32 markerSize=20,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8)"
+      ]
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.fillConvexPoly(Mat img[/IO];Mat points;Scalar color[/C,/Ref];int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fill_convex_poly"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FillConvexPoly(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point[] points,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FillConvexPoly(OpenCvSharp.Core.Mat image,System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.fillPoly(Mat img[/IO];vector_Mat pts;Scalar color[/C,/Ref];int lineType=LINE_8;int shift=0;Point offset=Point())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fill_poly"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void FillPoly(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point[] pts,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0,OpenCvSharp.Core.Point? offset=null)"
+      ]
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.polylines(Mat img[/IO];vector_Mat pts;bool isClosed;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;int shift=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_polylines"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void Polylines(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Point[] pts,System.Boolean isClosed,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Int32 shift=0)"
+      ]
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.drawContours(Mat image[/IO];vector_Mat contours;int contourIdx;Scalar color[/C,/Ref];int thickness=1;int lineType=LINE_8;Mat hierarchy=Mat();int maxLevel=INT_MAX;Point offset=Point())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_draw_contours"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void DrawContours(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point[][] contours,System.Int32 contourIdx,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,OpenCvSharp.Core.Vec4i[]? hierarchy=null,System.Int32 maxLevel=2147483647,OpenCvSharp.Core.Point? offset=null)"
+      ]
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.clipLine(Rect imgRect;Point pt1[/IO,/Ref];Point pt2[/IO,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_clip_line_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Boolean ClipLine(OpenCvSharp.Core.Rect imgRect,ref OpenCvSharp.Core.Point pt1,ref OpenCvSharp.Core.Point pt2)"
+      ]
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.ellipse2Poly(Point center;Size axes;int angle;int arcStart;int arcEnd;int delta;vector_Point pts[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_ellipse2_poly_count",
+        "jyppx_ocv_imgproc_ellipse2_poly_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[] Ellipse2Poly(OpenCvSharp.Core.Point center,OpenCvSharp.Core.Size axes,System.Int32 angle,System.Int32 arcStart,System.Int32 arcEnd,System.Int32 delta)"
+      ]
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.putText(Mat img[/IO];String text[/C,/Ref];Point org;int fontFace;double fontScale;Scalar color;int thickness=1;int lineType=LINE_8;bool bottomLeftOrigin=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_put_text"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void PutText(OpenCvSharp.Core.Mat img,System.String text,OpenCvSharp.Core.Point org,OpenCvSharp.ImgProc.HersheyFonts fontFace,System.Double fontScale,OpenCvSharp.Core.Scalar color,System.Int32 thickness=1,OpenCvSharp.ImgProc.LineTypes lineType=Line8,System.Boolean bottomLeftOrigin=false)"
+      ]
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.getTextSize(String text[/C,/Ref];int fontFace;double fontScale;int thickness;int* baseLine[/O])-\u003ESize",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_text_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Size GetTextSize(System.String text,OpenCvSharp.ImgProc.HersheyFonts fontFace,System.Double fontScale,System.Int32 thickness,out System.Int32 baseLine)"
+      ]
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.getFontScaleFromHeight(int fontFace[/C];int pixelHeight[/C];int thickness=1[/C])-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_font_scale_from_height"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double GetFontScaleFromHeight(OpenCvSharp.ImgProc.HersheyFonts fontFace,System.Int32 pixelHeight,System.Int32 thickness=1)"
+      ]
+    },
+    {
+      "ordinal": 193,
+      "identity": "class cv.FontFace",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.FontFace.FontFace()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_font_face_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 195,
+      "identity": "cv.FontFace.FontFace(String fontPathOrName[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_font_face_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|constructor|public;instance|.ctor(System.String fontPathOrName)"
+      ]
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.FontFace.set(String fontPathOrName[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_font_face_set"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean Set(System.String fontPathOrName)"
+      ]
+    },
+    {
+      "ordinal": 197,
+      "identity": "cv.FontFace.getName()-\u003EString",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_font_face_get_name_fill",
+        "jyppx_ocv_imgproc_font_face_get_name_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.String GetName()",
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|property|instance;get:public|System.String Name"
+      ]
+    },
+    {
+      "ordinal": 198,
+      "identity": "cv.FontFace.setInstance(vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_font_face_set_instance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean SetInstance(System.Int32[] parameters)",
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean SetInstance(System.ReadOnlySpan\u003CSystem.Int32\u003E parameters)"
+      ]
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.FontFace.getInstance(vector_int params[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_font_face_get_instance_count",
+        "jyppx_ocv_imgproc_font_face_get_instance_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Boolean GetInstance(out System.Int32[] parameters)",
+        "MEMBER|OpenCvSharp.ImgProc.FontFace|method|public;instance|System.Int32[] GetInstance()"
+      ]
+    },
+    {
+      "ordinal": 200,
+      "identity": "enum cv.PutTextFlags",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 201,
+      "identity": "cv.putText(Mat img[/IO];String text[/C,/Ref];Point org;Scalar color;FontFace fface[/Ref];int size;int weight=0;PutTextFlags flags=PUT_TEXT_ALIGN_LEFT;Range wrap=Range())-\u003EPoint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_put_text_font_face"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point PutText(OpenCvSharp.Core.Mat image,System.String text,OpenCvSharp.Core.Point origin,OpenCvSharp.Core.Scalar color,OpenCvSharp.ImgProc.FontFace fontFace,System.Int32 size,System.Int32 weight=0,OpenCvSharp.ImgProc.PutTextFlags flags=AlignLeft,OpenCvSharp.ImgProc.TextWrapRange? wrap=null)"
+      ]
+    },
+    {
+      "ordinal": 202,
+      "identity": "cv.getTextSize(Size imgsize;String text[/C,/Ref];Point org;FontFace fface[/Ref];int size;int weight=0;PutTextFlags flags=PUT_TEXT_ALIGN_LEFT;Range wrap=Range())-\u003ERect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_text_size_font_face"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Rect GetTextSize(OpenCvSharp.Core.Size imageSize,System.String text,OpenCvSharp.Core.Point origin,OpenCvSharp.ImgProc.FontFace fontFace,System.Int32 size,System.Int32 weight=0,OpenCvSharp.ImgProc.PutTextFlags flags=AlignLeft,OpenCvSharp.ImgProc.TextWrapRange? wrap=null)"
+      ]
+    }
+  ]
+}

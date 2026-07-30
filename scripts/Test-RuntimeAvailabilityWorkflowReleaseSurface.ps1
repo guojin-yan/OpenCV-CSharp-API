@@ -168,7 +168,7 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle $aggregateScript -Issue "Pack workflow must run aggregate invariant checks before pack work" -NormalizeSlashes
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "verify-artifacts:" -Issue "Pack workflow must keep a full-matrix artifact self-validation job"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "verify-consumers:" -Issue "Pack workflow must keep a full-matrix consumer restore verification job"
-Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "actions/download-artifact@v4" -Issue "Pack workflow artifact self-validation must download current-run artifacts"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "uses: actions/download-artifact@" -Issue "Pack workflow artifact self-validation must download current-run artifacts"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "scripts/Test-GitHubPackArtifactMatrixSurface.ps1" -Issue "Pack workflow must run the offline GitHub pack artifact matrix guard"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "scripts/Test-GitHubPackConsumerRestoreSurface.ps1" -Issue "Pack workflow must run the offline GitHub pack consumer restore guard"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "artifacts/pack-download" -Issue "Pack workflow must download package artifacts into an isolated generated directory"

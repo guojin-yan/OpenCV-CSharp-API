@@ -407,6 +407,115 @@ namespace OpenCvSharp.Photo
         }
 #endif
 
+        /// <summary>Denoises one or more 8-bit grayscale observations with the TV-L1 algorithm.</summary>
+        public static void DenoiseTvl1(Mat[] observations, Mat result, double lambda = 1.0, int niters = 30)
+        {
+            ValidateNotNull(result, nameof(result));
+            IntPtr[] handles = ToNativeHandles(observations, nameof(observations));
+            ValidateTvl1Inputs(observations, lambda, niters);
+            NativeException.ThrowIfError(NativeMethods.PhotoDenoiseTvl1(
+                handles,
+                handles.Length,
+                result.NativeHandle,
+                lambda,
+                niters));
+        }
+
+        /// <summary>Denoises TV-L1 observations and returns an independently owned 8-bit grayscale result.</summary>
+        public static Mat DenoiseTvl1(Mat[] observations, double lambda = 1.0, int niters = 30)
+        {
+            var result = new Mat();
+            try
+            {
+                DenoiseTvl1(observations, result, lambda, niters);
+                return result;
+            }
+            catch
+            {
+                result.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>Corrects lateral chromatic aberration in a BGR or raw Bayer image.</summary>
+        public static void CorrectChromaticAberration(
+            Mat inputImage,
+            Mat coefficients,
+            Mat outputImage,
+            Size calibrationSize,
+            int calibrationDegree,
+            int bayerPattern = -1)
+        {
+            ValidateNotNull(inputImage, nameof(inputImage));
+            ValidateNotNull(coefficients, nameof(coefficients));
+            ValidateNotNull(outputImage, nameof(outputImage));
+            ValidateChromaticAberrationInputs(inputImage, coefficients, calibrationSize, calibrationDegree, bayerPattern);
+            NativeException.ThrowIfError(NativeMethods.PhotoCorrectChromaticAberration(
+                inputImage.NativeHandle,
+                coefficients.NativeHandle,
+                outputImage.NativeHandle,
+                calibrationSize.Width,
+                calibrationSize.Height,
+                calibrationDegree,
+                bayerPattern));
+        }
+
+        /// <summary>Corrects lateral chromatic aberration and returns an independently owned image.</summary>
+        public static Mat CorrectChromaticAberration(
+            Mat inputImage,
+            Mat coefficients,
+            Size calibrationSize,
+            int calibrationDegree,
+            int bayerPattern = -1)
+        {
+            var outputImage = new Mat();
+            try
+            {
+                CorrectChromaticAberration(inputImage, coefficients, outputImage, calibrationSize, calibrationDegree, bayerPattern);
+                return outputImage;
+            }
+            catch
+            {
+                outputImage.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>Loads chromatic-aberration parameters into caller-owned coefficient storage.</summary>
+        public static void LoadChromaticAberrationParams(
+            FileNode node,
+            Mat coefficients,
+            out Size calibrationSize,
+            out int degree)
+        {
+            ValidateNotNull(node, nameof(node));
+            ValidateNotNull(coefficients, nameof(coefficients));
+            NativeException.ThrowIfError(NativeMethods.PhotoLoadChromaticAberrationParams(
+                node.NativeHandle,
+                coefficients.NativeHandle,
+                out int calibrationWidth,
+                out int calibrationHeight,
+                out degree));
+            calibrationSize = new Size(calibrationWidth, calibrationHeight);
+        }
+
+        /// <summary>Loads chromatic-aberration parameters with independent coefficient ownership.</summary>
+        public static ChromaticAberrationParameters LoadChromaticAberrationParams(FileNode node)
+        {
+            ValidateNotNull(node, nameof(node));
+            var coefficients = new Mat();
+            try
+            {
+                LoadChromaticAberrationParams(node, coefficients, out Size calibrationSize, out int degree);
+                return new ChromaticAberrationParameters(coefficients, calibrationSize, degree);
+            }
+            catch
+            {
+                coefficients.Dispose();
+                throw;
+            }
+        }
+
         /// <summary>
         /// Blends a source region into a destination image using seamless cloning.
         /// 使用 seamless cloning 将源区域融合到目标图像。
@@ -565,6 +674,68 @@ namespace OpenCvSharp.Photo
             }
         }
 
+        /// <summary>Applies CCM gamma correction to a caller-owned output matrix.</summary>
+        public static void GammaCorrection(Mat src, Mat dst, double gamma)
+        {
+            ValidateNotNull(src, nameof(src));
+            ValidateNotNull(dst, nameof(dst));
+            ValidateCcmGammaInput(src);
+            if (!(gamma > 0.0) || double.IsNaN(gamma) || double.IsInfinity(gamma))
+            {
+                throw new ArgumentOutOfRangeException(nameof(gamma), "Gamma must be finite and positive.");
+            }
+
+            NativeException.ThrowIfError(NativeMethods.PhotoCcmGammaCorrection(
+                src.NativeHandle, dst.NativeHandle, gamma));
+        }
+
+        /// <summary>Applies CCM gamma correction and returns a new matrix.</summary>
+        public static Mat GammaCorrection(Mat src, double gamma)
+        {
+            var dst = new Mat();
+            try
+            {
+                GammaCorrection(src, dst, gamma);
+                return dst;
+            }
+            catch
+            {
+                dst.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>Creates an empty color correction model intended for persistence loading.</summary>
+        public static ColorCorrectionModel CreateColorCorrectionModel()
+        {
+            return ColorCorrectionModel.Create();
+        }
+
+        /// <summary>Creates a color correction model from measured colors and a built-in checker.</summary>
+        public static ColorCorrectionModel CreateColorCorrectionModel(Mat src, ColorCheckerType colorChecker)
+        {
+            return ColorCorrectionModel.Create(src, colorChecker);
+        }
+
+        /// <summary>Creates a color correction model from measured and custom reference colors.</summary>
+        public static ColorCorrectionModel CreateColorCorrectionModel(
+            Mat src,
+            Mat colors,
+            ColorSpace referenceColorSpace)
+        {
+            return ColorCorrectionModel.Create(src, colors, referenceColorSpace);
+        }
+
+        /// <summary>Creates a color correction model with a custom colored-patch mask.</summary>
+        public static ColorCorrectionModel CreateColorCorrectionModel(
+            Mat src,
+            Mat colors,
+            ColorSpace referenceColorSpace,
+            Mat coloredPatchesMask)
+        {
+            return ColorCorrectionModel.Create(src, colors, referenceColorSpace, coloredPatchesMask);
+        }
+
         /// <summary>
         /// Creates a simple linear tonemap operator.
         /// 创建简单线性 tone mapping 算子。
@@ -601,12 +772,136 @@ namespace OpenCvSharp.Photo
             return TonemapMantiuk.Create(gamma, scale, saturation);
         }
 
+        /// <summary>Creates a median-threshold bitmap exposure aligner.</summary>
+        public static AlignMTB CreateAlignMTB(int maxBits = 6, int excludeRange = 4, bool cut = true)
+        {
+            return AlignMTB.Create(maxBits, excludeRange, cut);
+        }
+
+        /// <summary>Creates a Debevec camera-response calibrator.</summary>
+        public static CalibrateDebevec CreateCalibrateDebevec(
+            int samples = 70,
+            float lambda = 10.0F,
+            bool random = false)
+        {
+            return CalibrateDebevec.Create(samples, lambda, random);
+        }
+
+        /// <summary>Creates a Robertson camera-response calibrator.</summary>
+        public static CalibrateRobertson CreateCalibrateRobertson(
+            int maxIter = 30,
+            float threshold = 0.01F)
+        {
+            return CalibrateRobertson.Create(maxIter, threshold);
+        }
+
+        /// <summary>Creates a Debevec high-dynamic-range merger.</summary>
+        public static MergeDebevec CreateMergeDebevec()
+        {
+            return MergeDebevec.Create();
+        }
+
+        /// <summary>Creates a Mertens exposure-fusion merger.</summary>
+        public static MergeMertens CreateMergeMertens(
+            float contrastWeight = 1.0F,
+            float saturationWeight = 1.0F,
+            float exposureWeight = 0.0F)
+        {
+            return MergeMertens.Create(contrastWeight, saturationWeight, exposureWeight);
+        }
+
+        /// <summary>Creates a Robertson high-dynamic-range merger.</summary>
+        public static MergeRobertson CreateMergeRobertson()
+        {
+            return MergeRobertson.Create();
+        }
+
         private static void ValidateNotNull<T>(T value, string parameterName)
             where T : class
         {
             if (value == null)
             {
                 throw new ArgumentNullException(parameterName);
+            }
+        }
+
+        private static void ValidateTvl1Inputs(Mat[] observations, double lambda, int niters)
+        {
+            if (!(lambda > 0.0))
+            {
+                throw new ArgumentOutOfRangeException(nameof(lambda), "TV-L1 lambda must be positive.");
+            }
+            if (niters <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(niters), "TV-L1 iteration count must be positive.");
+            }
+
+            Mat first = observations[0];
+            if (first.Empty || first.Dims != 2 || first.Type != MatType.CV_8UC1)
+            {
+                throw new ArgumentException("TV-L1 observations must be non-empty two-dimensional CV_8UC1 matrices.", nameof(observations));
+            }
+
+            for (int i = 1; i < observations.Length; i++)
+            {
+                Mat current = observations[i];
+                if (current.Empty || current.Dims != 2 || current.Type != MatType.CV_8UC1 ||
+                    current.Rows != first.Rows || current.Cols != first.Cols)
+                {
+                    throw new ArgumentException("TV-L1 observations must have identical non-empty CV_8UC1 dimensions.", nameof(observations));
+                }
+            }
+        }
+
+        private static void ValidateChromaticAberrationInputs(
+            Mat inputImage,
+            Mat coefficients,
+            Size calibrationSize,
+            int calibrationDegree,
+            int bayerPattern)
+        {
+            if (calibrationSize.Width <= 0 || calibrationSize.Height <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(calibrationSize), "Calibration size must be positive.");
+            }
+            if (calibrationDegree < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(calibrationDegree), "Calibration degree must be non-negative.");
+            }
+            if (inputImage.Empty || inputImage.Dims != 2 || (inputImage.Channels != 1 && inputImage.Channels != 3))
+            {
+                throw new ArgumentException("Chromatic-aberration input must be a non-empty two-dimensional BGR or single-channel Bayer image.", nameof(inputImage));
+            }
+            if (inputImage.Cols != calibrationSize.Width || inputImage.Rows != calibrationSize.Height)
+            {
+                throw new ArgumentException("Input image size must match calibrationSize exactly.", nameof(calibrationSize));
+            }
+            if (inputImage.Channels == 1 && bayerPattern < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bayerPattern), "A non-negative Bayer conversion code is required for single-channel input.");
+            }
+            if (coefficients.Empty || coefficients.Dims != 2 || coefficients.Type != MatType.CV_32FC1 || coefficients.Rows != 4)
+            {
+                throw new ArgumentException("Chromatic-aberration coefficients must be a non-empty 4-row CV_32FC1 matrix.", nameof(coefficients));
+            }
+
+            long degree = calibrationDegree;
+            long expectedTerms = (degree + 1L) * (degree + 2L) / 2L;
+            if (expectedTerms > int.MaxValue || coefficients.Cols != (int)expectedTerms)
+            {
+                throw new ArgumentException("Coefficient column count must equal the triangular term count for calibrationDegree.", nameof(coefficients));
+            }
+        }
+
+        private static void ValidateCcmGammaInput(Mat src)
+        {
+            int depth = src.Depth;
+            if (src.Empty || src.Dims != 2 ||
+                (depth != MatType.CV_8U && depth != MatType.CV_16U &&
+                 depth != MatType.CV_16S && depth != MatType.CV_32F &&
+                 depth != MatType.CV_64F))
+            {
+                throw new ArgumentException("CCM gamma correction supports non-empty 8U, 16U, 16S, 32F, and 64F matrices.", nameof(src));
             }
         }
 

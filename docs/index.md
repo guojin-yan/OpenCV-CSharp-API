@@ -69,6 +69,8 @@ Welcome to the OpenCV CSharp API documentation.
 - [Saliency Objectness Guide](articles/saliency-objectness-guide.md)
 - [DNN Net Guide](articles/dnn-net-guide.md)
 - [DNN Net Advanced Guide](articles/dnn-net-advanced-guide.md)
+- [DNN Structured Parity Guide](articles/dnn-structured-parity-guide.md)
+- [Features Upstream Coverage And ANNIndex Guide](articles/features-upstream-parity-guide.md)
 - [HighGui Guide](articles/highgui-guide.md)
 - [HighGui Interaction Guide](articles/highgui-interaction-guide.md)
 - [Stitching Stitcher Guide](articles/stitching-stitcher-guide.md)

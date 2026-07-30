@@ -1,0 +1,1237 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 10,
+  "managedPublicMemberAdditionCount": 94,
+  "families": [
+    {
+      "id": "runtime-backend-and-model-loading",
+      "rationale": "Correlate backend/target/engine metadata, deterministic availability, owned Net construction, and path/buffer model readers.",
+      "declarations": [
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "enum cv.dnn.Backend[const cv.dnn.DNN_BACKEND_DEFAULT=0;const cv.dnn.DNN_BACKEND_INFERENCE_ENGINE=2;const cv.dnn.DNN_BACKEND_OPENCV=2\u002B1;const cv.dnn.DNN_BACKEND_VKCOM=2\u002B2;const cv.dnn.DNN_BACKEND_CUDA=2\u002B3;const cv.dnn.DNN_BACKEND_WEBNN=2\u002B4;const cv.dnn.DNN_BACKEND_TIMVX=2\u002B5;const cv.dnn.DNN_BACKEND_CANN=2\u002B6]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "enum cv.dnn.Target[const cv.dnn.DNN_TARGET_CPU=0;const cv.dnn.DNN_TARGET_OPENCL=0\u002B1;const cv.dnn.DNN_TARGET_OPENCL_FP16=0\u002B2;const cv.dnn.DNN_TARGET_MYRIAD=0\u002B3;const cv.dnn.DNN_TARGET_VULKAN=0\u002B4;const cv.dnn.DNN_TARGET_FPGA=0\u002B5;const cv.dnn.DNN_TARGET_CUDA=0\u002B6;const cv.dnn.DNN_TARGET_CUDA_FP16=0\u002B7;const cv.dnn.DNN_TARGET_HDDL=0\u002B8;const cv.dnn.DNN_TARGET_NPU=0\u002B9;const cv.dnn.DNN_TARGET_CPU_FP16=0\u002B10]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "enum cv.dnn.TracingMode[const cv.dnn.DNN_TRACE_NONE=0;const cv.dnn.DNN_TRACE_ALL=1;const cv.dnn.DNN_TRACE_OP=2]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "enum cv.dnn.ProfilingMode[const cv.dnn.DNN_PROFILE_NONE=0;const cv.dnn.DNN_PROFILE_SUMMARY=1;const cv.dnn.DNN_PROFILE_DETAILED=2]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "enum cv.dnn.ModelFormat[const cv.dnn.DNN_MODEL_GENERIC=0;const cv.dnn.DNN_MODEL_ONNX=1;const cv.dnn.DNN_MODEL_TF=2;const cv.dnn.DNN_MODEL_TFLITE=3]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.dnn.getAvailableTargets(dnn_Backend be)-\u003Estd::vector\u003CTarget\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_get_available_targets_count",
+            "jyppx_ocv_dnn_get_available_targets_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Dnn.DnnTarget[] GetAvailableTargets(OpenCvSharp.Dnn.DnnBackend backend)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "class cv.dnn.Net",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.dnn.Net.Net()-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_create_empty",
+            "jyppx_ocv_dnn_net_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net CreateEmpty()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 23,
+          "upstreamIdentity": "cv.dnn.Net.readFromModelOptimizer(String xml[/PATH,/C,/Ref];String bin[/PATH,/C,/Ref])-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_model_optimizer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.String xml,System.String bin=\u0022\u0022)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 24,
+          "upstreamIdentity": "cv.dnn.Net.readFromModelOptimizer(vector_uchar bufferModelConfig[/C,/Ref];vector_uchar bufferWeights[/C,/Ref])-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_model_optimizer_buffer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.Byte[] modelConfigBuffer,System.Byte[] weightsBuffer)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.dnn.Net.empty()-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_empty"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|property|instance;get:public|System.Boolean Empty"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 73,
+          "upstreamIdentity": "enum cv.dnn.EngineType[const cv.dnn.ENGINE_CLASSIC=1;const cv.dnn.ENGINE_NEW=2;const cv.dnn.ENGINE_AUTO=3;const cv.dnn.ENGINE_ORT=4]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 74,
+          "upstreamIdentity": "cv.dnn.readNetFromTensorflow(String model[/PATH,/C,/Ref];String config=String()[/PATH,/C,/Ref];int engine=ENGINE_AUTO;vector_String extraOutputs=std::vector\u003CString\u003E()[/C,/Ref])-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_tensorflow_ex"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTensorflow(System.String model,System.String config,OpenCvSharp.Dnn.DnnEngine engine,System.String[] extraOutputs)",
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTensorflow(System.String model,System.String config=\u0022\u0022,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 75,
+          "upstreamIdentity": "cv.dnn.readNetFromTensorflow(vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO;vector_String extraOutputs=std::vector\u003CString\u003E()[/C,/Ref])-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_tensorflow_buffer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTensorflow(System.Byte[] modelBuffer,System.Byte[]? configBuffer=null,OpenCvSharp.Dnn.DnnEngine engine=Auto,System.String[]? extraOutputs=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 76,
+          "upstreamIdentity": "cv.dnn.readNetFromTFLite(String model[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_tflite"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTFLite(System.String model,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 77,
+          "upstreamIdentity": "cv.dnn.readNetFromTFLite(vector_uchar bufferModel[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_tflite_buffer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromTFLite(System.Byte[] modelBuffer,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 78,
+          "upstreamIdentity": "cv.dnn.readNet(String model[/PATH,/C,/Ref];String config=\u0022\u0022[/PATH,/C,/Ref];String framework=\u0022\u0022[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNet(System.String model,System.String config=\u0022\u0022,System.String framework=\u0022\u0022,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 79,
+          "upstreamIdentity": "cv.dnn.readNet(String framework[/C,/Ref];vector_uchar bufferModel[/C,/Ref];vector_uchar bufferConfig=std::vector\u003Cuchar\u003E()[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_buffer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNet(System.String framework,System.Byte[] modelBuffer,System.Byte[]? configBuffer=null,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 80,
+          "upstreamIdentity": "cv.dnn.readNetFromModelOptimizer(String xml[/PATH,/C,/Ref];String bin=\u0022\u0022[/PATH,/C,/Ref])-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_model_optimizer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.String xml,System.String bin=\u0022\u0022)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 81,
+          "upstreamIdentity": "cv.dnn.readNetFromModelOptimizer(vector_uchar bufferModelConfig[/C,/Ref];vector_uchar bufferWeights[/C,/Ref])-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_model_optimizer_buffer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromModelOptimizer(System.Byte[] modelConfigBuffer,System.Byte[] weightsBuffer)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 82,
+          "upstreamIdentity": "cv.dnn.readNetFromONNX(String onnxFile[/PATH,/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_onnx"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromOnnx(System.String model,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 83,
+          "upstreamIdentity": "cv.dnn.readNetFromONNX(vector_uchar buffer[/C,/Ref];int engine=ENGINE_AUTO)-\u003ENet",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_release_handle",
+            "jyppx_ocv_dnn_read_net_from_onnx_buffer"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;static|OpenCvSharp.Dnn.Net ReadNetFromOnnx(System.Byte[] modelBuffer,OpenCvSharp.Dnn.DnnEngine engine=Auto)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 84,
+          "upstreamIdentity": "cv.dnn.readTensorFromONNX(String path[/PATH,/C,/Ref])-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_read_tensor_from_onnx"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat ReadTensorFromOnnx(System.String path)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void ReadTensorFromOnnx(System.String path,OpenCvSharp.Core.Mat output)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "net-forward-introspection-and-controls",
+      "rationale": "Close the adjacent Net dump, graph connection, forward, parameter, shape, memory, optimization, cache, and profiling surface.",
+      "declarations": [
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.dnn.Net.dump()-\u003EString",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_core_utf8_result_data",
+            "jyppx_ocv_core_utf8_result_release",
+            "jyppx_ocv_core_utf8_result_size",
+            "jyppx_ocv_dnn_net_dump"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String Dump()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.dnn.Net.dumpToFile(String path[/PATH,/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_dump_to_file"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Void DumpToFile(System.String path)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.dnn.Net.dumpToPbtxt(String path[/PATH,/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_dump_to_pbtxt"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Void DumpToPbtxt(System.String path)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.dnn.Net.getLayerId(String layer[/C,/Ref])-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_layer_id"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32 GetLayerId(System.String layerName)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.dnn.Net.getLayerNames()-\u003Estd::vector\u003CString\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_layer_names_count",
+            "jyppx_ocv_dnn_net_get_layer_names_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String[] GetLayerNames()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.dnn.Net.connect(String outPin;String inpPin)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_connect"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net Connect(System.String outputPin,System.String inputPin)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.dnn.Net.registerOutput(string outputName[/C,/Ref];int layerId;int outputPort)-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_register_output"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32 RegisterOutput(System.String outputName,System.Int32 layerId,System.Int32 outputPort)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.dnn.Net.setInputsNames(vector_String inputBlobNames[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_inputs_names"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetInputsNames(System.String[] inputBlobNames)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.dnn.Net.setInputShape(String inputName[/C,/Ref];MatShape shape[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_input_shape"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetInputShape(System.String inputName,System.Int32[] shape)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "cv.dnn.Net.forward(String outputName=String()[/C,/Ref])-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_forward"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat Forward(System.String outputName=\u0022\u0022)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];String outputName=String()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_forward"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Void Forward(OpenCvSharp.Core.Mat output,System.String outputName=\u0022\u0022)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 43,
+          "upstreamIdentity": "cv.dnn.Net.forward(vector_Mat outputBlobs[/ND,/O];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_forward_many"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat[] Forward(System.String[] outputNames)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 44,
+          "upstreamIdentity": "cv.dnn.Net.forward(vector_vector_Mat outputBlobs[/O,/Ref];vector_String outBlobNames[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_mat_groups_get_counts",
+            "jyppx_ocv_dnn_mat_groups_get_group_offsets",
+            "jyppx_ocv_dnn_mat_groups_release_handle",
+            "jyppx_ocv_dnn_mat_groups_take_mats",
+            "jyppx_ocv_dnn_net_forward_and_retrieve"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat[][] ForwardAndRetrieve(System.String[] outputNames)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 45,
+          "upstreamIdentity": "cv.dnn.Net.setPreferableBackend(int backendId)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_preferable_backend"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetPreferableBackend(OpenCvSharp.Dnn.DnnBackend backend)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.dnn.Net.setPreferableTarget(int targetId)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_preferable_target"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetPreferableTarget(OpenCvSharp.Dnn.DnnTarget target)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.dnn.Net.finalizeNet()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_finalize"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net FinalizeNetwork()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.dnn.Net.setTracingMode(TracingMode tracingMode)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_tracing_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetTracingMode(OpenCvSharp.Dnn.DnnTracingMode mode)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.dnn.Net.getTracingMode()-\u003ETracingMode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_tracing_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnTracingMode GetTracingMode()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.dnn.Net.setProfilingMode(ProfilingMode profilingMode)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_profiling_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetProfilingMode(OpenCvSharp.Dnn.DnnProfilingMode mode)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.dnn.Net.getProfilingMode()-\u003EProfilingMode",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_profiling_mode"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnProfilingMode GetProfilingMode()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.dnn.Net.getModelFormat()-\u003EModelFormat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_model_format"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|property|instance;get:public|OpenCvSharp.Dnn.DnnModelFormat ModelFormat"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.dnn.Net.setInput(Mat blob[/ND];String name=\u0022\u0022[/C,/Ref];double scalefactor=1.0;Scalar mean=Scalar()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_input"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetInput(OpenCvSharp.Core.Mat blob,System.String name=\u0022\u0022,System.Double scaleFactor=1,OpenCvSharp.Core.Scalar? mean=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.dnn.Net.setParam(int layer;int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_param_by_id"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetParam(System.Int32 layerId,System.Int32 parameterIndex,OpenCvSharp.Core.Mat value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.dnn.Net.setParam(String layerName[/C,/Ref];int numParam;Mat blob[/ND,/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_set_param_by_name"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net SetParam(System.String layerName,System.Int32 parameterIndex,OpenCvSharp.Core.Mat value)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.dnn.Net.getParam(int layer;int numParam=0)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_param_by_id"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat GetParam(System.Int32 layerId,System.Int32 parameterIndex=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.dnn.Net.getParam(String layerName[/C,/Ref];int numParam=0)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_param_by_name"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Core.Mat GetParam(System.String layerName,System.Int32 parameterIndex=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.dnn.Net.getUnconnectedOutLayers()-\u003Estd::vector\u003Cint\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_unconnected_out_layers_count",
+            "jyppx_ocv_dnn_net_get_unconnected_out_layers_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32[] GetUnconnectedOutLayers()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.dnn.Net.getUnconnectedOutLayersNames()-\u003Estd::vector\u003CString\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_unconnected_out_layers_names_count",
+            "jyppx_ocv_dnn_net_get_unconnected_out_layers_names_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String[] GetUnconnectedOutLayersNames()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.dnn.Net.getLayerShapes(vector_MatShape netInputShapes[/C,/Ref];vector_int netInputTypes[/C,/Ref];int layerId[/C];vector_MatShape inLayerShapes[/O,/Ref];vector_MatShape outLayerShapes[/O,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_layer_shapes_count",
+            "jyppx_ocv_dnn_net_get_layer_shapes_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnLayerShapes GetLayerShapes(System.Int32[][] inputShapes,System.Int32[] inputTypes,System.Int32 layerId)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.dnn.Net.getFLOPS(vector_MatShape netInputShapes[/C,/Ref];vector_int netInputTypes[/C,/Ref])-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_flops_many"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int64 GetFLOPS(System.Int32[] inputShape,System.Int32 inputType=5)",
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int64 GetFLOPS(System.Int32[][] inputShapes,System.Int32[] inputTypes)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.dnn.Net.getLayerTypes(vector_String layersTypes[/O,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_layer_types_count",
+            "jyppx_ocv_dnn_net_get_layer_types_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.String[] GetLayerTypes()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.dnn.Net.getLayersCount(String layerType[/C,/Ref])-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_layers_count_by_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|System.Int32 GetLayersCountByType(System.String layerType)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.dnn.Net.getMemoryConsumption(vector_MatShape netInputShapes[/C,/Ref];vector_int netInputTypes[/C,/Ref];size_t weights[/O,/Ref];size_t blobs[/O,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_memory_consumption"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnMemoryConsumption GetMemoryConsumption(System.Int32[][] inputShapes,System.Int32[] inputTypes)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.dnn.Net.enableFusion(bool fusion)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_enable_fusion"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net EnableFusion(System.Boolean enabled)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 66,
+          "upstreamIdentity": "cv.dnn.Net.enableWinograd(bool useWinograd)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_enable_winograd"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net EnableWinograd(System.Boolean enabled)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.dnn.Net.getPerfProfile(vector_double timings[/O,/Ref])-\u003Eint64",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_perf_profile_count",
+            "jyppx_ocv_dnn_net_get_perf_profile_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnPerfProfile GetPerfProfile()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 68,
+          "upstreamIdentity": "cv.dnn.Net.enableKVCache()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_enable_kv_cache"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net EnableKvCache()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 69,
+          "upstreamIdentity": "cv.dnn.Net.disableKVCache()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_disable_kv_cache"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net DisableKvCache()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 70,
+          "upstreamIdentity": "cv.dnn.Net.resetKVCache()-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_reset_kv_cache"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Net ResetKvCache()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 71,
+          "upstreamIdentity": "cv.dnn.Net.getPerfProfile(vector_string names[/O,/Ref];vector_string timems[/O,/Ref];vector_string counts[/O,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_net_get_detailed_perf_profile_count",
+            "jyppx_ocv_dnn_net_get_detailed_perf_profile_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.DnnDetailedPerfProfile GetDetailedPerfProfile()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "owned-layer-reference",
+      "rationale": "Expose ref-counted Layer lookup and output-name indexing without leaking cv::Ptr or parent Net lifetime.",
+      "declarations": [
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "class cv.dnn.Layer",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.dnn.Layer.outputNameToIndex(String outputName[/C,/Ref])-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_layer_output_name_to_index",
+            "jyppx_ocv_dnn_layer_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Layer|method|public;instance|System.Int32 OutputNameToIndex(System.String outputName)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.dnn.Net.getLayer(int layerId)-\u003EPtr\u003CLayer\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_layer_release_handle",
+            "jyppx_ocv_dnn_net_get_layer_by_id"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Layer GetLayer(System.Int32 layerId)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.dnn.Net.getLayer(String layerName[/C,/Ref])-\u003EPtr\u003CLayer\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_layer_release_handle",
+            "jyppx_ocv_dnn_net_get_layer_by_name"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Net|method|public;instance|OpenCvSharp.Dnn.Layer GetLayer(System.String layerName)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "image-to-blob-parameter-workflow",
+      "rationale": "Preserve legacy blob helpers and complete Image2BlobParams layout, padding, border, and rectangle projection semantics.",
+      "declarations": [
+        {
+          "ordinal": 85,
+          "upstreamIdentity": "cv.dnn.blobFromImage(Mat image;double scalefactor=1.0;Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_image"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImage(OpenCvSharp.Core.Mat image,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 86,
+          "upstreamIdentity": "cv.dnn.blobFromImages(vector_Mat images;double scalefactor=1.0;Size size=Size();Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;bool crop=false;int ddepth=CV_32F)-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_images"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImages(OpenCvSharp.Core.Mat[] images,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E images,OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 87,
+          "upstreamIdentity": "enum cv.dnn.ImagePaddingMode[const cv.dnn.DNN_PMODE_NULL=0;const cv.dnn.DNN_PMODE_CROP_CENTER=1;const cv.dnn.DNN_PMODE_LETTERBOX=2]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 88,
+          "upstreamIdentity": "class cv.dnn.Image2BlobParams",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 89,
+          "upstreamIdentity": "cv.dnn.Image2BlobParams.Image2BlobParams()-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_image_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 90,
+          "upstreamIdentity": "cv.dnn.Image2BlobParams.Image2BlobParams(Scalar scalefactor[/C,/Ref];Size size=Size()[/C,/Ref];Scalar mean=Scalar()[/C,/Ref];bool swapRB=false;int ddepth=CV_32F;DataLayout datalayout=DNN_LAYOUT_NCHW;ImagePaddingMode mode=dnn::DNN_PMODE_NULL;Scalar borderValue=0.0)-\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_image_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|constructor|public;instance|.ctor(OpenCvSharp.Core.Scalar scaleFactor,OpenCvSharp.Core.Size? size=null,OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Int32 ddepth=5,OpenCvSharp.Dnn.DnnDataLayout dataLayout=Nchw,OpenCvSharp.Dnn.DnnImagePaddingMode paddingMode=None,OpenCvSharp.Core.Scalar? borderValue=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 91,
+          "upstreamIdentity": "cv.dnn.Image2BlobParams.blobRectToImageRect(Rect rBlob[/C,/Ref];Size size[/C,/Ref])-\u003ERect",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_rect_to_image_rect"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|method|public;instance|OpenCvSharp.Core.Rect BlobRectToImageRect(OpenCvSharp.Core.Rect blobRect,OpenCvSharp.Core.Size imageSize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 92,
+          "upstreamIdentity": "cv.dnn.Image2BlobParams.blobRectsToImageRects(vector_Rect rBlob[/C,/Ref];vector_Rect rImg[/O,/Ref];Size size[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_rects_to_image_rects"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Image2BlobParams|method|public;instance|OpenCvSharp.Core.Rect[] BlobRectsToImageRects(OpenCvSharp.Core.Rect[] blobRects,OpenCvSharp.Core.Size imageSize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 93,
+          "upstreamIdentity": "cv.dnn.blobFromImageWithParams(Mat image;Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_image_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 94,
+          "upstreamIdentity": "cv.dnn.blobFromImageWithParams(Mat image;Mat blob[/O];Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_image_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 95,
+          "upstreamIdentity": "cv.dnn.blobFromImagesWithParams(vector_Mat images;Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003EMat",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_images_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 96,
+          "upstreamIdentity": "cv.dnn.blobFromImagesWithParams(vector_Mat images;Mat blob[/O];Image2BlobParams param=Image2BlobParams()[/C,/Ref])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_blob_from_images_with_params"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)",
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(System.ReadOnlySpan\u003COpenCvSharp.Core.Mat\u003E images,OpenCvSharp.Core.Mat blob,OpenCvSharp.Dnn.Image2BlobParams parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 97,
+          "upstreamIdentity": "cv.dnn.imagesFromBlob(Mat blob_[/C,/Ref];vector_Mat images_[/O])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_images_from_blob_count",
+            "jyppx_ocv_dnn_images_from_blob_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Dnn.Cv2|method|public;static|OpenCvSharp.Core.Mat[] ImagesFromBlob(OpenCvSharp.Core.Mat blob)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

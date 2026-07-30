@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using OpenCvSharp.Core;
 using OpenCvSharp.Internal.Interop;
 
@@ -11,6 +13,8 @@ namespace OpenCvSharp.VideoIO
     public sealed class VideoCapture : IDisposable
     {
         private NativeVideoCaptureHandle handle;
+        private VideoStreamReader? streamReader;
+        private bool ownsStreamReader;
         private bool disposed;
 
         /// <summary>
@@ -48,6 +52,36 @@ namespace OpenCvSharp.VideoIO
         }
 
         /// <summary>
+        /// Initializes and opens a video file with parameter pairs.
+        /// 使用参数对初始化并打开视频文件。
+        /// </summary>
+        public VideoCapture(string filename, VideoCaptureAPIs apiPreference, params int[] parameters)
+            : this()
+        {
+            Open(filename, apiPreference, parameters);
+        }
+
+        /// <summary>
+        /// Initializes and opens a camera device with parameter pairs.
+        /// 使用参数对初始化并打开摄像头设备。
+        /// </summary>
+        public VideoCapture(int index, VideoCaptureAPIs apiPreference, params int[] parameters)
+            : this()
+        {
+            Open(index, apiPreference, parameters);
+        }
+
+        /// <summary>
+        /// Initializes and opens a callback-backed stream reader.
+        /// 初始化并打开回调流读取器。
+        /// </summary>
+        public VideoCapture(VideoStreamReader reader, VideoCaptureAPIs apiPreference, params int[] parameters)
+            : this()
+        {
+            OpenStreamReaderCore(reader, apiPreference, parameters);
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this object has been disposed.
         /// 获取此对象是否已经释放。
         /// </summary>
@@ -67,6 +101,25 @@ namespace OpenCvSharp.VideoIO
                 ThrowIfDisposed();
                 NativeException.ThrowIfError(NativeMethods.VideoCaptureIsOpened(NativeHandle, out int opened));
                 return opened != 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets whether backend errors are raised as exceptions.
+        /// 获取或设置是否将后端错误作为异常抛出。
+        /// </summary>
+        public bool ExceptionMode
+        {
+            get
+            {
+                ThrowIfDisposed();
+                NativeException.ThrowIfError(NativeMethods.VideoCaptureGetExceptionMode(NativeHandle, out int enabled));
+                return enabled != 0;
+            }
+            set
+            {
+                ThrowIfDisposed();
+                NativeException.ThrowIfError(NativeMethods.VideoCaptureSetExceptionMode(NativeHandle, value ? 1 : 0));
             }
         }
 
@@ -287,8 +340,23 @@ namespace OpenCvSharp.VideoIO
         public bool Open(string filename, VideoCaptureAPIs apiPreference = VideoCaptureAPIs.Any)
         {
             ThrowIfDisposed();
+            ReleaseOwnedStreamReader();
             byte[] nativeFilename = VideoIOStringConvert.ToNullTerminatedUtf8(filename, nameof(filename));
             NativeException.ThrowIfError(NativeMethods.VideoCaptureOpenFile(NativeHandle, nativeFilename, (int)apiPreference, out int opened));
+            return opened != 0;
+        }
+
+        /// <summary>
+        /// Opens a video file with parameter pairs.
+        /// 使用参数对打开视频文件。
+        /// </summary>
+        public bool Open(string filename, VideoCaptureAPIs apiPreference, params int[] parameters)
+        {
+            ThrowIfDisposed();
+            int[] nativeParameters = NormalizeParameters(parameters);
+            ReleaseOwnedStreamReader();
+            byte[] nativeFilename = VideoIOStringConvert.ToNullTerminatedUtf8(filename, nameof(filename));
+            NativeException.ThrowIfError(NativeMethods.VideoCaptureOpenFileParams(NativeHandle, nativeFilename, (int)apiPreference, nativeParameters, nativeParameters.Length, out int opened));
             return opened != 0;
         }
 
@@ -302,7 +370,78 @@ namespace OpenCvSharp.VideoIO
         public bool Open(int index, VideoCaptureAPIs apiPreference = VideoCaptureAPIs.Any)
         {
             ThrowIfDisposed();
+            ReleaseOwnedStreamReader();
             NativeException.ThrowIfError(NativeMethods.VideoCaptureOpenIndex(NativeHandle, index, (int)apiPreference, out int opened));
+            return opened != 0;
+        }
+
+        /// <summary>
+        /// Opens a camera device with parameter pairs.
+        /// 使用参数对打开摄像头设备。
+        /// </summary>
+        public bool Open(int index, VideoCaptureAPIs apiPreference, params int[] parameters)
+        {
+            ThrowIfDisposed();
+            int[] nativeParameters = NormalizeParameters(parameters);
+            ReleaseOwnedStreamReader();
+            NativeException.ThrowIfError(NativeMethods.VideoCaptureOpenIndexParams(NativeHandle, index, (int)apiPreference, nativeParameters, nativeParameters.Length, out int opened));
+            return opened != 0;
+        }
+
+        /// <summary>
+        /// Opens a managed stream with parameter pairs.
+        /// 使用参数对打开托管流。
+        /// </summary>
+        internal bool OpenStreamCore(Stream stream, VideoCaptureAPIs apiPreference, bool leaveOpen, int[] parameters)
+        {
+            ThrowIfDisposed();
+            if (stream == null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+            int[] nativeParameters = NormalizeParameters(parameters);
+            ReleaseOwnedStreamReader();
+            var reader = new VideoStreamReader(stream, leaveOpen);
+            try
+            {
+                int status = NativeMethods.VideoCaptureOpenStream(NativeHandle, reader.NativeHandle, (int)apiPreference, nativeParameters, nativeParameters.Length, out int opened);
+                reader.ThrowIfCallbackFailed();
+                NativeException.ThrowIfError(status);
+                if (opened != 0)
+                {
+                    streamReader = reader;
+                    ownsStreamReader = true;
+                    reader = null!;
+                }
+                return opened != 0;
+            }
+            finally
+            {
+                reader?.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Opens a previously created stream reader.
+        /// 打开已有的流读取器。
+        /// </summary>
+        internal bool OpenStreamReaderCore(VideoStreamReader reader, VideoCaptureAPIs apiPreference, int[] parameters)
+        {
+            ThrowIfDisposed();
+            if (reader == null)
+            {
+                throw new ArgumentNullException(nameof(reader));
+            }
+            int[] nativeParameters = NormalizeParameters(parameters);
+            ReleaseOwnedStreamReader();
+            int status = NativeMethods.VideoCaptureOpenStream(NativeHandle, reader.NativeHandle, (int)apiPreference, nativeParameters, nativeParameters.Length, out int opened);
+            reader.ThrowIfCallbackFailed();
+            NativeException.ThrowIfError(status);
+            if (opened != 0)
+            {
+                streamReader = reader;
+                ownsStreamReader = false;
+            }
             return opened != 0;
         }
 
@@ -314,6 +453,7 @@ namespace OpenCvSharp.VideoIO
         {
             ThrowIfDisposed();
             NativeException.ThrowIfError(NativeMethods.VideoCaptureRelease(NativeHandle));
+            ReleaseOwnedStreamReader();
         }
 
         /// <summary>
@@ -440,6 +580,38 @@ namespace OpenCvSharp.VideoIO
         }
 
         /// <summary>
+        /// Waits until one of the captures has a ready frame.
+        /// 等待捕获对象中的任意一个准备好帧。
+        /// </summary>
+        public static bool WaitAny(IReadOnlyList<VideoCapture> streams, out int[] readyIndices, long timeoutNs = 0)
+        {
+            if (streams == null)
+            {
+                throw new ArgumentNullException(nameof(streams));
+            }
+            if (streams.Count == 0)
+            {
+                throw new ArgumentException("At least one capture is required.", nameof(streams));
+            }
+            var nativeCaptures = new IntPtr[streams.Count];
+            for (int i = 0; i < streams.Count; i++)
+            {
+                if (streams[i] == null)
+                {
+                    throw new ArgumentException("The capture list cannot contain null entries.", nameof(streams));
+                }
+                nativeCaptures[i] = streams[i].NativeHandle;
+            }
+
+            var rawReadyIndices = new int[streams.Count];
+            NativeException.ThrowIfError(NativeMethods.VideoCaptureWaitAny(nativeCaptures, nativeCaptures.Length, rawReadyIndices, rawReadyIndices.Length, timeoutNs, out int readyCount));
+            readyCount = Math.Max(0, Math.Min(readyCount, rawReadyIndices.Length));
+            readyIndices = new int[readyCount];
+            Array.Copy(rawReadyIndices, readyIndices, readyCount);
+            return readyCount > 0;
+        }
+
+        /// <summary>
         /// Releases the native capture object.
         /// 释放 native 捕获对象。
         /// </summary>
@@ -458,6 +630,8 @@ namespace OpenCvSharp.VideoIO
                     handle.Dispose();
                 }
 
+                ReleaseOwnedStreamReader();
+
                 disposed = true;
             }
         }
@@ -475,6 +649,31 @@ namespace OpenCvSharp.VideoIO
             if (disposed)
             {
                 throw new ObjectDisposedException(GetType().FullName);
+            }
+        }
+
+        private static int[] NormalizeParameters(int[]? parameters)
+        {
+            if (parameters == null || parameters.Length == 0)
+            {
+                return Array.Empty<int>();
+            }
+            if ((parameters.Length & 1) != 0)
+            {
+                throw new ArgumentException("VideoIO parameters must contain key/value pairs.", nameof(parameters));
+            }
+            return parameters;
+        }
+
+        private void ReleaseOwnedStreamReader()
+        {
+            VideoStreamReader? reader = streamReader;
+            bool owns = ownsStreamReader;
+            streamReader = null;
+            ownsStreamReader = false;
+            if (owns)
+            {
+                reader?.Dispose();
             }
         }
     }

@@ -5,6 +5,8 @@
 #include "open_cv_5_sharp/core/decomp.h"
 #include "open_cv_5_sharp/core/mat.h"
 #include "open_cv_5_sharp/core/operations.h"
+#include "open_cv_5_sharp/core/persistence.h"
+#include "open_cv_5_sharp/core/utility.h"
 #include "open_cv_5_sharp/dnn/dnn.h"
 #include "open_cv_5_sharp/error.h"
 #include "open_cv_5_sharp/export.h"

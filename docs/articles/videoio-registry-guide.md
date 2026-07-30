@@ -7,14 +7,18 @@
 ## Covered APIs / 已覆盖接口
 
 - `GetBackends`: returns available backend IDs as `VideoCaptureAPIs[]`.
+- Category lists: `GetCameraBackends`, `GetStreamBackends`, `GetStreamBufferedBackends`, and `GetWriterBackends`.
 - `GetBackendName`: returns a backend name such as `FFMPEG`, `MSMF`, or `DSHOW`.
 - `HasBackend`: returns whether a backend is available.
 - `IsBackendBuiltIn`: returns whether a backend is built into OpenCV rather than loaded as a plugin.
+- Plugin queries return `VideoIOPluginVersion` with ABI, API, and version text. The query is meaningful only for a backend accepted by the selected registry category; OpenCV may report an error for an unknown or incompatible ID.
 
 - `GetBackends`：以 `VideoCaptureAPIs[]` 返回可用后端 ID。
 - `GetBackendName`：返回后端名称，例如 `FFMPEG`、`MSMF` 或 `DSHOW`。
 - `HasBackend`：返回指定后端是否可用。
 - `IsBackendBuiltIn`：返回指定后端是否内建于 OpenCV，而不是以插件方式加载。
+- 分类列表：`GetCameraBackends`、`GetStreamBackends`、`GetStreamBufferedBackends` 和 `GetWriterBackends`。
+- 插件查询返回包含 ABI、API 和版本文本的 `VideoIOPluginVersion`。查询只对对应 registry 分类接受的后端有意义；对于未知或不兼容 ID，OpenCV 可能报告错误。
 
 ## Query Backends / 查询后端
 

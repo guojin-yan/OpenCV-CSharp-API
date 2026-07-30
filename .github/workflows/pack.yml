@@ -35,10 +35,6 @@ on:
         description: Existing real OpenCV source directory on the selected runner when synthetic validation is false
         required: false
         default: ""
-      opencv_install_dir:
-        description: Optional existing real OpenCV install directory on the selected runner when synthetic validation is false
-        required: false
-        default: ""
       real_runtime_artifact_run_id:
         description: Optional workflow run id containing runtime-input-<rid>-<profile> artifact handoffs when synthetic validation is false
         required: false
@@ -49,21 +45,19 @@ on:
         default: "false"
 
 permissions:
-  actions: read
   contents: read
-  packages: write
 
 jobs:
   validate:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Reject synthetic publish inputs
         if: ${{ inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
         shell: pwsh
@@ -75,14 +69,17 @@ jobs:
   pack-managed:
     needs: validate
     runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Restore
         run: dotnet restore ./OpenCV-CSharp-API.slnx
       - name: Build
@@ -97,7 +94,7 @@ jobs:
             -NoBuild `
             -NoRestore
       - name: Upload managed package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: nupkg-managed
           path: artifacts/packages/*.nupkg
@@ -220,14 +217,18 @@ jobs:
             profile: mini
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
+    permissions:
+      actions: read
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Reject synthetic publish
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
         shell: pwsh
@@ -250,7 +251,7 @@ jobs:
           "opencv_install_dir=$($result.OpenCvInstallDir)" >> $env:GITHUB_OUTPUT
       - name: Download real runtime input artifact
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.validate_synthetic_runtime != 'true' && inputs.real_runtime_artifact_run_id != '' }}
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           run-id: ${{ inputs.real_runtime_artifact_run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -265,7 +266,7 @@ jobs:
           $nativeRuntimeDir = '${{ inputs.native_runtime_dir }}'
           $openCvRuntimeDir = '${{ inputs.opencv_runtime_dir }}'
           $openCvSourceDir = '${{ inputs.opencv_source_dir }}'
-          $openCvInstallDir = '${{ inputs.opencv_install_dir }}'
+          $openCvInstallDir = ''
           $artifactRunId = '${{ inputs.real_runtime_artifact_run_id }}'
 
           if (-not [string]::IsNullOrWhiteSpace($artifactRunId)) {
@@ -402,14 +403,14 @@ jobs:
             [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
               ForEach-Object { $_.Groups[1].Value }
           )
-          if ($expectedSources.Count -ne 8 -or
-              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
-              $nativeWrapperSources.Count -ne 8 -or
+          if ($expectedSources.Count -ne 9 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 9 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
-            throw "Ubuntu 22.04 x64 mini provenance does not retain the exact 8-source/304-ABI profile and empty extra CMake arguments."
+            throw "Ubuntu 22.04 x64 mini provenance does not retain the exact 9-source/526-ABI profile and empty extra CMake arguments."
           }
 
           foreach ($containerValue in @(
@@ -466,7 +467,7 @@ jobs:
               throw "Ubuntu 22.04 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "UBUNTU_22_04_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false"
+          Write-Host "UBUNTU_22_04_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false"
       - name: Validate Debian 12 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'debian.12-x64' && matrix.profile == 'mini' && inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -575,15 +576,15 @@ jobs:
             [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
               ForEach-Object { $_.Groups[1].Value }
           )
-          if ($expectedSources.Count -ne 8 -or
-              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
-              $nativeWrapperSources.Count -ne 8 -or
+          if ($expectedSources.Count -ne 9 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 9 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "Debian 12 x64 mini provenance does not retain the exact 8-source/304-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "Debian 12 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -599,9 +600,9 @@ jobs:
               $provenance.HostedLibc -notmatch '^glibc ' -or
               [long]$provenance.HostedMemoryBytes -le 0 -or
               [long]$provenance.HostedDiskAvailableBytes -le 0 -or
-              $provenance.ContainerImage -ne 'debian:12' -or
+              $provenance.ContainerImage -ne 'debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc' -or
               $provenance.ContainerImageId -notmatch '^sha256:' -or
-              $provenance.ContainerImageDigest -notmatch '^debian@sha256:' -or
+              $provenance.ContainerImageDigest -ne 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc' -or
               $provenance.ContainerDistro -ne 'debian' -or
               $provenance.ContainerDistroVersion -notmatch '^12(?:\..*)?$' -or
               $provenance.ContainerArchitecture -ne 'x86_64' -or
@@ -634,7 +635,7 @@ jobs:
               throw "Debian 12 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "DEBIAN_12_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false"
+          Write-Host "DEBIAN_12_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false"
       - name: Validate Fedora 40 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'fedora.40-x64' && matrix.profile == 'mini' && inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -742,15 +743,15 @@ jobs:
             [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
               ForEach-Object { $_.Groups[1].Value }
           )
-          if ($expectedSources.Count -ne 8 -or
-              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
-              $nativeWrapperSources.Count -ne 8 -or
+          if ($expectedSources.Count -ne 9 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 9 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "Fedora 40 x64 mini provenance does not retain the exact 8-source/304-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "Fedora 40 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -766,9 +767,9 @@ jobs:
               $provenance.HostedLibc -notmatch '^glibc ' -or
               [long]$provenance.HostedMemoryBytes -le 0 -or
               [long]$provenance.HostedDiskAvailableBytes -le 0 -or
-              $provenance.ContainerImage -ne 'fedora:40' -or
+              $provenance.ContainerImage -ne 'fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed' -or
               $provenance.ContainerImageId -notmatch '^sha256:' -or
-              $provenance.ContainerImageDigest -notmatch '^fedora@sha256:' -or
+              $provenance.ContainerImageDigest -ne 'fedora@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed' -or
               $provenance.ContainerDistro -ne 'fedora' -or
               $provenance.ContainerDistroVersion -notmatch '^40(?:\..*)?$' -or
               $provenance.ContainerArchitecture -ne 'x86_64' -or
@@ -801,7 +802,7 @@ jobs:
               throw "Fedora 40 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "FEDORA_40_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false"
+          Write-Host "FEDORA_40_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false"
       - name: Validate Rocky Linux 9 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'rocky.9-x64' && matrix.profile == 'mini' && inputs.rid == 'rocky.9-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -909,15 +910,15 @@ jobs:
             [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
               ForEach-Object { $_.Groups[1].Value }
           )
-          if ($expectedSources.Count -ne 8 -or
-              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
-              $nativeWrapperSources.Count -ne 8 -or
+          if ($expectedSources.Count -ne 9 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 9 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "Rocky Linux 9 x64 mini provenance does not retain the exact 8-source/304-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "Rocky Linux 9 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -933,9 +934,9 @@ jobs:
               $provenance.HostedLibc -notmatch '^glibc ' -or
               [long]$provenance.HostedMemoryBytes -le 0 -or
               [long]$provenance.HostedDiskAvailableBytes -le 0 -or
-              $provenance.ContainerImage -ne 'rockylinux:9' -or
+              $provenance.ContainerImage -ne 'rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6' -or
               $provenance.ContainerImageId -notmatch '^sha256:' -or
-              $provenance.ContainerImageDigest -notmatch '(^|,)rockylinux@sha256:' -or
+              $provenance.ContainerImageDigest -ne 'rockylinux@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6' -or
               $provenance.ContainerDistro -ne 'rocky' -or
               $provenance.ContainerDistroVersion -notmatch '^9(?:\..*)?$' -or
               $provenance.ContainerArchitecture -ne 'x86_64' -or
@@ -968,7 +969,7 @@ jobs:
               throw "Rocky Linux 9 x64 mini provenance retained forbidden foreign or full-profile workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "ROCKY_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false extra_cmake_args=empty"
+          Write-Host "ROCKY_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false extra_cmake_args=empty"
       - name: Validate RHEL 9 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'rhel.9-x64' && matrix.profile == 'mini' && inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1076,15 +1077,15 @@ jobs:
             [regex]::Matches($miniMatch.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') |
               ForEach-Object { $_.Groups[1].Value }
           )
-          if ($expectedSources.Count -ne 8 -or
-              [int]$provenance.NativeWrapperSourceCount -ne 8 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 304 -or
-              $nativeWrapperSources.Count -ne 8 -or
+          if ($expectedSources.Count -ne 9 -or
+              [int]$provenance.NativeWrapperSourceCount -ne 9 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "RHEL 9 x64 mini provenance does not retain the exact 8-source/304-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "RHEL 9 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -1100,9 +1101,9 @@ jobs:
               $provenance.HostedLibc -notmatch '^glibc ' -or
               [long]$provenance.HostedMemoryBytes -le 0 -or
               [long]$provenance.HostedDiskAvailableBytes -le 0 -or
-              $provenance.ContainerImage -ne 'registry.access.redhat.com/ubi9/ubi:9.8' -or
+              $provenance.ContainerImage -ne 'registry.access.redhat.com/ubi9/ubi:9.8@sha256:50701171b9917ed51048b614924598d45b00bce9a64b73860c057922fc13bec2' -or
               $provenance.ContainerImageId -notmatch '^sha256:' -or
-              $provenance.ContainerImageDigest -notmatch '(^|,)registry\.access\.redhat\.com/ubi9/ubi@sha256:' -or
+              $provenance.ContainerImageDigest -ne 'registry.access.redhat.com/ubi9/ubi@sha256:50701171b9917ed51048b614924598d45b00bce9a64b73860c057922fc13bec2' -or
               $provenance.ContainerDistro -ne 'rhel' -or
               $provenance.ContainerDistroVersion -notmatch '^9\.8(?:\..*)?$' -or
               $provenance.ContainerArchitecture -ne 'x86_64' -or
@@ -1135,7 +1136,7 @@ jobs:
               throw "RHEL 9 x64 mini provenance retained forbidden foreign or full-profile workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "RHEL_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=8 abi_functions=304 synthetic=false extra_cmake_args=empty"
+          Write-Host "RHEL_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false extra_cmake_args=empty"
       - name: Validate Windows x64 runtime input provenance
         if: ${{ matrix.rid == 'win-x64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-x64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1240,14 +1241,14 @@ jobs:
             )
             $missingSources = @($expectedMiniSources | Where-Object { $nativeWrapperSources -notcontains $_ })
             $unexpectedSources = @($nativeWrapperSources | Where-Object { $expectedMiniSources -notcontains $_ })
-            if ([int]$provenance.NativeWrapperSourceCount -ne 8 -or
-                [int]$provenance.NativeAbiFunctionCount -ne 304 -or
-                $nativeWrapperSources.Count -ne 8 -or
+            if ([int]$provenance.NativeWrapperSourceCount -ne 9 -or
+                [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+                $nativeWrapperSources.Count -ne 9 -or
                 $missingSources.Count -ne 0 -or
                 $unexpectedSources.Count -ne 0 -or
                 $provenance.OpenCvExtraCMakeArgs -ne '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' -or
                 ([string]$provenance.OpenCvCMakeArguments).IndexOf('-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND', [System.StringComparison]::Ordinal) -lt 0) {
-              throw "Windows mini runtime-input provenance does not retain the exact 8-source/304-ABI reduced build evidence."
+              throw "Windows mini runtime-input provenance does not retain the exact 9-source/526-ABI reduced build evidence."
             }
           }
 
@@ -1271,6 +1272,146 @@ jobs:
             throw "Windows runtime-input provenance host, build, or PE evidence is not factual win-x64/$profileName."
           }
           Write-Host "WINDOWS_X64_RUNTIME_INPUT_PROVENANCE_OK profile=$profileName files=$expectedPayloadFileCount modules=$expectedRuntimeFileCount synthetic=false"
+      - name: Validate Windows x86 full runtime input provenance
+        if: ${{ matrix.rid == 'win-x86' && matrix.profile == 'full' && inputs.rid == 'win-x86' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' }}
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace('${{ inputs.real_runtime_artifact_run_id }}')) {
+            throw "Non-synthetic win-x86/full packaging requires an explicit runtime-input producer run id."
+          }
+
+          $artifactRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/real-runtime-inputs/win-x86-full'
+          $provenance = Get-Content -LiteralPath (Join-Path $artifactRoot 'runtime-input.provenance.json') -Raw | ConvertFrom-Json
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $profile = @($matrix.profiles | Where-Object { $_.name -eq 'full' })
+          if ($profile.Count -ne 1) {
+            throw "The full runtime profile was not found exactly once."
+          }
+
+          $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
+          $compatibilityLoaderName = 'Open' + 'Cv5Sharp.Native.dll'
+          $expectedModules = @($profile[0].modules)
+          $expectedRuntimeNames = @($expectedModules | ForEach-Object { "opencv_$($_)$binarySuffix.dll" })
+          $actualModules = @($provenance.RequiredModules)
+          $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
+          $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
+          if ($expectedModules.Count -ne 16 -or
+              $provenance.Rid -ne 'win-x86' -or
+              $provenance.OpenCvRid -ne 'windows-x86' -or
+              $provenance.PlatformFamily -ne 'windows' -or
+              $provenance.RuntimeProfile -ne 'full' -or
+              $provenance.RuntimeProfilePackageIdSuffix -ne '' -or
+              $provenance.BuildList -ne [string]$profile[0].buildList -or
+              [bool]$provenance.SyntheticRuntimeInputs -or
+              $actualModules.Count -ne 16 -or
+              @($expectedModules | Where-Object { $actualModules -notcontains $_ }).Count -ne 0 -or
+              @($actualModules | Where-Object { $expectedModules -notcontains $_ }).Count -ne 0 -or
+              $actualRuntimeNames.Count -ne 16 -or
+              @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
+              $actualLoaderNames.Count -ne 2 -or
+              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll' -or
+              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+            throw "Windows x86 runtime-input provenance does not match the exact 18-I386-DLL full producer contract."
+          }
+
+          foreach ($requiredValue in @(
+              [string]$provenance.RunnerImage,
+              [string]$provenance.RunnerImageVersion,
+              [string]$provenance.HostedOsCaption,
+              [string]$provenance.HostedOsVersion,
+              [string]$provenance.HostedOsBuildNumber,
+              [string]$provenance.HostedCpuModel,
+              [string]$provenance.HostedMemoryBytes,
+              [string]$provenance.HostedDiskAvailableBytes,
+              [string]$provenance.VisualStudioVersion,
+              [string]$provenance.MsvcVersion,
+              [string]$provenance.WindowsSdkVersion,
+              [string]$provenance.CMakeVersion,
+              [string]$provenance.CompilerPath,
+              [string]$provenance.LinkerPath,
+              [string]$provenance.LibrarianPath,
+              [string]$provenance.DumpbinPath,
+              [string]$provenance.OpenCvCMakeArguments,
+              [string]$provenance.OpenCvCpuConfiguration,
+              [string]$provenance.ExcludedForeignToolDirectories,
+              [string]$provenance.OpenCvAsmConfiguration,
+              [string]$provenance.PeAuditEvidence,
+              [string]$provenance.WindowsTargetExecutionEvidence,
+              [string]$provenance.NativeWrapperSources)) {
+            if ([string]::IsNullOrWhiteSpace($requiredValue)) {
+              throw "Windows x86 runtime-input provenance is missing required host, MSVC, profile, PE, or WoW64 evidence."
+            }
+          }
+
+          try {
+            $nativeWrapperSources = @(([string]$provenance.NativeWrapperSources | ConvertFrom-Json))
+            $openCvCMakeArguments = @(([string]$provenance.OpenCvCMakeArguments | ConvertFrom-Json))
+            $excludedForeignToolDirectories = @(([string]$provenance.ExcludedForeignToolDirectories | ConvertFrom-Json))
+          }
+          catch {
+            throw "Windows x86 runtime-input provenance contains invalid source, CMake argument, or excluded PATH JSON."
+          }
+          $cmakeText = Get-Content -LiteralPath ./src/OpenCvSharp.Native/CMakeLists.txt -Raw
+          function Get-NativeSourceList([string]$variableName) {
+            $match = [regex]::Match($cmakeText, "(?s)set\($variableName(?<body>.*?)\)")
+            if (-not $match.Success) { throw "Native CMake source list was not found: $variableName" }
+            return @([regex]::Matches($match.Groups['body'].Value, '(?m)^\s*(src/[^\s\)]+)\s*$') | ForEach-Object { $_.Groups[1].Value })
+          }
+          $expectedSources = @(
+            @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES') +
+            @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES'))
+          if ([int]$provenance.NativeWrapperSourceCount -ne 49 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 2438 -or
+              $nativeWrapperSources.Count -ne 49 -or
+              @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
+              @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
+              -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
+            throw "Windows x86 provenance does not retain the exact 49-source/2438-ABI full profile with empty extra CMake arguments."
+          }
+
+          foreach ($excludedDirectory in $excludedForeignToolDirectories) {
+            if ([string]::IsNullOrWhiteSpace([string]$excludedDirectory) -or
+                -not [System.IO.Path]::IsPathRooted([string]$excludedDirectory)) {
+              throw "Windows x86 provenance contains an invalid excluded PATH directory: $excludedDirectory"
+            }
+          }
+          $cmakeArgumentText = $openCvCMakeArguments -join [Environment]::NewLine
+          $expectedPePattern = '^WINDOWS_PE_AUDIT_OK rid=win-x86 profile=full files=18 machine=I386 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0 loader_equal=true$'
+          $expectedAsmPattern = '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$'
+          if ($provenance.HostedRunner -ne 'windows-latest' -or
+              $provenance.HostedArchitecture -ne 'X64' -or
+              $provenance.HostedProcessArchitecture -ne 'X64' -or
+              $provenance.HostedPackageArchitecture -ne 'x86' -or
+              -not ([string]$provenance.VisualStudioVersion).StartsWith('18.', [System.StringComparison]::Ordinal) -or
+              $provenance.CMakeGenerator -ne 'Visual Studio 18 2026' -or
+              $provenance.CMakePlatform -ne 'Win32' -or
+              $provenance.BuildConfiguration -ne 'Release' -or
+              $provenance.CompilerPath -notmatch '(?i)[\\/]bin[\\/]Hostx64[\\/]x86[\\/]cl\.exe$' -or
+              $provenance.LinkerPath -notmatch '(?i)[\\/]bin[\\/]Hostx64[\\/]x86[\\/]link\.exe$' -or
+              $provenance.LibrarianPath -notmatch '(?i)[\\/]bin[\\/]Hostx64[\\/]x86[\\/]lib\.exe$' -or
+              $provenance.DumpbinPath -notmatch '(?i)[\\/]bin[\\/]Hostx64[\\/]x86[\\/]dumpbin\.exe$' -or
+              $cmakeArgumentText.IndexOf('Win32', [System.StringComparison]::Ordinal) -lt 0 -or
+              $cmakeArgumentText.IndexOf('host=x64', [System.StringComparison]::Ordinal) -lt 0 -or
+              $provenance.OpenCvAsmConfiguration -notmatch $expectedAsmPattern -or
+              $provenance.PeAuditEvidence -notmatch $expectedPePattern -or
+              $provenance.WindowsTargetExecutionEvidence -ne 'WINDOWS_X86_WOW64_PROBE_OK pointer_bits=32 process_machine=0x014C native_machine=0x8664' -or
+              $provenance.OpenCvCpuConfiguration -notmatch 'CPU_BASELINE') {
+            throw "Windows x86 runtime-input provenance host, Hostx64/x86 toolchain, build, PE, or WoW64 execution evidence is not factual."
+          }
+          $architectureEvidence = @(
+            [string]$provenance.CompilerPath,
+            [string]$provenance.LinkerPath,
+            [string]$provenance.LibrarianPath,
+            [string]$provenance.DumpbinPath,
+            [string]$provenance.OpenCvCMakeArguments,
+            [string]$provenance.PeAuditEvidence) -join [Environment]::NewLine
+          foreach ($forbiddenToken in @('Hostx64\x64', 'MachineX64', 'ARM64', 'QEMU', 'emulation', 'wine')) {
+            if ($architectureEvidence.IndexOf($forbiddenToken, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+              throw "Windows x86 provenance retained foreign architecture or emulation evidence: $forbiddenToken"
+            }
+          }
+          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=49 abi_functions=2438 synthetic=false machine=I386 wow64=true"
       - name: Validate Windows ARM64 runtime input provenance
         if: ${{ matrix.rid == 'win-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1374,8 +1515,8 @@ jobs:
           $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
-          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2438 }
           $expectedExtraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
@@ -1538,8 +1679,8 @@ jobs:
           $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
-          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2438 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -1710,8 +1851,8 @@ jobs:
           $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
-          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2438 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -1890,8 +2031,8 @@ jobs:
           $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
-          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2438 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -2064,8 +2205,8 @@ jobs:
           $miniSources = @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES')
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
-          $expectedSourceCount = if ($profileName -eq 'mini') { 8 } else { 45 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 304 } else { 1966 }
+          $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2438 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -2168,7 +2309,7 @@ jobs:
           pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 @packArgs
       - name: Upload runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: nupkg-${{ matrix.rid }}-${{ matrix.profile }}
           path: artifacts/packages/*.nupkg
@@ -2189,9 +2330,9 @@ jobs:
     if: ${{ inputs.rid == 'all' && inputs.runtime_profile == 'all' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Download package artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           path: artifacts/pack-download
       - name: Verify package artifact matrix
@@ -2210,15 +2351,15 @@ jobs:
     if: ${{ inputs.rid == 'all' && inputs.runtime_profile == 'all' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Download package artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           path: artifacts/pack-download
       - name: Verify package consumer restore
@@ -2236,13 +2377,13 @@ jobs:
     if: ${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini'))) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Record hosted Ubuntu x64 consumer evidence
         shell: bash
         run: |
@@ -2278,12 +2419,12 @@ jobs:
               ;;
           esac
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted/nupkg-managed
       - name: Download selected runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
@@ -2313,6 +2454,164 @@ jobs:
             -SelectedRuntimeProfile $runtimeProfile `
             -RunNativeSmoke
 
+  verify-targeted-real-windows-x86:
+    needs:
+      - pack-managed
+      - pack-runtime
+    if: ${{ inputs.rid == 'win-x86' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: |
+            10.0.302
+            9.0.316
+            8.0.423
+      - name: Require AMD64 Windows host and install factual x86 .NET runtime
+        id: dotnet_x86
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $osArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+          $processArchitecture = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
+          if ($env:RUNNER_ARCH -ne 'X64' -or
+              $env:PROCESSOR_ARCHITECTURE -ne 'AMD64' -or
+              $osArchitecture -ne 'X64' -or
+              $processArchitecture -ne 'X64' -or
+              -not [Environment]::Is64BitProcess -or
+              -not [Environment]::Is64BitOperatingSystem) {
+            throw "Packaged win-x86/full verification requires an AMD64 Windows host with supported WoW64."
+          }
+          foreach ($name in @('OpenCvNativeRuntimeDir', ('Open' + 'Cv5SharpNativeRuntimeDir'), 'OPENCV_CSHARP_OPENCV_RUNTIME_ROOT', ('OPENCV' + '5SHARP_OPENCV_RUNTIME_ROOT'))) {
+            if (-not [string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($name))) {
+              throw "Packaged Windows x86 consumer must not use a native runtime search override: $name"
+            }
+          }
+          foreach ($forbiddenPath in @('artifacts\real-runtime-inputs', 'opencv-build', 'opencv-install', 'native-linked')) {
+            if (($env:PATH -split ';') | Where-Object { $_.IndexOf($forbiddenPath, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 }) {
+              throw "Packaged Windows x86 consumer PATH contains a producer directory: $forbiddenPath"
+            }
+          }
+
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $installationPath = (& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath).Trim()
+          $dumpbin = Get-ChildItem -LiteralPath (Join-Path $installationPath 'VC/Tools/MSVC') -Recurse -File -Filter dumpbin.exe |
+            Where-Object { $_.FullName -match '[\\/]bin[\\/]Hostx64[\\/]x86[\\/]dumpbin\.exe$' } |
+            Sort-Object FullName -Descending |
+            Select-Object -First 1
+          if ($null -eq $dumpbin) {
+            throw "Factual Hostx64/x86 dumpbin.exe was not found."
+          }
+
+          $runtimeVersions = @(
+            dotnet --list-runtimes |
+              ForEach-Object {
+                $match = [regex]::Match([string]$_, '^Microsoft\.NETCore\.App (8\.0\.\d+) ')
+                if ($match.Success) { [version]$match.Groups[1].Value }
+              } |
+              Sort-Object -Descending)
+          if ($runtimeVersions.Count -eq 0) {
+            throw "No exact .NET 8 runtime version was available for x86 installation."
+          }
+          $runtimeVersion = $runtimeVersions[0].ToString()
+          $installRoot = Join-Path $env:RUNNER_TEMP "dotnet-x86-$runtimeVersion"
+          $installScript = Join-Path $env:RUNNER_TEMP 'dotnet-install-x86.ps1'
+          $expectedInstallScriptSha256 = 'BB1CE92F4397E24D4736A4658B9728FB8F9DB64A0D3F8E636BA408A866A6661D'
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/dotnet/install-scripts/9c8552ae791982d3674fbb4d6ad887e536e7f506/src/dotnet-install.ps1 -OutFile $installScript
+          $installScriptSha256 = (Get-FileHash -LiteralPath $installScript -Algorithm SHA256).Hash
+          if (-not $installScriptSha256.Equals($expectedInstallScriptSha256, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "The commit-pinned dotnet-install.ps1 payload hash does not match the audited source. Expected $expectedInstallScriptSha256, actual $installScriptSha256."
+          }
+          & $installScript -Runtime dotnet -Version $runtimeVersion -Architecture x86 -InstallDir $installRoot -NoPath
+          if ($LASTEXITCODE -ne 0) {
+            throw "Exact .NET $runtimeVersion x86 runtime installation failed."
+          }
+          $x86Host = Join-Path $installRoot 'dotnet.exe'
+          $stream = [System.IO.File]::OpenRead($x86Host)
+          $reader = [System.IO.BinaryReader]::new($stream)
+          try {
+            $stream.Position = 0x3c
+            $peOffset = $reader.ReadInt32()
+            $stream.Position = $peOffset
+            if ($reader.ReadUInt32() -ne 0x00004550 -or $reader.ReadUInt16() -ne 0x014c) {
+              throw "Installed x86 dotnet host is not an I386/0x014c PE image."
+            }
+          }
+          finally {
+            $reader.Dispose()
+            $stream.Dispose()
+          }
+          $hostInfo = @(& $x86Host --info 2>&1)
+          $hostExitCode = $LASTEXITCODE
+          $hostInfo | ForEach-Object { Write-Host $_ }
+          $hostInfoText = $hostInfo -join [Environment]::NewLine
+          if ($hostExitCode -ne 0 -or
+              $hostInfoText -notmatch '(?m)^\s*Architecture:\s+x86\s*$' -or
+              $hostInfoText -notmatch '(?m)^\s*RID:\s+win-x86\s*$') {
+            throw "Installed .NET runtime host did not report factual win-x86 architecture."
+          }
+          Write-Host "WINDOWS_X86_DOTNET_HOST_OK version=$runtimeVersion machine=I386 host=$x86Host install_script_sha256=$installScriptSha256 OSArchitecture=$osArchitecture verifier_process=$processArchitecture"
+          "host_path=$x86Host" >> $env:GITHUB_OUTPUT
+          "dumpbin_path=$($dumpbin.FullName)" >> $env:GITHUB_OUTPUT
+          "runtime_version=$runtimeVersion" >> $env:GITHUB_OUTPUT
+          "install_script_sha256=$installScriptSha256" >> $env:GITHUB_OUTPUT
+      - name: Download managed package artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: nupkg-managed
+          path: artifacts/pack-targeted-windows-x86/nupkg-managed
+      - name: Download Windows x86 full runtime package artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: nupkg-win-x86-full
+          path: artifacts/pack-targeted-windows-x86/nupkg-win-x86-full
+      - name: Verify selected Windows x86 package artifacts
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-windows-x86 `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid win-x86 `
+            -SelectedRuntimeProfile full
+      - name: Audit packaged Windows x86 full PE closure
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $runtimeArtifactDirectory = Join-Path ./artifacts/pack-targeted-windows-x86 'nupkg-win-x86-full'
+          $packages = @(Get-ChildItem -LiteralPath $runtimeArtifactDirectory -File -Filter '*.nupkg')
+          if ($packages.Count -ne 1) {
+            throw "Exactly one win-x86/full runtime package was expected."
+          }
+          $extractRoot = Join-Path $env:RUNNER_TEMP 'opencv-windows-x86-package-audit'
+          if (Test-Path -LiteralPath $extractRoot -PathType Container) {
+            Remove-Item -LiteralPath $extractRoot -Recurse -Force
+          }
+          [System.IO.Compression.ZipFile]::ExtractToDirectory($packages[0].FullName, $extractRoot)
+          $nativeDirectory = Join-Path $extractRoot 'runtimes/win-x86/native'
+          pwsh -NoProfile -File ./scripts/Test-WindowsRuntimePeClosure.ps1 `
+            -RuntimeDirectory $nativeDirectory `
+            -Rid win-x86 `
+            -RuntimeProfile full `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -DumpbinPath '${{ steps.dotnet_x86.outputs.dumpbin_path }}'
+      - name: Restore, build, and run Windows x86 package consumer in an X86 process
+        shell: pwsh
+        run: |
+          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot ./artifacts/pack-targeted-windows-x86 `
+            -ExpectedPackageVersion $packageVersion `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid win-x86 `
+            -SelectedRuntimeProfile full `
+            -CompileNativeSmoke `
+            -RunNativeSmoke `
+            -NativeExecutionHost '${{ steps.dotnet_x86.outputs.host_path }}'
+
   verify-targeted-real-windows-x64:
     needs:
       - pack-managed
@@ -2320,13 +2619,13 @@ jobs:
     if: ${{ inputs.rid == 'win-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Require actual Windows x64 package consumer
         shell: pwsh
         run: |
@@ -2353,12 +2652,12 @@ jobs:
           }
           Write-Host "WINDOWS_X64_PACKAGE_CONSUMER_HOST_OK PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess)"
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-windows/nupkg-managed
       - name: Download Windows x64 runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-windows/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
@@ -2413,13 +2712,13 @@ jobs:
     if: ${{ inputs.rid == 'win-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: windows-11-vs2026-arm
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Require actual Windows ARM64 package consumer
         shell: pwsh
         run: |
@@ -2448,12 +2747,12 @@ jobs:
           }
           Write-Host "WINDOWS_ARM64_PACKAGE_CONSUMER_HOST_OK RUNNER_ARCH=$($env:RUNNER_ARCH) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) PROCESSOR_ARCHITEW6432=$($env:PROCESSOR_ARCHITEW6432)"
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-windows-arm64/nupkg-managed
       - name: Download Windows ARM64 runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-win-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-windows-arm64/nupkg-win-arm64-${{ inputs.runtime_profile }}
@@ -2508,13 +2807,13 @@ jobs:
     if: ${{ inputs.rid == 'ubuntu.24.04-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Verify native Ubuntu ARM64 consumer boundary
         shell: bash
         run: |
@@ -2531,12 +2830,12 @@ jobs:
           echo "UBUNTU_24_04_ARM64_CONSUMER_EVIDENCE profile=${{ inputs.runtime_profile }} ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc"
           dotnet --info
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-ubuntu-arm64/nupkg-managed
       - name: Download Ubuntu ARM64 runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-ubuntu.24.04-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-ubuntu-arm64/nupkg-ubuntu.24.04-arm64-${{ inputs.runtime_profile }}
@@ -2654,14 +2953,14 @@ jobs:
     if: ${{ inputs.rid == 'ubuntu.22.04-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-managed
       - name: Download Ubuntu 22.04 ARM64 runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-ubuntu.22.04-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-ubuntu.22.04-arm64-${{ inputs.runtime_profile }}
@@ -2726,8 +3025,10 @@ jobs:
               chmod +x /opt/microsoft/powershell/7/pwsh
               ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
-              curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
-              bash /tmp/dotnet-install.sh --channel 8.0 --architecture arm64 --install-dir /usr/share/dotnet
+              dotnet_install_script_sha256="082F7685E156738A1B2E2ED8381A621870D4CE8E8C59278034556F05C186EB2E"
+              curl -fsSL https://raw.githubusercontent.com/dotnet/install-scripts/9c8552ae791982d3674fbb4d6ad887e536e7f506/src/dotnet-install.sh -o /tmp/dotnet-install.sh
+              echo "$dotnet_install_script_sha256  /tmp/dotnet-install.sh" | sha256sum -c -
+              bash /tmp/dotnet-install.sh --version 8.0.423 --architecture arm64 --install-dir /usr/share/dotnet
               ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
 
               libc="$(getconf GNU_LIBC_VERSION)"
@@ -2836,10 +3137,15 @@ jobs:
       - pack-runtime
     if: ${{ inputs.rid == 'debian.12-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
-    container: debian:12
+    container: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
     steps:
       - name: Verify Debian 12 container and install tooling
         shell: bash
+        env:
+          MICROSOFT_SIGNING_KEY_SHA256: 2fa9c05d591a1582a9aba276272478c262e95ad00acf60eaee1644d93941e3c6
+          MICROSOFT_SIGNING_KEY_FINGERPRINT: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          POWERSHELL_DEBIAN_PACKAGE_VERSION: 7.6.4-1.deb
+          POWERSHELL_PACKAGE_SEMANTIC_VERSION: 7.6.4
         run: |
           set -euo pipefail
           cat /etc/os-release
@@ -2876,29 +3182,48 @@ jobs:
             unzip \
             zlib1g
           install -d -m 0755 /etc/apt/keyrings
-          curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/keyrings/packages.microsoft.gpg
+          microsoft_key_url="https://packages.microsoft.com/keys/microsoft.asc"
+          microsoft_key="/tmp/microsoft-packages-key.asc"
+          curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"
+          echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -
+          microsoft_key_metadata="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_key")"
+          microsoft_key_fingerprints="$(printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$microsoft_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "uid" { print $10 }' | grep -Fqx "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+          gpg --batch --yes --dearmor --output /etc/apt/keyrings/packages.microsoft.gpg "$microsoft_key"
+          installed_key_fingerprints="$(gpg --batch --show-keys --with-colons --fingerprint /etc/apt/keyrings/packages.microsoft.gpg | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$installed_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
           chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
+          rm -f "$microsoft_key"
           echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft-prod.list
+          echo "MICROSOFT_APT_TRUST_EVIDENCE rid=debian.12-x64 key_sha256=$MICROSOFT_SIGNING_KEY_SHA256 key_fingerprint=$MICROSOFT_SIGNING_KEY_FINGERPRINT signed_by=/etc/apt/keyrings/packages.microsoft.gpg repository=debian/12/prod"
           apt-get update
-          apt-get install -y --no-install-recommends powershell
+          apt-get install -y --no-install-recommends "powershell=$POWERSHELL_DEBIAN_PACKAGE_VERSION"
+          installed_powershell_package_version="$(dpkg-query -W -f='${Version}' powershell)"
+          installed_powershell_package_architecture="$(dpkg-query -W -f='${Architecture}' powershell)"
+          test "$installed_powershell_package_version" = "$POWERSHELL_DEBIAN_PACKAGE_VERSION"
+          test "$installed_powershell_package_architecture" = "amd64"
+          installed_powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
           process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$installed_powershell_version" = "$POWERSHELL_PACKAGE_SEMANTIC_VERSION"
           test "$process_architecture" = "X64"
+          echo "POWERSHELL_APT_TOOLCHAIN_EVIDENCE rid=debian.12-x64 package=powershell package_version=$installed_powershell_package_version semantic_version=$installed_powershell_version package_arch=$installed_powershell_package_architecture process_arch=$process_architecture key_fingerprint=$installed_key_fingerprints"
           echo "DEBIAN_12_X64_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-debian/nupkg-managed
       - name: Download Debian runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-debian.12-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-debian/nupkg-debian.12-x64-${{ inputs.runtime_profile }}
@@ -3020,14 +3345,14 @@ jobs:
     if: ${{ inputs.rid == 'debian.12-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-debian-arm64/nupkg-managed
       - name: Download Debian 12 ARM64 runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-debian.12-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-${{ inputs.runtime_profile }}
@@ -3095,8 +3420,10 @@ jobs:
               chmod +x /opt/microsoft/powershell/7/pwsh
               ln -sf /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
-              curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
-              bash /tmp/dotnet-install.sh --channel 8.0 --architecture arm64 --install-dir /usr/share/dotnet
+              dotnet_install_script_sha256="082F7685E156738A1B2E2ED8381A621870D4CE8E8C59278034556F05C186EB2E"
+              curl -fsSL https://raw.githubusercontent.com/dotnet/install-scripts/9c8552ae791982d3674fbb4d6ad887e536e7f506/src/dotnet-install.sh -o /tmp/dotnet-install.sh
+              echo "$dotnet_install_script_sha256  /tmp/dotnet-install.sh" | sha256sum -c -
+              bash /tmp/dotnet-install.sh --version 8.0.423 --architecture arm64 --install-dir /usr/share/dotnet
               ln -sf /usr/share/dotnet/dotnet /usr/bin/dotnet
 
               libc="$(getconf GNU_LIBC_VERSION)"
@@ -3206,10 +3533,15 @@ jobs:
       - pack-runtime
     if: ${{ inputs.rid == 'fedora.40-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
-    container: fedora:40
+    container: fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed
     steps:
       - name: Verify Fedora 40 container and install tooling
         shell: bash
+        env:
+          MICROSOFT_SIGNING_KEY_SHA256: 2fa9c05d591a1582a9aba276272478c262e95ad00acf60eaee1644d93941e3c6
+          MICROSOFT_SIGNING_KEY_FINGERPRINT: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          POWERSHELL_RPM_PACKAGE_NEVRA: powershell-7.6.4-1.rh.x86_64
+          POWERSHELL_PACKAGE_SEMANTIC_VERSION: 7.6.4
         run: |
           set -euo pipefail
           cat /etc/os-release
@@ -3241,6 +3573,7 @@ jobs:
             ca-certificates \
             curl-minimal \
             diffutils \
+            dnf-plugins-core \
             findutils \
             git \
             gnupg2 \
@@ -3255,28 +3588,60 @@ jobs:
             tzdata \
             unzip \
             zlib
-          rpm --import https://packages.microsoft.com/keys/microsoft.asc
+          microsoft_key_url="https://packages.microsoft.com/keys/microsoft.asc"
+          microsoft_key="/tmp/microsoft-packages-key.asc"
+          microsoft_local_key="/etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft"
+          curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"
+          echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -
+          microsoft_key_metadata="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_key")"
+          microsoft_key_fingerprints="$(printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$microsoft_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "uid" { print $10 }' | grep -Fqx "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+          install -d -m 0755 /etc/pki/rpm-gpg
+          install -o root -g root -m 0644 "$microsoft_key" "$microsoft_local_key"
+          installed_key_fingerprints="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_local_key" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$installed_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          rpm --import "$microsoft_local_key"
+          installed_microsoft_key_package="$(rpm -q gpg-pubkey-be1229cf-5631588c)"
+          rm -f "$microsoft_key"
           # Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path; this is not Fedora identity evidence.
-          curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
-          dnf install -y powershell
+          printf '%s\n' \
+            "[packages-microsoft-com-prod]" \
+            "name=Microsoft Production" \
+            "baseurl=https://packages.microsoft.com/rhel/9/prod/" \
+            "enabled=1" \
+            "gpgcheck=1" \
+            "repo_gpgcheck=1" \
+            "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft" \
+            "sslverify=1" \
+            > /etc/yum.repos.d/microsoft-prod.repo
+          dnf -y makecache --disablerepo="*" --enablerepo="packages-microsoft-com-prod"
+          echo "MICROSOFT_RPM_TRUST_EVIDENCE rid=fedora.40-x64 key_sha256=$MICROSOFT_SIGNING_KEY_SHA256 key_fingerprint=$MICROSOFT_SIGNING_KEY_FINGERPRINT local_key=$microsoft_local_key repository=packages-microsoft-com-prod gpgcheck=1 repo_gpgcheck=1 sslverify=1"
+          dnf repoquery --disablerepo="*" --enablerepo="packages-microsoft-com-prod" --qf "%{name}-%{evr}.%{arch}|%{repoid}" "$POWERSHELL_RPM_PACKAGE_NEVRA" | grep -Fqx "$POWERSHELL_RPM_PACKAGE_NEVRA|packages-microsoft-com-prod"
+          dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"
+          installed_powershell_package_identity="$(rpm -q --qf '%{NAME}|%{VERSION}-%{RELEASE}|%{ARCH}|%{VENDOR}' powershell)"
+          test "$installed_powershell_package_identity" = "powershell|7.6.4-1.rh|x86_64|(none)"
+          installed_powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
           process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$installed_powershell_version" = "$POWERSHELL_PACKAGE_SEMANTIC_VERSION"
           test "$process_architecture" = "X64"
+          echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=fedora.40-x64 package_nevra=$POWERSHELL_RPM_PACKAGE_NEVRA package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture key_package=$installed_microsoft_key_package key_fingerprint=$installed_key_fingerprints repository=packages-microsoft-com-prod"
           echo "FEDORA_40_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=${PLATFORM_ID:-unknown} SUPPORT_END=$SUPPORT_END UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-fedora/nupkg-managed
       - name: Download Fedora runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-fedora.40-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-fedora/nupkg-fedora.40-x64-${{ inputs.runtime_profile }}
@@ -3397,10 +3762,15 @@ jobs:
       - pack-runtime
     if: ${{ inputs.rid == 'rocky.9-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
-    container: rockylinux:9
+    container: rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6
     steps:
       - name: Verify Rocky Linux 9 container and install tooling
         shell: bash
+        env:
+          MICROSOFT_SIGNING_KEY_SHA256: 2fa9c05d591a1582a9aba276272478c262e95ad00acf60eaee1644d93941e3c6
+          MICROSOFT_SIGNING_KEY_FINGERPRINT: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          POWERSHELL_RPM_PACKAGE_NEVRA: powershell-7.6.4-1.rh.x86_64
+          POWERSHELL_PACKAGE_SEMANTIC_VERSION: 7.6.4
         run: |
           set -euo pipefail
           cat /etc/os-release
@@ -3448,28 +3818,60 @@ jobs:
             zlib
           assembler="$(as --version | head -n 1)"
           echo "ROCKY_9_ASSEMBLER_EVIDENCE $assembler"
-          rpm --import https://packages.microsoft.com/keys/microsoft.asc
+          microsoft_key_url="https://packages.microsoft.com/keys/microsoft.asc"
+          microsoft_key="/tmp/microsoft-packages-key.asc"
+          microsoft_local_key="/etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft"
+          curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"
+          echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -
+          microsoft_key_metadata="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_key")"
+          microsoft_key_fingerprints="$(printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$microsoft_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "uid" { print $10 }' | grep -Fqx "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+          install -d -m 0755 /etc/pki/rpm-gpg
+          install -o root -g root -m 0644 "$microsoft_key" "$microsoft_local_key"
+          installed_key_fingerprints="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_local_key" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$installed_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          rpm --import "$microsoft_local_key"
+          installed_microsoft_key_package="$(rpm -q gpg-pubkey-be1229cf-5631588c)"
+          rm -f "$microsoft_key"
           # Microsoft publishes the compatible PowerShell RPM feed under its RHEL 9 path.
-          curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
-          dnf install -y powershell
+          printf '%s\n' \
+            "[packages-microsoft-com-prod]" \
+            "name=Microsoft Production" \
+            "baseurl=https://packages.microsoft.com/rhel/9/prod/" \
+            "enabled=1" \
+            "gpgcheck=1" \
+            "repo_gpgcheck=1" \
+            "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft" \
+            "sslverify=1" \
+            > /etc/yum.repos.d/microsoft-prod.repo
+          dnf -y makecache --disablerepo="*" --enablerepo="packages-microsoft-com-prod"
+          echo "MICROSOFT_RPM_TRUST_EVIDENCE rid=rocky.9-x64 key_sha256=$MICROSOFT_SIGNING_KEY_SHA256 key_fingerprint=$MICROSOFT_SIGNING_KEY_FINGERPRINT local_key=$microsoft_local_key repository=packages-microsoft-com-prod gpgcheck=1 repo_gpgcheck=1 sslverify=1"
+          dnf repoquery --disablerepo="*" --enablerepo="packages-microsoft-com-prod" --qf "%{name}-%{evr}.%{arch}|%{repoid}" "$POWERSHELL_RPM_PACKAGE_NEVRA" | grep -Fqx "$POWERSHELL_RPM_PACKAGE_NEVRA|packages-microsoft-com-prod"
+          dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"
+          installed_powershell_package_identity="$(rpm -q --qf '%{NAME}|%{VERSION}-%{RELEASE}|%{ARCH}|%{VENDOR}' powershell)"
+          test "$installed_powershell_package_identity" = "powershell|7.6.4-1.rh|x86_64|(none)"
+          installed_powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
           process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$installed_powershell_version" = "$POWERSHELL_PACKAGE_SEMANTIC_VERSION"
           test "$process_architecture" = "X64"
+          echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=rocky.9-x64 package_nevra=$POWERSHELL_RPM_PACKAGE_NEVRA package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture key_package=$installed_microsoft_key_package key_fingerprint=$installed_key_fingerprints repository=packages-microsoft-com-prod"
           echo "ROCKY_9_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-rocky/nupkg-managed
       - name: Download Rocky runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-rocky.9-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-rocky/nupkg-rocky.9-x64-${{ inputs.runtime_profile }}
@@ -3590,10 +3992,15 @@ jobs:
       - pack-runtime
     if: ${{ inputs.rid == 'rhel.9-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
-    container: registry.access.redhat.com/ubi9/ubi:9.8
+    container: registry.access.redhat.com/ubi9/ubi:9.8@sha256:50701171b9917ed51048b614924598d45b00bce9a64b73860c057922fc13bec2
     steps:
       - name: Verify RHEL 9 UBI container and install tooling
         shell: bash
+        env:
+          MICROSOFT_SIGNING_KEY_SHA256: 2fa9c05d591a1582a9aba276272478c262e95ad00acf60eaee1644d93941e3c6
+          MICROSOFT_SIGNING_KEY_FINGERPRINT: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          POWERSHELL_RPM_PACKAGE_NEVRA: powershell-7.6.4-1.rh.x86_64
+          POWERSHELL_PACKAGE_SEMANTIC_VERSION: 7.6.4
         run: |
           set -euo pipefail
           cat /etc/os-release
@@ -3628,6 +4035,7 @@ jobs:
             ca-certificates \
             curl-minimal \
             diffutils \
+            dnf-plugins-core \
             findutils \
             git \
             glibc-common \
@@ -3644,28 +4052,60 @@ jobs:
             zlib
           assembler="$(as --version | head -n 1)"
           echo "RHEL_9_UBI_ASSEMBLER_EVIDENCE $assembler"
-          rpm --import https://packages.microsoft.com/keys/microsoft.asc
+          microsoft_key_url="https://packages.microsoft.com/keys/microsoft.asc"
+          microsoft_key="/tmp/microsoft-packages-key.asc"
+          microsoft_local_key="/etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft"
+          curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"
+          echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -
+          microsoft_key_metadata="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_key")"
+          microsoft_key_fingerprints="$(printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$microsoft_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "uid" { print $10 }' | grep -Fqx "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+          install -d -m 0755 /etc/pki/rpm-gpg
+          install -o root -g root -m 0644 "$microsoft_key" "$microsoft_local_key"
+          installed_key_fingerprints="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_local_key" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$installed_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          rpm --import "$microsoft_local_key"
+          installed_microsoft_key_package="$(rpm -q gpg-pubkey-be1229cf-5631588c)"
+          rm -f "$microsoft_key"
           # Microsoft's RHEL 9 feed matches this RHEL UBI container and supplies tooling only.
-          curl -fsSL https://packages.microsoft.com/config/rhel/9/prod.repo -o /etc/yum.repos.d/microsoft-prod.repo
-          dnf install -y powershell
+          printf '%s\n' \
+            "[packages-microsoft-com-prod]" \
+            "name=Microsoft Production" \
+            "baseurl=https://packages.microsoft.com/rhel/9/prod/" \
+            "enabled=1" \
+            "gpgcheck=1" \
+            "repo_gpgcheck=1" \
+            "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft" \
+            "sslverify=1" \
+            > /etc/yum.repos.d/microsoft-prod.repo
+          dnf -y makecache --disablerepo="*" --enablerepo="packages-microsoft-com-prod"
+          echo "MICROSOFT_RPM_TRUST_EVIDENCE rid=rhel.9-x64 key_sha256=$MICROSOFT_SIGNING_KEY_SHA256 key_fingerprint=$MICROSOFT_SIGNING_KEY_FINGERPRINT local_key=$microsoft_local_key repository=packages-microsoft-com-prod gpgcheck=1 repo_gpgcheck=1 sslverify=1"
+          dnf repoquery --disablerepo="*" --enablerepo="packages-microsoft-com-prod" --qf "%{name}-%{evr}.%{arch}|%{repoid}" "$POWERSHELL_RPM_PACKAGE_NEVRA" | grep -Fqx "$POWERSHELL_RPM_PACKAGE_NEVRA|packages-microsoft-com-prod"
+          dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"
+          installed_powershell_package_identity="$(rpm -q --qf '%{NAME}|%{VERSION}-%{RELEASE}|%{ARCH}|%{VENDOR}' powershell)"
+          test "$installed_powershell_package_identity" = "powershell|7.6.4-1.rh|x86_64|(none)"
+          installed_powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
           process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$installed_powershell_version" = "$POWERSHELL_PACKAGE_SEMANTIC_VERSION"
           test "$process_architecture" = "X64"
+          echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=rhel.9-x64 package_nevra=$POWERSHELL_RPM_PACKAGE_NEVRA package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture key_package=$installed_microsoft_key_package key_fingerprint=$installed_key_fingerprints repository=packages-microsoft-com-prod"
           echo "RHEL_9_UBI_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=$PLATFORM_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: |
-            10.0.x
-            9.0.x
-            8.0.x
+            10.0.302
+            9.0.316
+            8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-rhel/nupkg-managed
       - name: Download RHEL runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-rhel.9-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-${{ inputs.runtime_profile }}
@@ -3787,14 +4227,14 @@ jobs:
     if: ${{ inputs.rid == 'alpine.3.20-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Download managed package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-alpine/nupkg-managed
       - name: Download Alpine runtime package artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: nupkg-alpine.3.20-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-alpine/nupkg-alpine.3.20-x64-${{ inputs.runtime_profile }}
@@ -3804,6 +4244,8 @@ jobs:
           PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
           OPENCV_VERSION: ${{ inputs.opencv_version }}
           RUNTIME_PROFILE: ${{ inputs.runtime_profile }}
+          POWERSHELL_ALPINE_PACKAGE_VERSION: 7.4.6-r1
+          POWERSHELL_ALPINE_SEMANTIC_VERSION: 7.4.6
           ALPINE_3_20_IMAGE: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
         run: |
           set -euo pipefail
@@ -3818,6 +4260,8 @@ jobs:
             -e PACKAGE_VERSION="$PACKAGE_VERSION" \
             -e OPENCV_VERSION="$OPENCV_VERSION" \
             -e RUNTIME_PROFILE="$RUNTIME_PROFILE" \
+            -e POWERSHELL_ALPINE_PACKAGE_VERSION="$POWERSHELL_ALPINE_PACKAGE_VERSION" \
+            -e POWERSHELL_ALPINE_SEMANTIC_VERSION="$POWERSHELL_ALPINE_SEMANTIC_VERSION" \
             -v "$GITHUB_WORKSPACE:/workspace:ro" \
             -w /tmp \
             "$ALPINE_3_20_IMAGE" \
@@ -3849,8 +4293,16 @@ jobs:
                 binutils \
                 ca-certificates \
                 dotnet8-sdk \
-                powershell \
+                powershell=$POWERSHELL_ALPINE_PACKAGE_VERSION \
                 unzip
+
+              installed_powershell_package="$(apk info -e -vv powershell)"
+              test "$installed_powershell_package" = "powershell-$POWERSHELL_ALPINE_PACKAGE_VERSION - A cross-platform automation and configuration tool/framework"
+              installed_powershell_version="$(pwsh -NoProfile -Command "\$PSVersionTable.PSVersion.ToString()" | tr -d "\\r")"
+              powershell_process_architecture="$(pwsh -NoProfile -Command "[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()" | tr -d "\\r")"
+              test "$installed_powershell_version" = "$POWERSHELL_ALPINE_SEMANTIC_VERSION"
+              test "$powershell_process_architecture" = "X64"
+              echo "POWERSHELL_APK_TOOLCHAIN_EVIDENCE rid=alpine.3.20-x64 package=powershell package_version=$POWERSHELL_ALPINE_PACKAGE_VERSION semantic_version=$installed_powershell_version process_arch=$powershell_process_architecture repository=v3.20/community"
 
               musl_loader="/lib/ld-musl-x86_64.so.1"
               test -x "$musl_loader"

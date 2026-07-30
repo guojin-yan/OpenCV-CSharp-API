@@ -1774,3 +1774,422 @@ int jyppx_ocv_core_pow(const jyppx_ocv_mat* src, double power, jyppx_ocv_mat* ds
     }
 }
 
+int jyppx_ocv_core_calc_covar_matrix(
+    const jyppx_ocv_mat* samples,
+    jyppx_ocv_mat* covar,
+    jyppx_ocv_mat* mean,
+    int flags,
+    int ctype)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_calc_covar_matrix";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_mat(api_name, samples, "samples");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, covar, "covar");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, mean, "mean");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        cv::calcCovarMatrix(
+            opencv_csharp_native::mat_value(samples),
+            opencv_csharp_native::mat_value(covar),
+            opencv_csharp_native::mat_value(mean),
+            flags,
+            ctype);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)samples; (void)covar; (void)mean; (void)flags; (void)ctype;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_pca_compute_max_components(
+    const jyppx_ocv_mat* data,
+    jyppx_ocv_mat* mean,
+    jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* eigenvalues,
+    int max_components)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_pca_compute_max_components";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_mat(api_name, data, "data");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, mean, "mean");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, eigenvectors, "eigenvectors");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (eigenvalues == nullptr)
+        {
+            cv::PCACompute(
+                opencv_csharp_native::mat_value(data),
+                opencv_csharp_native::mat_value(mean),
+                opencv_csharp_native::mat_value(eigenvectors),
+                max_components);
+        }
+        else
+        {
+            cv::PCACompute(
+                opencv_csharp_native::mat_value(data),
+                opencv_csharp_native::mat_value(mean),
+                opencv_csharp_native::mat_value(eigenvectors),
+                opencv_csharp_native::mat_value(eigenvalues),
+                max_components);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)data; (void)mean; (void)eigenvectors; (void)eigenvalues; (void)max_components;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_pca_compute_retained_variance(
+    const jyppx_ocv_mat* data,
+    jyppx_ocv_mat* mean,
+    jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* eigenvalues,
+    double retained_variance)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_pca_compute_retained_variance";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_mat(api_name, data, "data");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, mean, "mean");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, eigenvectors, "eigenvectors");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (eigenvalues == nullptr)
+        {
+            cv::PCACompute(
+                opencv_csharp_native::mat_value(data),
+                opencv_csharp_native::mat_value(mean),
+                opencv_csharp_native::mat_value(eigenvectors),
+                retained_variance);
+        }
+        else
+        {
+            cv::PCACompute(
+                opencv_csharp_native::mat_value(data),
+                opencv_csharp_native::mat_value(mean),
+                opencv_csharp_native::mat_value(eigenvectors),
+                opencv_csharp_native::mat_value(eigenvalues),
+                retained_variance);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)data; (void)mean; (void)eigenvectors; (void)eigenvalues; (void)retained_variance;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+namespace
+{
+    int run_pca_projection(
+        const char* api_name,
+        bool back_project,
+        const jyppx_ocv_mat* data,
+        const jyppx_ocv_mat* mean,
+        const jyppx_ocv_mat* eigenvectors,
+        jyppx_ocv_mat* result)
+    {
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_mat(api_name, data, "data");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, mean, "mean");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, eigenvectors, "eigenvectors");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, result, "result");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (back_project)
+        {
+            cv::PCABackProject(
+                opencv_csharp_native::mat_value(data),
+                opencv_csharp_native::mat_value(mean),
+                opencv_csharp_native::mat_value(eigenvectors),
+                opencv_csharp_native::mat_value(result));
+        }
+        else
+        {
+            cv::PCAProject(
+                opencv_csharp_native::mat_value(data),
+                opencv_csharp_native::mat_value(mean),
+                opencv_csharp_native::mat_value(eigenvectors),
+                opencv_csharp_native::mat_value(result));
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)back_project; (void)data; (void)mean; (void)eigenvectors; (void)result;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+}
+
+int jyppx_ocv_core_pca_project(
+    const jyppx_ocv_mat* data,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_pca_project";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return run_pca_projection(api_name, false, data, mean, eigenvectors, result);
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_pca_back_project(
+    const jyppx_ocv_mat* data,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_pca_back_project";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return run_pca_projection(api_name, true, data, mean, eigenvectors, result);
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_set_rng_seed(int seed)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_set_rng_seed";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::setRNGSeed(seed);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)seed;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_randu_mat(
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* low,
+    const jyppx_ocv_mat* high)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_randu_mat";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_output_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, low, "low");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, high, "high");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        cv::randu(opencv_csharp_native::mat_value(dst), opencv_csharp_native::mat_value(low), opencv_csharp_native::mat_value(high));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)dst; (void)low; (void)high;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_randu_scalar(
+    jyppx_ocv_mat* dst,
+    double low_v0,
+    double low_v1,
+    double low_v2,
+    double low_v3,
+    double high_v0,
+    double high_v1,
+    double high_v2,
+    double high_v3)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_randu_scalar";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_output_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        cv::randu(
+            opencv_csharp_native::mat_value(dst),
+            scalar_from_values(low_v0, low_v1, low_v2, low_v3),
+            scalar_from_values(high_v0, high_v1, high_v2, high_v3));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)dst; (void)low_v0; (void)low_v1; (void)low_v2; (void)low_v3;
+        (void)high_v0; (void)high_v1; (void)high_v2; (void)high_v3;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_randn_mat(
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* stddev)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_randn_mat";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_output_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, mean, "mean");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, stddev, "stddev");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        cv::randn(opencv_csharp_native::mat_value(dst), opencv_csharp_native::mat_value(mean), opencv_csharp_native::mat_value(stddev));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)dst; (void)mean; (void)stddev;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_randn_scalar(
+    jyppx_ocv_mat* dst,
+    double mean_v0,
+    double mean_v1,
+    double mean_v2,
+    double mean_v3,
+    double stddev_v0,
+    double stddev_v1,
+    double stddev_v2,
+    double stddev_v3)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_randn_scalar";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_output_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        cv::randn(
+            opencv_csharp_native::mat_value(dst),
+            scalar_from_values(mean_v0, mean_v1, mean_v2, mean_v3),
+            scalar_from_values(stddev_v0, stddev_v1, stddev_v2, stddev_v3));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)dst; (void)mean_v0; (void)mean_v1; (void)mean_v2; (void)mean_v3;
+        (void)stddev_v0; (void)stddev_v1; (void)stddev_v2; (void)stddev_v3;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_rand_shuffle(jyppx_ocv_mat* dst, double iter_factor, jyppx_ocv_rng* rng)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_rand_shuffle";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_output_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        cv::randShuffle(opencv_csharp_native::mat_value(dst), iter_factor, rng == nullptr ? nullptr : &rng->value);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)dst; (void)iter_factor; (void)rng;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_core_solve_lp(
+    const jyppx_ocv_mat* objective,
+    const jyppx_ocv_mat* constraints,
+    jyppx_ocv_mat* solution,
+    double constraint_epsilon,
+    int* out_result)
+{
+    constexpr const char* api_name = "jyppx_ocv_core_solve_lp";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (out_result == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "out_result");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        int status = validate_mat(api_name, objective, "objective");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, constraints, "constraints");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, solution, "solution");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        *out_result = cv::solveLP(
+            opencv_csharp_native::mat_value(objective),
+            opencv_csharp_native::mat_value(constraints),
+            opencv_csharp_native::mat_value(solution),
+            constraint_epsilon);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)objective; (void)constraints; (void)solution; (void)constraint_epsilon;
+        *out_result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+

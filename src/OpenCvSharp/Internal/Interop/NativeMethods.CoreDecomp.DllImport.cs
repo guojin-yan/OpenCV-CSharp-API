@@ -143,6 +143,42 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_pow")]
         internal static extern int CorePow(IntPtr src, double power, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_calc_covar_matrix")]
+        internal static extern int CoreCalcCovarMatrix(IntPtr samples, IntPtr covar, IntPtr mean, int flags, int ctype);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_pca_compute_max_components")]
+        internal static extern int CorePcaComputeMaxComponents(IntPtr data, IntPtr mean, IntPtr eigenvectors, IntPtr eigenvalues, int maxComponents);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_pca_compute_retained_variance")]
+        internal static extern int CorePcaComputeRetainedVariance(IntPtr data, IntPtr mean, IntPtr eigenvectors, IntPtr eigenvalues, double retainedVariance);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_pca_project")]
+        internal static extern int CorePcaProject(IntPtr data, IntPtr mean, IntPtr eigenvectors, IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_pca_back_project")]
+        internal static extern int CorePcaBackProject(IntPtr data, IntPtr mean, IntPtr eigenvectors, IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_set_rng_seed")]
+        internal static extern int CoreSetRngSeed(int seed);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_randu_mat")]
+        internal static extern int CoreRanduMat(IntPtr dst, IntPtr low, IntPtr high);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_randu_scalar")]
+        internal static extern int CoreRanduScalar(IntPtr dst, double lowV0, double lowV1, double lowV2, double lowV3, double highV0, double highV1, double highV2, double highV3);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_randn_mat")]
+        internal static extern int CoreRandnMat(IntPtr dst, IntPtr mean, IntPtr stddev);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_randn_scalar")]
+        internal static extern int CoreRandnScalar(IntPtr dst, double meanV0, double meanV1, double meanV2, double meanV3, double stddevV0, double stddevV1, double stddevV2, double stddevV3);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_rand_shuffle")]
+        internal static extern int CoreRandShuffle(IntPtr dst, double iterFactor, IntPtr rng);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_core_solve_lp")]
+        internal static extern int CoreSolveLp(IntPtr objective, IntPtr constraints, IntPtr solution, double constraintEpsilon, out int result);
     }
 }
 #endif

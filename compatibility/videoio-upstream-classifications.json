@@ -1,0 +1,749 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/videoio.hpp declarations emitted by OpenCV hdr_parser.py",
+  "reviewStatus": "reviewed",
+  "limitation": "Declaration identities preserve parsed overload, default, direction, and type metadata. Implemented evidence correlates symbol groups across the C\u002B\u002B API, stable C ABI, and managed public API; it does not claim binary equivalence of C\u002B\u002B parameter layouts or repository-wide OpenCV parity.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.VideoCaptureAPIs[const cv.CAP_ANY=0;const cv.CAP_V4L=200;const cv.CAP_V4L2=CAP_V4L;const cv.CAP_FIREWIRE=300;const cv.CAP_FIREWARE=CAP_FIREWIRE;const cv.CAP_IEEE1394=CAP_FIREWIRE;const cv.CAP_DC1394=CAP_FIREWIRE;const cv.CAP_CMU1394=CAP_FIREWIRE;const cv.CAP_DSHOW=700;const cv.CAP_PVAPI=800;const cv.CAP_ANDROID=1000;const cv.CAP_XIAPI=1100;const cv.CAP_AVFOUNDATION=1200;const cv.CAP_MSMF=1400;const cv.CAP_WINRT=1410;const cv.CAP_INTELPERC=1500;const cv.CAP_REALSENSE=1500;const cv.CAP_OPENNI2=1600;const cv.CAP_OPENNI2_ASUS=1610;const cv.CAP_OPENNI2_ASTRA=1620;const cv.CAP_GPHOTO2=1700;const cv.CAP_GSTREAMER=1800;const cv.CAP_FFMPEG=1900;const cv.CAP_IMAGES=2000;const cv.CAP_ARAVIS=2100;const cv.CAP_OPENCV_MJPEG=2200;const cv.CAP_INTEL_MFX=2300;const cv.CAP_XINE=2400;const cv.CAP_UEYE=2500;const cv.CAP_OBSENSOR=2600]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.VideoCaptureProperties[const cv.CAP_PROP_UNKNOWN=-1;const cv.CAP_PROP_POS_MSEC=0;const cv.CAP_PROP_POS_FRAMES=1;const cv.CAP_PROP_POS_AVI_RATIO=2;const cv.CAP_PROP_FRAME_WIDTH=3;const cv.CAP_PROP_FRAME_HEIGHT=4;const cv.CAP_PROP_FPS=5;const cv.CAP_PROP_FOURCC=6;const cv.CAP_PROP_FRAME_COUNT=7;const cv.CAP_PROP_FORMAT=8;const cv.CAP_PROP_MODE=9;const cv.CAP_PROP_BRIGHTNESS=10;const cv.CAP_PROP_CONTRAST=11;const cv.CAP_PROP_SATURATION=12;const cv.CAP_PROP_HUE=13;const cv.CAP_PROP_GAIN=14;const cv.CAP_PROP_EXPOSURE=15;const cv.CAP_PROP_CONVERT_RGB=16;const cv.CAP_PROP_WHITE_BALANCE_BLUE_U=17;const cv.CAP_PROP_RECTIFICATION=18;const cv.CAP_PROP_MONOCHROME=19;const cv.CAP_PROP_SHARPNESS=20;const cv.CAP_PROP_AUTO_EXPOSURE=21;const cv.CAP_PROP_GAMMA=22;const cv.CAP_PROP_TEMPERATURE=23;const cv.CAP_PROP_TRIGGER=24;const cv.CAP_PROP_TRIGGER_DELAY=25;const cv.CAP_PROP_WHITE_BALANCE_RED_V=26;const cv.CAP_PROP_ZOOM=27;const cv.CAP_PROP_FOCUS=28;const cv.CAP_PROP_GUID=29;const cv.CAP_PROP_ISO_SPEED=30;const cv.CAP_PROP_BACKLIGHT=32;const cv.CAP_PROP_PAN=33;const cv.CAP_PROP_TILT=34;const cv.CAP_PROP_ROLL=35;const cv.CAP_PROP_IRIS=36;const cv.CAP_PROP_SETTINGS=37;const cv.CAP_PROP_BUFFERSIZE=38;const cv.CAP_PROP_AUTOFOCUS=39;const cv.CAP_PROP_SAR_NUM=40;const cv.CAP_PROP_SAR_DEN=41;const cv.CAP_PROP_BACKEND=42;const cv.CAP_PROP_CHANNEL=43;const cv.CAP_PROP_AUTO_WB=44;const cv.CAP_PROP_WB_TEMPERATURE=45;const cv.CAP_PROP_CODEC_PIXEL_FORMAT=46;const cv.CAP_PROP_BITRATE=47;const cv.CAP_PROP_ORIENTATION_META=48;const cv.CAP_PROP_ORIENTATION_AUTO=49;const cv.CAP_PROP_HW_ACCELERATION=50;const cv.CAP_PROP_HW_DEVICE=51;const cv.CAP_PROP_HW_ACCELERATION_USE_OPENCL=52;const cv.CAP_PROP_OPEN_TIMEOUT_MSEC=53;const cv.CAP_PROP_READ_TIMEOUT_MSEC=54;const cv.CAP_PROP_STREAM_OPEN_TIME_USEC=55;const cv.CAP_PROP_VIDEO_TOTAL_CHANNELS=56;const cv.CAP_PROP_VIDEO_STREAM=57;const cv.CAP_PROP_AUDIO_STREAM=58;const cv.CAP_PROP_AUDIO_POS=59;const cv.CAP_PROP_AUDIO_SHIFT_NSEC=60;const cv.CAP_PROP_AUDIO_DATA_DEPTH=61;const cv.CAP_PROP_AUDIO_SAMPLES_PER_SECOND=62;const cv.CAP_PROP_AUDIO_BASE_INDEX=63;const cv.CAP_PROP_AUDIO_TOTAL_CHANNELS=64;const cv.CAP_PROP_AUDIO_TOTAL_STREAMS=65;const cv.CAP_PROP_AUDIO_SYNCHRONIZE=66;const cv.CAP_PROP_LRF_HAS_KEY_FRAME=67;const cv.CAP_PROP_CODEC_EXTRADATA_INDEX=68;const cv.CAP_PROP_FRAME_TYPE=69;const cv.CAP_PROP_N_THREADS=70;const cv.CAP_PROP_PTS=71;const cv.CAP_PROP_DTS_DELAY=72;const cv.CAP_PROP_IMAGE_SEQ_START=73]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.VideoWriterProperties[const cv.VIDEOWRITER_PROP_UNKNOWN=-1;const cv.VIDEOWRITER_PROP_QUALITY=1;const cv.VIDEOWRITER_PROP_FRAMEBYTES=2;const cv.VIDEOWRITER_PROP_NSTRIPES=3;const cv.VIDEOWRITER_PROP_IS_COLOR=4;const cv.VIDEOWRITER_PROP_DEPTH=5;const cv.VIDEOWRITER_PROP_HW_ACCELERATION=6;const cv.VIDEOWRITER_PROP_HW_DEVICE=7;const cv.VIDEOWRITER_PROP_HW_ACCELERATION_USE_OPENCL=8;const cv.VIDEOWRITER_PROP_RAW_VIDEO=9;const cv.VIDEOWRITER_PROP_KEY_INTERVAL=10;const cv.VIDEOWRITER_PROP_KEY_FLAG=11;const cv.VIDEOWRITER_PROP_PTS=12;const cv.VIDEOWRITER_PROP_DTS_DELAY=13;const cv.VIDEOWRITER_PROP_COLOR_SPACE=14;const cv.VIDEOWRITER_PROP_ENABLE_ALPHA=15]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.VideoAccelerationType[const cv.VIDEO_ACCELERATION_NONE=0;const cv.VIDEO_ACCELERATION_ANY=1;const cv.VIDEO_ACCELERATION_D3D11=2;const cv.VIDEO_ACCELERATION_VAAPI=3;const cv.VIDEO_ACCELERATION_MFX=4;const cv.VIDEO_ACCELERATION_DRM=5]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_DC1394_OFF=-4;const cv.CAP_PROP_DC1394_MODE_MANUAL=-3;const cv.CAP_PROP_DC1394_MODE_AUTO=-2;const cv.CAP_PROP_DC1394_MODE_ONE_PUSH_AUTO=-1;const cv.CAP_PROP_DC1394_MAX=31]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_OPENNI_DEPTH_GENERATOR=1 \u003C\u003C 31;const cv.CAP_OPENNI_IMAGE_GENERATOR=1 \u003C\u003C 30;const cv.CAP_OPENNI_IR_GENERATOR=1 \u003C\u003C 29;const cv.CAP_OPENNI_GENERATORS_MASK=CAP_OPENNI_DEPTH_GENERATOR \u002B CAP_OPENNI_IMAGE_GENERATOR \u002B CAP_OPENNI_IR_GENERATOR]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_OPENNI_OUTPUT_MODE=100;const cv.CAP_PROP_OPENNI_FRAME_MAX_DEPTH=101;const cv.CAP_PROP_OPENNI_BASELINE=102;const cv.CAP_PROP_OPENNI_FOCAL_LENGTH=103;const cv.CAP_PROP_OPENNI_REGISTRATION=104;const cv.CAP_PROP_OPENNI_REGISTRATION_ON=CAP_PROP_OPENNI_REGISTRATION;const cv.CAP_PROP_OPENNI_APPROX_FRAME_SYNC=105;const cv.CAP_PROP_OPENNI_MAX_BUFFER_SIZE=106;const cv.CAP_PROP_OPENNI_CIRCLE_BUFFER=107;const cv.CAP_PROP_OPENNI_MAX_TIME_DURATION=108;const cv.CAP_PROP_OPENNI_GENERATOR_PRESENT=109;const cv.CAP_PROP_OPENNI2_SYNC=110;const cv.CAP_PROP_OPENNI2_MIRROR=111]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_OPENNI_IMAGE_GENERATOR_PRESENT=\u002BCAP_OPENNI_IMAGE_GENERATOR \u002B CAP_PROP_OPENNI_GENERATOR_PRESENT;const cv.CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE=\u002BCAP_OPENNI_IMAGE_GENERATOR \u002B CAP_PROP_OPENNI_OUTPUT_MODE;const cv.CAP_OPENNI_DEPTH_GENERATOR_PRESENT=\u002BCAP_OPENNI_DEPTH_GENERATOR \u002B CAP_PROP_OPENNI_GENERATOR_PRESENT;const cv.CAP_OPENNI_DEPTH_GENERATOR_BASELINE=\u002BCAP_OPENNI_DEPTH_GENERATOR \u002B CAP_PROP_OPENNI_BASELINE;const cv.CAP_OPENNI_DEPTH_GENERATOR_FOCAL_LENGTH=\u002BCAP_OPENNI_DEPTH_GENERATOR \u002B CAP_PROP_OPENNI_FOCAL_LENGTH;const cv.CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION=\u002BCAP_OPENNI_DEPTH_GENERATOR \u002B CAP_PROP_OPENNI_REGISTRATION;const cv.CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION_ON=CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION;const cv.CAP_OPENNI_IR_GENERATOR_PRESENT=\u002BCAP_OPENNI_IR_GENERATOR \u002B CAP_PROP_OPENNI_GENERATOR_PRESENT]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_OPENNI_DEPTH_MAP=0;const cv.CAP_OPENNI_POINT_CLOUD_MAP=1;const cv.CAP_OPENNI_DISPARITY_MAP=2;const cv.CAP_OPENNI_DISPARITY_MAP_32F=3;const cv.CAP_OPENNI_VALID_DEPTH_MASK=4;const cv.CAP_OPENNI_BGR_IMAGE=5;const cv.CAP_OPENNI_GRAY_IMAGE=6;const cv.CAP_OPENNI_IR_IMAGE=7]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_OPENNI_VGA_30HZ=0;const cv.CAP_OPENNI_SXGA_15HZ=1;const cv.CAP_OPENNI_SXGA_30HZ=2;const cv.CAP_OPENNI_QVGA_30HZ=3;const cv.CAP_OPENNI_QVGA_60HZ=4]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_GSTREAMER_QUEUE_LENGTH=200]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_PVAPI_MULTICASTIP=300;const cv.CAP_PROP_PVAPI_FRAMESTARTTRIGGERMODE=301;const cv.CAP_PROP_PVAPI_DECIMATIONHORIZONTAL=302;const cv.CAP_PROP_PVAPI_DECIMATIONVERTICAL=303;const cv.CAP_PROP_PVAPI_BINNINGX=304;const cv.CAP_PROP_PVAPI_BINNINGY=305;const cv.CAP_PROP_PVAPI_PIXELFORMAT=306]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PVAPI_FSTRIGMODE_FREERUN=0;const cv.CAP_PVAPI_FSTRIGMODE_SYNCIN1=1;const cv.CAP_PVAPI_FSTRIGMODE_SYNCIN2=2;const cv.CAP_PVAPI_FSTRIGMODE_FIXEDRATE=3;const cv.CAP_PVAPI_FSTRIGMODE_SOFTWARE=4]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PVAPI_DECIMATION_OFF=1;const cv.CAP_PVAPI_DECIMATION_2OUTOF4=2;const cv.CAP_PVAPI_DECIMATION_2OUTOF8=4;const cv.CAP_PVAPI_DECIMATION_2OUTOF16=8]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PVAPI_PIXELFORMAT_MONO8=1;const cv.CAP_PVAPI_PIXELFORMAT_MONO16=2;const cv.CAP_PVAPI_PIXELFORMAT_BAYER8=3;const cv.CAP_PVAPI_PIXELFORMAT_BAYER16=4;const cv.CAP_PVAPI_PIXELFORMAT_RGB24=5;const cv.CAP_PVAPI_PIXELFORMAT_BGR24=6;const cv.CAP_PVAPI_PIXELFORMAT_RGBA32=7;const cv.CAP_PVAPI_PIXELFORMAT_BGRA32=8]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_XI_DOWNSAMPLING=400;const cv.CAP_PROP_XI_DATA_FORMAT=401;const cv.CAP_PROP_XI_OFFSET_X=402;const cv.CAP_PROP_XI_OFFSET_Y=403;const cv.CAP_PROP_XI_TRG_SOURCE=404;const cv.CAP_PROP_XI_TRG_SOFTWARE=405;const cv.CAP_PROP_XI_GPI_SELECTOR=406;const cv.CAP_PROP_XI_GPI_MODE=407;const cv.CAP_PROP_XI_GPI_LEVEL=408;const cv.CAP_PROP_XI_GPO_SELECTOR=409;const cv.CAP_PROP_XI_GPO_MODE=410;const cv.CAP_PROP_XI_LED_SELECTOR=411;const cv.CAP_PROP_XI_LED_MODE=412;const cv.CAP_PROP_XI_MANUAL_WB=413;const cv.CAP_PROP_XI_AUTO_WB=414;const cv.CAP_PROP_XI_AEAG=415;const cv.CAP_PROP_XI_EXP_PRIORITY=416;const cv.CAP_PROP_XI_AE_MAX_LIMIT=417;const cv.CAP_PROP_XI_AG_MAX_LIMIT=418;const cv.CAP_PROP_XI_AEAG_LEVEL=419;const cv.CAP_PROP_XI_TIMEOUT=420;const cv.CAP_PROP_XI_EXPOSURE=421;const cv.CAP_PROP_XI_EXPOSURE_BURST_COUNT=422;const cv.CAP_PROP_XI_GAIN_SELECTOR=423;const cv.CAP_PROP_XI_GAIN=424;const cv.CAP_PROP_XI_DOWNSAMPLING_TYPE=426;const cv.CAP_PROP_XI_BINNING_SELECTOR=427;const cv.CAP_PROP_XI_BINNING_VERTICAL=428;const cv.CAP_PROP_XI_BINNING_HORIZONTAL=429;const cv.CAP_PROP_XI_BINNING_PATTERN=430;const cv.CAP_PROP_XI_DECIMATION_SELECTOR=431;const cv.CAP_PROP_XI_DECIMATION_VERTICAL=432;const cv.CAP_PROP_XI_DECIMATION_HORIZONTAL=433;const cv.CAP_PROP_XI_DECIMATION_PATTERN=434;const cv.CAP_PROP_XI_TEST_PATTERN_GENERATOR_SELECTOR=587;const cv.CAP_PROP_XI_TEST_PATTERN=588;const cv.CAP_PROP_XI_IMAGE_DATA_FORMAT=435;const cv.CAP_PROP_XI_SHUTTER_TYPE=436;const cv.CAP_PROP_XI_SENSOR_TAPS=437;const cv.CAP_PROP_XI_AEAG_ROI_OFFSET_X=439;const cv.CAP_PROP_XI_AEAG_ROI_OFFSET_Y=440;const cv.CAP_PROP_XI_AEAG_ROI_WIDTH=441;const cv.CAP_PROP_XI_AEAG_ROI_HEIGHT=442;const cv.CAP_PROP_XI_BPC=445;const cv.CAP_PROP_XI_WB_KR=448;const cv.CAP_PROP_XI_WB_KG=449;const cv.CAP_PROP_XI_WB_KB=450;const cv.CAP_PROP_XI_WIDTH=451;const cv.CAP_PROP_XI_HEIGHT=452;const cv.CAP_PROP_XI_REGION_SELECTOR=589;const cv.CAP_PROP_XI_REGION_MODE=595;const cv.CAP_PROP_XI_LIMIT_BANDWIDTH=459;const cv.CAP_PROP_XI_SENSOR_DATA_BIT_DEPTH=460;const cv.CAP_PROP_XI_OUTPUT_DATA_BIT_DEPTH=461;const cv.CAP_PROP_XI_IMAGE_DATA_BIT_DEPTH=462;const cv.CAP_PROP_XI_OUTPUT_DATA_PACKING=463;const cv.CAP_PROP_XI_OUTPUT_DATA_PACKING_TYPE=464;const cv.CAP_PROP_XI_IS_COOLED=465;const cv.CAP_PROP_XI_COOLING=466;const cv.CAP_PROP_XI_TARGET_TEMP=467;const cv.CAP_PROP_XI_CHIP_TEMP=468;const cv.CAP_PROP_XI_HOUS_TEMP=469;const cv.CAP_PROP_XI_HOUS_BACK_SIDE_TEMP=590;const cv.CAP_PROP_XI_SENSOR_BOARD_TEMP=596;const cv.CAP_PROP_XI_CMS=470;const cv.CAP_PROP_XI_APPLY_CMS=471;const cv.CAP_PROP_XI_IMAGE_IS_COLOR=474;const cv.CAP_PROP_XI_COLOR_FILTER_ARRAY=475;const cv.CAP_PROP_XI_GAMMAY=476;const cv.CAP_PROP_XI_GAMMAC=477;const cv.CAP_PROP_XI_SHARPNESS=478;const cv.CAP_PROP_XI_CC_MATRIX_00=479;const cv.CAP_PROP_XI_CC_MATRIX_01=480;const cv.CAP_PROP_XI_CC_MATRIX_02=481;const cv.CAP_PROP_XI_CC_MATRIX_03=482;const cv.CAP_PROP_XI_CC_MATRIX_10=483;const cv.CAP_PROP_XI_CC_MATRIX_11=484;const cv.CAP_PROP_XI_CC_MATRIX_12=485;const cv.CAP_PROP_XI_CC_MATRIX_13=486;const cv.CAP_PROP_XI_CC_MATRIX_20=487;const cv.CAP_PROP_XI_CC_MATRIX_21=488;const cv.CAP_PROP_XI_CC_MATRIX_22=489;const cv.CAP_PROP_XI_CC_MATRIX_23=490;const cv.CAP_PROP_XI_CC_MATRIX_30=491;const cv.CAP_PROP_XI_CC_MATRIX_31=492;const cv.CAP_PROP_XI_CC_MATRIX_32=493;const cv.CAP_PROP_XI_CC_MATRIX_33=494;const cv.CAP_PROP_XI_DEFAULT_CC_MATRIX=495;const cv.CAP_PROP_XI_TRG_SELECTOR=498;const cv.CAP_PROP_XI_ACQ_FRAME_BURST_COUNT=499;const cv.CAP_PROP_XI_DEBOUNCE_EN=507;const cv.CAP_PROP_XI_DEBOUNCE_T0=508;const cv.CAP_PROP_XI_DEBOUNCE_T1=509;const cv.CAP_PROP_XI_DEBOUNCE_POL=510;const cv.CAP_PROP_XI_LENS_MODE=511;const cv.CAP_PROP_XI_LENS_APERTURE_VALUE=512;const cv.CAP_PROP_XI_LENS_FOCUS_MOVEMENT_VALUE=513;const cv.CAP_PROP_XI_LENS_FOCUS_MOVE=514;const cv.CAP_PROP_XI_LENS_FOCUS_DISTANCE=515;const cv.CAP_PROP_XI_LENS_FOCAL_LENGTH=516;const cv.CAP_PROP_XI_LENS_FEATURE_SELECTOR=517;const cv.CAP_PROP_XI_LENS_FEATURE=518;const cv.CAP_PROP_XI_DEVICE_MODEL_ID=521;const cv.CAP_PROP_XI_DEVICE_SN=522;const cv.CAP_PROP_XI_IMAGE_DATA_FORMAT_RGB32_ALPHA=529;const cv.CAP_PROP_XI_IMAGE_PAYLOAD_SIZE=530;const cv.CAP_PROP_XI_TRANSPORT_PIXEL_FORMAT=531;const cv.CAP_PROP_XI_SENSOR_CLOCK_FREQ_HZ=532;const cv.CAP_PROP_XI_SENSOR_CLOCK_FREQ_INDEX=533;const cv.CAP_PROP_XI_SENSOR_OUTPUT_CHANNEL_COUNT=534;const cv.CAP_PROP_XI_FRAMERATE=535;const cv.CAP_PROP_XI_COUNTER_SELECTOR=536;const cv.CAP_PROP_XI_COUNTER_VALUE=537;const cv.CAP_PROP_XI_ACQ_TIMING_MODE=538;const cv.CAP_PROP_XI_AVAILABLE_BANDWIDTH=539;const cv.CAP_PROP_XI_BUFFER_POLICY=540;const cv.CAP_PROP_XI_LUT_EN=541;const cv.CAP_PROP_XI_LUT_INDEX=542;const cv.CAP_PROP_XI_LUT_VALUE=543;const cv.CAP_PROP_XI_TRG_DELAY=544;const cv.CAP_PROP_XI_TS_RST_MODE=545;const cv.CAP_PROP_XI_TS_RST_SOURCE=546;const cv.CAP_PROP_XI_IS_DEVICE_EXIST=547;const cv.CAP_PROP_XI_ACQ_BUFFER_SIZE=548;const cv.CAP_PROP_XI_ACQ_BUFFER_SIZE_UNIT=549;const cv.CAP_PROP_XI_ACQ_TRANSPORT_BUFFER_SIZE=550;const cv.CAP_PROP_XI_BUFFERS_QUEUE_SIZE=551;const cv.CAP_PROP_XI_ACQ_TRANSPORT_BUFFER_COMMIT=552;const cv.CAP_PROP_XI_RECENT_FRAME=553;const cv.CAP_PROP_XI_DEVICE_RESET=554;const cv.CAP_PROP_XI_COLUMN_FPN_CORRECTION=555;const cv.CAP_PROP_XI_ROW_FPN_CORRECTION=591;const cv.CAP_PROP_XI_SENSOR_MODE=558;const cv.CAP_PROP_XI_HDR=559;const cv.CAP_PROP_XI_HDR_KNEEPOINT_COUNT=560;const cv.CAP_PROP_XI_HDR_T1=561;const cv.CAP_PROP_XI_HDR_T2=562;const cv.CAP_PROP_XI_KNEEPOINT1=563;const cv.CAP_PROP_XI_KNEEPOINT2=564;const cv.CAP_PROP_XI_IMAGE_BLACK_LEVEL=565;const cv.CAP_PROP_XI_HW_REVISION=571;const cv.CAP_PROP_XI_DEBUG_LEVEL=572;const cv.CAP_PROP_XI_AUTO_BANDWIDTH_CALCULATION=573;const cv.CAP_PROP_XI_FFS_FILE_ID=594;const cv.CAP_PROP_XI_FFS_FILE_SIZE=580;const cv.CAP_PROP_XI_FREE_FFS_SIZE=581;const cv.CAP_PROP_XI_USED_FFS_SIZE=582;const cv.CAP_PROP_XI_FFS_ACCESS_KEY=583;const cv.CAP_PROP_XI_SENSOR_FEATURE_SELECTOR=585;const cv.CAP_PROP_XI_SENSOR_FEATURE_VALUE=586]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_ARAVIS_AUTOTRIGGER=600]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_ANDROID_DEVICE_TORCH=8001]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_IOS_DEVICE_FOCUS=9001;const cv.CAP_PROP_IOS_DEVICE_EXPOSURE=9002;const cv.CAP_PROP_IOS_DEVICE_FLASH=9003;const cv.CAP_PROP_IOS_DEVICE_WHITEBALANCE=9004;const cv.CAP_PROP_IOS_DEVICE_TORCH=9005]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_GIGA_FRAME_OFFSET_X=10001;const cv.CAP_PROP_GIGA_FRAME_OFFSET_Y=10002;const cv.CAP_PROP_GIGA_FRAME_WIDTH_MAX=10003;const cv.CAP_PROP_GIGA_FRAME_HEIGHT_MAX=10004;const cv.CAP_PROP_GIGA_FRAME_SENS_WIDTH=10005;const cv.CAP_PROP_GIGA_FRAME_SENS_HEIGHT=10006]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_INTELPERC_PROFILE_COUNT=11001;const cv.CAP_PROP_INTELPERC_PROFILE_IDX=11002;const cv.CAP_PROP_INTELPERC_DEPTH_LOW_CONFIDENCE_VALUE=11003;const cv.CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE=11004;const cv.CAP_PROP_INTELPERC_DEPTH_CONFIDENCE_THRESHOLD=11005;const cv.CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ=11006;const cv.CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT=11007]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 21,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_INTELPERC_DEPTH_GENERATOR=1 \u003C\u003C 29;const cv.CAP_INTELPERC_IMAGE_GENERATOR=1 \u003C\u003C 28;const cv.CAP_INTELPERC_IR_GENERATOR=1 \u003C\u003C 27;const cv.CAP_INTELPERC_GENERATORS_MASK=CAP_INTELPERC_DEPTH_GENERATOR \u002B CAP_INTELPERC_IMAGE_GENERATOR \u002B CAP_INTELPERC_IR_GENERATOR]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_INTELPERC_DEPTH_MAP=0;const cv.CAP_INTELPERC_UVDEPTH_MAP=1;const cv.CAP_INTELPERC_IR_MAP=2;const cv.CAP_INTELPERC_IMAGE=3]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 23,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_GPHOTO2_PREVIEW=17001;const cv.CAP_PROP_GPHOTO2_WIDGET_ENUMERATE=17002;const cv.CAP_PROP_GPHOTO2_RELOAD_CONFIG=17003;const cv.CAP_PROP_GPHOTO2_RELOAD_ON_CHANGE=17004;const cv.CAP_PROP_GPHOTO2_COLLECT_MSGS=17005;const cv.CAP_PROP_GPHOTO2_FLUSH_MSGS=17006;const cv.CAP_PROP_SPEED=17007;const cv.CAP_PROP_APERTURE=17008;const cv.CAP_PROP_EXPOSUREPROGRAM=17009;const cv.CAP_PROP_VIEWFINDER=17010]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CAP_PROP_IMAGES_BASE=18000;const cv.CAP_PROP_IMAGES_LAST=19000]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "enum cv.VideoCaptureOBSensorDataType[const cv.CAP_OBSENSOR_DEPTH_MAP=0;const cv.CAP_OBSENSOR_BGR_IMAGE=1;const cv.CAP_OBSENSOR_IR_IMAGE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "enum cv.VideoCaptureOBSensorGenerators[const cv.CAP_OBSENSOR_DEPTH_GENERATOR=1 \u003C\u003C 29;const cv.CAP_OBSENSOR_IMAGE_GENERATOR=1 \u003C\u003C 28;const cv.CAP_OBSENSOR_IR_GENERATOR=1 \u003C\u003C 27;const cv.CAP_OBSENSOR_GENERATORS_MASK=CAP_OBSENSOR_DEPTH_GENERATOR \u002B CAP_OBSENSOR_IMAGE_GENERATOR \u002B CAP_OBSENSOR_IR_GENERATOR]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "enum cv.VideoCaptureOBSensorProperties[const cv.CAP_PROP_OBSENSOR_INTRINSIC_FX=26001;const cv.CAP_PROP_OBSENSOR_INTRINSIC_FY=26002;const cv.CAP_PROP_OBSENSOR_INTRINSIC_CX=26003;const cv.CAP_PROP_OBSENSOR_INTRINSIC_CY=26004;const cv.CAP_PROP_OBSENSOR_RGB_POS_MSEC=26005;const cv.CAP_PROP_OBSENSOR_DEPTH_POS_MSEC=26006;const cv.CAP_PROP_OBSENSOR_DEPTH_WIDTH=26007;const cv.CAP_PROP_OBSENSOR_DEPTH_HEIGHT=26008;const cv.CAP_PROP_OBSENSOR_DEPTH_FPS=26009;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_K1=26010;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_K2=26011;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_K3=26012;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_K4=26013;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_K5=26014;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_K6=26015;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_P1=26016;const cv.CAP_PROP_OBSENSOR_COLOR_DISTORTION_P2=26017]",
+      "classification": "non-callable-metadata",
+      "reason": "The exact parser-emitted enum identity and values are preserved in checked mapping metadata; legacy backend-specific numeric IDs remain usable through integer parameter pairs without implying backend availability.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "identity": "class cv.IStreamReader",
+      "classification": "non-callable-metadata",
+      "reason": "The exact VideoIO class declaration is retained as metadata; its callable members are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.IStreamReader.read(c_string buffer;long long size)-\u003Elong long",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_stream_reader_read"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoStreamReader|method|public;instance|System.Int32 Read(System.Byte[] buffer,System.Int32 offset,System.Int32 count)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.IStreamReader.seek(long long offset;int origin)-\u003Elong long",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_stream_reader_seek"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoStreamReader|method|public;instance|System.Int64 Seek(System.Int64 offset,System.IO.SeekOrigin origin)"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "class cv.VideoCapture",
+      "classification": "non-callable-metadata",
+      "reason": "The exact VideoIO class declaration is retained as metadata; its callable members are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.VideoCapture.VideoCapture()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.VideoCapture.VideoCapture(String filename[/C,/Ref,/PATH];int apiPreference=CAP_ANY)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_file"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.VideoCapture.VideoCapture(String filename[/C,/Ref,/PATH];int apiPreference;vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_file_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.VideoCapture.VideoCapture(int index;int apiPreference=CAP_ANY)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_index"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.Int32 index,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.VideoCapture.VideoCapture(int index;int apiPreference;vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_index_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(System.Int32 index,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.VideoCapture.VideoCapture(Ptr_IStreamReader source[/C,/Ref];int apiPreference;vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_create",
+        "jyppx_ocv_video_capture_open_stream"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|constructor|public;instance|.ctor(OpenCvSharp.VideoIO.VideoStreamReader reader,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.VideoCapture.open(String filename[/C,/Ref,/PATH];int apiPreference=CAP_ANY)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_file"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.VideoCapture.open(String filename[/C,/Ref,/PATH];int apiPreference;vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_file_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.VideoCapture.open(int index;int apiPreference=CAP_ANY)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_index"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.Int32 index,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any)"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.VideoCapture.open(int index;int apiPreference;vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_index_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Open(System.Int32 index,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.VideoCapture.open(Ptr_IStreamReader source[/C,/Ref];int apiPreference;vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_open_stream"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCaptureExtensions|method|public;static|System.Boolean Open(OpenCvSharp.VideoIO.VideoCapture capture,OpenCvSharp.VideoIO.VideoStreamReader reader,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference=Any,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.VideoCapture.isOpened()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_is_opened"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|property|instance;get:public|System.Boolean IsOpened"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.VideoCapture.release()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Void Release()"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.VideoCapture.grab()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_grab"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Grab()"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.VideoCapture.retrieve(Mat image[/O];int flag=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_retrieve"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Retrieve(OpenCvSharp.Core.Mat image,System.Int32 flag=0)"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.VideoCapture.read(Mat image[/O])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_read"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Read(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.VideoCapture.set(int propId;double value)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_set"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Set(OpenCvSharp.VideoIO.VideoCaptureProperties propertyId,System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.VideoCapture.get(int propId)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_get"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Double Get(OpenCvSharp.VideoIO.VideoCaptureProperties propertyId)"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.VideoCapture.getBackendName()-\u003EString",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_backend_name_fill",
+        "jyppx_ocv_video_capture_backend_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.String GetBackendName()"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.VideoCapture.setExceptionMode(bool enable)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_set_exception_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|property|instance;get:public;set:public|System.Boolean ExceptionMode"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.VideoCapture.getExceptionMode()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_get_exception_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|property|instance;get:public;set:public|System.Boolean ExceptionMode"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.VideoCapture.waitAny(vector_VideoCapture streams[/C,/Ref];vector_int readyIndex[/O,/Ref];int64 timeoutNs=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_capture_wait_any"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoCapture|method|public;static|System.Boolean WaitAny(System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.VideoIO.VideoCapture\u003E streams,out System.Int32[] readyIndices,System.Int64 timeoutNs=0)"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "class cv.VideoWriter",
+      "classification": "non-callable-metadata",
+      "reason": "The exact VideoIO class declaration is retained as metadata; its callable members are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.VideoWriter.VideoWriter()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize;bool isColor=true)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize;bool isColor=true)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.VideoWriter.VideoWriter(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_create",
+        "jyppx_ocv_video_writer_open_api_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|constructor|public;instance|.ctor(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize;bool isColor=true)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize;bool isColor=true)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,System.Boolean isColor=true)"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.VideoWriter.open(String filename[/C,/Ref,/PATH];int apiPreference;int fourcc;double fps;Size frameSize[/C,/Ref];vector_int params[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_open_api_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Open(System.String filename,OpenCvSharp.VideoIO.VideoCaptureAPIs apiPreference,System.Int32 fourcc,System.Double fps,OpenCvSharp.Core.Size frameSize,params System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.VideoWriter.isOpened()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_is_opened"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|property|instance;get:public|System.Boolean IsOpened"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.VideoWriter.release()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_release"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Void Release()"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.VideoWriter.write(Mat image)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_write"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Write(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.VideoWriter.set(int propId;double value)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_set"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Boolean Set(OpenCvSharp.VideoIO.VideoWriterProperties propertyId,System.Double value)"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.VideoWriter.get(int propId)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_get"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.Double Get(OpenCvSharp.VideoIO.VideoWriterProperties propertyId)"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.VideoWriter.fourcc(char c1;char c2;char c3;char c4)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_fourcc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;static|System.Int32 FourCC(System.Char c1,System.Char c2,System.Char c3,System.Char c4)"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.VideoWriter.getBackendName()-\u003EString",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_writer_backend_name_fill",
+        "jyppx_ocv_video_writer_backend_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.VideoIO.VideoWriter|method|public;instance|System.String GetBackendName()"
+      ]
+    }
+  ]
+}

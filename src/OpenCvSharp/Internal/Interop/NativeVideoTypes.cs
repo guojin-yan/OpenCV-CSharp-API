@@ -29,5 +29,17 @@ namespace OpenCvSharp.Internal.Interop
             internal float Height;
             internal float Angle;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct VideoTrackerMilParamsNative
+        {
+            internal float SamplerInitInRadius;
+            internal int SamplerInitMaxNegNum;
+            internal float SamplerSearchWinSize;
+            internal float SamplerTrackInRadius;
+            internal int SamplerTrackMaxPosNum;
+            internal int SamplerTrackMaxNegNum;
+            internal int FeatureSetNumFeatures;
+        }
     }
 }

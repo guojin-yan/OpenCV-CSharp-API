@@ -1,0 +1,1747 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/ImgCodecsUpstreamMap/extract_imgcodecs.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/imgcodecs/include/opencv2/imgcodecs.hpp",
+  "headerSha256": "680ba3f356806553c70928856cef0ff8b0a2f6ad0d98db55f9e22e6ea124d5e1",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "declarationCount": 39,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "kind": "enum",
+      "name": "cv.ImreadModes",
+      "identity": "enum cv.ImreadModes",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMREAD_UNCHANGED",
+          "value": "-1"
+        },
+        {
+          "name": "const cv.IMREAD_GRAYSCALE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMREAD_COLOR_BGR",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMREAD_COLOR",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMREAD_ANYDEPTH",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMREAD_ANYCOLOR",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMREAD_LOAD_GDAL",
+          "value": "8"
+        },
+        {
+          "name": "const cv.IMREAD_REDUCED_GRAYSCALE_2",
+          "value": "16"
+        },
+        {
+          "name": "const cv.IMREAD_REDUCED_COLOR_2",
+          "value": "17"
+        },
+        {
+          "name": "const cv.IMREAD_REDUCED_GRAYSCALE_4",
+          "value": "32"
+        },
+        {
+          "name": "const cv.IMREAD_REDUCED_COLOR_4",
+          "value": "33"
+        },
+        {
+          "name": "const cv.IMREAD_REDUCED_GRAYSCALE_8",
+          "value": "64"
+        },
+        {
+          "name": "const cv.IMREAD_REDUCED_COLOR_8",
+          "value": "65"
+        },
+        {
+          "name": "const cv.IMREAD_IGNORE_ORIENTATION",
+          "value": "128"
+        },
+        {
+          "name": "const cv.IMREAD_COLOR_RGB",
+          "value": "256"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "kind": "enum",
+      "name": "cv.ImwriteFlags",
+      "identity": "enum cv.ImwriteFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_JPEG_QUALITY",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_PROGRESSIVE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_OPTIMIZE",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_RST_INTERVAL",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_LUMA_QUALITY",
+          "value": "5"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_CHROMA_QUALITY",
+          "value": "6"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR",
+          "value": "7"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_COMPRESSION",
+          "value": "16"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_STRATEGY",
+          "value": "17"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_BILEVEL",
+          "value": "18"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_FILTER",
+          "value": "19"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_ZLIBBUFFER_SIZE",
+          "value": "20"
+        },
+        {
+          "name": "const cv.IMWRITE_PXM_BINARY",
+          "value": "32"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_TYPE",
+          "value": "(3 << 4) + 0"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION",
+          "value": "(3 << 4) + 1"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_DWA_COMPRESSION_LEVEL",
+          "value": "(3 << 4) + 2"
+        },
+        {
+          "name": "const cv.IMWRITE_WEBP_QUALITY",
+          "value": "64"
+        },
+        {
+          "name": "const cv.IMWRITE_WEBP_LOSSLESS_MODE",
+          "value": "65"
+        },
+        {
+          "name": "const cv.IMWRITE_HDR_COMPRESSION",
+          "value": "(5 << 4) + 0"
+        },
+        {
+          "name": "const cv.IMWRITE_PAM_TUPLETYPE",
+          "value": "128"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_RESUNIT",
+          "value": "256"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_XDPI",
+          "value": "257"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_YDPI",
+          "value": "258"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION",
+          "value": "259"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_ROWSPERSTRIP",
+          "value": "278"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_PREDICTOR",
+          "value": "317"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG2000_COMPRESSION_X1000",
+          "value": "272"
+        },
+        {
+          "name": "const cv.IMWRITE_AVIF_QUALITY",
+          "value": "512"
+        },
+        {
+          "name": "const cv.IMWRITE_AVIF_DEPTH",
+          "value": "513"
+        },
+        {
+          "name": "const cv.IMWRITE_AVIF_SPEED",
+          "value": "514"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEGXL_QUALITY",
+          "value": "640"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEGXL_EFFORT",
+          "value": "641"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEGXL_DISTANCE",
+          "value": "642"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEGXL_DECODING_SPEED",
+          "value": "643"
+        },
+        {
+          "name": "const cv.IMWRITE_BMP_COMPRESSION",
+          "value": "768"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_LOOP",
+          "value": "1024"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_SPEED",
+          "value": "1025"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_QUALITY",
+          "value": "1026"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_DITHER",
+          "value": "1027"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_TRANSPARENCY",
+          "value": "1028"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE",
+          "value": "1029"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "kind": "enum",
+      "name": "cv.ImwriteJPEGSamplingFactorParams",
+      "identity": "enum cv.ImwriteJPEGSamplingFactorParams",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR_411",
+          "value": "0x411111"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR_420",
+          "value": "0x221111"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR_422",
+          "value": "0x211111"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR_440",
+          "value": "0x121111"
+        },
+        {
+          "name": "const cv.IMWRITE_JPEG_SAMPLING_FACTOR_444",
+          "value": "0x111111"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "kind": "enum",
+      "name": "cv.ImwriteTiffCompressionFlags",
+      "identity": "enum cv.ImwriteTiffCompressionFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_NONE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_CCITTRLE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_CCITTFAX3",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_CCITT_T4",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_CCITTFAX4",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_CCITT_T6",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_LZW",
+          "value": "5"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_OJPEG",
+          "value": "6"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_JPEG",
+          "value": "7"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_T85",
+          "value": "9"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_T43",
+          "value": "10"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_NEXT",
+          "value": "32766"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_CCITTRLEW",
+          "value": "32771"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_PACKBITS",
+          "value": "32773"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_THUNDERSCAN",
+          "value": "32809"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_IT8CTPAD",
+          "value": "32895"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_IT8LW",
+          "value": "32896"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_IT8MP",
+          "value": "32897"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_IT8BL",
+          "value": "32898"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_PIXARFILM",
+          "value": "32908"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_PIXARLOG",
+          "value": "32909"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_DEFLATE",
+          "value": "32946"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_ADOBE_DEFLATE",
+          "value": "8"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_DCS",
+          "value": "32947"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_JBIG",
+          "value": "34661"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_SGILOG",
+          "value": "34676"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_SGILOG24",
+          "value": "34677"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_JP2000",
+          "value": "34712"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_LERC",
+          "value": "34887"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_LZMA",
+          "value": "34925"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_ZSTD",
+          "value": "50000"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_WEBP",
+          "value": "50001"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_COMPRESSION_JXL",
+          "value": "50002"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "kind": "enum",
+      "name": "cv.ImwriteTiffPredictorFlags",
+      "identity": "enum cv.ImwriteTiffPredictorFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_TIFF_PREDICTOR_NONE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_PREDICTOR_HORIZONTAL",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_PREDICTOR_FLOATINGPOINT",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "kind": "enum",
+      "name": "cv.ImwriteTiffResolutionUnitFlags",
+      "identity": "enum cv.ImwriteTiffResolutionUnitFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_TIFF_RESOLUTION_UNIT_NONE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_RESOLUTION_UNIT_INCH",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_TIFF_RESOLUTION_UNIT_CENTIMETER",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "kind": "enum",
+      "name": "cv.ImwriteEXRTypeFlags",
+      "identity": "enum cv.ImwriteEXRTypeFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_EXR_TYPE_HALF",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_TYPE_FLOAT",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "kind": "enum",
+      "name": "cv.ImwriteEXRCompressionFlags",
+      "identity": "enum cv.ImwriteEXRCompressionFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_NO",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_RLE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_ZIPS",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_ZIP",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_PIZ",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_PXR24",
+          "value": "5"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_B44",
+          "value": "6"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_B44A",
+          "value": "7"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_DWAA",
+          "value": "8"
+        },
+        {
+          "name": "const cv.IMWRITE_EXR_COMPRESSION_DWAB",
+          "value": "9"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "kind": "enum",
+      "name": "cv.ImwritePNGFlags",
+      "identity": "enum cv.ImwritePNGFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_PNG_STRATEGY_DEFAULT",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_STRATEGY_FILTERED",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_STRATEGY_RLE",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_STRATEGY_FIXED",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "kind": "enum",
+      "name": "cv.ImwritePNGFilterFlags",
+      "identity": "enum cv.ImwritePNGFilterFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_PNG_FILTER_NONE",
+          "value": "8"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_FILTER_SUB",
+          "value": "16"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_FILTER_UP",
+          "value": "32"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_FILTER_AVG",
+          "value": "64"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_FILTER_PAETH",
+          "value": "128"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_FAST_FILTERS",
+          "value": "(IMWRITE_PNG_FILTER_NONE | IMWRITE_PNG_FILTER_SUB | IMWRITE_PNG_FILTER_UP)"
+        },
+        {
+          "name": "const cv.IMWRITE_PNG_ALL_FILTERS",
+          "value": "(IMWRITE_PNG_FAST_FILTERS | IMWRITE_PNG_FILTER_AVG | IMWRITE_PNG_FILTER_PAETH)"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "kind": "enum",
+      "name": "cv.ImwritePAMFlags",
+      "identity": "enum cv.ImwritePAMFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_PAM_FORMAT_NULL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMWRITE_PAM_FORMAT_BLACKANDWHITE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_PAM_FORMAT_GRAYSCALE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_PAM_FORMAT_GRAYSCALE_ALPHA",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_PAM_FORMAT_RGB",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMWRITE_PAM_FORMAT_RGB_ALPHA",
+          "value": "5"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "kind": "enum",
+      "name": "cv.ImwriteWEBPLosslessMode",
+      "identity": "enum cv.ImwriteWEBPLosslessMode",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_WEBP_LOSSLESS_OFF",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMWRITE_WEBP_LOSSLESS_ON",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_WEBP_LOSSLESS_PRESERVE_COLOR",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "kind": "enum",
+      "name": "cv.ImwriteHDRCompressionFlags",
+      "identity": "enum cv.ImwriteHDRCompressionFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_HDR_COMPRESSION_NONE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMWRITE_HDR_COMPRESSION_RLE",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "kind": "enum",
+      "name": "cv.ImwriteBMPCompressionFlags",
+      "identity": "enum cv.ImwriteBMPCompressionFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_BMP_COMPRESSION_RGB",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMWRITE_BMP_COMPRESSION_BITFIELDS",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "kind": "enum",
+      "name": "cv.ImwriteGIFCompressionFlags",
+      "identity": "enum cv.ImwriteGIFCompressionFlags",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMWRITE_GIF_FAST_NO_DITHER",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_FAST_FLOYD_DITHER",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE_SIZE_8",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE_SIZE_16",
+          "value": "4"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE_SIZE_32",
+          "value": "5"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE_SIZE_64",
+          "value": "6"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE_SIZE_128",
+          "value": "7"
+        },
+        {
+          "name": "const cv.IMWRITE_GIF_COLORTABLE_SIZE_256",
+          "value": "8"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "kind": "enum",
+      "name": "cv.ImageMetadataType",
+      "identity": "enum cv.ImageMetadataType",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.IMAGE_METADATA_UNKNOWN",
+          "value": "-1"
+        },
+        {
+          "name": "const cv.IMAGE_METADATA_EXIF",
+          "value": "0"
+        },
+        {
+          "name": "const cv.IMAGE_METADATA_XMP",
+          "value": "1"
+        },
+        {
+          "name": "const cv.IMAGE_METADATA_ICCP",
+          "value": "2"
+        },
+        {
+          "name": "const cv.IMAGE_METADATA_CICP",
+          "value": "3"
+        },
+        {
+          "name": "const cv.IMAGE_METADATA_MAX",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "kind": "class",
+      "name": "cv.Animation",
+      "identity": "class cv.Animation",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "loop_count",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "bgcolor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "durations",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "frames",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "still_image",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Represents an animation with multiple frames.\nThe `Animation` struct is designed to store and manage data for animated sequences such as those from animated formats (e.g., GIF, AVIF, APNG, WebP).\nIt provides support for looping, background color settings, frame timing, and frame storage."
+    },
+    {
+      "ordinal": 17,
+      "kind": "callable",
+      "name": "cv.Animation.Animation",
+      "identity": "cv.Animation.Animation(int loopCount=0;Scalar bgColor=Scalar())->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "loopCount",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "bgColor",
+          "default": "Scalar()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructs an Animation object with optional loop count and background color.\n\n    @param loopCount An integer representing the number of times the animation should loop:\n    - `0` (default) indicates infinite looping, meaning the animation will replay continuously.\n    - Positive values denote finite repeat counts, allowing the animation to play a limited number of times.\n    - If a negative value or a value beyond the maximum of `0xffff` (65535) is provided, it is reset to `0`\n    (infinite looping) to maintain valid bounds.\n\n    @param bgColor A `Scalar` object representing the background color in BGR format:\n    - Defaults to `Scalar()`, indicating an empty color (usually transparent if supported).\n    - This background color provides a solid fill behind frames that have transparency, ensuring a consistent display appearance."
+    },
+    {
+      "ordinal": 18,
+      "kind": "callable",
+      "name": "cv.imread",
+      "identity": "cv.imread(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "IMREAD_COLOR_BGR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads an image from a file.\n\n@anchor imread\n\nThe `imread` function loads an image from the specified file and returns OpenCV matrix. If the image cannot be\nread (because of a missing file, improper permissions, or unsupported/invalid format), the function\nreturns an empty matrix.\n\nCurrently, the following file formats are supported:\n\n-   Windows bitmaps - \\*.bmp, \\*.dib (always supported)\n-   GIF files - \\*.gif (always supported)\n-   JPEG files - \\*.jpeg, \\*.jpg, \\*.jpe (see the *Note* section)\n-   JPEG 2000 files - \\*.jp2 (see the *Note* section)\n-   Portable Network Graphics - \\*.png (see the *Note* section)\n-   WebP - \\*.webp (see the *Note* section)\n-   AVIF - \\*.avif (see the *Note* section)\n-   Portable image format - \\*.pbm, \\*.pgm, \\*.ppm, \\*.pxm, \\*.pnm (always supported)\n-   PFM files - \\*.pfm (see the *Note* section)\n-   Sun rasters - \\*.sr, \\*.ras (always supported)\n-   TIFF files - \\*.tiff, \\*.tif (see the *Note* section)\n-   OpenEXR Image files - \\*.exr (see the *Note* section)\n-   Radiance HDR - \\*.hdr, \\*.pic (always supported)\n-   Raster and Vector geospatial data supported by GDAL (see the *Note* section)\n\n@note\n-   The function determines the type of an image by its content, not by the file extension.\n-   In the case of color images, the decoded images will have the channels stored in **B G R** order.\n-   When using IMREAD_GRAYSCALE, the codec's internal grayscale conversion will be used, if available.\n    Results may differ from the output of cvtColor().\n-   On Microsoft Windows\\* and Mac OS\\*, the codecs shipped with OpenCV (libjpeg, libpng, libtiff,\n    and libjasper) are used by default. So, OpenCV can always read JPEGs, PNGs, and TIFFs. On Mac OS,\n    there is also an option to use native Mac OS image readers. However, beware that currently these\n    native image loaders give images with different pixel values because of the color management embedded\n    into Mac OS.\n-   On Linux\\*, BSD flavors, and other Unix-like open-source operating systems, OpenCV looks for\n    codecs supplied with the OS. Ensure the relevant packages are installed (including development\n    files, such as \"libjpeg-dev\" in Debian\\* and Ubuntu\\*) to get codec support, or turn\n    on the OPENCV_BUILD_3RDPARTY_LIBS flag in CMake.\n-   If the *WITH_GDAL* flag is set to true in CMake and @ref IMREAD_LOAD_GDAL is used to load the image,\n    the [GDAL](http://www.gdal.org) driver will be used to decode the image, supporting\n    [Raster](http://www.gdal.org/formats_list.html) and [Vector](http://www.gdal.org/ogr_formats.html) formats.\n-   If EXIF information is embedded in the image file, the EXIF orientation will be taken into account,\n    and thus the image will be rotated accordingly unless the flags @ref IMREAD_IGNORE_ORIENTATION\n    or @ref IMREAD_UNCHANGED are passed.\n-   Use the IMREAD_UNCHANGED flag to preserve the floating-point values from PFM images.\n-   By default, the number of pixels must be less than 2^30. This limit can be changed by setting\n    the environment variable `OPENCV_IO_MAX_IMAGE_PIXELS`. See @ref tutorial_env_reference.\n\n@param filename Name of the file to be loaded.\n@param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_COLOR_BGR."
+    },
+    {
+      "ordinal": 19,
+      "kind": "callable",
+      "name": "cv.imread",
+      "identity": "cv.imread(String filename[/C,/Ref,/PATH];Mat dst[/O];int flags=IMREAD_COLOR_BGR)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "IMREAD_COLOR_BGR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads an image from a file.\n\nThis is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts and the return value.\n@param filename Name of file to be loaded.\n@param dst object in which the image will be loaded.\n@param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_COLOR_BGR.\n@note\nThe image passing through the img parameter can be pre-allocated. The memory is reused if the shape and the type match with the load image."
+    },
+    {
+      "ordinal": 20,
+      "kind": "callable",
+      "name": "cv.imreadWithMetadata",
+      "identity": "cv.imreadWithMetadata(String filename[/C,/Ref,/PATH];vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "metadataTypes",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "metadata",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads an image from a file along with associated metadata.\n\nThis function behaves similarly to cv::imread(), loading an image from the specified file.\nIn addition to the image pixel data, it also attempts to extract any available metadata\nembedded in the file (such as EXIF, XMP, etc.), depending on file format support.\n\n@note In the case of color images, the decoded images will have the channels stored in **B G R** order.\n@param filename Name of the file to be loaded.\n@param metadataTypes Output vector with types of metadata chunks returned in metadata, see ImageMetadataType.\n@param metadata Output vector of vectors or vector of matrices to store the retrieved metadata.\n@param flags Flag that can take values of cv::ImreadModes.\n\n@return The loaded image as a cv::Mat object. If the image cannot be read, the function returns an empty matrix."
+    },
+    {
+      "ordinal": 21,
+      "kind": "callable",
+      "name": "cv.imreadmulti",
+      "identity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int flags=IMREAD_COLOR_BGR)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "mats",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "IMREAD_COLOR_BGR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads a multi-page image from a file.\n\nThe function imreadmulti loads a multi-page image from the specified file into a vector of Mat objects.\n@param filename Name of file to be loaded.\n@param mats A vector of Mat objects holding each page.\n@param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_COLOR_BGR.\n@note The default flags value was changed from cv::IMREAD_ANYCOLOR to cv::IMREAD_COLOR_BGR for unification.\n@sa cv::imread"
+    },
+    {
+      "ordinal": 22,
+      "kind": "callable",
+      "name": "cv.imreadmulti",
+      "identity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int start;int count;int flags=IMREAD_ANYCOLOR)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "mats",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "start",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "count",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "IMREAD_ANYCOLOR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads images of a multi-page image from a file.\n\nThe function imreadmulti loads a specified range from a multi-page image from the specified file into a vector of Mat objects.\n@param filename Name of file to be loaded.\n@param mats A vector of Mat objects holding each page.\n@param start Start index of the image to load\n@param count Count number of images to load\n@param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_ANYCOLOR.\n@sa cv::imread"
+    },
+    {
+      "ordinal": 23,
+      "kind": "callable",
+      "name": "cv.imreadanimation",
+      "identity": "cv.imreadanimation(String filename[/C,/Ref,/PATH];Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "Animation",
+          "name": "animation",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "start",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "count",
+          "default": "INT16_MAX",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads frames from an animated image file into an Animation structure.\n\nThe function imreadanimation loads frames from an animated image file (e.g., GIF, AVIF, APNG, WEBP) into the provided Animation struct.\n\n@param filename A string containing the path to the file.\n@param animation A reference to an Animation structure where the loaded frames will be stored. It should be initialized before the function is called.\n@param start The index of the first frame to load. This is optional and defaults to 0.\n@param count The number of frames to load. This is optional and defaults to 32767.\n\n@return Returns true if the file was successfully loaded and frames were extracted; returns false otherwise."
+    },
+    {
+      "ordinal": 24,
+      "kind": "callable",
+      "name": "cv.imdecodeanimation",
+      "identity": "cv.imdecodeanimation(Mat buf;Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "buf",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Animation",
+          "name": "animation",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "start",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "count",
+          "default": "INT16_MAX",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads frames from an animated image buffer into an Animation structure.\n\nThe function imdecodeanimation loads frames from an animated image buffer (e.g., GIF, AVIF, APNG, WEBP) into the provided Animation struct.\n\n@param buf A reference to an InputArray containing the image buffer.\n@param animation A reference to an Animation structure where the loaded frames will be stored. It should be initialized before the function is called.\n@param start The index of the first frame to load. This is optional and defaults to 0.\n@param count The number of frames to load. This is optional and defaults to 32767.\n\n@return Returns true if the buffer was successfully loaded and frames were extracted; returns false otherwise."
+    },
+    {
+      "ordinal": 25,
+      "kind": "callable",
+      "name": "cv.imwriteanimation",
+      "identity": "cv.imwriteanimation(String filename[/C,/Ref,/PATH];Animation animation[/C,/Ref];vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "Animation",
+          "name": "animation",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Saves an Animation to a specified file.\n\nThe function imwriteanimation saves the provided Animation data to the specified file in an animated format.\nSupported formats depend on the implementation and may include formats like GIF, AVIF, APNG, or WEBP.\n\n@param filename The name of the file where the animation will be saved. The file extension determines the format.\n@param animation A constant reference to an Animation struct containing the frames and metadata to be saved.\n@param params Optional format-specific parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ...).\nThese parameters are used to specify additional options for the encoding process. Refer to `cv::ImwriteFlags` for details on possible parameters.\n\n@return Returns true if the animation was successfully saved; returns false otherwise."
+    },
+    {
+      "ordinal": 26,
+      "kind": "callable",
+      "name": "cv.imencodeanimation",
+      "identity": "cv.imencodeanimation(String ext[/C,/Ref];Animation animation[/C,/Ref];vector_uchar buf[/O,/Ref];vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "ext",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Animation",
+          "name": "animation",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_uchar",
+          "name": "buf",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Encodes an Animation to a memory buffer.\n\nThe function imencodeanimation encodes the provided Animation data into a memory\nbuffer in an animated format. Supported formats depend on the implementation and\nmay include formats like GIF, AVIF, APNG, or WEBP.\n\n@param ext The file extension that determines the format of the encoded data.\n@param animation A constant reference to an Animation struct containing the\nframes and metadata to be encoded.\n@param buf A reference to a vector of unsigned chars where the encoded data will\nbe stored.\n@param params Optional format-specific parameters encoded as pairs (paramId_1,\nparamValue_1, paramId_2, paramValue_2, ...). These parameters are used to\nspecify additional options for the encoding process. Refer to `cv::ImwriteFlags`\nfor details on possible parameters.\n\n@return Returns true if the animation was successfully encoded; returns false otherwise."
+    },
+    {
+      "ordinal": 27,
+      "kind": "callable",
+      "name": "cv.imcount",
+      "identity": "cv.imcount(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)->size_t",
+      "returnType": "size_t",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "IMREAD_COLOR_BGR",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of images inside the given file\n\nThe function imcount returns the number of pages in a multi-page image (e.g. TIFF), the number of frames in an animation (e.g. AVIF), and 1 otherwise.\nIf the image cannot be decoded, 0 is returned.\n@param filename Name of file to be loaded.\n@param flags Flag that can take values of cv::ImreadModes, default with cv::IMREAD_COLOR_BGR.\n@note The default flags value was changed from cv::IMREAD_ANYCOLOR to cv::IMREAD_COLOR_BGR for unification.\n@todo when cv::IMREAD_LOAD_GDAL flag used the return value will be 0 or 1 because OpenCV's GDAL decoder doesn't support multi-page reading yet."
+    },
+    {
+      "ordinal": 28,
+      "kind": "callable",
+      "name": "cv.imwrite",
+      "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Saves an image to a specified file.\n\nThe function imwrite saves the image to the specified file. The image format is chosen based on the\nfilename extension (see cv::imread for the list of extensions). In general, only 8-bit unsigned (CV_8U)\nsingle-channel or 3-channel (with 'BGR' channel order) images\ncan be saved using this function, with these exceptions:\n\n- With BMP encoder, 8-bit unsigned (CV_8U) images can be saved.\n  - BMP images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255.\n    OpenCV v4.13.0 or later use BI_BITFIELDS compression as default. See IMWRITE_BMP_COMPRESSION.\n- With OpenEXR encoder, only 32-bit float (CV_32F) images can be saved. More than 4 channels can be saved. (imread can load it then.)\n  - 8-bit unsigned (CV_8U) images are not supported.\n- With Radiance HDR encoder, non 64-bit float (CV_64F) images can be saved.\n  - All images will be converted to 32-bit float (CV_32F).\n- With JPEG 2000 encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With JPEG XL encoder, 8-bit unsigned (CV_8U), 16-bit unsigned (CV_16U) and 32-bit float(CV_32F) images can be saved.\n  - JPEG XL images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) / 32-bit float 4-channel (CV_32FC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255/65535/1.0.\n- With PAM encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With PNG encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n  - PNG images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255/65535(see the code sample below).\n- With PGM/PPM encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n- With TIFF encoder, 8-bit unsigned (CV_8U), 8-bit signed (CV_8S),\n                     16-bit unsigned (CV_16U), 16-bit signed (CV_16S),\n                     32-bit unsigned (CV_32U), 32-bit signed (CV_32S),\n                     64-bit unsigned (CV_64U), 64-bit signed (CV_64S),\n                     32-bit float (CV_32F) and 64-bit float (CV_64F) images can be saved.\n  - Multiple images (vector of Mat) can be saved in TIFF format (see the code sample below).\n  - 32-bit float 3-channel (CV_32FC3) TIFF images can be saved\n    using the LogLuv high dynamic range encoding (4 bytes per pixel) through TIFF_COMPRESSION_SGILOG or\n    (3 bytes per pixel) through TIFF_COMPRESSION_SGILOG24.\n  - Other compression schemes (LZW...) are supported as well for 32F depth, but the efficiency might not\n    be very good for the floating-point representation bit patterns.\n- With GIF encoder, 8-bit unsigned (CV_8U) images can be saved.\n  - GIF images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255.\n  - 8-bit single-channel images (CV_8UC1) are not supported due to GIF's limitation to indexed color formats.\n- With AVIF encoder, 8-bit unsigned (CV_8U) and 16-bit unsigned (CV_16U) images can be saved.\n  - CV_16U images can be saved as only 10-bit or 12-bit (not 16-bit). See IMWRITE_AVIF_DEPTH.\n  - AVIF images with an alpha channel can be saved using this function.\n    To achieve this, create an 8-bit 4-channel (CV_8UC4) / 16-bit 4-channel (CV_16UC4) BGRA image, ensuring the alpha channel is the last component.\n    Fully transparent pixels should have an alpha value of 0, while fully opaque pixels should have an alpha value of 255 (8-bit) / 1023 (10-bit) / 4095 (12-bit) (see the code sample below).\n\nIf the image format is not supported, the image will be converted to 8-bit unsigned (CV_8U) and saved that way.\n\nIf the format, depth or channel order is different, use\nMat::convertTo and cv::cvtColor to convert it before saving. Or, use the universal FileStorage I/O\nfunctions to save the image to XML or YAML format.\n\nThe sample below shows how to create a BGRA image, how to set custom compression parameters and save it to a PNG file.\nIt also demonstrates how to save multiple images in a TIFF file:\n@include snippets/imgcodecs_imwrite.cpp\n@param filename Name of the file.\n@param img (Mat or vector of Mat) Image or Images to be saved.\n@param params Format-specific parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .) see cv::ImwriteFlags\n@return true if the image is successfully written to the specified file; false otherwise."
+    },
+    {
+      "ordinal": 29,
+      "kind": "callable",
+      "name": "cv.imwriteWithMetadata",
+      "identity": "cv.imwriteWithMetadata(String filename[/C,/Ref,/PATH];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata[/Ref];vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_int",
+          "name": "metadataTypes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "metadata",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Saves an image to a specified file with metadata\n\nThe function imwriteWithMetadata saves the image to the specified file. It does the same thing as imwrite, but additionally writes metadata if the corresponding format supports it.\n@param filename Name of the file. As with imwrite, image format is determined by the file extension.\n@param img (Mat or vector of Mat) Image or Images to be saved.\n@param metadataTypes Vector with types of metadata chucks stored in metadata to write, see ImageMetadataType.\n@param metadata Vector of vectors or vector of matrices with chunks of metadata to store into the file\n@param params Format-specific parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .) see cv::ImwriteFlags"
+    },
+    {
+      "ordinal": 30,
+      "kind": "callable",
+      "name": "cv.imwritemulti",
+      "identity": "cv.imwritemulti(String filename[/C,/Ref,/PATH];vector_Mat img;vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "kind": "callable",
+      "name": "cv.imdecode",
+      "identity": "cv.imdecode(Mat buf;int flags)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "buf",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads an image from a buffer in memory.\n\nThe function imdecode reads an image from the specified buffer in the memory. If the buffer is too short or\ncontains invalid data, the function returns an empty matrix ( Mat::data==NULL ).\n\nSee cv::imread for the list of supported formats and flags description.\n\n@note In the case of color images, the decoded images will have the channels stored in **B G R** order.\n@param buf Input array or vector of bytes.\n@param flags Flag that can take values of cv::ImreadModes."
+    },
+    {
+      "ordinal": 32,
+      "kind": "callable",
+      "name": "cv.imdecodeWithMetadata",
+      "identity": "cv.imdecodeWithMetadata(Mat buf;vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "buf",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_int",
+          "name": "metadataTypes",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "metadata",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads an image from a memory buffer and extracts associated metadata.\n\nThis function decodes an image from the specified memory buffer. If the buffer is too short or\ncontains invalid data, the function returns an empty matrix ( Mat::data==NULL ).\n\nSee cv::imread for the list of supported formats and flags description.\n\n@note In the case of color images, the decoded images will have the channels stored in **B G R** order.\n@param buf Input array or vector of bytes containing the encoded image data.\n@param metadataTypes Output vector with types of metadata chucks returned in metadata, see cv::ImageMetadataType\n@param metadata Output vector of vectors or vector of matrices to store the retrieved metadata\n@param flags Flag that can take values of cv::ImreadModes.\n\n@return The decoded image as a cv::Mat object. If decoding fails, the function returns an empty matrix."
+    },
+    {
+      "ordinal": 33,
+      "kind": "callable",
+      "name": "cv.imdecodemulti",
+      "identity": "cv.imdecodemulti(Mat buf;int flags;vector_Mat mats[/O,/Ref];Range range=Range::all()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "buf",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "mats",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Range",
+          "name": "range",
+          "default": "Range::all()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Reads a multi-page image from a buffer in memory.\n\nThe function imdecodemulti reads a multi-page image from the specified buffer in the memory. If the buffer is too short or\ncontains invalid data, the function returns false.\n\nSee cv::imreadmulti for the list of supported formats and flags description.\n\n@note In the case of color images, the decoded images will have the channels stored in **B G R** order.\n@param buf Input array or vector of bytes.\n@param flags Flag that can take values of cv::ImreadModes.\n@param mats A vector of Mat objects holding each page, if more than one.\n@param range A continuous selection of pages."
+    },
+    {
+      "ordinal": 34,
+      "kind": "callable",
+      "name": "cv.imencode",
+      "identity": "cv.imencode(String ext[/C,/Ref];Mat img;vector_uchar buf[/O,/Ref];vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "ext",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_uchar",
+          "name": "buf",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Encodes an image into a memory buffer.\n\nThe function imencode compresses the image and stores it in the memory buffer that is resized to fit the\nresult. See cv::imwrite for the list of supported formats and flags description.\n\n@param ext File extension that defines the output format. Must include a leading period.\n@param img Image to be compressed.\n@param buf Output buffer resized to fit the compressed image.\n@param params Format-specific parameters. See cv::imwrite and cv::ImwriteFlags."
+    },
+    {
+      "ordinal": 35,
+      "kind": "callable",
+      "name": "cv.imencodeWithMetadata",
+      "identity": "cv.imencodeWithMetadata(String ext[/C,/Ref];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata;vector_uchar buf[/O,/Ref];vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "ext",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_int",
+          "name": "metadataTypes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "metadata",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_uchar",
+          "name": "buf",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Encodes an image into a memory buffer.\n\nThe function imencode compresses the image and stores it in the memory buffer that is resized to fit the\nresult. See cv::imwrite for the list of supported formats and flags description.\n\n@param ext File extension that defines the output format. Must include a leading period.\n@param img Image to be compressed.\n@param metadataTypes Vector with types of metadata chucks stored in metadata to write, see ImageMetadataType.\n@param metadata Vector of vectors or vector of matrices with chunks of metadata to store into the file\n@param buf Output buffer resized to fit the compressed image.\n@param params Format-specific parameters. See cv::imwrite and cv::ImwriteFlags."
+    },
+    {
+      "ordinal": 36,
+      "kind": "callable",
+      "name": "cv.imencodemulti",
+      "identity": "cv.imencodemulti(String ext[/C,/Ref];vector_Mat imgs;vector_uchar buf[/O,/Ref];vector_int params=std::vector<int>()[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "ext",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "imgs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_uchar",
+          "name": "buf",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_int",
+          "name": "params",
+          "default": "std::vector<int>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Encodes array of images into a memory buffer.\n\nThe function is analog to cv::imencode for in-memory multi-page image compression.\nSee cv::imwrite for the list of supported formats and flags description.\n\n@param ext File extension that defines the output format. Must include a leading period.\n@param imgs Vector of images to be written.\n@param buf Output buffer resized to fit the compressed data.\n@param params Format-specific parameters. See cv::imwrite and cv::ImwriteFlags."
+    },
+    {
+      "ordinal": 37,
+      "kind": "callable",
+      "name": "cv.haveImageReader",
+      "identity": "cv.haveImageReader(String filename[/C,/Ref,/PATH])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Checks if the specified image file can be decoded by OpenCV.\n\nThe function haveImageReader checks if OpenCV is capable of reading the specified file.\nThis can be useful for verifying support for a given image format before attempting to load an image.\n\n@param filename The name of the file to be checked.\n@return true if an image reader for the specified file is available and the file can be opened, false otherwise.\n\n@note The function checks the availability of image codecs that are either built into OpenCV or dynamically loaded.\nIt does not load the image codec implementation and decode data, but uses signature check.\nIf the file cannot be opened or the format is unsupported, the function will return false.\n\n@sa cv::haveImageWriter, cv::imread, cv::imdecode"
+    },
+    {
+      "ordinal": 38,
+      "kind": "callable",
+      "name": "cv.haveImageWriter",
+      "identity": "cv.haveImageWriter(String filename[/C,/Ref,/PATH])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Checks if the specified image file or specified file extension can be encoded by OpenCV.\n\nThe function haveImageWriter checks if OpenCV is capable of writing images with the specified file extension.\nThis can be useful for verifying support for a given image format before attempting to save an image.\n\n@param filename The name of the file or the file extension (e.g., \".jpg\", \".png\").\nIt is recommended to provide the file extension rather than the full file name.\n@return true if an image writer for the specified extension is available, false otherwise.\n\n@note The function checks the availability of image codecs that are either built into OpenCV or dynamically loaded.\nIt does not check for the actual existence of the file but rather the ability to write files of the given type.\n\n@sa cv::haveImageReader, cv::imwrite, cv::imencode"
+    }
+  ]
+}

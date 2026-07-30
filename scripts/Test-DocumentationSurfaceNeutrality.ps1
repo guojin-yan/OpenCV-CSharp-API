@@ -182,7 +182,8 @@ if ($tocText -match "OpenCv5Sharp\.|OpenCv5Sharp runtime|OpenCv5Sharp package") 
 $docsWorkflowText = Read-RequiredText -Path $docsWorkflowPath
 foreach ($needle in @(
         "dotnet build .\src\OpenCvSharp\OpenCvSharp.csproj -c Release --no-restore",
-        "docfx .\docs\docfx.json",
+        "dotnet tool restore",
+        "dotnet tool run docfx ./docs/docfx.json",
         "path: docs/_site")) {
     if (-not (Test-ContainsText -Text $docsWorkflowText -Needle $needle)) {
         Add-Violation $violations ".github/workflows/docs.yml" "Docs workflow must contain '$needle'"

@@ -49,6 +49,16 @@ Each inner array is a managed copy owned by the caller. It remains valid after t
 
 每个内部数组都是由调用方拥有的 managed 副本。native 调用返回后仍然有效，不借用 OpenCV 内存。
 
+## Contiguous Integer Point Spans / 连续整数点 Span
+
+On modern .NET targets, geometry APIs can accept `ReadOnlySpan<Point>`. `PointSetMarshaller` verifies that `Point` is sequentially laid out as two 32-bit integers, reinterprets the span as interleaved `x, y` values, and pins it only for the native call. Output `Point2f[]` storage is likewise viewed as interleaved 32-bit floats, so count/fill and fixed-capacity operations write directly into the final managed array.
+
+在现代 .NET 目标上，几何 API 可以接收 `ReadOnlySpan<Point>`。`PointSetMarshaller` 会验证 `Point` 由两个连续的 32 位整数组成，把 Span 重解释为交错的 `x, y` 值，并且只在 native 调用期间固定内存。输出 `Point2f[]` 的内存同样会被视为交错的 32 位浮点数，因此 count/fill 和固定容量操作可以直接写入最终 managed 数组。
+
+This path avoids temporary interleaved `int[]` and `float[]` allocations. Empty spans and algorithm-specific scalar constraints are rejected before native code is called. The current advanced batch covers `ApproxPolyN`, the three ellipse-fit variants, `GetClosestEllipsePoints`, `MinEnclosingTriangle`, `MinEnclosingConvexPolygon`, and `IntersectConvexConvex`.
+
+该路径避免临时分配交错的 `int[]` 和 `float[]`。空 Span 与算法特定的标量约束会在调用 native 代码前被拒绝。当前高级批次覆盖 `ApproxPolyN`、三个椭圆拟合变体、`GetClosestEllipsePoints`、`MinEnclosingTriangle`、`MinEnclosingConvexPolygon` 和 `IntersectConvexConvex`。
+
 ## Current Uses / 当前用途
 
 - `ArucoDetector.DetectMarkers`

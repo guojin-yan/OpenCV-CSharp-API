@@ -59,6 +59,14 @@ The current geometry fast-path batch covers:
 - `PointPolygonTest(ReadOnlySpan<Point>)`
 - `MatchShapes(ReadOnlySpan<Point>, ReadOnlySpan<Point>)`
 - `MinAreaRect(ReadOnlySpan<Point>)`
+- `ApproxPolyN(ReadOnlySpan<Point>)`
+- `FitEllipse(ReadOnlySpan<Point>)`
+- `FitEllipseAMS(ReadOnlySpan<Point>)`
+- `FitEllipseDirect(ReadOnlySpan<Point>)`
+- `GetClosestEllipsePoints(RotatedRect, ReadOnlySpan<Point>)`
+- `MinEnclosingTriangle(ReadOnlySpan<Point>)`
+- `MinEnclosingConvexPolygon(ReadOnlySpan<Point>)`
+- `IntersectConvexConvex(ReadOnlySpan<Point>, ReadOnlySpan<Point>)`
 - `FitLine(ReadOnlySpan<Point>)`
 
 ## Common Shape Tasks / 常见形状任务
@@ -94,6 +102,19 @@ RotatedRect minRect = ImgProcCv2.MinAreaRect(contour);
 Vec4f line = ImgProcCv2.FitLine(contour, DistanceTypes.L2, 0, 0.01, 0.01);
 ```
 
+The advanced geometry overloads accept the same point storage directly and return managed `Point2f[]` results without first creating interleaved managed input or output arrays:
+
+高级几何重载直接使用相同点集内存，并返回 managed `Point2f[]`，不需要先创建交错的 managed 输入或输出数组：
+
+```csharp
+ReadOnlySpan<Point> points = contour.AsSpan();
+
+Point2f[] quadrilateral = ImgProcCv2.ApproxPolyN(points, 4);
+double triangleArea = ImgProcCv2.MinEnclosingTriangle(points, out Point2f[] triangle);
+double polygonArea = ImgProcCv2.MinEnclosingConvexPolygon(points, 4, out Point2f[] polygon);
+float intersectionArea = ImgProcCv2.IntersectConvexConvex(points, points, out Point2f[] intersection);
+```
+
 ## Degenerate Inputs / 退化输入
 
 Empty arrays and empty spans are rejected in managed code before native calls for the span fast paths.
@@ -105,11 +126,13 @@ Some OpenCV algorithms have additional requirements:
 部分 OpenCV 算法还有额外要求：
 
 - `FitEllipse`, `FitEllipseAMS`, and `FitEllipseDirect` require at least five points.
+- `ApproxPolyN` and `MinEnclosingConvexPolygon` require at least three requested sides or vertices.
 - `ConvexityDefects` requires hull indices from `ConvexHullIndices`, not hull points.
 - `IntersectConvexConvex` expects convex polygons.
 - Self-intersecting contours, duplicated points, and collinear points can produce OpenCV-specific results.
 
 - `FitEllipse`、`FitEllipseAMS`、`FitEllipseDirect` 至少需要五个点。
+- `ApproxPolyN` 和 `MinEnclosingConvexPolygon` 要求目标边数或顶点数至少为三。
 - `ConvexityDefects` 需要 `ConvexHullIndices` 返回的凸包索引，而不是凸包顶点。
 - `IntersectConvexConvex` 期望输入为凸多边形。
 - 自交轮廓、重复点、共线点可能产生 OpenCV 特定结果。

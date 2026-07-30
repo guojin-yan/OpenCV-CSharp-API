@@ -1,0 +1,1096 @@
+{
+  "SchemaVersion": 2,
+  "RecordKind": "local-release-candidate-closeout",
+  "CandidateId": "local-closeout/sha256/8907c0a347b0d21e",
+  "SourceIdentity": "sha256:8907c0a347b0d21e1d03bcef52500977dd35fc3c2875bf9859f6deda271621dc",
+  "OpenCvRevision": "5.0.0",
+  "SourceSet": {
+    "FileCount": 1475,
+    "Sha256": "8907c0a347b0d21e1d03bcef52500977dd35fc3c2875bf9859f6deda271621dc",
+    "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
+  },
+  "PackageMatrix": {
+    "Path": "packaging/runtime/runtime-package-matrix.json",
+    "Sha256": "6a767ed6b631391ffa7e7ceac2a57b0473245f55caf86855eae0027d6aca4534",
+    "RidCount": 17,
+    "ProfileCount": 2,
+    "EntryCount": 34
+  },
+  "SupportContract": {
+    "Path": "packaging/runtime/runtime-support-contract.json",
+    "Sha256": "5085884e79d66de5f8f9d2af8478795b66cd32d2998462efeec1696ddfffe02c",
+    "MatrixEntryCount": 34,
+    "RealSupportCount": 24,
+    "PendingSupportCount": 1,
+    "ExcludedSupportCount": 9,
+    "OutsideMatrixCount": 1,
+    "WinX86FullStatus": "hosted-evidence-pending",
+    "WinX86MiniStatus": "excluded",
+    "PackageSurfaceDefinesSupport": false
+  },
+  "ApiAbiBaseline": {
+    "Managed": {
+      "Path": "compatibility/managed-public-api.txt",
+      "SummaryPath": "compatibility/managed-public-api-summary.json",
+      "Sha256": "f87a3512b16690de43fe06d6f81bc393acb0d693ff34adcafcc824f25a21d154",
+      "TypeCount": 546,
+      "MemberCount": 5987,
+      "NamespaceCount": 41,
+      "TargetFramework": "net8.0"
+    },
+    "NativeFull": {
+      "Path": "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
+      "Sha256": "ee2bd5b36771ebe9150048c76306b57f6402f7ceb8c18a4eaee4a9c626236b8c",
+      "FunctionCount": 2438
+    },
+    "NativeMini": {
+      "Path": "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
+      "Sha256": "6101a6d4d71c3fce8baff6f5f2184962da95f44d8166b94bbbca47e4aa626395",
+      "FunctionCount": 526
+    },
+    "NativeManagedBindingMap": {
+      "Path": "compatibility/native-managed-binding-map.txt",
+      "SummaryPath": "compatibility/native-managed-binding-summary.json",
+      "Sha256": "c8bc80a49561c36a4dddb6bdfd4e281b9a7ecb9c96a47207f0fb0d8a6dea50a7",
+      "NativeFunctionCount": 2438,
+      "ManagedBoundCount": 2438,
+      "UnboundCount": 0,
+      "ManagedOnlyCount": 0
+    },
+    "ImgProcUpstreamMap": {
+      "Path": "compatibility/imgproc-upstream-map.txt",
+      "SummaryPath": "compatibility/imgproc-upstream-summary.json",
+      "FamilyInventoryPath": "compatibility/imgproc-implemented-families.json",
+      "Sha256": "bac07983162c52c5f12ffb4949ffdbfa31f53da566073dab02eee008f2784b59",
+      "DeclarationCount": 203,
+      "CallableCount": 167,
+      "ImplementedCount": 161,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 6,
+      "SelectedFamilyCount": 8,
+      "SelectedDeclarationCount": 90,
+      "ManagedPublicMemberAdditionCount": 174,
+      "RepositoryWideParityClaimed": false
+    },
+    "ImgCodecsUpstreamMap": {
+      "Path": "compatibility/imgcodecs-upstream-map.txt",
+      "SummaryPath": "compatibility/imgcodecs-upstream-summary.json",
+      "FamilyInventoryPath": "compatibility/imgcodecs-implemented-families.json",
+      "SourceReviewedExtensionsPath": "compatibility/imgcodecs-source-reviewed-extensions.json",
+      "Sha256": "f149a8fd857bc1cf5f8aaa4111d1487fd70bd3559ad7b933da3da53600684cea",
+      "DeclarationCount": 39,
+      "CallableCount": 22,
+      "ImplementedCount": 22,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 0,
+      "SelectedFamilyCount": 5,
+      "SelectedDeclarationCount": 40,
+      "ManagedPublicTypeAdditionCount": 16,
+      "ManagedPublicMemberAdditionCount": 168,
+      "RepositoryWideParityClaimed": false
+    },
+    "VideoIOUpstreamMap": {
+      "Path": "compatibility/videoio-upstream-map.txt",
+      "SummaryPath": "compatibility/videoio-upstream-summary.json",
+      "FamilyInventoryPath": "compatibility/videoio-implemented-families.json",
+      "RegistrySurfacePath": "compatibility/videoio-registry-surface.json",
+      "Sha256": "65654ea796fe7677838bc92056c1a89db39685883834378a4ce6aa7495cda11e",
+      "RegistrySurfaceSha256": "69ce6ab8be9f32f38cd31ab5549797b2baa03b74f0e449c217bb25659bdd6f2e",
+      "DeclarationCount": 71,
+      "CallableCount": 40,
+      "ImplementedCount": 40,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 0,
+      "RegistryOperationCount": 12,
+      "RepositoryWideParityClaimed": false
+    },
+    "Calib3DUpstreamMap": {
+      "Path": "compatibility/calib3d-upstream-map.txt",
+      "SummaryPath": "compatibility/calib3d-upstream-summary.json",
+      "FamilyInventoryPath": "compatibility/calib3d-implemented-families.json",
+      "Sha256": "a613d36a42a7513a06c3e4431164720aeecd5184b25497184d786a242407df72",
+      "DeclarationCount": 194,
+      "CallableCount": 167,
+      "ImplementedCount": 167,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 0,
+      "SourceHeaderCount": 4,
+      "SelectedFamilyCount": 11,
+      "SelectedDeclarationCount": 194,
+      "ManagedPublicTypeAdditionCount": 12,
+      "ManagedPublicMemberAdditionCount": 120,
+      "RepositoryWideParityClaimed": false
+    },
+    "CoreUpstreamMap": {
+      "Path": "compatibility/core-upstream-map.txt",
+      "SummaryPath": "compatibility/core-upstream-summary.json",
+      "ClassificationPath": "compatibility/core-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/core-implemented-families.json",
+      "Sha256": "d2cec168a381c43cac4c9b45da2581a394863e317ddf9047cdd90d5b7464a695",
+      "DeclarationCount": 258,
+      "CallableCount": 215,
+      "ImplementedCount": 176,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 29,
+      "UnsupportedCount": 5,
+      "UpstreamConditionalCount": 5,
+      "SourceHeaderCount": 11,
+      "SelectedFamilyCount": 4,
+      "SelectedDeclarationCount": 108,
+      "ManagedPublicTypeAdditionCount": 11,
+      "ManagedPublicMemberAdditionCount": 226,
+      "RepositoryWideParityClaimed": false
+    },
+    "DnnUpstreamMap": {
+      "Path": "compatibility/dnn-upstream-map.txt",
+      "SummaryPath": "compatibility/dnn-upstream-summary.json",
+      "ClassificationPath": "compatibility/dnn-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/dnn-implemented-families.json",
+      "Sha256": "28ad9e36b31dd6ca0e8d635deb27b35ff55c174edec2dd8443e54acdcf008708",
+      "DeclarationCount": 182,
+      "CallableCount": 159,
+      "ImplementedCount": 70,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 81,
+      "UnsupportedCount": 2,
+      "UpstreamConditionalCount": 6,
+      "SourceHeaderCount": 3,
+      "SelectedFamilyCount": 4,
+      "SelectedDeclarationCount": 80,
+      "ManagedPublicTypeAdditionCount": 10,
+      "ManagedPublicMemberAdditionCount": 94,
+      "RepositoryWideParityClaimed": false
+    },
+    "FeaturesUpstreamMap": {
+      "Path": "compatibility/features-upstream-map.txt",
+      "SummaryPath": "compatibility/features-upstream-summary.json",
+      "ClassificationPath": "compatibility/features-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/features-implemented-families.json",
+      "SourceReviewedExtensionsPath": "compatibility/features-source-reviewed-extensions.json",
+      "Sha256": "e6b2c37e0d1717fa3b9626f61761a1d79b04fe6d4a614fa363402e1fb1c9e0d7",
+      "DeclarationCount": 183,
+      "CallableCount": 160,
+      "ImplementedCount": 134,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 26,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "CompatibilityHeaderCount": 2,
+      "SourceHeaderCount": 1,
+      "SourceReviewedExtensionCount": 9,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 12,
+      "ManagedPublicTypeAdditionCount": 2,
+      "ManagedPublicMemberAdditionCount": 18,
+      "RepositoryWideParityClaimed": false
+    },
+    "ObjDetectUpstreamMap": {
+      "Path": "compatibility/objdetect-upstream-map.txt",
+      "SummaryPath": "compatibility/objdetect-upstream-summary.json",
+      "ClassificationPath": "compatibility/objdetect-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/objdetect-implemented-families.json",
+      "RawExtractionPath": "compatibility/objdetect-upstream-raw.json",
+      "Sha256": "d5b837ccb256c1cfa5479199395741b17bfb1bba01eff45b54c9b09ccbe19b3b",
+      "RawSha256": "e61cc23d241ae1582e45b085ffaabf066f1996d11ee188fcda6180820cb147e0",
+      "DeclarationCount": 195,
+      "CallableCount": 163,
+      "ImplementedCount": 153,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 10,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "CompatibilityHeaderCount": 2,
+      "SourceHeaderCount": 9,
+      "SelectedFamilyCount": 1,
+      "SelectedDeclarationCount": 33,
+      "ManagedPublicTypeAdditionCount": 4,
+      "ManagedPublicMemberAdditionCount": 55,
+      "NativeEntrypointAdditionCount": 35,
+      "RepositoryWideParityClaimed": false
+    },
+    "PhotoUpstreamMap": {
+      "Path": "compatibility/photo-upstream-map.txt",
+      "SummaryPath": "compatibility/photo-upstream-summary.json",
+      "ClassificationPath": "compatibility/photo-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/photo-implemented-families.json",
+      "RawExtractionPath": "compatibility/photo-upstream-raw.json",
+      "Sha256": "dabac4e67c5c22e508e32e7695b1acdfbb9bbd42136eac9d48753c60e576a490",
+      "RawSha256": "ac887c44492de0fdd533555c11c043c418ce02698b2332ac0e93dda3d35f239a",
+      "DeclarationCount": 145,
+      "CallableCount": 120,
+      "ImplementedCount": 120,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 0,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "CompatibilityHeaderCount": 2,
+      "ExcludedPublicHeaderCount": 1,
+      "SourceHeaderCount": 3,
+      "SelectedFamilyCount": 3,
+      "SelectedDeclarationCount": 83,
+      "ManagedPublicTypeAdditionCount": 18,
+      "ManagedPublicMemberAdditionCount": 181,
+      "NativeEntrypointAdditionCount": 80,
+      "RepositoryWideParityClaimed": false
+    },
+    "VideoUpstreamMap": {
+      "Path": "compatibility/video-upstream-map.txt",
+      "SummaryPath": "compatibility/video-upstream-summary.json",
+      "ClassificationPath": "compatibility/video-upstream-classifications.json",
+      "FamilyInventoryPath": "compatibility/video-implemented-families.json",
+      "RawExtractionPath": "compatibility/video-upstream-raw.json",
+      "Sha256": "e2ccc4a197082b463543f22348fffbb9348b8b2ce38b67d49ef78c7f61734afc",
+      "RawSha256": "67921346dfbe6f8f2d6a1c850cb88b34bf6eb46a89c4aa6c788ff893f74596af",
+      "DeclarationCount": 168,
+      "CallableCount": 145,
+      "ImplementedCount": 138,
+      "MissingCount": 0,
+      "IntentionallyOmittedCount": 7,
+      "UnsupportedCount": 0,
+      "UpstreamConditionalCount": 0,
+      "CompatibilityHeaderCount": 2,
+      "ExcludedPublicHeaderCount": 2,
+      "SourceHeaderCount": 2,
+      "SelectedFamilyCount": 3,
+      "SelectedDeclarationCount": 83,
+      "ManagedPublicTypeAdditionCount": 13,
+      "ManagedPublicMemberAdditionCount": 110,
+      "NativeEntrypointAdditionCount": 45,
+      "RepositoryWideParityClaimed": false
+    },
+    "GapInventoryPath": "compatibility/api-gap-inventory.json",
+    "GapInventoryStatus": "baseline-established-native-managed-parity-measured",
+    "UpstreamParityMeasured": false,
+    "NativeToManagedParityMeasured": true,
+    "ImplementedSpanFamilyPath": "compatibility/imgproc-point-set-span-family.json",
+    "ImplementedSpanFamilyStatus": "implemented-verified"
+  },
+  "EvidenceReferences": [
+    {
+      "Path": ".github/workflows/pack.yml",
+      "Sha256": "407c1079b24ae27a256b38b36fb04981887563b25edf5aba33e35457c8a8d7aa",
+      "Length": 265394
+    },
+    {
+      "Path": ".github/workflows/runtime-input.yml",
+      "Sha256": "9f80b1973802d57de342cc6ea75b7dfec7709a52d61c98969430b0cdd769d826",
+      "Length": 174205
+    },
+    {
+      "Path": "compatibility/api-gap-inventory.json",
+      "Sha256": "e8e90042be449c17b0f16e79e714b6e503e89c62d7a049e90fa31d81d12c2923",
+      "Length": 27494
+    },
+    {
+      "Path": "compatibility/calib3d-implemented-families.json",
+      "Sha256": "9fc3d35028849c4af36c4257cf0b739d841d02e411a7dcd1c6861e742836af2c",
+      "Length": 233224
+    },
+    {
+      "Path": "compatibility/calib3d-upstream-classifications.json",
+      "Sha256": "ed4326c84ce3e866cfdb04eaf69c006e10e5a85253ec51fe4e409c0089733f90",
+      "Length": 184879
+    },
+    {
+      "Path": "compatibility/calib3d-upstream-map.txt",
+      "Sha256": "a613d36a42a7513a06c3e4431164720aeecd5184b25497184d786a242407df72",
+      "Length": 160781
+    },
+    {
+      "Path": "compatibility/calib3d-upstream-raw.json",
+      "Sha256": "95de87f9e437fa46570ae94b298e1e2a123d96c69dd438c15649ead3e451014b",
+      "Length": 402074
+    },
+    {
+      "Path": "compatibility/calib3d-upstream-summary.json",
+      "Sha256": "81d5c19c953a4853535ae191b8745fa21fca504bf6c28bd7af592e73302b21b6",
+      "Length": 1586
+    },
+    {
+      "Path": "compatibility/core-implemented-families.json",
+      "Sha256": "813dbacc95c97838ff324f487b880b5900c2efb237d02d31df2f72433d6ba3d9",
+      "Length": 85597
+    },
+    {
+      "Path": "compatibility/core-upstream-classifications.json",
+      "Sha256": "e5efd28dc25dad64601313e3f04ec926551cc9d9c2e60fdb314e6211ce24c3e6",
+      "Length": 159167
+    },
+    {
+      "Path": "compatibility/core-upstream-map.txt",
+      "Sha256": "d2cec168a381c43cac4c9b45da2581a394863e317ddf9047cdd90d5b7464a695",
+      "Length": 125011
+    },
+    {
+      "Path": "compatibility/core-upstream-raw.json",
+      "Sha256": "423984c7bdabe5988b76b2c010caeb44126dfbee9ab3bf9d6f456e1cfef7d97d",
+      "Length": 320686
+    },
+    {
+      "Path": "compatibility/core-upstream-summary.json",
+      "Sha256": "99c6994f2e0164f80340c3e0184e054c2ca89e30bc344cc4795f5e3ee91ba100",
+      "Length": 1534
+    },
+    {
+      "Path": "compatibility/dnn-implemented-families.json",
+      "Sha256": "78eab85ffca0ba33c0db66580927cc3ef5d71e2faaf9a0163680b6c85ab26e64",
+      "Length": 67225
+    },
+    {
+      "Path": "compatibility/dnn-upstream-classifications.json",
+      "Sha256": "638aeecb16e821a336ca148bc846168153afe4f903ca21315e8094ef77abba16",
+      "Length": 102991
+    },
+    {
+      "Path": "compatibility/dnn-upstream-map.txt",
+      "Sha256": "28ad9e36b31dd6ca0e8d635deb27b35ff55c174edec2dd8443e54acdcf008708",
+      "Length": 75015
+    },
+    {
+      "Path": "compatibility/dnn-upstream-raw.json",
+      "Sha256": "1a9d121e7e06a8059612e368f9dfc83466a23b2ceafd3f505bb0aecb08be784a",
+      "Length": 181708
+    },
+    {
+      "Path": "compatibility/dnn-upstream-summary.json",
+      "Sha256": "79da1db1bcaed968effc63f5af951eaef8d148eb3737bab3f4bcd01458ee9abd",
+      "Length": 1547
+    },
+    {
+      "Path": "compatibility/features-implemented-families.json",
+      "Sha256": "3f3027c3d28455c818a0eac8a75d2e0d83ae15b2812832750d0f57a7f51b065d",
+      "Length": 9587
+    },
+    {
+      "Path": "compatibility/features-source-reviewed-extensions.json",
+      "Sha256": "ffc22187b73f4115b2f6c6f85a91b811113c08f449aafb0c78d9cc6287b0af5f",
+      "Length": 1414
+    },
+    {
+      "Path": "compatibility/features-upstream-classifications.json",
+      "Sha256": "81f80033ee01bac9863148c89af63564a7ae0310223563751f181bb9008e9404",
+      "Length": 117740
+    },
+    {
+      "Path": "compatibility/features-upstream-map.txt",
+      "Sha256": "e6b2c37e0d1717fa3b9626f61761a1d79b04fe6d4a614fa363402e1fb1c9e0d7",
+      "Length": 96641
+    },
+    {
+      "Path": "compatibility/features-upstream-raw.json",
+      "Sha256": "b12d0068c2dcfb58826cb98e4a8f826cbaac836dcc222e80c2a78a115ec25155",
+      "Length": 172524
+    },
+    {
+      "Path": "compatibility/features-upstream-summary.json",
+      "Sha256": "365f23457d5e94d3e27f38637a882a75c24d4bbf5c6d6b52700308aa389a4cf0",
+      "Length": 1866
+    },
+    {
+      "Path": "compatibility/imgcodecs-implemented-families.json",
+      "Sha256": "c6470cc5f6714131f4186874f006a052ce3fe6c014c411ea75f4f99c13d83c72",
+      "Length": 31732
+    },
+    {
+      "Path": "compatibility/imgcodecs-source-reviewed-extensions.json",
+      "Sha256": "a99bdf01da95c39236740df396cb7cebd3fe3c19996dd0cccf482f1e98fca22c",
+      "Length": 1962
+    },
+    {
+      "Path": "compatibility/imgcodecs-upstream-classifications.json",
+      "Sha256": "30b71d2645f4abc64e5f2e034f65b6e0a2543eeda3e40cea25b094bd060221eb",
+      "Length": 21286
+    },
+    {
+      "Path": "compatibility/imgcodecs-upstream-map.txt",
+      "Sha256": "f149a8fd857bc1cf5f8aaa4111d1487fd70bd3559ad7b933da3da53600684cea",
+      "Length": 14450
+    },
+    {
+      "Path": "compatibility/imgcodecs-upstream-raw.json",
+      "Sha256": "fb478948e69245bf15b76def1bc2e3429040f69cac7ac8c0d547fd7346875973",
+      "Length": 64729
+    },
+    {
+      "Path": "compatibility/imgcodecs-upstream-summary.json",
+      "Sha256": "389a36c6b70b0d480f2b9fa5cbe365cdf4642c748e0ad45baa9f267e02b829a5",
+      "Length": 1396
+    },
+    {
+      "Path": "compatibility/imgproc-implemented-families.json",
+      "Sha256": "99f41b25e8ae510946352909b6dba24064a4534c91b7b1d7a72c32d19077843d",
+      "Length": 80649
+    },
+    {
+      "Path": "compatibility/imgproc-point-set-span-family.json",
+      "Sha256": "0a1f2a7202b9f48d4fcf293cfb4f8658348d14f614e86e4e9b183d6584e0bf08",
+      "Length": 3106
+    },
+    {
+      "Path": "compatibility/imgproc-upstream-classifications.json",
+      "Sha256": "62e2a2899357615da765ae999115e90815a368946f171f89fca98a0a2a3067ce",
+      "Length": 139856
+    },
+    {
+      "Path": "compatibility/imgproc-upstream-map.txt",
+      "Sha256": "bac07983162c52c5f12ffb4949ffdbfa31f53da566073dab02eee008f2784b59",
+      "Length": 101061
+    },
+    {
+      "Path": "compatibility/imgproc-upstream-raw.json",
+      "Sha256": "0e8a25d5cada7fb5ac9bd3d53a7748e142e043c2176bb0e62d5bbaeb3ca08db3",
+      "Length": 342173
+    },
+    {
+      "Path": "compatibility/imgproc-upstream-summary.json",
+      "Sha256": "ca309ca71b764d0f507e8cc503db1d0070d2e5ffcb58f17ac9d7a37d31670a58",
+      "Length": 1389
+    },
+    {
+      "Path": "compatibility/managed-public-api-summary.json",
+      "Sha256": "465a092719352800ec18410a1175ceda47b41542f09478f6a3f2e6ea6042e811",
+      "Length": 4403
+    },
+    {
+      "Path": "compatibility/managed-public-api.txt",
+      "Sha256": "f87a3512b16690de43fe06d6f81bc393acb0d693ff34adcafcc824f25a21d154",
+      "Length": 910255
+    },
+    {
+      "Path": "compatibility/native-managed-binding-map.txt",
+      "Sha256": "c8bc80a49561c36a4dddb6bdfd4e281b9a7ecb9c96a47207f0fb0d8a6dea50a7",
+      "Length": 833819
+    },
+    {
+      "Path": "compatibility/native-managed-binding-summary.json",
+      "Sha256": "8a0988e90b7b30e17be599c0038df84f844994d147cabef9fe569c10d30ce989",
+      "Length": 763
+    },
+    {
+      "Path": "compatibility/objdetect-implemented-families.json",
+      "Sha256": "19740f3b768ef6bd354ca4fd79fd20edd473a50344e11c09e5acc478a07a1bbf",
+      "Length": 28541
+    },
+    {
+      "Path": "compatibility/objdetect-upstream-classifications.json",
+      "Sha256": "6768b44b05640ac0c90046bcd52b3391cfcf1df9775c3d0d06f66d8ec3f63179",
+      "Length": 137924
+    },
+    {
+      "Path": "compatibility/objdetect-upstream-map.txt",
+      "Sha256": "d5b837ccb256c1cfa5479199395741b17bfb1bba01eff45b54c9b09ccbe19b3b",
+      "Length": 117944
+    },
+    {
+      "Path": "compatibility/objdetect-upstream-raw.json",
+      "Sha256": "e61cc23d241ae1582e45b085ffaabf066f1996d11ee188fcda6180820cb147e0",
+      "Length": 222313
+    },
+    {
+      "Path": "compatibility/objdetect-upstream-summary.json",
+      "Sha256": "1260edf881d0f765e0c0ee7e6177c502051806edaa44c88f1645c8220cfe9fc8",
+      "Length": 1691
+    },
+    {
+      "Path": "compatibility/photo-implemented-families.json",
+      "Sha256": "17b0c86cfc4353b5f2c7dd36bfbc22d5046af0beb7288da9188789c5eabb988a",
+      "Length": 59291
+    },
+    {
+      "Path": "compatibility/photo-upstream-classifications.json",
+      "Sha256": "492b25a992b88e5d2cbdee94dc59bde3daf626eab7c9371e6eb0108205030783",
+      "Length": 100577
+    },
+    {
+      "Path": "compatibility/photo-upstream-map.txt",
+      "Sha256": "dabac4e67c5c22e508e32e7695b1acdfbb9bbd42136eac9d48753c60e576a490",
+      "Length": 83447
+    },
+    {
+      "Path": "compatibility/photo-upstream-raw.json",
+      "Sha256": "ac887c44492de0fdd533555c11c043c418ce02698b2332ac0e93dda3d35f239a",
+      "Length": 148105
+    },
+    {
+      "Path": "compatibility/photo-upstream-summary.json",
+      "Sha256": "1877786ff0cdeff6413b48412b0bb5b85244e4ea2196a9e25188d2d10d7da9df",
+      "Length": 1697
+    },
+    {
+      "Path": "compatibility/video-implemented-families.json",
+      "Sha256": "a9ebed5fb9a9efd418ea94a57090752f7f522f363bdaefe54b869d3f523c4600",
+      "Length": 62681
+    },
+    {
+      "Path": "compatibility/video-upstream-classifications.json",
+      "Sha256": "db0d5c6be3c0c2b7fab4ad3c6f8185ecbc52797d0433f33b6462a15e4d3eb1dc",
+      "Length": 114426
+    },
+    {
+      "Path": "compatibility/video-upstream-map.txt",
+      "Sha256": "e2ccc4a197082b463543f22348fffbb9348b8b2ce38b67d49ef78c7f61734afc",
+      "Length": 96007
+    },
+    {
+      "Path": "compatibility/video-upstream-raw.json",
+      "Sha256": "67921346dfbe6f8f2d6a1c850cb88b34bf6eb46a89c4aa6c788ff893f74596af",
+      "Length": 157244
+    },
+    {
+      "Path": "compatibility/video-upstream-summary.json",
+      "Sha256": "fe79205d8d7a9ecd87ebc140d8ce76ca6256c4172bf0e5738a5e9b1d0a0e6b04",
+      "Length": 1665
+    },
+    {
+      "Path": "compatibility/videoio-implemented-families.json",
+      "Sha256": "62e974f5de69993210e81237d708d4f4bc9686b26fd7dbe63f782c89ad268d9c",
+      "Length": 66736
+    },
+    {
+      "Path": "compatibility/videoio-registry-surface.json",
+      "Sha256": "69ce6ab8be9f32f38cd31ab5549797b2baa03b74f0e449c217bb25659bdd6f2e",
+      "Length": 5010
+    },
+    {
+      "Path": "compatibility/videoio-upstream-classifications.json",
+      "Sha256": "648dad334d802c9b03dd6a979580452987a4726be47514e9652849ba15f79b56",
+      "Length": 53017
+    },
+    {
+      "Path": "compatibility/videoio-upstream-map.txt",
+      "Sha256": "65654ea796fe7677838bc92056c1a89db39685883834378a4ce6aa7495cda11e",
+      "Length": 40516
+    },
+    {
+      "Path": "compatibility/videoio-upstream-raw.json",
+      "Sha256": "4a6fe6f3894215bc8c921acda6a315fd28ce0ec22e41a484fed62518d707b222",
+      "Length": 111486
+    },
+    {
+      "Path": "compatibility/videoio-upstream-summary.json",
+      "Sha256": "63cd3e37c6277317310af0fb9c0dda78dfecdd585bee75ab3f9df4edf3453ae9",
+      "Length": 1382
+    },
+    {
+      "Path": "docs/articles/api-abi-compatibility-policy.md",
+      "Sha256": "a6976abd33b6fa99544cc756015a4ebc0f60df8425768bc94a530f64241febae",
+      "Length": 11531
+    },
+    {
+      "Path": "docs/articles/calib3d-upstream-parity-guide.md",
+      "Sha256": "48bec6baa749805c726e64e9c6bd225fde478f93c17d1e7d342434e94d98d61b",
+      "Length": 4056
+    },
+    {
+      "Path": "docs/articles/core-upstream-parity-guide.md",
+      "Sha256": "45a4ee22cf1c856c6f8e97dd51b694c2ecbc0538ba54105211178eb13330a6bc",
+      "Length": 15945
+    },
+    {
+      "Path": "docs/articles/dnn-structured-parity-guide.md",
+      "Sha256": "9cce022dc49c94b98630828f5cd574bfd24f9fc7f2dc8e35edc5d3a5b687cd20",
+      "Length": 9663
+    },
+    {
+      "Path": "docs/articles/features-upstream-parity-guide.md",
+      "Sha256": "26022062c3b4e3b50d47521371cf41e96bf837ee7e974b884f9db9e501bcc226",
+      "Length": 4160
+    },
+    {
+      "Path": "docs/articles/imgcodecs-upstream-parity-guide.md",
+      "Sha256": "67c04752afd655acdaa4095152946b85bc73bf500f775ba5999ccbc6af84f276",
+      "Length": 5146
+    },
+    {
+      "Path": "docs/articles/imgproc-geometry-guide.md",
+      "Sha256": "098ed6de4db816be42b12452c61e68c6c75f22ef86c5c575c8ea1c45b7be247b",
+      "Length": 5458
+    },
+    {
+      "Path": "docs/articles/imgproc-upstream-parity-guide.md",
+      "Sha256": "b991fa976630205941215b1b409c7dd8227a652b1b88923b647c399566dbce61",
+      "Length": 9588
+    },
+    {
+      "Path": "docs/articles/objdetect-structured-parity-guide.md",
+      "Sha256": "2df6e193f555dc42dde30a699ecb138affd5bc229c513606c380171215a093f0",
+      "Length": 5272
+    },
+    {
+      "Path": "docs/articles/photo-ccm-guide.md",
+      "Sha256": "2b32a8b782d4203a87b977e1551d9aecdab9e92aef38a9239fb0109bc457618d",
+      "Length": 6956
+    },
+    {
+      "Path": "docs/articles/photo-hdr-workflow-guide.md",
+      "Sha256": "cb985c35d29f688e0ae1c34663baee62cc469bed27b72458444b21e16f9ac832",
+      "Length": 6209
+    },
+    {
+      "Path": "docs/articles/photo-intelligent-scissors-guide.md",
+      "Sha256": "5023be78cf9124cede22023a98488d032cd46781adc38ef9ef876a7a29fc6fb3",
+      "Length": 4644
+    },
+    {
+      "Path": "docs/articles/photo-tvl1-chromatic-aberration-guide.md",
+      "Sha256": "0ed1200dcace5fdc117712535520340862bb520165a4e0ab5f8061ca0f14e503",
+      "Length": 4231
+    },
+    {
+      "Path": "docs/articles/point-set-marshalling-guide.md",
+      "Sha256": "bc7e0ce48ac47860a3e49cc2bbec7accce2478a7b56cc2643617c1f8219f1b2a",
+      "Length": 4547
+    },
+    {
+      "Path": "docs/articles/release-candidate-closeout.md",
+      "Sha256": "b73d80fb71a4ed60cd08d414f62e823302037f0008e671bff8a5f52fb72e6472",
+      "Length": 2755
+    },
+    {
+      "Path": "docs/articles/support-lifecycle-policy.md",
+      "Sha256": "b2a6846d66d6edce7c123b5dc42a0a1933c34ce074efa70f907ba519626536a5",
+      "Length": 3424
+    },
+    {
+      "Path": "docs/articles/video-upstream-parity-guide.md",
+      "Sha256": "346f702f52fb6fa7b446e8591d928ad0acb59e7a77637490282b9897e966cb5e",
+      "Length": 7354
+    },
+    {
+      "Path": "docs/articles/videoio-upstream-parity-guide.md",
+      "Sha256": "3ccf13d3dde2f2b4d96fe993a970d19b7a1ceeac28328ee953b490bd7fa85f1d",
+      "Length": 3901
+    },
+    {
+      "Path": "packaging/runtime/runtime-support-contract.json",
+      "Sha256": "5085884e79d66de5f8f9d2af8478795b66cd32d2998462efeec1696ddfffe02c",
+      "Length": 3215
+    },
+    {
+      "Path": "scripts/Generate-Calib3DUpstreamMap.ps1",
+      "Sha256": "d51522e95ebeb52dbf09a33df7c2780827aa06d1063e4564053917baec969353",
+      "Length": 3614
+    },
+    {
+      "Path": "scripts/Generate-CoreUpstreamMap.ps1",
+      "Sha256": "31f0a04816dd406c6eb2e73b7dcea263ee8ffb39b31538fd054e6821fbe03b15",
+      "Length": 2481
+    },
+    {
+      "Path": "scripts/Generate-DnnUpstreamMap.ps1",
+      "Sha256": "7455731dd2b94481e7d4f79f1853d1ab59019227fba5087e13488d15a1d1ef16",
+      "Length": 2968
+    },
+    {
+      "Path": "scripts/Generate-FeaturesUpstreamMap.ps1",
+      "Sha256": "c5be462aab6a645c553ec4ecd114de025beaa70c0ae040e1d8d9c3d093c49f5b",
+      "Length": 3135
+    },
+    {
+      "Path": "scripts/Generate-ImgCodecsUpstreamMap.ps1",
+      "Sha256": "e91ff98b078ba12c7366229bbb8420ce8debc0aa4ec78a30e3d7894853f518ea",
+      "Length": 3642
+    },
+    {
+      "Path": "scripts/Generate-ImgProcUpstreamMap.ps1",
+      "Sha256": "d310d10a0dd2bb61460caf054b633eecd941f818a239f13ddd8d5d10016b52fd",
+      "Length": 3614
+    },
+    {
+      "Path": "scripts/Generate-ManagedPublicApiBaseline.ps1",
+      "Sha256": "cf3ff8af101d01eda9dc7e161393d3246e42f23138f5bb7f6a896f23bfeeaf41",
+      "Length": 1776
+    },
+    {
+      "Path": "scripts/Generate-NativeAbiCompatibility.ps1",
+      "Sha256": "8f3008bb0a168c6974b882cfb57fdc6ddc30fb50597b8f4acabc3014249ea08b",
+      "Length": 17173
+    },
+    {
+      "Path": "scripts/Generate-NativeManagedBindingMap.ps1",
+      "Sha256": "5687e6fa1df04df1cf3a462ccb2febdee53b382a736cd30d7b8a8f668212555c",
+      "Length": 2578
+    },
+    {
+      "Path": "scripts/Generate-ObjDetectUpstreamMap.ps1",
+      "Sha256": "825569c4cdc7e9e0d09d56c5b9bafeb2e594555a93f61d161b9bdbbc08764934",
+      "Length": 2951
+    },
+    {
+      "Path": "scripts/Generate-PhotoUpstreamMap.ps1",
+      "Sha256": "d7b2de8b8b4daa67acd46455e61a8fec8730f4d5432acb73de6910fa53202d60",
+      "Length": 2899
+    },
+    {
+      "Path": "scripts/Generate-VideoUpstreamMap.ps1",
+      "Sha256": "84516d502d896c97e778c1f91ef1b027bc177f1a497da7563a937b23209c392f",
+      "Length": 2899
+    },
+    {
+      "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
+      "Sha256": "fae4e7efc7fb1628e6c7cdc3292e9403da89cce6b9661351f9b571744137ed05",
+      "Length": 39443
+    },
+    {
+      "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
+      "Sha256": "0920df916683cfc5ab271a76607bcab7c2db8cc55547eac4f010c86277226d56",
+      "Length": 77829
+    },
+    {
+      "Path": "scripts/Test-Calib3DUpstreamMap.ps1",
+      "Sha256": "7d52f0104afe93d1b01f13e57bd81216be5cc00b23b14235070c9e37fd3932df",
+      "Length": 1256
+    },
+    {
+      "Path": "scripts/Test-CoreUpstreamMap.ps1",
+      "Sha256": "c0ef1815deb3e4dea561dd3b2777976a3e86b5bbd6b7b90415a84b5c1fa7e477",
+      "Length": 1009
+    },
+    {
+      "Path": "scripts/Test-DnnUpstreamMap.ps1",
+      "Sha256": "af072375103d177680d4bf4d9fc2c50cee448ac3621260b27b958c123db3403a",
+      "Length": 1456
+    },
+    {
+      "Path": "scripts/Test-FeaturesUpstreamMap.ps1",
+      "Sha256": "fc6dfec6dd7c484276d92d049e924f0531b01b4d74a9cae22245f44cc2e3a66a",
+      "Length": 1894
+    },
+    {
+      "Path": "scripts/Test-ImgCodecsUpstreamMap.ps1",
+      "Sha256": "a4af25e399abca4aebf005f279b6fd6f6d9695e09f2076938966f903cf03c67f",
+      "Length": 1265
+    },
+    {
+      "Path": "scripts/Test-ImgProcUpstreamMap.ps1",
+      "Sha256": "ce1e1fd97cd3df883cd7feb120d1254d9f67f9b8f95e0968552af139a54aff07",
+      "Length": 1256
+    },
+    {
+      "Path": "scripts/Test-NativeManagedBindingMap.ps1",
+      "Sha256": "48607909241edde9275403251db03def329f4d18afd0894546c6f03305a98750",
+      "Length": 16021
+    },
+    {
+      "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
+      "Sha256": "05cc2b0cb5bdfa6450b612dc8862ef183b806447d0b13bd98241871bbd1c43f9",
+      "Length": 1996
+    },
+    {
+      "Path": "scripts/Test-PhotoUpstreamMap.ps1",
+      "Sha256": "2cf1f9cfcc2afe24d3f68d1455cf167b37ad481064858a5e412ddcb74a0b0831",
+      "Length": 2126
+    },
+    {
+      "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
+      "Sha256": "c5ea491dfa8cde3d246a465fcf9bd437598b93a3240ee6ee11e4df34dbf35546",
+      "Length": 36846
+    },
+    {
+      "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
+      "Sha256": "e93e647d7dd78637313c31b0c80feef5e8c34f6b22260b74972291148d134227",
+      "Length": 25071
+    },
+    {
+      "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
+      "Sha256": "44f5ad621f3f74ba0b2fd9e003648648c6a4ecc0d45998ea0a2ef3f1fc72212d",
+      "Length": 24886
+    },
+    {
+      "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
+      "Sha256": "b06604429ee6bab73a4d760e6f3a3efa4fd3acd54e2de91b2815f9f3d8030afb",
+      "Length": 8410
+    },
+    {
+      "Path": "scripts/Test-ReleaseReadinessContract.ps1",
+      "Sha256": "caa3f6f89ebf3dde08b35fcc7e563d774f3796d10b350ce6fa29c67937eae03b",
+      "Length": 17182
+    },
+    {
+      "Path": "scripts/Test-ReleaseSigningBoundary.ps1",
+      "Sha256": "bcc597bacc02731ca650d09d49ea8563c411ecbb988453308bdb68d2da3c8107",
+      "Length": 34051
+    },
+    {
+      "Path": "scripts/Test-ReleaseSupportContract.ps1",
+      "Sha256": "32e9d8035faaa19db62fc0200adfbbf807c093b1f8ad21bbd98f7e82e9f01631",
+      "Length": 9768
+    },
+    {
+      "Path": "scripts/Test-VideoIORegistrySurface.ps1",
+      "Sha256": "fc87f2bf4baf703431d0918c5aaeb9cc27b8a9912d84b53f7b969344530099fd",
+      "Length": 3964
+    },
+    {
+      "Path": "scripts/Test-VideoIOUpstreamMap.ps1",
+      "Sha256": "19990899322f16b3b1d75ab8d5a819a21701c916ff90ecba41199bd18eb4f91d",
+      "Length": 2021
+    },
+    {
+      "Path": "scripts/Test-VideoUpstreamMap.ps1",
+      "Sha256": "081963cfba9ab5c62a237c18ed8d48e65e8a858e88cb36da5618f79bf7aa3f5d",
+      "Length": 2125
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
+      "Sha256": "ee2bd5b36771ebe9150048c76306b57f6402f7ceb8c18a4eaee4a9c626236b8c",
+      "Length": 263274
+    },
+    {
+      "Path": "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
+      "Sha256": "6101a6d4d71c3fce8baff6f5f2184962da95f44d8166b94bbbca47e4aa626395",
+      "Length": 47402
+    },
+    {
+      "Path": "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
+      "Sha256": "0005ec40db41e3c4ab60f933dd3c7ab18c83100795183649088f80be2bdc0c2d",
+      "Length": 239
+    },
+    {
+      "Path": "tools/Calib3DUpstreamMap/Program.cs",
+      "Sha256": "bf2c7f124e5e2c4ba803306745362d68fb786df735527d4710b1b73e923ce5ff",
+      "Length": 47923
+    },
+    {
+      "Path": "tools/Calib3DUpstreamMap/extract_calib3d.py",
+      "Sha256": "57ad23663e5d3a30ce514d52954b1ce8f14981422cef350eb82899e8b0bf4a77",
+      "Length": 5852
+    },
+    {
+      "Path": "tools/CoreUpstreamMap/CoreUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/CoreUpstreamMap/Program.cs",
+      "Sha256": "0aa7bb3fd8a0af21a2e24d748603ad8c14883218f8abdb3aab727aa2de5f29e1",
+      "Length": 53638
+    },
+    {
+      "Path": "tools/CoreUpstreamMap/extract_core.py",
+      "Sha256": "5e04f2b58d6a78b5c56ae3e9f57405e3f3794a20d391bbbceb5724e667814258",
+      "Length": 5122
+    },
+    {
+      "Path": "tools/DnnUpstreamMap/DnnUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/DnnUpstreamMap/Program.cs",
+      "Sha256": "5b860912ff85b9e1766eddf39d5402356476a9c7a82976629cb8d91a815c2694",
+      "Length": 46057
+    },
+    {
+      "Path": "tools/DnnUpstreamMap/extract_dnn.py",
+      "Sha256": "d02161f03f234adfa9e8ff91ba3d1729d50c5ebaaa0409e7db94c6ffe7460e67",
+      "Length": 5365
+    },
+    {
+      "Path": "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/FeaturesUpstreamMap/Program.cs",
+      "Sha256": "076f08d2b1aa9f6124e05d7c6f6150e31dd89034a5fd246cffd7326d1303d554",
+      "Length": 51610
+    },
+    {
+      "Path": "tools/FeaturesUpstreamMap/extract_features.py",
+      "Sha256": "127aa5d4fa550b54f3cbde59922689b09c8e98c906ff0f62208a78d5ae55eb54",
+      "Length": 5640
+    },
+    {
+      "Path": "tools/ImgCodecsUpstreamMap/ImgCodecsUpstreamMap.csproj",
+      "Sha256": "0005ec40db41e3c4ab60f933dd3c7ab18c83100795183649088f80be2bdc0c2d",
+      "Length": 239
+    },
+    {
+      "Path": "tools/ImgCodecsUpstreamMap/Program.cs",
+      "Sha256": "50c5363f1a175670a9ef5c62456d9a050476eac32e95d1f77150f8923e33b84a",
+      "Length": 43676
+    },
+    {
+      "Path": "tools/ImgCodecsUpstreamMap/extract_imgcodecs.py",
+      "Sha256": "0c0024c3e66abb7ca6f47c75d9459fe1c5cd555d82be20b2e53e9f2d47862f77",
+      "Length": 4341
+    },
+    {
+      "Path": "tools/ImgProcUpstreamMap/ImgProcUpstreamMap.csproj",
+      "Sha256": "0005ec40db41e3c4ab60f933dd3c7ab18c83100795183649088f80be2bdc0c2d",
+      "Length": 239
+    },
+    {
+      "Path": "tools/ImgProcUpstreamMap/Program.cs",
+      "Sha256": "ada63c72bc642cc376428afdcd868b4b0b1ca341efd9fb322965b079ff872bce",
+      "Length": 41773
+    },
+    {
+      "Path": "tools/ImgProcUpstreamMap/extract_imgproc.py",
+      "Sha256": "670c6c9845342118e485caa7e2d3303c8b1ee56008df3ac82ed5f1d859dd894b",
+      "Length": 4289
+    },
+    {
+      "Path": "tools/NativeManagedBindingMap/NativeManagedBindingMap.csproj",
+      "Sha256": "0005ec40db41e3c4ab60f933dd3c7ab18c83100795183649088f80be2bdc0c2d",
+      "Length": 239
+    },
+    {
+      "Path": "tools/NativeManagedBindingMap/Program.cs",
+      "Sha256": "48ffd689557aeaf6a2625c408acda4581368c198c856c58835e89000cb5652c3",
+      "Length": 16914
+    },
+    {
+      "Path": "tools/ObjDetectUpstreamMap/ObjDetectUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/ObjDetectUpstreamMap/Program.cs",
+      "Sha256": "c4765d1d306eb961677ba926c1b7264a4f441d95bfbc6406700cd75a30c86832",
+      "Length": 45326
+    },
+    {
+      "Path": "tools/ObjDetectUpstreamMap/extract_objdetect.py",
+      "Sha256": "8231507d455c735849baa49f8451deb2d0056445dd5f46932537b5ae849a81f6",
+      "Length": 6495
+    },
+    {
+      "Path": "tools/PhotoUpstreamMap/PhotoUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/PhotoUpstreamMap/Program.cs",
+      "Sha256": "371389093977f7cde0459b888257c83183da5b3c07bce75eaccb885350f79d7b",
+      "Length": 47787
+    },
+    {
+      "Path": "tools/PhotoUpstreamMap/extract_photo.py",
+      "Sha256": "e9209717d8da17d60949ee8e2188a065e8d0bc39450feed2e0de7bbfff2458aa",
+      "Length": 6200
+    },
+    {
+      "Path": "tools/VideoUpstreamMap/Program.cs",
+      "Sha256": "89c3bf5eb85f7aefa132688e3b8fe58fda3f744ce57f954c1d481e08e1cfe0bb",
+      "Length": 44413
+    },
+    {
+      "Path": "tools/VideoUpstreamMap/VideoUpstreamMap.csproj",
+      "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
+      "Length": 238
+    },
+    {
+      "Path": "tools/VideoUpstreamMap/extract_video.py",
+      "Sha256": "2012da45a77d0fbf4693cd1cc5818ddfd9084a892321a049ed657d1a32b8a158",
+      "Length": 6442
+    }
+  ],
+  "LocalValidation": {
+    "Status": "locally-validated",
+    "InvariantGuardCount": 70,
+    "RequiredChecks": [
+      "actionlint-1.7.12",
+      "api-abi-baseline",
+      "docfx-2.78.5",
+      "git-diff-check",
+      "repository-powershell-ast",
+      "workflow-bash-syntax",
+      "workflow-powershell-syntax"
+    ],
+    "ExactSdk": "10.0.302",
+    "PublicationAllowed": false
+  },
+  "Signing": {
+    "Status": "not-ready",
+    "NormalizedInputRequired": true,
+    "PrivateKeyMaterialPresent": false,
+    "Verification": "not-run"
+  },
+  "Sbom": {
+    "Status": "not-ready",
+    "Format": "SPDX-2.3-input-required",
+    "Deterministic": false,
+    "Verification": "not-run"
+  },
+  "Approval": {
+    "Status": "not-approved",
+    "Reviewer": "automated-local-preflight",
+    "Approver": "unassigned",
+    "EvidenceKind": "local-source-and-offline-fixture",
+    "RemoteMutationAllowed": false
+  },
+  "PublicFeed": {
+    "Mode": "read-only",
+    "ServiceIndex": "https://api.nuget.org/v3/index.json",
+    "CandidatePackage": "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0.0/jyppx.opencv.csharp.api.5.0.0.0.nupkg",
+    "Methods": [
+      "GET",
+      "HEAD"
+    ],
+    "Mutable": false,
+    "CandidateStatus": "not-published",
+    "UploadAttempted": false
+  },
+  "Rollback": {
+    "Status": "not-published",
+    "PriorKnownGood": "",
+    "PackageRemovalRequired": false
+  },
+  "ReleaseApproval": {
+    "Status": "not-approved",
+    "ReleaseReady": false,
+    "PublicationDecision": "do-not-publish"
+  },
+  "ExternalBlockers": [
+    {
+      "Id": "android-real-support",
+      "Status": "deferred-outside-real-support",
+      "Evidence": "Native Android build, package consumer, and device/emulator evidence are absent."
+    },
+    {
+      "Id": "api-gap-implementation",
+      "Status": "open-local-follow-up",
+      "Evidence": "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open."
+    },
+    {
+      "Id": "hosted-ci-compatibility",
+      "Status": "quota-blocked",
+      "Evidence": "The first normal hosted CI run after the tightened contracts must prove actual Action permissions and tool behavior."
+    },
+    {
+      "Id": "hosted-win-x86-full",
+      "Status": "quota-blocked",
+      "Evidence": "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent."
+    },
+    {
+      "Id": "macos-support-decision",
+      "Status": "decision-deferred",
+      "Evidence": "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist."
+    },
+    {
+      "Id": "publication-authorization",
+      "Status": "not-authorized",
+      "Evidence": "No publish, tag, release, or mutable feed operation is authorized in the current quota state."
+    },
+    {
+      "Id": "release-approval",
+      "Status": "not-approved",
+      "Evidence": "No external approver has accepted the exact normalized candidate bytes and provenance."
+    },
+    {
+      "Id": "sbom-inputs",
+      "Status": "not-ready",
+      "Evidence": "Deterministic SPDX-2.3 generator output and verified public input references are not provisioned."
+    },
+    {
+      "Id": "signing-inputs",
+      "Status": "not-ready",
+      "Evidence": "External certificate, timestamp, custody, and verification inputs are not provisioned."
+    }
+  ],
+  "PrivateKeyMaterialPresent": false,
+  "SecretMaterialPresent": false,
+  "Deterministic": true
+}

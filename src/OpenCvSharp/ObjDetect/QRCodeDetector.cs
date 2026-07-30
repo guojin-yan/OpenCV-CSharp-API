@@ -146,6 +146,23 @@ namespace OpenCvSharp.ObjDetect
             }
         }
 
+        /// <summary>Decodes a QR code without applying UTF-8 text conversion.</summary>
+        public byte[] DecodeBytes(Mat image, Mat points, Mat? straightQRCode = null)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(image, nameof(image));
+            ValidateNotNull(points, nameof(points));
+            unsafe
+            {
+                return GetBytes(
+                    NativeMethods.QRCodeDetectorDecodeLength,
+                    NativeMethods.QRCodeDetectorDecodeFill,
+                    image.NativeHandle,
+                    points.NativeHandle,
+                    OptionalHandle(straightQRCode));
+            }
+        }
+
         /// <summary>
         /// Detects and decodes a QR code.
         /// 检测并解码二维码。
@@ -157,6 +174,22 @@ namespace OpenCvSharp.ObjDetect
             unsafe
             {
                 return GetString(
+                    NativeMethods.QRCodeDetectorDetectAndDecodeLength,
+                    NativeMethods.QRCodeDetectorDetectAndDecodeFill,
+                    image.NativeHandle,
+                    OptionalHandle(points),
+                    OptionalHandle(straightQRCode));
+            }
+        }
+
+        /// <summary>Detects and decodes a QR code without applying UTF-8 text conversion.</summary>
+        public byte[] DetectAndDecodeBytes(Mat image, Mat? points = null, Mat? straightQRCode = null)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(image, nameof(image));
+            unsafe
+            {
+                return GetBytes(
                     NativeMethods.QRCodeDetectorDetectAndDecodeLength,
                     NativeMethods.QRCodeDetectorDetectAndDecodeFill,
                     image.NativeHandle,
@@ -254,6 +287,21 @@ namespace OpenCvSharp.ObjDetect
             return new QRCodeMultiDecodeResult(decoded, decodedInfo, points);
         }
 
+        /// <summary>Decodes multiple QR codes without applying UTF-8 text conversion.</summary>
+        public unsafe QRCodeMultiByteDecodeResult DecodeBytesMulti(Mat image, Mat points)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(image, nameof(image));
+            ValidateNotNull(points, nameof(points));
+            byte[][] decodedInfo = GetByteArrays(
+                NativeMethods.QRCodeDetectorDecodeMultiCount,
+                NativeMethods.QRCodeDetectorDecodeMultiFill,
+                image.NativeHandle,
+                points.NativeHandle,
+                out bool decoded);
+            return new QRCodeMultiByteDecodeResult(decoded, decodedInfo, points);
+        }
+
         /// <summary>
         /// Detects and decodes multiple QR codes.
         /// 检测并解码多个二维码。
@@ -285,6 +333,29 @@ namespace OpenCvSharp.ObjDetect
                     ownedPoints.Dispose();
                 }
 
+                throw;
+            }
+        }
+
+        /// <summary>Detects and decodes multiple QR codes without applying UTF-8 text conversion.</summary>
+        public unsafe QRCodeMultiByteDecodeResult DetectAndDecodeBytesMulti(Mat image, Mat? points = null)
+        {
+            ThrowIfDisposed();
+            ValidateNotNull(image, nameof(image));
+            Mat ownedPoints = points ?? new Mat();
+            try
+            {
+                byte[][] decodedInfo = GetByteArrays(
+                    NativeMethods.QRCodeDetectorDetectAndDecodeMultiCount,
+                    NativeMethods.QRCodeDetectorDetectAndDecodeMultiFill,
+                    image.NativeHandle,
+                    ownedPoints.NativeHandle,
+                    out bool decoded);
+                return new QRCodeMultiByteDecodeResult(decoded, decodedInfo, ownedPoints);
+            }
+            catch
+            {
+                if (points == null) ownedPoints.Dispose();
                 throw;
             }
         }
@@ -336,6 +407,24 @@ namespace OpenCvSharp.ObjDetect
             }
         }
 
+        private unsafe byte[] GetBytes(StringLengthGetter getLength, StringFillMethod fill, IntPtr image, IntPtr points, IntPtr straightQRCode)
+        {
+            NativeException.ThrowIfError(getLength(NativeHandle, image, points, straightQRCode, out int length));
+            if (length < 0) throw new OpenCvException("Native QR byte length is negative.");
+            if (length == 0) return Array.Empty<byte>();
+
+            var buffer = new byte[length];
+            fixed (byte* bufferPtr = buffer)
+            {
+                NativeException.ThrowIfError(fill(NativeHandle, image, points, straightQRCode, bufferPtr, buffer.Length, out int written));
+                if (written < 0 || written > buffer.Length) throw new OpenCvException("Native QR byte count exceeds the supplied capacity.");
+                if (written == buffer.Length) return buffer;
+                var result = new byte[written];
+                Array.Copy(buffer, result, written);
+                return result;
+            }
+        }
+
         private unsafe string[] GetStringArray(StringArrayCountGetter count, StringArrayFillMethod fill, IntPtr image, IntPtr points, out bool decoded)
         {
             NativeException.ThrowIfError(count(NativeHandle, image, points, out int decodedValue, out int stringCount, out int byteCount));
@@ -364,6 +453,44 @@ namespace OpenCvSharp.ObjDetect
                 decoded = decodedValue != 0;
                 return DecodeStringArray(offsets, Math.Min(writtenStringCount, stringCount), buffer, Math.Min(writtenByteCount, buffer.Length));
             }
+        }
+
+        private unsafe byte[][] GetByteArrays(StringArrayCountGetter count, StringArrayFillMethod fill, IntPtr image, IntPtr points, out bool decoded)
+        {
+            NativeException.ThrowIfError(count(NativeHandle, image, points, out int decodedValue, out int valueCount, out int byteCount));
+            decoded = decodedValue != 0;
+            if (valueCount < 0 || byteCount < 0) throw new OpenCvException("Native QR byte-array metadata is negative.");
+            if (valueCount == 0) return Array.Empty<byte[]>();
+
+            var offsets = new int[checked(valueCount + 1)];
+            var buffer = new byte[Math.Max(byteCount, 1)];
+            fixed (int* offsetsPtr = offsets)
+            fixed (byte* bufferPtr = buffer)
+            {
+                NativeException.ThrowIfError(fill(
+                    NativeHandle, image, points, offsetsPtr, offsets.Length, bufferPtr, buffer.Length,
+                    out decodedValue, out int writtenCount, out int writtenBytes));
+                decoded = decodedValue != 0;
+                if (writtenCount < 0 || writtenCount > valueCount || writtenBytes < 0 || writtenBytes > buffer.Length)
+                    throw new OpenCvException("Native QR byte-array metadata exceeds the supplied capacity.");
+                return DecodeByteArrays(offsets, writtenCount, buffer, writtenBytes);
+            }
+        }
+
+        private static byte[][] DecodeByteArrays(int[] offsets, int count, byte[] buffer, int byteCount)
+        {
+            var result = new byte[count][];
+            for (int i = 0; i < count; i++)
+            {
+                int start = offsets[i];
+                int end = offsets[i + 1];
+                if (start < 0 || end < start || end > byteCount)
+                    throw new OpenCvException("Native QR byte-array offsets are invalid.");
+                var value = new byte[end - start];
+                Array.Copy(buffer, start, value, 0, value.Length);
+                result[i] = value;
+            }
+            return result;
         }
 
         private static string[] DecodeStringArray(int[] offsets, int count, byte[] buffer, int byteCount)

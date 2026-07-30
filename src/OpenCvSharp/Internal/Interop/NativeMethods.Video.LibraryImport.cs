@@ -128,6 +128,141 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_background_subtractor_knn_set_double_property")]
         internal static partial int BackgroundSubtractorKNNSetDoubleProperty(IntPtr subtractor, int propertyId, double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dense_optical_flow_release_handle")]
+        internal static partial void DenseOpticalFlowReleaseHandle(IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dense_optical_flow_calc")]
+        internal static partial int DenseOpticalFlowCalc(IntPtr opticalFlow, IntPtr first, IntPtr second, IntPtr flow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dense_optical_flow_collect_garbage")]
+        internal static partial int DenseOpticalFlowCollectGarbage(IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_optical_flow_release_handle")]
+        internal static partial void SparseOpticalFlowReleaseHandle(IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_optical_flow_calc")]
+        internal static partial int SparseOpticalFlowCalc(IntPtr opticalFlow, IntPtr previousImage, IntPtr nextImage, VideoPoint2fNative* previousPoints, int pointCount, VideoPoint2fNative* nextPoints, byte* status, float* error);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_create")]
+        internal static partial int FarnebackOpticalFlowCreate(int numLevels, double pyramidScale, int fastPyramids, int windowSize, int numIterations, int polynomialNeighborhood, double polynomialSigma, int flags, out IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_get_int_property")]
+        internal static partial int FarnebackOpticalFlowGetIntProperty(IntPtr opticalFlow, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_set_int_property")]
+        internal static partial int FarnebackOpticalFlowSetIntProperty(IntPtr opticalFlow, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_get_double_property")]
+        internal static partial int FarnebackOpticalFlowGetDoubleProperty(IntPtr opticalFlow, int propertyId, out double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_set_double_property")]
+        internal static partial int FarnebackOpticalFlowSetDoubleProperty(IntPtr opticalFlow, int propertyId, double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_get_bool_property")]
+        internal static partial int FarnebackOpticalFlowGetBoolProperty(IntPtr opticalFlow, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_farneback_optical_flow_set_bool_property")]
+        internal static partial int FarnebackOpticalFlowSetBoolProperty(IntPtr opticalFlow, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_variational_refinement_create")]
+        internal static partial int VariationalRefinementCreate(out IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_variational_refinement_calc_uv")]
+        internal static partial int VariationalRefinementCalcUV(IntPtr opticalFlow, IntPtr first, IntPtr second, IntPtr flowU, IntPtr flowV);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_variational_refinement_get_int_property")]
+        internal static partial int VariationalRefinementGetIntProperty(IntPtr opticalFlow, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_variational_refinement_set_int_property")]
+        internal static partial int VariationalRefinementSetIntProperty(IntPtr opticalFlow, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_variational_refinement_get_float_property")]
+        internal static partial int VariationalRefinementGetFloatProperty(IntPtr opticalFlow, int propertyId, out float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_variational_refinement_set_float_property")]
+        internal static partial int VariationalRefinementSetFloatProperty(IntPtr opticalFlow, int propertyId, float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_create")]
+        internal static partial int DisOpticalFlowCreate(int preset, out IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_get_int_property")]
+        internal static partial int DisOpticalFlowGetIntProperty(IntPtr opticalFlow, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_set_int_property")]
+        internal static partial int DisOpticalFlowSetIntProperty(IntPtr opticalFlow, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_get_float_property")]
+        internal static partial int DisOpticalFlowGetFloatProperty(IntPtr opticalFlow, int propertyId, out float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_set_float_property")]
+        internal static partial int DisOpticalFlowSetFloatProperty(IntPtr opticalFlow, int propertyId, float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_get_bool_property")]
+        internal static partial int DisOpticalFlowGetBoolProperty(IntPtr opticalFlow, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dis_optical_flow_set_bool_property")]
+        internal static partial int DisOpticalFlowSetBoolProperty(IntPtr opticalFlow, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_create")]
+        internal static partial int SparsePyrLKOpticalFlowCreate(int windowWidth, int windowHeight, int maxLevel, int criteriaType, int criteriaMaxCount, double criteriaEpsilon, int flags, double minEigenvalueThreshold, out IntPtr opticalFlow);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_get_size_property")]
+        internal static partial int SparsePyrLKOpticalFlowGetSizeProperty(IntPtr opticalFlow, out int width, out int height);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_set_size_property")]
+        internal static partial int SparsePyrLKOpticalFlowSetSizeProperty(IntPtr opticalFlow, int width, int height);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property")]
+        internal static partial int SparsePyrLKOpticalFlowGetIntProperty(IntPtr opticalFlow, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property")]
+        internal static partial int SparsePyrLKOpticalFlowSetIntProperty(IntPtr opticalFlow, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_get_term_criteria")]
+        internal static partial int SparsePyrLKOpticalFlowGetTermCriteria(IntPtr opticalFlow, out int type, out int maxCount, out double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_set_term_criteria")]
+        internal static partial int SparsePyrLKOpticalFlowSetTermCriteria(IntPtr opticalFlow, int type, int maxCount, double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_get_min_eig_threshold")]
+        internal static partial int SparsePyrLKOpticalFlowGetMinEigThreshold(IntPtr opticalFlow, out double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_sparse_pyr_lk_optical_flow_set_min_eig_threshold")]
+        internal static partial int SparsePyrLKOpticalFlowSetMinEigThreshold(IntPtr opticalFlow, double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_compute_ecc")]
+        internal static partial int VideoComputeECC(IntPtr templateImage, IntPtr inputImage, IntPtr inputMask, out double result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_find_transform_ecc")]
+        internal static partial int VideoFindTransformECC(IntPtr templateImage, IntPtr inputImage, IntPtr warpMatrix, int motionType, int criteriaType, int criteriaMaxCount, double criteriaEpsilon, IntPtr inputMask, int gaussianFilterSize, out double result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_find_transform_ecc_with_mask")]
+        internal static partial int VideoFindTransformECCWithMask(IntPtr templateImage, IntPtr inputImage, IntPtr templateMask, IntPtr inputMask, IntPtr warpMatrix, int motionType, int criteriaType, int criteriaMaxCount, double criteriaEpsilon, int gaussianFilterSize, out double result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_ecc_parameters_get_default")]
+        internal static partial int VideoECCParametersGetDefault(out int motionType, out int criteriaType, out int criteriaMaxCount, out double criteriaEpsilon, out int gaussianFilterSize, out int levelCount, out int interpolation);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_find_transform_ecc_multi_scale")]
+        internal static partial int VideoFindTransformECCMultiScale(IntPtr referenceImage, IntPtr sampleImage, IntPtr warpMatrix, int motionType, int criteriaType, int criteriaMaxCount, double criteriaEpsilon, int* iterationsPerLevel, int iterationCount, int gaussianFilterSize, int levelCount, int interpolation, IntPtr referenceMask, IntPtr sampleMask, out double result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_tracker_release_handle")]
+        internal static partial void VideoTrackerReleaseHandle(IntPtr tracker);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_tracker_init")]
+        internal static partial int VideoTrackerInit(IntPtr tracker, IntPtr image, VideoRectNative boundingBox);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_tracker_update")]
+        internal static partial int VideoTrackerUpdate(IntPtr tracker, IntPtr image, ref VideoRectNative boundingBox, out int result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_tracker_get_tracking_score")]
+        internal static partial int VideoTrackerGetTrackingScore(IntPtr tracker, out float score);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_tracker_mil_get_default_params")]
+        internal static partial int VideoTrackerMilGetDefaultParams(out VideoTrackerMilParamsNative parameters);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_video_tracker_mil_create")]
+        internal static partial int VideoTrackerMilCreate(ref VideoTrackerMilParamsNative parameters, out IntPtr tracker);
     }
 }
 #endif

@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 4,
+  "managedPublicMemberAdditionCount": 55,
+  "nativeEntrypointAdditionCount": 35,
+  "families": [
+    {
+      "id": "objdetect-structured-parity",
+      "rationale": "The selected batch closes all remaining offline-safe ArUco object workflows, byte-preserving graphical-code overloads, MCC DNN controls, and advanced chessboard helpers without external models or polymorphic persistence handles.",
+      "declarations": [
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.aruco.extendDictionary(int nMarkers;int markerSize;Dictionary baseDictionary=Dictionary()[/C,/Ref];int randomSeed=0)-\u003EDictionary",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_dictionary_extend"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|OpenCvSharp.ObjDetect.ArucoDictionary Extend(System.Int32 markerCount,System.Int32 markerSize,OpenCvSharp.ObjDetect.ArucoDictionary? baseDictionary=null,System.Int32 randomSeed=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.aruco.Board.Board(vector_Mat objPoints;Dictionary dictionary[/C,/Ref];Mat ids)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|constructor|public;instance|.ctor(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.ObjDetect.ArucoDictionary dictionary,System.Int32[] ids)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.aruco.Board.getDictionary()-\u003EDictionary",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_get_dictionary"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.ObjDetect.ArucoDictionary Dictionary"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.aruco.Board.getObjPoints()-\u003Estd::vector\u003Cstd::vector\u003CPoint3f\u003E \u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_get_object_points_count",
+            "jyppx_ocv_aruco_board_get_object_points_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.Core.Point3f[][] ObjectPoints"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.aruco.Board.getIds()-\u003Estd::vector\u003Cint\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_get_ids_count",
+            "jyppx_ocv_aruco_board_get_ids_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|System.Int32[] Ids"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.aruco.Board.getRightBottomCorner()-\u003EPoint3f",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_get_right_bottom_corner"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.Core.Point3f RightBottomCorner"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.aruco.Board.matchImagePoints(vector_Mat detectedCorners;Mat detectedIds;Mat objPoints[/O];Mat imgPoints[/O])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_match_image_points"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|System.Void MatchImagePoints(OpenCvSharp.Core.Point2f[][] detectedCorners,System.Int32[] detectedIds,OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.aruco.Board.generateImage(Size outSize;Mat img[/O];int marginSize=0;int borderBits=1)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_board_generate_image"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|OpenCvSharp.Core.Mat GenerateImage(OpenCvSharp.Core.Size outSize,System.Int32 marginSize=0,System.Int32 borderBits=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.aruco.ArucoDetector.ArucoDetector(vector_Dictionary dictionaries[/C,/Ref];DetectorParameters detectorParams=DetectorParameters()[/C,/Ref];RefineParameters refineParams=RefineParameters()[/C,/Ref])-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_detector_create_multi_dictionary"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|OpenCvSharp.ObjDetect.ArucoDetector Create(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries,OpenCvSharp.ObjDetect.ArucoDetectorParameters? detectorParameters=null,OpenCvSharp.ObjDetect.ArucoRefineParameters? refineParameters=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.aruco.ArucoDetector.detectMarkersMultiDict(Mat image;vector_Mat corners[/O];Mat ids[/O];vector_Mat rejectedImgPoints=vector_Mat()[/O];Mat dictIndices=Mat()[/O])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count",
+            "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoMultiDictionaryDetectionResult DetectMarkersMultiDictionary(OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.aruco.ArucoDetector.getDictionaries()-\u003Estd::vector\u003CDictionary\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_detector_get_dictionaries_count",
+            "jyppx_ocv_aruco_detector_get_dictionary_at"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDictionary[] GetDictionaries()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.aruco.ArucoDetector.setDictionaries(vector_Dictionary dictionaries[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_detector_set_dictionaries"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetector SetDictionaries(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.aruco.drawDetectedMarkers(Mat image[/IO];vector_Mat corners;Mat ids=Mat();Scalar borderColor=Scalar(0, 255, 0))-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_draw_detected_markers"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|System.Void DrawDetectedMarkers(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[][] corners,System.Int32[]? ids=null,OpenCvSharp.Core.Scalar borderColor=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 72,
+          "upstreamIdentity": "cv.GraphicalCodeDetector.detectAndDecode(Mat img;Mat points=Mat()[/O];Mat straight_code=Mat()[/O])-\u003ENativeByteArray",
+          "nativeEntrypoints": [
+            "jyppx_ocv_qrcode_detector_detect_and_decode_fill",
+            "jyppx_ocv_qrcode_detector_detect_and_decode_length"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DetectAndDecodeBytes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null,OpenCvSharp.Core.Mat? straightQRCode=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 73,
+          "upstreamIdentity": "cv.GraphicalCodeDetector.decode(Mat img;Mat points;Mat straight_code=Mat()[/O])-\u003ENativeByteArray",
+          "nativeEntrypoints": [
+            "jyppx_ocv_qrcode_detector_decode_fill",
+            "jyppx_ocv_qrcode_detector_decode_length"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DecodeBytes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points,OpenCvSharp.Core.Mat? straightQRCode=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 74,
+          "upstreamIdentity": "cv.GraphicalCodeDetector.decodeMulti(Mat img;Mat points;vector_NativeByteArray decoded_info[/O,/Ref];vector_Mat straight_code=vector_Mat()[/O])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_qrcode_detector_decode_multi_count",
+            "jyppx_ocv_qrcode_detector_decode_multi_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DecodeBytesMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 75,
+          "upstreamIdentity": "cv.GraphicalCodeDetector.detectAndDecodeMulti(Mat img;vector_NativeByteArray decoded_info[/O,/Ref];Mat points=Mat()[/O];vector_Mat straight_code=vector_Mat()[/O])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_qrcode_detector_detect_and_decode_multi_count",
+            "jyppx_ocv_qrcode_detector_detect_and_decode_multi_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DetectAndDecodeBytesMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 100,
+          "upstreamIdentity": "cv.mcc.CCheckerDetector.create(dnn_Net net[/C,/Ref])-\u003EPtr\u003CCCheckerDetector\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_mcc_checker_detector_create_from_net"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|constructor|public;instance|.ctor(OpenCvSharp.Dnn.Net net)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 105,
+          "upstreamIdentity": "cv.mcc.CCheckerDetector.setUseDnnModel(bool useDnn)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_mcc_checker_detector_set_use_dnn_model"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 106,
+          "upstreamIdentity": "cv.mcc.CCheckerDetector.getUseDnnModel()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_mcc_checker_detector_get_use_dnn_model"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 133,
+          "upstreamIdentity": "cv.QRCodeDetectorAruco.getArucoParameters()-\u003Earuco::DetectorParameters",
+          "nativeEntrypoints": [
+            "jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetArucoParameters()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 134,
+          "upstreamIdentity": "cv.QRCodeDetectorAruco.setArucoParameters(aruco_DetectorParameters params[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetectorAruco SetArucoParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 139,
+          "upstreamIdentity": "cv.findChessboardCornersSB(Mat image;Size patternSize;Mat corners[/O];int flags;Mat meta[/O])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,OpenCvSharp.Core.Mat meta,OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 140,
+          "upstreamIdentity": "cv.findChessboardCornersSB(Mat image;Size patternSize;Mat corners[/O];int flags=0)-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_find_chessboard_corners_sb"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 141,
+          "upstreamIdentity": "cv.estimateChessboardSharpness(Mat image;Size patternSize;Mat corners;float rise_distance=0.8F;bool vertical=false;Mat sharpness=Mat()[/O])-\u003EScalar",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_estimate_chessboard_sharpness"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Scalar EstimateChessboardSharpness(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,System.Single riseDistance=0.8,System.Boolean vertical=false,OpenCvSharp.Core.Mat? sharpness=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 142,
+          "upstreamIdentity": "cv.find4QuadCornerSubpix(Mat img;Mat corners[/IO];Size region_size)-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calib3d_find_4_quad_corner_subpix"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean Find4QuadCornerSubpix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat corners,OpenCvSharp.Core.Size regionSize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 176,
+          "upstreamIdentity": "cv.aruco.CharucoDetector.getDetectorParameters()-\u003EDetectorParameters",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_charuco_detector_get_detector_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetDetectorParameters()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 177,
+          "upstreamIdentity": "cv.aruco.CharucoDetector.setDetectorParameters(DetectorParameters detectorParameters[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_charuco_detector_set_detector_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetDetectorParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 178,
+          "upstreamIdentity": "cv.aruco.CharucoDetector.getRefineParameters()-\u003ERefineParameters",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_charuco_detector_get_refine_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoRefineParameters GetRefineParameters()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 179,
+          "upstreamIdentity": "cv.aruco.CharucoDetector.setRefineParameters(RefineParameters refineParameters[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_charuco_detector_set_refine_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetRefineParameters(OpenCvSharp.ObjDetect.ArucoRefineParameters parameters)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 181,
+          "upstreamIdentity": "cv.aruco.CharucoDetector.detectDiamonds(Mat image;vector_Mat diamondCorners[/O];Mat diamondIds[/O];vector_Mat markerCorners=vector_Mat()[/IO];Mat markerIds=Mat()[/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_charuco_detector_detect_diamonds_count",
+            "jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDiamondDetectionResult DetectDiamonds(OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 182,
+          "upstreamIdentity": "cv.aruco.drawDetectedCornersCharuco(Mat image[/IO];Mat charucoCorners;Mat charucoIds=Mat();Scalar cornerColor=Scalar(255, 0, 0))-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_draw_detected_corners_charuco"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedCorners(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[] corners,System.Int32[]? ids=null,OpenCvSharp.Core.Scalar cornerColor=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 183,
+          "upstreamIdentity": "cv.aruco.drawDetectedDiamonds(Mat image[/IO];vector_Mat diamondCorners;Mat diamondIds=Mat();Scalar borderColor=Scalar(0, 0, 255))-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_aruco_draw_detected_diamonds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedDiamonds(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[][] diamondCorners,OpenCvSharp.Core.Vec4i[]? diamondIds=null,OpenCvSharp.Core.Scalar borderColor=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/objdetect-structured-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

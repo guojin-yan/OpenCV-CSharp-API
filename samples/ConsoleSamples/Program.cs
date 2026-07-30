@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using OpenCvSharp;
 using OpenCvSharp.AlphaMat;
@@ -89,6 +90,12 @@ using RgbdNormalsObject = OpenCvSharp.PtCloud.RgbdNormals;
 using StaticSaliencyFineGrainedObject = OpenCvSharp.Saliency.StaticSaliencyFineGrained;
 using StaticSaliencySpectralResidualObject = OpenCvSharp.Saliency.StaticSaliencySpectralResidual;
 using VideoKalmanFilterObject = OpenCvSharp.Video.KalmanFilter;
+using DisOpticalFlowObject = OpenCvSharp.Video.DisOpticalFlow;
+using FarnebackOpticalFlowObject = OpenCvSharp.Video.FarnebackOpticalFlow;
+using OpticalFlowFlags = OpenCvSharp.Video.OpticalFlowFlags;
+using SparsePyrLkOpticalFlowObject = OpenCvSharp.Video.SparsePyrLkOpticalFlow;
+using VideoTrackerMILObject = OpenCvSharp.Video.TrackerMIL;
+using VariationalRefinementObject = OpenCvSharp.Video.VariationalRefinement;
 using VideoCaptureObject = OpenCvSharp.VideoIO.VideoCapture;
 using VideoWriterObject = OpenCvSharp.VideoIO.VideoWriter;
 using BioInspiredCv2Object = OpenCvSharp.BioInspired.BioInspiredCv2;
@@ -256,6 +263,153 @@ namespace ConsoleSamples
                                 coreChannels[i].Dispose();
                             }
                         }
+                    }
+
+                    using (Mat coreParitySource = new Mat(2, 3, MatType.CV_32SC1))
+                    using (Mat coreParityShape = new Mat(1, 2, MatType.CV_32SC1))
+                    using (Mat coreParityFloat = new Mat(1, 4, MatType.CV_32FC1))
+                    {
+                        coreParitySource.CopyFrom(new int[] { 3, 1, 1, 2, 4, 0 });
+                        coreParityShape.CopyFrom(new int[] { 2, 3 });
+                        coreParityFloat.CopyFrom(new float[] { 1.0F, float.NaN, float.PositiveInfinity, -2.0F });
+
+                        using (Mat coreParityMin = CoreCv2.ReduceArgMin(coreParitySource, 1))
+                        using (Mat coreParitySorted = CoreCv2.Sort(coreParitySource, SortFlags.EveryRow | SortFlags.Descending))
+                        using (Mat parityRow = coreParitySource.Row(0))
+                        using (Mat coreParityBroadcast = CoreCv2.Broadcast(parityRow, coreParityShape))
+                        using (Mat coreParityFinite = CoreCv2.FiniteMask(coreParityFloat))
+                        using (Mat coreParityPoints = CoreCv2.FindNonZero(coreParitySource))
+                        {
+                        CheckRangeResult range = CoreCv2.CheckRange(coreParitySource, 0.0, 5.0);
+                        Console.WriteLine("Core upstream: min=" + string.Join(",", coreParityMin.ToArray<int>())
+                            + ", sorted=" + string.Join(",", coreParitySorted.ToArray<int>())
+                            + ", broadcast=" + coreParityBroadcast.Rows + "x" + coreParityBroadcast.Cols
+                            + ", finite=" + string.Join(",", coreParityFinite.ToArray<byte>())
+                            + ", points=" + coreParityPoints.Total.ToUInt64()
+                            + ", range=" + range.IsValid);
+                        }
+                    }
+
+                    using (Mat persistenceMatrix = new Mat(2, 2, MatType.CV_32SC1))
+                    {
+                        persistenceMatrix.CopyFrom(new int[] { 2, 4, 6, 8 });
+                        string persistenceDocument;
+                        using (FileStorage writer = new FileStorage(
+                            "memory.yml",
+                            FileStorageModes.Write | FileStorageModes.Memory | FileStorageModes.FormatYaml))
+                        {
+                            writer.Write("title", "core-persistence");
+                            writer.Write("labels", new string[] { "alpha", "", "gamma" });
+                            writer.Write("matrix", persistenceMatrix);
+                            writer.StartWriteStruct("values", FileNodeTypes.Sequence);
+                            writer.Write(string.Empty, 11);
+                            writer.Write(string.Empty, 13);
+                            writer.EndWriteStruct();
+                            persistenceDocument = writer.ReleaseAndGetString();
+                        }
+
+                        using (FileStorage reader = new FileStorage(
+                            persistenceDocument,
+                            FileStorageModes.Read | FileStorageModes.Memory | FileStorageModes.FormatYaml))
+                        using (FileNode root = reader.Root())
+                        using (FileNode title = reader["title"])
+                        using (FileNode labels = reader["labels"])
+                        using (FileNode matrixNode = reader["matrix"])
+                        using (FileNode values = reader["values"])
+                        using (FileNode lastValue = values[1])
+                        using (Mat restoredMatrix = matrixNode.ToMat())
+                        {
+                            Console.WriteLine("Core persistence: title=" + title.String
+                                + ", keys=" + root.Keys.Length
+                                + ", labels=" + labels.Size
+                                + ", matrix=" + restoredMatrix.Rows + "x" + restoredMatrix.Cols
+                                + ", values=" + values.Size
+                                + ", last=" + lastValue.Real);
+                        }
+                    }
+
+                    using (Mat numericalData = new Mat(3, 2, MatType.CV_64FC1))
+                    using (Mat numericalCovar = new Mat())
+                    using (Mat numericalMean = new Mat())
+                    using (Mat numericalVectors = new Mat())
+                    using (Mat numericalValues = new Mat())
+                    using (Mat numericalDescriptors = new Mat(3, 2, MatType.CV_32FC1))
+                    using (Mat numericalDistances = new Mat())
+                    using (Mat numericalIndices = new Mat())
+                    using (Mat numericalRandom = new Mat(1, 4, MatType.CV_32FC1))
+                    using (Mat lpObjective = new Mat(1, 2, MatType.CV_64FC1))
+                    using (Mat lpConstraints = new Mat(3, 3, MatType.CV_64FC1))
+                    using (Mat lpSolution = new Mat())
+                    {
+                        numericalData.CopyFrom(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 });
+                        numericalDescriptors.CopyFrom(new float[] { 1.0F, 2.0F, 3.0F, 4.0F, 5.0F, 6.0F });
+                        CoreCv2.CalcCovarMatrix(
+                            numericalData,
+                            numericalCovar,
+                            numericalMean,
+                            CovarFlags.Normal | CovarFlags.Rows | CovarFlags.Scale);
+                        CoreCv2.PcaCompute(numericalData, numericalMean, numericalVectors, numericalValues, 1);
+                        using (Mat numericalProjected = CoreCv2.PcaProject(numericalData, numericalMean, numericalVectors))
+                        using (Mat numericalReconstructed = CoreCv2.PcaBackProject(numericalProjected, numericalMean, numericalVectors))
+                        {
+                            CoreCv2.BatchDistance(
+                                numericalDescriptors,
+                                numericalDescriptors,
+                                numericalDistances,
+                                MatType.CV_32F,
+                                numericalIndices,
+                                NormTypes.L2,
+                                1);
+                            CoreCv2.SetRngSeed(2026);
+                            CoreCv2.Randu(numericalRandom, new Scalar(0.0), new Scalar(1.0));
+
+                            lpObjective.CopyFrom(new double[] { 1.0, 1.0 });
+                            lpConstraints.CopyFrom(new double[]
+                            {
+                                1.0, 0.0, 2.0,
+                                0.0, 1.0, 3.0,
+                                1.0, 1.0, 4.0
+                            });
+                            SolveLpResult lpResult = CoreCv2.SolveLp(lpObjective, lpConstraints, lpSolution);
+
+                            Console.WriteLine("Core numerical: cube=" + CoreCv2.CubeRoot(27.0F)
+                                + ", angle=" + CoreCv2.FastAtan2(1.0F, 0.0F)
+                                + ", covar=" + numericalCovar.Rows + "x" + numericalCovar.Cols
+                                + ", components=" + numericalValues.Total.ToUInt64()
+                                + ", projected=" + numericalProjected.Rows + "x" + numericalProjected.Cols
+                                + ", reconstructed=" + numericalReconstructed.Rows + "x" + numericalReconstructed.Cols
+                                + ", nearest=" + string.Join(",", numericalIndices.ToArray<int>())
+                                + ", random=" + string.Join(",", numericalRandom.ToArray<float>())
+                                + ", lp=" + lpResult);
+                        }
+                    }
+
+                    int originalThreadCount = CoreCv2.GetNumThreads();
+                    bool originalUseOptimized = CoreCv2.UseOptimized();
+                    try
+                    {
+                        CoreCv2.SetNumThreads(1);
+                        CoreCv2.SetUseOptimized(!originalUseOptimized);
+                        using (TickMeter runtimeMeter = new TickMeter())
+                        {
+                            runtimeMeter.Start();
+                            long runtimeTick = CoreCv2.GetTickCount();
+                            runtimeMeter.Stop();
+                            Console.WriteLine("Core runtime: version=" + OpenCvSharpBuildInfo.GetNativeOpenCvVersion()
+                                + ", cpus=" + CoreCv2.GetNumberOfCpus()
+                                + ", threads=" + CoreCv2.GetNumThreads()
+                                + ", tickFrequency=" + CoreCv2.GetTickFrequency()
+                                + ", tick=" + runtimeTick
+                                + ", optimized=" + CoreCv2.UseOptimized()
+                                + ", timerCounter=" + runtimeMeter.Counter
+                                + ", timerMilliseconds=" + runtimeMeter.TimeMilliseconds
+                                + ", cpuFeatures=" + CoreCv2.GetCpuFeaturesLine());
+                        }
+                    }
+                    finally
+                    {
+                        CoreCv2.SetUseOptimized(originalUseOptimized);
+                        CoreCv2.SetNumThreads(originalThreadCount);
                     }
 
                     using (Mat laA = new Mat(2, 2, MatType.CV_64FC1))
@@ -433,6 +587,7 @@ namespace ConsoleSamples
                     Point[] convexHullFromSpan = ImgProcCv2.ConvexHull(approxContour.AsSpan());
                     int[] convexHullIndices = ImgProcCv2.ConvexHullIndices(approxContour);
                     Point2f[] approxConvexPolygon = ImgProcCv2.ApproxPolyN(approxContour, 4);
+                    Point2f[] approxConvexPolygonFromSpan = ImgProcCv2.ApproxPolyN(approxContour.AsSpan(), 4);
                     Point[] concaveContour = new Point[]
                     {
                         new Point(0, 0),
@@ -460,23 +615,34 @@ namespace ConsoleSamples
                     RotatedRect fitEllipse = ImgProcCv2.FitEllipse(ellipseFitPoints);
                     RotatedRect fitEllipseAms = ImgProcCv2.FitEllipseAMS(ellipseFitPoints);
                     RotatedRect fitEllipseDirect = ImgProcCv2.FitEllipseDirect(ellipseFitPoints);
+                    RotatedRect fitEllipseFromSpan = ImgProcCv2.FitEllipse(ellipseFitPoints.AsSpan());
+                    RotatedRect fitEllipseAmsFromSpan = ImgProcCv2.FitEllipseAMS(ellipseFitPoints.AsSpan());
+                    RotatedRect fitEllipseDirectFromSpan = ImgProcCv2.FitEllipseDirect(ellipseFitPoints.AsSpan());
                     RectanglesIntersectTypes intersectionType = ImgProcCv2.RotatedRectangleIntersection(
                         minAreaRect,
                         new RotatedRect(new Point2f(2.5F, 1.5F), new Size2f(4.0F, 3.0F), 0.0F),
                         out Point2f[] intersectionRegion);
                     Point2f[] closestEllipsePoints = ImgProcCv2.GetClosestEllipsePoints(fitEllipse, ellipseFitPoints);
+                    Point2f[] closestEllipsePointsFromSpan = ImgProcCv2.GetClosestEllipsePoints(fitEllipse, ellipseFitPoints.AsSpan());
                     double enclosingTriangleArea = ImgProcCv2.MinEnclosingTriangle(approxContour, out Point2f[] enclosingTriangle);
+                    double enclosingTriangleAreaFromSpan = ImgProcCv2.MinEnclosingTriangle(approxContour.AsSpan(), out Point2f[] enclosingTriangleFromSpan);
                     double enclosingConvexPolygonArea = ImgProcCv2.MinEnclosingConvexPolygon(approxContour, 4, out Point2f[] enclosingConvexPolygon);
+                    double enclosingConvexPolygonAreaFromSpan = ImgProcCv2.MinEnclosingConvexPolygon(approxContour.AsSpan(), 4, out Point2f[] enclosingConvexPolygonFromSpan);
+                    Point[] intersectingContour = new Point[]
+                    {
+                        new Point(2, 0),
+                        new Point(6, 0),
+                        new Point(6, 3),
+                        new Point(2, 3)
+                    };
                     float intersectConvexArea = ImgProcCv2.IntersectConvexConvex(
                         contour,
-                        new Point[]
-                        {
-                            new Point(2, 0),
-                            new Point(6, 0),
-                            new Point(6, 3),
-                            new Point(2, 3)
-                        },
+                        intersectingContour,
                         out Point2f[] intersectConvexRegion);
+                    float intersectConvexAreaFromSpan = ImgProcCv2.IntersectConvexConvex(
+                        contour.AsSpan(),
+                        intersectingContour.AsSpan(),
+                        out Point2f[] intersectConvexRegionFromSpan);
                     Vec4f fitLine = ImgProcCv2.FitLine(
                         new Point[]
                         {
@@ -516,6 +682,7 @@ namespace ConsoleSamples
                     Console.WriteLine("Convex hull span points: " + convexHullFromSpan.Length);
                     Console.WriteLine("Convex hull indices: " + convexHullIndices.Length);
                     Console.WriteLine("Approx convex polygon points: " + approxConvexPolygon.Length);
+                    Console.WriteLine("Approx convex polygon span points: " + approxConvexPolygonFromSpan.Length);
                     Console.WriteLine("Convexity defects: " + convexityDefects.Length);
                     Console.WriteLine("Min enclosing circle: center=" + enclosingCenter + ", radius=" + enclosingRadius);
                     Console.WriteLine("Point polygon test: " + polygonTest);
@@ -525,11 +692,18 @@ namespace ConsoleSamples
                     Console.WriteLine("Fit ellipse: " + fitEllipse);
                     Console.WriteLine("Fit ellipse AMS: " + fitEllipseAms);
                     Console.WriteLine("Fit ellipse direct: " + fitEllipseDirect);
+                    Console.WriteLine("Fit ellipse span: " + fitEllipseFromSpan);
+                    Console.WriteLine("Fit ellipse AMS span: " + fitEllipseAmsFromSpan);
+                    Console.WriteLine("Fit ellipse direct span: " + fitEllipseDirectFromSpan);
                     Console.WriteLine("Rotated rect intersection: " + intersectionType + ", points=" + intersectionRegion.Length);
                     Console.WriteLine("Closest ellipse points: " + closestEllipsePoints.Length);
+                    Console.WriteLine("Closest ellipse span points: " + closestEllipsePointsFromSpan.Length);
                     Console.WriteLine("Min enclosing triangle: area=" + enclosingTriangleArea + ", points=" + enclosingTriangle.Length);
+                    Console.WriteLine("Min enclosing triangle span: area=" + enclosingTriangleAreaFromSpan + ", points=" + enclosingTriangleFromSpan.Length);
                     Console.WriteLine("Min enclosing convex polygon: area=" + enclosingConvexPolygonArea + ", points=" + enclosingConvexPolygon.Length);
+                    Console.WriteLine("Min enclosing convex polygon span: area=" + enclosingConvexPolygonAreaFromSpan + ", points=" + enclosingConvexPolygonFromSpan.Length);
                     Console.WriteLine("Intersect convex convex: area=" + intersectConvexArea + ", points=" + intersectConvexRegion.Length);
+                    Console.WriteLine("Intersect convex convex span: area=" + intersectConvexAreaFromSpan + ", points=" + intersectConvexRegionFromSpan.Length);
                     Console.WriteLine("Fit line: " + fitLine);
                     Console.WriteLine("Text size: " + textSize + ", baseLine=" + baseLine);
                     Console.WriteLine("Drawing bytes: " + drawingPixels.Length);
@@ -544,6 +718,20 @@ namespace ConsoleSamples
                         drawingPixels[6],
                         drawingPixels[7]
                     }));
+                    Console.WriteLine(RunImgProcUpstreamParitySummary());
+                    Console.WriteLine(RunImgProcRemainingParitySummary());
+                    Console.WriteLine(RunImgCodecsUpstreamParitySummary());
+                    Console.WriteLine(RunCalib3DUpstreamParitySummary());
+                    Console.WriteLine(RunVideoIODefaultSummary());
+                    Console.WriteLine(RunVideoOpticalFlowObjectSummary());
+                    Console.WriteLine(RunVideoEccTrackerMilSummary());
+                    Console.WriteLine(RunDnnStructuredDefaultSummary());
+                    Console.WriteLine(RunFeaturesAnnIndexSummary());
+                    Console.WriteLine(RunObjDetectStructuredSummary());
+                    Console.WriteLine(RunPhotoHdrDefaultSummary());
+                    Console.WriteLine(RunPhotoCcmDefaultSummary());
+                    Console.WriteLine(RunPhotoIntelligentScissorsDefaultSummary());
+                    Console.WriteLine(RunPhotoFinalCallablesDefaultSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -1009,16 +1197,24 @@ namespace ConsoleSamples
                     {
                         int mjpg = VideoWriterObject.FourCC("MJPG");
                         VideoCaptureAPIs[] backends = VideoIORegistry.GetBackends();
+                        VideoCaptureAPIs[] cameraBackends = VideoIORegistry.GetCameraBackends();
+                        VideoCaptureAPIs[] streamBackends = VideoIORegistry.GetStreamBackends();
+                        VideoCaptureAPIs[] writerBackends = VideoIORegistry.GetWriterBackends();
                         string firstBackendName = backends.Length == 0 ? string.Empty : VideoIORegistry.GetBackendName(backends[0]);
                         bool firstBackendBuiltIn = backends.Length > 0 && VideoIORegistry.IsBackendBuiltIn(backends[0]);
                         using (VideoCaptureObject capture = VideoCaptureObject.Create())
                         using (VideoWriterObject writer = VideoWriterObject.Create())
                         {
+                            capture.ExceptionMode = false;
                             videoIoSummary = "VideoIO FourCC=" + mjpg
                                 + ", captureOpened=" + capture.IsOpened
+                                + ", exceptionMode=" + capture.ExceptionMode
                                 + ", cameraOpen=skipped"
                                 + ", writerOpened=" + writer.IsOpened
                                 + ", registryBackends=" + backends.Length
+                                + ", cameraBackends=" + cameraBackends.Length
+                                + ", streamBackends=" + streamBackends.Length
+                                + ", writerBackends=" + writerBackends.Length
                                 + ", firstBackend=" + firstBackendName
                                 + ", firstBuiltIn=" + firstBackendBuiltIn;
                         }
@@ -1157,7 +1353,19 @@ namespace ConsoleSamples
                         using (Mat multiFrame2 = new Mat(8, 8, MatType.CV_8UC1, new Scalar(32)))
                         using (Mat multiFrame3 = new Mat(8, 8, MatType.CV_8UC1, new Scalar(31)))
                         using (Mat multiDenoised = new Mat())
+                        using (Mat exposure0 = new Mat(16, 16, MatType.CV_8UC3, new Scalar(32, 40, 48)))
+                        using (Mat exposure1 = new Mat(16, 16, MatType.CV_8UC3, new Scalar(96, 104, 112)))
+                        using (Mat exposure2 = new Mat(16, 16, MatType.CV_8UC3, new Scalar(192, 200, 208)))
+                        using (Mat exposureTimes = new Mat(3, 1, MatType.CV_32FC1, new Scalar(0.5)))
+                        using (Mat aligned0 = new Mat())
+                        using (Mat aligned1 = new Mat())
+                        using (Mat aligned2 = new Mat())
+                        using (Mat cameraResponse = new Mat())
+                        using (Mat fusedExposure = new Mat())
                         using (TonemapDrago tonemap = PhotoCv2.CreateTonemapDrago())
+                        using (AlignMTB alignMtb = PhotoCv2.CreateAlignMTB(cut: false))
+                        using (CalibrateDebevec calibrateDebevec = PhotoCv2.CreateCalibrateDebevec(samples: 16))
+                        using (MergeMertens mergeMertens = PhotoCv2.CreateMergeMertens())
                         {
                             PhotoCv2.Inpaint(photoSrc, photoMask, photoDst, 3.0, InpaintMethod.Telea);
                             PhotoCv2.FastNlMeansDenoising(photoSrc, denoised);
@@ -1169,6 +1377,10 @@ namespace ConsoleSamples
                             PhotoCv2.EdgePreservingFilter(colorPhoto, smoothed, EdgePreservingFilterFlags.RecursiveFilter);
                             PhotoCv2.PencilSketch(colorPhoto, sketchGray, sketchColor);
                             tonemap.Gamma = 1.0F;
+                            Mat[] exposures = { exposure0, exposure1, exposure2 };
+                            alignMtb.Process(exposures, new[] { aligned0, aligned1, aligned2 });
+                            calibrateDebevec.Process(exposures, cameraResponse, exposureTimes);
+                            mergeMertens.Process(exposures, fusedExposure);
 
                             photoSummary = "Photo inpaint=" + photoDst.Rows + "x" + photoDst.Cols
                                 + ", denoise=" + denoised.Rows + "x" + denoised.Cols
@@ -1177,7 +1389,10 @@ namespace ConsoleSamples
                                 + ", seamless=" + cloned.Rows + "x" + cloned.Cols
                                 + ", edge=" + smoothed.Rows + "x" + smoothed.Cols
                                 + ", sketch=" + sketchGray.Rows + "x" + sketchGray.Cols
-                                + ", tonemapGamma=" + tonemap.Gamma;
+                                + ", tonemapGamma=" + tonemap.Gamma
+                                + ", aligned=" + 3 + "x" + aligned0.Rows + "x" + aligned0.Cols
+                                + ", response=" + cameraResponse.Rows + "x" + cameraResponse.Cols
+                                + ", fused=" + fusedExposure.Rows + "x" + fusedExposure.Cols;
                         }
                     }
                     catch (OpenCvException ex) when (ex.Message.IndexOf("photo", StringComparison.OrdinalIgnoreCase) >= 0 || ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -1768,6 +1983,379 @@ namespace ConsoleSamples
             }
         }
 
+        private static string RunImgProcUpstreamParitySummary()
+        {
+            using (Mat gray = new Mat(16, 16, MatType.CV_8UC1))
+            using (Mat second = new Mat(16, 16, MatType.CV_8UC1))
+            using (Mat weights1 = new Mat(16, 16, MatType.CV_32FC1))
+            using (Mat weights2 = new Mat(16, 16, MatType.CV_32FC1))
+            using (Mat mask = new Mat(16, 16, MatType.CV_8UC1))
+            using (Mat thresholded = new Mat(16, 16, MatType.CV_8UC1))
+            using (Mat colored = new Mat())
+            using (Mat blended = new Mat())
+            using (Mat blurred = new Mat())
+            using (Mat dx = new Mat())
+            using (Mat dy = new Mat())
+            using (Mat template = new Mat(12, 12, MatType.CV_8UC1))
+            using (Mat image = new Mat(32, 32, MatType.CV_8UC1))
+            using (Mat positions = new Mat())
+            using (GeneralizedHoughBallard detector = ImgProcCv2.CreateGeneralizedHoughBallard())
+            {
+                gray.SetTo(new Scalar(32));
+                second.SetTo(new Scalar(192));
+                weights1.SetTo(new Scalar(0.25));
+                weights2.SetTo(new Scalar(0.75));
+                mask.SetTo(new Scalar(255));
+                thresholded.SetTo(new Scalar(0));
+                ImgProcCv2.ApplyColorMap(gray, colored, ColormapTypes.Turbo);
+                ImgProcCv2.BlendLinear(gray, second, weights1, weights2, blended);
+                ImgProcCv2.StackBlur(gray, blurred, new Size(3, 3));
+                ImgProcCv2.SpatialGradient(gray, dx, dy);
+                double threshold = ImgProcCv2.ThresholdWithMask(gray, thresholded, mask, 64, 255, ThresholdTypes.Binary);
+                ImgProcCv2.DrawMarker(colored, new Point(8, 8), new Scalar(0, 255, 0), MarkerTypes.Star, 7);
+                ImgProcCv2.FillConvexPoly(
+                    colored,
+                    new[] { new Point(2, 12), new Point(8, 2), new Point(14, 12) },
+                    new Scalar(255, 0, 0));
+                double fontScale = ImgProcCv2.GetFontScaleFromHeight(HersheyFonts.HersheySimplex, 18);
+
+                template.SetTo(new Scalar(0));
+                image.SetTo(new Scalar(0));
+                ImgProcCv2.Rectangle(template, new Rect(2, 2, 8, 8), new Scalar(255), 1);
+                ImgProcCv2.Rectangle(image, new Rect(10, 10, 8, 8), new Scalar(255), 1);
+                detector.CannyLowThreshold = 25;
+                detector.CannyHighThreshold = 75;
+                detector.Levels = 90;
+                detector.VotesThreshold = 1;
+                detector.SetTemplate(template);
+                detector.Detect(image, positions);
+
+                return "ImgProc upstream families: colormap=" + colored.Type
+                    + ", blend=" + blended.Type
+                    + ", gradient=" + dx.Type + "/" + dy.Type
+                    + ", threshold=" + threshold
+                    + ", fontScale=" + fontScale
+                    + ", generalizedHoughRows=" + positions.Rows;
+            }
+        }
+
+        private static string RunFeaturesAnnIndexSummary()
+        {
+            try
+            {
+                using (ANNIndex index = ANNIndex.Create(2))
+                using (Mat features = new Mat(4, 2, MatType.CV_32FC1))
+                using (Mat query = new Mat(2, 2, MatType.CV_32FC1))
+                using (Mat indices = new Mat())
+                using (Mat distances = new Mat())
+                {
+                    features.CopyFrom(new float[]
+                    {
+                        0.0F, 0.0F,
+                        10.0F, 10.0F,
+                        2.0F, 2.0F,
+                        -2.0F, -2.0F
+                    });
+                    query.CopyFrom(new float[] { 0.1F, 0.1F, 9.5F, 10.5F });
+                    index.SetSeed(1234);
+                    index.AddItems(features);
+                    index.Build(2);
+                    index.KnnSearch(query, indices, distances, 1);
+                    return "Features ANNIndex: items=" + index.ItemNumber
+                        + ", trees=" + index.TreeNumber
+                        + ", indices=" + indices.Rows + "x" + indices.Cols
+                        + ", distancesType=" + distances.Type
+                        + ", nearest=" + string.Join(",", indices.ToArray<int>());
+                }
+            }
+            catch (OpenCvException ex) when (ex.Message.IndexOf("features2d", StringComparison.OrdinalIgnoreCase) >= 0 || ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return "Features ANNIndex boundary: " + ex.Message;
+            }
+        }
+
+        private static string RunObjDetectStructuredSummary()
+        {
+            try
+            {
+                using (ArucoDictionary first = ArucoDictionary.GetPredefinedDictionary(PredefinedDictionaryType.Dict4X4_50))
+                using (ArucoDictionary second = ArucoDictionary.GetPredefinedDictionary(PredefinedDictionaryType.Dict5X5_50))
+                using (ArucoDictionary extended = ArucoDictionary.Extend(55, 4, first, 12345))
+                using (Mat extendedBytes = extended.BytesList)
+                using (ArucoBoard board = new ArucoBoard(
+                    new[]
+                    {
+                        new[]
+                        {
+                            new Point3f(0, 0, 0),
+                            new Point3f(1, 0, 0),
+                            new Point3f(1, 1, 0),
+                            new Point3f(0, 1, 0)
+                        }
+                    },
+                    first,
+                    new[] { 7 }))
+                using (ArucoDetector multiDetector = ArucoDetector.Create(new[] { first, second }))
+                using (Mat marker = first.GenerateImageMarker(3, 128))
+                using (Mat borderedMarker = CoreCv2.CopyMakeBorder(marker, 32, 32, 32, 32, BorderTypes.Constant, new Scalar(255)))
+                using (Mat boardImage = board.GenerateImage(new Size(96, 96), 4))
+                using (QRCodeEncoderObject encoder = QRCodeEncoderObject.Create())
+                using (QRCodeDetectorObject qrDetector = QRCodeDetectorObject.Create())
+                using (Mat qrCode = encoder.Encode("objdetect-structured-sample"))
+                using (Mat scaledQrCode = new Mat())
+                using (CharucoBoard charucoBoard = new CharucoBoard(new Size(5, 7), 80, 40, first))
+                using (Mat chessboard = charucoBoard.GenerateImage(new Size(600, 840), 40))
+                using (Mat chessboardCorners = new Mat())
+                using (Mat chessboardMeta = new Mat())
+                using (Mat chessboardSharpness = new Mat())
+                {
+                    ArucoMultiDictionaryDetectionResult detection = multiDetector.DetectMarkersMultiDictionary(borderedMarker);
+                    ImgProcCv2.Resize(qrCode, scaledQrCode, new Size(qrCode.Cols * 8, qrCode.Rows * 8), interpolation: InterpolationFlags.Nearest);
+                    using (Mat borderedQrCode = CoreCv2.CopyMakeBorder(scaledQrCode, 32, 32, 32, 32, BorderTypes.Constant, new Scalar(255)))
+                    {
+                        byte[] decoded = qrDetector.DetectAndDecodeBytes(borderedQrCode);
+                        bool found = Calib3DCv2.FindChessboardCornersSB(chessboard, new Size(4, 6), chessboardCorners, chessboardMeta);
+                        Scalar sharpness = Calib3DCv2.EstimateChessboardSharpness(
+                            chessboard,
+                            new Size(4, 6),
+                            chessboardCorners,
+                            sharpness: chessboardSharpness);
+                        bool refined = Calib3DCv2.Find4QuadCornerSubpix(chessboard, chessboardCorners, new Size(5, 5));
+
+                        return "ObjDetect structured: extended=" + extendedBytes.Rows
+                            + ", board=" + board.ObjectPoints.Length + "/" + boardImage.Rows + "x" + boardImage.Cols
+                            + ", multi=" + detection.Count + "/" + string.Join(",", detection.DictionaryIndices)
+                            + ", qrBytes=" + decoded.Length
+                            + ", chessboard=" + found + "/" + refined
+                            + ", meta=" + chessboardMeta.Rows + "x" + chessboardMeta.Cols
+                            + ", sharpness=" + sharpness.V0 + "/" + chessboardSharpness.Rows;
+                    }
+                }
+            }
+            catch (OpenCvException ex) when (
+                ex.Message.IndexOf("objdetect", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                ex.Message.IndexOf("calib3d", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return "ObjDetect structured boundary: " + ex.Message;
+            }
+        }
+
+        private static string RunImgCodecsUpstreamParitySummary()
+        {
+            string root = Path.Combine(Path.GetTempPath(), "opencv-csharp-imgcodecs-" + Guid.NewGuid().ToString("N"));
+            string tiffPath = Path.Combine(root, "多页.tiff");
+            string jpegPath = Path.Combine(root, "元数据.jpeg");
+            string gifPath = Path.Combine(root, "动画.gif");
+            Directory.CreateDirectory(root);
+
+            using (Mat first = new Mat(8, 8, MatType.CV_8UC3, new Scalar(20, 30, 40)))
+            using (Mat second = new Mat(8, 8, MatType.CV_8UC3, new Scalar(120, 130, 140)))
+            using (Mat exif = new Mat(1, CreateSampleExifMetadata().Length, MatType.CV_8UC1))
+            {
+                Mat[] filePages = Array.Empty<Mat>();
+                Mat[] memoryPages = Array.Empty<Mat>();
+                try
+                {
+                    byte[] exifBytes = CreateSampleExifMetadata();
+                    exif.CopyFrom(exifBytes);
+                    var pages = new[] { first, second };
+                    bool multiWritten = ImgCodecsCv2.ImWriteMulti(tiffPath, pages);
+                    bool multiRead = ImgCodecsCv2.ImReadMulti(tiffPath, out filePages);
+                    byte[] multiBuffer = ImgCodecsCv2.ImEncodeMulti(".tiff", pages);
+                    bool rangeDecoded = ImgCodecsCv2.ImDecodeMulti(multiBuffer, 1, 2, out memoryPages);
+
+                    var metadata = new[] { new ImageMetadataChunk(ImageMetadataType.Exif, exif) };
+                    bool metadataWritten = ImgCodecsCv2.ImWriteWithMetadata(jpegPath, first, metadata);
+                    byte[] metadataBuffer = ImgCodecsCv2.ImEncodeWithMetadata(".jpeg", first, metadata);
+                    using (ImageMetadataResult metadataResult = ImgCodecsCv2.ImDecodeWithMetadata(metadataBuffer))
+                    using (var animation = new Animation(2, new Scalar(1, 2, 3, 4)))
+                    {
+                        animation.SetFrames(pages, new[] { 40, 80 });
+                        byte[] animationBuffer = ImgCodecsCv2.ImEncodeAnimation(".gif", animation);
+                        bool animationWritten = ImgCodecsCv2.ImWriteAnimation(gifPath, animation);
+                        using (var decodedAnimation = new Animation())
+                        using (var collection = new ImageCollection(tiffPath, ImreadModes.Unchanged))
+                        using (Mat lazyPage = collection[1])
+                        {
+                            bool animationDecoded = ImgCodecsCv2.ImDecodeAnimation(animationBuffer, decodedAnimation);
+                            return "ImgCodecs upstream families: multi=" + multiWritten + "/" + multiRead
+                                + "/pages=" + filePages.Length + "/range=" + rangeDecoded + ":" + memoryPages.Length
+                                + ", count=" + ImgCodecsCv2.ImCount(tiffPath)
+                                + ", metadata=" + metadataWritten + "/chunks=" + metadataResult.Metadata.Count
+                                + ", animation=" + animationWritten + "/" + animationDecoded + "/frames=" + decodedAnimation.FrameCount
+                                + ", collection=" + collection.Count + "/lazyRows=" + lazyPage.Rows
+                                + ", probes=" + ImgCodecsCv2.HaveImageReader(tiffPath) + "/" + ImgCodecsCv2.HaveImageWriter(".gif");
+                        }
+                    }
+                }
+                finally
+                {
+                    DisposeAll(filePages);
+                    DisposeAll(memoryPages);
+                    if (File.Exists(tiffPath)) File.Delete(tiffPath);
+                    if (File.Exists(jpegPath)) File.Delete(jpegPath);
+                    if (File.Exists(gifPath)) File.Delete(gifPath);
+                    if (Directory.Exists(root)) Directory.Delete(root);
+                }
+            }
+        }
+
+        private static byte[] CreateSampleExifMetadata()
+        {
+            return new byte[]
+            {
+                (byte)'M', (byte)'M', 0, 42, 0, 0, 0, 8, 0, 10, 1, 0, 0, 4, 0, 0, 0, 1, 0, 0, 5,
+                0, 1, 1, 0, 4, 0, 0, 0, 1, 0, 0, 2, 208, 1, 2, 0, 3, 0, 0, 0, 1,
+                0, 10, 0, 0, 1, 18, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 1, 14, 0, 2, 0, 0,
+                0, 34, 0, 0, 0, 176, 1, 49, 0, 2, 0, 0, 0, 7, 0, 0, 0, 210, 1, 26,
+                0, 5, 0, 0, 0, 1, 0, 0, 0, 218, 1, 27, 0, 5, 0, 0, 0, 1, 0, 0, 0,
+                226, 1, 40, 0, 3, 0, 0, 0, 1, 0, 2, 0, 0, 135, 105, 0, 4, 0, 0, 0,
+                1, 0, 0, 0, 134, 0, 0, 0, 0, 0, 3, 144, 0, 0, 7, 0, 0, 0, 4, 48, 50,
+                50, 49, 160, 2, 0, 4, 0, 0, 0, 1, 0, 0, 5, 0, 160, 3, 0, 4, 0, 0,
+                0, 1, 0, 0, 2, 208, 0, 0, 0, 0, 83, 97, 109, 112, 108, 101, 32, 49, 48,
+                45, 98, 105, 116, 32, 105, 109, 97, 103, 101, 32, 119, 105, 116, 104, 32,
+                109, 101, 116, 97, 100, 97, 116, 97, 0, 79, 112, 101, 110, 67, 86, 0, 0,
+                0, 0, 0, 72, 0, 0, 0, 1, 0, 0, 0, 72, 0, 0, 0, 1
+            };
+        }
+
+        private static string RunImgProcRemainingParitySummary()
+        {
+            using (Mat color = new Mat(16, 16, MatType.CV_8UC3))
+            using (Mat camera = new Mat(3, 3, MatType.CV_64FC1))
+            using (Mat distortion = Mat.Zeros(new Size(5, 1), MatType.CV_64FC1))
+            using (Mat fisheyeDistortion = Mat.Zeros(new Size(4, 1), MatType.CV_64FC1))
+            using (Mat rectification = Mat.Eye(3, 3, MatType.CV_64FC1))
+            using (Mat rvec = Mat.Zeros(new Size(1, 3), MatType.CV_64FC1))
+            using (Mat tvec = Mat.Zeros(new Size(1, 3), MatType.CV_64FC1))
+            using (Mat phase1 = Mat.Zeros(new Size(8, 8), MatType.CV_32FC1))
+            using (Mat phase2 = Mat.Zeros(new Size(8, 8), MatType.CV_32FC1))
+            using (Mat accumulator = Mat.Zeros(new Size(8, 8), MatType.CV_32FC1))
+            using (Mat signature1 = new Mat(2, 2, MatType.CV_32FC1))
+            using (Mat signature2 = new Mat(2, 2, MatType.CV_32FC1))
+            using (Mat flow = new Mat())
+            using (Mat markers = Mat.Zeros(new Size(16, 16), MatType.CV_32SC1))
+            using (Mat grabMask = Mat.Zeros(new Size(16, 16), MatType.CV_8UC1))
+            using (Mat backgroundModel = new Mat())
+            using (Mat foregroundModel = new Mat())
+            using (Mat gray = Mat.Zeros(new Size(16, 16), MatType.CV_8UC1))
+            using (Mat template = Mat.Zeros(new Size(3, 3), MatType.CV_8UC1))
+            using (FontFace font = new FontFace("sans"))
+            {
+                var pixels = new byte[16 * 16 * 3];
+                for (int y = 0; y < 16; y++)
+                {
+                    for (int x = 0; x < 16; x++)
+                    {
+                        bool inside = x >= 3 && x < 13 && y >= 3 && y < 13;
+                        int offset = (y * 16 + x) * 3;
+                        pixels[offset] = (byte)(inside ? 180 + x % 5 : 10 + x);
+                        pixels[offset + 1] = (byte)(inside ? 40 + y % 7 : 15 + y);
+                        pixels[offset + 2] = (byte)(inside ? 60 + (x + y) % 9 : 20 + (x + y) % 5);
+                    }
+                }
+                color.CopyFrom(pixels);
+                camera.CopyFrom<double>(new[]
+                {
+                    12.0, 0.0, 8.0,
+                    0.0, 12.0, 8.0,
+                    0.0, 0.0, 1.0
+                });
+                tvec.CopyFrom<double>(new[] { 0.0, 0.0, 2.0 });
+
+                using (Mat undistorted = Calib3DCv2.Undistort(color, camera, distortion, camera))
+                using (Mat fisheye = Calib3DCv2.FisheyeUndistortImage(color, camera, fisheyeDistortion, camera, new Size(16, 16)))
+                using (Mat patch = ImgProcCv2.GetRectSubPix(undistorted, new Size(5, 5), new Point2f(8, 8)))
+                using (Mat polar = ImgProcCv2.WarpPolar(fisheye, new Size(16, 16), new Point2f(8, 8), 7, InterpolationFlags.Linear))
+                {
+                    UndistortRectifyMapResult maps = Calib3DCv2.InitInverseRectificationMap(
+                        camera,
+                        distortion,
+                        rectification,
+                        camera,
+                        new Size(16, 16),
+                        MatType.CV_32FC1);
+                    using (maps.Map1)
+                    using (maps.Map2)
+                    {
+                        Calib3DCv2.DrawFrameAxes(undistorted, camera, distortion, rvec, tvec, 0.5F, 1);
+
+                        float[] values1 = new float[64];
+                        float[] values2 = new float[64];
+                        values1[2 * 8 + 2] = 1;
+                        values2[3 * 8 + 4] = 1;
+                        phase1.CopyFrom(values1);
+                        phase2.CopyFrom(values2);
+                        using (Mat window = ImgProcCv2.CreateHanningWindow(new Size(8, 8), MatType.CV_32F))
+                        {
+                            ImgProcCv2.Accumulate(phase1, accumulator);
+                            ImgProcCv2.AccumulateSquare(phase1, accumulator);
+                            ImgProcCv2.AccumulateProduct(phase1, phase2, accumulator);
+                            ImgProcCv2.AccumulateWeighted(phase2, accumulator, 0.25);
+                            Point2d shift = ImgProcCv2.PhaseCorrelate(phase1, phase2, window, out double response);
+                            Point2d iterativeShift = ImgProcCv2.PhaseCorrelateIterative(phase1, phase2);
+
+                            signature1.CopyFrom<float>(new[] { 1.0F, 0.0F, 1.0F, 1.0F });
+                            signature2.CopyFrom<float>(new[] { 1.0F, 0.25F, 1.0F, 1.25F });
+                            float lowerBound = 0;
+                            float emd = ImgProcCv2.EMD(signature1, signature2, DistanceTypes.L2, ref lowerBound, flow: flow);
+
+                            using (Mat filtered = ImgProcCv2.PyrMeanShiftFiltering(color, 2, 8, 0))
+                            {
+                                int[] markerValues = new int[256];
+                                markerValues[2 * 16 + 2] = 1;
+                                markerValues[13 * 16 + 13] = 2;
+                                markers.CopyFrom(markerValues);
+                                ImgProcCv2.Watershed(color, markers);
+                                ImgProcCv2.GrabCut(
+                                    color,
+                                    grabMask,
+                                    new Rect(2, 2, 12, 12),
+                                    backgroundModel,
+                                    foregroundModel,
+                                    1,
+                                    GrabCutModes.InitWithRect);
+
+                                ImgProcCv2.Rectangle(gray, new Rect(3, 3, 8, 8), new Scalar(255), -1);
+                                using (Mat match = ImgProcCv2.MatchTemplate(gray, template, TemplateMatchModes.CCoeffNormed))
+                                {
+                                    ImgProcCv2.FindContoursLinkRuns(gray, out Point[][] contours, out Vec4i[] hierarchy);
+                                    font.SetInstance(Array.Empty<int>());
+                                    Point textNext = ImgProcCv2.PutText(
+                                        filtered,
+                                        "OpenCV",
+                                        new Point(1, 14),
+                                        new Scalar(255, 255, 255),
+                                        font,
+                                        8);
+                                    Rect textBounds = ImgProcCv2.GetTextSize(
+                                        new Size(16, 16),
+                                        "OpenCV",
+                                        new Point(1, 14),
+                                        font,
+                                        8);
+
+                                    return "ImgProc remaining families: calibration=" + maps.Rows + "x" + maps.Cols
+                                        + ", patch=" + patch.Rows + "x" + patch.Cols
+                                        + ", polar=" + polar.Rows + "x" + polar.Cols
+                                        + ", phase=" + shift + "/response=" + response
+                                        + ", iterative=" + iterativeShift
+                                        + ", emd=" + emd + "/lowerBound=" + lowerBound + "/flowRows=" + flow.Rows
+                                        + ", filtered=" + filtered.Type
+                                        + ", match=" + match.Rows + "x" + match.Cols
+                                        + ", linkRuns=" + contours.Length + "/hierarchy=" + hierarchy.Length
+                                        + ", grabModels=" + backgroundModel.Rows + "/" + foregroundModel.Rows
+                                        + ", font=" + font.Name
+                                        + ", text=" + textBounds.Width + "x" + textBounds.Height + "/next=" + textNext;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private static string RunDnnForwardSummary(string modelPath, string configPath, string framework, Mat blob)
         {
             using (DnnNetObject net = DnnNetObject.ReadNet(modelPath, configPath, framework))
@@ -1793,6 +2381,59 @@ namespace ConsoleSamples
             }
         }
 
+        private static string RunDnnStructuredDefaultSummary()
+        {
+            string fixturePath = Path.Combine(AppContext.BaseDirectory, "Dnn", "Fixtures", "identity-opset13.onnx.base64");
+            byte[] model = Convert.FromBase64String(File.ReadAllText(fixturePath).Trim());
+            using (DnnNetObject net = DnnNetObject.ReadNetFromOnnx(model, OpenCvSharp.Dnn.DnnEngine.Classic))
+            using (Mat image = new Mat(2, 2, MatType.CV_32FC1))
+            {
+                image.CopyFrom(new[] { 1.0F, 2.0F, 3.0F, 4.0F });
+                using (Mat blob = DnnCv2.BlobFromImage(image, new OpenCvSharp.Dnn.Image2BlobParams()))
+                {
+                    net.SetPreferableBackend(OpenCvSharp.Dnn.DnnBackend.OpenCV)
+                        .SetPreferableTarget(OpenCvSharp.Dnn.DnnTarget.Cpu)
+                        .SetProfilingMode(OpenCvSharp.Dnn.DnnProfilingMode.Detailed)
+                        .SetInput(blob, "input");
+                    string[] layerNames = net.GetLayerNames();
+                    string[] outputNames = net.GetUnconnectedOutLayersNames();
+                    int layerId = net.GetLayerId(layerNames[0]);
+                    int[][] inputShapes = { new[] { 1, 1, 2, 2 } };
+                    int[] inputTypes = { MatType.CV_32F };
+                    OpenCvSharp.Dnn.DnnLayerShapes shapes = net.GetLayerShapes(inputShapes, inputTypes, layerId);
+                    long flops = net.GetFLOPS(inputShapes, inputTypes);
+                    OpenCvSharp.Dnn.DnnMemoryConsumption memory = net.GetMemoryConsumption(inputShapes, inputTypes);
+                    net.FinalizeNetwork();
+                    using (Mat output = net.Forward(outputNames[0]))
+                    {
+                        Mat[][] nested = net.ForwardAndRetrieve(outputNames);
+                        try
+                        {
+                            int nestedCount = 0;
+                            for (int i = 0; i < nested.Length; i++) nestedCount += nested[i].Length;
+                            OpenCvSharp.Dnn.DnnDetailedPerfProfile detailed = net.GetDetailedPerfProfile();
+                            return "DNN structured: modelBytes=" + model.Length
+                                + ", format=" + net.ModelFormat
+                                + ", layers=" + layerNames.Length
+                                + ", inferredShapes=" + shapes.InputShapes.Length + "/" + shapes.OutputShapes.Length
+                                + ", outputDims=" + output.Dims
+                                + ", outputValues=" + string.Join(",", output.ToArray<float>())
+                                + ", nestedMats=" + nestedCount
+                                + ", flops=" + flops
+                                + ", memory=" + memory.WeightsBytes + "/" + memory.BlobBytes
+                                + ", profileRows=" + detailed.Count;
+                        }
+                        finally
+                        {
+                            for (int i = 0; i < nested.Length; i++)
+                                for (int j = 0; j < nested[i].Length; j++)
+                                    nested[i][j].Dispose();
+                        }
+                    }
+                }
+            }
+        }
+
         private static bool IsExtendedConsoleSamplesEnabled()
         {
             return IsEnvironmentFlagEnabled(ConsoleExtendedVariable, CompatibilityConsoleExtendedAlias);
@@ -1808,6 +2449,448 @@ namespace ConsoleSamples
             Console.WriteLine(GetBioInspiredUnstableSkipSummary());
             Console.WriteLine(GetXStereoSummary());
             Console.WriteLine("AlphaMat infoFlow=skipped in default console sample");
+        }
+
+        private static string RunVideoIODefaultSummary()
+        {
+            string path = Path.Combine(Path.GetTempPath(), "opencv-csharp-api-videoio-default.avi");
+            int fourcc = VideoWriterObject.FourCC("MJPG");
+            int framesWritten = 0;
+            int decodedFrames = 0;
+            int streamDecodedFrames = 0;
+            bool writerOpened = false;
+            bool captureOpened = false;
+            bool streamOpened = false;
+            double frameCount = -1;
+            string writerBackend = string.Empty;
+            string captureBackend = string.Empty;
+            string streamStatus = "not-opened";
+            VideoCaptureAPIs[] backends = Array.Empty<VideoCaptureAPIs>();
+            VideoCaptureAPIs[] streamBackends = Array.Empty<VideoCaptureAPIs>();
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                using (Mat frame = new Mat(32, 32, MatType.CV_8UC3))
+                using (VideoWriterObject writer = new VideoWriterObject())
+                {
+                    writerOpened = writer.Open(path, fourcc, 10.0, frame.Size, Array.Empty<int>());
+                    if (writerOpened)
+                    {
+                        writerBackend = writer.GetBackendName();
+                        for (int i = 0; i < 3; i++)
+                        {
+                            frame.SetTo(new Scalar(24 + i * 40, 64 + i * 32, 128 + i * 24));
+                            if (writer.Write(frame))
+                            {
+                                framesWritten++;
+                            }
+                        }
+                    }
+                }
+
+                using (VideoCaptureObject capture = new VideoCaptureObject())
+                using (Mat decoded = new Mat())
+                {
+                    capture.ExceptionMode = false;
+                    captureOpened = capture.Open(path, VideoCaptureAPIs.Any, Array.Empty<int>());
+                    if (captureOpened)
+                    {
+                        captureBackend = capture.GetBackendName();
+                        frameCount = capture.FrameCount;
+                        while (capture.Read(decoded))
+                        {
+                            decodedFrames++;
+                        }
+                    }
+                }
+
+                backends = VideoIORegistry.GetBackends();
+                streamBackends = VideoIORegistry.GetStreamBackends();
+                VideoCaptureAPIs streamApi = streamBackends.Length == 0 ? VideoCaptureAPIs.Any : streamBackends[0];
+                try
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    using (VideoCaptureObject streamCapture = new VideoCaptureObject())
+                    using (Mat streamed = new Mat())
+                    {
+                        streamCapture.ExceptionMode = false;
+                        streamOpened = streamCapture.Open(stream, streamApi, true, Array.Empty<int>());
+                        if (streamOpened)
+                        {
+                            while (streamCapture.Read(streamed))
+                            {
+                                streamDecodedFrames++;
+                            }
+                            streamStatus = "decoded";
+                        }
+                        else
+                        {
+                            streamStatus = "backend-rejected";
+                        }
+                    }
+                }
+                catch (OpenCvException ex)
+                {
+                    streamStatus = "boundary:" + ex.Message.Replace("\r", " ").Replace("\n", " ");
+                }
+
+                string firstBackend = backends.Length == 0 ? string.Empty : VideoIORegistry.GetBackendName(backends[0]);
+                bool firstBuiltIn = backends.Length > 0 && VideoIORegistry.IsBackendBuiltIn(backends[0]);
+                return "VideoIO default: writer=" + writerOpened + "/" + framesWritten
+                    + ", capture=" + captureOpened + "/" + decodedFrames
+                    + ", frameCount=" + frameCount
+                    + ", stream=" + streamOpened + "/" + streamDecodedFrames + "/" + streamStatus
+                    + ", writerBackend=" + writerBackend
+                    + ", captureBackend=" + captureBackend
+                    + ", registry=" + backends.Length + "/" + firstBackend + "/builtIn=" + firstBuiltIn
+                    + ", streamBackends=" + streamBackends.Length + "/api=" + streamApi;
+            }
+            catch (OpenCvException ex)
+            {
+                return "VideoIO default boundary: " + ex.Message.Replace("\r", " ").Replace("\n", " ");
+            }
+            finally
+            {
+                try
+                {
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+                catch
+                {
+                    // The sample remains useful even when a backend delays file release.
+                }
+            }
+        }
+
+        private static string RunPhotoHdrDefaultSummary()
+        {
+            using (Mat exposure0 = new Mat(16, 16, MatType.CV_8UC3, new Scalar(32, 40, 48)))
+            using (Mat exposure1 = new Mat(16, 16, MatType.CV_8UC3, new Scalar(96, 104, 112)))
+            using (Mat exposure2 = new Mat(16, 16, MatType.CV_8UC3, new Scalar(192, 200, 208)))
+            using (Mat exposureTimes = new Mat(3, 1, MatType.CV_32FC1, new Scalar(0.5)))
+            using (Mat aligned0 = new Mat())
+            using (Mat aligned1 = new Mat())
+            using (Mat aligned2 = new Mat())
+            using (Mat cameraResponse = new Mat())
+            using (Mat fusedExposure = new Mat())
+            using (AlignMTB align = PhotoCv2.CreateAlignMTB(cut: false))
+            using (CalibrateDebevec calibrate = PhotoCv2.CreateCalibrateDebevec(samples: 16))
+            using (MergeMertens merge = PhotoCv2.CreateMergeMertens())
+            {
+                Mat[] exposures = { exposure0, exposure1, exposure2 };
+                align.Process(exposures, new[] { aligned0, aligned1, aligned2 });
+                calibrate.Process(exposures, cameraResponse, exposureTimes);
+                merge.Process(exposures, fusedExposure);
+
+                return "Photo HDR default: aligned=3/" + aligned0.Rows + "x" + aligned0.Cols
+                    + ", response=" + cameraResponse.Rows + "x" + cameraResponse.Cols
+                    + ", fused=" + fusedExposure.Rows + "x" + fusedExposure.Cols;
+            }
+        }
+
+        private static string RunVideoOpticalFlowObjectSummary()
+        {
+            using (Mat first = CreateVideoOpticalFlowFrame(0))
+            using (Mat second = CreateVideoOpticalFlowFrame(1))
+            using (FarnebackOpticalFlowObject farneback = FarnebackOpticalFlowObject.Create(numLevels: 3, winSize: 9, numIterations: 3))
+            using (VariationalRefinementObject variational = VariationalRefinementObject.Create())
+            using (DisOpticalFlowObject dis = DisOpticalFlowObject.Create())
+            using (SparsePyrLkOpticalFlowObject sparse = SparsePyrLkOpticalFlowObject.Create(winSize: new Size(11, 11), maxLevel: 1))
+            using (Mat farnebackFlow = farneback.Calc(first, second))
+            using (Mat refinedFlow = variational.Calc(first, second))
+            using (Mat disFlow = dis.Calc(first, second))
+            {
+                Point2f[] points = { new Point2f(10, 10), new Point2f(15, 15), new Point2f(20, 20) };
+                sparse.Flags = OpticalFlowFlags.UseInitialFlow;
+                Point2f[] nextPoints = sparse.Calc(first, second, points, points, out byte[] status, out float[] error);
+                farneback.CollectGarbage();
+                variational.CollectGarbage();
+                dis.CollectGarbage();
+
+                return "Video optical-flow objects: farneback=" + farnebackFlow.Rows + "x" + farnebackFlow.Cols + "/type=" + farnebackFlow.Type
+                    + ", variational=" + refinedFlow.Rows + "x" + refinedFlow.Cols + "/type=" + refinedFlow.Type
+                    + ", dis=" + disFlow.Rows + "x" + disFlow.Cols + "/type=" + disFlow.Type
+                    + ", sparse=" + nextPoints.Length + "/status=" + status.Length + "/error=" + error.Length;
+            }
+        }
+
+        private static Mat CreateVideoOpticalFlowFrame(int offset)
+        {
+            var frame = new Mat(32, 32, MatType.CV_8UC1);
+            var pixels = new byte[32 * 32];
+            for (int y = 7; y < 25; y++)
+            {
+                for (int x = 7 + offset; x < 23 + offset; x++)
+                {
+                    pixels[(y * 32) + x] = (byte)(((x + y) & 1) == 0 ? 255 : 80);
+                }
+            }
+            frame.CopyFrom(pixels);
+            return frame;
+        }
+
+        private static string RunVideoEccTrackerMilSummary()
+        {
+            using (Mat reference = CreateVideoEccFrame())
+            using (OpenCvSharp.Video.ECCRegistrationResult registration = VideoCv2.FindTransformECC(
+                reference,
+                reference,
+                OpenCvSharp.Video.MotionType.Translation,
+                TermCriteria.ByCountAndEpsilon(20, 1e-6)))
+            using (Mat first = CreateVideoTrackerMilFrame(0))
+            using (Mat second = CreateVideoTrackerMilFrame(2))
+            using (VideoTrackerMILObject tracker = VideoTrackerMILObject.Create())
+            {
+                var box = new Rect(20, 22, 20, 20);
+                tracker.Init(first, box);
+                bool found = tracker.Update(second, ref box);
+                double correlation = VideoCv2.ComputeECC(reference, reference);
+
+                return "Video ECC/TrackerMIL: correlation=" + correlation.ToString("F6", CultureInfo.InvariantCulture)
+                    + ", score=" + registration.Score.ToString("F6", CultureInfo.InvariantCulture)
+                    + ", warp=" + registration.WarpMatrix.Rows + "x" + registration.WarpMatrix.Cols
+                    + "/type=" + registration.WarpMatrix.Type
+                    + ", initialized=" + tracker.IsInitialized
+                    + ", found=" + found
+                    + ", box=" + box;
+            }
+        }
+
+        private static Mat CreateVideoEccFrame()
+        {
+            var frame = new Mat(64, 64, MatType.CV_8UC1);
+            var pixels = new byte[64 * 64];
+            for (int y = 0; y < 64; y++)
+            {
+                for (int x = 0; x < 64; x++)
+                {
+                    pixels[(y * 64) + x] = (byte)((x * 7 + y * 11 + ((x / 5 + y / 7) & 1) * 80) & 255);
+                }
+            }
+            frame.CopyFrom(pixels);
+            return frame;
+        }
+
+        private static Mat CreateVideoTrackerMilFrame(int offset)
+        {
+            var frame = new Mat(80, 80, MatType.CV_8UC1);
+            var pixels = new byte[80 * 80];
+            for (int y = 0; y < 80; y++)
+            {
+                for (int x = 0; x < 80; x++)
+                {
+                    pixels[(y * 80) + x] = (byte)((x * 3 + y * 5) & 31);
+                }
+            }
+            for (int y = 22; y < 42; y++)
+            {
+                for (int x = 20 + offset; x < 40 + offset; x++)
+                {
+                    pixels[(y * 80) + x] = (byte)(((x + y) & 1) == 0 ? 240 : 96);
+                }
+            }
+            frame.CopyFrom(pixels);
+            return frame;
+        }
+
+        private static string RunPhotoCcmDefaultSummary()
+        {
+            using (Mat measured = CreatePhotoCcmSamples())
+            using (Mat reference = measured.Clone())
+            using (ColorCorrectionModel model = PhotoCv2.CreateColorCorrectionModel(
+                measured, reference, ColorSpace.Srgb))
+            using (Mat image = new Mat(2, 3, MatType.CV_8UC3, new Scalar(48, 96, 160)))
+            {
+                model.SetDistance(DistanceType.RgbLinear);
+                model.SetMaxCount(20);
+                model.SetEpsilon(0.01);
+                using Mat ccm = model.Compute();
+                using Mat corrected = model.CorrectImage(image);
+                double loss = model.GetLoss();
+
+                string document;
+                using (var writer = new FileStorage(
+                    "memory.yml",
+                    FileStorageModes.Write | FileStorageModes.Memory | FileStorageModes.FormatYaml))
+                {
+                    model.Write(writer);
+                    document = writer.ReleaseAndGetString();
+                }
+
+                bool persisted;
+                using (var reader = new FileStorage(
+                    document,
+                    FileStorageModes.Read | FileStorageModes.Memory | FileStorageModes.FormatYaml))
+                using (FileNode node = reader["ColorCorrectionModel"])
+                using (ColorCorrectionModel loaded = PhotoCv2.CreateColorCorrectionModel())
+                {
+                    loaded.Read(node);
+                    using Mat loadedCcm = loaded.GetColorCorrectionMatrix();
+                    persisted = loadedCcm.Size.Equals(ccm.Size) && loadedCcm.Type == ccm.Type;
+                }
+
+                return "Photo CCM default: ccm=" + ccm.Rows + "x" + ccm.Cols
+                    + ", loss=" + loss.ToString("G6", CultureInfo.InvariantCulture)
+                    + ", corrected=" + corrected.Rows + "x" + corrected.Cols + "/type=" + corrected.Type
+                    + ", persisted=" + persisted;
+            }
+        }
+
+        private static Mat CreatePhotoCcmSamples()
+        {
+            var samples = new Mat(24, 1, MatType.CV_64FC3);
+            var values = new double[24 * 3];
+            for (int i = 0; i < 24; i++)
+            {
+                values[(i * 3)] = 0.08 + (((i * 7) % 19) + 1) / 25.0;
+                values[(i * 3) + 1] = 0.07 + (((i * 11) % 17) + 1) / 24.0;
+                values[(i * 3) + 2] = 0.06 + (((i * 13) % 16) + 1) / 23.0;
+            }
+
+            samples.CopyFrom(values);
+            return samples;
+        }
+
+        private static string RunPhotoIntelligentScissorsDefaultSummary()
+        {
+            using (Mat image = CreatePhotoIntelligentScissorsImage())
+            using (var scissors = new IntelligentScissorsMB())
+            {
+                scissors.SetEdgeFeatureCannyParameters(20.0, 60.0);
+                scissors.ApplyImage(image);
+                scissors.BuildMap(new Point(2, 2));
+                using Mat contour = scissors.GetContour(new Point(13, 2));
+                int[] points = contour.ToArray<int>();
+                return "Photo Intelligent Scissors default: image=" + image.Rows + "x" + image.Cols
+                    + ", contour=" + contour.Rows + "x" + contour.Cols + "/type=" + contour.Type
+                    + ", endpoints=" + points[0] + "," + points[1]
+                    + "->" + points[points.Length - 2] + "," + points[points.Length - 1];
+            }
+        }
+
+        private static string RunPhotoFinalCallablesDefaultSummary()
+        {
+            using var observation0 = new Mat(4, 4, MatType.CV_8UC1, new Scalar(80));
+            using var observation1 = new Mat(4, 4, MatType.CV_8UC1, new Scalar(96));
+            using Mat denoised = PhotoCv2.DenoiseTvl1(
+                new[] { observation0, observation1 },
+                lambda: 1.0,
+                niters: 2);
+
+            const string calibration = "%YAML:1.0\n" +
+                "image_width: 4\n" +
+                "image_height: 4\n" +
+                "red_channel:\n" +
+                "  coeffs_x: [0.]\n" +
+                "  coeffs_y: [0.]\n" +
+                "blue_channel:\n" +
+                "  coeffs_x: [0.]\n" +
+                "  coeffs_y: [0.]\n";
+            using var storage = new FileStorage(
+                calibration,
+                FileStorageModes.Read | FileStorageModes.Memory | FileStorageModes.FormatYaml);
+            using FileNode root = storage.Root();
+            using ChromaticAberrationParameters parameters =
+                PhotoCv2.LoadChromaticAberrationParams(root);
+            using var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(20, 40, 80));
+            using Mat corrected = PhotoCv2.CorrectChromaticAberration(
+                image,
+                parameters.Coefficients,
+                parameters.CalibrationSize,
+                parameters.Degree);
+
+            return "Photo final default: tvl1=" + denoised.Rows + "x" + denoised.Cols + "/type=" + denoised.Type
+                + ", coefficients=" + parameters.Coefficients.Rows + "x" + parameters.Coefficients.Cols
+                + "/degree=" + parameters.Degree + "/size=" + parameters.CalibrationSize
+                + ", corrected=" + corrected.Rows + "x" + corrected.Cols + "/type=" + corrected.Type;
+        }
+
+        private static Mat CreatePhotoIntelligentScissorsImage()
+        {
+            const int size = 16;
+            var image = new Mat(size, size, MatType.CV_8UC1);
+            var pixels = new byte[size * size];
+            for (int coordinate = 2; coordinate <= 13; coordinate++)
+            {
+                pixels[(2 * size) + coordinate] = 255;
+                pixels[(13 * size) + coordinate] = 255;
+                pixels[(coordinate * size) + 2] = 255;
+                pixels[(coordinate * size) + 13] = 255;
+            }
+            image.CopyFrom(pixels);
+            return image;
+        }
+
+        private static string RunCalib3DUpstreamParitySummary()
+        {
+            using (var subdiv = new Subdiv2D(new Rect2f(0, 0, 100, 100)))
+            using (var source = new Mat(8, 2, MatType.CV_32FC1))
+            using (var destination = new Mat(8, 2, MatType.CV_32FC1))
+            using (var mask = new Mat())
+            using (Mat cameraMatrix1 = Mat.Eye(3, 3, MatType.CV_64FC1))
+            using (Mat cameraMatrix2 = Mat.Eye(3, 3, MatType.CV_64FC1))
+            using (Mat distCoeffs1 = Mat.Zeros(4, 1, MatType.CV_64FC1))
+            using (Mat distCoeffs2 = Mat.Zeros(4, 1, MatType.CV_64FC1))
+            using (Mat r = Mat.Eye(3, 3, MatType.CV_64FC1))
+            using (var t = new Mat(3, 1, MatType.CV_64FC1))
+            {
+                Point2f[] points =
+                {
+                    new Point2f(10, 10), new Point2f(85, 10), new Point2f(85, 85),
+                    new Point2f(10, 85), new Point2f(48, 48)
+                };
+                subdiv.Insert(points);
+                int centerVertex = subdiv.FindNearest(new Point2f(47, 47), out Point2f nearest);
+                subdiv.GetVoronoiFacetList(new[] { centerVertex }, out Point2f[][] facets, out Point2f[] centers);
+
+                float[] sourceValues = { 0, 0, 40, 0, 40, 30, 0, 30, 8, 7, 31, 6, 34, 24, 7, 22 };
+                float[] destinationValues = new float[sourceValues.Length];
+                for (int index = 0; index < sourceValues.Length; index += 2)
+                {
+                    destinationValues[index] = sourceValues[index] + 3;
+                    destinationValues[index + 1] = sourceValues[index + 1] + 4;
+                }
+                source.CopyFrom(sourceValues);
+                destination.CopyFrom(destinationValues);
+                using (Mat homography = Calib3DCv2.FindHomography(source, destination, mask, new UsacParams()))
+                {
+                    cameraMatrix1.SetValue(0, 500.0);
+                    cameraMatrix1.SetValue(2, 320.0);
+                    cameraMatrix1.SetValue(4, 500.0);
+                    cameraMatrix1.SetValue(5, 240.0);
+                    cameraMatrix2.CopyFrom(cameraMatrix1.ToArray<double>());
+                    t.SetValue(0, 0.2);
+                    FisheyeStereoRectifyResult rectified = Calib3DCv2.FisheyeStereoRectify(
+                        cameraMatrix1,
+                        distCoeffs1,
+                        cameraMatrix2,
+                        distCoeffs2,
+                        new Size(640, 480),
+                        r,
+                        t);
+                    using (rectified.R1)
+                    using (rectified.R2)
+                    using (rectified.P1)
+                    using (rectified.P2)
+                    using (rectified.Q)
+                    {
+                        return "Calib3D upstream: edges=" + subdiv.GetEdgeList().Length
+                            + ", triangles=" + subdiv.GetTriangleList().Length
+                            + ", voronoi=" + facets.Length + "/" + centers.Length
+                            + ", nearest=" + nearest
+                            + ", usac=" + homography.Rows + "x" + homography.Cols
+                            + ", fisheyeQ=" + rectified.Q.Rows + "x" + rectified.Q.Cols;
+                    }
+                }
+            }
         }
 
         private static string GetBioInspiredUnstableSkipSummary()

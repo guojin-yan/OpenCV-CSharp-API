@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "familyId": "imgproc-point-set-span-fast-paths",
+  "status": "implemented-verified",
+  "upstreamOpenCvVersion": "5.0.0",
+  "upstreamHeader": "opencv-source/opencv-5.0.0/modules/imgproc/include/opencv2/imgproc.hpp",
+  "managedType": "OpenCvSharp.ImgProc.Cv2",
+  "inputShape": "ReadOnlySpan<OpenCvSharp.Core.Point>",
+  "nativeAbiChangeRequired": false,
+  "selectionRationale": "Complete the allocation-free integer point-set geometry slice over ten existing pointer imports without changing the native ABI shape.",
+  "evidence": {
+    "implementation": "src/OpenCvSharp/ImgProc/Cv2.cs",
+    "managedTests": "tests/OpenCvSharp.Tests/ImgProc/Cv2InteropTests.cs",
+    "nativeRegressionTest": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+    "sample": "samples/ConsoleSamples/Program.cs",
+    "guide": "docs/articles/imgproc-geometry-guide.md",
+    "marshallingGuide": "docs/articles/point-set-marshalling-guide.md"
+  },
+  "operations": [
+    {
+      "id": "approx-poly-n",
+      "upstreamSymbol": "cv::approxPolyN",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_approx_poly_n_count",
+        "jyppx_ocv_imgproc_approx_poly_n_fill"
+      ]
+    },
+    {
+      "id": "fit-ellipse",
+      "upstreamSymbol": "cv::fitEllipse",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_ellipse"
+      ]
+    },
+    {
+      "id": "fit-ellipse-ams",
+      "upstreamSymbol": "cv::fitEllipseAMS",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_ellipse_ams"
+      ]
+    },
+    {
+      "id": "fit-ellipse-direct",
+      "upstreamSymbol": "cv::fitEllipseDirect",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_ellipse_direct"
+      ]
+    },
+    {
+      "id": "get-closest-ellipse-points",
+      "upstreamSymbol": "cv::getClosestEllipsePoints",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_closest_ellipse_points"
+      ]
+    },
+    {
+      "id": "intersect-convex-convex",
+      "upstreamSymbol": "cv::intersectConvexConvex",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_intersect_convex_convex_count",
+        "jyppx_ocv_imgproc_intersect_convex_convex_fill"
+      ]
+    },
+    {
+      "id": "min-enclosing-convex-polygon",
+      "upstreamSymbol": "cv::minEnclosingConvexPolygon",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_min_enclosing_convex_polygon"
+      ]
+    },
+    {
+      "id": "min-enclosing-triangle",
+      "upstreamSymbol": "cv::minEnclosingTriangle",
+      "classification": "implemented-verified",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_min_enclosing_triangle"
+      ]
+    }
+  ],
+  "outOfScope": [
+    "Floating-point point-set spans require a separately reviewed native ABI shape.",
+    "Repository-wide OpenCV C++ parity remains unmeasured."
+  ]
+}

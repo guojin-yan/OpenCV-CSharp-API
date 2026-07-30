@@ -352,6 +352,8 @@ if ($LASTEXITCODE -ne 0) {
     throw "dotnet pack failed with exit code $LASTEXITCODE"
 }
 
+& (Join-Path $PSScriptRoot "Normalize-NuGetPackageDeterminism.ps1") -PackagePath $packagePath
+
 if (-not (Test-Path -LiteralPath $packagePath)) {
     throw "Runtime package artifact was not found: $packagePath"
 }

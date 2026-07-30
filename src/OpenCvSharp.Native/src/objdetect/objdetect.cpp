@@ -1,4 +1,5 @@
 #include "open_cv_sharp/objdetect/objdetect.h"
+#include "open_cv_sharp/objdetect/aruco.h"
 
 #include "../core/mat_handle.h"
 #include "../error_state.h"
@@ -193,6 +194,88 @@ namespace
         params.max_penalties = source.maxPenalties;
         params.max_colors_mismatch = source.maxColorsMismatch;
         params.scale_timing_pattern_score = source.scaleTimingPatternScore;
+        return params;
+    }
+
+    cv::aruco::DetectorParameters to_aruco_detector_params(const jyppx_ocv_aruco_detector_params& source)
+    {
+        cv::aruco::DetectorParameters params;
+        params.adaptiveThreshWinSizeMin = source.adaptive_thresh_win_size_min;
+        params.adaptiveThreshWinSizeMax = source.adaptive_thresh_win_size_max;
+        params.adaptiveThreshWinSizeStep = source.adaptive_thresh_win_size_step;
+        params.adaptiveThreshConstant = source.adaptive_thresh_constant;
+        params.minMarkerPerimeterRate = source.min_marker_perimeter_rate;
+        params.maxMarkerPerimeterRate = source.max_marker_perimeter_rate;
+        params.polygonalApproxAccuracyRate = source.polygonal_approx_accuracy_rate;
+        params.minCornerDistanceRate = source.min_corner_distance_rate;
+        params.minDistanceToBorder = source.min_distance_to_border;
+        params.minMarkerDistanceRate = source.min_marker_distance_rate;
+        params.minGroupDistance = source.min_group_distance;
+        params.cornerRefinementMethod = source.corner_refinement_method;
+        params.cornerRefinementWinSize = source.corner_refinement_win_size;
+        params.relativeCornerRefinmentWinSize = source.relative_corner_refinement_win_size;
+        params.cornerRefinementMaxIterations = source.corner_refinement_max_iterations;
+        params.cornerRefinementMinAccuracy = source.corner_refinement_min_accuracy;
+        params.markerBorderBits = source.marker_border_bits;
+        params.perspectiveRemovePixelPerCell = source.perspective_remove_pixel_per_cell;
+        params.perspectiveRemoveIgnoredMarginPerCell = source.perspective_remove_ignored_margin_per_cell;
+        params.maxErroneousBitsInBorderRate = source.max_erroneous_bits_in_border_rate;
+        params.minOtsuStdDev = source.min_otsu_std_dev;
+        params.errorCorrectionRate = source.error_correction_rate;
+        params.aprilTagQuadDecimate = source.april_tag_quad_decimate;
+        params.aprilTagQuadSigma = source.april_tag_quad_sigma;
+        params.aprilTagMinClusterPixels = source.april_tag_min_cluster_pixels;
+        params.aprilTagMaxNmaxima = source.april_tag_max_nmaxima;
+        params.aprilTagCriticalRad = source.april_tag_critical_rad;
+        params.aprilTagMaxLineFitMse = source.april_tag_max_line_fit_mse;
+        params.aprilTagMinWhiteBlackDiff = source.april_tag_min_white_black_diff;
+        params.aprilTagDeglitch = source.april_tag_deglitch;
+        params.detectInvertedMarker = source.detect_inverted_marker != 0;
+        params.useAruco3Detection = source.use_aruco3_detection != 0;
+        params.minSideLengthCanonicalImg = source.min_side_length_canonical_img;
+        params.minMarkerLengthRatioOriginalImg = source.min_marker_length_ratio_original_img;
+        params.validBitIdThreshold = source.valid_bit_id_threshold;
+        return params;
+    }
+
+    jyppx_ocv_aruco_detector_params from_aruco_detector_params(const cv::aruco::DetectorParameters& source)
+    {
+        jyppx_ocv_aruco_detector_params params{};
+        params.adaptive_thresh_win_size_min = source.adaptiveThreshWinSizeMin;
+        params.adaptive_thresh_win_size_max = source.adaptiveThreshWinSizeMax;
+        params.adaptive_thresh_win_size_step = source.adaptiveThreshWinSizeStep;
+        params.adaptive_thresh_constant = source.adaptiveThreshConstant;
+        params.min_marker_perimeter_rate = source.minMarkerPerimeterRate;
+        params.max_marker_perimeter_rate = source.maxMarkerPerimeterRate;
+        params.polygonal_approx_accuracy_rate = source.polygonalApproxAccuracyRate;
+        params.min_corner_distance_rate = source.minCornerDistanceRate;
+        params.min_distance_to_border = source.minDistanceToBorder;
+        params.min_marker_distance_rate = source.minMarkerDistanceRate;
+        params.min_group_distance = source.minGroupDistance;
+        params.corner_refinement_method = source.cornerRefinementMethod;
+        params.corner_refinement_win_size = source.cornerRefinementWinSize;
+        params.relative_corner_refinement_win_size = source.relativeCornerRefinmentWinSize;
+        params.corner_refinement_max_iterations = source.cornerRefinementMaxIterations;
+        params.corner_refinement_min_accuracy = source.cornerRefinementMinAccuracy;
+        params.marker_border_bits = source.markerBorderBits;
+        params.perspective_remove_pixel_per_cell = source.perspectiveRemovePixelPerCell;
+        params.perspective_remove_ignored_margin_per_cell = source.perspectiveRemoveIgnoredMarginPerCell;
+        params.max_erroneous_bits_in_border_rate = source.maxErroneousBitsInBorderRate;
+        params.min_otsu_std_dev = source.minOtsuStdDev;
+        params.error_correction_rate = source.errorCorrectionRate;
+        params.april_tag_quad_decimate = source.aprilTagQuadDecimate;
+        params.april_tag_quad_sigma = source.aprilTagQuadSigma;
+        params.april_tag_min_cluster_pixels = source.aprilTagMinClusterPixels;
+        params.april_tag_max_nmaxima = source.aprilTagMaxNmaxima;
+        params.april_tag_critical_rad = source.aprilTagCriticalRad;
+        params.april_tag_max_line_fit_mse = source.aprilTagMaxLineFitMse;
+        params.april_tag_min_white_black_diff = source.aprilTagMinWhiteBlackDiff;
+        params.april_tag_deglitch = source.aprilTagDeglitch;
+        params.detect_inverted_marker = source.detectInvertedMarker ? 1 : 0;
+        params.use_aruco3_detection = source.useAruco3Detection ? 1 : 0;
+        params.min_side_length_canonical_img = source.minSideLengthCanonicalImg;
+        params.min_marker_length_ratio_original_img = source.minMarkerLengthRatioOriginalImg;
+        params.valid_bit_id_threshold = source.validBitIdThreshold;
         return params;
     }
 
@@ -2076,6 +2159,49 @@ int jyppx_ocv_qrcode_detector_aruco_set_detector_parameters(
     {
         return opencv_csharp_native::translate_current_exception(api_name);
     }
+}
+
+int jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters(
+    const jyppx_ocv_qrcode_detector_aruco* detector,
+    jyppx_ocv_aruco_detector_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_qrcode_detector_aruco(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (params == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "params");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *params = from_aruco_detector_params(detector->value.getArucoParameters());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *params = {};
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters(
+    jyppx_ocv_qrcode_detector_aruco* detector,
+    const jyppx_ocv_aruco_detector_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_qrcode_detector_aruco(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (params == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "params");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        detector->value.setArucoParameters(to_aruco_detector_params(*params));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
 
 int jyppx_ocv_qrcode_detector_aruco_detect(

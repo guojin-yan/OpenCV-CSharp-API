@@ -72,6 +72,24 @@ namespace OpenCvSharp.ObjDetect
             return this;
         }
 
+        /// <summary>Gets the ArUco marker detector parameters used by the QR detector.</summary>
+        public ArucoDetectorParameters GetArucoParameters()
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.QRCodeDetectorArucoGetArucoParameters(NativeHandle, out NativeMethods.ArucoDetectorParamsNative parameters));
+            return ArucoDetectorParameters.FromNative(parameters);
+        }
+
+        /// <summary>Sets the ArUco marker detector parameters used by the QR detector.</summary>
+        public QRCodeDetectorAruco SetArucoParameters(ArucoDetectorParameters parameters)
+        {
+            ThrowIfDisposed();
+            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
+            NativeMethods.ArucoDetectorParamsNative native = parameters.ToNative();
+            NativeException.ThrowIfError(NativeMethods.QRCodeDetectorArucoSetArucoParameters(NativeHandle, ref native));
+            return this;
+        }
+
         /// <summary>Detects a QR code and writes quadrangle points into a matrix. 检测二维码并将四边形顶点写入矩阵。</summary>
         public bool Detect(Mat image, Mat points)
         {

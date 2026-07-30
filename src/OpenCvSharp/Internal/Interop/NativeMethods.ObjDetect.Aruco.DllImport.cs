@@ -94,6 +94,9 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_dictionary_create_from_bytes_list")]
         internal static extern int ArucoDictionaryCreateFromBytesList(IntPtr bytesList, int markerSize, int maxCorrectionBits, out IntPtr dictionary);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_dictionary_extend")]
+        internal static extern int ArucoDictionaryExtend(int markerCount, int markerSize, IntPtr baseDictionary, int randomSeed, out IntPtr dictionary);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_dictionary_release_handle")]
         internal static extern void ArucoDictionaryReleaseHandle(IntPtr dictionary);
 
@@ -151,6 +154,9 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_create")]
         internal static extern int ArucoDetectorCreate(IntPtr dictionary, ref ArucoDetectorParamsNative detectorParameters, ref ArucoRefineParamsNative refineParameters, out IntPtr detector);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_create_multi_dictionary")]
+        internal static extern int ArucoDetectorCreateMultiDictionary(IntPtr[] dictionaries, int dictionaryCount, ref ArucoDetectorParamsNative detectorParameters, ref ArucoRefineParamsNative refineParameters, out IntPtr detector);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_release_handle")]
         internal static extern void ArucoDetectorReleaseHandle(IntPtr detector);
 
@@ -159,6 +165,15 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_set_dictionary")]
         internal static extern int ArucoDetectorSetDictionary(IntPtr detector, IntPtr dictionary);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_get_dictionaries_count")]
+        internal static extern int ArucoDetectorGetDictionariesCount(IntPtr detector, out int dictionaryCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_get_dictionary_at")]
+        internal static extern int ArucoDetectorGetDictionaryAt(IntPtr detector, int dictionaryIndex, out IntPtr dictionary);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_set_dictionaries")]
+        internal static extern int ArucoDetectorSetDictionaries(IntPtr detector, IntPtr[] dictionaries, int dictionaryCount);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_get_detector_parameters")]
         internal static extern int ArucoDetectorGetDetectorParameters(IntPtr detector, out ArucoDetectorParamsNative parameters);
@@ -181,6 +196,12 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_detect_markers_with_confidence_count")]
         internal static extern int ArucoDetectorDetectMarkersWithConfidenceCount(IntPtr detector, IntPtr image, out int markerCount, out int cornerPointCount, out int rejectedCount, out int rejectedPointCount);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count")]
+        internal static extern int ArucoDetectorDetectMarkersMultiDictionaryCount(IntPtr detector, IntPtr image, out int markerCount, out int cornerPointCount, out int rejectedCount, out int rejectedPointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill")]
+        internal static extern int ArucoDetectorDetectMarkersMultiDictionaryFill(IntPtr detector, IntPtr image, int* cornerOffsets, int cornerOffsetCapacity, Point2fNative* corners, int cornerCapacity, int* ids, int idCapacity, int* dictionaryIndices, int dictionaryIndexCapacity, int* rejectedOffsets, int rejectedOffsetCapacity, Point2fNative* rejectedPoints, int rejectedPointCapacity, out int markerCount, out int cornerPointCount, out int rejectedCount, out int rejectedPointCount);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_detector_detect_markers_with_confidence_fill")]
         internal static extern int ArucoDetectorDetectMarkersWithConfidenceFill(IntPtr detector, IntPtr image, int* cornerOffsets, int cornerOffsetCapacity, Point2fNative* corners, int cornerCapacity, int* ids, int idCapacity, float* confidence, int confidenceCapacity, int* rejectedOffsets, int rejectedOffsetCapacity, Point2fNative* rejectedPoints, int rejectedPointCapacity, out int markerCount, out int cornerPointCount, out int rejectedCount, out int rejectedPointCount);
 
@@ -192,6 +213,39 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_grid_board_create")]
         internal static extern int ArucoGridBoardCreate(int markersX, int markersY, float markerLength, float markerSeparation, IntPtr dictionary, int[] ids, int idCount, out IntPtr board);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_create")]
+        internal static extern int ArucoBoardCreate(int* objectPointOffsets, int markerCount, Point3fNative* objectPoints, int objectPointCount, IntPtr dictionary, int* ids, int idCount, out IntPtr board);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_release_handle")]
+        internal static extern void ArucoBoardReleaseHandle(IntPtr board);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_get_dictionary")]
+        internal static extern int ArucoBoardGetDictionary(IntPtr board, out IntPtr dictionary);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_get_object_points_count")]
+        internal static extern int ArucoBoardGetObjectPointsCount(IntPtr board, out int markerCount, out int objectPointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_get_object_points_fill")]
+        internal static extern int ArucoBoardGetObjectPointsFill(IntPtr board, int* offsets, int offsetCapacity, Point3fNative* points, int pointCapacity, out int markerCount, out int objectPointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_get_ids_count")]
+        internal static extern int ArucoBoardGetIdsCount(IntPtr board, out int idCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_get_ids_fill")]
+        internal static extern int ArucoBoardGetIdsFill(IntPtr board, int* ids, int idCapacity, out int idCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_get_right_bottom_corner")]
+        internal static extern int ArucoBoardGetRightBottomCorner(IntPtr board, out Point3fNative corner);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_match_image_points")]
+        internal static extern int ArucoBoardMatchImagePoints(IntPtr board, int* detectedOffsets, int detectedGroupCount, Point2fNative* detectedPoints, int detectedPointCount, int* detectedIds, int detectedIdCount, IntPtr objectPoints, IntPtr imagePoints);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_board_generate_image")]
+        internal static extern int ArucoBoardGenerateImage(IntPtr board, int width, int height, IntPtr image, int marginSize, int borderBits);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_draw_detected_markers")]
+        internal static extern int ArucoDrawDetectedMarkers(IntPtr image, int* cornerOffsets, int markerCount, Point2fNative* corners, int cornerPointCount, int* ids, int idCount, double colorV0, double colorV1, double colorV2, double colorV3);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_grid_board_create")]
         internal static extern int ArucoGridBoardCreate(int markersX, int markersY, float markerLength, float markerSeparation, IntPtr dictionary, int* ids, int idCount, out IntPtr board);
@@ -268,11 +322,35 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_set_charuco_parameters")]
         internal static extern int ArucoCharucoDetectorSetCharucoParameters(IntPtr detector, ref ArucoCharucoParamsNative parameters, IntPtr cameraMatrix, IntPtr distCoeffs);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_get_detector_parameters")]
+        internal static extern int ArucoCharucoDetectorGetDetectorParameters(IntPtr detector, out ArucoDetectorParamsNative parameters);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_set_detector_parameters")]
+        internal static extern int ArucoCharucoDetectorSetDetectorParameters(IntPtr detector, ref ArucoDetectorParamsNative parameters);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_get_refine_parameters")]
+        internal static extern int ArucoCharucoDetectorGetRefineParameters(IntPtr detector, out ArucoRefineParamsNative parameters);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_set_refine_parameters")]
+        internal static extern int ArucoCharucoDetectorSetRefineParameters(IntPtr detector, ref ArucoRefineParamsNative parameters);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_detect_board_count")]
         internal static extern int ArucoCharucoDetectorDetectBoardCount(IntPtr detector, IntPtr image, int* inputMarkerOffsets, int inputMarkerGroupCount, Point2fNative* inputMarkerPoints, int inputMarkerPointCount, int* inputMarkerIds, int inputMarkerIdCount, out int charucoCount, out int markerCount, out int markerPointCount);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_detect_board_fill")]
         internal static extern int ArucoCharucoDetectorDetectBoardFill(IntPtr detector, IntPtr image, int* inputMarkerOffsets, int inputMarkerGroupCount, Point2fNative* inputMarkerPoints, int inputMarkerPointCount, int* inputMarkerIds, int inputMarkerIdCount, Point2fNative* charucoCorners, int charucoCornerCapacity, int* charucoIds, int charucoIdCapacity, int* markerOffsets, int markerOffsetCapacity, Point2fNative* markerCorners, int markerCornerCapacity, int* markerIds, int markerIdCapacity, out int charucoCount, out int markerCount, out int markerPointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_detect_diamonds_count")]
+        internal static extern int ArucoCharucoDetectorDetectDiamondsCount(IntPtr detector, IntPtr image, int* inputMarkerOffsets, int inputMarkerCount, Point2fNative* inputMarkerPoints, int inputMarkerPointCount, int* inputMarkerIds, int inputMarkerIdCount, out int diamondCount, out int diamondPointCount, out int markerCount, out int markerPointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill")]
+        internal static extern int ArucoCharucoDetectorDetectDiamondsFill(IntPtr detector, IntPtr image, int* inputMarkerOffsets, int inputMarkerCount, Point2fNative* inputMarkerPoints, int inputMarkerPointCount, int* inputMarkerIds, int inputMarkerIdCount, int* diamondOffsets, int diamondOffsetCapacity, Point2fNative* diamondPoints, int diamondPointCapacity, int* diamondIds, int diamondIdCapacity, int* markerOffsets, int markerOffsetCapacity, Point2fNative* markerPoints, int markerPointCapacity, int* markerIds, int markerIdCapacity, out int diamondCount, out int diamondPointCount, out int markerCount, out int markerPointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_draw_detected_corners_charuco")]
+        internal static extern int ArucoDrawDetectedCornersCharuco(IntPtr image, Point2fNative* corners, int cornerCount, int* ids, int idCount, double colorV0, double colorV1, double colorV2, double colorV3);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_aruco_draw_detected_diamonds")]
+        internal static extern int ArucoDrawDetectedDiamonds(IntPtr image, int* diamondOffsets, int diamondCount, Point2fNative* diamondPoints, int diamondPointCount, int* diamondIds, int diamondIdCount, double colorV0, double colorV1, double colorV2, double colorV3);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_create")]
         internal static extern int MccCheckerCreate(out IntPtr checker);
@@ -328,6 +406,9 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_detector_create")]
         internal static extern int MccCheckerDetectorCreate(out IntPtr detector);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_detector_create_from_net")]
+        internal static extern int MccCheckerDetectorCreateFromNet(IntPtr net, out IntPtr detector);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_detector_release_handle")]
         internal static extern void MccCheckerDetectorReleaseHandle(IntPtr detector);
 
@@ -366,6 +447,12 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_detector_set_color_chart_type")]
         internal static extern int MccCheckerDetectorSetColorChartType(IntPtr detector, int chartType);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_detector_get_use_dnn_model")]
+        internal static extern int MccCheckerDetectorGetUseDnnModel(IntPtr detector, out int useDnnModel);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_mcc_checker_detector_set_use_dnn_model")]
+        internal static extern int MccCheckerDetectorSetUseDnnModel(IntPtr detector, int useDnnModel);
     }
 }
 #endif

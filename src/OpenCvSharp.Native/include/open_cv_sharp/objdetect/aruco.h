@@ -6,11 +6,13 @@
 
 typedef struct jyppx_ocv_aruco_dictionary jyppx_ocv_aruco_dictionary;
 typedef struct jyppx_ocv_aruco_detector jyppx_ocv_aruco_detector;
+typedef struct jyppx_ocv_aruco_board jyppx_ocv_aruco_board;
 typedef struct jyppx_ocv_aruco_grid_board jyppx_ocv_aruco_grid_board;
 typedef struct jyppx_ocv_aruco_charuco_board jyppx_ocv_aruco_charuco_board;
 typedef struct jyppx_ocv_aruco_charuco_detector jyppx_ocv_aruco_charuco_detector;
 typedef struct jyppx_ocv_mcc_checker jyppx_ocv_mcc_checker;
 typedef struct jyppx_ocv_mcc_checker_detector jyppx_ocv_mcc_checker_detector;
+typedef struct jyppx_ocv_dnn_net jyppx_ocv_dnn_net;
 
 typedef struct jyppx_ocv_point2f
 {
@@ -113,6 +115,13 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_dictionary_create_f
     int max_correction_bits,
     jyppx_ocv_aruco_dictionary** dictionary);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_dictionary_extend(
+    int marker_count,
+    int marker_size,
+    const jyppx_ocv_aruco_dictionary* base_dictionary,
+    int random_seed,
+    jyppx_ocv_aruco_dictionary** dictionary);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_aruco_dictionary_release_handle(
     jyppx_ocv_aruco_dictionary* dictionary);
 
@@ -205,6 +214,13 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_create(
     const jyppx_ocv_aruco_refine_params* refine_params,
     jyppx_ocv_aruco_detector** detector);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_create_multi_dictionary(
+    const jyppx_ocv_aruco_dictionary* const* dictionaries,
+    int dictionary_count,
+    const jyppx_ocv_aruco_detector_params* detector_params,
+    const jyppx_ocv_aruco_refine_params* refine_params,
+    jyppx_ocv_aruco_detector** detector);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_aruco_detector_release_handle(
     jyppx_ocv_aruco_detector* detector);
 
@@ -215,6 +231,20 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_get_dictio
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_set_dictionary(
     jyppx_ocv_aruco_detector* detector,
     const jyppx_ocv_aruco_dictionary* dictionary);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_get_dictionaries_count(
+    const jyppx_ocv_aruco_detector* detector,
+    int* dictionary_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_get_dictionary_at(
+    const jyppx_ocv_aruco_detector* detector,
+    int dictionary_index,
+    jyppx_ocv_aruco_dictionary** dictionary);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_set_dictionaries(
+    jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_aruco_dictionary* const* dictionaries,
+    int dictionary_count);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_get_detector_parameters(
     const jyppx_ocv_aruco_detector* detector,
@@ -261,6 +291,34 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_detect_mar
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_detect_markers_with_confidence_count(
     const jyppx_ocv_aruco_detector* detector,
     const jyppx_ocv_mat* image,
+    int* marker_count,
+    int* corner_point_count,
+    int* rejected_count,
+    int* rejected_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count(
+    const jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_mat* image,
+    int* marker_count,
+    int* corner_point_count,
+    int* rejected_count,
+    int* rejected_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill(
+    const jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_mat* image,
+    int* corner_offsets,
+    int corner_offset_capacity,
+    jyppx_ocv_point2f* corners,
+    int corner_capacity,
+    int* ids,
+    int id_capacity,
+    int* dictionary_indices,
+    int dictionary_index_capacity,
+    int* rejected_offsets,
+    int rejected_offset_capacity,
+    jyppx_ocv_point2f* rejected_points,
+    int rejected_point_capacity,
     int* marker_count,
     int* corner_point_count,
     int* rejected_count,
@@ -341,6 +399,83 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_detector_refine_det
     int* refined_rejected_count,
     int* refined_rejected_point_count,
     int* recovered_index_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_create(
+    const int* object_point_offsets,
+    int marker_count,
+    const jyppx_ocv_point3f* object_points,
+    int object_point_count,
+    const jyppx_ocv_aruco_dictionary* dictionary,
+    const int* ids,
+    int id_count,
+    jyppx_ocv_aruco_board** board);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_aruco_board_release_handle(
+    jyppx_ocv_aruco_board* board);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_get_dictionary(
+    const jyppx_ocv_aruco_board* board,
+    jyppx_ocv_aruco_dictionary** dictionary);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_get_object_points_count(
+    const jyppx_ocv_aruco_board* board,
+    int* marker_count,
+    int* object_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_get_object_points_fill(
+    const jyppx_ocv_aruco_board* board,
+    int* offsets,
+    int offset_capacity,
+    jyppx_ocv_point3f* points,
+    int point_capacity,
+    int* marker_count,
+    int* object_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_get_ids_count(
+    const jyppx_ocv_aruco_board* board,
+    int* id_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_get_ids_fill(
+    const jyppx_ocv_aruco_board* board,
+    int* ids,
+    int id_capacity,
+    int* id_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_get_right_bottom_corner(
+    const jyppx_ocv_aruco_board* board,
+    jyppx_ocv_point3f* corner);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_match_image_points(
+    const jyppx_ocv_aruco_board* board,
+    const int* detected_offsets,
+    int detected_group_count,
+    const jyppx_ocv_point2f* detected_points,
+    int detected_point_count,
+    const int* detected_ids,
+    int detected_id_count,
+    jyppx_ocv_mat* object_points,
+    jyppx_ocv_mat* image_points);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_board_generate_image(
+    const jyppx_ocv_aruco_board* board,
+    int width,
+    int height,
+    jyppx_ocv_mat* image,
+    int margin_size,
+    int border_bits);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_draw_detected_markers(
+    jyppx_ocv_mat* image,
+    const int* corner_offsets,
+    int marker_count,
+    const jyppx_ocv_point2f* corners,
+    int corner_point_count,
+    const int* ids,
+    int id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_grid_board_create(
     int markers_x,
@@ -466,6 +601,22 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_se
     const jyppx_ocv_mat* camera_matrix,
     const jyppx_ocv_mat* dist_coeffs);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_get_detector_parameters(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    jyppx_ocv_aruco_detector_params* params);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_set_detector_parameters(
+    jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_aruco_detector_params* params);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_get_refine_parameters(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    jyppx_ocv_aruco_refine_params* params);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_set_refine_parameters(
+    jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_aruco_refine_params* params);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_detect_board_count(
     const jyppx_ocv_aruco_charuco_detector* detector,
     const jyppx_ocv_mat* image,
@@ -501,6 +652,70 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_de
     int* charuco_count,
     int* marker_count,
     int* marker_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_detect_diamonds_count(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_mat* image,
+    const int* input_marker_offsets,
+    int input_marker_count,
+    const jyppx_ocv_point2f* input_marker_points,
+    int input_marker_point_count,
+    const int* input_marker_ids,
+    int input_marker_id_count,
+    int* diamond_count,
+    int* diamond_point_count,
+    int* marker_count,
+    int* marker_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_mat* image,
+    const int* input_marker_offsets,
+    int input_marker_count,
+    const jyppx_ocv_point2f* input_marker_points,
+    int input_marker_point_count,
+    const int* input_marker_ids,
+    int input_marker_id_count,
+    int* diamond_offsets,
+    int diamond_offset_capacity,
+    jyppx_ocv_point2f* diamond_points,
+    int diamond_point_capacity,
+    int* diamond_ids,
+    int diamond_id_capacity,
+    int* marker_offsets,
+    int marker_offset_capacity,
+    jyppx_ocv_point2f* marker_points,
+    int marker_point_capacity,
+    int* marker_ids,
+    int marker_id_capacity,
+    int* diamond_count,
+    int* diamond_point_count,
+    int* marker_count,
+    int* marker_point_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_draw_detected_corners_charuco(
+    jyppx_ocv_mat* image,
+    const jyppx_ocv_point2f* corners,
+    int corner_count,
+    const int* ids,
+    int id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_aruco_draw_detected_diamonds(
+    jyppx_ocv_mat* image,
+    const int* diamond_offsets,
+    int diamond_count,
+    const jyppx_ocv_point2f* diamond_points,
+    int diamond_point_count,
+    const int* diamond_ids,
+    int diamond_id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_create(
     jyppx_ocv_mcc_checker** checker);
@@ -577,6 +792,10 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_set_center(
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_detector_create(
     jyppx_ocv_mcc_checker_detector** detector);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_detector_create_from_net(
+    const jyppx_ocv_dnn_net* net,
+    jyppx_ocv_mcc_checker_detector** detector);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_mcc_checker_detector_release_handle(
     jyppx_ocv_mcc_checker_detector* detector);
 
@@ -639,3 +858,11 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_detector_get_
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_detector_set_color_chart_type(
     jyppx_ocv_mcc_checker_detector* detector,
     int chart_type);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_detector_get_use_dnn_model(
+    const jyppx_ocv_mcc_checker_detector* detector,
+    int* use_dnn_model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_mcc_checker_detector_set_use_dnn_model(
+    jyppx_ocv_mcc_checker_detector* detector,
+    int use_dnn_model);

@@ -1,0 +1,2220 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/features2d.hpp and opencv2/features/features.hpp compatibility headers implemented by parser-emitted opencv2/features.hpp declarations",
+  "reviewStatus": "reviewed",
+  "limitation": "The map covers the main OpenCV 5 Features compatibility header closure only. Optional xfeatures2d and source-reviewed non-parser declarations remain separate, and repository-wide parity is not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask=Mat();int blockSize=3;bool useHarrisDetector=false;double k=0.04)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES; full-profile; mini-returns-NOT_LINKED",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_good_features_to_track_count",
+        "jyppx_ocv_imgproc_good_features_to_track_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] GoodFeaturesToTrack(OpenCvSharp.Core.Mat image,System.Int32 maxCorners,System.Double qualityLevel,System.Double minDistance,OpenCvSharp.Core.Mat? mask=null,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ]
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask;int blockSize;int gradientSize;bool useHarrisDetector=false;double k=0.04)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES; full-profile; mini-returns-NOT_LINKED",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_good_features_to_track_count",
+        "jyppx_ocv_imgproc_good_features_to_track_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] GoodFeaturesToTrack(OpenCvSharp.Core.Mat image,System.Int32 maxCorners,System.Double qualityLevel,System.Double minDistance,OpenCvSharp.Core.Mat? mask=null,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask;Mat cornersQuality[/O];int blockSize=3;int gradientSize=3;bool useHarrisDetector=false;double k=0.04)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The cornersQuality output overload is not exposed by the current managed point-array result and is deferred until a paired quality result model is added.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES; full-profile; mini-returns-NOT_LINKED",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.Feature2D",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.Feature2D.detect(Mat image;vector_KeyPoint keypoints[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_detect_count",
+        "jyppx_ocv_features2d_orb_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|method|public;instance;abstract|OpenCvSharp.Features2D.KeyPoint[] Detect(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.Feature2D.detect(vector_Mat images;vector_vector_KeyPoint keypoints[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_detect_count",
+        "jyppx_ocv_features2d_orb_detect_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|method|public;instance|OpenCvSharp.Features2D.KeyPoint[][] Detect(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[]? masks)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.Feature2D.compute(Mat image;vector_KeyPoint keypoints[/IO,/Ref];Mat descriptors[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|method|public;instance|System.Void Compute(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Features2D.KeyPoint[] keypoints,OpenCvSharp.Core.Mat descriptors)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.Feature2D.compute(vector_Mat images;vector_vector_KeyPoint keypoints[/IO,/Ref];vector_Mat descriptors[/O])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Batch compute mutates nested keypoint collections and returns multiple descriptor matrices; it is deferred to a dedicated nested ownership result model while single-image compute remains implemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.Feature2D.detectAndCompute(Mat image;Mat mask;vector_KeyPoint keypoints[/O,/Ref];Mat descriptors[/O];bool useProvidedKeypoints=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_detect_and_compute_count",
+        "jyppx_ocv_features2d_orb_detect_and_compute_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|method|public;instance|OpenCvSharp.Features2D.KeyPoint[] DetectAndCompute(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Features2D.KeyPoint[] keypoints,OpenCvSharp.Core.Mat descriptors,System.Boolean useProvidedKeypoints=true)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.Feature2D.descriptorSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_descriptor_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.Int32 DescriptorSize"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.Feature2D.descriptorType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_descriptor_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.Int32 DescriptorType"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.Feature2D.defaultNorm()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_default_norm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|property|instance;get:public|OpenCvSharp.Core.NormTypes DefaultNorm"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.Feature2D.write(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.Feature2D.read(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.Feature2D.read(FileNode arg1[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.Feature2D.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.Boolean Empty"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.Feature2D.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_default_name_fill",
+        "jyppx_ocv_features2d_orb_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Feature2D|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.Feature2D.write(FileStorage fs[/Ref];String name[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "identity": "class cv.AffineFeature",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.AffineFeature.create(Ptr_Feature2D backend[/C,/Ref];int maxTilt=5;int minTilt=0;float tiltStep=1.4142135623730951f;float rotateStepBase=72)-\u003EPtr\u003CAffineFeature\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_create_from_orb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.AffineFeature|method|public;static|OpenCvSharp.Features2D.AffineFeature Create(OpenCvSharp.Features2D.AKAZE backend,System.Int32 maxTilt=5,System.Int32 minTilt=0,System.Single tiltStep=1.4142135,System.Single rotateStepBase=72)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.AffineFeature.setViewParams(vector_float tilts[/C,/Ref];vector_float rolls[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_set_view_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.AffineFeature|method|public;instance|System.Void SetViewParams(System.ReadOnlySpan\u003CSystem.Single\u003E tilts,System.ReadOnlySpan\u003CSystem.Single\u003E rolls)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.AffineFeature.getViewParams(vector_float tilts[/Ref];vector_float rolls[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_get_view_params_count",
+        "jyppx_ocv_features2d_affine_get_view_params_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.AffineFeature|method|public;instance|System.Int32 GetViewParams(System.Span\u003CSystem.Single\u003E tilts,System.Span\u003CSystem.Single\u003E rolls)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.AffineFeature.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_affine_default_name_fill",
+        "jyppx_ocv_features2d_affine_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.AffineFeature|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "class cv.SIFT",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.SIFT.create(int nfeatures=0;int nOctaveLayers=3;double contrastThreshold=0.04;double edgeThreshold=10;double sigma=1.6;bool enable_precise_upscale=false)-\u003EPtr\u003CSIFT\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|method|public;static|OpenCvSharp.Features2D.SIFT Create(System.Int32 nFeatures=0,System.Int32 nOctaveLayers=3,System.Double contrastThreshold=0.04,System.Double edgeThreshold=10,System.Double sigma=1.6,System.Int32 descriptorType=5,System.Boolean enablePreciseUpscale=false)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.SIFT.create(int nfeatures;int nOctaveLayers;double contrastThreshold;double edgeThreshold;double sigma;int descriptorType;bool enable_precise_upscale=false)-\u003EPtr\u003CSIFT\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|method|public;static|OpenCvSharp.Features2D.SIFT Create(System.Int32 nFeatures=0,System.Int32 nOctaveLayers=3,System.Double contrastThreshold=0.04,System.Double edgeThreshold=10,System.Double sigma=1.6,System.Int32 descriptorType=5,System.Boolean enablePreciseUpscale=false)"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.SIFT.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_default_name_fill",
+        "jyppx_ocv_features2d_sift_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.SIFT.setNFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_nfeatures"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NFeatures"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.SIFT.getNFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_nfeatures"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NFeatures"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.SIFT.setNOctaveLayers(int nOctaveLayers)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_n_octave_layers"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NOctaveLayers"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.SIFT.getNOctaveLayers()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_n_octave_layers"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Int32 NOctaveLayers"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.SIFT.setContrastThreshold(double contrastThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_contrast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double ContrastThreshold"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.SIFT.getContrastThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_contrast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double ContrastThreshold"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.SIFT.setEdgeThreshold(double edgeThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double EdgeThreshold"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.SIFT.getEdgeThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double EdgeThreshold"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.SIFT.setSigma(double sigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_set_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double Sigma"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.SIFT.getSigma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_sift_get_sigma"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SIFT|property|instance;get:public;set:public|System.Double Sigma"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "class cv.ORB",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "enum cv.ORB.ScoreType[const cv.ORB.HARRIS_SCORE=0;const cv.ORB.FAST_SCORE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ORB.create(int nfeatures=500;float scaleFactor=1.2f;int nlevels=8;int edgeThreshold=31;int firstLevel=0;int WTA_K=2;ORB_ScoreType scoreType=ORB::HARRIS_SCORE;int patchSize=31;int fastThreshold=20)-\u003EPtr\u003CORB\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|method|public;static|OpenCvSharp.Features2D.ORB Create(System.Int32 maxFeatures=500,System.Single scaleFactor=1.2,System.Int32 nLevels=8,System.Int32 edgeThreshold=31,System.Int32 firstLevel=0,System.Int32 wtaK=2,OpenCvSharp.Features2D.OrbScoreType scoreType=HarrisScore,System.Int32 patchSize=31,System.Int32 fastThreshold=20)"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ORB.setMaxFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ORB.getMaxFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ORB.setScaleFactor(double scaleFactor)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_scale_factor"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Double ScaleFactor"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.ORB.getScaleFactor()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_scale_factor"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Double ScaleFactor"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.ORB.setNLevels(int nlevels)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_nlevels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 NLevels"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.ORB.getNLevels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_nlevels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 NLevels"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.ORB.setEdgeThreshold(int edgeThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 EdgeThreshold"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.ORB.getEdgeThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_edge_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 EdgeThreshold"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.ORB.setFirstLevel(int firstLevel)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_first_level"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FirstLevel"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.ORB.getFirstLevel()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_first_level"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FirstLevel"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.ORB.setWTA_K(int wta_k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_wta_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 WtaK"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.ORB.getWTA_K()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_wta_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 WtaK"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.ORB.setScoreType(ORB_ScoreType scoreType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_score_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|OpenCvSharp.Features2D.OrbScoreType ScoreType"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.ORB.getScoreType()-\u003EORB::ScoreType",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_score_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|OpenCvSharp.Features2D.OrbScoreType ScoreType"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.ORB.setPatchSize(int patchSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_patch_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 PatchSize"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.ORB.getPatchSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_patch_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 PatchSize"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.ORB.setFastThreshold(int fastThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_set_fast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FastThreshold"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ORB.getFastThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_get_fast_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public;set:public|System.Int32 FastThreshold"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.ORB.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_orb_default_name_fill",
+        "jyppx_ocv_features2d_orb_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ORB|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "class cv.MSER",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.MSER.create(int delta=5;int min_area=60;int max_area=14400;double max_variation=0.25;double min_diversity=.2;int max_evolution=200;double area_threshold=1.01;double min_margin=0.003;int edge_blur_size=5)-\u003EPtr\u003CMSER\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|method|public;static|OpenCvSharp.Features2D.MSER Create(System.Int32 delta=5,System.Int32 minArea=60,System.Int32 maxArea=14400,System.Double maxVariation=0.25,System.Double minDiversity=0.2,System.Int32 maxEvolution=200,System.Double areaThreshold=1.01,System.Double minMargin=0.003,System.Int32 edgeBlurSize=5)"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.MSER.detectRegions(Mat image;vector_vector_Point msers[/O,/Ref];vector_Rect bboxes[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_detect_regions_count",
+        "jyppx_ocv_features2d_mser_detect_regions_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|method|public;instance|OpenCvSharp.Features2D.MserRegion[] DetectRegions(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.MSER.setDelta(int delta)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_delta"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 Delta"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.MSER.getDelta()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_delta"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 Delta"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.MSER.setMinArea(int minArea)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_min_area"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MinArea"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.MSER.getMinArea()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_min_area"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MinArea"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.MSER.setMaxArea(int maxArea)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_max_area"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxArea"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.MSER.getMaxArea()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_max_area"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxArea"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.MSER.setMaxVariation(double maxVariation)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_max_variation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MaxVariation"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.MSER.getMaxVariation()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_max_variation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MaxVariation"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.MSER.setMinDiversity(double minDiversity)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_min_diversity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinDiversity"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.MSER.getMinDiversity()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_min_diversity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinDiversity"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.MSER.setMaxEvolution(int maxEvolution)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_max_evolution"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxEvolution"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.MSER.getMaxEvolution()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_max_evolution"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 MaxEvolution"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.MSER.setAreaThreshold(double areaThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_area_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double AreaThreshold"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.MSER.getAreaThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_area_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double AreaThreshold"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.MSER.setMinMargin(double min_margin)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_min_margin"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinMargin"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.MSER.getMinMargin()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_min_margin"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Double MinMargin"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.MSER.setEdgeBlurSize(int edge_blur_size)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_edge_blur_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 EdgeBlurSize"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.MSER.getEdgeBlurSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_edge_blur_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Int32 EdgeBlurSize"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.MSER.setPass2Only(bool f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_set_pass2_only"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Boolean Pass2Only"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.MSER.getPass2Only()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_get_pass2_only"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public;set:public|System.Boolean Pass2Only"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.MSER.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_mser_default_name_fill",
+        "jyppx_ocv_features2d_mser_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.MSER|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "class cv.FastFeatureDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "enum cv.FastFeatureDetector.DetectorType[const cv.FastFeatureDetector.TYPE_5_8=0;const cv.FastFeatureDetector.TYPE_7_12=1;const cv.FastFeatureDetector.TYPE_9_16=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 85,
+      "identity": "enum cv.FastFeatureDetector.\u003Cunnamed\u003E[const cv.FastFeatureDetector.THRESHOLD=10000;const cv.FastFeatureDetector.NONMAX_SUPPRESSION=10001;const cv.FastFeatureDetector.FAST_N=10002]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.FastFeatureDetector.create(int threshold=10;bool nonmaxSuppression=true;FastFeatureDetector_DetectorType type=FastFeatureDetector::TYPE_9_16)-\u003EPtr\u003CFastFeatureDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|method|public;static|OpenCvSharp.Features2D.FastFeatureDetector Create(System.Int32 threshold=10,System.Boolean nonmaxSuppression=true,OpenCvSharp.Features2D.FastFeatureDetectorType type=Type9_16)"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.FastFeatureDetector.setThreshold(int threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_set_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Int32 Threshold"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.FastFeatureDetector.getThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_get_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Int32 Threshold"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.FastFeatureDetector.setNonmaxSuppression(bool f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_set_nonmax_suppression"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Boolean NonmaxSuppression"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.FastFeatureDetector.getNonmaxSuppression()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_get_nonmax_suppression"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|System.Boolean NonmaxSuppression"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.FastFeatureDetector.setType(FastFeatureDetector_DetectorType type)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_set_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|OpenCvSharp.Features2D.FastFeatureDetectorType Type"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.FastFeatureDetector.getType()-\u003EFastFeatureDetector::DetectorType",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_get_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public;set:public|OpenCvSharp.Features2D.FastFeatureDetectorType Type"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.FastFeatureDetector.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_fast_default_name_fill",
+        "jyppx_ocv_features2d_fast_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FastFeatureDetector|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "class cv.GFTTDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.GFTTDetector.create(int maxCorners=1000;double qualityLevel=0.01;double minDistance=1;int blockSize=3;bool useHarrisDetector=false;double k=0.04)-\u003EPtr\u003CGFTTDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|method|public;static|OpenCvSharp.Features2D.GFTTDetector Create(System.Int32 maxCorners=1000,System.Double qualityLevel=0.01,System.Double minDistance=1,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.GFTTDetector.create(int maxCorners;double qualityLevel;double minDistance;int blockSize;int gradientSize;bool useHarrisDetector=false;double k=0.04)-\u003EPtr\u003CGFTTDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|method|public;static|OpenCvSharp.Features2D.GFTTDetector Create(System.Int32 maxCorners=1000,System.Double qualityLevel=0.01,System.Double minDistance=1,System.Int32 blockSize=3,System.Int32 gradientSize=3,System.Boolean useHarrisDetector=false,System.Double k=0.04)"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.GFTTDetector.setMaxFeatures(int maxFeatures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.GFTTDetector.getMaxFeatures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_max_features"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 MaxFeatures"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.GFTTDetector.setQualityLevel(double qlevel)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_quality_level"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double QualityLevel"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.GFTTDetector.getQualityLevel()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_quality_level"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double QualityLevel"
+      ]
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.GFTTDetector.setMinDistance(double minDistance)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_min_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double MinDistance"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.GFTTDetector.getMinDistance()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_min_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double MinDistance"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.GFTTDetector.setBlockSize(int blockSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 BlockSize"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.GFTTDetector.getBlockSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 BlockSize"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.GFTTDetector.setGradientSize(int gradientSize_)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_gradient_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 GradientSize"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.GFTTDetector.getGradientSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_gradient_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Int32 GradientSize"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.GFTTDetector.setHarrisDetector(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_harris_detector"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Boolean HarrisDetector"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.GFTTDetector.getHarrisDetector()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_harris_detector"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Boolean HarrisDetector"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.GFTTDetector.setK(double k)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_set_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double K"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.GFTTDetector.getK()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public;set:public|System.Double K"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.GFTTDetector.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_gftt_default_name_fill",
+        "jyppx_ocv_features2d_gftt_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.GFTTDetector|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "identity": "class cv.DISK",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.DISK.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.0f;Size imageSize=Size()[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CDISK\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.DISK.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.0f;Size imageSize=Size()[/C,/Ref];int backendId=0;int targetId=0)-\u003EPtr\u003CDISK\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.DISK.setMaxKeypoints(int maxKeypoints)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.DISK.getMaxKeypoints()-\u003Eint",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.DISK.setScoreThreshold(float threshold)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.DISK.getScoreThreshold()-\u003Efloat",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.DISK.setImageSize(Size size[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.DISK.getImageSize()-\u003ESize",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.DISK.getDefaultName()-\u003EString",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "class cv.SimpleBlobDetector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "class cv.SimpleBlobDetector.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.SimpleBlobDetector.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SimpleBlobDetectorParams|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.SimpleBlobDetector.create(SimpleBlobDetector_Params parameters=SimpleBlobDetector::Params()[/C,/Ref])-\u003EPtr\u003CSimpleBlobDetector\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_create",
+        "jyppx_ocv_features2d_simple_blob_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SimpleBlobDetector|method|public;static|OpenCvSharp.Features2D.SimpleBlobDetector Create(OpenCvSharp.Features2D.SimpleBlobDetectorParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.SimpleBlobDetector.setParams(SimpleBlobDetector_Params params[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_set_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SimpleBlobDetector|property|instance;get:public;set:public|OpenCvSharp.Features2D.SimpleBlobDetectorParams Parameters"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.SimpleBlobDetector.getParams()-\u003ESimpleBlobDetector::Params",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_get_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SimpleBlobDetector|property|instance;get:public;set:public|OpenCvSharp.Features2D.SimpleBlobDetectorParams Parameters"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.SimpleBlobDetector.getDefaultName()-\u003EString",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_default_name_fill",
+        "jyppx_ocv_features2d_simple_blob_default_name_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SimpleBlobDetector|property|instance;get:public|System.String DefaultName"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.SimpleBlobDetector.getBlobContours()-\u003Estd::vector\u003Cstd::vector\u003Ccv::Point\u003E \u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_simple_blob_get_blob_contours_count",
+        "jyppx_ocv_features2d_simple_blob_get_blob_contours_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.SimpleBlobDetector|method|public;instance|OpenCvSharp.Core.Point[][] GetBlobContours()"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "class cv.ALIKED",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "class cv.ALIKED.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.ALIKED.Params.Params()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.ALIKED.create(String modelPath[/C,/Ref];ALIKED_Params params=ALIKED::Params()[/C,/Ref])-\u003EPtr\u003CALIKED\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "class cv.DescriptorMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "enum cv.DescriptorMatcher.MatcherType[const cv.DescriptorMatcher.FLANNBASED=1;const cv.DescriptorMatcher.BRUTEFORCE=2;const cv.DescriptorMatcher.BRUTEFORCE_L1=3;const cv.DescriptorMatcher.BRUTEFORCE_HAMMING=4;const cv.DescriptorMatcher.BRUTEFORCE_HAMMINGLUT=5;const cv.DescriptorMatcher.BRUTEFORCE_SL2=6]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.DescriptorMatcher.add(vector_Mat descriptors)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_add"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|System.Void Add(OpenCvSharp.Core.Mat[] descriptors)"
+      ]
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.DescriptorMatcher.getTrainDescriptors()-\u003Estd::vector\u003CMat\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_get_train_descriptor_clone",
+        "jyppx_ocv_features2d_descriptor_matcher_get_train_descriptors_count"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Core.Mat[] GetTrainDescriptors()"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.DescriptorMatcher.clear()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_clear"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|System.Void Clear()"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.DescriptorMatcher.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_empty"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|property|instance;get:public|System.Boolean Empty"
+      ]
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.DescriptorMatcher.isMaskSupported()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_is_mask_supported"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|property|instance;get:public|System.Boolean IsMaskSupported"
+      ]
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.DescriptorMatcher.train()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_train"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|System.Void Train()"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.DescriptorMatcher.match(Mat queryDescriptors;Mat trainDescriptors;vector_DMatch matches[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_match_count",
+        "jyppx_ocv_features2d_descriptor_matcher_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DMatch[] Match(OpenCvSharp.Core.Mat queryDescriptors)"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.DescriptorMatcher.knnMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_count",
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DMatch[][] KnnMatch(OpenCvSharp.Core.Mat queryDescriptors,OpenCvSharp.Core.Mat trainDescriptors,System.Int32 k,OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.DescriptorMatcher.radiusMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;Mat mask=Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_count",
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DMatch[][] RadiusMatch(OpenCvSharp.Core.Mat queryDescriptors,OpenCvSharp.Core.Mat trainDescriptors,System.Single maxDistance,OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ]
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.DescriptorMatcher.match(Mat queryDescriptors;vector_DMatch matches[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_match_train_count",
+        "jyppx_ocv_features2d_descriptor_matcher_match_train_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DMatch[] Match(OpenCvSharp.Core.Mat queryDescriptors)"
+      ]
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.DescriptorMatcher.knnMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;vector_Mat masks=vector_Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_train_count",
+        "jyppx_ocv_features2d_descriptor_matcher_knn_match_train_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DMatch[][] KnnMatch(OpenCvSharp.Core.Mat queryDescriptors,OpenCvSharp.Core.Mat trainDescriptors,System.Int32 k,OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ]
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.DescriptorMatcher.radiusMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;vector_Mat masks=vector_Mat();bool compactResult=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_train_count",
+        "jyppx_ocv_features2d_descriptor_matcher_radius_match_train_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DMatch[][] RadiusMatch(OpenCvSharp.Core.Mat queryDescriptors,OpenCvSharp.Core.Mat trainDescriptors,System.Single maxDistance,OpenCvSharp.Core.Mat? mask=null,System.Boolean compactResult=false)"
+      ]
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.DescriptorMatcher.write(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.DescriptorMatcher.read(String fileName[/C,/Ref,/PATH])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.DescriptorMatcher.read(FileNode arg1[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.DescriptorMatcher.clone(bool emptyTrainData=false)-\u003EPtr\u003CDescriptorMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_clone"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;instance;abstract|OpenCvSharp.Features2D.DescriptorMatcher Clone(System.Boolean emptyTrainData=false)"
+      ]
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.DescriptorMatcher.create(String descriptorMatcherType[/C,/Ref])-\u003EPtr\u003CDescriptorMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_create_by_name"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;static|OpenCvSharp.Features2D.DescriptorMatcher Create(System.String matcherName)"
+      ]
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.DescriptorMatcher.create(DescriptorMatcher_MatcherType matcherType[/C,/Ref])-\u003EPtr\u003CDescriptorMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_descriptor_matcher_create_by_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.DescriptorMatcher|method|public;static|OpenCvSharp.Features2D.DescriptorMatcher Create(OpenCvSharp.Features2D.DescriptorMatcherType matcherType)"
+      ]
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.DescriptorMatcher.write(FileStorage fs[/Ref];String name[/C,/Ref])-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Polymorphic Algorithm persistence is deferred until every concrete Feature2D or DescriptorMatcher handle can safely participate in one FileStorage and FileNode ownership contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "class cv.BFMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.BFMatcher.BFMatcher(int normType=NORM_L2;bool crossCheck=false)-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_bf_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.BFMatcher|method|public;static|OpenCvSharp.Features2D.BFMatcher Create(OpenCvSharp.Core.NormTypes normType=L2,System.Boolean crossCheck=false)"
+      ]
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.BFMatcher.create(int normType=NORM_L2;bool crossCheck=false)-\u003EPtr\u003CBFMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_bf_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.BFMatcher|method|public;static|OpenCvSharp.Features2D.BFMatcher Create(OpenCvSharp.Core.NormTypes normType=L2,System.Boolean crossCheck=false)"
+      ]
+    },
+    {
+      "ordinal": 158,
+      "identity": "class cv.FlannBasedMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "HAVE_OPENCV_FLANN=1; OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.FlannBasedMatcher.FlannBasedMatcher(Ptr_flann_IndexParams indexParams=makePtr\u003Cflann::KDTreeIndexParams\u003E()[/C,/Ref];Ptr_flann_SearchParams searchParams=makePtr\u003Cflann::SearchParams\u003E()[/C,/Ref])-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_FLANN=1; OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_flann_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FlannBasedMatcher|method|public;static|OpenCvSharp.Features2D.FlannBasedMatcher Create()"
+      ]
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.FlannBasedMatcher.create()-\u003EPtr\u003CFlannBasedMatcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "HAVE_OPENCV_FLANN=1; OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_flann_matcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.FlannBasedMatcher|method|public;static|OpenCvSharp.Features2D.FlannBasedMatcher Create()"
+      ]
+    },
+    {
+      "ordinal": 161,
+      "identity": "class cv.LightGlueMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)-\u003EPtr\u003CLightGlueMatcher\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.LightGlueMatcher.clearPairInfo()-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "DISK, ALIKED, and LightGlue require external DNN model artifacts and model-specific shape evidence; they are kept outside the offline deterministic success path.",
+      "buildCondition": "HAVE_OPENCV_DNN=1; external-model-evidence-required; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "identity": "enum struct cv.DrawMatchesFlags[const cv.DrawMatchesFlags.DEFAULT=0;const cv.DrawMatchesFlags.DRAW_OVER_OUTIMG=1;const cv.DrawMatchesFlags.NOT_DRAW_SINGLE_POINTS=2;const cv.DrawMatchesFlags.DRAW_RICH_KEYPOINTS=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.drawKeypoints(Mat image;vector_KeyPoint keypoints[/C,/Ref];Mat outImage[/IO];Scalar color=Scalar::all(-1)[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_draw_keypoints"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Cv2|method|public;static|System.Void DrawKeypoints(OpenCvSharp.Core.Mat image,OpenCvSharp.Features2D.KeyPoint[] keypoints,OpenCvSharp.Core.Mat outImage,OpenCvSharp.Core.Scalar? color=null,OpenCvSharp.Features2D.DrawMatchesFlags flags=Default)"
+      ]
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_char matchesMask=std::vector\u003Cchar\u003E()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_draw_matches"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Cv2|method|public;static|System.Void DrawMatches(OpenCvSharp.Core.Mat img1,OpenCvSharp.Features2D.KeyPoint[] keypoints1,OpenCvSharp.Core.Mat img2,OpenCvSharp.Features2D.KeyPoint[] keypoints2,OpenCvSharp.Features2D.DMatch[] matches,OpenCvSharp.Core.Mat outImage,OpenCvSharp.Core.Scalar? matchColor=null,OpenCvSharp.Core.Scalar? singlePointColor=null,OpenCvSharp.Features2D.DrawMatchesFlags flags=Default)"
+      ]
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];int matchesThickness[/C];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_char matchesMask=std::vector\u003Cchar\u003E()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "The matchesThickness drawing overload is a convenience variant not present in the current managed drawing contract; the standard flat and nested match overloads remain implemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_vector_char matchesMask=std::vector\u003Cstd::vector\u003Cchar\u003E \u003E()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed Features2D surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_draw_matches_knn"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.Cv2|method|public;static|System.Void DrawMatchesKnn(OpenCvSharp.Core.Mat img1,OpenCvSharp.Features2D.KeyPoint[] keypoints1,OpenCvSharp.Core.Mat img2,OpenCvSharp.Features2D.KeyPoint[] keypoints2,OpenCvSharp.Features2D.DMatch[][] matches,OpenCvSharp.Core.Mat outImage,OpenCvSharp.Core.Scalar? matchColor=null,OpenCvSharp.Core.Scalar? singlePointColor=null,OpenCvSharp.Features2D.DrawMatchesFlags flags=Default)"
+      ]
+    },
+    {
+      "ordinal": 171,
+      "identity": "class cv.ANNIndex",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "TYPE|class|public;sealed|OpenCvSharp.Features2D.ANNIndex|base=|interfaces=System.IDisposable"
+      ]
+    },
+    {
+      "ordinal": 172,
+      "identity": "enum cv.ANNIndex.Distance[const cv.ANNIndex.DIST_EUCLIDEAN=0;const cv.ANNIndex.DIST_MANHATTAN=1;const cv.ANNIndex.DIST_ANGULAR=2;const cv.ANNIndex.DIST_HAMMING=3;const cv.ANNIndex.DIST_DOTPRODUCT=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [],
+      "managedMembers": [
+        "TYPE|enum|public|OpenCvSharp.Features2D.ANNIndexDistance|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable"
+      ]
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.ANNIndex.addItems(Mat features)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_add_items"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void AddItems(OpenCvSharp.Core.Mat features)"
+      ]
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.ANNIndex.build(int trees=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_build"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Build(System.Int32 trees=-1)"
+      ]
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.ANNIndex.knnSearch(Mat query;Mat indices[/O];Mat dists[/O];int knn;int search_k=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_knn_search"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void KnnSearch(OpenCvSharp.Core.Mat query,OpenCvSharp.Core.Mat indices,OpenCvSharp.Core.Mat distances,System.Int32 knn,System.Int32 searchK=-1)"
+      ]
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.ANNIndex.save(String filename[/C,/Ref,/PATH];bool prefault=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_save"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Save(System.String filename,System.Boolean prefault=false)"
+      ]
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.ANNIndex.load(String filename[/C,/Ref,/PATH];bool prefault=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Load(System.String filename,System.Boolean prefault=false)"
+      ]
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.ANNIndex.getTreeNumber()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_get_tree_number"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|property|instance;get:public|System.Int32 TreeNumber"
+      ]
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.ANNIndex.getItemNumber()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_get_item_number"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|property|instance;get:public|System.Int32 ItemNumber"
+      ]
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.ANNIndex.setOnDiskBuild(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_set_on_disk_build"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Boolean SetOnDiskBuild(System.String filename)"
+      ]
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.ANNIndex.setSeed(int seed)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_set_seed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void SetSeed(System.Int32 seed)"
+      ]
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.ANNIndex.create(int dim;ANNIndex_Distance distType=ANNIndex::DIST_EUCLIDEAN)-\u003EPtr\u003CANNIndex\u003E",
+      "classification": "implemented",
+      "reason": "The selected ANNIndex family has a version-neutral opaque C ABI, SafeHandle ownership, caller-owned Mat outputs, strict validation, UTF-8 persistence, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_FEATURES2D; full-profile",
+      "nativeEntrypoints": [
+        "jyppx_ocv_features2d_ann_index_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;static|OpenCvSharp.Features2D.ANNIndex Create(System.Int32 dimension,OpenCvSharp.Features2D.ANNIndexDistance distance=Euclidean)"
+      ]
+    }
+  ]
+}

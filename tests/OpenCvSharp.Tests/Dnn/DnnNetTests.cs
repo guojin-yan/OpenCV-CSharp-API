@@ -15,9 +15,10 @@ namespace OpenCvSharp.Tests.Dnn
             Assert.Equal(5, (int)DnnBackend.Cuda);
             Assert.Equal(0, (int)DnnTarget.Cpu);
             Assert.Equal(10, (int)DnnTarget.CpuFp16);
-            Assert.Equal(0, (int)DnnEngine.Auto);
+            Assert.Equal(3, (int)DnnEngine.Auto);
             Assert.Equal(1, (int)DnnEngine.Classic);
             Assert.Equal(2, (int)DnnEngine.New);
+            Assert.Equal(4, (int)DnnEngine.Ort);
         }
 
         [Fact]

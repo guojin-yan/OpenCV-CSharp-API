@@ -12,3 +12,21 @@ struct jyppx_ocv_dnn_net
     int placeholder;
 #endif
 };
+
+struct jyppx_ocv_dnn_layer
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::Ptr<cv::dnn::Layer> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_dnn_mat_groups
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    std::vector<std::vector<cv::Mat>> values;
+#else
+    int placeholder;
+#endif
+};

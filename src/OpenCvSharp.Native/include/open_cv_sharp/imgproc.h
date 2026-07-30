@@ -6,6 +6,8 @@
 
 typedef struct jyppx_ocv_clahe jyppx_ocv_clahe;
 typedef struct jyppx_ocv_line_segment_detector jyppx_ocv_line_segment_detector;
+typedef struct jyppx_ocv_generalized_hough jyppx_ocv_generalized_hough;
+typedef struct jyppx_ocv_font_face jyppx_ocv_font_face;
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_cvt_color(
     const jyppx_ocv_mat* src,
@@ -1231,3 +1233,383 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_get_text_size(
     int* width,
     int* height,
     int* base_line);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_ballard_create(
+    jyppx_ocv_generalized_hough** hough);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_guil_create(
+    jyppx_ocv_generalized_hough** hough);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_imgproc_generalized_hough_release(
+    jyppx_ocv_generalized_hough* hough);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_set_template(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* templ,
+    int center_x,
+    int center_y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_set_template_edges(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* edges,
+    const jyppx_ocv_mat* dx,
+    const jyppx_ocv_mat* dy,
+    int center_x,
+    int center_y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_detect(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* positions,
+    jyppx_ocv_mat* votes);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_detect_edges(
+    jyppx_ocv_generalized_hough* hough,
+    const jyppx_ocv_mat* edges,
+    const jyppx_ocv_mat* dx,
+    const jyppx_ocv_mat* dy,
+    jyppx_ocv_mat* positions,
+    jyppx_ocv_mat* votes);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_get_int_property(
+    const jyppx_ocv_generalized_hough* hough,
+    int property,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_set_int_property(
+    jyppx_ocv_generalized_hough* hough,
+    int property,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_get_double_property(
+    const jyppx_ocv_generalized_hough* hough,
+    int property,
+    double* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_generalized_hough_set_double_property(
+    jyppx_ocv_generalized_hough* hough,
+    int property,
+    double value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_cvt_color_two_plane(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* dst,
+    int code);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_demosaicing(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int code,
+    int dst_cn);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_apply_color_map(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int colormap);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_apply_color_map_user(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* user_color);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_blend_linear(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    const jyppx_ocv_mat* weights1,
+    const jyppx_ocv_mat* weights2,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_stack_blur(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int width,
+    int height);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_spatial_gradient(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dx,
+    jyppx_ocv_mat* dy,
+    int ksize,
+    int border_type);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_threshold_with_mask(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask,
+    double thresh,
+    double maxval,
+    int type,
+    double* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_draw_marker(
+    jyppx_ocv_mat* image,
+    int position_x,
+    int position_y,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    int marker_type,
+    int marker_size,
+    int thickness,
+    int line_type);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_fill_convex_poly(
+    jyppx_ocv_mat* image,
+    const int* points_xy,
+    int point_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    int line_type,
+    int shift);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_get_font_scale_from_height(
+    int font_face,
+    int pixel_height,
+    int thickness,
+    double* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_undistort(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* new_camera_matrix);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_init_inverse_rectification_map(
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* r,
+    const jyppx_ocv_mat* new_camera_matrix,
+    int size_width,
+    int size_height,
+    int m1type,
+    jyppx_ocv_mat* map1,
+    jyppx_ocv_mat* map2);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_fisheye_undistort_image(
+    const jyppx_ocv_mat* distorted,
+    jyppx_ocv_mat* undistorted,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* new_camera_matrix,
+    int new_size_width,
+    int new_size_height);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_get_rect_sub_pix(
+    const jyppx_ocv_mat* image,
+    int patch_width,
+    int patch_height,
+    float center_x,
+    float center_y,
+    jyppx_ocv_mat* patch,
+    int patch_type);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_warp_polar(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int width,
+    int height,
+    float center_x,
+    float center_y,
+    double max_radius,
+    int flags);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_accumulate(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_accumulate_square(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_accumulate_product(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_accumulate_weighted(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double alpha,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_phase_correlate(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    const jyppx_ocv_mat* window,
+    double* shift_x,
+    double* shift_y,
+    double* response);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_phase_correlate_iterative(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    int l2_size,
+    int max_iters,
+    double* shift_x,
+    double* shift_y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_create_hanning_window(
+    jyppx_ocv_mat* dst,
+    int width,
+    int height,
+    int type);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_emd(
+    const jyppx_ocv_mat* signature1,
+    const jyppx_ocv_mat* signature2,
+    int distance_type,
+    const jyppx_ocv_mat* cost,
+    int has_lower_bound,
+    float* lower_bound,
+    jyppx_ocv_mat* flow,
+    float* distance);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_watershed(
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* markers);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_pyr_mean_shift_filtering(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    double spatial_radius,
+    double color_radius,
+    int max_level,
+    int criteria_type,
+    int criteria_max_count,
+    double criteria_epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_grab_cut(
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* mask,
+    int rect_x,
+    int rect_y,
+    int rect_width,
+    int rect_height,
+    jyppx_ocv_mat* background_model,
+    jyppx_ocv_mat* foreground_model,
+    int iteration_count,
+    int mode);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_match_template(
+    const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* templ,
+    jyppx_ocv_mat* result,
+    int method,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_find_contours_link_runs_count(
+    const jyppx_ocv_mat* image,
+    int include_hierarchy,
+    int* contour_count,
+    int* total_point_count,
+    int* hierarchy_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_find_contours_link_runs_fill(
+    const jyppx_ocv_mat* image,
+    int include_hierarchy,
+    int* contours_xy,
+    int point_capacity,
+    int* contour_lengths,
+    int contour_capacity,
+    int* hierarchy_values,
+    int hierarchy_capacity,
+    int* written_contour_count,
+    int* written_point_count,
+    int* written_hierarchy_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_draw_frame_axes(
+    jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    const jyppx_ocv_mat* rotation_vector,
+    const jyppx_ocv_mat* translation_vector,
+    float length,
+    int thickness);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_create_default(
+    jyppx_ocv_font_face** font_face);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_create(
+    const unsigned char* font_path_or_name_utf8,
+    jyppx_ocv_font_face** font_face);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_imgproc_font_face_release(
+    jyppx_ocv_font_face* font_face);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_set(
+    jyppx_ocv_font_face* font_face,
+    const unsigned char* font_path_or_name_utf8,
+    int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_get_name_size(
+    const jyppx_ocv_font_face* font_face,
+    int* byte_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_get_name_fill(
+    const jyppx_ocv_font_face* font_face,
+    unsigned char* buffer,
+    int buffer_capacity,
+    int* bytes_written);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_set_instance(
+    jyppx_ocv_font_face* font_face,
+    const int* parameters,
+    int parameter_count,
+    int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_get_instance_count(
+    const jyppx_ocv_font_face* font_face,
+    int* parameter_count,
+    int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_font_face_get_instance_fill(
+    const jyppx_ocv_font_face* font_face,
+    int* parameters,
+    int parameter_capacity,
+    int* parameters_written,
+    int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_put_text_font_face(
+    jyppx_ocv_mat* image,
+    const unsigned char* text_utf8,
+    int origin_x,
+    int origin_y,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3,
+    jyppx_ocv_font_face* font_face,
+    int size,
+    int weight,
+    int flags,
+    int has_wrap,
+    int wrap_start,
+    int wrap_end,
+    int* next_x,
+    int* next_y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_imgproc_get_text_size_font_face(
+    int image_width,
+    int image_height,
+    const unsigned char* text_utf8,
+    int origin_x,
+    int origin_y,
+    jyppx_ocv_font_face* font_face,
+    int size,
+    int weight,
+    int flags,
+    int has_wrap,
+    int wrap_start,
+    int wrap_end,
+    int* result_x,
+    int* result_y,
+    int* result_width,
+    int* result_height);

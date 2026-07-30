@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/imgcodecs.hpp declarations emitted by OpenCV hdr_parser.py",
+  "reviewStatus": "reviewed",
+  "limitation": "Declaration identities preserve parsed overload, default, direction, and type metadata. Implemented evidence correlates symbol groups across the C\u002B\u002B API, stable C ABI, and managed public API; it does not claim binary equivalence of C\u002B\u002B parameter layouts or repository-wide OpenCV parity.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.ImreadModes",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.ImwriteFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.ImwriteJPEGSamplingFactorParams",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.ImwriteTiffCompressionFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.ImwriteTiffPredictorFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "enum cv.ImwriteTiffResolutionUnitFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "enum cv.ImwriteEXRTypeFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "enum cv.ImwriteEXRCompressionFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "identity": "enum cv.ImwritePNGFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 9,
+      "identity": "enum cv.ImwritePNGFilterFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "enum cv.ImwritePAMFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "enum cv.ImwriteWEBPLosslessMode",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "enum cv.ImwriteHDRCompressionFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "enum cv.ImwriteBMPCompressionFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "identity": "enum cv.ImwriteGIFCompressionFlags",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "enum cv.ImageMetadataType",
+      "classification": "non-callable-metadata",
+      "reason": "The exact enum declaration and values are preserved in the managed ImgCodecs parameter contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "class cv.Animation",
+      "classification": "non-callable-metadata",
+      "reason": "The Animation class declaration is retained as metadata; its constructor and codec operations are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.Animation.Animation(int loopCount=0;Scalar bgColor=Scalar())-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_animation_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Animation|constructor|public;instance|.ctor(System.Int32 loopCount,OpenCvSharp.Core.Scalar backgroundColor)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Animation|constructor|public;instance|.ctor(System.Int32 loopCount=0)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.imread(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImRead(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,OpenCvSharp.Core.Mat destination,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.imread(String filename[/C,/Ref,/PATH];Mat dst[/O];int flags=IMREAD_COLOR_BGR)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_into"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImRead(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,OpenCvSharp.Core.Mat destination,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.imreadWithMetadata(String filename[/C,/Ref,/PATH];vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.ImgCodecs.ImageMetadataResult ImReadWithMetadata(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int flags=IMREAD_COLOR_BGR)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.imreadmulti(String filename[/C,/Ref,/PATH];vector_Mat mats[/O,/Ref];int start;int count;int flags=IMREAD_ANYCOLOR)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.imreadanimation(String filename[/C,/Ref,/PATH];Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imread_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadAnimation(System.String filename,OpenCvSharp.ImgCodecs.Animation animation,System.Int32 start=0,System.Int32 count=32767)"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.imdecodeanimation(Mat buf;Animation animation[/O,/Ref];int start=0;int count=INT16_MAX)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeAnimation(System.Byte[] buffer,OpenCvSharp.ImgCodecs.Animation animation,System.Int32 start=0,System.Int32 count=32767)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.imwriteanimation(String filename[/C,/Ref,/PATH];Animation animation[/C,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteAnimation(System.String filename,OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.imencodeanimation(String ext[/C,/Ref];Animation animation[/C,/Ref];vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode_animation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeAnimation(System.String ext,OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.imcount(String filename[/C,/Ref,/PATH];int flags=IMREAD_COLOR_BGR)-\u003Esize_t",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imcount"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Int32 ImCount(System.String filename,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.imwrite(String filename[/C,/Ref,/PATH];Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite",
+        "jyppx_ocv_imgcodecs_imwrite_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,OpenCvSharp.Core.Mat image)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,OpenCvSharp.Core.Mat image,System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.imwriteWithMetadata(String filename[/C,/Ref,/PATH];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata[/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteWithMetadata(System.String filename,OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.ImgCodecs.ImageMetadataChunk\u003E metadata,System.Int32[]? parameters=null)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.imwritemulti(String filename[/C,/Ref,/PATH];vector_Mat img;vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imwrite_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteMulti(System.String filename,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.Core.Mat\u003E images,System.Int32[]? parameters=null)"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.imdecode(Mat buf;int flags)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan\u003CSystem.Byte\u003E buffer,OpenCvSharp.ImgCodecs.ImreadModes flags=Color)"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.imdecodeWithMetadata(Mat buf;vector_int metadataTypes[/O,/Ref];vector_Mat metadata[/O];int flags)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|OpenCvSharp.ImgCodecs.ImageMetadataResult ImDecodeWithMetadata(System.Byte[] buffer,OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.imdecodemulti(Mat buf;int flags;vector_Mat mats[/O,/Ref];Range range=Range::all()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imdecode_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeMulti(System.Byte[] buffer,System.Int32 start,System.Int32 end,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImDecodeMulti(System.Byte[] buffer,out OpenCvSharp.Core.Mat[] images,OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.imencode(String ext[/C,/Ref];Mat img;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode",
+        "jyppx_ocv_imgcodecs_imencode_with_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,OpenCvSharp.Core.Mat image)",
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,OpenCvSharp.Core.Mat image,System.Int32[] parameters)"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.imencodeWithMetadata(String ext[/C,/Ref];Mat img;vector_int metadataTypes[/C,/Ref];vector_Mat metadata;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode_with_metadata"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.ImgCodecs.ImageMetadataChunk\u003E metadata,System.Int32[]? parameters=null)"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.imencodemulti(String ext[/C,/Ref];vector_Mat imgs;vector_uchar buf[/O,/Ref];vector_int params=std::vector\u003Cint\u003E()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_imencode_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeMulti(System.String ext,System.Collections.Generic.IReadOnlyList\u003COpenCvSharp.Core.Mat\u003E images,System.Int32[]? parameters=null)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.haveImageReader(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_have_image_reader"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageReader(System.String filename)"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.haveImageWriter(String filename[/C,/Ref,/PATH])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgcodecs_have_image_writer"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageWriter(System.String filenameOrExtension)"
+      ]
+    }
+  ]
+}

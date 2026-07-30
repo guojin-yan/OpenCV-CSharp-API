@@ -20,6 +20,7 @@ typedef struct jyppx_ocv_features2d_brisk jyppx_ocv_features2d_brisk;
 typedef struct jyppx_ocv_features2d_kaze jyppx_ocv_features2d_kaze;
 typedef struct jyppx_ocv_features2d_akaze jyppx_ocv_features2d_akaze;
 typedef struct jyppx_ocv_features2d_affine jyppx_ocv_features2d_affine;
+typedef struct jyppx_ocv_features2d_ann_index jyppx_ocv_features2d_ann_index;
 typedef struct jyppx_ocv_features2d_bow_kmeans_trainer jyppx_ocv_features2d_bow_kmeans_trainer;
 typedef struct jyppx_ocv_features2d_bow_img_descriptor_extractor jyppx_ocv_features2d_bow_img_descriptor_extractor;
 
@@ -1041,3 +1042,47 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_affine_detect_
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_affine_set_view_params(jyppx_ocv_features2d_affine* affine, const float* tilts, int tilt_count, const float* rolls, int roll_count);
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_affine_get_view_params_count(const jyppx_ocv_features2d_affine* affine, int* tilt_count, int* roll_count);
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_affine_get_view_params_fill(const jyppx_ocv_features2d_affine* affine, float* tilts, int tilt_capacity, float* rolls, int roll_capacity, int* tilt_count, int* roll_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_create(
+    int dimension,
+    int distance,
+    jyppx_ocv_features2d_ann_index** index);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_features2d_ann_index_release(
+    jyppx_ocv_features2d_ann_index* index);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_add_items(
+    jyppx_ocv_features2d_ann_index* index,
+    const jyppx_ocv_mat* features);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_build(
+    jyppx_ocv_features2d_ann_index* index,
+    int trees);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_knn_search(
+    const jyppx_ocv_features2d_ann_index* index,
+    const jyppx_ocv_mat* query,
+    jyppx_ocv_mat* indices,
+    jyppx_ocv_mat* distances,
+    int knn,
+    int search_k);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_save(
+    jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int prefault);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_load(
+    jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int prefault);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_get_tree_number(
+    const jyppx_ocv_features2d_ann_index* index,
+    int* tree_number);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_get_item_number(
+    const jyppx_ocv_features2d_ann_index* index,
+    int* item_number);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_set_on_disk_build(
+    jyppx_ocv_features2d_ann_index* index,
+    const unsigned char* filename_utf8,
+    int filename_byte_length,
+    int* enabled);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_features2d_ann_index_set_seed(
+    jyppx_ocv_features2d_ann_index* index,
+    int seed);

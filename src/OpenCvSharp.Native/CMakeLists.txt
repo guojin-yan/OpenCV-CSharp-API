@@ -77,6 +77,7 @@ set(OPENCV_CSHARP_MINI_NATIVE_SOURCES
     src/core/mat.cpp
     src/core/decomp.cpp
     src/core/operations.cpp
+    src/core/persistence.cpp
     src/videoio/videoio.cpp
     src/imgcodecs.cpp
     src/imgproc.cpp
@@ -118,6 +119,9 @@ set(OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES
     src/xphoto/xphoto.cpp
     src/img_hash/img_hash.cpp
     src/photo/photo.cpp
+    src/photo/hdr.cpp
+    src/photo/ccm.cpp
+    src/photo/intelligent_scissors.cpp
     src/features2d/features2d.cpp
     src/features2d/features2d_extra.cpp
 )
@@ -543,6 +547,17 @@ if(OPENCV_CSHARP_PWSH_EXECUTABLE)
     )
 
     set(OPENCV_CSHARP_NATIVE_ABI_EXPORT_TEST "${OPENCV_CSHARP_NATIVE_TARGET}AbiExportAudit")
+    set(OPENCV_CSHARP_NATIVE_ABI_EXPORT_TOOL_ARGUMENTS)
+    if(WIN32 AND MSVC AND CMAKE_LINKER)
+        get_filename_component(OPENCV_CSHARP_MSVC_TOOL_DIRECTORY "${CMAKE_LINKER}" DIRECTORY)
+        set(OPENCV_CSHARP_DUMPBIN_EXECUTABLE "${OPENCV_CSHARP_MSVC_TOOL_DIRECTORY}/dumpbin.exe")
+        if(EXISTS "${OPENCV_CSHARP_DUMPBIN_EXECUTABLE}")
+            list(APPEND
+                OPENCV_CSHARP_NATIVE_ABI_EXPORT_TOOL_ARGUMENTS
+                -ExportToolPath
+                "${OPENCV_CSHARP_DUMPBIN_EXECUTABLE}")
+        endif()
+    endif()
     add_test(
         NAME ${OPENCV_CSHARP_NATIVE_ABI_EXPORT_TEST}
         COMMAND
@@ -554,6 +569,7 @@ if(OPENCV_CSHARP_PWSH_EXECUTABLE)
             $<TARGET_FILE:${OPENCV_CSHARP_NATIVE_TARGET}>
             -ManifestPath
             ${CMAKE_CURRENT_SOURCE_DIR}/${OPENCV_CSHARP_NATIVE_ABI_MANIFEST}
+            ${OPENCV_CSHARP_NATIVE_ABI_EXPORT_TOOL_ARGUMENTS}
     )
     list(APPEND
         OPENCV_CSHARP_NATIVE_RUNTIME_TESTS

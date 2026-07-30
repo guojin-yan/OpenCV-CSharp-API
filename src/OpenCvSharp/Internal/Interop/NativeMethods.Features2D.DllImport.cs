@@ -737,6 +737,39 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_flann_matcher_radius_match_train_fill")]
         internal static extern int Features2DFlannMatcherRadiusMatchTrainFill(IntPtr matcher, IntPtr queryDescriptors, float maxDistance, int compactResult, int* offsets, int offsetCapacity, NativeDMatch* matches, int matchCapacity, out int groupCount, out int totalMatchCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_create")]
+        internal static extern int Features2DAnnIndexCreate(int dimension, int distance, out IntPtr index);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_release")]
+        internal static extern void Features2DAnnIndexRelease(IntPtr index);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_add_items")]
+        internal static extern int Features2DAnnIndexAddItems(IntPtr index, IntPtr features);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_build")]
+        internal static extern int Features2DAnnIndexBuild(IntPtr index, int trees);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_knn_search")]
+        internal static extern int Features2DAnnIndexKnnSearch(IntPtr index, IntPtr query, IntPtr indices, IntPtr distances, int knn, int searchK);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_save")]
+        internal static extern int Features2DAnnIndexSave(IntPtr index, byte[] filenameUtf8, int filenameByteLength, int prefault);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_load")]
+        internal static extern int Features2DAnnIndexLoad(IntPtr index, byte[] filenameUtf8, int filenameByteLength, int prefault);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_get_tree_number")]
+        internal static extern int Features2DAnnIndexGetTreeNumber(IntPtr index, out int treeNumber);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_get_item_number")]
+        internal static extern int Features2DAnnIndexGetItemNumber(IntPtr index, out int itemNumber);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_set_on_disk_build")]
+        internal static extern int Features2DAnnIndexSetOnDiskBuild(IntPtr index, byte[] filenameUtf8, int filenameByteLength, out int enabled);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_features2d_ann_index_set_seed")]
+        internal static extern int Features2DAnnIndexSetSeed(IntPtr index, int seed);
     }
 }
 #endif

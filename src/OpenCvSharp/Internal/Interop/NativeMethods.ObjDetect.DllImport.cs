@@ -165,6 +165,12 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_qrcode_detector_aruco_set_detector_parameters")]
         internal static extern int QRCodeDetectorArucoSetDetectorParameters(IntPtr detector, ref QRCodeDetectorArucoParamsNative parameters);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters")]
+        internal static extern int QRCodeDetectorArucoGetArucoParameters(IntPtr detector, out ArucoDetectorParamsNative parameters);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters")]
+        internal static extern int QRCodeDetectorArucoSetArucoParameters(IntPtr detector, ref ArucoDetectorParamsNative parameters);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_qrcode_detector_aruco_detect")]
         internal static extern int QRCodeDetectorArucoDetect(IntPtr detector, IntPtr image, IntPtr points, out int detected);
 

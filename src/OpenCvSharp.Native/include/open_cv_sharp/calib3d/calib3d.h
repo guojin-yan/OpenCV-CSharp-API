@@ -7,6 +7,7 @@
 typedef struct jyppx_ocv_stereo_bm jyppx_ocv_stereo_bm;
 typedef struct jyppx_ocv_stereo_sgbm jyppx_ocv_stereo_sgbm;
 typedef struct jyppx_ocv_stereo_matcher jyppx_ocv_stereo_matcher;
+typedef struct jyppx_ocv_calib3d_subdiv2d jyppx_ocv_calib3d_subdiv2d;
 
 typedef struct jyppx_ocv_calib3d_point2f
 {
@@ -20,6 +21,161 @@ typedef struct jyppx_ocv_calib3d_point3f
     float y;
     float z;
 } jyppx_ocv_calib3d_point3f;
+
+typedef struct jyppx_ocv_calib3d_vec4f
+{
+    float v0;
+    float v1;
+    float v2;
+    float v3;
+} jyppx_ocv_calib3d_vec4f;
+
+typedef struct jyppx_ocv_calib3d_vec6f
+{
+    float v0;
+    float v1;
+    float v2;
+    float v3;
+    float v4;
+    float v5;
+} jyppx_ocv_calib3d_vec6f;
+
+typedef struct jyppx_ocv_calib3d_usac_params
+{
+    double confidence;
+    int is_parallel;
+    int lo_iterations;
+    int lo_method;
+    int lo_sample_size;
+    int max_iterations;
+    int neighbors_search;
+    int random_generator_state;
+    int sampler;
+    int score;
+    double threshold;
+    int final_polisher;
+    int final_polisher_iterations;
+} jyppx_ocv_calib3d_usac_params;
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_create(
+    jyppx_ocv_calib3d_subdiv2d** subdiv);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_create_rect(
+    int x, int y, int width, int height, jyppx_ocv_calib3d_subdiv2d** subdiv);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_create_rect2f(
+    float x, float y, float width, float height, jyppx_ocv_calib3d_subdiv2d** subdiv);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_calib3d_subdiv2d_release(
+    jyppx_ocv_calib3d_subdiv2d* subdiv);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_init_delaunay(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, int x, int y, int width, int height);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, float width, float height);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_insert(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, int* vertex);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_insert_points(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, const jyppx_ocv_calib3d_point2f* points, int point_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_locate(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, int* location, int* edge, int* vertex);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_find_nearest(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, float x, float y, int* vertex, float* nearest_x, float* nearest_y);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_edge_list_count(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int* count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, jyppx_ocv_calib3d_vec4f* values, int capacity);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_count(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int* count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_fill(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int* values, int capacity);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_triangle_list_count(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int* count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_triangle_list_fill(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, jyppx_ocv_calib3d_vec6f* values, int capacity);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_count(
+    jyppx_ocv_calib3d_subdiv2d* subdiv, const int* indices, int index_count, int* facet_count, int* point_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_fill(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    const int* indices,
+    int index_count,
+    int* facet_offsets,
+    int facet_offset_capacity,
+    jyppx_ocv_calib3d_point2f* points,
+    int point_capacity,
+    jyppx_ocv_calib3d_point2f* centers,
+    int center_capacity);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_vertex(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int vertex, float* x, float* y, int* first_edge);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_get_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int next_edge_type, int* related_edge);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_next_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* next_edge);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_rotate_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int rotate, int* rotated_edge);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_sym_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* symmetric_edge);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_edge_org(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* vertex, float* x, float* y);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_subdiv2d_edge_dst(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv, int edge, int* vertex, float* x, float* y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_usac_params_get_default(
+    jyppx_ocv_calib3d_usac_params* params);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_homography_usac(
+    const jyppx_ocv_mat* src_points,
+    const jyppx_ocv_mat* dst_points,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** homography);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_solve_pnp_ransac_usac(
+    const jyppx_ocv_mat* object_points,
+    const jyppx_ocv_mat* image_points,
+    jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    jyppx_ocv_mat* rvec,
+    jyppx_ocv_mat* tvec,
+    jyppx_ocv_mat* inliers,
+    const jyppx_ocv_calib3d_usac_params* params,
+    int* solved);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_fundamental_mat_usac(
+    const jyppx_ocv_mat* points1,
+    const jyppx_ocv_mat* points2,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** fundamental);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_essential_mat_usac(
+    const jyppx_ocv_mat* points1,
+    const jyppx_ocv_mat* points2,
+    const jyppx_ocv_mat* camera_matrix1,
+    const jyppx_ocv_mat* camera_matrix2,
+    const jyppx_ocv_mat* dist_coeffs1,
+    const jyppx_ocv_mat* dist_coeffs2,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** essential);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_estimate_affine_2d_usac(
+    const jyppx_ocv_mat* source,
+    const jyppx_ocv_mat* destination,
+    jyppx_ocv_mat* transform,
+    jyppx_ocv_mat* inliers,
+    const jyppx_ocv_calib3d_usac_params* params);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_fisheye_stereo_rectify(
+    const jyppx_ocv_mat* camera_matrix1,
+    const jyppx_ocv_mat* dist_coeffs1,
+    const jyppx_ocv_mat* camera_matrix2,
+    const jyppx_ocv_mat* dist_coeffs2,
+    int image_width,
+    int image_height,
+    const jyppx_ocv_mat* r,
+    const jyppx_ocv_mat* t,
+    jyppx_ocv_mat* r1,
+    jyppx_ocv_mat* r2,
+    jyppx_ocv_mat* p1,
+    jyppx_ocv_mat* p2,
+    jyppx_ocv_mat* q,
+    int flags,
+    int new_image_width,
+    int new_image_height,
+    double balance,
+    double fov_scale);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_stereo_matcher_release(
     jyppx_ocv_stereo_matcher* stereo_matcher);
@@ -606,6 +762,39 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_chessboard_c
     int pattern_height,
     jyppx_ocv_mat* corners,
     int flags,
+    int* found);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_chessboard_corners_sb(
+    const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    jyppx_ocv_mat* corners,
+    int flags,
+    int* found);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta(
+    const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    jyppx_ocv_mat* corners,
+    int flags,
+    jyppx_ocv_mat* meta,
+    int* found);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_estimate_chessboard_sharpness(
+    const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    const jyppx_ocv_mat* corners,
+    float rise_distance,
+    int vertical,
+    jyppx_ocv_mat* sharpness,
+    double* value0,
+    double* value1,
+    double* value2,
+    double* value3);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_find_4_quad_corner_subpix(
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* corners,
+    int region_width,
+    int region_height,
     int* found);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_calib3d_check_chessboard(

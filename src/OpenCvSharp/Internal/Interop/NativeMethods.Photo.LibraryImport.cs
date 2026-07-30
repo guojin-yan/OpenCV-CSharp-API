@@ -36,6 +36,15 @@ namespace OpenCvSharp.Internal.Interop
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_photo_fast_nl_means_denoising_colored_multi")]
         internal static partial int PhotoFastNlMeansDenoisingColoredMulti(IntPtr[] srcImages, int imageCount, IntPtr dst, int imgToDenoiseIndex, int temporalWindowSize, float h, float hColor, int templateWindowSize, int searchWindowSize);
 
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_photo_denoise_tvl1")]
+        internal static partial int PhotoDenoiseTvl1(IntPtr[] observations, int observationCount, IntPtr result, double lambda, int niters);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_photo_correct_chromatic_aberration")]
+        internal static partial int PhotoCorrectChromaticAberration(IntPtr inputImage, IntPtr coefficients, IntPtr outputImage, int calibrationWidth, int calibrationHeight, int calibrationDegree, int bayerPattern);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_photo_load_chromatic_aberration_params")]
+        internal static partial int PhotoLoadChromaticAberrationParams(IntPtr node, IntPtr coefficients, out int calibrationWidth, out int calibrationHeight, out int degree);
+
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_photo_seamless_clone")]
         internal static partial int PhotoSeamlessClone(IntPtr src, IntPtr dst, IntPtr mask, int pointX, int pointY, IntPtr blend, int flags);
 

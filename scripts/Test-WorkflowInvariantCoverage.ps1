@@ -109,7 +109,7 @@ $workflowRequirements = @(
     },
     [pscustomobject]@{
         Path = ".github/workflows/docs.yml"
-        MustRunBefore = @("dotnet restore", "dotnet build", "docfx ./docs/docfx.json", "upload-pages-artifact", "path: docs/_site")
+        MustRunBefore = @("dotnet restore", "dotnet build", "dotnet tool restore", "dotnet tool run docfx ./docs/docfx.json", "upload-pages-artifact", "path: docs/_site")
     },
     [pscustomobject]@{
         Path = ".github/workflows/build-native.yml"
@@ -161,7 +161,7 @@ $packWorkflowText = Read-RequiredText -RelativePath ".github/workflows/pack.yml"
 foreach ($token in @(
         "verify-artifacts:",
         "verify-consumers:",
-        "actions/download-artifact@v4",
+        "uses: actions/download-artifact@",
         "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
         "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
         "artifacts/pack-download",

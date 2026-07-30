@@ -1,0 +1,1153 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 18,
+  "managedPublicMemberAdditionCount": 181,
+  "nativeEntrypointAdditionCount": 80,
+  "families": [
+    {
+      "id": "photo-hdr-calibrate-merge",
+      "rationale": "The selected batch closes the complete parser-emitted AlignMTB, CalibrateDebevec, CalibrateRobertson, MergeDebevec, MergeMertens, and MergeRobertson lifecycle and processing surface with offline deterministic inputs.",
+      "declarations": [
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.AlignExposures.process(vector_Mat src;vector_Mat dst[/Ref];Mat times;Mat response)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 38,
+          "upstreamIdentity": "cv.AlignMTB.process(vector_Mat src;vector_Mat dst[/Ref];Mat times;Mat response)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 39,
+          "upstreamIdentity": "cv.AlignMTB.process(vector_Mat src;vector_Mat dst[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "cv.AlignMTB.calculateShift(Mat img0;Mat img1)-\u003EPoint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_calculate_shift"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|OpenCvSharp.Core.Point CalculateShift(OpenCvSharp.Core.Mat img0,OpenCvSharp.Core.Mat img1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 41,
+          "upstreamIdentity": "cv.AlignMTB.shiftMat(Mat src;Mat dst[/O];Point shift[/C])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_shift_mat"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|System.Void ShiftMat(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Point shift)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.AlignMTB.computeBitmaps(Mat img;Mat tb[/O];Mat eb[/O])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_compute_bitmaps"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|System.Void ComputeBitmaps(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Mat thresholdBitmap,OpenCvSharp.Core.Mat excludeBitmap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 43,
+          "upstreamIdentity": "cv.AlignMTB.getMaxBits()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_get_max_bits"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 MaxBits"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 44,
+          "upstreamIdentity": "cv.AlignMTB.setMaxBits(int max_bits)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_set_max_bits"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 MaxBits"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 45,
+          "upstreamIdentity": "cv.AlignMTB.getExcludeRange()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_get_exclude_range"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 ExcludeRange"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.AlignMTB.setExcludeRange(int exclude_range)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_set_exclude_range"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 ExcludeRange"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.AlignMTB.getCut()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_get_cut"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Boolean Cut"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.AlignMTB.setCut(bool value)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_set_cut"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Boolean Cut"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.createAlignMTB(int max_bits=6;int exclude_range=4;bool cut=true)-\u003EPtr\u003CAlignMTB\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_align_mtb_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;static|OpenCvSharp.Photo.AlignMTB Create(System.Int32 maxBits=6,System.Int32 excludeRange=4,System.Boolean cut=true)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.CalibrateCRF.process(vector_Mat src;Mat dst[/O];Mat times)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_crf_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateCRF|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 53,
+          "upstreamIdentity": "cv.CalibrateDebevec.getLambda()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_get_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Single Lambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.CalibrateDebevec.setLambda(float lambda)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_set_lambda"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Single Lambda"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.CalibrateDebevec.getSamples()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_get_samples"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Int32 Samples"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.CalibrateDebevec.setSamples(int samples)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_set_samples"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Int32 Samples"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.CalibrateDebevec.getRandom()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_get_random"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Boolean Random"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.CalibrateDebevec.setRandom(bool random)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_set_random"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Boolean Random"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.createCalibrateDebevec(int samples=70;float lambda=10.0f;bool random=false)-\u003EPtr\u003CCalibrateDebevec\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_debevec_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|method|public;static|OpenCvSharp.Photo.CalibrateDebevec Create(System.Int32 samples=70,System.Single lambda=10,System.Boolean random=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.CalibrateRobertson.getMaxIter()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_robertson_get_max_iter"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Int32 MaxIter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.CalibrateRobertson.setMaxIter(int max_iter)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_robertson_set_max_iter"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Int32 MaxIter"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.CalibrateRobertson.getThreshold()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_robertson_get_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Single Threshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.CalibrateRobertson.setThreshold(float threshold)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_robertson_set_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Single Threshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.CalibrateRobertson.getRadiance()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_robertson_get_radiance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|method|public;instance|OpenCvSharp.Core.Mat GetRadiance()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 66,
+          "upstreamIdentity": "cv.createCalibrateRobertson(int max_iter=30;float threshold=0.01f)-\u003EPtr\u003CCalibrateRobertson\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_calibrate_robertson_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|method|public;static|OpenCvSharp.Photo.CalibrateRobertson Create(System.Int32 maxIter=30,System.Single threshold=0.01)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 68,
+          "upstreamIdentity": "cv.MergeExposures.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 70,
+          "upstreamIdentity": "cv.MergeDebevec.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 71,
+          "upstreamIdentity": "cv.MergeDebevec.process(vector_Mat src;Mat dst[/O];Mat times)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeDebevec|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 72,
+          "upstreamIdentity": "cv.createMergeDebevec()-\u003EPtr\u003CMergeDebevec\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_debevec_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeDebevec|method|public;static|OpenCvSharp.Photo.MergeDebevec Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 74,
+          "upstreamIdentity": "cv.MergeMertens.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 75,
+          "upstreamIdentity": "cv.MergeMertens.process(vector_Mat src;Mat dst[/O])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 76,
+          "upstreamIdentity": "cv.MergeMertens.getContrastWeight()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_get_contrast_weight"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ContrastWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 77,
+          "upstreamIdentity": "cv.MergeMertens.setContrastWeight(float contrast_weiht)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_set_contrast_weight"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ContrastWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 78,
+          "upstreamIdentity": "cv.MergeMertens.getSaturationWeight()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_get_saturation_weight"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single SaturationWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 79,
+          "upstreamIdentity": "cv.MergeMertens.setSaturationWeight(float saturation_weight)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_set_saturation_weight"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single SaturationWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 80,
+          "upstreamIdentity": "cv.MergeMertens.getExposureWeight()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_get_exposure_weight"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ExposureWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 81,
+          "upstreamIdentity": "cv.MergeMertens.setExposureWeight(float exposure_weight)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_set_exposure_weight"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ExposureWeight"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 82,
+          "upstreamIdentity": "cv.createMergeMertens(float contrast_weight=1.0f;float saturation_weight=1.0f;float exposure_weight=0.0f)-\u003EPtr\u003CMergeMertens\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_mertens_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeMertens|method|public;static|OpenCvSharp.Photo.MergeMertens Create(System.Single contrastWeight=1,System.Single saturationWeight=1,System.Single exposureWeight=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 84,
+          "upstreamIdentity": "cv.MergeRobertson.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 85,
+          "upstreamIdentity": "cv.MergeRobertson.process(vector_Mat src;Mat dst[/O];Mat times)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_exposures_process"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeRobertson|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        },
+        {
+          "ordinal": 86,
+          "upstreamIdentity": "cv.createMergeRobertson()-\u003EPtr\u003CMergeRobertson\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_merge_robertson_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.MergeRobertson|method|public;static|OpenCvSharp.Photo.MergeRobertson Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-hdr-workflow-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "photo-ccm-structured-parity",
+      "rationale": "The selected batch closes gamma correction and the complete parser-emitted ColorCorrectionModel construction, configuration, compute, correction, getter, persistence, and lifetime surface with deterministic offline colors.",
+      "declarations": [
+        {
+          "ordinal": 106,
+          "upstreamIdentity": "cv.ccm.gammaCorrection(Mat src;Mat dst[/O];double gamma)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_gamma_correction"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void GammaCorrection(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double gamma)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 108,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_create",
+            "jyppx_ocv_photo_ccm_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 109,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;int constColor[/C])-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_create_color_checker",
+            "jyppx_ocv_photo_ccm_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create(OpenCvSharp.Core.Mat src,OpenCvSharp.Photo.ColorCheckerType colorChecker)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 110,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;Mat colors;ColorSpace refColorSpace)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_create_reference_colors",
+            "jyppx_ocv_photo_ccm_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat colors,OpenCvSharp.Photo.ColorSpace referenceColorSpace)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 111,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;Mat colors;ColorSpace refColorSpace;Mat coloredPatchesMask)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_create_reference_colors_masked",
+            "jyppx_ocv_photo_ccm_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat colors,OpenCvSharp.Photo.ColorSpace referenceColorSpace,OpenCvSharp.Core.Mat coloredPatchesMask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 112,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setColorSpace(ColorSpace cs)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_color_space"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetColorSpace(OpenCvSharp.Photo.ColorSpace colorSpace)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 113,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setCcmType(CcmType ccmType)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_ccm_type"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetCcmType(OpenCvSharp.Photo.CcmType ccmType)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 114,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setDistance(DistanceType distance)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_distance"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetDistance(OpenCvSharp.Photo.DistanceType distance)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 115,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setLinearization(LinearizationType linearizationType)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_linearization"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetLinearization(OpenCvSharp.Photo.LinearizationType linearization)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 116,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setLinearizationGamma(double gamma)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_linearization_gamma"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetLinearizationGamma(System.Double gamma)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 117,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setLinearizationDegree(int deg)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_linearization_degree"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetLinearizationDegree(System.Int32 degree)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 118,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setSaturatedThreshold(double lower;double upper)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_saturated_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetSaturatedThreshold(System.Double lower,System.Double upper)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 119,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setWeightsList(Mat weightsList[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_weights_list"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetWeightsList(OpenCvSharp.Core.Mat weightsList)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 120,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setWeightCoeff(double weightsCoeff)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_weight_coeff"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetWeightCoeff(System.Double weightCoeff)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 121,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setInitialMethod(InitialMethodType initialMethodType)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_initial_method"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetInitialMethod(OpenCvSharp.Photo.InitialMethodType initialMethod)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 122,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setMaxCount(int maxCount)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_max_count"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetMaxCount(System.Int32 maxCount)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 123,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setEpsilon(double epsilon)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_epsilon"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetEpsilon(System.Double epsilon)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 124,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.setRGB(bool rgb)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_set_rgb"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetRGB(System.Boolean rgb)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 125,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.compute()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_compute"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat Compute()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 126,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.getColorCorrectionMatrix()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_get_color_correction_matrix"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetColorCorrectionMatrix()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 127,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.getLoss()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_get_loss"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Double GetLoss()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 128,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.getSrcLinearRGB()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_get_src_linear_rgb"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetSrcLinearRGB()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 129,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.getRefLinearRGB()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_get_ref_linear_rgb"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetRefLinearRGB()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 130,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.getMask()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_get_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetMask()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 131,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.getWeights()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_get_weights"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 132,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.correctImage(Mat src;Mat dst[/O];bool islinear=false)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_correct_image"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void CorrectImage(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Boolean isLinear=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 133,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.write(FileStorage fs[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_write"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void Write(OpenCvSharp.Core.FileStorage storage)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        },
+        {
+          "ordinal": 134,
+          "upstreamIdentity": "cv.ccm.ColorCorrectionModel.read(FileNode node[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_ccm_read"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void Read(OpenCvSharp.Core.FileNode node)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-ccm-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "photo-intelligent-scissors-live-wire",
+      "rationale": "The selected batch closes the complete parser-emitted IntelligentScissorsMB configuration, feature extraction, map construction, contour retrieval, and lifetime surface with deterministic offline images.",
+      "declarations": [
+        {
+          "ordinal": 136,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.IntelligentScissorsMB()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_create",
+            "jyppx_ocv_photo_intelligent_scissors_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 137,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.setWeights(float weight_non_edge;float weight_gradient_direction;float weight_gradient_magnitude)-\u003EIntelligentScissorsMB",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_set_weights"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetWeights(System.Single weightNonEdge,System.Single weightGradientDirection,System.Single weightGradientMagnitude)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 138,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.setGradientMagnitudeMaxLimit(float gradient_magnitude_threshold_max=0.0f)-\u003EIntelligentScissorsMB",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_set_gradient_magnitude_max_limit"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetGradientMagnitudeMaxLimit(System.Single gradientMagnitudeThresholdMax=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 139,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureZeroCrossingParameters(float gradient_magnitude_min_value=0.0f)-\u003EIntelligentScissorsMB",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_set_edge_feature_zero_crossing_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetEdgeFeatureZeroCrossingParameters(System.Single gradientMagnitudeMinValue=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 140,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureCannyParameters(double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)-\u003EIntelligentScissorsMB",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_set_edge_feature_canny_parameters"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetEdgeFeatureCannyParameters(System.Double threshold1,System.Double threshold2,System.Int32 apertureSize=3,System.Boolean l2Gradient=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 141,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.applyImage(Mat image)-\u003EIntelligentScissorsMB",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_apply_image"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB ApplyImage(OpenCvSharp.Core.Mat image)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 142,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.applyImageFeatures(Mat non_edge;Mat gradient_direction;Mat gradient_magnitude;Mat image=Mat())-\u003EIntelligentScissorsMB",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_apply_image_features"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB ApplyImageFeatures(OpenCvSharp.Core.Mat? nonEdge,OpenCvSharp.Core.Mat? gradientDirection,OpenCvSharp.Core.Mat? gradientMagnitude,OpenCvSharp.Core.Mat? image=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 143,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.buildMap(Point sourcePt[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_build_map"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|System.Void BuildMap(OpenCvSharp.Core.Point sourcePoint)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        },
+        {
+          "ordinal": 144,
+          "upstreamIdentity": "cv.segmentation.IntelligentScissorsMB.getContour(Point targetPt[/C,/Ref];Mat contour[/O];bool backward=false)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_photo_intelligent_scissors_get_contour"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|System.Void GetContour(OpenCvSharp.Core.Point targetPoint,OpenCvSharp.Core.Mat contour,System.Boolean backward=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/photo-intelligent-scissors-guide.md"
+        }
+      ]
+    }
+  ]
+}

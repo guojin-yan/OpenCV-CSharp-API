@@ -17,7 +17,7 @@ The first native wrapper scope is intentionally small:
 | dnn | `Net`, model path/buffer loading, input, single/multi-output forward, layer names/metadata, profile/FLOPS, blob helpers | Requires `opencv_dnn`; real forward depends on user-supplied model files |
 | stitching | `Stitcher`, mode/status, properties, stitch/estimate/compose, component/camera/result-mask output | Requires `opencv_stitching`; real success depends on image overlap and feature quality |
 | objdetect | `QRCodeDetector`, `BarcodeDetector`, `QRCodeDetectorAruco`, `QRCodeEncoder`, ArUco dictionary/detector/grid board/ChArUco, MCC checker detector/checker, `FaceDetectorYN`, `FaceRecognizerSF` | Main OpenCV object-detection surface; face and future MCC DNN workflows require OpenCV DNN and external model files |
-| photo | `Inpaint`, single-frame and multi-frame fast NLM denoise, decolor, seamless/editing, edge-preserving/sketch/stylization, `Tonemap`, `TonemapDrago`, `TonemapReinhard`, `TonemapMantiuk` | Main OpenCV photo surface; HDR tonemap and editing behavior depends on input type and range |
+| photo | `Inpaint`, single-frame and multi-frame fast NLM denoise, decolor, seamless/editing, edge-preserving/sketch/stylization, tonemap/HDR objects, CPU CCM, and `IntelligentScissorsMB` | Main OpenCV photo surface; HDR, correction, contour, and editing behavior depends on input type, range, and state |
 | calib | full camera calibration and stereo calibration | Current OpenCV 5.0.0 split calibration module, staged as the factual OpenCV 5.0.0 runtime artifact `opencv_calib500.dll` |
 | xobjdetect | `CascadeClassifier`, `HOGDescriptor` | Optional contrib module; exported ABI returns `NOT_LINKED` when unavailable |
 | ptcloud | depth/RGB-D functions and `RgbdNormals` | Main OpenCV module; depth behavior depends on intrinsics, depth units, and input type |
@@ -98,7 +98,7 @@ native 项目支持两种构建模式：
 - Stub mode: default mode used when OpenCV has not been built or installed. ABI shape and smoke tests still build, but OpenCV-backed APIs return `OPENCV_CSHARP_STATUS_NOT_LINKED`.
 - OpenCV mode: pass the version-neutral `-DOPENCV_CSHARP_OPENCV_DIR=<path-to-OpenCVConfig.cmake-directory>` CMake variable to link against the current OpenCV 5.0.0 build. The older `OPENCV5SHARP_OPENCV_DIR` variable remains accepted only as an existing-build-script compatibility alias.
 - ObjDetect mode: OpenCV mode requires `opencv_objdetect` for QR, barcode, QR encoder, ArUco, GridBoard, ChArUco, and MCC checker APIs. `FaceDetectorYN`, `FaceRecognizerSF`, and future DNN-assisted MCC workflows also require `opencv_dnn` and user-supplied model files.
-- Photo mode: OpenCV mode requires `opencv_photo` for inpainting, single-frame and multi-frame denoising, seamless/editing, edge-preserving/sketch/stylization, and tonemap APIs.
+- Photo mode: OpenCV mode requires `opencv_photo` for inpainting, denoising, seamless/editing, edge-preserving/sketch/stylization, tonemap/HDR APIs, gamma correction, `ColorCorrectionModel`, and `IntelligentScissorsMB`.
 - Calib mode: OpenCV mode requires `opencv_calib` for full `CalibrateCamera` and `StereoCalibrate` APIs. Existing stereo geometry still stages `opencv_stereo`.
 - Video mode: OpenCV mode requires `opencv_video` for optical flow, `.flo` optical-flow file IO, mean-shift/CamShift, optical-flow pyramids, background subtractors, and `KalmanFilter`.
 - DNN mode: OpenCV mode requires `opencv_dnn` for `Net`, blob helpers, model loading, single/multi-output forward passes, metadata/profile/FLOPS helpers, and real model execution.
@@ -184,9 +184,9 @@ Ownership rules:
 
 ## ObjDetect ABI / ObjDetect ABI
 
-The first ObjDetect batch follows the same opaque-handle rule and keeps OpenCV DNN objects behind native handles. It does not expose `cv::Ptr`, `std::vector`, `cv::InputArray`, or `cv::OutputArray` through exported signatures.
+The ObjDetect boundary follows the same opaque-handle rule and keeps OpenCV DNN objects behind native handles. It does not expose `cv::Ptr`, `std::vector`, `cv::InputArray`, or `cv::OutputArray` through exported signatures.
 
-第一批 ObjDetect 遵循相同的不透明句柄规则，并将 OpenCV DNN 对象隐藏在 native 句柄之后。导出签名不会暴露 `cv::Ptr`、`std::vector`、`cv::InputArray` 或 `cv::OutputArray`。
+ObjDetect 边界遵循相同的不透明句柄规则，并将 OpenCV DNN 对象隐藏在 native 句柄之后。导出签名不会暴露 `cv::Ptr`、`std::vector`、`cv::InputArray` 或 `cv::OutputArray`。
 
 Implemented ObjDetect ABI groups:
 
@@ -206,6 +206,7 @@ Implemented ObjDetect ABI groups:
 - `CChecker`: create/release, target get/set, box get/set, color-chart centers, RGB/YCbCr Mat get/set, cost get/set, and center get/set.
 - `FaceDetectorYN`: create from model path, create from model/config buffers, release, input-size get/set, score-threshold get/set, NMS-threshold get/set, topK get/set, and detect.
 - `FaceRecognizerSF`: create from model path, create from model/config buffers, release, align/crop, feature extraction, and feature match.
+- Structured parity additions: dictionary extension, generic `ArucoBoard` value ownership, multi-dictionary detection, marker/diamond drawing, QR byte-preserving decode, MCC `Net` creation and DNN controls, QR ArUco parameters, ChArUco detector/refine parameters, diamond detection, and advanced chessboard SB/meta/sharpness/4-quad helpers.
 - String output uses length/fill pairs so the caller owns the UTF-8 buffer allocation.
 - Multi-string output uses count/fill pairs with offset and byte buffers, keeping STL containers inside the native boundary.
 
@@ -223,6 +224,7 @@ Implemented ObjDetect ABI groups:
 - `CChecker`：创建/释放、target get/set、box get/set、色块中心、RGB/YCbCr Mat get/set、cost get/set 和 center get/set。
 - `FaceDetectorYN`：通过模型路径创建、通过模型/配置缓冲创建、释放、输入尺寸 get/set、分数阈值 get/set、NMS 阈值 get/set、topK get/set 和 detect。
 - `FaceRecognizerSF`：通过模型路径创建、通过模型/配置缓冲创建、释放、对齐裁剪、特征提取和特征匹配。
+- 结构化 parity 增量：dictionary extension、generic `ArucoBoard` 值所有权、多字典检测、marker/diamond 绘制、QR 原始字节解码、MCC `Net` 创建与 DNN 控制、QR ArUco 参数、ChArUco detector/refine 参数、diamond 检测，以及高级 chessboard SB/meta/sharpness/4-quad helper。
 - 字符串输出使用 length/fill 双阶段接口，由调用方持有 UTF-8 缓冲区分配。
 - 多字符串输出使用 count/fill 双阶段接口和 offset/byte 缓冲区，STL 容器始终留在 native 边界内部。
 - ArUco marker corners, ChArUco marker inputs/outputs, and MCC point arrays use group offsets or flat `Point2f` buffers. Managed code receives owned array copies.
@@ -262,6 +264,9 @@ Implemented Photo ABI groups:
 
 - Functions: `Inpaint`, scalar-strength fast NLM denoising, per-channel fast NLM denoising, colored fast NLM denoising, multi-frame fast NLM denoising, multi-frame colored fast NLM denoising, `Decolor`, `SeamlessClone`, `ColorChange`, `IlluminationChange`, `TextureFlattening`, `EdgePreservingFilter`, `DetailEnhance`, `PencilSketch`, and `Stylization`.
 - Tonemap objects: opaque base handle for `cv::Tonemap` plus dedicated create/get/set functions for Drago, Reinhard, and Mantiuk derived properties.
+- HDR objects: opaque aligner, camera-response calibrator, and exposure-merger handles with caller-owned image and matrix outputs.
+- CCM: a full-profile-only opaque `ColorCorrectionModel` handle, cloned constructor/setter inputs, caller-owned copied matrix outputs, checked persistence access through Core FileStorage/FileNode accessors, and explicit release.
+- Intelligent Scissors: a full-profile-only opaque `IntelligentScissorsMB` handle with retained ref-counted custom-feature matrices, validated state transitions and coordinates, caller-owned contour output, stable `N x 1 CV_32SC2` contour layout, and explicit release.
 
 - 函数：`Inpaint`、标量强度 fast NLM 去噪、按通道 fast NLM 去噪、彩色 fast NLM 去噪、多帧 fast NLM 去噪、多帧彩色 fast NLM 去噪、`Decolor`、`SeamlessClone`、`ColorChange`、`IlluminationChange`、`TextureFlattening`、`EdgePreservingFilter`、`DetailEnhance`、`PencilSketch` 和 `Stylization`。
 - Tonemap 对象：用于 `cv::Tonemap` 的 opaque 基类句柄，以及 Drago、Reinhard 和 Mantiuk 派生属性的专用 create/get/set 函数。
@@ -298,7 +303,7 @@ Implemented Video ABI groups:
 
 ## DNN ABI / DNN ABI
 
-The `dnn` boundary keeps `cv::dnn::Net` behind an opaque handle. Model buffers and strings are caller-owned, and array outputs use count/fill pairs.
+The `dnn` boundary keeps `cv::dnn::Net`, ref-counted `cv::dnn::Layer`, and nested forward results behind separate opaque handles. Model buffers and strings are caller-owned, and variable outputs use exact count/fill pairs.
 
 `dnn` 边界将 `cv::dnn::Net` 保持在 opaque 句柄之后。模型缓冲和字符串由调用方持有，数组输出使用 count/fill 双阶段接口。
 
@@ -306,9 +311,12 @@ Implemented DNN ABI groups:
 
 已实现的 DNN ABI 分组：
 
-- `Net`: create empty, read from model/config/framework paths, read from model/config buffers, ONNX/TensorFlow/TFLite/OpenVINO convenience readers, release, empty query, backend/target setters, input setter, single and multi-output forward, layer names, unconnected output layer names/ids, input names/shapes, layer type metadata, profile timings, and FLOPS helpers.
-- Blob helpers: `BlobFromImage`, `BlobFromImages`, and `ImagesFromBlob`.
-- String arrays use offsets plus UTF-8 byte buffers; Mat arrays use caller-provided handle buffers.
+- `Net`: path/buffer ONNX, TensorFlow, TFLite, OpenVINO, and general model loading; backend/target/finalization; input, single/multi/nested forward; dump/connect/register; layer lookup; parameter get/set; shapes, FLOPS, memory, tracing, profiling, fusion, Winograd, and KV cache controls.
+- `Layer`: independently ref-counted lookup handles with explicit release and output-name indexing. Layer lifetime does not borrow the parent `Net`.
+- Blob helpers: legacy and `Image2BlobParams` preprocessing, NCHW/NHWC, crop/letterbox, rectangle projection, and `ImagesFromBlob`.
+- Strings use strict UTF-8 and owned Core result handles. String arrays, detailed profile columns, shapes, targets, and layer ids use exact count/fill or packed offset/value buffers.
+- Nested forward results use a temporary opaque group handle. Each returned Mat becomes independently owned; partial native and managed conversion failures release all created handles.
+- KV cache calls reject graphs without a New-engine `mainGraph` before entering OpenCV's cache manager, preventing the upstream Classic-engine null dereference.
 
 - `Net`：创建空网络、通过模型/配置/framework 路径读取、通过模型/配置缓冲读取、ONNX/TensorFlow/TFLite/OpenVINO 便捷读取、释放、empty 查询、backend/target setter、input setter、单输出和多输出 forward、层名称、未连接输出层名称/id、输入名称/形状、layer type 元数据、profile 耗时和 FLOPS helper。
 - Blob helper：`BlobFromImage`、`BlobFromImages` 和 `ImagesFromBlob`。
@@ -886,6 +894,6 @@ Runtime packages are named generically as `JYPPX.OpenCV.runtime.<rid>` for full 
 
 runtime 包使用通用命名：full build 为 `JYPPX.OpenCV.runtime.<rid>`，mini build 为 `JYPPX.OpenCV.runtime.<rid>.mini`。当前具体 runtime 包骨架位于 `packaging/runtime/JYPPX.OpenCV.runtime`。
 
-For runtime package selection, local native runtime fallback, linked validation, and license layout, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Runtime Licenses](runtime-licenses.md), and [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
+For runtime package selection, local native runtime fallback, linked validation, and license layout, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Runtime Licenses](runtime-licenses.md), and [runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-runtime package 选择、local native runtime fallback、linked 验证和 license 布局见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
+runtime package 选择、local native runtime fallback、linked 验证和 license 布局见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md)。

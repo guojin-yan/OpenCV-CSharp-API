@@ -46,6 +46,23 @@ namespace OpenCvSharp.Tests.Core
         }
 
         [Fact]
+        public void NativeOpenCvVersionMatchesManagedTargetWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            Assert.Equal(OpenCvSharpBuildInfo.OpenCvVersion, OpenCvSharpBuildInfo.GetNativeOpenCvVersion());
+            Assert.True(OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible());
+            OpenCvSharpBuildInfo.VerifyNativeOpenCvVersionCompatibility();
+
+            Assert.Equal(OpenCvSharpBuildInfo.GetNativeOpenCvVersion(), OpenCv5SharpBuildInfo.GetNativeOpenCvVersion()); // compatibility facade
+            Assert.Equal(OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible(), OpenCv5SharpBuildInfo.IsNativeOpenCvVersionCompatible()); // compatibility facade
+            OpenCv5SharpBuildInfo.VerifyNativeOpenCvVersionCompatibility(); // compatibility facade
+        }
+
+        [Fact]
         public void TestEnvironmentPrefersNeutralVariableNames()
         {
             Assert.Equal("OPENCV_CSHARP_NATIVE_SMOKE", TestEnvironment.NativeSmokeVariable);

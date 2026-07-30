@@ -55,6 +55,26 @@ namespace OpenCvSharp.VideoIO
         }
 
         /// <summary>
+        /// Initializes and opens a video writer with parameter pairs.
+        /// 使用参数对初始化并打开视频写入器。
+        /// </summary>
+        public VideoWriter(string filename, int fourcc, double fps, Size frameSize, params int[] parameters)
+            : this()
+        {
+            Open(filename, fourcc, fps, frameSize, parameters);
+        }
+
+        /// <summary>
+        /// Initializes and opens a video writer with a preferred backend and parameter pairs.
+        /// 使用首选后端和参数对初始化并打开视频写入器。
+        /// </summary>
+        public VideoWriter(string filename, VideoCaptureAPIs apiPreference, int fourcc, double fps, Size frameSize, params int[] parameters)
+            : this()
+        {
+            Open(filename, apiPreference, fourcc, fps, frameSize, parameters);
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this object has been disposed.
         /// 获取此对象是否已经释放。
         /// </summary>
@@ -214,6 +234,53 @@ namespace OpenCvSharp.VideoIO
         }
 
         /// <summary>
+        /// Opens a video writer with parameter pairs.
+        /// 使用参数对打开视频写入器。
+        /// </summary>
+        public bool Open(string filename, int fourcc, double fps, Size frameSize, params int[] parameters)
+        {
+            ThrowIfDisposed();
+            ValidateFrameSize(frameSize);
+            int[] nativeParameters = NormalizeParameters(parameters);
+            byte[] nativeFilename = VideoIOStringConvert.ToNullTerminatedUtf8(filename, nameof(filename));
+            NativeException.ThrowIfError(NativeMethods.VideoWriterOpenParams(
+                NativeHandle,
+                nativeFilename,
+                fourcc,
+                fps,
+                frameSize.Width,
+                frameSize.Height,
+                nativeParameters,
+                nativeParameters.Length,
+                out int opened));
+            return opened != 0;
+        }
+
+        /// <summary>
+        /// Opens a video writer with a preferred backend and parameter pairs.
+        /// 使用首选后端和参数对打开视频写入器。
+        /// </summary>
+        public bool Open(string filename, VideoCaptureAPIs apiPreference, int fourcc, double fps, Size frameSize, params int[] parameters)
+        {
+            ThrowIfDisposed();
+            ValidateFrameSize(frameSize);
+            int[] nativeParameters = NormalizeParameters(parameters);
+            byte[] nativeFilename = VideoIOStringConvert.ToNullTerminatedUtf8(filename, nameof(filename));
+            NativeException.ThrowIfError(NativeMethods.VideoWriterOpenApiParams(
+                NativeHandle,
+                nativeFilename,
+                (int)apiPreference,
+                fourcc,
+                fps,
+                frameSize.Width,
+                frameSize.Height,
+                nativeParameters,
+                nativeParameters.Length,
+                out int opened));
+            return opened != 0;
+        }
+
+        /// <summary>
         /// Releases the current writer target.
         /// 释放当前写入目标。
         /// </summary>
@@ -364,6 +431,27 @@ namespace OpenCvSharp.VideoIO
             {
                 throw new ArgumentOutOfRangeException(parameterName, "FourCC characters must be in the byte range 0..255.");
             }
+        }
+
+        private static void ValidateFrameSize(Size frameSize)
+        {
+            if (frameSize.Width <= 0 || frameSize.Height <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(frameSize), "Frame size must be positive.");
+            }
+        }
+
+        private static int[] NormalizeParameters(int[]? parameters)
+        {
+            if (parameters == null || parameters.Length == 0)
+            {
+                return Array.Empty<int>();
+            }
+            if ((parameters.Length & 1) != 0)
+            {
+                throw new ArgumentException("VideoIO parameters must contain key/value pairs.", nameof(parameters));
+            }
+            return parameters;
         }
 
         private static void ValidateNotNull<T>(T value, string parameterName)

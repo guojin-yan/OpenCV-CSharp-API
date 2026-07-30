@@ -92,7 +92,7 @@ namespace OpenCvSharp.XImgProc
                 EdgeAwareInterpolator.ValidateSparseMatchImage(toImage, nameof(toImage));
             }
 
-            NativeException.ThrowIfError(NativeMethods.XImgProcRICInterpolatorInterpolate(NativeHandle, fromImage.NativeHandle, fromPoints.NativeHandle, toImage.NativeHandle, toPoints.NativeHandle, denseFlow.NativeHandle));
+            NativeException.ThrowIfError(NativeMethods.XImgProcSparseMatchInterpolatorInterpolate(NativeHandle, fromImage.NativeHandle, fromPoints.NativeHandle, toImage.NativeHandle, toPoints.NativeHandle, denseFlow.NativeHandle));
         }
 
         /// <summary>Sets an explicit cost map. 设置显式 cost map。</summary>

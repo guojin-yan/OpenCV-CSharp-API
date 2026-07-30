@@ -117,6 +117,11 @@ namespace OpenCvSharp.Tests.XImgProc
                     Assert.Throws<ArgumentException>(() => XImgProcCv2.JointBilateralFilter(jointBilateralSizeMismatch, jointBilateralGray, 3, 10.0, 3.0));
                     Assert.Throws<ArgumentException>(() => XImgProcCv2.JointBilateralFilter(jointBilateralDepthMismatch, jointBilateralGray, mat, 3, 10.0, 3.0));
                     Assert.Throws<ArgumentException>(() => XImgProcCv2.JointBilateralFilter(jointBilateralDepthMismatch, jointBilateralGray, 3, 10.0, 3.0));
+                    if (!IsXImgProcModuleLinked())
+                    {
+                        return;
+                    }
+
                     using (Mat jointBilateralFallback = XImgProcCv2.JointBilateralFilter(jointBilateralEmpty, jointBilateralGray, 3, 10.0, 3.0))
                     using (Mat jointBilateralSelf = XImgProcCv2.JointBilateralFilter(jointBilateralGray, jointBilateralGray, 3, 10.0, 3.0))
                     using (Mat jointBilateralFiltered = XImgProcCv2.JointBilateralFilter(jointBilateralColor, jointBilateralColorSource, -1, 0.0, -1.0))
@@ -1164,6 +1169,11 @@ namespace OpenCvSharp.Tests.XImgProc
         [Fact]
         public void EdgeBoxesRejectsNonFloatMaps()
         {
+            if (!IsXImgProcModuleLinked())
+            {
+                return;
+            }
+
             using (var edgeMap = new Mat(8, 8, MatType.CV_32FC1, new Scalar(0.1)))
             using (var orientationMap = new Mat(8, 8, MatType.CV_32FC1, new Scalar(0.0)))
             using (var badEdgeMap = new Mat(edgeMap.Rows, edgeMap.Cols, MatType.CV_8UC1, new Scalar(1)))
@@ -1178,6 +1188,11 @@ namespace OpenCvSharp.Tests.XImgProc
         [Fact]
         public void ScanSegmentRejectsInvalidIterateImages()
         {
+            if (!IsXImgProcModuleLinked())
+            {
+                return;
+            }
+
             using (var color = CreateColorImage())
             using (var empty = new Mat())
             using (var sizeMismatch = new Mat(color.Rows / 2, color.Cols / 2, MatType.CV_8UC3, new Scalar(0, 0, 0)))
@@ -1195,6 +1210,11 @@ namespace OpenCvSharp.Tests.XImgProc
         [Fact]
         public void SuperpixelSEEDSRejectsInvalidIterateImages()
         {
+            if (!IsXImgProcModuleLinked())
+            {
+                return;
+            }
+
             using (var color = CreateColorImage())
             using (var empty = new Mat())
             using (var sizeMismatch = new Mat(color.Rows / 2, color.Cols / 2, MatType.CV_8UC3, new Scalar(0, 0, 0)))
@@ -1218,6 +1238,11 @@ namespace OpenCvSharp.Tests.XImgProc
         [Fact]
         public void SuperpixelSLICRejectsInvalidInputs()
         {
+            if (!IsXImgProcModuleLinked())
+            {
+                return;
+            }
+
             using (var color = CreateColorImage())
             using (var empty = new Mat())
             using (var slic = SuperpixelSLIC.Create(color, SLICType.SLICO, 8, 10.0F))
@@ -1253,6 +1278,11 @@ namespace OpenCvSharp.Tests.XImgProc
         [Fact]
         public void FastLineDetectorRejectsInvalidDrawSegmentImages()
         {
+            if (!IsXImgProcModuleLinked())
+            {
+                return;
+            }
+
             using (var detector = FastLineDetector.Create(lengthThreshold: 6, cannyApertureSize: 3))
             using (var empty = new Mat())
             using (var invalidChannels = new Mat(8, 8, MatType.CV_8UC2, new Scalar(0)))
@@ -1270,6 +1300,11 @@ namespace OpenCvSharp.Tests.XImgProc
         [Fact]
         public void FastLineDetectorRejectsInvalidDrawSegmentLines()
         {
+            if (!IsXImgProcModuleLinked())
+            {
+                return;
+            }
+
             using (var detector = FastLineDetector.Create(lengthThreshold: 6, cannyApertureSize: 3))
             using (var image = new Mat(8, 8, MatType.CV_8UC3, new Scalar(0, 0, 0)))
             using (var emptyLines = new Mat())
@@ -1706,6 +1741,23 @@ namespace OpenCvSharp.Tests.XImgProc
                 new Point2f(3.0F, 13.0F),
                 new Point2f(14.0F, 13.0F)
             };
+        }
+
+        private static bool IsXImgProcModuleLinked()
+        {
+            try
+            {
+                using (FastLineDetector.Create(lengthThreshold: 6, cannyApertureSize: 3))
+                {
+                    return true;
+                }
+            }
+            catch (OpenCvException ex) when (
+                ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Assert.Contains("NOT_LINKED", ex.Message, StringComparison.OrdinalIgnoreCase);
+                return false;
+            }
         }
 
         private static int FieldOffset<T>(string fieldName)

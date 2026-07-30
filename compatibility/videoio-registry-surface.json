@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/videoio/registry.hpp public CV_EXPORTS_W functions",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/videoio/include/opencv2/videoio/registry.hpp",
+  "headerSha256": "8471f25b7c501b797ab01e8531d36b4250c929d1533da7e75da2024cbf46180c",
+  "reviewStatus": "implemented-verified",
+  "operations": [
+    {
+      "upstreamName": "getBackendName",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_backend_name_fill",
+        "jyppx_ocv_videoio_registry_get_backend_name_length"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|System.String GetBackendName(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    },
+    {
+      "upstreamName": "getBackends",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_backends_count",
+        "jyppx_ocv_videoio_registry_get_backends_fill"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoCaptureAPIs[] GetBackends()"
+    },
+    {
+      "upstreamName": "getCameraBackends",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_camera_backends_count",
+        "jyppx_ocv_videoio_registry_get_camera_backends_fill"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoCaptureAPIs[] GetCameraBackends()"
+    },
+    {
+      "upstreamName": "getStreamBackends",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_stream_backends_count",
+        "jyppx_ocv_videoio_registry_get_stream_backends_fill"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoCaptureAPIs[] GetStreamBackends()"
+    },
+    {
+      "upstreamName": "getStreamBufferedBackends",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_stream_buffered_backends_count",
+        "jyppx_ocv_videoio_registry_get_stream_buffered_backends_fill"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoCaptureAPIs[] GetStreamBufferedBackends()"
+    },
+    {
+      "upstreamName": "getWriterBackends",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_writer_backends_count",
+        "jyppx_ocv_videoio_registry_get_writer_backends_fill"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoCaptureAPIs[] GetWriterBackends()"
+    },
+    {
+      "upstreamName": "hasBackend",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_has_backend"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|System.Boolean HasBackend(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    },
+    {
+      "upstreamName": "isBackendBuiltIn",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_is_backend_built_in"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|System.Boolean IsBackendBuiltIn(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    },
+    {
+      "upstreamName": "getCameraBackendPluginVersion",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_camera_plugin_version_fill",
+        "jyppx_ocv_videoio_registry_get_camera_plugin_version_length"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoIOPluginVersion GetCameraPluginVersion(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    },
+    {
+      "upstreamName": "getStreamBackendPluginVersion",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_stream_plugin_version_fill",
+        "jyppx_ocv_videoio_registry_get_stream_plugin_version_length"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoIOPluginVersion GetStreamPluginVersion(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    },
+    {
+      "upstreamName": "getStreamBufferedBackendPluginVersion",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_stream_buffered_plugin_version_fill",
+        "jyppx_ocv_videoio_registry_get_stream_buffered_plugin_version_length"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoIOPluginVersion GetStreamBufferedPluginVersion(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    },
+    {
+      "upstreamName": "getWriterBackendPluginVersion",
+      "nativeEntrypoints": [
+        "jyppx_ocv_videoio_registry_get_writer_plugin_version_fill",
+        "jyppx_ocv_videoio_registry_get_writer_plugin_version_length"
+      ],
+      "managedMember": "MEMBER|OpenCvSharp.VideoIO.VideoIORegistry|method|public;static|OpenCvSharp.VideoIO.VideoIOPluginVersion GetWriterPluginVersion(OpenCvSharp.VideoIO.VideoCaptureAPIs api)"
+    }
+  ]
+}

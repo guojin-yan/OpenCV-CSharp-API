@@ -50,9 +50,9 @@ For package-local license layout and source-input details, see the `packaging/ru
 
 包内 license 布局和源输入细节见`packaging/runtime/JYPPX.OpenCV.runtime/README.md`。
 
-Consumer install and package selection start in the [Quick Start](quick-start.md). Local native runtime fallback and staging are covered by the [Linked Runtime Build Guide](linked-runtime-build-guide.md), linked validation is covered by the [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), and package-local metadata is documented in the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
+Consumer install and package selection start in the [Quick Start](quick-start.md). Local native runtime fallback and staging are covered by the [Linked Runtime Build Guide](linked-runtime-build-guide.md), linked validation is covered by the [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), and package-local metadata is documented in the [runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-consumer 安装和 package 选择从 [Quick Start](quick-start.md) 开始。local native runtime fallback 与 staging 见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)，linked 验证见 [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)，包内元数据见[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
+consumer 安装和 package 选择从 [Quick Start](quick-start.md) 开始。local native runtime fallback 与 staging 见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)，linked 验证见 [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)，包内元数据见[runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 ## Image Codec Dependencies
 

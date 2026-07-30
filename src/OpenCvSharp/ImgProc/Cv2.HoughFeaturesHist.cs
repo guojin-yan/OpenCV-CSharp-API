@@ -68,6 +68,20 @@ namespace OpenCvSharp.ImgProc
             return new LineSegmentDetector(nativeHandle);
         }
 
+        /// <summary>Creates a translation-only generalized Hough detector. 创建仅检测平移的广义霍夫检测器。</summary>
+        public static GeneralizedHoughBallard CreateGeneralizedHoughBallard()
+        {
+            NativeException.ThrowIfError(NativeMethods.ImgProcGeneralizedHoughBallardCreate(out IntPtr nativeHandle));
+            return new GeneralizedHoughBallard(nativeHandle);
+        }
+
+        /// <summary>Creates a position, scale, and rotation generalized Hough detector. 创建检测位置、缩放和旋转的广义霍夫检测器。</summary>
+        public static GeneralizedHoughGuil CreateGeneralizedHoughGuil()
+        {
+            NativeException.ThrowIfError(NativeMethods.ImgProcGeneralizedHoughGuilCreate(out IntPtr nativeHandle));
+            return new GeneralizedHoughGuil(nativeHandle);
+        }
+
         /// <summary>
         /// Refines corner locations to sub-pixel accuracy.
         /// 将角点位置细化到亚像素精度。

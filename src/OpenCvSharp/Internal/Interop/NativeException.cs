@@ -18,6 +18,12 @@ namespace OpenCvSharp.Internal.Interop
                 message = "Native OpenCV call failed with status " + status + ".";
             }
 
+            if (status == NativeStatus.NotLinked &&
+                message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                message = "NOT_LINKED: " + message;
+            }
+
             throw new OpenCvException(message);
         }
 
@@ -37,4 +43,3 @@ namespace OpenCvSharp.Internal.Interop
         }
     }
 }
-

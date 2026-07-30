@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using OpenCvSharp.Core;
 using OpenCvSharp.VideoIO;
 
@@ -215,6 +216,50 @@ namespace OpenCvSharp.Tests.VideoIO
             Assert.Throws<ObjectDisposedException>(() => writer.Quality);
             Assert.Throws<ObjectDisposedException>(() => writer.Quality = 90.0);
             Assert.Throws<ObjectDisposedException>(() => writer.GetBackendName());
+        }
+
+        [Fact]
+        public void WaitAnyValidatesCaptureCollectionBeforeNativeCall()
+        {
+            Assert.Throws<ArgumentException>(() => VideoCapture.WaitAny(Array.Empty<VideoCapture>(), out _));
+            Assert.Throws<ArgumentNullException>(() => VideoCapture.WaitAny(null!, out _));
+        }
+
+        [Fact]
+        public void VideoIOParameterPairsRejectOddLength()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var capture = new VideoCapture())
+            using (var writer = new VideoWriter())
+            {
+                Assert.Throws<ArgumentException>(() => capture.Open(-1, VideoCaptureAPIs.Any, 1));
+                Assert.Throws<ArgumentException>(() => writer.Open("out.avi", VideoWriter.FourCC("MJPG"), 30.0, new Size(16, 16), 1));
+            }
+        }
+
+        [Fact]
+        public void ManagedStreamReaderRoundTripsReadAndSeek()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var stream = new MemoryStream(new byte[] { 10, 20, 30, 40 }))
+            using (var reader = new VideoStreamReader(stream, leaveOpen: true))
+            {
+                var buffer = new byte[2];
+                Assert.Equal(2, reader.Read(buffer, 0, buffer.Length));
+                Assert.Equal(new byte[] { 10, 20 }, buffer);
+                Assert.Equal(3, reader.Seek(1, SeekOrigin.Current));
+                var final = new byte[1];
+                Assert.Equal(1, reader.Read(final, 0, final.Length));
+                Assert.Equal(40, final[0]);
+            }
         }
 
     }

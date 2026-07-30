@@ -7,7 +7,8 @@ param(
     [string]$SelectedRid = "",
     [string]$SelectedRuntimeProfile = "",
     [switch]$CompileNativeSmoke,
-    [switch]$RunNativeSmoke
+    [switch]$RunNativeSmoke,
+    [string]$NativeExecutionHost = ""
 )
 
 Set-StrictMode -Version Latest
@@ -402,6 +403,7 @@ internal static class Program
     {
         try
         {
+__TARGET_PROCESS_ARCHITECTURE_GUARD__
             using var source = new Mat(3, 4, MatType.CV_8UC3, new Scalar(10, 20, 30));
             using var gray = new Mat();
             OpenCvSharp.ImgProc.Cv2.CvtColor(source, gray, OpenCvSharp.ImgProc.ColorConversionCodes.BGR2GRAY);
@@ -456,7 +458,35 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
 '@
 
         $profileSpecificNativeSmoke = ""
+        $targetProcessArchitectureGuard = ""
         $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio"
+        if ($Rid -eq "win-x86") {
+            $targetProcessArchitectureGuard = @'
+            string processorArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") ?? "";
+            string processorArchitectureWow64 = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432") ?? "";
+            if (RuntimeInformation.ProcessArchitecture != Architecture.X86 ||
+                RuntimeInformation.OSArchitecture != Architecture.X64 ||
+                Environment.Is64BitProcess ||
+                !Environment.Is64BitOperatingSystem ||
+                !string.Equals(processorArchitecture, "x86", StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(processorArchitectureWow64, "AMD64", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.Error.WriteLine("WINDOWS_X86_PROCESS_ARCHITECTURE_FAILED OSArchitecture=" + RuntimeInformation.OSArchitecture +
+                    " ProcessArchitecture=" + RuntimeInformation.ProcessArchitecture +
+                    " Is64BitProcess=" + Environment.Is64BitProcess +
+                    " Is64BitOperatingSystem=" + Environment.Is64BitOperatingSystem +
+                    " PROCESSOR_ARCHITECTURE=" + processorArchitecture +
+                    " PROCESSOR_ARCHITEW6432=" + processorArchitectureWow64);
+                return 9;
+            }
+            Console.WriteLine("WINDOWS_X86_PACKAGE_CONSUMER_PROCESS_OK OSArchitecture=" + RuntimeInformation.OSArchitecture +
+                " ProcessArchitecture=" + RuntimeInformation.ProcessArchitecture +
+                " Is64BitProcess=" + Environment.Is64BitProcess +
+                " Is64BitOperatingSystem=" + Environment.Is64BitOperatingSystem +
+                " PROCESSOR_ARCHITECTURE=" + processorArchitecture +
+                " PROCESSOR_ARCHITEW6432=" + processorArchitectureWow64);
+'@
+        }
         if ($RuntimeProfile -eq "full") {
             $profileSpecificNativeSmoke = @'
             using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(source, 1.0, new Size(4, 3)))
@@ -486,6 +516,7 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
             throw "Targeted native smoke supports only full or mini profiles, got '$RuntimeProfile'."
         }
 
+        $programText = $programText.Replace("__TARGET_PROCESS_ARCHITECTURE_GUARD__", $targetProcessArchitectureGuard)
         $programText = $programText.Replace("__PROFILE_SPECIFIC_NATIVE_SMOKE__", $profileSpecificNativeSmoke)
         $programText = $programText.Replace("__TARGETED_NATIVE_SMOKE_SUCCESS__", $successMarker)
     }
@@ -581,6 +612,26 @@ if ($CompileNativeSmoke -and -not $selectedMode) {
 
 if ($RunNativeSmoke -and (-not $selectedMode -or $expectedSyntheticRuntimeInputsValue)) {
     throw "RunNativeSmoke requires one selected non-synthetic RID/profile package pair."
+}
+if ($RunNativeSmoke -and $SelectedRid -eq "win-x86" -and [string]::IsNullOrWhiteSpace($NativeExecutionHost)) {
+    throw "win-x86 native execution requires an explicit factual x86 .NET runtime host."
+}
+if (-not [string]::IsNullOrWhiteSpace($NativeExecutionHost) -and $SelectedRid -ne "win-x86") {
+    throw "NativeExecutionHost is reserved for the exact win-x86 package consumer boundary."
+}
+
+$nativeExecutionHostPath = ""
+if (-not [string]::IsNullOrWhiteSpace($NativeExecutionHost)) {
+    $nativeExecutionHostPath = if ([System.IO.Path]::IsPathRooted($NativeExecutionHost)) {
+        $NativeExecutionHost
+    }
+    else {
+        Join-Path $repo $NativeExecutionHost
+    }
+    if (-not (Test-Path -LiteralPath $nativeExecutionHostPath -PathType Leaf)) {
+        throw "NativeExecutionHost was not found: $nativeExecutionHostPath"
+    }
+    $nativeExecutionHostPath = (Resolve-Path -LiteralPath $nativeExecutionHostPath).Path
 }
 
 $managedArtifactDir = Join-Path $artifactRootFullPath "nupkg-managed"
@@ -728,6 +779,7 @@ try {
 
             $nativeSmokeSucceeded = $null
             if ($RunNativeSmoke -and $buildSucceeded) {
+                $runHost = $dotnet.Source
                 $runArguments = @(
                     "run",
                     "--project", $consumerProjectPath,
@@ -737,11 +789,23 @@ try {
                     "--no-restore",
                     "-p:RestorePackagesPath=$nugetPackagesDir"
                 )
+                if ($rid -eq "win-x86") {
+                    $consumerAssemblyCandidates = @(
+                        Get-ChildItem -LiteralPath (Join-Path $consumerDir "bin/Release/net8.0/win-x86") -File -Filter "PackageConsumer.dll"
+                    )
+                    if ($consumerAssemblyCandidates.Count -ne 1) {
+                        Add-Violation -Violations $violations -Path $consumerDir -Issue "win-x86 consumer build must produce exactly one executable managed assembly for the x86 runtime host" -Text "Found $($consumerAssemblyCandidates.Count)"
+                        $nativeSmokeSucceeded = $false
+                        continue
+                    }
+                    $runHost = $nativeExecutionHostPath
+                    $runArguments = @($consumerAssemblyCandidates[0].FullName)
+                }
                 $nativeSmokeSucceeded = Invoke-CheckedCommand `
                     -Violations $violations `
                     -Path $consumerProjectPath `
                     -Issue "Targeted GitHub artifact consumer native smoke failed; inspect loader, SONAME, RID selection, and supported profile entrypoint diagnostics" `
-                    -FilePath $dotnet.Source `
+                    -FilePath $runHost `
                     -Arguments $runArguments `
                     -EchoOutputOnSuccess
             }

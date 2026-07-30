@@ -24,6 +24,9 @@ namespace OpenCvSharp.ImgCodecs
         /// </summary>
         Color = 1,
 
+        /// <summary>Explicit BGR alias for <see cref="Color"/>. <see cref="Color"/> 的显式 BGR 别名。</summary>
+        ColorBgr = Color,
+
         /// <summary>
         /// Returns 16-bit or 32-bit image data when the input contains it.
         /// 输入包含 16 位或 32 位数据时按对应深度返回。

@@ -1,5 +1,6 @@
 using System;
 using OpenCvSharp.Core;
+using OpenCvSharp.Dnn;
 using OpenCvSharp.Internal.Interop;
 
 namespace OpenCvSharp.ObjDetect
@@ -20,6 +21,14 @@ namespace OpenCvSharp.ObjDetect
         public CCheckerDetector()
         {
             NativeException.ThrowIfError(NativeMethods.MccCheckerDetectorCreate(out IntPtr nativeHandle));
+            handle = NativeMccCheckerDetectorHandle.FromNativePointer(nativeHandle);
+        }
+
+        /// <summary>Initializes an MCC checker detector with an already loaded DNN network.</summary>
+        public CCheckerDetector(Net net)
+        {
+            ValidateNotNull(net, nameof(net));
+            NativeException.ThrowIfError(NativeMethods.MccCheckerDetectorCreateFromNet(net.NativeHandle, out IntPtr nativeHandle));
             handle = NativeMccCheckerDetectorHandle.FromNativePointer(nativeHandle);
         }
 
@@ -52,6 +61,22 @@ namespace OpenCvSharp.ObjDetect
             {
                 ThrowIfDisposed();
                 NativeException.ThrowIfError(NativeMethods.MccCheckerDetectorSetColorChartType(NativeHandle, (int)value));
+            }
+        }
+
+        /// <summary>Gets or sets whether the detector uses its DNN model path.</summary>
+        public bool UseDnnModel
+        {
+            get
+            {
+                ThrowIfDisposed();
+                NativeException.ThrowIfError(NativeMethods.MccCheckerDetectorGetUseDnnModel(NativeHandle, out int value));
+                return value != 0;
+            }
+            set
+            {
+                ThrowIfDisposed();
+                NativeException.ThrowIfError(NativeMethods.MccCheckerDetectorSetUseDnnModel(NativeHandle, value ? 1 : 0));
             }
         }
 

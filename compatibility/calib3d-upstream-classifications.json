@@ -1,0 +1,2486 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/calib3d.hpp compatibility include closure: parser-emitted geometry/2d.hpp, geometry/3d.hpp, stereo.hpp, and calib.hpp declarations",
+  "reviewStatus": "reviewed",
+  "limitation": "Declaration identities preserve parsed overload, default, direction, and type metadata. Implemented evidence correlates symbol groups across the C\u002B\u002B API, stable C ABI, and managed public API; it does not claim binary equivalence of C\u002B\u002B parameter layouts or repository-wide OpenCV parity.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.RectanglesIntersectTypes[const cv.INTERSECT_NONE=0;const cv.INTERSECT_PARTIAL=1;const cv.INTERSECT_FULL=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.DistanceTypes[const cv.DIST_USER=-1;const cv.DIST_L1=1;const cv.DIST_L2=2;const cv.DIST_C=3;const cv.DIST_L12=4;const cv.DIST_FAIR=5;const cv.DIST_WELSCH=6;const cv.DIST_HUBER=7]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "class cv.Subdiv2D",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.Subdiv2D.\u003Cunnamed\u003E[const cv.Subdiv2D.PTLOC_ERROR=-2;const cv.Subdiv2D.PTLOC_OUTSIDE_RECT=-1;const cv.Subdiv2D.PTLOC_INSIDE=0;const cv.Subdiv2D.PTLOC_VERTEX=1;const cv.Subdiv2D.PTLOC_ON_EDGE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.Subdiv2D.\u003Cunnamed\u003E[const cv.Subdiv2D.NEXT_AROUND_ORG=0x00;const cv.Subdiv2D.NEXT_AROUND_DST=0x22;const cv.Subdiv2D.PREV_AROUND_ORG=0x11;const cv.Subdiv2D.PREV_AROUND_DST=0x33;const cv.Subdiv2D.NEXT_AROUND_LEFT=0x13;const cv.Subdiv2D.NEXT_AROUND_RIGHT=0x31;const cv.Subdiv2D.PREV_AROUND_LEFT=0x20;const cv.Subdiv2D.PREV_AROUND_RIGHT=0x02]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.Subdiv2D.Subdiv2D()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_create",
+        "jyppx_ocv_calib3d_subdiv2d_create_rect",
+        "jyppx_ocv_calib3d_subdiv2d_create_rect2f"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor()",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor(OpenCvSharp.Core.Rect rect)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor(OpenCvSharp.Core.Rect2f rect)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.Subdiv2D.Subdiv2D(Rect rect)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_create",
+        "jyppx_ocv_calib3d_subdiv2d_create_rect",
+        "jyppx_ocv_calib3d_subdiv2d_create_rect2f"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor()",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor(OpenCvSharp.Core.Rect rect)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor(OpenCvSharp.Core.Rect2f rect)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.Subdiv2D.Subdiv2D(Rect2f rect2f)-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_create",
+        "jyppx_ocv_calib3d_subdiv2d_create_rect",
+        "jyppx_ocv_calib3d_subdiv2d_create_rect2f"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor()",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor(OpenCvSharp.Core.Rect rect)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|constructor|public;instance|.ctor(OpenCvSharp.Core.Rect2f rect)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.Subdiv2D.initDelaunay(Rect rect)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_init_delaunay",
+        "jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void InitDelaunay(OpenCvSharp.Core.Rect rect)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void InitDelaunay(OpenCvSharp.Core.Rect2f rect)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.Subdiv2D.initDelaunay(Rect2f rect)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_init_delaunay",
+        "jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void InitDelaunay(OpenCvSharp.Core.Rect rect)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void InitDelaunay(OpenCvSharp.Core.Rect2f rect)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.Subdiv2D.insert(Point2f pt)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_insert",
+        "jyppx_ocv_calib3d_subdiv2d_insert_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 Insert(OpenCvSharp.Core.Point2f point)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void Insert(OpenCvSharp.Core.Point2f[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void Insert(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.Subdiv2D.insert(vector_Point2f ptvec[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_insert",
+        "jyppx_ocv_calib3d_subdiv2d_insert_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 Insert(OpenCvSharp.Core.Point2f point)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void Insert(OpenCvSharp.Core.Point2f[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void Insert(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.Subdiv2D.locate(Point2f pt;int edge[/O,/Ref];int vertex[/O,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_locate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|OpenCvSharp.ImgProc.Subdiv2DPointLocation Locate(OpenCvSharp.Core.Point2f point,out System.Int32 edge,out System.Int32 vertex)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.Subdiv2D.findNearest(Point2f pt;Point2f* nearestPt=0[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_find_nearest"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 FindNearest(OpenCvSharp.Core.Point2f point,out OpenCvSharp.Core.Point2f nearestPoint)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.Subdiv2D.getEdgeList(vector_Vec4f edgeList[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_get_edge_list_count",
+        "jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|OpenCvSharp.Core.Vec4f[] GetEdgeList()"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.Subdiv2D.getLeadingEdgeList(vector_int leadingEdgeList[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_count",
+        "jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32[] GetLeadingEdgeList()"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.Subdiv2D.getTriangleList(vector_Vec6f triangleList[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_get_triangle_list_count",
+        "jyppx_ocv_calib3d_subdiv2d_get_triangle_list_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|OpenCvSharp.Core.Vec6f[] GetTriangleList()"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.Subdiv2D.getVoronoiFacetList(vector_int idx[/C,/Ref];vector_vector_Point2f facetList[/O,/Ref];vector_Point2f facetCenters[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_count",
+        "jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Void GetVoronoiFacetList(System.Int32[]? indices,out OpenCvSharp.Core.Point2f[][] facets,out OpenCvSharp.Core.Point2f[] centers)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.Subdiv2D.getVertex(int vertex;int* firstEdge=0[/O])-\u003EPoint2f",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_get_vertex"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|OpenCvSharp.Core.Point2f GetVertex(System.Int32 vertex,out System.Int32 firstEdge)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.Subdiv2D.getEdge(int edge;int nextEdgeType)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_get_edge",
+        "jyppx_ocv_calib3d_subdiv2d_get_edge_list_count",
+        "jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 GetEdge(System.Int32 edge,OpenCvSharp.ImgProc.Subdiv2DEdgeNavigation navigation)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.Subdiv2D.nextEdge(int edge)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_next_edge"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 NextEdge(System.Int32 edge)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.Subdiv2D.rotateEdge(int edge;int rotate)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_rotate_edge"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 RotateEdge(System.Int32 edge,System.Int32 rotate)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.Subdiv2D.symEdge(int edge)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_sym_edge"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 SymEdge(System.Int32 edge)"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.Subdiv2D.edgeOrg(int edge;Point2f* orgpt=0[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_edge_org"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 EdgeOrg(System.Int32 edge,out OpenCvSharp.Core.Point2f point)"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.Subdiv2D.edgeDst(int edge;Point2f* dstpt=0[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_subdiv2d_edge_dst"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Subdiv2D|method|public;instance|System.Int32 EdgeDst(System.Int32 edge,out OpenCvSharp.Core.Point2f point)"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.approxPolyDP(Mat curve;Mat approxCurve[/O];double epsilon;bool closed)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_approx_poly_dp_count",
+        "jyppx_ocv_imgproc_approx_poly_dp_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[] ApproxPolyDP(OpenCvSharp.Core.Point[] curve,System.Double epsilon,System.Boolean closed)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[] ApproxPolyDP(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E curve,System.Double epsilon,System.Boolean closed)"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.approxPolyN(Mat curve;Mat approxCurve[/O];int nsides;float epsilon_percentage=-1.0;bool ensure_convex=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_approx_poly_n_count",
+        "jyppx_ocv_imgproc_approx_poly_n_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] ApproxPolyN(OpenCvSharp.Core.Point[] curve,System.Int32 nsides,System.Single epsilonPercentage=-1,System.Boolean ensureConvex=true)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] ApproxPolyN(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E curve,System.Int32 nsides,System.Single epsilonPercentage=-1,System.Boolean ensureConvex=true)"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.minAreaRect(Mat points)-\u003ERotatedRect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_min_area_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect MinAreaRect(OpenCvSharp.Core.Point[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect MinAreaRect(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.boxPoints(RotatedRect box;Mat points[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_box_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] BoxPoints(OpenCvSharp.Core.RotatedRect box)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.minEnclosingCircle(Mat points;Point2f center[/O,/Ref];float radius[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_min_enclosing_circle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void MinEnclosingCircle(OpenCvSharp.Core.Point[] points,out OpenCvSharp.Core.Point2f center,out System.Single radius)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void MinEnclosingCircle(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,out OpenCvSharp.Core.Point2f center,out System.Single radius)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.minEnclosingTriangle(Mat points;Mat triangle[/O,/O])-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_min_enclosing_triangle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double MinEnclosingTriangle(OpenCvSharp.Core.Point[] points,out OpenCvSharp.Core.Point2f[] triangle)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double MinEnclosingTriangle(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,out OpenCvSharp.Core.Point2f[] triangle)"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.minEnclosingConvexPolygon(Mat points;Mat polygon[/O];int k)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_min_enclosing_convex_polygon"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double MinEnclosingConvexPolygon(OpenCvSharp.Core.Point[] points,System.Int32 k,out OpenCvSharp.Core.Point2f[] polygon)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double MinEnclosingConvexPolygon(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,System.Int32 k,out OpenCvSharp.Core.Point2f[] polygon)"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.moments(Mat array;bool binaryImage=false)-\u003EMoments",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_hu_moments",
+        "jyppx_ocv_imgproc_moments_mat",
+        "jyppx_ocv_imgproc_moments_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.Moments Moments(OpenCvSharp.Core.Mat array,System.Boolean binaryImage=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.Moments Moments(OpenCvSharp.Core.Point[] points,System.Boolean binaryImage=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.ImgProc.Moments Moments(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,System.Boolean binaryImage=false)"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.HuMoments(Moments m[/C,/Ref];Mat hu[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_hu_moments"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double[] HuMoments(OpenCvSharp.ImgProc.Moments moments)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.matchShapes(Mat contour1;Mat contour2;int method;double parameter)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_match_shapes"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double MatchShapes(OpenCvSharp.Core.Point[] contour1,OpenCvSharp.Core.Point[] contour2,OpenCvSharp.ImgProc.ShapeMatchModes method,System.Double parameter=0)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double MatchShapes(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E contour1,System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E contour2,OpenCvSharp.ImgProc.ShapeMatchModes method,System.Double parameter=0)"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.convexHull(Mat points;Mat hull[/O];bool clockwise=false;bool returnPoints=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_convex_hull_count",
+        "jyppx_ocv_imgproc_convex_hull_fill",
+        "jyppx_ocv_imgproc_convex_hull_indices_count",
+        "jyppx_ocv_imgproc_convex_hull_indices_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[] ConvexHull(OpenCvSharp.Core.Point[] points,System.Boolean clockwise=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point[] ConvexHull(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,System.Boolean clockwise=false)"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.convexityDefects(Mat contour;Mat convexhull;Mat convexityDefects[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_convexity_defects_count",
+        "jyppx_ocv_imgproc_convexity_defects_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Vec4i[] ConvexityDefects(OpenCvSharp.Core.Point[] contour,System.Int32[] convexHullIndices)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.isContourConvex(Mat contour)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_is_contour_convex"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Boolean IsContourConvex(OpenCvSharp.Core.Point[] contour)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Boolean IsContourConvex(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E contour)"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.intersectConvexConvex(Mat p1;Mat p2;Mat p12[/O];bool handleNested=true)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_intersect_convex_convex_count",
+        "jyppx_ocv_imgproc_intersect_convex_convex_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Single IntersectConvexConvex(OpenCvSharp.Core.Point[] polygon1,OpenCvSharp.Core.Point[] polygon2,out OpenCvSharp.Core.Point2f[] intersectingRegion,System.Boolean handleNested=true)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Single IntersectConvexConvex(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E polygon1,System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E polygon2,out OpenCvSharp.Core.Point2f[] intersectingRegion,System.Boolean handleNested=true)"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.fitEllipse(Mat points)-\u003ERotatedRect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_ellipse",
+        "jyppx_ocv_imgproc_fit_ellipse_ams",
+        "jyppx_ocv_imgproc_fit_ellipse_direct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect FitEllipse(OpenCvSharp.Core.Point[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect FitEllipse(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.fitEllipseAMS(Mat points)-\u003ERotatedRect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_ellipse_ams"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect FitEllipseAMS(OpenCvSharp.Core.Point[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect FitEllipseAMS(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.fitEllipseDirect(Mat points)-\u003ERotatedRect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_ellipse_direct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect FitEllipseDirect(OpenCvSharp.Core.Point[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.RotatedRect FitEllipseDirect(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.getClosestEllipsePoints(RotatedRect ellipse_params[/C,/Ref];Mat points;Mat closest_pts[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_closest_ellipse_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] GetClosestEllipsePoints(OpenCvSharp.Core.RotatedRect ellipseParams,OpenCvSharp.Core.Point[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] GetClosestEllipsePoints(OpenCvSharp.Core.RotatedRect ellipseParams,System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.fitLine(Mat points;Mat line[/O];int distType;double param;double reps;double aeps)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_fit_line_2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Vec4f FitLine(OpenCvSharp.Core.Point[] points,OpenCvSharp.Geometry.DistanceTypes distType,System.Double param,System.Double reps,System.Double aeps)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Vec4f FitLine(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points,OpenCvSharp.Geometry.DistanceTypes distType,System.Double param,System.Double reps,System.Double aeps)"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.pointPolygonTest(Mat contour;Point2f pt;bool measureDist)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_point_polygon_test"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double PointPolygonTest(OpenCvSharp.Core.Point[] contour,OpenCvSharp.Core.Point2f pt,System.Boolean measureDist)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double PointPolygonTest(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E contour,OpenCvSharp.Core.Point2f pt,System.Boolean measureDist)"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.rotatedRectangleIntersection(RotatedRect rect1[/C,/Ref];RotatedRect rect2[/C,/Ref];Mat intersectingRegion[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_rotated_rectangle_intersection_count",
+        "jyppx_ocv_imgproc_rotated_rectangle_intersection_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Geometry.RectanglesIntersectTypes RotatedRectangleIntersection(OpenCvSharp.Core.RotatedRect rect1,OpenCvSharp.Core.RotatedRect rect2,out OpenCvSharp.Core.Point2f[] intersectingRegion)"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.arcLength(Mat curve;bool closed)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_arc_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double ArcLength(OpenCvSharp.Core.Point[] curve,System.Boolean closed)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double ArcLength(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E curve,System.Boolean closed)"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.contourArea(Mat contour;bool oriented=false)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_contour_area"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double ContourArea(OpenCvSharp.Core.Point[] contour,System.Boolean oriented=false)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Double ContourArea(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E contour,System.Boolean oriented=false)"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.boundingRect(Mat array)-\u003ERect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_bounding_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Rect BoundingRect(OpenCvSharp.Core.Point[] points)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Rect BoundingRect(System.ReadOnlySpan\u003COpenCvSharp.Core.Point\u003E points)"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.getRotationMatrix2D(Point2f center;double angle;double scale)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_rotation_matrix2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetRotationMatrix2D(OpenCvSharp.Core.Point2f center,System.Double angle,System.Double scale)"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.invertAffineTransform(Mat M;Mat iM[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_invert_affine_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|System.Void InvertAffineTransform(OpenCvSharp.Core.Mat m,OpenCvSharp.Core.Mat inverseM)"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.getPerspectiveTransform(Mat src;Mat dst;int solveMethod=DECOMP_LU)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_perspective_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetPerspectiveTransform(OpenCvSharp.Core.Point2f[] src,OpenCvSharp.Core.Point2f[] dst,OpenCvSharp.Core.DecompTypes solveMethod=LU)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetPerspectiveTransform(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E src,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E dst,OpenCvSharp.Core.DecompTypes solveMethod=LU)"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.getAffineTransform(Mat src;Mat dst)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_imgproc_get_affine_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetAffineTransform(OpenCvSharp.Core.Point2f[] src,OpenCvSharp.Core.Point2f[] dst)",
+        "MEMBER|OpenCvSharp.ImgProc.Cv2|method|public;static|OpenCvSharp.Core.Mat GetAffineTransform(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E src,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E dst)"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.LMEDS=4;const cv.RANSAC=8;const cv.RHO=16;const cv.USAC_DEFAULT=32;const cv.USAC_PARALLEL=33;const cv.USAC_FM_8PTS=34;const cv.USAC_FAST=35;const cv.USAC_ACCURATE=36;const cv.USAC_PROSAC=37;const cv.USAC_MAGSAC=38]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "identity": "enum cv.SolvePnPMethod[const cv.SOLVEPNP_ITERATIVE=0;const cv.SOLVEPNP_EPNP=1;const cv.SOLVEPNP_P3P=2;const cv.SOLVEPNP_AP3P=3;const cv.SOLVEPNP_IPPE=4;const cv.SOLVEPNP_IPPE_SQUARE=5;const cv.SOLVEPNP_SQPNP=6;const cv.SOLVEPNP_MAX_COUNT=6\u002B1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.FM_7POINT=1;const cv.FM_8POINT=2;const cv.FM_LMEDS=4;const cv.FM_RANSAC=8]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "enum cv.SamplingMethod[const cv.SAMPLING_UNIFORM=0;const cv.SAMPLING_PROGRESSIVE_NAPSAC=1;const cv.SAMPLING_NAPSAC=2;const cv.SAMPLING_PROSAC=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "identity": "enum cv.LocalOptimMethod[const cv.LOCAL_OPTIM_NULL=0;const cv.LOCAL_OPTIM_INNER_LO=1;const cv.LOCAL_OPTIM_INNER_AND_ITER_LO=2;const cv.LOCAL_OPTIM_GC=3;const cv.LOCAL_OPTIM_SIGMA=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "identity": "enum cv.ScoreMethod[const cv.SCORE_METHOD_RANSAC=0;const cv.SCORE_METHOD_MSAC=1;const cv.SCORE_METHOD_MAGSAC=2;const cv.SCORE_METHOD_LMEDS=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "identity": "enum cv.NeighborSearchMethod[const cv.NEIGH_FLANN_KNN=0;const cv.NEIGH_GRID=1;const cv.NEIGH_FLANN_RADIUS=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "enum cv.PolishingMethod[const cv.NONE_POLISHER=0;const cv.LSQ_POLISHER=1;const cv.MAGSAC=2;const cv.COV_POLISHER=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "class cv.UsacParams",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.UsacParams.UsacParams()-\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_usac_params_get_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.UsacParams|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.Rodrigues(Mat src;Mat dst[/O];Mat jacobian=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_rodrigues"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat Rodrigues(OpenCvSharp.Core.Mat src)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void Rodrigues(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat? jacobian=null)"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "enum class cv.MatrixType[const cv.MatrixType.AUTO=0;const cv.MatrixType.DENSE=1;const cv.MatrixType.SPARSE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "identity": "enum class cv.VariableType[const cv.VariableType.LINEAR=0;const cv.VariableType.SO3=1;const cv.VariableType.SE3=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.findHomography(Mat srcPoints;Mat dstPoints;int method=0;double ransacReprojThreshold=3;Mat mask=Mat()[/O];int maxIters=2000[/C];double confidence=0.995[/C])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_homography"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindHomography(OpenCvSharp.Core.Mat srcPoints,OpenCvSharp.Core.Mat dstPoints,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=LeastSquares,System.Double ransacReprojThreshold=3,OpenCvSharp.Core.Mat? mask=null,System.Int32 maxIters=2000,System.Double confidence=0.995)"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.findHomography(Mat srcPoints;Mat dstPoints;Mat mask[/O];UsacParams params[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_homography_usac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindHomography(OpenCvSharp.Core.Mat srcPoints,OpenCvSharp.Core.Mat dstPoints,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Calib3D.UsacParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.RQDecomp3x3(Mat src;Mat mtxR[/O];Mat mtxQ[/O];Mat Qx=Mat()[/O];Mat Qy=Mat()[/O];Mat Qz=Mat()[/O])-\u003EVec3d",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_rq_decomp3x3"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RQDecomp3x3Result RQDecomp3x3(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat mtxR,OpenCvSharp.Core.Mat mtxQ,OpenCvSharp.Core.Mat? qx=null,OpenCvSharp.Core.Mat? qy=null,OpenCvSharp.Core.Mat? qz=null)"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.decomposeProjectionMatrix(Mat projMatrix;Mat cameraMatrix[/O];Mat rotMatrix[/O];Mat transVect[/O];Mat rotMatrixX=Mat()[/O];Mat rotMatrixY=Mat()[/O];Mat rotMatrixZ=Mat()[/O];Mat eulerAngles=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_decompose_projection_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void DecomposeProjectionMatrix(OpenCvSharp.Core.Mat projMatrix,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotMatrix,OpenCvSharp.Core.Mat transVect,OpenCvSharp.Core.Mat? rotMatrixX=null,OpenCvSharp.Core.Mat? rotMatrixY=null,OpenCvSharp.Core.Mat? rotMatrixZ=null,OpenCvSharp.Core.Mat? eulerAngles=null)"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.matMulDeriv(Mat A;Mat B;Mat dABdA[/O];Mat dABdB[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_mat_mul_deriv"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void MatMulDeriv(OpenCvSharp.Core.Mat a,OpenCvSharp.Core.Mat b,OpenCvSharp.Core.Mat dABdA,OpenCvSharp.Core.Mat dABdB)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void MatMulDeriv(OpenCvSharp.Core.Mat a,OpenCvSharp.Core.Mat b,out OpenCvSharp.Core.Mat dABdA,out OpenCvSharp.Core.Mat dABdB)"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.composeRT(Mat rvec1;Mat tvec1;Mat rvec2;Mat tvec2;Mat rvec3[/O];Mat tvec3[/O];Mat dr3dr1=Mat()[/O];Mat dr3dt1=Mat()[/O];Mat dr3dr2=Mat()[/O];Mat dr3dt2=Mat()[/O];Mat dt3dr1=Mat()[/O];Mat dt3dt1=Mat()[/O];Mat dt3dr2=Mat()[/O];Mat dt3dt2=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_compose_rt",
+        "jyppx_ocv_calib3d_compose_rt_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.ComposeRTDerivativesResult ComposeRT(OpenCvSharp.Core.Mat rvec1,OpenCvSharp.Core.Mat tvec1,OpenCvSharp.Core.Mat rvec2,OpenCvSharp.Core.Mat tvec2)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ComposeRT(OpenCvSharp.Core.Mat rvec1,OpenCvSharp.Core.Mat tvec1,OpenCvSharp.Core.Mat rvec2,OpenCvSharp.Core.Mat tvec2,OpenCvSharp.Core.Mat rvec3,OpenCvSharp.Core.Mat tvec3)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ComposeRT(OpenCvSharp.Core.Mat rvec1,OpenCvSharp.Core.Mat tvec1,OpenCvSharp.Core.Mat rvec2,OpenCvSharp.Core.Mat tvec2,OpenCvSharp.Core.Mat rvec3,OpenCvSharp.Core.Mat tvec3,OpenCvSharp.Core.Mat dr3dr1,OpenCvSharp.Core.Mat dr3dt1,OpenCvSharp.Core.Mat dr3dr2,OpenCvSharp.Core.Mat dr3dt2,OpenCvSharp.Core.Mat dt3dr1,OpenCvSharp.Core.Mat dt3dt1,OpenCvSharp.Core.Mat dt3dr2,OpenCvSharp.Core.Mat dt3dt2)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.projectPoints(Mat objectPoints;Mat rvec;Mat tvec;Mat cameraMatrix;Mat distCoeffs;Mat imagePoints[/O];Mat jacobian=Mat()[/O];double aspectRatio=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_project_points",
+        "jyppx_ocv_calib3d_project_points",
+        "jyppx_ocv_calib3d_project_points_separated_jacobians"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ProjectPoints(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ProjectPoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat dpdr,OpenCvSharp.Core.Mat dpdt,OpenCvSharp.Core.Mat dpdf,OpenCvSharp.Core.Mat dpdc,OpenCvSharp.Core.Mat dpdk,OpenCvSharp.Core.Mat dpdo,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat? jacobian=null,System.Double aspectRatio=0)"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.projectPoints(Mat objectPoints;Mat rvec;Mat tvec;Mat cameraMatrix;Mat distCoeffs;Mat imagePoints[/O];Mat dpdr[/O];Mat dpdt[/O];Mat dpdf=Mat()[/O];Mat dpdc=Mat()[/O];Mat dpdk=Mat()[/O];Mat dpdo=Mat()[/O];double aspectRatio=0.)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_project_points",
+        "jyppx_ocv_calib3d_project_points",
+        "jyppx_ocv_calib3d_project_points_separated_jacobians"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ProjectPoints(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ProjectPoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat dpdr,OpenCvSharp.Core.Mat dpdt,OpenCvSharp.Core.Mat dpdf,OpenCvSharp.Core.Mat dpdc,OpenCvSharp.Core.Mat dpdk,OpenCvSharp.Core.Mat dpdo,System.Double aspectRatio=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat? jacobian=null,System.Double aspectRatio=0)"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.solvePnP(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;Mat rvec[/O];Mat tvec[/O];bool useExtrinsicGuess=false;int flags=SOLVEPNP_ITERATIVE)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_solve_pnp",
+        "jyppx_ocv_calib3d_fisheye_solve_pnp_ransac",
+        "jyppx_ocv_calib3d_solve_pnp",
+        "jyppx_ocv_calib3d_solve_pnp_generic",
+        "jyppx_ocv_calib3d_solve_pnp_ransac",
+        "jyppx_ocv_calib3d_solve_pnp_refine_lm",
+        "jyppx_ocv_calib3d_solve_pnp_refine_vvs"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean SolvePnP(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean SolvePnP(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean SolvePnP(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative)"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.solvePnPRansac(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;Mat rvec[/O];Mat tvec[/O];bool useExtrinsicGuess=false;int iterationsCount=100;float reprojectionError=8.0;double confidence=0.99;Mat inliers=Mat()[/O];int flags=SOLVEPNP_ITERATIVE)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_solve_pnp_ransac",
+        "jyppx_ocv_calib3d_solve_pnp_ransac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean SolvePnPRansac(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,System.Int32 iterationsCount=100,System.Single reprojectionError=8,System.Double confidence=0.99,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative)"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.solvePnPRansac(Mat objectPoints;Mat imagePoints;Mat cameraMatrix[/IO];Mat distCoeffs;Mat rvec[/O];Mat tvec[/O];Mat inliers[/O];UsacParams params=UsacParams()[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_solve_pnp_ransac_usac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean SolvePnPRansac(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat inliers,OpenCvSharp.Calib3D.UsacParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.solveP3P(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags)-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_solve_p3p"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.SolvePnPGenericResult SolveP3P(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Calib3D.SolvePnPFlags flags=P3P)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.SolvePnPGenericResult SolveP3P(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Calib3D.SolvePnPFlags flags=P3P)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.SolvePnPGenericResult SolveP3P(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Calib3D.SolvePnPFlags flags=P3P)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Int32 SolveP3P(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Calib3D.SolvePnPFlags flags=P3P)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Int32 SolveP3P(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Calib3D.SolvePnPFlags flags=P3P)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Int32 SolveP3P(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Calib3D.SolvePnPFlags flags=P3P)"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.solvePnPRefineLM(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;Mat rvec[/IO];Mat tvec[/IO];TermCriteria criteria=TermCriteria(TermCriteria::EPS \u002B TermCriteria::COUNT, 20, FLT_EPSILON))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_solve_pnp_refine_lm"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void SolvePnPRefineLM(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void SolvePnPRefineLM(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void SolvePnPRefineLM(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.solvePnPRefineVVS(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;Mat rvec[/IO];Mat tvec[/IO];TermCriteria criteria=TermCriteria(TermCriteria::EPS \u002B TermCriteria::COUNT, 20, FLT_EPSILON);double VVSlambda=1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_solve_pnp_refine_vvs"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void SolvePnPRefineVVS(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.TermCriteria? criteria=null,System.Double vvsLambda=1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void SolvePnPRefineVVS(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.TermCriteria? criteria=null,System.Double vvsLambda=1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void SolvePnPRefineVVS(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.TermCriteria? criteria=null,System.Double vvsLambda=1)"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.solvePnPGeneric(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;vector_Mat rvecs[/O];vector_Mat tvecs[/O];bool useExtrinsicGuess=false;int flags=SOLVEPNP_ITERATIVE;Mat rvec=Mat();Mat tvec=Mat();Mat reprojectionError=Mat()[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_solve_pnp_generic"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.SolvePnPGenericResult SolvePnPGeneric(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.Mat? rvec=null,OpenCvSharp.Core.Mat? tvec=null,System.Boolean returnReprojectionError=false)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.SolvePnPGenericResult SolvePnPGeneric(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.Mat? rvec=null,OpenCvSharp.Core.Mat? tvec=null,System.Boolean returnReprojectionError=false)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.SolvePnPGenericResult SolvePnPGeneric(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.Mat? rvec=null,OpenCvSharp.Core.Mat? tvec=null,System.Boolean returnReprojectionError=false)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Int32 SolvePnPGeneric(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.Mat? rvec=null,OpenCvSharp.Core.Mat? tvec=null,OpenCvSharp.Core.Mat? reprojectionError=null)"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.convertPointsToHomogeneous(Mat src;Mat dst[/O];int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_convert_points_to_homogeneous"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsToHomogeneous(OpenCvSharp.Core.Mat source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsToHomogeneous(OpenCvSharp.Core.Point2f[] source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsToHomogeneous(OpenCvSharp.Core.Point3f[] source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsToHomogeneous(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsToHomogeneous(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ConvertPointsToHomogeneous(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.convertPointsFromHomogeneous(Mat src;Mat dst[/O];int dtype=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_convert_points_from_homogeneous"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsFromHomogeneous(OpenCvSharp.Core.Mat source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsFromHomogeneous(OpenCvSharp.Core.Point3f[] source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ConvertPointsFromHomogeneous(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.Int32 dtype=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ConvertPointsFromHomogeneous(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,System.Int32 dtype=-1)"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.findFundamentalMat(Mat points1;Mat points2;int method;double ransacReprojThreshold;double confidence;int maxIters;Mat mask=Mat()[/O])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_fundamental_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindFundamentalMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Calib3D.FundamentalMatMethods method=RANSAC,System.Double ransacReprojThreshold=3,System.Double confidence=0.99,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.findFundamentalMat(Mat points1;Mat points2;int method=FM_RANSAC;double ransacReprojThreshold=3.;double confidence=0.99;Mat mask=Mat()[/O])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_fundamental_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindFundamentalMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Calib3D.FundamentalMatMethods method=RANSAC,System.Double ransacReprojThreshold=3,System.Double confidence=0.99,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.findFundamentalMat(Mat points1;Mat points2;Mat mask[/O];UsacParams params[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_fundamental_mat_usac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindFundamentalMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Calib3D.UsacParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.findEssentialMat(Mat points1;Mat points2;Mat cameraMatrix;int method=RANSAC;double prob=0.999;double threshold=1.0;int maxIters=1000;Mat mask=Mat()[/O])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_essential_mat",
+        "jyppx_ocv_calib3d_find_essential_mat_focal",
+        "jyppx_ocv_calib3d_find_essential_mat_two_cameras"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.findEssentialMat(Mat points1;Mat points2;double focal=1.0;Point2d pp=Point2d(0, 0);int method=RANSAC;double prob=0.999;double threshold=1.0;int maxIters=1000;Mat mask=Mat()[/O])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_essential_mat",
+        "jyppx_ocv_calib3d_find_essential_mat_focal",
+        "jyppx_ocv_calib3d_find_essential_mat_two_cameras"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.findEssentialMat(Mat points1;Mat points2;Mat cameraMatrix1;Mat distCoeffs1;Mat cameraMatrix2;Mat distCoeffs2;int method=RANSAC;double prob=0.999;double threshold=1.0;Mat mask=Mat()[/O])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_essential_mat",
+        "jyppx_ocv_calib3d_find_essential_mat_focal",
+        "jyppx_ocv_calib3d_find_essential_mat_two_cameras"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,System.Int32 maxIters=1000,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.findEssentialMat(Mat points1;Mat points2;Mat cameraMatrix1;Mat cameraMatrix2;Mat dist_coeff1;Mat dist_coeff2;Mat mask[/O];UsacParams params[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_find_essential_mat_usac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FindEssentialMat(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Calib3D.UsacParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.decomposeEssentialMat(Mat E;Mat R1[/O];Mat R2[/O];Mat t[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_decompose_essential_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void DecomposeEssentialMat(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat r1,OpenCvSharp.Core.Mat r2,OpenCvSharp.Core.Mat t)"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.recoverPose(Mat points1;Mat points2;Mat cameraMatrix1;Mat distCoeffs1;Mat cameraMatrix2;Mat distCoeffs2;Mat E[/O];Mat R[/O];Mat t[/O];int method=cv::RANSAC;double prob=0.999;double threshold=1.0;Mat mask=Mat()[/IO])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_recover_pose",
+        "jyppx_ocv_calib3d_recover_pose_focal",
+        "jyppx_ocv_calib3d_recover_pose_two_cameras",
+        "jyppx_ocv_calib3d_recover_pose_with_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double distanceThresh,OpenCvSharp.Core.Mat? mask=null,OpenCvSharp.Core.Mat? triangulatedPoints=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.recoverPose(Mat E;Mat points1;Mat points2;Mat cameraMatrix;Mat R[/O];Mat t[/O];Mat mask=Mat()[/IO])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_recover_pose",
+        "jyppx_ocv_calib3d_recover_pose_focal",
+        "jyppx_ocv_calib3d_recover_pose_two_cameras",
+        "jyppx_ocv_calib3d_recover_pose_with_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double distanceThresh,OpenCvSharp.Core.Mat? mask=null,OpenCvSharp.Core.Mat? triangulatedPoints=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.recoverPose(Mat E;Mat points1;Mat points2;Mat R[/O];Mat t[/O];double focal=1.0;Point2d pp=Point2d(0, 0);Mat mask=Mat()[/IO])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_recover_pose",
+        "jyppx_ocv_calib3d_recover_pose_focal",
+        "jyppx_ocv_calib3d_recover_pose_two_cameras",
+        "jyppx_ocv_calib3d_recover_pose_with_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double distanceThresh,OpenCvSharp.Core.Mat? mask=null,OpenCvSharp.Core.Mat? triangulatedPoints=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.recoverPose(Mat E;Mat points1;Mat points2;Mat cameraMatrix;Mat R[/O];Mat t[/O];double distanceThresh;Mat mask=Mat()[/IO];Mat triangulatedPoints=Mat()[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_recover_pose",
+        "jyppx_ocv_calib3d_recover_pose_focal",
+        "jyppx_ocv_calib3d_recover_pose_two_cameras",
+        "jyppx_ocv_calib3d_recover_pose_with_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double distanceThresh,OpenCvSharp.Core.Mat? mask=null,OpenCvSharp.Core.Mat? triangulatedPoints=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,System.Double focal,OpenCvSharp.Core.Point2d pp,OpenCvSharp.Core.Mat? mask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.RecoverPoseResult RecoverPose(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Mat essential,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double prob=0.999,System.Double threshold=1,OpenCvSharp.Core.Mat? mask=null)"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.computeCorrespondEpilines(Mat points;int whichImage;Mat F;Mat lines[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_compute_correspond_epilines"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ComputeCorrespondEpilines(OpenCvSharp.Core.Mat points,System.Int32 whichImage,OpenCvSharp.Core.Mat fundamental)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ComputeCorrespondEpilines(OpenCvSharp.Core.Mat points,System.Int32 whichImage,OpenCvSharp.Core.Mat fundamental,OpenCvSharp.Core.Mat lines)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.triangulatePoints(Mat projMatr1;Mat projMatr2;Mat projPoints1;Mat projPoints2;Mat points4D[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_triangulate_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat TriangulatePoints(OpenCvSharp.Core.Mat projMatr1,OpenCvSharp.Core.Mat projMatr2,OpenCvSharp.Core.Mat projPoints1,OpenCvSharp.Core.Mat projPoints2)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void TriangulatePoints(OpenCvSharp.Core.Mat projMatr1,OpenCvSharp.Core.Mat projMatr2,OpenCvSharp.Core.Mat projPoints1,OpenCvSharp.Core.Mat projPoints2,OpenCvSharp.Core.Mat points4D)"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.correctMatches(Mat F;Mat points1;Mat points2;Mat newPoints1[/O];Mat newPoints2[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_correct_matches"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CorrectMatches(OpenCvSharp.Core.Mat fundamentalMatrix,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat correctedPoints1,OpenCvSharp.Core.Mat correctedPoints2)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CorrectMatches(OpenCvSharp.Core.Mat fundamentalMatrix,OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,out OpenCvSharp.Core.Mat correctedPoints1,out OpenCvSharp.Core.Mat correctedPoints2)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CorrectMatches(OpenCvSharp.Core.Mat fundamentalMatrix,OpenCvSharp.Core.Point2f[] points1,OpenCvSharp.Core.Point2f[] points2,out OpenCvSharp.Core.Mat correctedPoints1,out OpenCvSharp.Core.Mat correctedPoints2)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void CorrectMatches(OpenCvSharp.Core.Mat fundamentalMatrix,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E points1,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E points2,out OpenCvSharp.Core.Mat correctedPoints1,out OpenCvSharp.Core.Mat correctedPoints2)"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.sampsonDistance(Mat pt1;Mat pt2;Mat F)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_sampson_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double SampsonDistance(OpenCvSharp.Core.Mat homogeneousPoint1,OpenCvSharp.Core.Mat homogeneousPoint2,OpenCvSharp.Core.Mat fundamentalMatrix)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double SampsonDistance(OpenCvSharp.Core.Point2d point1,OpenCvSharp.Core.Point2d point2,OpenCvSharp.Core.Mat fundamentalMatrix)"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.estimateAffine3D(Mat src;Mat dst;Mat out[/O];Mat inliers[/O];double ransacThreshold=3;double confidence=0.99)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_affine_3d_ransac",
+        "jyppx_ocv_calib3d_estimate_affine_3d_umeyama"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,out System.Double scale,System.Boolean forceRotation=true)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,out System.Double scale,System.Boolean forceRotation=true)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,out System.Double scale,System.Boolean forceRotation=true)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat transform,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,out OpenCvSharp.Core.Mat transform,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,OpenCvSharp.Core.Mat transform,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,out OpenCvSharp.Core.Mat transform,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,OpenCvSharp.Core.Mat transform,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,out OpenCvSharp.Core.Mat transform,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.estimateAffine3D(Mat src;Mat dst;double* scale=nullptr[/O];bool force_rotation=true)-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_affine_3d_ransac",
+        "jyppx_ocv_calib3d_estimate_affine_3d_umeyama"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,out System.Double scale,System.Boolean forceRotation=true)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,out System.Double scale,System.Boolean forceRotation=true)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,out System.Double scale,System.Boolean forceRotation=true)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat transform,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,out OpenCvSharp.Core.Mat transform,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,OpenCvSharp.Core.Mat transform,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,out OpenCvSharp.Core.Mat transform,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,OpenCvSharp.Core.Mat transform,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateAffine3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,out OpenCvSharp.Core.Mat transform,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)"
+      ]
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.estimateTranslation3D(Mat src;Mat dst;Mat out[/O];Mat inliers[/O];double ransacThreshold=3;double confidence=0.99)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_translation_3d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateTranslation3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat translation,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateTranslation3D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,out OpenCvSharp.Core.Mat translation,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateTranslation3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,OpenCvSharp.Core.Mat translation,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateTranslation3D(OpenCvSharp.Core.Point3f[] source,OpenCvSharp.Core.Point3f[] destination,out OpenCvSharp.Core.Mat translation,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateTranslation3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,OpenCvSharp.Core.Mat translation,OpenCvSharp.Core.Mat? inliers=null,System.Double ransacThreshold=3,System.Double confidence=0.99)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean EstimateTranslation3D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E destination,out OpenCvSharp.Core.Mat translation,out OpenCvSharp.Core.Mat inliers,System.Double ransacThreshold=3,System.Double confidence=0.99)"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.estimateAffine2D(Mat from;Mat to;Mat inliers=Mat()[/O];int method=RANSAC;double ransacReprojThreshold=3;size_t maxIters=2000;double confidence=0.99;size_t refineIters=10)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_affine_2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine2D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=10)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine2D(OpenCvSharp.Core.Point2f[] source,OpenCvSharp.Core.Point2f[] destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=10)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine2D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=10)"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.estimateAffine2D(Mat pts1;Mat pts2;Mat inliers[/O];UsacParams params[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_affine_2d_usac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffine2D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat inliers,OpenCvSharp.Calib3D.UsacParams parameters)"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "identity": "cv.estimateAffinePartial2D(Mat from;Mat to;Mat inliers=Mat()[/O];int method=RANSAC;double ransacReprojThreshold=3;size_t maxIters=2000;double confidence=0.99;size_t refineIters=10)-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_affine_partial_2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffinePartial2D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=10)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffinePartial2D(OpenCvSharp.Core.Point2f[] source,OpenCvSharp.Core.Point2f[] destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=10)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat EstimateAffinePartial2D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=10)"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "identity": "cv.estimateTranslation2D(Mat from;Mat to;Mat inliers=Mat()[/O];int method=RANSAC;double ransacReprojThreshold=3;size_t maxIters=2000;double confidence=0.99;size_t refineIters=0)-\u003Ecv::Vec2d",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_estimate_translation_2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Point2d EstimateTranslation2D(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Point2d EstimateTranslation2D(OpenCvSharp.Core.Point2f[] source,OpenCvSharp.Core.Point2f[] destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Point2d EstimateTranslation2D(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E source,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E destination,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.RobustEstimationAlgorithms method=RANSAC,System.Double ransacReprojThreshold=3,System.Int32 maxIters=2000,System.Double confidence=0.99,System.Int32 refineIters=0)"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.decomposeHomographyMat(Mat H;Mat K;vector_Mat rotations[/O];vector_Mat translations[/O];vector_Mat normals[/O])-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_decompose_homography_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Int32 DecomposeHomographyMat(OpenCvSharp.Core.Mat homography,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat[] rotations,OpenCvSharp.Core.Mat[] translations,OpenCvSharp.Core.Mat[] normals)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Int32 DecomposeHomographyMat(OpenCvSharp.Core.Mat homography,OpenCvSharp.Core.Mat cameraMatrix,out OpenCvSharp.Core.Mat[] rotations,out OpenCvSharp.Core.Mat[] translations,out OpenCvSharp.Core.Mat[] normals)"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.filterHomographyDecompByVisibleRefpoints(vector_Mat rotations;vector_Mat normals;Mat beforePoints;Mat afterPoints;Mat possibleSolutions[/O];Mat pointsMask=Mat())-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_filter_homography_decomp_by_visible_refpoints"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FilterHomographyDecompByVisibleRefpoints(OpenCvSharp.Core.Mat[] rotations,OpenCvSharp.Core.Mat[] normals,OpenCvSharp.Core.Mat beforePoints,OpenCvSharp.Core.Mat afterPoints,OpenCvSharp.Core.Mat? pointsMask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FilterHomographyDecompByVisibleRefpoints(OpenCvSharp.Core.Mat[] rotations,OpenCvSharp.Core.Mat[] normals,OpenCvSharp.Core.Point2f[] beforePoints,OpenCvSharp.Core.Point2f[] afterPoints,OpenCvSharp.Core.Mat? pointsMask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FilterHomographyDecompByVisibleRefpoints(OpenCvSharp.Core.Mat[] rotations,OpenCvSharp.Core.Mat[] normals,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E beforePoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E afterPoints,OpenCvSharp.Core.Mat? pointsMask=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FilterHomographyDecompByVisibleRefpoints(OpenCvSharp.Core.Mat[] rotations,OpenCvSharp.Core.Mat[] normals,OpenCvSharp.Core.Mat beforePoints,OpenCvSharp.Core.Mat afterPoints,OpenCvSharp.Core.Mat possibleSolutions,OpenCvSharp.Core.Mat? pointsMask=null)"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.calibrationMatrixValues(Mat cameraMatrix;Size imageSize;double apertureWidth;double apertureHeight;double fovx[/O,/Ref];double fovy[/O,/Ref];double focalLength[/O,/Ref];Point2d principalPoint[/O,/Ref];double aspectRatio[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibration_matrix_values"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CalibrationMatrixValuesResult CalibrationMatrixValues(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Size imageSize,System.Double apertureWidth,System.Double apertureHeight)"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.getDefaultNewCameraMatrix(Mat cameraMatrix;Size imgsize=Size();bool centerPrincipalPoint=false)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_get_default_new_camera_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat GetDefaultNewCameraMatrix(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Size imageSize=null,System.Boolean centerPrincipalPoint=false)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void GetDefaultNewCameraMatrix(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Size imageSize=null,System.Boolean centerPrincipalPoint=false)"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.getOptimalNewCameraMatrix(Mat cameraMatrix;Mat distCoeffs;Size imageSize;double alpha;Size newImgSize=Size();Rect* validPixROI=0[/O];bool centerPrincipalPoint=false)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_get_optimal_new_camera_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.OptimalNewCameraMatrixResult GetOptimalNewCameraMatrix(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Size imageSize,System.Double alpha,OpenCvSharp.Core.Size? newImageSize=null,System.Boolean centerPrincipalPoint=false)"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.undistortPoints(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;Mat R=Mat();Mat P=Mat();TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER, 5, 0.01))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_undistort_points",
+        "jyppx_ocv_calib3d_undistort_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat UndistortPoints(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void UndistortPoints(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? r=null,OpenCvSharp.Core.Mat? p=null,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.undistortImagePoints(Mat src;Mat dst[/O];Mat cameraMatrix;Mat distCoeffs;TermCriteria arg1=TermCriteria(TermCriteria::MAX_ITER, 5, 0.01))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_undistort_image_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat UndistortImagePoints(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat UndistortImagePoints(OpenCvSharp.Core.Point2f[] src,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat UndistortImagePoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E src,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void UndistortImagePoints(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.fisheye.projectPoints(Mat objectPoints;Mat imagePoints[/O];Mat rvec;Mat tvec;Mat K;Mat D;double alpha=0;Mat jacobian=Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_project_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeProjectPoints(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeProjectPoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeProjectPoints(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat imagePoints,System.Double alpha=0,OpenCvSharp.Core.Mat? jacobian=null)"
+      ]
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.fisheye.distortPoints(Mat undistorted;Mat distorted[/O];Mat K;Mat D;double alpha=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_distort_points",
+        "jyppx_ocv_calib3d_fisheye_distort_points_with_camera_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeDistortPoints(OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeDistortPoints(OpenCvSharp.Core.Point2f[] undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeDistortPoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeDistortPoints(OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.fisheye.distortPoints(Mat undistorted;Mat distorted[/O];Mat Kundistorted;Mat K;Mat D;double alpha=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_distort_points",
+        "jyppx_ocv_calib3d_fisheye_distort_points_with_camera_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeDistortPoints(OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeDistortPoints(OpenCvSharp.Core.Point2f[] undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeDistortPoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeDistortPoints(OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,System.Double alpha=0)"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.fisheye.undistortPoints(Mat distorted;Mat undistorted[/O];Mat K;Mat D;Mat R=Mat();Mat P=Mat();TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER \u002B TermCriteria::EPS, 10, 1e-8))-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_undistort_points"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeUndistortPoints(OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? r=null,OpenCvSharp.Core.Mat? p=null,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeUndistortPoints(OpenCvSharp.Core.Point2f[] distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? r=null,OpenCvSharp.Core.Mat? p=null,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeUndistortPoints(System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E distorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? r=null,OpenCvSharp.Core.Mat? p=null,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeUndistortPoints(OpenCvSharp.Core.Mat distorted,OpenCvSharp.Core.Mat undistorted,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat? r=null,OpenCvSharp.Core.Mat? p=null,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.fisheye.estimateNewCameraMatrixForUndistortRectify(Mat K;Mat D;Size image_size[/C,/Ref];Mat R;Mat P[/O];double balance=0.0;Size new_size=Size()[/C,/Ref];double fov_scale=1.0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_estimate_new_camera_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat FisheyeEstimateNewCameraMatrixForUndistortRectify(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat? r=null,System.Double balance=0,OpenCvSharp.Core.Size? newSize=null,System.Double fovScale=1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeEstimateNewCameraMatrixForUndistortRectify(OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat newCameraMatrix,OpenCvSharp.Core.Mat? r=null,System.Double balance=0,OpenCvSharp.Core.Size? newSize=null,System.Double fovScale=1)"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.fisheye.solvePnP(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;Mat rvec[/O];Mat tvec[/O];bool useExtrinsicGuess=false;int flags=SOLVEPNP_ITERATIVE;TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER \u002B TermCriteria::EPS, 10, 1e-8))-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_solve_pnp",
+        "jyppx_ocv_calib3d_fisheye_solve_pnp_ransac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FisheyeSolvePnP(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FisheyeSolvePnP(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FisheyeSolvePnP(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.fisheye.solvePnPRansac(Mat objectPoints;Mat imagePoints;Mat cameraMatrix;Mat distCoeffs;Mat rvec[/O];Mat tvec[/O];bool useExtrinsicGuess=false;int iterationsCount=100;float reprojectionError=8.0;double confidence=0.99;Mat inliers=Mat()[/O];int flags=SOLVEPNP_ITERATIVE;TermCriteria criteria=TermCriteria(TermCriteria::MAX_ITER \u002B TermCriteria::EPS, 10, 1e-8))-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_solve_pnp_ransac"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FisheyeSolvePnPRansac(OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,System.Int32 iterationsCount=100,System.Single reprojectionError=8,System.Double confidence=0.99,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FisheyeSolvePnPRansac(OpenCvSharp.Core.Point3f[] objectPoints,OpenCvSharp.Core.Point2f[] imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,System.Int32 iterationsCount=100,System.Single reprojectionError=8,System.Double confidence=0.99,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FisheyeSolvePnPRansac(System.ReadOnlySpan\u003COpenCvSharp.Core.Point3f\u003E objectPoints,System.ReadOnlySpan\u003COpenCvSharp.Core.Point2f\u003E imagePoints,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvec,OpenCvSharp.Core.Mat tvec,System.Boolean useExtrinsicGuess=false,System.Int32 iterationsCount=100,System.Single reprojectionError=8,System.Double confidence=0.99,OpenCvSharp.Core.Mat? inliers=null,OpenCvSharp.Calib3D.SolvePnPFlags flags=Iterative,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 120,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.STEREO_ZERO_DISPARITY=0x00400]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.stereoRectify(Mat cameraMatrix1;Mat distCoeffs1;Mat cameraMatrix2;Mat distCoeffs2;Size imageSize;Mat R;Mat T;Mat R1[/O];Mat R2[/O];Mat P1[/O];Mat P2[/O];Mat Q[/O];int flags=STEREO_ZERO_DISPARITY;double alpha=-1;Size newImageSize=Size();Rect* validPixROI1=0[/O];Rect* validPixROI2=0[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_rectify",
+        "jyppx_ocv_calib3d_stereo_rectify",
+        "jyppx_ocv_calib3d_stereo_rectify_uncalibrated"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.StereoRectifyResult StereoRectify(OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.StereoRectifyResult StereoRectify(OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.StereoRectifyFlags flags,System.Double alpha,OpenCvSharp.Core.Size newImageSize)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void StereoRectify(OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat r1,OpenCvSharp.Core.Mat r2,OpenCvSharp.Core.Mat p1,OpenCvSharp.Core.Mat p2,OpenCvSharp.Core.Mat q,OpenCvSharp.Calib3D.StereoRectifyFlags flags,System.Double alpha,OpenCvSharp.Core.Size newImageSize,out OpenCvSharp.Core.Rect validPixROI1,out OpenCvSharp.Core.Rect validPixROI2)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void StereoRectify(OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat r1,OpenCvSharp.Core.Mat r2,OpenCvSharp.Core.Mat p1,OpenCvSharp.Core.Mat p2,OpenCvSharp.Core.Mat q,out OpenCvSharp.Core.Rect validPixROI1,out OpenCvSharp.Core.Rect validPixROI2)"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.stereoRectifyUncalibrated(Mat points1;Mat points2;Mat F;Size imgSize;Mat H1[/O];Mat H2[/O];double threshold=5)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_stereo_rectify_uncalibrated"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.StereoRectifyUncalibratedResult StereoRectifyUncalibrated(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat fundamental,OpenCvSharp.Core.Size imageSize,System.Double threshold=5)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean StereoRectifyUncalibrated(OpenCvSharp.Core.Mat points1,OpenCvSharp.Core.Mat points2,OpenCvSharp.Core.Mat fundamental,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat h1,OpenCvSharp.Core.Mat h2,System.Double threshold=5)"
+      ]
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.fisheye.stereoRectify(Mat K1;Mat D1;Mat K2;Mat D2;Size imageSize[/C,/Ref];Mat R;Mat tvec;Mat R1[/O];Mat R2[/O];Mat P1[/O];Mat P2[/O];Mat Q[/O];int flags;Size newImageSize=Size()[/C,/Ref];double balance=0.0;double fov_scale=1.0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_rectify"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.FisheyeStereoRectifyResult FisheyeStereoRectify(OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.StereoRectifyFlags flags=ZeroDisparity,OpenCvSharp.Core.Size? newImageSize=null,System.Double balance=0,System.Double fovScale=1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FisheyeStereoRectify(OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat r1,OpenCvSharp.Core.Mat r2,OpenCvSharp.Core.Mat p1,OpenCvSharp.Core.Mat p2,OpenCvSharp.Core.Mat q,OpenCvSharp.Calib3D.StereoRectifyFlags flags=ZeroDisparity,OpenCvSharp.Core.Size? newImageSize=null,System.Double balance=0,System.Double fovScale=1)"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "identity": "class cv.StereoMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "enum cv.StereoMatcher.\u003Cunnamed\u003E[const cv.StereoMatcher.DISP_SHIFT=4;const cv.StereoMatcher.DISP_SCALE=(1 \u003C\u003C DISP_SHIFT)]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.StereoMatcher.compute(Mat left;Mat right;Mat disparity[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|method|public;instance|OpenCvSharp.Core.Mat Compute(OpenCvSharp.Core.Mat left,OpenCvSharp.Core.Mat right)",
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|method|public;instance|System.Void Compute(OpenCvSharp.Core.Mat left,OpenCvSharp.Core.Mat right,OpenCvSharp.Core.Mat disparity)"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.StereoMatcher.getMinDisparity()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_get_min_disparity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 MinDisparity"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.StereoMatcher.setMinDisparity(int minDisparity)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_set_min_disparity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 MinDisparity"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.StereoMatcher.getNumDisparities()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_get_num_disparities"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 NumDisparities"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.StereoMatcher.setNumDisparities(int numDisparities)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_set_num_disparities"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 NumDisparities"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.StereoMatcher.getBlockSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_get_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 BlockSize"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.StereoMatcher.setBlockSize(int blockSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 BlockSize"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.StereoMatcher.getSpeckleWindowSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_get_speckle_window_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 SpeckleWindowSize"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.StereoMatcher.setSpeckleWindowSize(int speckleWindowSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_set_speckle_window_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 SpeckleWindowSize"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.StereoMatcher.getSpeckleRange()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_get_speckle_range"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 SpeckleRange"
+      ]
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.StereoMatcher.setSpeckleRange(int speckleRange)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_set_speckle_range"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 SpeckleRange"
+      ]
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.StereoMatcher.getDisp12MaxDiff()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_get_disp12_max_diff"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 Disp12MaxDiff"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.StereoMatcher.setDisp12MaxDiff(int disp12MaxDiff)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_matcher_set_disp12_max_diff"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoMatcher|property|instance;get:public;set:public|System.Int32 Disp12MaxDiff"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "class cv.StereoBM",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "enum cv.StereoBM.\u003Cunnamed\u003E[const cv.StereoBM.PREFILTER_NORMALIZED_RESPONSE=0;const cv.StereoBM.PREFILTER_XSOBEL=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.StereoBM.getPreFilterType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_pre_filter_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|OpenCvSharp.Calib3D.StereoBMPreFilterType PreFilterType"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.StereoBM.setPreFilterType(int preFilterType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_pre_filter_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|OpenCvSharp.Calib3D.StereoBMPreFilterType PreFilterType"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.StereoBM.getPreFilterSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_pre_filter_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 PreFilterSize"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.StereoBM.setPreFilterSize(int preFilterSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_pre_filter_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 PreFilterSize"
+      ]
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.StereoBM.getPreFilterCap()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_pre_filter_cap"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 PreFilterCap"
+      ]
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.StereoBM.setPreFilterCap(int preFilterCap)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_pre_filter_cap"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 PreFilterCap"
+      ]
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.StereoBM.getTextureThreshold()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_texture_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 TextureThreshold"
+      ]
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.StereoBM.setTextureThreshold(int textureThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_texture_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 TextureThreshold"
+      ]
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.StereoBM.getUniquenessRatio()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_uniqueness_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 UniquenessRatio"
+      ]
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.StereoBM.setUniquenessRatio(int uniquenessRatio)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_uniqueness_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 UniquenessRatio"
+      ]
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.StereoBM.getSmallerBlockSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_smaller_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 SmallerBlockSize"
+      ]
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.StereoBM.setSmallerBlockSize(int blockSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_smaller_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|System.Int32 SmallerBlockSize"
+      ]
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.StereoBM.getROI1()-\u003ERect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_roi1"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|OpenCvSharp.Core.Rect ROI1"
+      ]
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.StereoBM.setROI1(Rect roi1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_roi1"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|OpenCvSharp.Core.Rect ROI1"
+      ]
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.StereoBM.getROI2()-\u003ERect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_get_roi2"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|OpenCvSharp.Core.Rect ROI2"
+      ]
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.StereoBM.setROI2(Rect roi2)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_set_roi2"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|property|instance;get:public;set:public|OpenCvSharp.Core.Rect ROI2"
+      ]
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.StereoBM.create(int numDisparities=0;int blockSize=21)-\u003EPtr\u003CStereoBM\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_bm_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoBM|method|public;static|OpenCvSharp.Calib3D.StereoBM Create(System.Int32 numDisparities=0,System.Int32 blockSize=21)"
+      ]
+    },
+    {
+      "ordinal": 158,
+      "identity": "class cv.StereoSGBM",
+      "classification": "non-callable-metadata",
+      "reason": "Class declaration and inheritance are retained as normalized metadata; constructors and methods are classified independently.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "enum cv.StereoSGBM.\u003Cunnamed\u003E[const cv.StereoSGBM.MODE_SGBM=0;const cv.StereoSGBM.MODE_HH=1;const cv.StereoSGBM.MODE_SGBM_3WAY=2;const cv.StereoSGBM.MODE_HH4=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.StereoSGBM.getPreFilterCap()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_get_pre_filter_cap"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 PreFilterCap"
+      ]
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.StereoSGBM.setPreFilterCap(int preFilterCap)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_set_pre_filter_cap"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 PreFilterCap"
+      ]
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.StereoSGBM.getUniquenessRatio()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_get_uniqueness_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 UniquenessRatio"
+      ]
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.StereoSGBM.setUniquenessRatio(int uniquenessRatio)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_set_uniqueness_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 UniquenessRatio"
+      ]
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.StereoSGBM.getP1()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_get_p1"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 P1"
+      ]
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.StereoSGBM.setP1(int P1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_set_p1"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 P1"
+      ]
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.StereoSGBM.getP2()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_get_p2"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 P2"
+      ]
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.StereoSGBM.setP2(int P2)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_set_p2"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|System.Int32 P2"
+      ]
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.StereoSGBM.getMode()-\u003Eint",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_get_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|OpenCvSharp.Calib3D.StereoSGBMMode Mode"
+      ]
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.StereoSGBM.setMode(int mode)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_set_mode"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|property|instance;get:public;set:public|OpenCvSharp.Calib3D.StereoSGBMMode Mode"
+      ]
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.StereoSGBM.create(int minDisparity=0;int numDisparities=16;int blockSize=3;int P1=0;int P2=0;int disp12MaxDiff=0;int preFilterCap=0;int uniquenessRatio=0;int speckleWindowSize=0;int speckleRange=0;int mode=StereoSGBM::MODE_SGBM)-\u003EPtr\u003CStereoSGBM\u003E",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stereo_sgbm_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.StereoSGBM|method|public;static|OpenCvSharp.Calib3D.StereoSGBM Create(System.Int32 minDisparity=0,System.Int32 numDisparities=16,System.Int32 blockSize=3,System.Int32 p1=0,System.Int32 p2=0,System.Int32 disp12MaxDiff=0,System.Int32 preFilterCap=0,System.Int32 uniquenessRatio=0,System.Int32 speckleWindowSize=0,System.Int32 speckleRange=0,OpenCvSharp.Calib3D.StereoSGBMMode mode=SGBM)"
+      ]
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.filterSpeckles(Mat img[/IO];double newVal;int maxSpeckleSize;double maxDiff;Mat buf=Mat()[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_filter_speckles"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void FilterSpeckles(OpenCvSharp.Core.Mat image,System.Double newValue,System.Int32 maxSpeckleSize,System.Double maxDifference,OpenCvSharp.Core.Mat? buffer=null)"
+      ]
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.getValidDisparityROI(Rect roi1;Rect roi2;int minDisparity;int numberOfDisparities;int blockSize)-\u003ERect",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_get_valid_disparity_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Rect GetValidDisparityROI(OpenCvSharp.Core.Rect roi1,OpenCvSharp.Core.Rect roi2,System.Int32 minDisparity,System.Int32 numberOfDisparities,System.Int32 blockSize)"
+      ]
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.validateDisparity(Mat disparity[/IO];Mat cost;int minDisparity;int numberOfDisparities;int disp12MaxDisp=1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_validate_disparity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ValidateDisparity(OpenCvSharp.Core.Mat disparity,OpenCvSharp.Core.Mat cost,System.Int32 minDisparity,System.Int32 numberOfDisparities,System.Int32 disp12MaxDifference=1)"
+      ]
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.reprojectImageTo3D(Mat disparity;Mat _3dImage[/O];Mat Q;bool handleMissingValues=false;int ddepth=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_reproject_image_to_3d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat ReprojectImageTo3D(OpenCvSharp.Core.Mat disparity,OpenCvSharp.Core.Mat q,System.Boolean handleMissingValues=false,System.Int32 ddepth=-1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void ReprojectImageTo3D(OpenCvSharp.Core.Mat disparity,OpenCvSharp.Core.Mat image3D,OpenCvSharp.Core.Mat q,System.Boolean handleMissingValues=false,System.Int32 ddepth=-1)"
+      ]
+    },
+    {
+      "ordinal": 175,
+      "identity": "enum cv.CameraModel[const cv.CALIB_MODEL_PINHOLE=0;const cv.CALIB_MODEL_FISHEYE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 176,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.CALIB_USE_INTRINSIC_GUESS=0x00001;const cv.CALIB_FIX_ASPECT_RATIO=0x00002;const cv.CALIB_FIX_PRINCIPAL_POINT=0x00004;const cv.CALIB_ZERO_TANGENT_DIST=0x00008;const cv.CALIB_FIX_FOCAL_LENGTH=0x00010;const cv.CALIB_FIX_K1=0x00020;const cv.CALIB_FIX_K2=0x00040;const cv.CALIB_FIX_K3=0x00080;const cv.CALIB_FIX_K4=0x00800;const cv.CALIB_FIX_K5=0x01000;const cv.CALIB_FIX_K6=0x02000;const cv.CALIB_RATIONAL_MODEL=0x04000;const cv.CALIB_THIN_PRISM_MODEL=0x08000;const cv.CALIB_FIX_S1_S2_S3_S4=0x10000;const cv.CALIB_TILTED_MODEL=0x40000;const cv.CALIB_FIX_TAUX_TAUY=0x80000;const cv.CALIB_USE_QR=0x100000;const cv.CALIB_FIX_TANGENT_DIST=0x200000;const cv.CALIB_FIX_INTRINSIC=0x00100;const cv.CALIB_SAME_FOCAL_LENGTH=0x00200;const cv.CALIB_ZERO_DISPARITY=0x00400;const cv.CALIB_USE_LU=(1 \u003C\u003C 17);const cv.CALIB_DISABLE_SCHUR_COMPLEMENT=(1 \u003C\u003C 18);const cv.CALIB_USE_EXTRINSIC_GUESS=(1 \u003C\u003C 22);const cv.CALIB_RECOMPUTE_EXTRINSIC=(1 \u003C\u003C 23);const cv.CALIB_CHECK_COND=(1 \u003C\u003C 24);const cv.CALIB_FIX_SKEW=(1 \u003C\u003C 25);const cv.CALIB_STEREO_REGISTRATION=(1 \u003C\u003C 26)]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 177,
+      "identity": "enum cv.HandEyeCalibrationMethod[const cv.CALIB_HAND_EYE_TSAI=0;const cv.CALIB_HAND_EYE_PARK=1;const cv.CALIB_HAND_EYE_HORAUD=2;const cv.CALIB_HAND_EYE_ANDREFF=3;const cv.CALIB_HAND_EYE_DANIILIDIS=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 178,
+      "identity": "enum cv.RobotWorldHandEyeCalibrationMethod[const cv.CALIB_ROBOT_WORLD_HAND_EYE_SHAH=0;const cv.CALIB_ROBOT_WORLD_HAND_EYE_LI=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Enum declaration and values are retained as normalized metadata; this callable-slice map does not claim value-level enum parity.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.initCameraMatrix2D(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;double aspectRatio=1.0)-\u003EMat",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_init_camera_matrix_2d"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Mat InitCameraMatrix2D(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,System.Double aspectRatio=1)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Void InitCameraMatrix2D(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat cameraMatrix,System.Double aspectRatio=1)"
+      ]
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.calibrateCamera(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;Mat cameraMatrix[/IO];Mat distCoeffs[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat stdDeviationsIntrinsics[/O];Mat stdDeviationsExtrinsics[/O];Mat perViewErrors[/O];int flags=0;TermCriteria criteria=TermCriteria( TermCriteria::COUNT \u002B TermCriteria::EPS, 500, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibrate_camera",
+        "jyppx_ocv_calib3d_calibrate_camera_extended",
+        "jyppx_ocv_calib3d_calibrate_camera_ro",
+        "jyppx_ocv_calib3d_calibrate_camera_ro_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CalibrationResult CalibrateCamera(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double CalibrateCamera(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.calibrateCamera(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;Mat cameraMatrix[/IO];Mat distCoeffs[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags=0;TermCriteria criteria=TermCriteria( TermCriteria::COUNT \u002B TermCriteria::EPS, 500, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibrate_camera",
+        "jyppx_ocv_calib3d_calibrate_camera_extended",
+        "jyppx_ocv_calib3d_calibrate_camera_ro",
+        "jyppx_ocv_calib3d_calibrate_camera_ro_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CalibrationResult CalibrateCamera(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double CalibrateCamera(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.calibrateCameraRO(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;int iFixedPoint;Mat cameraMatrix[/IO];Mat distCoeffs[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat newObjPoints[/O];Mat stdDeviationsIntrinsics[/O];Mat stdDeviationsExtrinsics[/O];Mat stdDeviationsObjPoints[/O];Mat perViewErrors[/O];int flags=0;TermCriteria criteria=TermCriteria( TermCriteria::COUNT \u002B TermCriteria::EPS, 500, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibrate_camera_ro",
+        "jyppx_ocv_calib3d_calibrate_camera_ro_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CalibrationROResult CalibrateCameraRO(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,System.Int32 iFixedPoint,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double CalibrateCameraRO(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,System.Int32 iFixedPoint,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Core.Mat newObjectPoints,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.calibrateCameraRO(vector_Mat objectPoints;vector_Mat imagePoints;Size imageSize;int iFixedPoint;Mat cameraMatrix[/IO];Mat distCoeffs[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat newObjPoints[/O];int flags=0;TermCriteria criteria=TermCriteria( TermCriteria::COUNT \u002B TermCriteria::EPS, 500, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibrate_camera_ro",
+        "jyppx_ocv_calib3d_calibrate_camera_ro_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CalibrationROResult CalibrateCameraRO(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,System.Int32 iFixedPoint,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double CalibrateCameraRO(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,System.Int32 iFixedPoint,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Core.Mat newObjectPoints,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.stereoCalibrate(vector_Mat objectPoints;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat cameraMatrix1[/IO];Mat distCoeffs1[/IO];Mat cameraMatrix2[/IO];Mat distCoeffs2[/IO];Size imageSize;Mat R[/IO];Mat T[/IO];Mat E[/O];Mat F[/O];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat perViewErrors[/O];int flags=CALIB_FIX_INTRINSIC;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 100, 1e-6))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate",
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate_extended",
+        "jyppx_ocv_calib3d_stereo_calibrate",
+        "jyppx_ocv_calib3d_stereo_calibrate_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.StereoCalibrationResult StereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double StereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat e,OpenCvSharp.Core.Mat f,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.stereoCalibrate(vector_Mat objectPoints;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat cameraMatrix1[/IO];Mat distCoeffs1[/IO];Mat cameraMatrix2[/IO];Mat distCoeffs2[/IO];Size imageSize;Mat R[/O];Mat T[/O];Mat E[/O];Mat F[/O];int flags=CALIB_FIX_INTRINSIC;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 100, 1e-6))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate",
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate_extended",
+        "jyppx_ocv_calib3d_stereo_calibrate",
+        "jyppx_ocv_calib3d_stereo_calibrate_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.StereoCalibrationResult StereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double StereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat e,OpenCvSharp.Core.Mat f,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.stereoCalibrate(vector_Mat objectPoints;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat cameraMatrix1[/IO];Mat distCoeffs1[/IO];Mat cameraMatrix2[/IO];Mat distCoeffs2[/IO];Size imageSize;Mat R[/IO];Mat T[/IO];Mat E[/O];Mat F[/O];Mat perViewErrors[/O];int flags=CALIB_FIX_INTRINSIC;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 30, 1e-6))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate",
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate_extended",
+        "jyppx_ocv_calib3d_stereo_calibrate",
+        "jyppx_ocv_calib3d_stereo_calibrate_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.StereoCalibrationResult StereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double StereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat e,OpenCvSharp.Core.Mat f,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.registerCameras(vector_Mat objectPoints1;vector_Mat objectPoints2;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat cameraMatrix1;Mat distCoeffs1;CameraModel cameraModel1;Mat cameraMatrix2;Mat distCoeffs2;CameraModel cameraModel2;Mat R[/IO];Mat T[/IO];Mat E[/O];Mat F[/O];vector_Mat rvecs[/O];vector_Mat tvecs[/O];Mat perViewErrors[/O];int flags=0;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 100, 1e-6))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_register_cameras",
+        "jyppx_ocv_calib3d_register_cameras_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CameraRegistrationResult RegisterCameras(OpenCvSharp.Core.Point3f[][] objectPoints1,OpenCvSharp.Core.Point3f[][] objectPoints2,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Calib3D.CameraModel cameraModel1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.CameraModel cameraModel2,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double RegisterCameras(OpenCvSharp.Core.Point3f[][] objectPoints1,OpenCvSharp.Core.Point3f[][] objectPoints2,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Calib3D.CameraModel cameraModel1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.CameraModel cameraModel2,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat e,OpenCvSharp.Core.Mat f,OpenCvSharp.Core.Mat perViewErrors,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.registerCameras(vector_Mat objectPoints1;vector_Mat objectPoints2;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat cameraMatrix1;Mat distCoeffs1;CameraModel cameraModel1;Mat cameraMatrix2;Mat distCoeffs2;CameraModel cameraModel2;Mat R[/IO];Mat T[/IO];Mat E[/O];Mat F[/O];Mat perViewErrors[/O];int flags=0;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 100, 1e-6))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_register_cameras",
+        "jyppx_ocv_calib3d_register_cameras_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CameraRegistrationResult RegisterCameras(OpenCvSharp.Core.Point3f[][] objectPoints1,OpenCvSharp.Core.Point3f[][] objectPoints2,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Calib3D.CameraModel cameraModel1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.CameraModel cameraModel2,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double RegisterCameras(OpenCvSharp.Core.Point3f[][] objectPoints1,OpenCvSharp.Core.Point3f[][] objectPoints2,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Calib3D.CameraModel cameraModel1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Calib3D.CameraModel cameraModel2,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Core.Mat e,OpenCvSharp.Core.Mat f,OpenCvSharp.Core.Mat perViewErrors,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.calibrateMultiview(vector_Mat objPoints;vector_vector_Mat imagePoints[/C,/Ref];vector_Size imageSize[/C,/Ref];Mat detectionMask;Mat models;vector_Mat Ks[/IO];vector_Mat distortions[/IO];vector_Mat Rs[/IO];vector_Mat Ts[/IO];Mat initializationPairs[/O];vector_Mat rvecs0[/O];vector_Mat tvecs0[/O];Mat perFrameErrors[/O];Mat flagsForIntrinsics=Mat();int flags=0;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 100, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibrate_multiview",
+        "jyppx_ocv_calib3d_calibrate_multiview_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.MultiviewCalibrationResult CalibrateMultiview(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][][] imagePoints,OpenCvSharp.Core.Size[] imageSizes,System.Boolean[][] detectionMask,OpenCvSharp.Calib3D.CameraModel[] cameraModels,OpenCvSharp.Calib3D.CalibrationFlags[]? flagsForIntrinsics=null,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double CalibrateMultiview(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][][] imagePoints,OpenCvSharp.Core.Size[] imageSizes,System.Boolean[][] detectionMask,OpenCvSharp.Calib3D.CameraModel[] cameraModels,OpenCvSharp.Core.Mat[] cameraMatrices,OpenCvSharp.Core.Mat[] distCoeffs,OpenCvSharp.Core.Mat[] rotationVectors,OpenCvSharp.Core.Mat[] translationVectors,OpenCvSharp.Calib3D.CalibrationFlags[]? flagsForIntrinsics=null,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.calibrateMultiview(vector_Mat objPoints;vector_vector_Mat imagePoints[/C,/Ref];vector_Size imageSize[/C,/Ref];Mat detectionMask;Mat models;vector_Mat Ks[/IO];vector_Mat distortions[/IO];vector_Mat Rs[/IO];vector_Mat Ts[/IO];Mat flagsForIntrinsics=Mat();int flags=0;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 100, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_calibrate_multiview",
+        "jyppx_ocv_calib3d_calibrate_multiview_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.MultiviewCalibrationResult CalibrateMultiview(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][][] imagePoints,OpenCvSharp.Core.Size[] imageSizes,System.Boolean[][] detectionMask,OpenCvSharp.Calib3D.CameraModel[] cameraModels,OpenCvSharp.Calib3D.CalibrationFlags[]? flagsForIntrinsics=null,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double CalibrateMultiview(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][][] imagePoints,OpenCvSharp.Core.Size[] imageSizes,System.Boolean[][] detectionMask,OpenCvSharp.Calib3D.CameraModel[] cameraModels,OpenCvSharp.Core.Mat[] cameraMatrices,OpenCvSharp.Core.Mat[] distCoeffs,OpenCvSharp.Core.Mat[] rotationVectors,OpenCvSharp.Core.Mat[] translationVectors,OpenCvSharp.Calib3D.CalibrationFlags[]? flagsForIntrinsics=null,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.fisheye.calibrate(vector_Mat objectPoints;vector_Mat imagePoints;Size image_size[/C,/Ref];Mat K[/IO];Mat D[/IO];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags=0;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 100, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_calibrate"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.CalibrationResult FisheyeCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double FisheyeCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat distCoeffs,OpenCvSharp.Core.Mat rvecs,OpenCvSharp.Core.Mat tvecs,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.fisheye.stereoCalibrate(vector_Mat objectPoints;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat K1[/IO];Mat D1[/IO];Mat K2[/IO];Mat D2[/IO];Size imageSize;Mat R[/O];Mat T[/O];vector_Mat rvecs[/O];vector_Mat tvecs[/O];int flags=CALIB_FIX_INTRINSIC;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 100, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate",
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.FisheyeStereoCalibrationResult FisheyeStereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double FisheyeStereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.fisheye.stereoCalibrate(vector_Mat objectPoints;vector_Mat imagePoints1;vector_Mat imagePoints2;Mat K1[/IO];Mat D1[/IO];Mat K2[/IO];Mat D2[/IO];Size imageSize;Mat R[/O];Mat T[/O];int flags=CALIB_FIX_INTRINSIC;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 100, DBL_EPSILON))-\u003Edouble",
+      "classification": "implemented",
+      "reason": "Native and managed symbol-group evidence is present for this parsed declaration identity.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate",
+        "jyppx_ocv_calib3d_fisheye_stereo_calibrate_extended"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Calib3D.FisheyeStereoCalibrationResult FisheyeStereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Calib3D.CalibrationFlags flags=None,OpenCvSharp.Core.TermCriteria? criteria=null)",
+        "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Double FisheyeStereoCalibrate(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.Core.Point2f[][] imagePoints1,OpenCvSharp.Core.Point2f[][] imagePoints2,OpenCvSharp.Core.Mat cameraMatrix1,OpenCvSharp.Core.Mat distCoeffs1,OpenCvSharp.Core.Mat cameraMatrix2,OpenCvSharp.Core.Mat distCoeffs2,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Core.Mat r,OpenCvSharp.Core.Mat t,OpenCvSharp.Calib3D.CalibrationFlags flags=FixIntrinsic,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    }
+  ]
+}

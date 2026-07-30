@@ -77,10 +77,22 @@ namespace OpenCvSharp.Tests.ImgHash
         [Fact]
         public void ObjectHashRejectsInvalidInputBeforeNativeCall()
         {
+            AverageHash average;
+            try
+            {
+                average = AverageHash.Create();
+            }
+            catch (OpenCvException ex) when (
+                ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                Assert.Contains("NOT_LINKED", ex.Message, StringComparison.OrdinalIgnoreCase);
+                return;
+            }
+
             using (var empty = new Mat())
             using (var unsupportedInput = new Mat(8, 8, MatType.CV_32FC1, new Scalar(0.25)))
             using (var output = new Mat())
-            using (var average = AverageHash.Create())
+            using (average)
             {
                 Assert.Throws<ArgumentException>(() => average.Compute(empty, output));
                 Assert.Throws<ArgumentException>(() => average.Compute(empty));

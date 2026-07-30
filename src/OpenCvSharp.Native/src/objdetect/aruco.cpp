@@ -1,6 +1,7 @@
 #include "open_cv_sharp/objdetect/aruco.h"
 
 #include "../core/mat_handle.h"
+#include "../dnn/dnn_handles.h"
 #include "../error_state.h"
 #include "aruco_handles.h"
 
@@ -25,6 +26,13 @@ namespace
     }
 
     int validate_grid_board(const char* api_name, const jyppx_ocv_aruco_grid_board* board)
+    {
+        return board == nullptr
+            ? opencv_csharp_native::set_invalid_argument(api_name, "board")
+            : OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_board(const char* api_name, const jyppx_ocv_aruco_board* board)
     {
         return board == nullptr
             ? opencv_csharp_native::set_invalid_argument(api_name, "board")
@@ -280,6 +288,29 @@ namespace
         return OPENCV_CSHARP_STATUS_OK;
     }
 
+    int validate_point3f_groups(
+        const char* api_name,
+        const int* offsets,
+        int group_count,
+        const jyppx_ocv_point3f* points,
+        int point_count,
+        const char* offsets_name,
+        const char* points_name)
+    {
+        if (group_count < 0 || point_count < 0)
+            return opencv_csharp_native::set_invalid_argument(api_name, group_count < 0 ? offsets_name : points_name);
+        if (group_count == 0)
+            return point_count == 0 ? OPENCV_CSHARP_STATUS_OK : opencv_csharp_native::set_invalid_argument(api_name, points_name);
+        if (offsets == nullptr || (point_count > 0 && points == nullptr) || offsets[0] != 0)
+            return opencv_csharp_native::set_invalid_argument(api_name, offsets == nullptr || offsets[0] != 0 ? offsets_name : points_name);
+        for (int i = 0; i < group_count; ++i)
+            if (offsets[i] < 0 || offsets[i + 1] < offsets[i] || offsets[i + 1] > point_count)
+                return opencv_csharp_native::set_invalid_argument(api_name, offsets_name);
+        return offsets[group_count] == point_count
+            ? OPENCV_CSHARP_STATUS_OK
+            : opencv_csharp_native::set_invalid_argument(api_name, points_name);
+    }
+
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
     cv::aruco::DetectorParameters to_detector_params(const jyppx_ocv_aruco_detector_params& source)
     {
@@ -488,6 +519,47 @@ namespace
         }
 
         return static_cast<int>(total);
+    }
+
+    int point3_count(const std::vector<std::vector<cv::Point3f>>& groups)
+    {
+        size_t total = 0;
+        for (const std::vector<cv::Point3f>& group : groups)
+        {
+            total += group.size();
+            if (total > static_cast<size_t>(std::numeric_limits<int>::max())) return -1;
+        }
+        return static_cast<int>(total);
+    }
+
+    int copy_point3_groups(
+        const char* api_name,
+        const std::vector<std::vector<cv::Point3f>>& groups,
+        int* offsets,
+        int offset_capacity,
+        jyppx_ocv_point3f* points,
+        int point_capacity,
+        int* group_count,
+        int* total_point_count)
+    {
+        int status = set_count_from_size(api_name, groups.size(), group_count, "marker_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (total_point_count == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "object_point_count");
+        *total_point_count = point3_count(groups);
+        if (*total_point_count < 0) return opencv_csharp_native::set_invalid_argument(api_name, "object_point_count");
+        if (offsets == nullptr || offset_capacity < *group_count + 1) return opencv_csharp_native::set_invalid_argument(api_name, "offsets");
+        if (*total_point_count > 0 && (points == nullptr || point_capacity < *total_point_count)) return opencv_csharp_native::set_invalid_argument(api_name, "points");
+        int offset = 0;
+        offsets[0] = 0;
+        for (int i = 0; i < *group_count; ++i)
+        {
+            for (const cv::Point3f& point : groups[static_cast<size_t>(i)])
+            {
+                points[offset++] = { point.x, point.y, point.z };
+            }
+            offsets[i + 1] = offset;
+        }
+        return OPENCV_CSHARP_STATUS_OK;
     }
 
     int set_point_group_counts(
@@ -723,6 +795,24 @@ namespace
         return result;
     }
 
+    std::vector<std::vector<cv::Point3f>> to_point3f_groups(
+        const int* offsets,
+        int group_count,
+        const jyppx_ocv_point3f* points)
+    {
+        std::vector<std::vector<cv::Point3f>> result;
+        result.reserve(static_cast<size_t>(group_count));
+        for (int i = 0; i < group_count; ++i)
+        {
+            std::vector<cv::Point3f> group;
+            group.reserve(static_cast<size_t>(offsets[i + 1] - offsets[i]));
+            for (int j = offsets[i]; j < offsets[i + 1]; ++j)
+                group.emplace_back(points[j].x, points[j].y, points[j].z);
+            result.push_back(std::move(group));
+        }
+        return result;
+    }
+
     bool checker_is_valid(const jyppx_ocv_mcc_checker* checker)
     {
         return checker != nullptr && !checker->value.empty();
@@ -934,6 +1024,37 @@ int jyppx_ocv_aruco_dictionary_create_from_bytes_list(
 #else
         (void)marker_size;
         (void)max_correction_bits;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_aruco_dictionary_extend(
+    int marker_count,
+    int marker_size,
+    const jyppx_ocv_aruco_dictionary* base_dictionary,
+    int random_seed,
+    jyppx_ocv_aruco_dictionary** dictionary)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_dictionary_extend";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (marker_count < 0 || marker_size <= 0) return opencv_csharp_native::set_invalid_argument(api_name, marker_count < 0 ? "marker_count" : "marker_size");
+        if (dictionary == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionary");
+        *dictionary = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::aruco::Dictionary base = base_dictionary == nullptr ? cv::aruco::Dictionary() : base_dictionary->value;
+        auto* created = new (std::nothrow) jyppx_ocv_aruco_dictionary{ cv::aruco::extendDictionary(marker_count, marker_size, base, random_seed) };
+        if (created == nullptr) return opencv_csharp_native::set_out_of_memory(api_name);
+        *dictionary = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)base_dictionary; (void)random_seed;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }
@@ -1518,6 +1639,42 @@ int jyppx_ocv_aruco_detector_create(
     }
 }
 
+int jyppx_ocv_aruco_detector_create_multi_dictionary(
+    const jyppx_ocv_aruco_dictionary* const* dictionaries,
+    int dictionary_count,
+    const jyppx_ocv_aruco_detector_params* detector_params,
+    const jyppx_ocv_aruco_refine_params* refine_params,
+    jyppx_ocv_aruco_detector** detector)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_detector_create_multi_dictionary";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (dictionary_count <= 0 || dictionaries == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionaries");
+        if (detector == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "detector");
+        *detector = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::aruco::Dictionary> native_dictionaries;
+        native_dictionaries.reserve(static_cast<size_t>(dictionary_count));
+        for (int i = 0; i < dictionary_count; ++i)
+        {
+            if (dictionaries[i] == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionaries");
+            native_dictionaries.push_back(dictionaries[i]->value);
+        }
+        const auto native_detector_params = detector_params == nullptr ? cv::aruco::DetectorParameters() : to_detector_params(*detector_params);
+        const auto native_refine_params = refine_params == nullptr ? cv::aruco::RefineParameters() : to_refine_params(*refine_params);
+        auto* created = new (std::nothrow) jyppx_ocv_aruco_detector{ cv::aruco::ArucoDetector(native_dictionaries, native_detector_params, native_refine_params) };
+        if (created == nullptr) return opencv_csharp_native::set_out_of_memory(api_name);
+        *detector = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)detector_params; (void)refine_params;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
 void jyppx_ocv_aruco_detector_release_handle(jyppx_ocv_aruco_detector* detector)
 {
     delete detector;
@@ -1577,6 +1734,81 @@ int jyppx_ocv_aruco_detector_set_dictionary(jyppx_ocv_aruco_detector* detector, 
     {
         return opencv_csharp_native::translate_current_exception(api_name);
     }
+}
+
+int jyppx_ocv_aruco_detector_get_dictionaries_count(const jyppx_ocv_aruco_detector* detector, int* dictionary_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_detector_get_dictionaries_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        return set_count_from_size(api_name, detector->value.getDictionaries().size(), dictionary_count, "dictionary_count");
+#else
+        if (dictionary_count != nullptr) *dictionary_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_detector_get_dictionary_at(
+    const jyppx_ocv_aruco_detector* detector,
+    int dictionary_index,
+    jyppx_ocv_aruco_dictionary** dictionary)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_detector_get_dictionary_at";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (dictionary == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionary");
+        *dictionary = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const auto values = detector->value.getDictionaries();
+        if (dictionary_index < 0 || static_cast<size_t>(dictionary_index) >= values.size()) return opencv_csharp_native::set_invalid_argument(api_name, "dictionary_index");
+        auto* created = new (std::nothrow) jyppx_ocv_aruco_dictionary{ values[static_cast<size_t>(dictionary_index)] };
+        if (created == nullptr) return opencv_csharp_native::set_out_of_memory(api_name);
+        *dictionary = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)dictionary_index;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_detector_set_dictionaries(
+    jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_aruco_dictionary* const* dictionaries,
+    int dictionary_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_detector_set_dictionaries";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (dictionary_count <= 0 || dictionaries == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionaries");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::aruco::Dictionary> values;
+        values.reserve(static_cast<size_t>(dictionary_count));
+        for (int i = 0; i < dictionary_count; ++i)
+        {
+            if (dictionaries[i] == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionaries");
+            values.push_back(dictionaries[i]->value);
+        }
+        detector->value.setDictionaries(values);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
 
 int jyppx_ocv_aruco_detector_get_detector_parameters(const jyppx_ocv_aruco_detector* detector, jyppx_ocv_aruco_detector_params* params)
@@ -1795,6 +2027,94 @@ int jyppx_ocv_aruco_detector_detect_markers_fill(
     {
         return opencv_csharp_native::translate_current_exception(api_name);
     }
+}
+
+int jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count(
+    const jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_mat* image,
+    int* marker_count,
+    int* corner_point_count,
+    int* rejected_count,
+    int* rejected_point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<std::vector<cv::Point2f>> corners, rejected;
+        std::vector<int> ids, dictionary_indices;
+        detector->value.detectMarkersMultiDict(opencv_csharp_native::mat_value(image), corners, ids, rejected, dictionary_indices);
+        status = set_point_group_counts(api_name, corners, marker_count, corner_point_count);
+        return status == OPENCV_CSHARP_STATUS_OK
+            ? set_point_group_counts(api_name, rejected, rejected_count, rejected_point_count)
+            : status;
+#else
+        if (marker_count != nullptr) *marker_count = 0;
+        if (corner_point_count != nullptr) *corner_point_count = 0;
+        if (rejected_count != nullptr) *rejected_count = 0;
+        if (rejected_point_count != nullptr) *rejected_point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill(
+    const jyppx_ocv_aruco_detector* detector,
+    const jyppx_ocv_mat* image,
+    int* corner_offsets,
+    int corner_offset_capacity,
+    jyppx_ocv_point2f* corners,
+    int corner_capacity,
+    int* ids,
+    int id_capacity,
+    int* dictionary_indices,
+    int dictionary_index_capacity,
+    int* rejected_offsets,
+    int rejected_offset_capacity,
+    jyppx_ocv_point2f* rejected_points,
+    int rejected_point_capacity,
+    int* marker_count,
+    int* corner_point_count,
+    int* rejected_count,
+    int* rejected_point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<std::vector<cv::Point2f>> native_corners, native_rejected;
+        std::vector<int> native_ids, native_dictionary_indices;
+        detector->value.detectMarkersMultiDict(opencv_csharp_native::mat_value(image), native_corners, native_ids, native_rejected, native_dictionary_indices);
+        status = copy_point_groups(api_name, native_corners, corner_offsets, corner_offset_capacity, corners, corner_capacity, marker_count, corner_point_count, "corner_offsets", "corners");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = copy_ints(api_name, native_ids, ids, id_capacity, "ids");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = copy_ints(api_name, native_dictionary_indices, dictionary_indices, dictionary_index_capacity, "dictionary_indices");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        return copy_point_groups(api_name, native_rejected, rejected_offsets, rejected_offset_capacity, rejected_points, rejected_point_capacity, rejected_count, rejected_point_count, "rejected_offsets", "rejected_points");
+#else
+        (void)corner_offsets; (void)corner_offset_capacity; (void)corners; (void)corner_capacity;
+        (void)ids; (void)id_capacity; (void)dictionary_indices; (void)dictionary_index_capacity;
+        (void)rejected_offsets; (void)rejected_offset_capacity; (void)rejected_points; (void)rejected_point_capacity;
+        if (marker_count != nullptr) *marker_count = 0;
+        if (corner_point_count != nullptr) *corner_point_count = 0;
+        if (rejected_count != nullptr) *rejected_count = 0;
+        if (rejected_point_count != nullptr) *rejected_point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
 
 int jyppx_ocv_aruco_detector_detect_markers_with_confidence_count(
@@ -2102,6 +2422,307 @@ int jyppx_ocv_aruco_detector_refine_detected_markers_fill(
     {
         return opencv_csharp_native::translate_current_exception(api_name);
     }
+}
+
+int jyppx_ocv_aruco_draw_detected_markers(
+    jyppx_ocv_mat* image,
+    const int* corner_offsets,
+    int marker_count,
+    const jyppx_ocv_point2f* corners,
+    int corner_point_count,
+    const int* ids,
+    int id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_draw_detected_markers";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_point2f_groups(api_name, corner_offsets, marker_count, corners, corner_point_count, "corner_offsets", "corners");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_ids(api_name, ids, id_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (id_count != 0 && id_count != marker_count) return opencv_csharp_native::set_invalid_argument(api_name, "id_count");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::aruco::drawDetectedMarkers(
+            opencv_csharp_native::mat_value(image),
+            to_point2f_groups(corner_offsets, marker_count, corners, corner_point_count),
+            to_int_vector(ids, id_count),
+            cv::Scalar(color_v0, color_v1, color_v2, color_v3));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)color_v0; (void)color_v1; (void)color_v2; (void)color_v3;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_board_create(
+    const int* object_point_offsets,
+    int marker_count,
+    const jyppx_ocv_point3f* object_points,
+    int object_point_count,
+    const jyppx_ocv_aruco_dictionary* dictionary,
+    const int* ids,
+    int id_count,
+    jyppx_ocv_aruco_board** board)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_point3f_groups(api_name, object_point_offsets, marker_count, object_points, object_point_count, "object_point_offsets", "object_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_dictionary(api_name, dictionary);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_ids(api_name, ids, id_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (id_count != marker_count) return opencv_csharp_native::set_invalid_argument(api_name, "id_count");
+        if (board == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "board");
+        *board = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        auto native_points = to_point3f_groups(object_point_offsets, marker_count, object_points);
+        auto* created = new (std::nothrow) jyppx_ocv_aruco_board{ cv::aruco::Board(native_points, dictionary->value, to_int_vector(ids, id_count)) };
+        if (created == nullptr) return opencv_csharp_native::set_out_of_memory(api_name);
+        *board = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_aruco_board_release_handle(jyppx_ocv_aruco_board* board)
+{
+    delete board;
+}
+
+int jyppx_ocv_aruco_board_get_dictionary(
+    const jyppx_ocv_aruco_board* board,
+    jyppx_ocv_aruco_dictionary** dictionary)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_get_dictionary";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (dictionary == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "dictionary");
+        *dictionary = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        auto* created = new (std::nothrow) jyppx_ocv_aruco_dictionary{ board->value.getDictionary() };
+        if (created == nullptr) return opencv_csharp_native::set_out_of_memory(api_name);
+        *dictionary = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_aruco_board_get_object_points_count(
+    const jyppx_ocv_aruco_board* board,
+    int* marker_count,
+    int* object_point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_get_object_points_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        status = set_count_from_size(api_name, board->value.getObjPoints().size(), marker_count, "marker_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (object_point_count == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "object_point_count");
+        *object_point_count = point3_count(board->value.getObjPoints());
+        return *object_point_count < 0 ? opencv_csharp_native::set_invalid_argument(api_name, "object_point_count") : OPENCV_CSHARP_STATUS_OK;
+#else
+        if (marker_count != nullptr) *marker_count = 0;
+        if (object_point_count != nullptr) *object_point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_aruco_board_get_object_points_fill(
+    const jyppx_ocv_aruco_board* board,
+    int* offsets,
+    int offset_capacity,
+    jyppx_ocv_point3f* points,
+    int point_capacity,
+    int* marker_count,
+    int* object_point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_get_object_points_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        return copy_point3_groups(api_name, board->value.getObjPoints(), offsets, offset_capacity, points, point_capacity, marker_count, object_point_count);
+#else
+        (void)offsets; (void)offset_capacity; (void)points; (void)point_capacity;
+        if (marker_count != nullptr) *marker_count = 0;
+        if (object_point_count != nullptr) *object_point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_aruco_board_get_ids_count(const jyppx_ocv_aruco_board* board, int* id_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_get_ids_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        return set_count_from_size(api_name, board->value.getIds().size(), id_count, "id_count");
+#else
+        if (id_count != nullptr) *id_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_board_get_ids_fill(
+    const jyppx_ocv_aruco_board* board,
+    int* ids,
+    int id_capacity,
+    int* id_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_get_ids_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        status = set_count_from_size(api_name, board->value.getIds().size(), id_count, "id_count");
+        return status == OPENCV_CSHARP_STATUS_OK ? copy_ints(api_name, board->value.getIds(), ids, id_capacity, "ids") : status;
+#else
+        (void)ids; (void)id_capacity;
+        if (id_count != nullptr) *id_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_board_get_right_bottom_corner(
+    const jyppx_ocv_aruco_board* board,
+    jyppx_ocv_point3f* corner)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_get_right_bottom_corner";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (corner == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "corner");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        const cv::Point3f& value = board->value.getRightBottomCorner();
+        *corner = { value.x, value.y, value.z };
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *corner = {};
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_board_match_image_points(
+    const jyppx_ocv_aruco_board* board,
+    const int* detected_offsets,
+    int detected_group_count,
+    const jyppx_ocv_point2f* detected_points,
+    int detected_point_count,
+    const int* detected_ids,
+    int detected_id_count,
+    jyppx_ocv_mat* object_points,
+    jyppx_ocv_mat* image_points)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_match_image_points";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_point2f_groups(api_name, detected_offsets, detected_group_count, detected_points, detected_point_count, "detected_offsets", "detected_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_ids(api_name, detected_ids, detected_id_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (detected_id_count != detected_group_count) return opencv_csharp_native::set_invalid_argument(api_name, "detected_id_count");
+        status = validate_mat(api_name, object_points, "object_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, image_points, "image_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        board->value.matchImagePoints(
+            to_point2f_groups(detected_offsets, detected_group_count, detected_points, detected_point_count),
+            to_int_vector(detected_ids, detected_id_count),
+            opencv_csharp_native::mat_value(object_points),
+            opencv_csharp_native::mat_value(image_points));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_board_generate_image(
+    const jyppx_ocv_aruco_board* board,
+    int width,
+    int height,
+    jyppx_ocv_mat* image,
+    int margin_size,
+    int border_bits)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_board_generate_image";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_board(api_name, board);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        board->value.generateImage(cv::Size(width, height), opencv_csharp_native::mat_value(image), margin_size, border_bits);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)width; (void)height; (void)margin_size; (void)border_bits;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
 
 int jyppx_ocv_aruco_grid_board_create(
@@ -2834,6 +3455,92 @@ int jyppx_ocv_aruco_charuco_detector_set_charuco_parameters(
     }
 }
 
+int jyppx_ocv_aruco_charuco_detector_get_detector_parameters(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    jyppx_ocv_aruco_detector_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_charuco_detector_get_detector_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_charuco_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (params == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "params");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *params = from_detector_params(detector->value.getDetectorParameters());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        set_default_detector_params(params);
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_charuco_detector_set_detector_parameters(
+    jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_aruco_detector_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_charuco_detector_set_detector_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_charuco_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (params == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "params");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        detector->value.setDetectorParameters(to_detector_params(*params));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_charuco_detector_get_refine_parameters(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    jyppx_ocv_aruco_refine_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_charuco_detector_get_refine_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_charuco_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (params == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "params");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *params = from_refine_params(detector->value.getRefineParameters());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        set_default_refine_params(params);
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_charuco_detector_set_refine_parameters(
+    jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_aruco_refine_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_charuco_detector_set_refine_parameters";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_charuco_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (params == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "params");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        detector->value.setRefineParameters(to_refine_params(*params));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
 int jyppx_ocv_aruco_charuco_detector_detect_board_count(
     const jyppx_ocv_aruco_charuco_detector* detector,
     const jyppx_ocv_mat* image,
@@ -2966,6 +3673,204 @@ int jyppx_ocv_aruco_charuco_detector_detect_board_fill(
     {
         return opencv_csharp_native::translate_current_exception(api_name);
     }
+}
+
+int jyppx_ocv_aruco_charuco_detector_detect_diamonds_count(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_mat* image,
+    const int* input_marker_offsets,
+    int input_marker_count,
+    const jyppx_ocv_point2f* input_marker_points,
+    int input_marker_point_count,
+    const int* input_marker_ids,
+    int input_marker_id_count,
+    int* diamond_count,
+    int* diamond_point_count,
+    int* marker_count,
+    int* marker_point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_charuco_detector_detect_diamonds_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_charuco_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_point2f_groups(api_name, input_marker_offsets, input_marker_count, input_marker_points, input_marker_point_count, "input_marker_offsets", "input_marker_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_ids(api_name, input_marker_ids, input_marker_id_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (input_marker_id_count != input_marker_count) return opencv_csharp_native::set_invalid_argument(api_name, "input_marker_id_count");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<std::vector<cv::Point2f>> diamonds;
+        std::vector<cv::Vec4i> diamond_ids;
+        auto markers = to_point2f_groups(input_marker_offsets, input_marker_count, input_marker_points, input_marker_point_count);
+        auto marker_ids = to_int_vector(input_marker_ids, input_marker_id_count);
+        detector->value.detectDiamonds(opencv_csharp_native::mat_value(image), diamonds, diamond_ids, markers, marker_ids);
+        status = set_point_group_counts(api_name, diamonds, diamond_count, diamond_point_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        return set_point_group_counts(api_name, markers, marker_count, marker_point_count);
+#else
+        if (diamond_count != nullptr) *diamond_count = 0;
+        if (diamond_point_count != nullptr) *diamond_point_count = 0;
+        if (marker_count != nullptr) *marker_count = 0;
+        if (marker_point_count != nullptr) *marker_point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill(
+    const jyppx_ocv_aruco_charuco_detector* detector,
+    const jyppx_ocv_mat* image,
+    const int* input_marker_offsets,
+    int input_marker_count,
+    const jyppx_ocv_point2f* input_marker_points,
+    int input_marker_point_count,
+    const int* input_marker_ids,
+    int input_marker_id_count,
+    int* diamond_offsets,
+    int diamond_offset_capacity,
+    jyppx_ocv_point2f* diamond_points,
+    int diamond_point_capacity,
+    int* diamond_ids,
+    int diamond_id_capacity,
+    int* marker_offsets,
+    int marker_offset_capacity,
+    jyppx_ocv_point2f* marker_points,
+    int marker_point_capacity,
+    int* marker_ids,
+    int marker_id_capacity,
+    int* diamond_count,
+    int* diamond_point_count,
+    int* marker_count,
+    int* marker_point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_charuco_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_point2f_groups(api_name, input_marker_offsets, input_marker_count, input_marker_points, input_marker_point_count, "input_marker_offsets", "input_marker_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_ids(api_name, input_marker_ids, input_marker_id_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (input_marker_id_count != input_marker_count) return opencv_csharp_native::set_invalid_argument(api_name, "input_marker_id_count");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<std::vector<cv::Point2f>> diamonds;
+        std::vector<cv::Vec4i> native_diamond_ids;
+        auto markers = to_point2f_groups(input_marker_offsets, input_marker_count, input_marker_points, input_marker_point_count);
+        auto native_marker_ids = to_int_vector(input_marker_ids, input_marker_id_count);
+        detector->value.detectDiamonds(opencv_csharp_native::mat_value(image), diamonds, native_diamond_ids, markers, native_marker_ids);
+        status = copy_point_groups(api_name, diamonds, diamond_offsets, diamond_offset_capacity, diamond_points, diamond_point_capacity, diamond_count, diamond_point_count, "diamond_offsets", "diamond_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (native_diamond_ids.size() != diamonds.size() || native_diamond_ids.size() > static_cast<size_t>(std::numeric_limits<int>::max() / 4))
+            return opencv_csharp_native::set_invalid_argument(api_name, "diamond_ids");
+        const int required_diamond_ids = static_cast<int>(native_diamond_ids.size()) * 4;
+        if (required_diamond_ids > 0 && (diamond_ids == nullptr || diamond_id_capacity < required_diamond_ids))
+            return opencv_csharp_native::set_invalid_argument(api_name, "diamond_ids");
+        for (int i = 0; i < *diamond_count; ++i)
+            for (int j = 0; j < 4; ++j)
+                diamond_ids[i * 4 + j] = native_diamond_ids[static_cast<size_t>(i)][j];
+        status = copy_point_groups(api_name, markers, marker_offsets, marker_offset_capacity, marker_points, marker_point_capacity, marker_count, marker_point_count, "marker_offsets", "marker_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        return copy_ints(api_name, native_marker_ids, marker_ids, marker_id_capacity, "marker_ids");
+#else
+        (void)diamond_offsets; (void)diamond_offset_capacity; (void)diamond_points; (void)diamond_point_capacity;
+        (void)diamond_ids; (void)diamond_id_capacity; (void)marker_offsets; (void)marker_offset_capacity;
+        (void)marker_points; (void)marker_point_capacity; (void)marker_ids; (void)marker_id_capacity;
+        if (diamond_count != nullptr) *diamond_count = 0;
+        if (diamond_point_count != nullptr) *diamond_point_count = 0;
+        if (marker_count != nullptr) *marker_count = 0;
+        if (marker_point_count != nullptr) *marker_point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_draw_detected_corners_charuco(
+    jyppx_ocv_mat* image,
+    const jyppx_ocv_point2f* corners,
+    int corner_count,
+    const int* ids,
+    int id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_draw_detected_corners_charuco";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (corner_count < 0 || (corner_count > 0 && corners == nullptr)) return opencv_csharp_native::set_invalid_argument(api_name, "corners");
+        status = validate_ids(api_name, ids, id_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (id_count != 0 && id_count != corner_count) return opencv_csharp_native::set_invalid_argument(api_name, "id_count");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::aruco::drawDetectedCornersCharuco(
+            opencv_csharp_native::mat_value(image),
+            to_point2f_vector(corners, corner_count),
+            to_int_vector(ids, id_count),
+            cv::Scalar(color_v0, color_v1, color_v2, color_v3));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)color_v0; (void)color_v1; (void)color_v2; (void)color_v3;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_aruco_draw_detected_diamonds(
+    jyppx_ocv_mat* image,
+    const int* diamond_offsets,
+    int diamond_count,
+    const jyppx_ocv_point2f* diamond_points,
+    int diamond_point_count,
+    const int* diamond_ids,
+    int diamond_id_count,
+    double color_v0,
+    double color_v1,
+    double color_v2,
+    double color_v3)
+{
+    constexpr const char* api_name = "jyppx_ocv_aruco_draw_detected_diamonds";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_point2f_groups(api_name, diamond_offsets, diamond_count, diamond_points, diamond_point_count, "diamond_offsets", "diamond_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (diamond_count < 0 || diamond_count > (std::numeric_limits<int>::max() / 4) || diamond_id_count < 0 ||
+            (diamond_id_count > 0 && diamond_ids == nullptr) || (diamond_id_count != 0 && diamond_id_count != diamond_count * 4))
+            return opencv_csharp_native::set_invalid_argument(api_name, "diamond_ids");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Vec4i> native_ids;
+        native_ids.reserve(static_cast<size_t>(diamond_count));
+        for (int i = 0; i < diamond_id_count; i += 4)
+            native_ids.emplace_back(diamond_ids[i], diamond_ids[i + 1], diamond_ids[i + 2], diamond_ids[i + 3]);
+        cv::aruco::drawDetectedDiamonds(
+            opencv_csharp_native::mat_value(image),
+            to_point2f_groups(diamond_offsets, diamond_count, diamond_points, diamond_point_count),
+            native_ids,
+            cv::Scalar(color_v0, color_v1, color_v2, color_v3));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)color_v0; (void)color_v1; (void)color_v2; (void)color_v3;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
 
 int jyppx_ocv_mcc_checker_create(jyppx_ocv_mcc_checker** checker)
@@ -3509,9 +4414,105 @@ int jyppx_ocv_mcc_checker_detector_create(jyppx_ocv_mcc_checker_detector** detec
     }
 }
 
+int jyppx_ocv_mcc_checker_detector_create_from_net(
+    const jyppx_ocv_dnn_net* net,
+    jyppx_ocv_mcc_checker_detector** detector)
+{
+    constexpr const char* api_name = "jyppx_ocv_mcc_checker_detector_create_from_net";
+
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (net == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "net");
+        }
+        if (detector == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "detector");
+        }
+        *detector = nullptr;
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        jyppx_ocv_mcc_checker_detector* created = new (std::nothrow) jyppx_ocv_mcc_checker_detector{ cv::mcc::CCheckerDetector::create(net->value) };
+        if (created == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        if (created->value.empty())
+        {
+            delete created;
+            return opencv_csharp_native::set_last_error(OPENCV_CSHARP_STATUS_NATIVE_EXCEPTION, "OpenCV returned an empty CCheckerDetector.");
+        }
+        *detector = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
 void jyppx_ocv_mcc_checker_detector_release_handle(jyppx_ocv_mcc_checker_detector* detector)
 {
     delete detector;
+}
+
+int jyppx_ocv_mcc_checker_detector_get_use_dnn_model(
+    const jyppx_ocv_mcc_checker_detector* detector,
+    int* use_dnn_model)
+{
+    constexpr const char* api_name = "jyppx_ocv_mcc_checker_detector_get_use_dnn_model";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mcc_checker_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, use_dnn_model, "use_dnn_model");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        status = validate_mcc_checker_detector_value(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *use_dnn_model = detector->value->getUseDnnModel() ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *use_dnn_model = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_mcc_checker_detector_set_use_dnn_model(
+    jyppx_ocv_mcc_checker_detector* detector,
+    int use_dnn_model)
+{
+    constexpr const char* api_name = "jyppx_ocv_mcc_checker_detector_set_use_dnn_model";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_mcc_checker_detector(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        status = validate_mcc_checker_detector_value(api_name, detector);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        detector->value->setUseDnnModel(use_dnn_model != 0);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)use_dnn_model;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
 }
 
 int jyppx_ocv_mcc_checker_detector_process(

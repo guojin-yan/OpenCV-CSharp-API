@@ -1190,6 +1190,71 @@ namespace OpenCvSharp.Tests.ImgProc
         }
 
         [Fact]
+        public void SpanPointAdvancedGeometryFastPathsMatchArrayResultsWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            Point[] polygon = new Point[]
+            {
+                new Point(0, 0),
+                new Point(2, 0),
+                new Point(4, 0),
+                new Point(4, 4),
+                new Point(0, 4)
+            };
+            Point[] otherPolygon = new Point[]
+            {
+                new Point(2, 0),
+                new Point(6, 0),
+                new Point(6, 4),
+                new Point(2, 4)
+            };
+            Point[] ellipsePoints = new Point[]
+            {
+                new Point(0, 2),
+                new Point(1, 0),
+                new Point(3, 0),
+                new Point(4, 2),
+                new Point(3, 4),
+                new Point(1, 4)
+            };
+            ReadOnlySpan<Point> polygonSpan = polygon.AsSpan();
+            ReadOnlySpan<Point> otherPolygonSpan = otherPolygon.AsSpan();
+            ReadOnlySpan<Point> ellipseSpan = ellipsePoints.AsSpan();
+
+            Assert.Equal(ImgProcCv2.ApproxPolyN(polygon, 4), ImgProcCv2.ApproxPolyN(polygonSpan, 4));
+            AssertEllipseLooksReasonable(ImgProcCv2.FitEllipse(ellipsePoints));
+            AssertEllipseLooksReasonable(ImgProcCv2.FitEllipse(ellipseSpan));
+            AssertEllipseLooksReasonable(ImgProcCv2.FitEllipseAMS(ellipsePoints));
+            AssertEllipseLooksReasonable(ImgProcCv2.FitEllipseAMS(ellipseSpan));
+            AssertEllipseLooksReasonable(ImgProcCv2.FitEllipseDirect(ellipsePoints));
+            AssertEllipseLooksReasonable(ImgProcCv2.FitEllipseDirect(ellipseSpan));
+
+            RotatedRect ellipse = ImgProcCv2.FitEllipse(ellipseSpan);
+            Assert.Equal(
+                ImgProcCv2.GetClosestEllipsePoints(ellipse, ellipsePoints),
+                ImgProcCv2.GetClosestEllipsePoints(ellipse, ellipseSpan));
+
+            double arrayTriangleArea = ImgProcCv2.MinEnclosingTriangle(polygon, out Point2f[] arrayTriangle);
+            double spanTriangleArea = ImgProcCv2.MinEnclosingTriangle(polygonSpan, out Point2f[] spanTriangle);
+            Assert.Equal(arrayTriangleArea, spanTriangleArea);
+            Assert.Equal(arrayTriangle, spanTriangle);
+
+            double arrayPolygonArea = ImgProcCv2.MinEnclosingConvexPolygon(polygon, 4, out Point2f[] arrayEnclosingPolygon);
+            double spanPolygonArea = ImgProcCv2.MinEnclosingConvexPolygon(polygonSpan, 4, out Point2f[] spanEnclosingPolygon);
+            Assert.Equal(arrayPolygonArea, spanPolygonArea);
+            Assert.Equal(arrayEnclosingPolygon, spanEnclosingPolygon);
+
+            float arrayIntersectionArea = ImgProcCv2.IntersectConvexConvex(polygon, otherPolygon, out Point2f[] arrayIntersection);
+            float spanIntersectionArea = ImgProcCv2.IntersectConvexConvex(polygonSpan, otherPolygonSpan, out Point2f[] spanIntersection);
+            Assert.Equal(arrayIntersectionArea, spanIntersectionArea);
+            Assert.Equal(arrayIntersection, spanIntersection);
+        }
+
+        [Fact]
         public void SpanPointFastPathsRejectEmptyInputs()
         {
             Assert.Throws<ArgumentException>(CallContourAreaWithEmptySpan);
@@ -1204,6 +1269,33 @@ namespace OpenCvSharp.Tests.ImgProc
             Assert.Throws<ArgumentException>(CallMatchShapesWithEmptySpan);
             Assert.Throws<ArgumentException>(CallMinAreaRectWithEmptySpan);
             Assert.Throws<ArgumentException>(CallFitLineWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallApproxPolyNWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallFitEllipseWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallFitEllipseAmsWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallFitEllipseDirectWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallGetClosestEllipsePointsWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallMinEnclosingTriangleWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallMinEnclosingConvexPolygonWithEmptySpan);
+            Assert.Throws<ArgumentException>(CallIntersectConvexConvexWithFirstEmptySpan);
+            Assert.Throws<ArgumentException>(CallIntersectConvexConvexWithSecondEmptySpan);
+        }
+
+        [Fact]
+        public void SpanPointAdvancedGeometryFastPathsValidateScalarAndMinimumPointArguments()
+        {
+            Point[] fourPoints = new Point[]
+            {
+                new Point(0, 0),
+                new Point(1, 0),
+                new Point(1, 1),
+                new Point(0, 1)
+            };
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => CallApproxPolyNWithInvalidSideCount(fourPoints));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CallMinEnclosingConvexPolygonWithInvalidVertexCount(fourPoints));
+            Assert.Throws<ArgumentException>(() => CallFitEllipseWithTooFewPoints(fourPoints));
+            Assert.Throws<ArgumentException>(() => CallFitEllipseAmsWithTooFewPoints(fourPoints));
+            Assert.Throws<ArgumentException>(() => CallFitEllipseDirectWithTooFewPoints(fourPoints));
         }
 
         [Fact]
@@ -1439,6 +1531,78 @@ namespace OpenCvSharp.Tests.ImgProc
         private static void CallFitLineWithEmptySpan()
         {
             ImgProcCv2.FitLine(ReadOnlySpan<Point>.Empty, DistanceTypes.L2, 0.0, 0.01, 0.01);
+        }
+
+        private static void CallApproxPolyNWithEmptySpan()
+        {
+            ImgProcCv2.ApproxPolyN(ReadOnlySpan<Point>.Empty, 3);
+        }
+
+        private static void CallFitEllipseWithEmptySpan()
+        {
+            ImgProcCv2.FitEllipse(ReadOnlySpan<Point>.Empty);
+        }
+
+        private static void CallFitEllipseAmsWithEmptySpan()
+        {
+            ImgProcCv2.FitEllipseAMS(ReadOnlySpan<Point>.Empty);
+        }
+
+        private static void CallFitEllipseDirectWithEmptySpan()
+        {
+            ImgProcCv2.FitEllipseDirect(ReadOnlySpan<Point>.Empty);
+        }
+
+        private static void CallGetClosestEllipsePointsWithEmptySpan()
+        {
+            ImgProcCv2.GetClosestEllipsePoints(default, ReadOnlySpan<Point>.Empty);
+        }
+
+        private static void CallMinEnclosingTriangleWithEmptySpan()
+        {
+            ImgProcCv2.MinEnclosingTriangle(ReadOnlySpan<Point>.Empty, out _);
+        }
+
+        private static void CallMinEnclosingConvexPolygonWithEmptySpan()
+        {
+            ImgProcCv2.MinEnclosingConvexPolygon(ReadOnlySpan<Point>.Empty, 3, out _);
+        }
+
+        private static void CallIntersectConvexConvexWithFirstEmptySpan()
+        {
+            Point[] polygon = new Point[] { new Point(0, 0), new Point(1, 0), new Point(0, 1) };
+            ImgProcCv2.IntersectConvexConvex(ReadOnlySpan<Point>.Empty, polygon.AsSpan(), out _);
+        }
+
+        private static void CallIntersectConvexConvexWithSecondEmptySpan()
+        {
+            Point[] polygon = new Point[] { new Point(0, 0), new Point(1, 0), new Point(0, 1) };
+            ImgProcCv2.IntersectConvexConvex(polygon.AsSpan(), ReadOnlySpan<Point>.Empty, out _);
+        }
+
+        private static void CallApproxPolyNWithInvalidSideCount(Point[] points)
+        {
+            ImgProcCv2.ApproxPolyN(points.AsSpan(), 2);
+        }
+
+        private static void CallMinEnclosingConvexPolygonWithInvalidVertexCount(Point[] points)
+        {
+            ImgProcCv2.MinEnclosingConvexPolygon(points.AsSpan(), 2, out _);
+        }
+
+        private static void CallFitEllipseWithTooFewPoints(Point[] points)
+        {
+            ImgProcCv2.FitEllipse(points.AsSpan());
+        }
+
+        private static void CallFitEllipseAmsWithTooFewPoints(Point[] points)
+        {
+            ImgProcCv2.FitEllipseAMS(points.AsSpan());
+        }
+
+        private static void CallFitEllipseDirectWithTooFewPoints(Point[] points)
+        {
+            ImgProcCv2.FitEllipseDirect(points.AsSpan());
         }
     }
 }

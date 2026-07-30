@@ -1,5 +1,7 @@
 # DNN Net Guide
 
+The complete OpenCV 5 structured network, ownership, shape, preprocessing, and deterministic fixture contract is documented in [DNN Structured Parity Guide](dnn-structured-parity-guide.md).
+
 `OpenCvSharp.Dnn` exposes the OpenCV DNN surface: `Net`, path and buffer model loading, input setup, forward passes, multi-output forward, layer-name and metadata queries, profiling helpers, FLOPS helpers, and blob helpers. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_dnn500.dll` in linked runtime packages.
 
 `OpenCvSharp.Dnn` 暴露 OpenCV DNN 接口：`Net`、模型路径和缓冲区加载、输入设置、forward、多输出 forward、层名称和元数据查询、profile helper、FLOPS helper 和 blob 辅助函数。这些 API 在 linked runtime 包中需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_dnn500.dll`。
@@ -109,7 +111,7 @@ namespace DnnForwardSample
 }
 ```
 
-Default tests do not download or require a model. Real model smoke can be enabled with `OPENCV_CSHARP_DNN_MODEL`, `OPENCV_CSHARP_DNN_CONFIG`, and optionally `OPENCV_CSHARP_DNN_FRAMEWORK`. The older `OPENCV5SHARP_DNN_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
+Default tests and ConsoleSamples use a checked-in 147-byte Identity ONNX fixture and never download a model. Additional user-model smoke can be enabled with `OPENCV_CSHARP_DNN_MODEL`, `OPENCV_CSHARP_DNN_CONFIG`, and optionally `OPENCV_CSHARP_DNN_FRAMEWORK`. The older `OPENCV5SHARP_DNN_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
 
 默认测试不会下载或要求模型。真实模型 smoke 可按需通过 `OPENCV_CSHARP_DNN_MODEL`、`OPENCV_CSHARP_DNN_CONFIG`，以及可选的 `OPENCV_CSHARP_DNN_FRAMEWORK` 启用。旧的 `OPENCV5SHARP_DNN_*` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 

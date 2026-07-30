@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 2,
+  "managedPublicMemberAdditionCount": 18,
+  "families": [
+    {
+      "id": "features-ann-index",
+      "rationale": "The complete ANNIndex family is offline-safe, deterministic with a fixed seed, and adds the largest adjacent unimplemented main-module object family without external model assets.",
+      "declarations": [
+        {
+          "ordinal": 171,
+          "upstreamIdentity": "class cv.ANNIndex",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [
+            "TYPE|class|public;sealed|OpenCvSharp.Features2D.ANNIndex|base=|interfaces=System.IDisposable"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 172,
+          "upstreamIdentity": "enum cv.ANNIndex.Distance[const cv.ANNIndex.DIST_EUCLIDEAN=0;const cv.ANNIndex.DIST_MANHATTAN=1;const cv.ANNIndex.DIST_ANGULAR=2;const cv.ANNIndex.DIST_HAMMING=3;const cv.ANNIndex.DIST_DOTPRODUCT=4]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [
+            "TYPE|enum|public|OpenCvSharp.Features2D.ANNIndexDistance|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 173,
+          "upstreamIdentity": "cv.ANNIndex.addItems(Mat features)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_add_items"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void AddItems(OpenCvSharp.Core.Mat features)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 174,
+          "upstreamIdentity": "cv.ANNIndex.build(int trees=-1)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_build"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Build(System.Int32 trees=-1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 175,
+          "upstreamIdentity": "cv.ANNIndex.knnSearch(Mat query;Mat indices[/O];Mat dists[/O];int knn;int search_k=-1)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_knn_search"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void KnnSearch(OpenCvSharp.Core.Mat query,OpenCvSharp.Core.Mat indices,OpenCvSharp.Core.Mat distances,System.Int32 knn,System.Int32 searchK=-1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 176,
+          "upstreamIdentity": "cv.ANNIndex.save(String filename[/C,/Ref,/PATH];bool prefault=false)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_save"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Save(System.String filename,System.Boolean prefault=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 177,
+          "upstreamIdentity": "cv.ANNIndex.load(String filename[/C,/Ref,/PATH];bool prefault=false)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_load"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void Load(System.String filename,System.Boolean prefault=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 178,
+          "upstreamIdentity": "cv.ANNIndex.getTreeNumber()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_get_tree_number"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|property|instance;get:public|System.Int32 TreeNumber"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 179,
+          "upstreamIdentity": "cv.ANNIndex.getItemNumber()-\u003Eint",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_get_item_number"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|property|instance;get:public|System.Int32 ItemNumber"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 180,
+          "upstreamIdentity": "cv.ANNIndex.setOnDiskBuild(String filename[/C,/Ref,/PATH])-\u003Ebool",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_set_on_disk_build"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Boolean SetOnDiskBuild(System.String filename)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 181,
+          "upstreamIdentity": "cv.ANNIndex.setSeed(int seed)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_set_seed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;instance|System.Void SetSeed(System.Int32 seed)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        },
+        {
+          "ordinal": 182,
+          "upstreamIdentity": "cv.ANNIndex.create(int dim;ANNIndex_Distance distType=ANNIndex::DIST_EUCLIDEAN)-\u003EPtr\u003CANNIndex\u003E",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_features2d_ann_index_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Features2D.ANNIndex|method|public;static|OpenCvSharp.Features2D.ANNIndex Create(System.Int32 dimension,OpenCvSharp.Features2D.ANNIndexDistance distance=Euclidean)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/features-upstream-parity-guide.md"
+        }
+      ]
+    }
+  ]
+}

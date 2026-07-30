@@ -325,6 +325,10 @@ if (-not [string]::IsNullOrWhiteSpace($Platform)) {
     $cmakeArgs += @("-A", $Platform)
 }
 
+if ($buildTarget.PlatformFamily -eq "windows" -and $Rid -eq "win-x86") {
+    $cmakeArgs += @("-T", "host=x64")
+}
+
 if ($buildTarget.BuildSystem -eq "multi-config") {
     $cmakeArgs += "-DCMAKE_CONFIGURATION_TYPES=$Configuration"
 }

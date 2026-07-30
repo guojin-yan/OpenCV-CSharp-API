@@ -46,9 +46,9 @@ namespace OpenCvSharp.Tests.Dnn
         [Fact]
         public void AdvancedManagedValidationThrows()
         {
-            Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromOnnx(null!));
-            Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromTensorflow(null!));
-            Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromTFLite(null!));
+            Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromOnnx((string)null!));
+            Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromTensorflow((string)null!));
+            Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromTFLite((string)null!));
             Assert.Throws<ArgumentNullException>(() => Net.ReadNetFromModelOptimizer(null!));
             Assert.Throws<ArgumentNullException>(() => Net.ReadNet((string)null!));
             Assert.Throws<ArgumentNullException>(() => Net.ReadNet(null!, Array.Empty<byte>()));

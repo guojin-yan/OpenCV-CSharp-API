@@ -123,7 +123,7 @@ namespace OpenCvSharp.XImgProc
             XImgProcCv2.ValidateNotNull(filteredDisparityMap, nameof(filteredDisparityMap));
             XImgProcCv2.ValidateDisparityWLSFilterArguments(disparityMapLeft, leftView, disparityMapRight, useConfidence);
             NativeMethods.XImgProcRectNative nativeRoi = NativeXImgProcConvert.ToNative(roi ?? default(Rect));
-            NativeException.ThrowIfError(NativeMethods.XImgProcDisparityWLSFilterFilter(
+            NativeException.ThrowIfError(NativeMethods.XImgProcDisparityFilterFilter(
                 NativeHandle,
                 disparityMapLeft.NativeHandle,
                 leftView.NativeHandle,

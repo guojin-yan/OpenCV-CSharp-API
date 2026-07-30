@@ -41,3 +41,31 @@ struct jyppx_ocv_background_subtractor_knn : jyppx_ocv_background_subtractor
     int placeholder;
 #endif
 };
+
+struct jyppx_ocv_dense_optical_flow
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::Ptr<cv::DenseOpticalFlow> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_sparse_optical_flow
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::Ptr<cv::SparseOpticalFlow> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_video_tracker
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::Ptr<cv::Tracker> value;
+    bool initialized = false;
+#else
+    int placeholder;
+#endif
+};

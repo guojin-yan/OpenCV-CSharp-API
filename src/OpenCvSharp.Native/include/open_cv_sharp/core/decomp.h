@@ -254,3 +254,82 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_pow(
     const jyppx_ocv_mat* src,
     double power,
     jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_calc_covar_matrix(
+    const jyppx_ocv_mat* samples,
+    jyppx_ocv_mat* covar,
+    jyppx_ocv_mat* mean,
+    int flags,
+    int ctype);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_pca_compute_max_components(
+    const jyppx_ocv_mat* data,
+    jyppx_ocv_mat* mean,
+    jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* eigenvalues,
+    int max_components);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_pca_compute_retained_variance(
+    const jyppx_ocv_mat* data,
+    jyppx_ocv_mat* mean,
+    jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* eigenvalues,
+    double retained_variance);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_pca_project(
+    const jyppx_ocv_mat* data,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_pca_back_project(
+    const jyppx_ocv_mat* data,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* eigenvectors,
+    jyppx_ocv_mat* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_set_rng_seed(int seed);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_randu_mat(
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* low,
+    const jyppx_ocv_mat* high);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_randu_scalar(
+    jyppx_ocv_mat* dst,
+    double low_v0,
+    double low_v1,
+    double low_v2,
+    double low_v3,
+    double high_v0,
+    double high_v1,
+    double high_v2,
+    double high_v3);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_randn_mat(
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mean,
+    const jyppx_ocv_mat* stddev);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_randn_scalar(
+    jyppx_ocv_mat* dst,
+    double mean_v0,
+    double mean_v1,
+    double mean_v2,
+    double mean_v3,
+    double stddev_v0,
+    double stddev_v1,
+    double stddev_v2,
+    double stddev_v3);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_rand_shuffle(
+    jyppx_ocv_mat* dst,
+    double iter_factor,
+    jyppx_ocv_rng* rng);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_solve_lp(
+    const jyppx_ocv_mat* objective,
+    const jyppx_ocv_mat* constraints,
+    jyppx_ocv_mat* solution,
+    double constraint_epsilon,
+    int* out_result);

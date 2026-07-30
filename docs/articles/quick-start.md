@@ -16,9 +16,9 @@ Linux runtime packages use distro-specific Linux RID package IDs, for example `J
 
 Linux runtime package 使用 distro-specific Linux RID package ID，例如 `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`、`JYPPX.OpenCV.runtime.ubuntu.24.04-x64`、`JYPPX.OpenCV.runtime.debian.12-x64` 和 `JYPPX.OpenCV.runtime.alpine.3.20-x64`；它们不是通用 `linux-x64` 包。外部 consumer 使用这些项目自定义 distro RID 时，如果 .NET SDK 默认不认识所选 RID，应在 restore 前把 `RuntimeIdentifierGraphPath` 指向 `packaging/runtime/runtime-distro-rid-graph.json`，或指向复制到 consumer project 的等效 RID graph。
 
-For deeper runtime setup, fallback, smoke, and license details, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md).
+For deeper runtime setup, fallback, smoke, and license details, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
-更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](../../packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
+更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 ```powershell
 dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0.0

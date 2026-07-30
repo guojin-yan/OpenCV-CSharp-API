@@ -253,6 +253,10 @@ namespace StandaloneManagedConsumer;
 
 internal static class Program
 {
+    private static readonly Action<Mat[], Mat, double, int> DenoiseTvl1 = PhotoCv2.DenoiseTvl1;
+    private static readonly Action<Mat, Mat, Mat, Size, int, int> CorrectChromaticAberration = PhotoCv2.CorrectChromaticAberration;
+    private static readonly Func<FileNode, OpenCvSharp.Photo.ChromaticAberrationParameters> LoadChromaticAberrationParams = PhotoCv2.LoadChromaticAberrationParams;
+
     private static readonly Type[] RepresentativeTypes =
     {
         typeof(OpenCvException),
@@ -278,6 +282,24 @@ internal static class Program
         typeof(OpenCvSharp.Calib3D.StereoBM),
         typeof(OpenCvSharp.Dnn.Net),
         typeof(OpenCvSharp.ObjDetect.QRCodeDetector),
+        typeof(OpenCvSharp.Photo.AlignMTB),
+        typeof(OpenCvSharp.Photo.CalibrateDebevec),
+        typeof(OpenCvSharp.Photo.MergeMertens),
+        typeof(OpenCvSharp.Photo.ColorCorrectionModel),
+        typeof(OpenCvSharp.Photo.ChromaticAberrationParameters),
+        typeof(OpenCvSharp.Photo.IntelligentScissorsMB),
+        typeof(OpenCvSharp.Photo.CcmType),
+        typeof(OpenCvSharp.Photo.InitialMethodType),
+        typeof(OpenCvSharp.Photo.ColorCheckerType),
+        typeof(OpenCvSharp.Photo.ColorSpace),
+        typeof(OpenCvSharp.Photo.LinearizationType),
+        typeof(OpenCvSharp.Photo.DistanceType),
+        typeof(OpenCvSharp.Video.MotionType),
+        typeof(OpenCvSharp.Video.ECCParameters),
+        typeof(OpenCvSharp.Video.ECCRegistrationResult),
+        typeof(OpenCvSharp.Video.Tracker),
+        typeof(OpenCvSharp.Video.TrackerMIL),
+        typeof(OpenCvSharp.Video.TrackerMILParams),
         typeof(OpenCvSharp.VideoIO.VideoCapture),
         typeof(OpenCvSharp.VideoIO.VideoWriter),
         typeof(OpenCvSharp.ML.SVM),
@@ -303,6 +325,15 @@ internal static class Program
         default(OpenCvSharp.Dnn.DnnTarget),
         default(OpenCvSharp.ObjDetect.PredefinedDictionaryType),
         default(OpenCvSharp.Photo.InpaintMethod),
+        default(OpenCvSharp.Photo.CcmType),
+        default(OpenCvSharp.Photo.InitialMethodType),
+        default(OpenCvSharp.Photo.ColorCheckerType),
+        default(OpenCvSharp.Photo.ColorSpace),
+        default(OpenCvSharp.Photo.LinearizationType),
+        default(OpenCvSharp.Photo.DistanceType),
+        default(OpenCvSharp.Video.MotionType),
+        new OpenCvSharp.Video.ECCParameters(),
+        OpenCvSharp.Video.TrackerMILParams.Default,
         default(OpenCvSharp.Video.OpticalFlowFlags),
         default(OpenCvSharp.VideoIO.VideoCaptureAPIs),
         default(OpenCvSharp.ML.SVMTypes),
@@ -314,8 +345,9 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 28 &&
-            RepresentativeValues.Length >= 21 &&
+        return RepresentativeTypes.Length >= 46 &&
+            RepresentativeValues.Length >= 30 &&
+            DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
             exceptionType.Namespace == "OpenCvSharp" &&
             message.Length > 0
             ? 0

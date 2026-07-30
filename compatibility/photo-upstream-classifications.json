@@ -1,0 +1,1799 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/photo.hpp and opencv2/photo/photo.hpp compatibility headers measured through the three parser-emitted OpenCV 5.0.0 main Photo public source headers",
+  "reviewStatus": "source-reviewed",
+  "limitation": "The map covers the exact OpenCV 5.0.0 CPU main Photo compatibility include closure. CUDA and contrib xphoto are excluded, and repository-wide parity is not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.INPAINT_NS=0;const cv.INPAINT_TELEA=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.inpaint(Mat src;Mat inpaintMask;Mat dst[/O];double inpaintRadius;int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_inpaint"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void Inpaint(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat inpaintMask,OpenCvSharp.Core.Mat dst,System.Double inpaintRadius,OpenCvSharp.Photo.InpaintMethod flags)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.fastNlMeansDenoising(Mat src;Mat dst[/O];float h=3;int templateWindowSize=7;int searchWindowSize=21)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_fast_nl_means_denoising"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void FastNlMeansDenoising(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Single h=3,System.Int32 templateWindowSize=7,System.Int32 searchWindowSize=21)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.fastNlMeansDenoising(Mat src;Mat dst[/O];vector_float h[/C,/Ref];int templateWindowSize=7;int searchWindowSize=21;int normType=NORM_L2)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_fast_nl_means_denoising_with_h_array"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void FastNlMeansDenoising(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Single[] h,System.Int32 templateWindowSize=7,System.Int32 searchWindowSize=21,OpenCvSharp.Core.NormTypes normType=L2)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.fastNlMeansDenoisingColored(Mat src;Mat dst[/O];float h=3;float hColor=3;int templateWindowSize=7;int searchWindowSize=21)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_fast_nl_means_denoising_colored"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void FastNlMeansDenoisingColored(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Single h=3,System.Single hColor=3,System.Int32 templateWindowSize=7,System.Int32 searchWindowSize=21)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.fastNlMeansDenoisingMulti(vector_Mat srcImgs;Mat dst[/O];int imgToDenoiseIndex;int temporalWindowSize;float h=3;int templateWindowSize=7;int searchWindowSize=21)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_fast_nl_means_denoising_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void FastNlMeansDenoisingMulti(OpenCvSharp.Core.Mat[] srcImages,OpenCvSharp.Core.Mat dst,System.Int32 imgToDenoiseIndex,System.Int32 temporalWindowSize,System.Single h=3,System.Int32 templateWindowSize=7,System.Int32 searchWindowSize=21)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.fastNlMeansDenoisingMulti(vector_Mat srcImgs;Mat dst[/O];int imgToDenoiseIndex;int temporalWindowSize;vector_float h[/C,/Ref];int templateWindowSize=7;int searchWindowSize=21;int normType=NORM_L2)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_fast_nl_means_denoising_multi_with_h_array"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void FastNlMeansDenoisingMulti(OpenCvSharp.Core.Mat[] srcImages,OpenCvSharp.Core.Mat dst,System.Int32 imgToDenoiseIndex,System.Int32 temporalWindowSize,System.Single[] h,System.Int32 templateWindowSize=7,System.Int32 searchWindowSize=21,OpenCvSharp.Core.NormTypes normType=L2)"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.fastNlMeansDenoisingColoredMulti(vector_Mat srcImgs;Mat dst[/O];int imgToDenoiseIndex;int temporalWindowSize;float h=3;float hColor=3;int templateWindowSize=7;int searchWindowSize=21)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_fast_nl_means_denoising_colored_multi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void FastNlMeansDenoisingColoredMulti(OpenCvSharp.Core.Mat[] srcImages,OpenCvSharp.Core.Mat dst,System.Int32 imgToDenoiseIndex,System.Int32 temporalWindowSize,System.Single h=3,System.Single hColor=3,System.Int32 templateWindowSize=7,System.Int32 searchWindowSize=21)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.denoise_TVL1(vector_Mat observations[/C,/Ref];Mat result[/Ref];double lambda=1.0;int niters=30)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed Photo surface exposes the source-reviewed TV-L1 observation collection, caller-owned output, positive scalar validation, and CV_8UC1 safety contract.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_denoise_tvl1"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void DenoiseTvl1(OpenCvSharp.Core.Mat[] observations,OpenCvSharp.Core.Mat result,System.Double lambda=1,System.Int32 niters=30)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.LDR_SIZE=256]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 10,
+      "identity": "class cv.Tonemap",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.Tonemap.process(Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.Tonemap|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.Tonemap.getGamma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_get_gamma"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.Tonemap|property|instance;get:public;set:public|System.Single Gamma"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.Tonemap.setGamma(float gamma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_set_gamma"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.Tonemap|property|instance;get:public;set:public|System.Single Gamma"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.createTonemap(float gamma=1.0f)-\u003EPtr\u003CTonemap\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.Tonemap|method|public;static|OpenCvSharp.Photo.Tonemap Create(System.Single gamma=1)"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "class cv.TonemapDrago",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.TonemapDrago.getSaturation()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_drago_get_saturation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapDrago|property|instance;get:public;set:public|System.Single Saturation"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.TonemapDrago.setSaturation(float saturation)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_drago_set_saturation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapDrago|property|instance;get:public;set:public|System.Single Saturation"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.TonemapDrago.getBias()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_drago_get_bias"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapDrago|property|instance;get:public;set:public|System.Single Bias"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.TonemapDrago.setBias(float bias)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_drago_set_bias"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapDrago|property|instance;get:public;set:public|System.Single Bias"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.createTonemapDrago(float gamma=1.0f;float saturation=1.0f;float bias=0.85f)-\u003EPtr\u003CTonemapDrago\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_drago_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapDrago|method|public;static|OpenCvSharp.Photo.TonemapDrago Create(System.Single gamma=1,System.Single saturation=1,System.Single bias=0.85)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "class cv.TonemapReinhard",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.TonemapReinhard.getIntensity()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_get_intensity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|property|instance;get:public;set:public|System.Single Intensity"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.TonemapReinhard.setIntensity(float intensity)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_set_intensity"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|property|instance;get:public;set:public|System.Single Intensity"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.TonemapReinhard.getLightAdaptation()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_get_light_adaptation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|property|instance;get:public;set:public|System.Single LightAdaptation"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.TonemapReinhard.setLightAdaptation(float light_adapt)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_set_light_adaptation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|property|instance;get:public;set:public|System.Single LightAdaptation"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.TonemapReinhard.getColorAdaptation()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_get_color_adaptation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|property|instance;get:public;set:public|System.Single ColorAdaptation"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.TonemapReinhard.setColorAdaptation(float color_adapt)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_set_color_adaptation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|property|instance;get:public;set:public|System.Single ColorAdaptation"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.createTonemapReinhard(float gamma=1.0f;float intensity=0.0f;float light_adapt=1.0f;float color_adapt=0.0f)-\u003EPtr\u003CTonemapReinhard\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_reinhard_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapReinhard|method|public;static|OpenCvSharp.Photo.TonemapReinhard Create(System.Single gamma=1,System.Single intensity=0,System.Single lightAdapt=1,System.Single colorAdapt=0)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "class cv.TonemapMantiuk",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.TonemapMantiuk.getScale()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_mantiuk_get_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapMantiuk|property|instance;get:public;set:public|System.Single Scale"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.TonemapMantiuk.setScale(float scale)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_mantiuk_set_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapMantiuk|property|instance;get:public;set:public|System.Single Scale"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.TonemapMantiuk.getSaturation()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_mantiuk_get_saturation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapMantiuk|property|instance;get:public;set:public|System.Single Saturation"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.TonemapMantiuk.setSaturation(float saturation)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_mantiuk_set_saturation"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapMantiuk|property|instance;get:public;set:public|System.Single Saturation"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.createTonemapMantiuk(float gamma=1.0f;float scale=0.7f;float saturation=1.0f)-\u003EPtr\u003CTonemapMantiuk\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tonemap_mantiuk_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.TonemapMantiuk|method|public;static|OpenCvSharp.Photo.TonemapMantiuk Create(System.Single gamma=1,System.Single scale=0.7,System.Single saturation=1)"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "class cv.AlignExposures",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.AlignExposures.process(vector_Mat src;vector_Mat dst[/Ref];Mat times;Mat response)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "class cv.AlignMTB",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.AlignMTB.process(vector_Mat src;vector_Mat dst[/Ref];Mat times;Mat response)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.AlignMTB.process(vector_Mat src;vector_Mat dst[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat[] dst)"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.AlignMTB.calculateShift(Mat img0;Mat img1)-\u003EPoint",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_calculate_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|OpenCvSharp.Core.Point CalculateShift(OpenCvSharp.Core.Mat img0,OpenCvSharp.Core.Mat img1)"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.AlignMTB.shiftMat(Mat src;Mat dst[/O];Point shift[/C])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_shift_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|System.Void ShiftMat(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Point shift)"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.AlignMTB.computeBitmaps(Mat img;Mat tb[/O];Mat eb[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_compute_bitmaps"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;instance|System.Void ComputeBitmaps(OpenCvSharp.Core.Mat img,OpenCvSharp.Core.Mat thresholdBitmap,OpenCvSharp.Core.Mat excludeBitmap)"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.AlignMTB.getMaxBits()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_get_max_bits"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 MaxBits"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.AlignMTB.setMaxBits(int max_bits)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_set_max_bits"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 MaxBits"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.AlignMTB.getExcludeRange()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_get_exclude_range"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 ExcludeRange"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.AlignMTB.setExcludeRange(int exclude_range)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_set_exclude_range"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Int32 ExcludeRange"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.AlignMTB.getCut()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_get_cut"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Boolean Cut"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.AlignMTB.setCut(bool value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_set_cut"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|property|instance;get:public;set:public|System.Boolean Cut"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.createAlignMTB(int max_bits=6;int exclude_range=4;bool cut=true)-\u003EPtr\u003CAlignMTB\u003E",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_align_mtb_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.AlignMTB|method|public;static|OpenCvSharp.Photo.AlignMTB Create(System.Int32 maxBits=6,System.Int32 excludeRange=4,System.Boolean cut=true)"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "class cv.CalibrateCRF",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.CalibrateCRF.process(vector_Mat src;Mat dst[/O];Mat times)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_crf_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateCRF|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times)"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "class cv.CalibrateDebevec",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.CalibrateDebevec.getLambda()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_get_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Single Lambda"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.CalibrateDebevec.setLambda(float lambda)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_set_lambda"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Single Lambda"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.CalibrateDebevec.getSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_get_samples"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Int32 Samples"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.CalibrateDebevec.setSamples(int samples)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_set_samples"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Int32 Samples"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.CalibrateDebevec.getRandom()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_get_random"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Boolean Random"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.CalibrateDebevec.setRandom(bool random)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_set_random"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|property|instance;get:public;set:public|System.Boolean Random"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.createCalibrateDebevec(int samples=70;float lambda=10.0f;bool random=false)-\u003EPtr\u003CCalibrateDebevec\u003E",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_debevec_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateDebevec|method|public;static|OpenCvSharp.Photo.CalibrateDebevec Create(System.Int32 samples=70,System.Single lambda=10,System.Boolean random=false)"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "class cv.CalibrateRobertson",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.CalibrateRobertson.getMaxIter()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_robertson_get_max_iter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Int32 MaxIter"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.CalibrateRobertson.setMaxIter(int max_iter)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_robertson_set_max_iter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Int32 MaxIter"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.CalibrateRobertson.getThreshold()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_robertson_get_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Single Threshold"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.CalibrateRobertson.setThreshold(float threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_robertson_set_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|property|instance;get:public;set:public|System.Single Threshold"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.CalibrateRobertson.getRadiance()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_robertson_get_radiance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|method|public;instance|OpenCvSharp.Core.Mat GetRadiance()"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.createCalibrateRobertson(int max_iter=30;float threshold=0.01f)-\u003EPtr\u003CCalibrateRobertson\u003E",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_calibrate_robertson_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.CalibrateRobertson|method|public;static|OpenCvSharp.Photo.CalibrateRobertson Create(System.Int32 maxIter=30,System.Single threshold=0.01)"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "class cv.MergeExposures",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.MergeExposures.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "class cv.MergeDebevec",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.MergeDebevec.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.MergeDebevec.process(vector_Mat src;Mat dst[/O];Mat times)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeDebevec|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.createMergeDebevec()-\u003EPtr\u003CMergeDebevec\u003E",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_debevec_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeDebevec|method|public;static|OpenCvSharp.Photo.MergeDebevec Create()"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "class cv.MergeMertens",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.MergeMertens.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.MergeMertens.process(vector_Mat src;Mat dst[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst)"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.MergeMertens.getContrastWeight()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_get_contrast_weight"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ContrastWeight"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.MergeMertens.setContrastWeight(float contrast_weiht)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_set_contrast_weight"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ContrastWeight"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.MergeMertens.getSaturationWeight()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_get_saturation_weight"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single SaturationWeight"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.MergeMertens.setSaturationWeight(float saturation_weight)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_set_saturation_weight"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single SaturationWeight"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.MergeMertens.getExposureWeight()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_get_exposure_weight"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ExposureWeight"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.MergeMertens.setExposureWeight(float exposure_weight)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_set_exposure_weight"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|property|instance;get:public;set:public|System.Single ExposureWeight"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.createMergeMertens(float contrast_weight=1.0f;float saturation_weight=1.0f;float exposure_weight=0.0f)-\u003EPtr\u003CMergeMertens\u003E",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_mertens_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeMertens|method|public;static|OpenCvSharp.Photo.MergeMertens Create(System.Single contrastWeight=1,System.Single saturationWeight=1,System.Single exposureWeight=0)"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "class cv.MergeRobertson",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.MergeRobertson.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeExposures|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times,OpenCvSharp.Core.Mat response)"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.MergeRobertson.process(vector_Mat src;Mat dst[/O];Mat times)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_exposures_process"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeRobertson|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat[] src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat times)"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.createMergeRobertson()-\u003EPtr\u003CMergeRobertson\u003E",
+      "classification": "implemented",
+      "reason": "The selected HDR batch has a version-neutral opaque-handle ABI, caller-owned Mat outputs, explicit collection counts, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_merge_robertson_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.MergeRobertson|method|public;static|OpenCvSharp.Photo.MergeRobertson Create()"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.decolor(Mat src;Mat grayscale[/O];Mat color_boost[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_decolor"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void Decolor(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat grayscale,OpenCvSharp.Core.Mat colorBoost)"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "enum cv.SeamlessCloneFlags[const cv.NORMAL_CLONE=1;const cv.MIXED_CLONE=2;const cv.MONOCHROME_TRANSFER=3;const cv.NORMAL_CLONE_WIDE=9;const cv.MIXED_CLONE_WIDE=10;const cv.MONOCHROME_TRANSFER_WIDE=11]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.seamlessClone(Mat src;Mat dst;Mat mask;Point p;Mat blend[/O];int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_seamless_clone"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void SeamlessClone(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point center,OpenCvSharp.Core.Mat blend,OpenCvSharp.Photo.SeamlessCloneFlags flags)"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.colorChange(Mat src;Mat mask;Mat dst[/O];float red_mul=1.0f;float green_mul=1.0f;float blue_mul=1.0f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_color_change"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void ColorChange(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Mat dst,System.Single redMul=1,System.Single greenMul=1,System.Single blueMul=1)"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.illuminationChange(Mat src;Mat mask;Mat dst[/O];float alpha=0.2f;float beta=0.4f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_illumination_change"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void IlluminationChange(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Mat dst,System.Single alpha=0.2,System.Single beta=0.4)"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.textureFlattening(Mat src;Mat mask;Mat dst[/O];float low_threshold=30;float high_threshold=45;int kernel_size=3)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_texture_flattening"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void TextureFlattening(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Mat dst,System.Single lowThreshold=30,System.Single highThreshold=45,System.Int32 kernelSize=3)"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.RECURS_FILTER=1;const cv.NORMCONV_FILTER=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.edgePreservingFilter(Mat src;Mat dst[/O];int flags=1;float sigma_s=60;float sigma_r=0.4f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_edge_preserving_filter"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void EdgePreservingFilter(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,OpenCvSharp.Photo.EdgePreservingFilterFlags flags=RecursiveFilter,System.Single sigmaS=60,System.Single sigmaR=0.4)"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.detailEnhance(Mat src;Mat dst[/O];float sigma_s=10;float sigma_r=0.15f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_detail_enhance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void DetailEnhance(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Single sigmaS=10,System.Single sigmaR=0.15)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.pencilSketch(Mat src;Mat dst1[/O];Mat dst2[/O];float sigma_s=60;float sigma_r=0.07f;float shade_factor=0.02f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_pencil_sketch"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void PencilSketch(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst1,OpenCvSharp.Core.Mat dst2,System.Single sigmaS=60,System.Single sigmaR=0.07,System.Single shadeFactor=0.02)"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.stylization(Mat src;Mat dst[/O];float sigma_s=60;float sigma_r=0.45f)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Photo surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_stylization"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void Stylization(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Single sigmaS=60,System.Single sigmaR=0.45)"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.correctChromaticAberration(Mat input_image;Mat coefficients;Mat output_image[/O];Size image_size[/C,/Ref];int calib_degree;int bayer_pattern=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed Photo surface exposes source-reviewed chromatic correction with caller-owned output and validated coefficient, size, degree, and Bayer semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_correct_chromatic_aberration"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void CorrectChromaticAberration(OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat coefficients,OpenCvSharp.Core.Mat outputImage,OpenCvSharp.Core.Size calibrationSize,System.Int32 calibrationDegree,System.Int32 bayerPattern=-1)"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.loadChromaticAberrationParams(FileNode node[/C,/Ref];Mat coeffMat[/O];Size calib_size[/O,/Ref];int degree[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed Photo surface reuses the type-safe Core FileNode accessor and copies loaded coefficients into independently owned Mat storage with explicit size and degree outputs.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_load_chromatic_aberration_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void LoadChromaticAberrationParams(OpenCvSharp.Core.FileNode node,OpenCvSharp.Core.Mat coefficients,out OpenCvSharp.Core.Size calibrationSize,out System.Int32 degree)"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "enum cv.ccm.CcmType[const cv.ccm.CCM_LINEAR=0;const cv.ccm.CCM_AFFINE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "enum cv.ccm.InitialMethodType[const cv.ccm.INITIAL_METHOD_WHITE_BALANCE=0;const cv.ccm.INITIAL_METHOD_LEAST_SQUARE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 102,
+      "identity": "enum cv.ccm.ColorCheckerType[const cv.ccm.COLORCHECKER_MACBETH=0;const cv.ccm.COLORCHECKER_VINYL=1;const cv.ccm.COLORCHECKER_DIGITAL_SG=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 103,
+      "identity": "enum cv.ccm.ColorSpace[const cv.ccm.COLOR_SPACE_SRGB=0;const cv.ccm.COLOR_SPACE_SRGBL=1;const cv.ccm.COLOR_SPACE_ADOBE_RGB=2;const cv.ccm.COLOR_SPACE_ADOBE_RGBL=3;const cv.ccm.COLOR_SPACE_WIDE_GAMUT_RGB=4;const cv.ccm.COLOR_SPACE_WIDE_GAMUT_RGBL=5;const cv.ccm.COLOR_SPACE_PRO_PHOTO_RGB=6;const cv.ccm.COLOR_SPACE_PRO_PHOTO_RGBL=7;const cv.ccm.COLOR_SPACE_DCI_P3_RGB=8;const cv.ccm.COLOR_SPACE_DCI_P3_RGBL=9;const cv.ccm.COLOR_SPACE_APPLE_RGB=10;const cv.ccm.COLOR_SPACE_APPLE_RGBL=11;const cv.ccm.COLOR_SPACE_REC_709_RGB=12;const cv.ccm.COLOR_SPACE_REC_709_RGBL=13;const cv.ccm.COLOR_SPACE_REC_2020_RGB=14;const cv.ccm.COLOR_SPACE_REC_2020_RGBL=15;const cv.ccm.COLOR_SPACE_XYZ_D65_2=16;const cv.ccm.COLOR_SPACE_XYZ_D50_2=17;const cv.ccm.COLOR_SPACE_XYZ_D65_10=18;const cv.ccm.COLOR_SPACE_XYZ_D50_10=19;const cv.ccm.COLOR_SPACE_XYZ_A_2=20;const cv.ccm.COLOR_SPACE_XYZ_A_10=21;const cv.ccm.COLOR_SPACE_XYZ_D55_2=22;const cv.ccm.COLOR_SPACE_XYZ_D55_10=23;const cv.ccm.COLOR_SPACE_XYZ_D75_2=24;const cv.ccm.COLOR_SPACE_XYZ_D75_10=25;const cv.ccm.COLOR_SPACE_XYZ_E_2=26;const cv.ccm.COLOR_SPACE_XYZ_E_10=27;const cv.ccm.COLOR_SPACE_LAB_D65_2=28;const cv.ccm.COLOR_SPACE_LAB_D50_2=29;const cv.ccm.COLOR_SPACE_LAB_D65_10=30;const cv.ccm.COLOR_SPACE_LAB_D50_10=31;const cv.ccm.COLOR_SPACE_LAB_A_2=32;const cv.ccm.COLOR_SPACE_LAB_A_10=33;const cv.ccm.COLOR_SPACE_LAB_D55_2=34;const cv.ccm.COLOR_SPACE_LAB_D55_10=35;const cv.ccm.COLOR_SPACE_LAB_D75_2=36;const cv.ccm.COLOR_SPACE_LAB_D75_10=37;const cv.ccm.COLOR_SPACE_LAB_E_2=38;const cv.ccm.COLOR_SPACE_LAB_E_10=39]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "enum cv.ccm.LinearizationType[const cv.ccm.LINEARIZATION_IDENTITY=0;const cv.ccm.LINEARIZATION_GAMMA=1;const cv.ccm.LINEARIZATION_COLORPOLYFIT=2;const cv.ccm.LINEARIZATION_COLORLOGPOLYFIT=3;const cv.ccm.LINEARIZATION_GRAYPOLYFIT=4;const cv.ccm.LINEARIZATION_GRAYLOGPOLYFIT=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "enum cv.ccm.DistanceType[const cv.ccm.DISTANCE_CIE76=0;const cv.ccm.DISTANCE_CIE94_GRAPHIC_ARTS=1;const cv.ccm.DISTANCE_CIE94_TEXTILES=2;const cv.ccm.DISTANCE_CIE2000=3;const cv.ccm.DISTANCE_CMC_1TO1=4;const cv.ccm.DISTANCE_CMC_2TO1=5;const cv.ccm.DISTANCE_RGB=6;const cv.ccm.DISTANCE_RGBL=7]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.ccm.gammaCorrection(Mat src;Mat dst[/O];double gamma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_gamma_correction"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.PhotoCv2|method|public;static|System.Void GammaCorrection(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Double gamma)"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "class cv.ccm.ColorCorrectionModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_create",
+        "jyppx_ocv_photo_ccm_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create()"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;int constColor[/C])-\u003E",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_create_color_checker",
+        "jyppx_ocv_photo_ccm_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create(OpenCvSharp.Core.Mat src,OpenCvSharp.Photo.ColorCheckerType colorChecker)"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;Mat colors;ColorSpace refColorSpace)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_create_reference_colors",
+        "jyppx_ocv_photo_ccm_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat colors,OpenCvSharp.Photo.ColorSpace referenceColorSpace)"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;Mat colors;ColorSpace refColorSpace;Mat coloredPatchesMask)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_create_reference_colors_masked",
+        "jyppx_ocv_photo_ccm_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;static|OpenCvSharp.Photo.ColorCorrectionModel Create(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat colors,OpenCvSharp.Photo.ColorSpace referenceColorSpace,OpenCvSharp.Core.Mat coloredPatchesMask)"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.ccm.ColorCorrectionModel.setColorSpace(ColorSpace cs)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_color_space"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetColorSpace(OpenCvSharp.Photo.ColorSpace colorSpace)"
+      ]
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.ccm.ColorCorrectionModel.setCcmType(CcmType ccmType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_ccm_type"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetCcmType(OpenCvSharp.Photo.CcmType ccmType)"
+      ]
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.ccm.ColorCorrectionModel.setDistance(DistanceType distance)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_distance"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetDistance(OpenCvSharp.Photo.DistanceType distance)"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.ccm.ColorCorrectionModel.setLinearization(LinearizationType linearizationType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_linearization"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetLinearization(OpenCvSharp.Photo.LinearizationType linearization)"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.ccm.ColorCorrectionModel.setLinearizationGamma(double gamma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_linearization_gamma"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetLinearizationGamma(System.Double gamma)"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.ccm.ColorCorrectionModel.setLinearizationDegree(int deg)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_linearization_degree"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetLinearizationDegree(System.Int32 degree)"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.ccm.ColorCorrectionModel.setSaturatedThreshold(double lower;double upper)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_saturated_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetSaturatedThreshold(System.Double lower,System.Double upper)"
+      ]
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.ccm.ColorCorrectionModel.setWeightsList(Mat weightsList[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_weights_list"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetWeightsList(OpenCvSharp.Core.Mat weightsList)"
+      ]
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.ccm.ColorCorrectionModel.setWeightCoeff(double weightsCoeff)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_weight_coeff"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetWeightCoeff(System.Double weightCoeff)"
+      ]
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.ccm.ColorCorrectionModel.setInitialMethod(InitialMethodType initialMethodType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_initial_method"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetInitialMethod(OpenCvSharp.Photo.InitialMethodType initialMethod)"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.ccm.ColorCorrectionModel.setMaxCount(int maxCount)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_max_count"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetMaxCount(System.Int32 maxCount)"
+      ]
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.ccm.ColorCorrectionModel.setEpsilon(double epsilon)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_epsilon"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetEpsilon(System.Double epsilon)"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "identity": "cv.ccm.ColorCorrectionModel.setRGB(bool rgb)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_set_rgb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void SetRGB(System.Boolean rgb)"
+      ]
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.ccm.ColorCorrectionModel.compute()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_compute"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat Compute()"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.ccm.ColorCorrectionModel.getColorCorrectionMatrix()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_get_color_correction_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetColorCorrectionMatrix()"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.ccm.ColorCorrectionModel.getLoss()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_get_loss"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Double GetLoss()"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.ccm.ColorCorrectionModel.getSrcLinearRGB()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_get_src_linear_rgb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetSrcLinearRGB()"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.ccm.ColorCorrectionModel.getRefLinearRGB()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_get_ref_linear_rgb"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetRefLinearRGB()"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.ccm.ColorCorrectionModel.getMask()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_get_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetMask()"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.ccm.ColorCorrectionModel.getWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.ccm.ColorCorrectionModel.correctImage(Mat src;Mat dst[/O];bool islinear=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_correct_image"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void CorrectImage(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat dst,System.Boolean isLinear=false)"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.ccm.ColorCorrectionModel.write(FileStorage fs[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_write"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void Write(OpenCvSharp.Core.FileStorage storage)"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.ccm.ColorCorrectionModel.read(FileNode node[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected CCM batch has a version-neutral opaque-handle ABI, cloned inputs, caller-owned Mat outputs, checked Core persistence access, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_ccm_read"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.ColorCorrectionModel|method|public;instance|System.Void Read(OpenCvSharp.Core.FileNode node)"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "identity": "class cv.segmentation.IntelligentScissorsMB",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.segmentation.IntelligentScissorsMB.IntelligentScissorsMB()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_create",
+        "jyppx_ocv_photo_intelligent_scissors_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.segmentation.IntelligentScissorsMB.setWeights(float weight_non_edge;float weight_gradient_direction;float weight_gradient_magnitude)-\u003EIntelligentScissorsMB",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_set_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetWeights(System.Single weightNonEdge,System.Single weightGradientDirection,System.Single weightGradientMagnitude)"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.segmentation.IntelligentScissorsMB.setGradientMagnitudeMaxLimit(float gradient_magnitude_threshold_max=0.0f)-\u003EIntelligentScissorsMB",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_set_gradient_magnitude_max_limit"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetGradientMagnitudeMaxLimit(System.Single gradientMagnitudeThresholdMax=0)"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureZeroCrossingParameters(float gradient_magnitude_min_value=0.0f)-\u003EIntelligentScissorsMB",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_set_edge_feature_zero_crossing_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetEdgeFeatureZeroCrossingParameters(System.Single gradientMagnitudeMinValue=0)"
+      ]
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureCannyParameters(double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)-\u003EIntelligentScissorsMB",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_set_edge_feature_canny_parameters"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB SetEdgeFeatureCannyParameters(System.Double threshold1,System.Double threshold2,System.Int32 apertureSize=3,System.Boolean l2Gradient=false)"
+      ]
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.segmentation.IntelligentScissorsMB.applyImage(Mat image)-\u003EIntelligentScissorsMB",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_apply_image"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB ApplyImage(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.segmentation.IntelligentScissorsMB.applyImageFeatures(Mat non_edge;Mat gradient_direction;Mat gradient_magnitude;Mat image=Mat())-\u003EIntelligentScissorsMB",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_apply_image_features"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|OpenCvSharp.Photo.IntelligentScissorsMB ApplyImageFeatures(OpenCvSharp.Core.Mat? nonEdge,OpenCvSharp.Core.Mat? gradientDirection,OpenCvSharp.Core.Mat? gradientMagnitude,OpenCvSharp.Core.Mat? image=null)"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.segmentation.IntelligentScissorsMB.buildMap(Point sourcePt[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_build_map"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|System.Void BuildMap(OpenCvSharp.Core.Point sourcePoint)"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.segmentation.IntelligentScissorsMB.getContour(Point targetPt[/C,/Ref];Mat contour[/O];bool backward=false)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Intelligent Scissors batch has a version-neutral opaque-handle ABI, checked feature/state/point contracts, normalized caller-owned contour output, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_PHOTO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_photo_intelligent_scissors_get_contour"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Photo.IntelligentScissorsMB|method|public;instance|System.Void GetContour(OpenCvSharp.Core.Point targetPoint,OpenCvSharp.Core.Mat contour,System.Boolean backward=false)"
+      ]
+    }
+  ]
+}

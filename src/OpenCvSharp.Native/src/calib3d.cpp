@@ -5,10 +5,12 @@
 
 #include <cmath>
 #include <limits>
+#include <memory>
 #include <new>
 #include <vector>
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
+#include <opencv2/geometry/2d.hpp>
 #include <opencv2/geometry/3d.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/objdetect.hpp>
@@ -16,8 +18,103 @@
 #include <opencv2/stereo.hpp>
 #endif
 
+struct jyppx_ocv_calib3d_subdiv2d
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::Subdiv2D value;
+#else
+    int placeholder;
+#endif
+};
+
 namespace
 {
+    int validate_subdiv2d(
+        const char* api_name,
+        const jyppx_ocv_calib3d_subdiv2d* subdiv)
+    {
+        return subdiv == nullptr
+            ? opencv_csharp_native::set_invalid_argument(api_name, "subdiv")
+            : OPENCV_CSHARP_STATUS_OK;
+    }
+
+    void assign_default_usac_params(jyppx_ocv_calib3d_usac_params* params)
+    {
+        params->confidence = 0.99;
+        params->is_parallel = 0;
+        params->lo_iterations = 5;
+        params->lo_method = 1;
+        params->lo_sample_size = 14;
+        params->max_iterations = 5000;
+        params->neighbors_search = 1;
+        params->random_generator_state = 0;
+        params->sampler = 0;
+        params->score = 1;
+        params->threshold = 1.5;
+        params->final_polisher = 3;
+        params->final_polisher_iterations = 3;
+    }
+
+    int validate_usac_params(
+        const char* api_name,
+        const jyppx_ocv_calib3d_usac_params* params)
+    {
+        if (params == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params");
+        }
+        if (!std::isfinite(params->confidence) || params->confidence <= 0.0 || params->confidence > 1.0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params.confidence");
+        }
+        if (params->is_parallel != 0 && params->is_parallel != 1)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params.is_parallel");
+        }
+        if (params->lo_iterations < 0 || params->lo_method < 0 || params->lo_method > 4 ||
+            params->lo_sample_size <= 0 || params->max_iterations <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params.local_optimization");
+        }
+        if (params->neighbors_search < 0 || params->neighbors_search > 2 ||
+            params->sampler < 0 || params->sampler > 3 ||
+            params->score < 0 || params->score > 3)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params.method");
+        }
+        if (!std::isfinite(params->threshold) || params->threshold <= 0.0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params.threshold");
+        }
+        if (params->final_polisher < 0 || params->final_polisher > 3 ||
+            params->final_polisher_iterations < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "params.final_polisher");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+    cv::UsacParams to_usac_params(const jyppx_ocv_calib3d_usac_params& params)
+    {
+        cv::UsacParams result;
+        result.confidence = params.confidence;
+        result.isParallel = params.is_parallel != 0;
+        result.loIterations = params.lo_iterations;
+        result.loMethod = static_cast<cv::LocalOptimMethod>(params.lo_method);
+        result.loSampleSize = params.lo_sample_size;
+        result.maxIterations = params.max_iterations;
+        result.neighborsSearch = static_cast<cv::NeighborSearchMethod>(params.neighbors_search);
+        result.randomGeneratorState = params.random_generator_state;
+        result.sampler = static_cast<cv::SamplingMethod>(params.sampler);
+        result.score = static_cast<cv::ScoreMethod>(params.score);
+        result.threshold = params.threshold;
+        result.final_polisher = static_cast<cv::PolishingMethod>(params.final_polisher);
+        result.final_polisher_iterations = params.final_polisher_iterations;
+        return result;
+    }
+#endif
+
     int validate_input_mat(const char* api_name, const jyppx_ocv_mat* mat, const char* argument_name)
     {
         return mat == nullptr
@@ -4203,6 +4300,138 @@ int jyppx_ocv_calib3d_find_chessboard_corners(
     }
 }
 
+int jyppx_ocv_calib3d_find_chessboard_corners_sb(
+    const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    jyppx_ocv_mat* corners,
+    int flags,
+    int* found)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_find_chessboard_corners_sb";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, corners, "corners");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (pattern_width <= 0 || pattern_height <= 0) return opencv_csharp_native::set_invalid_argument(api_name, pattern_width <= 0 ? "pattern_width" : "pattern_height");
+        if (found == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "found");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *found = cv::findChessboardCornersSB(opencv_csharp_native::mat_value(image), cv::Size(pattern_width, pattern_height), opencv_csharp_native::mat_value(corners), flags) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)flags; *found = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta(
+    const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    jyppx_ocv_mat* corners,
+    int flags,
+    jyppx_ocv_mat* meta,
+    int* found)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, corners, "corners");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, meta, "meta");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (pattern_width <= 0 || pattern_height <= 0) return opencv_csharp_native::set_invalid_argument(api_name, pattern_width <= 0 ? "pattern_width" : "pattern_height");
+        if (found == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "found");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *found = cv::findChessboardCornersSB(opencv_csharp_native::mat_value(image), cv::Size(pattern_width, pattern_height), opencv_csharp_native::mat_value(corners), flags, opencv_csharp_native::mat_value(meta)) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)flags; *found = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_calib3d_estimate_chessboard_sharpness(
+    const jyppx_ocv_mat* image,
+    int pattern_width,
+    int pattern_height,
+    const jyppx_ocv_mat* corners,
+    float rise_distance,
+    int vertical,
+    jyppx_ocv_mat* sharpness,
+    double* value0,
+    double* value1,
+    double* value2,
+    double* value3)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_estimate_chessboard_sharpness";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_input_mat(api_name, corners, "corners");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (sharpness != nullptr)
+        {
+            status = validate_output_mat(api_name, sharpness, "sharpness");
+            if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        }
+        if (pattern_width <= 0 || pattern_height <= 0) return opencv_csharp_native::set_invalid_argument(api_name, pattern_width <= 0 ? "pattern_width" : "pattern_height");
+        if (!std::isfinite(rise_distance) || rise_distance <= 0.0F || rise_distance >= 1.0F) return opencv_csharp_native::set_invalid_argument(api_name, "rise_distance");
+        if (value0 == nullptr || value1 == nullptr || value2 == nullptr || value3 == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "result");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Scalar result = cv::estimateChessboardSharpness(
+            opencv_csharp_native::mat_value(image), cv::Size(pattern_width, pattern_height), opencv_csharp_native::mat_value(corners),
+            rise_distance, vertical != 0, sharpness == nullptr ? cv::noArray() : opencv_csharp_native::mat_value(sharpness));
+        *value0 = result[0]; *value1 = result[1]; *value2 = result[2]; *value3 = result[3];
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)vertical; *value0 = 0; *value1 = 0; *value2 = 0; *value3 = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_calib3d_find_4_quad_corner_subpix(
+    const jyppx_ocv_mat* image,
+    jyppx_ocv_mat* corners,
+    int region_width,
+    int region_height,
+    int* found)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_find_4_quad_corner_subpix";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_output_mat(api_name, corners, "corners");
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (region_width <= 0 || region_height <= 0) return opencv_csharp_native::set_invalid_argument(api_name, region_width <= 0 ? "region_width" : "region_height");
+        if (found == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "found");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *found = cv::find4QuadCornerSubpix(opencv_csharp_native::mat_value(image), opencv_csharp_native::mat_value(corners), cv::Size(region_width, region_height)) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *found = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
 int jyppx_ocv_calib3d_check_chessboard(
     const jyppx_ocv_mat* image,
     int pattern_width,
@@ -6685,6 +6914,1163 @@ int jyppx_ocv_calib3d_rectify3_collinear(
         write_rect_values(0, 0, 0, 0, roi1_x, roi1_y, roi1_width, roi1_height);
         write_rect_values(0, 0, 0, 0, roi2_x, roi2_y, roi2_width, roi2_height);
         *scale = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_create(jyppx_ocv_calib3d_subdiv2d** subdiv)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (subdiv == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "subdiv");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::unique_ptr<jyppx_ocv_calib3d_subdiv2d> result(
+            new (std::nothrow) jyppx_ocv_calib3d_subdiv2d{});
+        if (!result)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        *subdiv = result.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *subdiv = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_create_rect(
+    int x,
+    int y,
+    int width,
+    int height,
+    jyppx_ocv_calib3d_subdiv2d** subdiv)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_create_rect";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (subdiv == nullptr || width <= 0 || height <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(
+                api_name,
+                subdiv == nullptr ? "subdiv" : (width <= 0 ? "width" : "height"));
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::unique_ptr<jyppx_ocv_calib3d_subdiv2d> result(
+            new (std::nothrow) jyppx_ocv_calib3d_subdiv2d{});
+        if (!result)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        result->value.initDelaunay(cv::Rect(x, y, width, height));
+        *subdiv = result.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)x;
+        (void)y;
+        *subdiv = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_create_rect2f(
+    float x,
+    float y,
+    float width,
+    float height,
+    jyppx_ocv_calib3d_subdiv2d** subdiv)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_create_rect2f";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (subdiv == nullptr || !std::isfinite(x) || !std::isfinite(y) ||
+            !std::isfinite(width) || !std::isfinite(height) || width <= 0.0F || height <= 0.0F)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "rect");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::unique_ptr<jyppx_ocv_calib3d_subdiv2d> result(
+            new (std::nothrow) jyppx_ocv_calib3d_subdiv2d{});
+        if (!result)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        result->value.initDelaunay(cv::Rect2f(x, y, width, height));
+        *subdiv = result.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *subdiv = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_calib3d_subdiv2d_release(jyppx_ocv_calib3d_subdiv2d* subdiv)
+{
+    delete subdiv;
+}
+
+int jyppx_ocv_calib3d_subdiv2d_init_delaunay(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int x,
+    int y,
+    int width,
+    int height)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_init_delaunay";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (width <= 0 || height <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, width <= 0 ? "width" : "height");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        subdiv->value.initDelaunay(cv::Rect(x, y, width, height));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)x;
+        (void)y;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    float x,
+    float y,
+    float width,
+    float height)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_init_delaunay_rect2f";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(width) ||
+            !std::isfinite(height) || width <= 0.0F || height <= 0.0F)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "rect");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        subdiv->value.initDelaunay(cv::Rect2f(x, y, width, height));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_insert(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    float x,
+    float y,
+    int* vertex)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_insert";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (vertex == nullptr || !std::isfinite(x) || !std::isfinite(y))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, vertex == nullptr ? "vertex" : "point");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *vertex = subdiv->value.insert(cv::Point2f(x, y));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *vertex = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_insert_points(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    const jyppx_ocv_calib3d_point2f* points,
+    int point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_insert_points";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (point_count < 0 || (point_count > 0 && points == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, point_count < 0 ? "point_count" : "points");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Point2f> native_points;
+        native_points.reserve(static_cast<std::size_t>(point_count));
+        for (int index = 0; index < point_count; ++index)
+        {
+            if (!std::isfinite(points[index].x) || !std::isfinite(points[index].y))
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "points");
+            }
+            native_points.emplace_back(points[index].x, points[index].y);
+        }
+        subdiv->value.insert(native_points);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)points;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_locate(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    float x,
+    float y,
+    int* location,
+    int* edge,
+    int* vertex)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_locate";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (location == nullptr || edge == nullptr || vertex == nullptr ||
+            !std::isfinite(x) || !std::isfinite(y))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output_or_point");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *location = subdiv->value.locate(cv::Point2f(x, y), *edge, *vertex);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *location = -2;
+        *edge = 0;
+        *vertex = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_find_nearest(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    float x,
+    float y,
+    int* vertex,
+    float* nearest_x,
+    float* nearest_y)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_find_nearest";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (vertex == nullptr || nearest_x == nullptr || nearest_y == nullptr ||
+            !std::isfinite(x) || !std::isfinite(y))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output_or_point");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Point2f point;
+        *vertex = subdiv->value.findNearest(cv::Point2f(x, y), &point);
+        *nearest_x = point.x;
+        *nearest_y = point.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *vertex = 0;
+        *nearest_x = 0.0F;
+        *nearest_y = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_edge_list_count(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_edge_list_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (count == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "count"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Vec4f> values;
+        subdiv->value.getEdgeList(values);
+        *count = static_cast<int>(values.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    jyppx_ocv_calib3d_vec4f* values,
+    int capacity)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_edge_list_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (capacity < 0) { return opencv_csharp_native::set_invalid_argument(api_name, "capacity"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Vec4f> native_values;
+        subdiv->value.getEdgeList(native_values);
+        if (capacity < static_cast<int>(native_values.size()) || (!native_values.empty() && values == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "values");
+        }
+        for (std::size_t index = 0; index < native_values.size(); ++index)
+        {
+            values[index] = {native_values[index][0], native_values[index][1], native_values[index][2], native_values[index][3]};
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)values;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_count(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (count == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "count"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> values;
+        subdiv->value.getLeadingEdgeList(values);
+        *count = static_cast<int>(values.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_fill(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int* values,
+    int capacity)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_leading_edge_list_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (capacity < 0) { return opencv_csharp_native::set_invalid_argument(api_name, "capacity"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> native_values;
+        subdiv->value.getLeadingEdgeList(native_values);
+        if (capacity < static_cast<int>(native_values.size()) || (!native_values.empty() && values == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "values");
+        }
+        for (std::size_t index = 0; index < native_values.size(); ++index) { values[index] = native_values[index]; }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)values;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_triangle_list_count(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_triangle_list_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (count == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "count"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Vec6f> values;
+        subdiv->value.getTriangleList(values);
+        *count = static_cast<int>(values.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_triangle_list_fill(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    jyppx_ocv_calib3d_vec6f* values,
+    int capacity)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_triangle_list_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (capacity < 0) { return opencv_csharp_native::set_invalid_argument(api_name, "capacity"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Vec6f> native_values;
+        subdiv->value.getTriangleList(native_values);
+        if (capacity < static_cast<int>(native_values.size()) || (!native_values.empty() && values == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "values");
+        }
+        for (std::size_t index = 0; index < native_values.size(); ++index)
+        {
+            values[index] = {
+                native_values[index][0], native_values[index][1], native_values[index][2],
+                native_values[index][3], native_values[index][4], native_values[index][5]};
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)values;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_count(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    const int* indices,
+    int index_count,
+    int* facet_count,
+    int* point_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (index_count < 0 || (index_count > 0 && indices == nullptr) ||
+            facet_count == nullptr || point_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "indices_or_counts");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> native_indices;
+        if (index_count > 0) { native_indices.assign(indices, indices + index_count); }
+        std::vector<std::vector<cv::Point2f>> facets;
+        std::vector<cv::Point2f> centers;
+        subdiv->value.getVoronoiFacetList(native_indices, facets, centers);
+        std::size_t total_points = 0;
+        for (const auto& facet : facets) { total_points += facet.size(); }
+        if (facets.size() > static_cast<std::size_t>(std::numeric_limits<int>::max()) ||
+            total_points > static_cast<std::size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        *facet_count = static_cast<int>(facets.size());
+        *point_count = static_cast<int>(total_points);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)indices;
+        *facet_count = 0;
+        *point_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_fill(
+    jyppx_ocv_calib3d_subdiv2d* subdiv,
+    const int* indices,
+    int index_count,
+    int* facet_offsets,
+    int facet_offset_capacity,
+    jyppx_ocv_calib3d_point2f* points,
+    int point_capacity,
+    jyppx_ocv_calib3d_point2f* centers,
+    int center_capacity)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_voronoi_facet_list_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (index_count < 0 || (index_count > 0 && indices == nullptr) ||
+            facet_offset_capacity < 0 || point_capacity < 0 || center_capacity < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "capacity_or_indices");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<int> native_indices;
+        if (index_count > 0) { native_indices.assign(indices, indices + index_count); }
+        std::vector<std::vector<cv::Point2f>> facets;
+        std::vector<cv::Point2f> native_centers;
+        subdiv->value.getVoronoiFacetList(native_indices, facets, native_centers);
+        std::size_t total_points = 0;
+        for (const auto& facet : facets) { total_points += facet.size(); }
+        if (facet_offset_capacity < static_cast<int>(facets.size()) + 1 ||
+            point_capacity < static_cast<int>(total_points) ||
+            center_capacity < static_cast<int>(native_centers.size()) ||
+            facet_offsets == nullptr || (total_points > 0 && points == nullptr) ||
+            (!native_centers.empty() && centers == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output_capacity");
+        }
+        int point_index = 0;
+        facet_offsets[0] = 0;
+        for (std::size_t facet_index = 0; facet_index < facets.size(); ++facet_index)
+        {
+            for (const cv::Point2f& point : facets[facet_index])
+            {
+                points[point_index++] = {point.x, point.y};
+            }
+            facet_offsets[facet_index + 1] = point_index;
+        }
+        for (std::size_t index = 0; index < native_centers.size(); ++index)
+        {
+            centers[index] = {native_centers[index].x, native_centers[index].y};
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)indices;
+        (void)facet_offsets;
+        (void)points;
+        (void)centers;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_vertex(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int vertex,
+    float* x,
+    float* y,
+    int* first_edge)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_vertex";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (x == nullptr || y == nullptr || first_edge == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Point2f point = subdiv->value.getVertex(vertex, first_edge);
+        *x = point.x;
+        *y = point.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)vertex;
+        *x = 0.0F;
+        *y = 0.0F;
+        *first_edge = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_get_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int edge,
+    int next_edge_type,
+    int* related_edge)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_get_edge";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (related_edge == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "related_edge");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *related_edge = subdiv->value.getEdge(edge, next_edge_type);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)edge;
+        (void)next_edge_type;
+        *related_edge = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_next_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int edge,
+    int* next_edge)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_next_edge";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (next_edge == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "next_edge"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *next_edge = subdiv->value.nextEdge(edge);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)edge;
+        *next_edge = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_rotate_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int edge,
+    int rotate,
+    int* rotated_edge)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_rotate_edge";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (rotated_edge == nullptr || rotate < 0 || rotate > 3)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, rotated_edge == nullptr ? "rotated_edge" : "rotate");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *rotated_edge = subdiv->value.rotateEdge(edge, rotate);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)edge;
+        *rotated_edge = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_sym_edge(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int edge,
+    int* symmetric_edge)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_sym_edge";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (symmetric_edge == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "symmetric_edge"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        *symmetric_edge = subdiv->value.symEdge(edge);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)edge;
+        *symmetric_edge = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_edge_org(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int edge,
+    int* vertex,
+    float* x,
+    float* y)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_edge_org";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (vertex == nullptr || x == nullptr || y == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Point2f point;
+        *vertex = subdiv->value.edgeOrg(edge, &point);
+        *x = point.x;
+        *y = point.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)edge;
+        *vertex = 0;
+        *x = 0.0F;
+        *y = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_subdiv2d_edge_dst(
+    const jyppx_ocv_calib3d_subdiv2d* subdiv,
+    int edge,
+    int* vertex,
+    float* x,
+    float* y)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_subdiv2d_edge_dst";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_subdiv2d(api_name, subdiv);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (vertex == nullptr || x == nullptr || y == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Point2f point;
+        *vertex = subdiv->value.edgeDst(edge, &point);
+        *x = point.x;
+        *y = point.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)edge;
+        *vertex = 0;
+        *x = 0.0F;
+        *y = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_usac_params_get_default(jyppx_ocv_calib3d_usac_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_usac_params_get_default";
+    opencv_csharp_native::clear_last_error();
+    if (params == nullptr)
+    {
+        return opencv_csharp_native::set_invalid_argument(api_name, "params");
+    }
+    assign_default_usac_params(params);
+    return OPENCV_CSHARP_STATUS_OK;
+}
+
+int jyppx_ocv_calib3d_find_homography_usac(
+    const jyppx_ocv_mat* src_points,
+    const jyppx_ocv_mat* dst_points,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** homography)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_find_homography_usac";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, src_points, "src_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, dst_points, "dst_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_usac_params(api_name, params);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (homography == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "homography"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Mat value = cv::findHomography(
+            opencv_csharp_native::mat_value(src_points),
+            opencv_csharp_native::mat_value(dst_points),
+            output_or_no_array(mask),
+            to_usac_params(*params));
+        return assign_new_mat(api_name, value, homography);
+#else
+        (void)mask;
+        *homography = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_solve_pnp_ransac_usac(
+    const jyppx_ocv_mat* object_points,
+    const jyppx_ocv_mat* image_points,
+    jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* dist_coeffs,
+    jyppx_ocv_mat* rvec,
+    jyppx_ocv_mat* tvec,
+    jyppx_ocv_mat* inliers,
+    const jyppx_ocv_calib3d_usac_params* params,
+    int* solved)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_solve_pnp_ransac_usac";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, object_points, "object_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, image_points, "image_points");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, camera_matrix, "camera_matrix");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, dist_coeffs, "dist_coeffs");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, rvec, "rvec");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, tvec, "tvec");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, inliers, "inliers");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_usac_params(api_name, params);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (solved == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "solved"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        bool value = cv::solvePnPRansac(
+            opencv_csharp_native::mat_value(object_points),
+            opencv_csharp_native::mat_value(image_points),
+            opencv_csharp_native::mat_value(camera_matrix),
+            opencv_csharp_native::mat_value(dist_coeffs),
+            opencv_csharp_native::mat_value(rvec),
+            opencv_csharp_native::mat_value(tvec),
+            opencv_csharp_native::mat_value(inliers),
+            to_usac_params(*params));
+        *solved = value ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *solved = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_find_fundamental_mat_usac(
+    const jyppx_ocv_mat* points1,
+    const jyppx_ocv_mat* points2,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** fundamental)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_find_fundamental_mat_usac";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, points1, "points1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, points2, "points2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_usac_params(api_name, params);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (fundamental == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "fundamental"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Mat value = cv::findFundamentalMat(
+            opencv_csharp_native::mat_value(points1),
+            opencv_csharp_native::mat_value(points2),
+            output_or_no_array(mask),
+            to_usac_params(*params));
+        return assign_new_mat(api_name, value, fundamental);
+#else
+        (void)mask;
+        *fundamental = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_find_essential_mat_usac(
+    const jyppx_ocv_mat* points1,
+    const jyppx_ocv_mat* points2,
+    const jyppx_ocv_mat* camera_matrix1,
+    const jyppx_ocv_mat* camera_matrix2,
+    const jyppx_ocv_mat* dist_coeffs1,
+    const jyppx_ocv_mat* dist_coeffs2,
+    jyppx_ocv_mat* mask,
+    const jyppx_ocv_calib3d_usac_params* params,
+    jyppx_ocv_mat** essential)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_find_essential_mat_usac";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, points1, "points1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, points2, "points2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, camera_matrix1, "camera_matrix1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, camera_matrix2, "camera_matrix2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, dist_coeffs1, "dist_coeffs1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, dist_coeffs2, "dist_coeffs2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_usac_params(api_name, params);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (essential == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "essential"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::Mat value = cv::findEssentialMat(
+            opencv_csharp_native::mat_value(points1),
+            opencv_csharp_native::mat_value(points2),
+            opencv_csharp_native::mat_value(camera_matrix1),
+            opencv_csharp_native::mat_value(camera_matrix2),
+            opencv_csharp_native::mat_value(dist_coeffs1),
+            opencv_csharp_native::mat_value(dist_coeffs2),
+            output_or_no_array(mask),
+            to_usac_params(*params));
+        return assign_new_mat(api_name, value, essential);
+#else
+        (void)mask;
+        *essential = nullptr;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_estimate_affine_2d_usac(
+    const jyppx_ocv_mat* source,
+    const jyppx_ocv_mat* destination,
+    jyppx_ocv_mat* transform,
+    jyppx_ocv_mat* inliers,
+    const jyppx_ocv_calib3d_usac_params* params)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_estimate_affine_2d_usac";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, source, "source");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, destination, "destination");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, transform, "transform");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, inliers, "inliers");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_usac_params(api_name, params);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        opencv_csharp_native::mat_value(transform) = cv::estimateAffine2D(
+            opencv_csharp_native::mat_value(source),
+            opencv_csharp_native::mat_value(destination),
+            opencv_csharp_native::mat_value(inliers),
+            to_usac_params(*params));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_calib3d_fisheye_stereo_rectify(
+    const jyppx_ocv_mat* camera_matrix1,
+    const jyppx_ocv_mat* dist_coeffs1,
+    const jyppx_ocv_mat* camera_matrix2,
+    const jyppx_ocv_mat* dist_coeffs2,
+    int image_width,
+    int image_height,
+    const jyppx_ocv_mat* r,
+    const jyppx_ocv_mat* t,
+    jyppx_ocv_mat* r1,
+    jyppx_ocv_mat* r2,
+    jyppx_ocv_mat* p1,
+    jyppx_ocv_mat* p2,
+    jyppx_ocv_mat* q,
+    int flags,
+    int new_image_width,
+    int new_image_height,
+    double balance,
+    double fov_scale)
+{
+    constexpr const char* api_name = "jyppx_ocv_calib3d_fisheye_stereo_rectify";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_input_mat(api_name, camera_matrix1, "camera_matrix1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, dist_coeffs1, "dist_coeffs1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, camera_matrix2, "camera_matrix2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, dist_coeffs2, "dist_coeffs2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, r, "r");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat(api_name, t, "t");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, r1, "r1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, r2, "r2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, p1, "p1");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, p2, "p2");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_mat(api_name, q, "q");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (image_width <= 0 || image_height <= 0 || new_image_width < 0 || new_image_height < 0 ||
+            !std::isfinite(balance) || balance < 0.0 || balance > 1.0 ||
+            !std::isfinite(fov_scale) || fov_scale <= 0.0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "size_or_scale");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        cv::fisheye::stereoRectify(
+            opencv_csharp_native::mat_value(camera_matrix1),
+            opencv_csharp_native::mat_value(dist_coeffs1),
+            opencv_csharp_native::mat_value(camera_matrix2),
+            opencv_csharp_native::mat_value(dist_coeffs2),
+            cv::Size(image_width, image_height),
+            opencv_csharp_native::mat_value(r),
+            opencv_csharp_native::mat_value(t),
+            opencv_csharp_native::mat_value(r1),
+            opencv_csharp_native::mat_value(r2),
+            opencv_csharp_native::mat_value(p1),
+            opencv_csharp_native::mat_value(p2),
+            opencv_csharp_native::mat_value(q),
+            flags,
+            cv::Size(new_image_width, new_image_height),
+            balance,
+            fov_scale);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)flags;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

@@ -321,3 +321,112 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_kmeans(
     int flags,
     jyppx_ocv_mat* centers,
     double* compactness);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_border_interpolate(
+    int p,
+    int len,
+    int border_type,
+    int* out_value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_copy_make_border(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int top,
+    int bottom,
+    int left,
+    int right,
+    int border_type,
+    double v0,
+    double v1,
+    double v2,
+    double v3);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_has_non_zero(
+    const jyppx_ocv_mat* src,
+    int* out_value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_find_non_zero(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_psnr(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    double max_value,
+    double* out_value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_reduce_arg_min(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int axis,
+    int last_index);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_reduce_arg_max(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int axis,
+    int last_index);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_flip_nd(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int axis);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_broadcast(
+    const jyppx_ocv_mat* src,
+    const jyppx_ocv_mat* shape,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_copy_to_mask(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_check_range(
+    const jyppx_ocv_mat* src,
+    double min_value,
+    double max_value,
+    int* out_valid,
+    int* out_x,
+    int* out_y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_finite_mask(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_transpose_nd(
+    const jyppx_ocv_mat* src,
+    const int* order,
+    int order_count,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_sort(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int flags);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_sort_idx(
+    const jyppx_ocv_mat* src,
+    jyppx_ocv_mat* dst,
+    int flags);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_cube_root(
+    float value,
+    float* out_value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_fast_atan2(
+    float y,
+    float x,
+    float* out_degrees);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_core_batch_distance(
+    const jyppx_ocv_mat* src1,
+    const jyppx_ocv_mat* src2,
+    jyppx_ocv_mat* distances,
+    int dtype,
+    jyppx_ocv_mat* indices,
+    int norm_type,
+    int k,
+    const jyppx_ocv_mat* mask,
+    int update,
+    int crosscheck);

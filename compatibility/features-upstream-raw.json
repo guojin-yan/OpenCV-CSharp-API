@@ -1,0 +1,5115 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/FeaturesUpstreamMap/extract_features.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features2d.hpp",
+  "headerSha256": "4c983b74b48533275fd944005c07f1be9a401b2b6b7311cf4a2c175db1ba896b",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500,
+    "HAVE_OPENCV_FLANN": 1,
+    "HAVE_OPENCV_DNN": 1
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features2d.hpp",
+      "sha256": "4c983b74b48533275fd944005c07f1be9a401b2b6b7311cf4a2c175db1ba896b",
+      "includes": "opencv2/features.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features/features.hpp",
+      "sha256": "831e1f529e2e974bf41cb6621f4c57aaa84312c269f157fa6bb25dd0207c86a4",
+      "includes": "opencv2/features.hpp"
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "sha256": "c1d5ef95ffb0b7123f615627420ceaeb6a56152a14bf49e74f05696da54b01c2",
+      "startOrdinal": 0,
+      "declarationCount": 183
+    }
+  ],
+  "declarationCount": 183,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.goodFeaturesToTrack",
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask=Mat();int blockSize=3;bool useHarrisDetector=false;double k=0.04)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "qualityLevel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHarrisDetector",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "k",
+          "default": "0.04",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Determines strong corners on an image.\n\nThe function finds the most prominent corners in the image or in the specified image region, as\ndescribed in @cite Shi94\n\n-   Function calculates the corner quality measure at every source image pixel using the\n    #cornerMinEigenVal or #cornerHarris .\n-   Function performs a non-maximum suppression (the local maximums in *3 x 3* neighborhood are\n    retained).\n-   The corners with the minimal eigenvalue less than\n    \\f$\\texttt{qualityLevel} \\cdot \\max_{x,y} qualityMeasureMap(x,y)\\f$ are rejected.\n-   The remaining corners are sorted by the quality measure in the descending order.\n-   Function throws away each corner for which there is a stronger corner at a distance less than\n    maxDistance.\n\nThe function can be used to initialize a point-based tracker of an object.\n\n@note If the function is called with different values A and B of the parameter qualityLevel , and\nA \\> B, the vector of returned corners with qualityLevel=A will be the prefix of the output vector\nwith qualityLevel=B .\n\n@param image Input 8-bit or floating-point 32-bit, single-channel image.\n@param corners Output vector of detected corners.\n@param maxCorners Maximum number of corners to return. If there are more corners than are found,\nthe strongest of them is returned. `maxCorners <= 0` implies that no limit on the maximum is set\nand all detected corners are returned.\n@param qualityLevel Parameter characterizing the minimal accepted quality of image corners. The\nparameter value is multiplied by the best corner quality measure, which is the minimal eigenvalue\n(see #cornerMinEigenVal ) or the Harris function response (see #cornerHarris ). The corners with the\nquality measure less than the product are rejected. For example, if the best corner has the\nquality measure = 1500, and the qualityLevel=0.01 , then all the corners with the quality measure\nless than 15 are rejected.\n@param minDistance Minimum possible Euclidean distance between the returned corners.\n@param mask Optional region of interest. If the image is not empty (it needs to have the type\nCV_8UC1 and the same size as image ), it specifies the region in which the corners are detected.\n@param blockSize Size of an average block for computing a derivative covariation matrix over each\npixel neighborhood. See cornerEigenValsAndVecs .\n@param useHarrisDetector Parameter indicating whether to use a Harris detector (see #cornerHarris)\nor #cornerMinEigenVal.\n@param k Free parameter of the Harris detector.\n\n@sa  cornerMinEigenVal, cornerHarris, calcOpticalFlowPyrLK, estimateRigidTransform,"
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.goodFeaturesToTrack",
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask;int blockSize;int gradientSize;bool useHarrisDetector=false;double k=0.04)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "qualityLevel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "gradientSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHarrisDetector",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "k",
+          "default": "0.04",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.goodFeaturesToTrack",
+      "identity": "cv.goodFeaturesToTrack(Mat image;Mat corners[/O];int maxCorners;double qualityLevel;double minDistance;Mat mask;Mat cornersQuality[/O];int blockSize=3;int gradientSize=3;bool useHarrisDetector=false;double k=0.04)->void",
+      "returnType": "void",
+      "modifiers": [
+        "=goodFeaturesToTrackWithQuality"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "qualityLevel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "cornersQuality",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "gradientSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHarrisDetector",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "k",
+          "default": "0.04",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Same as above, but returns also quality measure of the detected corners.\n\n@param image Input 8-bit or floating-point 32-bit, single-channel image.\n@param corners Output vector of detected corners.\n@param maxCorners Maximum number of corners to return. If there are more corners than are found,\nthe strongest of them is returned. `maxCorners <= 0` implies that no limit on the maximum is set\nand all detected corners are returned.\n@param qualityLevel Parameter characterizing the minimal accepted quality of image corners. The\nparameter value is multiplied by the best corner quality measure, which is the minimal eigenvalue\n(see #cornerMinEigenVal ) or the Harris function response (see #cornerHarris ). The corners with the\nquality measure less than the product are rejected. For example, if the best corner has the\nquality measure = 1500, and the qualityLevel=0.01 , then all the corners with the quality measure\nless than 15 are rejected.\n@param minDistance Minimum possible Euclidean distance between the returned corners.\n@param mask Region of interest. If the image is not empty (it needs to have the type\nCV_8UC1 and the same size as image ), it specifies the region in which the corners are detected.\n@param cornersQuality Output vector of quality measure of the detected corners.\n@param blockSize Size of an average block for computing a derivative covariation matrix over each\npixel neighborhood. See cornerEigenValsAndVecs .\n@param gradientSize Aperture parameter for the Sobel operator used for derivatives computation.\nSee cornerEigenValsAndVecs .\n@param useHarrisDetector Parameter indicating whether to use a Harris detector (see #cornerHarris)\nor #cornerMinEigenVal.\n@param k Free parameter of the Harris detector."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.Feature2D",
+      "identity": "class cv.Feature2D",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for 2D image feature detectors and descriptor extractors"
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.detect",
+      "identity": "cv.Feature2D.detect(Mat image;vector_KeyPoint keypoints[/O,/Ref];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detects keypoints in an image (first variant) or image set (second variant).\n\n    @param image Image.\n    @param keypoints The detected keypoints. In the second variant of the method keypoints[i] is a set\n    of keypoints detected in images[i] .\n    @param mask Mask specifying where to look for keypoints (optional). It must be a 8-bit integer\n    matrix with non-zero values in the region of interest."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.detect",
+      "identity": "cv.Feature2D.detect(vector_Mat images;vector_vector_KeyPoint keypoints[/O,/Ref];vector_Mat masks=vector_Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "vector_Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param images Image set.\n    @param keypoints The detected keypoints. In the second variant of the method keypoints[i] is a set\n    of keypoints detected in images[i] .\n    @param masks Masks for each input image specifying where to look for keypoints (optional).\n    masks[i] is a mask for images[i]."
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.compute",
+      "identity": "cv.Feature2D.compute(Mat image;vector_KeyPoint keypoints[/IO,/Ref];Mat descriptors[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes the descriptors for a set of keypoints detected in an image (first variant) or image set\n    (second variant).\n\n    @param image Image.\n    @param keypoints Input collection of keypoints. Keypoints for which a descriptor cannot be\n    computed are removed. Sometimes new keypoints can be added, for example: SIFT duplicates keypoint\n    with several dominant orientations (for each orientation).\n    @param descriptors Computed descriptors. In the second variant of the method descriptors[i] are\n    descriptors computed for a keypoints[i]. Row j is the keypoints (or keypoints[i]) is the\n    descriptor for keypoint j-th keypoint."
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.compute",
+      "identity": "cv.Feature2D.compute(vector_Mat images;vector_vector_KeyPoint keypoints[/IO,/Ref];vector_Mat descriptors[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n\n    @param images Image set.\n    @param keypoints Input collection of keypoints. Keypoints for which a descriptor cannot be\n    computed are removed. Sometimes new keypoints can be added, for example: SIFT duplicates keypoint\n    with several dominant orientations (for each orientation).\n    @param descriptors Computed descriptors. In the second variant of the method descriptors[i] are\n    descriptors computed for a keypoints[i]. Row j is the keypoints (or keypoints[i]) is the\n    descriptor for keypoint j-th keypoint."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.detectAndCompute",
+      "identity": "cv.Feature2D.detectAndCompute(Mat image;Mat mask;vector_KeyPoint keypoints[/O,/Ref];Mat descriptors[/O];bool useProvidedKeypoints=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "useProvidedKeypoints",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Detects keypoints and computes the descriptors"
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.descriptorSize",
+      "identity": "cv.Feature2D.descriptorSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.descriptorType",
+      "identity": "cv.Feature2D.descriptorType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.defaultNorm",
+      "identity": "cv.Feature2D.defaultNorm()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.write",
+      "identity": "cv.Feature2D.write(String fileName[/C,/Ref,/PATH])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.read",
+      "identity": "cv.Feature2D.read(String fileName[/C,/Ref,/PATH])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.read",
+      "identity": "cv.Feature2D.read(FileNode arg1[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "arg1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.empty",
+      "identity": "cv.Feature2D.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.getDefaultName",
+      "identity": "cv.Feature2D.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.Feature2D.write",
+      "identity": "cv.Feature2D.write(FileStorage fs[/Ref];String name[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "FileStorage",
+          "name": "fs",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.AffineFeature",
+      "identity": "class cv.AffineFeature",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Class for implementing the wrapper which makes detectors and extractors to be affine invariant,\ndescribed as ASIFT in @cite YM11 ."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.AffineFeature.create",
+      "identity": "cv.AffineFeature.create(Ptr_Feature2D backend[/C,/Ref];int maxTilt=5;int minTilt=0;float tiltStep=1.4142135623730951f;float rotateStepBase=72)->Ptr<AffineFeature>",
+      "returnType": "Ptr<AffineFeature>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Feature2D",
+          "name": "backend",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxTilt",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "minTilt",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "tiltStep",
+          "default": "1.4142135623730951f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "rotateStepBase",
+          "default": "72",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param backend The detector/extractor you want to use as backend.\n    @param maxTilt The highest power index of tilt factor. 5 is used in the paper as tilt sampling range n.\n    @param minTilt The lowest power index of tilt factor. 0 is used in the paper.\n    @param tiltStep Tilt sampling step \\f$\\delta_t\\f$ in Algorithm 1 in the paper.\n    @param rotateStepBase Rotation sampling step factor b in Algorithm 1 in the paper."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.AffineFeature.setViewParams",
+      "identity": "cv.AffineFeature.setViewParams(vector_float tilts[/C,/Ref];vector_float rolls[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_float",
+          "name": "tilts",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_float",
+          "name": "rolls",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.AffineFeature.getViewParams",
+      "identity": "cv.AffineFeature.getViewParams(vector_float tilts[/Ref];vector_float rolls[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_float",
+          "name": "tilts",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_float",
+          "name": "rolls",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.AffineFeature.getDefaultName",
+      "identity": "cv.AffineFeature.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.SIFT",
+      "identity": "class cv.SIFT",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Class for extracting keypoints and computing descriptors using the Scale Invariant Feature Transform\n(SIFT) algorithm by D. Lowe @cite Lowe04 ."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.create",
+      "identity": "cv.SIFT.create(int nfeatures=0;int nOctaveLayers=3;double contrastThreshold=0.04;double edgeThreshold=10;double sigma=1.6;bool enable_precise_upscale=false)->Ptr<SIFT>",
+      "returnType": "Ptr<SIFT>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nfeatures",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nOctaveLayers",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "contrastThreshold",
+          "default": "0.04",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "edgeThreshold",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sigma",
+          "default": "1.6",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "enable_precise_upscale",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param nfeatures The number of best features to retain. The features are ranked by their scores\n    (measured in SIFT algorithm as the local contrast)\n\n    @param nOctaveLayers The number of layers in each octave. 3 is the value used in D. Lowe paper. The\n    number of octaves is computed automatically from the image resolution.\n\n    @param contrastThreshold The contrast threshold used to filter out weak features in semi-uniform\n    (low-contrast) regions. The larger the threshold, the less features are produced by the detector.\n\n    @note The contrast threshold will be divided by nOctaveLayers when the filtering is applied. When\n    nOctaveLayers is set to default and if you want to use the value used in D. Lowe paper, 0.03, set\n    this argument to 0.09.\n\n    @param edgeThreshold The threshold used to filter out edge-like features. Note that the its meaning\n    is different from the contrastThreshold, i.e. the larger the edgeThreshold, the less features are\n    filtered out (more features are retained).\n\n    @param sigma The sigma of the Gaussian applied to the input image at the octave \\#0. If your image\n    is captured with a weak camera with soft lenses, you might want to reduce the number.\n\n    @param enable_precise_upscale Whether to enable precise upscaling in the scale pyramid, which maps\n    index \\f$\\texttt{x}\\f$ to \\f$\\texttt{2x}\\f$. This prevents localization bias. The option\n    is disabled by default."
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.create",
+      "identity": "cv.SIFT.create(int nfeatures;int nOctaveLayers;double contrastThreshold;double edgeThreshold;double sigma;int descriptorType;bool enable_precise_upscale=false)->Ptr<SIFT>",
+      "returnType": "Ptr<SIFT>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nfeatures",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nOctaveLayers",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "contrastThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "edgeThreshold",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "sigma",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "descriptorType",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "enable_precise_upscale",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create SIFT with specified descriptorType.\n    @param nfeatures The number of best features to retain. The features are ranked by their scores\n    (measured in SIFT algorithm as the local contrast)\n\n    @param nOctaveLayers The number of layers in each octave. 3 is the value used in D. Lowe paper. The\n    number of octaves is computed automatically from the image resolution.\n\n    @param contrastThreshold The contrast threshold used to filter out weak features in semi-uniform\n    (low-contrast) regions. The larger the threshold, the less features are produced by the detector.\n\n    @note The contrast threshold will be divided by nOctaveLayers when the filtering is applied. When\n    nOctaveLayers is set to default and if you want to use the value used in D. Lowe paper, 0.03, set\n    this argument to 0.09.\n\n    @param edgeThreshold The threshold used to filter out edge-like features. Note that the its meaning\n    is different from the contrastThreshold, i.e. the larger the edgeThreshold, the less features are\n    filtered out (more features are retained).\n\n    @param sigma The sigma of the Gaussian applied to the input image at the octave \\#0. If your image\n    is captured with a weak camera with soft lenses, you might want to reduce the number.\n\n    @param descriptorType The type of descriptors. Only CV_32F and CV_8U are supported.\n\n    @param enable_precise_upscale Whether to enable precise upscaling in the scale pyramid, which maps\n    index \\f$\\texttt{x}\\f$ to \\f$\\texttt{2x}\\f$. This prevents localization bias. The option\n    is disabled by default."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.getDefaultName",
+      "identity": "cv.SIFT.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.setNFeatures",
+      "identity": "cv.SIFT.setNFeatures(int maxFeatures)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxFeatures",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.getNFeatures",
+      "identity": "cv.SIFT.getNFeatures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.setNOctaveLayers",
+      "identity": "cv.SIFT.setNOctaveLayers(int nOctaveLayers)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nOctaveLayers",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.getNOctaveLayers",
+      "identity": "cv.SIFT.getNOctaveLayers()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.setContrastThreshold",
+      "identity": "cv.SIFT.setContrastThreshold(double contrastThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "contrastThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.getContrastThreshold",
+      "identity": "cv.SIFT.getContrastThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.setEdgeThreshold",
+      "identity": "cv.SIFT.setEdgeThreshold(double edgeThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "edgeThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.getEdgeThreshold",
+      "identity": "cv.SIFT.getEdgeThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.setSigma",
+      "identity": "cv.SIFT.setSigma(double sigma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "sigma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SIFT.getSigma",
+      "identity": "cv.SIFT.getSigma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.ORB",
+      "identity": "class cv.ORB",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Class implementing the ORB (*oriented BRIEF*) keypoint detector and descriptor extractor\n\ndescribed in @cite RRKB11 . The algorithm uses FAST in pyramids to detect stable keypoints, selects\nthe strongest features using FAST or Harris response, finds their orientation using first-order\nmoments and computes the descriptors using BRIEF (where the coordinates of random point pairs (or\nk-tuples) are rotated according to the measured orientation)."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "enum",
+      "name": "cv.ORB.ScoreType",
+      "identity": "enum cv.ORB.ScoreType[const cv.ORB.HARRIS_SCORE=0;const cv.ORB.FAST_SCORE=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ORB.HARRIS_SCORE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ORB.FAST_SCORE",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.create",
+      "identity": "cv.ORB.create(int nfeatures=500;float scaleFactor=1.2f;int nlevels=8;int edgeThreshold=31;int firstLevel=0;int WTA_K=2;ORB_ScoreType scoreType=ORB::HARRIS_SCORE;int patchSize=31;int fastThreshold=20)->Ptr<ORB>",
+      "returnType": "Ptr<ORB>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nfeatures",
+          "default": "500",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scaleFactor",
+          "default": "1.2f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "8",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "edgeThreshold",
+          "default": "31",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "firstLevel",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "WTA_K",
+          "default": "2",
+          "modifiers": []
+        },
+        {
+          "type": "ORB_ScoreType",
+          "name": "scoreType",
+          "default": "ORB::HARRIS_SCORE",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "patchSize",
+          "default": "31",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "fastThreshold",
+          "default": "20",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief The ORB constructor\n\n    @param nfeatures The maximum number of features to retain.\n    @param scaleFactor Pyramid decimation ratio, greater than 1. scaleFactor==2 means the classical\n    pyramid, where each next level has 4x less pixels than the previous, but such a big scale factor\n    will degrade feature matching scores dramatically. On the other hand, too close to 1 scale factor\n    will mean that to cover certain scale range you will need more pyramid levels and so the speed\n    will suffer.\n    @param nlevels The number of pyramid levels. The smallest level will have linear size equal to\n    input_image_linear_size/pow(scaleFactor, nlevels - firstLevel).\n    @param edgeThreshold This is size of the border where the features are not detected. It should\n    roughly match the patchSize parameter.\n    @param firstLevel The level of pyramid to put source image to. Previous layers are filled\n    with upscaled source image.\n    @param WTA_K The number of points that produce each element of the oriented BRIEF descriptor. The\n    default value 2 means the BRIEF where we take a random point pair and compare their brightnesses,\n    so we get 0/1 response. Other possible values are 3 and 4. For example, 3 means that we take 3\n    random points (of course, those point coordinates are random, but they are generated from the\n    pre-defined seed, so each element of BRIEF descriptor is computed deterministically from the pixel\n    rectangle), find point of maximum brightness and output index of the winner (0, 1 or 2). Such\n    output will occupy 2 bits, and therefore it will need a special variant of Hamming distance,\n    denoted as NORM_HAMMING2 (2 bits per bin). When WTA_K=4, we take 4 random points to compute each\n    bin (that will also occupy 2 bits with possible values 0, 1, 2 or 3).\n    @param scoreType The default HARRIS_SCORE means that Harris algorithm is used to rank features\n    (the score is written to KeyPoint::score and is used to retain best nfeatures features);\n    FAST_SCORE is alternative value of the parameter that produces slightly less stable keypoints,\n    but it is a little faster to compute.\n    @param patchSize size of the patch used by the oriented BRIEF descriptor. Of course, on smaller\n    pyramid layers the perceived image area covered by a feature will be larger.\n    @param fastThreshold the fast threshold"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setMaxFeatures",
+      "identity": "cv.ORB.setMaxFeatures(int maxFeatures)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxFeatures",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getMaxFeatures",
+      "identity": "cv.ORB.getMaxFeatures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setScaleFactor",
+      "identity": "cv.ORB.setScaleFactor(double scaleFactor)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "scaleFactor",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getScaleFactor",
+      "identity": "cv.ORB.getScaleFactor()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setNLevels",
+      "identity": "cv.ORB.setNLevels(int nlevels)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nlevels",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getNLevels",
+      "identity": "cv.ORB.getNLevels()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setEdgeThreshold",
+      "identity": "cv.ORB.setEdgeThreshold(int edgeThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "edgeThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getEdgeThreshold",
+      "identity": "cv.ORB.getEdgeThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setFirstLevel",
+      "identity": "cv.ORB.setFirstLevel(int firstLevel)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "firstLevel",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getFirstLevel",
+      "identity": "cv.ORB.getFirstLevel()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setWTA_K",
+      "identity": "cv.ORB.setWTA_K(int wta_k)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "wta_k",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getWTA_K",
+      "identity": "cv.ORB.getWTA_K()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setScoreType",
+      "identity": "cv.ORB.setScoreType(ORB_ScoreType scoreType)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "ORB_ScoreType",
+          "name": "scoreType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getScoreType",
+      "identity": "cv.ORB.getScoreType()->ORB::ScoreType",
+      "returnType": "ORB::ScoreType",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setPatchSize",
+      "identity": "cv.ORB.setPatchSize(int patchSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "patchSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getPatchSize",
+      "identity": "cv.ORB.getPatchSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.setFastThreshold",
+      "identity": "cv.ORB.setFastThreshold(int fastThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "fastThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getFastThreshold",
+      "identity": "cv.ORB.getFastThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ORB.getDefaultName",
+      "identity": "cv.ORB.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.MSER",
+      "identity": "class cv.MSER",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Maximally stable extremal region extractor\n\nThe class encapsulates all the parameters of the %MSER extraction algorithm (see [wiki\narticle](http://en.wikipedia.org/wiki/Maximally_stable_extremal_regions)).\n\n- there are two different implementation of %MSER: one for grey image, one for color image\n\n- the grey image algorithm is taken from: @cite nister2008linear ;  the paper claims to be faster\nthan union-find method; it actually get 1.5~2m/s on my centrino L7200 1.2GHz laptop.\n\n- the color image algorithm is taken from: @cite forssen2007maximally ; it should be much slower\nthan grey image method ( 3~4 times )\n\n- (Python) A complete example showing the use of the %MSER detector can be found at samples/python/mser.py"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.create",
+      "identity": "cv.MSER.create(int delta=5;int min_area=60;int max_area=14400;double max_variation=0.25;double min_diversity=.2;int max_evolution=200;double area_threshold=1.01;double min_margin=0.003;int edge_blur_size=5)->Ptr<MSER>",
+      "returnType": "Ptr<MSER>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "delta",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "min_area",
+          "default": "60",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "max_area",
+          "default": "14400",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "max_variation",
+          "default": "0.25",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "min_diversity",
+          "default": ".2",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "max_evolution",
+          "default": "200",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "area_threshold",
+          "default": "1.01",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "min_margin",
+          "default": "0.003",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "edge_blur_size",
+          "default": "5",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Full constructor for %MSER detector\n\n    @param delta it compares \\f$(size_{i}-size_{i-delta})/size_{i-delta}\\f$\n    @param min_area prune the area which smaller than minArea\n    @param max_area prune the area which bigger than maxArea\n    @param max_variation prune the area have similar size to its children\n    @param min_diversity for color image, trace back to cut off mser with diversity less than min_diversity\n    @param max_evolution  for color image, the evolution steps\n    @param area_threshold for color image, the area threshold to cause re-initialize\n    @param min_margin for color image, ignore too small margin\n    @param edge_blur_size for color image, the aperture size for edge blur"
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.detectRegions",
+      "identity": "cv.MSER.detectRegions(Mat image;vector_vector_Point msers[/O,/Ref];vector_Rect bboxes[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_Point",
+          "name": "msers",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Rect",
+          "name": "bboxes",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Detect %MSER regions\n\n    @param image input image (8UC1, 8UC3 or 8UC4, must be greater or equal than 3x3)\n    @param msers resulting list of point sets\n    @param bboxes resulting bounding boxes"
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setDelta",
+      "identity": "cv.MSER.setDelta(int delta)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "delta",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getDelta",
+      "identity": "cv.MSER.getDelta()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setMinArea",
+      "identity": "cv.MSER.setMinArea(int minArea)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "minArea",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getMinArea",
+      "identity": "cv.MSER.getMinArea()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setMaxArea",
+      "identity": "cv.MSER.setMaxArea(int maxArea)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxArea",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getMaxArea",
+      "identity": "cv.MSER.getMaxArea()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setMaxVariation",
+      "identity": "cv.MSER.setMaxVariation(double maxVariation)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "maxVariation",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getMaxVariation",
+      "identity": "cv.MSER.getMaxVariation()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setMinDiversity",
+      "identity": "cv.MSER.setMinDiversity(double minDiversity)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "minDiversity",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getMinDiversity",
+      "identity": "cv.MSER.getMinDiversity()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setMaxEvolution",
+      "identity": "cv.MSER.setMaxEvolution(int maxEvolution)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxEvolution",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getMaxEvolution",
+      "identity": "cv.MSER.getMaxEvolution()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setAreaThreshold",
+      "identity": "cv.MSER.setAreaThreshold(double areaThreshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "areaThreshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getAreaThreshold",
+      "identity": "cv.MSER.getAreaThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setMinMargin",
+      "identity": "cv.MSER.setMinMargin(double min_margin)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "min_margin",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getMinMargin",
+      "identity": "cv.MSER.getMinMargin()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setEdgeBlurSize",
+      "identity": "cv.MSER.setEdgeBlurSize(int edge_blur_size)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "edge_blur_size",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getEdgeBlurSize",
+      "identity": "cv.MSER.getEdgeBlurSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.setPass2Only",
+      "identity": "cv.MSER.setPass2Only(bool f)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "f",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getPass2Only",
+      "identity": "cv.MSER.getPass2Only()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.MSER.getDefaultName",
+      "identity": "cv.MSER.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.FastFeatureDetector",
+      "identity": "class cv.FastFeatureDetector",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Wrapping class for feature detection using the FAST method.\n\nCheck @ref tutorial_py_fast \"the corresponding tutorial\" for more details."
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "enum",
+      "name": "cv.FastFeatureDetector.DetectorType",
+      "identity": "enum cv.FastFeatureDetector.DetectorType[const cv.FastFeatureDetector.TYPE_5_8=0;const cv.FastFeatureDetector.TYPE_7_12=1;const cv.FastFeatureDetector.TYPE_9_16=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.FastFeatureDetector.TYPE_5_8",
+          "value": "0"
+        },
+        {
+          "name": "const cv.FastFeatureDetector.TYPE_7_12",
+          "value": "1"
+        },
+        {
+          "name": "const cv.FastFeatureDetector.TYPE_9_16",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "enum",
+      "name": "cv.FastFeatureDetector.<unnamed>",
+      "identity": "enum cv.FastFeatureDetector.<unnamed>[const cv.FastFeatureDetector.THRESHOLD=10000;const cv.FastFeatureDetector.NONMAX_SUPPRESSION=10001;const cv.FastFeatureDetector.FAST_N=10002]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.FastFeatureDetector.THRESHOLD",
+          "value": "10000"
+        },
+        {
+          "name": "const cv.FastFeatureDetector.NONMAX_SUPPRESSION",
+          "value": "10001"
+        },
+        {
+          "name": "const cv.FastFeatureDetector.FAST_N",
+          "value": "10002"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.create",
+      "identity": "cv.FastFeatureDetector.create(int threshold=10;bool nonmaxSuppression=true;FastFeatureDetector_DetectorType type=FastFeatureDetector::TYPE_9_16)->Ptr<FastFeatureDetector>",
+      "returnType": "Ptr<FastFeatureDetector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "threshold",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "nonmaxSuppression",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "FastFeatureDetector_DetectorType",
+          "name": "type",
+          "default": "FastFeatureDetector::TYPE_9_16",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.setThreshold",
+      "identity": "cv.FastFeatureDetector.setThreshold(int threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.getThreshold",
+      "identity": "cv.FastFeatureDetector.getThreshold()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.setNonmaxSuppression",
+      "identity": "cv.FastFeatureDetector.setNonmaxSuppression(bool f)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "f",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.getNonmaxSuppression",
+      "identity": "cv.FastFeatureDetector.getNonmaxSuppression()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.setType",
+      "identity": "cv.FastFeatureDetector.setType(FastFeatureDetector_DetectorType type)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "FastFeatureDetector_DetectorType",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.getType",
+      "identity": "cv.FastFeatureDetector.getType()->FastFeatureDetector::DetectorType",
+      "returnType": "FastFeatureDetector::DetectorType",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FastFeatureDetector.getDefaultName",
+      "identity": "cv.FastFeatureDetector.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.GFTTDetector",
+      "identity": "class cv.GFTTDetector",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Wrapping class for feature detection using the goodFeaturesToTrack function. :"
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.create",
+      "identity": "cv.GFTTDetector.create(int maxCorners=1000;double qualityLevel=0.01;double minDistance=1;int blockSize=3;bool useHarrisDetector=false;double k=0.04)->Ptr<GFTTDetector>",
+      "returnType": "Ptr<GFTTDetector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "1000",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "qualityLevel",
+          "default": "0.01",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHarrisDetector",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "k",
+          "default": "0.04",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.create",
+      "identity": "cv.GFTTDetector.create(int maxCorners;double qualityLevel;double minDistance;int blockSize;int gradientSize;bool useHarrisDetector=false;double k=0.04)->Ptr<GFTTDetector>",
+      "returnType": "Ptr<GFTTDetector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxCorners",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "qualityLevel",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "gradientSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "useHarrisDetector",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "k",
+          "default": "0.04",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setMaxFeatures",
+      "identity": "cv.GFTTDetector.setMaxFeatures(int maxFeatures)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxFeatures",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getMaxFeatures",
+      "identity": "cv.GFTTDetector.getMaxFeatures()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setQualityLevel",
+      "identity": "cv.GFTTDetector.setQualityLevel(double qlevel)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "qlevel",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getQualityLevel",
+      "identity": "cv.GFTTDetector.getQualityLevel()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setMinDistance",
+      "identity": "cv.GFTTDetector.setMinDistance(double minDistance)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "minDistance",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getMinDistance",
+      "identity": "cv.GFTTDetector.getMinDistance()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setBlockSize",
+      "identity": "cv.GFTTDetector.setBlockSize(int blockSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "blockSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getBlockSize",
+      "identity": "cv.GFTTDetector.getBlockSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setGradientSize",
+      "identity": "cv.GFTTDetector.setGradientSize(int gradientSize_)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "gradientSize_",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getGradientSize",
+      "identity": "cv.GFTTDetector.getGradientSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setHarrisDetector",
+      "identity": "cv.GFTTDetector.setHarrisDetector(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getHarrisDetector",
+      "identity": "cv.GFTTDetector.getHarrisDetector()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.setK",
+      "identity": "cv.GFTTDetector.setK(double k)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getK",
+      "identity": "cv.GFTTDetector.getK()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.GFTTDetector.getDefaultName",
+      "identity": "cv.GFTTDetector.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.DISK",
+      "identity": "class cv.DISK",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief DISK feature detector and descriptor, based on a DNN model.\n\nDISK (Deep Image Structure and Keypoints) is a learned local-feature pipeline that produces\nkeypoints and 128-D L2-normalized descriptors via a single forward pass through a fully\nconvolutional network. This class wraps an ONNX export of the pre-trained DISK model through\ncv::dnn::Net and exposes it under the standard cv::Feature2D interface so it can be used as\na drop-in alternative to SIFT/ORB.\n\nThe class assumes the ONNX model has a single input named `image` taking an N\u00d73\u00d7H\u00d7W float32\ntensor in [0, 1] (RGB channel order) and three outputs named `keypoints` (N\u00d72), `scores` (N)\nand `descriptors` (N\u00d7128)."
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.create",
+      "identity": "cv.DISK.create(String modelPath[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.0f;Size imageSize=Size()[/C,/Ref];int backendId=0;int targetId=0)->Ptr<DISK>",
+      "returnType": "Ptr<DISK>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "modelPath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxKeypoints",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scoreThreshold",
+          "default": "0.0f",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "imageSize",
+          "default": "Size()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "backendId",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "targetId",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a DISK detector.\n    @param modelPath Path to the DISK ONNX model.\n    @param maxKeypoints Maximum number of keypoints to return per image. The strongest\n                        responses (by network score) are kept; -1 keeps all detections.\n    @param scoreThreshold Discard keypoints with network score strictly below this value.\n    @param imageSize Target input size (width, height) fed to the network. Use Size()\n                     (the default) to fall back to the network's expected fixed input\n                     shape of 1024x1024. When overriding, both dimensions must be\n                     positive multiples of 16, since DISK downsamples by a factor of 16.\n    @param backendId DNN backend identifier (see cv::dnn::Backend); 0 = DNN_BACKEND_DEFAULT.\n    @param targetId  DNN target identifier (see cv::dnn::Target);  0 = DNN_TARGET_CPU."
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.create",
+      "identity": "cv.DISK.create(vector_uchar bufferModel[/C,/Ref];int maxKeypoints=-1;float scoreThreshold=0.0f;Size imageSize=Size()[/C,/Ref];int backendId=0;int targetId=0)->Ptr<DISK>",
+      "returnType": "Ptr<DISK>",
+      "modifiers": [
+        "=createFromMemory",
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "vector_uchar",
+          "name": "bufferModel",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxKeypoints",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scoreThreshold",
+          "default": "0.0f",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "imageSize",
+          "default": "Size()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "backendId",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "targetId",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a DISK detector from an in-memory model buffer.\n\n    This overload loads the DISK ONNX model from a buffer instead of a file on disk. It is\n    intended for cases where the model is read from application resources (for example Android\n    assets) and is not available as a path on the filesystem.\n\n    @param bufferModel A buffer containing the contents of the DISK ONNX model.\n    @param maxKeypoints Maximum number of keypoints to return per image. The strongest\n                        responses (by network score) are kept; -1 keeps all detections.\n    @param scoreThreshold Discard keypoints with network score strictly below this value.\n    @param imageSize Target input size (width, height) fed to the network. Use Size()\n                     (the default) to fall back to the network's expected fixed input\n                     shape of 1024x1024. When overriding, both dimensions must be\n                     positive multiples of 16, since DISK downsamples by a factor of 16.\n    @param backendId DNN backend identifier (see cv::dnn::Backend); 0 = DNN_BACKEND_DEFAULT.\n    @param targetId  DNN target identifier (see cv::dnn::Target);  0 = DNN_TARGET_CPU.\n\n    @note In C++ this is an overload of @ref create. The Python/Java/Objective-C bindings expose\n          it as `createFromMemory`, because Objective-C selectors are not disambiguated by argument\n          type and would otherwise clash with the file-path @ref create."
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.setMaxKeypoints",
+      "identity": "cv.DISK.setMaxKeypoints(int maxKeypoints)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxKeypoints",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.getMaxKeypoints",
+      "identity": "cv.DISK.getMaxKeypoints()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.setScoreThreshold",
+      "identity": "cv.DISK.setScoreThreshold(float threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.getScoreThreshold",
+      "identity": "cv.DISK.getScoreThreshold()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.setImageSize",
+      "identity": "cv.DISK.setImageSize(Size size[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.getImageSize",
+      "identity": "cv.DISK.getImageSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DISK.getDefaultName",
+      "identity": "cv.DISK.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.SimpleBlobDetector",
+      "identity": "class cv.SimpleBlobDetector",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief Class for extracting blobs from an image. :\n\nThe class implements a simple algorithm for extracting blobs from an image:\n\n1.  Convert the source image to binary images by applying thresholding with several thresholds from\n    minThreshold (inclusive) to maxThreshold (exclusive) with distance thresholdStep between\n    neighboring thresholds.\n2.  Extract connected components from every binary image by findContours and calculate their\n    centers.\n3.  Group centers from several binary images by their coordinates. Close centers form one group that\n    corresponds to one blob, which is controlled by the minDistBetweenBlobs parameter.\n4.  From the groups, estimate final centers of blobs and their radiuses and return as locations and\n    sizes of keypoints.\n\nThis class performs several filtrations of returned blobs. You should set filterBy\\* to true/false\nto turn on/off corresponding filtration. Available filtrations:\n\n-   **By color**. This filter compares the intensity of a binary image at the center of a blob to\nblobColor. If they differ, the blob is filtered out. Use blobColor = 0 to extract dark blobs\nand blobColor = 255 to extract light blobs.\n-   **By area**. Extracted blobs have an area between minArea (inclusive) and maxArea (exclusive).\n-   **By circularity**. Extracted blobs have circularity\n(\\f$\\frac{4*\\pi*Area}{perimeter * perimeter}\\f$) between minCircularity (inclusive) and\nmaxCircularity (exclusive).\n-   **By ratio of the minimum inertia to maximum inertia**. Extracted blobs have this ratio\nbetween minInertiaRatio (inclusive) and maxInertiaRatio (exclusive).\n-   **By convexity**. Extracted blobs have convexity (area / area of blob convex hull) between\nminConvexity (inclusive) and maxConvexity (exclusive).\n\nDefault values of parameters are tuned to extract dark circular blobs."
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.SimpleBlobDetector.Params",
+      "identity": "class cv.SimpleBlobDetector.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "thresholdStep",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxThreshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "size_t",
+          "name": "minRepeatability",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minDistBetweenBlobs",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "filterByColor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "uchar",
+          "name": "blobColor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "filterByArea",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minArea",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxArea",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "filterByCircularity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minCircularity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxCircularity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "filterByInertia",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minInertiaRatio",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxInertiaRatio",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "filterByConvexity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "minConvexity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxConvexity",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "collectContours",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SimpleBlobDetector.Params.Params",
+      "identity": "cv.SimpleBlobDetector.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SimpleBlobDetector.create",
+      "identity": "cv.SimpleBlobDetector.create(SimpleBlobDetector_Params parameters=SimpleBlobDetector::Params()[/C,/Ref])->Ptr<SimpleBlobDetector>",
+      "returnType": "Ptr<SimpleBlobDetector>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "SimpleBlobDetector_Params",
+          "name": "parameters",
+          "default": "SimpleBlobDetector::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Flag to enable contour collection.\n      If set to true, the detector will store the contours of the detected blobs in memory,\n      which can be retrieved after the detect() call using getBlobContours().\n      @note Default value is false."
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SimpleBlobDetector.setParams",
+      "identity": "cv.SimpleBlobDetector.setParams(SimpleBlobDetector_Params params[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "SimpleBlobDetector_Params",
+          "name": "params",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SimpleBlobDetector.getParams",
+      "identity": "cv.SimpleBlobDetector.getParams()->SimpleBlobDetector::Params",
+      "returnType": "SimpleBlobDetector::Params",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SimpleBlobDetector.getDefaultName",
+      "identity": "cv.SimpleBlobDetector.getDefaultName()->String",
+      "returnType": "String",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.SimpleBlobDetector.getBlobContours",
+      "identity": "cv.SimpleBlobDetector.getBlobContours()->std::vector<std::vector<cv::Point> >",
+      "returnType": "std::vector<std::vector<cv::Point> >",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the contours of the blobs detected during the last call to detect().\n  @note The @ref Params::collectContours parameter must be set to true before calling\n  detect() for this method to return any data."
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.ALIKED",
+      "identity": "class cv.ALIKED",
+      "returnType": ": cv::Feature2D",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Feature2D",
+      "documentation": "@brief ALIKED feature detector and descriptor extractor.\n\nALIKED (A Lightweight Image KEYpoint Detector) is a CNN-based feature detector and descriptor\nextractor, as described in @cite Zhao23 . It produces 128-dimensional float descriptors and\nkeypoints with sub-pixel accuracy.\n\nThe model expects RGB input [1,3,H,W] and internally converts BGR images to RGB."
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.ALIKED.Params",
+      "identity": "class cv.ALIKED.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "inputSize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "normalizeDescriptors",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "engine",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "backend",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "target",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ALIKED.Params.Params",
+      "identity": "cv.ALIKED.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ALIKED.create",
+      "identity": "cv.ALIKED.create(String modelPath[/C,/Ref];ALIKED_Params params=ALIKED::Params()[/C,/Ref])->Ptr<ALIKED>",
+      "returnType": "Ptr<ALIKED>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "modelPath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "ALIKED_Params",
+          "name": "params",
+          "default": "ALIKED::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates ALIKED from a model file path.\n    @param modelPath Path to the ONNX model file.\n    @param params ALIKED parameters."
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.DescriptorMatcher",
+      "identity": "class cv.DescriptorMatcher",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Abstract base class for matching keypoint descriptors.\n\nIt has two groups of match methods: for matching descriptors of an image with another image or with\nan image set."
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "enum",
+      "name": "cv.DescriptorMatcher.MatcherType",
+      "identity": "enum cv.DescriptorMatcher.MatcherType[const cv.DescriptorMatcher.FLANNBASED=1;const cv.DescriptorMatcher.BRUTEFORCE=2;const cv.DescriptorMatcher.BRUTEFORCE_L1=3;const cv.DescriptorMatcher.BRUTEFORCE_HAMMING=4;const cv.DescriptorMatcher.BRUTEFORCE_HAMMINGLUT=5;const cv.DescriptorMatcher.BRUTEFORCE_SL2=6]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.DescriptorMatcher.FLANNBASED",
+          "value": "1"
+        },
+        {
+          "name": "const cv.DescriptorMatcher.BRUTEFORCE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.DescriptorMatcher.BRUTEFORCE_L1",
+          "value": "3"
+        },
+        {
+          "name": "const cv.DescriptorMatcher.BRUTEFORCE_HAMMING",
+          "value": "4"
+        },
+        {
+          "name": "const cv.DescriptorMatcher.BRUTEFORCE_HAMMINGLUT",
+          "value": "5"
+        },
+        {
+          "name": "const cv.DescriptorMatcher.BRUTEFORCE_SL2",
+          "value": "6"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.add",
+      "identity": "cv.DescriptorMatcher.add(vector_Mat descriptors)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Adds descriptors to train a CPU(trainDescCollectionis) or GPU(utrainDescCollectionis) descriptor\n    collection.\n\n    If the collection is not empty, the new descriptors are added to existing train descriptors.\n\n    @param descriptors Descriptors to add. Each descriptors[i] is a set of descriptors from the same\n    train image."
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.getTrainDescriptors",
+      "identity": "cv.DescriptorMatcher.getTrainDescriptors()->std::vector<Mat>",
+      "returnType": "std::vector<Mat>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns a constant link to the train descriptor collection trainDescCollection ."
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.clear",
+      "identity": "cv.DescriptorMatcher.clear()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Clears the train descriptor collections."
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.empty",
+      "identity": "cv.DescriptorMatcher.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns true if there are no train descriptors in the both collections."
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.isMaskSupported",
+      "identity": "cv.DescriptorMatcher.isMaskSupported()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns true if the descriptor matcher supports masking permissible matches."
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.train",
+      "identity": "cv.DescriptorMatcher.train()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Trains a descriptor matcher\n\n    Trains a descriptor matcher (for example, the flann index). In all methods to match, the method\n    train() is run every time before matching. Some descriptor matchers (for example, BruteForceMatcher)\n    have an empty implementation of this method. Other matchers really train their inner structures (for\n    example, FlannBasedMatcher trains flann::Index )."
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.match",
+      "identity": "cv.DescriptorMatcher.match(Mat queryDescriptors;Mat trainDescriptors;vector_DMatch matches[/O,/Ref];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the best match for each descriptor from a query set.\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Matches. If a query descriptor is masked out in mask , no match is added for this\n    descriptor. So, matches size may be smaller than the query descriptors count.\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n\n    In the first variant of this method, the train descriptors are passed as an input argument. In the\n    second variant of the method, train descriptors collection that was set by DescriptorMatcher::add is\n    used. Optional mask (or masks) can be passed to specify which query and training descriptors can be\n    matched. Namely, queryDescriptors[i] can be matched with trainDescriptors[j] only if\n    mask.at\\<uchar\\>(i,j) is non-zero."
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.knnMatch",
+      "identity": "cv.DescriptorMatcher.knnMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;Mat mask=Mat();bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the k best matches for each descriptor from a query set.\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n    @param matches Matches. Each matches[i] is k or less matches for the same query descriptor.\n    @param k Count of best matches found per each query descriptor or less if a query descriptor has\n    less than k possible matches in total.\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors.\n\n    These extended variants of DescriptorMatcher::match methods find several best matches for each query\n    descriptor. The matches are returned in the distance increasing order. See DescriptorMatcher::match\n    for the details about query and train descriptors."
+    },
+    {
+      "ordinal": 144,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.radiusMatch",
+      "identity": "cv.DescriptorMatcher.radiusMatch(Mat queryDescriptors;Mat trainDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;Mat mask=Mat();bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief For each query descriptor, finds the training descriptors not farther than the specified distance.\n\n    @param queryDescriptors Query set of descriptors.\n    @param trainDescriptors Train set of descriptors. This set is not added to the train descriptors\n    collection stored in the class object.\n    @param matches Found matches.\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors.\n    @param maxDistance Threshold for the distance between matched descriptors. Distance means here\n    metric distance (e.g. Hamming distance), not the distance between coordinates (which is measured\n    in Pixels)!\n    @param mask Mask specifying permissible matches between an input query and train matrices of\n    descriptors.\n\n    For each query descriptor, the methods find such training descriptors that the distance between the\n    query descriptor and the training descriptor is equal or smaller than maxDistance. Found matches are\n    returned in the distance increasing order."
+    },
+    {
+      "ordinal": 145,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.match",
+      "identity": "cv.DescriptorMatcher.match(Mat queryDescriptors;vector_DMatch matches[/O,/Ref];vector_Mat masks=vector_Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "vector_Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param queryDescriptors Query set of descriptors.\n    @param matches Matches. If a query descriptor is masked out in mask , no match is added for this\n    descriptor. So, matches size may be smaller than the query descriptors count.\n    @param masks Set of masks. Each masks[i] specifies permissible matches between the input query\n    descriptors and stored train descriptors from the i-th image trainDescCollection[i]."
+    },
+    {
+      "ordinal": 146,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.knnMatch",
+      "identity": "cv.DescriptorMatcher.knnMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];int k;vector_Mat masks=vector_Mat();bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "vector_Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param queryDescriptors Query set of descriptors.\n    @param matches Matches. Each matches[i] is k or less matches for the same query descriptor.\n    @param k Count of best matches found per each query descriptor or less if a query descriptor has\n    less than k possible matches in total.\n    @param masks Set of masks. Each masks[i] specifies permissible matches between the input query\n    descriptors and stored train descriptors from the i-th image trainDescCollection[i].\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors."
+    },
+    {
+      "ordinal": 147,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.radiusMatch",
+      "identity": "cv.DescriptorMatcher.radiusMatch(Mat queryDescriptors;vector_vector_DMatch matches[/O,/Ref];float maxDistance;vector_Mat masks=vector_Mat();bool compactResult=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryDescriptors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "maxDistance",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "vector_Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compactResult",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param queryDescriptors Query set of descriptors.\n    @param matches Found matches.\n    @param maxDistance Threshold for the distance between matched descriptors. Distance means here\n    metric distance (e.g. Hamming distance), not the distance between coordinates (which is measured\n    in Pixels)!\n    @param masks Set of masks. Each masks[i] specifies permissible matches between the input query\n    descriptors and stored train descriptors from the i-th image trainDescCollection[i].\n    @param compactResult Parameter used when the mask (or masks) is not empty. If compactResult is\n    false, the matches vector has the same size as queryDescriptors rows. If compactResult is true,\n    the matches vector does not contain matches for fully masked-out query descriptors."
+    },
+    {
+      "ordinal": 148,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.write",
+      "identity": "cv.DescriptorMatcher.write(String fileName[/C,/Ref,/PATH])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 149,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.read",
+      "identity": "cv.DescriptorMatcher.read(String fileName[/C,/Ref,/PATH])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "fileName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 150,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.read",
+      "identity": "cv.DescriptorMatcher.read(FileNode arg1[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "arg1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 151,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.clone",
+      "identity": "cv.DescriptorMatcher.clone(bool emptyTrainData=false)->Ptr<DescriptorMatcher>",
+      "returnType": "Ptr<DescriptorMatcher>",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "emptyTrainData",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Clones the matcher.\n\n    @param emptyTrainData If emptyTrainData is false, the method creates a deep copy of the object,\n    that is, copies both parameters and train data. If emptyTrainData is true, the method creates an\n    object copy with the current parameters but with empty train data."
+    },
+    {
+      "ordinal": 152,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.create",
+      "identity": "cv.DescriptorMatcher.create(String descriptorMatcherType[/C,/Ref])->Ptr<DescriptorMatcher>",
+      "returnType": "Ptr<DescriptorMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "descriptorMatcherType",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a descriptor matcher of a given type with the default parameters (using default\n    constructor).\n\n    @param descriptorMatcherType Descriptor matcher type. Now the following matcher types are\n    supported:\n    -   `BruteForce` (it uses L2 )\n    -   `BruteForce-L1`\n    -   `BruteForce-Hamming`\n    -   `BruteForce-Hamming(2)`\n    -   `FlannBased`"
+    },
+    {
+      "ordinal": 153,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.create",
+      "identity": "cv.DescriptorMatcher.create(DescriptorMatcher_MatcherType matcherType[/C,/Ref])->Ptr<DescriptorMatcher>",
+      "returnType": "Ptr<DescriptorMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "DescriptorMatcher_MatcherType",
+          "name": "matcherType",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 154,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.DescriptorMatcher.write",
+      "identity": "cv.DescriptorMatcher.write(FileStorage fs[/Ref];String name[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "FileStorage",
+          "name": "fs",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "name",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 155,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.BFMatcher",
+      "identity": "class cv.BFMatcher",
+      "returnType": ": cv::DescriptorMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::DescriptorMatcher",
+      "documentation": "@brief Brute-force descriptor matcher.\n\nFor each descriptor in the first set, this matcher finds the closest descriptor in the second set\nby trying each one. This descriptor matcher supports masking permissible matches of descriptor\nsets."
+    },
+    {
+      "ordinal": 156,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.BFMatcher.BFMatcher",
+      "identity": "cv.BFMatcher.BFMatcher(int normType=NORM_L2;bool crossCheck=false)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "NORM_L2",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "crossCheck",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Brute-force matcher constructor (obsolete). Please use BFMatcher.create()\n     *\n     *"
+    },
+    {
+      "ordinal": 157,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.BFMatcher.create",
+      "identity": "cv.BFMatcher.create(int normType=NORM_L2;bool crossCheck=false)->Ptr<BFMatcher>",
+      "returnType": "Ptr<BFMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "NORM_L2",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "crossCheck",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Brute-force matcher create method.\n    @param normType One of NORM_L1, NORM_L2, NORM_HAMMING, NORM_HAMMING2. L1 and L2 norms are\n    preferable choices for SIFT and SURF descriptors, NORM_HAMMING should be used with ORB, BRISK and\n    BRIEF, NORM_HAMMING2 should be used with ORB when WTA_K==3 or 4 (see ORB::ORB constructor\n    description).\n    @param crossCheck If it is false, this is will be default BFMatcher behaviour when it finds the k\n    nearest neighbors for each query descriptor. If crossCheck==true, then the knnMatch() method with\n    k=1 will only return pairs (i,j) such that for i-th query descriptor the j-th descriptor in the\n    matcher's collection is the nearest and vice versa, i.e. the BFMatcher will only return consistent\n    pairs. Such technique usually produces best results with minimal number of outliers when there are\n    enough matches. This is alternative to the ratio test, used by D. Lowe in SIFT paper."
+    },
+    {
+      "ordinal": 158,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.FlannBasedMatcher",
+      "identity": "class cv.FlannBasedMatcher",
+      "returnType": ": cv::DescriptorMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::DescriptorMatcher",
+      "documentation": "@brief Flann-based descriptor matcher.\n\nThis matcher trains cv::flann::Index on a train descriptor collection and calls its nearest search\nmethods to find the best matches. So, this matcher may be faster when matching a large train\ncollection than the brute force matcher. FlannBasedMatcher does not support masking permissible\nmatches of descriptor sets because flann::Index does not support this. :"
+    },
+    {
+      "ordinal": 159,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FlannBasedMatcher.FlannBasedMatcher",
+      "identity": "cv.FlannBasedMatcher.FlannBasedMatcher(Ptr_flann_IndexParams indexParams=makePtr<flann::KDTreeIndexParams>()[/C,/Ref];Ptr_flann_SearchParams searchParams=makePtr<flann::SearchParams>()[/C,/Ref])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_flann_IndexParams",
+          "name": "indexParams",
+          "default": "makePtr<flann::KDTreeIndexParams>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Ptr_flann_SearchParams",
+          "name": "searchParams",
+          "default": "makePtr<flann::SearchParams>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 160,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.FlannBasedMatcher.create",
+      "identity": "cv.FlannBasedMatcher.create()->Ptr<FlannBasedMatcher>",
+      "returnType": "Ptr<FlannBasedMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 161,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.LightGlueMatcher",
+      "identity": "class cv.LightGlueMatcher",
+      "returnType": ": cv::DescriptorMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::DescriptorMatcher",
+      "documentation": "@brief LightGlue feature matcher.\n\nLightGlue is a CNN-based feature matcher, as described in @cite Lindenberger23 . It takes\nkeypoint locations and descriptors from two images and directly predicts match pairs. Unlike\ntraditional matchers that compute descriptor distances, LightGlue uses attention mechanisms\nto produce confidence scores for each potential match pair.\n\nThe matcher extends DescriptorMatcher and supports the standard match(), knnMatch(), and\nradiusMatch() interfaces. Context (keypoints and image sizes) must be provided via\nsetPairInfo() before matching."
+    },
+    {
+      "ordinal": 162,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.LightGlueMatcher.create",
+      "identity": "cv.LightGlueMatcher.create(String modelPath[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)->Ptr<LightGlueMatcher>",
+      "returnType": "Ptr<LightGlueMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "modelPath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "scoreThreshold",
+          "default": "0.0f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "backend",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "target",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates LightGlueMatcher from a model file path.\n    @param modelPath Path to the ONNX model file.\n    @param scoreThreshold Match confidence threshold.\n    @param backend DNN backend\n    @param target DNN target"
+    },
+    {
+      "ordinal": 163,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.LightGlueMatcher.create",
+      "identity": "cv.LightGlueMatcher.create(vector_uchar modelData[/C,/Ref];float scoreThreshold=0.0f;int backend=0;int target=0)->Ptr<LightGlueMatcher>",
+      "returnType": "Ptr<LightGlueMatcher>",
+      "modifiers": [
+        "=createFromMemory",
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "vector_uchar",
+          "name": "modelData",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "scoreThreshold",
+          "default": "0.0f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "backend",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "target",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates LightGlueMatcher from in-memory model data.\n    @param modelData Buffer containing the model data.\n    @param scoreThreshold Match confidence threshold.\n    @param backend DNN backend\n    @param target DNN target"
+    },
+    {
+      "ordinal": 164,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.LightGlueMatcher.setPairInfo",
+      "identity": "cv.LightGlueMatcher.setPairInfo(Mat queryKpts;Mat trainKpts;Size queryImageSize=Size();Size trainImageSize=Size())->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "queryKpts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "trainKpts",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "queryImageSize",
+          "default": "Size()",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "trainImageSize",
+          "default": "Size()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the keypoint and image size context for the next match() call.\n\n    This provides the spatial context that LightGlue needs in addition to descriptors.\n    Must be called before match()/knnMatch()/radiusMatch() unless using automatic context\n    from in-process ALIKED instances.\n\n    @param queryKpts Query image keypoints (Nx2 float matrix with x,y coordinates).\n    @param trainKpts Train image keypoints (Nx2 float matrix with x,y coordinates).\n    @param queryImageSize Size of the query image (width, height).\n    @param trainImageSize Size of the train image (width, height)."
+    },
+    {
+      "ordinal": 165,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.LightGlueMatcher.clearPairInfo",
+      "identity": "cv.LightGlueMatcher.clearPairInfo()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Clears stored pair context information."
+    },
+    {
+      "ordinal": 166,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "enum",
+      "name": "struct cv.DrawMatchesFlags",
+      "identity": "enum struct cv.DrawMatchesFlags[const cv.DrawMatchesFlags.DEFAULT=0;const cv.DrawMatchesFlags.DRAW_OVER_OUTIMG=1;const cv.DrawMatchesFlags.NOT_DRAW_SINGLE_POINTS=2;const cv.DrawMatchesFlags.DRAW_RICH_KEYPOINTS=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.DrawMatchesFlags.DEFAULT",
+          "value": "0"
+        },
+        {
+          "name": "const cv.DrawMatchesFlags.DRAW_OVER_OUTIMG",
+          "value": "1"
+        },
+        {
+          "name": "const cv.DrawMatchesFlags.NOT_DRAW_SINGLE_POINTS",
+          "value": "2"
+        },
+        {
+          "name": "const cv.DrawMatchesFlags.DRAW_RICH_KEYPOINTS",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 167,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.drawKeypoints",
+      "identity": "cv.drawKeypoints(Mat image;vector_KeyPoint keypoints[/C,/Ref];Mat outImage[/IO];Scalar color=Scalar::all(-1)[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outImage",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "DrawMatchesFlags",
+          "name": "flags",
+          "default": "DrawMatchesFlags::DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Draws keypoints.\n\n@param image Source image.\n@param keypoints Keypoints from the source image.\n@param outImage Output image. Its content depends on the flags value defining what is drawn in the\noutput image. See possible flags bit values below.\n@param color Color of keypoints.\n@param flags Flags setting drawing features. Possible flags bit values are defined by\nDrawMatchesFlags. See details above in drawMatches .\n\n@note\nFor Python API, flags are modified as cv.DRAW_MATCHES_FLAGS_DEFAULT,\ncv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS, cv.DRAW_MATCHES_FLAGS_DRAW_OVER_OUTIMG,\ncv.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS"
+    },
+    {
+      "ordinal": 168,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.drawMatches",
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_char matchesMask=std::vector<char>()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches1to2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outImg",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "matchColor",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "singlePointColor",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_char",
+          "name": "matchesMask",
+          "default": "std::vector<char>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "DrawMatchesFlags",
+          "name": "flags",
+          "default": "DrawMatchesFlags::DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Draws the found matches of keypoints from two images.\n\n@param img1 First source image.\n@param keypoints1 Keypoints from the first source image.\n@param img2 Second source image.\n@param keypoints2 Keypoints from the second source image.\n@param matches1to2 Matches from the first image to the second one, which means that keypoints1[i]\nhas a corresponding point in keypoints2[matches[i]] .\n@param outImg Output image. Its content depends on the flags value defining what is drawn in the\noutput image. See possible flags bit values below.\n@param matchColor Color of matches (lines and connected keypoints). If matchColor==Scalar::all(-1)\n, the color is generated randomly.\n@param singlePointColor Color of single keypoints (circles), which means that keypoints do not\nhave the matches. If singlePointColor==Scalar::all(-1) , the color is generated randomly.\n@param matchesMask Mask determining which matches are drawn. If the mask is empty, all matches are\ndrawn.\n@param flags Flags setting drawing features. Possible flags bit values are defined by\nDrawMatchesFlags.\n\nThis function draws matches of keypoints from two images in the output image. Match is a line\nconnecting two keypoints (circles). See cv::DrawMatchesFlags."
+    },
+    {
+      "ordinal": 169,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.drawMatches",
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];int matchesThickness[/C];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_char matchesMask=std::vector<char>()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches1to2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outImg",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "matchesThickness",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "matchColor",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "singlePointColor",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_char",
+          "name": "matchesMask",
+          "default": "std::vector<char>()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "DrawMatchesFlags",
+          "name": "flags",
+          "default": "DrawMatchesFlags::DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 170,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.drawMatches",
+      "identity": "cv.drawMatches(Mat img1;vector_KeyPoint keypoints1[/C,/Ref];Mat img2;vector_KeyPoint keypoints2[/C,/Ref];vector_vector_DMatch matches1to2[/C,/Ref];Mat outImg[/IO];Scalar matchColor=Scalar::all(-1)[/C,/Ref];Scalar singlePointColor=Scalar::all(-1)[/C,/Ref];vector_vector_char matchesMask=std::vector<std::vector<char> >()[/C,/Ref];DrawMatchesFlags flags=DrawMatchesFlags::DEFAULT)->void",
+      "returnType": "void",
+      "modifiers": [
+        "=drawMatchesKnn"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_vector_DMatch",
+          "name": "matches1to2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outImg",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "matchColor",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Scalar",
+          "name": "singlePointColor",
+          "default": "Scalar::all(-1)",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_vector_char",
+          "name": "matchesMask",
+          "default": "std::vector<std::vector<char> >()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "DrawMatchesFlags",
+          "name": "flags",
+          "default": "DrawMatchesFlags::DEFAULT",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 171,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "class",
+      "name": "cv.ANNIndex",
+      "identity": "class cv.ANNIndex",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "**************************************************************************************\\\n*                             Approximate Nearest Neighbors                              *\n\\***************************************************************************************"
+    },
+    {
+      "ordinal": 172,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "enum",
+      "name": "cv.ANNIndex.Distance",
+      "identity": "enum cv.ANNIndex.Distance[const cv.ANNIndex.DIST_EUCLIDEAN=0;const cv.ANNIndex.DIST_MANHATTAN=1;const cv.ANNIndex.DIST_ANGULAR=2;const cv.ANNIndex.DIST_HAMMING=3;const cv.ANNIndex.DIST_DOTPRODUCT=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ANNIndex.DIST_EUCLIDEAN",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ANNIndex.DIST_MANHATTAN",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ANNIndex.DIST_ANGULAR",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ANNIndex.DIST_HAMMING",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ANNIndex.DIST_DOTPRODUCT",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 173,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.addItems",
+      "identity": "cv.ANNIndex.addItems(Mat features)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "features",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Add feature vectors to index.\n     *\n     * @param features Matrix containing the feature vectors to index. The size of the matrix is\n        num_features x feature_dimension."
+    },
+    {
+      "ordinal": 174,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.build",
+      "identity": "cv.ANNIndex.build(int trees=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "trees",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Build the index.\n     *\n     *  @param trees Number of trees in the index. If not provided, the number is determined automatically\n     *  in a way that at most 2x as much memory as the features vectors take is used."
+    },
+    {
+      "ordinal": 175,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.knnSearch",
+      "identity": "cv.ANNIndex.knnSearch(Mat query;Mat indices[/O];Mat dists[/O];int knn;int search_k=-1)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "query",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "indices",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dists",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "knn",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "search_k",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs a K-nearest neighbor search for given query vector(s) using the index.\n     *\n     *  @param query The query vector(s).\n     *  @param indices Matrix that will contain the indices of the K-nearest neighbors found, optional.\n     *  @param dists Matrix that will contain the distances to the K-nearest neighbors found, optional.\n     *  @param knn Number of nearest neighbors to search for.\n     *  @param search_k The maximum number of nodes to inspect, which defaults to trees x knn if not provided."
+    },
+    {
+      "ordinal": 176,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.save",
+      "identity": "cv.ANNIndex.save(String filename[/C,/Ref,/PATH];bool prefault=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "prefault",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Save the index to disk and loads it. After saving, no more vectors can be added.\n     *\n     *  @param filename Filename of the index to be saved.\n     *  @param prefault If prefault is set to true, it will pre-read the entire file into memory (using mmap\n     *  with MAP_POPULATE). Default is false."
+    },
+    {
+      "ordinal": 177,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.load",
+      "identity": "cv.ANNIndex.load(String filename[/C,/Ref,/PATH];bool prefault=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "prefault",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads (mmaps) an index from disk.\n     *\n     *  @param filename Filename of the index to be loaded.\n     *  @param prefault If prefault is set to true, it will pre-read the entire file into memory (using mmap\n     *  with MAP_POPULATE). Default is false."
+    },
+    {
+      "ordinal": 178,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.getTreeNumber",
+      "identity": "cv.ANNIndex.getTreeNumber()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Return the number of trees in the index."
+    },
+    {
+      "ordinal": 179,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.getItemNumber",
+      "identity": "cv.ANNIndex.getItemNumber()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Return the number of feature vectors in the index."
+    },
+    {
+      "ordinal": 180,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.setOnDiskBuild",
+      "identity": "cv.ANNIndex.setOnDiskBuild(String filename[/C,/Ref,/PATH])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filename",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief  Prepare to build the index in the specified file instead of RAM (execute before adding\n     * items, no need to save after build)\n     *\n     *  @param filename Filename of the index to be built."
+    },
+    {
+      "ordinal": 181,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.setSeed",
+      "identity": "cv.ANNIndex.setSeed(int seed)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "seed",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Initialize the random number generator with the given seed. Only necessary to pass this\n     *  before adding the items. Will have no effect after calling build() or load().\n     *\n     *  @param seed The given seed of the random number generator. Its value should be within the range of uint32_t."
+    },
+    {
+      "ordinal": 182,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/features/include/opencv2/features.hpp",
+      "kind": "callable",
+      "name": "cv.ANNIndex.create",
+      "identity": "cv.ANNIndex.create(int dim;ANNIndex_Distance distType=ANNIndex::DIST_EUCLIDEAN)->Ptr<ANNIndex>",
+      "returnType": "Ptr<ANNIndex>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "dim",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "ANNIndex_Distance",
+          "name": "distType",
+          "default": "ANNIndex::DIST_EUCLIDEAN",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates an instance of annoy index class with given parameters\n     *\n     *  @param dim The dimension of the feature vector.\n     *  @param distType Metric to calculate the distance between two feature vectors, can be DIST_EUCLIDEAN,\n        DIST_MANHATTAN, DIST_ANGULAR, DIST_HAMMING, or DIST_DOTPRODUCT."
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "packageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "realSupport": [
+    "alpine.3.20-x64/full",
+    "alpine.3.20-x64/mini",
+    "debian.12-arm64/full",
+    "debian.12-arm64/mini",
+    "debian.12-x64/full",
+    "debian.12-x64/mini",
+    "fedora.40-x64/full",
+    "fedora.40-x64/mini",
+    "rhel.9-x64/full",
+    "rhel.9-x64/mini",
+    "rocky.9-x64/full",
+    "rocky.9-x64/mini",
+    "ubuntu.22.04-arm64/full",
+    "ubuntu.22.04-arm64/mini",
+    "ubuntu.22.04-x64/full",
+    "ubuntu.22.04-x64/mini",
+    "ubuntu.24.04-arm64/full",
+    "ubuntu.24.04-arm64/mini",
+    "ubuntu.24.04-x64/full",
+    "ubuntu.24.04-x64/mini",
+    "win-arm64/full",
+    "win-arm64/mini",
+    "win-x64/full",
+    "win-x64/mini"
+  ],
+  "pending": [
+    {
+      "target": "win-x86/full",
+      "status": "hosted-evidence-pending",
+      "reason": "Local Win32/I386 feasibility exists, but hosted producer, same-run pack, independent artifact audit, and X86 consumer evidence are still required.",
+      "requires": [
+        "hosted-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "independent-artifact-audit",
+        "x86-consumer"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "target": "android-arm/full",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-arm/mini",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-arm64/full",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-arm64/mini",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-x64/full",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-x64/mini",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-x86/full",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "android-x86/mini",
+      "status": "excluded",
+      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+    },
+    {
+      "target": "win-x86/mini",
+      "status": "excluded",
+      "reason": "Mini profile has no hosted producer or consumer evidence and is outside the real-support allowlist."
+    }
+  ],
+  "outsideMatrix": [
+    {
+      "platform": "macOS",
+      "status": "not-supported",
+      "reason": "No declared RID, native build, package consumer, or runtime evidence exists."
+    }
+  ],
+  "policy": {
+    "packageSurfaceIsSupport": false,
+    "syntheticRuntimeInputs": "package-shape-only; never real support",
+    "publication": "blocked until real support, provenance, signing, SBOM, approval, and rollback gates pass"
+  }
+}

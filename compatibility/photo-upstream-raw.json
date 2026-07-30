@@ -1,0 +1,4089 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/PhotoUpstreamMap/extract_photo.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+  "headerSha256": "590b2cb4c8be5e4b53561b82ce2e451a8b72e87d2f4f09b5049c32b8ca55ad77",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "sha256": "590b2cb4c8be5e4b53561b82ce2e451a8b72e87d2f4f09b5049c32b8ca55ad77",
+      "includes": "main Photo declarations, CCM, and segmentation"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/photo.hpp",
+      "sha256": "18b6aed6db6c14d4295e89f7c9bb8931c44320d97195921fff3c16ea4174d67f",
+      "includes": "opencv2/photo.hpp"
+    }
+  ],
+  "excludedPublicHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/cuda.hpp",
+      "reason": "CUDA-only public surface is not part of the CPU Photo compatibility include closure."
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "sha256": "590b2cb4c8be5e4b53561b82ce2e451a8b72e87d2f4f09b5049c32b8ca55ad77",
+      "startOrdinal": 0,
+      "declarationCount": 100
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "sha256": "5051730cfc0919dc2c458b1db15254a07f95079be9155f54aef862cb363007c3",
+      "startOrdinal": 100,
+      "declarationCount": 35
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "sha256": "33feab6eea666a7035f744c15f11d435b642eaeb3ad2b9def2f2771bc3ad8fa5",
+      "startOrdinal": 135,
+      "declarationCount": 10
+    }
+  ],
+  "declarationCount": 145,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "enum",
+      "name": "cv.<unnamed>",
+      "identity": "enum cv.<unnamed>[const cv.INPAINT_NS=0;const cv.INPAINT_TELEA=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.INPAINT_NS",
+          "value": "0"
+        },
+        {
+          "name": "const cv.INPAINT_TELEA",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.inpaint",
+      "identity": "cv.inpaint(Mat src;Mat inpaintMask;Mat dst[/O];double inpaintRadius;int flags)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "inpaintMask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "inpaintRadius",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Restores the selected region in an image using the region neighborhood.\n\n@param src Input 8-bit, 16-bit unsigned or 32-bit float 1-channel or 8-bit 3-channel image.\n@param inpaintMask Inpainting mask, 8-bit 1-channel image. Non-zero pixels indicate the area that\nneeds to be inpainted.\n@param dst Output image with the same size and type as src .\n@param inpaintRadius Radius of a circular neighborhood of each point inpainted that is considered\nby the algorithm.\n@param flags Inpainting method that could be cv::INPAINT_NS or cv::INPAINT_TELEA\n\nThe function reconstructs the selected image area from the pixel near the area boundary. The\nfunction may be used to remove dust and scratches from a scanned photo, or to remove undesirable\nobjects from still images or video. See <http://en.wikipedia.org/wiki/Inpainting> for more details.\n\n@note\n   -   An example using the inpainting technique can be found at\n        opencv_source_code/samples/cpp/inpaint.cpp\n   -   (Python) An example using the inpainting technique can be found at\n        opencv_source_code/samples/python/inpaint.py"
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.fastNlMeansDenoising",
+      "identity": "cv.fastNlMeansDenoising(Mat src;Mat dst[/O];float h=3;int templateWindowSize=7;int searchWindowSize=21)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "7",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "21",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Perform image denoising using Non-local Means Denoising algorithm\n<http://www.ipol.im/pub/algo/bcm_non_local_means_denoising/> with several computational\noptimizations. Noise expected to be a gaussian white noise\n\n@param src Input 8-bit 1-channel, 2-channel, 3-channel or 4-channel image.\n@param dst Output image with the same size and type as src .\n@param templateWindowSize Size in pixels of the template patch that is used to compute weights.\nShould be odd. Recommended value 7 pixels\n@param searchWindowSize Size in pixels of the window that is used to compute weighted average for\ngiven pixel. Should be odd. Affect performance linearly: greater searchWindowsSize - greater\ndenoising time. Recommended value 21 pixels\n@param h Parameter regulating filter strength. Big h value perfectly removes noise but also\nremoves image details, smaller h value preserves details but also preserves some noise\n\nThis function expected to be applied to grayscale images. For colored images look at\nfastNlMeansDenoisingColored. Advanced usage of this functions can be manual denoising of colored\nimage in different colorspaces. Such approach is used in fastNlMeansDenoisingColored by converting\nimage to CIELAB colorspace and then separately denoise L and AB components with different h\nparameter."
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.fastNlMeansDenoising",
+      "identity": "cv.fastNlMeansDenoising(Mat src;Mat dst[/O];vector_float h[/C,/Ref];int templateWindowSize=7;int searchWindowSize=21;int normType=NORM_L2)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "vector_float",
+          "name": "h",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "7",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "21",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "NORM_L2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Perform image denoising using Non-local Means Denoising algorithm\n<http://www.ipol.im/pub/algo/bcm_non_local_means_denoising/> with several computational\noptimizations. Noise expected to be a gaussian white noise\n\n@param src Input 8-bit or 16-bit (only with NORM_L1) 1-channel,\n2-channel, 3-channel or 4-channel image.\n@param dst Output image with the same size and type as src .\n@param templateWindowSize Size in pixels of the template patch that is used to compute weights.\nShould be odd. Recommended value 7 pixels\n@param searchWindowSize Size in pixels of the window that is used to compute weighted average for\ngiven pixel. Should be odd. Affect performance linearly: greater searchWindowsSize - greater\ndenoising time. Recommended value 21 pixels\n@param h Array of parameters regulating filter strength, either one\nparameter applied to all channels or one per channel in dst. Big h value\nperfectly removes noise but also removes image details, smaller h\nvalue preserves details but also preserves some noise\n@param normType Type of norm used for weight calculation. Can be either NORM_L2 or NORM_L1\n\nThis function expected to be applied to grayscale images. For colored images look at\nfastNlMeansDenoisingColored. Advanced usage of this functions can be manual denoising of colored\nimage in different colorspaces. Such approach is used in fastNlMeansDenoisingColored by converting\nimage to CIELAB colorspace and then separately denoise L and AB components with different h\nparameter."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.fastNlMeansDenoisingColored",
+      "identity": "cv.fastNlMeansDenoisingColored(Mat src;Mat dst[/O];float h=3;float hColor=3;int templateWindowSize=7;int searchWindowSize=21)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "hColor",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "7",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "21",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Modification of fastNlMeansDenoising function for colored images\n\n@param src Input 8-bit 3-channel image.\n@param dst Output image with the same size and type as src .\n@param templateWindowSize Size in pixels of the template patch that is used to compute weights.\nShould be odd. Recommended value 7 pixels\n@param searchWindowSize Size in pixels of the window that is used to compute weighted average for\ngiven pixel. Should be odd. Affect performance linearly: greater searchWindowsSize - greater\ndenoising time. Recommended value 21 pixels\n@param h Parameter regulating filter strength for luminance component. Bigger h value perfectly\nremoves noise but also removes image details, smaller h value preserves details but also preserves\nsome noise\n@param hColor The same as h but for color components. For most images value equals 10\nwill be enough to remove colored noise and do not distort colors\n\nThe function converts image to CIELAB colorspace and then separately denoise L and AB components\nwith given h parameters using fastNlMeansDenoising function."
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.fastNlMeansDenoisingMulti",
+      "identity": "cv.fastNlMeansDenoisingMulti(vector_Mat srcImgs;Mat dst[/O];int imgToDenoiseIndex;int temporalWindowSize;float h=3;int templateWindowSize=7;int searchWindowSize=21)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "srcImgs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "imgToDenoiseIndex",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "temporalWindowSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "7",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "21",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Modification of fastNlMeansDenoising function for images sequence where consecutive images have been\ncaptured in small period of time. For example video. This version of the function is for grayscale\nimages or for manual manipulation with colorspaces. See @cite Buades2005DenoisingIS for more details\n(open access [here](https://static.aminer.org/pdf/PDF/000/317/196/spatio_temporal_wiener_filtering_of_image_sequences_using_a_parametric.pdf)).\n\n@param srcImgs Input 8-bit 1-channel, 2-channel, 3-channel or\n4-channel images sequence. All images should have the same type and\nsize.\n@param imgToDenoiseIndex Target image to denoise index in srcImgs sequence\n@param temporalWindowSize Number of surrounding images to use for target image denoising. Should\nbe odd. Images from imgToDenoiseIndex - temporalWindowSize / 2 to\nimgToDenoiseIndex + temporalWindowSize / 2 from srcImgs will be used to denoise\nsrcImgs[imgToDenoiseIndex] image.\n@param dst Output image with the same size and type as srcImgs images.\n@param templateWindowSize Size in pixels of the template patch that is used to compute weights.\nShould be odd. Recommended value 7 pixels\n@param searchWindowSize Size in pixels of the window that is used to compute weighted average for\ngiven pixel. Should be odd. Affect performance linearly: greater searchWindowsSize - greater\ndenoising time. Recommended value 21 pixels\n@param h Parameter regulating filter strength. Bigger h value\nperfectly removes noise but also removes image details, smaller h\nvalue preserves details but also preserves some noise"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.fastNlMeansDenoisingMulti",
+      "identity": "cv.fastNlMeansDenoisingMulti(vector_Mat srcImgs;Mat dst[/O];int imgToDenoiseIndex;int temporalWindowSize;vector_float h[/C,/Ref];int templateWindowSize=7;int searchWindowSize=21;int normType=NORM_L2)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "srcImgs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "imgToDenoiseIndex",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "temporalWindowSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_float",
+          "name": "h",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "7",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "21",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "normType",
+          "default": "NORM_L2",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Modification of fastNlMeansDenoising function for images sequence where consecutive images have been\ncaptured in small period of time. For example video. This version of the function is for grayscale\nimages or for manual manipulation with colorspaces. See @cite Buades2005DenoisingIS for more details\n(open access [here](https://static.aminer.org/pdf/PDF/000/317/196/spatio_temporal_wiener_filtering_of_image_sequences_using_a_parametric.pdf)).\n\n@param srcImgs Input 8-bit or 16-bit (only with NORM_L1) 1-channel,\n2-channel, 3-channel or 4-channel images sequence. All images should\nhave the same type and size.\n@param imgToDenoiseIndex Target image to denoise index in srcImgs sequence\n@param temporalWindowSize Number of surrounding images to use for target image denoising. Should\nbe odd. Images from imgToDenoiseIndex - temporalWindowSize / 2 to\nimgToDenoiseIndex + temporalWindowSize / 2 from srcImgs will be used to denoise\nsrcImgs[imgToDenoiseIndex] image.\n@param dst Output image with the same size and type as srcImgs images.\n@param templateWindowSize Size in pixels of the template patch that is used to compute weights.\nShould be odd. Recommended value 7 pixels\n@param searchWindowSize Size in pixels of the window that is used to compute weighted average for\ngiven pixel. Should be odd. Affect performance linearly: greater searchWindowsSize - greater\ndenoising time. Recommended value 21 pixels\n@param h Array of parameters regulating filter strength, either one\nparameter applied to all channels or one per channel in dst. Big h value\nperfectly removes noise but also removes image details, smaller h\nvalue preserves details but also preserves some noise\n@param normType Type of norm used for weight calculation. Can be either NORM_L2 or NORM_L1"
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.fastNlMeansDenoisingColoredMulti",
+      "identity": "cv.fastNlMeansDenoisingColoredMulti(vector_Mat srcImgs;Mat dst[/O];int imgToDenoiseIndex;int temporalWindowSize;float h=3;float hColor=3;int templateWindowSize=7;int searchWindowSize=21)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "srcImgs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "imgToDenoiseIndex",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "temporalWindowSize",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "h",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "hColor",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "templateWindowSize",
+          "default": "7",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "searchWindowSize",
+          "default": "21",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Modification of fastNlMeansDenoisingMulti function for colored images sequences\n\n@param srcImgs Input 8-bit 3-channel images sequence. All images should have the same type and\nsize.\n@param imgToDenoiseIndex Target image to denoise index in srcImgs sequence\n@param temporalWindowSize Number of surrounding images to use for target image denoising. Should\nbe odd. Images from imgToDenoiseIndex - temporalWindowSize / 2 to\nimgToDenoiseIndex + temporalWindowSize / 2 from srcImgs will be used to denoise\nsrcImgs[imgToDenoiseIndex] image.\n@param dst Output image with the same size and type as srcImgs images.\n@param templateWindowSize Size in pixels of the template patch that is used to compute weights.\nShould be odd. Recommended value 7 pixels\n@param searchWindowSize Size in pixels of the window that is used to compute weighted average for\ngiven pixel. Should be odd. Affect performance linearly: greater searchWindowsSize - greater\ndenoising time. Recommended value 21 pixels\n@param h Parameter regulating filter strength for luminance component. Bigger h value perfectly\nremoves noise but also removes image details, smaller h value preserves details but also preserves\nsome noise.\n@param hColor The same as h but for color components.\n\nThe function converts images to CIELAB colorspace and then separately denoise L and AB components\nwith given h parameters using fastNlMeansDenoisingMulti function."
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.denoise_TVL1",
+      "identity": "cv.denoise_TVL1(vector_Mat observations[/C,/Ref];Mat result[/Ref];double lambda=1.0;int niters=30)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "observations",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "result",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "lambda",
+          "default": "1.0",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "niters",
+          "default": "30",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Primal-dual algorithm is an algorithm for solving special types of variational problems (that is,\nfinding a function to minimize some functional). As the image denoising, in particular, may be seen\nas the variational problem, primal-dual algorithm then can be used to perform denoising and this is\nexactly what is implemented.\n\nIt should be noted, that this implementation was taken from the July 2013 blog entry\n@cite MA13 , which also contained (slightly more general) ready-to-use source code on Python.\nSubsequently, that code was rewritten on C++ with the usage of openCV by Vadim Pisarevsky at the end\nof July 2013 and finally it was slightly adapted by later authors.\n\nAlthough the thorough discussion and justification of the algorithm involved may be found in\n@cite ChambolleEtAl, it might make sense to skim over it here, following @cite MA13 . To begin\nwith, we consider the 1-byte gray-level images as the functions from the rectangular domain of\npixels (it may be seen as set\n\\f$\\left\\{(x,y)\\in\\mathbb{N}\\times\\mathbb{N}\\mid 1\\leq x\\leq n,\\;1\\leq y\\leq m\\right\\}\\f$ for some\n\\f$m,\\;n\\in\\mathbb{N}\\f$) into \\f$\\{0,1,\\dots,255\\}\\f$. We shall denote the noised images as \\f$f_i\\f$ and with\nthis view, given some image \\f$x\\f$ of the same size, we may measure how bad it is by the formula\n\n\\f[\\left\\|\\left\\|\\nabla x\\right\\|\\right\\| + \\lambda\\sum_i\\left\\|\\left\\|x-f_i\\right\\|\\right\\|\\f]\n\n\\f$\\|\\|\\cdot\\|\\|\\f$ here denotes \\f$L_2\\f$-norm and as you see, the first addend states that we want our\nimage to be smooth (ideally, having zero gradient, thus being constant) and the second states that\nwe want our result to be close to the observations we've got. If we treat \\f$x\\f$ as a function, this is\nexactly the functional what we seek to minimize and here the Primal-Dual algorithm comes into play.\n\n@param observations This array should contain one or more noised versions of the image that is to\nbe restored.\n@param result Here the denoised image will be stored. There is no need to do pre-allocation of\nstorage space, as it will be automatically allocated, if necessary.\n@param lambda Corresponds to \\f$\\lambda\\f$ in the formulas above. As it is enlarged, the smooth\n(blurred) images are treated more favorably than detailed (but maybe more noised) ones. Roughly\nspeaking, as it becomes smaller, the result will be more blur but more sever outliers will be\nremoved.\n@param niters Number of iterations that the algorithm will run. Of course, as more iterations as\nbetter, but it is hard to quantitatively refine this statement, so just use the default and\nincrease it if the results are poor."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "enum",
+      "name": "cv.<unnamed>",
+      "identity": "enum cv.<unnamed>[const cv.LDR_SIZE=256]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.LDR_SIZE",
+          "value": "256"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.Tonemap",
+      "identity": "class cv.Tonemap",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for tonemapping algorithms - tools that are used to map HDR image to 8-bit range."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.Tonemap.process",
+      "identity": "cv.Tonemap.process(Mat src;Mat dst[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Tonemaps image\n\n    @param src source image - CV_32FC3 Mat (float 32 bits 3 channels)\n    @param dst destination image - CV_32FC3 Mat with values in [0, 1] range"
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.Tonemap.getGamma",
+      "identity": "cv.Tonemap.getGamma()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.Tonemap.setGamma",
+      "identity": "cv.Tonemap.setGamma(float gamma)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gamma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createTonemap",
+      "identity": "cv.createTonemap(float gamma=1.0f)->Ptr<Tonemap>",
+      "returnType": "Ptr<Tonemap>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gamma",
+          "default": "1.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates simple linear mapper with gamma correction\n\n@param gamma positive value for gamma correction. Gamma value of 1.0 implies no correction, gamma\nequal to 2.2f is suitable for most displays.\nGenerally gamma \\> 1 brightens the image and gamma \\< 1 darkens it."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.TonemapDrago",
+      "identity": "class cv.TonemapDrago",
+      "returnType": ": cv::Tonemap",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tonemap",
+      "documentation": "@brief Adaptive logarithmic mapping is a fast global tonemapping algorithm that scales the image in\nlogarithmic domain.\n\nSince it's a global operator the same function is applied to all the pixels, it is controlled by the\nbias parameter.\n\nOptional saturation enhancement is possible as described in @cite FL02 .\n\nFor more information see @cite DM03 ."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapDrago.getSaturation",
+      "identity": "cv.TonemapDrago.getSaturation()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapDrago.setSaturation",
+      "identity": "cv.TonemapDrago.setSaturation(float saturation)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "saturation",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapDrago.getBias",
+      "identity": "cv.TonemapDrago.getBias()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapDrago.setBias",
+      "identity": "cv.TonemapDrago.setBias(float bias)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "bias",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createTonemapDrago",
+      "identity": "cv.createTonemapDrago(float gamma=1.0f;float saturation=1.0f;float bias=0.85f)->Ptr<TonemapDrago>",
+      "returnType": "Ptr<TonemapDrago>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gamma",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "saturation",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "bias",
+          "default": "0.85f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates TonemapDrago object\n\n@param gamma gamma value for gamma correction. See createTonemap\n@param saturation positive saturation enhancement value. 1.0 preserves saturation, values greater\nthan 1 increase saturation and values less than 1 decrease it.\n@param bias value for bias function in [0, 1] range. Values from 0.7 to 0.9 usually give best\nresults, default value is 0.85."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.TonemapReinhard",
+      "identity": "class cv.TonemapReinhard",
+      "returnType": ": cv::Tonemap",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tonemap",
+      "documentation": "@brief This is a global tonemapping operator that models human visual system.\n\nMapping function is controlled by adaptation parameter, that is computed using light adaptation and\ncolor adaptation.\n\nFor more information see @cite RD05 ."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapReinhard.getIntensity",
+      "identity": "cv.TonemapReinhard.getIntensity()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapReinhard.setIntensity",
+      "identity": "cv.TonemapReinhard.setIntensity(float intensity)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "intensity",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapReinhard.getLightAdaptation",
+      "identity": "cv.TonemapReinhard.getLightAdaptation()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapReinhard.setLightAdaptation",
+      "identity": "cv.TonemapReinhard.setLightAdaptation(float light_adapt)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "light_adapt",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapReinhard.getColorAdaptation",
+      "identity": "cv.TonemapReinhard.getColorAdaptation()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapReinhard.setColorAdaptation",
+      "identity": "cv.TonemapReinhard.setColorAdaptation(float color_adapt)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "color_adapt",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createTonemapReinhard",
+      "identity": "cv.createTonemapReinhard(float gamma=1.0f;float intensity=0.0f;float light_adapt=1.0f;float color_adapt=0.0f)->Ptr<TonemapReinhard>",
+      "returnType": "Ptr<TonemapReinhard>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gamma",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "intensity",
+          "default": "0.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "light_adapt",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "color_adapt",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates TonemapReinhard object\n\n@param gamma gamma value for gamma correction. See createTonemap\n@param intensity result intensity in [-8, 8] range. Greater intensity produces brighter results.\n@param light_adapt light adaptation in [0, 1] range. If 1 adaptation is based only on pixel\nvalue, if 0 it's global, otherwise it's a weighted mean of this two cases.\n@param color_adapt chromatic adaptation in [0, 1] range. If 1 channels are treated independently,\nif 0 adaptation level is the same for each channel."
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.TonemapMantiuk",
+      "identity": "class cv.TonemapMantiuk",
+      "returnType": ": cv::Tonemap",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tonemap",
+      "documentation": "@brief This algorithm transforms image to contrast using gradients on all levels of gaussian pyramid,\ntransforms contrast values to HVS response and scales the response. After this the image is\nreconstructed from new contrast values.\n\nFor more information see @cite MM06 ."
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapMantiuk.getScale",
+      "identity": "cv.TonemapMantiuk.getScale()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapMantiuk.setScale",
+      "identity": "cv.TonemapMantiuk.setScale(float scale)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapMantiuk.getSaturation",
+      "identity": "cv.TonemapMantiuk.getSaturation()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.TonemapMantiuk.setSaturation",
+      "identity": "cv.TonemapMantiuk.setSaturation(float saturation)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "saturation",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createTonemapMantiuk",
+      "identity": "cv.createTonemapMantiuk(float gamma=1.0f;float scale=0.7f;float saturation=1.0f)->Ptr<TonemapMantiuk>",
+      "returnType": "Ptr<TonemapMantiuk>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gamma",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "0.7f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "saturation",
+          "default": "1.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates TonemapMantiuk object\n\n@param gamma gamma value for gamma correction. See createTonemap\n@param scale contrast scale factor. HVS response is multiplied by this parameter, thus compressing\ndynamic range. Values from 0.6 to 0.9 produce best results.\n@param saturation saturation enhancement value. See createTonemapDrago"
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.AlignExposures",
+      "identity": "class cv.AlignExposures",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief The base class for algorithms that align images of the same scene with different exposures"
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignExposures.process",
+      "identity": "cv.AlignExposures.process(vector_Mat src;vector_Mat dst[/Ref];Mat times;Mat response)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Aligns images\n\n    @param src vector of input images\n    @param dst vector of aligned images\n    @param times vector of exposure time values for each image\n    @param response 256x1 matrix with inverse camera response function for each pixel value, it should\n    have the same number of channels as images."
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.AlignMTB",
+      "identity": "class cv.AlignMTB",
+      "returnType": ": cv::AlignExposures",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::AlignExposures",
+      "documentation": "@brief This algorithm converts images to median threshold bitmaps (1 for pixels brighter than median\nluminance and 0 otherwise) and than aligns the resulting bitmaps using bit operations.\n\nIt is invariant to exposure, so exposure values and camera response are not necessary.\n\nIn this implementation new image regions are filled with zeros.\n\nFor more information see @cite GW03 ."
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.process",
+      "identity": "cv.AlignMTB.process(vector_Mat src;vector_Mat dst[/Ref];Mat times;Mat response)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.process",
+      "identity": "cv.AlignMTB.process(vector_Mat src;vector_Mat dst[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Short version of process, that doesn't take extra arguments.\n\n    @param src vector of input images\n    @param dst vector of aligned images"
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.calculateShift",
+      "identity": "cv.AlignMTB.calculateShift(Mat img0;Mat img1)->Point",
+      "returnType": "Point",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "img1",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Calculates shift between two images, i. e. how to shift the second image to correspond it with the\n    first.\n\n    @param img0 first image\n    @param img1 second image"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.shiftMat",
+      "identity": "cv.AlignMTB.shiftMat(Mat src;Mat dst[/O];Point shift[/C])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Point",
+          "name": "shift",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Helper function, that shift Mat filling new regions with zeros.\n\n    @param src input image\n    @param dst result image\n    @param shift shift value"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.computeBitmaps",
+      "identity": "cv.AlignMTB.computeBitmaps(Mat img;Mat tb[/O];Mat eb[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "tb",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "eb",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes median threshold and exclude bitmaps of given image.\n\n    @param img input image\n    @param tb median threshold bitmap\n    @param eb exclude bitmap"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.getMaxBits",
+      "identity": "cv.AlignMTB.getMaxBits()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.setMaxBits",
+      "identity": "cv.AlignMTB.setMaxBits(int max_bits)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "max_bits",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.getExcludeRange",
+      "identity": "cv.AlignMTB.getExcludeRange()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.setExcludeRange",
+      "identity": "cv.AlignMTB.setExcludeRange(int exclude_range)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "exclude_range",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.getCut",
+      "identity": "cv.AlignMTB.getCut()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.AlignMTB.setCut",
+      "identity": "cv.AlignMTB.setCut(bool value)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createAlignMTB",
+      "identity": "cv.createAlignMTB(int max_bits=6;int exclude_range=4;bool cut=true)->Ptr<AlignMTB>",
+      "returnType": "Ptr<AlignMTB>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "max_bits",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "exclude_range",
+          "default": "4",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "cut",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates AlignMTB object\n\n@param max_bits logarithm to the base 2 of maximal shift in each dimension. Values of 5 and 6 are\nusually good enough (31 and 63 pixels shift respectively).\n@param exclude_range range for exclusion bitmap that is constructed to suppress noise around the\nmedian value.\n@param cut if true cuts images, otherwise fills the new regions with zeros."
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.CalibrateCRF",
+      "identity": "class cv.CalibrateCRF",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief The base class for camera response calibration algorithms."
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateCRF.process",
+      "identity": "cv.CalibrateCRF.process(vector_Mat src;Mat dst[/O];Mat times)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Recovers inverse camera response.\n\n    @param src vector of input images\n    @param dst 256x1 matrix with inverse camera response function\n    @param times vector of exposure time values for each image"
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.CalibrateDebevec",
+      "identity": "class cv.CalibrateDebevec",
+      "returnType": ": cv::CalibrateCRF",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::CalibrateCRF",
+      "documentation": "@brief Inverse camera response function is extracted for each brightness value by minimizing an objective\nfunction as linear system. Objective function is constructed using pixel values on the same position\nin all images, extra term is added to make the result smoother.\n\nFor more information see @cite DM97 ."
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateDebevec.getLambda",
+      "identity": "cv.CalibrateDebevec.getLambda()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateDebevec.setLambda",
+      "identity": "cv.CalibrateDebevec.setLambda(float lambda)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "lambda",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateDebevec.getSamples",
+      "identity": "cv.CalibrateDebevec.getSamples()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateDebevec.setSamples",
+      "identity": "cv.CalibrateDebevec.setSamples(int samples)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateDebevec.getRandom",
+      "identity": "cv.CalibrateDebevec.getRandom()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateDebevec.setRandom",
+      "identity": "cv.CalibrateDebevec.setRandom(bool random)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "random",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createCalibrateDebevec",
+      "identity": "cv.createCalibrateDebevec(int samples=70;float lambda=10.0f;bool random=false)->Ptr<CalibrateDebevec>",
+      "returnType": "Ptr<CalibrateDebevec>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "samples",
+          "default": "70",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "lambda",
+          "default": "10.0f",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "random",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates CalibrateDebevec object\n\n@param samples number of pixel locations to use\n@param lambda smoothness term weight. Greater values produce smoother results, but can alter the\nresponse.\n@param random if true sample pixel locations are chosen at random, otherwise they form a\nrectangular grid."
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.CalibrateRobertson",
+      "identity": "class cv.CalibrateRobertson",
+      "returnType": ": cv::CalibrateCRF",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::CalibrateCRF",
+      "documentation": "@brief Inverse camera response function is extracted for each brightness value by minimizing an objective\nfunction as linear system. This algorithm uses all image pixels.\n\nFor more information see @cite RB99 ."
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateRobertson.getMaxIter",
+      "identity": "cv.CalibrateRobertson.getMaxIter()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateRobertson.setMaxIter",
+      "identity": "cv.CalibrateRobertson.setMaxIter(int max_iter)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "max_iter",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateRobertson.getThreshold",
+      "identity": "cv.CalibrateRobertson.getThreshold()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateRobertson.setThreshold",
+      "identity": "cv.CalibrateRobertson.setThreshold(float threshold)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.CalibrateRobertson.getRadiance",
+      "identity": "cv.CalibrateRobertson.getRadiance()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createCalibrateRobertson",
+      "identity": "cv.createCalibrateRobertson(int max_iter=30;float threshold=0.01f)->Ptr<CalibrateRobertson>",
+      "returnType": "Ptr<CalibrateRobertson>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "max_iter",
+          "default": "30",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "threshold",
+          "default": "0.01f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates CalibrateRobertson object\n\n@param max_iter maximal number of Gauss-Seidel solver iterations.\n@param threshold target difference between results of two successive steps of the minimization."
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.MergeExposures",
+      "identity": "class cv.MergeExposures",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief The base class algorithms that can merge exposure sequence to a single image."
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeExposures.process",
+      "identity": "cv.MergeExposures.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Merges images.\n\n    @param src vector of input images\n    @param dst result image\n    @param times vector of exposure time values for each image\n    @param response 256x1 matrix with inverse camera response function for each pixel value, it should\n    have the same number of channels as images."
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.MergeDebevec",
+      "identity": "class cv.MergeDebevec",
+      "returnType": ": cv::MergeExposures",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::MergeExposures",
+      "documentation": "@brief The resulting HDR image is calculated as weighted average of the exposures considering exposure\nvalues and camera response.\n\nFor more information see @cite DM97 ."
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeDebevec.process",
+      "identity": "cv.MergeDebevec.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeDebevec.process",
+      "identity": "cv.MergeDebevec.process(vector_Mat src;Mat dst[/O];Mat times)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createMergeDebevec",
+      "identity": "cv.createMergeDebevec()->Ptr<MergeDebevec>",
+      "returnType": "Ptr<MergeDebevec>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates MergeDebevec object"
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.MergeMertens",
+      "identity": "class cv.MergeMertens",
+      "returnType": ": cv::MergeExposures",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::MergeExposures",
+      "documentation": "@brief Pixels are weighted using contrast, saturation and well-exposedness measures, than images are\ncombined using laplacian pyramids.\n\nThe resulting image weight is constructed as weighted average of contrast, saturation and\nwell-exposedness measures.\n\nThe resulting image doesn't require tonemapping and can be converted to 8-bit image by multiplying\nby 255, but it's recommended to apply gamma correction and/or linear tonemapping.\n\nFor more information see @cite MK07 ."
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.process",
+      "identity": "cv.MergeMertens.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.process",
+      "identity": "cv.MergeMertens.process(vector_Mat src;Mat dst[/O])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Short version of process, that doesn't take extra arguments.\n\n    @param src vector of input images\n    @param dst result image"
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.getContrastWeight",
+      "identity": "cv.MergeMertens.getContrastWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.setContrastWeight",
+      "identity": "cv.MergeMertens.setContrastWeight(float contrast_weiht)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "contrast_weiht",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.getSaturationWeight",
+      "identity": "cv.MergeMertens.getSaturationWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.setSaturationWeight",
+      "identity": "cv.MergeMertens.setSaturationWeight(float saturation_weight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "saturation_weight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.getExposureWeight",
+      "identity": "cv.MergeMertens.getExposureWeight()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeMertens.setExposureWeight",
+      "identity": "cv.MergeMertens.setExposureWeight(float exposure_weight)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "exposure_weight",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createMergeMertens",
+      "identity": "cv.createMergeMertens(float contrast_weight=1.0f;float saturation_weight=1.0f;float exposure_weight=0.0f)->Ptr<MergeMertens>",
+      "returnType": "Ptr<MergeMertens>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "contrast_weight",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "saturation_weight",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "exposure_weight",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates MergeMertens object\n\n@param contrast_weight contrast measure weight. See MergeMertens.\n@param saturation_weight saturation measure weight\n@param exposure_weight well-exposedness measure weight"
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "class",
+      "name": "cv.MergeRobertson",
+      "identity": "class cv.MergeRobertson",
+      "returnType": ": cv::MergeExposures",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::MergeExposures",
+      "documentation": "@brief The resulting HDR image is calculated as weighted average of the exposures considering exposure\nvalues and camera response.\n\nFor more information see @cite RB99 ."
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeRobertson.process",
+      "identity": "cv.MergeRobertson.process(vector_Mat src;Mat dst[/O];Mat times;Mat response)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "response",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.MergeRobertson.process",
+      "identity": "cv.MergeRobertson.process(vector_Mat src;Mat dst[/O];Mat times)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "times",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.createMergeRobertson",
+      "identity": "cv.createMergeRobertson()->Ptr<MergeRobertson>",
+      "returnType": "Ptr<MergeRobertson>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates MergeRobertson object"
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.decolor",
+      "identity": "cv.decolor(Mat src;Mat grayscale[/O];Mat color_boost[/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "grayscale",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "color_boost",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Transforms a color image to a grayscale image. It is a basic tool in digital printing, stylized\nblack-and-white photograph rendering, and in many single channel image processing applications\n@cite CL12 .\n\n@param src Input 8-bit 3-channel image.\n@param grayscale Output 8-bit 1-channel image.\n@param color_boost Output 8-bit 3-channel image.\n\nThis function is to be applied on color images."
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "enum",
+      "name": "cv.SeamlessCloneFlags",
+      "identity": "enum cv.SeamlessCloneFlags[const cv.NORMAL_CLONE=1;const cv.MIXED_CLONE=2;const cv.MONOCHROME_TRANSFER=3;const cv.NORMAL_CLONE_WIDE=9;const cv.MIXED_CLONE_WIDE=10;const cv.MONOCHROME_TRANSFER_WIDE=11]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.NORMAL_CLONE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.MIXED_CLONE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.MONOCHROME_TRANSFER",
+          "value": "3"
+        },
+        {
+          "name": "const cv.NORMAL_CLONE_WIDE",
+          "value": "9"
+        },
+        {
+          "name": "const cv.MIXED_CLONE_WIDE",
+          "value": "10"
+        },
+        {
+          "name": "const cv.MONOCHROME_TRANSFER_WIDE",
+          "value": "11"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.seamlessClone",
+      "identity": "cv.seamlessClone(Mat src;Mat dst;Mat mask;Point p;Mat blend[/O];int flags)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "p",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "blend",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs seamless cloning to blend a region from a source image into a destination image.\nThis function is designed for local image editing, allowing changes restricted to a region\n(manually selected as the ROI) to be applied effortlessly and seamlessly. These changes can\nrange from slight distortions to complete replacement by novel content @cite PM03.\n\n@param src The source image (8-bit 3-channel), from which a region will be blended into the destination.\n@param dst The destination image (8-bit 3-channel), where the src image will be blended.\n@param mask A binary mask (8-bit, 1, 3, or 4-channel) specifying the region in the source image to blend.\nNon-zero pixels indicate the region to be blended. If an empty Mat is provided, a mask with\nall non-zero pixels is created internally.\n@param p The point where the center of the src image is placed in the dst image.\n@param blend The output image that stores the result of the seamless cloning. It has the same size and type as `dst`.\n@param flags Flags that control the type of cloning method, can take values of `cv::SeamlessCloneFlags`."
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.colorChange",
+      "identity": "cv.colorChange(Mat src;Mat mask;Mat dst[/O];float red_mul=1.0f;float green_mul=1.0f;float blue_mul=1.0f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "red_mul",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "green_mul",
+          "default": "1.0f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "blue_mul",
+          "default": "1.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Given an original color image, two differently colored versions of this image can be mixed\nseamlessly.\n\n@param src Input 8-bit 3-channel image.\n@param mask Input 8-bit 1 or 3-channel image.\n@param dst Output image with the same size and type as src .\n@param red_mul R-channel multiply factor.\n@param green_mul G-channel multiply factor.\n@param blue_mul B-channel multiply factor.\n\nMultiplication factor is between .5 to 2.5."
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.illuminationChange",
+      "identity": "cv.illuminationChange(Mat src;Mat mask;Mat dst[/O];float alpha=0.2f;float beta=0.4f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "alpha",
+          "default": "0.2f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "beta",
+          "default": "0.4f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applying an appropriate non-linear transformation to the gradient field inside the selection and\nthen integrating back with a Poisson solver, modifies locally the apparent illumination of an image.\n\n@param src Input 8-bit 3-channel image.\n@param mask Input 8-bit 1 or 3-channel image.\n@param dst Output image with the same size and type as src.\n@param alpha Value ranges between 0-2.\n@param beta Value ranges between 0-2.\n\nThis is useful to highlight under-exposed foreground objects or to reduce specular reflections."
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.textureFlattening",
+      "identity": "cv.textureFlattening(Mat src;Mat mask;Mat dst[/O];float low_threshold=30;float high_threshold=45;int kernel_size=3)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "low_threshold",
+          "default": "30",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "high_threshold",
+          "default": "45",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "kernel_size",
+          "default": "3",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief By retaining only the gradients at edge locations, before integrating with the Poisson solver, one\nwashes out the texture of the selected region, giving its contents a flat aspect. Here Canny Edge %Detector is used.\n\n@param src Input 8-bit 3-channel image.\n@param mask Input 8-bit 1 or 3-channel image.\n@param dst Output image with the same size and type as src.\n@param low_threshold %Range from 0 to 100.\n@param high_threshold Value \\> 100.\n@param kernel_size The size of the Sobel kernel to be used.\n\n@note\nThe algorithm assumes that the color of the source image is close to that of the destination. This\nassumption means that when the colors don't match, the source image color gets tinted toward the\ncolor of the destination image."
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "enum",
+      "name": "cv.<unnamed>",
+      "identity": "enum cv.<unnamed>[const cv.RECURS_FILTER=1;const cv.NORMCONV_FILTER=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.RECURS_FILTER",
+          "value": "1"
+        },
+        {
+          "name": "const cv.NORMCONV_FILTER",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.edgePreservingFilter",
+      "identity": "cv.edgePreservingFilter(Mat src;Mat dst[/O];int flags=1;float sigma_s=60;float sigma_r=0.4f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "1",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_s",
+          "default": "60",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_r",
+          "default": "0.4f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Filtering is the fundamental operation in image and video processing. Edge-preserving smoothing\nfilters are used in many different applications @cite EM11 .\n\n@param src Input 8-bit 3-channel image.\n@param dst Output 8-bit 3-channel image.\n@param flags Edge preserving filters: cv::RECURS_FILTER or cv::NORMCONV_FILTER\n@param sigma_s %Range between 0 to 200.\n@param sigma_r %Range between 0 to 1."
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.detailEnhance",
+      "identity": "cv.detailEnhance(Mat src;Mat dst[/O];float sigma_s=10;float sigma_r=0.15f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sigma_s",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_r",
+          "default": "0.15f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This filter enhances the details of a particular image.\n\n@param src Input 8-bit 3-channel image.\n@param dst Output image with the same size and type as src.\n@param sigma_s %Range between 0 to 200.\n@param sigma_r %Range between 0 to 1."
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.pencilSketch",
+      "identity": "cv.pencilSketch(Mat src;Mat dst1[/O];Mat dst2[/O];float sigma_s=60;float sigma_r=0.07f;float shade_factor=0.02f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst1",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst2",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sigma_s",
+          "default": "60",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_r",
+          "default": "0.07f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "shade_factor",
+          "default": "0.02f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Pencil-like non-photorealistic line drawing\n\n@param src Input 8-bit 3-channel image.\n@param dst1 Output 8-bit 1-channel image.\n@param dst2 Output image with the same size and type as src.\n@param sigma_s %Range between 0 to 200.\n@param sigma_r %Range between 0 to 1.\n@param shade_factor %Range between 0 to 0.1."
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.stylization",
+      "identity": "cv.stylization(Mat src;Mat dst[/O];float sigma_s=60;float sigma_r=0.45f)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sigma_s",
+          "default": "60",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sigma_r",
+          "default": "0.45f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Stylization aims to produce digital imagery with a wide variety of effects not focused on\nphotorealism. Edge-aware filters are ideal for stylization, as they can abstract regions of low\ncontrast while preserving, or enhancing, high-contrast features.\n\n@param src Input 8-bit 3-channel image.\n@param dst Output image with the same size and type as src.\n@param sigma_s %Range between 0 to 200.\n@param sigma_r %Range between 0 to 1."
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.correctChromaticAberration",
+      "identity": "cv.correctChromaticAberration(Mat input_image;Mat coefficients;Mat output_image[/O];Size image_size[/C,/Ref];int calib_degree;int bayer_pattern=-1)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "input_image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "coefficients",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "output_image",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "image_size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "calib_degree",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "bayer_pattern",
+          "default": "-1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Corrects lateral chromatic aberration in an image using polynomial distortion model.\n\nThis function loads polynomial calibration data from the specified file and applies\na channel\u2010specific warp to remove chromatic aberration.\nIf @p input_image has one channel, it is assumed to be a raw Bayer image and is\nfirst demosaiced using @p bayer_pattern. If it has three channels, it is treated\nas a BGR image and @p bayer_pattern is ignored.\n\nFirstly, calibration needs to be done using apps/chromatic-aberration-calibration/ca_calibration.py on a photo of\na pattern of black discs on white background, included in opencv_extra/testdata/cv/cameracalibration/chromatic_aberration/chromatic_aberration_pattern_a3.png\n\nCalibration and correction are based on the algorithm described in @cite rudakova2013precise.\nThe chromatic aberration is modeled as a polynomial of some degree in red and blue channels compared to green.\nIn calibration, a photo of many black discs on white background is used, and the displacements\nbetween the centres of discs in red and blue channels compared to green are minimized. The coefficients\nare then saved in a yaml file which can be used with this function to correct lateral chromatic aberration.\n\n@param input_image Input BGR image to correct\n@param coefficients Coefficient model\n@param output_image Corrected BGR image\n@param image_size Size of images for the calibration coefficient model\n@param calib_degree Degree of the calibration coefficient model\n@param bayer_pattern Bayer pattern code (e.g. cv::COLOR_BayerBG2BGR) used for\ndemosaicing when @p input_image has one channel; ignored otherwise.\n\n@sa loadChromaticAberrationParams, demosaicing"
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo.hpp",
+      "kind": "callable",
+      "name": "cv.loadChromaticAberrationParams",
+      "identity": "cv.loadChromaticAberrationParams(FileNode node[/C,/Ref];Mat coeffMat[/O];Size calib_size[/O,/Ref];int degree[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "node",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "coeffMat",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "calib_size",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "degree",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Load chromatic-aberration calibration parameters from opened FileStorage.\n *\n R e*ads the red and blue polynomial coefficients from the specified file and\n packs them into a 4\u00d7N CV_32F matrix:\n row 0 = blue dx coefficients\n row 1 = blue dy coefficients\n row 2 = red  dx coefficients\n row 3 = red  dy coefficients\n\n @param node       Node of opened cv::FileStorage object.\n @param coeffMat   Output 4xN coefficient matrix (CV_32F).\n @param degree     Polynomial degree inferred from N.\n @param calib_size Calibration image size read from file.\n\n @sa correctChromaticAberration"
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "enum",
+      "name": "cv.ccm.CcmType",
+      "identity": "enum cv.ccm.CcmType[const cv.ccm.CCM_LINEAR=0;const cv.ccm.CCM_AFFINE=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ccm.CCM_LINEAR",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ccm.CCM_AFFINE",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "enum",
+      "name": "cv.ccm.InitialMethodType",
+      "identity": "enum cv.ccm.InitialMethodType[const cv.ccm.INITIAL_METHOD_WHITE_BALANCE=0;const cv.ccm.INITIAL_METHOD_LEAST_SQUARE=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ccm.INITIAL_METHOD_WHITE_BALANCE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ccm.INITIAL_METHOD_LEAST_SQUARE",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "enum",
+      "name": "cv.ccm.ColorCheckerType",
+      "identity": "enum cv.ccm.ColorCheckerType[const cv.ccm.COLORCHECKER_MACBETH=0;const cv.ccm.COLORCHECKER_VINYL=1;const cv.ccm.COLORCHECKER_DIGITAL_SG=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ccm.COLORCHECKER_MACBETH",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ccm.COLORCHECKER_VINYL",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ccm.COLORCHECKER_DIGITAL_SG",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "enum",
+      "name": "cv.ccm.ColorSpace",
+      "identity": "enum cv.ccm.ColorSpace[const cv.ccm.COLOR_SPACE_SRGB=0;const cv.ccm.COLOR_SPACE_SRGBL=1;const cv.ccm.COLOR_SPACE_ADOBE_RGB=2;const cv.ccm.COLOR_SPACE_ADOBE_RGBL=3;const cv.ccm.COLOR_SPACE_WIDE_GAMUT_RGB=4;const cv.ccm.COLOR_SPACE_WIDE_GAMUT_RGBL=5;const cv.ccm.COLOR_SPACE_PRO_PHOTO_RGB=6;const cv.ccm.COLOR_SPACE_PRO_PHOTO_RGBL=7;const cv.ccm.COLOR_SPACE_DCI_P3_RGB=8;const cv.ccm.COLOR_SPACE_DCI_P3_RGBL=9;const cv.ccm.COLOR_SPACE_APPLE_RGB=10;const cv.ccm.COLOR_SPACE_APPLE_RGBL=11;const cv.ccm.COLOR_SPACE_REC_709_RGB=12;const cv.ccm.COLOR_SPACE_REC_709_RGBL=13;const cv.ccm.COLOR_SPACE_REC_2020_RGB=14;const cv.ccm.COLOR_SPACE_REC_2020_RGBL=15;const cv.ccm.COLOR_SPACE_XYZ_D65_2=16;const cv.ccm.COLOR_SPACE_XYZ_D50_2=17;const cv.ccm.COLOR_SPACE_XYZ_D65_10=18;const cv.ccm.COLOR_SPACE_XYZ_D50_10=19;const cv.ccm.COLOR_SPACE_XYZ_A_2=20;const cv.ccm.COLOR_SPACE_XYZ_A_10=21;const cv.ccm.COLOR_SPACE_XYZ_D55_2=22;const cv.ccm.COLOR_SPACE_XYZ_D55_10=23;const cv.ccm.COLOR_SPACE_XYZ_D75_2=24;const cv.ccm.COLOR_SPACE_XYZ_D75_10=25;const cv.ccm.COLOR_SPACE_XYZ_E_2=26;const cv.ccm.COLOR_SPACE_XYZ_E_10=27;const cv.ccm.COLOR_SPACE_LAB_D65_2=28;const cv.ccm.COLOR_SPACE_LAB_D50_2=29;const cv.ccm.COLOR_SPACE_LAB_D65_10=30;const cv.ccm.COLOR_SPACE_LAB_D50_10=31;const cv.ccm.COLOR_SPACE_LAB_A_2=32;const cv.ccm.COLOR_SPACE_LAB_A_10=33;const cv.ccm.COLOR_SPACE_LAB_D55_2=34;const cv.ccm.COLOR_SPACE_LAB_D55_10=35;const cv.ccm.COLOR_SPACE_LAB_D75_2=36;const cv.ccm.COLOR_SPACE_LAB_D75_10=37;const cv.ccm.COLOR_SPACE_LAB_E_2=38;const cv.ccm.COLOR_SPACE_LAB_E_10=39]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ccm.COLOR_SPACE_SRGB",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_SRGBL",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_ADOBE_RGB",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_ADOBE_RGBL",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_WIDE_GAMUT_RGB",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_WIDE_GAMUT_RGBL",
+          "value": "5"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_PRO_PHOTO_RGB",
+          "value": "6"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_PRO_PHOTO_RGBL",
+          "value": "7"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_DCI_P3_RGB",
+          "value": "8"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_DCI_P3_RGBL",
+          "value": "9"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_APPLE_RGB",
+          "value": "10"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_APPLE_RGBL",
+          "value": "11"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_REC_709_RGB",
+          "value": "12"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_REC_709_RGBL",
+          "value": "13"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_REC_2020_RGB",
+          "value": "14"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_REC_2020_RGBL",
+          "value": "15"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D65_2",
+          "value": "16"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D50_2",
+          "value": "17"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D65_10",
+          "value": "18"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D50_10",
+          "value": "19"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_A_2",
+          "value": "20"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_A_10",
+          "value": "21"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D55_2",
+          "value": "22"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D55_10",
+          "value": "23"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D75_2",
+          "value": "24"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_D75_10",
+          "value": "25"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_E_2",
+          "value": "26"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_XYZ_E_10",
+          "value": "27"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D65_2",
+          "value": "28"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D50_2",
+          "value": "29"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D65_10",
+          "value": "30"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D50_10",
+          "value": "31"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_A_2",
+          "value": "32"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_A_10",
+          "value": "33"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D55_2",
+          "value": "34"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D55_10",
+          "value": "35"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D75_2",
+          "value": "36"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_D75_10",
+          "value": "37"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_E_2",
+          "value": "38"
+        },
+        {
+          "name": "const cv.ccm.COLOR_SPACE_LAB_E_10",
+          "value": "39"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "enum",
+      "name": "cv.ccm.LinearizationType",
+      "identity": "enum cv.ccm.LinearizationType[const cv.ccm.LINEARIZATION_IDENTITY=0;const cv.ccm.LINEARIZATION_GAMMA=1;const cv.ccm.LINEARIZATION_COLORPOLYFIT=2;const cv.ccm.LINEARIZATION_COLORLOGPOLYFIT=3;const cv.ccm.LINEARIZATION_GRAYPOLYFIT=4;const cv.ccm.LINEARIZATION_GRAYLOGPOLYFIT=5]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ccm.LINEARIZATION_IDENTITY",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ccm.LINEARIZATION_GAMMA",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ccm.LINEARIZATION_COLORPOLYFIT",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ccm.LINEARIZATION_COLORLOGPOLYFIT",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ccm.LINEARIZATION_GRAYPOLYFIT",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ccm.LINEARIZATION_GRAYLOGPOLYFIT",
+          "value": "5"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "enum",
+      "name": "cv.ccm.DistanceType",
+      "identity": "enum cv.ccm.DistanceType[const cv.ccm.DISTANCE_CIE76=0;const cv.ccm.DISTANCE_CIE94_GRAPHIC_ARTS=1;const cv.ccm.DISTANCE_CIE94_TEXTILES=2;const cv.ccm.DISTANCE_CIE2000=3;const cv.ccm.DISTANCE_CMC_1TO1=4;const cv.ccm.DISTANCE_CMC_2TO1=5;const cv.ccm.DISTANCE_RGB=6;const cv.ccm.DISTANCE_RGBL=7]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ccm.DISTANCE_CIE76",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_CIE94_GRAPHIC_ARTS",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_CIE94_TEXTILES",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_CIE2000",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_CMC_1TO1",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_CMC_2TO1",
+          "value": "5"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_RGB",
+          "value": "6"
+        },
+        {
+          "name": "const cv.ccm.DISTANCE_RGBL",
+          "value": "7"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.gammaCorrection",
+      "identity": "cv.ccm.gammaCorrection(Mat src;Mat dst[/O];double gamma)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "gamma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @brief Applies gamma correction to the input image.\n * @param src Input image.\n * @param dst Output image.\n * @param gamma Gamma correction greater than zero."
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "class",
+      "name": "cv.ccm.ColorCorrectionModel",
+      "identity": "class cv.ccm.ColorCorrectionModel",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Core class of ccm model\n\nProduce a ColorCorrectionModel instance for inference"
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel",
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel",
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;int constColor[/C])->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "constColor",
+          "default": "",
+          "modifiers": [
+            "/C"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Color Correction Model\n\n        Supported list of color cards:\n        - @ref COLORCHECKER_MACBETH, the Macbeth ColorChecker\n        - @ref COLORCHECKER_VINYL, the DKK ColorChecker\n        - @ref COLORCHECKER_DIGITAL_SG, the DigitalSG ColorChecker with 140 squares\n\n        @param src detected colors of ColorChecker patches;\n                    the color type is RGB not BGR, and the color values are in [0, 1];\n        @param constColor the Built-in color card"
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel",
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;Mat colors;ColorSpace refColorSpace)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "colors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "ColorSpace",
+          "name": "refColorSpace",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Color Correction Model\n        @param src detected colors of ColorChecker patches;\n                the color type is RGB not BGR, and the color values are in [0, 1];\n        @param colors the reference color values, the color values are in [0, 1].\n        @param refColorSpace the corresponding color space\n                If the color type is some RGB, the format is RGB not BGR;"
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel",
+      "identity": "cv.ccm.ColorCorrectionModel.ColorCorrectionModel(Mat src;Mat colors;ColorSpace refColorSpace;Mat coloredPatchesMask)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "colors",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "ColorSpace",
+          "name": "refColorSpace",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "coloredPatchesMask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Color Correction Model\n        @param src detected colors of ColorChecker patches;\n                    the color type is RGB not BGR, and the color values are in [0, 1];\n        @param colors the reference color values, the color values are in [0, 1].\n        @param refColorSpace the corresponding color space\n                    If the color type is some RGB, the format is RGB not BGR;\n        @param coloredPatchesMask binary mask indicating which patches are colored (non-gray) patches"
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setColorSpace",
+      "identity": "cv.ccm.ColorCorrectionModel.setColorSpace(ColorSpace cs)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "ColorSpace",
+          "name": "cs",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set ColorSpace\n        @note It should be some RGB color space;\n        Supported list of color cards:\n        - @ref COLOR_SPACE_SRGB\n        - @ref COLOR_SPACE_ADOBE_RGB\n        - @ref COLOR_SPACE_WIDE_GAMUT_RGB\n        - @ref COLOR_SPACE_PRO_PHOTO_RGB\n        - @ref COLOR_SPACE_DCI_P3_RGB\n        - @ref COLOR_SPACE_APPLE_RGB\n        - @ref COLOR_SPACE_REC_709_RGB\n        - @ref COLOR_SPACE_REC_2020_RGB\n        @param cs the absolute color space that detected colors convert to;\n              default: @ref COLOR_SPACE_SRGB"
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setCcmType",
+      "identity": "cv.ccm.ColorCorrectionModel.setCcmType(CcmType ccmType)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "CcmType",
+          "name": "ccmType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set ccmType\n    @param ccmType the shape of color correction matrix(CCM);\n                    default: @ref CCM_LINEAR"
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setDistance",
+      "identity": "cv.ccm.ColorCorrectionModel.setDistance(DistanceType distance)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "DistanceType",
+          "name": "distance",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set Distance\n    @param distance the type of color distance;\n                    default: @ref DISTANCE_CIE2000"
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setLinearization",
+      "identity": "cv.ccm.ColorCorrectionModel.setLinearization(LinearizationType linearizationType)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "LinearizationType",
+          "name": "linearizationType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set Linear\n    @param linearizationType the method of linearization;\n                       default: @ref LINEARIZATION_GAMMA"
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setLinearizationGamma",
+      "identity": "cv.ccm.ColorCorrectionModel.setLinearizationGamma(double gamma)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "gamma",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set Gamma\n\n    @note only valid when linear is set to \"gamma\";\n\n    @param gamma the gamma value of gamma correction;\n                 default: 2.2;"
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setLinearizationDegree",
+      "identity": "cv.ccm.ColorCorrectionModel.setLinearizationDegree(int deg)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "deg",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set degree\n        @note only valid when linear is set to\n        - @ref LINEARIZATION_COLORPOLYFIT\n        - @ref LINEARIZATION_GRAYPOLYFIT\n        - @ref LINEARIZATION_COLORLOGPOLYFIT\n        - @ref LINEARIZATION_GRAYLOGPOLYFIT\n\n        @param deg the degree of linearization polynomial\n            default: 3"
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setSaturatedThreshold",
+      "identity": "cv.ccm.ColorCorrectionModel.setSaturatedThreshold(double lower;double upper)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "lower",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "upper",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set SaturatedThreshold.\n                The colors in the closed interval [lower, upper] are reserved to participate\n                in the calculation of the loss function and initialization parameters\n        @param lower the lower threshold to determine saturation;\n                default: 0;\n        @param upper the upper threshold to determine saturation;\n                default: 0"
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setWeightsList",
+      "identity": "cv.ccm.ColorCorrectionModel.setWeightsList(Mat weightsList[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "weightsList",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set WeightsList\n    @param weightsList the list of weight of each color;\n                        default: empty array"
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setWeightCoeff",
+      "identity": "cv.ccm.ColorCorrectionModel.setWeightCoeff(double weightsCoeff)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "weightsCoeff",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set WeightCoeff\n    @param weightsCoeff the exponent number of L* component of the reference color in CIE Lab color space;\n                         default: 0"
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setInitialMethod",
+      "identity": "cv.ccm.ColorCorrectionModel.setInitialMethod(InitialMethodType initialMethodType)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InitialMethodType",
+          "name": "initialMethodType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set InitialMethod\n    @param initialMethodType the method of calculating CCM initial value;\n            default: INITIAL_METHOD_LEAST_SQUARE"
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setMaxCount",
+      "identity": "cv.ccm.ColorCorrectionModel.setMaxCount(int maxCount)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "maxCount",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set MaxCount\n    @param maxCount used in MinProblemSolver-DownhillSolver;\n        Terminal criteria to the algorithm;\n                     default: 5000;"
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setEpsilon",
+      "identity": "cv.ccm.ColorCorrectionModel.setEpsilon(double epsilon)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "epsilon",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief set Epsilon\n    @param epsilon used in MinProblemSolver-DownhillSolver;\n        Terminal criteria to the algorithm;\n                   default: 1e-4;"
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.setRGB",
+      "identity": "cv.ccm.ColorCorrectionModel.setRGB(bool rgb)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "rgb",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Set whether the input image is in RGB color space\n    @param rgb If true, the model expects input images in RGB format.\n                 If false, input is assumed to be in BGR (default)."
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.compute",
+      "identity": "cv.ccm.ColorCorrectionModel.compute()->Mat",
+      "returnType": "Mat",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief make color correction"
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.getColorCorrectionMatrix",
+      "identity": "cv.ccm.ColorCorrectionModel.getColorCorrectionMatrix()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.getLoss",
+      "identity": "cv.ccm.ColorCorrectionModel.getLoss()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.getSrcLinearRGB",
+      "identity": "cv.ccm.ColorCorrectionModel.getSrcLinearRGB()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.getRefLinearRGB",
+      "identity": "cv.ccm.ColorCorrectionModel.getRefLinearRGB()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.getMask",
+      "identity": "cv.ccm.ColorCorrectionModel.getMask()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.getWeights",
+      "identity": "cv.ccm.ColorCorrectionModel.getWeights()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.correctImage",
+      "identity": "cv.ccm.ColorCorrectionModel.correctImage(Mat src;Mat dst[/O];bool islinear=false)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "islinear",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Applies color correction to the input image using a fitted color correction matrix.\n     *\n     * The conventional ranges for R, G, and B channel values are:\n     -   0 to 255 for CV_8U images\n     -   0 to 65535 for CV_16U images\n     -   0 to 1 for CV_32F images\n        @param src Input 8-bit, 16-bit unsigned or 32-bit float 3-channel image..\n        @param dst Output image of the same size and datatype as src.\n        @param islinear default false."
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.write",
+      "identity": "cv.ccm.ColorCorrectionModel.write(FileStorage fs[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "FileStorage",
+          "name": "fs",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/ccm.hpp",
+      "kind": "callable",
+      "name": "cv.ccm.ColorCorrectionModel.read",
+      "identity": "cv.ccm.ColorCorrectionModel.read(FileNode node[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "FileNode",
+          "name": "node",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "class",
+      "name": "cv.segmentation.IntelligentScissorsMB",
+      "identity": "class cv.segmentation.IntelligentScissorsMB",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Intelligent Scissors image segmentation\n *\n * This class is used to find the path (contour) between two points\n * which can be used for image segmentation.\n *\n * Usage example:\n * @snippet snippets/photo_segmentation.cpp usage_example_intelligent_scissors\n *\n * Reference: <a href=\"http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.138.3811&rep=rep1&type=pdf\">\"Intelligent Scissors for Image Composition\"</a>\n * algorithm designed by Eric N. Mortensen and William A. Barrett, Brigham Young University\n * @cite Mortensen95intelligentscissors"
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.IntelligentScissorsMB",
+      "identity": "cv.segmentation.IntelligentScissorsMB.IntelligentScissorsMB()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.setWeights",
+      "identity": "cv.segmentation.IntelligentScissorsMB.setWeights(float weight_non_edge;float weight_gradient_direction;float weight_gradient_magnitude)->IntelligentScissorsMB",
+      "returnType": "IntelligentScissorsMB",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "weight_non_edge",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "weight_gradient_direction",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "weight_gradient_magnitude",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Specify weights of feature functions\n     *\n     * Consider keeping weights normalized (sum of weights equals to 1.0)\n     * Discrete dynamic programming (DP) goal is minimization of costs between pixels.\n     *\n     * @param weight_non_edge Specify cost of non-edge pixels (default: 0.43f)\n     * @param weight_gradient_direction Specify cost of gradient direction function (default: 0.43f)\n     * @param weight_gradient_magnitude Specify cost of gradient magnitude function (default: 0.14f)"
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.setGradientMagnitudeMaxLimit",
+      "identity": "cv.segmentation.IntelligentScissorsMB.setGradientMagnitudeMaxLimit(float gradient_magnitude_threshold_max=0.0f)->IntelligentScissorsMB",
+      "returnType": "IntelligentScissorsMB",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gradient_magnitude_threshold_max",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Specify gradient magnitude max value threshold\n     *\n     * Zero limit value is used to disable gradient magnitude thresholding (default behavior, as described in original article).\n     * Otherwize pixels with `gradient magnitude >= threshold` have zero cost.\n     *\n     * @note Thresholding should be used for images with irregular regions (to avoid stuck on parameters from high-contract areas, like embedded logos).\n     *\n     * @param gradient_magnitude_threshold_max Specify gradient magnitude max value threshold (default: 0, disabled)"
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureZeroCrossingParameters",
+      "identity": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureZeroCrossingParameters(float gradient_magnitude_min_value=0.0f)->IntelligentScissorsMB",
+      "returnType": "IntelligentScissorsMB",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "gradient_magnitude_min_value",
+          "default": "0.0f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Switch to \"Laplacian Zero-Crossing\" edge feature extractor and specify its parameters\n     *\n     * This feature extractor is used by default according to article.\n     *\n     * Implementation has additional filtering for regions with low-amplitude noise.\n     * This filtering is enabled through parameter of minimal gradient amplitude (use some small value 4, 8, 16).\n     *\n     * @note Current implementation of this feature extractor is based on processing of grayscale images (color image is converted to grayscale image first).\n     *\n     * @note Canny edge detector is a bit slower, but provides better results (especially on color images): use setEdgeFeatureCannyParameters().\n     *\n     * @param gradient_magnitude_min_value Minimal gradient magnitude value for edge pixels (default: 0, check is disabled)"
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureCannyParameters",
+      "identity": "cv.segmentation.IntelligentScissorsMB.setEdgeFeatureCannyParameters(double threshold1;double threshold2;int apertureSize=3;bool L2gradient=false)->IntelligentScissorsMB",
+      "returnType": "IntelligentScissorsMB",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "threshold1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "threshold2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "apertureSize",
+          "default": "3",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "L2gradient",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Switch edge feature extractor to use Canny edge detector\n     *\n     * @note \"Laplacian Zero-Crossing\" feature extractor is used by default (following to original article)\n     *\n     * @sa Canny"
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.applyImage",
+      "identity": "cv.segmentation.IntelligentScissorsMB.applyImage(Mat image)->IntelligentScissorsMB",
+      "returnType": "IntelligentScissorsMB",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Specify input image and extract image features\n     *\n     * @param image input image. Type is #CV_8UC1 / #CV_8UC3"
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.applyImageFeatures",
+      "identity": "cv.segmentation.IntelligentScissorsMB.applyImageFeatures(Mat non_edge;Mat gradient_direction;Mat gradient_magnitude;Mat image=Mat())->IntelligentScissorsMB",
+      "returnType": "IntelligentScissorsMB",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "non_edge",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "gradient_direction",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "gradient_magnitude",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Specify custom features of input image\n     *\n     * Customized advanced variant of applyImage() call.\n     *\n     * @param non_edge Specify cost of non-edge pixels. Type is CV_8UC1. Expected values are `{0, 1}`.\n     * @param gradient_direction Specify gradient direction feature. Type is CV_32FC2. Values are expected to be normalized: `x^2 + y^2 == 1`\n     * @param gradient_magnitude Specify cost of gradient magnitude function: Type is CV_32FC1. Values should be in range `[0, 1]`.\n     * @param image **Optional parameter**. Must be specified if subset of features is specified (non-specified features are calculated internally)"
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.buildMap",
+      "identity": "cv.segmentation.IntelligentScissorsMB.buildMap(Point sourcePt[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Point",
+          "name": "sourcePt",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Prepares a map of optimal paths for the given source point on the image\n     *\n     * @note applyImage() / applyImageFeatures() must be called before this call\n     *\n     * @param sourcePt The source point used to find the paths"
+    },
+    {
+      "ordinal": 144,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/photo/include/opencv2/photo/segmentation.hpp",
+      "kind": "callable",
+      "name": "cv.segmentation.IntelligentScissorsMB.getContour",
+      "identity": "cv.segmentation.IntelligentScissorsMB.getContour(Point targetPt[/C,/Ref];Mat contour[/O];bool backward=false)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [
+        {
+          "type": "Point",
+          "name": "targetPt",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "contour",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "backward",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Extracts optimal contour for the given target point on the image\n     *\n     * @note buildMap() must be called before this call\n     *\n     * @param targetPt The target point\n     * @param[out] contour The list of pixels which contains optimal path between the source and the target points of the image. Type is CV_32SC2 (compatible with `std::vector<Point>`)\n     * @param backward Flag to indicate reverse order of retrieved pixels (use \"true\" value to fetch points from the target to the source point)"
+    }
+  ]
+}

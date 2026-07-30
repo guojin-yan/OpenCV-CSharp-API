@@ -10,7 +10,7 @@ namespace OpenCvSharp.ImgCodecs
     /// Provides image encoding and decoding functions aligned with OpenCV <c>cv</c> free functions.
     /// 提供与 OpenCV <c>cv</c> 自由函数对齐的图像编码和解码函数。
     /// </summary>
-    public static class Cv2
+    public static partial class Cv2
     {
         /// <summary>
         /// Encodes an image into an in-memory compressed image buffer.

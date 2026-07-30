@@ -56,6 +56,13 @@ function Resolve-Dumpbin {
                 Target = "x64"
             }
         }
+        "win-x86" {
+            [pscustomobject]@{
+                Component = "Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
+                Host = "Hostx64"
+                Target = "x86"
+            }
+        }
         "win-arm64" {
             [pscustomobject]@{
                 Component = "Microsoft.VisualStudio.Component.VC.Tools.ARM64"
@@ -189,35 +196,47 @@ function Get-PeDependencies {
 $architectureSpec = switch ($Rid) {
     "win-x64" {
         [pscustomobject]@{
-            ProcessorArchitecture = "AMD64"
-            RuntimeArchitecture = "X64"
+            HostProcessorArchitecture = "AMD64"
+            HostRuntimeArchitecture = "X64"
             Machine = 0x8664
             MachineName = "AMD64"
         }
     }
+    "win-x86" {
+        [pscustomobject]@{
+            HostProcessorArchitecture = "AMD64"
+            HostRuntimeArchitecture = "X64"
+            Machine = 0x014c
+            MachineName = "I386"
+        }
+    }
     "win-arm64" {
         [pscustomobject]@{
-            ProcessorArchitecture = "ARM64"
-            RuntimeArchitecture = "Arm64"
+            HostProcessorArchitecture = "ARM64"
+            HostRuntimeArchitecture = "Arm64"
             Machine = 0xAA64
             MachineName = "ARM64"
         }
     }
-    default { throw "This factual PE closure audit approves only exact RIDs win-x64 and win-arm64, got '$Rid'." }
+    default { throw "This factual PE closure audit approves only exact RIDs win-x64, win-x86, and win-arm64, got '$Rid'." }
 }
 
 if (-not [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)) {
     throw "Windows PE closure audit must run on Windows."
 }
 
-if ($env:PROCESSOR_ARCHITECTURE -ne $architectureSpec.ProcessorArchitecture -or
-    [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString() -ne $architectureSpec.RuntimeArchitecture -or
-    [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString() -ne $architectureSpec.RuntimeArchitecture -or
+if ($env:PROCESSOR_ARCHITECTURE -ne $architectureSpec.HostProcessorArchitecture -or
+    [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString() -ne $architectureSpec.HostRuntimeArchitecture -or
+    [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString() -ne $architectureSpec.HostRuntimeArchitecture -or
     -not [Environment]::Is64BitProcess) {
-    throw "Windows PE closure audit requires an actual $($architectureSpec.ProcessorArchitecture) OS and native $($architectureSpec.RuntimeArchitecture) process for $Rid."
+    throw "Windows PE closure audit requires the audited $($architectureSpec.HostProcessorArchitecture) host and native $($architectureSpec.HostRuntimeArchitecture) inspection process for $Rid."
 }
 if ($Rid -eq "win-arm64" -and -not [string]::IsNullOrWhiteSpace($env:PROCESSOR_ARCHITEW6432)) {
     throw "Windows ARM64 PE closure audit must not run through x64 compatibility translation."
+}
+if ($Rid -eq "win-x86" -and
+    ($env:RUNNER_ARCH -ne "X64" -or -not [Environment]::Is64BitOperatingSystem)) {
+    throw "Windows x86 PE closure audit requires an AMD64 Windows host that can execute I386 payloads through supported WoW64."
 }
 
 $singleDirectoryMode = -not [string]::IsNullOrWhiteSpace($RuntimeDirectory)

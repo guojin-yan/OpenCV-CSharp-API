@@ -1,0 +1,2082 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/video.hpp compatibility include measured through the two parser-emitted OpenCV 5.0.0 main Video public source headers",
+  "reviewStatus": "source-reviewed",
+  "limitation": "The map covers the exact OpenCV 5.0.0 main Video compatibility include closure. VideoIO, contrib tracking, private detail headers, legacy C metadata, and repository-wide parity are excluded.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.OPTFLOW_USE_INITIAL_FLOW=4;const cv.OPTFLOW_LK_GET_MIN_EIGENVALS=8;const cv.OPTFLOW_FARNEBACK_GAUSSIAN=256]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "cv.CamShift(Mat probImage;Rect window[/IO,/Ref];TermCriteria criteria)-\u003ERotatedRect",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_cam_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Video.CamShiftResult CamShift(OpenCvSharp.Core.Mat probImage,OpenCvSharp.Core.Rect window,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 2,
+      "identity": "cv.meanShift(Mat probImage;Rect window[/IO,/Ref];TermCriteria criteria)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_mean_shift"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Video.MeanShiftResult MeanShift(OpenCvSharp.Core.Mat probImage,OpenCvSharp.Core.Rect window,OpenCvSharp.Core.TermCriteria? criteria=null)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "identity": "cv.buildOpticalFlowPyramid(Mat img;vector_Mat pyramid[/O];Size winSize;int maxLevel;bool withDerivatives=true;int pyrBorder=BORDER_REFLECT_101;int derivBorder=BORDER_CONSTANT;bool tryReuseInputImage=true)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_build_optical_flow_pyramid_count",
+        "jyppx_ocv_video_build_optical_flow_pyramid_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Video.OpticalFlowPyramidResult BuildOpticalFlowPyramid(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size winSize,System.Int32 maxLevel,System.Boolean withDerivatives=true,System.Int32 pyrBorder=4,System.Int32 derivBorder=0,System.Boolean tryReuseInputImage=true)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.calcOpticalFlowPyrLK(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err[/O];Size winSize=Size(21,21);int maxLevel=3;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 30, 0.01);int flags=0;double minEigThreshold=1e-4)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_calc_optical_flow_pyr_lk"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] CalcOpticalFlowPyrLK(OpenCvSharp.Core.Mat prevImg,OpenCvSharp.Core.Mat nextImg,OpenCvSharp.Core.Point2f[] prevPts,OpenCvSharp.Core.Point2f[] initialNextPts,out System.Byte[] status,out System.Single[] err,OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Video.OpticalFlowFlags flags=UseInitialFlow,System.Double minEigThreshold=0.0001)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "cv.calcOpticalFlowFarneback(Mat prev;Mat next;Mat flow[/IO];double pyr_scale;int levels;int winsize;int iterations;int poly_n;double poly_sigma;int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_calc_optical_flow_farneback"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Void CalcOpticalFlowFarneback(OpenCvSharp.Core.Mat prev,OpenCvSharp.Core.Mat next,OpenCvSharp.Core.Mat flow,System.Double pyrScale,System.Int32 levels,System.Int32 winsize,System.Int32 iterations,System.Int32 polyN,System.Double polySigma,OpenCvSharp.Video.OpticalFlowFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "identity": "enum cv.\u003Cunnamed\u003E[const cv.MOTION_TRANSLATION=0;const cv.MOTION_EUCLIDEAN=1;const cv.MOTION_AFFINE=2;const cv.MOTION_HOMOGRAPHY=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.computeECC(Mat templateImage;Mat inputImage;Mat inputMask=Mat())-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ECC batch provides validated image, mask, warp, criteria, multiscale schedule, and independently owned result semantics with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_compute_ecc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double ComputeECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat? inputMask=null)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.findTransformECC(Mat templateImage;Mat inputImage;Mat warpMatrix[/IO];int motionType;TermCriteria criteria;Mat inputMask;int gaussFiltSize)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ECC batch provides validated image, mask, warp, criteria, multiscale schedule, and independently owned result semantics with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_find_transform_ecc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.findTransformECC(Mat templateImage;Mat inputImage;Mat warpMatrix[/IO];int motionType=MOTION_AFFINE;TermCriteria criteria=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 50, 0.001);Mat inputMask=Mat())-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ECC batch provides validated image, mask, warp, criteria, multiscale schedule, and independently owned result semantics with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_find_transform_ecc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.findTransformECCWithMask(Mat templateImage;Mat inputImage;Mat templateMask;Mat inputMask;Mat warpMatrix[/IO];int motionType=MOTION_AFFINE;TermCriteria criteria=TermCriteria(TermCriteria::COUNT \u002B TermCriteria::EPS, 50, 1e-6);int gaussFiltSize=5)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ECC batch provides validated image, mask, warp, criteria, multiscale schedule, and independently owned result semantics with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_find_transform_ecc_with_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCWithMask(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat templateMask,OpenCvSharp.Core.Mat inputMask,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32 gaussianFilterSize=5)"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "class cv.ECCParameters",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ECCParameters.ECCParameters()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected ECC batch provides validated image, mask, warp, criteria, multiscale schedule, and independently owned result semantics with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_ecc_parameters_get_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.ECCParameters|constructor|public;instance|.ctor(OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32[]? iterationsPerLevel=null,System.Int32 gaussianFilterSize=5,System.Int32 levelCount=4,OpenCvSharp.ImgProc.InterpolationFlags interpolation=Linear)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.findTransformECCMultiScale(Mat reference;Mat sample;Mat warpMatrix[/IO];ECCParameters eccParams=ECCParameters()[/C,/Ref];Mat referenceMask=Mat();Mat sampleMask=Mat())-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ECC batch provides validated image, mask, warp, criteria, multiscale schedule, and independently owned result semantics with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_find_transform_ecc_multi_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCMultiScale(OpenCvSharp.Core.Mat referenceImage,OpenCvSharp.Core.Mat sampleImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.ECCParameters? parameters=null,OpenCvSharp.Core.Mat? referenceMask=null,OpenCvSharp.Core.Mat? sampleMask=null)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "class cv.KalmanFilter",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.KalmanFilter.KalmanFilter()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "The default KalmanFilter constructor creates an uninitialized object with no useful managed operation; the dimensioned constructor and explicit Init lifecycle are implemented instead.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.KalmanFilter.KalmanFilter(int dynamParams;int measureParams;int controlParams=0;int type=CV_32F)-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_kalman_filter_create",
+        "jyppx_ocv_kalman_filter_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.KalmanFilter|constructor|public;instance|.ctor(System.Int32 dynamParams,System.Int32 measureParams,System.Int32 controlParams=0,System.Int32 type=5)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.KalmanFilter.predict(Mat control=Mat()[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_kalman_filter_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.KalmanFilter|method|public;instance|OpenCvSharp.Core.Mat Predict(OpenCvSharp.Core.Mat? control=null)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.KalmanFilter.correct(Mat measurement[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_kalman_filter_correct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.KalmanFilter|method|public;instance|OpenCvSharp.Core.Mat Correct(OpenCvSharp.Core.Mat measurement)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.readOpticalFlow(String path[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_read_optical_flow"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Core.Mat ReadOpticalFlow(System.String path)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.writeOpticalFlow(String path[/C,/Ref];Mat flow)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_write_optical_flow"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Boolean WriteOpticalFlow(System.String path,OpenCvSharp.Core.Mat flow)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "class cv.DenseOpticalFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.DenseOpticalFlow.calc(Mat I0;Mat I1;Mat flow[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dense_optical_flow_calc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DenseOpticalFlow|method|public;instance;virtual|System.Void Calc(OpenCvSharp.Core.Mat first,OpenCvSharp.Core.Mat second,OpenCvSharp.Core.Mat flow)"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.DenseOpticalFlow.collectGarbage()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dense_optical_flow_collect_garbage"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DenseOpticalFlow|method|public;instance|System.Void CollectGarbage()"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "class cv.SparseOpticalFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.SparseOpticalFlow.calc(Mat prevImg;Mat nextImg;Mat prevPts;Mat nextPts[/IO];Mat status[/O];Mat err=cv::Mat()[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_optical_flow_calc"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparseOpticalFlow|method|public;instance|OpenCvSharp.Core.Point2f[] Calc(OpenCvSharp.Core.Mat previousImage,OpenCvSharp.Core.Mat nextImage,OpenCvSharp.Core.Point2f[] previousPoints,OpenCvSharp.Core.Point2f[] initialNextPoints,out System.Byte[] status,out System.Single[] error)"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "class cv.FarnebackOpticalFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.FarnebackOpticalFlow.getNumLevels()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.FarnebackOpticalFlow.setNumLevels(int numLevels)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.FarnebackOpticalFlow.getPyrScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.FarnebackOpticalFlow.setPyrScale(double pyrScale)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.FarnebackOpticalFlow.getFastPyramids()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_bool_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
+      ]
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.FarnebackOpticalFlow.setFastPyramids(bool fastPyramids)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_bool_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.FarnebackOpticalFlow.getWinSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.FarnebackOpticalFlow.setWinSize(int winSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.FarnebackOpticalFlow.getNumIters()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.FarnebackOpticalFlow.setNumIters(int numIters)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.FarnebackOpticalFlow.getPolyN()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.FarnebackOpticalFlow.setPolyN(int polyN)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.FarnebackOpticalFlow.getPolySigma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.FarnebackOpticalFlow.setPolySigma(double polySigma)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.FarnebackOpticalFlow.getFlags()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.FarnebackOpticalFlow.setFlags(int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_farneback_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.FarnebackOpticalFlow.create(int numLevels=5;double pyrScale=0.5;bool fastPyramids=false;int winSize=13;int numIters=10;int polyN=5;double polySigma=1.1;int flags=0)-\u003EPtr\u003CFarnebackOpticalFlow\u003E",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dense_optical_flow_release_handle",
+        "jyppx_ocv_farneback_optical_flow_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|method|public;static|OpenCvSharp.Video.FarnebackOpticalFlow Create(System.Int32 numLevels=5,System.Double pyrScale=0.5,System.Boolean fastPyramids=false,System.Int32 winSize=13,System.Int32 numIterations=10,System.Int32 polyN=5,System.Double polySigma=1.1,OpenCvSharp.Video.OpticalFlowFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "class cv.VariationalRefinement",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "identity": "cv.VariationalRefinement.calcUV(Mat I0;Mat I1;Mat flow_u[/IO];Mat flow_v[/IO])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_calc_uv"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|method|public;instance|System.Void CalcUV(OpenCvSharp.Core.Mat first,OpenCvSharp.Core.Mat second,OpenCvSharp.Core.Mat flowU,OpenCvSharp.Core.Mat flowV)"
+      ]
+    },
+    {
+      "ordinal": 46,
+      "identity": "cv.VariationalRefinement.getFixedPointIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
+      ]
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.VariationalRefinement.setFixedPointIterations(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.VariationalRefinement.getSorIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.VariationalRefinement.setSorIterations(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.VariationalRefinement.getOmega()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.VariationalRefinement.setOmega(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.VariationalRefinement.getAlpha()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.VariationalRefinement.setAlpha(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.VariationalRefinement.getDelta()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "cv.VariationalRefinement.setDelta(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
+      ]
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.VariationalRefinement.getGamma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.VariationalRefinement.setGamma(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.VariationalRefinement.getEpsilon()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "cv.VariationalRefinement.setEpsilon(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_variational_refinement_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
+      ]
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.VariationalRefinement.create()-\u003EPtr\u003CVariationalRefinement\u003E",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dense_optical_flow_release_handle",
+        "jyppx_ocv_variational_refinement_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.VariationalRefinement|method|public;static|OpenCvSharp.Video.VariationalRefinement Create()"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "class cv.DISOpticalFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "identity": "enum cv.DISOpticalFlow.\u003Cunnamed\u003E[const cv.DISOpticalFlow.PRESET_ULTRAFAST=0;const cv.DISOpticalFlow.PRESET_FAST=1;const cv.DISOpticalFlow.PRESET_MEDIUM=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.DISOpticalFlow.getFinestScale()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.DISOpticalFlow.setFinestScale(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.DISOpticalFlow.setCoarsestScale(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.DISOpticalFlow.getCoarsestScale()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.DISOpticalFlow.getPatchSize()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.DISOpticalFlow.setPatchSize(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "cv.DISOpticalFlow.getPatchStride()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
+      ]
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.DISOpticalFlow.setPatchStride(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.DISOpticalFlow.getGradientDescentIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "cv.DISOpticalFlow.setGradientDescentIterations(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementIterations(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementAlpha()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementAlpha(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementDelta()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementDelta(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementGamma()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementGamma(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.DISOpticalFlow.getVariationalRefinementEpsilon()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.DISOpticalFlow.setVariationalRefinementEpsilon(float val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_float_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.DISOpticalFlow.getUseMeanNormalization()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_bool_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.DISOpticalFlow.setUseMeanNormalization(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_bool_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.DISOpticalFlow.getUseSpatialPropagation()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_get_bool_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.DISOpticalFlow.setUseSpatialPropagation(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dis_optical_flow_set_bool_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.DISOpticalFlow.create(int preset=DISOpticalFlow::PRESET_FAST)-\u003EPtr\u003CDISOpticalFlow\u003E",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dense_optical_flow_release_handle",
+        "jyppx_ocv_dis_optical_flow_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|method|public;static|OpenCvSharp.Video.DisOpticalFlow Create(OpenCvSharp.Video.DisOpticalFlowPreset preset=Fast)"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "class cv.SparsePyrLKOpticalFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.SparsePyrLKOpticalFlow.getWinSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_get_size_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.Size WinSize"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.SparsePyrLKOpticalFlow.setWinSize(Size winSize)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_set_size_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.Size WinSize"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.SparsePyrLKOpticalFlow.getMaxLevel()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.SparsePyrLKOpticalFlow.setMaxLevel(int maxLevel)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "cv.SparsePyrLKOpticalFlow.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria Criteria"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "identity": "cv.SparsePyrLKOpticalFlow.setTermCriteria(TermCriteria crit[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria Criteria"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "identity": "cv.SparsePyrLKOpticalFlow.getFlags()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.SparsePyrLKOpticalFlow.setFlags(int flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.SparsePyrLKOpticalFlow.getMinEigThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_get_min_eig_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.SparsePyrLKOpticalFlow.setMinEigThreshold(double minEigThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_set_min_eig_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.SparsePyrLKOpticalFlow.create(Size winSize=Size(21, 21);int maxLevel=3;TermCriteria crit=TermCriteria(TermCriteria::COUNT\u002BTermCriteria::EPS, 30, 0.01);int flags=0;double minEigThreshold=1e-4)-\u003EPtr\u003CSparsePyrLKOpticalFlow\u003E",
+      "classification": "implemented",
+      "reason": "The selected main Video optical-flow object batch has opaque SafeHandle ownership, caller-owned Mat or point-array outputs, typed properties, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_sparse_optical_flow_release_handle",
+        "jyppx_ocv_sparse_pyr_lk_optical_flow_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|method|public;static|OpenCvSharp.Video.SparsePyrLkOpticalFlow Create(OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Video.OpticalFlowFlags flags=None,System.Double minEigThreshold=0.0001)"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "class cv.Tracker",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.Tracker.init(Mat image;Rect boundingBox[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected main Video TrackerMIL batch provides copied parameters, opaque owned tracker state, guarded initialization/update semantics, and deterministic disposal with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_tracker_init"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Tracker|method|public;instance|System.Void Init(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect boundingBox)"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.Tracker.update(Mat image;Rect boundingBox[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected main Video TrackerMIL batch provides copied parameters, opaque owned tracker state, guarded initialization/update semantics, and deterministic disposal with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_tracker_update"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Tracker|method|public;instance|System.Boolean Update(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Core.Rect boundingBox)"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "cv.Tracker.getTrackingScore()-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The selected main Video TrackerMIL batch provides copied parameters, opaque owned tracker state, guarded initialization/update semantics, and deterministic disposal with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_tracker_get_tracking_score"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.Tracker|property|instance;get:public|System.Single TrackingScore"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "identity": "class cv.TrackerMIL",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "class cv.TrackerMIL.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "cv.TrackerMIL.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected main Video TrackerMIL batch provides copied parameters, opaque owned tracker state, guarded initialization/update semantics, and deterministic disposal with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_tracker_mil_get_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.TrackerMILParams|property|static;get:public|OpenCvSharp.Video.TrackerMILParams Default"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.TrackerMIL.create(TrackerMIL_Params parameters=TrackerMIL::Params()[/C,/Ref])-\u003EPtr\u003CTrackerMIL\u003E",
+      "classification": "implemented",
+      "reason": "The selected main Video TrackerMIL batch provides copied parameters, opaque owned tracker state, guarded initialization/update semantics, and deterministic disposal with native smoke and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_video_tracker_mil_create",
+        "jyppx_ocv_video_tracker_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.TrackerMIL|method|public;static|OpenCvSharp.Video.TrackerMIL Create()"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "identity": "class cv.TrackerDaSiamRPN",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "class cv.TrackerDaSiamRPN.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.TrackerDaSiamRPN.Params.Params()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This tracker constructor or factory requires external DNN model files that are not present as deterministic repository-local test assets; it remains outside the supported offline main Video slice.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.TrackerDaSiamRPN.create(TrackerDaSiamRPN_Params parameters=TrackerDaSiamRPN::Params()[/C,/Ref])-\u003EPtr\u003CTrackerDaSiamRPN\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This tracker constructor or factory requires external DNN model files that are not present as deterministic repository-local test assets; it remains outside the supported offline main Video slice.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "class cv.TrackerNano",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "class cv.TrackerNano.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.TrackerNano.Params.Params()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This tracker constructor or factory requires external DNN model files that are not present as deterministic repository-local test assets; it remains outside the supported offline main Video slice.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.TrackerNano.create(TrackerNano_Params parameters=TrackerNano::Params()[/C,/Ref])-\u003EPtr\u003CTrackerNano\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This tracker constructor or factory requires external DNN model files that are not present as deterministic repository-local test assets; it remains outside the supported offline main Video slice.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "class cv.TrackerVit",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "class cv.TrackerVit.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.TrackerVit.Params.Params()-\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This tracker constructor or factory requires external DNN model files that are not present as deterministic repository-local test assets; it remains outside the supported offline main Video slice.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.TrackerVit.create(TrackerVit_Params parameters=TrackerVit::Params()[/C,/Ref])-\u003EPtr\u003CTrackerVit\u003E",
+      "classification": "intentionally-omitted",
+      "reason": "This tracker constructor or factory requires external DNN model files that are not present as deterministic repository-local test assets; it remains outside the supported offline main Video slice.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "class cv.BackgroundSubtractor",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.BackgroundSubtractor.apply(Mat image;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ]
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.BackgroundSubtractor.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_apply_with_known_foreground"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat knownForegroundMask,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ]
+    },
+    {
+      "ordinal": 123,
+      "identity": "cv.BackgroundSubtractor.getBackgroundImage(Mat backgroundImage[/O])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_get_background_image"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void GetBackgroundImage(OpenCvSharp.Core.Mat backgroundImage)"
+      ]
+    },
+    {
+      "ordinal": 124,
+      "identity": "class cv.BackgroundSubtractorMOG2",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.BackgroundSubtractorMOG2.getHistory()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_history"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 History"
+      ]
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.BackgroundSubtractorMOG2.setHistory(int history)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_history"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 History"
+      ]
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.BackgroundSubtractorMOG2.getNMixtures()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_n_mixtures"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 NMixtures"
+      ]
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.BackgroundSubtractorMOG2.setNMixtures(int nmixtures)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_n_mixtures"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 NMixtures"
+      ]
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.BackgroundSubtractorMOG2.getBackgroundRatio()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double BackgroundRatio"
+      ]
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.BackgroundSubtractorMOG2.setBackgroundRatio(double ratio)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double BackgroundRatio"
+      ]
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.BackgroundSubtractorMOG2.getVarThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThreshold"
+      ]
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.BackgroundSubtractorMOG2.setVarThreshold(double varThreshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThreshold"
+      ]
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.BackgroundSubtractorMOG2.getVarThresholdGen()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThresholdGen"
+      ]
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.BackgroundSubtractorMOG2.setVarThresholdGen(double varThresholdGen)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThresholdGen"
+      ]
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.BackgroundSubtractorMOG2.getVarInit()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarInit"
+      ]
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.BackgroundSubtractorMOG2.setVarInit(double varInit)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarInit"
+      ]
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.BackgroundSubtractorMOG2.getVarMin()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMin"
+      ]
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.BackgroundSubtractorMOG2.setVarMin(double varMin)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMin"
+      ]
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.BackgroundSubtractorMOG2.getVarMax()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMax"
+      ]
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.BackgroundSubtractorMOG2.setVarMax(double varMax)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMax"
+      ]
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.BackgroundSubtractorMOG2.getComplexityReductionThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ComplexityReductionThreshold"
+      ]
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.BackgroundSubtractorMOG2.setComplexityReductionThreshold(double ct)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ComplexityReductionThreshold"
+      ]
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.BackgroundSubtractorMOG2.getDetectShadows()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_detect_shadows"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Boolean DetectShadows"
+      ]
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.BackgroundSubtractorMOG2.setDetectShadows(bool detectShadows)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_detect_shadows"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Boolean DetectShadows"
+      ]
+    },
+    {
+      "ordinal": 145,
+      "identity": "cv.BackgroundSubtractorMOG2.getShadowValue()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 ShadowValue"
+      ]
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.BackgroundSubtractorMOG2.setShadowValue(int value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 ShadowValue"
+      ]
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.BackgroundSubtractorMOG2.getShadowThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ShadowThreshold"
+      ]
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.BackgroundSubtractorMOG2.setShadowThreshold(double threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ShadowThreshold"
+      ]
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.BackgroundSubtractorMOG2.apply(Mat image;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ]
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.BackgroundSubtractorMOG2.apply(Mat image;Mat knownForegroundMask;Mat fgmask[/O];double learningRate=-1)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_apply_with_known_foreground"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat knownForegroundMask,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+      ]
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.createBackgroundSubtractorMOG2(int history=500;double varThreshold=16;bool detectShadows=true)-\u003EPtr\u003CBackgroundSubtractorMOG2\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_mog2_create",
+        "jyppx_ocv_background_subtractor_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|method|public;static|OpenCvSharp.Video.BackgroundSubtractorMOG2 Create(System.Int32 history=500,System.Double varThreshold=16,System.Boolean detectShadows=true)"
+      ]
+    },
+    {
+      "ordinal": 152,
+      "identity": "class cv.BackgroundSubtractorKNN",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.BackgroundSubtractorKNN.getHistory()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_history"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 History"
+      ]
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.BackgroundSubtractorKNN.setHistory(int history)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_history"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 History"
+      ]
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.BackgroundSubtractorKNN.getNSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_n_samples"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 NSamples"
+      ]
+    },
+    {
+      "ordinal": 156,
+      "identity": "cv.BackgroundSubtractorKNN.setNSamples(int _nN)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_n_samples"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 NSamples"
+      ]
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.BackgroundSubtractorKNN.getDist2Threshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double Dist2Threshold"
+      ]
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.BackgroundSubtractorKNN.setDist2Threshold(double _dist2Threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double Dist2Threshold"
+      ]
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.BackgroundSubtractorKNN.getkNNSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 KnnSamples"
+      ]
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.BackgroundSubtractorKNN.setkNNSamples(int _nkNN)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 KnnSamples"
+      ]
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.BackgroundSubtractorKNN.getDetectShadows()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_detect_shadows"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Boolean DetectShadows"
+      ]
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.BackgroundSubtractorKNN.setDetectShadows(bool detectShadows)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_detect_shadows"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Boolean DetectShadows"
+      ]
+    },
+    {
+      "ordinal": 163,
+      "identity": "cv.BackgroundSubtractorKNN.getShadowValue()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 ShadowValue"
+      ]
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.BackgroundSubtractorKNN.setShadowValue(int value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 ShadowValue"
+      ]
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.BackgroundSubtractorKNN.getShadowThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double ShadowThreshold"
+      ]
+    },
+    {
+      "ordinal": 166,
+      "identity": "cv.BackgroundSubtractorKNN.setShadowThreshold(double threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double ShadowThreshold"
+      ]
+    },
+    {
+      "ordinal": 167,
+      "identity": "cv.createBackgroundSubtractorKNN(int history=500;double dist2Threshold=400.0;bool detectShadows=true)-\u003EPtr\u003CBackgroundSubtractorKNN\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed main Video surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_VIDEO; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_background_subtractor_knn_create",
+        "jyppx_ocv_background_subtractor_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|method|public;static|OpenCvSharp.Video.BackgroundSubtractorKNN Create(System.Int32 history=500,System.Double dist2Threshold=400,System.Boolean detectShadows=true)"
+      ]
+    }
+  ]
+}

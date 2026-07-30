@@ -1638,6 +1638,14 @@ namespace OpenCvSharp.ImgProc
             float epsilonPercentage = -1.0F,
             bool ensureConvex = true)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (curve == null)
+            {
+                throw new ArgumentNullException(nameof(curve));
+            }
+
+            return ApproxPolyN(curve.AsSpan(), nsides, epsilonPercentage, ensureConvex);
+#else
             if (nsides < 3)
             {
                 throw new ArgumentOutOfRangeException(nameof(nsides), "Number of sides must be at least three.");
@@ -1670,7 +1678,66 @@ namespace OpenCvSharp.ImgProc
             }
 
             return FromInterleavedPoint2f(approxPointsXy, writtenCount);
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>
+        /// Approximates a point span with a convex polygon with the requested number of sides.
+        /// 使用指定边数的凸多边形近似点 Span。
+        /// </summary>
+        /// <param name="curve">The input polygon vertices. 输入多边形顶点。</param>
+        /// <param name="nsides">The target number of sides. 目标边数。</param>
+        /// <param name="epsilonPercentage">The maximum additional area ratio, or -1 to disable this stop condition. 最大附加面积比例，传入 -1 表示禁用该停止条件。</param>
+        /// <param name="ensureConvex">Whether OpenCV should compute the convex hull before approximation. 是否先由 OpenCV 计算凸包再近似。</param>
+        /// <returns>The approximated polygon vertices. 近似多边形顶点。</returns>
+        public static unsafe Point2f[] ApproxPolyN(
+            ReadOnlySpan<Point> curve,
+            int nsides,
+            float epsilonPercentage = -1.0F,
+            bool ensureConvex = true)
+        {
+            PointSetMarshaller.ValidateNotEmpty(curve, nameof(curve));
+            if (nsides < 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(nsides), "Number of sides must be at least three.");
+            }
+
+            ReadOnlySpan<int> curveXy = PointSetMarshaller.AsInterleaved(curve);
+            fixed (int* curvePtr = curveXy)
+            {
+                int ensureConvexFlag = ensureConvex ? 1 : 0;
+                NativeException.ThrowIfError(NativeMethods.ImgProcApproxPolyNCountPtr(
+                    curvePtr,
+                    curve.Length,
+                    nsides,
+                    epsilonPercentage,
+                    ensureConvexFlag,
+                    out int approxPointCount));
+
+                var result = new Point2f[approxPointCount];
+                Span<float> resultXy = PointSetMarshaller.AsInterleaved(result.AsSpan());
+                fixed (float* resultPtr = resultXy)
+                {
+                    NativeException.ThrowIfError(NativeMethods.ImgProcApproxPolyNFillPtr(
+                        curvePtr,
+                        curve.Length,
+                        nsides,
+                        epsilonPercentage,
+                        ensureConvexFlag,
+                        resultPtr,
+                        result.Length,
+                        out int writtenCount));
+                    if (writtenCount != result.Length)
+                    {
+                        Array.Resize(ref result, writtenCount);
+                    }
+                }
+
+                return result;
+            }
+        }
+#endif
 
         /// <summary>
         /// Calculates the up-right bounding rectangle of a point set.
@@ -2293,8 +2360,25 @@ namespace OpenCvSharp.ImgProc
         /// <exception cref="OpenCvException">Thrown when the native OpenCV operation fails. 当 native OpenCV 操作失败时抛出。</exception>
         public static RotatedRect FitEllipse(Point[] points)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (points == null)
+            {
+                throw new ArgumentNullException(nameof(points));
+            }
+
+            return FitEllipse(points.AsSpan());
+#else
             return RunFitEllipse(points, nameof(points), NativeMethods.ImgProcFitEllipse);
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Fits an ellipse around a point span. 围绕点 Span 拟合椭圆。</summary>
+        public static unsafe RotatedRect FitEllipse(ReadOnlySpan<Point> points)
+        {
+            return RunFitEllipse(points, nameof(points), NativeMethods.ImgProcFitEllipsePtr);
+        }
+#endif
 
         /// <summary>
         /// Fits an ellipse around a set of at least five points using the AMS method.
@@ -2307,8 +2391,25 @@ namespace OpenCvSharp.ImgProc
         /// <exception cref="OpenCvException">Thrown when the native OpenCV operation fails. 当 native OpenCV 操作失败时抛出。</exception>
         public static RotatedRect FitEllipseAMS(Point[] points)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (points == null)
+            {
+                throw new ArgumentNullException(nameof(points));
+            }
+
+            return FitEllipseAMS(points.AsSpan());
+#else
             return RunFitEllipse(points, nameof(points), NativeMethods.ImgProcFitEllipseAMS);
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Fits an ellipse around a point span using the AMS method. 使用 AMS 方法围绕点 Span 拟合椭圆。</summary>
+        public static unsafe RotatedRect FitEllipseAMS(ReadOnlySpan<Point> points)
+        {
+            return RunFitEllipse(points, nameof(points), NativeMethods.ImgProcFitEllipseAMSPtr);
+        }
+#endif
 
         /// <summary>
         /// Fits an ellipse around a set of at least five points using the direct least-squares method.
@@ -2321,8 +2422,25 @@ namespace OpenCvSharp.ImgProc
         /// <exception cref="OpenCvException">Thrown when the native OpenCV operation fails. 当 native OpenCV 操作失败时抛出。</exception>
         public static RotatedRect FitEllipseDirect(Point[] points)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (points == null)
+            {
+                throw new ArgumentNullException(nameof(points));
+            }
+
+            return FitEllipseDirect(points.AsSpan());
+#else
             return RunFitEllipse(points, nameof(points), NativeMethods.ImgProcFitEllipseDirect);
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Fits an ellipse around a point span using direct least squares. 使用直接最小二乘方法围绕点 Span 拟合椭圆。</summary>
+        public static unsafe RotatedRect FitEllipseDirect(ReadOnlySpan<Point> points)
+        {
+            return RunFitEllipse(points, nameof(points), NativeMethods.ImgProcFitEllipseDirectPtr);
+        }
+#endif
 
         /// <summary>
         /// Finds the intersection region between two rotated rectangles.
@@ -2391,6 +2509,14 @@ namespace OpenCvSharp.ImgProc
         /// <exception cref="OpenCvException">Thrown when the native OpenCV operation fails. 当 native OpenCV 操作失败时抛出。</exception>
         public static Point2f[] GetClosestEllipsePoints(RotatedRect ellipseParams, Point[] points)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (points == null)
+            {
+                throw new ArgumentNullException(nameof(points));
+            }
+
+            return GetClosestEllipsePoints(ellipseParams, points.AsSpan());
+#else
             int[] pointsXy = ToInterleavedPoints(points, nameof(points));
             var closestPointsXy = new float[points.Length * 2];
             NativeException.ThrowIfError(NativeMethods.ImgProcGetClosestEllipsePoints(
@@ -2404,7 +2530,35 @@ namespace OpenCvSharp.ImgProc
                 closestPointsXy,
                 points.Length));
             return FromInterleavedPoint2f(closestPointsXy, points.Length);
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Computes closest points on an ellipse for a point span. 计算点 Span 在椭圆上的最近点。</summary>
+        public static unsafe Point2f[] GetClosestEllipsePoints(RotatedRect ellipseParams, ReadOnlySpan<Point> points)
+        {
+            PointSetMarshaller.ValidateNotEmpty(points, nameof(points));
+            ReadOnlySpan<int> pointsXy = PointSetMarshaller.AsInterleaved(points);
+            var result = new Point2f[points.Length];
+            Span<float> resultXy = PointSetMarshaller.AsInterleaved(result.AsSpan());
+            fixed (int* pointsPtr = pointsXy)
+            fixed (float* resultPtr = resultXy)
+            {
+                NativeException.ThrowIfError(NativeMethods.ImgProcGetClosestEllipsePointsPtr(
+                    ellipseParams.Center.X,
+                    ellipseParams.Center.Y,
+                    ellipseParams.Size.Width,
+                    ellipseParams.Size.Height,
+                    ellipseParams.Angle,
+                    pointsPtr,
+                    points.Length,
+                    resultPtr,
+                    result.Length));
+            }
+
+            return result;
+        }
+#endif
 
         /// <summary>
         /// Finds a minimum-area triangle enclosing a point set.
@@ -2418,6 +2572,14 @@ namespace OpenCvSharp.ImgProc
         /// <exception cref="OpenCvException">Thrown when the native OpenCV operation fails. 当 native OpenCV 操作失败时抛出。</exception>
         public static double MinEnclosingTriangle(Point[] points, out Point2f[] triangle)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (points == null)
+            {
+                throw new ArgumentNullException(nameof(points));
+            }
+
+            return MinEnclosingTriangle(points.AsSpan(), out triangle);
+#else
             int[] pointsXy = ToInterleavedPoints(points, nameof(points));
             var trianglePointsXy = new float[6];
             NativeException.ThrowIfError(NativeMethods.ImgProcMinEnclosingTriangle(
@@ -2428,7 +2590,30 @@ namespace OpenCvSharp.ImgProc
                 out double area));
             triangle = FromInterleavedPoint2f(trianglePointsXy, 3);
             return area;
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Finds a minimum-area triangle enclosing a point span. 查找包围点 Span 的最小面积三角形。</summary>
+        public static unsafe double MinEnclosingTriangle(ReadOnlySpan<Point> points, out Point2f[] triangle)
+        {
+            PointSetMarshaller.ValidateNotEmpty(points, nameof(points));
+            ReadOnlySpan<int> pointsXy = PointSetMarshaller.AsInterleaved(points);
+            triangle = new Point2f[3];
+            Span<float> triangleXy = PointSetMarshaller.AsInterleaved(triangle.AsSpan());
+            fixed (int* pointsPtr = pointsXy)
+            fixed (float* trianglePtr = triangleXy)
+            {
+                NativeException.ThrowIfError(NativeMethods.ImgProcMinEnclosingTrianglePtr(
+                    pointsPtr,
+                    points.Length,
+                    trianglePtr,
+                    triangle.Length,
+                    out double area));
+                return area;
+            }
+        }
+#endif
 
         /// <summary>
         /// Finds a minimum-area convex polygon with the specified number of vertices enclosing a point set.
@@ -2444,6 +2629,14 @@ namespace OpenCvSharp.ImgProc
         /// <exception cref="OpenCvException">Thrown when the native OpenCV operation fails. 当 native OpenCV 操作失败时抛出。</exception>
         public static double MinEnclosingConvexPolygon(Point[] points, int k, out Point2f[] polygon)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (points == null)
+            {
+                throw new ArgumentNullException(nameof(points));
+            }
+
+            return MinEnclosingConvexPolygon(points.AsSpan(), k, out polygon);
+#else
             if (k < 3)
             {
                 throw new ArgumentOutOfRangeException(nameof(k), "Polygon vertex count must be at least three.");
@@ -2467,7 +2660,41 @@ namespace OpenCvSharp.ImgProc
 
             polygon = FromInterleavedPoint2f(polygonPointsXy, polygonPointCount);
             return area;
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Finds a minimum-area convex polygon enclosing a point span. 查找包围点 Span 的最小面积凸多边形。</summary>
+        public static unsafe double MinEnclosingConvexPolygon(ReadOnlySpan<Point> points, int k, out Point2f[] polygon)
+        {
+            PointSetMarshaller.ValidateNotEmpty(points, nameof(points));
+            if (k < 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(k), "Polygon vertex count must be at least three.");
+            }
+
+            ReadOnlySpan<int> pointsXy = PointSetMarshaller.AsInterleaved(points);
+            polygon = new Point2f[k];
+            Span<float> polygonXy = PointSetMarshaller.AsInterleaved(polygon.AsSpan());
+            fixed (int* pointsPtr = pointsXy)
+            fixed (float* polygonPtr = polygonXy)
+            {
+                NativeException.ThrowIfError(NativeMethods.ImgProcMinEnclosingConvexPolygonPtr(
+                    pointsPtr,
+                    points.Length,
+                    k,
+                    polygonPtr,
+                    polygon.Length,
+                    out int polygonPointCount,
+                    out double area));
+                if (polygonPointCount != polygon.Length)
+                {
+                    Array.Resize(ref polygon, polygonPointCount);
+                }
+                return area;
+            }
+        }
+#endif
 
         /// <summary>
         /// Finds the intersection polygon of two convex polygons.
@@ -2487,6 +2714,18 @@ namespace OpenCvSharp.ImgProc
             out Point2f[] intersectingRegion,
             bool handleNested = true)
         {
+#if NETCOREAPP3_1_OR_GREATER
+            if (polygon1 == null)
+            {
+                throw new ArgumentNullException(nameof(polygon1));
+            }
+            if (polygon2 == null)
+            {
+                throw new ArgumentNullException(nameof(polygon2));
+            }
+
+            return IntersectConvexConvex(polygon1.AsSpan(), polygon2.AsSpan(), out intersectingRegion, handleNested);
+#else
             int[] polygon1Xy = ToInterleavedPoints(polygon1, nameof(polygon1));
             int[] polygon2Xy = ToInterleavedPoints(polygon2, nameof(polygon2));
             int handleNestedFlag = handleNested ? 1 : 0;
@@ -2525,7 +2764,63 @@ namespace OpenCvSharp.ImgProc
 
             intersectingRegion = FromInterleavedPoint2f(intersectingPointsXy, writtenCount);
             return area;
+#endif
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>Finds the intersection polygon of two convex point spans. 查找两个凸多边形点 Span 的相交多边形。</summary>
+        public static unsafe float IntersectConvexConvex(
+            ReadOnlySpan<Point> polygon1,
+            ReadOnlySpan<Point> polygon2,
+            out Point2f[] intersectingRegion,
+            bool handleNested = true)
+        {
+            PointSetMarshaller.ValidateNotEmpty(polygon1, nameof(polygon1));
+            PointSetMarshaller.ValidateNotEmpty(polygon2, nameof(polygon2));
+            ReadOnlySpan<int> polygon1Xy = PointSetMarshaller.AsInterleaved(polygon1);
+            ReadOnlySpan<int> polygon2Xy = PointSetMarshaller.AsInterleaved(polygon2);
+            fixed (int* polygon1Ptr = polygon1Xy)
+            fixed (int* polygon2Ptr = polygon2Xy)
+            {
+                int handleNestedFlag = handleNested ? 1 : 0;
+                NativeException.ThrowIfError(NativeMethods.ImgProcIntersectConvexConvexCountPtr(
+                    polygon1Ptr,
+                    polygon1.Length,
+                    polygon2Ptr,
+                    polygon2.Length,
+                    handleNestedFlag,
+                    out float area,
+                    out int pointCount));
+                if (pointCount <= 0)
+                {
+                    intersectingRegion = Array.Empty<Point2f>();
+                    return area;
+                }
+
+                intersectingRegion = new Point2f[pointCount];
+                Span<float> intersectingXy = PointSetMarshaller.AsInterleaved(intersectingRegion.AsSpan());
+                fixed (float* intersectingPtr = intersectingXy)
+                {
+                    NativeException.ThrowIfError(NativeMethods.ImgProcIntersectConvexConvexFillPtr(
+                        polygon1Ptr,
+                        polygon1.Length,
+                        polygon2Ptr,
+                        polygon2.Length,
+                        handleNestedFlag,
+                        intersectingPtr,
+                        intersectingRegion.Length,
+                        out area,
+                        out int writtenCount));
+                    if (writtenCount != intersectingRegion.Length)
+                    {
+                        Array.Resize(ref intersectingRegion, writtenCount);
+                    }
+                }
+
+                return area;
+            }
+        }
+#endif
 
         /// <summary>
         /// Fits a two-dimensional line to a point set.
@@ -3188,6 +3483,31 @@ namespace OpenCvSharp.ImgProc
         }
 
 #if NETCOREAPP3_1_OR_GREATER
+        private static unsafe RotatedRect RunFitEllipse(
+            ReadOnlySpan<Point> points,
+            string parameterName,
+            FitEllipseNativePtrMethod nativeMethod)
+        {
+            if (points.Length < 5)
+            {
+                throw new ArgumentException("At least five points are required.", parameterName);
+            }
+
+            ReadOnlySpan<int> pointsXy = PointSetMarshaller.AsInterleaved(points);
+            fixed (int* pointsPtr = pointsXy)
+            {
+                NativeException.ThrowIfError(nativeMethod(
+                    pointsPtr,
+                    points.Length,
+                    out float centerX,
+                    out float centerY,
+                    out float width,
+                    out float height,
+                    out float angle));
+                return ToRotatedRect(centerX, centerY, width, height, angle);
+            }
+        }
+
         private static unsafe double RunPointSetScalar(
             ReadOnlySpan<Point> points,
             string parameterName,
