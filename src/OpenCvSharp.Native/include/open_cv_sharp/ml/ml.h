@@ -161,6 +161,14 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_load(
     const char* node_name,
     jyppx_ocv_ml_model** model);
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_create(
+    jyppx_ocv_ml_model** model);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_load(
+    const char* filepath,
+    const char* node_name,
+    jyppx_ocv_ml_model** model);
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_ml_model_release_handle(
     jyppx_ocv_ml_model* model);
 
@@ -440,3 +448,79 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_get_weight_trim_
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_boost_set_weight_trim_rate(
     jyppx_ocv_ml_model* model,
     double value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_get_int(
+    const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_set_int(
+    jyppx_ocv_ml_model* model,
+    int property_id,
+    int value);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_get_term_criteria(
+    const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_set_term_criteria(
+    jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_get_weights(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_get_means(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_get_covariances_count(
+    const jyppx_ocv_ml_model* model,
+    int* count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_get_covariances_fill(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* const* covariances,
+    int covariance_capacity,
+    int* count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_predict2(
+    const jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* sample,
+    jyppx_ocv_mat* probabilities,
+    double* log_likelihood,
+    int* label);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_train_em(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    jyppx_ocv_mat* log_likelihoods,
+    jyppx_ocv_mat* labels,
+    jyppx_ocv_mat* probabilities,
+    int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_train_e(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    const jyppx_ocv_mat* initial_means,
+    const jyppx_ocv_mat* const* initial_covariances,
+    int initial_covariance_count,
+    const jyppx_ocv_mat* initial_weights,
+    jyppx_ocv_mat* log_likelihoods,
+    jyppx_ocv_mat* labels,
+    jyppx_ocv_mat* probabilities,
+    int* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_ml_em_train_m(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    const jyppx_ocv_mat* initial_probabilities,
+    jyppx_ocv_mat* log_likelihoods,
+    jyppx_ocv_mat* labels,
+    jyppx_ocv_mat* probabilities,
+    int* result);

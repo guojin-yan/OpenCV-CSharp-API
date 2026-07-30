@@ -8,15 +8,15 @@
 
 - Training data: `TrainData` from in-memory matrices or CSV files.
 - Model base: `StatModel` state, training, prediction, error calculation, save, and clear.
-- Models: `KNearest`, `SVM`, `NormalBayesClassifier`, `DTrees`, `RTrees`, `Boost`, and `ANN_MLP`.
+- Models: `KNearest`, `SVM`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, and `ANN_MLP`.
 - Parameter grids: `ParamGrid` and `SVM.GetDefaultGrid`.
-- Enums: sample layout, variable type, model flags, KNN algorithm, SVM type, SVM kernel, and SVM parameter ids.
+- Enums: sample layout, variable type, model flags, KNN algorithm, SVM type, SVM kernel, SVM parameter ids, and EM covariance constraints.
 
 - 训练数据：从内存矩阵或 CSV 文件创建 `TrainData`。
 - 模型基类：`StatModel` 状态、训练、预测、误差计算、保存和清理。
-- 模型：`KNearest`、`SVM`、`NormalBayesClassifier`、`DTrees`、`RTrees`、`Boost` 和 `ANN_MLP`。
+- 模型：`KNearest`、`SVM`、`NormalBayesClassifier`、`EM`、`DTrees`、`RTrees`、`Boost` 和 `ANN_MLP`。
 - 参数网格：`ParamGrid` 与 `SVM.GetDefaultGrid`。
-- 枚举：样本布局、变量类型、模型标志、KNN 算法、SVM 类型、SVM 核函数和 SVM 参数 id。
+- 枚举：样本布局、变量类型、模型标志、KNN 算法、SVM 类型、SVM 核函数、SVM 参数 id 和 EM 协方差约束。
 
 ## Runtime / 运行时
 
@@ -86,6 +86,49 @@ ann.TermCriteria = TermCriteria.ByCountAndEpsilon(300, 1e-6);
 ann.Train(samples, SampleTypes.RowSample, annResponses);
 
 using Mat weights = ann.GetWeights(1);
+```
+
+## EM
+
+`EM` models a Gaussian mixture with typed cluster-count, covariance-type, and termination-criteria properties. `TrainEM` performs automatic initialization. `TrainE` accepts initial means plus an optional `Mat[]` covariance collection and optional weights, preserving OpenCV's `InputArrayOfArrays` semantics. `TrainM` starts from caller-provided posterior probabilities. Training inputs are consumed synchronously and are never retained as managed or unmanaged pointers.
+
+Optional log-likelihood, label, and probability outputs are caller-owned `Mat` instances. Omitting one passes OpenCV's no-output sentinel; supplying one lets OpenCV create or replace that matrix's contents. `GetWeights()`, `GetMeans()`, and every element returned by `GetCovariances()` are independent deep copies, so their lifetime and mutation are isolated from the model. `Predict2` returns the log-likelihood and component label as `EMPredictionResult` and can also fill a caller-owned probability matrix. The inherited `StatModel.Predict` remains available for batch label prediction.
+
+Use `CV_32F` or another OpenCV-supported floating-point representation consistently for samples and initial estimates. Every sample row must have the same variable count; initial means use one row per cluster, covariance collections use one square matrix per cluster, initial weights contain one value per cluster, and initial probability matrices contain one row per sample and one column per cluster. Invalid shapes, depths, values, or an untrained prediction are reported through the normal `OpenCvException` bridge.
+
+```csharp
+using Mat emSamples = new Mat(4, 2, MatType.CV_32FC1);
+emSamples.CopyFrom<float>(new float[]
+{
+    0.0F, 0.0F,
+    0.2F, 0.1F,
+    5.0F, 5.0F,
+    5.2F, 4.9F
+});
+
+using EM em = EM.Create();
+em.ClustersNumber = 2;
+em.CovarianceMatrixType = EMCovarianceMatrixTypes.Generic;
+em.TrainEM(emSamples);
+
+using Mat emQuery = new Mat(1, 2, MatType.CV_32FC1);
+emQuery.CopyFrom<float>(new[] { 0.1F, 0.2F });
+using Mat probabilities = new Mat();
+EMPredictionResult prediction = em.Predict2(emQuery, probabilities);
+
+using Mat mixtureWeights = em.GetWeights();
+Mat[] covariances = em.GetCovariances();
+try
+{
+    Console.WriteLine($"component={prediction.Label}, likelihood={prediction.LogLikelihood}");
+}
+finally
+{
+    foreach (Mat covariance in covariances)
+    {
+        covariance.Dispose();
+    }
+}
 ```
 
 ## Tree Models

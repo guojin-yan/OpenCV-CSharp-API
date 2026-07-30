@@ -257,6 +257,48 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_boost_set_weight_trim_rate")]
         internal static extern int MlBoostSetWeightTrimRate(IntPtr model, double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_create")]
+        internal static extern int MlEMCreate(out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_load")]
+        internal static extern int MlEMLoad(byte[] filepath, byte[] nodeName, out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_get_int")]
+        internal static extern int MlEMGetInt(IntPtr model, int propertyId, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_set_int")]
+        internal static extern int MlEMSetInt(IntPtr model, int propertyId, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_get_term_criteria")]
+        internal static extern int MlEMGetTermCriteria(IntPtr model, out int type, out int maxCount, out double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_set_term_criteria")]
+        internal static extern int MlEMSetTermCriteria(IntPtr model, int type, int maxCount, double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_get_weights")]
+        internal static extern int MlEMGetWeights(IntPtr model, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_get_means")]
+        internal static extern int MlEMGetMeans(IntPtr model, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_get_covariances_count")]
+        internal static extern int MlEMGetCovariancesCount(IntPtr model, out int count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_get_covariances_fill")]
+        internal static extern int MlEMGetCovariancesFill(IntPtr model, IntPtr[] covariances, int covarianceCapacity, out int count);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_predict2")]
+        internal static extern int MlEMPredict2(IntPtr model, IntPtr sample, IntPtr probabilities, out double logLikelihood, out int label);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_train_em")]
+        internal static extern int MlEMTrainEM(IntPtr model, IntPtr samples, IntPtr logLikelihoods, IntPtr labels, IntPtr probabilities, out int result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_train_e")]
+        internal static extern int MlEMTrainE(IntPtr model, IntPtr samples, IntPtr initialMeans, IntPtr[] initialCovariances, int initialCovarianceCount, IntPtr initialWeights, IntPtr logLikelihoods, IntPtr labels, IntPtr probabilities, out int result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_em_train_m")]
+        internal static extern int MlEMTrainM(IntPtr model, IntPtr samples, IntPtr initialProbabilities, IntPtr logLikelihoods, IntPtr labels, IntPtr probabilities, out int result);
     }
 }
 #endif

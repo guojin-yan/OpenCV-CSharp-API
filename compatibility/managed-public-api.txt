@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=555
-member-count=6065
+type-count=558
+member-count=6095
 namespace-count=41
 nullable-shape=included
 
@@ -101,6 +101,7 @@ TYPE|class|public;sealed|OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|base
 TYPE|class|public;sealed|OpenCvSharp.LineDescriptor.BinaryDescriptor|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.ANN_MLP|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.Boost|base=OpenCvSharp.ML.DTrees|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.ML.EM|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.KNearest|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.NormalBayesClassifier|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.ParamGrid|base=|interfaces=System.IDisposable
@@ -406,6 +407,7 @@ TYPE|enum|public|OpenCvSharp.ML.ANN_MLPTrainFlags|base=|interfaces=System.ICompa
 TYPE|enum|public|OpenCvSharp.ML.ANN_MLPTrainingMethods|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.BoostTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.DTreesPredictionFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.EMCovarianceMatrixTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.KNearestTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlErrorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlVariableType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -536,6 +538,7 @@ TYPE|struct|public;readonly|OpenCvSharp.ImgProc.Moments|base=|interfaces=System.
 TYPE|struct|public;readonly|OpenCvSharp.ImgProc.TextWrapRange|base=|interfaces=System.IEquatable<OpenCvSharp.ImgProc.TextWrapRange>
 TYPE|struct|public;readonly|OpenCvSharp.LineDescriptor.BinaryDescriptorParameters|base=|interfaces=System.IEquatable<OpenCvSharp.LineDescriptor.BinaryDescriptorParameters>
 TYPE|struct|public;readonly|OpenCvSharp.LineDescriptor.KeyLine|base=|interfaces=System.IEquatable<OpenCvSharp.LineDescriptor.KeyLine>
+TYPE|struct|public;readonly|OpenCvSharp.ML.EMPredictionResult|base=|interfaces=System.IEquatable<OpenCvSharp.ML.EMPredictionResult>
 TYPE|struct|public;readonly|OpenCvSharp.ObjDetect.ArucoIdentificationResult|base=|interfaces=System.IEquatable<OpenCvSharp.ObjDetect.ArucoIdentificationResult>
 TYPE|struct|public;readonly|OpenCvSharp.ObjDetect.ArucoRefineParameters|base=|interfaces=System.IEquatable<OpenCvSharp.ObjDetect.ArucoRefineParameters>
 TYPE|struct|public;readonly|OpenCvSharp.ObjDetect.FaceDetection|base=|interfaces=System.IEquatable<OpenCvSharp.ObjDetect.FaceDetection>
@@ -4026,6 +4029,36 @@ MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int3
 MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MaxDepth
 MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Int32 MinSampleCount
 MEMBER|OpenCvSharp.ML.DTrees|property|instance;get:public;set:public|System.Single RegressionAccuracy
+MEMBER|OpenCvSharp.ML.EMCovarianceMatrixTypes|field|public;const|OpenCvSharp.ML.EMCovarianceMatrixTypes Default=1
+MEMBER|OpenCvSharp.ML.EMCovarianceMatrixTypes|field|public;const|OpenCvSharp.ML.EMCovarianceMatrixTypes Diagonal=1
+MEMBER|OpenCvSharp.ML.EMCovarianceMatrixTypes|field|public;const|OpenCvSharp.ML.EMCovarianceMatrixTypes Generic=2
+MEMBER|OpenCvSharp.ML.EMCovarianceMatrixTypes|field|public;const|OpenCvSharp.ML.EMCovarianceMatrixTypes Spherical=0
+MEMBER|OpenCvSharp.ML.EMCovarianceMatrixTypes|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.EMPredictionResult|constructor|public;instance|.ctor(System.Double logLikelihood,System.Int32 label)
+MEMBER|OpenCvSharp.ML.EMPredictionResult|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|OpenCvSharp.ML.EMPredictionResult|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|OpenCvSharp.ML.EMPredictionResult|method|public;instance;override|System.String ToString()
+MEMBER|OpenCvSharp.ML.EMPredictionResult|method|public;instance;sealed-override|System.Boolean Equals(OpenCvSharp.ML.EMPredictionResult other)
+MEMBER|OpenCvSharp.ML.EMPredictionResult|method|public;static|System.Boolean op_Equality(OpenCvSharp.ML.EMPredictionResult left,OpenCvSharp.ML.EMPredictionResult right)
+MEMBER|OpenCvSharp.ML.EMPredictionResult|method|public;static|System.Boolean op_Inequality(OpenCvSharp.ML.EMPredictionResult left,OpenCvSharp.ML.EMPredictionResult right)
+MEMBER|OpenCvSharp.ML.EMPredictionResult|property|instance;get:public|System.Double LogLikelihood
+MEMBER|OpenCvSharp.ML.EMPredictionResult|property|instance;get:public|System.Int32 Label
+MEMBER|OpenCvSharp.ML.EM|field|public;const|System.Int32 DefaultClustersNumber=5
+MEMBER|OpenCvSharp.ML.EM|field|public;const|System.Int32 DefaultMaxIterations=100
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetMeans()
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetWeights()
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat[] GetCovariances()
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.ML.EMPredictionResult Predict2(OpenCvSharp.Core.Mat sample,OpenCvSharp.Core.Mat? probabilities=null)
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainE(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat initialMeans,OpenCvSharp.Core.Mat[]? initialCovariances=null,OpenCvSharp.Core.Mat? initialWeights=null,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainEM(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainM(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat initialProbabilities,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Void GetMeans(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Void GetWeights(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.EM|method|public;static|OpenCvSharp.ML.EM Create()
+MEMBER|OpenCvSharp.ML.EM|method|public;static|OpenCvSharp.ML.EM Load(System.String filepath,System.String? nodeName=null)
+MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria
+MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType
+MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;const|OpenCvSharp.ML.KNearestTypes BruteForce=1
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;const|OpenCvSharp.ML.KNearestTypes KDTree=2
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;instance|System.Int32 value__

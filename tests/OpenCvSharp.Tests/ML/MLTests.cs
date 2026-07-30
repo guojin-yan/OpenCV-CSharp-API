@@ -46,6 +46,18 @@ namespace OpenCvSharp.Tests.ML
             Assert.Equal(1, (int)BoostTypes.Real);
             Assert.Equal(2, (int)BoostTypes.Logit);
             Assert.Equal(3, (int)BoostTypes.Gentle);
+            Assert.Equal(0, (int)EMCovarianceMatrixTypes.Spherical);
+            Assert.Equal(1, (int)EMCovarianceMatrixTypes.Diagonal);
+            Assert.Equal(2, (int)EMCovarianceMatrixTypes.Generic);
+            Assert.Equal(EMCovarianceMatrixTypes.Diagonal, EMCovarianceMatrixTypes.Default);
+            Assert.Equal(5, EM.DefaultClustersNumber);
+            Assert.Equal(100, EM.DefaultMaxIterations);
+
+            var prediction = new EMPredictionResult(-1.25, 1);
+            Assert.Equal(-1.25, prediction.LogLikelihood);
+            Assert.Equal(1, prediction.Label);
+            Assert.Equal(prediction, new EMPredictionResult(-1.25, 1));
+            Assert.NotEqual(prediction, new EMPredictionResult(-1.25, 0));
         }
 
         [Fact]
@@ -73,6 +85,7 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentNullException>(() => DTrees.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => RTrees.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => Boost.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => EM.Load(null!));
 
                 Assert.Throws<ArgumentException>(() => TrainData.LoadFromCsv("data\0file.csv", 0));
                 Assert.Throws<ArgumentException>(() => KNearest.Load("model\0file.yml"));
@@ -83,9 +96,11 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentException>(() => DTrees.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => RTrees.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => Boost.Load("model\0file.yml"));
+                Assert.Throws<ArgumentException>(() => EM.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => DTrees.Load("model.yml", "node\0name"));
                 Assert.Throws<ArgumentException>(() => RTrees.Load("model.yml", "node\0name"));
                 Assert.Throws<ArgumentException>(() => Boost.Load("model.yml", "node\0name"));
+                Assert.Throws<ArgumentException>(() => EM.Load("model.yml", "node\0name"));
             }
         }
 
@@ -216,6 +231,16 @@ namespace OpenCvSharp.Tests.ML
                 Assert.True(boost.IsDisposed);
                 Assert.Throws<ObjectDisposedException>(() => boost.BoostType);
                 Assert.Throws<ObjectDisposedException>(() => boost.WeightTrimRate);
+
+                EM em = EM.Create();
+                em.Dispose();
+                Assert.True(em.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => em.ClustersNumber);
+                Assert.Throws<ObjectDisposedException>(() => em.GetWeights());
+                Assert.Throws<ObjectDisposedException>(() => em.GetMeans());
+                Assert.Throws<ObjectDisposedException>(() => em.GetCovariances());
+                Assert.Throws<ObjectDisposedException>(() => em.Predict2(samples));
+                Assert.Throws<ObjectDisposedException>(() => em.TrainEM(samples));
             }
         }
 
@@ -447,6 +472,212 @@ namespace OpenCvSharp.Tests.ML
                     Assert.Equal(1, votes.Rows);
                     Assert.Equal(5, votes.Cols);
                     Assert.All(votes.ToArray<float>(), value => Assert.True(float.IsFinite(value)));
+                }
+            }
+        }
+
+        [Fact]
+        public void EMDefaultsPropertiesAndArgumentsRoundTripWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var model = EM.Create())
+            using (var mat = new Mat())
+            {
+                Assert.Equal(EM.DefaultClustersNumber, model.ClustersNumber);
+                Assert.Equal(EMCovarianceMatrixTypes.Diagonal, model.CovarianceMatrixType);
+                Assert.Equal(TermCriteriaTypes.CountOrEps, model.TermCriteria.Type);
+                Assert.Equal(EM.DefaultMaxIterations, model.TermCriteria.MaxCount);
+                Assert.Equal(1e-6, model.TermCriteria.Epsilon, 12);
+                Assert.True(model.IsClassifier);
+                Assert.False(model.IsTrained);
+
+                model.ClustersNumber = 2;
+                model.CovarianceMatrixType = EMCovarianceMatrixTypes.Generic;
+                model.TermCriteria = TermCriteria.ByCountAndEpsilon(75, 1e-7);
+                Assert.Equal(2, model.ClustersNumber);
+                Assert.Equal(EMCovarianceMatrixTypes.Generic, model.CovarianceMatrixType);
+                Assert.Equal(TermCriteria.ByCountAndEpsilon(75, 1e-7), model.TermCriteria);
+
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.ClustersNumber = 0);
+                Assert.Throws<ArgumentOutOfRangeException>(() => model.CovarianceMatrixType = (EMCovarianceMatrixTypes)99);
+                Assert.Throws<ArgumentNullException>(() => model.GetWeights(null!));
+                Assert.Throws<ArgumentNullException>(() => model.GetMeans(null!));
+                Assert.Throws<ArgumentNullException>(() => model.Predict2(null!));
+                Assert.Throws<ArgumentNullException>(() => model.TrainEM(null!));
+                Assert.Throws<ArgumentNullException>(() => model.TrainE(null!, mat));
+                Assert.Throws<ArgumentNullException>(() => model.TrainE(mat, null!));
+                Assert.Throws<ArgumentException>(() => model.TrainE(mat, mat, new Mat[] { null! }));
+                Assert.Throws<ArgumentNullException>(() => model.TrainM(null!, mat));
+                Assert.Throws<ArgumentNullException>(() => model.TrainM(mat, null!));
+
+                using (Mat weights = model.GetWeights())
+                using (Mat means = model.GetMeans())
+                {
+                    Assert.True(weights.Empty);
+                    Assert.True(means.Empty);
+                }
+                Assert.Empty(model.GetCovariances());
+            }
+        }
+
+        [Fact]
+        public void EMTrainPredictOwnOutputsAndPersistWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            string modelDir = TestEnvironment.GetMlModelDirVariable() ?? Path.GetTempPath();
+            string modelPath = Path.Combine(modelDir, "opencv-csharp-ml-em-模型.yml");
+            using (var samples = CreateEMSamples())
+            using (var query = CreateEMQuery())
+            using (var logLikelihoods = new Mat())
+            using (var labels = new Mat())
+            using (var probabilities = new Mat())
+            using (var predictProbabilities = new Mat())
+            using (var batchProbabilities = new Mat())
+            using (var model = EM.Create())
+            {
+                Cv2.SetRngSeed(20260731);
+                model.ClustersNumber = 2;
+                model.CovarianceMatrixType = EMCovarianceMatrixTypes.Generic;
+                model.TermCriteria = TermCriteria.ByCountAndEpsilon(100, 1e-8);
+                Assert.True(model.TrainEM(samples, logLikelihoods, labels, probabilities));
+                Assert.True(model.IsTrained);
+                Assert.True(model.IsClassifier);
+                Assert.Equal(2, model.VarCount);
+                Assert.Equal(8, logLikelihoods.Rows);
+                Assert.Equal(MatType.CV_64FC1, logLikelihoods.Type);
+                Assert.Equal(8, labels.Rows);
+                Assert.Equal(MatType.CV_32SC1, labels.Type);
+                Assert.Equal(8, probabilities.Rows);
+                Assert.Equal(2, probabilities.Cols);
+                Assert.Equal(MatType.CV_64FC1, probabilities.Type);
+
+                EMPredictionResult prediction = model.Predict2(query, predictProbabilities);
+                Assert.True(double.IsFinite(prediction.LogLikelihood));
+                Assert.InRange(prediction.Label, 0, 1);
+                Assert.Equal(1, predictProbabilities.Rows);
+                Assert.Equal(2, predictProbabilities.Cols);
+                float batchPrediction = model.Predict(query, batchProbabilities);
+                Assert.True(batchPrediction == 0.0F || batchPrediction == 1.0F);
+                Assert.Equal(1, batchProbabilities.Rows);
+                Assert.Equal(2, batchProbabilities.Cols);
+
+                using (Mat weights = model.GetWeights())
+                using (Mat means = model.GetMeans())
+                {
+                    double[] expectedWeights = weights.ToArray<double>();
+                    double[] expectedMeans = means.ToArray<double>();
+                    Assert.Equal(2, expectedWeights.Length);
+                    Assert.Equal(4, expectedMeans.Length);
+                    weights.SetTo(new Scalar(0.0));
+                    means.SetTo(new Scalar(0.0));
+                    using (Mat copiedWeights = model.GetWeights())
+                    using (Mat copiedMeans = model.GetMeans())
+                    {
+                        Assert.Equal(expectedWeights, copiedWeights.ToArray<double>());
+                        Assert.Equal(expectedMeans, copiedMeans.ToArray<double>());
+                    }
+                }
+
+                Mat[] covariances = model.GetCovariances();
+                try
+                {
+                    Assert.Equal(2, covariances.Length);
+                    Assert.All(covariances, covariance =>
+                    {
+                        Assert.Equal(2, covariance.Rows);
+                        Assert.Equal(2, covariance.Cols);
+                        Assert.Equal(MatType.CV_64FC1, covariance.Type);
+                    });
+                    double[] expected = covariances[0].ToArray<double>();
+                    covariances[0].SetTo(new Scalar(0.0));
+                    Mat[] copied = model.GetCovariances();
+                    try
+                    {
+                        Assert.Equal(expected, copied[0].ToArray<double>());
+                    }
+                    finally
+                    {
+                        DisposeMats(copied);
+                    }
+                }
+                finally
+                {
+                    DisposeMats(covariances);
+                }
+
+                model.Save(modelPath);
+            }
+
+            try
+            {
+                using (var query = CreateEMQuery())
+                using (var probabilities = new Mat())
+                using (var loaded = EM.Load(modelPath))
+                {
+                    Assert.True(loaded.IsTrained);
+                    EMPredictionResult prediction = loaded.Predict2(query, probabilities);
+                    Assert.True(double.IsFinite(prediction.LogLikelihood));
+                    Assert.InRange(prediction.Label, 0, 1);
+                    Assert.Equal(2, probabilities.Cols);
+                }
+            }
+            finally
+            {
+                DeleteModelFiles(modelPath);
+            }
+        }
+
+        [Fact]
+        public void EMTrainEAndTrainMUseInitialEstimatesWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var samples = CreateEMSamples())
+            using (var means = CreateEMInitialMeans())
+            using (var weights = CreateEMInitialWeights())
+            using (var initialProbabilities = CreateEMInitialProbabilities())
+            using (var eProbabilities = new Mat())
+            using (var mProbabilities = new Mat())
+            using (var eModel = EM.Create())
+            using (var mModel = EM.Create())
+            {
+                Mat[] covariances = CreateEMInitialCovariances();
+                try
+                {
+                    eModel.ClustersNumber = 2;
+                    eModel.CovarianceMatrixType = EMCovarianceMatrixTypes.Generic;
+                    Assert.True(eModel.TrainE(samples, means, covariances, weights, probabilities: eProbabilities));
+                }
+                finally
+                {
+                    DisposeMats(covariances);
+                }
+
+                mModel.ClustersNumber = 2;
+                mModel.CovarianceMatrixType = EMCovarianceMatrixTypes.Diagonal;
+                Assert.True(mModel.TrainM(samples, initialProbabilities, probabilities: mProbabilities));
+                Assert.True(eModel.IsTrained);
+                Assert.True(mModel.IsTrained);
+                Assert.Equal(8, eProbabilities.Rows);
+                Assert.Equal(2, eProbabilities.Cols);
+                Assert.Equal(8, mProbabilities.Rows);
+                Assert.Equal(2, mProbabilities.Cols);
+
+                using (var query = CreateEMQuery())
+                {
+                    Assert.InRange(eModel.Predict2(query).Label, 0, 1);
+                    Assert.InRange(mModel.Predict2(query).Label, 0, 1);
                 }
             }
         }
@@ -825,6 +1056,78 @@ namespace OpenCvSharp.Tests.ML
             var responses = new Mat(6, 1, MatType.CV_32FC1);
             responses.CopyFrom<float>(new float[] { 0.0F, 1.0F, 3.0F, 4.0F, 6.0F, 7.0F });
             return responses;
+        }
+
+        private static Mat CreateEMSamples()
+        {
+            var samples = new Mat(8, 2, MatType.CV_64FC1);
+            samples.CopyFrom<double>(new double[]
+            {
+                -0.2, 0.1,
+                0.1, -0.2,
+                0.3, 0.2,
+                -0.1, -0.3,
+                4.8, 5.1,
+                5.2, 4.9,
+                5.3, 5.2,
+                4.7, 4.8
+            });
+            return samples;
+        }
+
+        private static Mat CreateEMQuery()
+        {
+            var query = new Mat(1, 2, MatType.CV_64FC1);
+            query.CopyFrom<double>(new double[] { 0.0, 0.0 });
+            return query;
+        }
+
+        private static Mat CreateEMInitialMeans()
+        {
+            var means = new Mat(2, 2, MatType.CV_64FC1);
+            means.CopyFrom<double>(new double[] { 0.0, 0.0, 5.0, 5.0 });
+            return means;
+        }
+
+        private static Mat CreateEMInitialWeights()
+        {
+            var weights = new Mat(1, 2, MatType.CV_64FC1);
+            weights.CopyFrom<double>(new double[] { 0.5, 0.5 });
+            return weights;
+        }
+
+        private static Mat[] CreateEMInitialCovariances()
+        {
+            return new[]
+            {
+                Mat.Eye(2, 2, MatType.CV_64FC1),
+                Mat.Eye(2, 2, MatType.CV_64FC1)
+            };
+        }
+
+        private static Mat CreateEMInitialProbabilities()
+        {
+            var probabilities = new Mat(8, 2, MatType.CV_64FC1);
+            probabilities.CopyFrom<double>(new double[]
+            {
+                1.0, 0.0,
+                1.0, 0.0,
+                1.0, 0.0,
+                1.0, 0.0,
+                0.0, 1.0,
+                0.0, 1.0,
+                0.0, 1.0,
+                0.0, 1.0
+            });
+            return probabilities;
+        }
+
+        private static void DisposeMats(Mat[] values)
+        {
+            foreach (Mat value in values)
+            {
+                value.Dispose();
+            }
         }
 
         private static void DeleteModelFiles(params string[] paths)

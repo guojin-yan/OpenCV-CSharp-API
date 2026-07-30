@@ -260,6 +260,7 @@ internal static class Program
     private static readonly Func<OpenCvSharp.ML.DTrees> CreateDTrees = OpenCvSharp.ML.DTrees.Create;
     private static readonly Func<OpenCvSharp.ML.RTrees> CreateRTrees = OpenCvSharp.ML.RTrees.Create;
     private static readonly Func<OpenCvSharp.ML.Boost> CreateBoost = OpenCvSharp.ML.Boost.Create;
+    private static readonly Func<OpenCvSharp.ML.EM> CreateEM = OpenCvSharp.ML.EM.Create;
 
     private static readonly Type[] RepresentativeTypes =
     {
@@ -313,6 +314,9 @@ internal static class Program
         typeof(OpenCvSharp.ML.Boost),
         typeof(OpenCvSharp.ML.DTreesPredictionFlags),
         typeof(OpenCvSharp.ML.BoostTypes),
+        typeof(OpenCvSharp.ML.EM),
+        typeof(OpenCvSharp.ML.EMCovarianceMatrixTypes),
+        typeof(OpenCvSharp.ML.EMPredictionResult),
         typeof(OpenCvSharp.Stitching.Stitcher),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
@@ -352,6 +356,8 @@ internal static class Program
         default(OpenCvSharp.ML.ANN_MLPTrainFlags),
         default(OpenCvSharp.ML.DTreesPredictionFlags),
         default(OpenCvSharp.ML.BoostTypes),
+        default(OpenCvSharp.ML.EMCovarianceMatrixTypes),
+        default(OpenCvSharp.ML.EMPredictionResult),
         default(OpenCvSharp.Stitching.StitcherMode),
         default(OpenCvSharp.Geometry.DistanceTypes)
     };
@@ -360,10 +366,10 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 52 &&
-            RepresentativeValues.Length >= 35 &&
+        return RepresentativeTypes.Length >= 55 &&
+            RepresentativeValues.Length >= 37 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
-            CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null &&
+            CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null && CreateEM != null &&
             exceptionType.Namespace == "OpenCvSharp" &&
             message.Length > 0
             ? 0

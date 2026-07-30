@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/af6c386a162de88f",
-  "SourceIdentity": "sha256:af6c386a162de88f104f20ac7678721b9d6798e56aca3ae8fe40c6763f1b693d",
+  "CandidateId": "local-closeout/sha256/4033d1ec6c44233d",
+  "SourceIdentity": "sha256:4033d1ec6c44233dbd882cf14b232e834b1db25324a5f81ed16385f4c80afa82",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1493,
-    "Sha256": "af6c386a162de88f104f20ac7678721b9d6798e56aca3ae8fe40c6763f1b693d",
+    "FileCount": 1495,
+    "Sha256": "4033d1ec6c44233dbd882cf14b232e834b1db25324a5f81ed16385f4c80afa82",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -32,16 +32,16 @@
     "Managed": {
       "Path": "compatibility/managed-public-api.txt",
       "SummaryPath": "compatibility/managed-public-api-summary.json",
-      "Sha256": "3d552693f36f5218786e16ec892f31ea8d5eb2df916950a70e33109b8a84faad",
-      "TypeCount": 555,
-      "MemberCount": 6065,
+      "Sha256": "504b369eaf7138f0a42fd299782c61f613681e71450f9c3d3c443cdac555422a",
+      "TypeCount": 558,
+      "MemberCount": 6095,
       "NamespaceCount": 41,
       "TargetFramework": "net8.0"
     },
     "NativeFull": {
       "Path": "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
-      "Sha256": "3271b180a18228fc54bfd41dfc5086f3c490064f8ccb7d0d0999f6e5382419a7",
-      "FunctionCount": 2475
+      "Sha256": "e8de64559dce973b900a9fafb399e7f91d3423d40c6f76f89308d36b65287372",
+      "FunctionCount": 2489
     },
     "NativeMini": {
       "Path": "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
@@ -51,9 +51,9 @@
     "NativeManagedBindingMap": {
       "Path": "compatibility/native-managed-binding-map.txt",
       "SummaryPath": "compatibility/native-managed-binding-summary.json",
-      "Sha256": "92d66f9e98c18341a94c2382d6877d1804b57dcb573b9812a71a5545eaf161df",
-      "NativeFunctionCount": 2475,
-      "ManagedBoundCount": 2475,
+      "Sha256": "51acb78554e976d5c91096164746ffe1f97da2818a0ff7d2805a9c60f12adb2b",
+      "NativeFunctionCount": 2489,
+      "ManagedBoundCount": 2489,
       "UnboundCount": 0,
       "ManagedOnlyCount": 0
     },
@@ -239,12 +239,12 @@
       "ClassificationPath": "compatibility/ml-upstream-classifications.json",
       "FamilyInventoryPath": "compatibility/ml-implemented-families.json",
       "RawExtractionPath": "compatibility/ml-upstream-raw.json",
-      "Sha256": "25a806473152dfc9374a4acad1bf0ecd14bce9d29116fc7a3d3e189205a71067",
+      "Sha256": "177b050674409babc62a0741538325ee28038ab154af623e8c9b25224cf0d5d4",
       "RawSha256": "b7c850093e07b04739bff28a81b0248d3a646933f1d51bf6cc25fcab47ab1001",
       "DeclarationCount": 241,
       "CallableCount": 208,
-      "ImplementedCount": 157,
-      "MissingCount": 51,
+      "ImplementedCount": 173,
+      "MissingCount": 35,
       "IntentionallyOmittedCount": 0,
       "UnsupportedCount": 0,
       "UpstreamConditionalCount": 0,
@@ -252,11 +252,11 @@
       "ExcludedPublicHeaderCount": 1,
       "SourceHeaderCount": 1,
       "SourceReviewedExtensionCount": 2,
-      "SelectedFamilyCount": 2,
-      "SelectedDeclarationCount": 70,
-      "ManagedPublicTypeAdditionCount": 9,
-      "ManagedPublicMemberAdditionCount": 78,
-      "NativeEntrypointAdditionCount": 37,
+      "SelectedFamilyCount": 3,
+      "SelectedDeclarationCount": 86,
+      "ManagedPublicTypeAdditionCount": 12,
+      "ManagedPublicMemberAdditionCount": 108,
+      "NativeEntrypointAdditionCount": 51,
       "RepositoryWideParityClaimed": false
     },
     "VideoUpstreamMap": {
@@ -294,18 +294,18 @@
   "EvidenceReferences": [
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "eeaef39fca126b874ca47e5659dadee91a04de243c802e1b26df53d0d5cad46b",
+      "Sha256": "1aabfca9aacdd9bc687183f73b60de870af1182b91b90d4cc779d4032b4d69a6",
       "Length": 265549
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "09cb1b99941d2c028a8caba5f380f45843bc5b9360ed1e7ce240d5a845a2cc36",
+      "Sha256": "5abf75338b0cd1fe74b7843b57fcabf4d559c1fc2d72fdf5d218875121f4803f",
       "Length": 174550
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
-      "Sha256": "77149f110f2eb578536720a76d49f4cc57ed71b527595d1b62bb87ad297a2052",
-      "Length": 28538
+      "Sha256": "a1f1aa75bfeab3fa3612d2b8cee3bb7f9c15b11efbad65a33ab091df3c121e4b",
+      "Length": 28540
     },
     {
       "Path": "compatibility/calib3d-implemented-families.json",
@@ -474,28 +474,28 @@
     },
     {
       "Path": "compatibility/managed-public-api-summary.json",
-      "Sha256": "89b7adf409aed527c69dedae0cf368a004ac4d0a6a5f92618844937386681bb3",
+      "Sha256": "0d45ae0baa718f0191557e47559847becd9612a68472e977ad6d8db2c8433cd5",
       "Length": 4403
     },
     {
       "Path": "compatibility/managed-public-api.txt",
-      "Sha256": "3d552693f36f5218786e16ec892f31ea8d5eb2df916950a70e33109b8a84faad",
-      "Length": 919887
+      "Sha256": "504b369eaf7138f0a42fd299782c61f613681e71450f9c3d3c443cdac555422a",
+      "Length": 924037
     },
     {
       "Path": "compatibility/ml-implemented-families.json",
-      "Sha256": "dc87dd7693cb0c848443904bbd45f04251d646c4e49a746b89671d20f028f055",
-      "Length": 46125
+      "Sha256": "9a4c4a3685f7becfaf0e095336c5633094983d03cfa9b1959a015c0c0bba8ddd",
+      "Length": 57348
     },
     {
       "Path": "compatibility/ml-upstream-classifications.json",
-      "Sha256": "ac8c671c732026dbdfea89dccbd87516cb66f617aeab80dfe03297f6f0ac7fd9",
-      "Length": 143447
+      "Sha256": "a080e9a6972352498a653fcc9458e805f9f3bd6ad8f163394d342709695a78f3",
+      "Length": 147224
     },
     {
       "Path": "compatibility/ml-upstream-map.txt",
-      "Sha256": "25a806473152dfc9374a4acad1bf0ecd14bce9d29116fc7a3d3e189205a71067",
-      "Length": 115785
+      "Sha256": "177b050674409babc62a0741538325ee28038ab154af623e8c9b25224cf0d5d4",
+      "Length": 119263
     },
     {
       "Path": "compatibility/ml-upstream-raw.json",
@@ -504,17 +504,17 @@
     },
     {
       "Path": "compatibility/ml-upstream-summary.json",
-      "Sha256": "e6c1d86c23dae3b9cd57e73397201c5984a47d83da64ef5ec30f9186f4cbac75",
-      "Length": 1683
+      "Sha256": "65d9505ea6f9d1df2ff6de7fd5af9d1521f891fc2513fbfb35c2b5bf979e470b",
+      "Length": 1685
     },
     {
       "Path": "compatibility/native-managed-binding-map.txt",
-      "Sha256": "92d66f9e98c18341a94c2382d6877d1804b57dcb573b9812a71a5545eaf161df",
-      "Length": 844364
+      "Sha256": "51acb78554e976d5c91096164746ffe1f97da2818a0ff7d2805a9c60f12adb2b",
+      "Length": 848484
     },
     {
       "Path": "compatibility/native-managed-binding-summary.json",
-      "Sha256": "ba78b5b8bfc184b19b105abb9a0c72ed474e8d15978d84f2321660687d0328f3",
+      "Sha256": "43041451f041fbacd266a41aad37034676fa7ecfcf09d052aa1b90d6acef4a28",
       "Length": 745
     },
     {
@@ -624,7 +624,7 @@
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
-      "Sha256": "127bbd9d5f2523935978cddd748dd305b8ea18b221315e274817b89c4eacc868",
+      "Sha256": "fa569f6824c899bb6c4c1b7ff90a80b9f38afd2d7ce62f2ab6e45b925be0076b",
       "Length": 12089
     },
     {
@@ -664,8 +664,8 @@
     },
     {
       "Path": "docs/articles/ml-guide.md",
-      "Sha256": "7c0b0cf11495f446e96fd90c79132bcba6529103ab5c7b09febf2c620b36ca0c",
-      "Length": 7543
+      "Sha256": "3762deccd87f2629c5c4910d5a46cf0b6c85f656d8765957e86e9646e941650c",
+      "Length": 9999
     },
     {
       "Path": "docs/articles/objdetect-structured-parity-guide.md",
@@ -789,13 +789,13 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "c195f64e8eeacae5ceb71112b11e4bd9ffe576858afa5852c97f5fc84eaed824",
+      "Sha256": "606788f77070e3214ff2aabd72ebb391815dc904d45060f71b01cd4afb70b950",
       "Length": 41965
     },
     {
       "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
-      "Sha256": "a68052c44efa94605fc43f3933d4a304816334e3804299f390400db4b6bfa02a",
-      "Length": 85536
+      "Sha256": "348f9f543a7e77bcfa0f3f6bbf667a704de989b15526a7f140a4a28b77467fab",
+      "Length": 85791
     },
     {
       "Path": "scripts/Test-Calib3DUpstreamMap.ps1",
@@ -829,12 +829,12 @@
     },
     {
       "Path": "scripts/Test-MlUpstreamMap.ps1",
-      "Sha256": "f10daa3306eba774f89d20a50fc3ea86f90fdb799a922a03e11c3ca474d2f2fd",
-      "Length": 2159
+      "Sha256": "904745a33d1d3819e433197b5aea026269d5051dfc79b3fde20e4addcf4a796b",
+      "Length": 2161
     },
     {
       "Path": "scripts/Test-NativeManagedBindingMap.ps1",
-      "Sha256": "4ab70f18295d64bf8b7c887d02001e9ab2406da6e5411857dd6379c8ac487eab",
+      "Sha256": "30e0eda299b6f328a4b739856fc25fb7543bcf560f9574c1cfac0c7b17a7f7f2",
       "Length": 16021
     },
     {
@@ -849,8 +849,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "513f7cf8cd9f627c81c9632aa3ea770f41cbbe0e1f733e2cb97126f691e81e14",
-      "Length": 39654
+      "Sha256": "ec4f6c926111353d57ad0621529de196603ac2799dcb54d18697c05a25f4df87",
+      "Length": 39656
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -899,8 +899,8 @@
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
-      "Sha256": "3271b180a18228fc54bfd41dfc5086f3c490064f8ccb7d0d0999f6e5382419a7",
-      "Length": 266263
+      "Sha256": "e8de64559dce973b900a9fafb399e7f91d3423d40c6f76f89308d36b65287372",
+      "Length": 267248
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
@@ -1004,8 +1004,8 @@
     },
     {
       "Path": "tools/MlUpstreamMap/Program.cs",
-      "Sha256": "3b8d06ac4adbfbe1f386d7a284a839a374c2a27ae4ea101364c937cba6130859",
-      "Length": 48038
+      "Sha256": "0e5e402183f725c3d3afbc1cf8e73e183e4e2095c23f0cd2fd6f6ec158e32331",
+      "Length": 50708
     },
     {
       "Path": "tools/MlUpstreamMap/extract_ml.py",

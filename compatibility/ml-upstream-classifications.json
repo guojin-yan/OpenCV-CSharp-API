@@ -1320,146 +1320,211 @@
     {
       "ordinal": 107,
       "identity": "cv.ml.EM.getClustersNumber()-\u003Eint",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber"
+      ]
     },
     {
       "ordinal": 108,
       "identity": "cv.ml.EM.setClustersNumber(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber"
+      ]
     },
     {
       "ordinal": 109,
       "identity": "cv.ml.EM.getCovarianceMatrixType()-\u003Eint",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType"
+      ]
     },
     {
       "ordinal": 110,
       "identity": "cv.ml.EM.setCovarianceMatrixType(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType"
+      ]
     },
     {
       "ordinal": 111,
       "identity": "cv.ml.EM.getTermCriteria()-\u003ETermCriteria",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
     },
     {
       "ordinal": 112,
       "identity": "cv.ml.EM.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
     },
     {
       "ordinal": 113,
       "identity": "cv.ml.EM.getWeights()-\u003EMat",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"
+      ]
     },
     {
       "ordinal": 114,
       "identity": "cv.ml.EM.getMeans()-\u003EMat",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_means"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetMeans()"
+      ]
     },
     {
       "ordinal": 115,
       "identity": "cv.ml.EM.getCovs(vector_Mat covs[/O,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_get_covariances_count",
+        "jyppx_ocv_ml_em_get_covariances_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat[] GetCovariances()"
+      ]
     },
     {
       "ordinal": 116,
       "identity": "cv.ml.EM.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? results=null,OpenCvSharp.ML.StatModelFlags flags=None)"
+      ]
     },
     {
       "ordinal": 117,
       "identity": "cv.ml.EM.predict2(Mat sample;Mat probs[/O])-\u003EVec2d",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_predict2"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.ML.EMPredictionResult Predict2(OpenCvSharp.Core.Mat sample,OpenCvSharp.Core.Mat? probabilities=null)"
+      ]
     },
     {
       "ordinal": 118,
       "identity": "cv.ml.EM.trainEM(Mat samples;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_train_em"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainEM(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)"
+      ]
     },
     {
       "ordinal": 119,
       "identity": "cv.ml.EM.trainE(Mat samples;Mat means0;Mat covs0=Mat();Mat weights0=Mat();Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_train_e"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainE(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat initialMeans,OpenCvSharp.Core.Mat[]? initialCovariances=null,OpenCvSharp.Core.Mat? initialWeights=null,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)"
+      ]
     },
     {
       "ordinal": 120,
       "identity": "cv.ml.EM.trainM(Mat samples;Mat probs0;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_train_m"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainM(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat initialProbabilities,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)"
+      ]
     },
     {
       "ordinal": 121,
       "identity": "cv.ml.EM.create()-\u003EPtr\u003CEM\u003E",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;static|OpenCvSharp.ML.EM Create()"
+      ]
     },
     {
       "ordinal": 122,
       "identity": "cv.ml.EM.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CEM\u003E",
-      "classification": "missing",
-      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "classification": "implemented",
+      "reason": "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_em_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.EM|method|public;static|OpenCvSharp.ML.EM Load(System.String filepath,System.String? nodeName=null)"
+      ]
     },
     {
       "ordinal": 123,

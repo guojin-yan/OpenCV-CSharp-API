@@ -20,6 +20,7 @@ namespace
     constexpr int MODEL_KIND_DTREES = 5;
     constexpr int MODEL_KIND_RTREES = 6;
     constexpr int MODEL_KIND_BOOST = 7;
+    constexpr int MODEL_KIND_EM = 8;
 
     constexpr int TRAIN_DATA_INT_LAYOUT = 0;
     constexpr int TRAIN_DATA_INT_N_TRAIN_SAMPLES = 1;
@@ -101,6 +102,9 @@ namespace
     constexpr int BOOST_INT_TYPE = 0;
     constexpr int BOOST_INT_WEAK_COUNT = 1;
 
+    constexpr int EM_INT_CLUSTERS_NUMBER = 0;
+    constexpr int EM_INT_COVARIANCE_MATRIX_TYPE = 1;
+
     int validate_mat(const char* api_name, const jyppx_ocv_mat* mat, const char* argument_name)
     {
         return mat == nullptr
@@ -155,6 +159,50 @@ namespace
         if (value == nullptr || value[0] == '\0')
         {
             return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+        }
+
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_input_mat_array(
+        const char* api_name,
+        const jyppx_ocv_mat* const* values,
+        int value_count,
+        const char* argument_name)
+    {
+        if (value_count < 0 || (value_count > 0 && values == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+        }
+
+        for (int i = 0; i < value_count; ++i)
+        {
+            if (values[i] == nullptr)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+            }
+        }
+
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_output_mat_array(
+        const char* api_name,
+        jyppx_ocv_mat* const* values,
+        int value_count,
+        const char* argument_name)
+    {
+        if (value_count < 0 || (value_count > 0 && values == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+        }
+
+        for (int i = 0; i < value_count; ++i)
+        {
+            if (values[i] == nullptr)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+            }
         }
 
         return OPENCV_CSHARP_STATUS_OK;
@@ -262,6 +310,11 @@ namespace
     cv::Ptr<cv::ml::Boost> as_boost_ptr(const jyppx_ocv_ml_model* model)
     {
         return model == nullptr ? cv::Ptr<cv::ml::Boost>() : model->value.dynamicCast<cv::ml::Boost>();
+    }
+
+    cv::Ptr<cv::ml::EM> as_em_ptr(const jyppx_ocv_ml_model* model)
+    {
+        return model == nullptr ? cv::Ptr<cv::ml::EM>() : model->value.dynamicCast<cv::ml::EM>();
     }
 
     cv::Ptr<cv::ml::ParamGrid> make_grid_ptr(const jyppx_ocv_ml_param_grid* grid, int param_id)
@@ -1117,6 +1170,51 @@ int jyppx_ocv_ml_boost_load(const char* filepath, const char* node_name, jyppx_o
             api_name,
             cv::ml::Boost::load(filepath, node_name == nullptr ? cv::String() : cv::String(node_name)),
             MODEL_KIND_BOOST,
+            model);
+#else
+        (void)node_name;
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_create(jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(api_name, cv::ml::EM::create(), MODEL_KIND_EM, model);
+#else
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_load(const char* filepath, const char* node_name, jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_load";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_string(api_name, filepath, "filepath");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(
+            api_name,
+            cv::ml::EM::load(filepath, node_name == nullptr ? cv::String() : cv::String(node_name)),
+            MODEL_KIND_EM,
             model);
 #else
         (void)node_name;
@@ -2670,6 +2768,446 @@ int jyppx_ocv_ml_boost_set_weight_trim_rate(jyppx_ocv_ml_model* model, double va
         return OPENCV_CSHARP_STATUS_OK;
 #else
         (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_get_int(const jyppx_ocv_ml_model* model, int property_id, int* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_get_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case EM_INT_CLUSTERS_NUMBER: *value = native->getClustersNumber(); return OPENCV_CSHARP_STATUS_OK;
+        case EM_INT_COVARIANCE_MATRIX_TYPE: *value = native->getCovarianceMatrixType(); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id;
+        *value = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_set_int(jyppx_ocv_ml_model* model, int property_id, int value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_set_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case EM_INT_CLUSTERS_NUMBER: native->setClustersNumber(value); return OPENCV_CSHARP_STATUS_OK;
+        case EM_INT_COVARIANCE_MATRIX_TYPE: native->setCovarianceMatrixType(value); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id; (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_get_term_criteria(const jyppx_ocv_ml_model* model, int* type, int* max_count, double* epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_get_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, type, "type");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, max_count, "max_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, epsilon, "epsilon");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        const cv::TermCriteria criteria = native->getTermCriteria();
+        *type = criteria.type;
+        *max_count = criteria.maxCount;
+        *epsilon = criteria.epsilon;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *type = 0; *max_count = 0; *epsilon = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_set_term_criteria(jyppx_ocv_ml_model* model, int type, int max_count, double epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_set_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setTermCriteria(cv::TermCriteria(type, max_count, epsilon));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; (void)max_count; (void)epsilon;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_get_weights(const jyppx_ocv_ml_model* model, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_get_weights";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        copy_mat_to_output(native->getWeights(), dst);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_get_means(const jyppx_ocv_ml_model* model, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_get_means";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        copy_mat_to_output(native->getMeans(), dst);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_get_covariances_count(const jyppx_ocv_ml_model* model, int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_get_covariances_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, count, "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        std::vector<cv::Mat> covariances;
+        native->getCovs(covariances);
+        status = checked_int_size(api_name, covariances.size(), "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *count = static_cast<int>(covariances.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_get_covariances_fill(
+    const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* const* covariances,
+    int covariance_capacity,
+    int* count)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_get_covariances_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, count, "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (covariance_capacity < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "covariance_capacity");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        std::vector<cv::Mat> native_covariances;
+        native->getCovs(native_covariances);
+        status = checked_int_size(api_name, native_covariances.size(), "count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *count = static_cast<int>(native_covariances.size());
+        if (covariance_capacity < *count)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "covariance_capacity");
+        }
+        status = validate_output_mat_array(api_name, covariances, *count, "covariances");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        for (int i = 0; i < *count; ++i)
+        {
+            copy_mat_to_output(native_covariances[static_cast<size_t>(i)], covariances[i]);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)covariances; (void)covariance_capacity;
+        *count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_predict2(
+    const jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* sample,
+    jyppx_ocv_mat* probabilities,
+    double* log_likelihood,
+    int* label)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_predict2";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, sample, "sample");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, log_likelihood, "log_likelihood");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, label, "label");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        const cv::Vec2d prediction = native->predict2(
+            opencv_csharp_native::mat_value(sample),
+            optional_output_array(probabilities));
+        *log_likelihood = prediction[0];
+        *label = static_cast<int>(prediction[1]);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)probabilities;
+        *log_likelihood = 0.0; *label = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_train_em(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    jyppx_ocv_mat* log_likelihoods,
+    jyppx_ocv_mat* labels,
+    jyppx_ocv_mat* probabilities,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_train_em";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, samples, "samples");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, result, "result");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        *result = native->trainEM(
+            opencv_csharp_native::mat_value(samples),
+            optional_output_array(log_likelihoods),
+            optional_output_array(labels),
+            optional_output_array(probabilities)) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)log_likelihoods; (void)labels; (void)probabilities;
+        *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_train_e(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    const jyppx_ocv_mat* initial_means,
+    const jyppx_ocv_mat* const* initial_covariances,
+    int initial_covariance_count,
+    const jyppx_ocv_mat* initial_weights,
+    jyppx_ocv_mat* log_likelihoods,
+    jyppx_ocv_mat* labels,
+    jyppx_ocv_mat* probabilities,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_train_e";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, samples, "samples");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, initial_means, "initial_means");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_input_mat_array(api_name, initial_covariances, initial_covariance_count, "initial_covariances");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, result, "result");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        std::vector<cv::Mat> native_covariances;
+        native_covariances.reserve(static_cast<size_t>(initial_covariance_count));
+        for (int i = 0; i < initial_covariance_count; ++i)
+        {
+            native_covariances.push_back(opencv_csharp_native::mat_value(initial_covariances[i]));
+        }
+
+        bool trained;
+        if (native_covariances.empty())
+        {
+            trained = native->trainE(
+                opencv_csharp_native::mat_value(samples),
+                opencv_csharp_native::mat_value(initial_means),
+                cv::noArray(),
+                optional_input_array(initial_weights),
+                optional_output_array(log_likelihoods),
+                optional_output_array(labels),
+                optional_output_array(probabilities));
+        }
+        else
+        {
+            trained = native->trainE(
+                opencv_csharp_native::mat_value(samples),
+                opencv_csharp_native::mat_value(initial_means),
+                native_covariances,
+                optional_input_array(initial_weights),
+                optional_output_array(log_likelihoods),
+                optional_output_array(labels),
+                optional_output_array(probabilities));
+        }
+        *result = trained ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)initial_weights; (void)log_likelihoods; (void)labels; (void)probabilities;
+        *result = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_em_train_m(
+    jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* samples,
+    const jyppx_ocv_mat* initial_probabilities,
+    jyppx_ocv_mat* log_likelihoods,
+    jyppx_ocv_mat* labels,
+    jyppx_ocv_mat* probabilities,
+    int* result)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_em_train_m";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, samples, "samples");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, initial_probabilities, "initial_probabilities");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, result, "result");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::EM> native = as_em_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        *result = native->trainM(
+            opencv_csharp_native::mat_value(samples),
+            opencv_csharp_native::mat_value(initial_probabilities),
+            optional_output_array(log_likelihoods),
+            optional_output_array(labels),
+            optional_output_array(probabilities)) ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)log_likelihoods; (void)labels; (void)probabilities;
+        *result = 0;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

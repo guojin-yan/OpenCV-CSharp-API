@@ -65,6 +65,7 @@ using MLKNearestObject = OpenCvSharp.ML.KNearest;
 using MLAnnMlpObject = OpenCvSharp.ML.ANN_MLP;
 using MLBoostObject = OpenCvSharp.ML.Boost;
 using MLDTreesObject = OpenCvSharp.ML.DTrees;
+using MLEMObject = OpenCvSharp.ML.EM;
 using MLNormalBayesClassifierObject = OpenCvSharp.ML.NormalBayesClassifier;
 using MLRTreesObject = OpenCvSharp.ML.RTrees;
 using MLSvmObject = OpenCvSharp.ML.SVM;
@@ -737,6 +738,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunPhotoIntelligentScissorsDefaultSummary());
                     Console.WriteLine(RunPhotoFinalCallablesDefaultSummary());
                     Console.WriteLine(RunMLTreeModelsDefaultSummary());
+                    Console.WriteLine(RunMLEMDefaultSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -3317,6 +3319,45 @@ namespace ConsoleSamples
                         + ", votes=" + votes.Rows + "x" + votes.Cols
                         + ", importance=" + importance.Total
                         + ", oobFinite=" + double.IsFinite(rtrees.OobError);
+                }
+            }
+        }
+
+        private static string RunMLEMDefaultSummary()
+        {
+            using (Mat samples = CreateMLSamples())
+            using (Mat query = new Mat(1, 2, MatType.CV_32FC1))
+            using (Mat logLikelihoods = new Mat())
+            using (Mat labels = new Mat())
+            using (Mat probabilities = new Mat())
+            using (Mat predictionProbabilities = new Mat())
+            using (MLEMObject model = MLEMObject.Create())
+            {
+                query.CopyFrom<float>(new float[] { 0.1F, 0.2F });
+                CoreCv2.SetRngSeed(13579);
+                model.ClustersNumber = 2;
+                model.CovarianceMatrixType = EMCovarianceMatrixTypes.Generic;
+                bool trained = model.TrainEM(samples, logLikelihoods, labels, probabilities);
+                EMPredictionResult prediction = model.Predict2(query, predictionProbabilities);
+                using (Mat weights = model.GetWeights())
+                using (Mat means = model.GetMeans())
+                {
+                    Mat[] covariances = model.GetCovariances();
+                    try
+                    {
+                        return "ML EM: clusters=" + model.ClustersNumber
+                            + ", trained=" + trained
+                            + ", label=" + prediction.Label
+                            + ", finiteLikelihood=" + double.IsFinite(prediction.LogLikelihood)
+                            + ", probs=" + predictionProbabilities.Rows + "x" + predictionProbabilities.Cols
+                            + ", weights=" + weights.Total
+                            + ", means=" + means.Rows + "x" + means.Cols
+                            + ", covariances=" + covariances.Length;
+                    }
+                    finally
+                    {
+                        DisposeAll(covariances);
+                    }
                 }
             }
         }

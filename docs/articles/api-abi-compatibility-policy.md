@@ -2,7 +2,7 @@
 
 The project maintains two reviewable baselines for the current packaged OpenCV revision `5.0.0`:
 
-- Managed API: `compatibility/managed-public-api.txt` and its summary JSON. The exact `net8.0` assembly currently contains 555 public types, 6,065 public/protected members, and 41 namespaces. The baseline includes generic constraints and nullable metadata shape.
+- Managed API: `compatibility/managed-public-api.txt` and its summary JSON. The exact `net8.0` assembly currently contains 558 public types, 6,095 public/protected members, and 41 namespaces. The baseline includes generic constraints and nullable metadata shape.
 - Native ABI: `src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt` contains 2,475 full-profile functions; `legacy_abi_mini_manifest.txt` contains 526 mini-profile functions. The primary prefix is version-neutral `jyppx_ocv_`; `jyppx_ocv5_` is only the generated compatibility forwarding prefix.
 - Native-to-managed binding map: `compatibility/native-managed-binding-map.txt` and its summary correlate all 2,475 primary native entrypoints with reflected `net10.0` import metadata and checked-in source locations. All 2,475 are required to remain managed-bound; unbound and managed-only counts must remain zero.
 - ImgProc upstream map: `compatibility/imgproc-upstream-map.txt`, its structured raw extraction, reviewed classification manifest, summary, and selected-family inventory cover exactly the 203 declarations emitted from OpenCV 5.0.0 `opencv2/imgproc.hpp`. They classify 167 callable declarations without claiming repository-wide upstream parity.

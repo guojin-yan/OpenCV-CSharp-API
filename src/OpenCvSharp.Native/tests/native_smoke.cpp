@@ -3770,6 +3770,164 @@ namespace
 
         return 0;
     }
+
+    int run_ml_em_smoke()
+    {
+        NativeMlModelHandle model;
+        NativeMlModelHandle e_model;
+        NativeMlModelHandle m_model;
+        if (jyppx_ocv_ml_em_create(&model.value) != OPENCV_CSHARP_STATUS_OK || model.value == nullptr ||
+            jyppx_ocv_ml_em_create(&e_model.value) != OPENCV_CSHARP_STATUS_OK || e_model.value == nullptr ||
+            jyppx_ocv_ml_em_create(&m_model.value) != OPENCV_CSHARP_STATUS_OK || m_model.value == nullptr)
+        {
+            return 833;
+        }
+
+        int int_value = -1;
+        int criteria_type = 0;
+        int criteria_count = 0;
+        double criteria_epsilon = 0.0;
+        if (jyppx_ocv_ml_em_get_int(model.value, 0, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 5 ||
+            jyppx_ocv_ml_em_get_int(model.value, 1, &int_value) != OPENCV_CSHARP_STATUS_OK || int_value != 1 ||
+            jyppx_ocv_ml_em_get_term_criteria(model.value, &criteria_type, &criteria_count, &criteria_epsilon) != OPENCV_CSHARP_STATUS_OK ||
+            criteria_type != 3 || criteria_count != 100 || std::fabs(criteria_epsilon - 1e-6) > 1e-15 ||
+            jyppx_ocv_ml_em_set_int(model.value, 0, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_set_int(model.value, 1, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_set_term_criteria(model.value, 3, 100, 1e-8) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_set_int(e_model.value, 0, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_set_int(e_model.value, 1, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_set_int(m_model.value, 0, 2) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 834;
+        }
+
+        NativeMatHandle samples;
+        NativeMatHandle query;
+        NativeMatHandle log_likelihoods;
+        NativeMatHandle labels;
+        NativeMatHandle probabilities;
+        NativeMatHandle predict_probabilities;
+        NativeMatHandle batch_probabilities;
+        NativeMatHandle weights;
+        NativeMatHandle means;
+        NativeMatHandle covariance0;
+        NativeMatHandle covariance1;
+        NativeMatHandle initial_means;
+        NativeMatHandle initial_weights;
+        NativeMatHandle initial_probabilities;
+        if (jyppx_ocv_mat_create(8, 2, 6, samples.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 2, 6, query.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(log_likelihoods.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(labels.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(probabilities.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(predict_probabilities.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(batch_probabilities.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(weights.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(means.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(2, 2, 6, covariance0.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(2, 2, 6, covariance1.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(2, 2, 6, initial_means.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 2, 6, initial_weights.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(8, 2, 6, initial_probabilities.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 835;
+        }
+
+        const double sample_values[] = {
+            -0.2, 0.1,
+            0.1, -0.2,
+            0.3, 0.2,
+            -0.1, -0.3,
+            4.8, 5.1,
+            5.2, 4.9,
+            5.3, 5.2,
+            4.7, 4.8
+        };
+        const double query_values[] = { 0.0, 0.0 };
+        const double mean_values[] = { 0.0, 0.0, 5.0, 5.0 };
+        const double weight_values[] = { 0.5, 0.5 };
+        const double covariance_values[] = { 1.0, 0.0, 0.0, 1.0 };
+        const double initial_probability_values[] = {
+            1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0,
+            0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0
+        };
+        unsigned char* bytes = nullptr;
+#define COPY_EM_VALUES(HANDLE, VALUES, CODE) \
+        if (jyppx_ocv_mat_data((HANDLE).get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr) { return CODE; } \
+        std::memcpy(bytes, VALUES, sizeof(VALUES))
+        COPY_EM_VALUES(samples, sample_values, 836);
+        COPY_EM_VALUES(query, query_values, 837);
+        COPY_EM_VALUES(initial_means, mean_values, 838);
+        COPY_EM_VALUES(initial_weights, weight_values, 839);
+        COPY_EM_VALUES(covariance0, covariance_values, 840);
+        COPY_EM_VALUES(covariance1, covariance_values, 841);
+        COPY_EM_VALUES(initial_probabilities, initial_probability_values, 842);
+#undef COPY_EM_VALUES
+
+        int trained = 0;
+        if (jyppx_ocv_core_set_rng_seed(20260731) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_train_em(model.value, samples.get(), log_likelihoods.get(), labels.get(), probabilities.get(), &trained) != OPENCV_CSHARP_STATUS_OK || trained != 1)
+        {
+            return 843;
+        }
+
+        double log_likelihood = 0.0;
+        int label = -1;
+        float batch_prediction = -1.0F;
+        if (jyppx_ocv_ml_em_predict2(model.value, query.get(), predict_probabilities.get(), &log_likelihood, &label) != OPENCV_CSHARP_STATUS_OK ||
+            !std::isfinite(log_likelihood) || label < 0 || label > 1 ||
+            jyppx_ocv_ml_stat_model_predict(model.value, query.get(), batch_probabilities.get(), 0, &batch_prediction) != OPENCV_CSHARP_STATUS_OK ||
+            (batch_prediction != 0.0F && batch_prediction != 1.0F) ||
+            jyppx_ocv_ml_em_get_weights(model.value, weights.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_em_get_means(model.value, means.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 844;
+        }
+
+        int covariance_count = 0;
+        jyppx_ocv_mat* covariance_outputs[] = { covariance0.get(), covariance1.get() };
+        if (jyppx_ocv_ml_em_get_covariances_count(model.value, &covariance_count) != OPENCV_CSHARP_STATUS_OK || covariance_count != 2 ||
+            jyppx_ocv_ml_em_get_covariances_fill(model.value, covariance_outputs, 2, &covariance_count) != OPENCV_CSHARP_STATUS_OK || covariance_count != 2)
+        {
+            return 845;
+        }
+
+        int rows = 0;
+        int cols = 0;
+        if (jyppx_ocv_mat_rows(probabilities.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 8 ||
+            jyppx_ocv_mat_cols(probabilities.get(), &cols) != OPENCV_CSHARP_STATUS_OK || cols != 2 ||
+            jyppx_ocv_mat_rows(means.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 2 ||
+            jyppx_ocv_mat_cols(means.get(), &cols) != OPENCV_CSHARP_STATUS_OK || cols != 2)
+        {
+            return 846;
+        }
+
+        const jyppx_ocv_mat* initial_covariances[] = { covariance0.get(), covariance1.get() };
+        if (jyppx_ocv_ml_em_train_e(
+                e_model.value,
+                samples.get(),
+                initial_means.get(),
+                initial_covariances,
+                2,
+                initial_weights.get(),
+                nullptr,
+                nullptr,
+                probabilities.get(),
+                &trained) != OPENCV_CSHARP_STATUS_OK || trained != 1 ||
+            jyppx_ocv_ml_em_train_m(
+                m_model.value,
+                samples.get(),
+                initial_probabilities.get(),
+                nullptr,
+                nullptr,
+                probabilities.get(),
+                &trained) != OPENCV_CSHARP_STATUS_OK || trained != 1)
+        {
+            return 847;
+        }
+
+        return 0;
+    }
 #endif
 }
 
@@ -3864,6 +4022,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return ml_tree_models_status;
+        }
+
+        int ml_em_status = run_ml_em_smoke();
+        if (ml_em_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return ml_em_status;
         }
 #endif
 
@@ -5236,6 +5401,12 @@ int main()
             jyppx_ocv_ml_model_release_handle(rtrees);
             jyppx_ocv_ml_model_release_handle(boost);
             return 832;
+        }
+        jyppx_ocv_ml_model* em = nullptr;
+        if (jyppx_ocv_ml_em_create(&em) != OPENCV_CSHARP_STATUS_NOT_LINKED || em != nullptr)
+        {
+            jyppx_ocv_ml_model_release_handle(em);
+            return 848;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

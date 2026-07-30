@@ -16,21 +16,22 @@ internal static class Program
             .Concat(Enumerable.Range(96, 7)));
     private static readonly HashSet<int> AnnMlpSelected = new(
         Enumerable.Range(168, 29).Concat(Enumerable.Range(199, 3)));
+    private static readonly HashSet<int> EmSelected = new(Enumerable.Range(107, 16));
     private static readonly HashSet<int> TreeModelsSelected = new(
         Enumerable.Range(125, 20)
             .Concat(Enumerable.Range(146, 10))
             .Concat(Enumerable.Range(157, 6))
             .Concat(Enumerable.Range(164, 2)));
-    private static readonly HashSet<int> Selected = new(AnnMlpSelected.Concat(TreeModelsSelected));
+    private static readonly HashSet<int> Selected = new(AnnMlpSelected.Concat(EmSelected).Concat(TreeModelsSelected));
     private static readonly string[] Allowed =
     {
         "implemented", "missing", "intentionally-omitted", "upstream-conditional", "unsupported", "non-callable-metadata"
     };
     private const string ClaimedSlice = "opencv2/ml/ml.hpp compatibility include measured through the parser-emitted OpenCV 5.0.0 contrib ML public source header";
     private const int NegativeFixtureCount = 17;
-    private const int ManagedTypeAdditions = 9;
-    private const int ManagedMemberAdditions = 78;
-    private const int NativeEntrypointAdditions = 37;
+    private const int ManagedTypeAdditions = 12;
+    private const int ManagedMemberAdditions = 108;
+    private const int NativeEntrypointAdditions = 51;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification, string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput, bool Initialize, bool Check);
     private sealed class RawDocument
@@ -194,7 +195,7 @@ internal static class Program
                 ManagedEvidenceCount = classifications.Declarations.SelectMany(x => x.ManagedMembers).Distinct(Ordinal).Count(),
                 FamilyInventoryPath = Rel(options.Repository, options.FamilyOutput),
                 FamilyInventorySha256 = Sha256(familyText),
-                SelectedFamilyCount = 2,
+                SelectedFamilyCount = 3,
                 SelectedDeclarationCount = Selected.Count,
                 RepositoryWideUpstreamParityClaimed = false
             };
@@ -277,6 +278,8 @@ internal static class Program
     {
         if (AnnMlpSelected.Contains(ordinal))
             return "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
+        if (EmSelected.Contains(ordinal))
+            return "The selected EM batch has one owned StatModel handle, copied Mat and covariance outputs, typed configuration, caller-owned optional outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
         if (TreeModelsSelected.Contains(ordinal))
             return "The selected DTrees, RTrees, and Boost batch preserves upstream inheritance, typed tree configuration, copied matrix outputs, native smoke, net8/net10 managed tests, persistence, and an offline sample.";
         throw new InvalidOperationException("No selected-family rationale for ordinal " + ordinal);
@@ -286,8 +289,6 @@ internal static class Program
     {
         if (ordinal is 12 or 31)
             return "This TrainData pointer-buffer callable has no current stable span or caller-buffer ABI contract and remains an explicit full-profile gap.";
-        if (ordinal is >= 107 and <= 122)
-            return "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.";
         if (ordinal is >= 203 and <= 220)
             return "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.";
         if (ordinal is >= 224 and <= 240)
@@ -337,6 +338,20 @@ internal static class Program
             100 => N("jyppx_ocv_ml_svm_get_default_grid"),
             101 => N("jyppx_ocv_ml_svm_create"),
             102 => N("jyppx_ocv_ml_svm_load"),
+            107 or 109 => N("jyppx_ocv_ml_em_get_int"),
+            108 or 110 => N("jyppx_ocv_ml_em_set_int"),
+            111 => N("jyppx_ocv_ml_em_get_term_criteria"),
+            112 => N("jyppx_ocv_ml_em_set_term_criteria"),
+            113 => N("jyppx_ocv_ml_em_get_weights"),
+            114 => N("jyppx_ocv_ml_em_get_means"),
+            115 => N("jyppx_ocv_ml_em_get_covariances_count", "jyppx_ocv_ml_em_get_covariances_fill"),
+            116 => N("jyppx_ocv_ml_stat_model_predict"),
+            117 => N("jyppx_ocv_ml_em_predict2"),
+            118 => N("jyppx_ocv_ml_em_train_em"),
+            119 => N("jyppx_ocv_ml_em_train_e"),
+            120 => N("jyppx_ocv_ml_em_train_m"),
+            121 => N("jyppx_ocv_ml_em_create"),
+            122 => N("jyppx_ocv_ml_em_load"),
             125 or 127 or 129 or 131 or 133 or 135 or 137 => N("jyppx_ocv_ml_dtrees_get_int"),
             126 or 128 or 130 or 132 or 134 or 136 or 138 => N("jyppx_ocv_ml_dtrees_set_int"),
             139 => N("jyppx_ocv_ml_dtrees_get_regression_accuracy"),
@@ -458,6 +473,19 @@ internal static class Program
             100 => M(managed, "SVM", " GetDefaultGrid("),
             101 => M(managed, "SVM", " Create("),
             102 => M(managed, "SVM", " Load("),
+            107 or 108 => M(managed, "EM", "|property|", " ClustersNumber"),
+            109 or 110 => M(managed, "EM", "|property|", " CovarianceMatrixType"),
+            111 or 112 => M(managed, "EM", "|property|", " TermCriteria"),
+            113 => Exact(managed, "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"),
+            114 => Exact(managed, "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetMeans()"),
+            115 => M(managed, "EM", " GetCovariances()"),
+            116 => M(managed, "StatModel", " Predict("),
+            117 => M(managed, "EM", " Predict2("),
+            118 => M(managed, "EM", " TrainEM("),
+            119 => M(managed, "EM", " TrainE("),
+            120 => M(managed, "EM", " TrainM("),
+            121 => M(managed, "EM", "|method|public;static|", " Create("),
+            122 => M(managed, "EM", "|method|public;static|", " Load("),
             125 or 126 => M(managed, "DTrees", "|property|", " MaxCategories"),
             127 or 128 => M(managed, "DTrees", "|property|", " MaxDepth"),
             129 or 130 => M(managed, "DTrees", "|property|", " MinSampleCount"),
@@ -557,7 +585,7 @@ internal static class Program
                 Require(row.NativeEntrypoints.Count == 0 && row.ManagedMembers.Count == 0, "Non-implemented ML callable carries evidence at " + i);
             }
         }
-        Require(classifications.Declarations.Count(x => x.Classification == "implemented") == 157 && classifications.Declarations.Count(x => x.Classification == "missing") == 51 && classifications.Declarations.Count(x => x.Classification == "non-callable-metadata") == 33, "ML callable partition drifted.");
+        Require(classifications.Declarations.Count(x => x.Classification == "implemented") == 173 && classifications.Declarations.Count(x => x.Classification == "missing") == 35 && classifications.Declarations.Count(x => x.Classification == "non-callable-metadata") == 33, "ML callable partition drifted.");
         Require(classifications.Declarations.Count(x => x.Classification is "intentionally-omitted" or "upstream-conditional" or "unsupported") == 0, "Unexpected ML classifications were introduced.");
         Require(Existing.All(i => classifications.Declarations[i].Classification == "implemented") && Selected.All(i => classifications.Declarations[i].Classification == "implemented"), "Existing or selected ML correlation is incomplete.");
         if (verifyFiles)
@@ -618,6 +646,21 @@ internal static class Program
                 ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
             });
         }
+        var emFamily = new FamilyRow
+        {
+            Id = "ml-em",
+            Rationale = "The selected batch closes all 16 parser-emitted EM callables with typed configuration, automatic and explicit E/M-step training, copied parameter and covariance outputs, optional caller-owned result matrices, prediction, persistence, and deterministic disposal."
+        };
+        foreach (int i in EmSelected.OrderBy(x => x))
+        {
+            emFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = i,
+                UpstreamIdentity = raw.Declarations[i].Identity,
+                NativeEntrypoints = new(classifications.Declarations[i].NativeEntrypoints),
+                ManagedMembers = new(classifications.Declarations[i].ManagedMembers)
+            });
+        }
         var treeModelsFamily = new FamilyRow
         {
             Id = "ml-tree-models",
@@ -649,7 +692,7 @@ internal static class Program
         };
         return new FamilyDocument
         {
-            Families = new() { annMlpFamily, treeModelsFamily },
+            Families = new() { annMlpFamily, emFamily, treeModelsFamily },
             SourceReviewedExtensions = new() { annMlpExtension, rtreesOobExtension }
         };
     }

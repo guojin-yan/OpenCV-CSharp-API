@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 9,
-  "managedPublicMemberAdditionCount": 78,
-  "nativeEntrypointAdditionCount": 37,
+  "managedPublicTypeAdditionCount": 12,
+  "managedPublicMemberAdditionCount": 108,
+  "nativeEntrypointAdditionCount": 51,
   "families": [
     {
       "id": "ml-ann-mlp",
@@ -452,6 +452,237 @@
           ],
           "managedMembers": [
             "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Load(System.String filepath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "ml-em",
+      "rationale": "The selected batch closes all 16 parser-emitted EM callables with typed configuration, automatic and explicit E/M-step training, copied parameter and covariance outputs, optional caller-owned result matrices, prediction, persistence, and deterministic disposal.",
+      "declarations": [
+        {
+          "ordinal": 107,
+          "upstreamIdentity": "cv.ml.EM.getClustersNumber()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 108,
+          "upstreamIdentity": "cv.ml.EM.setClustersNumber(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|System.Int32 ClustersNumber"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 109,
+          "upstreamIdentity": "cv.ml.EM.getCovarianceMatrixType()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 110,
+          "upstreamIdentity": "cv.ml.EM.setCovarianceMatrixType(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.ML.EMCovarianceMatrixTypes CovarianceMatrixType"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 111,
+          "upstreamIdentity": "cv.ml.EM.getTermCriteria()-\u003ETermCriteria",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_get_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 112,
+          "upstreamIdentity": "cv.ml.EM.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_set_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 113,
+          "upstreamIdentity": "cv.ml.EM.getWeights()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_get_weights"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 114,
+          "upstreamIdentity": "cv.ml.EM.getMeans()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_get_means"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetMeans()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 115,
+          "upstreamIdentity": "cv.ml.EM.getCovs(vector_Mat covs[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_get_covariances_count",
+            "jyppx_ocv_ml_em_get_covariances_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat[] GetCovariances()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 116,
+          "upstreamIdentity": "cv.ml.EM.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_stat_model_predict"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? results=null,OpenCvSharp.ML.StatModelFlags flags=None)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 117,
+          "upstreamIdentity": "cv.ml.EM.predict2(Mat sample;Mat probs[/O])-\u003EVec2d",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_predict2"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.ML.EMPredictionResult Predict2(OpenCvSharp.Core.Mat sample,OpenCvSharp.Core.Mat? probabilities=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 118,
+          "upstreamIdentity": "cv.ml.EM.trainEM(Mat samples;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_train_em"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainEM(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 119,
+          "upstreamIdentity": "cv.ml.EM.trainE(Mat samples;Mat means0;Mat covs0=Mat();Mat weights0=Mat();Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_train_e"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainE(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat initialMeans,OpenCvSharp.Core.Mat[]? initialCovariances=null,OpenCvSharp.Core.Mat? initialWeights=null,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 120,
+          "upstreamIdentity": "cv.ml.EM.trainM(Mat samples;Mat probs0;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_train_m"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;instance|System.Boolean TrainM(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat initialProbabilities,OpenCvSharp.Core.Mat? logLikelihoods=null,OpenCvSharp.Core.Mat? labels=null,OpenCvSharp.Core.Mat? probabilities=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 121,
+          "upstreamIdentity": "cv.ml.EM.create()-\u003EPtr\u003CEM\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;static|OpenCvSharp.ML.EM Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 122,
+          "upstreamIdentity": "cv.ml.EM.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CEM\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_em_load"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.EM|method|public;static|OpenCvSharp.ML.EM Load(System.String filepath,System.String? nodeName=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
