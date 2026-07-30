@@ -205,6 +205,17 @@ if ($pagesConditionCount -ne 1) {
     Add-Violation -Violations $violations -Path ".github/workflows/docs.yml" -Issue "Pages deployment must remain authoritative-only and explicitly dispatched from main" -Text $authoritativePagesCondition
 }
 
+$authoritativeReleaseCondition = "if: github.repository == 'guojin-yan/OpenCV-CSharp-API'"
+foreach ($workflowPath in @(
+        ".github/workflows/pack.yml",
+        ".github/workflows/runtime-input.yml")) {
+    $workflowText = Normalize-CiText -Text (Read-RequiredText -RelativePath $workflowPath)
+    $conditionCount = [regex]::Matches($workflowText, [regex]::Escape($authoritativeReleaseCondition), [Text.RegularExpressions.RegexOptions]::IgnoreCase).Count
+    if ($conditionCount -ne 1) {
+        Add-Violation -Violations $violations -Path $workflowPath -Issue "Release and runtime-input workflow entry must remain authoritative-only" -Text $authoritativeReleaseCondition
+    }
+}
+
 $buildManagedWorkflowPath = ".github/workflows/build-managed.yml"
 $buildManagedWorkflowText = Read-RequiredText -RelativePath $buildManagedWorkflowPath
 if ((Get-TokenIndex -Text $buildManagedWorkflowText -Token "dotnet test") -ge 0) {

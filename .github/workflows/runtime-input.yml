@@ -21,6 +21,7 @@ permissions:
 
 jobs:
   validate-target:
+    if: github.repository == 'guojin-yan/OpenCV-CSharp-API'
     runs-on: ubuntu-24.04
     steps:
       - name: Validate real producer target
