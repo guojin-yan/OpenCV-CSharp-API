@@ -27,6 +27,17 @@ namespace OpenCvSharp.Tests.ML
             Assert.Equal(5, (int)SVMParamTypes.Degree);
             Assert.Equal(1, (int)StatModelFlags.RawOutput);
             Assert.Equal(4, (int)StatModelFlags.PreprocessedInput);
+            Assert.Equal(0, (int)ANN_MLPTrainingMethods.Backprop);
+            Assert.Equal(1, (int)ANN_MLPTrainingMethods.Rprop);
+            Assert.Equal(2, (int)ANN_MLPTrainingMethods.Anneal);
+            Assert.Equal(0, (int)ANN_MLPActivationFunctions.Identity);
+            Assert.Equal(1, (int)ANN_MLPActivationFunctions.SigmoidSym);
+            Assert.Equal(2, (int)ANN_MLPActivationFunctions.Gaussian);
+            Assert.Equal(3, (int)ANN_MLPActivationFunctions.Relu);
+            Assert.Equal(4, (int)ANN_MLPActivationFunctions.LeakyRelu);
+            Assert.Equal(1, (int)ANN_MLPTrainFlags.UpdateWeights);
+            Assert.Equal(2, (int)ANN_MLPTrainFlags.NoInputScale);
+            Assert.Equal(4, (int)ANN_MLPTrainFlags.NoOutputScale);
         }
 
         [Fact]
@@ -50,12 +61,14 @@ namespace OpenCvSharp.Tests.ML
                 Assert.Throws<ArgumentNullException>(() => KNearest.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => SVM.Load(null!));
                 Assert.Throws<ArgumentNullException>(() => NormalBayesClassifier.Load(null!));
+                Assert.Throws<ArgumentNullException>(() => ANN_MLP.Load(null!));
 
                 Assert.Throws<ArgumentException>(() => TrainData.LoadFromCsv("data\0file.csv", 0));
                 Assert.Throws<ArgumentException>(() => KNearest.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => SVM.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => NormalBayesClassifier.Load("model\0file.yml"));
                 Assert.Throws<ArgumentException>(() => NormalBayesClassifier.Load("model.yml", "node\0name"));
+                Assert.Throws<ArgumentException>(() => ANN_MLP.Load("model\0file.yml"));
             }
         }
 
@@ -158,6 +171,167 @@ namespace OpenCvSharp.Tests.ML
                 bayes.Dispose();
                 Assert.True(bayes.IsDisposed);
                 Assert.Throws<ObjectDisposedException>(() => bayes.Predict(samples));
+
+                ANN_MLP ann = ANN_MLP.Create();
+                ann.Dispose();
+                Assert.True(ann.IsDisposed);
+                Assert.Throws<ObjectDisposedException>(() => ann.SetActivationFunction(ANN_MLPActivationFunctions.Identity));
+                Assert.Throws<ObjectDisposedException>(() => ann.GetLayerSizes());
+                Assert.Throws<ObjectDisposedException>(() => ann.GetWeights(0));
+                Assert.Throws<ObjectDisposedException>(() => ann.SetAnnealEnergySeed(1));
+            }
+        }
+
+        [Fact]
+        public void AnnMlpDefaultsAndPropertiesRoundTripWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (var ann = ANN_MLP.Create())
+            using (Mat emptyLayers = ann.GetLayerSizes())
+            {
+                Assert.Throws<ArgumentOutOfRangeException>(() => ann.SetTrainMethod((ANN_MLPTrainingMethods)99));
+                Assert.Throws<ArgumentOutOfRangeException>(() => ann.SetActivationFunction((ANN_MLPActivationFunctions)99));
+                Assert.Throws<ArgumentNullException>(() => ann.SetLayerSizes(null!));
+                Assert.Throws<ArgumentNullException>(() => ann.GetLayerSizes(null!));
+                Assert.Throws<ArgumentNullException>(() => ann.GetWeights(0, null!));
+                Assert.Equal(ANN_MLPTrainingMethods.Rprop, ann.TrainingMethod);
+                Assert.True(emptyLayers.Empty);
+                Assert.Equal(TermCriteriaTypes.CountOrEps, ann.TermCriteria.Type);
+                Assert.Equal(1000, ann.TermCriteria.MaxCount);
+                Assert.Equal(0.01, ann.TermCriteria.Epsilon, 8);
+                Assert.Equal(0.1, ann.BackpropWeightScale, 8);
+                Assert.Equal(0.1, ann.BackpropMomentumScale, 8);
+                Assert.Equal(0.1, ann.RpropDW0, 8);
+                Assert.Equal(1.2, ann.RpropDWPlus, 8);
+                Assert.Equal(0.5, ann.RpropDWMinus, 8);
+                Assert.True(ann.RpropDWMin > 0.0);
+                Assert.Equal(50.0, ann.RpropDWMax, 8);
+                Assert.Equal(10.0, ann.AnnealInitialT, 8);
+                Assert.Equal(0.1, ann.AnnealFinalT, 8);
+                Assert.Equal(0.95, ann.AnnealCoolingRatio, 8);
+                Assert.Equal(10, ann.AnnealIterationsPerStep);
+
+                ann.BackpropWeightScale = 0.2;
+                ann.BackpropMomentumScale = 0.3;
+                ann.RpropDW0 = 0.15;
+                ann.RpropDWPlus = 1.3;
+                ann.RpropDWMinus = 0.4;
+                ann.RpropDWMin = 1e-5;
+                ann.RpropDWMax = 40.0;
+                ann.AnnealInitialT = 12.0;
+                ann.AnnealFinalT = 0.2;
+                ann.AnnealCoolingRatio = 0.9;
+                ann.AnnealIterationsPerStep = 12;
+                ann.TermCriteria = TermCriteria.ByCountAndEpsilon(250, 1e-5);
+                ann.SetAnnealEnergySeed(0xffffffffUL);
+
+                Assert.Equal(0.2, ann.BackpropWeightScale, 8);
+                Assert.Equal(0.3, ann.BackpropMomentumScale, 8);
+                Assert.Equal(0.15, ann.RpropDW0, 8);
+                Assert.Equal(1.3, ann.RpropDWPlus, 8);
+                Assert.Equal(0.4, ann.RpropDWMinus, 8);
+                Assert.Equal(1e-5, ann.RpropDWMin, 12);
+                Assert.Equal(40.0, ann.RpropDWMax, 8);
+                Assert.Equal(12.0, ann.AnnealInitialT, 8);
+                Assert.Equal(0.2, ann.AnnealFinalT, 8);
+                Assert.Equal(0.9, ann.AnnealCoolingRatio, 8);
+                Assert.Equal(12, ann.AnnealIterationsPerStep);
+                Assert.Equal(TermCriteria.ByCountAndEpsilon(250, 1e-5), ann.TermCriteria);
+
+                ann.SetTrainMethod(ANN_MLPTrainingMethods.Backprop, 0.25, 0.35);
+                Assert.Equal(ANN_MLPTrainingMethods.Backprop, ann.TrainingMethod);
+                Assert.Equal(0.25, ann.BackpropWeightScale, 8);
+                Assert.Equal(0.35, ann.BackpropMomentumScale, 8);
+
+                ann.SetTrainMethod(ANN_MLPTrainingMethods.Rprop, 0.2, 1e-6);
+                Assert.Equal(ANN_MLPTrainingMethods.Rprop, ann.TrainingMethod);
+                Assert.Equal(0.2, ann.RpropDW0, 8);
+                Assert.Equal(1e-6, ann.RpropDWMin, 12);
+            }
+        }
+
+        [Fact]
+        public void AnnMlpTrainingWeightsAndPersistenceRunWhenNativeSmokeIsEnabled()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            string modelDir = TestEnvironment.GetMlModelDirVariable() ?? Path.GetTempPath();
+            string modelPath = Path.Combine(modelDir, "opencv-csharp-ml-ann-mlp-smoke.yml");
+            using (var samples = CreateAnnSamples())
+            using (var responses = CreateAnnResponses())
+            using (var query = new Mat(1, 2, MatType.CV_32FC1))
+            using (var layers = new Mat(1, 3, MatType.CV_32SC1))
+            using (var trainData = TrainData.Create(samples, SampleTypes.RowSample, responses))
+            using (var ann = ANN_MLP.Create())
+            using (var predictions = new Mat())
+            {
+                query.CopyFrom<float>(new float[] { 0.25F, -0.5F });
+                layers.CopyFrom<int>(new int[] { 2, 4, 1 });
+                ann.SetLayerSizes(layers);
+                ann.SetActivationFunction(ANN_MLPActivationFunctions.Identity);
+                ann.SetTrainMethod(ANN_MLPTrainingMethods.Rprop, 0.1, 1e-6);
+                ann.TermCriteria = TermCriteria.ByCountAndEpsilon(300, 1e-6);
+
+                Assert.True(ann.Train(trainData, ANN_MLPTrainFlags.NoInputScale | ANN_MLPTrainFlags.NoOutputScale));
+                Assert.True(ann.IsTrained);
+                Assert.False(ann.IsClassifier);
+                Assert.Equal(2, ann.VarCount);
+                float prediction = ann.Predict(query, predictions);
+                Assert.False(float.IsNaN(prediction));
+                Assert.False(float.IsInfinity(prediction));
+                Assert.Equal(1, predictions.Rows);
+                Assert.Equal(1, predictions.Cols);
+
+                using (Mat returnedLayers = ann.GetLayerSizes())
+                using (Mat firstWeights = ann.GetWeights(1))
+                {
+                    Assert.Equal(new int[] { 2, 4, 1 }, returnedLayers.ToArray<int>());
+                    Assert.False(firstWeights.Empty);
+                    double[] nativeWeights = firstWeights.ToArray<double>();
+                    firstWeights.SetTo(new Scalar(0.0));
+                    using (Mat secondWeights = ann.GetWeights(1))
+                    {
+                        Assert.Equal(nativeWeights, secondWeights.ToArray<double>());
+                    }
+                }
+
+                ann.Save(modelPath);
+            }
+
+            try
+            {
+                using (var query = new Mat(1, 2, MatType.CV_32FC1))
+                using (var loadedResults = new Mat())
+                using (var loaded = ANN_MLP.Load(modelPath))
+                {
+                    query.CopyFrom<float>(new float[] { 0.25F, -0.5F });
+                    Assert.True(loaded.IsTrained);
+                    float loadedPrediction = loaded.Predict(query, loadedResults);
+                    Assert.False(float.IsNaN(loadedPrediction));
+                    Assert.False(float.IsInfinity(loadedPrediction));
+                    Assert.Equal(1, loadedResults.Rows);
+                    Assert.Equal(1, loadedResults.Cols);
+                }
+            }
+            finally
+            {
+                try
+                {
+                    File.Delete(modelPath);
+                }
+                catch (IOException)
+                {
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
             }
         }
 
@@ -337,6 +511,28 @@ namespace OpenCvSharp.Tests.ML
         {
             var responses = new Mat(6, 1, MatType.CV_32SC1);
             responses.CopyFrom<int>(new int[] { 0, 0, 0, 1, 1, 1 });
+            return responses;
+        }
+
+        private static Mat CreateAnnSamples()
+        {
+            var samples = new Mat(6, 2, MatType.CV_32FC1);
+            samples.CopyFrom<float>(new float[]
+            {
+                -1.0F, -1.0F,
+                -1.0F, 1.0F,
+                1.0F, -1.0F,
+                1.0F, 1.0F,
+                0.5F, -0.5F,
+                -0.5F, 0.5F
+            });
+            return samples;
+        }
+
+        private static Mat CreateAnnResponses()
+        {
+            var responses = new Mat(6, 1, MatType.CV_32FC1);
+            responses.CopyFrom<float>(new float[] { -2.0F, 0.0F, 0.0F, 2.0F, 0.0F, 0.0F });
             return responses;
         }
 

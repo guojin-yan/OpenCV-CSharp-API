@@ -7,6 +7,7 @@
 #include "open_cv_sharp/calib3d/calib3d.h"
 #include "open_cv_sharp/dnn/dnn.h"
 #include "open_cv_sharp/features2d/features2d.h"
+#include "open_cv_sharp/ml/ml.h"
 #include "open_cv_sharp/objdetect/aruco.h"
 #include "open_cv_sharp/objdetect/objdetect.h"
 #include "open_cv_sharp/photo/photo.h"
@@ -159,6 +160,12 @@ namespace
     {
         jyppx_ocv_video_tracker* value = nullptr;
         ~NativeVideoTrackerHandle() { jyppx_ocv_video_tracker_release_handle(value); }
+    };
+
+    struct NativeMlModelHandle
+    {
+        jyppx_ocv_ml_model* value = nullptr;
+        ~NativeMlModelHandle() { jyppx_ocv_ml_model_release_handle(value); }
     };
 
     struct NativeAnnIndexHandle
@@ -3534,6 +3541,107 @@ namespace
 
         return 0;
     }
+
+    int run_ml_ann_mlp_smoke()
+    {
+        NativeMlModelHandle model;
+        if (jyppx_ocv_ml_ann_mlp_create(&model.value) != OPENCV_CSHARP_STATUS_OK || model.value == nullptr)
+        {
+            return 800;
+        }
+
+        int train_method = -1;
+        double value = 0.0;
+        if (jyppx_ocv_ml_ann_mlp_get_int(model.value, 0, &train_method) != OPENCV_CSHARP_STATUS_OK || train_method != 1 ||
+            jyppx_ocv_ml_ann_mlp_get_double(model.value, 2, &value) != OPENCV_CSHARP_STATUS_OK || std::fabs(value - 0.1) > 1e-12 ||
+            jyppx_ocv_ml_ann_mlp_set_train_method(model.value, 1, 0.1, 1e-6) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_activation_function(model.value, 0, 0.0, 0.0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_double(model.value, 7, 12.0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_double(model.value, 8, 0.2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_double(model.value, 9, 0.9) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_int(model.value, 1, 12) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_term_criteria(model.value, 3, 200, 1e-6) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed(model.value, 0xffffffffULL) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 801;
+        }
+
+        NativeMatHandle layers;
+        NativeMatHandle returned_layers;
+        if (jyppx_ocv_mat_create(1, 3, 4, layers.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(returned_layers.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 802;
+        }
+        unsigned char* bytes = nullptr;
+        const int layer_values[] = { 2, 4, 1 };
+        if (jyppx_ocv_mat_data(layers.get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr)
+        {
+            return 803;
+        }
+        std::memcpy(bytes, layer_values, sizeof(layer_values));
+        if (jyppx_ocv_ml_ann_mlp_set_layer_sizes(model.value, layers.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_ann_mlp_get_layer_sizes(model.value, returned_layers.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 804;
+        }
+
+        int total_layers = 0;
+        size_t returned_total = 0;
+        if (jyppx_ocv_mat_total(returned_layers.get(), &returned_total) != OPENCV_CSHARP_STATUS_OK || returned_total != 3 ||
+            jyppx_ocv_ml_ann_mlp_get_int(model.value, 1, &total_layers) != OPENCV_CSHARP_STATUS_OK || total_layers != 12)
+        {
+            return 805;
+        }
+
+        NativeMatHandle samples;
+        NativeMatHandle responses;
+        NativeMatHandle query;
+        NativeMatHandle results;
+        if (jyppx_ocv_mat_create(4, 2, 5, samples.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(4, 1, 5, responses.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create(1, 2, 5, query.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(results.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 806;
+        }
+        const float sample_values[] = { -1.0F, -1.0F, -1.0F, 1.0F, 1.0F, -1.0F, 1.0F, 1.0F };
+        const float response_values[] = { -2.0F, 0.0F, 0.0F, 2.0F };
+        const float query_values[] = { 0.25F, -0.5F };
+        if (jyppx_ocv_mat_data(samples.get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr)
+        {
+            return 807;
+        }
+        std::memcpy(bytes, sample_values, sizeof(sample_values));
+        if (jyppx_ocv_mat_data(responses.get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr)
+        {
+            return 808;
+        }
+        std::memcpy(bytes, response_values, sizeof(response_values));
+        if (jyppx_ocv_mat_data(query.get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr)
+        {
+            return 809;
+        }
+        std::memcpy(bytes, query_values, sizeof(query_values));
+
+        int trained = 0;
+        float prediction = 0.0F;
+        NativeMatHandle weights;
+        if (jyppx_ocv_mat_create_empty(weights.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_ml_stat_model_train_samples(model.value, samples.get(), 0, responses.get(), &trained) != OPENCV_CSHARP_STATUS_OK || trained != 1 ||
+            jyppx_ocv_ml_stat_model_predict(model.value, query.get(), results.get(), 0, &prediction) != OPENCV_CSHARP_STATUS_OK || !std::isfinite(prediction) ||
+            jyppx_ocv_ml_ann_mlp_get_weights(model.value, 1, weights.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 810;
+        }
+        size_t weight_count = 0;
+        if (jyppx_ocv_mat_total(weights.get(), &weight_count) != OPENCV_CSHARP_STATUS_OK || weight_count == 0)
+        {
+            return 811;
+        }
+
+        return 0;
+    }
 #endif
 }
 
@@ -3614,6 +3722,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return photo_final_callables_status;
+        }
+
+        int ml_ann_mlp_status = run_ml_ann_mlp_smoke();
+        if (ml_ann_mlp_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return ml_ann_mlp_status;
         }
 #endif
 
@@ -4968,6 +5083,14 @@ int main()
 
     if (status == OPENCV_CSHARP_STATUS_NOT_LINKED)
     {
+#if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+        jyppx_ocv_ml_model* ann = nullptr;
+        if (jyppx_ocv_ml_ann_mlp_create(&ann) != OPENCV_CSHARP_STATUS_NOT_LINKED || ann != nullptr)
+        {
+            jyppx_ocv_ml_model_release_handle(ann);
+            return 812;
+        }
+#endif
         const char* error = jyppx_ocv_get_last_error();
         return error != nullptr && std::strlen(error) > 0 ? 0 : 12;
     }

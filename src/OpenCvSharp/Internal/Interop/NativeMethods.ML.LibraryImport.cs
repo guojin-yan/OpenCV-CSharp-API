@@ -146,6 +146,48 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_normal_bayes_classifier_predict_prob")]
         internal static partial int MlNormalBayesClassifierPredictProb(IntPtr model, IntPtr inputs, IntPtr outputs, IntPtr outputProbs, int flags, out float value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_create")]
+        internal static partial int MlAnnMlpCreate(out IntPtr model);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_load")]
+        internal static partial int MlAnnMlpLoad(byte[] filepath, out IntPtr model);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_int")]
+        internal static partial int MlAnnMlpGetInt(IntPtr model, int propertyId, out int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_int")]
+        internal static partial int MlAnnMlpSetInt(IntPtr model, int propertyId, int value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_double")]
+        internal static partial int MlAnnMlpGetDouble(IntPtr model, int propertyId, out double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_double")]
+        internal static partial int MlAnnMlpSetDouble(IntPtr model, int propertyId, double value);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_train_method")]
+        internal static partial int MlAnnMlpSetTrainMethod(IntPtr model, int method, double param1, double param2);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_activation_function")]
+        internal static partial int MlAnnMlpSetActivationFunction(IntPtr model, int type, double param1, double param2);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_layer_sizes")]
+        internal static partial int MlAnnMlpGetLayerSizes(IntPtr model, IntPtr dst);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_layer_sizes")]
+        internal static partial int MlAnnMlpSetLayerSizes(IntPtr model, IntPtr layerSizes);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_term_criteria")]
+        internal static partial int MlAnnMlpGetTermCriteria(IntPtr model, out int type, out int maxCount, out double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_term_criteria")]
+        internal static partial int MlAnnMlpSetTermCriteria(IntPtr model, int type, int maxCount, double epsilon);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_weights")]
+        internal static partial int MlAnnMlpGetWeights(IntPtr model, int layerIndex, IntPtr dst);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed")]
+        internal static partial int MlAnnMlpSetAnnealEnergySeed(IntPtr model, ulong seed);
     }
 }
 #endif

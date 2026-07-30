@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 4,
+  "managedPublicMemberAdditionCount": 39,
+  "nativeEntrypointAdditionCount": 14,
+  "families": [
+    {
+      "id": "ml-ann-mlp",
+      "rationale": "The selected batch closes all 32 parser-emitted ANN_MLP callables with offline training, prediction, copied topology and weight matrices, typed configuration, persistence, and deterministic disposal.",
+      "declarations": [
+        {
+          "ordinal": 168,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setTrainMethod(int method;double param1=0;double param2=0)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_train_method"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetTrainMethod(OpenCvSharp.ML.ANN_MLPTrainingMethods method,System.Double param1=0,System.Double param2=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 169,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getTrainMethod()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public|OpenCvSharp.ML.ANN_MLPTrainingMethods TrainingMethod"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 170,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setActivationFunction(int type;double param1=0;double param2=0)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_activation_function"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetActivationFunction(OpenCvSharp.ML.ANN_MLPActivationFunctions type,System.Double param1=0,System.Double param2=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 171,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setLayerSizes(Mat _layer_sizes)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_layer_sizes"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetLayerSizes(OpenCvSharp.Core.Mat layerSizes)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 172,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getLayerSizes()-\u003Ecv::Mat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_layer_sizes"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|OpenCvSharp.Core.Mat GetLayerSizes()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 173,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getTermCriteria()-\u003ETermCriteria",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 174,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setTermCriteria(TermCriteria val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 175,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getBackpropWeightScale()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 176,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setBackpropWeightScale(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 177,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getBackpropMomentumScale()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 178,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setBackpropMomentumScale(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 179,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getRpropDW0()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 180,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setRpropDW0(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 181,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getRpropDWPlus()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 182,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setRpropDWPlus(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 183,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getRpropDWMinus()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 184,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setRpropDWMinus(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 185,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getRpropDWMin()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 186,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setRpropDWMin(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 187,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getRpropDWMax()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 188,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setRpropDWMax(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 189,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getAnnealInitialT()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 190,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setAnnealInitialT(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 191,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getAnnealFinalT()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 192,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setAnnealFinalT(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 193,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getAnnealCoolingRatio()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 194,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setAnnealCoolingRatio(double val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_double"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 195,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getAnnealItePerStep()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 196,
+          "upstreamIdentity": "cv.ml.ANN_MLP.setAnnealItePerStep(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_set_int"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 199,
+          "upstreamIdentity": "cv.ml.ANN_MLP.getWeights(int layerIdx)-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_get_weights"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|OpenCvSharp.Core.Mat GetWeights(System.Int32 layerIndex)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 200,
+          "upstreamIdentity": "cv.ml.ANN_MLP.create()-\u003EPtr\u003CANN_MLP\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        },
+        {
+          "ordinal": 201,
+          "upstreamIdentity": "cv.ml.ANN_MLP.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CANN_MLP\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_ml_ann_mlp_load"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Load(System.String filepath)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/ML/MLTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/ml-guide.md"
+        }
+      ]
+    }
+  ],
+  "sourceReviewedExtensions": [
+    {
+      "upstreamIdentity": "cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG\u0026 rng)-\u003Evoid",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "adaptation": "The non-CV_WRAP C\u002B\u002B RNG parameter is represented as a stable unsigned 64-bit seed; it is intentionally excluded from parser-derived counts.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetAnnealEnergySeed(System.UInt64 seed)"
+      ]
+    }
+  ]
+}

@@ -256,6 +256,7 @@ internal static class Program
     private static readonly Action<Mat[], Mat, double, int> DenoiseTvl1 = PhotoCv2.DenoiseTvl1;
     private static readonly Action<Mat, Mat, Mat, Size, int, int> CorrectChromaticAberration = PhotoCv2.CorrectChromaticAberration;
     private static readonly Func<FileNode, OpenCvSharp.Photo.ChromaticAberrationParameters> LoadChromaticAberrationParams = PhotoCv2.LoadChromaticAberrationParams;
+    private static readonly Func<OpenCvSharp.ML.ANN_MLP> CreateAnnMlp = OpenCvSharp.ML.ANN_MLP.Create;
 
     private static readonly Type[] RepresentativeTypes =
     {
@@ -303,6 +304,7 @@ internal static class Program
         typeof(OpenCvSharp.VideoIO.VideoCapture),
         typeof(OpenCvSharp.VideoIO.VideoWriter),
         typeof(OpenCvSharp.ML.SVM),
+        typeof(OpenCvSharp.ML.ANN_MLP),
         typeof(OpenCvSharp.Stitching.Stitcher),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
@@ -337,6 +339,9 @@ internal static class Program
         default(OpenCvSharp.Video.OpticalFlowFlags),
         default(OpenCvSharp.VideoIO.VideoCaptureAPIs),
         default(OpenCvSharp.ML.SVMTypes),
+        default(OpenCvSharp.ML.ANN_MLPTrainingMethods),
+        default(OpenCvSharp.ML.ANN_MLPActivationFunctions),
+        default(OpenCvSharp.ML.ANN_MLPTrainFlags),
         default(OpenCvSharp.Stitching.StitcherMode),
         default(OpenCvSharp.Geometry.DistanceTypes)
     };

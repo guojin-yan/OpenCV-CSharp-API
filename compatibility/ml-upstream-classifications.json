@@ -1,0 +1,2655 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/ml/ml.hpp compatibility include measured through the parser-emitted OpenCV 5.0.0 contrib ML public source header",
+  "reviewStatus": "source-reviewed",
+  "limitation": "The map covers only the exact OpenCV 5.0.0 contrib ML compatibility include closure. Missing algorithms remain explicit gaps, and repository-wide parity is not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.ml.VariableTypes[const cv.ml.VAR_NUMERICAL=0;const cv.ml.VAR_ORDERED=0;const cv.ml.VAR_CATEGORICAL=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.ml.ErrorTypes[const cv.ml.TEST_ERROR=0;const cv.ml.TRAIN_ERROR=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.ml.SampleTypes[const cv.ml.ROW_SAMPLE=0;const cv.ml.COL_SAMPLE=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "class cv.ml.ParamGrid",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "cv.ml.ParamGrid.create(double minVal=0.;double maxVal=0.;double logstep=1.)-\u003EPtr\u003CParamGrid\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_param_grid_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ParamGrid|constructor|public;instance|.ctor(System.Double minVal=0,System.Double maxVal=0,System.Double logStep=1)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "identity": "class cv.ml.TrainData",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "cv.ml.TrainData.getLayout()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|OpenCvSharp.ML.SampleTypes Layout"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.ml.TrainData.getNTrainSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NTrainSamples"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.ml.TrainData.getNTestSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NTestSamples"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.ml.TrainData.getNSamples()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NSamples"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.ml.TrainData.getNVars()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NVars"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.ml.TrainData.getNAllVars()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|System.Int32 NAllVars"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.ml.TrainData.getSample(Mat varIdx;int sidx;float* buf)-\u003Evoid",
+      "classification": "missing",
+      "reason": "This TrainData pointer-buffer callable has no current stable span or caller-buffer ABI contract and remains an explicit full-profile gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.ml.TrainData.getSamples()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetSamples()"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.ml.TrainData.getMissing()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetMissing()"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.ml.TrainData.getTrainSamples(int layout=ROW_SAMPLE;bool compressSamples=true;bool compressVars=true)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTrainSamples(OpenCvSharp.ML.SampleTypes layout=RowSample,System.Boolean compressSamples=true,System.Boolean compressVars=true)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.ml.TrainData.getTrainResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTrainResponses()"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.ml.TrainData.getTrainNormCatResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTrainNormCatResponses()"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.ml.TrainData.getTestResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTestResponses()"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.ml.TrainData.getTestNormCatResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTestNormCatResponses()"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.ml.TrainData.getResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetResponses()"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.ml.TrainData.getNormCatResponses()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetNormCatResponses()"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.ml.TrainData.getSampleWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetSampleWeights()"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.ml.TrainData.getTrainSampleWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTrainSampleWeights()"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.ml.TrainData.getTestSampleWeights()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTestSampleWeights()"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.ml.TrainData.getVarIdx()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetVarIdx()"
+      ]
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.ml.TrainData.getVarType()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetVarType()"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.ml.TrainData.getVarSymbolFlags()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetVarSymbolFlags()"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.ml.TrainData.getResponseType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|property|instance;get:public|OpenCvSharp.ML.MlVariableType ResponseType"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.ml.TrainData.getTrainSampleIdx()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTrainSampleIdx()"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.ml.TrainData.getTestSampleIdx()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTestSampleIdx()"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.ml.TrainData.getValues(int vi;Mat sidx;float* values)-\u003Evoid",
+      "classification": "missing",
+      "reason": "This TrainData pointer-buffer callable has no current stable span or caller-buffer ABI contract and remains an explicit full-profile gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.ml.TrainData.getDefaultSubstValues()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetDefaultSubstValues()"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "identity": "cv.ml.TrainData.getCatCount(int vi)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Int32 GetCatCount(System.Int32 variableIndex)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "identity": "cv.ml.TrainData.getClassLabels()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetClassLabels()"
+      ]
+    },
+    {
+      "ordinal": 35,
+      "identity": "cv.ml.TrainData.getCatOfs()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetCatOfs()"
+      ]
+    },
+    {
+      "ordinal": 36,
+      "identity": "cv.ml.TrainData.getCatMap()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetCatMap()"
+      ]
+    },
+    {
+      "ordinal": 37,
+      "identity": "cv.ml.TrainData.setTrainTestSplit(int count;bool shuffle=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_set_train_test_split"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void SetTrainTestSplit(System.Int32 count,System.Boolean shuffle=true)"
+      ]
+    },
+    {
+      "ordinal": 38,
+      "identity": "cv.ml.TrainData.setTrainTestSplitRatio(double ratio;bool shuffle=true)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_set_train_test_split_ratio"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void SetTrainTestSplitRatio(System.Double ratio,System.Boolean shuffle=true)"
+      ]
+    },
+    {
+      "ordinal": 39,
+      "identity": "cv.ml.TrainData.shuffleTrainTest()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_shuffle_train_test"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Void ShuffleTrainTest()"
+      ]
+    },
+    {
+      "ordinal": 40,
+      "identity": "cv.ml.TrainData.getTestSamples()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_mat"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|OpenCvSharp.Core.Mat GetTestSamples()"
+      ]
+    },
+    {
+      "ordinal": 41,
+      "identity": "cv.ml.TrainData.getNames(vector_String names[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_names_count",
+        "jyppx_ocv_ml_train_data_get_names_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.String[] GetNames()"
+      ]
+    },
+    {
+      "ordinal": 42,
+      "identity": "cv.ml.TrainData.getSubVector(Mat vec[/C,/Ref];Mat idx[/C,/Ref])-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_sub_vector"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;static|OpenCvSharp.Core.Mat GetSubVector(OpenCvSharp.Core.Mat vec,OpenCvSharp.Core.Mat idx)"
+      ]
+    },
+    {
+      "ordinal": 43,
+      "identity": "cv.ml.TrainData.getSubMatrix(Mat matrix[/C,/Ref];Mat idx[/C,/Ref];int layout)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_get_sub_matrix"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;static|OpenCvSharp.Core.Mat GetSubMatrix(OpenCvSharp.Core.Mat matrix,OpenCvSharp.Core.Mat idx,OpenCvSharp.ML.SampleTypes layout)"
+      ]
+    },
+    {
+      "ordinal": 44,
+      "identity": "cv.ml.TrainData.create(Mat samples;int layout;Mat responses;Mat varIdx=Mat();Mat sampleIdx=Mat();Mat sampleWeights=Mat();Mat varType=Mat())-\u003EPtr\u003CTrainData\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_train_data_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.TrainData|method|public;static|OpenCvSharp.ML.TrainData Create(OpenCvSharp.Core.Mat samples,OpenCvSharp.ML.SampleTypes layout,OpenCvSharp.Core.Mat responses,OpenCvSharp.Core.Mat? varIdx=null,OpenCvSharp.Core.Mat? sampleIdx=null,OpenCvSharp.Core.Mat? sampleWeights=null,OpenCvSharp.Core.Mat? varType=null)"
+      ]
+    },
+    {
+      "ordinal": 45,
+      "identity": "class cv.ml.StatModel",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "identity": "enum cv.ml.StatModel.Flags[const cv.ml.StatModel.UPDATE_MODEL=1;const cv.ml.StatModel.RAW_OUTPUT=1;const cv.ml.StatModel.COMPRESSED_INPUT=2;const cv.ml.StatModel.PREPROCESSED_INPUT=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "identity": "cv.ml.StatModel.getVarCount()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|property|instance;get:public|System.Int32 VarCount"
+      ]
+    },
+    {
+      "ordinal": 48,
+      "identity": "cv.ml.StatModel.empty()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|property|instance;get:public|System.Boolean Empty"
+      ]
+    },
+    {
+      "ordinal": 49,
+      "identity": "cv.ml.StatModel.isTrained()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|property|instance;get:public|System.Boolean IsTrained"
+      ]
+    },
+    {
+      "ordinal": 50,
+      "identity": "cv.ml.StatModel.isClassifier()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|property|instance;get:public|System.Boolean IsClassifier"
+      ]
+    },
+    {
+      "ordinal": 51,
+      "identity": "cv.ml.StatModel.train(Ptr_TrainData trainData[/C,/Ref];int flags=0)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_train_data"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Boolean Train(OpenCvSharp.ML.TrainData trainData,OpenCvSharp.ML.StatModelFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 52,
+      "identity": "cv.ml.StatModel.train(Mat samples;int layout;Mat responses)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_train_samples"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Boolean Train(OpenCvSharp.Core.Mat samples,OpenCvSharp.ML.SampleTypes layout,OpenCvSharp.Core.Mat responses)"
+      ]
+    },
+    {
+      "ordinal": 53,
+      "identity": "cv.ml.StatModel.calcError(Ptr_TrainData data[/C,/Ref];bool test;Mat resp[/O])-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_calc_error"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Single CalcError(OpenCvSharp.ML.TrainData data,System.Boolean test,OpenCvSharp.Core.Mat? responses=null)"
+      ]
+    },
+    {
+      "ordinal": 54,
+      "identity": "cv.ml.StatModel.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_stat_model_predict"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.StatModel|method|public;instance|System.Single Predict(OpenCvSharp.Core.Mat samples,OpenCvSharp.Core.Mat? results=null,OpenCvSharp.ML.StatModelFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 55,
+      "identity": "class cv.ml.NormalBayesClassifier",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "identity": "cv.ml.NormalBayesClassifier.predictProb(Mat inputs;Mat outputs[/O];Mat outputProbs[/O];int flags=0)-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_normal_bayes_classifier_predict_prob"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.NormalBayesClassifier|method|public;instance|System.Single PredictProb(OpenCvSharp.Core.Mat inputs,OpenCvSharp.Core.Mat outputs,OpenCvSharp.Core.Mat outputProbs,OpenCvSharp.ML.StatModelFlags flags=None)"
+      ]
+    },
+    {
+      "ordinal": 57,
+      "identity": "cv.ml.NormalBayesClassifier.create()-\u003EPtr\u003CNormalBayesClassifier\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_normal_bayes_classifier_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.NormalBayesClassifier|method|public;static|OpenCvSharp.ML.NormalBayesClassifier Create()"
+      ]
+    },
+    {
+      "ordinal": 58,
+      "identity": "cv.ml.NormalBayesClassifier.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CNormalBayesClassifier\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_normal_bayes_classifier_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.NormalBayesClassifier|method|public;static|OpenCvSharp.ML.NormalBayesClassifier Load(System.String filepath,System.String? nodeName=null)"
+      ]
+    },
+    {
+      "ordinal": 59,
+      "identity": "class cv.ml.KNearest",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "identity": "cv.ml.KNearest.getDefaultK()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 DefaultK"
+      ]
+    },
+    {
+      "ordinal": 61,
+      "identity": "cv.ml.KNearest.setDefaultK(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 DefaultK"
+      ]
+    },
+    {
+      "ordinal": 62,
+      "identity": "cv.ml.KNearest.getIsClassifier()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Boolean IsClassifierModel"
+      ]
+    },
+    {
+      "ordinal": 63,
+      "identity": "cv.ml.KNearest.setIsClassifier(bool val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Boolean IsClassifierModel"
+      ]
+    },
+    {
+      "ordinal": 64,
+      "identity": "cv.ml.KNearest.getEmax()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 Emax"
+      ]
+    },
+    {
+      "ordinal": 65,
+      "identity": "cv.ml.KNearest.setEmax(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|System.Int32 Emax"
+      ]
+    },
+    {
+      "ordinal": 66,
+      "identity": "cv.ml.KNearest.getAlgorithmType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|OpenCvSharp.ML.KNearestTypes AlgorithmType"
+      ]
+    },
+    {
+      "ordinal": 67,
+      "identity": "cv.ml.KNearest.setAlgorithmType(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|property|instance;get:public;set:public|OpenCvSharp.ML.KNearestTypes AlgorithmType"
+      ]
+    },
+    {
+      "ordinal": 68,
+      "identity": "cv.ml.KNearest.findNearest(Mat samples;int k;Mat results[/O];Mat neighborResponses=Mat()[/O];Mat dist=Mat()[/O])-\u003Efloat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_find_nearest"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|method|public;instance|System.Single FindNearest(OpenCvSharp.Core.Mat samples,System.Int32 k,OpenCvSharp.Core.Mat results,OpenCvSharp.Core.Mat? neighborResponses=null,OpenCvSharp.Core.Mat? dist=null)"
+      ]
+    },
+    {
+      "ordinal": 69,
+      "identity": "enum cv.ml.KNearest.Types[const cv.ml.KNearest.BRUTE_FORCE=1;const cv.ml.KNearest.KDTREE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "identity": "cv.ml.KNearest.create()-\u003EPtr\u003CKNearest\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|method|public;static|OpenCvSharp.ML.KNearest Create()"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "identity": "cv.ml.KNearest.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CKNearest\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_knearest_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.KNearest|method|public;static|OpenCvSharp.ML.KNearest Load(System.String filepath)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "identity": "class cv.ml.SVM",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 73,
+      "identity": "cv.ml.SVM.getType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|OpenCvSharp.ML.SVMTypes Type"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "identity": "cv.ml.SVM.setType(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|OpenCvSharp.ML.SVMTypes Type"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "identity": "cv.ml.SVM.getGamma()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Gamma"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "identity": "cv.ml.SVM.setGamma(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Gamma"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "identity": "cv.ml.SVM.getCoef0()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Coef0"
+      ]
+    },
+    {
+      "ordinal": 78,
+      "identity": "cv.ml.SVM.setCoef0(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Coef0"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "identity": "cv.ml.SVM.getDegree()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Degree"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "identity": "cv.ml.SVM.setDegree(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Degree"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "identity": "cv.ml.SVM.getC()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double C"
+      ]
+    },
+    {
+      "ordinal": 82,
+      "identity": "cv.ml.SVM.setC(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double C"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "identity": "cv.ml.SVM.getNu()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Nu"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "identity": "cv.ml.SVM.setNu(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double Nu"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "identity": "cv.ml.SVM.getP()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double P"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "identity": "cv.ml.SVM.setP(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double P"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "identity": "cv.ml.SVM.getClassWeights()-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_class_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|OpenCvSharp.Core.Mat GetClassWeights()"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "identity": "cv.ml.SVM.setClassWeights(Mat val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_class_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|System.Void SetClassWeights(OpenCvSharp.Core.Mat weights)"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "identity": "cv.ml.SVM.getTermCriteria()-\u003Ecv::TermCriteria",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "identity": "cv.ml.SVM.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "identity": "cv.ml.SVM.getKernelType()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public|OpenCvSharp.ML.SVMKernelTypes KernelType"
+      ]
+    },
+    {
+      "ordinal": 92,
+      "identity": "cv.ml.SVM.setKernel(int kernelType)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|System.Void SetKernel(OpenCvSharp.ML.SVMKernelTypes kernelType)"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "identity": "enum cv.ml.SVM.Types[const cv.ml.SVM.C_SVC=100;const cv.ml.SVM.NU_SVC=101;const cv.ml.SVM.ONE_CLASS=102;const cv.ml.SVM.EPS_SVR=103;const cv.ml.SVM.NU_SVR=104]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 94,
+      "identity": "enum cv.ml.SVM.KernelTypes[const cv.ml.SVM.CUSTOM=-1;const cv.ml.SVM.LINEAR=0;const cv.ml.SVM.POLY=1;const cv.ml.SVM.RBF=2;const cv.ml.SVM.SIGMOID=3;const cv.ml.SVM.CHI2=4;const cv.ml.SVM.INTER=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 95,
+      "identity": "enum cv.ml.SVM.ParamTypes[const cv.ml.SVM.C=0;const cv.ml.SVM.GAMMA=1;const cv.ml.SVM.P=2;const cv.ml.SVM.NU=3;const cv.ml.SVM.COEF=4;const cv.ml.SVM.DEGREE=5]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 96,
+      "identity": "cv.ml.SVM.trainAuto(Mat samples;int layout;Mat responses;int kFold=10;Ptr_ParamGrid Cgrid=SVM::getDefaultGridPtr(SVM::C);Ptr_ParamGrid gammaGrid=SVM::getDefaultGridPtr(SVM::GAMMA);Ptr_ParamGrid pGrid=SVM::getDefaultGridPtr(SVM::P);Ptr_ParamGrid nuGrid=SVM::getDefaultGridPtr(SVM::NU);Ptr_ParamGrid coeffGrid=SVM::getDefaultGridPtr(SVM::COEF);Ptr_ParamGrid degreeGrid=SVM::getDefaultGridPtr(SVM::DEGREE);bool balanced=false)-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_train_auto"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|System.Boolean TrainAuto(OpenCvSharp.Core.Mat samples,OpenCvSharp.ML.SampleTypes layout,OpenCvSharp.Core.Mat responses,System.Int32 kFold=10,OpenCvSharp.ML.ParamGrid? cGrid=null,OpenCvSharp.ML.ParamGrid? gammaGrid=null,OpenCvSharp.ML.ParamGrid? pGrid=null,OpenCvSharp.ML.ParamGrid? nuGrid=null,OpenCvSharp.ML.ParamGrid? coeffGrid=null,OpenCvSharp.ML.ParamGrid? degreeGrid=null,System.Boolean balanced=false)"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "identity": "cv.ml.SVM.getSupportVectors()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_support_vectors"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|OpenCvSharp.Core.Mat GetSupportVectors()"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "identity": "cv.ml.SVM.getUncompressedSupportVectors()-\u003EMat",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_uncompressed_support_vectors"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|OpenCvSharp.Core.Mat GetUncompressedSupportVectors()"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "identity": "cv.ml.SVM.getDecisionFunction(int i;Mat alpha[/O];Mat svidx[/O])-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_decision_function"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|System.Double GetDecisionFunction(System.Int32 index,OpenCvSharp.Core.Mat? alpha=null,OpenCvSharp.Core.Mat? svidx=null)"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "identity": "cv.ml.SVM.getDefaultGridPtr(int param_id)-\u003EPtr\u003CParamGrid\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_get_default_grid"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;static|OpenCvSharp.ML.ParamGrid GetDefaultGrid(OpenCvSharp.ML.SVMParamTypes paramType)"
+      ]
+    },
+    {
+      "ordinal": 101,
+      "identity": "cv.ml.SVM.create()-\u003EPtr\u003CSVM\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;static|OpenCvSharp.ML.SVM Create()"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "identity": "cv.ml.SVM.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CSVM\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral native and managed ML surface provides the callable semantics represented by this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_svm_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.SVM|method|public;static|OpenCvSharp.ML.SVM Load(System.String filepath)"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "identity": "class cv.ml.EM",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 104,
+      "identity": "enum cv.ml.EM.Types[const cv.ml.EM.COV_MAT_SPHERICAL=0;const cv.ml.EM.COV_MAT_DIAGONAL=1;const cv.ml.EM.COV_MAT_GENERIC=2;const cv.ml.EM.COV_MAT_DEFAULT=COV_MAT_DIAGONAL]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 105,
+      "identity": "enum cv.ml.EM.\u003Cunnamed\u003E[const cv.ml.EM.DEFAULT_NCLUSTERS=5;const cv.ml.EM.DEFAULT_MAX_ITERS=100]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 106,
+      "identity": "enum cv.ml.EM.\u003Cunnamed\u003E[const cv.ml.EM.START_E_STEP=1;const cv.ml.EM.START_M_STEP=2;const cv.ml.EM.START_AUTO_STEP=0]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 107,
+      "identity": "cv.ml.EM.getClustersNumber()-\u003Eint",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 108,
+      "identity": "cv.ml.EM.setClustersNumber(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 109,
+      "identity": "cv.ml.EM.getCovarianceMatrixType()-\u003Eint",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 110,
+      "identity": "cv.ml.EM.setCovarianceMatrixType(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 111,
+      "identity": "cv.ml.EM.getTermCriteria()-\u003ETermCriteria",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 112,
+      "identity": "cv.ml.EM.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 113,
+      "identity": "cv.ml.EM.getWeights()-\u003EMat",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "identity": "cv.ml.EM.getMeans()-\u003EMat",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 115,
+      "identity": "cv.ml.EM.getCovs(vector_Mat covs[/O,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 116,
+      "identity": "cv.ml.EM.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 117,
+      "identity": "cv.ml.EM.predict2(Mat sample;Mat probs[/O])-\u003EVec2d",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 118,
+      "identity": "cv.ml.EM.trainEM(Mat samples;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 119,
+      "identity": "cv.ml.EM.trainE(Mat samples;Mat means0;Mat covs0=Mat();Mat weights0=Mat();Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "identity": "cv.ml.EM.trainM(Mat samples;Mat probs0;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])-\u003Ebool",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 121,
+      "identity": "cv.ml.EM.create()-\u003EPtr\u003CEM\u003E",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "identity": "cv.ml.EM.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CEM\u003E",
+      "classification": "missing",
+      "reason": "The EM model lifecycle, covariance collection, probability outputs, and E/M-step training variants have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "identity": "class cv.ml.DTrees",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "identity": "enum cv.ml.DTrees.Flags[const cv.ml.DTrees.PREDICT_AUTO=0;const cv.ml.DTrees.PREDICT_SUM=(1\u003C\u003C8);const cv.ml.DTrees.PREDICT_MAX_VOTE=(2\u003C\u003C8);const cv.ml.DTrees.PREDICT_MASK=(3\u003C\u003C8)]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "identity": "cv.ml.DTrees.getMaxCategories()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "identity": "cv.ml.DTrees.setMaxCategories(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "identity": "cv.ml.DTrees.getMaxDepth()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "identity": "cv.ml.DTrees.setMaxDepth(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "identity": "cv.ml.DTrees.getMinSampleCount()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "identity": "cv.ml.DTrees.setMinSampleCount(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "identity": "cv.ml.DTrees.getCVFolds()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "identity": "cv.ml.DTrees.setCVFolds(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "identity": "cv.ml.DTrees.getUseSurrogates()-\u003Ebool",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "identity": "cv.ml.DTrees.setUseSurrogates(bool val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "identity": "cv.ml.DTrees.getUse1SERule()-\u003Ebool",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "identity": "cv.ml.DTrees.setUse1SERule(bool val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "identity": "cv.ml.DTrees.getTruncatePrunedTree()-\u003Ebool",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "identity": "cv.ml.DTrees.setTruncatePrunedTree(bool val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "identity": "cv.ml.DTrees.getRegressionAccuracy()-\u003Efloat",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "identity": "cv.ml.DTrees.setRegressionAccuracy(float val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "identity": "cv.ml.DTrees.getPriors()-\u003Ecv::Mat",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "identity": "cv.ml.DTrees.setPriors(Mat val[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "identity": "cv.ml.DTrees.create()-\u003EPtr\u003CDTrees\u003E",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "identity": "cv.ml.DTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CDTrees\u003E",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "identity": "class cv.ml.RTrees",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "identity": "cv.ml.RTrees.getCalculateVarImportance()-\u003Ebool",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "identity": "cv.ml.RTrees.setCalculateVarImportance(bool val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "identity": "cv.ml.RTrees.getActiveVarCount()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "identity": "cv.ml.RTrees.setActiveVarCount(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "identity": "cv.ml.RTrees.getTermCriteria()-\u003ETermCriteria",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "identity": "cv.ml.RTrees.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "identity": "cv.ml.RTrees.getVarImportance()-\u003EMat",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "identity": "cv.ml.RTrees.getVotes(Mat samples;Mat results[/O];int flags)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "identity": "cv.ml.RTrees.create()-\u003EPtr\u003CRTrees\u003E",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "identity": "cv.ml.RTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CRTrees\u003E",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "identity": "class cv.ml.Boost",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "identity": "cv.ml.Boost.getBoostType()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "identity": "cv.ml.Boost.setBoostType(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "identity": "cv.ml.Boost.getWeakCount()-\u003Eint",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "identity": "cv.ml.Boost.setWeakCount(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "identity": "cv.ml.Boost.getWeightTrimRate()-\u003Edouble",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "identity": "cv.ml.Boost.setWeightTrimRate(double val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "identity": "enum cv.ml.Boost.Types[const cv.ml.Boost.DISCRETE=0;const cv.ml.Boost.REAL=1;const cv.ml.Boost.LOGIT=2;const cv.ml.Boost.GENTLE=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "identity": "cv.ml.Boost.create()-\u003EPtr\u003CBoost\u003E",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "identity": "cv.ml.Boost.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CBoost\u003E",
+      "classification": "missing",
+      "reason": "The DTrees, RTrees, and Boost model families, including tree parameter state and ensemble outputs, have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "identity": "class cv.ml.ANN_MLP",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "identity": "enum cv.ml.ANN_MLP.TrainingMethods[const cv.ml.ANN_MLP.BACKPROP=0;const cv.ml.ANN_MLP.RPROP=1;const cv.ml.ANN_MLP.ANNEAL=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 168,
+      "identity": "cv.ml.ANN_MLP.setTrainMethod(int method;double param1=0;double param2=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_train_method"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetTrainMethod(OpenCvSharp.ML.ANN_MLPTrainingMethods method,System.Double param1=0,System.Double param2=0)"
+      ]
+    },
+    {
+      "ordinal": 169,
+      "identity": "cv.ml.ANN_MLP.getTrainMethod()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public|OpenCvSharp.ML.ANN_MLPTrainingMethods TrainingMethod"
+      ]
+    },
+    {
+      "ordinal": 170,
+      "identity": "cv.ml.ANN_MLP.setActivationFunction(int type;double param1=0;double param2=0)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_activation_function"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetActivationFunction(OpenCvSharp.ML.ANN_MLPActivationFunctions type,System.Double param1=0,System.Double param2=0)"
+      ]
+    },
+    {
+      "ordinal": 171,
+      "identity": "cv.ml.ANN_MLP.setLayerSizes(Mat _layer_sizes)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_layer_sizes"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetLayerSizes(OpenCvSharp.Core.Mat layerSizes)"
+      ]
+    },
+    {
+      "ordinal": 172,
+      "identity": "cv.ml.ANN_MLP.getLayerSizes()-\u003Ecv::Mat",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_layer_sizes"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|OpenCvSharp.Core.Mat GetLayerSizes()"
+      ]
+    },
+    {
+      "ordinal": 173,
+      "identity": "cv.ml.ANN_MLP.getTermCriteria()-\u003ETermCriteria",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
+    },
+    {
+      "ordinal": 174,
+      "identity": "cv.ml.ANN_MLP.setTermCriteria(TermCriteria val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria"
+      ]
+    },
+    {
+      "ordinal": 175,
+      "identity": "cv.ml.ANN_MLP.getBackpropWeightScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale"
+      ]
+    },
+    {
+      "ordinal": 176,
+      "identity": "cv.ml.ANN_MLP.setBackpropWeightScale(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale"
+      ]
+    },
+    {
+      "ordinal": 177,
+      "identity": "cv.ml.ANN_MLP.getBackpropMomentumScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale"
+      ]
+    },
+    {
+      "ordinal": 178,
+      "identity": "cv.ml.ANN_MLP.setBackpropMomentumScale(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale"
+      ]
+    },
+    {
+      "ordinal": 179,
+      "identity": "cv.ml.ANN_MLP.getRpropDW0()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0"
+      ]
+    },
+    {
+      "ordinal": 180,
+      "identity": "cv.ml.ANN_MLP.setRpropDW0(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0"
+      ]
+    },
+    {
+      "ordinal": 181,
+      "identity": "cv.ml.ANN_MLP.getRpropDWPlus()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus"
+      ]
+    },
+    {
+      "ordinal": 182,
+      "identity": "cv.ml.ANN_MLP.setRpropDWPlus(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus"
+      ]
+    },
+    {
+      "ordinal": 183,
+      "identity": "cv.ml.ANN_MLP.getRpropDWMinus()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus"
+      ]
+    },
+    {
+      "ordinal": 184,
+      "identity": "cv.ml.ANN_MLP.setRpropDWMinus(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus"
+      ]
+    },
+    {
+      "ordinal": 185,
+      "identity": "cv.ml.ANN_MLP.getRpropDWMin()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"
+      ]
+    },
+    {
+      "ordinal": 186,
+      "identity": "cv.ml.ANN_MLP.setRpropDWMin(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"
+      ]
+    },
+    {
+      "ordinal": 187,
+      "identity": "cv.ml.ANN_MLP.getRpropDWMax()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax"
+      ]
+    },
+    {
+      "ordinal": 188,
+      "identity": "cv.ml.ANN_MLP.setRpropDWMax(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax"
+      ]
+    },
+    {
+      "ordinal": 189,
+      "identity": "cv.ml.ANN_MLP.getAnnealInitialT()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT"
+      ]
+    },
+    {
+      "ordinal": 190,
+      "identity": "cv.ml.ANN_MLP.setAnnealInitialT(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT"
+      ]
+    },
+    {
+      "ordinal": 191,
+      "identity": "cv.ml.ANN_MLP.getAnnealFinalT()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT"
+      ]
+    },
+    {
+      "ordinal": 192,
+      "identity": "cv.ml.ANN_MLP.setAnnealFinalT(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT"
+      ]
+    },
+    {
+      "ordinal": 193,
+      "identity": "cv.ml.ANN_MLP.getAnnealCoolingRatio()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio"
+      ]
+    },
+    {
+      "ordinal": 194,
+      "identity": "cv.ml.ANN_MLP.setAnnealCoolingRatio(double val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_double"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio"
+      ]
+    },
+    {
+      "ordinal": 195,
+      "identity": "cv.ml.ANN_MLP.getAnnealItePerStep()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep"
+      ]
+    },
+    {
+      "ordinal": 196,
+      "identity": "cv.ml.ANN_MLP.setAnnealItePerStep(int val)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_set_int"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep"
+      ]
+    },
+    {
+      "ordinal": 197,
+      "identity": "enum cv.ml.ANN_MLP.ActivationFunctions[const cv.ml.ANN_MLP.IDENTITY=0;const cv.ml.ANN_MLP.SIGMOID_SYM=1;const cv.ml.ANN_MLP.GAUSSIAN=2;const cv.ml.ANN_MLP.RELU=3;const cv.ml.ANN_MLP.LEAKYRELU=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 198,
+      "identity": "enum cv.ml.ANN_MLP.TrainFlags[const cv.ml.ANN_MLP.UPDATE_WEIGHTS=1;const cv.ml.ANN_MLP.NO_INPUT_SCALE=2;const cv.ml.ANN_MLP.NO_OUTPUT_SCALE=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 199,
+      "identity": "cv.ml.ANN_MLP.getWeights(int layerIdx)-\u003EMat",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_get_weights"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|OpenCvSharp.Core.Mat GetWeights(System.Int32 layerIndex)"
+      ]
+    },
+    {
+      "ordinal": 200,
+      "identity": "cv.ml.ANN_MLP.create()-\u003EPtr\u003CANN_MLP\u003E",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Create()"
+      ]
+    },
+    {
+      "ordinal": 201,
+      "identity": "cv.ml.ANN_MLP.load(String filepath[/C,/Ref,/PATH])-\u003EPtr\u003CANN_MLP\u003E",
+      "classification": "implemented",
+      "reason": "The selected ANN_MLP batch has one owned StatModel handle, copied Mat outputs, typed configuration, deterministic seed adaptation, native smoke, net8/net10 managed tests, persistence, and an offline sample.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_ml_ann_mlp_load"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Load(System.String filepath)"
+      ]
+    },
+    {
+      "ordinal": 202,
+      "identity": "class cv.ml.LogisticRegression",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 203,
+      "identity": "cv.ml.LogisticRegression.getLearningRate()-\u003Edouble",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 204,
+      "identity": "cv.ml.LogisticRegression.setLearningRate(double val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 205,
+      "identity": "cv.ml.LogisticRegression.getIterations()-\u003Eint",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 206,
+      "identity": "cv.ml.LogisticRegression.setIterations(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 207,
+      "identity": "cv.ml.LogisticRegression.getRegularization()-\u003Eint",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 208,
+      "identity": "cv.ml.LogisticRegression.setRegularization(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 209,
+      "identity": "cv.ml.LogisticRegression.getTrainMethod()-\u003Eint",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 210,
+      "identity": "cv.ml.LogisticRegression.setTrainMethod(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 211,
+      "identity": "cv.ml.LogisticRegression.getMiniBatchSize()-\u003Eint",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 212,
+      "identity": "cv.ml.LogisticRegression.setMiniBatchSize(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 213,
+      "identity": "cv.ml.LogisticRegression.getTermCriteria()-\u003ETermCriteria",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 214,
+      "identity": "cv.ml.LogisticRegression.setTermCriteria(TermCriteria val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 215,
+      "identity": "enum cv.ml.LogisticRegression.RegKinds[const cv.ml.LogisticRegression.REG_DISABLE=-1;const cv.ml.LogisticRegression.REG_L1=0;const cv.ml.LogisticRegression.REG_L2=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 216,
+      "identity": "enum cv.ml.LogisticRegression.Methods[const cv.ml.LogisticRegression.BATCH=0;const cv.ml.LogisticRegression.MINI_BATCH=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 217,
+      "identity": "cv.ml.LogisticRegression.predict(Mat samples;Mat results=Mat()[/O];int flags=0)-\u003Efloat",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 218,
+      "identity": "cv.ml.LogisticRegression.get_learnt_thetas()-\u003EMat",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 219,
+      "identity": "cv.ml.LogisticRegression.create()-\u003EPtr\u003CLogisticRegression\u003E",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 220,
+      "identity": "cv.ml.LogisticRegression.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CLogisticRegression\u003E",
+      "classification": "missing",
+      "reason": "The LogisticRegression model lifecycle, optimizer configuration, learned-theta output, and prediction surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 221,
+      "identity": "class cv.ml.SVMSGD",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 222,
+      "identity": "enum cv.ml.SVMSGD.SvmsgdType[const cv.ml.SVMSGD.SGD=0;const cv.ml.SVMSGD.ASGD=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 223,
+      "identity": "enum cv.ml.SVMSGD.MarginType[const cv.ml.SVMSGD.SOFT_MARGIN=0;const cv.ml.SVMSGD.HARD_MARGIN=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class or enum metadata is reviewed as public type shape rather than an independently callable ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 224,
+      "identity": "cv.ml.SVMSGD.getWeights()-\u003EMat",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 225,
+      "identity": "cv.ml.SVMSGD.getShift()-\u003Efloat",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 226,
+      "identity": "cv.ml.SVMSGD.create()-\u003EPtr\u003CSVMSGD\u003E",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 227,
+      "identity": "cv.ml.SVMSGD.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])-\u003EPtr\u003CSVMSGD\u003E",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 228,
+      "identity": "cv.ml.SVMSGD.setOptimalParameters(int svmsgdType=SVMSGD::ASGD;int marginType=SVMSGD::SOFT_MARGIN)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 229,
+      "identity": "cv.ml.SVMSGD.getSvmsgdType()-\u003Eint",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 230,
+      "identity": "cv.ml.SVMSGD.setSvmsgdType(int svmsgdType)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 231,
+      "identity": "cv.ml.SVMSGD.getMarginType()-\u003Eint",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 232,
+      "identity": "cv.ml.SVMSGD.setMarginType(int marginType)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 233,
+      "identity": "cv.ml.SVMSGD.getMarginRegularization()-\u003Efloat",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 234,
+      "identity": "cv.ml.SVMSGD.setMarginRegularization(float marginRegularization)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 235,
+      "identity": "cv.ml.SVMSGD.getInitialStepSize()-\u003Efloat",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 236,
+      "identity": "cv.ml.SVMSGD.setInitialStepSize(float InitialStepSize)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 237,
+      "identity": "cv.ml.SVMSGD.getStepDecreasingPower()-\u003Efloat",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 238,
+      "identity": "cv.ml.SVMSGD.setStepDecreasingPower(float stepDecreasingPower)-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 239,
+      "identity": "cv.ml.SVMSGD.getTermCriteria()-\u003ETermCriteria",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 240,
+      "identity": "cv.ml.SVMSGD.setTermCriteria(TermCriteria val[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "The SVMSGD model lifecycle, margin configuration, weight output, and termination surface have no current native or managed evidence and remain an explicit full-profile family gap.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_ML; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

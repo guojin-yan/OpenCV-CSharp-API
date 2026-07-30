@@ -62,6 +62,7 @@ using BlockMeanHashObject = OpenCvSharp.ImgHash.BlockMeanHash;
 using CamShiftResult = OpenCvSharp.Video.CamShiftResult;
 using MeanShiftResult = OpenCvSharp.Video.MeanShiftResult;
 using MLKNearestObject = OpenCvSharp.ML.KNearest;
+using MLAnnMlpObject = OpenCvSharp.ML.ANN_MLP;
 using MLNormalBayesClassifierObject = OpenCvSharp.ML.NormalBayesClassifier;
 using MLSvmObject = OpenCvSharp.ML.SVM;
 using OptFlowCv2Object = OpenCvSharp.OptFlow.OptFlowCv2;
@@ -3215,12 +3216,17 @@ namespace ConsoleSamples
             using (Mat bayesResults = new Mat())
             using (Mat bayesProbabilities = new Mat())
             using (Mat svmPrediction = new Mat())
+            using (Mat annResponses = CreateMLAnnResponses())
+            using (Mat annLayers = new Mat(1, 3, MatType.CV_32SC1))
+            using (Mat annPrediction = new Mat())
             using (TrainData data = TrainData.Create(samples, SampleTypes.RowSample, responses))
             using (MLKNearestObject knn = MLKNearestObject.Create())
             using (MLSvmObject svm = MLSvmObject.Create())
             using (MLNormalBayesClassifierObject bayes = MLNormalBayesClassifierObject.Create())
+            using (MLAnnMlpObject ann = MLAnnMlpObject.Create())
             {
                 query.CopyFrom<float>(new float[] { 0.1F, 0.2F });
+                annLayers.CopyFrom<int>(new int[] { 2, 4, 1 });
                 data.SetTrainTestSplitRatio(0.75, shuffle: false);
 
                 knn.DefaultK = 1;
@@ -3240,12 +3246,24 @@ namespace ConsoleSamples
                     bayes.Train(samples, SampleTypes.RowSample, responses);
                     float bayesValue = bayes.PredictProb(query, bayesResults, bayesProbabilities);
 
-                    return "ML train=" + data.NTrainSamples + "/" + data.NSamples
-                        + ", KNN=" + knnValue
-                        + ", SVM=" + svmValue
-                        + ", support=" + supportVectors.Rows + "x" + supportVectors.Cols
-                        + ", Bayes=" + bayesValue
-                        + ", probs=" + bayesProbabilities.Rows + "x" + bayesProbabilities.Cols;
+                    ann.SetLayerSizes(annLayers);
+                    ann.SetActivationFunction(ANN_MLPActivationFunctions.Identity);
+                    ann.SetTrainMethod(ANN_MLPTrainingMethods.Rprop, 0.1, 1e-6);
+                    ann.TermCriteria = TermCriteria.ByCountAndEpsilon(300, 1e-6);
+                    ann.Train(samples, SampleTypes.RowSample, annResponses);
+                    float annValue = ann.Predict(query, annPrediction);
+                    using (Mat annWeights = ann.GetWeights(1))
+                    {
+                        return "ML train=" + data.NTrainSamples + "/" + data.NSamples
+                            + ", KNN=" + knnValue
+                            + ", SVM=" + svmValue
+                            + ", support=" + supportVectors.Rows + "x" + supportVectors.Cols
+                            + ", Bayes=" + bayesValue
+                            + ", probs=" + bayesProbabilities.Rows + "x" + bayesProbabilities.Cols
+                            + ", ANN=" + annValue
+                            + ", layers=2x4x1"
+                            + ", weights=" + annWeights.Rows + "x" + annWeights.Cols;
+                    }
                 }
             }
         }
@@ -4163,6 +4181,13 @@ namespace ConsoleSamples
         {
             var responses = new Mat(6, 1, MatType.CV_32SC1);
             responses.CopyFrom<int>(new int[] { 0, 0, 0, 1, 1, 1 });
+            return responses;
+        }
+
+        private static Mat CreateMLAnnResponses()
+        {
+            var responses = new Mat(6, 1, MatType.CV_32FC1);
+            responses.CopyFrom<float>(new float[] { 0.0F, 0.1F, 0.1F, 1.0F, 1.1F, 1.1F });
             return responses;
         }
 

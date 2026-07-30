@@ -9,8 +9,10 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $workspace = (Resolve-Path -LiteralPath (Join-Path $repo "..")).Path
 $openCvCommit = "40738fb16ceddb5fb3fea747585f7ce6abb0605b"
+$openCvContribCommit = "755e50675d97db9b7d449d8bd6b09888646f6c6e"
 $sourcePrefix = "opencv-source/opencv-5.0.0/"
-$rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video")
+$contribSourcePrefix = "opencv-source/opencv_contrib-5.0.0/"
+$rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video") + @("ml")
 $maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 
@@ -20,8 +22,9 @@ function Add-RequiredFile {
         [Parameter(Mandatory)][string]$Sha256
     )
 
-    if (-not $Path.StartsWith($sourcePrefix, [StringComparison]::Ordinal)) {
-        throw "Upstream map evidence path is outside the exact OpenCV source root: $Path"
+    if (-not $Path.StartsWith($sourcePrefix, [StringComparison]::Ordinal) -and
+        -not $Path.StartsWith($contribSourcePrefix, [StringComparison]::Ordinal)) {
+        throw "Upstream map evidence path is outside the exact OpenCV or OpenCV contrib source roots: $Path"
     }
     if ($Sha256 -notmatch "^[0-9a-f]{64}$") {
         throw "Upstream map evidence SHA256 is malformed for $Path."
@@ -61,7 +64,16 @@ Add-RequiredFile -Path ([string]$registry.headerPath) -Sha256 ([string]$registry
 
 $downloaded = 0
 foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
-    $relativePath = $entry.Key.Substring($sourcePrefix.Length)
+    if ($entry.Key.StartsWith($contribSourcePrefix, [StringComparison]::Ordinal)) {
+        $relativePath = $entry.Key.Substring($contribSourcePrefix.Length)
+        $repositoryName = "opencv_contrib"
+        $commit = $openCvContribCommit
+    }
+    else {
+        $relativePath = $entry.Key.Substring($sourcePrefix.Length)
+        $repositoryName = "opencv"
+        $commit = $openCvCommit
+    }
     $destination = Join-Path $workspace ($entry.Key -replace '/', [IO.Path]::DirectorySeparatorChar)
     if (Test-Path -LiteralPath $destination -PathType Leaf) {
         $actualSha256 = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -73,7 +85,7 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination)) | Out-Null
     $downloadPath = "$destination.download"
     try {
-        $url = "https://raw.githubusercontent.com/opencv/opencv/$openCvCommit/$relativePath"
+        $url = "https://raw.githubusercontent.com/opencv/$repositoryName/$commit/$relativePath"
         for ($attempt = 1; $attempt -le $maximumDownloadAttempts; $attempt++) {
             try {
                 Invoke-WebRequest -Uri $url -OutFile $downloadPath -MaximumRedirection 0
@@ -103,4 +115,4 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     }
 }
 
-Write-Host "UPSTREAM_MAP_SOURCE_EVIDENCE_OK commit=$openCvCommit files=$($required.Count) downloaded=$downloaded root=$(Join-Path $workspace 'opencv-source/opencv-5.0.0')"
+Write-Host "UPSTREAM_MAP_SOURCE_EVIDENCE_OK opencvCommit=$openCvCommit contribCommit=$openCvContribCommit files=$($required.Count) downloaded=$downloaded root=$(Join-Path $workspace 'opencv-source')"

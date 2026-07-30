@@ -4,6 +4,7 @@
 #include "../error_state.h"
 #include "ml_handles.h"
 
+#include <cstdint>
 #include <cstring>
 #include <limits>
 #include <new>
@@ -15,6 +16,7 @@ namespace
     constexpr int MODEL_KIND_KNEAREST = 1;
     constexpr int MODEL_KIND_SVM = 2;
     constexpr int MODEL_KIND_NORMAL_BAYES = 3;
+    constexpr int MODEL_KIND_ANN_MLP = 4;
 
     constexpr int TRAIN_DATA_INT_LAYOUT = 0;
     constexpr int TRAIN_DATA_INT_N_TRAIN_SAMPLES = 1;
@@ -67,6 +69,20 @@ namespace
     constexpr int SVM_DOUBLE_C = 3;
     constexpr int SVM_DOUBLE_NU = 4;
     constexpr int SVM_DOUBLE_P = 5;
+
+    constexpr int ANN_MLP_INT_TRAIN_METHOD = 0;
+    constexpr int ANN_MLP_INT_ANNEAL_ITE_PER_STEP = 1;
+
+    constexpr int ANN_MLP_DOUBLE_BACKPROP_WEIGHT_SCALE = 0;
+    constexpr int ANN_MLP_DOUBLE_BACKPROP_MOMENTUM_SCALE = 1;
+    constexpr int ANN_MLP_DOUBLE_RPROP_DW0 = 2;
+    constexpr int ANN_MLP_DOUBLE_RPROP_DW_PLUS = 3;
+    constexpr int ANN_MLP_DOUBLE_RPROP_DW_MINUS = 4;
+    constexpr int ANN_MLP_DOUBLE_RPROP_DW_MIN = 5;
+    constexpr int ANN_MLP_DOUBLE_RPROP_DW_MAX = 6;
+    constexpr int ANN_MLP_DOUBLE_ANNEAL_INITIAL_T = 7;
+    constexpr int ANN_MLP_DOUBLE_ANNEAL_FINAL_T = 8;
+    constexpr int ANN_MLP_DOUBLE_ANNEAL_COOLING_RATIO = 9;
 
     int validate_mat(const char* api_name, const jyppx_ocv_mat* mat, const char* argument_name)
     {
@@ -209,6 +225,11 @@ namespace
     cv::Ptr<cv::ml::NormalBayesClassifier> as_normal_bayes_ptr(const jyppx_ocv_ml_model* model)
     {
         return model == nullptr ? cv::Ptr<cv::ml::NormalBayesClassifier>() : model->value.dynamicCast<cv::ml::NormalBayesClassifier>();
+    }
+
+    cv::Ptr<cv::ml::ANN_MLP> as_ann_mlp_ptr(const jyppx_ocv_ml_model* model)
+    {
+        return model == nullptr ? cv::Ptr<cv::ml::ANN_MLP>() : model->value.dynamicCast<cv::ml::ANN_MLP>();
     }
 
     cv::Ptr<cv::ml::ParamGrid> make_grid_ptr(const jyppx_ocv_ml_param_grid* grid, int param_id)
@@ -892,6 +913,46 @@ int jyppx_ocv_ml_normal_bayes_classifier_load(const char* filepath, const char* 
         return create_model_handle(api_name, cv::ml::NormalBayesClassifier::load(filepath, node_name == nullptr ? cv::String() : cv::String(node_name)), MODEL_KIND_NORMAL_BAYES, model);
 #else
         (void)node_name;
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_create(jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(api_name, cv::ml::ANN_MLP::create(), MODEL_KIND_ANN_MLP, model);
+#else
+        if (model != nullptr) { *model = nullptr; }
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_load(const char* filepath, jyppx_ocv_ml_model** model)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_load";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_string(api_name, filepath, "filepath");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        return create_model_handle(api_name, cv::ml::ANN_MLP::load(filepath), MODEL_KIND_ANN_MLP, model);
+#else
         if (model != nullptr) { *model = nullptr; }
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
@@ -1620,6 +1681,348 @@ int jyppx_ocv_ml_normal_bayes_classifier_predict_prob(
 #else
         (void)flags;
         *value = 0.0F;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_get_int(const jyppx_ocv_ml_model* model, int property_id, int* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_get_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case ANN_MLP_INT_TRAIN_METHOD: *value = native->getTrainMethod(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_INT_ANNEAL_ITE_PER_STEP: *value = native->getAnnealItePerStep(); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id;
+        *value = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_int(jyppx_ocv_ml_model* model, int property_id, int value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_int";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case ANN_MLP_INT_ANNEAL_ITE_PER_STEP: native->setAnnealItePerStep(value); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id; (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_get_double(const jyppx_ocv_ml_model* model, int property_id, double* value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_get_double";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, value, "value");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case ANN_MLP_DOUBLE_BACKPROP_WEIGHT_SCALE: *value = native->getBackpropWeightScale(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_BACKPROP_MOMENTUM_SCALE: *value = native->getBackpropMomentumScale(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW0: *value = native->getRpropDW0(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_PLUS: *value = native->getRpropDWPlus(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_MINUS: *value = native->getRpropDWMinus(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_MIN: *value = native->getRpropDWMin(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_MAX: *value = native->getRpropDWMax(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_ANNEAL_INITIAL_T: *value = native->getAnnealInitialT(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_ANNEAL_FINAL_T: *value = native->getAnnealFinalT(); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_ANNEAL_COOLING_RATIO: *value = native->getAnnealCoolingRatio(); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id;
+        *value = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_double(jyppx_ocv_ml_model* model, int property_id, double value)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_double";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        switch (property_id)
+        {
+        case ANN_MLP_DOUBLE_BACKPROP_WEIGHT_SCALE: native->setBackpropWeightScale(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_BACKPROP_MOMENTUM_SCALE: native->setBackpropMomentumScale(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW0: native->setRpropDW0(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_PLUS: native->setRpropDWPlus(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_MINUS: native->setRpropDWMinus(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_MIN: native->setRpropDWMin(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_RPROP_DW_MAX: native->setRpropDWMax(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_ANNEAL_INITIAL_T: native->setAnnealInitialT(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_ANNEAL_FINAL_T: native->setAnnealFinalT(value); return OPENCV_CSHARP_STATUS_OK;
+        case ANN_MLP_DOUBLE_ANNEAL_COOLING_RATIO: native->setAnnealCoolingRatio(value); return OPENCV_CSHARP_STATUS_OK;
+        default: return opencv_csharp_native::set_invalid_argument(api_name, "property_id");
+        }
+#else
+        (void)property_id; (void)value;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_train_method(jyppx_ocv_ml_model* model, int method, double param1, double param2)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_train_method";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setTrainMethod(method, param1, param2);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)method; (void)param1; (void)param2;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_activation_function(jyppx_ocv_ml_model* model, int type, double param1, double param2)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_activation_function";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setActivationFunction(type, param1, param2);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; (void)param1; (void)param2;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_get_layer_sizes(const jyppx_ocv_ml_model* model, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_get_layer_sizes";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        copy_mat_to_output(native->getLayerSizes(), dst);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_layer_sizes(jyppx_ocv_ml_model* model, const jyppx_ocv_mat* layer_sizes)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_layer_sizes";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, layer_sizes, "layer_sizes");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setLayerSizes(opencv_csharp_native::mat_value(layer_sizes));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_get_term_criteria(const jyppx_ocv_ml_model* model, int* type, int* max_count, double* epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_get_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, type, "type");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, max_count, "max_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, epsilon, "epsilon");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        cv::TermCriteria criteria = native->getTermCriteria();
+        *type = criteria.type;
+        *max_count = criteria.maxCount;
+        *epsilon = criteria.epsilon;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *type = 0; *max_count = 0; *epsilon = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_term_criteria(jyppx_ocv_ml_model* model, int type, int max_count, double epsilon)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_term_criteria";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setTermCriteria(cv::TermCriteria(type, max_count, epsilon));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; (void)max_count; (void)epsilon;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_get_weights(const jyppx_ocv_ml_model* model, int layer_index, jyppx_ocv_mat* dst)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_get_weights";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, dst, "dst");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        copy_mat_to_output(native->getWeights(layer_index), dst);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)layer_index;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed(jyppx_ocv_ml_model* model, unsigned long long seed)
+{
+    constexpr const char* api_name = "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_model(api_name, model);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_ML)
+        cv::Ptr<cv::ml::ANN_MLP> native = as_ann_mlp_ptr(model);
+        if (native.empty()) { return opencv_csharp_native::set_invalid_argument(api_name, "model"); }
+        native->setAnnealEnergyRNG(cv::RNG(static_cast<uint64_t>(seed)));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)seed;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

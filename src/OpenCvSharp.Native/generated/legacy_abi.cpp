@@ -12207,6 +12207,102 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_merge_robertson_create(j
     return jyppx_ocv_merge_robertson_create(merger);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_create(jyppx_ocv_ml_model** model)
+{
+    return jyppx_ocv_ml_ann_mlp_create(model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_get_double(const jyppx_ocv_ml_model* model,
+    int property_id,
+    double* value)
+{
+    return jyppx_ocv_ml_ann_mlp_get_double(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_get_int(const jyppx_ocv_ml_model* model,
+    int property_id,
+    int* value)
+{
+    return jyppx_ocv_ml_ann_mlp_get_int(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_get_layer_sizes(const jyppx_ocv_ml_model* model,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_ml_ann_mlp_get_layer_sizes(model, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_get_term_criteria(const jyppx_ocv_ml_model* model,
+    int* type,
+    int* max_count,
+    double* epsilon)
+{
+    return jyppx_ocv_ml_ann_mlp_get_term_criteria(model, type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_get_weights(const jyppx_ocv_ml_model* model,
+    int layer_index,
+    jyppx_ocv_mat* dst)
+{
+    return jyppx_ocv_ml_ann_mlp_get_weights(model, layer_index, dst);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_load(const char* filepath,
+    jyppx_ocv_ml_model** model)
+{
+    return jyppx_ocv_ml_ann_mlp_load(filepath, model);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_activation_function(jyppx_ocv_ml_model* model,
+    int type,
+    double param1,
+    double param2)
+{
+    return jyppx_ocv_ml_ann_mlp_set_activation_function(model, type, param1, param2);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_anneal_energy_seed(jyppx_ocv_ml_model* model,
+    unsigned long long seed)
+{
+    return jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed(model, seed);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_double(jyppx_ocv_ml_model* model,
+    int property_id,
+    double value)
+{
+    return jyppx_ocv_ml_ann_mlp_set_double(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_int(jyppx_ocv_ml_model* model,
+    int property_id,
+    int value)
+{
+    return jyppx_ocv_ml_ann_mlp_set_int(model, property_id, value);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_layer_sizes(jyppx_ocv_ml_model* model,
+    const jyppx_ocv_mat* layer_sizes)
+{
+    return jyppx_ocv_ml_ann_mlp_set_layer_sizes(model, layer_sizes);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_term_criteria(jyppx_ocv_ml_model* model,
+    int type,
+    int max_count,
+    double epsilon)
+{
+    return jyppx_ocv_ml_ann_mlp_set_term_criteria(model, type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_ann_mlp_set_train_method(jyppx_ocv_ml_model* model,
+    int method,
+    double param1,
+    double param2)
+{
+    return jyppx_ocv_ml_ann_mlp_set_train_method(model, method, param1, param2);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_ml_knearest_create(jyppx_ocv_ml_model** model)
 {
     return jyppx_ocv_ml_knearest_create(model);

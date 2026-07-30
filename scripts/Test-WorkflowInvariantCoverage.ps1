@@ -169,12 +169,15 @@ foreach ($entry in $sourceEvidenceCounts.GetEnumerator()) {
 $sourceEvidenceText = Read-RequiredText -RelativePath $sourceEvidenceScriptToken
 foreach ($token in @(
         '40738fb16ceddb5fb3fea747585f7ce6abb0605b',
-        'https://raw.githubusercontent.com/opencv/opencv/$openCvCommit/$relativePath',
+        '755e50675d97db9b7d449d8bd6b09888646f6c6e',
+        'https://raw.githubusercontent.com/opencv/$repositoryName/$commit/$relativePath',
         'Get-FileHash -LiteralPath $downloadPath -Algorithm SHA256',
         '$maximumDownloadAttempts = 4',
         'for ($attempt = 1; $attempt -le $maximumDownloadAttempts; $attempt++)',
         '@("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video")',
-        'opencv-source/opencv-5.0.0/')) {
+        '@("ml")',
+        'opencv-source/opencv-5.0.0/',
+        'opencv-source/opencv_contrib-5.0.0/')) {
     if ((Get-TokenIndex -Text $sourceEvidenceText -Token $token) -lt 0) {
         Add-Violation -Violations $violations -Path $sourceEvidenceScriptToken -Issue "Upstream source-evidence bootstrap must retain exact commit/path/hash contract" -Text $token
     }

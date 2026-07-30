@@ -126,6 +126,7 @@ function Get-Record {
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $photoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/photo-upstream-summary.json") -Raw | ConvertFrom-Json
+    $mlSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ml-upstream-summary.json") -Raw | ConvertFrom-Json
     $videoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/video-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
@@ -166,6 +167,11 @@ function Get-Record {
         "compatibility/imgproc-upstream-summary.json",
         "compatibility/managed-public-api-summary.json",
         "compatibility/managed-public-api.txt",
+        "compatibility/ml-implemented-families.json",
+        "compatibility/ml-upstream-classifications.json",
+        "compatibility/ml-upstream-map.txt",
+        "compatibility/ml-upstream-raw.json",
+        "compatibility/ml-upstream-summary.json",
         "compatibility/native-managed-binding-map.txt",
         "compatibility/native-managed-binding-summary.json",
         "compatibility/objdetect-implemented-families.json",
@@ -197,6 +203,7 @@ function Get-Record {
         "docs/articles/imgcodecs-upstream-parity-guide.md",
         "docs/articles/imgproc-geometry-guide.md",
         "docs/articles/imgproc-upstream-parity-guide.md",
+        "docs/articles/ml-guide.md",
         "docs/articles/objdetect-structured-parity-guide.md",
         "docs/articles/photo-ccm-guide.md",
         "docs/articles/photo-hdr-workflow-guide.md",
@@ -215,6 +222,7 @@ function Get-Record {
         "scripts/Generate-ImgProcUpstreamMap.ps1",
         "scripts/Generate-ImgCodecsUpstreamMap.ps1",
         "scripts/Generate-ManagedPublicApiBaseline.ps1",
+        "scripts/Generate-MlUpstreamMap.ps1",
         "scripts/Generate-NativeAbiCompatibility.ps1",
         "scripts/Generate-NativeManagedBindingMap.ps1",
         "scripts/Generate-ObjDetectUpstreamMap.ps1",
@@ -227,6 +235,7 @@ function Get-Record {
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
+        "scripts/Test-MlUpstreamMap.ps1",
         "scripts/Test-ImgCodecsUpstreamMap.ps1",
         "scripts/Test-NativeManagedBindingMap.ps1",
         "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -258,6 +267,9 @@ function Get-Record {
         "tools/ImgProcUpstreamMap/ImgProcUpstreamMap.csproj",
         "tools/ImgProcUpstreamMap/Program.cs",
         "tools/ImgProcUpstreamMap/extract_imgproc.py",
+        "tools/MlUpstreamMap/MlUpstreamMap.csproj",
+        "tools/MlUpstreamMap/Program.cs",
+        "tools/MlUpstreamMap/extract_ml.py",
         "tools/ImgCodecsUpstreamMap/ImgCodecsUpstreamMap.csproj",
         "tools/ImgCodecsUpstreamMap/Program.cs",
         "tools/ImgCodecsUpstreamMap/extract_imgcodecs.py",
@@ -330,7 +342,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2438
+                FunctionCount = 2452
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -522,6 +534,32 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$photoSummary.nativeEntrypointAdditionCount
                 RepositoryWideParityClaimed = [bool]$photoSummary.repositoryWideUpstreamParityClaimed
             }
+            MlUpstreamMap = [ordered]@{
+                Path = "compatibility/ml-upstream-map.txt"
+                SummaryPath = "compatibility/ml-upstream-summary.json"
+                ClassificationPath = "compatibility/ml-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/ml-implemented-families.json"
+                RawExtractionPath = "compatibility/ml-upstream-raw.json"
+                Sha256 = $mlSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/ml-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$mlSummary.declarationCount
+                CallableCount = [int]$mlSummary.callableCount
+                ImplementedCount = [int]$mlSummary.classificationCounts.implemented
+                MissingCount = [int]$mlSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$mlSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$mlSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$mlSummary.classificationCounts.'upstream-conditional'
+                CompatibilityHeaderCount = [int]$mlSummary.compatibilityHeaderCount
+                ExcludedPublicHeaderCount = [int]$mlSummary.excludedPublicHeaderCount
+                SourceHeaderCount = [int]$mlSummary.sourceHeaderCount
+                SourceReviewedExtensionCount = [int]$mlSummary.sourceReviewedExtensionCount
+                SelectedFamilyCount = [int]$mlSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$mlSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$mlSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$mlSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$mlSummary.nativeEntrypointAdditionCount
+                RepositoryWideParityClaimed = [bool]$mlSummary.repositoryWideUpstreamParityClaimed
+            }
             VideoUpstreamMap = [ordered]@{
                 Path = "compatibility/video-upstream-map.txt"
                 SummaryPath = "compatibility/video-upstream-summary.json"
@@ -557,7 +595,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 70
+            InvariantGuardCount = 71
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false

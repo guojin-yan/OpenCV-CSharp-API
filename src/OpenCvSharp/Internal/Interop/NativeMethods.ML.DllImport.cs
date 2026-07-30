@@ -146,6 +146,48 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_normal_bayes_classifier_predict_prob")]
         internal static extern int MlNormalBayesClassifierPredictProb(IntPtr model, IntPtr inputs, IntPtr outputs, IntPtr outputProbs, int flags, out float value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_create")]
+        internal static extern int MlAnnMlpCreate(out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_load")]
+        internal static extern int MlAnnMlpLoad(byte[] filepath, out IntPtr model);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_int")]
+        internal static extern int MlAnnMlpGetInt(IntPtr model, int propertyId, out int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_int")]
+        internal static extern int MlAnnMlpSetInt(IntPtr model, int propertyId, int value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_double")]
+        internal static extern int MlAnnMlpGetDouble(IntPtr model, int propertyId, out double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_double")]
+        internal static extern int MlAnnMlpSetDouble(IntPtr model, int propertyId, double value);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_train_method")]
+        internal static extern int MlAnnMlpSetTrainMethod(IntPtr model, int method, double param1, double param2);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_activation_function")]
+        internal static extern int MlAnnMlpSetActivationFunction(IntPtr model, int type, double param1, double param2);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_layer_sizes")]
+        internal static extern int MlAnnMlpGetLayerSizes(IntPtr model, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_layer_sizes")]
+        internal static extern int MlAnnMlpSetLayerSizes(IntPtr model, IntPtr layerSizes);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_term_criteria")]
+        internal static extern int MlAnnMlpGetTermCriteria(IntPtr model, out int type, out int maxCount, out double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_term_criteria")]
+        internal static extern int MlAnnMlpSetTermCriteria(IntPtr model, int type, int maxCount, double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_get_weights")]
+        internal static extern int MlAnnMlpGetWeights(IntPtr model, int layerIndex, IntPtr dst);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed")]
+        internal static extern int MlAnnMlpSetAnnealEnergySeed(IntPtr model, ulong seed);
     }
 }
 #endif

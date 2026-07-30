@@ -1,0 +1,5495 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/MlUpstreamMap/extract_ml.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml/ml.hpp",
+  "headerSha256": "ecd859e8d7208cd22381444201be96654bd21f4701e0e51e3a803a9f6b3fed73",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml/ml.hpp",
+      "sha256": "ecd859e8d7208cd22381444201be96654bd21f4701e0e51e3a803a9f6b3fed73",
+      "includes": "opencv2/ml.hpp"
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "sha256": "c41f7f03931dbbd80ee8668ea782fa4d401effd3bc582d582b648221f85069dd",
+      "startOrdinal": 0,
+      "declarationCount": 241
+    }
+  ],
+  "excludedPublicHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml/ml.inl.hpp",
+      "reason": "Template implementation header exposes no stable parser-derived C ABI callable surface."
+    }
+  ],
+  "declarationCount": 241,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.VariableTypes",
+      "identity": "enum cv.ml.VariableTypes[const cv.ml.VAR_NUMERICAL=0;const cv.ml.VAR_ORDERED=0;const cv.ml.VAR_CATEGORICAL=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.VAR_NUMERICAL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.VAR_ORDERED",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.VAR_CATEGORICAL",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.ErrorTypes",
+      "identity": "enum cv.ml.ErrorTypes[const cv.ml.TEST_ERROR=0;const cv.ml.TRAIN_ERROR=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.TEST_ERROR",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.TRAIN_ERROR",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.SampleTypes",
+      "identity": "enum cv.ml.SampleTypes[const cv.ml.ROW_SAMPLE=0;const cv.ml.COL_SAMPLE=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.ROW_SAMPLE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.COL_SAMPLE",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.ParamGrid",
+      "identity": "class cv.ml.ParamGrid",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "minVal",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "maxVal",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "logStep",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief The structure represents the logarithmic grid range of statmodel parameters.\n\nIt is used for optimizing statmodel accuracy by varying model parameters, the accuracy estimate\nbeing computed by cross-validation."
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ParamGrid.create",
+      "identity": "cv.ml.ParamGrid.create(double minVal=0.;double maxVal=0.;double logstep=1.)->Ptr<ParamGrid>",
+      "returnType": "Ptr<ParamGrid>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "minVal",
+          "default": "0.",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "maxVal",
+          "default": "0.",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "logstep",
+          "default": "1.",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a ParamGrid Ptr that can be given to the %SVM::trainAuto method\n\n    @param minVal minimum value of the parameter grid\n    @param maxVal maximum value of the parameter grid\n    @param logstep Logarithmic step for iterating the statmodel parameter"
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.TrainData",
+      "identity": "class cv.ml.TrainData",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Class encapsulating training data.\n\nPlease note that the class only specifies the interface of training data, but not implementation.\nAll the statistical model classes in _ml_ module accepts Ptr\\<TrainData\\> as parameter. In other\nwords, you can create your own class derived from TrainData and pass smart pointer to the instance\nof this class into StatModel::train.\n\n@sa @ref ml_intro_data"
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getLayout",
+      "identity": "cv.ml.TrainData.getLayout()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNTrainSamples",
+      "identity": "cv.ml.TrainData.getNTrainSamples()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNTestSamples",
+      "identity": "cv.ml.TrainData.getNTestSamples()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNSamples",
+      "identity": "cv.ml.TrainData.getNSamples()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNVars",
+      "identity": "cv.ml.TrainData.getNVars()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNAllVars",
+      "identity": "cv.ml.TrainData.getNAllVars()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getSample",
+      "identity": "cv.ml.TrainData.getSample(Mat varIdx;int sidx;float* buf)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "varIdx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "sidx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float*",
+          "name": "buf",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getSamples",
+      "identity": "cv.ml.TrainData.getSamples()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getMissing",
+      "identity": "cv.ml.TrainData.getMissing()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTrainSamples",
+      "identity": "cv.ml.TrainData.getTrainSamples(int layout=ROW_SAMPLE;bool compressSamples=true;bool compressVars=true)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "layout",
+          "default": "ROW_SAMPLE",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compressSamples",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "compressVars",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns matrix of train samples\n\n    @param layout The requested layout. If it's different from the initial one, the matrix is\n        transposed. See ml::SampleTypes.\n    @param compressSamples if true, the function returns only the training samples (specified by\n        sampleIdx)\n    @param compressVars if true, the function returns the shorter training samples, containing only\n        the active variables.\n\n    In current implementation the function tries to avoid physical data copying and returns the\n    matrix stored inside TrainData (unless the transposition or compression is needed)."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTrainResponses",
+      "identity": "cv.ml.TrainData.getTrainResponses()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the vector of responses\n\n    The function returns ordered or the original categorical responses. Usually it's used in\n    regression algorithms."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTrainNormCatResponses",
+      "identity": "cv.ml.TrainData.getTrainNormCatResponses()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the vector of normalized categorical responses\n\n    The function returns vector of responses. Each response is integer from `0` to `<number of\n    classes>-1`. The actual label value can be retrieved then from the class label vector, see\n    TrainData::getClassLabels."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTestResponses",
+      "identity": "cv.ml.TrainData.getTestResponses()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTestNormCatResponses",
+      "identity": "cv.ml.TrainData.getTestNormCatResponses()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getResponses",
+      "identity": "cv.ml.TrainData.getResponses()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNormCatResponses",
+      "identity": "cv.ml.TrainData.getNormCatResponses()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getSampleWeights",
+      "identity": "cv.ml.TrainData.getSampleWeights()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTrainSampleWeights",
+      "identity": "cv.ml.TrainData.getTrainSampleWeights()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTestSampleWeights",
+      "identity": "cv.ml.TrainData.getTestSampleWeights()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getVarIdx",
+      "identity": "cv.ml.TrainData.getVarIdx()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getVarType",
+      "identity": "cv.ml.TrainData.getVarType()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getVarSymbolFlags",
+      "identity": "cv.ml.TrainData.getVarSymbolFlags()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getResponseType",
+      "identity": "cv.ml.TrainData.getResponseType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTrainSampleIdx",
+      "identity": "cv.ml.TrainData.getTrainSampleIdx()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTestSampleIdx",
+      "identity": "cv.ml.TrainData.getTestSampleIdx()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getValues",
+      "identity": "cv.ml.TrainData.getValues(int vi;Mat sidx;float* values)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "vi",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sidx",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float*",
+          "name": "values",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getDefaultSubstValues",
+      "identity": "cv.ml.TrainData.getDefaultSubstValues()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 33,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getCatCount",
+      "identity": "cv.ml.TrainData.getCatCount(int vi)->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "vi",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getClassLabels",
+      "identity": "cv.ml.TrainData.getClassLabels()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the vector of class labels\n\n    The function returns vector of unique labels occurred in the responses."
+    },
+    {
+      "ordinal": 35,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getCatOfs",
+      "identity": "cv.ml.TrainData.getCatOfs()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 36,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getCatMap",
+      "identity": "cv.ml.TrainData.getCatMap()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 37,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.setTrainTestSplit",
+      "identity": "cv.ml.TrainData.setTrainTestSplit(int count;bool shuffle=true)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "count",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "shuffle",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Splits the training data into the training and test parts\n    @sa TrainData::setTrainTestSplitRatio"
+    },
+    {
+      "ordinal": 38,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.setTrainTestSplitRatio",
+      "identity": "cv.ml.TrainData.setTrainTestSplitRatio(double ratio;bool shuffle=true)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "ratio",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "shuffle",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Splits the training data into the training and test parts\n\n    The function selects a subset of specified relative size and then returns it as the training\n    set. If the function is not called, all the data is used for training. Please, note that for\n    each of TrainData::getTrain\\* there is corresponding TrainData::getTest\\*, so that the test\n    subset can be retrieved and processed as well.\n    @sa TrainData::setTrainTestSplit"
+    },
+    {
+      "ordinal": 39,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.shuffleTrainTest",
+      "identity": "cv.ml.TrainData.shuffleTrainTest()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getTestSamples",
+      "identity": "cv.ml.TrainData.getTestSamples()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns matrix of test samples"
+    },
+    {
+      "ordinal": 41,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getNames",
+      "identity": "cv.ml.TrainData.getNames(vector_String names[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_String",
+          "name": "names",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns vector of symbolic names captured in loadFromCSV()"
+    },
+    {
+      "ordinal": 42,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getSubVector",
+      "identity": "cv.ml.TrainData.getSubVector(Mat vec[/C,/Ref];Mat idx[/C,/Ref])->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "vec",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "idx",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Extract from 1D vector elements specified by passed indexes.\n    @param vec input vector (supported types: CV_32S, CV_32F, CV_64F)\n    @param idx 1D index vector"
+    },
+    {
+      "ordinal": 43,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.getSubMatrix",
+      "identity": "cv.ml.TrainData.getSubMatrix(Mat matrix[/C,/Ref];Mat idx[/C,/Ref];int layout)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "matrix",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "idx",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "layout",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Extract from matrix rows/cols specified by passed indexes.\n    @param matrix input matrix (supported types: CV_32S, CV_32F, CV_64F)\n    @param idx 1D index vector\n    @param layout specifies to extract rows (cv::ml::ROW_SAMPLES) or to extract columns (cv::ml::COL_SAMPLES)"
+    },
+    {
+      "ordinal": 44,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.TrainData.create",
+      "identity": "cv.ml.TrainData.create(Mat samples;int layout;Mat responses;Mat varIdx=Mat();Mat sampleIdx=Mat();Mat sampleWeights=Mat();Mat varType=Mat())->Ptr<TrainData>",
+      "returnType": "Ptr<TrainData>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "layout",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "responses",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "varIdx",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sampleIdx",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "sampleWeights",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "varType",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates training data from in-memory arrays.\n\n    @param samples matrix of samples. It should have CV_32F type.\n    @param layout see ml::SampleTypes.\n    @param responses matrix of responses. If the responses are scalar, they should be stored as a\n        single row or as a single column. The matrix should have type CV_32F or CV_32S (in the\n        former case the responses are considered as ordered by default; in the latter case - as\n        categorical)\n    @param varIdx vector specifying which variables to use for training. It can be an integer vector\n        (CV_32S) containing 0-based variable indices or byte vector (CV_8U) containing a mask of\n        active variables.\n    @param sampleIdx vector specifying which samples to use for training. It can be an integer\n        vector (CV_32S) containing 0-based sample indices or byte vector (CV_8U) containing a mask\n        of training samples.\n    @param sampleWeights optional vector with weights for each sample. It should have CV_32F type.\n    @param varType optional vector of type CV_8U and size `<number_of_variables_in_samples> +\n        <number_of_variables_in_responses>`, containing types of each input and output variable. See\n        ml::VariableTypes."
+    },
+    {
+      "ordinal": 45,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.StatModel",
+      "identity": "class cv.ml.StatModel",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base class for statistical models in OpenCV ML."
+    },
+    {
+      "ordinal": 46,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.StatModel.Flags",
+      "identity": "enum cv.ml.StatModel.Flags[const cv.ml.StatModel.UPDATE_MODEL=1;const cv.ml.StatModel.RAW_OUTPUT=1;const cv.ml.StatModel.COMPRESSED_INPUT=2;const cv.ml.StatModel.PREPROCESSED_INPUT=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.StatModel.UPDATE_MODEL",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.StatModel.RAW_OUTPUT",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.StatModel.COMPRESSED_INPUT",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.StatModel.PREPROCESSED_INPUT",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.getVarCount",
+      "identity": "cv.ml.StatModel.getVarCount()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the number of variables in training samples"
+    },
+    {
+      "ordinal": 48,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.empty",
+      "identity": "cv.ml.StatModel.empty()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.isTrained",
+      "identity": "cv.ml.StatModel.isTrained()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns true if the model is trained"
+    },
+    {
+      "ordinal": 50,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.isClassifier",
+      "identity": "cv.ml.StatModel.isClassifier()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns true if the model is classifier"
+    },
+    {
+      "ordinal": 51,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.train",
+      "identity": "cv.ml.StatModel.train(Ptr_TrainData trainData[/C,/Ref];int flags=0)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_TrainData",
+          "name": "trainData",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Trains the statistical model\n\n    @param trainData training data that can be loaded from file using TrainData::loadFromCSV or\n        created with TrainData::create.\n    @param flags optional flags, depending on the model. Some of the models can be updated with the\n        new training samples, not completely overwritten (such as NormalBayesClassifier or ANN_MLP)."
+    },
+    {
+      "ordinal": 52,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.train",
+      "identity": "cv.ml.StatModel.train(Mat samples;int layout;Mat responses)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "layout",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "responses",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Trains the statistical model\n\n    @param samples training samples\n    @param layout See ml::SampleTypes.\n    @param responses vector of responses associated with the training samples."
+    },
+    {
+      "ordinal": 53,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.calcError",
+      "identity": "cv.ml.StatModel.calcError(Ptr_TrainData data[/C,/Ref];bool test;Mat resp[/O])->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_TrainData",
+          "name": "data",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "test",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "resp",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Computes error on the training or test dataset\n\n    @param data the training data\n    @param test if true, the error is computed over the test subset of the data, otherwise it's\n        computed over the training subset of the data. Please note that if you loaded a completely\n        different dataset to evaluate already trained classifier, you will probably want not to set\n        the test subset at all with TrainData::setTrainTestSplitRatio and specify test=false, so\n        that the error is computed for the whole new set. Yes, this sounds a bit confusing.\n    @param resp the optional output responses.\n\n    The method uses StatModel::predict to compute the error. For regression models the error is\n    computed as RMS, for classifiers - as a percent of missclassified samples (0%-100%)."
+    },
+    {
+      "ordinal": 54,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.StatModel.predict",
+      "identity": "cv.ml.StatModel.predict(Mat samples;Mat results=Mat()[/O];int flags=0)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "results",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Predicts response(s) for the provided sample(s)\n\n    @param samples The input samples, floating-point matrix\n    @param results The optional output matrix of results.\n    @param flags The optional flags, model-dependent. See cv::ml::StatModel::Flags."
+    },
+    {
+      "ordinal": 55,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.NormalBayesClassifier",
+      "identity": "class cv.ml.NormalBayesClassifier",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief Bayes classifier for normally distributed data.\n\n@sa @ref ml_intro_bayes"
+    },
+    {
+      "ordinal": 56,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.NormalBayesClassifier.predictProb",
+      "identity": "cv.ml.NormalBayesClassifier.predictProb(Mat inputs;Mat outputs[/O];Mat outputProbs[/O];int flags=0)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "inputs",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "outputs",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "outputProbs",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Predicts the response for sample(s).\n\n    The method estimates the most probable classes for input vectors. Input vectors (one or more)\n    are stored as rows of the matrix inputs. In case of multiple input vectors, there should be one\n    output vector outputs. The predicted class for a single input vector is returned by the method.\n    The vector outputProbs contains the output probabilities corresponding to each element of\n    result."
+    },
+    {
+      "ordinal": 57,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.NormalBayesClassifier.create",
+      "identity": "cv.ml.NormalBayesClassifier.create()->Ptr<NormalBayesClassifier>",
+      "returnType": "Ptr<NormalBayesClassifier>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Creates empty model\nUse StatModel::train to train the model after creation."
+    },
+    {
+      "ordinal": 58,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.NormalBayesClassifier.load",
+      "identity": "cv.ml.NormalBayesClassifier.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<NormalBayesClassifier>",
+      "returnType": "Ptr<NormalBayesClassifier>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized NormalBayesClassifier from a file\n     *\n     * Use NormalBayesClassifier::save to serialize and store an NormalBayesClassifier to disk.\n     * Load the NormalBayesClassifier from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized NormalBayesClassifier\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 59,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.KNearest",
+      "identity": "class cv.ml.KNearest",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief The class implements K-Nearest Neighbors model\n\n@sa @ref ml_intro_knn"
+    },
+    {
+      "ordinal": 60,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.getDefaultK",
+      "identity": "cv.ml.KNearest.getDefaultK()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setDefaultK"
+    },
+    {
+      "ordinal": 61,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.setDefaultK",
+      "identity": "cv.ml.KNearest.setDefaultK(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getDefaultK @see getDefaultK"
+    },
+    {
+      "ordinal": 62,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.getIsClassifier",
+      "identity": "cv.ml.KNearest.getIsClassifier()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setIsClassifier"
+    },
+    {
+      "ordinal": 63,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.setIsClassifier",
+      "identity": "cv.ml.KNearest.setIsClassifier(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getIsClassifier @see getIsClassifier"
+    },
+    {
+      "ordinal": 64,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.getEmax",
+      "identity": "cv.ml.KNearest.getEmax()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setEmax"
+    },
+    {
+      "ordinal": 65,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.setEmax",
+      "identity": "cv.ml.KNearest.setEmax(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getEmax @see getEmax"
+    },
+    {
+      "ordinal": 66,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.getAlgorithmType",
+      "identity": "cv.ml.KNearest.getAlgorithmType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAlgorithmType"
+    },
+    {
+      "ordinal": 67,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.setAlgorithmType",
+      "identity": "cv.ml.KNearest.setAlgorithmType(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAlgorithmType @see getAlgorithmType"
+    },
+    {
+      "ordinal": 68,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.findNearest",
+      "identity": "cv.ml.KNearest.findNearest(Mat samples;int k;Mat results[/O];Mat neighborResponses=Mat()[/O];Mat dist=Mat()[/O])->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "k",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "results",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "neighborResponses",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dist",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Finds the neighbors and predicts responses for input vectors.\n\n    @param samples Input samples stored by rows. It is a single-precision floating-point matrix of\n        `<number_of_samples> * k` size.\n    @param k Number of used nearest neighbors. Should be greater than 1.\n    @param results Vector with results of prediction (regression or classification) for each input\n        sample. It is a single-precision floating-point vector with `<number_of_samples>` elements.\n    @param neighborResponses Optional output values for corresponding neighbors. It is a single-\n        precision floating-point matrix of `<number_of_samples> * k` size.\n    @param dist Optional output distances from the input vectors to the corresponding neighbors. It\n        is a single-precision floating-point matrix of `<number_of_samples> * k` size.\n\n    For each input vector (a row of the matrix samples), the method finds the k nearest neighbors.\n    In case of regression, the predicted result is a mean value of the particular vector's neighbor\n    responses. In case of classification, the class is determined by voting.\n\n    For each input vector, the neighbors are sorted by their distances to the vector.\n\n    In case of C++ interface you can use output pointers to empty matrices and the function will\n    allocate memory itself.\n\n    If only a single input vector is passed, all output matrices are optional and the predicted\n    value is returned by the method.\n\n    The function is parallelized with the TBB library."
+    },
+    {
+      "ordinal": 69,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.KNearest.Types",
+      "identity": "enum cv.ml.KNearest.Types[const cv.ml.KNearest.BRUTE_FORCE=1;const cv.ml.KNearest.KDTREE=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.KNearest.BRUTE_FORCE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.KNearest.KDTREE",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 70,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.create",
+      "identity": "cv.ml.KNearest.create()->Ptr<KNearest>",
+      "returnType": "Ptr<KNearest>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates the empty model\n\n    The static method creates empty %KNearest classifier. It should be then trained using StatModel::train method."
+    },
+    {
+      "ordinal": 71,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.KNearest.load",
+      "identity": "cv.ml.KNearest.load(String filepath[/C,/Ref,/PATH])->Ptr<KNearest>",
+      "returnType": "Ptr<KNearest>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized knearest from a file\n     *\n     * Use KNearest::save to serialize and store an KNearest to disk.\n     * Load the KNearest from this file again, by calling this function with the path to the file.\n     *\n     * @param filepath path to serialized KNearest"
+    },
+    {
+      "ordinal": 72,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.SVM",
+      "identity": "class cv.ml.SVM",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief Support Vector Machines.\n\n@sa @ref ml_intro_svm"
+    },
+    {
+      "ordinal": 73,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getType",
+      "identity": "cv.ml.SVM.getType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setType"
+    },
+    {
+      "ordinal": 74,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setType",
+      "identity": "cv.ml.SVM.setType(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getType @see getType"
+    },
+    {
+      "ordinal": 75,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getGamma",
+      "identity": "cv.ml.SVM.getGamma()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setGamma"
+    },
+    {
+      "ordinal": 76,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setGamma",
+      "identity": "cv.ml.SVM.setGamma(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getGamma @see getGamma"
+    },
+    {
+      "ordinal": 77,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getCoef0",
+      "identity": "cv.ml.SVM.getCoef0()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setCoef0"
+    },
+    {
+      "ordinal": 78,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setCoef0",
+      "identity": "cv.ml.SVM.setCoef0(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getCoef0 @see getCoef0"
+    },
+    {
+      "ordinal": 79,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getDegree",
+      "identity": "cv.ml.SVM.getDegree()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setDegree"
+    },
+    {
+      "ordinal": 80,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setDegree",
+      "identity": "cv.ml.SVM.setDegree(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getDegree @see getDegree"
+    },
+    {
+      "ordinal": 81,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getC",
+      "identity": "cv.ml.SVM.getC()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setC"
+    },
+    {
+      "ordinal": 82,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setC",
+      "identity": "cv.ml.SVM.setC(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getC @see getC"
+    },
+    {
+      "ordinal": 83,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getNu",
+      "identity": "cv.ml.SVM.getNu()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setNu"
+    },
+    {
+      "ordinal": 84,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setNu",
+      "identity": "cv.ml.SVM.setNu(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getNu @see getNu"
+    },
+    {
+      "ordinal": 85,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getP",
+      "identity": "cv.ml.SVM.getP()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setP"
+    },
+    {
+      "ordinal": 86,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setP",
+      "identity": "cv.ml.SVM.setP(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getP @see getP"
+    },
+    {
+      "ordinal": 87,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getClassWeights",
+      "identity": "cv.ml.SVM.getClassWeights()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setClassWeights"
+    },
+    {
+      "ordinal": 88,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setClassWeights",
+      "identity": "cv.ml.SVM.setClassWeights(Mat val[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getClassWeights @see getClassWeights"
+    },
+    {
+      "ordinal": 89,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getTermCriteria",
+      "identity": "cv.ml.SVM.getTermCriteria()->cv::TermCriteria",
+      "returnType": "cv::TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTermCriteria"
+    },
+    {
+      "ordinal": 90,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setTermCriteria",
+      "identity": "cv.ml.SVM.setTermCriteria(TermCriteria val[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTermCriteria @see getTermCriteria"
+    },
+    {
+      "ordinal": 91,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getKernelType",
+      "identity": "cv.ml.SVM.getKernelType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Type of a %SVM kernel.\nSee SVM::KernelTypes. Default value is SVM::RBF."
+    },
+    {
+      "ordinal": 92,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.setKernel",
+      "identity": "cv.ml.SVM.setKernel(int kernelType)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "kernelType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Initialize with one of predefined kernels.\nSee SVM::KernelTypes."
+    },
+    {
+      "ordinal": 93,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.SVM.Types",
+      "identity": "enum cv.ml.SVM.Types[const cv.ml.SVM.C_SVC=100;const cv.ml.SVM.NU_SVC=101;const cv.ml.SVM.ONE_CLASS=102;const cv.ml.SVM.EPS_SVR=103;const cv.ml.SVM.NU_SVR=104]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.SVM.C_SVC",
+          "value": "100"
+        },
+        {
+          "name": "const cv.ml.SVM.NU_SVC",
+          "value": "101"
+        },
+        {
+          "name": "const cv.ml.SVM.ONE_CLASS",
+          "value": "102"
+        },
+        {
+          "name": "const cv.ml.SVM.EPS_SVR",
+          "value": "103"
+        },
+        {
+          "name": "const cv.ml.SVM.NU_SVR",
+          "value": "104"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.SVM.KernelTypes",
+      "identity": "enum cv.ml.SVM.KernelTypes[const cv.ml.SVM.CUSTOM=-1;const cv.ml.SVM.LINEAR=0;const cv.ml.SVM.POLY=1;const cv.ml.SVM.RBF=2;const cv.ml.SVM.SIGMOID=3;const cv.ml.SVM.CHI2=4;const cv.ml.SVM.INTER=5]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.SVM.CUSTOM",
+          "value": "-1"
+        },
+        {
+          "name": "const cv.ml.SVM.LINEAR",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.SVM.POLY",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.SVM.RBF",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.SVM.SIGMOID",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ml.SVM.CHI2",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ml.SVM.INTER",
+          "value": "5"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 95,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.SVM.ParamTypes",
+      "identity": "enum cv.ml.SVM.ParamTypes[const cv.ml.SVM.C=0;const cv.ml.SVM.GAMMA=1;const cv.ml.SVM.P=2;const cv.ml.SVM.NU=3;const cv.ml.SVM.COEF=4;const cv.ml.SVM.DEGREE=5]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.SVM.C",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.SVM.GAMMA",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.SVM.P",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.SVM.NU",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ml.SVM.COEF",
+          "value": "4"
+        },
+        {
+          "name": "const cv.ml.SVM.DEGREE",
+          "value": "5"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 96,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.trainAuto",
+      "identity": "cv.ml.SVM.trainAuto(Mat samples;int layout;Mat responses;int kFold=10;Ptr_ParamGrid Cgrid=SVM::getDefaultGridPtr(SVM::C);Ptr_ParamGrid gammaGrid=SVM::getDefaultGridPtr(SVM::GAMMA);Ptr_ParamGrid pGrid=SVM::getDefaultGridPtr(SVM::P);Ptr_ParamGrid nuGrid=SVM::getDefaultGridPtr(SVM::NU);Ptr_ParamGrid coeffGrid=SVM::getDefaultGridPtr(SVM::COEF);Ptr_ParamGrid degreeGrid=SVM::getDefaultGridPtr(SVM::DEGREE);bool balanced=false)->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "layout",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "responses",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "kFold",
+          "default": "10",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ParamGrid",
+          "name": "Cgrid",
+          "default": "SVM::getDefaultGridPtr(SVM::C)",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ParamGrid",
+          "name": "gammaGrid",
+          "default": "SVM::getDefaultGridPtr(SVM::GAMMA)",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ParamGrid",
+          "name": "pGrid",
+          "default": "SVM::getDefaultGridPtr(SVM::P)",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ParamGrid",
+          "name": "nuGrid",
+          "default": "SVM::getDefaultGridPtr(SVM::NU)",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ParamGrid",
+          "name": "coeffGrid",
+          "default": "SVM::getDefaultGridPtr(SVM::COEF)",
+          "modifiers": []
+        },
+        {
+          "type": "Ptr_ParamGrid",
+          "name": "degreeGrid",
+          "default": "SVM::getDefaultGridPtr(SVM::DEGREE)",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "balanced",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Trains an %SVM with optimal parameters\n\n    @param samples training samples\n    @param layout See ml::SampleTypes.\n    @param responses vector of responses associated with the training samples.\n    @param kFold Cross-validation parameter. The training set is divided into kFold subsets. One\n        subset is used to test the model, the others form the train set. So, the %SVM algorithm is\n    @param Cgrid grid for C\n    @param gammaGrid grid for gamma\n    @param pGrid grid for p\n    @param nuGrid grid for nu\n    @param coeffGrid grid for coeff\n    @param degreeGrid grid for degree\n    @param balanced If true and the problem is 2-class classification then the method creates more\n        balanced cross-validation subsets that is proportions between classes in subsets are close\n        to such proportion in the whole train dataset.\n\n    The method trains the %SVM model automatically by choosing the optimal parameters C, gamma, p,\n    nu, coef0, degree. Parameters are considered optimal when the cross-validation\n    estimate of the test set error is minimal.\n\n    This function only makes use of SVM::getDefaultGrid for parameter optimization and thus only\n    offers rudimentary parameter options.\n\n    This function works for the classification (SVM::C_SVC or SVM::NU_SVC) as well as for the\n    regression (SVM::EPS_SVR or SVM::NU_SVR). If it is SVM::ONE_CLASS, no optimization is made and\n    the usual %SVM with parameters specified in params is executed."
+    },
+    {
+      "ordinal": 97,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getSupportVectors",
+      "identity": "cv.ml.SVM.getSupportVectors()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Retrieves all the support vectors\n\n    The method returns all the support vectors as a floating-point matrix, where support vectors are\n    stored as matrix rows."
+    },
+    {
+      "ordinal": 98,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getUncompressedSupportVectors",
+      "identity": "cv.ml.SVM.getUncompressedSupportVectors()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Retrieves all the uncompressed support vectors of a linear %SVM\n\n    The method returns all the uncompressed support vectors of a linear %SVM that the compressed\n    support vector, used for prediction, was derived from. They are returned in a floating-point\n    matrix, where the support vectors are stored as matrix rows."
+    },
+    {
+      "ordinal": 99,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getDecisionFunction",
+      "identity": "cv.ml.SVM.getDecisionFunction(int i;Mat alpha[/O];Mat svidx[/O])->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "i",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "alpha",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "svidx",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Retrieves the decision function\n\n    @param i the index of the decision function. If the problem solved is regression, 1-class or\n        2-class classification, then there will be just one decision function and the index should\n        always be 0. Otherwise, in the case of N-class classification, there will be \\f$N(N-1)/2\\f$\n        decision functions.\n    @param alpha the optional output vector for weights, corresponding to different support vectors.\n        In the case of linear %SVM all the alpha's will be 1's.\n    @param svidx the optional output vector of indices of support vectors within the matrix of\n        support vectors (which can be retrieved by SVM::getSupportVectors). In the case of linear\n        %SVM each decision function consists of a single \"compressed\" support vector.\n\n    The method returns rho parameter of the decision function, a scalar subtracted from the weighted\n    sum of kernel responses."
+    },
+    {
+      "ordinal": 100,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.getDefaultGridPtr",
+      "identity": "cv.ml.SVM.getDefaultGridPtr(int param_id)->Ptr<ParamGrid>",
+      "returnType": "Ptr<ParamGrid>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "param_id",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Generates a grid for %SVM parameters.\n\n    @param param_id %SVM parameters IDs that must be one of the SVM::ParamTypes. The grid is\n    generated for the parameter with this ID.\n\n    The function generates a grid pointer for the specified parameter of the %SVM algorithm.\n    The grid may be passed to the function SVM::trainAuto."
+    },
+    {
+      "ordinal": 101,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.create",
+      "identity": "cv.ml.SVM.create()->Ptr<SVM>",
+      "returnType": "Ptr<SVM>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Creates empty model.\n    Use StatModel::train to train the model. Since %SVM has several parameters, you may want to\nfind the best parameters for your problem, it can be done with SVM::trainAuto."
+    },
+    {
+      "ordinal": 102,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVM.load",
+      "identity": "cv.ml.SVM.load(String filepath[/C,/Ref,/PATH])->Ptr<SVM>",
+      "returnType": "Ptr<SVM>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized svm from a file\n     *\n     * Use SVM::save to serialize and store an SVM to disk.\n     * Load the SVM from this file again, by calling this function with the path to the file.\n     *\n     * @param filepath path to serialized svm"
+    },
+    {
+      "ordinal": 103,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.EM",
+      "identity": "class cv.ml.EM",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief The class implements the Expectation Maximization algorithm.\n\n@sa @ref ml_intro_em"
+    },
+    {
+      "ordinal": 104,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.EM.Types",
+      "identity": "enum cv.ml.EM.Types[const cv.ml.EM.COV_MAT_SPHERICAL=0;const cv.ml.EM.COV_MAT_DIAGONAL=1;const cv.ml.EM.COV_MAT_GENERIC=2;const cv.ml.EM.COV_MAT_DEFAULT=COV_MAT_DIAGONAL]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.EM.COV_MAT_SPHERICAL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.EM.COV_MAT_DIAGONAL",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.EM.COV_MAT_GENERIC",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.EM.COV_MAT_DEFAULT",
+          "value": "COV_MAT_DIAGONAL"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 105,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.EM.<unnamed>",
+      "identity": "enum cv.ml.EM.<unnamed>[const cv.ml.EM.DEFAULT_NCLUSTERS=5;const cv.ml.EM.DEFAULT_MAX_ITERS=100]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.EM.DEFAULT_NCLUSTERS",
+          "value": "5"
+        },
+        {
+          "name": "const cv.ml.EM.DEFAULT_MAX_ITERS",
+          "value": "100"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.EM.<unnamed>",
+      "identity": "enum cv.ml.EM.<unnamed>[const cv.ml.EM.START_E_STEP=1;const cv.ml.EM.START_M_STEP=2;const cv.ml.EM.START_AUTO_STEP=0]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.EM.START_E_STEP",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.EM.START_M_STEP",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.EM.START_AUTO_STEP",
+          "value": "0"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 107,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.getClustersNumber",
+      "identity": "cv.ml.EM.getClustersNumber()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setClustersNumber"
+    },
+    {
+      "ordinal": 108,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.setClustersNumber",
+      "identity": "cv.ml.EM.setClustersNumber(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getClustersNumber @see getClustersNumber"
+    },
+    {
+      "ordinal": 109,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.getCovarianceMatrixType",
+      "identity": "cv.ml.EM.getCovarianceMatrixType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setCovarianceMatrixType"
+    },
+    {
+      "ordinal": 110,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.setCovarianceMatrixType",
+      "identity": "cv.ml.EM.setCovarianceMatrixType(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getCovarianceMatrixType @see getCovarianceMatrixType"
+    },
+    {
+      "ordinal": 111,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.getTermCriteria",
+      "identity": "cv.ml.EM.getTermCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTermCriteria"
+    },
+    {
+      "ordinal": 112,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.setTermCriteria",
+      "identity": "cv.ml.EM.setTermCriteria(TermCriteria val[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTermCriteria @see getTermCriteria"
+    },
+    {
+      "ordinal": 113,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.getWeights",
+      "identity": "cv.ml.EM.getWeights()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns weights of the mixtures\n\n    Returns vector with the number of elements equal to the number of mixtures."
+    },
+    {
+      "ordinal": 114,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.getMeans",
+      "identity": "cv.ml.EM.getMeans()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the cluster centers (means of the Gaussian mixture)\n\n    Returns matrix with the number of rows equal to the number of mixtures and number of columns\n    equal to the space dimensionality."
+    },
+    {
+      "ordinal": 115,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.getCovs",
+      "identity": "cv.ml.EM.getCovs(vector_Mat covs[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "covs",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns covariation matrices\n\n    Returns vector of covariation matrices. Number of matrices is the number of gaussian mixtures,\n    each matrix is a square floating-point matrix NxN, where N is the space dimensionality."
+    },
+    {
+      "ordinal": 116,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.predict",
+      "identity": "cv.ml.EM.predict(Mat samples;Mat results=Mat()[/O];int flags=0)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "results",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns posterior probabilities for the provided samples\n\n    @param samples The input samples, floating-point matrix\n    @param results The optional output \\f$ nSamples \\times nClusters\\f$ matrix of results. It contains\n    posterior probabilities for each sample from the input\n    @param flags This parameter will be ignored"
+    },
+    {
+      "ordinal": 117,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.predict2",
+      "identity": "cv.ml.EM.predict2(Mat sample;Mat probs[/O])->Vec2d",
+      "returnType": "Vec2d",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "sample",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "probs",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns a likelihood logarithm value and an index of the most probable mixture component\n    for the given sample.\n\n    @param sample A sample for classification. It should be a one-channel matrix of\n        \\f$1 \\times dims\\f$ or \\f$dims \\times 1\\f$ size.\n    @param probs Optional output matrix that contains posterior probabilities of each component\n        given the sample. It has \\f$1 \\times nclusters\\f$ size and CV_64FC1 type.\n\n    The method returns a two-element double vector. Zero element is a likelihood logarithm value for\n    the sample. First element is an index of the most probable mixture component for the given\n    sample."
+    },
+    {
+      "ordinal": 118,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.trainEM",
+      "identity": "cv.ml.EM.trainEM(Mat samples;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "logLikelihoods",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "labels",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "probs",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate the Gaussian mixture parameters from a samples set.\n\n    This variation starts with Expectation step. Initial values of the model parameters will be\n    estimated by the k-means algorithm.\n\n    Unlike many of the ML models, %EM is an unsupervised learning algorithm and it does not take\n    responses (class labels or function values) as input. Instead, it computes the *Maximum\n    Likelihood Estimate* of the Gaussian mixture parameters from an input sample set, stores all the\n    parameters inside the structure: \\f$p_{i,k}\\f$ in probs, \\f$a_k\\f$ in means , \\f$S_k\\f$ in\n    covs[k], \\f$\\pi_k\\f$ in weights , and optionally computes the output \"class label\" for each\n    sample: \\f$\\texttt{labels}_i=\\texttt{arg max}_k(p_{i,k}), i=1..N\\f$ (indices of the most\n    probable mixture component for each sample).\n\n    The trained model can be used further for prediction, just like any other classifier. The\n    trained model is similar to the NormalBayesClassifier.\n\n    @param samples Samples from which the Gaussian mixture model will be estimated. It should be a\n        one-channel matrix, each row of which is a sample. If the matrix does not have CV_64F type\n        it will be converted to the inner matrix of such type for the further computing.\n    @param logLikelihoods The optional output matrix that contains a likelihood logarithm value for\n        each sample. It has \\f$nsamples \\times 1\\f$ size and CV_64FC1 type.\n    @param labels The optional output \"class label\" for each sample:\n        \\f$\\texttt{labels}_i=\\texttt{arg max}_k(p_{i,k}), i=1..N\\f$ (indices of the most probable\n        mixture component for each sample). It has \\f$nsamples \\times 1\\f$ size and CV_32SC1 type.\n    @param probs The optional output matrix that contains posterior probabilities of each Gaussian\n        mixture component given the each sample. It has \\f$nsamples \\times nclusters\\f$ size and\n        CV_64FC1 type."
+    },
+    {
+      "ordinal": 119,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.trainE",
+      "identity": "cv.ml.EM.trainE(Mat samples;Mat means0;Mat covs0=Mat();Mat weights0=Mat();Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "means0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "covs0",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "weights0",
+          "default": "Mat()",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "logLikelihoods",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "labels",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "probs",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate the Gaussian mixture parameters from a samples set.\n\n    This variation starts with Expectation step. You need to provide initial means \\f$a_k\\f$ of\n    mixture components. Optionally you can pass initial weights \\f$\\pi_k\\f$ and covariance matrices\n    \\f$S_k\\f$ of mixture components.\n\n    @param samples Samples from which the Gaussian mixture model will be estimated. It should be a\n        one-channel matrix, each row of which is a sample. If the matrix does not have CV_64F type\n        it will be converted to the inner matrix of such type for the further computing.\n    @param means0 Initial means \\f$a_k\\f$ of mixture components. It is a one-channel matrix of\n        \\f$nclusters \\times dims\\f$ size. If the matrix does not have CV_64F type it will be\n        converted to the inner matrix of such type for the further computing.\n    @param covs0 The vector of initial covariance matrices \\f$S_k\\f$ of mixture components. Each of\n        covariance matrices is a one-channel matrix of \\f$dims \\times dims\\f$ size. If the matrices\n        do not have CV_64F type they will be converted to the inner matrices of such type for the\n        further computing.\n    @param weights0 Initial weights \\f$\\pi_k\\f$ of mixture components. It should be a one-channel\n        floating-point matrix with \\f$1 \\times nclusters\\f$ or \\f$nclusters \\times 1\\f$ size.\n    @param logLikelihoods The optional output matrix that contains a likelihood logarithm value for\n        each sample. It has \\f$nsamples \\times 1\\f$ size and CV_64FC1 type.\n    @param labels The optional output \"class label\" for each sample:\n        \\f$\\texttt{labels}_i=\\texttt{arg max}_k(p_{i,k}), i=1..N\\f$ (indices of the most probable\n        mixture component for each sample). It has \\f$nsamples \\times 1\\f$ size and CV_32SC1 type.\n    @param probs The optional output matrix that contains posterior probabilities of each Gaussian\n        mixture component given the each sample. It has \\f$nsamples \\times nclusters\\f$ size and\n        CV_64FC1 type."
+    },
+    {
+      "ordinal": 120,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.trainM",
+      "identity": "cv.ml.EM.trainM(Mat samples;Mat probs0;Mat logLikelihoods=Mat()[/O];Mat labels=Mat()[/O];Mat probs=Mat()[/O])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "probs0",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "logLikelihoods",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "labels",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "probs",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimate the Gaussian mixture parameters from a samples set.\n\n    This variation starts with Maximization step. You need to provide initial probabilities\n    \\f$p_{i,k}\\f$ to use this option.\n\n    @param samples Samples from which the Gaussian mixture model will be estimated. It should be a\n        one-channel matrix, each row of which is a sample. If the matrix does not have CV_64F type\n        it will be converted to the inner matrix of such type for the further computing.\n    @param probs0 the probabilities\n    @param logLikelihoods The optional output matrix that contains a likelihood logarithm value for\n        each sample. It has \\f$nsamples \\times 1\\f$ size and CV_64FC1 type.\n    @param labels The optional output \"class label\" for each sample:\n        \\f$\\texttt{labels}_i=\\texttt{arg max}_k(p_{i,k}), i=1..N\\f$ (indices of the most probable\n        mixture component for each sample). It has \\f$nsamples \\times 1\\f$ size and CV_32SC1 type.\n    @param probs The optional output matrix that contains posterior probabilities of each Gaussian\n        mixture component given the each sample. It has \\f$nsamples \\times nclusters\\f$ size and\n        CV_64FC1 type."
+    },
+    {
+      "ordinal": 121,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.create",
+      "identity": "cv.ml.EM.create()->Ptr<EM>",
+      "returnType": "Ptr<EM>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Creates empty %EM model.\n    The model should be trained then using StatModel::train(traindata, flags) method. Alternatively, you\n    can use one of the EM::train\\* methods or load it from file using Algorithm::load\\<EM\\>(filename)."
+    },
+    {
+      "ordinal": 122,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.EM.load",
+      "identity": "cv.ml.EM.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<EM>",
+      "returnType": "Ptr<EM>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized EM from a file\n     *\n     * Use EM::save to serialize and store an EM to disk.\n     * Load the EM from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized EM\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 123,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.DTrees",
+      "identity": "class cv.ml.DTrees",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief The class represents a single decision tree or a collection of decision trees.\n\nThe current public interface of the class allows user to train only a single decision tree, however\nthe class is capable of storing multiple decision trees and using them for prediction (by summing\nresponses or using a voting schemes), and the derived from DTrees classes (such as RTrees and Boost)\nuse this capability to implement decision tree ensembles.\n\n@sa @ref ml_intro_trees"
+    },
+    {
+      "ordinal": 124,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.DTrees.Flags",
+      "identity": "enum cv.ml.DTrees.Flags[const cv.ml.DTrees.PREDICT_AUTO=0;const cv.ml.DTrees.PREDICT_SUM=(1<<8);const cv.ml.DTrees.PREDICT_MAX_VOTE=(2<<8);const cv.ml.DTrees.PREDICT_MASK=(3<<8)]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.DTrees.PREDICT_AUTO",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.DTrees.PREDICT_SUM",
+          "value": "(1<<8)"
+        },
+        {
+          "name": "const cv.ml.DTrees.PREDICT_MAX_VOTE",
+          "value": "(2<<8)"
+        },
+        {
+          "name": "const cv.ml.DTrees.PREDICT_MASK",
+          "value": "(3<<8)"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 125,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getMaxCategories",
+      "identity": "cv.ml.DTrees.getMaxCategories()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMaxCategories"
+    },
+    {
+      "ordinal": 126,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setMaxCategories",
+      "identity": "cv.ml.DTrees.setMaxCategories(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMaxCategories @see getMaxCategories"
+    },
+    {
+      "ordinal": 127,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getMaxDepth",
+      "identity": "cv.ml.DTrees.getMaxDepth()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMaxDepth"
+    },
+    {
+      "ordinal": 128,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setMaxDepth",
+      "identity": "cv.ml.DTrees.setMaxDepth(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMaxDepth @see getMaxDepth"
+    },
+    {
+      "ordinal": 129,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getMinSampleCount",
+      "identity": "cv.ml.DTrees.getMinSampleCount()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMinSampleCount"
+    },
+    {
+      "ordinal": 130,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setMinSampleCount",
+      "identity": "cv.ml.DTrees.setMinSampleCount(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMinSampleCount @see getMinSampleCount"
+    },
+    {
+      "ordinal": 131,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getCVFolds",
+      "identity": "cv.ml.DTrees.getCVFolds()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setCVFolds"
+    },
+    {
+      "ordinal": 132,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setCVFolds",
+      "identity": "cv.ml.DTrees.setCVFolds(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getCVFolds @see getCVFolds"
+    },
+    {
+      "ordinal": 133,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getUseSurrogates",
+      "identity": "cv.ml.DTrees.getUseSurrogates()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setUseSurrogates"
+    },
+    {
+      "ordinal": 134,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setUseSurrogates",
+      "identity": "cv.ml.DTrees.setUseSurrogates(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getUseSurrogates @see getUseSurrogates"
+    },
+    {
+      "ordinal": 135,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getUse1SERule",
+      "identity": "cv.ml.DTrees.getUse1SERule()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setUse1SERule"
+    },
+    {
+      "ordinal": 136,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setUse1SERule",
+      "identity": "cv.ml.DTrees.setUse1SERule(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getUse1SERule @see getUse1SERule"
+    },
+    {
+      "ordinal": 137,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getTruncatePrunedTree",
+      "identity": "cv.ml.DTrees.getTruncatePrunedTree()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTruncatePrunedTree"
+    },
+    {
+      "ordinal": 138,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setTruncatePrunedTree",
+      "identity": "cv.ml.DTrees.setTruncatePrunedTree(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTruncatePrunedTree @see getTruncatePrunedTree"
+    },
+    {
+      "ordinal": 139,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getRegressionAccuracy",
+      "identity": "cv.ml.DTrees.getRegressionAccuracy()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRegressionAccuracy"
+    },
+    {
+      "ordinal": 140,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setRegressionAccuracy",
+      "identity": "cv.ml.DTrees.setRegressionAccuracy(float val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRegressionAccuracy @see getRegressionAccuracy"
+    },
+    {
+      "ordinal": 141,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.getPriors",
+      "identity": "cv.ml.DTrees.getPriors()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setPriors"
+    },
+    {
+      "ordinal": 142,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.setPriors",
+      "identity": "cv.ml.DTrees.setPriors(Mat val[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getPriors @see getPriors"
+    },
+    {
+      "ordinal": 143,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.create",
+      "identity": "cv.ml.DTrees.create()->Ptr<DTrees>",
+      "returnType": "Ptr<DTrees>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates the empty model\n\n    The static method creates empty decision tree with the specified parameters. It should be then\n    trained using train method (see StatModel::train). Alternatively, you can load the model from\n    file using Algorithm::load\\<DTrees\\>(filename)."
+    },
+    {
+      "ordinal": 144,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.DTrees.load",
+      "identity": "cv.ml.DTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<DTrees>",
+      "returnType": "Ptr<DTrees>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized DTrees from a file\n     *\n     * Use DTree::save to serialize and store an DTree to disk.\n     * Load the DTree from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized DTree\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 145,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.RTrees",
+      "identity": "class cv.ml.RTrees",
+      "returnType": ": cv::ml::DTrees",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::DTrees",
+      "documentation": "@brief The class implements the random forest predictor.\n\n@sa @ref ml_intro_rtrees"
+    },
+    {
+      "ordinal": 146,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.getCalculateVarImportance",
+      "identity": "cv.ml.RTrees.getCalculateVarImportance()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setCalculateVarImportance"
+    },
+    {
+      "ordinal": 147,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.setCalculateVarImportance",
+      "identity": "cv.ml.RTrees.setCalculateVarImportance(bool val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getCalculateVarImportance @see getCalculateVarImportance"
+    },
+    {
+      "ordinal": 148,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.getActiveVarCount",
+      "identity": "cv.ml.RTrees.getActiveVarCount()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setActiveVarCount"
+    },
+    {
+      "ordinal": 149,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.setActiveVarCount",
+      "identity": "cv.ml.RTrees.setActiveVarCount(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getActiveVarCount @see getActiveVarCount"
+    },
+    {
+      "ordinal": 150,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.getTermCriteria",
+      "identity": "cv.ml.RTrees.getTermCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTermCriteria"
+    },
+    {
+      "ordinal": 151,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.setTermCriteria",
+      "identity": "cv.ml.RTrees.setTermCriteria(TermCriteria val[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTermCriteria @see getTermCriteria"
+    },
+    {
+      "ordinal": 152,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.getVarImportance",
+      "identity": "cv.ml.RTrees.getVarImportance()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns the variable importance array.\n    The method returns the variable importance vector, computed at the training stage when\n    CalculateVarImportance is set to true. If this flag was set to false, the empty matrix is\n    returned."
+    },
+    {
+      "ordinal": 153,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.getVotes",
+      "identity": "cv.ml.RTrees.getVotes(Mat samples;Mat results[/O];int flags)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "results",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns the result of each individual tree in the forest.\n    In case the model is a regression problem, the method will return each of the trees'\n    results for each of the sample cases. If the model is a classifier, it will return\n    a Mat with samples + 1 rows, where the first row gives the class number and the\n    following rows return the votes each class had for each sample.\n        @param samples Array containing the samples for which votes will be calculated.\n        @param results Array where the result of the calculation will be written.\n        @param flags Flags for defining the type of RTrees."
+    },
+    {
+      "ordinal": 154,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.create",
+      "identity": "cv.ml.RTrees.create()->Ptr<RTrees>",
+      "returnType": "Ptr<RTrees>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Creates the empty model.\n    Use StatModel::train to train the model, StatModel::train to create and train the model,\n    Algorithm::load to load the pre-trained model."
+    },
+    {
+      "ordinal": 155,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.RTrees.load",
+      "identity": "cv.ml.RTrees.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<RTrees>",
+      "returnType": "Ptr<RTrees>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized RTree from a file\n     *\n     * Use RTree::save to serialize and store an RTree to disk.\n     * Load the RTree from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized RTree\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 156,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.Boost",
+      "identity": "class cv.ml.Boost",
+      "returnType": ": cv::ml::DTrees",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::DTrees",
+      "documentation": "@brief Boosted tree classifier derived from DTrees\n\n@sa @ref ml_intro_boost"
+    },
+    {
+      "ordinal": 157,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.getBoostType",
+      "identity": "cv.ml.Boost.getBoostType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setBoostType"
+    },
+    {
+      "ordinal": 158,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.setBoostType",
+      "identity": "cv.ml.Boost.setBoostType(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getBoostType @see getBoostType"
+    },
+    {
+      "ordinal": 159,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.getWeakCount",
+      "identity": "cv.ml.Boost.getWeakCount()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setWeakCount"
+    },
+    {
+      "ordinal": 160,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.setWeakCount",
+      "identity": "cv.ml.Boost.setWeakCount(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getWeakCount @see getWeakCount"
+    },
+    {
+      "ordinal": 161,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.getWeightTrimRate",
+      "identity": "cv.ml.Boost.getWeightTrimRate()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setWeightTrimRate"
+    },
+    {
+      "ordinal": 162,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.setWeightTrimRate",
+      "identity": "cv.ml.Boost.setWeightTrimRate(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getWeightTrimRate @see getWeightTrimRate"
+    },
+    {
+      "ordinal": 163,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.Boost.Types",
+      "identity": "enum cv.ml.Boost.Types[const cv.ml.Boost.DISCRETE=0;const cv.ml.Boost.REAL=1;const cv.ml.Boost.LOGIT=2;const cv.ml.Boost.GENTLE=3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.Boost.DISCRETE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.Boost.REAL",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.Boost.LOGIT",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.Boost.GENTLE",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 164,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.create",
+      "identity": "cv.ml.Boost.create()->Ptr<Boost>",
+      "returnType": "Ptr<Boost>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Creates the empty model.\nUse StatModel::train to train the model, Algorithm::load\\<Boost\\>(filename) to load the pre-trained model."
+    },
+    {
+      "ordinal": 165,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.Boost.load",
+      "identity": "cv.ml.Boost.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<Boost>",
+      "returnType": "Ptr<Boost>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized Boost from a file\n     *\n     * Use Boost::save to serialize and store an RTree to disk.\n     * Load the Boost from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized Boost\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 166,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.ANN_MLP",
+      "identity": "class cv.ml.ANN_MLP",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief Artificial Neural Networks - Multi-Layer Perceptrons.\n\nUnlike many other models in ML that are constructed and trained at once, in the MLP model these\nsteps are separated. First, a network with the specified topology is created using the non-default\nconstructor or the method ANN_MLP::create. All the weights are set to zeros. Then, the network is\ntrained using a set of input and output vectors. The training procedure can be repeated more than\nonce, that is, the weights can be adjusted based on the new training data.\n\nAdditional flags for StatModel::train are available: ANN_MLP::TrainFlags.\n\n@sa @ref ml_intro_ann"
+    },
+    {
+      "ordinal": 167,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.ANN_MLP.TrainingMethods",
+      "identity": "enum cv.ml.ANN_MLP.TrainingMethods[const cv.ml.ANN_MLP.BACKPROP=0;const cv.ml.ANN_MLP.RPROP=1;const cv.ml.ANN_MLP.ANNEAL=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.ANN_MLP.BACKPROP",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.RPROP",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.ANNEAL",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 168,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setTrainMethod",
+      "identity": "cv.ml.ANN_MLP.setTrainMethod(int method;double param1=0;double param2=0)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "method",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "param1",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "param2",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Sets training method and common parameters.\n    @param method Default value is ANN_MLP::RPROP. See ANN_MLP::TrainingMethods.\n    @param param1 passed to setRpropDW0 for ANN_MLP::RPROP and to setBackpropWeightScale for ANN_MLP::BACKPROP and to initialT for ANN_MLP::ANNEAL.\n    @param param2 passed to setRpropDWMin for ANN_MLP::RPROP and to setBackpropMomentumScale for ANN_MLP::BACKPROP and to finalT for ANN_MLP::ANNEAL."
+    },
+    {
+      "ordinal": 169,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getTrainMethod",
+      "identity": "cv.ml.ANN_MLP.getTrainMethod()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns current training method"
+    },
+    {
+      "ordinal": 170,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setActivationFunction",
+      "identity": "cv.ml.ANN_MLP.setActivationFunction(int type;double param1=0;double param2=0)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "param1",
+          "default": "0",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "param2",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Initialize the activation function for each neuron.\n    Currently the default and the only fully supported activation function is ANN_MLP::SIGMOID_SYM.\n    @param type The type of activation function. See ANN_MLP::ActivationFunctions.\n    @param param1 The first parameter of the activation function, \\f$\\alpha\\f$. Default value is 0.\n    @param param2 The second parameter of the activation function, \\f$\\beta\\f$. Default value is 0."
+    },
+    {
+      "ordinal": 171,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setLayerSizes",
+      "identity": "cv.ml.ANN_MLP.setLayerSizes(Mat _layer_sizes)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "_layer_sizes",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Integer vector specifying the number of neurons in each layer including the input and output layers.\n    The very first element specifies the number of elements in the input layer.\n    The last element - number of elements in the output layer. Default value is empty Mat.\n@sa getLayerSizes"
+    },
+    {
+      "ordinal": 172,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getLayerSizes",
+      "identity": "cv.ml.ANN_MLP.getLayerSizes()->cv::Mat",
+      "returnType": "cv::Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Integer vector specifying the number of neurons in each layer including the input and output layers.\n    The very first element specifies the number of elements in the input layer.\n    The last element - number of elements in the output layer.\n@sa setLayerSizes"
+    },
+    {
+      "ordinal": 173,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getTermCriteria",
+      "identity": "cv.ml.ANN_MLP.getTermCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTermCriteria"
+    },
+    {
+      "ordinal": 174,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setTermCriteria",
+      "identity": "cv.ml.ANN_MLP.setTermCriteria(TermCriteria val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTermCriteria @see getTermCriteria"
+    },
+    {
+      "ordinal": 175,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getBackpropWeightScale",
+      "identity": "cv.ml.ANN_MLP.getBackpropWeightScale()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setBackpropWeightScale"
+    },
+    {
+      "ordinal": 176,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setBackpropWeightScale",
+      "identity": "cv.ml.ANN_MLP.setBackpropWeightScale(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getBackpropWeightScale @see getBackpropWeightScale"
+    },
+    {
+      "ordinal": 177,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getBackpropMomentumScale",
+      "identity": "cv.ml.ANN_MLP.getBackpropMomentumScale()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setBackpropMomentumScale"
+    },
+    {
+      "ordinal": 178,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setBackpropMomentumScale",
+      "identity": "cv.ml.ANN_MLP.setBackpropMomentumScale(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getBackpropMomentumScale @see getBackpropMomentumScale"
+    },
+    {
+      "ordinal": 179,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getRpropDW0",
+      "identity": "cv.ml.ANN_MLP.getRpropDW0()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRpropDW0"
+    },
+    {
+      "ordinal": 180,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setRpropDW0",
+      "identity": "cv.ml.ANN_MLP.setRpropDW0(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRpropDW0 @see getRpropDW0"
+    },
+    {
+      "ordinal": 181,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getRpropDWPlus",
+      "identity": "cv.ml.ANN_MLP.getRpropDWPlus()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRpropDWPlus"
+    },
+    {
+      "ordinal": 182,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setRpropDWPlus",
+      "identity": "cv.ml.ANN_MLP.setRpropDWPlus(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRpropDWPlus @see getRpropDWPlus"
+    },
+    {
+      "ordinal": 183,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getRpropDWMinus",
+      "identity": "cv.ml.ANN_MLP.getRpropDWMinus()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRpropDWMinus"
+    },
+    {
+      "ordinal": 184,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setRpropDWMinus",
+      "identity": "cv.ml.ANN_MLP.setRpropDWMinus(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRpropDWMinus @see getRpropDWMinus"
+    },
+    {
+      "ordinal": 185,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getRpropDWMin",
+      "identity": "cv.ml.ANN_MLP.getRpropDWMin()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRpropDWMin"
+    },
+    {
+      "ordinal": 186,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setRpropDWMin",
+      "identity": "cv.ml.ANN_MLP.setRpropDWMin(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRpropDWMin @see getRpropDWMin"
+    },
+    {
+      "ordinal": 187,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getRpropDWMax",
+      "identity": "cv.ml.ANN_MLP.getRpropDWMax()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRpropDWMax"
+    },
+    {
+      "ordinal": 188,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setRpropDWMax",
+      "identity": "cv.ml.ANN_MLP.setRpropDWMax(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRpropDWMax @see getRpropDWMax"
+    },
+    {
+      "ordinal": 189,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getAnnealInitialT",
+      "identity": "cv.ml.ANN_MLP.getAnnealInitialT()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAnnealInitialT"
+    },
+    {
+      "ordinal": 190,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setAnnealInitialT",
+      "identity": "cv.ml.ANN_MLP.setAnnealInitialT(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAnnealInitialT @see getAnnealInitialT"
+    },
+    {
+      "ordinal": 191,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getAnnealFinalT",
+      "identity": "cv.ml.ANN_MLP.getAnnealFinalT()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAnnealFinalT"
+    },
+    {
+      "ordinal": 192,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setAnnealFinalT",
+      "identity": "cv.ml.ANN_MLP.setAnnealFinalT(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAnnealFinalT @see getAnnealFinalT"
+    },
+    {
+      "ordinal": 193,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getAnnealCoolingRatio",
+      "identity": "cv.ml.ANN_MLP.getAnnealCoolingRatio()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAnnealCoolingRatio"
+    },
+    {
+      "ordinal": 194,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setAnnealCoolingRatio",
+      "identity": "cv.ml.ANN_MLP.setAnnealCoolingRatio(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAnnealCoolingRatio @see getAnnealCoolingRatio"
+    },
+    {
+      "ordinal": 195,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getAnnealItePerStep",
+      "identity": "cv.ml.ANN_MLP.getAnnealItePerStep()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setAnnealItePerStep"
+    },
+    {
+      "ordinal": 196,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.setAnnealItePerStep",
+      "identity": "cv.ml.ANN_MLP.setAnnealItePerStep(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getAnnealItePerStep @see getAnnealItePerStep"
+    },
+    {
+      "ordinal": 197,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.ANN_MLP.ActivationFunctions",
+      "identity": "enum cv.ml.ANN_MLP.ActivationFunctions[const cv.ml.ANN_MLP.IDENTITY=0;const cv.ml.ANN_MLP.SIGMOID_SYM=1;const cv.ml.ANN_MLP.GAUSSIAN=2;const cv.ml.ANN_MLP.RELU=3;const cv.ml.ANN_MLP.LEAKYRELU=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.ANN_MLP.IDENTITY",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.SIGMOID_SYM",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.GAUSSIAN",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.RELU",
+          "value": "3"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.LEAKYRELU",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 198,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.ANN_MLP.TrainFlags",
+      "identity": "enum cv.ml.ANN_MLP.TrainFlags[const cv.ml.ANN_MLP.UPDATE_WEIGHTS=1;const cv.ml.ANN_MLP.NO_INPUT_SCALE=2;const cv.ml.ANN_MLP.NO_OUTPUT_SCALE=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.ANN_MLP.UPDATE_WEIGHTS",
+          "value": "1"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.NO_INPUT_SCALE",
+          "value": "2"
+        },
+        {
+          "name": "const cv.ml.ANN_MLP.NO_OUTPUT_SCALE",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 199,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.getWeights",
+      "identity": "cv.ml.ANN_MLP.getWeights(int layerIdx)->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "layerIdx",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 200,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.create",
+      "identity": "cv.ml.ANN_MLP.create()->Ptr<ANN_MLP>",
+      "returnType": "Ptr<ANN_MLP>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates empty model\n\n    Use StatModel::train to train the model, Algorithm::load\\<ANN_MLP\\>(filename) to load the pre-trained model.\n    Note that the train method has optional flags: ANN_MLP::TrainFlags."
+    },
+    {
+      "ordinal": 201,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.ANN_MLP.load",
+      "identity": "cv.ml.ANN_MLP.load(String filepath[/C,/Ref,/PATH])->Ptr<ANN_MLP>",
+      "returnType": "Ptr<ANN_MLP>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized ANN from a file\n     *\n     * Use ANN::save to serialize and store an ANN to disk.\n     * Load the ANN from this file again, by calling this function with the path to the file.\n     *\n     * @param filepath path to serialized ANN"
+    },
+    {
+      "ordinal": 202,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.LogisticRegression",
+      "identity": "class cv.ml.LogisticRegression",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "@brief Implements Logistic Regression classifier.\n\n@sa @ref ml_intro_lr"
+    },
+    {
+      "ordinal": 203,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.getLearningRate",
+      "identity": "cv.ml.LogisticRegression.getLearningRate()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setLearningRate"
+    },
+    {
+      "ordinal": 204,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.setLearningRate",
+      "identity": "cv.ml.LogisticRegression.setLearningRate(double val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getLearningRate @see getLearningRate"
+    },
+    {
+      "ordinal": 205,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.getIterations",
+      "identity": "cv.ml.LogisticRegression.getIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setIterations"
+    },
+    {
+      "ordinal": 206,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.setIterations",
+      "identity": "cv.ml.LogisticRegression.setIterations(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getIterations @see getIterations"
+    },
+    {
+      "ordinal": 207,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.getRegularization",
+      "identity": "cv.ml.LogisticRegression.getRegularization()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setRegularization"
+    },
+    {
+      "ordinal": 208,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.setRegularization",
+      "identity": "cv.ml.LogisticRegression.setRegularization(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getRegularization @see getRegularization"
+    },
+    {
+      "ordinal": 209,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.getTrainMethod",
+      "identity": "cv.ml.LogisticRegression.getTrainMethod()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTrainMethod"
+    },
+    {
+      "ordinal": 210,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.setTrainMethod",
+      "identity": "cv.ml.LogisticRegression.setTrainMethod(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTrainMethod @see getTrainMethod"
+    },
+    {
+      "ordinal": 211,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.getMiniBatchSize",
+      "identity": "cv.ml.LogisticRegression.getMiniBatchSize()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMiniBatchSize"
+    },
+    {
+      "ordinal": 212,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.setMiniBatchSize",
+      "identity": "cv.ml.LogisticRegression.setMiniBatchSize(int val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMiniBatchSize @see getMiniBatchSize"
+    },
+    {
+      "ordinal": 213,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.getTermCriteria",
+      "identity": "cv.ml.LogisticRegression.getTermCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTermCriteria"
+    },
+    {
+      "ordinal": 214,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.setTermCriteria",
+      "identity": "cv.ml.LogisticRegression.setTermCriteria(TermCriteria val)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTermCriteria @see getTermCriteria"
+    },
+    {
+      "ordinal": 215,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.LogisticRegression.RegKinds",
+      "identity": "enum cv.ml.LogisticRegression.RegKinds[const cv.ml.LogisticRegression.REG_DISABLE=-1;const cv.ml.LogisticRegression.REG_L1=0;const cv.ml.LogisticRegression.REG_L2=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.LogisticRegression.REG_DISABLE",
+          "value": "-1"
+        },
+        {
+          "name": "const cv.ml.LogisticRegression.REG_L1",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.LogisticRegression.REG_L2",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 216,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.LogisticRegression.Methods",
+      "identity": "enum cv.ml.LogisticRegression.Methods[const cv.ml.LogisticRegression.BATCH=0;const cv.ml.LogisticRegression.MINI_BATCH=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.LogisticRegression.BATCH",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.LogisticRegression.MINI_BATCH",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 217,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.predict",
+      "identity": "cv.ml.LogisticRegression.predict(Mat samples;Mat results=Mat()[/O];int flags=0)->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "samples",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "results",
+          "default": "Mat()",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Predicts responses for input samples and returns a float type.\n\n    @param samples The input data for the prediction algorithm. Matrix [m x n], where each row\n        contains variables (features) of one object being classified. Should have data type CV_32F.\n    @param results Predicted labels as a column matrix of type CV_32S.\n    @param flags Not used."
+    },
+    {
+      "ordinal": 218,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.get_learnt_thetas",
+      "identity": "cv.ml.LogisticRegression.get_learnt_thetas()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief This function returns the trained parameters arranged across rows.\n\n    For a two class classification problem, it returns a row matrix. It returns learnt parameters of\n    the Logistic Regression as a matrix of type CV_32F."
+    },
+    {
+      "ordinal": 219,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.create",
+      "identity": "cv.ml.LogisticRegression.create()->Ptr<LogisticRegression>",
+      "returnType": "Ptr<LogisticRegression>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates empty model.\n\n    Creates Logistic Regression model with parameters given."
+    },
+    {
+      "ordinal": 220,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.LogisticRegression.load",
+      "identity": "cv.ml.LogisticRegression.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<LogisticRegression>",
+      "returnType": "Ptr<LogisticRegression>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized LogisticRegression from a file\n     *\n     * Use LogisticRegression::save to serialize and store an LogisticRegression to disk.\n     * Load the LogisticRegression from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized LogisticRegression\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 221,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "class",
+      "name": "cv.ml.SVMSGD",
+      "identity": "class cv.ml.SVMSGD",
+      "returnType": ": cv::ml::StatModel",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::ml::StatModel",
+      "documentation": "**************************************************************************************\\\n*                        Stochastic Gradient Descent SVM Classifier                      *\n\\***************************************************************************************"
+    },
+    {
+      "ordinal": 222,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.SVMSGD.SvmsgdType",
+      "identity": "enum cv.ml.SVMSGD.SvmsgdType[const cv.ml.SVMSGD.SGD=0;const cv.ml.SVMSGD.ASGD=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.SVMSGD.SGD",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.SVMSGD.ASGD",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 223,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "enum",
+      "name": "cv.ml.SVMSGD.MarginType",
+      "identity": "enum cv.ml.SVMSGD.MarginType[const cv.ml.SVMSGD.SOFT_MARGIN=0;const cv.ml.SVMSGD.HARD_MARGIN=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.ml.SVMSGD.SOFT_MARGIN",
+          "value": "0"
+        },
+        {
+          "name": "const cv.ml.SVMSGD.HARD_MARGIN",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 224,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getWeights",
+      "identity": "cv.ml.SVMSGD.getWeights()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @return the weights of the trained model (decision function f(x) = weights * x + shift)."
+    },
+    {
+      "ordinal": 225,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getShift",
+      "identity": "cv.ml.SVMSGD.getShift()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* @return the shift of the trained model (decision function f(x) = weights * x + shift)."
+    },
+    {
+      "ordinal": 226,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.create",
+      "identity": "cv.ml.SVMSGD.create()->Ptr<SVMSGD>",
+      "returnType": "Ptr<SVMSGD>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates empty model.\n     * Use StatModel::train to train the model. Since %SVMSGD has several parameters, you may want to\n     * find the best parameters for your problem or use setOptimalParameters() to set some default parameters."
+    },
+    {
+      "ordinal": 227,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.load",
+      "identity": "cv.ml.SVMSGD.load(String filepath[/C,/Ref,/PATH];String nodeName=String()[/C,/Ref])->Ptr<SVMSGD>",
+      "returnType": "Ptr<SVMSGD>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "filepath",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref",
+            "/PATH"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "nodeName",
+          "default": "String()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Loads and creates a serialized SVMSGD from a file\n     *\n     * Use SVMSGD::save to serialize and store an SVMSGD to disk.\n     * Load the SVMSGD from this file again, by calling this function with the path to the file.\n     * Optionally specify the node for the file containing the classifier\n     *\n     * @param filepath path to serialized SVMSGD\n     * @param nodeName name of node containing the classifier"
+    },
+    {
+      "ordinal": 228,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setOptimalParameters",
+      "identity": "cv.ml.SVMSGD.setOptimalParameters(int svmsgdType=SVMSGD::ASGD;int marginType=SVMSGD::SOFT_MARGIN)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "svmsgdType",
+          "default": "SVMSGD::ASGD",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "marginType",
+          "default": "SVMSGD::SOFT_MARGIN",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Function sets optimal parameters values for chosen SVM SGD model.\n     * @param svmsgdType is the type of SVMSGD classifier.\n     * @param marginType is the type of margin constraint."
+    },
+    {
+      "ordinal": 229,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getSvmsgdType",
+      "identity": "cv.ml.SVMSGD.getSvmsgdType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setSvmsgdType"
+    },
+    {
+      "ordinal": 230,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setSvmsgdType",
+      "identity": "cv.ml.SVMSGD.setSvmsgdType(int svmsgdType)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "svmsgdType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getSvmsgdType @see getSvmsgdType"
+    },
+    {
+      "ordinal": 231,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getMarginType",
+      "identity": "cv.ml.SVMSGD.getMarginType()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMarginType"
+    },
+    {
+      "ordinal": 232,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setMarginType",
+      "identity": "cv.ml.SVMSGD.setMarginType(int marginType)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "marginType",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMarginType @see getMarginType"
+    },
+    {
+      "ordinal": 233,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getMarginRegularization",
+      "identity": "cv.ml.SVMSGD.getMarginRegularization()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setMarginRegularization"
+    },
+    {
+      "ordinal": 234,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setMarginRegularization",
+      "identity": "cv.ml.SVMSGD.setMarginRegularization(float marginRegularization)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "marginRegularization",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getMarginRegularization @see getMarginRegularization"
+    },
+    {
+      "ordinal": 235,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getInitialStepSize",
+      "identity": "cv.ml.SVMSGD.getInitialStepSize()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setInitialStepSize"
+    },
+    {
+      "ordinal": 236,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setInitialStepSize",
+      "identity": "cv.ml.SVMSGD.setInitialStepSize(float InitialStepSize)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "InitialStepSize",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getInitialStepSize @see getInitialStepSize"
+    },
+    {
+      "ordinal": 237,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getStepDecreasingPower",
+      "identity": "cv.ml.SVMSGD.getStepDecreasingPower()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setStepDecreasingPower"
+    },
+    {
+      "ordinal": 238,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setStepDecreasingPower",
+      "identity": "cv.ml.SVMSGD.setStepDecreasingPower(float stepDecreasingPower)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "stepDecreasingPower",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getStepDecreasingPower @see getStepDecreasingPower"
+    },
+    {
+      "ordinal": 239,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.getTermCriteria",
+      "identity": "cv.ml.SVMSGD.getTermCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [
+        "/C",
+        "/V",
+        "/PV"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@see setTermCriteria"
+    },
+    {
+      "ordinal": 240,
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/ml/include/opencv2/ml.hpp",
+      "kind": "callable",
+      "name": "cv.ml.SVMSGD.setTermCriteria",
+      "identity": "cv.ml.SVMSGD.setTermCriteria(TermCriteria val[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "val",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@copybrief getTermCriteria @see getTermCriteria"
+    }
+  ]
+}

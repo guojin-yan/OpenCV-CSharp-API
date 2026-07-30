@@ -6,17 +6,17 @@
                       "managed":  {
                                       "path":  "compatibility/managed-public-api.txt",
                                       "summaryPath":  "compatibility/managed-public-api-summary.json",
-                                      "sha256":  "f87a3512b16690de43fe06d6f81bc393acb0d693ff34adcafcc824f25a21d154",
-                                      "typeCount":  546,
-                                      "memberCount":  5987,
+                                      "sha256":  "df534609b64476429448c45d542b5a0f2a5d166669ec2d6bd9a89e33d2aaf960",
+                                      "typeCount":  550,
+                                      "memberCount":  6026,
                                       "namespaceCount":  41,
                                       "targetFramework":  "net8.0",
                                       "nullableShape":  "included"
                                   },
                       "nativeFull":  {
                                          "path":  "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
-                                         "sha256":  "ee2bd5b36771ebe9150048c76306b57f6402f7ceb8c18a4eaee4a9c626236b8c",
-                                         "functionCount":  2438,
+                                         "sha256":  "a98cf46cf357bb6d4af313d677d0c51cd63dc876be22cbde52b28d52e0f03d36",
+                                         "functionCount":  2452,
                                          "primaryPrefix":  "jyppx_ocv_"
                                      },
                       "nativeMini":  {
@@ -28,9 +28,9 @@
                       "nativeManagedBindingMap":  {
                                                       "path":  "compatibility/native-managed-binding-map.txt",
                                                       "summaryPath":  "compatibility/native-managed-binding-summary.json",
-                                                      "sha256":  "c8bc80a49561c36a4dddb6bdfd4e281b9a7ecb9c96a47207f0fb0d8a6dea50a7",
-                                                      "nativeFunctionCount":  2438,
-                                                      "managedBoundCount":  2438,
+                                                      "sha256":  "b492fca17634c8c2e216c1e6e6b3ac28e8cac4a134aec2cc18febe9bc5c0eecc",
+                                                      "nativeFunctionCount":  2452,
+                                                      "managedBoundCount":  2452,
                                                       "unboundCount":  0,
                                                       "managedOnlyCount":  0
                                                   },
@@ -209,6 +209,31 @@
                                                "managedPublicMemberAdditionCount":  181,
                                                "nativeEntrypointAdditionCount":  80
                                            },
+                      "mlUpstreamMap":  {
+                                            "path":  "compatibility/ml-upstream-map.txt",
+                                            "summaryPath":  "compatibility/ml-upstream-summary.json",
+                                            "classificationPath":  "compatibility/ml-upstream-classifications.json",
+                                            "familyInventoryPath":  "compatibility/ml-implemented-families.json",
+                                            "rawExtractionPath":  "compatibility/ml-upstream-raw.json",
+                                            "sha256":  "19b88b31150ceb893ece43d0bdd783c0312c28b9ba05ffbad03cbc94b1edd388",
+                                            "rawSha256":  "b7c850093e07b04739bff28a81b0248d3a646933f1d51bf6cc25fcab47ab1001",
+                                            "declarationCount":  241,
+                                            "callableCount":  208,
+                                            "implementedCount":  119,
+                                            "missingCount":  89,
+                                            "intentionallyOmittedCount":  0,
+                                            "unsupportedCount":  0,
+                                            "upstreamConditionalCount":  0,
+                                            "selectedFamilyCount":  1,
+                                            "selectedDeclarationCount":  32,
+                                            "sourceHeaderCount":  1,
+                                            "compatibilityHeaderCount":  1,
+                                            "excludedPublicHeaderCount":  1,
+                                            "sourceReviewedExtensionCount":  1,
+                                            "managedPublicTypeAdditionCount":  4,
+                                            "managedPublicMemberAdditionCount":  39,
+                                            "nativeEntrypointAdditionCount":  14
+                                        },
                       "videoUpstreamMap":  {
                                                "path":  "compatibility/video-upstream-map.txt",
                                                "summaryPath":  "compatibility/video-upstream-summary.json",
@@ -248,6 +273,7 @@
                          "featuresCompatibilityClosureMeasured":  true,
                          "objDetectCompatibilityClosureMeasured":  true,
                          "photoCompatibilityClosureMeasured":  true,
+                         "mlCompatibilityClosureMeasured":  true,
                          "videoCompatibilityClosureMeasured":  true,
                          "nativeToManagedParityMeasured":  true,
                          "ownershipErrorMarshallingAuditComplete":  false,
@@ -257,21 +283,21 @@
                       {
                           "id":  "managed-upstream-parity-map",
                           "status":  "ongoing",
-                          "evidence":  "compatibility/imgproc-upstream-summary.json; compatibility/imgcodecs-upstream-summary.json; compatibility/videoio-upstream-summary.json; compatibility/videoio-registry-surface.json; compatibility/calib3d-upstream-summary.json; compatibility/core-upstream-summary.json; compatibility/dnn-upstream-summary.json; compatibility/features-upstream-summary.json; compatibility/objdetect-upstream-summary.json; compatibility/photo-upstream-summary.json; compatibility/video-upstream-summary.json",
-                          "result":  "The exact OpenCV 5.0.0 parser slices cover ImgProc at 203 declarations/161 implemented callables/zero missing/six intentional omissions, ImgCodecs at 39 declarations/22 implemented callables/zero missing/zero omissions plus one reviewed source extension, VideoIO at 71 declarations/40 implemented callables/zero missing/zero omissions plus 12 separately reviewed registry functions, Calib3D at 194 declarations/167 implemented callables/zero missing/zero omissions across four source headers, Core at 258 declarations/176 implemented/29 intentionally omitted/5 unsupported/5 conditional/zero missing across 11 public contributing headers, DNN at 182 declarations/70 implemented/81 intentionally omitted/2 unsupported/6 conditional/zero missing across three contributing headers, main Features at 183 declarations/134 implemented callables/26 intentional omissions/zero missing plus nine separately source-reviewed KeyPointsFilter declarations, ObjDetect at 195 declarations/153 implemented callables/10 intentional omissions/zero missing across nine public source headers, main CPU Photo at 145 declarations/120 implemented callables/zero missing/zero omissions across three source headers, and main Video at 168 declarations/138 implemented callables/zero missing/seven intentional omissions across two source headers; repository-wide parity remains unmeasured.",
+                          "evidence":  "compatibility/imgproc-upstream-summary.json; compatibility/imgcodecs-upstream-summary.json; compatibility/videoio-upstream-summary.json; compatibility/videoio-registry-surface.json; compatibility/calib3d-upstream-summary.json; compatibility/core-upstream-summary.json; compatibility/dnn-upstream-summary.json; compatibility/features-upstream-summary.json; compatibility/objdetect-upstream-summary.json; compatibility/photo-upstream-summary.json; compatibility/ml-upstream-summary.json; compatibility/video-upstream-summary.json",
+                          "result":  "The exact OpenCV 5.0.0 parser slices now also measure contrib ML at 241 declarations/119 implemented callables/89 explicit missing callables/zero omissions plus one source-reviewed RNG adaptation. Existing measured module slices remain governed independently, and repository-wide parity remains unmeasured.",
                           "nextEvidence":  "Extend the structured upstream mapping method to the next prioritized OpenCV module."
                       },
                       {
                           "id":  "native-to-managed-binding-map",
                           "status":  "closed",
                           "evidence":  "compatibility/native-managed-binding-summary.json",
-                          "result":  "All 2,438 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
+                          "result":  "All 2,452 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
                       },
                       {
                           "id":  "ownership-error-marshalling-audit",
                           "status":  "ongoing",
-                          "evidence":  "compatibility/core-implemented-families.json; compatibility/dnn-implemented-families.json; compatibility/features-implemented-families.json; compatibility/objdetect-implemented-families.json; compatibility/photo-implemented-families.json; compatibility/video-implemented-families.json; tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs; tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs; tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs; tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs; tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs; tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs; tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs; tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs; tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs; tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs; tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs; src/OpenCvSharp.Native/tests/native_smoke.cpp; docs/articles/core-upstream-parity-guide.md; docs/articles/dnn-structured-parity-guide.md; docs/articles/features-upstream-parity-guide.md; docs/articles/objdetect-structured-parity-guide.md; docs/articles/photo-hdr-workflow-guide.md; docs/articles/photo-ccm-guide.md; docs/articles/photo-intelligent-scissors-guide.md; docs/articles/video-upstream-parity-guide.md",
-                          "result":  "The complete Core persistence, numerical/collection/solver, and runtime diagnostics/timing batches, the DNN structured Net batch, the Features ANNIndex family, the ObjDetect structured parity family, the Photo HDR, CCM, and Intelligent Scissors families, and the Video optical-flow, ECC registration, and main TrackerMIL families now have explicit ownership, aliasing, shape/depth/layout, raw-byte/UTF-8, count/fill, persistence-generation, nested-result cleanup, backend/profile, native-smoke, cross-framework managed-test, sample, and documentation evidence. Other prioritized families still require the same audit.",
+                          "evidence":  "compatibility/core-implemented-families.json; compatibility/dnn-implemented-families.json; compatibility/features-implemented-families.json; compatibility/objdetect-implemented-families.json; compatibility/photo-implemented-families.json; compatibility/ml-implemented-families.json; compatibility/video-implemented-families.json; tests/OpenCvSharp.Tests/Core/CorePersistenceTests.cs; tests/OpenCvSharp.Tests/Core/CoreNumericalCollectionSolverTests.cs; tests/OpenCvSharp.Tests/Core/CoreRuntimeDiagnosticsTimingTests.cs; tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs; tests/OpenCvSharp.Tests/Features2D/ANNIndexTests.cs; tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs; tests/OpenCvSharp.Tests/Photo/PhotoHdrParityTests.cs; tests/OpenCvSharp.Tests/Photo/PhotoCcmParityTests.cs; tests/OpenCvSharp.Tests/Photo/PhotoIntelligentScissorsTests.cs; tests/OpenCvSharp.Tests/ML/MLTests.cs; tests/OpenCvSharp.Tests/Video/VideoOpticalFlowObjectTests.cs; tests/OpenCvSharp.Tests/Video/VideoEccTrackerMilTests.cs; src/OpenCvSharp.Native/tests/native_smoke.cpp; samples/ConsoleSamples/Program.cs; docs/articles/core-upstream-parity-guide.md; docs/articles/dnn-structured-parity-guide.md; docs/articles/features-upstream-parity-guide.md; docs/articles/objdetect-structured-parity-guide.md; docs/articles/photo-hdr-workflow-guide.md; docs/articles/photo-ccm-guide.md; docs/articles/photo-intelligent-scissors-guide.md; docs/articles/ml-guide.md; docs/articles/video-upstream-parity-guide.md",
+                          "result":  "The complete Core persistence, numerical/collection/solver, and runtime diagnostics/timing batches, the DNN structured Net batch, the Features ANNIndex family, the ObjDetect structured parity family, the Photo HDR, CCM, and Intelligent Scissors families, ANN_MLP, and the Video optical-flow, ECC registration, and main TrackerMIL families now have explicit ownership, aliasing, shape/depth/layout, raw-byte/UTF-8, count/fill, persistence-generation, nested-result cleanup, backend/profile, native-smoke, cross-framework managed-test, sample, and documentation evidence. Other prioritized families still require the same audit.",
                           "nextEvidence":  "Continue explicit lifetime, exception, UTF-8, array, collection, callback, concurrency, and unsafe-memory audits by prioritized API family."
                       },
                       {

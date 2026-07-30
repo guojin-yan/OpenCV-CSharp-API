@@ -8,19 +8,21 @@
 
 - Training data: `TrainData` from in-memory matrices or CSV files.
 - Model base: `StatModel` state, training, prediction, error calculation, save, and clear.
-- Models: `KNearest`, `SVM`, and `NormalBayesClassifier`.
+- Models: `KNearest`, `SVM`, `NormalBayesClassifier`, and `ANN_MLP`.
 - Parameter grids: `ParamGrid` and `SVM.GetDefaultGrid`.
 - Enums: sample layout, variable type, model flags, KNN algorithm, SVM type, SVM kernel, and SVM parameter ids.
 
 - 训练数据：从内存矩阵或 CSV 文件创建 `TrainData`。
 - 模型基类：`StatModel` 状态、训练、预测、误差计算、保存和清理。
-- 模型：`KNearest`、`SVM` 和 `NormalBayesClassifier`。
+- 模型：`KNearest`、`SVM`、`NormalBayesClassifier` 和 `ANN_MLP`。
 - 参数网格：`ParamGrid` 与 `SVM.GetDefaultGrid`。
 - 枚举：样本布局、变量类型、模型标志、KNN 算法、SVM 类型、SVM 核函数和 SVM 参数 id。
 
 ## Runtime / 运行时
 
 In this local OpenCV 5.0.0 source layout, `ml` is provided by the contrib tree, not the main OpenCV module tree. A linked runtime should include the factual OpenCV 5.0.0 runtime artifact `opencv_ml500.dll`. If the module is not linked, the exported ABI remains present and managed calls report `NOT_LINKED`.
+
+ML entrypoints belong to the full runtime profile. The mini profile deliberately excludes the ML source and ABI surface; use a full runtime package for `OpenCvSharp.ML`.
 
 在当前本地 OpenCV 5.0.0 源码布局中，`ml` 来自 contrib 树，而不是 OpenCV 主仓库模块树。linked runtime 应包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_ml500.dll`。如果模块未链接，导出的 ABI 仍存在，managed 调用会报告 `NOT_LINKED`。
 
@@ -61,4 +63,27 @@ knn.Train(samples, SampleTypes.RowSample, responses);
 using Mat query = new Mat(1, 2, MatType.CV_32FC1);
 query.CopyFrom<float>(new[] { 0.1F, 0.2F });
 float predicted = knn.Predict(query);
+```
+
+## ANN_MLP
+
+`ANN_MLP` separates network configuration from training. Supply a `CV_32S` layer-size vector that includes the input and output layers, select an activation function and training method, and then train with `CV_32F` samples and responses. The `Train(TrainData, ANN_MLPTrainFlags)` overload exposes ANN-specific update and scaling flags.
+
+`GetLayerSizes()` and `GetWeights(int)` return independently owned `Mat` copies. Disposing or modifying those matrices does not modify the model's internal storage. `SetAnnealEnergySeed(ulong)` provides deterministic seed control without exposing OpenCV's C++ `RNG` type through the stable C ABI.
+
+```csharp
+using Mat layers = new Mat(1, 3, MatType.CV_32SC1);
+layers.CopyFrom<int>(new[] { 2, 4, 1 });
+
+using Mat annResponses = new Mat(4, 1, MatType.CV_32FC1);
+annResponses.CopyFrom<float>(new[] { -2.0F, 0.0F, 0.0F, 2.0F });
+
+using ANN_MLP ann = ANN_MLP.Create();
+ann.SetLayerSizes(layers);
+ann.SetActivationFunction(ANN_MLPActivationFunctions.Identity);
+ann.SetTrainMethod(ANN_MLPTrainingMethods.Rprop, 0.1, 1e-6);
+ann.TermCriteria = TermCriteria.ByCountAndEpsilon(300, 1e-6);
+ann.Train(samples, SampleTypes.RowSample, annResponses);
+
+using Mat weights = ann.GetWeights(1);
 ```

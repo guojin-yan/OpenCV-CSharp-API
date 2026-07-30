@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=546
-member-count=5987
+type-count=550
+member-count=6026
 namespace-count=41
 nullable-shape=included
 
@@ -99,6 +99,7 @@ TYPE|class|public;sealed|OpenCvSharp.ImgProc.LineSegmentDetector|base=|interface
 TYPE|class|public;sealed|OpenCvSharp.ImgProc.Subdiv2D|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.LineDescriptor.BinaryDescriptorMatcher|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.LineDescriptor.BinaryDescriptor|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.ML.ANN_MLP|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.KNearest|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.NormalBayesClassifier|base=OpenCvSharp.ML.StatModel|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.ML.ParamGrid|base=|interfaces=System.IDisposable
@@ -397,6 +398,9 @@ TYPE|enum|public|OpenCvSharp.ImgProc.TemplateMatchModes|base=|interfaces=System.
 TYPE|enum|public|OpenCvSharp.ImgProc.ThresholdTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ImgProc.WarpPolarMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.ANN_MLPActivationFunctions|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.ANN_MLPTrainFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.ML.ANN_MLPTrainingMethods|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.KNearestTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlErrorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.ML.MlVariableType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -3949,6 +3953,45 @@ MEMBER|OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|OpenCvS
 MEMBER|OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|OpenCvSharp.Core.Mat DrawLineMatches(OpenCvSharp.Core.Mat image1,OpenCvSharp.LineDescriptor.KeyLine[] keylines1,OpenCvSharp.Core.Mat image2,OpenCvSharp.LineDescriptor.KeyLine[] keylines2,OpenCvSharp.Features2D.DMatch[] matches,OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)
 MEMBER|OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|System.Void DrawKeylines(OpenCvSharp.Core.Mat image,OpenCvSharp.LineDescriptor.KeyLine[] keylines,OpenCvSharp.Core.Mat outImage,OpenCvSharp.Core.Scalar color,OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)
 MEMBER|OpenCvSharp.LineDescriptor.LineDescriptorCv2|method|public;static|System.Void DrawLineMatches(OpenCvSharp.Core.Mat image1,OpenCvSharp.LineDescriptor.KeyLine[] keylines1,OpenCvSharp.Core.Mat image2,OpenCvSharp.LineDescriptor.KeyLine[] keylines2,OpenCvSharp.Features2D.DMatch[] matches,OpenCvSharp.Core.Mat outImage,OpenCvSharp.Core.Scalar matchColor,OpenCvSharp.Core.Scalar singleLineColor,OpenCvSharp.LineDescriptor.DrawLinesMatchesFlags flags=Default)
+MEMBER|OpenCvSharp.ML.ANN_MLPActivationFunctions|field|public;const|OpenCvSharp.ML.ANN_MLPActivationFunctions Gaussian=2
+MEMBER|OpenCvSharp.ML.ANN_MLPActivationFunctions|field|public;const|OpenCvSharp.ML.ANN_MLPActivationFunctions Identity=0
+MEMBER|OpenCvSharp.ML.ANN_MLPActivationFunctions|field|public;const|OpenCvSharp.ML.ANN_MLPActivationFunctions LeakyRelu=4
+MEMBER|OpenCvSharp.ML.ANN_MLPActivationFunctions|field|public;const|OpenCvSharp.ML.ANN_MLPActivationFunctions Relu=3
+MEMBER|OpenCvSharp.ML.ANN_MLPActivationFunctions|field|public;const|OpenCvSharp.ML.ANN_MLPActivationFunctions SigmoidSym=1
+MEMBER|OpenCvSharp.ML.ANN_MLPActivationFunctions|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainFlags|field|public;const|OpenCvSharp.ML.ANN_MLPTrainFlags NoInputScale=2
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainFlags|field|public;const|OpenCvSharp.ML.ANN_MLPTrainFlags NoOutputScale=4
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainFlags|field|public;const|OpenCvSharp.ML.ANN_MLPTrainFlags None=0
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainFlags|field|public;const|OpenCvSharp.ML.ANN_MLPTrainFlags UpdateWeights=1
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainFlags|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainingMethods|field|public;const|OpenCvSharp.ML.ANN_MLPTrainingMethods Anneal=2
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainingMethods|field|public;const|OpenCvSharp.ML.ANN_MLPTrainingMethods Backprop=0
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainingMethods|field|public;const|OpenCvSharp.ML.ANN_MLPTrainingMethods Rprop=1
+MEMBER|OpenCvSharp.ML.ANN_MLPTrainingMethods|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|OpenCvSharp.Core.Mat GetLayerSizes()
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|OpenCvSharp.Core.Mat GetWeights(System.Int32 layerIndex)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Boolean Train(OpenCvSharp.ML.TrainData trainData,OpenCvSharp.ML.ANN_MLPTrainFlags flags)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void GetLayerSizes(OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void GetWeights(System.Int32 layerIndex,OpenCvSharp.Core.Mat dst)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetActivationFunction(OpenCvSharp.ML.ANN_MLPActivationFunctions type,System.Double param1=0,System.Double param2=0)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetAnnealEnergySeed(System.UInt64 seed)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetLayerSizes(OpenCvSharp.Core.Mat layerSizes)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;instance|System.Void SetTrainMethod(OpenCvSharp.ML.ANN_MLPTrainingMethods method,System.Double param1=0,System.Double param2=0)
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Create()
+MEMBER|OpenCvSharp.ML.ANN_MLP|method|public;static|OpenCvSharp.ML.ANN_MLP Load(System.String filepath)
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TermCriteria
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealCoolingRatio
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealFinalT
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double AnnealInitialT
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropMomentumScale
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double BackpropWeightScale
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDW0
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMax
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMinus
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWPlus
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Int32 AnnealIterationsPerStep
+MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public|OpenCvSharp.ML.ANN_MLPTrainingMethods TrainingMethod
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;const|OpenCvSharp.ML.KNearestTypes BruteForce=1
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;const|OpenCvSharp.ML.KNearestTypes KDTree=2
 MEMBER|OpenCvSharp.ML.KNearestTypes|field|public;instance|System.Int32 value__
