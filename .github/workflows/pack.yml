@@ -64,7 +64,9 @@ jobs:
         run: throw "Publishing packages requires real native runtime inputs; synthetic runtime inputs validate package shape only."
       - name: Check project invariants
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
 
   pack-managed:
     needs: validate

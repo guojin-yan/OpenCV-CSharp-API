@@ -32,7 +32,9 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Check project invariants
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
       - name: Configure native ABI shell
         shell: pwsh
         run: |

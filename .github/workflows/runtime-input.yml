@@ -99,7 +99,9 @@ jobs:
       - name: Check project invariants
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
       - name: Install native build tools
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         run: |
@@ -816,7 +818,9 @@ jobs:
       - name: Check project invariants
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
       - name: Record native Windows runner and toolchain evidence
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: windows
@@ -1585,7 +1589,9 @@ jobs:
       - name: Check project invariants
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
-        run: pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
       - name: Resolve runtime profile build list
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: profile

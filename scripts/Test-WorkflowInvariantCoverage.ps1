@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $aggregateScriptToken = "scripts/Test-ProjectInvariants.ps1"
+$sourceEvidenceScriptToken = "scripts/Initialize-UpstreamMapSourceEvidence.ps1"
 
 function Get-RepositoryRelativePath {
     param(
@@ -138,6 +139,42 @@ foreach ($requirement in $workflowRequirements) {
                     -Issue "Project invariant gate must run before '$token'"
             }
         }
+    }
+}
+
+$sourceEvidenceCounts = [ordered]@{
+    ".github/workflows/build-managed.yml" = 1
+    ".github/workflows/build-native.yml" = 1
+    ".github/workflows/docs.yml" = 1
+    ".github/workflows/pack.yml" = 1
+    ".github/workflows/runtime-input.yml" = 3
+}
+foreach ($entry in $sourceEvidenceCounts.GetEnumerator()) {
+    $text = Normalize-CiText -Text (Read-RequiredText -RelativePath $entry.Key)
+    $sourceToken = $sourceEvidenceScriptToken.TrimStart("./".ToCharArray())
+    $aggregateToken = $aggregateScriptToken.TrimStart("./".ToCharArray())
+    $sourceMatches = @([regex]::Matches($text, [regex]::Escape($sourceToken), [Text.RegularExpressions.RegexOptions]::IgnoreCase))
+    $aggregateMatches = @([regex]::Matches($text, [regex]::Escape($aggregateToken), [Text.RegularExpressions.RegexOptions]::IgnoreCase))
+    if ($sourceMatches.Count -ne $entry.Value -or $aggregateMatches.Count -ne $entry.Value) {
+        Add-Violation -Violations $violations -Path $entry.Key -Issue "Every aggregate invariant invocation must have one upstream source-evidence bootstrap" -Text "expected=$($entry.Value) source=$($sourceMatches.Count) aggregate=$($aggregateMatches.Count)"
+        continue
+    }
+    for ($index = 0; $index -lt $entry.Value; $index++) {
+        if ($sourceMatches[$index].Index -gt $aggregateMatches[$index].Index) {
+            Add-Violation -Violations $violations -Path $entry.Key -Issue "Upstream source evidence must be initialized before aggregate invariants" -Text "invocation=$($index + 1)"
+        }
+    }
+}
+
+$sourceEvidenceText = Read-RequiredText -RelativePath $sourceEvidenceScriptToken
+foreach ($token in @(
+        '40738fb16ceddb5fb3fea747585f7ce6abb0605b',
+        'https://raw.githubusercontent.com/opencv/opencv/$openCvCommit/$relativePath',
+        'Get-FileHash -LiteralPath $downloadPath -Algorithm SHA256',
+        '@("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video")',
+        'opencv-source/opencv-5.0.0/')) {
+    if ((Get-TokenIndex -Text $sourceEvidenceText -Token $token) -lt 0) {
+        Add-Violation -Violations $violations -Path $sourceEvidenceScriptToken -Issue "Upstream source-evidence bootstrap must retain exact commit/path/hash contract" -Text $token
     }
 }
 

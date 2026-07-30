@@ -23,7 +23,9 @@ jobs:
             8.0.423
       - name: Check project invariants
         shell: pwsh
-        run: pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
+        run: |
+          pwsh -NoProfile -File .\scripts\Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
       - name: Restore
         run: dotnet restore .\OpenCV-CSharp-API.slnx
       - name: Build managed API
