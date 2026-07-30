@@ -11,6 +11,7 @@ $workspace = (Resolve-Path -LiteralPath (Join-Path $repo "..")).Path
 $openCvCommit = "40738fb16ceddb5fb3fea747585f7ce6abb0605b"
 $sourcePrefix = "opencv-source/opencv-5.0.0/"
 $rawNames = @("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video")
+$maximumDownloadAttempts = 4
 $required = [System.Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
 
 function Add-RequiredFile {
@@ -73,7 +74,21 @@ foreach ($entry in @($required.GetEnumerator() | Sort-Object Key)) {
     $downloadPath = "$destination.download"
     try {
         $url = "https://raw.githubusercontent.com/opencv/opencv/$openCvCommit/$relativePath"
-        Invoke-WebRequest -Uri $url -OutFile $downloadPath -MaximumRedirection 0
+        for ($attempt = 1; $attempt -le $maximumDownloadAttempts; $attempt++) {
+            try {
+                Invoke-WebRequest -Uri $url -OutFile $downloadPath -MaximumRedirection 0
+                break
+            }
+            catch {
+                if ($attempt -eq $maximumDownloadAttempts) {
+                    throw
+                }
+                if (Test-Path -LiteralPath $downloadPath -PathType Leaf) {
+                    Remove-Item -LiteralPath $downloadPath -Force
+                }
+                Start-Sleep -Seconds (2 * $attempt)
+            }
+        }
         $actualSha256 = (Get-FileHash -LiteralPath $downloadPath -Algorithm SHA256).Hash.ToLowerInvariant()
         if ($actualSha256 -ne $entry.Value) {
             throw "Downloaded upstream evidence SHA256 drifted for $relativePath. Expected $($entry.Value), found $actualSha256."

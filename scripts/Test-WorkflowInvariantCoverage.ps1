@@ -171,6 +171,8 @@ foreach ($token in @(
         '40738fb16ceddb5fb3fea747585f7ce6abb0605b',
         'https://raw.githubusercontent.com/opencv/opencv/$openCvCommit/$relativePath',
         'Get-FileHash -LiteralPath $downloadPath -Algorithm SHA256',
+        '$maximumDownloadAttempts = 4',
+        'for ($attempt = 1; $attempt -le $maximumDownloadAttempts; $attempt++)',
         '@("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video")',
         'opencv-source/opencv-5.0.0/')) {
     if ((Get-TokenIndex -Text $sourceEvidenceText -Token $token) -lt 0) {
