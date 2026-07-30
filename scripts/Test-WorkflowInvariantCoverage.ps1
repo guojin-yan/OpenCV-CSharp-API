@@ -178,6 +178,12 @@ foreach ($token in @(
     }
 }
 
+$attributesPath = ".gitattributes"
+$attributesText = Read-RequiredText -RelativePath $attributesPath
+if ((Get-TokenIndex -Text $attributesText -Token '* text=auto eol=lf') -lt 0) {
+    Add-Violation -Violations $violations -Path $attributesPath -Issue "Hosted checkouts must retain canonical LF text bytes" -Text '* text=auto eol=lf'
+}
+
 $buildManagedWorkflowPath = ".github/workflows/build-managed.yml"
 $buildManagedWorkflowText = Read-RequiredText -RelativePath $buildManagedWorkflowPath
 if ((Get-TokenIndex -Text $buildManagedWorkflowText -Token "dotnet test") -ge 0) {
