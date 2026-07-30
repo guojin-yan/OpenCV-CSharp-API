@@ -739,7 +739,10 @@ internal static class Program
         WriteIndented = true
     };
 
-    private static string Serialize<T>(T value) => JsonSerializer.Serialize(value, JsonOptions()) + "\n";
+    private static string Serialize<T>(T value) =>
+        JsonSerializer.Serialize(value, JsonOptions())
+            .Replace("\r\n", "\n", StringComparison.Ordinal)
+            .Replace("\r", "\n", StringComparison.Ordinal) + "\n";
 
     private static void WriteOrCheck(string path, string content, bool check)
     {

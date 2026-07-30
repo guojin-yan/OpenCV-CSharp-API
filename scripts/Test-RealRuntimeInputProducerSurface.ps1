@@ -898,9 +898,9 @@ if ($violations.Count -eq 0) {
             $cmakePlatform = if ($isWindowsArm64) { "ARM64" } elseif ($isWindowsX86) { "Win32" } elseif ($isWindowsX64) { "x64" } else { "" }
             $buildConfiguration = if ($isWindowsTarget -or $hasDetailedLinuxEvidence) { "Release" } else { "" }
             $compilerPath = if ($isWindowsArm64) { "C:\fixture\Hostarm64\arm64\cl.exe" } elseif ($isWindowsX86) { "C:\fixture\Hostx64\x86\cl.exe" } elseif ($isWindowsX64) { "C:\fixture\Hostx64\x64\cl.exe" } elseif ($hasDetailedLinuxEvidence) { "/usr/bin/g++" } else { "" }
-            $linkerPath = if ($isWindowsTarget) { Join-Path (Split-Path $compilerPath -Parent) "link.exe" } else { "" }
-            $librarianPath = if ($isWindowsTarget) { Join-Path (Split-Path $compilerPath -Parent) "lib.exe" } else { "" }
-            $dumpbinPath = if ($isWindowsTarget) { Join-Path (Split-Path $compilerPath -Parent) "dumpbin.exe" } else { "" }
+            $linkerPath = if ($isWindowsTarget) { $compilerPath -replace 'cl\.exe$', 'link.exe' } else { "" }
+            $librarianPath = if ($isWindowsTarget) { $compilerPath -replace 'cl\.exe$', 'lib.exe' } else { "" }
+            $dumpbinPath = if ($isWindowsTarget) { $compilerPath -replace 'cl\.exe$', 'dumpbin.exe' } else { "" }
             $compilerVersion = if ($isArm64Hosted) { "g++ fixture aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "g++ fixture x86_64" } else { "" }
             $assemblerVersion = if ($isArm64Hosted) { "GNU assembler fixture aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "GNU assembler fixture x86_64" } else { "" }
             $ninjaVersion = if ($hasDetailedLinuxEvidence) { "1.13.2" } else { "" }

@@ -89,7 +89,7 @@ function Assert-Contains {
 $violations = [System.Collections.Generic.List[object]]::new()
 $manifestPath = Join-Path $repo $manifestRelativePath
 $manifestFiles = @(
-    Get-ChildItem -LiteralPath $repo -Recurse -File -Filter "dotnet-tools.json" |
+    Get-ChildItem -LiteralPath $repo -Recurse -File -Force -Filter "dotnet-tools.json" |
         Where-Object {
             $relativePath = Get-RelativePath -Path $_.FullName
             $relativePath -notmatch '(^|/)(?:bin|obj|artifacts|build|\.git)/'

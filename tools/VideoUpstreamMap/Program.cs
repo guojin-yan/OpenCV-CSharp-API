@@ -531,7 +531,10 @@ internal static class Program
     private static T Read<T>(string path) => JsonSerializer.Deserialize<T>(File.ReadAllText(path, Encoding.UTF8), JsonOptions()) ?? throw new InvalidOperationException("Could not parse " + path);
     private static T Clone<T>(T value) => JsonSerializer.Deserialize<T>(Serialize(value), JsonOptions())!;
     private static JsonSerializerOptions JsonOptions() => new() { PropertyNameCaseInsensitive = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true };
-    private static string Serialize<T>(T value) => JsonSerializer.Serialize(value, JsonOptions()) + "\n";
+    private static string Serialize<T>(T value) =>
+        JsonSerializer.Serialize(value, JsonOptions())
+            .Replace("\r\n", "\n", StringComparison.Ordinal)
+            .Replace("\r", "\n", StringComparison.Ordinal) + "\n";
     private static void WriteOrCheck(string path, string content, bool check)
     {
         content = content.Replace("\r\n", "\n", StringComparison.Ordinal).Replace("\r", "\n", StringComparison.Ordinal);
