@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 9,
-  "managedPublicMemberAdditionCount": 38,
-  "nativeEntrypointAdditionCount": 33,
+  "managedPublicTypeAdditionCount": 13,
+  "managedPublicMemberAdditionCount": 60,
+  "nativeEntrypointAdditionCount": 52,
   "families": [
     {
       "id": "stitching-detail-exposure-compensation-completion",
@@ -790,6 +790,352 @@
             "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "stitching-detail-blender-completion",
+      "surface": "detail-blenders",
+      "rationale": "Closes all detail Blender callables with owned polymorphic lifetime, bounded prepare/feed/blend state, exact Mat types, caller-owned output arrays, CPU pyramids, explicit CUDA-unavailable failures, native smoke, and both-framework tests.",
+      "declarations": [
+        {
+          "ordinal": 40,
+          "upstreamIdentity": "cv.detail.Blender.createDefault(int type;bool try_gpu=false)-\u003EPtr\u003CBlender\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_create_default",
+            "jyppx_ocv_stitching_blender_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Stitching.Blender CreateDefault(OpenCvSharp.Stitching.BlenderType type,System.Boolean tryGpu=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 41,
+          "upstreamIdentity": "cv.detail.Blender.prepare(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_prepare"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 42,
+          "upstreamIdentity": "cv.detail.Blender.prepare(Rect dst_roi)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_prepare_roi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 43,
+          "upstreamIdentity": "cv.detail.Blender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_feed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 44,
+          "upstreamIdentity": "cv.detail.Blender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_blend"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 46,
+          "upstreamIdentity": "cv.detail.FeatherBlender.FeatherBlender(float sharpness=0.02f)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_create_feather",
+            "jyppx_ocv_stitching_blender_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeatherBlender|constructor|public;instance|.ctor(System.Single sharpness=0.02)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 47,
+          "upstreamIdentity": "cv.detail.FeatherBlender.sharpness()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_get_sharpness"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 48,
+          "upstreamIdentity": "cv.detail.FeatherBlender.setSharpness(float val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_set_sharpness"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 49,
+          "upstreamIdentity": "cv.detail.FeatherBlender.prepare(Rect dst_roi)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_prepare_roi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 50,
+          "upstreamIdentity": "cv.detail.FeatherBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_feed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 51,
+          "upstreamIdentity": "cv.detail.FeatherBlender.blend(Mat dst[/IO];Mat dst_mask[/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_blend"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 52,
+          "upstreamIdentity": "cv.detail.FeatherBlender.createWeightMaps(vector_UMat masks[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat weight_maps[/IO,/Ref])-\u003ERect",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_create_weight_maps"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeatherBlender|method|public;instance|OpenCvSharp.Core.Mat[] CreateWeightMaps(OpenCvSharp.Core.Mat[] masks,OpenCvSharp.Core.Point[] corners,out OpenCvSharp.Core.Rect destinationRoi)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 54,
+          "upstreamIdentity": "cv.detail.MultiBandBlender.MultiBandBlender(int try_gpu=false;int num_bands=5;int weight_type=CV_32F)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_create_multi_band",
+            "jyppx_ocv_stitching_blender_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.MultiBandBlender|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Int32 numberOfBands=5,System.Int32 weightType=5)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 55,
+          "upstreamIdentity": "cv.detail.MultiBandBlender.numBands()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_get_number_of_bands"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 56,
+          "upstreamIdentity": "cv.detail.MultiBandBlender.setNumBands(int val)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_set_number_of_bands"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 57,
+          "upstreamIdentity": "cv.detail.MultiBandBlender.prepare(Rect dst_roi)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_prepare_roi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 58,
+          "upstreamIdentity": "cv.detail.MultiBandBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_feed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 59,
+          "upstreamIdentity": "cv.detail.MultiBandBlender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_blender_blend"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 60,
+          "upstreamIdentity": "cv.detail.normalizeUsingWeightMap(Mat weight;Mat src[/IO,/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_normalize_using_weight_map"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void NormalizeUsingWeightMap(OpenCvSharp.Core.Mat weight,OpenCvSharp.Core.Mat source)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 61,
+          "upstreamIdentity": "cv.detail.createWeightMap(Mat mask;float sharpness;Mat weight[/IO,/IO])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_create_weight_map"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void CreateWeightMap(OpenCvSharp.Core.Mat mask,System.Single sharpness,OpenCvSharp.Core.Mat weight)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 62,
+          "upstreamIdentity": "cv.detail.createLaplacePyr(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_create_laplace_pyramid"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Core.Mat[] CreateLaplacePyramid(OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 63,
+          "upstreamIdentity": "cv.detail.createLaplacePyrGpu(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_create_laplace_pyramid_gpu"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Core.Mat[] CreateLaplacePyramidGpu(OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 64,
+          "upstreamIdentity": "cv.detail.restoreImageFromLaplacePyr(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_restore_image_from_laplace_pyramid"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramid(OpenCvSharp.Core.Mat[] pyramid)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 65,
+          "upstreamIdentity": "cv.detail.restoreImageFromLaplacePyrGpu(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramidGpu(OpenCvSharp.Core.Mat[] pyramid)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
           "sample": "samples/ConsoleSamples/Program.cs",
           "guide": "docs/articles/stitching-structured-parity-guide.md"

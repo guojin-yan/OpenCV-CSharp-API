@@ -19,7 +19,7 @@ The 53-row `detail/exposure_compensate.hpp` partition contains eight metadata ro
 - `BlocksChannelsCompensator`
 - `Feed`, `Apply`, `GetMatGains`, `SetMatGains`, and exact property round trips
 
-The 12-row public-warper partition contains two metadata rows and ten `PyRotationWarper` callable rows. All ten callables are implemented. The remaining 82 callable rows in other detail headers remain explicit `missing` rows. They are not described as implemented, omitted, or unsupported merely to reduce the gap count.
+The 12-row public-warper partition contains two metadata rows and ten `PyRotationWarper` callable rows. All ten callables are implemented. The 28-row `detail/blenders.hpp` partition contains four metadata rows and 24 callable rows. All 24 callables are implemented. The remaining 58 callable rows in other detail headers remain explicit `missing` rows. They are not described as implemented, omitted, or unsupported merely to reduce the gap count.
 
 ## Public rotation warper
 
@@ -49,6 +49,35 @@ The constructor scale must be finite and positive and controls the retained proj
 Camera and rotation matrices must be `3 x 3 CV_32FC1`. Non-contiguous ROI matrices are accepted. `BuildMaps` writes distinct caller-owned `CV_32FC1` x/y maps. For this upstream API, its returned rectangle uses the inclusive bottom-right coordinate while map dimensions include that endpoint, so map width and height are each one larger than the returned rectangle dimensions. `WarpRoi` returns the conventional full bounding rectangle.
 
 Forward and backward image operations borrow the source, K, and R only for the call and write to caller-owned destination Mats. OpenCV may allocate or resize ordinary destination storage. Correctly sized ROI destinations retain their view; a mismatched fixed ROI fails through `NativeException`. In-place source/destination use is rejected because `remap` does not support it. Output depth and channels match the source. Interpolation and border modes pass through the existing strongly typed enums and unsupported combinations retain OpenCV's native error.
+
+## Detail blender workflow
+
+```csharp
+using OpenCvSharp.Core;
+using OpenCvSharp.Stitching;
+
+using var image = new Mat(64, 64, MatType.CV_8UC3, new Scalar(40, 60, 80));
+using var mask = new Mat(64, 64, MatType.CV_8UC1, new Scalar(255));
+using var panorama16 = new Mat();
+using var panoramaMask = new Mat();
+using var blender = new MultiBandBlender(tryGpu: true, numberOfBands: 3);
+
+blender.Prepare(new Rect(0, 0, image.Cols, image.Rows));
+blender.Feed(image, mask, new Point(0, 0));
+blender.Blend(panorama16, panoramaMask);
+```
+
+`Blender.CreateDefault` preserves OpenCV's `None`, `Feather`, and `MultiBand` values. `Blender` and `FeatherBlender` accept `CV_16SC3` feed images. `MultiBandBlender` accepts `CV_8UC3` or `CV_16SC3`. Every feed mask must be a same-sized non-empty `CV_8UC1` Mat. The image rectangle at its top-left coordinate must fit completely within the prepared ROI; the wrapper validates that boundary before upstream pointer arithmetic.
+
+Both `Prepare(corners, sizes)` and `Prepare(Rect)` establish one state cycle. `Feed` may be repeated, and `Blend` is valid even before a feed, producing the prepared zero image and mask. A successful or failed blend invalidates the prepared state because upstream releases or may partially consume its internal destination. Call `Prepare` again before reuse. Blender instances are stateful and not thread-safe.
+
+Blend results are written into caller-owned Mats. The panorama has type `CV_16SC3`; its mask has type `CV_8UC1`. Inputs are borrowed only for the synchronous call. Base blending overwrites masked pixels, feather blending accumulates normalized distance weights, and multi-band blending constructs and normalizes Laplacian pyramids. `tryGpu: true` falls back to the CPU path when the required CUDA modules or a CUDA device are unavailable. `MultiBandBlender` accepts only `CV_32FC1` or `CV_16SC1` weight types and band counts from 0 through 30.
+
+`FeatherBlender.CreateWeightMaps` returns independently owned normalized `CV_32FC1` Mats and their union ROI. Dispose every returned map. `Blender.CreateWeightMap` writes one caller-owned `CV_32FC1` map, while `NormalizeUsingWeightMap` mutates a same-sized `CV_16SC3` source using `CV_32FC1` or `CV_16SC1` weights.
+
+`Blender.CreateLaplacePyramid` returns `numberOfLevels + 1` independently owned Mats. Eight-bit input becomes `CV_16S` at every level; other supported depths retain their type. Each level uses `ceil(previous size / 2)`. `RestoreImageFromLaplacePyramid` reconstructs the first level in place. Empty restore collections are a no-op, but non-empty collections require distinct, non-empty, type-consistent levels with the exact size progression.
+
+The installed OpenCV 5.0.0 full runtime used for current evidence has no CUDA blender backend. Its `createLaplacePyrGpu` and `restoreImageFromLaplacePyrGpu` implementations throw `StsNotImplemented` with `CUDA optimization is unavailable`; the managed GPU-named helpers preserve that `OpenCvException`. They do not silently run the CPU helper and are not evidence of CUDA support.
 
 ## Exposure workflow
 
@@ -104,6 +133,6 @@ Component indices are copied values. Camera results own independent rotation and
 
 ## Profile boundaries
 
-Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED`; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces, retained matcher/estimator/seam/blender strategies, callback shapes, templates, mutable nested detail containers, and internal detail warpers remain outside the completed families.
+Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED`; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces beyond the source-true blender fallbacks, retained matcher/estimator/seam strategies, callback shapes, templates, mutable nested detail containers, and internal detail warpers remain outside the completed families.
 
 Parser-emitted rows and source-reviewed extensions remain separate. `Stitcher.WaveCorrectKind`, `Stitcher.GetResultMask`, and the explicit managed no-op constructor are source-reviewed adaptations and do not alter the 207/158 parser counts.

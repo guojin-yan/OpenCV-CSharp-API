@@ -14,6 +14,12 @@ internal static class Program
     private static readonly HashSet<int> Exposure = new(ExposureOrdinals);
     private static readonly int[] PublicWarperOrdinals = Enumerable.Range(25, 10).ToArray();
     private static readonly HashSet<int> PublicWarper = new(PublicWarperOrdinals);
+    private static readonly int[] BlenderOrdinals =
+    {
+        40, 41, 42, 43, 44, 46, 47, 48, 49, 50, 51, 52,
+        54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65
+    };
+    private static readonly HashSet<int> Blender = new(BlenderOrdinals);
     private static readonly HashSet<int> HighLevel = new(Enumerable.Range(3, 21));
     private static readonly string[] Allowed =
     {
@@ -21,10 +27,10 @@ internal static class Program
     };
     private const string ClaimedSlice = "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header";
     private const string BuildCondition = "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded";
-    private const int NegativeFixtureCount = 20;
-    private const int ManagedTypeAdditions = 9;
-    private const int ManagedMemberAdditions = 38;
-    private const int NativeEntrypointAdditions = 33;
+    private const int NegativeFixtureCount = 24;
+    private const int ManagedTypeAdditions = 13;
+    private const int ManagedMemberAdditions = 60;
+    private const int NativeEntrypointAdditions = 52;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification,
         string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput,
@@ -61,7 +67,7 @@ internal static class Program
         public string UpstreamOpenCvVersion { get; set; } = "5.0.0";
         public string ClaimedSlice { get; set; } = Program.ClaimedSlice;
         public string ReviewStatus { get; set; } = "source-reviewed";
-        public string Limitation { get; set; } = "Closure is module-scoped. UMat/GPU, callbacks, retained detail strategies, templates, and repository-wide parity are not claimed.";
+        public string Limitation { get; set; } = "Closure is module-scoped. CUDA execution, callbacks, remaining retained detail strategies, templates, and repository-wide parity are not claimed.";
         public List<ClassificationRow> Declarations { get; set; } = new();
     }
 
@@ -132,7 +138,7 @@ internal static class Program
             WriteOrCheck(options.Output, mapping, options.Check);
             WriteOrCheck(options.FamilyOutput, families, options.Check);
             WriteOrCheck(options.Summary, Serialize(summary), options.Check);
-            Console.WriteLine($"STITCHING_UPSTREAM_MAP_OK declarations={summary.DeclarationCount} callables={summary.CallableCount} implemented={counts["implemented"]} missing={counts["missing"]} exposure={Exposure.Count} public_warper={PublicWarper.Count} fixtures={NegativeFixtureCount} sha256={summary.MappingSha256} mode={(options.Check ? "check" : "write")}");
+            Console.WriteLine($"STITCHING_UPSTREAM_MAP_OK declarations={summary.DeclarationCount} callables={summary.CallableCount} implemented={counts["implemented"]} missing={counts["missing"]} exposure={Exposure.Count} public_warper={PublicWarper.Count} blender={Blender.Count} fixtures={NegativeFixtureCount} sha256={summary.MappingSha256} mode={(options.Check ? "check" : "write")}");
             return 0;
         }
         catch (Exception exception)
@@ -169,8 +175,8 @@ internal static class Program
         public int NegativeFixtureCount { get; init; } = Program.NegativeFixtureCount;
         public string FamilyInventoryPath { get; init; } = "";
         public string FamilyInventorySha256 { get; init; } = "";
-        public int SelectedFamilyCount { get; init; } = 2;
-        public int SelectedDeclarationCount { get; init; } = 55;
+        public int SelectedFamilyCount { get; init; } = 3;
+        public int SelectedDeclarationCount { get; init; } = 79;
         public int HighLevelImplementedCallableCount { get; init; } = 21;
         public int SourceReviewedExtensionCount { get; init; } = 3;
         public int ManagedPublicTypeAdditionCount { get; init; } = ManagedTypeAdditions;
@@ -207,13 +213,15 @@ internal static class Program
                 row.Classification = "non-callable-metadata";
                 row.Reason = "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.";
             }
-            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal))
+            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal))
             {
                 row.Classification = "implemented";
                 row.Reason = Exposure.Contains(declaration.Ordinal)
                     ? "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests."
                     : PublicWarper.Contains(declaration.Ordinal)
                         ? "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests."
+                        : Blender.Contains(declaration.Ordinal)
+                            ? "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests."
                         : "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.";
                 row.NativeEntrypoints.AddRange(NativeEvidence(declaration.Ordinal, native));
                 row.ManagedMembers.AddRange(ManagedEvidence(declaration.Ordinal, managed));
@@ -258,6 +266,16 @@ internal static class Program
             25 => W("create"), 26 => W("create_default"), 27 => W("warp_point"), 28 => W("warp_point_backward"),
             29 => W("build_maps"), 30 => W("warp"), 31 => W("warp_backward"), 32 => W("warp_roi"),
             33 => W("get_scale"), 34 => W("set_scale"),
+            40 => B("create_default", "release_handle"), 41 => B("prepare"), 42 => B("prepare_roi"),
+            43 => B("feed"), 44 => B("blend"), 46 => B("create_feather", "release_handle"),
+            47 => B("get_sharpness"), 48 => B("set_sharpness"), 49 => B("prepare_roi"),
+            50 => B("feed"), 51 => B("blend"), 52 => B("create_weight_maps"),
+            54 => B("create_multi_band", "release_handle"), 55 => B("get_number_of_bands"),
+            56 => B("set_number_of_bands"), 57 => B("prepare_roi"), 58 => B("feed"), 59 => B("blend"),
+            60 => N("stitching_normalize_using_weight_map"), 61 => N("stitching_create_weight_map"),
+            62 => N("stitching_create_laplace_pyramid"), 63 => N("stitching_create_laplace_pyramid_gpu"),
+            64 => N("stitching_restore_image_from_laplace_pyramid"),
+            65 => N("stitching_restore_image_from_laplace_pyramid_gpu"),
             70 => E("create_default"), 71 => E("feed"), 72 or 78 or 84 or 93 or 101 or 116 => E("apply"),
             73 or 79 or 85 or 94 or 102 or 117 => E("get_mat_gains_count", "get_mat_gains_fill"),
             74 or 80 or 86 or 95 or 103 or 118 => E("set_mat_gains"), 75 => E("set_update_gain"), 76 => E("get_update_gain"),
@@ -275,6 +293,7 @@ internal static class Program
         static string[] N(params string[] suffixes) => suffixes.Select(x => "jyppx_ocv_" + x).ToArray();
         static string[] E(params string[] suffixes) => suffixes.Select(x => "jyppx_ocv_stitching_exposure_" + x).ToArray();
         static string[] W(params string[] suffixes) => suffixes.Select(x => "jyppx_ocv_stitching_py_rotation_warper_" + x).ToArray();
+        static string[] B(params string[] suffixes) => suffixes.Select(x => "jyppx_ocv_stitching_blender_" + x).ToArray();
     }
 
     private static IEnumerable<string> ManagedEvidence(int ordinal, string[] managed)
@@ -301,6 +320,22 @@ internal static class Program
             31 => M("PyRotationWarper|method|public;instance|", "Void WarpBackward("),
             32 => M("PyRotationWarper|method|public;instance|", "Rect WarpRoi("),
             33 or 34 => M("PyRotationWarper|property|", "Single Scale"),
+            40 => M("Blender|method|public;static|", "Blender CreateDefault("),
+            41 => M("Blender|method|public;instance|", "Prepare(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)"),
+            42 or 49 or 57 => M("Blender|method|public;instance|", "Prepare(OpenCvSharp.Core.Rect destinationRoi)"),
+            43 or 50 or 58 => M("Blender|method|public;instance|", " Feed(OpenCvSharp.Core.Mat image"),
+            44 or 51 or 59 => M("Blender|method|public;instance|", " Blend(OpenCvSharp.Core.Mat destination"),
+            46 => M("FeatherBlender|constructor|", ".ctor(System.Single sharpness=0.02)"),
+            47 or 48 => M("FeatherBlender|property|", "Single Sharpness"),
+            52 => M("FeatherBlender|method|public;instance|", "CreateWeightMaps("),
+            54 => M("MultiBandBlender|constructor|", ".ctor(System.Boolean tryGpu=false,System.Int32 numberOfBands=5,System.Int32 weightType=5)"),
+            55 or 56 => M("MultiBandBlender|property|", "Int32 NumberOfBands"),
+            60 => M("Blender|method|public;static|", "NormalizeUsingWeightMap("),
+            61 => M("Blender|method|public;static|", "CreateWeightMap("),
+            62 => M("Blender|method|public;static|", "CreateLaplacePyramid("),
+            63 => M("Blender|method|public;static|", "CreateLaplacePyramidGpu("),
+            64 => M("Blender|method|public;static|", "RestoreImageFromLaplacePyramid("),
+            65 => M("Blender|method|public;static|", "RestoreImageFromLaplacePyramidGpu("),
             70 => M("ExposureCompensator|method|public;static|", "CreateDefault("), 71 => M("ExposureCompensator|method|public;instance|", " Feed("),
             72 or 78 or 84 or 93 or 101 or 116 => M("ExposureCompensator|method|public;instance|", " Apply("),
             73 or 79 or 85 or 94 or 102 or 117 => M("ExposureCompensator|method|public;instance|", " GetMatGains()"),
@@ -363,7 +398,8 @@ internal static class Program
         Require(HighLevel.All(x => document.Declarations[x].Classification == "implemented"), "High-level Stitcher callable coverage drifted.");
         Require(Exposure.All(x => document.Declarations[x].Classification == "implemented"), "Exposure family coverage drifted.");
         Require(PublicWarper.All(x => document.Declarations[x].Classification == "implemented"), "Public warper family coverage drifted.");
-        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
+        Require(Blender.All(x => document.Declarations[x].Classification == "implemented"), "Detail Blender family coverage drifted.");
+        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
     }
 
     private static void RunNegativeFixtures(RawDocument raw, ClassificationDocument classifications, string[] native, string[] managed, string workspace)
@@ -396,6 +432,10 @@ internal static class Program
         Reject((_, c) => c.Declarations[25].Classification = "missing");
         Reject((_, c) => c.Declarations[25].Identity = c.Declarations[26].Identity);
         Reject((_, c) => c.Declarations[29].ManagedMembers.Clear());
+        Reject((_, c) => c.Declarations[40].Classification = "missing");
+        Reject((_, c) => c.Declarations[40].NativeEntrypoints.Clear());
+        Reject((_, c) => c.Declarations[52].ManagedMembers.Clear());
+        Reject((_, c) => c.Declarations[63].NativeEntrypoints.Clear());
         Require(accepted == NegativeFixtureCount, "Stitching negative fixture count drifted.");
     }
 
@@ -430,9 +470,27 @@ internal static class Program
                 FocusedTest = "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs"
             });
         }
+        var blenderFamily = new FamilyRow
+        {
+            Id = "stitching-detail-blender-completion",
+            Surface = "detail-blenders",
+            Rationale = "Closes all detail Blender callables with owned polymorphic lifetime, bounded prepare/feed/blend state, exact Mat types, caller-owned output arrays, CPU pyramids, explicit CUDA-unavailable failures, native smoke, and both-framework tests."
+        };
+        foreach (int ordinal in BlenderOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            blenderFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs"
+            });
+        }
         return new FamilyDocument
         {
-            Families = new List<FamilyRow> { family, publicWarperFamily },
+            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily },
             SourceReviewedExtensions = new List<SourceReviewedExtension>
             {
                 new() { UpstreamIdentity = "cv::detail::NoExposureCompensator default construction", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp", Adaptation = "Adds an explicit owned managed no-op constructor; the parser emits its inherited operations but not its implicit default constructor.", NativeEntrypoints = E("create_no"), ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()" } },

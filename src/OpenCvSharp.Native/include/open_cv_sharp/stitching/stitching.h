@@ -7,6 +7,7 @@
 typedef struct jyppx_ocv_stitcher jyppx_ocv_stitcher;
 typedef struct jyppx_ocv_stitching_exposure_compensator jyppx_ocv_stitching_exposure_compensator;
 typedef struct jyppx_ocv_stitching_py_rotation_warper jyppx_ocv_stitching_py_rotation_warper;
+typedef struct jyppx_ocv_stitching_blender jyppx_ocv_stitching_blender;
 
 typedef struct jyppx_ocv_stitching_point2f
 {
@@ -297,3 +298,104 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_py_rotation_war
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_py_rotation_warper_set_scale(
     jyppx_ocv_stitching_py_rotation_warper* warper,
     float scale);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_create_default(
+    int type,
+    int try_gpu,
+    jyppx_ocv_stitching_blender** blender);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_create_feather(
+    float sharpness,
+    jyppx_ocv_stitching_blender** blender);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_create_multi_band(
+    int try_gpu,
+    int number_of_bands,
+    int weight_type,
+    jyppx_ocv_stitching_blender** blender);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_stitching_blender_release_handle(
+    jyppx_ocv_stitching_blender* blender);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_prepare(
+    jyppx_ocv_stitching_blender* blender,
+    const int* corner_x,
+    const int* corner_y,
+    const int* widths,
+    const int* heights,
+    int item_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_prepare_roi(
+    jyppx_ocv_stitching_blender* blender,
+    int x,
+    int y,
+    int width,
+    int height);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_feed(
+    jyppx_ocv_stitching_blender* blender,
+    const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* mask,
+    int top_left_x,
+    int top_left_y);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_blend(
+    jyppx_ocv_stitching_blender* blender,
+    jyppx_ocv_mat* destination,
+    jyppx_ocv_mat* destination_mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_get_sharpness(
+    const jyppx_ocv_stitching_blender* blender,
+    float* sharpness);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_set_sharpness(
+    jyppx_ocv_stitching_blender* blender,
+    float sharpness);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_get_number_of_bands(
+    const jyppx_ocv_stitching_blender* blender,
+    int* number_of_bands);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_set_number_of_bands(
+    jyppx_ocv_stitching_blender* blender,
+    int number_of_bands);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_blender_create_weight_maps(
+    jyppx_ocv_stitching_blender* blender,
+    const jyppx_ocv_mat* const* masks,
+    int mask_count,
+    const int* corner_x,
+    const int* corner_y,
+    int corner_count,
+    jyppx_ocv_mat* const* weight_maps,
+    int weight_map_count,
+    jyppx_ocv_stitching_rect* result);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_normalize_using_weight_map(
+    const jyppx_ocv_mat* weight,
+    jyppx_ocv_mat* source);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_create_weight_map(
+    const jyppx_ocv_mat* mask,
+    float sharpness,
+    jyppx_ocv_mat* weight);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_create_laplace_pyramid(
+    const jyppx_ocv_mat* image,
+    int number_of_levels,
+    jyppx_ocv_mat* const* pyramid,
+    int pyramid_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_create_laplace_pyramid_gpu(
+    const jyppx_ocv_mat* image,
+    int number_of_levels,
+    jyppx_ocv_mat* const* pyramid,
+    int pyramid_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_restore_image_from_laplace_pyramid(
+    jyppx_ocv_mat* const* pyramid,
+    int pyramid_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu(
+    jyppx_ocv_mat* const* pyramid,
+    int pyramid_count);

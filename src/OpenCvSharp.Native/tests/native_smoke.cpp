@@ -4483,6 +4483,142 @@ namespace
         cleanup();
         return 0;
     }
+
+    int run_stitching_blender_smoke()
+    {
+        jyppx_ocv_stitching_blender* rejected = nullptr;
+        if (jyppx_ocv_stitching_blender_create_default(3, 0, &rejected) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT || rejected != nullptr ||
+            jyppx_ocv_stitching_blender_create_feather(0.02f, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_stitching_blender_get_sharpness(nullptr, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            return 901;
+        }
+
+        jyppx_ocv_stitching_blender* base = nullptr;
+        jyppx_ocv_stitching_blender* feather = nullptr;
+        jyppx_ocv_stitching_blender* multi_band = nullptr;
+        auto cleanup = [&]()
+        {
+            jyppx_ocv_stitching_blender_release_handle(base);
+            jyppx_ocv_stitching_blender_release_handle(feather);
+            jyppx_ocv_stitching_blender_release_handle(multi_band);
+        };
+
+        if (jyppx_ocv_stitching_blender_create_default(0, 0, &base) != OPENCV_CSHARP_STATUS_OK || base == nullptr ||
+            jyppx_ocv_stitching_blender_create_feather(0.02f, &feather) != OPENCV_CSHARP_STATUS_OK || feather == nullptr ||
+            jyppx_ocv_stitching_blender_create_multi_band(1, 2, 5, &multi_band) != OPENCV_CSHARP_STATUS_OK || multi_band == nullptr)
+        {
+            cleanup();
+            return 902;
+        }
+
+        float sharpness = 0.0f;
+        int bands = 0;
+        if (jyppx_ocv_stitching_blender_set_sharpness(feather, 0.5f) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_get_sharpness(feather, &sharpness) != OPENCV_CSHARP_STATUS_OK || std::abs(sharpness - 0.5f) > 0.000001f ||
+            jyppx_ocv_stitching_blender_set_number_of_bands(multi_band, 3) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_get_number_of_bands(multi_band, &bands) != OPENCV_CSHARP_STATUS_OK || bands != 3 ||
+            jyppx_ocv_stitching_blender_get_number_of_bands(feather, &bands) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            cleanup();
+            return 903;
+        }
+
+        NativeMatHandle image16;
+        NativeMatHandle image8;
+        NativeMatHandle mask;
+        NativeMatHandle mask8;
+        NativeMatHandle destination;
+        NativeMatHandle destination_mask;
+        NativeMatHandle weight;
+        NativeMatHandle weight_map_0;
+        NativeMatHandle weight_map_1;
+        NativeMatHandle pyramid_0;
+        NativeMatHandle pyramid_1;
+        NativeMatHandle pyramid_2;
+        if (jyppx_ocv_mat_create_with_scalar(4, 4, 67, 20.0, 30.0, 40.0, 0.0, image16.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(8, 8, 64, 40.0, 50.0, 60.0, 0.0, image8.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(4, 4, 0, 255.0, 0.0, 0.0, 0.0, mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(8, 8, 0, 255.0, 0.0, 0.0, 0.0, mask8.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(destination.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(destination_mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(weight.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(weight_map_0.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(weight_map_1.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(pyramid_0.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(pyramid_1.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(pyramid_2.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 904;
+        }
+
+        if (jyppx_ocv_stitching_blender_feed(base, image16.get(), mask.get(), 0, 0) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_stitching_blender_prepare_roi(base, 0, 0, 4, 4) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_feed(base, image16.get(), mask.get(), 0, 0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_blend(base, destination.get(), destination_mask.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_feed(base, image16.get(), mask.get(), 0, 0) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            cleanup();
+            return 905;
+        }
+
+        int rows = 0;
+        int cols = 0;
+        int type = -1;
+        if (jyppx_ocv_mat_rows(destination.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 4 ||
+            jyppx_ocv_mat_cols(destination.get(), &cols) != OPENCV_CSHARP_STATUS_OK || cols != 4 ||
+            jyppx_ocv_mat_type(destination.get(), &type) != OPENCV_CSHARP_STATUS_OK || type != 67 ||
+            jyppx_ocv_mat_type(destination_mask.get(), &type) != OPENCV_CSHARP_STATUS_OK || type != 0)
+        {
+            cleanup();
+            return 906;
+        }
+
+        const jyppx_ocv_mat* masks[] = { mask.get(), mask.get() };
+        const int corner_x[] = { 0, 2 };
+        const int corner_y[] = { 0, 0 };
+        jyppx_ocv_mat* weight_maps[] = { weight_map_0.get(), weight_map_1.get() };
+        jyppx_ocv_stitching_rect weight_roi{};
+        if (jyppx_ocv_stitching_blender_create_weight_maps(
+                feather, masks, 2, corner_x, corner_y, 2, weight_maps, 2, &weight_roi) != OPENCV_CSHARP_STATUS_OK ||
+            weight_roi.x != 0 || weight_roi.y != 0 || weight_roi.width != 6 || weight_roi.height != 4 ||
+            jyppx_ocv_mat_type(weight_map_0.get(), &type) != OPENCV_CSHARP_STATUS_OK || type != 5 ||
+            jyppx_ocv_stitching_create_weight_map(mask.get(), 1.0f, weight.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_normalize_using_weight_map(weight.get(), image16.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 907;
+        }
+
+        if (jyppx_ocv_stitching_blender_prepare_roi(feather, 0, 0, 4, 4) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_feed(feather, image16.get(), mask.get(), 0, 0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_blend(feather, destination.get(), destination_mask.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_prepare_roi(multi_band, 0, 0, 8, 8) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_feed(multi_band, image8.get(), mask8.get(), 0, 0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_blender_blend(multi_band, destination.get(), destination_mask.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 909;
+        }
+
+        jyppx_ocv_mat* pyramid[] = { pyramid_0.get(), pyramid_1.get(), pyramid_2.get() };
+        if (jyppx_ocv_stitching_create_laplace_pyramid(image8.get(), 2, pyramid, 3) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_rows(pyramid_0.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 8 ||
+            jyppx_ocv_mat_rows(pyramid_1.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 4 ||
+            jyppx_ocv_mat_rows(pyramid_2.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 2 ||
+            jyppx_ocv_mat_type(pyramid_0.get(), &type) != OPENCV_CSHARP_STATUS_OK || type != 67 ||
+            jyppx_ocv_stitching_restore_image_from_laplace_pyramid(pyramid, 3) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_create_laplace_pyramid_gpu(image8.get(), 2, pyramid, 3) != OPENCV_CSHARP_STATUS_NATIVE_EXCEPTION ||
+            jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu(pyramid, 3) != OPENCV_CSHARP_STATUS_NATIVE_EXCEPTION)
+        {
+            cleanup();
+            return 908;
+        }
+
+        cleanup();
+        return 0;
+    }
 #endif
 }
 
@@ -4612,6 +4748,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return stitching_warper_status;
+        }
+
+        int stitching_blender_status = run_stitching_blender_smoke();
+        if (stitching_blender_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return stitching_blender_status;
         }
 #endif
 
@@ -6020,6 +6163,12 @@ int main()
         {
             jyppx_ocv_stitching_py_rotation_warper_release_handle(warper);
             return 899;
+        }
+        jyppx_ocv_stitching_blender* blender = nullptr;
+        if (jyppx_ocv_stitching_blender_create_default(0, 0, &blender) != OPENCV_CSHARP_STATUS_NOT_LINKED || blender != nullptr)
+        {
+            jyppx_ocv_stitching_blender_release_handle(blender);
+            return 900;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

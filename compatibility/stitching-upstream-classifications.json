@@ -3,7 +3,7 @@
   "upstreamOpenCvVersion": "5.0.0",
   "claimedSlice": "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header",
   "reviewStatus": "source-reviewed",
-  "limitation": "Closure is module-scoped. UMat/GPU, callbacks, retained detail strategies, templates, and repository-wide parity are not claimed.",
+  "limitation": "Closure is module-scoped. CUDA execution, callbacks, remaining retained detail strategies, templates, and repository-wide parity are not claimed.",
   "declarations": [
     {
       "ordinal": 0,
@@ -535,51 +535,72 @@
       "ordinal": 40,
       "surface": "detail-blenders",
       "identity": "cv.detail.Blender.createDefault(int type;bool try_gpu=false)-\u003EPtr\u003CBlender\u003E",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_default",
+        "jyppx_ocv_stitching_blender_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Stitching.Blender CreateDefault(OpenCvSharp.Stitching.BlenderType type,System.Boolean tryGpu=false)"
+      ]
     },
     {
       "ordinal": 41,
       "surface": "detail-blenders",
       "identity": "cv.detail.Blender.prepare(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)"
+      ]
     },
     {
       "ordinal": 42,
       "surface": "detail-blenders",
       "identity": "cv.detail.Blender.prepare(Rect dst_roi)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)"
+      ]
     },
     {
       "ordinal": 43,
       "surface": "detail-blenders",
       "identity": "cv.detail.Blender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)"
+      ]
     },
     {
       "ordinal": 44,
       "surface": "detail-blenders",
       "identity": "cv.detail.Blender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_blend"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)"
+      ]
     },
     {
       "ordinal": 45,
@@ -595,71 +616,100 @@
       "ordinal": 46,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.FeatherBlender(float sharpness=0.02f)-\u003E",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_feather",
+        "jyppx_ocv_stitching_blender_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.FeatherBlender|constructor|public;instance|.ctor(System.Single sharpness=0.02)"
+      ]
     },
     {
       "ordinal": 47,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.sharpness()-\u003Efloat",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_get_sharpness"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness"
+      ]
     },
     {
       "ordinal": 48,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.setSharpness(float val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_set_sharpness"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness"
+      ]
     },
     {
       "ordinal": 49,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.prepare(Rect dst_roi)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)"
+      ]
     },
     {
       "ordinal": 50,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)"
+      ]
     },
     {
       "ordinal": 51,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.blend(Mat dst[/IO];Mat dst_mask[/IO])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_blend"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)"
+      ]
     },
     {
       "ordinal": 52,
       "surface": "detail-blenders",
       "identity": "cv.detail.FeatherBlender.createWeightMaps(vector_UMat masks[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat weight_maps[/IO,/Ref])-\u003ERect",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_weight_maps"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.FeatherBlender|method|public;instance|OpenCvSharp.Core.Mat[] CreateWeightMaps(OpenCvSharp.Core.Mat[] masks,OpenCvSharp.Core.Point[] corners,out OpenCvSharp.Core.Rect destinationRoi)"
+      ]
     },
     {
       "ordinal": 53,
@@ -675,121 +725,170 @@
       "ordinal": 54,
       "surface": "detail-blenders",
       "identity": "cv.detail.MultiBandBlender.MultiBandBlender(int try_gpu=false;int num_bands=5;int weight_type=CV_32F)-\u003E",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_create_multi_band",
+        "jyppx_ocv_stitching_blender_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.MultiBandBlender|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Int32 numberOfBands=5,System.Int32 weightType=5)"
+      ]
     },
     {
       "ordinal": 55,
       "surface": "detail-blenders",
       "identity": "cv.detail.MultiBandBlender.numBands()-\u003Eint",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_get_number_of_bands"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands"
+      ]
     },
     {
       "ordinal": 56,
       "surface": "detail-blenders",
       "identity": "cv.detail.MultiBandBlender.setNumBands(int val)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_set_number_of_bands"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands"
+      ]
     },
     {
       "ordinal": 57,
       "surface": "detail-blenders",
       "identity": "cv.detail.MultiBandBlender.prepare(Rect dst_roi)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_prepare_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)"
+      ]
     },
     {
       "ordinal": 58,
       "surface": "detail-blenders",
       "identity": "cv.detail.MultiBandBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)"
+      ]
     },
     {
       "ordinal": 59,
       "surface": "detail-blenders",
       "identity": "cv.detail.MultiBandBlender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_blender_blend"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)"
+      ]
     },
     {
       "ordinal": 60,
       "surface": "detail-blenders",
       "identity": "cv.detail.normalizeUsingWeightMap(Mat weight;Mat src[/IO,/IO])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_normalize_using_weight_map"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void NormalizeUsingWeightMap(OpenCvSharp.Core.Mat weight,OpenCvSharp.Core.Mat source)"
+      ]
     },
     {
       "ordinal": 61,
       "surface": "detail-blenders",
       "identity": "cv.detail.createWeightMap(Mat mask;float sharpness;Mat weight[/IO,/IO])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_create_weight_map"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void CreateWeightMap(OpenCvSharp.Core.Mat mask,System.Single sharpness,OpenCvSharp.Core.Mat weight)"
+      ]
     },
     {
       "ordinal": 62,
       "surface": "detail-blenders",
       "identity": "cv.detail.createLaplacePyr(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_create_laplace_pyramid"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Core.Mat[] CreateLaplacePyramid(OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)"
+      ]
     },
     {
       "ordinal": 63,
       "surface": "detail-blenders",
       "identity": "cv.detail.createLaplacePyrGpu(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_create_laplace_pyramid_gpu"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Core.Mat[] CreateLaplacePyramidGpu(OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)"
+      ]
     },
     {
       "ordinal": 64,
       "surface": "detail-blenders",
       "identity": "cv.detail.restoreImageFromLaplacePyr(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_restore_image_from_laplace_pyramid"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramid(OpenCvSharp.Core.Mat[] pyramid)"
+      ]
     },
     {
       "ordinal": 65,
       "surface": "detail-blenders",
       "identity": "cv.detail.restoreImageFromLaplacePyrGpu(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramidGpu(OpenCvSharp.Core.Mat[] pyramid)"
+      ]
     },
     {
       "ordinal": 66,

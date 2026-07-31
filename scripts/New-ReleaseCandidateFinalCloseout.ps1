@@ -229,6 +229,7 @@ function Get-Record {
         "docs/articles/video-upstream-parity-guide.md",
         "docs/articles/videoio-upstream-parity-guide.md",
         "packaging/runtime/runtime-support-contract.json",
+        "samples/ConsoleSamples/Program.cs",
         "scripts/Generate-Calib3DUpstreamMap.ps1",
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
@@ -251,6 +252,7 @@ function Get-Record {
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
+        "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
         "scripts/Test-MlUpstreamMap.ps1",
         "scripts/Test-TrackingUpstreamMap.ps1",
         "scripts/Test-StitchingUpstreamMap.ps1",
@@ -270,6 +272,17 @@ function Get-Record {
         "scripts/Test-VideoUpstreamMap.ps1",
         "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
         "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
+        "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
+        "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
+        "src/OpenCvSharp.Native/src/stitching/stitching_handles.h",
+        "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+        "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs",
+        "src/OpenCvSharp/Stitching/Blender.cs",
+        "src/OpenCvSharp/Stitching/BlenderType.cs",
+        "src/OpenCvSharp/Stitching/Blenders.cs",
+        "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -366,7 +379,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2556
+                FunctionCount = 2575
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -637,6 +650,9 @@ function Get-Record {
                 PublicWarperDeclarationCount = [int]$stitchingSummary.surfaceCounts.'public-warpers'.declarations
                 PublicWarperCallableCount = [int]$stitchingSummary.surfaceCounts.'public-warpers'.callables
                 PublicWarperImplementedCount = [int]$stitchingSummary.surfaceCounts.'public-warpers'.implemented
+                BlenderDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-blenders'.declarations
+                BlenderCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-blenders'.callables
+                BlenderImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-blenders'.implemented
                 ExposureDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.declarations
                 ExposureCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.callables
                 ExposureImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.implemented

@@ -340,6 +340,10 @@ internal static class Program
         typeof(OpenCvSharp.Stitching.BlocksGainCompensator),
         typeof(OpenCvSharp.Stitching.BlocksChannelsCompensator),
         typeof(OpenCvSharp.Stitching.PyRotationWarper),
+        typeof(OpenCvSharp.Stitching.BlenderType),
+        typeof(OpenCvSharp.Stitching.Blender),
+        typeof(OpenCvSharp.Stitching.FeatherBlender),
+        typeof(OpenCvSharp.Stitching.MultiBandBlender),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -389,6 +393,7 @@ internal static class Program
         default(OpenCvSharp.ML.SVMSGDMarginTypes),
         default(OpenCvSharp.Stitching.StitcherMode),
         default(OpenCvSharp.Stitching.ExposureCompensatorType),
+        default(OpenCvSharp.Stitching.BlenderType),
         default(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -396,8 +401,8 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 70 &&
-            RepresentativeValues.Length >= 42 &&
+        return RepresentativeTypes.Length >= 74 &&
+            RepresentativeValues.Length >= 43 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
             CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null && CreateEM != null &&
             CreateLogisticRegression != null && CreateSVMSGD != null &&

@@ -166,9 +166,9 @@ If the factual OpenCV 5.0.0 runtime artifact `opencv_xobjdetect500.dll` is not p
 
 如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_xobjdetect500.dll`，`CascadeClassifier` 和 `HOGDescriptor` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
 
-If the factual OpenCV 5.0.0 runtime artifact `opencv_stitching500.dll` is not present, `OpenCvSharp.Stitching.Stitcher` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
+If the factual OpenCV 5.0.0 runtime artifact `opencv_stitching500.dll` is not present, `OpenCvSharp.Stitching.Stitcher`, `PyRotationWarper`, exposure compensators, and detail blenders keep the same managed API shape and report the defined `NOT_LINKED` boundary. The packaged CPU runtime does not claim CUDA blender execution; GPU-named Laplacian-pyramid helpers preserve upstream `StsNotImplemented` when CUDA support is unavailable.
 
-如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_stitching500.dll`，`OpenCvSharp.Stitching.Stitcher` 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。
+如果不存在事实性 OpenCV 5.0.0 runtime 产物 `opencv_stitching500.dll`，`OpenCvSharp.Stitching.Stitcher`、`PyRotationWarper`、曝光补偿器和 detail blender 仍保持相同 managed API 形状，并返回定义明确的 `NOT_LINKED` 边界。当前打包的 CPU runtime 不声明 CUDA blender 执行能力；CUDA 不可用时，GPU 命名的 Laplacian-pyramid helper 保留上游 `StsNotImplemented` 行为。
 
 If the factual OpenCV 5.0.0 runtime artifact `opencv_ptcloud500.dll` is not present, `OpenCvSharp.PtCloud` keeps the same managed API shape and reports the defined `NOT_LINKED` boundary.
 

@@ -749,6 +749,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunTrackingDefaultSummary());
                     Console.WriteLine(RunExposureCompensationSummary());
                     Console.WriteLine(RunPyRotationWarperSummary());
+                    Console.WriteLine(RunBlenderSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -4571,7 +4572,8 @@ namespace ConsoleSamples
                         + ", cameras=" + DisposeAndCount(stitcher.GetCameras())
                         + ", workScale=" + stitcher.WorkScale
                         + ", " + RunExposureCompensationSummary()
-                        + ", " + RunPyRotationWarperSummary();
+                        + ", " + RunPyRotationWarperSummary()
+                        + ", " + RunBlenderSummary();
                 }
                 finally
                 {
@@ -4624,6 +4626,33 @@ namespace ConsoleSamples
                     + ", warperRoi=" + roi.Width + "x" + roi.Height
                     + ", topLeft=" + topLeft.X + "," + topLeft.Y
                     + ", warped=" + destination.Cols + "x" + destination.Rows;
+            }
+        }
+
+        private static string RunBlenderSummary()
+        {
+            using (var image = new Mat(8, 8, MatType.CV_8UC3, new Scalar(32, 48, 64)))
+            using (var mask = new Mat(8, 8, MatType.CV_8UC1, new Scalar(255)))
+            using (var destination = new Mat())
+            using (var destinationMask = new Mat())
+            using (var blender = new OpenCvSharp.Stitching.MultiBandBlender(tryGpu: true, numberOfBands: 2))
+            {
+                blender.Prepare(new Rect(0, 0, image.Cols, image.Rows));
+                blender.Feed(image, mask, new Point(0, 0));
+                blender.Blend(destination, destinationMask);
+                Mat[] pyramid = OpenCvSharp.Stitching.Blender.CreateLaplacePyramid(image, 1);
+                try
+                {
+                    OpenCvSharp.Stitching.Blender.RestoreImageFromLaplacePyramid(pyramid);
+                    return "blender=" + destination.Cols + "x" + destination.Rows
+                        + ", blenderType=" + destination.Type
+                        + ", blenderMask=" + destinationMask.Type
+                        + ", pyramidLevels=" + pyramid.Length;
+                }
+                finally
+                {
+                    DisposeAll(pyramid);
+                }
             }
         }
 

@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=578
-member-count=6195
+type-count=582
+member-count=6217
 namespace-count=41
 nullable-shape=included
 
@@ -186,7 +186,9 @@ TYPE|class|public;sealed|OpenCvSharp.Shape.ShapeContextDistanceExtractor|base=Op
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BlocksChannelsCompensator|base=OpenCvSharp.Stitching.BlocksCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BlocksGainCompensator|base=OpenCvSharp.Stitching.BlocksCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.ChannelsCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.FeatherBlender|base=OpenCvSharp.Stitching.Blender|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.GainCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.MultiBandBlender|base=OpenCvSharp.Stitching.Blender|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.NoExposureCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.PyRotationWarper|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.StitcherCameraParams|base=|interfaces=
@@ -300,6 +302,7 @@ TYPE|class|public|OpenCvSharp.Reg.RegMapper|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Reg.RegMap|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Saliency.Saliency|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Saliency.StaticSaliency|base=OpenCvSharp.Saliency.Saliency|interfaces=System.IDisposable
+TYPE|class|public|OpenCvSharp.Stitching.Blender|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Tracking.Legacy.LegacyTracker|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Tracking.Tracker|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|base=|interfaces=System.IDisposable
@@ -458,6 +461,7 @@ TYPE|enum|public|OpenCvSharp.Photo.SeamlessCloneFlags|base=|interfaces=System.IC
 TYPE|enum|public|OpenCvSharp.PtCloud.RgbdNormalsMethod|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.PtCloud.RgbdPlaneMethod|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Reg.RegMapKind|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.Stitching.BlenderType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.ExposureCompensatorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.StitcherMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.StitcherStatus|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -5386,6 +5390,23 @@ MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|method|protected;instance|System
 MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance|System.Single ComputeDistance(OpenCvSharp.Core.Mat contour1,OpenCvSharp.Core.Mat contour2)
 MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.Stitching.BlenderType|field|public;const|OpenCvSharp.Stitching.BlenderType Feather=1
+MEMBER|OpenCvSharp.Stitching.BlenderType|field|public;const|OpenCvSharp.Stitching.BlenderType MultiBand=2
+MEMBER|OpenCvSharp.Stitching.BlenderType|field|public;const|OpenCvSharp.Stitching.BlenderType None=0
+MEMBER|OpenCvSharp.Stitching.BlenderType|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Blend(OpenCvSharp.Core.Mat destination,OpenCvSharp.Core.Mat destinationMask)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Feed(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask,OpenCvSharp.Core.Point topLeft)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;instance|System.Void Prepare(OpenCvSharp.Core.Rect destinationRoi)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Core.Mat[] CreateLaplacePyramid(OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Core.Mat[] CreateLaplacePyramidGpu(OpenCvSharp.Core.Mat image,System.Int32 numberOfLevels)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|OpenCvSharp.Stitching.Blender CreateDefault(OpenCvSharp.Stitching.BlenderType type,System.Boolean tryGpu=false)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void CreateWeightMap(OpenCvSharp.Core.Mat mask,System.Single sharpness,OpenCvSharp.Core.Mat weight)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void NormalizeUsingWeightMap(OpenCvSharp.Core.Mat weight,OpenCvSharp.Core.Mat source)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramid(OpenCvSharp.Core.Mat[] pyramid)
+MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramidGpu(OpenCvSharp.Core.Mat[] pyramid)
+MEMBER|OpenCvSharp.Stitching.Blender|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.Stitching.BlocksChannelsCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)
 MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize
 MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
@@ -5409,9 +5430,14 @@ MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.V
 MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;static|OpenCvSharp.Stitching.ExposureCompensator CreateDefault(OpenCvSharp.Stitching.ExposureCompensatorType type)
 MEMBER|OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain
 MEMBER|OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.Stitching.FeatherBlender|constructor|public;instance|.ctor(System.Single sharpness=0.02)
+MEMBER|OpenCvSharp.Stitching.FeatherBlender|method|public;instance|OpenCvSharp.Core.Mat[] CreateWeightMaps(OpenCvSharp.Core.Mat[] masks,OpenCvSharp.Core.Point[] corners,out OpenCvSharp.Core.Rect destinationRoi)
+MEMBER|OpenCvSharp.Stitching.FeatherBlender|property|instance;get:public;set:public|System.Single Sharpness
 MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
+MEMBER|OpenCvSharp.Stitching.MultiBandBlender|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Int32 numberOfBands=5,System.Int32 weightType=5)
+MEMBER|OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands
 MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor(System.String type,System.Single scale)

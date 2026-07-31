@@ -183,6 +183,63 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_set_scale")]
         internal static extern int StitchingPyRotationWarperSetScale(IntPtr warper, float scale);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_create_default")]
+        internal static extern int StitchingBlenderCreateDefault(int type, int tryGpu, out IntPtr blender);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_create_feather")]
+        internal static extern int StitchingBlenderCreateFeather(float sharpness, out IntPtr blender);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_create_multi_band")]
+        internal static extern int StitchingBlenderCreateMultiBand(int tryGpu, int numberOfBands, int weightType, out IntPtr blender);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_release_handle")]
+        internal static extern void StitchingBlenderReleaseHandle(IntPtr blender);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_prepare")]
+        internal static extern int StitchingBlenderPrepare(IntPtr blender, int[] cornerX, int[] cornerY, int[] widths, int[] heights, int itemCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_prepare_roi")]
+        internal static extern int StitchingBlenderPrepareRoi(IntPtr blender, int x, int y, int width, int height);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_feed")]
+        internal static extern int StitchingBlenderFeed(IntPtr blender, IntPtr image, IntPtr mask, int topLeftX, int topLeftY);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_blend")]
+        internal static extern int StitchingBlenderBlend(IntPtr blender, IntPtr destination, IntPtr destinationMask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_get_sharpness")]
+        internal static extern int StitchingBlenderGetSharpness(IntPtr blender, out float sharpness);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_set_sharpness")]
+        internal static extern int StitchingBlenderSetSharpness(IntPtr blender, float sharpness);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_get_number_of_bands")]
+        internal static extern int StitchingBlenderGetNumberOfBands(IntPtr blender, out int numberOfBands);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_set_number_of_bands")]
+        internal static extern int StitchingBlenderSetNumberOfBands(IntPtr blender, int numberOfBands);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_blender_create_weight_maps")]
+        internal static extern int StitchingBlenderCreateWeightMaps(IntPtr blender, IntPtr[] masks, int maskCount, int[] cornerX, int[] cornerY, int cornerCount, IntPtr[] weightMaps, int weightMapCount, out StitchingRectNative result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_normalize_using_weight_map")]
+        internal static extern int StitchingNormalizeUsingWeightMap(IntPtr weight, IntPtr source);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_create_weight_map")]
+        internal static extern int StitchingCreateWeightMap(IntPtr mask, float sharpness, IntPtr weight);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_create_laplace_pyramid")]
+        internal static extern int StitchingCreateLaplacePyramid(IntPtr image, int numberOfLevels, IntPtr[] pyramid, int pyramidCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_create_laplace_pyramid_gpu")]
+        internal static extern int StitchingCreateLaplacePyramidGpu(IntPtr image, int numberOfLevels, IntPtr[] pyramid, int pyramidCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_restore_image_from_laplace_pyramid")]
+        internal static extern int StitchingRestoreImageFromLaplacePyramid(IntPtr[] pyramid, int pyramidCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu")]
+        internal static extern int StitchingRestoreImageFromLaplacePyramidGpu(IntPtr[] pyramid, int pyramidCount);
     }
 }
 #endif
