@@ -4368,6 +4368,121 @@ namespace
         cleanup();
         return 0;
     }
+
+    int run_stitching_py_rotation_warper_smoke()
+    {
+        if (jyppx_ocv_stitching_py_rotation_warper_create_default(nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_stitching_py_rotation_warper_get_scale(nullptr, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            return 891;
+        }
+
+        jyppx_ocv_stitching_py_rotation_warper* empty = nullptr;
+        jyppx_ocv_stitching_py_rotation_warper* plane = nullptr;
+        auto cleanup = [&]()
+        {
+            jyppx_ocv_stitching_py_rotation_warper_release_handle(empty);
+            jyppx_ocv_stitching_py_rotation_warper_release_handle(plane);
+        };
+
+        const unsigned char plane_name[] = { 'p', 'l', 'a', 'n', 'e' };
+        const unsigned char embedded_null[] = { 'p', 'l', 0, 'a', 'n', 'e' };
+        if (jyppx_ocv_stitching_py_rotation_warper_create_default(&empty) != OPENCV_CSHARP_STATUS_OK || empty == nullptr ||
+            jyppx_ocv_stitching_py_rotation_warper_create(plane_name, 5, 1.0f, &plane) != OPENCV_CSHARP_STATUS_OK || plane == nullptr)
+        {
+            cleanup();
+            return 892;
+        }
+
+        float scale = 0.0f;
+        jyppx_ocv_stitching_point2f point_result{};
+        if (jyppx_ocv_stitching_py_rotation_warper_get_scale(empty, &scale) != OPENCV_CSHARP_STATUS_OK || std::abs(scale - 1.0f) > 0.000001f ||
+            jyppx_ocv_stitching_py_rotation_warper_set_scale(empty, 2.0f) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_py_rotation_warper_get_scale(empty, &scale) != OPENCV_CSHARP_STATUS_OK || std::abs(scale - 1.0f) > 0.000001f ||
+            jyppx_ocv_stitching_py_rotation_warper_warp_point(empty, 1.0f, 2.0f, nullptr, nullptr, &point_result) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            cleanup();
+            return 893;
+        }
+
+        jyppx_ocv_stitching_py_rotation_warper* rejected = nullptr;
+        if (jyppx_ocv_stitching_py_rotation_warper_create(embedded_null, 6, 1.0f, &rejected) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT || rejected != nullptr ||
+            jyppx_ocv_stitching_py_rotation_warper_create(plane_name, 5, 0.0f, &rejected) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT || rejected != nullptr)
+        {
+            cleanup();
+            return 894;
+        }
+
+        NativeMatHandle camera_matrix;
+        NativeMatHandle rotation_matrix;
+        NativeMatHandle source;
+        NativeMatHandle x_map;
+        NativeMatHandle y_map;
+        NativeMatHandle destination;
+        NativeMatHandle backward;
+        if (jyppx_ocv_mat_eye(3, 3, 5, camera_matrix.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_eye(3, 3, 5, rotation_matrix.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(4, 5, 0, 37.0, 0.0, 0.0, 0.0, source.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(x_map.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(y_map.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(destination.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(backward.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 895;
+        }
+
+        if (jyppx_ocv_stitching_py_rotation_warper_warp_point(
+                plane, 2.0f, 3.0f, camera_matrix.get(), rotation_matrix.get(), &point_result) != OPENCV_CSHARP_STATUS_OK ||
+            std::abs(point_result.x - 2.0f) > 0.00001f || std::abs(point_result.y - 3.0f) > 0.00001f ||
+            jyppx_ocv_stitching_py_rotation_warper_warp_point_backward(
+                plane, point_result.x, point_result.y, camera_matrix.get(), rotation_matrix.get(), &point_result) != OPENCV_CSHARP_STATUS_OK ||
+            std::abs(point_result.x - 2.0f) > 0.00001f || std::abs(point_result.y - 3.0f) > 0.00001f)
+        {
+            cleanup();
+            return 896;
+        }
+
+        jyppx_ocv_stitching_rect map_roi{};
+        jyppx_ocv_stitching_rect warp_roi{};
+        int map_rows = 0;
+        int map_cols = 0;
+        int map_type = -1;
+        if (jyppx_ocv_stitching_py_rotation_warper_build_maps(
+                plane, 5, 4, camera_matrix.get(), rotation_matrix.get(), x_map.get(), y_map.get(), &map_roi) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_py_rotation_warper_warp_roi(
+                plane, 5, 4, camera_matrix.get(), rotation_matrix.get(), &warp_roi) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_rows(x_map.get(), &map_rows) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_cols(x_map.get(), &map_cols) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_type(x_map.get(), &map_type) != OPENCV_CSHARP_STATUS_OK ||
+            map_rows != 4 || map_cols != 5 || map_type != 5 ||
+            map_roi.x != 0 || map_roi.y != 0 || map_roi.width != 4 || map_roi.height != 3 ||
+            warp_roi.x != 0 || warp_roi.y != 0 || warp_roi.width != 5 || warp_roi.height != 4)
+        {
+            cleanup();
+            return 897;
+        }
+
+        jyppx_ocv_stitching_point top_left{};
+        int destination_rows = 0;
+        int destination_cols = 0;
+        if (jyppx_ocv_stitching_py_rotation_warper_warp(
+                plane, source.get(), camera_matrix.get(), rotation_matrix.get(), 0, 1, destination.get(), &top_left) != OPENCV_CSHARP_STATUS_OK ||
+            top_left.x != 0 || top_left.y != 0 ||
+            jyppx_ocv_mat_rows(destination.get(), &destination_rows) != OPENCV_CSHARP_STATUS_OK || destination_rows != 4 ||
+            jyppx_ocv_mat_cols(destination.get(), &destination_cols) != OPENCV_CSHARP_STATUS_OK || destination_cols != 5 ||
+            jyppx_ocv_stitching_py_rotation_warper_warp_backward(
+                plane, destination.get(), camera_matrix.get(), rotation_matrix.get(), 0, 1, 5, 4, backward.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_rows(backward.get(), &destination_rows) != OPENCV_CSHARP_STATUS_OK || destination_rows != 4 ||
+            jyppx_ocv_mat_cols(backward.get(), &destination_cols) != OPENCV_CSHARP_STATUS_OK || destination_cols != 5)
+        {
+            cleanup();
+            return 898;
+        }
+
+        cleanup();
+        return 0;
+    }
 #endif
 }
 
@@ -4490,6 +4605,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return stitching_exposure_status;
+        }
+
+        int stitching_warper_status = run_stitching_py_rotation_warper_smoke();
+        if (stitching_warper_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return stitching_warper_status;
         }
 #endif
 
@@ -5892,6 +6014,12 @@ int main()
         {
             jyppx_ocv_stitching_exposure_release_handle(exposure);
             return 887;
+        }
+        jyppx_ocv_stitching_py_rotation_warper* warper = nullptr;
+        if (jyppx_ocv_stitching_py_rotation_warper_create_default(&warper) != OPENCV_CSHARP_STATUS_NOT_LINKED || warper != nullptr)
+        {
+            jyppx_ocv_stitching_py_rotation_warper_release_handle(warper);
+            return 899;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

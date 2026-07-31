@@ -19,7 +19,36 @@ The 53-row `detail/exposure_compensate.hpp` partition contains eight metadata ro
 - `BlocksChannelsCompensator`
 - `Feed`, `Apply`, `GetMatGains`, `SetMatGains`, and exact property round trips
 
-The remaining 92 callable rows in public warpers and other detail headers remain explicit `missing` rows. They are not described as implemented, omitted, or unsupported merely to reduce the gap count.
+The 12-row public-warper partition contains two metadata rows and ten `PyRotationWarper` callable rows. All ten callables are implemented. The remaining 82 callable rows in other detail headers remain explicit `missing` rows. They are not described as implemented, omitted, or unsupported merely to reduce the gap count.
+
+## Public rotation warper
+
+```csharp
+using OpenCvSharp.Core;
+using OpenCvSharp.ImgProc;
+using OpenCvSharp.Stitching;
+
+using var camera = Mat.Eye(3, 3, MatType.CV_32FC1);
+using var rotation = Mat.Eye(3, 3, MatType.CV_32FC1);
+using var source = new Mat(4, 5, MatType.CV_8UC1, new Scalar(37));
+using var projected = new Mat();
+using var restored = new Mat();
+using var warper = new PyRotationWarper("plane", 1.0f);
+
+Point2f point = warper.WarpPoint(new Point2f(2, 3), camera, rotation);
+Rect roi = warper.WarpRoi(new Size(source.Cols, source.Rows), camera, rotation);
+Point topLeft = warper.Warp(source, camera, rotation, InterpolationFlags.Nearest, BorderTypes.Replicate, projected);
+warper.WarpBackward(projected, camera, rotation, InterpolationFlags.Nearest, BorderTypes.Replicate,
+    new Size(source.Cols, source.Rows), restored);
+```
+
+The exact accepted, case-sensitive OpenCV 5.0.0 names are `plane`, `affine`, `cylindrical`, `spherical`, `fisheye`, `stereographic`, `compressedPlaneA2B1`, `compressedPlaneA1.5B1`, `compressedPlanePortraitA2B1`, `compressedPlanePortraitA1.5B1`, `paniniA2B1`, `paniniA1.5B1`, `paniniPortraitA2B1`, `paniniPortraitA1.5B1`, `mercator`, and `transverseMercator`.
+
+The constructor scale must be finite and positive and controls the retained projector. OpenCV 5.0.0's public `PyRotationWarper.getScale()` nevertheless always returns `1`, while `setScale()` is a no-op; the managed `Scale` property preserves that upstream behavior and validates only finite positive setter inputs. The parameterless constructor preserves the parser-emitted upstream state but has no projector. Its point, map, ROI, and image operations fail deterministically instead of dereferencing OpenCV's null internal pointer.
+
+Camera and rotation matrices must be `3 x 3 CV_32FC1`. Non-contiguous ROI matrices are accepted. `BuildMaps` writes distinct caller-owned `CV_32FC1` x/y maps. For this upstream API, its returned rectangle uses the inclusive bottom-right coordinate while map dimensions include that endpoint, so map width and height are each one larger than the returned rectangle dimensions. `WarpRoi` returns the conventional full bounding rectangle.
+
+Forward and backward image operations borrow the source, K, and R only for the call and write to caller-owned destination Mats. OpenCV may allocate or resize ordinary destination storage. Correctly sized ROI destinations retain their view; a mismatched fixed ROI fails through `NativeException`. In-place source/destination use is rejected because `remap` does not support it. Output depth and channels match the source. Interpolation and border modes pass through the existing strongly typed enums and unsupported combinations retain OpenCV's native error.
 
 ## Exposure workflow
 
@@ -75,6 +104,6 @@ Component indices are copied values. Camera results own independent rotation and
 
 ## Profile boundaries
 
-Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED`; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific paths, retained matcher/estimator/seam/blender strategies, callback shapes, templates, mutable nested detail containers, and public warpers remain outside this completed family.
+Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED`; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces, retained matcher/estimator/seam/blender strategies, callback shapes, templates, mutable nested detail containers, and internal detail warpers remain outside the completed families.
 
 Parser-emitted rows and source-reviewed extensions remain separate. `Stitcher.WaveCorrectKind`, `Stitcher.GetResultMask`, and the explicit managed no-op constructor are source-reviewed adaptations and do not alter the 207/158 parser counts.

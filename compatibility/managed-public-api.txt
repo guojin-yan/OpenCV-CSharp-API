@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=577
-member-count=6184
+type-count=578
+member-count=6195
 namespace-count=41
 nullable-shape=included
 
@@ -188,6 +188,7 @@ TYPE|class|public;sealed|OpenCvSharp.Stitching.BlocksGainCompensator|base=OpenCv
 TYPE|class|public;sealed|OpenCvSharp.Stitching.ChannelsCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.GainCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.NoExposureCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.PyRotationWarper|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.StitcherCameraParams|base=|interfaces=
 TYPE|class|public;sealed|OpenCvSharp.Stitching.Stitcher|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.StructuredLight.GrayCodePattern|base=OpenCvSharp.StructuredLight.StructuredLightPattern|interfaces=System.IDisposable
@@ -5412,6 +5413,17 @@ MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(S
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
 MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor()
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor(System.String type,System.Single scale)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point Warp(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Mat destination)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point2f WarpPoint(OpenCvSharp.Core.Point2f point,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point2f WarpPointBackward(OpenCvSharp.Core.Point2f point,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Rect BuildMaps(OpenCvSharp.Core.Size sourceSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.Core.Mat xMap,OpenCvSharp.Core.Mat yMap)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Rect WarpRoi(OpenCvSharp.Core.Size sourceSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|System.Void WarpBackward(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Size destinationSize,OpenCvSharp.Core.Mat destination)
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale
+MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|constructor|public;instance|.ctor(OpenCvSharp.Stitching.StitcherCameraParams other)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|constructor|public;instance|.ctor(System.Double focal,System.Double aspect,System.Double ppx,System.Double ppy,OpenCvSharp.Core.Mat rotation,OpenCvSharp.Core.Mat translation)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance;override|System.String ToString()

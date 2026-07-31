@@ -345,101 +345,141 @@
       "ordinal": 25,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.PyRotationWarper(String type;float scale)-\u003E",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor(System.String type,System.Single scale)"
+      ]
     },
     {
       "ordinal": 26,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.PyRotationWarper()-\u003E",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 27,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.warpPoint(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_point"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point2f WarpPoint(OpenCvSharp.Core.Point2f point,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)"
+      ]
     },
     {
       "ordinal": 28,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.warpPointBackward(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_point_backward"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point2f WarpPointBackward(OpenCvSharp.Core.Point2f point,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)"
+      ]
     },
     {
       "ordinal": 29,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.buildMaps(Size src_size;Mat K;Mat R;Mat xmap[/O];Mat ymap[/O])-\u003ERect",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_build_maps"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Rect BuildMaps(OpenCvSharp.Core.Size sourceSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.Core.Mat xMap,OpenCvSharp.Core.Mat yMap)"
+      ]
     },
     {
       "ordinal": 30,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.warp(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Mat dst[/O,/O])-\u003EPoint",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point Warp(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Mat destination)"
+      ]
     },
     {
       "ordinal": 31,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.warpBackward(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Size dst_size;Mat dst[/O,/O])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_backward"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|System.Void WarpBackward(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Size destinationSize,OpenCvSharp.Core.Mat destination)"
+      ]
     },
     {
       "ordinal": 32,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.warpRoi(Size src_size;Mat K;Mat R)-\u003ERect",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_warp_roi"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Rect WarpRoi(OpenCvSharp.Core.Size sourceSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)"
+      ]
     },
     {
       "ordinal": 33,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.getScale()-\u003Efloat",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_get_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
+      ]
     },
     {
       "ordinal": 34,
       "surface": "public-warpers",
       "identity": "cv.PyRotationWarper.setScale(float arg1)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "classification": "implemented",
+      "reason": "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_py_rotation_warper_set_scale"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
+      ]
     },
     {
       "ordinal": 35,

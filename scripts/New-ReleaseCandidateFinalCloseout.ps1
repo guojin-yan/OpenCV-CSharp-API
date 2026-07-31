@@ -366,7 +366,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2545
+                FunctionCount = 2556
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -634,6 +634,9 @@ function Get-Record {
                 HighLevelDeclarationCount = [int]$stitchingSummary.surfaceCounts.primary.declarations
                 HighLevelCallableCount = [int]$stitchingSummary.surfaceCounts.primary.callables
                 HighLevelImplementedCount = [int]$stitchingSummary.surfaceCounts.primary.implemented
+                PublicWarperDeclarationCount = [int]$stitchingSummary.surfaceCounts.'public-warpers'.declarations
+                PublicWarperCallableCount = [int]$stitchingSummary.surfaceCounts.'public-warpers'.callables
+                PublicWarperImplementedCount = [int]$stitchingSummary.surfaceCounts.'public-warpers'.implemented
                 ExposureDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.declarations
                 ExposureCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.callables
                 ExposureImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.implemented

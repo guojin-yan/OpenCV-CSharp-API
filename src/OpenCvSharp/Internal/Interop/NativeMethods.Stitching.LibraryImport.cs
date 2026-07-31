@@ -17,6 +17,29 @@ namespace OpenCvSharp.Internal.Interop
             public IntPtr T;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct StitchingPoint2fNative
+        {
+            public float X;
+            public float Y;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct StitchingPointNative
+        {
+            public int X;
+            public int Y;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct StitchingRectNative
+        {
+            public int X;
+            public int Y;
+            public int Width;
+            public int Height;
+        }
+
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitcher_create")]
         internal static partial int StitcherCreate(int mode, out IntPtr stitcher);
 
@@ -127,6 +150,39 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_filtering_iterations")]
         internal static partial int StitchingExposureSetFilteringIterations(IntPtr compensator, int filteringIterations);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_create_default")]
+        internal static partial int StitchingPyRotationWarperCreateDefault(out IntPtr warper);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_create")]
+        internal static partial int StitchingPyRotationWarperCreate(byte[] typeUtf8, int typeByteCount, float scale, out IntPtr warper);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_release_handle")]
+        internal static partial void StitchingPyRotationWarperReleaseHandle(IntPtr warper);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_warp_point")]
+        internal static partial int StitchingPyRotationWarperWarpPoint(IntPtr warper, float pointX, float pointY, IntPtr cameraMatrix, IntPtr rotationMatrix, out StitchingPoint2fNative result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_warp_point_backward")]
+        internal static partial int StitchingPyRotationWarperWarpPointBackward(IntPtr warper, float pointX, float pointY, IntPtr cameraMatrix, IntPtr rotationMatrix, out StitchingPoint2fNative result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_build_maps")]
+        internal static partial int StitchingPyRotationWarperBuildMaps(IntPtr warper, int sourceWidth, int sourceHeight, IntPtr cameraMatrix, IntPtr rotationMatrix, IntPtr xMap, IntPtr yMap, out StitchingRectNative result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_warp")]
+        internal static partial int StitchingPyRotationWarperWarp(IntPtr warper, IntPtr source, IntPtr cameraMatrix, IntPtr rotationMatrix, int interpolationMode, int borderMode, IntPtr destination, out StitchingPointNative result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_warp_backward")]
+        internal static partial int StitchingPyRotationWarperWarpBackward(IntPtr warper, IntPtr source, IntPtr cameraMatrix, IntPtr rotationMatrix, int interpolationMode, int borderMode, int destinationWidth, int destinationHeight, IntPtr destination);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_warp_roi")]
+        internal static partial int StitchingPyRotationWarperWarpRoi(IntPtr warper, int sourceWidth, int sourceHeight, IntPtr cameraMatrix, IntPtr rotationMatrix, out StitchingRectNative result);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_get_scale")]
+        internal static partial int StitchingPyRotationWarperGetScale(IntPtr warper, out float scale);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_py_rotation_warper_set_scale")]
+        internal static partial int StitchingPyRotationWarperSetScale(IntPtr warper, float scale);
     }
 }
 #endif

@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 8,
-  "managedPublicMemberAdditionCount": 27,
-  "nativeEntrypointAdditionCount": 22,
+  "managedPublicTypeAdditionCount": 9,
+  "managedPublicMemberAdditionCount": 38,
+  "nativeEntrypointAdditionCount": 33,
   "families": [
     {
       "id": "stitching-detail-exposure-compensation-completion",
@@ -643,6 +643,153 @@
             "MEMBER|OpenCvSharp.Stitching.BlocksChannelsCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "stitching-public-py-rotation-warper-completion",
+      "surface": "public-warpers",
+      "rationale": "Closes all public PyRotationWarper callables with exact projector names, safe default state, owned lifetime, strict K/R matrices, caller-owned maps and image outputs, point/ROI semantics, native smoke, and both-framework tests.",
+      "declarations": [
+        {
+          "ordinal": 25,
+          "upstreamIdentity": "cv.PyRotationWarper.PyRotationWarper(String type;float scale)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor(System.String type,System.Single scale)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.PyRotationWarper.PyRotationWarper()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_create_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.PyRotationWarper.warpPoint(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_warp_point"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point2f WarpPoint(OpenCvSharp.Core.Point2f point,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.PyRotationWarper.warpPointBackward(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_warp_point_backward"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point2f WarpPointBackward(OpenCvSharp.Core.Point2f point,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.PyRotationWarper.buildMaps(Size src_size;Mat K;Mat R;Mat xmap[/O];Mat ymap[/O])-\u003ERect",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_build_maps"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Rect BuildMaps(OpenCvSharp.Core.Size sourceSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.Core.Mat xMap,OpenCvSharp.Core.Mat yMap)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 30,
+          "upstreamIdentity": "cv.PyRotationWarper.warp(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Mat dst[/O,/O])-\u003EPoint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_warp"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Point Warp(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Mat destination)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 31,
+          "upstreamIdentity": "cv.PyRotationWarper.warpBackward(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Size dst_size;Mat dst[/O,/O])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_warp_backward"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|System.Void WarpBackward(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Size destinationSize,OpenCvSharp.Core.Mat destination)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.PyRotationWarper.warpRoi(Size src_size;Mat K;Mat R)-\u003ERect",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_warp_roi"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp.Core.Rect WarpRoi(OpenCvSharp.Core.Size sourceSize,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.PyRotationWarper.getScale()-\u003Efloat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_get_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.PyRotationWarper.setScale(float arg1)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_py_rotation_warper_set_scale"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/PyRotationWarperTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
           "sample": "samples/ConsoleSamples/Program.cs",
           "guide": "docs/articles/stitching-structured-parity-guide.md"

@@ -16039,6 +16039,103 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_u
     return jyppx_ocv_stitching_exposure_set_update_gain(compensator, update_gain);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_build_maps(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    int source_width,
+    int source_height,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* rotation_matrix,
+    jyppx_ocv_mat* x_map,
+    jyppx_ocv_mat* y_map,
+    jyppx_ocv_stitching_rect* result)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_build_maps(warper, source_width, source_height, camera_matrix, rotation_matrix, x_map, y_map, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_create(const unsigned char* type_utf8,
+    int type_byte_count,
+    float scale,
+    jyppx_ocv_stitching_py_rotation_warper** warper)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_create(type_utf8, type_byte_count, scale, warper);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_create_default(jyppx_ocv_stitching_py_rotation_warper** warper)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_create_default(warper);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_get_scale(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    float* scale)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_get_scale(warper, scale);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_py_rotation_warper_release_handle(jyppx_ocv_stitching_py_rotation_warper* warper)
+{
+    jyppx_ocv_stitching_py_rotation_warper_release_handle(warper);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_set_scale(jyppx_ocv_stitching_py_rotation_warper* warper,
+    float scale)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_set_scale(warper, scale);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_warp(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    const jyppx_ocv_mat* source,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* rotation_matrix,
+    int interpolation_mode,
+    int border_mode,
+    jyppx_ocv_mat* destination,
+    jyppx_ocv_stitching_point* result)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_warp(warper, source, camera_matrix, rotation_matrix, interpolation_mode, border_mode, destination, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_warp_backward(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    const jyppx_ocv_mat* source,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* rotation_matrix,
+    int interpolation_mode,
+    int border_mode,
+    int destination_width,
+    int destination_height,
+    jyppx_ocv_mat* destination)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_warp_backward(warper, source, camera_matrix, rotation_matrix, interpolation_mode, border_mode, destination_width, destination_height, destination);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_warp_point(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    float point_x,
+    float point_y,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* rotation_matrix,
+    jyppx_ocv_stitching_point2f* result)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_warp_point(warper, point_x, point_y, camera_matrix, rotation_matrix, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_warp_point_backward(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    float point_x,
+    float point_y,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* rotation_matrix,
+    jyppx_ocv_stitching_point2f* result)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_warp_point_backward(warper, point_x, point_y, camera_matrix, rotation_matrix, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_warp_roi(const jyppx_ocv_stitching_py_rotation_warper* warper,
+    int source_width,
+    int source_height,
+    const jyppx_ocv_mat* camera_matrix,
+    const jyppx_ocv_mat* rotation_matrix,
+    jyppx_ocv_stitching_rect* result)
+{
+    return jyppx_ocv_stitching_py_rotation_warper_warp_roi(warper, source_width, source_height, camera_matrix, rotation_matrix, result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_structured_light_gray_code_pattern_create(int width,
     int height,
     jyppx_ocv_structured_light_pattern** pattern)

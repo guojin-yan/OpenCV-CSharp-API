@@ -748,6 +748,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunMLRemainingCallablesDefaultSummary());
                     Console.WriteLine(RunTrackingDefaultSummary());
                     Console.WriteLine(RunExposureCompensationSummary());
+                    Console.WriteLine(RunPyRotationWarperSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -4569,7 +4570,8 @@ namespace ConsoleSamples
                         + ", component=" + stitcher.GetComponent().Length
                         + ", cameras=" + DisposeAndCount(stitcher.GetCameras())
                         + ", workScale=" + stitcher.WorkScale
-                        + ", " + RunExposureCompensationSummary();
+                        + ", " + RunExposureCompensationSummary()
+                        + ", " + RunPyRotationWarperSummary();
                 }
                 finally
                 {
@@ -4603,6 +4605,25 @@ namespace ConsoleSamples
                 {
                     DisposeAll(gains);
                 }
+            }
+        }
+
+        private static string RunPyRotationWarperSummary()
+        {
+            using (var camera = Mat.Eye(3, 3, MatType.CV_32FC1))
+            using (var rotation = Mat.Eye(3, 3, MatType.CV_32FC1))
+            using (var source = new Mat(4, 5, MatType.CV_8UC1, new Scalar(37)))
+            using (var destination = new Mat())
+            using (var warper = new OpenCvSharp.Stitching.PyRotationWarper("plane", 1.0f))
+            {
+                Point2f projected = warper.WarpPoint(new Point2f(2.0f, 3.0f), camera, rotation);
+                Rect roi = warper.WarpRoi(new Size(source.Cols, source.Rows), camera, rotation);
+                Point topLeft = warper.Warp(source, camera, rotation, InterpolationFlags.Nearest, BorderTypes.Replicate, destination);
+                return "warperPoint=" + projected.X.ToString("0.0", CultureInfo.InvariantCulture)
+                    + "," + projected.Y.ToString("0.0", CultureInfo.InvariantCulture)
+                    + ", warperRoi=" + roi.Width + "x" + roi.Height
+                    + ", topLeft=" + topLeft.X + "," + topLeft.Y
+                    + ", warped=" + destination.Cols + "x" + destination.Rows;
             }
         }
 

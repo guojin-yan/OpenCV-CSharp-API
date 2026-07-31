@@ -339,6 +339,7 @@ internal static class Program
         typeof(OpenCvSharp.Stitching.BlocksCompensator),
         typeof(OpenCvSharp.Stitching.BlocksGainCompensator),
         typeof(OpenCvSharp.Stitching.BlocksChannelsCompensator),
+        typeof(OpenCvSharp.Stitching.PyRotationWarper),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -395,7 +396,7 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 69 &&
+        return RepresentativeTypes.Length >= 70 &&
             RepresentativeValues.Length >= 42 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
             CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null && CreateEM != null &&

@@ -17,12 +17,13 @@ $summary = Get-Content -LiteralPath (Join-Path $repo "compatibility/stitching-up
 if ($summary.declarationCount -ne 207 -or $summary.callableCount -ne 158 -or $summary.enumCount -ne 9 -or $summary.classCount -ne 40) { throw "Stitching parser count contract drifted." }
 if ($summary.compatibilityHeaderCount -ne 14 -or $summary.sourceHeaderCount -ne 14) { throw "Stitching public header closure drifted." }
 if ($summary.surfaceCounts.primary.declarations -ne 24 -or $summary.surfaceCounts.primary.callables -ne 21 -or $summary.surfaceCounts.primary.implemented -ne 21) { throw "Stitching high-level partition drifted." }
+if ($summary.surfaceCounts.'public-warpers'.declarations -ne 12 -or $summary.surfaceCounts.'public-warpers'.callables -ne 10 -or $summary.surfaceCounts.'public-warpers'.implemented -ne 10) { throw "Stitching public-warper partition drifted." }
 if ($summary.surfaceCounts.'detail-exposure'.declarations -ne 53 -or $summary.surfaceCounts.'detail-exposure'.callables -ne 45 -or $summary.surfaceCounts.'detail-exposure'.implemented -ne 45) { throw "Stitching Exposure partition drifted." }
-if ($summary.classificationCounts.implemented -ne 66 -or $summary.classificationCounts.missing -ne 92 -or
+if ($summary.classificationCounts.implemented -ne 76 -or $summary.classificationCounts.missing -ne 82 -or
     $summary.classificationCounts.'non-callable-metadata' -ne 49 -or $summary.classificationCounts.'intentionally-omitted' -ne 0 -or
     $summary.classificationCounts.unsupported -ne 0 -or $summary.classificationCounts.'upstream-conditional' -ne 0) { throw "Stitching classification contract drifted." }
-if ($summary.negativeFixtureCount -ne 17 -or $summary.selectedFamilyCount -ne 1 -or $summary.selectedDeclarationCount -ne 45 -or $summary.highLevelImplementedCallableCount -ne 21) { throw "Stitching fixture/family contract drifted." }
-if ($summary.managedPublicTypeAdditionCount -ne 8 -or $summary.managedPublicMemberAdditionCount -ne 27 -or $summary.nativeEntrypointAdditionCount -ne 22) { throw "Stitching addition counts drifted." }
+if ($summary.negativeFixtureCount -ne 20 -or $summary.selectedFamilyCount -ne 2 -or $summary.selectedDeclarationCount -ne 55 -or $summary.highLevelImplementedCallableCount -ne 21) { throw "Stitching fixture/family contract drifted." }
+if ($summary.managedPublicTypeAdditionCount -ne 9 -or $summary.managedPublicMemberAdditionCount -ne 38 -or $summary.nativeEntrypointAdditionCount -ne 33) { throw "Stitching addition counts drifted." }
 if ($summary.umatExecutionClaimed -or $summary.detailRowsMixedIntoHighLevel -or $summary.repositoryWideUpstreamParityClaimed) { throw "Stitching ownership or parity boundary was weakened." }
 
-Write-Output "STITCHING_UPSTREAM_MAP_GUARD_OK declarations=207 high-level=24/21/21 exposure=53/45/45 implemented=66 missing=92 fixtures=17"
+Write-Output "STITCHING_UPSTREAM_MAP_GUARD_OK declarations=207 high-level=24/21/21 public-warper=12/10/10 exposure=53/45/45 implemented=76 missing=82 fixtures=20"
