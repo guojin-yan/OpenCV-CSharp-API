@@ -16261,11 +16261,55 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_multi_tr
     return jyppx_ocv_tracking_legacy_multi_tracker_update_fill(multi_tracker, image, bounding_boxes, bounding_box_capacity, result, count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_boosting_create(const jyppx_ocv_tracking_boosting_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_boosting** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_boosting_create(parameters, tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_boosting_create_default(jyppx_ocv_tracking_legacy_tracker_boosting** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_boosting_create_default(tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_boosting_get_default_params(jyppx_ocv_tracking_boosting_params* parameters)
+{
+    return jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params(parameters);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_csrt_create(const jyppx_ocv_tracking_csrt_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_csrt** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_csrt_create(parameters, tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_csrt_create_default(jyppx_ocv_tracking_legacy_tracker_csrt** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_csrt_create_default(tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_csrt_set_initial_mask(jyppx_ocv_tracking_legacy_tracker_csrt* tracker,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask(tracker, mask);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_init(jyppx_ocv_tracking_legacy_tracker* tracker,
     const jyppx_ocv_mat* image,
     jyppx_ocv_tracking_rect2d bounding_box)
 {
     return jyppx_ocv_tracking_legacy_tracker_init(tracker, image, bounding_box);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_kcf_create(const jyppx_ocv_tracking_kcf_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_kcf** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_kcf_create(parameters, tracker);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_kcf_create_default(jyppx_ocv_tracking_legacy_tracker_kcf** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_kcf_create_default(tracker);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_median_flow_create(const jyppx_ocv_tracking_median_flow_params* parameters,
@@ -16310,12 +16354,23 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_tracking_legacy_tracker
     jyppx_ocv_tracking_legacy_tracker_release_handle(tracker);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_tld_create(jyppx_ocv_tracking_legacy_tracker_tld** tracker)
+{
+    return jyppx_ocv_tracking_legacy_tracker_tld_create(tracker);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_tracker_update(jyppx_ocv_tracking_legacy_tracker* tracker,
     const jyppx_ocv_mat* image,
     jyppx_ocv_tracking_rect2d* bounding_box,
     int* result)
 {
     return jyppx_ocv_tracking_legacy_tracker_update(tracker, image, bounding_box, result);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_legacy_upgrade(const jyppx_ocv_tracking_legacy_tracker* legacy_tracker,
+    jyppx_ocv_tracking_tracker** tracker)
+{
+    return jyppx_ocv_tracking_legacy_upgrade(legacy_tracker, tracker);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_tracking_tracker_csrt_create(const jyppx_ocv_tracking_csrt_params* parameters,

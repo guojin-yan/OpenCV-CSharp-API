@@ -1,0 +1,1061 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/TrackingUpstreamMap/extract_tracking.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+  "headerSha256": "5362366c9e9f96f9ffca16fc1d796b0eac4d5975e465d12e7018fa4aaad73170",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "sha256": "5362366c9e9f96f9ffca16fc1d796b0eac4d5975e465d12e7018fa4aaad73170",
+      "includes": "opencv2/core.hpp;opencv2/video/tracking.hpp"
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "sha256": "428367783b37c8b9e864868d1ea79fbdb4d12db5490977908b325419ada909a1",
+      "includes": "opencv2/tracking.hpp;opencv2/tracking/tracking_internals.hpp"
+    }
+  ],
+  "sourceHeaders": [
+    {
+      "surface": "primary",
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "sha256": "5362366c9e9f96f9ffca16fc1d796b0eac4d5975e465d12e7018fa4aaad73170",
+      "startOrdinal": 0,
+      "declarationCount": 10
+    },
+    {
+      "surface": "legacy",
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "sha256": "428367783b37c8b9e864868d1ea79fbdb4d12db5490977908b325419ada909a1",
+      "startOrdinal": 10,
+      "declarationCount": 25
+    }
+  ],
+  "excludedPublicHeaders": [
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/feature.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/kalman_filters.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/onlineBoosting.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tldDataset.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_by_matching.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_internals.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    },
+    {
+      "path": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/twist.hpp",
+      "reason": "Publicly installed detail, experimental, dataset, callback, or implementation-oriented header; reviewed separately from the primary and legacy tracker contracts."
+    }
+  ],
+  "declarationCount": 35,
+  "surfaceCounts": {
+    "primary": 10,
+    "legacy": 25
+  },
+  "declarations": [
+    {
+      "ordinal": 0,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerCSRT",
+      "identity": "class cv.TrackerCSRT",
+      "returnType": ": cv::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tracker",
+      "documentation": "@brief the CSRT tracker\n\nThe implementation is based on @cite Lukezic_IJCV2018 Discriminative Correlation Filter with Channel and Spatial Reliability"
+    },
+    {
+      "ordinal": 1,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerCSRT.Params",
+      "identity": "class cv.TrackerCSRT.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "use_hog",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "use_color_names",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "use_gray",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "use_rgb",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "use_channel_weights",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "use_segmentation",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "string",
+          "name": "window_function",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "kaiser_alpha",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "cheb_attenuation",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "template_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "gsl_sigma",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "hog_orientations",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "hog_clip",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "padding",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "filter_lr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "weights_lr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "num_hog_channels_used",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "admm_iterations",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "histogram_bins",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "histogram_lr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "background_ratio",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "number_of_scales",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "scale_sigma_factor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "scale_model_max_area",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "scale_lr",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "scale_step",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "psr_threshold",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerCSRT.Params.Params",
+      "identity": "cv.TrackerCSRT.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerCSRT.create",
+      "identity": "cv.TrackerCSRT.create(TrackerCSRT_Params parameters=TrackerCSRT::Params()[/C,/Ref])->Ptr<TrackerCSRT>",
+      "returnType": "Ptr<TrackerCSRT>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "TrackerCSRT_Params",
+          "name": "parameters",
+          "default": "TrackerCSRT::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create CSRT tracker instance\n    @param parameters CSRT parameters TrackerCSRT::Params"
+    },
+    {
+      "ordinal": 4,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerCSRT.setInitialMask",
+      "identity": "cv.TrackerCSRT.setInitialMask(Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerKCF",
+      "identity": "class cv.TrackerKCF",
+      "returnType": ": cv::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Tracker",
+      "documentation": "@brief the KCF (Kernelized Correlation Filter) tracker\n\n * KCF is a novel tracking framework that utilizes properties of circulant matrix to enhance the processing speed.\n * This tracking method is an implementation of @cite KCF_ECCV which is extended to KCF with color-names features (@cite KCF_CN).\n * The original paper of KCF is available at <http://www.robots.ox.ac.uk/~joao/publications/henriques_tpami2015.pdf>\n * as well as the matlab implementation. For more information about KCF with color-names features, please refer to\n * <http://www.cvl.isy.liu.se/research/objrec/visualtracking/colvistrack/index.html>."
+    },
+    {
+      "ordinal": 6,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "enum",
+      "name": "cv.TrackerKCF.MODE",
+      "identity": "enum cv.TrackerKCF.MODE[const cv.TrackerKCF.GRAY=(1 << 0);const cv.TrackerKCF.CN=(1 << 1);const cv.TrackerKCF.CUSTOM=(1 << 2)]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.TrackerKCF.GRAY",
+          "value": "(1 << 0)"
+        },
+        {
+          "name": "const cv.TrackerKCF.CN",
+          "value": "(1 << 1)"
+        },
+        {
+          "name": "const cv.TrackerKCF.CUSTOM",
+          "value": "(1 << 2)"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "class",
+      "name": "cv.TrackerKCF.Params",
+      "identity": "class cv.TrackerKCF.Params",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "detect_thresh",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "sigma",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "lambda",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "interp_factor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "output_sigma_factor",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "pca_learning_rate",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "resize",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "split_coeff",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "wrap_kernel",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "compress_feature",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "max_patch_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "compressed_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "desc_pca",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "desc_npca",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerKCF.Params.Params",
+      "identity": "cv.TrackerKCF.Params.Params()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking.hpp",
+      "kind": "callable",
+      "name": "cv.TrackerKCF.create",
+      "identity": "cv.TrackerKCF.create(TrackerKCF_Params parameters=TrackerKCF::Params()[/C,/Ref])->Ptr<TrackerKCF>",
+      "returnType": "Ptr<TrackerKCF>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "TrackerKCF_Params",
+          "name": "parameters",
+          "default": "TrackerKCF::Params()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Create KCF tracker instance\n    @param parameters KCF parameters TrackerKCF::Params"
+    },
+    {
+      "ordinal": 10,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.Tracker",
+      "identity": "class cv.legacy.Tracker",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief Base abstract class for the long-term tracker:"
+    },
+    {
+      "ordinal": 11,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.Tracker.init",
+      "identity": "cv.legacy.Tracker.init(Mat image;Rect2d boundingBox[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect2d",
+          "name": "boundingBox",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Initialize the tracker with a known bounding box that surrounded the target\n    @param image The initial frame\n    @param boundingBox The initial bounding box\n\n    @return True if initialization went succesfully, false otherwise"
+    },
+    {
+      "ordinal": 12,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.Tracker.update",
+      "identity": "cv.legacy.Tracker.update(Mat image;Rect2d boundingBox[/O,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect2d",
+          "name": "boundingBox",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Update the tracker, find the new most likely bounding box for the target\n    @param image The current frame\n    @param boundingBox The bounding box that represent the new target location, if true was returned, not\n    modified otherwise\n\n    @return True means that target was located and false means that tracker cannot locate target in\n    current frame. Note, that latter *does not* imply that tracker has failed, maybe target is indeed\n    missing from the frame (say, out of sight)"
+    },
+    {
+      "ordinal": 13,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerMIL",
+      "identity": "class cv.legacy.TrackerMIL",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief The MIL algorithm trains a classifier in an online manner to separate the object from the\nbackground.\n\nMultiple Instance Learning avoids the drift problem for a robust tracking. The implementation is\nbased on @cite MIL .\n\nOriginal code can be found here <http://vision.ucsd.edu/~bbabenko/project_miltrack.shtml>"
+    },
+    {
+      "ordinal": 14,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerMIL.create",
+      "identity": "cv.legacy.TrackerMIL.create()->Ptr<legacy::TrackerMIL>",
+      "returnType": "Ptr<legacy::TrackerMIL>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters MIL parameters TrackerMIL::Params"
+    },
+    {
+      "ordinal": 15,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerBoosting",
+      "identity": "class cv.legacy.TrackerBoosting",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief the Boosting tracker\n\nThis is a real-time object tracking based on a novel on-line version of the AdaBoost algorithm.\nThe classifier uses the surrounding background as negative examples in update step to avoid the\ndrifting problem. The implementation is based on @cite OLB ."
+    },
+    {
+      "ordinal": 16,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerBoosting.create",
+      "identity": "cv.legacy.TrackerBoosting.create()->Ptr<legacy::TrackerBoosting>",
+      "returnType": "Ptr<legacy::TrackerBoosting>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters BOOSTING parameters TrackerBoosting::Params"
+    },
+    {
+      "ordinal": 17,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerMedianFlow",
+      "identity": "class cv.legacy.TrackerMedianFlow",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief the Median Flow tracker\n\nImplementation of a paper @cite MedianFlow .\n\nThe tracker is suitable for very smooth and predictable movements when object is visible throughout\nthe whole sequence. It's quite and accurate for this type of problems (in particular, it was shown\nby authors to outperform MIL). During the implementation period the code at\n<http://www.aonsquared.co.uk/node/5>, the courtesy of the author Arthur Amarra, was used for the\nreference purpose."
+    },
+    {
+      "ordinal": 18,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerMedianFlow.create",
+      "identity": "cv.legacy.TrackerMedianFlow.create()->Ptr<legacy::TrackerMedianFlow>",
+      "returnType": "Ptr<legacy::TrackerMedianFlow>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters Median Flow parameters TrackerMedianFlow::Params"
+    },
+    {
+      "ordinal": 19,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerTLD",
+      "identity": "class cv.legacy.TrackerTLD",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief the TLD (Tracking, learning and detection) tracker\n\nTLD is a novel tracking framework that explicitly decomposes the long-term tracking task into\ntracking, learning and detection.\n\nThe tracker follows the object from frame to frame. The detector localizes all appearances that\nhave been observed so far and corrects the tracker if necessary. The learning estimates detector's\nerrors and updates it to avoid these errors in the future. The implementation is based on @cite TLD .\n\nThe Median Flow algorithm (see cv::TrackerMedianFlow) was chosen as a tracking component in this\nimplementation, following authors. The tracker is supposed to be able to handle rapid motions, partial\nocclusions, object absence etc."
+    },
+    {
+      "ordinal": 20,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerTLD.create",
+      "identity": "cv.legacy.TrackerTLD.create()->Ptr<legacy::TrackerTLD>",
+      "returnType": "Ptr<legacy::TrackerTLD>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n    @param parameters TLD parameters TrackerTLD::Params"
+    },
+    {
+      "ordinal": 21,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerKCF",
+      "identity": "class cv.legacy.TrackerKCF",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief the KCF (Kernelized Correlation Filter) tracker\n\n * KCF is a novel tracking framework that utilizes properties of circulant matrix to enhance the processing speed.\n * This tracking method is an implementation of @cite KCF_ECCV which is extended to KCF with color-names features (@cite KCF_CN).\n * The original paper of KCF is available at <http://www.robots.ox.ac.uk/~joao/publications/henriques_tpami2015.pdf>\n * as well as the matlab implementation. For more information about KCF with color-names features, please refer to\n * <http://www.cvl.isy.liu.se/research/objrec/visualtracking/colvistrack/index.html>."
+    },
+    {
+      "ordinal": 22,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerKCF.create",
+      "identity": "cv.legacy.TrackerKCF.create()->Ptr<legacy::TrackerKCF>",
+      "returnType": "Ptr<legacy::TrackerKCF>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n  @param parameters KCF parameters TrackerKCF::Params"
+    },
+    {
+      "ordinal": 23,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerMOSSE",
+      "identity": "class cv.legacy.TrackerMOSSE",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief the MOSSE (Minimum Output Sum of Squared %Error) tracker\n\nThe implementation is based on @cite MOSSE Visual Object Tracking using Adaptive Correlation Filters\n@note this tracker works with grayscale images, if passed bgr ones, they will get converted internally."
+    },
+    {
+      "ordinal": 24,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerMOSSE.create",
+      "identity": "cv.legacy.TrackerMOSSE.create()->Ptr<legacy::TrackerMOSSE>",
+      "returnType": "Ptr<legacy::TrackerMOSSE>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor"
+    },
+    {
+      "ordinal": 25,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.MultiTracker",
+      "identity": "class cv.legacy.MultiTracker",
+      "returnType": ": cv::Algorithm",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::Algorithm",
+      "documentation": "@brief This class is used to track multiple objects using the specified tracker algorithm.\n\n* The %MultiTracker is naive implementation of multiple object tracking.\n* It process the tracked objects independently without any optimization accross the tracked objects."
+    },
+    {
+      "ordinal": 26,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.MultiTracker.MultiTracker",
+      "identity": "cv.legacy.MultiTracker.MultiTracker()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Constructor."
+    },
+    {
+      "ordinal": 27,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.MultiTracker.add",
+      "identity": "cv.legacy.MultiTracker.add(Ptr_legacy_Tracker newTracker;Mat image;Rect2d boundingBox[/C,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_legacy_Tracker",
+          "name": "newTracker",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect2d",
+          "name": "boundingBox",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Add a new object to be tracked.\n  *\n  * @param newTracker tracking algorithm to be used\n  * @param image input image\n  * @param boundingBox a rectangle represents ROI of the tracked object"
+    },
+    {
+      "ordinal": 28,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.MultiTracker.update",
+      "identity": "cv.legacy.MultiTracker.update(Mat image;vector_Rect2d boundingBox[/O,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect2d",
+          "name": "boundingBox",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Update the current tracking status.\n  * @param image input image\n  * @param boundingBox the tracking result, represent a list of ROIs of the tracked objects."
+    },
+    {
+      "ordinal": 29,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.MultiTracker.getObjects",
+      "identity": "cv.legacy.MultiTracker.getObjects()->std::vector<Rect2d>",
+      "returnType": "std::vector<Rect2d>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Returns a reference to a storage for the tracked objects, each object corresponds to one tracker algorithm"
+    },
+    {
+      "ordinal": 30,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.MultiTracker.create",
+      "identity": "cv.legacy.MultiTracker.create()->Ptr<legacy::MultiTracker>",
+      "returnType": "Ptr<legacy::MultiTracker>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "* \\brief Returns a pointer to a new instance of MultiTracker"
+    },
+    {
+      "ordinal": 31,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "class",
+      "name": "cv.legacy.TrackerCSRT",
+      "identity": "class cv.legacy.TrackerCSRT",
+      "returnType": ": cv::legacy::Tracker",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::legacy::Tracker",
+      "documentation": "@brief the CSRT tracker\n\nThe implementation is based on @cite Lukezic_IJCV2018 Discriminative Correlation Filter with Channel and Spatial Reliability"
+    },
+    {
+      "ordinal": 32,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerCSRT.create",
+      "identity": "cv.legacy.TrackerCSRT.create()->Ptr<legacy::TrackerCSRT>",
+      "returnType": "Ptr<legacy::TrackerCSRT>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructor\n  @param parameters CSRT parameters TrackerCSRT::Params"
+    },
+    {
+      "ordinal": 33,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.TrackerCSRT.setInitialMask",
+      "identity": "cv.legacy.TrackerCSRT.setInitialMask(Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "surface": "legacy",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "kind": "callable",
+      "name": "cv.legacy.upgradeTrackingAPI",
+      "identity": "cv.legacy.upgradeTrackingAPI(Ptr_legacy_Tracker legacy_tracker[/C,/Ref])->Ptr<cv::Tracker>",
+      "returnType": "Ptr<cv::Tracker>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_legacy_Tracker",
+          "name": "legacy_tracker",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

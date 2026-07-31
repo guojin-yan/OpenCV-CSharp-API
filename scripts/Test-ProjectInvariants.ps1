@@ -265,6 +265,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Tracking upstream map"
+        Script = Join-Path $repo "scripts/Test-TrackingUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Video upstream map"
         Script = Join-Path $repo "scripts/Test-VideoUpstreamMap.ps1"
         Arguments = @("-RepositoryRoot", $repo)

@@ -72,6 +72,42 @@ struct jyppx_ocv_tracking_legacy_tracker_median_flow : jyppx_ocv_tracking_legacy
 #endif
 };
 
+struct jyppx_ocv_tracking_legacy_tracker_boosting : jyppx_ocv_tracking_legacy_tracker
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+    cv::Ptr<cv::legacy::TrackerBoosting> concrete;
+#else
+    int placeholder2;
+#endif
+};
+
+struct jyppx_ocv_tracking_legacy_tracker_tld : jyppx_ocv_tracking_legacy_tracker
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+    cv::Ptr<cv::legacy::TrackerTLD> concrete;
+#else
+    int placeholder2;
+#endif
+};
+
+struct jyppx_ocv_tracking_legacy_tracker_kcf : jyppx_ocv_tracking_legacy_tracker
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+    cv::Ptr<cv::legacy::TrackerKCF> concrete;
+#else
+    int placeholder2;
+#endif
+};
+
+struct jyppx_ocv_tracking_legacy_tracker_csrt : jyppx_ocv_tracking_legacy_tracker
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+    cv::Ptr<cv::legacy::TrackerCSRT> concrete;
+#else
+    int placeholder2;
+#endif
+};
+
 struct jyppx_ocv_tracking_legacy_multi_tracker
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)

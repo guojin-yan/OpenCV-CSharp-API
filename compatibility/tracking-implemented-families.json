@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 5,
+  "managedPublicMemberAdditionCount": 23,
+  "nativeEntrypointAdditionCount": 10,
+  "families": [
+    {
+      "id": "tracking-public-legacy-model-free-completion",
+      "surface": "legacy",
+      "rationale": "Closes every remaining parser-emitted public legacy model-free callable: Boosting, TLD, KCF, CSRT mask/lifecycle, and the ownership-preserving modern API adapter.",
+      "declarations": [
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.legacy.TrackerBoosting.create()-\u003EPtr\u003Clegacy::TrackerBoosting\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_tracking_legacy_tracker_boosting_create_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Tracking/TrackingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/tracking-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.legacy.TrackerTLD.create()-\u003EPtr\u003Clegacy::TrackerTLD\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_tracking_legacy_tracker_tld_create"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerTLD Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Tracking/TrackingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/tracking-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.legacy.TrackerKCF.create()-\u003EPtr\u003Clegacy::TrackerKCF\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_tracking_legacy_tracker_kcf_create_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Tracking/TrackingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/tracking-guide.md"
+        },
+        {
+          "ordinal": 32,
+          "upstreamIdentity": "cv.legacy.TrackerCSRT.create()-\u003EPtr\u003Clegacy::TrackerCSRT\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_tracking_legacy_tracker_csrt_create_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Tracking/TrackingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/tracking-guide.md"
+        },
+        {
+          "ordinal": 33,
+          "upstreamIdentity": "cv.legacy.TrackerCSRT.setInitialMask(Mat mask)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask(OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Tracking/TrackingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/tracking-guide.md"
+        },
+        {
+          "ordinal": 34,
+          "upstreamIdentity": "cv.legacy.upgradeTrackingAPI(Ptr_legacy_Tracker legacy_tracker[/C,/Ref])-\u003EPtr\u003Ccv::Tracker\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_tracking_legacy_upgrade"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|OpenCvSharp.Tracking.Tracker Upgrade()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Tracking/TrackingTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/tracking-guide.md"
+        }
+      ]
+    }
+  ],
+  "sourceReviewedExtensions": [
+    {
+      "upstreamIdentity": "cv::legacy::TrackerBoosting::Params and create(const Params\u0026)",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "adaptation": "Copies five primitive parameter fields through a flat C value and exposes exact native defaults without passing the C\u002B\u002B parameter layout.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_boosting_create",
+        "jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams parameters)"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv::legacy::TrackerKCF::create(const Params\u0026)",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "adaptation": "Reuses the reviewed modern KCF managed value shape and copies it into the derived legacy C\u002B\u002B parameter object.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_kcf_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create(OpenCvSharp.Tracking.TrackerKCFParams parameters)"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv::legacy::TrackerCSRT::create(const Params\u0026)",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "adaptation": "Reuses reviewed CSRT values, pins strict UTF-8 only for the call, and copies every field into the derived legacy C\u002B\u002B parameter object.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_csrt_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create(OpenCvSharp.Tracking.TrackerCSRTParams parameters)"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv::legacy::TrackerKCF::setFeatureExtractor(callback,bool)",
+      "sourceHeader": "opencv-source/opencv_contrib-5.0.0/modules/tracking/include/opencv2/tracking/tracking_legacy.hpp",
+      "adaptation": "Intentionally not exposed: callback lifetime, reentrancy, exception capture, thread origin, and native retention require a separate callback contract.",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

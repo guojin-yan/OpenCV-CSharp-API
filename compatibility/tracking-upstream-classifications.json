@@ -1,0 +1,447 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/tracking.hpp primary contrib tracker declarations plus separately partitioned public opencv2/tracking/tracking_legacy.hpp declarations",
+  "reviewStatus": "source-reviewed",
+  "limitation": "Primary contrib and public legacy declarations are counted separately. Main Video, external-model, callback, and detail/internal surfaces are not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "surface": "primary",
+      "identity": "class cv.TrackerCSRT",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "surface": "primary",
+      "identity": "class cv.TrackerCSRT.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "surface": "primary",
+      "identity": "cv.TrackerCSRT.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_csrt_get_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.TrackerCSRTParams|constructor|public;instance|.ctor(System.Boolean useHog,System.Boolean useColorNames,System.Boolean useGray,System.Boolean useRgb,System.Boolean useChannelWeights,System.Boolean useSegmentation,System.String windowFunction,System.Single kaiserAlpha,System.Single chebAttenuation,System.Single templateSize,System.Single gslSigma,System.Single hogOrientations,System.Single hogClip,System.Single padding,System.Single filterLr,System.Single weightsLr,System.Int32 numHogChannelsUsed,System.Int32 admmIterations,System.Int32 histogramBins,System.Single histogramLr,System.Int32 backgroundRatio,System.Int32 numberOfScales,System.Single scaleSigmaFactor,System.Single scaleModelMaxArea,System.Single scaleLr,System.Single scaleStep,System.Single psrThreshold)"
+      ]
+    },
+    {
+      "ordinal": 3,
+      "surface": "primary",
+      "identity": "cv.TrackerCSRT.create(TrackerCSRT_Params parameters=TrackerCSRT::Params()[/C,/Ref])-\u003EPtr\u003CTrackerCSRT\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_csrt_create",
+        "jyppx_ocv_tracking_tracker_csrt_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.TrackerCSRT Create()"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "surface": "primary",
+      "identity": "cv.TrackerCSRT.setInitialMask(Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_csrt_set_initial_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.TrackerCSRT|method|public;instance|System.Void SetInitialMask(OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "surface": "primary",
+      "identity": "class cv.TrackerKCF",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "surface": "primary",
+      "identity": "enum cv.TrackerKCF.MODE[const cv.TrackerKCF.GRAY=(1 \u003C\u003C 0);const cv.TrackerKCF.CN=(1 \u003C\u003C 1);const cv.TrackerKCF.CUSTOM=(1 \u003C\u003C 2)]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "surface": "primary",
+      "identity": "class cv.TrackerKCF.Params",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 8,
+      "surface": "primary",
+      "identity": "cv.TrackerKCF.Params.Params()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_kcf_get_default_params"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.TrackerKCFParams|constructor|public;instance|.ctor(System.Single detectThresh,System.Single sigma,System.Single lambda,System.Single interpFactor,System.Single outputSigmaFactor,System.Single pcaLearningRate,System.Boolean resize,System.Boolean splitCoeff,System.Boolean wrapKernel,System.Boolean compressFeature,System.Int32 maxPatchSize,System.Int32 compressedSize,OpenCvSharp.Tracking.TrackerKCFMode descPca,OpenCvSharp.Tracking.TrackerKCFMode descNpca)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "surface": "primary",
+      "identity": "cv.TrackerKCF.create(TrackerKCF_Params parameters=TrackerKCF::Params()[/C,/Ref])-\u003EPtr\u003CTrackerKCF\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_tracker_kcf_create",
+        "jyppx_ocv_tracking_tracker_kcf_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.TrackerKCF|method|public;static|OpenCvSharp.Tracking.TrackerKCF Create()"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "surface": "legacy",
+      "identity": "class cv.legacy.Tracker",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 11,
+      "surface": "legacy",
+      "identity": "cv.legacy.Tracker.init(Mat image;Rect2d boundingBox[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_init"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "surface": "legacy",
+      "identity": "cv.legacy.Tracker.update(Mat image;Rect2d boundingBox[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_update"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Core.Rect2d boundingBox)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerMIL",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 14,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerMIL.create()-\u003EPtr\u003Clegacy::TrackerMIL\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_mil_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMIL|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMIL Create()"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerBoosting",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 16,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerBoosting.create()-\u003EPtr\u003Clegacy::TrackerBoosting\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_boosting_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerMedianFlow",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 18,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerMedianFlow.create()-\u003EPtr\u003Clegacy::TrackerMedianFlow\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_median_flow_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerTLD",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 20,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerTLD.create()-\u003EPtr\u003Clegacy::TrackerTLD\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_tld_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerTLD Create()"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerKCF",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 22,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerKCF.create()-\u003EPtr\u003Clegacy::TrackerKCF\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_kcf_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create()"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerMOSSE",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerMOSSE.create()-\u003EPtr\u003Clegacy::TrackerMOSSE\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_mosse_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMOSSE|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMOSSE Create()"
+      ]
+    },
+    {
+      "ordinal": 25,
+      "surface": "legacy",
+      "identity": "class cv.legacy.MultiTracker",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.MultiTracker()-\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.add(Ptr_legacy_Tracker newTracker;Mat image;Rect2d boundingBox[/C,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_add"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add(OpenCvSharp.Tracking.Legacy.LegacyTracker tracker,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.update(Mat image;vector_Rect2d boundingBox[/O,/Ref])-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_update_count",
+        "jyppx_ocv_tracking_legacy_multi_tracker_update_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult Update(OpenCvSharp.Core.Mat image)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.getObjects()-\u003Estd::vector\u003CRect2d\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_get_objects_count",
+        "jyppx_ocv_tracking_legacy_multi_tracker_get_objects_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSharp.Core.Rect2d[] GetObjects()"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "surface": "legacy",
+      "identity": "cv.legacy.MultiTracker.create()-\u003EPtr\u003Clegacy::MultiTracker\u003E",
+      "classification": "implemented",
+      "reason": "The existing version-neutral contrib Tracking native and managed surface implements this parser row.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_multi_tracker_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
+      ]
+    },
+    {
+      "ordinal": 31,
+      "surface": "legacy",
+      "identity": "class cv.legacy.TrackerCSRT",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted class, struct, or enum metadata is reviewed as public type shape rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerCSRT.create()-\u003EPtr\u003Clegacy::TrackerCSRT\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_csrt_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()"
+      ]
+    },
+    {
+      "ordinal": 33,
+      "surface": "legacy",
+      "identity": "cv.legacy.TrackerCSRT.setInitialMask(Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask(OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 34,
+      "surface": "legacy",
+      "identity": "cv.legacy.upgradeTrackingAPI(Ptr_legacy_Tracker legacy_tracker[/C,/Ref])-\u003EPtr\u003Ccv::Tracker\u003E",
+      "classification": "implemented",
+      "reason": "The selected public legacy model-free completion batch provides opaque ownership, guarded lifecycle behavior, native smoke, and net8/net10 managed tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_TRACKING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_tracking_legacy_upgrade"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|OpenCvSharp.Tracking.Tracker Upgrade()"
+      ]
+    }
+  ]
+}

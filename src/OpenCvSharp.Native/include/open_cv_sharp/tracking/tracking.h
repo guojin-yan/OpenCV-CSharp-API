@@ -11,6 +11,10 @@ typedef struct jyppx_ocv_tracking_legacy_tracker jyppx_ocv_tracking_legacy_track
 typedef struct jyppx_ocv_tracking_legacy_tracker_mosse jyppx_ocv_tracking_legacy_tracker_mosse;
 typedef struct jyppx_ocv_tracking_legacy_tracker_mil jyppx_ocv_tracking_legacy_tracker_mil;
 typedef struct jyppx_ocv_tracking_legacy_tracker_median_flow jyppx_ocv_tracking_legacy_tracker_median_flow;
+typedef struct jyppx_ocv_tracking_legacy_tracker_boosting jyppx_ocv_tracking_legacy_tracker_boosting;
+typedef struct jyppx_ocv_tracking_legacy_tracker_tld jyppx_ocv_tracking_legacy_tracker_tld;
+typedef struct jyppx_ocv_tracking_legacy_tracker_kcf jyppx_ocv_tracking_legacy_tracker_kcf;
+typedef struct jyppx_ocv_tracking_legacy_tracker_csrt jyppx_ocv_tracking_legacy_tracker_csrt;
 typedef struct jyppx_ocv_tracking_legacy_multi_tracker jyppx_ocv_tracking_legacy_multi_tracker;
 
 typedef struct jyppx_ocv_tracking_rect
@@ -103,6 +107,15 @@ typedef struct jyppx_ocv_tracking_median_flow_params
     double max_median_length_of_displacement_difference;
 } jyppx_ocv_tracking_median_flow_params;
 
+typedef struct jyppx_ocv_tracking_boosting_params
+{
+    int num_classifiers;
+    float sampler_overlap;
+    float sampler_search_factor;
+    int iteration_init;
+    int feature_set_num_features;
+} jyppx_ocv_tracking_boosting_params;
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv_tracking_tracker_release_handle(
     jyppx_ocv_tracking_tracker* tracker);
 
@@ -180,6 +193,41 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_m
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_median_flow_get_default_params(
     jyppx_ocv_tracking_median_flow_params* parameters);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_boosting_create_default(
+    jyppx_ocv_tracking_legacy_tracker_boosting** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_boosting_create(
+    const jyppx_ocv_tracking_boosting_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_boosting** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params(
+    jyppx_ocv_tracking_boosting_params* parameters);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_tld_create(
+    jyppx_ocv_tracking_legacy_tracker_tld** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_kcf_create_default(
+    jyppx_ocv_tracking_legacy_tracker_kcf** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_kcf_create(
+    const jyppx_ocv_tracking_kcf_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_kcf** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_csrt_create_default(
+    jyppx_ocv_tracking_legacy_tracker_csrt** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_csrt_create(
+    const jyppx_ocv_tracking_csrt_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_csrt** tracker);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask(
+    jyppx_ocv_tracking_legacy_tracker_csrt* tracker,
+    const jyppx_ocv_mat* mask);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_upgrade(
+    const jyppx_ocv_tracking_legacy_tracker* legacy_tracker,
+    jyppx_ocv_tracking_tracker** tracker);
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_tracking_legacy_multi_tracker_create(
     jyppx_ocv_tracking_legacy_multi_tracker** tracker);

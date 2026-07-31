@@ -762,14 +762,14 @@ Implemented Tracking ABI groups:
 - `TrackerKCF`: default/parameter creation and flat default-parameter retrieval.
 - `TrackerCSRT`: default/parameter creation, flat default-parameter retrieval, and `SetInitialMask(Mat)`.
 - Legacy base: release, `Init(Mat, Rect2d)`, and `Update(Mat, Rect2d)`.
-- Legacy trackers: MOSSE creation, MIL creation/default params, and MedianFlow creation/default params.
+- Legacy trackers: MOSSE, MIL, MedianFlow, Boosting, TLD, KCF, and CSRT creation; copied Boosting/KCF/CSRT parameter values; CSRT initial mask; and ownership-preserving upgrade to the modern API.
 - `MultiTracker`: create/release, add legacy tracker, update count/fill output, and current-object count/fill output.
 
 - modern 基类：释放、`Init(Mat, Rect)` 和 `Update(Mat, Rect)`。
 - `TrackerKCF`：默认/参数创建和平铺默认参数读取。
 - `TrackerCSRT`：默认/参数创建、平铺默认参数读取和 `SetInitialMask(Mat)`。
 - legacy 基类：释放、`Init(Mat, Rect2d)` 和 `Update(Mat, Rect2d)`。
-- legacy tracker：MOSSE 创建、MIL 创建/默认参数，以及 MedianFlow 创建/默认参数。
+- legacy tracker：MOSSE、MIL、MedianFlow、Boosting、TLD、KCF 和 CSRT 创建，复制的 Boosting/KCF/CSRT 参数值，CSRT 初始 mask，以及保留所有权的 modern API upgrade。
 - `MultiTracker`：创建/释放、添加 legacy tracker、update count/fill 输出，以及当前对象 count/fill 输出。
 
 ## Face ABI / Face ABI

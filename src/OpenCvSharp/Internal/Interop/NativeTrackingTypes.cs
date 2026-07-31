@@ -100,5 +100,15 @@ namespace OpenCvSharp.Internal.Interop
             internal int WinHeightNcc;
             internal double MaxMedianLengthOfDisplacementDifference;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct TrackingBoostingParamsNative
+        {
+            internal int NumClassifiers;
+            internal float SamplerOverlap;
+            internal float SamplerSearchFactor;
+            internal int IterationInit;
+            internal int FeatureSetNumFeatures;
+        }
     }
 }

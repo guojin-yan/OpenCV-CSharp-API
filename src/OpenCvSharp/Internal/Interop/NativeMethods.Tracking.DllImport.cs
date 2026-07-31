@@ -69,6 +69,36 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_median_flow_get_default_params")]
         internal static extern int TrackingLegacyTrackerMedianFlowGetDefaultParams(out TrackingMedianFlowParamsNative parameters);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_boosting_create_default")]
+        internal static extern int TrackingLegacyTrackerBoostingCreateDefault(out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_boosting_create")]
+        internal static extern int TrackingLegacyTrackerBoostingCreate(ref TrackingBoostingParamsNative parameters, out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params")]
+        internal static extern int TrackingLegacyTrackerBoostingGetDefaultParams(out TrackingBoostingParamsNative parameters);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_tld_create")]
+        internal static extern int TrackingLegacyTrackerTldCreate(out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_kcf_create_default")]
+        internal static extern int TrackingLegacyTrackerKcfCreateDefault(out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_kcf_create")]
+        internal static extern int TrackingLegacyTrackerKcfCreate(ref TrackingKcfParamsNative parameters, out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_csrt_create_default")]
+        internal static extern int TrackingLegacyTrackerCsrtCreateDefault(out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_csrt_create")]
+        internal static extern int TrackingLegacyTrackerCsrtCreate(ref TrackingCsrtParamsNative parameters, out IntPtr tracker);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask")]
+        internal static extern int TrackingLegacyTrackerCsrtSetInitialMask(IntPtr tracker, IntPtr mask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_upgrade")]
+        internal static extern int TrackingLegacyUpgrade(IntPtr legacyTracker, out IntPtr tracker);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_tracking_legacy_multi_tracker_create")]
         internal static extern int TrackingLegacyMultiTrackerCreate(out IntPtr tracker);
 

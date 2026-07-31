@@ -7,6 +7,10 @@ using OpenCvSharp.Tracking;
 using OpenCvSharp.Tracking.Legacy;
 using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
 using LegacyMultiTracker = OpenCvSharp.Tracking.Legacy.MultiTracker;
+using LegacyTrackerCSRT = OpenCvSharp.Tracking.Legacy.TrackerCSRT;
+using LegacyTrackerKCF = OpenCvSharp.Tracking.Legacy.TrackerKCF;
+using ModernTrackerCSRT = OpenCvSharp.Tracking.TrackerCSRT;
+using ModernTrackerKCF = OpenCvSharp.Tracking.TrackerKCF;
 
 namespace OpenCvSharp.Tests.Tracking
 {
@@ -225,6 +229,21 @@ namespace OpenCvSharp.Tests.Tracking
             Assert.True(mil != differentMil);
             Assert.Equal(mil.GetHashCode(), sameMil.GetHashCode());
             Assert.Contains("FeatureSetNumFeatures=250", mil.ToString());
+
+            TrackerBoostingParams boosting = TrackerBoostingParams.Default;
+            var sameBoosting = new TrackerBoostingParams(100, 0.99F, 1.8F, 50, 1050);
+            var differentBoosting = new TrackerBoostingParams(101, 0.99F, 1.8F, 50, 1050);
+            Assert.Equal(100, boosting.NumClassifiers);
+            Assert.Equal(0.99F, boosting.SamplerOverlap, 3);
+            Assert.Equal(1.8F, boosting.SamplerSearchFactor, 3);
+            Assert.Equal(50, boosting.IterationInit);
+            Assert.Equal(1050, boosting.FeatureSetNumFeatures);
+            Assert.Equal(sameBoosting, boosting);
+            Assert.True(boosting == sameBoosting);
+            Assert.False(boosting != sameBoosting);
+            Assert.True(boosting != differentBoosting);
+            Assert.Equal(boosting.GetHashCode(), sameBoosting.GetHashCode());
+            Assert.Contains("SamplerOverlap=0.99", boosting.ToString(), StringComparison.Ordinal);
         }
 
         [Fact]
@@ -456,6 +475,7 @@ namespace OpenCvSharp.Tests.Tracking
             Assert.Equal(56, Marshal.SizeOf<TrackerKCFParams>());
             Assert.Equal(28, Marshal.SizeOf<TrackerMILParams>());
             Assert.Equal(48, Marshal.SizeOf<TrackerMedianFlowParams>());
+            Assert.Equal(20, Marshal.SizeOf<TrackerBoostingParams>());
 
             Assert.Equal(0, FieldOffset<TrackerUpdateResult>("<Success>k__BackingField"));
             Assert.Equal(4, FieldOffset<TrackerUpdateResult>("<BoundingBox>k__BackingField"));
@@ -492,6 +512,12 @@ namespace OpenCvSharp.Tests.Tracking
             Assert.Equal(16, FieldOffset<TrackerMedianFlowParams>("<TermCriteria>k__BackingField"));
             Assert.Equal(32, FieldOffset<TrackerMedianFlowParams>("<WinSizeNcc>k__BackingField"));
             Assert.Equal(40, FieldOffset<TrackerMedianFlowParams>("<MaxMedianLengthOfDisplacementDifference>k__BackingField"));
+
+            Assert.Equal(0, FieldOffset<TrackerBoostingParams>("<NumClassifiers>k__BackingField"));
+            Assert.Equal(4, FieldOffset<TrackerBoostingParams>("<SamplerOverlap>k__BackingField"));
+            Assert.Equal(8, FieldOffset<TrackerBoostingParams>("<SamplerSearchFactor>k__BackingField"));
+            Assert.Equal(12, FieldOffset<TrackerBoostingParams>("<IterationInit>k__BackingField"));
+            Assert.Equal(16, FieldOffset<TrackerBoostingParams>("<FeatureSetNumFeatures>k__BackingField"));
         }
 
         [Fact]
@@ -510,11 +536,15 @@ namespace OpenCvSharp.Tests.Tracking
         [Fact]
         public void FactoriesReturnObjectOrExplicitNativeBoundary()
         {
-            AssertFactoryBoundary(() => TrackerKCF.Create());
-            AssertFactoryBoundary(() => TrackerCSRT.Create(TrackerCSRTParams.Default));
+            AssertFactoryBoundary(() => ModernTrackerKCF.Create());
+            AssertFactoryBoundary(() => ModernTrackerCSRT.Create(TrackerCSRTParams.Default));
             AssertFactoryBoundary(() => TrackerMOSSE.Create());
             AssertFactoryBoundary(() => TrackerMIL.Create(TrackerMILParams.Default));
             AssertFactoryBoundary(() => TrackerMedianFlow.Create(TrackerMedianFlowParams.Default));
+            AssertFactoryBoundary(() => TrackerBoosting.Create(TrackerBoostingParams.Default));
+            AssertFactoryBoundary(() => TrackerTLD.Create());
+            AssertFactoryBoundary(() => LegacyTrackerKCF.Create(TrackerKCFParams.Default));
+            AssertFactoryBoundary(() => LegacyTrackerCSRT.Create(TrackerCSRTParams.Default));
             AssertFactoryBoundary(() => LegacyMultiTracker.Create());
         }
 
@@ -564,13 +594,19 @@ namespace OpenCvSharp.Tests.Tracking
                     Assert.True(parameters.WinSize.Height > 0);
                     Assert.Contains("PointsInGrid=", parameters.ToString(), StringComparison.Ordinal);
                 });
+
+            AssertNativeDefaultBoundaryOrValues(
+                TrackerBoostingParams.GetDefaultFromNative,
+                parameters => Assert.Equal(TrackerBoostingParams.Default, parameters));
         }
 
         [Fact]
         public void ManagedValidationRunsWhenTrackerCanBeCreated()
         {
-            using (TrackerKCF? kcfTracker = TryCreate(() => TrackerKCF.Create()))
-            using (TrackerCSRT? csrtTracker = TryCreate(() => TrackerCSRT.Create()))
+            using (ModernTrackerKCF? kcfTracker = TryCreate(() => ModernTrackerKCF.Create()))
+            using (ModernTrackerCSRT? csrtTracker = TryCreate(() => ModernTrackerCSRT.Create()))
+            using (LegacyTrackerCSRT? legacyCsrtTracker = TryCreate(() => LegacyTrackerCSRT.Create()))
+            using (TrackerTLD? tldTracker = TryCreate(() => TrackerTLD.Create()))
             using (TrackerMIL? firstMilTracker = TryCreate(() => TrackerMIL.Create()))
             using (LegacyMultiTracker? firstMulti = TryCreate(() => LegacyMultiTracker.Create()))
             using (TrackerMIL? secondMilTracker = TryCreate(() => TrackerMIL.Create()))
@@ -578,6 +614,8 @@ namespace OpenCvSharp.Tests.Tracking
             {
                 if (kcfTracker == null &&
                     csrtTracker == null &&
+                    legacyCsrtTracker == null &&
+                    tldTracker == null &&
                     firstMilTracker == null &&
                     firstMulti == null &&
                     secondMilTracker == null &&
@@ -610,6 +648,20 @@ namespace OpenCvSharp.Tests.Tracking
                         Assert.Throws<ObjectDisposedException>(() => csrtTracker.Update(image, ref box));
                         Assert.Throws<ObjectDisposedException>(() => csrtTracker.Update(image, new Rect(0, 0, 1, 1)));
                         Assert.Throws<ObjectDisposedException>(() => csrtTracker.SetInitialMask(image));
+                    }
+
+                    if (legacyCsrtTracker != null)
+                    {
+                        Assert.Throws<ArgumentNullException>(() => legacyCsrtTracker.SetInitialMask(null!));
+                        legacyCsrtTracker.Dispose();
+                        Assert.Throws<ObjectDisposedException>(() => legacyCsrtTracker.SetInitialMask(image));
+                        Assert.Throws<ObjectDisposedException>(() => legacyCsrtTracker.Upgrade());
+                    }
+
+                    if (tldTracker != null)
+                    {
+                        tldTracker.Dispose();
+                        Assert.Throws<ObjectDisposedException>(() => tldTracker.Upgrade());
                     }
 
                     if (firstMilTracker != null && firstMulti != null)
@@ -655,21 +707,21 @@ namespace OpenCvSharp.Tests.Tracking
             using (Mat first = CreateFrame(2))
             using (Mat second = CreateFrame(4))
             {
-                OpenCvException? modernException = Record.Exception(() =>
+                Exception? modernException = Record.Exception(() =>
                 {
-                    using (TrackerKCF tracker = TrackerKCF.Create(TrackerKCFParams.Default))
+                    using (ModernTrackerKCF tracker = ModernTrackerKCF.Create(TrackerKCFParams.Default))
                     {
                         Rect box = new Rect(6, 7, 8, 8);
                         tracker.Init(first, box);
                         TrackerUpdateResult update = tracker.Update(second, box);
                         Assert.True(update.BoundingBox.Width >= 0);
                     }
-                }) as OpenCvException;
+                });
                 AssertBoundaryOrSuccess(modernException);
 
-                OpenCvException? csrtException = Record.Exception(() =>
+                Exception? csrtException = Record.Exception(() =>
                 {
-                    using (TrackerCSRT tracker = TrackerCSRT.Create(TrackerCSRTParams.Default))
+                    using (ModernTrackerCSRT tracker = ModernTrackerCSRT.Create(TrackerCSRTParams.Default))
                     using (Mat mask = new Mat(first.Rows, first.Cols, MatType.CV_8UC1, new Scalar(0)))
                     {
                         ImgProcCv2.Rectangle(mask, new Rect(6, 7, 8, 8), new Scalar(255), -1);
@@ -678,10 +730,10 @@ namespace OpenCvSharp.Tests.Tracking
                         TrackerUpdateResult update = tracker.Update(second, new Rect(6, 7, 8, 8));
                         Assert.True(update.BoundingBox.Height >= 0);
                     }
-                }) as OpenCvException;
+                });
                 AssertBoundaryOrSuccess(csrtException);
 
-                OpenCvException? legacyException = Record.Exception(() =>
+                Exception? legacyException = Record.Exception(() =>
                 {
                     using (TrackerMIL tracker = TrackerMIL.Create())
                     using (TrackerMIL multiMember = TrackerMIL.Create())
@@ -699,8 +751,35 @@ namespace OpenCvSharp.Tests.Tracking
                         Assert.NotNull(multiUpdate.BoundingBoxes);
                         Assert.NotNull(objects);
                     }
-                }) as OpenCvException;
+                });
                 AssertBoundaryOrSuccess(legacyException);
+
+                Exception? legacyCompletionException = Record.Exception(() =>
+                {
+                    using (TrackerBoosting boosting = TrackerBoosting.Create(TrackerBoostingParams.Default))
+                    using (TrackerTLD tld = TrackerTLD.Create())
+                    using (LegacyTrackerCSRT csrt = LegacyTrackerCSRT.Create(TrackerCSRTParams.Default))
+                    using (Mat mask = new Mat(first.Rows, first.Cols, MatType.CV_8UC1, new Scalar(0)))
+                    {
+                        ImgProcCv2.Rectangle(mask, new Rect(6, 7, 8, 8), new Scalar(255), -1);
+                        csrt.SetInitialMask(mask);
+                        csrt.Init(first, new Rect2d(6.0, 7.0, 8.0, 8.0));
+                        LegacyTrackerUpdateResult update = csrt.Update(second, new Rect2d(6.0, 7.0, 8.0, 8.0));
+                        Assert.True(update.BoundingBox.Width >= 0.0);
+                        Assert.False(boosting.IsDisposed);
+                        Assert.False(tld.IsDisposed);
+                    }
+
+                    using (LegacyTrackerKCF legacy = LegacyTrackerKCF.Create(TrackerKCFParams.Default))
+                    using (OpenCvSharp.Tracking.Tracker upgraded = legacy.Upgrade())
+                    {
+                        legacy.Dispose();
+                        upgraded.Init(first, new Rect(6, 7, 8, 8));
+                        TrackerUpdateResult update = upgraded.Update(second, new Rect(6, 7, 8, 8));
+                        Assert.True(update.BoundingBox.Height >= 0);
+                    }
+                });
+                AssertBoundaryOrSuccess(legacyCompletionException);
             }
         }
 
@@ -771,14 +850,15 @@ namespace OpenCvSharp.Tests.Tracking
             }
         }
 
-        private static void AssertBoundaryOrSuccess(OpenCvException? exception)
+        private static void AssertBoundaryOrSuccess(Exception? exception)
         {
             if (exception == null)
             {
                 return;
             }
 
-            Assert.True(IsNativeBoundary(exception) || exception.Message.Length > 0, exception.Message);
+            OpenCvException openCvException = Assert.IsType<OpenCvException>(exception);
+            Assert.True(IsNativeBoundary(openCvException) || openCvException.Message.Length > 0, openCvException.Message);
         }
 
         private static bool IsNativeBoundary(OpenCvException exception)

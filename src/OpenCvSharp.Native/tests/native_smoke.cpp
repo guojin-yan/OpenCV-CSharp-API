@@ -11,6 +11,7 @@
 #include "open_cv_sharp/objdetect/aruco.h"
 #include "open_cv_sharp/objdetect/objdetect.h"
 #include "open_cv_sharp/photo/photo.h"
+#include "open_cv_sharp/tracking/tracking.h"
 #include "open_cv_sharp/video/video.h"
 #endif
 #include "open_cv_sharp/error.h"
@@ -4154,6 +4155,100 @@ namespace
         std::remove(svmsgd_path);
         return 0;
     }
+
+    int run_tracking_legacy_completion_smoke()
+    {
+        if (jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params(nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_tracking_legacy_upgrade(nullptr, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            return 873;
+        }
+
+        jyppx_ocv_tracking_boosting_params boosting_params{};
+        if (jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params(&boosting_params) != OPENCV_CSHARP_STATUS_OK ||
+            boosting_params.num_classifiers != 100 ||
+            std::abs(boosting_params.sampler_overlap - 0.99F) > 0.000001F ||
+            std::abs(boosting_params.sampler_search_factor - 1.8F) > 0.000001F ||
+            boosting_params.iteration_init != 50 ||
+            boosting_params.feature_set_num_features != 1050)
+        {
+            return 874;
+        }
+
+        jyppx_ocv_tracking_legacy_tracker_boosting* boosting = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_boosting* boosting_explicit = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_tld* tld = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_kcf* kcf = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_kcf* kcf_explicit = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_csrt* csrt = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_csrt* csrt_explicit = nullptr;
+        jyppx_ocv_tracking_tracker* upgraded = nullptr;
+        auto cleanup = [&]()
+        {
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(boosting));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(boosting_explicit));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(tld));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(kcf));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(kcf_explicit));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(csrt));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(csrt_explicit));
+            jyppx_ocv_tracking_tracker_release_handle(upgraded);
+        };
+
+        jyppx_ocv_tracking_kcf_params kcf_params{};
+        jyppx_ocv_tracking_csrt_params csrt_params{};
+        if (jyppx_ocv_tracking_tracker_kcf_get_default_params(&kcf_params) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_tracking_tracker_csrt_get_default_params(&csrt_params) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_tracking_legacy_tracker_boosting_create_default(&boosting) != OPENCV_CSHARP_STATUS_OK || boosting == nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_boosting_create(&boosting_params, &boosting_explicit) != OPENCV_CSHARP_STATUS_OK || boosting_explicit == nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_tld_create(&tld) != OPENCV_CSHARP_STATUS_OK || tld == nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_kcf_create_default(&kcf) != OPENCV_CSHARP_STATUS_OK || kcf == nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_kcf_create(&kcf_params, &kcf_explicit) != OPENCV_CSHARP_STATUS_OK || kcf_explicit == nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_csrt_create_default(&csrt) != OPENCV_CSHARP_STATUS_OK || csrt == nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_csrt_create(&csrt_params, &csrt_explicit) != OPENCV_CSHARP_STATUS_OK || csrt_explicit == nullptr)
+        {
+            cleanup();
+            return 875;
+        }
+
+        NativeMatHandle mask;
+        if (jyppx_ocv_mat_create_with_scalar(32, 32, 0, 255.0, 0.0, 0.0, 0.0, mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask(csrt, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask(csrt, mask.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 876;
+        }
+
+        if (jyppx_ocv_tracking_legacy_upgrade(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(kcf), &upgraded) != OPENCV_CSHARP_STATUS_OK || upgraded == nullptr)
+        {
+            cleanup();
+            return 877;
+        }
+
+        jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(kcf));
+        kcf = nullptr;
+        NativeMatHandle first;
+        NativeMatHandle second;
+        if (!create_video_tracking_frame(0, first) || !create_video_tracking_frame(2, second))
+        {
+            cleanup();
+            return 878;
+        }
+
+        jyppx_ocv_tracking_rect box{ 7, 7, 16, 18 };
+        int result = 0;
+        if (jyppx_ocv_tracking_tracker_init(upgraded, first.get(), box) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_tracking_tracker_update(upgraded, second.get(), &box, &result) != OPENCV_CSHARP_STATUS_OK ||
+            box.width < 0 || box.height < 0)
+        {
+            cleanup();
+            return 879;
+        }
+
+        cleanup();
+        return 0;
+    }
 #endif
 }
 
@@ -4262,6 +4357,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return ml_remaining_callables_status;
+        }
+
+        int tracking_legacy_completion_status = run_tracking_legacy_completion_smoke();
+        if (tracking_legacy_completion_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return tracking_legacy_completion_status;
         }
 #endif
 
@@ -5649,6 +5751,15 @@ int main()
             jyppx_ocv_ml_model_release_handle(logistic);
             jyppx_ocv_ml_model_release_handle(svmsgd);
             return 870;
+        }
+        jyppx_ocv_tracking_legacy_tracker_tld* tld = nullptr;
+        jyppx_ocv_tracking_legacy_tracker_kcf* kcf = nullptr;
+        if (jyppx_ocv_tracking_legacy_tracker_tld_create(&tld) != OPENCV_CSHARP_STATUS_NOT_LINKED || tld != nullptr ||
+            jyppx_ocv_tracking_legacy_tracker_kcf_create_default(&kcf) != OPENCV_CSHARP_STATUS_NOT_LINKED || kcf != nullptr)
+        {
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(tld));
+            jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(kcf));
+            return 880;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

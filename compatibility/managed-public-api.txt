@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=564
-member-count=6134
+type-count=569
+member-count=6157
 namespace-count=41
 nullable-shape=included
 
@@ -191,9 +191,13 @@ TYPE|class|public;sealed|OpenCvSharp.SurfaceMatching.Icp|base=|interfaces=System
 TYPE|class|public;sealed|OpenCvSharp.SurfaceMatching.Pose3DResult|base=|interfaces=
 TYPE|class|public;sealed|OpenCvSharp.SurfaceMatching.Ppf3DDetector|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.MultiTracker|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerBoosting|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerCSRT|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerKCF|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerMIL|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerMOSSE|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Tracking.Legacy.TrackerTLD|base=OpenCvSharp.Tracking.Legacy.LegacyTracker|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Tracking.TrackerCSRT|base=OpenCvSharp.Tracking.Tracker|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Tracking.TrackerKCF|base=OpenCvSharp.Tracking.Tracker|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Video.BackgroundSubtractorKNN|base=OpenCvSharp.Video.BackgroundSubtractor|interfaces=System.IDisposable
@@ -558,6 +562,7 @@ TYPE|struct|public;readonly|OpenCvSharp.Saliency.ObjectnessBINGBox|base=|interfa
 TYPE|struct|public;readonly|OpenCvSharp.StructuredLight.GrayCodePatternParams|base=|interfaces=System.IEquatable<OpenCvSharp.StructuredLight.GrayCodePatternParams>
 TYPE|struct|public;readonly|OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult|base=|interfaces=System.IEquatable<OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult>
 TYPE|struct|public;readonly|OpenCvSharp.Tracking.Legacy.LegacyTrackerUpdateResult|base=|interfaces=System.IEquatable<OpenCvSharp.Tracking.Legacy.LegacyTrackerUpdateResult>
+TYPE|struct|public;readonly|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|base=|interfaces=System.IEquatable<OpenCvSharp.Tracking.Legacy.TrackerBoostingParams>
 TYPE|struct|public;readonly|OpenCvSharp.Tracking.Legacy.TrackerMILParams|base=|interfaces=System.IEquatable<OpenCvSharp.Tracking.Legacy.TrackerMILParams>
 TYPE|struct|public;readonly|OpenCvSharp.Tracking.Legacy.TrackerMedianFlowParams|base=|interfaces=System.IEquatable<OpenCvSharp.Tracking.Legacy.TrackerMedianFlowParams>
 TYPE|struct|public;readonly|OpenCvSharp.Tracking.TrackerCSRTParams|base=|interfaces=System.IEquatable<OpenCvSharp.Tracking.TrackerCSRTParams>
@@ -5534,6 +5539,7 @@ MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTrackerUpdateResult|property|instance;g
 MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|protected;instance|System.Void ThrowIfDisposed()
 MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|OpenCvSharp.Tracking.Legacy.LegacyTrackerUpdateResult Update(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)
+MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|OpenCvSharp.Tracking.Tracker Upgrade()
 MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Core.Rect2d boundingBox)
 MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)
 MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|property|instance;get:public|System.Boolean IsDisposed
@@ -5543,6 +5549,27 @@ MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSha
 MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add(OpenCvSharp.Tracking.Legacy.LegacyTracker tracker,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)
 MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|OpenCvSharp.Tracking.Legacy.MultiTracker Create()
 MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|constructor|public;instance|.ctor(System.Int32 numClassifiers,System.Single samplerOverlap,System.Single samplerSearchFactor,System.Int32 iterationInit,System.Int32 featureSetNumFeatures)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;instance;override|System.String ToString()
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;instance;sealed-override|System.Boolean Equals(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams other)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams GetDefaultFromNative()
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;static|System.Boolean op_Equality(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams left,OpenCvSharp.Tracking.Legacy.TrackerBoostingParams right)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|method|public;static|System.Boolean op_Inequality(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams left,OpenCvSharp.Tracking.Legacy.TrackerBoostingParams right)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|property|instance;get:public|System.Int32 FeatureSetNumFeatures
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|property|instance;get:public|System.Int32 IterationInit
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|property|instance;get:public|System.Int32 NumClassifiers
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|property|instance;get:public|System.Single SamplerOverlap
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|property|instance;get:public|System.Single SamplerSearchFactor
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams|property|static;get:public|OpenCvSharp.Tracking.Legacy.TrackerBoostingParams Default
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams parameters)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask(OpenCvSharp.Core.Mat mask)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create(OpenCvSharp.Tracking.TrackerCSRTParams parameters)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create()
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create(OpenCvSharp.Tracking.TrackerKCFParams parameters)
 MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMILParams|constructor|public;instance|.ctor(System.Single samplerInitInRadius,System.Single samplerSearchWinSize,System.Int32 samplerInitMaxNegNum,System.Single samplerTrackInRadius,System.Int32 samplerTrackMaxPosNum,System.Int32 samplerTrackMaxNegNum,System.Int32 featureSetNumFeatures)
 MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMILParams|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMILParams|method|public;instance;override|System.Int32 GetHashCode()
@@ -5579,6 +5606,7 @@ MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlowParams|property|instance;get
 MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlowParams|property|static;get:public|OpenCvSharp.Tracking.Legacy.TrackerMedianFlowParams Default
 MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()
 MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create(OpenCvSharp.Tracking.Legacy.TrackerMedianFlowParams parameters)
+MEMBER|OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerTLD Create()
 MEMBER|OpenCvSharp.Tracking.TrackerCSRTParams|constructor|public;instance|.ctor(System.Boolean useHog,System.Boolean useColorNames,System.Boolean useGray,System.Boolean useRgb,System.Boolean useChannelWeights,System.Boolean useSegmentation,System.String windowFunction,System.Single kaiserAlpha,System.Single chebAttenuation,System.Single templateSize,System.Single gslSigma,System.Single hogOrientations,System.Single hogClip,System.Single padding,System.Single filterLr,System.Single weightsLr,System.Int32 numHogChannelsUsed,System.Int32 admmIterations,System.Int32 histogramBins,System.Single histogramLr,System.Int32 backgroundRatio,System.Int32 numberOfScales,System.Single scaleSigmaFactor,System.Single scaleModelMaxArea,System.Single scaleLr,System.Single scaleStep,System.Single psrThreshold)
 MEMBER|OpenCvSharp.Tracking.TrackerCSRTParams|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|OpenCvSharp.Tracking.TrackerCSRTParams|method|public;instance;override|System.Int32 GetHashCode()

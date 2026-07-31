@@ -245,6 +245,42 @@ namespace
         };
     }
 
+    cv::legacy::TrackerBoosting::Params to_boosting_params(const jyppx_ocv_tracking_boosting_params& parameters)
+    {
+        cv::legacy::TrackerBoosting::Params result;
+        result.numClassifiers = parameters.num_classifiers;
+        result.samplerOverlap = parameters.sampler_overlap;
+        result.samplerSearchFactor = parameters.sampler_search_factor;
+        result.iterationInit = parameters.iteration_init;
+        result.featureSetNumFeatures = parameters.feature_set_num_features;
+        return result;
+    }
+
+    jyppx_ocv_tracking_boosting_params from_boosting_params(const cv::legacy::TrackerBoosting::Params& parameters)
+    {
+        return jyppx_ocv_tracking_boosting_params{
+            parameters.numClassifiers,
+            parameters.samplerOverlap,
+            parameters.samplerSearchFactor,
+            parameters.iterationInit,
+            parameters.featureSetNumFeatures
+        };
+    }
+
+    cv::legacy::TrackerKCF::Params to_legacy_kcf_params(const jyppx_ocv_tracking_kcf_params& parameters)
+    {
+        cv::legacy::TrackerKCF::Params result;
+        static_cast<cv::tracking::TrackerKCF::Params&>(result) = to_kcf_params(parameters);
+        return result;
+    }
+
+    cv::legacy::TrackerCSRT::Params to_legacy_csrt_params(const jyppx_ocv_tracking_csrt_params& parameters)
+    {
+        cv::legacy::TrackerCSRT::Params result;
+        static_cast<cv::tracking::TrackerCSRT::Params&>(result) = to_csrt_params(parameters);
+        return result;
+    }
+
     int create_kcf_handle(const char* api_name, const cv::tracking::TrackerKCF::Params& parameters, jyppx_ocv_tracking_tracker_kcf** tracker)
     {
         if (tracker == nullptr)
@@ -302,6 +338,29 @@ namespace
 
         created->concrete = native;
         created->value = native;
+        *tracker = created;
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int create_upgraded_handle(
+        const char* api_name,
+        const cv::Ptr<cv::legacy::Tracker>& legacy_tracker,
+        jyppx_ocv_tracking_tracker** tracker)
+    {
+        if (tracker == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "tracker");
+        }
+
+        *tracker = nullptr;
+        cv::Ptr<cv::Tracker> upgraded = cv::legacy::upgradeTrackingAPI(legacy_tracker);
+        jyppx_ocv_tracking_tracker* created = new (std::nothrow) jyppx_ocv_tracking_tracker();
+        if (created == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+
+        created->value = upgraded;
         *tracker = created;
         return OPENCV_CSHARP_STATUS_OK;
     }
@@ -722,6 +781,230 @@ int jyppx_ocv_tracking_legacy_tracker_median_flow_get_default_params(jyppx_ocv_t
         *parameters = from_median_flow_params(cv::legacy::TrackerMedianFlow::Params());
         return OPENCV_CSHARP_STATUS_OK;
 #else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_boosting_create_default(jyppx_ocv_tracking_legacy_tracker_boosting** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_boosting_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerBoosting::create(), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_boosting_create(
+    const jyppx_ocv_tracking_boosting_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_boosting** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_boosting_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (parameters == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "parameters");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerBoosting::create(to_boosting_params(*parameters)), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params(jyppx_ocv_tracking_boosting_params* parameters)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (parameters == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "parameters");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        *parameters = from_boosting_params(cv::legacy::TrackerBoosting::Params());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_tld_create(jyppx_ocv_tracking_legacy_tracker_tld** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_tld_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerTLD::create(), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_kcf_create_default(jyppx_ocv_tracking_legacy_tracker_kcf** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_kcf_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerKCF::create(), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_kcf_create(
+    const jyppx_ocv_tracking_kcf_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_kcf** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_kcf_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (parameters == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "parameters");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerKCF::create(to_legacy_kcf_params(*parameters)), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_csrt_create_default(jyppx_ocv_tracking_legacy_tracker_csrt** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_csrt_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerCSRT::create(), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_csrt_create(
+    const jyppx_ocv_tracking_csrt_params* parameters,
+    jyppx_ocv_tracking_legacy_tracker_csrt** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_csrt_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (parameters == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "parameters");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_legacy_handle(api_name, cv::legacy::TrackerCSRT::create(to_legacy_csrt_params(*parameters)), tracker);
+#else
+        (void)tracker;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask(
+    jyppx_ocv_tracking_legacy_tracker_csrt* tracker,
+    const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (tracker == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "tracker");
+        }
+        int status = validate_mat(api_name, mask, "mask");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        tracker->concrete->setInitialMask(opencv_csharp_native::mat_value(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_tracking_legacy_upgrade(
+    const jyppx_ocv_tracking_legacy_tracker* legacy_tracker,
+    jyppx_ocv_tracking_tracker** tracker)
+{
+    constexpr const char* api_name = "jyppx_ocv_tracking_legacy_upgrade";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_legacy_tracker(api_name, legacy_tracker);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_TRACKING)
+        return create_upgraded_handle(api_name, legacy_tracker->value, tracker);
+#else
+        (void)tracker;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

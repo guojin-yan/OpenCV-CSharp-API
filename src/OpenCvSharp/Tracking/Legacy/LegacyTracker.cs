@@ -68,6 +68,17 @@ namespace OpenCvSharp.Tracking.Legacy
             return new LegacyTrackerUpdateResult(success, boundingBox);
         }
 
+        /// <summary>
+        /// Creates a modern tracker adapter that retains this legacy tracker state.
+        /// 创建保留此 legacy tracker 状态的 modern tracker 适配器。
+        /// </summary>
+        public OpenCvSharp.Tracking.Tracker Upgrade()
+        {
+            ThrowIfDisposed();
+            NativeException.ThrowIfError(NativeMethods.TrackingLegacyUpgrade(NativeHandle, out IntPtr nativeHandle));
+            return new OpenCvSharp.Tracking.Tracker(nativeHandle);
+        }
+
         /// <summary>Releases native resources. 释放 native 资源。</summary>
         public void Dispose()
         {

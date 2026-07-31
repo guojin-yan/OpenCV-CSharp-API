@@ -81,6 +81,10 @@ using TrackerKCFParamsObject = OpenCvSharp.Tracking.TrackerKCFParams;
 using TrackerMILObject = OpenCvSharp.Tracking.Legacy.TrackerMIL;
 using TrackerMedianFlowObject = OpenCvSharp.Tracking.Legacy.TrackerMedianFlow;
 using TrackerMOSSEObject = OpenCvSharp.Tracking.Legacy.TrackerMOSSE;
+using LegacyTrackerBoostingObject = OpenCvSharp.Tracking.Legacy.TrackerBoosting;
+using LegacyTrackerCSRTObject = OpenCvSharp.Tracking.Legacy.TrackerCSRT;
+using LegacyTrackerKCFObject = OpenCvSharp.Tracking.Legacy.TrackerKCF;
+using LegacyTrackerTLDObject = OpenCvSharp.Tracking.Legacy.TrackerTLD;
 using OpenCvLegacyMultiTrackerObject = OpenCvSharp.Tracking.Legacy.MultiTracker;
 using QRCodeDetectorObject = OpenCvSharp.ObjDetect.QRCodeDetector;
 using QRCodeDetectorArucoObject = OpenCvSharp.ObjDetect.QRCodeDetectorAruco;
@@ -742,6 +746,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunMLTreeModelsDefaultSummary());
                     Console.WriteLine(RunMLEMDefaultSummary());
                     Console.WriteLine(RunMLRemainingCallablesDefaultSummary());
+                    Console.WriteLine(RunTrackingDefaultSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -1868,16 +1873,6 @@ namespace ConsoleSamples
                         bgSegmSummary = "BgSegm boundary: " + ex.Message;
                     }
 
-                    string trackingSummary;
-                    try
-                    {
-                        trackingSummary = RunTrackingSummary();
-                    }
-                    catch (OpenCvException ex) when (ex.Message.IndexOf("tracking", StringComparison.OrdinalIgnoreCase) >= 0 || ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        trackingSummary = "Tracking boundary: " + ex.Message;
-                    }
-
                     string faceSummary;
                     try
                     {
@@ -1980,7 +1975,6 @@ namespace ConsoleSamples
                     Console.WriteLine(xstereoSummary);
                     Console.WriteLine(optFlowSummary);
                     Console.WriteLine(bgSegmSummary);
-                    Console.WriteLine(trackingSummary);
                     Console.WriteLine(faceSummary);
                     Console.WriteLine(saliencySummary);
                     Console.WriteLine(stitchingSummary);
@@ -3881,6 +3875,18 @@ namespace ConsoleSamples
             }
         }
 
+        private static string RunTrackingDefaultSummary()
+        {
+            try
+            {
+                return RunTrackingSummary();
+            }
+            catch (OpenCvException ex) when (ex.Message.IndexOf("tracking", StringComparison.OrdinalIgnoreCase) >= 0 || ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return "Tracking boundary: " + ex.Message;
+            }
+        }
+
         private static string RunTrackingSummary()
         {
             using (Mat first = CreateOptFlowFrame(2))
@@ -3890,6 +3896,11 @@ namespace ConsoleSamples
             using (TrackerMOSSEObject mosse = TrackerMOSSEObject.Create())
             using (TrackerMILObject mil = TrackerMILObject.Create())
             using (TrackerMedianFlowObject medianFlow = TrackerMedianFlowObject.Create())
+            using (LegacyTrackerBoostingObject boosting = LegacyTrackerBoostingObject.Create())
+            using (LegacyTrackerTLDObject tld = LegacyTrackerTLDObject.Create())
+            using (LegacyTrackerKCFObject legacyKcf = LegacyTrackerKCFObject.Create(TrackerKCFParamsObject.Default))
+            using (LegacyTrackerCSRTObject legacyCsrt = LegacyTrackerCSRTObject.Create())
+            using (OpenCvSharp.Tracking.Tracker upgraded = legacyKcf.Upgrade())
             using (OpenCvLegacyMultiTrackerObject multiTracker = OpenCvLegacyMultiTrackerObject.Create())
             {
                 Rect modernBox = new Rect(6, 7, 8, 8);
@@ -3906,10 +3917,16 @@ namespace ConsoleSamples
                 bool added = multiTracker.Add(medianFlow, first, openCvLegacyBox);
                 OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult multiUpdate = multiTracker.Update(second);
 
+                upgraded.Init(first, modernBox);
+                OpenCvSharp.Tracking.TrackerUpdateResult upgradedUpdate = upgraded.Update(second, modernBox);
+
                 return "Tracking KCF=" + kcfUpdate.Success + "/" + kcfUpdate.BoundingBox
                     + ", CSRT=" + csrtUpdate.Success + "/" + csrtUpdate.BoundingBox
                     + ", MOSSE disposed=" + mosse.IsDisposed
                     + ", MIL=" + milUpdate.Success + "/" + milUpdate.BoundingBox
+                    + ", legacy=Boosting/TLD/KCF/CSRT"
+                    + ", upgraded=" + upgradedUpdate.Success + "/" + upgradedUpdate.BoundingBox
+                    + ", ready=" + (!boosting.IsDisposed && !tld.IsDisposed && !legacyCsrt.IsDisposed)
                     + ", MultiTracker added=" + added
                     + ", boxes=" + multiUpdate.BoundingBoxes.Length;
             }

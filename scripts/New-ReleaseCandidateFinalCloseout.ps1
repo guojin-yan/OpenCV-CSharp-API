@@ -127,6 +127,7 @@ function Get-Record {
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $photoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/photo-upstream-summary.json") -Raw | ConvertFrom-Json
     $mlSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ml-upstream-summary.json") -Raw | ConvertFrom-Json
+    $trackingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/tracking-upstream-summary.json") -Raw | ConvertFrom-Json
     $videoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/video-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
@@ -172,6 +173,11 @@ function Get-Record {
         "compatibility/ml-upstream-map.txt",
         "compatibility/ml-upstream-raw.json",
         "compatibility/ml-upstream-summary.json",
+        "compatibility/tracking-implemented-families.json",
+        "compatibility/tracking-upstream-classifications.json",
+        "compatibility/tracking-upstream-map.txt",
+        "compatibility/tracking-upstream-raw.json",
+        "compatibility/tracking-upstream-summary.json",
         "compatibility/native-managed-binding-map.txt",
         "compatibility/native-managed-binding-summary.json",
         "compatibility/objdetect-implemented-families.json",
@@ -204,6 +210,7 @@ function Get-Record {
         "docs/articles/imgproc-geometry-guide.md",
         "docs/articles/imgproc-upstream-parity-guide.md",
         "docs/articles/ml-guide.md",
+        "docs/articles/tracking-guide.md",
         "docs/articles/objdetect-structured-parity-guide.md",
         "docs/articles/photo-ccm-guide.md",
         "docs/articles/photo-hdr-workflow-guide.md",
@@ -223,6 +230,7 @@ function Get-Record {
         "scripts/Generate-ImgCodecsUpstreamMap.ps1",
         "scripts/Generate-ManagedPublicApiBaseline.ps1",
         "scripts/Generate-MlUpstreamMap.ps1",
+        "scripts/Generate-TrackingUpstreamMap.ps1",
         "scripts/Generate-NativeAbiCompatibility.ps1",
         "scripts/Generate-NativeManagedBindingMap.ps1",
         "scripts/Generate-ObjDetectUpstreamMap.ps1",
@@ -236,6 +244,7 @@ function Get-Record {
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
         "scripts/Test-MlUpstreamMap.ps1",
+        "scripts/Test-TrackingUpstreamMap.ps1",
         "scripts/Test-ImgCodecsUpstreamMap.ps1",
         "scripts/Test-NativeManagedBindingMap.ps1",
         "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -270,6 +279,9 @@ function Get-Record {
         "tools/MlUpstreamMap/MlUpstreamMap.csproj",
         "tools/MlUpstreamMap/Program.cs",
         "tools/MlUpstreamMap/extract_ml.py",
+        "tools/TrackingUpstreamMap/TrackingUpstreamMap.csproj",
+        "tools/TrackingUpstreamMap/Program.cs",
+        "tools/TrackingUpstreamMap/extract_tracking.py",
         "tools/ImgCodecsUpstreamMap/ImgCodecsUpstreamMap.csproj",
         "tools/ImgCodecsUpstreamMap/Program.cs",
         "tools/ImgCodecsUpstreamMap/extract_imgcodecs.py",
@@ -342,7 +354,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2513
+                FunctionCount = 2523
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -560,6 +572,38 @@ function Get-Record {
                 NativeEntrypointAdditionCount = [int]$mlSummary.nativeEntrypointAdditionCount
                 RepositoryWideParityClaimed = [bool]$mlSummary.repositoryWideUpstreamParityClaimed
             }
+            TrackingUpstreamMap = [ordered]@{
+                Path = "compatibility/tracking-upstream-map.txt"
+                SummaryPath = "compatibility/tracking-upstream-summary.json"
+                ClassificationPath = "compatibility/tracking-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/tracking-implemented-families.json"
+                RawExtractionPath = "compatibility/tracking-upstream-raw.json"
+                Sha256 = $trackingSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/tracking-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$trackingSummary.declarationCount
+                CallableCount = [int]$trackingSummary.callableCount
+                ImplementedCount = [int]$trackingSummary.classificationCounts.implemented
+                MissingCount = [int]$trackingSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$trackingSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$trackingSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$trackingSummary.classificationCounts.'upstream-conditional'
+                PrimaryDeclarationCount = [int]$trackingSummary.primaryDeclarationCount
+                PrimaryCallableCount = [int]$trackingSummary.primaryCallableCount
+                LegacyDeclarationCount = [int]$trackingSummary.legacyDeclarationCount
+                LegacyCallableCount = [int]$trackingSummary.legacyCallableCount
+                CompatibilityHeaderCount = [int]$trackingSummary.compatibilityHeaderCount
+                ExcludedPublicHeaderCount = [int]$trackingSummary.excludedPublicHeaderCount
+                SourceHeaderCount = [int]$trackingSummary.sourceHeaderCount
+                SourceReviewedExtensionCount = [int]$trackingSummary.sourceReviewedExtensionCount
+                SelectedFamilyCount = [int]$trackingSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$trackingSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$trackingSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$trackingSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$trackingSummary.nativeEntrypointAdditionCount
+                MainVideoRowsDoubleCounted = [bool]$trackingSummary.mainVideoRowsDoubleCounted
+                LegacyRowsMixedIntoPrimary = [bool]$trackingSummary.legacyRowsMixedIntoPrimary
+                RepositoryWideParityClaimed = [bool]$trackingSummary.repositoryWideUpstreamParityClaimed
+            }
             VideoUpstreamMap = [ordered]@{
                 Path = "compatibility/video-upstream-map.txt"
                 SummaryPath = "compatibility/video-upstream-summary.json"
@@ -595,7 +639,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 71
+            InvariantGuardCount = 72
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false
