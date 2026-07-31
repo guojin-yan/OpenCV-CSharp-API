@@ -23,6 +23,12 @@ internal static class Program
     private static readonly int[] MatcherOrdinals = { 122, 123, 124, 126, 127, 129, 130, 131, 132, 134, 135, 136, 138, 140 };
     private static readonly HashSet<int> Matcher = new(MatcherOrdinals);
     private static readonly HashSet<int> MatcherUnsupported = new(new[] { 142, 143 });
+    private static readonly int[] CameraMotionOrdinals =
+    {
+        36, 37, 67, 145, 147, 149, 151, 152, 153, 154,
+        155, 156, 158, 160, 162, 164, 166, 168, 169, 170
+    };
+    private static readonly HashSet<int> CameraMotion = new(CameraMotionOrdinals);
     private static readonly HashSet<int> HighLevel = new(Enumerable.Range(3, 21));
     private static readonly string[] Allowed =
     {
@@ -31,9 +37,9 @@ internal static class Program
     private const string ClaimedSlice = "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header";
     private const string BuildCondition = "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded";
     private const int NegativeFixtureCount = 28;
-    private const int ManagedTypeAdditions = 6;
-    private const int ManagedMemberAdditions = 31;
-    private const int NativeEntrypointAdditions = 28;
+    private const int ManagedTypeAdditions = 10;
+    private const int ManagedMemberAdditions = 22;
+    private const int NativeEntrypointAdditions = 21;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification,
         string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput,
@@ -178,8 +184,8 @@ internal static class Program
         public int NegativeFixtureCount { get; init; } = Program.NegativeFixtureCount;
         public string FamilyInventoryPath { get; init; } = "";
         public string FamilyInventorySha256 { get; init; } = "";
-        public int SelectedFamilyCount { get; init; } = 4;
-        public int SelectedDeclarationCount { get; init; } = 93;
+        public int SelectedFamilyCount { get; init; } = 5;
+        public int SelectedDeclarationCount { get; init; } = 124;
         public int HighLevelImplementedCallableCount { get; init; } = 21;
         public int SourceReviewedExtensionCount { get; init; } = 3;
         public int ManagedPublicTypeAdditionCount { get; init; } = ManagedTypeAdditions;
@@ -221,11 +227,13 @@ internal static class Program
                 row.Classification = "unsupported";
                 row.Reason = "LightGlue matching requires an externally supplied ONNX model and an owned cv::LightGlueMatcher lifecycle that this repository does not currently expose; invalid-path construction is not sufficient evidence.";
             }
-            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal) || Matcher.Contains(declaration.Ordinal))
+            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal) || Matcher.Contains(declaration.Ordinal) || CameraMotion.Contains(declaration.Ordinal))
             {
                 row.Classification = "implemented";
                 row.Reason = Exposure.Contains(declaration.Ordinal)
                     ? "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests."
+                    : CameraMotion.Contains(declaration.Ordinal)
+                        ? "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests."
                     : PublicWarper.Contains(declaration.Ordinal)
                         ? "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests."
                         : Matcher.Contains(declaration.Ordinal)
@@ -251,11 +259,11 @@ internal static class Program
     private static string MissingReason(string surface) => surface switch
     {
         "public-warpers" => "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
-        "detail-autocalib" => "Autocalibration helpers remain unimplemented pending copied camera/matrix result contracts.",
+        "detail-autocalib" => "The selected autocalibration helpers are implemented with exact CV_64FC1 input and caller-owned or independently owned matrix outputs.",
         "detail-blenders" => "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
-        "detail-camera" => "CameraParams.K remains unimplemented; copied high-level camera results do not expose the mutable detail object.",
+        "detail-camera" => "CameraParams.K is represented by the copied high-level StitcherCameraParams intrinsic-matrix workflow.",
         "detail-matchers" => "Detail matcher families outside ImageFeatures and BestOf2Nearest strategies remain unimplemented; LightGlue rows are explicitly unsupported because their model lifecycle is not owned.",
-        "detail-motion-estimators" => "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+        "detail-motion-estimators" => "The selected estimator, bundle-adjuster, wave-correction, graph, and component result contracts are implemented; retained seam and timelapse strategies remain separate gaps.",
         "detail-seam-finders" => "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
         "detail-timelapsers" => "Detail timelapser state, borrowed destination UMat, and output ownership remain unimplemented.",
         "detail-util" => "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
@@ -273,6 +281,8 @@ internal static class Program
             16 => N("stitcher_estimate_transform"), 17 => N("stitcher_compose_panorama"), 18 => N("stitcher_compose_panorama_images"),
             19 or 20 => N("stitcher_stitch"), 21 => N("stitcher_get_component_count", "stitcher_get_component_fill"),
             22 => N("stitcher_get_cameras_count", "stitcher_get_cameras_fill"),
+            36 => N("stitching_focals_from_homography"),
+            37 => N("stitching_calibrate_rotating_camera"),
             25 => W("create"), 26 => W("create_default"), 27 => W("warp_point"), 28 => W("warp_point_backward"),
             29 => W("build_maps"), 30 => W("warp"), 31 => W("warp_backward"), 32 => W("warp_roi"),
             33 => W("get_scale"), 34 => W("set_scale"),
@@ -286,6 +296,7 @@ internal static class Program
             62 => N("stitching_create_laplace_pyramid"), 63 => N("stitching_create_laplace_pyramid_gpu"),
             64 => N("stitching_restore_image_from_laplace_pyramid"),
             65 => N("stitching_restore_image_from_laplace_pyramid_gpu"),
+            67 => N("stitching_camera_params_get_k"),
             122 => N("stitching_image_features_get_keypoints_count", "stitching_image_features_get_keypoints_fill"),
             123 => N("stitching_compute_image_features_batch"), 124 => N("stitching_compute_image_features"),
             126 => N("stitching_matches_info_get_matches_count", "stitching_matches_info_get_matches_fill"),
@@ -297,6 +308,23 @@ internal static class Program
             136 => N("stitching_features_matcher_factory_best_of_two_nearest", "stitching_features_matcher_release_handle"),
             138 => N("stitching_features_matcher_create_range", "stitching_features_matcher_release_handle"),
             140 => N("stitching_features_matcher_create_affine", "stitching_features_matcher_release_handle"),
+            145 => N("stitching_estimator_apply"),
+            147 => N("stitching_estimator_create_homography", "stitching_estimator_release_handle"),
+            149 => N("stitching_estimator_create_affine", "stitching_estimator_release_handle"),
+            151 => N("stitching_bundle_adjuster_copy_refinement_mask"),
+            152 => N("stitching_bundle_adjuster_set_refinement_mask"),
+            153 => N("stitching_bundle_adjuster_get_confidence_threshold"),
+            154 => N("stitching_bundle_adjuster_set_confidence_threshold"),
+            155 => N("stitching_bundle_adjuster_get_term_criteria"),
+            156 => N("stitching_bundle_adjuster_set_term_criteria"),
+            158 => N("stitching_estimator_create_no_bundle_adjuster", "stitching_estimator_release_handle"),
+            160 => N("stitching_estimator_create_bundle_adjuster_reproj", "stitching_estimator_release_handle"),
+            162 => N("stitching_estimator_create_bundle_adjuster_ray", "stitching_estimator_release_handle"),
+            164 => N("stitching_estimator_create_bundle_adjuster_affine", "stitching_estimator_release_handle"),
+            166 => N("stitching_estimator_create_bundle_adjuster_affine_partial", "stitching_estimator_release_handle"),
+            168 => N("stitching_wave_correct"),
+            169 => N("stitching_matches_graph_as_string"),
+            170 => N("stitching_leave_biggest_component"),
             70 => E("create_default"), 71 => E("feed"), 72 or 78 or 84 or 93 or 101 or 116 => E("apply"),
             73 or 79 or 85 or 94 or 102 or 117 => E("get_mat_gains_count", "get_mat_gains_fill"),
             74 or 80 or 86 or 95 or 103 or 118 => E("set_mat_gains"), 75 => E("set_update_gain"), 76 => E("get_update_gain"),
@@ -332,6 +360,8 @@ internal static class Program
             20 => M("Stitcher|method|public;instance|", "Stitch(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[]? masks"),
             21 => M("Stitcher|method|public;instance|", "GetComponent()"), 22 => M("Stitcher|method|public;instance|", "GetCameras()"),
             23 => M("Stitcher|property|", "WorkScale"),
+            36 => M("StitchingMotion|method|public;static|", "FocalsFromHomography("),
+            37 => M("StitchingMotion|method|public;static|System.Boolean CalibrateRotatingCamera("),
             25 => M("PyRotationWarper|constructor|", ".ctor(System.String type,System.Single scale)"),
             26 => M("PyRotationWarper|constructor|", ".ctor()"),
             27 => M("PyRotationWarper|method|public;instance|", "Point2f WarpPoint("),
@@ -357,6 +387,7 @@ internal static class Program
             63 => M("Blender|method|public;static|", "CreateLaplacePyramidGpu("),
             64 => M("Blender|method|public;static|", "RestoreImageFromLaplacePyramid("),
             65 => M("Blender|method|public;static|", "RestoreImageFromLaplacePyramidGpu("),
+            67 => M("StitcherCameraParams|method|public;instance|", "GetCameraMatrix()"),
             70 => M("ExposureCompensator|method|public;static|", "CreateDefault("), 71 => M("ExposureCompensator|method|public;instance|", " Feed("),
             72 or 78 or 84 or 93 or 101 or 116 => M("ExposureCompensator|method|public;instance|", " Apply("),
             73 or 79 or 85 or 94 or 102 or 117 => M("ExposureCompensator|method|public;instance|", " GetMatGains()"),
@@ -384,11 +415,30 @@ internal static class Program
             136 => M("BestOf2NearestMatcher|method|public;static|", "BestOf2NearestMatcher Create("),
             138 => M("BestOf2NearestRangeMatcher|constructor|", ".ctor(System.Int32 rangeWidth=5"),
             140 => M("AffineBestOf2NearestMatcher|constructor|", ".ctor(System.Boolean fullAffine=false"),
+            145 => M("Estimator|method|public;instance|", "Apply(OpenCvSharp.Stitching.ImageFeatures[] features", "initialCameras"),
+            147 => M("HomographyBasedEstimator|constructor|", ".ctor(System.Boolean focalLengthsEstimated=false)"),
+            149 => M("AffineBasedEstimator|constructor|", ".ctor()"),
+            151 or 152 => M("BundleAdjusterBase|property|", "RefinementMask"),
+            153 or 154 => M("BundleAdjusterBase|property|", "ConfidenceThreshold"),
+            155 or 156 => M("BundleAdjusterBase|property|", "TerminationCriteria"),
+            158 => M("NoBundleAdjuster|constructor|", ".ctor()"),
+            160 => M("BundleAdjusterReproj|constructor|", ".ctor()"),
+            162 => M("BundleAdjusterRay|constructor|", ".ctor()"),
+            164 => M("BundleAdjusterAffine|constructor|", ".ctor()"),
+            166 => M("BundleAdjusterAffinePartial|constructor|", ".ctor()"),
+            168 => M("StitchingMotion|method|public;static|", "WaveCorrect("),
+            169 => M("StitchingMotion|method|public;static|", "MatchesGraphAsString("),
+            170 => M("StitchingMotion|method|public;static|", "LeaveBiggestComponent("),
             _ => throw new InvalidOperationException("No managed evidence mapping for Stitching ordinal " + ordinal)
         };
-        string match = managed.SingleOrDefault(line => fragments.All(fragment => line.Contains(fragment, StringComparison.Ordinal)))
-            ?? throw new InvalidOperationException("Managed baseline is missing Stitching evidence: " + string.Join(" + ", fragments));
-        yield return match;
+        string[] matches = managed.Where(line => fragments.All(fragment => line.Contains(fragment, StringComparison.Ordinal))).ToArray();
+        if (matches.Length != 1)
+        {
+            throw new InvalidOperationException(
+                "Managed baseline Stitching evidence is not unique for ordinal " + ordinal +
+                ": candidates=" + matches.Length + " fragments=" + string.Join(" + ", fragments));
+        }
+        yield return matches[0];
         static string[] M(params string[] fragments) => fragments;
     }
 
@@ -435,8 +485,9 @@ internal static class Program
         Require(PublicWarper.All(x => document.Declarations[x].Classification == "implemented"), "Public warper family coverage drifted.");
         Require(Blender.All(x => document.Declarations[x].Classification == "implemented"), "Detail Blender family coverage drifted.");
         Require(Matcher.All(x => document.Declarations[x].Classification == "implemented"), "Detail matcher family coverage drifted.");
+        Require(CameraMotion.All(x => document.Declarations[x].Classification == "implemented"), "Camera and motion-estimator family coverage drifted.");
         Require(MatcherUnsupported.All(x => document.Declarations[x].Classification == "unsupported"), "LightGlue support boundary drifted.");
-        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal) || Matcher.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
+        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal) || Matcher.Contains(x.Ordinal) || CameraMotion.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
     }
 
     private static void RunNegativeFixtures(RawDocument raw, ClassificationDocument classifications, string[] native, string[] managed, string workspace)
@@ -547,9 +598,27 @@ internal static class Program
                 FocusedTest = "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs"
             });
         }
+        var cameraMotionFamily = new FamilyRow
+        {
+            Id = "stitching-camera-motion-estimator-completion",
+            Surface = "detail-motion-estimators",
+            Rationale = "Closes autocalibration, copied camera intrinsics, owned homography/affine estimators, five bundle adjusters, transactional wave correction, UTF-8 match graphs, and independently owned largest-component results."
+        };
+        foreach (int ordinal in CameraMotionOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            cameraMotionFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs"
+            });
+        }
         return new FamilyDocument
         {
-            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily, matcherFamily },
+            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily, matcherFamily, cameraMotionFamily },
             SourceReviewedExtensions = new List<SourceReviewedExtension>
             {
                 new() { UpstreamIdentity = "cv::detail::NoExposureCompensator default construction", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp", Adaptation = "Adds an explicit owned managed no-op constructor; the parser emits its inherited operations but not its implicit default constructor.", NativeEntrypoints = E("create_no"), ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()" } },

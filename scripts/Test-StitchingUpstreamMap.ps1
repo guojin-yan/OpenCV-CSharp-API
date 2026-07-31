@@ -21,14 +21,17 @@ if ($summary.surfaceCounts.'public-warpers'.declarations -ne 12 -or $summary.sur
 if ($summary.surfaceCounts.'detail-blenders'.declarations -ne 28 -or $summary.surfaceCounts.'detail-blenders'.callables -ne 24 -or $summary.surfaceCounts.'detail-blenders'.implemented -ne 24) { throw "Stitching Blender partition drifted." }
 if ($summary.surfaceCounts.'detail-exposure'.declarations -ne 53 -or $summary.surfaceCounts.'detail-exposure'.callables -ne 45 -or $summary.surfaceCounts.'detail-exposure'.implemented -ne 45) { throw "Stitching Exposure partition drifted." }
 if ($summary.surfaceCounts.'detail-matchers'.declarations -ne 23 -or $summary.surfaceCounts.'detail-matchers'.callables -ne 16 -or $summary.surfaceCounts.'detail-matchers'.implemented -ne 14) { throw "Stitching matcher partition drifted." }
-if ($summary.classificationCounts.implemented -ne 114 -or $summary.classificationCounts.missing -ne 42 -or
+if ($summary.surfaceCounts.'detail-autocalib'.declarations -ne 2 -or $summary.surfaceCounts.'detail-autocalib'.callables -ne 2 -or $summary.surfaceCounts.'detail-autocalib'.implemented -ne 2) { throw "Stitching autocalibration partition drifted." }
+if ($summary.surfaceCounts.'detail-camera'.declarations -ne 2 -or $summary.surfaceCounts.'detail-camera'.callables -ne 1 -or $summary.surfaceCounts.'detail-camera'.implemented -ne 1) { throw "Stitching camera partition drifted." }
+if ($summary.surfaceCounts.'detail-motion-estimators'.declarations -ne 27 -or $summary.surfaceCounts.'detail-motion-estimators'.callables -ne 17 -or $summary.surfaceCounts.'detail-motion-estimators'.implemented -ne 17) { throw "Stitching motion-estimator partition drifted." }
+if ($summary.classificationCounts.implemented -ne 134 -or $summary.classificationCounts.missing -ne 22 -or
     $summary.classificationCounts.'non-callable-metadata' -ne 49 -or $summary.classificationCounts.'intentionally-omitted' -ne 0 -or
     $summary.classificationCounts.unsupported -ne 2 -or $summary.classificationCounts.'upstream-conditional' -ne 0) { throw "Stitching classification contract drifted." }
-if ($summary.negativeFixtureCount -ne 28 -or $summary.selectedFamilyCount -ne 4 -or $summary.selectedDeclarationCount -ne 93 -or $summary.highLevelImplementedCallableCount -ne 21) { throw "Stitching fixture/family contract drifted." }
-if ($summary.managedPublicTypeAdditionCount -ne 6 -or $summary.managedPublicMemberAdditionCount -ne 31 -or $summary.nativeEntrypointAdditionCount -ne 28) { throw "Stitching addition counts drifted." }
+if ($summary.negativeFixtureCount -ne 28 -or $summary.selectedFamilyCount -ne 5 -or $summary.selectedDeclarationCount -ne 124 -or $summary.highLevelImplementedCallableCount -ne 21) { throw "Stitching fixture/family contract drifted." }
+if ($summary.managedPublicTypeAdditionCount -ne 10 -or $summary.managedPublicMemberAdditionCount -ne 22 -or $summary.nativeEntrypointAdditionCount -ne 21) { throw "Stitching addition counts drifted." }
 if ($summary.umatExecutionClaimed -or $summary.detailRowsMixedIntoHighLevel -or $summary.repositoryWideUpstreamParityClaimed) { throw "Stitching ownership or parity boundary was weakened." }
-if ($summary.mappingSha256 -ne "747062a832c2407d099dd39a8373a61cbd61005d69a8c08044c812b255a3d8ff" -or
-    $summary.familyInventorySha256 -ne "0ff698b4cef4f6719900a6f40ee79c4dbf254d92b305189a2d1a0e19658db2b6") { throw "Stitching generated map hashes drifted." }
+if ($summary.mappingSha256 -ne "d083e4238c9349064e23255cafdc2894fcd30583067d00b4176314475d46c43d" -or
+    $summary.familyInventorySha256 -ne "54392669767d751dce3dbd00147ae31f34733d5070b3fa2d60f6cc9fbf27f71e") { throw "Stitching generated map hashes drifted." }
 
 $rawHash = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/stitching-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($rawHash -ne "e712d4faed827e0c3e35ed584cde22fe11c60a9ca7589c3d87f6b840321399ad") { throw "Stitching raw extraction hash drifted." }
@@ -67,6 +70,19 @@ $matcherFamily = @($families.families | Where-Object id -eq "stitching-detail-fe
 if ($matcherFamily.Count -ne 1 -or $matcherFamily[0].declarations.Count -ne 14 -or
     (@($matcherFamily[0].declarations.ordinal) -join ',') -ne ($matcherOrdinals -join ',')) { throw "Stitching matcher family inventory drifted." }
 
+$cameraMotionOrdinals = @(36, 37, 67, 145, 147, 149, 151, 152, 153, 154, 155, 156, 158, 160, 162, 164, 166, 168, 169, 170)
+foreach ($ordinal in $cameraMotionOrdinals) {
+    $row = $classifications.declarations[$ordinal]
+    if ($row.ordinal -ne $ordinal -or $row.classification -ne "implemented" -or
+        $row.nativeEntrypoints.Count -eq 0 -or $row.managedMembers.Count -eq 0) { throw "Stitching camera/motion evidence drifted at ordinal $ordinal." }
+}
+foreach ($ordinal in @(146, 148, 150, 157, 159, 161, 163, 165, 167)) {
+    if ($classifications.declarations[$ordinal].classification -ne "non-callable-metadata") { throw "Stitching motion metadata drifted at ordinal $ordinal." }
+}
+$cameraMotionFamily = @($families.families | Where-Object id -eq "stitching-camera-motion-estimator-completion")
+if ($cameraMotionFamily.Count -ne 1 -or $cameraMotionFamily[0].declarations.Count -ne 20 -or
+    (@($cameraMotionFamily[0].declarations.ordinal) -join ',') -ne ($cameraMotionOrdinals -join ',')) { throw "Stitching camera/motion family inventory drifted." }
+
 $entrypoints = @(
     "jyppx_ocv_stitching_blender_create_default", "jyppx_ocv_stitching_blender_create_feather",
     "jyppx_ocv_stitching_blender_create_multi_band", "jyppx_ocv_stitching_blender_release_handle",
@@ -91,7 +107,18 @@ $entrypoints = @(
     "jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest", "jyppx_ocv_stitching_features_matcher_create_range",
     "jyppx_ocv_stitching_features_matcher_create_affine", "jyppx_ocv_stitching_features_matcher_release_handle",
     "jyppx_ocv_stitching_features_matcher_match_pair", "jyppx_ocv_stitching_features_matcher_match_batch",
-    "jyppx_ocv_stitching_features_matcher_is_thread_safe", "jyppx_ocv_stitching_features_matcher_collect_garbage"
+    "jyppx_ocv_stitching_features_matcher_is_thread_safe", "jyppx_ocv_stitching_features_matcher_collect_garbage",
+    "jyppx_ocv_stitching_camera_params_get_k", "jyppx_ocv_stitching_focals_from_homography",
+    "jyppx_ocv_stitching_calibrate_rotating_camera", "jyppx_ocv_stitching_estimator_create_homography",
+    "jyppx_ocv_stitching_estimator_create_affine", "jyppx_ocv_stitching_estimator_create_no_bundle_adjuster",
+    "jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj", "jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray",
+    "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine", "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial",
+    "jyppx_ocv_stitching_estimator_release_handle", "jyppx_ocv_stitching_estimator_apply",
+    "jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask", "jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask",
+    "jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold", "jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold",
+    "jyppx_ocv_stitching_bundle_adjuster_get_term_criteria", "jyppx_ocv_stitching_bundle_adjuster_set_term_criteria",
+    "jyppx_ocv_stitching_wave_correct", "jyppx_ocv_stitching_matches_graph_as_string",
+    "jyppx_ocv_stitching_leave_biggest_component"
 )
 $dllImport = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs") -Raw
 $libraryImport = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs") -Raw
@@ -105,6 +132,7 @@ foreach ($entrypoint in $entrypoints) {
 $smoke = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/tests/native_smoke.cpp") -Raw
 $tests = Get-Content -LiteralPath (Join-Path $repo "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs") -Raw
 $matcherTests = Get-Content -LiteralPath (Join-Path $repo "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs") -Raw
+$motionTests = Get-Content -LiteralPath (Join-Path $repo "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs") -Raw
 $sample = Get-Content -LiteralPath (Join-Path $repo "samples/ConsoleSamples/Program.cs") -Raw
 $guide = Get-Content -LiteralPath (Join-Path $repo "docs/articles/stitching-structured-parity-guide.md") -Raw
 $consumer = Get-Content -LiteralPath (Join-Path $repo "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1") -Raw
@@ -117,5 +145,9 @@ if (-not $smoke.Contains("run_stitching_features_matcher_smoke") -or -not $smoke
     -not $matcherTests.Contains("BatchMaskAndRangeMatcherProduceExactRowMajorResults") -or -not $matcherTests.Contains("OrbComputesSingleBatchAndNonContinuousRoi") -or
     -not $sample.Contains("RunFeaturesMatcherSummary") -or -not $guide.Contains("LightGlue matching remains explicitly unsupported") -or
     -not $consumer.Contains("typeof(OpenCvSharp.Stitching.BestOf2NearestMatcher)")) { throw "Stitching matcher evidence is incomplete." }
+if (-not $smoke.Contains("run_stitching_motion_estimator_smoke") -or -not $smoke.Contains("unchanged_estimator != reinterpret_cast") -or
+    -not $motionTests.Contains("HomographyAndAffineEstimatorsReturnIndependentCameras") -or -not $motionTests.Contains("WaveGraphAndLargestComponentPreserveOwnership") -or
+    -not $sample.Contains("RunMotionEstimatorSummary") -or -not $guide.Contains("The measured module result is 134 implemented, 22 missing") -or
+    -not $consumer.Contains("typeof(OpenCvSharp.Stitching.BundleAdjusterAffinePartial)")) { throw "Stitching camera/motion evidence is incomplete." }
 
-Write-Output "STITCHING_UPSTREAM_MAP_GUARD_OK declarations=207 high-level=24/21/21 public-warper=12/10/10 blender=28/24/24 exposure=53/45/45 matcher=23/16/14 implemented=114 missing=42 unsupported=2 fixtures=28"
+Write-Output "STITCHING_UPSTREAM_MAP_GUARD_OK declarations=207 high-level=24/21/21 public-warper=12/10/10 blender=28/24/24 exposure=53/45/45 matcher=23/16/14 camera-motion=31/20/20 implemented=134 missing=22 unsupported=2 fixtures=28"

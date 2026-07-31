@@ -280,6 +280,7 @@ function Get-Record {
         "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeImageFeaturesHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMatchesInfoHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeEstimatorHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs",
         "src/OpenCvSharp/Stitching/AffineBestOf2NearestMatcher.cs",
@@ -288,11 +289,16 @@ function Get-Record {
         "src/OpenCvSharp/Stitching/Blender.cs",
         "src/OpenCvSharp/Stitching/BlenderType.cs",
         "src/OpenCvSharp/Stitching/Blenders.cs",
+        "src/OpenCvSharp/Stitching/BundleAdjusters.cs",
+        "src/OpenCvSharp/Stitching/Estimator.cs",
         "src/OpenCvSharp/Stitching/FeaturesMatcher.cs",
         "src/OpenCvSharp/Stitching/ImageFeatures.cs",
         "src/OpenCvSharp/Stitching/MatchesInfo.cs",
+        "src/OpenCvSharp/Stitching/StitcherCameraParams.cs",
+        "src/OpenCvSharp/Stitching/StitchingMotion.cs",
         "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
         "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+        "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -389,7 +395,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2603
+                FunctionCount = 2624
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"

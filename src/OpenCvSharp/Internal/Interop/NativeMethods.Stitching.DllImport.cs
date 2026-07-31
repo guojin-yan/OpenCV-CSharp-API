@@ -324,6 +324,69 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_collect_garbage")]
         internal static extern int StitchingFeaturesMatcherCollectGarbage(IntPtr matcher);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_camera_params_get_k")]
+        internal static extern int StitchingCameraParamsGetK(double focal, double aspect, double ppx, double ppy, IntPtr cameraMatrix);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_focals_from_homography")]
+        internal static extern int StitchingFocalsFromHomography(IntPtr homography, out double focalX, out double focalY, out int focalXEstimated, out int focalYEstimated);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_calibrate_rotating_camera")]
+        internal static extern int StitchingCalibrateRotatingCamera(IntPtr[] homographies, int homographyCount, IntPtr cameraMatrix, out int calibrated);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_homography")]
+        internal static extern int StitchingEstimatorCreateHomography(int focalLengthsEstimated, out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_affine")]
+        internal static extern int StitchingEstimatorCreateAffine(out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_no_bundle_adjuster")]
+        internal static extern int StitchingEstimatorCreateNoBundleAdjuster(out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj")]
+        internal static extern int StitchingEstimatorCreateBundleAdjusterReproj(out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray")]
+        internal static extern int StitchingEstimatorCreateBundleAdjusterRay(out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine")]
+        internal static extern int StitchingEstimatorCreateBundleAdjusterAffine(out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial")]
+        internal static extern int StitchingEstimatorCreateBundleAdjusterAffinePartial(out IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_release_handle")]
+        internal static extern void StitchingEstimatorReleaseHandle(IntPtr estimator);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_estimator_apply")]
+        internal static extern int StitchingEstimatorApply(IntPtr estimator, IntPtr[] features, int featureCount, IntPtr[] pairwiseMatches, int pairwiseMatchCount, StitchingCameraParamsNative[] initialCameras, int initialCameraCount, StitchingCameraParamsNative[] cameras, int cameraCapacity, out int succeeded);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask")]
+        internal static extern int StitchingBundleAdjusterCopyRefinementMask(IntPtr estimator, IntPtr refinementMask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask")]
+        internal static extern int StitchingBundleAdjusterSetRefinementMask(IntPtr estimator, IntPtr refinementMask);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold")]
+        internal static extern int StitchingBundleAdjusterGetConfidenceThreshold(IntPtr estimator, out double confidenceThreshold);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold")]
+        internal static extern int StitchingBundleAdjusterSetConfidenceThreshold(IntPtr estimator, double confidenceThreshold);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_bundle_adjuster_get_term_criteria")]
+        internal static extern int StitchingBundleAdjusterGetTermCriteria(IntPtr estimator, out int criteriaType, out int maxCount, out double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_bundle_adjuster_set_term_criteria")]
+        internal static extern int StitchingBundleAdjusterSetTermCriteria(IntPtr estimator, int criteriaType, int maxCount, double epsilon);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_wave_correct")]
+        internal static extern int StitchingWaveCorrect(IntPtr[] rotationMatrices, int rotationMatrixCount, int correctionKind);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_graph_as_string")]
+        internal static extern int StitchingMatchesGraphAsString(byte[] pathBuffer, int pathByteCount, int[] pathOffsets, int pathCount, int pathOffsetCount, IntPtr[] pairwiseMatches, int pairwiseMatchCount, float confidenceThreshold, out IntPtr result);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_leave_biggest_component")]
+        internal static extern int StitchingLeaveBiggestComponent(IntPtr[] features, int featureCount, IntPtr[] pairwiseMatches, int pairwiseMatchCount, float confidenceThreshold, IntPtr[] componentFeatures, int componentFeatureCapacity, IntPtr[] componentMatches, int componentMatchCapacity, int[] originalIndices, int originalIndexCapacity, out int componentCount);
     }
 }
 #endif

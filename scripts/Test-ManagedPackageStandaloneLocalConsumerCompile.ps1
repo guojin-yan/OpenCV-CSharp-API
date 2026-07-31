@@ -350,6 +350,16 @@ internal static class Program
         typeof(OpenCvSharp.Stitching.BestOf2NearestMatcher),
         typeof(OpenCvSharp.Stitching.BestOf2NearestRangeMatcher),
         typeof(OpenCvSharp.Stitching.AffineBestOf2NearestMatcher),
+        typeof(OpenCvSharp.Stitching.Estimator),
+        typeof(OpenCvSharp.Stitching.HomographyBasedEstimator),
+        typeof(OpenCvSharp.Stitching.AffineBasedEstimator),
+        typeof(OpenCvSharp.Stitching.BundleAdjusterBase),
+        typeof(OpenCvSharp.Stitching.NoBundleAdjuster),
+        typeof(OpenCvSharp.Stitching.BundleAdjusterReproj),
+        typeof(OpenCvSharp.Stitching.BundleAdjusterRay),
+        typeof(OpenCvSharp.Stitching.BundleAdjusterAffine),
+        typeof(OpenCvSharp.Stitching.BundleAdjusterAffinePartial),
+        typeof(OpenCvSharp.Stitching.StitchingMotion),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -400,6 +410,7 @@ internal static class Program
         default(OpenCvSharp.Stitching.StitcherMode),
         default(OpenCvSharp.Stitching.ExposureCompensatorType),
         default(OpenCvSharp.Stitching.BlenderType),
+        default(OpenCvSharp.Stitching.WaveCorrectKind),
         default(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -407,8 +418,8 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 74 &&
-            RepresentativeValues.Length >= 43 &&
+        return RepresentativeTypes.Length >= 84 &&
+            RepresentativeValues.Length >= 44 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
             CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null && CreateEM != null &&
             CreateLogisticRegression != null && CreateSVMSGD != null &&

@@ -1,6 +1,8 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Text;
 using OpenCvSharp;
 using OpenCvSharp.AlphaMat;
 using OpenCvSharp.BgSegm;
@@ -4681,13 +4683,68 @@ namespace ConsoleSamples
                     return "featureKeypoints=" + features[0].Keypoints.Length + "," + features[1].Keypoints.Length
                         + ", pairwise=" + matches.Length
                         + ", forwardMatches=" + matches[1].Matches.Length
-                        + ", inliers=" + matches[1].NumberOfInliers;
+                        + ", inliers=" + matches[1].NumberOfInliers
+                        + ", " + RunMotionEstimatorSummary(features, matches);
                 }
                 finally
                 {
                     foreach (OpenCvSharp.Stitching.MatchesInfo match in matches) match.Dispose();
                     foreach (OpenCvSharp.Stitching.ImageFeatures feature in features) feature.Dispose();
                 }
+            }
+        }
+
+        private static string RunMotionEstimatorSummary(
+            OpenCvSharp.Stitching.ImageFeatures[] features,
+            OpenCvSharp.Stitching.MatchesInfo[] matches)
+        {
+            var initial = new OpenCvSharp.Stitching.StitcherCameraParams[features.Length];
+            var rotations = new Mat[features.Length];
+            var translations = new Mat[features.Length];
+            OpenCvSharp.Stitching.StitcherCameraParams[] adjusted = Array.Empty<OpenCvSharp.Stitching.StitcherCameraParams>();
+            OpenCvSharp.Stitching.ImageFeatures[] componentFeatures = Array.Empty<OpenCvSharp.Stitching.ImageFeatures>();
+            OpenCvSharp.Stitching.MatchesInfo[] componentMatches = Array.Empty<OpenCvSharp.Stitching.MatchesInfo>();
+            try
+            {
+                for (int i = 0; i < features.Length; ++i)
+                {
+                    rotations[i] = Mat.Eye(3, 3, MatType.CV_32FC1);
+                    translations[i] = new Mat(3, 1, MatType.CV_32FC1, new Scalar(0));
+                    initial[i] = new OpenCvSharp.Stitching.StitcherCameraParams(
+                        500, 1, 48, 48, rotations[i], translations[i]);
+                }
+
+                using (var adjuster = new OpenCvSharp.Stitching.NoBundleAdjuster())
+                {
+                    adjuster.ConfidenceThreshold = 0.0;
+                    bool succeeded = adjuster.Apply(features, matches, initial, out adjusted);
+                    Mat[] correctedRotations = adjusted.Select(camera => camera.Rotation).ToArray();
+                    OpenCvSharp.Stitching.StitchingMotion.WaveCorrect(
+                        correctedRotations, OpenCvSharp.Stitching.WaveCorrectKind.Horizontal);
+                    using (Mat intrinsic = adjusted[0].GetCameraMatrix())
+                    {
+                        string graph = OpenCvSharp.Stitching.StitchingMotion.MatchesGraphAsString(
+                            new[] { "left.png", "right.png" }, matches, 0.0f);
+                        int[] component = OpenCvSharp.Stitching.StitchingMotion.LeaveBiggestComponent(
+                            features, matches, 0.0f, out componentFeatures, out componentMatches);
+                        return "motionAdjusted=" + succeeded
+                            + ", K=" + intrinsic.Rows + "x" + intrinsic.Cols
+                            + ", graphBytes=" + Encoding.UTF8.GetByteCount(graph)
+                            + ", largestComponent=" + component.Length;
+                    }
+                }
+            }
+            finally
+            {
+                foreach (OpenCvSharp.Stitching.MatchesInfo match in componentMatches) match.Dispose();
+                foreach (OpenCvSharp.Stitching.ImageFeatures feature in componentFeatures) feature.Dispose();
+                foreach (OpenCvSharp.Stitching.StitcherCameraParams camera in adjusted)
+                {
+                    camera.Rotation.Dispose();
+                    camera.Translation.Dispose();
+                }
+                DisposeAll(translations);
+                DisposeAll(rotations);
             }
         }
 

@@ -21,7 +21,43 @@ The 53-row `detail/exposure_compensate.hpp` partition contains eight metadata ro
 
 The 12-row public-warper partition contains two metadata rows and ten `PyRotationWarper` callable rows. All ten callables are implemented. The 28-row `detail/blenders.hpp` partition contains four metadata rows and 24 callable rows. All 24 callables are implemented.
 
-The 23-row `detail/matchers.hpp` partition contains seven metadata rows and 16 callable rows. Fourteen callables are implemented through `ImageFeatures`, `MatchesInfo`, `FeaturesMatcher`, `BestOf2NearestMatcher`, `BestOf2NearestRangeMatcher`, and `AffineBestOf2NearestMatcher`. The two LightGlue callables are explicitly unsupported because they require an externally supplied ONNX model and an owned `cv::LightGlueMatcher` API that this repository does not expose. The remaining 42 callable rows in other detail headers remain explicit `missing` rows.
+The 23-row `detail/matchers.hpp` partition contains seven metadata rows and 16 callable rows. Fourteen callables are implemented through `ImageFeatures`, `MatchesInfo`, `FeaturesMatcher`, `BestOf2NearestMatcher`, `BestOf2NearestRangeMatcher`, and `AffineBestOf2NearestMatcher`. The two LightGlue callables are explicitly unsupported because they require an externally supplied ONNX model and an owned `cv::LightGlueMatcher` API that this repository does not expose.
+
+The two autocalibration callables, `CameraParams.K`, and all 17 motion-estimator callables are implemented through `StitcherCameraParams`, `Estimator`, the homography and affine estimators, five bundle adjusters, and `StitchingMotion`. The measured module result is 134 implemented, 22 missing, and two unsupported callable rows.
+
+## Camera and motion estimation
+
+```csharp
+using System.Linq;
+using OpenCvSharp.Core;
+using OpenCvSharp.Stitching;
+
+using var adjuster = new NoBundleAdjuster();
+adjuster.ConfidenceThreshold = 0.0;
+adjuster.TerminationCriteria = new TermCriteria(TermCriteriaTypes.Count, 2, 0.0);
+
+bool succeeded = adjuster.Apply(features, pairwiseMatches, initialCameras, out StitcherCameraParams[] cameras);
+try
+{
+    using Mat intrinsic = cameras[0].GetCameraMatrix();
+    StitchingMotion.WaveCorrect(cameras.Select(camera => camera.Rotation).ToArray(), WaveCorrectKind.Horizontal);
+    string graph = StitchingMotion.MatchesGraphAsString(paths, pairwiseMatches, 0.0f);
+}
+finally
+{
+    foreach (StitcherCameraParams camera in cameras)
+    {
+        camera.Rotation.Dispose();
+        camera.Translation.Dispose();
+    }
+}
+```
+
+Estimator input features and matches use the same exact `N * N` row-major contract as batch matching. `HomographyBasedEstimator(false)` and `AffineBasedEstimator` allocate their initial camera vector upstream. `HomographyBasedEstimator(true)` and every bundle adjuster require exactly `N` initial cameras. Inputs are borrowed and never mutated; each returned camera owns new `R` and `t` Mats that the caller must dispose. `R` is a single-channel `3 x 3 CV_32F` or `CV_64F` matrix, and `t` is a matching-depth single-channel `3 x 1` matrix. The affine bundle adjusters require upstream-compatible `CV_32F` rotations, so convert custom `CV_64F` initial rotations explicitly before calling them.
+
+`StitcherCameraParams.GetCameraMatrix` returns or copies a `3 x 3 CV_64FC1` intrinsic matrix. `FocalsFromHomography` accepts exactly `3 x 3 CV_64FC1`; its upstream formula assumes the zero-principal-point rotating-camera model. `CalibrateRotatingCamera` only replaces caller-owned output when upstream reports success. The convenience `TryCalibrateRotatingCamera` returns independently owned output storage.
+
+`WaveCorrect` accepts distinct `3 x 3 CV_32FC1` rotation objects. The native boundary clones every matrix, invokes OpenCV, and commits all results only after the whole operation succeeds. `MatchesGraphAsString` preserves UTF-8 path bytes and rejects embedded nulls. `LeaveBiggestComponent` does not mutate its inputs; its selected feature array and selected `M * M` row-major match array contain independent owned handles and must both be disposed.
 
 ## Detail feature matching
 

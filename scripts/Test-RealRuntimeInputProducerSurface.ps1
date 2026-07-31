@@ -436,7 +436,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record architecture-specific generator, SDK, build list, and CPU configuration" },
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_NATIVE_PROFILE_EVIDENCE"; Issue = "Windows producer must record profile-specific wrapper source and ABI counts" },
         [pscustomobject]@{ Needle = "expectedSourceCount = if (`$profileName -eq 'mini') { 9 } else { 49 }"; Issue = "Windows producer must lock exact mini/full wrapper source counts" },
-        [pscustomobject]@{ Needle = "expectedAbiFunctionCount = if (`$profileName -eq 'mini') { 526 } else { 2603 }"; Issue = "Windows producer must lock exact mini/full ABI counts" },
+        [pscustomobject]@{ Needle = "expectedAbiFunctionCount = if (`$profileName -eq 'mini') { 526 } else { 2624 }"; Issue = "Windows producer must lock exact mini/full ABI counts" },
         [pscustomobject]@{ Needle = "Windows mini OpenCV build unexpectedly configured full-only DNN MLAS"; Issue = "Windows mini producer must reject full-only DNN MLAS configuration" },
         [pscustomobject]@{ Needle = "Windows mini OpenCV build unexpectedly generated the full-only DNN project"; Issue = "Windows mini producer must reject a generated DNN project" },
         [pscustomobject]@{ Needle = "100% tests passed(?:, 0 tests failed)? out of 5"; Issue = "Windows producer must accept the audited CTest 4.4 success summary while retaining the older equivalent format" },
@@ -935,7 +935,7 @@ if ($violations.Count -eq 0) {
             $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) -and $producerTarget.Profile -eq "full")
             $nativeWrapperSources = if ($hasMiniProfileEvidence) { '["src/error_state.cpp","src/version.cpp","src/core/mat.cpp","src/core/decomp.cpp","src/core/operations.cpp","src/core/persistence.cpp","src/videoio/videoio.cpp","src/imgcodecs.cpp","src/imgproc.cpp"]' } elseif ($hasFullProfileEvidence) { '["full-source-fixture"]' } else { "" }
             $nativeWrapperSourceCount = if ($hasMiniProfileEvidence) { "9" } elseif ($hasFullProfileEvidence) { "49" } else { "" }
-            $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "526" } elseif ($hasFullProfileEvidence) { "2603" } else { "" }
+            $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "526" } elseif ($hasFullProfileEvidence) { "2624" } else { "" }
             $containerImageId = if ($isArm64Container -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "sha256:fixture" } else { "" }
             $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } elseif ($isDebian1204X64) { "debian@sha256:fixture" } elseif ($isFedora40X64) { "fedora@sha256:fixture" } elseif ($isRhel9X64) { "registry.access.redhat.com/ubi9/ubi@sha256:fixture" } else { "" }
             $containerArchitecture = if ($isArm64Container) { "aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "x86_64" } else { "" }

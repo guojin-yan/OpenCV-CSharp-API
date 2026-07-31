@@ -212,6 +212,27 @@ namespace
         jyppx_ocv_stitching_features_matcher** out() noexcept { return &value; }
     };
 
+    struct NativeStitchingEstimatorHandle
+    {
+        jyppx_ocv_stitching_estimator* value = nullptr;
+        ~NativeStitchingEstimatorHandle() { jyppx_ocv_stitching_estimator_release_handle(value); }
+        jyppx_ocv_stitching_estimator** out() noexcept { return &value; }
+    };
+
+    struct NativeStitchingCameraResults
+    {
+        jyppx_ocv_stitching_camera_params values[3]{};
+
+        ~NativeStitchingCameraResults()
+        {
+            for (jyppx_ocv_stitching_camera_params& value : values)
+            {
+                jyppx_ocv_mat_release(value.r);
+                jyppx_ocv_mat_release(value.t);
+            }
+        }
+    };
+
     struct NativeOrbHandle
     {
         jyppx_ocv_features2d_orb* value = nullptr;
@@ -4818,6 +4839,276 @@ namespace
 
         return 0;
     }
+
+    int run_stitching_motion_estimator_smoke()
+    {
+        NativeMatHandle camera_matrix;
+        NativeMatHandle mask;
+        NativeMatHandle copied_mask;
+        NativeMatHandle empty;
+        if (jyppx_ocv_mat_create_empty(camera_matrix.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(3, 3, 0, 0.0, 0.0, 0.0, 0.0, mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(copied_mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(empty.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 922;
+        }
+
+        if (jyppx_ocv_stitching_camera_params_get_k(500.0, 1.2, 320.0, 240.0, camera_matrix.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 923;
+        }
+        int rows = 0;
+        int cols = 0;
+        unsigned char* matrix_bytes = nullptr;
+        if (jyppx_ocv_mat_rows(camera_matrix.get(), &rows) != OPENCV_CSHARP_STATUS_OK || rows != 3 ||
+            jyppx_ocv_mat_cols(camera_matrix.get(), &cols) != OPENCV_CSHARP_STATUS_OK || cols != 3 ||
+            jyppx_ocv_mat_data(camera_matrix.get(), &matrix_bytes) != OPENCV_CSHARP_STATUS_OK || matrix_bytes == nullptr)
+        {
+            return 924;
+        }
+        const double* camera_values = reinterpret_cast<const double*>(matrix_bytes);
+        if (std::abs(camera_values[0] - 500.0) > 0.000001 ||
+            std::abs(camera_values[4] - 600.0) > 0.000001 ||
+            std::abs(camera_values[2] - 320.0) > 0.000001 ||
+            std::abs(camera_values[5] - 240.0) > 0.000001)
+        {
+            return 925;
+        }
+
+        NativeMatHandle homographies[3];
+        const double angles[3][3] = {
+            { 0.10, 0.20, 0.05 },
+            { -0.08, 0.15, -0.03 },
+            { 0.12, -0.10, 0.07 }
+        };
+        for (int index = 0; index < 3; ++index)
+        {
+            if (jyppx_ocv_mat_create(3, 3, 6, homographies[index].out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                return 926;
+            }
+            unsigned char* bytes = nullptr;
+            if (jyppx_ocv_mat_data(homographies[index].get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr)
+            {
+                return 927;
+            }
+            const double ax = angles[index][0];
+            const double ay = angles[index][1];
+            const double az = angles[index][2];
+            const double sx = std::sin(ax), cx = std::cos(ax);
+            const double sy = std::sin(ay), cy = std::cos(ay);
+            const double sz = std::sin(az), cz = std::cos(az);
+            const double rotation[9] = {
+                cz * cy,
+                cz * sy * sx - sz * cx,
+                cz * sy * cx + sz * sx,
+                sz * cy,
+                sz * sy * sx + cz * cx,
+                sz * sy * cx - cz * sx,
+                -sy,
+                cy * sx,
+                cy * cx
+            };
+            double* values = reinterpret_cast<double*>(bytes);
+            values[0] = rotation[0];
+            values[1] = rotation[1];
+            values[2] = rotation[2] * 500.0;
+            values[3] = rotation[3];
+            values[4] = rotation[4];
+            values[5] = rotation[5] * 500.0;
+            values[6] = rotation[6] / 500.0;
+            values[7] = rotation[7] / 500.0;
+            values[8] = rotation[8];
+        }
+
+        double focal_x = -1.0;
+        double focal_y = -1.0;
+        int focal_x_estimated = -1;
+        int focal_y_estimated = -1;
+        const jyppx_ocv_mat* homography_values[] = {
+            homographies[0].get(), homographies[1].get(), homographies[2].get()
+        };
+        int calibrated = 0;
+        if (jyppx_ocv_stitching_focals_from_homography(
+                homographies[0].get(), &focal_x, &focal_y, &focal_x_estimated, &focal_y_estimated) != OPENCV_CSHARP_STATUS_OK ||
+            (focal_x_estimated == 0 && focal_y_estimated == 0) ||
+            (focal_x_estimated != 0 && std::abs(focal_x - 500.0) > 1.0) ||
+            (focal_y_estimated != 0 && std::abs(focal_y - 500.0) > 1.0) ||
+            jyppx_ocv_stitching_calibrate_rotating_camera(
+                homography_values, 3, camera_matrix.get(), &calibrated) != OPENCV_CSHARP_STATUS_OK || calibrated != 1)
+        {
+            return 928;
+        }
+
+        NativeStitchingImageFeaturesHandle features[2];
+        NativeStitchingMatchesInfoHandle matches[4];
+        for (int i = 0; i < 2; ++i)
+        {
+            if (jyppx_ocv_stitching_image_features_create(i, 640, 480, nullptr, 0, empty.get(), features[i].out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                return 929;
+            }
+        }
+        for (int i = 0; i < 4; ++i)
+        {
+            if (jyppx_ocv_stitching_matches_info_create(matches[i].out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                return 930;
+            }
+        }
+        const jyppx_ocv_stitching_image_features* feature_values[] = { features[0].value, features[1].value };
+        const jyppx_ocv_stitching_matches_info* match_values[] = {
+            matches[0].value, matches[1].value, matches[2].value, matches[3].value
+        };
+
+        NativeStitchingEstimatorHandle homography_estimator;
+        NativeStitchingEstimatorHandle affine_estimator;
+        NativeStitchingEstimatorHandle no_adjuster;
+        NativeStitchingEstimatorHandle reproj_adjuster;
+        NativeStitchingEstimatorHandle ray_adjuster;
+        NativeStitchingEstimatorHandle affine_adjuster;
+        NativeStitchingEstimatorHandle affine_partial_adjuster;
+        if (jyppx_ocv_stitching_estimator_create_homography(0, homography_estimator.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_estimator_create_affine(affine_estimator.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_estimator_create_no_bundle_adjuster(no_adjuster.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj(reproj_adjuster.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray(ray_adjuster.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine(affine_adjuster.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial(affine_partial_adjuster.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 931;
+        }
+
+        NativeMatHandle rotations[2];
+        NativeMatHandle translations[2];
+        jyppx_ocv_stitching_camera_params initial_cameras[2]{};
+        for (int i = 0; i < 2; ++i)
+        {
+            if (jyppx_ocv_mat_create_with_scalar(3, 3, 5, 0.0, 0.0, 0.0, 0.0, rotations[i].out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_mat_create_with_scalar(3, 1, 5, 0.0, 0.0, 0.0, 0.0, translations[i].out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                return 932;
+            }
+            unsigned char* bytes = nullptr;
+            if (jyppx_ocv_mat_data(rotations[i].get(), &bytes) != OPENCV_CSHARP_STATUS_OK || bytes == nullptr)
+            {
+                return 933;
+            }
+            float* values = reinterpret_cast<float*>(bytes);
+            values[0] = 1.0f;
+            values[4] = 1.0f;
+            values[8] = 1.0f;
+            initial_cameras[i] = jyppx_ocv_stitching_camera_params{
+                500.0, 1.0, 320.0, 240.0, rotations[i].get(), translations[i].get()
+            };
+        }
+
+        NativeStitchingCameraResults camera_results;
+        int succeeded = 0;
+        if (jyppx_ocv_stitching_estimator_apply(
+                no_adjuster.value, feature_values, 2, match_values, 4,
+                initial_cameras, 2, camera_results.values, 2, &succeeded) != OPENCV_CSHARP_STATUS_OK ||
+            succeeded != 1 || camera_results.values[0].r == nullptr || camera_results.values[0].t == nullptr ||
+            camera_results.values[0].r == initial_cameras[0].r || camera_results.values[0].t == initial_cameras[0].t)
+        {
+            return 934;
+        }
+
+        double confidence = 0.0;
+        int criteria_type = 0;
+        int max_count = 0;
+        double epsilon = 0.0;
+        if (jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask(no_adjuster.value, mask.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask(no_adjuster.value, copied_mask.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold(no_adjuster.value, 0.25) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold(no_adjuster.value, &confidence) != OPENCV_CSHARP_STATUS_OK ||
+            std::abs(confidence - 0.25) > 0.000001 ||
+            jyppx_ocv_stitching_bundle_adjuster_set_term_criteria(no_adjuster.value, 1, 2, 0.0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_bundle_adjuster_get_term_criteria(
+                no_adjuster.value, &criteria_type, &max_count, &epsilon) != OPENCV_CSHARP_STATUS_OK ||
+            criteria_type != 1 || max_count != 2)
+        {
+            return 935;
+        }
+
+        jyppx_ocv_mat* rotation_values[] = { camera_results.values[0].r, camera_results.values[1].r };
+        if (jyppx_ocv_stitching_wave_correct(rotation_values, 2, 0) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 936;
+        }
+
+        const unsigned char paths[] = "left.jpgright.jpg";
+        const int offsets[] = { 0, 8, 17 };
+        NativeUtf8ResultHandle graph;
+        if (jyppx_ocv_stitching_matches_graph_as_string(
+                paths, 17, offsets, 2, 3, match_values, 4, 1.0f, &graph.value) != OPENCV_CSHARP_STATUS_OK ||
+            graph.value == nullptr)
+        {
+            return 937;
+        }
+        size_t graph_size = 0;
+        if (jyppx_ocv_core_utf8_result_size(graph.value, &graph_size) != OPENCV_CSHARP_STATUS_OK || graph_size == 0)
+        {
+            return 938;
+        }
+
+        NativeStitchingImageFeaturesHandle component_features[2];
+        NativeStitchingMatchesInfoHandle component_matches[4];
+        for (int i = 0; i < 2; ++i)
+        {
+            if (jyppx_ocv_stitching_image_features_create(-1, 0, 0, nullptr, 0, empty.get(), component_features[i].out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                return 939;
+            }
+        }
+        for (int i = 0; i < 4; ++i)
+        {
+            if (jyppx_ocv_stitching_matches_info_create(component_matches[i].out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                return 940;
+            }
+        }
+        jyppx_ocv_stitching_image_features* component_feature_values[] = {
+            component_features[0].value, component_features[1].value
+        };
+        jyppx_ocv_stitching_matches_info* component_match_values[] = {
+            component_matches[0].value, component_matches[1].value,
+            component_matches[2].value, component_matches[3].value
+        };
+        int original_indices[2] = { -1, -1 };
+        int component_count = 0;
+        if (jyppx_ocv_stitching_leave_biggest_component(
+                feature_values, 2, match_values, 4, 1.0f,
+                component_feature_values, 2, component_match_values, 4,
+                original_indices, 2, &component_count) != OPENCV_CSHARP_STATUS_OK ||
+            component_count != 1 || original_indices[0] < 0 || original_indices[0] > 1)
+        {
+            return 941;
+        }
+
+        double unchanged_focal_x = 11.0;
+        double unchanged_focal_y = 12.0;
+        int unchanged_estimated_x = 13;
+        int unchanged_estimated_y = 14;
+        auto* unchanged_estimator = reinterpret_cast<jyppx_ocv_stitching_estimator*>(static_cast<std::uintptr_t>(1));
+        auto* unchanged_graph = reinterpret_cast<jyppx_ocv_core_utf8_result*>(static_cast<std::uintptr_t>(1));
+        if (jyppx_ocv_stitching_focals_from_homography(
+                mask.get(), &unchanged_focal_x, &unchanged_focal_y,
+                &unchanged_estimated_x, &unchanged_estimated_y) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            unchanged_focal_x != 11.0 || unchanged_focal_y != 12.0 ||
+            unchanged_estimated_x != 13 || unchanged_estimated_y != 14 ||
+            jyppx_ocv_stitching_estimator_create_homography(2, &unchanged_estimator) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            unchanged_estimator != reinterpret_cast<jyppx_ocv_stitching_estimator*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_matches_graph_as_string(
+                paths, 17, offsets, 2, 3, nullptr, 0, 1.0f, &unchanged_graph) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            unchanged_graph != reinterpret_cast<jyppx_ocv_core_utf8_result*>(static_cast<std::uintptr_t>(1)))
+        {
+            return 942;
+        }
+
+        return 0;
+    }
 #endif
 }
 
@@ -4961,6 +5252,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return stitching_features_matcher_status;
+        }
+
+        int stitching_motion_estimator_status = run_stitching_motion_estimator_smoke();
+        if (stitching_motion_estimator_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return stitching_motion_estimator_status;
         }
 #endif
 
@@ -6379,14 +6677,24 @@ int main()
         auto* image_features = reinterpret_cast<jyppx_ocv_stitching_image_features*>(static_cast<std::uintptr_t>(1));
         auto* matches_info = reinterpret_cast<jyppx_ocv_stitching_matches_info*>(static_cast<std::uintptr_t>(1));
         auto* features_matcher = reinterpret_cast<jyppx_ocv_stitching_features_matcher*>(static_cast<std::uintptr_t>(1));
+        auto* estimator = reinterpret_cast<jyppx_ocv_stitching_estimator*>(static_cast<std::uintptr_t>(1));
+        double focal_x = 11.0;
+        double focal_y = 12.0;
+        int focal_x_estimated = 13;
+        int focal_y_estimated = 14;
         if (jyppx_ocv_stitching_image_features_create(0, 0, 0, nullptr, 0, nullptr, &image_features) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
             image_features != reinterpret_cast<jyppx_ocv_stitching_image_features*>(static_cast<std::uintptr_t>(1)) ||
             jyppx_ocv_stitching_matches_info_create(&matches_info) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
             matches_info != reinterpret_cast<jyppx_ocv_stitching_matches_info*>(static_cast<std::uintptr_t>(1)) ||
             jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest(0, 0.3f, 6, 6, 3.0, &features_matcher) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
-            features_matcher != reinterpret_cast<jyppx_ocv_stitching_features_matcher*>(static_cast<std::uintptr_t>(1)))
+            features_matcher != reinterpret_cast<jyppx_ocv_stitching_features_matcher*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_estimator_create_homography(0, &estimator) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            estimator != reinterpret_cast<jyppx_ocv_stitching_estimator*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_focals_from_homography(
+                nullptr, &focal_x, &focal_y, &focal_x_estimated, &focal_y_estimated) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            focal_x != 11.0 || focal_y != 12.0 || focal_x_estimated != 13 || focal_y_estimated != 14)
         {
-            return 921;
+            return 943;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

@@ -205,7 +205,7 @@ namespace OpenCvSharp.Stitching
             GC.SuppressFinalize(this);
         }
 
-        private static ImageFeatures CreateEmpty()
+        internal static ImageFeatures CreateEmpty()
         {
             using (var descriptors = new Mat())
             {

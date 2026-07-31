@@ -15988,6 +15988,63 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_blender_set_sh
     return jyppx_ocv_stitching_blender_set_sharpness(blender, sharpness);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_bundle_adjuster_copy_refinement_mask(const jyppx_ocv_stitching_estimator* estimator,
+    jyppx_ocv_mat* refinement_mask)
+{
+    return jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask(estimator, refinement_mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_bundle_adjuster_get_confidence_threshold(const jyppx_ocv_stitching_estimator* estimator,
+    double* confidence_threshold)
+{
+    return jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold(estimator, confidence_threshold);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_bundle_adjuster_get_term_criteria(const jyppx_ocv_stitching_estimator* estimator,
+    int* criteria_type,
+    int* max_count,
+    double* epsilon)
+{
+    return jyppx_ocv_stitching_bundle_adjuster_get_term_criteria(estimator, criteria_type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_bundle_adjuster_set_confidence_threshold(jyppx_ocv_stitching_estimator* estimator,
+    double confidence_threshold)
+{
+    return jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold(estimator, confidence_threshold);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_bundle_adjuster_set_refinement_mask(jyppx_ocv_stitching_estimator* estimator,
+    const jyppx_ocv_mat* refinement_mask)
+{
+    return jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask(estimator, refinement_mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_bundle_adjuster_set_term_criteria(jyppx_ocv_stitching_estimator* estimator,
+    int criteria_type,
+    int max_count,
+    double epsilon)
+{
+    return jyppx_ocv_stitching_bundle_adjuster_set_term_criteria(estimator, criteria_type, max_count, epsilon);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_calibrate_rotating_camera(const jyppx_ocv_mat* const* homographies,
+    int homography_count,
+    jyppx_ocv_mat* camera_matrix,
+    int* calibrated)
+{
+    return jyppx_ocv_stitching_calibrate_rotating_camera(homographies, homography_count, camera_matrix, calibrated);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_camera_params_get_k(double focal,
+    double aspect,
+    double ppx,
+    double ppy,
+    jyppx_ocv_mat* camera_matrix)
+{
+    return jyppx_ocv_stitching_camera_params_get_k(focal, aspect, ppx, ppy, camera_matrix);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_compute_image_features(int finder_kind,
     const void* finder_handle,
     const jyppx_ocv_mat* image,
@@ -16030,6 +16087,61 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_create_weight_
     jyppx_ocv_mat* weight)
 {
     return jyppx_ocv_stitching_create_weight_map(mask, sharpness, weight);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_apply(jyppx_ocv_stitching_estimator* estimator,
+    const jyppx_ocv_stitching_image_features* const* features,
+    int feature_count,
+    const jyppx_ocv_stitching_matches_info* const* pairwise_matches,
+    int pairwise_match_count,
+    const jyppx_ocv_stitching_camera_params* initial_cameras,
+    int initial_camera_count,
+    jyppx_ocv_stitching_camera_params* cameras,
+    int camera_capacity,
+    int* succeeded)
+{
+    return jyppx_ocv_stitching_estimator_apply(estimator, features, feature_count, pairwise_matches, pairwise_match_count, initial_cameras, initial_camera_count, cameras, camera_capacity, succeeded);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_affine(jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_affine(estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_bundle_adjuster_affine(jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine(estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_bundle_adjuster_affine_partial(jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial(estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_bundle_adjuster_ray(jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray(estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_bundle_adjuster_reproj(jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj(estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_homography(int focal_lengths_estimated,
+    jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_homography(focal_lengths_estimated, estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_estimator_create_no_bundle_adjuster(jyppx_ocv_stitching_estimator** estimator)
+{
+    return jyppx_ocv_stitching_estimator_create_no_bundle_adjuster(estimator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_estimator_release_handle(jyppx_ocv_stitching_estimator* estimator)
+{
+    jyppx_ocv_stitching_estimator_release_handle(estimator);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_apply(jyppx_ocv_stitching_exposure_compensator* compensator,
@@ -16254,6 +16366,15 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_features_matc
     jyppx_ocv_stitching_features_matcher_release_handle(matcher);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_focals_from_homography(const jyppx_ocv_mat* homography,
+    double* focal_x,
+    double* focal_y,
+    int* focal_x_estimated,
+    int* focal_y_estimated)
+{
+    return jyppx_ocv_stitching_focals_from_homography(homography, focal_x, focal_y, focal_x_estimated, focal_y_estimated);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_copy_descriptors(const jyppx_ocv_stitching_image_features* features,
     jyppx_ocv_mat* descriptors)
 {
@@ -16314,6 +16435,35 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features
     int image_height)
 {
     return jyppx_ocv_stitching_image_features_set_image_size(features, image_width, image_height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_leave_biggest_component(const jyppx_ocv_stitching_image_features* const* features,
+    int feature_count,
+    const jyppx_ocv_stitching_matches_info* const* pairwise_matches,
+    int pairwise_match_count,
+    float confidence_threshold,
+    jyppx_ocv_stitching_image_features* const* component_features,
+    int component_feature_capacity,
+    jyppx_ocv_stitching_matches_info* const* component_matches,
+    int component_match_capacity,
+    int* original_indices,
+    int original_index_capacity,
+    int* component_count)
+{
+    return jyppx_ocv_stitching_leave_biggest_component(features, feature_count, pairwise_matches, pairwise_match_count, confidence_threshold, component_features, component_feature_capacity, component_matches, component_match_capacity, original_indices, original_index_capacity, component_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_graph_as_string(const unsigned char* path_buffer,
+    int path_byte_count,
+    const int* path_offsets,
+    int path_count,
+    int path_offset_count,
+    const jyppx_ocv_stitching_matches_info* const* pairwise_matches,
+    int pairwise_match_count,
+    float confidence_threshold,
+    jyppx_ocv_core_utf8_result** result)
+{
+    return jyppx_ocv_stitching_matches_graph_as_string(path_buffer, path_byte_count, path_offsets, path_count, path_offset_count, pairwise_matches, pairwise_match_count, confidence_threshold, result);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_copy_homography(const jyppx_ocv_stitching_matches_info* matches_info,
@@ -16482,6 +16632,13 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_restore_image_
     int pyramid_count)
 {
     return jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu(pyramid, pyramid_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_wave_correct(jyppx_ocv_mat* const* rotation_matrices,
+    int rotation_matrix_count,
+    int correction_kind)
+{
+    return jyppx_ocv_stitching_wave_correct(rotation_matrices, rotation_matrix_count, correction_kind);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_structured_light_gray_code_pattern_create(int width,

@@ -495,21 +495,29 @@
       "ordinal": 36,
       "surface": "detail-autocalib",
       "identity": "cv.detail.focalsFromHomography(Mat H[/C,/Ref];double f0[/Ref];double f1[/Ref];bool f0_ok[/Ref];bool f1_ok[/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Autocalibration helpers remain unimplemented pending copied camera/matrix result contracts.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_focals_from_homography"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void FocalsFromHomography(OpenCvSharp.Core.Mat homography,out System.Double focalX,out System.Double focalY,out System.Boolean focalXEstimated,out System.Boolean focalYEstimated)"
+      ]
     },
     {
       "ordinal": 37,
       "surface": "detail-autocalib",
       "identity": "cv.detail.calibrateRotatingCamera(vector_Mat Hs[/C,/Ref];Mat K[/O,/Ref])-\u003Ebool",
-      "classification": "missing",
-      "reason": "Autocalibration helpers remain unimplemented pending copied camera/matrix result contracts.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_calibrate_rotating_camera"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Boolean CalibrateRotatingCamera(OpenCvSharp.Core.Mat[] homographies,OpenCvSharp.Core.Mat cameraMatrix)"
+      ]
     },
     {
       "ordinal": 38,
@@ -904,11 +912,15 @@
       "ordinal": 67,
       "surface": "detail-camera",
       "identity": "cv.detail.CameraParams.K()-\u003EMat",
-      "classification": "missing",
-      "reason": "CameraParams.K remains unimplemented; copied high-level camera results do not expose the mutable detail object.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_camera_params_get_k"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance|OpenCvSharp.Core.Mat GetCameraMatrix()"
+      ]
     },
     {
       "ordinal": 68,
@@ -1933,11 +1945,15 @@
       "ordinal": 145,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.Estimator.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/C,/Ref];vector_CameraParams cameras[/IO,/Ref])-\u003Ebool",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,OpenCvSharp.Stitching.StitcherCameraParams[]? initialCameras,out OpenCvSharp.Stitching.StitcherCameraParams[] cameras)"
+      ]
     },
     {
       "ordinal": 146,
@@ -1953,11 +1969,16 @@
       "ordinal": 147,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.HomographyBasedEstimator.HomographyBasedEstimator(bool is_focals_estimated=false)-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_homography",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.HomographyBasedEstimator|constructor|public;instance|.ctor(System.Boolean focalLengthsEstimated=false)"
+      ]
     },
     {
       "ordinal": 148,
@@ -1973,11 +1994,16 @@
       "ordinal": 149,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.AffineBasedEstimator.AffineBasedEstimator()-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_affine",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.AffineBasedEstimator|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 150,
@@ -1993,61 +2019,85 @@
       "ordinal": 151,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterBase.refinementMask()-\u003EMat",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.Mat RefinementMask"
+      ]
     },
     {
       "ordinal": 152,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterBase.setRefinementMask(Mat mask[/C,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.Mat RefinementMask"
+      ]
     },
     {
       "ordinal": 153,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterBase.confThresh()-\u003Edouble",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold"
+      ]
     },
     {
       "ordinal": 154,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterBase.setConfThresh(double conf_thresh)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold"
+      ]
     },
     {
       "ordinal": 155,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterBase.termCriteria()-\u003ETermCriteria",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_get_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TerminationCriteria"
+      ]
     },
     {
       "ordinal": 156,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterBase.setTermCriteria(TermCriteria term_criteria[/C,/Ref])-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_bundle_adjuster_set_term_criteria"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TerminationCriteria"
+      ]
     },
     {
       "ordinal": 157,
@@ -2063,11 +2113,16 @@
       "ordinal": 158,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.NoBundleAdjuster.NoBundleAdjuster()-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_no_bundle_adjuster",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.NoBundleAdjuster|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 159,
@@ -2083,11 +2138,16 @@
       "ordinal": 160,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterReproj.BundleAdjusterReproj()-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterReproj|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 161,
@@ -2103,11 +2163,16 @@
       "ordinal": 162,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterRay.BundleAdjusterRay()-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterRay|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 163,
@@ -2123,11 +2188,16 @@
       "ordinal": 164,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterAffine.BundleAdjusterAffine()-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterAffine|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 165,
@@ -2143,11 +2213,16 @@
       "ordinal": 166,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.BundleAdjusterAffinePartial.BundleAdjusterAffinePartial()-\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial",
+        "jyppx_ocv_stitching_estimator_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BundleAdjusterAffinePartial|constructor|public;instance|.ctor()"
+      ]
     },
     {
       "ordinal": 167,
@@ -2163,31 +2238,43 @@
       "ordinal": 168,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.waveCorrect(vector_Mat rmats[/IO,/Ref];WaveCorrectKind kind)-\u003Evoid",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_wave_correct"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void WaveCorrect(OpenCvSharp.Core.Mat[] rotationMatrices,OpenCvSharp.Stitching.WaveCorrectKind correctionKind)"
+      ]
     },
     {
       "ordinal": 169,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.matchesGraphAsString(vector_String paths[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003EString",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_matches_graph_as_string"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.String MatchesGraphAsString(System.String[] paths,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold)"
+      ]
     },
     {
       "ordinal": 170,
       "surface": "detail-motion-estimators",
       "identity": "cv.detail.leaveBiggestComponent(vector_ImageFeatures features[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003Estd::vector\u003Cint\u003E",
-      "classification": "missing",
-      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "classification": "implemented",
+      "reason": "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests.",
       "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_leave_biggest_component"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Int32[] LeaveBiggestComponent(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold,out OpenCvSharp.Stitching.ImageFeatures[] componentFeatures,out OpenCvSharp.Stitching.MatchesInfo[] componentMatches)"
+      ]
     },
     {
       "ordinal": 171,

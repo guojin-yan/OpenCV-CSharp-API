@@ -3,7 +3,9 @@
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
 #include <opencv2/stitching.hpp>
 #include <opencv2/stitching/detail/blenders.hpp>
+#include <opencv2/stitching/detail/autocalib.hpp>
 #include <opencv2/stitching/detail/matchers.hpp>
+#include <opencv2/stitching/detail/motion_estimators.hpp>
 #include <opencv2/stitching/warpers.hpp>
 #include <memory>
 #endif
@@ -70,6 +72,17 @@ struct jyppx_ocv_stitching_features_matcher
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
     cv::Ptr<cv::detail::FeaturesMatcher> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_estimator
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::Ptr<cv::detail::Estimator> value;
+    cv::Ptr<cv::detail::BundleAdjusterBase> bundle_adjuster;
+    bool requires_initial_cameras = false;
 #else
     int placeholder;
 #endif

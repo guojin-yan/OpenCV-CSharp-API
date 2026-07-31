@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 6,
-  "managedPublicMemberAdditionCount": 31,
-  "nativeEntrypointAdditionCount": 28,
+  "managedPublicTypeAdditionCount": 10,
+  "managedPublicMemberAdditionCount": 22,
+  "nativeEntrypointAdditionCount": 21,
   "families": [
     {
       "id": "stitching-detail-exposure-compensation-completion",
@@ -1346,6 +1346,300 @@
             "MEMBER|OpenCvSharp.Stitching.AffineBestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean fullAffine=false,System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "stitching-camera-motion-estimator-completion",
+      "surface": "detail-motion-estimators",
+      "rationale": "Closes autocalibration, copied camera intrinsics, owned homography/affine estimators, five bundle adjusters, transactional wave correction, UTF-8 match graphs, and independently owned largest-component results.",
+      "declarations": [
+        {
+          "ordinal": 36,
+          "upstreamIdentity": "cv.detail.focalsFromHomography(Mat H[/C,/Ref];double f0[/Ref];double f1[/Ref];bool f0_ok[/Ref];bool f1_ok[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_focals_from_homography"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void FocalsFromHomography(OpenCvSharp.Core.Mat homography,out System.Double focalX,out System.Double focalY,out System.Boolean focalXEstimated,out System.Boolean focalYEstimated)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 37,
+          "upstreamIdentity": "cv.detail.calibrateRotatingCamera(vector_Mat Hs[/C,/Ref];Mat K[/O,/Ref])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_calibrate_rotating_camera"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Boolean CalibrateRotatingCamera(OpenCvSharp.Core.Mat[] homographies,OpenCvSharp.Core.Mat cameraMatrix)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 67,
+          "upstreamIdentity": "cv.detail.CameraParams.K()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_camera_params_get_k"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance|OpenCvSharp.Core.Mat GetCameraMatrix()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 145,
+          "upstreamIdentity": "cv.detail.Estimator.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/C,/Ref];vector_CameraParams cameras[/IO,/Ref])-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,OpenCvSharp.Stitching.StitcherCameraParams[]? initialCameras,out OpenCvSharp.Stitching.StitcherCameraParams[] cameras)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 147,
+          "upstreamIdentity": "cv.detail.HomographyBasedEstimator.HomographyBasedEstimator(bool is_focals_estimated=false)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_homography",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.HomographyBasedEstimator|constructor|public;instance|.ctor(System.Boolean focalLengthsEstimated=false)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 149,
+          "upstreamIdentity": "cv.detail.AffineBasedEstimator.AffineBasedEstimator()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_affine",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.AffineBasedEstimator|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 151,
+          "upstreamIdentity": "cv.detail.BundleAdjusterBase.refinementMask()-\u003EMat",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_bundle_adjuster_copy_refinement_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.Mat RefinementMask"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 152,
+          "upstreamIdentity": "cv.detail.BundleAdjusterBase.setRefinementMask(Mat mask[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_bundle_adjuster_set_refinement_mask"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.Mat RefinementMask"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 153,
+          "upstreamIdentity": "cv.detail.BundleAdjusterBase.confThresh()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_bundle_adjuster_get_confidence_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 154,
+          "upstreamIdentity": "cv.detail.BundleAdjusterBase.setConfThresh(double conf_thresh)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_bundle_adjuster_set_confidence_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 155,
+          "upstreamIdentity": "cv.detail.BundleAdjusterBase.termCriteria()-\u003ETermCriteria",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_bundle_adjuster_get_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TerminationCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 156,
+          "upstreamIdentity": "cv.detail.BundleAdjusterBase.setTermCriteria(TermCriteria term_criteria[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_bundle_adjuster_set_term_criteria"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TerminationCriteria"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 158,
+          "upstreamIdentity": "cv.detail.NoBundleAdjuster.NoBundleAdjuster()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_no_bundle_adjuster",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.NoBundleAdjuster|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 160,
+          "upstreamIdentity": "cv.detail.BundleAdjusterReproj.BundleAdjusterReproj()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_bundle_adjuster_reproj",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterReproj|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 162,
+          "upstreamIdentity": "cv.detail.BundleAdjusterRay.BundleAdjusterRay()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_bundle_adjuster_ray",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterRay|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 164,
+          "upstreamIdentity": "cv.detail.BundleAdjusterAffine.BundleAdjusterAffine()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterAffine|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 166,
+          "upstreamIdentity": "cv.detail.BundleAdjusterAffinePartial.BundleAdjusterAffinePartial()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_estimator_create_bundle_adjuster_affine_partial",
+            "jyppx_ocv_stitching_estimator_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BundleAdjusterAffinePartial|constructor|public;instance|.ctor()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 168,
+          "upstreamIdentity": "cv.detail.waveCorrect(vector_Mat rmats[/IO,/Ref];WaveCorrectKind kind)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_wave_correct"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void WaveCorrect(OpenCvSharp.Core.Mat[] rotationMatrices,OpenCvSharp.Stitching.WaveCorrectKind correctionKind)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 169,
+          "upstreamIdentity": "cv.detail.matchesGraphAsString(vector_String paths[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003EString",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_matches_graph_as_string"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.String MatchesGraphAsString(System.String[] paths,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 170,
+          "upstreamIdentity": "cv.detail.leaveBiggestComponent(vector_ImageFeatures features[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003Estd::vector\u003Cint\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_leave_biggest_component"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Int32[] LeaveBiggestComponent(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold,out OpenCvSharp.Stitching.ImageFeatures[] componentFeatures,out OpenCvSharp.Stitching.MatchesInfo[] componentMatches)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
           "sample": "samples/ConsoleSamples/Program.cs",
           "guide": "docs/articles/stitching-structured-parity-guide.md"

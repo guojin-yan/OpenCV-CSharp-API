@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using OpenCvSharp.Core;
+using OpenCvSharp.Internal.Interop;
 
 namespace OpenCvSharp.Stitching
 {
@@ -83,6 +84,31 @@ namespace OpenCvSharp.Stitching
         public StitcherCameraParams Clone()
         {
             return new StitcherCameraParams(this);
+        }
+
+        /// <summary>Copies the 3 x 3 CV_64FC1 intrinsic matrix into caller-owned storage.</summary>
+        public void GetCameraMatrix(Mat cameraMatrix)
+        {
+            if (cameraMatrix == null) throw new ArgumentNullException(nameof(cameraMatrix));
+            NativeException.ThrowIfError(NativeMethods.StitchingCameraParamsGetK(
+                Focal, Aspect, PrincipalPointX, PrincipalPointY, cameraMatrix.NativeHandle));
+            GC.KeepAlive(cameraMatrix);
+        }
+
+        /// <summary>Returns an independently owned 3 x 3 CV_64FC1 intrinsic matrix.</summary>
+        public Mat GetCameraMatrix()
+        {
+            var result = new Mat();
+            try
+            {
+                GetCameraMatrix(result);
+                return result;
+            }
+            catch
+            {
+                result.Dispose();
+                throw;
+            }
         }
 
         /// <inheritdoc/>

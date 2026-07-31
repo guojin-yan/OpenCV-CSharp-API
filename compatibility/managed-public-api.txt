@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=588
-member-count=6248
+type-count=598
+member-count=6270
 namespace-count=41
 nullable-shape=included
 
@@ -23,6 +23,8 @@ TYPE|class|public;abstract|OpenCvSharp.Shape.HistogramCostExtractor|base=|interf
 TYPE|class|public;abstract|OpenCvSharp.Shape.NormHistogramCostExtractorBase|base=OpenCvSharp.Shape.HistogramCostExtractor|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Shape.ShapeDistanceExtractor|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Stitching.BlocksCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;abstract|OpenCvSharp.Stitching.BundleAdjusterBase|base=OpenCvSharp.Stitching.Estimator|interfaces=System.IDisposable
+TYPE|class|public;abstract|OpenCvSharp.Stitching.Estimator|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Stitching.ExposureCompensator|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Stitching.FeaturesMatcher|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.StructuredLight.StructuredLightPattern|base=|interfaces=System.IDisposable
@@ -184,17 +186,24 @@ TYPE|class|public;sealed|OpenCvSharp.Shape.EMDL1HistogramCostExtractor|base=Open
 TYPE|class|public;sealed|OpenCvSharp.Shape.HausdorffDistanceExtractor|base=OpenCvSharp.Shape.ShapeDistanceExtractor|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Shape.NormHistogramCostExtractor|base=OpenCvSharp.Shape.NormHistogramCostExtractorBase|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Shape.ShapeContextDistanceExtractor|base=OpenCvSharp.Shape.ShapeDistanceExtractor|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.AffineBasedEstimator|base=OpenCvSharp.Stitching.Estimator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.AffineBestOf2NearestMatcher|base=OpenCvSharp.Stitching.FeaturesMatcher|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BestOf2NearestMatcher|base=OpenCvSharp.Stitching.FeaturesMatcher|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BestOf2NearestRangeMatcher|base=OpenCvSharp.Stitching.FeaturesMatcher|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BlocksChannelsCompensator|base=OpenCvSharp.Stitching.BlocksCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BlocksGainCompensator|base=OpenCvSharp.Stitching.BlocksCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterAffinePartial|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterAffine|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterRay|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterReproj|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.ChannelsCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.FeatherBlender|base=OpenCvSharp.Stitching.Blender|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.GainCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.HomographyBasedEstimator|base=OpenCvSharp.Stitching.Estimator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.ImageFeatures|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.MatchesInfo|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.MultiBandBlender|base=OpenCvSharp.Stitching.Blender|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.NoBundleAdjuster|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.NoExposureCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.PyRotationWarper|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.StitcherCameraParams|base=|interfaces=
@@ -285,6 +294,7 @@ TYPE|class|public;static|OpenCvSharp.PtCloud.PtCloudCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Rapid.RapidCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Reg.RegCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Shape.ShapeCv2|base=|interfaces=
+TYPE|class|public;static|OpenCvSharp.Stitching.StitchingMotion|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.StructuredLight.StructuredLightCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.SurfaceMatching.SurfaceMatchingCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Video.Cv2|base=|interfaces=
@@ -5396,6 +5406,7 @@ MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|method|protected;instance|System
 MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|method|public;instance|System.Single ComputeDistance(OpenCvSharp.Core.Mat contour1,OpenCvSharp.Core.Mat contour2)
 MEMBER|OpenCvSharp.Shape.ShapeDistanceExtractor|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.Stitching.AffineBasedEstimator|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.AffineBestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean fullAffine=false,System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6)
 MEMBER|OpenCvSharp.Stitching.BestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6,System.Double matchesConfidenceThreshold=3)
 MEMBER|OpenCvSharp.Stitching.BestOf2NearestMatcher|method|public;static|OpenCvSharp.Stitching.BestOf2NearestMatcher Create(System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6,System.Double matchesConfidenceThreshold=3)
@@ -5423,9 +5434,20 @@ MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:
 MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations
 MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
 MEMBER|OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterAffinePartial|constructor|public;instance|.ctor()
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterAffine|constructor|public;instance|.ctor()
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.Mat RefinementMask
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria TerminationCriteria
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterBase|property|instance;get:public;set:public|System.Double ConfidenceThreshold
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterRay|constructor|public;instance|.ctor()
+MEMBER|OpenCvSharp.Stitching.BundleAdjusterReproj|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)
 MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
 MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
+MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,OpenCvSharp.Stitching.StitcherCameraParams[]? initialCameras,out OpenCvSharp.Stitching.StitcherCameraParams[] cameras)
+MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,out OpenCvSharp.Stitching.StitcherCameraParams[] cameras)
+MEMBER|OpenCvSharp.Stitching.Estimator|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.Stitching.ExposureCompensatorType|field|public;const|OpenCvSharp.Stitching.ExposureCompensatorType Channels=3
 MEMBER|OpenCvSharp.Stitching.ExposureCompensatorType|field|public;const|OpenCvSharp.Stitching.ExposureCompensatorType ChannelsBlocks=4
 MEMBER|OpenCvSharp.Stitching.ExposureCompensatorType|field|public;const|OpenCvSharp.Stitching.ExposureCompensatorType Gain=1
@@ -5452,6 +5474,7 @@ MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|property|instance;get:public|System
 MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
+MEMBER|OpenCvSharp.Stitching.HomographyBasedEstimator|constructor|public;instance|.ctor(System.Boolean focalLengthsEstimated=false)
 MEMBER|OpenCvSharp.Stitching.ImageFeatures|constructor|public;instance|.ctor(System.Int32 imageIndex,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Features2D.KeyPoint[] keypoints,OpenCvSharp.Core.Mat descriptors)
 MEMBER|OpenCvSharp.Stitching.ImageFeatures|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|OpenCvSharp.Stitching.ImageFeatures|method|public;instance|OpenCvSharp.Core.Mat GetDescriptors()
@@ -5475,6 +5498,7 @@ MEMBER|OpenCvSharp.Stitching.MatchesInfo|property|instance;get:public|System.Int
 MEMBER|OpenCvSharp.Stitching.MatchesInfo|property|instance;get:public|System.Int32 SourceImageIndex
 MEMBER|OpenCvSharp.Stitching.MultiBandBlender|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Int32 numberOfBands=5,System.Int32 weightType=5)
 MEMBER|OpenCvSharp.Stitching.MultiBandBlender|property|instance;get:public;set:public|System.Int32 NumberOfBands
+MEMBER|OpenCvSharp.Stitching.NoBundleAdjuster|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor()
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|constructor|public;instance|.ctor(System.String type,System.Single scale)
@@ -5490,7 +5514,9 @@ MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public|Syste
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|constructor|public;instance|.ctor(OpenCvSharp.Stitching.StitcherCameraParams other)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|constructor|public;instance|.ctor(System.Double focal,System.Double aspect,System.Double ppx,System.Double ppy,OpenCvSharp.Core.Mat rotation,OpenCvSharp.Core.Mat translation)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance;override|System.String ToString()
+MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance|OpenCvSharp.Core.Mat GetCameraMatrix()
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance|OpenCvSharp.Stitching.StitcherCameraParams Clone()
+MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance|System.Void GetCameraMatrix(OpenCvSharp.Core.Mat cameraMatrix)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|property|instance;get:public|OpenCvSharp.Core.Mat Rotation
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|property|instance;get:public|OpenCvSharp.Core.Mat Translation
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|property|instance;get:public|System.Double Aspect
@@ -5532,6 +5558,12 @@ MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|Sy
 MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double SeamEstimationResol
 MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public|System.Double WorkScale
+MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Boolean CalibrateRotatingCamera(OpenCvSharp.Core.Mat[] homographies,OpenCvSharp.Core.Mat cameraMatrix)
+MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Boolean TryCalibrateRotatingCamera(OpenCvSharp.Core.Mat[] homographies,out OpenCvSharp.Core.Mat cameraMatrix)
+MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Int32[] LeaveBiggestComponent(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold,out OpenCvSharp.Stitching.ImageFeatures[] componentFeatures,out OpenCvSharp.Stitching.MatchesInfo[] componentMatches)
+MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.String MatchesGraphAsString(System.String[] paths,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold)
+MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void FocalsFromHomography(OpenCvSharp.Core.Mat homography,out System.Double focalX,out System.Double focalY,out System.Boolean focalXEstimated,out System.Boolean focalYEstimated)
+MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void WaveCorrect(OpenCvSharp.Core.Mat[] rotationMatrices,OpenCvSharp.Stitching.WaveCorrectKind correctionKind)
 MEMBER|OpenCvSharp.Stitching.WaveCorrectKind|field|public;const|OpenCvSharp.Stitching.WaveCorrectKind Auto=2
 MEMBER|OpenCvSharp.Stitching.WaveCorrectKind|field|public;const|OpenCvSharp.Stitching.WaveCorrectKind Horizontal=0
 MEMBER|OpenCvSharp.Stitching.WaveCorrectKind|field|public;const|OpenCvSharp.Stitching.WaveCorrectKind Vertical=1
