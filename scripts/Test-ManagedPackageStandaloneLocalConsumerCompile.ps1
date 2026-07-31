@@ -344,6 +344,12 @@ internal static class Program
         typeof(OpenCvSharp.Stitching.Blender),
         typeof(OpenCvSharp.Stitching.FeatherBlender),
         typeof(OpenCvSharp.Stitching.MultiBandBlender),
+        typeof(OpenCvSharp.Stitching.ImageFeatures),
+        typeof(OpenCvSharp.Stitching.MatchesInfo),
+        typeof(OpenCvSharp.Stitching.FeaturesMatcher),
+        typeof(OpenCvSharp.Stitching.BestOf2NearestMatcher),
+        typeof(OpenCvSharp.Stitching.BestOf2NearestRangeMatcher),
+        typeof(OpenCvSharp.Stitching.AffineBestOf2NearestMatcher),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
 

@@ -15988,6 +15988,27 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_blender_set_sh
     return jyppx_ocv_stitching_blender_set_sharpness(blender, sharpness);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_compute_image_features(int finder_kind,
+    const void* finder_handle,
+    const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* mask,
+    jyppx_ocv_stitching_image_features* features)
+{
+    return jyppx_ocv_stitching_compute_image_features(finder_kind, finder_handle, image, mask, features);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_compute_image_features_batch(int finder_kind,
+    const void* finder_handle,
+    const jyppx_ocv_mat* const* images,
+    int image_count,
+    const jyppx_ocv_mat* const* masks,
+    int mask_count,
+    jyppx_ocv_stitching_image_features* const* features,
+    int feature_count)
+{
+    return jyppx_ocv_stitching_compute_image_features_batch(finder_kind, finder_handle, images, image_count, masks, mask_count, features, feature_count);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_create_laplace_pyramid(const jyppx_ocv_mat* image,
     int number_of_levels,
     jyppx_ocv_mat* const* pyramid,
@@ -16158,6 +16179,194 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_u
     int update_gain)
 {
     return jyppx_ocv_stitching_exposure_set_update_gain(compensator, update_gain);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_collect_garbage(jyppx_ocv_stitching_features_matcher* matcher)
+{
+    return jyppx_ocv_stitching_features_matcher_collect_garbage(matcher);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_create_affine(int full_affine,
+    int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    return jyppx_ocv_stitching_features_matcher_create_affine(full_affine, try_gpu, match_confidence, number_of_matches_threshold1, matcher);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_create_best_of_two_nearest(int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    int number_of_matches_threshold2,
+    double matches_confidence_threshold,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    return jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest(try_gpu, match_confidence, number_of_matches_threshold1, number_of_matches_threshold2, matches_confidence_threshold, matcher);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_create_range(int range_width,
+    int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    int number_of_matches_threshold2,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    return jyppx_ocv_stitching_features_matcher_create_range(range_width, try_gpu, match_confidence, number_of_matches_threshold1, number_of_matches_threshold2, matcher);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_factory_best_of_two_nearest(int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    int number_of_matches_threshold2,
+    double matches_confidence_threshold,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    return jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest(try_gpu, match_confidence, number_of_matches_threshold1, number_of_matches_threshold2, matches_confidence_threshold, matcher);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_is_thread_safe(const jyppx_ocv_stitching_features_matcher* matcher,
+    int* is_thread_safe)
+{
+    return jyppx_ocv_stitching_features_matcher_is_thread_safe(matcher, is_thread_safe);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_match_batch(jyppx_ocv_stitching_features_matcher* matcher,
+    const jyppx_ocv_stitching_image_features* const* features,
+    int feature_count,
+    const jyppx_ocv_mat* mask,
+    jyppx_ocv_stitching_matches_info* const* pairwise_matches,
+    int pairwise_match_count)
+{
+    return jyppx_ocv_stitching_features_matcher_match_batch(matcher, features, feature_count, mask, pairwise_matches, pairwise_match_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_features_matcher_match_pair(jyppx_ocv_stitching_features_matcher* matcher,
+    const jyppx_ocv_stitching_image_features* first,
+    const jyppx_ocv_stitching_image_features* second,
+    jyppx_ocv_stitching_matches_info* matches_info)
+{
+    return jyppx_ocv_stitching_features_matcher_match_pair(matcher, first, second, matches_info);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_features_matcher_release_handle(jyppx_ocv_stitching_features_matcher* matcher)
+{
+    jyppx_ocv_stitching_features_matcher_release_handle(matcher);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_copy_descriptors(const jyppx_ocv_stitching_image_features* features,
+    jyppx_ocv_mat* descriptors)
+{
+    return jyppx_ocv_stitching_image_features_copy_descriptors(features, descriptors);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_create(int image_index,
+    int image_width,
+    int image_height,
+    const jyppx_ocv_key_point* keypoints,
+    int keypoint_count,
+    const jyppx_ocv_mat* descriptors,
+    jyppx_ocv_stitching_image_features** features)
+{
+    return jyppx_ocv_stitching_image_features_create(image_index, image_width, image_height, keypoints, keypoint_count, descriptors, features);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_get_image_index(const jyppx_ocv_stitching_image_features* features,
+    int* image_index)
+{
+    return jyppx_ocv_stitching_image_features_get_image_index(features, image_index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_get_image_size(const jyppx_ocv_stitching_image_features* features,
+    int* image_width,
+    int* image_height)
+{
+    return jyppx_ocv_stitching_image_features_get_image_size(features, image_width, image_height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_get_keypoints_count(const jyppx_ocv_stitching_image_features* features,
+    int* keypoint_count)
+{
+    return jyppx_ocv_stitching_image_features_get_keypoints_count(features, keypoint_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_get_keypoints_fill(const jyppx_ocv_stitching_image_features* features,
+    jyppx_ocv_key_point* keypoints,
+    int keypoint_capacity,
+    int* keypoint_count)
+{
+    return jyppx_ocv_stitching_image_features_get_keypoints_fill(features, keypoints, keypoint_capacity, keypoint_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_image_features_release_handle(jyppx_ocv_stitching_image_features* features)
+{
+    jyppx_ocv_stitching_image_features_release_handle(features);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_set_image_index(jyppx_ocv_stitching_image_features* features,
+    int image_index)
+{
+    return jyppx_ocv_stitching_image_features_set_image_index(features, image_index);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_image_features_set_image_size(jyppx_ocv_stitching_image_features* features,
+    int image_width,
+    int image_height)
+{
+    return jyppx_ocv_stitching_image_features_set_image_size(features, image_width, image_height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_copy_homography(const jyppx_ocv_stitching_matches_info* matches_info,
+    jyppx_ocv_mat* homography)
+{
+    return jyppx_ocv_stitching_matches_info_copy_homography(matches_info, homography);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_create(jyppx_ocv_stitching_matches_info** matches_info)
+{
+    return jyppx_ocv_stitching_matches_info_create(matches_info);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_get_inliers_count(const jyppx_ocv_stitching_matches_info* matches_info,
+    int* inlier_count)
+{
+    return jyppx_ocv_stitching_matches_info_get_inliers_count(matches_info, inlier_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_get_inliers_fill(const jyppx_ocv_stitching_matches_info* matches_info,
+    unsigned char* inliers,
+    int inlier_capacity,
+    int* inlier_count)
+{
+    return jyppx_ocv_stitching_matches_info_get_inliers_fill(matches_info, inliers, inlier_capacity, inlier_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_get_matches_count(const jyppx_ocv_stitching_matches_info* matches_info,
+    int* match_count)
+{
+    return jyppx_ocv_stitching_matches_info_get_matches_count(matches_info, match_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_get_matches_fill(const jyppx_ocv_stitching_matches_info* matches_info,
+    jyppx_ocv_dmatch* matches,
+    int match_capacity,
+    int* match_count)
+{
+    return jyppx_ocv_stitching_matches_info_get_matches_fill(matches_info, matches, match_capacity, match_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_info_get_metadata(const jyppx_ocv_stitching_matches_info* matches_info,
+    int* source_image_index,
+    int* destination_image_index,
+    int* number_of_inliers,
+    double* confidence)
+{
+    return jyppx_ocv_stitching_matches_info_get_metadata(matches_info, source_image_index, destination_image_index, number_of_inliers, confidence);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_matches_info_release_handle(jyppx_ocv_stitching_matches_info* matches_info)
+{
+    jyppx_ocv_stitching_matches_info_release_handle(matches_info);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_normalize_using_weight_map(const jyppx_ocv_mat* weight,

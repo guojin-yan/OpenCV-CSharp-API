@@ -2,6 +2,7 @@
 
 #include "../core/mat_handle.h"
 #include "../error_state.h"
+#include "../features2d/feature_handles.h"
 #include "stitching_handles.h"
 
 #include <algorithm>
@@ -385,6 +386,218 @@ namespace
         {
             source[i].copyTo(opencv_csharp_native::mat_value(destination[i]));
         }
+    }
+
+    cv::KeyPoint to_cv_keypoint(const jyppx_ocv_key_point& keypoint)
+    {
+        return cv::KeyPoint(
+            keypoint.x,
+            keypoint.y,
+            keypoint.size,
+            keypoint.angle,
+            keypoint.response,
+            keypoint.octave,
+            keypoint.class_id);
+    }
+
+    jyppx_ocv_key_point from_cv_keypoint(const cv::KeyPoint& keypoint)
+    {
+        return jyppx_ocv_key_point{
+            keypoint.pt.x,
+            keypoint.pt.y,
+            keypoint.size,
+            keypoint.angle,
+            keypoint.response,
+            keypoint.octave,
+            keypoint.class_id};
+    }
+
+    jyppx_ocv_dmatch from_cv_dmatch(const cv::DMatch& match)
+    {
+        return jyppx_ocv_dmatch{match.queryIdx, match.trainIdx, match.imgIdx, match.distance};
+    }
+
+    int validate_image_features(
+        const char* api_name,
+        const jyppx_ocv_stitching_image_features* features,
+        const char* argument_name)
+    {
+        return features == nullptr
+            ? opencv_csharp_native::set_invalid_argument(api_name, argument_name)
+            : OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_matches_info(
+        const char* api_name,
+        const jyppx_ocv_stitching_matches_info* matches_info,
+        const char* argument_name)
+    {
+        return matches_info == nullptr
+            ? opencv_csharp_native::set_invalid_argument(api_name, argument_name)
+            : OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_features_matcher(
+        const char* api_name,
+        const jyppx_ocv_stitching_features_matcher* matcher)
+    {
+        if (matcher == nullptr || matcher->value.empty())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matcher");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_keypoints(
+        const char* api_name,
+        const jyppx_ocv_key_point* keypoints,
+        int keypoint_count)
+    {
+        if (keypoint_count < 0 || (keypoint_count > 0 && keypoints == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "keypoints");
+        }
+        for (int i = 0; i < keypoint_count; ++i)
+        {
+            if (!std::isfinite(keypoints[i].x) || !std::isfinite(keypoints[i].y) ||
+                !std::isfinite(keypoints[i].size) || !std::isfinite(keypoints[i].angle) ||
+                !std::isfinite(keypoints[i].response) || keypoints[i].size < 0.0f)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "keypoints");
+            }
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int get_feature_finder(
+        const char* api_name,
+        int finder_kind,
+        const void* finder_handle,
+        cv::Ptr<cv::Feature2D>& finder)
+    {
+        if (finder_handle == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "finder_handle");
+        }
+
+        switch (finder_kind)
+        {
+#if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES2D)
+        case 0:
+            finder = static_cast<const jyppx_ocv_features2d_orb*>(finder_handle)->value;
+            break;
+        case 1:
+            finder = static_cast<const jyppx_ocv_features2d_sift*>(finder_handle)->value;
+            break;
+        case 2:
+            finder = static_cast<const jyppx_ocv_features2d_fast*>(finder_handle)->value;
+            break;
+        case 3:
+            finder = static_cast<const jyppx_ocv_features2d_gftt*>(finder_handle)->value;
+            break;
+        case 4:
+            finder = static_cast<const jyppx_ocv_features2d_mser*>(finder_handle)->value;
+            break;
+        case 5:
+            finder = static_cast<const jyppx_ocv_features2d_simple_blob*>(finder_handle)->value;
+            break;
+        case 9:
+            finder = static_cast<const jyppx_ocv_features2d_affine*>(finder_handle)->value;
+            break;
+#endif
+#if defined(OPENCV_CSHARP_HAS_OPENCV_XFEATURES2D)
+        case 6:
+            finder = static_cast<const jyppx_ocv_features2d_brisk*>(finder_handle)->value;
+            break;
+        case 7:
+            finder = static_cast<const jyppx_ocv_features2d_kaze*>(finder_handle)->value;
+            break;
+        case 8:
+            finder = static_cast<const jyppx_ocv_features2d_akaze*>(finder_handle)->value;
+            break;
+#endif
+        default:
+            return opencv_csharp_native::set_invalid_argument(api_name, "finder_kind");
+        }
+
+        if (finder.empty())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "finder_handle");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_feature_descriptors(
+        const char* api_name,
+        const cv::detail::ImageFeatures& features,
+        const char* argument_name)
+    {
+        if (features.descriptors.empty())
+        {
+            return OPENCV_CSHARP_STATUS_OK;
+        }
+        if (features.descriptors.dims != 2 || features.descriptors.channels() != 1 ||
+            (features.descriptors.depth() != CV_8U && features.descriptors.depth() != CV_32F) ||
+            features.descriptors.rows != static_cast<int>(features.keypoints.size()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_feature_pair(
+        const char* api_name,
+        const cv::detail::ImageFeatures& first,
+        const cv::detail::ImageFeatures& second)
+    {
+        int status = validate_feature_descriptors(api_name, first, "first");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_feature_descriptors(api_name, second, "second");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (!first.descriptors.empty() && !second.descriptors.empty() &&
+            first.descriptors.type() != second.descriptors.type())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "descriptors");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int create_features_matcher_handle(
+        const char* api_name,
+        cv::Ptr<cv::detail::FeaturesMatcher> value,
+        jyppx_ocv_stitching_features_matcher** matcher)
+    {
+        if (value.empty())
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        auto* created = new (std::nothrow) jyppx_ocv_stitching_features_matcher();
+        if (created == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        created->value = std::move(value);
+        *matcher = created;
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_matcher_options(
+        const char* api_name,
+        int try_gpu,
+        float match_confidence,
+        int number_of_matches_threshold1,
+        int number_of_matches_threshold2,
+        double matches_confidence_threshold)
+    {
+        int status = validate_bool_int(api_name, try_gpu, "try_gpu");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (!std::isfinite(match_confidence) || match_confidence < 0.0f ||
+            number_of_matches_threshold1 < 0 || number_of_matches_threshold2 < 0 ||
+            !std::isfinite(matches_confidence_threshold))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matcher_options");
+        }
+        return OPENCV_CSHARP_STATUS_OK;
     }
 #endif
 }
@@ -2529,6 +2742,1027 @@ int jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu(
         copy_umat_vector_to_mats(native_pyramid, pyramid);
         return OPENCV_CSHARP_STATUS_OK;
 #else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_create(
+    int image_index,
+    int image_width,
+    int image_height,
+    const jyppx_ocv_key_point* keypoints,
+    int keypoint_count,
+    const jyppx_ocv_mat* descriptors,
+    jyppx_ocv_stitching_image_features** features)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "features");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *features = nullptr;
+        int status = validate_keypoints(api_name, keypoints, keypoint_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, descriptors, "descriptors");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (image_width < 0 || image_height < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "image_size");
+        }
+
+        std::unique_ptr<jyppx_ocv_stitching_image_features> created(
+            new (std::nothrow) jyppx_ocv_stitching_image_features());
+        if (!created)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        created->value.img_idx = image_index;
+        created->value.img_size = cv::Size(image_width, image_height);
+        created->value.keypoints.reserve(static_cast<size_t>(keypoint_count));
+        for (int i = 0; i < keypoint_count; ++i)
+        {
+            created->value.keypoints.push_back(to_cv_keypoint(keypoints[i]));
+        }
+        opencv_csharp_native::mat_value(descriptors).copyTo(created->value.descriptors);
+        status = validate_feature_descriptors(api_name, created->value, "descriptors");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *features = created.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)image_index;
+        (void)image_width;
+        (void)image_height;
+        (void)keypoints;
+        (void)keypoint_count;
+        (void)descriptors;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_stitching_image_features_release_handle(jyppx_ocv_stitching_image_features* features)
+{
+    delete features;
+}
+
+int jyppx_ocv_stitching_image_features_get_image_index(
+    const jyppx_ocv_stitching_image_features* features,
+    int* image_index)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_get_image_index";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr || image_index == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *image_index = features->value.img_idx;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_set_image_index(
+    jyppx_ocv_stitching_image_features* features,
+    int image_index)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_set_image_index";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "features");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        features->value.img_idx = image_index;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)image_index;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_get_image_size(
+    const jyppx_ocv_stitching_image_features* features,
+    int* image_width,
+    int* image_height)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_get_image_size";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr || image_width == nullptr || image_height == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *image_width = features->value.img_size.width;
+        *image_height = features->value.img_size.height;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_set_image_size(
+    jyppx_ocv_stitching_image_features* features,
+    int image_width,
+    int image_height)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_set_image_size";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "features");
+        }
+        if (image_width < 0 || image_height < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "image_size");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        features->value.img_size = cv::Size(image_width, image_height);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_get_keypoints_count(
+    const jyppx_ocv_stitching_image_features* features,
+    int* keypoint_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_get_keypoints_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr || keypoint_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (features->value.keypoints.size() > static_cast<size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "keypoints");
+        }
+        *keypoint_count = static_cast<int>(features->value.keypoints.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_get_keypoints_fill(
+    const jyppx_ocv_stitching_image_features* features,
+    jyppx_ocv_key_point* keypoints,
+    int keypoint_capacity,
+    int* keypoint_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_get_keypoints_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr || keypoint_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        const size_t required = features->value.keypoints.size();
+        if (required > static_cast<size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "keypoints");
+        }
+        *keypoint_count = static_cast<int>(required);
+        if (keypoint_capacity < 0 || static_cast<size_t>(keypoint_capacity) < required ||
+            (required > 0 && keypoints == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "keypoints");
+        }
+        for (size_t i = 0; i < required; ++i)
+        {
+            keypoints[i] = from_cv_keypoint(features->value.keypoints[i]);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)keypoints;
+        (void)keypoint_capacity;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_image_features_copy_descriptors(
+    const jyppx_ocv_stitching_image_features* features,
+    jyppx_ocv_mat* descriptors)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_image_features_copy_descriptors";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (features == nullptr || descriptors == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        features->value.descriptors.copyTo(opencv_csharp_native::mat_value(descriptors));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_compute_image_features(
+    int finder_kind,
+    const void* finder_handle,
+    const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* mask,
+    jyppx_ocv_stitching_image_features* features)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_compute_image_features";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        int status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_image_features(api_name, features, "features");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (opencv_csharp_native::mat_value(image).empty())
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "image");
+        }
+        if (mask != nullptr)
+        {
+            const cv::Mat& native_mask = opencv_csharp_native::mat_value(mask);
+            if (!native_mask.empty() &&
+                (native_mask.type() != CV_8UC1 || native_mask.size() != opencv_csharp_native::mat_value(image).size()))
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "mask");
+            }
+        }
+        cv::Ptr<cv::Feature2D> finder;
+        status = get_feature_finder(api_name, finder_kind, finder_handle, finder);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+        features->value = cv::detail::ImageFeatures();
+        cv::detail::computeImageFeatures(
+            finder,
+            opencv_csharp_native::mat_value(image),
+            features->value,
+            mask == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mask)));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)finder_kind;
+        (void)finder_handle;
+        (void)image;
+        (void)mask;
+        (void)features;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_compute_image_features_batch(
+    int finder_kind,
+    const void* finder_handle,
+    const jyppx_ocv_mat* const* images,
+    int image_count,
+    const jyppx_ocv_mat* const* masks,
+    int mask_count,
+    jyppx_ocv_stitching_image_features* const* features,
+    int feature_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_compute_image_features_batch";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        int status = validate_mat_array(api_name, images, image_count, "images");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_optional_masks(api_name, masks, mask_count, image_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (image_count <= 0 || feature_count != image_count || features == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+        }
+        for (int i = 0; i < image_count; ++i)
+        {
+            if (features[i] == nullptr || opencv_csharp_native::mat_value(images[i]).empty())
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+            }
+            for (int j = 0; j < i; ++j)
+            {
+                if (features[i] == features[j])
+                {
+                    return opencv_csharp_native::set_invalid_argument(api_name, "features");
+                }
+            }
+            if (mask_count > 0)
+            {
+                const cv::Mat& native_mask = opencv_csharp_native::mat_value(masks[i]);
+                if (!native_mask.empty() &&
+                    (native_mask.type() != CV_8UC1 || native_mask.size() != opencv_csharp_native::mat_value(images[i]).size()))
+                {
+                    return opencv_csharp_native::set_invalid_argument(api_name, "masks");
+                }
+            }
+        }
+        cv::Ptr<cv::Feature2D> finder;
+        status = get_feature_finder(api_name, finder_kind, finder_handle, finder);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+        for (int i = 0; i < feature_count; ++i)
+        {
+            features[i]->value = cv::detail::ImageFeatures();
+        }
+        std::vector<cv::detail::ImageFeatures> native_features;
+        const std::vector<cv::Mat> native_images = to_mat_vector(images, image_count);
+        if (mask_count == 0)
+        {
+            cv::detail::computeImageFeatures(finder, native_images, native_features);
+        }
+        else
+        {
+            cv::detail::computeImageFeatures(finder, native_images, native_features, to_mat_vector(masks, mask_count));
+        }
+        if (native_features.size() != static_cast<size_t>(feature_count))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "features");
+        }
+        for (int i = 0; i < feature_count; ++i)
+        {
+            features[i]->value = native_features[static_cast<size_t>(i)];
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)finder_kind;
+        (void)finder_handle;
+        (void)images;
+        (void)image_count;
+        (void)masks;
+        (void)mask_count;
+        (void)features;
+        (void)feature_count;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_matches_info_create(jyppx_ocv_stitching_matches_info** matches_info)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matches_info");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *matches_info = nullptr;
+        auto* created = new (std::nothrow) jyppx_ocv_stitching_matches_info();
+        if (created == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+        *matches_info = created;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_stitching_matches_info_release_handle(jyppx_ocv_stitching_matches_info* matches_info)
+{
+    delete matches_info;
+}
+
+int jyppx_ocv_stitching_matches_info_get_metadata(
+    const jyppx_ocv_stitching_matches_info* matches_info,
+    int* source_image_index,
+    int* destination_image_index,
+    int* number_of_inliers,
+    double* confidence)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_get_metadata";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr || source_image_index == nullptr || destination_image_index == nullptr ||
+            number_of_inliers == nullptr || confidence == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *source_image_index = matches_info->value.src_img_idx;
+        *destination_image_index = matches_info->value.dst_img_idx;
+        *number_of_inliers = matches_info->value.num_inliers;
+        *confidence = matches_info->value.confidence;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_matches_info_copy_homography(
+    const jyppx_ocv_stitching_matches_info* matches_info,
+    jyppx_ocv_mat* homography)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_copy_homography";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr || homography == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        matches_info->value.H.copyTo(opencv_csharp_native::mat_value(homography));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_matches_info_get_matches_count(
+    const jyppx_ocv_stitching_matches_info* matches_info,
+    int* match_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_get_matches_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr || match_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (matches_info->value.matches.size() > static_cast<size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matches");
+        }
+        *match_count = static_cast<int>(matches_info->value.matches.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_matches_info_get_matches_fill(
+    const jyppx_ocv_stitching_matches_info* matches_info,
+    jyppx_ocv_dmatch* matches,
+    int match_capacity,
+    int* match_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_get_matches_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr || match_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        const size_t required = matches_info->value.matches.size();
+        if (required > static_cast<size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matches");
+        }
+        *match_count = static_cast<int>(required);
+        if (match_capacity < 0 || static_cast<size_t>(match_capacity) < required ||
+            (required > 0 && matches == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matches");
+        }
+        for (size_t i = 0; i < required; ++i)
+        {
+            matches[i] = from_cv_dmatch(matches_info->value.matches[i]);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)matches;
+        (void)match_capacity;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_matches_info_get_inliers_count(
+    const jyppx_ocv_stitching_matches_info* matches_info,
+    int* inlier_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_get_inliers_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr || inlier_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (matches_info->value.inliers_mask.size() > static_cast<size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "inliers");
+        }
+        *inlier_count = static_cast<int>(matches_info->value.inliers_mask.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_matches_info_get_inliers_fill(
+    const jyppx_ocv_stitching_matches_info* matches_info,
+    unsigned char* inliers,
+    int inlier_capacity,
+    int* inlier_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_matches_info_get_inliers_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matches_info == nullptr || inlier_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        const size_t required = matches_info->value.inliers_mask.size();
+        if (required > static_cast<size_t>(std::numeric_limits<int>::max()))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "inliers");
+        }
+        *inlier_count = static_cast<int>(required);
+        if (inlier_capacity < 0 || static_cast<size_t>(inlier_capacity) < required ||
+            (required > 0 && inliers == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "inliers");
+        }
+        if (required > 0)
+        {
+            std::memcpy(inliers, matches_info->value.inliers_mask.data(), required);
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)inliers;
+        (void)inlier_capacity;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest(
+    int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    int number_of_matches_threshold2,
+    double matches_confidence_threshold,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matcher == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matcher");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *matcher = nullptr;
+        int status = validate_matcher_options(
+            api_name, try_gpu, match_confidence, number_of_matches_threshold1,
+            number_of_matches_threshold2, matches_confidence_threshold);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        return create_features_matcher_handle(
+            api_name,
+            cv::makePtr<cv::detail::BestOf2NearestMatcher>(
+                try_gpu != 0, match_confidence, number_of_matches_threshold1,
+                number_of_matches_threshold2, matches_confidence_threshold),
+            matcher);
+#else
+        (void)try_gpu;
+        (void)match_confidence;
+        (void)number_of_matches_threshold1;
+        (void)number_of_matches_threshold2;
+        (void)matches_confidence_threshold;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest(
+    int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    int number_of_matches_threshold2,
+    double matches_confidence_threshold,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matcher == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matcher");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *matcher = nullptr;
+        int status = validate_matcher_options(
+            api_name, try_gpu, match_confidence, number_of_matches_threshold1,
+            number_of_matches_threshold2, matches_confidence_threshold);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        return create_features_matcher_handle(
+            api_name,
+            cv::detail::BestOf2NearestMatcher::create(
+                try_gpu != 0, match_confidence, number_of_matches_threshold1,
+                number_of_matches_threshold2, matches_confidence_threshold),
+            matcher);
+#else
+        (void)try_gpu;
+        (void)match_confidence;
+        (void)number_of_matches_threshold1;
+        (void)number_of_matches_threshold2;
+        (void)matches_confidence_threshold;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_create_range(
+    int range_width,
+    int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    int number_of_matches_threshold2,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_create_range";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matcher == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matcher");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *matcher = nullptr;
+        int status = validate_matcher_options(
+            api_name, try_gpu, match_confidence, number_of_matches_threshold1,
+            number_of_matches_threshold2, 3.0);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (range_width <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "range_width");
+        }
+        return create_features_matcher_handle(
+            api_name,
+            cv::makePtr<cv::detail::BestOf2NearestRangeMatcher>(
+                range_width, try_gpu != 0, match_confidence,
+                number_of_matches_threshold1, number_of_matches_threshold2),
+            matcher);
+#else
+        (void)range_width;
+        (void)try_gpu;
+        (void)match_confidence;
+        (void)number_of_matches_threshold1;
+        (void)number_of_matches_threshold2;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_create_affine(
+    int full_affine,
+    int try_gpu,
+    float match_confidence,
+    int number_of_matches_threshold1,
+    jyppx_ocv_stitching_features_matcher** matcher)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_create_affine";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matcher == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "matcher");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *matcher = nullptr;
+        int status = validate_bool_int(api_name, full_affine, "full_affine");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_matcher_options(
+            api_name, try_gpu, match_confidence, number_of_matches_threshold1,
+            number_of_matches_threshold1, 3.0);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        return create_features_matcher_handle(
+            api_name,
+            cv::makePtr<cv::detail::AffineBestOf2NearestMatcher>(
+                full_affine != 0, try_gpu != 0, match_confidence, number_of_matches_threshold1),
+            matcher);
+#else
+        (void)full_affine;
+        (void)try_gpu;
+        (void)match_confidence;
+        (void)number_of_matches_threshold1;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_stitching_features_matcher_release_handle(jyppx_ocv_stitching_features_matcher* matcher)
+{
+    delete matcher;
+}
+
+int jyppx_ocv_stitching_features_matcher_match_pair(
+    jyppx_ocv_stitching_features_matcher* matcher,
+    const jyppx_ocv_stitching_image_features* first,
+    const jyppx_ocv_stitching_image_features* second,
+    jyppx_ocv_stitching_matches_info* matches_info)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_match_pair";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        int status = validate_features_matcher(api_name, matcher);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_image_features(api_name, first, "first");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_image_features(api_name, second, "second");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_matches_info(api_name, matches_info, "matches_info");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        matches_info->value = cv::detail::MatchesInfo();
+        status = validate_feature_pair(api_name, first->value, second->value);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+
+        cv::detail::MatchesInfo result;
+        (*matcher->value)(first->value, second->value, result);
+        matches_info->value = result;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)matcher;
+        (void)first;
+        (void)second;
+        (void)matches_info;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_match_batch(
+    jyppx_ocv_stitching_features_matcher* matcher,
+    const jyppx_ocv_stitching_image_features* const* features,
+    int feature_count,
+    const jyppx_ocv_mat* mask,
+    jyppx_ocv_stitching_matches_info* const* pairwise_matches,
+    int pairwise_match_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_match_batch";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        int status = validate_features_matcher(api_name, matcher);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (feature_count <= 0 || features == nullptr || pairwise_matches == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+        }
+        const std::int64_t required64 = static_cast<std::int64_t>(feature_count) * feature_count;
+        if (required64 > std::numeric_limits<int>::max() || pairwise_match_count != static_cast<int>(required64))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "pairwise_matches");
+        }
+        for (int i = 0; i < feature_count; ++i)
+        {
+            if (features[i] == nullptr)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "features");
+            }
+            status = validate_feature_descriptors(api_name, features[i]->value, "features");
+            if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        }
+        for (int i = 0; i < pairwise_match_count; ++i)
+        {
+            if (pairwise_matches[i] == nullptr)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "pairwise_matches");
+            }
+            for (int j = 0; j < i; ++j)
+            {
+                if (pairwise_matches[i] == pairwise_matches[j])
+                {
+                    return opencv_csharp_native::set_invalid_argument(api_name, "pairwise_matches");
+                }
+            }
+        }
+
+        cv::UMat native_mask;
+        if (mask != nullptr)
+        {
+            const cv::Mat& native_mask_mat = opencv_csharp_native::mat_value(mask);
+            if (native_mask_mat.type() != CV_8UC1 || native_mask_mat.rows != feature_count ||
+                native_mask_mat.cols != feature_count)
+            {
+                return opencv_csharp_native::set_invalid_argument(api_name, "mask");
+            }
+            native_mask = native_mask_mat.getUMat(cv::ACCESS_READ);
+        }
+
+        for (int i = 0; i < pairwise_match_count; ++i)
+        {
+            pairwise_matches[i]->value = cv::detail::MatchesInfo();
+        }
+        std::vector<cv::detail::ImageFeatures> native_features;
+        native_features.reserve(static_cast<size_t>(feature_count));
+        for (int i = 0; i < feature_count; ++i)
+        {
+            native_features.push_back(features[i]->value);
+        }
+        std::vector<cv::detail::MatchesInfo> native_matches;
+        (*matcher->value)(native_features, native_matches, native_mask);
+        if (native_matches.size() != static_cast<size_t>(pairwise_match_count))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "pairwise_matches");
+        }
+        for (int i = 0; i < pairwise_match_count; ++i)
+        {
+            pairwise_matches[i]->value = native_matches[static_cast<size_t>(i)];
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)matcher;
+        (void)features;
+        (void)feature_count;
+        (void)mask;
+        (void)pairwise_matches;
+        (void)pairwise_match_count;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_is_thread_safe(
+    const jyppx_ocv_stitching_features_matcher* matcher,
+    int* is_thread_safe)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_is_thread_safe";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (matcher == nullptr || is_thread_safe == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        int status = validate_features_matcher(api_name, matcher);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        *is_thread_safe = matcher->value->isThreadSafe() ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_features_matcher_collect_garbage(
+    jyppx_ocv_stitching_features_matcher* matcher)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_features_matcher_collect_garbage";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        int status = validate_features_matcher(api_name, matcher);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        matcher->value->collectGarbage();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)matcher;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

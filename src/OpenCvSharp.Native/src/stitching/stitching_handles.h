@@ -3,6 +3,7 @@
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
 #include <opencv2/stitching.hpp>
 #include <opencv2/stitching/detail/blenders.hpp>
+#include <opencv2/stitching/detail/matchers.hpp>
 #include <opencv2/stitching/warpers.hpp>
 #include <memory>
 #endif
@@ -42,6 +43,33 @@ struct jyppx_ocv_stitching_blender
     int kind = 0;
     bool prepared = false;
     cv::Rect prepared_roi;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_image_features
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::detail::ImageFeatures value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_matches_info
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::detail::MatchesInfo value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_features_matcher
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::Ptr<cv::detail::FeaturesMatcher> value;
 #else
     int placeholder;
 #endif

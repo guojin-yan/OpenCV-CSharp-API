@@ -750,6 +750,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunExposureCompensationSummary());
                     Console.WriteLine(RunPyRotationWarperSummary());
                     Console.WriteLine(RunBlenderSummary());
+                    Console.WriteLine(RunFeaturesMatcherSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -4573,7 +4574,8 @@ namespace ConsoleSamples
                         + ", workScale=" + stitcher.WorkScale
                         + ", " + RunExposureCompensationSummary()
                         + ", " + RunPyRotationWarperSummary()
-                        + ", " + RunBlenderSummary();
+                        + ", " + RunBlenderSummary()
+                        + ", " + RunFeaturesMatcherSummary();
                 }
                 finally
                 {
@@ -4652,6 +4654,39 @@ namespace ConsoleSamples
                 finally
                 {
                     DisposeAll(pyramid);
+                }
+            }
+        }
+
+        private static string RunFeaturesMatcherSummary()
+        {
+            using (var first = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0)))
+            using (var second = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0)))
+            using (ORB orb = ORB.Create(maxFeatures: 120))
+            using (var matcher = new OpenCvSharp.Stitching.BestOf2NearestMatcher(matchConfidence: 0.8f))
+            {
+                ImgProcCv2.Rectangle(first, new Rect(12, 12, 60, 60), new Scalar(255), 3);
+                ImgProcCv2.Line(first, new Point(8, 84), new Point(84, 8), new Scalar(200), 2);
+                ImgProcCv2.Circle(first, new Point(68, 68), 12, new Scalar(180), 2);
+                ImgProcCv2.Rectangle(second, new Rect(16, 15, 60, 60), new Scalar(255), 3);
+                ImgProcCv2.Line(second, new Point(12, 87), new Point(88, 11), new Scalar(200), 2);
+                ImgProcCv2.Circle(second, new Point(72, 71), 12, new Scalar(180), 2);
+
+                OpenCvSharp.Stitching.ImageFeatures[] features = OpenCvSharp.Stitching.ImageFeatures.Compute(
+                    orb, new[] { first, second });
+                OpenCvSharp.Stitching.MatchesInfo[] matches = Array.Empty<OpenCvSharp.Stitching.MatchesInfo>();
+                try
+                {
+                    matches = matcher.Match(features);
+                    return "featureKeypoints=" + features[0].Keypoints.Length + "," + features[1].Keypoints.Length
+                        + ", pairwise=" + matches.Length
+                        + ", forwardMatches=" + matches[1].Matches.Length
+                        + ", inliers=" + matches[1].NumberOfInliers;
+                }
+                finally
+                {
+                    foreach (OpenCvSharp.Stitching.MatchesInfo match in matches) match.Dispose();
+                    foreach (OpenCvSharp.Stitching.ImageFeatures feature in features) feature.Dispose();
                 }
             }
         }

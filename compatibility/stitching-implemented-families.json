@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 13,
-  "managedPublicMemberAdditionCount": 60,
-  "nativeEntrypointAdditionCount": 52,
+  "managedPublicTypeAdditionCount": 6,
+  "managedPublicMemberAdditionCount": 31,
+  "nativeEntrypointAdditionCount": 28,
   "families": [
     {
       "id": "stitching-detail-exposure-compensation-completion",
@@ -1136,6 +1136,216 @@
             "MEMBER|OpenCvSharp.Stitching.Blender|method|public;static|System.Void RestoreImageFromLaplacePyramidGpu(OpenCvSharp.Core.Mat[] pyramid)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "stitching-detail-feature-matchers-completion",
+      "surface": "detail-matchers",
+      "rationale": "Closes the ordinary offline ImageFeatures, MatchesInfo, BestOf2Nearest, range, and affine matcher rows with copied descriptors/transforms, exact count/fill collections, Feature2D bridge, N-squared batch layout, mask validation, native smoke, and both-framework tests.",
+      "declarations": [
+        {
+          "ordinal": 122,
+          "upstreamIdentity": "cv.detail.ImageFeatures.getKeypoints()-\u003Estd::vector\u003CKeyPoint\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_image_features_get_keypoints_count",
+            "jyppx_ocv_stitching_image_features_get_keypoints_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ImageFeatures|property|instance;get:public|OpenCvSharp.Features2D.KeyPoint[] Keypoints"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 123,
+          "upstreamIdentity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];vector_Mat images;vector_ImageFeatures features[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_compute_image_features_batch"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ImageFeatures|method|public;static|OpenCvSharp.Stitching.ImageFeatures[] Compute(OpenCvSharp.Features2D.Feature2D finder,OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[]? masks=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 124,
+          "upstreamIdentity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];Mat image;ImageFeatures features[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_compute_image_features"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ImageFeatures|method|public;static|OpenCvSharp.Stitching.ImageFeatures Compute(OpenCvSharp.Features2D.Feature2D finder,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 126,
+          "upstreamIdentity": "cv.detail.MatchesInfo.getMatches()-\u003Estd::vector\u003CDMatch\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_matches_info_get_matches_count",
+            "jyppx_ocv_stitching_matches_info_get_matches_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.MatchesInfo|property|instance;get:public|OpenCvSharp.Features2D.DMatch[] Matches"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 127,
+          "upstreamIdentity": "cv.detail.MatchesInfo.getInliers()-\u003Estd::vector\u003Cuchar\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_matches_info_get_inliers_count",
+            "jyppx_ocv_stitching_matches_info_get_inliers_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.MatchesInfo|property|instance;get:public|System.Byte[] Inliers"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 129,
+          "upstreamIdentity": "cv.detail.FeaturesMatcher.operator ()(ImageFeatures features1[/C,/Ref];ImageFeatures features2[/C,/Ref];MatchesInfo matches_info[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_match_pair"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|OpenCvSharp.Stitching.MatchesInfo Match(OpenCvSharp.Stitching.ImageFeatures first,OpenCvSharp.Stitching.ImageFeatures second)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 130,
+          "upstreamIdentity": "cv.detail.FeaturesMatcher.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/O,/Ref];UMat mask=cv::UMat()[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_match_batch"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|OpenCvSharp.Stitching.MatchesInfo[] Match(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Core.Mat? mask=null)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 131,
+          "upstreamIdentity": "cv.detail.FeaturesMatcher.isThreadSafe()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_is_thread_safe"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|property|instance;get:public|System.Boolean IsThreadSafe"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 132,
+          "upstreamIdentity": "cv.detail.FeaturesMatcher.collectGarbage()-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_collect_garbage"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|System.Void CollectGarbage()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 134,
+          "upstreamIdentity": "cv.detail.BestOf2NearestMatcher.BestOf2NearestMatcher(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest",
+            "jyppx_ocv_stitching_features_matcher_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6,System.Double matchesConfidenceThreshold=3)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 135,
+          "upstreamIdentity": "cv.detail.BestOf2NearestMatcher.collectGarbage()-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_collect_garbage"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|method|public;instance|System.Void CollectGarbage()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 136,
+          "upstreamIdentity": "cv.detail.BestOf2NearestMatcher.create(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)-\u003EPtr\u003CBestOf2NearestMatcher\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest",
+            "jyppx_ocv_stitching_features_matcher_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BestOf2NearestMatcher|method|public;static|OpenCvSharp.Stitching.BestOf2NearestMatcher Create(System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6,System.Double matchesConfidenceThreshold=3)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 138,
+          "upstreamIdentity": "cv.detail.BestOf2NearestRangeMatcher.BestOf2NearestRangeMatcher(int range_width=5;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_create_range",
+            "jyppx_ocv_stitching_features_matcher_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BestOf2NearestRangeMatcher|constructor|public;instance|.ctor(System.Int32 rangeWidth=5,System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6,System.Int32 numberOfMatchesThreshold2=6)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 140,
+          "upstreamIdentity": "cv.detail.AffineBestOf2NearestMatcher.AffineBestOf2NearestMatcher(bool full_affine=false;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_features_matcher_create_affine",
+            "jyppx_ocv_stitching_features_matcher_release_handle"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.AffineBestOf2NearestMatcher|constructor|public;instance|.ctor(System.Boolean fullAffine=false,System.Boolean tryGpu=false,System.Single matchConfidence=0.3,System.Int32 numberOfMatchesThreshold1=6)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
           "sample": "samples/ConsoleSamples/Program.cs",
           "guide": "docs/articles/stitching-structured-parity-guide.md"

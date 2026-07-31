@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace OpenCvSharp.Internal.Interop
 {
-    internal static partial class NativeMethods
+    internal static unsafe partial class NativeMethods
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct StitchingCameraParamsNative
@@ -240,6 +240,90 @@ namespace OpenCvSharp.Internal.Interop
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu")]
         internal static extern int StitchingRestoreImageFromLaplacePyramidGpu(IntPtr[] pyramid, int pyramidCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_create")]
+        internal static extern int StitchingImageFeaturesCreate(int imageIndex, int imageWidth, int imageHeight, NativeKeyPoint* keypoints, int keypointCount, IntPtr descriptors, out IntPtr features);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_release_handle")]
+        internal static extern void StitchingImageFeaturesReleaseHandle(IntPtr features);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_image_index")]
+        internal static extern int StitchingImageFeaturesGetImageIndex(IntPtr features, out int imageIndex);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_set_image_index")]
+        internal static extern int StitchingImageFeaturesSetImageIndex(IntPtr features, int imageIndex);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_image_size")]
+        internal static extern int StitchingImageFeaturesGetImageSize(IntPtr features, out int imageWidth, out int imageHeight);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_set_image_size")]
+        internal static extern int StitchingImageFeaturesSetImageSize(IntPtr features, int imageWidth, int imageHeight);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_keypoints_count")]
+        internal static extern int StitchingImageFeaturesGetKeypointsCount(IntPtr features, out int keypointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_keypoints_fill")]
+        internal static extern int StitchingImageFeaturesGetKeypointsFill(IntPtr features, NativeKeyPoint* keypoints, int keypointCapacity, out int keypointCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_copy_descriptors")]
+        internal static extern int StitchingImageFeaturesCopyDescriptors(IntPtr features, IntPtr descriptors);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_compute_image_features")]
+        internal static extern int StitchingComputeImageFeatures(int finderKind, IntPtr finderHandle, IntPtr image, IntPtr mask, IntPtr features);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_compute_image_features_batch")]
+        internal static extern int StitchingComputeImageFeaturesBatch(int finderKind, IntPtr finderHandle, IntPtr[] images, int imageCount, IntPtr[] masks, int maskCount, IntPtr[] features, int featureCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_create")]
+        internal static extern int StitchingMatchesInfoCreate(out IntPtr matchesInfo);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_release_handle")]
+        internal static extern void StitchingMatchesInfoReleaseHandle(IntPtr matchesInfo);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_metadata")]
+        internal static extern int StitchingMatchesInfoGetMetadata(IntPtr matchesInfo, out int sourceImageIndex, out int destinationImageIndex, out int numberOfInliers, out double confidence);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_copy_homography")]
+        internal static extern int StitchingMatchesInfoCopyHomography(IntPtr matchesInfo, IntPtr homography);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_matches_count")]
+        internal static extern int StitchingMatchesInfoGetMatchesCount(IntPtr matchesInfo, out int matchCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_matches_fill")]
+        internal static extern int StitchingMatchesInfoGetMatchesFill(IntPtr matchesInfo, NativeDMatch* matches, int matchCapacity, out int matchCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_inliers_count")]
+        internal static extern int StitchingMatchesInfoGetInliersCount(IntPtr matchesInfo, out int inlierCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_inliers_fill")]
+        internal static extern int StitchingMatchesInfoGetInliersFill(IntPtr matchesInfo, byte* inliers, int inlierCapacity, out int inlierCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest")]
+        internal static extern int StitchingFeaturesMatcherCreateBestOfTwoNearest(int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, int numberOfMatchesThreshold2, double matchesConfidenceThreshold, out IntPtr matcher);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest")]
+        internal static extern int StitchingFeaturesMatcherFactoryBestOfTwoNearest(int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, int numberOfMatchesThreshold2, double matchesConfidenceThreshold, out IntPtr matcher);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_create_range")]
+        internal static extern int StitchingFeaturesMatcherCreateRange(int rangeWidth, int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, int numberOfMatchesThreshold2, out IntPtr matcher);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_create_affine")]
+        internal static extern int StitchingFeaturesMatcherCreateAffine(int fullAffine, int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, out IntPtr matcher);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_release_handle")]
+        internal static extern void StitchingFeaturesMatcherReleaseHandle(IntPtr matcher);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_match_pair")]
+        internal static extern int StitchingFeaturesMatcherMatchPair(IntPtr matcher, IntPtr first, IntPtr second, IntPtr matchesInfo);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_match_batch")]
+        internal static extern int StitchingFeaturesMatcherMatchBatch(IntPtr matcher, IntPtr[] features, int featureCount, IntPtr mask, IntPtr[] pairwiseMatches, int pairwiseMatchCount);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_is_thread_safe")]
+        internal static extern int StitchingFeaturesMatcherIsThreadSafe(IntPtr matcher, out int isThreadSafe);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_collect_garbage")]
+        internal static extern int StitchingFeaturesMatcherCollectGarbage(IntPtr matcher);
     }
 }
 #endif

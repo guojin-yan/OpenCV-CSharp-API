@@ -23,6 +23,7 @@
 #include "open_cv_sharp/version.h"
 
 #include <cmath>
+#include <cstdint>
 #include <cstring>
 #include <cstdio>
 #include <limits>
@@ -188,6 +189,33 @@ namespace
         {
             jyppx_ocv_features2d_ann_index_release(value);
         }
+    };
+
+    struct NativeStitchingImageFeaturesHandle
+    {
+        jyppx_ocv_stitching_image_features* value = nullptr;
+        ~NativeStitchingImageFeaturesHandle() { jyppx_ocv_stitching_image_features_release_handle(value); }
+        jyppx_ocv_stitching_image_features** out() noexcept { return &value; }
+    };
+
+    struct NativeStitchingMatchesInfoHandle
+    {
+        jyppx_ocv_stitching_matches_info* value = nullptr;
+        ~NativeStitchingMatchesInfoHandle() { jyppx_ocv_stitching_matches_info_release_handle(value); }
+        jyppx_ocv_stitching_matches_info** out() noexcept { return &value; }
+    };
+
+    struct NativeStitchingFeaturesMatcherHandle
+    {
+        jyppx_ocv_stitching_features_matcher* value = nullptr;
+        ~NativeStitchingFeaturesMatcherHandle() { jyppx_ocv_stitching_features_matcher_release_handle(value); }
+        jyppx_ocv_stitching_features_matcher** out() noexcept { return &value; }
+    };
+
+    struct NativeOrbHandle
+    {
+        jyppx_ocv_features2d_orb* value = nullptr;
+        ~NativeOrbHandle() { jyppx_ocv_features2d_orb_release(value); }
     };
 
     struct NativeAlignMtbHandle
@@ -4619,6 +4647,177 @@ namespace
         cleanup();
         return 0;
     }
+
+    int run_stitching_features_matcher_smoke()
+    {
+        NativeMatHandle descriptors;
+        NativeMatHandle empty;
+        NativeMatHandle homography;
+        NativeMatHandle image;
+        NativeMatHandle bad_mask;
+        NativeMatHandle pair_mask;
+        if (jyppx_ocv_mat_create_with_scalar(8, 4, 5, 0.0, 0.0, 0.0, 0.0, descriptors.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(empty.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_empty(homography.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(96, 96, 0, 0.0, 0.0, 0.0, 0.0, image.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(2, 3, 0, 255.0, 0.0, 0.0, 0.0, bad_mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_create_with_scalar(2, 2, 0, 0.0, 0.0, 0.0, 0.0, pair_mask.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 910;
+        }
+
+        unsigned char* descriptor_bytes = nullptr;
+        unsigned char* image_bytes = nullptr;
+        unsigned char* mask_bytes = nullptr;
+        if (jyppx_ocv_mat_data(descriptors.get(), &descriptor_bytes) != OPENCV_CSHARP_STATUS_OK || descriptor_bytes == nullptr ||
+            jyppx_ocv_mat_data(image.get(), &image_bytes) != OPENCV_CSHARP_STATUS_OK || image_bytes == nullptr ||
+            jyppx_ocv_mat_data(pair_mask.get(), &mask_bytes) != OPENCV_CSHARP_STATUS_OK || mask_bytes == nullptr)
+        {
+            return 911;
+        }
+
+        float* descriptor_values = reinterpret_cast<float*>(descriptor_bytes);
+        for (int i = 0; i < 8; ++i)
+        {
+            descriptor_values[i * 4] = static_cast<float>(i);
+            descriptor_values[i * 4 + 1] = static_cast<float>(i * i);
+            descriptor_values[i * 4 + 2] = static_cast<float>((i % 3) * 10);
+            descriptor_values[i * 4 + 3] = static_cast<float>(i) * 0.5f;
+        }
+        for (int y = 12; y < 84; ++y)
+        {
+            for (int x = 12; x < 84; ++x)
+            {
+                if (x < 18 || x > 77 || y < 18 || y > 77 || x == y || x + y == 95)
+                {
+                    image_bytes[y * 96 + x] = 255;
+                }
+            }
+        }
+        mask_bytes[1] = 255;
+
+        jyppx_ocv_key_point first_keypoints[8] = {};
+        jyppx_ocv_key_point second_keypoints[8] = {};
+        const float coordinates[16] = { 10, 10, 30, 10, 50, 10, 10, 30, 30, 30, 50, 30, 20, 50, 40, 50 };
+        for (int i = 0; i < 8; ++i)
+        {
+            first_keypoints[i] = jyppx_ocv_key_point{ coordinates[i * 2], coordinates[i * 2 + 1], 1.0f, -1.0f, 0.0f, 0, -1 };
+            second_keypoints[i] = first_keypoints[i];
+            second_keypoints[i].x += 5.0f;
+            second_keypoints[i].y += 3.0f;
+        }
+
+        NativeStitchingImageFeaturesHandle first;
+        NativeStitchingImageFeaturesHandle second;
+        NativeStitchingImageFeaturesHandle computed_first;
+        NativeStitchingImageFeaturesHandle computed_second;
+        if (jyppx_ocv_stitching_image_features_create(10, 100, 80, first_keypoints, 8, descriptors.get(), first.out()) != OPENCV_CSHARP_STATUS_OK || first.value == nullptr ||
+            jyppx_ocv_stitching_image_features_create(20, 100, 80, second_keypoints, 8, descriptors.get(), second.out()) != OPENCV_CSHARP_STATUS_OK || second.value == nullptr ||
+            jyppx_ocv_stitching_image_features_create(-1, 0, 0, nullptr, 0, empty.get(), computed_first.out()) != OPENCV_CSHARP_STATUS_OK || computed_first.value == nullptr ||
+            jyppx_ocv_stitching_image_features_create(-1, 0, 0, nullptr, 0, empty.get(), computed_second.out()) != OPENCV_CSHARP_STATUS_OK || computed_second.value == nullptr)
+        {
+            return 912;
+        }
+
+        int image_index = 0;
+        int image_width = 0;
+        int image_height = 0;
+        int keypoint_count = 0;
+        jyppx_ocv_key_point copied_keypoints[8] = {};
+        if (jyppx_ocv_stitching_image_features_get_image_index(first.value, &image_index) != OPENCV_CSHARP_STATUS_OK || image_index != 10 ||
+            jyppx_ocv_stitching_image_features_set_image_index(first.value, 11) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_image_features_get_image_size(first.value, &image_width, &image_height) != OPENCV_CSHARP_STATUS_OK || image_width != 100 || image_height != 80 ||
+            jyppx_ocv_stitching_image_features_set_image_size(first.value, 120, 90) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_image_features_get_keypoints_count(first.value, &keypoint_count) != OPENCV_CSHARP_STATUS_OK || keypoint_count != 8 ||
+            jyppx_ocv_stitching_image_features_get_keypoints_fill(first.value, copied_keypoints, 7, &keypoint_count) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT || keypoint_count != 8 ||
+            jyppx_ocv_stitching_image_features_get_keypoints_fill(first.value, copied_keypoints, 8, &keypoint_count) != OPENCV_CSHARP_STATUS_OK || copied_keypoints[0].x != 10.0f ||
+            jyppx_ocv_stitching_image_features_copy_descriptors(first.value, empty.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 913;
+        }
+
+        NativeStitchingFeaturesMatcherHandle matcher;
+        NativeStitchingFeaturesMatcherHandle factory;
+        NativeStitchingFeaturesMatcherHandle range;
+        NativeStitchingFeaturesMatcherHandle affine;
+        if (jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest(0, 0.8f, 6, 6, 3.0, matcher.out()) != OPENCV_CSHARP_STATUS_OK || matcher.value == nullptr ||
+            jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest(1, 0.8f, 6, 6, 3.0, factory.out()) != OPENCV_CSHARP_STATUS_OK || factory.value == nullptr ||
+            jyppx_ocv_stitching_features_matcher_create_range(1, 0, 0.8f, 6, 6, range.out()) != OPENCV_CSHARP_STATUS_OK || range.value == nullptr ||
+            jyppx_ocv_stitching_features_matcher_create_affine(1, 0, 0.8f, 6, affine.out()) != OPENCV_CSHARP_STATUS_OK || affine.value == nullptr)
+        {
+            return 914;
+        }
+
+        NativeStitchingMatchesInfoHandle pair;
+        if (jyppx_ocv_stitching_matches_info_create(pair.out()) != OPENCV_CSHARP_STATUS_OK || pair.value == nullptr ||
+            jyppx_ocv_stitching_features_matcher_match_pair(matcher.value, first.value, second.value, pair.value) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 915;
+        }
+
+        int source_index = 0;
+        int destination_index = 0;
+        int number_of_inliers = 0;
+        double confidence = 0.0;
+        int match_count = 0;
+        int inlier_count = 0;
+        jyppx_ocv_dmatch matches[8] = {};
+        unsigned char inliers[8] = {};
+        int homography_rows = 0;
+        int homography_cols = 0;
+        if (jyppx_ocv_stitching_matches_info_get_metadata(pair.value, &source_index, &destination_index, &number_of_inliers, &confidence) != OPENCV_CSHARP_STATUS_OK || number_of_inliers != 8 ||
+            jyppx_ocv_stitching_matches_info_get_matches_count(pair.value, &match_count) != OPENCV_CSHARP_STATUS_OK || match_count != 8 ||
+            jyppx_ocv_stitching_matches_info_get_matches_fill(pair.value, matches, 7, &match_count) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT || match_count != 8 ||
+            jyppx_ocv_stitching_matches_info_get_matches_fill(pair.value, matches, 8, &match_count) != OPENCV_CSHARP_STATUS_OK || matches[0].query_idx != 0 ||
+            jyppx_ocv_stitching_matches_info_get_inliers_count(pair.value, &inlier_count) != OPENCV_CSHARP_STATUS_OK || inlier_count != 8 ||
+            jyppx_ocv_stitching_matches_info_get_inliers_fill(pair.value, inliers, 8, &inlier_count) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_matches_info_copy_homography(pair.value, homography.get()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_mat_rows(homography.get(), &homography_rows) != OPENCV_CSHARP_STATUS_OK || homography_rows != 3 ||
+            jyppx_ocv_mat_cols(homography.get(), &homography_cols) != OPENCV_CSHARP_STATUS_OK || homography_cols != 3)
+        {
+            return 916;
+        }
+
+        NativeStitchingMatchesInfoHandle batch_0;
+        NativeStitchingMatchesInfoHandle batch_1;
+        NativeStitchingMatchesInfoHandle batch_2;
+        NativeStitchingMatchesInfoHandle batch_3;
+        if (jyppx_ocv_stitching_matches_info_create(batch_0.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_matches_info_create(batch_1.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_matches_info_create(batch_2.out()) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_matches_info_create(batch_3.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 917;
+        }
+        const jyppx_ocv_stitching_image_features* feature_values[] = { first.value, second.value };
+        jyppx_ocv_stitching_matches_info* pairwise_values[] = { batch_0.value, batch_1.value, batch_2.value, batch_3.value };
+        int thread_safe = 0;
+        if (jyppx_ocv_stitching_features_matcher_match_batch(matcher.value, feature_values, 2, bad_mask.get(), pairwise_values, 4) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_stitching_features_matcher_match_batch(matcher.value, feature_values, 2, pair_mask.get(), pairwise_values, 4) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_matches_info_get_metadata(batch_1.value, &source_index, &destination_index, &number_of_inliers, &confidence) != OPENCV_CSHARP_STATUS_OK || source_index != 0 || destination_index != 1 ||
+            jyppx_ocv_stitching_features_matcher_is_thread_safe(matcher.value, &thread_safe) != OPENCV_CSHARP_STATUS_OK || thread_safe != 1 ||
+            jyppx_ocv_stitching_features_matcher_collect_garbage(matcher.value) != OPENCV_CSHARP_STATUS_OK)
+        {
+            return 918;
+        }
+
+        NativeOrbHandle orb;
+        if (jyppx_ocv_features2d_orb_create(100, 1.2f, 8, 8, 0, 2, 0, 31, 5, &orb.value) != OPENCV_CSHARP_STATUS_OK || orb.value == nullptr ||
+            jyppx_ocv_stitching_compute_image_features(0, orb.value, image.get(), nullptr, computed_first.value) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_image_features_get_keypoints_count(computed_first.value, &keypoint_count) != OPENCV_CSHARP_STATUS_OK || keypoint_count <= 0)
+        {
+            return 919;
+        }
+        const jyppx_ocv_mat* images[] = { image.get(), image.get() };
+        jyppx_ocv_stitching_image_features* computed_values[] = { computed_first.value, computed_second.value };
+        if (jyppx_ocv_stitching_compute_image_features_batch(0, orb.value, images, 2, nullptr, 0, computed_values, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_image_features_get_keypoints_count(computed_second.value, &keypoint_count) != OPENCV_CSHARP_STATUS_OK || keypoint_count <= 0)
+        {
+            return 920;
+        }
+
+        return 0;
+    }
 #endif
 }
 
@@ -4755,6 +4954,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return stitching_blender_status;
+        }
+
+        int stitching_features_matcher_status = run_stitching_features_matcher_smoke();
+        if (stitching_features_matcher_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return stitching_features_matcher_status;
         }
 #endif
 
@@ -6169,6 +6375,18 @@ int main()
         {
             jyppx_ocv_stitching_blender_release_handle(blender);
             return 900;
+        }
+        auto* image_features = reinterpret_cast<jyppx_ocv_stitching_image_features*>(static_cast<std::uintptr_t>(1));
+        auto* matches_info = reinterpret_cast<jyppx_ocv_stitching_matches_info*>(static_cast<std::uintptr_t>(1));
+        auto* features_matcher = reinterpret_cast<jyppx_ocv_stitching_features_matcher*>(static_cast<std::uintptr_t>(1));
+        if (jyppx_ocv_stitching_image_features_create(0, 0, 0, nullptr, 0, nullptr, &image_features) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            image_features != reinterpret_cast<jyppx_ocv_stitching_image_features*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_matches_info_create(&matches_info) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            matches_info != reinterpret_cast<jyppx_ocv_stitching_matches_info*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest(0, 0.3f, 6, 6, 3.0, &features_matcher) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            features_matcher != reinterpret_cast<jyppx_ocv_stitching_features_matcher*>(static_cast<std::uintptr_t>(1)))
+        {
+            return 921;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

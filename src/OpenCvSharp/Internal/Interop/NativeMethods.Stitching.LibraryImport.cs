@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace OpenCvSharp.Internal.Interop
 {
-    internal static partial class NativeMethods
+    internal static unsafe partial class NativeMethods
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct StitchingCameraParamsNative
@@ -240,6 +240,90 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu")]
         internal static partial int StitchingRestoreImageFromLaplacePyramidGpu(IntPtr[] pyramid, int pyramidCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_create")]
+        internal static partial int StitchingImageFeaturesCreate(int imageIndex, int imageWidth, int imageHeight, NativeKeyPoint* keypoints, int keypointCount, IntPtr descriptors, out IntPtr features);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_release_handle")]
+        internal static partial void StitchingImageFeaturesReleaseHandle(IntPtr features);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_image_index")]
+        internal static partial int StitchingImageFeaturesGetImageIndex(IntPtr features, out int imageIndex);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_set_image_index")]
+        internal static partial int StitchingImageFeaturesSetImageIndex(IntPtr features, int imageIndex);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_image_size")]
+        internal static partial int StitchingImageFeaturesGetImageSize(IntPtr features, out int imageWidth, out int imageHeight);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_set_image_size")]
+        internal static partial int StitchingImageFeaturesSetImageSize(IntPtr features, int imageWidth, int imageHeight);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_keypoints_count")]
+        internal static partial int StitchingImageFeaturesGetKeypointsCount(IntPtr features, out int keypointCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_get_keypoints_fill")]
+        internal static partial int StitchingImageFeaturesGetKeypointsFill(IntPtr features, NativeKeyPoint* keypoints, int keypointCapacity, out int keypointCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_image_features_copy_descriptors")]
+        internal static partial int StitchingImageFeaturesCopyDescriptors(IntPtr features, IntPtr descriptors);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_compute_image_features")]
+        internal static partial int StitchingComputeImageFeatures(int finderKind, IntPtr finderHandle, IntPtr image, IntPtr mask, IntPtr features);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_compute_image_features_batch")]
+        internal static partial int StitchingComputeImageFeaturesBatch(int finderKind, IntPtr finderHandle, IntPtr[] images, int imageCount, IntPtr[] masks, int maskCount, IntPtr[] features, int featureCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_create")]
+        internal static partial int StitchingMatchesInfoCreate(out IntPtr matchesInfo);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_release_handle")]
+        internal static partial void StitchingMatchesInfoReleaseHandle(IntPtr matchesInfo);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_metadata")]
+        internal static partial int StitchingMatchesInfoGetMetadata(IntPtr matchesInfo, out int sourceImageIndex, out int destinationImageIndex, out int numberOfInliers, out double confidence);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_copy_homography")]
+        internal static partial int StitchingMatchesInfoCopyHomography(IntPtr matchesInfo, IntPtr homography);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_matches_count")]
+        internal static partial int StitchingMatchesInfoGetMatchesCount(IntPtr matchesInfo, out int matchCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_matches_fill")]
+        internal static partial int StitchingMatchesInfoGetMatchesFill(IntPtr matchesInfo, NativeDMatch* matches, int matchCapacity, out int matchCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_inliers_count")]
+        internal static partial int StitchingMatchesInfoGetInliersCount(IntPtr matchesInfo, out int inlierCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_matches_info_get_inliers_fill")]
+        internal static partial int StitchingMatchesInfoGetInliersFill(IntPtr matchesInfo, byte* inliers, int inlierCapacity, out int inlierCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_create_best_of_two_nearest")]
+        internal static partial int StitchingFeaturesMatcherCreateBestOfTwoNearest(int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, int numberOfMatchesThreshold2, double matchesConfidenceThreshold, out IntPtr matcher);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_factory_best_of_two_nearest")]
+        internal static partial int StitchingFeaturesMatcherFactoryBestOfTwoNearest(int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, int numberOfMatchesThreshold2, double matchesConfidenceThreshold, out IntPtr matcher);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_create_range")]
+        internal static partial int StitchingFeaturesMatcherCreateRange(int rangeWidth, int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, int numberOfMatchesThreshold2, out IntPtr matcher);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_create_affine")]
+        internal static partial int StitchingFeaturesMatcherCreateAffine(int fullAffine, int tryGpu, float matchConfidence, int numberOfMatchesThreshold1, out IntPtr matcher);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_release_handle")]
+        internal static partial void StitchingFeaturesMatcherReleaseHandle(IntPtr matcher);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_match_pair")]
+        internal static partial int StitchingFeaturesMatcherMatchPair(IntPtr matcher, IntPtr first, IntPtr second, IntPtr matchesInfo);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_match_batch")]
+        internal static partial int StitchingFeaturesMatcherMatchBatch(IntPtr matcher, IntPtr[] features, int featureCount, IntPtr mask, IntPtr[] pairwiseMatches, int pairwiseMatchCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_is_thread_safe")]
+        internal static partial int StitchingFeaturesMatcherIsThreadSafe(IntPtr matcher, out int isThreadSafe);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_features_matcher_collect_garbage")]
+        internal static partial int StitchingFeaturesMatcherCollectGarbage(IntPtr matcher);
     }
 }
 #endif

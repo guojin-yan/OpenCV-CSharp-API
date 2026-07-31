@@ -20,6 +20,9 @@ internal static class Program
         54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65
     };
     private static readonly HashSet<int> Blender = new(BlenderOrdinals);
+    private static readonly int[] MatcherOrdinals = { 122, 123, 124, 126, 127, 129, 130, 131, 132, 134, 135, 136, 138, 140 };
+    private static readonly HashSet<int> Matcher = new(MatcherOrdinals);
+    private static readonly HashSet<int> MatcherUnsupported = new(new[] { 142, 143 });
     private static readonly HashSet<int> HighLevel = new(Enumerable.Range(3, 21));
     private static readonly string[] Allowed =
     {
@@ -27,10 +30,10 @@ internal static class Program
     };
     private const string ClaimedSlice = "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header";
     private const string BuildCondition = "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded";
-    private const int NegativeFixtureCount = 24;
-    private const int ManagedTypeAdditions = 13;
-    private const int ManagedMemberAdditions = 60;
-    private const int NativeEntrypointAdditions = 52;
+    private const int NegativeFixtureCount = 28;
+    private const int ManagedTypeAdditions = 6;
+    private const int ManagedMemberAdditions = 31;
+    private const int NativeEntrypointAdditions = 28;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification,
         string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput,
@@ -67,7 +70,7 @@ internal static class Program
         public string UpstreamOpenCvVersion { get; set; } = "5.0.0";
         public string ClaimedSlice { get; set; } = Program.ClaimedSlice;
         public string ReviewStatus { get; set; } = "source-reviewed";
-        public string Limitation { get; set; } = "Closure is module-scoped. CUDA execution, callbacks, remaining retained detail strategies, templates, and repository-wide parity are not claimed.";
+        public string Limitation { get; set; } = "Closure is module-scoped. CUDA execution, callbacks, LightGlue model ownership, remaining retained detail strategies, templates, and repository-wide parity are not claimed.";
         public List<ClassificationRow> Declarations { get; set; } = new();
     }
 
@@ -175,8 +178,8 @@ internal static class Program
         public int NegativeFixtureCount { get; init; } = Program.NegativeFixtureCount;
         public string FamilyInventoryPath { get; init; } = "";
         public string FamilyInventorySha256 { get; init; } = "";
-        public int SelectedFamilyCount { get; init; } = 3;
-        public int SelectedDeclarationCount { get; init; } = 79;
+        public int SelectedFamilyCount { get; init; } = 4;
+        public int SelectedDeclarationCount { get; init; } = 93;
         public int HighLevelImplementedCallableCount { get; init; } = 21;
         public int SourceReviewedExtensionCount { get; init; } = 3;
         public int ManagedPublicTypeAdditionCount { get; init; } = ManagedTypeAdditions;
@@ -213,13 +216,20 @@ internal static class Program
                 row.Classification = "non-callable-metadata";
                 row.Reason = "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.";
             }
-            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal))
+            else if (MatcherUnsupported.Contains(declaration.Ordinal))
+            {
+                row.Classification = "unsupported";
+                row.Reason = "LightGlue matching requires an externally supplied ONNX model and an owned cv::LightGlueMatcher lifecycle that this repository does not currently expose; invalid-path construction is not sufficient evidence.";
+            }
+            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal) || Matcher.Contains(declaration.Ordinal))
             {
                 row.Classification = "implemented";
                 row.Reason = Exposure.Contains(declaration.Ordinal)
                     ? "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests."
                     : PublicWarper.Contains(declaration.Ordinal)
                         ? "The complete public PyRotationWarper family is implemented with owned lifetime, strict projector/K/R contracts, caller-owned maps and images, safe default state, native smoke, and net8/net10 tests."
+                        : Matcher.Contains(declaration.Ordinal)
+                            ? "The selected detail matcher family is implemented with owned ImageFeatures and MatchesInfo value handles, copied descriptor/homography outputs, exact N-squared batch results, Feature2D finder bridging, native smoke, and net8/net10 tests."
                         : Blender.Contains(declaration.Ordinal)
                             ? "The complete detail Blender family is implemented with owned strategy lifetime, bounded prepare/feed/blend state, caller-owned outputs, copied UMat collections, source-true GPU failure behavior, native smoke, and net8/net10 tests."
                         : "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.";
@@ -244,7 +254,7 @@ internal static class Program
         "detail-autocalib" => "Autocalibration helpers remain unimplemented pending copied camera/matrix result contracts.",
         "detail-blenders" => "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
         "detail-camera" => "CameraParams.K remains unimplemented; copied high-level camera results do not expose the mutable detail object.",
-        "detail-matchers" => "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+        "detail-matchers" => "Detail matcher families outside ImageFeatures and BestOf2Nearest strategies remain unimplemented; LightGlue rows are explicitly unsupported because their model lifecycle is not owned.",
         "detail-motion-estimators" => "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
         "detail-seam-finders" => "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
         "detail-timelapsers" => "Detail timelapser state, borrowed destination UMat, and output ownership remain unimplemented.",
@@ -276,6 +286,17 @@ internal static class Program
             62 => N("stitching_create_laplace_pyramid"), 63 => N("stitching_create_laplace_pyramid_gpu"),
             64 => N("stitching_restore_image_from_laplace_pyramid"),
             65 => N("stitching_restore_image_from_laplace_pyramid_gpu"),
+            122 => N("stitching_image_features_get_keypoints_count", "stitching_image_features_get_keypoints_fill"),
+            123 => N("stitching_compute_image_features_batch"), 124 => N("stitching_compute_image_features"),
+            126 => N("stitching_matches_info_get_matches_count", "stitching_matches_info_get_matches_fill"),
+            127 => N("stitching_matches_info_get_inliers_count", "stitching_matches_info_get_inliers_fill"),
+            129 => N("stitching_features_matcher_match_pair"), 130 => N("stitching_features_matcher_match_batch"),
+            131 => N("stitching_features_matcher_is_thread_safe"), 132 => N("stitching_features_matcher_collect_garbage"),
+            134 => N("stitching_features_matcher_create_best_of_two_nearest", "stitching_features_matcher_release_handle"),
+            135 => N("stitching_features_matcher_collect_garbage"),
+            136 => N("stitching_features_matcher_factory_best_of_two_nearest", "stitching_features_matcher_release_handle"),
+            138 => N("stitching_features_matcher_create_range", "stitching_features_matcher_release_handle"),
+            140 => N("stitching_features_matcher_create_affine", "stitching_features_matcher_release_handle"),
             70 => E("create_default"), 71 => E("feed"), 72 or 78 or 84 or 93 or 101 or 116 => E("apply"),
             73 or 79 or 85 or 94 or 102 or 117 => E("get_mat_gains_count", "get_mat_gains_fill"),
             74 or 80 or 86 or 95 or 103 or 118 => E("set_mat_gains"), 75 => E("set_update_gain"), 76 => E("get_update_gain"),
@@ -349,6 +370,20 @@ internal static class Program
             108 or 109 or 110 => M("BlocksCompensator|property|", "BlockSize"), 111 or 112 => M("BlocksCompensator|property|", "FilteringIterations"),
             114 or 115 => M("BlocksGainCompensator|constructor|", ".ctor(System.Int32 blockWidth=32"),
             120 => M("BlocksChannelsCompensator|constructor|", ".ctor(System.Int32 blockWidth=32"),
+            122 => M("ImageFeatures|property|instance;get:public|", "KeyPoint[] Keypoints"),
+            123 => M("ImageFeatures|method|public;static|", "ImageFeatures[] Compute("),
+            124 => M("ImageFeatures|method|public;static|", "ImageFeatures Compute("),
+            126 => M("MatchesInfo|property|instance;get:public|", "DMatch[] Matches"),
+            127 => M("MatchesInfo|property|instance;get:public|", "Byte[] Inliers"),
+            129 => M("FeaturesMatcher|method|public;instance|", "MatchesInfo Match(OpenCvSharp.Stitching.ImageFeatures first"),
+            130 => M("FeaturesMatcher|method|public;instance|", "MatchesInfo[] Match(OpenCvSharp.Stitching.ImageFeatures[]"),
+            131 => M("FeaturesMatcher|property|instance;get:public|", "Boolean IsThreadSafe"),
+            132 => M("FeaturesMatcher|method|public;instance|", "CollectGarbage()"),
+            134 => M("BestOf2NearestMatcher|constructor|", ".ctor(System.Boolean tryGpu=false"),
+            135 => M("FeaturesMatcher|method|public;instance|", "CollectGarbage()"),
+            136 => M("BestOf2NearestMatcher|method|public;static|", "BestOf2NearestMatcher Create("),
+            138 => M("BestOf2NearestRangeMatcher|constructor|", ".ctor(System.Int32 rangeWidth=5"),
+            140 => M("AffineBestOf2NearestMatcher|constructor|", ".ctor(System.Boolean fullAffine=false"),
             _ => throw new InvalidOperationException("No managed evidence mapping for Stitching ordinal " + ordinal)
         };
         string match = managed.SingleOrDefault(line => fragments.All(fragment => line.Contains(fragment, StringComparison.Ordinal)))
@@ -399,7 +434,9 @@ internal static class Program
         Require(Exposure.All(x => document.Declarations[x].Classification == "implemented"), "Exposure family coverage drifted.");
         Require(PublicWarper.All(x => document.Declarations[x].Classification == "implemented"), "Public warper family coverage drifted.");
         Require(Blender.All(x => document.Declarations[x].Classification == "implemented"), "Detail Blender family coverage drifted.");
-        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
+        Require(Matcher.All(x => document.Declarations[x].Classification == "implemented"), "Detail matcher family coverage drifted.");
+        Require(MatcherUnsupported.All(x => document.Declarations[x].Classification == "unsupported"), "LightGlue support boundary drifted.");
+        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal) || Matcher.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
     }
 
     private static void RunNegativeFixtures(RawDocument raw, ClassificationDocument classifications, string[] native, string[] managed, string workspace)
@@ -436,6 +473,10 @@ internal static class Program
         Reject((_, c) => c.Declarations[40].NativeEntrypoints.Clear());
         Reject((_, c) => c.Declarations[52].ManagedMembers.Clear());
         Reject((_, c) => c.Declarations[63].NativeEntrypoints.Clear());
+        Reject((_, c) => c.Declarations[122].Classification = "missing");
+        Reject((_, c) => c.Declarations[142].Classification = "implemented");
+        Reject((_, c) => c.Declarations[142].Reason = "");
+        Reject((_, c) => c.Declarations[140].ManagedMembers.Clear());
         Require(accepted == NegativeFixtureCount, "Stitching negative fixture count drifted.");
     }
 
@@ -488,9 +529,27 @@ internal static class Program
                 FocusedTest = "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs"
             });
         }
+        var matcherFamily = new FamilyRow
+        {
+            Id = "stitching-detail-feature-matchers-completion",
+            Surface = "detail-matchers",
+            Rationale = "Closes the ordinary offline ImageFeatures, MatchesInfo, BestOf2Nearest, range, and affine matcher rows with copied descriptors/transforms, exact count/fill collections, Feature2D bridge, N-squared batch layout, mask validation, native smoke, and both-framework tests."
+        };
+        foreach (int ordinal in MatcherOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            matcherFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs"
+            });
+        }
         return new FamilyDocument
         {
-            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily },
+            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily, matcherFamily },
             SourceReviewedExtensions = new List<SourceReviewedExtension>
             {
                 new() { UpstreamIdentity = "cv::detail::NoExposureCompensator default construction", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp", Adaptation = "Adds an explicit owned managed no-op constructor; the parser emits its inherited operations but not its implicit default constructor.", NativeEntrypoints = E("create_no"), ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()" } },

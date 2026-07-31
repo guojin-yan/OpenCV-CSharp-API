@@ -19,7 +19,44 @@ The 53-row `detail/exposure_compensate.hpp` partition contains eight metadata ro
 - `BlocksChannelsCompensator`
 - `Feed`, `Apply`, `GetMatGains`, `SetMatGains`, and exact property round trips
 
-The 12-row public-warper partition contains two metadata rows and ten `PyRotationWarper` callable rows. All ten callables are implemented. The 28-row `detail/blenders.hpp` partition contains four metadata rows and 24 callable rows. All 24 callables are implemented. The remaining 58 callable rows in other detail headers remain explicit `missing` rows. They are not described as implemented, omitted, or unsupported merely to reduce the gap count.
+The 12-row public-warper partition contains two metadata rows and ten `PyRotationWarper` callable rows. All ten callables are implemented. The 28-row `detail/blenders.hpp` partition contains four metadata rows and 24 callable rows. All 24 callables are implemented.
+
+The 23-row `detail/matchers.hpp` partition contains seven metadata rows and 16 callable rows. Fourteen callables are implemented through `ImageFeatures`, `MatchesInfo`, `FeaturesMatcher`, `BestOf2NearestMatcher`, `BestOf2NearestRangeMatcher`, and `AffineBestOf2NearestMatcher`. The two LightGlue callables are explicitly unsupported because they require an externally supplied ONNX model and an owned `cv::LightGlueMatcher` API that this repository does not expose. The remaining 42 callable rows in other detail headers remain explicit `missing` rows.
+
+## Detail feature matching
+
+```csharp
+using OpenCvSharp.Core;
+using OpenCvSharp.Features2D;
+using OpenCvSharp.Stitching;
+
+using var first = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0));
+using var second = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0));
+using var orb = ORB.Create(maxFeatures: 200);
+using var matcher = new BestOf2NearestMatcher(matchConfidence: 0.8f);
+
+ImageFeatures[] features = ImageFeatures.Compute(orb, new[] { first, second });
+MatchesInfo[] pairwise = matcher.Match(features);
+try
+{
+    MatchesInfo forward = pairwise[0 * features.Length + 1];
+    using Mat homography = forward.GetHomography();
+    System.Console.WriteLine("matches=" + forward.Matches.Length + ", inliers=" + forward.NumberOfInliers);
+}
+finally
+{
+    foreach (MatchesInfo item in pairwise) item.Dispose();
+    foreach (ImageFeatures item in features) item.Dispose();
+}
+```
+
+`ImageFeatures.Compute` accepts the repository's built-in ORB, SIFT, FastFeatureDetector, GFTTDetector, MSER, SimpleBlobDetector, BRISK, KAZE, AKAZE, and AffineFeature wrappers. It borrows the finder, image, and optional mask only for the call. A non-empty mask must be same-sized `CV_8UC1`; non-contiguous image and mask ROIs are valid. Single-image computation assigns `ImageIndex = -1`; batch computation assigns stable zero-based indices. Keypoint arrays are copied, and `GetDescriptors` or `CopyDescriptorsTo` returns independent CPU Mat storage.
+
+Manually constructed `ImageFeatures` clones its descriptors and keypoints. Non-empty descriptors must be two-dimensional, single-channel `CV_8U` or `CV_32F`, with one row per keypoint. Pair matching additionally requires equal descriptor types. Empty descriptors are valid and produce no matches.
+
+Batch matching always returns exactly `N * N` independently owned `MatchesInfo` objects in row-major order: the pair from image `i` to image `j` is at `i * N + j`. An optional match mask must be an exact non-empty `N x N CV_8UC1` matrix. `BestOf2NearestRangeMatcher` further limits candidate pairs to its positive range width. Unmatched and diagonal cells retain source and destination indices of `-1`, empty matches/inliers, zero confidence, and an empty transform.
+
+`MatchesInfo.Matches` and `MatchesInfo.Inliers` return copies. `GetHomography` and `CopyHomographyTo` clone OpenCV's transform into caller-owned storage; homography and affine matchers both expose the upstream 3 by 3 matrix. Disposing a matcher does not invalidate returned feature or match records. All three built-in matchers currently report OpenCV's `IsThreadSafe` result, but callers must query that property rather than infer it from the managed type. `CollectGarbage` releases reusable native matcher working memory.
 
 ## Public rotation warper
 
@@ -133,6 +170,6 @@ Component indices are copied values. Camera results own independent rotation and
 
 ## Profile boundaries
 
-Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED`; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces beyond the source-true blender fallbacks, retained matcher/estimator/seam strategies, callback shapes, templates, mutable nested detail containers, and internal detail warpers remain outside the completed families.
+Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED` without allocating handles or mutating outputs; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces beyond the source-true blender fallbacks, retained estimator/seam strategies, callback shapes, templates, mutable nested detail containers, and internal detail warpers remain outside the completed families. LightGlue matching remains explicitly unsupported until the repository owns a stable model-input and `cv::LightGlueMatcher` lifecycle contract.
 
 Parser-emitted rows and source-reviewed extensions remain separate. `Stitcher.WaveCorrectKind`, `Stitcher.GetResultMask`, and the explicit managed no-op constructor are source-reviewed adaptations and do not alter the 207/158 parser counts.

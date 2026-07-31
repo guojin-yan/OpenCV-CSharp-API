@@ -277,12 +277,22 @@ function Get-Record {
         "src/OpenCvSharp.Native/src/stitching/stitching_handles.h",
         "src/OpenCvSharp.Native/tests/native_smoke.cpp",
         "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeImageFeaturesHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMatchesInfoHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs",
+        "src/OpenCvSharp/Stitching/AffineBestOf2NearestMatcher.cs",
+        "src/OpenCvSharp/Stitching/BestOf2NearestMatcher.cs",
+        "src/OpenCvSharp/Stitching/BestOf2NearestRangeMatcher.cs",
         "src/OpenCvSharp/Stitching/Blender.cs",
         "src/OpenCvSharp/Stitching/BlenderType.cs",
         "src/OpenCvSharp/Stitching/Blenders.cs",
+        "src/OpenCvSharp/Stitching/FeaturesMatcher.cs",
+        "src/OpenCvSharp/Stitching/ImageFeatures.cs",
+        "src/OpenCvSharp/Stitching/MatchesInfo.cs",
         "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
+        "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -379,7 +389,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2575
+                FunctionCount = 2603
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -656,6 +666,9 @@ function Get-Record {
                 ExposureDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.declarations
                 ExposureCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.callables
                 ExposureImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.implemented
+                MatcherDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-matchers'.declarations
+                MatcherCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-matchers'.callables
+                MatcherImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-matchers'.implemented
                 CompatibilityHeaderCount = [int]$stitchingSummary.compatibilityHeaderCount
                 SourceHeaderCount = [int]$stitchingSummary.sourceHeaderCount
                 SourceReviewedExtensionCount = [int]$stitchingSummary.sourceReviewedExtensionCount
