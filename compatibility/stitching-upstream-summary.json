@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/StitchingUpstreamMap",
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header",
+  "rawExtractionPath": "compatibility/stitching-upstream-raw.json",
+  "classificationPath": "compatibility/stitching-upstream-classifications.json",
+  "mappingPath": "compatibility/stitching-upstream-map.txt",
+  "headerSha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "compatibilityHeaderCount": 14,
+  "sourceHeaderCount": 14,
+  "sourceHeaderSetSha256": "9b470d2349d10890a1e7f9d3055dcd747f104b39fc9d569399805f827073dcac",
+  "mappingSha256": "f4976692a3ee4e28b8eafd50bc9a850570b5e10dace12967168ee0daf46c71c5",
+  "declarationCount": 207,
+  "enumCount": 9,
+  "classCount": 40,
+  "callableCount": 158,
+  "surfaceCounts": {
+    "primary": {
+      "declarations": 24,
+      "callables": 21,
+      "implemented": 21
+    },
+    "public-warpers": {
+      "declarations": 12,
+      "callables": 10,
+      "implemented": 0
+    },
+    "detail-autocalib": {
+      "declarations": 2,
+      "callables": 2,
+      "implemented": 0
+    },
+    "detail-blenders": {
+      "declarations": 28,
+      "callables": 24,
+      "implemented": 0
+    },
+    "detail-camera": {
+      "declarations": 2,
+      "callables": 1,
+      "implemented": 0
+    },
+    "detail-exposure": {
+      "declarations": 53,
+      "callables": 45,
+      "implemented": 45
+    },
+    "detail-matchers": {
+      "declarations": 23,
+      "callables": 16,
+      "implemented": 0
+    },
+    "detail-motion-estimators": {
+      "declarations": 27,
+      "callables": 17,
+      "implemented": 0
+    },
+    "detail-seam-finders": {
+      "declarations": 18,
+      "callables": 9,
+      "implemented": 0
+    },
+    "detail-timelapsers": {
+      "declarations": 7,
+      "callables": 4,
+      "implemented": 0
+    },
+    "detail-util": {
+      "declarations": 7,
+      "callables": 7,
+      "implemented": 0
+    },
+    "detail-util-inl": {
+      "declarations": 0,
+      "callables": 0,
+      "implemented": 0
+    },
+    "detail-warpers": {
+      "declarations": 4,
+      "callables": 2,
+      "implemented": 0
+    },
+    "detail-warpers-inl": {
+      "declarations": 0,
+      "callables": 0,
+      "implemented": 0
+    }
+  },
+  "classificationCounts": {
+    "implemented": 66,
+    "intentionally-omitted": 0,
+    "missing": 92,
+    "non-callable-metadata": 49,
+    "unsupported": 0,
+    "upstream-conditional": 0
+  },
+  "nativeEvidenceCount": 33,
+  "managedEvidenceCount": 33,
+  "negativeFixtureCount": 17,
+  "familyInventoryPath": "compatibility/stitching-implemented-families.json",
+  "familyInventorySha256": "484db06ac3e137a4f2d40e859768f239bb04fd66eb134817dc6c4e67ae66e958",
+  "selectedFamilyCount": 1,
+  "selectedDeclarationCount": 45,
+  "highLevelImplementedCallableCount": 21,
+  "sourceReviewedExtensionCount": 3,
+  "managedPublicTypeAdditionCount": 8,
+  "managedPublicMemberAdditionCount": 27,
+  "nativeEntrypointAdditionCount": 22,
+  "uMatExecutionClaimed": false,
+  "detailRowsMixedIntoHighLevel": false,
+  "repositoryWideUpstreamParityClaimed": false
+}

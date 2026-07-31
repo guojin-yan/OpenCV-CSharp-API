@@ -747,6 +747,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunMLEMDefaultSummary());
                     Console.WriteLine(RunMLRemainingCallablesDefaultSummary());
                     Console.WriteLine(RunTrackingDefaultSummary());
+                    Console.WriteLine(RunExposureCompensationSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -4567,7 +4568,8 @@ namespace ConsoleSamples
                         + ", pano=" + pano.Rows + "x" + pano.Cols
                         + ", component=" + stitcher.GetComponent().Length
                         + ", cameras=" + DisposeAndCount(stitcher.GetCameras())
-                        + ", workScale=" + stitcher.WorkScale;
+                        + ", workScale=" + stitcher.WorkScale
+                        + ", " + RunExposureCompensationSummary();
                 }
                 finally
                 {
@@ -4575,6 +4577,31 @@ namespace ConsoleSamples
                     {
                         DisposeAll(images);
                     }
+                }
+            }
+        }
+
+        private static string RunExposureCompensationSummary()
+        {
+            using (var first = new Mat(24, 24, MatType.CV_8UC3, new Scalar(40, 40, 40)))
+            using (var second = new Mat(24, 24, MatType.CV_8UC3, new Scalar(80, 80, 80)))
+            using (var firstMask = new Mat(24, 24, MatType.CV_8UC1, new Scalar(255)))
+            using (var secondMask = new Mat(24, 24, MatType.CV_8UC1, new Scalar(255)))
+            using (var compensator = new OpenCvSharp.Stitching.GainCompensator())
+            {
+                var corners = new[] { new Point(0, 0), new Point(0, 0) };
+                compensator.Feed(corners, new[] { first, second }, new[] { firstMask, secondMask });
+                compensator.Apply(0, corners[0], first, firstMask);
+                Mat[] gains = compensator.GetMatGains();
+                try
+                {
+                    return "exposureGains=" + gains.Length
+                        + ", output=" + first.Rows + "x" + first.Cols
+                        + ", type=" + first.Type;
+                }
+                finally
+                {
+                    DisposeAll(gains);
                 }
             }
         }

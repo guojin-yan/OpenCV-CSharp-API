@@ -128,6 +128,7 @@ function Get-Record {
     $photoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/photo-upstream-summary.json") -Raw | ConvertFrom-Json
     $mlSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ml-upstream-summary.json") -Raw | ConvertFrom-Json
     $trackingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/tracking-upstream-summary.json") -Raw | ConvertFrom-Json
+    $stitchingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/stitching-upstream-summary.json") -Raw | ConvertFrom-Json
     $videoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/video-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
@@ -178,6 +179,11 @@ function Get-Record {
         "compatibility/tracking-upstream-map.txt",
         "compatibility/tracking-upstream-raw.json",
         "compatibility/tracking-upstream-summary.json",
+        "compatibility/stitching-implemented-families.json",
+        "compatibility/stitching-upstream-classifications.json",
+        "compatibility/stitching-upstream-map.txt",
+        "compatibility/stitching-upstream-raw.json",
+        "compatibility/stitching-upstream-summary.json",
         "compatibility/native-managed-binding-map.txt",
         "compatibility/native-managed-binding-summary.json",
         "compatibility/objdetect-implemented-families.json",
@@ -211,6 +217,7 @@ function Get-Record {
         "docs/articles/imgproc-upstream-parity-guide.md",
         "docs/articles/ml-guide.md",
         "docs/articles/tracking-guide.md",
+        "docs/articles/stitching-structured-parity-guide.md",
         "docs/articles/objdetect-structured-parity-guide.md",
         "docs/articles/photo-ccm-guide.md",
         "docs/articles/photo-hdr-workflow-guide.md",
@@ -231,6 +238,7 @@ function Get-Record {
         "scripts/Generate-ManagedPublicApiBaseline.ps1",
         "scripts/Generate-MlUpstreamMap.ps1",
         "scripts/Generate-TrackingUpstreamMap.ps1",
+        "scripts/Generate-StitchingUpstreamMap.ps1",
         "scripts/Generate-NativeAbiCompatibility.ps1",
         "scripts/Generate-NativeManagedBindingMap.ps1",
         "scripts/Generate-ObjDetectUpstreamMap.ps1",
@@ -245,6 +253,7 @@ function Get-Record {
         "scripts/Test-ImgProcUpstreamMap.ps1",
         "scripts/Test-MlUpstreamMap.ps1",
         "scripts/Test-TrackingUpstreamMap.ps1",
+        "scripts/Test-StitchingUpstreamMap.ps1",
         "scripts/Test-ImgCodecsUpstreamMap.ps1",
         "scripts/Test-NativeManagedBindingMap.ps1",
         "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -282,6 +291,9 @@ function Get-Record {
         "tools/TrackingUpstreamMap/TrackingUpstreamMap.csproj",
         "tools/TrackingUpstreamMap/Program.cs",
         "tools/TrackingUpstreamMap/extract_tracking.py",
+        "tools/StitchingUpstreamMap/StitchingUpstreamMap.csproj",
+        "tools/StitchingUpstreamMap/Program.cs",
+        "tools/StitchingUpstreamMap/extract_stitching.py",
         "tools/ImgCodecsUpstreamMap/ImgCodecsUpstreamMap.csproj",
         "tools/ImgCodecsUpstreamMap/Program.cs",
         "tools/ImgCodecsUpstreamMap/extract_imgcodecs.py",
@@ -354,7 +366,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2523
+                FunctionCount = 2545
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -604,6 +616,39 @@ function Get-Record {
                 LegacyRowsMixedIntoPrimary = [bool]$trackingSummary.legacyRowsMixedIntoPrimary
                 RepositoryWideParityClaimed = [bool]$trackingSummary.repositoryWideUpstreamParityClaimed
             }
+            StitchingUpstreamMap = [ordered]@{
+                Path = "compatibility/stitching-upstream-map.txt"
+                SummaryPath = "compatibility/stitching-upstream-summary.json"
+                ClassificationPath = "compatibility/stitching-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/stitching-implemented-families.json"
+                RawExtractionPath = "compatibility/stitching-upstream-raw.json"
+                Sha256 = $stitchingSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/stitching-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$stitchingSummary.declarationCount
+                CallableCount = [int]$stitchingSummary.callableCount
+                ImplementedCount = [int]$stitchingSummary.classificationCounts.implemented
+                MissingCount = [int]$stitchingSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$stitchingSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$stitchingSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$stitchingSummary.classificationCounts.'upstream-conditional'
+                HighLevelDeclarationCount = [int]$stitchingSummary.surfaceCounts.primary.declarations
+                HighLevelCallableCount = [int]$stitchingSummary.surfaceCounts.primary.callables
+                HighLevelImplementedCount = [int]$stitchingSummary.surfaceCounts.primary.implemented
+                ExposureDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.declarations
+                ExposureCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.callables
+                ExposureImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-exposure'.implemented
+                CompatibilityHeaderCount = [int]$stitchingSummary.compatibilityHeaderCount
+                SourceHeaderCount = [int]$stitchingSummary.sourceHeaderCount
+                SourceReviewedExtensionCount = [int]$stitchingSummary.sourceReviewedExtensionCount
+                SelectedFamilyCount = [int]$stitchingSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$stitchingSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$stitchingSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$stitchingSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$stitchingSummary.nativeEntrypointAdditionCount
+                UMatExecutionClaimed = [bool]$stitchingSummary.uMatExecutionClaimed
+                DetailRowsMixedIntoHighLevel = [bool]$stitchingSummary.detailRowsMixedIntoHighLevel
+                RepositoryWideParityClaimed = [bool]$stitchingSummary.repositoryWideUpstreamParityClaimed
+            }
             VideoUpstreamMap = [ordered]@{
                 Path = "compatibility/video-upstream-map.txt"
                 SummaryPath = "compatibility/video-upstream-summary.json"
@@ -639,7 +684,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 72
+            InvariantGuardCount = 73
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false

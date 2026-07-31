@@ -331,6 +331,14 @@ internal static class Program
         typeof(OpenCvSharp.ML.SVMSGDTypes),
         typeof(OpenCvSharp.ML.SVMSGDMarginTypes),
         typeof(OpenCvSharp.Stitching.Stitcher),
+        typeof(OpenCvSharp.Stitching.ExposureCompensatorType),
+        typeof(OpenCvSharp.Stitching.ExposureCompensator),
+        typeof(OpenCvSharp.Stitching.NoExposureCompensator),
+        typeof(OpenCvSharp.Stitching.GainCompensator),
+        typeof(OpenCvSharp.Stitching.ChannelsCompensator),
+        typeof(OpenCvSharp.Stitching.BlocksCompensator),
+        typeof(OpenCvSharp.Stitching.BlocksGainCompensator),
+        typeof(OpenCvSharp.Stitching.BlocksChannelsCompensator),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -379,6 +387,7 @@ internal static class Program
         default(OpenCvSharp.ML.SVMSGDTypes),
         default(OpenCvSharp.ML.SVMSGDMarginTypes),
         default(OpenCvSharp.Stitching.StitcherMode),
+        default(OpenCvSharp.Stitching.ExposureCompensatorType),
         default(OpenCvSharp.Geometry.DistanceTypes)
     };
 
@@ -386,8 +395,8 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 61 &&
-            RepresentativeValues.Length >= 41 &&
+        return RepresentativeTypes.Length >= 69 &&
+            RepresentativeValues.Length >= 42 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
             CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null && CreateEM != null &&
             CreateLogisticRegression != null && CreateSVMSGD != null &&

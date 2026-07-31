@@ -4,6 +4,7 @@
 #include "../error_state.h"
 #include "stitching_handles.h"
 
+#include <cmath>
 #include <new>
 #include <vector>
 
@@ -68,6 +69,15 @@ namespace
         }
 
         return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int validate_exposure_compensator(
+        const char* api_name,
+        const jyppx_ocv_stitching_exposure_compensator* compensator)
+    {
+        return compensator == nullptr
+            ? opencv_csharp_native::set_invalid_argument(api_name, "compensator")
+            : OPENCV_CSHARP_STATUS_OK;
     }
 
     int validate_optional_masks(
@@ -148,6 +158,60 @@ namespace
         }
 
         return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    int create_exposure_handle(
+        const char* api_name,
+        cv::Ptr<cv::detail::ExposureCompensator> value,
+        jyppx_ocv_stitching_exposure_compensator** compensator)
+    {
+        if (compensator == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "compensator");
+        }
+
+        *compensator = nullptr;
+        if (value.empty())
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+
+        auto* created = new (std::nothrow) jyppx_ocv_stitching_exposure_compensator();
+        if (created == nullptr)
+        {
+            return opencv_csharp_native::set_out_of_memory(api_name);
+        }
+
+        created->value = std::move(value);
+        *compensator = created;
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    std::vector<cv::UMat> to_umat_vector(const jyppx_ocv_mat* const* mats, int mat_count)
+    {
+        std::vector<cv::UMat> result;
+        result.reserve(static_cast<size_t>(mat_count));
+        for (int i = 0; i < mat_count; ++i)
+        {
+            result.push_back(opencv_csharp_native::mat_value(mats[i]).getUMat(cv::ACCESS_READ));
+        }
+
+        return result;
+    }
+
+    cv::detail::GainCompensator* as_gain(cv::detail::ExposureCompensator* value)
+    {
+        return dynamic_cast<cv::detail::GainCompensator*>(value);
+    }
+
+    cv::detail::ChannelsCompensator* as_channels(cv::detail::ExposureCompensator* value)
+    {
+        return dynamic_cast<cv::detail::ChannelsCompensator*>(value);
+    }
+
+    cv::detail::BlocksCompensator* as_blocks(cv::detail::ExposureCompensator* value)
+    {
+        return dynamic_cast<cv::detail::BlocksCompensator*>(value);
     }
 #endif
 }
@@ -608,6 +672,649 @@ int jyppx_ocv_stitcher_get_result_mask(const jyppx_ocv_stitcher* stitcher, jyppx
         if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
         stitcher->value->resultMask().copyTo(opencv_csharp_native::mat_value(result_mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_create_default(
+    int type,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (compensator == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "compensator");
+        }
+        *compensator = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (type < cv::detail::ExposureCompensator::NO || type > cv::detail::ExposureCompensator::CHANNELS_BLOCKS)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "type");
+        }
+        return create_exposure_handle(api_name, cv::detail::ExposureCompensator::createDefault(type), compensator);
+#else
+        (void)type;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_create_no(jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_create_no";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (compensator == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "compensator");
+        }
+        *compensator = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        return create_exposure_handle(api_name, cv::makePtr<cv::detail::NoExposureCompensator>(), compensator);
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_create_gain(
+    int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_create_gain";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (compensator == nullptr || number_of_feeds <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, compensator == nullptr ? "compensator" : "number_of_feeds");
+        }
+        *compensator = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        return create_exposure_handle(api_name, cv::makePtr<cv::detail::GainCompensator>(number_of_feeds), compensator);
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_create_channels(
+    int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_create_channels";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (compensator == nullptr || number_of_feeds <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, compensator == nullptr ? "compensator" : "number_of_feeds");
+        }
+        *compensator = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        return create_exposure_handle(api_name, cv::makePtr<cv::detail::ChannelsCompensator>(number_of_feeds), compensator);
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_create_blocks_gain(
+    int block_width,
+    int block_height,
+    int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_create_blocks_gain";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (compensator == nullptr || block_width <= 0 || block_height <= 0 || number_of_feeds <= 0)
+        {
+            const char* argument = compensator == nullptr ? "compensator" : block_width <= 0 ? "block_width" : block_height <= 0 ? "block_height" : "number_of_feeds";
+            return opencv_csharp_native::set_invalid_argument(api_name, argument);
+        }
+        *compensator = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        return create_exposure_handle(api_name, cv::makePtr<cv::detail::BlocksGainCompensator>(block_width, block_height, number_of_feeds), compensator);
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_create_blocks_channels(
+    int block_width,
+    int block_height,
+    int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_create_blocks_channels";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (compensator == nullptr || block_width <= 0 || block_height <= 0 || number_of_feeds <= 0)
+        {
+            const char* argument = compensator == nullptr ? "compensator" : block_width <= 0 ? "block_width" : block_height <= 0 ? "block_height" : "number_of_feeds";
+            return opencv_csharp_native::set_invalid_argument(api_name, argument);
+        }
+        *compensator = nullptr;
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        return create_exposure_handle(api_name, cv::makePtr<cv::detail::BlocksChannelsCompensator>(block_width, block_height, number_of_feeds), compensator);
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+void jyppx_ocv_stitching_exposure_release_handle(jyppx_ocv_stitching_exposure_compensator* compensator)
+{
+    delete compensator;
+}
+
+int jyppx_ocv_stitching_exposure_feed(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    const int* corner_x,
+    const int* corner_y,
+    int corner_count,
+    const jyppx_ocv_mat* const* images,
+    int image_count,
+    const jyppx_ocv_mat* const* masks,
+    int mask_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_feed";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (corner_count < 0 || (corner_count > 0 && (corner_x == nullptr || corner_y == nullptr)))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "corners");
+        }
+        status = validate_mat_array(api_name, images, image_count, "images");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat_array(api_name, masks, mask_count, "masks");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (corner_count != image_count || mask_count != image_count || image_count == 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "collection_count");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Point> native_corners;
+        native_corners.reserve(static_cast<size_t>(corner_count));
+        for (int i = 0; i < corner_count; ++i)
+        {
+            native_corners.emplace_back(corner_x[i], corner_y[i]);
+        }
+        compensator->value->feed(native_corners, to_umat_vector(images, image_count), to_umat_vector(masks, mask_count));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_apply(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    int index,
+    int corner_x,
+    int corner_y,
+    jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* mask)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_apply";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (index < 0) { return opencv_csharp_native::set_invalid_argument(api_name, "index"); }
+        status = validate_mat(api_name, image, "image");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat(api_name, mask, "mask");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        compensator->value->apply(index, cv::Point(corner_x, corner_y), opencv_csharp_native::mat_value(image), opencv_csharp_native::mat_value(mask));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_mat_gains_count(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* gain_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_mat_gains_count";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, gain_count, "gain_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Mat> gains;
+        compensator->value->getMatGains(gains);
+        *gain_count = static_cast<int>(gains.size());
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *gain_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_mat_gains_fill(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    jyppx_ocv_mat** gains,
+    int gain_capacity,
+    int* gain_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_mat_gains_fill";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (gain_capacity < 0 || (gain_capacity > 0 && gains == nullptr))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "gains");
+        }
+        status = validate_output_int(api_name, gain_count, "gain_count");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        for (int i = 0; i < gain_capacity; ++i) { gains[i] = nullptr; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Mat> native_gains;
+        compensator->value->getMatGains(native_gains);
+        *gain_count = static_cast<int>(native_gains.size());
+        const int writable = gain_capacity < *gain_count ? gain_capacity : *gain_count;
+        int created_count = 0;
+        try
+        {
+            for (; created_count < writable; ++created_count)
+            {
+                status = create_mat_handle(
+                    api_name,
+                    native_gains[static_cast<size_t>(created_count)].clone(),
+                    &gains[created_count]);
+                if (status != OPENCV_CSHARP_STATUS_OK)
+                {
+                    for (int cleanup = 0; cleanup < created_count; ++cleanup)
+                    {
+                        delete gains[cleanup];
+                        gains[cleanup] = nullptr;
+                    }
+                    return status;
+                }
+            }
+        }
+        catch (...)
+        {
+            for (int cleanup = 0; cleanup < created_count; ++cleanup)
+            {
+                delete gains[cleanup];
+                gains[cleanup] = nullptr;
+            }
+            throw;
+        }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *gain_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_set_mat_gains(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    const jyppx_ocv_mat* const* gains,
+    int gain_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_set_mat_gains";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_mat_array(api_name, gains, gain_count, "gains");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Mat> native_gains = to_mat_vector(gains, gain_count);
+        compensator->value->setMatGains(native_gains);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_update_gain(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* update_gain)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_update_gain";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, update_gain, "update_gain");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *update_gain = compensator->value->getUpdateGain() ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *update_gain = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_set_update_gain(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    int update_gain)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_set_update_gain";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (update_gain != 0 && update_gain != 1) { return opencv_csharp_native::set_invalid_argument(api_name, "update_gain"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        compensator->value->setUpdateGain(update_gain != 0);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_number_of_feeds(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* number_of_feeds)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_number_of_feeds";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, number_of_feeds, "number_of_feeds");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (auto* value = as_gain(compensator->value.get())) { *number_of_feeds = value->getNrFeeds(); }
+        else if (auto* value = as_channels(compensator->value.get())) { *number_of_feeds = value->getNrFeeds(); }
+        else if (auto* value = as_blocks(compensator->value.get())) { *number_of_feeds = value->getNrFeeds(); }
+        else { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *number_of_feeds = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_set_number_of_feeds(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    int number_of_feeds)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_set_number_of_feeds";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (number_of_feeds <= 0) { return opencv_csharp_native::set_invalid_argument(api_name, "number_of_feeds"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (auto* value = as_gain(compensator->value.get())) { value->setNrFeeds(number_of_feeds); }
+        else if (auto* value = as_channels(compensator->value.get())) { value->setNrFeeds(number_of_feeds); }
+        else if (auto* value = as_blocks(compensator->value.get())) { value->setNrFeeds(number_of_feeds); }
+        else { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_similarity_threshold(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    double* similarity_threshold)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_similarity_threshold";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_double(api_name, similarity_threshold, "similarity_threshold");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (auto* value = as_gain(compensator->value.get())) { *similarity_threshold = value->getSimilarityThreshold(); }
+        else if (auto* value = as_channels(compensator->value.get())) { *similarity_threshold = value->getSimilarityThreshold(); }
+        else if (auto* value = as_blocks(compensator->value.get())) { *similarity_threshold = value->getSimilarityThreshold(); }
+        else { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *similarity_threshold = 0.0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_set_similarity_threshold(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    double similarity_threshold)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_set_similarity_threshold";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (!std::isfinite(similarity_threshold)) { return opencv_csharp_native::set_invalid_argument(api_name, "similarity_threshold"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (auto* value = as_gain(compensator->value.get())) { value->setSimilarityThreshold(similarity_threshold); }
+        else if (auto* value = as_channels(compensator->value.get())) { value->setSimilarityThreshold(similarity_threshold); }
+        else if (auto* value = as_blocks(compensator->value.get())) { value->setSimilarityThreshold(similarity_threshold); }
+        else { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_block_size(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* block_width,
+    int* block_height)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_block_size";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, block_width, "block_width");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, block_height, "block_height");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        auto* value = as_blocks(compensator->value.get());
+        if (value == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        const cv::Size size = value->getBlockSize();
+        *block_width = size.width;
+        *block_height = size.height;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *block_width = 0;
+        *block_height = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_set_block_size(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    int block_width,
+    int block_height)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_set_block_size";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (block_width <= 0 || block_height <= 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, block_width <= 0 ? "block_width" : "block_height");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        auto* value = as_blocks(compensator->value.get());
+        if (value == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        value->setBlockSize(block_width, block_height);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_get_filtering_iterations(
+    const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* filtering_iterations)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_get_filtering_iterations";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        status = validate_output_int(api_name, filtering_iterations, "filtering_iterations");
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        auto* value = as_blocks(compensator->value.get());
+        if (value == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        *filtering_iterations = value->getNrGainsFilteringIterations();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *filtering_iterations = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...)
+    {
+        return opencv_csharp_native::translate_current_exception(api_name);
+    }
+}
+
+int jyppx_ocv_stitching_exposure_set_filtering_iterations(
+    jyppx_ocv_stitching_exposure_compensator* compensator,
+    int filtering_iterations)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_exposure_set_filtering_iterations";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_exposure_compensator(api_name, compensator);
+        if (status != OPENCV_CSHARP_STATUS_OK) { return status; }
+        if (filtering_iterations < 0) { return opencv_csharp_native::set_invalid_argument(api_name, "filtering_iterations"); }
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        auto* value = as_blocks(compensator->value.get());
+        if (value == nullptr) { return opencv_csharp_native::set_invalid_argument(api_name, "compensator_type"); }
+        value->setNrGainsFilteringIterations(filtering_iterations);
         return OPENCV_CSHARP_STATUS_OK;
 #else
         return opencv_csharp_native::set_not_linked(api_name);

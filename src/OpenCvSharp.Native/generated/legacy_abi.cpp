@@ -15890,6 +15890,155 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitcher_stitch(jyppx_oc
     return jyppx_ocv_stitcher_stitch(stitcher, images, image_count, masks, mask_count, pano, status_code);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_apply(jyppx_ocv_stitching_exposure_compensator* compensator,
+    int index,
+    int corner_x,
+    int corner_y,
+    jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* mask)
+{
+    return jyppx_ocv_stitching_exposure_apply(compensator, index, corner_x, corner_y, image, mask);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_create_blocks_channels(int block_width,
+    int block_height,
+    int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    return jyppx_ocv_stitching_exposure_create_blocks_channels(block_width, block_height, number_of_feeds, compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_create_blocks_gain(int block_width,
+    int block_height,
+    int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    return jyppx_ocv_stitching_exposure_create_blocks_gain(block_width, block_height, number_of_feeds, compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_create_channels(int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    return jyppx_ocv_stitching_exposure_create_channels(number_of_feeds, compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_create_default(int type,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    return jyppx_ocv_stitching_exposure_create_default(type, compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_create_gain(int number_of_feeds,
+    jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    return jyppx_ocv_stitching_exposure_create_gain(number_of_feeds, compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_create_no(jyppx_ocv_stitching_exposure_compensator** compensator)
+{
+    return jyppx_ocv_stitching_exposure_create_no(compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_feed(jyppx_ocv_stitching_exposure_compensator* compensator,
+    const int* corner_x,
+    const int* corner_y,
+    int corner_count,
+    const jyppx_ocv_mat* const* images,
+    int image_count,
+    const jyppx_ocv_mat* const* masks,
+    int mask_count)
+{
+    return jyppx_ocv_stitching_exposure_feed(compensator, corner_x, corner_y, corner_count, images, image_count, masks, mask_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_block_size(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* block_width,
+    int* block_height)
+{
+    return jyppx_ocv_stitching_exposure_get_block_size(compensator, block_width, block_height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_filtering_iterations(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* filtering_iterations)
+{
+    return jyppx_ocv_stitching_exposure_get_filtering_iterations(compensator, filtering_iterations);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_mat_gains_count(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* gain_count)
+{
+    return jyppx_ocv_stitching_exposure_get_mat_gains_count(compensator, gain_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_mat_gains_fill(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    jyppx_ocv_mat** gains,
+    int gain_capacity,
+    int* gain_count)
+{
+    return jyppx_ocv_stitching_exposure_get_mat_gains_fill(compensator, gains, gain_capacity, gain_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_number_of_feeds(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* number_of_feeds)
+{
+    return jyppx_ocv_stitching_exposure_get_number_of_feeds(compensator, number_of_feeds);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_similarity_threshold(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    double* similarity_threshold)
+{
+    return jyppx_ocv_stitching_exposure_get_similarity_threshold(compensator, similarity_threshold);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_get_update_gain(const jyppx_ocv_stitching_exposure_compensator* compensator,
+    int* update_gain)
+{
+    return jyppx_ocv_stitching_exposure_get_update_gain(compensator, update_gain);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_exposure_release_handle(jyppx_ocv_stitching_exposure_compensator* compensator)
+{
+    jyppx_ocv_stitching_exposure_release_handle(compensator);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_block_size(jyppx_ocv_stitching_exposure_compensator* compensator,
+    int block_width,
+    int block_height)
+{
+    return jyppx_ocv_stitching_exposure_set_block_size(compensator, block_width, block_height);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_filtering_iterations(jyppx_ocv_stitching_exposure_compensator* compensator,
+    int filtering_iterations)
+{
+    return jyppx_ocv_stitching_exposure_set_filtering_iterations(compensator, filtering_iterations);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_mat_gains(jyppx_ocv_stitching_exposure_compensator* compensator,
+    const jyppx_ocv_mat* const* gains,
+    int gain_count)
+{
+    return jyppx_ocv_stitching_exposure_set_mat_gains(compensator, gains, gain_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_number_of_feeds(jyppx_ocv_stitching_exposure_compensator* compensator,
+    int number_of_feeds)
+{
+    return jyppx_ocv_stitching_exposure_set_number_of_feeds(compensator, number_of_feeds);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_similarity_threshold(jyppx_ocv_stitching_exposure_compensator* compensator,
+    double similarity_threshold)
+{
+    return jyppx_ocv_stitching_exposure_set_similarity_threshold(compensator, similarity_threshold);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_exposure_set_update_gain(jyppx_ocv_stitching_exposure_compensator* compensator,
+    int update_gain)
+{
+    return jyppx_ocv_stitching_exposure_set_update_gain(compensator, update_gain);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_structured_light_gray_code_pattern_create(int width,
     int height,
     jyppx_ocv_structured_light_pattern** pattern)

@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 8,
+  "managedPublicMemberAdditionCount": 27,
+  "nativeEntrypointAdditionCount": 22,
+  "families": [
+    {
+      "id": "stitching-detail-exposure-compensation-completion",
+      "surface": "detail-exposure",
+      "rationale": "Closes the largest continuous deterministic offline gap family with owned strategy lifetime, temporary Mat/UMat borrowing, in-place apply, copied gains, property round trips, native smoke, and both-framework tests.",
+      "declarations": [
+        {
+          "ordinal": 70,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.createDefault(int type)-\u003EPtr\u003CExposureCompensator\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_default"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;static|OpenCvSharp.Stitching.ExposureCompensator CreateDefault(OpenCvSharp.Stitching.ExposureCompensatorType type)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 71,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.feed(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref];vector_UMat masks[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_feed"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Feed(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[] masks)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 72,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 73,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.getMatGains(vector_Mat arg1[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+            "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 74,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.setMatGains(vector_Mat arg1[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_mat_gains"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 75,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.setUpdateGain(bool b)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_update_gain"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 76,
+          "upstreamIdentity": "cv.detail.ExposureCompensator.getUpdateGain()-\u003Ebool",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_update_gain"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 78,
+          "upstreamIdentity": "cv.detail.NoExposureCompensator.apply(int arg1;Point arg2;Mat arg3[/IO];Mat arg4)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 79,
+          "upstreamIdentity": "cv.detail.NoExposureCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+            "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 80,
+          "upstreamIdentity": "cv.detail.NoExposureCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_mat_gains"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 82,
+          "upstreamIdentity": "cv.detail.GainCompensator.GainCompensator()-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_gain"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 83,
+          "upstreamIdentity": "cv.detail.GainCompensator.GainCompensator(int nr_feeds)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_gain"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 84,
+          "upstreamIdentity": "cv.detail.GainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 85,
+          "upstreamIdentity": "cv.detail.GainCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+            "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 86,
+          "upstreamIdentity": "cv.detail.GainCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_mat_gains"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 87,
+          "upstreamIdentity": "cv.detail.GainCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 88,
+          "upstreamIdentity": "cv.detail.GainCompensator.getNrFeeds()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 89,
+          "upstreamIdentity": "cv.detail.GainCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 90,
+          "upstreamIdentity": "cv.detail.GainCompensator.getSimilarityThreshold()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 92,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.ChannelsCompensator(int nr_feeds=1)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_channels"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 93,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 94,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+            "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 95,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_mat_gains"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 96,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 97,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.getNrFeeds()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 98,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 99,
+          "upstreamIdentity": "cv.detail.ChannelsCompensator.getSimilarityThreshold()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 101,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 102,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+            "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 103,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_mat_gains"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 104,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 105,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.getNrFeeds()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 106,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 107,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.getSimilarityThreshold()-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 108,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.setBlockSize(int width;int height)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_block_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 109,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.setBlockSize(Size size)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_block_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 110,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.getBlockSize()-\u003ESize",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_block_size"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 111,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.setNrGainsFilteringIterations(int nr_iterations)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_filtering_iterations"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 112,
+          "upstreamIdentity": "cv.detail.BlocksCompensator.getNrGainsFilteringIterations()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_filtering_iterations"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 114,
+          "upstreamIdentity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width=32;int bl_height=32)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_blocks_gain"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 115,
+          "upstreamIdentity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width;int bl_height;int nr_feeds)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_blocks_gain"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 116,
+          "upstreamIdentity": "cv.detail.BlocksGainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_apply"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 117,
+          "upstreamIdentity": "cv.detail.BlocksGainCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+            "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 118,
+          "upstreamIdentity": "cv.detail.BlocksGainCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_set_mat_gains"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 120,
+          "upstreamIdentity": "cv.detail.BlocksChannelsCompensator.BlocksChannelsCompensator(int bl_width=32;int bl_height=32;int nr_feeds=1)-\u003E",
+          "nativeEntrypoints": [
+            "jyppx_ocv_stitching_exposure_create_blocks_channels"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.Stitching.BlocksChannelsCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Stitching/ExposureCompensatorTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/stitching-structured-parity-guide.md"
+        }
+      ]
+    }
+  ],
+  "sourceReviewedExtensions": [
+    {
+      "upstreamIdentity": "cv::detail::NoExposureCompensator default construction",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "adaptation": "Adds an explicit owned managed no-op constructor; the parser emits its inherited operations but not its implicit default constructor.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_no"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv::Stitcher::waveCorrectKind/setWaveCorrectKind",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "adaptation": "Source-reviewed high-level property pair omitted by hdr_parser and kept outside parser-derived counts.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_int_property",
+        "jyppx_ocv_stitcher_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|OpenCvSharp.Stitching.WaveCorrectKind WaveCorrectKind"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv::Stitcher::resultMask",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "adaptation": "Copies the source-reviewed internal result mask into caller-owned or newly allocated managed Mat storage.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_result_mask"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Core.Mat GetResultMask()",
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|System.Void GetResultMask(OpenCvSharp.Core.Mat resultMask)"
+      ]
+    }
+  ]
+}

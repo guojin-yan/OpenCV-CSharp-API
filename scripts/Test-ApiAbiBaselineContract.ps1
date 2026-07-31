@@ -53,6 +53,9 @@ $mlRawPath = Join-Path $repo "compatibility/ml-upstream-raw.json"
 $trackingMapPath = Join-Path $repo "compatibility/tracking-upstream-map.txt"
 $trackingSummaryPath = Join-Path $repo "compatibility/tracking-upstream-summary.json"
 $trackingRawPath = Join-Path $repo "compatibility/tracking-upstream-raw.json"
+$stitchingMapPath = Join-Path $repo "compatibility/stitching-upstream-map.txt"
+$stitchingSummaryPath = Join-Path $repo "compatibility/stitching-upstream-summary.json"
+$stitchingRawPath = Join-Path $repo "compatibility/stitching-upstream-raw.json"
 $videoMapPath = Join-Path $repo "compatibility/video-upstream-map.txt"
 $videoSummaryPath = Join-Path $repo "compatibility/video-upstream-summary.json"
 $videoRawPath = Join-Path $repo "compatibility/video-upstream-raw.json"
@@ -249,6 +252,9 @@ function Test-GapInventory {
         [Parameter(Mandatory)][object]$TrackingSummary,
         [Parameter(Mandatory)][string]$TrackingMapHash,
         [Parameter(Mandatory)][string]$TrackingRawHash,
+        [Parameter(Mandatory)][object]$StitchingSummary,
+        [Parameter(Mandatory)][string]$StitchingMapHash,
+        [Parameter(Mandatory)][string]$StitchingRawHash,
         [Parameter(Mandatory)][object]$VideoSummary,
         [Parameter(Mandatory)][string]$VideoMapHash,
         [Parameter(Mandatory)][string]$VideoRawHash,
@@ -267,7 +273,7 @@ function Test-GapInventory {
 
     Assert-True -List $List -Condition ($Inventory.schemaVersion -eq 1 -and $Inventory.upstreamOpenCvVersion -eq "5.0.0" -and $Inventory.status -eq "baseline-established-native-managed-parity-measured") -Path $Path -Issue "API gap inventory identity/status drifted"
     Assert-True -List $List -Condition ($Inventory.baselines.managed.sha256 -eq $ManagedHash -and [int]$Inventory.baselines.managed.typeCount -eq [int]$Summary.typeCount -and [int]$Inventory.baselines.managed.memberCount -eq [int]$Summary.memberCount -and [int]$Inventory.baselines.managed.namespaceCount -eq [int]$Summary.namespaceCount) -Path $Path -Issue "API gap inventory managed baseline evidence drifted"
-    Assert-True -List $List -Condition ($Inventory.baselines.nativeFull.sha256 -eq $NativeFullHash -and [int]$Inventory.baselines.nativeFull.functionCount -eq 2523 -and $Inventory.baselines.nativeFull.primaryPrefix -eq "jyppx_ocv_") -Path $Path -Issue "API gap inventory full native baseline evidence drifted"
+    Assert-True -List $List -Condition ($Inventory.baselines.nativeFull.sha256 -eq $NativeFullHash -and [int]$Inventory.baselines.nativeFull.functionCount -eq 2545 -and $Inventory.baselines.nativeFull.primaryPrefix -eq "jyppx_ocv_") -Path $Path -Issue "API gap inventory full native baseline evidence drifted"
     Assert-True -List $List -Condition ($Inventory.baselines.nativeMini.sha256 -eq $NativeMiniHash -and [int]$Inventory.baselines.nativeMini.functionCount -eq 526 -and $Inventory.baselines.nativeMini.primaryPrefix -eq "jyppx_ocv_") -Path $Path -Issue "API gap inventory mini native baseline evidence drifted"
     Assert-True -List $List -Condition ($Inventory.baselines.nativeManagedBindingMap.sha256 -eq $BindingMapHash -and $Inventory.baselines.nativeManagedBindingMap.path -eq "compatibility/native-managed-binding-map.txt" -and $Inventory.baselines.nativeManagedBindingMap.summaryPath -eq "compatibility/native-managed-binding-summary.json" -and [int]$Inventory.baselines.nativeManagedBindingMap.nativeFunctionCount -eq [int]$BindingSummary.nativeFunctionCount -and [int]$Inventory.baselines.nativeManagedBindingMap.managedBoundCount -eq [int]$BindingSummary.managedBoundCount -and [int]$Inventory.baselines.nativeManagedBindingMap.unboundCount -eq 0 -and [int]$Inventory.baselines.nativeManagedBindingMap.managedOnlyCount -eq 0) -Path $Path -Issue "API gap inventory native-to-managed binding evidence drifted"
     Assert-True -List $List -Condition ($Inventory.baselines.imgProcUpstreamMap.sha256 -eq $ImgProcMapHash -and $Inventory.baselines.imgProcUpstreamMap.summaryPath -eq "compatibility/imgproc-upstream-summary.json" -and $Inventory.baselines.imgProcUpstreamMap.familyInventoryPath -eq "compatibility/imgproc-implemented-families.json" -and [int]$Inventory.baselines.imgProcUpstreamMap.declarationCount -eq [int]$ImgProcSummary.declarationCount -and [int]$Inventory.baselines.imgProcUpstreamMap.implementedCount -eq [int]$ImgProcSummary.classificationCounts.implemented -and [int]$Inventory.baselines.imgProcUpstreamMap.missingCount -eq [int]$ImgProcSummary.classificationCounts.missing) -Path $Path -Issue "API gap inventory ImgProc upstream-map evidence drifted"
@@ -417,6 +423,35 @@ function Test-GapInventory {
         [int]$Inventory.baselines.trackingUpstreamMap.managedPublicMemberAdditionCount -eq [int]$TrackingSummary.managedPublicMemberAdditionCount -and
         [int]$Inventory.baselines.trackingUpstreamMap.nativeEntrypointAdditionCount -eq [int]$TrackingSummary.nativeEntrypointAdditionCount
     Assert-True -List $List -Condition $trackingInventoryMatches -Path $Path -Issue "API gap inventory Tracking upstream-map evidence drifted"
+    $stitchingInventoryMatches =
+        $Inventory.baselines.stitchingUpstreamMap.sha256 -eq $StitchingMapHash -and
+        $Inventory.baselines.stitchingUpstreamMap.rawSha256 -eq $StitchingRawHash -and
+        $Inventory.baselines.stitchingUpstreamMap.summaryPath -eq "compatibility/stitching-upstream-summary.json" -and
+        $Inventory.baselines.stitchingUpstreamMap.classificationPath -eq "compatibility/stitching-upstream-classifications.json" -and
+        $Inventory.baselines.stitchingUpstreamMap.familyInventoryPath -eq "compatibility/stitching-implemented-families.json" -and
+        $Inventory.baselines.stitchingUpstreamMap.rawExtractionPath -eq "compatibility/stitching-upstream-raw.json" -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.declarationCount -eq [int]$StitchingSummary.declarationCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.callableCount -eq [int]$StitchingSummary.callableCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.implementedCount -eq [int]$StitchingSummary.classificationCounts.implemented -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.missingCount -eq [int]$StitchingSummary.classificationCounts.missing -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.intentionallyOmittedCount -eq [int]$StitchingSummary.classificationCounts.'intentionally-omitted' -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.unsupportedCount -eq [int]$StitchingSummary.classificationCounts.unsupported -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.upstreamConditionalCount -eq [int]$StitchingSummary.classificationCounts.'upstream-conditional' -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.highLevelDeclarationCount -eq [int]$StitchingSummary.surfaceCounts.primary.declarations -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.highLevelCallableCount -eq [int]$StitchingSummary.surfaceCounts.primary.callables -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.highLevelImplementedCount -eq [int]$StitchingSummary.surfaceCounts.primary.implemented -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.exposureDeclarationCount -eq [int]$StitchingSummary.surfaceCounts.'detail-exposure'.declarations -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.exposureCallableCount -eq [int]$StitchingSummary.surfaceCounts.'detail-exposure'.callables -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.exposureImplementedCount -eq [int]$StitchingSummary.surfaceCounts.'detail-exposure'.implemented -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.sourceHeaderCount -eq [int]$StitchingSummary.sourceHeaderCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.compatibilityHeaderCount -eq [int]$StitchingSummary.compatibilityHeaderCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.selectedFamilyCount -eq [int]$StitchingSummary.selectedFamilyCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.selectedDeclarationCount -eq [int]$StitchingSummary.selectedDeclarationCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.sourceReviewedExtensionCount -eq [int]$StitchingSummary.sourceReviewedExtensionCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.managedPublicTypeAdditionCount -eq [int]$StitchingSummary.managedPublicTypeAdditionCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.managedPublicMemberAdditionCount -eq [int]$StitchingSummary.managedPublicMemberAdditionCount -and
+        [int]$Inventory.baselines.stitchingUpstreamMap.nativeEntrypointAdditionCount -eq [int]$StitchingSummary.nativeEntrypointAdditionCount
+    Assert-True -List $List -Condition $stitchingInventoryMatches -Path $Path -Issue "API gap inventory Stitching upstream-map evidence drifted"
     $videoInventoryMatches =
         $Inventory.baselines.videoUpstreamMap.sha256 -eq $VideoMapHash -and
         $Inventory.baselines.videoUpstreamMap.rawSha256 -eq $VideoRawHash -and
@@ -440,7 +475,7 @@ function Test-GapInventory {
         [int]$Inventory.baselines.videoUpstreamMap.managedPublicMemberAdditionCount -eq [int]$VideoSummary.managedPublicMemberAdditionCount -and
         [int]$Inventory.baselines.videoUpstreamMap.nativeEntrypointAdditionCount -eq [int]$VideoSummary.nativeEntrypointAdditionCount
     Assert-True -List $List -Condition $videoInventoryMatches -Path $Path -Issue "API gap inventory Video upstream-map evidence drifted"
-    Assert-True -List $List -Condition ([bool]$Inventory.measurements.managedPublicSurfaceBaseline -and [bool]$Inventory.measurements.nativeCAbiBaseline -and -not [bool]$Inventory.measurements.upstreamCppParityMeasured -and [bool]$Inventory.measurements.imgProcHeaderSliceMeasured -and [bool]$Inventory.measurements.imgCodecsHeaderSliceMeasured -and [bool]$Inventory.measurements.videoIOHeaderSliceMeasured -and [bool]$Inventory.measurements.videoIORegistrySurfaceMeasured -and [bool]$Inventory.measurements.calib3DCompatibilityClosureMeasured -and [bool]$Inventory.measurements.coreCompatibilityClosureMeasured -and [bool]$Inventory.measurements.dnnCompatibilityClosureMeasured -and [bool]$Inventory.measurements.featuresCompatibilityClosureMeasured -and [bool]$Inventory.measurements.objDetectCompatibilityClosureMeasured -and [bool]$Inventory.measurements.photoCompatibilityClosureMeasured -and [bool]$Inventory.measurements.mlCompatibilityClosureMeasured -and [bool]$Inventory.measurements.trackingCompatibilityClosureMeasured -and [bool]$Inventory.measurements.videoCompatibilityClosureMeasured -and [bool]$Inventory.measurements.nativeToManagedParityMeasured -and -not [bool]$Inventory.measurements.ownershipErrorMarshallingAuditComplete -and -not [bool]$Inventory.measurements.packageSurfaceDefinesSupport) -Path $Path -Issue "API gap inventory measured-parity or support claims drifted"
+    Assert-True -List $List -Condition ([bool]$Inventory.measurements.managedPublicSurfaceBaseline -and [bool]$Inventory.measurements.nativeCAbiBaseline -and -not [bool]$Inventory.measurements.upstreamCppParityMeasured -and [bool]$Inventory.measurements.imgProcHeaderSliceMeasured -and [bool]$Inventory.measurements.imgCodecsHeaderSliceMeasured -and [bool]$Inventory.measurements.videoIOHeaderSliceMeasured -and [bool]$Inventory.measurements.videoIORegistrySurfaceMeasured -and [bool]$Inventory.measurements.calib3DCompatibilityClosureMeasured -and [bool]$Inventory.measurements.coreCompatibilityClosureMeasured -and [bool]$Inventory.measurements.dnnCompatibilityClosureMeasured -and [bool]$Inventory.measurements.featuresCompatibilityClosureMeasured -and [bool]$Inventory.measurements.objDetectCompatibilityClosureMeasured -and [bool]$Inventory.measurements.photoCompatibilityClosureMeasured -and [bool]$Inventory.measurements.mlCompatibilityClosureMeasured -and [bool]$Inventory.measurements.trackingCompatibilityClosureMeasured -and [bool]$Inventory.measurements.stitchingCompatibilityClosureMeasured -and [bool]$Inventory.measurements.videoCompatibilityClosureMeasured -and [bool]$Inventory.measurements.nativeToManagedParityMeasured -and -not [bool]$Inventory.measurements.ownershipErrorMarshallingAuditComplete -and -not [bool]$Inventory.measurements.packageSurfaceDefinesSupport) -Path $Path -Issue "API gap inventory measured-parity or support claims drifted"
     Assert-True -List $List -Condition (-not [bool]$Inventory.policy.baselineIsParityClaim -and [bool]$Inventory.policy.baselineUpdateRequiresReview -and [bool]$Inventory.policy.breakingChangeRequiresExplicitDecision -and [bool]$Inventory.policy.supportRequiresRuntimeEvidence) -Path $Path -Issue "API gap inventory policy drifted"
 
     $expectedGapIds = @("managed-upstream-parity-map","native-to-managed-binding-map","ownership-error-marshalling-audit","public-api-compatibility-review","sample-and-guide-coverage-map")
@@ -784,6 +819,14 @@ $mlGuardArguments = @{ RepositoryRoot = $repo }
 if (-not [string]::IsNullOrWhiteSpace($DotNetPath)) { $mlGuardArguments.DotNetPath = $DotNetPath }
 & (Join-Path $repo "scripts/Test-MlUpstreamMap.ps1") @mlGuardArguments
 if (-not $?) { throw "ML upstream-map generated-file freshness check failed." }
+$trackingGuardArguments = @{ RepositoryRoot = $repo }
+if (-not [string]::IsNullOrWhiteSpace($DotNetPath)) { $trackingGuardArguments.DotNetPath = $DotNetPath }
+& (Join-Path $repo "scripts/Test-TrackingUpstreamMap.ps1") @trackingGuardArguments
+if (-not $?) { throw "Tracking upstream-map generated-file freshness check failed." }
+$stitchingGuardArguments = @{ RepositoryRoot = $repo }
+if (-not [string]::IsNullOrWhiteSpace($DotNetPath)) { $stitchingGuardArguments.DotNetPath = $DotNetPath }
+& (Join-Path $repo "scripts/Test-StitchingUpstreamMap.ps1") @stitchingGuardArguments
+if (-not $?) { throw "Stitching upstream-map generated-file freshness check failed." }
 $videoGuardArguments = @{ RepositoryRoot = $repo }
 if (-not [string]::IsNullOrWhiteSpace($DotNetPath)) { $videoGuardArguments.DotNetPath = $DotNetPath }
 & (Join-Path $repo "scripts/Test-VideoUpstreamMap.ps1") @videoGuardArguments
@@ -829,6 +872,8 @@ $mlFamilyText = [IO.File]::ReadAllText($mlFamilyPath)
 $mlFamily = $mlFamilyText | ConvertFrom-Json
 $trackingMapText = [IO.File]::ReadAllText($trackingMapPath)
 $trackingSummary = Get-Content -LiteralPath $trackingSummaryPath -Raw | ConvertFrom-Json
+$stitchingMapText = [IO.File]::ReadAllText($stitchingMapPath)
+$stitchingSummary = Get-Content -LiteralPath $stitchingSummaryPath -Raw | ConvertFrom-Json
 $videoMapText = [IO.File]::ReadAllText($videoMapPath)
 $videoSummary = Get-Content -LiteralPath $videoSummaryPath -Raw | ConvertFrom-Json
 $managedHash = Get-TextSha256 $managedText
@@ -854,13 +899,15 @@ $mlRawHash = (Get-FileHash -LiteralPath $mlRawPath -Algorithm SHA256).Hash.ToLow
 $mlFamilyHash = Get-TextSha256 $mlFamilyText
 $trackingMapHash = Get-TextSha256 $trackingMapText
 $trackingRawHash = (Get-FileHash -LiteralPath $trackingRawPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$stitchingMapHash = Get-TextSha256 $stitchingMapText
+$stitchingRawHash = (Get-FileHash -LiteralPath $stitchingRawPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $videoMapHash = Get-TextSha256 $videoMapText
 $videoRawHash = (Get-FileHash -LiteralPath $videoRawPath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 Test-ManagedBaselineDocument -Text $managedText -Summary $managedSummary -List $violations -Path "compatibility/managed-public-api.txt"
-Test-NativeManifestDocument -Text $nativeFullText -ExpectedCount 2523 -Mini $false -List $violations -Path "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
+Test-NativeManifestDocument -Text $nativeFullText -ExpectedCount 2545 -Mini $false -List $violations -Path "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
 Test-NativeManifestDocument -Text $nativeMiniText -ExpectedCount 526 -Mini $true -List $violations -Path "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
-Test-GapInventory -Inventory $gapInventory -Summary $managedSummary -ManagedHash $managedHash -NativeFullHash $nativeFullHash -NativeMiniHash $nativeMiniHash -BindingSummary $bindingSummary -BindingMapHash $bindingMapHash -ImgProcSummary $imgProcSummary -ImgProcMapHash $imgProcMapHash -ImgCodecsSummary $imgCodecsSummary -ImgCodecsMapHash $imgCodecsMapHash -VideoIOSummary $videoIOSummary -VideoIOMapHash $videoIOMapHash -VideoIORegistryHash $videoIORegistryHash -Calib3DSummary $calib3DSummary -Calib3DMapHash $calib3DMapHash -CoreSummary $coreSummary -CoreMapHash $coreMapHash -DnnSummary $dnnSummary -DnnMapHash $dnnMapHash -FeaturesSummary $featuresSummary -FeaturesMapHash $featuresMapHash -ObjDetectSummary $objDetectSummary -ObjDetectMapHash $objDetectMapHash -ObjDetectRawHash $objDetectRawHash -PhotoSummary $photoSummary -PhotoMapHash $photoMapHash -PhotoRawHash $photoRawHash -MlSummary $mlSummary -MlMapHash $mlMapHash -MlRawHash $mlRawHash -TrackingSummary $trackingSummary -TrackingMapHash $trackingMapHash -TrackingRawHash $trackingRawHash -VideoSummary $videoSummary -VideoMapHash $videoMapHash -VideoRawHash $videoRawHash -List $violations -Path "compatibility/api-gap-inventory.json"
+Test-GapInventory -Inventory $gapInventory -Summary $managedSummary -ManagedHash $managedHash -NativeFullHash $nativeFullHash -NativeMiniHash $nativeMiniHash -BindingSummary $bindingSummary -BindingMapHash $bindingMapHash -ImgProcSummary $imgProcSummary -ImgProcMapHash $imgProcMapHash -ImgCodecsSummary $imgCodecsSummary -ImgCodecsMapHash $imgCodecsMapHash -VideoIOSummary $videoIOSummary -VideoIOMapHash $videoIOMapHash -VideoIORegistryHash $videoIORegistryHash -Calib3DSummary $calib3DSummary -Calib3DMapHash $calib3DMapHash -CoreSummary $coreSummary -CoreMapHash $coreMapHash -DnnSummary $dnnSummary -DnnMapHash $dnnMapHash -FeaturesSummary $featuresSummary -FeaturesMapHash $featuresMapHash -ObjDetectSummary $objDetectSummary -ObjDetectMapHash $objDetectMapHash -ObjDetectRawHash $objDetectRawHash -PhotoSummary $photoSummary -PhotoMapHash $photoMapHash -PhotoRawHash $photoRawHash -MlSummary $mlSummary -MlMapHash $mlMapHash -MlRawHash $mlRawHash -TrackingSummary $trackingSummary -TrackingMapHash $trackingMapHash -TrackingRawHash $trackingRawHash -StitchingSummary $stitchingSummary -StitchingMapHash $stitchingMapHash -StitchingRawHash $stitchingRawHash -VideoSummary $videoSummary -VideoMapHash $videoMapHash -VideoRawHash $videoRawHash -List $violations -Path "compatibility/api-gap-inventory.json"
 Test-SpanFamilyInventory -Inventory $spanFamily -List $violations -Path "compatibility/imgproc-point-set-span-family.json"
 Test-ImgProcFamilyInventory -Summary $imgProcSummary -Inventory $imgProcFamily -MappingHash $imgProcMapHash -InventoryHash $imgProcFamilyHash -List $violations -Path "compatibility/imgproc-implemented-families.json"
 Test-Calib3DFamilyInventory -Summary $calib3DSummary -Inventory $calib3DFamily -MappingHash $calib3DMapHash -InventoryHash $calib3DFamilyHash -List $violations -Path "compatibility/calib3d-implemented-families.json"
@@ -915,18 +962,18 @@ Assert-FixtureRejected -Name "reordered native ABI" -ExpectedIssue "ordinal func
     $temporary = $fixture[$index]
     $fixture[$index] = $fixture[$index + 1]
     $fixture[$index + 1] = $temporary
-    Test-NativeManifestDocument -Text (($fixture -join "`n") + "`n") -ExpectedCount 2523 -Mini $false -List $list -Path "fixture/reordered-native-abi.txt"
+    Test-NativeManifestDocument -Text (($fixture -join "`n") + "`n") -ExpectedCount 2545 -Mini $false -List $list -Path "fixture/reordered-native-abi.txt"
 }
 Assert-FixtureRejected -Name "fixed-major primary native ABI" -ExpectedIssue "primary/compatibility identity" -Action {
     param($list)
     $fixture = @((Normalize-Text $nativeFullText).TrimEnd("`n").Split("`n"))
     $index = [Array]::IndexOf($fixture, "[functions]") + 1
     $fixture[$index] = $fixture[$index] -replace "^jyppx_ocv_", "jyppx_ocv6_"
-    Test-NativeManifestDocument -Text (($fixture -join "`n") + "`n") -ExpectedCount 2523 -Mini $false -List $list -Path "fixture/fixed-major-primary-native-abi.txt"
+    Test-NativeManifestDocument -Text (($fixture -join "`n") + "`n") -ExpectedCount 2545 -Mini $false -List $list -Path "fixture/fixed-major-primary-native-abi.txt"
 }
 Assert-FixtureRejected -Name "missing gap inventory" -ExpectedIssue "gap inventory is missing" -Action {
     param($list)
-    Test-GapInventory -Inventory $null -Summary $managedSummary -ManagedHash $managedHash -NativeFullHash $nativeFullHash -NativeMiniHash $nativeMiniHash -BindingSummary $bindingSummary -BindingMapHash $bindingMapHash -ImgProcSummary $imgProcSummary -ImgProcMapHash $imgProcMapHash -ImgCodecsSummary $imgCodecsSummary -ImgCodecsMapHash $imgCodecsMapHash -VideoIOSummary $videoIOSummary -VideoIOMapHash $videoIOMapHash -VideoIORegistryHash $videoIORegistryHash -Calib3DSummary $calib3DSummary -Calib3DMapHash $calib3DMapHash -CoreSummary $coreSummary -CoreMapHash $coreMapHash -DnnSummary $dnnSummary -DnnMapHash $dnnMapHash -FeaturesSummary $featuresSummary -FeaturesMapHash $featuresMapHash -ObjDetectSummary $objDetectSummary -ObjDetectMapHash $objDetectMapHash -ObjDetectRawHash $objDetectRawHash -PhotoSummary $photoSummary -PhotoMapHash $photoMapHash -PhotoRawHash $photoRawHash -MlSummary $mlSummary -MlMapHash $mlMapHash -MlRawHash $mlRawHash -TrackingSummary $trackingSummary -TrackingMapHash $trackingMapHash -TrackingRawHash $trackingRawHash -VideoSummary $videoSummary -VideoMapHash $videoMapHash -VideoRawHash $videoRawHash -List $list -Path "fixture/missing-gap-inventory.json"
+    Test-GapInventory -Inventory $null -Summary $managedSummary -ManagedHash $managedHash -NativeFullHash $nativeFullHash -NativeMiniHash $nativeMiniHash -BindingSummary $bindingSummary -BindingMapHash $bindingMapHash -ImgProcSummary $imgProcSummary -ImgProcMapHash $imgProcMapHash -ImgCodecsSummary $imgCodecsSummary -ImgCodecsMapHash $imgCodecsMapHash -VideoIOSummary $videoIOSummary -VideoIOMapHash $videoIOMapHash -VideoIORegistryHash $videoIORegistryHash -Calib3DSummary $calib3DSummary -Calib3DMapHash $calib3DMapHash -CoreSummary $coreSummary -CoreMapHash $coreMapHash -DnnSummary $dnnSummary -DnnMapHash $dnnMapHash -FeaturesSummary $featuresSummary -FeaturesMapHash $featuresMapHash -ObjDetectSummary $objDetectSummary -ObjDetectMapHash $objDetectMapHash -ObjDetectRawHash $objDetectRawHash -PhotoSummary $photoSummary -PhotoMapHash $photoMapHash -PhotoRawHash $photoRawHash -MlSummary $mlSummary -MlMapHash $mlMapHash -MlRawHash $mlRawHash -TrackingSummary $trackingSummary -TrackingMapHash $trackingMapHash -TrackingRawHash $trackingRawHash -StitchingSummary $stitchingSummary -StitchingMapHash $stitchingMapHash -StitchingRawHash $stitchingRawHash -VideoSummary $videoSummary -VideoMapHash $videoMapHash -VideoRawHash $videoRawHash -List $list -Path "fixture/missing-gap-inventory.json"
 }
 Assert-FixtureRejected -Name "pending Span family" -ExpectedIssue "identity/status" -Action {
     param($list)
@@ -941,6 +988,6 @@ if ($violations.Count -gt 0) {
     exit 1
 }
 
-Write-Host "API_ABI_BASELINE_OK managed_types=$($managedSummary.typeCount) managed_members=$($managedSummary.memberCount) namespaces=$($managedSummary.namespaceCount) native_full=2523 native_mini=526 imgproc_callables=167 imgproc_implemented=161 imgcodecs_callables=22 imgcodecs_implemented=22 videoio_callables=40 videoio_implemented=40 registry_operations=12 calib3d_callables=167 calib3d_implemented=167 core_callables=215 core_implemented=176 dnn_callables=159 dnn_implemented=70 features_callables=160 features_implemented=134 objdetect_callables=163 objdetect_implemented=153 photo_callables=120 photo_implemented=120 ml_callables=208 ml_implemented=208 ml_missing=0 tracking_callables=21 tracking_implemented=21 tracking_missing=0 video_callables=145 video_implemented=138 video_missing=0 managed_sha256=$managedHash"
+Write-Host "API_ABI_BASELINE_OK managed_types=$($managedSummary.typeCount) managed_members=$($managedSummary.memberCount) namespaces=$($managedSummary.namespaceCount) native_full=2545 native_mini=526 imgproc_callables=167 imgproc_implemented=161 imgcodecs_callables=22 imgcodecs_implemented=22 videoio_callables=40 videoio_implemented=40 registry_operations=12 calib3d_callables=167 calib3d_implemented=167 core_callables=215 core_implemented=176 dnn_callables=159 dnn_implemented=70 features_callables=160 features_implemented=134 objdetect_callables=163 objdetect_implemented=153 photo_callables=120 photo_implemented=120 ml_callables=208 ml_implemented=208 ml_missing=0 tracking_callables=21 tracking_implemented=21 tracking_missing=0 stitching_callables=158 stitching_implemented=66 stitching_missing=92 video_callables=145 video_implemented=138 video_missing=0 managed_sha256=$managedHash"
 Write-Host "API/ABI baseline contract passed."
 Write-Host "Negative fixtures rejected: missing type, duplicate member, reorder, fixed-major identity, stale hash, native reorder, native fixed-major primary prefix, missing gap inventory, pending Span family."

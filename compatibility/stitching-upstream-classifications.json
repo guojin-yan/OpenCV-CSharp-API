@@ -1,0 +1,2351 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header",
+  "reviewStatus": "source-reviewed",
+  "limitation": "Closure is module-scoped. UMat/GPU, callbacks, retained detail strategies, templates, and repository-wide parity are not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "surface": "primary",
+      "identity": "class cv.Stitcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "surface": "primary",
+      "identity": "enum cv.Stitcher.Status[const cv.Stitcher.OK=0;const cv.Stitcher.ERR_NEED_MORE_IMGS=1;const cv.Stitcher.ERR_HOMOGRAPHY_EST_FAIL=2;const cv.Stitcher.ERR_CAMERA_PARAMS_ADJUST_FAIL=3]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "surface": "primary",
+      "identity": "enum cv.Stitcher.Mode[const cv.Stitcher.PANORAMA=0;const cv.Stitcher.SCANS=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "surface": "primary",
+      "identity": "cv.Stitcher.create(Mode mode=Stitcher::PANORAMA)-\u003EPtr\u003CStitcher\u003E",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_create"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;static|OpenCvSharp.Stitching.Stitcher Create(OpenCvSharp.Stitching.StitcherMode mode=Panorama)"
+      ]
+    },
+    {
+      "ordinal": 4,
+      "surface": "primary",
+      "identity": "cv.Stitcher.registrationResol()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double RegistrationResol"
+      ]
+    },
+    {
+      "ordinal": 5,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setRegistrationResol(double resol_mpx)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double RegistrationResol"
+      ]
+    },
+    {
+      "ordinal": 6,
+      "surface": "primary",
+      "identity": "cv.Stitcher.seamEstimationResol()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double SeamEstimationResol"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setSeamEstimationResol(double resol_mpx)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double SeamEstimationResol"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "surface": "primary",
+      "identity": "cv.Stitcher.compositingResol()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double CompositingResol"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setCompositingResol(double resol_mpx)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double CompositingResol"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "surface": "primary",
+      "identity": "cv.Stitcher.panoConfidenceThresh()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double PanoConfidenceThresh"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setPanoConfidenceThresh(double conf_thresh)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Double PanoConfidenceThresh"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "surface": "primary",
+      "identity": "cv.Stitcher.waveCorrection()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Boolean WaveCorrection"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setWaveCorrection(bool flag)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|System.Boolean WaveCorrection"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "surface": "primary",
+      "identity": "cv.Stitcher.interpolationFlags()-\u003EInterpolationFlags",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|OpenCvSharp.ImgProc.InterpolationFlags InterpolationFlags"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "surface": "primary",
+      "identity": "cv.Stitcher.setInterpolationFlags(InterpolationFlags interp_flags)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_set_int_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|OpenCvSharp.ImgProc.InterpolationFlags InterpolationFlags"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "surface": "primary",
+      "identity": "cv.Stitcher.estimateTransform(vector_Mat images;vector_Mat masks=vector_Mat())-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_estimate_transform"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Stitching.StitcherStatus EstimateTransform(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[]? masks)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "surface": "primary",
+      "identity": "cv.Stitcher.composePanorama(Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_compose_panorama"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Stitching.StitcherStatus ComposePanorama(OpenCvSharp.Core.Mat pano)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "surface": "primary",
+      "identity": "cv.Stitcher.composePanorama(vector_Mat images;Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_compose_panorama_images"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Stitching.StitcherStatus ComposePanorama(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat pano)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "surface": "primary",
+      "identity": "cv.Stitcher.stitch(vector_Mat images;Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_stitch"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Stitching.StitcherStatus Stitch(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat pano)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "surface": "primary",
+      "identity": "cv.Stitcher.stitch(vector_Mat images;vector_Mat masks;Mat pano[/O])-\u003EStatus",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_stitch"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Stitching.StitcherStatus Stitch(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[]? masks,OpenCvSharp.Core.Mat pano)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "surface": "primary",
+      "identity": "cv.Stitcher.component()-\u003Estd::vector\u003Cint\u003E",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_component_count",
+        "jyppx_ocv_stitcher_get_component_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|System.Int32[] GetComponent()"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "surface": "primary",
+      "identity": "cv.Stitcher.cameras()-\u003Estd::vector\u003Ccv::detail::CameraParams\u003E",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_cameras_count",
+        "jyppx_ocv_stitcher_get_cameras_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Stitching.StitcherCameraParams[] GetCameras()"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "surface": "primary",
+      "identity": "cv.Stitcher.workScale()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The existing high-level Stitcher surface implements this parser row through the version-neutral native ABI and managed API.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitcher_get_double_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public|System.Double WorkScale"
+      ]
+    },
+    {
+      "ordinal": 24,
+      "surface": "public-warpers",
+      "identity": "class cv.PyRotationWarper",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.PyRotationWarper(String type;float scale)-\u003E",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.PyRotationWarper()-\u003E",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 27,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpPoint(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 28,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpPointBackward(Point2f pt[/C,/Ref];Mat K;Mat R)-\u003EPoint2f",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 29,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.buildMaps(Size src_size;Mat K;Mat R;Mat xmap[/O];Mat ymap[/O])-\u003ERect",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 30,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warp(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Mat dst[/O,/O])-\u003EPoint",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpBackward(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Size dst_size;Mat dst[/O,/O])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.warpRoi(Size src_size;Mat K;Mat R)-\u003ERect",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 33,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.getScale()-\u003Efloat",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 34,
+      "surface": "public-warpers",
+      "identity": "cv.PyRotationWarper.setScale(float arg1)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Public PyRotationWarper construction, matrix validation, map ownership, ROI, and forward/backward warp operations remain an unimplemented module-scoped family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 35,
+      "surface": "public-warpers",
+      "identity": "class cv.WarperCreator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 36,
+      "surface": "detail-autocalib",
+      "identity": "cv.detail.focalsFromHomography(Mat H[/C,/Ref];double f0[/Ref];double f1[/Ref];bool f0_ok[/Ref];bool f1_ok[/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Autocalibration helpers remain unimplemented pending copied camera/matrix result contracts.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 37,
+      "surface": "detail-autocalib",
+      "identity": "cv.detail.calibrateRotatingCamera(vector_Mat Hs[/C,/Ref];Mat K[/O,/Ref])-\u003Ebool",
+      "classification": "missing",
+      "reason": "Autocalibration helpers remain unimplemented pending copied camera/matrix result contracts.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 38,
+      "surface": "detail-blenders",
+      "identity": "class cv.detail.Blender",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 39,
+      "surface": "detail-blenders",
+      "identity": "enum cv.detail.Blender.\u003Cunnamed\u003E[const cv.detail.Blender.NO=0;const cv.detail.Blender.FEATHER=1;const cv.detail.Blender.MULTI_BAND=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 40,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.createDefault(int type;bool try_gpu=false)-\u003EPtr\u003CBlender\u003E",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 41,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.prepare(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 42,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.prepare(Rect dst_roi)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 43,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 44,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.Blender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 45,
+      "surface": "detail-blenders",
+      "identity": "class cv.detail.FeatherBlender",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 46,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.FeatherBlender(float sharpness=0.02f)-\u003E",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 47,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.sharpness()-\u003Efloat",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 48,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.setSharpness(float val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 49,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.prepare(Rect dst_roi)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 50,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 51,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.blend(Mat dst[/IO];Mat dst_mask[/IO])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 52,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.FeatherBlender.createWeightMaps(vector_UMat masks[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat weight_maps[/IO,/Ref])-\u003ERect",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 53,
+      "surface": "detail-blenders",
+      "identity": "class cv.detail.MultiBandBlender",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 54,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.MultiBandBlender(int try_gpu=false;int num_bands=5;int weight_type=CV_32F)-\u003E",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 55,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.numBands()-\u003Eint",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 56,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.setNumBands(int val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 57,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.prepare(Rect dst_roi)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 58,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.feed(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 59,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.MultiBandBlender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 60,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.normalizeUsingWeightMap(Mat weight;Mat src[/IO,/IO])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 61,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.createWeightMap(Mat mask;float sharpness;Mat weight[/IO,/IO])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 62,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.createLaplacePyr(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 63,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.createLaplacePyrGpu(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 64,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.restoreImageFromLaplacePyr(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 65,
+      "surface": "detail-blenders",
+      "identity": "cv.detail.restoreImageFromLaplacePyrGpu(vector_UMat pyr[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail blender lifecycle, UMat pyramids, GPU branches, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 66,
+      "surface": "detail-camera",
+      "identity": "class cv.detail.CameraParams",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 67,
+      "surface": "detail-camera",
+      "identity": "cv.detail.CameraParams.K()-\u003EMat",
+      "classification": "missing",
+      "reason": "CameraParams.K remains unimplemented; copied high-level camera results do not expose the mutable detail object.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 68,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.ExposureCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 69,
+      "surface": "detail-exposure",
+      "identity": "enum cv.detail.ExposureCompensator.\u003Cunnamed\u003E[const cv.detail.ExposureCompensator.NO=0;const cv.detail.ExposureCompensator.GAIN=1;const cv.detail.ExposureCompensator.GAIN_BLOCKS=2;const cv.detail.ExposureCompensator.CHANNELS=3;const cv.detail.ExposureCompensator.CHANNELS_BLOCKS=4]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 70,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.createDefault(int type)-\u003EPtr\u003CExposureCompensator\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_default"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;static|OpenCvSharp.Stitching.ExposureCompensator CreateDefault(OpenCvSharp.Stitching.ExposureCompensatorType type)"
+      ]
+    },
+    {
+      "ordinal": 71,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.feed(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref];vector_UMat masks[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_feed"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Feed(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Mat[] masks)"
+      ]
+    },
+    {
+      "ordinal": 72,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 73,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.getMatGains(vector_Mat arg1[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+      ]
+    },
+    {
+      "ordinal": 74,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.setMatGains(vector_Mat arg1[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+      ]
+    },
+    {
+      "ordinal": 75,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.setUpdateGain(bool b)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_update_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain"
+      ]
+    },
+    {
+      "ordinal": 76,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ExposureCompensator.getUpdateGain()-\u003Ebool",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_update_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|property|instance;get:public;set:public|System.Boolean UpdateGain"
+      ]
+    },
+    {
+      "ordinal": 77,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.NoExposureCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 78,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.NoExposureCompensator.apply(int arg1;Point arg2;Mat arg3[/IO];Mat arg4)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 79,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.NoExposureCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+      ]
+    },
+    {
+      "ordinal": 80,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.NoExposureCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+      ]
+    },
+    {
+      "ordinal": 81,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.GainCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 82,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.GainCompensator()-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+      ]
+    },
+    {
+      "ordinal": 83,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.GainCompensator(int nr_feeds)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+      ]
+    },
+    {
+      "ordinal": 84,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 85,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+      ]
+    },
+    {
+      "ordinal": 86,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+      ]
+    },
+    {
+      "ordinal": 87,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ]
+    },
+    {
+      "ordinal": 88,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.getNrFeeds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ]
+    },
+    {
+      "ordinal": 89,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ]
+    },
+    {
+      "ordinal": 90,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.GainCompensator.getSimilarityThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ]
+    },
+    {
+      "ordinal": 91,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.ChannelsCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 92,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.ChannelsCompensator(int nr_feeds=1)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_channels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)"
+      ]
+    },
+    {
+      "ordinal": 93,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 94,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+      ]
+    },
+    {
+      "ordinal": 95,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+      ]
+    },
+    {
+      "ordinal": 96,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ]
+    },
+    {
+      "ordinal": 97,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.getNrFeeds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ]
+    },
+    {
+      "ordinal": 98,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ]
+    },
+    {
+      "ordinal": 99,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.ChannelsCompensator.getSimilarityThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ]
+    },
+    {
+      "ordinal": 100,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.BlocksCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 101,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 102,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+      ]
+    },
+    {
+      "ordinal": 103,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+      ]
+    },
+    {
+      "ordinal": 104,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setNrFeeds(int nr_feeds)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ]
+    },
+    {
+      "ordinal": 105,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getNrFeeds()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_number_of_feeds"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds"
+      ]
+    },
+    {
+      "ordinal": 106,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setSimilarityThreshold(double similarity_threshold)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ]
+    },
+    {
+      "ordinal": 107,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getSimilarityThreshold()-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_similarity_threshold"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold"
+      ]
+    },
+    {
+      "ordinal": 108,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setBlockSize(int width;int height)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize"
+      ]
+    },
+    {
+      "ordinal": 109,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setBlockSize(Size size)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize"
+      ]
+    },
+    {
+      "ordinal": 110,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getBlockSize()-\u003ESize",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_block_size"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|OpenCvSharp.Core.Size BlockSize"
+      ]
+    },
+    {
+      "ordinal": 111,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.setNrGainsFilteringIterations(int nr_iterations)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_filtering_iterations"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations"
+      ]
+    },
+    {
+      "ordinal": 112,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksCompensator.getNrGainsFilteringIterations()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_filtering_iterations"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksCompensator|property|instance;get:public;set:public|System.Int32 FilteringIterations"
+      ]
+    },
+    {
+      "ordinal": 113,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.BlocksGainCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 114,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width=32;int bl_height=32)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_blocks_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+      ]
+    },
+    {
+      "ordinal": 115,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width;int bl_height;int nr_feeds)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_blocks_gain"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksGainCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+      ]
+    },
+    {
+      "ordinal": 116,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_apply"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void Apply(System.Int32 index,OpenCvSharp.Core.Point corner,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat mask)"
+      ]
+    },
+    {
+      "ordinal": 117,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.getMatGains(vector_Mat umv[/O,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_get_mat_gains_count",
+        "jyppx_ocv_stitching_exposure_get_mat_gains_fill"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|OpenCvSharp.Core.Mat[] GetMatGains()"
+      ]
+    },
+    {
+      "ordinal": 118,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksGainCompensator.setMatGains(vector_Mat umv[/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_set_mat_gains"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.ExposureCompensator|method|public;instance|System.Void SetMatGains(OpenCvSharp.Core.Mat[] gains)"
+      ]
+    },
+    {
+      "ordinal": 119,
+      "surface": "detail-exposure",
+      "identity": "class cv.detail.BlocksChannelsCompensator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 120,
+      "surface": "detail-exposure",
+      "identity": "cv.detail.BlocksChannelsCompensator.BlocksChannelsCompensator(int bl_width=32;int bl_height=32;int nr_feeds=1)-\u003E",
+      "classification": "implemented",
+      "reason": "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_stitching_exposure_create_blocks_channels"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.Stitching.BlocksChannelsCompensator|constructor|public;instance|.ctor(System.Int32 blockWidth=32,System.Int32 blockHeight=32,System.Int32 numberOfFeeds=1)"
+      ]
+    },
+    {
+      "ordinal": 121,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.ImageFeatures",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 122,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.ImageFeatures.getKeypoints()-\u003Estd::vector\u003CKeyPoint\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 123,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];vector_Mat images;vector_ImageFeatures features[/O,/Ref];vector_Mat masks=vector_Mat())-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 124,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];Mat image;ImageFeatures features[/O,/Ref];Mat mask=Mat())-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 125,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.MatchesInfo",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 126,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.MatchesInfo.getMatches()-\u003Estd::vector\u003CDMatch\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 127,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.MatchesInfo.getInliers()-\u003Estd::vector\u003Cuchar\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 128,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.FeaturesMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 129,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.operator ()(ImageFeatures features1[/C,/Ref];ImageFeatures features2[/C,/Ref];MatchesInfo matches_info[/O,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 130,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/O,/Ref];UMat mask=cv::UMat()[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 131,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.isThreadSafe()-\u003Ebool",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 132,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.FeaturesMatcher.collectGarbage()-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 133,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.BestOf2NearestMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 134,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestMatcher.BestOf2NearestMatcher(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)-\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 135,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestMatcher.collectGarbage()-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 136,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestMatcher.create(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)-\u003EPtr\u003CBestOf2NearestMatcher\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 137,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.BestOf2NearestRangeMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 138,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.BestOf2NearestRangeMatcher.BestOf2NearestRangeMatcher(int range_width=5;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6)-\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 139,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.AffineBestOf2NearestMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 140,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.AffineBestOf2NearestMatcher.AffineBestOf2NearestMatcher(bool full_affine=false;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6)-\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 141,
+      "surface": "detail-matchers",
+      "identity": "class cv.detail.LightGlueFeaturesMatcher",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 142,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.LightGlueFeaturesMatcher.LightGlueFeaturesMatcher(Ptr_LightGlueMatcher lgMatcher;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.0)-\u003E",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 143,
+      "surface": "detail-matchers",
+      "identity": "cv.detail.LightGlueFeaturesMatcher.setScoreThreshold(float thresh)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail feature/matcher retained strategy and nested match collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 144,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.Estimator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 145,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.Estimator.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/C,/Ref];vector_CameraParams cameras[/IO,/Ref])-\u003Ebool",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 146,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.HomographyBasedEstimator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 147,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.HomographyBasedEstimator.HomographyBasedEstimator(bool is_focals_estimated=false)-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 148,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.AffineBasedEstimator",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 149,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.AffineBasedEstimator.AffineBasedEstimator()-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 150,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.BundleAdjusterBase",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 151,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.refinementMask()-\u003EMat",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 152,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.setRefinementMask(Mat mask[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 153,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.confThresh()-\u003Edouble",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 154,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.setConfThresh(double conf_thresh)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 155,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.termCriteria()-\u003ETermCriteria",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 156,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterBase.setTermCriteria(TermCriteria term_criteria[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 157,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.NoBundleAdjuster",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 158,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.NoBundleAdjuster.NoBundleAdjuster()-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 159,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.BundleAdjusterReproj",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 160,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterReproj.BundleAdjusterReproj()-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 161,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.BundleAdjusterRay",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 162,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterRay.BundleAdjusterRay()-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 163,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.BundleAdjusterAffine",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 164,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterAffine.BundleAdjusterAffine()-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 165,
+      "surface": "detail-motion-estimators",
+      "identity": "class cv.detail.BundleAdjusterAffinePartial",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 166,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.BundleAdjusterAffinePartial.BundleAdjusterAffinePartial()-\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 167,
+      "surface": "detail-motion-estimators",
+      "identity": "enum cv.detail.WaveCorrectKind[const cv.detail.WAVE_CORRECT_HORIZ=0;const cv.detail.WAVE_CORRECT_VERT=1;const cv.detail.WAVE_CORRECT_AUTO=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 168,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.waveCorrect(vector_Mat rmats[/IO,/Ref];WaveCorrectKind kind)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 169,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.matchesGraphAsString(vector_String paths[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003EString",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 170,
+      "surface": "detail-motion-estimators",
+      "identity": "cv.detail.leaveBiggestComponent(vector_ImageFeatures features[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)-\u003Estd::vector\u003Cint\u003E",
+      "classification": "missing",
+      "reason": "Detail estimator, bundle-adjuster, camera mutation, and utility result contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 171,
+      "surface": "detail-seam-finders",
+      "identity": "class cv.detail.SeamFinder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 172,
+      "surface": "detail-seam-finders",
+      "identity": "enum cv.detail.SeamFinder.\u003Cunnamed\u003E[const cv.detail.SeamFinder.NO=0;const cv.detail.SeamFinder.VORONOI_SEAM=1;const cv.detail.SeamFinder.DP_SEAM=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 173,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.SeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 174,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.SeamFinder.createDefault(int type)-\u003EPtr\u003CSeamFinder\u003E",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 175,
+      "surface": "detail-seam-finders",
+      "identity": "class cv.detail.NoSeamFinder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 176,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.NoSeamFinder.find(vector_UMat arg1[/C,/Ref];vector_Point arg2[/C,/Ref];vector_UMat arg3[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 177,
+      "surface": "detail-seam-finders",
+      "identity": "class cv.detail.PairwiseSeamFinder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 178,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.PairwiseSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 179,
+      "surface": "detail-seam-finders",
+      "identity": "class cv.detail.VoronoiSeamFinder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 180,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.VoronoiSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 181,
+      "surface": "detail-seam-finders",
+      "identity": "class cv.detail.DpSeamFinder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 182,
+      "surface": "detail-seam-finders",
+      "identity": "enum cv.detail.DpSeamFinder.CostFunction[const cv.detail.DpSeamFinder.COLOR=0;const cv.detail.DpSeamFinder.COLOR_GRAD=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 183,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.DpSeamFinder.DpSeamFinder(String costFunc)-\u003E",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 184,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.DpSeamFinder.setCostFunction(String val)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 185,
+      "surface": "detail-seam-finders",
+      "identity": "enum cv.detail.GraphCutSeamFinderBase.CostType[const cv.detail.GraphCutSeamFinderBase.COST_COLOR=0;const cv.detail.GraphCutSeamFinderBase.COST_COLOR_GRAD=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 186,
+      "surface": "detail-seam-finders",
+      "identity": "class cv.detail.GraphCutSeamFinder",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 187,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.GraphCutSeamFinder.GraphCutSeamFinder(String cost_type;float terminal_cost=10000.f;float bad_region_penalty=1000.f)-\u003E",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 188,
+      "surface": "detail-seam-finders",
+      "identity": "cv.detail.GraphCutSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail seam-finder retained strategy and mutable UMat mask collection contracts remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 189,
+      "surface": "detail-timelapsers",
+      "identity": "class cv.detail.Timelapser",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 190,
+      "surface": "detail-timelapsers",
+      "identity": "enum cv.detail.Timelapser.\u003Cunnamed\u003E[const cv.detail.Timelapser.AS_IS=0;const cv.detail.Timelapser.CROP=1]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 191,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.createDefault(int type)-\u003EPtr\u003CTimelapser\u003E",
+      "classification": "missing",
+      "reason": "Detail timelapser state, borrowed destination UMat, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 192,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.initialize(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail timelapser state, borrowed destination UMat, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 193,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.process(Mat img;Mat mask;Point tl)-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail timelapser state, borrowed destination UMat, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 194,
+      "surface": "detail-timelapsers",
+      "identity": "cv.detail.Timelapser.getDst()-\u003EUMat",
+      "classification": "missing",
+      "reason": "Detail timelapser state, borrowed destination UMat, and output ownership remain unimplemented.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 195,
+      "surface": "detail-timelapsers",
+      "identity": "class cv.detail.TimelapserCrop",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 196,
+      "surface": "detail-util",
+      "identity": "cv.detail.overlapRoi(Point tl1;Point tl2;Size sz1;Size sz2;Rect roi[/Ref])-\u003Ebool",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 197,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultRoi(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref])-\u003ERect",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 198,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultRoi(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003ERect",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 199,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultRoiIntersection(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])-\u003ERect",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 200,
+      "surface": "detail-util",
+      "identity": "cv.detail.resultTl(vector_Point corners[/C,/Ref])-\u003EPoint",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 201,
+      "surface": "detail-util",
+      "identity": "cv.detail.selectRandomSubset(int count;int size;vector_int subset[/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 202,
+      "surface": "detail-util",
+      "identity": "cv.detail.stitchingLogLevel()-\u003Eint",
+      "classification": "missing",
+      "reason": "Detail ROI, random subset, and logging helpers remain unimplemented as a separately reviewable utility family.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 203,
+      "surface": "detail-warpers",
+      "identity": "class cv.detail.ProjectorBase",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 204,
+      "surface": "detail-warpers",
+      "identity": "class cv.detail.SphericalProjector",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted type or enum shape is reviewed as metadata rather than an independent ABI operation.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 205,
+      "surface": "detail-warpers",
+      "identity": "cv.detail.SphericalProjector.mapForward(float x;float y;float u[/Ref];float v[/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Parser-visible internal projector methods remain unimplemented and are not conflated with public warpers.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 206,
+      "surface": "detail-warpers",
+      "identity": "cv.detail.SphericalProjector.mapBackward(float u;float v;float x[/Ref];float y[/Ref])-\u003Evoid",
+      "classification": "missing",
+      "reason": "Parser-visible internal projector methods remain unimplemented and are not conflated with public warpers.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

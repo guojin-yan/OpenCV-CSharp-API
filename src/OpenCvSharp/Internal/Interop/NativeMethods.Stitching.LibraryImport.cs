@@ -61,6 +61,72 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitcher_get_result_mask")]
         internal static partial int StitcherGetResultMask(IntPtr stitcher, IntPtr resultMask);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_create_default")]
+        internal static partial int StitchingExposureCreateDefault(int type, out IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_create_no")]
+        internal static partial int StitchingExposureCreateNo(out IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_create_gain")]
+        internal static partial int StitchingExposureCreateGain(int numberOfFeeds, out IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_create_channels")]
+        internal static partial int StitchingExposureCreateChannels(int numberOfFeeds, out IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_create_blocks_gain")]
+        internal static partial int StitchingExposureCreateBlocksGain(int blockWidth, int blockHeight, int numberOfFeeds, out IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_create_blocks_channels")]
+        internal static partial int StitchingExposureCreateBlocksChannels(int blockWidth, int blockHeight, int numberOfFeeds, out IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_release_handle")]
+        internal static partial void StitchingExposureReleaseHandle(IntPtr compensator);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_feed")]
+        internal static partial int StitchingExposureFeed(IntPtr compensator, int[] cornerX, int[] cornerY, int cornerCount, IntPtr[] images, int imageCount, IntPtr[] masks, int maskCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_apply")]
+        internal static partial int StitchingExposureApply(IntPtr compensator, int index, int cornerX, int cornerY, IntPtr image, IntPtr mask);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_mat_gains_count")]
+        internal static partial int StitchingExposureGetMatGainsCount(IntPtr compensator, out int gainCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_mat_gains_fill")]
+        internal static partial int StitchingExposureGetMatGainsFill(IntPtr compensator, IntPtr[] gains, int gainCapacity, out int gainCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_mat_gains")]
+        internal static partial int StitchingExposureSetMatGains(IntPtr compensator, IntPtr[] gains, int gainCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_update_gain")]
+        internal static partial int StitchingExposureGetUpdateGain(IntPtr compensator, out int updateGain);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_update_gain")]
+        internal static partial int StitchingExposureSetUpdateGain(IntPtr compensator, int updateGain);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_number_of_feeds")]
+        internal static partial int StitchingExposureGetNumberOfFeeds(IntPtr compensator, out int numberOfFeeds);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_number_of_feeds")]
+        internal static partial int StitchingExposureSetNumberOfFeeds(IntPtr compensator, int numberOfFeeds);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_similarity_threshold")]
+        internal static partial int StitchingExposureGetSimilarityThreshold(IntPtr compensator, out double similarityThreshold);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_similarity_threshold")]
+        internal static partial int StitchingExposureSetSimilarityThreshold(IntPtr compensator, double similarityThreshold);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_block_size")]
+        internal static partial int StitchingExposureGetBlockSize(IntPtr compensator, out int blockWidth, out int blockHeight);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_block_size")]
+        internal static partial int StitchingExposureSetBlockSize(IntPtr compensator, int blockWidth, int blockHeight);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_get_filtering_iterations")]
+        internal static partial int StitchingExposureGetFilteringIterations(IntPtr compensator, out int filteringIterations);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_exposure_set_filtering_iterations")]
+        internal static partial int StitchingExposureSetFilteringIterations(IntPtr compensator, int filteringIterations);
     }
 }
 #endif

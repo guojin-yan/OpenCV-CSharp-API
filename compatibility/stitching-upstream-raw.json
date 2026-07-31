@@ -1,0 +1,5427 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/StitchingUpstreamMap/extract_stitching.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+  "headerSha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "sha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960",
+      "includes": "opencv2/core.hpp;opencv2/features2d.hpp;opencv2/imgproc.hpp;opencv2/stitching/warpers.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "sha256": "b90a62bc0aee06816c9296f3cff19f78375ffcf5b8bbde5ffffcef5b0232d47b",
+      "includes": "opencv2/core.hpp;opencv2/imgproc.hpp;opencv2/stitching/detail/warpers.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/autocalib.hpp",
+      "sha256": "2c4107e72bf872061c41659e85914ff644778a0ecaac57f1252274aa54af8301",
+      "includes": "opencv2/core.hpp;opencv2/stitching/detail/camera.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "sha256": "ff361d24611c38f1963d1dd59c980f21cb514730baf1300ff5bfe23dde1805eb",
+      "includes": "opencv2/core.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/camera.hpp",
+      "sha256": "b1a5d84045121ddd6db63a2045679e58e21e83a5224214a71791420dd17b2c79",
+      "includes": "opencv2/core.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "sha256": "fab533f94ff612868728bd5065cc01819a60540b967b7c0cdde9fae1c58fccf7",
+      "includes": "opencv2/core.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "sha256": "0b37441e717b7fe07f18041fd1057f04681fa0f8aa29b183f9eb10f43cc83d3d",
+      "includes": "opencv2/core.hpp;opencv2/features2d.hpp;opencv2/stitching/detail/camera.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "sha256": "2e34fe92b9a8cd37976e5623956f7bd137c55fe23e61f6f97e81b8760bb9c885",
+      "includes": "opencv2/core.hpp;opencv2/stitching/detail/camera.hpp;opencv2/stitching/detail/matchers.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "sha256": "1b99fcb3a7aa88d98945261c4b66e0fa8871bfe1eca2bee156f08a05428ad811",
+      "includes": "opencv2/core.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "sha256": "8e13a2225415e9e4a633b3d0ce539e038271aedaeb7242afc0dfb58e55aa6771",
+      "includes": "opencv2/core.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "sha256": "6dfdc25654c4363868f778e338f65ee8e530d6012567f722d5ea458b0d06725a",
+      "includes": "opencv2/core.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util_inl.hpp",
+      "sha256": "75ad5d758c607f78151db4e9485791d8ef5dda0d5e2b9e2b11d9675b81e97559",
+      "includes": "opencv2/stitching/detail/util.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+      "sha256": "b9ebe3c1b9a869a0c323a2f4b43ec8faf10f594c905360c2f54c9f4b39b50d3e",
+      "includes": "opencv2/core.hpp;opencv2/imgproc.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers_inl.hpp",
+      "sha256": "40b095deb217b04ffe19971a12892d5f898a3a6e7eb0f25cfd93110d31e11fde",
+      "includes": "opencv2/stitching/detail/warpers.hpp"
+    }
+  ],
+  "excludedPublicHeaders": [],
+  "sourceHeaders": [
+    {
+      "surface": "primary",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "sha256": "6f063406b40722b15de037d46222e51eb9614ed998b78ce32d37b52d240b4960",
+      "startOrdinal": 0,
+      "declarationCount": 24
+    },
+    {
+      "surface": "public-warpers",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "sha256": "b90a62bc0aee06816c9296f3cff19f78375ffcf5b8bbde5ffffcef5b0232d47b",
+      "startOrdinal": 24,
+      "declarationCount": 12
+    },
+    {
+      "surface": "detail-autocalib",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/autocalib.hpp",
+      "sha256": "2c4107e72bf872061c41659e85914ff644778a0ecaac57f1252274aa54af8301",
+      "startOrdinal": 36,
+      "declarationCount": 2
+    },
+    {
+      "surface": "detail-blenders",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "sha256": "ff361d24611c38f1963d1dd59c980f21cb514730baf1300ff5bfe23dde1805eb",
+      "startOrdinal": 38,
+      "declarationCount": 28
+    },
+    {
+      "surface": "detail-camera",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/camera.hpp",
+      "sha256": "b1a5d84045121ddd6db63a2045679e58e21e83a5224214a71791420dd17b2c79",
+      "startOrdinal": 66,
+      "declarationCount": 2
+    },
+    {
+      "surface": "detail-exposure",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "sha256": "fab533f94ff612868728bd5065cc01819a60540b967b7c0cdde9fae1c58fccf7",
+      "startOrdinal": 68,
+      "declarationCount": 53
+    },
+    {
+      "surface": "detail-matchers",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "sha256": "0b37441e717b7fe07f18041fd1057f04681fa0f8aa29b183f9eb10f43cc83d3d",
+      "startOrdinal": 121,
+      "declarationCount": 23
+    },
+    {
+      "surface": "detail-motion-estimators",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "sha256": "2e34fe92b9a8cd37976e5623956f7bd137c55fe23e61f6f97e81b8760bb9c885",
+      "startOrdinal": 144,
+      "declarationCount": 27
+    },
+    {
+      "surface": "detail-seam-finders",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "sha256": "1b99fcb3a7aa88d98945261c4b66e0fa8871bfe1eca2bee156f08a05428ad811",
+      "startOrdinal": 171,
+      "declarationCount": 18
+    },
+    {
+      "surface": "detail-timelapsers",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "sha256": "8e13a2225415e9e4a633b3d0ce539e038271aedaeb7242afc0dfb58e55aa6771",
+      "startOrdinal": 189,
+      "declarationCount": 7
+    },
+    {
+      "surface": "detail-util",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "sha256": "6dfdc25654c4363868f778e338f65ee8e530d6012567f722d5ea458b0d06725a",
+      "startOrdinal": 196,
+      "declarationCount": 7
+    },
+    {
+      "surface": "detail-util-inl",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util_inl.hpp",
+      "sha256": "75ad5d758c607f78151db4e9485791d8ef5dda0d5e2b9e2b11d9675b81e97559",
+      "startOrdinal": 203,
+      "declarationCount": 0
+    },
+    {
+      "surface": "detail-warpers",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+      "sha256": "b9ebe3c1b9a869a0c323a2f4b43ec8faf10f594c905360c2f54c9f4b39b50d3e",
+      "startOrdinal": 203,
+      "declarationCount": 4
+    },
+    {
+      "surface": "detail-warpers-inl",
+      "path": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers_inl.hpp",
+      "sha256": "40b095deb217b04ffe19971a12892d5f898a3a6e7eb0f25cfd93110d31e11fde",
+      "startOrdinal": 207,
+      "declarationCount": 0
+    }
+  ],
+  "declarationCount": 207,
+  "surfaceCounts": {
+    "primary": 24,
+    "public-warpers": 12,
+    "detail-autocalib": 2,
+    "detail-blenders": 28,
+    "detail-camera": 2,
+    "detail-exposure": 53,
+    "detail-matchers": 23,
+    "detail-motion-estimators": 27,
+    "detail-seam-finders": 18,
+    "detail-timelapsers": 7,
+    "detail-util": 7,
+    "detail-util-inl": 0,
+    "detail-warpers": 4,
+    "detail-warpers-inl": 0
+  },
+  "declarations": [
+    {
+      "ordinal": 0,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "class",
+      "name": "cv.Stitcher",
+      "identity": "class cv.Stitcher",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief High level image stitcher.\n\nIt's possible to use this class without being aware of the entire stitching pipeline. However, to\nbe able to achieve higher stitching stability and quality of the final images at least being\nfamiliar with the theory is recommended.\n\n@note\n-   A basic example on image stitching can be found at\n    opencv_source_code/samples/cpp/stitching.cpp\n-   A basic example on image stitching in Python can be found at\n    opencv_source_code/samples/python/stitching.py\n-   A detailed example on image stitching can be found at\n    opencv_source_code/samples/cpp/stitching_detailed.cpp"
+    },
+    {
+      "ordinal": 1,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "enum",
+      "name": "cv.Stitcher.Status",
+      "identity": "enum cv.Stitcher.Status[const cv.Stitcher.OK=0;const cv.Stitcher.ERR_NEED_MORE_IMGS=1;const cv.Stitcher.ERR_HOMOGRAPHY_EST_FAIL=2;const cv.Stitcher.ERR_CAMERA_PARAMS_ADJUST_FAIL=3]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.Stitcher.OK",
+          "value": "0"
+        },
+        {
+          "name": "const cv.Stitcher.ERR_NEED_MORE_IMGS",
+          "value": "1"
+        },
+        {
+          "name": "const cv.Stitcher.ERR_HOMOGRAPHY_EST_FAIL",
+          "value": "2"
+        },
+        {
+          "name": "const cv.Stitcher.ERR_CAMERA_PARAMS_ADJUST_FAIL",
+          "value": "3"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "enum",
+      "name": "cv.Stitcher.Mode",
+      "identity": "enum cv.Stitcher.Mode[const cv.Stitcher.PANORAMA=0;const cv.Stitcher.SCANS=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.Stitcher.PANORAMA",
+          "value": "0"
+        },
+        {
+          "name": "const cv.Stitcher.SCANS",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.create",
+      "identity": "cv.Stitcher.create(Mode mode=Stitcher::PANORAMA)->Ptr<Stitcher>",
+      "returnType": "Ptr<Stitcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "Mode",
+          "name": "mode",
+          "default": "Stitcher::PANORAMA",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a Stitcher configured in one of the stitching modes.\n\n    @param mode Scenario for stitcher operation. This is usually determined by source of images\n    to stitch and their transformation. Default parameters will be chosen for operation in given\n    scenario.\n    @return Stitcher class instance."
+    },
+    {
+      "ordinal": 4,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.registrationResol",
+      "identity": "cv.Stitcher.registrationResol()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.setRegistrationResol",
+      "identity": "cv.Stitcher.setRegistrationResol(double resol_mpx)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "resol_mpx",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.seamEstimationResol",
+      "identity": "cv.Stitcher.seamEstimationResol()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.setSeamEstimationResol",
+      "identity": "cv.Stitcher.setSeamEstimationResol(double resol_mpx)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "resol_mpx",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 8,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.compositingResol",
+      "identity": "cv.Stitcher.compositingResol()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 9,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.setCompositingResol",
+      "identity": "cv.Stitcher.setCompositingResol(double resol_mpx)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "resol_mpx",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 10,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.panoConfidenceThresh",
+      "identity": "cv.Stitcher.panoConfidenceThresh()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 11,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.setPanoConfidenceThresh",
+      "identity": "cv.Stitcher.setPanoConfidenceThresh(double conf_thresh)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "conf_thresh",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.waveCorrection",
+      "identity": "cv.Stitcher.waveCorrection()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 13,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.setWaveCorrection",
+      "identity": "cv.Stitcher.setWaveCorrection(bool flag)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "flag",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 14,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.interpolationFlags",
+      "identity": "cv.Stitcher.interpolationFlags()->InterpolationFlags",
+      "returnType": "InterpolationFlags",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 15,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.setInterpolationFlags",
+      "identity": "cv.Stitcher.setInterpolationFlags(InterpolationFlags interp_flags)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "InterpolationFlags",
+          "name": "interp_flags",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 16,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.estimateTransform",
+      "identity": "cv.Stitcher.estimateTransform(vector_Mat images;vector_Mat masks=vector_Mat())->Status",
+      "returnType": "Status",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "vector_Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief These functions try to match the given images and to estimate rotations of each camera.\n\n    @note Use the functions only if you're aware of the stitching pipeline, otherwise use\n    Stitcher::stitch.\n\n    @param images Input images.\n    @param masks Masks for each input image specifying where to look for keypoints (optional).\n    @return Status code."
+    },
+    {
+      "ordinal": 17,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.composePanorama",
+      "identity": "cv.Stitcher.composePanorama(Mat pano[/O])->Status",
+      "returnType": "Status",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "pano",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 18,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.composePanorama",
+      "identity": "cv.Stitcher.composePanorama(vector_Mat images;Mat pano[/O])->Status",
+      "returnType": "Status",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pano",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief These functions try to compose the given images (or images stored internally from the other function\n    calls) into the final pano under the assumption that the image transformations were estimated\n    before.\n\n    @note Use the functions only if you're aware of the stitching pipeline, otherwise use\n    Stitcher::stitch.\n\n    @param images Input images.\n    @param pano Final pano.\n    @return Status code."
+    },
+    {
+      "ordinal": 19,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.stitch",
+      "identity": "cv.Stitcher.stitch(vector_Mat images;Mat pano[/O])->Status",
+      "returnType": "Status",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pano",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 20,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.stitch",
+      "identity": "cv.Stitcher.stitch(vector_Mat images;vector_Mat masks;Mat pano[/O])->Status",
+      "returnType": "Status",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "pano",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief These functions try to stitch the given images.\n\n    @param images Input images.\n    @param masks Masks for each input image specifying where to look for keypoints (optional).\n    @param pano Final pano.\n    @return Status code."
+    },
+    {
+      "ordinal": 21,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.component",
+      "identity": "cv.Stitcher.component()->std::vector<int>",
+      "returnType": "std::vector<int>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns indices of input images used in panorama stitching"
+    },
+    {
+      "ordinal": 22,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.cameras",
+      "identity": "cv.Stitcher.cameras()->std::vector<cv::detail::CameraParams>",
+      "returnType": "std::vector<cv::detail::CameraParams>",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "Returns estimated camera parameters for all stitched images"
+    },
+    {
+      "ordinal": 23,
+      "surface": "primary",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp",
+      "kind": "callable",
+      "name": "cv.Stitcher.workScale",
+      "identity": "cv.Stitcher.workScale()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 24,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "class",
+      "name": "cv.PyRotationWarper",
+      "identity": "class cv.PyRotationWarper",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 25,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.PyRotationWarper",
+      "identity": "cv.PyRotationWarper.PyRotationWarper(String type;float scale)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "scale",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 26,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.PyRotationWarper",
+      "identity": "cv.PyRotationWarper.PyRotationWarper()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 27,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.warpPoint",
+      "identity": "cv.PyRotationWarper.warpPoint(Point2f pt[/C,/Ref];Mat K;Mat R)->Point2f",
+      "returnType": "Point2f",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Point2f",
+          "name": "pt",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Projects the image point.\n\n        @param pt Source point\n        @param K Camera intrinsic parameters\n        @param R Camera rotation matrix\n        @return Projected point"
+    },
+    {
+      "ordinal": 28,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.warpPointBackward",
+      "identity": "cv.PyRotationWarper.warpPointBackward(Point2f pt[/C,/Ref];Mat K;Mat R)->Point2f",
+      "returnType": "Point2f",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Point2f",
+          "name": "pt",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Projects the image point backward.\n\n        @param pt Projected point\n        @param K Camera intrinsic parameters\n        @param R Camera rotation matrix\n        @return Backward-projected point"
+    },
+    {
+      "ordinal": 29,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.buildMaps",
+      "identity": "cv.PyRotationWarper.buildMaps(Size src_size;Mat K;Mat R;Mat xmap[/O];Mat ymap[/O])->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "src_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "xmap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "ymap",
+          "default": "",
+          "modifiers": [
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Builds the projection maps according to the given camera data.\n\n        @param src_size Source image size\n        @param K Camera intrinsic parameters\n        @param R Camera rotation matrix\n        @param xmap Projection map for the x axis\n        @param ymap Projection map for the y axis\n        @return Projected image minimum bounding box"
+    },
+    {
+      "ordinal": 30,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.warp",
+      "identity": "cv.PyRotationWarper.warp(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Mat dst[/O,/O])->Point",
+      "returnType": "Point",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interp_mode",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "border_mode",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Projects the image.\n\n        @param src Source image\n        @param K Camera intrinsic parameters\n        @param R Camera rotation matrix\n        @param interp_mode Interpolation mode\n        @param border_mode Border extrapolation mode\n        @param dst Projected image\n        @return Project image top-left corner"
+    },
+    {
+      "ordinal": 31,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.warpBackward",
+      "identity": "cv.PyRotationWarper.warpBackward(Mat src;Mat K;Mat R;int interp_mode;int border_mode;Size dst_size;Mat dst[/O,/O])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "interp_mode",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "border_mode",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "dst_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/O"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Projects the image backward.\n\n        @param src Projected image\n        @param K Camera intrinsic parameters\n        @param R Camera rotation matrix\n        @param interp_mode Interpolation mode\n        @param border_mode Border extrapolation mode\n        @param dst_size Backward-projected image size\n        @param dst Backward-projected image"
+    },
+    {
+      "ordinal": 32,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.warpRoi",
+      "identity": "cv.PyRotationWarper.warpRoi(Size src_size;Mat K;Mat R)->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "src_size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param src_size Source image bounding box\n        @param K Camera intrinsic parameters\n        @param R Camera rotation matrix\n        @return Projected image minimum bounding box"
+    },
+    {
+      "ordinal": 33,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.getScale",
+      "identity": "cv.PyRotationWarper.getScale()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 34,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.PyRotationWarper.setScale",
+      "identity": "cv.PyRotationWarper.setScale(float arg1)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "arg1",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 35,
+      "surface": "public-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/warpers.hpp",
+      "kind": "class",
+      "name": "cv.WarperCreator",
+      "identity": "class cv.WarperCreator",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Image warper factories base class."
+    },
+    {
+      "ordinal": 36,
+      "surface": "detail-autocalib",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/autocalib.hpp",
+      "kind": "callable",
+      "name": "cv.detail.focalsFromHomography",
+      "identity": "cv.detail.focalsFromHomography(Mat H[/C,/Ref];double f0[/Ref];double f1[/Ref];bool f0_ok[/Ref];bool f1_ok[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "H",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "f0",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "f1",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "f0_ok",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "f1_ok",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Tries to estimate focal lengths from the given homography under the assumption that the camera\nundergoes rotations around its centre only.\n\n@param H Homography.\n@param f0 Estimated focal length along X axis.\n@param f1 Estimated focal length along Y axis.\n@param f0_ok True, if f0 was estimated successfully, false otherwise.\n@param f1_ok True, if f1 was estimated successfully, false otherwise.\n\nSee \"Construction of Panoramic Image Mosaics with Global and Local Alignment\"\nby Heung-Yeung Shum and Richard Szeliski."
+    },
+    {
+      "ordinal": 37,
+      "surface": "detail-autocalib",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/autocalib.hpp",
+      "kind": "callable",
+      "name": "cv.detail.calibrateRotatingCamera",
+      "identity": "cv.detail.calibrateRotatingCamera(vector_Mat Hs[/C,/Ref];Mat K[/O,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "Hs",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "K",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimates focal lengths for each given camera.\n\n@param features Features of images.\n@param pairwise_matches Matches between all image pairs.\n@param focals Estimated focal lengths for each camera."
+    },
+    {
+      "ordinal": 38,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "class",
+      "name": "cv.detail.Blender",
+      "identity": "class cv.detail.Blender",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for all blenders.\n\nSimple blender which puts one image over another"
+    },
+    {
+      "ordinal": 39,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "enum",
+      "name": "cv.detail.Blender.<unnamed>",
+      "identity": "enum cv.detail.Blender.<unnamed>[const cv.detail.Blender.NO=0;const cv.detail.Blender.FEATHER=1;const cv.detail.Blender.MULTI_BAND=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.Blender.NO",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.Blender.FEATHER",
+          "value": "1"
+        },
+        {
+          "name": "const cv.detail.Blender.MULTI_BAND",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 40,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Blender.createDefault",
+      "identity": "cv.detail.Blender.createDefault(int type;bool try_gpu=false)->Ptr<Blender>",
+      "returnType": "Ptr<Blender>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "try_gpu",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 41,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Blender.prepare",
+      "identity": "cv.detail.Blender.prepare(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Size",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Prepares the blender for blending.\n\n    @param corners Source images top-left corners\n    @param sizes Source image sizes"
+    },
+    {
+      "ordinal": 42,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Blender.prepare",
+      "identity": "cv.detail.Blender.prepare(Rect dst_roi)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Rect",
+          "name": "dst_roi",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 43,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Blender.feed",
+      "identity": "cv.detail.Blender.feed(Mat img;Mat mask;Point tl)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "tl",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Processes the image.\n\n    @param img Source image\n    @param mask Source image mask\n    @param tl Source image top-left corners"
+    },
+    {
+      "ordinal": 44,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Blender.blend",
+      "identity": "cv.detail.Blender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst_mask",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Blends and returns the final pano.\n\n    @param dst Final pano\n    @param dst_mask Final pano mask"
+    },
+    {
+      "ordinal": 45,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "class",
+      "name": "cv.detail.FeatherBlender",
+      "identity": "class cv.detail.FeatherBlender",
+      "returnType": ": cv::detail::Blender",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::Blender",
+      "documentation": "@brief Simple blender which mixes images at its borders."
+    },
+    {
+      "ordinal": 46,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.FeatherBlender",
+      "identity": "cv.detail.FeatherBlender.FeatherBlender(float sharpness=0.02f)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "sharpness",
+          "default": "0.02f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 47,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.sharpness",
+      "identity": "cv.detail.FeatherBlender.sharpness()->float",
+      "returnType": "float",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 48,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.setSharpness",
+      "identity": "cv.detail.FeatherBlender.setSharpness(float val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 49,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.prepare",
+      "identity": "cv.detail.FeatherBlender.prepare(Rect dst_roi)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Rect",
+          "name": "dst_roi",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 50,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.feed",
+      "identity": "cv.detail.FeatherBlender.feed(Mat img;Mat mask;Point tl)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "tl",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 51,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.blend",
+      "identity": "cv.detail.FeatherBlender.blend(Mat dst[/IO];Mat dst_mask[/IO])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst_mask",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 52,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeatherBlender.createWeightMaps",
+      "identity": "cv.detail.FeatherBlender.createWeightMaps(vector_UMat masks[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat weight_maps[/IO,/Ref])->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "masks",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "weight_maps",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 53,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "class",
+      "name": "cv.detail.MultiBandBlender",
+      "identity": "class cv.detail.MultiBandBlender",
+      "returnType": ": cv::detail::Blender",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::Blender",
+      "documentation": "@brief Blender which uses multi-band blending algorithm (see @cite BA83)."
+    },
+    {
+      "ordinal": 54,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MultiBandBlender.MultiBandBlender",
+      "identity": "cv.detail.MultiBandBlender.MultiBandBlender(int try_gpu=false;int num_bands=5;int weight_type=CV_32F)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "try_gpu",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_bands",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "weight_type",
+          "default": "CV_32F",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 55,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MultiBandBlender.numBands",
+      "identity": "cv.detail.MultiBandBlender.numBands()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 56,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MultiBandBlender.setNumBands",
+      "identity": "cv.detail.MultiBandBlender.setNumBands(int val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 57,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MultiBandBlender.prepare",
+      "identity": "cv.detail.MultiBandBlender.prepare(Rect dst_roi)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Rect",
+          "name": "dst_roi",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 58,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MultiBandBlender.feed",
+      "identity": "cv.detail.MultiBandBlender.feed(Mat img;Mat mask;Point tl)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "tl",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 59,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MultiBandBlender.blend",
+      "identity": "cv.detail.MultiBandBlender.blend(Mat dst[/IO,/IO];Mat dst_mask[/IO,/IO])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "dst",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "dst_mask",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 60,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.normalizeUsingWeightMap",
+      "identity": "cv.detail.normalizeUsingWeightMap(Mat weight;Mat src[/IO,/IO])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "weight",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 61,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.createWeightMap",
+      "identity": "cv.detail.createWeightMap(Mat mask;float sharpness;Mat weight[/IO,/IO])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "sharpness",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "weight",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/IO"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 62,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.createLaplacePyr",
+      "identity": "cv.detail.createLaplacePyr(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_levels",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_UMat",
+          "name": "pyr",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 63,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.createLaplacePyrGpu",
+      "identity": "cv.detail.createLaplacePyrGpu(Mat img;int num_levels;vector_UMat pyr[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_levels",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_UMat",
+          "name": "pyr",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 64,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.restoreImageFromLaplacePyr",
+      "identity": "cv.detail.restoreImageFromLaplacePyr(vector_UMat pyr[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "pyr",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 65,
+      "surface": "detail-blenders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/blenders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.restoreImageFromLaplacePyrGpu",
+      "identity": "cv.detail.restoreImageFromLaplacePyrGpu(vector_UMat pyr[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "pyr",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 66,
+      "surface": "detail-camera",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/camera.hpp",
+      "kind": "class",
+      "name": "cv.detail.CameraParams",
+      "identity": "class cv.detail.CameraParams",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "focal",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "aspect",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "ppx",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "ppy",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "R",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "t",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Describes camera parameters.\n\n@note Translation is assumed to be zero during the whole stitching pipeline. :"
+    },
+    {
+      "ordinal": 67,
+      "surface": "detail-camera",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/camera.hpp",
+      "kind": "callable",
+      "name": "cv.detail.CameraParams.K",
+      "identity": "cv.detail.CameraParams.K()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 68,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.ExposureCompensator",
+      "identity": "class cv.detail.ExposureCompensator",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for all exposure compensators."
+    },
+    {
+      "ordinal": 69,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "enum",
+      "name": "cv.detail.ExposureCompensator.<unnamed>",
+      "identity": "enum cv.detail.ExposureCompensator.<unnamed>[const cv.detail.ExposureCompensator.NO=0;const cv.detail.ExposureCompensator.GAIN=1;const cv.detail.ExposureCompensator.GAIN_BLOCKS=2;const cv.detail.ExposureCompensator.CHANNELS=3;const cv.detail.ExposureCompensator.CHANNELS_BLOCKS=4]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.ExposureCompensator.NO",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.ExposureCompensator.GAIN",
+          "value": "1"
+        },
+        {
+          "name": "const cv.detail.ExposureCompensator.GAIN_BLOCKS",
+          "value": "2"
+        },
+        {
+          "name": "const cv.detail.ExposureCompensator.CHANNELS",
+          "value": "3"
+        },
+        {
+          "name": "const cv.detail.ExposureCompensator.CHANNELS_BLOCKS",
+          "value": "4"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 70,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.createDefault",
+      "identity": "cv.detail.ExposureCompensator.createDefault(int type)->Ptr<ExposureCompensator>",
+      "returnType": "Ptr<ExposureCompensator>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 71,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.feed",
+      "identity": "cv.detail.ExposureCompensator.feed(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref];vector_UMat masks[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "images",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "masks",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@param corners Source image top-left corners\n    @param images Source images\n    @param masks Image masks to update (second value in pair specifies the value which should be used\n    to detect where image is)"
+    },
+    {
+      "ordinal": 72,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.apply",
+      "identity": "cv.detail.ExposureCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "index",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "corner",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Compensate exposure in the specified image.\n\n    @param index Image index\n    @param corner Image top-left corner\n    @param image Image to process\n    @param mask Image mask"
+    },
+    {
+      "ordinal": 73,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.getMatGains",
+      "identity": "cv.detail.ExposureCompensator.getMatGains(vector_Mat arg1[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "arg1",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 74,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.setMatGains",
+      "identity": "cv.detail.ExposureCompensator.setMatGains(vector_Mat arg1[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "arg1",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 75,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.setUpdateGain",
+      "identity": "cv.detail.ExposureCompensator.setUpdateGain(bool b)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "b",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 76,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ExposureCompensator.getUpdateGain",
+      "identity": "cv.detail.ExposureCompensator.getUpdateGain()->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 77,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.NoExposureCompensator",
+      "identity": "class cv.detail.NoExposureCompensator",
+      "returnType": ": cv::detail::ExposureCompensator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::ExposureCompensator",
+      "documentation": "@brief Stub exposure compensator which does nothing."
+    },
+    {
+      "ordinal": 78,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.NoExposureCompensator.apply",
+      "identity": "cv.detail.NoExposureCompensator.apply(int arg1;Point arg2;Mat arg3[/IO];Mat arg4)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "arg1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "arg2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "arg3",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "arg4",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 79,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.NoExposureCompensator.getMatGains",
+      "identity": "cv.detail.NoExposureCompensator.getMatGains(vector_Mat umv[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 80,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.NoExposureCompensator.setMatGains",
+      "identity": "cv.detail.NoExposureCompensator.setMatGains(vector_Mat umv[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 81,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.GainCompensator",
+      "identity": "class cv.detail.GainCompensator",
+      "returnType": ": cv::detail::ExposureCompensator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::ExposureCompensator",
+      "documentation": "@brief Exposure compensator which tries to remove exposure related artifacts by adjusting image\nintensities, see @cite BL07 and @cite WJ10 for details."
+    },
+    {
+      "ordinal": 82,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.GainCompensator",
+      "identity": "cv.detail.GainCompensator.GainCompensator()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 83,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.GainCompensator",
+      "identity": "cv.detail.GainCompensator.GainCompensator(int nr_feeds)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 84,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.apply",
+      "identity": "cv.detail.GainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "index",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "corner",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 85,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.getMatGains",
+      "identity": "cv.detail.GainCompensator.getMatGains(vector_Mat umv[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 86,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.setMatGains",
+      "identity": "cv.detail.GainCompensator.setMatGains(vector_Mat umv[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 87,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.setNrFeeds",
+      "identity": "cv.detail.GainCompensator.setNrFeeds(int nr_feeds)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 88,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.getNrFeeds",
+      "identity": "cv.detail.GainCompensator.getNrFeeds()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 89,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.setSimilarityThreshold",
+      "identity": "cv.detail.GainCompensator.setSimilarityThreshold(double similarity_threshold)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "similarity_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 90,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GainCompensator.getSimilarityThreshold",
+      "identity": "cv.detail.GainCompensator.getSimilarityThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 91,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.ChannelsCompensator",
+      "identity": "class cv.detail.ChannelsCompensator",
+      "returnType": ": cv::detail::ExposureCompensator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::ExposureCompensator",
+      "documentation": "@brief Exposure compensator which tries to remove exposure related artifacts by adjusting image\nintensities on each channel independently."
+    },
+    {
+      "ordinal": 92,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.ChannelsCompensator",
+      "identity": "cv.detail.ChannelsCompensator.ChannelsCompensator(int nr_feeds=1)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 93,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.apply",
+      "identity": "cv.detail.ChannelsCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "index",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "corner",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 94,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.getMatGains",
+      "identity": "cv.detail.ChannelsCompensator.getMatGains(vector_Mat umv[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 95,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.setMatGains",
+      "identity": "cv.detail.ChannelsCompensator.setMatGains(vector_Mat umv[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 96,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.setNrFeeds",
+      "identity": "cv.detail.ChannelsCompensator.setNrFeeds(int nr_feeds)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 97,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.getNrFeeds",
+      "identity": "cv.detail.ChannelsCompensator.getNrFeeds()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 98,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.setSimilarityThreshold",
+      "identity": "cv.detail.ChannelsCompensator.setSimilarityThreshold(double similarity_threshold)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "similarity_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 99,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ChannelsCompensator.getSimilarityThreshold",
+      "identity": "cv.detail.ChannelsCompensator.getSimilarityThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 100,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.BlocksCompensator",
+      "identity": "class cv.detail.BlocksCompensator",
+      "returnType": ": cv::detail::ExposureCompensator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::ExposureCompensator",
+      "documentation": "@brief Exposure compensator which tries to remove exposure related artifacts by adjusting image blocks."
+    },
+    {
+      "ordinal": 101,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.apply",
+      "identity": "cv.detail.BlocksCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "index",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "corner",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 102,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.getMatGains",
+      "identity": "cv.detail.BlocksCompensator.getMatGains(vector_Mat umv[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 103,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.setMatGains",
+      "identity": "cv.detail.BlocksCompensator.setMatGains(vector_Mat umv[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 104,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.setNrFeeds",
+      "identity": "cv.detail.BlocksCompensator.setNrFeeds(int nr_feeds)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 105,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.getNrFeeds",
+      "identity": "cv.detail.BlocksCompensator.getNrFeeds()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 106,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.setSimilarityThreshold",
+      "identity": "cv.detail.BlocksCompensator.setSimilarityThreshold(double similarity_threshold)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "similarity_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 107,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.getSimilarityThreshold",
+      "identity": "cv.detail.BlocksCompensator.getSimilarityThreshold()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 108,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.setBlockSize",
+      "identity": "cv.detail.BlocksCompensator.setBlockSize(int width;int height)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 109,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.setBlockSize",
+      "identity": "cv.detail.BlocksCompensator.setBlockSize(Size size)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 110,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.getBlockSize",
+      "identity": "cv.detail.BlocksCompensator.getBlockSize()->Size",
+      "returnType": "Size",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 111,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.setNrGainsFilteringIterations",
+      "identity": "cv.detail.BlocksCompensator.setNrGainsFilteringIterations(int nr_iterations)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "nr_iterations",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 112,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksCompensator.getNrGainsFilteringIterations",
+      "identity": "cv.detail.BlocksCompensator.getNrGainsFilteringIterations()->int",
+      "returnType": "int",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 113,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.BlocksGainCompensator",
+      "identity": "class cv.detail.BlocksGainCompensator",
+      "returnType": ": cv::detail::BlocksCompensator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BlocksCompensator",
+      "documentation": "@brief Exposure compensator which tries to remove exposure related artifacts by adjusting image block\nintensities, see @cite UES01 for details."
+    },
+    {
+      "ordinal": 114,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksGainCompensator.BlocksGainCompensator",
+      "identity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width=32;int bl_height=32)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "bl_width",
+          "default": "32",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "bl_height",
+          "default": "32",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 115,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksGainCompensator.BlocksGainCompensator",
+      "identity": "cv.detail.BlocksGainCompensator.BlocksGainCompensator(int bl_width;int bl_height;int nr_feeds)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "bl_width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "bl_height",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 116,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksGainCompensator.apply",
+      "identity": "cv.detail.BlocksGainCompensator.apply(int index;Point corner;Mat image[/IO];Mat mask)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "index",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "corner",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": [
+            "/IO"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 117,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksGainCompensator.getMatGains",
+      "identity": "cv.detail.BlocksGainCompensator.getMatGains(vector_Mat umv[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 118,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksGainCompensator.setMatGains",
+      "identity": "cv.detail.BlocksGainCompensator.setMatGains(vector_Mat umv[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "umv",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 119,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "class",
+      "name": "cv.detail.BlocksChannelsCompensator",
+      "identity": "class cv.detail.BlocksChannelsCompensator",
+      "returnType": ": cv::detail::BlocksCompensator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BlocksCompensator",
+      "documentation": "@brief Exposure compensator which tries to remove exposure related artifacts by adjusting image block\non each channel."
+    },
+    {
+      "ordinal": 120,
+      "surface": "detail-exposure",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BlocksChannelsCompensator.BlocksChannelsCompensator",
+      "identity": "cv.detail.BlocksChannelsCompensator.BlocksChannelsCompensator(int bl_width=32;int bl_height=32;int nr_feeds=1)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "bl_width",
+          "default": "32",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "bl_height",
+          "default": "32",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "nr_feeds",
+          "default": "1",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 121,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.ImageFeatures",
+      "identity": "class cv.detail.ImageFeatures",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "img_idx",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "img_size",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_KeyPoint",
+          "name": "keypoints",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "UMat",
+          "name": "descriptors",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Structure containing image keypoints and descriptors."
+    },
+    {
+      "ordinal": 122,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.ImageFeatures.getKeypoints",
+      "identity": "cv.detail.ImageFeatures.getKeypoints()->std::vector<KeyPoint>",
+      "returnType": "std::vector<KeyPoint>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 123,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.computeImageFeatures",
+      "identity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];vector_Mat images;vector_ImageFeatures features[/O,/Ref];vector_Mat masks=vector_Mat())->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_Feature2D",
+          "name": "featuresFinder",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "images",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_ImageFeatures",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Mat",
+          "name": "masks",
+          "default": "vector_Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief\n\n@param featuresFinder\n@param images\n@param features\n@param masks"
+    },
+    {
+      "ordinal": 124,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.computeImageFeatures",
+      "identity": "cv.detail.computeImageFeatures(Ptr_Feature2D featuresFinder[/C,/Ref];Mat image;ImageFeatures features[/O,/Ref];Mat mask=Mat())->void",
+      "returnType": "void",
+      "modifiers": [
+        "=computeImageFeatures2"
+      ],
+      "arguments": [
+        {
+          "type": "Ptr_Feature2D",
+          "name": "featuresFinder",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "image",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "ImageFeatures",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "Mat()",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief\n\n@param featuresFinder\n@param image\n@param features\n@param mask"
+    },
+    {
+      "ordinal": 125,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.MatchesInfo",
+      "identity": "class cv.detail.MatchesInfo",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "src_img_idx",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "dst_img_idx",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_DMatch",
+          "name": "matches",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "vector_uchar",
+          "name": "inliers_mask",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "num_inliers",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "H",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        },
+        {
+          "type": "double",
+          "name": "confidence",
+          "default": "",
+          "modifiers": [
+            "/RW"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Structure containing information about matches between two images.\n\nIt's assumed that there is a transformation between those images. Transformation may be\nhomography or affine transformation based on selected matcher.\n\n@sa detail::FeaturesMatcher"
+    },
+    {
+      "ordinal": 126,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MatchesInfo.getMatches",
+      "identity": "cv.detail.MatchesInfo.getMatches()->std::vector<DMatch>",
+      "returnType": "std::vector<DMatch>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 127,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.MatchesInfo.getInliers",
+      "identity": "cv.detail.MatchesInfo.getInliers()->std::vector<uchar>",
+      "returnType": "std::vector<uchar>",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 128,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.FeaturesMatcher",
+      "identity": "class cv.detail.FeaturesMatcher",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Feature matchers base class."
+    },
+    {
+      "ordinal": 129,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeaturesMatcher.operator ()",
+      "identity": "cv.detail.FeaturesMatcher.operator ()(ImageFeatures features1[/C,/Ref];ImageFeatures features2[/C,/Ref];MatchesInfo matches_info[/O,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "=apply"
+      ],
+      "arguments": [
+        {
+          "type": "ImageFeatures",
+          "name": "features1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "ImageFeatures",
+          "name": "features2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "MatchesInfo",
+          "name": "matches_info",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n    @param features1 First image features\n    @param features2 Second image features\n    @param matches_info Found matches"
+    },
+    {
+      "ordinal": 130,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeaturesMatcher.operator ()",
+      "identity": "cv.detail.FeaturesMatcher.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/O,/Ref];UMat mask=cv::UMat()[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "=apply2"
+      ],
+      "arguments": [
+        {
+          "type": "vector_ImageFeatures",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_MatchesInfo",
+          "name": "pairwise_matches",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "UMat",
+          "name": "mask",
+          "default": "cv::UMat()",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Performs images matching.\n\n    @param features Features of the source images\n    @param pairwise_matches Found pairwise matches\n    @param mask Mask indicating which image pairs must be matched\n\n    The function is parallelized with the TBB library.\n\n    @sa detail::MatchesInfo"
+    },
+    {
+      "ordinal": 131,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeaturesMatcher.isThreadSafe",
+      "identity": "cv.detail.FeaturesMatcher.isThreadSafe()->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@return True, if it's possible to use the same matcher instance in parallel, false otherwise"
+    },
+    {
+      "ordinal": 132,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.FeaturesMatcher.collectGarbage",
+      "identity": "cv.detail.FeaturesMatcher.collectGarbage()->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Frees unused memory allocated before if there is any."
+    },
+    {
+      "ordinal": 133,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.BestOf2NearestMatcher",
+      "identity": "class cv.detail.BestOf2NearestMatcher",
+      "returnType": ": cv::detail::FeaturesMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::FeaturesMatcher",
+      "documentation": "@brief Features matcher which finds two best matches for each feature and leaves the best one only if the\nratio between descriptor distances is greater than the threshold match_conf\n\n@sa detail::FeaturesMatcher"
+    },
+    {
+      "ordinal": 134,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BestOf2NearestMatcher.BestOf2NearestMatcher",
+      "identity": "cv.detail.BestOf2NearestMatcher.BestOf2NearestMatcher(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "try_use_gpu",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "match_conf",
+          "default": "0.3f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh1",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh2",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "matches_confidence_thresh",
+          "default": "3.",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructs a \"best of 2 nearest\" matcher.\n\n    @param try_use_gpu Should try to use GPU or not\n    @param match_conf Match distances ration threshold\n    @param num_matches_thresh1 Minimum number of matches required for the 2D projective transform\n    estimation used in the inliers classification step\n    @param num_matches_thresh2 Minimum number of matches required for the 2D projective transform\n    re-estimation on inliers\n    @param matches_confidence_thresh Matching confidence threshold to take the match into account.\n    The threshold was determined experimentally and set to 3 by default."
+    },
+    {
+      "ordinal": 135,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BestOf2NearestMatcher.collectGarbage",
+      "identity": "cv.detail.BestOf2NearestMatcher.collectGarbage()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 136,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BestOf2NearestMatcher.create",
+      "identity": "cv.detail.BestOf2NearestMatcher.create(bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.)->Ptr<BestOf2NearestMatcher>",
+      "returnType": "Ptr<BestOf2NearestMatcher>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "try_use_gpu",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "match_conf",
+          "default": "0.3f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh1",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh2",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "matches_confidence_thresh",
+          "default": "3.",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 137,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.BestOf2NearestRangeMatcher",
+      "identity": "class cv.detail.BestOf2NearestRangeMatcher",
+      "returnType": ": cv::detail::BestOf2NearestMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BestOf2NearestMatcher",
+      "documentation": ""
+    },
+    {
+      "ordinal": 138,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BestOf2NearestRangeMatcher.BestOf2NearestRangeMatcher",
+      "identity": "cv.detail.BestOf2NearestRangeMatcher.BestOf2NearestRangeMatcher(int range_width=5;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6;int num_matches_thresh2=6)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "range_width",
+          "default": "5",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "try_use_gpu",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "match_conf",
+          "default": "0.3f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh1",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh2",
+          "default": "6",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 139,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.AffineBestOf2NearestMatcher",
+      "identity": "class cv.detail.AffineBestOf2NearestMatcher",
+      "returnType": ": cv::detail::BestOf2NearestMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BestOf2NearestMatcher",
+      "documentation": "@brief Features matcher similar to cv::detail::BestOf2NearestMatcher which\nfinds two best matches for each feature and leaves the best one only if the\nratio between descriptor distances is greater than the threshold match_conf.\n\nUnlike cv::detail::BestOf2NearestMatcher this matcher uses affine\ntransformation (affine transformation estimate will be placed in matches_info).\n\n@sa cv::detail::FeaturesMatcher cv::detail::BestOf2NearestMatcher"
+    },
+    {
+      "ordinal": 140,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.AffineBestOf2NearestMatcher.AffineBestOf2NearestMatcher",
+      "identity": "cv.detail.AffineBestOf2NearestMatcher.AffineBestOf2NearestMatcher(bool full_affine=false;bool try_use_gpu=false;float match_conf=0.3f;int num_matches_thresh1=6)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "full_affine",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "try_use_gpu",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "match_conf",
+          "default": "0.3f",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh1",
+          "default": "6",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructs a \"best of 2 nearest\" matcher that expects affine transformation\n    between images\n\n    @param full_affine whether to use full affine transformation with 6 degress of freedom or reduced\n    transformation with 4 degrees of freedom using only rotation, translation and uniform scaling\n    @param try_use_gpu Should try to use GPU or not\n    @param match_conf Match distances ration threshold\n    @param num_matches_thresh1 Minimum number of matches required for the 2D affine transform\n    estimation used in the inliers classification step\n\n    @sa cv::estimateAffine2D cv::estimateAffinePartial2D"
+    },
+    {
+      "ordinal": 141,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "class",
+      "name": "cv.detail.LightGlueFeaturesMatcher",
+      "identity": "class cv.detail.LightGlueFeaturesMatcher",
+      "returnType": ": cv::detail::FeaturesMatcher",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::FeaturesMatcher",
+      "documentation": "@brief Features matcher that adapts LightGlueMatcher (DescriptorMatcher) to the\nstitching pipeline's FeaturesMatcher interface.\n\nThis matcher uses DNN-based LightGlue for feature matching, requiring ALIKED-style\nkeypoints with spatial context for positional encoding.\n\n@sa cv::detail::FeaturesMatcher cv::LightGlueMatcher"
+    },
+    {
+      "ordinal": 142,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.LightGlueFeaturesMatcher.LightGlueFeaturesMatcher",
+      "identity": "cv.detail.LightGlueFeaturesMatcher.LightGlueFeaturesMatcher(Ptr_LightGlueMatcher lgMatcher;int num_matches_thresh1=6;int num_matches_thresh2=6;double matches_confidence_thresh=3.0)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Ptr_LightGlueMatcher",
+          "name": "lgMatcher",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh1",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "num_matches_thresh2",
+          "default": "6",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "matches_confidence_thresh",
+          "default": "3.0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Constructs a LightGlue features matcher.\n\n    @param lgMatcher LightGlueMatcher instance for DNN-based matching\n    @param num_matches_thresh1 Minimum number of matches required for the 2D projective transform\n    estimation used in the inliers classification step\n    @param num_matches_thresh2 Minimum number of matches required for the 2D projective transform\n    re-estimation on inliers\n    @param matches_confidence_thresh Matching confidence threshold to take the match into account."
+    },
+    {
+      "ordinal": 143,
+      "surface": "detail-matchers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/matchers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.LightGlueFeaturesMatcher.setScoreThreshold",
+      "identity": "cv.detail.LightGlueFeaturesMatcher.setScoreThreshold(float thresh)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "thresh",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the LightGlue confidence threshold for filtering matches."
+    },
+    {
+      "ordinal": 144,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.Estimator",
+      "identity": "class cv.detail.Estimator",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Rotation estimator base class.\n\nIt takes features of all images, pairwise matches between all images and estimates rotations of all\ncameras.\n\n@note The coordinate system origin is implementation-dependent, but you can always normalize the\nrotations in respect to the first camera, for instance. :"
+    },
+    {
+      "ordinal": 145,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Estimator.operator ()",
+      "identity": "cv.detail.Estimator.operator ()(vector_ImageFeatures features[/C,/Ref];vector_MatchesInfo pairwise_matches[/C,/Ref];vector_CameraParams cameras[/IO,/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [
+        "=apply"
+      ],
+      "arguments": [
+        {
+          "type": "vector_ImageFeatures",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_MatchesInfo",
+          "name": "pairwise_matches",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_CameraParams",
+          "name": "cameras",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimates camera parameters.\n\n    @param features Features of images\n    @param pairwise_matches Pairwise matches of images\n    @param cameras Estimated camera parameters\n    @return True in case of success, false otherwise"
+    },
+    {
+      "ordinal": 146,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.HomographyBasedEstimator",
+      "identity": "class cv.detail.HomographyBasedEstimator",
+      "returnType": ": cv::detail::Estimator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::Estimator",
+      "documentation": "@brief Homography based rotation estimator."
+    },
+    {
+      "ordinal": 147,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.HomographyBasedEstimator.HomographyBasedEstimator",
+      "identity": "cv.detail.HomographyBasedEstimator.HomographyBasedEstimator(bool is_focals_estimated=false)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "bool",
+          "name": "is_focals_estimated",
+          "default": "false",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 148,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.AffineBasedEstimator",
+      "identity": "class cv.detail.AffineBasedEstimator",
+      "returnType": ": cv::detail::Estimator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::Estimator",
+      "documentation": "@brief Affine transformation based estimator.\n\nThis estimator uses pairwise transformations estimated by matcher to estimate\nfinal transformation for each camera.\n\n@sa cv::detail::HomographyBasedEstimator"
+    },
+    {
+      "ordinal": 149,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.AffineBasedEstimator.AffineBasedEstimator",
+      "identity": "cv.detail.AffineBasedEstimator.AffineBasedEstimator()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 150,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.BundleAdjusterBase",
+      "identity": "class cv.detail.BundleAdjusterBase",
+      "returnType": ": cv::detail::Estimator",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::Estimator",
+      "documentation": "@brief Base class for all camera parameters refinement methods."
+    },
+    {
+      "ordinal": 151,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterBase.refinementMask",
+      "identity": "cv.detail.BundleAdjusterBase.refinementMask()->Mat",
+      "returnType": "Mat",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 152,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterBase.setRefinementMask",
+      "identity": "cv.detail.BundleAdjusterBase.setRefinementMask(Mat mask[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 153,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterBase.confThresh",
+      "identity": "cv.detail.BundleAdjusterBase.confThresh()->double",
+      "returnType": "double",
+      "modifiers": [
+        "/C"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 154,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterBase.setConfThresh",
+      "identity": "cv.detail.BundleAdjusterBase.setConfThresh(double conf_thresh)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "double",
+          "name": "conf_thresh",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 155,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterBase.termCriteria",
+      "identity": "cv.detail.BundleAdjusterBase.termCriteria()->TermCriteria",
+      "returnType": "TermCriteria",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 156,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterBase.setTermCriteria",
+      "identity": "cv.detail.BundleAdjusterBase.setTermCriteria(TermCriteria term_criteria[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "TermCriteria",
+          "name": "term_criteria",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 157,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.NoBundleAdjuster",
+      "identity": "class cv.detail.NoBundleAdjuster",
+      "returnType": ": cv::detail::BundleAdjusterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BundleAdjusterBase",
+      "documentation": "@brief Stub bundle adjuster that does nothing."
+    },
+    {
+      "ordinal": 158,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.NoBundleAdjuster.NoBundleAdjuster",
+      "identity": "cv.detail.NoBundleAdjuster.NoBundleAdjuster()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 159,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.BundleAdjusterReproj",
+      "identity": "class cv.detail.BundleAdjusterReproj",
+      "returnType": ": cv::detail::BundleAdjusterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BundleAdjusterBase",
+      "documentation": "@brief Implementation of the camera parameters refinement algorithm which minimizes sum of the reprojection\nerror squares\n\nIt can estimate focal length, aspect ratio, principal point.\nYou can affect only on them via the refinement mask."
+    },
+    {
+      "ordinal": 160,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterReproj.BundleAdjusterReproj",
+      "identity": "cv.detail.BundleAdjusterReproj.BundleAdjusterReproj()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 161,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.BundleAdjusterRay",
+      "identity": "class cv.detail.BundleAdjusterRay",
+      "returnType": ": cv::detail::BundleAdjusterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BundleAdjusterBase",
+      "documentation": "@brief Implementation of the camera parameters refinement algorithm which minimizes sum of the distances\nbetween the rays passing through the camera center and a feature. :\n\nIt can estimate focal length. It ignores the refinement mask for now."
+    },
+    {
+      "ordinal": 162,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterRay.BundleAdjusterRay",
+      "identity": "cv.detail.BundleAdjusterRay.BundleAdjusterRay()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 163,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.BundleAdjusterAffine",
+      "identity": "class cv.detail.BundleAdjusterAffine",
+      "returnType": ": cv::detail::BundleAdjusterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BundleAdjusterBase",
+      "documentation": "@brief Bundle adjuster that expects affine transformation\nrepresented in homogeneous coordinates in R for each camera param. Implements\ncamera parameters refinement algorithm which minimizes sum of the reprojection\nerror squares\n\nIt estimates all transformation parameters. Refinement mask is ignored.\n\n@sa AffineBasedEstimator AffineBestOf2NearestMatcher BundleAdjusterAffinePartial"
+    },
+    {
+      "ordinal": 164,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterAffine.BundleAdjusterAffine",
+      "identity": "cv.detail.BundleAdjusterAffine.BundleAdjusterAffine()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 165,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "class",
+      "name": "cv.detail.BundleAdjusterAffinePartial",
+      "identity": "class cv.detail.BundleAdjusterAffinePartial",
+      "returnType": ": cv::detail::BundleAdjusterBase",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::BundleAdjusterBase",
+      "documentation": "@brief Bundle adjuster that expects affine transformation with 4 DOF\nrepresented in homogeneous coordinates in R for each camera param. Implements\ncamera parameters refinement algorithm which minimizes sum of the reprojection\nerror squares\n\nIt estimates all transformation parameters. Refinement mask is ignored.\n\n@sa AffineBasedEstimator AffineBestOf2NearestMatcher BundleAdjusterAffine"
+    },
+    {
+      "ordinal": 166,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.BundleAdjusterAffinePartial.BundleAdjusterAffinePartial",
+      "identity": "cv.detail.BundleAdjusterAffinePartial.BundleAdjusterAffinePartial()->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 167,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "enum",
+      "name": "cv.detail.WaveCorrectKind",
+      "identity": "enum cv.detail.WaveCorrectKind[const cv.detail.WAVE_CORRECT_HORIZ=0;const cv.detail.WAVE_CORRECT_VERT=1;const cv.detail.WAVE_CORRECT_AUTO=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.WAVE_CORRECT_HORIZ",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.WAVE_CORRECT_VERT",
+          "value": "1"
+        },
+        {
+          "name": "const cv.detail.WAVE_CORRECT_AUTO",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 168,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.waveCorrect",
+      "identity": "cv.detail.waveCorrect(vector_Mat rmats[/IO,/Ref];WaveCorrectKind kind)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Mat",
+          "name": "rmats",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "WaveCorrectKind",
+          "name": "kind",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Tries to make panorama more horizontal (or vertical).\n\n@param rmats Camera rotation matrices.\n@param kind Correction kind, see detail::WaveCorrectKind."
+    },
+    {
+      "ordinal": 169,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.matchesGraphAsString",
+      "identity": "cv.detail.matchesGraphAsString(vector_String paths[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)->String",
+      "returnType": "String",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_String",
+          "name": "paths",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_MatchesInfo",
+          "name": "pairwise_matches",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "conf_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 170,
+      "surface": "detail-motion-estimators",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/motion_estimators.hpp",
+      "kind": "callable",
+      "name": "cv.detail.leaveBiggestComponent",
+      "identity": "cv.detail.leaveBiggestComponent(vector_ImageFeatures features[/Ref];vector_MatchesInfo pairwise_matches[/Ref];float conf_threshold)->std::vector<int>",
+      "returnType": "std::vector<int>",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_ImageFeatures",
+          "name": "features",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_MatchesInfo",
+          "name": "pairwise_matches",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "conf_threshold",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 171,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "class",
+      "name": "cv.detail.SeamFinder",
+      "identity": "class cv.detail.SeamFinder",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for a seam estimator."
+    },
+    {
+      "ordinal": 172,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "enum",
+      "name": "cv.detail.SeamFinder.<unnamed>",
+      "identity": "enum cv.detail.SeamFinder.<unnamed>[const cv.detail.SeamFinder.NO=0;const cv.detail.SeamFinder.VORONOI_SEAM=1;const cv.detail.SeamFinder.DP_SEAM=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.SeamFinder.NO",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.SeamFinder.VORONOI_SEAM",
+          "value": "1"
+        },
+        {
+          "name": "const cv.detail.SeamFinder.DP_SEAM",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 173,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.SeamFinder.find",
+      "identity": "cv.detail.SeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V",
+        "/PV"
+      ],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "masks",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Estimates seams.\n\n    @param src Source images\n    @param corners Source image top-left corners\n    @param masks Source image masks to update"
+    },
+    {
+      "ordinal": 174,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.SeamFinder.createDefault",
+      "identity": "cv.detail.SeamFinder.createDefault(int type)->Ptr<SeamFinder>",
+      "returnType": "Ptr<SeamFinder>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 175,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "class",
+      "name": "cv.detail.NoSeamFinder",
+      "identity": "class cv.detail.NoSeamFinder",
+      "returnType": ": cv::detail::SeamFinder",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::SeamFinder",
+      "documentation": "@brief Stub seam estimator which does nothing."
+    },
+    {
+      "ordinal": 176,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.NoSeamFinder.find",
+      "identity": "cv.detail.NoSeamFinder.find(vector_UMat arg1[/C,/Ref];vector_Point arg2[/C,/Ref];vector_UMat arg3[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "arg1",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Point",
+          "name": "arg2",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "arg3",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 177,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "class",
+      "name": "cv.detail.PairwiseSeamFinder",
+      "identity": "class cv.detail.PairwiseSeamFinder",
+      "returnType": ": cv::detail::SeamFinder",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::SeamFinder",
+      "documentation": "@brief Base class for all pairwise seam estimators."
+    },
+    {
+      "ordinal": 178,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.PairwiseSeamFinder.find",
+      "identity": "cv.detail.PairwiseSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "masks",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 179,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "class",
+      "name": "cv.detail.VoronoiSeamFinder",
+      "identity": "class cv.detail.VoronoiSeamFinder",
+      "returnType": ": cv::detail::PairwiseSeamFinder",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::PairwiseSeamFinder",
+      "documentation": "@brief Voronoi diagram-based seam estimator."
+    },
+    {
+      "ordinal": 180,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.VoronoiSeamFinder.find",
+      "identity": "cv.detail.VoronoiSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "masks",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 181,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "class",
+      "name": "cv.detail.DpSeamFinder",
+      "identity": "class cv.detail.DpSeamFinder",
+      "returnType": ": cv::detail::SeamFinder",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::SeamFinder",
+      "documentation": ""
+    },
+    {
+      "ordinal": 182,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "enum",
+      "name": "cv.detail.DpSeamFinder.CostFunction",
+      "identity": "enum cv.detail.DpSeamFinder.CostFunction[const cv.detail.DpSeamFinder.COLOR=0;const cv.detail.DpSeamFinder.COLOR_GRAD=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.DpSeamFinder.COLOR",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.DpSeamFinder.COLOR_GRAD",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 183,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.DpSeamFinder.DpSeamFinder",
+      "identity": "cv.detail.DpSeamFinder.DpSeamFinder(String costFunc)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "costFunc",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 184,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.DpSeamFinder.setCostFunction",
+      "identity": "cv.detail.DpSeamFinder.setCostFunction(String val)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "val",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 185,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "enum",
+      "name": "cv.detail.GraphCutSeamFinderBase.CostType",
+      "identity": "enum cv.detail.GraphCutSeamFinderBase.CostType[const cv.detail.GraphCutSeamFinderBase.COST_COLOR=0;const cv.detail.GraphCutSeamFinderBase.COST_COLOR_GRAD=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.GraphCutSeamFinderBase.COST_COLOR",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.GraphCutSeamFinderBase.COST_COLOR_GRAD",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 186,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "class",
+      "name": "cv.detail.GraphCutSeamFinder",
+      "identity": "class cv.detail.GraphCutSeamFinder",
+      "returnType": ": cv::detail::GraphCutSeamFinderBase, cv::detail::SeamFinder",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::GraphCutSeamFinderBase, cv::detail::SeamFinder",
+      "documentation": "@brief Minimum graph cut-based seam estimator. See details in @cite Kwatra03 ."
+    },
+    {
+      "ordinal": 187,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GraphCutSeamFinder.GraphCutSeamFinder",
+      "identity": "cv.detail.GraphCutSeamFinder.GraphCutSeamFinder(String cost_type;float terminal_cost=10000.f;float bad_region_penalty=1000.f)->",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "cost_type",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "terminal_cost",
+          "default": "10000.f",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "bad_region_penalty",
+          "default": "1000.f",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 188,
+      "surface": "detail-seam-finders",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp",
+      "kind": "callable",
+      "name": "cv.detail.GraphCutSeamFinder.find",
+      "identity": "cv.detail.GraphCutSeamFinder.find(vector_UMat src[/C,/Ref];vector_Point corners[/C,/Ref];vector_UMat masks[/IO,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_UMat",
+          "name": "src",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "masks",
+          "default": "",
+          "modifiers": [
+            "/IO",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 189,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "class",
+      "name": "cv.detail.Timelapser",
+      "identity": "class cv.detail.Timelapser",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 190,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "enum",
+      "name": "cv.detail.Timelapser.<unnamed>",
+      "identity": "enum cv.detail.Timelapser.<unnamed>[const cv.detail.Timelapser.AS_IS=0;const cv.detail.Timelapser.CROP=1]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.detail.Timelapser.AS_IS",
+          "value": "0"
+        },
+        {
+          "name": "const cv.detail.Timelapser.CROP",
+          "value": "1"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 191,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Timelapser.createDefault",
+      "identity": "cv.detail.Timelapser.createDefault(int type)->Ptr<Timelapser>",
+      "returnType": "Ptr<Timelapser>",
+      "modifiers": [
+        "/S"
+      ],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "type",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 192,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Timelapser.initialize",
+      "identity": "cv.detail.Timelapser.initialize(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Size",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 193,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Timelapser.process",
+      "identity": "cv.detail.Timelapser.process(Mat img;Mat mask;Point tl)->void",
+      "returnType": "void",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Mat",
+          "name": "mask",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "tl",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 194,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.Timelapser.getDst",
+      "identity": "cv.detail.Timelapser.getDst()->UMat",
+      "returnType": "UMat",
+      "modifiers": [
+        "/V"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 195,
+      "surface": "detail-timelapsers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/timelapsers.hpp",
+      "kind": "class",
+      "name": "cv.detail.TimelapserCrop",
+      "identity": "class cv.detail.TimelapserCrop",
+      "returnType": ": cv::detail::Timelapser",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::Timelapser",
+      "documentation": ""
+    },
+    {
+      "ordinal": 196,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.overlapRoi",
+      "identity": "cv.detail.overlapRoi(Point tl1;Point tl2;Size sz1;Size sz2;Rect roi[/Ref])->bool",
+      "returnType": "bool",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Point",
+          "name": "tl1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Point",
+          "name": "tl2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "sz1",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Size",
+          "name": "sz2",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "Rect",
+          "name": "roi",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 197,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.resultRoi",
+      "identity": "cv.detail.resultRoi(vector_Point corners[/C,/Ref];vector_UMat images[/C,/Ref])->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_UMat",
+          "name": "images",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 198,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.resultRoi",
+      "identity": "cv.detail.resultRoi(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Size",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 199,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.resultRoiIntersection",
+      "identity": "cv.detail.resultRoiIntersection(vector_Point corners[/C,/Ref];vector_Size sizes[/C,/Ref])->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "vector_Size",
+          "name": "sizes",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 200,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.resultTl",
+      "identity": "cv.detail.resultTl(vector_Point corners[/C,/Ref])->Point",
+      "returnType": "Point",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "vector_Point",
+          "name": "corners",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 201,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.selectRandomSubset",
+      "identity": "cv.detail.selectRandomSubset(int count;int size;vector_int subset[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "count",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "size",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_int",
+          "name": "subset",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 202,
+      "surface": "detail-util",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/util.hpp",
+      "kind": "callable",
+      "name": "cv.detail.stitchingLogLevel",
+      "identity": "cv.detail.stitchingLogLevel()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 203,
+      "surface": "detail-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+      "kind": "class",
+      "name": "cv.detail.ProjectorBase",
+      "identity": "class cv.detail.ProjectorBase",
+      "returnType": "",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Base class for warping logic implementation."
+    },
+    {
+      "ordinal": 204,
+      "surface": "detail-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+      "kind": "class",
+      "name": "cv.detail.SphericalProjector",
+      "identity": "class cv.detail.SphericalProjector",
+      "returnType": ": cv::detail::ProjectorBase",
+      "modifiers": [
+        "/Simple"
+      ],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": ": cv::detail::ProjectorBase",
+      "documentation": "@brief Extracts rotation and translation matrices from matrix H representing\n        affine transformation in homogeneous coordinates"
+    },
+    {
+      "ordinal": 205,
+      "surface": "detail-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.SphericalProjector.mapForward",
+      "identity": "cv.detail.SphericalProjector.mapForward(float x;float y;float u[/Ref];float v[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "u",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "v",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 206,
+      "surface": "detail-warpers",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp",
+      "kind": "callable",
+      "name": "cv.detail.SphericalProjector.mapBackward",
+      "identity": "cv.detail.SphericalProjector.mapBackward(float u;float v;float x[/Ref];float y[/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "float",
+          "name": "u",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "v",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "float",
+          "name": "x",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        },
+        {
+          "type": "float",
+          "name": "y",
+          "default": "",
+          "modifiers": [
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    }
+  ]
+}

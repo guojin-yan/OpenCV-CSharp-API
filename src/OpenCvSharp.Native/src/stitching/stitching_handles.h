@@ -12,3 +12,12 @@ struct jyppx_ocv_stitcher
     int placeholder;
 #endif
 };
+
+struct jyppx_ocv_stitching_exposure_compensator
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::Ptr<cv::detail::ExposureCompensator> value;
+#else
+    int placeholder;
+#endif
+};

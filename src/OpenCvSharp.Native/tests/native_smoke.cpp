@@ -11,6 +11,7 @@
 #include "open_cv_sharp/objdetect/aruco.h"
 #include "open_cv_sharp/objdetect/objdetect.h"
 #include "open_cv_sharp/photo/photo.h"
+#include "open_cv_sharp/stitching/stitching.h"
 #include "open_cv_sharp/tracking/tracking.h"
 #include "open_cv_sharp/video/video.h"
 #endif
@@ -4249,6 +4250,124 @@ namespace
         cleanup();
         return 0;
     }
+
+    int run_stitching_exposure_compensator_smoke()
+    {
+        if (jyppx_ocv_stitching_exposure_create_gain(0, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            jyppx_ocv_stitching_exposure_get_update_gain(nullptr, nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            return 881;
+        }
+
+        jyppx_ocv_stitching_exposure_compensator* default_compensator = nullptr;
+        jyppx_ocv_stitching_exposure_compensator* no_compensator = nullptr;
+        jyppx_ocv_stitching_exposure_compensator* gain = nullptr;
+        jyppx_ocv_stitching_exposure_compensator* channels = nullptr;
+        jyppx_ocv_stitching_exposure_compensator* blocks_gain = nullptr;
+        jyppx_ocv_stitching_exposure_compensator* blocks_channels = nullptr;
+        auto cleanup = [&]()
+        {
+            jyppx_ocv_stitching_exposure_release_handle(default_compensator);
+            jyppx_ocv_stitching_exposure_release_handle(no_compensator);
+            jyppx_ocv_stitching_exposure_release_handle(gain);
+            jyppx_ocv_stitching_exposure_release_handle(channels);
+            jyppx_ocv_stitching_exposure_release_handle(blocks_gain);
+            jyppx_ocv_stitching_exposure_release_handle(blocks_channels);
+        };
+
+        if (jyppx_ocv_stitching_exposure_create_default(4, &default_compensator) != OPENCV_CSHARP_STATUS_OK || default_compensator == nullptr ||
+            jyppx_ocv_stitching_exposure_create_no(&no_compensator) != OPENCV_CSHARP_STATUS_OK || no_compensator == nullptr ||
+            jyppx_ocv_stitching_exposure_create_gain(2, &gain) != OPENCV_CSHARP_STATUS_OK || gain == nullptr ||
+            jyppx_ocv_stitching_exposure_create_channels(3, &channels) != OPENCV_CSHARP_STATUS_OK || channels == nullptr ||
+            jyppx_ocv_stitching_exposure_create_blocks_gain(16, 24, 2, &blocks_gain) != OPENCV_CSHARP_STATUS_OK || blocks_gain == nullptr ||
+            jyppx_ocv_stitching_exposure_create_blocks_channels(32, 32, 1, &blocks_channels) != OPENCV_CSHARP_STATUS_OK || blocks_channels == nullptr)
+        {
+            cleanup();
+            return 882;
+        }
+
+        int update_gain = 1;
+        int feeds = 0;
+        double threshold = 0.0;
+        int block_width = 0;
+        int block_height = 0;
+        int filtering_iterations = 0;
+        if (jyppx_ocv_stitching_exposure_set_update_gain(gain, 0) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_exposure_get_update_gain(gain, &update_gain) != OPENCV_CSHARP_STATUS_OK || update_gain != 0 ||
+            jyppx_ocv_stitching_exposure_set_number_of_feeds(gain, 4) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_exposure_get_number_of_feeds(gain, &feeds) != OPENCV_CSHARP_STATUS_OK || feeds != 4 ||
+            jyppx_ocv_stitching_exposure_set_similarity_threshold(gain, 0.75) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_exposure_get_similarity_threshold(gain, &threshold) != OPENCV_CSHARP_STATUS_OK || std::abs(threshold - 0.75) > 0.000001 ||
+            jyppx_ocv_stitching_exposure_set_block_size(blocks_gain, 20, 28) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_exposure_get_block_size(blocks_gain, &block_width, &block_height) != OPENCV_CSHARP_STATUS_OK || block_width != 20 || block_height != 28 ||
+            jyppx_ocv_stitching_exposure_set_filtering_iterations(blocks_gain, 4) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_exposure_get_filtering_iterations(blocks_gain, &filtering_iterations) != OPENCV_CSHARP_STATUS_OK || filtering_iterations != 4)
+        {
+            cleanup();
+            return 883;
+        }
+
+        NativeMatHandle first;
+        NativeMatHandle second;
+        NativeMatHandle first_mask;
+        NativeMatHandle second_mask;
+        const int first_status = jyppx_ocv_mat_create_with_scalar(24, 24, 64, 40.0, 40.0, 40.0, 0.0, first.out());
+        if (first_status != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 884;
+        }
+        if (jyppx_ocv_mat_create_with_scalar(24, 24, 64, 80.0, 80.0, 80.0, 0.0, second.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 888;
+        }
+        if (jyppx_ocv_mat_create_with_scalar(24, 24, 0, 255.0, 0.0, 0.0, 0.0, first_mask.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 889;
+        }
+        if (jyppx_ocv_mat_create_with_scalar(24, 24, 0, 255.0, 0.0, 0.0, 0.0, second_mask.out()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 890;
+        }
+
+        const int corner_x[] = { 0, 0 };
+        const int corner_y[] = { 0, 0 };
+        const jyppx_ocv_mat* images[] = { first.get(), second.get() };
+        const jyppx_ocv_mat* masks[] = { first_mask.get(), second_mask.get() };
+        if (jyppx_ocv_stitching_exposure_feed(gain, corner_x, corner_y, 2, images, 2, masks, 2) != OPENCV_CSHARP_STATUS_OK ||
+            jyppx_ocv_stitching_exposure_apply(gain, 0, 0, 0, first.get(), first_mask.get()) != OPENCV_CSHARP_STATUS_OK)
+        {
+            cleanup();
+            return 885;
+        }
+
+        int gain_count = 0;
+        jyppx_ocv_mat* gains[2] = {};
+        int written = 0;
+        if (jyppx_ocv_stitching_exposure_get_mat_gains_count(gain, &gain_count) != OPENCV_CSHARP_STATUS_OK || gain_count != 2 ||
+            jyppx_ocv_stitching_exposure_get_mat_gains_fill(gain, gains, 2, &written) != OPENCV_CSHARP_STATUS_OK || written != 2 || gains[0] == nullptr || gains[1] == nullptr)
+        {
+            jyppx_ocv_mat_release(gains[0]);
+            jyppx_ocv_mat_release(gains[1]);
+            cleanup();
+            return 886;
+        }
+        const jyppx_ocv_mat* input_gains[] = { gains[0], gains[1] };
+        if (jyppx_ocv_stitching_exposure_set_mat_gains(gain, input_gains, 2) != OPENCV_CSHARP_STATUS_OK)
+        {
+            jyppx_ocv_mat_release(gains[0]);
+            jyppx_ocv_mat_release(gains[1]);
+            cleanup();
+            return 886;
+        }
+        jyppx_ocv_mat_release(gains[0]);
+        jyppx_ocv_mat_release(gains[1]);
+        cleanup();
+        return 0;
+    }
 #endif
 }
 
@@ -4364,6 +4483,13 @@ int main()
         {
             jyppx_ocv_mat_release(mat);
             return tracking_legacy_completion_status;
+        }
+
+        int stitching_exposure_status = run_stitching_exposure_compensator_smoke();
+        if (stitching_exposure_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return stitching_exposure_status;
         }
 #endif
 
@@ -5760,6 +5886,12 @@ int main()
             jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(tld));
             jyppx_ocv_tracking_legacy_tracker_release_handle(reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(kcf));
             return 880;
+        }
+        jyppx_ocv_stitching_exposure_compensator* exposure = nullptr;
+        if (jyppx_ocv_stitching_exposure_create_gain(1, &exposure) != OPENCV_CSHARP_STATUS_NOT_LINKED || exposure != nullptr)
+        {
+            jyppx_ocv_stitching_exposure_release_handle(exposure);
+            return 887;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();
