@@ -352,17 +352,19 @@ Implemented HighGUI ABI groups:
 
 已实现的 HighGUI ABI 分组：
 
-- `NamedWindow`, `DestroyWindow`, `DestroyAllWindows`, `ImShow`, `WaitKey`, `PollKey`, `MoveWindow`, and `ResizeWindow`.
+- `NamedWindow`, `DestroyWindow`, `DestroyAllWindows`, `GetCurrentUIFramework`, `StartWindowThread`, `ImShow`, `WaitKey`, `WaitKeyEx`, `PollKey`, `MoveWindow`, and `ResizeWindow`.
 - Window property/title/image-rectangle helpers.
 - Trackbar create/get/set/min/max with managed callback lifetime held by `HighGuiTrackbar`.
-- Mouse and Qt button callback registration. The initial managed wrapper keeps one current callback slot per callback kind.
-- no-OpenCV builds export all functions and return `OPENCV_CSHARP_STATUS_NOT_LINKED`.
+- Mouse registration isolated by window name, Qt button registration rooted until all windows are destroyed, signed wheel-delta extraction, and explicit FIFO observation of captured managed callback exceptions.
+- Trackbar and callback native registrations use separate managed/native references. Managed disposal disables callbacks immediately; window destruction releases the remaining native references.
+- Full no-OpenCV builds export all full functions and return `OPENCV_CSHARP_STATUS_NOT_LINKED` without changing output sentinels. The mini profile excludes HighGui and does not export this ABI.
 
-- `NamedWindow`、`DestroyWindow`、`DestroyAllWindows`、`ImShow`、`WaitKey`、`PollKey`、`MoveWindow` 和 `ResizeWindow`。
+- `NamedWindow`、`DestroyWindow`、`DestroyAllWindows`、`GetCurrentUIFramework`、`StartWindowThread`、`ImShow`、`WaitKey`、`WaitKeyEx`、`PollKey`、`MoveWindow` 和 `ResizeWindow`。
 - 窗口属性、标题和图像区域 helper。
 - Trackbar create/get/set/min/max，并由 `HighGuiTrackbar` 保持 managed callback 生命周期。
-- 鼠标和 Qt button 回调注册。当前初始 managed wrapper 对每种回调保留一个当前槽位。
-- no-OpenCV build 会导出所有函数并返回 `OPENCV_CSHARP_STATUS_NOT_LINKED`。
+- 按窗口名称隔离的 mouse 注册、保持到全部窗口销毁的 Qt button 注册、有符号滚轮 delta 提取，以及按 FIFO 显式观察捕获到的 managed callback 异常。
+- Trackbar 和 callback native 注册分别持有 managed/native 引用。Managed disposal 立即禁用 callback；窗口销毁释放剩余 native 引用。
+- Full no-OpenCV build 导出完整 full ABI，并在不修改输出 sentinel 的情况下返回 `OPENCV_CSHARP_STATUS_NOT_LINKED`。Mini profile 排除 HighGui，不导出此 ABI。
 
 ## Calib ABI / Calib ABI
 

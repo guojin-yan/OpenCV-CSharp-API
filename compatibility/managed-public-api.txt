@@ -3,7 +3,7 @@ schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
 type-count=612
-member-count=6308
+member-count=6314
 namespace-count=41
 nullable-shape=included
 
@@ -3044,15 +3044,20 @@ MEMBER|OpenCvSharp.HighGui.Cv2.TrackbarCallback|method|public;instance;virtual|S
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|OpenCvSharp.Core.Rect GetWindowImageRect(System.String winname)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|OpenCvSharp.HighGui.HighGuiTrackbar CreateTrackbar(System.String trackbarname,System.String winname,System.Int32 initialValue,System.Int32 count,OpenCvSharp.HighGui.Cv2.TrackbarCallback? callback=null)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Double GetWindowProperty(System.String winname,OpenCvSharp.HighGui.WindowPropertyFlags propId)
+MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 GetMouseWheelDelta(OpenCvSharp.HighGui.MouseEventFlags flags)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 GetTrackbarPos(System.String trackbarname,System.String winname)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 PollKey()
+MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 StartWindowThread()
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKey(System.Int32 delay=0)
+MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKeyEx(System.Int32 delay=0)
+MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.String GetCurrentUIFramework()
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void CreateButton(System.String buttonName,OpenCvSharp.HighGui.Cv2.ButtonCallback? callback=null,OpenCvSharp.HighGui.QtButtonTypes type=PushButton,System.Boolean initialButtonState=false)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyAllWindows()
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyWindow(System.String winname)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ImShow(System.String winname,OpenCvSharp.Core.Mat mat)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void MoveWindow(System.String winname,System.Int32 x,System.Int32 y)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void NamedWindow(System.String winname,OpenCvSharp.HighGui.WindowFlags flags=AutoSize)
+MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,OpenCvSharp.Core.Size size)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,System.Int32 width,System.Int32 height)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetMouseCallback(System.String winname,OpenCvSharp.HighGui.Cv2.MouseCallback? callback)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMax(System.String trackbarname,System.String winname,System.Int32 maxval)
@@ -3060,6 +3065,7 @@ MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMin(S
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarPos(System.String trackbarname,System.String winname,System.Int32 pos)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowProperty(System.String winname,OpenCvSharp.HighGui.WindowPropertyFlags propId,System.Double propValue)
 MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowTitle(System.String winname,System.String title)
+MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ThrowPendingCallbackException()
 MEMBER|OpenCvSharp.HighGui.HighGuiTrackbar|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|OpenCvSharp.HighGui.HighGuiTrackbar|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.HighGui.MouseEventFlags|field|public;const|OpenCvSharp.HighGui.MouseEventFlags AltKey=32

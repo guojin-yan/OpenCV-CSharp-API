@@ -141,6 +141,12 @@ $imgCodecsMapPath = "compatibility/imgcodecs-upstream-map.txt"
 $imgCodecsMapSummaryPath = "compatibility/imgcodecs-upstream-summary.json"
 $imgCodecsFamilyPath = "compatibility/imgcodecs-implemented-families.json"
 $imgCodecsExtensionsPath = "compatibility/imgcodecs-source-reviewed-extensions.json"
+$highGuiMapGuardPath = "scripts/Test-HighGuiUpstreamMap.ps1"
+$highGuiMapGeneratorPath = "scripts/Generate-HighGuiUpstreamMap.ps1"
+$highGuiMapToolPath = "tools/HighGuiUpstreamMap/Program.cs"
+$highGuiMapPath = "compatibility/highgui-upstream-map.txt"
+$highGuiMapSummaryPath = "compatibility/highgui-upstream-summary.json"
+$highGuiFamilyPath = "compatibility/highgui-implemented-families.json"
 $finalCloseoutPath = "scripts/Test-ReleaseCandidateFinalCloseout.ps1"
 $finalCloseoutRecordPath = "packaging/release/local-release-candidate-closeout.json"
 $runtimeProjectPath = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"
@@ -187,6 +193,12 @@ $imgCodecsMapText = Read-RequiredText -RelativePath $imgCodecsMapPath
 $imgCodecsMapSummaryText = Read-RequiredText -RelativePath $imgCodecsMapSummaryPath
 $imgCodecsFamilyText = Read-RequiredText -RelativePath $imgCodecsFamilyPath
 $imgCodecsExtensionsText = Read-RequiredText -RelativePath $imgCodecsExtensionsPath
+$highGuiMapGuardText = Read-RequiredText -RelativePath $highGuiMapGuardPath
+$highGuiMapGeneratorText = Read-RequiredText -RelativePath $highGuiMapGeneratorPath
+$highGuiMapToolText = Read-RequiredText -RelativePath $highGuiMapToolPath
+$highGuiMapText = Read-RequiredText -RelativePath $highGuiMapPath
+$highGuiMapSummaryText = Read-RequiredText -RelativePath $highGuiMapSummaryPath
+$highGuiFamilyText = Read-RequiredText -RelativePath $highGuiFamilyPath
 $finalCloseoutText = Read-RequiredText -RelativePath $finalCloseoutPath
 $finalCloseoutRecordText = Read-RequiredText -RelativePath $finalCloseoutRecordPath
 $runtimeProjectText = Read-RequiredText -RelativePath $runtimeProjectPath
@@ -231,12 +243,12 @@ Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntim
 Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'managed-public-api.txt' -Issue "Release artifact surface must register the managed API baseline"
 Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'legacy_abi_mini_manifest.txt' -Issue "Release artifact surface must register the mini ABI baseline"
 Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'Generate-NativeManagedBindingMap.ps1' -Issue "Release artifact surface must freshness-check the native-to-managed binding map"
-Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'native=2646 bound=2646 unbound=0 managed_only=0' -Issue "Native-to-managed binding guard must emit complete parity evidence"
+Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'native=2656 bound=2656 unbound=0 managed_only=0' -Issue "Native-to-managed binding guard must emit complete parity evidence"
 Assert-Contains -Violations $violations -Path $bindingMapGeneratorPath -Text $bindingMapGeneratorText -Needle 'tools/NativeManagedBindingMap/NativeManagedBindingMap.csproj' -Issue "Binding-map generator must invoke its checked-in tool project"
 Assert-Contains -Violations $violations -Path $bindingMapToolProjectPath -Text $bindingMapToolProjectText -Needle '<TargetFramework>net10.0</TargetFramework>' -Issue "Binding-map tool must retain its exact modern target framework"
 Assert-Contains -Violations $violations -Path $bindingMapToolProgramPath -Text $bindingMapToolProgramText -Needle 'NATIVE_MANAGED_BINDING_MAP_OK' -Issue "Binding-map tool must emit deterministic parity evidence"
 Assert-Contains -Violations $violations -Path $bindingMapPath -Text $bindingMapText -Needle '[managed-only]' -Issue "Release artifact surface must include the complete native-to-managed mapping output"
-Assert-Contains -Violations $violations -Path $bindingMapSummaryPath -Text $bindingMapSummaryText -Needle '"managedBoundCount": 2646' -Issue "Binding-map summary must record all native functions as managed-bound"
+Assert-Contains -Violations $violations -Path $bindingMapSummaryPath -Text $bindingMapSummaryText -Needle '"managedBoundCount": 2656' -Issue "Binding-map summary must record all native functions as managed-bound"
 Assert-Contains -Violations $violations -Path $bindingMapSummaryPath -Text $bindingMapSummaryText -Needle '"unboundCount": 0' -Issue "Binding-map summary must record zero unbound native functions"
 Assert-Contains -Violations $violations -Path $imgProcMapGuardPath -Text $imgProcMapGuardText -Needle 'Generate-ImgProcUpstreamMap.ps1' -Issue "Release artifact surface must freshness-check the ImgProc upstream map"
 Assert-Contains -Violations $violations -Path $imgProcMapGeneratorPath -Text $imgProcMapGeneratorText -Needle '-RegenerateRaw requires -PythonPath' -Issue "ImgProc raw extraction must require an explicit Python path"
@@ -253,6 +265,13 @@ Assert-Contains -Violations $violations -Path $imgCodecsMapSummaryPath -Text $im
 Assert-Contains -Violations $violations -Path $imgCodecsMapSummaryPath -Text $imgCodecsMapSummaryText -Needle '"implemented": 22' -Issue "ImgCodecs map summary must record all callable evidence"
 Assert-Contains -Violations $violations -Path $imgCodecsFamilyPath -Text $imgCodecsFamilyText -Needle '"managedPublicMemberAdditionCount": 168' -Issue "ImgCodecs family inventory must record the reviewed managed API addition count"
 Assert-Contains -Violations $violations -Path $imgCodecsExtensionsPath -Text $imgCodecsExtensionsText -Needle '"identity": "cv::ImageCollection"' -Issue "ImgCodecs source-reviewed extension inventory must retain ImageCollection evidence"
+Assert-Contains -Violations $violations -Path $highGuiMapGuardPath -Text $highGuiMapGuardText -Needle 'Generate-HighGuiUpstreamMap.ps1' -Issue "Release artifact surface must freshness-check the HighGui upstream map"
+Assert-Contains -Violations $violations -Path $highGuiMapGeneratorPath -Text $highGuiMapGeneratorText -Needle '-RegenerateRaw requires an explicit -PythonPath.' -Issue "HighGui raw extraction must require an explicit Python path"
+Assert-Contains -Violations $violations -Path $highGuiMapToolPath -Text $highGuiMapToolText -Needle 'RepositoryWideUpstreamParityClaimed = false' -Issue "HighGui map tool must retain the exact non-repository-wide claim boundary"
+Assert-Contains -Violations $violations -Path $highGuiMapPath -Text $highGuiMapText -Needle 'repository-wide-upstream-parity-claimed=false' -Issue "Release artifact surface must include the bounded HighGui mapping output"
+Assert-Contains -Violations $violations -Path $highGuiMapSummaryPath -Text $highGuiMapSummaryText -Needle '"declarationCount": 33' -Issue "HighGui map summary must record the exact declaration count"
+Assert-Contains -Violations $violations -Path $highGuiMapSummaryPath -Text $highGuiMapSummaryText -Needle '"implemented": 20' -Issue "HighGui map summary must record all locally supported callables"
+Assert-Contains -Violations $violations -Path $highGuiFamilyPath -Text $highGuiFamilyText -Needle '"nativeEntrypointAdditionCount": 10' -Issue "HighGui family inventory must record the reviewed native ABI addition count"
 Assert-Contains -Violations $violations -Path $finalCloseoutPath -Text $finalCloseoutText -Needle 'local-release-candidate-closeout.json' -Issue "Release artifact surface must register the final closeout record"
 Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $finalCloseoutRecordText -Needle 'local-release-candidate-closeout' -Issue "Final closeout record must identify its record kind"
 Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"

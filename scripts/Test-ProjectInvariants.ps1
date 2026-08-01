@@ -250,6 +250,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "HighGui upstream map"
+        Script = Join-Path $repo "scripts/Test-HighGuiUpstreamMap.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "ObjDetect upstream map"
         Script = Join-Path $repo "scripts/Test-ObjDetectUpstreamMap.ps1"
         Arguments = @("-RepositoryRoot", $repo)

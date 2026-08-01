@@ -8666,6 +8666,22 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_hfs_segment_set_int_prop
     return jyppx_ocv_hfs_segment_set_int_property(segment, property_id, value);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_button_callback_create_utf8(const unsigned char* button_name,
+    int button_name_length,
+    jyppx_ocv_highgui_button_callback callback,
+    void* userdata,
+    int type,
+    int initial_button_state,
+    jyppx_ocv_highgui_callback_registration** registration)
+{
+    return jyppx_ocv_highgui_button_callback_create_utf8(button_name, button_name_length, callback, userdata, type, initial_button_state, registration);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_highgui_callback_registration_release_handle(jyppx_ocv_highgui_callback_registration* registration)
+{
+    jyppx_ocv_highgui_callback_registration_release_handle(registration);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_create_button(const char* button_name,
     jyppx_ocv_highgui_button_callback callback,
     void* userdata,
@@ -8686,6 +8702,31 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_create_trackbar(
     return jyppx_ocv_highgui_create_trackbar(trackbarname, winname, initial_value, count, callback, userdata, trackbar);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_create_trackbar_utf8(const unsigned char* trackbar_name,
+    int trackbar_name_length,
+    const unsigned char* window_name,
+    int window_name_length,
+    int initial_value,
+    int count,
+    jyppx_ocv_highgui_trackbar_callback callback,
+    void* userdata,
+    jyppx_ocv_highgui_trackbar** trackbar)
+{
+    return jyppx_ocv_highgui_create_trackbar_utf8(trackbar_name, trackbar_name_length, window_name, window_name_length, initial_value, count, callback, userdata, trackbar);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_current_ui_framework_fill(unsigned char* buffer,
+    int buffer_capacity,
+    int* written)
+{
+    return jyppx_ocv_highgui_current_ui_framework_fill(buffer, buffer_capacity, written);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_current_ui_framework_length(int* byte_length)
+{
+    return jyppx_ocv_highgui_current_ui_framework_length(byte_length);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_destroy_all_windows(void)
 {
     return jyppx_ocv_highgui_destroy_all_windows();
@@ -8694,6 +8735,11 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_destroy_all_wind
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_destroy_window(const char* winname)
 {
     return jyppx_ocv_highgui_destroy_window(winname);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_get_mouse_wheel_delta(int flags, int* delta)
+{
+    return jyppx_ocv_highgui_get_mouse_wheel_delta(flags, delta);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_get_trackbar_pos(const char* trackbarname, const char* winname, int* pos)
@@ -8714,6 +8760,21 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_get_window_prope
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_imshow(const char* winname, const jyppx_ocv_mat* mat)
 {
     return jyppx_ocv_highgui_imshow(winname, mat);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_mouse_callback_clear_utf8(const unsigned char* window_name,
+    int window_name_length)
+{
+    return jyppx_ocv_highgui_mouse_callback_clear_utf8(window_name, window_name_length);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_mouse_callback_create_utf8(const unsigned char* window_name,
+    int window_name_length,
+    jyppx_ocv_highgui_mouse_callback callback,
+    void* userdata,
+    jyppx_ocv_highgui_callback_registration** registration)
+{
+    return jyppx_ocv_highgui_mouse_callback_create_utf8(window_name, window_name_length, callback, userdata, registration);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_move_window(const char* winname, int x, int y)
@@ -8768,6 +8829,11 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_set_window_title
     return jyppx_ocv_highgui_set_window_title(winname, title);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_start_window_thread(int* result)
+{
+    return jyppx_ocv_highgui_start_window_thread(result);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_highgui_trackbar_release_handle(jyppx_ocv_highgui_trackbar* trackbar)
 {
     jyppx_ocv_highgui_trackbar_release_handle(trackbar);
@@ -8776,6 +8842,11 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_highgui_trackbar_releas
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_wait_key(int delay, int* key)
 {
     return jyppx_ocv_highgui_wait_key(delay, key);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_highgui_wait_key_ex(int delay, int* key)
+{
+    return jyppx_ocv_highgui_wait_key_ex(delay, key);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_hog_descriptor_check_detector_size(const jyppx_ocv_hog_descriptor* descriptor,

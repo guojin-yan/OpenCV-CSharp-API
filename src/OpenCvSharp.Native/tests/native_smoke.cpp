@@ -7,6 +7,7 @@
 #include "open_cv_sharp/calib3d/calib3d.h"
 #include "open_cv_sharp/dnn/dnn.h"
 #include "open_cv_sharp/features2d/features2d.h"
+#include "open_cv_sharp/highgui/highgui.h"
 #include "open_cv_sharp/ml/ml.h"
 #include "open_cv_sharp/objdetect/aruco.h"
 #include "open_cv_sharp/objdetect/objdetect.h"
@@ -32,6 +33,40 @@
 
 namespace
 {
+#if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+    void highgui_smoke_mouse_callback(int, int, int, int, void*)
+    {
+    }
+
+    void highgui_smoke_trackbar_callback(int, void*)
+    {
+    }
+
+    int run_highgui_structured_smoke()
+    {
+        int wheel_delta = 0;
+        if (jyppx_ocv_highgui_get_mouse_wheel_delta(120 << 16, &wheel_delta) != OPENCV_CSHARP_STATUS_OK || wheel_delta != 120)
+            return 960;
+
+        int framework_length = -1;
+        if (jyppx_ocv_highgui_current_ui_framework_length(&framework_length) != OPENCV_CSHARP_STATUS_OK || framework_length < 0 || framework_length > 64)
+            return 961;
+        std::vector<unsigned char> framework(static_cast<size_t>(framework_length));
+        int written = -1;
+        if (jyppx_ocv_highgui_current_ui_framework_fill(framework.data(), framework_length, &written) != OPENCV_CSHARP_STATUS_OK ||
+            written < 0 || written > framework_length)
+            return 962;
+
+        const unsigned char invalid_utf8[] = { 0xc0, 0x80 };
+        auto* registration = reinterpret_cast<jyppx_ocv_highgui_callback_registration*>(static_cast<std::uintptr_t>(1));
+        if (jyppx_ocv_highgui_mouse_callback_create_utf8(
+                invalid_utf8, 2, highgui_smoke_mouse_callback, nullptr, &registration) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
+            registration != reinterpret_cast<jyppx_ocv_highgui_callback_registration*>(static_cast<std::uintptr_t>(1)))
+            return 963;
+        return 0;
+    }
+#endif
+
     long long videoio_smoke_read(void*, char* buffer, long long size)
     {
         if (size > 0 && buffer != nullptr)
@@ -5281,6 +5316,13 @@ int main()
             jyppx_ocv_mat_release(mat);
             return stitching_motion_estimator_status;
         }
+
+        int highgui_structured_status = run_highgui_structured_smoke();
+        if (highgui_structured_status != 0)
+        {
+            jyppx_ocv_mat_release(mat);
+            return highgui_structured_status;
+        }
 #endif
 
         int empty = 0;
@@ -6845,6 +6887,29 @@ int main()
             focal_x != 11.0 || focal_y != 12.0 || focal_x_estimated != 13 || focal_y_estimated != 14)
         {
             return 943;
+        }
+        int highgui_framework_length = 17;
+        int highgui_written = 18;
+        int highgui_thread_result = 19;
+        int highgui_key = 20;
+        int highgui_wheel_delta = 21;
+        unsigned char highgui_buffer[] = { 22, 23 };
+        const unsigned char highgui_name[] = { 'w' };
+        auto* highgui_registration = reinterpret_cast<jyppx_ocv_highgui_callback_registration*>(static_cast<std::uintptr_t>(1));
+        auto* highgui_trackbar = reinterpret_cast<jyppx_ocv_highgui_trackbar*>(static_cast<std::uintptr_t>(1));
+        if (jyppx_ocv_highgui_current_ui_framework_length(&highgui_framework_length) != OPENCV_CSHARP_STATUS_NOT_LINKED || highgui_framework_length != 17 ||
+            jyppx_ocv_highgui_current_ui_framework_fill(highgui_buffer, 2, &highgui_written) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            highgui_written != 18 || highgui_buffer[0] != 22 || highgui_buffer[1] != 23 ||
+            jyppx_ocv_highgui_start_window_thread(&highgui_thread_result) != OPENCV_CSHARP_STATUS_NOT_LINKED || highgui_thread_result != 19 ||
+            jyppx_ocv_highgui_wait_key_ex(1, &highgui_key) != OPENCV_CSHARP_STATUS_NOT_LINKED || highgui_key != 20 ||
+            jyppx_ocv_highgui_get_mouse_wheel_delta(120 << 16, &highgui_wheel_delta) != OPENCV_CSHARP_STATUS_NOT_LINKED || highgui_wheel_delta != 21 ||
+            jyppx_ocv_highgui_mouse_callback_create_utf8(highgui_name, 1, highgui_smoke_mouse_callback, nullptr, &highgui_registration) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            highgui_registration != reinterpret_cast<jyppx_ocv_highgui_callback_registration*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_highgui_create_trackbar_utf8(
+                highgui_name, 1, highgui_name, 1, 0, 1, highgui_smoke_trackbar_callback, nullptr, &highgui_trackbar) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            highgui_trackbar != reinterpret_cast<jyppx_ocv_highgui_trackbar*>(static_cast<std::uintptr_t>(1)))
+        {
+            return 964;
         }
 #endif
         const char* error = jyppx_ocv_get_last_error();

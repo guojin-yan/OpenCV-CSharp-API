@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using OpenCvSharp.Internal.Interop;
 
 namespace OpenCvSharp.HighGui
@@ -12,17 +11,12 @@ namespace OpenCvSharp.HighGui
     {
         private NativeHighGuiTrackbarHandle handle;
         private NativeMethods.HighGuiTrackbarCallback? nativeCallback;
-        private GCHandle? callbackHandle;
         private bool disposed;
 
         internal HighGuiTrackbar(IntPtr nativeHandle, NativeMethods.HighGuiTrackbarCallback? callback)
         {
             handle = NativeHighGuiTrackbarHandle.FromNativePointer(nativeHandle);
             nativeCallback = callback;
-            if (callback != null)
-            {
-                callbackHandle = GCHandle.Alloc(callback);
-            }
         }
 
         /// <summary>
@@ -43,12 +37,6 @@ namespace OpenCvSharp.HighGui
             if (!disposed)
             {
                 handle.Dispose();
-                if (callbackHandle.HasValue)
-                {
-                    callbackHandle.Value.Free();
-                    callbackHandle = null;
-                }
-
                 nativeCallback = null;
                 disposed = true;
                 GC.SuppressFinalize(this);

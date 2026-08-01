@@ -46,6 +46,7 @@ $representativeSourceNeedles = @(
     "OpenCvSharp.Features2D",
     "OpenCvSharp.Calib3D",
     "OpenCvSharp.Dnn",
+    "OpenCvSharp.HighGui",
     "OpenCvSharp.ObjDetect",
     "OpenCvSharp.Photo",
     "OpenCvSharp.Video",
@@ -263,6 +264,11 @@ internal static class Program
     private static readonly Func<OpenCvSharp.ML.EM> CreateEM = OpenCvSharp.ML.EM.Create;
     private static readonly Func<OpenCvSharp.ML.LogisticRegression> CreateLogisticRegression = OpenCvSharp.ML.LogisticRegression.Create;
     private static readonly Func<OpenCvSharp.ML.SVMSGD> CreateSVMSGD = OpenCvSharp.ML.SVMSGD.Create;
+    private static readonly HighGuiCv2.TrackbarCallback HighGuiTrackbarCallback = _ => { };
+    private static readonly HighGuiCv2.MouseCallback HighGuiMouseCallback = (_, _, _, _) => { };
+    private static readonly HighGuiCv2.ButtonCallback HighGuiButtonCallback = _ => { };
+    private static readonly Func<string> GetHighGuiBackend = HighGuiCv2.GetCurrentUIFramework;
+    private static readonly Func<OpenCvSharp.HighGui.MouseEventFlags, int> GetHighGuiWheelDelta = HighGuiCv2.GetMouseWheelDelta;
 
     private static readonly Type[] RepresentativeTypes =
     {
@@ -281,6 +287,11 @@ internal static class Program
         typeof(Calib3DCv2),
         typeof(DnnCv2),
         typeof(HighGuiCv2),
+        typeof(OpenCvSharp.HighGui.HighGuiTrackbar),
+        typeof(OpenCvSharp.HighGui.WindowFlags),
+        typeof(OpenCvSharp.HighGui.MouseEventTypes),
+        typeof(OpenCvSharp.HighGui.MouseEventFlags),
+        typeof(OpenCvSharp.HighGui.QtButtonTypes),
         typeof(PhotoCv2),
         typeof(VideoCv2),
         typeof(KeyPoint),
@@ -385,6 +396,10 @@ internal static class Program
         default(OpenCvSharp.Calib3D.SolvePnPFlags),
         default(OpenCvSharp.Dnn.DnnBackend),
         default(OpenCvSharp.Dnn.DnnTarget),
+        default(OpenCvSharp.HighGui.WindowFlags),
+        default(OpenCvSharp.HighGui.MouseEventTypes),
+        default(OpenCvSharp.HighGui.MouseEventFlags),
+        default(OpenCvSharp.HighGui.QtButtonTypes),
         default(OpenCvSharp.ObjDetect.PredefinedDictionaryType),
         default(OpenCvSharp.Photo.InpaintMethod),
         default(OpenCvSharp.Photo.CcmType),
@@ -424,11 +439,13 @@ internal static class Program
     {
         var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
         var exceptionType = typeof(OpenCvException);
-        return RepresentativeTypes.Length >= 84 &&
-            RepresentativeValues.Length >= 44 &&
+        return RepresentativeTypes.Length >= 89 &&
+            RepresentativeValues.Length >= 48 &&
             DenoiseTvl1 != null && CorrectChromaticAberration != null && LoadChromaticAberrationParams != null &&
             CreateAnnMlp != null && CreateDTrees != null && CreateRTrees != null && CreateBoost != null && CreateEM != null &&
             CreateLogisticRegression != null && CreateSVMSGD != null &&
+            HighGuiTrackbarCallback != null && HighGuiMouseCallback != null && HighGuiButtonCallback != null &&
+            GetHighGuiBackend != null && GetHighGuiWheelDelta != null &&
             exceptionType.Namespace == "OpenCvSharp" &&
             message.Length > 0
             ? 0

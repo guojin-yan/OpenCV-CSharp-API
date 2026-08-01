@@ -30,11 +30,23 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_destroy_all_windows")]
         internal static extern int HighGuiDestroyAllWindows();
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_current_ui_framework_length")]
+        internal static extern int HighGuiCurrentUiFrameworkLength(out int byteLength);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_current_ui_framework_fill")]
+        internal static extern int HighGuiCurrentUiFrameworkFill(byte[] buffer, int bufferCapacity, out int written);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_start_window_thread")]
+        internal static extern int HighGuiStartWindowThread(out int result);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_imshow")]
         internal static extern int HighGuiImShow(byte[] winname, IntPtr mat);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_wait_key")]
         internal static extern int HighGuiWaitKey(int delay, out int key);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_wait_key_ex")]
+        internal static extern int HighGuiWaitKeyEx(int delay, out int key);
 
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_poll_key")]
         internal static extern int HighGuiPollKey(out int key);
@@ -60,6 +72,9 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_create_trackbar")]
         internal static extern int HighGuiCreateTrackbar(byte[] trackbarname, byte[] winname, int initialValue, int count, HighGuiTrackbarCallback? callback, IntPtr userdata, out IntPtr trackbar);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_create_trackbar_utf8")]
+        internal static extern int HighGuiCreateTrackbarUtf8(byte[] trackbarName, int trackbarNameLength, byte[] windowName, int windowNameLength, int initialValue, int count, HighGuiTrackbarCallback? callback, IntPtr userdata, out IntPtr trackbar);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_trackbar_release_handle")]
         internal static extern void HighGuiTrackbarReleaseHandle(IntPtr trackbar);
 
@@ -78,8 +93,23 @@ namespace OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_set_mouse_callback")]
         internal static extern int HighGuiSetMouseCallback(byte[] winname, HighGuiMouseCallback? callback, IntPtr userdata);
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_mouse_callback_create_utf8")]
+        internal static extern int HighGuiMouseCallbackCreateUtf8(byte[] windowName, int windowNameLength, HighGuiMouseCallback callback, IntPtr userdata, out IntPtr registration);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_mouse_callback_clear_utf8")]
+        internal static extern int HighGuiMouseCallbackClearUtf8(byte[] windowName, int windowNameLength);
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_create_button")]
         internal static extern int HighGuiCreateButton(byte[] buttonName, HighGuiButtonCallback? callback, IntPtr userdata, int type, int initialButtonState);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_button_callback_create_utf8")]
+        internal static extern int HighGuiButtonCallbackCreateUtf8(byte[] buttonName, int buttonNameLength, HighGuiButtonCallback callback, IntPtr userdata, int type, int initialButtonState, out IntPtr registration);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_callback_registration_release_handle")]
+        internal static extern void HighGuiCallbackRegistrationReleaseHandle(IntPtr registration);
+
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_highgui_get_mouse_wheel_delta")]
+        internal static extern int HighGuiGetMouseWheelDelta(int flags, out int delta);
     }
 }
 #endif

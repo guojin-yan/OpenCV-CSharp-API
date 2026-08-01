@@ -1535,6 +1535,8 @@ namespace ConsoleSamples
                     string highGuiSummary;
                     try
                     {
+                        string highGuiBackend = HighGuiCv2.GetCurrentUIFramework();
+                        int highGuiWheelDelta = HighGuiCv2.GetMouseWheelDelta((OpenCvSharp.HighGui.MouseEventFlags)unchecked((int)0x00780000));
                         bool smokeEnabled = IsEnvironmentFlagEnabled(HighGuiSmokeVariable, CompatibilityHighGuiSmokeAlias);
                         if (smokeEnabled)
                         {
@@ -1555,6 +1557,8 @@ namespace ConsoleSamples
                                     HighGuiCv2.SetMouseCallback(windowName, null);
                                     int key = HighGuiCv2.WaitKey(1);
                                     highGuiSummary = "HighGui smoke key=" + key
+                                        + ", backend=" + (highGuiBackend.Length == 0 ? "none" : highGuiBackend)
+                                        + ", wheelDelta=" + highGuiWheelDelta
                                         + ", trackbar=" + position
                                         + ", imageRect=" + imageRect.Width + "x" + imageRect.Height
                                         + ", trackbarDisposed=" + trackbar.IsDisposed;
@@ -1564,7 +1568,9 @@ namespace ConsoleSamples
                         }
                         else
                         {
-                            highGuiSummary = "HighGui smoke=skipped, enum=" + OpenCvSharp.HighGui.WindowFlags.AutoSize;
+                            highGuiSummary = "HighGui backend=" + (highGuiBackend.Length == 0 ? "none" : highGuiBackend)
+                                + ", wheelDelta=" + highGuiWheelDelta
+                                + ", smoke=skipped, enum=" + OpenCvSharp.HighGui.WindowFlags.AutoSize;
                         }
                     }
                     catch (OpenCvException ex) when (ex.Message.IndexOf("highgui", StringComparison.OrdinalIgnoreCase) >= 0 || ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)

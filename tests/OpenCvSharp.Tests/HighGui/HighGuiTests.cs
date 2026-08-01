@@ -28,7 +28,20 @@ namespace OpenCvSharp.Tests.HighGui
                 Assert.Throws<ArgumentNullException>(() => HighGuiCv2.ImShow("image", null!));
                 Assert.Throws<ArgumentNullException>(() => HighGuiCv2.MoveWindow(null!, 0, 0));
                 Assert.Throws<ArgumentNullException>(() => HighGuiCv2.ResizeWindow(null!, 10, 10));
+                Assert.Throws<ArgumentException>(() => HighGuiCv2.NamedWindow("bad\0name"));
+                Assert.Throws<ArgumentException>(() => HighGuiCv2.SetWindowTitle("window", "bad\0title"));
             }
+        }
+
+        [Fact]
+        public void HighGuiBackendAndMouseWheelHelpersAreNonInteractive()
+        {
+            string framework = HighGuiCv2.GetCurrentUIFramework();
+            Assert.NotNull(framework);
+            Assert.DoesNotContain('\0', framework);
+            Assert.Equal(120, HighGuiCv2.GetMouseWheelDelta((MouseEventFlags)unchecked((int)0x00780000)));
+            Assert.Equal(-120, HighGuiCv2.GetMouseWheelDelta((MouseEventFlags)unchecked((int)0xff880000)));
+            HighGuiCv2.ThrowPendingCallbackException();
         }
 
         [Fact]

@@ -9,8 +9,11 @@
 - `Cv2.NamedWindow`
 - `Cv2.DestroyWindow`
 - `Cv2.DestroyAllWindows`
+- `Cv2.GetCurrentUIFramework`
+- `Cv2.StartWindowThread`
 - `Cv2.ImShow`
 - `Cv2.WaitKey`
+- `Cv2.WaitKeyEx`
 - `Cv2.PollKey`
 - `Cv2.MoveWindow`
 - `Cv2.ResizeWindow`
@@ -20,14 +23,19 @@
 - `Cv2.GetWindowImageRect`
 - `Cv2.CreateTrackbar`
 - `Cv2.SetMouseCallback`
+- `Cv2.GetMouseWheelDelta`
 - `Cv2.CreateButton`
+- `Cv2.ThrowPendingCallbackException`
 - `WindowFlags`
 
 - `Cv2.NamedWindow`
 - `Cv2.DestroyWindow`
 - `Cv2.DestroyAllWindows`
+- `Cv2.GetCurrentUIFramework`
+- `Cv2.StartWindowThread`
 - `Cv2.ImShow`
 - `Cv2.WaitKey`
+- `Cv2.WaitKeyEx`
 - `Cv2.PollKey`
 - `Cv2.MoveWindow`
 - `Cv2.ResizeWindow`
@@ -37,7 +45,9 @@
 - `Cv2.GetWindowImageRect`
 - `Cv2.CreateTrackbar`
 - `Cv2.SetMouseCallback`
+- `Cv2.GetMouseWheelDelta`
 - `Cv2.CreateButton`
+- `Cv2.ThrowPendingCallbackException`
 - `WindowFlags`
 
 ## Guarded Smoke / 受控 Smoke
@@ -77,9 +87,9 @@ namespace HighGuiSmokeSample
 
 ## Runtime Notes / 运行时说明
 
-HighGUI requires the factual OpenCV 5.0.0 runtime artifact `opencv_highgui500.dll` and may require additional platform GUI dependencies. Headless runners should keep `OPENCV_CSHARP_HIGHGUI_SMOKE` unset. The older `OPENCV5SHARP_HIGHGUI_SMOKE` name remains accepted only as an existing-smoke-workflow compatibility alias. Stub builds still export the ABI and return `NOT_LINKED` for native calls.
+HighGUI requires the factual OpenCV 5.0.0 runtime artifact `opencv_highgui500.dll` and may require additional platform GUI dependencies. `GetCurrentUIFramework` and `GetMouseWheelDelta` are safe noninteractive probes; headless runners should keep `OPENCV_CSHARP_HIGHGUI_SMOKE` unset. The older `OPENCV5SHARP_HIGHGUI_SMOKE` name remains accepted only as an existing-smoke-workflow compatibility alias. Full-unlinked builds export the full ABI and return `NOT_LINKED`; mini excludes HighGui and does not export its ABI.
 
-HighGUI 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_highgui500.dll`，并可能需要额外平台 GUI 依赖。无头 runner 应保持 `OPENCV_CSHARP_HIGHGUI_SMOKE` 未设置。旧的 `OPENCV5SHARP_HIGHGUI_SMOKE` 名称仍仅作为既有 smoke workflow 的兼容别名使用。stub build 仍会导出 ABI，并让 native 调用返回 `NOT_LINKED`。
+HighGUI 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_highgui500.dll`，并可能需要额外平台 GUI 依赖。`GetCurrentUIFramework` 与 `GetMouseWheelDelta` 是安全的无交互探针；无头 runner 应保持 `OPENCV_CSHARP_HIGHGUI_SMOKE` 未设置。旧的 `OPENCV5SHARP_HIGHGUI_SMOKE` 名称仍仅作为既有 smoke workflow 的兼容别名使用。Full-unlinked build 导出完整 ABI 并返回 `NOT_LINKED`；mini 排除 HighGui 且不导出其 ABI。
 
 Trackbar, mouse callback, button callback, and callback lifetime notes are covered in [HighGui Interaction Guide](highgui-interaction-guide.md).
 

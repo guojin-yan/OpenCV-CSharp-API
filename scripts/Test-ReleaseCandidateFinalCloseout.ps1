@@ -66,7 +66,7 @@ function Get-OrdinalSorted {
 }
 
 function Get-ExpectedEvidencePaths {
-    return @(
+    $paths = @(
         ".github/workflows/pack.yml",
         ".github/workflows/runtime-input.yml",
         "compatibility/api-gap-inventory.json",
@@ -91,6 +91,11 @@ function Get-ExpectedEvidencePaths {
         "compatibility/features-upstream-map.txt",
         "compatibility/features-upstream-raw.json",
         "compatibility/features-upstream-summary.json",
+        "compatibility/highgui-implemented-families.json",
+        "compatibility/highgui-upstream-classifications.json",
+        "compatibility/highgui-upstream-map.txt",
+        "compatibility/highgui-upstream-raw.json",
+        "compatibility/highgui-upstream-summary.json",
         "compatibility/imgcodecs-implemented-families.json",
         "compatibility/imgcodecs-source-reviewed-extensions.json",
         "compatibility/imgcodecs-upstream-classifications.json",
@@ -148,6 +153,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
         "docs/articles/features-upstream-parity-guide.md",
+        "docs/articles/highgui-interaction-guide.md",
         "docs/articles/imgcodecs-upstream-parity-guide.md",
         "docs/articles/imgproc-geometry-guide.md",
         "docs/articles/imgproc-upstream-parity-guide.md",
@@ -170,6 +176,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
+        "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgCodecsUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
         "scripts/Generate-ManagedPublicApiBaseline.ps1",
@@ -187,6 +194,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-CoreUpstreamMap.ps1",
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
+        "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgCodecsUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
         "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
@@ -208,6 +216,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-VideoUpstreamMap.ps1",
         "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
         "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
+        "src/OpenCvSharp.Native/include/open_cv_sharp/highgui/highgui.h",
+        "src/OpenCvSharp.Native/src/highgui/highgui.cpp",
         "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
         "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
         "src/OpenCvSharp.Native/src/stitching/stitching_handles.h",
@@ -215,6 +225,9 @@ function Get-ExpectedEvidencePaths {
         "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeEstimatorHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeHighGuiCallbackRegistrationHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMethods.HighGui.DllImport.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMethods.HighGui.LibraryImport.cs",
         "src/OpenCvSharp/Internal/Interop/NativeImageFeaturesHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMatchesInfoHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs",
@@ -232,9 +245,14 @@ function Get-ExpectedEvidencePaths {
         "src/OpenCvSharp/Stitching/MatchesInfo.cs",
         "src/OpenCvSharp/Stitching/StitcherCameraParams.cs",
         "src/OpenCvSharp/Stitching/StitchingMotion.cs",
+        "src/OpenCvSharp/HighGui/Cv2.cs",
+        "src/OpenCvSharp/HighGui/HighGuiStringConvert.cs",
+        "src/OpenCvSharp/HighGui/HighGuiTrackbar.cs",
         "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
         "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
         "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+        "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
+        "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -247,6 +265,9 @@ function Get-ExpectedEvidencePaths {
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
+        "tools/HighGuiUpstreamMap/HighGuiUpstreamMap.csproj",
+        "tools/HighGuiUpstreamMap/Program.cs",
+        "tools/HighGuiUpstreamMap/extract_highgui.py",
         "tools/ImgCodecsUpstreamMap/ImgCodecsUpstreamMap.csproj",
         "tools/ImgCodecsUpstreamMap/Program.cs",
         "tools/ImgCodecsUpstreamMap/extract_imgcodecs.py",
@@ -274,6 +295,7 @@ function Get-ExpectedEvidencePaths {
         "tools/VideoUpstreamMap/VideoUpstreamMap.csproj",
         "tools/VideoUpstreamMap/extract_video.py"
     )
+    return @(Get-OrdinalSorted -Values $paths)
 }
 
 function Test-Record {
@@ -299,9 +321,9 @@ function Test-Record {
     Assert-True -List $List -Condition ([int]$Record.PackageMatrix.RidCount -gt 0 -and [int]$Record.PackageMatrix.ProfileCount -eq 2 -and [int]$Record.PackageMatrix.EntryCount -eq 34 -and $Record.PackageMatrix.Sha256 -match "^[0-9a-f]{64}$") -Issue "Final closeout package matrix evidence drifted"
     Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 24 -and $Record.SupportContract.PendingSupportCount -eq 1 -and $Record.SupportContract.ExcludedSupportCount -eq 9 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "hosted-evidence-pending" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
 
-    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "7db8c81fd5676e0bf097d0093c9b1b50162e23706803ff820ca80e01682fd814" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 612 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 6308 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
-    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeFull.Sha256 -eq "07b7ef2a24b6175eb801099ef9a0b9a582385bd1054254ad24f90d1ccf615ec5" -and $Record.ApiAbiBaseline.NativeFull.FunctionCount -eq 2646 -and $Record.ApiAbiBaseline.NativeMini.Sha256 -eq "6101a6d4d71c3fce8baff6f5f2184962da95f44d8166b94bbbca47e4aa626395" -and $Record.ApiAbiBaseline.NativeMini.FunctionCount -eq 526) -Issue "Final closeout native ABI baseline evidence drifted"
-    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeManagedBindingMap.Sha256 -eq "f0eeedbb313ee2e884beed76b64e11a95f3ccad472b11815ee18e36f14d08b1e" -and $Record.ApiAbiBaseline.NativeManagedBindingMap.NativeFunctionCount -eq 2646 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedBoundCount -eq 2646 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.UnboundCount -eq 0 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedOnlyCount -eq 0) -Issue "Final closeout native-to-managed binding evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "fbd740ab965bc2baebc21855bd0983bb9208ca54c1942484b9d56af71f7fed22" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 612 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 6314 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeFull.Sha256 -eq "e4878cfab788c0654f21be6b3235eb7ada0333b7152f7b7078ba64a0f1156860" -and $Record.ApiAbiBaseline.NativeFull.FunctionCount -eq 2656 -and $Record.ApiAbiBaseline.NativeMini.Sha256 -eq "6101a6d4d71c3fce8baff6f5f2184962da95f44d8166b94bbbca47e4aa626395" -and $Record.ApiAbiBaseline.NativeMini.FunctionCount -eq 526) -Issue "Final closeout native ABI baseline evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeManagedBindingMap.Sha256 -eq "23ab245053a9192e44b95869e38c07b71945b7bc723c73f858489a34a7509cbe" -and $Record.ApiAbiBaseline.NativeManagedBindingMap.NativeFunctionCount -eq 2656 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedBoundCount -eq 2656 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.UnboundCount -eq 0 -and $Record.ApiAbiBaseline.NativeManagedBindingMap.ManagedOnlyCount -eq 0) -Issue "Final closeout native-to-managed binding evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.ImgProcUpstreamMap.Sha256 -eq "bac07983162c52c5f12ffb4949ffdbfa31f53da566073dab02eee008f2784b59" -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.DeclarationCount -eq 203 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.CallableCount -eq 167 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.ImplementedCount -eq 161 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.IntentionallyOmittedCount -eq 6 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.SelectedFamilyCount -eq 8 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.SelectedDeclarationCount -eq 90 -and $Record.ApiAbiBaseline.ImgProcUpstreamMap.ManagedPublicMemberAdditionCount -eq 174 -and -not [bool]$Record.ApiAbiBaseline.ImgProcUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout ImgProc upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.ImgCodecsUpstreamMap.Sha256 -eq "f149a8fd857bc1cf5f8aaa4111d1487fd70bd3559ad7b933da3da53600684cea" -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.DeclarationCount -eq 39 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.CallableCount -eq 22 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.ImplementedCount -eq 22 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.IntentionallyOmittedCount -eq 0 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.SelectedFamilyCount -eq 5 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.SelectedDeclarationCount -eq 40 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.ManagedPublicTypeAdditionCount -eq 16 -and $Record.ApiAbiBaseline.ImgCodecsUpstreamMap.ManagedPublicMemberAdditionCount -eq 168 -and -not [bool]$Record.ApiAbiBaseline.ImgCodecsUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout ImgCodecs upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.VideoIOUpstreamMap.Sha256 -eq "65654ea796fe7677838bc92056c1a89db39685883834378a4ce6aa7495cda11e" -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.RegistrySurfaceSha256 -eq "69ce6ab8be9f32f38cd31ab5549797b2baa03b74f0e449c217bb25659bdd6f2e" -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.DeclarationCount -eq 71 -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.CallableCount -eq 40 -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.ImplementedCount -eq 40 -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.IntentionallyOmittedCount -eq 0 -and $Record.ApiAbiBaseline.VideoIOUpstreamMap.RegistryOperationCount -eq 12 -and -not [bool]$Record.ApiAbiBaseline.VideoIOUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout VideoIO upstream-map evidence drifted"
@@ -309,6 +331,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.CoreUpstreamMap.Sha256 -eq "d2cec168a381c43cac4c9b45da2581a394863e317ddf9047cdd90d5b7464a695" -and $Record.ApiAbiBaseline.CoreUpstreamMap.DeclarationCount -eq 258 -and $Record.ApiAbiBaseline.CoreUpstreamMap.CallableCount -eq 215 -and $Record.ApiAbiBaseline.CoreUpstreamMap.ImplementedCount -eq 176 -and $Record.ApiAbiBaseline.CoreUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.CoreUpstreamMap.IntentionallyOmittedCount -eq 29 -and $Record.ApiAbiBaseline.CoreUpstreamMap.UnsupportedCount -eq 5 -and $Record.ApiAbiBaseline.CoreUpstreamMap.UpstreamConditionalCount -eq 5 -and $Record.ApiAbiBaseline.CoreUpstreamMap.SourceHeaderCount -eq 11 -and $Record.ApiAbiBaseline.CoreUpstreamMap.SelectedFamilyCount -eq 4 -and $Record.ApiAbiBaseline.CoreUpstreamMap.SelectedDeclarationCount -eq 108 -and $Record.ApiAbiBaseline.CoreUpstreamMap.ManagedPublicTypeAdditionCount -eq 11 -and $Record.ApiAbiBaseline.CoreUpstreamMap.ManagedPublicMemberAdditionCount -eq 226 -and -not [bool]$Record.ApiAbiBaseline.CoreUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Core upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.DnnUpstreamMap.Sha256 -eq "28ad9e36b31dd6ca0e8d635deb27b35ff55c174edec2dd8443e54acdcf008708" -and $Record.ApiAbiBaseline.DnnUpstreamMap.DeclarationCount -eq 182 -and $Record.ApiAbiBaseline.DnnUpstreamMap.CallableCount -eq 159 -and $Record.ApiAbiBaseline.DnnUpstreamMap.ImplementedCount -eq 70 -and $Record.ApiAbiBaseline.DnnUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.DnnUpstreamMap.IntentionallyOmittedCount -eq 81 -and $Record.ApiAbiBaseline.DnnUpstreamMap.UnsupportedCount -eq 2 -and $Record.ApiAbiBaseline.DnnUpstreamMap.UpstreamConditionalCount -eq 6 -and $Record.ApiAbiBaseline.DnnUpstreamMap.SourceHeaderCount -eq 3 -and $Record.ApiAbiBaseline.DnnUpstreamMap.SelectedFamilyCount -eq 4 -and $Record.ApiAbiBaseline.DnnUpstreamMap.SelectedDeclarationCount -eq 80 -and $Record.ApiAbiBaseline.DnnUpstreamMap.ManagedPublicTypeAdditionCount -eq 10 -and $Record.ApiAbiBaseline.DnnUpstreamMap.ManagedPublicMemberAdditionCount -eq 94 -and -not [bool]$Record.ApiAbiBaseline.DnnUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout DNN upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.FeaturesUpstreamMap.Sha256 -eq "e6b2c37e0d1717fa3b9626f61761a1d79b04fe6d4a614fa363402e1fb1c9e0d7" -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.DeclarationCount -eq 183 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.CallableCount -eq 160 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.ImplementedCount -eq 134 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.IntentionallyOmittedCount -eq 26 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.CompatibilityHeaderCount -eq 2 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.SourceReviewedExtensionCount -eq 9 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.SelectedDeclarationCount -eq 12 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.ManagedPublicTypeAdditionCount -eq 2 -and $Record.ApiAbiBaseline.FeaturesUpstreamMap.ManagedPublicMemberAdditionCount -eq 18 -and -not [bool]$Record.ApiAbiBaseline.FeaturesUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Features upstream-map evidence drifted"
+    Assert-True -List $List -Condition ($Record.ApiAbiBaseline.HighGuiUpstreamMap.Sha256 -eq "be3b19f91278bdeafbbd1a898c84a27392738bf3d5a8e3f20cad250f1a75058c" -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.RawSha256 -eq "8d21c928dc3edd89fd3f57ee8b43aafc415c55b59bccf8e817d01cc2c9b2ba82" -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.DeclarationCount -eq 33 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.CallableCount -eq 26 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.ImplementedCount -eq 20 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.IntentionallyOmittedCount -eq 3 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.UpstreamConditionalCount -eq 3 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.CompatibilityHeaderCount -eq 3 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.ExcludedPublicHeaderCount -eq 0 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.SourceReviewedExtensionCount -eq 4 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.SelectedFamilyCount -eq 3 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.SelectedDeclarationCount -eq 20 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.ManagedPublicTypeAdditionCount -eq 0 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.ManagedPublicMemberAdditionCount -eq 6 -and $Record.ApiAbiBaseline.HighGuiUpstreamMap.NativeEntrypointAdditionCount -eq 10 -and -not [bool]$Record.ApiAbiBaseline.HighGuiUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout HighGui upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.ObjDetectUpstreamMap.Sha256 -eq "d5b837ccb256c1cfa5479199395741b17bfb1bba01eff45b54c9b09ccbe19b3b" -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.RawSha256 -eq "e61cc23d241ae1582e45b085ffaabf066f1996d11ee188fcda6180820cb147e0" -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.DeclarationCount -eq 195 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.CallableCount -eq 163 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.ImplementedCount -eq 153 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.IntentionallyOmittedCount -eq 10 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.CompatibilityHeaderCount -eq 2 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.SourceHeaderCount -eq 9 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.SelectedFamilyCount -eq 1 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.SelectedDeclarationCount -eq 33 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.ManagedPublicTypeAdditionCount -eq 4 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.ManagedPublicMemberAdditionCount -eq 55 -and $Record.ApiAbiBaseline.ObjDetectUpstreamMap.NativeEntrypointAdditionCount -eq 35 -and -not [bool]$Record.ApiAbiBaseline.ObjDetectUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout ObjDetect upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.PhotoUpstreamMap.Sha256 -eq "dabac4e67c5c22e508e32e7695b1acdfbb9bbd42136eac9d48753c60e576a490" -and $Record.ApiAbiBaseline.PhotoUpstreamMap.RawSha256 -eq "ac887c44492de0fdd533555c11c043c418ce02698b2332ac0e93dda3d35f239a" -and $Record.ApiAbiBaseline.PhotoUpstreamMap.DeclarationCount -eq 145 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.CallableCount -eq 120 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.ImplementedCount -eq 120 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.IntentionallyOmittedCount -eq 0 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.UnsupportedCount -eq 0 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.UpstreamConditionalCount -eq 0 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.CompatibilityHeaderCount -eq 2 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.ExcludedPublicHeaderCount -eq 1 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.SourceHeaderCount -eq 3 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.SelectedFamilyCount -eq 3 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.SelectedDeclarationCount -eq 83 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.ManagedPublicTypeAdditionCount -eq 18 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.ManagedPublicMemberAdditionCount -eq 181 -and $Record.ApiAbiBaseline.PhotoUpstreamMap.NativeEntrypointAdditionCount -eq 80 -and -not [bool]$Record.ApiAbiBaseline.PhotoUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout Photo upstream-map evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.MlUpstreamMap.Sha256 -eq "fe47d7ad50741c31ba441ff3494b06e6ef99e1d089a8eb103379e6f614cbe93d" -and $Record.ApiAbiBaseline.MlUpstreamMap.RawSha256 -eq "b7c850093e07b04739bff28a81b0248d3a646933f1d51bf6cc25fcab47ab1001" -and $Record.ApiAbiBaseline.MlUpstreamMap.DeclarationCount -eq 241 -and $Record.ApiAbiBaseline.MlUpstreamMap.CallableCount -eq 208 -and $Record.ApiAbiBaseline.MlUpstreamMap.ImplementedCount -eq 208 -and $Record.ApiAbiBaseline.MlUpstreamMap.MissingCount -eq 0 -and $Record.ApiAbiBaseline.MlUpstreamMap.IntentionallyOmittedCount -eq 0 -and $Record.ApiAbiBaseline.MlUpstreamMap.SourceHeaderCount -eq 1 -and $Record.ApiAbiBaseline.MlUpstreamMap.CompatibilityHeaderCount -eq 1 -and $Record.ApiAbiBaseline.MlUpstreamMap.ExcludedPublicHeaderCount -eq 1 -and $Record.ApiAbiBaseline.MlUpstreamMap.SourceReviewedExtensionCount -eq 2 -and $Record.ApiAbiBaseline.MlUpstreamMap.SelectedFamilyCount -eq 6 -and $Record.ApiAbiBaseline.MlUpstreamMap.SelectedDeclarationCount -eq 121 -and $Record.ApiAbiBaseline.MlUpstreamMap.ManagedPublicTypeAdditionCount -eq 18 -and $Record.ApiAbiBaseline.MlUpstreamMap.ManagedPublicMemberAdditionCount -eq 147 -and $Record.ApiAbiBaseline.MlUpstreamMap.NativeEntrypointAdditionCount -eq 75 -and -not [bool]$Record.ApiAbiBaseline.MlUpstreamMap.RepositoryWideParityClaimed) -Issue "Final closeout ML upstream-map evidence drifted"
@@ -380,7 +403,7 @@ function Test-Record {
     }
 
     $expectedChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
-    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 73 -and $Record.LocalValidation.ExactSdk -eq "10.0.302" -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
+    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 74 -and $Record.LocalValidation.ExactSdk -eq "10.0.302" -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
     Assert-True -List $List -Condition ($Record.Signing.Status -eq "not-ready" -and $Record.Signing.NormalizedInputRequired -and -not [bool]$Record.Signing.PrivateKeyMaterialPresent -and $Record.Signing.Verification -eq "not-run") -Issue "Final closeout signing state must remain not-ready"
     Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3-input-required" -and -not [bool]$Record.Sbom.Deterministic -and $Record.Sbom.Verification -eq "not-run") -Issue "Final closeout SBOM state must remain not-ready"
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"

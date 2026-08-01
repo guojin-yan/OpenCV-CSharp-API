@@ -1365,12 +1365,12 @@ jobs:
             @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES') +
             @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES'))
           if ([int]$provenance.NativeWrapperSourceCount -ne 49 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 2646 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 2656 -or
               $nativeWrapperSources.Count -ne 49 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
-            throw "Windows x86 provenance does not retain the exact 49-source/2646-ABI full profile with empty extra CMake arguments."
+            throw "Windows x86 provenance does not retain the exact 49-source/2656-ABI full profile with empty extra CMake arguments."
           }
 
           foreach ($excludedDirectory in $excludedForeignToolDirectories) {
@@ -1414,7 +1414,7 @@ jobs:
               throw "Windows x86 provenance retained foreign architecture or emulation evidence: $forbiddenToken"
             }
           }
-          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=49 abi_functions=2646 synthetic=false machine=I386 wow64=true"
+          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true"
       - name: Validate Windows ARM64 runtime input provenance
         if: ${{ matrix.rid == 'win-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1519,7 +1519,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2646 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           $expectedExtraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
@@ -1683,7 +1683,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2646 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -1855,7 +1855,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2646 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -2035,7 +2035,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2646 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -2209,7 +2209,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2646 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or

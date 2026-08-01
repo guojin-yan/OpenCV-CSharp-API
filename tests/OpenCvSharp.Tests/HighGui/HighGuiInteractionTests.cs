@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using OpenCvSharp.HighGui;
 using HighGuiCv2 = OpenCvSharp.HighGui.Cv2;
 
@@ -39,6 +40,23 @@ namespace OpenCvSharp.Tests.HighGui
             Assert.Throws<ArgumentNullException>(() => HighGuiCv2.SetTrackbarMax("trackbar", null!, 10));
             Assert.Throws<ArgumentNullException>(() => HighGuiCv2.SetMouseCallback(null!, null));
             Assert.Throws<ArgumentNullException>(() => HighGuiCv2.CreateButton(null!));
+            Assert.Throws<ArgumentException>(() => HighGuiCv2.CreateTrackbar("bad\0trackbar", "window", 0, 10));
+            Assert.Throws<ArgumentException>(() => HighGuiCv2.SetMouseCallback("bad\0window", null));
+            Assert.Throws<ArgumentException>(() => HighGuiCv2.CreateButton("bad\0button"));
+            Assert.Throws<ArgumentOutOfRangeException>(() => HighGuiCv2.CreateTrackbar("trackbar", "window", 0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => HighGuiCv2.CreateTrackbar("trackbar", "window", 11, 10));
+        }
+
+        [Fact]
+        public void CallbackExceptionsAreCapturedUntilExplicitlyObserved()
+        {
+            MethodInfo? capture = typeof(HighGuiCv2).GetMethod("CaptureCallbackException", BindingFlags.Static | BindingFlags.NonPublic);
+            Assert.NotNull(capture);
+            var expected = new InvalidOperationException("callback failure");
+            capture!.Invoke(null, new object[] { expected });
+            InvalidOperationException actual = Assert.Throws<InvalidOperationException>(() => HighGuiCv2.ThrowPendingCallbackException());
+            Assert.Same(expected, actual);
+            HighGuiCv2.ThrowPendingCallbackException();
         }
 
         [Fact]

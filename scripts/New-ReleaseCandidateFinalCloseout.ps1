@@ -124,6 +124,7 @@ function Get-Record {
     $coreSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/core-upstream-summary.json") -Raw | ConvertFrom-Json
     $dnnSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/dnn-upstream-summary.json") -Raw | ConvertFrom-Json
     $featuresSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/features-upstream-summary.json") -Raw | ConvertFrom-Json
+    $highGuiSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-summary.json") -Raw | ConvertFrom-Json
     $objDetectSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/objdetect-upstream-summary.json") -Raw | ConvertFrom-Json
     $photoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/photo-upstream-summary.json") -Raw | ConvertFrom-Json
     $mlSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/ml-upstream-summary.json") -Raw | ConvertFrom-Json
@@ -155,6 +156,11 @@ function Get-Record {
         "compatibility/features-upstream-map.txt",
         "compatibility/features-upstream-raw.json",
         "compatibility/features-upstream-summary.json",
+        "compatibility/highgui-implemented-families.json",
+        "compatibility/highgui-upstream-classifications.json",
+        "compatibility/highgui-upstream-map.txt",
+        "compatibility/highgui-upstream-raw.json",
+        "compatibility/highgui-upstream-summary.json",
         "compatibility/imgcodecs-implemented-families.json",
         "compatibility/imgcodecs-source-reviewed-extensions.json",
         "compatibility/imgcodecs-upstream-classifications.json",
@@ -212,6 +218,7 @@ function Get-Record {
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
         "docs/articles/features-upstream-parity-guide.md",
+        "docs/articles/highgui-interaction-guide.md",
         "docs/articles/imgcodecs-upstream-parity-guide.md",
         "docs/articles/imgproc-geometry-guide.md",
         "docs/articles/imgproc-upstream-parity-guide.md",
@@ -234,6 +241,7 @@ function Get-Record {
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
         "scripts/Generate-FeaturesUpstreamMap.ps1",
+        "scripts/Generate-HighGuiUpstreamMap.ps1",
         "scripts/Generate-ImgProcUpstreamMap.ps1",
         "scripts/Generate-ImgCodecsUpstreamMap.ps1",
         "scripts/Generate-ManagedPublicApiBaseline.ps1",
@@ -251,6 +259,7 @@ function Get-Record {
         "scripts/Test-CoreUpstreamMap.ps1",
         "scripts/Test-DnnUpstreamMap.ps1",
         "scripts/Test-FeaturesUpstreamMap.ps1",
+        "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
         "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
         "scripts/Test-MlUpstreamMap.ps1",
@@ -272,12 +281,17 @@ function Get-Record {
         "scripts/Test-VideoUpstreamMap.ps1",
         "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
         "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
+        "src/OpenCvSharp.Native/include/open_cv_sharp/highgui/highgui.h",
+        "src/OpenCvSharp.Native/src/highgui/highgui.cpp",
         "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
         "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
         "src/OpenCvSharp.Native/src/stitching/stitching_handles.h",
         "src/OpenCvSharp.Native/tests/native_smoke.cpp",
         "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeHighGuiCallbackRegistrationHandle.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMethods.HighGui.DllImport.cs",
+        "src/OpenCvSharp/Internal/Interop/NativeMethods.HighGui.LibraryImport.cs",
         "src/OpenCvSharp/Internal/Interop/NativeImageFeaturesHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeMatchesInfoHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeEstimatorHandle.cs",
@@ -296,9 +310,14 @@ function Get-Record {
         "src/OpenCvSharp/Stitching/MatchesInfo.cs",
         "src/OpenCvSharp/Stitching/StitcherCameraParams.cs",
         "src/OpenCvSharp/Stitching/StitchingMotion.cs",
+        "src/OpenCvSharp/HighGui/Cv2.cs",
+        "src/OpenCvSharp/HighGui/HighGuiStringConvert.cs",
+        "src/OpenCvSharp/HighGui/HighGuiTrackbar.cs",
         "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
         "tests/OpenCvSharp.Tests/Stitching/FeaturesMatcherTests.cs",
         "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
+        "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
+        "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -311,6 +330,9 @@ function Get-Record {
         "tools/FeaturesUpstreamMap/FeaturesUpstreamMap.csproj",
         "tools/FeaturesUpstreamMap/Program.cs",
         "tools/FeaturesUpstreamMap/extract_features.py",
+        "tools/HighGuiUpstreamMap/HighGuiUpstreamMap.csproj",
+        "tools/HighGuiUpstreamMap/Program.cs",
+        "tools/HighGuiUpstreamMap/extract_highgui.py",
         "tools/ImgProcUpstreamMap/ImgProcUpstreamMap.csproj",
         "tools/ImgProcUpstreamMap/Program.cs",
         "tools/ImgProcUpstreamMap/extract_imgproc.py",
@@ -395,7 +417,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2646
+                FunctionCount = 2656
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -537,6 +559,32 @@ function Get-Record {
                 ManagedPublicTypeAdditionCount = [int]$featuresSummary.managedPublicTypeAdditionCount
                 ManagedPublicMemberAdditionCount = [int]$featuresSummary.managedPublicMemberAdditionCount
                 RepositoryWideParityClaimed = [bool]$featuresSummary.repositoryWideUpstreamParityClaimed
+            }
+            HighGuiUpstreamMap = [ordered]@{
+                Path = "compatibility/highgui-upstream-map.txt"
+                SummaryPath = "compatibility/highgui-upstream-summary.json"
+                ClassificationPath = "compatibility/highgui-upstream-classifications.json"
+                FamilyInventoryPath = "compatibility/highgui-implemented-families.json"
+                RawExtractionPath = "compatibility/highgui-upstream-raw.json"
+                Sha256 = $highGuiSummary.mappingSha256
+                RawSha256 = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/highgui-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                DeclarationCount = [int]$highGuiSummary.declarationCount
+                CallableCount = [int]$highGuiSummary.callableCount
+                ImplementedCount = [int]$highGuiSummary.classificationCounts.implemented
+                MissingCount = [int]$highGuiSummary.classificationCounts.missing
+                IntentionallyOmittedCount = [int]$highGuiSummary.classificationCounts.'intentionally-omitted'
+                UnsupportedCount = [int]$highGuiSummary.classificationCounts.unsupported
+                UpstreamConditionalCount = [int]$highGuiSummary.classificationCounts.'upstream-conditional'
+                CompatibilityHeaderCount = [int]$highGuiSummary.compatibilityHeaderCount
+                ExcludedPublicHeaderCount = [int]$highGuiSummary.excludedPublicHeaderCount
+                SourceHeaderCount = [int]$highGuiSummary.sourceHeaderCount
+                SourceReviewedExtensionCount = [int]$highGuiSummary.sourceReviewedExtensionCount
+                SelectedFamilyCount = [int]$highGuiSummary.selectedFamilyCount
+                SelectedDeclarationCount = [int]$highGuiSummary.selectedDeclarationCount
+                ManagedPublicTypeAdditionCount = [int]$highGuiSummary.managedPublicTypeAdditionCount
+                ManagedPublicMemberAdditionCount = [int]$highGuiSummary.managedPublicMemberAdditionCount
+                NativeEntrypointAdditionCount = [int]$highGuiSummary.nativeEntrypointAdditionCount
+                RepositoryWideParityClaimed = [bool]$highGuiSummary.repositoryWideUpstreamParityClaimed
             }
             ObjDetectUpstreamMap = [ordered]@{
                 Path = "compatibility/objdetect-upstream-map.txt"
@@ -734,7 +782,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 73
+            InvariantGuardCount = 74
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false

@@ -1,0 +1,1154 @@
+{
+  "schemaVersion": 1,
+  "generator": "tools/HighGuiUpstreamMap/extract_highgui.py",
+  "upstreamOpenCvVersion": "5.0.0",
+  "headerPath": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+  "headerSha256": "0689126ee23d856b18e304afbac7db9492cce8d357008cdda48c897c2657ab9a",
+  "parserPath": "opencv-source/opencv-5.0.0/modules/python/src2/hdr_parser.py",
+  "parserSha256": "619cfc4e00987a905e06e11e780b963d90b3b0b86d41a8278a9b3a9d81780702",
+  "preprocessorDefinitions": {
+    "CV_VERSION_MAJOR": 5,
+    "OPENCV_ABI_COMPATIBILITY": 500
+  },
+  "compatibilityHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "sha256": "0689126ee23d856b18e304afbac7db9492cce8d357008cdda48c897c2657ab9a",
+      "includes": "main HighGui public declarations"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui/highgui.hpp",
+      "sha256": "2705134ada3002073de9d41704da25540f13248bbfc2325c3a597f117e63cf42",
+      "includes": "compatibility include forwarding to opencv2/highgui.hpp"
+    },
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui/highgui_winrt.hpp",
+      "sha256": "e34ada0b5fe8f035f50419369b1167b54919a4a6ade1c38d5c0edd91bf3dae8c",
+      "includes": "WinRT-only source-reviewed conditional declaration; official parser emits zero rows"
+    }
+  ],
+  "excludedPublicHeaders": [],
+  "sourceHeaders": [
+    {
+      "path": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "sha256": "0689126ee23d856b18e304afbac7db9492cce8d357008cdda48c897c2657ab9a",
+      "startOrdinal": 0,
+      "declarationCount": 33
+    }
+  ],
+  "declarationCount": 33,
+  "declarations": [
+    {
+      "ordinal": 0,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.WindowFlags",
+      "identity": "enum cv.WindowFlags[const cv.WINDOW_NORMAL=0x00000000;const cv.WINDOW_AUTOSIZE=0x00000001;const cv.WINDOW_OPENGL=0x00001000;const cv.WINDOW_FULLSCREEN=1;const cv.WINDOW_FREERATIO=0x00000100;const cv.WINDOW_KEEPRATIO=0x00000000;const cv.WINDOW_GUI_EXPANDED=0x00000000;const cv.WINDOW_GUI_NORMAL=0x00000010]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.WINDOW_NORMAL",
+          "value": "0x00000000"
+        },
+        {
+          "name": "const cv.WINDOW_AUTOSIZE",
+          "value": "0x00000001"
+        },
+        {
+          "name": "const cv.WINDOW_OPENGL",
+          "value": "0x00001000"
+        },
+        {
+          "name": "const cv.WINDOW_FULLSCREEN",
+          "value": "1"
+        },
+        {
+          "name": "const cv.WINDOW_FREERATIO",
+          "value": "0x00000100"
+        },
+        {
+          "name": "const cv.WINDOW_KEEPRATIO",
+          "value": "0x00000000"
+        },
+        {
+          "name": "const cv.WINDOW_GUI_EXPANDED",
+          "value": "0x00000000"
+        },
+        {
+          "name": "const cv.WINDOW_GUI_NORMAL",
+          "value": "0x00000010"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 1,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.WindowPropertyFlags",
+      "identity": "enum cv.WindowPropertyFlags[const cv.WND_PROP_FULLSCREEN=0;const cv.WND_PROP_AUTOSIZE=1;const cv.WND_PROP_ASPECT_RATIO=2;const cv.WND_PROP_OPENGL=3;const cv.WND_PROP_VISIBLE=4;const cv.WND_PROP_TOPMOST=5;const cv.WND_PROP_VSYNC=6]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.WND_PROP_FULLSCREEN",
+          "value": "0"
+        },
+        {
+          "name": "const cv.WND_PROP_AUTOSIZE",
+          "value": "1"
+        },
+        {
+          "name": "const cv.WND_PROP_ASPECT_RATIO",
+          "value": "2"
+        },
+        {
+          "name": "const cv.WND_PROP_OPENGL",
+          "value": "3"
+        },
+        {
+          "name": "const cv.WND_PROP_VISIBLE",
+          "value": "4"
+        },
+        {
+          "name": "const cv.WND_PROP_TOPMOST",
+          "value": "5"
+        },
+        {
+          "name": "const cv.WND_PROP_VSYNC",
+          "value": "6"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 2,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.MouseEventTypes",
+      "identity": "enum cv.MouseEventTypes[const cv.EVENT_MOUSEMOVE=0;const cv.EVENT_LBUTTONDOWN=1;const cv.EVENT_RBUTTONDOWN=2;const cv.EVENT_MBUTTONDOWN=3;const cv.EVENT_LBUTTONUP=4;const cv.EVENT_RBUTTONUP=5;const cv.EVENT_MBUTTONUP=6;const cv.EVENT_LBUTTONDBLCLK=7;const cv.EVENT_RBUTTONDBLCLK=8;const cv.EVENT_MBUTTONDBLCLK=9;const cv.EVENT_MOUSEWHEEL=10;const cv.EVENT_MOUSEHWHEEL=11]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.EVENT_MOUSEMOVE",
+          "value": "0"
+        },
+        {
+          "name": "const cv.EVENT_LBUTTONDOWN",
+          "value": "1"
+        },
+        {
+          "name": "const cv.EVENT_RBUTTONDOWN",
+          "value": "2"
+        },
+        {
+          "name": "const cv.EVENT_MBUTTONDOWN",
+          "value": "3"
+        },
+        {
+          "name": "const cv.EVENT_LBUTTONUP",
+          "value": "4"
+        },
+        {
+          "name": "const cv.EVENT_RBUTTONUP",
+          "value": "5"
+        },
+        {
+          "name": "const cv.EVENT_MBUTTONUP",
+          "value": "6"
+        },
+        {
+          "name": "const cv.EVENT_LBUTTONDBLCLK",
+          "value": "7"
+        },
+        {
+          "name": "const cv.EVENT_RBUTTONDBLCLK",
+          "value": "8"
+        },
+        {
+          "name": "const cv.EVENT_MBUTTONDBLCLK",
+          "value": "9"
+        },
+        {
+          "name": "const cv.EVENT_MOUSEWHEEL",
+          "value": "10"
+        },
+        {
+          "name": "const cv.EVENT_MOUSEHWHEEL",
+          "value": "11"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 3,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.MouseEventFlags",
+      "identity": "enum cv.MouseEventFlags[const cv.EVENT_FLAG_LBUTTON=1;const cv.EVENT_FLAG_RBUTTON=2;const cv.EVENT_FLAG_MBUTTON=4;const cv.EVENT_FLAG_CTRLKEY=8;const cv.EVENT_FLAG_SHIFTKEY=16;const cv.EVENT_FLAG_ALTKEY=32]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.EVENT_FLAG_LBUTTON",
+          "value": "1"
+        },
+        {
+          "name": "const cv.EVENT_FLAG_RBUTTON",
+          "value": "2"
+        },
+        {
+          "name": "const cv.EVENT_FLAG_MBUTTON",
+          "value": "4"
+        },
+        {
+          "name": "const cv.EVENT_FLAG_CTRLKEY",
+          "value": "8"
+        },
+        {
+          "name": "const cv.EVENT_FLAG_SHIFTKEY",
+          "value": "16"
+        },
+        {
+          "name": "const cv.EVENT_FLAG_ALTKEY",
+          "value": "32"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 4,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.QtFontWeights",
+      "identity": "enum cv.QtFontWeights[const cv.QT_FONT_LIGHT=25;const cv.QT_FONT_NORMAL=50;const cv.QT_FONT_DEMIBOLD=63;const cv.QT_FONT_BOLD=75;const cv.QT_FONT_BLACK=87]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.QT_FONT_LIGHT",
+          "value": "25"
+        },
+        {
+          "name": "const cv.QT_FONT_NORMAL",
+          "value": "50"
+        },
+        {
+          "name": "const cv.QT_FONT_DEMIBOLD",
+          "value": "63"
+        },
+        {
+          "name": "const cv.QT_FONT_BOLD",
+          "value": "75"
+        },
+        {
+          "name": "const cv.QT_FONT_BLACK",
+          "value": "87"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 5,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.QtFontStyles",
+      "identity": "enum cv.QtFontStyles[const cv.QT_STYLE_NORMAL=0;const cv.QT_STYLE_ITALIC=1;const cv.QT_STYLE_OBLIQUE=2]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.QT_STYLE_NORMAL",
+          "value": "0"
+        },
+        {
+          "name": "const cv.QT_STYLE_ITALIC",
+          "value": "1"
+        },
+        {
+          "name": "const cv.QT_STYLE_OBLIQUE",
+          "value": "2"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 6,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "enum",
+      "name": "cv.QtButtonTypes",
+      "identity": "enum cv.QtButtonTypes[const cv.QT_PUSH_BUTTON=0;const cv.QT_CHECKBOX=1;const cv.QT_RADIOBOX=2;const cv.QT_NEW_BUTTONBAR=1024]",
+      "returnType": "",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [
+        {
+          "name": "const cv.QT_PUSH_BUTTON",
+          "value": "0"
+        },
+        {
+          "name": "const cv.QT_CHECKBOX",
+          "value": "1"
+        },
+        {
+          "name": "const cv.QT_RADIOBOX",
+          "value": "2"
+        },
+        {
+          "name": "const cv.QT_NEW_BUTTONBAR",
+          "value": "1024"
+        }
+      ],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 7,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.namedWindow",
+      "identity": "cv.namedWindow(String winname[/C,/Ref];int flags=WINDOW_AUTOSIZE)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "flags",
+          "default": "WINDOW_AUTOSIZE",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Creates a window.\n\nThe function namedWindow creates a window that can be used as a placeholder for images and\ntrackbars. Created windows are referred to by their names.\n\nIf a window with the same name already exists, the function does nothing.\n\nYou can call cv::destroyWindow or cv::destroyAllWindows to close the window and de-allocate any associated\nmemory usage. For a simple program, you do not really have to call these functions because all the\nresources and windows of the application are closed automatically by the operating system upon exit.\n\n@note Qt backend supports additional flags:\n -   **WINDOW_NORMAL or WINDOW_AUTOSIZE:** WINDOW_NORMAL enables you to resize the\n     window, whereas WINDOW_AUTOSIZE adjusts automatically the window size to fit the\n     displayed image (see imshow ), and you cannot change the window size manually.\n -   **WINDOW_FREERATIO or WINDOW_KEEPRATIO:** WINDOW_FREERATIO adjusts the image\n     with no respect to its ratio, whereas WINDOW_KEEPRATIO keeps the image ratio.\n -   **WINDOW_GUI_NORMAL or WINDOW_GUI_EXPANDED:** WINDOW_GUI_NORMAL is the old way to draw the window\n     without statusbar and toolbar, whereas WINDOW_GUI_EXPANDED is a new enhanced GUI.\nBy default, flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO | WINDOW_GUI_EXPANDED\n\n@param winname Name of the window in the window caption that may be used as a window identifier.\n@param flags Flags of the window. The supported flags are: (cv::WindowFlags)"
+    },
+    {
+      "ordinal": 8,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.destroyWindow",
+      "identity": "cv.destroyWindow(String winname[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Destroys the specified window.\n\nThe function destroyWindow destroys the window with the given name.\n\n@param winname Name of the window to be destroyed."
+    },
+    {
+      "ordinal": 9,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.destroyAllWindows",
+      "identity": "cv.destroyAllWindows()->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Destroys all of the HighGUI windows.\n\nThe function destroyAllWindows destroys all of the opened HighGUI windows."
+    },
+    {
+      "ordinal": 10,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.currentUIFramework",
+      "identity": "cv.currentUIFramework()->std::string",
+      "returnType": "std::string",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief HighGUI backend used.\n\nThe function returns HighGUI backend name used: could be COCOA, GTK2/3, QT, WAYLAND or WIN32.\nReturns empty string if there is no available UI backend."
+    },
+    {
+      "ordinal": 11,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.startWindowThread",
+      "identity": "cv.startWindowThread()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": ""
+    },
+    {
+      "ordinal": 12,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.waitKeyEx",
+      "identity": "cv.waitKeyEx(int delay=0)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "delay",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Similar to #waitKey, but returns full key code.\n\n@note Key code is implementation specific and depends on used backend: QT/GTK/Win32/etc"
+    },
+    {
+      "ordinal": 13,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.waitKey",
+      "identity": "cv.waitKey(int delay=0)->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "int",
+          "name": "delay",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Waits for a pressed key.\n\nThe function waitKey waits for a key event infinitely (when \\f$\\texttt{delay}\\leq 0\\f$ ) or for delay\nmilliseconds, when it is positive. Since the OS has a minimum time between switching threads, the\nfunction will not wait exactly delay ms, it will wait at least delay ms, depending on what else is\nrunning on your computer at that time. It returns the code of the pressed key or -1 if no key was\npressed before the specified time had elapsed. To check for a key press but not wait for it, use\n#pollKey.\n\n@note The functions #waitKey and #pollKey are the only methods in HighGUI that can fetch and handle\nGUI events, so one of them needs to be called periodically for normal event processing unless\nHighGUI is used within an environment that takes care of event processing.\n\n@note The function only works if there is at least one HighGUI window created and the window is\nactive. If there are several HighGUI windows, any of them can be active.\n\n@param delay Delay in milliseconds. 0 is the special value that means \"forever\"."
+    },
+    {
+      "ordinal": 14,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.pollKey",
+      "identity": "cv.pollKey()->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Polls for a pressed key.\n\nThe function pollKey polls for a key event without waiting. It returns the code of the pressed key\nor -1 if no key was pressed since the last invocation. To wait until a key was pressed, use #waitKey.\n\n@note The functions #waitKey and #pollKey are the only methods in HighGUI that can fetch and handle\nGUI events, so one of them needs to be called periodically for normal event processing unless\nHighGUI is used within an environment that takes care of event processing.\n\n@note The function only works if there is at least one HighGUI window created and the window is\nactive. If there are several HighGUI windows, any of them can be active."
+    },
+    {
+      "ordinal": 15,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.imshow",
+      "identity": "cv.imshow(String winname[/C,/Ref];Mat mat)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "mat",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Displays an image in the specified window.\n\nThe function imshow displays an image in the specified window. If the window was created with the\ncv::WINDOW_AUTOSIZE flag, the image is shown with its original size, however it is still limited by the screen resolution.\nOtherwise, the image is scaled to fit the window. The function may scale the image, depending on its depth:\n\n-   If the image is 8-bit unsigned, it is displayed as is.\n-   If the image is 16-bit unsigned, the pixels are divided by 256. That is, the\n    value range [0,255\\*256] is mapped to [0,255].\n-   If the image is 32-bit or 64-bit floating-point, the pixel values are multiplied by 255. That is, the\n    value range [0,1] is mapped to [0,255].\n-   32-bit integer images are not processed anymore due to ambiguouty of required transform.\n    Convert to 8-bit unsigned matrix using a custom preprocessing specific to image's context.\n\nIf window was created with OpenGL support, cv::imshow also support ogl::Buffer , ogl::Texture2D and\ncuda::GpuMat as input.\n\nIf the window was not created before this function, it is assumed creating a window with cv::WINDOW_AUTOSIZE.\n\nIf you need to show an image that is bigger than the screen resolution, you will need to call namedWindow(\"\", WINDOW_NORMAL) before the imshow.\n\n@note This function should be followed by a call to cv::waitKey or cv::pollKey to perform GUI\nhousekeeping tasks that are necessary to actually show the given image and make the window respond\nto mouse and keyboard events. Otherwise, it won't display the image and the window might lock up.\nFor example, **waitKey(0)** will display the window infinitely until any keypress (it is suitable\nfor image display). **waitKey(25)** will display a frame and wait approximately 25 ms for a key\npress (suitable for displaying a video frame-by-frame). To remove the window, use cv::destroyWindow.\n\n@note [__Windows Backend Only__] Pressing Ctrl+C will copy the image to the clipboard. Pressing Ctrl+S will show a dialog to save the image.\n@note [__Wayland Backend Only__] Supoorting format is extended.\n-   If the image is 8-bit signed, the pixels are biased by 128. That is, the\n    value range [-128,127] is mapped to [0,255].\n-   If the image is 16-bit signed, the pixels are divided by 256 and biased by 128. That is, the\n    value range [-32768,32767] is mapped to [0,255].\n\n@param winname Name of the window.\n@param mat Image to be shown."
+    },
+    {
+      "ordinal": 16,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.resizeWindow",
+      "identity": "cv.resizeWindow(String winname[/C,/Ref];int width;int height)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "width",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "height",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Resizes the window to the specified size\n\n@note The specified window size is for the image area. Toolbars are not counted.\nOnly windows created without cv::WINDOW_AUTOSIZE flag can be resized.\n\n@param winname Window name.\n@param width The new window width.\n@param height The new window height."
+    },
+    {
+      "ordinal": 17,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.resizeWindow",
+      "identity": "cv.resizeWindow(String winname[/C,/Ref];Size size[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Size",
+          "name": "size",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload\n@param winname Window name.\n@param size The new window size."
+    },
+    {
+      "ordinal": 18,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.moveWindow",
+      "identity": "cv.moveWindow(String winname[/C,/Ref];int x;int y)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "x",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "y",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Moves the window to the specified position\n\n@param winname Name of the window.\n@param x The new x-coordinate of the window.\n@param y The new y-coordinate of the window.\n\n@note [__Wayland Backend Only__] This function is not supported by the Wayland protocol limitation."
+    },
+    {
+      "ordinal": 19,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.setWindowProperty",
+      "identity": "cv.setWindowProperty(String winname[/C,/Ref];int prop_id;double prop_value)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop_id",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "double",
+          "name": "prop_value",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Changes parameters of a window dynamically.\n\nThe function setWindowProperty enables changing properties of a window.\n\n@param winname Name of the window.\n@param prop_id Window property to edit. The supported operation flags are: (cv::WindowPropertyFlags)\n@param prop_value New value of the window property. The supported flags are: (cv::WindowFlags)\n\n@note [__Wayland Backend Only__] This function is not supported."
+    },
+    {
+      "ordinal": 20,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.setWindowTitle",
+      "identity": "cv.setWindowTitle(String winname[/C,/Ref];String title[/C,/Ref])->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "title",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Updates window title\n@param winname Name of the window.\n@param title New title."
+    },
+    {
+      "ordinal": 21,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.getWindowProperty",
+      "identity": "cv.getWindowProperty(String winname[/C,/Ref];int prop_id)->double",
+      "returnType": "double",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "prop_id",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Provides parameters of a window.\n\nThe function getWindowProperty returns properties of a window.\n\n@param winname Name of the window.\n@param prop_id Window property to retrieve. The following operation flags are available: (cv::WindowPropertyFlags)\n\n@sa setWindowProperty\n\n@note [__Wayland Backend Only__] This function is not supported."
+    },
+    {
+      "ordinal": 22,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.getWindowImageRect",
+      "identity": "cv.getWindowImageRect(String winname[/C,/Ref])->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Provides rectangle of image in the window.\n\nThe function getWindowImageRect returns the client screen coordinates, width and height of the image rendering area.\n\n@param winname Name of the window.\n\n@sa resizeWindow moveWindow\n\n@note [__Wayland Backend Only__] This function is not supported by the Wayland protocol limitation."
+    },
+    {
+      "ordinal": 23,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.selectROI",
+      "identity": "cv.selectROI(String windowName[/C,/Ref];Mat img;bool showCrosshair=true;bool fromCenter=false;bool printNotice=true)->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "windowName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "showCrosshair",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "fromCenter",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "printNotice",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allows users to select a ROI on the given image.\n\nThe function creates a window and allows users to select a ROI using the mouse.\nControls: use `space` or `enter` to finish selection, use key `c` to cancel selection (function will return the zero cv::Rect).\n\n@param windowName name of the window where selection process will be shown.\n@param img image to select a ROI.\n@param showCrosshair if true crosshair of selection rectangle will be shown.\n@param fromCenter if true center of selection will match initial mouse position. In opposite case a corner of\nselection rectangle will correspont to the initial mouse position.\n@param printNotice if true a notice to select ROI or cancel selection will be printed in console.\n@return selected ROI or empty rect if selection canceled.\n\n@note The function sets it's own mouse callback for specified window using cv::setMouseCallback(windowName, ...).\nAfter finish of work an empty callback will be set for the used window."
+    },
+    {
+      "ordinal": 24,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.selectROI",
+      "identity": "cv.selectROI(Mat img;bool showCrosshair=true;bool fromCenter=false;bool printNotice=true)->Rect",
+      "returnType": "Rect",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "showCrosshair",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "fromCenter",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "printNotice",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@overload"
+    },
+    {
+      "ordinal": 25,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.selectROIs",
+      "identity": "cv.selectROIs(String windowName[/C,/Ref];Mat img;vector_Rect boundingBoxes[/O,/Ref];bool showCrosshair=true;bool fromCenter=false;bool printNotice=true)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "windowName",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "vector_Rect",
+          "name": "boundingBoxes",
+          "default": "",
+          "modifiers": [
+            "/O",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "bool",
+          "name": "showCrosshair",
+          "default": "true",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "fromCenter",
+          "default": "false",
+          "modifiers": []
+        },
+        {
+          "type": "bool",
+          "name": "printNotice",
+          "default": "true",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Allows users to select multiple ROIs on the given image.\n\nThe function creates a window and allows users to select multiple ROIs using the mouse.\nControls: use `space` or `enter` to finish current selection and start a new one,\nuse `esc` to terminate multiple ROI selection process.\n\n@param windowName name of the window where selection process will be shown.\n@param img image to select a ROI.\n@param boundingBoxes selected ROIs.\n@param showCrosshair if true crosshair of selection rectangle will be shown.\n@param fromCenter if true center of selection will match initial mouse position. In opposite case a corner of\nselection rectangle will correspont to the initial mouse position.\n@param printNotice if true a notice to select ROI or cancel selection will be printed in console.\n\n@note The function sets it's own mouse callback for specified window using cv::setMouseCallback(windowName, ...).\nAfter finish of work an empty callback will be set for the used window."
+    },
+    {
+      "ordinal": 26,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.getTrackbarPos",
+      "identity": "cv.getTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref])->int",
+      "returnType": "int",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "trackbarname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Returns the trackbar position.\n\nThe function returns the current position of the specified trackbar.\n\n@note [__Qt Backend Only__] winname can be empty if the trackbar is attached to the control\npanel.\n\n@param trackbarname Name of the trackbar.\n@param winname Name of the window that is the parent of the trackbar."
+    },
+    {
+      "ordinal": 27,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.setTrackbarPos",
+      "identity": "cv.setTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref];int pos)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "trackbarname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "pos",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the trackbar position.\n\nThe function sets the position of the specified trackbar in the specified window.\n\n@note [__Qt Backend Only__] winname can be empty if the trackbar is attached to the control\npanel.\n\n@param trackbarname Name of the trackbar.\n@param winname Name of the window that is the parent of trackbar.\n@param pos New position."
+    },
+    {
+      "ordinal": 28,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.setTrackbarMax",
+      "identity": "cv.setTrackbarMax(String trackbarname[/C,/Ref];String winname[/C,/Ref];int maxval)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "trackbarname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "maxval",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the trackbar maximum position.\n\nThe function sets the maximum position of the specified trackbar in the specified window.\n\n@note [__Qt Backend Only__] winname can be empty if the trackbar is attached to the control\npanel.\n\n@param trackbarname Name of the trackbar.\n@param winname Name of the window that is the parent of trackbar.\n@param maxval New maximum position."
+    },
+    {
+      "ordinal": 29,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.setTrackbarMin",
+      "identity": "cv.setTrackbarMin(String trackbarname[/C,/Ref];String winname[/C,/Ref];int minval)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "trackbarname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "minval",
+          "default": "",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Sets the trackbar minimum position.\n\nThe function sets the minimum position of the specified trackbar in the specified window.\n\n@note [__Qt Backend Only__] winname can be empty if the trackbar is attached to the control\npanel.\n\n@param trackbarname Name of the trackbar.\n@param winname Name of the window that is the parent of trackbar.\n@param minval New minimum position."
+    },
+    {
+      "ordinal": 30,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.addText",
+      "identity": "cv.addText(Mat img[/C,/Ref];String text[/C,/Ref];Point org;String nameFont[/C,/Ref];int pointSize=-1;Scalar color=Scalar::all(0);int weight=QT_FONT_NORMAL;int style=QT_STYLE_NORMAL;int spacing=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "Mat",
+          "name": "img",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "text",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "Point",
+          "name": "org",
+          "default": "",
+          "modifiers": []
+        },
+        {
+          "type": "String",
+          "name": "nameFont",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "pointSize",
+          "default": "-1",
+          "modifiers": []
+        },
+        {
+          "type": "Scalar",
+          "name": "color",
+          "default": "Scalar::all(0)",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "weight",
+          "default": "QT_FONT_NORMAL",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "style",
+          "default": "QT_STYLE_NORMAL",
+          "modifiers": []
+        },
+        {
+          "type": "int",
+          "name": "spacing",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Draws a text on the image.\n\n@param img 8-bit 3-channel image where the text should be drawn.\n@param text Text to write on an image.\n@param org Point(x,y) where the text should start on an image.\n@param nameFont Name of the font. The name should match the name of a system font (such as\n*Times*). If the font is not found, a default one is used.\n@param pointSize Size of the font. If not specified, equal zero or negative, the point size of the\nfont is set to a system-dependent default value. Generally, this is 12 points.\n@param color Color of the font in BGRA where A = 255 is fully transparent.\n@param weight Font weight. Available operation flags are : cv::QtFontWeights You can also specify a positive integer for better control.\n@param style Font style. Available operation flags are : cv::QtFontStyles\n@param spacing Spacing between characters. It can be negative or positive."
+    },
+    {
+      "ordinal": 31,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.displayOverlay",
+      "identity": "cv.displayOverlay(String winname[/C,/Ref];String text[/C,/Ref];int delayms=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "text",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "delayms",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Displays a text on a window image as an overlay for a specified duration.\n\nThe function displayOverlay displays useful information/tips on top of the window for a certain\namount of time *delayms*. The function does not modify the image, displayed in the window, that is,\nafter the specified delay the original content of the window is restored.\n\n@param winname Name of the window.\n@param text Overlay text to write on a window image.\n@param delayms The period (in milliseconds), during which the overlay text is displayed. If this\nfunction is called before the previous overlay text timed out, the timer is restarted and the text\nis updated. If this value is zero, the text never disappears."
+    },
+    {
+      "ordinal": 32,
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "kind": "callable",
+      "name": "cv.displayStatusBar",
+      "identity": "cv.displayStatusBar(String winname[/C,/Ref];String text[/C,/Ref];int delayms=0)->void",
+      "returnType": "void",
+      "modifiers": [],
+      "arguments": [
+        {
+          "type": "String",
+          "name": "winname",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "String",
+          "name": "text",
+          "default": "",
+          "modifiers": [
+            "/C",
+            "/Ref"
+          ]
+        },
+        {
+          "type": "int",
+          "name": "delayms",
+          "default": "0",
+          "modifiers": []
+        }
+      ],
+      "enumValues": [],
+      "baseDeclaration": "",
+      "documentation": "@brief Displays a text on the window statusbar during the specified period of time.\n\nThe function displayStatusBar displays useful information/tips on top of the window for a certain\namount of time *delayms* . This information is displayed on the window statusbar (the window must be\ncreated with the cv::WINDOW_GUI_EXPANDED flags).\n\n@param winname Name of the window.\n@param text Text to write on the window statusbar.\n@param delayms Duration (in milliseconds) to display the text. If this function is called before\nthe previous text timed out, the timer is restarted and the text is updated. If this value is\nzero, the text never disappears."
+    }
+  ]
+}

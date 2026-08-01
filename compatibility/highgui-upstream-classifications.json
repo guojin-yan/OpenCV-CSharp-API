@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "claimedSlice": "opencv2/highgui.hpp exact OpenCV 5.0.0 official-parser surface with compatibility and WinRT headers separately source-reviewed",
+  "reviewStatus": "source-reviewed",
+  "limitation": "Interactive ROI selection is intentionally omitted from automation; Qt-only calls and WinRT are conditional; callback APIs omitted by the official parser are recorded as source-reviewed extensions; repository-wide parity is not claimed.",
+  "declarations": [
+    {
+      "ordinal": 0,
+      "identity": "enum cv.WindowFlags[const cv.WINDOW_NORMAL=0x00000000;const cv.WINDOW_AUTOSIZE=0x00000001;const cv.WINDOW_OPENGL=0x00001000;const cv.WINDOW_FULLSCREEN=1;const cv.WINDOW_FREERATIO=0x00000100;const cv.WINDOW_KEEPRATIO=0x00000000;const cv.WINDOW_GUI_EXPANDED=0x00000000;const cv.WINDOW_GUI_NORMAL=0x00000010]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 1,
+      "identity": "enum cv.WindowPropertyFlags[const cv.WND_PROP_FULLSCREEN=0;const cv.WND_PROP_AUTOSIZE=1;const cv.WND_PROP_ASPECT_RATIO=2;const cv.WND_PROP_OPENGL=3;const cv.WND_PROP_VISIBLE=4;const cv.WND_PROP_TOPMOST=5;const cv.WND_PROP_VSYNC=6]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 2,
+      "identity": "enum cv.MouseEventTypes[const cv.EVENT_MOUSEMOVE=0;const cv.EVENT_LBUTTONDOWN=1;const cv.EVENT_RBUTTONDOWN=2;const cv.EVENT_MBUTTONDOWN=3;const cv.EVENT_LBUTTONUP=4;const cv.EVENT_RBUTTONUP=5;const cv.EVENT_MBUTTONUP=6;const cv.EVENT_LBUTTONDBLCLK=7;const cv.EVENT_RBUTTONDBLCLK=8;const cv.EVENT_MBUTTONDBLCLK=9;const cv.EVENT_MOUSEWHEEL=10;const cv.EVENT_MOUSEHWHEEL=11]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 3,
+      "identity": "enum cv.MouseEventFlags[const cv.EVENT_FLAG_LBUTTON=1;const cv.EVENT_FLAG_RBUTTON=2;const cv.EVENT_FLAG_MBUTTON=4;const cv.EVENT_FLAG_CTRLKEY=8;const cv.EVENT_FLAG_SHIFTKEY=16;const cv.EVENT_FLAG_ALTKEY=32]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 4,
+      "identity": "enum cv.QtFontWeights[const cv.QT_FONT_LIGHT=25;const cv.QT_FONT_NORMAL=50;const cv.QT_FONT_DEMIBOLD=63;const cv.QT_FONT_BOLD=75;const cv.QT_FONT_BLACK=87]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 5,
+      "identity": "enum cv.QtFontStyles[const cv.QT_STYLE_NORMAL=0;const cv.QT_STYLE_ITALIC=1;const cv.QT_STYLE_OBLIQUE=2]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 6,
+      "identity": "enum cv.QtButtonTypes[const cv.QT_PUSH_BUTTON=0;const cv.QT_CHECKBOX=1;const cv.QT_RADIOBOX=2;const cv.QT_NEW_BUTTONBAR=1024]",
+      "classification": "non-callable-metadata",
+      "reason": "Parser-emitted HighGui enum metadata is reviewed as public constant shape rather than an independently callable ABI operation.",
+      "buildCondition": "metadata; parser-emitted",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 7,
+      "identity": "cv.namedWindow(String winname[/C,/Ref];int flags=WINDOW_AUTOSIZE)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_named_window"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void NamedWindow(System.String winname,OpenCvSharp.HighGui.WindowFlags flags=AutoSize)"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "identity": "cv.destroyWindow(String winname[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_destroy_window"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyWindow(System.String winname)"
+      ]
+    },
+    {
+      "ordinal": 9,
+      "identity": "cv.destroyAllWindows()-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_destroy_all_windows"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyAllWindows()"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "identity": "cv.currentUIFramework()-\u003Estd::string",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_current_ui_framework_fill",
+        "jyppx_ocv_highgui_current_ui_framework_length"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.String GetCurrentUIFramework()"
+      ]
+    },
+    {
+      "ordinal": 11,
+      "identity": "cv.startWindowThread()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_start_window_thread"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 StartWindowThread()"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "identity": "cv.waitKeyEx(int delay=0)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_wait_key_ex"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKeyEx(System.Int32 delay=0)"
+      ]
+    },
+    {
+      "ordinal": 13,
+      "identity": "cv.waitKey(int delay=0)-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_wait_key"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKey(System.Int32 delay=0)"
+      ]
+    },
+    {
+      "ordinal": 14,
+      "identity": "cv.pollKey()-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_poll_key"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 PollKey()"
+      ]
+    },
+    {
+      "ordinal": 15,
+      "identity": "cv.imshow(String winname[/C,/Ref];Mat mat)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_imshow"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ImShow(System.String winname,OpenCvSharp.Core.Mat mat)"
+      ]
+    },
+    {
+      "ordinal": 16,
+      "identity": "cv.resizeWindow(String winname[/C,/Ref];int width;int height)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_resize_window"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,System.Int32 width,System.Int32 height)"
+      ]
+    },
+    {
+      "ordinal": 17,
+      "identity": "cv.resizeWindow(String winname[/C,/Ref];Size size[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_resize_window"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,OpenCvSharp.Core.Size size)"
+      ]
+    },
+    {
+      "ordinal": 18,
+      "identity": "cv.moveWindow(String winname[/C,/Ref];int x;int y)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_move_window"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void MoveWindow(System.String winname,System.Int32 x,System.Int32 y)"
+      ]
+    },
+    {
+      "ordinal": 19,
+      "identity": "cv.setWindowProperty(String winname[/C,/Ref];int prop_id;double prop_value)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_window_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowProperty(System.String winname,OpenCvSharp.HighGui.WindowPropertyFlags propId,System.Double propValue)"
+      ]
+    },
+    {
+      "ordinal": 20,
+      "identity": "cv.setWindowTitle(String winname[/C,/Ref];String title[/C,/Ref])-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_window_title"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowTitle(System.String winname,System.String title)"
+      ]
+    },
+    {
+      "ordinal": 21,
+      "identity": "cv.getWindowProperty(String winname[/C,/Ref];int prop_id)-\u003Edouble",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_window_property"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Double GetWindowProperty(System.String winname,OpenCvSharp.HighGui.WindowPropertyFlags propId)"
+      ]
+    },
+    {
+      "ordinal": 22,
+      "identity": "cv.getWindowImageRect(String winname[/C,/Ref])-\u003ERect",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_window_image_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|OpenCvSharp.Core.Rect GetWindowImageRect(System.String winname)"
+      ]
+    },
+    {
+      "ordinal": 23,
+      "identity": "cv.selectROI(String windowName[/C,/Ref];Mat img;bool showCrosshair=true;bool fromCenter=false;bool printNotice=true)-\u003ERect",
+      "classification": "intentionally-omitted",
+      "reason": "Interactive ROI selection owns a blocking window/event loop and temporarily replaces the window mouse callback; it is intentionally excluded from deterministic unattended binding workflows.",
+      "buildCondition": "interactive-user-input; automation-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 24,
+      "identity": "cv.selectROI(Mat img;bool showCrosshair=true;bool fromCenter=false;bool printNotice=true)-\u003ERect",
+      "classification": "intentionally-omitted",
+      "reason": "Interactive ROI selection owns a blocking window/event loop and temporarily replaces the window mouse callback; it is intentionally excluded from deterministic unattended binding workflows.",
+      "buildCondition": "interactive-user-input; automation-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 25,
+      "identity": "cv.selectROIs(String windowName[/C,/Ref];Mat img;vector_Rect boundingBoxes[/O,/Ref];bool showCrosshair=true;bool fromCenter=false;bool printNotice=true)-\u003Evoid",
+      "classification": "intentionally-omitted",
+      "reason": "Interactive ROI selection owns a blocking window/event loop and temporarily replaces the window mouse callback; it is intentionally excluded from deterministic unattended binding workflows.",
+      "buildCondition": "interactive-user-input; automation-excluded",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 26,
+      "identity": "cv.getTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref])-\u003Eint",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_trackbar_pos"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 GetTrackbarPos(System.String trackbarname,System.String winname)"
+      ]
+    },
+    {
+      "ordinal": 27,
+      "identity": "cv.setTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref];int pos)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_trackbar_pos"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarPos(System.String trackbarname,System.String winname,System.Int32 pos)"
+      ]
+    },
+    {
+      "ordinal": 28,
+      "identity": "cv.setTrackbarMax(String trackbarname[/C,/Ref];String winname[/C,/Ref];int maxval)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_trackbar_max"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMax(System.String trackbarname,System.String winname,System.Int32 maxval)"
+      ]
+    },
+    {
+      "ordinal": 29,
+      "identity": "cv.setTrackbarMin(String trackbarname[/C,/Ref];String winname[/C,/Ref];int minval)-\u003Evoid",
+      "classification": "implemented",
+      "reason": "The version-neutral native and managed HighGui surface preserves this callable\u0027s backend, value, UTF-8, and full-profile semantics.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; highgui-required",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_set_trackbar_min"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMin(System.String trackbarname,System.String winname,System.Int32 minval)"
+      ]
+    },
+    {
+      "ordinal": 30,
+      "identity": "cv.addText(Mat img[/C,/Ref];String text[/C,/Ref];Point org;String nameFont[/C,/Ref];int pointSize=-1;Scalar color=Scalar::all(0);int weight=QT_FONT_NORMAL;int style=QT_STYLE_NORMAL;int spacing=0)-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "This text/overlay/status operation is implemented only by the Qt HighGui backend; the verified full runtime uses WIN32 and must not advertise Qt-only behavior.",
+      "buildCondition": "HAVE_QT; Qt-backend-only",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 31,
+      "identity": "cv.displayOverlay(String winname[/C,/Ref];String text[/C,/Ref];int delayms=0)-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "This text/overlay/status operation is implemented only by the Qt HighGui backend; the verified full runtime uses WIN32 and must not advertise Qt-only behavior.",
+      "buildCondition": "HAVE_QT; Qt-backend-only",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    },
+    {
+      "ordinal": 32,
+      "identity": "cv.displayStatusBar(String winname[/C,/Ref];String text[/C,/Ref];int delayms=0)-\u003Evoid",
+      "classification": "upstream-conditional",
+      "reason": "This text/overlay/status operation is implemented only by the Qt HighGui backend; the verified full runtime uses WIN32 and must not advertise Qt-only behavior.",
+      "buildCondition": "HAVE_QT; Qt-backend-only",
+      "nativeEntrypoints": [],
+      "managedMembers": []
+    }
+  ]
+}

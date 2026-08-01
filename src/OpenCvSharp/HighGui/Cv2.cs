@@ -1,5 +1,7 @@
 using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
+using System.Text;
 using OpenCvSharp.Core;
 using OpenCvSharp.Internal.Interop;
 
@@ -29,10 +31,11 @@ namespace OpenCvSharp.HighGui
         /// </summary>
         public delegate void ButtonCallback(int state);
 
-        private static NativeMethods.HighGuiMouseCallback? currentMouseCallback;
-        private static GCHandle? currentMouseCallbackHandle;
-        private static NativeMethods.HighGuiButtonCallback? currentButtonCallback;
-        private static GCHandle? currentButtonCallbackHandle;
+        private static readonly object CallbackSync = new object();
+        private static readonly Dictionary<string, CallbackRegistration> MouseRegistrations =
+            new Dictionary<string, CallbackRegistration>(StringComparer.Ordinal);
+        private static readonly List<CallbackRegistration> ButtonRegistrations = new List<CallbackRegistration>();
+        private static readonly Queue<ExceptionDispatchInfo> PendingCallbackExceptions = new Queue<ExceptionDispatchInfo>();
 
         /// <summary>
         /// Creates or reuses a named window.
@@ -52,6 +55,7 @@ namespace OpenCvSharp.HighGui
         {
             byte[] nativeName = HighGuiStringConvert.ToNullTerminatedUtf8(winname, nameof(winname));
             NativeException.ThrowIfError(NativeMethods.HighGuiDestroyWindow(nativeName));
+            ReleaseMouseRegistration(winname);
         }
 
         /// <summary>
@@ -61,6 +65,33 @@ namespace OpenCvSharp.HighGui
         public static void DestroyAllWindows()
         {
             NativeException.ThrowIfError(NativeMethods.HighGuiDestroyAllWindows());
+            ReleaseAllCallbackRegistrations();
+        }
+
+        /// <summary>
+        /// Gets the active HighGUI backend name, or an empty string when no UI backend is available.
+        /// 获取当前 HighGUI backend 名称；没有可用 UI backend 时返回空字符串。
+        /// </summary>
+        public static string GetCurrentUIFramework()
+        {
+            NativeException.ThrowIfError(NativeMethods.HighGuiCurrentUiFrameworkLength(out int length));
+            if (length < 0) throw new OpenCvException("Native HighGUI returned a negative backend-name length.");
+            var buffer = new byte[length];
+            NativeException.ThrowIfError(NativeMethods.HighGuiCurrentUiFrameworkFill(buffer, buffer.Length, out int written));
+            if (written < 0 || written > buffer.Length)
+                throw new OpenCvException("Native HighGUI returned an invalid backend-name length.");
+            return HighGuiStringConvert.FromUtf8(buffer, written);
+        }
+
+        /// <summary>
+        /// Starts the backend-specific HighGUI window thread when the active backend supports it.
+        /// 在当前 backend 支持时启动其 HighGUI window thread。
+        /// </summary>
+        /// <remarks>Most backends return zero and continue to require <see cref="WaitKey(int)"/> or <see cref="PollKey"/> for event processing.</remarks>
+        public static int StartWindowThread()
+        {
+            NativeException.ThrowIfError(NativeMethods.HighGuiStartWindowThread(out int result));
+            return result;
         }
 
         /// <summary>
@@ -81,6 +112,16 @@ namespace OpenCvSharp.HighGui
         public static int WaitKey(int delay = 0)
         {
             NativeException.ThrowIfError(NativeMethods.HighGuiWaitKey(delay, out int key));
+            return key;
+        }
+
+        /// <summary>
+        /// Waits for a key event and returns the backend-specific full key code.
+        /// 等待按键事件并返回 backend-specific 完整键码。
+        /// </summary>
+        public static int WaitKeyEx(int delay = 0)
+        {
+            NativeException.ThrowIfError(NativeMethods.HighGuiWaitKeyEx(delay, out int key));
             return key;
         }
 
@@ -112,6 +153,15 @@ namespace OpenCvSharp.HighGui
         {
             byte[] nativeName = HighGuiStringConvert.ToNullTerminatedUtf8(winname, nameof(winname));
             NativeException.ThrowIfError(NativeMethods.HighGuiResizeWindow(nativeName, width, height));
+        }
+
+        /// <summary>
+        /// Resizes a named window to the specified image-area size.
+        /// 按指定图像区域尺寸调整命名窗口大小。
+        /// </summary>
+        public static void ResizeWindow(string winname, Size size)
+        {
+            ResizeWindow(winname, size.Width, size.Height);
         }
 
         /// <summary>
@@ -163,14 +213,18 @@ namespace OpenCvSharp.HighGui
         /// </summary>
         public static HighGuiTrackbar CreateTrackbar(string trackbarname, string winname, int initialValue, int count, TrackbarCallback? callback = null)
         {
-            byte[] nativeTrackbarName = HighGuiStringConvert.ToNullTerminatedUtf8(trackbarname, nameof(trackbarname));
-            byte[] nativeWindowName = HighGuiStringConvert.ToNullTerminatedUtf8(winname, nameof(winname));
+            if (count < 0) throw new ArgumentOutOfRangeException(nameof(count));
+            if (initialValue < 0 || initialValue > count) throw new ArgumentOutOfRangeException(nameof(initialValue));
+            byte[] nativeTrackbarName = HighGuiStringConvert.ToUtf8(trackbarname, nameof(trackbarname));
+            byte[] nativeWindowName = HighGuiStringConvert.ToUtf8(winname, nameof(winname));
             NativeMethods.HighGuiTrackbarCallback? nativeCallback = callback == null
                 ? null
-                : (position, userdata) => callback(position);
-            NativeException.ThrowIfError(NativeMethods.HighGuiCreateTrackbar(
+                : (position, userdata) => InvokeCallbackSafely(() => callback(position));
+            NativeException.ThrowIfError(NativeMethods.HighGuiCreateTrackbarUtf8(
                 nativeTrackbarName,
+                nativeTrackbarName.Length,
                 nativeWindowName,
+                nativeWindowName.Length,
                 initialValue,
                 count,
                 nativeCallback,
@@ -230,17 +284,40 @@ namespace OpenCvSharp.HighGui
         /// </summary>
         public static void SetMouseCallback(string winname, MouseCallback? callback)
         {
-            byte[] nativeName = HighGuiStringConvert.ToNullTerminatedUtf8(winname, nameof(winname));
-            ReleaseMouseCallback();
+            byte[] nativeName = HighGuiStringConvert.ToUtf8(winname, nameof(winname));
             if (callback == null)
             {
-                NativeException.ThrowIfError(NativeMethods.HighGuiSetMouseCallback(nativeName, null, IntPtr.Zero));
+                NativeException.ThrowIfError(NativeMethods.HighGuiMouseCallbackClearUtf8(nativeName, nativeName.Length));
+                ReleaseMouseRegistration(winname);
                 return;
             }
 
-            currentMouseCallback = (eventId, x, y, flags, userdata) => callback((MouseEventTypes)eventId, x, y, (MouseEventFlags)flags);
-            currentMouseCallbackHandle = GCHandle.Alloc(currentMouseCallback);
-            NativeException.ThrowIfError(NativeMethods.HighGuiSetMouseCallback(nativeName, currentMouseCallback, IntPtr.Zero));
+            NativeMethods.HighGuiMouseCallback nativeCallback = (eventId, x, y, flags, userdata) =>
+                InvokeCallbackSafely(() => callback((MouseEventTypes)eventId, x, y, (MouseEventFlags)flags));
+            NativeException.ThrowIfError(NativeMethods.HighGuiMouseCallbackCreateUtf8(
+                nativeName,
+                nativeName.Length,
+                nativeCallback,
+                IntPtr.Zero,
+                out IntPtr nativeHandle));
+            CallbackRegistration registration;
+            try
+            {
+                registration = new CallbackRegistration(nativeHandle, nativeCallback);
+            }
+            catch
+            {
+                NativeMethods.HighGuiCallbackRegistrationReleaseHandle(nativeHandle);
+                throw;
+            }
+
+            CallbackRegistration? previous = null;
+            lock (CallbackSync)
+            {
+                MouseRegistrations.TryGetValue(winname, out previous);
+                MouseRegistrations[winname] = registration;
+            }
+            if (previous != null) previous.Dispose();
         }
 
         /// <summary>
@@ -249,39 +326,120 @@ namespace OpenCvSharp.HighGui
         /// </summary>
         public static void CreateButton(string buttonName, ButtonCallback? callback = null, QtButtonTypes type = QtButtonTypes.PushButton, bool initialButtonState = false)
         {
-            byte[] nativeButtonName = HighGuiStringConvert.ToNullTerminatedUtf8(buttonName, nameof(buttonName));
-            ReleaseButtonCallback();
+            byte[] nativeButtonName = HighGuiStringConvert.ToUtf8(buttonName, nameof(buttonName));
             if (callback == null)
             {
-                NativeException.ThrowIfError(NativeMethods.HighGuiCreateButton(nativeButtonName, null, IntPtr.Zero, (int)type, initialButtonState ? 1 : 0));
+                byte[] terminatedName = HighGuiStringConvert.ToNullTerminatedUtf8(buttonName, nameof(buttonName));
+                NativeException.ThrowIfError(NativeMethods.HighGuiCreateButton(terminatedName, null, IntPtr.Zero, (int)type, initialButtonState ? 1 : 0));
                 return;
             }
 
-            currentButtonCallback = (state, userdata) => callback(state);
-            currentButtonCallbackHandle = GCHandle.Alloc(currentButtonCallback);
-            NativeException.ThrowIfError(NativeMethods.HighGuiCreateButton(nativeButtonName, currentButtonCallback, IntPtr.Zero, (int)type, initialButtonState ? 1 : 0));
+            NativeMethods.HighGuiButtonCallback nativeCallback = (state, userdata) =>
+                InvokeCallbackSafely(() => callback(state));
+            NativeException.ThrowIfError(NativeMethods.HighGuiButtonCallbackCreateUtf8(
+                nativeButtonName,
+                nativeButtonName.Length,
+                nativeCallback,
+                IntPtr.Zero,
+                (int)type,
+                initialButtonState ? 1 : 0,
+                out IntPtr nativeHandle));
+            CallbackRegistration registration;
+            try
+            {
+                registration = new CallbackRegistration(nativeHandle, nativeCallback);
+            }
+            catch
+            {
+                NativeMethods.HighGuiCallbackRegistrationReleaseHandle(nativeHandle);
+                throw;
+            }
+            lock (CallbackSync)
+            {
+                ButtonRegistrations.Add(registration);
+            }
         }
 
-        private static void ReleaseMouseCallback()
+        /// <summary>
+        /// Extracts the signed mouse-wheel delta from a HighGUI mouse callback flags value.
+        /// 从 HighGUI mouse callback flags 中提取有符号滚轮增量。
+        /// </summary>
+        public static int GetMouseWheelDelta(MouseEventFlags flags)
         {
-            if (currentMouseCallbackHandle.HasValue)
-            {
-                currentMouseCallbackHandle.Value.Free();
-                currentMouseCallbackHandle = null;
-            }
-
-            currentMouseCallback = null;
+            NativeException.ThrowIfError(NativeMethods.HighGuiGetMouseWheelDelta((int)flags, out int delta));
+            return delta;
         }
 
-        private static void ReleaseButtonCallback()
+        /// <summary>
+        /// Rethrows the oldest managed exception captured from a HighGUI callback, if one is pending.
+        /// 若 HighGUI callback 捕获了 managed 异常，则重新抛出最早的一项。
+        /// </summary>
+        public static void ThrowPendingCallbackException()
         {
-            if (currentButtonCallbackHandle.HasValue)
+            ExceptionDispatchInfo? pending = null;
+            lock (CallbackSync)
             {
-                currentButtonCallbackHandle.Value.Free();
-                currentButtonCallbackHandle = null;
+                if (PendingCallbackExceptions.Count > 0)
+                    pending = PendingCallbackExceptions.Dequeue();
+            }
+            if (pending != null) pending.Throw();
+        }
+
+        internal static void CaptureCallbackException(Exception exception)
+        {
+            if (exception == null) return;
+            lock (CallbackSync)
+            {
+                PendingCallbackExceptions.Enqueue(ExceptionDispatchInfo.Capture(exception));
+            }
+        }
+
+        private static void InvokeCallbackSafely(Action callback)
+        {
+            try { callback(); }
+            catch (Exception exception) { CaptureCallbackException(exception); }
+        }
+
+        private static void ReleaseMouseRegistration(string winname)
+        {
+            CallbackRegistration? registration = null;
+            lock (CallbackSync)
+            {
+                if (MouseRegistrations.TryGetValue(winname, out registration))
+                    MouseRegistrations.Remove(winname);
+            }
+            if (registration != null) registration.Dispose();
+        }
+
+        private static void ReleaseAllCallbackRegistrations()
+        {
+            var registrations = new List<CallbackRegistration>();
+            lock (CallbackSync)
+            {
+                registrations.AddRange(MouseRegistrations.Values);
+                registrations.AddRange(ButtonRegistrations);
+                MouseRegistrations.Clear();
+                ButtonRegistrations.Clear();
+            }
+            foreach (CallbackRegistration registration in registrations) registration.Dispose();
+        }
+
+        private sealed class CallbackRegistration : IDisposable
+        {
+            private readonly NativeHighGuiCallbackRegistrationHandle handle;
+            private Delegate? callback;
+
+            internal CallbackRegistration(IntPtr nativeHandle, Delegate callback)
+            {
+                handle = NativeHighGuiCallbackRegistrationHandle.FromNativePointer(nativeHandle);
+                this.callback = callback ?? throw new ArgumentNullException(nameof(callback));
             }
 
-            currentButtonCallback = null;
+            public void Dispose()
+            {
+                handle.Dispose();
+                callback = null;
+            }
         }
 
         private static void ValidateNotNull<T>(T value, string parameterName)

@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "upstreamOpenCvVersion": "5.0.0",
+  "status": "implemented-verified",
+  "managedPublicTypeAdditionCount": 0,
+  "managedPublicMemberAdditionCount": 6,
+  "nativeEntrypointAdditionCount": 10,
+  "families": [
+    {
+      "id": "highgui-window-lifecycle-backend",
+      "rationale": "Window creation/destruction, backend identity, and backend-specific thread startup retain explicit full-profile and event-loop behavior.",
+      "declarations": [
+        {
+          "ordinal": 7,
+          "upstreamIdentity": "cv.namedWindow(String winname[/C,/Ref];int flags=WINDOW_AUTOSIZE)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_named_window"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void NamedWindow(System.String winname,OpenCvSharp.HighGui.WindowFlags flags=AutoSize)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 8,
+          "upstreamIdentity": "cv.destroyWindow(String winname[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_destroy_window"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyWindow(System.String winname)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 9,
+          "upstreamIdentity": "cv.destroyAllWindows()-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_destroy_all_windows"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void DestroyAllWindows()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 10,
+          "upstreamIdentity": "cv.currentUIFramework()-\u003Estd::string",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_current_ui_framework_fill",
+            "jyppx_ocv_highgui_current_ui_framework_length"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.String GetCurrentUIFramework()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 11,
+          "upstreamIdentity": "cv.startWindowThread()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_start_window_thread"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 StartWindowThread()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "highgui-event-image-window",
+      "rationale": "Key/event, image display, resize/move, property, title, and rendering-rectangle operations retain borrowed Mat and backend-specific result semantics.",
+      "declarations": [
+        {
+          "ordinal": 12,
+          "upstreamIdentity": "cv.waitKeyEx(int delay=0)-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_wait_key_ex"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKeyEx(System.Int32 delay=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 13,
+          "upstreamIdentity": "cv.waitKey(int delay=0)-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_wait_key"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 WaitKey(System.Int32 delay=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 14,
+          "upstreamIdentity": "cv.pollKey()-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_poll_key"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 PollKey()"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 15,
+          "upstreamIdentity": "cv.imshow(String winname[/C,/Ref];Mat mat)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_imshow"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ImShow(System.String winname,OpenCvSharp.Core.Mat mat)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 16,
+          "upstreamIdentity": "cv.resizeWindow(String winname[/C,/Ref];int width;int height)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_resize_window"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,System.Int32 width,System.Int32 height)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 17,
+          "upstreamIdentity": "cv.resizeWindow(String winname[/C,/Ref];Size size[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_resize_window"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ResizeWindow(System.String winname,OpenCvSharp.Core.Size size)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 18,
+          "upstreamIdentity": "cv.moveWindow(String winname[/C,/Ref];int x;int y)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_move_window"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void MoveWindow(System.String winname,System.Int32 x,System.Int32 y)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 19,
+          "upstreamIdentity": "cv.setWindowProperty(String winname[/C,/Ref];int prop_id;double prop_value)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_set_window_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowProperty(System.String winname,OpenCvSharp.HighGui.WindowPropertyFlags propId,System.Double propValue)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 20,
+          "upstreamIdentity": "cv.setWindowTitle(String winname[/C,/Ref];String title[/C,/Ref])-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_set_window_title"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetWindowTitle(System.String winname,System.String title)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 21,
+          "upstreamIdentity": "cv.getWindowProperty(String winname[/C,/Ref];int prop_id)-\u003Edouble",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_get_window_property"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Double GetWindowProperty(System.String winname,OpenCvSharp.HighGui.WindowPropertyFlags propId)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 22,
+          "upstreamIdentity": "cv.getWindowImageRect(String winname[/C,/Ref])-\u003ERect",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_get_window_image_rect"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|OpenCvSharp.Core.Rect GetWindowImageRect(System.String winname)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "highgui-trackbar-controls",
+      "rationale": "Trackbar position and range operations preserve exact window/name association and source-defined integer state.",
+      "declarations": [
+        {
+          "ordinal": 26,
+          "upstreamIdentity": "cv.getTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref])-\u003Eint",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_get_trackbar_pos"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 GetTrackbarPos(System.String trackbarname,System.String winname)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 27,
+          "upstreamIdentity": "cv.setTrackbarPos(String trackbarname[/C,/Ref];String winname[/C,/Ref];int pos)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_set_trackbar_pos"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarPos(System.String trackbarname,System.String winname,System.Int32 pos)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 28,
+          "upstreamIdentity": "cv.setTrackbarMax(String trackbarname[/C,/Ref];String winname[/C,/Ref];int maxval)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_set_trackbar_max"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMax(System.String trackbarname,System.String winname,System.Int32 maxval)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        },
+        {
+          "ordinal": 29,
+          "upstreamIdentity": "cv.setTrackbarMin(String trackbarname[/C,/Ref];String winname[/C,/Ref];int minval)-\u003Evoid",
+          "nativeEntrypoints": [
+            "jyppx_ocv_highgui_set_trackbar_min"
+          ],
+          "managedMembers": [
+            "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetTrackbarMin(System.String trackbarname,System.String winname,System.Int32 minval)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/highgui-interaction-guide.md"
+        }
+      ]
+    }
+  ],
+  "sourceReviewedExtensions": [
+    {
+      "upstreamIdentity": "cv.createTrackbar(String trackbarname;String winname;int* value;int count;TrackbarCallback onChange=0;void* userdata=0)-\u003Eint",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "adaptation": "A ref-counted opaque registration keeps the value pointer and callback state alive until both the managed SafeHandle and owning window release their references; explicit-length UTF-8 rejects embedded null and invalid text.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_create_trackbar",
+        "jyppx_ocv_highgui_create_trackbar_utf8",
+        "jyppx_ocv_highgui_trackbar_release_handle"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|OpenCvSharp.HighGui.HighGuiTrackbar CreateTrackbar(System.String trackbarname,System.String winname,System.Int32 initialValue,System.Int32 count,OpenCvSharp.HighGui.Cv2.TrackbarCallback? callback=null)"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv.setMouseCallback(String winname;MouseCallback onMouse;void* userdata=0)-\u003Evoid",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "adaptation": "Per-window registrations replace and unregister native callbacks before managed delegates are released; callback exceptions are captured and rethrown only through an explicit managed observation call.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_callback_registration_release_handle",
+        "jyppx_ocv_highgui_mouse_callback_clear_utf8",
+        "jyppx_ocv_highgui_mouse_callback_create_utf8",
+        "jyppx_ocv_highgui_set_mouse_callback"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void SetMouseCallback(System.String winname,OpenCvSharp.HighGui.Cv2.MouseCallback? callback)",
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ThrowPendingCallbackException()"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv.getMouseWheelDelta(int flags)-\u003Eint",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "adaptation": "The signed high-word delta is exposed as a pure full-profile helper with exact integer output and no retained state.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_get_mouse_wheel_delta"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Int32 GetMouseWheelDelta(OpenCvSharp.HighGui.MouseEventFlags flags)"
+      ]
+    },
+    {
+      "upstreamIdentity": "cv.createButton(String bar_name;ButtonCallback on_change;void* userdata=0;int type=QT_PUSH_BUTTON;bool initial_button_state=false)-\u003Eint",
+      "sourceHeader": "opencv-source/opencv-5.0.0/modules/highgui/include/opencv2/highgui.hpp",
+      "adaptation": "Qt-only button callbacks use a native ref-counted trampoline and remain rooted until DestroyAllWindows; unavailable Qt backends report the upstream NativeException without leaking state.",
+      "nativeEntrypoints": [
+        "jyppx_ocv_highgui_button_callback_create_utf8",
+        "jyppx_ocv_highgui_callback_registration_release_handle",
+        "jyppx_ocv_highgui_create_button"
+      ],
+      "managedMembers": [
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void CreateButton(System.String buttonName,OpenCvSharp.HighGui.Cv2.ButtonCallback? callback=null,OpenCvSharp.HighGui.QtButtonTypes type=PushButton,System.Boolean initialButtonState=false)",
+        "MEMBER|OpenCvSharp.HighGui.Cv2|method|public;static|System.Void ThrowPendingCallbackException()"
+      ]
+    }
+  ]
+}
