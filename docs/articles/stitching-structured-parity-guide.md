@@ -23,7 +23,7 @@ The 12-row public-warper partition contains two metadata rows and ten `PyRotatio
 
 The 23-row `detail/matchers.hpp` partition contains seven metadata rows and 16 callable rows. Fourteen callables are implemented through `ImageFeatures`, `MatchesInfo`, `FeaturesMatcher`, `BestOf2NearestMatcher`, `BestOf2NearestRangeMatcher`, and `AffineBestOf2NearestMatcher`. The two LightGlue callables are explicitly unsupported because they require an externally supplied ONNX model and an owned `cv::LightGlueMatcher` API that this repository does not expose.
 
-The two autocalibration callables, `CameraParams.K`, and all 17 motion-estimator callables are implemented through `StitcherCameraParams`, `Estimator`, the homography and affine estimators, five bundle adjusters, and `StitchingMotion`. The measured module result is 134 implemented, 22 missing, and two unsupported callable rows.
+The two autocalibration callables, `CameraParams.K`, and all 17 motion-estimator callables are implemented through `StitcherCameraParams`, `Estimator`, the homography and affine estimators, five bundle adjusters, and `StitchingMotion`. All nine seam-finder, four timelapser, seven detail-utility, and two spherical-projector callables are also implemented. The measured module result is 156 implemented, zero missing, and two unsupported callable rows.
 
 ## Camera and motion estimation
 
@@ -204,8 +204,18 @@ Gain, channel, and block compensators require `NumberOfFeeds > 0`. Similarity th
 
 Component indices are copied values. Camera results own independent rotation and translation matrices, which callers dispose. Result masks copy into caller-owned or newly allocated managed matrices.
 
+## Seam, timelapse, and geometry details
+
+`SeamFinder.CreateDefault` preserves the upstream `None`, `Voronoi`, and `DynamicProgramming` values. `DpSeamFinder` and `GraphCutSeamFinder` expose strongly typed costs instead of case-sensitive upstream strings. `Find` requires equal non-empty image, corner, and mask collections. Every mask is an exact same-sized `CV_8UC1` Mat, and mask objects must be distinct. Images are borrowed. The native boundary clones all masks into temporary UMat storage and commits every result only after OpenCV succeeds, so exceptions never expose partially updated masks. Non-contiguous images and masks are valid.
+
+`Timelapser.CreateDefault` preserves `AsIs` union and `Crop` intersection behavior. Call `Initialize` with equal non-empty corner and positive-size arrays before `Process` or `GetDestination`. Process images are exact two-dimensional `CV_16SC3` Mats. The upstream mask parameter is currently ignored, but a supplied managed mask must still be a live non-empty Mat. `GetDestination` copies the retained upstream UMat into independently owned CPU Mat storage that remains valid after the timelapser is disposed.
+
+`StitchingUtilities` validates collection lengths, positive sizes, and checked 32-bit placement boundaries before calling `overlapRoi`, both `resultRoi` overloads, `resultRoiIntersection`, or `resultTl`. `SelectRandomSubset` rejects negative counts and `count > size`, returns exactly `count` distinct ascending indices, and uses bounded caller-owned storage. OpenCV 5.0.0 can overshoot that declared count because its implementation applies signed modulo to a random integer; the boundary detects that case and rebuilds the intended exact-count sample with OpenCV's bounded RNG. `LogLevel` is read-only because upstream exposes a mutable process-global reference.
+
+`SphericalProjector` is an owned source-reviewed configuration extension around parser-visible `mapForward` and `mapBackward`. Construction requires a finite positive scale, exact `3 x 3 CV_32FC1` K and R matrices, and an optional `3 x 1` or `1 x 3 CV_32FC1` translation. The matrices are consumed synchronously by upstream `ProjectorBase.setCameraParams`; no Mat pointer is retained. Point mapping then uses only the copied projector state.
+
 ## Profile boundaries
 
-Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED` without allocating handles or mutating outputs; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces beyond the source-true blender fallbacks, retained estimator/seam strategies, callback shapes, templates, mutable nested detail containers, and internal detail warpers remain outside the completed families. LightGlue matching remains explicitly unsupported until the repository owns a stable model-input and `cv::LightGlueMatcher` lifecycle contract.
+Stitching entrypoints are full-profile only. A mini-linked or unlinked wrapper keeps the ABI shape but returns `NOT_LINKED` without allocating handles or mutating outputs; that is not evidence that `opencv_stitching` is present. CUDA/OpenCL-specific input surfaces beyond the source-true blender fallbacks, callback shapes, templates, and mutable nested detail containers remain outside the completed families. LightGlue matching remains explicitly unsupported until the repository owns a stable model-input and `cv::LightGlueMatcher` lifecycle contract.
 
-Parser-emitted rows and source-reviewed extensions remain separate. `Stitcher.WaveCorrectKind`, `Stitcher.GetResultMask`, and the explicit managed no-op constructor are source-reviewed adaptations and do not alter the 207/158 parser counts.
+Parser-emitted rows and source-reviewed extensions remain separate. `Stitcher.WaveCorrectKind`, `Stitcher.GetResultMask`, the explicit managed no-op constructor, and owned `SphericalProjector` configuration are source-reviewed adaptations and do not alter the 207/158 parser counts.

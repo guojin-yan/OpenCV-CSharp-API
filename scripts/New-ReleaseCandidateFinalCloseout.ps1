@@ -395,7 +395,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2624
+                FunctionCount = 2646
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
@@ -675,6 +675,18 @@ function Get-Record {
                 MatcherDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-matchers'.declarations
                 MatcherCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-matchers'.callables
                 MatcherImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-matchers'.implemented
+                SeamFinderDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-seam-finders'.declarations
+                SeamFinderCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-seam-finders'.callables
+                SeamFinderImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-seam-finders'.implemented
+                TimelapserDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-timelapsers'.declarations
+                TimelapserCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-timelapsers'.callables
+                TimelapserImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-timelapsers'.implemented
+                UtilityDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-util'.declarations
+                UtilityCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-util'.callables
+                UtilityImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-util'.implemented
+                DetailWarperDeclarationCount = [int]$stitchingSummary.surfaceCounts.'detail-warpers'.declarations
+                DetailWarperCallableCount = [int]$stitchingSummary.surfaceCounts.'detail-warpers'.callables
+                DetailWarperImplementedCount = [int]$stitchingSummary.surfaceCounts.'detail-warpers'.implemented
                 CompatibilityHeaderCount = [int]$stitchingSummary.compatibilityHeaderCount
                 SourceHeaderCount = [int]$stitchingSummary.sourceHeaderCount
                 SourceReviewedExtensionCount = [int]$stitchingSummary.sourceReviewedExtensionCount

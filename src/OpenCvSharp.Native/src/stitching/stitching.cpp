@@ -4836,3 +4836,500 @@ int jyppx_ocv_stitching_leave_biggest_component(
     }
 }
 
+int jyppx_ocv_stitching_seam_finder_create_default(
+    int type, jyppx_ocv_stitching_seam_finder** seam_finder)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_seam_finder_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (seam_finder == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "seam_finder");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *seam_finder = nullptr;
+        std::unique_ptr<jyppx_ocv_stitching_seam_finder> created(new (std::nothrow) jyppx_ocv_stitching_seam_finder());
+        if (!created) return opencv_csharp_native::set_out_of_memory(api_name);
+        created->value = cv::detail::SeamFinder::createDefault(type);
+        *seam_finder = created.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_seam_finder_create_dp(
+    const unsigned char* cost_utf8, int cost_byte_count,
+    jyppx_ocv_stitching_seam_finder** seam_finder)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_seam_finder_create_dp";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (seam_finder == nullptr || cost_utf8 == nullptr || cost_byte_count <= 0 ||
+            std::memchr(cost_utf8, 0, static_cast<size_t>(cost_byte_count)) != nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "cost");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *seam_finder = nullptr;
+        std::unique_ptr<jyppx_ocv_stitching_seam_finder> created(new (std::nothrow) jyppx_ocv_stitching_seam_finder());
+        if (!created) return opencv_csharp_native::set_out_of_memory(api_name);
+        created->value = cv::makePtr<cv::detail::DpSeamFinder>(cv::String(reinterpret_cast<const char*>(cost_utf8), static_cast<size_t>(cost_byte_count)));
+        *seam_finder = created.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_seam_finder_create_graph_cut(
+    const unsigned char* cost_utf8, int cost_byte_count, float terminal_cost,
+    float bad_region_penalty, jyppx_ocv_stitching_seam_finder** seam_finder)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_seam_finder_create_graph_cut";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (seam_finder == nullptr || cost_utf8 == nullptr || cost_byte_count <= 0 ||
+            std::memchr(cost_utf8, 0, static_cast<size_t>(cost_byte_count)) != nullptr ||
+            !std::isfinite(terminal_cost) || !std::isfinite(bad_region_penalty))
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *seam_finder = nullptr;
+        std::unique_ptr<jyppx_ocv_stitching_seam_finder> created(new (std::nothrow) jyppx_ocv_stitching_seam_finder());
+        if (!created) return opencv_csharp_native::set_out_of_memory(api_name);
+        created->value = cv::makePtr<cv::detail::GraphCutSeamFinder>(
+            cv::String(reinterpret_cast<const char*>(cost_utf8), static_cast<size_t>(cost_byte_count)),
+            terminal_cost, bad_region_penalty);
+        *seam_finder = created.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+void jyppx_ocv_stitching_seam_finder_release_handle(jyppx_ocv_stitching_seam_finder* seam_finder)
+{
+    delete seam_finder;
+}
+
+int jyppx_ocv_stitching_seam_finder_set_dp_cost(
+    jyppx_ocv_stitching_seam_finder* seam_finder, const unsigned char* cost_utf8, int cost_byte_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_seam_finder_set_dp_cost";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (seam_finder == nullptr || cost_utf8 == nullptr || cost_byte_count <= 0 ||
+            std::memchr(cost_utf8, 0, static_cast<size_t>(cost_byte_count)) != nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "cost");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        auto* dp = dynamic_cast<cv::detail::DpSeamFinder*>(seam_finder->value.get());
+        if (dp == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "seam_finder");
+        dp->setCostFunction(cv::String(reinterpret_cast<const char*>(cost_utf8), static_cast<size_t>(cost_byte_count)));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_seam_finder_find(
+    jyppx_ocv_stitching_seam_finder* seam_finder, const jyppx_ocv_mat* const* images, int image_count,
+    const int* corner_x, const int* corner_y, int corner_count, jyppx_ocv_mat* const* masks, int mask_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_seam_finder_find";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (seam_finder == nullptr || image_count <= 0 || corner_count != image_count || mask_count != image_count ||
+            images == nullptr || masks == nullptr || corner_x == nullptr || corner_y == nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+        for (int i = 0; i < image_count; ++i)
+            if (images[i] == nullptr || masks[i] == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::UMat> src;
+        std::vector<cv::Mat> mask_copies;
+        std::vector<cv::UMat> mask_umat;
+        std::vector<cv::Point> corners;
+        src.reserve(static_cast<size_t>(image_count)); mask_copies.resize(static_cast<size_t>(image_count));
+        mask_umat.reserve(static_cast<size_t>(image_count)); corners.reserve(static_cast<size_t>(image_count));
+        for (int i = 0; i < image_count; ++i)
+        {
+            const cv::Mat& image = opencv_csharp_native::mat_value(images[i]);
+            const cv::Mat& mask = opencv_csharp_native::mat_value(masks[i]);
+            if (image.empty() || mask.empty() || mask.type() != CV_8UC1 || mask.size() != image.size())
+                return opencv_csharp_native::set_invalid_argument(api_name, "masks");
+            src.push_back(image.getUMat(cv::ACCESS_READ));
+            mask.copyTo(mask_copies[static_cast<size_t>(i)]);
+            mask_umat.push_back(mask_copies[static_cast<size_t>(i)].getUMat(cv::ACCESS_RW));
+            corners.emplace_back(corner_x[i], corner_y[i]);
+        }
+        seam_finder->value->find(src, corners, mask_umat);
+        for (int i = 0; i < image_count; ++i)
+            mask_umat[static_cast<size_t>(i)].copyTo(opencv_csharp_native::mat_value(masks[i]));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_timelapser_create_default(int type, jyppx_ocv_stitching_timelapser** timelapser)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_timelapser_create_default";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (timelapser == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "timelapser");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *timelapser = nullptr;
+        std::unique_ptr<jyppx_ocv_stitching_timelapser> created(new (std::nothrow) jyppx_ocv_stitching_timelapser());
+        if (!created) return opencv_csharp_native::set_out_of_memory(api_name);
+        created->value = cv::detail::Timelapser::createDefault(type);
+        *timelapser = created.release();
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)type; return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+void jyppx_ocv_stitching_timelapser_release_handle(jyppx_ocv_stitching_timelapser* timelapser)
+{
+    delete timelapser;
+}
+
+int jyppx_ocv_stitching_timelapser_initialize(
+    jyppx_ocv_stitching_timelapser* timelapser, const int* corner_x, const int* corner_y, int corner_count,
+    const int* widths, const int* heights, int size_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_timelapser_initialize";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (timelapser == nullptr || corner_count <= 0 || size_count != corner_count || corner_x == nullptr || corner_y == nullptr || widths == nullptr || heights == nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Point> corners; std::vector<cv::Size> sizes;
+        corners.reserve(static_cast<size_t>(corner_count)); sizes.reserve(static_cast<size_t>(corner_count));
+        for (int i = 0; i < corner_count; ++i)
+        {
+            if (widths[i] <= 0 || heights[i] <= 0) return opencv_csharp_native::set_invalid_argument(api_name, "sizes");
+            corners.emplace_back(corner_x[i], corner_y[i]); sizes.emplace_back(widths[i], heights[i]);
+        }
+        timelapser->value->initialize(corners, sizes);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_timelapser_process(
+    jyppx_ocv_stitching_timelapser* timelapser, const jyppx_ocv_mat* image, const jyppx_ocv_mat* mask,
+    int top_left_x, int top_left_y)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_timelapser_process";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (timelapser == nullptr || image == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        const cv::Mat& value = opencv_csharp_native::mat_value(image);
+        if (value.empty() || value.type() != CV_16SC3) return opencv_csharp_native::set_invalid_argument(api_name, "image");
+        if (mask != nullptr && opencv_csharp_native::mat_value(mask).empty()) return opencv_csharp_native::set_invalid_argument(api_name, "mask");
+        timelapser->value->process(value, mask == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mask)), cv::Point(top_left_x, top_left_y));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)mask; (void)top_left_x; (void)top_left_y; return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_timelapser_get_dst(const jyppx_ocv_stitching_timelapser* timelapser, jyppx_ocv_mat* destination)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_timelapser_get_dst";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (timelapser == nullptr || destination == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        timelapser->value->getDst().copyTo(opencv_csharp_native::mat_value(destination));
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_overlap_roi(
+    int first_x, int first_y, int first_width, int first_height,
+    int second_x, int second_y, int second_width, int second_height,
+    jyppx_ocv_stitching_rect* roi, int* overlaps)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_overlap_roi";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (roi == nullptr || overlaps == nullptr || first_width <= 0 || first_height <= 0 || second_width <= 0 || second_height <= 0)
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+        const std::int64_t first_right = static_cast<std::int64_t>(first_x) + first_width;
+        const std::int64_t first_bottom = static_cast<std::int64_t>(first_y) + first_height;
+        const std::int64_t second_right = static_cast<std::int64_t>(second_x) + second_width;
+        const std::int64_t second_bottom = static_cast<std::int64_t>(second_y) + second_height;
+        if (first_right > std::numeric_limits<int>::max() || first_bottom > std::numeric_limits<int>::max() ||
+            second_right > std::numeric_limits<int>::max() || second_bottom > std::numeric_limits<int>::max())
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        cv::Rect value;
+        const bool result = cv::detail::overlapRoi(cv::Point(first_x, first_y), cv::Point(second_x, second_y),
+            cv::Size(first_width, first_height), cv::Size(second_width, second_height), value);
+        roi->x = value.x; roi->y = value.y; roi->width = value.width; roi->height = value.height; *overlaps = result ? 1 : 0;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)first_x; (void)first_y; (void)second_x; (void)second_y; return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_result_roi_sizes(
+    const int* corner_x, const int* corner_y, int corner_count, const int* widths, const int* heights, int size_count,
+    jyppx_ocv_stitching_rect* roi)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_result_roi_sizes";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (roi == nullptr || corner_count <= 0 || size_count != corner_count || corner_x == nullptr || corner_y == nullptr || widths == nullptr || heights == nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Point> corners; std::vector<cv::Size> sizes;
+        corners.reserve(static_cast<size_t>(corner_count)); sizes.reserve(static_cast<size_t>(corner_count));
+        for (int i = 0; i < corner_count; ++i)
+        {
+            if (widths[i] <= 0 || heights[i] <= 0) return opencv_csharp_native::set_invalid_argument(api_name, "sizes");
+            corners.emplace_back(corner_x[i], corner_y[i]); sizes.emplace_back(widths[i], heights[i]);
+        }
+        const cv::Rect value = cv::detail::resultRoi(corners, sizes);
+        roi->x = value.x; roi->y = value.y; roi->width = value.width; roi->height = value.height;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_result_roi_images(
+    const int* corner_x, const int* corner_y, int corner_count, const jyppx_ocv_mat* const* images, int image_count,
+    jyppx_ocv_stitching_rect* roi)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_result_roi_images";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (roi == nullptr || corner_count <= 0 || image_count != corner_count || corner_x == nullptr || corner_y == nullptr || images == nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Point> corners; std::vector<cv::UMat> values;
+        corners.reserve(static_cast<size_t>(corner_count)); values.reserve(static_cast<size_t>(corner_count));
+        for (int i = 0; i < corner_count; ++i)
+        {
+            if (images[i] == nullptr || opencv_csharp_native::mat_value(images[i]).empty()) return opencv_csharp_native::set_invalid_argument(api_name, "images");
+            corners.emplace_back(corner_x[i], corner_y[i]); values.push_back(opencv_csharp_native::mat_value(images[i]).getUMat(cv::ACCESS_READ));
+        }
+        const cv::Rect value = cv::detail::resultRoi(corners, values);
+        roi->x = value.x; roi->y = value.y; roi->width = value.width; roi->height = value.height;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_result_roi_intersection(
+    const int* corner_x, const int* corner_y, int corner_count, const int* widths, const int* heights, int size_count,
+    jyppx_ocv_stitching_rect* roi)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_result_roi_intersection";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (roi == nullptr || corner_count <= 0 || size_count != corner_count || corner_x == nullptr || corner_y == nullptr || widths == nullptr || heights == nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Point> corners; std::vector<cv::Size> sizes;
+        corners.reserve(static_cast<size_t>(corner_count)); sizes.reserve(static_cast<size_t>(corner_count));
+        for (int i = 0; i < corner_count; ++i)
+        {
+            if (widths[i] <= 0 || heights[i] <= 0) return opencv_csharp_native::set_invalid_argument(api_name, "sizes");
+            corners.emplace_back(corner_x[i], corner_y[i]); sizes.emplace_back(widths[i], heights[i]);
+        }
+        const cv::Rect value = cv::detail::resultRoiIntersection(corners, sizes);
+        roi->x = value.x; roi->y = value.y; roi->width = value.width; roi->height = value.height;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_result_tl(const int* corner_x, const int* corner_y, int corner_count, jyppx_ocv_stitching_point* point)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_result_tl";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (point == nullptr || corner_count <= 0 || corner_x == nullptr || corner_y == nullptr)
+            return opencv_csharp_native::set_invalid_argument(api_name, "collections");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<cv::Point> corners; corners.reserve(static_cast<size_t>(corner_count));
+        for (int i = 0; i < corner_count; ++i) corners.emplace_back(corner_x[i], corner_y[i]);
+        const cv::Point value = cv::detail::resultTl(corners); point->x = value.x; point->y = value.y;
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_select_random_subset(int count, int size, int* subset, int subset_capacity, int* subset_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_select_random_subset";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (count < 0 || size <= 0 || count > size || subset_count == nullptr || subset_capacity < count || (count > 0 && subset == nullptr))
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        std::vector<int> values; cv::detail::selectRandomSubset(count, size, values);
+        if (values.size() != static_cast<size_t>(count))
+        {
+            // OpenCV 5.0.0's signed modulo can overshoot; preserve its intended exact-count contract.
+            values.clear();
+            int remaining = count;
+            for (int i = 0; i < size && remaining > 0; ++i)
+            {
+                if (cv::theRNG().uniform(0, size - i) < remaining)
+                {
+                    values.push_back(i);
+                    --remaining;
+                }
+            }
+        }
+        if (values.size() != static_cast<size_t>(count)) return opencv_csharp_native::set_invalid_argument(api_name, "subset");
+        for (int i = 0; i < count; ++i) subset[i] = values[static_cast<size_t>(i)];
+        *subset_count = count; return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_log_level(int* level)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_log_level";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (level == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "level");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *level = cv::detail::stitchingLogLevel(); return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_spherical_projector_create(
+    float scale, const jyppx_ocv_mat* camera_matrix, const jyppx_ocv_mat* rotation_matrix,
+    const jyppx_ocv_mat* translation, jyppx_ocv_stitching_spherical_projector** projector)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_spherical_projector_create";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (projector == nullptr || camera_matrix == nullptr || rotation_matrix == nullptr || !std::isfinite(scale) || scale <= 0.0f)
+            return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        *projector = nullptr;
+        const cv::Mat& K = opencv_csharp_native::mat_value(camera_matrix); const cv::Mat& R = opencv_csharp_native::mat_value(rotation_matrix);
+        if (K.dims != 2 || K.rows != 3 || K.cols != 3 || K.type() != CV_32FC1 || R.dims != 2 || R.rows != 3 || R.cols != 3 || R.type() != CV_32FC1)
+            return opencv_csharp_native::set_invalid_argument(api_name, "camera_parameters");
+        cv::Mat T = cv::Mat::zeros(3, 1, CV_32FC1);
+        if (translation != nullptr)
+        {
+            const cv::Mat& source = opencv_csharp_native::mat_value(translation);
+            if (source.type() != CV_32FC1 || !((source.rows == 3 && source.cols == 1) || (source.rows == 1 && source.cols == 3)))
+                return opencv_csharp_native::set_invalid_argument(api_name, "translation");
+            source.copyTo(T);
+            if (source.rows == 1) T = T.reshape(0, 3);
+        }
+        std::unique_ptr<jyppx_ocv_stitching_spherical_projector> created(new (std::nothrow) jyppx_ocv_stitching_spherical_projector());
+        if (!created) return opencv_csharp_native::set_out_of_memory(api_name);
+        created->value.scale = scale; created->value.setCameraParams(K, R, T); created->configured = true;
+        *projector = created.release(); return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)translation; return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+void jyppx_ocv_stitching_spherical_projector_release_handle(jyppx_ocv_stitching_spherical_projector* projector)
+{
+    delete projector;
+}
+
+int jyppx_ocv_stitching_spherical_projector_map_forward(
+    const jyppx_ocv_stitching_spherical_projector* projector, float x, float y, float* u, float* v)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_spherical_projector_map_forward";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (projector == nullptr || u == nullptr || v == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (!projector->configured) return opencv_csharp_native::set_invalid_argument(api_name, "projector");
+        projector->value.mapForward(x, y, *u, *v); return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_stitching_spherical_projector_map_backward(
+    const jyppx_ocv_stitching_spherical_projector* projector, float u, float v, float* x, float* y)
+{
+    constexpr const char* api_name = "jyppx_ocv_stitching_spherical_projector_map_backward";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        if (projector == nullptr || x == nullptr || y == nullptr) return opencv_csharp_native::set_invalid_argument(api_name, "arguments");
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+        if (!projector->configured) return opencv_csharp_native::set_invalid_argument(api_name, "projector");
+        projector->value.mapBackward(u, v, *x, *y); return OPENCV_CSHARP_STATUS_OK;
+#else
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+

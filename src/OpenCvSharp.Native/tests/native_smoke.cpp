@@ -219,6 +219,27 @@ namespace
         jyppx_ocv_stitching_estimator** out() noexcept { return &value; }
     };
 
+    struct NativeStitchingSeamFinderHandle
+    {
+        jyppx_ocv_stitching_seam_finder* value = nullptr;
+        ~NativeStitchingSeamFinderHandle() { jyppx_ocv_stitching_seam_finder_release_handle(value); }
+        jyppx_ocv_stitching_seam_finder** out() noexcept { return &value; }
+    };
+
+    struct NativeStitchingTimelapserHandle
+    {
+        jyppx_ocv_stitching_timelapser* value = nullptr;
+        ~NativeStitchingTimelapserHandle() { jyppx_ocv_stitching_timelapser_release_handle(value); }
+        jyppx_ocv_stitching_timelapser** out() noexcept { return &value; }
+    };
+
+    struct NativeStitchingSphericalProjectorHandle
+    {
+        jyppx_ocv_stitching_spherical_projector* value = nullptr;
+        ~NativeStitchingSphericalProjectorHandle() { jyppx_ocv_stitching_spherical_projector_release_handle(value); }
+        jyppx_ocv_stitching_spherical_projector** out() noexcept { return &value; }
+    };
+
     struct NativeStitchingCameraResults
     {
         jyppx_ocv_stitching_camera_params values[3]{};
@@ -6607,6 +6628,120 @@ int main()
             return 162;
         }
 
+#if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+        {
+            jyppx_ocv_stitching_rect overlap{};
+            int overlaps = 0;
+            if (jyppx_ocv_stitching_overlap_roi(-2, 3, 6, 4, 2, 1, 5, 7, &overlap, &overlaps) != OPENCV_CSHARP_STATUS_OK ||
+                overlaps != 1 || overlap.x != 2 || overlap.y != 3 || overlap.width != 2 || overlap.height != 4)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 951;
+            }
+            const int corners_x[] = { -2, 2 };
+            const int corners_y[] = { 3, 1 };
+            const int widths[] = { 6, 5 };
+            const int heights[] = { 4, 7 };
+            jyppx_ocv_stitching_rect result_roi{};
+            if (jyppx_ocv_stitching_result_roi_sizes(corners_x, corners_y, 2, widths, heights, 2, &result_roi) != OPENCV_CSHARP_STATUS_OK ||
+                result_roi.x != -2 || result_roi.y != 1 || result_roi.width != 9 || result_roi.height != 7)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 952;
+            }
+            int subset[3]{};
+            int subset_count = 0;
+            if (jyppx_ocv_stitching_select_random_subset(3, 8, subset, 3, &subset_count) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 953;
+            }
+            if (subset_count != 3)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 960;
+            }
+            if (jyppx_ocv_stitching_select_random_subset(9, 8, subset, 3, &subset_count) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 959;
+            }
+
+            NativeMatHandle seam_image;
+            NativeMatHandle seam_mask;
+            NativeStitchingSeamFinderHandle seam_finder;
+            if (jyppx_ocv_mat_create_with_scalar(5, 6, 69, 10, 20, 30, 0, seam_image.out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 954;
+            }
+            if (jyppx_ocv_mat_create_with_scalar(5, 6, 0, 255, 0, 0, 0, seam_mask.out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 961;
+            }
+            if (jyppx_ocv_stitching_seam_finder_create_default(0, seam_finder.out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 962;
+            }
+            const jyppx_ocv_mat* seam_images[] = { seam_image.get() };
+            jyppx_ocv_mat* seam_masks[] = { seam_mask.get() };
+            const int seam_x[] = { -2 };
+            const int seam_y[] = { 3 };
+            if (jyppx_ocv_stitching_seam_finder_find(seam_finder.value, seam_images, 1, seam_x, seam_y, 1, seam_masks, 1) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 955;
+            }
+
+            NativeMatHandle timelapse_image;
+            NativeMatHandle timelapse_mask;
+            NativeMatHandle timelapse_destination;
+            NativeStitchingTimelapserHandle timelapser;
+            const int time_x[] = { -1 };
+            const int time_y[] = { 2 };
+            const int time_width[] = { 3 };
+            const int time_height[] = { 2 };
+            if (jyppx_ocv_mat_create_with_scalar(2, 3, 67, 7, 11, 13, 0, timelapse_image.out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_mat_create_with_scalar(2, 3, 0, 255, 0, 0, 0, timelapse_mask.out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_mat_create_empty(timelapse_destination.out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_stitching_timelapser_create_default(0, timelapser.out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_stitching_timelapser_initialize(timelapser.value, time_x, time_y, 1, time_width, time_height, 1) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_stitching_timelapser_process(timelapser.value, timelapse_image.get(), timelapse_mask.get(), -1, 2) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_stitching_timelapser_get_dst(timelapser.value, timelapse_destination.get()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 956;
+            }
+
+            NativeMatHandle camera;
+            NativeMatHandle rotation;
+            NativeStitchingSphericalProjectorHandle projector;
+            if (jyppx_ocv_mat_create(3, 3, 5, camera.out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_mat_create(3, 3, 5, rotation.out()) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_core_set_identity(camera.get(), 1, 0, 0, 0) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_core_set_identity(rotation.get(), 1, 0, 0, 0) != OPENCV_CSHARP_STATUS_OK ||
+                jyppx_ocv_stitching_spherical_projector_create(2, camera.get(), rotation.get(), nullptr, projector.out()) != OPENCV_CSHARP_STATUS_OK)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 957;
+            }
+            float u = 0;
+            float v = 0;
+            float x = 0;
+            float y = 0;
+            if (jyppx_ocv_stitching_spherical_projector_map_forward(projector.value, 0, 0, &u, &v) != OPENCV_CSHARP_STATUS_OK ||
+                std::abs(u) > 0.0001F || std::abs(v - static_cast<float>(3.14159265358979323846)) > 0.0001F ||
+                jyppx_ocv_stitching_spherical_projector_map_backward(projector.value, u, v, &x, &y) != OPENCV_CSHARP_STATUS_OK ||
+                std::abs(x) > 0.0001F || std::abs(y) > 0.0001F)
+            {
+                jyppx_ocv_mat_release(drawing);
+                return 958;
+            }
+        }
+#endif
+
         jyppx_ocv_mat_release(drawing);
         return 0;
     }
@@ -6673,6 +6808,21 @@ int main()
         {
             jyppx_ocv_stitching_blender_release_handle(blender);
             return 900;
+        }
+        auto* seam_finder = reinterpret_cast<jyppx_ocv_stitching_seam_finder*>(static_cast<std::uintptr_t>(1));
+        auto* timelapser = reinterpret_cast<jyppx_ocv_stitching_timelapser*>(static_cast<std::uintptr_t>(1));
+        auto* projector = reinterpret_cast<jyppx_ocv_stitching_spherical_projector*>(static_cast<std::uintptr_t>(1));
+        auto* fake_mat = reinterpret_cast<jyppx_ocv_mat*>(static_cast<std::uintptr_t>(1));
+        int stitching_log_level = 17;
+        if (jyppx_ocv_stitching_seam_finder_create_default(0, &seam_finder) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            seam_finder != reinterpret_cast<jyppx_ocv_stitching_seam_finder*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_timelapser_create_default(0, &timelapser) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            timelapser != reinterpret_cast<jyppx_ocv_stitching_timelapser*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_spherical_projector_create(1.0F, fake_mat, fake_mat, nullptr, &projector) != OPENCV_CSHARP_STATUS_NOT_LINKED ||
+            projector != reinterpret_cast<jyppx_ocv_stitching_spherical_projector*>(static_cast<std::uintptr_t>(1)) ||
+            jyppx_ocv_stitching_log_level(&stitching_log_level) != OPENCV_CSHARP_STATUS_NOT_LINKED || stitching_log_level != 17)
+        {
+            return 944;
         }
         auto* image_features = reinterpret_cast<jyppx_ocv_stitching_image_features*>(static_cast<std::uintptr_t>(1));
         auto* matches_info = reinterpret_cast<jyppx_ocv_stitching_matches_info*>(static_cast<std::uintptr_t>(1));

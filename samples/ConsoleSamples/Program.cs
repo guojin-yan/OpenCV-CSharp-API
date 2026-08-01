@@ -753,6 +753,7 @@ namespace ConsoleSamples
                     Console.WriteLine(RunPyRotationWarperSummary());
                     Console.WriteLine(RunBlenderSummary());
                     Console.WriteLine(RunFeaturesMatcherSummary());
+                    Console.WriteLine(RunStitchingDetailSummary());
 
                     if (!IsExtendedConsoleSamplesEnabled())
                     {
@@ -4656,6 +4657,40 @@ namespace ConsoleSamples
                 finally
                 {
                     DisposeAll(pyramid);
+                }
+            }
+        }
+
+        private static string RunStitchingDetailSummary()
+        {
+            var corners = new[] { new Point(-2, 3), new Point(2, 1) };
+            var sizes = new[] { new Size(6, 4), new Size(5, 7) };
+            Rect union = OpenCvSharp.Stitching.StitchingUtilities.ResultRoi(corners, sizes);
+            Rect intersection = OpenCvSharp.Stitching.StitchingUtilities.ResultRoiIntersection(corners, sizes);
+            using (var seamImage = new Mat(4, 6, MatType.CV_32FC3, new Scalar(10, 20, 30)))
+            using (var seamMask = new Mat(4, 6, MatType.CV_8UC1, new Scalar(255)))
+            using (OpenCvSharp.Stitching.SeamFinder seamFinder =
+                OpenCvSharp.Stitching.SeamFinder.CreateDefault(OpenCvSharp.Stitching.SeamFinderType.None))
+            using (var timelapseImage = new Mat(2, 3, MatType.CV_16SC3, new Scalar(7, 11, 13)))
+            using (var timelapseMask = new Mat(2, 3, MatType.CV_8UC1, new Scalar(255)))
+            using (OpenCvSharp.Stitching.Timelapser timelapser =
+                OpenCvSharp.Stitching.Timelapser.CreateDefault(OpenCvSharp.Stitching.TimelapserType.AsIs))
+            using (var camera = Mat.Eye(3, 3, MatType.CV_32FC1))
+            using (var rotation = Mat.Eye(3, 3, MatType.CV_32FC1))
+            using (var projector = new OpenCvSharp.Stitching.SphericalProjector(2F, camera, rotation))
+            {
+                seamFinder.Find(new[] { seamImage }, new[] { corners[0] }, new[] { seamMask });
+                timelapser.Initialize(new[] { new Point(-1, 2) }, new[] { new Size(3, 2) });
+                timelapser.Process(timelapseImage, timelapseMask, new Point(-1, 2));
+                using (Mat destination = timelapser.GetDestination())
+                {
+                    Point2f spherical = projector.MapForward(new Point2f(0, 0));
+                    return "detailUnion=" + union.Width + "x" + union.Height
+                        + ", detailIntersection=" + intersection.Width + "x" + intersection.Height
+                        + ", seamMaskMean=" + CoreCv2.Mean(seamMask).V0.ToString("0", CultureInfo.InvariantCulture)
+                        + ", timelapse=" + destination.Cols + "x" + destination.Rows
+                        + ", spherical=" + spherical.X.ToString("0.0", CultureInfo.InvariantCulture)
+                        + "," + spherical.Y.ToString("0.0", CultureInfo.InvariantCulture);
                 }
             }
         }

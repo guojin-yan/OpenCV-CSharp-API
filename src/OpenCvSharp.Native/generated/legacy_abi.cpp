@@ -16453,6 +16453,11 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_leave_biggest_
     return jyppx_ocv_stitching_leave_biggest_component(features, feature_count, pairwise_matches, pairwise_match_count, confidence_threshold, component_features, component_feature_capacity, component_matches, component_match_capacity, original_indices, original_index_capacity, component_count);
 }
 
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_log_level(int* level)
+{
+    return jyppx_ocv_stitching_log_level(level);
+}
+
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_matches_graph_as_string(const unsigned char* path_buffer,
     int path_byte_count,
     const int* path_offsets,
@@ -16523,6 +16528,13 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_normalize_usin
     jyppx_ocv_mat* source)
 {
     return jyppx_ocv_stitching_normalize_using_weight_map(weight, source);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_overlap_roi(int first_x, int first_y, int first_width, int first_height,
+    int second_x, int second_y, int second_width, int second_height,
+    jyppx_ocv_stitching_rect* roi, int* overlaps)
+{
+    return jyppx_ocv_stitching_overlap_roi(first_x, first_y, first_width, first_height, second_x, second_y, second_width, second_height, roi, overlaps);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_py_rotation_warper_build_maps(const jyppx_ocv_stitching_py_rotation_warper* warper,
@@ -16632,6 +16644,118 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_restore_image_
     int pyramid_count)
 {
     return jyppx_ocv_stitching_restore_image_from_laplace_pyramid_gpu(pyramid, pyramid_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_result_roi_images(const int* corner_x, const int* corner_y, int corner_count,
+    const jyppx_ocv_mat* const* images, int image_count, jyppx_ocv_stitching_rect* roi)
+{
+    return jyppx_ocv_stitching_result_roi_images(corner_x, corner_y, corner_count, images, image_count, roi);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_result_roi_intersection(const int* corner_x, const int* corner_y, int corner_count,
+    const int* widths, const int* heights, int size_count, jyppx_ocv_stitching_rect* roi)
+{
+    return jyppx_ocv_stitching_result_roi_intersection(corner_x, corner_y, corner_count, widths, heights, size_count, roi);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_result_roi_sizes(const int* corner_x, const int* corner_y, int corner_count,
+    const int* widths, const int* heights, int size_count, jyppx_ocv_stitching_rect* roi)
+{
+    return jyppx_ocv_stitching_result_roi_sizes(corner_x, corner_y, corner_count, widths, heights, size_count, roi);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_result_tl(const int* corner_x, const int* corner_y, int corner_count, jyppx_ocv_stitching_point* point)
+{
+    return jyppx_ocv_stitching_result_tl(corner_x, corner_y, corner_count, point);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_seam_finder_create_default(int type, jyppx_ocv_stitching_seam_finder** seam_finder)
+{
+    return jyppx_ocv_stitching_seam_finder_create_default(type, seam_finder);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_seam_finder_create_dp(const unsigned char* cost_utf8, int cost_byte_count,
+    jyppx_ocv_stitching_seam_finder** seam_finder)
+{
+    return jyppx_ocv_stitching_seam_finder_create_dp(cost_utf8, cost_byte_count, seam_finder);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_seam_finder_create_graph_cut(const unsigned char* cost_utf8, int cost_byte_count, float terminal_cost,
+    float bad_region_penalty, jyppx_ocv_stitching_seam_finder** seam_finder)
+{
+    return jyppx_ocv_stitching_seam_finder_create_graph_cut(cost_utf8, cost_byte_count, terminal_cost, bad_region_penalty, seam_finder);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_seam_finder_find(jyppx_ocv_stitching_seam_finder* seam_finder,
+    const jyppx_ocv_mat* const* images, int image_count,
+    const int* corner_x, const int* corner_y, int corner_count,
+    jyppx_ocv_mat* const* masks, int mask_count)
+{
+    return jyppx_ocv_stitching_seam_finder_find(seam_finder, images, image_count, corner_x, corner_y, corner_count, masks, mask_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_seam_finder_release_handle(jyppx_ocv_stitching_seam_finder* seam_finder)
+{
+    jyppx_ocv_stitching_seam_finder_release_handle(seam_finder);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_seam_finder_set_dp_cost(jyppx_ocv_stitching_seam_finder* seam_finder, const unsigned char* cost_utf8, int cost_byte_count)
+{
+    return jyppx_ocv_stitching_seam_finder_set_dp_cost(seam_finder, cost_utf8, cost_byte_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_select_random_subset(int count, int size, int* subset, int subset_capacity, int* subset_count)
+{
+    return jyppx_ocv_stitching_select_random_subset(count, size, subset, subset_capacity, subset_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_spherical_projector_create(float scale, const jyppx_ocv_mat* camera_matrix, const jyppx_ocv_mat* rotation_matrix,
+    const jyppx_ocv_mat* translation, jyppx_ocv_stitching_spherical_projector** projector)
+{
+    return jyppx_ocv_stitching_spherical_projector_create(scale, camera_matrix, rotation_matrix, translation, projector);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_spherical_projector_map_backward(const jyppx_ocv_stitching_spherical_projector* projector, float u, float v, float* x, float* y)
+{
+    return jyppx_ocv_stitching_spherical_projector_map_backward(projector, u, v, x, y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_spherical_projector_map_forward(const jyppx_ocv_stitching_spherical_projector* projector, float x, float y, float* u, float* v)
+{
+    return jyppx_ocv_stitching_spherical_projector_map_forward(projector, x, y, u, v);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_spherical_projector_release_handle(jyppx_ocv_stitching_spherical_projector* projector)
+{
+    jyppx_ocv_stitching_spherical_projector_release_handle(projector);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_timelapser_create_default(int type, jyppx_ocv_stitching_timelapser** timelapser)
+{
+    return jyppx_ocv_stitching_timelapser_create_default(type, timelapser);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_timelapser_get_dst(const jyppx_ocv_stitching_timelapser* timelapser, jyppx_ocv_mat* destination)
+{
+    return jyppx_ocv_stitching_timelapser_get_dst(timelapser, destination);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_timelapser_initialize(jyppx_ocv_stitching_timelapser* timelapser,
+    const int* corner_x, const int* corner_y, int corner_count,
+    const int* widths, const int* heights, int size_count)
+{
+    return jyppx_ocv_stitching_timelapser_initialize(timelapser, corner_x, corner_y, corner_count, widths, heights, size_count);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_timelapser_process(jyppx_ocv_stitching_timelapser* timelapser, const jyppx_ocv_mat* image,
+    const jyppx_ocv_mat* mask, int top_left_x, int top_left_y)
+{
+    return jyppx_ocv_stitching_timelapser_process(timelapser, image, mask, top_left_x, top_left_y);
+}
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API void jyppx_ocv5_stitching_timelapser_release_handle(jyppx_ocv_stitching_timelapser* timelapser)
+{
+    jyppx_ocv_stitching_timelapser_release_handle(timelapser);
 }
 
 OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv5_stitching_wave_correct(jyppx_ocv_mat* const* rotation_matrices,

@@ -360,6 +360,12 @@ internal static class Program
         typeof(OpenCvSharp.Stitching.BundleAdjusterAffine),
         typeof(OpenCvSharp.Stitching.BundleAdjusterAffinePartial),
         typeof(OpenCvSharp.Stitching.StitchingMotion),
+        typeof(OpenCvSharp.Stitching.SeamFinder),
+        typeof(OpenCvSharp.Stitching.DpSeamFinder),
+        typeof(OpenCvSharp.Stitching.GraphCutSeamFinder),
+        typeof(OpenCvSharp.Stitching.Timelapser),
+        typeof(OpenCvSharp.Stitching.StitchingUtilities),
+        typeof(OpenCvSharp.Stitching.SphericalProjector),
         typeof(OpenCvSharp.Geometry.DistanceTypes)
     };
 

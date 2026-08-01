@@ -387,6 +387,54 @@ namespace OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_leave_biggest_component")]
         internal static partial int StitchingLeaveBiggestComponent(IntPtr[] features, int featureCount, IntPtr[] pairwiseMatches, int pairwiseMatchCount, float confidenceThreshold, IntPtr[] componentFeatures, int componentFeatureCapacity, IntPtr[] componentMatches, int componentMatchCapacity, int[] originalIndices, int originalIndexCapacity, out int componentCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_seam_finder_create_default")]
+        internal static partial int StitchingSeamFinderCreateDefault(int type, out IntPtr seamFinder);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_seam_finder_create_dp")]
+        internal static partial int StitchingSeamFinderCreateDp(byte[] cost, int costByteCount, out IntPtr seamFinder);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_seam_finder_create_graph_cut")]
+        internal static partial int StitchingSeamFinderCreateGraphCut(byte[] cost, int costByteCount, float terminalCost, float badRegionPenalty, out IntPtr seamFinder);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_seam_finder_release_handle")]
+        internal static partial void StitchingSeamFinderReleaseHandle(IntPtr seamFinder);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_seam_finder_set_dp_cost")]
+        internal static partial int StitchingSeamFinderSetDpCost(IntPtr seamFinder, byte[] cost, int costByteCount);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_seam_finder_find")]
+        internal static partial int StitchingSeamFinderFind(IntPtr seamFinder, IntPtr[] images, int imageCount, int[] cornerX, int[] cornerY, int cornerCount, IntPtr[] masks, int maskCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_timelapser_create_default")]
+        internal static partial int StitchingTimelapserCreateDefault(int type, out IntPtr timelapser);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_timelapser_release_handle")]
+        internal static partial void StitchingTimelapserReleaseHandle(IntPtr timelapser);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_timelapser_initialize")]
+        internal static partial int StitchingTimelapserInitialize(IntPtr timelapser, int[] cornerX, int[] cornerY, int cornerCount, int[] widths, int[] heights, int sizeCount);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_timelapser_process")]
+        internal static partial int StitchingTimelapserProcess(IntPtr timelapser, IntPtr image, IntPtr mask, int topLeftX, int topLeftY);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_timelapser_get_dst")]
+        internal static partial int StitchingTimelapserGetDst(IntPtr timelapser, IntPtr destination);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_overlap_roi")]
+        internal static partial int StitchingOverlapRoi(int firstX, int firstY, int firstWidth, int firstHeight, int secondX, int secondY, int secondWidth, int secondHeight, out StitchingRectNative roi, out int overlaps);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_result_roi_sizes")]
+        internal static partial int StitchingResultRoiSizes(int[] cornerX, int[] cornerY, int cornerCount, int[] widths, int[] heights, int sizeCount, out StitchingRectNative roi);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_result_roi_images")]
+        internal static partial int StitchingResultRoiImages(int[] cornerX, int[] cornerY, int cornerCount, IntPtr[] images, int imageCount, out StitchingRectNative roi);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_result_roi_intersection")]
+        internal static partial int StitchingResultRoiIntersection(int[] cornerX, int[] cornerY, int cornerCount, int[] widths, int[] heights, int sizeCount, out StitchingRectNative roi);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_result_tl")]
+        internal static partial int StitchingResultTl(int[] cornerX, int[] cornerY, int cornerCount, out StitchingPointNative point);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_select_random_subset")]
+        internal static partial int StitchingSelectRandomSubset(int count, int size, int[] subset, int subsetCapacity, out int subsetCount);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_log_level")]
+        internal static partial int StitchingLogLevel(out int level);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_spherical_projector_create")]
+        internal static partial int StitchingSphericalProjectorCreate(float scale, IntPtr cameraMatrix, IntPtr rotationMatrix, IntPtr translation, out IntPtr projector);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_spherical_projector_release_handle")]
+        internal static partial void StitchingSphericalProjectorReleaseHandle(IntPtr projector);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_spherical_projector_map_forward")]
+        internal static partial int StitchingSphericalProjectorMapForward(IntPtr projector, float x, float y, out float u, out float v);
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_stitching_spherical_projector_map_backward")]
+        internal static partial int StitchingSphericalProjectorMapBackward(IntPtr projector, float u, float v, out float x, out float y);
     }
 }
 #endif

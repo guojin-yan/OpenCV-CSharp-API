@@ -6,6 +6,11 @@
 #include <opencv2/stitching/detail/autocalib.hpp>
 #include <opencv2/stitching/detail/matchers.hpp>
 #include <opencv2/stitching/detail/motion_estimators.hpp>
+#include <opencv2/stitching/detail/seam_finders.hpp>
+#include <opencv2/stitching/detail/timelapsers.hpp>
+#include <opencv2/stitching/detail/util.hpp>
+#include <opencv2/stitching/detail/warpers.hpp>
+#include <opencv2/stitching/detail/warpers_inl.hpp>
 #include <opencv2/stitching/warpers.hpp>
 #include <memory>
 #endif
@@ -83,6 +88,34 @@ struct jyppx_ocv_stitching_estimator
     cv::Ptr<cv::detail::Estimator> value;
     cv::Ptr<cv::detail::BundleAdjusterBase> bundle_adjuster;
     bool requires_initial_cameras = false;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_seam_finder
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::Ptr<cv::detail::SeamFinder> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_timelapser
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    cv::Ptr<cv::detail::Timelapser> value;
+#else
+    int placeholder;
+#endif
+};
+
+struct jyppx_ocv_stitching_spherical_projector
+{
+#if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_STITCHING)
+    mutable cv::detail::SphericalProjector value;
+    bool configured = false;
 #else
     int placeholder;
 #endif

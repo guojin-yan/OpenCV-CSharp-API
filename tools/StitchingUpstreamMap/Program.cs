@@ -29,6 +29,14 @@ internal static class Program
         155, 156, 158, 160, 162, 164, 166, 168, 169, 170
     };
     private static readonly HashSet<int> CameraMotion = new(CameraMotionOrdinals);
+    private static readonly int[] SeamFinderOrdinals = { 173, 174, 176, 178, 180, 183, 184, 187, 188 };
+    private static readonly HashSet<int> SeamFinder = new(SeamFinderOrdinals);
+    private static readonly int[] TimelapserOrdinals = { 191, 192, 193, 194 };
+    private static readonly HashSet<int> Timelapser = new(TimelapserOrdinals);
+    private static readonly int[] UtilityOrdinals = { 196, 197, 198, 199, 200, 201, 202 };
+    private static readonly HashSet<int> Utility = new(UtilityOrdinals);
+    private static readonly int[] SphericalProjectorOrdinals = { 205, 206 };
+    private static readonly HashSet<int> SphericalProjector = new(SphericalProjectorOrdinals);
     private static readonly HashSet<int> HighLevel = new(Enumerable.Range(3, 21));
     private static readonly string[] Allowed =
     {
@@ -36,10 +44,10 @@ internal static class Program
     };
     private const string ClaimedSlice = "OpenCV 5.0.0 installed public main Stitching header closure, partitioned by high-level, public-warper, and detail source header";
     private const string BuildCondition = "OPENCV_CSHARP_HAS_OPENCV_STITCHING; full-profile; mini-excluded";
-    private const int NegativeFixtureCount = 28;
-    private const int ManagedTypeAdditions = 10;
-    private const int ManagedMemberAdditions = 22;
-    private const int NativeEntrypointAdditions = 21;
+    private const int NegativeFixtureCount = 32;
+    private const int ManagedTypeAdditions = 14;
+    private const int ManagedMemberAdditions = 38;
+    private const int NativeEntrypointAdditions = 22;
 
     private sealed record Options(string Repository, string Workspace, string Raw, string Classification,
         string NativeManifest, string ManagedBaseline, string Output, string Summary, string FamilyOutput,
@@ -76,7 +84,7 @@ internal static class Program
         public string UpstreamOpenCvVersion { get; set; } = "5.0.0";
         public string ClaimedSlice { get; set; } = Program.ClaimedSlice;
         public string ReviewStatus { get; set; } = "source-reviewed";
-        public string Limitation { get; set; } = "Closure is module-scoped. CUDA execution, callbacks, LightGlue model ownership, remaining retained detail strategies, templates, and repository-wide parity are not claimed.";
+        public string Limitation { get; set; } = "Closure is module-scoped. CUDA execution, callbacks, LightGlue model ownership, templates, and repository-wide parity are not claimed.";
         public List<ClassificationRow> Declarations { get; set; } = new();
     }
 
@@ -147,7 +155,7 @@ internal static class Program
             WriteOrCheck(options.Output, mapping, options.Check);
             WriteOrCheck(options.FamilyOutput, families, options.Check);
             WriteOrCheck(options.Summary, Serialize(summary), options.Check);
-            Console.WriteLine($"STITCHING_UPSTREAM_MAP_OK declarations={summary.DeclarationCount} callables={summary.CallableCount} implemented={counts["implemented"]} missing={counts["missing"]} exposure={Exposure.Count} public_warper={PublicWarper.Count} blender={Blender.Count} fixtures={NegativeFixtureCount} sha256={summary.MappingSha256} mode={(options.Check ? "check" : "write")}");
+            Console.WriteLine($"STITCHING_UPSTREAM_MAP_OK declarations={summary.DeclarationCount} callables={summary.CallableCount} implemented={counts["implemented"]} missing={counts["missing"]} seam={SeamFinder.Count} timelapser={Timelapser.Count} utility={Utility.Count} projector={SphericalProjector.Count} fixtures={NegativeFixtureCount} sha256={summary.MappingSha256} mode={(options.Check ? "check" : "write")}");
             return 0;
         }
         catch (Exception exception)
@@ -184,10 +192,10 @@ internal static class Program
         public int NegativeFixtureCount { get; init; } = Program.NegativeFixtureCount;
         public string FamilyInventoryPath { get; init; } = "";
         public string FamilyInventorySha256 { get; init; } = "";
-        public int SelectedFamilyCount { get; init; } = 5;
-        public int SelectedDeclarationCount { get; init; } = 124;
+        public int SelectedFamilyCount { get; init; } = 9;
+        public int SelectedDeclarationCount { get; init; } = 146;
         public int HighLevelImplementedCallableCount { get; init; } = 21;
-        public int SourceReviewedExtensionCount { get; init; } = 3;
+        public int SourceReviewedExtensionCount { get; init; } = 4;
         public int ManagedPublicTypeAdditionCount { get; init; } = ManagedTypeAdditions;
         public int ManagedPublicMemberAdditionCount { get; init; } = ManagedMemberAdditions;
         public int NativeEntrypointAdditionCount { get; init; } = NativeEntrypointAdditions;
@@ -227,11 +235,19 @@ internal static class Program
                 row.Classification = "unsupported";
                 row.Reason = "LightGlue matching requires an externally supplied ONNX model and an owned cv::LightGlueMatcher lifecycle that this repository does not currently expose; invalid-path construction is not sufficient evidence.";
             }
-            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal) || Matcher.Contains(declaration.Ordinal) || CameraMotion.Contains(declaration.Ordinal))
+            else if (HighLevel.Contains(declaration.Ordinal) || Exposure.Contains(declaration.Ordinal) || PublicWarper.Contains(declaration.Ordinal) || Blender.Contains(declaration.Ordinal) || Matcher.Contains(declaration.Ordinal) || CameraMotion.Contains(declaration.Ordinal) || SeamFinder.Contains(declaration.Ordinal) || Timelapser.Contains(declaration.Ordinal) || Utility.Contains(declaration.Ordinal) || SphericalProjector.Contains(declaration.Ordinal))
             {
                 row.Classification = "implemented";
                 row.Reason = Exposure.Contains(declaration.Ordinal)
                     ? "The selected Exposure Compensation family is implemented through an owned cv::Ptr handle, temporary Mat-to-UMat borrowing, in-place apply, independent gain copies, native smoke, and net8/net10 tests."
+                    : SeamFinder.Contains(declaration.Ordinal)
+                        ? "The complete seam-finder family uses owned strategy handles, strongly typed costs, temporary UMat inputs, and transactional mask commits."
+                    : Timelapser.Contains(declaration.Ordinal)
+                        ? "The complete timelapser family uses owned state, validated placements, borrowed process inputs, and independent CPU destination copies."
+                    : Utility.Contains(declaration.Ordinal)
+                        ? "The complete detail utility family uses checked geometry collections, bounded subset output, and a read-only process-global log query."
+                    : SphericalProjector.Contains(declaration.Ordinal)
+                        ? "The parser-visible spherical mapping methods use an owned source-reviewed camera configuration and copied projector state."
                     : CameraMotion.Contains(declaration.Ordinal)
                         ? "The selected camera and motion-estimator family uses copied camera matrices, owned estimator handles, transactional outputs, exact N-squared collections, strict UTF-8 packing, native smoke, and net8/net10 tests."
                     : PublicWarper.Contains(declaration.Ordinal)
@@ -325,6 +341,24 @@ internal static class Program
             168 => N("stitching_wave_correct"),
             169 => N("stitching_matches_graph_as_string"),
             170 => N("stitching_leave_biggest_component"),
+            173 or 176 or 178 or 180 or 188 => N("stitching_seam_finder_find"),
+            174 => N("stitching_seam_finder_create_default", "stitching_seam_finder_release_handle"),
+            183 => N("stitching_seam_finder_create_dp", "stitching_seam_finder_release_handle"),
+            184 => N("stitching_seam_finder_set_dp_cost"),
+            187 => N("stitching_seam_finder_create_graph_cut", "stitching_seam_finder_release_handle"),
+            191 => N("stitching_timelapser_create_default", "stitching_timelapser_release_handle"),
+            192 => N("stitching_timelapser_initialize"),
+            193 => N("stitching_timelapser_process"),
+            194 => N("stitching_timelapser_get_dst"),
+            196 => N("stitching_overlap_roi"),
+            197 => N("stitching_result_roi_images"),
+            198 => N("stitching_result_roi_sizes"),
+            199 => N("stitching_result_roi_intersection"),
+            200 => N("stitching_result_tl"),
+            201 => N("stitching_select_random_subset"),
+            202 => N("stitching_log_level"),
+            205 => N("stitching_spherical_projector_create", "stitching_spherical_projector_release_handle", "stitching_spherical_projector_map_forward"),
+            206 => N("stitching_spherical_projector_create", "stitching_spherical_projector_release_handle", "stitching_spherical_projector_map_backward"),
             70 => E("create_default"), 71 => E("feed"), 72 or 78 or 84 or 93 or 101 or 116 => E("apply"),
             73 or 79 or 85 or 94 or 102 or 117 => E("get_mat_gains_count", "get_mat_gains_fill"),
             74 or 80 or 86 or 95 or 103 or 118 => E("set_mat_gains"), 75 => E("set_update_gain"), 76 => E("get_update_gain"),
@@ -429,6 +463,24 @@ internal static class Program
             168 => M("StitchingMotion|method|public;static|", "WaveCorrect("),
             169 => M("StitchingMotion|method|public;static|", "MatchesGraphAsString("),
             170 => M("StitchingMotion|method|public;static|", "LeaveBiggestComponent("),
+            173 or 176 or 178 or 180 or 188 => M("SeamFinder|method|public;instance|", " Find("),
+            174 => M("SeamFinder|method|public;static|", " CreateDefault("),
+            183 => M("DpSeamFinder|constructor|", ".ctor(OpenCvSharp.Stitching.DpSeamCost"),
+            184 => M("DpSeamFinder|method|public;instance|", " SetCostFunction("),
+            187 => M("GraphCutSeamFinder|constructor|", ".ctor(OpenCvSharp.Stitching.GraphCutSeamCost"),
+            191 => M("Timelapser|method|public;static|", " CreateDefault("),
+            192 => M("Timelapser|method|public;instance|", " Initialize("),
+            193 => M("Timelapser|method|public;instance|", " Process("),
+            194 => M("Timelapser|method|public;instance|", " GetDestination("),
+            196 => M("StitchingUtilities|method|public;static|", " TryOverlapRoi("),
+            197 => M("StitchingUtilities|method|public;static|", " ResultRoi(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Mat[] images)"),
+            198 => M("StitchingUtilities|method|public;static|", " ResultRoi(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)"),
+            199 => M("StitchingUtilities|method|public;static|", " ResultRoiIntersection("),
+            200 => M("StitchingUtilities|method|public;static|", " ResultTopLeft("),
+            201 => M("StitchingUtilities|method|public;static|", " SelectRandomSubset("),
+            202 => M("StitchingUtilities|property|static;get:public|", " LogLevel"),
+            205 => M("SphericalProjector|method|public;instance|", " MapForward("),
+            206 => M("SphericalProjector|method|public;instance|", " MapBackward("),
             _ => throw new InvalidOperationException("No managed evidence mapping for Stitching ordinal " + ordinal)
         };
         string[] matches = managed.Where(line => fragments.All(fragment => line.Contains(fragment, StringComparison.Ordinal))).ToArray();
@@ -486,8 +538,12 @@ internal static class Program
         Require(Blender.All(x => document.Declarations[x].Classification == "implemented"), "Detail Blender family coverage drifted.");
         Require(Matcher.All(x => document.Declarations[x].Classification == "implemented"), "Detail matcher family coverage drifted.");
         Require(CameraMotion.All(x => document.Declarations[x].Classification == "implemented"), "Camera and motion-estimator family coverage drifted.");
+        Require(SeamFinder.All(x => document.Declarations[x].Classification == "implemented"), "Seam-finder family coverage drifted.");
+        Require(Timelapser.All(x => document.Declarations[x].Classification == "implemented"), "Timelapser family coverage drifted.");
+        Require(Utility.All(x => document.Declarations[x].Classification == "implemented"), "Detail utility family coverage drifted.");
+        Require(SphericalProjector.All(x => document.Declarations[x].Classification == "implemented"), "Spherical projector coverage drifted.");
         Require(MatcherUnsupported.All(x => document.Declarations[x].Classification == "unsupported"), "LightGlue support boundary drifted.");
-        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal) || Matcher.Contains(x.Ordinal) || CameraMotion.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
+        Require(document.Declarations.Where(x => x.Classification == "implemented").All(x => HighLevel.Contains(x.Ordinal) || Exposure.Contains(x.Ordinal) || PublicWarper.Contains(x.Ordinal) || Blender.Contains(x.Ordinal) || Matcher.Contains(x.Ordinal) || CameraMotion.Contains(x.Ordinal) || SeamFinder.Contains(x.Ordinal) || Timelapser.Contains(x.Ordinal) || Utility.Contains(x.Ordinal) || SphericalProjector.Contains(x.Ordinal)), "Stitching implementation partitions were mixed.");
     }
 
     private static void RunNegativeFixtures(RawDocument raw, ClassificationDocument classifications, string[] native, string[] managed, string workspace)
@@ -528,6 +584,10 @@ internal static class Program
         Reject((_, c) => c.Declarations[142].Classification = "implemented");
         Reject((_, c) => c.Declarations[142].Reason = "");
         Reject((_, c) => c.Declarations[140].ManagedMembers.Clear());
+        Reject((_, c) => c.Declarations[173].Classification = "missing");
+        Reject((_, c) => c.Declarations[191].NativeEntrypoints.Clear());
+        Reject((_, c) => c.Declarations[196].ManagedMembers.Clear());
+        Reject((_, c) => c.Declarations[205].Classification = "missing");
         Require(accepted == NegativeFixtureCount, "Stitching negative fixture count drifted.");
     }
 
@@ -616,14 +676,87 @@ internal static class Program
                 FocusedTest = "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs"
             });
         }
+        var seamFinderFamily = new FamilyRow
+        {
+            Id = "stitching-detail-seam-finders-completion",
+            Surface = "detail-seam-finders",
+            Rationale = "Closes all seam-finder callables with owned polymorphic lifetime, strongly typed cost selection, temporary UMat inputs, transactional mutable masks, native smoke, and both-framework tests."
+        };
+        foreach (int ordinal in SeamFinderOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            seamFinderFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/StitchingDetailTests.cs"
+            });
+        }
+        var timelapserFamily = new FamilyRow
+        {
+            Id = "stitching-detail-timelapsers-completion",
+            Surface = "detail-timelapsers",
+            Rationale = "Closes all timelapser callables with owned initialized state, checked placements, exact CV_16SC3 processing, independent CPU destination copies, native smoke, and both-framework tests."
+        };
+        foreach (int ordinal in TimelapserOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            timelapserFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/StitchingDetailTests.cs"
+            });
+        }
+        var utilityFamily = new FamilyRow
+        {
+            Id = "stitching-detail-utilities-completion",
+            Surface = "detail-util",
+            Rationale = "Closes all detail utility callables with checked placement arithmetic, exact ROI values, bounded random-subset output, read-only logging state, native smoke, and both-framework tests."
+        };
+        foreach (int ordinal in UtilityOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            utilityFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/StitchingDetailTests.cs"
+            });
+        }
+        var sphericalProjectorFamily = new FamilyRow
+        {
+            Id = "stitching-detail-spherical-projector-completion",
+            Surface = "detail-warpers",
+            Rationale = "Closes both parser-visible spherical mapping methods through an owned, source-reviewed camera configuration with exact CV_32FC1 matrices, native smoke, and both-framework tests."
+        };
+        foreach (int ordinal in SphericalProjectorOrdinals)
+        {
+            ClassificationRow row = classifications.Declarations[ordinal];
+            sphericalProjectorFamily.Declarations.Add(new FamilyOperation
+            {
+                Ordinal = ordinal,
+                UpstreamIdentity = raw.Declarations[ordinal].Identity,
+                NativeEntrypoints = row.NativeEntrypoints,
+                ManagedMembers = row.ManagedMembers,
+                FocusedTest = "tests/OpenCvSharp.Tests/Stitching/StitchingDetailTests.cs"
+            });
+        }
         return new FamilyDocument
         {
-            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily, matcherFamily, cameraMotionFamily },
+            Families = new List<FamilyRow> { family, publicWarperFamily, blenderFamily, matcherFamily, cameraMotionFamily, seamFinderFamily, timelapserFamily, utilityFamily, sphericalProjectorFamily },
             SourceReviewedExtensions = new List<SourceReviewedExtension>
             {
                 new() { UpstreamIdentity = "cv::detail::NoExposureCompensator default construction", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/exposure_compensate.hpp", Adaptation = "Adds an explicit owned managed no-op constructor; the parser emits its inherited operations but not its implicit default constructor.", NativeEntrypoints = E("create_no"), ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.NoExposureCompensator|constructor|public;instance|.ctor()" } },
                 new() { UpstreamIdentity = "cv::Stitcher::waveCorrectKind/setWaveCorrectKind", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp", Adaptation = "Source-reviewed high-level property pair omitted by hdr_parser and kept outside parser-derived counts.", NativeEntrypoints = new() { "jyppx_ocv_stitcher_get_int_property", "jyppx_ocv_stitcher_set_int_property" }, ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.Stitcher|property|instance;get:public;set:public|OpenCvSharp.Stitching.WaveCorrectKind WaveCorrectKind" } },
-                new() { UpstreamIdentity = "cv::Stitcher::resultMask", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp", Adaptation = "Copies the source-reviewed internal result mask into caller-owned or newly allocated managed Mat storage.", NativeEntrypoints = new() { "jyppx_ocv_stitcher_get_result_mask" }, ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Core.Mat GetResultMask()", "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|System.Void GetResultMask(OpenCvSharp.Core.Mat resultMask)" } }
+                new() { UpstreamIdentity = "cv::Stitcher::resultMask", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching.hpp", Adaptation = "Copies the source-reviewed internal result mask into caller-owned or newly allocated managed Mat storage.", NativeEntrypoints = new() { "jyppx_ocv_stitcher_get_result_mask" }, ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|OpenCvSharp.Core.Mat GetResultMask()", "MEMBER|OpenCvSharp.Stitching.Stitcher|method|public;instance|System.Void GetResultMask(OpenCvSharp.Core.Mat resultMask)" } },
+                new() { UpstreamIdentity = "cv::detail::ProjectorBase::setCameraParams plus SphericalProjector scale configuration", SourceHeader = "opencv-source/opencv-5.0.0/modules/stitching/include/opencv2/stitching/detail/warpers.hpp", Adaptation = "Adds an owned configured projector constructor so parser-visible mapping methods cannot observe uninitialized scale or camera arrays.", NativeEntrypoints = new() { "jyppx_ocv_stitching_spherical_projector_create", "jyppx_ocv_stitching_spherical_projector_release_handle" }, ManagedMembers = new() { "MEMBER|OpenCvSharp.Stitching.SphericalProjector|constructor|public;instance|.ctor(System.Single scale,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.Core.Mat? translation=null)" } }
             }
         };
         static List<string> E(params string[] suffixes) => suffixes.Select(x => "jyppx_ocv_stitching_exposure_" + x).ToList();

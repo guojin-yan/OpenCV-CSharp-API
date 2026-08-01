@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=598
-member-count=6270
+type-count=612
+member-count=6308
 namespace-count=41
 nullable-shape=included
 
@@ -27,6 +27,8 @@ TYPE|class|public;abstract|OpenCvSharp.Stitching.BundleAdjusterBase|base=OpenCvS
 TYPE|class|public;abstract|OpenCvSharp.Stitching.Estimator|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Stitching.ExposureCompensator|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Stitching.FeaturesMatcher|base=|interfaces=System.IDisposable
+TYPE|class|public;abstract|OpenCvSharp.Stitching.PairwiseSeamFinder|base=OpenCvSharp.Stitching.SeamFinder|interfaces=System.IDisposable
+TYPE|class|public;abstract|OpenCvSharp.Stitching.SeamFinder|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.StructuredLight.StructuredLightPattern|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Video.BackgroundSubtractor|base=|interfaces=System.IDisposable
 TYPE|class|public;abstract|OpenCvSharp.Video.DenseOpticalFlow|base=|interfaces=System.IDisposable
@@ -197,17 +199,23 @@ TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterAffine|base=OpenCvS
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterRay|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.BundleAdjusterReproj|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.ChannelsCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.DpSeamFinder|base=OpenCvSharp.Stitching.SeamFinder|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.FeatherBlender|base=OpenCvSharp.Stitching.Blender|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.GainCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.GraphCutSeamFinder|base=OpenCvSharp.Stitching.SeamFinder|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.HomographyBasedEstimator|base=OpenCvSharp.Stitching.Estimator|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.ImageFeatures|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.MatchesInfo|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.MultiBandBlender|base=OpenCvSharp.Stitching.Blender|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.NoBundleAdjuster|base=OpenCvSharp.Stitching.BundleAdjusterBase|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.NoExposureCompensator|base=OpenCvSharp.Stitching.ExposureCompensator|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.NoSeamFinder|base=OpenCvSharp.Stitching.SeamFinder|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.PyRotationWarper|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.SphericalProjector|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.Stitching.StitcherCameraParams|base=|interfaces=
 TYPE|class|public;sealed|OpenCvSharp.Stitching.Stitcher|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.TimelapserCrop|base=OpenCvSharp.Stitching.Timelapser|interfaces=System.IDisposable
+TYPE|class|public;sealed|OpenCvSharp.Stitching.VoronoiSeamFinder|base=OpenCvSharp.Stitching.PairwiseSeamFinder|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.StructuredLight.GrayCodePattern|base=OpenCvSharp.StructuredLight.StructuredLightPattern|interfaces=System.IDisposable
 TYPE|class|public;sealed|OpenCvSharp.StructuredLight.SinusoidalPatternParams|base=|interfaces=
 TYPE|class|public;sealed|OpenCvSharp.StructuredLight.SinusoidalPattern|base=OpenCvSharp.StructuredLight.StructuredLightPattern|interfaces=System.IDisposable
@@ -295,6 +303,7 @@ TYPE|class|public;static|OpenCvSharp.Rapid.RapidCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Reg.RegCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Shape.ShapeCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Stitching.StitchingMotion|base=|interfaces=
+TYPE|class|public;static|OpenCvSharp.Stitching.StitchingUtilities|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.StructuredLight.StructuredLightCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.SurfaceMatching.SurfaceMatchingCv2|base=|interfaces=
 TYPE|class|public;static|OpenCvSharp.Video.Cv2|base=|interfaces=
@@ -319,6 +328,7 @@ TYPE|class|public|OpenCvSharp.Reg.RegMap|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Saliency.Saliency|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Saliency.StaticSaliency|base=OpenCvSharp.Saliency.Saliency|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Stitching.Blender|base=|interfaces=System.IDisposable
+TYPE|class|public|OpenCvSharp.Stitching.Timelapser|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Tracking.Legacy.LegacyTracker|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.Tracking.Tracker|base=|interfaces=System.IDisposable
 TYPE|class|public|OpenCvSharp.XImgProc.SelectiveSearchSegmentationStrategy|base=|interfaces=System.IDisposable
@@ -478,9 +488,13 @@ TYPE|enum|public|OpenCvSharp.PtCloud.RgbdNormalsMethod|base=|interfaces=System.I
 TYPE|enum|public|OpenCvSharp.PtCloud.RgbdPlaneMethod|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Reg.RegMapKind|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.BlenderType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.Stitching.DpSeamCost|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.ExposureCompensatorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.Stitching.GraphCutSeamCost|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.Stitching.SeamFinderType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.StitcherMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.StitcherStatus|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|OpenCvSharp.Stitching.TimelapserType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.Stitching.WaveCorrectKind|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.StructuredLight.SinusoidalPatternMethod|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|OpenCvSharp.SurfaceMatching.IcpSamplingType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -5444,6 +5458,11 @@ MEMBER|OpenCvSharp.Stitching.BundleAdjusterReproj|constructor|public;instance|.c
 MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)
 MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
 MEMBER|OpenCvSharp.Stitching.ChannelsCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
+MEMBER|OpenCvSharp.Stitching.DpSeamCost|field|public;const|OpenCvSharp.Stitching.DpSeamCost Color=0
+MEMBER|OpenCvSharp.Stitching.DpSeamCost|field|public;const|OpenCvSharp.Stitching.DpSeamCost ColorGradient=1
+MEMBER|OpenCvSharp.Stitching.DpSeamCost|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.Stitching.DpSeamFinder|constructor|public;instance|.ctor(OpenCvSharp.Stitching.DpSeamCost cost=Color)
+MEMBER|OpenCvSharp.Stitching.DpSeamFinder|method|public;instance|System.Void SetCostFunction(OpenCvSharp.Stitching.DpSeamCost cost)
 MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,OpenCvSharp.Stitching.StitcherCameraParams[]? initialCameras,out OpenCvSharp.Stitching.StitcherCameraParams[] cameras)
 MEMBER|OpenCvSharp.Stitching.Estimator|method|public;instance|System.Boolean Apply(OpenCvSharp.Stitching.ImageFeatures[] features,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,out OpenCvSharp.Stitching.StitcherCameraParams[] cameras)
@@ -5474,6 +5493,10 @@ MEMBER|OpenCvSharp.Stitching.FeaturesMatcher|property|instance;get:public|System
 MEMBER|OpenCvSharp.Stitching.GainCompensator|constructor|public;instance|.ctor(System.Int32 numberOfFeeds=1)
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Double SimilarityThreshold
 MEMBER|OpenCvSharp.Stitching.GainCompensator|property|instance;get:public;set:public|System.Int32 NumberOfFeeds
+MEMBER|OpenCvSharp.Stitching.GraphCutSeamCost|field|public;const|OpenCvSharp.Stitching.GraphCutSeamCost Color=0
+MEMBER|OpenCvSharp.Stitching.GraphCutSeamCost|field|public;const|OpenCvSharp.Stitching.GraphCutSeamCost ColorGradient=1
+MEMBER|OpenCvSharp.Stitching.GraphCutSeamCost|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.Stitching.GraphCutSeamFinder|constructor|public;instance|.ctor(OpenCvSharp.Stitching.GraphCutSeamCost cost=ColorGradient,System.Single terminalCost=10000,System.Single badRegionPenalty=1000)
 MEMBER|OpenCvSharp.Stitching.HomographyBasedEstimator|constructor|public;instance|.ctor(System.Boolean focalLengthsEstimated=false)
 MEMBER|OpenCvSharp.Stitching.ImageFeatures|constructor|public;instance|.ctor(System.Int32 imageIndex,OpenCvSharp.Core.Size imageSize,OpenCvSharp.Features2D.KeyPoint[] keypoints,OpenCvSharp.Core.Mat descriptors)
 MEMBER|OpenCvSharp.Stitching.ImageFeatures|method|public;instance;sealed-override|System.Void Dispose()
@@ -5511,6 +5534,19 @@ MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|OpenCvSharp
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|method|public;instance|System.Void WarpBackward(OpenCvSharp.Core.Mat source,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.ImgProc.InterpolationFlags interpolationMode,OpenCvSharp.ImgProc.BorderTypes borderMode,OpenCvSharp.Core.Size destinationSize,OpenCvSharp.Core.Mat destination)
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public;set:public|System.Single Scale
 MEMBER|OpenCvSharp.Stitching.PyRotationWarper|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.Stitching.SeamFinderType|field|public;const|OpenCvSharp.Stitching.SeamFinderType DynamicProgramming=2
+MEMBER|OpenCvSharp.Stitching.SeamFinderType|field|public;const|OpenCvSharp.Stitching.SeamFinderType None=0
+MEMBER|OpenCvSharp.Stitching.SeamFinderType|field|public;const|OpenCvSharp.Stitching.SeamFinderType Voronoi=1
+MEMBER|OpenCvSharp.Stitching.SeamFinderType|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.Stitching.SeamFinder|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|OpenCvSharp.Stitching.SeamFinder|method|public;instance|System.Void Find(OpenCvSharp.Core.Mat[] images,OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Mat[] masks)
+MEMBER|OpenCvSharp.Stitching.SeamFinder|method|public;static|OpenCvSharp.Stitching.SeamFinder CreateDefault(OpenCvSharp.Stitching.SeamFinderType type)
+MEMBER|OpenCvSharp.Stitching.SeamFinder|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|OpenCvSharp.Stitching.SphericalProjector|constructor|public;instance|.ctor(System.Single scale,OpenCvSharp.Core.Mat cameraMatrix,OpenCvSharp.Core.Mat rotationMatrix,OpenCvSharp.Core.Mat? translation=null)
+MEMBER|OpenCvSharp.Stitching.SphericalProjector|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|OpenCvSharp.Stitching.SphericalProjector|method|public;instance|OpenCvSharp.Core.Point2f MapBackward(OpenCvSharp.Core.Point2f point)
+MEMBER|OpenCvSharp.Stitching.SphericalProjector|method|public;instance|OpenCvSharp.Core.Point2f MapForward(OpenCvSharp.Core.Point2f point)
+MEMBER|OpenCvSharp.Stitching.SphericalProjector|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|constructor|public;instance|.ctor(OpenCvSharp.Stitching.StitcherCameraParams other)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|constructor|public;instance|.ctor(System.Double focal,System.Double aspect,System.Double ppx,System.Double ppy,OpenCvSharp.Core.Mat rotation,OpenCvSharp.Core.Mat translation)
 MEMBER|OpenCvSharp.Stitching.StitcherCameraParams|method|public;instance;override|System.String ToString()
@@ -5564,6 +5600,22 @@ MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Int32[]
 MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.String MatchesGraphAsString(System.String[] paths,OpenCvSharp.Stitching.MatchesInfo[] pairwiseMatches,System.Single confidenceThreshold)
 MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void FocalsFromHomography(OpenCvSharp.Core.Mat homography,out System.Double focalX,out System.Double focalY,out System.Boolean focalXEstimated,out System.Boolean focalYEstimated)
 MEMBER|OpenCvSharp.Stitching.StitchingMotion|method|public;static|System.Void WaveCorrect(OpenCvSharp.Core.Mat[] rotationMatrices,OpenCvSharp.Stitching.WaveCorrectKind correctionKind)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|method|public;static|OpenCvSharp.Core.Point ResultTopLeft(OpenCvSharp.Core.Point[] corners)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|method|public;static|OpenCvSharp.Core.Rect ResultRoi(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Mat[] images)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|method|public;static|OpenCvSharp.Core.Rect ResultRoi(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|method|public;static|OpenCvSharp.Core.Rect ResultRoiIntersection(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|method|public;static|System.Boolean TryOverlapRoi(OpenCvSharp.Core.Rect first,OpenCvSharp.Core.Rect second,out OpenCvSharp.Core.Rect roi)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|method|public;static|System.Int32[] SelectRandomSubset(System.Int32 count,System.Int32 size)
+MEMBER|OpenCvSharp.Stitching.StitchingUtilities|property|static;get:public|System.Int32 LogLevel
+MEMBER|OpenCvSharp.Stitching.TimelapserType|field|public;const|OpenCvSharp.Stitching.TimelapserType AsIs=0
+MEMBER|OpenCvSharp.Stitching.TimelapserType|field|public;const|OpenCvSharp.Stitching.TimelapserType Crop=1
+MEMBER|OpenCvSharp.Stitching.TimelapserType|field|public;instance|System.Int32 value__
+MEMBER|OpenCvSharp.Stitching.Timelapser|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|OpenCvSharp.Stitching.Timelapser|method|public;instance|OpenCvSharp.Core.Mat GetDestination()
+MEMBER|OpenCvSharp.Stitching.Timelapser|method|public;instance|System.Void Initialize(OpenCvSharp.Core.Point[] corners,OpenCvSharp.Core.Size[] sizes)
+MEMBER|OpenCvSharp.Stitching.Timelapser|method|public;instance|System.Void Process(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? mask,OpenCvSharp.Core.Point topLeft)
+MEMBER|OpenCvSharp.Stitching.Timelapser|method|public;static|OpenCvSharp.Stitching.Timelapser CreateDefault(OpenCvSharp.Stitching.TimelapserType type)
+MEMBER|OpenCvSharp.Stitching.Timelapser|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|OpenCvSharp.Stitching.WaveCorrectKind|field|public;const|OpenCvSharp.Stitching.WaveCorrectKind Auto=2
 MEMBER|OpenCvSharp.Stitching.WaveCorrectKind|field|public;const|OpenCvSharp.Stitching.WaveCorrectKind Horizontal=0
 MEMBER|OpenCvSharp.Stitching.WaveCorrectKind|field|public;const|OpenCvSharp.Stitching.WaveCorrectKind Vertical=1
