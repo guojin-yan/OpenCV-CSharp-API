@@ -174,7 +174,7 @@ foreach ($token in @(
         'Get-FileHash -LiteralPath $downloadPath -Algorithm SHA256',
         '$maximumDownloadAttempts = 4',
         'for ($attempt = 1; $attempt -le $maximumDownloadAttempts; $attempt++)',
-        '@("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "objdetect", "photo", "video")',
+        '@("imgproc", "imgcodecs", "videoio", "calib3d", "core", "dnn", "features", "highgui", "objdetect", "photo", "video")',
         '@("ml", "tracking", "stitching")',
         'opencv-source/opencv-5.0.0/',
         'opencv-source/opencv_contrib-5.0.0/')) {
