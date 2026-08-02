@@ -185,6 +185,8 @@ $openCvSourceDir = Join-Path $temporaryRoot "opencv-source"
 $openCvInstallDir = Join-Path $temporaryRoot "opencv-install"
 $outputRoot = Join-Path $temporaryRoot "staging-output"
 $runtimeProjectDir = Join-Path $temporaryRoot "runtime-package-project"
+$miniOutputRoot = Join-Path $temporaryRoot "mini-staging-output"
+$miniRuntimeProjectDir = Join-Path $temporaryRoot "mini-runtime-package-project"
 $releasePackStageOutputRoot = Join-Path $temporaryRoot "release-pack-stage-output"
 $releasePackOutputDir = Join-Path $temporaryRoot "release-package-output"
 $releasePackProjectDir = Join-Path $temporaryRoot "release-pack-runtime-package-project"
@@ -194,6 +196,7 @@ $negativePackStageOutputRoot = Join-Path $temporaryRoot "negative-pack-stage-out
 $rid = "win-x64"
 $runtimeProfile = "full"
 $packageId = "JYPPX.OpenCV.runtime.win-x64"
+$miniPackageId = "JYPPX.OpenCV.runtime.win-x64.mini"
 $packageFileName = "$packageId.5.0.0.nupkg"
 $packageVersion = "5.0.0.0"
 $openCvVersion = "5.0.0"
@@ -212,11 +215,13 @@ try {
             (Join-Path $openCvSourceDir "3rdparty/ippicv"),
             (Join-Path $openCvInstallDir "etc/licenses"),
             $outputRoot,
+            $miniOutputRoot,
             $releasePackStageOutputRoot,
             $releasePackOutputDir,
             $negativePackOutputDir,
             $negativePackStageOutputRoot,
-            $runtimeProjectDir)) {
+            $runtimeProjectDir,
+            $miniRuntimeProjectDir)) {
         New-Item -ItemType Directory -Force -Path $directory | Out-Null
     }
 
@@ -264,6 +269,40 @@ try {
     )
     if ($preflightResult.ExitCode -ne 0) {
         Add-Violation -Violations $violations -Path $preflightPath -Issue "Release-shaped runtime preflight should pass" -Text $preflightResult.Output
+    }
+
+    $miniStageResult = Invoke-ChildPwsh -Arguments @(
+        "-NoProfile",
+        "-File", $stageRuntimePath,
+        "-Rid", $rid,
+        "-RuntimeProfile", "mini",
+        "-Configuration", "Release",
+        "-OpenCvNativeRuntimeDir", $nativeWrapperRuntimeDir,
+        "-OpenCvRuntimeDir", $openCvRuntimeDir,
+        "-OpenCvSourceDir", $openCvSourceDir,
+        "-OpenCvInstallDir", $openCvInstallDir,
+        "-OutputRoot", $miniOutputRoot,
+        "-RuntimeProject", $miniRuntimeProjectDir,
+        "-RuntimePackageId", $miniPackageId,
+        "-PackageVersion", $packageVersion
+    )
+    if ($miniStageResult.ExitCode -ne 0) {
+        Add-Violation -Violations $violations -Path $stageRuntimePath -Issue "Mini release-shaped staging fixture failed" -Text $miniStageResult.Output
+    }
+
+    $miniPreflightResult = Invoke-ChildPwsh -Arguments @(
+        "-NoProfile",
+        "-File", $preflightPath,
+        "-RepositoryRoot", $repo,
+        "-RuntimeProject", $miniRuntimeProjectDir,
+        "-Rid", $rid,
+        "-RuntimeProfile", "mini",
+        "-RuntimePackageId", $miniPackageId,
+        "-PackageVersion", $packageVersion,
+        "-OpenCvVersion", $openCvVersion
+    )
+    if ($miniPreflightResult.ExitCode -ne 0) {
+        Add-Violation -Violations $violations -Path $preflightPath -Issue "Mini runtime preflight should accept empty optional-module collections" -Text $miniPreflightResult.Output
     }
 
     $staleNativeFile = Join-Path $runtimeProjectDir "runtimes/$rid/native/stale-opencv-file.dll"
@@ -450,4 +489,5 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Runtime release-candidate preflight guard passed."
 Write-Host "Release-shaped manifests pass; Pack-Runtime -RequireReleasePreflight produces a package only for non-synthetic staged inputs."
+Write-Host "Mini release-shaped manifests accept empty optional-module collections."
 Write-Host "Synthetic manifests and stale mirrors are rejected by default."

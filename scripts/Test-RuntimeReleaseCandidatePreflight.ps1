@@ -217,16 +217,18 @@ function Get-ExpectedNativeLoaderNames {
 
 function Test-StringSequenceEqual {
     param(
-        [Parameter(Mandatory = $true)][string[]]$Actual,
-        [Parameter(Mandatory = $true)][string[]]$Expected
+        [Parameter(Mandatory = $true)][AllowNull()][AllowEmptyCollection()][string[]]$Actual,
+        [Parameter(Mandatory = $true)][AllowNull()][AllowEmptyCollection()][string[]]$Expected
     )
 
-    if ($Actual.Count -ne $Expected.Count) {
+    $actualValues = @($Actual | Where-Object { $null -ne $_ })
+    $expectedValues = @($Expected | Where-Object { $null -ne $_ })
+    if ($actualValues.Count -ne $expectedValues.Count) {
         return $false
     }
 
-    for ($i = 0; $i -lt $Expected.Count; $i++) {
-        if (-not $Actual[$i].Equals($Expected[$i], [System.StringComparison]::Ordinal)) {
+    for ($i = 0; $i -lt $expectedValues.Count; $i++) {
+        if (-not $actualValues[$i].Equals($expectedValues[$i], [System.StringComparison]::Ordinal)) {
             return $false
         }
     }
@@ -236,17 +238,17 @@ function Test-StringSequenceEqual {
 
 function Test-StringSetEqual {
     param(
-        [Parameter(Mandatory = $true)][string[]]$Actual,
-        [Parameter(Mandatory = $true)][string[]]$Expected
+        [Parameter(Mandatory = $true)][AllowNull()][AllowEmptyCollection()][string[]]$Actual,
+        [Parameter(Mandatory = $true)][AllowNull()][AllowEmptyCollection()][string[]]$Expected
     )
 
     $actualSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
-    foreach ($item in $Actual) {
+    foreach ($item in @($Actual | Where-Object { $null -ne $_ })) {
         [void]$actualSet.Add($item)
     }
 
     $expectedSet = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
-    foreach ($item in $Expected) {
+    foreach ($item in @($Expected | Where-Object { $null -ne $_ })) {
         [void]$expectedSet.Add($item)
     }
 
