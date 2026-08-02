@@ -15,13 +15,13 @@ body:
     attributes:
       label: Managed package version
       description: Version of JYPPX.OpenCV.CSharp.API.
-      placeholder: JYPPX.OpenCV.CSharp.API 5.0.0.0
+      placeholder: JYPPX.OpenCV.CSharp.API 5.0.0-preview.1
   - type: input
     id: runtime_package_version
     attributes:
       label: Runtime package version
       description: Runtime package ID and version, if a native runtime package is installed. Use JYPPX.OpenCV.runtime.<rid> for the full target RID/profile or JYPPX.OpenCV.runtime.<rid>.mini for the mini target RID/profile; the placeholder is the current Windows x64 example. If no matching runtime package is available yet, include the local native runtime path from Build-OpenCV.ps1 / Stage-Runtime.ps1 and any OpenCvNativeRuntimeDir value used. See docs/articles/linked-runtime-build-guide.md and docs/articles/linked-runtime-smoke-guide.md.
-      placeholder: JYPPX.OpenCV.runtime.win-x64 5.0.0.0
+      placeholder: JYPPX.OpenCV.runtime.win-x64 5.0.0-preview.1
   - type: textarea
     id: repro
     attributes:

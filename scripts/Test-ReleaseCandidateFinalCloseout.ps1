@@ -410,7 +410,7 @@ function Test-Record {
 
     $expectedMethods = @("GET", "HEAD")
     Assert-True -List $List -Condition ($Record.PublicFeed.Mode -eq "read-only" -and $Record.PublicFeed.ServiceIndex -eq "https://api.nuget.org/v3/index.json") -Issue "Final closeout public-feed mode or service index drifted"
-    Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0.0/jyppx.opencv.csharp.api.5.0.0.0.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
+    Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
     Assert-True -List $List -Condition ((@($Record.PublicFeed.Methods) -join ",") -eq ($expectedMethods -join ",")) -Issue "Final closeout public-feed method list drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PublicFeed.Mutable -and $Record.PublicFeed.CandidateStatus -eq "not-published" -and -not [bool]$Record.PublicFeed.UploadAttempted) -Issue "Final closeout public-feed state is not immutable and not-published"
     Assert-True -List $List -Condition ($Record.Rollback.Status -eq "not-published" -and -not [bool]$Record.Rollback.PackageRemovalRequired -and $Record.ReleaseApproval.Status -eq "not-approved" -and -not [bool]$Record.ReleaseApproval.ReleaseReady -and $Record.ReleaseApproval.PublicationDecision -eq "do-not-publish") -Issue "Final closeout rollback or publication decision drifted"

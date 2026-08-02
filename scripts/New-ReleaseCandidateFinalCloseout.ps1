@@ -809,7 +809,7 @@ function Get-Record {
         PublicFeed = [ordered]@{
             Mode = "read-only"
             ServiceIndex = "https://api.nuget.org/v3/index.json"
-            CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0.0/jyppx.opencv.csharp.api.5.0.0.0.nupkg"
+            CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg"
             Methods = @("GET", "HEAD")
             Mutable = $false
             CandidateStatus = "not-published"

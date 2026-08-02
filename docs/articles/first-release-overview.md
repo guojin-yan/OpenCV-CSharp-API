@@ -39,13 +39,13 @@ See [API And ABI Compatibility Policy](api-abi-compatibility-policy.md) for the 
 
 ## Install Shape / 安装方式
 
-Applications reference the managed API package and one runtime package with the same four-part version. Choose the exact RID and either the full or mini profile.
+Applications reference the managed API package and one runtime package with the same normalized NuGet version. Choose the exact RID and either the full or mini profile. The first public candidate is `5.0.0-preview.1`; it remains a preview until publication authorization and public-feed verification are complete.
 
-应用需要引用相同四段版本的 managed API 包与一个 runtime 包，并选择精确 RID 以及 full 或 mini profile。
+应用需要引用相同 NuGet 规范版本的 managed API 包与一个 runtime 包，并选择精确 RID 以及 full 或 mini profile。首个公开候选版本为 `5.0.0-preview.1`；在发布授权和公共源验证完成前，其状态仍为 preview。
 
 ```powershell
-dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0.0
-dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0.0
+dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
+dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1
 ```
 
 The mini profile targets common `core,imgproc,imgcodecs,videoio` workflows and their OpenCV 5 geometry/flann runtime dependencies. DNN, calibration, features, photo, HighGui, and other extended modules require full. Runtime availability and support claims are governed by [Support And Lifecycle Policy](support-lifecycle-policy.md), not merely by the existence of a package ID.

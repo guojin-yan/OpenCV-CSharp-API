@@ -11,7 +11,7 @@ $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $runtimePackageShape = "$runtimePackagePrefix.<rid>"
 $runtimeMiniPackageShape = "$runtimePackagePrefix.<rid>.mini"
 $currentWindowsRuntimePackage = "$runtimePackagePrefix.win-x64"
-$examplePackageVersion = "5.0.0.0"
+$examplePackageVersion = "5.0.0-preview.1"
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
 $compatibilityRuntimeProperty = "Open" + "Cv5SharpNativeRuntimeDir"
 
@@ -134,10 +134,10 @@ Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartT
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "target RID" -Issue "Quick Start must tell consumers to choose the runtime package for their target RID"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "no matching" -Issue "Quick Start must keep no-matching-runtime-package fallback guidance visible"
 Assert-Matches -Violations $violations -Path $quickStartPath -Text $quickStartText -Pattern "win-x64.*example|example.*win-x64" -Issue "Quick Start must label win-x64 as an example RID"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same four-part package version metadata" -Issue "Quick Start must explain managed/runtime package version alignment"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same normalized NuGet package version" -Issue "Quick Start must explain managed/runtime package version alignment"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
-    "dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--version\s+(?<Version>\d+\.\d+\.\d+\.\d+)",
+    "dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--version\s+(?<Version>\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9a-z-]+(?:\.[0-9a-z-]+)*)?)",
     [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 $installMatches = @($installRegex.Matches($quickStartText))
 if ($installMatches.Count -ne 2) {

@@ -124,6 +124,7 @@ else {
     $expectedDispatchInputNames = @(
         "opencv_version",
         "package_revision",
+        "package_version",
         "rid",
         "runtime_profile",
         "validate_synthetic_runtime",
@@ -133,12 +134,12 @@ else {
         "real_runtime_artifact_run_id",
         "publish_github_packages"
     )
-    if ($dispatchInputNames.Count -ne 10 -or
+    if ($dispatchInputNames.Count -ne 11 -or
         (Compare-Object -ReferenceObject $expectedDispatchInputNames -DifferenceObject $dispatchInputNames)) {
         Add-Violation `
             -Violations $violations `
             -Path $packWorkflowPath `
-            -Issue "pack.yml workflow_dispatch must retain exactly the ten supported inputs allowed by GitHub"
+            -Issue "pack.yml workflow_dispatch must retain exactly the eleven supported inputs allowed by GitHub" `
             -Text ($dispatchInputNames -join ", ")
     }
 }

@@ -203,7 +203,7 @@ pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0
 
 The `./build/native-opencv-core/Release` path in the example is the current local native wrapper build-output location, not a package identity or a new generic naming pattern.
 
-`Pack-Runtime.ps1` derives the four-part package version from `-OpenCvVersion` plus `-PackageRevision`; `-PackageVersion` remains accepted only as an explicit version-metadata compatibility override, not as a package identity or naming surface. The script uses `-OpenCvNativeRuntimeDir` as the preferred version-neutral native wrapper runtime path/staging parameter; the older `-NativeRuntimeDir` remains accepted only as an existing-packaging-script compatibility alias. It forwards version-neutral OpenCV path parameters such as `-OpenCvRuntimeDir`, `-OpenCvInstallDir`, `-OpenCvSourceDir`, `-OpenCvSourceRoot`, `-OpenCvInstallRoot`, and `-OpenCvRuntimeVersionSuffix` to `Stage-Runtime.ps1` when `-StageRuntime` is set.
+`Pack-Runtime.ps1` derives a stable four-part package version from `-OpenCvVersion` plus `-PackageRevision`. Pass `-PackageVersion 5.0.0.0-preview.1` for the first preview channel; the shared version contract rejects malformed labels, build metadata, missing revision components, and OpenCV/revision mismatches. The script uses `-OpenCvNativeRuntimeDir` as the preferred version-neutral native wrapper runtime path/staging parameter; the older `-NativeRuntimeDir` remains accepted only as an existing-packaging-script compatibility alias. It forwards version-neutral OpenCV path parameters such as `-OpenCvRuntimeDir`, `-OpenCvInstallDir`, `-OpenCvSourceDir`, `-OpenCvSourceRoot`, `-OpenCvInstallRoot`, and `-OpenCvRuntimeVersionSuffix` to `Stage-Runtime.ps1` when `-StageRuntime` is set.
 
 `-RuntimeProject` accepts repository-relative or absolute runtime project paths. An absolute `-RuntimeProject` is accepted as-is and can point outside the repository when the caller chooses that layout.
 
@@ -221,11 +221,11 @@ The managed and runtime package IDs stay version-neutral; the default package ou
 
 managed 与 runtime package IDs 保持版本中立；默认包输出目录保持 `artifacts\packages`，release 检查把该目录中规范化后的 `.nupkg` 文件视为包产物证据。
 
-The runtime package ID stays version-neutral; the OpenCV runtime identity is expressed through package version metadata derived from `-OpenCvVersion` plus `-PackageRevision`. The pack scripts keep that package version metadata contract while checking the normalized `.nupkg` artifact file name that NuGet writes, for example `5.0.0.0` becomes `5.0.0` in the package file name.
+The runtime package ID stays version-neutral; the OpenCV runtime identity is expressed through the strict four-part pack input. The pack scripts canonicalize the consumer-facing NuGet identity and `.nupkg` file name: `5.0.0.0` becomes `5.0.0`, while `5.0.0.0-preview.1` becomes `5.0.0-preview.1`.
 
-Runtime package ID 保持版本中立；OpenCV runtime 身份通过由 `-OpenCvVersion` 加 `-PackageRevision` 推导出的 package version 元数据表达。打包脚本保持该 package version 元数据契约，同时检查 NuGet 实际写出的规范化 `.nupkg` 产物文件名；例如 `5.0.0.0` 在包文件名中会变成 `5.0.0`。
+Runtime package ID 保持版本中立；OpenCV runtime 身份由严格的四段打包输入表达。打包脚本会规范化消费者可见的 NuGet 身份和 `.nupkg` 文件名：`5.0.0.0` 变为 `5.0.0`，`5.0.0.0-preview.1` 变为 `5.0.0-preview.1`。
 
-Use the managed package `JYPPX.OpenCV.CSharp.API` and the matching runtime package `JYPPX.OpenCV.runtime.<rid>` together on the same four-part package version metadata so their OpenCV runtime identity stays aligned.
+Use the managed package `JYPPX.OpenCV.CSharp.API` and the matching runtime package `JYPPX.OpenCV.runtime.<rid>` together on the same normalized NuGet package version so their OpenCV runtime identity stays aligned.
 
 managed 主包 `JYPPX.OpenCV.CSharp.API` 和匹配的 runtime 包 `JYPPX.OpenCV.runtime.<rid>` 应使用相同的四段 package version 元数据，以保持 OpenCV runtime 身份一致。
 

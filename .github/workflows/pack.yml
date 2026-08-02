@@ -11,6 +11,10 @@ on:
         description: Package revision for this OpenCV version
         required: true
         default: "0"
+      package_version:
+        description: Exact four-part package version with optional lowercase prerelease suffix
+        required: true
+        default: 5.0.0.0-preview.1
       rid:
         description: Runtime identifier to pack; use all for the configured matrix
         required: true
@@ -63,6 +67,19 @@ jobs:
         if: ${{ inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
         shell: pwsh
         run: throw "Publishing packages requires real native runtime inputs; synthetic runtime inputs validate package shape only."
+      - name: Validate package version
+        shell: pwsh
+        env:
+          PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
+          OPENCV_VERSION_INPUT: ${{ inputs.opencv_version }}
+          PACKAGE_REVISION_INPUT: ${{ inputs.package_revision }}
+        run: |
+          . ./scripts/PackageVersion.ps1
+          $packageRevision = [int]$env:PACKAGE_REVISION_INPUT
+          Assert-OpenCvCSharpPackageVersion `
+            -Version $env:PACKAGE_VERSION_INPUT `
+            -OpenCvVersion $env:OPENCV_VERSION_INPUT `
+            -PackageRevision $packageRevision | Out-Null
       - name: Check project invariants
         shell: pwsh
         run: |
@@ -89,11 +106,14 @@ jobs:
         run: dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore
       - name: Pack managed API
         shell: pwsh
+        env:
+          PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
         run: |
           $packageRevision = [int]'${{ inputs.package_revision }}'
           pwsh -NoProfile -File ./scripts/Pack-Managed.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -PackageRevision $packageRevision `
+            -PackageVersion $env:PACKAGE_VERSION_INPUT `
             -NoBuild `
             -NoRestore
       - name: Upload managed package
@@ -2265,6 +2285,8 @@ jobs:
       - name: Pack runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
         shell: pwsh
+        env:
+          PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
         run: |
           $packageRevision = [int]'${{ inputs.package_revision }}'
           $nativeRuntimeDir = '${{ steps.synthetic.outputs.native_runtime_dir }}'
@@ -2290,6 +2312,7 @@ jobs:
             '-RuntimeProfile', '${{ matrix.profile }}',
             '-OpenCvVersion', '${{ inputs.opencv_version }}',
             '-PackageRevision', $packageRevision,
+            '-PackageVersion', $env:PACKAGE_VERSION_INPUT,
             '-StageRuntime',
             '-OpenCvNativeRuntimeDir', $nativeRuntimeDir,
             '-OpenCvRuntimeDir', $openCvRuntimeDir,
@@ -2341,7 +2364,7 @@ jobs:
       - name: Verify package artifact matrix
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           $expectedSyntheticRuntimeInputs = '${{ inputs.validate_synthetic_runtime }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-download `
@@ -2368,7 +2391,7 @@ jobs:
       - name: Verify package consumer restore
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-download `
             -ExpectedPackageVersion $packageVersion
@@ -2434,7 +2457,7 @@ jobs:
       - name: Verify selected real package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           $runtimeRid = '${{ inputs.rid }}'
           $runtimeProfile = '${{ inputs.runtime_profile }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
@@ -2446,7 +2469,7 @@ jobs:
       - name: Restore, build, and run selected real package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           $runtimeRid = '${{ inputs.rid }}'
           $runtimeProfile = '${{ inputs.runtime_profile }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
@@ -2573,7 +2596,7 @@ jobs:
       - name: Verify selected Windows x86 package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-windows-x86 `
             -ExpectedPackageVersion $packageVersion `
@@ -2604,7 +2627,7 @@ jobs:
       - name: Restore, build, and run Windows x86 package consumer in an X86 process
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-windows-x86 `
             -ExpectedPackageVersion $packageVersion `
@@ -2667,7 +2690,7 @@ jobs:
       - name: Verify selected Windows package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-windows `
             -ExpectedPackageVersion $packageVersion `
@@ -2698,7 +2721,7 @@ jobs:
       - name: Restore, build, and run Windows x64 package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-windows `
             -ExpectedPackageVersion $packageVersion `
@@ -2762,7 +2785,7 @@ jobs:
       - name: Verify selected Windows ARM64 package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-windows-arm64 `
             -ExpectedPackageVersion $packageVersion `
@@ -2793,7 +2816,7 @@ jobs:
       - name: Restore, build, and run Windows ARM64 package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-windows-arm64 `
             -ExpectedPackageVersion $packageVersion `
@@ -2845,7 +2868,7 @@ jobs:
       - name: Verify selected real Ubuntu ARM64 package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-ubuntu-arm64 `
             -ExpectedPackageVersion $packageVersion `
@@ -2940,7 +2963,7 @@ jobs:
       - name: Restore, build, and run selected real Ubuntu ARM64 package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-ubuntu-arm64 `
             -ExpectedPackageVersion $packageVersion `
@@ -2970,7 +2993,7 @@ jobs:
       - name: Verify and run selected real Ubuntu 22.04 ARM64 package
         shell: bash
         env:
-          PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+          PACKAGE_VERSION: ${{ inputs.package_version }}
           OPENCV_VERSION: ${{ inputs.opencv_version }}
           RUNTIME_PROFILE: ${{ inputs.runtime_profile }}
           POWERSHELL_VERSION: 7.4.17
@@ -3233,7 +3256,7 @@ jobs:
       - name: Verify selected real Debian package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-debian `
             -ExpectedPackageVersion $packageVersion `
@@ -3332,7 +3355,7 @@ jobs:
       - name: Restore, build, and run selected real Debian package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-debian `
             -ExpectedPackageVersion $packageVersion `
@@ -3362,7 +3385,7 @@ jobs:
       - name: Verify and run selected real Debian 12 ARM64 package
         shell: bash
         env:
-          PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+          PACKAGE_VERSION: ${{ inputs.package_version }}
           OPENCV_VERSION: ${{ inputs.opencv_version }}
           RUNTIME_PROFILE: ${{ inputs.runtime_profile }}
           POWERSHELL_VERSION: 7.4.17
@@ -3651,7 +3674,7 @@ jobs:
       - name: Verify selected real Fedora package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-fedora `
             -ExpectedPackageVersion $packageVersion `
@@ -3750,7 +3773,7 @@ jobs:
       - name: Restore, build, and run selected real Fedora package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-fedora `
             -ExpectedPackageVersion $packageVersion `
@@ -3881,7 +3904,7 @@ jobs:
       - name: Verify selected real Rocky package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-rocky `
             -ExpectedPackageVersion $packageVersion `
@@ -3980,7 +4003,7 @@ jobs:
       - name: Restore, build, and run selected real Rocky package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-rocky `
             -ExpectedPackageVersion $packageVersion `
@@ -4115,7 +4138,7 @@ jobs:
       - name: Verify selected real RHEL package artifacts
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-rhel `
             -ExpectedPackageVersion $packageVersion `
@@ -4214,7 +4237,7 @@ jobs:
       - name: Restore, build, and run selected real RHEL package consumer
         shell: pwsh
         run: |
-          $packageVersion = '${{ inputs.opencv_version }}.${{ inputs.package_revision }}'
+          $packageVersion = '${{ inputs.package_version }}'
           pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
             -ArtifactRoot ./artifacts/pack-targeted-rhel `
             -ExpectedPackageVersion $packageVersion `
@@ -4244,7 +4267,7 @@ jobs:
       - name: Verify and run selected real Alpine package inside Alpine 3.20
         shell: bash
         env:
-          PACKAGE_VERSION: ${{ inputs.opencv_version }}.${{ inputs.package_revision }}
+          PACKAGE_VERSION: ${{ inputs.package_version }}
           OPENCV_VERSION: ${{ inputs.opencv_version }}
           RUNTIME_PROFILE: ${{ inputs.runtime_profile }}
           POWERSHELL_ALPINE_PACKAGE_VERSION: 7.4.6-r1

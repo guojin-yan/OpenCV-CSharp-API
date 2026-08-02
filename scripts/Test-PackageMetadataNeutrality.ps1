@@ -7,6 +7,11 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
+$packageVersionContractPath = Join-Path $repo "scripts/PackageVersion.ps1"
+if (-not (Test-Path -LiteralPath $packageVersionContractPath -PathType Leaf)) {
+    throw "Package version contract was not found: $packageVersionContractPath"
+}
+. $packageVersionContractPath
 
 function Get-RepositoryRelativePath {
     param(
@@ -238,6 +243,61 @@ $primaryNativeLoader = Get-RequiredDirectoryBuildProperty $centralProperties "Op
 
 $violations = [System.Collections.Generic.List[object]]::new()
 
+$acceptedPackageVersions = @(
+    [pscustomobject]@{ Version = "5.0.0.0"; OpenCvVersion = "5.0.0"; Revision = 0; NuGetVersion = "5.0.0"; Prerelease = $false },
+    [pscustomobject]@{ Version = "5.0.0.0-preview.1"; OpenCvVersion = "5.0.0"; Revision = 0; NuGetVersion = "5.0.0-preview.1"; Prerelease = $true },
+    [pscustomobject]@{ Version = "5.0.0.1-rc.2"; OpenCvVersion = "5.0.0"; Revision = 1; NuGetVersion = "5.0.0.1-rc.2"; Prerelease = $true }
+)
+foreach ($fixture in $acceptedPackageVersions) {
+    try {
+        $record = Assert-OpenCvCSharpPackageVersion `
+            -Version $fixture.Version `
+            -OpenCvVersion $fixture.OpenCvVersion `
+            -PackageRevision $fixture.Revision
+        if ($record.NuGetVersion -ne $fixture.NuGetVersion -or $record.IsPrerelease -ne $fixture.Prerelease) {
+            Add-Violation $violations "scripts/PackageVersion.ps1" "Accepted package version normalized incorrectly: $($fixture.Version)"
+        }
+    }
+    catch {
+        Add-Violation $violations "scripts/PackageVersion.ps1" "Accepted package version was rejected: $($fixture.Version)"
+    }
+}
+
+$rejectedPackageVersions = @(
+    "5.0.0-preview.1",
+    "5.0.0.0-Preview.1",
+    "5.0.0.0-preview.01",
+    "05.0.0.0-preview.1",
+    "5.0.0.0-preview.1+build.7",
+    "5.0.0.0-preview..1",
+    "5.0.0.0-preview.",
+    "5.0.0.0-",
+    "5.0.0.2147483648-preview.1"
+)
+foreach ($fixture in $rejectedPackageVersions) {
+    try {
+        ConvertTo-OpenCvCSharpPackageVersion -Version $fixture | Out-Null
+        Add-Violation $violations "scripts/PackageVersion.ps1" "Malformed package version was accepted: $fixture"
+    }
+    catch {
+    }
+}
+
+foreach ($fixture in @(
+        [pscustomobject]@{ Version = "5.0.0.0-preview.1"; OpenCvVersion = "5.0.1"; Revision = 0 },
+        [pscustomobject]@{ Version = "5.0.0.0-preview.1"; OpenCvVersion = "5.0.0"; Revision = 1 }
+    )) {
+    try {
+        Assert-OpenCvCSharpPackageVersion `
+            -Version $fixture.Version `
+            -OpenCvVersion $fixture.OpenCvVersion `
+            -PackageRevision $fixture.Revision | Out-Null
+        Add-Violation $violations "scripts/PackageVersion.ps1" "Mismatched package version identity was accepted: $($fixture.Version) / $($fixture.OpenCvVersion) / $($fixture.Revision)"
+    }
+    catch {
+    }
+}
+
 $managedProjectPath = "src/OpenCvSharp/OpenCvSharp.csproj"
 $managedProject = Read-XmlProject -RelativePath $managedProjectPath
 $managedPackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageId") -Properties $centralProperties)
@@ -344,6 +404,16 @@ $packManagedText = Read-RequiredText -RelativePath $packManagedPath
 $packRuntimeText = Read-RequiredText -RelativePath $packRuntimePath
 $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
 
+foreach ($packScript in @(
+        [pscustomobject]@{ Path = $packManagedPath; Text = $packManagedText },
+        [pscustomobject]@{ Path = $packRuntimePath; Text = $packRuntimeText }
+    )) {
+    if (-not (Test-ContainsText -Text $packScript.Text -Needle 'PackageVersion.ps1') -or
+        -not (Test-ContainsText -Text $packScript.Text -Needle 'Assert-OpenCvCSharpPackageVersion')) {
+        Add-Violation $violations $packScript.Path "Pack script must use the shared fail-closed package version contract"
+    }
+}
+
 if (-not (Test-ContainsText -Text $packManagedText -Needle "OpenCvCSharpManagedPackageId") -or
     -not (Test-ContainsText -Text $packManagedText -Needle "`$managedPackageId = Get-RequiredDirectoryBuildProperty")) {
     Add-Violation $violations $packManagedPath "Pack-Managed must derive the version-neutral managed package ID from Directory.Build.props"
@@ -409,3 +479,4 @@ Write-Host "Project metadata files scanned: $($projectFiles.Count)."
 Write-Host "Runtime package projects scanned: $($runtimeProjectFiles.Count)."
 Write-Host "Managed package ID: $primaryManagedPackageId."
 Write-Host "Runtime package prefix: $runtimePackagePrefix."
+Write-Host "Package version fixtures: $($acceptedPackageVersions.Count) accepted, $($rejectedPackageVersions.Count + 2) rejected."

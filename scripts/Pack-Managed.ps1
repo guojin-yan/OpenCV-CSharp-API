@@ -15,6 +15,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+. (Join-Path $PSScriptRoot "PackageVersion.ps1")
 
 function Resolve-PropertyReferences {
     param(
@@ -170,38 +171,19 @@ if ([string]::IsNullOrWhiteSpace($PackageVersion)) {
     }
 }
 
-if ($PackageVersion -notmatch '^\d+\.\d+\.\d+\.\d+$') {
-    throw "PackageVersion must use four numeric parts, for example 5.0.0.0. Actual: $PackageVersion"
-}
-
-if (-not $PackageVersion.StartsWith("$OpenCvVersion.", [System.StringComparison]::Ordinal)) {
-    throw "PackageVersion must start with the OpenCV version '$OpenCvVersion.'. Actual: $PackageVersion"
-}
-
-function Get-NuGetPackageFileVersion {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Version
-    )
-
-    $parts = @($Version.Split(".") | ForEach-Object { [int]$_ })
-    if ($parts.Count -ne 4) {
-        throw "PackageVersion must use four numeric parts, for example 5.0.0.0. Actual: $Version"
-    }
-
-    if ($parts[3] -eq 0) {
-        return "{0}.{1}.{2}" -f $parts[0], $parts[1], $parts[2]
-    }
-
-    return "{0}.{1}.{2}.{3}" -f $parts[0], $parts[1], $parts[2], $parts[3]
-}
+$packageVersionRecord = Assert-OpenCvCSharpPackageVersion `
+    -Version $PackageVersion `
+    -OpenCvVersion $OpenCvVersion `
+    -PackageRevision $PackageRevision
 
 New-Item -ItemType Directory -Force $outputFullPath | Out-Null
 
-$packageFileVersion = Get-NuGetPackageFileVersion -Version $PackageVersion
-$packagePath = Join-Path $outputFullPath "$managedPackageId.$packageFileVersion.nupkg"
-if (Test-Path -LiteralPath $packagePath) {
-    Remove-Item -LiteralPath $packagePath -Force
+$packagePath = Join-Path $outputFullPath "$managedPackageId.$($packageVersionRecord.NuGetVersion).nupkg"
+$sdkPackagePath = Join-Path $outputFullPath "$managedPackageId.$PackageVersion.nupkg"
+foreach ($candidatePath in @($packagePath, $sdkPackagePath) | Sort-Object -Unique) {
+    if (Test-Path -LiteralPath $candidatePath) {
+        Remove-Item -LiteralPath $candidatePath -Force
+    }
 }
 
 $arguments = @(
@@ -243,6 +225,19 @@ Write-Host "Packing managed API package $managedPackageId $PackageVersion"
 & dotnet @arguments
 if ($LASTEXITCODE -ne 0) {
     throw "dotnet pack failed with exit code $LASTEXITCODE"
+}
+
+$producedPackagePaths = @(
+    @($packagePath, $sdkPackagePath) |
+        Sort-Object -Unique |
+        Where-Object { Test-Path -LiteralPath $_ -PathType Leaf }
+)
+if ($producedPackagePaths.Count -ne 1) {
+    throw "Managed package output could not be identified exactly once. Expected SDK or canonical artifact: $sdkPackagePath / $packagePath"
+}
+
+if (-not $producedPackagePaths[0].Equals($packagePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+    Move-Item -LiteralPath $producedPackagePaths[0] -Destination $packagePath
 }
 
 & (Join-Path $PSScriptRoot "Normalize-NuGetPackageDeterminism.ps1") -PackagePath $packagePath

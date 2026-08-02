@@ -29,6 +29,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+. (Join-Path $PSScriptRoot "PackageVersion.ps1")
 
 function Resolve-PropertyReferences {
     param(
@@ -199,33 +200,12 @@ if ([string]::IsNullOrWhiteSpace($PackageVersion)) {
     }
 }
 
-if ($PackageVersion -notmatch '^\d+\.\d+\.\d+\.\d+$') {
-    throw "PackageVersion must use four numeric parts, for example 5.0.0.0. Actual: $PackageVersion"
-}
-
-if (-not $PackageVersion.StartsWith("$OpenCvVersion.", [System.StringComparison]::Ordinal)) {
-    throw "PackageVersion must start with the OpenCV version '$OpenCvVersion.'. Actual: $PackageVersion"
-}
+$packageVersionRecord = Assert-OpenCvCSharpPackageVersion `
+    -Version $PackageVersion `
+    -OpenCvVersion $OpenCvVersion `
+    -PackageRevision $PackageRevision
 
 $runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"
-
-function Get-NuGetPackageFileVersion {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Version
-    )
-
-    $parts = @($Version.Split(".") | ForEach-Object { [int]$_ })
-    if ($parts.Count -ne 4) {
-        throw "PackageVersion must use four numeric parts, for example 5.0.0.0. Actual: $Version"
-    }
-
-    if ($parts[3] -eq 0) {
-        return "{0}.{1}.{2}" -f $parts[0], $parts[1], $parts[2]
-    }
-
-    return "{0}.{1}.{2}.{3}" -f $parts[0], $parts[1], $parts[2], $parts[3]
-}
 
 if ($RequireReleasePreflight -and $SyntheticRuntimeInputs) {
     throw "Release-candidate runtime packages require real native runtime inputs; synthetic runtime inputs validate package shape only."
@@ -318,10 +298,12 @@ if ($RequireReleasePreflight) {
 
 New-Item -ItemType Directory -Force $outputFullPath | Out-Null
 
-$packageFileVersion = Get-NuGetPackageFileVersion -Version $PackageVersion
-$packagePath = Join-Path $outputFullPath "$runtimePackageId.$packageFileVersion.nupkg"
-if (Test-Path -LiteralPath $packagePath) {
-    Remove-Item -LiteralPath $packagePath -Force
+$packagePath = Join-Path $outputFullPath "$runtimePackageId.$($packageVersionRecord.NuGetVersion).nupkg"
+$sdkPackagePath = Join-Path $outputFullPath "$runtimePackageId.$PackageVersion.nupkg"
+foreach ($candidatePath in @($packagePath, $sdkPackagePath) | Sort-Object -Unique) {
+    if (Test-Path -LiteralPath $candidatePath) {
+        Remove-Item -LiteralPath $candidatePath -Force
+    }
 }
 
 $arguments = @(
@@ -350,6 +332,19 @@ Write-Host "Packing runtime package $runtimePackageId $PackageVersion ($RuntimeP
 & dotnet @arguments
 if ($LASTEXITCODE -ne 0) {
     throw "dotnet pack failed with exit code $LASTEXITCODE"
+}
+
+$producedPackagePaths = @(
+    @($packagePath, $sdkPackagePath) |
+        Sort-Object -Unique |
+        Where-Object { Test-Path -LiteralPath $_ -PathType Leaf }
+)
+if ($producedPackagePaths.Count -ne 1) {
+    throw "Runtime package output could not be identified exactly once. Expected SDK or canonical artifact: $sdkPackagePath / $packagePath"
+}
+
+if (-not $producedPackagePaths[0].Equals($packagePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+    Move-Item -LiteralPath $producedPackagePaths[0] -Destination $packagePath
 }
 
 & (Join-Path $PSScriptRoot "Normalize-NuGetPackageDeterminism.ps1") -PackagePath $packagePath

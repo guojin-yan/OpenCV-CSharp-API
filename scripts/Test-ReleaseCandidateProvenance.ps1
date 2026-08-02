@@ -42,19 +42,23 @@ function Assert-True {
     }
 }
 
-function Get-NormalizedPackageVersion {
+function Test-NormalizedNuGetPackageVersion {
     param([Parameter(Mandatory = $true)][string]$Version)
 
-    $parts = @($Version.Split('.') | ForEach-Object { [int]$_ })
-    if ($parts.Count -ne 4) {
-        return $Version
+    $match = [regex]::Match(
+        $Version,
+        '^(?<major>0|[1-9][0-9]*)\.(?<minor>0|[1-9][0-9]*)\.(?<patch>0|[1-9][0-9]*)(?:\.(?<revision>[1-9][0-9]*))?(?:-(?<prerelease>[0-9a-z-]+(?:\.[0-9a-z-]+)*))?$')
+    if (-not $match.Success) {
+        return $false
     }
 
-    if ($parts[3] -eq 0) {
-        return "{0}.{1}.{2}" -f $parts[0], $parts[1], $parts[2]
+    foreach ($identifier in $match.Groups['prerelease'].Value.Split('.', [System.StringSplitOptions]::RemoveEmptyEntries)) {
+        if ($identifier -match '^[0-9]+$' -and $identifier.Length -gt 1 -and $identifier[0] -eq '0') {
+            return $false
+        }
     }
 
-    return $Version
+    return $true
 }
 
 function Get-EntryBytes {
@@ -142,11 +146,11 @@ function Get-PackageRecord {
         $packageId = Get-NuspecValue -Nuspec $nuspec -Name 'id'
         $packageVersion = Get-NuspecValue -Nuspec $nuspec -Name 'version'
         $packageFileName = [System.IO.Path]::GetFileName($PackagePath)
-        $expectedName = "$packageId.$(Get-NormalizedPackageVersion -Version $packageVersion).nupkg"
+        $expectedName = "$packageId.$packageVersion.nupkg"
 
         Assert-True -Violations $Violations -Condition ($packageFileName -eq $expectedName) -Path $PackagePath -Issue "Package filename must match nuspec identity and normalized version" -Text "Expected $expectedName"
         Assert-True -Violations $Violations -Condition ($packageId -match '^JYPPX\.OpenCV(?:\.CSharp\.API|\.runtime\.[a-z0-9.-]+(?:\.mini)?)$') -Path $PackagePath -Issue "Package ID must remain version-neutral and target-bound" -Text $packageId
-        Assert-True -Violations $Violations -Condition ($packageVersion -match '^\d+\.\d+\.\d+\.\d+$') -Path $PackagePath -Issue "Package version must use four numeric parts" -Text $packageVersion
+        Assert-True -Violations $Violations -Condition (Test-NormalizedNuGetPackageVersion -Version $packageVersion) -Path $PackagePath -Issue "Package version must use canonical NuGet numeric and optional lowercase prerelease metadata" -Text $packageVersion
 
         return [pscustomobject]@{
             Path = [System.IO.Path]::GetFullPath($PackagePath)
@@ -363,10 +367,10 @@ $temporaryRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("opencv-csharp-rel
 try {
     $packageRoot = Join-Path $temporaryRoot 'packages'
     $packageId = 'JYPPX.OpenCV.runtime.win-x64'
-    $packageVersion = '5.0.0.0'
+    $packageVersion = '5.0.0-preview.1'
     $rid = 'win-x64'
     $profile = 'full'
-    $packagePath = Join-Path $packageRoot "$packageId.5.0.0.nupkg"
+    $packagePath = Join-Path $packageRoot "$packageId.$packageVersion.nupkg"
     New-TestPackage -Path $packagePath -PackageId $packageId -PackageVersion $packageVersion -Rid $rid -RuntimeProfile $profile
 
     $packageViolations = [System.Collections.Generic.List[object]]::new()

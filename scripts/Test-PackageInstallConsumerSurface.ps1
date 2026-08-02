@@ -9,7 +9,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $exampleRuntimePackageId = "$runtimePackagePrefix.win-x64"
-$examplePackageVersion = "5.0.0.0"
+$examplePackageVersion = "5.0.0-preview.1"
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
 $compatibilityRuntimeProperty = "Open" + "Cv5SharpNativeRuntimeDir"
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
@@ -135,13 +135,13 @@ $featureTemplateText = Read-RequiredText -RelativePath $featureTemplatePath
 $sampleProjectText = Read-RequiredText -RelativePath $sampleProjectPath
 $testProjectText = Read-RequiredText -RelativePath $testProjectPath
 
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --version $examplePackageVersion" -Issue "Quick Start must install the neutral managed package with four-part package version metadata"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $exampleRuntimePackageId --version $examplePackageVersion" -Issue "Quick Start must install the neutral runtime package with matching four-part package version metadata"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same four-part package version metadata" -Issue "Quick Start must explain managed/runtime package version alignment"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --version $examplePackageVersion" -Issue "Quick Start must install the neutral managed preview package"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $exampleRuntimePackageId --version $examplePackageVersion" -Issue "Quick Start must install the matching neutral runtime preview package"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same normalized NuGet package version" -Issue "Quick Start must explain managed/runtime package version alignment"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "package IDs and public namespace stay version-neutral" -Issue "Quick Start must state package IDs and namespace stay version-neutral"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
-    "dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--version\s+(?<Version>\d+\.\d+\.\d+\.\d+)",
+    "dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--version\s+(?<Version>\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9a-z-]+(?:\.[0-9a-z-]+)*)?)",
     [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 $installMatches = @($installRegex.Matches($quickStartText))
 if ($installMatches.Count -ne 2) {
@@ -166,7 +166,7 @@ foreach ($doc in @(
         [pscustomobject]@{ Path = $smokeProfilesGuidePath; Text = $smokeProfilesGuideText })) {
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle $managedPackageId -Issue "$($doc.Path) must name the neutral managed package"
     Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "$runtimePackagePrefix" -Issue "$($doc.Path) must name the neutral runtime package prefix"
-    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "four-part package version metadata" -Issue "$($doc.Path) must document matching package version metadata"
+    Assert-Contains -Violations $violations -Path $doc.Path -Text $doc.Text -Needle "normalized NuGet package version" -Issue "$($doc.Path) must document matching consumer package versions"
 }
 
 Assert-Contains -Violations $violations -Path $linkedRuntimeSmokeGuidePath -Text $linkedRuntimeSmokeGuideText -Needle $preferredRuntimeProperty -Issue "Linked runtime smoke guide must prefer the neutral runtime copy property"

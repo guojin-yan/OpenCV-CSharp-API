@@ -13,6 +13,7 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $artifactRootFullPath = (Resolve-Path -LiteralPath $ArtifactRoot).Path
+. (Join-Path $repo "scripts/PackageVersion.ps1")
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
@@ -109,12 +110,7 @@ function Get-NormalizedPackageFileVersion {
         [string]$VersionText
     )
 
-    $version = [System.Version]::Parse($VersionText)
-    if ($version.Revision -eq 0) {
-        return "$($version.Major).$($version.Minor).$($version.Build)"
-    }
-
-    return $version.ToString()
+    return (ConvertTo-OpenCvCSharpPackageVersion -Version $VersionText).NuGetVersion
 }
 
 function Get-EntryFileName {

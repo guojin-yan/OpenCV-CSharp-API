@@ -51,13 +51,13 @@ net5.0;net6.0;net7.0;net8.0;net9.0;net10.0
 - Managed assembly: `JYPPX.OpenCV.CSharp.API.dll`
 - Public namespace: `OpenCvSharp.*`
 - Runtime packages: `JYPPX.OpenCV.runtime.<rid>` for full builds and `JYPPX.OpenCV.runtime.<rid>.mini` for mini builds
-- Package version metadata: `OpenCV major.minor.patch.packageRevision`, for example `5.0.0.0`
+- Pack-time version contract: `OpenCV major.minor.patch.packageRevision[-prerelease]`, for example `5.0.0.0-preview.1`; NuGet normalizes revision zero to consumer version `5.0.0-preview.1`
 
 For the authoritative support classification, read [`docs/articles/support-lifecycle-policy.md`](docs/articles/support-lifecycle-policy.md) and `packaging/runtime/runtime-support-contract.json`. The package matrix is not itself a production-support promise. API and ABI baseline review is described in [`docs/articles/api-abi-compatibility-policy.md`](docs/articles/api-abi-compatibility-policy.md); the current local release candidate remains unsigned, unapproved, unpublished, and documented in [`docs/articles/release-candidate-closeout.md`](docs/articles/release-candidate-closeout.md).
 
 支持分类以 [`docs/articles/support-lifecycle-policy.md`](docs/articles/support-lifecycle-policy.md) 和 `packaging/runtime/runtime-support-contract.json` 为准；package matrix 本身不是 production-support promise。API/ABI 基线规则见 [`docs/articles/api-abi-compatibility-policy.md`](docs/articles/api-abi-compatibility-policy.md)，当前 local release candidate 仍未签名、未批准、未发布，状态见 [`docs/articles/release-candidate-closeout.md`](docs/articles/release-candidate-closeout.md)。
 
-Use the managed and runtime packages together on the same four-part package version metadata. Consumers should choose the full `JYPPX.OpenCV.runtime.<rid>` package or the smaller `JYPPX.OpenCV.runtime.<rid>.mini` package that matches their exact target RID. The current runtime package matrix covers `win-x64`, `win-x86`, `win-arm64`, distro-specific Linux RID package IDs such as `ubuntu.22.04-x64`, `ubuntu.22.04-arm64`, `ubuntu.24.04-x64`, `ubuntu.24.04-arm64`, `debian.12-x64`, `fedora.40-x64`, `rhel.9-x64`, `rocky.9-x64`, and `alpine.3.20-x64`, plus `android-arm64`, `android-arm`, `android-x64`, and `android-x86`. Linux runtime packages are built and named per distro/runtime family, so `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64` and `JYPPX.OpenCV.runtime.alpine.3.20-x64` are separate package identities. For custom distro-specific Linux RID restore, set `RuntimeIdentifierGraphPath` to `packaging/runtime/runtime-distro-rid-graph.json` or copy that graph into the consuming project before restore.
+Use the managed and runtime packages together on the same normalized NuGet package version. Consumers should choose the full `JYPPX.OpenCV.runtime.<rid>` package or the smaller `JYPPX.OpenCV.runtime.<rid>.mini` package that matches their exact target RID. The current runtime package matrix covers `win-x64`, `win-x86`, `win-arm64`, distro-specific Linux RID package IDs such as `ubuntu.22.04-x64`, `ubuntu.22.04-arm64`, `ubuntu.24.04-x64`, `ubuntu.24.04-arm64`, `debian.12-x64`, `fedora.40-x64`, `rhel.9-x64`, `rocky.9-x64`, and `alpine.3.20-x64`, plus `android-arm64`, `android-arm`, `android-x64`, and `android-x86`. Linux runtime packages are built and named per distro/runtime family, so `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64` and `JYPPX.OpenCV.runtime.alpine.3.20-x64` are separate package identities. For custom distro-specific Linux RID restore, set `RuntimeIdentifierGraphPath` to `packaging/runtime/runtime-distro-rid-graph.json` or copy that graph into the consuming project before restore.
 
 managed 主包和 runtime 包应使用相同的四段 package version 元数据。消费者应选择与精确 target RID 匹配的 full `JYPPX.OpenCV.runtime.<rid>` 包，或更小的 `JYPPX.OpenCV.runtime.<rid>.mini` 包。当前 runtime package matrix 覆盖 `win-x64`、`win-x86`、`win-arm64`，以及 `ubuntu.22.04-x64`、`ubuntu.22.04-arm64`、`ubuntu.24.04-x64`、`ubuntu.24.04-arm64`、`debian.12-x64`、`fedora.40-x64`、`rhel.9-x64`、`rocky.9-x64`、`alpine.3.20-x64` 等 distro-specific Linux RID package IDs，并覆盖 `android-arm64`、`android-arm`、`android-x64` 和 `android-x86`。Linux runtime 包按发行版/runtime family 分别构建和命名，因此 `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64` 与 `JYPPX.OpenCV.runtime.alpine.3.20-x64` 是不同包身份。使用自定义 distro-specific Linux RID restore 时，请把 `RuntimeIdentifierGraphPath` 指向 `packaging/runtime/runtime-distro-rid-graph.json`，或在 restore 前把该 graph 复制到 consumer project。
 
@@ -264,7 +264,7 @@ The `./build/native-opencv-core/Release` path in the example is the current loca
 
 Use the version-neutral `-OpenCvNativeRuntimeDir` parameter for new runtime staging commands. The older `-NativeRuntimeDir` parameter remains accepted only as an existing-packaging-script compatibility alias.
 
-The pack scripts derive the four-part package version from `-OpenCvVersion` plus `-PackageRevision`; package IDs stay version-neutral, so the OpenCV runtime identity is carried by package versions and build metadata. `-PackageVersion` remains accepted only as an explicit version-metadata compatibility override, not as a package identity or naming surface.
+The pack scripts derive the stable four-part package version from `-OpenCvVersion` plus `-PackageRevision`. An explicit `-PackageVersion 5.0.0.0-preview.1` adds the lowercase prerelease channel while preserving the OpenCV version and package revision contract. Package IDs stay version-neutral, and managed/runtime packages must use the same normalized NuGet version.
 
 打包脚本会从 `-OpenCvVersion` 和 `-PackageRevision` 推导四段 package version；包 ID 保持版本中立，因此 OpenCV runtime 身份由包版本和构建元数据承载。`-PackageVersion` 仍仅作为版本元数据的显式兼容覆盖口接受，不作为包身份或命名面。
 
@@ -306,9 +306,9 @@ An absolute `-OutputDir` is accepted as-is and can write package artifacts outsi
 
 绝对 `-OutputDir` 会按原样接受；如果调用方选择仓库外路径，包产物也会写到仓库外。
 
-NuGet may normalize `5.0.0.0` package file names to `5.0.0`; non-zero package revisions such as `5.0.0.1` remain visible in the file name.
+NuGet normalizes `5.0.0.0` to `5.0.0` and `5.0.0.0-preview.1` to `5.0.0-preview.1`; non-zero package revisions such as `5.0.0.1` remain visible.
 
-NuGet 可能会把 `5.0.0.0` 的包文件名规范化为 `5.0.0`；非零打包修订号，例如 `5.0.0.1`，会保留在文件名中。
+NuGet 会把 `5.0.0.0` 规范化为 `5.0.0`，并把 `5.0.0.0-preview.1` 规范化为 `5.0.0-preview.1`；非零打包修订号（例如 `5.0.0.1`）会保留。
 
 The pack scripts verify the normalized `.nupkg` artifact path after `dotnet pack` completes.
 
