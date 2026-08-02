@@ -4,6 +4,19 @@ Welcome to the OpenCV CSharp API documentation.
 
 欢迎阅读 OpenCV CSharp API 文档。
 
+![OpenCV CSharp API visual showcase](images/showcase/showcase-overview.png)
+
+## First Release / 首版
+
+The first release is organized around useful end-to-end workflows while the broader OpenCV surface continues to evolve under stable managed API and native ABI baselines.
+
+首版以可直接使用的端到端工作流为中心，更广泛的 OpenCV 接口将在稳定的 managed API 与 native ABI 基线下持续迭代。
+
+- [First Release Overview](articles/first-release-overview.md)
+- [Visual Showcase](articles/visual-showcase.md)
+- [Scenario Recipes](articles/scenario-recipes.md)
+- [Quick Start](articles/quick-start.md)
+
 ## Release Readiness / 发布准备
 
 - [Version-Neutral Naming Guide](articles/version-neutral-naming-guide.md)
@@ -16,6 +29,9 @@ Welcome to the OpenCV CSharp API documentation.
 ## Start Here / 从这里开始
 
 - [Quick Start](articles/quick-start.md)
+- [First Release Overview](articles/first-release-overview.md)
+- [Visual Showcase](articles/visual-showcase.md)
+- [Scenario Recipes](articles/scenario-recipes.md)
 - [Version-Neutral Naming Guide](articles/version-neutral-naming-guide.md)
 - [Native ABI Plan](articles/native-module-boundary.md)
 - [Mat Object Model](articles/mat-object-model.md)

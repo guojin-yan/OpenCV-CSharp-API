@@ -140,8 +140,14 @@ namespace ConsoleSamples
         private const string CompatibilityStitchingImagesAlias = "OPENCV5SHARP_STITCHING_IMAGES";
         private static readonly string FactualOpenCvInstallCacheName = "opencv-" + OpenCvSharpBuildInfo.OpenCvVersion + "-windows-x64";
 
-        private static void Main()
+        private static void Main(string[] args)
         {
+            if (args.Length > 0 && string.Equals(args[0], "showcase", StringComparison.OrdinalIgnoreCase))
+            {
+                ShowcaseRunner.Run(args.Skip(1).ToArray());
+                return;
+            }
+
             Console.WriteLine(OpenCvSharpBuildInfo.GetDisplayString());
 
             Point point = new Point(10, 20);

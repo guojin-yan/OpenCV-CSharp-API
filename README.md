@@ -4,6 +4,31 @@ OpenCV CSharp API is a .NET binding project for OpenCV. The current packaged Ope
 
 OpenCV CSharp API 是面向 OpenCV 的 .NET 封装项目。当前打包的 OpenCV runtime 身份为 OpenCV 5.0.0；项目通过稳定的 native C ABI 间接调用 OpenCV C++，并在 C# 层以版本中立的 `OpenCvSharp` 命名空间提供接近 OpenCV C++ 使用体验的对象模型。
 
+![OpenCV CSharp API visual showcase](docs/images/showcase/showcase-overview.png)
+
+## First Release / 首版入口
+
+The first public version focuses on practical image processing, image codecs, feature extraction and matching, camera/video I/O, geometry and calibration, DNN inference, classical ML, photo operations, object detection, tracking, and stitching. Public managed APIs and the native C ABI are source-controlled as compatibility baselines so later releases can add coverage without silently breaking existing consumers.
+
+首个公开版本优先保证图像处理、图像编解码、特征提取与匹配、相机/视频 I/O、几何与标定、DNN 推理、传统机器学习、照片处理、目标检测、跟踪和拼接等主要场景可用。托管公共 API 与 native C ABI 均以源码基线管理，后续版本可以持续扩展覆盖范围，但不会静默破坏既有调用方。
+
+- [First Release Overview / 首版概览](docs/articles/first-release-overview.md)
+- [Visual Showcase / 可视化案例](docs/articles/visual-showcase.md)
+- [Scenario Recipes / 场景路线](docs/articles/scenario-recipes.md)
+- [Quick Start / 快速开始](docs/articles/quick-start.md)
+
+Generate the visual samples with the factual full native runtime:
+
+使用真实 full native runtime 生成展示图：
+
+```powershell
+C:\Users\guoji\.dotnet\dotnet.exe run `
+  --project .\samples\ConsoleSamples\ConsoleSamples.csproj `
+  -c Release `
+  -p:OpenCvNativeRuntimeDir=<full-runtime-directory> `
+  -- showcase all .\artifacts\showcase
+```
+
 ## Goals / 目标
 
 - Wrap OpenCV C++ through a stable C API.
