@@ -10,7 +10,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $violations = [System.Collections.Generic.List[object]]::new()
 $feedIndex = 'https://api.nuget.org/v3/index.json'
 $packageId = 'JYPPX.OpenCV.CSharp.API'
-$packageVersion = '5.0.0'
+$packageVersion = '5.0.0-preview.1'
 $packageFlatContainerUrl = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/$packageVersion/jyppx.opencv.csharp.api.$packageVersion.nupkg"
 
 function Add-Violation {
