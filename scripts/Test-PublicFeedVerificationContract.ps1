@@ -49,7 +49,7 @@ function Test-ReadinessHandoffText {
     Assert-True -List $List -Condition ($Text -match 'SchemaVersion\s*=\s*2') -Path 'scripts/Test-ReleaseCandidateProvenance.ps1' -Issue 'Schema-v2 provenance must be the signing/SBOM handoff owner'
     Assert-True -List $List -Condition ($Text -match 'SigningHandoff') -Path 'scripts/Test-ReleaseCandidateProvenance.ps1' -Issue 'Provenance must expose explicit signing handoff fields'
     Assert-True -List $List -Condition ($Text -match 'SbomHandoff') -Path 'scripts/Test-ReleaseCandidateProvenance.ps1' -Issue 'Provenance must expose explicit SBOM handoff fields'
-    Assert-True -List $List -Condition ($Text -match "RFC3161-required") -Path 'scripts/Test-ReleaseCandidateProvenance.ps1' -Issue 'Signing handoff must retain an explicit timestamp policy'
+    Assert-True -List $List -Condition ($Text -match "NuGet\.org-repository-timestamp-required") -Path 'scripts/Test-ReleaseCandidateProvenance.ps1' -Issue 'Repository-signing handoff must retain the NuGet.org timestamp policy'
     Assert-True -List $List -Condition ($Text -notmatch '-----BEGIN [A-Z ]*PRIVATE KEY-----') -Path 'scripts/Test-ReleaseCandidateProvenance.ps1' -Issue 'Signing handoff source must not contain private key material'
 }
 
@@ -68,6 +68,17 @@ try {
     Assert-True -List $violations -Condition ($packText -match 'dotnet nuget push') -Path '.github/workflows/pack.yml' -Issue 'Publish command must remain explicit and auditable'
     Assert-True -List $violations -Condition ($packText -notmatch 'api\.nuget\.org.*push|nuget\.org.*api-key') -Path '.github/workflows/pack.yml' -Issue 'Public feed verification must not add a public feed upload path'
     Assert-True -List $violations -Condition ($packText -match 'publish_github_packages') -Path '.github/workflows/pack.yml' -Issue 'Publishing must remain behind the existing explicit workflow input'
+
+    $publishWorkflowPath = Join-Path $repo '.github/workflows/publish-nuget.yml'
+    Assert-True -List $violations -Condition (Test-Path -LiteralPath $publishWorkflowPath -PathType Leaf) -Path '.github/workflows/publish-nuget.yml' -Issue 'Dedicated NuGet.org publication workflow is missing'
+    if (Test-Path -LiteralPath $publishWorkflowPath -PathType Leaf) {
+        $publishText = [IO.File]::ReadAllText($publishWorkflowPath)
+        foreach ($token in @('https://api.nuget.org/v3/index.json','environment: nuget-production','publish_authorization','secrets.NUGET_API_KEY','scripts/Test-NuGetRepositorySignedPackage.ps1','github.repository == ''guojin-yan/OpenCV-CSharp-API''')) {
+            Assert-True -List $violations -Condition ($publishText.Contains($token, [StringComparison]::Ordinal)) -Path '.github/workflows/publish-nuget.yml' -Issue 'NuGet.org publication workflow lost a required trust boundary' -Text $token
+        }
+        Assert-True -List $violations -Condition (-not $publishText.Contains('--skip-duplicate', [StringComparison]::OrdinalIgnoreCase)) -Path '.github/workflows/publish-nuget.yml' -Issue 'First publication must fail on duplicate package identity rather than hiding it'
+        Assert-True -List $violations -Condition (-not $publishText.Contains('dotnet nuget sign', [StringComparison]::OrdinalIgnoreCase)) -Path '.github/workflows/publish-nuget.yml' -Issue 'Confirmed strategy requires NuGet.org repository signing, not local author signing'
+    }
 
     $sourceFiles = Get-ChildItem -LiteralPath $repo -Recurse -File -Include *.ps1,*.json,*.yml,*.yaml,*.props,*.targets,*.md -Force
     foreach ($sourceFile in $sourceFiles) {

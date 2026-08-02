@@ -133,6 +133,7 @@ function Get-Record {
     $videoSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/video-upstream-summary.json") -Raw | ConvertFrom-Json
     $evidencePaths = @(
         ".github/workflows/pack.yml",
+        ".github/workflows/publish-nuget.yml",
         ".github/workflows/runtime-input.yml",
         "compatibility/api-gap-inventory.json",
         "compatibility/calib3d-implemented-families.json",
@@ -254,6 +255,7 @@ function Get-Record {
         "scripts/Generate-PhotoUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
+        "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/New-ReleasePackageSbom.ps1",
         "scripts/Test-ApiAbiBaselineContract.ps1",
         "scripts/Test-Calib3DUpstreamMap.ps1",
@@ -277,6 +279,8 @@ function Get-Record {
         "scripts/Test-ReleasePackageSbom.ps1",
         "scripts/Test-ReleaseReadinessContract.ps1",
         "scripts/Test-ReleaseSigningBoundary.ps1",
+        "scripts/Test-NuGetRepositorySignedPackage.ps1",
+        "scripts/Test-NuGetRepositorySigningBoundary.ps1",
         "scripts/Test-ReleaseSupportContract.ps1",
         "scripts/Test-VideoIORegistrySurface.ps1",
         "scripts/Test-VideoIOUpstreamMap.ps1",
@@ -359,6 +363,8 @@ function Get-Record {
         "tools/PhotoUpstreamMap/Program.cs",
         "tools/PhotoUpstreamMap/extract_photo.py",
         "tools/VideoUpstreamMap/VideoUpstreamMap.csproj",
+        "tools/NuGetRepositorySignatureVerifier/NuGetRepositorySignatureVerifier.csproj",
+        "tools/NuGetRepositorySignatureVerifier/Program.cs",
         "tools/VideoUpstreamMap/Program.cs",
         "tools/VideoUpstreamMap/extract_video.py"
     )
@@ -367,13 +373,13 @@ function Get-Record {
     $blockers = @(
         [ordered]@{ Id = "android-real-support"; Status = "deferred-outside-real-support"; Evidence = "Native Android build, package consumer, and device/emulator evidence are absent." },
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
-        [ordered]@{ Id = "hosted-ci-compatibility"; Status = "quota-blocked"; Evidence = "The first normal hosted CI run after the tightened contracts must prove actual Action permissions and tool behavior." },
         [ordered]@{ Id = "hosted-win-x86-full"; Status = "quota-blocked"; Evidence = "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
+        [ordered]@{ Id = "nuget-production-environment"; Status = "not-configured"; Evidence = "The authoritative nuget-production Environment, protected reviewer, and NUGET_API_KEY secret are not configured." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
         [ordered]@{ Id = "release-approval"; Status = "not-approved"; Evidence = "No external approver has accepted the exact normalized candidate bytes and provenance." },
-        [ordered]@{ Id = "sbom-inputs"; Status = "not-ready"; Evidence = "The deterministic SPDX-2.3 generator and guard are provisioned; final-candidate package-bound documents and external approval are not yet generated." },
-        [ordered]@{ Id = "signing-inputs"; Status = "not-ready"; Evidence = "External certificate, timestamp, custody, and verification inputs are not provisioned." }
+        [ordered]@{ Id = "repository-signing-verification"; Status = "post-publication-required"; Evidence = "NuGet.org must add a Repository primary signature; the public package must then pass cryptographic verification and exact unsigned-payload comparison." },
+        [ordered]@{ Id = "sbom-inputs"; Status = "candidate-refresh-required"; Evidence = "The deterministic SPDX-2.3 generator and guard are provisioned; final package-bound documents must be regenerated from the final source commit and approved." }
     )
 
     [ordered]@{
@@ -784,16 +790,23 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 75
+            InvariantGuardCount = 76
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false
         }
         Signing = [ordered]@{
-            Status = "not-ready"
+            Status = "repository-signing-pending"
+            Strategy = "nuget.org-repository-signing"
             NormalizedInputRequired = $true
+            AuthorCertificateRequired = $false
+            PrivateKeyRequired = $false
             PrivateKeyMaterialPresent = $false
-            Verification = "not-run"
+            ServiceIndex = "https://api.nuget.org/v3/index.json"
+            ExpectedSignatureType = "Repository"
+            ExpectedOwner = "GuojinYan"
+            VerificationScript = "scripts/Test-NuGetRepositorySignedPackage.ps1"
+            Verification = "post-publication-required"
         }
         Sbom = [ordered]@{
             Status = "not-ready"

@@ -110,6 +110,7 @@ function Assert-Matches {
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $packWorkflowPath = ".github/workflows/pack.yml"
+$publishNugetWorkflowPath = ".github/workflows/publish-nuget.yml"
 $packManagedPath = "scripts/Pack-Managed.ps1"
 $packRuntimePath = "scripts/Pack-Runtime.ps1"
 $stageRuntimePath = "scripts/Stage-Runtime.ps1"
@@ -120,6 +121,11 @@ $releaseReadinessContractPath = "scripts/Test-ReleaseReadinessContract.ps1"
 $releasePackageSbomGeneratorPath = "scripts/New-ReleasePackageSbom.ps1"
 $releasePackageSbomGuardPath = "scripts/Test-ReleasePackageSbom.ps1"
 $releaseSigningBoundaryPath = "scripts/Test-ReleaseSigningBoundary.ps1"
+$nugetRepositorySigningBoundaryPath = "scripts/Test-NuGetRepositorySigningBoundary.ps1"
+$nugetRepositorySignedPackagePath = "scripts/Test-NuGetRepositorySignedPackage.ps1"
+$nugetPublicationBundlePath = "scripts/New-NuGetPublicationBundle.ps1"
+$nugetRepositoryVerifierProjectPath = "tools/NuGetRepositorySignatureVerifier/NuGetRepositorySignatureVerifier.csproj"
+$nugetRepositoryVerifierProgramPath = "tools/NuGetRepositorySignatureVerifier/Program.cs"
 $releaseSupportContractPath = "scripts/Test-ReleaseSupportContract.ps1"
 $publicFeedVerificationContractPath = "scripts/Test-PublicFeedVerificationContract.ps1"
 $releaseChangeControlPath = "scripts/Test-ReleaseChangeControlRecord.ps1"
@@ -159,12 +165,14 @@ $apiAbiPolicyPath = "docs/articles/api-abi-compatibility-policy.md"
 $supportLifecyclePolicyPath = "docs/articles/support-lifecycle-policy.md"
 $releaseCloseoutDocPath = "docs/articles/release-candidate-closeout.md"
 $previewReleaseNotesPath = "docs/articles/preview-release-notes.md"
+$nugetRepositorySigningGuidePath = "docs/articles/nuget-repository-signing-guide.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $githubPackArtifactGuardPath = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"
 $githubPackConsumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
 $gitignorePath = ".gitignore"
 
 $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowPath
+$publishNugetWorkflowText = Read-RequiredText -RelativePath $publishNugetWorkflowPath
 $packManagedText = Read-RequiredText -RelativePath $packManagedPath
 $packRuntimeText = Read-RequiredText -RelativePath $packRuntimePath
 $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
@@ -175,6 +183,11 @@ $releaseReadinessContractText = Read-RequiredText -RelativePath $releaseReadines
 $releasePackageSbomGeneratorText = Read-RequiredText -RelativePath $releasePackageSbomGeneratorPath
 $releasePackageSbomGuardText = Read-RequiredText -RelativePath $releasePackageSbomGuardPath
 $releaseSigningBoundaryText = Read-RequiredText -RelativePath $releaseSigningBoundaryPath
+$nugetRepositorySigningBoundaryText = Read-RequiredText -RelativePath $nugetRepositorySigningBoundaryPath
+$nugetRepositorySignedPackageText = Read-RequiredText -RelativePath $nugetRepositorySignedPackagePath
+$nugetPublicationBundleText = Read-RequiredText -RelativePath $nugetPublicationBundlePath
+$nugetRepositoryVerifierProjectText = Read-RequiredText -RelativePath $nugetRepositoryVerifierProjectPath
+$nugetRepositoryVerifierProgramText = Read-RequiredText -RelativePath $nugetRepositoryVerifierProgramPath
 $releaseSupportContractText = Read-RequiredText -RelativePath $releaseSupportContractPath
 $publicFeedVerificationContractText = Read-RequiredText -RelativePath $publicFeedVerificationContractPath
 $releaseChangeControlText = Read-RequiredText -RelativePath $releaseChangeControlPath
@@ -214,6 +227,7 @@ $apiAbiPolicyText = Read-RequiredText -RelativePath $apiAbiPolicyPath
 $supportLifecyclePolicyText = Read-RequiredText -RelativePath $supportLifecyclePolicyPath
 $releaseCloseoutDocText = Read-RequiredText -RelativePath $releaseCloseoutDocPath
 $previewReleaseNotesText = Read-RequiredText -RelativePath $previewReleaseNotesPath
+$nugetRepositorySigningGuideText = Read-RequiredText -RelativePath $nugetRepositorySigningGuidePath
 $runtimeLicensesText = Read-RequiredText -RelativePath $runtimeLicensesPath
 $githubPackArtifactGuardText = Read-RequiredText -RelativePath $githubPackArtifactGuardPath
 $gitignoreText = Read-RequiredText -RelativePath $gitignorePath
@@ -237,6 +251,15 @@ foreach ($check in @(
 }
 
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle '[string]$OutputDir = "artifacts\packages"' -Issue "Pack-Managed default output directory must be artifacts\packages"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'environment: nuget-production' -Issue "NuGet.org publication must require the protected production Environment"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'scripts/New-NuGetPublicationBundle.ps1' -Issue "NuGet.org publication must generate and recheck the exact reviewed bundle"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'scripts/Test-NuGetRepositorySignedPackage.ps1' -Issue "NuGet.org publication must verify public Repository signatures and payload equality"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'publish_authorization' -Issue "NuGet.org publication must require the exact dry-run authorization token"
+Assert-Contains -Violations $violations -Path $nugetRepositorySigningBoundaryPath -Text $nugetRepositorySigningBoundaryText -Needle 'NUGET_REPOSITORY_SIGNING_BOUNDARY_OK' -Issue "Release artifact surface must register repository-signing negative fixtures"
+Assert-Contains -Violations $violations -Path $nugetRepositorySignedPackagePath -Text $nugetRepositorySignedPackageText -Needle 'dotnet nuget verify' -Issue "Repository-signed package verifier must invoke NuGet cryptographic verification"
+Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'publish-nuget:sha256:' -Issue "Publication bundle must emit a candidate-specific authorization token"
+Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProjectPath -Text $nugetRepositoryVerifierProjectText -Needle '<PackageReference Include="NuGet.Packaging" Version="6.14.0" />' -Issue "Structured repository-signature verifier must pin NuGet.Packaging"
+Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProgramPath -Text $nugetRepositoryVerifierProgramText -Needle 'RepositoryPrimarySignature' -Issue "Structured verifier must require a repository primary signature"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle '[string]$ProjectPath = "src\OpenCvSharp\OpenCvSharp.csproj"' -Issue "Pack-Managed default project path must be the neutral managed project"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "OpenCvCSharpManagedPackageId" -Issue "Pack-Managed must derive the neutral managed package ID from Directory.Build.props"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle "`$managedPackageId = Get-RequiredDirectoryBuildProperty" -Issue "Pack-Managed must assign the neutral managed package ID from the central metadata property"
@@ -284,11 +307,16 @@ Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPol
 Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '24' -Issue "Support lifecycle policy must expose the real-support count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
+Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'repository-signing-pending' -Issue "Release closeout documentation must expose the confirmed NuGet.org signing strategy"
+Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'Test-NuGetRepositorySignedPackage.ps1' -Issue "Release closeout documentation must register post-publication signature verification"
 Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle '5.0.0-preview.1' -Issue "Preview release notes must identify the exact normalized public candidate version"
 Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'dotnet remove package JYPPX.OpenCV.CSharp.API' -Issue "Preview release notes must provide managed package uninstall guidance"
 Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'Known Limitations' -Issue "Preview release notes must expose known limitations"
 Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'there is no earlier published' -Issue "First-preview rollback guidance must not invent a prior public package"
 Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'Do not reference full and mini runtime packages together' -Issue "Preview release notes must prevent ambiguous full/mini runtime selection"
+Assert-Contains -Violations $violations -Path $nugetRepositorySigningGuidePath -Text $nugetRepositorySigningGuideText -Needle 'RepositoryPrimarySignature' -Issue "Repository-signing guide must explain the structured NuGet signature type"
+Assert-Contains -Violations $violations -Path $nugetRepositorySigningGuidePath -Text $nugetRepositorySigningGuideText -Needle 'publish-nuget:sha256:' -Issue "Repository-signing guide must explain the dry-run authorization token"
+Assert-Contains -Violations $violations -Path $nugetRepositorySigningGuidePath -Text $nugetRepositorySigningGuideText -Needle 'dotnet nuget verify --all' -Issue "Repository-signing guide must expose the consumer verification command"
 Assert-Contains -Violations $violations -Path $linkedRuntimeGuidePath -Text $linkedRuntimeGuideText -Needle 'Test-ReleasePackageSbom.ps1' -Issue "Linked runtime documentation must register the release package SBOM guard"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"' -Issue "Pack-Runtime default project path must be the neutral runtime package project"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"' -Issue "Pack-Runtime package ID must be derived from neutral runtime package prefix, RID, and profile suffix"
@@ -323,11 +351,11 @@ Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath 
 Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath -Text $runtimeReleasePreflightGuardText -Needle 'Synthetic release-preflight negative path must not produce a runtime package' -Issue "Runtime release preflight guard must prove synthetic preflight integration does not produce packages"
 Assert-Contains -Violations $violations -Path $runtimeReleasePreflightGuardPath -Text $runtimeReleasePreflightGuardText -Needle 'Pack-Runtime -RequireReleasePreflight produces a package only for non-synthetic staged inputs.' -Issue "Runtime release preflight guard must cover positive and negative pack integration cases"
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'Deterministic package manifest' -Issue "Release candidate provenance guard must produce deterministic package manifest evidence"
-Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "SignatureStatus = 'not-ready'" -Issue "Release candidate provenance guard must keep local signing readiness explicit"
+Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "SignatureStatus = 'repository-signing-pending'" -Issue "Release candidate provenance guard must keep NuGet.org repository-signing readiness explicit"
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "SbomStatus = 'not-ready'" -Issue "Release candidate provenance guard must keep local SBOM readiness explicit"
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'PublicationAllowed = $false' -Issue "Release candidate provenance guard must remain non-publishing"
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "local-preflight-only; no remote mutation" -Issue "Release candidate provenance guard must record rollback abort metadata"
-Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'Signature/SBOM state machine' -Issue "Release readiness contract must validate signing and SBOM state transitions"
+Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'repository-signature/SBOM state machine' -Issue "Release readiness contract must validate repository signing and SBOM state transitions"
 Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'Private key material must never be present' -Issue "Release readiness contract must reject private key material"
 Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'pending-hosted-evidence' -Issue "Release readiness contract must keep hosted Windows x86 promotion pending"
 Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'read-only-fixture' -Issue "Release readiness contract must keep public feed verification read-only"

@@ -109,6 +109,10 @@ $workflowRequirements = @(
         MustRunBefore = @("dotnet restore", "dotnet build", "scripts/Pack-Managed.ps1", "scripts/Pack-Runtime.ps1")
     },
     [pscustomobject]@{
+        Path = ".github/workflows/publish-nuget.yml"
+        MustRunBefore = @("dotnet nuget push", "gh release create")
+    },
+    [pscustomobject]@{
         Path = ".github/workflows/docs.yml"
         MustRunBefore = @("dotnet restore", "dotnet build", "dotnet tool restore", "dotnet tool run docfx ./docs/docfx.json", "upload-pages-artifact", "path: docs/_site")
     },
@@ -147,6 +151,7 @@ $sourceEvidenceCounts = [ordered]@{
     ".github/workflows/build-native.yml" = 1
     ".github/workflows/docs.yml" = 1
     ".github/workflows/pack.yml" = 1
+    ".github/workflows/publish-nuget.yml" = 1
     ".github/workflows/runtime-input.yml" = 3
 }
 foreach ($entry in $sourceEvidenceCounts.GetEnumerator()) {
@@ -211,12 +216,30 @@ if ($pagesConditionCount -ne 1) {
 $authoritativeReleaseCondition = "if: github.repository == 'guojin-yan/OpenCV-CSharp-API'"
 foreach ($workflowPath in @(
         ".github/workflows/pack.yml",
+        ".github/workflows/publish-nuget.yml",
         ".github/workflows/runtime-input.yml")) {
     $workflowText = Normalize-CiText -Text (Read-RequiredText -RelativePath $workflowPath)
     $conditionCount = [regex]::Matches($workflowText, [regex]::Escape($authoritativeReleaseCondition), [Text.RegularExpressions.RegexOptions]::IgnoreCase).Count
     if ($conditionCount -ne 1) {
         Add-Violation -Violations $violations -Path $workflowPath -Issue "Release and runtime-input workflow entry must remain authoritative-only" -Text $authoritativeReleaseCondition
     }
+}
+
+$publishWorkflowText = Read-RequiredText -RelativePath ".github/workflows/publish-nuget.yml"
+foreach ($token in @(
+        "environment: nuget-production",
+        "publish_authorization",
+        "scripts/New-NuGetPublicationBundle.ps1",
+        "scripts/Test-NuGetRepositorySignedPackage.ps1",
+        "https://api.nuget.org/v3/index.json",
+        "github.repository == 'guojin-yan/OpenCV-CSharp-API'")) {
+    if ((Get-TokenIndex -Text $publishWorkflowText -Token $token) -lt 0) {
+        Add-Violation -Violations $violations -Path ".github/workflows/publish-nuget.yml" -Issue "NuGet publication workflow lost required authoritative repository-signing gate" -Text $token
+    }
+}
+if ((Get-TokenIndex -Text $publishWorkflowText -Token "dotnet nuget sign") -ge 0 -or
+    (Get-TokenIndex -Text $publishWorkflowText -Token "--skip-duplicate") -ge 0) {
+    Add-Violation -Violations $violations -Path ".github/workflows/publish-nuget.yml" -Issue "NuGet.org repository-signing workflow must not author-sign or hide duplicate publication"
 }
 
 $buildManagedWorkflowPath = ".github/workflows/build-managed.yml"

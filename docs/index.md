@@ -26,6 +26,7 @@ The first release is organized around useful end-to-end workflows while the broa
 - [Smoke Profiles Guide](articles/smoke-profiles-guide.md)
 - [Runtime Licenses](articles/runtime-licenses.md)
 - [Runtime Package Staging Notes](articles/linked-runtime-build-guide.md#pack-runtime--打包-runtime)
+- [NuGet.org Repository Signing Guide](articles/nuget-repository-signing-guide.md)
 
 ## Start Here / 从这里开始
 

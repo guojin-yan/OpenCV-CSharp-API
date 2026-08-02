@@ -19,6 +19,7 @@ $expectedWorkflowPaths = @(
     ".github/workflows/build-native.yml",
     ".github/workflows/docs.yml",
     ".github/workflows/pack.yml",
+    ".github/workflows/publish-nuget.yml",
     ".github/workflows/runtime-input.yml"
 )
 

@@ -197,7 +197,7 @@ function New-DeterministicManifest {
         RuntimeProfile = $RuntimeProfile
         SourceCommit = $Commit
         Entries = @($Package.Entries)
-        SignatureStatus = 'not-ready'
+        SignatureStatus = 'repository-signing-pending'
         SbomStatus = 'not-ready'
         SigningKeyReference = ''
         PublicFeedVerification = 'not-run'
@@ -205,19 +205,26 @@ function New-DeterministicManifest {
         PublicationAttempted = $false
         PublicationAllowed = $false
         Signature = [ordered]@{
-            Status = 'not-ready'
+            Status = 'repository-signing-pending'
+            Strategy = 'nuget.org-repository-signing'
             PackageSha256 = $Package.PackageSha256
             InputPackageSha256 = $Package.PackageSha256
             PostSigningPackageSha256 = ''
             NormalizationRequired = $true
             PackageIdentity = "$($Package.PackageId)/$($Package.PackageVersion)"
             CertificateReference = ''
-            TimestampPolicy = 'RFC3161-required'
-            VerificationResult = ''
+            TimestampPolicy = 'NuGet.org-repository-timestamp-required'
+            ServiceIndex = 'https://api.nuget.org/v3/index.json'
+            ExpectedSignatureType = 'Repository'
+            ExpectedOwner = 'GuojinYan'
+            AuthorCertificateRequired = $false
+            PrivateKeyRequired = $false
+            VerificationResult = 'post-publication-required'
             PrivateKeyMaterialPresent = $false
         }
         SigningHandoff = [ordered]@{
-            Status = 'not-ready'
+            Status = 'repository-signing-pending'
+            Strategy = 'nuget.org-repository-signing'
             PackageSha256 = $Package.PackageSha256
             InputPackageSha256 = $Package.PackageSha256
             PostSigningPackageSha256 = ''
@@ -225,7 +232,13 @@ function New-DeterministicManifest {
             PackageIdentity = "$($Package.PackageId)/$($Package.PackageVersion)"
             PublicKeyReference = ''
             CertificateReference = ''
-            TimestampPolicy = 'RFC3161-required'
+            TimestampPolicy = 'NuGet.org-repository-timestamp-required'
+            ServiceIndex = 'https://api.nuget.org/v3/index.json'
+            ExpectedSignatureType = 'Repository'
+            ExpectedOwner = 'GuojinYan'
+            VerificationScript = 'scripts/Test-NuGetRepositorySignedPackage.ps1'
+            AuthorCertificateRequired = $false
+            PrivateKeyRequired = $false
             CustodyOwner = ''
             KeyNotBefore = ''
             KeyNotAfter = ''
@@ -299,23 +312,23 @@ function Test-Manifest {
         Assert-True -Violations $Violations -Condition ($Manifest.Rid -eq $expectedRid) -Path $ManifestPath -Issue "Release manifest RID does not match runtime package ID" -Text "Expected $expectedRid"
         Assert-True -Violations $Violations -Condition ($Manifest.RuntimeProfile -eq $expectedProfile) -Path $ManifestPath -Issue "Release manifest profile does not match runtime package ID" -Text "Expected $expectedProfile"
     }
-    Assert-True -Violations $Violations -Condition ($Manifest.SignatureStatus -eq 'not-ready') -Path $ManifestPath -Issue "Unsigned local preflight must state signature readiness explicitly"
+    Assert-True -Violations $Violations -Condition ($Manifest.SignatureStatus -eq 'repository-signing-pending') -Path $ManifestPath -Issue "Unsigned local preflight must state NuGet.org repository-signing readiness explicitly"
     Assert-True -Violations $Violations -Condition ($Manifest.SbomStatus -eq 'not-ready') -Path $ManifestPath -Issue "Local preflight must state SBOM readiness explicitly"
     Assert-True -Violations $Violations -Condition ($Manifest.PublicFeedVerification -eq 'not-run') -Path $ManifestPath -Issue "Local preflight must not claim public-feed verification"
     Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.FeedReference)) -Path $ManifestPath -Issue "Local preflight must not carry a mutable feed reference"
     Assert-True -Violations $Violations -Condition (-not [bool]$Manifest.PublicationAttempted) -Path $ManifestPath -Issue "Release preflight must reject publication attempts"
     Assert-True -Violations $Violations -Condition (-not [bool]$Manifest.PublicationAllowed) -Path $ManifestPath -Issue "Local preflight must not authorize publication"
     Assert-True -Violations $Violations -Condition ($null -ne $Manifest.Rollback -and $Manifest.Rollback.AbortRecord -eq 'local-preflight-only; no remote mutation') -Path $ManifestPath -Issue "Rollback metadata must record the non-publishing abort state"
-    Assert-True -Violations $Violations -Condition ($null -ne $Manifest.Signature -and $Manifest.Signature.Status -eq 'not-ready') -Path $ManifestPath -Issue "Signature readiness must be explicit"
+    Assert-True -Violations $Violations -Condition ($null -ne $Manifest.Signature -and $Manifest.Signature.Status -eq 'repository-signing-pending' -and $Manifest.Signature.Strategy -eq 'nuget.org-repository-signing') -Path $ManifestPath -Issue "Repository-signing readiness must be explicit"
     Assert-True -Violations $Violations -Condition ($Manifest.Signature.PackageSha256 -eq $Package.PackageSha256) -Path $ManifestPath -Issue "Signature input hash must match package"
     Assert-True -Violations $Violations -Condition ($Manifest.Signature.InputPackageSha256 -eq $Manifest.Normalization.PackageSha256 -and [bool]$Manifest.Signature.NormalizationRequired) -Path $ManifestPath -Issue "Signature input must bind the normalized package hash"
-    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.CertificateReference)) -Path $ManifestPath -Issue "Not-ready signature must not claim a certificate"
+    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.CertificateReference) -and $Manifest.Signature.TimestampPolicy -eq 'NuGet.org-repository-timestamp-required' -and $Manifest.Signature.ServiceIndex -eq 'https://api.nuget.org/v3/index.json' -and $Manifest.Signature.ExpectedSignatureType -eq 'Repository' -and $Manifest.Signature.ExpectedOwner -eq 'GuojinYan' -and -not [bool]$Manifest.Signature.AuthorCertificateRequired -and -not [bool]$Manifest.Signature.PrivateKeyRequired -and $Manifest.Signature.VerificationResult -eq 'post-publication-required') -Path $ManifestPath -Issue "Repository-signing policy drifted or claimed author-signing inputs"
     Assert-True -Violations $Violations -Condition (-not [bool]$Manifest.Signature.PrivateKeyMaterialPresent) -Path $ManifestPath -Issue "Private key material must never be present in provenance"
-    Assert-True -Violations $Violations -Condition ($null -ne $Manifest.SigningHandoff -and $Manifest.SigningHandoff.Status -eq 'not-ready') -Path $ManifestPath -Issue "Signing handoff must remain not-ready without release inputs"
+    Assert-True -Violations $Violations -Condition ($null -ne $Manifest.SigningHandoff -and $Manifest.SigningHandoff.Status -eq 'repository-signing-pending' -and $Manifest.SigningHandoff.Strategy -eq 'nuget.org-repository-signing') -Path $ManifestPath -Issue "Signing handoff must remain repository-signing-pending before publication"
     Assert-True -Violations $Violations -Condition ($Manifest.SigningHandoff.PackageSha256 -eq $Package.PackageSha256) -Path $ManifestPath -Issue "Signing handoff package hash must match package"
     Assert-True -Violations $Violations -Condition ($Manifest.SigningHandoff.InputPackageSha256 -eq $Manifest.Normalization.PackageSha256 -and [bool]$Manifest.SigningHandoff.NormalizationRequired) -Path $ManifestPath -Issue "Signing handoff must bind the normalized package hash"
-    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.SigningHandoff.PostSigningPackageSha256)) -Path $ManifestPath -Issue "Not-ready signing handoff must not claim post-signing package bytes"
-    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.SigningHandoff.PublicKeyReference) -and [string]::IsNullOrWhiteSpace([string]$Manifest.SigningHandoff.CertificateReference)) -Path $ManifestPath -Issue "Not-ready signing handoff must not claim key or certificate inputs"
+    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.SigningHandoff.PostSigningPackageSha256)) -Path $ManifestPath -Issue "Prepublication signing handoff must not claim repository-signed package bytes"
+    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.SigningHandoff.PublicKeyReference) -and [string]::IsNullOrWhiteSpace([string]$Manifest.SigningHandoff.CertificateReference) -and $Manifest.SigningHandoff.ServiceIndex -eq 'https://api.nuget.org/v3/index.json' -and $Manifest.SigningHandoff.ExpectedSignatureType -eq 'Repository' -and $Manifest.SigningHandoff.ExpectedOwner -eq 'GuojinYan' -and $Manifest.SigningHandoff.VerificationScript -eq 'scripts/Test-NuGetRepositorySignedPackage.ps1' -and -not [bool]$Manifest.SigningHandoff.AuthorCertificateRequired -and -not [bool]$Manifest.SigningHandoff.PrivateKeyRequired) -Path $ManifestPath -Issue "Repository-signing handoff drifted or claimed author-signing inputs"
     Assert-True -Violations $Violations -Condition (-not [bool]$Manifest.SigningHandoff.PrivateKeyMaterialPresent) -Path $ManifestPath -Issue "Signing handoff must reject private key material"
     Assert-True -Violations $Violations -Condition ($null -ne $Manifest.Sbom -and $Manifest.Sbom.Status -eq 'not-ready') -Path $ManifestPath -Issue "SBOM readiness must be explicit"
     Assert-True -Violations $Violations -Condition ($Manifest.Sbom.PackageSha256 -eq $Package.PackageSha256) -Path $ManifestPath -Issue "SBOM input hash must match package"
@@ -428,5 +441,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host 'Release candidate provenance guard passed.'
-Write-Host 'Deterministic package manifest, explicit unsigned/SBOM readiness, rollback metadata, and non-publishing policy validated.'
+Write-Host 'Deterministic package manifest, NuGet.org repository-signing handoff, explicit SBOM readiness, rollback metadata, and non-publishing policy validated.'
 Write-Host 'Negative fixtures rejected: changed hash, extra entry, RID drift, mutable feed, malformed manifest, publication attempt.'

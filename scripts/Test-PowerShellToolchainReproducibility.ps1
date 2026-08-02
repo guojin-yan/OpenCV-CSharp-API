@@ -215,13 +215,14 @@ $expectedWorkflowNames = @(
     "build-native.yml",
     "docs.yml",
     "pack.yml",
+    "publish-nuget.yml",
     "runtime-input.yml"
 )
 
 $workflowFiles = @(Get-ChildItem -LiteralPath $workflowRoot -File | Where-Object { $_.Extension -in @(".yml", ".yaml") } | Sort-Object Name)
 $workflowDifference = @(Compare-Object -ReferenceObject $expectedWorkflowNames -DifferenceObject @($workflowFiles.Name))
 if ($workflowDifference.Count -gt 0) {
-    Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell toolchain guard requires the exact five-workflow set" -Text (($workflowDifference | ForEach-Object { "$($_.SideIndicator)$($_.InputObject)" }) -join ", ")
+    Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell toolchain guard requires the exact six-workflow set" -Text (($workflowDifference | ForEach-Object { "$($_.SideIndicator)$($_.InputObject)" }) -join ", ")
 }
 
 $workflowRecords = @(

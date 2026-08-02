@@ -95,7 +95,8 @@ dotnet restore
 - Some algorithms require user-supplied models, training data, codecs, GUI backends, or optional OpenCV build features. The library does not silently download them.
 - HighGui requires a compatible desktop UI backend and event-thread model. Server, container, and unattended workflows should prefer file or memory encoding.
 - Fedora 40 and Alpine 3.20 are exact compatibility targets with ended standard lifecycle; they are not current-lifecycle distribution promises.
-- Signing, independent approval, public package availability, and support status must be verified from the exact published artifacts and official feed, not inferred from local candidates or mirror CI.
+- The normalized candidate is intentionally unsigned before upload. NuGet.org must add a `Repository` primary signature owned by `GuojinYan`; the downloaded public package must pass `dotnet nuget verify --all` and exact payload comparison before the release is accepted.
+- Independent approval, public package availability, repository-signature evidence, and support status must be verified from the exact published artifacts and official feed, not inferred from local candidates or mirror CI.
 
 - 本版本为 preview。兼容性基线会阻止意外漂移，但后续仍会继续增加 API 与 runtime 包。
 - 已测量模块分区具有明确的 zero-gap 证据，但不代表整个仓库或全部 OpenCV 已达到 parity。
@@ -104,7 +105,8 @@ dotnet restore
 - 部分算法需要用户提供模型、训练数据、codec、GUI backend 或 OpenCV 可选构建能力；库不会静默下载这些输入。
 - HighGui 需要兼容的桌面 UI backend 和事件线程模型。服务器、容器和无人值守流程应优先使用文件或内存编码。
 - Fedora 40 与 Alpine 3.20 是标准生命周期已结束的精确兼容目标，不代表当前生命周期发行版承诺。
-- 签名、独立审批、公共包可用性和支持状态必须以精确发布产物及官方 feed 为准，不能从本地候选或 mirror CI 推断。
+- 规范化候选在上传前有意保持未签名；NuGet.org 必须为公开下载包添加 owner 为 `GuojinYan` 的 `Repository` primary signature，并通过 `dotnet nuget verify --all` 与精确 payload 对比。
+- 独立审批、公共包可用性、repository-signature 证据和支持状态必须以精确发布产物及官方 feed 为准，不能从本地候选或 mirror CI 推断。
 
 ## Verification / 验证
 

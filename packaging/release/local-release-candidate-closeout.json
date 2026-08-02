@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/479845d0e82dabad",
-  "SourceIdentity": "sha256:479845d0e82dabad8f638feae43d30dec33d44cff72bc5f1fe7f261cc5ccf0be",
+  "CandidateId": "local-closeout/sha256/c750bbfb327c7784",
+  "SourceIdentity": "sha256:c750bbfb327c778414d2f3797d0aa678b0e6a007f9666b4ba31618ea51c6d99e",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1584,
-    "Sha256": "479845d0e82dabad8f638feae43d30dec33d44cff72bc5f1fe7f261cc5ccf0be",
+    "FileCount": 1591,
+    "Sha256": "c750bbfb327c778414d2f3797d0aa678b0e6a007f9666b4ba31618ea51c6d99e",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -408,6 +408,11 @@
       "Path": ".github/workflows/pack.yml",
       "Sha256": "e68e2be12f32ee8dfe6ff781fe0fca90062f601db10f9b45736f4df567900674",
       "Length": 265890
+    },
+    {
+      "Path": ".github/workflows/publish-nuget.yml",
+      "Sha256": "9e69337d7c20a32871b96f478b25787be26cacddb0a4cf7d0180d9d7a1eca985",
+      "Length": 22999
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
@@ -891,8 +896,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "eb380882200511d310ddde8569e0fedf481d934801ba047362cb489af44579e6",
-      "Length": 7028
+      "Sha256": "941ed329ac77a714516c4b5ebfbdd5db49394e5737f6a672d040197e5aab5c97",
+      "Length": 8519
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -1010,9 +1015,14 @@
       "Length": 2899
     },
     {
+      "Path": "scripts/New-NuGetPublicationBundle.ps1",
+      "Sha256": "c23cfbf436f89c533cfd6216a27ec90e00d22c65a51b2e16993cdd7537174354",
+      "Length": 11489
+    },
+    {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b6689458975d6df28d66623d5a8133ac378e045cc7f3cae9bdefbf971256e0de",
-      "Length": 57321
+      "Sha256": "160c565c06a932e01a56b3ad01d72a069e9c3bae732e731caf8e12dcfebbedc0",
+      "Length": 58220
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1075,6 +1085,16 @@
       "Length": 16021
     },
     {
+      "Path": "scripts/Test-NuGetRepositorySignedPackage.ps1",
+      "Sha256": "f2051d83cbb51b782406894980a2d26efb9f75e52ffa7ff531fa2217c9315ed8",
+      "Length": 3488
+    },
+    {
+      "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
+      "Sha256": "c452a5ce7493b83d89d26e61c23d5eb651dba73758d68c90905cc206603ccf02",
+      "Length": 12269
+    },
+    {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
       "Sha256": "05cc2b0cb5bdfa6450b612dc8862ef183b806447d0b13bd98241871bbd1c43f9",
       "Length": 1996
@@ -1086,18 +1106,18 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "d0457a690c6c0077f77410440f2c332e6ed259470055b195cde1fc7f8f14ef22",
-      "Length": 52461
+      "Sha256": "76f2cc05e44cfb33081a41f47b36427234f20f45fc875c23fa2d4865c87843d0",
+      "Length": 53332
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
-      "Sha256": "32fc6500a2b8b7ef5e933f31b35ade8f027dd4d37cce20e0440f3ffa27dea274",
-      "Length": 25433
+      "Sha256": "ccb5163e6aef55164589c1f5801897ab78952c292dc6241214de379d55503265",
+      "Length": 27440
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "daf02a9d1a7ba1cfdce7fe2c0bb539fa0b341759c88de7b4e195a5cb29c8a98c",
-      "Length": 42666
+      "Sha256": "54978fe37d0c6ec36d3c41301a339b8a31c9b395a4762fc9b758ae5ec0d040be",
+      "Length": 43269
     },
     {
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
@@ -1111,8 +1131,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseReadinessContract.ps1",
-      "Sha256": "caa3f6f89ebf3dde08b35fcc7e563d774f3796d10b350ce6fa29c67937eae03b",
-      "Length": 17182
+      "Sha256": "6e463592bd5cac600ed6a45ed270891bb3dd888e6d6ad7cd28f721f258d37077",
+      "Length": 18320
     },
     {
       "Path": "scripts/Test-ReleaseSigningBoundary.ps1",
@@ -1475,6 +1495,16 @@
       "Length": 17145
     },
     {
+      "Path": "tools/NuGetRepositorySignatureVerifier/NuGetRepositorySignatureVerifier.csproj",
+      "Sha256": "217bb49664c7c0c139fc4d76dfdf54cf4923e8879533c9c3e59431c3268f43fe",
+      "Length": 370
+    },
+    {
+      "Path": "tools/NuGetRepositorySignatureVerifier/Program.cs",
+      "Sha256": "f176df724e37ab6596ff87ecd16d0e88d701b9d0394fe5cabbc7ede69c6e6b04",
+      "Length": 17658
+    },
+    {
       "Path": "tools/ObjDetectUpstreamMap/ObjDetectUpstreamMap.csproj",
       "Sha256": "cdd6f0b4e4b9c72196431282fc7f42508e52e0f6a10b88a948a157bbdabd220b",
       "Length": 238
@@ -1552,7 +1582,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 75,
+    "InvariantGuardCount": 76,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
@@ -1566,10 +1596,17 @@
     "PublicationAllowed": false
   },
   "Signing": {
-    "Status": "not-ready",
+    "Status": "repository-signing-pending",
+    "Strategy": "nuget.org-repository-signing",
     "NormalizedInputRequired": true,
+    "AuthorCertificateRequired": false,
+    "PrivateKeyRequired": false,
     "PrivateKeyMaterialPresent": false,
-    "Verification": "not-run"
+    "ServiceIndex": "https://api.nuget.org/v3/index.json",
+    "ExpectedSignatureType": "Repository",
+    "ExpectedOwner": "GuojinYan",
+    "VerificationScript": "scripts/Test-NuGetRepositorySignedPackage.ps1",
+    "Verification": "post-publication-required"
   },
   "Sbom": {
     "Status": "not-ready",
@@ -1621,11 +1658,6 @@
       "Evidence": "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open."
     },
     {
-      "Id": "hosted-ci-compatibility",
-      "Status": "quota-blocked",
-      "Evidence": "The first normal hosted CI run after the tightened contracts must prove actual Action permissions and tool behavior."
-    },
-    {
       "Id": "hosted-win-x86-full",
       "Status": "quota-blocked",
       "Evidence": "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent."
@@ -1634,6 +1666,11 @@
       "Id": "macos-support-decision",
       "Status": "decision-deferred",
       "Evidence": "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist."
+    },
+    {
+      "Id": "nuget-production-environment",
+      "Status": "not-configured",
+      "Evidence": "The authoritative nuget-production Environment, protected reviewer, and NUGET_API_KEY secret are not configured."
     },
     {
       "Id": "publication-authorization",
@@ -1646,14 +1683,14 @@
       "Evidence": "No external approver has accepted the exact normalized candidate bytes and provenance."
     },
     {
-      "Id": "sbom-inputs",
-      "Status": "not-ready",
-      "Evidence": "The deterministic SPDX-2.3 generator and guard are provisioned; final-candidate package-bound documents and external approval are not yet generated."
+      "Id": "repository-signing-verification",
+      "Status": "post-publication-required",
+      "Evidence": "NuGet.org must add a Repository primary signature; the public package must then pass cryptographic verification and exact unsigned-payload comparison."
     },
     {
-      "Id": "signing-inputs",
-      "Status": "not-ready",
-      "Evidence": "External certificate, timestamp, custody, and verification inputs are not provisioned."
+      "Id": "sbom-inputs",
+      "Status": "candidate-refresh-required",
+      "Evidence": "The deterministic SPDX-2.3 generator and guard are provisioned; final package-bound documents must be regenerated from the final source commit and approved."
     }
   ],
   "PrivateKeyMaterialPresent": false,

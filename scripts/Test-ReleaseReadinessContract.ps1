@@ -108,15 +108,22 @@ function New-ReadinessManifest {
             Deterministic = $true
         }
         Signature = [ordered]@{
-            Status = 'not-ready'
+            Status = 'repository-signing-pending'
+            Strategy = 'nuget.org-repository-signing'
             PackageSha256 = $Package.PackageSha256
             InputPackageSha256 = $Package.PackageSha256
             PostSigningPackageSha256 = ''
             NormalizationRequired = $true
             PackageIdentity = "$($Package.PackageId)/$($Package.PackageVersion)"
             CertificateReference = ''
-            TimestampPolicy = 'RFC3161-required'
-            VerificationResult = ''
+            TimestampPolicy = 'NuGet.org-repository-timestamp-required'
+            ServiceIndex = 'https://api.nuget.org/v3/index.json'
+            ExpectedSignatureType = 'Repository'
+            ExpectedOwner = 'GuojinYan'
+            VerificationScript = 'scripts/Test-NuGetRepositorySignedPackage.ps1'
+            AuthorCertificateRequired = $false
+            PrivateKeyRequired = $false
+            VerificationResult = 'post-publication-required'
             PrivateKeyMaterialPresent = $false
         }
         Sbom = [ordered]@{
@@ -175,19 +182,19 @@ function Test-ReadinessManifest {
     Assert-True -List $List -Condition ($Manifest.Normalization.PackageSha256 -eq $Package.PackageSha256 -and [int]$Manifest.Normalization.EntryCount -eq @($Package.Entries).Count -and [bool]$Manifest.Normalization.Deterministic) -Path $Path -Issue 'Normalization provenance does not match package contents'
     Assert-True -List $List -Condition ($Manifest.Signature.PackageSha256 -eq $Package.PackageSha256) -Path $Path -Issue 'Signature input hash does not match package'
     Assert-True -List $List -Condition ($Manifest.Signature.InputPackageSha256 -eq $Manifest.Normalization.PackageSha256 -and [bool]$Manifest.Signature.NormalizationRequired) -Path $Path -Issue 'Signing input must bind the normalized package hash'
-    Assert-True -List $List -Condition ($Manifest.Signature.Status -in @('not-ready', 'ready-for-signing', 'signed', 'verified')) -Path $Path -Issue 'Signature status is outside the approved state machine'
+    Assert-True -List $List -Condition ($Manifest.Signature.Status -in @('repository-signing-pending', 'repository-signed', 'verified')) -Path $Path -Issue 'Repository-signature status is outside the approved state machine'
     Assert-True -List $List -Condition (-not [bool]$Manifest.Signature.PrivateKeyMaterialPresent) -Path $Path -Issue 'Private key material must never be present in readiness metadata'
-    if ($Manifest.Signature.Status -eq 'not-ready') {
-        Assert-True -List $List -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.CertificateReference)) -Path $Path -Issue 'Not-ready signature must not claim a certificate'
-        Assert-True -List $List -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.VerificationResult)) -Path $Path -Issue 'Not-ready signature must not claim verification'
-        Assert-True -List $List -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.PostSigningPackageSha256)) -Path $Path -Issue 'Not-ready signature must not claim post-signing package bytes'
+    Assert-True -List $List -Condition ($Manifest.Signature.Strategy -eq 'nuget.org-repository-signing' -and $Manifest.Signature.TimestampPolicy -eq 'NuGet.org-repository-timestamp-required' -and $Manifest.Signature.ServiceIndex -eq 'https://api.nuget.org/v3/index.json' -and $Manifest.Signature.ExpectedSignatureType -eq 'Repository' -and $Manifest.Signature.ExpectedOwner -eq 'GuojinYan' -and $Manifest.Signature.VerificationScript -eq 'scripts/Test-NuGetRepositorySignedPackage.ps1' -and -not [bool]$Manifest.Signature.AuthorCertificateRequired -and -not [bool]$Manifest.Signature.PrivateKeyRequired) -Path $Path -Issue 'NuGet.org repository-signing policy drifted'
+    if ($Manifest.Signature.Status -eq 'repository-signing-pending') {
+        Assert-True -List $List -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.CertificateReference)) -Path $Path -Issue 'Repository-signing pending state must not claim an author certificate'
+        Assert-True -List $List -Condition ($Manifest.Signature.VerificationResult -eq 'post-publication-required') -Path $Path -Issue 'Repository-signing pending state must require post-publication verification'
+        Assert-True -List $List -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.Signature.PostSigningPackageSha256)) -Path $Path -Issue 'Repository-signing pending state must not claim post-publication package bytes'
     }
     else {
-        Assert-True -List $List -Condition (-not [string]::IsNullOrWhiteSpace([string]$Manifest.Signature.CertificateReference)) -Path $Path -Issue 'Signable/signed signature must identify a certificate reference'
+        Assert-True -List $List -Condition ($Manifest.Signature.PostSigningPackageSha256 -match '^[0-9a-f]{64}$' -and $Manifest.Signature.PostSigningPackageSha256 -ne $Manifest.Signature.InputPackageSha256) -Path $Path -Issue 'Repository-signed state must bind distinct public package bytes'
     }
     if ($Manifest.Signature.Status -eq 'verified') {
         Assert-True -List $List -Condition ($Manifest.Signature.VerificationResult -eq 'passed') -Path $Path -Issue 'Verified signature must have a passed verification result'
-        Assert-True -List $List -Condition ($Manifest.Signature.PostSigningPackageSha256 -eq $Manifest.PackageSha256) -Path $Path -Issue 'Verified signature must bind post-signing package bytes'
     }
 
     Assert-True -List $List -Condition ($Manifest.Sbom.Status -in @('not-ready', 'ready', 'verified')) -Path $Path -Issue 'SBOM status is outside the approved state machine'
@@ -229,7 +236,7 @@ try {
     Test-ReadinessManifest -Package $package -Manifest ($json | ConvertFrom-Json) -List $violations -Path $manifestPath
 
     $negativeCases = @(
-        'missing signing key',
+        'missing repository signing policy',
         'changed package hash',
         'unsigned marked signed',
         'SBOM component drift',
@@ -241,9 +248,9 @@ try {
     foreach ($case in $negativeCases) {
         $copy = $json | ConvertFrom-Json
         switch ($case) {
-            'missing signing key' { $copy.Signature.Status = 'ready-for-signing' }
+            'missing repository signing policy' { $copy.Signature.Strategy = '' }
             'changed package hash' { $copy.Signature.PackageSha256 = ('0' * 64) }
-            'unsigned marked signed' { $copy.Signature.Status = 'signed' }
+            'unsigned marked signed' { $copy.Signature.Status = 'verified' }
             'SBOM component drift' { $copy.Sbom.Status = 'ready'; $copy.Sbom.Generator = 'fixture'; $copy.Sbom.GeneratorVersion = '1'; $copy.Sbom.DocumentSha256 = 'a'; $copy.Sbom.ComponentCount = 1; $copy.Sbom.PackageSha256 = ('0' * 64) }
             'nondeterministic ordering' { $copy.Sbom.Deterministic = $false }
             'mutable feed' { $copy.FeedVerification.FeedReference = 'https://example.invalid/latest' }
@@ -279,5 +286,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host 'Release readiness contract passed.'
-Write-Host 'Signature/SBOM state machine, package hash binding, private-key exclusion, read-only feed policy, and hosted win-x86 promotion checklist validated.'
-Write-Host 'Negative fixtures rejected: missing key, package hash drift, unsigned marked signed, SBOM drift, nondeterminism, mutable feed, publication, private key.'
+Write-Host 'NuGet.org repository-signature/SBOM state machine, package hash binding, private-key exclusion, read-only feed policy, and hosted win-x86 promotion checklist validated.'
+Write-Host 'Negative fixtures rejected: missing repository policy, package hash drift, unsigned marked signed, SBOM drift, nondeterminism, mutable feed, publication, private key.'

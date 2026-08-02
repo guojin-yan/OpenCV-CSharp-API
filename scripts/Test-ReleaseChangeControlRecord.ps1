@@ -176,6 +176,9 @@ function New-ReviewRecord {
             'scripts/Test-ReleaseCandidateProvenance.ps1',
             'scripts/Test-ReleaseReadinessContract.ps1',
             'scripts/Test-ReleaseSigningBoundary.ps1',
+            'scripts/Test-NuGetRepositorySigningBoundary.ps1',
+            'scripts/Test-NuGetRepositorySignedPackage.ps1',
+            'scripts/New-NuGetPublicationBundle.ps1',
             'scripts/New-ReleasePackageSbom.ps1',
             'scripts/Test-ReleasePackageSbom.ps1',
             'scripts/Test-ReleaseSupportContract.ps1',
@@ -183,9 +186,10 @@ function New-ReviewRecord {
             'scripts/Test-TargetedPackConsumerVerificationSurface.ps1',
             'scripts/Test-WindowsRuntimePeClosure.ps1',
             '.github/workflows/runtime-input.yml',
-            '.github/workflows/pack.yml'
+            '.github/workflows/pack.yml',
+            '.github/workflows/publish-nuget.yml'
         )
-        SigningStatus = 'not-ready'
+        SigningStatus = 'repository-signing-pending'
         SbomStatus = if ($Sboms.Count -eq $Packages.Count -and $Packages.Count -gt 0) { 'generated-unapproved' } else { 'not-ready' }
         Reviewer = [ordered]@{ Id = 'automated-local-preflight'; Status = 'completed' }
         Approver = [ordered]@{ Id = 'unassigned'; Status = 'not-approved' }
@@ -200,6 +204,7 @@ function New-ReviewRecord {
             [ordered]@{ Area = 'feed-trust'; Guard = 'scripts/Test-PublicFeedVerificationContract.ps1' },
             [ordered]@{ Area = 'public-feed'; Guard = 'scripts/Test-PublicFeedVerificationContract.ps1' },
             [ordered]@{ Area = 'signing-sbom'; Guard = 'scripts/Test-ReleaseSigningBoundary.ps1' },
+            [ordered]@{ Area = 'repository-signing'; Guard = 'scripts/Test-NuGetRepositorySigningBoundary.ps1' },
             [ordered]@{ Area = 'package-sbom'; Guard = 'scripts/Test-ReleasePackageSbom.ps1' },
             [ordered]@{ Area = 'hosted-x86'; Guard = 'scripts/Test-TargetedPackConsumerVerificationSurface.ps1' },
             [ordered]@{ Area = 'release-scripts'; Guard = 'scripts/Test-ReleasePackageArtifactSurface.ps1' }
@@ -232,13 +237,12 @@ function New-ReviewRecord {
             Allowed = $false
         }
         RequiredApprovalInputs = @(
-            'immutable-certificate-reference',
-            'immutable-public-key-reference',
-            'rfc3161-timestamp-service',
-            'private-key-custody-owner',
-            'designated-signer',
+            'nuget-production-environment',
+            'nuget-api-key-custody-owner',
+            'designated-publisher',
             'independent-approver',
-            'explicit-publication-authorization'
+            'explicit-publication-authorization',
+            'post-publish-repository-signature-verification'
         )
         PrivateKeyMaterialPresent = $false
         SecretMaterialPresent = $false
@@ -280,10 +284,10 @@ function Test-ReviewRecord {
     Assert-True -List $List -Condition ($Record.SupportMatrix.WinX86FullStatus -eq 'hosted-evidence-pending' -and $Record.SupportMatrix.WinX86MiniStatus -eq 'excluded') -Path $Path -Issue 'Windows x86 support status changed without hosted evidence'
     $expectedCloseoutValues = "$($ExpectedCloseout.Path)|$($ExpectedCloseout.Sha256)|$($ExpectedCloseout.CandidateId)|$($ExpectedCloseout.SourceSetSha256)|$($ExpectedCloseout.Status)|$($ExpectedCloseout.InvariantGuardCount)|$($ExpectedCloseout.SigningStatus)|$($ExpectedCloseout.SbomStatus)|$($ExpectedCloseout.ApprovalStatus)|$($ExpectedCloseout.PublicationAllowed)"
     $recordCloseoutValues = "$($Record.Closeout.Path)|$($Record.Closeout.Sha256)|$($Record.Closeout.CandidateId)|$($Record.Closeout.SourceSetSha256)|$($Record.Closeout.Status)|$($Record.Closeout.InvariantGuardCount)|$($Record.Closeout.SigningStatus)|$($Record.Closeout.SbomStatus)|$($Record.Closeout.ApprovalStatus)|$($Record.Closeout.PublicationAllowed)"
-    Assert-True -List $List -Condition ($recordCloseoutValues -ceq $expectedCloseoutValues -and $Record.Closeout.Status -eq 'locally-validated' -and [int]$Record.Closeout.InvariantGuardCount -eq 75 -and $Record.Closeout.SigningStatus -eq 'not-ready' -and $Record.Closeout.ApprovalStatus -eq 'not-approved' -and -not [bool]$Record.Closeout.PublicationAllowed -and $Record.Closeout.Sha256 -match '^[0-9a-f]{64}$') -Path $Path -Issue 'Release review closeout binding drifted'
+    Assert-True -List $List -Condition ($recordCloseoutValues -ceq $expectedCloseoutValues -and $Record.Closeout.Status -eq 'locally-validated' -and [int]$Record.Closeout.InvariantGuardCount -eq 76 -and $Record.Closeout.SigningStatus -eq 'repository-signing-pending' -and $Record.Closeout.ApprovalStatus -eq 'not-approved' -and -not [bool]$Record.Closeout.PublicationAllowed -and $Record.Closeout.Sha256 -match '^[0-9a-f]{64}$') -Path $Path -Issue 'Release review closeout binding drifted'
     $expectedSbomStatus = if ($Sboms.Count -eq $Packages.Count -and $Packages.Count -gt 0) { 'generated-unapproved' } else { 'not-ready' }
     $expectedSbomEvidenceKind = if ($Sboms.Count -gt 0) { 'deterministic-package-bound' } else { 'not-provisioned' }
-    Assert-True -List $List -Condition ($Record.SigningStatus -eq 'not-ready' -and $Record.SbomStatus -eq $expectedSbomStatus -and $Record.SbomEvidenceKind -eq $expectedSbomEvidenceKind) -Path $Path -Issue 'Release review signing/SBOM state drifted'
+    Assert-True -List $List -Condition ($Record.SigningStatus -eq 'repository-signing-pending' -and $Record.SbomStatus -eq $expectedSbomStatus -and $Record.SbomEvidenceKind -eq $expectedSbomEvidenceKind) -Path $Path -Issue 'Release review signing/SBOM state drifted'
     Assert-True -List $List -Condition ($Record.Reviewer.Id -eq 'automated-local-preflight' -and $Record.Reviewer.Status -eq 'completed') -Path $Path -Issue 'Release review reviewer identity/status is invalid'
     Assert-True -List $List -Condition ($Record.Approver.Id -eq 'unassigned' -and $Record.Approver.Status -eq 'not-approved') -Path $Path -Issue 'Release review approver must remain explicitly unassigned/not-approved'
     Assert-True -List $List -Condition (-not [bool]$Record.PrivateKeyMaterialPresent -and -not [bool]$Record.SecretMaterialPresent) -Path $Path -Issue 'Release review must not contain private key or secret material'
@@ -295,6 +299,9 @@ function Test-ReviewRecord {
         'scripts/Test-ReleaseCandidateProvenance.ps1',
         'scripts/Test-ReleaseReadinessContract.ps1',
         'scripts/Test-ReleaseSigningBoundary.ps1',
+        'scripts/Test-NuGetRepositorySigningBoundary.ps1',
+        'scripts/Test-NuGetRepositorySignedPackage.ps1',
+        'scripts/New-NuGetPublicationBundle.ps1',
         'scripts/New-ReleasePackageSbom.ps1',
         'scripts/Test-ReleasePackageSbom.ps1',
         'scripts/Test-ReleaseSupportContract.ps1',
@@ -302,7 +309,8 @@ function Test-ReviewRecord {
         'scripts/Test-TargetedPackConsumerVerificationSurface.ps1',
         'scripts/Test-WindowsRuntimePeClosure.ps1',
         '.github/workflows/runtime-input.yml',
-        '.github/workflows/pack.yml'
+        '.github/workflows/pack.yml',
+        '.github/workflows/publish-nuget.yml'
     )
     $actualEvidenceReferences = @($Record.EvidenceReferences | ForEach-Object { [string]$_ })
     Assert-True -List $List -Condition ((@($actualEvidenceReferences | Sort-Object) -join "`n") -eq (@($expectedEvidenceReferences | Sort-Object) -join "`n")) -Path $Path -Issue 'Release review evidence references changed or are incomplete'
@@ -329,10 +337,10 @@ function Test-ReviewRecord {
         })
     Assert-True -List $List -Condition ([string]::Join("`n", $actualSboms) -eq [string]::Join("`n", $recordSboms)) -Path $Path -Issue 'Release review SBOM hashes or package bindings do not match actual documents'
 
-    $requiredApprovalInputs = @('designated-signer','explicit-publication-authorization','immutable-certificate-reference','immutable-public-key-reference','independent-approver','private-key-custody-owner','rfc3161-timestamp-service')
+    $requiredApprovalInputs = @('designated-publisher','explicit-publication-authorization','independent-approver','nuget-api-key-custody-owner','nuget-production-environment','post-publish-repository-signature-verification')
     Assert-True -List $List -Condition ((@($Record.RequiredApprovalInputs | Sort-Object) -join ',') -eq ($requiredApprovalInputs -join ',')) -Path $Path -Issue 'Release review approval input checklist drifted'
 
-    $expectedAreas = @('abi-api','feed-trust','hosted-x86','package-metadata','package-sbom','public-feed','release-scripts','runtime-matrix','signing-sbom','support-contract','toolchain-pins','workflow-permissions')
+    $expectedAreas = @('abi-api','feed-trust','hosted-x86','package-metadata','package-sbom','public-feed','release-scripts','repository-signing','runtime-matrix','signing-sbom','support-contract','toolchain-pins','workflow-permissions')
     $actualAreas = @($Record.ChangeControl | ForEach-Object { $_.Area } | Sort-Object)
     Assert-True -List $List -Condition ([string]::Join(',', $actualAreas) -eq [string]::Join(',', $expectedAreas)) -Path $Path -Issue 'Release change-control area list changed'
     foreach ($entry in $Record.ChangeControl) {
@@ -489,7 +497,7 @@ try {
             'SBOM state drift' { $copy.SbomStatus = 'verified' }
             'closeout drift' { $copy.Closeout.InvariantGuardCount = 0 }
             'closeout hash drift' { $copy.Closeout.Sha256 = ('0' * 64) }
-            'approval input drift' { $copy.RequiredApprovalInputs[0] = 'mutable-certificate-reference' }
+            'approval input drift' { $copy.RequiredApprovalInputs[0] = 'author-signing-certificate-substitute' }
             'record kind drift' { $copy.RecordKind = 'unknown' }
             'SBOM format drift' { $copy.Sboms[0].Format = 'unknown' }
         }

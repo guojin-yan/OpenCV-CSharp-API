@@ -97,6 +97,7 @@ $expectedWorkflowNames = @(
     "build-native.yml",
     "docs.yml",
     "pack.yml",
+    "publish-nuget.yml",
     "runtime-input.yml"
 )
 $workflowFiles = @(
@@ -112,7 +113,7 @@ if ($workflowDifference.Count -gt 0) {
     Add-Violation `
         -Violations $violations `
         -Path ".github/workflows" `
-        -Issue "Workflow container image guard requires the exact five-workflow set" `
+        -Issue "Workflow container image guard requires the exact six-workflow set" `
         -Text (($workflowDifference | ForEach-Object { "$($_.SideIndicator)$($_.InputObject)" }) -join ", ")
 }
 

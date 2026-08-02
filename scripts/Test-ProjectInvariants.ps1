@@ -305,6 +305,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "NuGet.org repository-signing boundary"
+        Script = Join-Path $repo "scripts/Test-NuGetRepositorySigningBoundary.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Public feed verification contract"
         Script = Join-Path $repo "scripts/Test-PublicFeedVerificationContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)

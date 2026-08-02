@@ -73,6 +73,44 @@ $expectations = [ordered]@{
             )
         }
     }
+    ".github/workflows/publish-nuget.yml" = [pscustomobject]@{
+        WorkflowPermissions = New-PermissionMap @{ contents = "read" }
+        JobPermissions = [ordered]@{
+            "prepare" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+            "publish-nuget" = New-PermissionMap @{
+                contents = "read"
+            }
+            "verify-nuget" = New-PermissionMap @{
+                contents = "read"
+            }
+            "create-github-release" = New-PermissionMap @{
+                contents = "write"
+            }
+        }
+        RequiredJobMarkers = [ordered]@{
+            "prepare" = @(
+                "actions/download-artifact@",
+                "run-id:",
+                "github-token:"
+            )
+            "publish-nuget" = @(
+                "environment: nuget-production",
+                "dotnet nuget push",
+                "secrets.NUGET_API_KEY"
+            )
+            "verify-nuget" = @(
+                "Test-NuGetRepositorySignedPackage.ps1",
+                "actions/upload-artifact@"
+            )
+            "create-github-release" = @(
+                "environment: nuget-production",
+                "gh release create"
+            )
+        }
+    }
     ".github/workflows/runtime-input.yml" = [pscustomobject]@{
         WorkflowPermissions = New-PermissionMap @{ contents = "read" }
         JobPermissions = [ordered]@{}
@@ -433,4 +471,4 @@ if ($violations.Count -gt 0) {
 
 Write-Host "GitHub workflow permissions guard passed."
 Write-Host "Workflow files checked: $($workflowFiles.Count); jobs checked: $jobCount; job-level permission blocks: $jobPermissionBlockCount."
-Write-Host "Workflow-level permissions are read-only; write scopes are limited to deploy-pages, pack-managed, and pack-runtime."
+Write-Host "Workflow-level permissions are read-only; write scopes are limited to deploy-pages, GitHub Packages pack jobs, and the Environment-gated GitHub Release job."
