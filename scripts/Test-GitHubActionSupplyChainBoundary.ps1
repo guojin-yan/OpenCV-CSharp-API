@@ -14,28 +14,42 @@ if (-not (Test-Path -LiteralPath $workflowRoot -PathType Container)) {
 # Update an action SHA only after independently resolving and auditing its official release tag.
 $approvedActions = [ordered]@{
     "actions/checkout" = [pscustomobject]@{
-        Sha = "11d5960a326750d5838078e36cf38b85af677262"
-        Major = "v4"
+        Sha = "3d3c42e5aac5ba805825da76410c181273ba90b1"
+        Major = "v7"
+        ReleaseTag = "v7.0.1"
+        Runtime = "node24"
     }
     "actions/setup-dotnet" = [pscustomobject]@{
-        Sha = "67a3573c9a986a3f9c594539f4ab511d57bb3ce9"
-        Major = "v4"
+        Sha = "a98b56852c35b8e3190ac28c8c2271da59106c68"
+        Major = "v6"
+        ReleaseTag = "v6.0.0"
+        Runtime = "node24"
     }
     "actions/download-artifact" = [pscustomobject]@{
-        Sha = "d3f86a106a0bac45b974a628896c90dbdf5c8093"
-        Major = "v4"
+        Sha = "3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c"
+        Major = "v8"
+        ReleaseTag = "v8.0.1"
+        Runtime = "node24"
     }
     "actions/upload-artifact" = [pscustomobject]@{
-        Sha = "ea165f8d65b6e75b540449e92b4886f43607fa02"
-        Major = "v4"
+        Sha = "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a"
+        Major = "v7"
+        ReleaseTag = "v7.0.1"
+        Runtime = "node24"
     }
     "actions/upload-pages-artifact" = [pscustomobject]@{
-        Sha = "56afc609e74202658d3ffba0e8f6dda462b719fa"
-        Major = "v3"
+        Sha = "fc324d3547104276b827a68afc52ff2a11cc49c9"
+        Major = "v5"
+        ReleaseTag = "v5.0.0"
+        Runtime = "composite"
+        TransitivePin = "actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f"
+        TransitiveRuntime = "node24"
     }
     "actions/deploy-pages" = [pscustomobject]@{
-        Sha = "d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e"
-        Major = "v4"
+        Sha = "cd2ce8fcbc39b97be8ca5fce6e763baed58fa128"
+        Major = "v5"
+        ReleaseTag = "v5.0.0"
+        Runtime = "node24"
     }
 }
 
@@ -74,6 +88,21 @@ if ($workflowFiles.Count -eq 0) {
 $violations = [System.Collections.Generic.List[object]]::new()
 $approvedUseCounts = @{}
 foreach ($actionName in $approvedActions.Keys) {
+    $approved = $approvedActions[$actionName]
+    if ($approved.Sha -notmatch '^[0-9a-f]{40}$') {
+        Add-Violation -Violations $violations -Path 'scripts/Test-GitHubActionSupplyChainBoundary.ps1' -Issue 'Audited action SHA must be an immutable lowercase commit' -Text $actionName
+    }
+    if ($approved.ReleaseTag -notmatch "^$([regex]::Escape($approved.Major))\.\d+\.\d+$") {
+        Add-Violation -Violations $violations -Path 'scripts/Test-GitHubActionSupplyChainBoundary.ps1' -Issue 'Audited release tag must match the workflow major-version comment' -Text "$actionName $($approved.ReleaseTag) / $($approved.Major)"
+    }
+    if ($approved.Runtime -eq 'composite') {
+        if ($approved.TransitivePin -notmatch '^actions/[a-z0-9-]+@[0-9a-f]{40}$' -or $approved.TransitiveRuntime -ne 'node24') {
+            Add-Violation -Violations $violations -Path 'scripts/Test-GitHubActionSupplyChainBoundary.ps1' -Issue 'Composite action must retain an immutable audited Node.js 24 transitive action' -Text $actionName
+        }
+    }
+    elseif ($approved.Runtime -ne 'node24') {
+        Add-Violation -Violations $violations -Path 'scripts/Test-GitHubActionSupplyChainBoundary.ps1' -Issue 'JavaScript action must use the audited Node.js 24 runtime' -Text "$actionName runtime=$($approved.Runtime)"
+    }
     $approvedUseCounts[$actionName] = 0
 }
 
@@ -204,4 +233,5 @@ if ($violations.Count -gt 0) {
 
 Write-Host "GitHub Action supply-chain boundary guard passed."
 Write-Host "Workflow files checked: $($workflowFiles.Count); uses declarations: $usesDeclarationCount; approved external actions: $($approvedActions.Count)."
+Write-Host "Audited official release pins use Node.js 24 directly or through the immutable upload-pages composite dependency."
 Write-Host "Local actions: $localUseCount; digest-pinned Docker actions: $dockerUseCount."

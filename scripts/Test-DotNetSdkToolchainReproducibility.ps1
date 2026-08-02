@@ -11,7 +11,8 @@ $aggregateRelativePath = "scripts/Test-ProjectInvariants.ps1"
 $guardRelativePath = "scripts/Test-DotNetSdkToolchainReproducibility.ps1"
 $expectedGlobalSdkVersion = "10.0.302"
 $expectedSdkVersions = @("10.0.302", "9.0.316", "8.0.423")
-$setupDotNetSha = "67a3573c9a986a3f9c594539f4ab511d57bb3ce9"
+$setupDotNetSha = "a98b56852c35b8e3190ac28c8c2271da59106c68"
+$setupDotNetMajor = "v6"
 $expectedWorkflowSetupCounts = [ordered]@{
     ".github/workflows/build-managed.yml" = 1
     ".github/workflows/build-native.yml" = 1
@@ -277,7 +278,7 @@ foreach ($workflowRelativePath in $expectedWorkflowPaths) {
                 -Issue "setup-dotnet must retain the separately audited Action commit" `
                 -Text "actual=$revision expected=$setupDotNetSha"
         }
-        if (-not $usesMatch.Groups["comment"].Value.Equals("v4", [System.StringComparison]::Ordinal)) {
+        if (-not $usesMatch.Groups["comment"].Value.Equals($setupDotNetMajor, [System.StringComparison]::Ordinal)) {
             Add-Violation `
                 -Violations $violations `
                 -Path $workflowRelativePath `

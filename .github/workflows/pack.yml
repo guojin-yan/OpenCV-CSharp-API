@@ -56,8 +56,8 @@ jobs:
     if: github.repository == 'guojin-yan/OpenCV-CSharp-API'
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -93,8 +93,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -117,7 +117,7 @@ jobs:
             -NoBuild `
             -NoRestore
       - name: Upload managed package
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: nupkg-managed
           path: artifacts/packages/*.nupkg
@@ -245,8 +245,8 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -274,7 +274,7 @@ jobs:
           "opencv_install_dir=$($result.OpenCvInstallDir)" >> $env:GITHUB_OUTPUT
       - name: Download real runtime input artifact
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.validate_synthetic_runtime != 'true' && inputs.real_runtime_artifact_run_id != '' }}
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           run-id: ${{ inputs.real_runtime_artifact_run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -2335,7 +2335,7 @@ jobs:
           pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 @packArgs
       - name: Upload runtime package
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: nupkg-${{ matrix.rid }}-${{ matrix.profile }}
           path: artifacts/packages/*.nupkg
@@ -2356,9 +2356,9 @@ jobs:
     if: ${{ inputs.rid == 'all' && inputs.runtime_profile == 'all' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Download package artifacts
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           path: artifacts/pack-download
       - name: Verify package artifact matrix
@@ -2377,15 +2377,15 @@ jobs:
     if: ${{ inputs.rid == 'all' && inputs.runtime_profile == 'all' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
             9.0.316
             8.0.423
       - name: Download package artifacts
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           path: artifacts/pack-download
       - name: Verify package consumer restore
@@ -2403,8 +2403,8 @@ jobs:
     if: ${{ ((inputs.rid == 'ubuntu.24.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini')) || (inputs.rid == 'ubuntu.22.04-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini'))) && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ${{ inputs.rid == 'ubuntu.22.04-x64' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -2445,12 +2445,12 @@ jobs:
               ;;
           esac
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted/nupkg-managed
       - name: Download selected runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
@@ -2487,8 +2487,8 @@ jobs:
     if: ${{ inputs.rid == 'win-x86' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -2584,12 +2584,12 @@ jobs:
           "runtime_version=$runtimeVersion" >> $env:GITHUB_OUTPUT
           "install_script_sha256=$installScriptSha256" >> $env:GITHUB_OUTPUT
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-windows-x86/nupkg-managed
       - name: Download Windows x86 full runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-win-x86-full
           path: artifacts/pack-targeted-windows-x86/nupkg-win-x86-full
@@ -2645,8 +2645,8 @@ jobs:
     if: ${{ inputs.rid == 'win-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -2678,12 +2678,12 @@ jobs:
           }
           Write-Host "WINDOWS_X64_PACKAGE_CONSUMER_HOST_OK PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess)"
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-windows/nupkg-managed
       - name: Download Windows x64 runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-windows/nupkg-${{ inputs.rid }}-${{ inputs.runtime_profile }}
@@ -2738,8 +2738,8 @@ jobs:
     if: ${{ inputs.rid == 'win-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: windows-11-vs2026-arm
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -2773,12 +2773,12 @@ jobs:
           }
           Write-Host "WINDOWS_ARM64_PACKAGE_CONSUMER_HOST_OK RUNNER_ARCH=$($env:RUNNER_ARCH) PROCESSOR_ARCHITECTURE=$($env:PROCESSOR_ARCHITECTURE) OSArchitecture=$osArchitecture ProcessArchitecture=$processArchitecture Is64BitProcess=$([Environment]::Is64BitProcess) PROCESSOR_ARCHITEW6432=$($env:PROCESSOR_ARCHITEW6432)"
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-windows-arm64/nupkg-managed
       - name: Download Windows ARM64 runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-win-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-windows-arm64/nupkg-win-arm64-${{ inputs.runtime_profile }}
@@ -2833,8 +2833,8 @@ jobs:
     if: ${{ inputs.rid == 'ubuntu.24.04-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
@@ -2856,12 +2856,12 @@ jobs:
           echo "UBUNTU_24_04_ARM64_CONSUMER_EVIDENCE profile=${{ inputs.runtime_profile }} ImageOS=${ImageOS:-unknown} ImageVersion=${ImageVersion:-unknown} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$libc"
           dotnet --info
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-ubuntu-arm64/nupkg-managed
       - name: Download Ubuntu ARM64 runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-ubuntu.24.04-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-ubuntu-arm64/nupkg-ubuntu.24.04-arm64-${{ inputs.runtime_profile }}
@@ -2979,14 +2979,14 @@ jobs:
     if: ${{ inputs.rid == 'ubuntu.22.04-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-managed
       - name: Download Ubuntu 22.04 ARM64 runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-ubuntu.22.04-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-ubuntu2204-arm64/nupkg-ubuntu.22.04-arm64-${{ inputs.runtime_profile }}
@@ -3236,20 +3236,20 @@ jobs:
           echo "POWERSHELL_APT_TOOLCHAIN_EVIDENCE rid=debian.12-x64 package=powershell package_version=$installed_powershell_package_version semantic_version=$installed_powershell_version package_arch=$installed_powershell_package_architecture process_arch=$process_architecture key_fingerprint=$installed_key_fingerprints"
           echo "DEBIAN_12_X64_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture DPKG_ARCH=$(dpkg --print-architecture) LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
             9.0.316
             8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-debian/nupkg-managed
       - name: Download Debian runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-debian.12-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-debian/nupkg-debian.12-x64-${{ inputs.runtime_profile }}
@@ -3371,14 +3371,14 @@ jobs:
     if: ${{ inputs.rid == 'debian.12-arm64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-debian-arm64/nupkg-managed
       - name: Download Debian 12 ARM64 runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-debian.12-arm64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-debian-arm64/nupkg-debian.12-arm64-${{ inputs.runtime_profile }}
@@ -3654,20 +3654,20 @@ jobs:
           echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=fedora.40-x64 package_nevra=$POWERSHELL_RPM_PACKAGE_NEVRA package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture key_package=$installed_microsoft_key_package key_fingerprint=$installed_key_fingerprints repository=packages-microsoft-com-prod"
           echo "FEDORA_40_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=${PLATFORM_ID:-unknown} SUPPORT_END=$SUPPORT_END UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
             9.0.316
             8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-fedora/nupkg-managed
       - name: Download Fedora runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-fedora.40-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-fedora/nupkg-fedora.40-x64-${{ inputs.runtime_profile }}
@@ -3884,20 +3884,20 @@ jobs:
           echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=rocky.9-x64 package_nevra=$POWERSHELL_RPM_PACKAGE_NEVRA package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture key_package=$installed_microsoft_key_package key_fingerprint=$installed_key_fingerprints repository=packages-microsoft-com-prod"
           echo "ROCKY_9_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
             9.0.316
             8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-rocky/nupkg-managed
       - name: Download Rocky runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-rocky.9-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-rocky/nupkg-rocky.9-x64-${{ inputs.runtime_profile }}
@@ -4118,20 +4118,20 @@ jobs:
           echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=rhel.9-x64 package_nevra=$POWERSHELL_RPM_PACKAGE_NEVRA package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture key_package=$installed_microsoft_key_package key_fingerprint=$installed_key_fingerprints repository=packages-microsoft-com-prod"
           echo "RHEL_9_UBI_CONTAINER_EVIDENCE profile=${{ inputs.runtime_profile }} ID=$ID VERSION_ID=$VERSION_ID PLATFORM_ID=$PLATFORM_ID UNAME=$(uname -m) PROCESS_ARCH=$process_architecture RPM_ARCH=$(rpm --eval '%{_arch}') LIBC=$container_libc"
           pwsh --version
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
             10.0.302
             9.0.316
             8.0.423
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-rhel/nupkg-managed
       - name: Download RHEL runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-rhel.9-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-rhel/nupkg-rhel.9-x64-${{ inputs.runtime_profile }}
@@ -4253,14 +4253,14 @@ jobs:
     if: ${{ inputs.rid == 'alpine.3.20-x64' && (inputs.runtime_profile == 'full' || inputs.runtime_profile == 'mini') && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true' }}
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Download managed package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-managed
           path: artifacts/pack-targeted-alpine/nupkg-managed
       - name: Download Alpine runtime package artifact
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: nupkg-alpine.3.20-x64-${{ inputs.runtime_profile }}
           path: artifacts/pack-targeted-alpine/nupkg-alpine.3.20-x64-${{ inputs.runtime_profile }}
