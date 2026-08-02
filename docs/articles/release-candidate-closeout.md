@@ -34,13 +34,15 @@ After rebuilding the normalized unsigned packages from the final release commit,
 pwsh -NoProfile -File ./scripts/New-ReleasePackageSbom.ps1 -PackagePath <normalized-unsigned.nupkg> -SourceCommit <40-hex-final-commit> -Created <factual-UTC-timestamp> -OpenCvVersion 5.0.0 -OutputPath <package.spdx.json>
 pwsh -NoProfile -File ./scripts/New-ReleasePackageSbom.ps1 -PackagePath <normalized-unsigned.nupkg> -SourceCommit <40-hex-final-commit> -Created <same-factual-UTC-timestamp> -OpenCvVersion 5.0.0 -OutputPath <package.spdx.json> -Check
 pwsh -NoProfile -File ./scripts/Test-ReleasePackageSbom.ps1
+pwsh -NoProfile -File ./scripts/Test-ReleaseChangeControlRecord.ps1 -PackageRoot <package-root> -SbomRoot <sbom-root> -OutputPath <release-change-control.json> -Created <same-factual-UTC-timestamp> -ExpectedPackageCount 3
+pwsh -NoProfile -File ./scripts/Test-ReleaseChangeControlRecord.ps1 -PackageRoot <package-root> -SbomRoot <sbom-root> -OutputPath <release-change-control.json> -Created <same-factual-UTC-timestamp> -ExpectedPackageCount 3 -Check
 ```
 
-The generator rejects signed or nondeterministically normalized packages, repository/source drift, unsafe archive entries, synthetic runtime provenance, version/OpenCV/license drift, and stale SBOM bytes. Generator readiness does not mean that final-candidate documents exist: the closeout remains `not-ready` until documents are generated from the exact final package bytes, reviewed, and bound into release approval.
+The generator rejects signed or nondeterministically normalized packages, repository/source drift, unsafe archive entries, synthetic runtime provenance, version/OpenCV/license drift, and stale SBOM bytes. The durable change-control record classifies exact commit-bound packages as `current-unsigned-candidate` and complete package-bound SBOMs as `generated-unapproved`; these states never imply a signature, human approval, or publication authorization. Generator readiness does not mean that final-candidate documents exist: the closeout remains `not-ready` until documents are generated from the exact final package bytes, reviewed, and bound into release approval.
 
 首个发布渠道使用严格打包输入 `5.0.0.0-preview.1`，对应 NuGet 规范身份 `5.0.0-preview.1`。使用真实 win-x64 输入生成的 full/mini preview 包已通过 release preflight、产物检查、隔离还原/构建和包内 native smoke；这些结果只证明本地 preview 路径，不代表已批准或已发布。签名、审批或上传前，必须基于最终 release commit 重新生成并核对最终包字节与哈希。
 
-最终提交的规范化未签名包生成后，必须用 `New-ReleasePackageSbom.ps1` 为每个精确包生成 SPDX-2.3 文档，并以相同 commit、UTC 时间和 OpenCV 版本参数执行 `-Check`。生成器会拒绝已签名或未规范化包、源码与仓库漂移、不安全 ZIP entry、synthetic runtime provenance、版本/OpenCV/license 漂移及陈旧文档。生成器本身已就绪不代表最终候选 SBOM 已生成；在文档绑定最终包字节并完成外部审核前，closeout 仍保持 `not-ready`。
+最终提交的规范化未签名包生成后，必须用 `New-ReleasePackageSbom.ps1` 为每个精确包生成 SPDX-2.3 文档，并以相同 commit、UTC 时间和 OpenCV 版本参数执行 `-Check`。随后使用显式 `-PackageRoot`、`-SbomRoot`、`-OutputPath` 与 `-Check` 生成 durable change-control record。记录会把精确 commit-bound 包分类为 `current-unsigned-candidate`、把完整 package-bound SBOM 分类为 `generated-unapproved`；这两个状态都不代表已签名、人工批准或允许发布。生成器会拒绝已签名或未规范化包、源码与仓库漂移、不安全 ZIP entry、synthetic runtime provenance、版本/OpenCV/license 漂移及陈旧文档。在完成外部审核前，closeout 仍保持 `not-ready`。
 
 ## Blocker Ledger
 

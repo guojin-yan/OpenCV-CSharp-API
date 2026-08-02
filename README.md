@@ -13,6 +13,7 @@ The first public version focuses on practical image processing, image codecs, fe
 首个公开版本优先保证图像处理、图像编解码、特征提取与匹配、相机/视频 I/O、几何与标定、DNN 推理、传统机器学习、照片处理、目标检测、跟踪和拼接等主要场景可用。托管公共 API 与 native C ABI 均以源码基线管理，后续版本可以持续扩展覆盖范围，但不会静默破坏既有调用方。
 
 - [First Release Overview / 首版概览](docs/articles/first-release-overview.md)
+- [5.0.0-preview.1 Release Notes / 发布说明](docs/articles/preview-release-notes.md)
 - [Visual Showcase / 可视化案例](docs/articles/visual-showcase.md)
 - [Scenario Recipes / 场景路线](docs/articles/scenario-recipes.md)
 - [Quick Start / 快速开始](docs/articles/quick-start.md)

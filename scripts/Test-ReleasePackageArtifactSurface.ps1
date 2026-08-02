@@ -158,6 +158,7 @@ $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
 $apiAbiPolicyPath = "docs/articles/api-abi-compatibility-policy.md"
 $supportLifecyclePolicyPath = "docs/articles/support-lifecycle-policy.md"
 $releaseCloseoutDocPath = "docs/articles/release-candidate-closeout.md"
+$previewReleaseNotesPath = "docs/articles/preview-release-notes.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $githubPackArtifactGuardPath = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"
 $githubPackConsumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
@@ -212,6 +213,7 @@ $linkedRuntimeGuideText = Read-RequiredText -RelativePath $linkedRuntimeGuidePat
 $apiAbiPolicyText = Read-RequiredText -RelativePath $apiAbiPolicyPath
 $supportLifecyclePolicyText = Read-RequiredText -RelativePath $supportLifecyclePolicyPath
 $releaseCloseoutDocText = Read-RequiredText -RelativePath $releaseCloseoutDocPath
+$previewReleaseNotesText = Read-RequiredText -RelativePath $previewReleaseNotesPath
 $runtimeLicensesText = Read-RequiredText -RelativePath $runtimeLicensesPath
 $githubPackArtifactGuardText = Read-RequiredText -RelativePath $githubPackArtifactGuardPath
 $gitignoreText = Read-RequiredText -RelativePath $gitignorePath
@@ -282,6 +284,11 @@ Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPol
 Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '24' -Issue "Support lifecycle policy must expose the real-support count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
+Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle '5.0.0-preview.1' -Issue "Preview release notes must identify the exact normalized public candidate version"
+Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'dotnet remove package JYPPX.OpenCV.CSharp.API' -Issue "Preview release notes must provide managed package uninstall guidance"
+Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'Known Limitations' -Issue "Preview release notes must expose known limitations"
+Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'there is no earlier published' -Issue "First-preview rollback guidance must not invent a prior public package"
+Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'Do not reference full and mini runtime packages together' -Issue "Preview release notes must prevent ambiguous full/mini runtime selection"
 Assert-Contains -Violations $violations -Path $linkedRuntimeGuidePath -Text $linkedRuntimeGuideText -Needle 'Test-ReleasePackageSbom.ps1' -Issue "Linked runtime documentation must register the release package SBOM guard"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"' -Issue "Pack-Runtime default project path must be the neutral runtime package project"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"' -Issue "Pack-Runtime package ID must be derived from neutral runtime package prefix, RID, and profile suffix"
@@ -354,6 +361,13 @@ Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $r
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle "Decision = 'do-not-publish'" -Issue "Release change-control guard must default to non-publishing"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle "Status = 'not-approved'" -Issue "Release change-control guard must require explicit approval"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'hosted-evidence-pending' -Issue "Release change-control guard must keep win-x86/full pending"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[string]$SbomRoot = ""' -Issue "Release change-control guard must accept package-bound SBOM inputs"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[string]$OutputPath = ""' -Issue "Release change-control guard must support durable output"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[switch]$Check' -Issue "Release change-control guard must support byte-for-byte output checks"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'current-unsigned-candidate' -Issue "Release change-control guard must distinguish current unsigned candidates from historical artifacts"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'generated-unapproved' -Issue "Release change-control guard must distinguish generated SBOMs from external approval"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'RequiredApprovalInputs' -Issue "Release change-control guard must retain the explicit signing/approval input checklist"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[Linq.Enumerable]::SequenceEqual($outputBytes' -Issue "Release change-control check mode must compare exact deterministic bytes"
 
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<PackageId>\s*(?:JYPPX\.OpenCV\.runtime|\$\(OpenCvCSharpRuntimePackageIdPrefix\))\.\$\(RuntimePackageRid\)\$\(RuntimePackageProfileSuffix\)\s*</PackageId>" -Issue "Runtime package project PackageId must stay RID/profile-derived and version-neutral"
 Assert-Contains -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Needle "<PackageReadmeFile>README.md</PackageReadmeFile>" -Issue "Runtime package project must package README.md"
@@ -450,7 +464,8 @@ $releaseSurfaceFiles = @(
     $runtimeLicensesPath,
     $apiAbiPolicyPath,
     $supportLifecyclePolicyPath,
-    $releaseCloseoutDocPath
+    $releaseCloseoutDocPath,
+    $previewReleaseNotesPath
 )
 
 foreach ($relativePath in $releaseSurfaceFiles) {

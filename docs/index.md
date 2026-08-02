@@ -13,6 +13,7 @@ The first release is organized around useful end-to-end workflows while the broa
 首版以可直接使用的端到端工作流为中心，更广泛的 OpenCV 接口将在稳定的 managed API 与 native ABI 基线下持续迭代。
 
 - [First Release Overview](articles/first-release-overview.md)
+- [5.0.0-preview.1 Release Notes](articles/preview-release-notes.md)
 - [Visual Showcase](articles/visual-showcase.md)
 - [Scenario Recipes](articles/scenario-recipes.md)
 - [Quick Start](articles/quick-start.md)
@@ -29,6 +30,7 @@ The first release is organized around useful end-to-end workflows while the broa
 ## Start Here / 从这里开始
 
 - [Quick Start](articles/quick-start.md)
+- [5.0.0-preview.1 Release Notes](articles/preview-release-notes.md)
 - [First Release Overview](articles/first-release-overview.md)
 - [Visual Showcase](articles/visual-showcase.md)
 - [Scenario Recipes](articles/scenario-recipes.md)
