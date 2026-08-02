@@ -189,6 +189,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Generate-TrackingUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
+        "scripts/New-ReleasePackageSbom.ps1",
         "scripts/Test-ApiAbiBaselineContract.ps1",
         "scripts/Test-Calib3DUpstreamMap.ps1",
         "scripts/Test-CoreUpstreamMap.ps1",
@@ -206,6 +207,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-ReleaseCandidateProvenance.ps1",
         "scripts/Test-ReleaseChangeControlRecord.ps1",
         "scripts/Test-ReleasePackageReproducibility.ps1",
+        "scripts/Test-ReleasePackageSbom.ps1",
         "scripts/Test-ReleaseReadinessContract.ps1",
         "scripts/Test-ReleaseSigningBoundary.ps1",
         "scripts/Test-ReleaseSupportContract.ps1",
@@ -403,9 +405,9 @@ function Test-Record {
     }
 
     $expectedChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
-    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 74 -and $Record.LocalValidation.ExactSdk -eq "10.0.302" -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
+    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 75 -and $Record.LocalValidation.ExactSdk -eq "10.0.302" -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
     Assert-True -List $List -Condition ($Record.Signing.Status -eq "not-ready" -and $Record.Signing.NormalizedInputRequired -and -not [bool]$Record.Signing.PrivateKeyMaterialPresent -and $Record.Signing.Verification -eq "not-run") -Issue "Final closeout signing state must remain not-ready"
-    Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3-input-required" -and -not [bool]$Record.Sbom.Deterministic -and $Record.Sbom.Verification -eq "not-run") -Issue "Final closeout SBOM state must remain not-ready"
+    Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3" -and $Record.Sbom.Generator -eq "scripts/New-ReleasePackageSbom.ps1" -and $Record.Sbom.Guard -eq "scripts/Test-ReleasePackageSbom.ps1" -and [bool]$Record.Sbom.Deterministic -and -not [bool]$Record.Sbom.FinalCandidateDocumentGenerated -and $Record.Sbom.Verification -eq "generator-verified-final-candidate-not-generated") -Issue "Final closeout SBOM state must retain a verified generator without claiming final-candidate output"
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"
 
     $expectedMethods = @("GET", "HEAD")

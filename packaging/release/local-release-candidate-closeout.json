@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/7f015a5fdf3766c7",
-  "SourceIdentity": "sha256:7f015a5fdf3766c79613d30dd8d863d4a97f88fed760e275d6ccd09e3bad34e8",
+  "CandidateId": "local-closeout/sha256/f53b019bacb0b2f6",
+  "SourceIdentity": "sha256:f53b019bacb0b2f66dc3a48ff90ffce3d1ba150074b47a98419e7ae03511eefc",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1581,
-    "Sha256": "7f015a5fdf3766c79613d30dd8d863d4a97f88fed760e275d6ccd09e3bad34e8",
+    "FileCount": 1583,
+    "Sha256": "f53b019bacb0b2f66dc3a48ff90ffce3d1ba150074b47a98419e7ae03511eefc",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -891,8 +891,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "b31859c3b8505570f8c93b8c26c67e09c2dea7bd474b49754634805bcfe10dc0",
-      "Length": 4144
+      "Sha256": "8df121ba6850327a4a67be81e30964adf5be802c60baa10c76d7422a65f05a65",
+      "Length": 6096
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -1011,8 +1011,13 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b0701efe88c35f01dc4f31917d98861c8ec89b238992370f166e0c8922fcef47",
-      "Length": 56980
+      "Sha256": "b6689458975d6df28d66623d5a8133ac378e045cc7f3cae9bdefbf971256e0de",
+      "Length": 57321
+    },
+    {
+      "Path": "scripts/New-ReleasePackageSbom.ps1",
+      "Sha256": "bd5eb216d1cad672087a61bd3cb3bec400342be62a7079e6a5cdbbf6c976a06b",
+      "Length": 20243
     },
     {
       "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
@@ -1081,8 +1086,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "2118e1b0418ef5e5e6a983cacf9a1870a1036cb63ef3cde0cd0bdbe7580d4637",
-      "Length": 52100
+      "Sha256": "d0457a690c6c0077f77410440f2c332e6ed259470055b195cde1fc7f8f14ef22",
+      "Length": 52461
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1098,6 +1103,11 @@
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
       "Sha256": "b06604429ee6bab73a4d760e6f3a3efa4fd3acd54e2de91b2815f9f3d8030afb",
       "Length": 8410
+    },
+    {
+      "Path": "scripts/Test-ReleasePackageSbom.ps1",
+      "Sha256": "36dcdf74ccfb48daa0b1f3128f3f59768b59d0c687defe5a1e05d3e98faf7c09",
+      "Length": 21689
     },
     {
       "Path": "scripts/Test-ReleaseReadinessContract.ps1",
@@ -1542,7 +1552,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 74,
+    "InvariantGuardCount": 75,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
@@ -1563,9 +1573,12 @@
   },
   "Sbom": {
     "Status": "not-ready",
-    "Format": "SPDX-2.3-input-required",
-    "Deterministic": false,
-    "Verification": "not-run"
+    "Format": "SPDX-2.3",
+    "Generator": "scripts/New-ReleasePackageSbom.ps1",
+    "Guard": "scripts/Test-ReleasePackageSbom.ps1",
+    "Deterministic": true,
+    "FinalCandidateDocumentGenerated": false,
+    "Verification": "generator-verified-final-candidate-not-generated"
   },
   "Approval": {
     "Status": "not-approved",
@@ -1635,7 +1648,7 @@
     {
       "Id": "sbom-inputs",
       "Status": "not-ready",
-      "Evidence": "Deterministic SPDX-2.3 generator output and verified public input references are not provisioned."
+      "Evidence": "The deterministic SPDX-2.3 generator and guard are provisioned; final-candidate package-bound documents and external approval are not yet generated."
     },
     {
       "Id": "signing-inputs",

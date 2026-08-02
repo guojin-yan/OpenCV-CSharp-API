@@ -117,6 +117,8 @@ $runtimeReleasePreflightPath = "scripts/Test-RuntimeReleaseCandidatePreflight.ps
 $runtimeReleasePreflightGuardPath = "scripts/Test-RuntimeReleaseCandidatePreflightGuard.ps1"
 $releaseCandidateProvenancePath = "scripts/Test-ReleaseCandidateProvenance.ps1"
 $releaseReadinessContractPath = "scripts/Test-ReleaseReadinessContract.ps1"
+$releasePackageSbomGeneratorPath = "scripts/New-ReleasePackageSbom.ps1"
+$releasePackageSbomGuardPath = "scripts/Test-ReleasePackageSbom.ps1"
 $releaseSigningBoundaryPath = "scripts/Test-ReleaseSigningBoundary.ps1"
 $releaseSupportContractPath = "scripts/Test-ReleaseSupportContract.ps1"
 $publicFeedVerificationContractPath = "scripts/Test-PublicFeedVerificationContract.ps1"
@@ -169,6 +171,8 @@ $runtimeReleasePreflightText = Read-RequiredText -RelativePath $runtimeReleasePr
 $runtimeReleasePreflightGuardText = Read-RequiredText -RelativePath $runtimeReleasePreflightGuardPath
 $releaseCandidateProvenanceText = Read-RequiredText -RelativePath $releaseCandidateProvenancePath
 $releaseReadinessContractText = Read-RequiredText -RelativePath $releaseReadinessContractPath
+$releasePackageSbomGeneratorText = Read-RequiredText -RelativePath $releasePackageSbomGeneratorPath
+$releasePackageSbomGuardText = Read-RequiredText -RelativePath $releasePackageSbomGuardPath
 $releaseSigningBoundaryText = Read-RequiredText -RelativePath $releaseSigningBoundaryPath
 $releaseSupportContractText = Read-RequiredText -RelativePath $releaseSupportContractPath
 $publicFeedVerificationContractText = Read-RequiredText -RelativePath $publicFeedVerificationContractPath
@@ -277,6 +281,8 @@ Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $fi
 Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"
 Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '24' -Issue "Support lifecycle policy must expose the real-support count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
+Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
+Assert-Contains -Violations $violations -Path $linkedRuntimeGuidePath -Text $linkedRuntimeGuideText -Needle 'Test-ReleasePackageSbom.ps1' -Issue "Linked runtime documentation must register the release package SBOM guard"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj"' -Issue "Pack-Runtime default project path must be the neutral runtime package project"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$runtimePackageId = "$runtimePackagePrefix.$Rid$runtimePackageSuffix"' -Issue "Pack-Runtime package ID must be derived from neutral runtime package prefix, RID, and profile suffix"
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '$packagePath = Join-Path $outputFullPath "$runtimePackageId.$($packageVersionRecord.NuGetVersion).nupkg"' -Issue "Pack-Runtime package artifact file must be derived from neutral package ID plus normalized version"
@@ -323,6 +329,19 @@ Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text 
 Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'SPDX-2.3' -Issue "Release signing boundary must bind SPDX-2.3 SBOM provenance"
 Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'RemoteMutationAllowed' -Issue "Release signing boundary must keep approval unable to mutate remote state"
 Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'dotnet nuget sign' -Issue "Release signing boundary must reject direct workflow signing"
+
+Assert-Contains -Violations $violations -Path $releasePackageSbomGeneratorPath -Text $releasePackageSbomGeneratorText -Needle "[switch]`$Check" -Issue "Release package SBOM generator must expose byte-for-byte check mode"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGeneratorPath -Text $releasePackageSbomGeneratorText -Needle "spdxVersion = 'SPDX-2.3'" -Issue "Release package SBOM generator must emit SPDX-2.3"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGeneratorPath -Text $releasePackageSbomGeneratorText -Needle 'normalized unsigned package before signing' -Issue "Release package SBOM generator must require normalized unsigned package input"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGeneratorPath -Text $releasePackageSbomGeneratorText -Needle '$nuspecRepositoryCommit -ne $SourceCommit' -Issue "Release package SBOM generator must bind the exact source commit"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGeneratorPath -Text $releasePackageSbomGeneratorText -Needle 'SyntheticRuntimeInputs' -Issue "Release package SBOM generator must reject synthetic runtime provenance"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGeneratorPath -Text $releasePackageSbomGeneratorText -Needle '[Linq.Enumerable]::SequenceEqual($outputBytes, $actualBytes)' -Issue "Release package SBOM check mode must compare exact deterministic bytes"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGuardPath -Text $releasePackageSbomGuardText -Needle 'RELEASE_PACKAGE_SBOM_OK format=SPDX-2.3 deterministic=true' -Issue "Release package SBOM guard must emit deterministic SPDX evidence"
+Assert-Contains -Violations $violations -Path $releasePackageSbomGuardPath -Text $releasePackageSbomGuardText -Needle 'private_keys=false remote_mutation=false' -Issue "Release package SBOM guard must remain local and private-key free"
+$actualSbomNegativeFixtureCount = [regex]::Matches($releasePackageSbomGuardText, '(?m)^\s{4}Assert-Rejected\s+-Name\s+').Count
+if ($actualSbomNegativeFixtureCount -ne 17) {
+    Add-Violation -Violations $violations -Path $releasePackageSbomGuardPath -Issue "Release package SBOM guard must retain exactly 17 negative fixtures" -Text "actual=$actualSbomNegativeFixtureCount"
+}
 Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'RELEASE_SUPPORT_CONTRACT_OK' -Issue "Release support contract must emit explicit matrix/support classification"
 Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'packageSurfaceIsSupport' -Issue "Release support contract must separate package surface from real support"
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'NUGET_PUBLIC_FEED_READ_ONLY_OK' -Issue "Public feed contract must emit read-only verification evidence"
@@ -416,6 +435,8 @@ $releaseSurfaceFiles = @(
     "CONTRIBUTING.md",
     $runtimeReleasePreflightPath,
     $runtimeReleasePreflightGuardPath,
+    $releasePackageSbomGeneratorPath,
+    $releasePackageSbomGuardPath,
     $apiAbiBaselinePath,
     $bindingMapGuardPath,
     $bindingMapGeneratorPath,

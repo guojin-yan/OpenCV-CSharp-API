@@ -254,6 +254,7 @@ function Get-Record {
         "scripts/Generate-PhotoUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
+        "scripts/New-ReleasePackageSbom.ps1",
         "scripts/Test-ApiAbiBaselineContract.ps1",
         "scripts/Test-Calib3DUpstreamMap.ps1",
         "scripts/Test-CoreUpstreamMap.ps1",
@@ -273,6 +274,7 @@ function Get-Record {
         "scripts/Test-ReleaseCandidateProvenance.ps1",
         "scripts/Test-ReleaseChangeControlRecord.ps1",
         "scripts/Test-ReleasePackageReproducibility.ps1",
+        "scripts/Test-ReleasePackageSbom.ps1",
         "scripts/Test-ReleaseReadinessContract.ps1",
         "scripts/Test-ReleaseSigningBoundary.ps1",
         "scripts/Test-ReleaseSupportContract.ps1",
@@ -370,7 +372,7 @@ function Get-Record {
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
         [ordered]@{ Id = "release-approval"; Status = "not-approved"; Evidence = "No external approver has accepted the exact normalized candidate bytes and provenance." },
-        [ordered]@{ Id = "sbom-inputs"; Status = "not-ready"; Evidence = "Deterministic SPDX-2.3 generator output and verified public input references are not provisioned." },
+        [ordered]@{ Id = "sbom-inputs"; Status = "not-ready"; Evidence = "The deterministic SPDX-2.3 generator and guard are provisioned; final-candidate package-bound documents and external approval are not yet generated." },
         [ordered]@{ Id = "signing-inputs"; Status = "not-ready"; Evidence = "External certificate, timestamp, custody, and verification inputs are not provisioned." }
     )
 
@@ -782,7 +784,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 74
+            InvariantGuardCount = 75
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false
@@ -795,9 +797,12 @@ function Get-Record {
         }
         Sbom = [ordered]@{
             Status = "not-ready"
-            Format = "SPDX-2.3-input-required"
-            Deterministic = $false
-            Verification = "not-run"
+            Format = "SPDX-2.3"
+            Generator = "scripts/New-ReleasePackageSbom.ps1"
+            Guard = "scripts/Test-ReleasePackageSbom.ps1"
+            Deterministic = $true
+            FinalCandidateDocumentGenerated = $false
+            Verification = "generator-verified-final-candidate-not-generated"
         }
         Approval = [ordered]@{
             Status = "not-approved"

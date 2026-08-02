@@ -295,6 +295,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Release package SPDX SBOM"
+        Script = Join-Path $repo "scripts/Test-ReleasePackageSbom.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Release signing boundary"
         Script = Join-Path $repo "scripts/Test-ReleaseSigningBoundary.ps1"
         Arguments = @("-RepositoryRoot", $repo)
