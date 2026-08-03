@@ -396,7 +396,8 @@ foreach ($ridSpec in @($matrix.rids)) {
                     "-DANDROID_ABI=$expectedAbi",
                     "-DANDROID_PLATFORM=android-24",
                     "-DBUILD_ANDROID_EXAMPLES=OFF",
-                    "-DINSTALL_ANDROID_EXAMPLES=OFF")) {
+                    "-DINSTALL_ANDROID_EXAMPLES=OFF",
+                    "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384,-z,common-page-size=16384")) {
                 if (-not (Test-SequenceContains -Values @($plan.CMakeArgs) -Needle $expectedArg)) {
                     Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Android RID build plans must include Android CMake toolchain and example-disable arguments" -Text "$rid :: $expectedArg"
                 }

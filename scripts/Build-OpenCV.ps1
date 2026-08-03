@@ -359,7 +359,8 @@ if ($buildTarget.PlatformFamily -eq "android") {
         "-DANDROID_ABI=$($buildTarget.AndroidAbi)",
         "-DANDROID_PLATFORM=android-$AndroidApiLevel",
         "-DBUILD_ANDROID_EXAMPLES=OFF",
-        "-DINSTALL_ANDROID_EXAMPLES=OFF"
+        "-DINSTALL_ANDROID_EXAMPLES=OFF",
+        "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384,-z,common-page-size=16384"
     )
 }
 
