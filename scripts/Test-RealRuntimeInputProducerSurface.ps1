@@ -593,6 +593,12 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Container distro mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro does not match the runtime RID matrix" },
         [pscustomobject]@{ Needle = "Container distro version mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro version does not match the runtime RID matrix" },
         [pscustomobject]@{ Needle = "getconf GNU_LIBC_VERSION"; Issue = "Producer workflow must record libc evidence for container-native Linux outputs" },
+        [pscustomobject]@{ Needle = 'OpenCV source reset target escaped its dedicated root'; Issue = "Producer workflow must fail closed before clearing partial upstream-map source evidence" },
+        [pscustomobject]@{ Needle = '[IO.Directory]::Delete($sourceDir, $true)'; Issue = "Hosted Linux and Windows producers must clear partial upstream-map source evidence before cloning" },
+        [pscustomobject]@{ Needle = 'if [ "$source_dir" != "$source_root/opencv-$OPENCV_VERSION" ]'; Issue = "Container producers must prove the exact OpenCV source reset target" },
+        [pscustomobject]@{ Needle = 'rm -rf -- "$source_dir"'; Issue = "Container producers must clear partial upstream-map source evidence before cloning" },
+        [pscustomobject]@{ Needle = 'OPENCV_SOURCE_RESET_EVIDENCE path=$sourceDir reason=upstream-map-partial-source'; Issue = "Hosted Linux and Windows producers must record their partial-source reset" },
+        [pscustomobject]@{ Needle = 'OPENCV_SOURCE_RESET_EVIDENCE path=$source_dir reason=upstream-map-partial-source'; Issue = "Container producers must record their partial-source reset" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
@@ -608,6 +614,13 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Issue = "Producer workflow must upload neutral runtime-input artifact names" },
         [pscustomobject]@{ Needle = 'artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}'; Issue = "Producer workflow must upload the agreed runtime-input layout root" })) {
     Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle $required.Needle -Issue $required.Issue
+}
+
+if ([regex]::Matches($producerWorkflowText, [regex]::Escape('[IO.Directory]::Delete($sourceDir, $true)')).Count -ne 2) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Producer workflow must keep exactly two guarded PowerShell source resets" -Text '[IO.Directory]::Delete($sourceDir, $true)'
+}
+if ([regex]::Matches($producerWorkflowText, 'OPENCV_SOURCE_RESET_EVIDENCE').Count -ne 3) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Producer workflow must record exactly three hosted/container source-reset boundaries" -Text 'OPENCV_SOURCE_RESET_EVIDENCE'
 }
 
 Assert-RealProducerTargets `

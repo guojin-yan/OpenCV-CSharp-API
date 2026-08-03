@@ -357,10 +357,21 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: |
-          $sourceRoot = Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'
-          $sourceDir = Join-Path $sourceRoot "opencv-${{ inputs.opencv_version }}"
+          $sourceRoot = [IO.Path]::GetFullPath((Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'))
+          $sourceDir = [IO.Path]::GetFullPath((Join-Path $sourceRoot "opencv-${{ inputs.opencv_version }}"))
+          $sourceRootPrefix = $sourceRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
+          if (-not $sourceDir.StartsWith($sourceRootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "OpenCV source reset target escaped its dedicated root: $sourceDir"
+          }
           New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          if (Test-Path -LiteralPath $sourceDir) {
+            [IO.Directory]::Delete($sourceDir, $true)
+            Write-Host "OPENCV_SOURCE_RESET_EVIDENCE path=$sourceDir reason=upstream-map-partial-source"
+          }
           git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv.git $sourceDir
+          if ($LASTEXITCODE -ne 0) {
+            throw "OpenCV source clone failed."
+          }
       - name: Build OpenCV runtime
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
@@ -1096,9 +1107,17 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
         run: |
-          $sourceRoot = Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'
-          $sourceDir = Join-Path $sourceRoot "opencv-${{ inputs.opencv_version }}"
+          $sourceRoot = [IO.Path]::GetFullPath((Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'))
+          $sourceDir = [IO.Path]::GetFullPath((Join-Path $sourceRoot "opencv-${{ inputs.opencv_version }}"))
+          $sourceRootPrefix = $sourceRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
+          if (-not $sourceDir.StartsWith($sourceRootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "OpenCV source reset target escaped its dedicated root: $sourceDir"
+          }
           New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          if (Test-Path -LiteralPath $sourceDir) {
+            [IO.Directory]::Delete($sourceDir, $true)
+            Write-Host "OPENCV_SOURCE_RESET_EVIDENCE path=$sourceDir reason=upstream-map-partial-source"
+          }
           git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv.git $sourceDir
           if ($LASTEXITCODE -ne 0) {
             throw "OpenCV source clone failed."
@@ -2434,7 +2453,7 @@ jobs:
                  pwsh --version
                fi
 
-               source_root="/workspace/opencv-source"
+              source_root="/workspace/opencv-source"
               source_dir="$source_root/opencv-$OPENCV_VERSION"
               compiler_path="$(command -v g++)"
               compiler_version="$(g++ --version | head -n 1) target=$(g++ -dumpmachine)"
@@ -2465,9 +2484,18 @@ jobs:
                 echo "RHEL_9_X64_TOOLCHAIN_EVIDENCE profile=$RUNTIME_PROFILE COMPILER=$compiler_path COMPILER_VERSION=$compiler_version ASSEMBLER_VERSION=$assembler_version CMAKE=$cmake_version NINJA=$ninja_version POWERSHELL=$provenance_powershell_version HOST_DOTNET=$HOSTED_DOTNET_VERSION"
               fi
               mkdir -p "$source_root"
-              if [ ! -d "$source_dir/.git" ]; then
-                git -c advice.detachedHead=false clone --depth 1 --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git "$source_dir"
+              if [ "$source_dir" != "$source_root/opencv-$OPENCV_VERSION" ]; then
+                echo "OpenCV source reset target escaped its dedicated root: $source_dir" >&2
+                exit 1
               fi
+              case "$OPENCV_VERSION" in
+                ""|*[!0-9.]*) echo "OpenCV version is invalid for source reset: $OPENCV_VERSION" >&2; exit 1 ;;
+              esac
+              if [ -e "$source_dir" ]; then
+                rm -rf -- "$source_dir"
+                echo "OPENCV_SOURCE_RESET_EVIDENCE path=$source_dir reason=upstream-map-partial-source"
+              fi
+              git -c advice.detachedHead=false clone --depth 1 --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git "$source_dir"
 
               pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 \
                 -OpenCvVersion "$OPENCV_VERSION" \
