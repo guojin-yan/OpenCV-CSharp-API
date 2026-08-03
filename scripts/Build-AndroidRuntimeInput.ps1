@@ -144,7 +144,8 @@ function Assert-AndroidElf {
             ForEach-Object { [Convert]::ToInt64($_.Groups["align"].Value.Substring(2), 16) }
     )
     if ($loadAlignments.Count -eq 0 -or @($loadAlignments | Where-Object { $_ -lt 16384 }).Count -gt 0) {
-        throw "Android ELF must retain at least 16 KB LOAD segment alignment: $Path"
+        $alignmentEvidence = @($loadAlignments | ForEach-Object { "0x$($_.ToString('x'))" }) -join ","
+        throw "Android ELF must retain at least 16 KB LOAD segment alignment: $Path; actual=$alignmentEvidence"
     }
 }
 

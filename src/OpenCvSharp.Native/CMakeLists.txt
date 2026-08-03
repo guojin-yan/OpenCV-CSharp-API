@@ -477,6 +477,13 @@ if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV)
     target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")
 endif()
 
+if(ANDROID)
+    target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE
+        "LINKER:-z,max-page-size=16384"
+        "LINKER:-z,common-page-size=16384"
+    )
+endif()
+
 # Compatibility loader copy keeps existing binary consumers working; the primary build output remains JYPPX.OpenCV.Native.
 set(
     OPENCV_CSHARP_COMPATIBILITY_NATIVE_FILE_NAME

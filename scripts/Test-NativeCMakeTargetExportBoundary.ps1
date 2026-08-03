@@ -174,6 +174,14 @@ foreach ($required in @(
         [pscustomobject]@{
             Needle = "OPENCV_CSHARP_* variables primary and OPENCV5SHARP_* variables only as existing-build-script compatibility aliases"
             Issue = "Native CMake comments must document primary and compatibility variable roles"
+        },
+        [pscustomobject]@{
+            Needle = '"LINKER:-z,max-page-size=16384"'
+            Issue = "Android native loader must retain 16 KB maximum page-size alignment"
+        },
+        [pscustomobject]@{
+            Needle = '"LINKER:-z,common-page-size=16384"'
+            Issue = "Android native loader must retain 16 KB common page-size alignment"
         })) {
     Assert-Contains `
         -Violations $violations `
