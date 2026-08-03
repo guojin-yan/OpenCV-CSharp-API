@@ -432,6 +432,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "ANDROID_PACKAGE_CONSUMER_OK"; Issue = "Android producer must build an APK from the same-run managed and runtime packages" },
         [pscustomobject]@{ Needle = "system-images;android-35;default;x86_64"; Issue = "Android emulator smoke must use the minimal pinned x86_64 system image" },
         [pscustomobject]@{ Needle = "timeout 20m bash -c"; Issue = "Android emulator system-image installation must have a bounded timeout" },
+        [pscustomobject]@{ Needle = 'timeout 3m "$adb" wait-for-device'; Issue = "Android emulator adb connection wait must have a bounded timeout" },
+        [pscustomobject]@{ Needle = 'cat "$emulator_log"'; Issue = "Android emulator failures must expose the emulator log" },
         [pscustomobject]@{ Needle = "ANDROID_EMULATOR_LOADING_OK"; Issue = "Android x86_64 producer must execute a native loading smoke in an emulator" },
         [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Native Windows production must remain in a separate hosted Windows job" },
         [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_X64"; Issue = "Windows producer matrix must retain the x64 evidence branch" },

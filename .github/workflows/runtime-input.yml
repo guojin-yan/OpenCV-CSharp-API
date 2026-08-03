@@ -1009,6 +1009,7 @@ jobs:
           test -d "$ANDROID_HOME/system-images/android-35/default/x86_64"
           printf 'no\n' | "$avdmanager" create avd --force --name opencv-csharp-smoke --package "$image" --device pixel_2
           sudo chmod a+rw /dev/kvm
+          emulator_log='artifacts/android-proof/emulator.log'
           nohup "$emulator" \
             -avd opencv-csharp-smoke \
             -no-window \
@@ -1016,15 +1017,26 @@ jobs:
             -no-boot-anim \
             -gpu swiftshader_indirect \
             -accel on \
-            > artifacts/android-proof/emulator.log 2>&1 &
-          "$adb" wait-for-device
+            > "$emulator_log" 2>&1 &
+          emulator_pid=$!
+          if ! timeout 3m "$adb" wait-for-device; then
+            echo 'Android emulator did not connect to adb within 3 minutes.' >&2
+            cat "$emulator_log" >&2 || true
+            kill "$emulator_pid" 2>/dev/null || true
+            wait "$emulator_pid" 2>/dev/null || true
+            exit 1
+          fi
           boot_completed=''
           for attempt in $(seq 1 72); do
             boot_completed="$("$adb" shell getprop sys.boot_completed | tr -d '\r')"
             if [ "$boot_completed" = '1' ]; then break; fi
             sleep 5
           done
-          test "$boot_completed" = '1'
+          if [ "$boot_completed" != '1' ]; then
+            echo 'Android emulator did not finish booting within 6 minutes.' >&2
+            cat "$emulator_log" >&2 || true
+            exit 1
+          fi
           "$adb" install -r "$ANDROID_APK_PATH"
           "$adb" logcat -c
           "$adb" shell am start -W -n io.github.guojinyan.opencvcsharp.smoke/io.github.guojinyan.opencvcsharp.smoke.MainActivity
@@ -1034,9 +1046,15 @@ jobs:
             if [ -n "$smoke" ]; then break; fi
             sleep 2
           done
-          test -n "$smoke"
+          if [ -z "$smoke" ]; then
+            "$adb" logcat -d | tail -n 400 | tee artifacts/android-proof/emulator-logcat.txt >&2
+            cat "$emulator_log" >&2 || true
+            exit 1
+          fi
           printf '%s\n' "$smoke" | tee artifacts/android-proof/emulator-smoke.txt
           echo 'ANDROID_EMULATOR_LOADING_OK rid=android-x64 abi=x86_64 profile=${{ matrix.profile }} native_call=Mat+Cv2.Sum version=5.0.0 sum=448'
+          "$adb" emu kill || true
+          wait "$emulator_pid" 2>/dev/null || true
       - name: Upload Android runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
