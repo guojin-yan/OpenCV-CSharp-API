@@ -384,8 +384,11 @@ if (Test-Path -LiteralPath $ippicvReadme -PathType Leaf) {
 }
 
 if (-not [string]::IsNullOrWhiteSpace($openCvInstallPath)) {
-    $installLicenseDir = Join-Path $openCvInstallPath "etc/licenses"
-    if (Test-Path -LiteralPath $installLicenseDir -PathType Container) {
+    $installLicenseDir = @(
+        (Join-Path $openCvInstallPath "etc/licenses"),
+        (Join-Path $openCvInstallPath "sdk/etc/licenses")
+    ) | Where-Object { Test-Path -LiteralPath $_ -PathType Container } | Select-Object -First 1
+    if (-not [string]::IsNullOrWhiteSpace($installLicenseDir)) {
         $installArtifactLicenseDir = Join-Path $openCvInstallArtifactDir "etc/licenses"
         New-Item -ItemType Directory -Force -Path $installArtifactLicenseDir | Out-Null
         foreach ($file in @(Get-ChildItem -LiteralPath $installLicenseDir -File -ErrorAction SilentlyContinue)) {

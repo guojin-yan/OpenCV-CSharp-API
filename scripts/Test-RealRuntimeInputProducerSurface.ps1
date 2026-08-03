@@ -787,6 +787,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = '"Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers'; Issue = "Runtime input artifact script must keep compatibility loader explicitly scoped" },
         [pscustomobject]@{ Needle = "OpenCV source LICENSE was not found"; Issue = "Runtime input artifact script must require OpenCV source license evidence" },
+        [pscustomobject]@{ Needle = 'Join-Path $openCvInstallPath "sdk/etc/licenses"'; Issue = "Runtime input artifact script must preserve Android OpenCV install-license evidence" },
         [pscustomobject]@{ Needle = "Assert-NoAbsoluteElfRuntimePaths"; Issue = "Runtime input artifact script must audit real Linux ELF dynamic paths" },
         [pscustomobject]@{ Needle = 'ELF runtime contains an absolute RPATH/RUNPATH entry'; Issue = "Runtime input artifact script must reject producer absolute dynamic paths" },
         [pscustomobject]@{ Needle = "Runtime input artifact name: runtime-input-`$Rid-`$RuntimeProfile"; Issue = "Runtime input artifact script must print the neutral artifact name" })) {
@@ -969,6 +970,21 @@ if ($violations.Count -eq 0) {
                 Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir $runtimeFileName)
             }
 
+            $standardInstallLicenseDir = Join-Path $fixtureInstallDir "etc/licenses"
+            $androidInstallLicenseDir = Join-Path $fixtureInstallDir "sdk/etc/licenses"
+            if ($isAndroidTarget) {
+                if (Test-Path -LiteralPath $standardInstallLicenseDir -PathType Container) {
+                    [IO.Directory]::Delete($standardInstallLicenseDir, $true)
+                }
+                Write-FixtureFile -Path (Join-Path $androidInstallLicenseDir "opencv-license.txt") -Text "Android install license fixture"
+            }
+            else {
+                if (Test-Path -LiteralPath $androidInstallLicenseDir -PathType Container) {
+                    [IO.Directory]::Delete($androidInstallLicenseDir, $true)
+                }
+                Write-FixtureFile -Path (Join-Path $standardInstallLicenseDir "opencv-license.txt") -Text "install license fixture"
+            }
+
             & (Join-Path $repo $runtimeInputScriptPath) `
                 -Rid ([string]$producerTarget.Rid) `
                 -RuntimeProfile ([string]$producerTarget.Profile) `
@@ -1034,6 +1050,11 @@ if ($violations.Count -eq 0) {
             $manifestPath = Join-Path (Join-Path $fixtureOutputRoot "$($producerTarget.Rid)-$($producerTarget.Profile)") "runtime-input.provenance.json"
             if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
                 throw "Fixture runtime input provenance was not written: $manifestPath"
+            }
+
+            $installLicenseArtifact = Join-Path (Split-Path $manifestPath -Parent) "opencv-install/etc/licenses/opencv-license.txt"
+            if (-not (Test-Path -LiteralPath $installLicenseArtifact -PathType Leaf)) {
+                throw "Fixture runtime input did not normalize install-license layout for $($producerTarget.Rid)/$($producerTarget.Profile)."
             }
 
             $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
