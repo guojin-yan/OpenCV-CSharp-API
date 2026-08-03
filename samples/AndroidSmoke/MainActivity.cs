@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Util;
 using Android.Widget;
 using OpenCvSharp;
+using OpenCvSharp.Core;
 
 namespace OpenCvSharp.AndroidSmoke;
 

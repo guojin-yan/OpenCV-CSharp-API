@@ -511,6 +511,7 @@ foreach ($androidProducerNeedle in @(
 }
 Assert-Contains -Violations $violations -Path $androidSmokeProjectPath -Text $androidSmokeProjectText -Needle '<TargetFramework>net10.0-android</TargetFramework>' -Issue "Android smoke project must target .NET 10 for Android"
 Assert-Contains -Violations $violations -Path $androidSmokeProjectPath -Text $androidSmokeProjectText -Needle '<PackageReference Include="$(AndroidRuntimePackageId)"' -Issue "Android smoke project must support consuming the selected runtime package"
+Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'using OpenCvSharp.Core;' -Issue "Android smoke activity must import the core API namespace"
 Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'OpenCvSharpBuildInfo.GetNativeOpenCvVersion()' -Issue "Android smoke activity must load and report the native OpenCV runtime"
 Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'Cv2.Sum(image)' -Issue "Android smoke activity must execute a real native OpenCV operation"
 foreach ($workflowNeedle in @(
