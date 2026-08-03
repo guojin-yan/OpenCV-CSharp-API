@@ -430,6 +430,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Build-AndroidRuntimeInput.ps1"; Issue = "Android producer must use the audited NDK build and ELF evidence script" },
         [pscustomobject]@{ Needle = "28.2.13676358"; Issue = "Android producer must pin the audited NDK revision" },
         [pscustomobject]@{ Needle = "ANDROID_PACKAGE_CONSUMER_OK"; Issue = "Android producer must build an APK from the same-run managed and runtime packages" },
+        [pscustomobject]@{ Needle = "system-images;android-35;default;x86_64"; Issue = "Android emulator smoke must use the minimal pinned x86_64 system image" },
+        [pscustomobject]@{ Needle = "timeout 20m bash -c"; Issue = "Android emulator system-image installation must have a bounded timeout" },
         [pscustomobject]@{ Needle = "ANDROID_EMULATOR_LOADING_OK"; Issue = "Android x86_64 producer must execute a native loading smoke in an emulator" },
         [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Native Windows production must remain in a separate hosted Windows job" },
         [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_X64"; Issue = "Windows producer matrix must retain the x64 evidence branch" },

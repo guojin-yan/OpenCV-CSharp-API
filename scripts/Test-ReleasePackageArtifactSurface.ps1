@@ -521,6 +521,8 @@ foreach ($workflowNeedle in @(
         'artifacts/android-proof/consumer-packages',
         '-p:RestorePackagesPath=$consumerPackages',
         'Restored Android managed assembly did not match the same-run package payload.',
+        'system-images;android-35;default;x86_64',
+        'timeout 20m bash -c',
         'ANDROID_PACKAGE_CONSUMER_OK',
         'ANDROID_EMULATOR_LOADING_OK')) {
     Assert-Contains -Violations $violations -Path $runtimeInputWorkflowPath -Text $runtimeInputWorkflowText -Needle $workflowNeedle -Issue "Android runtime workflow must retain '$workflowNeedle'"
