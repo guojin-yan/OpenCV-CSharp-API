@@ -112,7 +112,7 @@ function Assert-AndroidElf {
         [Parameter(Mandatory = $true)][int]$MachineCode
     )
 
-    $header = @(& $ReadElf -h -- $Path 2>&1)
+    $header = @(& $ReadElf -h $Path 2>&1)
     if ($LASTEXITCODE -ne 0) {
         throw "Android ELF header audit failed for $Path`: $([string]::Join(' | ', $header))"
     }
@@ -134,7 +134,7 @@ function Assert-AndroidElf {
         throw "Android ELF e_machine audit failed for $Path`: actual=$actualMachineCode expected=$MachineCode."
     }
 
-    $programHeaders = [string]::Join("`n", @(& $ReadElf -lW -- $Path 2>&1))
+    $programHeaders = [string]::Join("`n", @(& $ReadElf -lW $Path 2>&1))
     if ($LASTEXITCODE -ne 0) {
         throw "Android ELF program-header audit failed for $Path."
     }
@@ -307,7 +307,7 @@ $elfIdentity = Get-ExpectedElfIdentity -RuntimeIdentifier $Rid
 $dependencyEdges = 0
 foreach ($file in $allAuditFiles) {
     Assert-AndroidElf -ReadElf $readElf -Path $file -ElfClass $elfIdentity.Class -MachineCode $elfIdentity.Machine
-    $dynamicText = [string]::Join("`n", @(& $readElf -dW -- $file 2>&1))
+    $dynamicText = [string]::Join("`n", @(& $readElf -dW $file 2>&1))
     if ($LASTEXITCODE -ne 0) {
         throw "Android ELF dynamic-section audit failed for $file."
     }
