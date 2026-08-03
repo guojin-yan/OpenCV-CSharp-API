@@ -523,6 +523,8 @@ foreach ($workflowNeedle in @(
         'Restored Android managed assembly did not match the same-run package payload.',
         'system-images;android-35;default;x86_64',
         'timeout 20m bash -c',
+        'export ANDROID_AVD_HOME="$RUNNER_TEMP/android-avd"',
+        'opencv-csharp-smoke.ini',
         'timeout 3m "$adb" wait-for-device',
         'emulator-logcat.txt',
         'ANDROID_PACKAGE_CONSUMER_OK',

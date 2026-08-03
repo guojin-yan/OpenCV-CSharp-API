@@ -1005,9 +1005,13 @@ jobs:
           emulator="$ANDROID_HOME/emulator/emulator"
           adb="$ANDROID_HOME/platform-tools/adb"
           image='system-images;android-35;default;x86_64'
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/android-avd"
+          mkdir -p "$ANDROID_AVD_HOME"
           timeout 20m bash -c 'yes | "$1" --install "$2"' _ "$sdkmanager" "$image"
           test -d "$ANDROID_HOME/system-images/android-35/default/x86_64"
           printf 'no\n' | "$avdmanager" create avd --force --name opencv-csharp-smoke --package "$image" --device pixel_2
+          test -f "$ANDROID_AVD_HOME/opencv-csharp-smoke.ini"
+          test -d "$ANDROID_AVD_HOME/opencv-csharp-smoke.avd"
           sudo chmod a+rw /dev/kvm
           emulator_log='artifacts/android-proof/emulator.log'
           nohup "$emulator" \
