@@ -82,9 +82,9 @@ namespace
             : OPENCV_CSHARP_STATUS_OK;
     }
 
-    cv::InputArray optional_input_array(const jyppx_ocv_mat* mat)
+    cv::_InputArray optional_input_array(const jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputArray() : cv::_InputArray(opencv_csharp_native::mat_value(mat));
     }
 
     cv::Mat optional_mat(const jyppx_ocv_mat* mat)

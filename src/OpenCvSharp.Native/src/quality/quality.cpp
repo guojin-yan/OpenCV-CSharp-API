@@ -69,9 +69,9 @@ namespace
         return OPENCV_CSHARP_STATUS_OK;
     }
 
-    cv::OutputArray optional_output_array(jyppx_ocv_mat* mat)
+    cv::_OutputArray optional_output_array(jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::OutputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_OutputArray() : cv::_OutputArray(opencv_csharp_native::mat_value(mat));
     }
 
     int create_quality_handle(const char* api_name, const cv::Ptr<cv::quality::QualityBase>& native, jyppx_ocv_quality** quality)

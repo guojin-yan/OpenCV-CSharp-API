@@ -67,14 +67,14 @@ struct jyppx_ocv_font_face
 namespace
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV)
-    cv::InputArray input_or_no_array(const jyppx_ocv_mat* mat)
+    cv::_InputArray input_or_no_array(const jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputArray() : cv::_InputArray(opencv_csharp_native::mat_value(mat));
     }
 
-    cv::OutputArray output_or_no_array(jyppx_ocv_mat* mat)
+    cv::_OutputArray output_or_no_array(jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::OutputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_OutputArray() : cv::_OutputArray(opencv_csharp_native::mat_value(mat));
     }
 
     cv::Point2f get_point2f(float x, float y)

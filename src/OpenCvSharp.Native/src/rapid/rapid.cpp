@@ -30,14 +30,14 @@ namespace
     }
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_RAPID)
-    cv::InputArray optional_input_array(const jyppx_ocv_mat* mat)
+    cv::_InputArray optional_input_array(const jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputArray() : cv::_InputArray(opencv_csharp_native::mat_value(mat));
     }
 
-    cv::InputOutputArray optional_input_output_array(jyppx_ocv_mat* mat)
+    cv::_InputOutputArray optional_input_output_array(jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputOutputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputOutputArray() : cv::_InputOutputArray(opencv_csharp_native::mat_value(mat));
     }
 
     int create_tracker_handle(const char* api_name, const cv::Ptr<cv::rapid::Tracker>& native, jyppx_ocv_rapid_tracker** tracker)

@@ -25,9 +25,9 @@ namespace
     }
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_PHASE_UNWRAPPING)
-    cv::InputArray optional_input_array(const jyppx_ocv_mat* mat)
+    cv::_InputArray optional_input_array(const jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputArray() : cv::_InputArray(opencv_csharp_native::mat_value(mat));
     }
 
     cv::phase_unwrapping::HistogramPhaseUnwrapping* as_histogram(jyppx_ocv_phase_unwrapping* phase_unwrapping)

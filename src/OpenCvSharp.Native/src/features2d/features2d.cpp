@@ -108,14 +108,14 @@ namespace
         return OPENCV_CSHARP_STATUS_OK;
     }
 
-    cv::InputArray optional_input_array(const jyppx_ocv_mat* mat)
+    cv::_InputArray optional_input_array(const jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputArray() : cv::_InputArray(opencv_csharp_native::mat_value(mat));
     }
 
-    cv::InputArray optional_masks_input_array(const std::vector<cv::Mat>& masks)
+    cv::_InputArray optional_masks_input_array(const std::vector<cv::Mat>& masks)
     {
-        return masks.empty() ? cv::noArray() : cv::InputArray(masks);
+        return masks.empty() ? cv::_InputArray() : cv::_InputArray(masks);
     }
 
     cv::Scalar scalar_from_values(double v0, double v1, double v2, double v3)

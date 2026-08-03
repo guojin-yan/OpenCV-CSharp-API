@@ -36,14 +36,14 @@ namespace
     }
 
 #if defined(OPENCV_CSHARP_HAS_OPENCV) && defined(OPENCV_CSHARP_HAS_OPENCV_PTCLOUD)
-    cv::InputArray optional_input_array(const jyppx_ocv_mat* mat)
+    cv::_InputArray optional_input_array(const jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::InputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_InputArray() : cv::_InputArray(opencv_csharp_native::mat_value(mat));
     }
 
-    cv::OutputArray optional_output_array(jyppx_ocv_mat* mat)
+    cv::_OutputArray optional_output_array(jyppx_ocv_mat* mat)
     {
-        return mat == nullptr ? cv::noArray() : cv::OutputArray(opencv_csharp_native::mat_value(mat));
+        return mat == nullptr ? cv::_OutputArray() : cv::_OutputArray(opencv_csharp_native::mat_value(mat));
     }
 #endif
 }

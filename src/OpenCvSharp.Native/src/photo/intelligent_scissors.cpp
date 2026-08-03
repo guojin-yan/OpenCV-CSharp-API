@@ -109,11 +109,11 @@ namespace
         return OPENCV_CSHARP_STATUS_OK;
     }
 
-    cv::InputArray input_or_no_array(const jyppx_ocv_mat* value)
+    cv::_InputArray input_or_no_array(const jyppx_ocv_mat* value)
     {
         return value == nullptr
-            ? cv::noArray()
-            : cv::InputArray(opencv_csharp_native::mat_value(value));
+            ? cv::_InputArray()
+            : cv::_InputArray(opencv_csharp_native::mat_value(value));
     }
 
     int validate_point(

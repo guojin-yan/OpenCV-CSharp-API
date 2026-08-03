@@ -151,6 +151,8 @@ foreach ($expectation in @(
 
 Assert-Contains -Text $imgprocSourceText -Needle '#if defined(OPENCV_CSHARP_HAS_OPENCV_GEOMETRY)' -Description "imgproc wrapper must guard OpenCV 5 geometry-backed calls"
 Assert-Contains -Text $imgprocSourceText -Needle '#if defined(OPENCV_CSHARP_HAS_OPENCV_FEATURES)' -Description "imgproc wrapper must guard OpenCV 5 features-backed calls"
+Assert-Contains -Text $imgprocSourceText -Needle 'cv::_InputArray input_or_no_array' -Description "Optional input helpers must return a concrete OpenCV proxy value"
+Assert-Contains -Text $imgprocSourceText -Needle 'cv::_OutputArray output_or_no_array' -Description "Optional output helpers must return a concrete OpenCV proxy value"
 Assert-Contains -Text $nativeSmokeText -Needle 'run_mini_excluded_features_smoke' -Description "Native smoke must verify the mini excluded-features boundary"
 Assert-Contains -Text $nativeSmokeText -Needle 'status != OPENCV_CSHARP_STATUS_NOT_LINKED' -Description "Mini smoke must require NOT_LINKED for excluded features APIs"
 if ($imgprocSourceText.Contains('__has_include(<opencv2/features.hpp>)')) {
@@ -187,6 +189,19 @@ if (Compare-Object -ReferenceObject $diskSources -DifferenceObject $configuredFu
 }
 if (@($miniSources | Where-Object { $_ -in $fullOnlySources }).Count -gt 0) {
     Add-Violation "Mini and full-only native source lists must not overlap."
+}
+
+$proxyAliasReturnPattern = '\bcv::(?:InputArray|OutputArray|InputOutputArray)\s+[A-Za-z_][A-Za-z0-9_]*\s*\('
+if (-not [regex]::IsMatch('cv::InputArray unsafe_helper(', $proxyAliasReturnPattern)) {
+    Add-Violation "The native proxy return-type guard regex no longer detects its unsafe reference-alias fixture."
+}
+foreach ($sourcePath in Get-ChildItem -LiteralPath $nativeSourceRoot -Recurse -File -Filter "*.cpp") {
+    $sourceText = [System.IO.File]::ReadAllText($sourcePath.FullName)
+    foreach ($match in [regex]::Matches($sourceText, $proxyAliasReturnPattern)) {
+        $relativePath = [System.IO.Path]::GetRelativePath($repo, $sourcePath.FullName).Replace("\", "/")
+        $unsafeReturn = $match.Value.Trim()
+        Add-Violation "$relativePath returns OpenCV's reference alias '$unsafeReturn'. Return cv::_InputArray, cv::_OutputArray, or cv::_InputOutputArray by value to avoid a dangling temporary."
+    }
 }
 
 $miniRows = @(Get-ManifestRows -Path $miniManifestPath)
