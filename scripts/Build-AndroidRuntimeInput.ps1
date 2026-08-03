@@ -277,7 +277,10 @@ foreach ($file in $allAuditFiles) {
     [void]$packagedNames.Add((Split-Path -Leaf $file))
 }
 
-$versionedAndroidLibraries = @(Get-ChildItem -LiteralPath $openCvRuntimeDir -File -Filter "libopencv_*.so.*" -ErrorAction SilentlyContinue)
+$versionedAndroidLibraries = @(
+    Get-ChildItem -LiteralPath $openCvRuntimeDir -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -match '^libopencv_.+\.so\..+$' }
+)
 if ($versionedAndroidLibraries.Count -gt 0) {
     throw "Android runtime libraries must use unversioned APK-loadable .so names: $($versionedAndroidLibraries.Name -join ', ')"
 }
