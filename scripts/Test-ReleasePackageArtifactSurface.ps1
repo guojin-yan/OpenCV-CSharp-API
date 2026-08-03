@@ -522,6 +522,8 @@ foreach ($workflowNeedle in @(
         '-p:RestorePackagesPath=$consumerPackages',
         'Restored Android managed assembly did not match the same-run package payload.',
         'system-images;android-35;default;x86_64',
+        'system-images;android-29;default;x86',
+        "matrix.rid == 'android-x64' || matrix.rid == 'android-x86'",
         'timeout 20m bash -c',
         'export ANDROID_AVD_HOME="$RUNNER_TEMP/android-avd"',
         'opencv-csharp-smoke.ini',

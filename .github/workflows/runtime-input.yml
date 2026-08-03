@@ -995,8 +995,8 @@ jobs:
           Copy-Item -LiteralPath $apk[0].FullName -Destination $proofApk -Force
           "ANDROID_APK_PATH=$proofApk" >> $env:GITHUB_ENV
           Write-Host "ANDROID_PACKAGE_CONSUMER_OK rid=${{ matrix.rid }} abi=${{ matrix.abi }} profile=${{ matrix.profile }} native_files=$($nativeNames.Count) apk=$proofApk"
-      - name: Run x86_64 Android emulator loading smoke
-        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'android-x64' }}
+      - name: Run Android emulator loading smoke
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && (matrix.rid == 'android-x64' || matrix.rid == 'android-x86') }}
         shell: bash
         run: |
           set -euo pipefail
@@ -1004,11 +1004,24 @@ jobs:
           avdmanager="$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager"
           emulator="$ANDROID_HOME/emulator/emulator"
           adb="$ANDROID_HOME/platform-tools/adb"
-          image='system-images;android-35;default;x86_64'
+          case '${{ matrix.rid }}' in
+            android-x64)
+              image='system-images;android-35;default;x86_64'
+              image_dir="$ANDROID_HOME/system-images/android-35/default/x86_64"
+              ;;
+            android-x86)
+              image='system-images;android-29;default;x86'
+              image_dir="$ANDROID_HOME/system-images/android-29/default/x86"
+              ;;
+            *)
+              echo 'Unsupported Android emulator RID: ${{ matrix.rid }}' >&2
+              exit 1
+              ;;
+          esac
           export ANDROID_AVD_HOME="$RUNNER_TEMP/android-avd"
           mkdir -p "$ANDROID_AVD_HOME"
           timeout 20m bash -c 'yes | "$1" --install "$2"' _ "$sdkmanager" "$image"
-          test -d "$ANDROID_HOME/system-images/android-35/default/x86_64"
+          test -d "$image_dir"
           printf 'no\n' | "$avdmanager" create avd --force --name opencv-csharp-smoke --package "$image" --device pixel_2
           test -f "$ANDROID_AVD_HOME/opencv-csharp-smoke.ini"
           test -d "$ANDROID_AVD_HOME/opencv-csharp-smoke.avd"
@@ -1056,7 +1069,7 @@ jobs:
             exit 1
           fi
           printf '%s\n' "$smoke" | tee artifacts/android-proof/emulator-smoke.txt
-          echo 'ANDROID_EMULATOR_LOADING_OK rid=android-x64 abi=x86_64 profile=${{ matrix.profile }} native_call=Mat+Cv2.Sum version=5.0.0 sum=448'
+          echo 'ANDROID_EMULATOR_LOADING_OK rid=${{ matrix.rid }} abi=${{ matrix.abi }} profile=${{ matrix.profile }} native_call=Mat+Cv2.Sum version=5.0.0 sum=448'
           "$adb" emu kill || true
           wait "$emulator_pid" 2>/dev/null || true
       - name: Upload Android runtime input artifact
