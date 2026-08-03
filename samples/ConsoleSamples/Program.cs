@@ -142,7 +142,9 @@ namespace ConsoleSamples
 
         private static void Main(string[] args)
         {
-            if (args.Length > 0 && string.Equals(args[0], "showcase", StringComparison.OrdinalIgnoreCase))
+            if (args.Length > 0 &&
+                (string.Equals(args[0], "tutorial", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(args[0], "showcase", StringComparison.OrdinalIgnoreCase)))
             {
                 ShowcaseRunner.Run(args.Skip(1).ToArray());
                 return;

@@ -28,16 +28,18 @@ namespace ConsoleSamples
                 return;
             }
 
-            if (command != "all" && command != "image" && command != "features" &&
-                command != "template" && command != "ml")
+            if (command != "all" && command != "image" && command != "text" &&
+                command != "contours" && command != "features" && command != "template" &&
+                command != "ml")
             {
-                throw new ArgumentException("Unknown showcase command: " + command, nameof(args));
+                throw new ArgumentException("Unknown tutorial command: " + command, nameof(args));
             }
 
             string outputDirectory = args.Length > 1
                 ? Path.GetFullPath(args[1])
                 : Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "artifacts", "showcase"));
             Directory.CreateDirectory(outputDirectory);
+            string? requestedFontPath = args.Length > 2 ? args[2] : null;
 
             using (Mat source = CreateSourceImage())
             {
@@ -62,6 +64,28 @@ namespace ConsoleSamples
                     return;
                 }
 
+                if (command == "text")
+                {
+                    string fontPath = ResolveCjkFontPath(requestedFontPath);
+                    using (Mat image = CreateChineseTextPanel(fontPath, out Rect bounds, out Point next))
+                    {
+                        WritePng(outputDirectory, "chinese-text.png", image);
+                        WriteSummary(command, outputDirectory,
+                            "font=" + fontPath + ", bounds=" + bounds + ", next=" + next);
+                    }
+                    return;
+                }
+
+                if (command == "contours")
+                {
+                    using (Mat image = CreateContourPanel(source, out int contourCount))
+                    {
+                        WritePng(outputDirectory, "contours.png", image);
+                        WriteSummary(command, outputDirectory, "contours=" + contourCount);
+                    }
+                    return;
+                }
+
                 if (command == "template")
                 {
                     using (Mat image = CreateTemplatePanel(source, out Point location, out double confidence))
@@ -82,28 +106,37 @@ namespace ConsoleSamples
                     return;
                 }
 
-                RunAll(source, outputDirectory);
+                RunAll(source, outputDirectory, requestedFontPath);
             }
         }
 
-        private static void RunAll(Mat source, string outputDirectory)
+        private static void RunAll(Mat source, string outputDirectory, string? requestedFontPath)
         {
+            string fontPath = ResolveCjkFontPath(requestedFontPath);
             using (Mat edgePanel = CreateEdgePanel(source, out int edgePixels))
+            using (Mat textPanel = CreateChineseTextPanel(fontPath, out Rect textBounds, out Point nextTextPoint))
+            using (Mat contourPanel = CreateContourPanel(source, out int contourCount))
             using (Mat featurePanel = CreateFeaturePanel(source, out int keypointCount, out int descriptorColumns))
             using (Mat templatePanel = CreateTemplatePanel(source, out Point location, out double confidence))
             using (Mat mlPanel = CreateMlPanel(out int queryCount))
-            using (Mat top = CoreCv2.HConcat(new[] { edgePanel, featurePanel }))
-            using (Mat bottom = CoreCv2.HConcat(new[] { templatePanel, mlPanel }))
+            using (Mat top = CoreCv2.HConcat(new[] { edgePanel, textPanel, contourPanel }))
+            using (Mat bottom = CoreCv2.HConcat(new[] { featurePanel, templatePanel, mlPanel }))
             using (Mat overview = CoreCv2.VConcat(new[] { top, bottom }))
             {
                 WritePng(outputDirectory, "source.png", source);
                 WritePng(outputDirectory, "image-pipeline.png", edgePanel);
+                WritePng(outputDirectory, "chinese-text.png", textPanel);
+                WritePng(outputDirectory, "contours.png", contourPanel);
                 WritePng(outputDirectory, "orb-features.png", featurePanel);
                 WritePng(outputDirectory, "template-match.png", templatePanel);
                 WritePng(outputDirectory, "knn-classification.png", mlPanel);
                 WritePng(outputDirectory, "showcase-overview.png", overview);
 
                 string details = "edgePixels=" + edgePixels
+                    + ", textBounds=" + textBounds
+                    + ", nextTextPoint=" + nextTextPoint
+                    + ", font=" + fontPath
+                    + ", contours=" + contourCount
                     + ", keypoints=" + keypointCount
                     + ", descriptorColumns=" + descriptorColumns
                     + ", match=" + location
@@ -149,6 +182,50 @@ namespace ConsoleSamples
             }
         }
 
+        private static Mat CreateChineseTextPanel(string fontPath, out Rect bounds, out Point next)
+        {
+            const string headline = "OpenCV 中文写字";
+            const string detail = "图像处理 UTF-8";
+            var panel = new Mat(PanelHeight, PanelWidth, MatType.CV_8UC3, new Scalar(31, 35, 42));
+            ImgProcCv2.Rectangle(panel, new Rect(32, 92, PanelWidth - 64, 192), new Scalar(43, 49, 58), -1);
+
+            using (var fontFace = new FontFace(fontPath))
+            {
+                var origin = new Point(54, 145);
+                bounds = ImgProcCv2.GetTextSize(panel.Size, headline, origin, fontFace, 42, weight: 500);
+                next = ImgProcCv2.PutText(panel, headline, origin, new Scalar(92, 224, 255), fontFace, 42, weight: 500);
+                ImgProcCv2.PutText(panel, detail, new Point(54, 224), new Scalar(232, 240, 245), fontFace, 30, weight: 400);
+                ImgProcCv2.Rectangle(panel, bounds, new Scalar(92, 224, 255), 1, LineTypes.AntiAlias);
+            }
+
+            AddPanelLabel(panel, "02  OPENCV PUTTEXT + UTF-8", new Scalar(92, 224, 255));
+            AddMetric(panel, "Bounds  " + bounds.Width + "x" + bounds.Height);
+            return panel;
+        }
+
+        private static Mat CreateContourPanel(Mat source, out int contourCount)
+        {
+            using (var gray = new Mat())
+            using (var binary = new Mat())
+            {
+                ImgProcCv2.CvtColor(source, gray, ColorConversionCodes.BGR2GRAY);
+                ImgProcCv2.Threshold(gray, binary, 82, 255, ThresholdTypes.Binary);
+                ImgProcCv2.FindContours(binary, out Point[][] contours, out Vec4i[] hierarchy,
+                    RetrievalModes.External, ContourApproximationModes.ApproxSimple);
+
+                Mat panel = source.Clone();
+                contourCount = contours.Length;
+                if (contourCount > 0)
+                {
+                    ImgProcCv2.DrawContours(panel, contours, -1, new Scalar(52, 226, 164), 4,
+                        LineTypes.AntiAlias, hierarchy);
+                }
+                AddPanelLabel(panel, "03  CONTOURS", new Scalar(52, 226, 164));
+                AddMetric(panel, "Objects  " + contourCount.ToString(CultureInfo.InvariantCulture));
+                return panel;
+            }
+        }
+
         private static Mat CreateFeaturePanel(Mat source, out int keypointCount, out int descriptorColumns)
         {
             using (ORB orb = ORB.Create(maxFeatures: 320, fastThreshold: 8))
@@ -159,7 +236,7 @@ namespace ConsoleSamples
                 Features2DCv2.DrawKeypoints(source, keypoints, panel, new Scalar(48, 238, 255), DrawMatchesFlags.DrawRichKeypoints);
                 keypointCount = keypoints.Length;
                 descriptorColumns = descriptors.Cols;
-                AddPanelLabel(panel, "02  ORB FEATURES", new Scalar(48, 238, 255));
+                AddPanelLabel(panel, "04  ORB FEATURES", new Scalar(48, 238, 255));
                 AddMetric(panel, "Keypoints  " + keypointCount.ToString(CultureInfo.InvariantCulture));
                 return panel;
             }
@@ -177,7 +254,7 @@ namespace ConsoleSamples
                 confidence = extrema.MaxVal;
                 Mat panel = source.Clone();
                 ImgProcCv2.Rectangle(panel, new Rect(location, template.Size), new Scalar(72, 220, 255), 5, LineTypes.AntiAlias);
-                AddPanelLabel(panel, "03  TEMPLATE MATCH", new Scalar(72, 220, 255));
+                AddPanelLabel(panel, "05  TEMPLATE MATCH", new Scalar(72, 220, 255));
                 AddMetric(panel, "Confidence  " + Format(confidence));
                 return panel;
             }
@@ -247,7 +324,7 @@ namespace ConsoleSamples
                         ImgProcCv2.Circle(panel, new Point(x, y), 10, color, -1, LineTypes.AntiAlias);
                         ImgProcCv2.Circle(panel, new Point(x, y), 10, new Scalar(32, 36, 42), 2, LineTypes.AntiAlias);
                     }
-                    AddPanelLabel(panel, "04  KNN CLASSIFICATION", new Scalar(245, 245, 245));
+                    AddPanelLabel(panel, "06  KNN CLASSIFICATION", new Scalar(245, 245, 245));
                     AddMetric(panel, "3-nearest  3,600 queries");
                     return panel;
                 }
@@ -283,7 +360,7 @@ namespace ConsoleSamples
         private static void WriteSummary(string command, string outputDirectory, string details)
         {
             Console.WriteLine(OpenCvSharpBuildInfo.GetDisplayString());
-            Console.WriteLine("Showcase: " + command);
+            Console.WriteLine("Tutorial: " + command);
             Console.WriteLine("Output: " + outputDirectory);
             Console.WriteLine(details);
         }
@@ -293,9 +370,52 @@ namespace ConsoleSamples
             return value.ToString("0.000", CultureInfo.InvariantCulture);
         }
 
+        private static string ResolveCjkFontPath(string? requestedPath)
+        {
+            string? configuredPath = string.IsNullOrWhiteSpace(requestedPath)
+                ? Environment.GetEnvironmentVariable("OPENCV_CSHARP_CJK_FONT")
+                : requestedPath;
+            if (!string.IsNullOrWhiteSpace(configuredPath))
+            {
+                string fullPath = Path.GetFullPath(configuredPath);
+                if (!File.Exists(fullPath))
+                {
+                    throw new FileNotFoundException("The configured CJK font file was not found.", fullPath);
+                }
+                return fullPath;
+            }
+
+            string fontsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
+            string[] candidates =
+            {
+                Path.Combine(fontsDirectory, "Deng.ttf"),
+                Path.Combine(fontsDirectory, "msyh.ttc"),
+                Path.Combine(fontsDirectory, "simhei.ttf"),
+                Path.Combine(fontsDirectory, "simsun.ttc"),
+                "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+                "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.otf",
+                "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc",
+                "/System/Library/Fonts/PingFang.ttc"
+            };
+
+            foreach (string candidate in candidates)
+            {
+                if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
+                {
+                    return Path.GetFullPath(candidate);
+                }
+            }
+
+            throw new FileNotFoundException(
+                "No CJK font was found. Pass a TTF/TTC font as the third argument or set OPENCV_CSHARP_CJK_FONT. " +
+                "The font must contain the Chinese glyphs used by the tutorial.");
+        }
+
         private static void WriteUsage()
         {
-            Console.WriteLine("Usage: dotnet run --project samples/ConsoleSamples/ConsoleSamples.csproj -- showcase [all|image|features|template|ml] [output-directory]");
+            Console.WriteLine("Usage: dotnet run --project samples/ConsoleSamples/ConsoleSamples.csproj -- tutorial [all|image|text|contours|features|template|ml] [output-directory] [cjk-font-file]");
+            Console.WriteLine("Compatibility alias: replace 'tutorial' with 'showcase'.");
+            Console.WriteLine("CJK font fallback: OPENCV_CSHARP_CJK_FONT, then known system font locations.");
         }
     }
 }

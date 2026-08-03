@@ -152,7 +152,7 @@ $sourceEvidenceCounts = [ordered]@{
     ".github/workflows/docs.yml" = 1
     ".github/workflows/pack.yml" = 1
     ".github/workflows/publish-nuget.yml" = 1
-    ".github/workflows/runtime-input.yml" = 3
+    ".github/workflows/runtime-input.yml" = 4
 }
 foreach ($entry in $sourceEvidenceCounts.GetEnumerator()) {
     $text = Normalize-CiText -Text (Read-RequiredText -RelativePath $entry.Key)
@@ -232,9 +232,14 @@ foreach ($token in @(
         "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/Test-NuGetRepositorySignedPackage.ps1",
         "https://api.nuget.org/v3/index.json",
+        "https://nuget.pkg.github.com/guojin-yan/index.json",
+        "verify_publication",
+        "github-packages-publication-proof.json",
+        "packages: write",
+        "packages: read",
         "github.repository == 'guojin-yan/OpenCV-CSharp-API'")) {
     if ((Get-TokenIndex -Text $publishWorkflowText -Token $token) -lt 0) {
-        Add-Violation -Violations $violations -Path ".github/workflows/publish-nuget.yml" -Issue "NuGet publication workflow lost required authoritative repository-signing gate" -Text $token
+        Add-Violation -Violations $violations -Path ".github/workflows/publish-nuget.yml" -Issue "Dual-feed publication workflow lost a required authoritative trust boundary" -Text $token
     }
 }
 if ((Get-TokenIndex -Text $publishWorkflowText -Token "dotnet nuget sign") -ge 0 -or

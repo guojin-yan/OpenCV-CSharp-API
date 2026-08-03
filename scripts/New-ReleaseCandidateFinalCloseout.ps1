@@ -234,10 +234,31 @@ function Get-Record {
         "docs/articles/point-set-marshalling-guide.md",
         "docs/articles/release-candidate-closeout.md",
         "docs/articles/support-lifecycle-policy.md",
+        "docs/articles/tutorial-series.md",
+        "docs/articles/tutorial-01-image-pipeline.md",
+        "docs/articles/tutorial-02-chinese-puttext.md",
+        "docs/articles/tutorial-03-contours.md",
+        "docs/articles/tutorial-04-orb-features.md",
+        "docs/articles/tutorial-05-template-matching.md",
+        "docs/articles/tutorial-06-knn-classification.md",
+        "docs/images/showcase/chinese-text.png",
+        "docs/images/showcase/contours.png",
+        "docs/images/showcase/image-pipeline.png",
+        "docs/images/showcase/knn-classification.png",
+        "docs/images/showcase/orb-features.png",
+        "docs/images/showcase/showcase-overview.png",
+        "docs/images/showcase/source.png",
+        "docs/images/showcase/template-match.png",
+        "docs/index.md",
+        "docs/toc.yml",
         "docs/articles/video-upstream-parity-guide.md",
         "docs/articles/videoio-upstream-parity-guide.md",
+        "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
         "packaging/runtime/runtime-support-contract.json",
+        "samples/AndroidSmoke/AndroidSmoke.csproj",
+        "samples/AndroidSmoke/MainActivity.cs",
         "samples/ConsoleSamples/Program.cs",
+        "samples/ConsoleSamples/ShowcaseRunner.cs",
         "scripts/Generate-Calib3DUpstreamMap.ps1",
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
@@ -254,6 +275,7 @@ function Get-Record {
         "scripts/Generate-ObjDetectUpstreamMap.ps1",
         "scripts/Generate-PhotoUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
+        "scripts/Build-AndroidRuntimeInput.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
         "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/Test-NuGetPublicationManifest.ps1",
@@ -293,7 +315,10 @@ function Get-Record {
         "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
         "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
         "src/OpenCvSharp.Native/src/stitching/stitching_handles.h",
+        "src/OpenCvSharp.Native/src/imgproc.cpp",
         "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+        "src/OpenCvSharp/ImgProc/Cv2.RemainingParity.cs",
+        "src/OpenCvSharp/ImgProc/FontFace.cs",
         "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeHighGuiCallbackRegistrationHandle.cs",
@@ -325,6 +350,7 @@ function Get-Record {
         "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
         "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
         "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+        "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -372,14 +398,14 @@ function Get-Record {
     $evidence = @(Get-OrdinalSortedObjects -Values @($evidencePaths | ForEach-Object { Get-FileEvidence -RelativePath $_ }) -Property "Path")
 
     $blockers = @(
-        [ordered]@{ Id = "android-real-support"; Status = "deferred-outside-real-support"; Evidence = "Native Android build, package consumer, and device/emulator evidence are absent." },
+        [ordered]@{ Id = "android-real-support"; Status = "android-evidence-pending"; Evidence = "The four-ABI NDK producer, NuGet AndroidNativeLibrary integration, package-consumer APK, ELF audit, and x86_64 emulator smoke are implemented; authoritative hosted Full/Mini evidence is still required before promotion to real support." },
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
         [ordered]@{ Id = "hosted-win-x86-full"; Status = "quota-blocked"; Evidence = "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
         [ordered]@{ Id = "nuget-production-environment"; Status = "not-configured"; Evidence = "The authoritative nuget-production Environment, protected reviewer, and NUGET_API_KEY secret are not configured." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
         [ordered]@{ Id = "release-approval"; Status = "not-approved"; Evidence = "No external approver has accepted the exact normalized candidate bytes and provenance." },
-        [ordered]@{ Id = "repository-signing-verification"; Status = "post-publication-required"; Evidence = "NuGet.org must add a Repository primary signature; the public package must then pass cryptographic verification and exact unsigned-payload comparison." },
+        [ordered]@{ Id = "repository-signing-verification"; Status = "post-publication-required"; Evidence = "NuGet.org must add a Repository primary signature and pass exact payload comparison; GitHub Packages must be public, repository-linked, and byte-identical to the reviewed candidate." },
         [ordered]@{ Id = "sbom-inputs"; Status = "candidate-refresh-required"; Evidence = "The deterministic SPDX-2.3 generator and guard are provisioned; final package-bound documents must be regenerated from the final source commit and approved." }
     )
 
@@ -828,6 +854,10 @@ function Get-Record {
         PublicFeed = [ordered]@{
             Mode = "read-only"
             ServiceIndex = "https://api.nuget.org/v3/index.json"
+            GitHubPackagesServiceIndex = "https://nuget.pkg.github.com/guojin-yan/index.json"
+            GitHubPackagesRepository = "guojin-yan/OpenCV-CSharp-API"
+            RequiredPublicVisibility = "public"
+            RequiredFeedCount = 2
             CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg"
             Methods = @("GET", "HEAD")
             Mutable = $false

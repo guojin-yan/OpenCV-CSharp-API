@@ -44,8 +44,8 @@ Applications reference the managed API package and one runtime package with the 
 应用需要引用相同 NuGet 规范版本的 managed API 包与一个 runtime 包，并选择精确 RID 以及 full 或 mini profile。首个公开候选版本为 `5.0.0-preview.1`；在发布授权和公共源验证完成前，其状态仍为 preview。
 
 ```powershell
-dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
-dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1
+dotnet add package JYPPX.OpenCV.CSharp.API --prerelease
+dotnet add package JYPPX.OpenCV.runtime.win-x64 --prerelease
 ```
 
 The mini profile targets common `core,imgproc,imgcodecs,videoio` workflows and their OpenCV 5 geometry/flann runtime dependencies. DNN, calibration, features, photo, HighGui, and other extended modules require full. Runtime availability and support claims are governed by [Support And Lifecycle Policy](support-lifecycle-policy.md), not merely by the existence of a package ID.
@@ -54,9 +54,9 @@ mini profile 面向常用 `core,imgproc,imgcodecs,videoio` 工作流，以及 Op
 
 ## Start With Evidence / 从可执行案例开始
 
-Run the [Visual Showcase](visual-showcase.md) to generate six PNG files from synthetic, redistributable inputs. Then select a focused guide from [Scenario Recipes](scenario-recipes.md). The default `ConsoleSamples` path remains the broad smoke program; the `showcase` path is the short, presentation-ready entry point.
+Run the six-part [Tutorial Series](tutorial-series.md) to generate eight PNG files from synthetic, redistributable inputs plus an application-selected CJK font. It includes direct Chinese rendering through OpenCV 5 `putText`. Then select a product route from [Scenario Recipes](scenario-recipes.md). The default `ConsoleSamples` path remains the broad smoke program; `tutorial` is the presentation-ready entry point and `showcase` remains its compatibility alias.
 
-先运行 [Visual Showcase](visual-showcase.md)，使用可再分发的合成输入生成 6 个 PNG 文件，再从 [Scenario Recipes](scenario-recipes.md) 选择对应的专题指南。默认 `ConsoleSamples` 仍是广覆盖 smoke 程序，`showcase` 则是简短、适合展示的入口。
+先运行包含 6 个案例的[系列教程](tutorial-series.md)，使用可再分发的合成输入和应用选择的中文字体生成 8 个 PNG 文件，其中包含通过 OpenCV 5 `putText` 直接绘制中文。再从 [Scenario Recipes](scenario-recipes.md) 选择产品路线。默认 `ConsoleSamples` 仍是广覆盖 smoke 程序；`tutorial` 是适合展示的入口，`showcase` 继续作为兼容别名。
 
 ## Release Boundaries / 首版边界
 

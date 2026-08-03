@@ -167,8 +167,8 @@ function New-ReviewRecord {
             EntryCount = $MatrixEntryCount
             SupportContractSha256 = $SupportContractSha256
             RealSupportCount = 24
-            PendingSupportCount = 1
-            ExcludedSupportCount = 9
+            PendingSupportCount = 9
+            ExcludedSupportCount = 1
             WinX86FullStatus = 'hosted-evidence-pending'
             WinX86MiniStatus = 'excluded'
         }
@@ -243,7 +243,9 @@ function New-ReviewRecord {
             'designated-publisher',
             'independent-approver',
             'explicit-publication-authorization',
-            'post-publish-repository-signature-verification'
+            'post-publish-repository-signature-verification',
+            'github-packages-public-visibility',
+            'github-packages-verification'
         )
         PrivateKeyMaterialPresent = $false
         SecretMaterialPresent = $false
@@ -281,7 +283,7 @@ function Test-ReviewRecord {
     Assert-True -List $List -Condition ($Record.PackageEvidenceKind -eq $expectedPackageEvidenceKind) -Path $Path -Issue 'Release review package evidence classification drifted'
     $expectedChangeSummary = if ($ExternalPackages) { 'first-preview-publication-handoff' } else { 'deterministic-release-guard-fixture' }
     Assert-True -List $List -Condition ($Record.ChangeSummary -eq $expectedChangeSummary) -Path $Path -Issue 'Release review change summary drifted'
-    Assert-True -List $List -Condition ($Record.SupportMatrix.Sha256 -eq $MatrixSha256 -and [int]$Record.SupportMatrix.EntryCount -eq $MatrixEntryCount -and $Record.SupportMatrix.SupportContractSha256 -eq $SupportContractSha256 -and [int]$Record.SupportMatrix.RealSupportCount -eq 24 -and [int]$Record.SupportMatrix.PendingSupportCount -eq 1 -and [int]$Record.SupportMatrix.ExcludedSupportCount -eq 9) -Path $Path -Issue 'Release review support matrix or support contract drifted'
+    Assert-True -List $List -Condition ($Record.SupportMatrix.Sha256 -eq $MatrixSha256 -and [int]$Record.SupportMatrix.EntryCount -eq $MatrixEntryCount -and $Record.SupportMatrix.SupportContractSha256 -eq $SupportContractSha256 -and [int]$Record.SupportMatrix.RealSupportCount -eq 24 -and [int]$Record.SupportMatrix.PendingSupportCount -eq 9 -and [int]$Record.SupportMatrix.ExcludedSupportCount -eq 1) -Path $Path -Issue 'Release review support matrix or support contract drifted'
     Assert-True -List $List -Condition ($Record.SupportMatrix.WinX86FullStatus -eq 'hosted-evidence-pending' -and $Record.SupportMatrix.WinX86MiniStatus -eq 'excluded') -Path $Path -Issue 'Windows x86 support status changed without hosted evidence'
     $expectedCloseoutValues = "$($ExpectedCloseout.Path)|$($ExpectedCloseout.Sha256)|$($ExpectedCloseout.CandidateId)|$($ExpectedCloseout.SourceSetSha256)|$($ExpectedCloseout.Status)|$($ExpectedCloseout.InvariantGuardCount)|$($ExpectedCloseout.SigningStatus)|$($ExpectedCloseout.SbomStatus)|$($ExpectedCloseout.ApprovalStatus)|$($ExpectedCloseout.PublicationAllowed)"
     $recordCloseoutValues = "$($Record.Closeout.Path)|$($Record.Closeout.Sha256)|$($Record.Closeout.CandidateId)|$($Record.Closeout.SourceSetSha256)|$($Record.Closeout.Status)|$($Record.Closeout.InvariantGuardCount)|$($Record.Closeout.SigningStatus)|$($Record.Closeout.SbomStatus)|$($Record.Closeout.ApprovalStatus)|$($Record.Closeout.PublicationAllowed)"
@@ -339,7 +341,7 @@ function Test-ReviewRecord {
         })
     Assert-True -List $List -Condition ([string]::Join("`n", $actualSboms) -eq [string]::Join("`n", $recordSboms)) -Path $Path -Issue 'Release review SBOM hashes or package bindings do not match actual documents'
 
-    $requiredApprovalInputs = @('designated-publisher','explicit-publication-authorization','independent-approver','nuget-api-key-custody-owner','nuget-production-environment','post-publish-repository-signature-verification')
+    $requiredApprovalInputs = @('designated-publisher','explicit-publication-authorization','github-packages-public-visibility','github-packages-verification','independent-approver','nuget-api-key-custody-owner','nuget-production-environment','post-publish-repository-signature-verification')
     Assert-True -List $List -Condition ((@($Record.RequiredApprovalInputs | Sort-Object) -join ',') -eq ($requiredApprovalInputs -join ',')) -Path $Path -Issue 'Release review approval input checklist drifted'
 
     $expectedAreas = @('abi-api','feed-trust','hosted-x86','package-metadata','package-sbom','public-feed','release-scripts','repository-signing','runtime-matrix','signing-sbom','support-contract','toolchain-pins','workflow-permissions')
@@ -370,7 +372,8 @@ function Test-ReviewRecord {
         [pscustomobject]@{ Text = 'platform: Win32'; Path = $runtimeInputWorkflowPath },
         [pscustomobject]@{ Text = 'tool_host: Hostx64'; Path = $runtimeInputWorkflowPath },
         [pscustomobject]@{ Text = 'tool_target: x86'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = 'runtime-input-win-x86-full'; Path = $runtimeInputWorkflowPath },
+        [pscustomobject]@{ Text = "'win-x86/full'"; Path = $runtimeInputWorkflowPath },
+        [pscustomobject]@{ Text = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Path = $runtimeInputWorkflowPath },
         [pscustomobject]@{ Text = "real_runtime_artifact_run_id"; Path = $packWorkflowPath },
         [pscustomobject]@{ Text = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Path = $packWorkflowPath },
         [pscustomobject]@{ Text = "inputs.rid == 'win-x86' && inputs.runtime_profile == 'full' && inputs.validate_synthetic_runtime != 'true' && inputs.publish_github_packages != 'true'"; Path = $packWorkflowPath },

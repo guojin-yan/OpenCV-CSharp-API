@@ -52,11 +52,19 @@ jobs:
             'rocky.9-x64/full',
             'rocky.9-x64/mini',
             'alpine.3.20-x64/full',
-            'alpine.3.20-x64/mini'
+            'alpine.3.20-x64/mini',
+            'android-arm64/full',
+            'android-arm64/mini',
+            'android-arm/full',
+            'android-arm/mini',
+            'android-x64/full',
+            'android-x64/mini',
+            'android-x86/full',
+            'android-x86/mini'
           )
           $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-x86-full, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-fedora.40-x64-mini, runtime-input-rhel.9-x64-full, runtime-input-rhel.9-x64-mini, runtime-input-rocky.9-x64-full, runtime-input-rocky.9-x64-mini, runtime-input-alpine.3.20-x64-full, and runtime-input-alpine.3.20-x64-mini. Windows x86 mini and remaining platform RIDs need separate linked-component or platform-native producer steps before being advertised as real runtime inputs."
+            throw "runtime-input.yml currently produces the real-supported Windows/Linux targets, pending win-x86/full, and pending Android full/mini targets for arm64-v8a, armeabi-v7a, x86_64, and x86. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
           }
 
   produce:
@@ -745,6 +753,270 @@ jobs:
         with:
           name: runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
           path: artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
+          if-no-files-found: error
+
+  produce-android:
+    needs: validate-target
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: android-arm64
+            profile: full
+            abi: arm64-v8a
+            os: ubuntu-24.04
+          - rid: android-arm64
+            profile: mini
+            abi: arm64-v8a
+            os: ubuntu-24.04
+          - rid: android-arm
+            profile: full
+            abi: armeabi-v7a
+            os: ubuntu-24.04
+          - rid: android-arm
+            profile: mini
+            abi: armeabi-v7a
+            os: ubuntu-24.04
+          - rid: android-x64
+            profile: full
+            abi: x86_64
+            os: ubuntu-24.04
+          - rid: android-x64
+            profile: mini
+            abi: x86_64
+            os: ubuntu-24.04
+          - rid: android-x86
+            profile: full
+            abi: x86
+            os: ubuntu-24.04
+          - rid: android-x86
+            profile: mini
+            abi: x86
+            os: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Skip unmatched Android producer target
+        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
+        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        with:
+          dotnet-version: |
+            10.0.302
+            9.0.316
+            8.0.423
+      - name: Check project invariants
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Verify pinned Android SDK and NDK
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: |
+          $ndkVersion = '28.2.13676358'
+          if ([string]::IsNullOrWhiteSpace($env:ANDROID_HOME)) {
+            throw 'ANDROID_HOME is required on the Android producer runner.'
+          }
+          $ndkRoot = Join-Path $env:ANDROID_HOME "ndk/$ndkVersion"
+          $sourceProperties = Join-Path $ndkRoot 'source.properties'
+          $toolchain = Join-Path $ndkRoot 'build/cmake/android.toolchain.cmake'
+          if (-not (Test-Path -LiteralPath $sourceProperties -PathType Leaf) -or
+              -not (Test-Path -LiteralPath $toolchain -PathType Leaf)) {
+            throw "Pinned Android NDK is unavailable on ubuntu-24.04: $ndkRoot"
+          }
+          $properties = Get-Content -LiteralPath $sourceProperties -Raw
+          if ($properties -notmatch "(?m)^Pkg\.Revision\s*=\s*$([regex]::Escape($ndkVersion))\s*$") {
+            throw "Android NDK source.properties did not match $ndkVersion."
+          }
+          $sdkManager = Join-Path $env:ANDROID_HOME 'cmdline-tools/latest/bin/sdkmanager'
+          $adb = Join-Path $env:ANDROID_HOME 'platform-tools/adb'
+          if (-not (Test-Path -LiteralPath $sdkManager -PathType Leaf) -or
+              -not (Test-Path -LiteralPath $adb -PathType Leaf)) {
+            throw 'Android SDK command-line tools or adb were not found.'
+          }
+          Write-Host "ANDROID_TOOLCHAIN_EVIDENCE rid=${{ matrix.rid }} abi=${{ matrix.abi }} ndk=$ndkVersion api=24 sdk=$($env:ANDROID_HOME)"
+          "ANDROID_NDK_ROOT=$ndkRoot" >> $env:GITHUB_ENV
+          "ANDROID_NDK_VERSION=$ndkVersion" >> $env:GITHUB_ENV
+      - name: Fetch OpenCV source for Android
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: |
+          $sourceRoot = [IO.Path]::GetFullPath((Join-Path (Split-Path $env:GITHUB_WORKSPACE -Parent) 'opencv-source'))
+          $sourceDir = [IO.Path]::GetFullPath((Join-Path $sourceRoot 'opencv-${{ inputs.opencv_version }}'))
+          $sourceRootPrefix = $sourceRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
+          if (-not $sourceDir.StartsWith($sourceRootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Android OpenCV source reset target escaped its dedicated root: $sourceDir"
+          }
+          New-Item -ItemType Directory -Force -Path $sourceRoot | Out-Null
+          if (Test-Path -LiteralPath $sourceDir) {
+            [IO.Directory]::Delete($sourceDir, $true)
+            Write-Host "ANDROID_OPENCV_SOURCE_RESET_EVIDENCE path=$sourceDir reason=partial-source"
+          }
+          git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv.git $sourceDir
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Android OpenCV source clone failed.'
+          }
+      - name: Build and audit Android runtime input
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        env:
+          CMAKE_BUILD_PARALLEL_LEVEL: 2
+        run: |
+          pwsh -NoProfile -File ./scripts/Build-AndroidRuntimeInput.ps1 `
+            -Rid '${{ matrix.rid }}' `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -AndroidNdkRoot $env:ANDROID_NDK_ROOT `
+            -AndroidNdkVersion $env:ANDROID_NDK_VERSION `
+            -AndroidApiLevel 24 `
+            -WorkspaceRoot (Split-Path $env:GITHUB_WORKSPACE -Parent) `
+            -Build
+      - name: Build same-run managed and Android runtime packages
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: |
+          $inputRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}'
+          $manifest = Get-Content -LiteralPath (Join-Path $inputRoot 'runtime-input.provenance.json') -Raw | ConvertFrom-Json
+          if ($manifest.SyntheticRuntimeInputs -ne $false -or
+              $manifest.Rid -ne '${{ matrix.rid }}' -or
+              $manifest.RuntimeProfile -ne '${{ matrix.profile }}') {
+            throw 'Android runtime input provenance did not match the selected non-synthetic target.'
+          }
+          $packageRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/android-proof/packages'
+          dotnet restore ./OpenCV-CSharp-API.slnx
+          dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore
+          pwsh -NoProfile -File ./scripts/Pack-Managed.ps1 -OutputDir $packageRoot -NoBuild -NoRestore
+          pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 `
+            -Rid '${{ matrix.rid }}' `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -StageRuntime `
+            -RequireReleasePreflight `
+            -OpenCvNativeRuntimeDir (Join-Path $inputRoot 'native-wrapper') `
+            -OpenCvRuntimeDir (Join-Path $inputRoot 'opencv-runtime') `
+            -OpenCvSourceDir (Join-Path $inputRoot 'opencv-source') `
+            -OpenCvInstallDir (Join-Path $inputRoot 'opencv-install') `
+            -StageOutputRoot (Join-Path $env:GITHUB_WORKSPACE 'artifacts/android-proof/stage') `
+            -OutputDir $packageRoot
+      - name: Install pinned .NET Android workload
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: |
+          dotnet workload install android --skip-manifest-update
+          dotnet workload list
+      - name: Build Android package consumer APK
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        shell: pwsh
+        run: |
+          $packageRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/android-proof/packages'
+          $profileSuffix = if ('${{ matrix.profile }}' -eq 'mini') { '.mini' } else { '' }
+          $runtimePackageId = 'JYPPX.OpenCV.runtime.${{ matrix.rid }}' + $profileSuffix
+          $project = Join-Path $env:GITHUB_WORKSPACE 'samples/AndroidSmoke/AndroidSmoke.csproj'
+          $common = @(
+            '-p:UseLocalPackages=true',
+            "-p:AndroidRuntimePackageId=$runtimePackageId",
+            '-p:RuntimeIdentifier=${{ matrix.rid }}'
+          )
+          dotnet restore $project @common --source $packageRoot --source 'https://api.nuget.org/v3/index.json'
+          if ($LASTEXITCODE -ne 0) { throw 'Android package consumer restore failed.' }
+          dotnet build $project -c Release --no-restore @common
+          if ($LASTEXITCODE -ne 0) { throw 'Android package consumer build failed.' }
+
+          $nugetTargets = Get-ChildItem -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'samples/AndroidSmoke/obj') -Recurse -File -Filter '*.nuget.g.targets'
+          $expectedImport = "buildTransitive/$runtimePackageId.targets"
+          if (@($nugetTargets | Where-Object { (Get-Content -LiteralPath $_.FullName -Raw).Replace('\', '/').Contains($expectedImport) }).Count -eq 0) {
+            throw "Android runtime package buildTransitive target was not auto-imported: $expectedImport"
+          }
+
+          $apk = @(Get-ChildItem -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'samples/AndroidSmoke/bin/Release') -Recurse -File -Filter '*-Signed.apk' | Select-Object -First 1)
+          if ($apk.Count -eq 0) {
+            $apk = @(Get-ChildItem -LiteralPath (Join-Path $env:GITHUB_WORKSPACE 'samples/AndroidSmoke/bin/Release') -Recurse -File -Filter '*.apk' | Select-Object -First 1)
+          }
+          if ($apk.Count -ne 1) { throw 'Android package consumer APK was not found exactly once.' }
+
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $runtimePackage = @(Get-ChildItem -LiteralPath $packageRoot -File -Filter "$runtimePackageId.*.nupkg")
+          if ($runtimePackage.Count -ne 1) { throw 'Same-run Android runtime package was not found exactly once.' }
+          $packageZip = [IO.Compression.ZipFile]::OpenRead($runtimePackage[0].FullName)
+          $apkZip = [IO.Compression.ZipFile]::OpenRead($apk[0].FullName)
+          try {
+            $nativePrefix = 'runtimes/${{ matrix.rid }}/native/'
+            $nativeNames = @($packageZip.Entries | Where-Object { $_.FullName.StartsWith($nativePrefix) } | ForEach-Object { Split-Path $_.FullName -Leaf })
+            $apkEntries = @($apkZip.Entries | ForEach-Object { $_.FullName })
+            foreach ($nativeName in $nativeNames) {
+              $apkEntry = 'lib/${{ matrix.abi }}/' + $nativeName
+              if ($apkEntries -notcontains $apkEntry) {
+                throw "Android APK is missing packaged native library: $apkEntry"
+              }
+            }
+          }
+          finally {
+            $packageZip.Dispose()
+            $apkZip.Dispose()
+          }
+
+          $proofRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/android-proof'
+          $proofApk = Join-Path $proofRoot 'OpenCvSharp-${{ matrix.rid }}-${{ matrix.profile }}.apk'
+          Copy-Item -LiteralPath $apk[0].FullName -Destination $proofApk -Force
+          "ANDROID_APK_PATH=$proofApk" >> $env:GITHUB_ENV
+          Write-Host "ANDROID_PACKAGE_CONSUMER_OK rid=${{ matrix.rid }} abi=${{ matrix.abi }} profile=${{ matrix.profile }} native_files=$($nativeNames.Count) apk=$proofApk"
+      - name: Run x86_64 Android emulator loading smoke
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'android-x64' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdkmanager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          avdmanager="$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager"
+          emulator="$ANDROID_HOME/emulator/emulator"
+          adb="$ANDROID_HOME/platform-tools/adb"
+          image='system-images;android-35;google_apis;x86_64'
+          "$sdkmanager" "$image"
+          printf 'no\n' | "$avdmanager" create avd --force --name opencv-csharp-smoke --package "$image" --device pixel_2
+          sudo chmod a+rw /dev/kvm
+          nohup "$emulator" \
+            -avd opencv-csharp-smoke \
+            -no-window \
+            -no-audio \
+            -no-boot-anim \
+            -gpu swiftshader_indirect \
+            -accel on \
+            > artifacts/android-proof/emulator.log 2>&1 &
+          "$adb" wait-for-device
+          boot_completed=''
+          for attempt in $(seq 1 72); do
+            boot_completed="$("$adb" shell getprop sys.boot_completed | tr -d '\r')"
+            if [ "$boot_completed" = '1' ]; then break; fi
+            sleep 5
+          done
+          test "$boot_completed" = '1'
+          "$adb" install -r "$ANDROID_APK_PATH"
+          "$adb" logcat -c
+          "$adb" shell am start -W -n io.github.guojinyan.opencvcsharp.smoke/io.github.guojinyan.opencvcsharp.smoke.MainActivity
+          smoke=''
+          for attempt in $(seq 1 60); do
+            smoke="$($adb logcat -d -s OpenCvSharpSmoke:I '*:S' | tr -d '\r' | grep 'PASS version=5.0.0 sum=448' || true)"
+            if [ -n "$smoke" ]; then break; fi
+            sleep 2
+          done
+          test -n "$smoke"
+          printf '%s\n' "$smoke" | tee artifacts/android-proof/emulator-smoke.txt
+          echo 'ANDROID_EMULATOR_LOADING_OK rid=android-x64 abi=x86_64 profile=${{ matrix.profile }} native_call=Mat+Cv2.Sum version=5.0.0 sum=448'
+      - name: Upload Android runtime input artifact
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
+          if-no-files-found: error
+      - name: Upload Android package consumer proof
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: android-proof-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/android-proof
           if-no-files-found: error
 
   produce-windows:

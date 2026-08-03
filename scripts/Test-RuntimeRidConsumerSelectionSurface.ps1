@@ -127,32 +127,30 @@ $runtimeReadmeText = Read-RequiredText -RelativePath $runtimeReadmePath
 $sampleProjectText = Read-RequiredText -RelativePath $sampleProjectPath
 $testProjectText = Read-RequiredText -RelativePath $testProjectPath
 
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --version $examplePackageVersion" -Issue "Quick Start must install the neutral managed package"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $currentWindowsRuntimePackage --version $examplePackageVersion" -Issue "Quick Start may keep win-x64 only as the current Windows x64 runtime package example"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --prerelease" -Issue "Quick Start must install the neutral managed package without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $currentWindowsRuntimePackage --prerelease" -Issue "Quick Start may keep win-x64 only as the current Windows x64 runtime package example without a hardcoded version"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle $runtimePackageShape -Issue "Quick Start must describe generic runtime package selection as JYPPX.OpenCV.runtime.<rid>"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle $runtimeMiniPackageShape -Issue "Quick Start must describe mini runtime package selection as JYPPX.OpenCV.runtime.<rid>.mini"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "target RID" -Issue "Quick Start must tell consumers to choose the runtime package for their target RID"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "no matching" -Issue "Quick Start must keep no-matching-runtime-package fallback guidance visible"
 Assert-Matches -Violations $violations -Path $quickStartPath -Text $quickStartText -Pattern "win-x64.*example|example.*win-x64" -Issue "Quick Start must label win-x64 as an example RID"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same normalized NuGet package version" -Issue "Quick Start must explain managed/runtime package version alignment"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same resolved NuGet version" -Issue "Quick Start must explain managed/runtime package version alignment"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
-    "dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--version\s+(?<Version>\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9a-z-]+(?:\.[0-9a-z-]+)*)?)",
-    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    "^\s*dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--prerelease(?:\s+#.*)?\s*$",
+    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Multiline)
 $installMatches = @($installRegex.Matches($quickStartText))
 if ($installMatches.Count -ne 2) {
-    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start must contain exactly two current install commands: managed and current Windows x64 runtime example"
+    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start must contain exactly two version-free prerelease install commands: managed and current Windows x64 runtime example"
 }
 else {
     $packageIds = @($installMatches | ForEach-Object { $_.Groups["PackageId"].Value })
-    $versions = @($installMatches | ForEach-Object { $_.Groups["Version"].Value })
     if ($packageIds -notcontains $managedPackageId -or $packageIds -notcontains $currentWindowsRuntimePackage) {
         Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start install commands must use neutral managed package and current Windows x64 runtime package example"
     }
-
-    if (@($versions | Sort-Object -Unique).Count -ne 1) {
-        Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start managed/runtime install commands must use the same package version metadata"
-    }
+}
+if ($quickStartText -match "(?im)^\s*dotnet\s+add\s+package\s+\S+.*\s--version(?:\s|=)") {
+    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start install commands must not hardcode package versions"
 }
 
 foreach ($doc in @(

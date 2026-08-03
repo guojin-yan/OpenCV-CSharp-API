@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <SupportedOSPlatformVersion>24.0</SupportedOSPlatformVersion>
+    <ApplicationId>io.github.guojinyan.opencvcsharp.smoke</ApplicationId>
+    <ApplicationTitle>OpenCV CSharp Smoke</ApplicationTitle>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseLocalPackages Condition="'$(UseLocalPackages)' == ''">false</UseLocalPackages>
+    <AndroidRuntimePackageId Condition="'$(AndroidRuntimePackageId)' == ''">JYPPX.OpenCV.runtime.android-arm64.mini</AndroidRuntimePackageId>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(UseLocalPackages)' != 'true'">
+    <ProjectReference Include="..\..\src\OpenCvSharp\OpenCvSharp.csproj" />
+    <AndroidNativeLibrary Include="$(OpenCvNativeRuntimeDir)\*.so" Condition="'$(OpenCvNativeRuntimeDir)' != ''">
+      <Abi Condition="'$(RuntimeIdentifier)' == 'android-arm64'">arm64-v8a</Abi>
+      <Abi Condition="'$(RuntimeIdentifier)' == 'android-arm'">armeabi-v7a</Abi>
+      <Abi Condition="'$(RuntimeIdentifier)' == 'android-x64'">x86_64</Abi>
+      <Abi Condition="'$(RuntimeIdentifier)' == 'android-x86'">x86</Abi>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseLocalPackages)' == 'true'">
+    <PackageReference Include="JYPPX.OpenCV.CSharp.API" Version="$(OpenCvCSharpPackageVersion)" />
+    <PackageReference Include="$(AndroidRuntimePackageId)" Version="$(OpenCvCSharpPackageVersion)" />
+  </ItemGroup>
+</Project>

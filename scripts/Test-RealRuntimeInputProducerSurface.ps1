@@ -276,7 +276,15 @@ function Assert-RealProducerTargets {
         [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6"; OpenCvExtraCMakeArgs = "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0" },
         [pscustomobject]@{ Rid = "rocky.9-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = "rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6"; OpenCvExtraCMakeArgs = "" },
         [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"; OpenCvExtraCMakeArgs = "" },
-        [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"; OpenCvExtraCMakeArgs = "" }
+        [pscustomobject]@{ Rid = "alpine.3.20-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-arm64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-arm64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-arm"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-arm"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-x64"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-x64"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-x86"; Profile = "full"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" },
+        [pscustomobject]@{ Rid = "android-x86"; Profile = "mini"; Runner = "ubuntu-24.04"; ContainerImage = ""; OpenCvExtraCMakeArgs = "" }
     )
     $expectedByKey = @{}
     foreach ($target in $expectedTargets) {
@@ -353,6 +361,13 @@ function Assert-RealProducerTargets {
                 Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Windows producer must remain exact hosted win-x64 full/mini, win-x86 full, or win-arm64 full/mini without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
             }
         }
+        elseif ($platformFamily.Equals("android", [System.StringComparison]::OrdinalIgnoreCase)) {
+            if (-not $target.Rid.StartsWith("android-", [System.StringComparison]::Ordinal) -or
+                $target.Profile -notin @("full", "mini") -or
+                -not [string]::IsNullOrWhiteSpace([string]$target.ContainerImage)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved Android producer must remain an NDK-hosted full/mini target without a container" -Text "$($target.Rid)/$($target.Profile) platform=$platformFamily"
+            }
+        }
         else {
             if (-not $platformFamily.Equals("linux", [System.StringComparison]::OrdinalIgnoreCase)) {
                 Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved distro real producer target must remain a Linux runtime package RID" -Text $target.Rid
@@ -411,11 +426,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
         [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
-        [pscustomobject]@{ Needle = "runtime-input-win-x64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 full target" },
-        [pscustomobject]@{ Needle = "runtime-input-win-x64-mini"; Issue = "Producer workflow must explicitly advertise the factual Windows x64 mini target" },
-        [pscustomobject]@{ Needle = "runtime-input-win-x86-full"; Issue = "Producer workflow must explicitly advertise the factual Windows x86 full target" },
-        [pscustomobject]@{ Needle = "runtime-input-win-arm64-full"; Issue = "Producer workflow must explicitly advertise the factual Windows ARM64 full target" },
-        [pscustomobject]@{ Needle = "runtime-input-win-arm64-mini"; Issue = "Producer workflow must explicitly advertise the Windows ARM64 mini target" },
+        [pscustomobject]@{ Needle = "produce-android:"; Issue = "Android production must remain in a separate NDK-hosted job" },
+        [pscustomobject]@{ Needle = "Build-AndroidRuntimeInput.ps1"; Issue = "Android producer must use the audited NDK build and ELF evidence script" },
+        [pscustomobject]@{ Needle = "28.2.13676358"; Issue = "Android producer must pin the audited NDK revision" },
+        [pscustomobject]@{ Needle = "ANDROID_PACKAGE_CONSUMER_OK"; Issue = "Android producer must build an APK from the same-run managed and runtime packages" },
+        [pscustomobject]@{ Needle = "ANDROID_EMULATOR_LOADING_OK"; Issue = "Android x86_64 producer must execute a native loading smoke in an emulator" },
         [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Native Windows production must remain in a separate hosted Windows job" },
         [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_X64"; Issue = "Windows producer matrix must retain the x64 evidence branch" },
         [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_ARM64"; Issue = "Windows producer matrix must retain the ARM64 evidence branch" },
@@ -457,15 +472,6 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "-NativeWrapperSources"; Issue = "Windows producer provenance must retain the exact wrapper source list" },
         [pscustomobject]@{ Needle = "-NativeWrapperSourceCount"; Issue = "Windows producer provenance must retain the wrapper source count" },
         [pscustomobject]@{ Needle = "-NativeAbiFunctionCount"; Issue = "Windows producer provenance must retain the ABI function count" },
-        [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the first real mini producer target" },
-        [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-full"; Issue = "Producer workflow must advertise the proven native Ubuntu 24.04 ARM64 full target" },
-        [pscustomobject]@{ Needle = "runtime-input-ubuntu.24.04-arm64-mini"; Issue = "Producer workflow must explicitly advertise the native Ubuntu 24.04 ARM64 mini target" },
-        [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-x64-mini"; Issue = "Producer workflow must explicitly advertise the native Ubuntu 22.04 x64 mini target" },
-         [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Ubuntu 22.04 ARM64 full target" },
-         [pscustomobject]@{ Needle = "runtime-input-ubuntu.22.04-arm64-mini"; Issue = "Producer workflow must advertise the exact container-native Ubuntu 22.04 ARM64 mini target" },
-         [pscustomobject]@{ Needle = "runtime-input-debian.12-x64-mini"; Issue = "Producer workflow must advertise the exact container-native Debian 12 x64 mini target" },
-         [pscustomobject]@{ Needle = "runtime-input-debian.12-arm64-full"; Issue = "Producer workflow must advertise the proven container-native Debian 12 ARM64 full target" },
-         [pscustomobject]@{ Needle = "runtime-input-debian.12-arm64-mini"; Issue = "Producer workflow must advertise the exact container-native Debian 12 ARM64 mini target" },
         [pscustomobject]@{ Needle = "os: ubuntu-24.04-arm"; Issue = "Ubuntu 24.04 ARM64 producer must use the native GitHub-hosted ARM64 runner" },
         [pscustomobject]@{ Needle = "container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited official multi-architecture image digest" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record the native AArch64 Docker host" },
@@ -594,10 +600,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "Container distro version mismatch for `$PRODUCER_RID"; Issue = "Producer workflow must reject container images whose actual distro version does not match the runtime RID matrix" },
         [pscustomobject]@{ Needle = "getconf GNU_LIBC_VERSION"; Issue = "Producer workflow must record libc evidence for container-native Linux outputs" },
         [pscustomobject]@{ Needle = 'OpenCV source reset target escaped its dedicated root'; Issue = "Producer workflow must fail closed before clearing partial upstream-map source evidence" },
-        [pscustomobject]@{ Needle = '[IO.Directory]::Delete($sourceDir, $true)'; Issue = "Hosted Linux and Windows producers must clear partial upstream-map source evidence before cloning" },
+        [pscustomobject]@{ Needle = '[IO.Directory]::Delete($sourceDir, $true)'; Issue = "Hosted Linux, Android, and Windows producers must clear partial upstream-map source evidence before cloning" },
         [pscustomobject]@{ Needle = 'if [ "$source_dir" != "$source_root/opencv-$OPENCV_VERSION" ]'; Issue = "Container producers must prove the exact OpenCV source reset target" },
         [pscustomobject]@{ Needle = 'rm -rf -- "$source_dir"'; Issue = "Container producers must clear partial upstream-map source evidence before cloning" },
         [pscustomobject]@{ Needle = 'OPENCV_SOURCE_RESET_EVIDENCE path=$sourceDir reason=upstream-map-partial-source'; Issue = "Hosted Linux and Windows producers must record their partial-source reset" },
+        [pscustomobject]@{ Needle = 'ANDROID_OPENCV_SOURCE_RESET_EVIDENCE path=$sourceDir reason=partial-source'; Issue = "Android producer must record its guarded partial-source reset" },
         [pscustomobject]@{ Needle = 'OPENCV_SOURCE_RESET_EVIDENCE path=$source_dir reason=upstream-map-partial-source'; Issue = "Container producers must record their partial-source reset" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
@@ -616,11 +623,11 @@ foreach ($required in @(
     Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle $required.Needle -Issue $required.Issue
 }
 
-if ([regex]::Matches($producerWorkflowText, [regex]::Escape('[IO.Directory]::Delete($sourceDir, $true)')).Count -ne 2) {
-    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Producer workflow must keep exactly two guarded PowerShell source resets" -Text '[IO.Directory]::Delete($sourceDir, $true)'
+if ([regex]::Matches($producerWorkflowText, [regex]::Escape('[IO.Directory]::Delete($sourceDir, $true)')).Count -ne 3) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Producer workflow must keep exactly three guarded PowerShell source resets" -Text '[IO.Directory]::Delete($sourceDir, $true)'
 }
-if ([regex]::Matches($producerWorkflowText, 'OPENCV_SOURCE_RESET_EVIDENCE').Count -ne 3) {
-    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Producer workflow must record exactly three hosted/container source-reset boundaries" -Text 'OPENCV_SOURCE_RESET_EVIDENCE'
+if ([regex]::Matches($producerWorkflowText, 'OPENCV_SOURCE_RESET_EVIDENCE').Count -ne 4) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Producer workflow must record exactly four hosted/container/Android source-reset boundaries" -Text 'OPENCV_SOURCE_RESET_EVIDENCE'
 }
 
 Assert-RealProducerTargets `
@@ -889,6 +896,7 @@ if ($violations.Count -eq 0) {
             $isWindowsArm64 = $producerTarget.Rid -eq "win-arm64" -and $producerTarget.Profile -in @("full", "mini")
             $isWindowsTarget = $isWindowsX64 -or $isWindowsX86 -or $isWindowsArm64
             $isWindowsMini = $isWindowsTarget -and $producerTarget.Profile -eq "mini"
+            $isAndroidTarget = $expectedPlatformFamily.Equals("android", [System.StringComparison]::OrdinalIgnoreCase)
             $runnerImage = if ($isWindowsArm64) { "win11-vs2026-arm64" } elseif ($isWindowsX64 -or $isWindowsX86) { "win25-vs2026" } elseif ($isArm64Hosted) { "ubuntu24-arm64" } elseif ($isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "ubuntu24" } else { "" }
             $runnerImageVersion = if ($isWindowsTarget -or $hasDetailedLinuxEvidence) { "fixture" } else { "" }
             $hostedDistro = if ($isWindowsTarget) { "windows" } elseif ($hasDetailedLinuxEvidence) { "ubuntu" } else { "" }
@@ -922,7 +930,7 @@ if ($violations.Count -eq 0) {
             if ($profileSpec.Count -eq 0) {
                 throw "Fixture producer profile was not found in runtime matrix: $($producerTarget.Profile)"
             }
-            $openCvExtraCMakeArgs = if ($isWindowsMini) { "-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND" } else { [string]$producerTarget.OpenCvExtraCMakeArgs }
+            $openCvExtraCMakeArgs = if ($isWindowsMini) { "-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND" } elseif ($isAndroidTarget) { "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON" } else { [string]$producerTarget.OpenCvExtraCMakeArgs }
             $openCvSourcePatchEvidence = if ($isWindowsArm64) {
                 [ordered]@{
                     Path = "packaging/runtime/patches/windows-arm64-mlas-processor-case.patch"
@@ -934,18 +942,18 @@ if ($violations.Count -eq 0) {
             else {
                 ""
             }
-            $openCvCMakeArguments = if ($isWindowsArm64 -and $isWindowsMini) { '["-G","Visual Studio 18 2026","-A","ARM64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsX86) { '["-G","Visual Studio 18 2026","-A","Win32","-T","host=x64"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } elseif ($hasDetailedLinuxEvidence) { "[`"-G`",`"Ninja`",`"-DBUILD_LIST=$([string]$profileSpec[0].buildList)`"]" } else { "" }
+            $openCvCMakeArguments = if ($isWindowsArm64 -and $isWindowsMini) { '["-G","Visual Studio 18 2026","-A","ARM64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsMini) { '["-G","Visual Studio 18 2026","-A","x64","-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND"]' } elseif ($isWindowsX86) { '["-G","Visual Studio 18 2026","-A","Win32","-T","host=x64"]' } elseif ($isWindowsArm64) { '["-G","Visual Studio 18 2026","-A","ARM64"]' } elseif ($isWindowsX64) { '["-G","Visual Studio 18 2026","-A","x64"]' } elseif ($isAndroidTarget -or $hasDetailedLinuxEvidence) { "[`"-G`",`"Ninja`",`"-DBUILD_LIST=$([string]$profileSpec[0].buildList)`"]" } else { "" }
             $expectedModuleCount = @($profileSpec[0].modules).Count
             $peAuditEvidence = if ($isWindowsArm64) { "WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=ARM64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX86) { "WINDOWS_PE_AUDIT_OK rid=win-x86 profile=full files=$($expectedModuleCount + 2) machine=I386 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } elseif ($isWindowsX64) { "WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$($producerTarget.Profile) files=$($expectedModuleCount + 2) machine=AMD64 packaged_modules=$expectedModuleCount reachable_modules=$expectedModuleCount loader_opencv_imports=5 opencv_import_edges=12 missing_opencv_imports=0 loader_equal=true" } else { "" }
             $expectedCanonicalCount = $expectedModuleCount + 2
             $expectedLinuxPayloadCount = ($expectedModuleCount * 3) + 2
-            $elfAuditEvidence = if ($isDirectUbuntuArm64) { "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isUbuntu2204Arm64) { "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204Arm64) { "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204X64) { "DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isFedora40X64) { "FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isRhel9X64) { "RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } else { "" }
+            $elfAuditEvidence = if ($isAndroidTarget) { "ANDROID_ELF_EVIDENCE rid=$($producerTarget.Rid) profile=$($producerTarget.Profile) files=$expectedCanonicalCount required_modules=$expectedModuleCount min_page_alignment=16384 versioned_so=0 libcxx_shared=0 loaders_equal=true" } elseif ($isDirectUbuntuArm64) { "UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isUbuntu2204Arm64) { "UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204Arm64) { "DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isDebian1204X64) { "DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isFedora40X64) { "FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } elseif ($isRhel9X64) { "RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=$($producerTarget.Profile) files=$expectedCanonicalCount runtime_files=$expectedLinuxPayloadCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true" } else { "" }
             $openCvCpuConfiguration = if ($isWindowsArm64) { "CPU_BASELINE:NEON;CPU_DISPATCH:" } elseif ($isWindowsX86) { "CPU_BASELINE:SSE2;CPU_DISPATCH:SSE4_1" } elseif ($isWindowsX64) { "CPU_BASELINE:SSE3;CPU_DISPATCH:SSE4_1" } elseif ($isArm64Hosted) { "CPU_BASELINE=NEON" } elseif ($isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "CPU_BASELINE=SSE3;CPU_DISPATCH=AVX2" } else { "" }
             $excludedForeignToolDirectories = if ($isWindowsTarget) { '["C:\\mingw64\\bin"]' } else { "" }
             $openCvAsmConfiguration = if ($isWindowsMini) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile" } elseif ($isWindowsArm64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for ARM64" } elseif ($isWindowsX86 -or $isWindowsX64) { "CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for AMD64" } else { "" }
             $windowsTargetExecutionEvidence = if ($isWindowsX86) { "WINDOWS_X86_WOW64_PROBE_OK pointer_bits=32 process_machine=0x014C native_machine=0x8664" } else { "" }
-            $hasMiniProfileEvidence = $isWindowsMini -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) -and $producerTarget.Profile -eq "mini")
-            $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) -and $producerTarget.Profile -eq "full")
+            $hasMiniProfileEvidence = $isWindowsMini -or (($isAndroidTarget -or $isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) -and $producerTarget.Profile -eq "mini")
+            $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isAndroidTarget -or $isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) -and $producerTarget.Profile -eq "full")
             $nativeWrapperSources = if ($hasMiniProfileEvidence) { '["src/error_state.cpp","src/version.cpp","src/core/mat.cpp","src/core/decomp.cpp","src/core/operations.cpp","src/core/persistence.cpp","src/videoio/videoio.cpp","src/imgcodecs.cpp","src/imgproc.cpp"]' } elseif ($hasFullProfileEvidence) { '["full-source-fixture"]' } else { "" }
             $nativeWrapperSourceCount = if ($hasMiniProfileEvidence) { "9" } elseif ($hasFullProfileEvidence) { "49" } else { "" }
             $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "526" } elseif ($hasFullProfileEvidence) { "2656" } else { "" }
@@ -957,7 +965,7 @@ if ($violations.Count -eq 0) {
             $powerShellArchiveSha256 = if ($isArm64Container) { "68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c" } else { "" }
             $fixtureRuntimeDir = Join-Path $fixtureRoot "opencv-runtime-$($producerTarget.Rid)-$($producerTarget.Profile)"
             foreach ($module in @($profileSpec[0].modules)) {
-                $runtimeFileName = if ($isWindowsTarget) { "opencv_$($module)500.dll" } else { "libopencv_$module.so.5.0.0" }
+                $runtimeFileName = if ($isWindowsTarget) { "opencv_$($module)500.dll" } elseif ($isAndroidTarget) { "libopencv_$module.so" } else { "libopencv_$module.so.5.0.0" }
                 Write-FixtureFile -Path (Join-Path $fixtureRuntimeDir $runtimeFileName)
             }
 
@@ -1237,5 +1245,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Real runtime input producer surface guard passed."
-Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-x86-full, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-fedora.40-x64-mini, runtime-input-rhel.9-x64-full, runtime-input-rhel.9-x64-mini, runtime-input-rocky.9-x64-full, runtime-input-rocky.9-x64-mini, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini."
+Write-Host "Producer artifacts: runtime-input-win-x64-full, runtime-input-win-x64-mini, runtime-input-win-x86-full, runtime-input-win-arm64-full, runtime-input-win-arm64-mini, runtime-input-ubuntu.24.04-x64-full, runtime-input-ubuntu.24.04-x64-mini, runtime-input-ubuntu.24.04-arm64-full, runtime-input-ubuntu.24.04-arm64-mini, runtime-input-ubuntu.22.04-x64-full, runtime-input-ubuntu.22.04-x64-mini, runtime-input-ubuntu.22.04-arm64-full, runtime-input-ubuntu.22.04-arm64-mini, runtime-input-debian.12-x64-full, runtime-input-debian.12-x64-mini, runtime-input-debian.12-arm64-full, runtime-input-debian.12-arm64-mini, runtime-input-fedora.40-x64-full, runtime-input-fedora.40-x64-mini, runtime-input-rhel.9-x64-full, runtime-input-rhel.9-x64-mini, runtime-input-rocky.9-x64-full, runtime-input-rocky.9-x64-mini, runtime-input-alpine.3.20-x64-full, runtime-input-alpine.3.20-x64-mini, runtime-input-android-arm64-full, runtime-input-android-arm64-mini, runtime-input-android-arm-full, runtime-input-android-arm-mini, runtime-input-android-x64-full, runtime-input-android-x64-mini, runtime-input-android-x86-full, runtime-input-android-x86-mini."
 Write-Host "Producer handoff layout: native-wrapper, opencv-runtime, opencv-source, optional opencv-install."

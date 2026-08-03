@@ -67,13 +67,30 @@ try {
 
     Assert-ExactSet -Path $contract.RelativePath -Issue 'Support contract must partition every package matrix RID/profile pair exactly once' -Expected $matrixTargets -Actual $classifiedTargets
     Assert-True -Condition (@($realTargets).Count -eq 24) -Path $contract.RelativePath -Issue 'Real support target count must remain 24'
-    Assert-True -Condition (@($pendingTargets).Count -eq 1 -and $pendingTargets[0] -eq 'win-x86/full') -Path $contract.RelativePath -Issue 'Only win-x86/full may remain pending'
-    Assert-True -Condition (@($excludedTargets).Count -eq 9 -and $excludedTargets -contains 'win-x86/mini') -Path $contract.RelativePath -Issue 'Excluded support target set drifted'
+    $expectedAndroidPendingTargets = @(
+        'android-arm/full',
+        'android-arm/mini',
+        'android-arm64/full',
+        'android-arm64/mini',
+        'android-x64/full',
+        'android-x64/mini',
+        'android-x86/full',
+        'android-x86/mini'
+    )
+    Assert-ExactSet -Path $contract.RelativePath -Issue 'Pending support targets must contain Windows x86 full plus every Android RID/profile' -Expected (@('win-x86/full') + $expectedAndroidPendingTargets) -Actual $pendingTargets
+    Assert-ExactSet -Path $contract.RelativePath -Issue 'Only Windows x86 mini may remain excluded' -Expected @('win-x86/mini') -Actual $excludedTargets
     Assert-True -Condition (@($c.outsideMatrix | Where-Object { $_.platform -eq 'macOS' -and $_.status -eq 'not-supported' }).Count -eq 1) -Path $contract.RelativePath -Issue 'macOS must remain explicitly outside support'
 
     foreach ($entry in @($c.pending)) {
-        Assert-True -Condition ([string]$entry.status -eq 'hosted-evidence-pending') -Path $contract.RelativePath -Issue 'Pending support target must remain hosted-evidence-pending' -Text $entry.target
-        Assert-ExactSet -Path $contract.RelativePath -Issue "Pending target requirements drifted for $($entry.target)" -Expected @('artifact-handoff','hosted-producer','independent-artifact-audit','same-run-pack','x86-consumer') -Actual @($entry.requires)
+        $target = [string]$entry.target
+        if ($target -eq 'win-x86/full') {
+            Assert-True -Condition ([string]$entry.status -eq 'hosted-evidence-pending') -Path $contract.RelativePath -Issue 'Windows x86 pending target must remain hosted-evidence-pending' -Text $target
+            Assert-ExactSet -Path $contract.RelativePath -Issue "Pending target requirements drifted for $target" -Expected @('artifact-handoff','hosted-producer','independent-artifact-audit','same-run-pack','x86-consumer') -Actual @($entry.requires)
+        }
+        else {
+            Assert-True -Condition ($target.StartsWith('android-', [StringComparison]::Ordinal) -and [string]$entry.status -eq 'android-evidence-pending') -Path $contract.RelativePath -Issue 'Android pending target must remain android-evidence-pending' -Text $target
+            Assert-ExactSet -Path $contract.RelativePath -Issue "Pending target requirements drifted for $target" -Expected @('android-elf-audit','android-package-consumer','artifact-handoff','device-or-emulator-loader','hosted-ndk-producer','same-run-pack') -Actual @($entry.requires)
+        }
     }
     foreach ($entry in @($c.excluded)) {
         Assert-True -Condition ([string]$entry.status -eq 'excluded' -and -not [string]::IsNullOrWhiteSpace([string]$entry.reason)) -Path $contract.RelativePath -Issue 'Excluded target must carry an explicit reason' -Text $entry.target
@@ -100,12 +117,12 @@ try {
     $readmePath = Join-Path $repo 'packaging/runtime/JYPPX.OpenCV.runtime/README.md'
     $readmeText = [IO.File]::ReadAllText($readmePath)
     Assert-True -Condition ($readmeText.Contains('runtime-support-contract.json')) -Path 'packaging/runtime/JYPPX.OpenCV.runtime/README.md' -Issue 'Runtime README must link the support contract'
-    Assert-True -Condition ($readmeText.Contains('Windows x86 remains synthetic-only') -and $readmeText.Contains('Android')) -Path 'packaging/runtime/JYPPX.OpenCV.runtime/README.md' -Issue 'Runtime README must preserve x86 and Android non-support wording'
+    Assert-True -Condition ($readmeText.Contains('Windows x86 remains synthetic-only') -and $readmeText.Contains('android-evidence-pending')) -Path 'packaging/runtime/JYPPX.OpenCV.runtime/README.md' -Issue 'Runtime README must preserve x86 and Android pending-support wording'
 
     $guidePath = Join-Path $repo 'docs/articles/linked-runtime-build-guide.md'
     $guideText = [IO.File]::ReadAllText($guidePath)
     Assert-True -Condition ($guideText.Contains('runtime-support-contract.json')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must link the support contract'
-    Assert-True -Condition ($guideText.Contains('Windows x86 remains synthetic-only') -and $guideText.Contains('Android')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must preserve x86 and Android non-support wording'
+    Assert-True -Condition ($guideText.Contains('Windows x86 remains synthetic-only') -and $guideText.Contains('android-evidence-pending')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must preserve x86 and Android pending-support wording'
 
     Write-Host "RELEASE_SUPPORT_CONTRACT_OK matrix_entries=$($matrixTargets.Count) real=$($realTargets.Count) pending=$($pendingTargets.Count) excluded=$($excludedTargets.Count) outside_matrix=macOS package_surface_support=false"
 }
@@ -120,4 +137,4 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host 'Release support contract passed.'
-Write-Host 'Package-matrix surface is explicitly separated from real support; Android/macOS and Windows x86 mini remain excluded, while Windows x86 full remains hosted-evidence-pending.'
+Write-Host 'Package-matrix surface is explicitly separated from real support; Android targets are evidence-pending, Windows x86 mini remains excluded, Windows x86 full remains hosted-evidence-pending, and macOS remains outside the matrix.'

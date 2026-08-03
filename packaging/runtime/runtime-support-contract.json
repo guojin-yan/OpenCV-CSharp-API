@@ -39,49 +39,113 @@
         "independent-artifact-audit",
         "x86-consumer"
       ]
-    }
-  ],
-  "excluded": [
+    },
     {
       "target": "android-arm/full",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-arm/mini",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-arm64/full",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-arm64/mini",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-x64/full",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run plus the x86_64 emulator loading smoke are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-x64/mini",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run plus the x86_64 emulator loading smoke are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-x86/full",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and emulator loading evidence are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
     },
     {
       "target": "android-x86/mini",
-      "status": "excluded",
-      "reason": "No real Android native build, package consumer, or device/emulator evidence."
-    },
+      "status": "android-evidence-pending",
+      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and emulator loading evidence are still required.",
+      "requires": [
+        "hosted-ndk-producer",
+        "artifact-handoff",
+        "same-run-pack",
+        "android-package-consumer",
+        "android-elf-audit",
+        "device-or-emulator-loader"
+      ]
+    }
+  ],
+  "excluded": [
     {
       "target": "win-x86/mini",
       "status": "excluded",

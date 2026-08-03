@@ -318,6 +318,9 @@ function Get-NativeFileNames {
                 "libopencv_$module.so.$OpenCvVersion"
             )
         }
+        elseif ($PlatformFamily -eq "android") {
+            "libopencv_$module.so"
+        }
         else {
             "libopencv_$module.so.$OpenCvVersion"
         }

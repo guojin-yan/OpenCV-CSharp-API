@@ -89,6 +89,9 @@ foreach ($module in @($profileSpec.modules)) {
     $fileName = if ($extension -eq ".dll") {
         "opencv_$module$openCvBinarySuffix.dll"
     }
+    elseif ([string]$ridSpec.platformFamily -eq "android") {
+        "libopencv_$module.so"
+    }
     else {
         "libopencv_$module.so.$OpenCvVersion"
     }

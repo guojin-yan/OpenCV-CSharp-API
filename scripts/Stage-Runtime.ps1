@@ -145,6 +145,10 @@ function Resolve-OpenCvModuleRuntimeFiles {
         return ,(Join-Path $RuntimeDirectory "opencv_$Module$BinarySuffix.dll")
     }
 
+    if (Test-AndroidRid -RuntimeIdentifier $RuntimeIdentifier) {
+        return ,(Join-Path $RuntimeDirectory "libopencv_$Module.so")
+    }
+
     # Linux OpenCV libraries carry versioned DT_NEEDED/SONAME entries. Keep the
     # unversioned linker name and every versioned companion in the runtime package.
     $globbed = @(Get-ChildItem -LiteralPath $RuntimeDirectory -Filter "libopencv_$Module.so*" -File -ErrorAction SilentlyContinue | Sort-Object Name)
@@ -173,6 +177,10 @@ function Test-OpenCvRuntimeDirectory {
 
     if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
         return Test-Path -LiteralPath (Join-Path $Directory "opencv_core$BinarySuffix.dll") -PathType Leaf
+    }
+
+    if (Test-AndroidRid -RuntimeIdentifier $RuntimeIdentifier) {
+        return Test-Path -LiteralPath (Join-Path $Directory "libopencv_core.so") -PathType Leaf
     }
 
     foreach ($candidate in @(

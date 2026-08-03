@@ -10,8 +10,10 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
-  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet version" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet prerelease version" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet downloads" /></a>
+  <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-5.0.0--preview.1-24292f" alt="GitHub Packages version" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/releases"><img src="https://img.shields.io/github/v/release/guojin-yan/OpenCV-CSharp-API?include_prereleases&label=Release" alt="GitHub Release" /></a>
   <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4" alt="Supported .NET versions" /></a>
   <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8" alt="Upstream OpenCV 5.0.0" /></a>
 </p>
@@ -27,14 +29,14 @@
 
 OpenCV CSharp API brings [OpenCV 5.0](https://opencv.org/) to C# through the familiar `OpenCvSharp.*` namespace family. It combines an idiomatic managed API, a stable native C ABI, explicit native-resource ownership, and runtime NuGet packages for verified Windows and Linux targets.
 
-The first public channel is `5.0.0-preview.1`. It is intended for early adopters who need broad computer-vision coverage while keeping public API and ABI identities stable across later iterations.
+The current public version is reported by the live NuGet badges below. The preview channel is intended for early adopters who need broad computer-vision coverage while keeping public API and ABI identities stable across later iterations.
 
 ## Release Highlights
 
 - Broad coverage of Core, ImgProc, ImgCodecs, VideoIO, Calib3D, DNN, Features, ObjDetect, Photo, Video, HighGui, Stitching, ML, Tracking, and selected contrib APIs.
 - One managed package plus full and mini native runtime profiles for 12 verified Windows and Linux RIDs.
 - .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
-- Deterministic NuGet packages, SPDX 2.3 SBOMs, protected release approval, and NuGet.org Repository-signature verification.
+- Deterministic packages on NuGet.org and GitHub Packages, SPDX 2.3 SBOMs, protected release approval, and verified GitHub Release assets.
 - Headless, executable examples that generate inspectable PNG output without a camera, model download, or GUI session.
 - Checked compatibility baselines covering 612 public managed types, 6,314 public/protected members, 41 namespaces, and the declared native ABI.
 
@@ -45,8 +47,8 @@ The first public channel is `5.0.0-preview.1`. It is intended for early adopters
 Install the managed API and exactly one runtime package at the same package version. This example selects the full Windows x64 runtime:
 
 ```powershell
-dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
-dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1 # current Windows x64 example
+dotnet add package JYPPX.OpenCV.CSharp.API --prerelease
+dotnet add package JYPPX.OpenCV.runtime.win-x64 --prerelease # current Windows x64 example
 ```
 
 ### 2. Write C# Code
@@ -85,11 +87,21 @@ The complete [Quick Start](docs/articles/quick-start.md) covers package selectio
 
 ## NuGet Packages
 
-| Package | Purpose |
-| --- | --- |
-| [`JYPPX.OpenCV.CSharp.API`](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | Version-neutral managed API for every supported .NET target |
-| `JYPPX.OpenCV.runtime.<rid>` | Full native runtime for one supported RID |
-| `JYPPX.OpenCV.runtime.<rid>.mini` | Smaller native runtime for one supported RID |
+### Managed API
+
+| Package | Version | NuGet.org | GitHub Packages | Purpose |
+| --- | --- | --- | --- | --- |
+| `JYPPX.OpenCV.CSharp.API` | [![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | [NuGet Gallery](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | [Package page](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API) | Version-neutral managed API for every supported .NET target |
+
+### Distribution Channels
+
+| Channel | Public entry point | Published content |
+| --- | --- | --- |
+| NuGet.org | [JYPPX.OpenCV.CSharp.API](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | Managed API and all 24 runtime packages |
+| GitHub Packages | [JYPPX.OpenCV.CSharp.API](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API) | The exact reviewed managed and runtime package bytes |
+| GitHub Releases | [OpenCV-CSharp-API Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases) | Repository-signed packages, SBOMs, manifests, and verification reports |
+
+Full runtimes use the version-neutral pattern `JYPPX.OpenCV.runtime.<rid>`; mini runtimes use `JYPPX.OpenCV.runtime.<rid>.mini`.
 
 Choose the runtime package that matches your target RID and preferred profile.
 
@@ -97,25 +109,28 @@ The full profile guarantees its matrix-required modules, including DNN, calibrat
 
 Do not reference full and mini runtime packages together. Keep the managed and runtime packages on the same normalized NuGet package version.
 
-## Supported Runtime Targets
+## Native Runtime Packages
 
-The first preview publishes the managed package and the 24 runtime targets classified as `realSupport` in [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json).
+The first preview publishes the managed package and the 24 runtime packages classified as `realSupport` in [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json). Each package is published to both public registries from the same reviewed candidate; the formal assets and evidence are published on [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases).
 
-| Platform | RID | Architectures | Profiles |
+| Platform | Architecture | Full runtime | Mini runtime |
 | --- | --- | --- | --- |
-| Windows 10/11 | `win-x64` | x64 | full, mini |
-| Windows 11 | `win-arm64` | ARM64 | full, mini |
-| Ubuntu 22.04 | `ubuntu.22.04-x64`, `ubuntu.22.04-arm64` | x64, ARM64 | full, mini |
-| Ubuntu 24.04 | `ubuntu.24.04-x64`, `ubuntu.24.04-arm64` | x64, ARM64 | full, mini |
-| Debian 12 | `debian.12-x64`, `debian.12-arm64` | x64, ARM64 | full, mini |
-| Fedora 40 | `fedora.40-x64` | x64 | full, mini |
-| RHEL 9 / UBI 9 | `rhel.9-x64` | x64 | full, mini |
-| Rocky Linux 9 | `rocky.9-x64` | x64 | full, mini |
-| Alpine 3.20 | `alpine.3.20-x64` | x64 / musl | full, mini |
+| Windows 10/11 | x64 | `JYPPX.OpenCV.runtime.win-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64) | `JYPPX.OpenCV.runtime.win-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64.mini) |
+| Windows 11 | ARM64 | `JYPPX.OpenCV.runtime.win-arm64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64) | `JYPPX.OpenCV.runtime.win-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64.mini) |
+| Ubuntu 22.04 | x64 | `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-x64) | `JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini) |
+| Ubuntu 22.04 | ARM64 | `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64) | `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini) |
+| Ubuntu 24.04 | x64 | `JYPPX.OpenCV.runtime.ubuntu.24.04-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.24.04-x64) | `JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini) |
+| Ubuntu 24.04 | ARM64 | `JYPPX.OpenCV.runtime.ubuntu.24.04-arm64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64) | `JYPPX.OpenCV.runtime.ubuntu.24.04-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.24.04-arm64.mini) |
+| Debian 12 | x64 | `JYPPX.OpenCV.runtime.debian.12-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.debian.12-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.debian.12-x64) | `JYPPX.OpenCV.runtime.debian.12-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.debian.12-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.debian.12-x64.mini) |
+| Debian 12 | ARM64 | `JYPPX.OpenCV.runtime.debian.12-arm64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.debian.12-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-arm64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.debian.12-arm64) | `JYPPX.OpenCV.runtime.debian.12-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.debian.12-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.debian.12-arm64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.debian.12-arm64.mini) |
+| Fedora 40 | x64 | `JYPPX.OpenCV.runtime.fedora.40-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.fedora.40-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.fedora.40-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.fedora.40-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.fedora.40-x64) | `JYPPX.OpenCV.runtime.fedora.40-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.fedora.40-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.fedora.40-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.fedora.40-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.fedora.40-x64.mini) |
+| RHEL 9 / UBI 9 | x64 | `JYPPX.OpenCV.runtime.rhel.9-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.rhel.9-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rhel.9-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rhel.9-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.rhel.9-x64) | `JYPPX.OpenCV.runtime.rhel.9-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.rhel.9-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rhel.9-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rhel.9-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.rhel.9-x64.mini) |
+| Rocky Linux 9 | x64 | `JYPPX.OpenCV.runtime.rocky.9-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.rocky.9-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rocky.9-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rocky.9-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.rocky.9-x64) | `JYPPX.OpenCV.runtime.rocky.9-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.rocky.9-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rocky.9-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.rocky.9-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.rocky.9-x64.mini) |
+| Alpine 3.20 | x64 / musl | `JYPPX.OpenCV.runtime.alpine.3.20-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.alpine.3.20-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.alpine.3.20-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.alpine.3.20-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.alpine.3.20-x64) | `JYPPX.OpenCV.runtime.alpine.3.20-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.alpine.3.20-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.alpine.3.20-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.alpine.3.20-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.alpine.3.20-x64.mini) |
 
 Linux packages use a distro-specific Linux RID rather than a generic `linux-x64` identity. If the .NET SDK does not recognize a project-defined RID, set `RuntimeIdentifierGraphPath` to [`packaging/runtime/runtime-distro-rid-graph.json`](packaging/runtime/runtime-distro-rid-graph.json) or copy that graph into the consuming project before restore.
 
-`win-x86/full` remains `hosted-evidence-pending`. `win-x86/mini` and Android profiles are excluded from the first preview because they do not have complete real producer and consumer evidence. macOS is outside the declared runtime package matrix. Package-matrix presence is not a production-support claim.
+`win-x86/full` remains `hosted-evidence-pending`; `win-x86/mini` is excluded. All Android profiles are `android-evidence-pending` and do not enter the current first-preview candidate until their real producer and consumer evidence passes. Android package IDs, NDK build planning, unversioned `.so` staging, and .NET for Android `AndroidNativeLibrary`/ABI integration are implemented; real NDK builds for all four ABIs plus emulator/device loading evidence remain release blockers before those packages can be added to this published table. macOS is outside the declared runtime package matrix. Package-matrix presence is not a production-support claim.
 
 If there is no matching runtime package, build a local native runtime with `scripts/Build-OpenCV.ps1`, stage it with `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>`, and point local samples or tests at it with `OpenCvNativeRuntimeDir`. The corresponding package fallback is `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`. See the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) for the supported local native runtime workflow.
 
@@ -131,21 +146,22 @@ If there is no matching runtime package, build a local native runtime with `scri
 | ML, Tracking, selected contrib modules | Runtime-dependent | No |
 | Stable response for an unavailable module | `NOT_LINKED` | `NOT_LINKED` |
 
-## Examples And Visual Results
+## Tutorial Series And Visual Results
 
-The [`samples/ConsoleSamples`](samples/ConsoleSamples) project includes broad smoke coverage and an image-processing showcase:
+The [`samples/ConsoleSamples`](samples/ConsoleSamples) project includes broad smoke coverage and a six-part, headless tutorial series. Set a CJK font path to run the complete series, including OpenCV `putText` with Chinese:
 
 ```powershell
+$env:OPENCV_CSHARP_CJK_FONT = "C:\path\to\a-cjk-font.ttf"
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
   -p:OpenCvNativeRuntimeDir=E:\path\to\full-runtime `
-  -- showcase all .\artifacts\showcase
+  -- tutorial all .\artifacts\tutorials
 ```
 
-The command writes image processing, ORB feature, template matching, and KNN classification results:
+The command writes image processing, native OpenCV Chinese text, contour, ORB feature, template matching, and KNN classification results:
 
 ![OpenCV CSharp API visual showcase](docs/images/showcase/showcase-overview.png)
 
-See the [Visual Showcase](docs/articles/visual-showcase.md) and [Scenario Recipes](docs/articles/scenario-recipes.md) for more executable workflows.
+Start with the [Tutorial Series](docs/articles/tutorial-series.md). Each output has a matching technical article, runnable command, focused code, runtime profile, and links into the deeper module guides. The earlier `showcase` command remains a compatibility alias.
 
 ## Documentation
 
@@ -153,7 +169,9 @@ See the [Visual Showcase](docs/articles/visual-showcase.md) and [Scenario Recipe
 | --- | --- |
 | [Documentation site](https://guojin-yan.github.io/OpenCV-CSharp-API/) | API reference and articles |
 | [Quick Start](docs/articles/quick-start.md) | Install and write the first program |
-| [Visual Showcase](docs/articles/visual-showcase.md) | Executable image, feature, template, and ML examples |
+| [Tutorial Series](docs/articles/tutorial-series.md) | Six executable tutorials with synchronized technical articles |
+| [OpenCV PutText With Chinese](docs/articles/tutorial-02-chinese-puttext.md) | Render UTF-8 Chinese directly into `Mat` through OpenCV 5 `putText` |
+| [Visual Showcase](docs/articles/visual-showcase.md) | Output gallery and compatibility commands |
 | [Scenario Recipes](docs/articles/scenario-recipes.md) | Task-oriented workflows |
 | [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) | Build and stage a factual native runtime |
 | [Linked Runtime Smoke Guide](docs/articles/linked-runtime-smoke-guide.md) | Validate native loading and package execution |

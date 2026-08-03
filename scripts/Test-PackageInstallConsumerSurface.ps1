@@ -135,28 +135,26 @@ $featureTemplateText = Read-RequiredText -RelativePath $featureTemplatePath
 $sampleProjectText = Read-RequiredText -RelativePath $sampleProjectPath
 $testProjectText = Read-RequiredText -RelativePath $testProjectPath
 
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --version $examplePackageVersion" -Issue "Quick Start must install the neutral managed preview package"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $exampleRuntimePackageId --version $examplePackageVersion" -Issue "Quick Start must install the matching neutral runtime preview package"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same normalized NuGet package version" -Issue "Quick Start must explain managed/runtime package version alignment"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --prerelease" -Issue "Quick Start must install the neutral managed preview package without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $exampleRuntimePackageId --prerelease" -Issue "Quick Start must install the matching neutral runtime preview package without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same resolved NuGet version" -Issue "Quick Start must explain managed/runtime package version alignment"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "package IDs and public namespace stay version-neutral" -Issue "Quick Start must state package IDs and namespace stay version-neutral"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
-    "dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--version\s+(?<Version>\d+\.\d+\.\d+(?:\.\d+)?(?:-[0-9a-z-]+(?:\.[0-9a-z-]+)*)?)",
-    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    "^\s*dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--prerelease(?:\s+#.*)?\s*$",
+    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Multiline)
 $installMatches = @($installRegex.Matches($quickStartText))
 if ($installMatches.Count -ne 2) {
-    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start must contain exactly two dotnet add package commands: managed and runtime"
+    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start must contain exactly two version-free prerelease install commands: managed and runtime"
 }
 else {
     $packageIds = @($installMatches | ForEach-Object { $_.Groups["PackageId"].Value })
-    $versions = @($installMatches | ForEach-Object { $_.Groups["Version"].Value })
     if ($packageIds -notcontains $managedPackageId -or $packageIds -notcontains $exampleRuntimePackageId) {
         Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start install commands must use neutral managed/runtime package IDs"
     }
-
-    if (@($versions | Sort-Object -Unique).Count -ne 1) {
-        Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start managed/runtime install commands must use the same package version metadata"
-    }
+}
+if ($quickStartText -match "(?im)^\s*dotnet\s+add\s+package\s+\S+.*\s--version(?:\s|=)") {
+    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start install commands must not hardcode package versions"
 }
 
 foreach ($doc in @(

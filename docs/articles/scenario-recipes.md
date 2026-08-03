@@ -16,9 +16,9 @@ Use this route for upload processing, thumbnails, OCR preprocessing, document cl
 4. [ImgProc Filter Transform Guide](imgproc-filter-transform-guide.md) and [ImgProc Segmentation Contours Features Guide](imgproc-segmentation-contours-features-guide.md).
 5. [Photo Guide](photo-guide.md) for denoising, inpainting, HDR, and color operations.
 
-The executable starting point is `showcase image` in the [Visual Showcase](visual-showcase.md).
+The executable starting point is `tutorial image` in the [Tutorial Series](tutorial-series.md).
 
-可执行起点是 [Visual Showcase](visual-showcase.md) 中的 `showcase image`。
+可执行起点是[系列教程](tutorial-series.md)中的 `tutorial image`。
 
 ## Visual Search And Registration / 视觉搜索与配准
 
@@ -32,9 +32,9 @@ Use ORB, SIFT, BRISK, KAZE, or AKAZE for keypoints and descriptors, then choose 
 - [Geometry Homogeneous And Epipolar Utilities Guide](geometry-homogeneous-epipolar-utilities-guide.md)
 - [Calib3D Geometry Guide](calib3d-geometry-guide.md)
 
-Run `showcase features` for a model-free visual proof and `showcase template` for the simpler response-map alternative.
+Run `tutorial features` for a model-free visual proof and `tutorial template` for the simpler response-map alternative.
 
-运行 `showcase features` 可得到不依赖模型的视觉证明；更简单的 response-map 路线可运行 `showcase template`。
+运行 `tutorial features` 可得到不依赖模型的视觉证明；更简单的 response-map 路线可运行 `tutorial template`。
 
 ## Camera And Video Analytics / 相机与视频分析
 
@@ -62,9 +62,9 @@ Use [DNN Net Guide](dnn-net-guide.md) for model loading, input blobs, forward ou
 
 ## Classical Machine Learning / 传统机器学习
 
-[ML Guide](ml-guide.md) covers `TrainData`, KNN, SVM, Bayes, trees, boosting, EM, logistic regression, and neural-network models. `showcase ml` demonstrates batch prediction and visualization with KNN. Keep feature scaling, label type, train/test separation, and model persistence under application control.
+[ML Guide](ml-guide.md) covers `TrainData`, KNN, SVM, Bayes, trees, boosting, EM, logistic regression, and neural-network models. `tutorial ml` demonstrates batch prediction and visualization with KNN. Keep feature scaling, label type, train/test separation, and model persistence under application control.
 
-[ML Guide](ml-guide.md) 覆盖 `TrainData`、KNN、SVM、Bayes、trees、boosting、EM、logistic regression 和神经网络模型；`showcase ml` 演示 KNN 批量预测与可视化。feature scaling、label type、train/test 划分和模型持久化应由应用控制。
+[ML Guide](ml-guide.md) 覆盖 `TrainData`、KNN、SVM、Bayes、trees、boosting、EM、logistic regression 和神经网络模型；`tutorial ml` 演示 KNN 批量预测与可视化。feature scaling、label type、train/test 划分和模型持久化应由应用控制。
 
 ## Detection, Tracking, And Faces / 检测、跟踪与人脸
 

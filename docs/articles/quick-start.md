@@ -21,13 +21,13 @@ For deeper runtime setup, fallback, smoke, and license details, see the [Linked 
 更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
 
 ```powershell
-dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
-dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1 # current example package; replace win-x64 with your target RID package
+dotnet add package JYPPX.OpenCV.CSharp.API --prerelease
+dotnet add package JYPPX.OpenCV.runtime.win-x64 --prerelease # current example package; replace win-x64 with your target RID package
 ```
 
-Keep the managed and runtime packages on the same normalized NuGet package version. The first preview uses the strict pack input `5.0.0.0-preview.1`, which NuGet exposes to consumers as `5.0.0-preview.1`; the package IDs and public namespace stay version-neutral.
+Use `--prerelease` while following the preview channel. Both commands resolve the current package version from NuGet, so the example does not require a version edit for every release. Keep the managed and runtime packages on the same resolved NuGet version; the package IDs and public namespace stay version-neutral.
 
-managed 主包和 runtime 包应使用相同的 NuGet 规范版本。首个预览版使用严格打包输入 `5.0.0.0-preview.1`，NuGet 向消费者公开为 `5.0.0-preview.1`；包 ID 和公开命名空间保持版本中立。
+使用 preview 通道时保留 `--prerelease`。两个命令都会从 NuGet 解析当前版本，因此示例不需要随每次发布修改版本号。managed 主包和 runtime 包应解析到相同的 NuGet 版本；包 ID 和公开命名空间保持版本中立。
 
 Core array operations cover arithmetic, statistics, normalization, and channel layout work:
 

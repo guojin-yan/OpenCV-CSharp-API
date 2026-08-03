@@ -179,8 +179,10 @@ namespace OpenCvSharp.Tests.ImgProc
 
                 Point next = ImgProcCv2.PutText(canvas, "OpenCV", new Point(2, 24), new Scalar(255, 255, 255), font, 16);
                 Rect bounds = ImgProcCv2.GetTextSize(new Size(120, 40), "OpenCV", new Point(2, 24), font, 16);
+                Point unicodeNext = ImgProcCv2.PutText(canvas, "中文", new Point(2, 38), new Scalar(255, 255, 255), font, 12);
 
                 Assert.True(next.X > 2);
+                Assert.True(unicodeNext.X > 2);
                 Assert.True(bounds.Width > 0);
                 Assert.True(bounds.Height > 0);
                 Assert.False(font.IsDisposed);

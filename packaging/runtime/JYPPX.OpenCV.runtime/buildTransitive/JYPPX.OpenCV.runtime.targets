@@ -1,0 +1,24 @@
+<Project>
+  <!--
+    Android does not use the desktop RuntimeIdentifier native asset probing
+    rules. .NET for Android consumes AndroidNativeLibrary items instead, and
+    the Abi metadata is the authoritative ABI-to-folder mapping. Each runtime
+    package contains one RID directory, so the Exists conditions make this
+    shared target safe for all four Android package variants and inert for
+    desktop consumers.
+  -->
+  <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'android' Or '$(TargetFrameworkIdentifier)' == 'MonoAndroid'">
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\runtimes\android-arm64\native\*.so" Condition="Exists('$(MSBuildThisFileDirectory)..\runtimes\android-arm64\native')">
+      <Abi>arm64-v8a</Abi>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\runtimes\android-arm\native\*.so" Condition="Exists('$(MSBuildThisFileDirectory)..\runtimes\android-arm\native')">
+      <Abi>armeabi-v7a</Abi>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\runtimes\android-x64\native\*.so" Condition="Exists('$(MSBuildThisFileDirectory)..\runtimes\android-x64\native')">
+      <Abi>x86_64</Abi>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\runtimes\android-x86\native\*.so" Condition="Exists('$(MSBuildThisFileDirectory)..\runtimes\android-x86\native')">
+      <Abi>x86</Abi>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+</Project>

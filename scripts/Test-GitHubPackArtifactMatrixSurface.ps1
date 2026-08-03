@@ -337,6 +337,7 @@ foreach ($ridSpec in @($matrix.rids)) {
         $profileSuffix = if ($profile -eq "mini") { ".mini" } else { "" }
         $expectedId = "$runtimePackagePrefix.$rid$profileSuffix"
         $expectedFileName = "$expectedId.$normalizedPackageVersion.nupkg"
+        $androidBuildTargetEntry = "buildTransitive/$expectedId.targets"
         $nativePrefix = "runtimes/$rid/native/"
         $nativeEntries = @($info.Entries | Where-Object {
                 $_.StartsWith($nativePrefix, [System.StringComparison]::OrdinalIgnoreCase) -and -not $_.EndsWith("/")
@@ -380,6 +381,11 @@ foreach ($ridSpec in @($matrix.rids)) {
                     $expectedNativeFileNames += "opencv_$module$openCvBinarySuffix.dll"
                 }
             }
+            elseif ($ridSpec.platformFamily -eq "android") {
+                foreach ($module in $expectedStagedModules) {
+                    $expectedNativeFileNames += "libopencv_$module.so"
+                }
+            }
             else {
                 foreach ($module in $expectedStagedModules) {
                     $expectedNativeFileNames += "libopencv_$module.so.$expectedOpenCvVersion"
@@ -399,6 +405,15 @@ foreach ($ridSpec in @($matrix.rids)) {
 
         if ($info.Version -ne $normalizedPackageVersion) {
             Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package version mismatch" -Text $info.Version
+        }
+
+        if ($ridSpec.platformFamily -eq "android") {
+            if ($info.Entries -notcontains $androidBuildTargetEntry) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Android runtime package must include the auto-imported buildTransitive target" -Text $androidBuildTargetEntry
+            }
+        }
+        elseif ($info.Entries -contains $androidBuildTargetEntry) {
+            Add-Violation -Violations $violations -Path $info.FileName -Issue "Desktop runtime package must not include Android buildTransitive integration" -Text $androidBuildTargetEntry
         }
 
         if ($nativeEntries.Count -eq 0) {

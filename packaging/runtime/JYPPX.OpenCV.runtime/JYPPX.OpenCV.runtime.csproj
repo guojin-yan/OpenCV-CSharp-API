@@ -23,6 +23,10 @@
     <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="../runtime-distro-rid-graph.json" Pack="true" PackagePath="build" />
     <None Include="build/JYPPX.OpenCV.runtime.provenance.json" Condition="Exists('build/JYPPX.OpenCV.runtime.provenance.json')" Pack="true" PackagePath="build" />
+    <None Include="buildTransitive/JYPPX.OpenCV.runtime.targets"
+          Condition="'$(RuntimePackageRid)' == 'android-arm64' Or '$(RuntimePackageRid)' == 'android-arm' Or '$(RuntimePackageRid)' == 'android-x64' Or '$(RuntimePackageRid)' == 'android-x86'"
+          Pack="true"
+          PackagePath="buildTransitive/$(PackageId).targets" />
     <None Include="runtimes/$(RuntimePackageRid)/native/**/*" Pack="true" PackagePath="runtimes/$(RuntimePackageRid)/native" />
     <None Include="licenses/**/*" Pack="true" PackagePath="licenses" />
   </ItemGroup>

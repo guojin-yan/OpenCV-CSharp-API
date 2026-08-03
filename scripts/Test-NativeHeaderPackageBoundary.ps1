@@ -85,6 +85,7 @@ foreach ($allowed in @(
         "README.md",
         "../runtime-distro-rid-graph.json",
         "build/JYPPX.OpenCV.runtime.provenance.json",
+        "buildTransitive/JYPPX.OpenCV.runtime.targets",
         "runtimes/`$(RuntimePackageRid)/native/**/*",
         "licenses/**/*")) {
     [void]$allowedPackedIncludes.Add($allowed)
@@ -107,7 +108,7 @@ foreach ($item in $packedItems) {
         Add-Violation `
             -Violations $violations `
             -Path $runtimeProjectPath `
-            -Issue "Runtime package project must not add unreviewed packed payloads outside runtime binaries, licenses, provenance, and README" `
+            -Issue "Runtime package project must not add unreviewed packed payloads outside runtime binaries, licenses, provenance, README, and the audited Android buildTransitive target" `
             -Text $include
     }
 
@@ -122,6 +123,26 @@ foreach ($item in $packedItems) {
             -Path $runtimeProjectPath `
             -Issue "Runtime package project must not package native C headers or include trees" `
             -Text "Include=$include PackagePath=$packagePath"
+    }
+}
+
+$androidBuildTargetItems = @(
+    $packedItems |
+        Where-Object { $_.Attributes["Include"].Value -eq "buildTransitive/JYPPX.OpenCV.runtime.targets" })
+if ($androidBuildTargetItems.Count -ne 1) {
+    Add-Violation -Violations $violations -Path $runtimeProjectPath -Issue "Runtime package project must declare exactly one audited Android buildTransitive target"
+}
+else {
+    $androidItem = $androidBuildTargetItems[0]
+    $condition = $androidItem.Attributes["Condition"].Value
+    $packagePath = $androidItem.Attributes["PackagePath"].Value
+    foreach ($androidRid in @("android-arm64", "android-arm", "android-x64", "android-x86")) {
+        if ($condition.IndexOf("'`$(RuntimePackageRid)' == '$androidRid'", [System.StringComparison]::Ordinal) -lt 0) {
+            Add-Violation -Violations $violations -Path $runtimeProjectPath -Issue "Android buildTransitive target condition must be restricted to every declared Android RID" -Text $androidRid
+        }
+    }
+    if ($packagePath -ne "buildTransitive/`$(PackageId).targets") {
+        Add-Violation -Violations $violations -Path $runtimeProjectPath -Issue "Android buildTransitive target must use NuGet's exact package-ID import name" -Text $packagePath
     }
 }
 

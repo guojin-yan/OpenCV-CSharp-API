@@ -126,7 +126,11 @@ try {
             'AuthorizationToken = "publish-nuget:sha256:$candidateHash"',
             'PublicationManifestPath',
             'PackRunId = $_.RunId',
-            'PrivateKeyRequired = $false')) {
+            'PrivateKeyRequired = $false',
+            'PublicationTargets = @(',
+            "Channel = 'github-packages'",
+            'https://nuget.pkg.github.com/guojin-yan/index.json',
+            "RequiredVisibility = 'public'")) {
         Assert-True -Condition ($publicationBundleText.Contains($token, [StringComparison]::Ordinal)) -Path $publicationBundle -Issue "NuGet publication bundle lost a deterministic repository-signing contract" -Text $token
     }
     foreach ($token in @(
@@ -269,9 +273,16 @@ try {
                 "environment: nuget-production",
                 "secrets.NUGET_API_KEY",
                 "https://api.nuget.org/v3/index.json",
+                "https://nuget.pkg.github.com/guojin-yan/index.json",
                 "scripts/Test-NuGetRepositorySignedPackage.ps1",
                 "scripts/Test-NuGetPublicationManifest.ps1",
                 "publish_authorization",
+                "verify_publication",
+                "publish-github-packages:",
+                "verify-github-packages:",
+                "github-packages-publication-proof.json",
+                "visibility -ne 'public'",
+                "repository.full_name -cne 'guojin-yan/OpenCV-CSharp-API'",
                 "publication_manifest_json",
                 "gh run download",
                 "actions/download-artifact@")) {

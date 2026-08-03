@@ -170,6 +170,7 @@ function Remove-DirectoryIfSafe {
 
 $violations = [System.Collections.Generic.List[object]]::new()
 $validatedProjectFiles = [System.Collections.Generic.List[object]]::new()
+$validatedAndroidProjectCount = 0
 
 $projectFiles = @()
 foreach ($root in @("samples", "tests")) {
@@ -194,6 +195,33 @@ foreach ($projectFile in $projectFiles) {
     }
     catch {
         Add-Violation -Violations $violations -Path $relativePath -Issue "Project file must be valid XML" -Text $_.Exception.Message
+        continue
+    }
+
+    $targetFramework = Get-ProjectTargetFramework -ProjectXml $xml
+    if ($targetFramework.EndsWith("-android", [System.StringComparison]::OrdinalIgnoreCase)) {
+        $androidNativeLibraries = @($xml.SelectNodes("//AndroidNativeLibrary"))
+        $localRuntimeLibraries = @(
+            $androidNativeLibraries |
+                Where-Object {
+                    ($_ -is [System.Xml.XmlElement]) -and
+                    (Get-ProjectAttribute -Element $_ -Name "Include") -eq "`$($preferredRuntimeProperty)\*.so" -and
+                    (Get-ProjectAttribute -Element $_ -Name "Condition") -eq "'`$($preferredRuntimeProperty)' != ''"
+                })
+        if ($localRuntimeLibraries.Count -ne 1) {
+            Add-Violation -Violations $violations -Path $relativePath -Issue "Android sample must map local unversioned .so files through AndroidNativeLibrary and OpenCvNativeRuntimeDir"
+        }
+        else {
+            $abis = @($localRuntimeLibraries[0].SelectNodes("./Abi") | ForEach-Object { $_.InnerText.Trim() } | Sort-Object -Unique)
+            $expectedAbis = @("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+            if (($abis -join ",") -ne ($expectedAbis -join ",")) {
+                Add-Violation -Violations $violations -Path $relativePath -Issue "Android sample must map all four supported Android ABIs" -Text ($abis -join ",")
+            }
+        }
+        if (@($xml.SelectNodes("//Target[@Name='$copyTargetName']")).Count -ne 0) {
+            Add-Violation -Violations $violations -Path $relativePath -Issue "Android sample must use AndroidNativeLibrary packaging rather than the desktop CopyOpenCvNativeRuntime target"
+        }
+        $validatedAndroidProjectCount++
         continue
     }
 
@@ -417,5 +445,6 @@ if ($violations.Count -gt 0) {
 Write-Host "Runtime native copy property propagation guard passed."
 Write-Host "Sample/test project files checked: $($projectFiles.Count)."
 Write-Host "MSBuild copy dry-run project files checked: $($validatedProjectFiles.Count)."
+Write-Host "AndroidNativeLibrary project files checked: $validatedAndroidProjectCount."
 Write-Host "Preferred runtime copy property: $preferredRuntimeProperty."
 Write-Host "Compatibility runtime copy property: $compatibilityRuntimeProperty."

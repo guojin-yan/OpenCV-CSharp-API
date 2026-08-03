@@ -8,7 +8,8 @@ This document is the authoritative support classification for runtime packages. 
 | --- | ---: | --- |
 | `real-supported` | 24 | Non-synthetic native producer, package handoff, and package consumer evidence exists for the exact RID/profile. |
 | `hosted-evidence-pending` | 1 | `win-x86/full` is locally feasible, but hosted producer, same-run pack, independent artifact audit, and X86 consumer evidence are still missing. |
-| `excluded` | 9 | `win-x86/mini` and all Android full/mini profiles are not production support. |
+| `android-evidence-pending` | 8 | NDK production and Android package integration exist, but authoritative hosted runs and device/emulator evidence are still required. |
+| `excluded` | 1 | `win-x86/mini` is not production support. |
 | outside matrix | 1 | macOS is intentionally not declared. |
 
 The 24 real-supported entries are the twelve full and twelve mini desktop/server targets listed in the support contract. Fedora 40 and Alpine 3.20 are retained as explicit compatibility targets: their historical userspace, image identity, lifecycle state, and exact native/package evidence must remain recorded. An ended distro is never silently represented as a current-lifecycle promise.
@@ -24,13 +25,13 @@ A target can move into `real-supported` only when the exact target has all of th
 5. Profile-specific native smoke and negative `NOT_LINKED` behavior where applicable.
 6. Documentation and release records that name the exact target without broadening the support contract.
 
-Synthetic runtime inputs, cross-builds, emulation, relabeled binaries, PE/ELF headers alone, or package presence alone cannot promote a target.
+Synthetic runtime inputs, unaudited cross-builds, emulation alone, relabeled binaries, PE/ELF headers alone, or package presence alone cannot promote a target. Android NDK cross-production must be paired with ABI-specific ELF/package audits and a real Android package consumer.
 
 ## Pending And Excluded Targets
 
 `win-x86/full` requires one quota-authorized hosted chain in this order: hosted producer, neutral artifact handoff, same-run non-synthetic pack, independent artifact/PE audit, and an actual X86 consumer process. Until then it remains pending. `win-x86/mini` is excluded and must not be inferred from the full profile.
 
-Android requires a real native build, Android package consumer, and device or emulator loading evidence for each profile before any Android RID is promoted. macOS requires an explicit matrix decision followed by native build and package-consumer evidence; it is currently outside the matrix.
+All Android targets are `android-evidence-pending`. The repository now contains the pinned NDK producer, unversioned `.so` staging, dynamic `buildTransitive` package import, ABI-specific APK consumer, and emulator smoke route. Each target still requires a successful authoritative hosted run and device or emulator loading evidence before promotion. macOS requires an explicit matrix decision followed by native build and package-consumer evidence; it is currently outside the matrix.
 
 ## Retirement And Review
 

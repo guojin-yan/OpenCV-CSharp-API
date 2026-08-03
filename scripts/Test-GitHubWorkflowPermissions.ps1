@@ -83,8 +83,16 @@ $expectations = [ordered]@{
             "publish-nuget" = New-PermissionMap @{
                 contents = "read"
             }
+            "publish-github-packages" = New-PermissionMap @{
+                contents = "read"
+                packages = "write"
+            }
             "verify-nuget" = New-PermissionMap @{
                 contents = "read"
+            }
+            "verify-github-packages" = New-PermissionMap @{
+                contents = "read"
+                packages = "read"
             }
             "create-github-release" = New-PermissionMap @{
                 contents = "write"
@@ -101,8 +109,18 @@ $expectations = [ordered]@{
                 "dotnet nuget push",
                 "secrets.NUGET_API_KEY"
             )
+            "publish-github-packages" = @(
+                "environment: nuget-production",
+                "dotnet nuget push",
+                'GITHUB_PACKAGES_TOKEN: ${{ github.token }}'
+            )
             "verify-nuget" = @(
                 "Test-NuGetRepositorySignedPackage.ps1",
+                "actions/upload-artifact@"
+            )
+            "verify-github-packages" = @(
+                "RequiredVisibility = 'public'",
+                "github-packages-publication-proof.json",
                 "actions/upload-artifact@"
             )
             "create-github-release" = @(
@@ -471,4 +489,4 @@ if ($violations.Count -gt 0) {
 
 Write-Host "GitHub workflow permissions guard passed."
 Write-Host "Workflow files checked: $($workflowFiles.Count); jobs checked: $jobCount; job-level permission blocks: $jobPermissionBlockCount."
-Write-Host "Workflow-level permissions are read-only; write scopes are limited to deploy-pages, GitHub Packages pack jobs, and the Environment-gated GitHub Release job."
+Write-Host "Workflow-level permissions are read-only; write scopes are limited to deploy-pages, GitHub Packages publishing jobs, and the Environment-gated GitHub Release job."

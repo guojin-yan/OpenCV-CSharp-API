@@ -1,8 +1,8 @@
 # 5.0.0-preview.1 Release Notes / 5.0.0-preview.1 发布说明
 
-`5.0.0-preview.1` is the first planned public preview of OpenCV CSharp API. It binds OpenCV 5.0.0 through the version-neutral `OpenCvSharp.*` managed API, `JYPPX.OpenCV.CSharp.API` package, and stable `jyppx_ocv_*` native C ABI. Public availability must be confirmed on the NuGet feed; these notes do not treat a local candidate as published.
+`5.0.0-preview.1` is the first planned public preview of OpenCV CSharp API. It binds OpenCV 5.0.0 through the version-neutral `OpenCvSharp.*` managed API, `JYPPX.OpenCV.CSharp.API` package, and stable `jyppx_ocv_*` native C ABI. Public availability must be confirmed on NuGet.org, GitHub Packages, and the GitHub Release page; these notes do not treat a local candidate as published.
 
-`5.0.0-preview.1` 是 OpenCV CSharp API 计划发布的首个公开预览版。它通过版本中立的 `OpenCvSharp.*` managed API、`JYPPX.OpenCV.CSharp.API` 包和稳定的 `jyppx_ocv_*` native C ABI 绑定 OpenCV 5.0.0。是否已经公开可用必须以 NuGet feed 为准；本文不会把本地候选误称为已发布版本。
+`5.0.0-preview.1` 是 OpenCV CSharp API 计划发布的首个公开预览版。它通过版本中立的 `OpenCvSharp.*` managed API、`JYPPX.OpenCV.CSharp.API` 包和稳定的 `jyppx_ocv_*` native C ABI 绑定 OpenCV 5.0.0。是否已经公开可用必须以 NuGet.org、GitHub Packages 和 GitHub Release 页面为准；本文不会把本地候选误称为已发布版本。
 
 ## Highlights / 主要内容
 
@@ -10,13 +10,15 @@
 - 2,656 full-profile and 526 mini-profile native ABI functions, with complete native-to-managed binding coverage for the declared ABI.
 - Image decode/encode, processing, geometry, calibration, video, DNN, object detection, Photo, machine learning, Tracking, Stitching, and selected contrib workflows.
 - Deterministic normalized NuGet packages, package-owned full/mini native smoke, package provenance, SPDX-2.3 SBOM generation, and fail-closed release review.
-- A six-image [Visual Showcase](visual-showcase.md), executable `showcase` commands, and task-oriented [Scenario Recipes](scenario-recipes.md).
+- The exact 25-package candidate is published to NuGet.org and GitHub Packages, then attached to a verified GitHub prerelease with both registry proofs.
+- A six-part [Tutorial Series](tutorial-series.md), eight generated images, direct Chinese rendering through OpenCV 5 `putText`, compatibility `showcase` commands, and task-oriented [Scenario Recipes](scenario-recipes.md).
 
 - 612 个 public managed type、6,314 个 public/protected member 和 41 个 namespace，全部受兼容性基线约束。
 - full profile 2,656 个、mini profile 526 个 native ABI function，并对声明 ABI 保持完整 native-to-managed binding coverage。
 - 覆盖图像编解码、处理、几何、标定、视频、DNN、目标检测、Photo、机器学习、Tracking、Stitching 和部分 contrib 工作流。
 - 提供确定性规范化 NuGet 包、包内 full/mini native smoke、package provenance、SPDX-2.3 SBOM 和 fail-closed 发布审核。
-- 提供生成 6 张图片的 [Visual Showcase](visual-showcase.md)、可执行 `showcase` 命令和面向任务的 [Scenario Recipes](scenario-recipes.md)。
+- 同一份精确的 25 包 candidate 发布到 NuGet.org 和 GitHub Packages，并在两个 registry 验证通过后附加到 GitHub prerelease。
+- 提供 6 个案例的[系列教程](tutorial-series.md)、8 张生成图片、通过 OpenCV 5 `putText` 直接绘制中文、兼容 `showcase` 命令和面向任务的 [Scenario Recipes](scenario-recipes.md)。
 
 ## Package Selection / 包选择
 
@@ -90,13 +92,14 @@ dotnet restore
 
 - The release is a preview. Compatibility baselines prevent accidental drift, but additional APIs and runtime packages will continue to be added.
 - Measured module partitions have explicit zero-gap evidence, but this is not repository-wide or all-OpenCV parity.
-- The first candidate contains 25 packages: one managed package plus 24 real-supported runtime packages across Windows x64/ARM64 and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. `win-x86/full` remains hosted-evidence-pending; `win-x86/mini` and Android profiles are excluded; macOS is outside the declared matrix.
+- The currently publishable candidate contains 25 packages: one managed package plus 24 real-supported runtime packages across Windows x64/ARM64 and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. `win-x86/full` remains hosted-evidence-pending, all eight Android Full/Mini targets are `android-evidence-pending`, `win-x86/mini` is excluded, and macOS is outside the declared matrix. Android packages join the publication set only after their authoritative NDK, package-consumer, ELF, and emulator evidence passes.
 - Mini excludes DNN, calibration, features, Photo, HighGui, ML, Tracking, Stitching, and other full-only modules.
 - Some algorithms require user-supplied models, training data, codecs, GUI backends, or optional OpenCV build features. The library does not silently download them.
 - HighGui requires a compatible desktop UI backend and event-thread model. Server, container, and unattended workflows should prefer file or memory encoding.
 - Fedora 40 and Alpine 3.20 are exact compatibility targets with ended standard lifecycle; they are not current-lifecycle distribution promises.
 - The normalized candidate is intentionally unsigned before upload. NuGet.org must add a `Repository` primary signature owned by `GuojinYan`; the downloaded public package must pass `dotnet nuget verify --all` and exact payload comparison before the release is accepted.
-- Independent approval, public package availability, repository-signature evidence, and support status must be verified from the exact published artifacts and official feed, not inferred from local candidates or mirror CI.
+- GitHub Packages initially creates the 25 user-scoped packages as private. Each must be made Public, linked to `guojin-yan/OpenCV-CSharp-API`, and verified byte-for-byte against the reviewed candidate before the Release is created.
+- Independent approval, both public package registries, repository-signature evidence, exact GitHub package hashes, and support status must be verified from the published artifacts, not inferred from local candidates or mirror CI.
 
 - 本版本为 preview。兼容性基线会阻止意外漂移，但后续仍会继续增加 API 与 runtime 包。
 - 已测量模块分区具有明确的 zero-gap 证据，但不代表整个仓库或全部 OpenCV 已达到 parity。
@@ -106,7 +109,8 @@ dotnet restore
 - HighGui 需要兼容的桌面 UI backend 和事件线程模型。服务器、容器和无人值守流程应优先使用文件或内存编码。
 - Fedora 40 与 Alpine 3.20 是标准生命周期已结束的精确兼容目标，不代表当前生命周期发行版承诺。
 - 规范化候选在上传前有意保持未签名；NuGet.org 必须为公开下载包添加 owner 为 `GuojinYan` 的 `Repository` primary signature，并通过 `dotnet nuget verify --all` 与精确 payload 对比。
-- 独立审批、公共包可用性、repository-signature 证据和支持状态必须以精确发布产物及官方 feed 为准，不能从本地候选或 mirror CI 推断。
+- GitHub Packages 初次创建 25 个 user-scoped 包时默认为 private；每个包都必须设为 Public、关联 `guojin-yan/OpenCV-CSharp-API`，并与审核 candidate 逐字节验证后才能创建 Release。
+- 独立审批、两个公开 package registry、repository-signature 证据、GitHub package 精确 hash 和支持状态必须以发布产物为准，不能从本地候选或 mirror CI 推断。
 
 ## Verification / 验证
 

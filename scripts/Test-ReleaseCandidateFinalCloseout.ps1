@@ -168,11 +168,31 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/release-candidate-closeout.md",
         "docs/articles/stitching-structured-parity-guide.md",
         "docs/articles/support-lifecycle-policy.md",
+        "docs/articles/tutorial-series.md",
+        "docs/articles/tutorial-01-image-pipeline.md",
+        "docs/articles/tutorial-02-chinese-puttext.md",
+        "docs/articles/tutorial-03-contours.md",
+        "docs/articles/tutorial-04-orb-features.md",
+        "docs/articles/tutorial-05-template-matching.md",
+        "docs/articles/tutorial-06-knn-classification.md",
+        "docs/images/showcase/chinese-text.png",
+        "docs/images/showcase/contours.png",
+        "docs/images/showcase/image-pipeline.png",
+        "docs/images/showcase/knn-classification.png",
+        "docs/images/showcase/orb-features.png",
+        "docs/images/showcase/showcase-overview.png",
+        "docs/images/showcase/source.png",
+        "docs/images/showcase/template-match.png",
+        "docs/index.md",
+        "docs/toc.yml",
         "docs/articles/tracking-guide.md",
         "docs/articles/video-upstream-parity-guide.md",
         "docs/articles/videoio-upstream-parity-guide.md",
         "packaging/runtime/runtime-support-contract.json",
+        "samples/AndroidSmoke/AndroidSmoke.csproj",
+        "samples/AndroidSmoke/MainActivity.cs",
         "samples/ConsoleSamples/Program.cs",
+        "samples/ConsoleSamples/ShowcaseRunner.cs",
         "scripts/Generate-Calib3DUpstreamMap.ps1",
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
@@ -189,6 +209,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Generate-StitchingUpstreamMap.ps1",
         "scripts/Generate-TrackingUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
+        "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
+        "scripts/Build-AndroidRuntimeInput.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
         "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/Test-NuGetPublicationManifest.ps1",
@@ -228,7 +250,10 @@ function Get-ExpectedEvidencePaths {
         "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
         "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
         "src/OpenCvSharp.Native/src/stitching/stitching_handles.h",
+        "src/OpenCvSharp.Native/src/imgproc.cpp",
         "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+        "src/OpenCvSharp/ImgProc/Cv2.RemainingParity.cs",
+        "src/OpenCvSharp/ImgProc/FontFace.cs",
         "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeEstimatorHandle.cs",
         "src/OpenCvSharp/Internal/Interop/NativeFeaturesMatcherHandle.cs",
@@ -260,6 +285,7 @@ function Get-ExpectedEvidencePaths {
         "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
         "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
         "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
+        "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
@@ -328,7 +354,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.SourceSet.Sha256 -eq $ExpectedSourceHash) -Issue "Final closeout source-set digest drifted" -Text "expected=$ExpectedSourceHash actual=$($Record.SourceSet.Sha256)"
 
     Assert-True -List $List -Condition ([int]$Record.PackageMatrix.RidCount -gt 0 -and [int]$Record.PackageMatrix.ProfileCount -eq 2 -and [int]$Record.PackageMatrix.EntryCount -eq 34 -and $Record.PackageMatrix.Sha256 -match "^[0-9a-f]{64}$") -Issue "Final closeout package matrix evidence drifted"
-    Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 24 -and $Record.SupportContract.PendingSupportCount -eq 1 -and $Record.SupportContract.ExcludedSupportCount -eq 9 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "hosted-evidence-pending" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
+    Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 24 -and $Record.SupportContract.PendingSupportCount -eq 9 -and $Record.SupportContract.ExcludedSupportCount -eq 1 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "hosted-evidence-pending" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
 
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "fbd740ab965bc2baebc21855bd0983bb9208ca54c1942484b9d56af71f7fed22" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 612 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 6314 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeFull.Sha256 -eq "e4878cfab788c0654f21be6b3235eb7ada0333b7152f7b7078ba64a0f1156860" -and $Record.ApiAbiBaseline.NativeFull.FunctionCount -eq 2656 -and $Record.ApiAbiBaseline.NativeMini.Sha256 -eq "6101a6d4d71c3fce8baff6f5f2184962da95f44d8166b94bbbca47e4aa626395" -and $Record.ApiAbiBaseline.NativeMini.FunctionCount -eq 526) -Issue "Final closeout native ABI baseline evidence drifted"
@@ -418,7 +444,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"
 
     $expectedMethods = @("GET", "HEAD")
-    Assert-True -List $List -Condition ($Record.PublicFeed.Mode -eq "read-only" -and $Record.PublicFeed.ServiceIndex -eq "https://api.nuget.org/v3/index.json") -Issue "Final closeout public-feed mode or service index drifted"
+    Assert-True -List $List -Condition ($Record.PublicFeed.Mode -eq "read-only" -and $Record.PublicFeed.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.PublicFeed.GitHubPackagesServiceIndex -eq "https://nuget.pkg.github.com/guojin-yan/index.json" -and $Record.PublicFeed.GitHubPackagesRepository -eq "guojin-yan/OpenCV-CSharp-API" -and $Record.PublicFeed.RequiredPublicVisibility -eq "public" -and [int]$Record.PublicFeed.RequiredFeedCount -eq 2) -Issue "Final closeout dual public-feed boundary drifted"
     Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
     Assert-True -List $List -Condition ((@($Record.PublicFeed.Methods) -join ",") -eq ($expectedMethods -join ",")) -Issue "Final closeout public-feed method list drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PublicFeed.Mutable -and $Record.PublicFeed.CandidateStatus -eq "not-published" -and -not [bool]$Record.PublicFeed.UploadAttempted) -Issue "Final closeout public-feed state is not immutable and not-published"
@@ -431,6 +457,8 @@ function Test-Record {
     foreach ($blocker in $Record.ExternalBlockers) {
         Assert-True -List $List -Condition (-not [string]::IsNullOrWhiteSpace([string]$blocker.Status) -and -not [string]::IsNullOrWhiteSpace([string]$blocker.Evidence)) -Issue "Final closeout blocker lacks status/evidence" -Text $blocker.Id
     }
+    $androidBlocker = @($Record.ExternalBlockers | Where-Object { $_.Id -eq "android-real-support" })
+    Assert-True -List $List -Condition ($androidBlocker.Count -eq 1 -and $androidBlocker[0].Status -eq "android-evidence-pending" -and $androidBlocker[0].Evidence -match "four-ABI NDK producer" -and $androidBlocker[0].Evidence -match "authoritative hosted Full/Mini evidence") -Issue "Final closeout Android blocker must distinguish implemented support machinery from pending hosted evidence"
 }
 
 function Assert-FixtureRejected {

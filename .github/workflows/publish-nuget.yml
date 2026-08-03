@@ -21,12 +21,12 @@ on:
         required: true
         type: string
       designated_publisher:
-        description: Named publisher; required and distinct from approver when publish is true
+        description: Named publisher; required and distinct from approver for every protected publication phase
         required: true
         default: unassigned
         type: string
       independent_approver:
-        description: Named independent approver; required and distinct from publisher when publish is true
+        description: Named independent approver; required and distinct from publisher for every protected publication phase
         required: true
         default: unassigned
         type: string
@@ -36,12 +36,17 @@ on:
         default: ""
         type: string
       publish:
-        description: Upload the exact reviewed packages to NuGet.org after Environment approval
+        description: Upload the exact reviewed packages to NuGet.org and GitHub Packages after Environment approval
+        required: true
+        default: false
+        type: boolean
+      verify_publication:
+        description: Verify both public feeds after all GitHub Packages have been made public
         required: true
         default: false
         type: boolean
       create_github_release:
-        description: After repository-signature verification, create the formal GitHub prerelease
+        description: After both-feed verification, create the formal GitHub prerelease
         required: true
         default: false
         type: boolean
@@ -160,6 +165,8 @@ jobs:
           INDEPENDENT_APPROVER: ${{ inputs.independent_approver }}
           PUBLISH_AUTHORIZATION: ${{ inputs.publish_authorization }}
           PUBLISH_REQUESTED: ${{ inputs.publish }}
+          VERIFICATION_REQUESTED: ${{ inputs.verify_publication }}
+          RELEASE_REQUESTED: ${{ inputs.create_github_release }}
         run: |
           $root = Join-Path $PWD 'artifacts/nuget-publication'
           $packageRoot = Join-Path $root 'packages'
@@ -177,22 +184,31 @@ jobs:
             -Created $env:CANDIDATE_CREATED -PublicationManifestPath $manifestPath `
             -OutputPath $publicationRecord
           $record = Get-Content -LiteralPath $publicationRecord -Raw | ConvertFrom-Json
-          if ($env:PUBLISH_REQUESTED -eq 'true') {
+          $protectedPhaseRequested = $env:PUBLISH_REQUESTED -eq 'true' -or $env:VERIFICATION_REQUESTED -eq 'true' -or $env:RELEASE_REQUESTED -eq 'true'
+          if ($env:PUBLISH_REQUESTED -eq 'true' -and $env:VERIFICATION_REQUESTED -eq 'true') {
+            throw 'Upload and public-feed verification are separate phases because GitHub package visibility must be changed after first upload.'
+          }
+          if ($env:RELEASE_REQUESTED -eq 'true' -and $env:VERIFICATION_REQUESTED -ne 'true') {
+            throw 'GitHub Release creation requires verify_publication=true.'
+          }
+          if ($protectedPhaseRequested) {
             if ($env:PUBLISH_AUTHORIZATION -cne $record.AuthorizationToken) { throw 'publish_authorization does not match the exact dry-run candidate token.' }
-            if ($env:DESIGNATED_PUBLISHER -in @('', 'unassigned') -or $env:INDEPENDENT_APPROVER -in @('', 'unassigned')) { throw 'Publishing requires named publisher and independent approver.' }
+            if ($env:DESIGNATED_PUBLISHER -in @('', 'unassigned') -or $env:INDEPENDENT_APPROVER -in @('', 'unassigned')) { throw 'Protected publication phases require named publisher and independent approver.' }
             if ($env:DESIGNATED_PUBLISHER -eq $env:INDEPENDENT_APPROVER) { throw 'Publisher and independent approver must be different identities.' }
           }
           elseif (-not [string]::IsNullOrWhiteSpace($env:PUBLISH_AUTHORIZATION)) {
             throw 'Dry-run publication must not carry a publish_authorization token.'
           }
           $decision = [ordered]@{
-            SchemaVersion = 1
+            SchemaVersion = 2
             RecordKind = 'nuget-publication-decision'
             CandidateId = $record.CandidateId
-            AuthorizationTokenSha256 = if ($env:PUBLISH_REQUESTED -eq 'true') { [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($env:PUBLISH_AUTHORIZATION))).ToLowerInvariant() } else { '' }
+            AuthorizationTokenSha256 = if ($protectedPhaseRequested) { [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($env:PUBLISH_AUTHORIZATION))).ToLowerInvariant() } else { '' }
             Publisher = $env:DESIGNATED_PUBLISHER
             IndependentApprover = $env:INDEPENDENT_APPROVER
             PublishRequested = $env:PUBLISH_REQUESTED -eq 'true'
+            VerificationRequested = $env:VERIFICATION_REQUESTED -eq 'true'
+            ReleaseRequested = $env:RELEASE_REQUESTED -eq 'true'
             Environment = 'nuget-production'
             PackageCount = $record.Packages.Count
             SensitiveMaterialPresent = $false
@@ -272,11 +288,75 @@ jobs:
             if ($LASTEXITCODE -ne 0) { throw "NuGet.org upload failed: $($package.Name)" }
           }
 
-  verify-nuget:
-    needs:
-      - prepare
-      - publish-nuget
+  publish-github-packages:
+    needs: prepare
     if: ${{ inputs.publish }}
+    runs-on: windows-latest
+    environment: nuget-production
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ inputs.source_commit }}
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.302
+            9.0.316
+            8.0.423
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: nuget-publication-candidate
+          path: artifacts/nuget-publication
+      - name: Revalidate approved GitHub Packages bytes
+        shell: pwsh
+        env:
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          PACKAGE_VERSION: ${{ inputs.package_version }}
+          CANDIDATE_CREATED: ${{ inputs.candidate_created }}
+          PUBLISH_AUTHORIZATION: ${{ inputs.publish_authorization }}
+          PREPARED_AUTHORIZATION: ${{ needs.prepare.outputs.authorization_token }}
+        run: |
+          if ($env:PUBLISH_AUTHORIZATION -cne $env:PREPARED_AUTHORIZATION) { throw 'Prepared publication authorization token drifted.' }
+          $root = Join-Path $PWD 'artifacts/nuget-publication'
+          $manifestPath = Join-Path $root 'publication-manifest.json'
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+          pwsh -NoProfile -File ./scripts/Test-NuGetPublicationManifest.ps1 `
+            -ManifestPath $manifestPath -SourceCommit $env:SOURCE_COMMIT `
+            -PackageVersion $env:PACKAGE_VERSION -OutputPath $manifestPath -Check
+          pwsh -NoProfile -File ./scripts/Test-ReleaseChangeControlRecord.ps1 `
+            -PackageRoot (Join-Path $root 'packages') -SbomRoot (Join-Path $root 'sbom') `
+            -OutputPath (Join-Path $root 'release-change-control.json') `
+            -Created $env:CANDIDATE_CREATED -ExpectedPackageCount $manifest.PackageCount -Check
+          pwsh -NoProfile -File ./scripts/New-NuGetPublicationBundle.ps1 `
+            -PackageRoot (Join-Path $root 'packages') -SbomRoot (Join-Path $root 'sbom') `
+            -ChangeControlPath (Join-Path $root 'release-change-control.json') `
+            -SourceCommit $env:SOURCE_COMMIT -PackageVersion $env:PACKAGE_VERSION `
+            -Created $env:CANDIDATE_CREATED -PublicationManifestPath $manifestPath `
+            -OutputPath (Join-Path $root 'nuget-publication-bundle.json') -Check
+      - name: Publish exact packages to GitHub Packages
+        shell: pwsh
+        env:
+          GITHUB_PACKAGES_TOKEN: ${{ github.token }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:GITHUB_PACKAGES_TOKEN)) { throw 'GitHub Actions did not provide a package-write token.' }
+          $root = Join-Path $PWD 'artifacts/nuget-publication'
+          $manifest = Get-Content -LiteralPath (Join-Path $root 'publication-manifest.json') -Raw | ConvertFrom-Json
+          $packages = @(Get-ChildItem (Join-Path $root 'packages') -Filter *.nupkg -File | Sort-Object Name)
+          if ($packages.Count -ne $manifest.PackageCount) { throw "Approved package count mismatch: expected=$($manifest.PackageCount) actual=$($packages.Count)" }
+          foreach ($package in $packages) {
+            dotnet nuget push $package.FullName `
+              --source https://nuget.pkg.github.com/guojin-yan/index.json `
+              --api-key $env:GITHUB_PACKAGES_TOKEN
+            if ($LASTEXITCODE -ne 0) { throw "GitHub Packages upload failed: $($package.Name)" }
+          }
+          Write-Host 'GitHub Packages uploads default to private visibility. Make all 25 packages public before running verify_publication.'
+
+  verify-nuget:
+    needs: prepare
+    if: ${{ inputs.verify_publication }}
     runs-on: windows-latest
     permissions:
       contents: read
@@ -361,11 +441,128 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  verify-github-packages:
+    needs: prepare
+    if: ${{ inputs.verify_publication }}
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ inputs.source_commit }}
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.302
+            9.0.316
+            8.0.423
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: nuget-publication-candidate
+          path: artifacts/nuget-publication
+      - name: Verify public GitHub Packages and exact package bytes
+        shell: pwsh
+        env:
+          GITHUB_PACKAGES_TOKEN: ${{ github.token }}
+          PACKAGE_VERSION: ${{ inputs.package_version }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:GITHUB_PACKAGES_TOKEN)) { throw 'GitHub Actions did not provide a package-read token.' }
+          $publicationRoot = Join-Path $PWD 'artifacts/nuget-publication'
+          $candidateRoot = Join-Path $publicationRoot 'packages'
+          $manifest = Get-Content -LiteralPath (Join-Path $publicationRoot 'publication-manifest.json') -Raw | ConvertFrom-Json
+          $proofRoot = Join-Path $PWD 'artifacts/github-packages-proof'
+          $downloadRoot = Join-Path $proofRoot 'packages'
+          New-Item -ItemType Directory -Force -Path $downloadRoot | Out-Null
+          $verifiedAt = [DateTimeOffset]::UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'")
+          $apiHeaders = @{
+            Accept = 'application/vnd.github+json'
+            Authorization = "Bearer $($env:GITHUB_PACKAGES_TOKEN)"
+            'User-Agent' = 'OpenCV-CSharp-API-publication-verifier'
+            'X-GitHub-Api-Version' = '2022-11-28'
+          }
+          $basicToken = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("guojin-yan:$($env:GITHUB_PACKAGES_TOKEN)"))
+          $downloadHeaders = @{ Authorization = "Basic $basicToken"; 'User-Agent' = 'OpenCV-CSharp-API-publication-verifier' }
+          $proofs = [Collections.Generic.List[object]]::new()
+          foreach ($item in $manifest.Packages) {
+            $escapedId = [Uri]::EscapeDataString($item.PackageId)
+            $metadataUrl = "https://api.github.com/users/guojin-yan/packages/nuget/$escapedId"
+            $metadata = Invoke-RestMethod -Uri $metadataUrl -Headers $apiHeaders -TimeoutSec 60
+            if ($metadata.name -cne $item.PackageId -or $metadata.visibility -ne 'public') {
+              throw "GitHub package is missing or is not public: $($item.PackageId)"
+            }
+            if ($metadata.repository.full_name -cne 'guojin-yan/OpenCV-CSharp-API') {
+              throw "GitHub package is not linked to the authoritative repository: $($item.PackageId)"
+            }
+            $versionsUrl = "$metadataUrl/versions?per_page=100"
+            $versions = @(Invoke-RestMethod -Uri $versionsUrl -Headers $apiHeaders -TimeoutSec 60)
+            $matchingVersions = @($versions | Where-Object { $_.name -ceq $env:PACKAGE_VERSION })
+            if ($matchingVersions.Count -ne 1) { throw "GitHub package version closure mismatch: $($item.PackageId)/$($env:PACKAGE_VERSION)" }
+
+            $lower = $item.PackageId.ToLowerInvariant()
+            $downloadUrl = "https://nuget.pkg.github.com/guojin-yan/download/$lower/$($env:PACKAGE_VERSION)/$lower.$($env:PACKAGE_VERSION).nupkg"
+            $downloadPath = Join-Path $downloadRoot $item.PackageFile
+            for ($attempt = 1; $attempt -le 20; $attempt++) {
+              try {
+                Invoke-WebRequest -Uri $downloadUrl -Headers $downloadHeaders -OutFile $downloadPath -UseBasicParsing -TimeoutSec 300
+                break
+              }
+              catch {
+                if ($attempt -eq 20) { throw }
+                Start-Sleep -Seconds 15
+              }
+            }
+            if (-not (Test-Path -LiteralPath $downloadPath -PathType Leaf)) { throw "GitHub package did not become available: $downloadUrl" }
+            $candidateSha256 = (Get-FileHash (Join-Path $candidateRoot $item.PackageFile) -Algorithm SHA256).Hash.ToLowerInvariant()
+            $downloadSha256 = (Get-FileHash $downloadPath -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($candidateSha256 -cne $downloadSha256 -or $candidateSha256 -cne $item.Sha256) {
+              throw "GitHub package bytes differ from the reviewed candidate: $($item.PackageId)"
+            }
+            $proofs.Add([ordered]@{
+                PackageId = $item.PackageId
+                Version = $env:PACKAGE_VERSION
+                Visibility = $metadata.visibility
+                Repository = $metadata.repository.full_name
+                PackagePage = $metadata.html_url
+                VersionPage = $matchingVersions[0].html_url
+                DownloadUrl = $downloadUrl
+                CandidateSha256 = $candidateSha256
+                GitHubPackagesSha256 = $downloadSha256
+              }) | Out-Null
+          }
+          if ($proofs.Count -ne $manifest.PackageCount) { throw 'GitHub Packages proof closure is incomplete.' }
+          $summary = [ordered]@{
+            SchemaVersion = 1
+            RecordKind = 'github-packages-publication-proof'
+            SourceRevision = $env:SOURCE_COMMIT
+            PackageVersion = $env:PACKAGE_VERSION
+            VerifiedAt = $verifiedAt
+            ServiceIndex = 'https://nuget.pkg.github.com/guojin-yan/index.json'
+            Repository = 'guojin-yan/OpenCV-CSharp-API'
+            RequiredVisibility = 'public'
+            PackageCount = $proofs.Count
+            Packages = @($proofs | Sort-Object PackageId)
+            Verification = 'passed'
+            SensitiveMaterialPresent = $false
+          }
+          $summaryJson = ((($summary | ConvertTo-Json -Depth 10) -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd() + "`n"
+          [IO.File]::WriteAllText((Join-Path $proofRoot 'github-packages-publication-proof.json'), $summaryJson, [Text.UTF8Encoding]::new($false))
+      - name: Upload GitHub Packages publication proof
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: github-packages-publication-proof
+          path: artifacts/github-packages-proof
+          if-no-files-found: error
+          retention-days: 90
+
   create-github-release:
     needs:
       - prepare
       - verify-nuget
-    if: ${{ inputs.publish && inputs.create_github_release }}
+      - verify-github-packages
+    if: ${{ inputs.verify_publication && inputs.create_github_release }}
     runs-on: windows-latest
     environment: nuget-production
     permissions:
@@ -382,7 +579,11 @@ jobs:
         with:
           name: nuget-repository-signing-proof
           path: artifacts/nuget-repository-proof
-      - name: Create release from verified repository-signed packages
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: github-packages-publication-proof
+          path: artifacts/github-packages-proof
+      - name: Create release from packages verified on both public feeds
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -401,7 +602,8 @@ jobs:
               './artifacts/nuget-publication/publication-manifest.json',
               './artifacts/nuget-publication/release-change-control.json',
               './artifacts/nuget-publication/nuget-publication-bundle.json',
-              './artifacts/nuget-repository-proof/nuget-repository-signing-proof.json')) {
+              './artifacts/nuget-repository-proof/nuget-repository-signing-proof.json',
+              './artifacts/github-packages-proof/github-packages-publication-proof.json')) {
             $assets.Add((Get-Item $path))
           }
           @(Get-ChildItem ./artifacts/nuget-repository-proof/reports -Filter *.json -File) | ForEach-Object { $assets.Add($_) }

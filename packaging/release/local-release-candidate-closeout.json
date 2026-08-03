@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/f331ebf0a879df19",
-  "SourceIdentity": "sha256:f331ebf0a879df196e20cc6d9c06218bb60b797be342e4a5839bc8298dc7f4cd",
+  "CandidateId": "local-closeout/sha256/48d833b2973eb035",
+  "SourceIdentity": "sha256:48d833b2973eb0350b2e3a5b014542c624a907285aee549175d1ea462d3de1c0",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1593,
-    "Sha256": "f331ebf0a879df196e20cc6d9c06218bb60b797be342e4a5839bc8298dc7f4cd",
+    "FileCount": 1606,
+    "Sha256": "48d833b2973eb0350b2e3a5b014542c624a907285aee549175d1ea462d3de1c0",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -18,11 +18,11 @@
   },
   "SupportContract": {
     "Path": "packaging/runtime/runtime-support-contract.json",
-    "Sha256": "5085884e79d66de5f8f9d2af8478795b66cd32d2998462efeec1696ddfffe02c",
+    "Sha256": "33db44525d3c07b0e2b97dccef44e7db3c2a96bb8ebd09e8d4df88b272e16c93",
     "MatrixEntryCount": 34,
     "RealSupportCount": 24,
-    "PendingSupportCount": 1,
-    "ExcludedSupportCount": 9,
+    "PendingSupportCount": 9,
+    "ExcludedSupportCount": 1,
     "OutsideMatrixCount": 1,
     "WinX86FullStatus": "hosted-evidence-pending",
     "WinX86MiniStatus": "excluded",
@@ -411,13 +411,13 @@
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
-      "Sha256": "1654387bfdebb8192828c23eaf01fea01339a15b042a3863c35fc77d0c4924f6",
-      "Length": 22999
+      "Sha256": "16d83eb09e3ec8efe038dd9e932abf2b3c2d14878a8684bddef4f8f135807577",
+      "Length": 34675
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "4098a113466fa8178783c196bb312c869c9451e0f890572a115fbe736173bab7",
-      "Length": 176358
+      "Sha256": "e0a16ac8d5b880cbd6d3907752e781893e28db2fbcacef0f895aa24f11bf30a1",
+      "Length": 190147
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
@@ -896,8 +896,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "efe5e7b877fe761814e35ec4e40635bf40ef89534338335394fdf6d0963e5fac",
-      "Length": 8895
+      "Sha256": "23f1837062cba59bec2233faf6d8f3858d73f8294b43210860f226d0887f7508",
+      "Length": 9825
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -906,13 +906,48 @@
     },
     {
       "Path": "docs/articles/support-lifecycle-policy.md",
-      "Sha256": "b2a6846d66d6edce7c123b5dc42a0a1933c34ce074efa70f907ba519626536a5",
-      "Length": 3424
+      "Sha256": "a845a2302e78726b4286581788493d463845567951edcd964fb961ebca3dd60f",
+      "Length": 3885
     },
     {
       "Path": "docs/articles/tracking-guide.md",
       "Sha256": "f0aa0c75c6c8bff92b89b22e321b1a3d0ed4c4894201ee93ad6a850945e4b718",
       "Length": 6826
+    },
+    {
+      "Path": "docs/articles/tutorial-01-image-pipeline.md",
+      "Sha256": "29760d273899896c2380822b04b3f71c9419769a4f3cae3b40208313d488f0f1",
+      "Length": 1997
+    },
+    {
+      "Path": "docs/articles/tutorial-02-chinese-puttext.md",
+      "Sha256": "80c7ebd2fa4594ab0bdd77aa235cdae04f1af18ec0b0f3715cc7364c450724ca",
+      "Length": 2679
+    },
+    {
+      "Path": "docs/articles/tutorial-03-contours.md",
+      "Sha256": "f44acccec646efe69ffdddfc62759867b380529dfde441c58c8cbb5f3e604365",
+      "Length": 1898
+    },
+    {
+      "Path": "docs/articles/tutorial-04-orb-features.md",
+      "Sha256": "41328d1a934caf8c2e7fd0e6d1a99a97d20421aa63c5ebf6aa7b613784a9cb0c",
+      "Length": 1671
+    },
+    {
+      "Path": "docs/articles/tutorial-05-template-matching.md",
+      "Sha256": "619f08d90e7f357b9ee5a901bd0e840ccb60f3a276f927f32e32d8fd01af0e51",
+      "Length": 1830
+    },
+    {
+      "Path": "docs/articles/tutorial-06-knn-classification.md",
+      "Sha256": "3dbc0b130c328d1eace873fc8f39434e05fe670c9183fe45ccce277f9bdeeb49",
+      "Length": 1951
+    },
+    {
+      "Path": "docs/articles/tutorial-series.md",
+      "Sha256": "7fabaf099c10db28d8a3e2491eecdeb029f71e9ef15b65b84f7defebd5ea9f07",
+      "Length": 3507
     },
     {
       "Path": "docs/articles/video-upstream-parity-guide.md",
@@ -925,14 +960,89 @@
       "Length": 3901
     },
     {
+      "Path": "docs/images/showcase/chinese-text.png",
+      "Sha256": "99c6de057cc64203bd7675b8bfecac426fbc71d2802a8e092054b651d7919b24",
+      "Length": 25487
+    },
+    {
+      "Path": "docs/images/showcase/contours.png",
+      "Sha256": "e4f52bf559f7847269d568dda0b4da292c2dbb33e6ec76583c64b36f058004d1",
+      "Length": 21554
+    },
+    {
+      "Path": "docs/images/showcase/image-pipeline.png",
+      "Sha256": "2b4143c49519b9856634efaa409c9a41bd65ba2f2b28a3887900045204da1cba",
+      "Length": 12986
+    },
+    {
+      "Path": "docs/images/showcase/knn-classification.png",
+      "Sha256": "13f6a958fed937f9ed2b4898c74872a586d1f436fda9095a04b5d5a45910f006",
+      "Length": 15129
+    },
+    {
+      "Path": "docs/images/showcase/orb-features.png",
+      "Sha256": "e7f2c9bf7cba44b6a73038e2afde2a07e249a531d62668b338cd5b2d04c51864",
+      "Length": 126366
+    },
+    {
+      "Path": "docs/images/showcase/showcase-overview.png",
+      "Sha256": "a0331a14d55681a80ba42bdfd314d7f2c92f866e4e076d04d83b542a44e7d235",
+      "Length": 215090
+    },
+    {
+      "Path": "docs/images/showcase/source.png",
+      "Sha256": "0894ae1dd8cac8754c0b5f82b4cc4b0bc3ffb437509453e402c9f7f7d62e6fc6",
+      "Length": 17806
+    },
+    {
+      "Path": "docs/images/showcase/template-match.png",
+      "Sha256": "3a86ad183bf73fc7b426c63fe75854ab014426673212453a96401ef2254c2cc9",
+      "Length": 17811
+    },
+    {
+      "Path": "docs/index.md",
+      "Sha256": "18faa366f114f0054082774728a84eb4bc1b8f1fb6962d35a6b292a94ab3ae27",
+      "Length": 4483
+    },
+    {
+      "Path": "docs/toc.yml",
+      "Sha256": "59d7341299f06052e984e67da566480d6002088a85249a8e4a76ed81302ad442",
+      "Length": 12277
+    },
+    {
+      "Path": "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
+      "Sha256": "04777f42adbf8c73f311403b78ab99bfb423cc4d22c9eaf85d05e416e89f0653",
+      "Length": 1510
+    },
+    {
       "Path": "packaging/runtime/runtime-support-contract.json",
-      "Sha256": "5085884e79d66de5f8f9d2af8478795b66cd32d2998462efeec1696ddfffe02c",
-      "Length": 3215
+      "Sha256": "33db44525d3c07b0e2b97dccef44e7db3c2a96bb8ebd09e8d4df88b272e16c93",
+      "Length": 5841
+    },
+    {
+      "Path": "samples/AndroidSmoke/AndroidSmoke.csproj",
+      "Sha256": "2415a7c057c16af5d8862d5b9406151876fcabd30a405a65be7b1b85b0d0474a",
+      "Length": 1759
+    },
+    {
+      "Path": "samples/AndroidSmoke/MainActivity.cs",
+      "Sha256": "e0835f0835b8da291596d4fe4048380f5626fbb32c85c468c55dd730ef5e65af",
+      "Length": 1177
     },
     {
       "Path": "samples/ConsoleSamples/Program.cs",
-      "Sha256": "5f30cf82eabf6a205b59bc848230064cadf992df21d5d8f3ee89386fd489b376",
-      "Length": 269723
+      "Sha256": "cabedfff1076aed58fe463465a4387c3116964a911f3a336a2d6fa94a6066dce",
+      "Length": 269832
+    },
+    {
+      "Path": "samples/ConsoleSamples/ShowcaseRunner.cs",
+      "Sha256": "4b261f304569ad03792a616fc903c893857199afc964788fc4ee44a788f28474",
+      "Length": 20894
+    },
+    {
+      "Path": "scripts/Build-AndroidRuntimeInput.ps1",
+      "Sha256": "c8e853b13818444cce1fb70de61a61c3cabea009bd49cc0af79d33dc687c0926",
+      "Length": 15486
     },
     {
       "Path": "scripts/Generate-Calib3DUpstreamMap.ps1",
@@ -1016,13 +1126,13 @@
     },
     {
       "Path": "scripts/New-NuGetPublicationBundle.ps1",
-      "Sha256": "b35252ed2f9889b72f8bbf34bf65a129963b3f6cbd8343510bbc67464035cf88",
-      "Length": 13211
+      "Sha256": "f525664965f7d646c2ead236a0cbd6a88bbffb0cb9a373ef892872c7bea500f7",
+      "Length": 14123
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f75e7c46530b4b5c1a329b72303d8b6aca40ea42d69f8069b69cef4814a06a2f",
-      "Length": 58273
+      "Sha256": "8d9d3a66975afb954b70c470ad6da59967048ac002b058bcf0d7d681fa8e9034",
+      "Length": 60044
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1096,8 +1206,8 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "0f1586ee58c8c8f7158da492117fd0935ca9e2f0ac70526bc7feb0a364ccf20f",
-      "Length": 19546
+      "Sha256": "c5f1696f66d809dded7ec93ada322bdf3e918954ba622f3c31d66db099022d72",
+      "Length": 20111
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1111,8 +1221,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "33a47621577a2fcbe02f32353c2c127eeb0961c35a585d309cfc0b8424d36830",
-      "Length": 53385
+      "Sha256": "0da83cd628701a18e87ac393007d976596d8aaf7e6ad01669d5ca03c9e7d5580",
+      "Length": 55524
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1121,8 +1231,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "a0c1c0d3ffeb79e1becbb90e2751553c87aca76d9c769abfe9ded32d2855342b",
-      "Length": 43379
+      "Sha256": "1d5c143b581541dbdcc1453310a157a6935bd37858afdb26d7e7430722f5cb22",
+      "Length": 43654
     },
     {
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
@@ -1146,8 +1256,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
-      "Sha256": "32e9d8035faaa19db62fc0200adfbbf807c093b1f8ad21bbd98f7e82e9f01631",
-      "Length": 9768
+      "Sha256": "a7c612a887e9c541f6d3777f5ac9217bb5b0048bb5d14eaa1f32b35cf1e4a085",
+      "Length": 10826
     },
     {
       "Path": "scripts/Test-StitchingUpstreamMap.ps1",
@@ -1200,6 +1310,11 @@
       "Length": 38416
     },
     {
+      "Path": "src/OpenCvSharp.Native/src/imgproc.cpp",
+      "Sha256": "6c87d0df024891a5b0a3601e735e4ce32670a530d25a7351b748cb0a5da9e832",
+      "Length": 293344
+    },
+    {
       "Path": "src/OpenCvSharp.Native/src/stitching/stitching.cpp",
       "Sha256": "14dcf211f260a5f86f94d38564c82920371b7f6ae7bcc2e29549cb3072d7c4a1",
       "Length": 213872
@@ -1228,6 +1343,16 @@
       "Path": "src/OpenCvSharp/HighGui/HighGuiTrackbar.cs",
       "Sha256": "a011de6db08f92d4d223cf6825f0889c193f3cdf7b3418d194e03e53768a4f77",
       "Length": 1406
+    },
+    {
+      "Path": "src/OpenCvSharp/ImgProc/Cv2.RemainingParity.cs",
+      "Sha256": "ed86931a63e84c875e93a79cf80cb7047057ee9a747886ac655d4148b1cbaf98",
+      "Length": 24850
+    },
+    {
+      "Path": "src/OpenCvSharp/ImgProc/FontFace.cs",
+      "Sha256": "33c4146acfbd13b00531fdd51a5bc6a7d93b2ca0593c7b46afcce4c9a5256290",
+      "Length": 7831
     },
     {
       "Path": "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
@@ -1353,6 +1478,11 @@
       "Path": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
       "Sha256": "b1ef7ccd6999b5eff94d739ba526c6c4ac8ec310d2a48eb0cfb0d951326d0eb1",
       "Length": 2647
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
+      "Sha256": "e5caf6d5588d92bef013e4b46b1e0e56f9253bce291d771077e1f59c680541d2",
+      "Length": 11004
     },
     {
       "Path": "tests/OpenCvSharp.Tests/Stitching/BlenderTests.cs",
@@ -1632,6 +1762,10 @@
   "PublicFeed": {
     "Mode": "read-only",
     "ServiceIndex": "https://api.nuget.org/v3/index.json",
+    "GitHubPackagesServiceIndex": "https://nuget.pkg.github.com/guojin-yan/index.json",
+    "GitHubPackagesRepository": "guojin-yan/OpenCV-CSharp-API",
+    "RequiredPublicVisibility": "public",
+    "RequiredFeedCount": 2,
     "CandidatePackage": "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg",
     "Methods": [
       "GET",
@@ -1654,8 +1788,8 @@
   "ExternalBlockers": [
     {
       "Id": "android-real-support",
-      "Status": "deferred-outside-real-support",
-      "Evidence": "Native Android build, package consumer, and device/emulator evidence are absent."
+      "Status": "android-evidence-pending",
+      "Evidence": "The four-ABI NDK producer, NuGet AndroidNativeLibrary integration, package-consumer APK, ELF audit, and x86_64 emulator smoke are implemented; authoritative hosted Full/Mini evidence is still required before promotion to real support."
     },
     {
       "Id": "api-gap-implementation",
@@ -1690,7 +1824,7 @@
     {
       "Id": "repository-signing-verification",
       "Status": "post-publication-required",
-      "Evidence": "NuGet.org must add a Repository primary signature; the public package must then pass cryptographic verification and exact unsigned-payload comparison."
+      "Evidence": "NuGet.org must add a Repository primary signature and pass exact payload comparison; GitHub Packages must be public, repository-linked, and byte-identical to the reviewed candidate."
     },
     {
       "Id": "sbom-inputs",

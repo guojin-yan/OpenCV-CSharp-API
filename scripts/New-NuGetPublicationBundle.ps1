@@ -18,6 +18,8 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $repositoryUrl = "https://github.com/guojin-yan/OpenCV-CSharp-API"
 $serviceIndex = "https://api.nuget.org/v3/index.json"
+$githubPackagesServiceIndex = "https://nuget.pkg.github.com/guojin-yan/index.json"
+$githubRepository = "guojin-yan/OpenCV-CSharp-API"
 $normalizedTimestamp = [DateTimeOffset]::new(2000, 1, 1, 0, 0, 0, [TimeSpan]::Zero)
 
 function Get-BytesSha256 {
@@ -174,12 +176,15 @@ $canonical = @(
     "version=$PackageVersion",
     "owner=$ExpectedOwner",
     "service=$serviceIndex",
+    "github-packages=$githubPackagesServiceIndex",
+    "github-repository=$githubRepository",
+    "github-packages-visibility=public",
     "change-control=$((Get-FileHash -LiteralPath $resolvedChangeControl -Algorithm SHA256).Hash.ToLowerInvariant())",
     "manifest=$((Get-FileHash -LiteralPath $resolvedManifest -Algorithm SHA256).Hash.ToLowerInvariant())"
 ) + @($packages | Sort-Object Id | ForEach-Object { "package=$($_.Id)|$($_.PackRunId)|$($_.ArtifactName)|$($_.Bytes)|$($_.Sha256)|$($_.PayloadCanonicalSha256)" }) + @($sboms | Sort-Object PackageId | ForEach-Object { "sbom=$($_.PackageId)|$($_.Bytes)|$($_.Sha256)|$($_.PackageSha256)" })
 $candidateHash = Get-BytesSha256 -Bytes ([Text.UTF8Encoding]::new($false).GetBytes(($canonical -join "`n") + "`n"))
 $record = [ordered]@{
-    SchemaVersion = 2
+    SchemaVersion = 3
     RecordKind = 'nuget-publication-bundle'
     CandidateId = "nuget-publication/sha256/$candidateHash"
     AuthorizationToken = "publish-nuget:sha256:$candidateHash"
@@ -190,6 +195,24 @@ $record = [ordered]@{
     Sboms = @($sboms | Sort-Object PackageId)
     PublicationManifest = [ordered]@{ FileName = (Split-Path -Leaf $resolvedManifest); Bytes = (Get-Item -LiteralPath $resolvedManifest).Length; Sha256 = (Get-FileHash -LiteralPath $resolvedManifest -Algorithm SHA256).Hash.ToLowerInvariant(); PackageCount = $definitions.Count }
     ChangeControl = [ordered]@{ FileName = $changeControlFile.Name; Bytes = $changeControlFile.Length; Sha256 = (Get-FileHash -LiteralPath $resolvedChangeControl -Algorithm SHA256).Hash.ToLowerInvariant() }
+    PublicationTargets = @(
+        [ordered]@{
+            Channel = 'nuget.org'
+            ServiceIndex = $serviceIndex
+            Owner = $ExpectedOwner
+            Repository = $githubRepository
+            RequiredVisibility = 'public'
+            Payload = 'repository-signed-public-bytes'
+        },
+        [ordered]@{
+            Channel = 'github-packages'
+            ServiceIndex = $githubPackagesServiceIndex
+            Owner = 'guojin-yan'
+            Repository = $githubRepository
+            RequiredVisibility = 'public'
+            Payload = 'exact-reviewed-unsigned-bytes'
+        }
+    )
     RepositorySigning = [ordered]@{
         Strategy = 'nuget.org-repository-signing'
         Status = 'repository-signing-pending'
@@ -202,7 +225,7 @@ $record = [ordered]@{
         PostPublishVerification = 'required'
     }
     Approval = [ordered]@{ Status = 'not-approved'; Publisher = 'unassigned'; IndependentApprover = 'unassigned' }
-    Publication = [ordered]@{ Decision = 'do-not-publish'; Allowed = $false; UploadAttempted = $false; Environment = 'nuget-production'; AuthoritativeRepository = 'guojin-yan/OpenCV-CSharp-API' }
+    Publication = [ordered]@{ Decision = 'do-not-publish'; Allowed = $false; UploadAttempted = $false; Environment = 'nuget-production'; AuthoritativeRepository = $githubRepository; RequiredPublicFeedCount = 2 }
     SensitiveMaterialPresent = $false
     Deterministic = $true
 }
@@ -221,6 +244,6 @@ if (-not [string]::IsNullOrWhiteSpace($OutputPath)) {
 }
 elseif ($Check) { throw "-Check requires -OutputPath." }
 
-Write-Host "NUGET_PUBLICATION_BUNDLE_OK candidate=$($record.CandidateId) packages=$($packages.Count) sboms=$($sboms.Count) signing=repository-signing-pending approval=not-approved publication=do-not-publish"
+Write-Host "NUGET_PUBLICATION_BUNDLE_OK candidate=$($record.CandidateId) packages=$($packages.Count) sboms=$($sboms.Count) public_feeds=2 signing=repository-signing-pending approval=not-approved publication=do-not-publish"
 Write-Host "NUGET_PUBLICATION_AUTHORIZATION_TOKEN $($record.AuthorizationToken)"
 if (-not [string]::IsNullOrWhiteSpace($OutputPath)) { Write-Host "Record: $([IO.Path]::GetFullPath($OutputPath))" }

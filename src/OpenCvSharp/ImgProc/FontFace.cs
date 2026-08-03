@@ -4,7 +4,7 @@ using OpenCvSharp.Internal.Interop;
 
 namespace OpenCvSharp.ImgProc
 {
-    /// <summary>Owns an OpenCV TrueType/OpenType font face. 拥有 OpenCV TrueType/OpenType 字体对象。</summary>
+    /// <summary>Owns an OpenCV TrueType/OpenType font face for Unicode text, including Chinese when the selected font contains the required glyphs. 拥有用于 Unicode 文本的 OpenCV TrueType/OpenType 字体对象；所选字体包含相应字形时可绘制中文。</summary>
     public sealed class FontFace : IDisposable
     {
         private NativeFontFaceHandle handle;
@@ -17,7 +17,7 @@ namespace OpenCvSharp.ImgProc
             handle = NativeFontFaceHandle.FromNativePointer(nativeHandle);
         }
 
-        /// <summary>Loads an embedded font name or a font file path. 加载内嵌字体名称或字体文件路径。</summary>
+        /// <summary>Loads an embedded font name or a TTF/TTC/OpenType font file path. Use a CJK font file to render Chinese with <c>Cv2.PutText</c>. 加载内嵌字体名称或 TTF/TTC/OpenType 字体文件路径；使用包含中文字形的字体文件即可通过 <c>Cv2.PutText</c> 绘制中文。</summary>
         public FontFace(string fontPathOrName)
         {
             byte[] nativeName = ToNullTerminatedUtf8(fontPathOrName, nameof(fontPathOrName));

@@ -516,7 +516,15 @@ foreach ($relativePath in $fixedMajorContextFiles) {
     $lineNumber = 0
     foreach ($line in [System.IO.File]::ReadLines($path)) {
         $lineNumber++
-        if ($winRuntimePackagePattern.IsMatch($line) -and -not $currentExampleContextPattern.IsMatch($line)) {
+        $isRuntimePackageTableRow = (
+            $relativePath -eq $readmePath -and
+            $line.TrimStart().StartsWith("|", [System.StringComparison]::Ordinal) -and
+            $line.Contains("img.shields.io/nuget/vpre/", [System.StringComparison]::Ordinal) -and
+            $line.Contains("[NuGet.org]", [System.StringComparison]::Ordinal) -and
+            $line.Contains("[GitHub]", [System.StringComparison]::Ordinal))
+        if ($winRuntimePackagePattern.IsMatch($line) -and
+            -not $currentExampleContextPattern.IsMatch($line) -and
+            -not $isRuntimePackageTableRow) {
             Add-Violation `
                 -Violations $violations `
                 -Path $relativePath `

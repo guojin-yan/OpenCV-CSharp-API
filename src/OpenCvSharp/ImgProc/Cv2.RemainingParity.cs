@@ -370,7 +370,7 @@ namespace OpenCvSharp.ImgProc
             return contours;
         }
 
-        /// <summary>Renders text with an OpenCV font face and returns the continuation point. 使用 OpenCV 字体渲染文本并返回续写位置。</summary>
+        /// <summary>Renders UTF-8 Unicode text with OpenCV <c>putText</c> and a TrueType/OpenType <see cref="FontFace"/>, then returns the continuation point. A font containing the requested glyphs enables Chinese rendering. 使用 OpenCV <c>putText</c> 和 TrueType/OpenType <see cref="FontFace"/> 渲染 UTF-8 Unicode 文本并返回续写位置；指定包含相应字形的字体即可绘制中文。</summary>
         public static Point PutText(
             Mat image,
             string text,
