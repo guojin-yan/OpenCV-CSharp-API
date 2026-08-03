@@ -498,6 +498,8 @@ foreach ($androidProducerNeedle in @(
         'ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON',
         'libopencv_$_.so',
         '^libopencv_.+\.so\..+$',
+        'Get-ExpectedElfIdentity',
+        'Android ELF e_machine audit failed',
         'Android ELF must retain at least 16 KB LOAD segment alignment',
         'libc++_shared.so',
         'New-RuntimeInputArtifact.ps1',

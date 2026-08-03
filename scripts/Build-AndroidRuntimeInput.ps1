@@ -52,14 +52,14 @@ function Get-AndroidAbi {
     }
 }
 
-function Get-ExpectedElfMachinePattern {
+function Get-ExpectedElfIdentity {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
 
     switch ($RuntimeIdentifier) {
-        "android-arm64" { return "AArch64" }
-        "android-arm" { return "ARM" }
-        "android-x64" { return "X86-64|x86-64" }
-        "android-x86" { return "80386|i386" }
+        "android-arm64" { return [pscustomobject]@{ Class = 2; Machine = 183 } }
+        "android-arm" { return [pscustomobject]@{ Class = 1; Machine = 40 } }
+        "android-x64" { return [pscustomobject]@{ Class = 2; Machine = 62 } }
+        "android-x86" { return [pscustomobject]@{ Class = 1; Machine = 3 } }
         default { throw "Unsupported Android RID: $RuntimeIdentifier" }
     }
 }
@@ -108,12 +108,30 @@ function Assert-AndroidElf {
     param(
         [Parameter(Mandatory = $true)][string]$ReadElf,
         [Parameter(Mandatory = $true)][string]$Path,
-        [Parameter(Mandatory = $true)][string]$MachinePattern
+        [Parameter(Mandatory = $true)][int]$ElfClass,
+        [Parameter(Mandatory = $true)][int]$MachineCode
     )
 
     $header = @(& $ReadElf -h -- $Path 2>&1)
-    if ($LASTEXITCODE -ne 0 -or ([string]::Join("`n", $header) -notmatch "Machine:\s+(?:$MachinePattern)")) {
-        throw "Android ELF machine audit failed for $Path."
+    if ($LASTEXITCODE -ne 0) {
+        throw "Android ELF header audit failed for $Path`: $([string]::Join(' | ', $header))"
+    }
+
+    $elfHeaderBytes = [IO.File]::ReadAllBytes($Path)
+    if ($elfHeaderBytes.Length -lt 20 -or
+        $elfHeaderBytes[0] -ne 0x7f -or
+        $elfHeaderBytes[1] -ne 0x45 -or
+        $elfHeaderBytes[2] -ne 0x4c -or
+        $elfHeaderBytes[3] -ne 0x46) {
+        throw "Android native library is not a valid ELF file: $Path"
+    }
+    if ([int]$elfHeaderBytes[4] -ne $ElfClass -or [int]$elfHeaderBytes[5] -ne 1) {
+        throw "Android ELF class/data audit failed for $Path`: class=$($elfHeaderBytes[4]) data=$($elfHeaderBytes[5]) expected_class=$ElfClass expected_data=1."
+    }
+
+    $actualMachineCode = [int]$elfHeaderBytes[18] -bor ([int]$elfHeaderBytes[19] -shl 8)
+    if ($actualMachineCode -ne $MachineCode) {
+        throw "Android ELF e_machine audit failed for $Path`: actual=$actualMachineCode expected=$MachineCode."
     }
 
     $programHeaders = [string]::Join("`n", @(& $ReadElf -lW -- $Path 2>&1))
@@ -285,10 +303,10 @@ if ($versionedAndroidLibraries.Count -gt 0) {
     throw "Android runtime libraries must use unversioned APK-loadable .so names: $($versionedAndroidLibraries.Name -join ', ')"
 }
 
-$machinePattern = Get-ExpectedElfMachinePattern -RuntimeIdentifier $Rid
+$elfIdentity = Get-ExpectedElfIdentity -RuntimeIdentifier $Rid
 $dependencyEdges = 0
 foreach ($file in $allAuditFiles) {
-    Assert-AndroidElf -ReadElf $readElf -Path $file -MachinePattern $machinePattern
+    Assert-AndroidElf -ReadElf $readElf -Path $file -ElfClass $elfIdentity.Class -MachineCode $elfIdentity.Machine
     $dynamicText = [string]::Join("`n", @(& $readElf -dW -- $file 2>&1))
     if ($LASTEXITCODE -ne 0) {
         throw "Android ELF dynamic-section audit failed for $file."
