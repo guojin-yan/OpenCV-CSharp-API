@@ -357,7 +357,9 @@ if ($buildTarget.PlatformFamily -eq "android") {
     $cmakeArgs += @(
         "-DCMAKE_TOOLCHAIN_FILE=$androidToolchainFile",
         "-DANDROID_ABI=$($buildTarget.AndroidAbi)",
-        "-DANDROID_PLATFORM=android-$AndroidApiLevel"
+        "-DANDROID_PLATFORM=android-$AndroidApiLevel",
+        "-DBUILD_ANDROID_EXAMPLES=OFF",
+        "-DINSTALL_ANDROID_EXAMPLES=OFF"
     )
 }
 

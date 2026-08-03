@@ -392,9 +392,13 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Android RID build plans must require NDK and select matching Android ABI" -Text "$rid :: $($plan.PlatformFamily) / $($plan.RequiresAndroidNdk) / $($plan.AndroidAbi)"
             }
 
-            foreach ($expectedArg in @("-DANDROID_ABI=$expectedAbi", "-DANDROID_PLATFORM=android-24")) {
+            foreach ($expectedArg in @(
+                    "-DANDROID_ABI=$expectedAbi",
+                    "-DANDROID_PLATFORM=android-24",
+                    "-DBUILD_ANDROID_EXAMPLES=OFF",
+                    "-DINSTALL_ANDROID_EXAMPLES=OFF")) {
                 if (-not (Test-SequenceContains -Values @($plan.CMakeArgs) -Needle $expectedArg)) {
-                    Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Android RID build plans must include Android CMake toolchain arguments" -Text "$rid :: $expectedArg"
+                    Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Android RID build plans must include Android CMake toolchain and example-disable arguments" -Text "$rid :: $expectedArg"
                 }
             }
 
