@@ -191,6 +191,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Generate-VideoUpstreamMap.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
         "scripts/New-NuGetPublicationBundle.ps1",
+        "scripts/Test-NuGetPublicationManifest.ps1",
         "scripts/New-ReleasePackageSbom.ps1",
         "scripts/Test-ApiAbiBaselineContract.ps1",
         "scripts/Test-Calib3DUpstreamMap.ps1",

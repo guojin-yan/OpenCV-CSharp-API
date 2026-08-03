@@ -124,6 +124,7 @@ $releaseSigningBoundaryPath = "scripts/Test-ReleaseSigningBoundary.ps1"
 $nugetRepositorySigningBoundaryPath = "scripts/Test-NuGetRepositorySigningBoundary.ps1"
 $nugetRepositorySignedPackagePath = "scripts/Test-NuGetRepositorySignedPackage.ps1"
 $nugetPublicationBundlePath = "scripts/New-NuGetPublicationBundle.ps1"
+$nugetPublicationManifestPath = "scripts/Test-NuGetPublicationManifest.ps1"
 $nugetRepositoryVerifierProjectPath = "tools/NuGetRepositorySignatureVerifier/NuGetRepositorySignatureVerifier.csproj"
 $nugetRepositoryVerifierProgramPath = "tools/NuGetRepositorySignatureVerifier/Program.cs"
 $releaseSupportContractPath = "scripts/Test-ReleaseSupportContract.ps1"
@@ -186,6 +187,7 @@ $releaseSigningBoundaryText = Read-RequiredText -RelativePath $releaseSigningBou
 $nugetRepositorySigningBoundaryText = Read-RequiredText -RelativePath $nugetRepositorySigningBoundaryPath
 $nugetRepositorySignedPackageText = Read-RequiredText -RelativePath $nugetRepositorySignedPackagePath
 $nugetPublicationBundleText = Read-RequiredText -RelativePath $nugetPublicationBundlePath
+$nugetPublicationManifestText = Read-RequiredText -RelativePath $nugetPublicationManifestPath
 $nugetRepositoryVerifierProjectText = Read-RequiredText -RelativePath $nugetRepositoryVerifierProjectPath
 $nugetRepositoryVerifierProgramText = Read-RequiredText -RelativePath $nugetRepositoryVerifierProgramPath
 $releaseSupportContractText = Read-RequiredText -RelativePath $releaseSupportContractPath
@@ -255,9 +257,14 @@ Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $p
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'scripts/New-NuGetPublicationBundle.ps1' -Issue "NuGet.org publication must generate and recheck the exact reviewed bundle"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'scripts/Test-NuGetRepositorySignedPackage.ps1' -Issue "NuGet.org publication must verify public Repository signatures and payload equality"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'publish_authorization' -Issue "NuGet.org publication must require the exact dry-run authorization token"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'publication_manifest_json' -Issue "NuGet.org publication must bind the complete real-supported package manifest"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'gh run download' -Issue "NuGet.org publication must download exact manifest-bound authoritative pack artifacts"
 Assert-Contains -Violations $violations -Path $nugetRepositorySigningBoundaryPath -Text $nugetRepositorySigningBoundaryText -Needle 'NUGET_REPOSITORY_SIGNING_BOUNDARY_OK' -Issue "Release artifact surface must register repository-signing negative fixtures"
 Assert-Contains -Violations $violations -Path $nugetRepositorySignedPackagePath -Text $nugetRepositorySignedPackageText -Needle 'dotnet nuget verify' -Issue "Repository-signed package verifier must invoke NuGet cryptographic verification"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'publish-nuget:sha256:' -Issue "Publication bundle must emit a candidate-specific authorization token"
+Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'PublicationManifestPath' -Issue "Publication bundle must bind the normalized package manifest"
+Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 24' -Issue "Publication manifest must require all 24 real-supported runtime targets"
+Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle 'Publication manifest must contain exactly' -Issue "Publication manifest must reject incomplete package closure"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProjectPath -Text $nugetRepositoryVerifierProjectText -Needle '<PackageReference Include="NuGet.Packaging" Version="6.14.0" />' -Issue "Structured repository-signature verifier must pin NuGet.Packaging"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProgramPath -Text $nugetRepositoryVerifierProgramText -Needle 'RepositoryPrimarySignature' -Issue "Structured verifier must require a repository primary signature"
 Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle '[string]$ProjectPath = "src\OpenCvSharp\OpenCvSharp.csproj"' -Issue "Pack-Managed default project path must be the neutral managed project"

@@ -92,9 +92,9 @@ $expectations = [ordered]@{
         }
         RequiredJobMarkers = [ordered]@{
             "prepare" = @(
-                "actions/download-artifact@",
-                "run-id:",
-                "github-token:"
+                'gh api "repos/guojin-yan/OpenCV-CSharp-API/actions/runs/$runId"',
+                'gh run download $item.RunId',
+                'GH_TOKEN: ${{ github.token }}'
             )
             "publish-nuget" = @(
                 "environment: nuget-production",

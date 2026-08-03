@@ -6,9 +6,7 @@ param(
     [Parameter(Mandatory = $true)][ValidatePattern('^[0-9a-f]{40}$')][string]$SourceCommit,
     [Parameter(Mandatory = $true)][string]$PackageVersion,
     [Parameter(Mandatory = $true)][ValidatePattern('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$')][string]$Created,
-    [Parameter(Mandatory = $true)][ValidatePattern('^[0-9a-f]{64}$')][string]$ExpectedManagedSha256,
-    [Parameter(Mandatory = $true)][ValidatePattern('^[0-9a-f]{64}$')][string]$ExpectedFullSha256,
-    [Parameter(Mandatory = $true)][ValidatePattern('^[0-9a-f]{64}$')][string]$ExpectedMiniSha256,
+    [Parameter(Mandatory = $true)][string]$PublicationManifestPath,
     [string]$ExpectedOwner = "GuojinYan",
     [string]$OutputPath = "",
     [switch]$Check
@@ -113,15 +111,53 @@ function Get-SbomFact {
 $resolvedPackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 $resolvedSbomRoot = (Resolve-Path -LiteralPath $SbomRoot).Path
 $resolvedChangeControl = (Resolve-Path -LiteralPath $ChangeControlPath).Path
-$definitions = @(
-    [pscustomobject]@{ Id = 'JYPPX.OpenCV.CSharp.API'; File = "JYPPX.OpenCV.CSharp.API.$PackageVersion.nupkg"; Hash = $ExpectedManagedSha256; Sbom = 'managed.spdx.json' },
-    [pscustomobject]@{ Id = 'JYPPX.OpenCV.runtime.win-x64'; File = "JYPPX.OpenCV.runtime.win-x64.$PackageVersion.nupkg"; Hash = $ExpectedFullSha256; Sbom = 'runtime-full.spdx.json' },
-    [pscustomobject]@{ Id = 'JYPPX.OpenCV.runtime.win-x64.mini'; File = "JYPPX.OpenCV.runtime.win-x64.mini.$PackageVersion.nupkg"; Hash = $ExpectedMiniSha256; Sbom = 'runtime-mini.spdx.json' }
-)
+$resolvedManifest = (Resolve-Path -LiteralPath $PublicationManifestPath).Path
+pwsh -NoProfile -File (Join-Path $PSScriptRoot 'Test-NuGetPublicationManifest.ps1') `
+    -ManifestPath $resolvedManifest -SourceCommit $SourceCommit -PackageVersion $PackageVersion `
+    -OutputPath $resolvedManifest -Check
+if ($LASTEXITCODE -ne 0) { throw 'Publication manifest validation failed.' }
+$manifest = Get-Content -LiteralPath $resolvedManifest -Raw | ConvertFrom-Json
+$definitions = @($manifest.Packages | ForEach-Object {
+        [pscustomobject]@{
+            Id = [string]$_.PackageId
+            File = [string]$_.PackageFile
+            Hash = [string]$_.Sha256
+            Sbom = [string]$_.SbomFile
+            ArtifactName = [string]$_.ArtifactName
+            RunId = [string]$_.RunId
+            Rid = [string]$_.Rid
+            RuntimeProfile = [string]$_.RuntimeProfile
+            Kind = [string]$_.Kind
+        }
+    } | Sort-Object Id)
 $actualPackages = @(Get-ChildItem -LiteralPath $resolvedPackageRoot -Filter *.nupkg -File)
-if ($actualPackages.Count -ne $definitions.Count) { throw "Publication bundle must contain exactly three packages; actual=$($actualPackages.Count)" }
+if ($actualPackages.Count -ne $definitions.Count) { throw "Publication bundle package closure mismatch: expected=$($definitions.Count) actual=$($actualPackages.Count)" }
+$expectedPackageFiles = @($definitions.File | Sort-Object)
+$actualPackageFiles = @($actualPackages.Name | Sort-Object)
+if (($actualPackageFiles -join "`n") -cne ($expectedPackageFiles -join "`n")) { throw 'Publication bundle package filenames do not match the manifest.' }
+$actualSbomFiles = @(Get-ChildItem -LiteralPath $resolvedSbomRoot -Filter *.json -File)
+$expectedSbomFiles = @($definitions.Sbom | Sort-Object)
+if ($actualSbomFiles.Count -ne $definitions.Count -or (@($actualSbomFiles.Name | Sort-Object) -join "`n") -cne ($expectedSbomFiles -join "`n")) {
+    throw 'Publication bundle SBOM filenames do not match the manifest.'
+}
 
-$packages = @($definitions | ForEach-Object { Get-PackageFact -Path (Join-Path $resolvedPackageRoot $_.File) -ExpectedId $_.Id -ExpectedHash $_.Hash })
+$packages = @($definitions | ForEach-Object {
+        $fact = Get-PackageFact -Path (Join-Path $resolvedPackageRoot $_.File) -ExpectedId $_.Id -ExpectedHash $_.Hash
+        [ordered]@{
+            Id = $fact.Id
+            Version = $fact.Version
+            FileName = $fact.FileName
+            Bytes = $fact.Bytes
+            Sha256 = $fact.Sha256
+            EntryCount = $fact.EntryCount
+            PayloadCanonicalSha256 = $fact.PayloadCanonicalSha256
+            Kind = $_.Kind
+            Rid = $_.Rid
+            RuntimeProfile = $_.RuntimeProfile
+            ArtifactName = $_.ArtifactName
+            PackRunId = $_.RunId
+        }
+    })
 $sboms = @($definitions | ForEach-Object { Get-SbomFact -Path (Join-Path $resolvedSbomRoot $_.Sbom) -ExpectedPackageId $_.Id -ExpectedPackageSha256 $_.Hash })
 $changeControlFile = Get-Item -LiteralPath $resolvedChangeControl
 $changeControl = Get-Content -LiteralPath $changeControlFile.FullName -Raw | ConvertFrom-Json
@@ -138,11 +174,12 @@ $canonical = @(
     "version=$PackageVersion",
     "owner=$ExpectedOwner",
     "service=$serviceIndex",
-    "change-control=$((Get-FileHash -LiteralPath $resolvedChangeControl -Algorithm SHA256).Hash.ToLowerInvariant())"
-) + @($packages | Sort-Object Id | ForEach-Object { "package=$($_.Id)|$($_.Bytes)|$($_.Sha256)|$($_.PayloadCanonicalSha256)" }) + @($sboms | Sort-Object PackageId | ForEach-Object { "sbom=$($_.PackageId)|$($_.Bytes)|$($_.Sha256)|$($_.PackageSha256)" })
+    "change-control=$((Get-FileHash -LiteralPath $resolvedChangeControl -Algorithm SHA256).Hash.ToLowerInvariant())",
+    "manifest=$((Get-FileHash -LiteralPath $resolvedManifest -Algorithm SHA256).Hash.ToLowerInvariant())"
+) + @($packages | Sort-Object Id | ForEach-Object { "package=$($_.Id)|$($_.PackRunId)|$($_.ArtifactName)|$($_.Bytes)|$($_.Sha256)|$($_.PayloadCanonicalSha256)" }) + @($sboms | Sort-Object PackageId | ForEach-Object { "sbom=$($_.PackageId)|$($_.Bytes)|$($_.Sha256)|$($_.PackageSha256)" })
 $candidateHash = Get-BytesSha256 -Bytes ([Text.UTF8Encoding]::new($false).GetBytes(($canonical -join "`n") + "`n"))
 $record = [ordered]@{
-    SchemaVersion = 1
+    SchemaVersion = 2
     RecordKind = 'nuget-publication-bundle'
     CandidateId = "nuget-publication/sha256/$candidateHash"
     AuthorizationToken = "publish-nuget:sha256:$candidateHash"
@@ -151,6 +188,7 @@ $record = [ordered]@{
     PackageVersion = $PackageVersion
     Packages = @($packages | Sort-Object Id)
     Sboms = @($sboms | Sort-Object PackageId)
+    PublicationManifest = [ordered]@{ FileName = (Split-Path -Leaf $resolvedManifest); Bytes = (Get-Item -LiteralPath $resolvedManifest).Length; Sha256 = (Get-FileHash -LiteralPath $resolvedManifest -Algorithm SHA256).Hash.ToLowerInvariant(); PackageCount = $definitions.Count }
     ChangeControl = [ordered]@{ FileName = $changeControlFile.Name; Bytes = $changeControlFile.Length; Sha256 = (Get-FileHash -LiteralPath $resolvedChangeControl -Algorithm SHA256).Hash.ToLowerInvariant() }
     RepositorySigning = [ordered]@{
         Strategy = 'nuget.org-repository-signing'

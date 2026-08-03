@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/c750bbfb327c7784",
-  "SourceIdentity": "sha256:c750bbfb327c778414d2f3797d0aa678b0e6a007f9666b4ba31618ea51c6d99e",
+  "CandidateId": "local-closeout/sha256/6d9b61f724409e2f",
+  "SourceIdentity": "sha256:6d9b61f724409e2f83491f4e94ffe553c8483ffe5eb5504050543389304c6300",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1591,
-    "Sha256": "c750bbfb327c778414d2f3797d0aa678b0e6a007f9666b4ba31618ea51c6d99e",
+    "FileCount": 1593,
+    "Sha256": "6d9b61f724409e2f83491f4e94ffe553c8483ffe5eb5504050543389304c6300",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -411,7 +411,7 @@
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
-      "Sha256": "9e69337d7c20a32871b96f478b25787be26cacddb0a4cf7d0180d9d7a1eca985",
+      "Sha256": "1654387bfdebb8192828c23eaf01fea01339a15b042a3863c35fc77d0c4924f6",
       "Length": 22999
     },
     {
@@ -896,8 +896,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "941ed329ac77a714516c4b5ebfbdd5db49394e5737f6a672d040197e5aab5c97",
-      "Length": 8519
+      "Sha256": "efe5e7b877fe761814e35ec4e40635bf40ef89534338335394fdf6d0963e5fac",
+      "Length": 8895
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -1016,13 +1016,13 @@
     },
     {
       "Path": "scripts/New-NuGetPublicationBundle.ps1",
-      "Sha256": "c23cfbf436f89c533cfd6216a27ec90e00d22c65a51b2e16993cdd7537174354",
-      "Length": 11489
+      "Sha256": "b35252ed2f9889b72f8bbf34bf65a129963b3f6cbd8343510bbc67464035cf88",
+      "Length": 13211
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "160c565c06a932e01a56b3ad01d72a069e9c3bae732e731caf8e12dcfebbedc0",
-      "Length": 58220
+      "Sha256": "f75e7c46530b4b5c1a329b72303d8b6aca40ea42d69f8069b69cef4814a06a2f",
+      "Length": 58273
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1085,14 +1085,19 @@
       "Length": 16021
     },
     {
+      "Path": "scripts/Test-NuGetPublicationManifest.ps1",
+      "Sha256": "3d819e018752dc2dd4105b9d1128946c48b729852451cacd9ede90fb0e1f7eb8",
+      "Length": 7789
+    },
+    {
       "Path": "scripts/Test-NuGetRepositorySignedPackage.ps1",
       "Sha256": "f2051d83cbb51b782406894980a2d26efb9f75e52ffa7ff531fa2217c9315ed8",
       "Length": 3488
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "c452a5ce7493b83d89d26e61c23d5eb651dba73758d68c90905cc206603ccf02",
-      "Length": 12269
+      "Sha256": "0f1586ee58c8c8f7158da492117fd0935ca9e2f0ac70526bc7feb0a364ccf20f",
+      "Length": 19546
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1106,8 +1111,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "76f2cc05e44cfb33081a41f47b36427234f20f45fc875c23fa2d4865c87843d0",
-      "Length": 53332
+      "Sha256": "33a47621577a2fcbe02f32353c2c127eeb0961c35a585d309cfc0b8424d36830",
+      "Length": 53385
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1116,8 +1121,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "54978fe37d0c6ec36d3c41301a339b8a31c9b395a4762fc9b758ae5ec0d040be",
-      "Length": 43269
+      "Sha256": "a0c1c0d3ffeb79e1becbb90e2751553c87aca76d9c769abfe9ded32d2855342b",
+      "Length": 43379
     },
     {
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",

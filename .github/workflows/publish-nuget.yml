@@ -16,28 +16,8 @@ on:
         description: Factual whole-second UTC timestamp shared by SBOM and review records
         required: true
         type: string
-      managed_run_id:
-        description: Authoritative pack run containing nupkg-managed
-        required: true
-        type: string
-      full_run_id:
-        description: Authoritative pack run containing nupkg-win-x64-full
-        required: true
-        type: string
-      mini_run_id:
-        description: Authoritative pack run containing nupkg-win-x64-mini
-        required: true
-        type: string
-      managed_sha256:
-        description: Reviewed normalized managed package SHA256
-        required: true
-        type: string
-      full_sha256:
-        description: Reviewed normalized win-x64 full package SHA256
-        required: true
-        type: string
-      mini_sha256:
-        description: Reviewed normalized win-x64 mini package SHA256
+      publication_manifest_json:
+        description: Exact managed plus real-supported runtime pack run and SHA256 manifest JSON
         required: true
         type: string
       designated_publisher:
@@ -61,7 +41,7 @@ on:
         default: false
         type: boolean
       create_github_release:
-        description: After repository-signature verification, create the formal GitHub Release
+        description: After repository-signature verification, create the formal GitHub prerelease
         required: true
         default: false
         type: boolean
@@ -94,63 +74,81 @@ jobs:
             10.0.302
             9.0.316
             8.0.423
-      - name: Validate immutable publication inputs
+      - name: Validate and normalize immutable publication manifest
         shell: pwsh
         env:
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           PACKAGE_VERSION: ${{ inputs.package_version }}
           CANDIDATE_CREATED: ${{ inputs.candidate_created }}
-          MANAGED_RUN_ID: ${{ inputs.managed_run_id }}
-          FULL_RUN_ID: ${{ inputs.full_run_id }}
-          MINI_RUN_ID: ${{ inputs.mini_run_id }}
-          MANAGED_SHA256: ${{ inputs.managed_sha256 }}
-          FULL_SHA256: ${{ inputs.full_sha256 }}
-          MINI_SHA256: ${{ inputs.mini_sha256 }}
+          PUBLICATION_MANIFEST_JSON: ${{ inputs.publication_manifest_json }}
           GH_TOKEN: ${{ github.token }}
         run: |
           if ($env:SOURCE_COMMIT -notmatch '^[0-9a-f]{40}$') { throw 'source_commit must be exact lowercase 40-hex.' }
           if ($env:PACKAGE_VERSION -cne '5.0.0-preview.1') { throw 'The first-preview workflow requires package_version=5.0.0-preview.1.' }
           if ($env:CANDIDATE_CREATED -notmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$') { throw 'candidate_created must be whole-second UTC.' }
-          foreach ($hash in @($env:MANAGED_SHA256, $env:FULL_SHA256, $env:MINI_SHA256)) {
-            if ($hash -notmatch '^[0-9a-f]{64}$') { throw "Expected package hash is not lowercase SHA256: $hash" }
-          }
-          foreach ($runId in @($env:MANAGED_RUN_ID, $env:FULL_RUN_ID, $env:MINI_RUN_ID)) {
-            if ($runId -notmatch '^[1-9][0-9]*$') { throw "Pack run id is invalid: $runId" }
+          if ((git rev-parse HEAD) -ne $env:SOURCE_COMMIT) { throw 'Checkout does not match source_commit.' }
+          if ([string]::IsNullOrWhiteSpace($env:PUBLICATION_MANIFEST_JSON)) { throw 'publication_manifest_json is required.' }
+
+          $root = Join-Path $PWD 'artifacts/nuget-publication'
+          New-Item -ItemType Directory -Force -Path $root | Out-Null
+          $rawManifest = Join-Path $root 'publication-manifest.input.json'
+          $manifestPath = Join-Path $root 'publication-manifest.json'
+          [IO.File]::WriteAllText($rawManifest, $env:PUBLICATION_MANIFEST_JSON, [Text.UTF8Encoding]::new($false))
+          pwsh -NoProfile -File ./scripts/Test-NuGetPublicationManifest.ps1 `
+            -ManifestPath $rawManifest -SourceCommit $env:SOURCE_COMMIT `
+            -PackageVersion $env:PACKAGE_VERSION -OutputPath $manifestPath
+
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+          foreach ($runId in @($manifest.Packages.RunId | Sort-Object -Unique)) {
             $run = gh api "repos/guojin-yan/OpenCV-CSharp-API/actions/runs/$runId" | ConvertFrom-Json
-            if ($run.status -ne 'completed' -or $run.conclusion -ne 'success' -or $run.head_sha -ne $env:SOURCE_COMMIT -or $run.repository.full_name -ne 'guojin-yan/OpenCV-CSharp-API') {
-              throw "Pack run is not a successful authoritative run of the reviewed source: $runId"
+            if ($run.status -ne 'completed' -or
+                $run.conclusion -ne 'success' -or
+                $run.head_sha -ne $env:SOURCE_COMMIT -or
+                $run.repository.full_name -ne 'guojin-yan/OpenCV-CSharp-API' -or
+                $run.event -ne 'workflow_dispatch' -or
+                $run.path -ne '.github/workflows/pack.yml') {
+              throw "Pack run is not a successful authoritative pack workflow run of the reviewed source: $runId"
             }
           }
-          if ((git rev-parse HEAD) -ne $env:SOURCE_COMMIT) { throw 'Checkout does not match source_commit.' }
+          Remove-Item -LiteralPath $rawManifest -Force
       - name: Check project invariants
         shell: pwsh
         run: |
           pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
           pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
-      - name: Download managed package
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
-        with:
-          name: nupkg-managed
-          path: incoming/managed
-          repository: guojin-yan/OpenCV-CSharp-API
-          run-id: ${{ inputs.managed_run_id }}
-          github-token: ${{ github.token }}
-      - name: Download win-x64 full package
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
-        with:
-          name: nupkg-win-x64-full
-          path: incoming/full
-          repository: guojin-yan/OpenCV-CSharp-API
-          run-id: ${{ inputs.full_run_id }}
-          github-token: ${{ github.token }}
-      - name: Download win-x64 mini package
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
-        with:
-          name: nupkg-win-x64-mini
-          path: incoming/mini
-          repository: guojin-yan/OpenCV-CSharp-API
-          run-id: ${{ inputs.mini_run_id }}
-          github-token: ${{ github.token }}
+      - name: Download and bind exact package artifacts
+        shell: pwsh
+        env:
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          PACKAGE_VERSION: ${{ inputs.package_version }}
+          CANDIDATE_CREATED: ${{ inputs.candidate_created }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $root = Join-Path $PWD 'artifacts/nuget-publication'
+          $incomingRoot = Join-Path $PWD 'artifacts/nuget-incoming'
+          $packageRoot = Join-Path $root 'packages'
+          $sbomRoot = Join-Path $root 'sbom'
+          $manifestPath = Join-Path $root 'publication-manifest.json'
+          New-Item -ItemType Directory -Force -Path $incomingRoot, $packageRoot, $sbomRoot | Out-Null
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+          foreach ($item in $manifest.Packages) {
+            $incoming = Join-Path $incomingRoot $item.ArtifactName
+            gh run download $item.RunId --repo guojin-yan/OpenCV-CSharp-API --name $item.ArtifactName --dir $incoming
+            if ($LASTEXITCODE -ne 0) { throw "Artifact download failed: $($item.ArtifactName) from run $($item.RunId)" }
+            $files = @(Get-ChildItem -LiteralPath $incoming -Recurse -Filter *.nupkg -File)
+            if ($files.Count -ne 1 -or $files[0].Name -cne $item.PackageFile) { throw "Artifact package closure mismatch: $($item.ArtifactName)" }
+            $hash = (Get-FileHash -LiteralPath $files[0].FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($hash -cne $item.Sha256) { throw "Artifact package hash mismatch: $($item.PackageId) actual=$hash expected=$($item.Sha256)" }
+            $destination = Join-Path $packageRoot $item.PackageFile
+            Copy-Item -LiteralPath $files[0].FullName -Destination $destination
+            pwsh -NoProfile -File ./scripts/New-ReleasePackageSbom.ps1 `
+              -PackagePath $destination -SourceCommit $env:SOURCE_COMMIT `
+              -Created $env:CANDIDATE_CREATED -OutputPath (Join-Path $sbomRoot $item.SbomFile)
+          }
+          if (@(Get-ChildItem -LiteralPath $packageRoot -Filter *.nupkg -File).Count -ne $manifest.PackageCount) {
+            throw 'Downloaded publication package closure is incomplete.'
+          }
+          Remove-Item -LiteralPath $incomingRoot -Recurse -Force
       - name: Build deterministic publication review bundle
         id: publication
         shell: pwsh
@@ -158,9 +156,6 @@ jobs:
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           PACKAGE_VERSION: ${{ inputs.package_version }}
           CANDIDATE_CREATED: ${{ inputs.candidate_created }}
-          MANAGED_SHA256: ${{ inputs.managed_sha256 }}
-          FULL_SHA256: ${{ inputs.full_sha256 }}
-          MINI_SHA256: ${{ inputs.mini_sha256 }}
           DESIGNATED_PUBLISHER: ${{ inputs.designated_publisher }}
           INDEPENDENT_APPROVER: ${{ inputs.independent_approver }}
           PUBLISH_AUTHORIZATION: ${{ inputs.publish_authorization }}
@@ -169,33 +164,17 @@ jobs:
           $root = Join-Path $PWD 'artifacts/nuget-publication'
           $packageRoot = Join-Path $root 'packages'
           $sbomRoot = Join-Path $root 'sbom'
-          New-Item -ItemType Directory -Force -Path $packageRoot, $sbomRoot | Out-Null
-          $expected = @(
-            [pscustomobject]@{ Source = 'incoming/managed'; Name = "JYPPX.OpenCV.CSharp.API.$($env:PACKAGE_VERSION).nupkg"; Hash = $env:MANAGED_SHA256; Sbom = 'managed.spdx.json' },
-            [pscustomobject]@{ Source = 'incoming/full'; Name = "JYPPX.OpenCV.runtime.win-x64.$($env:PACKAGE_VERSION).nupkg"; Hash = $env:FULL_SHA256; Sbom = 'runtime-full.spdx.json' },
-            [pscustomobject]@{ Source = 'incoming/mini'; Name = "JYPPX.OpenCV.runtime.win-x64.mini.$($env:PACKAGE_VERSION).nupkg"; Hash = $env:MINI_SHA256; Sbom = 'runtime-mini.spdx.json' }
-          )
-          foreach ($item in $expected) {
-            $files = @(Get-ChildItem -LiteralPath $item.Source -Recurse -Filter *.nupkg -File)
-            if ($files.Count -ne 1 -or $files[0].Name -cne $item.Name) { throw "Artifact package closure mismatch for $($item.Name)." }
-            $hash = (Get-FileHash -LiteralPath $files[0].FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-            if ($hash -ne $item.Hash) { throw "Artifact package hash mismatch for $($item.Name): $hash" }
-            Copy-Item -LiteralPath $files[0].FullName -Destination (Join-Path $packageRoot $item.Name)
-            pwsh -NoProfile -File ./scripts/New-ReleasePackageSbom.ps1 `
-              -PackagePath (Join-Path $packageRoot $item.Name) `
-              -SourceCommit $env:SOURCE_COMMIT `
-              -Created $env:CANDIDATE_CREATED `
-              -OutputPath (Join-Path $sbomRoot $item.Sbom)
-          }
+          $manifestPath = Join-Path $root 'publication-manifest.json'
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
           $changeControl = Join-Path $root 'release-change-control.json'
           pwsh -NoProfile -File ./scripts/Test-ReleaseChangeControlRecord.ps1 `
             -PackageRoot $packageRoot -SbomRoot $sbomRoot -OutputPath $changeControl `
-            -Created $env:CANDIDATE_CREATED -ExpectedPackageCount 3
+            -Created $env:CANDIDATE_CREATED -ExpectedPackageCount $manifest.PackageCount
           $publicationRecord = Join-Path $root 'nuget-publication-bundle.json'
           pwsh -NoProfile -File ./scripts/New-NuGetPublicationBundle.ps1 `
             -PackageRoot $packageRoot -SbomRoot $sbomRoot -ChangeControlPath $changeControl `
-            -SourceCommit $env:SOURCE_COMMIT -PackageVersion $env:PACKAGE_VERSION -Created $env:CANDIDATE_CREATED `
-            -ExpectedManagedSha256 $env:MANAGED_SHA256 -ExpectedFullSha256 $env:FULL_SHA256 -ExpectedMiniSha256 $env:MINI_SHA256 `
+            -SourceCommit $env:SOURCE_COMMIT -PackageVersion $env:PACKAGE_VERSION `
+            -Created $env:CANDIDATE_CREATED -PublicationManifestPath $manifestPath `
             -OutputPath $publicationRecord
           $record = Get-Content -LiteralPath $publicationRecord -Raw | ConvertFrom-Json
           if ($env:PUBLISH_REQUESTED -eq 'true') {
@@ -214,11 +193,12 @@ jobs:
             Publisher = $env:DESIGNATED_PUBLISHER
             IndependentApprover = $env:INDEPENDENT_APPROVER
             PublishRequested = $env:PUBLISH_REQUESTED -eq 'true'
-            EnvironmentApprovalRequired = $true
             Environment = 'nuget-production'
-            SecretMaterialPresent = $false
+            PackageCount = $record.Packages.Count
+            SensitiveMaterialPresent = $false
           }
-          [IO.File]::WriteAllText((Join-Path $root 'nuget-publication-decision.json'), (($decision | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
+          $decisionJson = ((($decision | ConvertTo-Json -Depth 8) -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd() + "`n"
+          [IO.File]::WriteAllText((Join-Path $root 'nuget-publication-decision.json'), $decisionJson, [Text.UTF8Encoding]::new($false))
           "candidate_id=$($record.CandidateId)" >> $env:GITHUB_OUTPUT
           "authorization_token=$($record.AuthorizationToken)" >> $env:GITHUB_OUTPUT
           Write-Host "Dry-run authorization token: $($record.AuthorizationToken)"
@@ -257,23 +237,25 @@ jobs:
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           PACKAGE_VERSION: ${{ inputs.package_version }}
           CANDIDATE_CREATED: ${{ inputs.candidate_created }}
-          MANAGED_SHA256: ${{ inputs.managed_sha256 }}
-          FULL_SHA256: ${{ inputs.full_sha256 }}
-          MINI_SHA256: ${{ inputs.mini_sha256 }}
           PUBLISH_AUTHORIZATION: ${{ inputs.publish_authorization }}
           PREPARED_AUTHORIZATION: ${{ needs.prepare.outputs.authorization_token }}
         run: |
           if ($env:PUBLISH_AUTHORIZATION -cne $env:PREPARED_AUTHORIZATION) { throw 'Prepared publication authorization token drifted.' }
           $root = Join-Path $PWD 'artifacts/nuget-publication'
+          $manifestPath = Join-Path $root 'publication-manifest.json'
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+          pwsh -NoProfile -File ./scripts/Test-NuGetPublicationManifest.ps1 `
+            -ManifestPath $manifestPath -SourceCommit $env:SOURCE_COMMIT `
+            -PackageVersion $env:PACKAGE_VERSION -OutputPath $manifestPath -Check
           pwsh -NoProfile -File ./scripts/Test-ReleaseChangeControlRecord.ps1 `
             -PackageRoot (Join-Path $root 'packages') -SbomRoot (Join-Path $root 'sbom') `
             -OutputPath (Join-Path $root 'release-change-control.json') `
-            -Created $env:CANDIDATE_CREATED -ExpectedPackageCount 3 -Check
+            -Created $env:CANDIDATE_CREATED -ExpectedPackageCount $manifest.PackageCount -Check
           pwsh -NoProfile -File ./scripts/New-NuGetPublicationBundle.ps1 `
             -PackageRoot (Join-Path $root 'packages') -SbomRoot (Join-Path $root 'sbom') `
             -ChangeControlPath (Join-Path $root 'release-change-control.json') `
-            -SourceCommit $env:SOURCE_COMMIT -PackageVersion $env:PACKAGE_VERSION -Created $env:CANDIDATE_CREATED `
-            -ExpectedManagedSha256 $env:MANAGED_SHA256 -ExpectedFullSha256 $env:FULL_SHA256 -ExpectedMiniSha256 $env:MINI_SHA256 `
+            -SourceCommit $env:SOURCE_COMMIT -PackageVersion $env:PACKAGE_VERSION `
+            -Created $env:CANDIDATE_CREATED -PublicationManifestPath $manifestPath `
             -OutputPath (Join-Path $root 'nuget-publication-bundle.json') -Check
       - name: Publish exact packages to NuGet.org
         shell: pwsh
@@ -281,8 +263,10 @@ jobs:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           if ([string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) { throw 'The nuget-production Environment must provide NUGET_API_KEY.' }
-          $packages = @(Get-ChildItem ./artifacts/nuget-publication/packages -Filter *.nupkg -File | Sort-Object Name)
-          if ($packages.Count -ne 3) { throw "Expected exactly three approved packages, got $($packages.Count)." }
+          $root = Join-Path $PWD 'artifacts/nuget-publication'
+          $manifest = Get-Content -LiteralPath (Join-Path $root 'publication-manifest.json') -Raw | ConvertFrom-Json
+          $packages = @(Get-ChildItem (Join-Path $root 'packages') -Filter *.nupkg -File | Sort-Object Name)
+          if ($packages.Count -ne $manifest.PackageCount) { throw "Approved package count mismatch: expected=$($manifest.PackageCount) actual=$($packages.Count)" }
           foreach ($package in $packages) {
             dotnet nuget push $package.FullName --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY
             if ($LASTEXITCODE -ne 0) { throw "NuGet.org upload failed: $($package.Name)" }
@@ -316,26 +300,22 @@ jobs:
           PACKAGE_VERSION: ${{ inputs.package_version }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
         run: |
-          $unsignedRoot = Join-Path $PWD 'artifacts/nuget-publication/packages'
+          $publicationRoot = Join-Path $PWD 'artifacts/nuget-publication'
+          $unsignedRoot = Join-Path $publicationRoot 'packages'
+          $manifest = Get-Content -LiteralPath (Join-Path $publicationRoot 'publication-manifest.json') -Raw | ConvertFrom-Json
           $proofRoot = Join-Path $PWD 'artifacts/nuget-repository-proof'
           $signedRoot = Join-Path $proofRoot 'packages'
           $reportRoot = Join-Path $proofRoot 'reports'
           New-Item -ItemType Directory -Force -Path $signedRoot, $reportRoot | Out-Null
-          $definitions = @(
-            [pscustomobject]@{ Id = 'JYPPX.OpenCV.CSharp.API'; Lower = 'jyppx.opencv.csharp.api'; Name = "JYPPX.OpenCV.CSharp.API.$($env:PACKAGE_VERSION).nupkg" },
-            [pscustomobject]@{ Id = 'JYPPX.OpenCV.runtime.win-x64'; Lower = 'jyppx.opencv.runtime.win-x64'; Name = "JYPPX.OpenCV.runtime.win-x64.$($env:PACKAGE_VERSION).nupkg" },
-            [pscustomobject]@{ Id = 'JYPPX.OpenCV.runtime.win-x64.mini'; Lower = 'jyppx.opencv.runtime.win-x64.mini'; Name = "JYPPX.OpenCV.runtime.win-x64.mini.$($env:PACKAGE_VERSION).nupkg" }
-          )
           $verifiedAt = [DateTimeOffset]::UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'")
           $proofs = [Collections.Generic.List[object]]::new()
-          foreach ($item in $definitions) {
-            $url = "https://api.nuget.org/v3-flatcontainer/$($item.Lower)/$($env:PACKAGE_VERSION)/$($item.Lower).$($env:PACKAGE_VERSION).nupkg"
-            $signedPath = Join-Path $signedRoot $item.Name
-            $downloaded = $false
+          foreach ($item in $manifest.Packages) {
+            $lower = $item.PackageId.ToLowerInvariant()
+            $url = "https://api.nuget.org/v3-flatcontainer/$lower/$($env:PACKAGE_VERSION)/$lower.$($env:PACKAGE_VERSION).nupkg"
+            $signedPath = Join-Path $signedRoot $item.PackageFile
             for ($attempt = 1; $attempt -le 30; $attempt++) {
               try {
                 Invoke-WebRequest -Uri $url -OutFile $signedPath -UseBasicParsing -TimeoutSec 60
-                $downloaded = $true
                 break
               }
               catch {
@@ -343,21 +323,22 @@ jobs:
                 Start-Sleep -Seconds 20
               }
             }
-            if (-not $downloaded) { throw "NuGet.org package did not become available: $url" }
-            $reportPath = Join-Path $reportRoot ($item.Lower + '.repository-signature.json')
+            if (-not (Test-Path -LiteralPath $signedPath -PathType Leaf)) { throw "NuGet.org package did not become available: $url" }
+            $reportPath = Join-Path $reportRoot ($lower + '.repository-signature.json')
             pwsh -NoProfile -File ./scripts/Test-NuGetRepositorySignedPackage.ps1 `
-              -UnsignedPackagePath (Join-Path $unsignedRoot $item.Name) `
-              -RepositorySignedPackagePath $signedPath `
-              -PackageId $item.Id -PackageVersion $env:PACKAGE_VERSION `
-              -ExpectedOwner GuojinYan -VerifiedAt $verifiedAt -OutputPath $reportPath
+              -UnsignedPackagePath (Join-Path $unsignedRoot $item.PackageFile) `
+              -RepositorySignedPackagePath $signedPath -PackageId $item.PackageId `
+              -PackageVersion $env:PACKAGE_VERSION -ExpectedOwner GuojinYan `
+              -VerifiedAt $verifiedAt -OutputPath $reportPath
             $proofs.Add([ordered]@{
-              PackageId = $item.Id
-              PublicUrl = $url
-              UnsignedSha256 = (Get-FileHash (Join-Path $unsignedRoot $item.Name) -Algorithm SHA256).Hash.ToLowerInvariant()
-              RepositorySignedSha256 = (Get-FileHash $signedPath -Algorithm SHA256).Hash.ToLowerInvariant()
-              VerificationReportSha256 = (Get-FileHash $reportPath -Algorithm SHA256).Hash.ToLowerInvariant()
-            }) | Out-Null
+                PackageId = $item.PackageId
+                PublicUrl = $url
+                UnsignedSha256 = (Get-FileHash (Join-Path $unsignedRoot $item.PackageFile) -Algorithm SHA256).Hash.ToLowerInvariant()
+                RepositorySignedSha256 = (Get-FileHash $signedPath -Algorithm SHA256).Hash.ToLowerInvariant()
+                VerificationReportSha256 = (Get-FileHash $reportPath -Algorithm SHA256).Hash.ToLowerInvariant()
+              }) | Out-Null
           }
+          if ($proofs.Count -ne $manifest.PackageCount) { throw 'Repository-signing proof closure is incomplete.' }
           $summary = [ordered]@{
             SchemaVersion = 1
             RecordKind = 'nuget-repository-signing-proof'
@@ -365,11 +346,13 @@ jobs:
             PackageVersion = $env:PACKAGE_VERSION
             VerifiedAt = $verifiedAt
             Strategy = 'nuget.org-repository-signing'
+            PackageCount = $proofs.Count
             Packages = @($proofs | Sort-Object PackageId)
             Verification = 'passed'
             SensitiveMaterialPresent = $false
           }
-          [IO.File]::WriteAllText((Join-Path $proofRoot 'nuget-repository-signing-proof.json'), (($summary | ConvertTo-Json -Depth 10) + "`n"), [Text.UTF8Encoding]::new($false))
+          $summaryJson = ((($summary | ConvertTo-Json -Depth 10) -replace "`r`n", "`n") -replace "`r", "`n").TrimEnd() + "`n"
+          [IO.File]::WriteAllText((Join-Path $proofRoot 'nuget-repository-signing-proof.json'), $summaryJson, [Text.UTF8Encoding]::new($false))
       - name: Upload NuGet.org repository-signing proof
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
@@ -408,22 +391,23 @@ jobs:
           SOURCE_COMMIT: ${{ inputs.source_commit }}
         run: |
           if ($env:RELEASE_TAG -cne "v$($env:PACKAGE_VERSION)") { throw 'release_tag must exactly match v<package_version>.' }
-          $existingTag = @(git ls-remote --tags origin "refs/tags/$($env:RELEASE_TAG)")
-          if ($existingTag.Count -ne 0) { throw "Release tag already exists: $($env:RELEASE_TAG)" }
-          $existingRelease = @(gh release view $env:RELEASE_TAG --repo guojin-yan/OpenCV-CSharp-API 2>$null)
+          if (@(git ls-remote --tags origin "refs/tags/$($env:RELEASE_TAG)").Count -ne 0) { throw "Release tag already exists: $($env:RELEASE_TAG)" }
+          gh release view $env:RELEASE_TAG --repo guojin-yan/OpenCV-CSharp-API 2>$null | Out-Null
           if ($LASTEXITCODE -eq 0) { throw "GitHub Release already exists: $($env:RELEASE_TAG)" }
           $assets = [Collections.Generic.List[IO.FileInfo]]::new()
           @(Get-ChildItem ./artifacts/nuget-repository-proof/packages -Filter *.nupkg -File) | ForEach-Object { $assets.Add($_) }
           @(Get-ChildItem ./artifacts/nuget-publication/sbom -Filter *.json -File) | ForEach-Object { $assets.Add($_) }
-          $assets.Add((Get-Item ./artifacts/nuget-publication/release-change-control.json))
-          $assets.Add((Get-Item ./artifacts/nuget-publication/nuget-publication-bundle.json))
-          $assets.Add((Get-Item ./artifacts/nuget-repository-proof/nuget-repository-signing-proof.json))
+          foreach ($path in @(
+              './artifacts/nuget-publication/publication-manifest.json',
+              './artifacts/nuget-publication/release-change-control.json',
+              './artifacts/nuget-publication/nuget-publication-bundle.json',
+              './artifacts/nuget-repository-proof/nuget-repository-signing-proof.json')) {
+            $assets.Add((Get-Item $path))
+          }
           @(Get-ChildItem ./artifacts/nuget-repository-proof/reports -Filter *.json -File) | ForEach-Object { $assets.Add($_) }
           gh release create $env:RELEASE_TAG @($assets.FullName) `
-            --repo guojin-yan/OpenCV-CSharp-API `
-            --target $env:SOURCE_COMMIT `
-            --title $env:RELEASE_TAG `
-            --prerelease `
+            --repo guojin-yan/OpenCV-CSharp-API --target $env:SOURCE_COMMIT `
+            --title $env:RELEASE_TAG --prerelease `
             --notes-file ./docs/articles/preview-release-notes.md
           if ($LASTEXITCODE -ne 0) { throw 'GitHub Release creation failed.' }
           $release = gh release view $env:RELEASE_TAG --repo guojin-yan/OpenCV-CSharp-API --json tagName,isDraft,isPrerelease,targetCommitish,assets | ConvertFrom-Json

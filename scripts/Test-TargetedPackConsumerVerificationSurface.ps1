@@ -122,6 +122,7 @@ $consumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
 $windowsPeAuditPath = "scripts/Test-WindowsRuntimePeClosure.ps1"
 $cmakePath = "src/OpenCvSharp.Native/CMakeLists.txt"
 $readmePath = "README.md"
+$readmeChinesePath = "README_cn.md"
 $guidePath = "docs/articles/linked-runtime-build-guide.md"
 $runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
 
@@ -131,6 +132,7 @@ $consumerGuardText = Read-RequiredText $consumerGuardPath
 $windowsPeAuditText = Read-RequiredText $windowsPeAuditPath
 $cmakeText = Read-RequiredText $cmakePath
 $readmeText = Read-RequiredText $readmePath
+$readmeChineseText = Read-RequiredText $readmeChinesePath
 $guideText = Read-RequiredText $guidePath
 $runtimeMatrixText = Read-RequiredText $runtimeMatrixPath
 $runtimeMatrix = $runtimeMatrixText | ConvertFrom-Json
@@ -563,7 +565,7 @@ foreach ($expectation in @(
         @($readmePath, $readmeText, 'Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm`', "README must document the exact native Ubuntu ARM64 consumer boundary"),
         @($readmePath, $readmeText, 'Ubuntu 22.04 ARM64 full runs through a separate host-orchestrated `docker run` verifier', "README must document the exact Ubuntu 22.04 ARM64 container consumer boundary"),
         @($readmePath, $readmeText, 'Debian 12 ARM64 full uses its own host-orchestrated `docker run` verifier on native `ubuntu-24.04-arm`', "README must document the exact Debian ARM64 container consumer boundary"),
-        @($readmePath, $readmeText, 'Debian 12 ARM64 full 使用由原生 `ubuntu-24.04-arm` 宿主机编排的独立 `docker run` verifier', "README Chinese text must document the exact Debian ARM64 container consumer boundary"),
+        @($readmeChinesePath, $readmeChineseText, 'Debian 12 ARM64 full 使用由原生 `ubuntu-24.04-arm` 宿主机编排的独立 `docker run` verifier', "Chinese README must document the exact Debian ARM64 container consumer boundary"),
         @($readmePath, $readmeText, 'Debian 12 x64 full runs in a separate `debian:12` job container', "README must document the exact Debian x64 container-native consumer execution"),
         @($readmePath, $readmeText, 'Fedora 40 full runs in its own separate `fedora:40` job container', "README must document Fedora container-native consumer execution"),
         @($readmePath, $readmeText, 'Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container', "README must document Rocky container-native consumer execution"),

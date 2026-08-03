@@ -20,9 +20,9 @@
 
 ## Package Selection / 包选择
 
-Install the managed package and exactly one runtime package at the same normalized version. The first candidate package set contains the managed package plus `win-x64` full and mini runtimes; other package IDs or previously proven build targets are not public-feed availability claims.
+Install the managed package and exactly one runtime package at the same normalized version. The first candidate contains the managed package plus full and mini runtimes for all 24 targets classified as `realSupport` in the checked-in support contract.
 
-managed 包与一个 runtime 包必须使用相同的 NuGet 规范版本。首个候选包集合包含 managed 包以及 `win-x64` full/mini runtime；其他 package ID 或此前已验证的构建目标不代表相应包已经在公共源可用。
+managed 包与一个 runtime 包必须使用相同的 NuGet 规范版本。首个候选包含 managed 包，以及仓库 support contract 中 24 个 `realSupport` 目标的 full/mini runtime 包。
 
 | Profile | Package | Use it for |
 | --- | --- | --- |
@@ -90,7 +90,7 @@ dotnet restore
 
 - The release is a preview. Compatibility baselines prevent accidental drift, but additional APIs and runtime packages will continue to be added.
 - Measured module partitions have explicit zero-gap evidence, but this is not repository-wide or all-OpenCV parity.
-- The first candidate package set is `win-x64` managed/full/mini. `win-x86/full` remains hosted-evidence-pending; `win-x86/mini` and Android profiles are excluded; macOS is outside the declared matrix.
+- The first candidate contains 25 packages: one managed package plus 24 real-supported runtime packages across Windows x64/ARM64 and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. `win-x86/full` remains hosted-evidence-pending; `win-x86/mini` and Android profiles are excluded; macOS is outside the declared matrix.
 - Mini excludes DNN, calibration, features, Photo, HighGui, ML, Tracking, Stitching, and other full-only modules.
 - Some algorithms require user-supplied models, training data, codecs, GUI backends, or optional OpenCV build features. The library does not silently download them.
 - HighGui requires a compatible desktop UI backend and event-thread model. Server, container, and unattended workflows should prefer file or memory encoding.
@@ -100,7 +100,7 @@ dotnet restore
 
 - 本版本为 preview。兼容性基线会阻止意外漂移，但后续仍会继续增加 API 与 runtime 包。
 - 已测量模块分区具有明确的 zero-gap 证据，但不代表整个仓库或全部 OpenCV 已达到 parity。
-- 首个候选包集合是 `win-x64` managed/full/mini。`win-x86/full` 仍为 hosted-evidence-pending；`win-x86/mini` 与 Android profile 被排除；macOS 位于声明矩阵之外。
+- 首个候选包含 25 个包：一个 managed 包，加上 Windows x64/ARM64 以及声明的 Ubuntu、Debian、Fedora、RHEL、Rocky、Alpine 目标共 24 个真实支持 runtime 包。`win-x86/full` 仍为 hosted-evidence-pending；`win-x86/mini` 与 Android profile 被排除；macOS 位于声明矩阵之外。
 - mini 排除 DNN、标定、Features、Photo、HighGui、ML、Tracking、Stitching 和其他 full-only 模块。
 - 部分算法需要用户提供模型、训练数据、codec、GUI backend 或 OpenCV 可选构建能力；库不会静默下载这些输入。
 - HighGui 需要兼容的桌面 UI backend 和事件线程模型。服务器、容器和无人值守流程应优先使用文件或内存编码。

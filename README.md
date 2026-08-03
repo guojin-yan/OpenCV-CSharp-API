@@ -1,431 +1,216 @@
+![OpenCV CSharp API](https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light)
+
 # OpenCV CSharp API
 
-OpenCV CSharp API is a .NET binding project for OpenCV. The current packaged OpenCV runtime identity is OpenCV 5.0.0, and the project exposes OpenCV C++ capabilities to C# through a stable native C ABI and a managed object model under the version-neutral `OpenCvSharp` namespace.
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![NuGet](https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/)
+[![Downloads](https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/)
+[![.NET](https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4)](https://dotnet.microsoft.com/)
+[![Upstream OpenCV](https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8)](https://opencv.org/)
+[![Managed CI](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml/badge.svg?branch=opencv5.x)](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml)
+[![Native CI](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml/badge.svg?branch=opencv5.x)](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml)
 
-OpenCV CSharp API 是面向 OpenCV 的 .NET 封装项目。当前打包的 OpenCV runtime 身份为 OpenCV 5.0.0；项目通过稳定的 native C ABI 间接调用 OpenCV C++，并在 C# 层以版本中立的 `OpenCvSharp` 命名空间提供接近 OpenCV C++ 使用体验的对象模型。
+English | [简体中文](README_cn.md)
+
+OpenCV CSharp API is a version-neutral .NET binding for OpenCV 5.0. It combines an idiomatic managed API under `OpenCvSharp.*` with a stable native C ABI, deterministic NuGet packages, explicit native ownership, and real runtime packages for supported Windows and Linux targets.
+
+The first public channel is `5.0.0-preview.1`. It is designed for early adopters who need broad OpenCV coverage while preserving API and ABI identity across later iterations.
+
+## Highlights
+
+- 612 public managed types, 6,314 public/protected members, and 41 namespaces under a checked compatibility baseline.
+- 2,656 full-profile and 526 mini-profile native ABI functions with complete declared native-to-managed binding coverage.
+- Practical coverage across Core, ImgProc, ImgCodecs, VideoIO, Calib3D, DNN, Features, HighGui, ObjDetect, Photo, Video, ML, Tracking, Stitching, and selected contrib modules.
+- Targets .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
+- Full and mini runtime profiles with package-owned native smoke tests and explicit `NOT_LINKED` behavior for unavailable mini features.
+- Deterministic packages, SPDX 2.3 SBOMs, protected publication approval, and post-upload NuGet.org Repository-signature verification.
+- Headless visual samples that generate inspection-ready PNG files without a camera, model download, or GUI session.
 
 ![OpenCV CSharp API visual showcase](docs/images/showcase/showcase-overview.png)
 
-## First Release / 首版入口
+## Quick Start
 
-The first public version focuses on practical image processing, image codecs, feature extraction and matching, camera/video I/O, geometry and calibration, DNN inference, classical ML, photo operations, object detection, tracking, and stitching. Public managed APIs and the native C ABI are source-controlled as compatibility baselines so later releases can add coverage without silently breaking existing consumers.
-
-首个公开版本优先保证图像处理、图像编解码、特征提取与匹配、相机/视频 I/O、几何与标定、DNN 推理、传统机器学习、照片处理、目标检测、跟踪和拼接等主要场景可用。托管公共 API 与 native C ABI 均以源码基线管理，后续版本可以持续扩展覆盖范围，但不会静默破坏既有调用方。
-
-- [First Release Overview / 首版概览](docs/articles/first-release-overview.md)
-- [5.0.0-preview.1 Release Notes / 发布说明](docs/articles/preview-release-notes.md)
-- [NuGet.org Repository Signing Guide / NuGet.org 仓库签名指南](docs/articles/nuget-repository-signing-guide.md)
-- [Visual Showcase / 可视化案例](docs/articles/visual-showcase.md)
-- [Scenario Recipes / 场景路线](docs/articles/scenario-recipes.md)
-- [Quick Start / 快速开始](docs/articles/quick-start.md)
-
-Generate the visual samples with the factual full native runtime:
-
-使用真实 full native runtime 生成展示图：
+Install the managed package and exactly one runtime package on the same normalized NuGet package version. The example below uses the full Windows x64 runtime:
 
 ```powershell
-C:\Users\guoji\.dotnet\dotnet.exe run `
-  --project .\samples\ConsoleSamples\ConsoleSamples.csproj `
-  -c Release `
-  -p:OpenCvNativeRuntimeDir=<full-runtime-directory> `
+dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
+dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1 # current Windows x64 example
+```
+
+Then use the module namespace that owns the API:
+
+```csharp
+using System;
+using OpenCvSharp.Core;
+using CoreCv2 = OpenCvSharp.Core.Cv2;
+
+using Mat left = new Mat(2, 3, MatType.CV_8UC1);
+using Mat right = new Mat(2, 3, MatType.CV_8UC1);
+using Mat result = new Mat();
+
+left.CopyFrom(new byte[] { 1, 2, 3, 4, 5, 6 });
+right.CopyFrom(new byte[] { 6, 5, 4, 3, 2, 1 });
+CoreCv2.Add(left, right, result);
+
+Console.WriteLine(string.Join(",", result.ToBytes()));
+```
+
+The complete [Quick Start](docs/articles/quick-start.md) covers package selection, matrices, image codecs, geometry, and disposal.
+
+## NuGet Packages
+
+### Managed API
+
+| Package | Purpose |
+| --- | --- |
+| [`JYPPX.OpenCV.CSharp.API`](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | Version-neutral managed API for all supported frameworks |
+
+### Runtime Packages
+
+Choose one package matching your target RID and profile:
+
+- Full: `JYPPX.OpenCV.runtime.<rid>`
+- Mini: `JYPPX.OpenCV.runtime.<rid>.mini`
+
+The full profile contains broad OpenCV modules including DNN, calibration, features, Photo, HighGui, ML, Tracking, and Stitching. The mini profile focuses on `core`, `imgproc`, `imgcodecs`, and `videoio`, with the required `geometry` and `flann` runtime dependencies.
+
+Do not reference full and mini runtime packages together. Keep the managed and runtime packages on the same normalized NuGet package version.
+
+## Supported Runtime Targets
+
+The first preview publishes the managed package and the 24 runtime targets classified as `realSupport` in [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json).
+
+| Platform | RID | Architectures | Profiles |
+| --- | --- | --- | --- |
+| Windows 10/11 | `win-x64` | x64 | full, mini |
+| Windows 11 | `win-arm64` | ARM64 | full, mini |
+| Ubuntu 22.04 | `ubuntu.22.04-x64`, `ubuntu.22.04-arm64` | x64, ARM64 | full, mini |
+| Ubuntu 24.04 | `ubuntu.24.04-x64`, `ubuntu.24.04-arm64` | x64, ARM64 | full, mini |
+| Debian 12 | `debian.12-x64`, `debian.12-arm64` | x64, ARM64 | full, mini |
+| Fedora 40 | `fedora.40-x64` | x64 | full, mini |
+| RHEL 9 / UBI 9 | `rhel.9-x64` | x64 | full, mini |
+| Rocky Linux 9 | `rocky.9-x64` | x64 | full, mini |
+| Alpine 3.20 | `alpine.3.20-x64` | x64 / musl | full, mini |
+
+Linux packages use a distro-specific Linux RID rather than a generic `linux-x64` identity. If the .NET SDK does not recognize a project-defined RID, set `RuntimeIdentifierGraphPath` to [`packaging/runtime/runtime-distro-rid-graph.json`](packaging/runtime/runtime-distro-rid-graph.json) or copy that graph into the consuming project before restore.
+
+`win-x86/full` remains `hosted-evidence-pending`. `win-x86/mini` and Android profiles are excluded from the first preview because they do not have complete real producer and consumer evidence. macOS is outside the declared runtime package matrix. Package-matrix presence is not a production-support claim.
+
+If there is no matching runtime package, build a local native runtime with `scripts/Build-OpenCV.ps1`, stage it with `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>`, and point local samples or tests at it with `OpenCvNativeRuntimeDir`. The corresponding package fallback is `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`. See the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) for the supported local native runtime workflow.
+
+## Full And Mini Profiles
+
+| Capability | Full | Mini |
+| --- | :---: | :---: |
+| Core arrays, matrices, persistence | Yes | Yes |
+| ImgProc, ImgCodecs, VideoIO | Yes | Yes |
+| Geometry and FLANN runtime dependencies | Yes | Yes |
+| DNN and object detection | Yes | No |
+| Calibration and feature matching | Yes | No |
+| Photo, Video, ML, Tracking, Stitching | Yes | No |
+| HighGui | Yes | No |
+| Stable missing-feature response | N/A | `NOT_LINKED` |
+
+## Samples
+
+The [`samples/ConsoleSamples`](samples/ConsoleSamples) project includes broad smoke coverage and a visual showcase:
+
+```powershell
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
+  -p:OpenCvNativeRuntimeDir=E:\path\to\full-runtime `
   -- showcase all .\artifacts\showcase
 ```
 
-## Goals / 目标
+The showcase writes image processing, ORB feature, template matching, and KNN classification results. See [Visual Showcase](docs/articles/visual-showcase.md) and [Scenario Recipes](docs/articles/scenario-recipes.md).
 
-- Wrap OpenCV C++ through a stable C API.
-- Provide C# APIs that stay close to OpenCV C++ naming while following .NET conventions.
-- Support .NET Framework, .NET Core 3.1, and modern .NET versions from .NET 5 to .NET 10.
-- Keep modern .NET fast paths such as `Span<T>`, `MemoryMarshal`, `LibraryImport`, and low-copy data access.
-- Publish managed and runtime NuGet packages with versions aligned to OpenCV.
+## Documentation
 
-## Target Frameworks / 目标框架
+| Resource | Description |
+| --- | --- |
+| [Documentation site](https://guojin-yan.github.io/OpenCV-CSharp-API/) | API reference and articles |
+| [Quick Start](docs/articles/quick-start.md) | Install and write the first program |
+| [Visual Showcase](docs/articles/visual-showcase.md) | Executable image, feature, template, and ML examples |
+| [Scenario Recipes](docs/articles/scenario-recipes.md) | Task-oriented workflows |
+| [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) | Build and stage a factual native runtime |
+| [Linked Runtime Smoke Guide](docs/articles/linked-runtime-smoke-guide.md) | Validate native loading and package execution |
+| [Smoke Profiles Guide](docs/articles/smoke-profiles-guide.md) | Select full or mini verification |
+| [Runtime Licenses](docs/articles/runtime-licenses.md) | Runtime license and third-party notices |
+| [Runtime package README](packaging/runtime/JYPPX.OpenCV.runtime/README.md) | Package layout and provenance |
+| [API/ABI Compatibility Policy](docs/articles/api-abi-compatibility-policy.md) | Compatibility and gap accounting |
+| [Support and Lifecycle Policy](docs/articles/support-lifecycle-policy.md) | Real support, pending, and excluded targets |
+| [NuGet Repository Signing Guide](docs/articles/nuget-repository-signing-guide.md) | Publication trust and verification |
+
+## Build From Source
+
+Requirements:
+
+- .NET SDK 10.0.302 for the repository's exact validation path.
+- CMake and a supported C/C++ toolchain for native builds.
+- OpenCV 5.0.0 source or an installed OpenCV 5.0.0 runtime for linked native builds.
+
+```powershell
+git clone https://github.com/guojin-yan/OpenCV-CSharp-API.git
+cd OpenCV-CSharp-API
+git switch opencv5.x
+
+dotnet restore .\OpenCV-CSharp-API.slnx
+dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
+```
+
+Native and package instructions are intentionally kept in the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md). Synthetic runtime inputs validate package shape only and must never be published.
+
+## Project Structure
 
 ```text
-net46;net461;net462;net47;net471;net472;net48;net481;
-netcoreapp3.1;
-net5.0;net6.0;net7.0;net8.0;net9.0;net10.0
+OpenCV-CSharp-API/
+|-- src/OpenCvSharp/                    Managed API
+|-- src/OpenCvSharp.Native/             Stable native C ABI
+|-- samples/ConsoleSamples/             Smoke and visual examples
+|-- packaging/runtime/                  RID/profile runtime package template
+|-- compatibility/                      API, ABI, and upstream maps
+|-- docs/                               DocFX configuration and articles
+|-- scripts/                            Build, pack, verification, and release guards
+`-- .github/workflows/                  CI, runtime production, pack, and publication
 ```
 
-## Packages / 包
+## Contributing
 
-- Managed API: `JYPPX.OpenCV.CSharp.API`
-- Managed assembly: `JYPPX.OpenCV.CSharp.API.dll`
-- Public namespace: `OpenCvSharp.*`
-- Runtime packages: `JYPPX.OpenCV.runtime.<rid>` for full builds and `JYPPX.OpenCV.runtime.<rid>.mini` for mini builds
-- Pack-time version contract: `OpenCV major.minor.patch.packageRevision[-prerelease]`, for example `5.0.0.0-preview.1`; NuGet normalizes revision zero to consumer version `5.0.0-preview.1`
+Issues and pull requests are welcome. Before changing public API, native ABI, package identity, ownership, or runtime behavior, read [CONTRIBUTING.md](CONTRIBUTING.md) and the [API/ABI Compatibility Policy](docs/articles/api-abi-compatibility-policy.md).
 
-For the authoritative support classification, read [`docs/articles/support-lifecycle-policy.md`](docs/articles/support-lifecycle-policy.md) and `packaging/runtime/runtime-support-contract.json`. The package matrix is not itself a production-support promise. API and ABI baseline review is described in [`docs/articles/api-abi-compatibility-policy.md`](docs/articles/api-abi-compatibility-policy.md); the current normalized candidate is unsigned before upload, `repository-signing-pending`, unapproved, and unpublished. The exact NuGet.org verification model is documented in [`docs/articles/nuget-repository-signing-guide.md`](docs/articles/nuget-repository-signing-guide.md).
+Please include focused tests, preserve version-neutral public identities, and document any unsupported upstream behavior explicitly.
 
-支持分类以 [`docs/articles/support-lifecycle-policy.md`](docs/articles/support-lifecycle-policy.md) 和 `packaging/runtime/runtime-support-contract.json` 为准；package matrix 本身不是 production-support promise。API/ABI 基线规则见 [`docs/articles/api-abi-compatibility-policy.md`](docs/articles/api-abi-compatibility-policy.md)。当前规范化候选在上传前保持未签名，状态为 `repository-signing-pending`、未批准、未发布；精确 NuGet.org 验证模型见 [`docs/articles/nuget-repository-signing-guide.md`](docs/articles/nuget-repository-signing-guide.md)。
+## License
 
-Use the managed and runtime packages together on the same normalized NuGet package version. Consumers should choose the full `JYPPX.OpenCV.runtime.<rid>` package or the smaller `JYPPX.OpenCV.runtime.<rid>.mini` package that matches their exact target RID. The current runtime package matrix covers `win-x64`, `win-x86`, `win-arm64`, distro-specific Linux RID package IDs such as `ubuntu.22.04-x64`, `ubuntu.22.04-arm64`, `ubuntu.24.04-x64`, `ubuntu.24.04-arm64`, `debian.12-x64`, `fedora.40-x64`, `rhel.9-x64`, `rocky.9-x64`, and `alpine.3.20-x64`, plus `android-arm64`, `android-arm`, `android-x64`, and `android-x86`. Linux runtime packages are built and named per distro/runtime family, so `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64` and `JYPPX.OpenCV.runtime.alpine.3.20-x64` are separate package identities. For custom distro-specific Linux RID restore, set `RuntimeIdentifierGraphPath` to `packaging/runtime/runtime-distro-rid-graph.json` or copy that graph into the consuming project before restore.
+The managed API and project code are licensed under the [MIT License](LICENSE). Runtime packages combine project code with OpenCV runtime files and use the package license expression `MIT AND Apache-2.0`; packaged third-party notices remain authoritative for their respective components.
 
-managed 主包和 runtime 包应使用相同的四段 package version 元数据。消费者应选择与精确 target RID 匹配的 full `JYPPX.OpenCV.runtime.<rid>` 包，或更小的 `JYPPX.OpenCV.runtime.<rid>.mini` 包。当前 runtime package matrix 覆盖 `win-x64`、`win-x86`、`win-arm64`，以及 `ubuntu.22.04-x64`、`ubuntu.22.04-arm64`、`ubuntu.24.04-x64`、`ubuntu.24.04-arm64`、`debian.12-x64`、`fedora.40-x64`、`rhel.9-x64`、`rocky.9-x64`、`alpine.3.20-x64` 等 distro-specific Linux RID package IDs，并覆盖 `android-arm64`、`android-arm`、`android-x64` 和 `android-x86`。Linux runtime 包按发行版/runtime family 分别构建和命名，因此 `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64` 与 `JYPPX.OpenCV.runtime.alpine.3.20-x64` 是不同包身份。使用自定义 distro-specific Linux RID restore 时，请把 `RuntimeIdentifierGraphPath` 指向 `packaging/runtime/runtime-distro-rid-graph.json`，或在 restore 前把该 graph 复制到 consumer project。
+## Support
 
-The mini profile builds and packages `core,imgproc,imgcodecs,videoio,geometry,flann`. OpenCV 5 split geometry-backed contour, shape, and transform APIs out of imgproc, and `geometry` links `flann`, so both runtime dependencies are required to keep the common imgproc wrapper useful and loadable; DNN, calib, features, photo, highgui, and other full-only modules remain excluded. The native wrapper still compiles only common infrastructure plus core/imgproc/imgcodecs/videoio sources and exports a reduced compatibility ABI; `geometry` and `flann` do not add wrapper source modules. APIs moved to excluded OpenCV 5 modules, including `GoodFeaturesToTrack` in `features`, keep their managed/native entrypoint shape but report `NOT_LINKED` under mini.
+- [GitHub Issues](https://github.com/guojin-yan/OpenCV-CSharp-API/issues) for bugs and feature requests.
+- [GitHub Discussions](https://github.com/guojin-yan/OpenCV-CSharp-API/discussions) for usage questions.
+- QQ group `945057948` for community discussion.
 
-mini profile 会构建并打包 `core,imgproc,imgcodecs,videoio,geometry,flann`。OpenCV 5 已把 imgproc 中基于 geometry 的轮廓、形状和变换 API 拆到 `geometry`，而 `geometry` 会链接 `flann`，因此为了保留实用且可加载的常用 imgproc wrapper，mini 必须包含这两个运行时依赖；DNN、calib、features、photo、highgui 等 full-only 模块仍被排除。native wrapper 仍只编译公共基础设施与 core/imgproc/imgcodecs/videoio 源，并导出缩减后的兼容 ABI；`geometry` 与 `flann` 不增加 wrapper 源模块。被 OpenCV 5 移到排除模块的 API（例如位于 `features` 的 `GoodFeaturesToTrack`）保持 managed/native 入口形状，但在 mini 下明确返回 `NOT_LINKED`。
+This is a preview release. Test representative workflows before using it in production, industrial, or mission-critical systems.
 
-Runtime package template project: `packaging/runtime/JYPPX.OpenCV.runtime`. The matrix lives in `packaging/runtime/runtime-package-matrix.json`; Actions validate the full/mini package surface with synthetic runtime inputs by default, while real publishing requires native wrapper and OpenCV runtime outputs for the selected RID/profile. If no matching published runtime package is available yet, build and stage a local native runtime with `Build-OpenCV.ps1` and `Stage-Runtime.ps1`, then point local samples/tests at it with `OpenCvNativeRuntimeDir` or package it with `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`.
+<details>
+<summary>Maintainer build and compatibility boundaries</summary>
 
-runtime package 模板项目为 `packaging/runtime/JYPPX.OpenCV.runtime`。矩阵定义在 `packaging/runtime/runtime-package-matrix.json`；Actions 默认使用 synthetic runtime inputs 验证 full/mini package surface，真实发布则必须提供所选 RID/profile 的 native wrapper 与 OpenCV runtime 输出。如果 no matching published runtime package is available yet，请用 `Build-OpenCV.ps1` 和 `Stage-Runtime.ps1` 构建并暂存 local native runtime，然后通过 `OpenCvNativeRuntimeDir` 指向本地样例/测试，或使用 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>` 打包。
+The following compact notes preserve the repository's audited build contracts. Most users should follow the linked guides instead.
 
-`pack.yml` does not build real runtime inputs. When `validate_synthetic_runtime=false`, real input paths must already exist on the selected runner or come from `real_runtime_artifact_run_id`; that run must contain a neutral `runtime-input-<rid>-<profile>` artifact with `native-wrapper/`, `opencv-runtime/`, `opencv-source/`, and optional `opencv-install/` directories. Synthetic runtime inputs are package-surface validation only; real publishable runtime packages require `SyntheticRuntimeInputs=false` provenance and release preflight.
+- The native CMake project is currently source-tree build only and does not currently install or export a reusable CMake package or SDK target. The `JYPPX.OpenCV.Native` CMake target is primary; `OpenCv5Sharp.Native` remains only a compatibility alias.
+- Runtime NuGet packages do not currently distribute native C headers. The primary header tree is `src/OpenCvSharp.Native/include/open_cv_sharp`; `src/OpenCvSharp.Native/include/open_cv_5_sharp` is a compatibility tree.
+- Native CTest and local build output names are neutral-first: `JYPPX.OpenCV.NativeSmoke` and `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`. The `OpenCv5Sharp.Native` loader file remains only a compatibility copy.
+- Native CMake runtime-root/PATH copy is neutral-first. `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT` may put that target output directory first in CTest `PATH`; the copied `opencv*.dll` names remain factual upstream artifacts.
+- Local sample and test builds prefer `OpenCvNativeRuntimeDir`; `OpenCv5SharpNativeRuntimeDir` remains a compatibility alias. To build a missing runtime locally, point local samples/tests at it with `OpenCvNativeRuntimeDir`.
+- `OpenCv5SharpBuildInfo` remains a documented and tested compatibility facade; new public API continues to use version-neutral identities.
+- `runtime-input.yml` produces factual `runtime-input-<rid>-<profile>` artifacts containing `native-wrapper/`, `opencv-runtime/`, and `opencv-source/`. Named examples include `runtime-input-win-x64-full`, `runtime-input-ubuntu.24.04-x64-full`, `runtime-input-ubuntu.24.04-x64-mini`, `runtime-input-ubuntu.24.04-arm64-full`, `runtime-input-ubuntu.22.04-x64-full`, `runtime-input-ubuntu.22.04-x64-mini`, `runtime-input-ubuntu.22.04-arm64-full`, `runtime-input-debian.12-x64-full`, `runtime-input-debian.12-arm64-full`, `runtime-input-fedora.40-x64-full`, `runtime-input-rhel.9-x64-full`, `runtime-input-rocky.9-x64-full`, and `runtime-input-alpine.3.20-x64-full`.
+- Windows runtime evidence distinguishes `CMAKE_ASM_COMPILER=NOTFOUND`, `OPENCV_DNN_MLAS_ENABLED=0`, factual `opencv_<module>500.dll` files, the 18 AMD64 DLL full payload, and Linux SONAME layouts.
+- The pack workflow operates over the active multi-RID runtime package matrix and its full/mini profiles. Synthetic jobs validate package shape, while publishable jobs require factual inputs and consumer restore verification. All normalized nupkg outputs remain neutral workflow artifacts rooted under `artifacts/packages`.
+- `pack.yml` does not build real runtime inputs. Real input paths must already exist on the selected runner or come from `real_runtime_artifact_run_id`. Synthetic runtime inputs are package-surface validation only; real publishable runtime packages require `SyntheticRuntimeInputs=false`, non-synthetic provenance, and release preflight.
+- Before packing, pass the exact release version with `-PackageVersion` and the factual staged runtime with `-OpenCvNativeRuntimeDir`. Public package IDs stay version-neutral; normalized `.nupkg` files are written beneath `artifacts\packages`.
+- Full payload verification uses matrix-required modules plus provenance-recorded staged optional modules. Hosted native verification covers Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full/mini.
+- Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm`. Ubuntu 22.04 ARM64 full runs through a separate host-orchestrated `docker run` verifier. Debian 12 ARM64 full uses its own host-orchestrated `docker run` verifier on native `ubuntu-24.04-arm`.
+- Debian 12 x64 full runs in a separate `debian:12` job container. Fedora 40 full runs in its own separate `fedora:40` job container. Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container. RHEL 9 full runs in a fifth separate official Red Hat UBI 9 job container. Alpine 3.20 full runs through a separate host-orchestrated `docker run alpine:3.20` verifier.
 
-`pack.yml` 当前不会构建真实 runtime 输入；当 `validate_synthetic_runtime=false` 时，真实输入路径必须已经存在于 selected runner，或来自 `real_runtime_artifact_run_id`；该 run 必须包含中性的 `runtime-input-<rid>-<profile>` artifact，并带有 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 与可选 `opencv-install/` 目录。synthetic runtime inputs 只用于 package-surface validation；真实可发布 runtime 包必须带有 `SyntheticRuntimeInputs=false` provenance 并通过 release preflight。
+</details>
 
-`runtime-input.yml` is the first real producer workflow for that handoff. It currently produces proven full and mini `runtime-input-win-x64-*` on `windows-latest`, proven full and mini `runtime-input-win-arm64-*` on `windows-11-vs2026-arm`, `runtime-input-ubuntu.24.04-x64-full` and `runtime-input-ubuntu.24.04-x64-mini` on `ubuntu-24.04`, proven `runtime-input-ubuntu.22.04-x64-full` and `runtime-input-ubuntu.22.04-x64-mini` on `ubuntu-22.04`, `runtime-input-ubuntu.22.04-arm64-full` and `runtime-input-ubuntu.22.04-arm64-mini` inside official Ubuntu 22.04 ARM64 userspace on `ubuntu-24.04-arm`, `runtime-input-debian.12-x64-full` inside `debian:12`, `runtime-input-debian.12-arm64-full` and `runtime-input-debian.12-arm64-mini` inside official Debian 12 ARM64 userspace on `ubuntu-24.04-arm`, proven `runtime-input-fedora.40-x64-full` and `runtime-input-fedora.40-x64-mini` inside `fedora:40`, proven `runtime-input-rhel.9-x64-full` and `runtime-input-rhel.9-x64-mini` inside the official `registry.access.redhat.com/ubi9/ubi:9.8` image, proven `runtime-input-rocky.9-x64-full` and `runtime-input-rocky.9-x64-mini` inside `rockylinux:9`, and proven full and mini `runtime-input-alpine.3.20-x64-*` inside `alpine:3.20` on Ubuntu hosted Docker runners. Each target fetches factual OpenCV source, builds the selected OpenCV profile, links/tests the matching profile of `JYPPX.OpenCV.Native`, records platform/profile/build-list provenance, and uploads the agreed `runtime-input-<rid>-<profile>` layout. The containerized distro producers additionally record hosted-runner, container image, container distro/version, and libc evidence so they are not confused with generic Ubuntu-hosted package-surface runs. Mini producers for the remaining unproven RIDs, including Windows x86, stay disabled until their own linked-component and platform boundaries are verified.
-
-The full-only `runtime-input-win-x64-full` producer runs in an actual 64-bit Windows process on x64 hardware. Its proven boundary records Windows Server 2025, X64/AMD64, Visual Studio 18.7, MSVC 14.51, CMake 4.4, the selected Windows SDK, and build-scoped exclusion of directories exposing foreign generic compilers. OpenCV configuration must keep `CMAKE_ASM_COMPILER=NOTFOUND` and `OPENCV_DNN_MLAS_ENABLED=0`, with the audited built-in SGEMM fallback instead of GNU assembly in the MSVC build. Linked CTest must pass 5/5. The producer and package each contain exactly two byte-identical loaders plus one factual `opencv_<module>500.dll` for each of the 16 full modules, for 18 AMD64 DLLs total; this Windows payload is distinct from Linux SONAME triplets. The same-run non-synthetic package verifier requires complete PE import closure, isolated NuGet restore/build, and native DNN execution from package output without producer directories in `PATH`, `AddDllDirectory`, or runtime-root overrides.
-
-The `win-x64/mini` producer is now proven on the same actual Windows x64/MSVC boundary. It records X64/AMD64, Visual Studio 18.7, MSVC 14.51, CMake 4.4, `CMAKE_ASM_COMPILER=NOTFOUND`, factual `OPENCV_DNN_MLAS_ENABLED=NOT_BUILT` because DNN is excluded, linked CTest 5/5, exactly 8 native wrapper sources and 398 mini ABI functions. The non-synthetic producer and same-run package verifier each contain exactly two byte-identical loaders plus one factual `opencv_<module>500.dll` for each of `core,imgproc,imgcodecs,videoio,geometry,flann`, for 8 AMD64 DLLs total; the Windows mini payload is not the Linux 20-file SONAME-triplet payload. The verifier restores the managed and `.mini` packages in isolation, audits complete six-module PE closure, and executes `core,imgproc,imgcodecs,videoio` from package output without producer directories in `PATH`, `AddDllDirectory`, or runtime-root overrides. Full-only entrypoints remain present but report `NOT_LINKED`; Windows x86 remains synthetic-only.
-The `ubuntu.22.04-x64/mini` producer is independently proven on the matching GitHub-hosted `ubuntu-22.04` x64 runner. It records Ubuntu 22.04, runner image `ubuntu22`, glibc 2.35, x86_64/amd64/X64, GCC 11.4, GNU assembler 2.38, CMake 3.31.6, Ninja 1.13.2, and empty extra OpenCV CMake arguments. It builds `core,imgproc,imgcodecs,videoio,geometry,flann` from source, links exactly 8 wrapper sources with 398 mini ABI functions, passes linked CTest 5/5, and audits eight canonical x86-64 ELFs with `$ORIGIN`, six direct OpenCV dependencies, zero producer paths, zero missing dependencies, and byte-identical loaders. The producer and same-run `.mini` package each contain exactly 20 runtime files, and every packaged native file is SHA256-identical to its producer counterpart. The matching Ubuntu 22.04 consumer restores only same-run managed/runtime artifacts and executes `core,imgproc,imgcodecs,videoio,not_linked` without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The `debian.12-x64/mini` producer is independently proven inside the audited `debian:12` x64 container boundary on the Ubuntu hosted Docker runner. Its provenance records Debian 12, x86_64/amd64/X64, glibc 2.36, GCC 12.2, GNU binutils 2.40, CMake 3.25.1, Ninja 1.11.1, PowerShell 7.6.4, empty extra OpenCV CMake arguments, and `SyntheticRuntimeInputs=false`. It builds `core,imgproc,imgcodecs,videoio,geometry,flann` from source, links exactly 8 wrapper sources with 398 mini ABI functions, passes linked CTest 5/5, and audits eight canonical x86-64 ELFs with `$ORIGIN`, six direct OpenCV dependencies, zero producer paths, zero missing dependencies, and byte-identical loaders. The producer and same-run `.mini` package each contain exactly 20 runtime files; all package native files are SHA256-identical to producer counterparts, and the Debian 12 consumer executes `core,imgproc,imgcodecs,videoio,not_linked` inside the container without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The `fedora.40-x64/mini` producer is independently proven inside the exact `fedora:40` x64 container boundary on the Ubuntu hosted Docker runner. Fedora 40 standard support ended on 2025-05-13, so this is an explicit compatibility boundary: provenance requires Fedora 40, x86_64/X64, glibc 2.39, the resolved image digest, and exact archived release/update repository paths. The Microsoft RHEL 9-path RPM feed supplies compatible PowerShell tooling only and is not Fedora identity evidence. The producer keeps extra OpenCV CMake arguments empty, builds `core,imgproc,imgcodecs,videoio,geometry,flann`, links 8 wrapper sources with 398 mini ABI functions, and passes linked CTest 5/5. Producer and same-run `.mini` package each contain exactly 20 x86-64 runtime files; all 8 canonical ELFs use `$ORIGIN`, the loader keeps six direct OpenCV dependencies, producer paths and missing dependencies are zero, loader copies and all six SONAME triplets are byte-identical, and all 20 package files match producer SHA256 values. The Fedora consumer executes `core,imgproc,imgcodecs,videoio,not_linked` without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The `rocky.9-x64/mini` producer is independently proven inside the exact `rockylinux:9` x64 container boundary on the Ubuntu hosted Docker runner. Provenance records the resolved image digest and ID, Rocky Linux 9.3, x86_64/X64, glibc 2.34, GCC 11.5, and GNU assembler `2.35.2-72.el9`. Unlike Rocky full, mini excludes DNN and keeps extra OpenCV CMake arguments empty; it does not inherit `CV_AVXVNNI_AVAILABLE=0`. The producer builds `core,imgproc,imgcodecs,videoio,geometry,flann`, links 8 wrapper sources with 398 mini ABI functions, and passes linked CTest 5/5. Producer and same-run `.mini` package each contain exactly 20 x86-64 runtime files; all 8 canonical ELFs use `$ORIGIN`, the loader keeps six direct OpenCV dependencies, producer paths and missing dependencies are zero, loader copies and all six SONAME triplets are byte-identical, and all 20 package files match producer SHA256 values. The Rocky consumer executes `core,imgproc,imgcodecs,videoio,not_linked` without `LD_LIBRARY_PATH` or runtime-root overrides. The Microsoft RHEL 9-path RPM feed supplies compatible PowerShell tooling only and is not Rocky identity evidence.
-
-The `rhel.9-x64/mini` producer is independently proven inside the official `registry.access.redhat.com/ubi9/ubi:9.8` x64 userspace on the Ubuntu hosted Docker runner. Provenance records the resolved official image digest and ID, RHEL 9.8, `platform:el9`, x86_64/X64, glibc 2.34, GCC 11.5, GNU assembler `2.35.2-72.el9`, and the UBI BaseOS, AppStream, and CodeReady Builder repositories. Unlike RHEL full, mini excludes DNN, keeps extra OpenCV CMake arguments empty, and does not inherit `CV_AVXVNNI_AVAILABLE=0`. The producer builds `core,imgproc,imgcodecs,videoio,geometry,flann`, links 8 wrapper sources with 398 mini ABI functions, and passes linked CTest 5/5. Producer and same-run `.mini` package each contain exactly 20 x86-64 runtime files; all 8 canonical ELFs use `$ORIGIN`, the loader keeps six direct OpenCV dependencies, producer paths and missing dependencies are zero, loader copies and all six SONAME triplets are byte-identical, and all 20 package files match producer SHA256 values. The official UBI consumer executes `core,imgproc,imgcodecs,videoio,not_linked` without `LD_LIBRARY_PATH` or runtime-root overrides. Microsoft's RHEL 9 feed supplies tooling only; the official UBI image and RHEL identity checks establish the runtime boundary.
-
-The full-only `runtime-input-win-arm64-full` producer runs on actual Windows ARM64 hardware in a native ARM64 PowerShell process. Its proven boundary records Windows 11 Enterprise 10.0.26200, a Cobalt 100 ARM64 CPU, Visual Studio 18.7, MSVC 14.51, Windows SDK 10.0.26100.0, CMake 4.4, and the native `Hostarm64\arm64\cl.exe` toolchain. An exact OpenCV 5.0.0 patch accepts the factual uppercase `ARM64` processor spelling so DNN disables unavailable MLAS assembly and uses the built-in SGEMM fallback without weakening the 16-module full contract. Linked CTest passes 5/5. Producer and non-synthetic package each contain two byte-identical loaders plus 16 `opencv_<module>500.dll` files, exactly 18 ARM64 (`0xAA64`) DLLs with complete package-owned PE import closure. The same-run verifier restores only the managed and `win-arm64/full` packages and executes `core,imgproc,imgcodecs,videoio,dnn` on ARM64 without producer `PATH`, `AddDllDirectory`, or runtime-root overrides. Windows x86 remains synthetic-only.
-
-The `win-arm64/mini` producer is independently proven on that same native Windows ARM64 boundary. It builds exact OpenCV `core,imgproc,imgcodecs,videoio,geometry,flann`, links 8 wrapper sources with 398 mini ABI functions, records no ARM64 ASM compiler, DNN excluded as `NOT_BUILT`, and NEON FP16/BF16/DOTPROD dispatch, then passes linked CTest 5/5. Producer and `.mini` package each contain two byte-identical loaders plus six `opencv_<module>500.dll` files, exactly 8 ARM64 (`0xAA64`) DLLs; all six modules are reachable with 20 OpenCV import edges and zero missing imports. The same-run verifier restores only the managed and mini runtime packages in isolation, executes `core,imgproc,imgcodecs,videoio`, and confirms a representative full-only entrypoint reports `NOT_LINKED`, without producer `PATH`, `AddDllDirectory`, `OpenCvNativeRuntimeDir`, or runtime-root overrides.
-
-The `runtime-input-ubuntu.24.04-arm64-full` and `runtime-input-ubuntu.24.04-arm64-mini` producers run directly on `ubuntu-24.04-arm`. Both reject non-AArch64 execution and record the actual runner image, Ubuntu 24.04, `aarch64`/`arm64`, glibc, CPU, disk, compiler/assembler, and OpenCV NEON configuration. Full remains a separate 16-module, 45-source, 2060-function, 50-runtime-file boundary. Mini independently builds `core,imgproc,imgcodecs,videoio,geometry,flann`, links 8 wrapper sources with 398 ABI functions, and stages exactly two loaders plus six modules with all three SONAME companions, for 20 runtime files. Both pass linked CTest 5/5; their profile-specific ELF audits require respectively 18/8 canonical AArch64 ELFs, `$ORIGIN` on every canonical ELF, 16/6 direct OpenCV dependencies, zero producer paths, zero missing dependencies, and byte-identical loaders. No x86 CPU workaround is applied.
-
-The full-only `runtime-input-ubuntu.22.04-arm64-full` producer keeps GitHub actions on native `ubuntu-24.04-arm` hardware and builds only inside the digest-pinned official `ubuntu:22.04` ARM64 image. Its provenance records both host and container identities, the image ID/digest, Ubuntu 22.04, `aarch64`/`arm64`, glibc 2.35, verified PowerShell 7.4.17 ARM64 archive SHA256, and OpenCV NEON configuration. It also requires linked CTest 5/5 and the same 18-file AArch64 `$ORIGIN`/closure audit, with empty extra CMake arguments and no x86, emulation, or cross-build path.
-
-The real `runtime-input-ubuntu.22.04-arm64-mini` producer is independently proven on that same native host and pinned Ubuntu 22.04 ARM64 userspace. It builds `core,imgproc,imgcodecs,videoio,geometry,flann` from source, links exactly 8 wrapper sources with 398 mini ABI functions, passes linked CTest 5/5, and records target glibc 2.35, native AArch64/NEON toolchain evidence, and `SyntheticRuntimeInputs=false`. Producer and `.mini` package each contain two byte-identical loaders plus six OpenCV modules with unversioned, `.so.500`, and `.so.5.0.0` companions, exactly 20 AArch64 ELF runtime files; the 8 canonical ELFs use `$ORIGIN`, the loader keeps 6 direct OpenCV dependencies, and producer paths/missing dependencies are zero. The same-run verifier executes `core,imgproc,imgcodecs,videoio,not_linked` inside the pinned container without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The full-only `runtime-input-debian.12-arm64-full` producer follows the same native-host boundary on `ubuntu-24.04-arm` and builds only inside the official Debian 12 ARM64 image pinned to the audited multi-architecture digest. Its provenance records both host and container identities, the image ID/digest, Debian 12, `aarch64`/`arm64`, glibc 2.36, the verified PowerShell 7.4.17 ARM64 archive SHA256, empty extra CMake arguments, and factual OpenCV NEON configuration. Linked CTest must pass 5/5, and two loaders plus 16 canonical OpenCV ELFs must pass the AArch64, `$ORIGIN`, zero producer path, 16 direct dependency, and complete closure audit. x64, QEMU, `--platform`, emulation, and cross-builds are excluded from this boundary.
-
-The real `runtime-input-debian.12-arm64-mini` producer is independently proven inside the same digest-pinned official Debian 12 ARM64 userspace on native `ubuntu-24.04-arm`. It builds `core,imgproc,imgcodecs,videoio,geometry,flann` from source, links exactly 8 wrapper sources with 398 mini ABI functions, records Debian 12/glibc 2.36, native `aarch64`/`arm64`, verified PowerShell 7.4.17 ARM64, factual NEON/toolchain evidence, and `SyntheticRuntimeInputs=false`, then passes linked CTest 5/5. Producer and `.mini` package each contain two byte-identical loaders plus six modules with unversioned, `.so.500`, and `.so.5.0.0` companions, exactly 20 AArch64 ELF runtime files; the 8 canonical ELFs use `$ORIGIN`, the loader keeps 6 direct OpenCV dependencies, and producer paths/missing dependencies are zero. The same-run verifier confirms Debian 12 ARM64 in the pinned container and executes `core,imgproc,imgcodecs,videoio,not_linked` without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The Rocky Linux 9 and RHEL UBI 9 full producers independently record `-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0` in their own runtime-input provenance. Both audited GCC 11 / GNU assembler 2.35.2 toolchains reject OpenCV 5.0.0's AVX-VNNI `vpdpbusd` DNN path; the targeted per-producer define leaves AVX2 and the remaining OpenCV CPU-dispatch configuration enabled and is not a global distro-family assumption. Rocky and RHEL mini exclude DNN and therefore record empty extra OpenCV CMake arguments.
-
-The Alpine producer uses the official `alpine:3.20` image, its `v3.20/main` and `v3.20/community` repositories, `samurai` as the Ninja-compatible build tool, and `linux-headers` required by OpenCV core. Alpine 3.20's audited GCC 13.2.1 / GNU assembler 2.42 path compiles `vpdpbusd`, so its provenance keeps `OpenCvExtraCMakeArgs` empty and never inherits the Rocky/RHEL workaround. The audited image is Alpine 3.20.10 with musl 1.2.5. Alpine 3.20 standard support ended on 2026-04-01 and fixes are now on request, so this RID is an exact compatibility boundary rather than a claim that 3.20 is a current standard-support branch.
-
-The `runtime-input-alpine.3.20-x64-mini` boundary is independently proven in that exact digest-pinned Alpine 3.20 x86_64/musl userspace. It builds `core,imgproc,imgcodecs,videoio,geometry,flann`, links exactly 8 wrapper sources with 398 mini ABI functions, keeps `OpenCvExtraCMakeArgs` empty, and passes linked CTest 5/5. Producer and `.mini` package each contain two byte-identical loaders plus three SONAME companions for each module, exactly 20 runtime files; all 8 canonical x86-64 ELFs use `$ORIGIN`, the loader keeps six direct OpenCV dependencies, and producer paths/missing dependencies are zero. The same-run verifier consumes only the managed and `alpine.3.20-x64/mini` packages inside actual Alpine 3.20 and executes `core,imgproc,imgcodecs,videoio,not_linked` without `LD_LIBRARY_PATH` or runtime-root overrides. The existing 50-file full/DNN boundary remains separate.
-
-The `runtime-input-alpine.3.20-x64-full` artifact remains an independent full-profile producer output; it is never trimmed or relabeled to create mini evidence.
-
-`runtime-input.yml` 是该 handoff 的第一条真实 producer workflow。当前它会在 `windows-latest` 上生产已经验证的 full 与 mini `runtime-input-win-x64-*`，在 `windows-11-vs2026-arm` 上生产已经验证的 full 与 mini `runtime-input-win-arm64-*`，在 `ubuntu-24.04` 上生产 full 与 mini `runtime-input-ubuntu.24.04-x64-*` artifact，在 `ubuntu-22.04` 上生产已经验证的 `runtime-input-ubuntu.22.04-x64-full` 与 `runtime-input-ubuntu.22.04-x64-mini`，在原生 `ubuntu-24.04-arm` 宿主机的官方 Ubuntu 22.04 ARM64 容器中生产 `runtime-input-ubuntu.22.04-arm64-full` 与 `runtime-input-ubuntu.22.04-arm64-mini`，在同类原生宿主机的官方 Debian 12 ARM64 容器中生产 `runtime-input-debian.12-arm64-full` 与 `runtime-input-debian.12-arm64-mini`，并通过 Ubuntu hosted runner 中的 `debian:12`、`fedora:40`、官方 `registry.access.redhat.com/ubi9/ubi:9.8`、`rockylinux:9` 与 `alpine:3.20` 容器分别生产对应的 x64 artifact；Alpine 3.20 x64 的 full 与 mini 均已验证。每个目标都会获取事实性 OpenCV 源码、构建所选 OpenCV profile、链接并测试匹配 profile 的 `JYPPX.OpenCV.Native`，记录 platform/profile/build-list provenance，然后上传约定的 `runtime-input-<rid>-<profile>` layout。容器化 distro producer 还会记录 hosted runner、container image、container distro/version 和 libc 证据。Windows x86 与其他尚未证明 RID 的 mini producer 均保持禁用，直到各自 linked-component 与平台边界完成并通过验证。
-
-full-only 的 `runtime-input-win-x64-full` producer 会在 x64 硬件上的真实 64 位 Windows 进程中运行。已证明的边界会记录 Windows Server 2025、X64/AMD64、Visual Studio 18.7、MSVC 14.51、CMake 4.4、所选 Windows SDK，以及仅在 build scope 内排除暴露外来 generic compiler 的目录。OpenCV 配置必须保持 `CMAKE_ASM_COMPILER=NOTFOUND` 和 `OPENCV_DNN_MLAS_ENABLED=0`，在 MSVC 构建中使用已审计的内置 SGEMM fallback，而不是 GNU assembly；linked CTest 必须通过 5/5。producer 与 package 都精确包含两个字节相同的 loader，以及 16 个 full 模块各一个事实性 `opencv_<module>500.dll`，总计 18 个 AMD64 DLL；该 Windows payload 与 Linux SONAME triplet 明确分离。同 run 的 non-synthetic package verifier 要求完整 PE import closure、隔离 NuGet restore/build，并从 package output 执行 native DNN；不得把 producer 目录注入 `PATH`，也不得使用 `AddDllDirectory` 或 runtime-root override。
-
-`win-x64/mini` producer 现在也已在同一个真实 Windows x64/MSVC 边界上完成验证。provenance 记录 X64/AMD64、Visual Studio 18.7、MSVC 14.51、CMake 4.4、`CMAKE_ASM_COMPILER=NOTFOUND`、因排除 DNN 而得到的事实性 `OPENCV_DNN_MLAS_ENABLED=NOT_BUILT`、linked CTest 5/5、精确 8 个 native wrapper 源和 398 个 mini ABI 函数。non-synthetic producer 与同 run package verifier 都精确包含两个字节相同的 loader，以及 `core,imgproc,imgcodecs,videoio,geometry,flann` 六个模块各一个事实性 `opencv_<module>500.dll`，共 8 个 AMD64 DLL；Windows mini payload 不套用 Linux 20-file SONAME triplet 规则。verifier 在隔离环境中 restore managed 与 `.mini` 包，审计完整六模块 PE 闭包，并在没有 producer `PATH`、`AddDllDirectory` 或 runtime-root override 的情况下从 package output 执行 `core,imgproc,imgcodecs,videoio`。full-only 入口仍保留但返回 `NOT_LINKED`；Windows x86 仍只属于 synthetic-only。
-
-full-only 的 `runtime-input-win-arm64-full` producer 会在实际 Windows ARM64 硬件上的原生 ARM64 PowerShell 进程中运行。已证明边界记录 Windows 11 Enterprise 10.0.26200、Cobalt 100 ARM64 CPU、Visual Studio 18.7、MSVC 14.51、Windows SDK 10.0.26100.0、CMake 4.4 和原生 `Hostarm64\arm64\cl.exe` 工具链。精确的 OpenCV 5.0.0 补丁接受事实上的大写 `ARM64` processor spelling，使 DNN 在 ARM64 assembly 不可用时禁用 MLAS 并使用内置 SGEMM fallback，同时不削弱 16 模块 full 契约；linked CTest 通过 5/5。producer 与 non-synthetic package 都精确包含两个字节相同的 loader 和 16 个 `opencv_<module>500.dll`，共 18 个 ARM64 (`0xAA64`) DLL，并具有完整的 package-owned PE import closure。同 run verifier 只 restore managed 与 `win-arm64/full` 包，在不注入 producer `PATH`、`AddDllDirectory` 或 runtime-root override 的情况下于 ARM64 上执行 `core,imgproc,imgcodecs,videoio,dnn`。Windows x86 仍只属于 synthetic-only。
-
-`win-arm64/mini` producer 也已在同一原生 Windows ARM64 边界上独立证明。它构建精确 OpenCV `core,imgproc,imgcodecs,videoio,geometry,flann`，链接 8 个 wrapper 源与 398 个 mini ABI 函数，记录 ARM64 ASM compiler 不可用、因排除 DNN 而得到的 `NOT_BUILT`，以及 NEON FP16/BF16/DOTPROD dispatch，并通过 linked CTest 5/5。producer 与 `.mini` package 都包含两个字节相同的 loader 和六个 `opencv_<module>500.dll`，共 8 个 ARM64 (`0xAA64`) DLL；六模块全部可达、20 条 OpenCV import edge、零缺失 import。同 run verifier 只在隔离环境中 restore managed 与 mini runtime 包，执行 `core,imgproc,imgcodecs,videoio`，并确认代表性的 full-only 入口返回 `NOT_LINKED`，且不使用 producer `PATH`、`AddDllDirectory`、`OpenCvNativeRuntimeDir` 或 runtime-root override。
-`ubuntu.22.04-x64/mini` producer 也已在匹配的 `ubuntu-22.04` GitHub-hosted x64 runner 上独立证明。它记录 Ubuntu 22.04、`ubuntu22` runner image、glibc 2.35、x86_64/amd64/X64、GCC 11.4、GNU assembler 2.38、CMake 3.31.6、Ninja 1.13.2 与空 extra OpenCV CMake arguments，从源代码构建六模块 mini profile，链接精确 8 个 wrapper 源与 398 个 ABI 函数，并通过 linked CTest 5/5。producer 与 `.mini` package 各包含两个字节相同的 loader 和六模块的无版本、`.so.500`、`.so.5.0.0` companion，共 20 个 x86-64 ELF runtime files；8 个 canonical ELF 使用 `$ORIGIN`，loader 保留六条 OpenCV 直接依赖，producer path 与缺失依赖均为零，所有 package native files 与 producer SHA256 逐一相同。同 run verifier 只 restore 选中的 managed/runtime 包，并在不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。
-
-`debian.12-x64/mini` producer 也已在 `debian:12` x64 container-native 边界上独立证明。它记录目标 Debian 12/glibc 2.36、x86_64/amd64/X64、GCC 12.2、GNU binutils 2.40、CMake 3.25.1、Ninja 1.11.1、PowerShell 7.6.4、空 extra OpenCV CMake arguments 与 `SyntheticRuntimeInputs=false`，从源码构建六模块 mini profile，链接精确 8 个 wrapper 源与 398 个 ABI 函数，并通过 linked CTest 5/5。producer 与同 run package 都包含两个字节相同的 loader、六模块各三份 SONAME companion，共 20 个 x86-64 ELF runtime files；8 个 canonical ELF 使用 `$ORIGIN`，loader 保留六条 OpenCV 直接依赖，producer path 与缺失依赖均为零，全部 package native files 与 producer SHA256 逐一相同。同 run Debian 12 consumer 在容器内、不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。
-
-`fedora.40-x64/mini` producer 已在 Ubuntu hosted Docker runner 上的精确 `fedora:40` x64 container boundary 中独立证明。Fedora 40 已于 2025-05-13 结束常规支持，因此这里只建立明确的兼容边界：provenance 要求 Fedora 40、x86_64/X64、glibc 2.39、解析后的 image digest，以及精确的归档 release/update repository path。Microsoft 的 RHEL 9 路径 RPM feed 只提供兼容 PowerShell 工具，不属于 Fedora identity 证据。producer 保持空 extra OpenCV CMake arguments，构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接 8 个 wrapper 源与 398 个 mini ABI 函数，并通过 linked CTest 5/5。producer 与同 run `.mini` package 各包含 20 个 x86-64 runtime files；8 个 canonical ELF 全部使用 `$ORIGIN`，loader 保留六条 OpenCV 直接依赖，producer path 与缺失依赖均为零，两个 loader 和六组 SONAME triplet 字节相同，且全部 20 个 package files 与 producer SHA256 逐一相同。Fedora consumer 在不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。
-
-`rocky.9-x64/mini` producer 已在 Ubuntu hosted Docker runner 上的精确 `rockylinux:9` x64 container boundary 中独立证明。provenance 记录解析后的 image digest 与 ID、Rocky Linux 9.3、x86_64/X64、glibc 2.34、GCC 11.5 和 GNU assembler `2.35.2-72.el9`。与 Rocky full 不同，mini 排除 DNN、保持空 extra OpenCV CMake arguments，并且不继承 `CV_AVXVNNI_AVAILABLE=0`。producer 构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接 8 个 wrapper 源与 398 个 mini ABI 函数，并通过 linked CTest 5/5。producer 与同 run `.mini` package 各包含 20 个 x86-64 runtime files；8 个 canonical ELF 全部使用 `$ORIGIN`，loader 保留六条 OpenCV 直接依赖，producer path 与缺失依赖均为零，两个 loader 和六组 SONAME triplet 字节相同，且全部 20 个 package files 与 producer SHA256 逐一相同。Rocky consumer 在不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。Microsoft 的 RHEL 9 路径 RPM feed 只提供兼容 PowerShell 工具，不属于 Rocky identity 证据。
-
-`rhel.9-x64/mini` producer 已在 Ubuntu hosted Docker runner 上的官方 `registry.access.redhat.com/ubi9/ubi:9.8` x64 userspace 中独立证明。provenance 记录解析后的官方 image digest 与 ID、RHEL 9.8、`platform:el9`、x86_64/X64、glibc 2.34、GCC 11.5、GNU assembler `2.35.2-72.el9`，以及 UBI BaseOS、AppStream 和 CodeReady Builder 仓库。与 RHEL full 不同，mini 排除 DNN、保持空 extra OpenCV CMake arguments，并且不继承 `CV_AVXVNNI_AVAILABLE=0`。producer 构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接 8 个 wrapper 源与 398 个 mini ABI 函数，并通过 linked CTest 5/5。producer 与同 run `.mini` package 各包含 20 个 x86-64 runtime files；8 个 canonical ELF 全部使用 `$ORIGIN`，loader 保留六条 OpenCV 直接依赖，producer path 与缺失依赖均为零，两个 loader 和六组 SONAME triplet 字节相同，且全部 20 个 package files 与 producer SHA256 逐一相同。官方 UBI consumer 在不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。Microsoft RHEL 9 feed 只提供工具；runtime identity 由官方 UBI 镜像与 RHEL 身份检查建立。
-
-`runtime-input-ubuntu.24.04-arm64-full` 与 `runtime-input-ubuntu.24.04-arm64-mini` producer 都直接运行在 `ubuntu-24.04-arm`。二者都会拒绝非 AArch64 执行，并记录真实 runner image、Ubuntu 24.04、`aarch64`/`arm64`、glibc、CPU、磁盘、compiler/assembler 与 OpenCV NEON 配置。full 保持独立的 16 模块、45 wrapper 源、2060 ABI 函数、50 runtime file 边界；mini 独立构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接 8 个 wrapper 源与 398 个 ABI 函数，并精确暂存两个 loader 加六模块各三份 SONAME companion，共 20 个 runtime files。二者的 linked CTest 都通过 5/5；profile-specific ELF 审计分别要求 18/8 个 canonical AArch64 ELF、每个 canonical ELF 都使用 `$ORIGIN`、16/6 条 OpenCV 直接依赖、零 producer path、零缺失依赖和 loader 字节相同。该目标不会使用任何 x86 CPU workaround。
-
-full-only 的 `runtime-input-ubuntu.22.04-arm64-full` producer 把 GitHub actions 保留在原生 `ubuntu-24.04-arm` 硬件上，并只在 digest 固定的官方 `ubuntu:22.04` ARM64 镜像内构建。provenance 同时记录宿主机与容器身份、镜像 ID/digest、Ubuntu 22.04、`aarch64`/`arm64`、glibc 2.35、经 SHA256 核验的 PowerShell 7.4.17 ARM64 archive 与 OpenCV NEON 配置；同时要求 linked CTest 5/5 和相同的 18 文件 AArch64 `$ORIGIN`/依赖闭包审计，extra CMake arguments 为空，不经过 x86、模拟或交叉构建。
-
-真实的 `runtime-input-ubuntu.22.04-arm64-mini` producer 已在同一原生宿主边界和固定的 Ubuntu 22.04 ARM64 userspace 中独立证明。它从源代码构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接精确 8 个 wrapper 源与 398 个 mini ABI 函数，通过 linked CTest 5/5，并记录目标 glibc 2.35、原生 AArch64/NEON toolchain 与 `SyntheticRuntimeInputs=false`。producer 与 `.mini` package 各包含两个字节相同的 loader、六个 OpenCV 模块的无版本/`.so.500`/`.so.5.0.0` companion，共 20 个 AArch64 ELF runtime files；8 个 canonical ELF 使用 `$ORIGIN`，loader 保留 6 条 OpenCV 直接依赖，producer path 与缺失依赖均为零。同 run verifier 在固定容器内、不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。
-
-full-only 的 `runtime-input-debian.12-arm64-full` producer 同样使用原生 `ubuntu-24.04-arm` 宿主边界，并只在固定到已审计 multi-architecture digest 的官方 Debian 12 ARM64 镜像中构建。provenance 同时记录宿主与容器身份、镜像 ID/digest、Debian 12、`aarch64`/`arm64`、glibc 2.36、经 SHA256 核验的 PowerShell 7.4.17 ARM64 archive、空 extra CMake arguments 和事实 OpenCV NEON 配置；linked CTest 必须通过 5/5，两个 loader 加 16 个 canonical OpenCV ELF 必须通过 AArch64、`$ORIGIN`、零 producer path、16 条直接依赖与完整闭包审计。x64、QEMU、`--platform`、模拟、交叉构建和 Debian ARM64 mini 均不属于这条边界。
-
-真实的 `runtime-input-debian.12-arm64-mini` producer 也已在同一原生宿主边界和固定的 Debian 12 ARM64 userspace 中独立证明。它从源代码构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接精确 8 个 wrapper 源与 398 个 mini ABI 函数，记录目标 Debian 12/glibc 2.36、原生 `aarch64`/`arm64`、经 SHA256 核验的 PowerShell 7.4.17 ARM64 archive、NEON/toolchain 与 `SyntheticRuntimeInputs=false`，并通过 linked CTest 5/5。producer 与 `.mini` package 各包含两个字节相同的 loader、六个 OpenCV 模块的无版本/`.so.500`/`.so.5.0.0` companion，共 20 个 AArch64 ELF runtime files；8 个 canonical ELF 使用 `$ORIGIN`，loader 保留 6 条 OpenCV 直接依赖，producer path 与缺失依赖均为零。同 run verifier 在固定 Debian 12 ARM64 容器内执行 `core,imgproc,imgcodecs,videoio,not_linked`，不设置 `LD_LIBRARY_PATH` 或 runtime-root override。
-
-Rocky Linux 9 与 RHEL UBI 9 full producer 会分别在自己的 runtime-input provenance 中记录 `-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0`。两个经过独立审计的 GCC 11 / GNU assembler 2.35.2 工具链都无法汇编 OpenCV 5.0.0 AVX-VNNI DNN 的 `vpdpbusd` 路径；该逐 producer 定向 define 仍保留 AVX2 与其余 OpenCV CPU-dispatch 配置，不是对整个发行版家族的全局假设。Rocky mini 与 RHEL mini 都排除 DNN，因此记录空 extra OpenCV CMake arguments。
-
-Alpine producer 使用官方 `alpine:3.20`、`v3.20/main`/`v3.20/community` 仓库、提供 Ninja 兼容命令的 `samurai`，以及 OpenCV core 所需的 `linux-headers`。独立审计的 Alpine GCC 13.2.1 / GNU assembler 2.42 能正常编译 `vpdpbusd`，因此其 provenance 中 `OpenCvExtraCMakeArgs` 保持为空，绝不复制 Rocky/RHEL workaround。审计镜像为 Alpine 3.20.10 / musl 1.2.5；Alpine 3.20 已于 2026-04-01 结束常规支持，后续修复为 on request，所以该 RID 是精确兼容边界，不表示 3.20 仍处于当前常规支持期。
-
-`runtime-input-alpine.3.20-x64-mini` 已在同一 digest 固定的 Alpine 3.20 x86_64/musl userspace 中独立证明。它构建 `core,imgproc,imgcodecs,videoio,geometry,flann`，链接精确 8 个 wrapper 源与 398 个 mini ABI 函数，保持 `OpenCvExtraCMakeArgs` 为空，并通过 linked CTest 5/5。producer 与 `.mini` package 各包含两个字节相同的 loader，以及六模块各三份 SONAME companion，共 20 个 runtime files；8 个 canonical x86-64 ELF 全部使用 `$ORIGIN`，loader 保留六条 OpenCV 直接依赖，producer path 与缺失依赖均为零。同 run verifier 只在实际 Alpine 3.20 中消费 managed 与 `alpine.3.20-x64/mini` 包，并在不设置 `LD_LIBRARY_PATH` 或 runtime-root override 的情况下执行 `core,imgproc,imgcodecs,videoio,not_linked`。既有 50-file full/DNN 边界保持独立。
-
-Ubuntu 22.04 x64 mini、Debian 12 x64 mini、Debian 12 ARM64 mini、Fedora 40 x64 mini、Rocky Linux 9 mini、RHEL 9 mini 与 Alpine 3.20 x64 mini 均已从 synthetic-only 列表中移出并完成独立真实闭环；Windows x86 仍保持 synthetic-only，直到其平台边界被独立证明。
-
-Naming policy: package IDs, managed assembly, public namespaces, project paths, and primary native loader stay version-neutral. The current packaged OpenCV runtime identity is expressed through package version metadata and factual runtime filenames. `OpenCv5Sharp.Native.dll` and `jyppx_ocv5_*` remain only as explicit compatibility contracts for already-compiled consumers.
-
-命名策略：包 ID、managed 程序集、公开命名空间、项目路径和主 native loader 都保持版本中立。当前打包的 OpenCV runtime 身份通过 package version 元数据和事实性 runtime 文件名表达。`OpenCv5Sharp.Native.dll` 与 `jyppx_ocv5_*` 仅作为供已编译消费者使用的明确兼容契约保留。
-
-The primary native ABI uses `jyppx_ocv_*` exports and `OPENCV_CSHARP_STATUS_*` status constants. A generated compatibility translation unit forwards every public `jyppx_ocv5_*` export to its neutral implementation, and the source-compatible include tree keeps old wrapper-header identifiers available for existing native code.
-
-主 native ABI 使用 `jyppx_ocv_*` 导出和 `OPENCV_CSHARP_STATUS_*` 状态常量。生成的兼容 translation unit 会把每个公开 `jyppx_ocv5_*` 导出转发到中性实现，source-compatible include 树则为既有 native 代码继续提供旧 wrapper-header 标识。
-
-Current native source and examples should include wrapper headers through `open_cv_sharp/...`. The generated `open_cv_5_sharp/...` tree is retained only as a source-compatibility wrapper surface for existing native code.
-
-当前 native 源码和示例应通过 `open_cv_sharp/...` include wrapper headers。生成的 `open_cv_5_sharp/...` 树仅作为既有 native 代码的源码兼容 wrapper surface 保留。
-
-Runtime NuGet packages do not currently distribute native C headers. The current advanced/source-tree native build surface is `src/OpenCvSharp.Native/include/open_cv_sharp`; `src/OpenCvSharp.Native/include/open_cv_5_sharp` remains only as a compatibility wrapper tree for existing native source includes.
-
-runtime NuGet 包当前不分发 native C headers。当前 advanced/source-tree native build surface 是 `src/OpenCvSharp.Native/include/open_cv_sharp`；`src/OpenCvSharp.Native/include/open_cv_5_sharp` 仅作为既有 native source include 的兼容 wrapper tree 保留。
-
-The native CMake project is currently source-tree build only and does not currently install or export a reusable CMake package or SDK target. The `JYPPX.OpenCV.Native` CMake target is primary; `OpenCv5Sharp.Native` remains only a compatibility alias for existing build scripts and loaders.
-
-native CMake 项目当前只作为 source-tree build surface 使用，当前不 install 或 export 可复用的 CMake package / SDK target。`JYPPX.OpenCV.Native` CMake target 是主目标；`OpenCv5Sharp.Native` 仅作为既有构建脚本和 loader 的兼容 alias 保留。
-
-Native CTest and local build output names are neutral-first. CTest names derive from the primary target, including `JYPPX.OpenCV.NativeSmoke`, `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`, `JYPPX.OpenCV.NativeAbiGeneratedCheck`, `JYPPX.OpenCV.NativeLegacyIncludeParity`, and `JYPPX.OpenCV.NativeAbiExportAudit`; the `OpenCv5Sharp.Native` loader file remains only a compatibility copy.
-
-native CTest 和本地 build output 名称保持 neutral-first。CTest 名称从主 target 派生，包括 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit`；`OpenCv5Sharp.Native` loader file 仅作为兼容副本保留。
-
-Native CMake runtime-root/PATH copy is neutral-first. Windows linked builds discover `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT`, copy factual upstream `opencv*.dll` files into `$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>`, and put that target output directory first in CTest `PATH`; the copied `opencv*.dll` names remain factual upstream artifacts, not project identities.
-
-native CMake runtime-root/PATH copy 保持 neutral-first。Windows linked build 会发现 `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT`，把事实性上游 `opencv*.dll` 文件复制到 `$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>`，并把该 target output directory 放在 CTest `PATH` 首位；复制的 `opencv*.dll` 名称仍是事实性上游产物，不是项目身份。
-
-The canonical outer workspace root is version-neutral, for example `OpenCV-CSharp-API-workspace`. Generic repository, plan, diary, source-cache, and artifact-root directories do not encode an OpenCV major. Versioned names remain valid below factual dependency caches such as `artifacts/opencv-install/opencv-5.0.0-windows-x64`.
-
-正式的外层工作区根目录保持版本中立，例如 `OpenCV-CSharp-API-workspace`。通用的仓库、计划、日记、源码缓存和产物根目录均不编码 OpenCV major；事实性依赖缓存内部仍可使用版本目录，例如 `artifacts/opencv-install/opencv-5.0.0-windows-x64`。
-
-The primary native loader is `JYPPX.OpenCV.Native.dll`, selected by `NativeLibraryNames.CurrentNativeLibrary` and exposed by build-info `CurrentNativeLibraryName`. `OpenCv5Sharp.Native.dll`, `NativeLibraryNames.LegacyNativeLibrary`, `NativeLibraryName`, and `OpenCv5SharpBuildInfo` remain only as explicitly preserved loader/build-info compatibility names for existing consumers.
-
-主 native loader 为 `JYPPX.OpenCV.Native.dll`，由 `NativeLibraryNames.CurrentNativeLibrary` 选择，并由 build-info `CurrentNativeLibraryName` 暴露。`OpenCv5Sharp.Native.dll`、`NativeLibraryNames.LegacyNativeLibrary`、`NativeLibraryName` 和 `OpenCv5SharpBuildInfo` 仅作为供既有消费者使用、明确保留的 loader/build-info 兼容名称保留。
-
-## Build / 构建
-
-Fast project invariant checks do not require external OpenCV runtime artifacts:
-
-快速项目不变量检查不需要外部 OpenCV runtime 产物：
-
-```powershell
-pwsh -NoProfile -File .\scripts\Test-ProjectInvariants.ps1
-```
-
-The invariant suite includes public API namespace, consumer-facing naming, package install consumer surface, package metadata, release package artifact surface, path/artifact naming, documentation surface, and workflow/release gate coverage guards, which keep current managed APIs and examples under `OpenCvSharp.*`, keep package install commands, package IDs, assembly names, package artifact labels, generic project-owned paths, DocFX publish surfaces, and CI release gates version-neutral, reject fixed-major package recommendations, and allow `OpenCv5SharpBuildInfo` only as the documented/tested existing-caller compatibility facade.
-
-该不变量套件包含公开 API 命名空间、面向消费者命名、package install consumer 表面、包元数据、release package artifact 表面、路径/产物命名、文档发布面与 workflow/release gate 覆盖守卫，确保当前 managed API 和示例保持在 `OpenCvSharp.*` 下，确保 package install 命令、package ID、程序集名称、包产物标签、通用项目路径、DocFX 发布面和 CI release gate 保持版本中立，拒绝固定大版本包推荐，并且仅允许 `OpenCv5SharpBuildInfo` 作为已文档化、已测试的既有调用方兼容 facade。
-
-```powershell
-dotnet restore .\OpenCV-CSharp-API.slnx
-dotnet build .\OpenCV-CSharp-API.slnx -c Release
-```
-
-For native CMake configuration, prefer version-neutral cache variables such as `OPENCV_CSHARP_OPENCV_DIR`, `OPENCV_CSHARP_OPENCV_BUILD_LIST`, and `OPENCV_CSHARP_BUILD_WITH_OPENCV`. Older `OPENCV5SHARP_*` CMake variables remain accepted only as existing-build-script compatibility aliases, not as public CMake package variables.
-
-native CMake 配置优先使用版本中立的 cache 变量，例如 `OPENCV_CSHARP_OPENCV_DIR`、`OPENCV_CSHARP_OPENCV_BUILD_LIST` 和 `OPENCV_CSHARP_BUILD_WITH_OPENCV`。旧的 `OPENCV5SHARP_*` CMake 变量仍仅作为既有构建脚本的兼容别名接受，不作为 public CMake package variables。
-
-## Smoke Switches / Smoke 开关
-
-Default tests and samples avoid downloads, cameras, GUI windows, real models, and known unstable tiny-data paths. Use `OPENCV_CSHARP_NATIVE_SMOKE=1` for ordinary linked native smoke. Use `OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE=1` only for experimental optional contrib paths that may expose local runtime crashes, currently including BioInspired Retina/tone/transient algorithm smoke. Older `OPENCV5SHARP_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
-
-默认测试和样例避免下载、摄像头、GUI 窗口、真实模型以及已知不稳定的 tiny-data 路径。普通 linked native smoke 使用 `OPENCV_CSHARP_NATIVE_SMOKE=1`。`OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE=1` 只用于可能暴露本地 runtime crash 的实验性 optional contrib 路径，目前包括 BioInspired Retina/tone/transient 算法 smoke。旧的 `OPENCV5SHARP_*` 名称仍仅作为既有 smoke workflow 的兼容别名保留。
-
-## Pack / 打包
-
-```powershell
-pwsh -NoProfile -File .\scripts\Pack-Managed.ps1 -OpenCvVersion 5.0.0 -PackageRevision 0
-pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0
-pwsh -NoProfile -File .\scripts\Pack-Runtime.ps1 -Rid ubuntu.22.04-x64 -RuntimeProfile mini -OpenCvVersion 5.0.0 -PackageRevision 0
-```
-
-`Pack-Managed.ps1` accepts `-ProjectPath` as either a repository-relative or absolute project path. Its default is the version-neutral managed project `src\OpenCvSharp\OpenCvSharp.csproj`, and another managed project layout can be selected without changing the script. Its neutral `-OutputDir` parameter also accepts a repository-relative or absolute package output directory; the default remains `artifacts\packages`.
-
-For isolated validation or local package-source dry-runs, `Pack-Managed.ps1` also accepts `-TargetFrameworks`, `-BuildOutputRoot`, and `-RestorePackagesPath`. These parameters only scope MSBuild target-framework selection, `bin`/`obj`, and NuGet restore outputs; they do not change the managed package ID, assembly name, or OpenCV runtime identity carried by package version metadata.
-
-`Pack-Managed.ps1` 的 `-ProjectPath` 可以使用仓库相对路径或绝对项目路径。默认值是版本中立的 managed 项目 `src\OpenCvSharp\OpenCvSharp.csproj`，同时可以在不修改脚本的情况下选择其他 managed 项目布局。中性的 `-OutputDir` 参数也可以使用仓库相对或绝对包输出目录，默认值仍为 `artifacts\packages`。
-
-用于隔离验证或 local package-source dry-run 时，`Pack-Managed.ps1` 也接受 `-TargetFrameworks`、`-BuildOutputRoot` 和 `-RestorePackagesPath`。这些参数只限定 MSBuild target-framework 选择、`bin`/`obj` 和 NuGet restore 输出；不会改变 managed package ID、assembly name，也不会改变由 package version metadata 承载的 OpenCV runtime 身份。
-
-`Pack-Runtime.ps1 -Rid <rid>` derives full runtime package IDs as `JYPPX.OpenCV.runtime.<rid>` and `-RuntimeProfile mini` derives mini package IDs as `JYPPX.OpenCV.runtime.<rid>.mini`. It passes `RuntimePackageRid` and `RuntimePackageProfile` into the generic runtime package project.
-
-`Pack-Runtime.ps1` packs runtime files staged in the generic `packaging/runtime/JYPPX.OpenCV.runtime` project. Its neutral `-RuntimeProject` parameter accepts a repository-relative or absolute runtime project path; the default remains `packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj`. Its neutral `-OutputDir` parameter accepts a repository-relative or absolute package output directory; the default remains `artifacts\packages`. To stage fresh runtime files and then pack in one command, pass `-StageRuntime` with the native wrapper output directory:
-
-`Stage-Runtime.ps1` also exposes a neutral `-OutputRoot` parameter for the standalone runtime staging tree. It accepts a repository-relative or absolute staging root, while the compatibility default remains `artifacts\runtime`. When `Pack-Runtime.ps1 -StageRuntime` is used, its neutral `-StageOutputRoot` parameter forwards to that staging root without changing the package `-OutputDir`.
-
-`Stage-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package directory used for generated `runtimes/<rid>/native` and `licenses/` mirrors. `Pack-Runtime.ps1 -RuntimeProject` is a repository-relative or absolute runtime package `.csproj` file path used by `dotnet pack`.
-
-The pack workflow exposes `rid` and `runtime_profile` inputs. `all` runs the configured multi-RID matrix for full and mini profiles; individual RID/profile selections are supported for targeted packaging. The workflow uploads neutral `nupkg-*` artifacts from `artifacts/packages`, self-validates the full matrix artifacts with `Test-GitHubPackArtifactMatrixSurface.ps1`, then verifies consumer restore/build behavior with `Test-GitHubPackConsumerRestoreSurface.ps1` against the same downloaded artifacts. Non-synthetic hosted native execution uses explicit platform-specific allowlists. `win-x64/full` runs in its separate actual Windows x64 verifier, while hosted Linux execution covers Ubuntu 24.04 x64 full/mini and Ubuntu 22.04 x64 full/mini on matching Ubuntu runners. Debian 12 x64 full runs in a separate `debian:12` job container, which verifies `/etc/os-release`, Debian version 12, and glibc before restoring and executing the exact same-run `debian.12-x64/full` package. Fedora 40 full runs in its own separate `fedora:40` job container with the equivalent Fedora/version/glibc evidence and exact `fedora.40-x64/full` package boundary. Rocky Linux 9 full runs in a fourth separate `rockylinux:9` job container, verifies Rocky Linux 9 distro/version/glibc evidence, and consumes only the exact same-run `rocky.9-x64/full` package. RHEL 9 full runs in a fifth separate official Red Hat UBI 9 job container using `registry.access.redhat.com/ubi9/ubi:9.8`; it requires factual `ID=rhel`, `platform:el9`, version, glibc, and UBI repository evidence before consuming only `rhel.9-x64/full`. Alpine 3.20 full runs through a separate host-orchestrated `docker run alpine:3.20` verifier: checkout and artifact-download actions remain on the Ubuntu host because their Node runtime is not a musl execution boundary, while package guards, isolated .NET 8 restore/build, loader execution, and deterministic DNN smoke run inside Alpine after explicit 3.20/x86_64/musl evidence. Microsoft's RHEL 9-path RPM feed is a compatible PowerShell source for Fedora and Rocky and the matching tooling feed for RHEL UBI; it is never runtime identity evidence. The independently audited Rocky and RHEL `-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0` workarounds remain producer provenance and are not consumer-side environment overrides. These runs download only their same-run managed/runtime artifacts, use an isolated NuGet source/cache, and execute native calls through the packaged loader without platform search-path overrides: Windows rejects producer directories in `PATH`, `AddDllDirectory`, and runtime-root overrides, while Linux runs without `LD_LIBRARY_PATH`. Windows full keeps its exact two-loader plus 16-module, 18-DLL payload; the proven Linux mini keeps its exact 20-file six-module SONAME payload and runs core/imgproc/imgcodecs/videoio; full derives its exact payload from matrix-required modules plus provenance-recorded staged optional modules and adds a deterministic DNN smoke. Linux loaders use `$ORIGIN` so packaged OpenCV SONAME dependencies resolve beside `JYPPX.OpenCV.Native` without retaining a producer path; both linked profiles retain their declared OpenCV closure as direct dependencies so edges such as `geometry -> flann` do not rely on transitive RUNPATH lookup. Synthetic runtime inputs are only for non-publishing package-surface validation, and publishing is rejected when synthetic inputs are enabled.
-
-The Debian 12 x64 container verifier is profile-aware: full keeps its 50-file/18-canonical-ELF/DNN contract, while mini requires the six-module 20-file/8-canonical-ELF contract and the `not_linked` compatibility smoke. Both profiles consume only their exact same-run non-synthetic package inside Debian 12 without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The Fedora 40 container verifier is also profile-aware. Fedora 40 full runs in its own separate `fedora:40` job container with the 50-file/18-canonical-ELF/DNN contract; mini uses the same exact Fedora 40 identity, glibc 2.39, archive repository, and same-run non-synthetic boundary with the six-module 20-file/8-canonical-ELF contract and `not_linked` smoke. Neither profile uses `LD_LIBRARY_PATH` or runtime-root overrides.
-
-The RHEL UBI 9 container verifier is profile-aware. RHEL full keeps the 50-file/18-canonical-ELF/DNN contract and its audited AVX-VNNI workaround; mini requires the six-module 20-file/8-canonical-ELF contract, empty extra OpenCV CMake arguments, and `not_linked` smoke. Both profiles require official UBI 9.8, `ID=rhel`, `platform:el9`, glibc 2.34, UBI repository evidence, and a non-synthetic same-run package without `LD_LIBRARY_PATH` or runtime-root overrides.
-
-Windows ARM64 full and mini run in the same separate `verify-targeted-real-windows-arm64` job on `windows-11-vs2026-arm`, but exact profile selection keeps their evidence distinct. The verifier requires a native ARM64 OS/process, downloads only same-run managed and selected `win-arm64` runtime artifacts, audits the exact 18-DLL full or 8-DLL mini PE closure, and executes the matching full DNN or mini `core,imgproc,imgcodecs,videoio,not_linked` smoke without producer search-path overrides.
-
-Ubuntu 24.04 ARM64 full runs natively on `ubuntu-24.04-arm` in a separate exact verifier. It requires Ubuntu 24.04, `aarch64`, Debian architecture `arm64`, and glibc evidence, downloads only the same-run `nupkg-managed` and selected `nupkg-ubuntu.24.04-arm64-<profile>` artifact, and requires `SyntheticRuntimeInputs=false`. Exact profile selection keeps full and mini evidence distinct: full audits 18 canonical ELFs and executes deterministic DNN, while mini audits 8 canonical ELFs/20 runtime files and executes `core,imgproc,imgcodecs,videoio,not_linked`. Both run without `LD_LIBRARY_PATH`, producer paths, runtime-root overrides, x64, cross-compilation, QEMU, or containers.
-
-Ubuntu 22.04 ARM64 full runs through a separate host-orchestrated `docker run` verifier on `ubuntu-24.04-arm`; mini runs through the same exact verifier with an independent profile contract. Checkout and same-run artifact downloads remain on the native AArch64 host; exact profile-specific artifact/provenance checks, isolated .NET 8 ARM64 restore/build, and native calls run inside the digest-pinned official Ubuntu 22.04 ARM64 userspace. Full executes deterministic DNN over 18 canonical ELFs; mini audits 8 canonical ELFs/20 runtime files and executes `core,imgproc,imgcodecs,videoio,not_linked`. Both run without `LD_LIBRARY_PATH`, QEMU, `--platform`, cross-compilation, or producer/runtime-root overrides.
-
-Debian 12 ARM64 full uses its own host-orchestrated `docker run` verifier on native `ubuntu-24.04-arm`; mini uses the same exact verifier with an independent profile contract. Checkout and exact same-run artifact downloads remain on the AArch64 host; the digest-pinned official Debian 12 ARM64 container verifies Debian 12, `aarch64`/`arm64`, glibc, the PowerShell archive hash, and native .NET 8 before running exact profile-specific artifact/provenance guards, isolated restore/build, and packaged loader execution without `LD_LIBRARY_PATH`. Full executes deterministic DNN; mini executes `core,imgproc,imgcodecs,videoio,not_linked`. x64, QEMU, `--platform`, emulation, cross-builds, and cross-profile evidence are excluded.
-
-For real non-synthetic workflow runs, `native_runtime_dir`, `opencv_runtime_dir`, and `opencv_source_dir` are existing directories on the selected runner unless `real_runtime_artifact_run_id` is provided. With artifact handoff, `pack.yml` downloads `runtime-input-<rid>-<profile>` into `artifacts/real-runtime-inputs/<rid>-<profile>` and resolves `native-wrapper/`, `opencv-runtime/`, `opencv-source/`, and optional `opencv-install/` before packaging. The workflow validates resolved paths before packaging but does not build them.
-
-To try a real producer/consumer chain, dispatch `runtime-input.yml` with a target/profile explicitly enabled in its allowlist, then dispatch `pack.yml` with the same RID/profile, `validate_synthetic_runtime=false`, `publish_github_packages=false`, and `real_runtime_artifact_run_id=<runtime-input-run-id>`. The current real mini boundaries include `win-x64`, `win-arm64`, `ubuntu.22.04-x64`, `ubuntu.22.04-arm64`, `ubuntu.24.04-x64`, `ubuntu.24.04-arm64`, `debian.12-x64`, `debian.12-arm64`, `fedora.40-x64`, `rocky.9-x64`, `rhel.9-x64`, and `alpine.3.20-x64`; full boundaries remain separately profile-specific.
-
-```powershell
-pwsh -NoProfile -File ./scripts/Pack-Runtime.ps1 -Rid win-x64 -OpenCvVersion 5.0.0 -PackageRevision 0 -StageRuntime -OpenCvNativeRuntimeDir ./build/native-opencv-core/Release
-```
-
-The `./build/native-opencv-core/Release` path in the example is the current local native wrapper build-output location, not a package identity or a new generic naming pattern.
-
-Use the version-neutral `-OpenCvNativeRuntimeDir` parameter for new runtime staging commands. The older `-NativeRuntimeDir` parameter remains accepted only as an existing-packaging-script compatibility alias.
-
-The pack scripts derive the stable four-part package version from `-OpenCvVersion` plus `-PackageRevision`. An explicit `-PackageVersion 5.0.0.0-preview.1` adds the lowercase prerelease channel while preserving the OpenCV version and package revision contract. Package IDs stay version-neutral, and managed/runtime packages must use the same normalized NuGet version.
-
-打包脚本会从 `-OpenCvVersion` 和 `-PackageRevision` 推导四段 package version；包 ID 保持版本中立，因此 OpenCV runtime 身份由包版本和构建元数据承载。`-PackageVersion` 仍仅作为版本元数据的显式兼容覆盖口接受，不作为包身份或命名面。
-
-示例中的 `./build/native-opencv-core/Release` 路径只是当前本地 native wrapper build-output 位置，不是 package 身份或新的通用命名模式。
-
-`Pack-Runtime.ps1 -Rid <rid>` 会把 full runtime package ID 推导为 `JYPPX.OpenCV.runtime.<rid>`；`-RuntimeProfile mini` 会推导 mini package ID `JYPPX.OpenCV.runtime.<rid>.mini`。脚本会把 `RuntimePackageRid` 和 `RuntimePackageProfile` 传给通用 runtime package project。
-
-`Pack-Runtime.ps1` 会打包暂存在通用 `packaging/runtime/JYPPX.OpenCV.runtime` 项目下的 runtime 文件。中性的 `-RuntimeProject` 参数可以使用仓库相对或绝对 runtime 项目路径，默认值仍为 `packaging/runtime/JYPPX.OpenCV.runtime/JYPPX.OpenCV.runtime.csproj`。中性的 `-OutputDir` 参数可以使用仓库相对或绝对包输出目录，默认值仍为 `artifacts\packages`。若要先暂存最新 runtime 文件再打包，可传入 `-StageRuntime` 和 native wrapper 输出目录。优先使用版本中立的 `-OpenCvNativeRuntimeDir`；旧的 `-NativeRuntimeDir` 仍仅作为既有 packaging script 的兼容别名接受。
-
-`Stage-Runtime.ps1` 还为独立 runtime staging 目录提供了中性的 `-OutputRoot` 参数。该参数可以使用仓库相对或绝对 staging 根目录，兼容默认值仍为 `artifacts\runtime`。使用 `Pack-Runtime.ps1 -StageRuntime` 时，中性的 `-StageOutputRoot` 参数会转发到该 staging root，且不会改变 package `-OutputDir`。
-
-`Stage-Runtime.ps1 -RuntimeProject` 是仓库相对或绝对 runtime package 目录，用于生成 `runtimes/<rid>/native` 和 `licenses/` 镜像；`Pack-Runtime.ps1 -RuntimeProject` 是供 `dotnet pack` 使用的仓库相对或绝对 runtime package `.csproj` 文件路径。
-
-pack workflow 暴露 `rid` 与 `runtime_profile` 输入。`all` 会运行配置好的 full/mini 多 RID 矩阵；也可以选择单个 RID/profile 做定向打包。workflow 从 `artifacts/packages` 上传中性的 `nupkg-*` 产物，先用 `Test-GitHubPackArtifactMatrixSurface.ps1` 自检 full matrix artifacts，再用 `Test-GitHubPackConsumerRestoreSurface.ps1` 针对同一批下载产物验证 consumer restore/build。真实 non-synthetic hosted verifier 使用按平台分离的 allowlist：`win-x64/full` 在单独的真实 Windows x64 verifier 中执行，hosted Linux 则覆盖 Ubuntu 24.04 x64 full/mini 与 Ubuntu 22.04 x64 full/mini，并使用匹配的 Ubuntu runner。Debian 12 x64 full、Fedora 40 full、Rocky Linux 9 full 分别使用独立的 `debian:12`、`fedora:40` 与 `rockylinux:9` job container；RHEL 9 full 使用第五个独立的官方 Red Hat UBI 9 `registry.access.redhat.com/ubi9/ubi:9.8` job container。四个 glibc 容器 job 都先核验事实发行版、版本与 glibc，RHEL 还要求 `ID=rhel`、`platform:el9` 和 UBI 仓库证据。Alpine 3.20 full 使用另一条由 Ubuntu host 编排的显式 `docker run alpine:3.20` verifier：checkout/artifact download actions 留在 host，artifact guard、隔离 .NET 8 restore/build、loader 与确定性 DNN 执行全部位于核验过 3.20/x86_64/musl 的 Alpine 容器内。所有 verifier 只消费同 run 的精确 managed/runtime 包并使用隔离 NuGet source/cache；Windows 不注入 producer `PATH`、`AddDllDirectory` 或 runtime-root override，Linux 则不设置 `LD_LIBRARY_PATH`。Windows full 保持两个 loader 加 16 模块的精确 18-DLL payload；已证明的 Linux mini 保持六模块 SONAME triplet 的精确 20-file payload。Microsoft 的 RHEL 9 路径 RPM feed 对 Fedora/Rocky 只是兼容 PowerShell 来源，对 RHEL UBI 是匹配的工具来源，但都不是 runtime identity 证据。Rocky 与 RHEL 独立审计得到的 `-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0` workaround 只保留在各自 producer provenance 中，不是 consumer 环境覆盖；Alpine 不使用该 workaround。默认仅使用 synthetic runtime inputs 验证 package surface，并在启用 synthetic inputs 时拒绝发布。
-
-Debian 12 x64 container verifier 已支持精确的 full/mini profile：full 保持 50-file/18-canonical-ELF/DNN 契约，mini 则要求六模块 20-file/8-canonical-ELF 契约和 `not_linked` compatibility smoke。两个 profile 都只在 Debian 12 内消费精确 same-run non-synthetic package，不设置 `LD_LIBRARY_PATH` 或 runtime-root override。
-
-Fedora 40 container verifier 也已支持精确的 full/mini profile。Fedora 40 full 在独立的 `fedora:40` job container 中保持 50-file/18-canonical-ELF/DNN 契约；mini 使用相同的精确 Fedora 40 identity、glibc 2.39、归档 repository 与 same-run non-synthetic 边界，同时要求六模块 20-file/8-canonical-ELF 契约和 `not_linked` smoke。两个 profile 都不设置 `LD_LIBRARY_PATH` 或 runtime-root override。
-
-RHEL UBI 9 container verifier 也已支持精确的 full/mini profile。RHEL full 保持 50-file/18-canonical-ELF/DNN 契约及其独立审计的 AVX-VNNI workaround；mini 要求六模块 20-file/8-canonical-ELF 契约、空 extra OpenCV CMake arguments 和 `not_linked` smoke。两个 profile 都要求官方 UBI 9.8、`ID=rhel`、`platform:el9`、glibc 2.34、UBI 仓库证据与 same-run non-synthetic package，并且不设置 `LD_LIBRARY_PATH` 或 runtime-root override。
-
-Windows ARM64 full 与 mini 使用同一个位于 `windows-11-vs2026-arm` 的独立 `verify-targeted-real-windows-arm64` job，但精确 profile 选择会保持两套证据彼此分离。verifier 要求原生 ARM64 OS/进程，只下载同 run 的 managed 与选中 `win-arm64` runtime artifacts，审计精确的 full 18-DLL 或 mini 8-DLL PE closure，并在没有 producer search-path override 的情况下执行匹配的 full DNN 或 mini `core,imgproc,imgcodecs,videoio,not_linked` smoke。
-
-Ubuntu 24.04 ARM64 full 使用独立的 `ubuntu-24.04-arm` 原生 verifier。它要求 Ubuntu 24.04、`aarch64`、Debian `arm64` 与 glibc 事实证据，只下载同 run 的 `nupkg-managed` 和选中的 `nupkg-ubuntu.24.04-arm64-<profile>`，并要求 `SyntheticRuntimeInputs=false`。精确 profile 选择会保持 full 与 mini 证据彼此分离：full 审计 18 个 canonical ELF 并执行确定性 DNN；mini 审计 8 个 canonical ELF/20 个 runtime files，并执行 `core,imgproc,imgcodecs,videoio,not_linked`。二者都不设置 `LD_LIBRARY_PATH`，也不使用 producer path、runtime-root override、x64、交叉编译、QEMU 或容器。
-
-Ubuntu 22.04 ARM64 full 与 mini 使用由 `ubuntu-24.04-arm` 宿主机编排的独立 `docker run` verifier。checkout 与同 run artifact 下载保留在原生 AArch64 宿主机；精确 profile-specific artifact/provenance guard、隔离的 .NET 8 ARM64 restore/build、包内 loader 与 native calls 则在 digest 固定的官方 Ubuntu 22.04 ARM64 userspace 内执行。full 执行确定性 DNN，mini 执行 `core,imgproc,imgcodecs,videoio,not_linked`；二者都不设置 `LD_LIBRARY_PATH`，也不使用 QEMU、`--platform`、交叉编译或 runtime-root override。
-
-Debian 12 ARM64 full 使用由原生 `ubuntu-24.04-arm` 宿主机编排的独立 `docker run` verifier；mini 使用同一 verifier 的独立 profile 契约。checkout 与精确同 run artifact 下载保留在 AArch64 宿主机；digest 固定的官方 Debian 12 ARM64 容器先核验 Debian 12、`aarch64`/`arm64`、glibc、PowerShell archive hash 与原生 .NET 8，再运行精确 profile-specific artifact/provenance guard、隔离 restore/build 与包内 loader，且不设置 `LD_LIBRARY_PATH`。full 执行确定性 DNN，mini 执行 `core,imgproc,imgcodecs,videoio,not_linked`；x64、QEMU、`--platform`、模拟、交叉构建和跨 profile 证据均被排除。
-
-对于真实 non-synthetic workflow run，除非提供 `real_runtime_artifact_run_id`，否则 `native_runtime_dir`、`opencv_runtime_dir` 和 `opencv_source_dir` 必须是 selected runner 上已存在的目录。使用 artifact handoff 时，`pack.yml` 会把 `runtime-input-<rid>-<profile>` 下载到 `artifacts/real-runtime-inputs/<rid>-<profile>`，并解析 `native-wrapper/`、`opencv-runtime/`、`opencv-source/` 和可选 `opencv-install/` 后再打包。workflow 会在打包前验证解析后的路径，但不会构建这些路径。
-
-要试跑真实 producer/consumer 链路，请先用 producer allowlist 中明确启用的 RID/profile dispatch `runtime-input.yml`；当前已证明的 mini 边界包括 `win-x64`、`win-arm64`、Ubuntu 22.04/24.04 x64 与 ARM64、Debian 12 x64/ARM64、`fedora.40-x64`、`rocky.9-x64`、`rhel.9-x64` 和 `alpine.3.20-x64`。随后 dispatch `pack.yml`，使用相同 RID/profile，并设置 `validate_synthetic_runtime=false`、`publish_github_packages=false` 和 `real_runtime_artifact_run_id=<runtime-input-run-id>`。
-
-Absolute `-ProjectPath` and `-RuntimeProject` values are accepted as-is and can point outside the repository when the caller chooses that layout.
-
-绝对 `-ProjectPath` 与 `-RuntimeProject` 会按原样接受；如果调用方选择仓库外项目路径，也可以指向仓库外。
-
-An absolute `-OutputDir` is accepted as-is and can write package artifacts outside the repository when the caller chooses that path.
-
-绝对 `-OutputDir` 会按原样接受；如果调用方选择仓库外路径，包产物也会写到仓库外。
-
-NuGet normalizes `5.0.0.0` to `5.0.0` and `5.0.0.0-preview.1` to `5.0.0-preview.1`; non-zero package revisions such as `5.0.0.1` remain visible.
-
-NuGet 会把 `5.0.0.0` 规范化为 `5.0.0`，并把 `5.0.0.0-preview.1` 规范化为 `5.0.0-preview.1`；非零打包修订号（例如 `5.0.0.1`）会保留。
-
-The pack scripts verify the normalized `.nupkg` artifact path after `dotnet pack` completes.
-
-打包脚本会在 `dotnet pack` 完成后验证规范化后的 `.nupkg` 产物路径。
-
-Before packing, the scripts remove the expected normalized package file if it already exists, so a successful run proves the artifact was produced by the current invocation rather than left over from an earlier build.
-
-打包前，脚本会先删除预期的规范化包文件（如果已存在），因此成功运行可以证明该产物来自本次调用，而不是早先构建遗留。
-
-The optional `-NoBuild` and `-NoRestore` switches only forward `--no-build` and `--no-restore` to `dotnet pack`; stale artifact removal and normalized `.nupkg` verification still run.
-
-可选的 `-NoBuild` 与 `-NoRestore` 开关只会把 `--no-build` 和 `--no-restore` 转发给 `dotnet pack`；旧产物删除和规范化 `.nupkg` 验证仍会执行。
-
-Quick install and minimal usage are covered by the [Quick Start](docs/articles/quick-start.md). Release, runtime staging, smoke, and license details are covered by the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](docs/articles/linked-runtime-smoke-guide.md), [Smoke Profiles Guide](docs/articles/smoke-profiles-guide.md), [Runtime Licenses](docs/articles/runtime-licenses.md), and the [runtime package README](packaging/runtime/JYPPX.OpenCV.runtime/README.md).
-
-快速安装和最小用法见 [Quick Start](docs/articles/quick-start.md)。发布、runtime 暂存、smoke 和 license 细节见 [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](docs/articles/linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](docs/articles/smoke-profiles-guide.md)、[Runtime Licenses](docs/articles/runtime-licenses.md) 以及 [runtime package README](packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
-
-## Current Scope / 当前范围
-
-- `Core`: `Mat` lifetime, ROI/view operations, typed data access, array arithmetic, bitwise operations, statistics, normalization, matrix solve/invert, SVD, RNG, generalized matrix multiplication, vector transforms, spectral transforms, channel split/merge, and layout helpers.
-- `ImgCodecs`: encode/decode and file read/write APIs with parameter flags.
-- `ImgProc`: color and two-plane conversion, Bayer demosaicing, colormaps, weighted blending, resize, threshold and masked threshold, filtering and stack blur, spatial gradients, morphology, drawing and marker overlays, geometric transforms, contours, connected components, moments, histograms, Hough features, generalized Hough objects, CLAHE, and line segment detection.
-- `Features2D`: feature package with `KeyPoint`, `DMatch`, `Feature2D`, `DescriptorMatcher`, `ORB`, `SIFT`, `FastFeatureDetector`, `GFTTDetector`, `MSER`, `MserRegion`, `SimpleBlobDetector`, `SimpleBlobDetectorParams`, contrib-backed `BRISK`, `KAZE`, `AKAZE`, `AffineFeature`, `BFMatcher`, `FlannBasedMatcher`, common `DefaultName` metadata, descriptor compute/detect-and-compute helpers, batch keypoint detection, `DrawKeypoints`, `DrawMatches`, and `DrawMatchesKnn`. The ABI remains available when OpenCV was built without `opencv_features` or optional `opencv_xfeatures2d`; those calls report a clear `NOT_LINKED` boundary.
-- `Calib3D`: complete callable coverage of the OpenCV 5 `calib3d.hpp` compatibility include closure, including owned `Subdiv2D` geometry/topology, explicit `UsacParams` overloads, fisheye stereo rectification, pose and robust estimation, calibration and registration, camera utilities, and complete stereo matcher object wrappers.
-- `VideoIO`: complete `videoio.hpp` callable coverage with `VideoCapture`, `VideoWriter`, callback-backed managed streams, parameter-pair overloads, exception mode, `WaitAny`, frame write/readback, backend names, category/plugin-version `VideoIORegistry` queries, FourCC helpers, and checked parser-emitted enum metadata.
-- `Video`: motion-analysis package with Lucas-Kanade and Farneback functions, owned `DenseOpticalFlow` / `SparseOpticalFlow`, `FarnebackOpticalFlow`, `VariationalRefinement`, `DISOpticalFlow`, and `SparsePyrLKOpticalFlow` objects, optical-flow pyramid construction, `.flo` optical-flow file read/write helpers, mean-shift/CamShift tracking, background subtraction objects (`BackgroundSubtractorMOG2` and `BackgroundSubtractorKNN`), and a complete `KalmanFilter` object wrapper.
-- `OptFlow`: optional contrib optical-flow package with `DenseOpticalFlow`, `SparseOpticalFlow`, `DualTVL1OpticalFlow`, RLOF parameters and objects, SimpleFlow/SparseToDense/RLOF helpers, and motion-template functions; runtime staging includes the factual OpenCV 5.0.0 runtime artifact `opencv_optflow500.dll` when available and can use the staged XImgProc module for related algorithms.
-- `XImgProc`: optional contrib extended image-processing package with `XImgProcCv2` local thresholding, thinning, edge-aware filters, Hough helpers, ridge and recursive gradient helpers, Fourier descriptors and contour fitting, run-length morphology, `GuidedFilter`, `FastGlobalSmootherFilter`, `SuperpixelSLIC`, `SuperpixelSEEDS`, `SuperpixelLSC`, `FastLineDetector`, disparity WLS filtering and metrics, `FastBilateralSolverFilter`, sparse match interpolation, `EdgeDrawing`, `EdgeBoxes`, `ScanSegment`, `GraphSegmentation`, Selective Search strategies, and covariance estimation; runtime staging includes the factual OpenCV 5.0.0 runtime artifact `opencv_ximgproc500.dll` when available.
-- `BgSegm`: optional contrib background-segmentation package with `BackgroundSubtractorMOG`, `BackgroundSubtractorGMG`, `BackgroundSubtractorCNT`, a separate `BgSegmBackgroundSubtractor` base, and `SyntheticSequenceGenerator`.
-- `Tracking`: optional contrib tracking package with modern `Tracker`, `TrackerKCF`, `TrackerCSRT`, CSRT initial-mask support, OpenCV legacy (`cv::legacy`) MOSSE/MIL/MedianFlow/Boosting/TLD/KCF/CSRT trackers, `MultiTracker`, ownership-preserving legacy-to-modern upgrade, and separate modern/legacy parser and native boundaries.
-- `Face`: optional contrib face package with `FaceRecognizer`, `BasicFaceRecognizer`, `EigenFaceRecognizer`, `FisherFaceRecognizer`, `LBPHFaceRecognizer`, `StandardCollector`, `FacePrediction`, `FacePredictionResult`, `BIF`, `Facemark`, `FacemarkTrain`, `FacemarkLBF`, `FacemarkLBFParams`, `FacemarkFitResult`, and `MACE`; runtime staging includes the factual OpenCV 5.0.0 runtime artifact `opencv_face500.dll` when available.
-- `Saliency`: optional contrib saliency package with `Saliency`, `StaticSaliency`, `StaticSaliencySpectralResidual`, `StaticSaliencyFineGrained`, `MotionSaliencyBinWangApr2014`, `ObjectnessBING`, `ObjectnessBINGResult`, and `ObjectnessBINGBox`; runtime staging includes the factual OpenCV 5.0.0 runtime artifact `opencv_saliency500.dll` when available.
-- `Dnn`: deep-neural-network package with SafeHandle-backed `Net` and ref-counted `Layer`, path/buffer model loading, structured preprocessing, single/multi/nested forward, dump/connect/register, parameter access, packed shape/FLOPS/memory queries, detailed profiling, fusion/Winograd/KV controls, deterministic Identity ONNX evidence, backend/target availability, and model-engine selection.
-- `HighGui`: guarded window/key package with named windows, image display, wait/poll key helpers, window move/resize, window properties, title/image-rectangle helpers, trackbar/mouse/button callbacks, and default samples/tests that avoid creating windows unless explicitly enabled.
-- `Stitching`: high-level panorama package with `Stitcher`, mode/status/wave-correction enums, stitch/estimate/compose calls, component indices, camera parameter output, result masks, and defined `NOT_LINKED` behavior when `opencv_stitching` is unavailable.
-- `ObjDetect`: main OpenCV object-detection package with complete `QRCodeDetector`, `BarcodeDetector`, `QRCodeDetectorAruco`, `QRCodeEncoder`, ArUco dictionary/detector/grid-board/ChArUco wrappers, `ArucoDetector.RefineDetectedMarkers`, MCC checker detector/checker wrappers, DNN-backed `FaceDetectorYN`, DNN-backed `FaceRecognizerSF`, QR ECI and encoder enums, DNN backend/target enums, QR/barcode/ArUco/ChArUco result objects, UTF-8 string marshalling, model path and model buffer creation, grouped point-array marshalling, and modern `ReadOnlySpan<byte>` / `ReadOnlySpan<float>` overloads where useful.
-- `Photo`: main OpenCV photo package with `Inpaint`, single-frame and multi-frame fast non-local means denoising, colored denoising, decoloring, seamless cloning, local color/illumination/texture editing, edge-preserving/detail/sketch/stylization functions, and `Tonemap` / `TonemapDrago` / `TonemapReinhard` / `TonemapMantiuk` object wrappers.
-- `XObjDetect`: optional contrib object-detection package for the local OpenCV 5.0.0 `xobjdetect` module, including `CascadeClassifier`, `HOGDescriptor`, detection result objects, cascade flags, HOG histogram norm enum, and defined `NOT_LINKED` behavior when `opencv_xobjdetect` is unavailable.
-- `PtCloud`: main OpenCV depth/RGB-D package with `RescaleDepth`, `DepthTo3d`, `DepthTo3dSparse`, `RegisterDepth`, `WarpFrame`, `FindPlanes`, `RgbdNormals`, and depth/plane method enums.
-- `Quality`: optional contrib quality package with `QualityMSE`, `QualityPSNR`, `QualitySSIM`, `QualityGMSD`, `QualityBRISQUE`, quality-map output, scalar score helpers, BRISQUE feature extraction, and model/range-file guarded smoke paths.
-- `XPhoto`: optional contrib xphoto package with `WhiteBalancer`, `SimpleWB`, `GrayworldWB`, `LearningBasedWB`, channel gains, DCT denoising, BM3D denoising, oil painting, and BM3D enum wrappers.
-- `ML`: contrib-backed OpenCV machine-learning package with `TrainData` scalar-buffer extraction, `ParamGrid`, common `StatModel` operations, `KNearest`, `SVM`, `SVMSGD`, `LogisticRegression`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, `ANN_MLP`, model save/load paths, and tiny-matrix smoke coverage.
-- `ImgHash`: optional contrib perceptual-hash package with `ImgHashBase`, `AverageHash`, `PHash`, `BlockMeanHash`, `ColorMomentHash`, `MarrHildrethHash`, `RadialVarianceHash`, and matching one-shot helpers.
-- `Plot`: optional contrib plot package with `Plot2d`, Y-series and X/Y-series factories, styling setters, and `Mat` render output.
-- `Shape`: optional contrib model-free shape package with `EMDL1`, histogram cost extractors, `ShapeContextDistanceExtractor`, and `HausdorffDistanceExtractor` for tiny descriptor and contour smoke coverage.
-- `LineDescriptor`: optional contrib line-descriptor namespace with `KeyLine`, `BinaryDescriptor`, `BinaryDescriptorMatcher`, match/draw helpers, and drawing-flag value types for tiny synthetic line-image smoke coverage.
-- `PhaseUnwrapping`: optional contrib phase-unwrapping namespace with `HistogramPhaseUnwrappingParams`, `HistogramPhaseUnwrapping`, `UnwrapPhaseMap`, and inverse reliability-map output for tiny `CV_32FC1` phase-map smoke coverage.
-- `StructuredLight`: optional contrib structured-light namespace with `StructuredLightPattern`, `GrayCodePattern`, `SinusoidalPattern`, pattern generation, Gray-code shadow-mask/projection-pixel helpers, and sinusoidal phase/data-modulation helpers.
-- `IntensityTransform`: optional contrib image-enhancement namespace with log transform, gamma correction, autoscaling, contrast stretching, and BIMEF wrappers; BIMEF also depends on OpenCV EIGEN support.
-- `Fuzzy`: optional contrib fuzzy mathematics namespace with kernel creation, inpaint/filter helpers, and F0/F1 transform helpers for tiny matrix smoke coverage.
-- `Hfs`: optional contrib Hierarchical Feature Selection segmentation namespace with `HfsSegmentParams`, `HfsSegment`, seven parameter properties, and CPU/GPU segmentation calls.
-- `Reg`: optional contrib image-registration namespace with `RegMap`, `MapShift`, `MapAffine`, `MapProjec`, gradient mappers, `MapperPyramid`, and map warp/inverse/compose/scale calls.
-- `SurfaceMatching`: optional contrib 3D registration namespace with `Icp`, `Ppf3DDetector`, flat ICP pose output, and `Pose3DResult` summaries for PPF matches.
-- `Rapid`: optional contrib silhouette-tracking namespace with RAPID draw/extract/find/convert/run helpers plus `RapidSilhouetteTracker` and `OlsTracker`.
-- `AlphaMat`: optional contrib alpha matting namespace with `AlphaMatCv2.InfoFlow` overloads.
-- `BioInspired`: optional contrib bio-inspired vision namespace with `Retina`, `RetinaFastToneMapping`, `TransientAreasSegmentationModule`, and flat parameter value types.
-- `XStereo`: optional contrib extended stereo namespace with census descriptor helpers, `StereoBinaryBM`, `StereoBinarySGBM`, `QuasiDenseStereo`, flat match output, and parameter/enum value types.
-
-- `Core`：`Mat` 生命周期、ROI/视图操作、类型化数据访问、数组算术、位运算、统计、归一化、矩阵求解/求逆、SVD、RNG、广义矩阵乘法、向量变换、频谱变换、通道拆合和布局辅助。
-- `ImgCodecs`：编码/解码、文件读写和参数标志。
-- `ImgProc`：颜色与双平面转换、Bayer 去马赛克、颜色映射、权重混合、缩放、阈值与掩码阈值、滤波与 stack blur、空间梯度、形态学、绘图与 marker overlay、几何变换、轮廓、连通域、矩、直方图、霍夫特征、广义霍夫对象、CLAHE 和线段检测。
-- `Features2D`：特征模块能力，包含 `KeyPoint`、`DMatch`、`Feature2D`、`DescriptorMatcher`、`ORB`、`SIFT`、`FastFeatureDetector`、`GFTTDetector`、`MSER`、`MserRegion`、`SimpleBlobDetector`、`SimpleBlobDetectorParams`、contrib 版本 `BRISK`、`KAZE`、`AKAZE`、`AffineFeature`、`BFMatcher`、`FlannBasedMatcher`、通用 `DefaultName` 元数据、描述子 compute/detect-and-compute 辅助、批量关键点检测、`DrawKeypoints`、`DrawMatches` 和 `DrawMatchesKnn`。当 OpenCV 构建未包含 `opencv_features` 或可选 `opencv_xfeatures2d` 时，ABI 仍然导出并返回明确的 `NOT_LINKED` 边界。
-- `Calib3D`：完整覆盖 OpenCV 5 `calib3d.hpp` 兼容 include 闭包的 callable，包含拥有所有权的 `Subdiv2D` 几何/拓扑、显式 `UsacParams` 重载、鱼眼双目校正、位姿与鲁棒估计、标定与注册、相机工具，以及完整双目 matcher 对象封装。
-- `VideoIO`：完整覆盖 `videoio.hpp` callable，包含 `VideoCapture`、`VideoWriter`、回调托管流、参数对重载、异常模式、`WaitAny`、帧写入/回读、后端名称、分类/插件版本 `VideoIORegistry` 查询、FourCC helper 和已核验的 parser 枚举元数据。
-- `Video`：运动分析能力包，包含 Lucas-Kanade/Farneback 函数、拥有所有权的 `DenseOpticalFlow` / `SparseOpticalFlow`、`FarnebackOpticalFlow`、`VariationalRefinement`、`DISOpticalFlow` 与 `SparsePyrLKOpticalFlow` 对象、光流金字塔构建、`.flo` 光流文件读写 helper、mean-shift/CamShift 跟踪、背景减除对象（`BackgroundSubtractorMOG2` 和 `BackgroundSubtractorKNN`），以及完整 `KalmanFilter` 对象封装。
-- `OptFlow`：可选 contrib 光流能力包，包含 `DenseOpticalFlow`、`SparseOpticalFlow`、`DualTVL1OpticalFlow`、RLOF 参数/对象、SimpleFlow/SparseToDense/RLOF helper 和 motion-template 函数；runtime staging 会在可用时包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_optflow500.dll`，并可复用已暂存的 XImgProc 模块处理相关算法。
-- `XImgProc`：可选 contrib 扩展图像处理能力包，包含 `XImgProcCv2` 局部阈值、细化、edge-aware filter、Hough helper、ridge 和递归梯度 helper、Fourier descriptor 与轮廓拟合、run-length morphology、`GuidedFilter`、`FastGlobalSmootherFilter`、`SuperpixelSLIC`、`SuperpixelSEEDS`、`SuperpixelLSC`、`FastLineDetector`、disparity WLS 滤波与指标、`FastBilateralSolverFilter`、稀疏匹配插值、`EdgeDrawing`、`EdgeBoxes`、`ScanSegment`、`GraphSegmentation`、Selective Search strategy 和 covariance estimation；runtime staging 会在可用时包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_ximgproc500.dll`。
-- `BgSegm`：可选 contrib 背景分割能力包，包含 `BackgroundSubtractorMOG`、`BackgroundSubtractorGMG`、`BackgroundSubtractorCNT`、独立的 `BgSegmBackgroundSubtractor` 基类和 `SyntheticSequenceGenerator`。
-- `Tracking`：可选 contrib 跟踪能力包，包含 modern `Tracker`、`TrackerKCF`、`TrackerCSRT`、CSRT 初始 mask、OpenCV legacy（`cv::legacy`）MOSSE/MIL/MedianFlow/Boosting/TLD/KCF/CSRT、`MultiTracker` 和保留所有权的 legacy-to-modern upgrade，并区分 modern/legacy parser 与 native 边界。
-- `Face`：可选 contrib face 能力包，包含 `FaceRecognizer`、`BasicFaceRecognizer`、`EigenFaceRecognizer`、`FisherFaceRecognizer`、`LBPHFaceRecognizer`、`StandardCollector`、`FacePrediction`、`FacePredictionResult`、`BIF`、`Facemark`、`FacemarkTrain`、`FacemarkLBF`、`FacemarkLBFParams`、`FacemarkFitResult` 和 `MACE`；runtime staging 会在可用时包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_face500.dll`。
-- `Saliency`：可选 contrib 显著性能力包，包含 `Saliency`、`StaticSaliency`、`StaticSaliencySpectralResidual`、`StaticSaliencyFineGrained`、`MotionSaliencyBinWangApr2014`、`ObjectnessBING`、`ObjectnessBINGResult` 和 `ObjectnessBINGBox`；runtime staging 会在可用时包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_saliency500.dll`。
-- `Dnn`：深度神经网络能力包，包含基于 SafeHandle 的 `Net`、独立引用计数的 `Layer`、路径/缓冲模型加载、结构化预处理、单输出/多输出/嵌套 forward、dump/connect/register、参数访问、packed shape/FLOPS/内存查询、详细 profiling、fusion/Winograd/KV 控制、确定性 Identity ONNX 证据、backend/target 可用性和 engine 选择。
-- `HighGui`：受控窗口/key 能力包，包含命名窗口、图像显示、wait/poll key、窗口移动/缩放、窗口属性、标题/图像区域 helper、trackbar/鼠标/按钮回调；默认样例和测试不会创建窗口，除非显式启用。
-- `Stitching`：高层全景拼接能力包，包含 `Stitcher`、mode/status/wave-correction 枚举、stitch/estimate/compose 调用、component 索引、相机参数输出、result mask，以及 `opencv_stitching` 不可用时定义明确的 `NOT_LINKED` 行为。
-- `ObjDetect`：OpenCV 主线目标检测能力包，包含完整 `QRCodeDetector`、`BarcodeDetector`、`QRCodeDetectorAruco`、`QRCodeEncoder`、ArUco 字典/检测器/网格板/ChArUco 封装、`ArucoDetector.RefineDetectedMarkers`、MCC checker detector/checker 封装、DNN 版本 `FaceDetectorYN`、DNN 版本 `FaceRecognizerSF`、QR ECI 和 encoder 枚举、DNN backend/target 枚举、二维码/条形码/ArUco/ChArUco 结果对象、UTF-8 字符串封送、模型路径和模型缓冲创建、分组点集数组封送，以及必要位置的现代 `ReadOnlySpan<byte>` / `ReadOnlySpan<float>` 重载。
-- `Photo`：OpenCV 主线 photo 能力包，包含 `Inpaint`、单帧和多帧 fast non-local means 去噪、彩色去噪、decolor、seamless cloning、局部颜色/光照/纹理编辑、边缘保持/detail/sketch/stylization 函数，以及 `Tonemap` / `TonemapDrago` / `TonemapReinhard` / `TonemapMantiuk` 对象封装。
-- `XObjDetect`：可选 contrib 目标检测能力包，对应本地 OpenCV 5.0.0 `xobjdetect` 模块，包含 `CascadeClassifier`、`HOGDescriptor`、检测结果对象、cascade flags、HOG 直方图归一化枚举，以及 `opencv_xobjdetect` 不可用时定义明确的 `NOT_LINKED` 行为。
-- `PtCloud`：OpenCV 主线 depth/RGB-D 能力包，包含 `RescaleDepth`、`DepthTo3d`、`DepthTo3dSparse`、`RegisterDepth`、`WarpFrame`、`FindPlanes`、`RgbdNormals` 和 depth/plane 方法枚举。
-- `Quality`：可选 contrib 图像质量能力包，包含 `QualityMSE`、`QualityPSNR`、`QualitySSIM`、`QualityGMSD`、`QualityBRISQUE`、质量图输出、标量评分 helper、BRISQUE 特征提取，以及由模型/range 文件环境变量保护的 smoke 路径。
-- `XPhoto`：可选 contrib xphoto 能力包，包含 `WhiteBalancer`、`SimpleWB`、`GrayworldWB`、`LearningBasedWB`、channel gains、DCT 去噪、BM3D 去噪、oil painting 和 BM3D 枚举封装。
-- `ML`：由 contrib 支撑的 OpenCV 机器学习能力包，包含 `TrainData` 标量缓冲提取、`ParamGrid`、通用 `StatModel` 操作、`KNearest`、`SVM`、`SVMSGD`、`LogisticRegression`、`NormalBayesClassifier`、`EM`、`DTrees`、`RTrees`、`Boost`、`ANN_MLP`、模型保存/加载路径和 tiny matrix smoke 覆盖。
-- `ImgHash`：可选 contrib 感知哈希能力包，包含 `ImgHashBase`、`AverageHash`、`PHash`、`BlockMeanHash`、`ColorMomentHash`、`MarrHildrethHash`、`RadialVarianceHash` 以及对应一次性 helper。
-- `Plot`：可选 contrib plot 能力包，包含 `Plot2d`、Y 序列与 X/Y 序列工厂、样式 setter，以及渲染到 `Mat` 的输出路径。
-- `Shape`：可选 contrib 无模型 shape 能力包，包含 `EMDL1`、直方图代价提取器、`ShapeContextDistanceExtractor` 与 `HausdorffDistanceExtractor`，覆盖 tiny descriptor 与 contour smoke。
-- `LineDescriptor`：可选 contrib line_descriptor 命名空间，包含 `KeyLine`、`BinaryDescriptor`、`BinaryDescriptorMatcher`、match/draw helper 和绘制标志值类型，覆盖 tiny 合成线段图 smoke。
-- `PhaseUnwrapping`：可选 contrib 相位展开命名空间，包含 `HistogramPhaseUnwrappingParams`、`HistogramPhaseUnwrapping`、`UnwrapPhaseMap` 和 inverse reliability map 输出，覆盖 tiny `CV_32FC1` 相位图 smoke。
-- `StructuredLight`：可选 contrib 结构光命名空间，包含 `StructuredLightPattern`、`GrayCodePattern`、`SinusoidalPattern`、图案生成、Gray-code shadow-mask/projector-pixel helper，以及正弦 phase/data-modulation helper。
-- `IntensityTransform`：可选 contrib 图像增强命名空间，包含 log transform、gamma correction、autoscaling、contrast stretching 和 BIMEF 封装；BIMEF 还依赖 OpenCV EIGEN 支持。
-- `Fuzzy`：可选 contrib fuzzy mathematics 命名空间，包含 kernel 创建、inpaint/filter helper，以及 F0/F1 transform helper，覆盖 tiny matrix smoke。
-- `Hfs`：可选 contrib Hierarchical Feature Selection 分割命名空间，包含 `HfsSegmentParams`、`HfsSegment`、七个参数属性和 CPU/GPU 分割调用。
-- `Reg`：可选 contrib 图像配准命名空间，包含 `RegMap`、`MapShift`、`MapAffine`、`MapProjec`、梯度 mapper、`MapperPyramid`，以及 map warp/inverse/compose/scale 调用。
-- `SurfaceMatching`：可选 contrib 三维配准命名空间，包含 `Icp`、`Ppf3DDetector`、平铺 ICP pose 输出，以及 PPF match 的 `Pose3DResult` 摘要。
-- `Rapid`：可选 contrib 轮廓跟踪命名空间，包含 RAPID draw/extract/find/convert/run helper，以及 `RapidSilhouetteTracker` 与 `OlsTracker`。
-- `AlphaMat`：可选 contrib alpha matting 命名空间，包含 `AlphaMatCv2.InfoFlow` 重载。
-- `BioInspired`：可选 contrib 生物启发视觉命名空间，包含 `Retina`、`RetinaFastToneMapping`、`TransientAreasSegmentationModule` 和平铺参数值类型。
-- `XStereo`：可选 contrib 扩展 stereo 命名空间，包含 census descriptor helper、`StereoBinaryBM`、`StereoBinarySGBM`、`QuasiDenseStereo`、平铺 match 输出和参数/枚举值类型。
-
-The native layer is prepared under `src/OpenCvSharp.Native` and is expanded module by module through stable, version-neutral `jyppx_ocv_` C ABI entries.
-
-native 层位于 `src/OpenCvSharp.Native`，通过稳定、版本中立的 `jyppx_ocv_` C ABI 按 OpenCV 模块逐步扩展。
-
-Those names are compatibility contracts. New generic scripts, docs, and package metadata should prefer version-neutral names and refer to OpenCV 5.0.0 only as the current packaged runtime identity or a factual runtime artifact.
-
-这些名称属于兼容契约。新增的通用脚本、文档和包元数据应优先使用版本中立名称，只在描述当前打包 runtime 身份或事实性 runtime 产物时写明 OpenCV 5.0.0。
-
-For scripted native builds, use the version-neutral `-NativeWrapperSourceDir` parameter. Its default is the version-neutral source directory `src/OpenCvSharp.Native`, and another wrapper source layout can be selected without changing the script. The neutral `-BuildDir` parameter accepts a repository-relative or absolute native build directory; its default remains `build/native`.
-
-```powershell
-pwsh -NoProfile -File ./scripts/Build-Native.ps1 -NativeWrapperSourceDir ./src/OpenCvSharp.Native
-```
-
-脚本化 native 构建应使用版本中立的 `-NativeWrapperSourceDir` 参数。其默认值是版本中立的源码目录 `src/OpenCvSharp.Native`，同时可以在不修改脚本的情况下选择其他 wrapper 源码布局。中性的 `-BuildDir` 参数可以使用仓库相对或绝对 native 构建目录，默认值仍为 `build/native`。
-
-## Code Style / 代码风格
-
-All applications, samples, tests, and tools must use explicit `Program` classes and `Main` methods. Top-level statements are not allowed.
-
-所有应用程序、示例、测试和工具程序都必须显式声明 `Program` 类和 `Main` 方法，不允许使用顶级语句。
+Copyright (c) 2026 Guojin Yan.
