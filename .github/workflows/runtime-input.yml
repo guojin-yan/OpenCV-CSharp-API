@@ -915,13 +915,46 @@ jobs:
           $profileSuffix = if ('${{ matrix.profile }}' -eq 'mini') { '.mini' } else { '' }
           $runtimePackageId = 'JYPPX.OpenCV.runtime.${{ matrix.rid }}' + $profileSuffix
           $project = Join-Path $env:GITHUB_WORKSPACE 'samples/AndroidSmoke/AndroidSmoke.csproj'
+          $consumerPackages = Join-Path $env:GITHUB_WORKSPACE 'artifacts/android-proof/consumer-packages'
           $common = @(
             '-p:UseLocalPackages=true',
             "-p:AndroidRuntimePackageId=$runtimePackageId",
-            '-p:RuntimeIdentifier=${{ matrix.rid }}'
+            '-p:RuntimeIdentifier=${{ matrix.rid }}',
+            "-p:RestorePackagesPath=$consumerPackages"
           )
           dotnet restore $project @common --source $packageRoot --source 'https://api.nuget.org/v3/index.json'
           if ($LASTEXITCODE -ne 0) { throw 'Android package consumer restore failed.' }
+
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $managedPackage = @(Get-ChildItem -LiteralPath $packageRoot -File -Filter 'JYPPX.OpenCV.CSharp.API.*.nupkg')
+          $managedInstallRoot = Join-Path $consumerPackages 'jyppx.opencv.csharp.api'
+          $managedVersions = @(Get-ChildItem -LiteralPath $managedInstallRoot -Directory)
+          if ($managedPackage.Count -ne 1 -or $managedVersions.Count -ne 1) {
+            throw 'Same-run managed package or its isolated restore directory was not found exactly once.'
+          }
+          $restoredManagedAssembly = Join-Path $managedVersions[0].FullName 'lib/net10.0/JYPPX.OpenCV.CSharp.API.dll'
+          if (-not (Test-Path -LiteralPath $restoredManagedAssembly -PathType Leaf)) {
+            throw 'Isolated Android restore did not select the managed net10.0 assembly.'
+          }
+          $managedZip = [IO.Compression.ZipFile]::OpenRead($managedPackage[0].FullName)
+          try {
+            $managedEntries = @($managedZip.Entries | Where-Object { $_.FullName -ceq 'lib/net10.0/JYPPX.OpenCV.CSharp.API.dll' })
+            if ($managedEntries.Count -ne 1) { throw 'Same-run managed package did not contain the net10.0 assembly exactly once.' }
+            $managedStream = $managedEntries[0].Open()
+            try {
+              $packageAssemblyHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($managedStream)).ToLowerInvariant()
+            }
+            finally {
+              $managedStream.Dispose()
+            }
+          }
+          finally {
+            $managedZip.Dispose()
+          }
+          $restoredAssemblyHash = (Get-FileHash -LiteralPath $restoredManagedAssembly -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($restoredAssemblyHash -cne $packageAssemblyHash) {
+            throw 'Restored Android managed assembly did not match the same-run package payload.'
+          }
           dotnet build $project -c Release --no-restore @common
           if ($LASTEXITCODE -ne 0) { throw 'Android package consumer build failed.' }
 
@@ -937,7 +970,6 @@ jobs:
           }
           if ($apk.Count -ne 1) { throw 'Android package consumer APK was not found exactly once.' }
 
-          Add-Type -AssemblyName System.IO.Compression.FileSystem
           $runtimePackage = @(Get-ChildItem -LiteralPath $packageRoot -File -Filter "$runtimePackageId.*.nupkg")
           if ($runtimePackage.Count -ne 1) { throw 'Same-run Android runtime package was not found exactly once.' }
           $packageZip = [IO.Compression.ZipFile]::OpenRead($runtimePackage[0].FullName)

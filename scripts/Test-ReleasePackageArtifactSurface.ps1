@@ -517,6 +517,9 @@ foreach ($workflowNeedle in @(
         'produce-android:',
         'scripts/Build-AndroidRuntimeInput.ps1',
         'dotnet workload install android --skip-manifest-update',
+        'artifacts/android-proof/consumer-packages',
+        '-p:RestorePackagesPath=$consumerPackages',
+        'Restored Android managed assembly did not match the same-run package payload.',
         'ANDROID_PACKAGE_CONSUMER_OK',
         'ANDROID_EMULATOR_LOADING_OK')) {
     Assert-Contains -Violations $violations -Path $runtimeInputWorkflowPath -Text $runtimeInputWorkflowText -Needle $workflowNeedle -Issue "Android runtime workflow must retain '$workflowNeedle'"
