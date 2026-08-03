@@ -1,43 +1,57 @@
-![OpenCV CSharp API](https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light)
+<p align="center">
+  <img src="https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light" alt="OpenCV CSharp API" width="100%" />
+</p>
 
-# OpenCV CSharp API
+<h1 align="center">OpenCV CSharp API</h1>
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![NuGet](https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/)
-[![Downloads](https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/)
-[![.NET](https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4)](https://dotnet.microsoft.com/)
-[![Upstream OpenCV](https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8)](https://opencv.org/)
-[![Managed CI](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml/badge.svg?branch=opencv5.x)](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml)
-[![Native CI](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml/badge.svg?branch=opencv5.x)](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml)
+<p align="center">
+  Version-neutral OpenCV 5.0 bindings for C# and .NET, with managed APIs and verified native runtime packages.
+</p>
 
-English | [简体中文](README_cn.md)
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet version" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet downloads" /></a>
+  <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4" alt="Supported .NET versions" /></a>
+  <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8" alt="Upstream OpenCV 5.0.0" /></a>
+</p>
 
-OpenCV CSharp API is a version-neutral .NET binding for OpenCV 5.0. It combines an idiomatic managed API under `OpenCvSharp.*` with a stable native C ABI, deterministic NuGet packages, explicit native ownership, and real runtime packages for supported Windows and Linux targets.
+<p align="center">
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml"><img src="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml/badge.svg?branch=opencv5.x" alt="Managed CI" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml"><img src="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml/badge.svg?branch=opencv5.x" alt="Native CI" /></a>
+</p>
 
-The first public channel is `5.0.0-preview.1`. It is designed for early adopters who need broad OpenCV coverage while preserving API and ABI identity across later iterations.
+<p align="center"><strong>English</strong> | <a href="README_cn.md">简体中文</a></p>
 
-## Highlights
+## Introduction
 
-- 612 public managed types, 6,314 public/protected members, and 41 namespaces under a checked compatibility baseline.
-- 2,656 full-profile and 526 mini-profile native ABI functions with complete declared native-to-managed binding coverage.
-- Practical coverage across Core, ImgProc, ImgCodecs, VideoIO, Calib3D, DNN, Features, HighGui, ObjDetect, Photo, Video, ML, Tracking, Stitching, and selected contrib modules.
-- Targets .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
-- Full and mini runtime profiles with package-owned native smoke tests and explicit `NOT_LINKED` behavior for unavailable mini features.
-- Deterministic packages, SPDX 2.3 SBOMs, protected publication approval, and post-upload NuGet.org Repository-signature verification.
-- Headless visual samples that generate inspection-ready PNG files without a camera, model download, or GUI session.
+OpenCV CSharp API brings [OpenCV 5.0](https://opencv.org/) to C# through the familiar `OpenCvSharp.*` namespace family. It combines an idiomatic managed API, a stable native C ABI, explicit native-resource ownership, and runtime NuGet packages for verified Windows and Linux targets.
 
-![OpenCV CSharp API visual showcase](docs/images/showcase/showcase-overview.png)
+The first public channel is `5.0.0-preview.1`. It is intended for early adopters who need broad computer-vision coverage while keeping public API and ABI identities stable across later iterations.
 
-## Quick Start
+## Release Highlights
 
-Install the managed package and exactly one runtime package on the same normalized NuGet package version. The example below uses the full Windows x64 runtime:
+- Broad coverage of Core, ImgProc, ImgCodecs, VideoIO, Calib3D, DNN, Features, ObjDetect, Photo, Video, HighGui, Stitching, ML, Tracking, and selected contrib APIs.
+- One managed package plus full and mini native runtime profiles for 12 verified Windows and Linux RIDs.
+- .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
+- Deterministic NuGet packages, SPDX 2.3 SBOMs, protected release approval, and NuGet.org Repository-signature verification.
+- Headless, executable examples that generate inspectable PNG output without a camera, model download, or GUI session.
+- Checked compatibility baselines covering 612 public managed types, 6,314 public/protected members, 41 namespaces, and the declared native ABI.
+
+## Get Started In 30 Seconds
+
+### 1. Install The Packages
+
+Install the managed API and exactly one runtime package at the same package version. This example selects the full Windows x64 runtime:
 
 ```powershell
 dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
 dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1 # current Windows x64 example
 ```
 
-Then use the module namespace that owns the API:
+### 2. Write C# Code
+
+Use the namespace that owns each OpenCV module:
 
 ```csharp
 using System;
@@ -55,24 +69,31 @@ CoreCv2.Add(left, right, result);
 Console.WriteLine(string.Join(",", result.ToBytes()));
 ```
 
-The complete [Quick Start](docs/articles/quick-start.md) covers package selection, matrices, image codecs, geometry, and disposal.
+### 3. Run
+
+```powershell
+dotnet run
+```
+
+Expected output:
+
+```text
+7,7,7,7,7,7
+```
+
+The complete [Quick Start](docs/articles/quick-start.md) covers package selection, matrices, image codecs, geometry, and deterministic disposal.
 
 ## NuGet Packages
 
-### Managed API
-
 | Package | Purpose |
 | --- | --- |
-| [`JYPPX.OpenCV.CSharp.API`](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | Version-neutral managed API for all supported frameworks |
+| [`JYPPX.OpenCV.CSharp.API`](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | Version-neutral managed API for every supported .NET target |
+| `JYPPX.OpenCV.runtime.<rid>` | Full native runtime for one supported RID |
+| `JYPPX.OpenCV.runtime.<rid>.mini` | Smaller native runtime for one supported RID |
 
-### Runtime Packages
+Choose the runtime package that matches your target RID and preferred profile.
 
-Choose one package matching your target RID and profile:
-
-- Full: `JYPPX.OpenCV.runtime.<rid>`
-- Mini: `JYPPX.OpenCV.runtime.<rid>.mini`
-
-The full profile contains broad OpenCV modules including DNN, calibration, features, Photo, HighGui, ML, Tracking, and Stitching. The mini profile focuses on `core`, `imgproc`, `imgcodecs`, and `videoio`, with the required `geometry` and `flann` runtime dependencies.
+The full profile guarantees its matrix-required modules, including DNN, calibration, features, Photo, Video, HighGui, and Stitching. ML, Tracking, and selected contrib modules are optional staged modules: their managed APIs remain stable, and unavailable native features report `NOT_LINKED`. The mini profile focuses on `core`, `imgproc`, `imgcodecs`, and `videoio`, with the required `geometry` and `flann` dependencies.
 
 Do not reference full and mini runtime packages together. Keep the managed and runtime packages on the same normalized NuGet package version.
 
@@ -98,22 +119,21 @@ Linux packages use a distro-specific Linux RID rather than a generic `linux-x64`
 
 If there is no matching runtime package, build a local native runtime with `scripts/Build-OpenCV.ps1`, stage it with `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>`, and point local samples or tests at it with `OpenCvNativeRuntimeDir`. The corresponding package fallback is `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`. See the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) for the supported local native runtime workflow.
 
-## Full And Mini Profiles
+## Choose Full Or Mini
 
 | Capability | Full | Mini |
 | --- | :---: | :---: |
 | Core arrays, matrices, persistence | Yes | Yes |
 | ImgProc, ImgCodecs, VideoIO | Yes | Yes |
 | Geometry and FLANN runtime dependencies | Yes | Yes |
-| DNN and object detection | Yes | No |
-| Calibration and feature matching | Yes | No |
-| Photo, Video, ML, Tracking, Stitching | Yes | No |
-| HighGui | Yes | No |
-| Stable missing-feature response | N/A | `NOT_LINKED` |
+| DNN, object detection, calibration, features | Yes | No |
+| Photo, Video, HighGui, Stitching | Yes | No |
+| ML, Tracking, selected contrib modules | Runtime-dependent | No |
+| Stable response for an unavailable module | `NOT_LINKED` | `NOT_LINKED` |
 
-## Samples
+## Examples And Visual Results
 
-The [`samples/ConsoleSamples`](samples/ConsoleSamples) project includes broad smoke coverage and a visual showcase:
+The [`samples/ConsoleSamples`](samples/ConsoleSamples) project includes broad smoke coverage and an image-processing showcase:
 
 ```powershell
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
@@ -121,7 +141,11 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
   -- showcase all .\artifacts\showcase
 ```
 
-The showcase writes image processing, ORB feature, template matching, and KNN classification results. See [Visual Showcase](docs/articles/visual-showcase.md) and [Scenario Recipes](docs/articles/scenario-recipes.md).
+The command writes image processing, ORB feature, template matching, and KNN classification results:
+
+![OpenCV CSharp API visual showcase](docs/images/showcase/showcase-overview.png)
+
+See the [Visual Showcase](docs/articles/visual-showcase.md) and [Scenario Recipes](docs/articles/scenario-recipes.md) for more executable workflows.
 
 ## Documentation
 
@@ -179,17 +203,25 @@ Issues and pull requests are welcome. Before changing public API, native ABI, pa
 
 Please include focused tests, preserve version-neutral public identities, and document any unsupported upstream behavior explicitly.
 
+## Acknowledgments
+
+This project builds on [OpenCV](https://opencv.org/) and its contributors. OpenCV remains the authoritative source for algorithm behavior and native runtime licensing.
+
 ## License
 
 The managed API and project code are licensed under the [MIT License](LICENSE). Runtime packages combine project code with OpenCV runtime files and use the package license expression `MIT AND Apache-2.0`; packaged third-party notices remain authoritative for their respective components.
 
-## Support
+## Support And Contact
 
 - [GitHub Issues](https://github.com/guojin-yan/OpenCV-CSharp-API/issues) for bugs and feature requests.
 - [GitHub Discussions](https://github.com/guojin-yan/OpenCV-CSharp-API/discussions) for usage questions.
 - QQ group `945057948` for community discussion.
 
 This is a preview release. Test representative workflows before using it in production, industrial, or mission-critical systems.
+
+## Software Notice
+
+This project uses AI-assisted development and has not been exhaustively tested across every device, workload, and edge case. The source contains no intentionally introduced malicious functionality. Review the license and third-party notices, validate the library against your own requirements, and perform rigorous testing before production or safety-critical use.
 
 <details>
 <summary>Maintainer build and compatibility boundaries</summary>

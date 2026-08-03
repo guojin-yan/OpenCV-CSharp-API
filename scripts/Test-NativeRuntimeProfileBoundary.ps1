@@ -155,6 +155,10 @@ Assert-Contains -Text $imgprocSourceText -Needle 'cv::_InputArray input_or_no_ar
 Assert-Contains -Text $imgprocSourceText -Needle 'cv::_OutputArray output_or_no_array' -Description "Optional output helpers must return a concrete OpenCV proxy value"
 Assert-Contains -Text $nativeSmokeText -Needle 'run_mini_excluded_features_smoke' -Description "Native smoke must verify the mini excluded-features boundary"
 Assert-Contains -Text $nativeSmokeText -Needle 'status != OPENCV_CSHARP_STATUS_NOT_LINKED' -Description "Mini smoke must require NOT_LINKED for excluded features APIs"
+Assert-Contains -Text $nativeSmokeText -Needle 'int run_ml_optional_module_smoke()' -Description "Full native smoke must model ML as an optional OpenCV module"
+Assert-Contains -Text $nativeSmokeText -Needle 'int ml_optional_module_status = run_ml_optional_module_smoke();' -Description "Full native smoke must execute the ML optional-module boundary"
+Assert-Contains -Text $nativeSmokeText -Needle 'int run_tracking_optional_module_smoke()' -Description "Full native smoke must model tracking as an optional OpenCV module"
+Assert-Contains -Text $nativeSmokeText -Needle 'int tracking_optional_module_status = run_tracking_optional_module_smoke();' -Description "Full native smoke must execute the tracking optional-module boundary"
 if ($imgprocSourceText.Contains('__has_include(<opencv2/features.hpp>)')) {
     Add-Violation "imgproc wrapper must not infer features linkage from header presence; CMake target linkage is authoritative."
 }

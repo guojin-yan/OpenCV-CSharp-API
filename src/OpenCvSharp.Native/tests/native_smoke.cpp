@@ -4262,6 +4262,31 @@ namespace
         return 0;
     }
 
+    int run_ml_optional_module_smoke()
+    {
+        NativeMlModelHandle probe;
+        const int probe_status = jyppx_ocv_ml_ann_mlp_create(&probe.value);
+        if (probe_status == OPENCV_CSHARP_STATUS_NOT_LINKED)
+        {
+            return probe.value == nullptr ? 0 : 965;
+        }
+        if (probe_status != OPENCV_CSHARP_STATUS_OK || probe.value == nullptr)
+        {
+            return 966;
+        }
+
+        jyppx_ocv_ml_model_release_handle(probe.value);
+        probe.value = nullptr;
+
+        int status = run_ml_ann_mlp_smoke();
+        if (status != 0) { return status; }
+        status = run_ml_tree_models_smoke();
+        if (status != 0) { return status; }
+        status = run_ml_em_smoke();
+        if (status != 0) { return status; }
+        return run_ml_remaining_callables_smoke();
+    }
+
     int run_tracking_legacy_completion_smoke()
     {
         if (jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params(nullptr) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT ||
@@ -4354,6 +4379,24 @@ namespace
 
         cleanup();
         return 0;
+    }
+
+    int run_tracking_optional_module_smoke()
+    {
+        jyppx_ocv_tracking_legacy_tracker_tld* probe = nullptr;
+        const int probe_status = jyppx_ocv_tracking_legacy_tracker_tld_create(&probe);
+        if (probe_status == OPENCV_CSHARP_STATUS_NOT_LINKED)
+        {
+            return probe == nullptr ? 0 : 967;
+        }
+        if (probe_status != OPENCV_CSHARP_STATUS_OK || probe == nullptr)
+        {
+            return 968;
+        }
+
+        jyppx_ocv_tracking_legacy_tracker_release_handle(
+            reinterpret_cast<jyppx_ocv_tracking_legacy_tracker*>(probe));
+        return run_tracking_legacy_completion_smoke();
     }
 
     int run_stitching_exposure_compensator_smoke()
@@ -5247,39 +5290,18 @@ int main()
             return photo_final_callables_status;
         }
 
-        int ml_ann_mlp_status = run_ml_ann_mlp_smoke();
-        if (ml_ann_mlp_status != 0)
+        int ml_optional_module_status = run_ml_optional_module_smoke();
+        if (ml_optional_module_status != 0)
         {
             jyppx_ocv_mat_release(mat);
-            return ml_ann_mlp_status;
+            return ml_optional_module_status;
         }
 
-        int ml_tree_models_status = run_ml_tree_models_smoke();
-        if (ml_tree_models_status != 0)
+        int tracking_optional_module_status = run_tracking_optional_module_smoke();
+        if (tracking_optional_module_status != 0)
         {
             jyppx_ocv_mat_release(mat);
-            return ml_tree_models_status;
-        }
-
-        int ml_em_status = run_ml_em_smoke();
-        if (ml_em_status != 0)
-        {
-            jyppx_ocv_mat_release(mat);
-            return ml_em_status;
-        }
-
-        int ml_remaining_callables_status = run_ml_remaining_callables_smoke();
-        if (ml_remaining_callables_status != 0)
-        {
-            jyppx_ocv_mat_release(mat);
-            return ml_remaining_callables_status;
-        }
-
-        int tracking_legacy_completion_status = run_tracking_legacy_completion_smoke();
-        if (tracking_legacy_completion_status != 0)
-        {
-            jyppx_ocv_mat_release(mat);
-            return tracking_legacy_completion_status;
+            return tracking_optional_module_status;
         }
 
         int stitching_exposure_status = run_stitching_exposure_compensator_smoke();

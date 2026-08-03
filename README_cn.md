@@ -1,43 +1,57 @@
-![OpenCV CSharp API](https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light)
+<p align="center">
+  <img src="https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light" alt="OpenCV CSharp API" width="100%" />
+</p>
 
-# OpenCV CSharp API
+<h1 align="center">OpenCV CSharp API</h1>
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![NuGet](https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/)
-[![Downloads](https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg)](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/)
-[![.NET](https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4)](https://dotnet.microsoft.com/)
-[![Upstream OpenCV](https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8)](https://opencv.org/)
-[![Managed CI](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml/badge.svg?branch=opencv5.x)](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml)
-[![Native CI](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml/badge.svg?branch=opencv5.x)](https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml)
+<p align="center">
+  面向 C# 与 .NET 的版本中立 OpenCV 5.0 封装，提供 managed API 和经过验证的 native runtime 包。
+</p>
 
-[English](README.md) | 简体中文
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 版本" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 下载量" /></a>
+  <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4" alt="支持的 .NET 版本" /></a>
+  <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8" alt="上游 Upstream OpenCV 5.0.0" /></a>
+</p>
 
-OpenCV CSharp API 是面向 OpenCV 5.0 的版本中立 .NET 封装。项目通过 `OpenCvSharp.*` 提供符合 C# 使用习惯的 managed API，通过稳定 native C ABI 连接 OpenCV，并为已验证的 Windows 与 Linux 目标提供确定性 NuGet runtime 包。
+<p align="center">
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml"><img src="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-managed.yml/badge.svg?branch=opencv5.x" alt="Managed CI" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml"><img src="https://github.com/guojin-yan/OpenCV-CSharp-API/actions/workflows/build-native.yml/badge.svg?branch=opencv5.x" alt="Native CI" /></a>
+</p>
 
-首个公开版本通道为 `5.0.0-preview.1`，适合需要广泛 OpenCV 能力、同时重视后续 API/ABI 一致性的早期使用者。
+<p align="center"><a href="README.md">English</a> | <strong>简体中文</strong></p>
 
-## 主要特点
+## 项目简介
 
-- 612 个 public managed type、6,314 个 public/protected member、41 个 namespace，均受兼容性基线约束。
-- full profile 包含 2,656 个 native ABI function，mini profile 包含 526 个，并对声明 ABI 保持完整 native-to-managed binding coverage。
-- 覆盖 Core、ImgProc、ImgCodecs、VideoIO、Calib3D、DNN、Features、HighGui、ObjDetect、Photo、Video、ML、Tracking、Stitching 和部分 contrib 模块。
+OpenCV CSharp API 通过熟悉的 `OpenCvSharp.*` 命名空间，将 [OpenCV 5.0](https://opencv.org/) 引入 C#。项目提供符合 .NET 使用习惯的 managed API、稳定的 native C ABI、明确的 native 资源所有权，以及面向已验证 Windows 和 Linux 目标的 runtime NuGet 包。
+
+首个公开版本通道为 `5.0.0-preview.1`，适合需要广泛计算机视觉能力、同时重视后续 API 与 ABI 身份稳定性的早期使用者。
+
+## 版本亮点
+
+- 广泛覆盖 Core、ImgProc、ImgCodecs、VideoIO、Calib3D、DNN、Features、ObjDetect、Photo、Video、HighGui、Stitching、ML、Tracking 和部分 contrib API。
+- 一个 managed 包，以及面向 12 个已验证 Windows/Linux RID 的 full 与 mini native runtime profile。
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
-- 提供 full 与 mini runtime profile；mini 中不可用的兼容入口会明确返回 `NOT_LINKED`。
-- 提供确定性 NuGet 包、SPDX 2.3 SBOM、受保护发布审批和 NuGet.org Repository signature 回读验证。
-- 提供无头可视化示例，不需要相机、模型下载或桌面 GUI，即可生成可检查的 PNG 结果。
+- 提供确定性 NuGet 包、SPDX 2.3 SBOM、受保护的发布审批和 NuGet.org Repository signature 验证。
+- 提供可直接执行的无头示例，无需相机、模型下载或桌面 GUI，即可生成可检查的 PNG 结果。
+- 兼容性基线覆盖 612 个 public managed type、6,314 个 public/protected member、41 个 namespace 和已声明的 native ABI。
 
-![OpenCV CSharp API 可视化案例](docs/images/showcase/showcase-overview.png)
+## 30 秒快速开始
 
-## 快速开始
+### 1. 安装 NuGet 包
 
-安装 managed 包和一个与目标平台匹配的 runtime 包，并确保二者使用相同的 NuGet 规范版本。以下示例使用 Windows x64 full runtime：
+安装 managed API 和一个 runtime 包，并确保二者使用相同版本。以下示例选择 Windows x64 full runtime：
 
 ```powershell
 dotnet add package JYPPX.OpenCV.CSharp.API --version 5.0.0-preview.1
 dotnet add package JYPPX.OpenCV.runtime.win-x64 --version 5.0.0-preview.1 # 当前 Windows x64 示例
 ```
 
-然后使用 API 所属的模块 namespace：
+### 2. 编写 C# 代码
+
+根据 OpenCV 模块使用对应的命名空间：
 
 ```csharp
 using System;
@@ -55,24 +69,31 @@ CoreCv2.Add(left, right, result);
 Console.WriteLine(string.Join(",", result.ToBytes()));
 ```
 
-完整的[快速开始](docs/articles/quick-start.md)包含 package 选择、Mat、图像编解码、几何运算和资源释放说明。
+### 3. 运行程序
+
+```powershell
+dotnet run
+```
+
+预期输出：
+
+```text
+7,7,7,7,7,7
+```
+
+完整的[快速开始](docs/articles/quick-start.md)包含 package 选择、Mat、图像编解码、几何运算和确定性资源释放说明。
 
 ## NuGet 包
 
-### Managed API
-
 | 包 | 用途 |
 | --- | --- |
-| [`JYPPX.OpenCV.CSharp.API`](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | 面向全部受支持 .NET framework 的版本中立 managed API |
+| [`JYPPX.OpenCV.CSharp.API`](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | 面向全部受支持 .NET target 的版本中立 managed API |
+| `JYPPX.OpenCV.runtime.<rid>` | 面向一个受支持 RID 的 full native runtime |
+| `JYPPX.OpenCV.runtime.<rid>.mini` | 面向一个受支持 RID 的轻量 native runtime |
 
-### Runtime 包
+请根据 target RID 和所需 profile 选择对应的 runtime 包。
 
-请根据 target RID 和 profile 选择一个包：
-
-- Full：`JYPPX.OpenCV.runtime.<rid>`
-- Mini：`JYPPX.OpenCV.runtime.<rid>.mini`
-
-full profile 包含 DNN、标定、Features、Photo、HighGui、ML、Tracking、Stitching 等广泛模块。mini profile 聚焦 `core`、`imgproc`、`imgcodecs`、`videoio`，并包含必需的 `geometry` 与 `flann` runtime 依赖。
+full profile 保证包含矩阵要求的模块，包括 DNN、标定、Features、Photo、Video、HighGui 和 Stitching。ML、Tracking 和部分 contrib 模块属于按实际构建暂存的可选模块：managed API 保持稳定，native 功能不可用时返回 `NOT_LINKED`。mini profile 聚焦 `core`、`imgproc`、`imgcodecs`、`videoio`，并包含必需的 `geometry` 与 `flann` 依赖。
 
 不要同时引用 full 与 mini runtime 包。managed 和 runtime 包必须使用同一个 NuGet 规范版本。
 
@@ -98,22 +119,21 @@ Linux runtime 包使用 distro-specific Linux RID，不使用模糊的通用 `li
 
 如果 no matching runtime package，请使用 `scripts/Build-OpenCV.ps1` 构建 local native runtime，再通过 `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>` 暂存，并用 `OpenCvNativeRuntimeDir` 将本地示例或测试指向该目录。对应 package fallback 命令为 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`。完整流程见 [Linked Runtime 构建指南](docs/articles/linked-runtime-build-guide.md)。
 
-## Full 与 Mini
+## 选择 Full 或 Mini
 
 | 能力 | Full | Mini |
 | --- | :---: | :---: |
 | Core 数组、Mat、持久化 | 支持 | 支持 |
 | ImgProc、ImgCodecs、VideoIO | 支持 | 支持 |
 | Geometry 与 FLANN runtime 依赖 | 支持 | 支持 |
-| DNN 与目标检测 | 支持 | 不支持 |
-| 标定与特征匹配 | 支持 | 不支持 |
-| Photo、Video、ML、Tracking、Stitching | 支持 | 不支持 |
-| HighGui | 支持 | 不支持 |
-| 缺失功能的稳定响应 | 不适用 | `NOT_LINKED` |
+| DNN、目标检测、标定、特征 | 支持 | 不支持 |
+| Photo、Video、HighGui、Stitching | 支持 | 不支持 |
+| ML、Tracking、部分 contrib 模块 | 取决于 runtime | 不支持 |
+| 模块不可用时的稳定响应 | `NOT_LINKED` | `NOT_LINKED` |
 
-## 示例
+## 示例与可视化结果
 
-[`samples/ConsoleSamples`](samples/ConsoleSamples) 包含广覆盖 smoke 和可视化 showcase：
+[`samples/ConsoleSamples`](samples/ConsoleSamples) 包含广覆盖 smoke 和图像处理 showcase：
 
 ```powershell
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
@@ -121,7 +141,11 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
   -- showcase all .\artifacts\showcase
 ```
 
-showcase 会生成图像处理、ORB 特征、模板匹配和 KNN 分类结果。详细说明见[可视化案例](docs/articles/visual-showcase.md)和[场景配方](docs/articles/scenario-recipes.md)。
+该命令会生成图像处理、ORB 特征、模板匹配和 KNN 分类结果：
+
+![OpenCV CSharp API 可视化案例](docs/images/showcase/showcase-overview.png)
+
+更多可执行流程见[可视化案例](docs/articles/visual-showcase.md)和[场景配方](docs/articles/scenario-recipes.md)。
 
 ## 文档
 
@@ -179,17 +203,25 @@ OpenCV-CSharp-API/
 
 请提供聚焦测试，保持 public identity 版本中立，并明确记录无法支持的 upstream 行为。
 
+## 致谢
+
+本项目建立在 [OpenCV](https://opencv.org/) 及其社区贡献之上。算法行为和 native runtime 许可证以 OpenCV 上游内容为准。
+
 ## 许可证
 
 managed API 与项目代码使用 [MIT License](LICENSE)。runtime 包同时包含项目代码与 OpenCV runtime 文件，因此 package license expression 为 `MIT AND Apache-2.0`；包内第三方 notice 对相应组件具有最终效力。
 
-## 技术支持
+## 技术支持与联系方式
 
 - 通过 [GitHub Issues](https://github.com/guojin-yan/OpenCV-CSharp-API/issues) 报告 Bug 或提出功能建议。
 - 通过 [GitHub Discussions](https://github.com/guojin-yan/OpenCV-CSharp-API/discussions) 交流使用问题。
 - QQ 交流群：`945057948`。
 
 本项目当前为 preview。用于生产、工业或关键任务系统前，请针对实际业务流程完成严格测试。
+
+## 软件声明
+
+本项目在开发过程中使用了 AI 辅助，尚未在所有设备、工作负载和边缘场景下完成穷尽测试。源码中不包含任何有意引入的恶意功能。使用前请阅读许可证和第三方 notice，根据自身需求审查代码，并在生产或安全关键场景中完成严格验证。
 
 <details>
 <summary>维护者构建与兼容边界</summary>
