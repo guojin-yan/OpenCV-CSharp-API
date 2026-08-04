@@ -80,6 +80,28 @@ jobs:
             -Version $env:PACKAGE_VERSION_INPUT `
             -OpenCvVersion $env:OPENCV_VERSION_INPUT `
             -PackageRevision $packageRevision | Out-Null
+      - name: Validate runtime selection
+        shell: pwsh
+        env:
+          RID_INPUT: ${{ inputs.rid }}
+          RUNTIME_PROFILE_INPUT: ${{ inputs.runtime_profile }}
+          VALIDATE_SYNTHETIC_RUNTIME_INPUT: ${{ inputs.validate_synthetic_runtime }}
+        run: |
+          $matrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $allowedRids = @('all') + @($matrix.rids | ForEach-Object { [string]$_.rid })
+          $allowedProfiles = @('all') + @($matrix.profiles | ForEach-Object { [string]$_.name })
+
+          if ($allowedRids -notcontains $env:RID_INPUT) {
+            throw "Unknown runtime RID input: $($env:RID_INPUT)"
+          }
+          if ($allowedProfiles -notcontains $env:RUNTIME_PROFILE_INPUT) {
+            throw "Unknown runtime profile input: $($env:RUNTIME_PROFILE_INPUT)"
+          }
+          if ($env:RID_INPUT -eq 'win-x86' -and
+              $env:RUNTIME_PROFILE_INPUT -eq 'mini' -and
+              $env:VALIDATE_SYNTHETIC_RUNTIME_INPUT -ne 'true') {
+            throw "win-x86/mini has no approved real runtime producer or target-execution evidence and cannot be packed as a real candidate."
+          }
       - name: Check project invariants
         shell: pwsh
         run: |
