@@ -554,15 +554,13 @@ function Test-ContainsDisallowedFixedMajorIdentity {
     return $Text -match $pattern
 }
 
-function Assert-FixedMajorEntriesAreCompatibilityLoaders {
+function Assert-NoFixedMajorEntries {
     param(
         [Parameter(Mandatory = $true)]
         [AllowEmptyCollection()]
         [System.Collections.Generic.List[object]]$Violations,
         [Parameter(Mandatory = $true)]
-        [string]$Root,
-        [Parameter(Mandatory = $true)]
-        [string]$CompatibilityLoaderName
+        [string]$Root
     )
 
     if (-not (Test-Path -LiteralPath $Root -PathType Container)) {
@@ -571,9 +569,7 @@ function Assert-FixedMajorEntriesAreCompatibilityLoaders {
 
     foreach ($file in Get-ChildItem -LiteralPath $Root -Recurse -File) {
         if ($file.FullName -match ("Open" + "Cv5Sharp|opencv" + "5sharp")) {
-            if (-not $file.Name.Equals($CompatibilityLoaderName, [System.StringComparison]::OrdinalIgnoreCase)) {
-                Add-Violation -Violations $Violations -Path $file.FullName -Issue "Fixed-major restored files are allowed only for the explicit compatibility native loader copy"
-            }
+            Add-Violation -Violations $Violations -Path $file.FullName -Issue "Restored package content must not contain a fixed-major file identity"
         }
     }
 }
@@ -843,7 +839,7 @@ try {
                     Add-Violation -Violations $violations -Path $nativeCacheDirectory -Issue "Restored runtime package module file count must match selected runtime profile and provenance mode" -Text "Found $($restoredModuleFiles.Count), expected $(@($nativeNames.Modules).Count)"
                 }
 
-                Assert-FixedMajorEntriesAreCompatibilityLoaders -Violations $violations -Root $nativeCacheDirectory -CompatibilityLoaderName $nativeNames.CompatibilityLoader
+                Assert-NoFixedMajorEntries -Violations $violations -Root $nativeCacheDirectory
             }
 
             $consumerOutputFiles = @{}
@@ -864,7 +860,7 @@ try {
                 }
             }
 
-            Assert-FixedMajorEntriesAreCompatibilityLoaders -Violations $violations -Root $consumerBinDirectory -CompatibilityLoaderName $nativeNames.CompatibilityLoader
+            Assert-NoFixedMajorEntries -Violations $violations -Root $consumerBinDirectory
 
             $consumerProjectText = [System.IO.File]::ReadAllText($consumerProjectPath)
             foreach ($packageReference in @(

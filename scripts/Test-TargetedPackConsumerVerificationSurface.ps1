@@ -544,6 +544,7 @@ foreach ($expectation in @(
         @($artifactGuardPath, $artifactGuardText, "Runtime provenance manifest optional modules must match selected runtime profile", "Artifact guard must validate the profile's requested optional modules"),
         @($artifactGuardPath, $artifactGuardText, "Runtime provenance staged optional modules must be an ordered unique subset", "Artifact guard must constrain provenance-derived full optional modules"),
         @($artifactGuardPath, $artifactGuardText, '$expectedStagedModules += $manifestOptionalModulesStaged', "Artifact guard must combine required and actually staged optional modules for exact payload checks"),
+        @($workflowPath, $workflowText, 'profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0', "Pack provenance checks must use the single-loader Linux mini closure"),
         @($consumerGuardPath, $consumerGuardText, '[switch]$RunNativeSmoke', "Consumer guard must expose native execution only as an explicit mode"),
         @($consumerGuardPath, $consumerGuardText, "CompileNativeSmoke requires one selected RID/profile package pair", "Consumer guard must reject broad native smoke compilation"),
         @($consumerGuardPath, $consumerGuardText, "RunNativeSmoke requires one selected non-synthetic RID/profile package pair", "Consumer guard must reject broad or synthetic native execution"),
@@ -555,6 +556,7 @@ foreach ($expectation in @(
         @($consumerGuardPath, $consumerGuardText, "Consumer runtime provenance staged optional modules must be an ordered unique subset", "Consumer native asset expectations must include only allowed staged optional modules"),
         @($consumerGuardPath, $consumerGuardText, "NATIVE_LOADER_OR_SONAME_MISSING", "Consumer diagnostics must distinguish loader or SONAME failure"),
         @($consumerGuardPath, $consumerGuardText, "SUPPORTED_PROFILE_ENTRYPOINT_MISSING", "Consumer diagnostics must distinguish a missing supported profile entrypoint"),
+        @($consumerGuardPath, $consumerGuardText, "Assert-NoFixedMajorEntries", "Consumer restore must reject every fixed-major file identity"),
         @($consumerGuardPath, $consumerGuardText, "-EchoOutputOnSuccess", "Successful targeted native smoke output must remain visible in GitHub logs"),
         @($consumerGuardPath, $consumerGuardText, '"run",', "Consumer guard must execute the restored package application"),
         @($cmakePath, $cmakeText, "BUILD_WITH_INSTALL_RPATH TRUE", "Linux loader must use package RPATH in producer output"),
@@ -709,7 +711,7 @@ foreach ($forbiddenWindowsArm64Text in @(
         -Issue "Windows ARM64 package verification must remain native, same-run, full/mini-only, and free of DLL search overrides: $forbiddenWindowsArm64Text"
 }
 
-foreach ($forbiddenConsumerText in @("AddDllDirectory", "SetDllDirectory", "OpenCvNativeRuntimeDir", "OPENCV_CSHARP_OPENCV_RUNTIME_ROOT")) {
+foreach ($forbiddenConsumerText in @("AddDllDirectory", "SetDllDirectory", "OpenCvNativeRuntimeDir", "OPENCV_CSHARP_OPENCV_RUNTIME_ROOT", "CompatibilityLoader")) {
     Assert-NotContains `
         -Path $consumerGuardPath `
         -Text $consumerGuardText `

@@ -451,7 +451,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
+          $expectedElfPattern = '^UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-22.04' -or
               $provenance.HostedRunner -ne 'ubuntu-22.04' -or
               $provenance.RunnerImage -ne 'ubuntu22' -or
@@ -609,7 +609,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
+          $expectedElfPattern = '^DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -775,7 +775,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
+          $expectedElfPattern = '^FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -941,7 +941,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
+          $expectedElfPattern = '^ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -1107,7 +1107,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
+          $expectedElfPattern = '^RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
