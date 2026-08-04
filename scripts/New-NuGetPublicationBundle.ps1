@@ -166,9 +166,19 @@ $changeControl = Get-Content -LiteralPath $changeControlFile.FullName -Raw | Con
 if ($changeControl.SourceRevision -ne $SourceCommit -or $changeControl.SigningStatus -ne 'repository-signing-pending' -or $changeControl.SbomStatus -ne 'generated-unapproved' -or $changeControl.Approver.Status -ne 'not-approved' -or [bool]$changeControl.Publication.Allowed) {
     throw "Change-control state is not ready for NuGet.org repository-signing review."
 }
-$recordPackageHashes = @($changeControl.Packages | Sort-Object PackageId | ForEach-Object { "$($_.PackageId)|$($_.Sha256)" })
-$expectedPackageHashes = @($packages | Sort-Object Id | ForEach-Object { "$($_.Id)|$($_.Sha256)" })
-if (($recordPackageHashes -join "`n") -cne ($expectedPackageHashes -join "`n")) { throw "Change-control package closure does not match publication bundle." }
+$changeControlPackages = @($changeControl.Packages)
+if ($changeControlPackages.Count -ne $packages.Count) {
+    throw "Change-control package count does not match publication bundle: change-control=$($changeControlPackages.Count) publication=$($packages.Count)"
+}
+foreach ($package in $packages) {
+    $matches = @($changeControlPackages | Where-Object { [string]$_.PackageId -ceq [string]$package.Id })
+    if ($matches.Count -ne 1) {
+        throw "Change-control package identity is missing or duplicated: $($package.Id) matches=$($matches.Count)"
+    }
+    if ([string]$matches[0].Sha256 -cne [string]$package.Sha256) {
+        throw "Change-control package hash mismatch: $($package.Id) change-control=$($matches[0].Sha256) publication=$($package.Sha256)"
+    }
+}
 
 $canonical = @(
     "source=$SourceCommit",

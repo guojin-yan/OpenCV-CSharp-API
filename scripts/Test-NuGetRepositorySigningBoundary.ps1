@@ -126,6 +126,8 @@ try {
             'AuthorizationToken = "publish-nuget:sha256:$candidateHash"',
             'PublicationManifestPath',
             'PackRunId = $_.RunId',
+            'Change-control package identity is missing or duplicated',
+            'Change-control package hash mismatch',
             'PrivateKeyRequired = $false',
             'PublicationTargets = @(',
             "Channel = 'github-packages'",
