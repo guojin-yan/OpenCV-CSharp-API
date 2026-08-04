@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0 License" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 预览版本" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 下载量" /></a>
   <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-package%20feed-24292f" alt="GitHub Packages 源" /></a>
@@ -229,7 +229,7 @@ OpenCV-CSharp-API/
 
 ## 许可证
 
-managed API 与项目代码使用 [MIT License](LICENSE)。runtime 包同时包含项目代码与 OpenCV runtime 文件，因此 package license expression 为 `MIT AND Apache-2.0`；包内第三方 notice 对相应组件具有最终效力。
+managed API、native wrapper 与 OpenCV runtime 均使用 [Apache License 2.0](LICENSE)，因此 managed 和 runtime NuGet 包统一使用 SPDX expression `Apache-2.0`；包内第三方 notice 对相应组件具有最终效力。
 
 ## 技术支持与联系方式
 

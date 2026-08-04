@@ -240,6 +240,7 @@ $primaryManagedAssemblyName = $primaryManagedPackageId
 $primaryManagedRootNamespace = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRootNamespace"
 $runtimePackagePrefix = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRuntimePackageIdPrefix"
 $primaryNativeLoader = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCurrentNativeLibraryName"
+$projectLicenseExpression = Get-RequiredDirectoryBuildProperty $centralProperties "PackageLicenseExpression"
 
 $violations = [System.Collections.Generic.List[object]]::new()
 
@@ -303,6 +304,7 @@ $managedProject = Read-XmlProject -RelativePath $managedProjectPath
 $managedPackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageId") -Properties $centralProperties)
 $managedAssemblyNames = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "AssemblyName") -Properties $centralProperties)
 $managedRootNamespaces = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "RootNamespace") -Properties $centralProperties)
+$managedLicenseExpressions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageLicenseExpression") -Properties $centralProperties)
 $managedVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "Version") -Properties $centralProperties)
 $managedPackageVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageVersion") -Properties $centralProperties)
 
@@ -316,6 +318,10 @@ if ($managedAssemblyNames.Count -ne 1 -or $managedAssemblyNames[0] -ne $primaryM
 
 if ($managedRootNamespaces.Count -ne 1 -or $managedRootNamespaces[0] -ne $primaryManagedRootNamespace) {
     Add-Violation $violations $managedProjectPath "Managed project RootNamespace must be $primaryManagedRootNamespace"
+}
+
+if ($projectLicenseExpression -cne "Apache-2.0" -or $managedLicenseExpressions.Count -ne 1 -or $managedLicenseExpressions[0] -cne "Apache-2.0") {
+    Add-Violation $violations $managedProjectPath "Project and managed package license expressions must be exactly Apache-2.0"
 }
 
 if ($managedVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $managedVersions[0])) {
@@ -346,6 +352,7 @@ foreach ($runtimeProjectFile in $runtimeProjectFiles) {
     $runtimePackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageId") -Properties $centralProperties)
     $runtimeVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "Version") -Properties $centralProperties)
     $runtimePackageVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageVersion") -Properties $centralProperties)
+    $runtimeLicenseExpressions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageLicenseExpression") -Properties $centralProperties)
     $runtimeRidValues = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "RuntimePackageRid")
     $runtimeProfileValues = @(Get-ProjectPropertyValues -Project $runtimeProject -Name "RuntimePackageProfile")
 
@@ -371,6 +378,31 @@ foreach ($runtimeProjectFile in $runtimeProjectFiles) {
 
     if ($runtimeVersions.Count -eq 1 -and $runtimePackageVersions.Count -eq 1 -and $runtimeVersions[0] -ne $runtimePackageVersions[0]) {
         Add-Violation $violations $relativePath "Runtime project Version and PackageVersion should match so OpenCV runtime identity stays in package version metadata"
+    }
+
+    if ($runtimeLicenseExpressions.Count -ne 1 -or $runtimeLicenseExpressions[0] -cne "Apache-2.0") {
+        Add-Violation $violations $relativePath "Runtime package license expression must be exactly Apache-2.0"
+    }
+}
+
+$licenseText = Read-RequiredText -RelativePath "LICENSE"
+foreach ($needle in @("Apache License", "Version 2.0, January 2004", "http://www.apache.org/licenses/", "END OF TERMS AND CONDITIONS")) {
+    if (-not (Test-ContainsText -Text $licenseText -Needle $needle)) {
+        Add-Violation $violations "LICENSE" "Repository license must contain the standard Apache License 2.0 text: $needle"
+    }
+}
+
+foreach ($surface in @(
+        [pscustomobject]@{ Path = "README.md"; Needles = @('License-Apache%202.0-blue.svg', '[Apache License 2.0](LICENSE)', '`Apache-2.0`') },
+        [pscustomobject]@{ Path = "README_cn.md"; Needles = @('License-Apache%202.0-blue.svg', '[Apache License 2.0](LICENSE)', '`Apache-2.0`') },
+        [pscustomobject]@{ Path = "docs/articles/runtime-licenses.md"; Needles = @('license expression is `Apache-2.0`') },
+        [pscustomobject]@{ Path = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"; Needles = @('license expression is `Apache-2.0`') }
+    )) {
+    $surfaceText = Read-RequiredText -RelativePath $surface.Path
+    foreach ($needle in $surface.Needles) {
+        if (-not (Test-ContainsText -Text $surfaceText -Needle $needle)) {
+            Add-Violation $violations $surface.Path "Apache-2.0 license surface is incomplete: $needle"
+        }
     }
 }
 

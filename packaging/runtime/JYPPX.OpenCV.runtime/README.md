@@ -119,7 +119,7 @@ licenses
 licenses/opencv-3rdparty
 ```
 
-The runtime package license expression is `MIT AND Apache-2.0`: this project's native wrapper pieces are covered by MIT, and the OpenCV runtime is covered by Apache-2.0. Additional third-party license texts exported by the OpenCV install tree are included under `licenses/opencv-3rdparty`; the exact list depends on the OpenCV build configuration.
+The runtime package license expression is `Apache-2.0`: this project's native wrapper pieces and the OpenCV runtime are both covered by Apache-2.0. Additional third-party license texts exported by the OpenCV install tree are included under `licenses/opencv-3rdparty`; the exact list depends on the OpenCV build configuration.
 
 License source inputs are the repository `LICENSE`, the OpenCV source `LICENSE`, the OpenCV source `3rdparty/ippicv/readme.htm`, and third-party license files from the OpenCV install `etc/licenses` directory. `Stage-Runtime.ps1` copies those inputs into the generated package layout shown above.
 
@@ -130,7 +130,7 @@ licenses
 licenses/opencv-3rdparty
 ```
 
-runtime 包的 license expression 为 `MIT AND Apache-2.0`：本项目 native wrapper 使用 MIT 许可，OpenCV runtime 使用 Apache-2.0 许可。OpenCV install tree 导出的其他第三方许可证文本会包含在 `licenses/opencv-3rdparty` 下；具体列表取决于 OpenCV 构建配置。
+runtime 包的 license expression 为 `Apache-2.0`：本项目 native wrapper 与 OpenCV runtime 均使用 Apache-2.0 许可。OpenCV install tree 导出的其他第三方许可证文本会包含在 `licenses/opencv-3rdparty` 下；具体列表取决于 OpenCV 构建配置。
 
 许可证源输入包括仓库 `LICENSE`、OpenCV 源码 `LICENSE`、OpenCV 源码 `3rdparty/ippicv/readme.htm`，以及 OpenCV install `etc/licenses` 目录中的第三方许可证文件。`Stage-Runtime.ps1` 会把这些输入复制到上方所示的生成包布局中。
 

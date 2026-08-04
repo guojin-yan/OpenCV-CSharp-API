@@ -94,7 +94,7 @@ function New-FixturePackage {
         [IO.File]::Delete($Path)
     }
 
-    $license = if ($OmitLicenseExpression) { '' } else { '<license type="expression">MIT AND Apache-2.0</license>' }
+    $license = if ($OmitLicenseExpression) { '' } else { '<license type="expression">Apache-2.0</license>' }
     $doctype = if ($IncludeDtd) { '<!DOCTYPE package [<!ENTITY author SYSTEM "file:///release-sbom-xxe">]>' } else { '' }
     $author = if ($IncludeDtd) { '&author;' } else { 'guojin-yan' }
     $nuspec = @"
@@ -120,7 +120,7 @@ $doctype<package><metadata><id>$packageId</id><version>$NuspecVersion</version><
     }
     $items.Add([pscustomobject]@{ Name = 'README.md'; Bytes = Get-TextBytes -Text $ReadmeText })
     $items.Add([pscustomobject]@{ Name = 'build/JYPPX.OpenCV.runtime.provenance.json'; Bytes = Get-TextBytes -Text $provenance })
-    $items.Add([pscustomobject]@{ Name = 'licenses/LICENSE'; Bytes = Get-TextBytes -Text 'MIT and Apache-2.0 fixture evidence' })
+    $items.Add([pscustomobject]@{ Name = 'licenses/LICENSE'; Bytes = Get-TextBytes -Text 'Apache-2.0 fixture evidence' })
     $items.Add([pscustomobject]@{ Name = 'runtimes/win-x64/native/JYPPX.OpenCV.Native.dll'; Bytes = [byte[]](1, 2, 3, 4) })
     $items.Add([pscustomobject]@{ Name = 'runtimes/win-x64/native/opencv_core500.dll'; Bytes = [byte[]](5, 6, 7, 8) })
     if ($IncludeSignature) {

@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0 License" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet prerelease version" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet downloads" /></a>
   <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-package%20feed-24292f" alt="GitHub Packages feed" /></a>
@@ -229,7 +229,7 @@ This project builds on [OpenCV](https://opencv.org/) and its contributors. OpenC
 
 ## License
 
-The managed API and project code are licensed under the [MIT License](LICENSE). Runtime packages combine project code with OpenCV runtime files and use the package license expression `MIT AND Apache-2.0`; packaged third-party notices remain authoritative for their respective components.
+The managed API, native wrapper, and OpenCV runtime are licensed under the [Apache License 2.0](LICENSE), so managed and runtime NuGet packages use the SPDX expression `Apache-2.0`. Packaged third-party notices remain authoritative for their respective components.
 
 ## Support And Contact
 

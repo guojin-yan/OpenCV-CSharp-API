@@ -169,7 +169,7 @@ function New-TemporaryRuntimeProject {
     <PackageVersion>5.0.0.0</PackageVersion>
     <Authors>synthetic</Authors>
     <Description>Synthetic native runtime package for local consumer restore validation.</Description>
-    <PackageLicenseExpression>MIT AND Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageReadmeFile>README.md</PackageReadmeFile>

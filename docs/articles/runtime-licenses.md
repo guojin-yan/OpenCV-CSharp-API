@@ -4,9 +4,9 @@ Runtime packages include this project's license, the OpenCV license, and third-p
 
 runtime 包包含本项目许可证、OpenCV 许可证，以及 OpenCV 安装树导出的第三方许可证文件。
 
-The runtime package license expression is `MIT AND Apache-2.0`: this project's native wrapper pieces are covered by MIT, and the OpenCV runtime is covered by Apache-2.0.
+The runtime package license expression is `Apache-2.0`: this project's native wrapper pieces and the OpenCV runtime are both covered by Apache-2.0.
 
-runtime 包的 license expression 为 `MIT AND Apache-2.0`：本项目 native wrapper 使用 MIT 许可，OpenCV runtime 使用 Apache-2.0 许可。
+runtime 包的 license expression 为 `Apache-2.0`：本项目 native wrapper 与 OpenCV runtime 均使用 Apache-2.0 许可。
 
 ## Staging Rule
 
