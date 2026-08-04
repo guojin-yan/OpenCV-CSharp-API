@@ -132,7 +132,7 @@ full profile 保证包含矩阵要求的模块，包括 DNN、标定、Features�
 
 Linux runtime 包使用 distro-specific Linux RID，不使用模糊的通用 `linux-x64` 身份。如果 .NET SDK 无法识别项目定义的 RID，请将 `RuntimeIdentifierGraphPath` 指向 [`packaging/runtime/runtime-distro-rid-graph.json`](packaging/runtime/runtime-distro-rid-graph.json)，或在 restore 前把该文件复制到 consumer 项目。
 
-Android x64/x86 的 Full 与 Mini 在新的单加载器产物完成正式重建和模拟器原生加载前，暂时归类为 `android-evidence-pending`；已淘汰的双加载器运行记录保留在 [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json) 的 `superseded` 区域。Android ARM/ARM64 的 Full 与 Mini 也仍为 `android-evidence-pending`：其托管生产和包证据已经通过，但在晋升前仍需 ABI 匹配的真机加载证据。`win-x86/full` 仍为 `hosted-evidence-pending`，`win-x86/mini` 被排除，macOS 位于声明的 runtime package matrix 之外。矩阵中存在某一行，不等于项目对该平台作出正式支持承诺。
+Android x64/x86 的 Full 与 Mini 已通过正式单加载器 NDK 构建、包与 APK 审计，以及模拟器内 `Mat` 加 `Cv2.Sum` 原生加载，现已归类为 `realSupport`；已淘汰的双加载器运行记录保留在 [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json) 的 `superseded` 区域。Android ARM/ARM64 的 Full 与 Mini 仍为 `android-evidence-pending`：其托管生产和包证据已经通过，但在晋升前仍需 ABI 匹配的真机加载证据。`win-x86/full` 仍为 `hosted-evidence-pending`，`win-x86/mini` 被排除，macOS 位于声明的 runtime package matrix 之外。矩阵中存在某一行，不等于项目对该平台作出正式支持承诺。
 
 如果 no matching runtime package，请使用 `scripts/Build-OpenCV.ps1` 构建 local native runtime，再通过 `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>` 暂存，并用 `OpenCvNativeRuntimeDir` 将本地示例或测试指向该目录。对应 package fallback 命令为 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`。完整流程见 [Linked Runtime 构建指南](docs/articles/linked-runtime-build-guide.md)。
 

@@ -2,8 +2,97 @@
   "schemaVersion": 2,
   "repository": "guojin-yan/OpenCV-CSharp-API",
   "workflow": ".github/workflows/runtime-input.yml",
-  "verified": [],
-  "supersededEvidenceReason": "These runs prove the retired dual-loader payload and are retained only as historical records. The single-loader payload requires a new authoritative rebuild and emulator loading proof.",
+  "verified": [
+    {
+      "target": "android-x64/full",
+      "sourceCommit": "51b95cb3ed05b8a5f91c2bdd3f73a2efff4cd676",
+      "runId": 30878449159,
+      "jobId": 91894557251,
+      "completedAt": "2026-08-04T05:10:49Z",
+      "runtimeArtifact": {
+        "id": 8880853960,
+        "name": "runtime-input-android-x64-full",
+        "size": 98484714
+      },
+      "proofArtifact": {
+        "id": 8880864550,
+        "name": "android-proof-android-x64-full",
+        "size": 527873709
+      },
+      "abi": "x86_64",
+      "systemImage": "system-images;android-35;default;x86_64",
+      "nativeFiles": 17,
+      "nativeCall": "Mat+Cv2.Sum",
+      "marker": "ANDROID_EMULATOR_LOADING_OK rid=android-x64 abi=x86_64 profile=full native_call=Mat+Cv2.Sum version=5.0.0 sum=448"
+    },
+    {
+      "target": "android-x64/mini",
+      "sourceCommit": "51b95cb3ed05b8a5f91c2bdd3f73a2efff4cd676",
+      "runId": 30878495497,
+      "jobId": 91894702928,
+      "completedAt": "2026-08-04T04:59:47Z",
+      "runtimeArtifact": {
+        "id": 8880655900,
+        "name": "runtime-input-android-x64-mini",
+        "size": 40681794
+      },
+      "proofArtifact": {
+        "id": 8880660174,
+        "name": "android-proof-android-x64-mini",
+        "size": 241968869
+      },
+      "abi": "x86_64",
+      "systemImage": "system-images;android-35;default;x86_64",
+      "nativeFiles": 7,
+      "nativeCall": "Mat+Cv2.Sum",
+      "marker": "ANDROID_EMULATOR_LOADING_OK rid=android-x64 abi=x86_64 profile=mini native_call=Mat+Cv2.Sum version=5.0.0 sum=448"
+    },
+    {
+      "target": "android-x86/full",
+      "sourceCommit": "51b95cb3ed05b8a5f91c2bdd3f73a2efff4cd676",
+      "runId": 30878499069,
+      "jobId": 91894701473,
+      "completedAt": "2026-08-04T05:07:24Z",
+      "runtimeArtifact": {
+        "id": 8880788983,
+        "name": "runtime-input-android-x86-full",
+        "size": 91344740
+      },
+      "proofArtifact": {
+        "id": 8880798881,
+        "name": "android-proof-android-x86-full",
+        "size": 493259125
+      },
+      "abi": "x86",
+      "systemImage": "system-images;android-29;default;x86",
+      "nativeFiles": 17,
+      "nativeCall": "Mat+Cv2.Sum",
+      "marker": "ANDROID_EMULATOR_LOADING_OK rid=android-x86 abi=x86 profile=full native_call=Mat+Cv2.Sum version=5.0.0 sum=448"
+    },
+    {
+      "target": "android-x86/mini",
+      "sourceCommit": "51b95cb3ed05b8a5f91c2bdd3f73a2efff4cd676",
+      "runId": 30878502934,
+      "jobId": 91894727191,
+      "completedAt": "2026-08-04T04:58:33Z",
+      "runtimeArtifact": {
+        "id": 8880634898,
+        "name": "runtime-input-android-x86-mini",
+        "size": 35219017
+      },
+      "proofArtifact": {
+        "id": 8880638449,
+        "name": "android-proof-android-x86-mini",
+        "size": 215248348
+      },
+      "abi": "x86",
+      "systemImage": "system-images;android-29;default;x86",
+      "nativeFiles": 7,
+      "nativeCall": "Mat+Cv2.Sum",
+      "marker": "ANDROID_EMULATOR_LOADING_OK rid=android-x86 abi=x86 profile=mini native_call=Mat+Cv2.Sum version=5.0.0 sum=448"
+    }
+  ],
+  "supersededEvidenceReason": "These runs prove the retired dual-loader payload and are retained only as historical records. Current x64/x86 support is represented by the verified single-loader records above.",
   "superseded": [
     {
       "target": "android-x64/full",
@@ -98,10 +187,6 @@
     "android-arm/full",
     "android-arm/mini",
     "android-arm64/full",
-    "android-arm64/mini",
-    "android-x64/full",
-    "android-x64/mini",
-    "android-x86/full",
-    "android-x86/mini"
+    "android-arm64/mini"
   ]
 }

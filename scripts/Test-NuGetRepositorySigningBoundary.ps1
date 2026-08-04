@@ -135,7 +135,7 @@ try {
     }
     foreach ($token in @(
             'runtime-support-contract.json',
-            '$realTargets.Count -ne 24',
+            '$realTargets.Count -ne 28',
             'Publication manifest must contain exactly',
             'JYPPX.OpenCV.CSharp.API',
             'nupkg-$rid-$profile',
@@ -199,7 +199,7 @@ try {
     $missingPackage.Packages = @($missingPackage.Packages | Select-Object -Skip 1)
     $missingPackagePath = Join-Path $temporaryRoot 'missing-package.json'
     [IO.File]::WriteAllText($missingPackagePath, (($missingPackage | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'exactly 25 packages'
+    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'exactly 29 packages'
 
     $fixtureProject = Join-Path $temporaryRoot "fixture/Fixture.csproj"
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $fixtureProject) | Out-Null

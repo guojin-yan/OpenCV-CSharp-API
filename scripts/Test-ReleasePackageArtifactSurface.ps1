@@ -294,7 +294,7 @@ Assert-Contains -Violations $violations -Path $nugetRepositorySigningBoundaryPat
 Assert-Contains -Violations $violations -Path $nugetRepositorySignedPackagePath -Text $nugetRepositorySignedPackageText -Needle 'dotnet nuget verify' -Issue "Repository-signed package verifier must invoke NuGet cryptographic verification"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'publish-nuget:sha256:' -Issue "Publication bundle must emit a candidate-specific authorization token"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'PublicationManifestPath' -Issue "Publication bundle must bind the normalized package manifest"
-Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 24' -Issue "Publication manifest must require all 24 currently real-supported runtime targets"
+Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 28' -Issue "Publication manifest must require all 28 currently real-supported runtime targets"
 Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle 'Publication manifest must contain exactly' -Issue "Publication manifest must reject incomplete package closure"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProjectPath -Text $nugetRepositoryVerifierProjectText -Needle '<PackageReference Include="NuGet.Packaging" Version="6.14.0" />' -Issue "Structured repository-signature verifier must pin NuGet.Packaging"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProgramPath -Text $nugetRepositoryVerifierProgramText -Needle 'RepositoryPrimarySignature' -Issue "Structured verifier must require a repository primary signature"
@@ -342,7 +342,7 @@ Assert-Contains -Violations $violations -Path $highGuiFamilyPath -Text $highGuiF
 Assert-Contains -Violations $violations -Path $finalCloseoutPath -Text $finalCloseoutText -Needle 'local-release-candidate-closeout.json' -Issue "Release artifact surface must register the final closeout record"
 Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $finalCloseoutRecordText -Needle 'local-release-candidate-closeout' -Issue "Final closeout record must identify its record kind"
 Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"
-Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 24 |' -Issue "Support lifecycle policy must expose the real-support count"
+Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 28 |' -Issue "Support lifecycle policy must expose the real-support count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'repository-signing-pending' -Issue "Release closeout documentation must expose the confirmed NuGet.org signing strategy"
@@ -423,8 +423,8 @@ foreach ($imageName in $requiredTutorialImages) {
 }
 
 $runtimeTargets = @($runtimeSupportContract.realSupport)
-if ($runtimeTargets.Count -ne 24) {
-    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 24 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
+if ($runtimeTargets.Count -ne 28) {
+    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 28 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
 }
 foreach ($readme in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },

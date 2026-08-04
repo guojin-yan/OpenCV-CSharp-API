@@ -92,7 +92,7 @@ dotnet restore
 
 - The release is a preview. Compatibility baselines prevent accidental drift, but additional APIs and runtime packages will continue to be added.
 - Measured module partitions have explicit zero-gap evidence, but this is not repository-wide or all-OpenCV parity.
-- The current fail-closed candidate contains 25 packages: one managed package plus 24 real-supported runtime packages across Windows x64/ARM64 and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. Android x64/x86 Full/Mini await single-loader emulator revalidation; Android ARM/ARM64 Full/Mini remain `android-evidence-pending` until physical-device loading passes; `win-x86/full` remains hosted-evidence-pending, `win-x86/mini` is excluded, and macOS is outside the declared matrix. The intended final candidate returns to 29 packages after x64/x86 promotion.
+- The current fail-closed candidate contains 29 packages: one managed package plus 28 real-supported runtime packages across Android x64/x86, Windows x64/ARM64, and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. Android x64/x86 Full/Mini have authoritative single-loader emulator evidence; Android ARM/ARM64 Full/Mini remain `android-evidence-pending` until physical-device loading passes; `win-x86/full` remains hosted-evidence-pending, `win-x86/mini` is excluded, and macOS is outside the declared matrix.
 - Mini excludes DNN, calibration, features, Photo, HighGui, ML, Tracking, Stitching, and other full-only modules.
 - Some algorithms require user-supplied models, training data, codecs, GUI backends, or optional OpenCV build features. The library does not silently download them.
 - HighGui requires a compatible desktop UI backend and event-thread model. Server, container, and unattended workflows should prefer file or memory encoding.
@@ -103,7 +103,7 @@ dotnet restore
 
 - 本版本为 preview。兼容性基线会阻止意外漂移，但后续仍会继续增加 API 与 runtime 包。
 - 已测量模块分区具有明确的 zero-gap 证据，但不代表整个仓库或全部 OpenCV 已达到 parity。
-- 当前 fail-closed 候选包含 25 个包：一个 managed 包，加上 Windows x64/ARM64 以及声明的 Ubuntu、Debian、Fedora、RHEL、Rocky、Alpine 目标共 24 个真实支持 runtime 包。Android x64/x86 的 Full/Mini 等待单加载器模拟器重新验证；Android ARM/ARM64 的 Full/Mini 在真机加载通过前仍为 `android-evidence-pending`；`win-x86/full` 仍为 hosted-evidence-pending，`win-x86/mini` 被排除，macOS 位于声明矩阵之外。x64/x86 晋升后，预期最终候选恢复为 29 个包。
+- 当前 fail-closed 候选包含 29 个包：一个 managed 包，加上 Android x64/x86、Windows x64/ARM64 以及声明的 Ubuntu、Debian、Fedora、RHEL、Rocky、Alpine 目标共 28 个真实支持 runtime 包。Android x64/x86 的 Full/Mini 已有正式单加载器模拟器证据；Android ARM/ARM64 的 Full/Mini 在真机加载通过前仍为 `android-evidence-pending`；`win-x86/full` 仍为 hosted-evidence-pending，`win-x86/mini` 被排除，macOS 位于声明矩阵之外。
 - mini 排除 DNN、标定、Features、Photo、HighGui、ML、Tracking、Stitching 和其他 full-only 模块。
 - 部分算法需要用户提供模型、训练数据、codec、GUI backend 或 OpenCV 可选构建能力；库不会静默下载这些输入。
 - HighGui 需要兼容的桌面 UI backend 和事件线程模型。服务器、容器和无人值守流程应优先使用文件或内存编码。

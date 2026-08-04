@@ -7,12 +7,12 @@ The current candidate is a local, deterministic preflight only. The generated re
 - [x] Managed package and runtime package identities remain version-neutral.
 - [x] Native full/mini ABI manifests and managed API baseline are generated and checked for deterministic drift.
 - [x] The bounded OpenCV 5.0.0 ImgProc map classifies all 203 parsed declarations, with 161 implemented callables, zero measured gaps, 6 intentional omissions, and no repository-wide parity claim.
-- [x] Runtime support is classified as 24 real, 9 pending, 1 excluded, with macOS outside the matrix while Android single-loader evidence is regenerated.
+- [x] Runtime support is classified as 28 real, 5 pending, 1 excluded, with macOS outside the matrix and Android ARM/ARM64 awaiting physical-device evidence.
 - [x] Deterministic package normalization runs before the NuGet.org repository-signing boundary.
 - [x] The first-preview signing strategy is `nuget.org-repository-signing`; no author certificate or project private key is required.
 - [x] Structured and cryptographic verification bind the public Repository signature to owner `GuojinYan` and compare every non-signature payload entry with the frozen unsigned package.
 - [x] Formal publication binds the same support-contract-derived package candidate to NuGet.org and GitHub Packages, with exact-byte, public-visibility, and authoritative-repository verification before Release.
-- [ ] Android x64/x86 Full and Mini single-loader payloads execute package-owned native calls in ABI-matched hosted emulators; retired dual-loader runs are retained only as superseded history.
+- [x] Android x64/x86 Full and Mini single-loader payloads execute package-owned native calls in ABI-matched hosted emulators; retired dual-loader runs are retained only as superseded history.
 - [x] Deterministic SPDX-2.3 generation and byte-for-byte check mode are guarded with 17 negative fixtures.
 - [x] Provenance, license, runtime payload, change-control, rollback, and read-only public-feed evidence are locally validated.
 - [x] Exact SDK `10.0.302`, DocFX `2.78.5`, workflow syntax, actionlint, and aggregate invariant checks are local gates.
@@ -52,7 +52,7 @@ NuGet.org adds the primary Repository signature only after upload. `Test-NuGetRe
 
 首个发布渠道使用严格打包输入 `5.0.0.0-preview.1`，对应 NuGet 规范身份 `5.0.0-preview.1`。使用真实 win-x64 输入生成的 full/mini preview 包已通过 release preflight、产物检查、隔离还原/构建和包内 native smoke；这些结果只证明本地 preview 路径，不代表已批准或已发布。dry-run 审核或上传前，必须基于最终 release commit 重新生成并核对最终规范化未签名包字节与哈希。
 
-最终提交的规范化未签名包生成后，必须为全部候选包生成并 `-Check` SPDX-2.3、完整 publication manifest、durable change-control 和 NuGet publication bundle。集合只能包含一个 managed 包和 `realSupport` 中的全部 runtime 包；pending、excluded 与 synthetic 目标必须失败。Android 重验完成前临时候选为 25 个包，重验通过并晋升后最终候选恢复为 29 个包。状态分别保持 `current-unsigned-candidate`、`generated-unapproved` 与 `repository-signing-pending`。首次 `publish-nuget.yml` dispatch 只生成绑定两个 registry 的精确授权 token；正式上传必须回填该 token、不同的 publisher/approver，并通过 `nuget-production` Environment，将同一候选物发布到 NuGet.org 和 GitHub Packages。随后将全部 GitHub package 页面逐项设为 Public，再单独运行双源验证与 Release。NuGet.org 包要求 Repository signature、owner `GuojinYan`、可信 timestamp 以及除 `.signature.p7s` 外的 payload entry 全部逐字节一致；GitHub Packages 要求精确 unsigned SHA256、Public 可见性和正式仓库关联。
+最终提交的规范化未签名包生成后，必须为全部 29 个候选包生成并 `-Check` SPDX-2.3、完整 publication manifest、durable change-control 和 NuGet publication bundle。集合只能包含一个 managed 包和 `realSupport` 中的全部 28 个 runtime 包；pending、excluded 与 synthetic 目标必须失败。状态分别保持 `current-unsigned-candidate`、`generated-unapproved` 与 `repository-signing-pending`。首次 `publish-nuget.yml` dispatch 只生成绑定两个 registry 的精确授权 token；正式上传必须回填该 token、不同的 publisher/approver，并通过 `nuget-production` Environment，将同一候选物发布到 NuGet.org 和 GitHub Packages。随后将全部 GitHub package 页面逐项设为 Public，再单独运行双源验证与 Release。NuGet.org 包要求 Repository signature、owner `GuojinYan`、可信 timestamp 以及除 `.signature.p7s` 外的 payload entry 全部逐字节一致；GitHub Packages 要求精确 unsigned SHA256、Public 可见性和正式仓库关联。
 
 ## Blocker Ledger
 

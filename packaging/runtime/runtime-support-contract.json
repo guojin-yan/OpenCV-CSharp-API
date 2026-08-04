@@ -26,7 +26,11 @@
     "win-arm64/full",
     "win-arm64/mini",
     "win-x64/full",
-    "win-x64/mini"
+    "win-x64/mini",
+    "android-x64/full",
+    "android-x64/mini",
+    "android-x86/full",
+    "android-x86/mini"
   ],
   "pending": [
     {
@@ -71,38 +75,6 @@
       "reason": "Authoritative hosted NDK production, ELF audit, same-run packaging, and APK consumption have passed; matching arm64-v8a device loading evidence is still required.",
       "requires": [
         "device-or-emulator-loader"
-      ]
-    },
-    {
-      "target": "android-x64/full",
-      "status": "android-evidence-pending",
-      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86_64 emulator loading rerun are required.",
-      "requires": [
-        "hosted-emulator-loader"
-      ]
-    },
-    {
-      "target": "android-x64/mini",
-      "status": "android-evidence-pending",
-      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86_64 emulator loading rerun are required.",
-      "requires": [
-        "hosted-emulator-loader"
-      ]
-    },
-    {
-      "target": "android-x86/full",
-      "status": "android-evidence-pending",
-      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86 emulator loading rerun are required.",
-      "requires": [
-        "hosted-emulator-loader"
-      ]
-    },
-    {
-      "target": "android-x86/mini",
-      "status": "android-evidence-pending",
-      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86 emulator loading rerun are required.",
-      "requires": [
-        "hosted-emulator-loader"
       ]
     }
   ],

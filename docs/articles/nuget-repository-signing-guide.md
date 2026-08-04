@@ -26,7 +26,7 @@ Repository signing 不是 author certificate。本项目不会声称本地自签
 
 ## Prepublication State / 发布前状态
 
-The first-preview set remains `repository-signing-pending`: one managed package plus every runtime package in `runtime-support-contract.json` `realSupport`. While Android single-loader evidence is regenerated, that fail-closed set contains 25 packages; after all four emulator profiles are promoted it returns to the intended 29 packages. The normalized publication manifest binds every authoritative pack run ID and package SHA256 to the package-bound SPDX documents and durable change-control record. Generate the final publication bundle only from the final source commit:
+The first-preview set remains `repository-signing-pending`: one managed package plus every runtime package in `runtime-support-contract.json` `realSupport`, for 29 packages after Android x64/x86 promotion. The normalized publication manifest binds every authoritative pack run ID and package SHA256 to the package-bound SPDX documents and durable change-control record. Generate the final publication bundle only from the final source commit:
 
 29 个 package 在发布前保持 `repository-signing-pending`：一个 managed 包，加上 `runtime-support-contract.json` 中 28 个 `realSupport` runtime 包。规范化 publication manifest 将每个正式 pack run ID 和 SHA256 绑定到 package-bound SPDX 与 durable change-control。只能从最终 source commit 生成 publication bundle：
 

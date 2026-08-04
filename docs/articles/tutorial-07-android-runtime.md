@@ -11,9 +11,9 @@ This tutorial creates a .NET for Android application, installs the managed API p
 | x86_64 | `android-x64` | `JYPPX.OpenCV.runtime.android-x64` | `JYPPX.OpenCV.runtime.android-x64.mini` | Android 35 `default;x86_64` |
 | x86 | `android-x86` | `JYPPX.OpenCV.runtime.android-x86` | `JYPPX.OpenCV.runtime.android-x86.mini` | Android 29 `default;x86` |
 
-Android x64/x86 Full and Mini are `android-evidence-pending` until the single-loader packages pass authoritative emulator loading again. Android ARM/ARM64 remain `android-evidence-pending` until ABI-matched physical-device loading passes, so do not use package-matrix presence as a support claim. Current and superseded CI records are stored in [`android-runtime-evidence.json`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/android-runtime-evidence.json).
+Android x64/x86 Full and Mini are real-supported after the single-loader packages passed authoritative emulator-native loading with `Mat` and `Cv2.Sum`. Android ARM/ARM64 remain `android-evidence-pending` until ABI-matched physical-device loading passes, so do not use package-matrix presence as a support claim. Current and superseded CI records are stored in [`android-runtime-evidence.json`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/android-runtime-evidence.json).
 
-Android x64/x86 的 Full 与 Mini 在单加载器包重新通过正式模拟器加载前为 `android-evidence-pending`。Android ARM/ARM64 在 ABI 匹配的真机加载通过前也仍为 `android-evidence-pending`，不能仅根据 package matrix 中存在包名就宣称已受支持。当前及已淘汰的 CI 记录见 [`android-runtime-evidence.json`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/android-runtime-evidence.json)。
+Android x64/x86 的 Full 与 Mini 已通过单加载器包的正式模拟器原生加载，并实际执行 `Mat` 与 `Cv2.Sum`，现归类为 real support。Android ARM/ARM64 在 ABI 匹配的真机加载通过前仍为 `android-evidence-pending`，不能仅根据 package matrix 中存在包名就宣称已受支持。当前及已淘汰的 CI 记录见 [`android-runtime-evidence.json`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/android-runtime-evidence.json)。
 
 ## 1. Prepare The Android Toolchain / 准备 Android 工具链
 

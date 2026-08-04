@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0d111833887eb707",
-  "SourceIdentity": "sha256:0d111833887eb7075bf78b70156042f52aadd8aec86b4e4c85edf8fc6fae4a29",
+  "CandidateId": "local-closeout/sha256/3df293d4a5250b88",
+  "SourceIdentity": "sha256:3df293d4a5250b8861970c4692c9ab49ee8532f673d3107f04e6529aa054150c",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
     "FileCount": 1556,
-    "Sha256": "0d111833887eb7075bf78b70156042f52aadd8aec86b4e4c85edf8fc6fae4a29",
+    "Sha256": "3df293d4a5250b8861970c4692c9ab49ee8532f673d3107f04e6529aa054150c",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -18,10 +18,10 @@
   },
   "SupportContract": {
     "Path": "packaging/runtime/runtime-support-contract.json",
-    "Sha256": "ea20925cf1d93ab7e22bbd082911018c56c1d8dc822e966a42741e620c478b15",
+    "Sha256": "e38cabc06fcfcae90e275bbc467ee48bd4d8a37446c5612b6d509e273726a301",
     "MatrixEntryCount": 34,
-    "RealSupportCount": 24,
-    "PendingSupportCount": 9,
+    "RealSupportCount": 28,
+    "PendingSupportCount": 5,
     "ExcludedSupportCount": 1,
     "OutsideMatrixCount": 1,
     "WinX86FullStatus": "hosted-evidence-pending",
@@ -411,7 +411,7 @@
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
-      "Sha256": "9849a2303f875ab753c27c08a25311cd757cbb7c8d5ef5b48b8b6c8f253608cd",
+      "Sha256": "e58e14164f2cba4fc0b6514094e4efc1409b52a71c82262265cb755bfe681d6a",
       "Length": 34693
     },
     {
@@ -896,8 +896,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "7576ef3db5f535bdc3a2f9ad182b7aa691ad1e2710f75bfd62567a59931c4edd",
-      "Length": 10296
+      "Sha256": "32738b425c265ed17659765a88816ded269627d90f5102de68c9f4d344341f7e",
+      "Length": 10205
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -906,8 +906,8 @@
     },
     {
       "Path": "docs/articles/support-lifecycle-policy.md",
-      "Sha256": "6ac5d5afdc0a5befb339634cef71f8446bcf2b9e28b51bd92d8858f43ce0e219",
-      "Length": 3962
+      "Sha256": "897221216f9c290a7bb150b56dbcb22a052109dc16f00045234a71352018ee3e",
+      "Length": 3974
     },
     {
       "Path": "docs/articles/tracking-guide.md",
@@ -946,8 +946,8 @@
     },
     {
       "Path": "docs/articles/tutorial-07-android-runtime.md",
-      "Sha256": "39db6061a9d357a7f240fcced92718dfedcf5b7a0265c1393dcee9d0603cdaf1",
-      "Length": 9339
+      "Sha256": "6af3321b2537c44d644514b991cce01cbd709b5fe9714be9bc66fc7873dd290e",
+      "Length": 9388
     },
     {
       "Path": "docs/articles/tutorial-series.md",
@@ -1021,13 +1021,13 @@
     },
     {
       "Path": "packaging/runtime/android-runtime-evidence.json",
-      "Sha256": "553cc3496d797926cfa63525cee8205c6d1ad82098a1dc2563a9bbd5799cfa4f",
-      "Length": 3665
+      "Sha256": "40fba275f4ddec2ccc343242188a9a69016a09dbfe7fe5584c2285ed31d7b398",
+      "Length": 6616
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
-      "Sha256": "ea20925cf1d93ab7e22bbd082911018c56c1d8dc822e966a42741e620c478b15",
-      "Length": 4636
+      "Sha256": "e38cabc06fcfcae90e275bbc467ee48bd4d8a37446c5612b6d509e273726a301",
+      "Length": 3374
     },
     {
       "Path": "samples/AndroidSmoke/AndroidSmoke.csproj",
@@ -1141,8 +1141,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "54a3b940f45c72cb9c062dd37d13f209485814b1839bb929b19265370d757f82",
-      "Length": 60220
+      "Sha256": "5f9a25df970c9692a98b817229911f7e41a81e73d3ff6844832ddde0a0fa71ee",
+      "Length": 60221
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1211,8 +1211,8 @@
     },
     {
       "Path": "scripts/Test-NuGetPublicationManifest.ps1",
-      "Sha256": "91422a851b915fc48d02422ccdb9274ad4561539ae2e8ec15b2aeeee5ab09b3b",
-      "Length": 7837
+      "Sha256": "c89a6ba6ba51ff532dda6a8f5973f710ef4d9d0aa100e23039724d584e189611",
+      "Length": 7821
     },
     {
       "Path": "scripts/Test-NuGetRepositorySignedPackage.ps1",
@@ -1221,7 +1221,7 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "c5f1696f66d809dded7ec93ada322bdf3e918954ba622f3c31d66db099022d72",
+      "Sha256": "2d7b21228aeb0b18b6e8069ce66eadfbc447b65e2978edc42e7acd0d802e6ba0",
       "Length": 20111
     },
     {
@@ -1236,8 +1236,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "7997529ef0b60ae235d22a0dd577dd4ca9be4dc0e09adee7762731b0e3b4fff0",
-      "Length": 55820
+      "Sha256": "702bd54a92dcc2fa4cf04416e35ff728225fcfffe30fc5223aa186ccfcc489e0",
+      "Length": 55829
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1271,8 +1271,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
-      "Sha256": "9764ff4ca58fff8ef796ba8e4fe92479e4c37be46af4b786f5a3478367ad2568",
-      "Length": 15968
+      "Sha256": "60a350a8e4460a2256d7dc0edcb02a1810fc607f127737d25f29c31b1d96cabe",
+      "Length": 15749
     },
     {
       "Path": "scripts/Test-StitchingUpstreamMap.ps1",
@@ -1804,7 +1804,7 @@
     {
       "Id": "android-arm-device-evidence",
       "Status": "android-evidence-pending",
-      "Evidence": "Android x64/x86 Full and Mini require authoritative single-loader emulator revalidation. Android ARM/ARM64 NDK, ELF, same-run package, and APK evidence has passed; matching device loading evidence remains required before promotion."
+      "Evidence": "Android x64/x86 Full and Mini have authoritative single-loader emulator loading evidence. Android ARM/ARM64 NDK, ELF, same-run package, and APK evidence has passed; matching device loading evidence remains required before promotion."
     },
     {
       "Id": "api-gap-implementation",
