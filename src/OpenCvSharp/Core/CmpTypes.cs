@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies array comparison operations compatible with OpenCV <c>cv::CmpTypes</c>.

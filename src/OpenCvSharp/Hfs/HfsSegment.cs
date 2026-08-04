@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Hfs
+namespace JYPPX.OpenCvSharp.Hfs
 {
     /// <summary>
     /// Hierarchical Feature Selection image segmentation object.

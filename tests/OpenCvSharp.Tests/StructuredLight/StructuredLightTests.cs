@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.StructuredLight;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.StructuredLight;
 
-namespace OpenCvSharp.Tests.StructuredLight
+namespace JYPPX.OpenCvSharp.Tests.StructuredLight
 {
     public sealed class StructuredLightTests
     {

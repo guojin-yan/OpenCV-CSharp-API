@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tests.Calib3D
+namespace JYPPX.OpenCvSharp.Tests.Calib3D
 {
     [Collection(NativeSmokeCollection.Name)]
     public sealed class StereoSGBMTests

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>Specifies the geometric motion model used by ECC registration.</summary>
     public enum MotionType

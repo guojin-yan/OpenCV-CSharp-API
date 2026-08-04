@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies interpolation table constants compatible with OpenCV <c>cv::InterpolationMasks</c>.

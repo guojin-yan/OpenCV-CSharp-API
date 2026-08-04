@@ -12,8 +12,8 @@ The array overload is available on every supported target framework. It validate
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -42,8 +42,8 @@ When masks are provided, the mask count must either be zero or match the image c
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -71,8 +71,8 @@ Modern target frameworks also expose `ReadOnlySpan<Mat>` overloads. This keeps s
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {

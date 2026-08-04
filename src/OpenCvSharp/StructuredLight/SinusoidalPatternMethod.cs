@@ -1,4 +1,4 @@
-namespace OpenCvSharp.StructuredLight
+namespace JYPPX.OpenCvSharp.StructuredLight
 {
     /// <summary>
     /// Sinusoidal structured-light profilometry method.

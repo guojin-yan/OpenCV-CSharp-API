@@ -1,11 +1,11 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.XStereo;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XStereo;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.XStereo
+namespace JYPPX.OpenCvSharp.Tests.XStereo
 {
     [Collection(NativeSmokeCollection.Name)]
     public sealed class XStereoTests

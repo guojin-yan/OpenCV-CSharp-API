@@ -45,7 +45,7 @@ if ([int]$input.SchemaVersion -ne 1 -or [string]$input.SourceRevision -cne $Sour
 
 $realTargets = @($support.realSupport | ForEach-Object { [string]$_ } | Sort-Object)
 if ($realTargets.Count -ne 24 -or @($realTargets | Sort-Object -Unique).Count -ne 24) {
-    throw "Runtime support contract must contain exactly 24 unique real-supported targets. Actual: $($realTargets.Count)"
+    throw "Runtime support contract must contain exactly 24 unique real-supported targets while Android single-loader evidence is pending. Actual: $($realTargets.Count)"
 }
 $supportHash = (Get-FileHash -LiteralPath $resolvedSupport -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($isNormalized -and ([string]$input.SupportContractSha256 -cne $supportHash -or [int]$input.PackageCount -ne 25 -or [int]$input.RuntimePackageCount -ne 24)) {

@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// QR code detector based on OpenCV's ArUco marker detection code.

@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>Represents an owned wrapper around a node borrowed from FileStorage state.</summary>
     public sealed class FileNode : IDisposable, IEnumerable<FileNode>

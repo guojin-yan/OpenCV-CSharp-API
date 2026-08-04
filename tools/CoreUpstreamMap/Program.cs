@@ -370,45 +370,45 @@ internal static class Program
         {
             string expected = d.Ordinal switch
             {
-                57 => "MEMBER|OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor()",
-                58 => "MEMBER|OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor(System.String source,OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)",
-                59 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Boolean Open(System.String source,OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)",
-                60 => "MEMBER|OpenCvSharp.Core.FileStorage|property|instance;get:public|System.Boolean IsOpened",
-                61 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Release()",
-                62 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.String ReleaseAndGetString()",
-                63 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileNode GetFirstTopLevelNode()",
-                64 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileNode Root(System.Int32 streamIndex=0)",
-                65 => "MEMBER|OpenCvSharp.Core.FileStorage|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.String name]",
-                66 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int32 value)",
-                67 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Boolean value)",
-                68 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int64 value)",
-                69 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Double value)",
-                70 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.String value)",
-                71 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,OpenCvSharp.Core.Mat value)",
-                72 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Collections.Generic.IReadOnlyList<System.String> values)",
-                73 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void WriteComment(System.String comment,System.Boolean append=false)",
-                74 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void StartWriteStruct(System.String name,OpenCvSharp.Core.FileNodeTypes flags,System.String? typeName=null)",
-                75 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|System.Void EndWriteStruct()",
-                76 => "MEMBER|OpenCvSharp.Core.FileStorage|method|public;instance|OpenCvSharp.Core.FileStorageModes GetFormat()",
-                79 => "MEMBER|OpenCvSharp.Core.FileNode|constructor|public;instance|.ctor()",
-                80 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.String name]",
-                81 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNode Item[System.Int32 index]",
-                82 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String[] Keys",
-                83 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|OpenCvSharp.Core.FileNodeTypes Type",
-                84 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean Empty",
-                85 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNone",
-                86 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsSequence",
-                87 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsMap",
-                88 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsInteger",
-                89 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsReal",
-                90 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsString",
-                91 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNamed",
-                92 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String Name",
-                93 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Int32 Size",
-                94 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.UInt64 RawSize",
-                95 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.Double Real",
-                96 => "MEMBER|OpenCvSharp.Core.FileNode|property|instance;get:public|System.String String",
-                97 => "MEMBER|OpenCvSharp.Core.FileNode|method|public;instance|OpenCvSharp.Core.Mat ToMat()",
+                57 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor()",
+                58 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|constructor|public;instance|.ctor(System.String source,JYPPX.OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)",
+                59 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Boolean Open(System.String source,JYPPX.OpenCvSharp.Core.FileStorageModes flags,System.String? encoding=null)",
+                60 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|property|instance;get:public|System.Boolean IsOpened",
+                61 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Release()",
+                62 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.String ReleaseAndGetString()",
+                63 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|JYPPX.OpenCvSharp.Core.FileNode GetFirstTopLevelNode()",
+                64 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|JYPPX.OpenCvSharp.Core.FileNode Root(System.Int32 streamIndex=0)",
+                65 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|property|instance;get:public|JYPPX.OpenCvSharp.Core.FileNode Item[System.String name]",
+                66 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int32 value)",
+                67 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Boolean value)",
+                68 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Int64 value)",
+                69 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Double value)",
+                70 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.String value)",
+                71 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,JYPPX.OpenCvSharp.Core.Mat value)",
+                72 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void Write(System.String name,System.Collections.Generic.IReadOnlyList<System.String> values)",
+                73 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void WriteComment(System.String comment,System.Boolean append=false)",
+                74 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void StartWriteStruct(System.String name,JYPPX.OpenCvSharp.Core.FileNodeTypes flags,System.String? typeName=null)",
+                75 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|System.Void EndWriteStruct()",
+                76 => "MEMBER|JYPPX.OpenCvSharp.Core.FileStorage|method|public;instance|JYPPX.OpenCvSharp.Core.FileStorageModes GetFormat()",
+                79 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|constructor|public;instance|.ctor()",
+                80 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|JYPPX.OpenCvSharp.Core.FileNode Item[System.String name]",
+                81 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|JYPPX.OpenCvSharp.Core.FileNode Item[System.Int32 index]",
+                82 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.String[] Keys",
+                83 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|JYPPX.OpenCvSharp.Core.FileNodeTypes Type",
+                84 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean Empty",
+                85 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNone",
+                86 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsSequence",
+                87 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsMap",
+                88 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsInteger",
+                89 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsReal",
+                90 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsString",
+                91 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Boolean IsNamed",
+                92 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.String Name",
+                93 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Int32 Size",
+                94 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.UInt64 RawSize",
+                95 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.Double Real",
+                96 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|property|instance;get:public|System.String String",
+                97 => "MEMBER|JYPPX.OpenCvSharp.Core.FileNode|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ToMat()",
                 _ => ""
             };
             return managed.Where(v => v.Equals(expected, StringComparison.Ordinal));
@@ -418,12 +418,12 @@ internal static class Program
         {
             string expected = d.Ordinal switch
             {
-                180 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,System.Int32 maxComponents=0)",
-                181 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat eigenvalues,System.Int32 maxComponents=0)",
-                182 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,System.Double retainedVariance)",
-                183 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(OpenCvSharp.Core.Mat data,OpenCvSharp.Core.Mat mean,OpenCvSharp.Core.Mat eigenvectors,OpenCvSharp.Core.Mat eigenvalues,System.Double retainedVariance)",
-                186 => "MEMBER|OpenCvSharp.Core.Svd|method|public;static|System.Void Compute(OpenCvSharp.Core.Mat src,OpenCvSharp.Core.Mat w,OpenCvSharp.Core.Mat u,OpenCvSharp.Core.Mat vt,OpenCvSharp.Core.SvdFlags flags=None)",
-                187 => "MEMBER|OpenCvSharp.Core.Svd|method|public;static|System.Void BackSubst(OpenCvSharp.Core.Mat w,OpenCvSharp.Core.Mat u,OpenCvSharp.Core.Mat vt,OpenCvSharp.Core.Mat rhs,OpenCvSharp.Core.Mat dst)",
+                180 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(JYPPX.OpenCvSharp.Core.Mat data,JYPPX.OpenCvSharp.Core.Mat mean,JYPPX.OpenCvSharp.Core.Mat eigenvectors,System.Int32 maxComponents=0)",
+                181 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(JYPPX.OpenCvSharp.Core.Mat data,JYPPX.OpenCvSharp.Core.Mat mean,JYPPX.OpenCvSharp.Core.Mat eigenvectors,JYPPX.OpenCvSharp.Core.Mat eigenvalues,System.Int32 maxComponents=0)",
+                182 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(JYPPX.OpenCvSharp.Core.Mat data,JYPPX.OpenCvSharp.Core.Mat mean,JYPPX.OpenCvSharp.Core.Mat eigenvectors,System.Double retainedVariance)",
+                183 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Void PcaCompute(JYPPX.OpenCvSharp.Core.Mat data,JYPPX.OpenCvSharp.Core.Mat mean,JYPPX.OpenCvSharp.Core.Mat eigenvectors,JYPPX.OpenCvSharp.Core.Mat eigenvalues,System.Double retainedVariance)",
+                186 => "MEMBER|JYPPX.OpenCvSharp.Core.Svd|method|public;static|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat src,JYPPX.OpenCvSharp.Core.Mat w,JYPPX.OpenCvSharp.Core.Mat u,JYPPX.OpenCvSharp.Core.Mat vt,JYPPX.OpenCvSharp.Core.SvdFlags flags=None)",
+                187 => "MEMBER|JYPPX.OpenCvSharp.Core.Svd|method|public;static|System.Void BackSubst(JYPPX.OpenCvSharp.Core.Mat w,JYPPX.OpenCvSharp.Core.Mat u,JYPPX.OpenCvSharp.Core.Mat vt,JYPPX.OpenCvSharp.Core.Mat rhs,JYPPX.OpenCvSharp.Core.Mat dst)",
                 _ => ""
             };
             if (expected.Length > 0)
@@ -436,40 +436,40 @@ internal static class Program
         {
             string expected = d.Ordinal switch
             {
-                215 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetNumThreads(System.Int32 threadCount)",
-                216 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumThreads()",
-                217 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetThreadNum()",
-                218 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetBuildInformation()",
-                219 => "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.String GetNativeOpenCvVersion()",
-                220 => "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMajor()",
-                221 => "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMinor()",
-                222 => "MEMBER|OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionRevision()",
-                223 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetTickCount()",
-                224 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Double GetTickFrequency()",
-                226 => "MEMBER|OpenCvSharp.Core.TickMeter|constructor|public;instance|.ctor()",
-                227 => "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Start()",
-                228 => "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Stop()",
-                229 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 TimeTicks",
-                230 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMicroseconds",
-                231 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMilliseconds",
-                232 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeSeconds",
-                233 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 LastTimeTicks",
-                234 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMicroseconds",
-                235 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMilliseconds",
-                236 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeSeconds",
-                237 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 Counter",
-                238 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double FramesPerSecond",
-                239 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeSeconds",
-                240 => "MEMBER|OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeMilliseconds",
-                241 => "MEMBER|OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Reset()",
-                242 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetCpuTickCount()",
-                243 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean CheckHardwareSupport(OpenCvSharp.Core.CpuFeatures feature)",
-                244 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetHardwareFeatureName(OpenCvSharp.Core.CpuFeatures feature)",
-                245 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.String GetCpuFeaturesLine()",
-                246 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumberOfCpus()",
-                248 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|OpenCvSharp.Core.AlgorithmHint GetDefaultAlgorithmHint()",
-                249 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Void SetUseOptimized(System.Boolean enabled)",
-                250 => "MEMBER|OpenCvSharp.Core.Cv2|method|public;static|System.Boolean UseOptimized()",
+                215 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Void SetNumThreads(System.Int32 threadCount)",
+                216 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumThreads()",
+                217 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetThreadNum()",
+                218 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.String GetBuildInformation()",
+                219 => "MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.String GetNativeOpenCvVersion()",
+                220 => "MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMajor()",
+                221 => "MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionMinor()",
+                222 => "MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Int32 GetNativeOpenCvVersionRevision()",
+                223 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetTickCount()",
+                224 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Double GetTickFrequency()",
+                226 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|constructor|public;instance|.ctor()",
+                227 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Start()",
+                228 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Stop()",
+                229 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 TimeTicks",
+                230 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMicroseconds",
+                231 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeMilliseconds",
+                232 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double TimeSeconds",
+                233 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 LastTimeTicks",
+                234 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMicroseconds",
+                235 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeMilliseconds",
+                236 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double LastTimeSeconds",
+                237 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 Counter",
+                238 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double FramesPerSecond",
+                239 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeSeconds",
+                240 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Double AverageTimeMilliseconds",
+                241 => "MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|method|public;instance|System.Void Reset()",
+                242 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Int64 GetCpuTickCount()",
+                243 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Boolean CheckHardwareSupport(JYPPX.OpenCvSharp.Core.CpuFeatures feature)",
+                244 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.String GetHardwareFeatureName(JYPPX.OpenCvSharp.Core.CpuFeatures feature)",
+                245 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.String GetCpuFeaturesLine()",
+                246 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Int32 GetNumberOfCpus()",
+                248 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.AlgorithmHint GetDefaultAlgorithmHint()",
+                249 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Void SetUseOptimized(System.Boolean enabled)",
+                250 => "MEMBER|JYPPX.OpenCvSharp.Core.Cv2|method|public;static|System.Boolean UseOptimized()",
                 _ => ""
             };
             return managed.Where(v => v.Equals(expected, StringComparison.Ordinal));
@@ -482,7 +482,7 @@ internal static class Program
             string[] p = line.Split('|');
             string signature = p.Length >= 5 ? p[4].Replace("_", "", StringComparison.Ordinal) : "";
             string normalizedMethod = method.Replace("_", "", StringComparison.Ordinal);
-            return p.Length >= 5 && p[1] == "OpenCvSharp.Core.Cv2" && p[2] == "method" && Regex.IsMatch(signature, @"\b" + Regex.Escape(normalizedMethod) + @"\(", RegexOptions.IgnoreCase);
+            return p.Length >= 5 && p[1] == "JYPPX.OpenCvSharp.Core.Cv2" && p[2] == "method" && Regex.IsMatch(signature, @"\b" + Regex.Escape(normalizedMethod) + @"\(", RegexOptions.IgnoreCase);
         }).Order(Ordinal);
     }
 
@@ -636,7 +636,7 @@ internal static class Program
         Reject("stale hash", "header hash", () => { var v = CopyR(); v.HeaderSha256 = new string('0', 64); Validate(v, c, o, native, managed, true); });
         Reject("false evidence", "false native", () => { var v = CopyC(); var x = v.Declarations.First(z => z.Classification == "implemented"); x.NativeEntrypoints[0] = "jyppx_ocv_core_false"; Validate(raw, v, o, native, managed, false); });
         Reject("undocumented omission", "reason", () => { var v = CopyC(); var x = v.Declarations.First(z => z.Classification == "intentionally-omitted"); x.Reason = ""; Validate(raw, v, o, native, managed, false); });
-        Reject("fixed major", "fixed-major", () => { var v = CopyC(); var x = v.Declarations.First(z => z.ManagedMembers.Count > 0); x.ManagedMembers[0] = x.ManagedMembers[0].Replace("OpenCvSharp", "OpenCvSharp5", StringComparison.Ordinal); Validate(raw, v, o, native, managed, false); });
+        Reject("fixed major", "fixed-major", () => { var v = CopyC(); var x = v.Declarations.First(z => z.ManagedMembers.Count > 0); x.ManagedMembers[0] = x.ManagedMembers[0].Replace("JYPPX.OpenCvSharp", "JYPPX.OpenCvSharp5", StringComparison.Ordinal); Validate(raw, v, o, native, managed, false); });
         Reject("conditional misclassification", "build condition", () => { var v = CopyC(); var x = v.Declarations.First(z => z.Classification == "upstream-conditional"); x.BuildCondition = "unconditional-parser-surface"; Validate(raw, v, o, native, managed, false); });
         Reject("evidence order", "nondeterministically", () => { var v = CopyC(); var x = v.Declarations.First(z => z.ManagedMembers.Count > 1); x.ManagedMembers.Reverse(); Validate(raw, v, o, native, managed, false); });
         Require(rejected == 13, "Core negative fixture count drifted.");

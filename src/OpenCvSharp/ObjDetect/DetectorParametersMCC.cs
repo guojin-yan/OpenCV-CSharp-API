@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// Parameters for MCC color checker detection.

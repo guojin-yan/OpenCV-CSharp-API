@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Fuzzy
+namespace JYPPX.OpenCvSharp.Fuzzy
 {
     /// <summary>
     /// Basic fuzzy function type.

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Represents an integer rectangle compatible with OpenCV's <c>cv::Rect</c>.

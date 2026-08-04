@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     internal static class VideoIOStringConvert
     {

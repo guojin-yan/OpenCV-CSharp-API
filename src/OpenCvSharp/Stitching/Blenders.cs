@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Distance-weighted stitching blender.</summary>
     public sealed class FeatherBlender : Blender

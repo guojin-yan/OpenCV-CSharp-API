@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>Owns a decoded image and independent clones of all metadata chunks. 拥有解码图像及所有元数据块的独立克隆。</summary>
     public sealed class ImageMetadataResult : IDisposable

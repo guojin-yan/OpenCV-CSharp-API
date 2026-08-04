@@ -12,7 +12,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 预览版本" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 下载量" /></a>
-  <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-5.0.0--preview.1-24292f" alt="GitHub Packages 版本" /></a>
+  <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-package%20feed-24292f" alt="GitHub Packages 源" /></a>
   <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/releases"><img src="https://img.shields.io/github/v/release/guojin-yan/OpenCV-CSharp-API?include_prereleases&label=Release" alt="GitHub Release" /></a>
   <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4" alt="支持的 .NET 版本" /></a>
   <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8" alt="上游 Upstream OpenCV 5.0.0" /></a>
@@ -27,18 +27,18 @@
 
 ## 项目简介
 
-OpenCV CSharp API 通过熟悉的 `OpenCvSharp.*` 命名空间，将 [OpenCV 5.0](https://opencv.org/) 引入 C#。项目提供符合 .NET 使用习惯的 managed API、稳定的 native C ABI、明确的 native 资源所有权，以及面向已验证 Windows 和 Linux 目标的 runtime NuGet 包。
+OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [OpenCV 5.0](https://opencv.org/) 引入 C#。项目提供符合 .NET 使用习惯的 managed API、稳定的 native C ABI、明确的 native 资源所有权，以及面向已验证 Windows、Linux 和 Android 模拟器目标的 runtime NuGet 包。
 
 当前公开版本由下方 NuGet 实时徽章显示。preview 通道适合需要广泛计算机视觉能力、同时重视后续 API 与 ABI 身份稳定性的早期使用者。
 
 ## 版本亮点
 
 - 广泛覆盖 Core、ImgProc、ImgCodecs、VideoIO、Calib3D、DNN、Features、ObjDetect、Photo、Video、HighGui、Stitching、ML、Tracking 和部分 contrib API。
-- 一个 managed 包，以及面向 12 个已验证 Windows/Linux RID 的 full 与 mini native runtime profile。
+- 一个 managed 包，以及面向 14 个已验证 Windows、Linux 和 Android 模拟器 RID 的 full 与 mini native runtime profile。
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
 - 向 NuGet.org 与 GitHub Packages 发布确定性包，并提供 SPDX 2.3 SBOM、受保护的发布审批和经过验证的 GitHub Release 产物。
 - 提供可直接执行的无头示例，无需相机、模型下载或桌面 GUI，即可生成可检查的 PNG 结果。
-- 兼容性基线覆盖 612 个 public managed type、6,314 个 public/protected member、41 个 namespace 和已声明的 native ABI。
+- 兼容性基线覆盖 611 个 public managed type、6,300 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
 
 ## 30 秒快速开始
 
@@ -57,8 +57,8 @@ dotnet add package JYPPX.OpenCV.runtime.win-x64 --prerelease # 当前 Windows x6
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 using Mat left = new Mat(2, 3, MatType.CV_8UC1);
 using Mat right = new Mat(2, 3, MatType.CV_8UC1);
@@ -97,7 +97,7 @@ dotnet run
 
 | 渠道 | 公开入口 | 发布内容 |
 | --- | --- | --- |
-| NuGet.org | [JYPPX.OpenCV.CSharp.API](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | managed API 和全部 24 个 runtime 包 |
+| NuGet.org | [JYPPX.OpenCV.CSharp.API](https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/) | managed API 和当前全部已验证 runtime 包 |
 | GitHub Packages | [JYPPX.OpenCV.CSharp.API](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API) | 与审核 candidate 字节完全一致的 managed 与 runtime 包 |
 | GitHub Releases | [OpenCV-CSharp-API Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases) | Repository-signed 包、SBOM、manifest 和验证报告 |
 
@@ -111,12 +111,14 @@ full profile 保证包含矩阵要求的模块，包括 DNN、标定、Features�
 
 ## Native Runtime 包
 
-首个 preview 发布 managed 包，以及 [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json) 中归类为 `realSupport` 的 24 个 runtime 包。每个包都从同一份审核通过的 candidate 发布到两个公开 registry；正式发布产物与验证证据同时发布在 [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases)。
+首个 preview 发布 managed 包，以及 [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json) 中全部归类为 `realSupport` 的 runtime 包。每个包都从同一份审核通过的 candidate 发布到两个公开 registry；正式发布产物与验证证据同时发布在 [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases)。
 
 | 平台 | 架构 | Full runtime | Mini runtime |
 | --- | --- | --- | --- |
 | Windows 10/11 | x64 | `JYPPX.OpenCV.runtime.win-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64) | `JYPPX.OpenCV.runtime.win-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64.mini) |
 | Windows 11 | ARM64 | `JYPPX.OpenCV.runtime.win-arm64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64) | `JYPPX.OpenCV.runtime.win-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.win-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64.mini) |
+| Android 7.0+ 模拟器 | x86_64 | `JYPPX.OpenCV.runtime.android-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.android-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x64) | `JYPPX.OpenCV.runtime.android-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.android-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x64.mini) |
+| Android 7.0+ 模拟器 | x86 | `JYPPX.OpenCV.runtime.android-x86`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.android-x86.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x86) | `JYPPX.OpenCV.runtime.android-x86.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.android-x86.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x86.mini) |
 | Ubuntu 22.04 | x64 | `JYPPX.OpenCV.runtime.ubuntu.22.04-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-x64) | `JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-x64.mini) |
 | Ubuntu 22.04 | ARM64 | `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64) | `JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.22.04-arm64.mini) |
 | Ubuntu 24.04 | x64 | `JYPPX.OpenCV.runtime.ubuntu.24.04-x64`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.24.04-x64) | `JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/vpre/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.ubuntu.24.04-x64.mini) |
@@ -130,7 +132,7 @@ full profile 保证包含矩阵要求的模块，包括 DNN、标定、Features�
 
 Linux runtime 包使用 distro-specific Linux RID，不使用模糊的通用 `linux-x64` 身份。如果 .NET SDK 无法识别项目定义的 RID，请将 `RuntimeIdentifierGraphPath` 指向 [`packaging/runtime/runtime-distro-rid-graph.json`](packaging/runtime/runtime-distro-rid-graph.json)，或在 restore 前把该文件复制到 consumer 项目。
 
-`win-x86/full` 仍为 `hosted-evidence-pending`，`win-x86/mini` 被排除。全部 Android profile 当前为 `android-evidence-pending`，在真实 producer/consumer 证据通过前不进入当前首个 preview candidate。Android package ID、NDK build plan、无版本 `.so` staging，以及 .NET for Android 的 `AndroidNativeLibrary`/ABI 接入已经实现；在把这些包加入上面的正式发布表格前，还必须完成四种 ABI 的真实 NDK 构建与模拟器/设备加载证据，这些是首版发布阻断项。macOS 位于声明的 runtime package matrix 之外。矩阵中存在某一行，不等于项目对该平台作出正式支持承诺。
+Android x64/x86 的 Full 与 Mini 在新的单加载器产物完成正式重建和模拟器原生加载前，暂时归类为 `android-evidence-pending`；已淘汰的双加载器运行记录保留在 [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json) 的 `superseded` 区域。Android ARM/ARM64 的 Full 与 Mini 也仍为 `android-evidence-pending`：其托管生产和包证据已经通过，但在晋升前仍需 ABI 匹配的真机加载证据。`win-x86/full` 仍为 `hosted-evidence-pending`，`win-x86/mini` 被排除，macOS 位于声明的 runtime package matrix 之外。矩阵中存在某一行，不等于项目对该平台作出正式支持承诺。
 
 如果 no matching runtime package，请使用 `scripts/Build-OpenCV.ps1` 构建 local native runtime，再通过 `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>` 暂存，并用 `OpenCvNativeRuntimeDir` 将本地示例或测试指向该目录。对应 package fallback 命令为 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`。完整流程见 [Linked Runtime 构建指南](docs/articles/linked-runtime-build-guide.md)。
 
@@ -246,10 +248,11 @@ managed API 与项目代码使用 [MIT License](LICENSE)。runtime 包同时包�
 
 以下内容用于保留仓库审计约束。普通使用者应优先阅读上方链接的指南。
 
-- native CMake 工程目前只支持 source-tree build，不安装或导出通用 CMake package/SDK target。`JYPPX.OpenCV.Native` 是主 target，`OpenCv5Sharp.Native` 仅为 compatibility alias。
-- runtime NuGet 包当前不分发 native C header。主 header tree 为 `src/OpenCvSharp.Native/include/open_cv_sharp`；`src/OpenCvSharp.Native/include/open_cv_5_sharp` 是兼容树。
-- native CTest 和本地输出命名保持版本中立：`JYPPX.OpenCV.NativeSmoke` 与 `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`。`OpenCv5Sharp.Native` loader 只保留为 compatibility copy。
-- 本地 sample 与 test 优先使用 `OpenCvNativeRuntimeDir`；`OpenCv5SharpNativeRuntimeDir` 仅作为 compatibility alias。`OpenCv5SharpBuildInfo` 仍是有文档和测试保护的 compatibility facade。
+- native CMake 工程目前只支持 source-tree build，不安装或导出通用 CMake package/SDK target。唯一的 native target 和 loader identity 是 `JYPPX.OpenCV.Native`。
+- runtime NuGet 包当前不分发 native C header。source-tree header surface 为 `src/OpenCvSharp.Native/include/open_cv_sharp`。
+- native CTest 和本地输出命名保持版本中立：`JYPPX.OpenCV.NativeSmoke` 与 `JYPPX.OpenCV.NativeAbiExportAudit`。
+- 本地 sample 与 test 使用 `OpenCvNativeRuntimeDir`；构建缺失 runtime 时将该属性指向本地 runtime 目录即可。
+- managed build-info 公共接口为 `OpenCvSharpBuildInfo`；native interop 使用 `JYPPX.OpenCV.Native` 和 `jyppx_ocv_*` entry points。
 - `runtime-input.yml` 生成真实 `runtime-input-<rid>-<profile>` artifact，内含 `native-wrapper/`、`opencv-runtime/` 与 `opencv-source/`。
 - pack workflow 覆盖当前 multi-RID runtime package matrix 及 full/mini profile。synthetic job 只验证 package shape；可发布 job 要求真实输入与 consumer restore 验证。规范化 nupkg 输出位于 `artifacts/packages`。
 - `pack.yml` 不构建真实 runtime input。真实输入必须已存在于 runner，或来自 `real_runtime_artifact_run_id`。synthetic runtime input 只验证 package surface；real publishable runtime packages require `SyntheticRuntimeInputs=false`。

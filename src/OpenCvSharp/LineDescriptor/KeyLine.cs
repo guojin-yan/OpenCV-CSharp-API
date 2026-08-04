@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.LineDescriptor
+namespace JYPPX.OpenCvSharp.LineDescriptor
 {
     /// <summary>
     /// Represents an OpenCV line-descriptor key line.

@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>Represents detected ChArUco diamonds and their marker observations.</summary>
     public sealed class CharucoDiamondDetectionResult

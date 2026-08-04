@@ -1,10 +1,10 @@
 using System;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XImgProc
+namespace JYPPX.OpenCvSharp.XImgProc
 {
     /// <summary>
     /// Static entry points for OpenCV contrib ximgproc.
@@ -441,15 +441,15 @@ namespace OpenCvSharp.XImgProc
         }
 
         /// <summary>Creates a reusable guided filter. 创建可复用 guided filter。</summary>
-        public static OpenCvSharp.XImgProc.GuidedFilter CreateGuidedFilter(Mat guide, int radius, double eps, double scale = 1.0)
+        public static JYPPX.OpenCvSharp.XImgProc.GuidedFilter CreateGuidedFilter(Mat guide, int radius, double eps, double scale = 1.0)
         {
-            return OpenCvSharp.XImgProc.GuidedFilter.Create(guide, radius, eps, scale);
+            return JYPPX.OpenCvSharp.XImgProc.GuidedFilter.Create(guide, radius, eps, scale);
         }
 
         /// <summary>Creates a reusable fast global smoother filter. 创建可复用 fast global smoother filter。</summary>
-        public static OpenCvSharp.XImgProc.FastGlobalSmootherFilter CreateFastGlobalSmootherFilter(Mat guide, double lambda, double sigmaColor, double lambdaAttenuation = 0.25, int numIter = 3)
+        public static JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter CreateFastGlobalSmootherFilter(Mat guide, double lambda, double sigmaColor, double lambdaAttenuation = 0.25, int numIter = 3)
         {
-            return OpenCvSharp.XImgProc.FastGlobalSmootherFilter.Create(guide, lambda, sigmaColor, lambdaAttenuation, numIter);
+            return JYPPX.OpenCvSharp.XImgProc.FastGlobalSmootherFilter.Create(guide, lambda, sigmaColor, lambdaAttenuation, numIter);
         }
 
         /// <summary>Creates a SLIC superpixel segmenter. 创建 SLIC 超像素分割器。</summary>
@@ -544,9 +544,9 @@ namespace OpenCvSharp.XImgProc
         }
 
         /// <summary>Creates a reusable fast bilateral solver filter. 创建可复用 fast bilateral solver filter。</summary>
-        public static OpenCvSharp.XImgProc.FastBilateralSolverFilter CreateFastBilateralSolverFilter(Mat guide, double sigmaSpatial, double sigmaLuma, double sigmaChroma, double lambda = 128.0, int numIter = 25, double maxTol = 1e-5)
+        public static JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter CreateFastBilateralSolverFilter(Mat guide, double sigmaSpatial, double sigmaLuma, double sigmaChroma, double lambda = 128.0, int numIter = 25, double maxTol = 1e-5)
         {
-            return OpenCvSharp.XImgProc.FastBilateralSolverFilter.Create(guide, sigmaSpatial, sigmaLuma, sigmaChroma, lambda, numIter, maxTol);
+            return JYPPX.OpenCvSharp.XImgProc.FastBilateralSolverFilter.Create(guide, sigmaSpatial, sigmaLuma, sigmaChroma, lambda, numIter, maxTol);
         }
 
         /// <summary>Creates an edge-aware sparse match interpolator. 创建边缘感知稀疏匹配插值器。</summary>

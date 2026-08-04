@@ -202,7 +202,6 @@ $packageVersion = "5.0.0.0"
 $openCvVersion = "5.0.0"
 $openCvBinarySuffix = "500"
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll" # compatibility loader copy for already-compiled consumers
 
 $matrix = Get-Content -LiteralPath (Join-Path $repo "packaging/runtime/runtime-package-matrix.json") -Raw | ConvertFrom-Json
 $profileSpec = @($matrix.profiles | Where-Object { $_.name -eq $runtimeProfile } | Select-Object -First 1)
@@ -225,7 +224,7 @@ try {
         New-Item -ItemType Directory -Force -Path $directory | Out-Null
     }
 
-    foreach ($dllName in @($primaryNativeLoader, $compatibilityNativeLoader)) {
+    foreach ($dllName in @($primaryNativeLoader)) {
         Write-SyntheticDll -Path (Join-Path $nativeWrapperRuntimeDir $dllName)
     }
 
@@ -360,7 +359,6 @@ try {
             Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "$packageId.nuspec" -PackagePath $releasePackagePath -Issue "Release-preflight pack integration package did not contain the expected neutral nuspec"
             Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "build/JYPPX.OpenCV.runtime.provenance.json" -PackagePath $releasePackagePath -Issue "Release-preflight pack integration package did not contain provenance manifest"
             Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "runtimes/$rid/native/$primaryNativeLoader" -PackagePath $releasePackagePath -Issue "Release-preflight pack integration package did not contain the primary native loader"
-            Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "runtimes/$rid/native/$compatibilityNativeLoader" -PackagePath $releasePackagePath -Issue "Release-preflight pack integration package did not contain the compatibility native loader"
             foreach ($licenseEntry in @(
                     "licenses/LICENSE",
                     "licenses/readme.htm",

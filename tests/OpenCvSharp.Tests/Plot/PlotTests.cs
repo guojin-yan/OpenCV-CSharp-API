@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Plot;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Plot;
 
-namespace OpenCvSharp.Tests.Plot
+namespace JYPPX.OpenCvSharp.Tests.Plot
 {
     public sealed class PlotTests
     {

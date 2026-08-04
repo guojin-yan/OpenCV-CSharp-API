@@ -1,4 +1,4 @@
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     /// <summary>
     /// Generic properties supported by OpenCV <c>cv::VideoWriter</c>.

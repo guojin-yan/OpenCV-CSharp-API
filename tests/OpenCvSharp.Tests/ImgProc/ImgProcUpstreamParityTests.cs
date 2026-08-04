@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.ImgProc
+namespace JYPPX.OpenCvSharp.Tests.ImgProc
 {
     public class ImgProcUpstreamParityTests
     {

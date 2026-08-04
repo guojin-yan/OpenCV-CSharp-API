@@ -70,10 +70,10 @@ if ([string]::IsNullOrWhiteSpace($extension)) {
 }
 
 $nativeLoaderNames = if ($extension -eq ".dll") {
-    @("JYPPX.OpenCV.Native.dll", "OpenCv5Sharp.Native.dll") # compatibility loader copy for already-compiled consumers
+    @("JYPPX.OpenCV.Native.dll")
 }
 else {
-    @("libJYPPX.OpenCV.Native$extension", "libOpenCv5Sharp.Native$extension")
+    @("libJYPPX.OpenCV.Native$extension")
 }
 
 foreach ($loaderName in $nativeLoaderNames) {

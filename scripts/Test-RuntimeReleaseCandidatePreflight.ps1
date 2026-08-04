@@ -207,12 +207,11 @@ function Test-WindowsRid {
 function Get-ExpectedNativeLoaderNames {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
 
-    $compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader copy for already-compiled consumers
     if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
-        return @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll")
+        return @("JYPPX.OpenCV.Native.dll")
     }
 
-    return @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")
+    return @("libJYPPX.OpenCV.Native.so")
 }
 
 function Test-StringSequenceEqual {
@@ -316,7 +315,7 @@ else {
     }
 
     $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-    $expectedLoaderNames = Get-ExpectedNativeLoaderNames -RuntimeIdentifier $Rid
+    $expectedLoaderNames = @(Get-ExpectedNativeLoaderNames -RuntimeIdentifier $Rid)
 
     foreach ($check in @(
             [pscustomobject]@{ Name = "PackageId"; Expected = $RuntimePackageId },
@@ -325,8 +324,7 @@ else {
             [pscustomobject]@{ Name = "OpenCvRid"; Expected = $OpenCvRid },
             [pscustomobject]@{ Name = "Rid"; Expected = $Rid },
             [pscustomobject]@{ Name = "RuntimeProfile"; Expected = $RuntimeProfile },
-            [pscustomobject]@{ Name = "PrimaryNativeLoaderName"; Expected = $expectedLoaderNames[0] },
-            [pscustomobject]@{ Name = "CompatibilityNativeLoaderName"; Expected = $expectedLoaderNames[1] })) {
+            [pscustomobject]@{ Name = "PrimaryNativeLoaderName"; Expected = $expectedLoaderNames[0] })) {
         $actual = [string](Get-JsonProperty -Object $manifest -Name $check.Name)
         if (-not $actual.Equals($check.Expected, [System.StringComparison]::Ordinal)) {
             Add-Violation -Violations $violations -Path $manifestPath -Issue "Runtime provenance $($check.Name) must match selected release candidate input" -Text "Expected '$($check.Expected)', found '$actual'"
@@ -354,10 +352,6 @@ else {
     $runtimeFileNames = @($runtimeFiles | ForEach-Object { [string](Get-JsonProperty -Object $_ -Name "FileName") } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
     if (-not $runtimeFileNames.Contains($expectedLoaderNames[0])) {
         Add-Violation -Violations $violations -Path $manifestPath -Issue "Runtime provenance must include the primary native loader"
-    }
-
-    if (-not $runtimeFileNames.Contains($expectedLoaderNames[1])) {
-        Add-Violation -Violations $violations -Path $manifestPath -Issue "Runtime provenance must include the compatibility native loader copy"
     }
 
     $openCvBinarySuffix = (($OpenCvVersion -split "\.") | Select-Object -First 3) -join ""

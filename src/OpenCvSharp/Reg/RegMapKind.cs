@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Reg
+namespace JYPPX.OpenCvSharp.Reg
 {
     /// <summary>
     /// Identifies the concrete OpenCV registration map type.

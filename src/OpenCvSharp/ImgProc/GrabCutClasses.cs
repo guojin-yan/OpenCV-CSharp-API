@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>GrabCut mask labels. GrabCut 掩码标签。</summary>
     public enum GrabCutClasses : byte

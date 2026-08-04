@@ -1,8 +1,8 @@
 # Photo Second Batch Guide
 
-The second `OpenCvSharp.Photo` batch adds decoloring, seamless cloning, local editing, edge-preserving filters, sketching, and stylization.
+The second `JYPPX.OpenCvSharp.Photo` batch adds decoloring, seamless cloning, local editing, edge-preserving filters, sketching, and stylization.
 
-第二批 `OpenCvSharp.Photo` 增加去色、seamless cloning、局部编辑、边缘保持滤波、素描和风格化能力。
+第二批 `JYPPX.OpenCvSharp.Photo` 增加去色、seamless cloning、局部编辑、边缘保持滤波、素描和风格化能力。
 
 ## Covered APIs / 已覆盖接口
 
@@ -21,8 +21,8 @@ The second `OpenCvSharp.Photo` batch adds decoloring, seamless cloning, local ed
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 namespace PhotoSecondBatchSample
 {

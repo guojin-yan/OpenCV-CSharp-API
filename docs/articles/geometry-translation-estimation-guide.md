@@ -30,9 +30,9 @@ and destination collections must contain the same number of points.
 点数必须相同。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 Point3f[] source =
 {

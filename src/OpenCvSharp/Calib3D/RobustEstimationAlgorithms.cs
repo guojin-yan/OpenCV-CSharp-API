@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Robust estimation algorithms used by homography and essential-matrix estimation.

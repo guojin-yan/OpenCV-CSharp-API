@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tracking
+namespace JYPPX.OpenCvSharp.Tracking
 {
     /// <summary>
     /// Result of a modern tracker update.

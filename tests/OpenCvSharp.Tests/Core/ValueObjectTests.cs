@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Tests.Core
+namespace JYPPX.OpenCvSharp.Tests.Core
 {
     public class ValueObjectTests
     {

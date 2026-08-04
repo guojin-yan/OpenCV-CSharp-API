@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Saliency
+namespace JYPPX.OpenCvSharp.Saliency
 {
     /// <summary>
     /// Motion saliency algorithm by Bin Wang and Dudek 2014.

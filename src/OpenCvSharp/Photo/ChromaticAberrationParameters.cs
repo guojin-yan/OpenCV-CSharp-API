@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     /// <summary>Owns chromatic-aberration calibration coefficients and their calibration metadata.</summary>
     public sealed class ChromaticAberrationParameters : IDisposable

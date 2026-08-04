@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>
     /// Wave correction kind compatible with OpenCV <c>cv::detail::WaveCorrectKind</c>.

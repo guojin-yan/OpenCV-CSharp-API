@@ -1,4 +1,4 @@
-namespace OpenCvSharp.SurfaceMatching
+namespace JYPPX.OpenCvSharp.SurfaceMatching
 {
     /// <summary>
     /// ICP sampling mode values used by OpenCV surface matching.

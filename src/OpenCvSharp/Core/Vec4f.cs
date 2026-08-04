@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Represents a four-element single-precision vector compatible with OpenCV's <c>cv::Vec4f</c>.

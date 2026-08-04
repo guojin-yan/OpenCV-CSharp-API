@@ -1,10 +1,10 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Stitching;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Stitching;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
-namespace OpenCvSharp.Tests.Stitching
+namespace JYPPX.OpenCvSharp.Tests.Stitching
 {
     public sealed class PyRotationWarperTests
     {

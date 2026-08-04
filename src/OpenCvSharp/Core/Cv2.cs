@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Provides OpenCV core array functions aligned with OpenCV <c>cv</c> free functions.

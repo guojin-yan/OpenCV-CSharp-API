@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
-namespace OpenCvSharp.Tests.Features2D
+namespace JYPPX.OpenCvSharp.Tests.Features2D
 {
     public class BriskTests
     {

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Dnn
+namespace JYPPX.OpenCvSharp.Dnn
 {
     /// <summary>
     /// DNN backend identifiers compatible with OpenCV <c>cv::dnn::Backend</c>.

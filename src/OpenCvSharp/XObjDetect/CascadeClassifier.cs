@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XObjDetect
+namespace JYPPX.OpenCvSharp.XObjDetect
 {
     /// <summary>
     /// Contrib cascade classifier from OpenCV <c>xobjdetect</c>.

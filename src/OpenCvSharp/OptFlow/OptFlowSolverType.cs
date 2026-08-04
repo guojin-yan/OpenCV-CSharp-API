@@ -1,4 +1,4 @@
-namespace OpenCvSharp.OptFlow
+namespace JYPPX.OpenCvSharp.OptFlow
 {
     /// <summary>
     /// RLOF iterative solver types.

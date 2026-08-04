@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Quality;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Quality;
 
-namespace OpenCvSharp.Tests.Quality
+namespace JYPPX.OpenCvSharp.Tests.Quality
 {
     public sealed class QualityTests
     {

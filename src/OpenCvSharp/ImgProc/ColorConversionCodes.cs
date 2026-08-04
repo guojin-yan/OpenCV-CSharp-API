@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies color conversion operation codes compatible with OpenCV <c>cv::ColorConversionCodes</c>.

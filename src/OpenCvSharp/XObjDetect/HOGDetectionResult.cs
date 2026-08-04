@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.XObjDetect
+namespace JYPPX.OpenCvSharp.XObjDetect
 {
     /// <summary>
     /// Result for HOG detections.

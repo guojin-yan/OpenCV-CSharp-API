@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ImgHash
+namespace JYPPX.OpenCvSharp.ImgHash
 {
     /// <summary>
     /// Provides one-shot image hash functions.
@@ -37,7 +37,7 @@ namespace OpenCvSharp.ImgHash
         /// <summary>Computes block mean hash. 计算 block mean hash。</summary>
         public static void BlockMeanHash(Mat input, Mat output, BlockMeanHashMode mode = BlockMeanHashMode.Mode0)
         {
-            global::OpenCvSharp.ImgHash.BlockMeanHash.ValidateMode(mode, nameof(mode));
+            global::JYPPX.OpenCvSharp.ImgHash.BlockMeanHash.ValidateMode(mode, nameof(mode));
             Validate(input, nameof(input));
             Validate(output, nameof(output));
             ImgHashBase.ValidateInputImage(input, nameof(input));

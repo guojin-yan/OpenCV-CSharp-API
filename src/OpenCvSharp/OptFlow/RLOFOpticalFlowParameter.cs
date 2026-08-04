@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.OptFlow
+namespace JYPPX.OpenCvSharp.OptFlow
 {
     /// <summary>
     /// Parameter object for robust local optical flow.

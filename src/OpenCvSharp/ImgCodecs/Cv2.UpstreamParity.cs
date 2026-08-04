@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     public static partial class Cv2
     {

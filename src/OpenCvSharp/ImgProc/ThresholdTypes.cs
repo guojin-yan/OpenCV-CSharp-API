@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies thresholding operation types compatible with OpenCV <c>cv::ThresholdTypes</c>.

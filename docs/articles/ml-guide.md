@@ -1,8 +1,8 @@
 # ML Guide / ML 指南
 
-`OpenCvSharp.ML` wraps the first OpenCV 5.0.0 machine-learning objects from the local contrib `ml` tree.
+`JYPPX.OpenCvSharp.ML` wraps the first OpenCV 5.0.0 machine-learning objects from the local contrib `ml` tree.
 
-`OpenCvSharp.ML` 封装第一批来自本地 OpenCV 5.0.0 contrib `ml` 树的机器学习对象。
+`JYPPX.OpenCvSharp.ML` 封装第一批来自本地 OpenCV 5.0.0 contrib `ml` 树的机器学习对象。
 
 ## Scope / 范围
 
@@ -22,7 +22,7 @@
 
 In this local OpenCV 5.0.0 source layout, `ml` is provided by the contrib tree, not the main OpenCV module tree. A linked runtime should include the factual OpenCV 5.0.0 runtime artifact `opencv_ml500.dll`. If the module is not linked, the exported ABI remains present and managed calls report `NOT_LINKED`.
 
-ML entrypoints belong to the full runtime profile. The mini profile deliberately excludes the ML source and ABI surface; use a full runtime package for `OpenCvSharp.ML`.
+ML entrypoints belong to the full runtime profile. The mini profile deliberately excludes the ML source and ABI surface; use a full runtime package for `JYPPX.OpenCvSharp.ML`.
 
 在当前本地 OpenCV 5.0.0 源码布局中，`ml` 来自 contrib 树，而不是 OpenCV 主仓库模块树。linked runtime 应包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_ml500.dll`。如果模块未链接，导出的 ABI 仍存在，managed 调用会报告 `NOT_LINKED`。
 
@@ -43,8 +43,8 @@ OpenCV ML 训练样本通常使用 `CV_32F`。使用 row samples 时，每一行
 `SVM.TrainAuto` 会搜索参数网格，因此可能比 tiny smoke 示例慢。示例和默认测试使用小矩阵直接训练。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ML;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ML;
 
 using Mat samples = new Mat(4, 2, MatType.CV_32FC1);
 samples.CopyFrom<float>(new float[]
@@ -169,7 +169,7 @@ finally
 
 `DTreesPredictionFlags.Auto`, `Sum`, and `MaxVote` are valid prediction modes. `Mask` is exposed because it is part of the upstream enum contract, but it is only a bit mask and managed prediction/vote methods reject it as a standalone mode. Combine a tree mode with `StatModelFlags.RawOutput` through the separate `flags` argument.
 
-Random-forest training uses OpenCV's current-thread global RNG. Call `OpenCvSharp.Core.Cv2.SetRngSeed` immediately before training when a repeatable local sequence is required, and do not interleave other RNG-consuming operations on that thread. Model configuration, training, clearing, and disposal are mutable lifecycle operations and must not race with prediction. After successful training, callers may coordinate concurrent read-only prediction according to their own model lifetime policy; the wrapper does not add locking.
+Random-forest training uses OpenCV's current-thread global RNG. Call `JYPPX.OpenCvSharp.Core.Cv2.SetRngSeed` immediately before training when a repeatable local sequence is required, and do not interleave other RNG-consuming operations on that thread. Model configuration, training, clearing, and disposal are mutable lifecycle operations and must not race with prediction. After successful training, callers may coordinate concurrent read-only prediction according to their own model lifetime policy; the wrapper does not add locking.
 
 ```csharp
 using RTrees forest = RTrees.Create();
@@ -179,7 +179,7 @@ forest.CalculateVarImportance = true;
 forest.ActiveVarCount = 1;
 forest.TermCriteria = TermCriteria.ByCount(32);
 
-OpenCvSharp.Core.Cv2.SetRngSeed(12345);
+JYPPX.OpenCvSharp.Core.Cv2.SetRngSeed(12345);
 forest.Train(samples, SampleTypes.RowSample, responses);
 
 using Mat votes = forest.GetVotes(samples, DTreesPredictionFlags.MaxVote);

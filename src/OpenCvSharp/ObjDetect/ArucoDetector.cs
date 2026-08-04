@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// ArUco marker detector compatible with OpenCV <c>cv::aruco::ArucoDetector</c>.

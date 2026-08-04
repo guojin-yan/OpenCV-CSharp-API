@@ -70,10 +70,7 @@ if (-not [string]::IsNullOrWhiteSpace($diagDirectory)) {
 }
 
 $unstableNativeSmokeVariable = "OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE"
-$compatibilityUnstableNativeSmokeAlias = "OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE"
 $nativeSmokeVariable = "OPENCV_CSHARP_NATIVE_SMOKE"
-$compatibilityNativeSmokeAlias = "OPENCV5SHARP_NATIVE_SMOKE"
-# OPENCV_CSHARP_* environment variables are primary; OPENCV5SHARP_* names remain only as existing-workflow compatibility aliases for smoke automation.
 
 Write-Warning "Unstable native smoke may terminate the testhost process. Run only while diagnosing fragile linked runtime paths."
 Write-Host "Project: $projectFullPath"
@@ -105,19 +102,15 @@ elseif (-not [string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
 }
 
 $previousUnstableNativeSmoke = [Environment]::GetEnvironmentVariable($unstableNativeSmokeVariable)
-$previousCompatibilityUnstableNativeSmoke = [Environment]::GetEnvironmentVariable($compatibilityUnstableNativeSmokeAlias)
 $previousNativeSmoke = [Environment]::GetEnvironmentVariable($nativeSmokeVariable)
-$previousCompatibilityNativeSmoke = [Environment]::GetEnvironmentVariable($compatibilityNativeSmokeAlias)
 
 try {
     Set-Item -Path "Env:$unstableNativeSmokeVariable" -Value "1"
-    Remove-Item -Path "Env:$compatibilityUnstableNativeSmokeAlias" -ErrorAction SilentlyContinue
     if ($IncludeOrdinaryNativeSmoke) {
         Set-Item -Path "Env:$nativeSmokeVariable" -Value "1"
     }
     else {
         Remove-Item -Path "Env:$nativeSmokeVariable" -ErrorAction SilentlyContinue
-        Remove-Item -Path "Env:$compatibilityNativeSmokeAlias" -ErrorAction SilentlyContinue
     }
 
     $testArguments = @(
@@ -142,9 +135,7 @@ try {
 }
 finally {
     Restore-EnvironmentVariable -Name $unstableNativeSmokeVariable -Value $previousUnstableNativeSmoke
-    Restore-EnvironmentVariable -Name $compatibilityUnstableNativeSmokeAlias -Value $previousCompatibilityUnstableNativeSmoke
     Restore-EnvironmentVariable -Name $nativeSmokeVariable -Value $previousNativeSmoke
-    Restore-EnvironmentVariable -Name $compatibilityNativeSmokeAlias -Value $previousCompatibilityNativeSmoke
 }
 
 Write-Host "Unstable smoke diagnostic log: $diagFullPath"

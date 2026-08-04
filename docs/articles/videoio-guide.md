@@ -1,8 +1,8 @@
 # VideoIO Guide
 
-`OpenCvSharp.VideoIO` wraps OpenCV `cv::VideoCapture`, `cv::VideoWriter`, `cv::IStreamReader`, and backend-registry queries through stable C ABI calls. This package focuses on file/device/managed-stream workflows: open, read, write, get/set properties, exception mode, wait-any coordination, inspect backend names, query backend availability, and build FourCC values.
+`JYPPX.OpenCvSharp.VideoIO` wraps OpenCV `cv::VideoCapture`, `cv::VideoWriter`, `cv::IStreamReader`, and backend-registry queries through stable C ABI calls. This package focuses on file/device/managed-stream workflows: open, read, write, get/set properties, exception mode, wait-any coordination, inspect backend names, query backend availability, and build FourCC values.
 
-`OpenCvSharp.VideoIO` 通过稳定 C ABI 调用封装 OpenCV `cv::VideoCapture`、`cv::VideoWriter` 和 backend registry 查询。该能力包聚焦常见文件/设备流程：打开、读取、写入、读写属性、查看后端名称、查询后端可用性，以及构造 FourCC 值。
+`JYPPX.OpenCvSharp.VideoIO` 通过稳定 C ABI 调用封装 OpenCV `cv::VideoCapture`、`cv::VideoWriter` 和 backend registry 查询。该能力包聚焦常见文件/设备流程：打开、读取、写入、读写属性、查看后端名称、查询后端可用性，以及构造 FourCC 值。
 
 ## Covered APIs / 已覆盖接口
 
@@ -27,8 +27,8 @@
 当文件或设备无法打开时，`VideoCapture.Open` 返回 `false`。只有参数非法、native 错误或 VideoIO native 链接缺失时才会抛异常。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.VideoIO;
 
 namespace VideoCaptureSample
 {
@@ -59,7 +59,7 @@ The stream overload is supplied by `VideoCaptureExtensions`, so the existing `ca
 
 ```csharp
 using System.IO;
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.VideoIO;
 
 using (var capture = new VideoCapture())
 using (var stream = File.OpenRead("input.mp4"))
@@ -85,8 +85,8 @@ Use `VideoWriter.FourCC` to build codec identifiers. The string overload validat
 使用 `VideoWriter.FourCC` 构造编解码器标识。字符串重载会校验编码必须正好包含四个字符，现代目标框架还提供 `ReadOnlySpan<char>` 重载。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.VideoIO;
 
 namespace VideoWriterSample
 {
@@ -117,7 +117,7 @@ namespace VideoWriterSample
 `VideoIORegistry` 报告当前机器上 OpenCV runtime 的后端可用性。结果取决于构建开关和可发现的后端插件。
 
 ```csharp
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.VideoIO;
 
 namespace VideoIORegistrySample
 {

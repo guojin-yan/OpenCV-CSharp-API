@@ -361,9 +361,8 @@ foreach ($ridSpec in @($matrix.rids)) {
         $expectedModuleFileCount = $expectedStagedModules.Count
         $expectedNativeFileNames = @()
         $primaryLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "JYPPX.OpenCV.Native.dll" } else { "libJYPPX.OpenCV.Native.so" }
-        $compatibilityLoaderName = if ($rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "OpenCv5Sharp.Native.dll" } else { "libOpenCv5Sharp.Native.so" }
         if ($selectedMode) {
-            $expectedNativeFileNames = @($primaryLoaderName, $compatibilityLoaderName)
+            $expectedNativeFileNames = @($primaryLoaderName)
             if ($ridSpec.platformFamily -eq "linux" -and -not $expectedSyntheticRuntimeInputsValue) {
                 $openCvBinarySuffix = ([System.Version]::Parse($expectedOpenCvVersion).Major.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Minor.ToString() + [System.Version]::Parse($expectedOpenCvVersion).Build.ToString())
                 foreach ($module in $expectedStagedModules) {
@@ -393,7 +392,6 @@ foreach ($ridSpec in @($matrix.rids)) {
             }
         }
         $hasPrimaryLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $primaryLoaderName }).Count -gt 0
-        $hasCompatibilityLoader = @($nativeEntries | Where-Object { (Get-EntryFileName -EntryName $_) -eq $compatibilityLoaderName }).Count -gt 0
 
         if ($info.FileName -ne $expectedFileName) {
             Add-Violation -Violations $violations -Path $artifactName -Issue "Runtime package file name must match neutral package ID plus normalized version" -Text $info.FileName
@@ -436,10 +434,6 @@ foreach ($ridSpec in @($matrix.rids)) {
             Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package must include the neutral primary native loader" -Text $primaryLoaderName
         }
 
-        if (-not $hasCompatibilityLoader) {
-            Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package must include the explicit compatibility native loader copy" -Text $compatibilityLoaderName
-        }
-
         if ($null -ne $manifest) {
             if ($manifest.PackageId -ne $expectedId -or $manifest.PackageVersion -ne $ExpectedPackageVersion) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record package identity and four-part version metadata" -Text "$($manifest.PackageId) / $($manifest.PackageVersion)"
@@ -457,8 +451,8 @@ foreach ($ridSpec in @($matrix.rids)) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must distinguish synthetic validation inputs from real runtime inputs" -Text $manifest.SyntheticRuntimeInputs
             }
 
-            if ($manifest.PrimaryNativeLoaderName -ne $primaryLoaderName -or $manifest.CompatibilityNativeLoaderName -ne $compatibilityLoaderName) {
-                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record primary and compatibility native loader names" -Text "$($manifest.PrimaryNativeLoaderName) / $($manifest.CompatibilityNativeLoaderName)"
+            if ($manifest.PrimaryNativeLoaderName -ne $primaryLoaderName) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must record the version-neutral native loader name" -Text $manifest.PrimaryNativeLoaderName
             }
 
             $manifestRequiredModules = @($manifest.RequiredModules | ForEach-Object { [string]$_ })
@@ -477,7 +471,7 @@ foreach ($ridSpec in @($matrix.rids)) {
             }
 
             $manifestRuntimeFiles = @($manifest.RuntimeFiles)
-            if ($manifestRuntimeFiles.Count -lt ($expectedStagedModules.Count + 2)) {
+            if ($manifestRuntimeFiles.Count -lt ($expectedStagedModules.Count + 1)) {
                 Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime provenance manifest must list staged native loader and OpenCV runtime files" -Text "Found $($manifestRuntimeFiles.Count), expected at least $($expectedStagedModules.Count + 2)"
             }
 
@@ -495,10 +489,7 @@ foreach ($ridSpec in @($matrix.rids)) {
 
         foreach ($entry in @($info.Entries)) {
             if (Test-ContainsFixedMajorIdentity -Text $entry) {
-                $entryFileName = Get-EntryFileName -EntryName $entry
-                if ($entryFileName -ne $compatibilityLoaderName) {
-                    Add-Violation -Violations $violations -Path $info.FileName -Issue "Fixed-major package entries are allowed only for the compatibility native loader copy" -Text $entry
-                }
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package must not contain fixed-major entries" -Text $entry
             }
         }
 

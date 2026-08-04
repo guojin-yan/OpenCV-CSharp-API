@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Specifies KAZE diffusivity types compatible with <c>cv::xfeatures2d::KAZE::DiffusivityType</c>.

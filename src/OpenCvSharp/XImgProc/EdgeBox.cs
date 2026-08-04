@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.XImgProc
+namespace JYPPX.OpenCvSharp.XImgProc
 {
     /// <summary>
     /// Represents an EdgeBoxes object proposal and its score.

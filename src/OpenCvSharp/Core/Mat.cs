@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Represents an OpenCV matrix object compatible with <c>cv::Mat</c>.

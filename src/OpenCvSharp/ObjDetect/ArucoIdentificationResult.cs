@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// Result returned by ArUco dictionary identification.

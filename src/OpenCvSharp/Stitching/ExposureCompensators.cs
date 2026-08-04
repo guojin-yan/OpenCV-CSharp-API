@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>An exposure compensator that leaves images unchanged.</summary>
     public sealed class NoExposureCompensator : ExposureCompensator

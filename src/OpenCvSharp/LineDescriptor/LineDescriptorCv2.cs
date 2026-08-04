@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.LineDescriptor
+namespace JYPPX.OpenCvSharp.LineDescriptor
 {
     /// <summary>
     /// Drawing helpers for OpenCV line_descriptor key lines and matches.

@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>Pairs an image metadata type with its matrix-backed payload. 将元数据类型与矩阵负载配对。</summary>
     public sealed class ImageMetadataChunk

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Flags for OpenCV FontFace text rendering. OpenCV FontFace 文本渲染标志。</summary>
     [Flags]

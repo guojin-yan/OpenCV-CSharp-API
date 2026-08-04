@@ -105,24 +105,19 @@ $pathChecks = @(
     }
 )
 
-$allowedFixedMajorRelativePathPrefixes = @(
-    # Source-compatible include tree for existing native code that includes old wrapper headers.
-    "src/OpenCvSharp.Native/include/$fixedMajorIncludeTree"
-)
+$allowedFixedMajorRelativePathPrefixes = @()
 
 $contentScanIgnoredRelativePrefixes = @(
-    # Generated compatibility files are covered by ABI-specific tests and can contain many intentional legacy names.
-    "src/OpenCvSharp.Native/generated",
-    "src/OpenCvSharp.Native/include/$fixedMajorIncludeTree"
+    "docs/api",
+    "docs/_site"
 )
 
 $allowedFixedMajorContentRelativePaths = @(
     # Compatibility generator and verification code intentionally contains legacy ABI/include spellings.
-    "scripts/Generate-NativeAbiCompatibility.ps1",
+    "scripts/Generate-NativeAbiManifest.ps1",
     "scripts/Test-ManagedNativeInteropNeutrality.ps1",
     "scripts/Test-NativeAbiExports.ps1",
-    "scripts/Test-NativeLegacyIncludeParity.ps1",
-    "src/OpenCvSharp.Native/tests/legacy_source_compat_smoke.cpp"
+    "scripts/Test-NoUnpublishedCompatibilitySurface.ps1"
 )
 
 $fixedMajorCompatibilityContextPattern = "compatib|legacy|existing|older|already-compiled|source-compatible|historical|retired|alias|facade|generated|include tree|allowlist|保留|兼容|旧|既有|已编译|历史|别名|生成"

@@ -1,8 +1,8 @@
 # Geometry ComposeRT Jacobians Guide
 
-Round 974 adds all eight transform-composition Jacobians to `OpenCvSharp.Calib3D.Cv2`.
+Round 974 adds all eight transform-composition Jacobians to `JYPPX.OpenCvSharp.Calib3D.Cv2`.
 
-Round 974 在 `OpenCvSharp.Calib3D.Cv2` 中增加变换组合的全部八个 Jacobian。
+Round 974 在 `JYPPX.OpenCvSharp.Calib3D.Cv2` 中增加变换组合的全部八个 Jacobian。
 
 ## Composition / 组合
 
@@ -70,9 +70,9 @@ pipeline:
 当输出矩阵属于现有处理流程时，使用十四参数重载：
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 using var rvec1 = new Mat(3, 1, MatType.CV_64FC1);
 using var tvec1 = new Mat(3, 1, MatType.CV_64FC1);

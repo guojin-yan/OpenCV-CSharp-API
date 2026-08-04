@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.Face
+namespace JYPPX.OpenCvSharp.Face
 {
     internal static class FaceStringConvert
     {

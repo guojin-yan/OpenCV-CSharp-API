@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies singular value decomposition flags compatible with OpenCV <c>cv::SVD::Flags</c>.

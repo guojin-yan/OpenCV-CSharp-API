@@ -212,20 +212,15 @@ function Invoke-StageCase {
             $outputRoot,
             $runtimeProject | Out-Null
 
-        $compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers
         if ($PlatformFamily -eq "windows") {
-            foreach ($loaderName in @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll")) {
-                Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir $loaderName) -Kind "windows"
-            }
+            Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir "JYPPX.OpenCV.Native.dll") -Kind "windows"
 
             foreach ($module in $modules) {
                 Write-SyntheticBinary -Path (Join-Path $runtimeDir "opencv_$module`500.dll") -Kind "windows"
             }
         }
         elseif ($PlatformFamily -eq "linux") {
-            foreach ($loaderName in @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")) {
-                Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir $loaderName) -Kind "elf"
-            }
+            Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir "libJYPPX.OpenCV.Native.so") -Kind "elf"
 
             foreach ($module in $modules) {
                 foreach ($suffix in @(".so", ".so.5.0.0", ".so.500")) {
@@ -234,9 +229,7 @@ function Invoke-StageCase {
             }
         }
         else {
-            foreach ($loaderName in @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")) {
-                Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir $loaderName) -Kind "elf"
-            }
+            Write-SyntheticBinary -Path (Join-Path $nativeRuntimeDir "libJYPPX.OpenCV.Native.so") -Kind "elf"
 
             foreach ($module in $modules) {
                 Write-SyntheticBinary -Path (Join-Path $runtimeDir "libopencv_$module.so") -Kind "elf"
@@ -286,16 +279,16 @@ function Invoke-StageCase {
         }
 
         $expectedRuntimeFileNames = if ($PlatformFamily -eq "windows") {
-            @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll") + @($modules | ForEach-Object { "opencv_$_`500.dll" })
+            @("JYPPX.OpenCV.Native.dll") + @($modules | ForEach-Object { "opencv_$_`500.dll" })
         }
         elseif ($PlatformFamily -eq "linux") {
-            @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so") + @($modules | ForEach-Object {
+            @("libJYPPX.OpenCV.Native.so") + @($modules | ForEach-Object {
                     $module = $_
                     @("libopencv_$module.so", "libopencv_$module.so.5.0.0", "libopencv_$module.so.500")
                 })
         }
         else {
-            @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so") + @($modules | ForEach-Object { "libopencv_$_.so" })
+            @("libJYPPX.OpenCV.Native.so") + @($modules | ForEach-Object { "libopencv_$_.so" })
         }
         $actualRuntimeFileNames = @($manifest.RuntimeFiles | ForEach-Object { [string]$_.FileName })
         if (Compare-Object -ReferenceObject @($expectedRuntimeFileNames | Sort-Object) -DifferenceObject @($actualRuntimeFileNames | Sort-Object)) {

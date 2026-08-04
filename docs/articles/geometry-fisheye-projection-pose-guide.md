@@ -44,9 +44,9 @@ and optional `jacobian` outputs must not alias any input matrix or each other.
 调用方持有的 `imagePoints` 与可选 `jacobian` 输出不得与任何输入矩阵或彼此使用相同别名。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 using var imagePoints = new Mat();
 using var jacobian = new Mat();

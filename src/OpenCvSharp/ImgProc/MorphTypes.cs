@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies morphological operation types compatible with OpenCV <c>cv::MorphTypes</c>.

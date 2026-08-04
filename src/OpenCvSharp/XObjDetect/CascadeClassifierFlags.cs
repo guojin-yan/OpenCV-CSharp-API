@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.XObjDetect
+namespace JYPPX.OpenCvSharp.XObjDetect
 {
     /// <summary>
     /// Flags for legacy cascade classifier detection.

@@ -202,8 +202,6 @@ Assert-NotMatches `
 
 foreach ($requiredStageNeedle in @(
         '[string]$OpenCvNativeRuntimeDir = ""',
-        '# OpenCvNativeRuntimeDir is the preferred version-neutral runtime path/staging parameter.',
-        '# NativeRuntimeDir is accepted only as an older existing-packaging-script compatibility alias.',
         'Derived only for factual upstream OpenCV runtime probe names such as opencv_core500.dll or libopencv_core.so.',
         'Derived only for factual upstream OpenCV runtime names such as opencv_core500.dll or libopencv_core.so.5.0.0.',
         '$nativeRuntimePath = Resolve-RepoPath $OpenCvNativeRuntimeDir')) {

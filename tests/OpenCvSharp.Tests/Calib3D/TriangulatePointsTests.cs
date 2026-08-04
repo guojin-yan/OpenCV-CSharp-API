@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
-namespace OpenCvSharp.Tests.Calib3D
+namespace JYPPX.OpenCvSharp.Tests.Calib3D
 {
     [Collection(NativeSmokeCollection.Name)]
     public sealed class TriangulatePointsTests

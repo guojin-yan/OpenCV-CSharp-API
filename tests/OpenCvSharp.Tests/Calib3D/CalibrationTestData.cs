@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tests.Calib3D
+namespace JYPPX.OpenCvSharp.Tests.Calib3D
 {
     internal static class CalibrationTestData
     {

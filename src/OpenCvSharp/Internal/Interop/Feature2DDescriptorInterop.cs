@@ -1,11 +1,11 @@
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 #if NETCOREAPP3_1_OR_GREATER
 using System.Buffers;
 #endif
 
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     internal static unsafe class Feature2DDescriptorInterop
     {

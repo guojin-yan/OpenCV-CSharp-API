@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     /// <summary>
     /// Stream-oriented VideoCapture entry points.

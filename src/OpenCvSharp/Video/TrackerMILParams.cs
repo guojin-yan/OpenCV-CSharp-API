@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>Parameters for the model-free main Video MIL tracker.</summary>
     public readonly struct TrackerMILParams : IEquatable<TrackerMILParams>

@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// Parameters used by ArUco marker refinement.

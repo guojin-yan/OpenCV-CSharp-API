@@ -1,8 +1,8 @@
 # AlphaMat Guide / AlphaMat 指南
 
-`OpenCvSharp.AlphaMat` wraps the first OpenCV contrib `alphamat` API for information-flow alpha matting.
+`JYPPX.OpenCvSharp.AlphaMat` wraps the first OpenCV contrib `alphamat` API for information-flow alpha matting.
 
-`OpenCvSharp.AlphaMat` 封装第一批 OpenCV contrib `alphamat` 信息流 alpha matting API。
+`JYPPX.OpenCvSharp.AlphaMat` 封装第一批 OpenCV contrib `alphamat` 信息流 alpha matting API。
 
 ## Scope / 范围
 
@@ -25,9 +25,9 @@ The input image is normally BGR/RGB color and the trimap is a single-channel mat
 输入图像通常是 BGR/RGB 彩色图，trimap 是单通道矩阵，包含前景、背景和未知区域。tiny smoke 只断言输出形状和类型，因为 matting 质量强依赖 trimap 质量。
 
 ```csharp
-using OpenCvSharp.AlphaMat;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.AlphaMat;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
 
 internal static class Program
 {

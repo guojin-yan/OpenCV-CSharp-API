@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Photo;
 
-namespace OpenCvSharp.Tests.Photo
+namespace JYPPX.OpenCvSharp.Tests.Photo
 {
     public sealed class PhotoFinalCallableTests
     {

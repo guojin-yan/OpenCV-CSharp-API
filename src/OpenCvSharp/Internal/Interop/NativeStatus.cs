@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     internal static class NativeStatus
     {

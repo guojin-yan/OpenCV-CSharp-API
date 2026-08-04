@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ImgHash
+namespace JYPPX.OpenCvSharp.ImgHash
 {
     /// <summary>Color moment image hash. Color moment 图像哈希。</summary>
     public sealed class ColorMomentHash : ImgHashBase

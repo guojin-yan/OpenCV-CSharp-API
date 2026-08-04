@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Owns the keypoints, descriptors, index, and image size used by OpenCV's stitching pipeline.</summary>
     public sealed unsafe class ImageFeatures : IDisposable

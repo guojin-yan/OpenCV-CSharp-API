@@ -1,8 +1,8 @@
 # Stitching Stitcher Guide
 
-`OpenCvSharp.Stitching` wraps the high-level OpenCV `cv::Stitcher` object. The wrapper focuses on the stable public `Stitcher` surface: mode/status enums, pipeline scale properties, wave correction, stitch/estimate/compose calls, component indices, camera parameters, and result mask access.
+`JYPPX.OpenCvSharp.Stitching` wraps the high-level OpenCV `cv::Stitcher` object. The wrapper focuses on the stable public `Stitcher` surface: mode/status enums, pipeline scale properties, wave correction, stitch/estimate/compose calls, component indices, camera parameters, and result mask access.
 
-`OpenCvSharp.Stitching` 封装 OpenCV 高层 `cv::Stitcher` 对象。当前 wrapper 聚焦稳定的 public `Stitcher` 接口：mode/status 枚举、pipeline 尺度属性、波形校正、stitch/estimate/compose 调用、component 索引、相机参数和 result mask 访问。
+`JYPPX.OpenCvSharp.Stitching` 封装 OpenCV 高层 `cv::Stitcher` 对象。当前 wrapper 聚焦稳定的 public `Stitcher` 接口：mode/status 枚举、pipeline 尺度属性、波形校正、stitch/estimate/compose 调用、component 索引、相机参数和 result mask 访问。
 
 ## Covered APIs / 已覆盖接口
 
@@ -31,8 +31,8 @@
 ## Minimal Call Shape / 最小调用形态
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Stitching;
 
 namespace StitchingSample
 {

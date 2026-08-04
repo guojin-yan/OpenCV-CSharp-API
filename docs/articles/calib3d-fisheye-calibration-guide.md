@@ -154,9 +154,9 @@ owned 双目重载默认以 `CalibrationFlags.None` 执行联合标定；由于�
 ## Caller-Owned Example / Caller-Owned 示例
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 using var cameraMatrix = Mat.Eye(3, 3, MatType.CV_64FC1);
 using var distCoeffs = Mat.Zeros(4, 1, MatType.CV_64FC1);

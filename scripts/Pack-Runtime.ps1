@@ -13,7 +13,6 @@ param(
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
     [string]$RuntimeProfile = "full",
     [string]$OpenCvNativeRuntimeDir = "",
-    [string]$NativeRuntimeDir = "",
     [string]$OpenCvRuntimeDir = "",
     [string]$OpenCvInstallDir = "",
     [string]$OpenCvSourceDir = "",
@@ -213,13 +212,7 @@ if ($RequireReleasePreflight -and $SyntheticRuntimeInputs) {
 
 if ($StageRuntime) {
     if ([string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
-        # OpenCvNativeRuntimeDir is the preferred version-neutral runtime path/staging parameter.
-        # NativeRuntimeDir is accepted only as an older existing-packaging-script compatibility alias.
-        $OpenCvNativeRuntimeDir = $NativeRuntimeDir
-    }
-
-    if ([string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
-        throw "OpenCvNativeRuntimeDir is required when StageRuntime is set. The older NativeRuntimeDir parameter remains accepted only as an existing-packaging-script compatibility alias."
+        throw "OpenCvNativeRuntimeDir is required when StageRuntime is set."
     }
 
     $stageParameters = @{

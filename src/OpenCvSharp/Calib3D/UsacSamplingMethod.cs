@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>Specifies the USAC minimal-sample strategy. 指定 USAC 最小样本策略。</summary>
     public enum UsacSamplingMethod

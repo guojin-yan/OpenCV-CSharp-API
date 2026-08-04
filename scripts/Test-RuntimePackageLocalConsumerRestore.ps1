@@ -22,7 +22,6 @@ if (-not (Test-Path -LiteralPath $packRuntimePath -PathType Leaf)) {
 }
 
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $runtimePackageId = "JYPPX.OpenCV.runtime.win-x64"
 $runtimePackageVersion = "5.0.0.0"
 $normalizedPackageVersion = "5.0.0"
@@ -288,7 +287,7 @@ try {
     $runtimeProjectPath = New-TemporaryRuntimeProject -RuntimeProjectDirectory $runtimeProjectDir
     $consumerProjectPath = New-TemporaryConsumerProject -ConsumerDirectory $consumerDir
 
-    foreach ($dllName in @($primaryNativeLoader, $compatibilityNativeLoader)) {
+    foreach ($dllName in @($primaryNativeLoader)) {
         Write-SyntheticDll -Path (Join-Path $nativeWrapperRuntimeDir $dllName)
     }
 
@@ -373,7 +372,7 @@ try {
         Add-Violation -Violations $violations -Path "consumer/RuntimeConsumer.csproj" -Issue "Temporary consumer build failed" -Text $buildOutputText
     }
 
-    $expectedRuntimeFiles = @($primaryNativeLoader, $compatibilityNativeLoader)
+    $expectedRuntimeFiles = @($primaryNativeLoader)
     foreach ($module in $requiredOpenCvModules) {
         $expectedRuntimeFiles += "opencv_$module$openCvBinarySuffix.dll"
     }

@@ -346,7 +346,7 @@ jobs:
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = 6
           $expectedOpenCvFileCount = 18
-          $expectedPayloadFileCount = 20
+          $expectedPayloadFileCount = 19
           if ($expectedModules.Count -ne $expectedModuleCount) {
             throw "Mini runtime matrix must retain exactly six OpenCV modules."
           }
@@ -358,7 +358,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'ubuntu.22.04-x64' -or
               $provenance.OpenCvRid -ne 'ubuntu.22.04-x64' -or
               $provenance.PlatformFamily -ne 'linux' -or
@@ -374,10 +373,10 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "Ubuntu 22.04 x64 mini provenance does not match the exact six-module 20-file producer contract."
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
+            throw "Ubuntu 22.04 x64 mini provenance does not match the exact six-module 19-file producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -452,7 +451,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          $expectedElfPattern = '^UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-22.04' -or
               $provenance.HostedRunner -ne 'ubuntu-22.04' -or
               $provenance.RunnerImage -ne 'ubuntu22' -or
@@ -509,9 +508,9 @@ jobs:
 
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = 6
-          $expectedCanonicalCount = 8
+          $expectedCanonicalCount = 7
           $expectedOpenCvFileCount = 18
-          $expectedPayloadFileCount = 20
+          $expectedPayloadFileCount = 19
           if ($expectedModules.Count -ne $expectedModuleCount) {
             throw "Mini runtime matrix must retain exactly six OpenCV modules."
           }
@@ -523,7 +522,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'debian.12-x64' -or
               $provenance.OpenCvRid -ne 'debian.12-x64' -or
               $provenance.PlatformFamily -ne 'linux' -or
@@ -539,10 +537,10 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "Debian 12 x64 mini provenance does not match the exact six-module 20-file producer contract."
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
+            throw "Debian 12 x64 mini provenance does not match the exact six-module 19-file producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -611,7 +609,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          $expectedElfPattern = '^DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -678,7 +676,7 @@ jobs:
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = 6
           $expectedOpenCvFileCount = 18
-          $expectedPayloadFileCount = 20
+          $expectedPayloadFileCount = 19
           if ($expectedModules.Count -ne $expectedModuleCount) {
             throw "Mini runtime matrix must retain exactly six OpenCV modules."
           }
@@ -690,7 +688,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'fedora.40-x64' -or
               $provenance.OpenCvRid -ne 'fedora.40-x64' -or
               $provenance.PlatformFamily -ne 'linux' -or
@@ -706,10 +703,10 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "Fedora 40 x64 mini provenance does not match the exact six-module 20-file producer contract."
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
+            throw "Fedora 40 x64 mini provenance does not match the exact six-module 19-file producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -778,7 +775,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          $expectedElfPattern = '^FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -845,7 +842,7 @@ jobs:
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = 6
           $expectedOpenCvFileCount = 18
-          $expectedPayloadFileCount = 20
+          $expectedPayloadFileCount = 19
           if ($expectedModules.Count -ne $expectedModuleCount) {
             throw "Mini runtime matrix must retain exactly six OpenCV modules."
           }
@@ -857,7 +854,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'rocky.9-x64' -or
               $provenance.OpenCvRid -ne 'rocky.9-x64' -or
               $provenance.PlatformFamily -ne 'linux' -or
@@ -873,10 +869,10 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "Rocky Linux 9 x64 mini provenance does not match the exact six-module 20-file producer contract."
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
+            throw "Rocky Linux 9 x64 mini provenance does not match the exact six-module 19-file producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -945,7 +941,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          $expectedElfPattern = '^ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -1012,7 +1008,7 @@ jobs:
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = 6
           $expectedOpenCvFileCount = 18
-          $expectedPayloadFileCount = 20
+          $expectedPayloadFileCount = 19
           if ($expectedModules.Count -ne $expectedModuleCount) {
             throw "Mini runtime matrix must retain exactly six OpenCV modules."
           }
@@ -1024,7 +1020,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'rhel.9-x64' -or
               $provenance.OpenCvRid -ne 'rhel.9-x64' -or
               $provenance.PlatformFamily -ne 'linux' -or
@@ -1040,10 +1035,10 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "RHEL 9 x64 mini provenance does not match the exact six-module 20-file producer contract."
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
+            throw "RHEL 9 x64 mini provenance does not match the exact six-module 19-file producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -1112,7 +1107,7 @@ jobs:
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
-          $expectedElfPattern = '^RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true$'
+          $expectedElfPattern = '^RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0$'
           if ($provenance.MatrixRunner -ne 'ubuntu-24.04' -or
               $provenance.HostedRunner -ne 'ubuntu-24.04' -or
               $provenance.RunnerImage -ne 'ubuntu24' -or
@@ -1179,10 +1174,9 @@ jobs:
           }
 
           $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
-          $compatibilityLoaderName = 'Open' + 'Cv5Sharp.Native.dll'
           $expectedModules = @($profile[0].modules)
           $expectedRuntimeFileCount = $expectedModules.Count
-          $expectedPayloadFileCount = $expectedModules.Count + 2
+          $expectedPayloadFileCount = $expectedModules.Count + 1
           $actualModules = @($provenance.RequiredModules)
           $expectedRuntimeNames = @($expectedModules | ForEach-Object { "opencv_$($_)$binarySuffix.dll" })
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
@@ -1204,9 +1198,9 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
               $missingRuntimeFiles.Count -ne 0 -or
               $unexpectedRuntimeFiles.Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll'
+          ) {
             throw "Windows runtime-input provenance does not match the exact win-x64/$profileName $expectedPayloadFileCount-DLL producer contract."
           }
 
@@ -1282,7 +1276,7 @@ jobs:
             '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$'
           }
           $peProfile = [regex]::Escape($profileName)
-          $expectedPePattern = "^WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$peProfile files=$expectedPayloadFileCount machine=AMD64 packaged_modules=$expectedRuntimeFileCount reachable_modules=$expectedRuntimeFileCount loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0 loader_equal=true$"
+          $expectedPePattern = "^WINDOWS_PE_AUDIT_OK rid=win-x64 profile=$peProfile files=$expectedPayloadFileCount machine=AMD64 packaged_modules=$expectedRuntimeFileCount reachable_modules=$expectedRuntimeFileCount loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0$"
           if ($provenance.HostedArchitecture -ne 'X64' -or
               $provenance.HostedProcessArchitecture -ne 'X64' -or
               $provenance.HostedPackageArchitecture -ne 'AMD64' -or
@@ -1312,7 +1306,6 @@ jobs:
           }
 
           $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
-          $compatibilityLoaderName = 'Open' + 'Cv5Sharp.Native.dll'
           $expectedModules = @($profile[0].modules)
           $expectedRuntimeNames = @($expectedModules | ForEach-Object { "opencv_$($_)$binarySuffix.dll" })
           $actualModules = @($provenance.RequiredModules)
@@ -1332,10 +1325,10 @@ jobs:
               $actualRuntimeNames.Count -ne 16 -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
-            throw "Windows x86 runtime-input provenance does not match the exact 18-I386-DLL full producer contract."
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll'
+          ) {
+            throw "Windows x86 runtime-input provenance does not match the exact 17-I386-DLL full producer contract."
           }
 
           foreach ($requiredValue in @(
@@ -1400,7 +1393,7 @@ jobs:
             }
           }
           $cmakeArgumentText = $openCvCMakeArguments -join [Environment]::NewLine
-          $expectedPePattern = '^WINDOWS_PE_AUDIT_OK rid=win-x86 profile=full files=18 machine=I386 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0 loader_equal=true$'
+          $expectedPePattern = '^WINDOWS_PE_AUDIT_OK rid=win-x86 profile=full files=17 machine=I386 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0$'
           $expectedAsmPattern = '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$'
           if ($provenance.HostedRunner -ne 'windows-latest' -or
               $provenance.HostedArchitecture -ne 'X64' -or
@@ -1434,7 +1427,7 @@ jobs:
               throw "Windows x86 provenance retained foreign architecture or emulation evidence: $forbiddenToken"
             }
           }
-          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=16 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true"
+          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=17 modules=16 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true"
       - name: Validate Windows ARM64 runtime input provenance
         if: ${{ matrix.rid == 'win-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1454,10 +1447,9 @@ jobs:
           }
 
           $binarySuffix = (('${{ inputs.opencv_version }}' -split '\.') | Select-Object -First 3) -join ''
-          $compatibilityLoaderName = 'Open' + 'Cv5Sharp.Native.dll'
           $expectedModules = @($profile[0].modules)
           $expectedRuntimeFileCount = $expectedModules.Count
-          $expectedPayloadFileCount = $expectedModules.Count + 2
+          $expectedPayloadFileCount = $expectedModules.Count + 1
           $expectedRuntimeNames = @($expectedModules | ForEach-Object { "opencv_$($_)$binarySuffix.dll" })
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
@@ -1474,9 +1466,9 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll'
+          ) {
             throw "Windows ARM64 runtime-input provenance does not match the exact win-arm64/$profileName $expectedPayloadFileCount-DLL producer contract."
           }
 
@@ -1558,7 +1550,7 @@ jobs:
           }
 
           $peProfile = [regex]::Escape($profileName)
-          $expectedPePattern = "^WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$peProfile files=$expectedPayloadFileCount machine=ARM64 packaged_modules=$expectedRuntimeFileCount reachable_modules=$expectedRuntimeFileCount loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0 loader_equal=true$"
+          $expectedPePattern = "^WINDOWS_PE_AUDIT_OK rid=win-arm64 profile=$peProfile files=$expectedPayloadFileCount machine=ARM64 packaged_modules=$expectedRuntimeFileCount reachable_modules=$expectedRuntimeFileCount loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0$"
           $expectedAsmPattern = if ($profileName -eq 'mini') {
             '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=NOT_BUILT;OPENCV_DNN_MLAS_SKIP_REASON=dnn excluded by mini profile$'
           }
@@ -1618,9 +1610,9 @@ jobs:
 
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = $expectedModules.Count
-          $expectedCanonicalCount = $expectedModuleCount + 2
+          $expectedCanonicalCount = $expectedModuleCount + 1
           $expectedRuntimeFileCount = $expectedModuleCount * 3
-          $expectedPayloadFileCount = $expectedRuntimeFileCount + 2
+          $expectedPayloadFileCount = $expectedRuntimeFileCount + 1
           $expectedDirectOpenCv = $expectedModuleCount
           $expectedRuntimeNames = @($expectedModules | ForEach-Object {
               "libopencv_$_.so"
@@ -1630,7 +1622,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'ubuntu.24.04-arm64' -or
               $provenance.PlatformFamily -ne 'linux' -or
               $provenance.Distro -ne 'ubuntu' -or
@@ -1645,9 +1636,9 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
             throw "Ubuntu ARM64 runtime-input provenance does not match the exact ubuntu.24.04-arm64/$profileName $expectedPayloadFileCount-file producer contract."
           }
 
@@ -1716,7 +1707,7 @@ jobs:
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
           $expectedBuildListArgument = "-DBUILD_LIST=$([string]$profile[0].buildList)"
           $elfProfile = [regex]::Escape($profileName)
-          $expectedElfPattern = "^UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedDirectOpenCv missing_dependencies=0 loader_equal=true$"
+          $expectedElfPattern = "^UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedDirectOpenCv missing_dependencies=0$"
           if ($provenance.HostedRunner -ne 'ubuntu-24.04-arm' -or
               $provenance.RunnerImage -ne 'ubuntu24-arm64' -or
               $provenance.HostedDistro -ne 'ubuntu' -or
@@ -1782,9 +1773,9 @@ jobs:
 
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = $expectedModules.Count
-          $expectedCanonicalCount = $expectedModuleCount + 2
+          $expectedCanonicalCount = $expectedModuleCount + 1
           $expectedRuntimeFileCount = $expectedModuleCount * 3
-          $expectedPayloadFileCount = $expectedRuntimeFileCount + 2
+          $expectedPayloadFileCount = $expectedRuntimeFileCount + 1
           $expectedRuntimeNames = @($expectedModules | ForEach-Object {
               "libopencv_$_.so"
               "libopencv_$_.so.500"
@@ -1793,7 +1784,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'ubuntu.22.04-arm64' -or
               $provenance.PlatformFamily -ne 'linux' -or
               $provenance.Distro -ne 'ubuntu' -or
@@ -1808,9 +1798,9 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
             throw "Ubuntu 22.04 ARM64 runtime-input provenance does not match the exact ubuntu.22.04-arm64/$profileName $expectedPayloadFileCount-file producer contract."
           }
 
@@ -1888,7 +1878,7 @@ jobs:
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
           $expectedBuildListArgument = "-DBUILD_LIST=$([string]$profile[0].buildList)"
           $elfProfile = [regex]::Escape($profileName)
-          $expectedElfPattern = "^UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true$"
+          $expectedElfPattern = "^UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0$"
           $expectedImage = 'ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982'
           $expectedImageDigest = 'ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982'
           if ($provenance.HostedRunner -ne 'ubuntu-24.04-arm' -or
@@ -1962,9 +1952,9 @@ jobs:
 
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = $expectedModules.Count
-          $expectedCanonicalCount = $expectedModuleCount + 2
+          $expectedCanonicalCount = $expectedModuleCount + 1
           $expectedRuntimeFileCount = $expectedModuleCount * 3
-          $expectedPayloadFileCount = $expectedRuntimeFileCount + 2
+          $expectedPayloadFileCount = $expectedRuntimeFileCount + 1
           $expectedRuntimeNames = @($expectedModules | ForEach-Object {
               "libopencv_$_.so"
               "libopencv_$_.so.500"
@@ -1973,7 +1963,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'debian.12-arm64' -or
               $provenance.PlatformFamily -ne 'linux' -or
               $provenance.Distro -ne 'debian' -or
@@ -1988,9 +1977,9 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedRuntimeFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
             throw "Debian 12 ARM64 runtime-input provenance does not match the exact debian.12-arm64/$profileName $expectedPayloadFileCount-file producer contract."
           }
 
@@ -2068,7 +2057,7 @@ jobs:
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
           $expectedBuildListArgument = "-DBUILD_LIST=$([string]$profile[0].buildList)"
           $elfProfile = [regex]::Escape($profileName)
-          $expectedElfPattern = "^DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true$"
+          $expectedElfPattern = "^DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=AArch64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0$"
           $expectedImage = 'debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
           $expectedImageDigest = 'debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc'
           if ($provenance.HostedRunner -ne 'ubuntu-24.04-arm' -or
@@ -2141,9 +2130,9 @@ jobs:
 
           $expectedModules = @($profile[0].modules)
           $expectedModuleCount = $expectedModules.Count
-          $expectedCanonicalCount = $expectedModuleCount + 2
+          $expectedCanonicalCount = $expectedModuleCount + 1
           $expectedOpenCvFileCount = $expectedModuleCount * 3
-          $expectedPayloadFileCount = $expectedOpenCvFileCount + 2
+          $expectedPayloadFileCount = $expectedOpenCvFileCount + 1
           $expectedRuntimeNames = @($expectedModules | ForEach-Object {
               "libopencv_$_.so"
               "libopencv_$_.so.500"
@@ -2152,7 +2141,6 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          $compatibilityLoaderName = 'libOpen' + 'Cv5Sharp.Native.so'
           if ($provenance.Rid -ne 'alpine.3.20-x64' -or
               $provenance.OpenCvRid -ne 'alpine.3.20-x64' -or
               $provenance.PlatformFamily -ne 'linux' -or
@@ -2168,9 +2156,9 @@ jobs:
               $actualRuntimeNames.Count -ne $expectedOpenCvFileCount -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
-              $actualLoaderNames.Count -ne 2 -or
-              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so' -or
-              $actualLoaderNames -notcontains $compatibilityLoaderName) {
+              $actualLoaderNames.Count -ne 1 -or
+              $actualLoaderNames -notcontains 'libJYPPX.OpenCV.Native.so'
+          ) {
             throw "Alpine runtime-input provenance does not match the exact alpine.3.20-x64/$profileName $expectedPayloadFileCount-file producer contract."
           }
 
@@ -2242,7 +2230,7 @@ jobs:
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
           $expectedBuildListArgument = "-DBUILD_LIST=$([string]$profile[0].buildList)"
           $elfProfile = [regex]::Escape($profileName)
-          $expectedElfPattern = "^ALPINE_3_20_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0 loader_equal=true$"
+          $expectedElfPattern = "^ALPINE_3_20_PRODUCER_ELF_EVIDENCE profile=$elfProfile files=$expectedCanonicalCount runtime_files=$expectedPayloadFileCount machine=X86-64 origin=$expectedCanonicalCount producer_paths=0 direct_opencv=$expectedModuleCount missing_dependencies=0$"
           $expectedImage = 'alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc'
           $expectedImageDigest = 'alpine@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc'
           if ($provenance.HostedRunner -ne 'ubuntu-24.04' -or
@@ -2664,9 +2652,7 @@ jobs:
             throw "Packaged win-x64/${{ inputs.runtime_profile }} execution requires an actual AMD64 Windows host and x64 process."
           }
 
-          $compatibilityNativeRuntimeDir = 'Open' + 'Cv5SharpNativeRuntimeDir'
-          $compatibilityRuntimeRoot = 'OPENCV' + '5SHARP_OPENCV_RUNTIME_ROOT'
-          foreach ($name in @('OpenCvNativeRuntimeDir', $compatibilityNativeRuntimeDir, 'OPENCV_CSHARP_OPENCV_RUNTIME_ROOT', $compatibilityRuntimeRoot)) {
+          foreach ($name in @('OpenCvNativeRuntimeDir', 'OPENCV_CSHARP_OPENCV_RUNTIME_ROOT')) {
             if (-not [string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($name))) {
               throw "Packaged Windows consumer must not use a native runtime search override: $name"
             }
@@ -2759,9 +2745,7 @@ jobs:
             throw "Packaged win-arm64/${{ inputs.runtime_profile }} execution requires actual ARM64 Windows hardware and a native ARM64 process without compatibility translation."
           }
 
-          $compatibilityNativeRuntimeDir = 'Open' + 'Cv5SharpNativeRuntimeDir'
-          $compatibilityRuntimeRoot = 'OPENCV' + '5SHARP_OPENCV_RUNTIME_ROOT'
-          foreach ($name in @('OpenCvNativeRuntimeDir', $compatibilityNativeRuntimeDir, 'OPENCV_CSHARP_OPENCV_RUNTIME_ROOT', $compatibilityRuntimeRoot)) {
+          foreach ($name in @('OpenCvNativeRuntimeDir', 'OPENCV_CSHARP_OPENCV_RUNTIME_ROOT')) {
             if (-not [string]::IsNullOrWhiteSpace([Environment]::GetEnvironmentVariable($name))) {
               throw "Packaged Windows ARM64 consumer must not use a native runtime search override: $name"
             }
@@ -2883,14 +2867,14 @@ jobs:
           case "$profile" in
             full)
               modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=18
-              expected_runtime_file_count=50
+              expected_canonical_count=17
+              expected_runtime_file_count=49
               expected_direct_opencv=16
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
-              expected_canonical_count=8
-              expected_runtime_file_count=20
+              expected_canonical_count=7
+              expected_runtime_file_count=19
               expected_direct_opencv=6
               ;;
             *)
@@ -2909,11 +2893,9 @@ jobs:
           native_dir="$extract_root/runtimes/ubuntu.24.04-arm64/native"
           test -d "$native_dir"
 
-          compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name 'lib*.Native.so' ! -name 'libJYPPX.OpenCV.Native.so' -print -quit)"
-          test -n "$compatibility_loader"
           expected_names="$RUNNER_TEMP/ubuntu-arm64-expected-runtime-files.txt"
           actual_names="$RUNNER_TEMP/ubuntu-arm64-actual-runtime-files.txt"
-          printf '%s\n' 'libJYPPX.OpenCV.Native.so' "$(basename "$compatibility_loader")" > "$expected_names"
+          printf '%s\n' 'libJYPPX.OpenCV.Native.so' > "$expected_names"
           for module in "${modules[@]}"; do
             printf '%s\n' \
               "libopencv_${module}.so" \
@@ -2928,7 +2910,7 @@ jobs:
 
           mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name 'libopencv_*.so.${{ inputs.opencv_version }}' | sort)
           test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
           test "${#elf_files[@]}" -eq "$expected_canonical_count"
 
           machine_count=0
@@ -2958,8 +2940,7 @@ jobs:
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
-          cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          echo "UBUNTU_24_04_ARM64_PACKAGE_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+          echo "UBUNTU_24_04_ARM64_PACKAGE_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
       - name: Restore, build, and run selected real Ubuntu ARM64 package consumer
         shell: pwsh
         run: |
@@ -3072,14 +3053,14 @@ jobs:
               case "$RUNTIME_PROFILE" in
                 full)
                   modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-                  expected_canonical_count=18
-                  expected_runtime_file_count=50
+                  expected_canonical_count=17
+                  expected_runtime_file_count=49
                   expected_direct_opencv=16
                   ;;
                 mini)
                   modules=(core imgproc imgcodecs videoio geometry flann)
-                  expected_canonical_count=8
-                  expected_runtime_file_count=20
+                  expected_canonical_count=7
+                  expected_runtime_file_count=19
                   expected_direct_opencv=6
                   ;;
                 *)
@@ -3098,11 +3079,9 @@ jobs:
               native_dir="$extract_root/runtimes/ubuntu.22.04-arm64/native"
               test -d "$native_dir"
 
-              compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-              test -n "$compatibility_loader"
               expected_names="/tmp/ubuntu2204-arm64-$RUNTIME_PROFILE-expected-runtime-files.txt"
               actual_names="/tmp/ubuntu2204-arm64-$RUNTIME_PROFILE-actual-runtime-files.txt"
-              printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+              printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
               for module in "${modules[@]}"; do
                 printf "%s\n" \
                   "libopencv_${module}.so" \
@@ -3117,7 +3096,7 @@ jobs:
 
               mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
               test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-              elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+              elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
               test "${#elf_files[@]}" -eq "$expected_canonical_count"
               machine_count=0
               origin_count=0
@@ -3145,8 +3124,7 @@ jobs:
               test "$producer_path_count" -eq 0
               test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
               test "$missing_dependency_count" -eq 0
-              cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-              echo "UBUNTU_22_04_ARM64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+              echo "UBUNTU_22_04_ARM64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
 
               pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1 \
                 -ArtifactRoot /workspace/artifacts/pack-targeted-ubuntu2204-arm64 \
@@ -3273,14 +3251,14 @@ jobs:
           case "$RUNTIME_PROFILE" in
             full)
               modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=18
-              expected_runtime_file_count=50
+              expected_canonical_count=17
+              expected_runtime_file_count=49
               expected_direct_opencv=16
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
-              expected_canonical_count=8
-              expected_runtime_file_count=20
+              expected_canonical_count=7
+              expected_runtime_file_count=19
               expected_direct_opencv=6
               ;;
             *)
@@ -3299,11 +3277,9 @@ jobs:
           native_dir="$extract_root/runtimes/debian.12-x64/native"
           test -d "$native_dir"
 
-          compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-          test -n "$compatibility_loader"
           expected_names="/tmp/debian12-x64-$RUNTIME_PROFILE-expected-runtime-files.txt"
           actual_names="/tmp/debian12-x64-$RUNTIME_PROFILE-actual-runtime-files.txt"
-          printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+          printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
           for module in "${modules[@]}"; do
             printf "%s\n" \
               "libopencv_${module}.so" \
@@ -3318,7 +3294,7 @@ jobs:
 
           mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
           test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
           test "${#elf_files[@]}" -eq "$expected_canonical_count"
           machine_count=0
           origin_count=0
@@ -3350,8 +3326,7 @@ jobs:
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
-          cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          echo "DEBIAN_12_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true triplets_equal=true"
+          echo "DEBIAN_12_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 triplets_equal=true"
       - name: Restore, build, and run selected real Debian package consumer
         shell: pwsh
         run: |
@@ -3468,14 +3443,14 @@ jobs:
               case "$RUNTIME_PROFILE" in
                 full)
                   modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-                  expected_canonical_count=18
-                  expected_runtime_file_count=50
+                  expected_canonical_count=17
+                  expected_runtime_file_count=49
                   expected_direct_opencv=16
                   ;;
                 mini)
                   modules=(core imgproc imgcodecs videoio geometry flann)
-                  expected_canonical_count=8
-                  expected_runtime_file_count=20
+                  expected_canonical_count=7
+                  expected_runtime_file_count=19
                   expected_direct_opencv=6
                   ;;
                 *)
@@ -3494,11 +3469,9 @@ jobs:
               native_dir="$extract_root/runtimes/debian.12-arm64/native"
               test -d "$native_dir"
 
-              compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-              test -n "$compatibility_loader"
               expected_names="/tmp/debian12-arm64-$RUNTIME_PROFILE-expected-runtime-files.txt"
               actual_names="/tmp/debian12-arm64-$RUNTIME_PROFILE-actual-runtime-files.txt"
-              printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+              printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
               for module in "${modules[@]}"; do
                 printf "%s\n" \
                   "libopencv_${module}.so" \
@@ -3513,7 +3486,7 @@ jobs:
 
               mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
               test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-              elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+              elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
               test "${#elf_files[@]}" -eq "$expected_canonical_count"
               machine_count=0
               origin_count=0
@@ -3541,8 +3514,7 @@ jobs:
               test "$producer_path_count" -eq 0
               test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
               test "$missing_dependency_count" -eq 0
-              cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-              echo "DEBIAN_12_ARM64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+              echo "DEBIAN_12_ARM64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
 
               pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackConsumerRestoreSurface.ps1 \
                 -ArtifactRoot /workspace/artifacts/pack-targeted-debian-arm64 \
@@ -3691,14 +3663,14 @@ jobs:
           case "$RUNTIME_PROFILE" in
             full)
               modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=18
-              expected_runtime_file_count=50
+              expected_canonical_count=17
+              expected_runtime_file_count=49
               expected_direct_opencv=16
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
-              expected_canonical_count=8
-              expected_runtime_file_count=20
+              expected_canonical_count=7
+              expected_runtime_file_count=19
               expected_direct_opencv=6
               ;;
             *)
@@ -3717,11 +3689,9 @@ jobs:
           native_dir="$extract_root/runtimes/fedora.40-x64/native"
           test -d "$native_dir"
 
-          compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-          test -n "$compatibility_loader"
           expected_names="/tmp/fedora40-x64-$RUNTIME_PROFILE-expected-runtime-files.txt"
           actual_names="/tmp/fedora40-x64-$RUNTIME_PROFILE-actual-runtime-files.txt"
-          printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+          printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
           for module in "${modules[@]}"; do
             printf "%s\n" \
               "libopencv_${module}.so" \
@@ -3736,7 +3706,7 @@ jobs:
 
           mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
           test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
           test "${#elf_files[@]}" -eq "$expected_canonical_count"
           machine_count=0
           origin_count=0
@@ -3768,8 +3738,7 @@ jobs:
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
-          cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          echo "FEDORA_40_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true triplets_equal=true"
+          echo "FEDORA_40_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 triplets_equal=true"
       - name: Restore, build, and run selected real Fedora package consumer
         shell: pwsh
         run: |
@@ -3921,14 +3890,14 @@ jobs:
           case "$RUNTIME_PROFILE" in
             full)
               modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=18
-              expected_runtime_file_count=50
+              expected_canonical_count=17
+              expected_runtime_file_count=49
               expected_direct_opencv=16
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
-              expected_canonical_count=8
-              expected_runtime_file_count=20
+              expected_canonical_count=7
+              expected_runtime_file_count=19
               expected_direct_opencv=6
               ;;
             *)
@@ -3947,11 +3916,9 @@ jobs:
           native_dir="$extract_root/runtimes/rocky.9-x64/native"
           test -d "$native_dir"
 
-          compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-          test -n "$compatibility_loader"
           expected_names="/tmp/rocky9-x64-$RUNTIME_PROFILE-expected-runtime-files.txt"
           actual_names="/tmp/rocky9-x64-$RUNTIME_PROFILE-actual-runtime-files.txt"
-          printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+          printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
           for module in "${modules[@]}"; do
             printf "%s\n" \
               "libopencv_${module}.so" \
@@ -3966,7 +3933,7 @@ jobs:
 
           mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
           test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
           test "${#elf_files[@]}" -eq "$expected_canonical_count"
           machine_count=0
           origin_count=0
@@ -3998,8 +3965,7 @@ jobs:
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
-          cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          echo "ROCKY_9_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true triplets_equal=true"
+          echo "ROCKY_9_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 triplets_equal=true"
       - name: Restore, build, and run selected real Rocky package consumer
         shell: pwsh
         run: |
@@ -4155,14 +4121,14 @@ jobs:
           case "$RUNTIME_PROFILE" in
             full)
               modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=18
-              expected_runtime_file_count=50
+              expected_canonical_count=17
+              expected_runtime_file_count=49
               expected_direct_opencv=16
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
-              expected_canonical_count=8
-              expected_runtime_file_count=20
+              expected_canonical_count=7
+              expected_runtime_file_count=19
               expected_direct_opencv=6
               ;;
             *)
@@ -4181,11 +4147,9 @@ jobs:
           native_dir="$extract_root/runtimes/rhel.9-x64/native"
           test -d "$native_dir"
 
-          compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-          test -n "$compatibility_loader"
           expected_names="/tmp/rhel9-x64-$RUNTIME_PROFILE-expected-runtime-files.txt"
           actual_names="/tmp/rhel9-x64-$RUNTIME_PROFILE-actual-runtime-files.txt"
-          printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+          printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
           for module in "${modules[@]}"; do
             printf "%s\n" \
               "libopencv_${module}.so" \
@@ -4200,7 +4164,7 @@ jobs:
 
           mapfile -t opencv_elfs < <(find "$native_dir" -maxdepth 1 -type f -name "libopencv_*.so.$OPENCV_VERSION" | sort)
           test "${#opencv_elfs[@]}" -eq "${#modules[@]}"
-          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          elf_files=("$native_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
           test "${#elf_files[@]}" -eq "$expected_canonical_count"
           machine_count=0
           origin_count=0
@@ -4232,8 +4196,7 @@ jobs:
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
-          cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          echo "RHEL_9_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true triplets_equal=true"
+          echo "RHEL_9_X64_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 triplets_equal=true"
       - name: Restore, build, and run selected real RHEL package consumer
         shell: pwsh
         run: |
@@ -4342,16 +4305,16 @@ jobs:
               case "$RUNTIME_PROFILE" in
                 full)
                   modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
-                  expected_canonical_count=18
+                  expected_canonical_count=17
                   expected_opencv_count=16
-                  expected_runtime_file_count=50
+                  expected_runtime_file_count=49
                   expected_direct_opencv=16
                   ;;
                 mini)
                   modules="core imgproc imgcodecs videoio geometry flann"
-                  expected_canonical_count=8
+                  expected_canonical_count=7
                   expected_opencv_count=6
-                  expected_runtime_file_count=20
+                  expected_runtime_file_count=19
                   expected_direct_opencv=6
                   ;;
                 *)
@@ -4369,11 +4332,9 @@ jobs:
               unzip -q "$package_path" -d "$extract_root"
               native_dir="$extract_root/runtimes/alpine.3.20-x64/native"
               test -d "$native_dir"
-              compatibility_loader="$(find "$native_dir" -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-              test -n "$compatibility_loader"
               expected_names="/tmp/alpine-$RUNTIME_PROFILE-expected-runtime-files.txt"
               actual_names="/tmp/alpine-$RUNTIME_PROFILE-actual-runtime-files.txt"
-              printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+              printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
               for module in $modules; do
                 printf "%s\n" "libopencv_${module}.so" "libopencv_${module}.so.500" "libopencv_${module}.so.$OPENCV_VERSION" >> "$expected_names"
               done
@@ -4387,7 +4348,7 @@ jobs:
               alpine_producer_path_count=0
               alpine_missing_dependency_count=0
               alpine_opencv_count=0
-              for elf in "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "$native_dir"/libopencv_*.so."$OPENCV_VERSION"; do
+              for elf in "$native_dir/libJYPPX.OpenCV.Native.so" "$native_dir"/libopencv_*.so."$OPENCV_VERSION"; do
                 test -f "$elf"
                 readelf -h "$elf" | grep -q "Machine:.*X86-64"
                 case "$(basename "$elf")" in libopencv_*) alpine_opencv_count=$((alpine_opencv_count + 1)) ;; esac
@@ -4406,8 +4367,7 @@ jobs:
               test "$alpine_producer_path_count" -eq 0
               test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
               test "$alpine_missing_dependency_count" -eq 0
-              cmp -s "$native_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-              echo "ALPINE_3_20_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+              echo "ALPINE_3_20_PACKAGE_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
 
               pwsh -NoProfile -File /workspace/scripts/Test-GitHubPackArtifactMatrixSurface.ps1 \
                 -ArtifactRoot /workspace/artifacts/pack-targeted-alpine \

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.PhaseUnwrapping
+namespace JYPPX.OpenCvSharp.PhaseUnwrapping
 {
     /// <summary>
     /// Provides OpenCV phase_unwrapping factory helpers.

@@ -1,11 +1,11 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 #if NETCOREAPP3_1_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     /// <summary>
     /// Provides point-set validation and interleaved memory views for imgproc interop.

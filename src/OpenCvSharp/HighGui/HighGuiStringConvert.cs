@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     internal static class HighGuiStringConvert
     {

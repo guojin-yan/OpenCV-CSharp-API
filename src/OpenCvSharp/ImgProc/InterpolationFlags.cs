@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies interpolation algorithms compatible with OpenCV <c>cv::InterpolationFlags</c>.

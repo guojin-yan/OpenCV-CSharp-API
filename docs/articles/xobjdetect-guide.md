@@ -1,17 +1,17 @@
 # XObjDetect Guide
 
-`OpenCvSharp.XObjDetect` wraps the first optional contrib object-detection APIs found in the local OpenCV 5.0.0 contrib tree. In this source layout, legacy cascade and HOG workflows are in `opencv_contrib/modules/xobjdetect`, not the main OpenCV `objdetect` module.
+`JYPPX.OpenCvSharp.XObjDetect` wraps the first optional contrib object-detection APIs found in the local OpenCV 5.0.0 contrib tree. In this source layout, legacy cascade and HOG workflows are in `opencv_contrib/modules/xobjdetect`, not the main OpenCV `objdetect` module.
 
-`OpenCvSharp.XObjDetect` 封装本地 OpenCV 5.0.0 contrib 源码树中的第一批可选目标检测 API。在当前源码布局中，传统级联分类器和 HOG 工作流位于 `opencv_contrib/modules/xobjdetect`，而不是 OpenCV 主仓库 `objdetect` 模块。
+`JYPPX.OpenCvSharp.XObjDetect` 封装本地 OpenCV 5.0.0 contrib 源码树中的第一批可选目标检测 API。在当前源码布局中，传统级联分类器和 HOG 工作流位于 `opencv_contrib/modules/xobjdetect`，而不是 OpenCV 主仓库 `objdetect` 模块。
 
 ## Main vs Contrib / 主线与 contrib
 
-- `OpenCvSharp.ObjDetect` maps to the main factual OpenCV 5.0.0 runtime artifact `opencv_objdetect500.dll` module and contains QR, barcode, and DNN-backed face APIs.
-- `OpenCvSharp.XObjDetect` maps to optional contrib factual OpenCV 5.0.0 runtime artifact `opencv_xobjdetect500.dll` and currently contains cascade and HOG APIs.
+- `JYPPX.OpenCvSharp.ObjDetect` maps to the main factual OpenCV 5.0.0 runtime artifact `opencv_objdetect500.dll` module and contains QR, barcode, and DNN-backed face APIs.
+- `JYPPX.OpenCvSharp.XObjDetect` maps to optional contrib factual OpenCV 5.0.0 runtime artifact `opencv_xobjdetect500.dll` and currently contains cascade and HOG APIs.
 - If OpenCV is built without contrib `xobjdetect`, the managed API shape still exists, but native calls report the defined `NOT_LINKED` boundary.
 
-- `OpenCvSharp.ObjDetect` 对应主线事实性 OpenCV 5.0.0 runtime 产物 `opencv_objdetect500.dll` 模块，包含二维码、条形码和 DNN 人脸 API。
-- `OpenCvSharp.XObjDetect` 对应可选 contrib 事实性 OpenCV 5.0.0 runtime 产物 `opencv_xobjdetect500.dll`，当前包含级联分类器和 HOG API。
+- `JYPPX.OpenCvSharp.ObjDetect` 对应主线事实性 OpenCV 5.0.0 runtime 产物 `opencv_objdetect500.dll` 模块，包含二维码、条形码和 DNN 人脸 API。
+- `JYPPX.OpenCvSharp.XObjDetect` 对应可选 contrib 事实性 OpenCV 5.0.0 runtime 产物 `opencv_xobjdetect500.dll`，当前包含级联分类器和 HOG API。
 - 如果 OpenCV 构建未包含 contrib `xobjdetect`，managed API 形状仍保持存在，但 native 调用会返回定义好的 `NOT_LINKED` 边界。
 
 ## Covered APIs / 已覆盖接口
@@ -37,9 +37,9 @@ Cascade models are loaded from user-supplied XML files. Default tests and sample
 级联模型由用户提供 XML 文件加载。默认测试和示例不内置 Haar 或 LBP 模型。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.XObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.XObjDetect;
 
 namespace XObjDetectCascadeSample
 {
@@ -72,9 +72,9 @@ namespace XObjDetectCascadeSample
 `HOGDescriptor` 暴露 OpenCV 默认行人检测器和 Daimler 行人检测器向量，并在现代 .NET 目标上通过 `float[]` 与 `ReadOnlySpan<float>` 支持自定义 SVM detector。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.XObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.XObjDetect;
 
 namespace XObjDetectHogSample
 {

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Specifies OpenCV descriptor matcher factory types compatible with <c>cv::DescriptorMatcher::MatcherType</c>.

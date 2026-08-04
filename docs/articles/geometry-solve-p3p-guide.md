@@ -1,8 +1,8 @@
 # Geometry SolveP3P Guide
 
-Round 972 adds direct P3P and AP3P pose solving to `OpenCvSharp.Calib3D.Cv2`.
+Round 972 adds direct P3P and AP3P pose solving to `JYPPX.OpenCvSharp.Calib3D.Cv2`.
 
-Round 972 在 `OpenCvSharp.Calib3D.Cv2` 中增加直接 P3P 和 AP3P 位姿求解。
+Round 972 在 `JYPPX.OpenCvSharp.Calib3D.Cv2` 中增加直接 P3P 和 AP3P 位姿求解。
 
 ## Problem And Inputs / 问题与输入
 
@@ -74,9 +74,9 @@ Use the caller-owned overload when output matrices already belong to a larger pr
 当输出矩阵已经属于更大的处理流程时，可以使用调用方持有输出的重载：
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 Point3f[] objectPoints =
 {

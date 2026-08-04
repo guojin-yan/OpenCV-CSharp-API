@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Horizontal wrapping interval used by FontFace text rendering. FontFace 文本渲染使用的水平换行区间。</summary>
     public readonly struct TextWrapRange : IEquatable<TextWrapRange>

@@ -1,10 +1,10 @@
 using System;
 using System.Text;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Owns OpenCV's public string-selected rotation warper adapter.</summary>
     public sealed class PyRotationWarper : IDisposable

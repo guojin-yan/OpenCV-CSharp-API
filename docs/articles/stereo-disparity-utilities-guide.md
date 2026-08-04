@@ -2,14 +2,14 @@
 
 ## Overview
 
-`OpenCvSharp.Calib3D.Cv2` exposes four OpenCV stereo disparity utilities:
+`JYPPX.OpenCvSharp.Calib3D.Cv2` exposes four OpenCV stereo disparity utilities:
 
 - `FilterSpeckles`
 - `GetValidDisparityROI`
 - `ValidateDisparity`
 - `ReprojectImageTo3D`
 
-`OpenCvSharp.Calib3D.Cv2` 提供四个 OpenCV 双目视差工具：
+`JYPPX.OpenCvSharp.Calib3D.Cv2` 提供四个 OpenCV 双目视差工具：
 
 - `FilterSpeckles`
 - `GetValidDisparityROI`

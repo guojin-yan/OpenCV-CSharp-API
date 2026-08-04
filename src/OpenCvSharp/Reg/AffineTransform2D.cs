@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Reg
+namespace JYPPX.OpenCvSharp.Reg
 {
     /// <summary>
     /// Represents a 2D affine transform used by OpenCV reg maps.

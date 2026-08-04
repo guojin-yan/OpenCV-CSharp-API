@@ -1,8 +1,8 @@
 # BgSegm Guide / BgSegm 指南
 
-`OpenCvSharp.BgSegm` wraps the first OpenCV 5.0.0 contrib `bgsegm` background-modeling objects.
+`JYPPX.OpenCvSharp.BgSegm` wraps the first OpenCV 5.0.0 contrib `bgsegm` background-modeling objects.
 
-`OpenCvSharp.BgSegm` 封装第一批 OpenCV 5.0.0 contrib `bgsegm` 背景建模对象。
+`JYPPX.OpenCvSharp.BgSegm` 封装第一批 OpenCV 5.0.0 contrib `bgsegm` 背景建模对象。
 
 ## Scope / 范围
 
@@ -28,14 +28,14 @@ Background modeling needs a frame sequence before the model becomes useful. Tiny
 
 背景建模需要多帧序列才能形成有用模型。tiny 合成帧样例和测试只验证对象创建、属性、`Apply` 与背景图调用能正确跨过 native 边界。
 
-`BgSegmBackgroundSubtractor` is separate from `OpenCvSharp.Video.BackgroundSubtractor` because the native layer keeps each module's opaque handle ownership independent. In the local OpenCV 5.0.0 contrib implementation, MOG reports `StsNotImplemented` for `getBackgroundImage`; use `Apply` for MOG smoke and call `GetBackgroundImage` on algorithms that implement it, such as CNT.
+`BgSegmBackgroundSubtractor` is separate from `JYPPX.OpenCvSharp.Video.BackgroundSubtractor` because the native layer keeps each module's opaque handle ownership independent. In the local OpenCV 5.0.0 contrib implementation, MOG reports `StsNotImplemented` for `getBackgroundImage`; use `Apply` for MOG smoke and call `GetBackgroundImage` on algorithms that implement it, such as CNT.
 
-`BgSegmBackgroundSubtractor` 与 `OpenCvSharp.Video.BackgroundSubtractor` 分离，因为 native 层保持各模块 opaque handle 的所有权边界独立。在本地 OpenCV 5.0.0 contrib 实现中，MOG 的 `getBackgroundImage` 会返回 `StsNotImplemented`；MOG smoke 建议使用 `Apply`，背景图调用应放在 CNT 等已实现该函数的算法上。
+`BgSegmBackgroundSubtractor` 与 `JYPPX.OpenCvSharp.Video.BackgroundSubtractor` 分离，因为 native 层保持各模块 opaque handle 的所有权边界独立。在本地 OpenCV 5.0.0 contrib 实现中，MOG 的 `getBackgroundImage` 会返回 `StsNotImplemented`；MOG smoke 建议使用 `Apply`，背景图调用应放在 CNT 等已实现该函数的算法上。
 
 ```csharp
-using OpenCvSharp.BgSegm;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.BgSegm;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
 
 using Mat first = new Mat(24, 24, MatType.CV_8UC3, new Scalar(20, 40, 60));
 using Mat second = first.Clone();

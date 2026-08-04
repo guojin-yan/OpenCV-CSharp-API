@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace OpenCvSharp.Rapid
+namespace JYPPX.OpenCvSharp.Rapid
 {
     /// <summary>
     /// Result returned by a RAPID iteration.

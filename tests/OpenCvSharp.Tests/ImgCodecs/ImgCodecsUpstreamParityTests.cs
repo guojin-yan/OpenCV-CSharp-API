@@ -1,10 +1,10 @@
 using System;
 using System.IO;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using ImgCodecsCv2 = OpenCvSharp.ImgCodecs.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 
-namespace OpenCvSharp.Tests.ImgCodecs
+namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
 {
     public class ImgCodecsUpstreamParityTests
     {
@@ -13,7 +13,7 @@ namespace OpenCvSharp.Tests.ImgCodecs
         {
             if (!TestEnvironment.IsNativeSmokeEnabled()) return;
 
-            string root = Path.Combine(Path.GetTempPath(), "OpenCvSharp-多页-" + Guid.NewGuid().ToString("N"));
+            string root = Path.Combine(Path.GetTempPath(), "JYPPX.OpenCvSharp-多页-" + Guid.NewGuid().ToString("N"));
             string path = Path.Combine(root, "页面.tiff");
             Directory.CreateDirectory(root);
             var pages = new Mat[]
@@ -90,7 +90,7 @@ namespace OpenCvSharp.Tests.ImgCodecs
         {
             if (!TestEnvironment.IsNativeSmokeEnabled()) return;
 
-            string root = Path.Combine(Path.GetTempPath(), "OpenCvSharp-元数据-" + Guid.NewGuid().ToString("N"));
+            string root = Path.Combine(Path.GetTempPath(), "JYPPX.OpenCvSharp-元数据-" + Guid.NewGuid().ToString("N"));
             string path = Path.Combine(root, "照片.jpeg");
             Directory.CreateDirectory(root);
             byte[] exif = CreateSampleExifData();
@@ -130,7 +130,7 @@ namespace OpenCvSharp.Tests.ImgCodecs
         {
             if (!TestEnvironment.IsNativeSmokeEnabled()) return;
 
-            string root = Path.Combine(Path.GetTempPath(), "OpenCvSharp-动画-" + Guid.NewGuid().ToString("N"));
+            string root = Path.Combine(Path.GetTempPath(), "JYPPX.OpenCvSharp-动画-" + Guid.NewGuid().ToString("N"));
             string path = Path.Combine(root, "序列.gif");
             Directory.CreateDirectory(root);
             var sourceFrames = new[]

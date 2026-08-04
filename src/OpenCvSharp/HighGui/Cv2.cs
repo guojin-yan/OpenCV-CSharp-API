@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using System.Text;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// OpenCV HighGUI window and key helpers.

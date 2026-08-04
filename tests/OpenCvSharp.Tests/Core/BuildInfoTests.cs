@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tests.Core
+namespace JYPPX.OpenCvSharp.Tests.Core
 {
     public class BuildInfoTests
     {
@@ -17,32 +17,14 @@ namespace OpenCvSharp.Tests.Core
             Assert.Equal("JYPPX.OpenCV.CSharp.API", OpenCvSharpBuildInfo.ManagedPackageId);
             Assert.Equal("JYPPX.OpenCV.runtime", OpenCvSharpBuildInfo.RuntimePackageIdPrefix);
             Assert.Equal("JYPPX.OpenCV.Native", OpenCvSharpBuildInfo.CurrentNativeLibraryName);
-            Assert.Equal("OpenCv5Sharp.Native", OpenCvSharpBuildInfo.LegacyNativeLibraryName);
-            // NativeLibraryName preserves the existing-caller compatibility loader value.
-            Assert.Equal(OpenCvSharpBuildInfo.LegacyNativeLibraryName, OpenCvSharpBuildInfo.NativeLibraryName);
         }
 
         [Fact]
         public void PrimaryManagedIdentityIsVersionNeutral()
         {
             Assert.Equal("JYPPX.OpenCV.CSharp.API", typeof(OpenCvSharpBuildInfo).Assembly.GetName().Name);
-            Assert.Equal("OpenCvSharp", typeof(OpenCvSharpBuildInfo).Namespace);
-            Assert.Equal("OpenCvSharp.Core", typeof(Mat).Namespace);
-        }
-
-        [Fact]
-        public void CompatibilityBuildInfoFacadeMatchesVersionNeutralBuildInfo()
-        {
-            Assert.Equal(OpenCvSharpBuildInfo.ManagedPackageId, OpenCv5SharpBuildInfo.ManagedPackageId); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.RuntimePackageIdPrefix, OpenCv5SharpBuildInfo.RuntimePackageIdPrefix); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.OpenCvVersion, OpenCv5SharpBuildInfo.OpenCvVersion); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.PackageVersion, OpenCv5SharpBuildInfo.PackageVersion); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.CurrentNativeLibraryName, OpenCv5SharpBuildInfo.CurrentNativeLibraryName); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.LegacyNativeLibraryName, OpenCv5SharpBuildInfo.LegacyNativeLibraryName);
-            // OpenCv5SharpBuildInfo remains only for existing callers over the current build-info surface.
-            Assert.Equal(OpenCvSharpBuildInfo.NativeLibraryName, OpenCv5SharpBuildInfo.NativeLibraryName); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.TargetFramework, OpenCv5SharpBuildInfo.TargetFramework); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.GetDisplayString(), OpenCv5SharpBuildInfo.GetDisplayString()); // compatibility facade
+            Assert.Equal("JYPPX.OpenCvSharp", typeof(OpenCvSharpBuildInfo).Namespace);
+            Assert.Equal("JYPPX.OpenCvSharp.Core", typeof(Mat).Namespace);
         }
 
         [Fact]
@@ -57,63 +39,26 @@ namespace OpenCvSharp.Tests.Core
             Assert.True(OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible());
             OpenCvSharpBuildInfo.VerifyNativeOpenCvVersionCompatibility();
 
-            Assert.Equal(OpenCvSharpBuildInfo.GetNativeOpenCvVersion(), OpenCv5SharpBuildInfo.GetNativeOpenCvVersion()); // compatibility facade
-            Assert.Equal(OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible(), OpenCv5SharpBuildInfo.IsNativeOpenCvVersionCompatible()); // compatibility facade
-            OpenCv5SharpBuildInfo.VerifyNativeOpenCvVersionCompatibility(); // compatibility facade
         }
 
         [Fact]
         public void TestEnvironmentPrefersNeutralVariableNames()
         {
             Assert.Equal("OPENCV_CSHARP_NATIVE_SMOKE", TestEnvironment.NativeSmokeVariable);
-            Assert.Equal("OPENCV5SHARP_NATIVE_SMOKE", TestEnvironment.CompatibilityNativeSmokeAlias);
             Assert.Equal("OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE", TestEnvironment.UnstableNativeSmokeVariable);
-            Assert.Equal("OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE", TestEnvironment.CompatibilityUnstableNativeSmokeAlias);
             Assert.Equal("OPENCV_CSHARP_HIGHGUI_SMOKE", TestEnvironment.HighGuiSmokeVariable);
-            Assert.Equal("OPENCV5SHARP_HIGHGUI_SMOKE", TestEnvironment.CompatibilityHighGuiSmokeAlias);
             Assert.Equal("OPENCV_CSHARP_FACE_CASCADE", TestEnvironment.FaceCascadeVariable);
-            Assert.Equal("OPENCV5SHARP_FACE_CASCADE", TestEnvironment.CompatibilityFaceCascadeAlias);
             Assert.Equal("OPENCV_CSHARP_FACE_DETECTOR_MODEL", TestEnvironment.FaceDetectorModelVariable);
-            Assert.Equal("OPENCV5SHARP_FACE_DETECTOR_MODEL", TestEnvironment.CompatibilityFaceDetectorModelAlias);
             Assert.Equal("OPENCV_CSHARP_FACE_RECOGNIZER_MODEL", TestEnvironment.FaceRecognizerModelVariable);
-            Assert.Equal("OPENCV5SHARP_FACE_RECOGNIZER_MODEL", TestEnvironment.CompatibilityFaceRecognizerModelAlias);
             Assert.Equal("OPENCV_CSHARP_BRISQUE_MODEL", TestEnvironment.BrisqueModelVariable);
-            Assert.Equal("OPENCV5SHARP_BRISQUE_MODEL", TestEnvironment.CompatibilityBrisqueModelAlias);
             Assert.Equal("OPENCV_CSHARP_BRISQUE_RANGE", TestEnvironment.BrisqueRangeVariable);
-            Assert.Equal("OPENCV5SHARP_BRISQUE_RANGE", TestEnvironment.CompatibilityBrisqueRangeAlias);
             Assert.Equal("OPENCV_CSHARP_ML_MODEL_DIR", TestEnvironment.MlModelDirVariable);
-            Assert.Equal("OPENCV5SHARP_ML_MODEL_DIR", TestEnvironment.CompatibilityMlModelDirAlias);
-            Assert.Equal("new", TestEnvironment.ChooseVariableValue("new", "old"));
-            Assert.Equal("old", TestEnvironment.ChooseVariableValue(string.Empty, "old"));
             Assert.True(TestEnvironment.IsFlagValueEnabled("1"));
             Assert.True(TestEnvironment.IsFlagValueEnabled("true"));
             Assert.False(TestEnvironment.IsFlagValueEnabled("0"));
             Assert.Equal(TestEnvironment.IsFlagValueEnabled(TestEnvironment.GetNativeSmokeVariable()), TestEnvironment.IsNativeSmokeEnabled());
             Assert.Equal(TestEnvironment.IsFlagValueEnabled(TestEnvironment.GetUnstableNativeSmokeVariable()), TestEnvironment.IsUnstableNativeSmokeEnabled());
             Assert.Equal(TestEnvironment.IsFlagValueEnabled(TestEnvironment.GetHighGuiSmokeVariable()), TestEnvironment.IsHighGuiSmokeEnabled());
-        }
-
-        [Fact]
-        public void TestEnvironmentGetVariablePrefersNeutralValueAndFallsBackToCompatibilityAlias()
-        {
-            string suffix = Guid.NewGuid().ToString("N");
-            string neutralName = "OPENCV_CSHARP_TEST_NEUTRAL_" + suffix;
-            string compatibilityAliasName = "OPENCV5SHARP_TEST_COMPATIBILITY_ALIAS_" + suffix;
-
-            try
-            {
-                Environment.SetEnvironmentVariable(neutralName, null);
-                Environment.SetEnvironmentVariable(compatibilityAliasName, "compatibility");
-                Assert.Equal("compatibility", TestEnvironment.GetVariable(neutralName, compatibilityAliasName));
-
-                Environment.SetEnvironmentVariable(neutralName, "neutral");
-                Assert.Equal("neutral", TestEnvironment.GetVariable(neutralName, compatibilityAliasName));
-            }
-            finally
-            {
-                Environment.SetEnvironmentVariable(neutralName, null);
-                Environment.SetEnvironmentVariable(compatibilityAliasName, null);
-            }
         }
 
         [Fact]

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Built-in OpenCV stitching blender strategies.</summary>
     public enum BlenderType

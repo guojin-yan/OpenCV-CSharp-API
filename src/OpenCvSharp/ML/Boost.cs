@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Boosted decision-tree model.</summary>
     public sealed class Boost : DTrees

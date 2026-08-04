@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     public static partial class Cv2
     {

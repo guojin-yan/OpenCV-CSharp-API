@@ -1,7 +1,7 @@
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Shape
+namespace JYPPX.OpenCvSharp.Shape
 {
     /// <summary>
     /// Base class for histogram cost extractors with a norm flag.

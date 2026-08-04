@@ -1,8 +1,8 @@
 # ArUco Guide
 
-`OpenCvSharp.ObjDetect` exposes the first ArUco batch from the main OpenCV `objdetect` module. These APIs are not contrib `xobjdetect` APIs; they are staged with the factual OpenCV 5.0.0 runtime artifact `opencv_objdetect500.dll`.
+`JYPPX.OpenCvSharp.ObjDetect` exposes the first ArUco batch from the main OpenCV `objdetect` module. These APIs are not contrib `xobjdetect` APIs; they are staged with the factual OpenCV 5.0.0 runtime artifact `opencv_objdetect500.dll`.
 
-`OpenCvSharp.ObjDetect` 暴露 OpenCV 主线 `objdetect` 模块的第一批 ArUco 能力。这些 API 不是 contrib `xobjdetect` API，而是随事实性 OpenCV 5.0.0 runtime 产物 `opencv_objdetect500.dll` 暂存。
+`JYPPX.OpenCvSharp.ObjDetect` 暴露 OpenCV 主线 `objdetect` 模块的第一批 ArUco 能力。这些 API 不是 contrib `xobjdetect` API，而是随事实性 OpenCV 5.0.0 runtime 产物 `opencv_objdetect500.dll` 暂存。
 
 ## Covered APIs / 已覆盖接口
 
@@ -23,8 +23,8 @@
 ## Marker Generation / Marker 生成
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ArucoMarkerSample
 {
@@ -53,8 +53,8 @@ namespace ArucoMarkerSample
 `ArucoDetector.DetectMarkers` 返回 `Point2f[][]` 形式的角点分组、`int[]` id 和 `Point2f[][]` 形式的 rejected candidates。native ABI 使用 count/fill 两阶段调用，并通过 group offsets 和扁平点缓冲区传递数据。`std::vector` 或 `OutputArrayOfArrays` 不会穿过 C ABI。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ArucoDetectSample
 {
@@ -81,8 +81,8 @@ Real detection quality still depends on marker size, border bits, image resoluti
 ## Grid Board / 网格板
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ArucoBoardSample
 {

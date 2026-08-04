@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Regularization kinds supported by <see cref="LogisticRegression"/>.</summary>
     public enum LogisticRegressionRegularizationKinds

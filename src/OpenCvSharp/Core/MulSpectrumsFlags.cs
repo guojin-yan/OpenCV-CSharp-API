@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies spectrum multiplication flags compatible with OpenCV <c>mulSpectrums</c>.

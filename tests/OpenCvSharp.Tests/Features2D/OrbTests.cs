@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.Features2D
+namespace JYPPX.OpenCvSharp.Tests.Features2D
 {
     public class OrbTests
     {

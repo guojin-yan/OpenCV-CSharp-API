@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Specifies AKAZE descriptor types compatible with <c>cv::xfeatures2d::AKAZE::DescriptorType</c>.

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>
     /// Specifies how an image buffer should be decoded by OpenCV.

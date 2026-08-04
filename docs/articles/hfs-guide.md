@@ -1,8 +1,8 @@
 # HFS Guide / HFS 指南
 
-`OpenCvSharp.Hfs` wraps the first OpenCV contrib `hfs` Hierarchical Feature Selection segmentation surface through an opaque `HfsSegment` handle.
+`JYPPX.OpenCvSharp.Hfs` wraps the first OpenCV contrib `hfs` Hierarchical Feature Selection segmentation surface through an opaque `HfsSegment` handle.
 
-`OpenCvSharp.Hfs` 通过 opaque `HfsSegment` 句柄封装第一批 OpenCV contrib `hfs` Hierarchical Feature Selection 分割能力。
+`JYPPX.OpenCvSharp.Hfs` 通过 opaque `HfsSegment` 句柄封装第一批 OpenCV contrib `hfs` Hierarchical Feature Selection 分割能力。
 
 ## Scope / 范围
 
@@ -33,8 +33,8 @@ OpenCV HFS expects the segmenter size to match the input image size. The CPU smo
 OpenCV HFS 期望 segmenter 尺寸与输入图像尺寸一致。CPU smoke 使用 tiny 合成 `CV_8UC3` BGR 图像，并只验证输出形状，不衡量分割质量。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Hfs;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Hfs;
 
 using Mat image = new Mat(32, 32, MatType.CV_8UC3, new Scalar(20, 40, 80));
 using HfsSegment segment = HfsCv2.CreateHfsSegment(32, 32);

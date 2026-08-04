@@ -34,8 +34,8 @@ if ($summary.classificationCounts.implemented -ne 156 -or $summary.classificatio
 if ($summary.negativeFixtureCount -ne 32 -or $summary.selectedFamilyCount -ne 9 -or $summary.selectedDeclarationCount -ne 146 -or $summary.highLevelImplementedCallableCount -ne 21 -or $summary.sourceReviewedExtensionCount -ne 4) { throw "Stitching fixture/family contract drifted." }
 if ($summary.managedPublicTypeAdditionCount -ne 14 -or $summary.managedPublicMemberAdditionCount -ne 38 -or $summary.nativeEntrypointAdditionCount -ne 22) { throw "Stitching addition counts drifted." }
 if ($summary.umatExecutionClaimed -or $summary.detailRowsMixedIntoHighLevel -or $summary.repositoryWideUpstreamParityClaimed) { throw "Stitching ownership or parity boundary was weakened." }
-if ($summary.mappingSha256 -ne "a293df54df227128ea116726908a84aa94fa1003538369a0c744ef0fbf30ef70" -or
-    $summary.familyInventorySha256 -ne "806098568cc452580f5cb9baa00e34561ca4d9edef372feff71516fcd4a707ba") { throw "Stitching generated map hashes drifted." }
+if ($summary.mappingSha256 -ne "dd89f9bac6104644aa040d7c7dbc77597f8b28597441487dbef02edd1b6b71f0" -or
+    $summary.familyInventorySha256 -ne "5277b0aeafc696562994ea80347c017094d7a8d5b58716844078f4aab8514f83") { throw "Stitching generated map hashes drifted." }
 
 $rawHash = (Get-FileHash -LiteralPath (Join-Path $repo "compatibility/stitching-upstream-raw.json") -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($rawHash -ne "e712d4faed827e0c3e35ed584cde22fe11c60a9ca7589c3d87f6b840321399ad") { throw "Stitching raw extraction hash drifted." }
@@ -154,7 +154,7 @@ $entrypoints = @(
 )
 $dllImport = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.DllImport.cs") -Raw
 $libraryImport = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs") -Raw
-$manifest = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Raw
+$manifest = Get-Content -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt") -Raw
 foreach ($entrypoint in $entrypoints) {
     if (-not $dllImport.Contains($entrypoint) -or -not $libraryImport.Contains($entrypoint) -or -not $manifest.Contains("$entrypoint|")) {
         throw "Stitching Blender ABI/interop evidence is incomplete: $entrypoint"
@@ -173,20 +173,20 @@ if (-not $smoke.Contains("run_stitching_blender_smoke") -or -not $smoke.Contains
     -not $smoke.Contains("jyppx_ocv_stitching_blender_create_default(0, 0, &blender) != OPENCV_CSHARP_STATUS_NOT_LINKED")) { throw "Stitching Blender native smoke or profile-boundary evidence is incomplete." }
 if (-not $tests.Contains("GpuNamedPyramidHelpersPreserveUpstreamUnavailableError") -or -not $tests.Contains("CpuLaplacePyramidRoundTripsRoiInput") -or
     -not $sample.Contains("RunBlenderSummary") -or -not $guide.Contains("CUDA optimization is unavailable") -or
-    -not $consumer.Contains("typeof(OpenCvSharp.Stitching.MultiBandBlender)")) { throw "Stitching Blender managed evidence is incomplete." }
+    -not $consumer.Contains("typeof(JYPPX.OpenCvSharp.Stitching.MultiBandBlender)")) { throw "Stitching Blender managed evidence is incomplete." }
 if (-not $smoke.Contains("run_stitching_features_matcher_smoke") -or -not $smoke.Contains("features_matcher != reinterpret_cast") -or
     -not $matcherTests.Contains("BatchMaskAndRangeMatcherProduceExactRowMajorResults") -or -not $matcherTests.Contains("OrbComputesSingleBatchAndNonContinuousRoi") -or
     -not $sample.Contains("RunFeaturesMatcherSummary") -or -not $guide.Contains("LightGlue matching remains explicitly unsupported") -or
-    -not $consumer.Contains("typeof(OpenCvSharp.Stitching.BestOf2NearestMatcher)")) { throw "Stitching matcher evidence is incomplete." }
+    -not $consumer.Contains("typeof(JYPPX.OpenCvSharp.Stitching.BestOf2NearestMatcher)")) { throw "Stitching matcher evidence is incomplete." }
 if (-not $smoke.Contains("run_stitching_motion_estimator_smoke") -or -not $smoke.Contains("unchanged_estimator != reinterpret_cast") -or
     -not $motionTests.Contains("HomographyAndAffineEstimatorsReturnIndependentCameras") -or -not $motionTests.Contains("WaveGraphAndLargestComponentPreserveOwnership") -or
     -not $sample.Contains("RunMotionEstimatorSummary") -or -not $guide.Contains("The measured module result is 156 implemented, zero missing") -or
-    -not $consumer.Contains("typeof(OpenCvSharp.Stitching.BundleAdjusterAffinePartial)")) { throw "Stitching camera/motion evidence is incomplete." }
+    -not $consumer.Contains("typeof(JYPPX.OpenCvSharp.Stitching.BundleAdjusterAffinePartial)")) { throw "Stitching camera/motion evidence is incomplete." }
 if (-not $smoke.Contains("jyppx_ocv_stitching_seam_finder_find") -or -not $smoke.Contains("jyppx_ocv_stitching_timelapser_get_dst") -or
     -not $smoke.Contains("jyppx_ocv_stitching_spherical_projector_map_backward") -or -not $smoke.Contains("stitching_log_level != 17") -or
     -not $detailTests.Contains("SeamFactoriesAndTransactionalMasksWork") -or -not $detailTests.Contains("TimelapserReturnsIndependentCpuStorage") -or
     -not $detailTests.Contains("PlacementUtilitiesMatchExactGeometry") -or -not $detailTests.Contains("SphericalProjectionRoundTrips") -or
     -not $sample.Contains("RunStitchingDetailSummary") -or -not $guide.Contains("signed modulo") -or
-    -not $consumer.Contains("typeof(OpenCvSharp.Stitching.SphericalProjector)")) { throw "Stitching final-detail evidence is incomplete." }
+    -not $consumer.Contains("typeof(JYPPX.OpenCvSharp.Stitching.SphericalProjector)")) { throw "Stitching final-detail evidence is incomplete." }
 
 Write-Output "STITCHING_UPSTREAM_MAP_GUARD_OK declarations=207 high-level=24/21/21 public-warper=12/10/10 blender=28/24/24 exposure=53/45/45 matcher=23/16/14 camera-motion=31/20/20 seam=18/9/9 timelapser=7/4/4 utility=7/7/7 detail-warper=4/2/2 implemented=156 missing=0 unsupported=2 fixtures=32"

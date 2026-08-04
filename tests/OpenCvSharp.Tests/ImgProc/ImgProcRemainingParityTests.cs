@@ -1,12 +1,12 @@
 using System;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.ImgProc;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.ImgProc;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.ImgProc
+namespace JYPPX.OpenCvSharp.Tests.ImgProc
 {
     public class ImgProcRemainingParityTests
     {

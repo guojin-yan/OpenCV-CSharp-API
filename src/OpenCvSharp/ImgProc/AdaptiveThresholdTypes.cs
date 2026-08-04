@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies adaptive thresholding algorithms compatible with OpenCV <c>cv::AdaptiveThresholdTypes</c>.

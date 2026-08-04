@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// HighGUI mouse event flags compatible with OpenCV <c>cv::MouseEventFlags</c>.

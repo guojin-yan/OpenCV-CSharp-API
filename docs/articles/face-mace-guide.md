@@ -35,8 +35,8 @@ If the factual OpenCV 5.0.0 runtime artifact `opencv_face500.dll` is unavailable
 ```csharp
 using System;
 using System.IO;
-using OpenCvSharp.Core;
-using OpenCvSharp.Face;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Face;
 
 namespace FaceMaceSample
 {

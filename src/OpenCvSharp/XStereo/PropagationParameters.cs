@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XStereo
+namespace JYPPX.OpenCvSharp.XStereo
 {
     /// <summary>
     /// Propagation parameters for QuasiDenseStereo.

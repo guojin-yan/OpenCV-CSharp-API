@@ -335,21 +335,21 @@ internal static class Program
     {
         int ordinal = declaration.Ordinal;
         string type = ManagedType(declaration.Name);
-        if (ordinal == 2) return FindManaged(managed, type, "|constructor|", "OpenCvSharp.Core.Mat bytesList");
-        if (ordinal == 48) return FindManaged(managed, type, " Create(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries");
+        if (ordinal == 2) return FindManaged(managed, type, "|constructor|", "JYPPX.OpenCvSharp.Core.Mat bytesList");
+        if (ordinal == 48) return FindManaged(managed, type, " Create(JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries");
         if (ordinal == 72) return FindManaged(managed, type, " DetectAndDecodeBytes(");
         if (ordinal == 73) return FindManaged(managed, type, " DecodeBytes(");
         if (ordinal == 74) return FindManaged(managed, type, " DecodeBytesMulti(");
         if (ordinal == 75) return FindManaged(managed, type, " DetectAndDecodeBytesMulti(");
         if (ordinal == 78) return FindManaged(managed, type, "|constructor|");
         if (ordinal == 95) return FindManaged(managed, type, " Process(", "regionsOfInterest");
-        if (ordinal == 96) return FindManaged(managed, type, " Process(OpenCvSharp.Core.Mat image,System.Int32 nc=1)");
+        if (ordinal == 96) return FindManaged(managed, type, " Process(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 nc=1)");
         if (ordinal == 99) return FindManaged(managed, type, "|constructor|", ".ctor()");
-        if (ordinal == 100) return FindManaged(managed, type, "|constructor|", "OpenCvSharp.Dnn.Net net");
+        if (ordinal == 100) return FindManaged(managed, type, "|constructor|", "JYPPX.OpenCvSharp.Dnn.Net net");
         if (ordinal == 127) return FindManaged(managed, type, "|constructor|", ".ctor()");
         if (ordinal == 130) return FindManaged(managed, type, "|constructor|", "QRCodeDetectorArucoParams parameters");
-        if (ordinal == 139) return FindManaged(managed, type, " FindChessboardCornersSB(", "OpenCvSharp.Core.Mat meta");
-        if (ordinal == 140) return managed.Where(x => x.Contains("MEMBER|" + type + "|", StringComparison.Ordinal) && x.Contains(" FindChessboardCornersSB(", StringComparison.Ordinal) && !x.Contains("OpenCvSharp.Core.Mat meta", StringComparison.Ordinal)).Single();
+        if (ordinal == 139) return FindManaged(managed, type, " FindChessboardCornersSB(", "JYPPX.OpenCvSharp.Core.Mat meta");
+        if (ordinal == 140) return managed.Where(x => x.Contains("MEMBER|" + type + "|", StringComparison.Ordinal) && x.Contains(" FindChessboardCornersSB(", StringComparison.Ordinal) && !x.Contains("JYPPX.OpenCvSharp.Core.Mat meta", StringComparison.Ordinal)).Single();
         if (ordinal == 159 || ordinal == 166) return FindManaged(managed, type, " Create(System.String model");
         if (ordinal == 160 || ordinal == 167) return FindManaged(managed, type, " Create(System.String framework,System.Byte[] modelBuffer");
         if (ordinal == 185) return FindManaged(managed, type, "|constructor|", ".ctor()");
@@ -378,27 +378,27 @@ internal static class Program
 
     private static string ManagedType(string name)
     {
-        if (name.StartsWith("cv.aruco.Dictionary", StringComparison.Ordinal) || name == "cv.aruco.getPredefinedDictionary" || name == "cv.aruco.extendDictionary" || name == "cv.aruco.generateImageMarker") return "OpenCvSharp.ObjDetect.ArucoDictionary";
-        if (name.StartsWith("cv.aruco.Board", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.ArucoBoard";
-        if (name.StartsWith("cv.aruco.GridBoard", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.ArucoGridBoard";
-        if (name.StartsWith("cv.aruco.CharucoBoard", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.CharucoBoard";
-        if (name.StartsWith("cv.aruco.DetectorParameters", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.ArucoDetectorParameters";
-        if (name.StartsWith("cv.aruco.RefineParameters", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.ArucoRefineParameters";
-        if (name.StartsWith("cv.aruco.ArucoDetector", StringComparison.Ordinal) || name == "cv.aruco.drawDetectedMarkers") return "OpenCvSharp.ObjDetect.ArucoDetector";
-        if (name.StartsWith("cv.GraphicalCodeDetector", StringComparison.Ordinal) || name.StartsWith("cv.QRCodeDetector.", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.QRCodeDetector";
-        if (name.StartsWith("cv.mcc.CCheckerDetector", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.CCheckerDetector";
-        if (name.StartsWith("cv.mcc.CChecker", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.CChecker";
-        if (name.StartsWith("cv.mcc.DetectorParametersMCC", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.DetectorParametersMCC";
-        if (name.StartsWith("cv.QRCodeEncoder.Params", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.QRCodeEncoderParams";
-        if (name.StartsWith("cv.QRCodeEncoder", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.QRCodeEncoder";
-        if (name.StartsWith("cv.QRCodeDetectorAruco.Params", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.QRCodeDetectorArucoParams";
-        if (name.StartsWith("cv.QRCodeDetectorAruco", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.QRCodeDetectorAruco";
-        if (name.StartsWith("cv.find", StringComparison.Ordinal) || name.StartsWith("cv.checkChessboard", StringComparison.Ordinal) || name.StartsWith("cv.estimateChessboard", StringComparison.Ordinal) || name.StartsWith("cv.drawChessboard", StringComparison.Ordinal)) return "OpenCvSharp.Calib3D.Cv2";
-        if (name.StartsWith("cv.FaceDetectorYN", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.FaceDetectorYN";
-        if (name.StartsWith("cv.FaceRecognizerSF", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.FaceRecognizerSF";
-        if (name.StartsWith("cv.aruco.CharucoParameters", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.CharucoParameters";
-        if (name.StartsWith("cv.aruco.CharucoDetector", StringComparison.Ordinal) || name.StartsWith("cv.aruco.drawDetectedCornersCharuco", StringComparison.Ordinal) || name.StartsWith("cv.aruco.drawDetectedDiamonds", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.CharucoDetector";
-        if (name.StartsWith("cv.barcode.BarcodeDetector", StringComparison.Ordinal)) return "OpenCvSharp.ObjDetect.BarcodeDetector";
+        if (name.StartsWith("cv.aruco.Dictionary", StringComparison.Ordinal) || name == "cv.aruco.getPredefinedDictionary" || name == "cv.aruco.extendDictionary" || name == "cv.aruco.generateImageMarker") return "JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary";
+        if (name.StartsWith("cv.aruco.Board", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.ArucoBoard";
+        if (name.StartsWith("cv.aruco.GridBoard", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.ArucoGridBoard";
+        if (name.StartsWith("cv.aruco.CharucoBoard", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.CharucoBoard";
+        if (name.StartsWith("cv.aruco.DetectorParameters", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.ArucoDetectorParameters";
+        if (name.StartsWith("cv.aruco.RefineParameters", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.ArucoRefineParameters";
+        if (name.StartsWith("cv.aruco.ArucoDetector", StringComparison.Ordinal) || name == "cv.aruco.drawDetectedMarkers") return "JYPPX.OpenCvSharp.ObjDetect.ArucoDetector";
+        if (name.StartsWith("cv.GraphicalCodeDetector", StringComparison.Ordinal) || name.StartsWith("cv.QRCodeDetector.", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector";
+        if (name.StartsWith("cv.mcc.CCheckerDetector", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.CCheckerDetector";
+        if (name.StartsWith("cv.mcc.CChecker", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.CChecker";
+        if (name.StartsWith("cv.mcc.DetectorParametersMCC", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.DetectorParametersMCC";
+        if (name.StartsWith("cv.QRCodeEncoder.Params", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoderParams";
+        if (name.StartsWith("cv.QRCodeEncoder", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoder";
+        if (name.StartsWith("cv.QRCodeDetectorAruco.Params", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.QRCodeDetectorArucoParams";
+        if (name.StartsWith("cv.QRCodeDetectorAruco", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.QRCodeDetectorAruco";
+        if (name.StartsWith("cv.find", StringComparison.Ordinal) || name.StartsWith("cv.checkChessboard", StringComparison.Ordinal) || name.StartsWith("cv.estimateChessboard", StringComparison.Ordinal) || name.StartsWith("cv.drawChessboard", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.Calib3D.Cv2";
+        if (name.StartsWith("cv.FaceDetectorYN", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.FaceDetectorYN";
+        if (name.StartsWith("cv.FaceRecognizerSF", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.FaceRecognizerSF";
+        if (name.StartsWith("cv.aruco.CharucoParameters", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.CharucoParameters";
+        if (name.StartsWith("cv.aruco.CharucoDetector", StringComparison.Ordinal) || name.StartsWith("cv.aruco.drawDetectedCornersCharuco", StringComparison.Ordinal) || name.StartsWith("cv.aruco.drawDetectedDiamonds", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.CharucoDetector";
+        if (name.StartsWith("cv.barcode.BarcodeDetector", StringComparison.Ordinal)) return "JYPPX.OpenCvSharp.ObjDetect.BarcodeDetector";
         throw new InvalidOperationException("No managed owner for " + name);
     }
 

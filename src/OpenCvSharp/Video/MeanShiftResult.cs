@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>
     /// Result returned by mean-shift tracking.

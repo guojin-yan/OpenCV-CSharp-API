@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Euler angle result returned by <see cref="Cv2.RQDecomp3x3"/>.

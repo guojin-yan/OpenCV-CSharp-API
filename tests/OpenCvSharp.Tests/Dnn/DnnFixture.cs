@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace OpenCvSharp.Tests.Dnn
+namespace JYPPX.OpenCvSharp.Tests.Dnn
 {
     internal static class DnnFixture
     {

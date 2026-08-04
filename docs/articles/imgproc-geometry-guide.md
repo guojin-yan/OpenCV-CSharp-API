@@ -1,8 +1,8 @@
 # ImgProc Geometry Guide / ImgProc 几何指南
 
-This guide explains the current point-set and shape-analysis APIs in `OpenCvSharp.ImgProc.Cv2`.
+This guide explains the current point-set and shape-analysis APIs in `JYPPX.OpenCvSharp.ImgProc.Cv2`.
 
-本文说明 `OpenCvSharp.ImgProc.Cv2` 当前的点集和形状分析 API。
+本文说明 `JYPPX.OpenCvSharp.ImgProc.Cv2` 当前的点集和形状分析 API。
 
 ## Point Input / 点集输入
 
@@ -11,9 +11,9 @@ Classic APIs accept `Point[]` for compatibility with all target frameworks:
 传统 API 使用 `Point[]`，用于兼容所有目标框架：
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 Point[] contour = new Point[]
 {
@@ -32,9 +32,9 @@ On `netcoreapp3.1` and newer, selected APIs also accept `ReadOnlySpan<Point>`. T
 在 `netcoreapp3.1` 及更新框架上，部分 API 也支持 `ReadOnlySpan<Point>`。Span 重载会把顺序布局的 `Point` 内存重解释为交错的 `x, y` 值，并在调用 native C ABI 前固定内存。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 ReadOnlySpan<Point> contourSpan = contour.AsSpan();
 

@@ -2,16 +2,16 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Face;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Face;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.Face
+namespace JYPPX.OpenCvSharp.Tests.Face
 {
     public sealed class FaceTests
     {
         private static readonly string FactualOpenCvInstallCacheName =
-            "opencv-" + global::OpenCvSharp.OpenCvSharpBuildInfo.OpenCvVersion + "-windows-x64";
+            "opencv-" + global::JYPPX.OpenCvSharp.OpenCvSharpBuildInfo.OpenCvVersion + "-windows-x64";
 
         [Fact]
         public void ResultObjectsExposeConstructorValues()

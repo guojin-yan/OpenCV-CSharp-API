@@ -1,8 +1,8 @@
 # XPhoto Guide / XPhoto 指南
 
-`OpenCvSharp.XPhoto` wraps the first optional contrib `xphoto` white balance and enhancement utilities.
+`JYPPX.OpenCvSharp.XPhoto` wraps the first optional contrib `xphoto` white balance and enhancement utilities.
 
-`OpenCvSharp.XPhoto` 封装第一批可选 contrib `xphoto` 白平衡与增强工具。
+`JYPPX.OpenCvSharp.XPhoto` 封装第一批可选 contrib `xphoto` 白平衡与增强工具。
 
 ## Scope / 范围
 
@@ -29,8 +29,8 @@ XPhoto algorithms are sensitive to channel count, depth, and parameter ranges. B
 XPhoto 算法对通道数、位深和参数范围较敏感。OpenCV 的 BM3D 实现期望灰度 8-bit 或 16-bit 输入。白平衡输出会随真实照片、光源和饱和度阈值明显变化。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.XPhoto;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XPhoto;
 
 using Mat color = new Mat(8, 8, MatType.CV_8UC3, new Scalar(10, 20, 30));
 using SimpleWB whiteBalancer = XPhotoCv2.CreateSimpleWB();

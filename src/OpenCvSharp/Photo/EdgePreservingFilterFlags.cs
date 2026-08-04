@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     /// <summary>
     /// Edge-preserving filter modes from OpenCV photo module.

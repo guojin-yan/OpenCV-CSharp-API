@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies covariance calculation modes compatible with OpenCV <c>cv::CovarFlags</c>.

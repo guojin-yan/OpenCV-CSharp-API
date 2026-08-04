@@ -25,9 +25,9 @@ Alternatively set `OPENCV_CSHARP_CJK_FONT`. If neither input is supplied, the sa
 ## OpenCV PutText API / OpenCV PutText 接口
 
 ```csharp
-using OpenCvSharp;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 using var image = new Mat(240, 800, MatType.CV_8UC3, new Scalar(32, 32, 32));
 using var font = new FontFace(@"C:\Windows\Fonts\Deng.ttf");

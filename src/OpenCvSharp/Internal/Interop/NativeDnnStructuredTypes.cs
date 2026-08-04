@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct NativeDnnRect

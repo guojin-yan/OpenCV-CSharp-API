@@ -6,8 +6,8 @@ Core 通道 API 处理常见矩阵布局任务，例如拆分、合并、旋转�
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {

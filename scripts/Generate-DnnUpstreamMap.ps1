@@ -55,7 +55,7 @@ $arguments = @(
     "--workspace", $workspace,
     "--raw", $raw,
     "--classification", (Join-Path $repo "compatibility/dnn-upstream-classifications.json"),
-    "--native-manifest", (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"),
+    "--native-manifest", (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"),
     "--managed-baseline", (Join-Path $repo "compatibility/managed-public-api.txt"),
     "--output", (Join-Path $repo "compatibility/dnn-upstream-map.txt"),
     "--summary", (Join-Path $repo "compatibility/dnn-upstream-summary.json"),

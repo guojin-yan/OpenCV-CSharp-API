@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace ManagedApiBaseline;
+namespace JYPPX.OpenCvSharp.Tools.ManagedApiBaseline;
 
 internal static class Program
 {
@@ -18,7 +18,7 @@ internal static class Program
         try
         {
             var options = Options.Parse(args);
-            var assembly = typeof(OpenCvSharp.Core.Cv2).Assembly;
+            var assembly = typeof(JYPPX.OpenCvSharp.Core.Cv2).Assembly;
             var result = Generate(assembly);
 
             WriteOrCheck(options.OutputPath, result.Baseline, options.Check);

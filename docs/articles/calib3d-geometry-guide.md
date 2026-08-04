@@ -1,8 +1,8 @@
 # Calib3D Geometry Guide
 
-Local OpenCV 5.0.0 moves many classic `calib3d` geometry APIs into the `geometry` and `stereo` modules while keeping compatibility headers. OpenCvSharp exposes the first managed package under `OpenCvSharp.Calib3D` and keeps the C ABI stable through `jyppx_ocv_calib3d_*` exports.
+Local OpenCV 5.0.0 moves many classic `calib3d` geometry APIs into the `geometry` and `stereo` modules while keeping compatibility headers. JYPPX.OpenCvSharp exposes the first managed package under `JYPPX.OpenCvSharp.Calib3D` and keeps the C ABI stable through `jyppx_ocv_calib3d_*` exports.
 
-本地 OpenCV 5.0.0 将许多经典 `calib3d` 几何 API 移到 `geometry` 和 `stereo` 模块，同时保留兼容头文件。OpenCvSharp 将第一批托管接口放在 `OpenCvSharp.Calib3D` 下，并通过 `jyppx_ocv_calib3d_*` 导出保持 C ABI 稳定。
+本地 OpenCV 5.0.0 将许多经典 `calib3d` 几何 API 移到 `geometry` 和 `stereo` 模块，同时保留兼容头文件。JYPPX.OpenCvSharp 将第一批托管接口放在 `JYPPX.OpenCvSharp.Calib3D` 下，并通过 `jyppx_ocv_calib3d_*` 导出保持 C ABI 稳定。
 
 ## Covered APIs / 已覆盖接口
 
@@ -199,9 +199,9 @@ using (Mat newCameraMatrix = cameraMatrix.Clone())
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 internal static class Program
 {

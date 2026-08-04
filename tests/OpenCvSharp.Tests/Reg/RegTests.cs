@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Reg;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Reg;
 
-namespace OpenCvSharp.Tests.Reg
+namespace JYPPX.OpenCvSharp.Tests.Reg
 {
     public sealed class RegTests
     {

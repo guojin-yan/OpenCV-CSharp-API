@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Result returned by the owned <see cref="Cv2.StereoRectify(Mat, Mat, Mat, Mat, Size, Mat, Mat, StereoRectifyFlags, double, Size)"/> overload.

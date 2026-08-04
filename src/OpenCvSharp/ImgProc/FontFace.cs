@@ -1,8 +1,8 @@
 using System;
 using System.Text;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Owns an OpenCV TrueType/OpenType font face for Unicode text, including Chinese when the selected font contains the required glyphs. 拥有用于 Unicode 文本的 OpenCV TrueType/OpenType 字体对象；所选字体包含相应字形时可绘制中文。</summary>
     public sealed class FontFace : IDisposable

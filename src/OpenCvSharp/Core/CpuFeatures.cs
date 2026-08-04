@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>Identifies an OpenCV CPU feature for runtime capability queries.</summary>
     public enum CpuFeatures

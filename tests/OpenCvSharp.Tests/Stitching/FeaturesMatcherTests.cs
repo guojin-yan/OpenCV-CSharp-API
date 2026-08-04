@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Stitching;
 
-namespace OpenCvSharp.Tests.Stitching
+namespace JYPPX.OpenCvSharp.Tests.Stitching
 {
     public sealed class FeaturesMatcherTests
     {
@@ -55,7 +55,7 @@ namespace OpenCvSharp.Tests.Stitching
             if (!TestEnvironment.IsNativeSmokeEnabled()) return;
 
             using (ORB orb = ORB.Create(maxFeatures: 100))
-            using (Mat parent = OpenCvSharp.Tests.Features2D.Feature2DTestData.CreateFeatureImage())
+            using (Mat parent = JYPPX.OpenCvSharp.Tests.Features2D.Feature2DTestData.CreateFeatureImage())
             using (Mat padded = new Mat(100, 100, MatType.CV_8UC1, new Scalar(0)))
             using (Mat roi = padded.SubMat(new Rect(2, 2, 96, 96)))
             using (Mat mask = new Mat(96, 96, MatType.CV_8UC1, new Scalar(255)))

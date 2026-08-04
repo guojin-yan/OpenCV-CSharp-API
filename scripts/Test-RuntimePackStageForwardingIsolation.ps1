@@ -22,7 +22,6 @@ if (-not (Test-Path -LiteralPath $packRuntimePath -PathType Leaf)) {
 }
 
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $runtimePackageId = "JYPPX.OpenCV.runtime.win-x64"
 $packageFileName = "$runtimePackageId.5.0.0.nupkg"
 $requiredOpenCvModules = @(
@@ -228,7 +227,7 @@ try {
 
     $runtimeProjectPath = New-TemporaryRuntimeProject -RuntimeProjectDirectory $runtimeProjectDir
 
-    foreach ($dllName in @($primaryNativeLoader, $compatibilityNativeLoader)) {
+    foreach ($dllName in @($primaryNativeLoader)) {
         Write-SyntheticDll -Path (Join-Path $nativeWrapperRuntimeDir $dllName)
     }
 
@@ -264,7 +263,7 @@ try {
         Add-Violation -Violations $violations -Path "scripts/Pack-Runtime.ps1" -Issue "Pack-Runtime synthetic stage-forwarding dry-run failed" -Text $packOutputText
     }
 
-    $expectedRuntimeFiles = @($primaryNativeLoader, $compatibilityNativeLoader)
+    $expectedRuntimeFiles = @($primaryNativeLoader)
     foreach ($module in $requiredOpenCvModules) {
         $expectedRuntimeFiles += "opencv_$module$openCvBinarySuffix.dll"
     }

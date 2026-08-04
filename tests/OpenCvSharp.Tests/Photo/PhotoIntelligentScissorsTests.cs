@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp;
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
-namespace OpenCvSharp.Tests.Photo
+namespace JYPPX.OpenCvSharp.Tests.Photo
 {
     public sealed class PhotoIntelligentScissorsTests
     {

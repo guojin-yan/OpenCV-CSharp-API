@@ -1,8 +1,8 @@
 # Core Linear Algebra Guide / Core 线性代数指南
 
-`OpenCvSharp.Core.Cv2` exposes the first OpenCV core linear algebra batch through the native C ABI.
+`JYPPX.OpenCvSharp.Core.Cv2` exposes the first OpenCV core linear algebra batch through the native C ABI.
 
-`OpenCvSharp.Core.Cv2` 通过 native C ABI 暴露第一批 OpenCV core 线性代数能力。
+`JYPPX.OpenCvSharp.Core.Cv2` 通过 native C ABI 暴露第一批 OpenCV core 线性代数能力。
 
 ## Matrix Multiplication / 矩阵乘法
 
@@ -12,8 +12,8 @@ Use `Gemm` for OpenCV-compatible generalized matrix multiplication:
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -61,8 +61,8 @@ The current batch includes destination overloads for repeated processing and con
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -98,8 +98,8 @@ namespace Demo
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {

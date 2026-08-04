@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>
     /// Specifies how samples are laid out in a matrix.

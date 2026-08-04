@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Tracking
+namespace JYPPX.OpenCvSharp.Tracking
 {
     /// <summary>
     /// Feature descriptor flags for KCF trackers.

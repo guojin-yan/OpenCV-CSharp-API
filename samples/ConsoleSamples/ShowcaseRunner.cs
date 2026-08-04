@@ -1,18 +1,18 @@
 using System;
 using System.Globalization;
 using System.IO;
-using OpenCvSharp;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.ML;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
-using Features2DCv2 = OpenCvSharp.Features2D.Cv2;
-using ImgCodecsCv2 = OpenCvSharp.ImgCodecs.Cv2;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.ML;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
+using Features2DCv2 = JYPPX.OpenCvSharp.Features2D.Cv2;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace ConsoleSamples
+namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
 {
     internal static class ShowcaseRunner
     {

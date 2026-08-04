@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Calibration flags shared by camera, stereo, fisheye, and multi-view calibration APIs.

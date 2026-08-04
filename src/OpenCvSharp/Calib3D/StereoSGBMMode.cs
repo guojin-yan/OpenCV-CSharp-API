@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// StereoSGBM dynamic-programming mode.

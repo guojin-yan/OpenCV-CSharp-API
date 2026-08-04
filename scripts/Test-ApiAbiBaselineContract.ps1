@@ -10,8 +10,8 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $managedBaselinePath = Join-Path $repo "compatibility/managed-public-api.txt"
 $managedSummaryPath = Join-Path $repo "compatibility/managed-public-api-summary.json"
 $gapInventoryPath = Join-Path $repo "compatibility/api-gap-inventory.json"
-$nativeFullPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
-$nativeMiniPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
+$nativeFullPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
+$nativeMiniPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"
 $bindingMapPath = Join-Path $repo "compatibility/native-managed-binding-map.txt"
 $bindingSummaryPath = Join-Path $repo "compatibility/native-managed-binding-summary.json"
 $spanFamilyPath = Join-Path $repo "compatibility/imgproc-point-set-span-family.json"
@@ -169,7 +169,7 @@ function Test-ManagedBaselineDocument {
         $parts = $line.Split([char]'|')
         $identity = if ($line.StartsWith("TYPE|", [StringComparison]::Ordinal)) { $parts[3] } else { $parts[1] }
         $fixedMajorIdentityPattern = "OpenCv" + "[0-9]+Sharp"
-        if ($identity -match $fixedMajorIdentityPattern -and $identity -ne ("OpenCvSharp.OpenCv" + "5SharpBuildInfo")) {
+        if ($identity -match $fixedMajorIdentityPattern) {
             Add-Violation -List $List -Path $Path -Issue "Managed API baseline contains an unexpected fixed-major public identity" -Text $identity
         }
     }
@@ -201,7 +201,7 @@ function Test-NativeManifestDocument {
         if ($pair.Count -eq 2) { $metadata[$pair[0]] = $pair[1] }
     }
     $functionLines = @($lines[($functionsIndex + 1)..($lines.Count - 1)] | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
-    Assert-True -List $List -Condition ($metadata["primary-prefix"] -eq "jyppx_ocv_" -and $metadata["legacy-prefix"] -eq "jyppx_ocv5_") -Path $Path -Issue "Native ABI manifest prefixes drifted"
+    Assert-True -List $List -Condition ($metadata["primary-prefix"] -eq "jyppx_ocv_" -and -not $metadata.ContainsKey("legacy-prefix")) -Path $Path -Issue "Native ABI manifest prefix drifted"
     Assert-True -List $List -Condition ($functionLines.Count -eq $ExpectedCount -and $functionLines.Count -eq [int]$metadata["function-count"]) -Path $Path -Issue "Native ABI function count drifted" -Text "actual=$($functionLines.Count) expected=$ExpectedCount"
     Assert-True -List $List -Condition ((-not $Mini -and -not $metadata.ContainsKey("runtime-profile")) -or ($Mini -and $metadata["runtime-profile"] -eq "mini")) -Path $Path -Issue "Native ABI runtime profile metadata drifted"
     $functionNames = @($functionLines | ForEach-Object { $_.Split([char]'|')[0] })
@@ -211,12 +211,11 @@ function Test-NativeManifestDocument {
 
     foreach ($line in $functionLines) {
         $parts = $line.Split([char]'|')
-        if ($parts.Count -ne 5) {
+        if ($parts.Count -ne 4) {
             Add-Violation -List $List -Path $Path -Issue "Native ABI manifest entry is malformed" -Text $line
             continue
         }
-        $expectedLegacy = "jyppx_ocv5_" + $parts[0].Substring("jyppx_ocv_".Length)
-        Assert-True -List $List -Condition ($parts[0].StartsWith("jyppx_ocv_", [StringComparison]::Ordinal) -and $parts[0] -notmatch "^jyppx_ocv[0-9]+_" -and $parts[1] -eq $expectedLegacy) -Path $Path -Issue "Native ABI primary/compatibility identity drifted" -Text $line
+        Assert-True -List $List -Condition ($parts[0].StartsWith("jyppx_ocv_", [StringComparison]::Ordinal) -and $parts[0] -notmatch "^jyppx_ocv[0-9]+_") -Path $Path -Issue "Native ABI version-neutral identity drifted" -Text $line
     }
 }
 
@@ -586,7 +585,7 @@ function Test-SpanFamilyInventory {
         "min-enclosing-triangle")
     $actualIds = @($Inventory.operations | ForEach-Object { [string]$_.id })
     Assert-True -List $List -Condition ($Inventory.schemaVersion -eq 1 -and $Inventory.familyId -eq "imgproc-point-set-span-fast-paths" -and $Inventory.status -eq "implemented-verified" -and $Inventory.upstreamOpenCvVersion -eq "5.0.0") -Path $Path -Issue "ImgProc Span family inventory identity/status drifted"
-    Assert-True -List $List -Condition ($Inventory.managedType -eq "OpenCvSharp.ImgProc.Cv2" -and $Inventory.inputShape -eq "ReadOnlySpan<OpenCvSharp.Core.Point>" -and -not [bool]$Inventory.nativeAbiChangeRequired) -Path $Path -Issue "ImgProc Span family API or ABI shape drifted"
+    Assert-True -List $List -Condition ($Inventory.managedType -eq "JYPPX.OpenCvSharp.ImgProc.Cv2" -and $Inventory.inputShape -eq "ReadOnlySpan<JYPPX.OpenCvSharp.Core.Point>" -and -not [bool]$Inventory.nativeAbiChangeRequired) -Path $Path -Issue "ImgProc Span family API or ABI shape drifted"
     Assert-True -List $List -Condition (($actualIds -join ",") -eq ($expectedIds -join ",")) -Path $Path -Issue "ImgProc Span family operations are missing, duplicated, or reordered"
     foreach ($operation in $Inventory.operations) {
         Assert-True -List $List -Condition ($operation.classification -eq "implemented-verified" -and @($operation.nativeEntrypoints).Count -gt 0) -Path $Path -Issue "ImgProc Span operation must retain implemented evidence" -Text $operation.id
@@ -827,7 +826,7 @@ if (-not [string]::IsNullOrWhiteSpace($DotNetPath)) {
 }
 & (Join-Path $repo "scripts/Generate-ManagedPublicApiBaseline.ps1") @managedGeneratorArguments
 if (-not $?) { throw "Managed API generated-file freshness check failed." }
-& (Join-Path $repo "scripts/Generate-NativeAbiCompatibility.ps1") -RepositoryRoot $repo -Check
+& (Join-Path $repo "scripts/Generate-NativeAbiManifest.ps1") -RepositoryRoot $repo -Check
 if (-not $?) { throw "Native ABI generated-file freshness check failed." }
 $imgProcGuardArguments = @{ RepositoryRoot = $repo }
 if (-not [string]::IsNullOrWhiteSpace($DotNetPath)) { $imgProcGuardArguments.DotNetPath = $DotNetPath }
@@ -965,8 +964,8 @@ $videoMapHash = Get-TextSha256 $videoMapText
 $videoRawHash = (Get-FileHash -LiteralPath $videoRawPath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 Test-ManagedBaselineDocument -Text $managedText -Summary $managedSummary -List $violations -Path "compatibility/managed-public-api.txt"
-Test-NativeManifestDocument -Text $nativeFullText -ExpectedCount 2656 -Mini $false -List $violations -Path "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
-Test-NativeManifestDocument -Text $nativeMiniText -ExpectedCount 526 -Mini $true -List $violations -Path "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
+Test-NativeManifestDocument -Text $nativeFullText -ExpectedCount 2656 -Mini $false -List $violations -Path "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
+Test-NativeManifestDocument -Text $nativeMiniText -ExpectedCount 526 -Mini $true -List $violations -Path "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"
 Test-GapInventory -Inventory $gapInventory -Summary $managedSummary -ManagedHash $managedHash -NativeFullHash $nativeFullHash -NativeMiniHash $nativeMiniHash -BindingSummary $bindingSummary -BindingMapHash $bindingMapHash -ImgProcSummary $imgProcSummary -ImgProcMapHash $imgProcMapHash -ImgCodecsSummary $imgCodecsSummary -ImgCodecsMapHash $imgCodecsMapHash -VideoIOSummary $videoIOSummary -VideoIOMapHash $videoIOMapHash -VideoIORegistryHash $videoIORegistryHash -Calib3DSummary $calib3DSummary -Calib3DMapHash $calib3DMapHash -CoreSummary $coreSummary -CoreMapHash $coreMapHash -DnnSummary $dnnSummary -DnnMapHash $dnnMapHash -FeaturesSummary $featuresSummary -FeaturesMapHash $featuresMapHash -HighGuiSummary $highGuiSummary -HighGuiMapHash $highGuiMapHash -HighGuiRawHash $highGuiRawHash -ObjDetectSummary $objDetectSummary -ObjDetectMapHash $objDetectMapHash -ObjDetectRawHash $objDetectRawHash -PhotoSummary $photoSummary -PhotoMapHash $photoMapHash -PhotoRawHash $photoRawHash -MlSummary $mlSummary -MlMapHash $mlMapHash -MlRawHash $mlRawHash -TrackingSummary $trackingSummary -TrackingMapHash $trackingMapHash -TrackingRawHash $trackingRawHash -StitchingSummary $stitchingSummary -StitchingMapHash $stitchingMapHash -StitchingRawHash $stitchingRawHash -VideoSummary $videoSummary -VideoMapHash $videoMapHash -VideoRawHash $videoRawHash -List $violations -Path "compatibility/api-gap-inventory.json"
 Test-SpanFamilyInventory -Inventory $spanFamily -List $violations -Path "compatibility/imgproc-point-set-span-family.json"
 Test-ImgProcFamilyInventory -Summary $imgProcSummary -Inventory $imgProcFamily -MappingHash $imgProcMapHash -InventoryHash $imgProcFamilyHash -List $violations -Path "compatibility/imgproc-implemented-families.json"
@@ -1006,7 +1005,7 @@ Assert-FixtureRejected -Name "reordered managed types" -ExpectedIssue "ordinal o
 Assert-FixtureRejected -Name "fixed-major managed identity" -ExpectedIssue "unexpected fixed-major" -Action {
     param($list)
     $fixture = [string[]]$baselineLines.Clone()
-    $fixture[$typesIndex + 1] = $fixture[$typesIndex + 1] -replace "OpenCvSharp\.", "OpenCv6Sharp."
+    $fixture[$typesIndex + 1] = $fixture[$typesIndex + 1] -replace "JYPPX.OpenCvSharp\.", "OpenCv6Sharp."
     Test-ManagedBaselineDocument -Text (($fixture -join "`n") + "`n") -Summary $managedSummary -List $list -Path "fixture/fixed-major-managed-identity.txt"
 }
 Assert-FixtureRejected -Name "stale managed hash" -ExpectedIssue "SHA256" -Action {
@@ -1024,7 +1023,7 @@ Assert-FixtureRejected -Name "reordered native ABI" -ExpectedIssue "ordinal func
     $fixture[$index + 1] = $temporary
     Test-NativeManifestDocument -Text (($fixture -join "`n") + "`n") -ExpectedCount 2656 -Mini $false -List $list -Path "fixture/reordered-native-abi.txt"
 }
-Assert-FixtureRejected -Name "fixed-major primary native ABI" -ExpectedIssue "primary/compatibility identity" -Action {
+Assert-FixtureRejected -Name "fixed-major primary native ABI" -ExpectedIssue "version-neutral identity" -Action {
     param($list)
     $fixture = @((Normalize-Text $nativeFullText).TrimEnd("`n").Split("`n"))
     $index = [Array]::IndexOf($fixture, "[functions]") + 1

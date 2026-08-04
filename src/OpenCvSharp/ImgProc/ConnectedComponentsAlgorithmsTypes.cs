@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies connected-components labeling algorithms compatible with OpenCV <c>cv::ConnectedComponentsAlgorithmsTypes</c>.

@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>
     /// Camera parameters returned by <see cref="Stitcher.GetCameras"/>.

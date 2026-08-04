@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Face
+namespace JYPPX.OpenCvSharp.Face
 {
     /// <summary>
     /// Creation parameters for OpenCV contrib <c>FacemarkLBF</c>.

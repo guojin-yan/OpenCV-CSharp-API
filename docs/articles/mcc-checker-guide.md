@@ -1,14 +1,14 @@
 # MCC Checker Guide
 
-`OpenCvSharp.ObjDetect` exposes OpenCV MCC checker detection through `CCheckerDetector`, `CChecker`, `DetectorParametersMCC`, and `ColorChart`.
+`JYPPX.OpenCvSharp.ObjDetect` exposes OpenCV MCC checker detection through `CCheckerDetector`, `CChecker`, `DetectorParametersMCC`, and `ColorChart`.
 
-`OpenCvSharp.ObjDetect` 通过 `CCheckerDetector`、`CChecker`、`DetectorParametersMCC` 和 `ColorChart` 暴露 OpenCV MCC 色卡检测能力。
+`JYPPX.OpenCvSharp.ObjDetect` 通过 `CCheckerDetector`、`CChecker`、`DetectorParametersMCC` 和 `ColorChart` 暴露 OpenCV MCC 色卡检测能力。
 
 ## Detector / 检测器
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace MccCheckerGuideSample
 {

@@ -17,7 +17,7 @@
             "jyppx_ocv_aruco_dictionary_extend"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|OpenCvSharp.ObjDetect.ArucoDictionary Extend(System.Int32 markerCount,System.Int32 markerSize,OpenCvSharp.ObjDetect.ArucoDictionary? baseDictionary=null,System.Int32 randomSeed=0)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary|method|public;static|JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary Extend(System.Int32 markerCount,System.Int32 markerSize,JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary? baseDictionary=null,System.Int32 randomSeed=0)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -31,7 +31,7 @@
             "jyppx_ocv_aruco_board_create"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|constructor|public;instance|.ctor(OpenCvSharp.Core.Point3f[][] objectPoints,OpenCvSharp.ObjDetect.ArucoDictionary dictionary,System.Int32[] ids)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Point3f[][] objectPoints,JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary dictionary,System.Int32[] ids)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -45,7 +45,7 @@
             "jyppx_ocv_aruco_board_get_dictionary"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.ObjDetect.ArucoDictionary Dictionary"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary Dictionary"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -60,7 +60,7 @@
             "jyppx_ocv_aruco_board_get_object_points_fill"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.Core.Point3f[][] ObjectPoints"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|JYPPX.OpenCvSharp.Core.Point3f[][] ObjectPoints"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -75,7 +75,7 @@
             "jyppx_ocv_aruco_board_get_ids_fill"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|System.Int32[] Ids"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|System.Int32[] Ids"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -89,7 +89,7 @@
             "jyppx_ocv_aruco_board_get_right_bottom_corner"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|OpenCvSharp.Core.Point3f RightBottomCorner"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|property|instance;get:public|JYPPX.OpenCvSharp.Core.Point3f RightBottomCorner"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -103,7 +103,7 @@
             "jyppx_ocv_aruco_board_match_image_points"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|System.Void MatchImagePoints(OpenCvSharp.Core.Point2f[][] detectedCorners,System.Int32[] detectedIds,OpenCvSharp.Core.Mat objectPoints,OpenCvSharp.Core.Mat imagePoints)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|System.Void MatchImagePoints(JYPPX.OpenCvSharp.Core.Point2f[][] detectedCorners,System.Int32[] detectedIds,JYPPX.OpenCvSharp.Core.Mat objectPoints,JYPPX.OpenCvSharp.Core.Mat imagePoints)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -117,7 +117,7 @@
             "jyppx_ocv_aruco_board_generate_image"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|OpenCvSharp.Core.Mat GenerateImage(OpenCvSharp.Core.Size outSize,System.Int32 marginSize=0,System.Int32 borderBits=1)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoBoard|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GenerateImage(JYPPX.OpenCvSharp.Core.Size outSize,System.Int32 marginSize=0,System.Int32 borderBits=1)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -131,7 +131,7 @@
             "jyppx_ocv_aruco_detector_create_multi_dictionary"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|OpenCvSharp.ObjDetect.ArucoDetector Create(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries,OpenCvSharp.ObjDetect.ArucoDetectorParameters? detectorParameters=null,OpenCvSharp.ObjDetect.ArucoRefineParameters? refineParameters=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector Create(JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries,JYPPX.OpenCvSharp.ObjDetect.ArucoDetectorParameters? detectorParameters=null,JYPPX.OpenCvSharp.ObjDetect.ArucoRefineParameters? refineParameters=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -146,7 +146,7 @@
             "jyppx_ocv_aruco_detector_detect_markers_multi_dictionary_fill"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoMultiDictionaryDetectionResult DetectMarkersMultiDictionary(OpenCvSharp.Core.Mat image)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.ArucoMultiDictionaryDetectionResult DetectMarkersMultiDictionary(JYPPX.OpenCvSharp.Core.Mat image)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -161,7 +161,7 @@
             "jyppx_ocv_aruco_detector_get_dictionary_at"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDictionary[] GetDictionaries()"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary[] GetDictionaries()"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -175,7 +175,7 @@
             "jyppx_ocv_aruco_detector_set_dictionaries"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetector SetDictionaries(OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector SetDictionaries(JYPPX.OpenCvSharp.ObjDetect.ArucoDictionary[] dictionaries)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -189,7 +189,7 @@
             "jyppx_ocv_aruco_draw_detected_markers"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|System.Void DrawDetectedMarkers(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[][] corners,System.Int32[]? ids=null,OpenCvSharp.Core.Scalar borderColor=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.ArucoDetector|method|public;static|System.Void DrawDetectedMarkers(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Point2f[][] corners,System.Int32[]? ids=null,JYPPX.OpenCvSharp.Core.Scalar borderColor=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -204,7 +204,7 @@
             "jyppx_ocv_qrcode_detector_detect_and_decode_length"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DetectAndDecodeBytes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null,OpenCvSharp.Core.Mat? straightQRCode=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DetectAndDecodeBytes(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? points=null,JYPPX.OpenCvSharp.Core.Mat? straightQRCode=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -219,7 +219,7 @@
             "jyppx_ocv_qrcode_detector_decode_length"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DecodeBytes(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points,OpenCvSharp.Core.Mat? straightQRCode=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|System.Byte[] DecodeBytes(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat points,JYPPX.OpenCvSharp.Core.Mat? straightQRCode=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -234,7 +234,7 @@
             "jyppx_ocv_qrcode_detector_decode_multi_fill"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DecodeBytesMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat points)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DecodeBytesMulti(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat points)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -249,7 +249,7 @@
             "jyppx_ocv_qrcode_detector_detect_and_decode_multi_fill"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DetectAndDecodeBytesMulti(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat? points=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult DetectAndDecodeBytesMulti(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat? points=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -263,7 +263,7 @@
             "jyppx_ocv_mcc_checker_detector_create_from_net"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|constructor|public;instance|.ctor(OpenCvSharp.Dnn.Net net)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CCheckerDetector|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Dnn.Net net)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -277,7 +277,7 @@
             "jyppx_ocv_mcc_checker_detector_set_use_dnn_model"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -291,7 +291,7 @@
             "jyppx_ocv_mcc_checker_detector_get_use_dnn_model"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CCheckerDetector|property|instance;get:public;set:public|System.Boolean UseDnnModel"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -305,7 +305,7 @@
             "jyppx_ocv_qrcode_detector_aruco_get_aruco_parameters"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetArucoParameters()"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.ArucoDetectorParameters GetArucoParameters()"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -319,7 +319,7 @@
             "jyppx_ocv_qrcode_detector_aruco_set_aruco_parameters"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|OpenCvSharp.ObjDetect.QRCodeDetectorAruco SetArucoParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetectorAruco|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetectorAruco SetArucoParameters(JYPPX.OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -333,7 +333,7 @@
             "jyppx_ocv_calib3d_find_chessboard_corners_sb_with_meta"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,OpenCvSharp.Core.Mat meta,OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Size patternSize,JYPPX.OpenCvSharp.Core.Mat corners,JYPPX.OpenCvSharp.Core.Mat meta,JYPPX.OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -347,7 +347,7 @@
             "jyppx_ocv_calib3d_find_chessboard_corners_sb"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean FindChessboardCornersSB(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Size patternSize,JYPPX.OpenCvSharp.Core.Mat corners,JYPPX.OpenCvSharp.Calib3D.ChessboardFlags flags=0)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -361,7 +361,7 @@
             "jyppx_ocv_calib3d_estimate_chessboard_sharpness"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|OpenCvSharp.Core.Scalar EstimateChessboardSharpness(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size patternSize,OpenCvSharp.Core.Mat corners,System.Single riseDistance=0.8,System.Boolean vertical=false,OpenCvSharp.Core.Mat? sharpness=null)"
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Scalar EstimateChessboardSharpness(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Size patternSize,JYPPX.OpenCvSharp.Core.Mat corners,System.Single riseDistance=0.8,System.Boolean vertical=false,JYPPX.OpenCvSharp.Core.Mat? sharpness=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -375,7 +375,7 @@
             "jyppx_ocv_calib3d_find_4_quad_corner_subpix"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean Find4QuadCornerSubpix(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat corners,OpenCvSharp.Core.Size regionSize)"
+            "MEMBER|JYPPX.OpenCvSharp.Calib3D.Cv2|method|public;static|System.Boolean Find4QuadCornerSubpix(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat corners,JYPPX.OpenCvSharp.Core.Size regionSize)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -389,7 +389,7 @@
             "jyppx_ocv_aruco_charuco_detector_get_detector_parameters"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoDetectorParameters GetDetectorParameters()"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.ArucoDetectorParameters GetDetectorParameters()"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -403,7 +403,7 @@
             "jyppx_ocv_aruco_charuco_detector_set_detector_parameters"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetDetectorParameters(OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector SetDetectorParameters(JYPPX.OpenCvSharp.ObjDetect.ArucoDetectorParameters parameters)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -417,7 +417,7 @@
             "jyppx_ocv_aruco_charuco_detector_get_refine_parameters"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.ArucoRefineParameters GetRefineParameters()"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.ArucoRefineParameters GetRefineParameters()"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -431,7 +431,7 @@
             "jyppx_ocv_aruco_charuco_detector_set_refine_parameters"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDetector SetRefineParameters(OpenCvSharp.ObjDetect.ArucoRefineParameters parameters)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector SetRefineParameters(JYPPX.OpenCvSharp.ObjDetect.ArucoRefineParameters parameters)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -446,7 +446,7 @@
             "jyppx_ocv_aruco_charuco_detector_detect_diamonds_fill"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|OpenCvSharp.ObjDetect.CharucoDiamondDetectionResult DetectDiamonds(OpenCvSharp.Core.Mat image)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;instance|JYPPX.OpenCvSharp.ObjDetect.CharucoDiamondDetectionResult DetectDiamonds(JYPPX.OpenCvSharp.Core.Mat image)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -460,7 +460,7 @@
             "jyppx_ocv_aruco_draw_detected_corners_charuco"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedCorners(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[] corners,System.Int32[]? ids=null,OpenCvSharp.Core.Scalar cornerColor=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedCorners(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Point2f[] corners,System.Int32[]? ids=null,JYPPX.OpenCvSharp.Core.Scalar cornerColor=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
@@ -474,7 +474,7 @@
             "jyppx_ocv_aruco_draw_detected_diamonds"
           ],
           "managedMembers": [
-            "MEMBER|OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedDiamonds(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Point2f[][] diamondCorners,OpenCvSharp.Core.Vec4i[]? diamondIds=null,OpenCvSharp.Core.Scalar borderColor=null)"
+            "MEMBER|JYPPX.OpenCvSharp.ObjDetect.CharucoDetector|method|public;static|System.Void DrawDetectedDiamonds(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Point2f[][] diamondCorners,JYPPX.OpenCvSharp.Core.Vec4i[]? diamondIds=null,JYPPX.OpenCvSharp.Core.Scalar borderColor=null)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/ObjDetect/ObjDetectStructuredParityTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",

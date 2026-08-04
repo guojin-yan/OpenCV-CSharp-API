@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Fuzzy;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Fuzzy;
 
-namespace OpenCvSharp.Tests.Fuzzy
+namespace JYPPX.OpenCvSharp.Tests.Fuzzy
 {
     public sealed class FuzzyTests
     {

@@ -34,7 +34,7 @@ $arguments = @(
     "--configuration", "Release", "--framework", "net10.0", "--",
     "--repository", $repo, "--workspace", $workspace, "--raw", $raw,
     "--classification", (Join-Path $repo "compatibility/stitching-upstream-classifications.json"),
-    "--native-manifest", (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"),
+    "--native-manifest", (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"),
     "--managed-baseline", (Join-Path $repo "compatibility/managed-public-api.txt"),
     "--output", (Join-Path $repo "compatibility/stitching-upstream-map.txt"),
     "--summary", (Join-Path $repo "compatibility/stitching-upstream-summary.json"),

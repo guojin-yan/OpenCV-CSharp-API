@@ -1,12 +1,12 @@
 # Video Optical Flow IO Guide
 
-OpenCV keeps `.flo` optical-flow file IO in the main `video` module, not in contrib `optflow`. The managed entry points are `OpenCvSharp.Video.Cv2.ReadOpticalFlow` and `OpenCvSharp.Video.Cv2.WriteOpticalFlow`.
+OpenCV keeps `.flo` optical-flow file IO in the main `video` module, not in contrib `optflow`. The managed entry points are `JYPPX.OpenCvSharp.Video.Cv2.ReadOpticalFlow` and `JYPPX.OpenCvSharp.Video.Cv2.WriteOpticalFlow`.
 
-OpenCV 将 `.flo` 光流文件读写放在主线 `video` 模块中，而不是 contrib `optflow`。managed 入口是 `OpenCvSharp.Video.Cv2.ReadOpticalFlow` 和 `OpenCvSharp.Video.Cv2.WriteOpticalFlow`。
+OpenCV 将 `.flo` 光流文件读写放在主线 `video` 模块中，而不是 contrib `optflow`。managed 入口是 `JYPPX.OpenCvSharp.Video.Cv2.ReadOpticalFlow` 和 `JYPPX.OpenCvSharp.Video.Cv2.WriteOpticalFlow`。
 
 ```csharp
-using OpenCvSharp.Core;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
 using Mat flow = new Mat(2, 3, MatType.CV_32FC2, new Scalar(1.0, 0.5, 0.0, 0.0));
 bool written = VideoCv2.WriteOpticalFlow("field.flo", flow);

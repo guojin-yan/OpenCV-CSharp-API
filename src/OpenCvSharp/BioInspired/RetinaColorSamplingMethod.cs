@@ -1,4 +1,4 @@
-namespace OpenCvSharp.BioInspired
+namespace JYPPX.OpenCvSharp.BioInspired
 {
     /// <summary>
     /// Color sampling methods used by OpenCV bioinspired Retina log sampling.

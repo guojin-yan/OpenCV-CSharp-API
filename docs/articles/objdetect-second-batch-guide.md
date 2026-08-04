@@ -1,8 +1,8 @@
 # ObjDetect Second Batch Guide
 
-`OpenCvSharp.ObjDetect` now includes the second main-module graphical-code batch from OpenCV 5.0.0: `BarcodeDetector`, `QRCodeDetectorAruco`, and `QRCodeEncoder`. These APIs live in the main OpenCV `objdetect` module and are staged with the factual OpenCV 5.0.0 runtime artifact `opencv_objdetect500.dll`.
+`JYPPX.OpenCvSharp.ObjDetect` now includes the second main-module graphical-code batch from OpenCV 5.0.0: `BarcodeDetector`, `QRCodeDetectorAruco`, and `QRCodeEncoder`. These APIs live in the main OpenCV `objdetect` module and are staged with the factual OpenCV 5.0.0 runtime artifact `opencv_objdetect500.dll`.
 
-`OpenCvSharp.ObjDetect` 现在包含 OpenCV 5.0.0 主线图形码第二批能力：`BarcodeDetector`、`QRCodeDetectorAruco` 和 `QRCodeEncoder`。这些 API 属于 OpenCV 主仓库 `objdetect` 模块，并随事实性 OpenCV 5.0.0 runtime 产物 `opencv_objdetect500.dll` 暂存。
+`JYPPX.OpenCvSharp.ObjDetect` 现在包含 OpenCV 5.0.0 主线图形码第二批能力：`BarcodeDetector`、`QRCodeDetectorAruco` 和 `QRCodeEncoder`。这些 API 属于 OpenCV 主仓库 `objdetect` 模块，并随事实性 OpenCV 5.0.0 runtime 产物 `opencv_objdetect500.dll` 暂存。
 
 ## Covered APIs / 已覆盖接口
 
@@ -27,9 +27,9 @@
 `BarcodeDetector` 可在不提供模型的情况下创建。如果应用需要 OpenCV 的超分辨率条形码路径，也可以提供 ONNX 模型路径。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ObjDetectBarcodeSample
 {
@@ -68,9 +68,9 @@ namespace ObjDetectBarcodeSample
 `QRCodeDetectorAruco` 是基于 OpenCV ArUco 标记检测代码的二维码检测器。它独立于已有 `QRCodeDetector`，并通过 `QRCodeDetectorArucoParams` 暴露 OpenCV 5.0.0 的 ArUco QR 参数结构。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ObjDetectQrArucoSample
 {
@@ -105,8 +105,8 @@ Multi-code methods return `QRCodeMultiDecodeResult`, matching the first QR detec
 `QRCodeEncoder` 可将字符串编码为二维码图像。参数暴露二维码版本、纠错级别、编码模式和结构化追加数量。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ObjDetectQrEncoderSample
 {
@@ -121,7 +121,7 @@ namespace ObjDetectQrEncoderSample
                 1);
 
             using (QRCodeEncoder encoder = QRCodeEncoder.Create(parameters))
-            using (Mat qrcode = encoder.Encode("OpenCvSharp"))
+            using (Mat qrcode = encoder.Encode("JYPPX.OpenCvSharp"))
             {
                 System.Console.WriteLine("QR size=" + qrcode.Size);
             }

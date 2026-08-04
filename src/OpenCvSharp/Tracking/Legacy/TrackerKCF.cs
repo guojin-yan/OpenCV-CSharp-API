@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking.Legacy
+namespace JYPPX.OpenCvSharp.Tracking.Legacy
 {
     /// <summary>OpenCV legacy KCF tracker.</summary>
     public sealed class TrackerKCF : LegacyTracker
@@ -19,7 +19,7 @@ namespace OpenCvSharp.Tracking.Legacy
         }
 
         /// <summary>Creates a legacy KCF tracker with explicit copied parameters.</summary>
-        public static TrackerKCF Create(OpenCvSharp.Tracking.TrackerKCFParams parameters)
+        public static TrackerKCF Create(JYPPX.OpenCvSharp.Tracking.TrackerKCFParams parameters)
         {
             NativeMethods.TrackingKcfParamsNative native = parameters.ToNative();
             NativeException.ThrowIfError(NativeMethods.TrackingLegacyTrackerKcfCreate(ref native, out IntPtr nativeHandle));

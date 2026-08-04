@@ -29,9 +29,9 @@ OpenCV 将 RLE 图像存储在普通 `Mat` 中，其中包含 `Point3i` 行。`C
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcRleExample
 {

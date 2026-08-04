@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.LineDescriptor
+namespace JYPPX.OpenCvSharp.LineDescriptor
 {
     /// <summary>
     /// Drawing flags for line-descriptor keylines and matches.

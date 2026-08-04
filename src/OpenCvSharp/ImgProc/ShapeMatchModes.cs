@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies contour shape comparison methods compatible with OpenCV <c>cv::ShapeMatchModes</c>.

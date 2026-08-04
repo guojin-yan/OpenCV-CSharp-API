@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Represents a rotated rectangle compatible with OpenCV's <c>cv::RotatedRect</c>.

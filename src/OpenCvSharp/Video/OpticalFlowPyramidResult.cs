@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>
     /// Result returned by <see cref="Cv2.BuildOpticalFlowPyramid"/>.

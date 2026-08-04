@@ -9,7 +9,6 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $packageOutputRoot = "artifacts/packages"
 $runtimeStagingRoot = "artifacts/runtime"
 $uploadArtifactName = "nupkg"
@@ -182,6 +181,7 @@ $putTextApiPath = "src/OpenCvSharp/ImgProc/Cv2.RemainingParity.cs"
 $nativeImgProcPath = "src/OpenCvSharp.Native/src/imgproc.cpp"
 $tutorialSeriesPath = "docs/articles/tutorial-series.md"
 $chinesePutTextTutorialPath = "docs/articles/tutorial-02-chinese-puttext.md"
+$androidTutorialPath = "docs/articles/tutorial-07-android-runtime.md"
 $docsTocPath = "docs/toc.yml"
 $githubPackArtifactGuardPath = "scripts/Test-GitHubPackArtifactMatrixSurface.ps1"
 $githubPackConsumerGuardPath = "scripts/Test-GitHubPackConsumerRestoreSurface.ps1"
@@ -260,6 +260,7 @@ $putTextApiText = Read-RequiredText -RelativePath $putTextApiPath
 $nativeImgProcText = Read-RequiredText -RelativePath $nativeImgProcPath
 $tutorialSeriesText = Read-RequiredText -RelativePath $tutorialSeriesPath
 $chinesePutTextTutorialText = Read-RequiredText -RelativePath $chinesePutTextTutorialPath
+$androidTutorialText = Read-RequiredText -RelativePath $androidTutorialPath
 $docsTocText = Read-RequiredText -RelativePath $docsTocPath
 $githubPackArtifactGuardText = Read-RequiredText -RelativePath $githubPackArtifactGuardPath
 $gitignoreText = Read-RequiredText -RelativePath $gitignorePath
@@ -293,7 +294,7 @@ Assert-Contains -Violations $violations -Path $nugetRepositorySigningBoundaryPat
 Assert-Contains -Violations $violations -Path $nugetRepositorySignedPackagePath -Text $nugetRepositorySignedPackageText -Needle 'dotnet nuget verify' -Issue "Repository-signed package verifier must invoke NuGet cryptographic verification"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'publish-nuget:sha256:' -Issue "Publication bundle must emit a candidate-specific authorization token"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'PublicationManifestPath' -Issue "Publication bundle must bind the normalized package manifest"
-Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 24' -Issue "Publication manifest must require all 24 real-supported runtime targets"
+Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 24' -Issue "Publication manifest must require all 24 currently real-supported runtime targets"
 Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle 'Publication manifest must contain exactly' -Issue "Publication manifest must reject incomplete package closure"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProjectPath -Text $nugetRepositoryVerifierProjectText -Needle '<PackageReference Include="NuGet.Packaging" Version="6.14.0" />' -Issue "Structured repository-signature verifier must pin NuGet.Packaging"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProgramPath -Text $nugetRepositoryVerifierProgramText -Needle 'RepositoryPrimarySignature' -Issue "Structured verifier must require a repository primary signature"
@@ -307,7 +308,7 @@ Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManage
 
 Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntimeText -Needle '[string]$OutputDir = "artifacts/packages"' -Issue "Pack-Runtime default output directory must be artifacts/packages"
 Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'managed-public-api.txt' -Issue "Release artifact surface must register the managed API baseline"
-Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'legacy_abi_mini_manifest.txt' -Issue "Release artifact surface must register the mini ABI baseline"
+Assert-Contains -Violations $violations -Path $apiAbiBaselinePath -Text $apiAbiBaselineText -Needle 'native_abi_mini_manifest.txt' -Issue "Release artifact surface must register the mini ABI baseline"
 Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'Generate-NativeManagedBindingMap.ps1' -Issue "Release artifact surface must freshness-check the native-to-managed binding map"
 Assert-Contains -Violations $violations -Path $bindingMapGuardPath -Text $bindingMapGuardText -Needle 'native=2656 bound=2656 unbound=0 managed_only=0' -Issue "Native-to-managed binding guard must emit complete parity evidence"
 Assert-Contains -Violations $violations -Path $bindingMapGeneratorPath -Text $bindingMapGeneratorText -Needle 'tools/NativeManagedBindingMap/NativeManagedBindingMap.csproj' -Issue "Binding-map generator must invoke its checked-in tool project"
@@ -341,7 +342,7 @@ Assert-Contains -Violations $violations -Path $highGuiFamilyPath -Text $highGuiF
 Assert-Contains -Violations $violations -Path $finalCloseoutPath -Text $finalCloseoutText -Needle 'local-release-candidate-closeout.json' -Issue "Release artifact surface must register the final closeout record"
 Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $finalCloseoutRecordText -Needle 'local-release-candidate-closeout' -Issue "Final closeout record must identify its record kind"
 Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"
-Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '24' -Issue "Support lifecycle policy must expose the real-support count"
+Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 24 |' -Issue "Support lifecycle policy must expose the real-support count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'repository-signing-pending' -Issue "Release closeout documentation must expose the confirmed NuGet.org signing strategy"
@@ -380,12 +381,16 @@ foreach ($needle in @(
         'tutorial-03-contours.md',
         'tutorial-04-orb-features.md',
         'tutorial-05-template-matching.md',
-        'tutorial-06-knn-classification.md')) {
+        'tutorial-06-knn-classification.md',
+        'tutorial-07-android-runtime.md')) {
     Assert-Contains -Violations $violations -Path $tutorialSeriesPath -Text $tutorialSeriesText -Needle $needle -Issue "Tutorial overview must link every numbered technical article"
     Assert-Contains -Violations $violations -Path $docsTocPath -Text $docsTocText -Needle $needle -Issue "DocFX navigation must expose every numbered technical article"
 }
 foreach ($needle in @('OpenCV 5 adds a `FontFace` overload of `putText`', 'does not use GDI, Skia', 'ImgProcCv2.PutText(', 'OPENCV_CSHARP_CJK_FONT')) {
     Assert-Contains -Violations $violations -Path $chinesePutTextTutorialPath -Text $chinesePutTextTutorialText -Needle $needle -Issue "Chinese tutorial must document and demonstrate the direct OpenCV putText path"
+}
+foreach ($needle in @('JYPPX.OpenCV.runtime.android-x64.mini --prerelease', 'Cv2.Sum(image)', 'PASS version=5.0.0 sum=448', 'Android ARM/ARM64 remain `android-evidence-pending`')) {
+    Assert-Contains -Violations $violations -Path $androidTutorialPath -Text $androidTutorialText -Needle $needle -Issue "Android tutorial must retain version-neutral package installation, native loading, and truthful support boundaries"
 }
 foreach ($readme in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -419,7 +424,7 @@ foreach ($imageName in $requiredTutorialImages) {
 
 $runtimeTargets = @($runtimeSupportContract.realSupport)
 if ($runtimeTargets.Count -ne 24) {
-    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 24 real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
+    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 24 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
 }
 foreach ($readme in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -472,8 +477,6 @@ Assert-Contains -Violations $violations -Path $packRuntimePath -Text $packRuntim
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '[string]$OutputRoot = "artifacts/runtime"' -Issue "Stage-Runtime default staging output root must be artifacts/runtime"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '[string]$RuntimeProject = "packaging/runtime/JYPPX.OpenCV.runtime"' -Issue "Stage-Runtime default runtime project root must use the neutral runtime package identity"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "JYPPX.OpenCV.Native.dll" -Issue "Stage-Runtime must stage the neutral primary native loader"
-Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle '$compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers' -Issue "Stage-Runtime must keep the fixed-major native loader only as a compatibility copy"
-Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "compatibility loader copy for already-compiled consumers" -Issue "Stage-Runtime must label the fixed-major loader copy as compatibility-scoped"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "Runtime staging directory:" -Issue "Stage-Runtime must print staging directory evidence"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle "Runtime package project directory:" -Issue "Stage-Runtime must print runtime package mirror evidence"
 Assert-Contains -Violations $violations -Path $stageRuntimePath -Text $stageRuntimeText -Needle 'JYPPX.OpenCV.runtime.provenance.json' -Issue "Stage-Runtime must generate a durable runtime provenance manifest"
@@ -511,7 +514,7 @@ foreach ($androidProducerNeedle in @(
 }
 Assert-Contains -Violations $violations -Path $androidSmokeProjectPath -Text $androidSmokeProjectText -Needle '<TargetFramework>net10.0-android</TargetFramework>' -Issue "Android smoke project must target .NET 10 for Android"
 Assert-Contains -Violations $violations -Path $androidSmokeProjectPath -Text $androidSmokeProjectText -Needle '<PackageReference Include="$(AndroidRuntimePackageId)"' -Issue "Android smoke project must support consuming the selected runtime package"
-Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'using OpenCvSharp.Core;' -Issue "Android smoke activity must import the core API namespace"
+Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'using JYPPX.OpenCvSharp.Core;' -Issue "Android smoke activity must import the core API namespace"
 Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'OpenCvSharpBuildInfo.GetNativeOpenCvVersion()' -Issue "Android smoke activity must load and report the native OpenCV runtime"
 Assert-Contains -Violations $violations -Path $androidSmokeActivityPath -Text $androidSmokeActivityText -Needle 'Cv2.Sum(image)' -Issue "Android smoke activity must execute a real native OpenCV operation"
 foreach ($workflowNeedle in @(
@@ -606,8 +609,6 @@ Assert-Contains -Violations $violations -Path $githubPackArtifactGuardPath -Text
 foreach ($requiredText in @(
         "The package ID is version-neutral",
         $primaryNativeLoader,
-        $compatibilityNativeLoader,
-        "compatibility loader copy",
         "factual OpenCV 5.0.0 runtime artifacts",
         "not a naming pattern for new project concepts")) {
     Assert-Contains -Violations $violations -Path $runtimeReadmePath -Text $runtimeReadmeText -Needle $requiredText -Issue "Runtime package README must document '$requiredText'"

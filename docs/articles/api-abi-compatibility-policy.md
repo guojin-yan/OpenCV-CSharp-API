@@ -2,8 +2,7 @@
 
 The project maintains two reviewable baselines for the current packaged OpenCV revision `5.0.0`:
 
-- Managed API: `compatibility/managed-public-api.txt` and its summary JSON. The exact `net8.0` assembly currently contains 612 public types, 6,314 public/protected members, and 41 namespaces. The baseline includes generic constraints and nullable metadata shape.
-- Native ABI: `src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt` contains 2,656 full-profile functions; `legacy_abi_mini_manifest.txt` contains 526 mini-profile functions. The primary prefix is version-neutral `jyppx_ocv_`; `jyppx_ocv5_` is only the generated compatibility forwarding prefix.
+- Managed API: `compatibility/managed-public-api.txt` and its summary JSON. The exact `net8.0` assembly currently contains 611 public types, 6,300 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp`. The baseline includes generic constraints and nullable metadata shape.
 - Native-to-managed binding map: `compatibility/native-managed-binding-map.txt` and its summary correlate all 2,656 primary native entrypoints with reflected `net10.0` import metadata and checked-in source locations. All 2,656 are required to remain managed-bound; unbound and managed-only counts must remain zero.
 - ImgProc upstream map: `compatibility/imgproc-upstream-map.txt`, its structured raw extraction, reviewed classification manifest, summary, and selected-family inventory cover exactly the 203 declarations emitted from OpenCV 5.0.0 `opencv2/imgproc.hpp`. They classify 167 callable declarations without claiming repository-wide upstream parity.
 - ImgCodecs upstream map: `compatibility/imgcodecs-upstream-map.txt`, its structured raw extraction, reviewed classification manifest, summary, selected-family inventory, and source-reviewed extension record cover exactly the 39 declarations emitted from OpenCV 5.0.0 `opencv2/imgcodecs.hpp` plus the separately reviewed `ImageCollection` source extension. They classify 22 callable declarations without claiming repository-wide upstream parity.
@@ -25,7 +24,7 @@ Regenerate and check the baselines with exact SDK `10.0.302`:
 ```powershell
 pwsh -NoProfile -File ./scripts/Generate-ManagedPublicApiBaseline.ps1
 pwsh -NoProfile -File ./scripts/Test-ApiAbiBaselineContract.ps1
-pwsh -NoProfile -File ./scripts/Generate-NativeAbiCompatibility.ps1 -Check
+pwsh -NoProfile -File ./scripts/Generate-NativeAbiManifest.ps1 -Check
 pwsh -NoProfile -File ./scripts/Test-NativeManagedBindingMap.ps1
 pwsh -NoProfile -File ./scripts/Test-ImgProcUpstreamMap.ps1
 pwsh -NoProfile -File ./scripts/Test-ImgCodecsUpstreamMap.ps1
@@ -42,7 +41,6 @@ pwsh -NoProfile -File ./scripts/Test-VideoUpstreamMap.ps1
 pwsh -NoProfile -File ./scripts/Test-StitchingUpstreamMap.ps1
 ```
 
-The API/ABI and binding-map guards reject missing, duplicate, reordered, stale, malformed, unexpectedly fixed-major, entrypoint-drifted, undocumented-classification, conditional-build, source-header, parser, callback-ownership, or nondeterministically sourced entries. The existing `OpenCvSharp.OpenCv5SharpBuildInfo` and `OpenCv5Sharp.Native` names are explicit compatibility facades; new public names must remain version-neutral.
 
 ## What The Baseline Proves
 

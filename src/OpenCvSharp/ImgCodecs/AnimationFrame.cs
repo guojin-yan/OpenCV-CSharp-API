@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>Owns one cloned animation frame and its duration. 拥有一个克隆动画帧及其持续时间。</summary>
     public sealed class AnimationFrame : IDisposable

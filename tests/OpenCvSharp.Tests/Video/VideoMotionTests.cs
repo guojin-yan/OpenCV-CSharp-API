@@ -1,11 +1,11 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Video;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Video;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
-namespace OpenCvSharp.Tests.Video
+namespace JYPPX.OpenCvSharp.Tests.Video
 {
     public sealed class VideoMotionTests
     {

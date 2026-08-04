@@ -1,4 +1,4 @@
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     /// <summary>
     /// Hardware acceleration type for video decoding and encoding.

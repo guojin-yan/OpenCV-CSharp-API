@@ -204,12 +204,11 @@ function Assert-NoAbsoluteElfRuntimePaths {
 function Get-NativeLoaderFileNames {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
 
-    $compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers
     if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
-        return @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll")
+        return @("JYPPX.OpenCV.Native.dll")
     }
 
-    return @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")
+    return @("libJYPPX.OpenCV.Native.so")
 }
 
 function Resolve-OpenCvModuleRuntimeFile {

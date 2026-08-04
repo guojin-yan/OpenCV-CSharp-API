@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     /// <summary>
     /// Inpainting algorithms from OpenCV photo module.

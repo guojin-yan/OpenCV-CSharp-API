@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     /// <summary>
     /// Video file or camera capture object compatible with OpenCV <c>cv::VideoCapture</c>.

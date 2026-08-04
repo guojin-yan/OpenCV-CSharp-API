@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.BgSegm
+namespace JYPPX.OpenCvSharp.BgSegm
 {
     /// <summary>
     /// Synthetic sequence generator for background-subtraction tests.

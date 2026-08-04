@@ -1,8 +1,8 @@
 # Features2D Detectors Guide / Features2D 检测器指南
 
-`OpenCvSharp.Features2D` now exposes object wrappers for ORB, SIFT, FAST, GFTT, MSER, SimpleBlobDetector, and the contrib-backed BRISK, KAZE, and AKAZE wrappers. The managed API keeps OpenCV C++ names recognizable while using .NET naming and lifetime rules.
+`JYPPX.OpenCvSharp.Features2D` now exposes object wrappers for ORB, SIFT, FAST, GFTT, MSER, SimpleBlobDetector, and the contrib-backed BRISK, KAZE, and AKAZE wrappers. The managed API keeps OpenCV C++ names recognizable while using .NET naming and lifetime rules.
 
-`OpenCvSharp.Features2D` 现在提供 ORB、SIFT、FAST、GFTT、MSER、SimpleBlobDetector 以及 contrib 版本的 BRISK、KAZE、AKAZE 对象封装。managed API 保持 OpenCV C++ 名称可识别，同时遵循 .NET 命名与生命周期规则。
+`JYPPX.OpenCvSharp.Features2D` 现在提供 ORB、SIFT、FAST、GFTT、MSER、SimpleBlobDetector 以及 contrib 版本的 BRISK、KAZE、AKAZE 对象封装。managed API 保持 OpenCV C++ 名称可识别，同时遵循 .NET 命名与生命周期规则。
 
 ## SIFT / SIFT
 
@@ -12,8 +12,8 @@
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -45,8 +45,8 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -73,8 +73,8 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -101,8 +101,8 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {

@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XPhoto;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XPhoto;
 
-namespace OpenCvSharp.Tests.XPhoto
+namespace JYPPX.OpenCvSharp.Tests.XPhoto
 {
     public sealed class XPhotoTests
     {

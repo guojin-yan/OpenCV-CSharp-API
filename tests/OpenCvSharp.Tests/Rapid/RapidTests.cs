@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Rapid;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Rapid;
 
-namespace OpenCvSharp.Tests.Rapid
+namespace JYPPX.OpenCvSharp.Tests.Rapid
 {
     public sealed class RapidTests
     {

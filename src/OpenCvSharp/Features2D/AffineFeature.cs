@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Provides an affine-invariant wrapper around an existing <see cref="Feature2D"/> backend compatible with <c>cv::AffineFeature</c>.

@@ -28,9 +28,9 @@ When `centerPrincipalPoint` is `false`:
 - 图像尺寸不会参与计算，可以保留默认的空 `Size`。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 using Mat cameraMatrix = GetCameraMatrix();
 using Mat newCameraMatrix =

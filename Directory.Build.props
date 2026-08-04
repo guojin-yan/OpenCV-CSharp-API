@@ -15,14 +15,13 @@
     <PackageTags>opencv;csharp;dotnet;computer-vision;image-processing</PackageTags>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
 
-    <!-- Central version-neutral project metadata; fixed-major compatibility values are explicit exceptions. -->
+    <!-- Central version-neutral project metadata. -->
     <OpenCvCSharpManagedPackageId>JYPPX.OpenCV.CSharp.API</OpenCvCSharpManagedPackageId>
     <OpenCvCSharpRuntimePackageIdPrefix>JYPPX.OpenCV.runtime</OpenCvCSharpRuntimePackageIdPrefix>
-    <OpenCvCSharpRootNamespace>OpenCvSharp</OpenCvCSharpRootNamespace>
+    <OpenCvCSharpRootNamespace>JYPPX.OpenCvSharp</OpenCvCSharpRootNamespace>
     <OpenCvCSharpOpenCvVersion>5.0.0</OpenCvCSharpOpenCvVersion>
     <OpenCvCSharpPackageRevision>0</OpenCvCSharpPackageRevision>
     <OpenCvCSharpPackageVersion>$(OpenCvCSharpOpenCvVersion).$(OpenCvCSharpPackageRevision)</OpenCvCSharpPackageVersion>
     <OpenCvCSharpCurrentNativeLibraryName>JYPPX.OpenCV.Native</OpenCvCSharpCurrentNativeLibraryName>
-    <OpenCvCSharpCompatibilityNativeLibraryName>OpenCv5Sharp.Native</OpenCvCSharpCompatibilityNativeLibraryName>
   </PropertyGroup>
 </Project>

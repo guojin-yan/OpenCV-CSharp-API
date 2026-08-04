@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.PhaseUnwrapping
+namespace JYPPX.OpenCvSharp.PhaseUnwrapping
 {
     /// <summary>
     /// Parameters for OpenCV histogram-based phase unwrapping.

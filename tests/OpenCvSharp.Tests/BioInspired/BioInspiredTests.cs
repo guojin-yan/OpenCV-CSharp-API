@@ -1,11 +1,11 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.BioInspired;
-using OpenCvSharp.Core;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.BioInspired;
+using JYPPX.OpenCvSharp.Core;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.BioInspired
+namespace JYPPX.OpenCvSharp.Tests.BioInspired
 {
     [Collection(NativeSmokeCollection.Name)]
     public sealed class BioInspiredTests

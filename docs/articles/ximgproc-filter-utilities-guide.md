@@ -1,8 +1,8 @@
 # XImgProc Filter Utilities Guide / XImgProc 滤波工具指南
 
-`OpenCvSharp.XImgProc` includes the model-free ridge and recursive gradient utilities from OpenCV contrib `ximgproc`.
+`JYPPX.OpenCvSharp.XImgProc` includes the model-free ridge and recursive gradient utilities from OpenCV contrib `ximgproc`.
 
-`OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 中不依赖模型文件的 ridge 与递归梯度工具。
+`JYPPX.OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 中不依赖模型文件的 ridge 与递归梯度工具。
 
 ## Scope / 范围
 
@@ -23,9 +23,9 @@ The OpenCV algorithms are sensitive to image type and parameter scale. The thin 
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcFilterUtilitiesExample
 {
@@ -51,7 +51,3 @@ namespace XImgProcFilterUtilitiesExample
 ```
 
 ## Smoke / Smoke
-
-Default tests cover managed argument validation. Linked smoke runs tiny synthetic images when `OPENCV_CSHARP_NATIVE_SMOKE=1`. The older `OPENCV5SHARP_NATIVE_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias.
-
-默认测试覆盖 managed 参数校验。设置 `OPENCV_CSHARP_NATIVE_SMOKE=1` 后，linked smoke 会使用 tiny 合成图像执行真实 native 调用。旧的 `OPENCV5SHARP_NATIVE_SMOKE=1` 名称仍仅作为既有 smoke workflow 的兼容别名使用。

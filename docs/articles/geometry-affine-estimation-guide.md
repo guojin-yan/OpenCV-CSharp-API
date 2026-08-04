@@ -1,9 +1,9 @@
 # Geometry Affine Estimation Guide
 
 Round 971 adds the classic Geometry affine-estimation family to
-`OpenCvSharp.Calib3D.Cv2`.
+`JYPPX.OpenCvSharp.Calib3D.Cv2`.
 
-Round 971 在 `OpenCvSharp.Calib3D.Cv2` 中增加经典 Geometry 仿射估计 API。
+Round 971 在 `JYPPX.OpenCvSharp.Calib3D.Cv2` 中增加经典 Geometry 仿射估计 API。
 
 ## Transform Families / 变换类型
 
@@ -34,9 +34,9 @@ RANSAC 重载把变换写入调用方持有的 `Mat`，并可选写入内点掩�
 `out` 参数返回两个矩阵。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 Point3f[] source =
 {

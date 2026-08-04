@@ -1,8 +1,8 @@
 # HighGui Interaction Guide
 
-`OpenCvSharp.HighGui` covers the OpenCV 5.0.0 main HighGUI window, event-loop, property, trackbar, mouse, and Qt-button surface that can be represented safely by the full runtime. The deterministic compatibility map classifies all 26 parser-emitted callables: 20 implemented, 3 intentionally omitted interactive ROI operations, and 3 Qt-only conditional operations.
+`JYPPX.OpenCvSharp.HighGui` covers the OpenCV 5.0.0 main HighGUI window, event-loop, property, trackbar, mouse, and Qt-button surface that can be represented safely by the full runtime. The deterministic compatibility map classifies all 26 parser-emitted callables: 20 implemented, 3 intentionally omitted interactive ROI operations, and 3 Qt-only conditional operations.
 
-`OpenCvSharp.HighGui` 覆盖 OpenCV 5.0.0 main HighGUI 中可由 full runtime 安全表达的窗口、事件循环、属性、trackbar、鼠标和 Qt button surface。确定性兼容性 map 对 parser 输出的 26 个 callable 完成分类：20 个 implemented、3 个 intentionally omitted 的交互式 ROI 操作，以及 3 个 Qt-only conditional 操作。
+`JYPPX.OpenCvSharp.HighGui` 覆盖 OpenCV 5.0.0 main HighGUI 中可由 full runtime 安全表达的窗口、事件循环、属性、trackbar、鼠标和 Qt button surface。确定性兼容性 map 对 parser 输出的 26 个 callable 完成分类：20 个 implemented、3 个 intentionally omitted 的交互式 ROI 操作，以及 3 个 Qt-only conditional 操作。
 
 ## Covered APIs / 已覆盖接口
 
@@ -47,15 +47,14 @@
 ## Guarded Interaction Smoke / 受控交互 Smoke
 
 ```csharp
-using OpenCvSharp.Core;
-using HighGuiCv2 = OpenCvSharp.HighGui.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
 
 namespace HighGuiInteractionSample
 {
     internal static class Program
     {
         private const string HighGuiSmokeVariable = "OPENCV_CSHARP_HIGHGUI_SMOKE";
-        private const string CompatibilityHighGuiSmokeAliasVariable = "OPENCV5SHARP_HIGHGUI_SMOKE";
 
         private static void Main()
         {
@@ -66,13 +65,13 @@ namespace HighGuiInteractionSample
                 return;
             }
 
-            const string name = "OpenCvSharp.HighGui.Interaction";
+            const string name = "JYPPX.OpenCvSharp.HighGui.Interaction";
             using (Mat image = new Mat(32, 32, MatType.CV_8UC3, new Scalar(0, 128, 255)))
             {
                 HighGuiCv2.NamedWindow(name);
                 HighGuiCv2.SetWindowTitle(name, "Interaction smoke");
                 HighGuiCv2.ImShow(name, image);
-                using (OpenCvSharp.HighGui.HighGuiTrackbar trackbar = HighGuiCv2.CreateTrackbar("value", name, 0, 10, _ => { }))
+                using (JYPPX.OpenCvSharp.HighGui.HighGuiTrackbar trackbar = HighGuiCv2.CreateTrackbar("value", name, 0, 10, _ => { }))
                 {
                     HighGuiCv2.SetTrackbarPos("value", name, 3);
                     HighGuiCv2.SetMouseCallback(name, null);
@@ -107,7 +106,3 @@ All managed HighGUI strings reject `null`, embedded null characters, and invalid
 所有 managed HighGUI 字符串在进入 native code 前拒绝 `null`、embedded null 和 invalid UTF-16。显式长度 callback entrypoint 还会独立拒绝 invalid UTF-8。图像参数仍由 caller 持有，只在 native call 期间 borrowed。交互式 `selectROI` overload 因会阻塞自动化且没有可取消 managed contract 而有意省略。Qt overlay/status/font 操作保持 conditional，不由已验证的 WIN32 runtime 宣称支持。
 
 ## Runtime Notes / 运行时说明
-
-Default tests and samples call only `GetCurrentUIFramework` and `GetMouseWheelDelta`; they do not create a window. Window creation remains behind `OPENCV_CSHARP_HIGHGUI_SMOKE=1`. The older `OPENCV5SHARP_HIGHGUI_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias. Headless CI should leave both variables unset. The actual mini profile excludes HighGUI entirely. Full-unlinked builds preserve the full ABI and return `NOT_LINKED` without modifying output sentinels or invoking callbacks.
-
-默认测试和示例只调用 `GetCurrentUIFramework` 与 `GetMouseWheelDelta`，不会创建窗口。窗口创建仍放在 `OPENCV_CSHARP_HIGHGUI_SMOKE=1` 之后。旧的 `OPENCV5SHARP_HIGHGUI_SMOKE=1` 名称仍仅作为既有 smoke workflow 的兼容别名使用。无头 CI 应保持两个变量都未设置。实际 mini profile 完全排除 HighGUI；full-unlinked build 保留完整 ABI，并在不修改输出 sentinel、不调用 callback 的情况下返回 `NOT_LINKED`。

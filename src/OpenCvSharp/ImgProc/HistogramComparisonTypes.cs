@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies histogram comparison methods compatible with OpenCV <c>cv::HistCompMethods</c>.

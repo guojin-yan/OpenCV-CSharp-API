@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Provides OpenCV matrix type constants and helpers.

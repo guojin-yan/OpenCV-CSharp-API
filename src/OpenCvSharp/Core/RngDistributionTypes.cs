@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies random distribution types compatible with OpenCV <c>cv::RNG</c>.

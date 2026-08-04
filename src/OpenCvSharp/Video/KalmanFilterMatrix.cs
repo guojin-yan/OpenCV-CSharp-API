@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>
     /// Matrix identifiers for <see cref="KalmanFilter"/>.

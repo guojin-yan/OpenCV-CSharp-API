@@ -1,17 +1,17 @@
 # Core Array Operations Guide / Core 数组运算指南
 
-`OpenCvSharp.Core.Cv2` exposes OpenCV core array operations through the stable native C ABI.
+`JYPPX.OpenCvSharp.Core.Cv2` exposes OpenCV core array operations through the stable native C ABI.
 
-`OpenCvSharp.Core.Cv2` 通过稳定 native C ABI 暴露 OpenCV core 数组运算。
+`JYPPX.OpenCvSharp.Core.Cv2` 通过稳定 native C ABI 暴露 OpenCV core 数组运算。
 
-When a file also imports `OpenCvSharp.ImgProc` or `OpenCvSharp.ImgCodecs`, use aliases to avoid multiple `Cv2` classes with the same short name.
+When a file also imports `JYPPX.OpenCvSharp.ImgProc` or `JYPPX.OpenCvSharp.ImgCodecs`, use aliases to avoid multiple `Cv2` classes with the same short name.
 
-当文件同时引用 `OpenCvSharp.ImgProc` 或 `OpenCvSharp.ImgCodecs` 时，建议使用别名，避免多个 `Cv2` 类短名冲突。
+当文件同时引用 `JYPPX.OpenCvSharp.ImgProc` 或 `JYPPX.OpenCvSharp.ImgCodecs` 时，建议使用别名，避免多个 `Cv2` 类短名冲突。
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -57,8 +57,8 @@ Statistics APIs return C# value objects where OpenCV returns multiple out values
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {

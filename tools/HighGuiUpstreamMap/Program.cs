@@ -305,12 +305,12 @@ internal static class Program
             14 => new[] { "System.Int32 PollKey()" },
             15 => new[] { "System.Void ImShow(" },
             16 => new[] { "System.Void ResizeWindow(System.String winname,System.Int32 width,System.Int32 height)" },
-            17 => new[] { "System.Void ResizeWindow(System.String winname,OpenCvSharp.Core.Size size)" },
+            17 => new[] { "System.Void ResizeWindow(System.String winname,JYPPX.OpenCvSharp.Core.Size size)" },
             18 => new[] { "System.Void MoveWindow(" },
             19 => new[] { "System.Void SetWindowProperty(" },
             20 => new[] { "System.Void SetWindowTitle(" },
             21 => new[] { "System.Double GetWindowProperty(" },
-            22 => new[] { "OpenCvSharp.Core.Rect GetWindowImageRect(" },
+            22 => new[] { "JYPPX.OpenCvSharp.Core.Rect GetWindowImageRect(" },
             26 => new[] { "System.Int32 GetTrackbarPos(" },
             27 => new[] { "System.Void SetTrackbarPos(" },
             28 => new[] { "System.Void SetTrackbarMax(" },
@@ -513,7 +513,7 @@ internal static class Program
 
     private static string FindManaged(string[] managed, params string[] fragments)
     {
-        const string prefix = "MEMBER|OpenCvSharp.HighGui.Cv2|";
+        const string prefix = "MEMBER|JYPPX.OpenCvSharp.HighGui.Cv2|";
         List<string> matches = managed.Where(x => x.Contains(prefix, StringComparison.Ordinal) && fragments.All(fragment => x.Contains(fragment, StringComparison.Ordinal))).OrderBy(x => x, Ordinal).ToList();
         Require(matches.Count == 1, "Expected one HighGui managed evidence row for " + string.Join(",", fragments) + "; found " + matches.Count);
         return matches[0];

@@ -166,8 +166,8 @@ function New-ReviewRecord {
             Sha256 = $MatrixSha256
             EntryCount = $MatrixEntryCount
             SupportContractSha256 = $SupportContractSha256
-            RealSupportCount = 24
-            PendingSupportCount = 9
+            RealSupportCount = 28
+            PendingSupportCount = 5
             ExcludedSupportCount = 1
             WinX86FullStatus = 'hosted-evidence-pending'
             WinX86MiniStatus = 'excluded'
@@ -283,7 +283,7 @@ function Test-ReviewRecord {
     Assert-True -List $List -Condition ($Record.PackageEvidenceKind -eq $expectedPackageEvidenceKind) -Path $Path -Issue 'Release review package evidence classification drifted'
     $expectedChangeSummary = if ($ExternalPackages) { 'first-preview-publication-handoff' } else { 'deterministic-release-guard-fixture' }
     Assert-True -List $List -Condition ($Record.ChangeSummary -eq $expectedChangeSummary) -Path $Path -Issue 'Release review change summary drifted'
-    Assert-True -List $List -Condition ($Record.SupportMatrix.Sha256 -eq $MatrixSha256 -and [int]$Record.SupportMatrix.EntryCount -eq $MatrixEntryCount -and $Record.SupportMatrix.SupportContractSha256 -eq $SupportContractSha256 -and [int]$Record.SupportMatrix.RealSupportCount -eq 24 -and [int]$Record.SupportMatrix.PendingSupportCount -eq 9 -and [int]$Record.SupportMatrix.ExcludedSupportCount -eq 1) -Path $Path -Issue 'Release review support matrix or support contract drifted'
+    Assert-True -List $List -Condition ($Record.SupportMatrix.Sha256 -eq $MatrixSha256 -and [int]$Record.SupportMatrix.EntryCount -eq $MatrixEntryCount -and $Record.SupportMatrix.SupportContractSha256 -eq $SupportContractSha256 -and [int]$Record.SupportMatrix.RealSupportCount -eq 28 -and [int]$Record.SupportMatrix.PendingSupportCount -eq 5 -and [int]$Record.SupportMatrix.ExcludedSupportCount -eq 1) -Path $Path -Issue 'Release review support matrix or support contract drifted'
     Assert-True -List $List -Condition ($Record.SupportMatrix.WinX86FullStatus -eq 'hosted-evidence-pending' -and $Record.SupportMatrix.WinX86MiniStatus -eq 'excluded') -Path $Path -Issue 'Windows x86 support status changed without hosted evidence'
     $expectedCloseoutValues = "$($ExpectedCloseout.Path)|$($ExpectedCloseout.Sha256)|$($ExpectedCloseout.CandidateId)|$($ExpectedCloseout.SourceSetSha256)|$($ExpectedCloseout.Status)|$($ExpectedCloseout.InvariantGuardCount)|$($ExpectedCloseout.SigningStatus)|$($ExpectedCloseout.SbomStatus)|$($ExpectedCloseout.ApprovalStatus)|$($ExpectedCloseout.PublicationAllowed)"
     $recordCloseoutValues = "$($Record.Closeout.Path)|$($Record.Closeout.Sha256)|$($Record.Closeout.CandidateId)|$($Record.Closeout.SourceSetSha256)|$($Record.Closeout.Status)|$($Record.Closeout.InvariantGuardCount)|$($Record.Closeout.SigningStatus)|$($Record.Closeout.SbomStatus)|$($Record.Closeout.ApprovalStatus)|$($Record.Closeout.PublicationAllowed)"

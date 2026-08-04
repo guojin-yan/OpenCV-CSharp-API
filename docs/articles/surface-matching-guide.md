@@ -1,8 +1,8 @@
 # Surface Matching Guide / Surface Matching 指南
 
-`OpenCvSharp.SurfaceMatching` wraps the first OpenCV contrib `surface_matching` registration and PPF detection surface with opaque native handles and flat result objects.
+`JYPPX.OpenCvSharp.SurfaceMatching` wraps the first OpenCV contrib `surface_matching` registration and PPF detection surface with opaque native handles and flat result objects.
 
-`OpenCvSharp.SurfaceMatching` 通过 opaque native 句柄和平铺结果对象封装第一批 OpenCV contrib `surface_matching` 配准与 PPF 检测能力。
+`JYPPX.OpenCvSharp.SurfaceMatching` 通过 opaque native 句柄和平铺结果对象封装第一批 OpenCV contrib `surface_matching` 配准与 PPF 检测能力。
 
 ## Scope / 范围
 
@@ -29,8 +29,8 @@ OpenCV ICP and PPF expect point clouds with normals, commonly `Nx6 CV_32FC1`: `x
 OpenCV ICP 与 PPF 期望带法线点云，常见格式为 `Nx6 CV_32FC1`：`x, y, z, nx, ny, nz`。tiny smoke 只验证 linked 调用形状。真实 model-to-scene 匹配需要采样充分且法线合理的几何数据。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.SurfaceMatching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.SurfaceMatching;
 
 internal static class Program
 {

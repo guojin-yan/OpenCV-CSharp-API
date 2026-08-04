@@ -1,8 +1,8 @@
 # Structured Light Guide / Structured Light 指南
 
-`OpenCvSharp.StructuredLight` wraps the first model-free OpenCV contrib `structured_light` surfaces: Gray-code and sinusoidal pattern generation plus selected decode/phase helpers.
+`JYPPX.OpenCvSharp.StructuredLight` wraps the first model-free OpenCV contrib `structured_light` surfaces: Gray-code and sinusoidal pattern generation plus selected decode/phase helpers.
 
-`OpenCvSharp.StructuredLight` 封装第一批无需模型文件的 OpenCV contrib `structured_light` 能力：Gray-code 和正弦图案生成，以及部分解码/相位 helper。
+`JYPPX.OpenCvSharp.StructuredLight` 封装第一批无需模型文件的 OpenCV contrib `structured_light` 能力：Gray-code 和正弦图案生成，以及部分解码/相位 helper。
 
 ## Scope / 范围
 
@@ -29,8 +29,8 @@ Pattern generation returns newly owned `Mat[]` values; dispose each returned mat
 图案生成返回新持有的 `Mat[]`；使用后需要逐个释放。Gray-code `GetProjPixel` 期望输入相机采集到的图案图像。传入生成的投影图案适合作为 smoke 检查，但真实投影仪-相机标定需要使用相机采集图像。正弦相位 helper 同样期望采集图像和 shadow mask。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.StructuredLight;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.StructuredLight;
 
 using GrayCodePattern gray = GrayCodePattern.Create(16, 8);
 Mat[] grayImages = gray.Generate();

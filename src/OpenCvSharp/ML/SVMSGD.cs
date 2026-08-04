@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Linear SVM classifier trained with stochastic gradient descent.</summary>
     public sealed class SVMSGD : StatModel

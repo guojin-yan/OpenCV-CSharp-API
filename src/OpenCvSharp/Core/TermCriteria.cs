@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Represents OpenCV iteration termination criteria compatible with <c>cv::TermCriteria</c>.

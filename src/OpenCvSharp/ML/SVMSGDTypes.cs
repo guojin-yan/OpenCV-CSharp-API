@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Optimization variants supported by <see cref="SVMSGD"/>.</summary>
     public enum SVMSGDTypes

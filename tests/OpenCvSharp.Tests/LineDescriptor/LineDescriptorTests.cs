@@ -1,13 +1,13 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.LineDescriptor;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.LineDescriptor;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.LineDescriptor
+namespace JYPPX.OpenCvSharp.Tests.LineDescriptor
 {
     public sealed class LineDescriptorTests
     {

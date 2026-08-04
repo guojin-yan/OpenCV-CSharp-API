@@ -1,4 +1,4 @@
-namespace OpenCvSharp.XStereo
+namespace JYPPX.OpenCvSharp.XStereo
 {
     /// <summary>
     /// Speckle removal algorithms for OpenCV xstereo matchers.

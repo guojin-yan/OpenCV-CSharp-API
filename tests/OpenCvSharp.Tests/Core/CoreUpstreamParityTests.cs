@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using Cv2 = OpenCvSharp.Core.Cv2;
-using BorderTypes = OpenCvSharp.ImgProc.BorderTypes;
+using JYPPX.OpenCvSharp.Core;
+using Cv2 = JYPPX.OpenCvSharp.Core.Cv2;
+using BorderTypes = JYPPX.OpenCvSharp.ImgProc.BorderTypes;
 
-namespace OpenCvSharp.Tests.Core
+namespace JYPPX.OpenCvSharp.Tests.Core
 {
     public class CoreUpstreamParityTests
     {

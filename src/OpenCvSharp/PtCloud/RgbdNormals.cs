@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.PtCloud
+namespace JYPPX.OpenCvSharp.PtCloud
 {
     /// <summary>
     /// Computes normals from organized RGB-D point data.

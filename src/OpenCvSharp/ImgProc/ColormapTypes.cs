@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Specifies OpenCV built-in color maps. 指定 OpenCV 内置颜色映射。</summary>
     public enum ColormapTypes

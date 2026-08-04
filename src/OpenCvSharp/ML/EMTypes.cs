@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Covariance-matrix constraints supported by <see cref="EM"/>.</summary>
     public enum EMCovarianceMatrixTypes

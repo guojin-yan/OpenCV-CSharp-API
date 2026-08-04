@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies line segment detector refinement modes compatible with OpenCV <c>cv::LineSegmentDetectorModes</c>.

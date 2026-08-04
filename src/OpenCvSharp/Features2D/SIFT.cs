@@ -1,13 +1,13 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
 #if NETCOREAPP3_1_OR_GREATER
 using System.Buffers;
 #endif
 
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Provides SIFT keypoint detection and descriptor extraction compatible with <c>cv::SIFT</c>.

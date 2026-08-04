@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace OpenCvSharp.Dnn
+namespace JYPPX.OpenCvSharp.Dnn
 {
     /// <summary>
     /// DNN performance profile returned by <see cref="Net.GetPerfProfile"/>.

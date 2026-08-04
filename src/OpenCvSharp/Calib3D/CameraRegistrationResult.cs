@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Owned result returned by camera-pair registration.

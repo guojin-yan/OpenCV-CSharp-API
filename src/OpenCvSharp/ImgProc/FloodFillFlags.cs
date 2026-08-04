@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies flood-fill options compatible with OpenCV <c>cv::FloodFillFlags</c>.

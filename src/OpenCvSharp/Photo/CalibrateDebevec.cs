@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     /// <summary>Debevec inverse camera-response calibration.</summary>
     public sealed class CalibrateDebevec : CalibrateCRF

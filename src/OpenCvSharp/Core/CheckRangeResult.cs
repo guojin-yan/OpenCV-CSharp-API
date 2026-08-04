@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Describes whether every matrix value lies in a half-open numeric range and where the first failure occurred.

@@ -1,12 +1,12 @@
 # Photo HDR Workflow Guide
 
-The main `OpenCvSharp.Photo` HDR surface covers OpenCV 5.0.0 exposure alignment, inverse camera-response calibration, HDR merge, and exposure fusion. It uses the version-neutral `jyppx_ocv_` C ABI and the full linked runtime with `opencv_photo500.dll`. Contrib `xphoto` and CUDA Photo are separate surfaces and are not included in this contract.
+The main `JYPPX.OpenCvSharp.Photo` HDR surface covers OpenCV 5.0.0 exposure alignment, inverse camera-response calibration, HDR merge, and exposure fusion. It uses the version-neutral `jyppx_ocv_` C ABI and the full linked runtime with `opencv_photo500.dll`. Contrib `xphoto` and CUDA Photo are separate surfaces and are not included in this contract.
 
 ## Practical Workflow
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 using Mat dark = new Mat(16, 16, MatType.CV_8UC3, new Scalar(32, 40, 48));
 using Mat middle = new Mat(16, 16, MatType.CV_8UC3, new Scalar(96, 104, 112));
@@ -70,4 +70,4 @@ Property setters preserve OpenCV values rather than imposing undocumented ranges
 
 The deterministic OpenCV 5.0.0 Photo map measures 145 declarations and 120 callable rows. The HDR batch implements all 43 parser-emitted alignment, calibration, and merge callables. With the separately documented CCM, Intelligent Scissors, TV-L1, and chromatic-aberration batches, the complete map records all 120 callable rows implemented.
 
-The remaining groups are TV-L1 denoising and chromatic-aberration correction/loading. They are linked CPU Photo surfaces but have no current native/managed evidence. CUDA is excluded from the CPU compatibility closure, and contrib `OpenCvSharp.XPhoto` remains separate. No repository-wide upstream parity claim is made.
+The remaining groups are TV-L1 denoising and chromatic-aberration correction/loading. They are linked CPU Photo surfaces but have no current native/managed evidence. CUDA is excluded from the CPU compatibility closure, and contrib `JYPPX.OpenCvSharp.XPhoto` remains separate. No repository-wide upstream parity claim is made.

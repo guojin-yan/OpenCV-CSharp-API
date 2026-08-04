@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies contour approximation modes compatible with OpenCV <c>cv::ContourApproximationModes</c>.

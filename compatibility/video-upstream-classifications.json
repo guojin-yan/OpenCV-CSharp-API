@@ -24,7 +24,7 @@
         "jyppx_ocv_video_cam_shift"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Video.CamShiftResult CamShift(OpenCvSharp.Core.Mat probImage,OpenCvSharp.Core.Rect window,OpenCvSharp.Core.TermCriteria? criteria=null)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|JYPPX.OpenCvSharp.Video.CamShiftResult CamShift(JYPPX.OpenCvSharp.Core.Mat probImage,JYPPX.OpenCvSharp.Core.Rect window,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null)"
       ]
     },
     {
@@ -37,7 +37,7 @@
         "jyppx_ocv_video_mean_shift"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Video.MeanShiftResult MeanShift(OpenCvSharp.Core.Mat probImage,OpenCvSharp.Core.Rect window,OpenCvSharp.Core.TermCriteria? criteria=null)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|JYPPX.OpenCvSharp.Video.MeanShiftResult MeanShift(JYPPX.OpenCvSharp.Core.Mat probImage,JYPPX.OpenCvSharp.Core.Rect window,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null)"
       ]
     },
     {
@@ -51,7 +51,7 @@
         "jyppx_ocv_video_build_optical_flow_pyramid_fill"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Video.OpticalFlowPyramidResult BuildOpticalFlowPyramid(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Size winSize,System.Int32 maxLevel,System.Boolean withDerivatives=true,System.Int32 pyrBorder=4,System.Int32 derivBorder=0,System.Boolean tryReuseInputImage=true)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|JYPPX.OpenCvSharp.Video.OpticalFlowPyramidResult BuildOpticalFlowPyramid(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Size winSize,System.Int32 maxLevel,System.Boolean withDerivatives=true,System.Int32 pyrBorder=4,System.Int32 derivBorder=0,System.Boolean tryReuseInputImage=true)"
       ]
     },
     {
@@ -64,7 +64,7 @@
         "jyppx_ocv_video_calc_optical_flow_pyr_lk"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Core.Point2f[] CalcOpticalFlowPyrLK(OpenCvSharp.Core.Mat prevImg,OpenCvSharp.Core.Mat nextImg,OpenCvSharp.Core.Point2f[] prevPts,OpenCvSharp.Core.Point2f[] initialNextPts,out System.Byte[] status,out System.Single[] err,OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Video.OpticalFlowFlags flags=UseInitialFlow,System.Double minEigThreshold=0.0001)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Point2f[] CalcOpticalFlowPyrLK(JYPPX.OpenCvSharp.Core.Mat prevImg,JYPPX.OpenCvSharp.Core.Mat nextImg,JYPPX.OpenCvSharp.Core.Point2f[] prevPts,JYPPX.OpenCvSharp.Core.Point2f[] initialNextPts,out System.Byte[] status,out System.Single[] err,JYPPX.OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null,JYPPX.OpenCvSharp.Video.OpticalFlowFlags flags=UseInitialFlow,System.Double minEigThreshold=0.0001)"
       ]
     },
     {
@@ -77,7 +77,7 @@
         "jyppx_ocv_video_calc_optical_flow_farneback"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Void CalcOpticalFlowFarneback(OpenCvSharp.Core.Mat prev,OpenCvSharp.Core.Mat next,OpenCvSharp.Core.Mat flow,System.Double pyrScale,System.Int32 levels,System.Int32 winsize,System.Int32 iterations,System.Int32 polyN,System.Double polySigma,OpenCvSharp.Video.OpticalFlowFlags flags=None)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Void CalcOpticalFlowFarneback(JYPPX.OpenCvSharp.Core.Mat prev,JYPPX.OpenCvSharp.Core.Mat next,JYPPX.OpenCvSharp.Core.Mat flow,System.Double pyrScale,System.Int32 levels,System.Int32 winsize,System.Int32 iterations,System.Int32 polyN,System.Double polySigma,JYPPX.OpenCvSharp.Video.OpticalFlowFlags flags=None)"
       ]
     },
     {
@@ -99,7 +99,7 @@
         "jyppx_ocv_video_compute_ecc"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double ComputeECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat? inputMask=null)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Double ComputeECC(JYPPX.OpenCvSharp.Core.Mat templateImage,JYPPX.OpenCvSharp.Core.Mat inputImage,JYPPX.OpenCvSharp.Core.Mat? inputMask=null)"
       ]
     },
     {
@@ -112,7 +112,7 @@
         "jyppx_ocv_video_find_transform_ecc"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(JYPPX.OpenCvSharp.Core.Mat templateImage,JYPPX.OpenCvSharp.Core.Mat inputImage,JYPPX.OpenCvSharp.Core.Mat warpMatrix,JYPPX.OpenCvSharp.Video.MotionType motionType=Affine,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null,JYPPX.OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
       ]
     },
     {
@@ -125,7 +125,7 @@
         "jyppx_ocv_video_find_transform_ecc"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECC(JYPPX.OpenCvSharp.Core.Mat templateImage,JYPPX.OpenCvSharp.Core.Mat inputImage,JYPPX.OpenCvSharp.Core.Mat warpMatrix,JYPPX.OpenCvSharp.Video.MotionType motionType=Affine,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null,JYPPX.OpenCvSharp.Core.Mat? inputMask=null,System.Int32 gaussianFilterSize=5)"
       ]
     },
     {
@@ -138,7 +138,7 @@
         "jyppx_ocv_video_find_transform_ecc_with_mask"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCWithMask(OpenCvSharp.Core.Mat templateImage,OpenCvSharp.Core.Mat inputImage,OpenCvSharp.Core.Mat templateMask,OpenCvSharp.Core.Mat inputMask,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32 gaussianFilterSize=5)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCWithMask(JYPPX.OpenCvSharp.Core.Mat templateImage,JYPPX.OpenCvSharp.Core.Mat inputImage,JYPPX.OpenCvSharp.Core.Mat templateMask,JYPPX.OpenCvSharp.Core.Mat inputMask,JYPPX.OpenCvSharp.Core.Mat warpMatrix,JYPPX.OpenCvSharp.Video.MotionType motionType=Affine,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32 gaussianFilterSize=5)"
       ]
     },
     {
@@ -160,7 +160,7 @@
         "jyppx_ocv_video_ecc_parameters_get_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.ECCParameters|constructor|public;instance|.ctor(OpenCvSharp.Video.MotionType motionType=Affine,OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32[]? iterationsPerLevel=null,System.Int32 gaussianFilterSize=5,System.Int32 levelCount=4,OpenCvSharp.ImgProc.InterpolationFlags interpolation=Linear)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.ECCParameters|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Video.MotionType motionType=Affine,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null,System.Int32[]? iterationsPerLevel=null,System.Int32 gaussianFilterSize=5,System.Int32 levelCount=4,JYPPX.OpenCvSharp.ImgProc.InterpolationFlags interpolation=Linear)"
       ]
     },
     {
@@ -173,7 +173,7 @@
         "jyppx_ocv_video_find_transform_ecc_multi_scale"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCMultiScale(OpenCvSharp.Core.Mat referenceImage,OpenCvSharp.Core.Mat sampleImage,OpenCvSharp.Core.Mat warpMatrix,OpenCvSharp.Video.ECCParameters? parameters=null,OpenCvSharp.Core.Mat? referenceMask=null,OpenCvSharp.Core.Mat? sampleMask=null)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Double FindTransformECCMultiScale(JYPPX.OpenCvSharp.Core.Mat referenceImage,JYPPX.OpenCvSharp.Core.Mat sampleImage,JYPPX.OpenCvSharp.Core.Mat warpMatrix,JYPPX.OpenCvSharp.Video.ECCParameters? parameters=null,JYPPX.OpenCvSharp.Core.Mat? referenceMask=null,JYPPX.OpenCvSharp.Core.Mat? sampleMask=null)"
       ]
     },
     {
@@ -205,7 +205,7 @@
         "jyppx_ocv_kalman_filter_release_handle"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.KalmanFilter|constructor|public;instance|.ctor(System.Int32 dynamParams,System.Int32 measureParams,System.Int32 controlParams=0,System.Int32 type=5)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.KalmanFilter|constructor|public;instance|.ctor(System.Int32 dynamParams,System.Int32 measureParams,System.Int32 controlParams=0,System.Int32 type=5)"
       ]
     },
     {
@@ -218,7 +218,7 @@
         "jyppx_ocv_kalman_filter_predict"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.KalmanFilter|method|public;instance|OpenCvSharp.Core.Mat Predict(OpenCvSharp.Core.Mat? control=null)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.KalmanFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Predict(JYPPX.OpenCvSharp.Core.Mat? control=null)"
       ]
     },
     {
@@ -231,7 +231,7 @@
         "jyppx_ocv_kalman_filter_correct"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.KalmanFilter|method|public;instance|OpenCvSharp.Core.Mat Correct(OpenCvSharp.Core.Mat measurement)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.KalmanFilter|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Correct(JYPPX.OpenCvSharp.Core.Mat measurement)"
       ]
     },
     {
@@ -244,7 +244,7 @@
         "jyppx_ocv_video_read_optical_flow"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|OpenCvSharp.Core.Mat ReadOpticalFlow(System.String path)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ReadOpticalFlow(System.String path)"
       ]
     },
     {
@@ -257,7 +257,7 @@
         "jyppx_ocv_video_write_optical_flow"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Cv2|method|public;static|System.Boolean WriteOpticalFlow(System.String path,OpenCvSharp.Core.Mat flow)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Cv2|method|public;static|System.Boolean WriteOpticalFlow(System.String path,JYPPX.OpenCvSharp.Core.Mat flow)"
       ]
     },
     {
@@ -279,7 +279,7 @@
         "jyppx_ocv_dense_optical_flow_calc"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DenseOpticalFlow|method|public;instance;virtual|System.Void Calc(OpenCvSharp.Core.Mat first,OpenCvSharp.Core.Mat second,OpenCvSharp.Core.Mat flow)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DenseOpticalFlow|method|public;instance;virtual|System.Void Calc(JYPPX.OpenCvSharp.Core.Mat first,JYPPX.OpenCvSharp.Core.Mat second,JYPPX.OpenCvSharp.Core.Mat flow)"
       ]
     },
     {
@@ -292,7 +292,7 @@
         "jyppx_ocv_dense_optical_flow_collect_garbage"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DenseOpticalFlow|method|public;instance|System.Void CollectGarbage()"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DenseOpticalFlow|method|public;instance|System.Void CollectGarbage()"
       ]
     },
     {
@@ -314,7 +314,7 @@
         "jyppx_ocv_sparse_optical_flow_calc"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparseOpticalFlow|method|public;instance|OpenCvSharp.Core.Point2f[] Calc(OpenCvSharp.Core.Mat previousImage,OpenCvSharp.Core.Mat nextImage,OpenCvSharp.Core.Point2f[] previousPoints,OpenCvSharp.Core.Point2f[] initialNextPoints,out System.Byte[] status,out System.Single[] error)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparseOpticalFlow|method|public;instance|JYPPX.OpenCvSharp.Core.Point2f[] Calc(JYPPX.OpenCvSharp.Core.Mat previousImage,JYPPX.OpenCvSharp.Core.Mat nextImage,JYPPX.OpenCvSharp.Core.Point2f[] previousPoints,JYPPX.OpenCvSharp.Core.Point2f[] initialNextPoints,out System.Byte[] status,out System.Single[] error)"
       ]
     },
     {
@@ -336,7 +336,7 @@
         "jyppx_ocv_farneback_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
       ]
     },
     {
@@ -349,7 +349,7 @@
         "jyppx_ocv_farneback_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumLevels"
       ]
     },
     {
@@ -362,7 +362,7 @@
         "jyppx_ocv_farneback_optical_flow_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
       ]
     },
     {
@@ -375,7 +375,7 @@
         "jyppx_ocv_farneback_optical_flow_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PyrScale"
       ]
     },
     {
@@ -388,7 +388,7 @@
         "jyppx_ocv_farneback_optical_flow_get_bool_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
       ]
     },
     {
@@ -401,7 +401,7 @@
         "jyppx_ocv_farneback_optical_flow_set_bool_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Boolean FastPyramids"
       ]
     },
     {
@@ -414,7 +414,7 @@
         "jyppx_ocv_farneback_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
       ]
     },
     {
@@ -427,7 +427,7 @@
         "jyppx_ocv_farneback_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 WinSize"
       ]
     },
     {
@@ -440,7 +440,7 @@
         "jyppx_ocv_farneback_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
       ]
     },
     {
@@ -453,7 +453,7 @@
         "jyppx_ocv_farneback_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 NumIterations"
       ]
     },
     {
@@ -466,7 +466,7 @@
         "jyppx_ocv_farneback_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
       ]
     },
     {
@@ -479,7 +479,7 @@
         "jyppx_ocv_farneback_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Int32 PolyN"
       ]
     },
     {
@@ -492,7 +492,7 @@
         "jyppx_ocv_farneback_optical_flow_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
       ]
     },
     {
@@ -505,7 +505,7 @@
         "jyppx_ocv_farneback_optical_flow_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|System.Double PolySigma"
       ]
     },
     {
@@ -518,7 +518,7 @@
         "jyppx_ocv_farneback_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Video.OpticalFlowFlags Flags"
       ]
     },
     {
@@ -531,7 +531,7 @@
         "jyppx_ocv_farneback_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Video.OpticalFlowFlags Flags"
       ]
     },
     {
@@ -545,7 +545,7 @@
         "jyppx_ocv_farneback_optical_flow_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.FarnebackOpticalFlow|method|public;static|OpenCvSharp.Video.FarnebackOpticalFlow Create(System.Int32 numLevels=5,System.Double pyrScale=0.5,System.Boolean fastPyramids=false,System.Int32 winSize=13,System.Int32 numIterations=10,System.Int32 polyN=5,System.Double polySigma=1.1,OpenCvSharp.Video.OpticalFlowFlags flags=None)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow|method|public;static|JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow Create(System.Int32 numLevels=5,System.Double pyrScale=0.5,System.Boolean fastPyramids=false,System.Int32 winSize=13,System.Int32 numIterations=10,System.Int32 polyN=5,System.Double polySigma=1.1,JYPPX.OpenCvSharp.Video.OpticalFlowFlags flags=None)"
       ]
     },
     {
@@ -567,7 +567,7 @@
         "jyppx_ocv_variational_refinement_calc_uv"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|method|public;instance|System.Void CalcUV(OpenCvSharp.Core.Mat first,OpenCvSharp.Core.Mat second,OpenCvSharp.Core.Mat flowU,OpenCvSharp.Core.Mat flowV)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|method|public;instance|System.Void CalcUV(JYPPX.OpenCvSharp.Core.Mat first,JYPPX.OpenCvSharp.Core.Mat second,JYPPX.OpenCvSharp.Core.Mat flowU,JYPPX.OpenCvSharp.Core.Mat flowV)"
       ]
     },
     {
@@ -580,7 +580,7 @@
         "jyppx_ocv_variational_refinement_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
       ]
     },
     {
@@ -593,7 +593,7 @@
         "jyppx_ocv_variational_refinement_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 FixedPointIterations"
       ]
     },
     {
@@ -606,7 +606,7 @@
         "jyppx_ocv_variational_refinement_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
       ]
     },
     {
@@ -619,7 +619,7 @@
         "jyppx_ocv_variational_refinement_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Int32 SorIterations"
       ]
     },
     {
@@ -632,7 +632,7 @@
         "jyppx_ocv_variational_refinement_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
       ]
     },
     {
@@ -645,7 +645,7 @@
         "jyppx_ocv_variational_refinement_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Omega"
       ]
     },
     {
@@ -658,7 +658,7 @@
         "jyppx_ocv_variational_refinement_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
       ]
     },
     {
@@ -671,7 +671,7 @@
         "jyppx_ocv_variational_refinement_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Alpha"
       ]
     },
     {
@@ -684,7 +684,7 @@
         "jyppx_ocv_variational_refinement_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
       ]
     },
     {
@@ -697,7 +697,7 @@
         "jyppx_ocv_variational_refinement_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Delta"
       ]
     },
     {
@@ -710,7 +710,7 @@
         "jyppx_ocv_variational_refinement_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
       ]
     },
     {
@@ -723,7 +723,7 @@
         "jyppx_ocv_variational_refinement_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Gamma"
       ]
     },
     {
@@ -736,7 +736,7 @@
         "jyppx_ocv_variational_refinement_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
       ]
     },
     {
@@ -749,7 +749,7 @@
         "jyppx_ocv_variational_refinement_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|property|instance;get:public;set:public|System.Single Epsilon"
       ]
     },
     {
@@ -763,7 +763,7 @@
         "jyppx_ocv_variational_refinement_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.VariationalRefinement|method|public;static|OpenCvSharp.Video.VariationalRefinement Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Video.VariationalRefinement|method|public;static|JYPPX.OpenCvSharp.Video.VariationalRefinement Create()"
       ]
     },
     {
@@ -794,7 +794,7 @@
         "jyppx_ocv_dis_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
       ]
     },
     {
@@ -807,7 +807,7 @@
         "jyppx_ocv_dis_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 FinestScale"
       ]
     },
     {
@@ -820,7 +820,7 @@
         "jyppx_ocv_dis_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
       ]
     },
     {
@@ -833,7 +833,7 @@
         "jyppx_ocv_dis_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 CoarsestScale"
       ]
     },
     {
@@ -846,7 +846,7 @@
         "jyppx_ocv_dis_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
       ]
     },
     {
@@ -859,7 +859,7 @@
         "jyppx_ocv_dis_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchSize"
       ]
     },
     {
@@ -872,7 +872,7 @@
         "jyppx_ocv_dis_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
       ]
     },
     {
@@ -885,7 +885,7 @@
         "jyppx_ocv_dis_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 PatchStride"
       ]
     },
     {
@@ -898,7 +898,7 @@
         "jyppx_ocv_dis_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
       ]
     },
     {
@@ -911,7 +911,7 @@
         "jyppx_ocv_dis_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 GradientDescentIterations"
       ]
     },
     {
@@ -924,7 +924,7 @@
         "jyppx_ocv_dis_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
       ]
     },
     {
@@ -937,7 +937,7 @@
         "jyppx_ocv_dis_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Int32 VariationalRefinementIterations"
       ]
     },
     {
@@ -950,7 +950,7 @@
         "jyppx_ocv_dis_optical_flow_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
       ]
     },
     {
@@ -963,7 +963,7 @@
         "jyppx_ocv_dis_optical_flow_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementAlpha"
       ]
     },
     {
@@ -976,7 +976,7 @@
         "jyppx_ocv_dis_optical_flow_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
       ]
     },
     {
@@ -989,7 +989,7 @@
         "jyppx_ocv_dis_optical_flow_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementDelta"
       ]
     },
     {
@@ -1002,7 +1002,7 @@
         "jyppx_ocv_dis_optical_flow_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
       ]
     },
     {
@@ -1015,7 +1015,7 @@
         "jyppx_ocv_dis_optical_flow_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementGamma"
       ]
     },
     {
@@ -1028,7 +1028,7 @@
         "jyppx_ocv_dis_optical_flow_get_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
       ]
     },
     {
@@ -1041,7 +1041,7 @@
         "jyppx_ocv_dis_optical_flow_set_float_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Single VariationalRefinementEpsilon"
       ]
     },
     {
@@ -1054,7 +1054,7 @@
         "jyppx_ocv_dis_optical_flow_get_bool_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
       ]
     },
     {
@@ -1067,7 +1067,7 @@
         "jyppx_ocv_dis_optical_flow_set_bool_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseMeanNormalization"
       ]
     },
     {
@@ -1080,7 +1080,7 @@
         "jyppx_ocv_dis_optical_flow_get_bool_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
       ]
     },
     {
@@ -1093,7 +1093,7 @@
         "jyppx_ocv_dis_optical_flow_set_bool_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|property|instance;get:public;set:public|System.Boolean UseSpatialPropagation"
       ]
     },
     {
@@ -1107,7 +1107,7 @@
         "jyppx_ocv_dis_optical_flow_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.DisOpticalFlow|method|public;static|OpenCvSharp.Video.DisOpticalFlow Create(OpenCvSharp.Video.DisOpticalFlowPreset preset=Fast)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.DisOpticalFlow|method|public;static|JYPPX.OpenCvSharp.Video.DisOpticalFlow Create(JYPPX.OpenCvSharp.Video.DisOpticalFlowPreset preset=Fast)"
       ]
     },
     {
@@ -1129,7 +1129,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_get_size_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.Size WinSize"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size WinSize"
       ]
     },
     {
@@ -1142,7 +1142,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_set_size_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.Size WinSize"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.Size WinSize"
       ]
     },
     {
@@ -1155,7 +1155,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
       ]
     },
     {
@@ -1168,7 +1168,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Int32 MaxLevel"
       ]
     },
     {
@@ -1181,7 +1181,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_get_term_criteria"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria Criteria"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria Criteria"
       ]
     },
     {
@@ -1194,7 +1194,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_set_term_criteria"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Core.TermCriteria Criteria"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Core.TermCriteria Criteria"
       ]
     },
     {
@@ -1207,7 +1207,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Video.OpticalFlowFlags Flags"
       ]
     },
     {
@@ -1220,7 +1220,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|OpenCvSharp.Video.OpticalFlowFlags Flags"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|JYPPX.OpenCvSharp.Video.OpticalFlowFlags Flags"
       ]
     },
     {
@@ -1233,7 +1233,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_get_min_eig_threshold"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
       ]
     },
     {
@@ -1246,7 +1246,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_set_min_eig_threshold"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|property|instance;get:public;set:public|System.Double MinEigThreshold"
       ]
     },
     {
@@ -1260,7 +1260,7 @@
         "jyppx_ocv_sparse_pyr_lk_optical_flow_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.SparsePyrLkOpticalFlow|method|public;static|OpenCvSharp.Video.SparsePyrLkOpticalFlow Create(OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,OpenCvSharp.Core.TermCriteria? criteria=null,OpenCvSharp.Video.OpticalFlowFlags flags=None,System.Double minEigThreshold=0.0001)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow|method|public;static|JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow Create(JYPPX.OpenCvSharp.Core.Size? winSize=null,System.Int32 maxLevel=3,JYPPX.OpenCvSharp.Core.TermCriteria? criteria=null,JYPPX.OpenCvSharp.Video.OpticalFlowFlags flags=None,System.Double minEigThreshold=0.0001)"
       ]
     },
     {
@@ -1282,7 +1282,7 @@
         "jyppx_ocv_video_tracker_init"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Tracker|method|public;instance|System.Void Init(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect boundingBox)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Tracker|method|public;instance|System.Void Init(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect boundingBox)"
       ]
     },
     {
@@ -1295,7 +1295,7 @@
         "jyppx_ocv_video_tracker_update"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Tracker|method|public;instance|System.Boolean Update(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Core.Rect boundingBox)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Tracker|method|public;instance|System.Boolean Update(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.Core.Rect boundingBox)"
       ]
     },
     {
@@ -1308,7 +1308,7 @@
         "jyppx_ocv_video_tracker_get_tracking_score"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.Tracker|property|instance;get:public|System.Single TrackingScore"
+        "MEMBER|JYPPX.OpenCvSharp.Video.Tracker|property|instance;get:public|System.Single TrackingScore"
       ]
     },
     {
@@ -1339,7 +1339,7 @@
         "jyppx_ocv_video_tracker_mil_get_default_params"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.TrackerMILParams|property|static;get:public|OpenCvSharp.Video.TrackerMILParams Default"
+        "MEMBER|JYPPX.OpenCvSharp.Video.TrackerMILParams|property|static;get:public|JYPPX.OpenCvSharp.Video.TrackerMILParams Default"
       ]
     },
     {
@@ -1353,7 +1353,7 @@
         "jyppx_ocv_video_tracker_release_handle"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.TrackerMIL|method|public;static|OpenCvSharp.Video.TrackerMIL Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Video.TrackerMIL|method|public;static|JYPPX.OpenCvSharp.Video.TrackerMIL Create()"
       ]
     },
     {
@@ -1483,7 +1483,7 @@
         "jyppx_ocv_background_subtractor_apply"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
       ]
     },
     {
@@ -1496,7 +1496,7 @@
         "jyppx_ocv_background_subtractor_apply_with_known_foreground"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat knownForegroundMask,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
       ]
     },
     {
@@ -1509,7 +1509,7 @@
         "jyppx_ocv_background_subtractor_get_background_image"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void GetBackgroundImage(OpenCvSharp.Core.Mat backgroundImage)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void GetBackgroundImage(JYPPX.OpenCvSharp.Core.Mat backgroundImage)"
       ]
     },
     {
@@ -1531,7 +1531,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_history"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 History"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 History"
       ]
     },
     {
@@ -1544,7 +1544,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_history"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 History"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 History"
       ]
     },
     {
@@ -1557,7 +1557,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_n_mixtures"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 NMixtures"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 NMixtures"
       ]
     },
     {
@@ -1570,7 +1570,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_n_mixtures"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 NMixtures"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 NMixtures"
       ]
     },
     {
@@ -1583,7 +1583,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double BackgroundRatio"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double BackgroundRatio"
       ]
     },
     {
@@ -1596,7 +1596,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double BackgroundRatio"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double BackgroundRatio"
       ]
     },
     {
@@ -1609,7 +1609,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThreshold"
       ]
     },
     {
@@ -1622,7 +1622,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThreshold"
       ]
     },
     {
@@ -1635,7 +1635,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThresholdGen"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThresholdGen"
       ]
     },
     {
@@ -1648,7 +1648,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThresholdGen"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarThresholdGen"
       ]
     },
     {
@@ -1661,7 +1661,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarInit"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarInit"
       ]
     },
     {
@@ -1674,7 +1674,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarInit"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarInit"
       ]
     },
     {
@@ -1687,7 +1687,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMin"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMin"
       ]
     },
     {
@@ -1700,7 +1700,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMin"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMin"
       ]
     },
     {
@@ -1713,7 +1713,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMax"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMax"
       ]
     },
     {
@@ -1726,7 +1726,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMax"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double VarMax"
       ]
     },
     {
@@ -1739,7 +1739,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ComplexityReductionThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ComplexityReductionThreshold"
       ]
     },
     {
@@ -1752,7 +1752,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ComplexityReductionThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ComplexityReductionThreshold"
       ]
     },
     {
@@ -1765,7 +1765,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_detect_shadows"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Boolean DetectShadows"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Boolean DetectShadows"
       ]
     },
     {
@@ -1778,7 +1778,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_detect_shadows"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Boolean DetectShadows"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Boolean DetectShadows"
       ]
     },
     {
@@ -1791,7 +1791,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 ShadowValue"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 ShadowValue"
       ]
     },
     {
@@ -1804,7 +1804,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 ShadowValue"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Int32 ShadowValue"
       ]
     },
     {
@@ -1817,7 +1817,7 @@
         "jyppx_ocv_background_subtractor_mog2_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ShadowThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ShadowThreshold"
       ]
     },
     {
@@ -1830,7 +1830,7 @@
         "jyppx_ocv_background_subtractor_mog2_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ShadowThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|property|instance;get:public;set:public|System.Double ShadowThreshold"
       ]
     },
     {
@@ -1843,7 +1843,7 @@
         "jyppx_ocv_background_subtractor_apply"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
       ]
     },
     {
@@ -1856,7 +1856,7 @@
         "jyppx_ocv_background_subtractor_apply_with_known_foreground"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Mat knownForegroundMask,OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractor|method|public;instance|System.Void Apply(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat knownForegroundMask,JYPPX.OpenCvSharp.Core.Mat fgmask,System.Double learningRate=-1)"
       ]
     },
     {
@@ -1870,7 +1870,7 @@
         "jyppx_ocv_background_subtractor_release_handle"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorMOG2|method|public;static|OpenCvSharp.Video.BackgroundSubtractorMOG2 Create(System.Int32 history=500,System.Double varThreshold=16,System.Boolean detectShadows=true)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2|method|public;static|JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2 Create(System.Int32 history=500,System.Double varThreshold=16,System.Boolean detectShadows=true)"
       ]
     },
     {
@@ -1892,7 +1892,7 @@
         "jyppx_ocv_background_subtractor_knn_get_history"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 History"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 History"
       ]
     },
     {
@@ -1905,7 +1905,7 @@
         "jyppx_ocv_background_subtractor_knn_set_history"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 History"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 History"
       ]
     },
     {
@@ -1918,7 +1918,7 @@
         "jyppx_ocv_background_subtractor_knn_get_n_samples"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 NSamples"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 NSamples"
       ]
     },
     {
@@ -1931,7 +1931,7 @@
         "jyppx_ocv_background_subtractor_knn_set_n_samples"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 NSamples"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 NSamples"
       ]
     },
     {
@@ -1944,7 +1944,7 @@
         "jyppx_ocv_background_subtractor_knn_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double Dist2Threshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double Dist2Threshold"
       ]
     },
     {
@@ -1957,7 +1957,7 @@
         "jyppx_ocv_background_subtractor_knn_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double Dist2Threshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double Dist2Threshold"
       ]
     },
     {
@@ -1970,7 +1970,7 @@
         "jyppx_ocv_background_subtractor_knn_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 KnnSamples"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 KnnSamples"
       ]
     },
     {
@@ -1983,7 +1983,7 @@
         "jyppx_ocv_background_subtractor_knn_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 KnnSamples"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 KnnSamples"
       ]
     },
     {
@@ -1996,7 +1996,7 @@
         "jyppx_ocv_background_subtractor_knn_get_detect_shadows"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Boolean DetectShadows"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Boolean DetectShadows"
       ]
     },
     {
@@ -2009,7 +2009,7 @@
         "jyppx_ocv_background_subtractor_knn_set_detect_shadows"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Boolean DetectShadows"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Boolean DetectShadows"
       ]
     },
     {
@@ -2022,7 +2022,7 @@
         "jyppx_ocv_background_subtractor_knn_get_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 ShadowValue"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 ShadowValue"
       ]
     },
     {
@@ -2035,7 +2035,7 @@
         "jyppx_ocv_background_subtractor_knn_set_int_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 ShadowValue"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Int32 ShadowValue"
       ]
     },
     {
@@ -2048,7 +2048,7 @@
         "jyppx_ocv_background_subtractor_knn_get_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double ShadowThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double ShadowThreshold"
       ]
     },
     {
@@ -2061,7 +2061,7 @@
         "jyppx_ocv_background_subtractor_knn_set_double_property"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double ShadowThreshold"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|property|instance;get:public;set:public|System.Double ShadowThreshold"
       ]
     },
     {
@@ -2075,7 +2075,7 @@
         "jyppx_ocv_background_subtractor_release_handle"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Video.BackgroundSubtractorKNN|method|public;static|OpenCvSharp.Video.BackgroundSubtractorKNN Create(System.Int32 history=500,System.Double dist2Threshold=400,System.Boolean detectShadows=true)"
+        "MEMBER|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN|method|public;static|JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN Create(System.Int32 history=500,System.Double dist2Threshold=400,System.Boolean detectShadows=true)"
       ]
     }
   ]

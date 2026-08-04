@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Reg
+namespace JYPPX.OpenCvSharp.Reg
 {
     /// <summary>
     /// Registration map that models a 2D translation.

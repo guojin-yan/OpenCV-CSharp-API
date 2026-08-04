@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp
+namespace JYPPX.OpenCvSharp
 {
     /// <summary>
     /// Provides build and package information for OpenCV CSharp API.
@@ -42,20 +42,6 @@ namespace OpenCvSharp
         /// 获取当前 managed 包使用的版本中立主 native 库名称。
         /// </summary>
         public const string CurrentNativeLibraryName = "JYPPX.OpenCV.Native";
-
-        /// <summary>
-        /// Gets the compatibility native library copy name retained for earlier fixed-major consumers.
-        /// 获取为早期固定大版本消费者保留的 compatibility native 库副本名称。
-        /// </summary>
-        public const string LegacyNativeLibraryName = "OpenCv5Sharp.Native";
-
-        /// <summary>
-        /// Gets the existing-caller build-info property value.
-        /// New code should prefer <see cref="CurrentNativeLibraryName"/>.
-        /// 获取既有调用方 build-info 属性值。
-        /// 新增代码应优先使用 <see cref="CurrentNativeLibraryName"/>。
-        /// </summary>
-        public const string NativeLibraryName = LegacyNativeLibraryName;
 
         /// <summary>
         /// Gets the target framework used by the current assembly build.
@@ -187,98 +173,6 @@ namespace OpenCvSharp
                     "Native OpenCV runtime version " + nativeVersion +
                     " does not match managed target version " + OpenCvVersion + ".");
             }
-        }
-    }
-
-    /// <summary>
-    /// Preserves the OpenCv5Sharp build-info facade only for existing callers.
-    /// 仅为既有 OpenCv5Sharp 构建信息调用方保留 build-info facade。
-    /// </summary>
-    public static class OpenCv5SharpBuildInfo // Compatibility facade for existing callers.
-    {
-        /// <summary>
-        /// Gets the managed package identifier.
-        /// 获取 managed 主包标识。
-        /// </summary>
-        public const string ManagedPackageId = OpenCvSharpBuildInfo.ManagedPackageId;
-
-        /// <summary>
-        /// Gets the runtime package identifier prefix; the RID is appended by runtime packages.
-        /// 获取 runtime 包标识前缀；runtime 包会追加 RID。
-        /// </summary>
-        public const string RuntimePackageIdPrefix = OpenCvSharpBuildInfo.RuntimePackageIdPrefix;
-
-        /// <summary>
-        /// Gets the OpenCV version targeted by this package.
-        /// 获取当前包适配的 OpenCV 版本。
-        /// </summary>
-        public const string OpenCvVersion = OpenCvSharpBuildInfo.OpenCvVersion;
-
-        /// <summary>
-        /// Gets package version metadata through the existing-caller facade.
-        /// The forwarded value preserves the OpenCV runtime identity and package revision without changing version-neutral package identifiers.
-        /// 通过既有调用方 facade 获取当前 build-info 包版本元数据。
-        /// 转发值保留 OpenCV runtime 身份和包修订号，不改变版本中性的包标识。
-        /// </summary>
-        public const string PackageVersion = OpenCvSharpBuildInfo.PackageVersion;
-
-        /// <summary>
-        /// Gets the existing-caller facade view of the current version-neutral native library name.
-        /// The value is forwarded from the current build-info surface; legacy loader compatibility remains exposed through <see cref="LegacyNativeLibraryName"/> and <see cref="NativeLibraryName"/>.
-        /// 获取当前版本中立 native 库名称的既有调用方 facade 视图。
-        /// 该值转发自当前 build-info 接口面；legacy loader 兼容性仍通过 <see cref="LegacyNativeLibraryName"/> 和 <see cref="NativeLibraryName"/> 暴露。
-        /// </summary>
-        public const string CurrentNativeLibraryName = OpenCvSharpBuildInfo.CurrentNativeLibraryName;
-
-        /// <summary>
-        /// Gets the compatibility native library copy name retained for earlier fixed-major consumers.
-        /// 获取为早期固定大版本消费者保留的 compatibility native 库副本名称。
-        /// </summary>
-        public const string LegacyNativeLibraryName = OpenCvSharpBuildInfo.LegacyNativeLibraryName;
-
-        /// <summary>
-        /// Gets the existing-caller build-info property value.
-        /// New code should prefer <see cref="CurrentNativeLibraryName"/>.
-        /// 获取既有调用方 build-info 属性值。
-        /// 新增代码应优先使用 <see cref="CurrentNativeLibraryName"/>。
-        /// </summary>
-        public const string NativeLibraryName = OpenCvSharpBuildInfo.NativeLibraryName;
-
-        /// <summary>
-        /// Gets the target framework used by the current assembly build.
-        /// 获取当前程序集构建所使用的目标框架。
-        /// </summary>
-        public static string TargetFramework
-        {
-            get { return OpenCvSharpBuildInfo.TargetFramework; }
-        }
-
-        /// <summary>
-        /// Gets a display string containing package and OpenCV version information.
-        /// 获取包含包版本和 OpenCV 版本的显示字符串。
-        /// </summary>
-        /// <returns>A human-readable version string. 人类可读的版本字符串。</returns>
-        public static string GetDisplayString()
-        {
-            return OpenCvSharpBuildInfo.GetDisplayString();
-        }
-
-        /// <summary>Gets the loaded native OpenCV runtime version through the compatibility facade. 通过 compatibility facade 获取已加载 native OpenCV runtime 版本。</summary>
-        public static string GetNativeOpenCvVersion()
-        {
-            return OpenCvSharpBuildInfo.GetNativeOpenCvVersion();
-        }
-
-        /// <summary>Gets native runtime compatibility through the compatibility facade. 通过 compatibility facade 获取 native runtime 兼容性。</summary>
-        public static bool IsNativeOpenCvVersionCompatible()
-        {
-            return OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible();
-        }
-
-        /// <summary>Verifies native runtime compatibility through the compatibility facade. 通过 compatibility facade 验证 native runtime 兼容性。</summary>
-        public static void VerifyNativeOpenCvVersionCompatibility()
-        {
-            OpenCvSharpBuildInfo.VerifyNativeOpenCvVersionCompatibility();
         }
     }
 }

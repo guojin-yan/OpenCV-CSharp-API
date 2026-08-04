@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.XPhoto
+namespace JYPPX.OpenCvSharp.XPhoto
 {
     internal static class XPhotoStringConvert
     {

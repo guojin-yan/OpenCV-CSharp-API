@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Stitching;
 
-namespace OpenCvSharp.Tests.Stitching
+namespace JYPPX.OpenCvSharp.Tests.Stitching
 {
     public sealed class StitcherTests
     {
@@ -149,7 +149,7 @@ namespace OpenCvSharp.Tests.Stitching
                 Assert.Throws<ObjectDisposedException>(() => stitcher.WaveCorrection);
                 Assert.Throws<ObjectDisposedException>(() => stitcher.WaveCorrection = true);
                 Assert.Throws<ObjectDisposedException>(() => stitcher.InterpolationFlags);
-                Assert.Throws<ObjectDisposedException>(() => stitcher.InterpolationFlags = OpenCvSharp.ImgProc.InterpolationFlags.Linear);
+                Assert.Throws<ObjectDisposedException>(() => stitcher.InterpolationFlags = JYPPX.OpenCvSharp.ImgProc.InterpolationFlags.Linear);
                 Assert.Throws<ObjectDisposedException>(() => stitcher.WaveCorrectKind);
                 Assert.Throws<ObjectDisposedException>(() => stitcher.WaveCorrectKind = WaveCorrectKind.Auto);
                 Assert.Throws<ObjectDisposedException>(() => stitcher.EstimateTransform(new[] { image }));
@@ -183,7 +183,7 @@ namespace OpenCvSharp.Tests.Stitching
                 stitcher.CompositingResol = -1.0;
                 stitcher.PanoConfidenceThresh = 0.5;
                 stitcher.WaveCorrection = true;
-                stitcher.InterpolationFlags = OpenCvSharp.ImgProc.InterpolationFlags.Linear;
+                stitcher.InterpolationFlags = JYPPX.OpenCvSharp.ImgProc.InterpolationFlags.Linear;
                 stitcher.WaveCorrectKind = WaveCorrectKind.Auto;
 
                 StitcherStatus status = stitcher.Stitch(new[] { first, second }, pano);
@@ -194,7 +194,7 @@ namespace OpenCvSharp.Tests.Stitching
                 Assert.Equal(-1.0, stitcher.CompositingResol, 3);
                 Assert.Equal(0.5, stitcher.PanoConfidenceThresh, 3);
                 Assert.True(stitcher.WaveCorrection);
-                Assert.Equal(OpenCvSharp.ImgProc.InterpolationFlags.Linear, stitcher.InterpolationFlags);
+                Assert.Equal(JYPPX.OpenCvSharp.ImgProc.InterpolationFlags.Linear, stitcher.InterpolationFlags);
                 Assert.Equal(WaveCorrectKind.Auto, stitcher.WaveCorrectKind);
                 Assert.NotNull(stitcher.GetComponent());
                 Assert.NotNull(stitcher.GetCameras());

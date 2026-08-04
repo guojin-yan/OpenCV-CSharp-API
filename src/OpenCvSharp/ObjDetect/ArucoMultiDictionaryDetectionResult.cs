@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>Pairs a marker detection result with the source dictionary index for each marker.</summary>
     public sealed class ArucoMultiDictionaryDetectionResult

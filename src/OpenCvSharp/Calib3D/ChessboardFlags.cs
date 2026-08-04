@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Chessboard detection flags used by OpenCV calibration pattern APIs.

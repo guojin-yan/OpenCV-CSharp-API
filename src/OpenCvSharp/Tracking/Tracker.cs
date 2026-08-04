@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking
+namespace JYPPX.OpenCvSharp.Tracking
 {
     /// <summary>
     /// Base wrapper for modern OpenCV tracking trackers.

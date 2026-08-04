@@ -1,10 +1,10 @@
 # Tutorial Series / 系列教程
 
-This series is the primary learning path for the first OpenCV CSharp API release. Every article maps to a deterministic command in `samples/ConsoleSamples`, uses generated input, runs without a camera or desktop window, and writes a PNG that can be inspected in local or CI environments.
+This series is the primary learning path for the first OpenCV CSharp API release. Tutorials 01-06 map to deterministic commands in `samples/ConsoleSamples`, use generated input, run without a camera or desktop window, and write inspectable PNG files. Tutorial 07 uses `samples/AndroidSmoke` to build an APK and execute a package-owned native OpenCV call on an emulator.
 
-本系列是 OpenCV CSharp API 首版的主要学习路径。每篇文章都对应 `samples/ConsoleSamples` 中一个可重复执行的命令，使用生成输入，不依赖相机或桌面窗口，并输出可在本地或 CI 中检查的 PNG。
+本系列是 OpenCV CSharp API 首版的主要学习路径。教程 01-06 对应 `samples/ConsoleSamples` 中可重复执行的命令，使用生成输入，不依赖相机或桌面窗口，并输出可检查的 PNG。教程 07 使用 `samples/AndroidSmoke` 构建 APK，并在模拟器中执行 package-owned native OpenCV 调用。
 
-![Six OpenCV CSharp API tutorial workflows](../images/showcase/showcase-overview.png)
+![Six visual OpenCV CSharp API tutorial workflows](../images/showcase/showcase-overview.png)
 
 ## Learning Path / 学习路线
 
@@ -16,6 +16,7 @@ This series is the primary learning path for the first OpenCV CSharp API release
 | 04 | [ORB Features / ORB 特征](tutorial-04-orb-features.md) | `tutorial features` | `orb-features.png` | full |
 | 05 | [Template Matching / 模板匹配](tutorial-05-template-matching.md) | `tutorial template` | `template-match.png` | mini or full |
 | 06 | [KNN Classification / KNN 分类](tutorial-06-knn-classification.md) | `tutorial ml` | `knn-classification.png` | full |
+| 07 | [Android Runtime And Native Loading / Android Runtime 与原生加载](tutorial-07-android-runtime.md) | `dotnet build` + `adb` | APK native `PASS` marker | Android x64/x86 mini or full |
 
 ## Run The Series / 运行全系列
 

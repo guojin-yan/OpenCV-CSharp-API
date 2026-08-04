@@ -55,29 +55,10 @@ function Add-BuildListModule {
 function Get-DefaultOpenCvSourceRoot {
     param(
         [Parameter(Mandatory = $true)]
-        [string]$WorkspaceRoot,
-        [Parameter(Mandatory = $true)]
-        [string]$OpenCvVersion
+        [string]$WorkspaceRoot
     )
 
-    # Prefer the version-neutral workspace source root when it exists.
-    $neutralSourceRoot = Join-Path $WorkspaceRoot "opencv-source"
-    if (Test-Path $neutralSourceRoot) {
-        return $neutralSourceRoot
-    }
-
-    $versionMatch = [regex]::Match($OpenCvVersion, "^(\d+)(?:\.|$)")
-    if (-not $versionMatch.Success) {
-        throw "OpenCvVersion must start with a numeric major version: $OpenCvVersion"
-    }
-
-    # Use the major-version source directory only when an existing local checkout still uses that older layout.
-    $legacyMajorSourceRoot = Join-Path $WorkspaceRoot "opencv$($versionMatch.Groups[1].Value)-source code"
-    if (Test-Path $legacyMajorSourceRoot) {
-        return $legacyMajorSourceRoot
-    }
-
-    return $neutralSourceRoot
+    return Join-Path $WorkspaceRoot "opencv-source"
 }
 
 function Get-RuntimeMatrix {
@@ -277,7 +258,7 @@ $Generator = $buildTarget.Generator
 $Platform = $buildTarget.Platform
 
 if ([string]::IsNullOrWhiteSpace($OpenCvSourceRoot)) {
-    $OpenCvSourceRoot = Get-DefaultOpenCvSourceRoot -WorkspaceRoot $WorkspaceRoot -OpenCvVersion $OpenCvVersion
+    $OpenCvSourceRoot = Get-DefaultOpenCvSourceRoot -WorkspaceRoot $WorkspaceRoot
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvInstallRoot)) {

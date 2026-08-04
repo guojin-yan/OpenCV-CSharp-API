@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XPhoto
+namespace JYPPX.OpenCvSharp.XPhoto
 {
     /// <summary>
     /// Entry points for OpenCV xphoto functions.

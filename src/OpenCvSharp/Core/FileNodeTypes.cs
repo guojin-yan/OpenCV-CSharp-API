@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>Describes the scalar or collection shape of a FileNode.</summary>
     [Flags]

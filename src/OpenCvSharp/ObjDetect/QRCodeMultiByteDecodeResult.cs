@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>Represents a multi-code QR decode result whose payloads retain their original bytes.</summary>
     public sealed class QRCodeMultiByteDecodeResult

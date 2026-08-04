@@ -25,7 +25,7 @@ The first boundary contains:
 The managed API is exposed under:
 
 ```csharp
-OpenCvSharp.ImgCodecs.Cv2
+JYPPX.OpenCvSharp.ImgCodecs.Cv2
 ```
 
 ## ABI Design

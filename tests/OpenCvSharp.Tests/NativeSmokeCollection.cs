@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Tests
+namespace JYPPX.OpenCvSharp.Tests
 {
     [CollectionDefinition(Name, DisableParallelization = true)]
     public sealed class NativeSmokeCollection

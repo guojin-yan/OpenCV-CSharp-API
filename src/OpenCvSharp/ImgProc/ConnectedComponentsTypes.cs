@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies connected-components statistics columns compatible with OpenCV <c>cv::ConnectedComponentsTypes</c>.

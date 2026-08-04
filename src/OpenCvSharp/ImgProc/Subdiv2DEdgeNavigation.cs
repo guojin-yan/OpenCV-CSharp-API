@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Specifies quad-edge navigation relative to an edge. 指定相对于一条边的 quad-edge 导航方向。</summary>
     public enum Subdiv2DEdgeNavigation

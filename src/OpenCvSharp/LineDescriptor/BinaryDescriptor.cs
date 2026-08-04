@@ -1,12 +1,12 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
 #if NETCOREAPP3_1_OR_GREATER
 using System.Buffers;
 #endif
 
-namespace OpenCvSharp.LineDescriptor
+namespace JYPPX.OpenCvSharp.LineDescriptor
 {
     /// <summary>
     /// Detects key lines and computes OpenCV line_descriptor binary descriptors.

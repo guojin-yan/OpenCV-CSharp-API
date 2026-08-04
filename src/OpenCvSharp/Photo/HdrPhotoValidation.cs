@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     internal static class HdrPhotoValidation
     {

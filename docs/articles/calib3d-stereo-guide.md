@@ -21,8 +21,8 @@
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
 
 namespace StereoBMSample
 {
@@ -63,8 +63,8 @@ OpenCV `StereoBM` returns fixed-point disparity values. `StereoBM.DispShift` and
 OpenCV `StereoBM` 返回定点视差值。`StereoBM.DispShift` 和 `StereoBM.DispScale` 暴露了对应 OpenCV 常量，方便显式转换。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
 
 namespace DisparityScaleSample
 {
@@ -93,8 +93,8 @@ For a complete stereo pipeline, use `Calib3D.Cv2.StereoCalibrate`, then `StereoR
 完整双目流程中，应先使用 `Calib3D.Cv2.StereoCalibrate`，再使用 `StereoRectify` 或 `StereoRectifyUncalibrated` 进行校正，最后执行块匹配。校正得到的有效像素 ROI 可以赋值给 `ROI1` 和 `ROI2`。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
 
 namespace StereoROIConfigurationSample
 {

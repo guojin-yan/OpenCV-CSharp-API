@@ -1,8 +1,8 @@
 # XImgProc Fourier Guide / XImgProc Fourier 指南
 
-`OpenCvSharp.XImgProc` wraps OpenCV contrib Fourier descriptor utilities for closed contours.
+`JYPPX.OpenCvSharp.XImgProc` wraps OpenCV contrib Fourier descriptor utilities for closed contours.
 
-`OpenCvSharp.XImgProc` 封装 OpenCV contrib 中面向闭合轮廓的 Fourier descriptor 工具。
+`JYPPX.OpenCvSharp.XImgProc` 封装 OpenCV contrib 中面向闭合轮廓的 Fourier descriptor 工具。
 
 ## Scope / 范围
 
@@ -25,9 +25,9 @@ Contour inputs are caller-owned `Mat` values. You can use `Calib3D.Cv2.ToPointMa
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcFourierExample
 {

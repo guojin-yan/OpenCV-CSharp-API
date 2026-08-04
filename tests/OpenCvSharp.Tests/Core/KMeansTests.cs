@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tests.Core
+namespace JYPPX.OpenCvSharp.Tests.Core
 {
     public class KMeansTests
     {
@@ -119,7 +119,7 @@ namespace OpenCvSharp.Tests.Core
             using (var mismatchedRows = new Mat(3, 2, MatType.CV_8UC1))
             using (var mismatchedType = new Mat(2, 2, MatType.CV_32FC1))
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var dst = new Mat())
             {
                 Assert.Equal(4, blob.Dims);
@@ -144,7 +144,7 @@ namespace OpenCvSharp.Tests.Core
             using (var mismatchedCols = new Mat(2, 3, MatType.CV_8UC1))
             using (var mismatchedType = new Mat(2, 2, MatType.CV_32FC1))
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var dst = new Mat())
             {
                 Assert.Equal(4, blob.Dims);
@@ -170,7 +170,7 @@ namespace OpenCvSharp.Tests.Core
             using (var nonFloat = new Mat(2, 2, MatType.CV_8UC1))
             using (var tooFewSamples = new Mat(1, 1, MatType.CV_32FC1))
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             {
                 Assert.Equal(4, blob.Dims);
 

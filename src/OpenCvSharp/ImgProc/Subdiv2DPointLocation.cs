@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Describes where a point lies in a Delaunay subdivision. 描述点在 Delaunay 细分中的位置。</summary>
     public enum Subdiv2DPointLocation

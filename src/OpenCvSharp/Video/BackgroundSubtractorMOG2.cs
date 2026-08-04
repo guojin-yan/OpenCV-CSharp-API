@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>
     /// Gaussian-mixture background subtractor compatible with OpenCV <c>cv::BackgroundSubtractorMOG2</c>.

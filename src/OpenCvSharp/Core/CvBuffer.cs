@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Provides buffer helpers used by image and matrix data paths.

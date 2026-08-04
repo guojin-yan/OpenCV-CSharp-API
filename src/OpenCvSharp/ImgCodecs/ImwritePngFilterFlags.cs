@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>
     /// Specifies PNG filter values for <see cref="ImwriteFlags.PngFilter"/>.

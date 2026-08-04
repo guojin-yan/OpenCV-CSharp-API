@@ -7,8 +7,8 @@ The three selected families account for 83 parser rows, 13 public types, 110 pub
 ## Dense Flow
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Video;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Video;
 
 using Mat first = LoadFirstGrayFrame();
 using Mat second = LoadSecondGrayFrame();
@@ -56,9 +56,9 @@ The returned point array and the status/error arrays are independently managed. 
 ## ECC Registration
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Video;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Video;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
 double correlation = VideoCv2.ComputeECC(reference, sample, inputMask);
 
@@ -80,8 +80,8 @@ The allocating overload returns `ECCRegistrationResult`, which independently own
 ## Main Video TrackerMIL
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Video;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Video;
 
 using TrackerMIL tracker = TrackerMIL.Create(TrackerMILParams.Default);
 var box = new Rect(20, 22, 20, 20);
@@ -89,7 +89,7 @@ tracker.Init(firstFrame, box);
 bool found = tracker.Update(nextFrame, ref box);
 ```
 
-This `OpenCvSharp.Video.TrackerMIL` is separate from contrib and legacy Tracking wrappers. It owns an opaque `cv::Ptr<cv::Tracker>` through a safe handle, and the native factory copies the complete parameter value. `Init` requires a non-empty two-dimensional frame and a positive rectangle fully contained in that frame. `Update` before successful initialization throws without entering OpenCV, avoiding the upstream null-state dereference.
+This `JYPPX.OpenCvSharp.Video.TrackerMIL` is separate from contrib and legacy Tracking wrappers. It owns an opaque `cv::Ptr<cv::Tracker>` through a safe handle, and the native factory copies the complete parameter value. `Init` requires a non-empty two-dimensional frame and a positive rectangle fully contained in that frame. `Update` before successful initialization throws without entering OpenCV, avoiding the upstream null-state dereference.
 
 The update rectangle is written only when OpenCV reports success. A false result leaves the caller value unchanged. `TrackingScore` exposes the base implementation; OpenCV 5.0.0 reports `-1` for TrackerMIL. Disposal is idempotent, clears managed initialization state, and makes subsequent operations throw `ObjectDisposedException`.
 

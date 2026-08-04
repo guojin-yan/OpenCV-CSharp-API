@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>
     /// Specifies OpenCV ML error kinds.

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Training algorithms supported by <see cref="ANN_MLP"/>.</summary>
     public enum ANN_MLPTrainingMethods

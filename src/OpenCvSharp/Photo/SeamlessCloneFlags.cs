@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     /// <summary>
     /// Seamless clone modes from OpenCV photo module.

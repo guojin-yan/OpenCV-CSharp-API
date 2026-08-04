@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// Represents a HighGUI trackbar registration and keeps callback state alive.

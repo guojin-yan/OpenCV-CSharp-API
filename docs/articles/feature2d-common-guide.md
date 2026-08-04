@@ -24,7 +24,7 @@ Every implemented detector exposes the same OpenCV metadata shape:
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -56,8 +56,8 @@ Batch detection is a managed helper over the single-image `Detect` path. Image c
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -94,7 +94,7 @@ This rule also applies when a detector is used through the base class:
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {

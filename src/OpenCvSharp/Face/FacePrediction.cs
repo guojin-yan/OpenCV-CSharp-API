@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Face
+namespace JYPPX.OpenCvSharp.Face
 {
     /// <summary>
     /// Represents a face recognizer prediction.

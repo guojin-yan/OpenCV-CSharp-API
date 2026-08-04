@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Saliency
+namespace JYPPX.OpenCvSharp.Saliency
 {
     /// <summary>
     /// Bounding box returned by OpenCV contrib ObjectnessBING as min/max coordinates.

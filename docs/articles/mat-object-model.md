@@ -1,8 +1,8 @@
 # Mat Object Model / Mat 对象模型
 
-`OpenCvSharp.Core.Mat` is the managed object wrapper for OpenCV `cv::Mat`. It owns an opaque native `jyppx_ocv_mat*` handle and releases it through the native C ABI.
+`JYPPX.OpenCvSharp.Core.Mat` is the managed object wrapper for OpenCV `cv::Mat`. It owns an opaque native `jyppx_ocv_mat*` handle and releases it through the native C ABI.
 
-`OpenCvSharp.Core.Mat` 是 OpenCV `cv::Mat` 的 managed 对象包装。它持有 opaque native `jyppx_ocv_mat*` 句柄，并通过 native C ABI 释放。
+`JYPPX.OpenCvSharp.Core.Mat` 是 OpenCV `cv::Mat` 的 managed 对象包装。它持有 opaque native `jyppx_ocv_mat*` 句柄，并通过 native C ABI 释放。
 
 ## Creation / 创建
 
@@ -12,7 +12,7 @@ The first complete `Mat` object batch includes empty matrices, typed allocation,
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {
@@ -47,7 +47,7 @@ namespace Demo
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {
@@ -110,7 +110,7 @@ On `netcoreapp3.1` and newer targets, `Mat` also exposes modern low-copy access 
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {

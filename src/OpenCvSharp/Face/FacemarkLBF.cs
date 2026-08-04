@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Face
+namespace JYPPX.OpenCvSharp.Face
 {
     /// <summary>
     /// OpenCV contrib LBF facemark model.

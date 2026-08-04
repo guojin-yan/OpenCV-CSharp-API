@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>Specifies the implementation preference selected by the OpenCV build.</summary>
     public enum AlgorithmHint

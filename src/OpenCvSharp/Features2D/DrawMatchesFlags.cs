@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Specifies feature drawing flags compatible with OpenCV <c>cv::DrawMatchesFlags</c>.

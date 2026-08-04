@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>Specifies the USAC model score. 指定 USAC 模型评分方法。</summary>
     public enum UsacScoreMethod

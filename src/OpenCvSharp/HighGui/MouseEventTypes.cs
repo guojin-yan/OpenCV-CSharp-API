@@ -1,4 +1,4 @@
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// HighGUI mouse event types compatible with OpenCV <c>cv::MouseEventTypes</c>.

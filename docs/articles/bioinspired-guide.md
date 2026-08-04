@@ -1,8 +1,8 @@
 # BioInspired Guide / BioInspired 指南
 
-`OpenCvSharp.BioInspired` wraps the first OpenCV contrib `bioinspired` Retina, fast tone-mapping, and transient-area segmentation surfaces.
+`JYPPX.OpenCvSharp.BioInspired` wraps the first OpenCV contrib `bioinspired` Retina, fast tone-mapping, and transient-area segmentation surfaces.
 
-`OpenCvSharp.BioInspired` 封装第一批 OpenCV contrib `bioinspired` Retina、fast tone mapping 和 transient-area segmentation 能力。
+`JYPPX.OpenCvSharp.BioInspired` 封装第一批 OpenCV contrib `bioinspired` Retina、fast tone mapping 和 transient-area segmentation 能力。
 
 ## Scope / 范围
 
@@ -22,9 +22,7 @@
 
 `bioinspired` 是可选 OpenCV contrib 模块。构建该模块时 runtime staging 会包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_bioinspired500.dll`。如果某个 runtime 缺少它，managed API 形状仍保持稳定，linked 调用会报告 `NOT_LINKED`。
 
-The local OpenCV 5.0.0 headers expose `Retina.Run(InputArray)`, `Retina.ApplyFastToneMapping(InputArray, OutputArray)`, `RetinaFastToneMapping.ApplyFastToneMapping(InputArray, OutputArray)`, and `TransientAreasSegmentationModule.Run(InputArray, int)`. Those algorithm calls are available in the managed API, but linked smoke is intentionally treated as unstable for this module: default tests and ordinary `OPENCV_CSHARP_NATIVE_SMOKE=1` runs do not create linked BioInspired objects, and `OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE=1` is required for object, metadata, Retina, tone, and transient smoke. The older `OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias.
 
-本地 OpenCV 5.0.0 header 暴露 `Retina.Run(InputArray)`、`Retina.ApplyFastToneMapping(InputArray, OutputArray)`、`RetinaFastToneMapping.ApplyFastToneMapping(InputArray, OutputArray)` 和 `TransientAreasSegmentationModule.Run(InputArray, int)`。这些算法调用在 managed API 中可用，但本模块的 linked smoke 被有意视作不稳定路径：默认测试和普通 `OPENCV_CSHARP_NATIVE_SMOKE=1` 都不会创建 linked BioInspired 对象；object、metadata、Retina、tone 和 transient smoke 都需要额外设置 `OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE=1`。旧的 `OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE=1` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 
 ## Example / 示例
 
@@ -33,9 +31,9 @@ The following example demonstrates real algorithm calls. Keep it out of default 
 下面示例演示真实算法调用。除非正在显式验证 linked BioInspired runtime，否则不要把它放进默认 CI smoke。
 
 ```csharp
-using OpenCvSharp.BioInspired;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.BioInspired;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
 
 internal static class Program
 {

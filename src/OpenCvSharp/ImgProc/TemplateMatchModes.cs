@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Template matching comparison modes. 模板匹配比较模式。</summary>
     public enum TemplateMatchModes

@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking.Legacy
+namespace JYPPX.OpenCvSharp.Tracking.Legacy
 {
     /// <summary>
     /// OpenCV legacy MIL tracker wrapper.

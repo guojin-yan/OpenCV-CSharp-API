@@ -1,18 +1,18 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Tracking;
-using OpenCvSharp.Tracking.Legacy;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
-using LegacyMultiTracker = OpenCvSharp.Tracking.Legacy.MultiTracker;
-using LegacyTrackerCSRT = OpenCvSharp.Tracking.Legacy.TrackerCSRT;
-using LegacyTrackerKCF = OpenCvSharp.Tracking.Legacy.TrackerKCF;
-using ModernTrackerCSRT = OpenCvSharp.Tracking.TrackerCSRT;
-using ModernTrackerKCF = OpenCvSharp.Tracking.TrackerKCF;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Tracking;
+using JYPPX.OpenCvSharp.Tracking.Legacy;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
+using LegacyMultiTracker = JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker;
+using LegacyTrackerCSRT = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT;
+using LegacyTrackerKCF = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF;
+using ModernTrackerCSRT = JYPPX.OpenCvSharp.Tracking.TrackerCSRT;
+using ModernTrackerKCF = JYPPX.OpenCvSharp.Tracking.TrackerKCF;
 
-namespace OpenCvSharp.Tests.Tracking
+namespace JYPPX.OpenCvSharp.Tests.Tracking
 {
     public sealed class TrackingTests
     {
@@ -771,7 +771,7 @@ namespace OpenCvSharp.Tests.Tracking
                     }
 
                     using (LegacyTrackerKCF legacy = LegacyTrackerKCF.Create(TrackerKCFParams.Default))
-                    using (OpenCvSharp.Tracking.Tracker upgraded = legacy.Upgrade())
+                    using (JYPPX.OpenCvSharp.Tracking.Tracker upgraded = legacy.Upgrade())
                     {
                         legacy.Dispose();
                         upgraded.Init(first, new Rect(6, 7, 8, 8));

@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.IntensityTransform;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.IntensityTransform;
 
-namespace OpenCvSharp.Tests.IntensityTransform
+namespace JYPPX.OpenCvSharp.Tests.IntensityTransform
 {
     public sealed class IntensityTransformTests
     {

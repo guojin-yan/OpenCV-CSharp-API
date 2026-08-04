@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies polar warp modes compatible with OpenCV <c>cv::WarpPolarMode</c>.

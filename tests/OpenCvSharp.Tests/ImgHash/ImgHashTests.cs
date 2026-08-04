@@ -1,10 +1,10 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgHash;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgHash;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.ImgHash
+namespace JYPPX.OpenCvSharp.Tests.ImgHash
 {
     public sealed class ImgHashTests
     {

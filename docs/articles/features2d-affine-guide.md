@@ -12,10 +12,10 @@ managed 封装会在 `AffineFeature` 存活期间保留后端对象引用。释�
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Samples
 {
@@ -85,7 +85,7 @@ Array overloads are available on every target framework. Modern target framework
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {

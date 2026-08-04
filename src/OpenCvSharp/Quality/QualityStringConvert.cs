@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.Quality
+namespace JYPPX.OpenCvSharp.Quality
 {
     internal static class QualityStringConvert
     {

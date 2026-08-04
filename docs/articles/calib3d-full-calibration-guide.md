@@ -1,8 +1,8 @@
 # Calib3D Full Calibration Guide
 
-`OpenCvSharp.Calib3D.Cv2` exposes OpenCV camera calibration through stable grouped point-set marshalling. The managed API accepts `Point3f[][]` object points and `Point2f[][]` image points, while the native ABI keeps OpenCV `InputArrayOfArrays`, `OutputArrayOfArrays`, and `std::vector` inside the C++ boundary.
+`JYPPX.OpenCvSharp.Calib3D.Cv2` exposes OpenCV camera calibration through stable grouped point-set marshalling. The managed API accepts `Point3f[][]` object points and `Point2f[][]` image points, while the native ABI keeps OpenCV `InputArrayOfArrays`, `OutputArrayOfArrays`, and `std::vector` inside the C++ boundary.
 
-`OpenCvSharp.Calib3D.Cv2` 通过稳定的分组点集封送暴露 OpenCV 相机标定能力。managed API 接收 `Point3f[][]` 物点和 `Point2f[][]` 像点，native ABI 将 OpenCV `InputArrayOfArrays`、`OutputArrayOfArrays` 和 `std::vector` 保留在 C++ 边界内部。
+`JYPPX.OpenCvSharp.Calib3D.Cv2` 通过稳定的分组点集封送暴露 OpenCV 相机标定能力。managed API 接收 `Point3f[][]` 物点和 `Point2f[][]` 像点，native ABI 将 OpenCV `InputArrayOfArrays`、`OutputArrayOfArrays` 和 `std::vector` 保留在 C++ 边界内部。
 
 ## APIs / API
 
@@ -121,9 +121,9 @@ finally
 
 ```csharp
 using System;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 namespace Calib3DFullCalibrationSample
 {

@@ -32,20 +32,8 @@ option(OPENCV_CSHARP_BUILD_WITH_OPENCV "Link against an installed OpenCV package
 set(OPENCV_CSHARP_OPENCV_DIR "" CACHE PATH "${OPENCV_CSHARP_OPENCV_DIR_DESCRIPTION}")
 set(OPENCV_CSHARP_OPENCV_BUILD_LIST "${OPENCV_CSHARP_OPENCV_BUILD_LIST_DEFAULT}" CACHE STRING "${OPENCV_CSHARP_OPENCV_BUILD_LIST_DESCRIPTION}")
 
-if(NOT OPENCV_CSHARP_BUILD_WITH_OPENCV_WAS_DEFINED AND DEFINED OPENCV5SHARP_BUILD_WITH_OPENCV)
-    set(OPENCV_CSHARP_BUILD_WITH_OPENCV "${OPENCV5SHARP_BUILD_WITH_OPENCV}" CACHE BOOL "Link against an installed OpenCV package." FORCE)
-endif()
-
-if(NOT OPENCV_CSHARP_OPENCV_DIR_WAS_DEFINED AND DEFINED OPENCV5SHARP_OPENCV_DIR AND NOT "${OPENCV5SHARP_OPENCV_DIR}" STREQUAL "")
-    set(OPENCV_CSHARP_OPENCV_DIR "${OPENCV5SHARP_OPENCV_DIR}" CACHE PATH "${OPENCV_CSHARP_OPENCV_DIR_DESCRIPTION}" FORCE)
-endif()
-
-if(NOT OPENCV_CSHARP_OPENCV_BUILD_LIST_WAS_DEFINED AND DEFINED OPENCV5SHARP_OPENCV_BUILD_LIST AND NOT "${OPENCV5SHARP_OPENCV_BUILD_LIST}" STREQUAL "")
-    set(OPENCV_CSHARP_OPENCV_BUILD_LIST "${OPENCV5SHARP_OPENCV_BUILD_LIST}" CACHE STRING "${OPENCV_CSHARP_OPENCV_BUILD_LIST_DESCRIPTION}" FORCE)
-endif()
-
 if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
-    if(NOT OPENCV_CSHARP_OPENCV_BUILD_LIST_WAS_DEFINED AND (NOT DEFINED OPENCV5SHARP_OPENCV_BUILD_LIST OR "${OPENCV5SHARP_OPENCV_BUILD_LIST}" STREQUAL ""))
+    if(NOT OPENCV_CSHARP_OPENCV_BUILD_LIST_WAS_DEFINED)
         set(OPENCV_CSHARP_OPENCV_BUILD_LIST "${OPENCV_CSHARP_MINI_OPENCV_BUILD_LIST}" CACHE STRING "${OPENCV_CSHARP_OPENCV_BUILD_LIST_DESCRIPTION}" FORCE)
     endif()
 
@@ -59,18 +47,10 @@ if(OPENCV_CSHARP_OPENCV_DIR)
     set(OPENCV_CSHARP_BUILD_WITH_OPENCV ON CACHE BOOL "Link against an installed OpenCV package." FORCE)
 endif()
 
-set(OPENCV5SHARP_BUILD_WITH_OPENCV "${OPENCV_CSHARP_BUILD_WITH_OPENCV}" CACHE BOOL "Existing-build-script compatibility alias for OPENCV_CSHARP_BUILD_WITH_OPENCV." FORCE)
-set(OPENCV5SHARP_OPENCV_DIR "${OPENCV_CSHARP_OPENCV_DIR}" CACHE PATH "Existing-build-script compatibility alias for OPENCV_CSHARP_OPENCV_DIR." FORCE)
-set(OPENCV5SHARP_OPENCV_BUILD_LIST "${OPENCV_CSHARP_OPENCV_BUILD_LIST}" CACHE STRING "Existing-build-script compatibility alias for OPENCV_CSHARP_OPENCV_BUILD_LIST." FORCE)
-
 set(OPENCV_CSHARP_NATIVE_TARGET "JYPPX.OpenCV.Native")
-set(OPENCV_CSHARP_COMPATIBILITY_NATIVE_TARGET "OpenCv5Sharp.Native")
 set(OPENCV_CSHARP_NATIVE_TARGET_DISPLAY_NAME "${OPENCV_CSHARP_NATIVE_TARGET}")
 set(OPENCV_CSHARP_NATIVE_SMOKE_TARGET "${OPENCV_CSHARP_NATIVE_TARGET}Smoke")
-set(OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET "${OPENCV_CSHARP_NATIVE_TARGET}CompatibilitySourceSmoke")
 # JYPPX.OpenCV.Native is the version-neutral primary native target/output.
-# OpenCv5Sharp.Native remains only as a compatibility target and copied loader filename.
-# Keep OPENCV_CSHARP_* variables primary and OPENCV5SHARP_* variables only as existing-build-script compatibility aliases.
 set(OPENCV_CSHARP_MINI_NATIVE_SOURCES
     src/error_state.cpp
     src/version.cpp
@@ -127,12 +107,10 @@ set(OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES
 )
 
 if(OPENCV_CSHARP_RUNTIME_PROFILE STREQUAL "mini")
-    set(OPENCV_CSHARP_NATIVE_ABI_SOURCE generated/legacy_abi_mini.cpp)
-    set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/legacy_abi_mini_manifest.txt)
+    set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/native_abi_mini_manifest.txt)
     set(OPENCV_CSHARP_NATIVE_SOURCES ${OPENCV_CSHARP_MINI_NATIVE_SOURCES})
 else()
-    set(OPENCV_CSHARP_NATIVE_ABI_SOURCE generated/legacy_abi.cpp)
-    set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/legacy_abi_manifest.txt)
+    set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/native_abi_manifest.txt)
     set(OPENCV_CSHARP_NATIVE_SOURCES
         ${OPENCV_CSHARP_MINI_NATIVE_SOURCES}
         ${OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES}
@@ -140,11 +118,8 @@ else()
 endif()
 
 add_library(${OPENCV_CSHARP_NATIVE_TARGET} SHARED
-    ${OPENCV_CSHARP_NATIVE_ABI_SOURCE}
     ${OPENCV_CSHARP_NATIVE_SOURCES}
 )
-
-add_library(${OPENCV_CSHARP_COMPATIBILITY_NATIVE_TARGET} ALIAS ${OPENCV_CSHARP_NATIVE_TARGET})
 
 target_compile_features(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE cxx_std_17)
 
@@ -174,7 +149,6 @@ if(OPENCV_CSHARP_BUILD_WITH_OPENCV)
     target_link_libraries(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE ${OpenCV_LIBS})
     target_include_directories(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE ${OpenCV_INCLUDE_DIRS})
     target_compile_definitions(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE
-        # Keep OPENCV5SHARP_* feature macros only as existing-include-guard compatibility definitions.
         OPENCV_CSHARP_HAS_OPENCV=1
         
     )
@@ -484,22 +458,8 @@ if(ANDROID)
     )
 endif()
 
-# Compatibility loader copy keeps existing binary consumers working; the primary build output remains JYPPX.OpenCV.Native.
-set(
-    OPENCV_CSHARP_COMPATIBILITY_NATIVE_FILE_NAME
-    "${CMAKE_SHARED_LIBRARY_PREFIX}${OPENCV_CSHARP_COMPATIBILITY_NATIVE_TARGET}${CMAKE_SHARED_LIBRARY_SUFFIX}"
-)
-add_custom_command(TARGET ${OPENCV_CSHARP_NATIVE_TARGET} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "$<TARGET_FILE:${OPENCV_CSHARP_NATIVE_TARGET}>"
-        "$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>/${OPENCV_CSHARP_COMPATIBILITY_NATIVE_FILE_NAME}"
-    COMMENT "Creating native loader compatibility copy ${OPENCV_CSHARP_COMPATIBILITY_NATIVE_FILE_NAME}"
-    VERBATIM
-)
-
 enable_testing()
 
-# Smoke/CTest target names derive from the neutral primary target; compatibility source smoke verifies legacy includes without introducing fixed-major test target names.
 add_executable(${OPENCV_CSHARP_NATIVE_SMOKE_TARGET}
     tests/native_smoke.cpp
 )
@@ -512,20 +472,9 @@ endif()
 
 add_test(NAME ${OPENCV_CSHARP_NATIVE_SMOKE_TARGET} COMMAND ${OPENCV_CSHARP_NATIVE_SMOKE_TARGET})
 
-add_executable(${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET}
-    tests/legacy_source_compat_smoke.cpp
-)
-target_link_libraries(${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET} PRIVATE ${OPENCV_CSHARP_NATIVE_TARGET})
-target_include_directories(${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-add_test(
-    NAME ${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET}
-    COMMAND ${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET}
-)
-
 set(
     OPENCV_CSHARP_NATIVE_RUNTIME_TESTS
     ${OPENCV_CSHARP_NATIVE_SMOKE_TARGET}
-    ${OPENCV_CSHARP_COMPATIBILITY_SOURCE_SMOKE_TARGET}
 )
 
 find_program(OPENCV_CSHARP_PWSH_EXECUTABLE NAMES pwsh)
@@ -536,21 +485,10 @@ if(OPENCV_CSHARP_PWSH_EXECUTABLE)
             ${OPENCV_CSHARP_PWSH_EXECUTABLE}
             -NoProfile
             -File
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/Generate-NativeAbiCompatibility.ps1
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/Generate-NativeAbiManifest.ps1
             -RepositoryRoot
             ${CMAKE_CURRENT_SOURCE_DIR}/../..
             -Check
-    )
-
-    add_test(
-        NAME ${OPENCV_CSHARP_NATIVE_TARGET}LegacyIncludeParity
-        COMMAND
-            ${OPENCV_CSHARP_PWSH_EXECUTABLE}
-            -NoProfile
-            -File
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/Test-NativeLegacyIncludeParity.ps1
-            -RepositoryRoot
-            ${CMAKE_CURRENT_SOURCE_DIR}/../..
     )
 
     set(OPENCV_CSHARP_NATIVE_ABI_EXPORT_TEST "${OPENCV_CSHARP_NATIVE_TARGET}AbiExportAudit")
@@ -583,7 +521,7 @@ if(OPENCV_CSHARP_PWSH_EXECUTABLE)
         ${OPENCV_CSHARP_NATIVE_ABI_EXPORT_TEST}
     )
 else()
-    message(WARNING "pwsh was not found. Native ABI generation, legacy include parity, and export checks are disabled.")
+    message(WARNING "pwsh was not found. Native ABI generation and export checks are disabled.")
 endif()
 
 if(UNIX AND NOT APPLE AND OPENCV_CSHARP_BUILD_WITH_OPENCV AND TARGET opencv_core)

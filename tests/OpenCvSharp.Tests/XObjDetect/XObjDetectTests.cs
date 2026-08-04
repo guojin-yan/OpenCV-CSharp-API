@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.XObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XObjDetect;
 
-namespace OpenCvSharp.Tests.XObjDetect
+namespace JYPPX.OpenCvSharp.Tests.XObjDetect
 {
     public sealed class XObjDetectTests
     {

@@ -24,7 +24,7 @@ Only regenerate raw extraction when the pinned OpenCV source or parser changes.
 
 ## Subdiv2D Ownership And Output
 
-`OpenCvSharp.ImgProc.Subdiv2D` owns a native `cv::Subdiv2D` through a `SafeHandle`. Dispose it deterministically. Integer and single-precision rectangles are supported, and `InitDelaunay` can reuse an existing object.
+`JYPPX.OpenCvSharp.ImgProc.Subdiv2D` owns a native `cv::Subdiv2D` through a `SafeHandle`. Dispose it deterministically. Integer and single-precision rectangles are supported, and `InitDelaunay` can reuse an existing object.
 
 ```csharp
 using var subdiv = new Subdiv2D(new Rect2f(0, 0, 640, 480));

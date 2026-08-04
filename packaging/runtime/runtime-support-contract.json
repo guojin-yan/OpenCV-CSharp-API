@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "packageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "androidRuntimeEvidence": "packaging/runtime/android-runtime-evidence.json",
   "realSupport": [
     "alpine.3.20-x64/full",
     "alpine.3.20-x64/mini",
@@ -43,105 +44,65 @@
     {
       "target": "android-arm/full",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "reason": "Authoritative hosted NDK production, ELF audit, same-run packaging, and APK consumption have passed; matching armeabi-v7a device loading evidence is still required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
         "device-or-emulator-loader"
       ]
     },
     {
       "target": "android-arm/mini",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "reason": "Authoritative hosted NDK production, ELF audit, same-run packaging, and APK consumption have passed; matching armeabi-v7a device loading evidence is still required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
         "device-or-emulator-loader"
       ]
     },
     {
       "target": "android-arm64/full",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "reason": "Authoritative hosted NDK production, ELF audit, same-run packaging, and APK consumption have passed; matching arm64-v8a device loading evidence is still required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
         "device-or-emulator-loader"
       ]
     },
     {
       "target": "android-arm64/mini",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and device-class loading evidence are still required.",
+      "reason": "Authoritative hosted NDK production, ELF audit, same-run packaging, and APK consumption have passed; matching arm64-v8a device loading evidence is still required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
         "device-or-emulator-loader"
       ]
     },
     {
       "target": "android-x64/full",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run plus the x86_64 emulator loading smoke are still required.",
+      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86_64 emulator loading rerun are required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
-        "device-or-emulator-loader"
+        "hosted-emulator-loader"
       ]
     },
     {
       "target": "android-x64/mini",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run plus the x86_64 emulator loading smoke are still required.",
+      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86_64 emulator loading rerun are required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
-        "device-or-emulator-loader"
+        "hosted-emulator-loader"
       ]
     },
     {
       "target": "android-x86/full",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and emulator loading evidence are still required.",
+      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86 emulator loading rerun are required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
-        "device-or-emulator-loader"
+        "hosted-emulator-loader"
       ]
     },
     {
       "target": "android-x86/mini",
       "status": "android-evidence-pending",
-      "reason": "NDK producer, unversioned .so packaging, and Android package-consumer paths are implemented; an authoritative hosted run and emulator loading evidence are still required.",
+      "reason": "The native package switched to one neutral loader; an authoritative hosted NDK rebuild, package audit, APK consumption, and x86 emulator loading rerun are required.",
       "requires": [
-        "hosted-ndk-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "android-package-consumer",
-        "android-elf-audit",
-        "device-or-emulator-loader"
+        "hosted-emulator-loader"
       ]
     }
   ],

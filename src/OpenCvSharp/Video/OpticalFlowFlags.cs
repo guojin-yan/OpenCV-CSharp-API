@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>
     /// Optical-flow operation flags compatible with OpenCV video tracking APIs.

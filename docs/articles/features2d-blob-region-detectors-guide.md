@@ -16,8 +16,8 @@ This guide covers blob and region detectors. The current implemented objects are
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {

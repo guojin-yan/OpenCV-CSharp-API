@@ -52,20 +52,15 @@ Version naming note:
 
 - `JYPPX.OpenCV.Native.dll` is the primary version-neutral loader selected by current managed interop declarations.
 - `JYPPX.OpenCV.Native.dll`, `jyppx_ocv_*`, and `OPENCV_CSHARP_STATUS_*` are the primary native loader, ABI, and status names.
-- `OpenCv5Sharp.Native.dll`, `jyppx_ocv5_*`, and `OPENCV5SHARP_STATUS_*` remain existing-binary compatibility contracts for already-compiled managed and native consumers.
-- `OPENCV5SHARP_STATUS_NOT_LINKED` remains an alias to `OPENCV_CSHARP_STATUS_NOT_LINKED`.
 - New generic build or documentation concepts should use version-neutral names and reserve `OpenCV 5.0.0` for current packaged runtime identity or factual upstream runtime artifacts.
 
 - `JYPPX.OpenCV.Native.dll` 是当前 managed interop 声明选择的版本中立主 loader。
 - `JYPPX.OpenCV.Native.dll`、`jyppx_ocv_*` 与 `OPENCV_CSHARP_STATUS_*` 是主 native loader、ABI 和状态名称。
-- `OpenCv5Sharp.Native.dll`、`jyppx_ocv5_*` 与 `OPENCV5SHARP_STATUS_*` 继续作为供已编译 managed 和 native 消费者使用的既有二进制兼容契约保留。
-- `OPENCV5SHARP_STATUS_NOT_LINKED` 继续作为 `OPENCV_CSHARP_STATUS_NOT_LINKED` 的别名。
 - 新增的通用构建或文档概念应使用版本中立名称，只在描述当前打包 runtime 身份或事实性上游 runtime 产物时使用 `OpenCV 5.0.0`。
 
 Rules:
 
 - Primary C exports use the `jyppx_ocv_` prefix.
-- Generated wrappers preserve matching `jyppx_ocv5_*` exports for already-compiled binaries.
 - C++ objects are exposed as opaque handles.
 - C++ exceptions are caught at the native boundary.
 - STL containers never cross the C ABI.
@@ -73,15 +68,11 @@ Rules:
 
 ## CMake Target/Export Boundary / CMake Target/Export 边界
 
-The native CMake project is currently source-tree build only. It builds the primary `JYPPX.OpenCV.Native` target for local wrapper builds and does not install or export a reusable CMake package or SDK target today. The `OpenCv5Sharp.Native` CMake target name is only a compatibility alias to the primary target for existing build scripts and loaders.
 
-native CMake 项目当前只作为 source-tree build surface 使用。它为本地 wrapper build 构建主 `JYPPX.OpenCV.Native` target，当前不 install 或 export 可复用的 CMake package / SDK target。`OpenCv5Sharp.Native` CMake target name 仅作为指向主目标的兼容 alias 保留给既有构建脚本和 loader。
 
 ## CTest/Output Naming Boundary / CTest/Output 命名边界
 
-Native CTest and local build output names are neutral-first. The primary smoke and audit tests derive from `JYPPX.OpenCV.Native`, including `JYPPX.OpenCV.NativeSmoke`, `JYPPX.OpenCV.NativeCompatibilitySourceSmoke`, `JYPPX.OpenCV.NativeAbiGeneratedCheck`, `JYPPX.OpenCV.NativeLegacyIncludeParity`, and `JYPPX.OpenCV.NativeAbiExportAudit`. The `OpenCv5Sharp.Native` loader file remains only the compatibility copy for existing binary consumers.
 
-native CTest 和本地 build output 名称保持 neutral-first。主 smoke 与 audit tests 从 `JYPPX.OpenCV.Native` 派生，包括 `JYPPX.OpenCV.NativeSmoke`、`JYPPX.OpenCV.NativeCompatibilitySourceSmoke`、`JYPPX.OpenCV.NativeAbiGeneratedCheck`、`JYPPX.OpenCV.NativeLegacyIncludeParity` 和 `JYPPX.OpenCV.NativeAbiExportAudit`。`OpenCv5Sharp.Native` loader file 仅作为既有 binary consumers 的兼容副本保留。
 
 ## Runtime Root/PATH Copy Boundary / Runtime Root/PATH Copy 边界
 
@@ -96,7 +87,6 @@ The native project supports two build modes:
 native 项目支持两种构建模式：
 
 - Stub mode: default mode used when OpenCV has not been built or installed. ABI shape and smoke tests still build, but OpenCV-backed APIs return `OPENCV_CSHARP_STATUS_NOT_LINKED`.
-- OpenCV mode: pass the version-neutral `-DOPENCV_CSHARP_OPENCV_DIR=<path-to-OpenCVConfig.cmake-directory>` CMake variable to link against the current OpenCV 5.0.0 build. The older `OPENCV5SHARP_OPENCV_DIR` variable remains accepted only as an existing-build-script compatibility alias.
 - ObjDetect mode: OpenCV mode requires `opencv_objdetect` for QR, barcode, QR encoder, ArUco, GridBoard, ChArUco, and MCC checker APIs. `FaceDetectorYN`, `FaceRecognizerSF`, and future DNN-assisted MCC workflows also require `opencv_dnn` and user-supplied model files.
 - Photo mode: OpenCV mode requires `opencv_photo` for inpainting, denoising, seamless/editing, edge-preserving/sketch/stylization, tonemap/HDR APIs, gamma correction, `ColorCorrectionModel`, and `IntelligentScissorsMB`.
 - Calib mode: OpenCV mode requires `opencv_calib` for full `CalibrateCamera` and `StereoCalibrate` APIs. Existing stereo geometry still stages `opencv_stereo`.
@@ -107,7 +97,7 @@ native 项目支持两种构建模式：
 - Quality mode: OpenCV mode requires contrib `opencv_quality`; BRISQUE also requires `opencv_ml` and caller-supplied model/range files.
 - XPhoto mode: OpenCV mode requires contrib `opencv_xphoto` for white balance, channel gains, DCT/BM3D denoising, and oil painting.
 - ML mode: in the local OpenCV 5.0.0 tree, `opencv_ml` comes from contrib and is required for `TrainData`, `KNearest`, `SVM`, `SVMSGD`, `LogisticRegression`, `NormalBayesClassifier`, `EM`, `DTrees`, `RTrees`, `Boost`, and `ANN_MLP`.
-- ImgHash mode: OpenCV mode requires contrib `opencv_img_hash` for all `OpenCvSharp.ImgHash` objects and one-shot helpers.
+- ImgHash mode: OpenCV mode requires contrib `opencv_img_hash` for all `JYPPX.OpenCvSharp.ImgHash` objects and one-shot helpers.
 - XImgProc mode: OpenCV mode requires contrib `opencv_ximgproc` for local thresholding, edge-aware filters, superpixels, FastLineDetector, disparity WLS helpers, sparse interpolation, EdgeDrawing, EdgeBoxes, ridge/gradient utilities, Fourier descriptors, run-length morphology, ScanSegment, GraphSegmentation, Selective Search, and covariance estimation.
 - OptFlow mode: OpenCV mode requires contrib `opencv_optflow`; several first-batch algorithms can also use the staged contrib `opencv_ximgproc` module at runtime.
 - BgSegm mode: OpenCV mode requires contrib `opencv_bgsegm`; tiny generated-frame smoke checks call paths, not stable background-model quality.
@@ -128,7 +118,6 @@ native 项目支持两种构建模式：
 - AlphaMat mode: OpenCV mode requires contrib `opencv_alphamat`; `infoFlow` uses caller-owned `Mat` image, trimap, and output values.
 - BioInspired mode: OpenCV mode requires contrib `opencv_bioinspired`; Retina, fast tone-mapping, and transient segmentation objects stay behind opaque handles, and parameter groups are flattened deliberately. Ordinary native smoke skips linked BioInspired calls; object creation, metadata, and Retina/tone/transient algorithm execution are guarded by `OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE=1` because tiny linked setup/teardown and inputs can expose local runtime crashes.
 - XStereo mode: OpenCV mode requires contrib `opencv_xstereo`; BinaryBM/BinarySGBM/QuasiDense objects stay behind opaque handles, and quasi-dense matches are exposed through count/fill flat structs.
-- HighGUI mode: OpenCV mode requires `opencv_highgui` for windows, properties, trackbars, mouse callbacks, and optional Qt buttons; it may need platform GUI dependencies. Default tests keep window creation behind `OPENCV_CSHARP_HIGHGUI_SMOKE=1`; the older `OPENCV5SHARP_HIGHGUI_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias.
 - Optional module mode: `opencv_features` is linked when the installed OpenCV package exposes that target. If the target is missing, `features2d` exports still build and return `OPENCV_CSHARP_STATUS_NOT_LINKED`.
 - Optional contrib mode: `opencv_xfeatures2d` and `opencv_xobjdetect` are linked when the installed OpenCV package exposes those targets. If a target is missing, the matching exports still build and return `OPENCV_CSHARP_STATUS_NOT_LINKED`.
 
@@ -842,12 +831,9 @@ Current staged native files:
 
 当前暂存的 native 文件：
 
-`JYPPX.OpenCV.Native.dll` is the primary loader. `OpenCv5Sharp.Native.dll` is the explicitly named compatibility loader copy kept stable for already-compiled consumers. The `opencv_*500.dll` entries are factual OpenCV 5.0.0 runtime artifacts.
 
-`JYPPX.OpenCV.Native.dll` 是主 loader。`OpenCv5Sharp.Native.dll` 是为已编译消费者保持稳定的名称明确兼容 loader 副本。`opencv_*500.dll` 条目是 OpenCV 5.0.0 runtime 的事实性产物。
 
 - `JYPPX.OpenCV.Native.dll` (primary loader / 主 loader)
-- `OpenCv5Sharp.Native.dll` (explicit compatibility loader copy kept stable for already-compiled consumers / 为已编译消费者保持稳定的明确兼容 loader 副本)
 - factual OpenCV 5.0.0 runtime artifact `opencv_core500.dll`
 - factual OpenCV 5.0.0 runtime artifact `opencv_imgcodecs500.dll`
 - factual OpenCV 5.0.0 runtime artifact `opencv_imgproc500.dll`

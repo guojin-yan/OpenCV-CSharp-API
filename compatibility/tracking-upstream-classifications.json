@@ -36,7 +36,7 @@
         "jyppx_ocv_tracking_tracker_csrt_get_default_params"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.TrackerCSRTParams|constructor|public;instance|.ctor(System.Boolean useHog,System.Boolean useColorNames,System.Boolean useGray,System.Boolean useRgb,System.Boolean useChannelWeights,System.Boolean useSegmentation,System.String windowFunction,System.Single kaiserAlpha,System.Single chebAttenuation,System.Single templateSize,System.Single gslSigma,System.Single hogOrientations,System.Single hogClip,System.Single padding,System.Single filterLr,System.Single weightsLr,System.Int32 numHogChannelsUsed,System.Int32 admmIterations,System.Int32 histogramBins,System.Single histogramLr,System.Int32 backgroundRatio,System.Int32 numberOfScales,System.Single scaleSigmaFactor,System.Single scaleModelMaxArea,System.Single scaleLr,System.Single scaleStep,System.Single psrThreshold)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams|constructor|public;instance|.ctor(System.Boolean useHog,System.Boolean useColorNames,System.Boolean useGray,System.Boolean useRgb,System.Boolean useChannelWeights,System.Boolean useSegmentation,System.String windowFunction,System.Single kaiserAlpha,System.Single chebAttenuation,System.Single templateSize,System.Single gslSigma,System.Single hogOrientations,System.Single hogClip,System.Single padding,System.Single filterLr,System.Single weightsLr,System.Int32 numHogChannelsUsed,System.Int32 admmIterations,System.Int32 histogramBins,System.Single histogramLr,System.Int32 backgroundRatio,System.Int32 numberOfScales,System.Single scaleSigmaFactor,System.Single scaleModelMaxArea,System.Single scaleLr,System.Single scaleStep,System.Single psrThreshold)"
       ]
     },
     {
@@ -51,7 +51,7 @@
         "jyppx_ocv_tracking_tracker_csrt_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.TrackerCSRT Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.TrackerCSRT Create()"
       ]
     },
     {
@@ -65,7 +65,7 @@
         "jyppx_ocv_tracking_tracker_csrt_set_initial_mask"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.TrackerCSRT|method|public;instance|System.Void SetInitialMask(OpenCvSharp.Core.Mat mask)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRT|method|public;instance|System.Void SetInitialMask(JYPPX.OpenCvSharp.Core.Mat mask)"
       ]
     },
     {
@@ -109,7 +109,7 @@
         "jyppx_ocv_tracking_tracker_kcf_get_default_params"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.TrackerKCFParams|constructor|public;instance|.ctor(System.Single detectThresh,System.Single sigma,System.Single lambda,System.Single interpFactor,System.Single outputSigmaFactor,System.Single pcaLearningRate,System.Boolean resize,System.Boolean splitCoeff,System.Boolean wrapKernel,System.Boolean compressFeature,System.Int32 maxPatchSize,System.Int32 compressedSize,OpenCvSharp.Tracking.TrackerKCFMode descPca,OpenCvSharp.Tracking.TrackerKCFMode descNpca)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerKCFParams|constructor|public;instance|.ctor(System.Single detectThresh,System.Single sigma,System.Single lambda,System.Single interpFactor,System.Single outputSigmaFactor,System.Single pcaLearningRate,System.Boolean resize,System.Boolean splitCoeff,System.Boolean wrapKernel,System.Boolean compressFeature,System.Int32 maxPatchSize,System.Int32 compressedSize,JYPPX.OpenCvSharp.Tracking.TrackerKCFMode descPca,JYPPX.OpenCvSharp.Tracking.TrackerKCFMode descNpca)"
       ]
     },
     {
@@ -124,7 +124,7 @@
         "jyppx_ocv_tracking_tracker_kcf_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.TrackerKCF|method|public;static|OpenCvSharp.Tracking.TrackerKCF Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.TrackerKCF Create()"
       ]
     },
     {
@@ -148,7 +148,7 @@
         "jyppx_ocv_tracking_legacy_tracker_init"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init(OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect2d boundingBox)"
       ]
     },
     {
@@ -162,7 +162,7 @@
         "jyppx_ocv_tracking_legacy_tracker_update"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update(OpenCvSharp.Core.Mat image,ref OpenCvSharp.Core.Rect2d boundingBox)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update(JYPPX.OpenCvSharp.Core.Mat image,ref JYPPX.OpenCvSharp.Core.Rect2d boundingBox)"
       ]
     },
     {
@@ -186,7 +186,7 @@
         "jyppx_ocv_tracking_legacy_tracker_mil_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMIL|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMIL Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL Create()"
       ]
     },
     {
@@ -210,7 +210,7 @@
         "jyppx_ocv_tracking_legacy_tracker_boosting_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()"
       ]
     },
     {
@@ -234,7 +234,7 @@
         "jyppx_ocv_tracking_legacy_tracker_median_flow_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()"
       ]
     },
     {
@@ -258,7 +258,7 @@
         "jyppx_ocv_tracking_legacy_tracker_tld_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerTLD Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD Create()"
       ]
     },
     {
@@ -282,7 +282,7 @@
         "jyppx_ocv_tracking_legacy_tracker_kcf_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF Create()"
       ]
     },
     {
@@ -306,7 +306,7 @@
         "jyppx_ocv_tracking_legacy_tracker_mosse_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMOSSE|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMOSSE Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE Create()"
       ]
     },
     {
@@ -330,7 +330,7 @@
         "jyppx_ocv_tracking_legacy_multi_tracker_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
       ]
     },
     {
@@ -344,7 +344,7 @@
         "jyppx_ocv_tracking_legacy_multi_tracker_add"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add(OpenCvSharp.Tracking.Legacy.LegacyTracker tracker,OpenCvSharp.Core.Mat image,OpenCvSharp.Core.Rect2d boundingBox)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add(JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker tracker,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Rect2d boundingBox)"
       ]
     },
     {
@@ -359,7 +359,7 @@
         "jyppx_ocv_tracking_legacy_multi_tracker_update_fill"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult Update(OpenCvSharp.Core.Mat image)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult Update(JYPPX.OpenCvSharp.Core.Mat image)"
       ]
     },
     {
@@ -374,7 +374,7 @@
         "jyppx_ocv_tracking_legacy_multi_tracker_get_objects_fill"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSharp.Core.Rect2d[] GetObjects()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|JYPPX.OpenCvSharp.Core.Rect2d[] GetObjects()"
       ]
     },
     {
@@ -388,7 +388,7 @@
         "jyppx_ocv_tracking_legacy_multi_tracker_create"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker Create()"
       ]
     },
     {
@@ -412,7 +412,7 @@
         "jyppx_ocv_tracking_legacy_tracker_csrt_create_default"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()"
       ]
     },
     {
@@ -426,7 +426,7 @@
         "jyppx_ocv_tracking_legacy_tracker_csrt_set_initial_mask"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask(OpenCvSharp.Core.Mat mask)"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask(JYPPX.OpenCvSharp.Core.Mat mask)"
       ]
     },
     {
@@ -440,7 +440,7 @@
         "jyppx_ocv_tracking_legacy_upgrade"
       ],
       "managedMembers": [
-        "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|OpenCvSharp.Tracking.Tracker Upgrade()"
+        "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|JYPPX.OpenCvSharp.Tracking.Tracker Upgrade()"
       ]
     }
   ]

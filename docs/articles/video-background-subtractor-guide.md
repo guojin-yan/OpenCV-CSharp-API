@@ -1,8 +1,8 @@
 # Video Background Subtractor Guide
 
-`OpenCvSharp.Video` now wraps OpenCV background subtraction through `BackgroundSubtractor`, `BackgroundSubtractorMOG2`, and `BackgroundSubtractorKNN`. These objects live behind opaque native handles and require the factual OpenCV 5.0.0 runtime artifact `opencv_video500.dll` in a linked runtime.
+`JYPPX.OpenCvSharp.Video` now wraps OpenCV background subtraction through `BackgroundSubtractor`, `BackgroundSubtractorMOG2`, and `BackgroundSubtractorKNN`. These objects live behind opaque native handles and require the factual OpenCV 5.0.0 runtime artifact `opencv_video500.dll` in a linked runtime.
 
-`OpenCvSharp.Video` 现在通过 `BackgroundSubtractor`、`BackgroundSubtractorMOG2` 和 `BackgroundSubtractorKNN` 封装 OpenCV 背景减除能力。这些对象由 native opaque handle 持有，在 linked runtime 中需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_video500.dll`。
+`JYPPX.OpenCvSharp.Video` 现在通过 `BackgroundSubtractor`、`BackgroundSubtractorMOG2` 和 `BackgroundSubtractorKNN` 封装 OpenCV 背景减除能力。这些对象由 native opaque handle 持有，在 linked runtime 中需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_video500.dll`。
 
 ## Covered APIs / 已覆盖接口
 
@@ -25,10 +25,10 @@
 ## Tiny Synthetic Frames / 小型合成帧
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Video;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Video;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace VideoBackgroundSample
 {

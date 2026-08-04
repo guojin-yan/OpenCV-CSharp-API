@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies distance-transform label output modes compatible with OpenCV <c>cv::DistanceTransformLabelTypes</c>.

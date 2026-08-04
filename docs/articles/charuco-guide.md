@@ -1,14 +1,14 @@
 # ChArUco Guide
 
-`OpenCvSharp.ObjDetect` exposes `CharucoBoard`, `CharucoDetector`, `CharucoParameters`, and `CharucoDetectionResult` for OpenCV ChArUco workflows.
+`JYPPX.OpenCvSharp.ObjDetect` exposes `CharucoBoard`, `CharucoDetector`, `CharucoParameters`, and `CharucoDetectionResult` for OpenCV ChArUco workflows.
 
-`OpenCvSharp.ObjDetect` 为 OpenCV ChArUco 工作流暴露 `CharucoBoard`、`CharucoDetector`、`CharucoParameters` 和 `CharucoDetectionResult`。
+`JYPPX.OpenCvSharp.ObjDetect` 为 OpenCV ChArUco 工作流暴露 `CharucoBoard`、`CharucoDetector`、`CharucoParameters` 和 `CharucoDetectionResult`。
 
 ## Basic Use / 基本用法
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace CharucoGuideSample
 {

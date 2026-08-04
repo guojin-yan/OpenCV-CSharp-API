@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XImgProc
+namespace JYPPX.OpenCvSharp.XImgProc
 {
     /// <summary>
     /// Parameters for ximgproc EdgeDrawing.

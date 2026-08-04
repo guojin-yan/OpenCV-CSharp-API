@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Video;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Video;
 
-namespace OpenCvSharp.Tests.Video
+namespace JYPPX.OpenCvSharp.Tests.Video
 {
     public sealed class BackgroundSubtractorTests
     {

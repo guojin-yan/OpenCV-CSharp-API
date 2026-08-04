@@ -1,12 +1,12 @@
 # Photo Intelligent Scissors Guide
 
-`OpenCvSharp.Photo.IntelligentScissorsMB` exposes OpenCV 5.0.0's live-wire image segmentation object. One instance owns one native model through a SafeHandle and follows an explicit configure, apply, build, and retrieve lifecycle.
+`JYPPX.OpenCvSharp.Photo.IntelligentScissorsMB` exposes OpenCV 5.0.0's live-wire image segmentation object. One instance owns one native model through a SafeHandle and follows an explicit configure, apply, build, and retrieve lifecycle.
 
 ## Basic Workflow
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 using var image = new Mat(64, 64, MatType.CV_8UC1, new Scalar(0));
 using var scissors = new IntelligentScissorsMB();

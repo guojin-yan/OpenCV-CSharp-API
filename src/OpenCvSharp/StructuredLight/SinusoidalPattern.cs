@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.StructuredLight
+namespace JYPPX.OpenCvSharp.StructuredLight
 {
     /// <summary>
     /// Sinusoidal structured-light pattern generator.

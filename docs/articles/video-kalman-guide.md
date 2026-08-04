@@ -1,8 +1,8 @@
 # Video Kalman Guide
 
-`OpenCvSharp.Video.KalmanFilter` wraps OpenCV `cv::KalmanFilter` as an opaque native object. It covers creation, reinitialization, prediction, correction, and all primary Kalman matrices through copy-in/copy-out `Mat` accessors.
+`JYPPX.OpenCvSharp.Video.KalmanFilter` wraps OpenCV `cv::KalmanFilter` as an opaque native object. It covers creation, reinitialization, prediction, correction, and all primary Kalman matrices through copy-in/copy-out `Mat` accessors.
 
-`OpenCvSharp.Video.KalmanFilter` 以 opaque native 对象封装 OpenCV `cv::KalmanFilter`。它覆盖创建、重新初始化、预测、校正，以及通过 `Mat` 拷入/拷出的主要 Kalman 矩阵访问。
+`JYPPX.OpenCvSharp.Video.KalmanFilter` 以 opaque native 对象封装 OpenCV `cv::KalmanFilter`。它覆盖创建、重新初始化、预测、校正，以及通过 `Mat` 拷入/拷出的主要 Kalman 矩阵访问。
 
 ## Covered APIs / 已覆盖接口
 
@@ -25,8 +25,8 @@
 ## Basic Use / 基础用法
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Video;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Video;
 
 namespace KalmanSample
 {

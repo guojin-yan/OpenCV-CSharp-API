@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Generalized Hough detector for translation-only matching. 仅检测平移的广义霍夫检测器。</summary>
     public sealed class GeneralizedHoughBallard : GeneralizedHough

@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using OpenCvSharp.Core;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
-namespace OpenCvSharp.Tests.Video
+namespace JYPPX.OpenCvSharp.Tests.Video
 {
     public sealed class VideoOpticalFlowIoTests
     {

@@ -94,7 +94,7 @@ double fontScale = Cv2.GetFontScaleFromHeight(HersheyFonts.HersheySimplex, 24);
 
 ## Calibration, Sampling, And Coordinates
 
-Camera-oriented methods live on `OpenCvSharp.Calib3D.Cv2`, while their neutral ABI entrypoints remain in the ImgProc wrapper because OpenCV 5 declares these operations in `opencv2/imgproc.hpp`:
+Camera-oriented methods live on `JYPPX.OpenCvSharp.Calib3D.Cv2`, while their neutral ABI entrypoints remain in the ImgProc wrapper because OpenCV 5 declares these operations in `opencv2/imgproc.hpp`:
 
 ```csharp
 using Mat undistorted = Calib3DCv2.Undistort(source, cameraMatrix, distortion);

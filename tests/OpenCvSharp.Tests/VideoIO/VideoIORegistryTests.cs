@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp;
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.VideoIO;
 
-namespace OpenCvSharp.Tests.VideoIO
+namespace JYPPX.OpenCvSharp.Tests.VideoIO
 {
     public sealed class VideoIORegistryTests
     {

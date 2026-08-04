@@ -3,141 +3,131 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using OpenCvSharp;
-using OpenCvSharp.AlphaMat;
-using OpenCvSharp.BgSegm;
-using OpenCvSharp.BioInspired;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.Face;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.Hfs;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ImgHash;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.IntensityTransform;
-using OpenCvSharp.LineDescriptor;
-using OpenCvSharp.ML;
-using OpenCvSharp.ObjDetect;
-using OpenCvSharp.OptFlow;
-using OpenCvSharp.Photo;
-using OpenCvSharp.PhaseUnwrapping;
-using OpenCvSharp.Plot;
-using OpenCvSharp.PtCloud;
-using OpenCvSharp.Quality;
-using OpenCvSharp.Fuzzy;
-using OpenCvSharp.Rapid;
-using OpenCvSharp.Reg;
-using OpenCvSharp.Saliency;
-using OpenCvSharp.Shape;
-using OpenCvSharp.StructuredLight;
-using OpenCvSharp.SurfaceMatching;
-using OpenCvSharp.VideoIO;
-using OpenCvSharp.XImgProc;
-using OpenCvSharp.XObjDetect;
-using OpenCvSharp.XPhoto;
-using OpenCvSharp.XStereo;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
-using Features2DCv2 = OpenCvSharp.Features2D.Cv2;
-using DnnCv2 = OpenCvSharp.Dnn.Cv2;
-using HighGuiCv2 = OpenCvSharp.HighGui.Cv2;
-using ImgCodecsCv2 = OpenCvSharp.ImgCodecs.Cv2;
-using ImgHashCv2 = OpenCvSharp.ImgHash.ImgHashCv2;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
-using PhotoCv2 = OpenCvSharp.Photo.PhotoCv2;
-using PlotCv2 = OpenCvSharp.Plot.PlotCv2;
-using PtCloudCv2 = OpenCvSharp.PtCloud.PtCloudCv2;
-using ShapeCv2 = OpenCvSharp.Shape.ShapeCv2;
-using StitcherObject = OpenCvSharp.Stitching.Stitcher;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
-using XImgProcCv2 = OpenCvSharp.XImgProc.XImgProcCv2;
-using XPhotoCv2 = OpenCvSharp.XPhoto.XPhotoCv2;
-using BgSegmBackgroundSubtractorCNTObject = OpenCvSharp.BgSegm.BackgroundSubtractorCNT;
-using BgSegmBackgroundSubtractorGMGObject = OpenCvSharp.BgSegm.BackgroundSubtractorGMG;
-using BgSegmBackgroundSubtractorMOGObject = OpenCvSharp.BgSegm.BackgroundSubtractorMOG;
-using BgSegmSyntheticSequenceGeneratorObject = OpenCvSharp.BgSegm.SyntheticSequenceGenerator;
-using BackgroundSubtractorKNNObject = OpenCvSharp.Video.BackgroundSubtractorKNN;
-using BackgroundSubtractorMOG2Object = OpenCvSharp.Video.BackgroundSubtractorMOG2;
-using BlockMeanHashObject = OpenCvSharp.ImgHash.BlockMeanHash;
-using CamShiftResult = OpenCvSharp.Video.CamShiftResult;
-using MeanShiftResult = OpenCvSharp.Video.MeanShiftResult;
-using MLKNearestObject = OpenCvSharp.ML.KNearest;
-using MLAnnMlpObject = OpenCvSharp.ML.ANN_MLP;
-using MLBoostObject = OpenCvSharp.ML.Boost;
-using MLDTreesObject = OpenCvSharp.ML.DTrees;
-using MLEMObject = OpenCvSharp.ML.EM;
-using MLLogisticRegressionObject = OpenCvSharp.ML.LogisticRegression;
-using MLNormalBayesClassifierObject = OpenCvSharp.ML.NormalBayesClassifier;
-using MLRTreesObject = OpenCvSharp.ML.RTrees;
-using MLSvmObject = OpenCvSharp.ML.SVM;
-using MLSVMSGDObject = OpenCvSharp.ML.SVMSGD;
-using OptFlowCv2Object = OpenCvSharp.OptFlow.OptFlowCv2;
-using OptFlowDualTVL1Object = OpenCvSharp.OptFlow.DualTVL1OpticalFlow;
-using OptFlowRLOFParameterObject = OpenCvSharp.OptFlow.RLOFOpticalFlowParameter;
-using OpticalFlowPyramidResult = OpenCvSharp.Video.OpticalFlowPyramidResult;
-using TrackerCSRTObject = OpenCvSharp.Tracking.TrackerCSRT;
-using TrackerKCFObject = OpenCvSharp.Tracking.TrackerKCF;
-using TrackerKCFParamsObject = OpenCvSharp.Tracking.TrackerKCFParams;
-using TrackerMILObject = OpenCvSharp.Tracking.Legacy.TrackerMIL;
-using TrackerMedianFlowObject = OpenCvSharp.Tracking.Legacy.TrackerMedianFlow;
-using TrackerMOSSEObject = OpenCvSharp.Tracking.Legacy.TrackerMOSSE;
-using LegacyTrackerBoostingObject = OpenCvSharp.Tracking.Legacy.TrackerBoosting;
-using LegacyTrackerCSRTObject = OpenCvSharp.Tracking.Legacy.TrackerCSRT;
-using LegacyTrackerKCFObject = OpenCvSharp.Tracking.Legacy.TrackerKCF;
-using LegacyTrackerTLDObject = OpenCvSharp.Tracking.Legacy.TrackerTLD;
-using OpenCvLegacyMultiTrackerObject = OpenCvSharp.Tracking.Legacy.MultiTracker;
-using QRCodeDetectorObject = OpenCvSharp.ObjDetect.QRCodeDetector;
-using QRCodeDetectorArucoObject = OpenCvSharp.ObjDetect.QRCodeDetectorAruco;
-using QRCodeEncoderObject = OpenCvSharp.ObjDetect.QRCodeEncoder;
-using BarcodeDetectorObject = OpenCvSharp.ObjDetect.BarcodeDetector;
-using CascadeClassifierObject = OpenCvSharp.XObjDetect.CascadeClassifier;
-using DnnNetObject = OpenCvSharp.Dnn.Net;
-using EigenFaceRecognizerObject = OpenCvSharp.Face.EigenFaceRecognizer;
-using FisherFaceRecognizerObject = OpenCvSharp.Face.FisherFaceRecognizer;
-using LBPHFaceRecognizerObject = OpenCvSharp.Face.LBPHFaceRecognizer;
-using HOGDescriptorObject = OpenCvSharp.XObjDetect.HOGDescriptor;
-using MotionSaliencyBinWangObject = OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014;
-using RgbdNormalsObject = OpenCvSharp.PtCloud.RgbdNormals;
-using StaticSaliencyFineGrainedObject = OpenCvSharp.Saliency.StaticSaliencyFineGrained;
-using StaticSaliencySpectralResidualObject = OpenCvSharp.Saliency.StaticSaliencySpectralResidual;
-using VideoKalmanFilterObject = OpenCvSharp.Video.KalmanFilter;
-using DisOpticalFlowObject = OpenCvSharp.Video.DisOpticalFlow;
-using FarnebackOpticalFlowObject = OpenCvSharp.Video.FarnebackOpticalFlow;
-using OpticalFlowFlags = OpenCvSharp.Video.OpticalFlowFlags;
-using SparsePyrLkOpticalFlowObject = OpenCvSharp.Video.SparsePyrLkOpticalFlow;
-using VideoTrackerMILObject = OpenCvSharp.Video.TrackerMIL;
-using VariationalRefinementObject = OpenCvSharp.Video.VariationalRefinement;
-using VideoCaptureObject = OpenCvSharp.VideoIO.VideoCapture;
-using VideoWriterObject = OpenCvSharp.VideoIO.VideoWriter;
-using BioInspiredCv2Object = OpenCvSharp.BioInspired.BioInspiredCv2;
-using XStereoCv2Object = OpenCvSharp.XStereo.XStereoCv2;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.AlphaMat;
+using JYPPX.OpenCvSharp.BgSegm;
+using JYPPX.OpenCvSharp.BioInspired;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Face;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.Hfs;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ImgHash;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.IntensityTransform;
+using JYPPX.OpenCvSharp.LineDescriptor;
+using JYPPX.OpenCvSharp.ML;
+using JYPPX.OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.OptFlow;
+using JYPPX.OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.PhaseUnwrapping;
+using JYPPX.OpenCvSharp.Plot;
+using JYPPX.OpenCvSharp.PtCloud;
+using JYPPX.OpenCvSharp.Quality;
+using JYPPX.OpenCvSharp.Fuzzy;
+using JYPPX.OpenCvSharp.Rapid;
+using JYPPX.OpenCvSharp.Reg;
+using JYPPX.OpenCvSharp.Saliency;
+using JYPPX.OpenCvSharp.Shape;
+using JYPPX.OpenCvSharp.StructuredLight;
+using JYPPX.OpenCvSharp.SurfaceMatching;
+using JYPPX.OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.XObjDetect;
+using JYPPX.OpenCvSharp.XPhoto;
+using JYPPX.OpenCvSharp.XStereo;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
+using Features2DCv2 = JYPPX.OpenCvSharp.Features2D.Cv2;
+using DnnCv2 = JYPPX.OpenCvSharp.Dnn.Cv2;
+using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
+using ImgHashCv2 = JYPPX.OpenCvSharp.ImgHash.ImgHashCv2;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
+using PhotoCv2 = JYPPX.OpenCvSharp.Photo.PhotoCv2;
+using PlotCv2 = JYPPX.OpenCvSharp.Plot.PlotCv2;
+using PtCloudCv2 = JYPPX.OpenCvSharp.PtCloud.PtCloudCv2;
+using ShapeCv2 = JYPPX.OpenCvSharp.Shape.ShapeCv2;
+using StitcherObject = JYPPX.OpenCvSharp.Stitching.Stitcher;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
+using XImgProcCv2 = JYPPX.OpenCvSharp.XImgProc.XImgProcCv2;
+using XPhotoCv2 = JYPPX.OpenCvSharp.XPhoto.XPhotoCv2;
+using BgSegmBackgroundSubtractorCNTObject = JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorCNT;
+using BgSegmBackgroundSubtractorGMGObject = JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorGMG;
+using BgSegmBackgroundSubtractorMOGObject = JYPPX.OpenCvSharp.BgSegm.BackgroundSubtractorMOG;
+using BgSegmSyntheticSequenceGeneratorObject = JYPPX.OpenCvSharp.BgSegm.SyntheticSequenceGenerator;
+using BackgroundSubtractorKNNObject = JYPPX.OpenCvSharp.Video.BackgroundSubtractorKNN;
+using BackgroundSubtractorMOG2Object = JYPPX.OpenCvSharp.Video.BackgroundSubtractorMOG2;
+using BlockMeanHashObject = JYPPX.OpenCvSharp.ImgHash.BlockMeanHash;
+using CamShiftResult = JYPPX.OpenCvSharp.Video.CamShiftResult;
+using MeanShiftResult = JYPPX.OpenCvSharp.Video.MeanShiftResult;
+using MLKNearestObject = JYPPX.OpenCvSharp.ML.KNearest;
+using MLAnnMlpObject = JYPPX.OpenCvSharp.ML.ANN_MLP;
+using MLBoostObject = JYPPX.OpenCvSharp.ML.Boost;
+using MLDTreesObject = JYPPX.OpenCvSharp.ML.DTrees;
+using MLEMObject = JYPPX.OpenCvSharp.ML.EM;
+using MLLogisticRegressionObject = JYPPX.OpenCvSharp.ML.LogisticRegression;
+using MLNormalBayesClassifierObject = JYPPX.OpenCvSharp.ML.NormalBayesClassifier;
+using MLRTreesObject = JYPPX.OpenCvSharp.ML.RTrees;
+using MLSvmObject = JYPPX.OpenCvSharp.ML.SVM;
+using MLSVMSGDObject = JYPPX.OpenCvSharp.ML.SVMSGD;
+using OptFlowCv2Object = JYPPX.OpenCvSharp.OptFlow.OptFlowCv2;
+using OptFlowDualTVL1Object = JYPPX.OpenCvSharp.OptFlow.DualTVL1OpticalFlow;
+using OptFlowRLOFParameterObject = JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter;
+using OpticalFlowPyramidResult = JYPPX.OpenCvSharp.Video.OpticalFlowPyramidResult;
+using TrackerCSRTObject = JYPPX.OpenCvSharp.Tracking.TrackerCSRT;
+using TrackerKCFObject = JYPPX.OpenCvSharp.Tracking.TrackerKCF;
+using TrackerKCFParamsObject = JYPPX.OpenCvSharp.Tracking.TrackerKCFParams;
+using TrackerMILObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL;
+using TrackerMedianFlowObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow;
+using TrackerMOSSEObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE;
+using LegacyTrackerBoostingObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting;
+using LegacyTrackerCSRTObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT;
+using LegacyTrackerKCFObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF;
+using LegacyTrackerTLDObject = JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD;
+using OpenCvLegacyMultiTrackerObject = JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker;
+using QRCodeDetectorObject = JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector;
+using QRCodeDetectorArucoObject = JYPPX.OpenCvSharp.ObjDetect.QRCodeDetectorAruco;
+using QRCodeEncoderObject = JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoder;
+using BarcodeDetectorObject = JYPPX.OpenCvSharp.ObjDetect.BarcodeDetector;
+using CascadeClassifierObject = JYPPX.OpenCvSharp.XObjDetect.CascadeClassifier;
+using DnnNetObject = JYPPX.OpenCvSharp.Dnn.Net;
+using EigenFaceRecognizerObject = JYPPX.OpenCvSharp.Face.EigenFaceRecognizer;
+using FisherFaceRecognizerObject = JYPPX.OpenCvSharp.Face.FisherFaceRecognizer;
+using LBPHFaceRecognizerObject = JYPPX.OpenCvSharp.Face.LBPHFaceRecognizer;
+using HOGDescriptorObject = JYPPX.OpenCvSharp.XObjDetect.HOGDescriptor;
+using MotionSaliencyBinWangObject = JYPPX.OpenCvSharp.Saliency.MotionSaliencyBinWangApr2014;
+using RgbdNormalsObject = JYPPX.OpenCvSharp.PtCloud.RgbdNormals;
+using StaticSaliencyFineGrainedObject = JYPPX.OpenCvSharp.Saliency.StaticSaliencyFineGrained;
+using StaticSaliencySpectralResidualObject = JYPPX.OpenCvSharp.Saliency.StaticSaliencySpectralResidual;
+using VideoKalmanFilterObject = JYPPX.OpenCvSharp.Video.KalmanFilter;
+using DisOpticalFlowObject = JYPPX.OpenCvSharp.Video.DisOpticalFlow;
+using FarnebackOpticalFlowObject = JYPPX.OpenCvSharp.Video.FarnebackOpticalFlow;
+using OpticalFlowFlags = JYPPX.OpenCvSharp.Video.OpticalFlowFlags;
+using SparsePyrLkOpticalFlowObject = JYPPX.OpenCvSharp.Video.SparsePyrLkOpticalFlow;
+using VideoTrackerMILObject = JYPPX.OpenCvSharp.Video.TrackerMIL;
+using VariationalRefinementObject = JYPPX.OpenCvSharp.Video.VariationalRefinement;
+using VideoCaptureObject = JYPPX.OpenCvSharp.VideoIO.VideoCapture;
+using VideoWriterObject = JYPPX.OpenCvSharp.VideoIO.VideoWriter;
+using BioInspiredCv2Object = JYPPX.OpenCvSharp.BioInspired.BioInspiredCv2;
+using XStereoCv2Object = JYPPX.OpenCvSharp.XStereo.XStereoCv2;
 
-namespace ConsoleSamples
+namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
 {
     internal static class Program
     {
         private const string DnnModelVariable = "OPENCV_CSHARP_DNN_MODEL";
-        private const string CompatibilityDnnModelAlias = "OPENCV5SHARP_DNN_MODEL";
         private const string DnnConfigVariable = "OPENCV_CSHARP_DNN_CONFIG";
-        private const string CompatibilityDnnConfigAlias = "OPENCV5SHARP_DNN_CONFIG";
         private const string DnnFrameworkVariable = "OPENCV_CSHARP_DNN_FRAMEWORK";
-        private const string CompatibilityDnnFrameworkAlias = "OPENCV5SHARP_DNN_FRAMEWORK";
         private const string HighGuiSmokeVariable = "OPENCV_CSHARP_HIGHGUI_SMOKE";
-        private const string CompatibilityHighGuiSmokeAlias = "OPENCV5SHARP_HIGHGUI_SMOKE";
         private const string ConsoleExtendedVariable = "OPENCV_CSHARP_CONSOLE_EXTENDED";
-        private const string CompatibilityConsoleExtendedAlias = "OPENCV5SHARP_CONSOLE_EXTENDED";
         private const string UnstableNativeSmokeVariable = "OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE";
-        private const string CompatibilityUnstableNativeSmokeAlias = "OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE";
         private const string BrisqueModelVariable = "OPENCV_CSHARP_BRISQUE_MODEL";
-        private const string CompatibilityBrisqueModelAlias = "OPENCV5SHARP_BRISQUE_MODEL";
         private const string BrisqueRangeVariable = "OPENCV_CSHARP_BRISQUE_RANGE";
-        private const string CompatibilityBrisqueRangeAlias = "OPENCV5SHARP_BRISQUE_RANGE";
         private const string FaceCascadeVariable = "OPENCV_CSHARP_FACE_CASCADE";
-        private const string CompatibilityFaceCascadeAlias = "OPENCV5SHARP_FACE_CASCADE";
         private const string StitchingImagesVariable = "OPENCV_CSHARP_STITCHING_IMAGES";
-        private const string CompatibilityStitchingImagesAlias = "OPENCV5SHARP_STITCHING_IMAGES";
         private static readonly string FactualOpenCvInstallCacheName = "opencv-" + OpenCvSharpBuildInfo.OpenCvVersion + "-windows-x64";
 
         private static void Main(string[] args)
@@ -1264,7 +1254,7 @@ namespace ConsoleSamples
                         using (Mat qrPoints = new Mat())
                         using (Mat barcodePoints = new Mat())
                         using (Mat arucoPoints = new Mat())
-                        using (Mat encodedQr = qrEncoder.Encode("OpenCvSharp"))
+                        using (Mat encodedQr = qrEncoder.Encode("JYPPX.OpenCvSharp"))
                         using (Mat faceInput = new Mat(32, 32, MatType.CV_8UC3))
                         using (Mat faceRows = new Mat())
                         {
@@ -1511,9 +1501,9 @@ namespace ConsoleSamples
                             Mat[] images = DnnCv2.ImagesFromBlob(blob);
                             try
                             {
-                                string modelPath = GetEnvironmentVariable(DnnModelVariable, CompatibilityDnnModelAlias) ?? string.Empty;
-                                string configPath = GetEnvironmentVariable(DnnConfigVariable, CompatibilityDnnConfigAlias) ?? string.Empty;
-                                string framework = GetEnvironmentVariable(DnnFrameworkVariable, CompatibilityDnnFrameworkAlias) ?? string.Empty;
+                                string modelPath = GetEnvironmentVariable(DnnModelVariable) ?? string.Empty;
+                                string configPath = GetEnvironmentVariable(DnnConfigVariable) ?? string.Empty;
+                                string framework = GetEnvironmentVariable(DnnFrameworkVariable) ?? string.Empty;
                                 string modelSummary = string.IsNullOrWhiteSpace(modelPath)
                                     ? "modelForward=skipped"
                                     : RunDnnForwardSummary(modelPath, configPath, framework, blob);
@@ -1522,8 +1512,8 @@ namespace ConsoleSamples
                                     + ", imagesFromBlob=" + images.Length
                                     + ", emptyNet=" + emptyNet.Empty
                                     + ", " + emptyMetadata
-                                    + ", backend=" + OpenCvSharp.Dnn.DnnBackend.OpenCV
-                                    + ", target=" + OpenCvSharp.Dnn.DnnTarget.Cpu
+                                    + ", backend=" + JYPPX.OpenCvSharp.Dnn.DnnBackend.OpenCV
+                                    + ", target=" + JYPPX.OpenCvSharp.Dnn.DnnTarget.Cpu
                                     + ", " + modelSummary;
                             }
                             finally
@@ -1544,23 +1534,23 @@ namespace ConsoleSamples
                     try
                     {
                         string highGuiBackend = HighGuiCv2.GetCurrentUIFramework();
-                        int highGuiWheelDelta = HighGuiCv2.GetMouseWheelDelta((OpenCvSharp.HighGui.MouseEventFlags)unchecked((int)0x00780000));
-                        bool smokeEnabled = IsEnvironmentFlagEnabled(HighGuiSmokeVariable, CompatibilityHighGuiSmokeAlias);
+                        int highGuiWheelDelta = HighGuiCv2.GetMouseWheelDelta((JYPPX.OpenCvSharp.HighGui.MouseEventFlags)unchecked((int)0x00780000));
+                        bool smokeEnabled = IsEnvironmentFlagEnabled(HighGuiSmokeVariable);
                         if (smokeEnabled)
                         {
-                            const string windowName = "OpenCvSharp.HighGui.Smoke";
+                            const string windowName = "JYPPX.OpenCvSharp.HighGui.Smoke";
                             using (Mat preview = new Mat(24, 24, MatType.CV_8UC3, new Scalar(0, 128, 255)))
                             {
-                                HighGuiCv2.NamedWindow(windowName, OpenCvSharp.HighGui.WindowFlags.AutoSize);
-                                HighGuiCv2.SetWindowTitle(windowName, "OpenCvSharp HighGui Smoke");
+                                HighGuiCv2.NamedWindow(windowName, JYPPX.OpenCvSharp.HighGui.WindowFlags.AutoSize);
+                                HighGuiCv2.SetWindowTitle(windowName, "JYPPX.OpenCvSharp HighGui Smoke");
                                 HighGuiCv2.ImShow(windowName, preview);
-                                using (OpenCvSharp.HighGui.HighGuiTrackbar trackbar = HighGuiCv2.CreateTrackbar("value", windowName, 0, 10, _ => { }))
+                                using (JYPPX.OpenCvSharp.HighGui.HighGuiTrackbar trackbar = HighGuiCv2.CreateTrackbar("value", windowName, 0, 10, _ => { }))
                                 {
                                     HighGuiCv2.SetTrackbarMin("value", windowName, 0);
                                     HighGuiCv2.SetTrackbarMax("value", windowName, 10);
                                     HighGuiCv2.SetTrackbarPos("value", windowName, 3);
                                     int position = HighGuiCv2.GetTrackbarPos("value", windowName);
-                                    HighGuiCv2.SetWindowProperty(windowName, OpenCvSharp.HighGui.WindowPropertyFlags.Topmost, 0.0);
+                                    HighGuiCv2.SetWindowProperty(windowName, JYPPX.OpenCvSharp.HighGui.WindowPropertyFlags.Topmost, 0.0);
                                     Rect imageRect = HighGuiCv2.GetWindowImageRect(windowName);
                                     HighGuiCv2.SetMouseCallback(windowName, null);
                                     int key = HighGuiCv2.WaitKey(1);
@@ -1578,7 +1568,7 @@ namespace ConsoleSamples
                         {
                             highGuiSummary = "HighGui backend=" + (highGuiBackend.Length == 0 ? "none" : highGuiBackend)
                                 + ", wheelDelta=" + highGuiWheelDelta
-                                + ", smoke=skipped, enum=" + OpenCvSharp.HighGui.WindowFlags.AutoSize;
+                                + ", smoke=skipped, enum=" + JYPPX.OpenCvSharp.HighGui.WindowFlags.AutoSize;
                         }
                     }
                     catch (OpenCvException ex) when (ex.Message.IndexOf("highgui", StringComparison.OrdinalIgnoreCase) >= 0 || ex.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -2385,8 +2375,8 @@ namespace ConsoleSamples
         {
             using (DnnNetObject net = DnnNetObject.ReadNet(modelPath, configPath, framework))
             {
-                net.SetPreferableBackend(OpenCvSharp.Dnn.DnnBackend.OpenCV);
-                net.SetPreferableTarget(OpenCvSharp.Dnn.DnnTarget.Cpu);
+                net.SetPreferableBackend(JYPPX.OpenCvSharp.Dnn.DnnBackend.OpenCV);
+                net.SetPreferableTarget(JYPPX.OpenCvSharp.Dnn.DnnTarget.Cpu);
                 net.SetInput(blob);
                 using (Mat output = net.Forward())
                 {
@@ -2410,24 +2400,24 @@ namespace ConsoleSamples
         {
             string fixturePath = Path.Combine(AppContext.BaseDirectory, "Dnn", "Fixtures", "identity-opset13.onnx.base64");
             byte[] model = Convert.FromBase64String(File.ReadAllText(fixturePath).Trim());
-            using (DnnNetObject net = DnnNetObject.ReadNetFromOnnx(model, OpenCvSharp.Dnn.DnnEngine.Classic))
+            using (DnnNetObject net = DnnNetObject.ReadNetFromOnnx(model, JYPPX.OpenCvSharp.Dnn.DnnEngine.Classic))
             using (Mat image = new Mat(2, 2, MatType.CV_32FC1))
             {
                 image.CopyFrom(new[] { 1.0F, 2.0F, 3.0F, 4.0F });
-                using (Mat blob = DnnCv2.BlobFromImage(image, new OpenCvSharp.Dnn.Image2BlobParams()))
+                using (Mat blob = DnnCv2.BlobFromImage(image, new JYPPX.OpenCvSharp.Dnn.Image2BlobParams()))
                 {
-                    net.SetPreferableBackend(OpenCvSharp.Dnn.DnnBackend.OpenCV)
-                        .SetPreferableTarget(OpenCvSharp.Dnn.DnnTarget.Cpu)
-                        .SetProfilingMode(OpenCvSharp.Dnn.DnnProfilingMode.Detailed)
+                    net.SetPreferableBackend(JYPPX.OpenCvSharp.Dnn.DnnBackend.OpenCV)
+                        .SetPreferableTarget(JYPPX.OpenCvSharp.Dnn.DnnTarget.Cpu)
+                        .SetProfilingMode(JYPPX.OpenCvSharp.Dnn.DnnProfilingMode.Detailed)
                         .SetInput(blob, "input");
                     string[] layerNames = net.GetLayerNames();
                     string[] outputNames = net.GetUnconnectedOutLayersNames();
                     int layerId = net.GetLayerId(layerNames[0]);
                     int[][] inputShapes = { new[] { 1, 1, 2, 2 } };
                     int[] inputTypes = { MatType.CV_32F };
-                    OpenCvSharp.Dnn.DnnLayerShapes shapes = net.GetLayerShapes(inputShapes, inputTypes, layerId);
+                    JYPPX.OpenCvSharp.Dnn.DnnLayerShapes shapes = net.GetLayerShapes(inputShapes, inputTypes, layerId);
                     long flops = net.GetFLOPS(inputShapes, inputTypes);
-                    OpenCvSharp.Dnn.DnnMemoryConsumption memory = net.GetMemoryConsumption(inputShapes, inputTypes);
+                    JYPPX.OpenCvSharp.Dnn.DnnMemoryConsumption memory = net.GetMemoryConsumption(inputShapes, inputTypes);
                     net.FinalizeNetwork();
                     using (Mat output = net.Forward(outputNames[0]))
                     {
@@ -2436,7 +2426,7 @@ namespace ConsoleSamples
                         {
                             int nestedCount = 0;
                             for (int i = 0; i < nested.Length; i++) nestedCount += nested[i].Length;
-                            OpenCvSharp.Dnn.DnnDetailedPerfProfile detailed = net.GetDetailedPerfProfile();
+                            JYPPX.OpenCvSharp.Dnn.DnnDetailedPerfProfile detailed = net.GetDetailedPerfProfile();
                             return "DNN structured: modelBytes=" + model.Length
                                 + ", format=" + net.ModelFormat
                                 + ", layers=" + layerNames.Length
@@ -2461,12 +2451,12 @@ namespace ConsoleSamples
 
         private static bool IsExtendedConsoleSamplesEnabled()
         {
-            return IsEnvironmentFlagEnabled(ConsoleExtendedVariable, CompatibilityConsoleExtendedAlias);
+            return IsEnvironmentFlagEnabled(ConsoleExtendedVariable);
         }
 
         private static bool IsUnstableNativeSmokeEnabled()
         {
-            return IsEnvironmentFlagEnabled(UnstableNativeSmokeVariable, CompatibilityUnstableNativeSmokeAlias);
+            return IsEnvironmentFlagEnabled(UnstableNativeSmokeVariable);
         }
 
         private static void PrintStableRound73Summaries()
@@ -2665,10 +2655,10 @@ namespace ConsoleSamples
         private static string RunVideoEccTrackerMilSummary()
         {
             using (Mat reference = CreateVideoEccFrame())
-            using (OpenCvSharp.Video.ECCRegistrationResult registration = VideoCv2.FindTransformECC(
+            using (JYPPX.OpenCvSharp.Video.ECCRegistrationResult registration = VideoCv2.FindTransformECC(
                 reference,
                 reference,
-                OpenCvSharp.Video.MotionType.Translation,
+                JYPPX.OpenCvSharp.Video.MotionType.Translation,
                 TermCriteria.ByCountAndEpsilon(20, 1e-6)))
             using (Mat first = CreateVideoTrackerMilFrame(0))
             using (Mat second = CreateVideoTrackerMilFrame(2))
@@ -3012,8 +3002,8 @@ namespace ConsoleSamples
                 Scalar ssim = QualitySSIM.Compute(reference, comparison);
                 Scalar gmsd = QualityGMSD.Compute(reference, comparison);
                 string brisqueSummary = "BRISQUE=skipped";
-                string model = GetEnvironmentVariable(BrisqueModelVariable, CompatibilityBrisqueModelAlias) ?? string.Empty;
-                string range = GetEnvironmentVariable(BrisqueRangeVariable, CompatibilityBrisqueRangeAlias) ?? string.Empty;
+                string model = GetEnvironmentVariable(BrisqueModelVariable) ?? string.Empty;
+                string range = GetEnvironmentVariable(BrisqueRangeVariable) ?? string.Empty;
                 if (!string.IsNullOrWhiteSpace(model) && !string.IsNullOrWhiteSpace(range))
                 {
                     brisqueSummary = "BRISQUE=" + QualityBRISQUE.Compute(reference, model, range).V0;
@@ -3921,25 +3911,25 @@ namespace ConsoleSamples
             using (LegacyTrackerTLDObject tld = LegacyTrackerTLDObject.Create())
             using (LegacyTrackerKCFObject legacyKcf = LegacyTrackerKCFObject.Create(TrackerKCFParamsObject.Default))
             using (LegacyTrackerCSRTObject legacyCsrt = LegacyTrackerCSRTObject.Create())
-            using (OpenCvSharp.Tracking.Tracker upgraded = legacyKcf.Upgrade())
+            using (JYPPX.OpenCvSharp.Tracking.Tracker upgraded = legacyKcf.Upgrade())
             using (OpenCvLegacyMultiTrackerObject multiTracker = OpenCvLegacyMultiTrackerObject.Create())
             {
                 Rect modernBox = new Rect(6, 7, 8, 8);
                 kcf.Init(first, modernBox);
-                OpenCvSharp.Tracking.TrackerUpdateResult kcfUpdate = kcf.Update(second, modernBox);
+                JYPPX.OpenCvSharp.Tracking.TrackerUpdateResult kcfUpdate = kcf.Update(second, modernBox);
 
                 Rect csrtBox = new Rect(6, 7, 8, 8);
                 csrt.Init(first, csrtBox);
-                OpenCvSharp.Tracking.TrackerUpdateResult csrtUpdate = csrt.Update(second, csrtBox);
+                JYPPX.OpenCvSharp.Tracking.TrackerUpdateResult csrtUpdate = csrt.Update(second, csrtBox);
 
                 Rect2d openCvLegacyBox = new Rect2d(6.0, 7.0, 8.0, 8.0);
                 mil.Init(first, openCvLegacyBox);
-                OpenCvSharp.Tracking.Legacy.LegacyTrackerUpdateResult milUpdate = mil.Update(second, openCvLegacyBox);
+                JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTrackerUpdateResult milUpdate = mil.Update(second, openCvLegacyBox);
                 bool added = multiTracker.Add(medianFlow, first, openCvLegacyBox);
-                OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult multiUpdate = multiTracker.Update(second);
+                JYPPX.OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult multiUpdate = multiTracker.Update(second);
 
                 upgraded.Init(first, modernBox);
-                OpenCvSharp.Tracking.TrackerUpdateResult upgradedUpdate = upgraded.Update(second, modernBox);
+                JYPPX.OpenCvSharp.Tracking.TrackerUpdateResult upgradedUpdate = upgraded.Update(second, modernBox);
 
                 return "Tracking KCF=" + kcfUpdate.Success + "/" + kcfUpdate.BoundingBox
                     + ", CSRT=" + csrtUpdate.Success + "/" + csrtUpdate.BoundingBox
@@ -4494,7 +4484,7 @@ namespace ConsoleSamples
 
         private static string? FindFaceCascadePath()
         {
-            string? configured = GetEnvironmentVariable(FaceCascadeVariable, CompatibilityFaceCascadeAlias);
+            string? configured = GetEnvironmentVariable(FaceCascadeVariable);
             if (!string.IsNullOrWhiteSpace(configured) && File.Exists(configured))
             {
                 return configured;
@@ -4571,7 +4561,7 @@ namespace ConsoleSamples
                 stitcher.CompositingResol = -1.0;
                 stitcher.PanoConfidenceThresh = 0.5;
                 stitcher.WaveCorrection = true;
-                stitcher.WaveCorrectKind = OpenCvSharp.Stitching.WaveCorrectKind.Auto;
+                stitcher.WaveCorrectKind = JYPPX.OpenCvSharp.Stitching.WaveCorrectKind.Auto;
 
                 Mat[] images = LoadStitchingImagesFromEnvironment();
                 bool ownsImages = true;
@@ -4582,7 +4572,7 @@ namespace ConsoleSamples
 
                 try
                 {
-                    OpenCvSharp.Stitching.StitcherStatus status = stitcher.Stitch(images, pano);
+                    JYPPX.OpenCvSharp.Stitching.StitcherStatus status = stitcher.Stitch(images, pano);
                     return "Stitching status=" + status
                         + ", images=" + images.Length
                         + ", pano=" + pano.Rows + "x" + pano.Cols
@@ -4610,7 +4600,7 @@ namespace ConsoleSamples
             using (var second = new Mat(24, 24, MatType.CV_8UC3, new Scalar(80, 80, 80)))
             using (var firstMask = new Mat(24, 24, MatType.CV_8UC1, new Scalar(255)))
             using (var secondMask = new Mat(24, 24, MatType.CV_8UC1, new Scalar(255)))
-            using (var compensator = new OpenCvSharp.Stitching.GainCompensator())
+            using (var compensator = new JYPPX.OpenCvSharp.Stitching.GainCompensator())
             {
                 var corners = new[] { new Point(0, 0), new Point(0, 0) };
                 compensator.Feed(corners, new[] { first, second }, new[] { firstMask, secondMask });
@@ -4635,7 +4625,7 @@ namespace ConsoleSamples
             using (var rotation = Mat.Eye(3, 3, MatType.CV_32FC1))
             using (var source = new Mat(4, 5, MatType.CV_8UC1, new Scalar(37)))
             using (var destination = new Mat())
-            using (var warper = new OpenCvSharp.Stitching.PyRotationWarper("plane", 1.0f))
+            using (var warper = new JYPPX.OpenCvSharp.Stitching.PyRotationWarper("plane", 1.0f))
             {
                 Point2f projected = warper.WarpPoint(new Point2f(2.0f, 3.0f), camera, rotation);
                 Rect roi = warper.WarpRoi(new Size(source.Cols, source.Rows), camera, rotation);
@@ -4654,15 +4644,15 @@ namespace ConsoleSamples
             using (var mask = new Mat(8, 8, MatType.CV_8UC1, new Scalar(255)))
             using (var destination = new Mat())
             using (var destinationMask = new Mat())
-            using (var blender = new OpenCvSharp.Stitching.MultiBandBlender(tryGpu: true, numberOfBands: 2))
+            using (var blender = new JYPPX.OpenCvSharp.Stitching.MultiBandBlender(tryGpu: true, numberOfBands: 2))
             {
                 blender.Prepare(new Rect(0, 0, image.Cols, image.Rows));
                 blender.Feed(image, mask, new Point(0, 0));
                 blender.Blend(destination, destinationMask);
-                Mat[] pyramid = OpenCvSharp.Stitching.Blender.CreateLaplacePyramid(image, 1);
+                Mat[] pyramid = JYPPX.OpenCvSharp.Stitching.Blender.CreateLaplacePyramid(image, 1);
                 try
                 {
-                    OpenCvSharp.Stitching.Blender.RestoreImageFromLaplacePyramid(pyramid);
+                    JYPPX.OpenCvSharp.Stitching.Blender.RestoreImageFromLaplacePyramid(pyramid);
                     return "blender=" + destination.Cols + "x" + destination.Rows
                         + ", blenderType=" + destination.Type
                         + ", blenderMask=" + destinationMask.Type
@@ -4679,19 +4669,19 @@ namespace ConsoleSamples
         {
             var corners = new[] { new Point(-2, 3), new Point(2, 1) };
             var sizes = new[] { new Size(6, 4), new Size(5, 7) };
-            Rect union = OpenCvSharp.Stitching.StitchingUtilities.ResultRoi(corners, sizes);
-            Rect intersection = OpenCvSharp.Stitching.StitchingUtilities.ResultRoiIntersection(corners, sizes);
+            Rect union = JYPPX.OpenCvSharp.Stitching.StitchingUtilities.ResultRoi(corners, sizes);
+            Rect intersection = JYPPX.OpenCvSharp.Stitching.StitchingUtilities.ResultRoiIntersection(corners, sizes);
             using (var seamImage = new Mat(4, 6, MatType.CV_32FC3, new Scalar(10, 20, 30)))
             using (var seamMask = new Mat(4, 6, MatType.CV_8UC1, new Scalar(255)))
-            using (OpenCvSharp.Stitching.SeamFinder seamFinder =
-                OpenCvSharp.Stitching.SeamFinder.CreateDefault(OpenCvSharp.Stitching.SeamFinderType.None))
+            using (JYPPX.OpenCvSharp.Stitching.SeamFinder seamFinder =
+                JYPPX.OpenCvSharp.Stitching.SeamFinder.CreateDefault(JYPPX.OpenCvSharp.Stitching.SeamFinderType.None))
             using (var timelapseImage = new Mat(2, 3, MatType.CV_16SC3, new Scalar(7, 11, 13)))
             using (var timelapseMask = new Mat(2, 3, MatType.CV_8UC1, new Scalar(255)))
-            using (OpenCvSharp.Stitching.Timelapser timelapser =
-                OpenCvSharp.Stitching.Timelapser.CreateDefault(OpenCvSharp.Stitching.TimelapserType.AsIs))
+            using (JYPPX.OpenCvSharp.Stitching.Timelapser timelapser =
+                JYPPX.OpenCvSharp.Stitching.Timelapser.CreateDefault(JYPPX.OpenCvSharp.Stitching.TimelapserType.AsIs))
             using (var camera = Mat.Eye(3, 3, MatType.CV_32FC1))
             using (var rotation = Mat.Eye(3, 3, MatType.CV_32FC1))
-            using (var projector = new OpenCvSharp.Stitching.SphericalProjector(2F, camera, rotation))
+            using (var projector = new JYPPX.OpenCvSharp.Stitching.SphericalProjector(2F, camera, rotation))
             {
                 seamFinder.Find(new[] { seamImage }, new[] { corners[0] }, new[] { seamMask });
                 timelapser.Initialize(new[] { new Point(-1, 2) }, new[] { new Size(3, 2) });
@@ -4714,7 +4704,7 @@ namespace ConsoleSamples
             using (var first = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0)))
             using (var second = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0)))
             using (ORB orb = ORB.Create(maxFeatures: 120))
-            using (var matcher = new OpenCvSharp.Stitching.BestOf2NearestMatcher(matchConfidence: 0.8f))
+            using (var matcher = new JYPPX.OpenCvSharp.Stitching.BestOf2NearestMatcher(matchConfidence: 0.8f))
             {
                 ImgProcCv2.Rectangle(first, new Rect(12, 12, 60, 60), new Scalar(255), 3);
                 ImgProcCv2.Line(first, new Point(8, 84), new Point(84, 8), new Scalar(200), 2);
@@ -4723,9 +4713,9 @@ namespace ConsoleSamples
                 ImgProcCv2.Line(second, new Point(12, 87), new Point(88, 11), new Scalar(200), 2);
                 ImgProcCv2.Circle(second, new Point(72, 71), 12, new Scalar(180), 2);
 
-                OpenCvSharp.Stitching.ImageFeatures[] features = OpenCvSharp.Stitching.ImageFeatures.Compute(
+                JYPPX.OpenCvSharp.Stitching.ImageFeatures[] features = JYPPX.OpenCvSharp.Stitching.ImageFeatures.Compute(
                     orb, new[] { first, second });
-                OpenCvSharp.Stitching.MatchesInfo[] matches = Array.Empty<OpenCvSharp.Stitching.MatchesInfo>();
+                JYPPX.OpenCvSharp.Stitching.MatchesInfo[] matches = Array.Empty<JYPPX.OpenCvSharp.Stitching.MatchesInfo>();
                 try
                 {
                     matches = matcher.Match(features);
@@ -4737,44 +4727,44 @@ namespace ConsoleSamples
                 }
                 finally
                 {
-                    foreach (OpenCvSharp.Stitching.MatchesInfo match in matches) match.Dispose();
-                    foreach (OpenCvSharp.Stitching.ImageFeatures feature in features) feature.Dispose();
+                    foreach (JYPPX.OpenCvSharp.Stitching.MatchesInfo match in matches) match.Dispose();
+                    foreach (JYPPX.OpenCvSharp.Stitching.ImageFeatures feature in features) feature.Dispose();
                 }
             }
         }
 
         private static string RunMotionEstimatorSummary(
-            OpenCvSharp.Stitching.ImageFeatures[] features,
-            OpenCvSharp.Stitching.MatchesInfo[] matches)
+            JYPPX.OpenCvSharp.Stitching.ImageFeatures[] features,
+            JYPPX.OpenCvSharp.Stitching.MatchesInfo[] matches)
         {
-            var initial = new OpenCvSharp.Stitching.StitcherCameraParams[features.Length];
+            var initial = new JYPPX.OpenCvSharp.Stitching.StitcherCameraParams[features.Length];
             var rotations = new Mat[features.Length];
             var translations = new Mat[features.Length];
-            OpenCvSharp.Stitching.StitcherCameraParams[] adjusted = Array.Empty<OpenCvSharp.Stitching.StitcherCameraParams>();
-            OpenCvSharp.Stitching.ImageFeatures[] componentFeatures = Array.Empty<OpenCvSharp.Stitching.ImageFeatures>();
-            OpenCvSharp.Stitching.MatchesInfo[] componentMatches = Array.Empty<OpenCvSharp.Stitching.MatchesInfo>();
+            JYPPX.OpenCvSharp.Stitching.StitcherCameraParams[] adjusted = Array.Empty<JYPPX.OpenCvSharp.Stitching.StitcherCameraParams>();
+            JYPPX.OpenCvSharp.Stitching.ImageFeatures[] componentFeatures = Array.Empty<JYPPX.OpenCvSharp.Stitching.ImageFeatures>();
+            JYPPX.OpenCvSharp.Stitching.MatchesInfo[] componentMatches = Array.Empty<JYPPX.OpenCvSharp.Stitching.MatchesInfo>();
             try
             {
                 for (int i = 0; i < features.Length; ++i)
                 {
                     rotations[i] = Mat.Eye(3, 3, MatType.CV_32FC1);
                     translations[i] = new Mat(3, 1, MatType.CV_32FC1, new Scalar(0));
-                    initial[i] = new OpenCvSharp.Stitching.StitcherCameraParams(
+                    initial[i] = new JYPPX.OpenCvSharp.Stitching.StitcherCameraParams(
                         500, 1, 48, 48, rotations[i], translations[i]);
                 }
 
-                using (var adjuster = new OpenCvSharp.Stitching.NoBundleAdjuster())
+                using (var adjuster = new JYPPX.OpenCvSharp.Stitching.NoBundleAdjuster())
                 {
                     adjuster.ConfidenceThreshold = 0.0;
                     bool succeeded = adjuster.Apply(features, matches, initial, out adjusted);
                     Mat[] correctedRotations = adjusted.Select(camera => camera.Rotation).ToArray();
-                    OpenCvSharp.Stitching.StitchingMotion.WaveCorrect(
-                        correctedRotations, OpenCvSharp.Stitching.WaveCorrectKind.Horizontal);
+                    JYPPX.OpenCvSharp.Stitching.StitchingMotion.WaveCorrect(
+                        correctedRotations, JYPPX.OpenCvSharp.Stitching.WaveCorrectKind.Horizontal);
                     using (Mat intrinsic = adjusted[0].GetCameraMatrix())
                     {
-                        string graph = OpenCvSharp.Stitching.StitchingMotion.MatchesGraphAsString(
+                        string graph = JYPPX.OpenCvSharp.Stitching.StitchingMotion.MatchesGraphAsString(
                             new[] { "left.png", "right.png" }, matches, 0.0f);
-                        int[] component = OpenCvSharp.Stitching.StitchingMotion.LeaveBiggestComponent(
+                        int[] component = JYPPX.OpenCvSharp.Stitching.StitchingMotion.LeaveBiggestComponent(
                             features, matches, 0.0f, out componentFeatures, out componentMatches);
                         return "motionAdjusted=" + succeeded
                             + ", K=" + intrinsic.Rows + "x" + intrinsic.Cols
@@ -4785,9 +4775,9 @@ namespace ConsoleSamples
             }
             finally
             {
-                foreach (OpenCvSharp.Stitching.MatchesInfo match in componentMatches) match.Dispose();
-                foreach (OpenCvSharp.Stitching.ImageFeatures feature in componentFeatures) feature.Dispose();
-                foreach (OpenCvSharp.Stitching.StitcherCameraParams camera in adjusted)
+                foreach (JYPPX.OpenCvSharp.Stitching.MatchesInfo match in componentMatches) match.Dispose();
+                foreach (JYPPX.OpenCvSharp.Stitching.ImageFeatures feature in componentFeatures) feature.Dispose();
+                foreach (JYPPX.OpenCvSharp.Stitching.StitcherCameraParams camera in adjusted)
                 {
                     camera.Rotation.Dispose();
                     camera.Translation.Dispose();
@@ -4799,7 +4789,7 @@ namespace ConsoleSamples
 
         private static Mat[] LoadStitchingImagesFromEnvironment()
         {
-            string imageList = GetEnvironmentVariable(StitchingImagesVariable, CompatibilityStitchingImagesAlias) ?? string.Empty;
+            string imageList = GetEnvironmentVariable(StitchingImagesVariable) ?? string.Empty;
             if (string.IsNullOrWhiteSpace(imageList))
             {
                 return Array.Empty<Mat>();
@@ -4825,20 +4815,19 @@ namespace ConsoleSamples
             return new[] { first, second };
         }
 
-        private static string? GetEnvironmentVariable(string neutralName, string compatibilityAliasName)
+        private static string? GetEnvironmentVariable(string name)
         {
-            string? neutralValue = Environment.GetEnvironmentVariable(neutralName);
-            return string.IsNullOrEmpty(neutralValue) ? Environment.GetEnvironmentVariable(compatibilityAliasName) : neutralValue;
+            return Environment.GetEnvironmentVariable(name);
         }
 
-        private static bool IsEnvironmentFlagEnabled(string neutralName, string compatibilityAliasName)
+        private static bool IsEnvironmentFlagEnabled(string name)
         {
-            string? value = GetEnvironmentVariable(neutralName, compatibilityAliasName);
+            string? value = GetEnvironmentVariable(name);
             return string.Equals(value, "1", StringComparison.OrdinalIgnoreCase) ||
                 string.Equals(value, "true", StringComparison.OrdinalIgnoreCase);
         }
 
-        private static int DisposeAndCount(OpenCvSharp.Stitching.StitcherCameraParams[] cameras)
+        private static int DisposeAndCount(JYPPX.OpenCvSharp.Stitching.StitcherCameraParams[] cameras)
         {
             try
             {

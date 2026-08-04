@@ -10,13 +10,12 @@ $cmakePath = Join-Path $repo "src/OpenCvSharp.Native/CMakeLists.txt"
 $nativeSourceRoot = Join-Path $repo "src/OpenCvSharp.Native/src"
 $imgprocSourcePath = Join-Path $nativeSourceRoot "imgproc.cpp"
 $nativeSmokePath = Join-Path $repo "src/OpenCvSharp.Native/tests/native_smoke.cpp"
-$generatorPath = Join-Path $repo "scripts/Generate-NativeAbiCompatibility.ps1"
+$generatorPath = Join-Path $repo "scripts/Generate-NativeAbiManifest.ps1"
 $buildNativePath = Join-Path $repo "scripts/Build-Native.ps1"
 $workflowPath = Join-Path $repo ".github/workflows/runtime-input.yml"
 $matrixPath = Join-Path $repo "packaging/runtime/runtime-package-matrix.json"
-$miniAbiPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_mini.cpp"
-$miniManifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
-$fullManifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
+$miniManifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"
+$fullManifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
 
 $requiredPaths = @(
     $cmakePath,
@@ -27,7 +26,6 @@ $requiredPaths = @(
     $buildNativePath,
     $workflowPath,
     $matrixPath,
-    $miniAbiPath,
     $miniManifestPath,
     $fullManifestPath
 )
@@ -82,17 +80,16 @@ function Get-ManifestRows {
             Where-Object { $_ -and -not $_.StartsWith("#") -and -not $_.StartsWith("[") -and $_.Contains("|") } |
             ForEach-Object {
                 $parts = $_.Split("|")
-                if ($parts.Count -ne 5) {
+                if ($parts.Count -ne 4) {
                     Add-Violation "Malformed ABI manifest row in $Path`: $_"
                     return
                 }
 
                 [pscustomobject]@{
-                    Primary = $parts[0]
-                    Legacy = $parts[1]
-                    ReturnType = $parts[2]
-                    ParameterCount = [int]$parts[3]
-                    Header = $parts[4]
+                    Name = $parts[0]
+                    ReturnType = $parts[1]
+                    ParameterCount = [int]$parts[2]
+                    Header = $parts[3]
                 }
             }
     )
@@ -121,7 +118,6 @@ $cmakeText = [System.IO.File]::ReadAllText($cmakePath)
 $generatorText = [System.IO.File]::ReadAllText($generatorPath)
 $buildNativeText = [System.IO.File]::ReadAllText($buildNativePath)
 $workflowText = [System.IO.File]::ReadAllText($workflowPath)
-$miniAbiText = [System.IO.File]::ReadAllText($miniAbiPath)
 $imgprocSourceText = [System.IO.File]::ReadAllText($imgprocSourcePath)
 $nativeSmokeText = [System.IO.File]::ReadAllText($nativeSmokePath)
 
@@ -132,14 +128,12 @@ foreach ($expectation in @(
         @($cmakeText, 'find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs videoio geometry flann)', "Mini CMake must require only mini OpenCV components plus the OpenCV 5 geometry/flann dependency chain"),
         @($cmakeText, 'OPENCV_CSHARP_HAS_OPENCV_GEOMETRY=1', "Mini/full CMake must expose OpenCV 5 geometry-backed imgproc APIs"),
         @($cmakeText, 'OPENCV_CSHARP_HAS_OPENCV_FEATURES=1', "Full CMake must explicitly expose OpenCV 5 features-backed imgproc APIs"),
-        @($cmakeText, 'set(OPENCV_CSHARP_NATIVE_ABI_SOURCE generated/legacy_abi_mini.cpp)', "Mini CMake must select the reduced compatibility ABI"),
-        @($cmakeText, 'set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/legacy_abi_mini_manifest.txt)', "Mini CTest must select the reduced export manifest"),
+        @($cmakeText, 'set(OPENCV_CSHARP_NATIVE_ABI_MANIFEST generated/native_abi_mini_manifest.txt)', "Mini CTest must select the reduced export manifest"),
         @($cmakeText, 'BUILD_WITH_INSTALL_RPATH TRUE', "Linked Linux native wrapper must use its package runtime RPATH during the producer build"),
         @($cmakeText, 'INSTALL_RPATH "\$ORIGIN"', "Linked Linux native wrapper must resolve packaged OpenCV dependencies beside the loader"),
         @($cmakeText, 'target_link_options(${OPENCV_CSHARP_NATIVE_TARGET} PRIVATE "LINKER:--no-as-needed")', "Linked Linux full and mini wrappers must keep their declared runtime closures as direct loader dependencies"),
         @($cmakeText, 'LD_LIBRARY_PATH=${OPENCV_CSHARP_OPENCV_RUNTIME_DIRECTORY}', "Producer CTest must resolve OpenCV from the factual install tree without changing the packaged loader RPATH"),
-        @($generatorText, 'generated/legacy_abi_mini.cpp', "ABI generator must own the mini forwarding unit"),
-        @($generatorText, 'generated/legacy_abi_mini_manifest.txt', "ABI generator must own the mini manifest"),
+        @($generatorText, 'generated/native_abi_mini_manifest.txt', "ABI generator must own the mini manifest"),
         @($buildNativeText, '[ValidateSet("full", "mini")]', "Build-Native must expose full/mini profiles"),
         @($buildNativeText, '"-DOPENCV_CSHARP_RUNTIME_PROFILE=$RuntimeProfile"', "Build-Native must pass runtime profile to CMake"),
         @($workflowText, "'ubuntu.24.04-x64/mini'", "Runtime producer must explicitly allow the first mini target"),
@@ -240,18 +234,8 @@ if ($missingManifestHeaders.Count -gt 0) {
     Add-Violation "Mini ABI manifest is missing supported headers: $($missingManifestHeaders -join ', ')"
 }
 
-foreach ($row in $miniRows) {
-    if (-not $miniAbiText.Contains("$($row.Legacy)(")) {
-        Add-Violation "Mini compatibility ABI is missing legacy export $($row.Legacy)."
-    }
-    if (-not $miniAbiText.Contains("$($row.Primary)(")) {
-        Add-Violation "Mini compatibility ABI is missing forwarding call $($row.Primary)."
-    }
-}
-
-$fixedMajorDnnPrefix = "jyppx_ocv" + "5_dnn_" # compatibility ABI check; keep fixed-major token out of new project identity text
-if ($miniAbiText.Contains('open_cv_sharp/dnn/dnn.h') -or $miniAbiText.Contains($fixedMajorDnnPrefix)) {
-    Add-Violation "Mini compatibility ABI must not include or forward DNN entrypoints."
+if (@($miniRows.Name | Where-Object { $_.StartsWith("jyppx_ocv_dnn_", [StringComparison]::Ordinal) }).Count -gt 0) {
+    Add-Violation "Mini ABI manifest must not include DNN entrypoints."
 }
 
 if ($violations.Count -gt 0) {

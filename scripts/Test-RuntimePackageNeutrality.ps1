@@ -9,9 +9,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $primaryManagedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $preferredRuntimeCopyProperty = "OpenCvNativeRuntimeDir"
-$compatibilityRuntimeCopyProperty = "OpenCv5SharpNativeRuntimeDir"
 
 function Get-RepositoryRelativePath {
     param(
@@ -75,17 +73,12 @@ if (-not (Test-Contains -Text $stageRuntimeText -Needle "`"$primaryNativeLoader`
     Add-Violation $violations $stageRuntimePath "Stage-Runtime must name $primaryNativeLoader as the Windows primary loader"
 }
 
-if (-not (Test-Contains -Text $stageRuntimeText -Needle '"Cv5Sharp.Native" # compatibility loader')) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must keep $compatibilityNativeLoader only as an explicit compatibility copy"
-}
-
 if (-not (Test-Contains -Text $stageRuntimeText -Needle '"libJYPPX.OpenCV.Native.so"')) {
     Add-Violation $violations $stageRuntimePath "Stage-Runtime must name libJYPPX.OpenCV.Native.so as the non-Windows primary loader"
 }
 
 foreach ($needle in @(
-        "(Join-Path `$nativeRuntimePath `$primaryNativeLoaderFileName)",
-        "(Join-Path `$nativeRuntimePath `$compatibilityNativeLoaderCopyFileName)")) {
+        "(Join-Path `$nativeRuntimePath `$primaryNativeLoaderFileName)")) {
     if (-not (Test-Contains -Text $stageRuntimeText -Needle $needle)) {
         Add-Violation $violations $stageRuntimePath "Stage-Runtime runtimeFiles must include '$needle'"
     }
@@ -153,7 +146,7 @@ foreach ($readmeFile in $runtimeReadmeFiles) {
     $relativePath = Get-RepositoryRelativePath -Path $readmeFile.FullName
     $text = [System.IO.File]::ReadAllText($readmeFile.FullName)
 
-    foreach ($requiredText in @($runtimePackagePrefix, $primaryNativeLoader, $compatibilityNativeLoader)) {
+    foreach ($requiredText in @($runtimePackagePrefix, $primaryNativeLoader)) {
         if (-not (Test-Contains -Text $text -Needle $requiredText)) {
             Add-Violation $violations $relativePath "Runtime README must mention $requiredText"
         }
@@ -175,48 +168,9 @@ foreach ($projectFile in $copyProjectFiles) {
     $relativePath = Get-RepositoryRelativePath -Path $projectFile.FullName
     $text = [System.IO.File]::ReadAllText($projectFile.FullName)
 
-    if ($text.Contains($compatibilityRuntimeCopyProperty)) {
-        if (-not $text.Contains($preferredRuntimeCopyProperty)) {
-            Add-Violation $violations $relativePath "Compatibility runtime copy property requires preferred $preferredRuntimeCopyProperty"
-        }
-
-        if ($text -notmatch "$([regex]::Escape($compatibilityRuntimeCopyProperty)).*(compatibility alias|兼容别名|compatibility)") {
-            Add-Violation $violations $relativePath "$compatibilityRuntimeCopyProperty must be documented as a compatibility alias"
-        }
-    }
-}
-
-$loaderMentionFiles = @(
-    Get-ChildItem -LiteralPath $repo -Recurse -File |
-        Where-Object {
-            $_.FullName -notmatch "\\(\.git|bin|obj|artifacts|packages)\\" -and
-            $_.FullName -notmatch "\\src\\OpenCvSharp\.Native\\generated\\" -and
-            $_.FullName -notmatch "\\src\\OpenCvSharp\.Native\\include\\open_cv_5_sharp\\" # generated compatibility include tree
-        } |
-        Sort-Object FullName
-)
-
-foreach ($file in $loaderMentionFiles) {
-    $relativePath = Get-RepositoryRelativePath -Path $file.FullName
-    try {
-        $lines = [System.IO.File]::ReadAllLines($file.FullName)
-    }
-    catch [System.Text.DecoderFallbackException] {
-        continue
-    }
-    catch [System.IO.IOException] {
-        continue
-    }
-    catch [System.UnauthorizedAccessException] {
-        continue
-    }
-
-    for ($index = 0; $index -lt $lines.Count; $index++) {
-        $line = $lines[$index]
-        if ($line.Contains($compatibilityNativeLoader) -and
-            $line -notmatch "compatibility|兼容|already-compiled|已编译|Compatibility") {
-            Add-Violation $violations $relativePath "$compatibilityNativeLoader mention on line $($index + 1) must be explicitly compatibility-scoped"
-        }
+    if (-not $text.Contains($preferredRuntimeCopyProperty) -and
+        $text.Contains($preferredRuntimeCopyProperty, [System.StringComparison]::OrdinalIgnoreCase)) {
+        Add-Violation $violations $relativePath "Runtime copy property casing must stay $preferredRuntimeCopyProperty"
     }
 }
 
@@ -248,9 +202,6 @@ foreach ($nativeDir in $stagedNativeDirs) {
         Add-Violation $violations $relativePath "Staged runtime native directory with DLLs must include primary loader $primaryNativeLoader"
     }
 
-    if (-not $names.Contains($compatibilityNativeLoader)) {
-        Add-Violation $violations $relativePath "Staged runtime native directory with DLLs must include explicit compatibility loader copy $compatibilityNativeLoader"
-    }
 }
 
 if ($violations.Count -gt 0) {

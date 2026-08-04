@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Dnn;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Dnn;
 
-namespace OpenCvSharp.Tests.Dnn
+namespace JYPPX.OpenCvSharp.Tests.Dnn
 {
     public sealed class DnnNetAdvancedTests
     {

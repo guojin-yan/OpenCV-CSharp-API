@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// DNN backend identifiers compatible with OpenCV <c>cv::dnn::Backend</c>.

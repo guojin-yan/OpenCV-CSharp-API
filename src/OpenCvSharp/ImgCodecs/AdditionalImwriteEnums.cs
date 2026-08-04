@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>Specifies JPEG chroma sampling factors. 指定 JPEG 色度采样因子。</summary>
     public enum ImwriteJpegSamplingFactor

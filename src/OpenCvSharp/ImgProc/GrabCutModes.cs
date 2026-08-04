@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>GrabCut initialization and evaluation modes. GrabCut 初始化与求值模式。</summary>
     public enum GrabCutModes

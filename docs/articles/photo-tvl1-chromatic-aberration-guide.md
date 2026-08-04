@@ -7,8 +7,8 @@
 TV-L1 accepts one or more non-empty, two-dimensional `CV_8UC1` observations with identical dimensions. The wrapper requires this exact type because the upstream implementation reads every observation through byte iterators. ROI and other non-contiguous matrices are accepted. `lambda` and `niters` must both be positive.
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 using var first = new Mat(64, 64, MatType.CV_8UC1, new Scalar(72));
 using var second = new Mat(64, 64, MatType.CV_8UC1, new Scalar(88));

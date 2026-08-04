@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>Specifies final USAC model polishing. 指定最终 USAC 模型精修方法。</summary>
     public enum UsacPolishingMethod

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>
     /// Specifies PNG compression strategy values for <see cref="ImwriteFlags.PngStrategy"/>.

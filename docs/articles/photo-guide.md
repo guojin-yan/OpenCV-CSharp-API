@@ -1,8 +1,8 @@
 # Photo Guide
 
-`OpenCvSharp.Photo` exposes OpenCV `photo` module functions and objects: inpainting, fast non-local means and TV-L1 denoising, chromatic-aberration correction, seamless editing, edge-preserving stylization, tonemap operators, the main HDR align/calibrate/merge workflow, CPU color correction models, and stateful live-wire contours. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_photo500.dll`. See [Photo HDR Workflow Guide](photo-hdr-workflow-guide.md), [Photo Color Correction Model Guide](photo-ccm-guide.md), [Photo Intelligent Scissors Guide](photo-intelligent-scissors-guide.md), and [Photo TV-L1 And Chromatic Aberration Guide](photo-tvl1-chromatic-aberration-guide.md) for ownership, state, and data contracts.
+`JYPPX.OpenCvSharp.Photo` exposes OpenCV `photo` module functions and objects: inpainting, fast non-local means and TV-L1 denoising, chromatic-aberration correction, seamless editing, edge-preserving stylization, tonemap operators, the main HDR align/calibrate/merge workflow, CPU color correction models, and stateful live-wire contours. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_photo500.dll`. See [Photo HDR Workflow Guide](photo-hdr-workflow-guide.md), [Photo Color Correction Model Guide](photo-ccm-guide.md), [Photo Intelligent Scissors Guide](photo-intelligent-scissors-guide.md), and [Photo TV-L1 And Chromatic Aberration Guide](photo-tvl1-chromatic-aberration-guide.md) for ownership, state, and data contracts.
 
-`OpenCvSharp.Photo` 暴露 OpenCV `photo` 模块函数和对象：图像修复、单帧和多帧 fast non-local means 去噪、seamless editing、边缘保持风格化，以及 tone mapping 对象。这些 API 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_photo500.dll`。
+`JYPPX.OpenCvSharp.Photo` 暴露 OpenCV `photo` 模块函数和对象：图像修复、单帧和多帧 fast non-local means 去噪、seamless editing、边缘保持风格化，以及 tone mapping 对象。这些 API 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_photo500.dll`。
 
 ## Covered APIs / 已覆盖接口
 
@@ -53,8 +53,8 @@
 ## Inpainting And Denoising / 图像修复与去噪
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 namespace PhotoFunctionSample
 {
@@ -81,8 +81,8 @@ namespace PhotoFunctionSample
 ## Tonemap Objects / Tone Mapping 对象
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 namespace TonemapSample
 {
@@ -107,7 +107,3 @@ The `Tonemap` base handle owns the native `cv::Ptr<cv::Tonemap>` through an opaq
 `Tonemap` 基类句柄通过 opaque C ABI 句柄持有 native `cv::Ptr<cv::Tonemap>`。Drago bias、Reinhard adaptation 和 Mantiuk scale 等派生属性通过专用函数访问；`cv::Ptr` 不会穿过 ABI。
 
 ## Runtime Notes / 运行时说明
-
-Photo APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_photo500.dll` in addition to the core `Mat` runtime. Multi-frame denoise uses a short-lived array of `Mat` handles and does not expose OpenCV vector layouts through the ABI. Real results depend on valid image types and ranges; tonemap operators usually expect floating-point HDR input. Default tests avoid external images and only run native smoke when `OPENCV_CSHARP_NATIVE_SMOKE` is enabled. The older `OPENCV5SHARP_NATIVE_SMOKE` name remains accepted only as an existing-smoke-workflow compatibility alias.
-
-Photo API 除 core `Mat` runtime 外还需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_photo500.dll`。多帧去噪使用短生命周期的 `Mat` 句柄数组，不会通过 ABI 暴露 OpenCV vector 布局。真实效果取决于有效的图像类型和数值范围；tone mapping 算子通常期望浮点 HDR 输入。默认测试不依赖外部图像，只有设置 `OPENCV_CSHARP_NATIVE_SMOKE` 时才运行 native smoke。旧的 `OPENCV5SHARP_NATIVE_SMOKE` 名称仍仅作为既有 smoke workflow 的兼容别名使用。

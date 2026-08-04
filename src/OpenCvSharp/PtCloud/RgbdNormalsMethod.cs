@@ -1,4 +1,4 @@
-namespace OpenCvSharp.PtCloud
+namespace JYPPX.OpenCvSharp.PtCloud
 {
     /// <summary>
     /// Normal-estimation methods for <see cref="RgbdNormals"/>.

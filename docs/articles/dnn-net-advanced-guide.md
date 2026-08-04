@@ -2,9 +2,9 @@
 
 The current structured network, nested-output, layer ownership, preprocessing, control, and deterministic fixture contract is documented in [DNN Structured Parity Guide](dnn-structured-parity-guide.md).
 
-`OpenCvSharp.Dnn.Net` now includes the second DNN batch: multi-output `Forward`, layer and net metadata, performance profile timings, FLOPS helpers, input-shape helpers, and convenience model readers for selected OpenCV loaders.
+`JYPPX.OpenCvSharp.Dnn.Net` now includes the second DNN batch: multi-output `Forward`, layer and net metadata, performance profile timings, FLOPS helpers, input-shape helpers, and convenience model readers for selected OpenCV loaders.
 
-`OpenCvSharp.Dnn.Net` 现在包含 DNN 第二批能力：多输出 `Forward`、layer/net 元数据、性能剖析耗时、FLOPS helper、输入形状 helper，以及部分 OpenCV loader 的便捷读取入口。
+`JYPPX.OpenCvSharp.Dnn.Net` 现在包含 DNN 第二批能力：多输出 `Forward`、layer/net 元数据、性能剖析耗时、FLOPS helper、输入形状 helper，以及部分 OpenCV loader 的便捷读取入口。
 
 ## Covered APIs / 已覆盖接口
 
@@ -45,8 +45,8 @@ For Caffe and Darknet style path loading, use the existing general `Net.ReadNet(
 ## Multi-Output Forward / 多输出 Forward
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Dnn;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Dnn;
 
 namespace DnnAdvancedSample
 {
@@ -79,9 +79,7 @@ namespace DnnAdvancedSample
 }
 ```
 
-Default tests and ConsoleSamples execute a checked-in 147-byte Identity ONNX fixture without network access. Additional user-model smoke remains opt-in through `OPENCV_CSHARP_DNN_MODEL`, `OPENCV_CSHARP_DNN_CONFIG`, and optionally `OPENCV_CSHARP_DNN_FRAMEWORK`. The older `OPENCV5SHARP_DNN_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
 
-默认测试不会下载或依赖模型。真实模型 smoke 仍通过 `OPENCV_CSHARP_DNN_MODEL`、`OPENCV_CSHARP_DNN_CONFIG`，以及可选的 `OPENCV_CSHARP_DNN_FRAMEWORK` 显式启用。旧的 `OPENCV5SHARP_DNN_*` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 
 Empty `Net` metadata is runtime-specific. The runtime for the current packaged runtime identity, OpenCV 5.0.0, may report internal `_input` output names or layer types even when `Net.Empty` is true, so smoke tests validate that metadata calls are stable rather than requiring all metadata arrays to be empty.
 

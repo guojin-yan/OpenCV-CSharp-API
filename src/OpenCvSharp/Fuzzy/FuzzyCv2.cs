@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Fuzzy
+namespace JYPPX.OpenCvSharp.Fuzzy
 {
     /// <summary>
     /// Entry points for OpenCV fuzzy image-processing functions.

@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     /// <summary>
     /// Provides internal helpers for matrix ownership, slicing, and byte-view access.

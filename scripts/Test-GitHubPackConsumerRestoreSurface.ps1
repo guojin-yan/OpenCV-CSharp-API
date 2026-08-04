@@ -306,7 +306,6 @@ function Get-NativeFileNames {
 
     $ridIsWindows = $Rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)
     $primaryLoaderName = if ($ridIsWindows) { "JYPPX.OpenCV.Native.dll" } else { "libJYPPX.OpenCV.Native.so" }
-    $compatibilityLoaderName = if ($ridIsWindows) { "OpenCv5Sharp.Native.dll" } else { "libOpenCv5Sharp.Native.so" } # compatibility loader copy for already-compiled consumers
     $moduleFileNames = foreach ($module in $Modules) {
         if ($ridIsWindows) {
             "opencv_$module$OpenCvBinarySuffix.dll"
@@ -328,9 +327,8 @@ function Get-NativeFileNames {
 
     return [pscustomobject]@{
         PrimaryLoader = $primaryLoaderName
-        CompatibilityLoader = $compatibilityLoaderName
         Modules = @($moduleFileNames)
-        All = @($primaryLoaderName, $compatibilityLoaderName) + @($moduleFileNames)
+        All = @($primaryLoaderName) + @($moduleFileNames)
     }
 }
 
@@ -378,8 +376,8 @@ function New-TemporaryConsumerProject {
         $programText = @'
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
 
 namespace PackageConsumer;
 
@@ -405,7 +403,7 @@ internal static class Program
 __TARGET_PROCESS_ARCHITECTURE_GUARD__
             using var source = new Mat(3, 4, MatType.CV_8UC3, new Scalar(10, 20, 30));
             using var gray = new Mat();
-            OpenCvSharp.ImgProc.Cv2.CvtColor(source, gray, OpenCvSharp.ImgProc.ColorConversionCodes.BGR2GRAY);
+            JYPPX.OpenCvSharp.ImgProc.Cv2.CvtColor(source, gray, JYPPX.OpenCvSharp.ImgProc.ColorConversionCodes.BGR2GRAY);
             if (source.Empty || source.Rows != 3 || source.Cols != 4 || source.Channels != 3)
             {
                 Console.Error.WriteLine("CORE_SMOKE_FAILED");
@@ -418,15 +416,15 @@ __TARGET_PROCESS_ARCHITECTURE_GUARD__
                 return 11;
             }
 
-            byte[] encoded = OpenCvSharp.ImgCodecs.Cv2.ImEncode(".png", gray);
-            using var decoded = OpenCvSharp.ImgCodecs.Cv2.ImDecode(encoded, OpenCvSharp.ImgCodecs.ImreadModes.Grayscale);
+            byte[] encoded = JYPPX.OpenCvSharp.ImgCodecs.Cv2.ImEncode(".png", gray);
+            using var decoded = JYPPX.OpenCvSharp.ImgCodecs.Cv2.ImDecode(encoded, JYPPX.OpenCvSharp.ImgCodecs.ImreadModes.Grayscale);
             if (encoded.Length == 0 || decoded.Empty || decoded.Rows != 3 || decoded.Cols != 4 || decoded.Channels != 1)
             {
                 Console.Error.WriteLine("IMGCODECS_SMOKE_FAILED");
                 return 12;
             }
 
-            using var capture = new OpenCvSharp.VideoIO.VideoCapture();
+            using var capture = new JYPPX.OpenCvSharp.VideoIO.VideoCapture();
             if (capture.IsOpened)
             {
                 Console.Error.WriteLine("VIDEOIO_SMOKE_FAILED");
@@ -488,7 +486,7 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
         }
         if ($RuntimeProfile -eq "full") {
             $profileSpecificNativeSmoke = @'
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(source, 1.0, new Size(4, 3)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(source, 1.0, new Size(4, 3)))
             {
                 if (blob.Empty || blob.Dims != 4)
                 {
@@ -521,7 +519,7 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
     }
     else {
         $programText = @'
-using OpenCvSharp;
+using JYPPX.OpenCvSharp;
 
 namespace PackageConsumer;
 

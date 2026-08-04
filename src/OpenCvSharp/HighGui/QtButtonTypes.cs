@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// Qt HighGUI button types compatible with OpenCV <c>cv::QtButtonTypes</c>.

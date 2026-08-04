@@ -1,8 +1,8 @@
 # XImgProc Segmentation Guide / XImgProc 分割指南
 
-`OpenCvSharp.XImgProc` includes model-free segmentation and proposal wrappers from OpenCV contrib `ximgproc`.
+`JYPPX.OpenCvSharp.XImgProc` includes model-free segmentation and proposal wrappers from OpenCV contrib `ximgproc`.
 
-`OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 中不依赖模型文件的分割与候选框包装。
+`JYPPX.OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 中不依赖模型文件的分割与候选框包装。
 
 ## Scope / 范围
 
@@ -31,8 +31,8 @@ strategy 和 graph segmentation 句柄由各自 managed wrapper 持有。向 Sel
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcSegmentationExample
 {

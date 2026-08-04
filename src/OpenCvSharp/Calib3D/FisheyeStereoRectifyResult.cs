@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>Owns all matrices returned by fisheye stereo rectification. 拥有鱼眼双目标定返回的全部矩阵。</summary>
     public readonly struct FisheyeStereoRectifyResult

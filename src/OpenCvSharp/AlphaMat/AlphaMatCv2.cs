@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.AlphaMat
+namespace JYPPX.OpenCvSharp.AlphaMat
 {
     /// <summary>
     /// Static helpers for OpenCV contrib alpha matting.

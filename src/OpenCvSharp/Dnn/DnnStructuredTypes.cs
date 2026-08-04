@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Dnn
+namespace JYPPX.OpenCvSharp.Dnn
 {
     /// <summary>Controls OpenCV DNN graph tracing.</summary>
     public enum DnnTracingMode

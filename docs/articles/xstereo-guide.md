@@ -1,8 +1,8 @@
 # XStereo Guide / XStereo 指南
 
-`OpenCvSharp.XStereo` wraps the first OpenCV contrib `xstereo` descriptor, binary stereo, and quasi-dense stereo surfaces.
+`JYPPX.OpenCvSharp.XStereo` wraps the first OpenCV contrib `xstereo` descriptor, binary stereo, and quasi-dense stereo surfaces.
 
-`OpenCvSharp.XStereo` 封装第一批 OpenCV contrib `xstereo` 描述子、二值 stereo 和 quasi-dense stereo 能力。
+`JYPPX.OpenCvSharp.XStereo` 封装第一批 OpenCV contrib `xstereo` 描述子、二值 stereo 和 quasi-dense stereo 能力。
 
 ## Scope / 范围
 
@@ -25,9 +25,9 @@
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XStereo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XStereo;
 
 internal static class Program
 {

@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Stitching;
 
-namespace OpenCvSharp.Tests.Stitching
+namespace JYPPX.OpenCvSharp.Tests.Stitching
 {
     public sealed class MotionEstimatorTests
     {

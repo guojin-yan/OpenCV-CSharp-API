@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies contour retrieval modes compatible with OpenCV <c>cv::RetrievalModes</c>.

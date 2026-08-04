@@ -1,11 +1,11 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
-namespace OpenCvSharp.Tests.Calib3D
+namespace JYPPX.OpenCvSharp.Tests.Calib3D
 {
     public sealed class Calib3DTests
     {
@@ -698,8 +698,8 @@ namespace OpenCvSharp.Tests.Calib3D
             {
                 left.SetTo(new Scalar(0));
                 right.SetTo(new Scalar(0));
-                OpenCvSharp.ImgProc.Cv2.Rectangle(left, new Rect(20, 20, 20, 20), new Scalar(255), -1);
-                OpenCvSharp.ImgProc.Cv2.Rectangle(right, new Rect(16, 20, 20, 20), new Scalar(255), -1);
+                JYPPX.OpenCvSharp.ImgProc.Cv2.Rectangle(left, new Rect(20, 20, 20, 20), new Scalar(255), -1);
+                JYPPX.OpenCvSharp.ImgProc.Cv2.Rectangle(right, new Rect(16, 20, 20, 20), new Scalar(255), -1);
 
                 stereo.MinDisparity = 0;
                 stereo.NumDisparities = 16;

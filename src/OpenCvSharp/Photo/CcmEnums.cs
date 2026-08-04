@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Photo
+namespace JYPPX.OpenCvSharp.Photo
 {
     /// <summary>Shape of the color correction matrix.</summary>
     public enum CcmType

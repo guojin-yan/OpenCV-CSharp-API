@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XImgProc
+namespace JYPPX.OpenCvSharp.XImgProc
 {
     /// <summary>
     /// Base class for ximgproc sparse match interpolators.
@@ -43,8 +43,8 @@ namespace OpenCvSharp.XImgProc
         public void Interpolate(Mat fromImage, Point2f[] fromPoints, Mat toImage, Point2f[] toPoints, Mat denseFlow)
         {
             ValidatePointPairs(fromPoints, toPoints);
-            using (Mat fromMat = OpenCvSharp.Calib3D.Cv2.ToPointMat(fromPoints))
-            using (Mat toMat = OpenCvSharp.Calib3D.Cv2.ToPointMat(toPoints))
+            using (Mat fromMat = JYPPX.OpenCvSharp.Calib3D.Cv2.ToPointMat(fromPoints))
+            using (Mat toMat = JYPPX.OpenCvSharp.Calib3D.Cv2.ToPointMat(toPoints))
             {
                 Interpolate(fromImage, fromMat, toImage, toMat, denseFlow);
             }

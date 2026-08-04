@@ -1,4 +1,4 @@
-namespace OpenCvSharp.XObjDetect
+namespace JYPPX.OpenCvSharp.XObjDetect
 {
     /// <summary>
     /// HOG histogram normalization type.

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     /// <summary>
     /// Video capture and writer API backend identifiers.

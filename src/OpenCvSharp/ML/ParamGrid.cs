@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>
     /// Represents an OpenCV ML parameter grid.

@@ -6,13 +6,13 @@
 
 ## SVD / 奇异值分解
 
-`OpenCvSharp.Core.Svd` mirrors the lifetime and main operations of `cv::SVD`.
+`JYPPX.OpenCvSharp.Core.Svd` mirrors the lifetime and main operations of `cv::SVD`.
 
-`OpenCvSharp.Core.Svd` 对齐 `cv::SVD` 的生命周期和主要操作。
+`JYPPX.OpenCvSharp.Core.Svd` 对齐 `cv::SVD` 的生命周期和主要操作。
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {
@@ -56,13 +56,13 @@ Available SVD APIs:
 
 ## RNG / 随机数生成器
 
-`OpenCvSharp.Core.Rng` mirrors `cv::RNG` scalar generation and matrix filling.
+`JYPPX.OpenCvSharp.Core.Rng` mirrors `cv::RNG` scalar generation and matrix filling.
 
-`OpenCvSharp.Core.Rng` 对齐 `cv::RNG` 的标量生成和矩阵填充能力。
+`JYPPX.OpenCvSharp.Core.Rng` 对齐 `cv::RNG` 的标量生成和矩阵填充能力。
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {

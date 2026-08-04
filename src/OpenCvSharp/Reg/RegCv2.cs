@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Reg
+namespace JYPPX.OpenCvSharp.Reg
 {
     /// <summary>
     /// Factory helpers for the OpenCV reg module.

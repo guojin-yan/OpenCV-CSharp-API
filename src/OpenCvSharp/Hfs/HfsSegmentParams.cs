@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Hfs
+namespace JYPPX.OpenCvSharp.Hfs
 {
     /// <summary>
     /// Parameters for OpenCV HFS image segmentation.

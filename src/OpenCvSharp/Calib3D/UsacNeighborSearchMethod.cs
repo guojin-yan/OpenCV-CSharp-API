@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>Specifies the USAC neighborhood search. 指定 USAC 邻域搜索方法。</summary>
     public enum UsacNeighborSearchMethod

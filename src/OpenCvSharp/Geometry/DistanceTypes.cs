@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Geometry
+namespace JYPPX.OpenCvSharp.Geometry
 {
     /// <summary>
     /// Specifies distance metrics compatible with OpenCV's <c>cv::DistanceTypes</c>.

@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tests.Core
+namespace JYPPX.OpenCvSharp.Tests.Core
 {
     [Collection(NativeSmokeCollection.Name)]
     public class CoreRuntimeDiagnosticsTimingTests

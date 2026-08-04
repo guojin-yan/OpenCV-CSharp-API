@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Face
+namespace JYPPX.OpenCvSharp.Face
 {
     /// <summary>
     /// Result returned by a facemark fitting call.

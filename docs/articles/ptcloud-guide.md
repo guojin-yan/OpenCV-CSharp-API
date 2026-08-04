@@ -1,8 +1,8 @@
 # PtCloud Guide / PtCloud 指南
 
-`OpenCvSharp.PtCloud` wraps the first OpenCV `ptcloud` depth and RGB-D utilities through stable `Mat` handles.
+`JYPPX.OpenCvSharp.PtCloud` wraps the first OpenCV `ptcloud` depth and RGB-D utilities through stable `Mat` handles.
 
-`OpenCvSharp.PtCloud` 通过稳定的 `Mat` 句柄封装第一批 OpenCV `ptcloud` 深度与 RGB-D 工具。
+`JYPPX.OpenCvSharp.PtCloud` 通过稳定的 `Mat` 句柄封装第一批 OpenCV `ptcloud` 深度与 RGB-D 工具。
 
 ## Scope / 范围
 
@@ -27,8 +27,8 @@ Depth behavior depends on camera intrinsics, depth units, and matrix type. `CV_1
 深度处理结果取决于相机内参、深度单位和矩阵类型。OpenCV helper 会把 `CV_16U` 深度视作类似毫米的输入，而 `CV_32F` 与 `CV_64F` 视作米制深度值。平面提取需要有组织的 3D 点，并依赖合理的内参和传感器误差参数。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.PtCloud;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.PtCloud;
 
 using Mat depth = new Mat(2, 2, MatType.CV_16UC1, new Scalar(1000));
 using Mat k = Mat.Eye(3, 3, MatType.CV_32F);

@@ -1,8 +1,8 @@
 # XImgProc Disparity Guide / XImgProc Disparity 指南
 
-`OpenCvSharp.XImgProc` includes the second-batch disparity helpers from OpenCV contrib `ximgproc`.
+`JYPPX.OpenCvSharp.XImgProc` includes the second-batch disparity helpers from OpenCV contrib `ximgproc`.
 
-`OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 第二批 disparity 相关能力。
+`JYPPX.OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 第二批 disparity 相关能力。
 
 ## Scope / 范围
 
@@ -57,9 +57,9 @@ stereo 输入必须是非空、已校正并且尺寸与类型完全一致的图�
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcDisparityExample
 {
@@ -101,7 +101,3 @@ namespace XImgProcDisparityExample
 ```
 
 ## Smoke / Smoke
-
-Default tests keep these APIs behind managed validation and `NOT_LINKED` boundaries. Linked smoke is enabled with `OPENCV_CSHARP_NATIVE_SMOKE=1` and uses tiny synthetic disparity maps, so it verifies ABI shape and call paths rather than stereo quality. The older `OPENCV5SHARP_NATIVE_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias.
-
-默认测试只覆盖 managed 校验和 `NOT_LINKED` 边界。linked smoke 由 `OPENCV_CSHARP_NATIVE_SMOKE=1` 启用，并使用 tiny 合成 disparity map，因此验证的是 ABI 形状和调用路径，不代表 stereo 质量。旧的 `OPENCV5SHARP_NATIVE_SMOKE=1` 名称仍仅作为既有 smoke workflow 的兼容别名使用。

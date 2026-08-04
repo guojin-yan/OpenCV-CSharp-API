@@ -4,7 +4,7 @@
 
 ## Checklist
 
-- [ ] Public C# APIs are under `OpenCvSharp`.
+- [ ] Public C# APIs are under `JYPPX.OpenCvSharp`.
 - [ ] Public APIs have bilingual XML documentation.
 - [ ] No top-level statements were added.
 - [ ] Primary native exports use the version-neutral `jyppx_ocv_` prefix.

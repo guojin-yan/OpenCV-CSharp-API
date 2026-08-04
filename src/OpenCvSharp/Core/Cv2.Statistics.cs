@@ -1,10 +1,10 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
 #if NETCOREAPP3_1_OR_GREATER
 #endif
 
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     public static partial class Cv2
     {

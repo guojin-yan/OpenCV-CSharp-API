@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Saliency
+namespace JYPPX.OpenCvSharp.Saliency
 {
     /// <summary>
     /// ObjectnessBING candidate boxes and their optional scores.

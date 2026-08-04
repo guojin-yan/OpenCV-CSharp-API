@@ -95,9 +95,9 @@ owned-result 重载会分配空输出矩阵，因此会明确拒绝内参和外�
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 MultiviewCalibrationExtendedResult result =
     Calib3DCv2.CalibrateMultiviewExtended(

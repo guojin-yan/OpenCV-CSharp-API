@@ -1,6 +1,6 @@
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Plot
+namespace JYPPX.OpenCvSharp.Plot
 {
     /// <summary>
     /// Provides convenience factory methods for the Plot module.

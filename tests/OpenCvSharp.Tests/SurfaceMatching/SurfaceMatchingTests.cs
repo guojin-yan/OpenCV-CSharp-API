@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.SurfaceMatching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.SurfaceMatching;
 
-namespace OpenCvSharp.Tests.SurfaceMatching
+namespace JYPPX.OpenCvSharp.Tests.SurfaceMatching
 {
     public sealed class SurfaceMatchingTests
     {

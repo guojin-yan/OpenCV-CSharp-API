@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using OpenCvSharp.Core;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Stitching;
 
-namespace OpenCvSharp.Tests.Stitching
+namespace JYPPX.OpenCvSharp.Tests.Stitching
 {
     public sealed class StitchingDetailTests
     {

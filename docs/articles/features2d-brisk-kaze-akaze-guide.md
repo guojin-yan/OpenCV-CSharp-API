@@ -12,7 +12,7 @@ These classes are always present in `JYPPX.OpenCV.CSharp.API`, but they require 
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -48,8 +48,8 @@ Custom pattern array overloads require non-null `radiusList` and `numberList` va
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -72,7 +72,7 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -110,8 +110,8 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -144,8 +144,8 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -176,7 +176,7 @@ namespace Samples
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {

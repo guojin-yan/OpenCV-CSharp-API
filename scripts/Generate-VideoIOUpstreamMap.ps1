@@ -65,7 +65,7 @@ $arguments = @(
     "--workspace", $workspace,
     "--raw", $rawPath,
     "--classification", $classificationPath,
-    "--native-manifest", (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"),
+    "--native-manifest", (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"),
     "--managed-baseline", (Join-Path $repo "compatibility/managed-public-api.txt"),
     "--output", $mappingPath,
     "--summary", $summaryPath,

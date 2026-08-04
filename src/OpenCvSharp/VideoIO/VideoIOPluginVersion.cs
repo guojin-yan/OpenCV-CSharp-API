@@ -1,4 +1,4 @@
-namespace OpenCvSharp.VideoIO
+namespace JYPPX.OpenCvSharp.VideoIO
 {
     /// <summary>
     /// VideoIO plugin version information returned by the registry.

@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>Owns an ECC registration warp matrix and its final correlation score.</summary>
     public sealed class ECCRegistrationResult : IDisposable

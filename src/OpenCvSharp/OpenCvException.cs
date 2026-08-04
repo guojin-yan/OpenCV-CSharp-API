@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp
+namespace JYPPX.OpenCvSharp
 {
     /// <summary>
     /// Represents an exception thrown by the OpenCV CSharp API managed layer.

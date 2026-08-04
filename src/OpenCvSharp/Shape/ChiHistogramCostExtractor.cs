@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Shape
+namespace JYPPX.OpenCvSharp.Shape
 {
     /// <summary>
     /// Chi histogram cost extractor.

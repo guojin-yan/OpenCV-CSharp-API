@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.BgSegm
+namespace JYPPX.OpenCvSharp.BgSegm
 {
     /// <summary>
     /// Contrib GMG background subtractor.

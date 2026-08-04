@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>
     /// Specifies WEBP lossless mode values for <see cref="ImwriteFlags.WebPLosslessMode"/>.

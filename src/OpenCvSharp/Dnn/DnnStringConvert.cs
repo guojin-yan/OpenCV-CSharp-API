@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.Dnn
+namespace JYPPX.OpenCvSharp.Dnn
 {
     internal static class DnnStringConvert
     {

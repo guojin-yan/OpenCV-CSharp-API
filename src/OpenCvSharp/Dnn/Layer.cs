@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Dnn
+namespace JYPPX.OpenCvSharp.Dnn
 {
     /// <summary>Owned ref-counted reference to an OpenCV DNN layer.</summary>
     /// <remarks>The native reference is independent of its originating <see cref="Net"/> and must be disposed.</remarks>

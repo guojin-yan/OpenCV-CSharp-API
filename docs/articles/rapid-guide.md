@@ -1,8 +1,8 @@
 # RAPID Guide / RAPID 指南
 
-`OpenCvSharp.Rapid` wraps the first OpenCV contrib `rapid` silhouette-tracking helpers and tracker objects.
+`JYPPX.OpenCvSharp.Rapid` wraps the first OpenCV contrib `rapid` silhouette-tracking helpers and tracker objects.
 
-`OpenCvSharp.Rapid` 封装第一批 OpenCV contrib `rapid` 轮廓跟踪 helper 和 tracker 对象。
+`JYPPX.OpenCvSharp.Rapid` 封装第一批 OpenCV contrib `rapid` 轮廓跟踪 helper 和 tracker 对象。
 
 ## Scope / 范围
 
@@ -33,9 +33,9 @@ RAPID uses caller-owned mesh, camera, pose, and image matrices. The tiny smoke p
 RAPID 使用调用方持有的网格、相机、位姿和图像矩阵。tiny smoke 使用合成方形网格和边缘图，只检查调用路径与有限结果形状。真实跟踪质量取决于边缘内容、相机标定、网格拓扑和位姿初值。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Rapid;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Rapid;
 
 internal static class Program
 {

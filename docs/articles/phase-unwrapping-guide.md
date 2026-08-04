@@ -1,8 +1,8 @@
 # Phase Unwrapping Guide / Phase Unwrapping 指南
 
-`OpenCvSharp.PhaseUnwrapping` wraps the OpenCV contrib `phase_unwrapping` module through opaque native handles and caller-owned `Mat` inputs and outputs.
+`JYPPX.OpenCvSharp.PhaseUnwrapping` wraps the OpenCV contrib `phase_unwrapping` module through opaque native handles and caller-owned `Mat` inputs and outputs.
 
-`OpenCvSharp.PhaseUnwrapping` 通过 opaque native handle 以及调用方持有的 `Mat` 输入/输出封装 OpenCV contrib `phase_unwrapping` 模块。
+`JYPPX.OpenCvSharp.PhaseUnwrapping` 通过 opaque native handle 以及调用方持有的 `Mat` 输入/输出封装 OpenCV contrib `phase_unwrapping` 模块。
 
 ## Scope / 范围
 
@@ -29,8 +29,8 @@ Histogram phase unwrapping expects wrapped and unwrapped phase maps as single-ch
 直方图相位展开期望包裹相位图和展开结果为单通道 32 位浮点矩阵。可选 shadow mask 仍由调用方持有。`GetInverseReliabilityMap` 返回上一次展开调用计算得到的反可靠性图。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.PhaseUnwrapping;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.PhaseUnwrapping;
 
 using Mat wrapped = new Mat(8, 8, MatType.CV_32FC1);
 wrapped.CopyFrom(new float[64]);

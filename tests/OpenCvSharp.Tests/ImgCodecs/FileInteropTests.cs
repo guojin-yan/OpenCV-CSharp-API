@@ -1,11 +1,11 @@
 using System;
 using System.IO;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp;
-using ImgCodecsCv2 = OpenCvSharp.ImgCodecs.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 
-namespace OpenCvSharp.Tests.ImgCodecs
+namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
 {
     public class FileInteropTests
     {
@@ -17,7 +17,7 @@ namespace OpenCvSharp.Tests.ImgCodecs
                 return;
             }
 
-            string root = Path.Combine(Path.GetTempPath(), "OpenCvSharp-文件-" + Guid.NewGuid().ToString("N"));
+            string root = Path.Combine(Path.GetTempPath(), "JYPPX.OpenCvSharp-文件-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(root);
 
             string pngPath = Path.Combine(root, "测试图片.png");
@@ -89,7 +89,7 @@ namespace OpenCvSharp.Tests.ImgCodecs
                 return;
             }
 
-            string root = Path.Combine(Path.GetTempPath(), "OpenCvSharp-missing-" + Guid.NewGuid().ToString("N"));
+            string root = Path.Combine(Path.GetTempPath(), "JYPPX.OpenCvSharp-missing-" + Guid.NewGuid().ToString("N"));
             string path = Path.Combine(root, "image.png");
 
             using (Mat source = new Mat(1, 1, MatType.CV_8UC1))
@@ -111,7 +111,7 @@ namespace OpenCvSharp.Tests.ImgCodecs
                 return;
             }
 
-            string path = Path.Combine(Path.GetTempPath(), "OpenCvSharp-no-extension-" + Guid.NewGuid().ToString("N"));
+            string path = Path.Combine(Path.GetTempPath(), "JYPPX.OpenCvSharp-no-extension-" + Guid.NewGuid().ToString("N"));
 
             using (Mat source = new Mat(1, 1, MatType.CV_8UC1))
             {

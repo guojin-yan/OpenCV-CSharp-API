@@ -1,15 +1,15 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
 #if NETCOREAPP3_1_OR_GREATER
 using System.Buffers;
 #endif
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Provides image processing functions aligned with OpenCV <c>cv</c> free functions.

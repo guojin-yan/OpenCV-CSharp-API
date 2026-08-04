@@ -405,13 +405,13 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
-        Name = "Native legacy include parity"
-        Script = Join-Path $repo "scripts/Test-NativeLegacyIncludeParity.ps1"
+        Name = "No unpublished compatibility surface"
+        Script = Join-Path $repo "scripts/Test-NoUnpublishedCompatibilitySurface.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
-        Name = "Native ABI compatibility generated-file freshness"
-        Script = Join-Path $repo "scripts/Generate-NativeAbiCompatibility.ps1"
+        Name = "Native ABI manifest generated-file freshness"
+        Script = Join-Path $repo "scripts/Generate-NativeAbiManifest.ps1"
         Arguments = @("-RepositoryRoot", $repo, "-Check")
     }
 )

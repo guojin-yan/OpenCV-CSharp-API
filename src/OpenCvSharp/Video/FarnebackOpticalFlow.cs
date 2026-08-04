@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Video
+namespace JYPPX.OpenCvSharp.Video
 {
     /// <summary>Stateful Farneback dense optical-flow algorithm.</summary>
     public sealed class FarnebackOpticalFlow : DenseOpticalFlow

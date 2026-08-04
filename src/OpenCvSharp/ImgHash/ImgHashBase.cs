@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ImgHash
+namespace JYPPX.OpenCvSharp.ImgHash
 {
     /// <summary>
     /// Base class for OpenCV image hash algorithms.

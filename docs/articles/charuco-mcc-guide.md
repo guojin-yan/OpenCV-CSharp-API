@@ -23,8 +23,8 @@ Local OpenCV 5.0.0 keeps ArUco, Charuco, and MCC under the main `objdetect` modu
 ## ChArUco / ChArUco
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace CharucoSample
 {
@@ -52,8 +52,8 @@ namespace CharucoSample
 ## MCC Checker / MCC 色卡
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace MccCheckerSample
 {

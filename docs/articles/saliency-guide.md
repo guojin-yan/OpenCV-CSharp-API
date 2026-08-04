@@ -1,8 +1,8 @@
 # Saliency Guide / Saliency 指南
 
-`OpenCvSharp.Saliency` wraps OpenCV 5.0.0 contrib `saliency` static, motion, and objectness saliency objects. The linked runtime module is the factual OpenCV 5.0.0 runtime artifact `opencv_saliency500.dll`.
+`JYPPX.OpenCvSharp.Saliency` wraps OpenCV 5.0.0 contrib `saliency` static, motion, and objectness saliency objects. The linked runtime module is the factual OpenCV 5.0.0 runtime artifact `opencv_saliency500.dll`.
 
-`OpenCvSharp.Saliency` 封装 OpenCV 5.0.0 contrib `saliency` 静态、运动和 objectness 显著性对象。linked runtime 模块是事实性 OpenCV 5.0.0 runtime 产物 `opencv_saliency500.dll`。
+`JYPPX.OpenCvSharp.Saliency` 封装 OpenCV 5.0.0 contrib `saliency` 静态、运动和 objectness 显著性对象。linked runtime 模块是事实性 OpenCV 5.0.0 runtime 产物 `opencv_saliency500.dll`。
 
 ## Scope / 范围
 
@@ -47,8 +47,8 @@ Default tests do not require external models, image datasets, cameras, GUI windo
 默认测试不依赖外部模型、图像数据集、摄像头、GUI 窗口或下载。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Saliency;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Saliency;
 
 using Mat image = new Mat(32, 32, MatType.CV_8UC3, new Scalar(20, 30, 40));
 using Mat motionFrame = new Mat(32, 32, MatType.CV_8UC1, new Scalar(40));

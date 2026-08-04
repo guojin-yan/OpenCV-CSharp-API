@@ -1,11 +1,11 @@
 using System;
 using System.Text;
-using OpenCvSharp.Core;
-using OpenCvSharp.Dnn;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Dnn;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.ObjDetect;
 
-namespace OpenCvSharp.Tests.ObjDetect
+namespace JYPPX.OpenCvSharp.Tests.ObjDetect
 {
     public sealed class ObjDetectStructuredParityTests
     {
@@ -53,7 +53,7 @@ namespace OpenCvSharp.Tests.ObjDetect
 
             using var detector = ArucoDetector.Create(new[] { first, second });
             using Mat marker = first.GenerateImageMarker(3, 128);
-            using Mat borderedMarker = OpenCvSharp.Core.Cv2.CopyMakeBorder(marker, 32, 32, 32, 32, BorderTypes.Constant, new Scalar(255));
+            using Mat borderedMarker = JYPPX.OpenCvSharp.Core.Cv2.CopyMakeBorder(marker, 32, 32, 32, 32, BorderTypes.Constant, new Scalar(255));
             ArucoMultiDictionaryDetectionResult result = detector.DetectMarkersMultiDictionary(borderedMarker);
             Assert.Single(result.Detection.Ids);
             Assert.Equal(3, result.Detection.Ids[0]);
@@ -94,8 +94,8 @@ namespace OpenCvSharp.Tests.ObjDetect
             using var encoder = QRCodeEncoder.Create();
             using Mat code = encoder.Encode(payload);
             using var scaledCode = new Mat();
-            OpenCvSharp.ImgProc.Cv2.Resize(code, scaledCode, new Size(code.Cols * 8, code.Rows * 8), interpolation: InterpolationFlags.Nearest);
-            using Mat borderedCode = OpenCvSharp.Core.Cv2.CopyMakeBorder(scaledCode, 32, 32, 32, 32, BorderTypes.Constant, new Scalar(255));
+            JYPPX.OpenCvSharp.ImgProc.Cv2.Resize(code, scaledCode, new Size(code.Cols * 8, code.Rows * 8), interpolation: InterpolationFlags.Nearest);
+            using Mat borderedCode = JYPPX.OpenCvSharp.Core.Cv2.CopyMakeBorder(scaledCode, 32, 32, 32, 32, BorderTypes.Constant, new Scalar(255));
             using var detector = QRCodeDetector.Create();
             Assert.Equal(Encoding.UTF8.GetBytes(payload), detector.DetectAndDecodeBytes(borderedCode));
             Assert.Throws<ArgumentNullException>(() => detector.DecodeBytes(null!, null!));
@@ -161,20 +161,20 @@ namespace OpenCvSharp.Tests.ObjDetect
             using var board = new CharucoBoard(new Size(5, 7), 80, 40, dictionary);
             using Mat image = board.GenerateImage(new Size(600, 840), 40);
             using var corners = new Mat();
-            bool found = OpenCvSharp.Calib3D.Cv2.FindChessboardCornersSB(image, new Size(4, 6), corners);
+            bool found = JYPPX.OpenCvSharp.Calib3D.Cv2.FindChessboardCornersSB(image, new Size(4, 6), corners);
             Assert.True(found);
             Assert.False(corners.Empty);
 
             using var cornersWithMeta = new Mat();
             using var meta = new Mat();
-            Assert.True(OpenCvSharp.Calib3D.Cv2.FindChessboardCornersSB(image, new Size(4, 6), cornersWithMeta, meta));
+            Assert.True(JYPPX.OpenCvSharp.Calib3D.Cv2.FindChessboardCornersSB(image, new Size(4, 6), cornersWithMeta, meta));
             Assert.Equal(6, meta.Rows);
             Assert.Equal(4, meta.Cols);
             using var sharpness = new Mat();
-            Scalar summary = OpenCvSharp.Calib3D.Cv2.EstimateChessboardSharpness(image, new Size(4, 6), corners, sharpness: sharpness);
+            Scalar summary = JYPPX.OpenCvSharp.Calib3D.Cv2.EstimateChessboardSharpness(image, new Size(4, 6), corners, sharpness: sharpness);
             Assert.True(summary.V0 >= 0);
             Assert.False(sharpness.Empty);
-            Assert.True(OpenCvSharp.Calib3D.Cv2.Find4QuadCornerSubpix(image, corners, new Size(5, 5)));
+            Assert.True(JYPPX.OpenCvSharp.Calib3D.Cv2.Find4QuadCornerSubpix(image, corners, new Size(5, 5)));
         }
 
         [Fact]

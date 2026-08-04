@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Specifies ORB keypoint scoring methods compatible with <c>cv::ORB::ScoreType</c>.

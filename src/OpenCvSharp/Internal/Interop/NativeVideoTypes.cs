@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     internal static unsafe partial class NativeMethods
     {

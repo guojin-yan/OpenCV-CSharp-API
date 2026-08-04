@@ -1,6 +1,6 @@
-using OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.Geometry;
 
-namespace OpenCvSharp.Tests.Geometry
+namespace JYPPX.OpenCvSharp.Tests.Geometry
 {
     public sealed class GeometryTests
     {

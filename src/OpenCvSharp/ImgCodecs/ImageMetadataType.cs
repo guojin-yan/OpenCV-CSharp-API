@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>Identifies an image metadata chunk type. 标识图像元数据块类型。</summary>
     public enum ImageMetadataType

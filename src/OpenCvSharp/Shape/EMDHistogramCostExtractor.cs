@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Shape
+namespace JYPPX.OpenCvSharp.Shape
 {
     /// <summary>
     /// Earth Mover's Distance histogram cost extractor.

@@ -1,8 +1,8 @@
 # DNN Structured Parity Guide
 
-This guide covers the parser-selected OpenCV 5.0.0 DNN network, layer, model-loading, preprocessing, shape, memory, and profiling families exposed by `OpenCvSharp.Dnn`. The measured scope is module-specific and does not claim repository-wide OpenCV C++ parity.
+This guide covers the parser-selected OpenCV 5.0.0 DNN network, layer, model-loading, preprocessing, shape, memory, and profiling families exposed by `JYPPX.OpenCvSharp.Dnn`. The measured scope is module-specific and does not claim repository-wide OpenCV C++ parity.
 
-本指南说明 `OpenCvSharp.Dnn` 对 OpenCV 5.0.0 DNN 网络、层、模型加载、预处理、形状、内存和性能分析接口的结构化绑定。该范围仅针对已测量的 DNN 模块，不代表整个 OpenCV C++ API 已全部覆盖。
+本指南说明 `JYPPX.OpenCvSharp.Dnn` 对 OpenCV 5.0.0 DNN 网络、层、模型加载、预处理、形状、内存和性能分析接口的结构化绑定。该范围仅针对已测量的 DNN 模块，不代表整个 OpenCV C++ API 已全部覆盖。
 
 ## Model Loading / 模型加载
 
@@ -31,9 +31,9 @@ Paths and names use strict UTF-8. Null strings, embedded null characters, and in
 ## Network Workflow / 网络流程
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Dnn;
-using DnnCv2 = OpenCvSharp.Dnn.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Dnn;
+using DnnCv2 = JYPPX.OpenCvSharp.Dnn.Cv2;
 
 byte[] model = File.ReadAllBytes("model.onnx");
 using Net net = Net.ReadNetFromOnnx(model, DnnEngine.Classic);

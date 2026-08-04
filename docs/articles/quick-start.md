@@ -35,8 +35,8 @@ Core 数组运算覆盖算术、统计、归一化和通道布局处理：
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -89,14 +89,14 @@ namespace Demo
 }
 ```
 
-Linear algebra, decomposition objects, random generation, and spectral transforms are available from `OpenCvSharp.Core`:
+Linear algebra, decomposition objects, random generation, and spectral transforms are available from `JYPPX.OpenCvSharp.Core`:
 
-线性代数、分解对象、随机数生成和频谱变换可通过 `OpenCvSharp.Core` 使用：
+线性代数、分解对象、随机数生成和频谱变换可通过 `JYPPX.OpenCvSharp.Core` 使用：
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -144,10 +144,10 @@ Local contrast, histogram, Hough, and line segment APIs can be composed into a c
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Demo
 {
@@ -190,10 +190,10 @@ Segmentation, contour, and moment APIs can be composed into an analysis pipeline
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Demo
 {
@@ -239,7 +239,7 @@ Minimal code:
 
 ```csharp
 using System;
-using OpenCvSharp;
+using JYPPX.OpenCvSharp;
 
 namespace Demo
 {
@@ -259,10 +259,10 @@ Filtering and transform APIs can be composed into a small preprocessing pipeline
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Demo
 {
@@ -328,7 +328,7 @@ When the native runtime package is available, `Mat` can be created and inspected
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {
@@ -351,7 +351,7 @@ namespace Demo
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
 namespace Demo
 {
@@ -389,16 +389,16 @@ namespace Demo
 }
 ```
 
-The first `imgproc` APIs are available through `OpenCvSharp.ImgProc.Cv2`:
+The first `imgproc` APIs are available through `JYPPX.OpenCvSharp.ImgProc.Cv2`:
 
-第一批 `imgproc` API 可通过 `OpenCvSharp.ImgProc.Cv2` 使用：
+第一批 `imgproc` API 可通过 `JYPPX.OpenCvSharp.ImgProc.Cv2` 使用：
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Geometry;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Geometry;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Demo
 {

@@ -355,7 +355,7 @@ internal static class Program
 
     private static string ManagedEvidence(int ordinal, string[] managed)
     {
-        string M(string type, params string[] fragments) => FindManaged(managed, "OpenCvSharp.Video." + type, fragments);
+        string M(string type, params string[] fragments) => FindManaged(managed, "JYPPX.OpenCvSharp.Video." + type, fragments);
         string Property(string type, string name) => M(type, "|property|", " " + name);
         return ordinal switch
         {

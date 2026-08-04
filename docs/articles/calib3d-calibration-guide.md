@@ -1,8 +1,8 @@
 # Calib3D Calibration Pattern Guide
 
-This guide covers calibration-support APIs exposed by `OpenCvSharp.Calib3D`. They focus on pattern detection, pose refinement, camera matrix utilities, and drawing helpers. Full multi-view `CalibrateCamera` is covered in the dedicated [Calib3D Full Calibration Guide](calib3d-full-calibration-guide.md).
+This guide covers calibration-support APIs exposed by `JYPPX.OpenCvSharp.Calib3D`. They focus on pattern detection, pose refinement, camera matrix utilities, and drawing helpers. Full multi-view `CalibrateCamera` is covered in the dedicated [Calib3D Full Calibration Guide](calib3d-full-calibration-guide.md).
 
-本指南覆盖 `OpenCvSharp.Calib3D` 标定辅助接口，重点是标定图案检测、位姿 refinement、相机矩阵工具和绘制辅助。完整多视角 `CalibrateCamera` 见专门的 [Calib3D Full Calibration Guide](calib3d-full-calibration-guide.md)。
+本指南覆盖 `JYPPX.OpenCvSharp.Calib3D` 标定辅助接口，重点是标定图案检测、位姿 refinement、相机矩阵工具和绘制辅助。完整多视角 `CalibrateCamera` 见专门的 [Calib3D Full Calibration Guide](calib3d-full-calibration-guide.md)。
 
 ## Covered APIs / 已覆盖接口
 
@@ -29,9 +29,9 @@ This guide covers calibration-support APIs exposed by `OpenCvSharp.Calib3D`. The
 `FindChessboardCorners` 将角点坐标写入输出 `Mat`。带 `out Mat` 的重载会创建输出矩阵，方便 managed 侧管理生命周期。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 namespace CalibrationPatternSample
 {
@@ -68,9 +68,9 @@ Use `FindCirclesGrid` for symmetric or asymmetric circle patterns. The initial A
 对于对称或非对称圆点阵，可以使用 `FindCirclesGrid`。当前 API 接收 OpenCV 标志，并将检测到的圆心返回到 `Mat`。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 namespace CirclesGridSample
 {
@@ -105,9 +105,9 @@ namespace CirclesGridSample
 `GetOptimalNewCameraMatrix` 同时返回调整后的相机矩阵和有效像素 ROI。`CalibrationMatrixValues` 根据相机矩阵和物理光圈尺寸计算视场角等信息。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 namespace CameraMatrixUtilitySample
 {
@@ -158,9 +158,9 @@ All four input collections must contain the same number of poses, with at least 
 四组输入集合必须包含相同数量的位姿，且至少需要三个位姿。旋转可以是 `3 x 3` 矩阵或三个元素的旋转向量；平移必须是三个元素的向量。所有目标框架均提供数组重载，现代 .NET 目标还提供 `ReadOnlySpan<Mat>` 重载。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 namespace HandEyeCalibrationSample
 {

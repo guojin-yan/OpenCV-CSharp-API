@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using OpenCvSharp.Core;
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.VideoIO;
 
-namespace OpenCvSharp.Tests.VideoIO
+namespace JYPPX.OpenCvSharp.Tests.VideoIO
 {
     public sealed class VideoIOTests
     {

@@ -279,8 +279,7 @@ $version = [System.Version]::Parse($OpenCvVersion)
 $binarySuffix = "$($version.Major)$($version.Minor)$($version.Build)"
 $moduleFileNames = @($profileSpecs[0].modules | ForEach-Object { "opencv_$_$binarySuffix.dll" })
 $primaryLoaderName = "JYPPX.OpenCV.Native.dll"
-$compatibilityLoaderName = "OpenCv5Sharp.Native.dll"
-$expectedFileNames = @($primaryLoaderName, $compatibilityLoaderName) + $moduleFileNames
+$expectedFileNames = @($primaryLoaderName) + $moduleFileNames
 
 $filesByName = [System.Collections.Generic.Dictionary[string, System.IO.FileInfo]]::new([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($directory in $runtimeDirectories) {
@@ -297,12 +296,6 @@ $missing = @($expectedFileNames | Where-Object { -not $filesByName.ContainsKey($
 $unexpected = @($filesByName.Keys | Where-Object { $expectedFileNames -notcontains $_ })
 if ($missing.Count -gt 0 -or $unexpected.Count -gt 0 -or $filesByName.Count -ne $expectedFileNames.Count) {
     throw "Windows runtime payload must contain exactly $($expectedFileNames.Count) DLLs. Missing: $($missing -join ', '); unexpected: $($unexpected -join ', ')."
-}
-
-$primaryHash = (Get-FileHash -LiteralPath $filesByName[$primaryLoaderName].FullName -Algorithm SHA256).Hash
-$compatibilityHash = (Get-FileHash -LiteralPath $filesByName[$compatibilityLoaderName].FullName -Algorithm SHA256).Hash
-if ($primaryHash -ne $compatibilityHash) {
-    throw "Primary and compatibility native loaders must be byte-identical."
 }
 
 $dumpbin = Resolve-Dumpbin -ExplicitPath $DumpbinPath -TargetRid $Rid
@@ -351,4 +344,4 @@ if ($unreachableModules.Count -gt 0 -or $reachableModules.Count -ne $moduleFileN
     throw "Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph. Unreachable: $($unreachableModules -join ', ')."
 }
 
-Write-Host "WINDOWS_PE_AUDIT_OK rid=$Rid profile=$RuntimeProfile files=$($filesByName.Count) machine=$($architectureSpec.MachineName) packaged_modules=$($moduleFileNames.Count) reachable_modules=$($reachableModules.Count) loader_opencv_imports=$($primaryOpenCvImports.Count) opencv_import_edges=$opencvImportEdges missing_opencv_imports=0 loader_equal=true"
+Write-Host "WINDOWS_PE_AUDIT_OK rid=$Rid profile=$RuntimeProfile files=$($filesByName.Count) machine=$($architectureSpec.MachineName) packaged_modules=$($moduleFileNames.Count) reachable_modules=$($reachableModules.Count) loader_opencv_imports=$($primaryOpenCvImports.Count) opencv_import_edges=$opencvImportEdges missing_opencv_imports=0"

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.StructuredLight
+namespace JYPPX.OpenCvSharp.StructuredLight
 {
     /// <summary>
     /// Parameters for a Gray-code structured-light pattern.

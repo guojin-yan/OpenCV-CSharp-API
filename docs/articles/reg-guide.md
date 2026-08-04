@@ -1,8 +1,8 @@
 # Reg Guide / Reg 指南
 
-`OpenCvSharp.Reg` wraps the first OpenCV contrib `reg` image-registration surface with opaque map and mapper handles.
+`JYPPX.OpenCvSharp.Reg` wraps the first OpenCV contrib `reg` image-registration surface with opaque map and mapper handles.
 
-`OpenCvSharp.Reg` 通过 opaque map 与 mapper 句柄封装第一批 OpenCV contrib `reg` 图像配准能力。
+`JYPPX.OpenCvSharp.Reg` 通过 opaque map 与 mapper 句柄封装第一批 OpenCV contrib `reg` 图像配准能力。
 
 ## Scope / 范围
 
@@ -31,8 +31,8 @@ The first smoke path uses tiny generated grayscale images and checks output shap
 第一批 smoke 路径使用 tiny 合成灰度图，并只检查输出形状。配准质量取决于图像内容、初始 map、mapper 选择和 pyramid 参数。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Reg;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Reg;
 
 internal static class Program
 {

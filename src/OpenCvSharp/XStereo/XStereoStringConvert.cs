@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.XStereo
+namespace JYPPX.OpenCvSharp.XStereo
 {
     internal static class XStereoStringConvert
     {

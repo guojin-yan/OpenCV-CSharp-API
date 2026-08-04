@@ -1,8 +1,8 @@
 # XImgProc Edge Guide / XImgProc Edge 指南
 
-`OpenCvSharp.XImgProc` includes the second-batch edge and proposal APIs from OpenCV contrib `ximgproc`.
+`JYPPX.OpenCvSharp.XImgProc` includes the second-batch edge and proposal APIs from OpenCV contrib `ximgproc`.
 
-`OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 第二批 edge 与 proposal API。
+`JYPPX.OpenCvSharp.XImgProc` 已包含 OpenCV contrib `ximgproc` 第二批 edge 与 proposal API。
 
 ## Scope / 范围
 
@@ -31,9 +31,9 @@
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcEdgeExample
 {

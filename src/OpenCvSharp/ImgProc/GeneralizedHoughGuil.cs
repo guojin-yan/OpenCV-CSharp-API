@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Generalized Hough detector for position, scale, and rotation. 检测位置、缩放和旋转的广义霍夫检测器。</summary>
     public sealed class GeneralizedHoughGuil : GeneralizedHough

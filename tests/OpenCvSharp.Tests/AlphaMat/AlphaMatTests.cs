@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.AlphaMat;
-using OpenCvSharp.Core;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.AlphaMat;
+using JYPPX.OpenCvSharp.Core;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.AlphaMat
+namespace JYPPX.OpenCvSharp.Tests.AlphaMat
 {
     [Collection(NativeSmokeCollection.Name)]
     public sealed class AlphaMatTests

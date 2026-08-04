@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
-using OpenCvSharp.HighGui;
-using HighGuiCv2 = OpenCvSharp.HighGui.Cv2;
+using JYPPX.OpenCvSharp.HighGui;
+using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
 
-namespace OpenCvSharp.Tests.HighGui
+namespace JYPPX.OpenCvSharp.Tests.HighGui
 {
     public sealed class HighGuiInteractionTests
     {
@@ -67,11 +67,11 @@ namespace OpenCvSharp.Tests.HighGui
                 return;
             }
 
-            const string windowName = "OpenCvSharp.HighGui.Interaction.Tests";
+            const string windowName = "JYPPX.OpenCvSharp.HighGui.Interaction.Tests";
             HighGuiCv2.NamedWindow(windowName, WindowFlags.AutoSize);
             using (var trackbar = HighGuiCv2.CreateTrackbar("value", windowName, 0, 10, _ => { }))
             {
-                HighGuiCv2.SetWindowTitle(windowName, "OpenCvSharp HighGui Interaction");
+                HighGuiCv2.SetWindowTitle(windowName, "JYPPX.OpenCvSharp HighGui Interaction");
                 HighGuiCv2.SetWindowProperty(windowName, WindowPropertyFlags.Topmost, 0.0);
                 HighGuiCv2.SetTrackbarMax("value", windowName, 10);
                 HighGuiCv2.SetTrackbarMin("value", windowName, 0);

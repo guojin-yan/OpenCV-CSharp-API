@@ -9,7 +9,7 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $mappingPath = Join-Path $repo "compatibility/native-managed-binding-map.txt"
 $summaryPath = Join-Path $repo "compatibility/native-managed-binding-summary.json"
-$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
+$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
 $violations = [System.Collections.Generic.List[object]]::new()
 
 function Add-Violation {
@@ -138,7 +138,7 @@ function Test-BindingMapDocument {
     }
     $mappingHash = Get-TextSha256 $normalized
     Assert-True -List $List -Condition ($Summary.schemaVersion -eq 1 -and $Summary.generator -eq "tools/NativeManagedBindingMap" -and $Summary.assemblyName -eq "JYPPX.OpenCV.CSharp.API" -and $Summary.targetFramework -eq ".NETCoreApp,Version=v10.0") -Path $Path -Issue "Binding-map summary identity drifted"
-    Assert-True -List $List -Condition ($Summary.nativeManifestPath -eq "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt" -and $Summary.managedSourceRoot -eq "src/OpenCvSharp/Internal/Interop" -and $Summary.mappingPath -eq "compatibility/native-managed-binding-map.txt") -Path $Path -Issue "Binding-map summary paths drifted"
+    Assert-True -List $List -Condition ($Summary.nativeManifestPath -eq "src/OpenCvSharp.Native/generated/native_abi_manifest.txt" -and $Summary.managedSourceRoot -eq "src/OpenCvSharp/Internal/Interop" -and $Summary.mappingPath -eq "compatibility/native-managed-binding-map.txt") -Path $Path -Issue "Binding-map summary paths drifted"
     Assert-True -List $List -Condition ($Summary.mappingSha256 -eq $mappingHash) -Path $Path -Issue "Binding-map SHA256 does not match its summary" -Text "actual=$mappingHash summary=$($Summary.mappingSha256)"
     Assert-True -List $List -Condition ([int]$Summary.nativeFunctionCount -eq 2656 -and [int]$Summary.managedEntryPointCount -eq 2656 -and [int]$Summary.managedBoundCount -eq 2656) -Path $Path -Issue "Binding-map summary parity counts drifted"
     Assert-True -List $List -Condition ([int]$Summary.managedImportMethodCount -eq $methodCount -and [int]$Summary.managedSourceDeclarationCount -eq $sourceCount) -Path $Path -Issue "Binding-map summary method/source counts drifted" -Text "methods=$methodCount sources=$sourceCount"

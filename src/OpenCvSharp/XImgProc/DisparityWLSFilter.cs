@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.XImgProc
+namespace JYPPX.OpenCvSharp.XImgProc
 {
     /// <summary>
     /// Weighted least-squares disparity filter wrapper.

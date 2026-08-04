@@ -1,11 +1,11 @@
 # Features2D Boundary / Features2D 边界
 
-`OpenCvSharp.Features2D` is the first feature detection and descriptor matching package. It follows the same three-layer rule as the rest of the project:
+`JYPPX.OpenCvSharp.Features2D` is the first feature detection and descriptor matching package. It follows the same three-layer rule as the rest of the project:
 
-`OpenCvSharp.Features2D` 是第一批特征检测与描述子匹配封装。它遵循项目统一的三层规则：
+`JYPPX.OpenCvSharp.Features2D` 是第一批特征检测与描述子匹配封装。它遵循项目统一的三层规则：
 
 ```text
-OpenCV C++ object/function -> jyppx_ocv_* C ABI -> OpenCvSharp managed API
+OpenCV C++ object/function -> jyppx_ocv_* C ABI -> JYPPX.OpenCvSharp managed API
 ```
 
 ## Implemented Surface / 已实现接口面

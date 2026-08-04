@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory)]
     [string]$LibraryPath,
     [string]$ManifestPath = (
-        Join-Path $PSScriptRoot "../src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"),
+        Join-Path $PSScriptRoot "../src/OpenCvSharp.Native/generated/native_abi_manifest.txt"),
     [string]$ExportToolPath = ""
 )
 
@@ -22,16 +22,15 @@ $manifestRows = @(
         } |
         ForEach-Object {
             $parts = $_.Split("|")
-            if ($parts.Count -ne 5) {
+            if ($parts.Count -ne 4) {
                 throw "Malformed ABI manifest row: $_"
             }
 
             [pscustomobject]@{
-                Neutral = $parts[0]
-                Compatibility = $parts[1]
-                ReturnType = $parts[2]
-                ParameterCount = [int]$parts[3]
-                Header = $parts[4]
+                Name = $parts[0]
+                ReturnType = $parts[1]
+                ParameterCount = [int]$parts[2]
+                Header = $parts[3]
             }
         }
 )
@@ -75,28 +74,17 @@ function Assert-ManifestExports {
         [Parameter(Mandatory)][object[]]$Rows
     )
 
-    $missingNeutral = [System.Collections.Generic.List[string]]::new()
-    $missingCompatibility = [System.Collections.Generic.List[string]]::new()
+    $missingExports = [System.Collections.Generic.List[string]]::new()
     foreach ($row in $Rows) {
-        if (-not $ExportNames.Contains($row.Neutral)) {
-            $missingNeutral.Add($row.Neutral)
-        }
-        if (-not $ExportNames.Contains($row.Compatibility)) {
-            $missingCompatibility.Add($row.Compatibility)
+        if (-not $ExportNames.Contains($row.Name)) {
+            $missingExports.Add($row.Name)
         }
     }
 
-    if ($missingNeutral.Count -gt 0) {
+    if ($missingExports.Count -gt 0) {
         Write-Error (
-            "Missing neutral exports ($($missingNeutral.Count)): " +
-            ($missingNeutral -join ", "))
-    }
-    if ($missingCompatibility.Count -gt 0) {
-        Write-Error (
-            "Missing compatibility exports ($($missingCompatibility.Count)): " +
-            ($missingCompatibility -join ", "))
-    }
-    if ($missingNeutral.Count -gt 0 -or $missingCompatibility.Count -gt 0) {
+            "Missing exports ($($missingExports.Count)): " +
+            ($missingExports -join ", "))
         throw "Native ABI export audit failed."
     }
 }
@@ -150,8 +138,7 @@ if ($requiresStaticExportAudit) {
     }
 
     Assert-ManifestExports -ExportNames $exportNames -Rows $manifestRows
-    Write-Host "Verified neutral exports: $($manifestRows.Count)"
-    Write-Host "Verified compatibility exports: $($manifestRows.Count)"
+    Write-Host "Verified version-neutral exports: $($manifestRows.Count)"
     Write-Host (
         "Verified cross-architecture Windows export table: " +
         "library_machine=0x$($libraryMachine.ToString('X4')) " +
@@ -168,15 +155,13 @@ $libraryHandle = [System.Runtime.InteropServices.NativeLibrary]::Load(
 
 try {
     foreach ($row in $manifestRows) {
-        foreach ($symbol in @($row.Neutral, $row.Compatibility)) {
-            $address = [IntPtr]::Zero
-            if ([System.Runtime.InteropServices.NativeLibrary]::TryGetExport(
-                    $libraryHandle,
-                    $symbol,
-                    [ref]$address)) {
-                $addresses[$symbol] = $address
-                [void]$exportNames.Add($symbol)
-            }
+        $address = [IntPtr]::Zero
+        if ([System.Runtime.InteropServices.NativeLibrary]::TryGetExport(
+                $libraryHandle,
+                $row.Name,
+                [ref]$address)) {
+            $addresses[$row.Name] = $address
+            [void]$exportNames.Add($row.Name)
         }
     }
 
@@ -216,39 +201,16 @@ public delegate IntPtr OpenCvCSharpNativeStringDelegate();
         return [System.Runtime.InteropServices.Marshal]::PtrToStringAnsi($pointer)
     }
 
-    $versionPairs = @(
-        @("jyppx_ocv_get_version_major", "jyppx_ocv5_get_version_major", "int"),
-        @("jyppx_ocv_get_version_minor", "jyppx_ocv5_get_version_minor", "int"),
-        @("jyppx_ocv_get_version_revision", "jyppx_ocv5_get_version_revision", "int"),
-        @("jyppx_ocv_get_version_string", "jyppx_ocv5_get_version_string", "string")
+    $versionValues = @(
+        Invoke-NativeInt -Symbol "jyppx_ocv_get_version_major"
+        Invoke-NativeInt -Symbol "jyppx_ocv_get_version_minor"
+        Invoke-NativeInt -Symbol "jyppx_ocv_get_version_revision"
+        Invoke-NativeString -Symbol "jyppx_ocv_get_version_string"
     )
-    $versionValues = [System.Collections.Generic.List[string]]::new()
-    foreach ($pair in $versionPairs) {
-        $neutralValue = if ($pair[2] -eq "int") {
-            Invoke-NativeInt -Symbol $pair[0]
-        }
-        else {
-            Invoke-NativeString -Symbol $pair[0]
-        }
-        $compatibilityValue = if ($pair[2] -eq "int") {
-            Invoke-NativeInt -Symbol $pair[1]
-        }
-        else {
-            Invoke-NativeString -Symbol $pair[1]
-        }
 
-        if ($neutralValue -ne $compatibilityValue) {
-            throw (
-                "Neutral and compatibility exports returned different values: " +
-                "$($pair[0])='$neutralValue', $($pair[1])='$compatibilityValue'")
-        }
-        $versionValues.Add([string]$neutralValue)
-    }
-
-    Write-Host "Verified neutral exports: $($manifestRows.Count)"
-    Write-Host "Verified compatibility exports: $($manifestRows.Count)"
+    Write-Host "Verified version-neutral exports: $($manifestRows.Count)"
     Write-Host (
-        "Verified neutral/compatibility version equivalence: " +
+        "Verified native version exports: " +
         "$($versionValues[0]).$($versionValues[1]).$($versionValues[2]) " +
         "($($versionValues[3]))")
 }

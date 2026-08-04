@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using ImgCodecsCv2 = OpenCvSharp.ImgCodecs.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 
-namespace OpenCvSharp.Tests.ImgCodecs
+namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
 {
     public class Cv2InteropTests
     {

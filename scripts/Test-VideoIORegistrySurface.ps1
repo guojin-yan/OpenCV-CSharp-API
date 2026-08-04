@@ -9,7 +9,7 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $workspace = (Resolve-Path -LiteralPath (Join-Path $repo "..")).Path
 $surfacePath = Join-Path $repo "compatibility/videoio-registry-surface.json"
-$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
+$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
 $managedPath = Join-Path $repo "compatibility/managed-public-api.txt"
 $surface = Get-Content -LiteralPath $surfacePath -Raw | ConvertFrom-Json
 

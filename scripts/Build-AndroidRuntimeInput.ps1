@@ -84,7 +84,7 @@ function Get-NativeProfileEvidence {
     $miniSources = @(Get-SourceList -VariableName "OPENCV_CSHARP_MINI_NATIVE_SOURCES")
     $fullSources = @($miniSources + @(Get-SourceList -VariableName "OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES"))
     $sources = if ($Profile -eq "mini") { $miniSources } else { $fullSources }
-    $manifestName = if ($Profile -eq "mini") { "legacy_abi_mini_manifest.txt" } else { "legacy_abi_manifest.txt" }
+    $manifestName = if ($Profile -eq "mini") { "native_abi_mini_manifest.txt" } else { "native_abi_manifest.txt" }
     $manifestPath = Join-Path $repoRoot "src/OpenCvSharp.Native/generated/$manifestName"
     $functionCountLine = @(Get-Content -LiteralPath $manifestPath | Where-Object { $_ -match "^function-count=" })
     if ($functionCountLine.Count -ne 1) {
@@ -267,16 +267,8 @@ Invoke-CheckedCommand cmake @nativeCMakeArguments
 Invoke-CheckedCommand cmake --build $nativeBuildDir --config Release --target JYPPX.OpenCV.Native
 
 $primaryLoader = Join-Path $nativeRuntimeDir "libJYPPX.OpenCV.Native.so"
-$compatibilityLoader = Join-Path $nativeRuntimeDir "libOpenCv5Sharp.Native.so"
-foreach ($loader in @($primaryLoader, $compatibilityLoader)) {
-    if (-not (Test-Path -LiteralPath $loader -PathType Leaf)) {
-        throw "Android native wrapper loader was not found: $loader"
-    }
-}
-$primaryHash = (Get-FileHash -LiteralPath $primaryLoader -Algorithm SHA256).Hash
-$compatibilityHash = (Get-FileHash -LiteralPath $compatibilityLoader -Algorithm SHA256).Hash
-if ($primaryHash -ne $compatibilityHash) {
-    throw "Android primary and compatibility native loaders must be byte-identical."
+if (-not (Test-Path -LiteralPath $primaryLoader -PathType Leaf)) {
+    throw "Android native wrapper loader was not found: $primaryLoader"
 }
 
 $prebuiltRoot = Join-Path ([IO.Path]::GetFullPath($AndroidNdkRoot)) "toolchains/llvm/prebuilt/linux-x86_64"
@@ -287,7 +279,7 @@ if (-not (Test-Path -LiteralPath $readElf -PathType Leaf) -or -not (Test-Path -L
 }
 
 $requiredModuleFiles = @($profile.modules | ForEach-Object { Join-Path $openCvRuntimeDir "libopencv_$_.so" })
-$allAuditFiles = @($primaryLoader, $compatibilityLoader) + $requiredModuleFiles
+$allAuditFiles = @($primaryLoader) + $requiredModuleFiles
 $packagedNames = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
 foreach ($file in $allAuditFiles) {
     if (-not (Test-Path -LiteralPath $file -PathType Leaf)) {
@@ -332,7 +324,7 @@ $ninjaVersion = (& ninja --version | Select-Object -First 1)
 $dotnetVersion = (& dotnet --version | Select-Object -First 1)
 $compilerVersion = [string]::Join(" ", @(& $clang --version | Select-Object -First 1))
 $nativeSourcesJson = ConvertTo-Json -InputObject ([object[]]$nativeEvidence.Sources) -Compress
-$elfEvidence = "ANDROID_ELF_EVIDENCE rid=$Rid abi=$abi profile=$RuntimeProfile files=$($allAuditFiles.Count) required_modules=$($requiredModuleFiles.Count) dependencies=$dependencyEdges min_page_alignment=16384 versioned_so=0 libcxx_shared=0 loaders_equal=true"
+$elfEvidence = "ANDROID_ELF_EVIDENCE rid=$Rid abi=$abi profile=$RuntimeProfile files=$($allAuditFiles.Count) required_modules=$($requiredModuleFiles.Count) dependencies=$dependencyEdges min_page_alignment=16384 versioned_so=0 libcxx_shared=0"
 Write-Host $elfEvidence
 
 & (Join-Path $PSScriptRoot "New-RuntimeInputArtifact.ps1") `

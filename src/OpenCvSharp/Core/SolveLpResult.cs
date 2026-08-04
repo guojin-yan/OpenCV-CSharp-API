@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies the result of OpenCV linear programming compatible with <c>cv::SolveLPResult</c>.

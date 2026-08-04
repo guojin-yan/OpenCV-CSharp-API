@@ -31,7 +31,6 @@ $normalizedPackageVersion = "5.0.0"
 $managedPackageFileName = "$managedPackageId.$normalizedPackageVersion.nupkg"
 $runtimePackageFileName = "$runtimePackageId.$normalizedPackageVersion.nupkg"
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $managedAssemblyName = "JYPPX.OpenCV.CSharp.API.dll"
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
 $fixedMajorConsumerPattern = (
@@ -232,7 +231,7 @@ function New-TemporaryConsumerProject {
     [System.IO.File]::WriteAllText($projectPath, $projectText)
 
     $programText = @'
-using OpenCvSharp;
+using JYPPX.OpenCvSharp;
 
 namespace PackagePairConsumer;
 
@@ -309,7 +308,7 @@ try {
     $runtimeProjectPath = New-TemporaryRuntimeProject -RuntimeProjectDirectory $runtimeProjectDir
     $consumerProjectPath = New-TemporaryConsumerProject -ConsumerDirectory $consumerDir
 
-    foreach ($dllName in @($primaryNativeLoader, $compatibilityNativeLoader)) {
+    foreach ($dllName in @($primaryNativeLoader)) {
         Write-SyntheticDll -Path (Join-Path $nativeWrapperRuntimeDir $dllName)
     }
 
@@ -412,7 +411,7 @@ try {
         Add-Violation -Violations $violations -Path "consumer/PackagePairConsumer.csproj" -Issue "Temporary package-pair consumer build failed" -Text $buildOutputText
     }
 
-    $expectedRuntimeFiles = @($primaryNativeLoader, $compatibilityNativeLoader)
+    $expectedRuntimeFiles = @($primaryNativeLoader)
     foreach ($module in $requiredOpenCvModules) {
         $expectedRuntimeFiles += "opencv_$module$openCvBinarySuffix.dll"
     }

@@ -153,7 +153,7 @@ Namespace:
 命名空间：
 
 ```csharp
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 ```
 
 Static class:

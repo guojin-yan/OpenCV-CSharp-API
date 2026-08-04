@@ -1,4 +1,4 @@
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// HighGUI window property flags compatible with OpenCV <c>cv::WindowPropertyFlags</c>.

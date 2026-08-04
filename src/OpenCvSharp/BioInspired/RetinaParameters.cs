@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.BioInspired
+namespace JYPPX.OpenCvSharp.BioInspired
 {
     /// <summary>
     /// Combined Retina parameter groups.

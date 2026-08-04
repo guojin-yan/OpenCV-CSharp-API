@@ -241,6 +241,7 @@ function Get-Record {
         "docs/articles/tutorial-04-orb-features.md",
         "docs/articles/tutorial-05-template-matching.md",
         "docs/articles/tutorial-06-knn-classification.md",
+        "docs/articles/tutorial-07-android-runtime.md",
         "docs/images/showcase/chinese-text.png",
         "docs/images/showcase/contours.png",
         "docs/images/showcase/image-pipeline.png",
@@ -254,6 +255,7 @@ function Get-Record {
         "docs/articles/video-upstream-parity-guide.md",
         "docs/articles/videoio-upstream-parity-guide.md",
         "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
+        "packaging/runtime/android-runtime-evidence.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
         "samples/AndroidSmoke/MainActivity.cs",
@@ -270,8 +272,9 @@ function Get-Record {
         "scripts/Generate-MlUpstreamMap.ps1",
         "scripts/Generate-TrackingUpstreamMap.ps1",
         "scripts/Generate-StitchingUpstreamMap.ps1",
-        "scripts/Generate-NativeAbiCompatibility.ps1",
+        "scripts/Generate-NativeAbiManifest.ps1",
         "scripts/Generate-NativeManagedBindingMap.ps1",
+        "scripts/Test-NoUnpublishedCompatibilitySurface.ps1",
         "scripts/Generate-ObjDetectUpstreamMap.ps1",
         "scripts/Generate-PhotoUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
@@ -308,8 +311,8 @@ function Get-Record {
         "scripts/Test-VideoIORegistrySurface.ps1",
         "scripts/Test-VideoIOUpstreamMap.ps1",
         "scripts/Test-VideoUpstreamMap.ps1",
-        "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt",
-        "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt",
+        "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
+        "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
         "src/OpenCvSharp.Native/include/open_cv_sharp/highgui/highgui.h",
         "src/OpenCvSharp.Native/src/highgui/highgui.cpp",
         "src/OpenCvSharp.Native/include/open_cv_sharp/stitching/stitching.h",
@@ -398,7 +401,7 @@ function Get-Record {
     $evidence = @(Get-OrdinalSortedObjects -Values @($evidencePaths | ForEach-Object { Get-FileEvidence -RelativePath $_ }) -Property "Path")
 
     $blockers = @(
-        [ordered]@{ Id = "android-real-support"; Status = "android-evidence-pending"; Evidence = "The four-ABI NDK producer, NuGet AndroidNativeLibrary integration, package-consumer APK, ELF audit, and x86_64 emulator smoke are implemented; authoritative hosted Full/Mini evidence is still required before promotion to real support." },
+        [ordered]@{ Id = "android-arm-device-evidence"; Status = "android-evidence-pending"; Evidence = "Android x64/x86 Full and Mini require authoritative single-loader emulator revalidation. Android ARM/ARM64 NDK, ELF, same-run package, and APK evidence has passed; matching device loading evidence remains required before promotion." },
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
         [ordered]@{ Id = "hosted-win-x86-full"; Status = "quota-blocked"; Evidence = "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
@@ -450,13 +453,13 @@ function Get-Record {
                 TargetFramework = $summary.targetFramework
             }
             NativeFull = [ordered]@{
-                Path = "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
-                Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
+                Path = "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
+                Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
                 FunctionCount = 2656
             }
             NativeMini = [ordered]@{
-                Path = "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt"
-                Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
+                Path = "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"
+                Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
                 FunctionCount = 526
             }
             NativeManagedBindingMap = [ordered]@{

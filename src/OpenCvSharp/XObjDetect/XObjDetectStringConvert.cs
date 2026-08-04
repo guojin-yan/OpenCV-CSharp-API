@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.XObjDetect
+namespace JYPPX.OpenCvSharp.XObjDetect
 {
     internal static class XObjDetectStringConvert
     {

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgHash
+namespace JYPPX.OpenCvSharp.ImgHash
 {
     /// <summary>
     /// Specifies block mean hash mode.

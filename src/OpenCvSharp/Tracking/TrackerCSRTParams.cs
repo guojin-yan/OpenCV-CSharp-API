@@ -2,9 +2,9 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking
+namespace JYPPX.OpenCvSharp.Tracking
 {
     /// <summary>
     /// Parameters for OpenCV contrib <c>TrackerCSRT</c>.

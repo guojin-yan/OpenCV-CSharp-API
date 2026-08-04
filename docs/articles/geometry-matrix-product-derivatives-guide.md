@@ -1,8 +1,8 @@
 # Geometry Matrix Product Derivatives Guide
 
-Round 973 adds direct matrix-product Jacobians to `OpenCvSharp.Calib3D.Cv2`.
+Round 973 adds direct matrix-product Jacobians to `JYPPX.OpenCvSharp.Calib3D.Cv2`.
 
-Round 973 在 `OpenCvSharp.Calib3D.Cv2` 中增加直接矩阵乘积 Jacobian 计算。
+Round 973 在 `JYPPX.OpenCvSharp.Calib3D.Cv2` 中增加直接矩阵乘积 Jacobian 计算。
 
 ## Operation / 运算
 
@@ -75,9 +75,9 @@ Use caller-owned matrices when outputs belong to a longer processing pipeline:
 当输出属于更长的处理流程时，使用调用方持有的矩阵：
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 using var a = new Mat(2, 3, MatType.CV_64FC1);
 using var b = new Mat(3, 2, MatType.CV_64FC1);

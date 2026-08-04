@@ -7,14 +7,12 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $managedRoot = Join-Path $repo "src/OpenCvSharp"
-$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
+$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
 $nativeLibraryNamesPath = Join-Path $managedRoot "Internal/Interop/NativeLibraryNames.cs"
 $buildInfoPath = Join-Path $managedRoot "OpenCvSharpBuildInfo.cs"
 $currentNativeLibraryName = "JYPPX.OpenCV.Native"
-$compatibilityNativeLibraryName = "OpenCv5Sharp.Native"
 $currentNativeLibraryExpression = "NativeLibraryNames.CurrentNativeLibrary"
 $neutralEntryPointPrefix = "jyppx_ocv_"
-$fixedMajorEntryPointPrefix = "jyppx_ocv5_"
 
 foreach ($requiredPath in @($managedRoot, $manifestPath, $nativeLibraryNamesPath, $buildInfoPath)) {
     if (-not (Test-Path -LiteralPath $requiredPath)) {
@@ -33,7 +31,7 @@ Get-Content -LiteralPath $manifestPath |
     } |
     ForEach-Object {
         $parts = $_.Split("|")
-        if ($parts.Count -ne 5) {
+        if ($parts.Count -ne 4) {
             throw "Malformed ABI manifest row: $_"
         }
 
@@ -68,16 +66,6 @@ function Get-LineNumber {
     return (($Text.Substring(0, $Index) -split "`n").Count)
 }
 
-function Test-IsAllowedCompatibilityLoaderMetadata {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$RelativePath
-    )
-
-    return $RelativePath.Equals("src/OpenCvSharp/Internal/Interop/NativeLibraryNames.cs", [System.StringComparison]::Ordinal) -or
-        $RelativePath.Equals("src/OpenCvSharp/OpenCvSharpBuildInfo.cs", [System.StringComparison]::Ordinal)
-}
-
 $violations = [System.Collections.Generic.List[object]]::new()
 $entryPoints = [System.Collections.Generic.List[string]]::new()
 $importCount = 0
@@ -96,15 +84,6 @@ $csFiles = @(
 foreach ($file in $csFiles) {
     $text = [System.IO.File]::ReadAllText($file.FullName)
     $relativePath = Get-RepositoryRelativePath -Path $file.FullName
-
-    if ($text.Contains($compatibilityNativeLibraryName) -and
-        -not (Test-IsAllowedCompatibilityLoaderMetadata -RelativePath $relativePath)) {
-        $violations.Add([pscustomobject]@{
-            Path = $relativePath
-            Line = 0
-            Issue = "Managed source must not use fixed-major loader name $compatibilityNativeLibraryName outside compatibility metadata"
-        })
-    }
 
     foreach ($match in $attributeRegex.Matches($text)) {
         $importCount++
@@ -139,11 +118,11 @@ foreach ($file in $csFiles) {
         $entryPoint = $entryPointMatch.Groups["name"].Value
         $entryPoints.Add($entryPoint)
 
-        if ($entryPoint.StartsWith($fixedMajorEntryPointPrefix, [System.StringComparison]::Ordinal)) {
+        if ($entryPoint -match '^jyppx_ocv[0-9]+_') {
             $violations.Add([pscustomobject]@{
                 Path = $relativePath
                 Line = $line
-                Issue = "Import uses fixed-major compatibility EntryPoint '$entryPoint'"
+                Issue = "Import uses fixed-major EntryPoint '$entryPoint'"
             })
             continue
         }
@@ -176,28 +155,12 @@ if (-not $nativeLibraryNamesText.Contains("CurrentNativeLibrary = `"$currentNati
     })
 }
 
-if (-not $nativeLibraryNamesText.Contains("LegacyNativeLibrary = `"$compatibilityNativeLibraryName`"")) {
-    $violations.Add([pscustomobject]@{
-        Path = Get-RepositoryRelativePath -Path $nativeLibraryNamesPath
-        Line = 0
-        Issue = "NativeLibraryNames.LegacyNativeLibrary must stay '$compatibilityNativeLibraryName' as compatibility metadata only"
-    })
-}
-
 $buildInfoText = [System.IO.File]::ReadAllText($buildInfoPath)
 if (-not $buildInfoText.Contains("CurrentNativeLibraryName = `"$currentNativeLibraryName`"")) {
     $violations.Add([pscustomobject]@{
         Path = Get-RepositoryRelativePath -Path $buildInfoPath
         Line = 0
         Issue = "OpenCvSharpBuildInfo.CurrentNativeLibraryName must stay '$currentNativeLibraryName'"
-    })
-}
-
-if (-not $buildInfoText.Contains("LegacyNativeLibraryName = `"$compatibilityNativeLibraryName`"")) {
-    $violations.Add([pscustomobject]@{
-        Path = Get-RepositoryRelativePath -Path $buildInfoPath
-        Line = 0
-        Issue = "OpenCvSharpBuildInfo.LegacyNativeLibraryName must stay '$compatibilityNativeLibraryName' as compatibility metadata only"
     })
 }
 

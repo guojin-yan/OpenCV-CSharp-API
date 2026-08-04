@@ -1,8 +1,8 @@
 # XImgProc Sparse Interpolation Guide / XImgProc 稀疏插值指南
 
-`OpenCvSharp.XImgProc` wraps OpenCV contrib sparse match interpolation as reusable managed objects.
+`JYPPX.OpenCvSharp.XImgProc` wraps OpenCV contrib sparse match interpolation as reusable managed objects.
 
-`OpenCvSharp.XImgProc` 将 OpenCV contrib 稀疏匹配插值能力封装为可复用 managed 对象。
+`JYPPX.OpenCvSharp.XImgProc` 将 OpenCV contrib 稀疏匹配插值能力封装为可复用 managed 对象。
 
 ## Scope / 范围
 
@@ -27,8 +27,8 @@ The two point arrays must be non-empty and have the same length.
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcSparseInterpolationExample
 {

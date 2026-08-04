@@ -23,18 +23,13 @@ $ignoredRelativePrefixes = @(
     "docs/api"
 )
 
-$allowedFixedMajorPathPrefixes = @(
-    "src/OpenCvSharp.Native/include/$fixedMajorIncludeTree"
-)
+$allowedFixedMajorPathPrefixes = @()
 
-$contentIgnoredRelativePrefixes = @(
-    "src/OpenCvSharp.Native/generated",
-    "src/OpenCvSharp.Native/include/$fixedMajorIncludeTree"
-)
+$contentIgnoredRelativePrefixes = @()
 
 $contentIgnoredRelativePaths = @(
-    "scripts/Generate-NativeAbiCompatibility.ps1",
-    "scripts/Test-NativeLegacyIncludeParity.ps1",
+    "scripts/Generate-NativeAbiManifest.ps1",
+    "scripts/Test-NoUnpublishedCompatibilitySurface.ps1",
     "scripts/Test-VersionNeutralNaming.ps1",
     "scripts/Test-PathArtifactNaming.ps1"
 )

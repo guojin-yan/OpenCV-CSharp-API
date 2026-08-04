@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>Owns an OpenCV animation and exposes cloned frames. 拥有 OpenCV 动画并公开克隆帧。</summary>
     public sealed class Animation : IDisposable

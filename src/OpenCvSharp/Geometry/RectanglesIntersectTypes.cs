@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Geometry
+namespace JYPPX.OpenCvSharp.Geometry
 {
     /// <summary>
     /// Specifies the intersection type between two rotated rectangles compatible with OpenCV's <c>cv::RectanglesIntersectTypes</c>.

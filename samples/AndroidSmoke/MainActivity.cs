@@ -2,10 +2,10 @@ using Android.App;
 using Android.OS;
 using Android.Util;
 using Android.Widget;
-using OpenCvSharp;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.AndroidSmoke;
+namespace JYPPX.OpenCvSharp.AndroidSmoke;
 
 [Activity(
     Name = "io.github.guojinyan.opencvcsharp.smoke.MainActivity",

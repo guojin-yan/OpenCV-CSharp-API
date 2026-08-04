@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.StructuredLight
+namespace JYPPX.OpenCvSharp.StructuredLight
 {
     /// <summary>
     /// Parameters for a sinusoidal structured-light pattern.

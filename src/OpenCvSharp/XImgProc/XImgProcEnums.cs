@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.XImgProc
+namespace JYPPX.OpenCvSharp.XImgProc
 {
     /// <summary>Thinning algorithms. 细化算法。</summary>
     public enum ThinningTypes

@@ -1,8 +1,8 @@
 # Shape Guide / Shape 指南
 
-`OpenCvSharp.Shape` wraps model-free OpenCV contrib `shape` utilities behind stable managed objects and caller-owned `Mat` inputs.
+`JYPPX.OpenCvSharp.Shape` wraps model-free OpenCV contrib `shape` utilities behind stable managed objects and caller-owned `Mat` inputs.
 
-`OpenCvSharp.Shape` 通过稳定的 managed object 和调用方持有的 `Mat` 输入封装 OpenCV contrib `shape` 的无模型工具。
+`JYPPX.OpenCvSharp.Shape` 通过稳定的 managed object 和调用方持有的 `Mat` 输入封装 OpenCV contrib `shape` 的无模型工具。
 
 ## Scope / 范围
 
@@ -31,8 +31,8 @@
 `EMDL1` 与直方图代价提取器使用调用方持有的浮点 descriptor/signature 矩阵。距离提取器使用轮廓矩阵，常见为 `CV_32FC2` 点序列。tiny smoke 只验证调用路径和输出形状；真实匹配质量取决于 descriptor 与 contour 的构造方式。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Shape;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Shape;
 
 using Mat first = new Mat(3, 1, MatType.CV_32FC1);
 using Mat second = new Mat(3, 1, MatType.CV_32FC1);

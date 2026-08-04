@@ -1,8 +1,8 @@
 # Quality Guide / Quality 指南
 
-`OpenCvSharp.Quality` wraps the first contrib `quality` metrics: MSE, PSNR, SSIM, GMSD, and BRISQUE.
+`JYPPX.OpenCvSharp.Quality` wraps the first contrib `quality` metrics: MSE, PSNR, SSIM, GMSD, and BRISQUE.
 
-`OpenCvSharp.Quality` 封装第一批 contrib `quality` 图像质量指标：MSE、PSNR、SSIM、GMSD 和 BRISQUE。
+`JYPPX.OpenCvSharp.Quality` 封装第一批 contrib `quality` 图像质量指标：MSE、PSNR、SSIM、GMSD 和 BRISQUE。
 
 ## Scope / 范围
 
@@ -24,13 +24,11 @@
 
 ## BRISQUE Models / BRISQUE 模型
 
-BRISQUE scoring requires user-provided model and range files. Tests and samples only run the real BRISQUE score path when `OPENCV_CSHARP_BRISQUE_MODEL` and `OPENCV_CSHARP_BRISQUE_RANGE` are set. The older `OPENCV5SHARP_BRISQUE_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
 
-BRISQUE 评分需要用户提供 model 和 range 文件。测试和示例只有在设置 `OPENCV_CSHARP_BRISQUE_MODEL` 与 `OPENCV_CSHARP_BRISQUE_RANGE` 时才运行真实 BRISQUE 评分路径。旧的 `OPENCV5SHARP_BRISQUE_*` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Quality;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Quality;
 
 using Mat reference = new Mat(4, 4, MatType.CV_8UC1, new Scalar(10));
 using Mat comparison = new Mat(4, 4, MatType.CV_8UC1, new Scalar(12));

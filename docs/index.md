@@ -11,7 +11,7 @@ OpenCV CSharp API 通过版本中立的 managed API 和稳定的 native C ABI，
 | Path / 路线 | Purpose / 用途 |
 |---|---|
 | [Quick Start](articles/quick-start.md) | Select packages and run the first program / 选择包并运行第一个程序 |
-| [Tutorial Series](articles/tutorial-series.md) | Follow six executable visual workflows / 完成 6 个可执行可视化流程 |
+| [Tutorial Series](articles/tutorial-series.md) | Follow six visual workflows and one Android native-loading workflow / 完成 6 个可视化流程和 1 个 Android 原生加载流程 |
 | [OpenCV PutText With Chinese](articles/tutorial-02-chinese-puttext.md) | Draw UTF-8 Chinese directly into `Mat` / 把 UTF-8 中文直接写入 `Mat` |
 | [Scenario Recipes](articles/scenario-recipes.md) | Choose a product-oriented documentation route / 选择面向产品场景的文档路线 |
 | [First Release Overview](articles/first-release-overview.md) | Understand scope, compatibility, and boundaries / 了解首版范围、兼容性与边界 |
@@ -24,6 +24,7 @@ OpenCV CSharp API 通过版本中立的 managed API 和稳定的 native C ABI，
 4. [ORB Features / ORB 特征](articles/tutorial-04-orb-features.md)
 5. [Template Matching / 模板匹配](articles/tutorial-05-template-matching.md)
 6. [KNN Classification / KNN 分类](articles/tutorial-06-knn-classification.md)
+7. [Android Runtime And Native Loading / Android Runtime 与原生加载](articles/tutorial-07-android-runtime.md)
 
 Each tutorial has a deterministic command, generated input, inspectable PNG output, a runtime-profile requirement, focused code, and links to deeper module guides. The complete gallery remains available in [Visual Showcase](articles/visual-showcase.md).
 

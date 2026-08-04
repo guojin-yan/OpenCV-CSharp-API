@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgCodecs
+namespace JYPPX.OpenCvSharp.ImgCodecs
 {
     /// <summary>
     /// Specifies image encoder parameter keys used by OpenCV <c>imencode</c> and <c>imwrite</c>.

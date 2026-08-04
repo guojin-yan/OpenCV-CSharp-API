@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Restricts batch matching to image pairs inside a configured index range.</summary>
     public sealed class BestOf2NearestRangeMatcher : FeaturesMatcher

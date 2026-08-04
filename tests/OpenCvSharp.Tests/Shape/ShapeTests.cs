@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Shape;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Shape;
 
-namespace OpenCvSharp.Tests.Shape
+namespace JYPPX.OpenCvSharp.Tests.Shape
 {
     public sealed class ShapeTests
     {

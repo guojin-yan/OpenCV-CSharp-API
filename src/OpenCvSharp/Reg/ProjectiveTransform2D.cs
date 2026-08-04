@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.Reg
+namespace JYPPX.OpenCvSharp.Reg
 {
     /// <summary>
     /// Represents a 3x3 projective transform used by OpenCV reg maps.

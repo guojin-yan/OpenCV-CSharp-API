@@ -1,8 +1,8 @@
 # Point-Set Marshalling Guide
 
-OpenCV frequently uses `std::vector<std::vector<Point2f>>` or `OutputArrayOfArrays` for marker corners, board corners, and calibration point groups. OpenCvSharp keeps those C++ containers inside the native boundary and represents grouped points with an offset table plus a flat point buffer.
+OpenCV frequently uses `std::vector<std::vector<Point2f>>` or `OutputArrayOfArrays` for marker corners, board corners, and calibration point groups. JYPPX.OpenCvSharp keeps those C++ containers inside the native boundary and represents grouped points with an offset table plus a flat point buffer.
 
-OpenCV 经常使用 `std::vector<std::vector<Point2f>>` 或 `OutputArrayOfArrays` 表示 marker corners、board corners 和标定点分组。OpenCvSharp 将这些 C++ 容器保留在 native 边界内部，并使用偏移表加扁平点缓冲区表示分组点集。
+OpenCV 经常使用 `std::vector<std::vector<Point2f>>` 或 `OutputArrayOfArrays` 表示 marker corners、board corners 和标定点分组。JYPPX.OpenCvSharp 将这些 C++ 容器保留在 native 边界内部，并使用偏移表加扁平点缓冲区表示分组点集。
 
 ## Native Layout / Native 布局
 

@@ -264,7 +264,6 @@ $expectedRootNamespace = Get-RequiredDirectoryBuildProperty $centralProperties "
 $expectedOpenCvVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpOpenCvVersion"
 $expectedPackageVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpPackageVersion"
 $expectedCurrentNativeLibraryName = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCurrentNativeLibraryName"
-$expectedCompatibilityNativeLibraryName = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCompatibilityNativeLibraryName"
 $buildInfoText = Read-RequiredText -RelativePath $buildInfoPath
 $nativeLibraryNamesText = Read-RequiredText -RelativePath $nativeLibraryNamesPath
 $nativeCMakeText = Read-RequiredText -RelativePath $nativeCMakePath
@@ -276,17 +275,14 @@ $buildInfoRuntimePackagePrefix = Get-RegexValue $buildInfoText 'public\s+const\s
 $buildInfoOpenCvVersion = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+OpenCvVersion\s*=\s*"(?<value>[^"]+)";'
 $buildInfoPackageVersion = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+PackageVersion\s*=\s*"(?<value>[^"]+)";'
 $buildInfoCurrentNativeLibraryName = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+CurrentNativeLibraryName\s*=\s*"(?<value>[^"]+)";'
-$buildInfoLegacyNativeLibraryName = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+LegacyNativeLibraryName\s*=\s*"(?<value>[^"]+)";'
 
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.ManagedPackageId" $buildInfoManagedPackageId $expectedManagedPackageId
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.RuntimePackageIdPrefix" $buildInfoRuntimePackagePrefix $expectedRuntimePackagePrefix
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.OpenCvVersion" $buildInfoOpenCvVersion $expectedOpenCvVersion
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.PackageVersion" $buildInfoPackageVersion $expectedPackageVersion
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.CurrentNativeLibraryName" $buildInfoCurrentNativeLibraryName $expectedCurrentNativeLibraryName
-Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.LegacyNativeLibraryName" $buildInfoLegacyNativeLibraryName $expectedCompatibilityNativeLibraryName
-
-if (-not (Test-ContainsText -Text $buildInfoText -Needle "public const string NativeLibraryName = LegacyNativeLibraryName;")) {
-    Add-Violation $violations $buildInfoPath "OpenCvSharpBuildInfo.NativeLibraryName must forward to LegacyNativeLibraryName"
+if ($buildInfoText -match 'LegacyNativeLibraryName|public\s+const\s+string\s+NativeLibraryName') {
+    Add-Violation $violations $buildInfoPath "Build info must not expose an unpublished native loader compatibility alias"
 }
 
 Assert-Equals $violations $managedProjectPath "Managed project AssemblyName" (Resolve-PropertyReferences -Value (Get-SingleProjectProperty $managedProject "AssemblyName") -Properties $centralProperties) $expectedManagedPackageId
@@ -303,18 +299,19 @@ if (-not $runtimePackageId.StartsWith("$expectedRuntimePackagePrefix.", [System.
 }
 
 $nativeCurrentLibraryName = Get-RegexValue $nativeLibraryNamesText 'internal\s+const\s+string\s+CurrentNativeLibrary\s*=\s*"(?<value>[^"]+)";'
-$nativeLegacyLibraryName = Get-RegexValue $nativeLibraryNamesText 'internal\s+const\s+string\s+LegacyNativeLibrary\s*=\s*"(?<value>[^"]+)";'
 Assert-Equals $violations $nativeLibraryNamesPath "NativeLibraryNames.CurrentNativeLibrary" $nativeCurrentLibraryName $expectedCurrentNativeLibraryName
-Assert-Equals $violations $nativeLibraryNamesPath "NativeLibraryNames.LegacyNativeLibrary" $nativeLegacyLibraryName $expectedCompatibilityNativeLibraryName
 Assert-Equals $violations $nativeLibraryNamesPath "NativeLibraryNames.CurrentNativeLibrary vs build-info" $nativeCurrentLibraryName $buildInfoCurrentNativeLibraryName
-Assert-Equals $violations $nativeLibraryNamesPath "NativeLibraryNames.LegacyNativeLibrary vs build-info" $nativeLegacyLibraryName $buildInfoLegacyNativeLibraryName
+if ($nativeLibraryNamesText -match 'LegacyNativeLibrary') {
+    Add-Violation $violations $nativeLibraryNamesPath "Managed interop must not retain an unpublished native loader compatibility alias"
+}
 
 $cmakeProjectVersion = Get-RegexValue $nativeCMakeText 'project\s*\(\s*OpenCvCSharpNative\s+VERSION\s+(?<value>\d+\.\d+\.\d+)\s+LANGUAGES\s+CXX\s*\)'
 $cmakeCurrentTarget = Get-RegexValue $nativeCMakeText 'set\s*\(\s*OPENCV_CSHARP_NATIVE_TARGET\s+"(?<value>[^"]+)"\s*\)'
-$cmakeCompatibilityTarget = Get-RegexValue $nativeCMakeText 'set\s*\(\s*OPENCV_CSHARP_COMPATIBILITY_NATIVE_TARGET\s+"(?<value>[^"]+)"\s*\)'
 Assert-Equals $violations $nativeCMakePath "Native CMake project version" $cmakeProjectVersion $expectedOpenCvVersion
 Assert-Equals $violations $nativeCMakePath "Native CMake primary target" $cmakeCurrentTarget $expectedCurrentNativeLibraryName
-Assert-Equals $violations $nativeCMakePath "Native CMake compatibility target" $cmakeCompatibilityTarget $expectedCompatibilityNativeLibraryName
+if ($nativeCMakeText -match 'COMPATIBILITY_NATIVE_TARGET') {
+    Add-Violation $violations $nativeCMakePath "Native CMake must not retain an unpublished compatibility target"
+}
 
 $nativeNoOpenCvVersion = Get-RegexValue $nativeVersionText 'return\s+"(?<value>\d+\.\d+\.\d+)";'
 Assert-Equals $violations $nativeVersionPath "No-OpenCV native version fallback" $nativeNoOpenCvVersion $expectedOpenCvVersion
@@ -356,13 +353,8 @@ if (-not (Test-ContainsText -Text $stageRuntimeText -Needle "`"lib$expectedCurre
     Add-Violation $violations $stageRuntimePath "Stage-Runtime must stage lib$expectedCurrentNativeLibraryName.so as the non-Windows primary loader"
 }
 
-if (-not (Test-ContainsText -Text $stageRuntimeText -Needle '"Open" + "Cv5Sharp.Native" # compatibility loader')) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must construct $expectedCompatibilityNativeLibraryName only as an explicit compatibility loader"
-}
-
-if (-not (Test-ContainsText -Text $stageRuntimeText -Needle '$compatibilityNativeLoaderBaseName.dll') -or
-    -not (Test-ContainsText -Text $stageRuntimeText -Needle 'lib$compatibilityNativeLoaderBaseName.so')) {
-    Add-Violation $violations $stageRuntimePath "Stage-Runtime must stage the compatibility loader copy for Windows and non-Windows RIDs"
+if ($stageRuntimeText -match 'compatibilityNativeLoader|LegacyNativeLibrary') {
+    Add-Violation $violations $stageRuntimePath "Stage-Runtime must stage only the neutral native loader"
 }
 
 if ($violations.Count -gt 0) {
@@ -376,4 +368,4 @@ if ($violations.Count -gt 0) {
 Write-Host "Build-info/runtime metadata consistency guard passed."
 Write-Host "Managed package ID: $expectedManagedPackageId."
 Write-Host "Package/OpenCV version: $expectedPackageVersion / $expectedOpenCvVersion."
-Write-Host "Native loaders: $expectedCurrentNativeLibraryName; compatibility $expectedCompatibilityNativeLibraryName."
+Write-Host "Native loader: $expectedCurrentNativeLibraryName."

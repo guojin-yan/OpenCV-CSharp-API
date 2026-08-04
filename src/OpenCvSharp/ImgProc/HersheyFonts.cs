@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies Hershey font faces compatible with OpenCV <c>cv::HersheyFonts</c>.

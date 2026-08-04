@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>Specifies the metric used by <see cref="ANNIndex"/>.</summary>
     public enum ANNIndexDistance

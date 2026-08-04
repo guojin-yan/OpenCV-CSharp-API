@@ -2,7 +2,6 @@ param(
     [string]$Rid = "win-x64",
     [string]$Configuration = "Release",
     [string]$OpenCvNativeRuntimeDir = "",
-    [string]$NativeRuntimeDir = "",
     [string]$OpenCvVersion = "5.0.0",
     [string]$OpenCvRid = "",
     [string]$OpenCvRuntimeVersionSuffix = "",
@@ -119,12 +118,11 @@ function Get-AndroidAbi {
 function Get-NativeLoaderFileNames {
     param([Parameter(Mandatory = $true)][string]$RuntimeIdentifier)
 
-    $compatibilityNativeLoaderBaseName = "Open" + "Cv5Sharp.Native" # compatibility loader for already-compiled consumers
     if (Test-WindowsRid -RuntimeIdentifier $RuntimeIdentifier) {
-        return @("JYPPX.OpenCV.Native.dll", "$compatibilityNativeLoaderBaseName.dll")
+        return @("JYPPX.OpenCV.Native.dll")
     }
 
-    return @("libJYPPX.OpenCV.Native.so", "lib$compatibilityNativeLoaderBaseName.so")
+    return @("libJYPPX.OpenCV.Native.so")
 }
 
 function Resolve-OpenCvModuleRuntimeFiles {
@@ -272,29 +270,10 @@ if (-not $PSBoundParameters.ContainsKey("OptionalOpenCvModules")) {
 function Get-DefaultOpenCvSourceRoot {
     param(
         [Parameter(Mandatory = $true)]
-        [string]$WorkspaceRoot,
-        [Parameter(Mandatory = $true)]
-        [string]$OpenCvVersion
+        [string]$WorkspaceRoot
     )
 
-    # Prefer the version-neutral workspace source root when it exists.
-    $neutralSourceRoot = Join-Path $WorkspaceRoot "opencv-source"
-    if (Test-Path -LiteralPath $neutralSourceRoot) {
-        return $neutralSourceRoot
-    }
-
-    $versionMatch = [regex]::Match($OpenCvVersion, "^(\d+)(?:\.|$)")
-    if (-not $versionMatch.Success) {
-        throw "OpenCvVersion must start with a numeric major version: $OpenCvVersion"
-    }
-
-    # Use the major-version source directory only when an existing local checkout still uses that older layout.
-    $legacyMajorSourceRoot = Join-Path $WorkspaceRoot "opencv$($versionMatch.Groups[1].Value)-source code"
-    if (Test-Path -LiteralPath $legacyMajorSourceRoot) {
-        return $legacyMajorSourceRoot
-    }
-
-    return $neutralSourceRoot
+    return Join-Path $WorkspaceRoot "opencv-source"
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeVersionSuffix)) {
@@ -303,19 +282,11 @@ if ([string]::IsNullOrWhiteSpace($OpenCvRuntimeVersionSuffix)) {
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
-    if (-not [string]::IsNullOrWhiteSpace($NativeRuntimeDir)) {
-        # OpenCvNativeRuntimeDir is the preferred version-neutral runtime path/staging parameter.
-        # NativeRuntimeDir is accepted only as an older existing-packaging-script compatibility alias.
-        $OpenCvNativeRuntimeDir = $NativeRuntimeDir
-    }
-    else {
-        # Default native runtime input path is a current local build-output fallback; it is not a runtime package identity or naming surface.
-        $OpenCvNativeRuntimeDir = "build\native-opencv-core\Release"
-    }
+    $OpenCvNativeRuntimeDir = "build\native-opencv-core\Release"
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvSourceRoot)) {
-    $OpenCvSourceRoot = Get-DefaultOpenCvSourceRoot -WorkspaceRoot $workspaceRoot -OpenCvVersion $OpenCvVersion
+    $OpenCvSourceRoot = Get-DefaultOpenCvSourceRoot -WorkspaceRoot $workspaceRoot
 }
 
 if ([string]::IsNullOrWhiteSpace($OpenCvInstallRoot)) {
@@ -553,14 +524,11 @@ New-Item -ItemType Directory -Force $runtimeProjectOpenCvLicenseDir | Out-Null
 
 # Derived only for factual upstream OpenCV runtime names such as opencv_core500.dll or libopencv_core.so.5.0.0.
 $openCvBinarySuffix = (($OpenCvVersion -split "\.") | Select-Object -First 3) -join ""
-# JYPPX.OpenCV.Native is the version-neutral primary loader.
-# OpenCv5Sharp.Native remains a compatibility loader copy for already-compiled consumers.
-$nativeLoaderFileNames = Get-NativeLoaderFileNames -RuntimeIdentifier $Rid
+# JYPPX.OpenCV.Native is the version-neutral loader.
+$nativeLoaderFileNames = @(Get-NativeLoaderFileNames -RuntimeIdentifier $Rid)
 $primaryNativeLoaderFileName = $nativeLoaderFileNames[0]
-$compatibilityNativeLoaderCopyFileName = $nativeLoaderFileNames[1]
 $runtimeFiles = @(
-    (Join-Path $nativeRuntimePath $primaryNativeLoaderFileName),
-    (Join-Path $nativeRuntimePath $compatibilityNativeLoaderCopyFileName)
+    (Join-Path $nativeRuntimePath $primaryNativeLoaderFileName)
 )
 
 foreach ($module in $OpenCvModules) {
@@ -661,7 +629,6 @@ $provenance = [ordered]@{
     RuntimeProfile = $RuntimeProfile
     SyntheticRuntimeInputs = [bool]$SyntheticRuntimeInputs.IsPresent
     PrimaryNativeLoaderName = $primaryNativeLoaderFileName
-    CompatibilityNativeLoaderName = $compatibilityNativeLoaderCopyFileName
     RequiredModules = @($OpenCvModules)
     OptionalModulesRequested = @($OptionalOpenCvModules)
     OptionalModulesStaged = @($optionalModulesStaged)

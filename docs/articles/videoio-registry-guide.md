@@ -1,8 +1,8 @@
 # VideoIO Registry Guide
 
-`OpenCvSharp.VideoIO.VideoIORegistry` exposes OpenCV `cv::videoio_registry` queries. Use it to inspect which video backends are known to the current OpenCV runtime before opening captures or writers.
+`JYPPX.OpenCvSharp.VideoIO.VideoIORegistry` exposes OpenCV `cv::videoio_registry` queries. Use it to inspect which video backends are known to the current OpenCV runtime before opening captures or writers.
 
-`OpenCvSharp.VideoIO.VideoIORegistry` 暴露 OpenCV `cv::videoio_registry` 查询能力。它可在打开 capture 或 writer 前检查当前 OpenCV runtime 已知的视频后端。
+`JYPPX.OpenCvSharp.VideoIO.VideoIORegistry` 暴露 OpenCV `cv::videoio_registry` 查询能力。它可在打开 capture 或 writer 前检查当前 OpenCV runtime 已知的视频后端。
 
 ## Covered APIs / 已覆盖接口
 
@@ -23,7 +23,7 @@
 ## Query Backends / 查询后端
 
 ```csharp
-using OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.VideoIO;
 
 namespace VideoIORegistrySample
 {

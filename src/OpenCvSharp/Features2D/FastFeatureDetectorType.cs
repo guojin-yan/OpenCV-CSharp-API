@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Specifies FAST detector neighborhoods compatible with <c>cv::FastFeatureDetector::DetectorType</c>.

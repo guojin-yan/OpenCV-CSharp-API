@@ -6,7 +6,7 @@ This is a module-scoped compatibility map. It does not claim repository-wide Ope
 
 ## Measured coverage
 
-The 24-row high-level `stitching.hpp` partition contains three metadata rows and 21 callable rows. All 21 callable rows map to the existing `OpenCvSharp.Stitching.Stitcher` lifecycle, properties, estimate/compose/stitch operations, components, copied cameras, and work scale.
+The 24-row high-level `stitching.hpp` partition contains three metadata rows and 21 callable rows. All 21 callable rows map to the existing `JYPPX.OpenCvSharp.Stitching.Stitcher` lifecycle, properties, estimate/compose/stitch operations, components, copied cameras, and work scale.
 
 The 53-row `detail/exposure_compensate.hpp` partition contains eight metadata rows and 45 callable rows. All 45 callables map to:
 
@@ -29,8 +29,8 @@ The two autocalibration callables, `CameraParams.K`, and all 17 motion-estimator
 
 ```csharp
 using System.Linq;
-using OpenCvSharp.Core;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Stitching;
 
 using var adjuster = new NoBundleAdjuster();
 adjuster.ConfidenceThreshold = 0.0;
@@ -62,9 +62,9 @@ Estimator input features and matches use the same exact `N * N` row-major contra
 ## Detail feature matching
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Stitching;
 
 using var first = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0));
 using var second = new Mat(96, 96, MatType.CV_8UC1, new Scalar(0));
@@ -97,9 +97,9 @@ Batch matching always returns exactly `N * N` independently owned `MatchesInfo` 
 ## Public rotation warper
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Stitching;
 
 using var camera = Mat.Eye(3, 3, MatType.CV_32FC1);
 using var rotation = Mat.Eye(3, 3, MatType.CV_32FC1);
@@ -126,8 +126,8 @@ Forward and backward image operations borrow the source, K, and R only for the c
 ## Detail blender workflow
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Stitching;
 
 using var image = new Mat(64, 64, MatType.CV_8UC3, new Scalar(40, 60, 80));
 using var mask = new Mat(64, 64, MatType.CV_8UC1, new Scalar(255));
@@ -155,8 +155,8 @@ The installed OpenCV 5.0.0 full runtime used for current evidence has no CUDA bl
 ## Exposure workflow
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Stitching;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Stitching;
 
 using var first = new Mat(64, 64, MatType.CV_8UC3, new Scalar(40, 40, 40));
 using var second = new Mat(64, 64, MatType.CV_8UC3, new Scalar(80, 80, 80));

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>
     /// Specifies flags used by OpenCV ML statistical models.

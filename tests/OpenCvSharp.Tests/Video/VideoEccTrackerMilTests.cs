@@ -1,11 +1,11 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.Video;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.Video;
 using Xunit;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
-namespace OpenCvSharp.Tests.Video
+namespace JYPPX.OpenCvSharp.Tests.Video
 {
     public sealed class VideoEccTrackerMilTests
     {

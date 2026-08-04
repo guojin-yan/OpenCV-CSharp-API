@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.SurfaceMatching
+namespace JYPPX.OpenCvSharp.SurfaceMatching
 {
     /// <summary>
     /// Flat managed summary of OpenCV <c>Pose3D</c>.

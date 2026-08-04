@@ -382,15 +382,15 @@ internal static class Program
         IEnumerable<ManagedMember> candidates = members.Where(value => value.Name == managedName);
         if (owner == "Subdiv2D")
         {
-            candidates = candidates.Where(value => value.TypeName == "OpenCvSharp.ImgProc.Subdiv2D");
+            candidates = candidates.Where(value => value.TypeName == "JYPPX.OpenCvSharp.ImgProc.Subdiv2D");
         }
         else if (owner == "fisheye")
         {
-            candidates = candidates.Where(value => value.TypeName == "OpenCvSharp.Calib3D.Cv2");
+            candidates = candidates.Where(value => value.TypeName == "JYPPX.OpenCvSharp.Calib3D.Cv2");
         }
         else if (owner.Length > 0)
         {
-            string typeName = "OpenCvSharp.Calib3D." + owner;
+            string typeName = "JYPPX.OpenCvSharp.Calib3D." + owner;
             candidates = candidates.Where(value => value.TypeName == typeName);
         }
         else
@@ -400,7 +400,7 @@ internal static class Program
         bool usacOverload = declaration.Identity.Contains("UsacParams", StringComparison.Ordinal);
         if (managedName != ".ctor")
         {
-            candidates = candidates.Where(value => value.Evidence.Contains("OpenCvSharp.Calib3D.UsacParams", StringComparison.Ordinal) == usacOverload);
+            candidates = candidates.Where(value => value.Evidence.Contains("JYPPX.OpenCvSharp.Calib3D.UsacParams", StringComparison.Ordinal) == usacOverload);
         }
         return candidates.Select(value => value.Evidence).Distinct(Ordinal).OrderBy(value => value, Ordinal);
     }
@@ -549,7 +549,7 @@ internal static class Program
             Require(IsOrdinallySorted(row.NativeEntrypoints), "Native evidence is nondeterministically ordered: " + row.Identity);
             Require(IsOrdinallySorted(row.ManagedMembers), "Managed evidence is nondeterministically ordered: " + row.Identity);
             Require(row.NativeEntrypoints.All(value => !Regex.IsMatch(value, "^jyppx_ocv[0-9]+_", RegexOptions.CultureInvariant)), "Fixed-major native evidence is forbidden: " + row.Identity);
-            Require(row.ManagedMembers.All(value => !Regex.IsMatch(value, "OpenCvSharp[0-9]+", RegexOptions.CultureInvariant)), "Fixed-major managed evidence is forbidden: " + row.Identity);
+            Require(row.ManagedMembers.All(value => !Regex.IsMatch(value, "JYPPX.OpenCvSharp[0-9]+", RegexOptions.CultureInvariant)), "Fixed-major managed evidence is forbidden: " + row.Identity);
             Require(row.NativeEntrypoints.All(nativeSet.Contains), "Classification references nonexistent native evidence: " + row.Identity);
             Require(row.ManagedMembers.All(managedSet.Contains), "Classification references nonexistent managed evidence: " + row.Identity);
 
@@ -773,7 +773,7 @@ internal static class Program
         Reject("stale hash", "mapping SHA256", () => ValidateSummaryHash(summary, new string('0', 64)));
         Reject("undocumented omission", "documented reason", () => { var value = CopyClassifications(); ClassificationRow row = value.Declarations.First(item => item.Classification == "implemented"); row.Classification = "intentionally-omitted"; row.Reason = string.Empty; Validate(raw, value, options, nativeEntrypoints, managedMembers, false); });
         Reject("false implementation", "requires callable native and managed evidence", () => { var value = CopyClassifications(); ClassificationRow row = value.Declarations.First(item => item.Classification == "non-callable-metadata"); row.Classification = "implemented"; row.NativeEntrypoints.Clear(); row.ManagedMembers.Clear(); Validate(raw, value, options, nativeEntrypoints, managedMembers, false); });
-        Reject("fixed-major identity", "Fixed-major", () => { var value = CopyClassifications(); ClassificationRow row = value.Declarations.First(item => item.ManagedMembers.Count == 1); row.ManagedMembers[0] = row.ManagedMembers[0].Replace("OpenCvSharp", "OpenCvSharp5", StringComparison.Ordinal); Validate(raw, value, options, nativeEntrypoints, managedMembers, false); });
+        Reject("fixed-major identity", "Fixed-major", () => { var value = CopyClassifications(); ClassificationRow row = value.Declarations.First(item => item.ManagedMembers.Count == 1); row.ManagedMembers[0] = row.ManagedMembers[0].Replace("JYPPX.OpenCvSharp", "JYPPX.OpenCvSharp5", StringComparison.Ordinal); Validate(raw, value, options, nativeEntrypoints, managedMembers, false); });
         Reject("nondeterministic source ordering", "nondeterministically ordered", () => { var value = CopyClassifications(); ClassificationRow row = value.Declarations.First(item => item.ManagedMembers.Count > 1); row.ManagedMembers.Reverse(); Validate(raw, value, options, nativeEntrypoints, managedMembers, false); });
         Require(rejected == 11, "Calib3D map negative fixture count drifted.");
     }

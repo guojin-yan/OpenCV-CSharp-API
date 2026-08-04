@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>Specifies marker shapes used by <see cref="Cv2.DrawMarker"/>. 指定绘制标记使用的形状。</summary>
     public enum MarkerTypes

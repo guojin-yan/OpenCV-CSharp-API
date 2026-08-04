@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Saliency
+namespace JYPPX.OpenCvSharp.Saliency
 {
     /// <summary>
     /// Static fine-grained saliency algorithm.

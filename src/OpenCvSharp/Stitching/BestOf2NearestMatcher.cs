@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Matches each descriptor against its two nearest candidates and estimates a homography.</summary>
     public sealed class BestOf2NearestMatcher : FeaturesMatcher

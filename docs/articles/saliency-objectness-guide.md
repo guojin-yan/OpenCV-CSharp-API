@@ -37,7 +37,7 @@ If the factual OpenCV 5.0.0 runtime artifact `opencv_saliency500.dll` is not lin
 ```csharp
 using System;
 using System.IO;
-using OpenCvSharp.Saliency;
+using JYPPX.OpenCvSharp.Saliency;
 
 namespace SaliencyObjectnessSample
 {

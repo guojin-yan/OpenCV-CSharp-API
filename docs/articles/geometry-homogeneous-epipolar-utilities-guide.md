@@ -82,9 +82,9 @@ input. For conversion from homogeneous coordinates, `-1` produces `CV_32F` from 
 `CV_32F` 输入在 `-1` 下输出 `CV_32F`，`CV_64F` 输入输出 `CV_64F`。
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 Point2f[] points =
 {

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ImgProc
+namespace JYPPX.OpenCvSharp.ImgProc
 {
     /// <summary>
     /// Specifies distance-transform mask sizes compatible with OpenCV <c>cv::DistanceTransformMasks</c>.

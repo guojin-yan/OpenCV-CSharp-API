@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
-namespace OpenCvSharp.Tests.Photo
+namespace JYPPX.OpenCvSharp.Tests.Photo
 {
     public sealed class PhotoSecondBatchTests
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.ML
+namespace JYPPX.OpenCvSharp.ML
 {
     /// <summary>Prediction modes used by decision-tree models.</summary>
     [Flags]

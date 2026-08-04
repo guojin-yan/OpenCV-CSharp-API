@@ -1,8 +1,8 @@
 # OptFlow Guide / OptFlow 指南
 
-`OpenCvSharp.OptFlow` wraps the first OpenCV 5.0.0 contrib `optflow` objects and motion-template helpers.
+`JYPPX.OpenCvSharp.OptFlow` wraps the first OpenCV 5.0.0 contrib `optflow` objects and motion-template helpers.
 
-`OpenCvSharp.OptFlow` 封装第一批 OpenCV 5.0.0 contrib `optflow` 对象和 motion-template 辅助函数。
+`JYPPX.OpenCvSharp.OptFlow` 封装第一批 OpenCV 5.0.0 contrib `optflow` 对象和 motion-template 辅助函数。
 
 ## Scope / 范围
 
@@ -20,9 +20,9 @@
 
 ## Runtime / 运行时
 
-`optflow` is an optional OpenCV contrib module. A linked runtime should include the factual OpenCV 5.0.0 runtime artifact `opencv_optflow500.dll`. Several algorithms can also use the staged contrib `ximgproc` module, which is now exposed directly through `OpenCvSharp.XImgProc`. If the module is not linked, the exported ABI remains present and managed calls report `NOT_LINKED`.
+`optflow` is an optional OpenCV contrib module. A linked runtime should include the factual OpenCV 5.0.0 runtime artifact `opencv_optflow500.dll`. Several algorithms can also use the staged contrib `ximgproc` module, which is now exposed directly through `JYPPX.OpenCvSharp.XImgProc`. If the module is not linked, the exported ABI remains present and managed calls report `NOT_LINKED`.
 
-`optflow` 是可选 OpenCV contrib 模块。linked runtime 应包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_optflow500.dll`。部分算法也可以使用已暂存的 contrib `ximgproc` 模块，该模块现在也通过 `OpenCvSharp.XImgProc` 直接暴露。如果模块未链接，导出的 ABI 仍存在，managed 调用会报告 `NOT_LINKED`。
+`optflow` 是可选 OpenCV contrib 模块。linked runtime 应包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_optflow500.dll`。部分算法也可以使用已暂存的 contrib `ximgproc` 模块，该模块现在也通过 `JYPPX.OpenCvSharp.XImgProc` 直接暴露。如果模块未链接，导出的 ABI 仍存在，managed 调用会报告 `NOT_LINKED`。
 
 ## Data Notes / 数据说明
 
@@ -35,9 +35,9 @@ RLOF cross support regions are sensitive to channel count and image content. Tin
 RLOF cross support region 对输入通道数和图像内容敏感。tiny smoke 只验证 linked 调用路径和输出形状，不代表真实跟踪质量。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.OptFlow;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.OptFlow;
 
 using Mat first = new Mat(24, 24, MatType.CV_8UC3, new Scalar(20, 40, 60));
 using Mat second = first.Clone();

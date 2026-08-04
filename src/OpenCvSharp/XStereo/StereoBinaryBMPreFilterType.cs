@@ -1,4 +1,4 @@
-namespace OpenCvSharp.XStereo
+namespace JYPPX.OpenCvSharp.XStereo
 {
     /// <summary>
     /// Pre-filter types for StereoBinaryBM.

@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>Specifies the USAC local-optimization strategy. 指定 USAC 局部优化策略。</summary>
     public enum UsacLocalOptimizationMethod

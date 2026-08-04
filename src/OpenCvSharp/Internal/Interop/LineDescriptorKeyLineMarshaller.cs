@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.LineDescriptor;
+using JYPPX.OpenCvSharp.LineDescriptor;
 
-namespace OpenCvSharp.Internal.Interop
+namespace JYPPX.OpenCvSharp.Internal.Interop
 {
     internal static class LineDescriptorKeyLineMarshaller
     {

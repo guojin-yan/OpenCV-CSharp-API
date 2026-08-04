@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 #if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 #endif
 
-namespace OpenCvSharp.Features2D
+namespace JYPPX.OpenCvSharp.Features2D
 {
     /// <summary>
     /// Trains a bag-of-visual-words vocabulary with OpenCV <c>cv::kmeans</c>.

@@ -444,7 +444,7 @@ internal static class Program
             9 => M(managed, "TrainData", "|property|", " NSamples"),
             10 => M(managed, "TrainData", "|property|", " NVars"),
             11 => M(managed, "TrainData", "|property|", " NAllVars"),
-            12 => Exact(managed, "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetSample(System.Int32 sampleIndex,OpenCvSharp.Core.Mat? variableIndices=null)"),
+            12 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetSample(System.Int32 sampleIndex,JYPPX.OpenCvSharp.Core.Mat? variableIndices=null)"),
             13 => M(managed, "TrainData", " GetSamples("),
             14 => M(managed, "TrainData", " GetMissing("),
             15 => M(managed, "TrainData", " GetTrainSamples("),
@@ -463,7 +463,7 @@ internal static class Program
             28 => M(managed, "TrainData", "|property|", " ResponseType"),
             29 => M(managed, "TrainData", " GetTrainSampleIdx("),
             30 => M(managed, "TrainData", " GetTestSampleIdx("),
-            31 => Exact(managed, "MEMBER|OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetValues(System.Int32 variableIndex,OpenCvSharp.Core.Mat? sampleIndices=null)"),
+            31 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.TrainData|method|public;instance|System.Single[] GetValues(System.Int32 variableIndex,JYPPX.OpenCvSharp.Core.Mat? sampleIndices=null)"),
             32 => M(managed, "TrainData", " GetDefaultSubstValues("),
             33 => M(managed, "TrainData", " GetCatCount("),
             34 => M(managed, "TrainData", " GetClassLabels("),
@@ -474,15 +474,15 @@ internal static class Program
             39 => M(managed, "TrainData", " ShuffleTrainTest("),
             40 => M(managed, "TrainData", " GetTestSamples("),
             41 => M(managed, "TrainData", " GetNames("),
-            42 => M(managed, "TrainData", " GetSubVector(", "|method|public;static|OpenCvSharp.Core.Mat"),
-            43 => M(managed, "TrainData", " GetSubMatrix(", "|method|public;static|OpenCvSharp.Core.Mat"),
-            44 => M(managed, "TrainData", "|method|public;static|OpenCvSharp.ML.TrainData Create("),
+            42 => M(managed, "TrainData", " GetSubVector(", "|method|public;static|JYPPX.OpenCvSharp.Core.Mat"),
+            43 => M(managed, "TrainData", " GetSubMatrix(", "|method|public;static|JYPPX.OpenCvSharp.Core.Mat"),
+            44 => M(managed, "TrainData", "|method|public;static|JYPPX.OpenCvSharp.ML.TrainData Create("),
             47 => M(managed, "StatModel", "|property|", " VarCount"),
             48 => M(managed, "StatModel", "|property|", " Empty"),
             49 => M(managed, "StatModel", "|property|", " IsTrained"),
             50 => M(managed, "StatModel", "|property|", " IsClassifier"),
-            51 => M(managed, "StatModel", " Train(OpenCvSharp.ML.TrainData"),
-            52 => M(managed, "StatModel", " Train(OpenCvSharp.Core.Mat"),
+            51 => M(managed, "StatModel", " Train(JYPPX.OpenCvSharp.ML.TrainData"),
+            52 => M(managed, "StatModel", " Train(JYPPX.OpenCvSharp.Core.Mat"),
             53 => M(managed, "StatModel", " CalcError("),
             54 => M(managed, "StatModel", " Predict("),
             56 => M(managed, "NormalBayesClassifier", " PredictProb("),
@@ -499,10 +499,10 @@ internal static class Program
             75 or 76 => M(managed, "SVM", "|property|", " Gamma"),
             77 or 78 => M(managed, "SVM", "|property|", " Coef0"),
             79 or 80 => M(managed, "SVM", "|property|", " Degree"),
-            81 or 82 => Exact(managed, "MEMBER|OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double C"),
+            81 or 82 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.SVM|property|instance;get:public;set:public|System.Double C"),
             83 or 84 => M(managed, "SVM", "|property|", " Nu"),
             85 or 86 => M(managed, "SVM", "|property|", " P"),
-            87 => Exact(managed, "MEMBER|OpenCvSharp.ML.SVM|method|public;instance|OpenCvSharp.Core.Mat GetClassWeights()"),
+            87 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.SVM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetClassWeights()"),
             88 => M(managed, "SVM", " SetClassWeights("),
             89 or 90 => M(managed, "SVM", "|property|", " TermCriteria"),
             91 => M(managed, "SVM", "|property|", " KernelType"),
@@ -517,8 +517,8 @@ internal static class Program
             107 or 108 => M(managed, "EM", "|property|", " ClustersNumber"),
             109 or 110 => M(managed, "EM", "|property|", " CovarianceMatrixType"),
             111 or 112 => M(managed, "EM", "|property|", " TermCriteria"),
-            113 => Exact(managed, "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"),
-            114 => Exact(managed, "MEMBER|OpenCvSharp.ML.EM|method|public;instance|OpenCvSharp.Core.Mat GetMeans()"),
+            113 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetWeights()"),
+            114 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.EM|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetMeans()"),
             115 => M(managed, "EM", " GetCovariances()"),
             116 => M(managed, "StatModel", " Predict("),
             117 => M(managed, "EM", " Predict2("),
@@ -535,14 +535,14 @@ internal static class Program
             135 or 136 => M(managed, "DTrees", "|property|", " Use1SERule"),
             137 or 138 => M(managed, "DTrees", "|property|", " TruncatePrunedTree"),
             139 or 140 => M(managed, "DTrees", "|property|", " RegressionAccuracy"),
-            141 => Exact(managed, "MEMBER|OpenCvSharp.ML.DTrees|method|public;instance|OpenCvSharp.Core.Mat GetPriors()"),
+            141 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.DTrees|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetPriors()"),
             142 => M(managed, "DTrees", " SetPriors("),
             143 => M(managed, "DTrees", "|method|public;static|", " Create("),
             144 => M(managed, "DTrees", "|method|public;static|", " Load("),
             146 or 147 => M(managed, "RTrees", "|property|", " CalculateVarImportance"),
             148 or 149 => M(managed, "RTrees", "|property|", " ActiveVarCount"),
             150 or 151 => M(managed, "RTrees", "|property|", " TermCriteria"),
-            152 => Exact(managed, "MEMBER|OpenCvSharp.ML.RTrees|method|public;instance|OpenCvSharp.Core.Mat GetVarImportance()"),
+            152 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.RTrees|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetVarImportance()"),
             153 => M(managed, "RTrees", "|method|public;instance|System.Void", " GetVotes("),
             154 => M(managed, "RTrees", "|method|public;static|", " Create("),
             155 => M(managed, "RTrees", "|method|public;static|", " Load("),
@@ -562,7 +562,7 @@ internal static class Program
             179 or 180 => M(managed, "ANN_MLP", "|property|", " RpropDW0"),
             181 or 182 => M(managed, "ANN_MLP", "|property|", " RpropDWPlus"),
             183 or 184 => M(managed, "ANN_MLP", "|property|", " RpropDWMinus"),
-            185 or 186 => Exact(managed, "MEMBER|OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"),
+            185 or 186 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.ANN_MLP|property|instance;get:public;set:public|System.Double RpropDWMin"),
             187 or 188 => M(managed, "ANN_MLP", "|property|", " RpropDWMax"),
             189 or 190 => M(managed, "ANN_MLP", "|property|", " AnnealInitialT"),
             191 or 192 => M(managed, "ANN_MLP", "|property|", " AnnealFinalT"),
@@ -578,10 +578,10 @@ internal static class Program
             211 or 212 => M(managed, "LogisticRegression", "|property|", " MiniBatchSize"),
             213 or 214 => M(managed, "LogisticRegression", "|property|", " TermCriteria"),
             217 => M(managed, "StatModel", " Predict("),
-            218 => Exact(managed, "MEMBER|OpenCvSharp.ML.LogisticRegression|method|public;instance|OpenCvSharp.Core.Mat GetLearntThetas()"),
+            218 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.LogisticRegression|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetLearntThetas()"),
             219 => M(managed, "LogisticRegression", "|method|public;static|", " Create("),
             220 => M(managed, "LogisticRegression", "|method|public;static|", " Load("),
-            224 => Exact(managed, "MEMBER|OpenCvSharp.ML.SVMSGD|method|public;instance|OpenCvSharp.Core.Mat GetWeights()"),
+            224 => Exact(managed, "MEMBER|JYPPX.OpenCvSharp.ML.SVMSGD|method|public;instance|JYPPX.OpenCvSharp.Core.Mat GetWeights()"),
             225 => M(managed, "SVMSGD", "|property|", " Shift"),
             226 => M(managed, "SVMSGD", "|method|public;static|", " Create("),
             227 => M(managed, "SVMSGD", "|method|public;static|", " Load("),
@@ -599,7 +599,7 @@ internal static class Program
 
     private static string M(string[] managed, string type, params string[] fragments)
     {
-        string prefix = "MEMBER|OpenCvSharp.ML." + type + "|";
+        string prefix = "MEMBER|JYPPX.OpenCvSharp.ML." + type + "|";
         List<string> matches = managed.Where(x => x.Contains(prefix, StringComparison.Ordinal) && fragments.All(f => x.Contains(f, StringComparison.Ordinal))).OrderBy(x => x, Ordinal).ToList();
         Require(matches.Count == 1, $"Expected one managed evidence row for {type} fragments {string.Join(",", fragments)}; found {matches.Count}.");
         return matches[0];
@@ -686,8 +686,8 @@ internal static class Program
             b.AppendLine($"{i}|{d.Kind}|{d.SourceHeader}|{r.Classification}|{d.Identity}|{Join(r.NativeEntrypoints)}|{Join(r.ManagedMembers)}|{r.BuildCondition}|{r.Reason}");
         }
         b.AppendLine();
-        b.AppendLine("source-reviewed-extension|cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG& rng)->void|jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed|OpenCvSharp.ML.ANN_MLP.SetAnnealEnergySeed(System.UInt64)|excluded-from-parser-derived-counts");
-        b.AppendLine("source-reviewed-extension|cv.ml.RTrees.getOOBError()->double|jyppx_ocv_ml_rtrees_get_oob_error|OpenCvSharp.ML.RTrees.OobError|excluded-from-parser-derived-counts");
+        b.AppendLine("source-reviewed-extension|cv.ml.ANN_MLP.setAnnealEnergyRNG(const RNG& rng)->void|jyppx_ocv_ml_ann_mlp_set_anneal_energy_seed|JYPPX.OpenCvSharp.ML.ANN_MLP.SetAnnealEnergySeed(System.UInt64)|excluded-from-parser-derived-counts");
+        b.AppendLine("source-reviewed-extension|cv.ml.RTrees.getOOBError()->double|jyppx_ocv_ml_rtrees_get_oob_error|JYPPX.OpenCvSharp.ML.RTrees.OobError|excluded-from-parser-derived-counts");
         return b.ToString().Replace("\r\n", "\n", StringComparison.Ordinal);
     }
 

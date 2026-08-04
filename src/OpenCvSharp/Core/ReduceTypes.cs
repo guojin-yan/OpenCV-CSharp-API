@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Core
+namespace JYPPX.OpenCvSharp.Core
 {
     /// <summary>
     /// Specifies reduction operations compatible with OpenCV <c>cv::ReduceTypes</c>.

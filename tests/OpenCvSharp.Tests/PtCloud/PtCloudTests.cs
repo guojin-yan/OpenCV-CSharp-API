@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.PtCloud;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.PtCloud;
 
-namespace OpenCvSharp.Tests.PtCloud
+namespace JYPPX.OpenCvSharp.Tests.PtCloud
 {
     public sealed class PtCloudTests
     {

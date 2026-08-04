@@ -2,11 +2,11 @@
 
 ## Overview
 
-`OpenCvSharp.Calib3D.Cv2.UndistortImagePoints` exposes OpenCV's
+`JYPPX.OpenCvSharp.Calib3D.Cv2.UndistortImagePoints` exposes OpenCV's
 `cv::undistortImagePoints` utility for correcting distorted image-point positions while keeping
 the result in pixel coordinates.
 
-`OpenCvSharp.Calib3D.Cv2.UndistortImagePoints` 封装 OpenCV 的
+`JYPPX.OpenCvSharp.Calib3D.Cv2.UndistortImagePoints` 封装 OpenCV 的
 `cv::undistortImagePoints` 工具，用于校正畸变像点，并始终将结果保留在像素坐标系中。
 
 The operation is equivalent to calling `UndistortPoints` with:
@@ -88,7 +88,7 @@ Point2f[] distorted =
     new Point2f(548.0F, 391.0F)
 };
 
-using Mat undistorted = OpenCvSharp.Calib3D.Cv2.UndistortImagePoints(
+using Mat undistorted = JYPPX.OpenCvSharp.Calib3D.Cv2.UndistortImagePoints(
     distorted,
     cameraMatrix,
     distCoeffs);

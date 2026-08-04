@@ -16,7 +16,7 @@
 
 ```csharp
 using System;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Features2D;
 
 namespace Samples
 {
@@ -44,9 +44,9 @@ For bright backgrounds with dark blobs, keep `FilterByColor = true` and `BlobCol
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Samples
 {
@@ -94,9 +94,9 @@ OpenCV can cache the contour for each detected blob when `CollectContours` is en
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Samples
 {

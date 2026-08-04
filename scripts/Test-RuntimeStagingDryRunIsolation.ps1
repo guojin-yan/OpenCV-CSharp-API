@@ -17,7 +17,6 @@ if (-not (Test-Path -LiteralPath $stageRuntimePath -PathType Leaf)) {
 }
 
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $requiredOpenCvModules = @(
     "core",
     "imgcodecs",
@@ -156,7 +155,7 @@ try {
         New-Item -ItemType Directory -Force -Path $directory | Out-Null
     }
 
-    foreach ($dllName in @($primaryNativeLoader, $compatibilityNativeLoader)) {
+    foreach ($dllName in @($primaryNativeLoader)) {
         Write-SyntheticDll -Path (Join-Path $nativeWrapperRuntimeDir $dllName)
     }
 
@@ -188,7 +187,7 @@ try {
         Add-Violation -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Issue "Stage-Runtime synthetic isolation dry-run failed" -Text $stageOutputText
     }
 
-    $expectedRuntimeFiles = @($primaryNativeLoader, $compatibilityNativeLoader)
+    $expectedRuntimeFiles = @($primaryNativeLoader)
     foreach ($module in $requiredOpenCvModules) {
         $expectedRuntimeFiles += "opencv_$module$openCvBinarySuffix.dll"
     }
@@ -229,8 +228,8 @@ try {
             Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest required module count must match staged profile" -Text "Found $(@($manifest.RequiredModules).Count), expected $($requiredOpenCvModules.Count)"
         }
 
-        if ($manifest.PrimaryNativeLoaderName -ne $primaryNativeLoader -or $manifest.CompatibilityNativeLoaderName -ne $compatibilityNativeLoader) {
-            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest must record primary and compatibility loader names" -Text "$($manifest.PrimaryNativeLoaderName) / $($manifest.CompatibilityNativeLoaderName)"
+        if ($manifest.PrimaryNativeLoaderName -ne $primaryNativeLoader) {
+            Add-Violation -Violations $violations -Path $manifestPath -Issue "Provenance manifest must record the version-neutral loader name" -Text $manifest.PrimaryNativeLoaderName
         }
     }
 

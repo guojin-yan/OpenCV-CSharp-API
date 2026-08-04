@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Plot
+namespace JYPPX.OpenCvSharp.Plot
 {
     /// <summary>
     /// Wraps OpenCV's two-dimensional plot renderer.

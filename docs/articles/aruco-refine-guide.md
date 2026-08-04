@@ -20,8 +20,8 @@ The result contains refined corners, ids, rejected candidates, and recovered can
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ArucoRefineSample
 {

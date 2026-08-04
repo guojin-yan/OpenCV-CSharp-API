@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Dnn
+namespace JYPPX.OpenCvSharp.Dnn
 {
     /// <summary>
     /// DNN engine selection for OpenCV model import.

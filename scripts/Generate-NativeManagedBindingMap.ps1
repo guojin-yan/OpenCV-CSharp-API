@@ -26,7 +26,7 @@ if ($LASTEXITCODE -ne 0 -or $sdkVersion -ne "10.0.302") {
 $managedProject = Join-Path $repo "src/OpenCvSharp/OpenCvSharp.csproj"
 $managedAssembly = Join-Path $repo "src/OpenCvSharp/bin/Release/net10.0/JYPPX.OpenCV.CSharp.API.dll"
 $toolProject = Join-Path $repo "tools/NativeManagedBindingMap/NativeManagedBindingMap.csproj"
-$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt"
+$manifestPath = Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
 $sourceRoot = Join-Path $repo "src/OpenCvSharp/Internal/Interop"
 $outputPath = Join-Path $repo "compatibility/native-managed-binding-map.txt"
 $summaryPath = Join-Path $repo "compatibility/native-managed-binding-summary.json"

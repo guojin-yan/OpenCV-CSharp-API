@@ -1,4 +1,4 @@
-namespace OpenCvSharp.PtCloud
+namespace JYPPX.OpenCvSharp.PtCloud
 {
     /// <summary>
     /// Plane extraction methods for OpenCV ptcloud.

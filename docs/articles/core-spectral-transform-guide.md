@@ -12,8 +12,8 @@ Use `Dft`/`Idft` and `Dct`/`Idct` for transform round-trips.
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -54,8 +54,8 @@ Use `GetOptimalDftSize` when preparing padded buffers for FFT-friendly dimension
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {
@@ -97,8 +97,8 @@ The current transform group includes:
 
 ```csharp
 using System;
-using OpenCvSharp.Core;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
 namespace Demo
 {

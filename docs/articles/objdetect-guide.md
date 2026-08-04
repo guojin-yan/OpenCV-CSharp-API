@@ -1,8 +1,8 @@
 # ObjDetect Guide
 
-`OpenCvSharp.ObjDetect` wraps OpenCV object-detection APIs that are present in the main OpenCV `objdetect` module. The first guide focuses on QR code detection/decoding and DNN-based face detection/recognition through stable native handles; the second-batch guide covers barcode, ArUco QR, and QR encoder objects.
+`JYPPX.OpenCvSharp.ObjDetect` wraps OpenCV object-detection APIs that are present in the main OpenCV `objdetect` module. The first guide focuses on QR code detection/decoding and DNN-based face detection/recognition through stable native handles; the second-batch guide covers barcode, ArUco QR, and QR encoder objects.
 
-`OpenCvSharp.ObjDetect` 封装 OpenCV 主仓库 `objdetect` 模块中的目标检测 API。本指南聚焦二维码检测/解码，以及通过稳定 native 句柄调用的 DNN 人脸检测与识别对象；第二批指南覆盖条形码、ArUco 二维码和二维码编码器对象。
+`JYPPX.OpenCvSharp.ObjDetect` 封装 OpenCV 主仓库 `objdetect` 模块中的目标检测 API。本指南聚焦二维码检测/解码，以及通过稳定 native 句柄调用的 DNN 人脸检测与识别对象；第二批指南覆盖条形码、ArUco 二维码和二维码编码器对象。
 
 ## Covered APIs / 已覆盖接口
 
@@ -31,9 +31,9 @@
 ## QR Code Detection / 二维码检测
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ObjDetectQrSample
 {
@@ -76,9 +76,9 @@ namespace ObjDetectQrSample
 - 分数
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ObjDetectFaceSample
 {
@@ -119,9 +119,9 @@ For `netcoreapp3.1+`, model buffers can be passed as `ReadOnlySpan<byte>` to avo
 4. 使用 `Match` 比较两个人脸特征。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgCodecs;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using JYPPX.OpenCvSharp.ObjDetect;
 
 namespace ObjDetectRecognizerSample
 {
@@ -160,9 +160,7 @@ ObjDetect runtime packages must stage `opencv_objdetect500` and `opencv_dnn500` 
 
 包含 ObjDetect 的 runtime 包除现有 core/image 模块外，还必须暂存 `opencv_objdetect500` 和 `opencv_dnn500`。二维码、条形码、二维码编码器、ArUco、ChArUco 和非 DNN MCC checker API 使用 `objdetect`，而 `FaceDetectorYN`、`FaceRecognizerSF` 以及后续 DNN 辅助 MCC API 需要 OpenCV 启用 DNN，并由用户提供外部模型文件。
 
-The default unit tests do not download or bundle face models. Native smoke tests for face objects run only when `OPENCV_CSHARP_NATIVE_SMOKE=1` and model paths are supplied through `OPENCV_CSHARP_FACE_DETECTOR_MODEL` or `OPENCV_CSHARP_FACE_RECOGNIZER_MODEL`. The older `OPENCV5SHARP_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
 
-默认单元测试不会下载或内置人脸模型。人脸对象 native smoke 测试只有在设置 `OPENCV_CSHARP_NATIVE_SMOKE=1`，并通过 `OPENCV_CSHARP_FACE_DETECTOR_MODEL` 或 `OPENCV_CSHARP_FACE_RECOGNIZER_MODEL` 提供模型路径时才会运行。旧的 `OPENCV5SHARP_*` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 
 ## OpenCV 5.0.0 Boundary / OpenCV 5.0.0 边界
 

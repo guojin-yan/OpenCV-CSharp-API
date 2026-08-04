@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.HighGui;
-using HighGuiCv2 = OpenCvSharp.HighGui.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.HighGui;
+using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
 
-namespace OpenCvSharp.Tests.HighGui
+namespace JYPPX.OpenCvSharp.Tests.HighGui
 {
     public sealed class HighGuiTests
     {
@@ -54,10 +54,10 @@ namespace OpenCvSharp.Tests.HighGui
 
             using (var image = new Mat(8, 8, MatType.CV_8UC1, new Scalar(0)))
             {
-                HighGuiCv2.NamedWindow("OpenCvSharp.HighGui.Tests", WindowFlags.AutoSize);
-                HighGuiCv2.ImShow("OpenCvSharp.HighGui.Tests", image);
+                HighGuiCv2.NamedWindow("JYPPX.OpenCvSharp.HighGui.Tests", WindowFlags.AutoSize);
+                HighGuiCv2.ImShow("JYPPX.OpenCvSharp.HighGui.Tests", image);
                 HighGuiCv2.PollKey();
-                HighGuiCv2.DestroyWindow("OpenCvSharp.HighGui.Tests");
+                HighGuiCv2.DestroyWindow("JYPPX.OpenCvSharp.HighGui.Tests");
             }
         }
 

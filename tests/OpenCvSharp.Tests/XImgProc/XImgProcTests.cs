@@ -1,13 +1,13 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XImgProc;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XImgProc;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
-namespace OpenCvSharp.Tests.XImgProc
+namespace JYPPX.OpenCvSharp.Tests.XImgProc
 {
     public sealed class XImgProcTests
     {

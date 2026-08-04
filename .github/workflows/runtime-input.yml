@@ -329,10 +329,10 @@ jobs:
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
           $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           $abiManifest = if ($profileName -eq 'mini') {
-            './src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt'
+            './src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
           }
           else {
-            './src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt'
+            './src/OpenCvSharp.Native/generated/native_abi_manifest.txt'
           }
           $abiFunctionLine = @(Get-Content -LiteralPath $abiManifest | Where-Object { $_ -match '^function-count=' })
           if ($abiFunctionLine.Count -ne 1) {
@@ -485,14 +485,14 @@ jobs:
           case "$profile" in
             full)
               expected_module_count=16
-              expected_canonical_count=18
-              expected_runtime_file_count=50
+              expected_canonical_count=17
+              expected_runtime_file_count=49
               expected_direct_opencv=16
               ;;
             mini)
               expected_module_count=6
-              expected_canonical_count=8
-              expected_runtime_file_count=20
+              expected_canonical_count=7
+              expected_runtime_file_count=19
               expected_direct_opencv=6
               ;;
             *)
@@ -519,14 +519,10 @@ jobs:
           mkdir -p "$audit_dir"
           cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
           cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
-          compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name 'lib*.Native.so' ! -name 'libJYPPX.OpenCV.Native.so' -print -quit)"
-          test -n "$compatibility_loader"
-          cp "$compatibility_loader" "$audit_dir/"
-          compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
 
           expected_names="$audit_dir/expected-runtime-files.txt"
           actual_names="$audit_dir/actual-runtime-files.txt"
-          printf '%s\n' 'libJYPPX.OpenCV.Native.so' "$(basename "$compatibility_loader")" > "$expected_names"
+          printf '%s\n' 'libJYPPX.OpenCV.Native.so' > "$expected_names"
           for module in "${required_modules[@]}"; do
             printf '%s\n' \
               "libopencv_${module}.so" \
@@ -544,7 +540,7 @@ jobs:
 
           mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name 'libopencv_*.so.${{ inputs.opencv_version }}' | sort)
           test "${#opencv_elfs[@]}" -eq "$expected_module_count"
-          elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
+          elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
           test "${#elf_files[@]}" -eq "$expected_canonical_count"
 
           machine_count=0
@@ -575,8 +571,7 @@ jobs:
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
-          cmp -s "$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          audit_evidence="UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+          audit_evidence="UBUNTU_24_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
           echo "$audit_evidence"
           echo "elf_audit_evidence=$audit_evidence" >> "$GITHUB_OUTPUT"
       - name: Audit Ubuntu 22.04 x64 mini producer ELF closure
@@ -604,14 +599,10 @@ jobs:
           mkdir -p "$audit_dir"
           cp -a "$open_cv_runtime_dir"/libopencv_*.so* "$audit_dir/"
           cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
-          compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name 'lib*.Native.so' ! -name 'libJYPPX.OpenCV.Native.so' -print -quit)"
-          test -n "$compatibility_loader"
-          cp "$compatibility_loader" "$audit_dir/"
-          compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
 
           expected_names="$audit_dir/expected-runtime-files.txt"
           actual_names="$audit_dir/actual-runtime-files.txt"
-          printf '%s\n' 'libJYPPX.OpenCV.Native.so' "$(basename "$compatibility_loader")" > "$expected_names"
+          printf '%s\n' 'libJYPPX.OpenCV.Native.so' > "$expected_names"
           for module in "${required_modules[@]}"; do
             printf '%s\n' \
               "libopencv_${module}.so" \
@@ -624,13 +615,13 @@ jobs:
             ! -name 'actual-runtime-files.txt' \
             -printf '%f\n' | sort > "$actual_names"
           sort -o "$expected_names" "$expected_names"
-          test "$(wc -l < "$actual_names")" -eq 20
+          test "$(wc -l < "$actual_names")" -eq 19
           diff -u "$expected_names" "$actual_names"
 
           mapfile -t opencv_elfs < <(find "$audit_dir" -maxdepth 1 -type f -name 'libopencv_*.so.${{ inputs.opencv_version }}' | sort)
           test "${#opencv_elfs[@]}" -eq 6
-          elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader" "${opencv_elfs[@]}")
-          test "${#elf_files[@]}" -eq 8
+          elf_files=("$audit_dir/libJYPPX.OpenCV.Native.so" "${opencv_elfs[@]}")
+          test "${#elf_files[@]}" -eq 7
 
           machine_count=0
           origin_count=0
@@ -655,13 +646,12 @@ jobs:
           done
 
           direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c 'libopencv_.*so.500')"
-          test "$machine_count" -eq 8
-          test "$origin_count" -eq 8
+          test "$machine_count" -eq 7
+          test "$origin_count" -eq 7
           test "$producer_path_count" -eq 0
           test "$direct_opencv_dependencies" -eq 6
           test "$missing_dependency_count" -eq 0
-          cmp -s "$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-          audit_evidence="UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=8 runtime_files=20 machine=X86-64 origin=8 producer_paths=0 direct_opencv=6 missing_dependencies=0 loader_equal=true"
+          audit_evidence="UBUNTU_22_04_X64_PRODUCER_ELF_EVIDENCE profile=mini files=7 runtime_files=19 machine=X86-64 origin=7 producer_paths=0 direct_opencv=6 missing_dependencies=0"
           echo "$audit_evidence"
           echo "elf_audit_evidence=$audit_evidence" >> "$GITHUB_OUTPUT"
       - name: Create runtime input artifact layout
@@ -991,7 +981,7 @@ jobs:
           }
 
           $proofRoot = Join-Path $env:GITHUB_WORKSPACE 'artifacts/android-proof'
-          $proofApk = Join-Path $proofRoot 'OpenCvSharp-${{ matrix.rid }}-${{ matrix.profile }}.apk'
+          $proofApk = Join-Path $proofRoot 'JYPPX.OpenCvSharp-${{ matrix.rid }}-${{ matrix.profile }}.apk'
           Copy-Item -LiteralPath $apk[0].FullName -Destination $proofApk -Force
           "ANDROID_APK_PATH=$proofApk" >> $env:GITHUB_ENV
           Write-Host "ANDROID_PACKAGE_CONSUMER_OK rid=${{ matrix.rid }} abi=${{ matrix.abi }} profile=${{ matrix.profile }} native_files=$($nativeNames.Count) apk=$proofApk"
@@ -1412,10 +1402,10 @@ jobs:
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
           $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           $abiManifest = if ($profileName -eq 'mini') {
-            './src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt'
+            './src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
           }
           else {
-            './src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt'
+            './src/OpenCvSharp.Native/generated/native_abi_manifest.txt'
           }
           $abiFunctionLine = Get-Content -LiteralPath $abiManifest | Where-Object { $_ -match '^function-count=' }
           if (@($abiFunctionLine).Count -ne 1) {
@@ -1999,10 +1989,10 @@ jobs:
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
           $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
           $abiManifest = if ($profileName -eq 'mini') {
-            './src/OpenCvSharp.Native/generated/legacy_abi_mini_manifest.txt'
+            './src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
           }
           else {
-            './src/OpenCvSharp.Native/generated/legacy_abi_manifest.txt'
+            './src/OpenCvSharp.Native/generated/native_abi_manifest.txt'
           }
           $abiFunctionLine = @(Get-Content -LiteralPath $abiManifest | Where-Object { $_ -match '^function-count=' })
           if ($abiFunctionLine.Count -ne 1) {
@@ -2931,15 +2921,15 @@ jobs:
                    full)
                      modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
                      expected_opencv_count=16
-                     expected_canonical_count=18
-                     expected_runtime_file_count=50
+                     expected_canonical_count=17
+                     expected_runtime_file_count=49
                      expected_direct_opencv=16
                      ;;
                    mini)
                      modules="core imgproc imgcodecs videoio geometry flann"
                      expected_opencv_count=6
-                     expected_canonical_count=8
-                     expected_runtime_file_count=20
+                     expected_canonical_count=7
+                     expected_runtime_file_count=19
                      expected_direct_opencv=6
                      ;;
                    *)
@@ -2962,14 +2952,10 @@ jobs:
                  mkdir -p "$audit_dir"
                  cp -a "$open_cv_runtime_audit_dir"/libopencv_*.so* "$audit_dir/"
                  cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
-                 compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" | head -n 1)" # compatibility loader for already-compiled consumers
-                 test -n "$compatibility_loader"
-                 cp "$compatibility_loader" "$audit_dir/"
-                 compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
 
                  expected_names="/tmp/alpine-$RUNTIME_PROFILE-expected-runtime-files.txt"
                  actual_names="/tmp/alpine-$RUNTIME_PROFILE-actual-runtime-files.txt"
-                 printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+                 printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
                  for module in $modules; do
                    printf "%s\n" \
                      "libopencv_${module}.so" \
@@ -2989,7 +2975,6 @@ jobs:
                  alpine_opencv_count=0
                  for elf in \
                    "$audit_dir/libJYPPX.OpenCV.Native.so" \
-                   "$compatibility_loader" \
                    "$audit_dir"/libopencv_*.so."$OPENCV_VERSION"; do
                    test -f "$elf"
                    readelf -h "$elf" | grep -q "Machine:.*X86-64"
@@ -3014,8 +2999,7 @@ jobs:
                  test "$alpine_producer_path_count" -eq 0
                  test "$alpine_direct_opencv_dependencies" -eq "$expected_direct_opencv"
                  test "$alpine_missing_dependency_count" -eq 0
-                 cmp -s "$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
-                 elf_audit_evidence="ALPINE_3_20_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                 elf_audit_evidence="ALPINE_3_20_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                  echo "$elf_audit_evidence"
                fi
 
@@ -3024,15 +3008,15 @@ jobs:
                   full)
                     modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
                     expected_opencv_count=16
-                    expected_canonical_count=18
-                    expected_runtime_file_count=50
+                    expected_canonical_count=17
+                    expected_runtime_file_count=49
                     expected_direct_opencv=16
                     ;;
                   mini)
                     modules="core imgproc imgcodecs videoio geometry flann"
                     expected_opencv_count=6
-                    expected_canonical_count=8
-                    expected_runtime_file_count=20
+                    expected_canonical_count=7
+                    expected_runtime_file_count=19
                     expected_direct_opencv=6
                     ;;
                   *)
@@ -3055,14 +3039,10 @@ jobs:
                 mkdir -p "$audit_dir"
                 cp -a "$open_cv_runtime_audit_dir"/libopencv_*.so* "$audit_dir/"
                 cp build/native-linked/libJYPPX.OpenCV.Native.so "$audit_dir/"
-                compatibility_loader="$(find build/native-linked -maxdepth 1 -type f -name "lib*.Native.so" ! -name "libJYPPX.OpenCV.Native.so" -print -quit)"
-                test -n "$compatibility_loader"
-                cp "$compatibility_loader" "$audit_dir/"
-                compatibility_loader="$audit_dir/$(basename "$compatibility_loader")"
 
                 expected_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-expected-runtime-files.txt"
                 actual_names="/tmp/$PRODUCER_RID-$RUNTIME_PROFILE-actual-runtime-files.txt"
-                printf "%s\n" "libJYPPX.OpenCV.Native.so" "$(basename "$compatibility_loader")" > "$expected_names"
+                printf "%s\n" "libJYPPX.OpenCV.Native.so" > "$expected_names"
                 for module in $modules; do
                   printf "%s\n" \
                     "libopencv_${module}.so" \
@@ -3084,7 +3064,6 @@ jobs:
                 missing_dependency_count=0
                 for elf in \
                   "$audit_dir/libJYPPX.OpenCV.Native.so" \
-                  "$compatibility_loader" \
                   "$audit_dir"/libopencv_*.so."$OPENCV_VERSION"; do
                   test -f "$elf"
                   expected_machine="AArch64"
@@ -3111,24 +3090,23 @@ jobs:
                 test "$producer_path_count" -eq 0
                 test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
                 test "$missing_dependency_count" -eq 0
-                cmp -s "$audit_dir/libJYPPX.OpenCV.Native.so" "$compatibility_loader"
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  elf_audit_evidence="UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  elf_audit_evidence="UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                   echo "$elf_audit_evidence"
                 elif [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
-                  elf_audit_evidence="DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  elf_audit_evidence="DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                   echo "$elf_audit_evidence"
                 elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
-                  elf_audit_evidence="FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  elf_audit_evidence="FEDORA_40_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                   echo "$elf_audit_evidence"
                 elif [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
-                  elf_audit_evidence="ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  elf_audit_evidence="ROCKY_9_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                   echo "$elf_audit_evidence"
                 elif [ "$PRODUCER_RID" = "rhel.9-x64" ]; then
-                  elf_audit_evidence="RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  elf_audit_evidence="RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                   echo "$elf_audit_evidence"
                 else
-                  elf_audit_evidence="DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 loader_equal=true"
+                  elf_audit_evidence="DEBIAN_12_X64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
                   echo "$elf_audit_evidence"
                 fi
               fi

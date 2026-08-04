@@ -13,7 +13,6 @@ $runtimeMiniPackageShape = "$runtimePackagePrefix.<rid>.mini"
 $currentWindowsRuntimePackage = "$runtimePackagePrefix.win-x64"
 $examplePackageVersion = "5.0.0-preview.1"
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
-$compatibilityRuntimeProperty = "Open" + "Cv5SharpNativeRuntimeDir"
 
 function Add-Violation {
     param(
@@ -186,8 +185,6 @@ foreach ($project in @(
         [pscustomobject]@{ Path = $sampleProjectPath; Text = $sampleProjectText; Kind = "sample" },
         [pscustomobject]@{ Path = $testProjectPath; Text = $testProjectText; Kind = "test" })) {
     Assert-Contains -Violations $violations -Path $project.Path -Text $project.Text -Needle $preferredRuntimeProperty -Issue "$($project.Kind) project must prefer the neutral runtime copy property"
-    Assert-Contains -Violations $violations -Path $project.Path -Text $project.Text -Needle $compatibilityRuntimeProperty -Issue "$($project.Kind) project must preserve the existing fixed-major runtime copy compatibility alias"
-    Assert-Contains -Violations $violations -Path $project.Path -Text $project.Text -Needle "compatibility alias" -Issue "$($project.Kind) project must label the fixed-major runtime copy property as compatibility-only"
 }
 
 $consumerRidFiles = @(

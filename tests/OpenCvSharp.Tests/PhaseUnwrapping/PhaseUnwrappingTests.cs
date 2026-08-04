@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.PhaseUnwrapping;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.PhaseUnwrapping;
 
-namespace OpenCvSharp.Tests.PhaseUnwrapping
+namespace JYPPX.OpenCvSharp.Tests.PhaseUnwrapping
 {
     public sealed class PhaseUnwrappingTests
     {

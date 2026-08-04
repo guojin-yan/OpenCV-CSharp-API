@@ -2,12 +2,12 @@
 
 ## Overview / 概述
 
-`OpenCvSharp.Calib3D.StereoSGBM` wraps the mainline OpenCV `cv::StereoSGBM`
+`JYPPX.OpenCvSharp.Calib3D.StereoSGBM` wraps the mainline OpenCV `cv::StereoSGBM`
 algorithm as a sealed, disposable managed object. It is a parallel companion to the
 existing `StereoBM` wrapper rather than a new managed `StereoMatcher` inheritance
 hierarchy, which preserves the published `StereoBM` API.
 
-`OpenCvSharp.Calib3D.StereoSGBM` 将 OpenCV 主线的 `cv::StereoSGBM` 算法封装为
+`JYPPX.OpenCvSharp.Calib3D.StereoSGBM` 将 OpenCV 主线的 `cv::StereoSGBM` 算法封装为
 密封、可释放的 managed 对象。它与现有 `StereoBM` 并列，而不是引入新的 managed
 `StereoMatcher` 继承体系，从而保持已发布的 `StereoBM` API 不变。
 
@@ -31,8 +31,8 @@ resize or replace its storage.
 ## Basic Usage / 基本用法
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
 
 using var left = new Mat(240, 320, MatType.CV_8UC1);
 using var right = new Mat(240, 320, MatType.CV_8UC1);

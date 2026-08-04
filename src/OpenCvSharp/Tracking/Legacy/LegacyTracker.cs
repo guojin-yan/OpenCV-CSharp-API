@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking.Legacy
+namespace JYPPX.OpenCvSharp.Tracking.Legacy
 {
     /// <summary>
     /// Base wrapper for OpenCV legacy tracking trackers.
@@ -72,11 +72,11 @@ namespace OpenCvSharp.Tracking.Legacy
         /// Creates a modern tracker adapter that retains this legacy tracker state.
         /// 创建保留此 legacy tracker 状态的 modern tracker 适配器。
         /// </summary>
-        public OpenCvSharp.Tracking.Tracker Upgrade()
+        public JYPPX.OpenCvSharp.Tracking.Tracker Upgrade()
         {
             ThrowIfDisposed();
             NativeException.ThrowIfError(NativeMethods.TrackingLegacyUpgrade(NativeHandle, out IntPtr nativeHandle));
-            return new OpenCvSharp.Tracking.Tracker(nativeHandle);
+            return new JYPPX.OpenCvSharp.Tracking.Tracker(nativeHandle);
         }
 
         /// <summary>Releases native resources. 释放 native 资源。</summary>

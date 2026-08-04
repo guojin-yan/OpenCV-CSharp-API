@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tracking.Legacy
+namespace JYPPX.OpenCvSharp.Tracking.Legacy
 {
     /// <summary>
     /// Result of an OpenCV legacy MultiTracker update.

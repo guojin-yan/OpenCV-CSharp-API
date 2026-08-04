@@ -1,8 +1,8 @@
 # ImgHash Guide / ImgHash 指南
 
-`OpenCvSharp.ImgHash` wraps the first optional contrib `img_hash` perceptual image hash algorithms.
+`JYPPX.OpenCvSharp.ImgHash` wraps the first optional contrib `img_hash` perceptual image hash algorithms.
 
-`OpenCvSharp.ImgHash` 封装第一批可选 contrib `img_hash` 感知图像哈希算法。
+`JYPPX.OpenCvSharp.ImgHash` 封装第一批可选 contrib `img_hash` 感知图像哈希算法。
 
 ## Scope / 范围
 
@@ -33,8 +33,8 @@
 `ColorMomentHash` 输出 `CV_64F`。第一批其他大多数哈希会输出紧凑的 `CV_8U`。应用在存储或序列化 hash Mat 时应检查 `Mat.Type`。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgHash;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgHash;
 
 using Mat image = new Mat(32, 32, MatType.CV_8UC3, new Scalar(16, 32, 48));
 using Mat average = ImgHashCv2.AverageHash(image);

@@ -41,7 +41,7 @@ if (-not (Test-Path -LiteralPath $nativeSourceCandidate -PathType Container)) {
 
 $nativeSource = (Resolve-Path -LiteralPath $nativeSourceCandidate).Path
 # BuildDir is the version-neutral native build-output path input.
-# Its default remains the existing build\native compatibility directory.
+# Its default remains the current build\native local output directory.
 $nativeBuildCandidate = if ([System.IO.Path]::IsPathRooted($BuildDir)) {
     $BuildDir
 }
@@ -67,7 +67,6 @@ $cmakeArgs = @(
 )
 
 if (-not [string]::IsNullOrWhiteSpace($OpenCvDir)) {
-    # OPENCV_CSHARP_* variables are the current smoke-test/build environment knobs; fixed-major OPENCV5SHARP_* aliases are not primary build inputs here.
     $cmakeArgs += "-DOPENCV_CSHARP_OPENCV_DIR=$OpenCvDir"
 }
 

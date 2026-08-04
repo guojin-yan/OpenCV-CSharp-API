@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// Face feature distance type compatible with OpenCV <c>cv::FaceRecognizerSF::DisType</c>.

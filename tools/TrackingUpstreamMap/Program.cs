@@ -381,26 +381,26 @@ internal static class Program
     {
         string[] fragments = ordinal switch
         {
-            2 => new[] { "MEMBER|OpenCvSharp.Tracking.TrackerCSRTParams|constructor|" },
-            3 => new[] { "MEMBER|OpenCvSharp.Tracking.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.TrackerCSRT Create()" },
-            4 => new[] { "MEMBER|OpenCvSharp.Tracking.TrackerCSRT|method|public;instance|System.Void SetInitialMask" },
-            8 => new[] { "MEMBER|OpenCvSharp.Tracking.TrackerKCFParams|constructor|" },
-            9 => new[] { "MEMBER|OpenCvSharp.Tracking.TrackerKCF|method|public;static|OpenCvSharp.Tracking.TrackerKCF Create()" },
-            11 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init" },
-            12 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update" },
-            14 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMIL|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMIL Create()" },
-            16 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()" },
-            18 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()" },
-            20 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerTLD Create()" },
-            22 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create()" },
-            24 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerMOSSE|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerMOSSE Create()" },
-            26 or 30 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|OpenCvSharp.Tracking.Legacy.MultiTracker Create()" },
-            27 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add" },
-            28 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult Update" },
-            29 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|OpenCvSharp.Core.Rect2d[] GetObjects()" },
-            32 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()" },
-            33 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask" },
-            34 => new[] { "MEMBER|OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|OpenCvSharp.Tracking.Tracker Upgrade()" },
+            2 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams|constructor|" },
+            3 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.TrackerCSRT Create()" },
+            4 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerCSRT|method|public;instance|System.Void SetInitialMask" },
+            8 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerKCFParams|constructor|" },
+            9 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.TrackerKCF Create()" },
+            11 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Void Init" },
+            12 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|System.Boolean Update" },
+            14 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMIL Create()" },
+            16 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting Create()" },
+            18 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMedianFlow Create()" },
+            20 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD Create()" },
+            22 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF Create()" },
+            24 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerMOSSE Create()" },
+            26 or 30 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker Create()" },
+            27 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|System.Boolean Add" },
+            28 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyMultiTrackerUpdateResult Update" },
+            29 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.MultiTracker|method|public;instance|JYPPX.OpenCvSharp.Core.Rect2d[] GetObjects()" },
+            32 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT Create()" },
+            33 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;instance|System.Void SetInitialMask" },
+            34 => new[] { "MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.LegacyTracker|method|public;instance|JYPPX.OpenCvSharp.Tracking.Tracker Upgrade()" },
             _ => throw new InvalidOperationException("No managed evidence mapping for callable ordinal " + ordinal)
         };
         foreach (string fragment in fragments)
@@ -449,21 +449,21 @@ internal static class Program
                     UpstreamIdentity = "cv::legacy::TrackerBoosting::Params and create(const Params&)",
                     Adaptation = "Copies five primitive parameter fields through a flat C value and exposes exact native defaults without passing the C++ parameter layout.",
                     NativeEntrypoints = new List<string> { "jyppx_ocv_tracking_legacy_tracker_boosting_create", "jyppx_ocv_tracking_legacy_tracker_boosting_get_default_params" },
-                    ManagedMembers = new List<string> { Managed("MEMBER|OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerBoosting Create(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams") }
+                    ManagedMembers = new List<string> { Managed("MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting Create(JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoostingParams") }
                 },
                 new()
                 {
                     UpstreamIdentity = "cv::legacy::TrackerKCF::create(const Params&)",
                     Adaptation = "Reuses the reviewed modern KCF managed value shape and copies it into the derived legacy C++ parameter object.",
                     NativeEntrypoints = new List<string> { "jyppx_ocv_tracking_legacy_tracker_kcf_create" },
-                    ManagedMembers = new List<string> { Managed("MEMBER|OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerKCF Create(OpenCvSharp.Tracking.TrackerKCFParams") }
+                    ManagedMembers = new List<string> { Managed("MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF Create(JYPPX.OpenCvSharp.Tracking.TrackerKCFParams") }
                 },
                 new()
                 {
                     UpstreamIdentity = "cv::legacy::TrackerCSRT::create(const Params&)",
                     Adaptation = "Reuses reviewed CSRT values, pins strict UTF-8 only for the call, and copies every field into the derived legacy C++ parameter object.",
                     NativeEntrypoints = new List<string> { "jyppx_ocv_tracking_legacy_tracker_csrt_create" },
-                    ManagedMembers = new List<string> { Managed("MEMBER|OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|OpenCvSharp.Tracking.Legacy.TrackerCSRT Create(OpenCvSharp.Tracking.TrackerCSRTParams") }
+                    ManagedMembers = new List<string> { Managed("MEMBER|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT|method|public;static|JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT Create(JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams") }
                 },
                 new()
                 {

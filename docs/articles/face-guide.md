@@ -1,8 +1,8 @@
 # Face Guide / Face 指南
 
-`OpenCvSharp.Face` wraps traditional face-recognition, descriptor, facemark, and MACE objects from the local OpenCV 5.0.0 contrib `face` tree. The linked runtime module is the factual OpenCV 5.0.0 runtime artifact `opencv_face500.dll`.
+`JYPPX.OpenCvSharp.Face` wraps traditional face-recognition, descriptor, facemark, and MACE objects from the local OpenCV 5.0.0 contrib `face` tree. The linked runtime module is the factual OpenCV 5.0.0 runtime artifact `opencv_face500.dll`.
 
-`OpenCvSharp.Face` 封装来自本地 OpenCV 5.0.0 contrib `face` 树的传统人脸识别、描述子、facemark 和 MACE 对象。linked runtime 模块是事实性 OpenCV 5.0.0 runtime 产物 `opencv_face500.dll`。
+`JYPPX.OpenCvSharp.Face` 封装来自本地 OpenCV 5.0.0 contrib `face` 树的传统人脸识别、描述子、facemark 和 MACE 对象。linked runtime 模块是事实性 OpenCV 5.0.0 runtime 产物 `opencv_face500.dll`。
 
 ## Scope / 范围
 
@@ -51,8 +51,8 @@ For face alignment details, see [Face Alignment Guide](face-alignment-guide.md).
 Face alignment 细节见 [Face Alignment Guide](face-alignment-guide.md)。MACE 工作流见 [Face MACE Guide](face-mace-guide.md)。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Face;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Face;
 
 using Mat first = new Mat(32, 32, MatType.CV_8UC1, new Scalar(30));
 using Mat second = new Mat(32, 32, MatType.CV_8UC1, new Scalar(180));

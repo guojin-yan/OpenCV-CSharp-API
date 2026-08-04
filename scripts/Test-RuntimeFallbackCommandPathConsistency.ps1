@@ -136,26 +136,14 @@ foreach ($path in @(
 }
 
 Assert-Contains -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Text $texts["scripts/Build-OpenCV.ps1"] -Needle 'Join-Path $WorkspaceRoot "opencv-source"' -Issue "Build-OpenCV.ps1 must prefer the version-neutral opencv-source workspace root"
-Assert-Contains -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Text $texts["scripts/Build-OpenCV.ps1"] -Needle 'Use the major-version source directory only when an existing local checkout still uses that older layout.' -Issue "Build-OpenCV.ps1 must scope the major-version source directory as an existing local compatibility fallback"
-Assert-Contains -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Text $texts["scripts/Build-OpenCV.ps1"] -Needle 'if (Test-Path $legacyMajorSourceRoot)' -Issue "Build-OpenCV.ps1 must only use the major-version source directory when that older local path exists"
-Assert-Contains -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Text $texts["scripts/Build-OpenCV.ps1"] -Needle 'return $neutralSourceRoot' -Issue "Build-OpenCV.ps1 must fall back to the version-neutral opencv-source root for new workspaces"
+Assert-Contains -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Text $texts["scripts/Build-OpenCV.ps1"] -Needle 'return Join-Path $WorkspaceRoot "opencv-source"' -Issue "Build-OpenCV.ps1 must use only the version-neutral opencv-source workspace root"
 Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle 'Join-Path $WorkspaceRoot "opencv-source"' -Issue "Stage-Runtime.ps1 must prefer the version-neutral opencv-source workspace root"
-Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle 'if (Test-Path -LiteralPath $legacyMajorSourceRoot)' -Issue "Stage-Runtime.ps1 must only use the major-version source directory when that older local path exists"
-Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle 'return $neutralSourceRoot' -Issue "Stage-Runtime.ps1 must fall back to the version-neutral opencv-source root for new workspaces"
+Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle 'return Join-Path $WorkspaceRoot "opencv-source"' -Issue "Stage-Runtime.ps1 must use only the version-neutral opencv-source workspace root"
 Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle '[string]$OpenCvNativeRuntimeDir = ""' -Issue "Stage-Runtime.ps1 must expose OpenCvNativeRuntimeDir as the neutral runtime input"
-Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle 'NativeRuntimeDir is accepted only as an older existing-packaging-script compatibility alias' -Issue "Stage-Runtime.ps1 must keep NativeRuntimeDir compatibility-only"
 Assert-Contains -Violations $violations -Path "scripts/Stage-Runtime.ps1" -Text $texts["scripts/Stage-Runtime.ps1"] -Needle 'build\native-opencv-core\Release' -Issue "Stage-Runtime.ps1 must keep the neutral local native wrapper output fallback path"
 Assert-Contains -Violations $violations -Path "scripts/Pack-Runtime.ps1" -Text $texts["scripts/Pack-Runtime.ps1"] -Needle '[string]$OpenCvNativeRuntimeDir = ""' -Issue "Pack-Runtime.ps1 must expose OpenCvNativeRuntimeDir as the neutral runtime input"
-Assert-Contains -Violations $violations -Path "scripts/Pack-Runtime.ps1" -Text $texts["scripts/Pack-Runtime.ps1"] -Needle 'NativeRuntimeDir is accepted only as an older existing-packaging-script compatibility alias' -Issue "Pack-Runtime.ps1 must keep NativeRuntimeDir compatibility-only"
 Assert-Contains -Violations $violations -Path "scripts/Pack-Runtime.ps1" -Text $texts["scripts/Pack-Runtime.ps1"] -Needle 'OpenCvNativeRuntimeDir is required when StageRuntime is set' -Issue "Pack-Runtime.ps1 must require OpenCvNativeRuntimeDir when StageRuntime is set"
 Assert-Contains -Violations $violations -Path "scripts/Test-ProjectInvariants.ps1" -Text $texts["scripts/Test-ProjectInvariants.ps1"] -Needle "Test-RuntimeFallbackCommandPathConsistency.ps1" -Issue "Aggregate invariant suite must include runtime fallback command/path consistency guard"
-
-$legacyContextRegex = [System.Text.RegularExpressions.Regex]::new(
-    "compatibility|alias|existing|older|legacy|preserved|source-compatible|历史|既有|旧|兼容|别名|保留",
-    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-$preferredContextRegex = [System.Text.RegularExpressions.Regex]::new(
-    "prefer|preferred|current|primary|new runtime|new build|首选|优先|当前|主",
-    [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
 foreach ($path in $auditedPaths) {
     $lineNumber = 0
@@ -166,26 +154,16 @@ foreach ($path in $auditedPaths) {
             Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "Runtime fallback surfaces must not use the old fixed-major repository root" -Text $line
         }
 
-        if ($line.IndexOf("OpenCv5SharpNativeRuntimeDir", [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and
-            -not $legacyContextRegex.IsMatch($line)) {
-            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "OpenCv5SharpNativeRuntimeDir must be compatibility-only" -Text $line
+        if ($line.IndexOf("OpenCv5SharpNativeRuntimeDir", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "Retired fixed-major runtime property must not remain" -Text $line
         }
 
-        if ($line.IndexOf("OPENCV5SHARP_", [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and
-            -not $legacyContextRegex.IsMatch($line)) {
-            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "OPENCV5SHARP_* names must be compatibility-only" -Text $line
+        if ($line.IndexOf("OPENCV5SHARP_", [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
+            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "Retired fixed-major environment variable must not remain" -Text $line
         }
 
-        if ($line -match "(?<!OpenCv)-NativeRuntimeDir" -and -not $legacyContextRegex.IsMatch($line)) {
-            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "-NativeRuntimeDir must be compatibility-only" -Text $line
-        }
-
-        if (($line.IndexOf("OpenCv5SharpNativeRuntimeDir", [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -or
-                $line.IndexOf("OPENCV5SHARP_", [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -or
-                $line -match "(?<!OpenCv)-NativeRuntimeDir") -and
-            $preferredContextRegex.IsMatch($line) -and
-            -not $legacyContextRegex.IsMatch($line)) {
-            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "Legacy fallback names must not be described as preferred/current without compatibility context" -Text $line
+        if ($line -match "(?<!OpenCv)-NativeRuntimeDir") {
+            Add-Violation -Violations $violations -Path $path -Line $lineNumber -Issue "Retired NativeRuntimeDir parameter alias must not remain" -Text $line
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.Saliency
+namespace JYPPX.OpenCvSharp.Saliency
 {
     internal static class SaliencyStringConvert
     {

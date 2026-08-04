@@ -1,10 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.XImgProc;
 
-namespace OpenCvSharp.Tests.XImgProc
+namespace JYPPX.OpenCvSharp.Tests.XImgProc
 {
     [Collection(NativeSmokeCollection.Name)]
     public sealed class StereoMatcherBridgeTests

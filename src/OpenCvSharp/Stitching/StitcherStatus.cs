@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>
     /// Status returned by OpenCV <c>cv::Stitcher</c>.

@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Matches features and estimates either a full or reduced affine transform.</summary>
     public sealed class AffineBestOf2NearestMatcher : FeaturesMatcher

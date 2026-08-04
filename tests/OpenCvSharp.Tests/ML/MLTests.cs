@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.IO;
-using OpenCvSharp.Core;
-using OpenCvSharp.ML;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ML;
 
-namespace OpenCvSharp.Tests.ML
+namespace JYPPX.OpenCvSharp.Tests.ML
 {
     public sealed class MLTests
     {

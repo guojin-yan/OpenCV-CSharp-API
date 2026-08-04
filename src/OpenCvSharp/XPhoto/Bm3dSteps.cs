@@ -1,4 +1,4 @@
-namespace OpenCvSharp.XPhoto
+namespace JYPPX.OpenCvSharp.XPhoto
 {
     /// <summary>
     /// BM3D denoising steps.

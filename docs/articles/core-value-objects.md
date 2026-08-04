@@ -10,11 +10,11 @@ The core namespace contains small value objects that mirror common OpenCV C++ ty
 - `Size` mirrors `cv::Size`.
 - `Rect` mirrors `cv::Rect`.
 - `Scalar` mirrors `cv::Scalar`.
-- `Moments` mirrors `cv::Moments` in the `OpenCvSharp.ImgProc` namespace.
-- `TermCriteria` mirrors `cv::TermCriteria` in the `OpenCvSharp.Core` namespace.
+- `Moments` mirrors `cv::Moments` in the `JYPPX.OpenCvSharp.ImgProc` namespace.
+- `TermCriteria` mirrors `cv::TermCriteria` in the `JYPPX.OpenCvSharp.Core` namespace.
 - `MinMaxLocResult` groups the scalar values and locations returned by `cv::minMaxLoc`.
 - `MeanStdDevResult` groups the per-channel mean and standard deviation returned by `cv::meanStdDev`.
-- `HoughLine`, `HoughLinePointSet`, `HoughCircle`, and `LineSegment` are `imgproc` result value objects in the `OpenCvSharp.ImgProc` namespace.
+- `HoughLine`, `HoughLinePointSet`, `HoughCircle`, and `LineSegment` are `imgproc` result value objects in the `JYPPX.OpenCvSharp.ImgProc` namespace.
 - `SvdFlags`, `GemmFlags`, `DftFlags`, `DctFlags`, `MulSpectrumsFlags`, and `RngDistributionTypes` map OpenCV core flags to C# enum names.
 
 ## Rect

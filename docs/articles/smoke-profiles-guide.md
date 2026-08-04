@@ -1,8 +1,6 @@
 # Smoke Profiles Guide
 
-This guide describes the supported smoke profiles for the OpenCV CSharp API test and sample suite. New profile switches use version-neutral `OPENCV_CSHARP_*` names; older `OPENCV5SHARP_*` names remain accepted only as existing-smoke-workflow compatibility aliases.
 
-本文说明 OpenCV CSharp API 测试与样例套件支持的 smoke profile。新增 profile 开关使用版本中立的 `OPENCV_CSHARP_*` 名称；旧的 `OPENCV5SHARP_*` 名称仍仅作为既有 smoke workflow 的兼容别名接受。
 
 Linked smoke profiles assume the managed package `JYPPX.OpenCV.CSharp.API` and the matching full `JYPPX.OpenCV.runtime.<rid>` or mini `JYPPX.OpenCV.runtime.<rid>.mini` package use the same normalized NuGet package version. Choose the runtime package for the target RID/profile under smoke.
 
@@ -36,14 +34,11 @@ Default tests leave smoke environment variables unset. They cover managed object
 $env:OPENCV_CSHARP_NATIVE_SMOKE='1'
 Remove-Item Env:\OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE -ErrorAction SilentlyContinue
 # Clear the legacy compatibility alias too so ordinary smoke cannot inherit unstable mode.
-Remove-Item Env:\OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE -ErrorAction SilentlyContinue # legacy compatibility alias
 Remove-Item Env:\OPENCV_CSHARP_BIOINSPIRED_NATIVE_SMOKE -ErrorAction SilentlyContinue
 dotnet test .\tests\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj -c Release -f net10.0
 ```
 
-`OPENCV_CSHARP_NATIVE_SMOKE=1` enables ordinary linked native calls against tiny synthetic data. This profile verifies representative ABI and runtime call paths, not algorithm quality. It should avoid downloads, cameras, windows, large assets, and known process-fatal optional contrib paths. Leave `OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE`, the legacy compatibility alias `OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE`, and `OPENCV_CSHARP_BIOINSPIRED_NATIVE_SMOKE` unset for ordinary smoke. Round 77 verified this profile across `net8.0` and `net10.0`.
 
-`OPENCV_CSHARP_NATIVE_SMOKE=1` 启用普通 linked native 调用，并使用 tiny 合成数据。该 profile 验证代表性的 ABI 和 runtime 调用路径，不衡量算法质量。它应避免下载、摄像头、窗口、大型资产和已知可能导致进程级崩溃的 optional contrib 路径。普通 smoke 应保持 `OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE`、旧兼容别名 `OPENCV5SHARP_UNSTABLE_NATIVE_SMOKE` 和 `OPENCV_CSHARP_BIOINSPIRED_NATIVE_SMOKE` 都未设置。Round 77 已在 `net8.0` 和 `net10.0` 验证该 profile。
 
 ## Console Samples / Console 样例
 

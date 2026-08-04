@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking
+namespace JYPPX.OpenCvSharp.Tracking
 {
     /// <summary>
     /// Modern contrib CSRT tracker wrapper.

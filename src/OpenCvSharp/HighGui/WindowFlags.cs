@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.HighGui
+namespace JYPPX.OpenCvSharp.HighGui
 {
     /// <summary>
     /// HighGUI window flags compatible with OpenCV <c>cv::WindowFlags</c>.

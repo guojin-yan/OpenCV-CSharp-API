@@ -1,8 +1,8 @@
 # Intensity Transform Guide / Intensity Transform 指南
 
-`OpenCvSharp.IntensityTransform` wraps the first OpenCV contrib `intensity_transform` image-enhancement functions through caller-owned `Mat` inputs and outputs.
+`JYPPX.OpenCvSharp.IntensityTransform` wraps the first OpenCV contrib `intensity_transform` image-enhancement functions through caller-owned `Mat` inputs and outputs.
 
-`OpenCvSharp.IntensityTransform` 通过调用方持有的 `Mat` 输入/输出封装第一批 OpenCV contrib `intensity_transform` 图像增强函数。
+`JYPPX.OpenCvSharp.IntensityTransform` 通过调用方持有的 `Mat` 输入/输出封装第一批 OpenCV contrib `intensity_transform` 图像增强函数。
 
 ## Scope / 范围
 
@@ -35,8 +35,8 @@ The basic transforms are useful on tiny generated grayscale matrices for smoke t
 基础变换适合在 tiny 合成灰度矩阵上做 smoke。BIMEF 面向彩色低照度图像。封装层在进入 native 边界前验证空矩阵、gamma 正数、对比度点位字节范围，以及 BIMEF 参数是否有限。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.IntensityTransform;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.IntensityTransform;
 
 using Mat gray = new Mat(8, 8, MatType.CV_8UC1, new Scalar(32));
 using Mat log = IntensityTransformCv2.LogTransform(gray);

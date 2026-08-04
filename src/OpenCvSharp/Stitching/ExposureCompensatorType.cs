@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>Specifies the built-in exposure compensation strategy.</summary>
     public enum ExposureCompensatorType

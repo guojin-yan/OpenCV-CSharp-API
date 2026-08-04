@@ -1,8 +1,8 @@
 # Video Motion Guide
 
-`OpenCvSharp.Video` exposes OpenCV `video` module motion APIs: sparse Lucas-Kanade optical flow, dense Farneback optical flow, optical-flow pyramids, mean-shift tracking, CamShift tracking, background subtraction objects, and `KalmanFilter`. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_video500.dll` when the native wrapper is linked to OpenCV.
+`JYPPX.OpenCvSharp.Video` exposes OpenCV `video` module motion APIs: sparse Lucas-Kanade optical flow, dense Farneback optical flow, optical-flow pyramids, mean-shift tracking, CamShift tracking, background subtraction objects, and `KalmanFilter`. These APIs require the factual OpenCV 5.0.0 runtime artifact `opencv_video500.dll` when the native wrapper is linked to OpenCV.
 
-`OpenCvSharp.Video` 暴露 OpenCV `video` 模块运动能力：稀疏 Lucas-Kanade 光流、密集 Farneback 光流、光流金字塔、mean-shift 跟踪、CamShift 跟踪、背景减除对象和 `KalmanFilter`。当 native wrapper 链接真实 OpenCV 时，这些 API 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_video500.dll`。
+`JYPPX.OpenCvSharp.Video` 暴露 OpenCV `video` 模块运动能力：稀疏 Lucas-Kanade 光流、密集 Farneback 光流、光流金字塔、mean-shift 跟踪、CamShift 跟踪、背景减除对象和 `KalmanFilter`。当 native wrapper 链接真实 OpenCV 时，这些 API 需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_video500.dll`。
 
 ## Covered APIs / 已覆盖接口
 
@@ -33,8 +33,8 @@
 ## Optical Flow / 光流
 
 ```csharp
-using OpenCvSharp.Core;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
 namespace VideoMotionSample
 {
@@ -64,8 +64,8 @@ native ABI 使用平铺点缓冲和调用方持有的输出数组，不暴露 `s
 ## Tracking Windows / 跟踪窗口
 
 ```csharp
-using OpenCvSharp.Core;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
 namespace VideoShiftSample
 {
@@ -88,9 +88,7 @@ namespace VideoShiftSample
 
 ## Runtime Notes / 运行时说明
 
-Default tests cover enum values, result shape, parameter validation, and no-OpenCV `NOT_LINKED` behavior. Real optical-flow behavior requires the factual OpenCV 5.0.0 runtime artifact `opencv_video500.dll` and valid image data. Linked smoke is guarded by `OPENCV_CSHARP_NATIVE_SMOKE=1`; the older `OPENCV5SHARP_NATIVE_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias.
 
-默认测试覆盖枚举值、结果形状、参数校验和 no-OpenCV 下的 `NOT_LINKED` 行为。真实光流效果需要事实性 OpenCV 5.0.0 runtime 产物 `opencv_video500.dll` 并提供有效图像数据。linked smoke 通过 `OPENCV_CSHARP_NATIVE_SMOKE=1` 保护；旧的 `OPENCV5SHARP_NATIVE_SMOKE=1` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 
 For background subtraction details, see [Video Background Subtractor Guide](video-background-subtractor-guide.md). Motion-template functions were rechecked against the local OpenCV 5.0.0 public headers and are documented in [Video Motion Template Guide](video-motion-template-guide.md).
 

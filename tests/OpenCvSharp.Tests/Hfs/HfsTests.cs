@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Hfs;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Hfs;
 
-namespace OpenCvSharp.Tests.Hfs
+namespace JYPPX.OpenCvSharp.Tests.Hfs
 {
     public sealed class HfsTests
     {

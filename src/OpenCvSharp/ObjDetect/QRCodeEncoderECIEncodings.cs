@@ -1,4 +1,4 @@
-namespace OpenCvSharp.ObjDetect
+namespace JYPPX.OpenCvSharp.ObjDetect
 {
     /// <summary>
     /// QR code ECI encoding identifiers compatible with OpenCV <c>cv::QRCodeEncoder::ECIEncodings</c>.

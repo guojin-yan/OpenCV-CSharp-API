@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
 
-namespace OpenCvSharp.Tests.Features2D
+namespace JYPPX.OpenCvSharp.Tests.Features2D
 {
     public class DescriptorMatcherTests
     {
@@ -231,7 +231,7 @@ namespace OpenCvSharp.Tests.Features2D
 
         private static MethodInfo GetDescriptorMatcherCoreMethod(string methodName)
         {
-            Type? coreType = typeof(DescriptorMatcher).Assembly.GetType("OpenCvSharp.Features2D.DescriptorMatcherCore");
+            Type? coreType = typeof(DescriptorMatcher).Assembly.GetType("JYPPX.OpenCvSharp.Features2D.DescriptorMatcherCore");
             Assert.NotNull(coreType);
             MethodInfo? method = coreType.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic);
             Assert.NotNull(method);
@@ -240,7 +240,7 @@ namespace OpenCvSharp.Tests.Features2D
 
         private static MethodInfo GetDescriptorMatcherCoreExMethod(string methodName, params Type[] parameterTypes)
         {
-            Type? coreType = typeof(DescriptorMatcher).Assembly.GetType("OpenCvSharp.Features2D.DescriptorMatcherCoreEx");
+            Type? coreType = typeof(DescriptorMatcher).Assembly.GetType("JYPPX.OpenCvSharp.Features2D.DescriptorMatcherCoreEx");
             Assert.NotNull(coreType);
             MethodInfo? method = coreType.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic, null, parameterTypes, null);
             Assert.NotNull(method);

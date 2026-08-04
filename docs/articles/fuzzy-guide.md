@@ -1,8 +1,8 @@
 # Fuzzy Guide / Fuzzy 指南
 
-`OpenCvSharp.Fuzzy` wraps the first model-free OpenCV contrib `fuzzy` F-transform and image inpainting helpers.
+`JYPPX.OpenCvSharp.Fuzzy` wraps the first model-free OpenCV contrib `fuzzy` F-transform and image inpainting helpers.
 
-`OpenCvSharp.Fuzzy` 封装第一批无需模型文件的 OpenCV contrib `fuzzy` F-transform 与图像修复 helper。
+`JYPPX.OpenCvSharp.Fuzzy` 封装第一批无需模型文件的 OpenCV contrib `fuzzy` F-transform 与图像修复 helper。
 
 ## Scope / 范围
 
@@ -31,8 +31,8 @@ Most F0/F1 helpers expect matrix and kernel channel counts to match. The optimiz
 多数 F0/F1 helper 要求 matrix 与 kernel 通道数匹配。优化的 F0 linear helper 期望 3 通道输入。tiny smoke 只检查输出形状和调用路径，不衡量修复或变换质量。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Fuzzy;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Fuzzy;
 
 using Mat image = new Mat(8, 8, MatType.CV_8UC3, new Scalar(20, 40, 80));
 using Mat mask = new Mat(8, 8, MatType.CV_8UC1, new Scalar(0));

@@ -1,9 +1,9 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using Features2DCv2 = OpenCvSharp.Features2D.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using Features2DCv2 = JYPPX.OpenCvSharp.Features2D.Cv2;
 
-namespace OpenCvSharp.Tests.Features2D
+namespace JYPPX.OpenCvSharp.Tests.Features2D
 {
     public class Features2DDrawingTests
     {

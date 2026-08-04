@@ -23,11 +23,6 @@
     <None Update="Dnn\Fixtures\identity-opset13.onnx.base64" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <!-- OpenCvNativeRuntimeDir is the version-neutral runtime copy property; OpenCv5SharpNativeRuntimeDir remains only as an existing-test-build-script compatibility alias. -->
-  <PropertyGroup>
-    <OpenCvNativeRuntimeDir Condition="'$(OpenCvNativeRuntimeDir)' == '' and '$(OpenCv5SharpNativeRuntimeDir)' != ''">$(OpenCv5SharpNativeRuntimeDir)</OpenCvNativeRuntimeDir><!-- compatibility alias bridge -->
-  </PropertyGroup>
-
   <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">
     <ItemGroup>
       <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\*.dll" />

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace OpenCvSharp.LineDescriptor
+namespace JYPPX.OpenCvSharp.LineDescriptor
 {
     /// <summary>
     /// Parameters used to create a line-descriptor binary descriptor.

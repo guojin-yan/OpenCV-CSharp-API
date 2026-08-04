@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace OpenCvSharp.BioInspired
+namespace JYPPX.OpenCvSharp.BioInspired
 {
     internal static class BioInspiredStringConvert
     {

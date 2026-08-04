@@ -7,11 +7,9 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
-$compatibilityRuntimeProperty = "Open" + "Cv5SharpNativeRuntimeDir"
 $copyTargetName = "CopyOpenCvNativeRuntime"
 $copyItemName = "OpenCvNativeRuntimeFiles"
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 
 function Add-Violation {
     param(
@@ -225,28 +223,6 @@ foreach ($projectFile in $projectFiles) {
         continue
     }
 
-    Assert-Contains -Violations $violations -Path $relativePath -Text $text -Needle "$preferredRuntimeProperty is the version-neutral runtime copy property" -Issue "$relativePath must document OpenCvNativeRuntimeDir as version-neutral"
-    Assert-Contains -Violations $violations -Path $relativePath -Text $text -Needle "$compatibilityRuntimeProperty remains only as an existing-" -Issue "$relativePath must document OpenCv5SharpNativeRuntimeDir as existing compatibility only"
-    Assert-Contains -Violations $violations -Path $relativePath -Text $text -Needle "compatibility alias bridge" -Issue "$relativePath must label the legacy property bridge as a compatibility alias bridge"
-
-    $propertyNodes = @($xml.SelectNodes("//$preferredRuntimeProperty"))
-    $aliasBridgeNodes = @(
-        $propertyNodes |
-            Where-Object {
-                $condition = ""
-                if ($_ -is [System.Xml.XmlElement]) {
-                    $condition = Get-ProjectAttribute -Element $_ -Name "Condition"
-                }
-
-                $condition -eq "'`$($preferredRuntimeProperty)' == '' and '`$($compatibilityRuntimeProperty)' != ''" -and
-                $_.InnerText -eq "`$($compatibilityRuntimeProperty)"
-            }
-    )
-
-    if ($aliasBridgeNodes.Count -ne 1) {
-        Add-Violation -Violations $violations -Path $relativePath -Issue "$relativePath must bridge OpenCv5SharpNativeRuntimeDir to OpenCvNativeRuntimeDir only when the preferred property is empty"
-    }
-
     $copyTargets = @($xml.SelectNodes("//Target[@Name='$copyTargetName']"))
 
     if ($copyTargets.Count -ne 1) {
@@ -270,10 +246,6 @@ foreach ($projectFile in $projectFiles) {
         if ($targetCondition.IndexOf($requiredCondition, [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
             Add-Violation -Violations $violations -Path $relativePath -Issue "$copyTargetName condition must require $requiredCondition" -Text $targetCondition
         }
-    }
-
-    if ($targetCondition.IndexOf($compatibilityRuntimeProperty, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-        Add-Violation -Violations $violations -Path $relativePath -Issue "$copyTargetName target condition must use only the preferred OpenCvNativeRuntimeDir property"
     }
 
     $runtimeFileItems = @($target.SelectNodes(".//$copyItemName"))
@@ -302,19 +274,6 @@ foreach ($projectFile in $projectFiles) {
     }
 
     $lineNumber = 0
-    foreach ($line in [System.IO.File]::ReadLines($projectFile.FullName)) {
-        $lineNumber++
-        if ($line.IndexOf($compatibilityRuntimeProperty, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and
-            -not (Test-ContextualLegacyLine -Line $line)) {
-            Add-Violation -Violations $violations -Path $relativePath -Issue "$compatibilityRuntimeProperty on line $lineNumber must be compatibility-only" -Text $line
-        }
-
-        if ($line.IndexOf($compatibilityRuntimeProperty, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and
-            (Test-PreferredLegacyLine -Line $line) -and
-            -not (Test-ContextualLegacyLine -Line $line)) {
-            Add-Violation -Violations $violations -Path $relativePath -Issue "$compatibilityRuntimeProperty on line $lineNumber must not be described as preferred/current" -Text $line
-        }
-    }
 }
 
 $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
@@ -326,7 +285,6 @@ else {
     $nativeRuntimeDir = Join-Path $tempRoot "native-runtime"
     $syntheticDllNames = @(
         $primaryNativeLoader,
-        $compatibilityNativeLoader,
         "opencv_core500.dll"
     )
     $nonDllFileName = "do-not-copy.txt"
@@ -402,12 +360,8 @@ Assert-Contains -Violations $violations -Path $runUnstablePath -Text $runUnstabl
 Assert-Contains -Violations $violations -Path $runUnstablePath -Text $runUnstableText -Needle '$buildArguments += "/p:OpenCvNativeRuntimeDir=$OpenCvNativeRuntimeDir"' -Issue "Run-UnstableSmoke must pass OpenCvNativeRuntimeDir through to dotnet build"
 Assert-Contains -Violations $violations -Path $runUnstablePath -Text $runUnstableText -Needle 'OpenCvNativeRuntimeDir is only applied during the build step; -NoBuild assumes the test output is already staged.' -Issue "Run-UnstableSmoke must warn when -NoBuild prevents applying OpenCvNativeRuntimeDir"
 Assert-Contains -Violations $violations -Path $runUnstablePath -Text $runUnstableText -Needle '"--no-build"' -Issue "Run-UnstableSmoke must run dotnet test with --no-build after the build/property propagation step"
-if ($runUnstableText.IndexOf($compatibilityRuntimeProperty, [System.StringComparison]::OrdinalIgnoreCase) -ge 0) {
-    Add-Violation -Violations $violations -Path $runUnstablePath -Issue "Run-UnstableSmoke must not expose the legacy runtime copy property as a script parameter"
-}
-
 foreach ($doc in @(
-        [pscustomobject]@{ Path = "README.md"; Text = Read-RequiredText -RelativePath "README.md"; Needle = 'point local samples/tests at it with `OpenCvNativeRuntimeDir`' },
+        [pscustomobject]@{ Path = "README.md"; Text = Read-RequiredText -RelativePath "README.md"; Needle = 'point local samples or tests at it with `OpenCvNativeRuntimeDir`' },
         [pscustomobject]@{ Path = "docs/articles/quick-start.md"; Text = Read-RequiredText -RelativePath "docs/articles/quick-start.md"; Needle = 'use `OpenCvNativeRuntimeDir` for local builds' },
         [pscustomobject]@{ Path = "docs/articles/linked-runtime-build-guide.md"; Text = Read-RequiredText -RelativePath "docs/articles/linked-runtime-build-guide.md"; Needle = 'pass the staged native output through `OpenCvNativeRuntimeDir`' },
         [pscustomobject]@{ Path = "docs/articles/smoke-profiles-guide.md"; Text = Read-RequiredText -RelativePath "docs/articles/smoke-profiles-guide.md"; Needle = 'tests or samples with `OpenCvNativeRuntimeDir`' },
@@ -416,23 +370,8 @@ foreach ($doc in @(
 }
 
 $linkedRuntimeSmokeText = Read-RequiredText -RelativePath "docs/articles/linked-runtime-smoke-guide.md"
-Assert-Contains -Violations $violations -Path "docs/articles/linked-runtime-smoke-guide.md" -Text $linkedRuntimeSmokeText -Needle "/p:OpenCv5SharpNativeRuntimeDir=<runtime-native-dir>" -Issue "Linked runtime smoke guide must document the legacy property only as compatibility"
-Assert-Contains -Violations $violations -Path "docs/articles/linked-runtime-smoke-guide.md" -Text $linkedRuntimeSmokeText -Needle "existing-test-build-script compatibility alias" -Issue "Linked runtime smoke guide must label OpenCv5SharpNativeRuntimeDir as compatibility-only"
 Assert-Contains -Violations $violations -Path "docs/articles/version-neutral-naming-guide.md" -Text (Read-RequiredText -RelativePath "docs/articles/version-neutral-naming-guide.md") -Needle "Test-RuntimeNativeCopyPropertyPropagation.ps1" -Issue "Version-neutral naming guide must list runtime native copy property propagation guard"
 Assert-Contains -Violations $violations -Path "scripts/Test-ProjectInvariants.ps1" -Text (Read-RequiredText -RelativePath "scripts/Test-ProjectInvariants.ps1") -Needle "Test-RuntimeNativeCopyPropertyPropagation.ps1" -Issue "Aggregate invariant suite must include runtime native copy property propagation guard"
-
-foreach ($doc in @(
-        [pscustomobject]@{ Path = "README.md"; Text = Read-RequiredText -RelativePath "README.md" },
-        [pscustomobject]@{ Path = "docs/articles/linked-runtime-smoke-guide.md"; Text = $linkedRuntimeSmokeText },
-        [pscustomobject]@{ Path = "docs/articles/version-neutral-naming-guide.md"; Text = Read-RequiredText -RelativePath "docs/articles/version-neutral-naming-guide.md" },
-        [pscustomobject]@{ Path = "CONTRIBUTING.md"; Text = Read-RequiredText -RelativePath "CONTRIBUTING.md" })) {
-    foreach ($line in $doc.Text -split "\r?\n") {
-        if ($line.IndexOf($compatibilityNativeLoader, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and
-            -not (Test-ContextualLegacyLine -Line $line)) {
-            Add-Violation -Violations $violations -Path $doc.Path -Issue "$compatibilityNativeLoader mentions must be explicitly compatibility-scoped" -Text $line
-        }
-    }
-}
 
 if ($violations.Count -gt 0) {
     Write-Host "Runtime native copy property propagation guard failed with $($violations.Count) violation(s)."
@@ -447,4 +386,3 @@ Write-Host "Sample/test project files checked: $($projectFiles.Count)."
 Write-Host "MSBuild copy dry-run project files checked: $($validatedProjectFiles.Count)."
 Write-Host "AndroidNativeLibrary project files checked: $validatedAndroidProjectCount."
 Write-Host "Preferred runtime copy property: $preferredRuntimeProperty."
-Write-Host "Compatibility runtime copy property: $compatibilityRuntimeProperty."

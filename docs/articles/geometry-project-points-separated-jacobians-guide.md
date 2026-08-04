@@ -77,9 +77,9 @@ Use the extended overload when output matrices belong to an existing pipeline:
 当输出矩阵属于现有处理流程时，使用扩展重载：
 
 ```csharp
-using OpenCvSharp.Calib3D;
-using OpenCvSharp.Core;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
+using JYPPX.OpenCvSharp.Calib3D;
+using JYPPX.OpenCvSharp.Core;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
 
 using var imagePoints = new Mat();
 using var dpdr = new Mat();

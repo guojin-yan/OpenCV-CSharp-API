@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Hfs
+namespace JYPPX.OpenCvSharp.Hfs
 {
     /// <summary>
     /// Entry points for OpenCV HFS functions.

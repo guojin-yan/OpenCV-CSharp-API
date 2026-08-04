@@ -30,7 +30,6 @@ $targetFramework = "net8.0"
 $managedPackageFileName = "$managedPackageId.$normalizedPackageVersion.nupkg"
 $managedAssemblyFileName = "$managedPackageId.dll"
 $primaryNativeLoader = "JYPPX.OpenCV.Native.dll"
-$compatibilityNativeLoader = "OpenCv5Sharp.Native.dll"
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
 $fixedMajorConsumerPattern = (
     "PackageReference.*" + [regex]::Escape($fixedMajorManagedIdentity) + "|" +
@@ -40,20 +39,20 @@ $fixedMajorConsumerPattern = (
     "opencv" + "5sharp\.runtime")
 $fixedMajorSourcePattern = "Open" + "Cv5Sharp|opencv" + "5sharp"
 $representativeSourceNeedles = @(
-    "OpenCvSharp.Core",
-    "OpenCvSharp.ImgProc",
-    "OpenCvSharp.ImgCodecs",
-    "OpenCvSharp.Features2D",
-    "OpenCvSharp.Calib3D",
-    "OpenCvSharp.Dnn",
-    "OpenCvSharp.HighGui",
-    "OpenCvSharp.ObjDetect",
-    "OpenCvSharp.Photo",
-    "OpenCvSharp.Video",
-    "OpenCvSharp.VideoIO",
-    "OpenCvSharp.ML",
-    "OpenCvSharp.Stitching",
-    "OpenCvSharp.Geometry")
+    "JYPPX.OpenCvSharp.Core",
+    "JYPPX.OpenCvSharp.ImgProc",
+    "JYPPX.OpenCvSharp.ImgCodecs",
+    "JYPPX.OpenCvSharp.Features2D",
+    "JYPPX.OpenCvSharp.Calib3D",
+    "JYPPX.OpenCvSharp.Dnn",
+    "JYPPX.OpenCvSharp.HighGui",
+    "JYPPX.OpenCvSharp.ObjDetect",
+    "JYPPX.OpenCvSharp.Photo",
+    "JYPPX.OpenCvSharp.Video",
+    "JYPPX.OpenCvSharp.VideoIO",
+    "JYPPX.OpenCvSharp.ML",
+    "JYPPX.OpenCvSharp.Stitching",
+    "JYPPX.OpenCvSharp.Geometry")
 
 function Add-Violation {
     param(
@@ -237,18 +236,18 @@ function New-TemporaryConsumerProject {
 
     $programText = @'
 using System;
-using OpenCvSharp;
-using OpenCvSharp.Core;
-using OpenCvSharp.Features2D;
-using CoreCv2 = OpenCvSharp.Core.Cv2;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
-using ImgCodecsCv2 = OpenCvSharp.ImgCodecs.Cv2;
-using Features2DCv2 = OpenCvSharp.Features2D.Cv2;
-using Calib3DCv2 = OpenCvSharp.Calib3D.Cv2;
-using DnnCv2 = OpenCvSharp.Dnn.Cv2;
-using HighGuiCv2 = OpenCvSharp.HighGui.Cv2;
-using PhotoCv2 = OpenCvSharp.Photo.PhotoCv2;
-using VideoCv2 = OpenCvSharp.Video.Cv2;
+using JYPPX.OpenCvSharp;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Features2D;
+using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
+using Features2DCv2 = JYPPX.OpenCvSharp.Features2D.Cv2;
+using Calib3DCv2 = JYPPX.OpenCvSharp.Calib3D.Cv2;
+using DnnCv2 = JYPPX.OpenCvSharp.Dnn.Cv2;
+using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
+using PhotoCv2 = JYPPX.OpenCvSharp.Photo.PhotoCv2;
+using VideoCv2 = JYPPX.OpenCvSharp.Video.Cv2;
 
 namespace StandaloneManagedConsumer;
 
@@ -256,19 +255,19 @@ internal static class Program
 {
     private static readonly Action<Mat[], Mat, double, int> DenoiseTvl1 = PhotoCv2.DenoiseTvl1;
     private static readonly Action<Mat, Mat, Mat, Size, int, int> CorrectChromaticAberration = PhotoCv2.CorrectChromaticAberration;
-    private static readonly Func<FileNode, OpenCvSharp.Photo.ChromaticAberrationParameters> LoadChromaticAberrationParams = PhotoCv2.LoadChromaticAberrationParams;
-    private static readonly Func<OpenCvSharp.ML.ANN_MLP> CreateAnnMlp = OpenCvSharp.ML.ANN_MLP.Create;
-    private static readonly Func<OpenCvSharp.ML.DTrees> CreateDTrees = OpenCvSharp.ML.DTrees.Create;
-    private static readonly Func<OpenCvSharp.ML.RTrees> CreateRTrees = OpenCvSharp.ML.RTrees.Create;
-    private static readonly Func<OpenCvSharp.ML.Boost> CreateBoost = OpenCvSharp.ML.Boost.Create;
-    private static readonly Func<OpenCvSharp.ML.EM> CreateEM = OpenCvSharp.ML.EM.Create;
-    private static readonly Func<OpenCvSharp.ML.LogisticRegression> CreateLogisticRegression = OpenCvSharp.ML.LogisticRegression.Create;
-    private static readonly Func<OpenCvSharp.ML.SVMSGD> CreateSVMSGD = OpenCvSharp.ML.SVMSGD.Create;
+    private static readonly Func<FileNode, JYPPX.OpenCvSharp.Photo.ChromaticAberrationParameters> LoadChromaticAberrationParams = PhotoCv2.LoadChromaticAberrationParams;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.ANN_MLP> CreateAnnMlp = JYPPX.OpenCvSharp.ML.ANN_MLP.Create;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.DTrees> CreateDTrees = JYPPX.OpenCvSharp.ML.DTrees.Create;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.RTrees> CreateRTrees = JYPPX.OpenCvSharp.ML.RTrees.Create;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.Boost> CreateBoost = JYPPX.OpenCvSharp.ML.Boost.Create;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.EM> CreateEM = JYPPX.OpenCvSharp.ML.EM.Create;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.LogisticRegression> CreateLogisticRegression = JYPPX.OpenCvSharp.ML.LogisticRegression.Create;
+    private static readonly Func<JYPPX.OpenCvSharp.ML.SVMSGD> CreateSVMSGD = JYPPX.OpenCvSharp.ML.SVMSGD.Create;
     private static readonly HighGuiCv2.TrackbarCallback HighGuiTrackbarCallback = _ => { };
     private static readonly HighGuiCv2.MouseCallback HighGuiMouseCallback = (_, _, _, _) => { };
     private static readonly HighGuiCv2.ButtonCallback HighGuiButtonCallback = _ => { };
     private static readonly Func<string> GetHighGuiBackend = HighGuiCv2.GetCurrentUIFramework;
-    private static readonly Func<OpenCvSharp.HighGui.MouseEventFlags, int> GetHighGuiWheelDelta = HighGuiCv2.GetMouseWheelDelta;
+    private static readonly Func<JYPPX.OpenCvSharp.HighGui.MouseEventFlags, int> GetHighGuiWheelDelta = HighGuiCv2.GetMouseWheelDelta;
 
     private static readonly Type[] RepresentativeTypes =
     {
@@ -287,97 +286,97 @@ internal static class Program
         typeof(Calib3DCv2),
         typeof(DnnCv2),
         typeof(HighGuiCv2),
-        typeof(OpenCvSharp.HighGui.HighGuiTrackbar),
-        typeof(OpenCvSharp.HighGui.WindowFlags),
-        typeof(OpenCvSharp.HighGui.MouseEventTypes),
-        typeof(OpenCvSharp.HighGui.MouseEventFlags),
-        typeof(OpenCvSharp.HighGui.QtButtonTypes),
+        typeof(JYPPX.OpenCvSharp.HighGui.HighGuiTrackbar),
+        typeof(JYPPX.OpenCvSharp.HighGui.WindowFlags),
+        typeof(JYPPX.OpenCvSharp.HighGui.MouseEventTypes),
+        typeof(JYPPX.OpenCvSharp.HighGui.MouseEventFlags),
+        typeof(JYPPX.OpenCvSharp.HighGui.QtButtonTypes),
         typeof(PhotoCv2),
         typeof(VideoCv2),
         typeof(KeyPoint),
         typeof(DMatch),
-        typeof(OpenCvSharp.ImgProc.LineSegment),
-        typeof(OpenCvSharp.Calib3D.StereoBM),
-        typeof(OpenCvSharp.Dnn.Net),
-        typeof(OpenCvSharp.ObjDetect.QRCodeDetector),
-        typeof(OpenCvSharp.Photo.AlignMTB),
-        typeof(OpenCvSharp.Photo.CalibrateDebevec),
-        typeof(OpenCvSharp.Photo.MergeMertens),
-        typeof(OpenCvSharp.Photo.ColorCorrectionModel),
-        typeof(OpenCvSharp.Photo.ChromaticAberrationParameters),
-        typeof(OpenCvSharp.Photo.IntelligentScissorsMB),
-        typeof(OpenCvSharp.Photo.CcmType),
-        typeof(OpenCvSharp.Photo.InitialMethodType),
-        typeof(OpenCvSharp.Photo.ColorCheckerType),
-        typeof(OpenCvSharp.Photo.ColorSpace),
-        typeof(OpenCvSharp.Photo.LinearizationType),
-        typeof(OpenCvSharp.Photo.DistanceType),
-        typeof(OpenCvSharp.Video.MotionType),
-        typeof(OpenCvSharp.Video.ECCParameters),
-        typeof(OpenCvSharp.Video.ECCRegistrationResult),
-        typeof(OpenCvSharp.Video.Tracker),
-        typeof(OpenCvSharp.Video.TrackerMIL),
-        typeof(OpenCvSharp.Video.TrackerMILParams),
-        typeof(OpenCvSharp.Tracking.Legacy.TrackerBoosting),
-        typeof(OpenCvSharp.Tracking.Legacy.TrackerBoostingParams),
-        typeof(OpenCvSharp.Tracking.Legacy.TrackerTLD),
-        typeof(OpenCvSharp.Tracking.Legacy.TrackerKCF),
-        typeof(OpenCvSharp.Tracking.Legacy.TrackerCSRT),
-        typeof(OpenCvSharp.VideoIO.VideoCapture),
-        typeof(OpenCvSharp.VideoIO.VideoWriter),
-        typeof(OpenCvSharp.ML.SVM),
-        typeof(OpenCvSharp.ML.ANN_MLP),
-        typeof(OpenCvSharp.ML.DTrees),
-        typeof(OpenCvSharp.ML.RTrees),
-        typeof(OpenCvSharp.ML.Boost),
-        typeof(OpenCvSharp.ML.DTreesPredictionFlags),
-        typeof(OpenCvSharp.ML.BoostTypes),
-        typeof(OpenCvSharp.ML.EM),
-        typeof(OpenCvSharp.ML.EMCovarianceMatrixTypes),
-        typeof(OpenCvSharp.ML.EMPredictionResult),
-        typeof(OpenCvSharp.ML.LogisticRegression),
-        typeof(OpenCvSharp.ML.LogisticRegressionRegularizationKinds),
-        typeof(OpenCvSharp.ML.LogisticRegressionTrainingMethods),
-        typeof(OpenCvSharp.ML.SVMSGD),
-        typeof(OpenCvSharp.ML.SVMSGDTypes),
-        typeof(OpenCvSharp.ML.SVMSGDMarginTypes),
-        typeof(OpenCvSharp.Stitching.Stitcher),
-        typeof(OpenCvSharp.Stitching.ExposureCompensatorType),
-        typeof(OpenCvSharp.Stitching.ExposureCompensator),
-        typeof(OpenCvSharp.Stitching.NoExposureCompensator),
-        typeof(OpenCvSharp.Stitching.GainCompensator),
-        typeof(OpenCvSharp.Stitching.ChannelsCompensator),
-        typeof(OpenCvSharp.Stitching.BlocksCompensator),
-        typeof(OpenCvSharp.Stitching.BlocksGainCompensator),
-        typeof(OpenCvSharp.Stitching.BlocksChannelsCompensator),
-        typeof(OpenCvSharp.Stitching.PyRotationWarper),
-        typeof(OpenCvSharp.Stitching.BlenderType),
-        typeof(OpenCvSharp.Stitching.Blender),
-        typeof(OpenCvSharp.Stitching.FeatherBlender),
-        typeof(OpenCvSharp.Stitching.MultiBandBlender),
-        typeof(OpenCvSharp.Stitching.ImageFeatures),
-        typeof(OpenCvSharp.Stitching.MatchesInfo),
-        typeof(OpenCvSharp.Stitching.FeaturesMatcher),
-        typeof(OpenCvSharp.Stitching.BestOf2NearestMatcher),
-        typeof(OpenCvSharp.Stitching.BestOf2NearestRangeMatcher),
-        typeof(OpenCvSharp.Stitching.AffineBestOf2NearestMatcher),
-        typeof(OpenCvSharp.Stitching.Estimator),
-        typeof(OpenCvSharp.Stitching.HomographyBasedEstimator),
-        typeof(OpenCvSharp.Stitching.AffineBasedEstimator),
-        typeof(OpenCvSharp.Stitching.BundleAdjusterBase),
-        typeof(OpenCvSharp.Stitching.NoBundleAdjuster),
-        typeof(OpenCvSharp.Stitching.BundleAdjusterReproj),
-        typeof(OpenCvSharp.Stitching.BundleAdjusterRay),
-        typeof(OpenCvSharp.Stitching.BundleAdjusterAffine),
-        typeof(OpenCvSharp.Stitching.BundleAdjusterAffinePartial),
-        typeof(OpenCvSharp.Stitching.StitchingMotion),
-        typeof(OpenCvSharp.Stitching.SeamFinder),
-        typeof(OpenCvSharp.Stitching.DpSeamFinder),
-        typeof(OpenCvSharp.Stitching.GraphCutSeamFinder),
-        typeof(OpenCvSharp.Stitching.Timelapser),
-        typeof(OpenCvSharp.Stitching.StitchingUtilities),
-        typeof(OpenCvSharp.Stitching.SphericalProjector),
-        typeof(OpenCvSharp.Geometry.DistanceTypes)
+        typeof(JYPPX.OpenCvSharp.ImgProc.LineSegment),
+        typeof(JYPPX.OpenCvSharp.Calib3D.StereoBM),
+        typeof(JYPPX.OpenCvSharp.Dnn.Net),
+        typeof(JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector),
+        typeof(JYPPX.OpenCvSharp.Photo.AlignMTB),
+        typeof(JYPPX.OpenCvSharp.Photo.CalibrateDebevec),
+        typeof(JYPPX.OpenCvSharp.Photo.MergeMertens),
+        typeof(JYPPX.OpenCvSharp.Photo.ColorCorrectionModel),
+        typeof(JYPPX.OpenCvSharp.Photo.ChromaticAberrationParameters),
+        typeof(JYPPX.OpenCvSharp.Photo.IntelligentScissorsMB),
+        typeof(JYPPX.OpenCvSharp.Photo.CcmType),
+        typeof(JYPPX.OpenCvSharp.Photo.InitialMethodType),
+        typeof(JYPPX.OpenCvSharp.Photo.ColorCheckerType),
+        typeof(JYPPX.OpenCvSharp.Photo.ColorSpace),
+        typeof(JYPPX.OpenCvSharp.Photo.LinearizationType),
+        typeof(JYPPX.OpenCvSharp.Photo.DistanceType),
+        typeof(JYPPX.OpenCvSharp.Video.MotionType),
+        typeof(JYPPX.OpenCvSharp.Video.ECCParameters),
+        typeof(JYPPX.OpenCvSharp.Video.ECCRegistrationResult),
+        typeof(JYPPX.OpenCvSharp.Video.Tracker),
+        typeof(JYPPX.OpenCvSharp.Video.TrackerMIL),
+        typeof(JYPPX.OpenCvSharp.Video.TrackerMILParams),
+        typeof(JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoosting),
+        typeof(JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoostingParams),
+        typeof(JYPPX.OpenCvSharp.Tracking.Legacy.TrackerTLD),
+        typeof(JYPPX.OpenCvSharp.Tracking.Legacy.TrackerKCF),
+        typeof(JYPPX.OpenCvSharp.Tracking.Legacy.TrackerCSRT),
+        typeof(JYPPX.OpenCvSharp.VideoIO.VideoCapture),
+        typeof(JYPPX.OpenCvSharp.VideoIO.VideoWriter),
+        typeof(JYPPX.OpenCvSharp.ML.SVM),
+        typeof(JYPPX.OpenCvSharp.ML.ANN_MLP),
+        typeof(JYPPX.OpenCvSharp.ML.DTrees),
+        typeof(JYPPX.OpenCvSharp.ML.RTrees),
+        typeof(JYPPX.OpenCvSharp.ML.Boost),
+        typeof(JYPPX.OpenCvSharp.ML.DTreesPredictionFlags),
+        typeof(JYPPX.OpenCvSharp.ML.BoostTypes),
+        typeof(JYPPX.OpenCvSharp.ML.EM),
+        typeof(JYPPX.OpenCvSharp.ML.EMCovarianceMatrixTypes),
+        typeof(JYPPX.OpenCvSharp.ML.EMPredictionResult),
+        typeof(JYPPX.OpenCvSharp.ML.LogisticRegression),
+        typeof(JYPPX.OpenCvSharp.ML.LogisticRegressionRegularizationKinds),
+        typeof(JYPPX.OpenCvSharp.ML.LogisticRegressionTrainingMethods),
+        typeof(JYPPX.OpenCvSharp.ML.SVMSGD),
+        typeof(JYPPX.OpenCvSharp.ML.SVMSGDTypes),
+        typeof(JYPPX.OpenCvSharp.ML.SVMSGDMarginTypes),
+        typeof(JYPPX.OpenCvSharp.Stitching.Stitcher),
+        typeof(JYPPX.OpenCvSharp.Stitching.ExposureCompensatorType),
+        typeof(JYPPX.OpenCvSharp.Stitching.ExposureCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.NoExposureCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.GainCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.ChannelsCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.BlocksCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.BlocksGainCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.BlocksChannelsCompensator),
+        typeof(JYPPX.OpenCvSharp.Stitching.PyRotationWarper),
+        typeof(JYPPX.OpenCvSharp.Stitching.BlenderType),
+        typeof(JYPPX.OpenCvSharp.Stitching.Blender),
+        typeof(JYPPX.OpenCvSharp.Stitching.FeatherBlender),
+        typeof(JYPPX.OpenCvSharp.Stitching.MultiBandBlender),
+        typeof(JYPPX.OpenCvSharp.Stitching.ImageFeatures),
+        typeof(JYPPX.OpenCvSharp.Stitching.MatchesInfo),
+        typeof(JYPPX.OpenCvSharp.Stitching.FeaturesMatcher),
+        typeof(JYPPX.OpenCvSharp.Stitching.BestOf2NearestMatcher),
+        typeof(JYPPX.OpenCvSharp.Stitching.BestOf2NearestRangeMatcher),
+        typeof(JYPPX.OpenCvSharp.Stitching.AffineBestOf2NearestMatcher),
+        typeof(JYPPX.OpenCvSharp.Stitching.Estimator),
+        typeof(JYPPX.OpenCvSharp.Stitching.HomographyBasedEstimator),
+        typeof(JYPPX.OpenCvSharp.Stitching.AffineBasedEstimator),
+        typeof(JYPPX.OpenCvSharp.Stitching.BundleAdjusterBase),
+        typeof(JYPPX.OpenCvSharp.Stitching.NoBundleAdjuster),
+        typeof(JYPPX.OpenCvSharp.Stitching.BundleAdjusterReproj),
+        typeof(JYPPX.OpenCvSharp.Stitching.BundleAdjusterRay),
+        typeof(JYPPX.OpenCvSharp.Stitching.BundleAdjusterAffine),
+        typeof(JYPPX.OpenCvSharp.Stitching.BundleAdjusterAffinePartial),
+        typeof(JYPPX.OpenCvSharp.Stitching.StitchingMotion),
+        typeof(JYPPX.OpenCvSharp.Stitching.SeamFinder),
+        typeof(JYPPX.OpenCvSharp.Stitching.DpSeamFinder),
+        typeof(JYPPX.OpenCvSharp.Stitching.GraphCutSeamFinder),
+        typeof(JYPPX.OpenCvSharp.Stitching.Timelapser),
+        typeof(JYPPX.OpenCvSharp.Stitching.StitchingUtilities),
+        typeof(JYPPX.OpenCvSharp.Stitching.SphericalProjector),
+        typeof(JYPPX.OpenCvSharp.Geometry.DistanceTypes)
     };
 
     private static readonly object[] RepresentativeValues =
@@ -390,49 +389,49 @@ internal static class Program
         new TermCriteria(TermCriteriaTypes.CountOrEps, 10, 0.01),
         new KeyPoint(1.0f, 2.0f, 3.0f),
         new DMatch(0, 1, 0.25f),
-        default(OpenCvSharp.ImgCodecs.ImreadModes),
-        default(OpenCvSharp.ImgProc.ColorConversionCodes),
-        default(OpenCvSharp.ImgProc.ThresholdTypes),
-        default(OpenCvSharp.Calib3D.SolvePnPFlags),
-        default(OpenCvSharp.Dnn.DnnBackend),
-        default(OpenCvSharp.Dnn.DnnTarget),
-        default(OpenCvSharp.HighGui.WindowFlags),
-        default(OpenCvSharp.HighGui.MouseEventTypes),
-        default(OpenCvSharp.HighGui.MouseEventFlags),
-        default(OpenCvSharp.HighGui.QtButtonTypes),
-        default(OpenCvSharp.ObjDetect.PredefinedDictionaryType),
-        default(OpenCvSharp.Photo.InpaintMethod),
-        default(OpenCvSharp.Photo.CcmType),
-        default(OpenCvSharp.Photo.InitialMethodType),
-        default(OpenCvSharp.Photo.ColorCheckerType),
-        default(OpenCvSharp.Photo.ColorSpace),
-        default(OpenCvSharp.Photo.LinearizationType),
-        default(OpenCvSharp.Photo.DistanceType),
-        default(OpenCvSharp.Video.MotionType),
-        new OpenCvSharp.Video.ECCParameters(),
-        OpenCvSharp.Video.TrackerMILParams.Default,
-        OpenCvSharp.Tracking.Legacy.TrackerBoostingParams.Default,
-        OpenCvSharp.Tracking.TrackerKCFParams.Default,
-        OpenCvSharp.Tracking.TrackerCSRTParams.Default,
-        default(OpenCvSharp.Video.OpticalFlowFlags),
-        default(OpenCvSharp.VideoIO.VideoCaptureAPIs),
-        default(OpenCvSharp.ML.SVMTypes),
-        default(OpenCvSharp.ML.ANN_MLPTrainingMethods),
-        default(OpenCvSharp.ML.ANN_MLPActivationFunctions),
-        default(OpenCvSharp.ML.ANN_MLPTrainFlags),
-        default(OpenCvSharp.ML.DTreesPredictionFlags),
-        default(OpenCvSharp.ML.BoostTypes),
-        default(OpenCvSharp.ML.EMCovarianceMatrixTypes),
-        default(OpenCvSharp.ML.EMPredictionResult),
-        default(OpenCvSharp.ML.LogisticRegressionRegularizationKinds),
-        default(OpenCvSharp.ML.LogisticRegressionTrainingMethods),
-        default(OpenCvSharp.ML.SVMSGDTypes),
-        default(OpenCvSharp.ML.SVMSGDMarginTypes),
-        default(OpenCvSharp.Stitching.StitcherMode),
-        default(OpenCvSharp.Stitching.ExposureCompensatorType),
-        default(OpenCvSharp.Stitching.BlenderType),
-        default(OpenCvSharp.Stitching.WaveCorrectKind),
-        default(OpenCvSharp.Geometry.DistanceTypes)
+        default(JYPPX.OpenCvSharp.ImgCodecs.ImreadModes),
+        default(JYPPX.OpenCvSharp.ImgProc.ColorConversionCodes),
+        default(JYPPX.OpenCvSharp.ImgProc.ThresholdTypes),
+        default(JYPPX.OpenCvSharp.Calib3D.SolvePnPFlags),
+        default(JYPPX.OpenCvSharp.Dnn.DnnBackend),
+        default(JYPPX.OpenCvSharp.Dnn.DnnTarget),
+        default(JYPPX.OpenCvSharp.HighGui.WindowFlags),
+        default(JYPPX.OpenCvSharp.HighGui.MouseEventTypes),
+        default(JYPPX.OpenCvSharp.HighGui.MouseEventFlags),
+        default(JYPPX.OpenCvSharp.HighGui.QtButtonTypes),
+        default(JYPPX.OpenCvSharp.ObjDetect.PredefinedDictionaryType),
+        default(JYPPX.OpenCvSharp.Photo.InpaintMethod),
+        default(JYPPX.OpenCvSharp.Photo.CcmType),
+        default(JYPPX.OpenCvSharp.Photo.InitialMethodType),
+        default(JYPPX.OpenCvSharp.Photo.ColorCheckerType),
+        default(JYPPX.OpenCvSharp.Photo.ColorSpace),
+        default(JYPPX.OpenCvSharp.Photo.LinearizationType),
+        default(JYPPX.OpenCvSharp.Photo.DistanceType),
+        default(JYPPX.OpenCvSharp.Video.MotionType),
+        new JYPPX.OpenCvSharp.Video.ECCParameters(),
+        JYPPX.OpenCvSharp.Video.TrackerMILParams.Default,
+        JYPPX.OpenCvSharp.Tracking.Legacy.TrackerBoostingParams.Default,
+        JYPPX.OpenCvSharp.Tracking.TrackerKCFParams.Default,
+        JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams.Default,
+        default(JYPPX.OpenCvSharp.Video.OpticalFlowFlags),
+        default(JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs),
+        default(JYPPX.OpenCvSharp.ML.SVMTypes),
+        default(JYPPX.OpenCvSharp.ML.ANN_MLPTrainingMethods),
+        default(JYPPX.OpenCvSharp.ML.ANN_MLPActivationFunctions),
+        default(JYPPX.OpenCvSharp.ML.ANN_MLPTrainFlags),
+        default(JYPPX.OpenCvSharp.ML.DTreesPredictionFlags),
+        default(JYPPX.OpenCvSharp.ML.BoostTypes),
+        default(JYPPX.OpenCvSharp.ML.EMCovarianceMatrixTypes),
+        default(JYPPX.OpenCvSharp.ML.EMPredictionResult),
+        default(JYPPX.OpenCvSharp.ML.LogisticRegressionRegularizationKinds),
+        default(JYPPX.OpenCvSharp.ML.LogisticRegressionTrainingMethods),
+        default(JYPPX.OpenCvSharp.ML.SVMSGDTypes),
+        default(JYPPX.OpenCvSharp.ML.SVMSGDMarginTypes),
+        default(JYPPX.OpenCvSharp.Stitching.StitcherMode),
+        default(JYPPX.OpenCvSharp.Stitching.ExposureCompensatorType),
+        default(JYPPX.OpenCvSharp.Stitching.BlenderType),
+        default(JYPPX.OpenCvSharp.Stitching.WaveCorrectKind),
+        default(JYPPX.OpenCvSharp.Geometry.DistanceTypes)
     };
 
     private static int Main()
@@ -446,7 +445,7 @@ internal static class Program
             CreateLogisticRegression != null && CreateSVMSGD != null &&
             HighGuiTrackbarCallback != null && HighGuiMouseCallback != null && HighGuiButtonCallback != null &&
             GetHighGuiBackend != null && GetHighGuiWheelDelta != null &&
-            exceptionType.Namespace == "OpenCvSharp" &&
+            exceptionType.Namespace == "JYPPX.OpenCvSharp" &&
             message.Length > 0
             ? 0
             : 1;
@@ -593,7 +592,7 @@ try {
     if (Test-Path -LiteralPath $consumerProgramPath -PathType Leaf) {
         $consumerProgramText = [System.IO.File]::ReadAllText($consumerProgramPath)
         foreach ($needle in $representativeSourceNeedles) {
-            Assert-TextContains -Violations $violations -Path $consumerProgramPath -Text $consumerProgramText -Needle $needle -Issue "Representative consumer source must reference selected OpenCvSharp module namespaces"
+            Assert-TextContains -Violations $violations -Path $consumerProgramPath -Text $consumerProgramText -Needle $needle -Issue "Representative consumer source must reference selected JYPPX.OpenCvSharp module namespaces"
         }
 
         Assert-TextDoesNotContain -Violations $violations -Path $consumerProgramPath -Text $consumerProgramText -Needle $runtimePackagePrefix -Issue "Representative consumer source must not reference a runtime package for compile-only usage"
@@ -644,7 +643,6 @@ try {
             Get-ChildItem -LiteralPath $consumerOutputDir -Recurse -File |
                 Where-Object {
                     $_.Name -eq $primaryNativeLoader -or
-                    $_.Name -eq $compatibilityNativeLoader -or
                     $_.Name -match '^opencv_.*\.dll$'
                 } |
                 ForEach-Object { $_.FullName }

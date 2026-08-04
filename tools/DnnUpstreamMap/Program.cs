@@ -429,72 +429,72 @@ internal static class Program
 
     private static ManagedQuery[] ManagedQueries(int ordinal) => ordinal switch
     {
-        15 => Q("OpenCvSharp.Dnn.Cv2", "GetAvailableTargets("),
-        20 => Q("OpenCvSharp.Dnn.Layer", "OutputNameToIndex("),
-        22 => Q("OpenCvSharp.Dnn.Net", " CreateEmpty("),
-        23 or 80 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromModelOptimizer(System.String"),
-        24 or 81 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromModelOptimizer(System.Byte[]"),
-        25 => Q("OpenCvSharp.Dnn.Net", "System.Boolean Empty"),
-        26 => Q("OpenCvSharp.Dnn.Net", "System.String Dump("),
-        27 => Q("OpenCvSharp.Dnn.Net", " DumpToFile("),
-        28 => Q("OpenCvSharp.Dnn.Net", " DumpToPbtxt("),
-        31 => Q("OpenCvSharp.Dnn.Net", " GetLayerId("),
-        32 => Q("OpenCvSharp.Dnn.Net", "System.String[] GetLayerNames("),
-        33 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.Layer GetLayer(System.Int32"),
-        34 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.Layer GetLayer(System.String"),
-        36 => Q("OpenCvSharp.Dnn.Net", " Connect("),
-        37 => Q("OpenCvSharp.Dnn.Net", " RegisterOutput("),
-        38 => Q("OpenCvSharp.Dnn.Net", " SetInputsNames("),
-        39 => Q("OpenCvSharp.Dnn.Net", " SetInputShape("),
-        40 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Core.Mat Forward(System.String"),
-        42 => Q("OpenCvSharp.Dnn.Net", "System.Void Forward(OpenCvSharp.Core.Mat"),
-        43 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Core.Mat[] Forward(System.String[]"),
-        44 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Core.Mat[][] ForwardAndRetrieve("),
-        45 => Q("OpenCvSharp.Dnn.Net", " SetPreferableBackend("),
-        46 => Q("OpenCvSharp.Dnn.Net", " SetPreferableTarget("),
-        47 => Q("OpenCvSharp.Dnn.Net", " FinalizeNetwork("),
-        48 => Q("OpenCvSharp.Dnn.Net", " SetTracingMode("),
-        49 => Q("OpenCvSharp.Dnn.Net", " GetTracingMode("),
-        50 => Q("OpenCvSharp.Dnn.Net", " SetProfilingMode("),
-        51 => Q("OpenCvSharp.Dnn.Net", " GetProfilingMode("),
-        52 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.DnnModelFormat ModelFormat"),
-        53 => Q("OpenCvSharp.Dnn.Net", " SetInput("),
-        54 => Q("OpenCvSharp.Dnn.Net", " SetParam(System.Int32"),
-        55 => Q("OpenCvSharp.Dnn.Net", " SetParam(System.String"),
-        56 => Q("OpenCvSharp.Dnn.Net", " GetParam(System.Int32"),
-        57 => Q("OpenCvSharp.Dnn.Net", " GetParam(System.String"),
-        58 => Q("OpenCvSharp.Dnn.Net", "System.Int32[] GetUnconnectedOutLayers("),
-        59 => Q("OpenCvSharp.Dnn.Net", "System.String[] GetUnconnectedOutLayersNames("),
-        60 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.DnnLayerShapes GetLayerShapes("),
-        61 => Q("OpenCvSharp.Dnn.Net", " GetFLOPS("),
-        62 => Q("OpenCvSharp.Dnn.Net", "System.String[] GetLayerTypes("),
-        63 => Q("OpenCvSharp.Dnn.Net", " GetLayersCountByType("),
-        64 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.DnnMemoryConsumption GetMemoryConsumption("),
-        65 => Q("OpenCvSharp.Dnn.Net", " EnableFusion("),
-        66 => Q("OpenCvSharp.Dnn.Net", " EnableWinograd("),
-        67 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.DnnPerfProfile GetPerfProfile("),
-        68 => Q("OpenCvSharp.Dnn.Net", " EnableKvCache("),
-        69 => Q("OpenCvSharp.Dnn.Net", " DisableKvCache("),
-        70 => Q("OpenCvSharp.Dnn.Net", " ResetKvCache("),
-        71 => Q("OpenCvSharp.Dnn.Net", "OpenCvSharp.Dnn.DnnDetailedPerfProfile GetDetailedPerfProfile("),
-        74 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromTensorflow(System.String"),
-        75 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromTensorflow(System.Byte[]"),
-        76 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromTFLite(System.String"),
-        77 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromTFLite(System.Byte[]"),
-        78 => Q("OpenCvSharp.Dnn.Net", " ReadNet(System.String model"),
-        79 => Q("OpenCvSharp.Dnn.Net", " ReadNet(System.String framework,System.Byte[]"),
-        82 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromOnnx(System.String"),
-        83 => Q("OpenCvSharp.Dnn.Net", " ReadNetFromOnnx(System.Byte[]"),
-        84 => Q("OpenCvSharp.Dnn.Cv2", " ReadTensorFromOnnx("),
-        85 => Q("OpenCvSharp.Dnn.Cv2", " BlobFromImage(", "scaleFactor"),
-        86 => Q("OpenCvSharp.Dnn.Cv2", " BlobFromImages(", "scaleFactor"),
-        89 => Q("OpenCvSharp.Dnn.Image2BlobParams", ".ctor()"),
-        90 => Q("OpenCvSharp.Dnn.Image2BlobParams", ".ctor(", "OpenCvSharp.Core.Scalar scaleFactor"),
-        91 => Q("OpenCvSharp.Dnn.Image2BlobParams", " BlobRectToImageRect("),
-        92 => Q("OpenCvSharp.Dnn.Image2BlobParams", " BlobRectsToImageRects("),
-        93 or 94 => Q("OpenCvSharp.Dnn.Cv2", " BlobFromImage(", "OpenCvSharp.Dnn.Image2BlobParams"),
-        95 or 96 => Q("OpenCvSharp.Dnn.Cv2", " BlobFromImages(", "OpenCvSharp.Dnn.Image2BlobParams"),
-        97 => Q("OpenCvSharp.Dnn.Cv2", " ImagesFromBlob("),
+        15 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", "GetAvailableTargets("),
+        20 => Q("JYPPX.OpenCvSharp.Dnn.Layer", "OutputNameToIndex("),
+        22 => Q("JYPPX.OpenCvSharp.Dnn.Net", " CreateEmpty("),
+        23 or 80 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromModelOptimizer(System.String"),
+        24 or 81 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromModelOptimizer(System.Byte[]"),
+        25 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.Boolean Empty"),
+        26 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.String Dump("),
+        27 => Q("JYPPX.OpenCvSharp.Dnn.Net", " DumpToFile("),
+        28 => Q("JYPPX.OpenCvSharp.Dnn.Net", " DumpToPbtxt("),
+        31 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetLayerId("),
+        32 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.String[] GetLayerNames("),
+        33 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.Layer GetLayer(System.Int32"),
+        34 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.Layer GetLayer(System.String"),
+        36 => Q("JYPPX.OpenCvSharp.Dnn.Net", " Connect("),
+        37 => Q("JYPPX.OpenCvSharp.Dnn.Net", " RegisterOutput("),
+        38 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetInputsNames("),
+        39 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetInputShape("),
+        40 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Core.Mat Forward(System.String"),
+        42 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.Void Forward(JYPPX.OpenCvSharp.Core.Mat"),
+        43 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Core.Mat[] Forward(System.String[]"),
+        44 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Core.Mat[][] ForwardAndRetrieve("),
+        45 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetPreferableBackend("),
+        46 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetPreferableTarget("),
+        47 => Q("JYPPX.OpenCvSharp.Dnn.Net", " FinalizeNetwork("),
+        48 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetTracingMode("),
+        49 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetTracingMode("),
+        50 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetProfilingMode("),
+        51 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetProfilingMode("),
+        52 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.DnnModelFormat ModelFormat"),
+        53 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetInput("),
+        54 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetParam(System.Int32"),
+        55 => Q("JYPPX.OpenCvSharp.Dnn.Net", " SetParam(System.String"),
+        56 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetParam(System.Int32"),
+        57 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetParam(System.String"),
+        58 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.Int32[] GetUnconnectedOutLayers("),
+        59 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.String[] GetUnconnectedOutLayersNames("),
+        60 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.DnnLayerShapes GetLayerShapes("),
+        61 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetFLOPS("),
+        62 => Q("JYPPX.OpenCvSharp.Dnn.Net", "System.String[] GetLayerTypes("),
+        63 => Q("JYPPX.OpenCvSharp.Dnn.Net", " GetLayersCountByType("),
+        64 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.DnnMemoryConsumption GetMemoryConsumption("),
+        65 => Q("JYPPX.OpenCvSharp.Dnn.Net", " EnableFusion("),
+        66 => Q("JYPPX.OpenCvSharp.Dnn.Net", " EnableWinograd("),
+        67 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.DnnPerfProfile GetPerfProfile("),
+        68 => Q("JYPPX.OpenCvSharp.Dnn.Net", " EnableKvCache("),
+        69 => Q("JYPPX.OpenCvSharp.Dnn.Net", " DisableKvCache("),
+        70 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ResetKvCache("),
+        71 => Q("JYPPX.OpenCvSharp.Dnn.Net", "JYPPX.OpenCvSharp.Dnn.DnnDetailedPerfProfile GetDetailedPerfProfile("),
+        74 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromTensorflow(System.String"),
+        75 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromTensorflow(System.Byte[]"),
+        76 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromTFLite(System.String"),
+        77 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromTFLite(System.Byte[]"),
+        78 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNet(System.String model"),
+        79 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNet(System.String framework,System.Byte[]"),
+        82 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromOnnx(System.String"),
+        83 => Q("JYPPX.OpenCvSharp.Dnn.Net", " ReadNetFromOnnx(System.Byte[]"),
+        84 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " ReadTensorFromOnnx("),
+        85 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " BlobFromImage(", "scaleFactor"),
+        86 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " BlobFromImages(", "scaleFactor"),
+        89 => Q("JYPPX.OpenCvSharp.Dnn.Image2BlobParams", ".ctor()"),
+        90 => Q("JYPPX.OpenCvSharp.Dnn.Image2BlobParams", ".ctor(", "JYPPX.OpenCvSharp.Core.Scalar scaleFactor"),
+        91 => Q("JYPPX.OpenCvSharp.Dnn.Image2BlobParams", " BlobRectToImageRect("),
+        92 => Q("JYPPX.OpenCvSharp.Dnn.Image2BlobParams", " BlobRectsToImageRects("),
+        93 or 94 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " BlobFromImage(", "JYPPX.OpenCvSharp.Dnn.Image2BlobParams"),
+        95 or 96 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " BlobFromImages(", "JYPPX.OpenCvSharp.Dnn.Image2BlobParams"),
+        97 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " ImagesFromBlob("),
         _ => Array.Empty<ManagedQuery>()
     };
 
@@ -539,7 +539,7 @@ internal static class Program
             Require(Classifications.Contains(row.Classification, Ordinal), "Unknown DNN classification: " + row.Classification);
             Require(IsSorted(row.NativeEntrypoints) && IsSorted(row.ManagedMembers), "DNN evidence is nondeterministically ordered: " + row.Identity);
             Require(row.NativeEntrypoints.All(value => !Regex.IsMatch(value, "^jyppx_ocv[0-9]+_", RegexOptions.CultureInvariant)), "Fixed-major DNN native evidence is forbidden: " + row.Identity);
-            Require(row.ManagedMembers.All(value => !Regex.IsMatch(value, "OpenCvSharp[0-9]+", RegexOptions.CultureInvariant)), "Fixed-major DNN managed evidence is forbidden: " + row.Identity);
+            Require(row.ManagedMembers.All(value => !Regex.IsMatch(value, "JYPPX.OpenCvSharp[0-9]+", RegexOptions.CultureInvariant)), "Fixed-major DNN managed evidence is forbidden: " + row.Identity);
             Require(row.NativeEntrypoints.All(nativeSet.Contains), "DNN classification references false native evidence: " + row.Identity);
             Require(row.ManagedMembers.All(managedSet.Contains), "DNN classification references false managed evidence: " + row.Identity);
             if (row.Classification == "implemented")
@@ -569,7 +569,7 @@ internal static class Program
             (Id: "owned-layer-reference", Rationale: "Expose ref-counted Layer lookup and output-name indexing without leaking cv::Ptr or parent Net lifetime.", Ordinals: new HashSet<int>(new[] { 17, 20, 33, 34 })),
             (Id: "image-to-blob-parameter-workflow", Rationale: "Preserve legacy blob helpers and complete Image2BlobParams layout, padding, border, and rectangle projection semantics.", Ordinals: new HashSet<int>(Enumerable.Range(85, 13)))
         };
-        int memberAdditions = managed.Count(value => value.StartsWith("MEMBER|OpenCvSharp.Dnn.", StringComparison.Ordinal)) - 69;
+        int memberAdditions = managed.Count(value => value.StartsWith("MEMBER|JYPPX.OpenCvSharp.Dnn.", StringComparison.Ordinal)) - 69;
         Require(memberAdditions >= 0, "DNN managed member baseline regressed below the pre-round 69-member surface.");
         var result = new FamilyDocument { ManagedPublicMemberAdditionCount = memberAdditions };
         foreach (var definition in definitions)
@@ -645,9 +645,9 @@ internal static class Program
         Reject("parser drift", "generator identity", () => { var value = CopyR(); value.Generator = "other"; Validate(value, classifications, options, native, managed, false); });
         Reject("stale source hash", "SHA256", () => { var value = CopyR(); value.HeaderSha256 = new string('0', 64); Validate(value, classifications, options, native, managed, true); });
         Reject("false native evidence", "false native", () => { var value = CopyC(); var row = value.Declarations.First(item => item.Classification == "implemented"); row.NativeEntrypoints[0] = "jyppx_ocv_dnn_false"; Validate(raw, value, options, native, managed, false); });
-        Reject("false managed evidence", "false managed", () => { var value = CopyC(); var row = value.Declarations.First(item => item.Classification == "implemented"); row.ManagedMembers[0] = "MEMBER|OpenCvSharp.Dnn.False|method|public|System.Void False()"; Validate(raw, value, options, native, managed, false); });
+        Reject("false managed evidence", "false managed", () => { var value = CopyC(); var row = value.Declarations.First(item => item.Classification == "implemented"); row.ManagedMembers[0] = "MEMBER|JYPPX.OpenCvSharp.Dnn.False|method|public|System.Void False()"; Validate(raw, value, options, native, managed, false); });
         Reject("undocumented omission", "documented reason", () => { var value = CopyC(); var row = value.Declarations.First(item => item.Classification == "intentionally-omitted"); row.Reason = ""; Validate(raw, value, options, native, managed, false); });
-        Reject("fixed major", "Fixed-major", () => { var value = CopyC(); var row = value.Declarations.First(item => item.ManagedMembers.Count > 0); row.ManagedMembers[0] = row.ManagedMembers[0].Replace("OpenCvSharp", "OpenCvSharp5", StringComparison.Ordinal); Validate(raw, value, options, native, managed, false); });
+        Reject("fixed major", "Fixed-major", () => { var value = CopyC(); var row = value.Declarations.First(item => item.ManagedMembers.Count > 0); row.ManagedMembers[0] = row.ManagedMembers[0].Replace("JYPPX.OpenCvSharp", "JYPPX.OpenCvSharp5", StringComparison.Ordinal); Validate(raw, value, options, native, managed, false); });
         Reject("conditional misclassification", "build condition", () => { var value = CopyC(); var row = value.Declarations[176]; row.BuildCondition = "unconditional-parser-surface"; Validate(raw, value, options, native, managed, false); });
         Reject("evidence order", "nondeterministically", () => { var value = CopyC(); var row = value.Declarations.First(item => item.NativeEntrypoints.Count > 1); row.NativeEntrypoints.Reverse(); Validate(raw, value, options, native, managed, false); });
         Reject("stale mapping hash", "stale", () => Require(summary.MappingSha256 == new string('0', 64), "DNN mapping SHA256 is stale."));

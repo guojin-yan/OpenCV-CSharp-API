@@ -12,7 +12,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UseLocalPackages Condition="'$(UseLocalPackages)' == ''">false</UseLocalPackages>
-    <AndroidRuntimePackageId Condition="'$(AndroidRuntimePackageId)' == ''">JYPPX.OpenCV.runtime.android-arm64.mini</AndroidRuntimePackageId>
+    <AndroidRuntimePackageId Condition="'$(AndroidRuntimePackageId)' == ''">JYPPX.OpenCV.runtime.android-x64.mini</AndroidRuntimePackageId>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(UseLocalPackages)' != 'true'">

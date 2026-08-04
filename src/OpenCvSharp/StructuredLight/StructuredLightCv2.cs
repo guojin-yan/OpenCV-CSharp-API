@@ -1,4 +1,4 @@
-namespace OpenCvSharp.StructuredLight
+namespace JYPPX.OpenCvSharp.StructuredLight
 {
     /// <summary>
     /// Provides OpenCV structured_light factory helpers.

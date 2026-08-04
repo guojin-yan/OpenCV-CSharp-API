@@ -1,8 +1,8 @@
 # ImgProc Filter Transform Guide / ImgProc 滤波与变换指南
 
-This guide explains the current filtering, derivative, pyramid, warp, and remap APIs in `OpenCvSharp.ImgProc.Cv2`.
+This guide explains the current filtering, derivative, pyramid, warp, and remap APIs in `JYPPX.OpenCvSharp.ImgProc.Cv2`.
 
-本文说明 `OpenCvSharp.ImgProc.Cv2` 当前的滤波、导数、金字塔、几何变换和重映射 API。
+本文说明 `JYPPX.OpenCvSharp.ImgProc.Cv2` 当前的滤波、导数、金字塔、几何变换和重映射 API。
 
 ## Filtering / 滤波
 
@@ -11,9 +11,9 @@ Most filtering APIs follow the OpenCV C++ shape: the caller provides `src` and `
 大多数滤波 API 保持 OpenCV C++ 的调用形态：调用者传入 `src` 和 `dst`，OpenCV 会按需要分配或重塑目标矩阵。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using ImgProcCv2 = OpenCvSharp.ImgProc.Cv2;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using ImgProcCv2 = JYPPX.OpenCvSharp.ImgProc.Cv2;
 
 namespace Demo
 {

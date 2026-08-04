@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Tracking.Legacy
+namespace JYPPX.OpenCvSharp.Tracking.Legacy
 {
     /// <summary>OpenCV legacy CSRT tracker.</summary>
     public sealed class TrackerCSRT : LegacyTracker
@@ -21,9 +21,9 @@ namespace OpenCvSharp.Tracking.Legacy
         }
 
         /// <summary>Creates a legacy CSRT tracker with explicit copied parameters.</summary>
-        public static TrackerCSRT Create(OpenCvSharp.Tracking.TrackerCSRTParams parameters)
+        public static TrackerCSRT Create(JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams parameters)
         {
-            byte[] windowFunction = OpenCvSharp.Tracking.TrackerCSRTParams.ToNullTerminatedUtf8(parameters.WindowFunction);
+            byte[] windowFunction = JYPPX.OpenCvSharp.Tracking.TrackerCSRTParams.ToNullTerminatedUtf8(parameters.WindowFunction);
             GCHandle pinned = GCHandle.Alloc(windowFunction, GCHandleType.Pinned);
             try
             {

@@ -1,8 +1,8 @@
 # Plot Guide / Plot 指南
 
-`OpenCvSharp.Plot` wraps the optional contrib `plot` module for rendering small two-dimensional plots into `Mat` images.
+`JYPPX.OpenCvSharp.Plot` wraps the optional contrib `plot` module for rendering small two-dimensional plots into `Mat` images.
 
-`OpenCvSharp.Plot` 封装可选 contrib `plot` 模块，用于把二维曲线图渲染为 `Mat` 图像。
+`JYPPX.OpenCvSharp.Plot` 封装可选 contrib `plot` 模块，用于把二维曲线图渲染为 `Mat` 图像。
 
 ## Scope / 范围
 
@@ -31,8 +31,8 @@ The first batch accepts numeric `Mat` vectors. OpenCV 5.0.0 `Plot2d` expects `CV
 第一批接口接受数值 `Mat` 向量。OpenCV 5.0.0 `Plot2d` 期望 `CV_64FC1` 输入向量，且其 `setPlotSize` 实现会把较小请求夹到至少 400 x 300 像素。封装层将 OpenCV `cv::plot::Plot2d` 对象保持在 opaque native handle 后面；输入与输出矩阵仍由调用方持有。
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Plot;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Plot;
 
 using Mat y = new Mat(5, 1, MatType.CV_64FC1);
 y.CopyFrom(new double[] { 0.0, 1.0, 0.0, 2.0, 1.5 });

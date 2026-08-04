@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using OpenCvSharp.Core;
-using OpenCvSharp.ObjDetect;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ObjDetect;
 
-namespace OpenCvSharp.Tests.ObjDetect
+namespace JYPPX.OpenCvSharp.Tests.ObjDetect
 {
     public sealed class CharucoMccTests
     {

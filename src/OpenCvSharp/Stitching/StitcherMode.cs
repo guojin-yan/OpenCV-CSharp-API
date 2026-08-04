@@ -1,4 +1,4 @@
-namespace OpenCvSharp.Stitching
+namespace JYPPX.OpenCvSharp.Stitching
 {
     /// <summary>
     /// Stitcher operating mode compatible with OpenCV <c>cv::Stitcher::Mode</c>.

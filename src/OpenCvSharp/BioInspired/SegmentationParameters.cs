@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.BioInspired
+namespace JYPPX.OpenCvSharp.BioInspired
 {
     /// <summary>
     /// Parameters for transient areas segmentation.

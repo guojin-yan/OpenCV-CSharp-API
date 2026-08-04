@@ -1,4 +1,4 @@
-namespace OpenCvSharp.SurfaceMatching
+namespace JYPPX.OpenCvSharp.SurfaceMatching
 {
     /// <summary>
     /// Factory helpers for the OpenCV surface_matching module.

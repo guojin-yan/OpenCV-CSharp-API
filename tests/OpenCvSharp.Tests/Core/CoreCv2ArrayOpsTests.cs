@@ -1,7 +1,7 @@
 using System;
-using OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Core;
 
-namespace OpenCvSharp.Tests.Core
+namespace JYPPX.OpenCvSharp.Tests.Core
 {
     public class CoreCv2ArrayOpsTests
     {
@@ -161,7 +161,7 @@ namespace OpenCvSharp.Tests.Core
         public void TraceRejectsMultiDimensionalSourceContract()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             {
                 Assert.Equal(4, blob.Dims);
                 ArgumentException exception = Assert.Throws<ArgumentException>(() => Cv2.Trace(blob));
@@ -777,7 +777,7 @@ namespace OpenCvSharp.Tests.Core
         public void RepeatRejectsSourceWithMoreThanTwoDimensions()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var dst = new Mat())
             {
                 Assert.Equal(4, blob.Dims);
@@ -793,7 +793,7 @@ namespace OpenCvSharp.Tests.Core
         public void FlipRejectsSourceWithMoreThanTwoDimensions()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var dst = new Mat())
             {
                 Assert.Equal(4, blob.Dims);
@@ -809,7 +809,7 @@ namespace OpenCvSharp.Tests.Core
         public void RotateRejectsSourceWithMoreThanTwoDimensions()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var dst = new Mat())
             {
                 Assert.Equal(4, blob.Dims);
@@ -825,7 +825,7 @@ namespace OpenCvSharp.Tests.Core
         public void TransposeRejectsSourceWithMoreThanTwoDimensions()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var dst = new Mat())
             {
                 Assert.Equal(4, blob.Dims);
@@ -841,7 +841,7 @@ namespace OpenCvSharp.Tests.Core
         public void ReduceRejectsInvalidSourceAndDtypeContract()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             using (var threeChannel = new Mat(2, 2, MatType.CV_8UC3))
             using (var dst = new Mat())
             {
@@ -1279,7 +1279,7 @@ namespace OpenCvSharp.Tests.Core
         {
             using (var nonSquare = new Mat(2, 3, MatType.CV_64FC1))
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             {
                 Assert.Equal(4, blob.Dims);
 
@@ -1309,7 +1309,7 @@ namespace OpenCvSharp.Tests.Core
         public void SetIdentityRejectsMatrixWithMoreThanTwoDimensions()
         {
             using (var image = new Mat(4, 4, MatType.CV_8UC3, new Scalar(1, 2, 3)))
-            using (Mat blob = OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
+            using (Mat blob = JYPPX.OpenCvSharp.Dnn.Cv2.BlobFromImage(image, 1.0, new Size(4, 4)))
             {
                 Assert.Equal(4, blob.Dims);
 

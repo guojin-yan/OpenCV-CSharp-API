@@ -1,8 +1,8 @@
 using System;
-using OpenCvSharp.Core;
-using OpenCvSharp.Internal.Interop;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Internal.Interop;
 
-namespace OpenCvSharp.Quality
+namespace JYPPX.OpenCvSharp.Quality
 {
     /// <summary>
     /// Peak signal-to-noise ratio quality metric.

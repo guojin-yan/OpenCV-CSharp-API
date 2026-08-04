@@ -1,4 +1,4 @@
-namespace OpenCvSharp.XPhoto
+namespace JYPPX.OpenCvSharp.XPhoto
 {
     /// <summary>
     /// Transform types supported by xphoto BM3D.

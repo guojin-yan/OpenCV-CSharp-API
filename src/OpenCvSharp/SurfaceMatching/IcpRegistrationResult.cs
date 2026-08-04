@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace OpenCvSharp.SurfaceMatching
+namespace JYPPX.OpenCvSharp.SurfaceMatching
 {
     /// <summary>
     /// Result returned by ICP model-to-scene registration.

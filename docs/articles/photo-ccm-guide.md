@@ -1,14 +1,14 @@
 # Photo Color Correction Model Guide
 
-`OpenCvSharp.Photo.ColorCorrectionModel` wraps OpenCV 5.0.0 `cv::ccm::ColorCorrectionModel`. The managed object owns an opaque native handle, and every matrix returned by `Compute`, `GetColorCorrectionMatrix`, `GetSrcLinearRGB`, `GetRefLinearRGB`, `GetMask`, `GetWeights`, or `CorrectImage` is independently owned by the caller.
+`JYPPX.OpenCvSharp.Photo.ColorCorrectionModel` wraps OpenCV 5.0.0 `cv::ccm::ColorCorrectionModel`. The managed object owns an opaque native handle, and every matrix returned by `Compute`, `GetColorCorrectionMatrix`, `GetSrcLinearRGB`, `GetRefLinearRGB`, `GetMask`, `GetWeights`, or `CorrectImage` is independently owned by the caller.
 
 ## Construction
 
 Use one of four factories:
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.Photo;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.Photo;
 
 using Mat measured = new Mat(24, 1, MatType.CV_64FC3);
 // Fill measured with RGB patch values in [0, 1], in checker order.
@@ -111,6 +111,6 @@ Persistence stores the fitted CCM and correction configuration, but not original
 
 ## Runtime Boundary
 
-CCM is part of the main CPU `opencv_photo` module and is included in the full runtime profile. Its native wrapper source and exports are intentionally excluded from the mini profile. Contrib `OpenCvSharp.XPhoto` and CUDA Photo APIs are separate surfaces.
+CCM is part of the main CPU `opencv_photo` module and is included in the full runtime profile. Its native wrapper source and exports are intentionally excluded from the mini profile. Contrib `JYPPX.OpenCvSharp.XPhoto` and CUDA Photo APIs are separate surfaces.
 
 The remaining main CPU Photo gaps are TV-L1 denoising, chromatic-aberration correction/loading, and `IntelligentScissorsMB`. No repository-wide upstream parity claim is implied.

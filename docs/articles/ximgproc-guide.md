@@ -1,8 +1,8 @@
 # XImgProc Guide / XImgProc 指南
 
-`OpenCvSharp.XImgProc` wraps optional contrib `ximgproc` extended image-processing batches from the local OpenCV 5.0.0 tree.
+`JYPPX.OpenCvSharp.XImgProc` wraps optional contrib `ximgproc` extended image-processing batches from the local OpenCV 5.0.0 tree.
 
-`OpenCvSharp.XImgProc` 封装本地 OpenCV 5.0.0 contrib `ximgproc` 的扩展图像处理能力批次。
+`JYPPX.OpenCvSharp.XImgProc` 封装本地 OpenCV 5.0.0 contrib `ximgproc` 的扩展图像处理能力批次。
 
 ## Scope / 范围
 
@@ -50,9 +50,9 @@
 
 `ximgproc` 是可选 OpenCV contrib 模块。构建该模块时，runtime staging 应包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_ximgproc500.dll`。如果缺少该 DLL，managed API 形状仍保持稳定，调用会报告 `NOT_LINKED`。
 
-The same DLL can also be used by related OptFlow algorithms, but `OpenCvSharp.XImgProc` is the first-class public API surface for extended image processing.
+The same DLL can also be used by related OptFlow algorithms, but `JYPPX.OpenCvSharp.XImgProc` is the first-class public API surface for extended image processing.
 
-同一个 DLL 也可被相关 OptFlow 算法复用，但 `OpenCvSharp.XImgProc` 是扩展图像处理的一等公开 API 接口面。
+同一个 DLL 也可被相关 OptFlow 算法复用，但 `JYPPX.OpenCvSharp.XImgProc` 是扩展图像处理的一等公开 API 接口面。
 
 ## Input Notes / 输入说明
 
@@ -75,16 +75,14 @@ $env:OPENCV_CSHARP_NATIVE_SMOKE='1'
 dotnet test .\tests\OpenCvSharp.Tests\OpenCvSharp.Tests.csproj -c Release --filter "FullyQualifiedName~XImgProc"
 ```
 
-The older `OPENCV5SHARP_NATIVE_SMOKE=1` name remains accepted only as an existing-smoke-workflow compatibility alias.
 
-旧的 `OPENCV5SHARP_NATIVE_SMOKE=1` 名称仍仅作为既有 smoke workflow 的兼容别名使用。
 
 ## Example / 示例
 
 ```csharp
-using OpenCvSharp.Core;
-using OpenCvSharp.ImgProc;
-using OpenCvSharp.XImgProc;
+using JYPPX.OpenCvSharp.Core;
+using JYPPX.OpenCvSharp.ImgProc;
+using JYPPX.OpenCvSharp.XImgProc;
 
 namespace XImgProcExample
 {

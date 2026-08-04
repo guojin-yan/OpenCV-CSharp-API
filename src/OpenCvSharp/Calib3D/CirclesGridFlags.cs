@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenCvSharp.Calib3D
+namespace JYPPX.OpenCvSharp.Calib3D
 {
     /// <summary>
     /// Circle-grid calibration pattern detection flags.
