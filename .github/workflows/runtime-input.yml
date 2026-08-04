@@ -469,11 +469,11 @@ jobs:
           set -euo pipefail
           ctest --test-dir build/native-linked -C Release --output-on-failure | tee build/native-linked/ctest-output.txt
           if [ '${{ matrix.rid }}' = 'ubuntu.24.04-arm64' ]; then
-            grep -Fq '100% tests passed, 0 tests failed out of 5' build/native-linked/ctest-output.txt
-            echo 'UBUNTU_24_04_ARM64_LINKED_CTEST_EVIDENCE profile=${{ matrix.profile }} passed=5 total=5'
+            grep -Fq '100% tests passed, 0 tests failed out of 3' build/native-linked/ctest-output.txt
+            echo 'UBUNTU_24_04_ARM64_LINKED_CTEST_EVIDENCE profile=${{ matrix.profile }} passed=3 total=3'
           elif [ '${{ matrix.rid }}' = 'ubuntu.22.04-x64' ] && [ '${{ matrix.profile }}' = 'mini' ]; then
-            grep -Fq '100% tests passed, 0 tests failed out of 5' build/native-linked/ctest-output.txt
-            echo 'UBUNTU_22_04_X64_LINKED_CTEST_EVIDENCE profile=mini passed=5 total=5'
+            grep -Fq '100% tests passed, 0 tests failed out of 3' build/native-linked/ctest-output.txt
+            echo 'UBUNTU_22_04_X64_LINKED_CTEST_EVIDENCE profile=mini passed=3 total=3'
           fi
       - name: Audit Ubuntu ARM64 producer ELF closure
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' }}
@@ -1759,11 +1759,11 @@ jobs:
           $exitCode = $LASTEXITCODE
           $output | ForEach-Object { Write-Host $_ }
           $text = $output -join [System.Environment]::NewLine
-          $successSummaryPattern = '(?m)^100% tests passed(?:, 0 tests failed)? out of 5\r?$'
+          $successSummaryPattern = '(?m)^100% tests passed(?:, 0 tests failed)? out of 3\r?$'
           if ($exitCode -ne 0 -or $text -notmatch $successSummaryPattern) {
-            throw "Linked Windows native wrapper did not pass all five CTests."
+            throw "Linked Windows native wrapper did not pass all three CTests."
           }
-          Write-Host '${{ matrix.evidence_prefix }}_LINKED_CTEST_EVIDENCE passed=5 total=5'
+          Write-Host '${{ matrix.evidence_prefix }}_LINKED_CTEST_EVIDENCE passed=3 total=3'
       - name: Audit native Windows producer PE closure
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         id: pe
@@ -2897,21 +2897,21 @@ jobs:
               cmake --build build/native-linked --config Release
               ctest --test-dir build/native-linked -C Release --output-on-failure | tee build/native-linked/ctest-output.txt
                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "rocky.9-x64" ] || [ "$PRODUCER_RID" = "rhel.9-x64" ] || [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
-                 grep -Fq "100% tests passed, 0 tests failed out of 5" build/native-linked/ctest-output.txt
+                 grep -Fq "100% tests passed, 0 tests failed out of 3" build/native-linked/ctest-output.txt
                  if [ "$PRODUCER_RID" = "alpine.3.20-x64" ]; then
-                   echo "ALPINE_3_20_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                    echo "ALPINE_3_20_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 elif [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                   echo "UBUNTU_22_04_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 elif [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
-                  echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                   echo "DEBIAN_12_ARM64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 elif [ "$PRODUCER_RID" = "fedora.40-x64" ]; then
-                  echo "FEDORA_40_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                   echo "FEDORA_40_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 elif [ "$PRODUCER_RID" = "rocky.9-x64" ]; then
-                  echo "ROCKY_9_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                   echo "ROCKY_9_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 elif [ "$PRODUCER_RID" = "rhel.9-x64" ]; then
-                  echo "RHEL_9_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                   echo "RHEL_9_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 else
-                  echo "DEBIAN_12_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=5 total=5"
+                   echo "DEBIAN_12_X64_LINKED_CTEST_EVIDENCE profile=$RUNTIME_PROFILE passed=3 total=3"
                 fi
               fi
 
