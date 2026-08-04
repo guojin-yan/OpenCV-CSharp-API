@@ -503,7 +503,6 @@ foreach ($ridSpec in @($matrix.rids)) {
             ModuleCount = $moduleEntries.Count
             ExpectedModuleCount = $expectedModuleFileCount
             HasPrimaryLoader = $hasPrimaryLoader
-            HasCompatibilityLoader = $hasCompatibilityLoader
             HasProvenanceManifest = $null -ne $manifest
         })
     }
