@@ -233,6 +233,31 @@ function Test-ContainsText {
     return $Text.IndexOf($Needle, [System.StringComparison]::Ordinal) -ge 0
 }
 
+function Test-PackedRootFileItem {
+    param(
+        [Parameter(Mandatory = $true)]
+        [xml]$Project,
+        [Parameter(Mandatory = $true)]
+        [string]$Include
+    )
+
+    foreach ($item in @($Project.SelectNodes("/*[local-name()='Project']/*[local-name()='ItemGroup']/*[local-name()='None']"))) {
+        $includeAttribute = $item.Attributes['Include']
+        $packAttribute = $item.Attributes['Pack']
+        $packagePathAttribute = $item.Attributes['PackagePath']
+        if ($null -ne $includeAttribute -and
+            $includeAttribute.Value -ceq $Include -and
+            $null -ne $packAttribute -and
+            $packAttribute.Value -ieq 'true' -and
+            $null -ne $packagePathAttribute -and
+            $packagePathAttribute.Value -ceq '\') {
+            return $true
+        }
+    }
+
+    return $false
+}
+
 $directoryBuildProps = Read-XmlProject -RelativePath "Directory.Build.props"
 $centralProperties = Get-DirectoryBuildProperties -Project $directoryBuildProps
 $primaryManagedPackageId = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpManagedPackageId"
@@ -241,8 +266,22 @@ $primaryManagedRootNamespace = Get-RequiredDirectoryBuildProperty $centralProper
 $runtimePackagePrefix = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRuntimePackageIdPrefix"
 $primaryNativeLoader = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCurrentNativeLibraryName"
 $projectLicenseExpression = Get-RequiredDirectoryBuildProperty $centralProperties "PackageLicenseExpression"
+$logoPath = Join-Path $repo "nuget/logo.jpg"
 
 $violations = [System.Collections.Generic.List[object]]::new()
+
+if (-not (Test-Path -LiteralPath $logoPath -PathType Leaf)) {
+    Add-Violation $violations "nuget/logo.jpg" "NuGet package logo must be present"
+}
+else {
+    $logoBytes = [System.IO.File]::ReadAllBytes($logoPath)
+    if ($logoBytes.Length -le 0 -or $logoBytes.Length -gt 1048576) {
+        Add-Violation $violations "nuget/logo.jpg" "NuGet package logo must be a non-empty file no larger than 1 MiB"
+    }
+    elseif ($logoBytes.Length -lt 2 -or $logoBytes[0] -ne 0xFF -or $logoBytes[1] -ne 0xD8) {
+        Add-Violation $violations "nuget/logo.jpg" "NuGet package logo must use the JPEG file format"
+    }
+}
 
 $acceptedPackageVersions = @(
     [pscustomobject]@{ Version = "5.0.0.0"; OpenCvVersion = "5.0.0"; Revision = 0; NuGetVersion = "5.0.0"; Prerelease = $false },
@@ -301,6 +340,8 @@ foreach ($fixture in @(
 
 $managedProjectPath = "src/OpenCvSharp/OpenCvSharp.csproj"
 $managedProject = Read-XmlProject -RelativePath $managedProjectPath
+$managedPackageIconValues = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageIcon") -Properties $centralProperties)
+$managedPackageReadmeValues = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageReadmeFile") -Properties $centralProperties)
 $managedPackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "PackageId") -Properties $centralProperties)
 $managedAssemblyNames = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "AssemblyName") -Properties $centralProperties)
 $managedRootNamespaces = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $managedProject -Name "RootNamespace") -Properties $centralProperties)
@@ -322,6 +363,19 @@ if ($managedRootNamespaces.Count -ne 1 -or $managedRootNamespaces[0] -ne $primar
 
 if ($projectLicenseExpression -cne "Apache-2.0" -or $managedLicenseExpressions.Count -ne 1 -or $managedLicenseExpressions[0] -cne "Apache-2.0") {
     Add-Violation $violations $managedProjectPath "Project and managed package license expressions must be exactly Apache-2.0"
+}
+
+if ($managedPackageIconValues.Count -ne 1 -or $managedPackageIconValues[0] -cne "logo.jpg") {
+    Add-Violation $violations $managedProjectPath "Managed package PackageIcon must be logo.jpg"
+}
+
+if ($managedPackageReadmeValues.Count -ne 1 -or $managedPackageReadmeValues[0] -cne "README.md") {
+    Add-Violation $violations $managedProjectPath "Managed package PackageReadmeFile must be README.md"
+}
+
+if (-not (Test-PackedRootFileItem -Project $managedProject -Include "..\..\README.md") -or
+    -not (Test-PackedRootFileItem -Project $managedProject -Include "..\..\nuget\logo.jpg")) {
+    Add-Violation $violations $managedProjectPath "Managed package must pack the repository README.md and nuget/logo.jpg at the package root"
 }
 
 if ($managedVersions.Count -ne 1 -or -not (Test-FourPartVersion -Value $managedVersions[0])) {
@@ -349,6 +403,8 @@ if ($runtimeProjectFiles.Count -eq 0) {
 foreach ($runtimeProjectFile in $runtimeProjectFiles) {
     $relativePath = Get-RepositoryRelativePath -Path $runtimeProjectFile.FullName
     [xml]$runtimeProject = [System.IO.File]::ReadAllText($runtimeProjectFile.FullName)
+    $runtimePackageIconValues = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageIcon") -Properties $centralProperties)
+    $runtimePackageReadmeValues = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageReadmeFile") -Properties $centralProperties)
     $runtimePackageIds = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageId") -Properties $centralProperties)
     $runtimeVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "Version") -Properties $centralProperties)
     $runtimePackageVersions = @(Resolve-ProjectPropertyValues -Values @(Get-ProjectPropertyValues -Project $runtimeProject -Name "PackageVersion") -Properties $centralProperties)
@@ -382,6 +438,19 @@ foreach ($runtimeProjectFile in $runtimeProjectFiles) {
 
     if ($runtimeLicenseExpressions.Count -ne 1 -or $runtimeLicenseExpressions[0] -cne "Apache-2.0") {
         Add-Violation $violations $relativePath "Runtime package license expression must be exactly Apache-2.0"
+    }
+
+    if ($runtimePackageIconValues.Count -ne 1 -or $runtimePackageIconValues[0] -cne "logo.jpg") {
+        Add-Violation $violations $relativePath "Runtime package PackageIcon must be logo.jpg"
+    }
+
+    if ($runtimePackageReadmeValues.Count -ne 1 -or $runtimePackageReadmeValues[0] -cne "README.md") {
+        Add-Violation $violations $relativePath "Runtime package PackageReadmeFile must be README.md"
+    }
+
+    if (-not (Test-PackedRootFileItem -Project $runtimeProject -Include "../../../README.md") -or
+        -not (Test-PackedRootFileItem -Project $runtimeProject -Include "../../../nuget/logo.jpg")) {
+        Add-Violation $violations $relativePath "Runtime package must pack the repository README.md and nuget/logo.jpg at the package root"
     }
 }
 

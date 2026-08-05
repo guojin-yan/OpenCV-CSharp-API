@@ -1,10 +1,6 @@
 name: build-managed
 
 on:
-  push:
-    branches: [main, opencv5.x]
-  pull_request:
-    branches: [main, opencv5.x]
   workflow_dispatch:
 
 permissions:

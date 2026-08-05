@@ -204,6 +204,14 @@ foreach ($workflowPath in @(
     if ($conditionCount -ne 1) {
         Add-Violation -Violations $violations -Path $workflowPath -Issue "Daily compilation must run on the mirror while authoritative compilation requires explicit dispatch" -Text $dailyCompileCondition
     }
+
+    if ([regex]::IsMatch($workflowText, '(?m)^  (?:push|pull_request):')) {
+        Add-Violation -Violations $violations -Path $workflowPath -Issue "Daily compilation workflows must not consume Actions quota automatically on push or pull request"
+    }
+
+    if (-not [regex]::IsMatch($workflowText, '(?m)^  workflow_dispatch:\s*$')) {
+        Add-Violation -Violations $violations -Path $workflowPath -Issue "Daily compilation workflows must remain available for explicit mirror dispatch"
+    }
 }
 
 $docsWorkflowText = Normalize-CiText -Text (Read-RequiredText -RelativePath ".github/workflows/docs.yml")

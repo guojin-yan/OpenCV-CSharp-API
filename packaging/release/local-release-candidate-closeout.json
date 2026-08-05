@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/30240a20593ce572",
-  "SourceIdentity": "sha256:30240a20593ce572fa739a7b2ccd1d47c3f18f5772d9f25d2845fe052a4d1787",
+  "CandidateId": "local-closeout/sha256/a95747e41f47b8af",
+  "SourceIdentity": "sha256:a95747e41f47b8af849452d78271d86af0c4d3f2fdd1414bff60159767725ae0",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1556,
-    "Sha256": "30240a20593ce572fa739a7b2ccd1d47c3f18f5772d9f25d2845fe052a4d1787",
+    "FileCount": 1557,
+    "Sha256": "a95747e41f47b8af849452d78271d86af0c4d3f2fdd1414bff60159767725ae0",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1015,6 +1015,11 @@
       "Length": 12379
     },
     {
+      "Path": "nuget/logo.jpg",
+      "Sha256": "f85de97828d9f152903c8b90e8ee89aa1575ff8d0ef1c3704526e27dfe0d54d0",
+      "Length": 77499
+    },
+    {
       "Path": "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
       "Sha256": "04777f42adbf8c73f311403b78ab99bfb423cc4d22c9eaf85d05e416e89f0653",
       "Length": 1510
@@ -1141,8 +1146,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "a46b4734b1cddc577b38a036abcac91f6f0dbde4a41d42cd9c5fa5b004bc5526",
-      "Length": 60376
+      "Sha256": "a204ebac9081ea95df11e41152e188b802aac60f85d3eb19a97d7a09bfa67bbc",
+      "Length": 60636
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1175,6 +1180,11 @@
       "Length": 1894
     },
     {
+      "Path": "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
+      "Sha256": "1028a61e6d54877fd8ee9ab418ddd2f606e450a927e5dc08048039acf0091840",
+      "Length": 26899
+    },
+    {
       "Path": "scripts/Test-HighGuiUpstreamMap.ps1",
       "Sha256": "4ec0c39edade9f135303d1b7d149aad8a83a33dc573d2860d67a4a9106a085de",
       "Length": 2161
@@ -1188,6 +1198,11 @@
       "Path": "scripts/Test-ImgProcUpstreamMap.ps1",
       "Sha256": "ce1e1fd97cd3df883cd7feb120d1254d9f67f9b8f95e0968552af139a54aff07",
       "Length": 1256
+    },
+    {
+      "Path": "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
+      "Sha256": "33acdbc9cf0cd95507f1ccaaf36eea50c0472e85dfe404aeba53b800b980f515",
+      "Length": 18180
     },
     {
       "Path": "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
@@ -1230,14 +1245,19 @@
       "Length": 1996
     },
     {
+      "Path": "scripts/Test-PackageMetadataNeutrality.ps1",
+      "Sha256": "32159bd9f551ef336402cd0d544da924638f3878512ccf4b08752499cd03fdef",
+      "Length": 25519
+    },
+    {
       "Path": "scripts/Test-PhotoUpstreamMap.ps1",
       "Sha256": "2cf1f9cfcc2afe24d3f68d1455cf167b37ad481064858a5e412ddcb74a0b0831",
       "Length": 2126
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "702bd54a92dcc2fa4cf04416e35ff728225fcfffe30fc5223aa186ccfcc489e0",
-      "Length": 55829
+      "Sha256": "951dd7cd29b8cf0d30d64d123727cbfe4c52692b0e7369c780fcf3f04a98e77c",
+      "Length": 56089
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1298,6 +1318,11 @@
       "Path": "scripts/Test-VideoUpstreamMap.ps1",
       "Sha256": "081963cfba9ab5c62a237c18ed8d48e65e8a858e88cb36da5618f79bf7aa3f5d",
       "Length": 2125
+    },
+    {
+      "Path": "scripts/Test-WorkflowInvariantCoverage.ps1",
+      "Sha256": "902eb3c5dbbcf940701dd2ca70b724fee224d0bf3e0161adec0ba4b6c5727427",
+      "Length": 14862
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",

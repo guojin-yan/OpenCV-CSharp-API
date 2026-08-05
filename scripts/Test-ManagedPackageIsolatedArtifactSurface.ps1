@@ -30,6 +30,8 @@ $targetFramework = "net8.0"
 $expectedPackageFileName = "$managedPackageId.$normalizedPackageVersion.nupkg"
 $expectedNuspecEntryName = "$managedPackageId.nuspec"
 $expectedAssemblyEntryName = "lib/$targetFramework/$managedAssemblyFileName"
+$expectedReadmeEntryName = "README.md"
+$expectedLogoEntryName = "logo.jpg"
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
 $fixedMajorPackageIdentityRegex = [System.Text.RegularExpressions.Regex]::new(
     "<id>\s*$fixedMajorManagedIdentity\b|<PackageId>\s*$fixedMajorManagedIdentity\b|<AssemblyName>\s*$fixedMajorManagedIdentity\b|$fixedMajorManagedIdentity\.runtime|opencv" + "5sharp\.runtime",
@@ -136,6 +138,22 @@ function Read-ZipEntryText {
         finally {
             $reader.Dispose()
         }
+    }
+    finally {
+        $stream.Dispose()
+    }
+}
+
+function Get-ZipEntrySha256 {
+    param(
+        [Parameter(Mandatory = $true)]
+        [System.IO.Compression.ZipArchiveEntry]$Entry
+    )
+
+    $stream = $Entry.Open()
+    try {
+        return ([Convert]::ToHexString(
+                [Security.Cryptography.SHA256]::HashData($stream))).ToLowerInvariant()
     }
     finally {
         $stream.Dispose()
@@ -268,6 +286,24 @@ try {
                 }
             }
 
+            if (-not $entriesByName.ContainsKey($expectedLogoEntryName)) {
+                Add-Violation -Violations $violations -Path $packagePath -Issue "Managed package is missing the NuGet logo entry" -Text $expectedLogoEntryName
+            }
+            else {
+                $expectedLogoPath = Join-Path $repo "nuget/logo.jpg"
+                if (-not (Test-Path -LiteralPath $expectedLogoPath -PathType Leaf) -or
+                    (Get-ZipEntrySha256 -Entry $entriesByName[$expectedLogoEntryName]) -cne (Get-FileHash -LiteralPath $expectedLogoPath -Algorithm SHA256).Hash.ToLowerInvariant()) {
+                    Add-Violation -Violations $violations -Path $packagePath -Issue "Managed package logo bytes must match nuget/logo.jpg"
+                }
+            }
+
+            $expectedReadmePath = Join-Path $repo "README.md"
+            if ((Test-Path -LiteralPath $expectedReadmePath -PathType Leaf) -and $entriesByName.ContainsKey($expectedReadmeEntryName)) {
+                if ((Get-ZipEntrySha256 -Entry $entriesByName[$expectedReadmeEntryName]) -cne (Get-FileHash -LiteralPath $expectedReadmePath -Algorithm SHA256).Hash.ToLowerInvariant()) {
+                    Add-Violation -Violations $violations -Path $packagePath -Issue "Managed package README bytes must match the repository root README.md"
+                }
+            }
+
             $managedLibEntries = @(
                 $archive.Entries |
                     Where-Object {
@@ -296,6 +332,15 @@ try {
 
                 if ($nuspecVersion -ne $normalizedPackageVersion) {
                     Add-Violation -Violations $violations -Path $expectedNuspecEntryName -Issue "Nuspec package version must be normalized from four-part package metadata" -Text $nuspecVersion
+                }
+
+                $nuspecIcon = Get-NuspecMetadataValue -Nuspec $nuspecXml -Name "icon"
+                $nuspecReadme = Get-NuspecMetadataValue -Nuspec $nuspecXml -Name "readme"
+                if ($nuspecIcon -cne $expectedLogoEntryName) {
+                    Add-Violation -Violations $violations -Path $expectedNuspecEntryName -Issue "Nuspec icon metadata must point to logo.jpg" -Text $nuspecIcon
+                }
+                if ($nuspecReadme -cne $expectedReadmeEntryName) {
+                    Add-Violation -Violations $violations -Path $expectedNuspecEntryName -Issue "Nuspec readme metadata must point to README.md" -Text $nuspecReadme
                 }
 
                 if ($fixedMajorPackageIdentityRegex.IsMatch($nuspecText)) {
@@ -386,4 +431,4 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Managed package isolated artifact surface guard passed."
 Write-Host "Package artifact checked: $expectedPackageFileName."
-Write-Host "Nuspec, root README, and metadata-only assembly name verified for $targetFramework."
+Write-Host "Nuspec, root README, root logo, and metadata-only assembly name verified for $targetFramework."

@@ -153,12 +153,16 @@ function Read-NupkgInfo {
 
         $idNode = $nuspec.SelectSingleNode('/*[local-name()="package"]/*[local-name()="metadata"]/*[local-name()="id"]')
         $versionNode = $nuspec.SelectSingleNode('/*[local-name()="package"]/*[local-name()="metadata"]/*[local-name()="version"]')
+        $iconNode = $nuspec.SelectSingleNode('/*[local-name()="package"]/*[local-name()="metadata"]/*[local-name()="icon"]')
+        $readmeNode = $nuspec.SelectSingleNode('/*[local-name()="package"]/*[local-name()="metadata"]/*[local-name()="readme"]')
 
         return [pscustomobject]@{
             Path = $Path
             FileName = Split-Path -Leaf $Path
             Id = if ($null -ne $idNode) { $idNode.InnerText } else { "" }
             Version = if ($null -ne $versionNode) { $versionNode.InnerText } else { "" }
+            Icon = if ($null -ne $iconNode) { $iconNode.InnerText } else { "" }
+            Readme = if ($null -ne $readmeNode) { $readmeNode.InnerText } else { "" }
             Entries = $entries
         }
     }
@@ -298,6 +302,16 @@ if (Test-Path -LiteralPath $managedDir -PathType Container) {
             Add-Violation -Violations $violations -Path $managedInfo.FileName -Issue "Managed package version mismatch" -Text $managedInfo.Version
         }
 
+        if ($managedInfo.Icon -cne "logo.jpg" -or $managedInfo.Readme -cne "README.md") {
+            Add-Violation -Violations $violations -Path $managedInfo.FileName -Issue "Managed package nuspec must reference root logo.jpg and README.md" -Text "$($managedInfo.Icon) / $($managedInfo.Readme)"
+        }
+
+        foreach ($brandingEntry in @("README.md", "logo.jpg")) {
+            if ($managedInfo.Entries -notcontains $brandingEntry) {
+                Add-Violation -Violations $violations -Path $managedInfo.FileName -Issue "Managed package is missing required root branding entry" -Text $brandingEntry
+            }
+        }
+
         if ($managedInfo.Entries -notcontains "lib/net8.0/$managedPackageId.dll") {
             Add-Violation -Violations $violations -Path $managedInfo.FileName -Issue "Managed package must include the net8.0 compile asset"
         }
@@ -348,6 +362,16 @@ foreach ($ridSpec in @($matrix.rids)) {
         $expectedModuleCount = @($profileSpec.modules).Count
         $expectedRequiredModules = @($profileSpec.modules | ForEach-Object { [string]$_ })
         $expectedOptionalModules = @($profileSpec.optionalModules | ForEach-Object { [string]$_ })
+
+        if ($info.Icon -cne "logo.jpg" -or $info.Readme -cne "README.md") {
+            Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package nuspec must reference root logo.jpg and README.md" -Text "$($info.Icon) / $($info.Readme)"
+        }
+
+        foreach ($brandingEntry in @("README.md", "logo.jpg")) {
+            if ($info.Entries -notcontains $brandingEntry) {
+                Add-Violation -Violations $violations -Path $info.FileName -Issue "Runtime package is missing required root branding entry" -Text $brandingEntry
+            }
+        }
         $manifestOptionalModulesStaged = @()
         if ($null -ne $manifest -and $null -ne $manifest.PSObject.Properties["OptionalModulesStaged"]) {
             $manifestOptionalModulesStaged = @($manifest.OptionalModulesStaged | ForEach-Object { [string]$_ })
