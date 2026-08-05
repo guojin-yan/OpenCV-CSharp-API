@@ -464,12 +464,12 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2656
+                FunctionCount = 2657
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 526
+                FunctionCount = 527
             }
             NativeManagedBindingMap = [ordered]@{
                 Path = "compatibility/native-managed-binding-map.txt"

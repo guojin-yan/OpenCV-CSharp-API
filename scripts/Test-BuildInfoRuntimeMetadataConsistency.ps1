@@ -251,6 +251,7 @@ $directoryBuildPropsPath = "Directory.Build.props"
 $buildInfoPath = "src/OpenCvSharp/OpenCvSharpBuildInfo.cs"
 $nativeLibraryNamesPath = "src/OpenCvSharp/Internal/Interop/NativeLibraryNames.cs"
 $nativeCMakePath = "src/OpenCvSharp.Native/CMakeLists.txt"
+$nativeVersionHeaderPath = "src/OpenCvSharp.Native/include/open_cv_sharp/version.h"
 $nativeVersionPath = "src/OpenCvSharp.Native/src/version.cpp"
 $stageRuntimePath = "scripts/Stage-Runtime.ps1"
 
@@ -263,24 +264,44 @@ $expectedRuntimePackagePrefix = Get-RequiredDirectoryBuildProperty $centralPrope
 $expectedRootNamespace = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpRootNamespace"
 $expectedOpenCvVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpOpenCvVersion"
 $expectedPackageVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpPackageVersion"
+$expectedNuGetPackageVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpNuGetPackageVersion"
+$expectedNativeAbiVersion = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpNativeAbiVersion"
 $expectedCurrentNativeLibraryName = Get-RequiredDirectoryBuildProperty $centralProperties "OpenCvCSharpCurrentNativeLibraryName"
+$managedProjectText = Read-RequiredText -RelativePath $managedProjectPath
 $buildInfoText = Read-RequiredText -RelativePath $buildInfoPath
 $nativeLibraryNamesText = Read-RequiredText -RelativePath $nativeLibraryNamesPath
 $nativeCMakeText = Read-RequiredText -RelativePath $nativeCMakePath
+$nativeVersionHeaderText = Read-RequiredText -RelativePath $nativeVersionHeaderPath
 $nativeVersionText = Read-RequiredText -RelativePath $nativeVersionPath
 $stageRuntimeText = Read-RequiredText -RelativePath $stageRuntimePath
 
 $buildInfoManagedPackageId = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+ManagedPackageId\s*=\s*"(?<value>[^"]+)";'
 $buildInfoRuntimePackagePrefix = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+RuntimePackageIdPrefix\s*=\s*"(?<value>[^"]+)";'
 $buildInfoOpenCvVersion = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+OpenCvVersion\s*=\s*"(?<value>[^"]+)";'
-$buildInfoPackageVersion = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+PackageVersion\s*=\s*"(?<value>[^"]+)";'
+$buildInfoNativeAbiVersion = Get-RegexValue $buildInfoText 'public\s+const\s+int\s+NativeAbiVersion\s*=\s*(?<value>[0-9]+);'
 $buildInfoCurrentNativeLibraryName = Get-RegexValue $buildInfoText 'public\s+const\s+string\s+CurrentNativeLibraryName\s*=\s*"(?<value>[^"]+)";'
 
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.ManagedPackageId" $buildInfoManagedPackageId $expectedManagedPackageId
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.RuntimePackageIdPrefix" $buildInfoRuntimePackagePrefix $expectedRuntimePackagePrefix
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.OpenCvVersion" $buildInfoOpenCvVersion $expectedOpenCvVersion
-Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.PackageVersion" $buildInfoPackageVersion $expectedPackageVersion
+Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.NativeAbiVersion" $buildInfoNativeAbiVersion $expectedNativeAbiVersion
 Assert-Equals $violations $buildInfoPath "OpenCvSharpBuildInfo.CurrentNativeLibraryName" $buildInfoCurrentNativeLibraryName $expectedCurrentNativeLibraryName
+foreach ($needle in @(
+        'public static string NuGetPackageVersion { get; }',
+        'return NuGetPackageVersion;',
+        'GetLoadedNativeAbiVersion()',
+        'VerifyNativeRuntimeCompatibility()')) {
+    if (-not (Test-ContainsText -Text $buildInfoText -Needle $needle)) {
+        Add-Violation $violations $buildInfoPath "Build info must retain exact package/native diagnostics: $needle"
+    }
+}
+foreach ($needle in @(
+        '<AssemblyMetadata Include="NuGetPackageVersion" Value="$(OpenCvCSharpNuGetPackageVersion)" />',
+        '<AssemblyMetadata Include="NativeAbiVersion" Value="$(OpenCvCSharpNativeAbiVersion)" />')) {
+    if (-not (Test-ContainsText -Text $managedProjectText -Needle $needle)) {
+        Add-Violation $violations $managedProjectPath "Managed assembly metadata contract is missing: $needle"
+    }
+}
 if ($buildInfoText -match 'LegacyNativeLibraryName|public\s+const\s+string\s+NativeLibraryName') {
     Add-Violation $violations $buildInfoPath "Build info must not expose an unpublished native loader compatibility alias"
 }
@@ -311,6 +332,13 @@ Assert-Equals $violations $nativeCMakePath "Native CMake project version" $cmake
 Assert-Equals $violations $nativeCMakePath "Native CMake primary target" $cmakeCurrentTarget $expectedCurrentNativeLibraryName
 if ($nativeCMakeText -match 'COMPATIBILITY_NATIVE_TARGET') {
     Add-Violation $violations $nativeCMakePath "Native CMake must not retain an unpublished compatibility target"
+}
+
+$nativeHeaderAbiVersion = Get-RegexValue $nativeVersionHeaderText '#define\s+OPENCV_CSHARP_NATIVE_ABI_VERSION\s+(?<value>[0-9]+)'
+Assert-Equals $violations $nativeVersionHeaderPath "Native wrapper ABI version" $nativeHeaderAbiVersion $expectedNativeAbiVersion
+if (-not (Test-ContainsText -Text $nativeVersionHeaderText -Needle 'jyppx_ocv_get_native_abi_version(void)') -or
+    -not (Test-ContainsText -Text $nativeVersionText -Needle 'return OPENCV_CSHARP_NATIVE_ABI_VERSION;')) {
+    Add-Violation $violations $nativeVersionHeaderPath "Native wrapper must export its ABI version probe"
 }
 
 $nativeNoOpenCvVersion = Get-RegexValue $nativeVersionText 'return\s+"(?<value>\d+\.\d+\.\d+)";'
@@ -367,5 +395,6 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Build-info/runtime metadata consistency guard passed."
 Write-Host "Managed package ID: $expectedManagedPackageId."
-Write-Host "Package/OpenCV version: $expectedPackageVersion / $expectedOpenCvVersion."
+Write-Host "Package/NuGet/OpenCV version: $expectedPackageVersion / $expectedNuGetPackageVersion / $expectedOpenCvVersion."
+Write-Host "Native ABI version: $expectedNativeAbiVersion."
 Write-Host "Native loader: $expectedCurrentNativeLibraryName."

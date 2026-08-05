@@ -202,17 +202,22 @@ public delegate IntPtr OpenCvCSharpNativeStringDelegate();
     }
 
     $versionValues = @(
+        Invoke-NativeInt -Symbol "jyppx_ocv_get_native_abi_version"
         Invoke-NativeInt -Symbol "jyppx_ocv_get_version_major"
         Invoke-NativeInt -Symbol "jyppx_ocv_get_version_minor"
         Invoke-NativeInt -Symbol "jyppx_ocv_get_version_revision"
         Invoke-NativeString -Symbol "jyppx_ocv_get_version_string"
     )
 
+    if ($versionValues[0] -ne 1) {
+        throw "Native ABI version probe returned '$($versionValues[0])' instead of '1'."
+    }
+
     Write-Host "Verified version-neutral exports: $($manifestRows.Count)"
     Write-Host (
         "Verified native version exports: " +
-        "$($versionValues[0]).$($versionValues[1]).$($versionValues[2]) " +
-        "($($versionValues[3]))")
+        "$($versionValues[1]).$($versionValues[2]).$($versionValues[3]) " +
+        "($($versionValues[4])); ABI $($versionValues[0])")
 }
 finally {
     [System.Runtime.InteropServices.NativeLibrary]::Free($libraryHandle)

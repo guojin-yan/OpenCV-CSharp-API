@@ -13,7 +13,10 @@ namespace JYPPX.OpenCvSharp.Tests.Core
 
             Assert.Contains("5.0.0", value);
             Assert.Equal("5.0.0", OpenCvSharpBuildInfo.OpenCvVersion);
-            Assert.Equal("5.0.0.0", OpenCvSharpBuildInfo.PackageVersion);
+            Assert.Equal("5.0.0", OpenCvSharpBuildInfo.NuGetPackageVersion);
+            Assert.Equal(OpenCvSharpBuildInfo.NuGetPackageVersion, OpenCvSharpBuildInfo.PackageVersion);
+            Assert.Equal(1, OpenCvSharpBuildInfo.NativeAbiVersion);
+            Assert.Contains("native ABI 1", value, StringComparison.Ordinal);
             Assert.Equal("JYPPX.OpenCV.CSharp.API", OpenCvSharpBuildInfo.ManagedPackageId);
             Assert.Equal("JYPPX.OpenCV.runtime", OpenCvSharpBuildInfo.RuntimePackageIdPrefix);
             Assert.Equal("JYPPX.OpenCV.Native", OpenCvSharpBuildInfo.CurrentNativeLibraryName);
@@ -36,8 +39,11 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             }
 
             Assert.Equal(OpenCvSharpBuildInfo.OpenCvVersion, OpenCvSharpBuildInfo.GetNativeOpenCvVersion());
+            Assert.Equal(OpenCvSharpBuildInfo.NativeAbiVersion, OpenCvSharpBuildInfo.GetLoadedNativeAbiVersion());
+            Assert.True(OpenCvSharpBuildInfo.IsNativeAbiCompatible());
             Assert.True(OpenCvSharpBuildInfo.IsNativeOpenCvVersionCompatible());
-            OpenCvSharpBuildInfo.VerifyNativeOpenCvVersionCompatibility();
+            OpenCvSharpBuildInfo.VerifyNativeRuntimeCompatibility();
+            Assert.Contains("loaded native ABI 1", OpenCvSharpBuildInfo.GetRuntimeDiagnosticString(), StringComparison.Ordinal);
 
         }
 

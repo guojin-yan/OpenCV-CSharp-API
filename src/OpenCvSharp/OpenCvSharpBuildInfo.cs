@@ -1,52 +1,62 @@
 using System;
 using System.Globalization;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using JYPPX.OpenCvSharp.Internal.Interop;
 
 namespace JYPPX.OpenCvSharp
 {
     /// <summary>
-    /// Provides build and package information for OpenCV CSharp API.
-    /// 提供 OpenCV CSharp API 的构建信息和包信息。
+    /// Provides managed package, native ABI, and OpenCV runtime diagnostics.
     /// </summary>
     public static class OpenCvSharpBuildInfo
     {
-        /// <summary>
-        /// Gets the managed package identifier.
-        /// 获取 managed 主包标识。
-        /// </summary>
+        private const string NuGetPackageVersionMetadataName = "NuGetPackageVersion";
+        private const string NativeAbiVersionMetadataName = "NativeAbiVersion";
+
+        static OpenCvSharpBuildInfo()
+        {
+            string embeddedAbiVersion = GetRequiredAssemblyMetadata(NativeAbiVersionMetadataName);
+            if (!string.Equals(
+                    embeddedAbiVersion,
+                    NativeAbiVersion.ToString(CultureInfo.InvariantCulture),
+                    StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException("Managed native ABI metadata is inconsistent.");
+            }
+        }
+
+        /// <summary>Gets the managed package identifier.</summary>
         public const string ManagedPackageId = "JYPPX.OpenCV.CSharp.API";
 
-        /// <summary>
-        /// Gets the runtime package identifier prefix; the RID is appended by runtime packages.
-        /// 获取 runtime 包标识前缀；runtime 包会追加 RID。
-        /// </summary>
+        /// <summary>Gets the runtime package identifier prefix.</summary>
         public const string RuntimePackageIdPrefix = "JYPPX.OpenCV.runtime";
 
-        /// <summary>
-        /// Gets the OpenCV version targeted by this package.
-        /// 获取当前包适配的 OpenCV 版本。
-        /// </summary>
+        /// <summary>Gets the OpenCV version targeted by this managed package.</summary>
         public const string OpenCvVersion = "5.0.0";
 
         /// <summary>
-        /// Gets the managed package version metadata for the selected OpenCV runtime identity.
-        /// The version carries the OpenCV runtime identity and package revision while package identifiers remain version-neutral.
-        /// 获取当前 OpenCV runtime 身份的 managed 包版本元数据。
-        /// 版本承载 OpenCV runtime 身份和包修订号，包标识保持版本中性。
+        /// Gets the native wrapper ABI version required by this managed package.
         /// </summary>
-        public const string PackageVersion = "5.0.0.0";
+        public const int NativeAbiVersion = 1;
 
         /// <summary>
-        /// Gets the version-neutral primary native library name used by the current managed package.
-        /// 获取当前 managed 包使用的版本中立主 native 库名称。
+        /// Gets the exact normalized NuGet version embedded when this assembly was packed.
         /// </summary>
+        public static string NuGetPackageVersion { get; } = GetRequiredAssemblyMetadata(NuGetPackageVersionMetadataName);
+
+        /// <summary>
+        /// Gets the exact normalized NuGet version. Use <see cref="NuGetPackageVersion"/> in new diagnostics.
+        /// </summary>
+        public static string PackageVersion
+        {
+            get { return NuGetPackageVersion; }
+        }
+
+        /// <summary>Gets the version-neutral native loader name.</summary>
         public const string CurrentNativeLibraryName = "JYPPX.OpenCV.Native";
 
-        /// <summary>
-        /// Gets the target framework used by the current assembly build.
-        /// 获取当前程序集构建所使用的目标框架。
-        /// </summary>
+        /// <summary>Gets the target framework used by the current assembly build.</summary>
         public static string TargetFramework
         {
             get
@@ -87,52 +97,78 @@ namespace JYPPX.OpenCvSharp
             }
         }
 
-        /// <summary>
-        /// Gets a display string containing package and OpenCV version information.
-        /// 获取包含包版本和 OpenCV 版本的显示字符串。
-        /// </summary>
-        /// <returns>A human-readable version string. 人类可读的版本字符串。</returns>
+        /// <summary>Gets managed package and target runtime information without loading native code.</summary>
         public static string GetDisplayString()
         {
-            return "OpenCV CSharp API " + PackageVersion + " for OpenCV " + OpenCvVersion + " (" + TargetFramework + ")";
+            return ManagedPackageId + " " + NuGetPackageVersion +
+                " for OpenCV " + OpenCvVersion +
+                " (native ABI " + NativeAbiVersion.ToString(CultureInfo.InvariantCulture) +
+                ", " + TargetFramework + ")";
         }
 
-        /// <summary>
-        /// Gets the major version reported by the loaded native OpenCV runtime.
-        /// 获取已加载 native OpenCV runtime 报告的主版本号。
-        /// </summary>
-        /// <returns>The native OpenCV major version. native OpenCV 主版本号。</returns>
+        /// <summary>Gets diagnostics for both the managed package and the loaded native runtime.</summary>
+        public static string GetRuntimeDiagnosticString()
+        {
+            return GetDisplayString() +
+                "; loaded OpenCV " + GetNativeOpenCvVersion() +
+                "; loaded native ABI " + GetLoadedNativeAbiVersion().ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>Gets the ABI version reported by the loaded native wrapper.</summary>
+        public static int GetLoadedNativeAbiVersion()
+        {
+            try
+            {
+                return NativeMethods.GetNativeAbiVersion();
+            }
+            catch (EntryPointNotFoundException exception)
+            {
+                throw new OpenCvException(
+                    "The loaded native runtime does not expose the required ABI version probe. " +
+                    "Install a runtime package with the same NuGet version as " + ManagedPackageId + " " +
+                    NuGetPackageVersion + ".",
+                    exception);
+            }
+        }
+
+        /// <summary>Gets whether the loaded native wrapper ABI exactly matches this managed package.</summary>
+        public static bool IsNativeAbiCompatible()
+        {
+            return GetLoadedNativeAbiVersion() == NativeAbiVersion;
+        }
+
+        /// <summary>Verifies that the loaded native wrapper ABI exactly matches this managed package.</summary>
+        public static void VerifyNativeAbiCompatibility()
+        {
+            int loadedVersion = GetLoadedNativeAbiVersion();
+            if (loadedVersion != NativeAbiVersion)
+            {
+                throw new OpenCvException(
+                    "Loaded native ABI version " + loadedVersion.ToString(CultureInfo.InvariantCulture) +
+                    " does not match managed ABI version " + NativeAbiVersion.ToString(CultureInfo.InvariantCulture) +
+                    " from NuGet package " + NuGetPackageVersion + ".");
+            }
+        }
+
+        /// <summary>Gets the major version reported by the loaded native OpenCV runtime.</summary>
         public static int GetNativeOpenCvVersionMajor()
         {
             return NativeMethods.GetVersionMajor();
         }
 
-        /// <summary>
-        /// Gets the minor version reported by the loaded native OpenCV runtime.
-        /// 获取已加载 native OpenCV runtime 报告的次版本号。
-        /// </summary>
-        /// <returns>The native OpenCV minor version. native OpenCV 次版本号。</returns>
+        /// <summary>Gets the minor version reported by the loaded native OpenCV runtime.</summary>
         public static int GetNativeOpenCvVersionMinor()
         {
             return NativeMethods.GetVersionMinor();
         }
 
-        /// <summary>
-        /// Gets the revision reported by the loaded native OpenCV runtime.
-        /// 获取已加载 native OpenCV runtime 报告的修订版本号。
-        /// </summary>
-        /// <returns>The native OpenCV revision. native OpenCV 修订版本号。</returns>
+        /// <summary>Gets the revision reported by the loaded native OpenCV runtime.</summary>
         public static int GetNativeOpenCvVersionRevision()
         {
             return NativeMethods.GetVersionRevision();
         }
 
-        /// <summary>
-        /// Gets the version reported by the loaded native OpenCV runtime.
-        /// 获取已加载 native OpenCV runtime 报告的版本。
-        /// </summary>
-        /// <returns>The native OpenCV version string. native OpenCV 版本字符串。</returns>
-        /// <exception cref="OpenCvException">Thrown when native numeric and string version probes disagree. 当 native 数字版本与字符串版本探针不一致时抛出。</exception>
+        /// <summary>Gets the version string reported by the loaded native OpenCV runtime.</summary>
         public static string GetNativeOpenCvVersion()
         {
             int major = GetNativeOpenCvVersionMajor();
@@ -150,20 +186,13 @@ namespace JYPPX.OpenCvSharp
             return versionString;
         }
 
-        /// <summary>
-        /// Gets whether the loaded native OpenCV runtime exactly matches the managed package target version.
-        /// 获取已加载 native OpenCV runtime 是否与 managed 包目标版本完全匹配。
-        /// </summary>
+        /// <summary>Gets whether the loaded OpenCV version exactly matches this managed package.</summary>
         public static bool IsNativeOpenCvVersionCompatible()
         {
             return string.Equals(GetNativeOpenCvVersion(), OpenCvVersion, StringComparison.Ordinal);
         }
 
-        /// <summary>
-        /// Verifies that the loaded native OpenCV runtime exactly matches the managed package target version.
-        /// 验证已加载 native OpenCV runtime 与 managed 包目标版本完全匹配。
-        /// </summary>
-        /// <exception cref="OpenCvException">Thrown when the loaded native runtime version does not match <see cref="OpenCvVersion"/>. 当已加载 native runtime 版本与 <see cref="OpenCvVersion"/> 不一致时抛出。</exception>
+        /// <summary>Verifies that the loaded OpenCV version exactly matches this managed package.</summary>
         public static void VerifyNativeOpenCvVersionCompatibility()
         {
             string nativeVersion = GetNativeOpenCvVersion();
@@ -173,6 +202,31 @@ namespace JYPPX.OpenCvSharp
                     "Native OpenCV runtime version " + nativeVersion +
                     " does not match managed target version " + OpenCvVersion + ".");
             }
+        }
+
+        /// <summary>Verifies both the native wrapper ABI and OpenCV runtime version.</summary>
+        public static void VerifyNativeRuntimeCompatibility()
+        {
+            VerifyNativeAbiCompatibility();
+            VerifyNativeOpenCvVersionCompatibility();
+        }
+
+        private static string GetRequiredAssemblyMetadata(string name)
+        {
+            object[] attributes = typeof(OpenCvSharpBuildInfo).Assembly.GetCustomAttributes(
+                typeof(AssemblyMetadataAttribute),
+                false);
+            foreach (object attribute in attributes)
+            {
+                AssemblyMetadataAttribute metadata = (AssemblyMetadataAttribute)attribute;
+                if (string.Equals(metadata.Key, name, StringComparison.Ordinal) &&
+                    !string.IsNullOrWhiteSpace(metadata.Value))
+                {
+                    return metadata.Value;
+                }
+            }
+
+            throw new InvalidOperationException("Required assembly metadata is missing: " + name + ".");
         }
     }
 }

@@ -4,6 +4,11 @@
 #include <opencv2/core/version.hpp>
 #endif
 
+int jyppx_ocv_get_native_abi_version(void)
+{
+    return OPENCV_CSHARP_NATIVE_ABI_VERSION;
+}
+
 int jyppx_ocv_get_version_major(void)
 {
 #if defined(OPENCV_CSHARP_HAS_OPENCV)

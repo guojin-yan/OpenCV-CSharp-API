@@ -160,6 +160,55 @@ namespace JYPPX.OpenCvSharp.Tests.Core
         }
 
         [Fact]
+        public void LogicalCopyAndRowCopyHonorNonContinuousStrideWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (Mat source = new Mat(3, 4, MatType.CV_8UC1))
+            using (Mat roi = source.SubMat(new Rect(1, 0, 2, 3)))
+            {
+                source.CopyFrom(new byte[]
+                {
+                    1, 2, 3, 4,
+                    5, 6, 7, 8,
+                    9, 10, 11, 12
+                });
+
+                Assert.False(roi.IsContinuous);
+                Assert.Equal(2, roi.RowByteLength);
+                Assert.Equal(new byte[] { 2, 3, 6, 7, 10, 11 }, roi.ToBytes());
+
+                byte[] secondRow = new byte[roi.RowByteLength];
+                roi.CopyRowTo(1, secondRow);
+                Assert.Equal(new byte[] { 6, 7 }, secondRow);
+
+                roi.CopyRowFrom(1, new byte[] { 60, 70 });
+                roi.CopyFrom(new byte[] { 20, 30, 60, 70, 100, 110 });
+
+                Assert.Equal(new byte[]
+                {
+                    1, 20, 30, 4,
+                    5, 60, 70, 8,
+                    9, 100, 110, 12
+                }, source.ToBytes());
+
+                Assert.Throws<ArgumentOutOfRangeException>(() => roi.CopyRowTo(3, secondRow));
+                Assert.Throws<ArgumentException>(() => roi.CopyRowTo(0, new byte[1]));
+
+#if NETCOREAPP3_1_OR_GREATER
+                Span<byte> firstRow = stackalloc byte[2];
+                roi.CopyRowTo(0, firstRow);
+                Assert.True(firstRow.SequenceEqual(new byte[] { 20, 30 }));
+                roi.CopyRowFrom(2, new byte[] { 101, 111 });
+                Assert.Equal(new byte[] { 20, 30, 60, 70, 101, 111 }, roi.ToBytes());
+#endif
+            }
+        }
+
+        [Fact]
         public void ReshapeChangesRowsAndChannelsWithoutCopyWhenNativeRuntimeIsAvailable()
         {
             if (!TestEnvironment.IsNativeSmokeEnabled())

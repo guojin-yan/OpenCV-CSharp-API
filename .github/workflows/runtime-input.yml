@@ -327,7 +327,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $nativeSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           $abiManifest = if ($profileName -eq 'mini') {
             './src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
           }
@@ -1430,7 +1430,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList -variableName 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $nativeSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           $abiManifest = if ($profileName -eq 'mini') {
             './src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
           }
@@ -2033,7 +2033,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $nativeSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           $abiManifest = if ($profileName -eq 'mini') {
             './src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt'
           }

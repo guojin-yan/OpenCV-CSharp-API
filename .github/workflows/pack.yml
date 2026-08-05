@@ -124,8 +124,17 @@ jobs:
             8.0.423
       - name: Restore
         run: dotnet restore ./OpenCV-CSharp-API.slnx
-      - name: Build
-        run: dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore
+      - name: Build exact package version
+        shell: pwsh
+        env:
+          PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
+        run: |
+          . ./scripts/PackageVersion.ps1
+          $version = ConvertTo-OpenCvCSharpPackageVersion -Version $env:PACKAGE_VERSION_INPUT
+          dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore `
+            -p:Version=$env:PACKAGE_VERSION_INPUT `
+            -p:PackageVersion=$env:PACKAGE_VERSION_INPUT `
+            -p:OpenCvCSharpNuGetPackageVersion=$($version.NuGetVersion)
       - name: Pack managed API
         shell: pwsh
         env:
@@ -449,12 +458,12 @@ jobs:
           )
           if ($expectedSources.Count -ne 9 -or
               [int]$provenance.NativeWrapperSourceCount -ne 9 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 527 -or
               $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
-            throw "Ubuntu 22.04 x64 mini provenance does not retain the exact 9-source/526-ABI profile and empty extra CMake arguments."
+            throw "Ubuntu 22.04 x64 mini provenance does not retain the exact 9-source/527-ABI profile and empty extra CMake arguments."
           }
 
           foreach ($containerValue in @(
@@ -511,7 +520,7 @@ jobs:
               throw "Ubuntu 22.04 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "UBUNTU_22_04_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false"
+          Write-Host "UBUNTU_22_04_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=527 synthetic=false"
       - name: Validate Debian 12 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'debian.12-x64' && matrix.profile == 'mini' && inputs.rid == 'debian.12-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -621,13 +630,13 @@ jobs:
           )
           if ($expectedSources.Count -ne 9 -or
               [int]$provenance.NativeWrapperSourceCount -ne 9 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 527 -or
               $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "Debian 12 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "Debian 12 x64 mini provenance does not retain the exact 9-source/527-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -678,7 +687,7 @@ jobs:
               throw "Debian 12 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "DEBIAN_12_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false"
+          Write-Host "DEBIAN_12_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=527 synthetic=false"
       - name: Validate Fedora 40 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'fedora.40-x64' && matrix.profile == 'mini' && inputs.rid == 'fedora.40-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -787,13 +796,13 @@ jobs:
           )
           if ($expectedSources.Count -ne 9 -or
               [int]$provenance.NativeWrapperSourceCount -ne 9 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 527 -or
               $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "Fedora 40 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "Fedora 40 x64 mini provenance does not retain the exact 9-source/527-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -844,7 +853,7 @@ jobs:
               throw "Fedora 40 x64 mini provenance retained forbidden foreign or workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "FEDORA_40_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false"
+          Write-Host "FEDORA_40_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=527 synthetic=false"
       - name: Validate Rocky Linux 9 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'rocky.9-x64' && matrix.profile == 'mini' && inputs.rid == 'rocky.9-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -953,13 +962,13 @@ jobs:
           )
           if ($expectedSources.Count -ne 9 -or
               [int]$provenance.NativeWrapperSourceCount -ne 9 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 527 -or
               $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "Rocky Linux 9 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "Rocky Linux 9 x64 mini provenance does not retain the exact 9-source/527-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -1010,7 +1019,7 @@ jobs:
               throw "Rocky Linux 9 x64 mini provenance retained forbidden foreign or full-profile workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "ROCKY_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false extra_cmake_args=empty"
+          Write-Host "ROCKY_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=527 synthetic=false extra_cmake_args=empty"
       - name: Validate RHEL 9 x64 mini runtime input provenance
         if: ${{ matrix.rid == 'rhel.9-x64' && matrix.profile == 'mini' && inputs.rid == 'rhel.9-x64' && inputs.runtime_profile == 'mini' && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1119,13 +1128,13 @@ jobs:
           )
           if ($expectedSources.Count -ne 9 -or
               [int]$provenance.NativeWrapperSourceCount -ne 9 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 527 -or
               $nativeWrapperSources.Count -ne 9 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs) -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.PowerShellArchiveSha256)) {
-            throw "RHEL 9 x64 mini provenance does not retain the exact 9-source/526-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
+            throw "RHEL 9 x64 mini provenance does not retain the exact 9-source/527-ABI profile, empty extra CMake arguments, and package-installed PowerShell boundary."
           }
 
           $cmakeArgumentText = $openCvCMakeArguments -join "`n"
@@ -1176,7 +1185,7 @@ jobs:
               throw "RHEL 9 x64 mini provenance retained forbidden foreign or full-profile workaround evidence: $forbiddenToken"
             }
           }
-          Write-Host "RHEL_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=526 synthetic=false extra_cmake_args=empty"
+          Write-Host "RHEL_9_X64_RUNTIME_INPUT_PROVENANCE_OK profile=mini files=$expectedPayloadFileCount modules=$expectedModuleCount sources=9 abi_functions=527 synthetic=false extra_cmake_args=empty"
       - name: Validate Windows x64 runtime input provenance
         if: ${{ matrix.rid == 'win-x64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-x64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1282,13 +1291,13 @@ jobs:
             $missingSources = @($expectedMiniSources | Where-Object { $nativeWrapperSources -notcontains $_ })
             $unexpectedSources = @($nativeWrapperSources | Where-Object { $expectedMiniSources -notcontains $_ })
             if ([int]$provenance.NativeWrapperSourceCount -ne 9 -or
-                [int]$provenance.NativeAbiFunctionCount -ne 526 -or
+                [int]$provenance.NativeAbiFunctionCount -ne 527 -or
                 $nativeWrapperSources.Count -ne 9 -or
                 $missingSources.Count -ne 0 -or
                 $unexpectedSources.Count -ne 0 -or
                 $provenance.OpenCvExtraCMakeArgs -ne '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' -or
                 ([string]$provenance.OpenCvCMakeArguments).IndexOf('-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND', [System.StringComparison]::Ordinal) -lt 0) {
-              throw "Windows mini runtime-input provenance does not retain the exact 9-source/526-ABI reduced build evidence."
+              throw "Windows mini runtime-input provenance does not retain the exact 9-source/527-ABI reduced build evidence."
             }
           }
 
@@ -1401,12 +1410,12 @@ jobs:
             @(Get-NativeSourceList 'OPENCV_CSHARP_MINI_NATIVE_SOURCES') +
             @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES'))
           if ([int]$provenance.NativeWrapperSourceCount -ne 49 -or
-              [int]$provenance.NativeAbiFunctionCount -ne 2656 -or
+              [int]$provenance.NativeAbiFunctionCount -ne 2657 -or
               $nativeWrapperSources.Count -ne 49 -or
               @($expectedSources | Where-Object { $nativeWrapperSources -notcontains $_ }).Count -ne 0 -or
               @($nativeWrapperSources | Where-Object { $expectedSources -notcontains $_ }).Count -ne 0 -or
               -not [string]::IsNullOrWhiteSpace([string]$provenance.OpenCvExtraCMakeArgs)) {
-            throw "Windows x86 provenance does not retain the exact 49-source/2656-ABI full profile with empty extra CMake arguments."
+            throw "Windows x86 provenance does not retain the exact 49-source/2657-ABI full profile with empty extra CMake arguments."
           }
 
           foreach ($excludedDirectory in $excludedForeignToolDirectories) {
@@ -1450,7 +1459,7 @@ jobs:
               throw "Windows x86 provenance retained foreign architecture or emulation evidence: $forbiddenToken"
             }
           }
-          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=17 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true"
+          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=17 sources=49 abi_functions=2657 synthetic=false machine=I386 wow64=true"
       - name: Validate Windows ARM64 runtime input provenance
         if: ${{ matrix.rid == 'win-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -1554,7 +1563,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           $expectedExtraCMakeArgs = if ($profileName -eq 'mini') { '-DCMAKE_ASM_COMPILER:FILEPATH=NOTFOUND' } else { '' }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
@@ -1717,7 +1726,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -1888,7 +1897,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -2067,7 +2076,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or
@@ -2240,7 +2249,7 @@ jobs:
           $fullOnlySources = @(Get-NativeSourceList 'OPENCV_CSHARP_FULL_ONLY_NATIVE_SOURCES')
           $expectedSources = if ($profileName -eq 'mini') { @($miniSources) } else { @($miniSources + $fullOnlySources) }
           $expectedSourceCount = if ($profileName -eq 'mini') { 9 } else { 49 }
-          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 526 } else { 2656 }
+          $expectedAbiFunctionCount = if ($profileName -eq 'mini') { 527 } else { 2657 }
           if ([int]$provenance.NativeWrapperSourceCount -ne $expectedSourceCount -or
               [int]$provenance.NativeAbiFunctionCount -ne $expectedAbiFunctionCount -or
               $nativeWrapperSources.Count -ne $expectedSourceCount -or

@@ -365,6 +365,19 @@ namespace JYPPX.OpenCvSharp.Core
         }
 
         /// <summary>
+        /// Gets the number of logical payload bytes in one row of a two-dimensional matrix.
+        /// The value excludes any padding represented by <see cref="Step"/>.
+        /// </summary>
+        public int RowByteLength
+        {
+            get
+            {
+                ThrowIfDisposed();
+                return MatViewAdapter.GetRowByteLength(this);
+            }
+        }
+
+        /// <summary>
         /// Gets the number of single-channel values in the matrix.
         /// 获取矩阵中的单通道值数量。
         /// </summary>
@@ -682,13 +695,11 @@ namespace JYPPX.OpenCvSharp.Core
         }
 
         /// <summary>
-        /// Copies bytes from a managed buffer into this continuous matrix.
-        /// 将 managed 缓冲区中的字节复制到此连续矩阵。
+        /// Copies logical matrix bytes from a managed buffer, honoring row stride for non-continuous matrices.
         /// </summary>
         /// <param name="source">The source buffer. 源缓冲区。</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> is null. 当 <paramref name="source"/> 为空时抛出。</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="source"/> is smaller than the matrix byte length. 当 <paramref name="source"/> 小于矩阵字节长度时抛出。</exception>
-        /// <exception cref="OpenCvException">Thrown when the matrix is not continuous. 当矩阵不是连续内存时抛出。</exception>
         public void CopyFrom(byte[] source)
         {
             if (source == null)
@@ -696,34 +707,16 @@ namespace JYPPX.OpenCvSharp.Core
                 throw new ArgumentNullException(nameof(source));
             }
 
-#if NETCOREAPP3_1_OR_GREATER
-            CopyFrom(source.AsSpan());
-#else
             ThrowIfDisposed();
-
-            int byteLength = MatViewAdapter.GetContinuousByteLength(this);
-            if (source.Length < byteLength)
-            {
-                throw new ArgumentException("Source buffer is smaller than the matrix byte length.", nameof(source));
-            }
-
-            if (byteLength == 0)
-            {
-                return;
-            }
-
-            Marshal.Copy(source, 0, Data, byteLength);
-#endif
+            MatViewAdapter.CopyFrom(this, source);
         }
 
         /// <summary>
-        /// Copies bytes from this continuous matrix into a managed buffer.
-        /// 将此连续矩阵中的字节复制到 managed 缓冲区。
+        /// Copies logical matrix bytes into a managed buffer, honoring row stride for non-continuous matrices.
         /// </summary>
         /// <param name="destination">The destination buffer. 目标缓冲区。</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="destination"/> is null. 当 <paramref name="destination"/> 为空时抛出。</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="destination"/> is smaller than the matrix byte length. 当 <paramref name="destination"/> 小于矩阵字节长度时抛出。</exception>
-        /// <exception cref="OpenCvException">Thrown when the matrix is not continuous. 当矩阵不是连续内存时抛出。</exception>
         public void CopyTo(byte[] destination)
         {
             if (destination == null)
@@ -731,24 +724,36 @@ namespace JYPPX.OpenCvSharp.Core
                 throw new ArgumentNullException(nameof(destination));
             }
 
-#if NETCOREAPP3_1_OR_GREATER
-            CopyTo(destination.AsSpan());
-#else
             ThrowIfDisposed();
+            MatViewAdapter.CopyTo(this, destination);
+        }
 
-            int byteLength = MatViewAdapter.GetContinuousByteLength(this);
-            if (destination.Length < byteLength)
+        /// <summary>
+        /// Copies one logical matrix row into a managed buffer without exposing the native data pointer.
+        /// </summary>
+        public void CopyRowTo(int row, byte[] destination)
+        {
+            if (destination == null)
             {
-                throw new ArgumentException("Destination buffer is smaller than the matrix byte length.", nameof(destination));
+                throw new ArgumentNullException(nameof(destination));
             }
 
-            if (byteLength == 0)
+            ThrowIfDisposed();
+            MatViewAdapter.CopyRowTo(this, row, destination);
+        }
+
+        /// <summary>
+        /// Copies managed bytes into one logical matrix row without writing row padding.
+        /// </summary>
+        public void CopyRowFrom(int row, byte[] source)
+        {
+            if (source == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(source));
             }
 
-            Marshal.Copy(Data, destination, 0, byteLength);
-#endif
+            ThrowIfDisposed();
+            MatViewAdapter.CopyRowFrom(this, row, source);
         }
 
         /// <summary>
@@ -765,73 +770,73 @@ namespace JYPPX.OpenCvSharp.Core
 
 #if NETCOREAPP3_1_OR_GREATER
         /// <summary>
-        /// Copies bytes from a span into this continuous matrix.
-        /// 将 Span 中的字节复制到此连续矩阵。
+        /// Copies logical matrix bytes from a span, honoring row stride for non-continuous matrices.
         /// </summary>
         /// <param name="source">The source span. 源 Span。</param>
         /// <exception cref="ArgumentException">Thrown when <paramref name="source"/> is smaller than the matrix byte length. 当 <paramref name="source"/> 小于矩阵字节长度时抛出。</exception>
-        /// <exception cref="OpenCvException">Thrown when the matrix is not continuous. 当矩阵不是连续内存时抛出。</exception>
         public void CopyFrom(ReadOnlySpan<byte> source)
         {
-            Span<byte> destination = AsByteSpan();
-            if (source.Length < destination.Length)
-            {
-                throw new ArgumentException("Source span is smaller than the matrix byte length.", nameof(source));
-            }
-
-            source.Slice(0, destination.Length).CopyTo(destination);
+            ThrowIfDisposed();
+            MatViewAdapter.CopyFrom(this, source);
         }
 
         /// <summary>
-        /// Copies bytes from this continuous matrix into a span.
-        /// 将此连续矩阵中的字节复制到 Span。
+        /// Copies logical matrix bytes into a span, honoring row stride for non-continuous matrices.
         /// </summary>
         /// <param name="destination">The destination span. 目标 Span。</param>
         /// <exception cref="ArgumentException">Thrown when <paramref name="destination"/> is smaller than the matrix byte length. 当 <paramref name="destination"/> 小于矩阵字节长度时抛出。</exception>
-        /// <exception cref="OpenCvException">Thrown when the matrix is not continuous. 当矩阵不是连续内存时抛出。</exception>
         public void CopyTo(Span<byte> destination)
         {
-            Span<byte> source = AsByteSpan();
-            if (destination.Length < source.Length)
-            {
-                throw new ArgumentException("Destination span is smaller than the matrix byte length.", nameof(destination));
-            }
+            ThrowIfDisposed();
+            MatViewAdapter.CopyTo(this, destination);
+        }
 
-            source.CopyTo(destination);
+        /// <summary>Copies one logical matrix row into a span without exposing native memory.</summary>
+        public void CopyRowTo(int row, Span<byte> destination)
+        {
+            ThrowIfDisposed();
+            MatViewAdapter.CopyRowTo(this, row, destination);
+        }
+
+        /// <summary>Copies a span into one logical matrix row without writing row padding.</summary>
+        public void CopyRowFrom(int row, ReadOnlySpan<byte> source)
+        {
+            ThrowIfDisposed();
+            MatViewAdapter.CopyRowFrom(this, row, source);
         }
 
         /// <summary>
-        /// Copies typed values from a span into this continuous matrix.
-        /// 将类型化 Span 中的值复制到此连续矩阵。
+        /// Copies typed values from a span into the logical matrix payload, honoring row stride.
+        /// 将类型化 Span 中的值按逻辑行复制到矩阵，并正确处理行步长。
         /// </summary>
         /// <typeparam name="T">The unmanaged element type. 非托管元素类型。</typeparam>
         /// <param name="source">The source span. 源 Span。</param>
         public void CopyFrom<T>(ReadOnlySpan<T> source) where T : unmanaged
         {
-            Span<T> destination = AsSpan<T>();
-            if (source.Length < destination.Length)
+            int elementSize = Marshal.SizeOf<T>();
+            if (ByteLength % elementSize != 0)
             {
-                throw new ArgumentException("Source span is smaller than the matrix value count.", nameof(source));
+                throw new OpenCvException("Matrix element size does not match the requested span type.");
             }
 
-            source.Slice(0, destination.Length).CopyTo(destination);
+            CopyFrom(MemoryMarshal.AsBytes(source));
         }
 
         /// <summary>
-        /// Copies typed values from this continuous matrix into a span.
-        /// 将此连续矩阵中的类型化值复制到 Span。
+        /// Copies typed values from the logical matrix payload into a span, honoring row stride.
+        /// 将矩阵中的类型化值按逻辑行复制到 Span，并正确处理行步长。
         /// </summary>
         /// <typeparam name="T">The unmanaged element type. 非托管元素类型。</typeparam>
         /// <param name="destination">The destination span. 目标 Span。</param>
         public void CopyTo<T>(Span<T> destination) where T : unmanaged
         {
-            Span<T> source = AsSpan<T>();
-            if (destination.Length < source.Length)
+            int elementSize = Marshal.SizeOf<T>();
+            if (ByteLength % elementSize != 0)
             {
-                throw new ArgumentException("Destination span is smaller than the matrix value count.", nameof(destination));
+                throw new OpenCvException("Matrix element size does not match the requested span type.");
             }
 
-            source.CopyTo(destination);
+            CopyTo(MemoryMarshal.AsBytes(destination));
         }
 
         /// <summary>

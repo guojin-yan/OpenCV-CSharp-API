@@ -9,6 +9,49 @@ namespace JYPPX.OpenCvSharp.Tests.ImgProc
     public class Cv2InteropTests
     {
         [Fact]
+        public void CommonColorConversionCodesMatchOpenCv500()
+        {
+            Assert.Equal(270, Enum.GetNames(typeof(ColorConversionCodes)).Length);
+            Assert.Equal(0, (int)ColorConversionCodes.BGR2BGRA);
+            Assert.Equal(1, (int)ColorConversionCodes.BGRA2BGR);
+            Assert.Equal(3, (int)ColorConversionCodes.BGRA2RGB);
+            Assert.Equal(4, (int)ColorConversionCodes.BGR2RGB);
+            Assert.Equal(5, (int)ColorConversionCodes.BGRA2RGBA);
+            Assert.Equal(10, (int)ColorConversionCodes.BGRA2GRAY);
+            Assert.Equal(40, (int)ColorConversionCodes.BGR2HSV);
+            Assert.Equal(82, (int)ColorConversionCodes.BGR2YUV);
+            Assert.Equal(155, (int)ColorConversionCodes.ColorCvtMax);
+        }
+
+        [Fact]
+        public void CvtColorSupportsRgbAndAlphaConversionsWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled())
+            {
+                return;
+            }
+
+            using (Mat bgr = new Mat(1, 2, MatType.CV_8UC3))
+            using (Mat rgb = new Mat())
+            using (Mat bgra = new Mat())
+            using (Mat bgraToRgb = new Mat())
+            using (Mat gray = new Mat())
+            {
+                bgr.CopyFrom(new byte[] { 10, 20, 30, 100, 150, 200 });
+
+                ImgProcCv2.CvtColor(bgr, rgb, ColorConversionCodes.BGR2RGB);
+                ImgProcCv2.CvtColor(bgr, bgra, ColorConversionCodes.BGR2BGRA);
+                ImgProcCv2.CvtColor(bgra, bgraToRgb, ColorConversionCodes.BGRA2RGB);
+                ImgProcCv2.CvtColor(bgra, gray, ColorConversionCodes.BGRA2GRAY);
+
+                Assert.Equal(new byte[] { 30, 20, 10, 200, 150, 100 }, rgb.ToBytes());
+                Assert.Equal(new byte[] { 10, 20, 30, 255, 100, 150, 200, 255 }, bgra.ToBytes());
+                Assert.Equal(rgb.ToBytes(), bgraToRgb.ToBytes());
+                Assert.Equal(new byte[] { 22, 159 }, gray.ToBytes());
+            }
+        }
+
+        [Fact]
         public void CvtColorAndResizeProduceExpectedPixelsWhenNativeRuntimeIsAvailable()
         {
             if (!TestEnvironment.IsNativeSmokeEnabled())

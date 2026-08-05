@@ -529,6 +529,10 @@ foreach ($requiredProperty in @(
     }
 }
 
+if (-not (Test-ContainsText -Text $packManagedText -Needle '-p:OpenCvCSharpNuGetPackageVersion=$($packageVersionRecord.NuGetVersion)')) {
+    Add-Violation $violations $packManagedPath "Pack-Managed must embed the exact normalized NuGet version into the managed assembly"
+}
+
 if (-not (Test-ContainsText -Text $packRuntimeText -Needle "OpenCvCSharpRuntimePackageIdPrefix") -or
     -not (Test-ContainsText -Text $packRuntimeText -Needle "`$runtimePackagePrefix = Get-RequiredDirectoryBuildProperty")) {
     Add-Violation $violations $packRuntimePath "Pack-Runtime must derive the version-neutral runtime package prefix from Directory.Build.props"

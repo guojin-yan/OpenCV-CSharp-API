@@ -38,7 +38,7 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
 - 向 NuGet.org 与 GitHub Packages 发布确定性包，并提供 SPDX 2.3 SBOM、受保护的发布审批和经过验证的 GitHub Release 产物。
 - 提供 23 个按功能分组的无头完整案例并生成可检查 PNG；模型 DNN 案例使用一次性哈希校验资产包，其余案例完全离线运行。
-- 兼容性基线覆盖 611 个 public managed type、6,300 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
+- 兼容性基线覆盖 611 个 public managed type、6,561 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
 
 ## 30 秒快速开始
 
@@ -108,6 +108,8 @@ Full runtime 使用版本中立规则 `JYPPX.OpenCV.runtime.<rid>`；mini runtim
 full profile 保证包含矩阵要求的模块，包括 DNN、ML、标定、Features、Photo、Video、HighGui 和 Stitching。Tracking 和部分 contrib 模块属于按实际构建暂存的可选模块：managed API 保持稳定，native 功能不可用时返回 `NOT_LINKED`。mini profile 聚焦 `core`、`imgproc`、`imgcodecs`、`videoio`，并包含必需的 `geometry` 与 `flann` 依赖。修正 Full/ML 边界之前发布的旧包可能对 ML 返回 `NOT_LINKED`，ML 工作负载应使用最新 Full runtime。
 
 不要同时引用 full 与 mini runtime 包。managed 和 runtime 包必须使用同一个 NuGet 规范版本。
+
+启动诊断时，`OpenCvSharpBuildInfo.NuGetPackageVersion` 返回包含 `preview.N` 在内的精确规范包版本；`OpenCvSharpBuildInfo.NativeAbiVersion` 与 `GetLoadedNativeAbiVersion()` 用于确认 managed/native ABI 组合。runtime 加载后调用 `VerifyNativeRuntimeCompatibility()`，可以在 managed 包、native ABI 或 OpenCV 版本不匹配时立即失败。
 
 ## Native Runtime 包
 

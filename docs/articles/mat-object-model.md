@@ -89,9 +89,9 @@ Views share native data with the source matrix. Mutating a view mutates the refe
 
 ## Data Access / 数据访问
 
-Byte array APIs are available for all target frameworks:
+Byte array APIs are available for all target frameworks. `CopyTo(byte[])` and `CopyFrom(byte[])` copy the logical matrix payload row by row, so a two-dimensional ROI or column view no longer requires `IsContinuous == true`. `RowByteLength` reports the bytes in one logical row and excludes padding represented by `Step`.
 
-字节数组 API 在所有目标框架中可用：
+字节数组 API 在所有目标框架中可用。`CopyTo(byte[])` 与 `CopyFrom(byte[])` 会按逻辑行复制二维矩阵，因此 ROI 或列视图不再要求 `IsContinuous == true`；`RowByteLength` 返回单行逻辑字节数，不包含 `Step` 表示的填充。
 
 ```csharp
 byte[] input = new byte[] { 1, 2, 3, 4 };
@@ -101,6 +101,19 @@ using (Mat mat = new Mat(2, 2, MatType.CV_8UC1))
 {
     mat.CopyFrom(input);
     mat.CopyTo(output);
+}
+```
+
+For a non-contiguous view, use the explicit row methods when a caller is processing one row at a time. They never copy padding bytes and never expose the native data pointer:
+
+```csharp
+using (Mat source = new Mat(3, 4, MatType.CV_8UC1))
+using (Mat roi = source.SubMat(new Rect(1, 0, 2, 3)))
+{
+    byte[] row = new byte[roi.RowByteLength];
+    roi.CopyRowTo(1, row);
+    row[0] = 99;
+    roi.CopyRowFrom(1, row);
 }
 ```
 
@@ -141,9 +154,9 @@ namespace Demo
 }
 ```
 
-Span views require `Mat.IsContinuous == true`. ROI and column views are often non-continuous; use `Clone()` before calling `AsByteSpan()`, `AsSpan<T>()`, `CopyTo(Span<byte>)`, or `ToArray<T>()`.
+`CopyTo(Span<byte>)`, `CopyFrom(ReadOnlySpan<byte>)`, and their typed span overloads use the same logical row-by-row semantics as the byte-array APIs. A single `AsByteSpan()` or `AsSpan<T>()` still requires `Mat.IsContinuous == true`, because a span cannot represent a stride; use `Clone()` first when a contiguous span is required.
 
-Span 视图要求 `Mat.IsContinuous == true`。ROI 和列视图通常不是连续矩阵；调用 `AsByteSpan()`、`AsSpan<T>()`、`CopyTo(Span<byte>)` 或 `ToArray<T>()` 前，可先调用 `Clone()`。
+`CopyTo(Span<byte>)`、`CopyFrom(ReadOnlySpan<byte>)` 及其 typed Span 重载与字节数组 API 使用相同的按行语义。单个 `AsByteSpan()` 或 `AsSpan<T>()` 仍要求 `Mat.IsContinuous == true`，因为 Span 无法表示步长；需要连续 Span 时请先调用 `Clone()`。
 
 ## Native ABI / Native ABI
 

@@ -6,31 +6,31 @@
     "managed": {
       "path": "compatibility/managed-public-api.txt",
       "summaryPath": "compatibility/managed-public-api-summary.json",
-      "sha256": "8c11d1eea4a349ee782d7e4ede740113ecc40102d83a8a0860bdc6de100225fb",
+      "sha256": "448c1fb7e636ba89d271d53c87e39f252cbd38586b0da3f6b8267c2b63a4b038",
       "typeCount": 611,
-      "memberCount": 6300,
+      "memberCount": 6561,
       "namespaceCount": 41,
       "targetFramework": "net8.0",
       "nullableShape": "included"
     },
     "nativeFull": {
       "path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
-      "sha256": "cc26f65ffa8e6c422b6db1e50fb6f29441907283349f2ac4b47762a69fb00473",
-      "functionCount": 2656,
+      "sha256": "01a387c6d0608b3c261dd9bee96c37cd73a87ff252178d8420807490e7f0c426",
+      "functionCount": 2657,
       "primaryPrefix": "jyppx_ocv_"
     },
     "nativeMini": {
       "path": "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
-      "sha256": "db7cfee61317ade8765a21da370475e7832c0eb5f051ac6891598515d1b3e61d",
-      "functionCount": 526,
+      "sha256": "aac22280e4b88aa45bbc3710ecf0633ba0658e0ba40a0c80a031bb1cf287a9ec",
+      "functionCount": 527,
       "primaryPrefix": "jyppx_ocv_"
     },
     "nativeManagedBindingMap": {
       "path": "compatibility/native-managed-binding-map.txt",
       "summaryPath": "compatibility/native-managed-binding-summary.json",
-      "sha256": "c3cc09873fa796e3190dd952ca8d5c054f8dc2e958c8de8e3ca1cc50b5c3bc6f",
-      "nativeFunctionCount": 2656,
-      "managedBoundCount": 2656,
+      "sha256": "8a2834971e6af1cab9d4edb991eca0d9ed89c99db51ccc9f6441176891d81d1e",
+      "nativeFunctionCount": 2657,
+      "managedBoundCount": 2657,
       "unboundCount": 0,
       "managedOnlyCount": 0
     },
@@ -398,7 +398,7 @@
       "id": "native-to-managed-binding-map",
       "status": "closed",
       "evidence": "compatibility/native-managed-binding-summary.json",
-      "result": "All 2,656 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
+      "result": "All 2,657 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
     },
     {
       "id": "ownership-error-marshalling-audit",

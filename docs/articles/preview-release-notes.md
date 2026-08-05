@@ -6,16 +6,22 @@
 
 ## Highlights / 主要内容
 
-- 611 public managed types, 6,300 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp` under a checked compatibility baseline.
-- 2,656 full-profile and 526 mini-profile native ABI functions, with complete native-to-managed binding coverage for the declared ABI.
+- 611 public managed types, 6,561 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp` under a checked compatibility baseline.
+- 2,657 full-profile and 527 mini-profile native ABI functions, with complete native-to-managed binding coverage for the declared ABI.
+- `OpenCvSharpBuildInfo.NuGetPackageVersion` reports the exact `5.0.0-preview.2` package identity; native ABI version `1` is exported and verified before runtime use.
+- `ColorConversionCodes` mirrors the OpenCV 5.0.0 conversion table, including BGR/RGB, BGRA/RGBA, grayscale, HSV, Lab, YUV, and Bayer families.
+- `Mat.CopyTo`/`CopyFrom` and span overloads now copy non-contiguous two-dimensional views row by row; `RowByteLength` and `CopyRowTo`/`CopyRowFrom` provide safe explicit row access without exposing native pointers.
 - Image decode/encode, processing, geometry, calibration, video, DNN, object detection, Photo, machine learning, Tracking, Stitching, and selected contrib workflows.
 - Corrected Full runtimes make OpenCV `ml` mandatory, ship one neutral loader plus 17 required OpenCV modules, and verify both DNN inference and trained KNN prediction.
 - Deterministic normalized NuGet packages, package-owned full/mini native smoke, package provenance, SPDX-2.3 SBOM generation, and fail-closed release review.
 - The exact support-contract-derived candidate is published to NuGet.org and GitHub Packages, then attached to a verified GitHub prerelease with both registry proofs; the intended final set is 29 packages after Android single-loader revalidation.
 - A 24-part [Tutorial Series](tutorial-series.md) and grouped standalone projects covering image processing, Chinese text, geometry, features, ML, DNN classification/detection/segmentation, document scanning, panorama stitching, motion analysis, tracking, and Android package loading.
 
-- 611 个 public managed type、6,300 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
-- full profile 2,656 个、mini profile 526 个 native ABI function，并对声明 ABI 保持完整 native-to-managed binding coverage。
+- 611 个 public managed type、6,561 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
+- full profile 2,657 个、mini profile 527 个 native ABI function，并对声明 ABI 保持完整 native-to-managed binding coverage。
+- `OpenCvSharpBuildInfo.NuGetPackageVersion` 返回精确的 `5.0.0-preview.2` 包身份；native ABI 版本 `1` 已导出并在 runtime 使用前校验。
+- `ColorConversionCodes` 对齐 OpenCV 5.0.0 转换表，覆盖 BGR/RGB、BGRA/RGBA、灰度、HSV、Lab、YUV 和 Bayer 系列。
+- `Mat.CopyTo`/`CopyFrom` 及 Span 重载现在按行复制非连续二维视图；`RowByteLength` 与 `CopyRowTo`/`CopyRowFrom` 提供不暴露 native 指针的安全行访问。
 - 覆盖图像编解码、处理、几何、标定、视频、DNN、目标检测、Photo、机器学习、Tracking、Stitching 和部分 contrib 工作流。
 - 修正 Full runtime 契约，将 OpenCV `ml` 设为必需模块，交付一个中性 loader 加 17 个必需 OpenCV 模块，并同时验证 DNN 推理和真实训练后的 KNN 预测。
 - 提供确定性规范化 NuGet 包、包内 full/mini native smoke、package provenance、SPDX-2.3 SBOM 和 fail-closed 发布审核。

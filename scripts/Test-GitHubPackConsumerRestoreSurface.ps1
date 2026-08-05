@@ -349,6 +349,7 @@ function New-TemporaryConsumerProject {
         [switch]$RunNativeSmoke
     )
 
+    $normalizedExpectedPackageVersion = Get-NormalizedPackageFileVersion -VersionText $PackageVersion
     New-Item -ItemType Directory -Force -Path $ConsumerDirectory | Out-Null
     $projectPath = Join-Path $ConsumerDirectory "PackageConsumer.csproj"
     $projectText = @"
@@ -400,6 +401,12 @@ internal static class Program
     {
         try
         {
+            if (!string.Equals(OpenCvSharpBuildInfo.NuGetPackageVersion, "__EXPECTED_NUGET_PACKAGE_VERSION__", StringComparison.Ordinal))
+            {
+                Console.Error.WriteLine("MANAGED_NUGET_VERSION_MISMATCH actual=" + OpenCvSharpBuildInfo.NuGetPackageVersion);
+                return 8;
+            }
+            OpenCvSharpBuildInfo.VerifyNativeRuntimeCompatibility();
 __TARGET_PROCESS_ARCHITECTURE_GUARD__
             using var source = new Mat(3, 4, MatType.CV_8UC3, new Scalar(10, 20, 30));
             using var gray = new Mat();
@@ -552,13 +559,18 @@ internal static class Program
 {
     private static int Main()
     {
-        var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.PackageVersion;
+        if (OpenCvSharpBuildInfo.NuGetPackageVersion != "__EXPECTED_NUGET_PACKAGE_VERSION__")
+        {
+            return 2;
+        }
+        var message = OpenCvSharpBuildInfo.ManagedPackageId + ":" + OpenCvSharpBuildInfo.NuGetPackageVersion;
         var exception = new OpenCvException(message);
         return exception.Message == message ? 0 : 1;
     }
 }
 '@
     }
+    $programText = $programText.Replace("__EXPECTED_NUGET_PACKAGE_VERSION__", $normalizedExpectedPackageVersion)
     [System.IO.File]::WriteAllText((Join-Path $ConsumerDirectory "Program.cs"), $programText)
 
     return $projectPath

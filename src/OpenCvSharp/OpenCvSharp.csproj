@@ -24,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AssemblyMetadata Include="NuGetPackageVersion" Value="$(OpenCvCSharpNuGetPackageVersion)" />
+    <AssemblyMetadata Include="NativeAbiVersion" Value="$(OpenCvCSharpNativeAbiVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="bin\**;obj\**" />
     <EmbeddedResource Remove="bin\**;obj\**" />
     <None Remove="bin\**;obj\**" />

@@ -15,6 +15,9 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_version_string")]
         internal static extern IntPtr GetVersionStringPointer();
 
+        [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_native_abi_version")]
+        internal static extern int GetNativeAbiVersion();
+
         [DllImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_get_version_major")]
         internal static extern int GetVersionMajor();
 

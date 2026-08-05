@@ -38,7 +38,7 @@ The current public version is reported by the live NuGet badges below. The previ
 - .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
 - Deterministic packages on NuGet.org and GitHub Packages, SPDX 2.3 SBOMs, protected release approval, and verified GitHub Release assets.
 - Twenty-three grouped, headless workflows with inspectable PNG output; model-backed DNN cases use one-time, hash-verified asset bundles while the remaining cases stay fully offline.
-- Checked compatibility baselines covering 611 public managed types, 6,300 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
+- Checked compatibility baselines covering 611 public managed types, 6,561 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
 
 ## Get Started In 30 Seconds
 
@@ -108,6 +108,8 @@ Choose the runtime package that matches your target RID and preferred profile.
 The full profile guarantees its matrix-required modules, including DNN, ML, calibration, features, Photo, Video, HighGui, and Stitching. Tracking and additional contrib modules are optional staged modules: their managed APIs remain stable, and unavailable native features report `NOT_LINKED`. The mini profile focuses on `core`, `imgproc`, `imgcodecs`, and `videoio`, with the required `geometry` and `flann` dependencies. Packages published before the corrected Full/ML boundary can report `NOT_LINKED` for ML; use the latest Full runtime for ML workloads.
 
 Do not reference full and mini runtime packages together. Keep the managed and runtime packages on the same normalized NuGet package version.
+
+For startup diagnostics, `OpenCvSharpBuildInfo.NuGetPackageVersion` reports the exact normalized package version (including `preview.N`), while `OpenCvSharpBuildInfo.NativeAbiVersion` and `GetLoadedNativeAbiVersion()` identify the managed/native ABI pair. Call `VerifyNativeRuntimeCompatibility()` after the runtime is loaded to fail fast when the managed package, native ABI, or OpenCV runtime version do not match.
 
 ## Native Runtime Packages
 

@@ -194,7 +194,8 @@ $arguments = @(
     "-o",
     $outputFullPath,
     "-p:Version=$PackageVersion",
-    "-p:PackageVersion=$PackageVersion"
+    "-p:PackageVersion=$PackageVersion",
+    "-p:OpenCvCSharpNuGetPackageVersion=$($packageVersionRecord.NuGetVersion)"
 )
 
 if (-not [string]::IsNullOrWhiteSpace($TargetFrameworks)) {

@@ -158,12 +158,12 @@ foreach ($required in @(
             Issue = "Native CMake missing-runtime diagnostic must stay generic and OpenCV-focused"
         },
         [pscustomobject]@{
-            Needle = 'ENVIRONMENT "PATH=$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>;${OPENCV_CSHARP_OPENCV_RUNTIME_ROOT};$ENV{PATH}"'
-            Issue = "Native CTest PATH must include target output first and the neutral OpenCV runtime root second"
+            Needle = 'ENVIRONMENT "PATH=$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>\;${OPENCV_CSHARP_OPENCV_RUNTIME_ROOT}\;${OPENCV_CSHARP_ESCAPED_HOST_PATH}"'
+            Issue = "Native CTest PATH must include target output first, the neutral OpenCV runtime root second, and the escaped host PATH as one environment value"
         },
         [pscustomobject]@{
-            Needle = 'ENVIRONMENT "PATH=$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>;$ENV{PATH}"'
-            Issue = "Native CTest PATH fallback must still include the neutral target output directory first"
+            Needle = 'ENVIRONMENT "PATH=$<TARGET_FILE_DIR:${OPENCV_CSHARP_NATIVE_TARGET}>\;${OPENCV_CSHARP_ESCAPED_HOST_PATH}"'
+            Issue = "Native CTest PATH fallback must still include the neutral target output directory first and preserve the host PATH as one environment value"
         })) {
     Assert-Contains `
         -Violations $violations `
