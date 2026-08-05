@@ -21,15 +21,20 @@ on:
         required: true
         type: string
       designated_publisher:
-        description: Named publisher; required and distinct from approver for every protected publication phase
+        description: Named publisher; distinct from approver on the normal path and exact Guojin Yan on the first-preview exception path
         required: true
         default: unassigned
         type: string
       independent_approver:
-        description: Named independent approver; required and distinct from publisher for every protected publication phase
+        description: Named independent approver, or exact not-available when the first-preview single-maintainer exception is enabled
         required: true
         default: unassigned
         type: string
+      single_maintainer_exception:
+        description: Explicit first-preview owner exception when no independent reviewer is available
+        required: true
+        default: false
+        type: boolean
       publish_authorization:
         description: Exact publish-nuget:sha256 token emitted by a prior dry run
         required: false
@@ -163,6 +168,7 @@ jobs:
           CANDIDATE_CREATED: ${{ inputs.candidate_created }}
           DESIGNATED_PUBLISHER: ${{ inputs.designated_publisher }}
           INDEPENDENT_APPROVER: ${{ inputs.independent_approver }}
+          SINGLE_MAINTAINER_EXCEPTION: ${{ inputs.single_maintainer_exception }}
           PUBLISH_AUTHORIZATION: ${{ inputs.publish_authorization }}
           PUBLISH_REQUESTED: ${{ inputs.publish }}
           VERIFICATION_REQUESTED: ${{ inputs.verify_publication }}
@@ -185,27 +191,41 @@ jobs:
             -OutputPath $publicationRecord
           $record = Get-Content -LiteralPath $publicationRecord -Raw | ConvertFrom-Json
           $protectedPhaseRequested = $env:PUBLISH_REQUESTED -eq 'true' -or $env:VERIFICATION_REQUESTED -eq 'true' -or $env:RELEASE_REQUESTED -eq 'true'
+          $singleMaintainerException = $env:SINGLE_MAINTAINER_EXCEPTION -eq 'true'
           if ($env:PUBLISH_REQUESTED -eq 'true' -and $env:VERIFICATION_REQUESTED -eq 'true') {
             throw 'Upload and public-feed verification are separate phases because GitHub package visibility must be changed after first upload.'
           }
           if ($env:RELEASE_REQUESTED -eq 'true' -and $env:VERIFICATION_REQUESTED -ne 'true') {
             throw 'GitHub Release creation requires verify_publication=true.'
           }
+          if ($singleMaintainerException) {
+            if ($env:PACKAGE_VERSION -cne '5.0.0-preview.1') { throw 'The single-maintainer exception is restricted to 5.0.0-preview.1.' }
+            if ($env:GITHUB_REPOSITORY -cne 'guojin-yan/OpenCV-CSharp-API') { throw 'The single-maintainer exception is restricted to the authoritative repository.' }
+            if ($env:GITHUB_ACTOR -cne 'guojin-yan') { throw 'The single-maintainer exception must be dispatched by guojin-yan.' }
+            if ($env:DESIGNATED_PUBLISHER -cne 'Guojin Yan') { throw 'The single-maintainer exception requires designated_publisher=Guojin Yan.' }
+            if ($env:INDEPENDENT_APPROVER -cne 'not-available') { throw 'The single-maintainer exception requires independent_approver=not-available.' }
+          }
           if ($protectedPhaseRequested) {
             if ($env:PUBLISH_AUTHORIZATION -cne $record.AuthorizationToken) { throw 'publish_authorization does not match the exact dry-run candidate token.' }
-            if ($env:DESIGNATED_PUBLISHER -in @('', 'unassigned') -or $env:INDEPENDENT_APPROVER -in @('', 'unassigned')) { throw 'Protected publication phases require named publisher and independent approver.' }
-            if ($env:DESIGNATED_PUBLISHER -eq $env:INDEPENDENT_APPROVER) { throw 'Publisher and independent approver must be different identities.' }
+            if (-not $singleMaintainerException) {
+              if ($env:DESIGNATED_PUBLISHER -in @('', 'unassigned') -or $env:INDEPENDENT_APPROVER -in @('', 'unassigned', 'not-available')) { throw 'Protected publication phases require named publisher and independent approver unless the explicit first-preview exception is enabled.' }
+              if ($env:DESIGNATED_PUBLISHER -eq $env:INDEPENDENT_APPROVER) { throw 'Publisher and independent approver must be different identities.' }
+            }
           }
           elseif (-not [string]::IsNullOrWhiteSpace($env:PUBLISH_AUTHORIZATION)) {
             throw 'Dry-run publication must not carry a publish_authorization token.'
           }
           $decision = [ordered]@{
-            SchemaVersion = 2
+            SchemaVersion = 3
             RecordKind = 'nuget-publication-decision'
             CandidateId = $record.CandidateId
             AuthorizationTokenSha256 = if ($protectedPhaseRequested) { [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($env:PUBLISH_AUTHORIZATION))).ToLowerInvariant() } else { '' }
             Publisher = $env:DESIGNATED_PUBLISHER
+            PublisherGitHubAccount = $env:GITHUB_ACTOR
             IndependentApprover = $env:INDEPENDENT_APPROVER
+            ApprovalMode = if ($singleMaintainerException) { 'single-maintainer-first-preview-exception' } else { 'independent-review' }
+            SingleMaintainerException = $singleMaintainerException
+            RiskAcceptance = if ($singleMaintainerException) { 'explicit-owner-authorization-no-independent-reviewer-available' } else { '' }
             PublishRequested = $env:PUBLISH_REQUESTED -eq 'true'
             VerificationRequested = $env:VERIFICATION_REQUESTED -eq 'true'
             ReleaseRequested = $env:RELEASE_REQUESTED -eq 'true'

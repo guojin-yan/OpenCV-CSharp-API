@@ -229,6 +229,9 @@ $publishWorkflowText = Read-RequiredText -RelativePath ".github/workflows/publis
 foreach ($token in @(
         "environment: nuget-production",
         "publish_authorization",
+        "single_maintainer_exception",
+        "single-maintainer-first-preview-exception",
+        "explicit-owner-authorization-no-independent-reviewer-available",
         "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/Test-NuGetRepositorySignedPackage.ps1",
         "https://api.nuget.org/v3/index.json",

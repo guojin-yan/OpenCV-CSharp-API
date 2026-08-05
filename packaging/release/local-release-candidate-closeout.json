@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0d40bbcc74403d30",
-  "SourceIdentity": "sha256:0d40bbcc74403d3058794488bce092f402027b164ace97b912489f95a48e81d7",
+  "CandidateId": "local-closeout/sha256/30240a20593ce572",
+  "SourceIdentity": "sha256:30240a20593ce572fa739a7b2ccd1d47c3f18f5772d9f25d2845fe052a4d1787",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
     "FileCount": 1556,
-    "Sha256": "0d40bbcc74403d3058794488bce092f402027b164ace97b912489f95a48e81d7",
+    "Sha256": "30240a20593ce572fa739a7b2ccd1d47c3f18f5772d9f25d2845fe052a4d1787",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -411,8 +411,8 @@
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
-      "Sha256": "e58e14164f2cba4fc0b6514094e4efc1409b52a71c82262265cb755bfe681d6a",
-      "Length": 34693
+      "Sha256": "c8a352875a9a0a7b22b4eab1110e00caa97841e9be9becfd29f85bc6760bd7c5",
+      "Length": 36432
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
@@ -896,8 +896,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "32738b425c265ed17659765a88816ded269627d90f5102de68c9f4d344341f7e",
-      "Length": 10205
+      "Sha256": "1acb4b586b03cfce2b3ab6a44e83ace18831af0c3d3fa9cfa53f5ed5a94ca500",
+      "Length": 10796
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -1141,8 +1141,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "5f9a25df970c9692a98b817229911f7e41a81e73d3ff6844832ddde0a0fa71ee",
-      "Length": 60221
+      "Sha256": "a46b4734b1cddc577b38a036abcac91f6f0dbde4a41d42cd9c5fa5b004bc5526",
+      "Length": 60376
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1221,8 +1221,8 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "97dc93e3f7d000742d295d08a533074a200d4579a21e7348ff5e9604951826ca",
-      "Length": 20235
+      "Sha256": "b61f5e3ba1fa99296148e7d11d5186227411cfc7387549999fe1c029625323b9",
+      "Length": 20784
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1246,8 +1246,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "876a45f603ec8e35296eaced3669ad5d32bbae03c9fa12987c17d3ae95750be3",
-      "Length": 43654
+      "Sha256": "3a9d557dfc3576814f49e07feca2ed4f2c72e59085a84ee532811cbe45b4e8b1",
+      "Length": 43762
     },
     {
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
@@ -1824,7 +1824,7 @@
     {
       "Id": "nuget-production-environment",
       "Status": "not-configured",
-      "Evidence": "The authoritative nuget-production Environment, protected reviewer, and NUGET_API_KEY secret are not configured."
+      "Evidence": "The authoritative nuget-production Environment and NUGET_API_KEY secret are not configured. The first preview may use only the workflow's explicit single-maintainer exception instead of a protected reviewer."
     },
     {
       "Id": "publication-authorization",
@@ -1834,7 +1834,7 @@
     {
       "Id": "release-approval",
       "Status": "not-approved",
-      "Evidence": "No external approver has accepted the exact normalized candidate bytes and provenance."
+      "Evidence": "No exact candidate has been approved by either an independent reviewer or the explicit, version-bounded first-preview single-maintainer exception."
     },
     {
       "Id": "repository-signing-verification",
