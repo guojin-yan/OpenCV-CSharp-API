@@ -8,10 +8,12 @@ ORB 无需外部模型即可检测可重复关键点并生成紧凑的二进制�
 
 ## Run / 运行
 
+[`Case04.OrbFeatures/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case04.OrbFeatures/Program.cs) owns feature detection, descriptor generation, rich keypoint visualization, metrics, and output persistence.
+
+[`Case04.OrbFeatures/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case04.OrbFeatures/Program.cs) 自行完成特征检测、描述子生成、关键点可视化、指标统计和结果保存。
+
 ```powershell
-dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
-  -p:OpenCvNativeRuntimeDir=E:\path\to\full-runtime `
-  -- tutorial features .\artifacts\tutorial-04
+dotnet run --project .\samples\PublishedPackageSamples\Case04.OrbFeatures\Case04.OrbFeatures.csproj -c Release -- .\artifacts\tutorial-04
 ```
 
 ## Core Flow / 核心流程

@@ -98,10 +98,12 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
 
                 if (command == "ml")
                 {
-                    using (Mat image = CreateMlPanel(out int queryCount))
+                    using (Mat image = CreateMlPanel(out int queryCount, out bool mlLinked))
                     {
                         WritePng(outputDirectory, "knn-classification.png", image);
-                        WriteSummary(command, outputDirectory, "queries=" + queryCount + ", k=3");
+                        WriteSummary(command, outputDirectory, mlLinked
+                            ? "queries=" + queryCount + ", k=3"
+                            : "status=NOT_LINKED, queries=0");
                     }
                     return;
                 }
@@ -118,7 +120,7 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             using (Mat contourPanel = CreateContourPanel(source, out int contourCount))
             using (Mat featurePanel = CreateFeaturePanel(source, out int keypointCount, out int descriptorColumns))
             using (Mat templatePanel = CreateTemplatePanel(source, out Point location, out double confidence))
-            using (Mat mlPanel = CreateMlPanel(out int queryCount))
+            using (Mat mlPanel = CreateMlPanel(out int queryCount, out bool mlLinked))
             using (Mat top = CoreCv2.HConcat(new[] { edgePanel, textPanel, contourPanel }))
             using (Mat bottom = CoreCv2.HConcat(new[] { featurePanel, templatePanel, mlPanel }))
             using (Mat overview = CoreCv2.VConcat(new[] { top, bottom }))
@@ -141,7 +143,7 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
                     + ", descriptorColumns=" + descriptorColumns
                     + ", match=" + location
                     + ", confidence=" + Format(confidence)
-                    + ", mlQueries=" + queryCount;
+                    + ", ml=" + (mlLinked ? "linked, queries=" + queryCount : "NOT_LINKED");
                 WriteSummary("all", outputDirectory, details);
             }
         }
@@ -260,7 +262,7 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             }
         }
 
-        private static Mat CreateMlPanel(out int queryCount)
+        private static Mat CreateMlPanel(out int queryCount, out bool mlLinked)
         {
             const int gridWidth = 80;
             const int gridHeight = 45;
@@ -271,64 +273,86 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             };
             int[] trainingLabels = { 0, 0, 0, 0, 1, 1, 1, 1 };
             queryCount = gridWidth * gridHeight;
+            mlLinked = true;
 
-            using (var samples = new Mat(8, 2, MatType.CV_32FC1))
-            using (var responses = new Mat(8, 1, MatType.CV_32SC1))
-            using (var queries = new Mat(queryCount, 2, MatType.CV_32FC1))
-            using (var results = new Mat())
-            using (KNearest knn = KNearest.Create())
+            try
             {
-                samples.CopyFrom<float>(trainingValues);
-                responses.CopyFrom<int>(trainingLabels);
-                float[] queryValues = new float[queryCount * 2];
-                for (int y = 0; y < gridHeight; y++)
+                using (var samples = new Mat(8, 2, MatType.CV_32FC1))
+                using (var responses = new Mat(8, 1, MatType.CV_32SC1))
+                using (var queries = new Mat(queryCount, 2, MatType.CV_32FC1))
+                using (var results = new Mat())
+                using (KNearest knn = KNearest.Create())
                 {
-                    for (int x = 0; x < gridWidth; x++)
+                    samples.CopyFrom<float>(trainingValues);
+                    responses.CopyFrom<int>(trainingLabels);
+                    float[] queryValues = new float[queryCount * 2];
+                    for (int y = 0; y < gridHeight; y++)
                     {
-                        int offset = ((y * gridWidth) + x) * 2;
-                        queryValues[offset] = x / (float)(gridWidth - 1);
-                        queryValues[offset + 1] = y / (float)(gridHeight - 1);
+                        for (int x = 0; x < gridWidth; x++)
+                        {
+                            int offset = ((y * gridWidth) + x) * 2;
+                            queryValues[offset] = x / (float)(gridWidth - 1);
+                            queryValues[offset + 1] = y / (float)(gridHeight - 1);
+                        }
                     }
-                }
-                queries.CopyFrom<float>(queryValues);
+                    queries.CopyFrom<float>(queryValues);
 
-                knn.DefaultK = 3;
-                knn.IsClassifierModel = true;
-                knn.AlgorithmType = KNearestTypes.BruteForce;
-                if (!knn.Train(samples, SampleTypes.RowSample, responses))
-                {
-                    throw new InvalidOperationException("KNearest showcase training failed.");
-                }
-                knn.FindNearest(queries, 3, results);
-
-                float[] labels = results.ToArray<float>();
-                byte[] pixels = new byte[queryCount * 3];
-                for (int i = 0; i < labels.Length; i++)
-                {
-                    bool secondClass = labels[i] >= 0.5F;
-                    pixels[(i * 3)] = secondClass ? (byte)74 : (byte)198;
-                    pixels[(i * 3) + 1] = secondClass ? (byte)156 : (byte)91;
-                    pixels[(i * 3) + 2] = secondClass ? (byte)232 : (byte)62;
-                }
-
-                using (var grid = new Mat(gridHeight, gridWidth, MatType.CV_8UC3))
-                {
-                    grid.CopyFrom<byte>(pixels);
-                    var panel = new Mat();
-                    ImgProcCv2.Resize(grid, panel, new Size(PanelWidth, PanelHeight), interpolation: InterpolationFlags.Nearest);
-                    for (int i = 0; i < trainingLabels.Length; i++)
+                    knn.DefaultK = 3;
+                    knn.IsClassifierModel = true;
+                    knn.AlgorithmType = KNearestTypes.BruteForce;
+                    if (!knn.Train(samples, SampleTypes.RowSample, responses))
                     {
-                        int x = (int)Math.Round(trainingValues[i * 2] * (PanelWidth - 1));
-                        int y = (int)Math.Round(trainingValues[(i * 2) + 1] * (PanelHeight - 1));
-                        Scalar color = trainingLabels[i] == 0 ? new Scalar(255, 225, 220) : new Scalar(220, 250, 255);
-                        ImgProcCv2.Circle(panel, new Point(x, y), 10, color, -1, LineTypes.AntiAlias);
-                        ImgProcCv2.Circle(panel, new Point(x, y), 10, new Scalar(32, 36, 42), 2, LineTypes.AntiAlias);
+                        throw new InvalidOperationException("KNearest showcase training failed.");
                     }
-                    AddPanelLabel(panel, "06  KNN CLASSIFICATION", new Scalar(245, 245, 245));
-                    AddMetric(panel, "3-nearest  3,600 queries");
-                    return panel;
+                    knn.FindNearest(queries, 3, results);
+
+                    float[] labels = results.ToArray<float>();
+                    byte[] pixels = new byte[queryCount * 3];
+                    for (int i = 0; i < labels.Length; i++)
+                    {
+                        bool secondClass = labels[i] >= 0.5F;
+                        pixels[(i * 3)] = secondClass ? (byte)74 : (byte)198;
+                        pixels[(i * 3) + 1] = secondClass ? (byte)156 : (byte)91;
+                        pixels[(i * 3) + 2] = secondClass ? (byte)232 : (byte)62;
+                    }
+
+                    using (var grid = new Mat(gridHeight, gridWidth, MatType.CV_8UC3))
+                    {
+                        grid.CopyFrom<byte>(pixels);
+                        var panel = new Mat();
+                        ImgProcCv2.Resize(grid, panel, new Size(PanelWidth, PanelHeight), interpolation: InterpolationFlags.Nearest);
+                        for (int i = 0; i < trainingLabels.Length; i++)
+                        {
+                            int x = (int)Math.Round(trainingValues[i * 2] * (PanelWidth - 1));
+                            int y = (int)Math.Round(trainingValues[(i * 2) + 1] * (PanelHeight - 1));
+                            Scalar color = trainingLabels[i] == 0 ? new Scalar(255, 225, 220) : new Scalar(220, 250, 255);
+                            ImgProcCv2.Circle(panel, new Point(x, y), 10, color, -1, LineTypes.AntiAlias);
+                            ImgProcCv2.Circle(panel, new Point(x, y), 10, new Scalar(32, 36, 42), 2, LineTypes.AntiAlias);
+                        }
+                        AddPanelLabel(panel, "06  KNN CLASSIFICATION", new Scalar(245, 245, 245));
+                        AddMetric(panel, "3-nearest  3,600 queries");
+                        return panel;
+                    }
                 }
             }
+            catch (OpenCvException exception) when (exception.Message.IndexOf("NOT_LINKED", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                mlLinked = false;
+                queryCount = 0;
+                return CreateUnavailableMlPanel();
+            }
+        }
+
+        private static Mat CreateUnavailableMlPanel()
+        {
+            var panel = new Mat(PanelHeight, PanelWidth, MatType.CV_8UC3, new Scalar(31, 35, 42));
+            AddPanelLabel(panel, "06  KNN CLASSIFICATION", new Scalar(245, 245, 245));
+            ImgProcCv2.PutText(panel, "Native ML module is not linked in this runtime.",
+                new Point(32, 166), HersheyFonts.HersheySimplex, 0.8, new Scalar(232, 240, 245), 2, LineTypes.AntiAlias);
+            ImgProcCv2.PutText(panel, "Install a runtime profile with ML support to execute KNN.",
+                new Point(32, 204), HersheyFonts.HersheySimplex, 0.62, new Scalar(190, 202, 214), 1, LineTypes.AntiAlias);
+            AddMetric(panel, "Native ML  NOT_LINKED");
+            return panel;
         }
 
         private static void AddPanelLabel(Mat panel, string text, Scalar accent)

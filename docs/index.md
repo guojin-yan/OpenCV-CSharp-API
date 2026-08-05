@@ -12,6 +12,7 @@ OpenCV CSharp API 通过版本中立的 managed API 和稳定的 native C ABI，
 |---|---|
 | [Quick Start](articles/quick-start.md) | Select packages and run the first program / 选择包并运行第一个程序 |
 | [Tutorial Series](articles/tutorial-series.md) | Follow six visual workflows and one Android native-loading workflow / 完成 6 个可视化流程和 1 个 Android 原生加载流程 |
+| [Published Package Samples](articles/published-package-samples.md) | Run six independent module projects from the published NuGet packages / 使用已发布 NuGet 包运行 6 个独立模块项目 |
 | [OpenCV PutText With Chinese](articles/tutorial-02-chinese-puttext.md) | Draw UTF-8 Chinese directly into `Mat` / 把 UTF-8 中文直接写入 `Mat` |
 | [Scenario Recipes](articles/scenario-recipes.md) | Choose a product-oriented documentation route / 选择面向产品场景的文档路线 |
 | [First Release Overview](articles/first-release-overview.md) | Understand scope, compatibility, and boundaries / 了解首版范围、兼容性与边界 |

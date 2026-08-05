@@ -59,6 +59,10 @@ The source is intentionally split into a dedicated [`ShowcaseRunner.cs`](https:/
 
 源码有意拆分到独立的 [`ShowcaseRunner.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ConsoleSamples/ShowcaseRunner.cs)，原有 [`Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ConsoleSamples/Program.cs) 继续承担广覆盖模块 smoke。`showcase` 继续作为 `tutorial` 的兼容别名。
 
+For a release-post check, use the [`PublishedPackageSamples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples/PublishedPackageSamples) fixture. It restores the public `5.0.0-preview.1` managed and Windows x64 runtime packages and produces the same gallery without a project reference. See [Published Package Samples](published-package-samples.md) for the complete command and evidence interpretation.
+
+发布后验证请使用 [`PublishedPackageSamples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples/PublishedPackageSamples) 夹具。它从公开源恢复 `5.0.0-preview.1` managed 包和 Windows x64 runtime 包，不使用项目引用即可生成同一图集。完整命令和证据解释见[已发布包案例](published-package-samples.md)。
+
 ## What Each Case Proves / 每个案例证明什么
 
 ### Image pipeline / 图像流水线
@@ -93,9 +97,9 @@ The template case uses `CCoeffNormed`, reads the best location with `MinMaxLoc`,
 
 ### KNN classification / KNN 分类
 
-The ML case trains a `KNearest` classifier, classifies a batch matrix of 3,600 samples in one native call, converts the result matrix to managed data, and renders the decision surface. It demonstrates that classical OpenCV ML can be composed with the image API rather than living in an isolated console-only example.
+When the optional ML module is linked, the ML case trains a `KNearest` classifier, classifies a batch matrix of 3,600 samples in one native call, converts the result matrix to managed data, and renders the decision surface. When it is not linked, the same panel records `NOT_LINKED` and keeps the other five workflows inspectable. This makes the showcase honest about runtime capabilities while remaining headless and CI-friendly.
 
-ML 案例训练 `KNearest` 分类器，在一次 native 调用中批量分类 3,600 个样本，将结果矩阵转回 managed 数据，并绘制 decision surface。这说明 OpenCV 传统机器学习可以直接与图像 API 组合，而不是停留在孤立的控制台输出中。
+链接可选 ML 模块时，ML 案例训练 `KNearest` 分类器，在一次 native 调用中批量分类 3,600 个样本，将结果矩阵转回 managed 数据，并绘制 decision surface。未链接时，同一面板会记录 `NOT_LINKED`，其余五个工作流仍可检查。这样既保持无头和 CI 友好，也如实反映 runtime 能力。
 
 ## Headless And CI Friendly / 适合无头与 CI 环境
 

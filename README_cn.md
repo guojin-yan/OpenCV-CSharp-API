@@ -165,6 +165,19 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 
 建议从[系列教程](docs/articles/tutorial-series.md)开始。每个输出都对应一篇技术文章，其中包含可运行命令、核心代码、runtime profile 以及深入模块指南的链接。原 `showcase` 命令继续作为兼容别名。
 
+[已发布包案例](samples/PublishedPackageSamples)已经按功能拆分为多个独立项目。每个项目只从公开源恢复 managed API 和 `win-x64` runtime、运行一个模块，并对应一篇聚焦的技术文章：
+
+| 功能模块 | 独立案例项目 | 技术文章 |
+| --- | --- | --- |
+| 图像处理流水线 | [`Case01.ImagePipeline`](samples/PublishedPackageSamples/Case01.ImagePipeline) | [教程 01](docs/articles/tutorial-01-image-pipeline.md) |
+| OpenCV 中文 `putText` | [`Case02.ChinesePutText`](samples/PublishedPackageSamples/Case02.ChinesePutText) | [教程 02](docs/articles/tutorial-02-chinese-puttext.md) |
+| 阈值与轮廓 | [`Case03.Contours`](samples/PublishedPackageSamples/Case03.Contours) | [教程 03](docs/articles/tutorial-03-contours.md) |
+| ORB 特征 | [`Case04.OrbFeatures`](samples/PublishedPackageSamples/Case04.OrbFeatures) | [教程 04](docs/articles/tutorial-04-orb-features.md) |
+| 模板匹配 | [`Case05.TemplateMatching`](samples/PublishedPackageSamples/Case05.TemplateMatching) | [教程 05](docs/articles/tutorial-05-template-matching.md) |
+| KNN 分类 | [`Case06.KnnClassification`](samples/PublishedPackageSamples/Case06.KnnClassification) | [教程 06](docs/articles/tutorial-06-knn-classification.md) |
+
+学习时只运行当前功能对应的项目。根目录聚合项目仅保留给发布回归检查；用于复现的包版本统一维护在 `PublishedPackageSamples.props`，不会写进普通安装命令。
+
 ## 文档
 
 | 资源 | 说明 |
@@ -172,6 +185,7 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 | [在线文档](https://guojin-yan.github.io/OpenCV-CSharp-API/) | API reference 和专题文章 |
 | [快速开始](docs/articles/quick-start.md) | 安装并编写第一个程序 |
 | [系列教程](docs/articles/tutorial-series.md) | 6 个可执行案例及同步技术文章 |
+| [已发布包案例](docs/articles/published-package-samples.md) | 使用当前已发布包夹具逐个运行 6 个独立模块项目 |
 | [OpenCV 中文写字](docs/articles/tutorial-02-chinese-puttext.md) | 通过 OpenCV 5 `putText` 把 UTF-8 中文直接写入 `Mat` |
 | [可视化案例](docs/articles/visual-showcase.md) | 输出图集与兼容命令 |
 | [场景配方](docs/articles/scenario-recipes.md) | 面向任务的使用流程 |
@@ -210,6 +224,7 @@ OpenCV-CSharp-API/
 |-- src/OpenCvSharp/                    Managed API
 |-- src/OpenCvSharp.Native/             稳定 native C ABI
 |-- samples/ConsoleSamples/             Smoke 与可视化示例
+|-- samples/PublishedPackageSamples/    已发布 NuGet 包验证夹具
 |-- packaging/runtime/                  RID/profile runtime package 模板
 |-- compatibility/                      API、ABI 与 upstream map
 |-- docs/                               DocFX 配置与文章

@@ -12,10 +12,12 @@ Pass a TTF/TTC/OpenType font containing the required Chinese glyphs:
 
 传入包含所需中文字形的 TTF/TTC/OpenType 字体：
 
+The independent [`Case02.ChinesePutText/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case02.ChinesePutText/Program.cs) owns font resolution, OpenCV `FontFace` lifetime, UTF-8 rendering, bounds measurement, and PNG output.
+
+独立的 [`Case02.ChinesePutText/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case02.ChinesePutText/Program.cs) 自行完成字体解析、OpenCV `FontFace` 生命周期、UTF-8 渲染、边界测量和 PNG 输出。
+
 ```powershell
-dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
-  -p:OpenCvNativeRuntimeDir=E:\path\to\runtime `
-  -- tutorial text .\artifacts\tutorial-02 C:\Windows\Fonts\Deng.ttf
+dotnet run --project .\samples\PublishedPackageSamples\Case02.ChinesePutText\Case02.ChinesePutText.csproj -c Release -- .\artifacts\tutorial-02 C:\Windows\Fonts\Deng.ttf
 ```
 
 Alternatively set `OPENCV_CSHARP_CJK_FONT`. If neither input is supplied, the sample checks known CJK font locations on Windows, Linux, and macOS and fails with an actionable message when none is found.

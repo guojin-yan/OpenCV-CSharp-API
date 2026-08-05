@@ -165,6 +165,19 @@ The command writes image processing, native OpenCV Chinese text, contour, ORB fe
 
 Start with the [Tutorial Series](docs/articles/tutorial-series.md). Each output has a matching technical article, runnable command, focused code, runtime profile, and links into the deeper module guides. The earlier `showcase` command remains a compatibility alias.
 
+The [published-package samples](samples/PublishedPackageSamples) are split into independent projects. Each one restores the public managed API and `win-x64` runtime, runs one module, and links to one focused article:
+
+| Module | Independent project | Article |
+| --- | --- | --- |
+| Image pipeline | [`Case01.ImagePipeline`](samples/PublishedPackageSamples/Case01.ImagePipeline) | [Tutorial 01](docs/articles/tutorial-01-image-pipeline.md) |
+| OpenCV Chinese `putText` | [`Case02.ChinesePutText`](samples/PublishedPackageSamples/Case02.ChinesePutText) | [Tutorial 02](docs/articles/tutorial-02-chinese-puttext.md) |
+| Threshold and contours | [`Case03.Contours`](samples/PublishedPackageSamples/Case03.Contours) | [Tutorial 03](docs/articles/tutorial-03-contours.md) |
+| ORB features | [`Case04.OrbFeatures`](samples/PublishedPackageSamples/Case04.OrbFeatures) | [Tutorial 04](docs/articles/tutorial-04-orb-features.md) |
+| Template matching | [`Case05.TemplateMatching`](samples/PublishedPackageSamples/Case05.TemplateMatching) | [Tutorial 05](docs/articles/tutorial-05-template-matching.md) |
+| KNN classification | [`Case06.KnnClassification`](samples/PublishedPackageSamples/Case06.KnnClassification) | [Tutorial 06](docs/articles/tutorial-06-knn-classification.md) |
+
+Run only the project for the feature you are learning. The root aggregate project is retained solely for release regression checks; the pinned fixture version is maintained in `PublishedPackageSamples.props`, outside normal installation commands.
+
 ## Documentation
 
 | Resource | Description |
@@ -172,6 +185,7 @@ Start with the [Tutorial Series](docs/articles/tutorial-series.md). Each output 
 | [Documentation site](https://guojin-yan.github.io/OpenCV-CSharp-API/) | API reference and articles |
 | [Quick Start](docs/articles/quick-start.md) | Install and write the first program |
 | [Tutorial Series](docs/articles/tutorial-series.md) | Six executable tutorials with synchronized technical articles |
+| [Published Package Samples](docs/articles/published-package-samples.md) | Run six independent module projects against the current published package fixture |
 | [OpenCV PutText With Chinese](docs/articles/tutorial-02-chinese-puttext.md) | Render UTF-8 Chinese directly into `Mat` through OpenCV 5 `putText` |
 | [Visual Showcase](docs/articles/visual-showcase.md) | Output gallery and compatibility commands |
 | [Scenario Recipes](docs/articles/scenario-recipes.md) | Task-oriented workflows |
@@ -210,6 +224,7 @@ OpenCV-CSharp-API/
 |-- src/OpenCvSharp/                    Managed API
 |-- src/OpenCvSharp.Native/             Stable native C ABI
 |-- samples/ConsoleSamples/             Smoke and visual examples
+|-- samples/PublishedPackageSamples/   Published NuGet package validation fixture
 |-- packaging/runtime/                  RID/profile runtime package template
 |-- compatibility/                      API, ABI, and upstream maps
 |-- docs/                               DocFX configuration and articles

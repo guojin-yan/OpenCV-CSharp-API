@@ -62,9 +62,9 @@ Use [DNN Net Guide](dnn-net-guide.md) for model loading, input blobs, forward ou
 
 ## Classical Machine Learning / 传统机器学习
 
-[ML Guide](ml-guide.md) covers `TrainData`, KNN, SVM, Bayes, trees, boosting, EM, logistic regression, and neural-network models. `tutorial ml` demonstrates batch prediction and visualization with KNN. Keep feature scaling, label type, train/test separation, and model persistence under application control.
+[ML Guide](ml-guide.md) covers `TrainData`, KNN, SVM, Bayes, trees, boosting, EM, logistic regression, and neural-network models. `tutorial ml` demonstrates batch prediction and visualization with KNN when the selected runtime links the optional ML module; otherwise it records `NOT_LINKED` as a capability result. Keep feature scaling, label type, train/test separation, and model persistence under application control.
 
-[ML Guide](ml-guide.md) 覆盖 `TrainData`、KNN、SVM、Bayes、trees、boosting、EM、logistic regression 和神经网络模型；`tutorial ml` 演示 KNN 批量预测与可视化。feature scaling、label type、train/test 划分和模型持久化应由应用控制。
+[ML Guide](ml-guide.md) 覆盖 `TrainData`、KNN、SVM、Bayes、trees、boosting、EM、logistic regression 和神经网络模型；所选 runtime 链接可选 ML 模块时，`tutorial ml` 演示 KNN 批量预测与可视化，否则记录 `NOT_LINKED` 能力结果。feature scaling、label type、train/test 划分和模型持久化应由应用控制。
 
 ## Detection, Tracking, And Faces / 检测、跟踪与人脸
 
