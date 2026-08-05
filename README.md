@@ -37,7 +37,7 @@ The current public version is reported by the live NuGet badges below. The previ
 - One managed package plus full and mini native runtime profiles for 14 verified Windows, Linux, and Android emulator RIDs.
 - .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
 - Deterministic packages on NuGet.org and GitHub Packages, SPDX 2.3 SBOMs, protected release approval, and verified GitHub Release assets.
-- Headless, executable examples that generate inspectable PNG output without a camera, model download, or GUI session.
+- Twenty-three grouped, headless workflows with inspectable PNG output; model-backed DNN cases use one-time, hash-verified asset bundles while the remaining cases stay fully offline.
 - Checked compatibility baselines covering 611 public managed types, 6,300 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
 
 ## Get Started In 30 Seconds
@@ -105,7 +105,7 @@ Full runtimes use the version-neutral pattern `JYPPX.OpenCV.runtime.<rid>`; mini
 
 Choose the runtime package that matches your target RID and preferred profile.
 
-The full profile guarantees its matrix-required modules, including DNN, calibration, features, Photo, Video, HighGui, and Stitching. ML, Tracking, and selected contrib modules are optional staged modules: their managed APIs remain stable, and unavailable native features report `NOT_LINKED`. The mini profile focuses on `core`, `imgproc`, `imgcodecs`, and `videoio`, with the required `geometry` and `flann` dependencies.
+The full profile guarantees its matrix-required modules, including DNN, ML, calibration, features, Photo, Video, HighGui, and Stitching. Tracking and additional contrib modules are optional staged modules: their managed APIs remain stable, and unavailable native features report `NOT_LINKED`. The mini profile focuses on `core`, `imgproc`, `imgcodecs`, and `videoio`, with the required `geometry` and `flann` dependencies. Packages published before the corrected Full/ML boundary can report `NOT_LINKED` for ML; use the latest Full runtime for ML workloads.
 
 Do not reference full and mini runtime packages together. Keep the managed and runtime packages on the same normalized NuGet package version.
 
@@ -145,7 +145,8 @@ If there is no matching runtime package, build a local native runtime with `scri
 | Geometry and FLANN runtime dependencies | Yes | Yes |
 | DNN, object detection, calibration, features | Yes | No |
 | Photo, Video, HighGui, Stitching | Yes | No |
-| ML, Tracking, selected contrib modules | Runtime-dependent | No |
+| ML | Yes | No |
+| Tracking, additional contrib modules | Runtime-dependent | No |
 | Stable response for an unavailable module | `NOT_LINKED` | `NOT_LINKED` |
 
 ## Tutorial Series And Visual Results
@@ -165,7 +166,7 @@ The command writes image processing, native OpenCV Chinese text, contour, ORB fe
 
 Start with the [Tutorial Series](docs/articles/tutorial-series.md). Each output has a matching technical article, runnable command, focused code, runtime profile, and links into the deeper module guides. The earlier `showcase` command remains a compatibility alias.
 
-The [`samples`](samples) directory is a scalable, grouped catalog of complete examples. Image processing, features, geometry, video, classical ML, and deep learning each have their own numbered subdirectories. The full catalog, commands, outputs, and article map are maintained in [`samples/README.md`](samples/README.md).
+The [`samples`](samples) directory is a scalable catalog of 23 complete examples. Image processing, features, geometry, video, tracking, stitching, classical ML, and deep learning each have numbered subdirectories. The full catalog, commands, outputs, and article map are maintained in [`samples/README.md`](samples/README.md); model provenance and verified downloads are documented in [Sample Model Assets](docs/articles/sample-model-assets-guide.md).
 
 Run only the project for the feature you are learning. Each case restores the public managed API and the matching runtime fixture, performs a complete workflow, writes a focused result, and prints package/native build metadata. The reproducible fixture pin lives in `samples/SamplePackages.props`; normal installation commands remain version-neutral.
 
@@ -177,6 +178,7 @@ Run only the project for the feature you are learning. Each case restores the pu
 | [Quick Start](docs/articles/quick-start.md) | Install and write the first program |
 | [Tutorial Series](docs/articles/tutorial-series.md) | Grouped executable examples with synchronized technical articles |
 | [Example Catalog](docs/articles/example-catalog.md) | Run the package-backed examples by capability group |
+| [Sample Model Assets](docs/articles/sample-model-assets-guide.md) | Download pinned models with source, hash, and license verification |
 | [OpenCV PutText With Chinese](docs/articles/tutorial-02-chinese-puttext.md) | Render UTF-8 Chinese directly into `Mat` through OpenCV 5 `putText` |
 | [Visual Showcase](docs/articles/visual-showcase.md) | Output gallery and compatibility commands |
 | [Scenario Recipes](docs/articles/scenario-recipes.md) | Task-oriented workflows |
@@ -219,8 +221,10 @@ OpenCV-CSharp-API/
 |-- samples/Features/                   Feature detection and matching examples
 |-- samples/Geometry/                   Projective geometry examples
 |-- samples/Video/                      Motion and temporal examples
+|-- samples/Tracking/                   Stateful object-tracking examples
+|-- samples/Stitching/                  Multi-image panorama examples
 |-- samples/MachineLearning/            KNN and SVM examples
-|-- samples/DeepLearning/               ONNX/DNN examples
+|-- samples/DeepLearning/               ONNX classification, detection, and segmentation
 |-- samples/Common/                     Shared sample infrastructure
 |-- packaging/runtime/                  RID/profile runtime package template
 |-- compatibility/                      API, ABI, and upstream maps
@@ -267,7 +271,7 @@ The following compact notes preserve the repository's audited build contracts. M
 - Local sample and test builds use `OpenCvNativeRuntimeDir`. To build a missing runtime locally, point local samples/tests at that property.
 - The public managed build-info surface is `OpenCvSharpBuildInfo`; native interop imports use `JYPPX.OpenCV.Native` and `jyppx_ocv_*` entry points.
 - `runtime-input.yml` produces factual `runtime-input-<rid>-<profile>` artifacts containing `native-wrapper/`, `opencv-runtime/`, and `opencv-source/`. Named examples include `runtime-input-win-x64-full`, `runtime-input-ubuntu.24.04-x64-full`, `runtime-input-ubuntu.24.04-x64-mini`, `runtime-input-ubuntu.24.04-arm64-full`, `runtime-input-ubuntu.22.04-x64-full`, `runtime-input-ubuntu.22.04-x64-mini`, `runtime-input-ubuntu.22.04-arm64-full`, `runtime-input-debian.12-x64-full`, `runtime-input-debian.12-arm64-full`, `runtime-input-fedora.40-x64-full`, `runtime-input-rhel.9-x64-full`, `runtime-input-rocky.9-x64-full`, and `runtime-input-alpine.3.20-x64-full`.
-- Windows runtime evidence distinguishes `CMAKE_ASM_COMPILER=NOTFOUND`, `OPENCV_DNN_MLAS_ENABLED=0`, factual `opencv_<module>500.dll` files, the single-loader 17 AMD64 DLL full payload, and Linux SONAME layouts.
+- Windows runtime evidence distinguishes `CMAKE_ASM_COMPILER=NOTFOUND`, `OPENCV_DNN_MLAS_ENABLED=0`, factual `opencv_<module>500.dll` files, and Linux SONAME layouts. The corrected Full contract is one loader plus 17 modules, for 18 AMD64 DLLs. The previously verified 17 AMD64 DLL result belongs only to the 16-module first-preview historical candidate and cannot authorize the corrected release.
 - The pack workflow operates over the active multi-RID runtime package matrix and its full/mini profiles. Synthetic jobs validate package shape, while publishable jobs require factual inputs and consumer restore verification. All normalized nupkg outputs remain neutral workflow artifacts rooted under `artifacts/packages`.
 - `pack.yml` does not build real runtime inputs. Real input paths must already exist on the selected runner or come from `real_runtime_artifact_run_id`. Synthetic runtime inputs are package-surface validation only; real publishable runtime packages require `SyntheticRuntimeInputs=false`, non-synthetic provenance, and release preflight.
 - Before packing, pass the exact release version with `-PackageVersion` and the factual staged runtime with `-OpenCvNativeRuntimeDir`. Public package IDs stay version-neutral; normalized `.nupkg` files are written beneath `artifacts\packages`.

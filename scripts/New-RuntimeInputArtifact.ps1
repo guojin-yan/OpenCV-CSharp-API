@@ -5,6 +5,7 @@ param(
     [string]$NativeRuntimeDir,
     [string]$OpenCvRuntimeDir,
     [string]$OpenCvSourceDir,
+    [string]$OpenCvContribSourceDir = "",
     [string]$OpenCvInstallDir = "",
     [string]$HostedRunner = "",
     [string]$RunnerImage = "",
@@ -289,6 +290,11 @@ $profileDefinition = $profileSpec[0]
 $nativeRuntimePath = Resolve-InputDirectory -Name "NativeRuntimeDir" -Value $NativeRuntimeDir
 $openCvRuntimePath = Resolve-InputDirectory -Name "OpenCvRuntimeDir" -Value $OpenCvRuntimeDir
 $openCvSourcePath = Resolve-InputDirectory -Name "OpenCvSourceDir" -Value $OpenCvSourceDir
+$requiresContribSource = @($profileDefinition.modules) -contains "ml"
+if ($requiresContribSource -and [string]::IsNullOrWhiteSpace($OpenCvContribSourceDir)) {
+    throw "OpenCvContribSourceDir is required because runtime profile '$RuntimeProfile' requires the OpenCV 5 ml module."
+}
+$openCvContribSourcePath = if ([string]::IsNullOrWhiteSpace($OpenCvContribSourceDir)) { "" } else { Resolve-InputDirectory -Name "OpenCvContribSourceDir" -Value $OpenCvContribSourceDir }
 $openCvInstallPath = if ([string]::IsNullOrWhiteSpace($OpenCvInstallDir)) { "" } else { Resolve-InputDirectory -Name "OpenCvInstallDir" -Value $OpenCvInstallDir }
 
 $outputRootCandidate = if ([System.IO.Path]::IsPathRooted($OutputRoot)) {
@@ -369,6 +375,20 @@ $licenseEntries.Add([pscustomobject]@{
     SourcePath = [System.IO.Path]::GetFullPath($openCvLicense)
     ArtifactPath = "opencv-source/LICENSE"
 })
+
+if (-not [string]::IsNullOrWhiteSpace($openCvContribSourcePath)) {
+    $openCvContribLicense = Join-Path $openCvContribSourcePath "LICENSE"
+    if (-not (Test-Path -LiteralPath $openCvContribLicense -PathType Leaf)) {
+        throw "OpenCV contrib source LICENSE was not found: $openCvContribLicense"
+    }
+
+    Copy-Item -LiteralPath $openCvContribLicense -Destination (Join-Path $openCvSourceArtifactDir "opencv_contrib-LICENSE") -Force
+    $licenseEntries.Add([pscustomobject]@{
+        FileName = "opencv_contrib-LICENSE"
+        SourcePath = [System.IO.Path]::GetFullPath($openCvContribLicense)
+        ArtifactPath = "opencv-source/opencv_contrib-LICENSE"
+    })
+}
 
 $ippicvReadme = Join-Path (Join-Path (Join-Path $openCvSourcePath "3rdparty") "ippicv") "readme.htm"
 if (Test-Path -LiteralPath $ippicvReadme -PathType Leaf) {
@@ -477,6 +497,7 @@ $manifest = [ordered]@{
         NativeRuntimeDir = $nativeRuntimePath
         OpenCvRuntimeDir = $openCvRuntimePath
         OpenCvSourceDir = $openCvSourcePath
+        OpenCvContribSourceDir = $openCvContribSourcePath
         OpenCvInstallDir = $openCvInstallPath
     }
     NativeLoaderFiles = @($nativeEntries)

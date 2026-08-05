@@ -380,6 +380,20 @@ jobs:
           if ($LASTEXITCODE -ne 0) {
             throw "OpenCV source clone failed."
           }
+          if ('${{ matrix.profile }}' -eq 'full') {
+            $contribSourceDir = [IO.Path]::GetFullPath((Join-Path $sourceRoot "opencv_contrib-${{ inputs.opencv_version }}"))
+            if (-not $contribSourceDir.StartsWith($sourceRootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+              throw "OpenCV contrib source reset target escaped its dedicated root: $contribSourceDir"
+            }
+            if (Test-Path -LiteralPath $contribSourceDir) {
+              [IO.Directory]::Delete($contribSourceDir, $true)
+              Write-Host "OPENCV_CONTRIB_SOURCE_RESET_EVIDENCE path=$contribSourceDir reason=required-full-ml-source"
+            }
+            git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv_contrib.git $contribSourceDir
+            if ($LASTEXITCODE -ne 0) {
+              throw "OpenCV contrib source clone failed."
+            }
+          }
       - name: Build OpenCV runtime
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         shell: pwsh
@@ -484,10 +498,10 @@ jobs:
           profile='${{ matrix.profile }}'
           case "$profile" in
             full)
-              expected_module_count=16
-              expected_canonical_count=17
-              expected_runtime_file_count=49
-              expected_direct_opencv=16
+              expected_module_count=17
+              expected_canonical_count=18
+              expected_runtime_file_count=52
+              expected_direct_opencv=17
               ;;
             mini)
               expected_module_count=6
@@ -699,6 +713,7 @@ jobs:
           }
           $openCvRuntimeDir = [string]$openCvRuntimeDirMatches[0]
           $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
+          $openCvContribSourceDir = if ('${{ matrix.profile }}' -eq 'full') { Join-Path $workspaceRoot "opencv-source/opencv_contrib-${{ inputs.opencv_version }}" } else { '' }
 
           & ./scripts/New-RuntimeInputArtifact.ps1 `
             -Rid '${{ matrix.rid }}' `
@@ -707,6 +722,7 @@ jobs:
             -NativeRuntimeDir ./build/native-linked `
             -OpenCvRuntimeDir $openCvRuntimeDir `
             -OpenCvSourceDir $openCvSourceDir `
+            -OpenCvContribSourceDir $openCvContribSourceDir `
             -OpenCvInstallDir $openCvInstallDir `
             -HostedRunner '${{ matrix.os }}' `
             -RunnerImage $env:PRODUCER_RUNNER_IMAGE `
@@ -849,6 +865,20 @@ jobs:
           git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv.git $sourceDir
           if ($LASTEXITCODE -ne 0) {
             throw 'Android OpenCV source clone failed.'
+          }
+          if ('${{ matrix.profile }}' -eq 'full') {
+            $contribSourceDir = [IO.Path]::GetFullPath((Join-Path $sourceRoot 'opencv_contrib-${{ inputs.opencv_version }}'))
+            if (-not $contribSourceDir.StartsWith($sourceRootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+              throw "Android OpenCV contrib source reset target escaped its dedicated root: $contribSourceDir"
+            }
+            if (Test-Path -LiteralPath $contribSourceDir) {
+              [IO.Directory]::Delete($contribSourceDir, $true)
+              Write-Host "ANDROID_OPENCV_CONTRIB_SOURCE_RESET_EVIDENCE path=$contribSourceDir reason=required-full-ml-source"
+            }
+            git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv_contrib.git $contribSourceDir
+            if ($LASTEXITCODE -ne 0) {
+              throw 'Android OpenCV contrib source clone failed.'
+            }
           }
       - name: Build and audit Android runtime input
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
@@ -1452,6 +1482,20 @@ jobs:
           if ($LASTEXITCODE -ne 0) {
             throw "OpenCV source clone failed."
           }
+          if ('${{ matrix.profile }}' -eq 'full') {
+            $contribSourceDir = [IO.Path]::GetFullPath((Join-Path $sourceRoot "opencv_contrib-${{ inputs.opencv_version }}"))
+            if (-not $contribSourceDir.StartsWith($sourceRootPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+              throw "OpenCV contrib source reset target escaped its dedicated root: $contribSourceDir"
+            }
+            if (Test-Path -LiteralPath $contribSourceDir) {
+              [IO.Directory]::Delete($contribSourceDir, $true)
+              Write-Host "OPENCV_CONTRIB_SOURCE_RESET_EVIDENCE path=$contribSourceDir reason=required-full-ml-source"
+            }
+            git -c advice.detachedHead=false clone --depth 1 --branch '${{ inputs.opencv_version }}' https://github.com/opencv/opencv_contrib.git $contribSourceDir
+            if ($LASTEXITCODE -ne 0) {
+              throw "OpenCV contrib source clone failed."
+            }
+          }
       - name: Apply audited Windows ARM64 OpenCV MLAS processor patch
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'win-arm64' }}
         id: arm64_patch
@@ -1793,6 +1837,7 @@ jobs:
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
           $openCvSourceDir = Join-Path $workspaceRoot 'opencv-source/opencv-${{ inputs.opencv_version }}'
+          $openCvContribSourceDir = if ('${{ matrix.profile }}' -eq 'full') { Join-Path $workspaceRoot 'opencv-source/opencv_contrib-${{ inputs.opencv_version }}' } else { '' }
           & ./scripts/New-RuntimeInputArtifact.ps1 `
             -Rid '${{ matrix.rid }}' `
             -RuntimeProfile '${{ matrix.profile }}' `
@@ -1800,6 +1845,7 @@ jobs:
             -NativeRuntimeDir ./build/native-linked/Release `
             -OpenCvRuntimeDir '${{ steps.opencv.outputs.runtime_dir }}' `
             -OpenCvSourceDir $openCvSourceDir `
+            -OpenCvContribSourceDir $openCvContribSourceDir `
             -OpenCvInstallDir '${{ steps.opencv.outputs.install_dir }}' `
             -HostedRunner '${{ matrix.os }}' `
             -RunnerImage '${{ steps.windows.outputs.runner_image }}' `
@@ -2785,6 +2831,7 @@ jobs:
 
               source_root="/workspace/opencv-source"
               source_dir="$source_root/opencv-$OPENCV_VERSION"
+              contrib_source_dir=""
               compiler_path="$(command -v g++)"
               compiler_version="$(g++ --version | head -n 1) target=$(g++ -dumpmachine)"
               assembler_target="$(as --version | sed -n "s/^This assembler was configured for a target of //p" | tr -cd "[:alnum:]_.-" | head -n 1)"
@@ -2826,6 +2873,18 @@ jobs:
                 echo "OPENCV_SOURCE_RESET_EVIDENCE path=$source_dir reason=upstream-map-partial-source"
               fi
               git -c advice.detachedHead=false clone --depth 1 --branch "$OPENCV_VERSION" https://github.com/opencv/opencv.git "$source_dir"
+              if [ "$RUNTIME_PROFILE" = "full" ]; then
+                contrib_source_dir="/workspace/opencv-source/opencv_contrib-$OPENCV_VERSION"
+                case "$contrib_source_dir" in
+                  /workspace/opencv-source/opencv_contrib-*) ;;
+                  *) echo "OpenCV contrib source reset target escaped its dedicated root: $contrib_source_dir" >&2; exit 1 ;;
+                esac
+                if [ -e "$contrib_source_dir" ]; then
+                  rm -rf -- "$contrib_source_dir"
+                  echo "OPENCV_CONTRIB_SOURCE_RESET_EVIDENCE path=$contrib_source_dir reason=required-full-ml-source"
+                fi
+                git -c advice.detachedHead=false clone --depth 1 --branch "$OPENCV_VERSION" https://github.com/opencv/opencv_contrib.git "$contrib_source_dir"
+              fi
 
               pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 \
                 -OpenCvVersion "$OPENCV_VERSION" \
@@ -2919,11 +2978,11 @@ jobs:
                if [ "$container_distro" = "alpine" ]; then
                  case "$RUNTIME_PROFILE" in
                    full)
-                     modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
-                     expected_opencv_count=16
-                     expected_canonical_count=17
-                     expected_runtime_file_count=49
-                     expected_direct_opencv=16
+                     modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud"
+                     expected_opencv_count=17
+                     expected_canonical_count=18
+                     expected_runtime_file_count=52
+                     expected_direct_opencv=17
                      ;;
                    mini)
                      modules="core imgproc imgcodecs videoio geometry flann"
@@ -3006,11 +3065,11 @@ jobs:
                if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ] || [ "$PRODUCER_RID" = "debian.12-arm64" ] || [ "$PRODUCER_RID" = "debian.12-x64" ] || [ "$PRODUCER_RID" = "fedora.40-x64" ] || [ "$PRODUCER_RID" = "rocky.9-x64" ] || [ "$PRODUCER_RID" = "rhel.9-x64" ]; then
                 case "$RUNTIME_PROFILE" in
                   full)
-                    modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
-                    expected_opencv_count=16
-                    expected_canonical_count=17
-                    expected_runtime_file_count=49
-                    expected_direct_opencv=16
+                    modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud"
+                    expected_opencv_count=17
+                    expected_canonical_count=18
+                    expected_runtime_file_count=52
+                    expected_direct_opencv=17
                     ;;
                   mini)
                     modules="core imgproc imgcodecs videoio geometry flann"
@@ -3133,6 +3192,7 @@ jobs:
                 -NativeRuntimeDir ./build/native-linked \
                 -OpenCvRuntimeDir "$open_cv_runtime_dir" \
                 -OpenCvSourceDir "$source_dir" \
+                -OpenCvContribSourceDir "$contrib_source_dir" \
                 -OpenCvInstallDir "$open_cv_install_dir" \
                 -HostedRunner "$HOSTED_RUNNER" \
                 -RunnerImage "$HOSTED_RUNNER_IMAGE" \

@@ -616,6 +616,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'OPENCV_SOURCE_RESET_EVIDENCE path=$source_dir reason=upstream-map-partial-source'; Issue = "Container producers must record their partial-source reset" },
         [pscustomobject]@{ Needle = "git -c advice.detachedHead=false clone --depth 1 --branch"; Issue = "Producer workflow must fetch factual OpenCV source for real runtime inputs" },
         [pscustomobject]@{ Needle = "https://github.com/opencv/opencv.git"; Issue = "Producer workflow must fetch OpenCV from the upstream source repository" },
+        [pscustomobject]@{ Needle = "https://github.com/opencv/opencv_contrib.git"; Issue = "Full producer workflow must fetch the matching OpenCV contrib source required by ML" },
+        [pscustomobject]@{ Needle = "reason=required-full-ml-source"; Issue = "Full producer workflow must record guarded contrib source reset evidence" },
         [pscustomobject]@{ Needle = "./scripts/Build-OpenCV.ps1"; Issue = "Producer workflow must build OpenCV runtime inputs" },
         [pscustomobject]@{ Needle = "-Build"; Issue = "Producer workflow must run the OpenCV build/install target, not only describe it" },
         [pscustomobject]@{ Needle = "OPENCV_CSHARP_OPENCV_DIR"; Issue = "Producer workflow must link native wrapper against produced OpenCV config" },
@@ -718,7 +720,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'Resolve-Dumpbin -ExplicitPath $DumpbinPath -TargetRid $Rid'; Issue = "Windows PE audit must discover architecture-specific dumpbin without a producer path" },
         [pscustomobject]@{ Needle = '$expectedFileNames = @($primaryLoaderName) + $moduleFileNames'; Issue = "Windows PE audit must require exactly one neutral loader plus the matrix modules" },
         [pscustomobject]@{ Needle = 'Packaged OpenCV dependency closure is incomplete'; Issue = "Windows PE audit must reject missing package-owned imports" },
-        [pscustomobject]@{ Needle = 'Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph'; Issue = "Windows PE audit must require the complete 16-module graph closure" },
+        [pscustomobject]@{ Needle = 'Matrix-required OpenCV DLLs must all be reachable from the primary loader import graph'; Issue = "Windows PE audit must require the complete 17-module graph closure" },
         [pscustomobject]@{ Needle = 'WINDOWS_PE_AUDIT_OK'; Issue = "Windows PE audit must emit a deterministic success marker" })) {
     Assert-Contains -Violations $violations -Path $windowsPeAuditPath -Text $windowsPeAuditText -Needle $required.Needle -Issue $required.Issue
 }
@@ -792,6 +794,11 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "OpenCvExtraCMakeArgs = `$OpenCvExtraCMakeArgs"; Issue = "Runtime input artifact provenance must record distro-specific OpenCV CMake arguments" },
         [pscustomobject]@{ Needle = "OpenCvSourcePatchEvidence = `$OpenCvSourcePatchEvidence"; Issue = "Runtime input artifact provenance must record audited OpenCV source patch evidence" },
         [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
+        [pscustomobject]@{ Needle = '[string]$OpenCvContribSourceDir = ""'; Issue = "Runtime input artifact script must accept the profile-scoped OpenCV contrib source root" },
+        [pscustomobject]@{ Needle = "OpenCvContribSourceDir is required because runtime profile"; Issue = "Runtime input artifact script must require contrib source whenever the selected profile requires ML" },
+        [pscustomobject]@{ Needle = "OpenCV contrib source LICENSE was not found"; Issue = "Runtime input artifact script must fail closed when the required contrib license is absent" },
+        [pscustomobject]@{ Needle = 'ArtifactPath = "opencv-source/opencv_contrib-LICENSE"'; Issue = "Runtime input artifact script must preserve the contrib license in the neutral handoff" },
+        [pscustomobject]@{ Needle = "OpenCvContribSourceDir = `$openCvContribSourcePath"; Issue = "Runtime input artifact provenance must record the resolved contrib source root" },
         [pscustomobject]@{ Needle = "JYPPX.OpenCV.Native"; Issue = "Runtime input artifact script must require the neutral native loader" },
         [pscustomobject]@{ Needle = 'return @("JYPPX.OpenCV.Native.dll")'; Issue = "Runtime input artifact script must expose only the neutral Windows loader" },
         [pscustomobject]@{ Needle = "OpenCV source LICENSE was not found"; Issue = "Runtime input artifact script must require OpenCV source license evidence" },
@@ -860,12 +867,14 @@ if ($violations.Count -eq 0) {
     try {
         $fixtureNativeDir = Join-Path $fixtureRoot "native"
         $fixtureSourceDir = Join-Path $fixtureRoot "opencv-source"
+        $fixtureContribSourceDir = Join-Path $fixtureRoot "opencv-contrib-source"
         $fixtureInstallDir = Join-Path $fixtureRoot "opencv-install"
         $fixtureOutputRoot = Join-Path $fixtureRoot "out"
 
         Write-FixtureFile -Path (Join-Path $fixtureNativeDir "libJYPPX.OpenCV.Native.so")
         Write-FixtureFile -Path (Join-Path $fixtureNativeDir "JYPPX.OpenCV.Native.dll")
         Write-FixtureFile -Path (Join-Path $fixtureSourceDir "LICENSE") -Text "OpenCV license fixture"
+        Write-FixtureFile -Path (Join-Path $fixtureContribSourceDir "LICENSE") -Text "OpenCV contrib license fixture"
         Write-FixtureFile -Path (Join-Path (Join-Path (Join-Path $fixtureSourceDir "3rdparty") "ippicv") "readme.htm") -Text "ippicv fixture"
         Write-FixtureFile -Path (Join-Path (Join-Path $fixtureInstallDir "etc/licenses") "opencv-license.txt") -Text "install license fixture"
 
@@ -1001,6 +1010,7 @@ if ($violations.Count -eq 0) {
                 -NativeRuntimeDir $fixtureNativeDir `
                 -OpenCvRuntimeDir $fixtureRuntimeDir `
                 -OpenCvSourceDir $fixtureSourceDir `
+                -OpenCvContribSourceDir $(if ($producerTarget.Profile -eq "full") { $fixtureContribSourceDir } else { "" }) `
                 -OpenCvInstallDir $fixtureInstallDir `
                 -HostedRunner ([string]$producerTarget.Runner) `
                 -RunnerImage $runnerImage `
@@ -1069,6 +1079,36 @@ if ($violations.Count -eq 0) {
             $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
             if ($manifest.SyntheticRuntimeInputs -ne $false) {
                 throw "Fixture provenance did not mark SyntheticRuntimeInputs=false for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+
+            $artifactRoot = Split-Path $manifestPath -Parent
+            $contribLicenseArtifact = Join-Path $artifactRoot "opencv-source/opencv_contrib-LICENSE"
+            $contribLicenseEntries = @($manifest.LicenseFiles | Where-Object { [string]$_.ArtifactPath -eq "opencv-source/opencv_contrib-LICENSE" })
+            if ($producerTarget.Profile -eq "full") {
+                if (-not (Test-Path -LiteralPath $contribLicenseArtifact -PathType Leaf)) {
+                    throw "Fixture full runtime input did not preserve the required OpenCV contrib license for $($producerTarget.Rid)."
+                }
+
+                if (-not ([string]$manifest.InputRoots.OpenCvContribSourceDir).Equals([IO.Path]::GetFullPath($fixtureContribSourceDir), [System.StringComparison]::OrdinalIgnoreCase)) {
+                    throw "Fixture full provenance did not record the exact OpenCV contrib source root for $($producerTarget.Rid)."
+                }
+
+                if ($contribLicenseEntries.Count -ne 1) {
+                    throw "Fixture full provenance must record exactly one OpenCV contrib license for $($producerTarget.Rid); found $($contribLicenseEntries.Count)."
+                }
+            }
+            else {
+                if (Test-Path -LiteralPath $contribLicenseArtifact -PathType Leaf) {
+                    throw "Fixture mini runtime input must not stage an unused OpenCV contrib license for $($producerTarget.Rid)."
+                }
+
+                if (-not [string]::IsNullOrEmpty([string]$manifest.InputRoots.OpenCvContribSourceDir)) {
+                    throw "Fixture mini provenance must keep OpenCvContribSourceDir empty for $($producerTarget.Rid)."
+                }
+
+                if ($contribLicenseEntries.Count -ne 0) {
+                    throw "Fixture mini provenance must not record an OpenCV contrib license for $($producerTarget.Rid)."
+                }
             }
 
             if (-not ([string]$manifest.PlatformFamily).Equals($expectedPlatformFamily, [System.StringComparison]::OrdinalIgnoreCase)) {

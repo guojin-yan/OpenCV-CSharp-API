@@ -17,7 +17,7 @@ param(
     [string]$RuntimePackageId = "",
     [string]$PackageVersion = "",
     [string[]]$OpenCvModules = @(),
-    [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "ml", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"),
+    [string[]]$OptionalOpenCvModules = @("xfeatures2d", "xobjdetect", "quality", "xphoto", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"),
     [switch]$SyntheticRuntimeInputs
 )
 
@@ -584,6 +584,7 @@ if ($optionalRuntimeFiles.Count -gt 0) {
 $licenseFiles = @(
     (Join-Path $repoRoot "LICENSE"),
     (Join-Path $openCvSourcePath "LICENSE"),
+    (Join-Path $openCvSourcePath "opencv_contrib-LICENSE"),
     (Join-Path (Join-Path (Join-Path $openCvSourcePath "3rdparty") "ippicv") "readme.htm")
 )
 

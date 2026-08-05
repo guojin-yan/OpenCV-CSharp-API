@@ -20,11 +20,11 @@
 
 ## Runtime / 运行时
 
-In this local OpenCV 5.0.0 source layout, `ml` is provided by the contrib tree, not the main OpenCV module tree. A linked runtime should include the factual OpenCV 5.0.0 runtime artifact `opencv_ml500.dll`. If the module is not linked, the exported ABI remains present and managed calls report `NOT_LINKED`.
+In this local OpenCV 5.0.0 source layout, `ml` is provided by the contrib tree, not the main OpenCV module tree. Every Full runtime must include the factual OpenCV 5.0.0 runtime artifact `opencv_ml500.dll`; configuration and package guards fail closed when it is absent. Mini keeps the stable managed surface and reports `NOT_LINKED` for ML calls.
 
 ML entrypoints belong to the full runtime profile. The mini profile deliberately excludes the ML source and ABI surface; use a full runtime package for `JYPPX.OpenCvSharp.ML`.
 
-在当前本地 OpenCV 5.0.0 源码布局中，`ml` 来自 contrib 树，而不是 OpenCV 主仓库模块树。linked runtime 应包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_ml500.dll`。如果模块未链接，导出的 ABI 仍存在，managed 调用会报告 `NOT_LINKED`。
+在当前本地 OpenCV 5.0.0 源码布局中，`ml` 来自 contrib 树，而不是 OpenCV 主仓库模块树。每个 Full runtime 都必须包含事实性 OpenCV 5.0.0 runtime 产物 `opencv_ml500.dll`；配置和打包守卫会在缺失时直接失败。Mini 保留稳定的 managed 接口，并在调用 ML 时报告 `NOT_LINKED`。
 
 ## Data Notes / 数据说明
 

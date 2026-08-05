@@ -34,6 +34,7 @@ $requiredOpenCvModules = @(
     "calib",
     "stereo",
     "dnn",
+    "ml",
     "objdetect",
     "photo",
     "features",
@@ -236,6 +237,7 @@ try {
     }
 
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "LICENSE"), "Synthetic OpenCV source license")
+    [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "opencv_contrib-LICENSE"), "Synthetic OpenCV contrib source license")
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "3rdparty/ippicv/readme.htm"), "Synthetic IPPICV license")
     [System.IO.File]::WriteAllText((Join-Path $openCvInstallDir "etc/licenses/synthetic-3rdparty.txt"), "Synthetic third-party license")
 
@@ -277,6 +279,7 @@ try {
 
     $runtimeProjectLicenseDir = Join-Path $runtimeProjectDir "licenses"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "LICENSE") -Issue "Pack-Runtime stage forwarding did not populate runtime project license layout"
+    Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "opencv_contrib-LICENSE") -Issue "Pack-Runtime stage forwarding did not populate the matching OpenCV contrib license"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "readme.htm") -Issue "Pack-Runtime stage forwarding did not populate OpenCV 3rdparty readme.htm"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "opencv-3rdparty/synthetic-3rdparty.txt") -Issue "Pack-Runtime stage forwarding did not populate OpenCV third-party license layout"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectDir "build/JYPPX.OpenCV.runtime.provenance.json") -Issue "Pack-Runtime stage forwarding did not populate runtime provenance manifest"
@@ -301,6 +304,7 @@ try {
 
             foreach ($licenseEntry in @(
                     "licenses/LICENSE",
+                    "licenses/opencv_contrib-LICENSE",
                     "licenses/readme.htm",
                     "licenses/opencv-3rdparty/synthetic-3rdparty.txt")) {
                 Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry $licenseEntry -PackagePath $packagePath -Issue "Runtime package did not contain staged license file"

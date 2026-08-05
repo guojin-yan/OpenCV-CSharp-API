@@ -1,17 +1,17 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/24d37848d9c14b8b",
-  "SourceIdentity": "sha256:24d37848d9c14b8ba57c746dfa8a1164bbb195eae584a5814b37d6df2ec9b1d8",
+  "CandidateId": "local-closeout/sha256/a584ba685972720e",
+  "SourceIdentity": "sha256:a584ba685972720e30613ad2ce73e5bf0ceaf71fa89c8f228b01a690b7429c56",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1603,
-    "Sha256": "24d37848d9c14b8ba57c746dfa8a1164bbb195eae584a5814b37d6df2ec9b1d8",
+    "FileCount": 1636,
+    "Sha256": "a584ba685972720e30613ad2ce73e5bf0ceaf71fa89c8f228b01a690b7429c56",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
     "Path": "packaging/runtime/runtime-package-matrix.json",
-    "Sha256": "6a767ed6b631391ffa7e7ceac2a57b0473245f55caf86855eae0027d6aca4534",
+    "Sha256": "2c5a14a88ced5f51ece8dbc3df731725b57d57b4885bbadd53375e2768a8ac17",
     "RidCount": 17,
     "ProfileCount": 2,
     "EntryCount": 34
@@ -406,8 +406,8 @@
   "EvidenceReferences": [
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "7441b2364d546811cee7293b3564e4ec4fcb9ed0c5efafd4461b8da304e9f4c8",
-      "Length": 262052
+      "Sha256": "9f11c1b42c502cd312565980e06f769f30dff4bc2c0af4bcf4a6748e3207d410",
+      "Length": 262076
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
@@ -416,8 +416,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "1b6ed04f0d02962d61de24cde212d1434f34b69907908857f05da6ada0a9f121",
-      "Length": 191594
+      "Sha256": "e95fc51ef10414f2d1466f821f05c53c945e502ab3ee40b562922447bd0f5e36",
+      "Length": 195868
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
@@ -861,8 +861,8 @@
     },
     {
       "Path": "docs/articles/ml-guide.md",
-      "Sha256": "21f486d7941849385fb1702c9a0075b1a707f2a524da9e63c789b4b6150938b9",
-      "Length": 12312
+      "Sha256": "de639ad97072a8b9a6518d047638e810fc7690863b84a7d9dfd3b9635b827ce0",
+      "Length": 12404
     },
     {
       "Path": "docs/articles/objdetect-structured-parity-guide.md",
@@ -898,6 +898,11 @@
       "Path": "docs/articles/release-candidate-closeout.md",
       "Sha256": "1acb4b586b03cfce2b3ab6a44e83ace18831af0c3d3fa9cfa53f5ed5a94ca500",
       "Length": 10796
+    },
+    {
+      "Path": "docs/articles/sample-model-assets-guide.md",
+      "Sha256": "1444aa09ef1c4ad836ce64a137046ffa7216d2cfe629d651f987d6970211734d",
+      "Length": 3495
     },
     {
       "Path": "docs/articles/stitching-structured-parity-guide.md",
@@ -941,8 +946,8 @@
     },
     {
       "Path": "docs/articles/tutorial-06-knn-classification.md",
-      "Sha256": "454a587d5487a22b2b9082d5399f2271812b4afedfaae9a751e20948540ffa13",
-      "Length": 3238
+      "Sha256": "8ea78a1d0df16d419e78fdb5b27e0c538a2ab6b2073146258712696e06eba4fb",
+      "Length": 3298
     },
     {
       "Path": "docs/articles/tutorial-07-android-runtime.md",
@@ -951,8 +956,8 @@
     },
     {
       "Path": "docs/articles/tutorial-series.md",
-      "Sha256": "a4951af7db316a1dc2d9b8fd346744f9e18cb5a30caeb61673df13919bb9feb4",
-      "Length": 4750
+      "Sha256": "fb7880fedfb7a1aa1116be6e677b0978a46c862d45338bec183045d3e0efdd4b",
+      "Length": 5893
     },
     {
       "Path": "docs/articles/video-upstream-parity-guide.md",
@@ -1006,13 +1011,13 @@
     },
     {
       "Path": "docs/index.md",
-      "Sha256": "132c17af14a328453dc6c1ec339ed9211cc7ac0e6b98ab750f69960458343a60",
-      "Length": 5691
+      "Sha256": "1d3c12c5b3885539a03be9ba3217c66a252431298d5747fd984e25d08a0f28c6",
+      "Length": 6404
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "4126672ce9211c44edfbbb8841297b8d7bb7a4a4ba93be03800a23dfd8d22dee",
-      "Length": 13341
+      "Sha256": "8a9e7059ae191cd5e34690a8fd1e8e2bf91beb363a7c20ccfb4810ad62caf323",
+      "Length": 14074
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1045,6 +1050,11 @@
       "Length": 1219
     },
     {
+      "Path": "samples/Common/ModelAssetSupport.cs",
+      "Sha256": "0b6b8439cc67818986a19cab5c35b39a8ea5f94b25b6cd8b849c672dac0caa5b",
+      "Length": 4384
+    },
+    {
       "Path": "samples/ConsoleSamples/Program.cs",
       "Sha256": "4754afae3a95715903394f9771c93b6b7edf894d2d56b3350cdf66405d7d17b0",
       "Length": 269421
@@ -1055,9 +1065,14 @@
       "Length": 22522
     },
     {
+      "Path": "samples/assets/models/model-assets.json",
+      "Sha256": "ad45f76c3d435ceff035180161b7566f4c264a6166ca1d74cb1073f743da440c",
+      "Length": 6149
+    },
+    {
       "Path": "scripts/Build-AndroidRuntimeInput.ps1",
-      "Sha256": "4501e7b03969a2d5c4c7eb9e9dc2c4a8decedca9b8a2ac2996d2a84d7528028a",
-      "Length": 16156
+      "Sha256": "d5ef3927c15af4e8bcb1a9d9ee730830654b85f83db63af5e326de06088f3a19",
+      "Length": 16423
     },
     {
       "Path": "scripts/Generate-Calib3DUpstreamMap.ps1",
@@ -1140,14 +1155,19 @@
       "Length": 2899
     },
     {
+      "Path": "scripts/Get-SampleModelAssets.ps1",
+      "Sha256": "76857593666525b74ca24342b0c5863a311684263f4ed231541ccc4924d1049b",
+      "Length": 4877
+    },
+    {
       "Path": "scripts/New-NuGetPublicationBundle.ps1",
       "Sha256": "49c49fff69fdac37091b26e3a193c3ce868f5e52cb0d80443203eaa98b6a0d83",
       "Length": 14508
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "a204ebac9081ea95df11e41152e188b802aac60f85d3eb19a97d7a09bfa67bbc",
-      "Length": 60636
+      "Sha256": "cd5b09c6e0dae378103cef12ad50413522a1e0d919daca33d2a2f714d6359137",
+      "Length": 60886
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1256,8 +1276,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "951dd7cd29b8cf0d30d64d123727cbfe4c52692b0e7369c780fcf3f04a98e77c",
-      "Length": 56089
+      "Sha256": "6a132d38c6e3348d704b8de131c98160de19c4b0158ce7eee0f2e63ffa2e3ede",
+      "Length": 56339
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1266,7 +1286,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "3a9d557dfc3576814f49e07feca2ed4f2c72e59085a84ee532811cbe45b4e8b1",
+      "Sha256": "d49dc19c167e99500a1a070cc20793b6695ec033fcdceac13edd87532ba7114e",
       "Length": 43762
     },
     {
@@ -1293,6 +1313,11 @@
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
       "Sha256": "60a350a8e4460a2256d7dc0edcb02a1810fc607f127737d25f29c31b1d96cabe",
       "Length": 15749
+    },
+    {
+      "Path": "scripts/Test-SampleModelAssetContract.ps1",
+      "Sha256": "d8e570db5745d55b48fe4db01eb47a8b0bc13af68d80864ebbdb82782affddc8",
+      "Length": 9121
     },
     {
       "Path": "scripts/Test-StitchingUpstreamMap.ps1",
@@ -1366,8 +1391,8 @@
     },
     {
       "Path": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
-      "Sha256": "af5d7a8927f05b6ea2fd8583393f725aaa8ce18bba20664fa5ba57175e493e06",
-      "Length": 307048
+      "Sha256": "b651a8c06047cfef8ec6a05026096a0ad33c8f2fcc83bb61f03a3b5d0938cced",
+      "Length": 306914
     },
     {
       "Path": "src/OpenCvSharp/HighGui/Cv2.cs",
@@ -1757,7 +1782,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 76,
+    "InvariantGuardCount": 77,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

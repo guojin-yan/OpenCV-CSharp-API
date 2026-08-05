@@ -204,7 +204,7 @@ foreach ($expectation in @(
         @($workflowPath, $windowsX86JobText, "-NativeExecutionHost '`${{ steps.dotnet_x86.outputs.host_path }}'", "Windows x86 consumer must execute through the explicit x86 .NET host"),
         @($workflowPath, $windowsX86JobText, "-CompileNativeSmoke", "Windows x86 verifier must compile the package consumer"),
         @($workflowPath, $windowsX86JobText, "-RunNativeSmoke", "Windows x86 verifier must execute package-output full native calls"),
-        @($workflowPath, $workflowText, "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=17 modules=16 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true", "Pack runtime job must validate exact Windows x86 full provenance"),
+        @($workflowPath, $workflowText, "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=17 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true", "Pack runtime job must validate exact Windows x86 full provenance"),
         @($consumerGuardPath, $consumerGuardText, "WINDOWS_X86_PACKAGE_CONSUMER_PROCESS_OK", "Package consumer must emit process-local X86/WoW64 evidence before native calls"),
         @($consumerGuardPath, $consumerGuardText, "RuntimeInformation.ProcessArchitecture != Architecture.X86", "Package consumer must reject a non-X86 process for win-x86"),
         @($consumerGuardPath, $consumerGuardText, "Environment.Is64BitProcess", "Package consumer must reject a 64-bit win-x86 process"),
@@ -513,9 +513,9 @@ foreach ($expectation in @(
         @($workflowPath, $alpineJobText, "/lib/ld-musl-x86_64.so.1", "Alpine verification must derive libc evidence from the musl loader"),
         @($workflowPath, $alpineJobText, "ALPINE_3_20_CONTAINER_EVIDENCE", "Alpine verification must emit explicit distro/version/architecture/musl evidence"),
         @($workflowPath, $alpineJobText, "ALPINE_3_20_PACKAGE_ELF_EVIDENCE", "Alpine verification must audit the exact selected package ELF closure"),
-        @($workflowPath, $alpineJobText, "expected_opencv_count=16", "Alpine full package audit must require 16 canonical OpenCV ELFs"),
+        @($workflowPath, $alpineJobText, "expected_opencv_count=17", "Alpine full package audit must require 17 canonical OpenCV ELFs"),
         @($workflowPath, $alpineJobText, "expected_opencv_count=6", "Alpine mini package audit must require six canonical OpenCV ELFs"),
-        @($workflowPath, $alpineJobText, "expected_runtime_file_count=49", "Alpine full package audit must require the exact 49-file payload"),
+        @($workflowPath, $alpineJobText, "expected_runtime_file_count=52", "Alpine full package audit must require the exact 52-file payload"),
         @($workflowPath, $alpineJobText, "expected_runtime_file_count=19", "Alpine mini package audit must require the exact 19-file payload"),
         @($workflowPath, $alpineJobText, 'test "$alpine_opencv_count" -eq "$expected_opencv_count"', "Alpine package audit must compare canonical OpenCV ELFs against the selected module count"),
         @($workflowPath, $alpineJobText, "ALPINE_3_20_REPOSITORY_EVIDENCE", "Alpine verification must require the exact v3.20 repositories"),
@@ -551,8 +551,10 @@ foreach ($expectation in @(
         @($consumerGuardPath, $consumerGuardText, "<clear />", "Consumer restore must clear external NuGet sources"),
         @($consumerGuardPath, $consumerGuardText, '$env:NUGET_PACKAGES = $nugetPackagesDir', "Consumer restore must isolate the global package cache"),
         @($consumerGuardPath, $consumerGuardText, "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio", "Consumer must execute every mini wrapper module"),
-        @($consumerGuardPath, $consumerGuardText, "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn profile=full", "Full consumer must execute a deterministic full-only DNN call"),
+        @($consumerGuardPath, $consumerGuardText, "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full", "Full consumer must execute deterministic DNN and ML KNN calls"),
         @($consumerGuardPath, $consumerGuardText, "FULL_DNN_SMOKE_FAILED", "Full consumer must diagnose its full-only API execution separately"),
+        @($consumerGuardPath, $consumerGuardText, "FULL_ML_KNN_TRAIN_SMOKE_FAILED", "Full consumer must fail closed when packaged ML cannot train KNN"),
+        @($consumerGuardPath, $consumerGuardText, "FULL_ML_KNN_PREDICT_SMOKE_FAILED", "Full consumer must fail closed when packaged ML cannot predict with KNN"),
         @($consumerGuardPath, $consumerGuardText, "Consumer runtime provenance staged optional modules must be an ordered unique subset", "Consumer native asset expectations must include only allowed staged optional modules"),
         @($consumerGuardPath, $consumerGuardText, "NATIVE_LOADER_OR_SONAME_MISSING", "Consumer diagnostics must distinguish loader or SONAME failure"),
         @($consumerGuardPath, $consumerGuardText, "SUPPORTED_PROFILE_ENTRYPOINT_MISSING", "Consumer diagnostics must distinguish a missing supported profile entrypoint"),
@@ -1262,4 +1264,4 @@ Write-Host "Pending factual target: win-x86/full has a dedicated full-only Windo
 Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full, ubuntu.22.04-x64/mini; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
 Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full and fedora.40-x64/mini in fedora:40; rocky.9-x64/full and rocky.9-x64/mini in rockylinux:9; rhel.9-x64/full and rhel.9-x64/mini in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."
-Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn."
+Write-Host "Packaged native smoke modules: mini core,imgproc,imgcodecs,videoio plus NOT_LINKED compatibility evidence; full adds dnn and a trained ML KNN prediction."

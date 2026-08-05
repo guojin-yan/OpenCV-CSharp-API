@@ -36,6 +36,13 @@ OpenCV CSharp API 通过版本中立的 managed API 和稳定的 native C ABI，
 15. [Sparse Optical Flow / 稀疏光流](articles/tutorial-15-optical-flow.md)
 16. [SVM Classification / SVM 分类](articles/tutorial-16-svm-classification.md)
 17. [ONNX Inference / ONNX 推理](articles/tutorial-17-onnx-inference.md)
+18. [MobileNetV2 Classification / MobileNetV2 图像分类](articles/tutorial-18-mobilenet-classification.md)
+19. [NanoDet Object Detection / NanoDet 目标检测](articles/tutorial-19-nanodet-object-detection.md)
+20. [PPHumanSeg Segmentation / PPHumanSeg 人像分割](articles/tutorial-20-pphumanseg-segmentation.md)
+21. [Document Scanner / 文档扫描](articles/tutorial-21-document-scanner.md)
+22. [Panorama Stitching / 全景拼接](articles/tutorial-22-panorama-stitching.md)
+23. [Motion Analysis / 运动分析](articles/tutorial-23-motion-analysis.md)
+24. [MIL Object Tracking / MIL 目标跟踪](articles/tutorial-24-mil-object-tracking.md)
 
 Each tutorial has a deterministic command, generated input, inspectable PNG output, a runtime-profile requirement, focused code, and links to deeper module guides. The complete gallery remains available in [Visual Showcase](articles/visual-showcase.md).
 
@@ -50,7 +57,7 @@ Each tutorial has a deterministic command, generated input, inspectable PNG outp
 | Features and matching / 特征与匹配 | [Features2D ORB](articles/features2d-orb-guide.md), [Detectors](articles/features2d-detectors-guide.md), [Matcher](articles/features2d-matcher-guide.md) |
 | Calibration and geometry / 标定与几何 | [Calib3D Geometry](articles/calib3d-geometry-guide.md), [Calibration](articles/calib3d-calibration-guide.md), [Stereo](articles/calib3d-stereo-guide.md) |
 | Video / 视频 | [VideoIO](articles/videoio-guide.md), [Motion](articles/video-motion-guide.md), [Optical Flow](articles/optflow-guide.md) |
-| DNN and ML / DNN 与 ML | [DNN Net](articles/dnn-net-guide.md), [DNN Advanced](articles/dnn-net-advanced-guide.md), [ML](articles/ml-guide.md) |
+| DNN and ML / DNN 与 ML | [DNN Net](articles/dnn-net-guide.md), [DNN Advanced](articles/dnn-net-advanced-guide.md), [Sample Model Assets](articles/sample-model-assets-guide.md), [ML](articles/ml-guide.md) |
 | Detection and composition / 检测与合成 | [ObjDetect](articles/objdetect-guide.md), [Tracking](articles/tracking-guide.md), [Stitching](articles/stitching-stitcher-guide.md) |
 
 The navigation sidebar contains the complete module-by-module article catalog. Existing article URLs remain stable; the tutorial series provides the primary path through them.

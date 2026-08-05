@@ -1416,7 +1416,7 @@ jobs:
             }
           }
           $cmakeArgumentText = $openCvCMakeArguments -join [Environment]::NewLine
-          $expectedPePattern = '^WINDOWS_PE_AUDIT_OK rid=win-x86 profile=full files=17 machine=I386 packaged_modules=16 reachable_modules=16 loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0$'
+          $expectedPePattern = '^WINDOWS_PE_AUDIT_OK rid=win-x86 profile=full files=18 machine=I386 packaged_modules=17 reachable_modules=17 loader_opencv_imports=\d+ opencv_import_edges=\d+ missing_opencv_imports=0$'
           $expectedAsmPattern = '^CMAKE_ASM_COMPILER=NOTFOUND;OPENCV_DNN_MLAS_ENABLED=0;OPENCV_DNN_MLAS_SKIP_REASON=no ASM compiler available for (?:AMD64|amd64)$'
           if ($provenance.HostedRunner -ne 'windows-latest' -or
               $provenance.HostedArchitecture -ne 'X64' -or
@@ -1450,7 +1450,7 @@ jobs:
               throw "Windows x86 provenance retained foreign architecture or emulation evidence: $forbiddenToken"
             }
           }
-          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=17 modules=16 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true"
+          Write-Host "WINDOWS_X86_RUNTIME_INPUT_PROVENANCE_OK profile=full files=18 modules=17 sources=49 abi_functions=2656 synthetic=false machine=I386 wow64=true"
       - name: Validate Windows ARM64 runtime input provenance
         if: ${{ matrix.rid == 'win-arm64' && (matrix.profile == 'full' || matrix.profile == 'mini') && inputs.rid == 'win-arm64' && inputs.runtime_profile == matrix.profile && inputs.validate_synthetic_runtime != 'true' }}
         shell: pwsh
@@ -2889,10 +2889,10 @@ jobs:
           profile='${{ inputs.runtime_profile }}'
           case "$profile" in
             full)
-              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=17
-              expected_runtime_file_count=49
-              expected_direct_opencv=16
+              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+              expected_canonical_count=18
+              expected_runtime_file_count=52
+              expected_direct_opencv=17
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
@@ -3075,10 +3075,10 @@ jobs:
 
               case "$RUNTIME_PROFILE" in
                 full)
-                  modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-                  expected_canonical_count=17
-                  expected_runtime_file_count=49
-                  expected_direct_opencv=16
+                  modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+                  expected_canonical_count=18
+                  expected_runtime_file_count=52
+                  expected_direct_opencv=17
                   ;;
                 mini)
                   modules=(core imgproc imgcodecs videoio geometry flann)
@@ -3273,10 +3273,10 @@ jobs:
           set -euo pipefail
           case "$RUNTIME_PROFILE" in
             full)
-              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=17
-              expected_runtime_file_count=49
-              expected_direct_opencv=16
+              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+              expected_canonical_count=18
+              expected_runtime_file_count=52
+              expected_direct_opencv=17
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
@@ -3465,10 +3465,10 @@ jobs:
 
               case "$RUNTIME_PROFILE" in
                 full)
-                  modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-                  expected_canonical_count=17
-                  expected_runtime_file_count=49
-                  expected_direct_opencv=16
+                  modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+                  expected_canonical_count=18
+                  expected_runtime_file_count=52
+                  expected_direct_opencv=17
                   ;;
                 mini)
                   modules=(core imgproc imgcodecs videoio geometry flann)
@@ -3685,10 +3685,10 @@ jobs:
           set -euo pipefail
           case "$RUNTIME_PROFILE" in
             full)
-              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=17
-              expected_runtime_file_count=49
-              expected_direct_opencv=16
+              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+              expected_canonical_count=18
+              expected_runtime_file_count=52
+              expected_direct_opencv=17
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
@@ -3912,10 +3912,10 @@ jobs:
           set -euo pipefail
           case "$RUNTIME_PROFILE" in
             full)
-              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=17
-              expected_runtime_file_count=49
-              expected_direct_opencv=16
+              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+              expected_canonical_count=18
+              expected_runtime_file_count=52
+              expected_direct_opencv=17
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
@@ -4143,10 +4143,10 @@ jobs:
           set -euo pipefail
           case "$RUNTIME_PROFILE" in
             full)
-              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud)
-              expected_canonical_count=17
-              expected_runtime_file_count=49
-              expected_direct_opencv=16
+              modules=(core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud)
+              expected_canonical_count=18
+              expected_runtime_file_count=52
+              expected_direct_opencv=17
               ;;
             mini)
               modules=(core imgproc imgcodecs videoio geometry flann)
@@ -4327,11 +4327,11 @@ jobs:
 
               case "$RUNTIME_PROFILE" in
                 full)
-                  modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn objdetect photo features video highgui stitching ptcloud"
-                  expected_canonical_count=17
-                  expected_opencv_count=16
-                  expected_runtime_file_count=49
-                  expected_direct_opencv=16
+                  modules="core imgproc imgcodecs videoio flann geometry calib stereo dnn ml objdetect photo features video highgui stitching ptcloud"
+                  expected_canonical_count=18
+                  expected_opencv_count=17
+                  expected_runtime_file_count=52
+                  expected_direct_opencv=17
                   ;;
                 mini)
                   modules="core imgproc imgcodecs videoio geometry flann"

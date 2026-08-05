@@ -494,8 +494,33 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
                     return 14;
                 }
             }
+
+            using (var trainingSamples = new Mat(4, 2, MatType.CV_32FC1))
+            using (var trainingLabels = new Mat(4, 1, MatType.CV_32SC1))
+            using (var query = new Mat(1, 2, MatType.CV_32FC1))
+            using (var results = new Mat())
+            using (JYPPX.OpenCvSharp.ML.KNearest knn = JYPPX.OpenCvSharp.ML.KNearest.Create())
+            {
+                trainingSamples.CopyFrom<float>(new float[] { 0F, 0F, 0F, 1F, 10F, 10F, 10F, 11F });
+                trainingLabels.CopyFrom<int>(new int[] { 0, 0, 1, 1 });
+                query.CopyFrom<float>(new float[] { 9.5F, 10.5F });
+                knn.DefaultK = 1;
+                knn.IsClassifierModel = true;
+                if (!knn.Train(trainingSamples, JYPPX.OpenCvSharp.ML.SampleTypes.RowSample, trainingLabels))
+                {
+                    Console.Error.WriteLine("FULL_ML_KNN_TRAIN_SMOKE_FAILED");
+                    return 15;
+                }
+
+                float prediction = knn.FindNearest(query, 1, results);
+                if (Math.Abs(prediction - 1F) > 0.001F || results.Empty)
+                {
+                    Console.Error.WriteLine("FULL_ML_KNN_PREDICT_SMOKE_FAILED prediction=" + prediction);
+                    return 16;
+                }
+            }
 '@
-            $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn profile=full"
+            $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,dnn,ml_knn profile=full"
         }
         elseif ($RuntimeProfile -eq "mini") {
             $profileSpecificNativeSmoke = @'
@@ -504,7 +529,7 @@ __PROFILE_SPECIFIC_NATIVE_SMOKE__
             if (status != -100 || cornerCount != 0)
             {
                 Console.Error.WriteLine("MINI_NOT_LINKED_SMOKE_FAILED status=" + status + " cornerCount=" + cornerCount);
-                return 15;
+                return 17;
             }
 '@
             $successMarker = "TARGETED_NATIVE_SMOKE_OK core,imgproc,imgcodecs,videoio,not_linked profile=mini"

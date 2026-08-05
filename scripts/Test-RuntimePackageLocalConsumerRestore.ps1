@@ -38,6 +38,7 @@ $requiredOpenCvModules = @(
     "calib",
     "stereo",
     "dnn",
+    "ml",
     "objdetect",
     "photo",
     "features",
@@ -296,6 +297,7 @@ try {
     }
 
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "LICENSE"), "Synthetic OpenCV source license")
+    [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "opencv_contrib-LICENSE"), "Synthetic OpenCV contrib source license")
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "3rdparty/ippicv/readme.htm"), "Synthetic IPPICV license")
     [System.IO.File]::WriteAllText((Join-Path $openCvInstallDir "etc/licenses/synthetic-3rdparty.txt"), "Synthetic third-party license")
 

@@ -8,7 +8,7 @@ param(
     [string]$Configuration = "Release",
     [string]$Generator = "",
     [string]$Platform = "",
-    [string]$BuildList = "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,objdetect,photo,features,video,highgui,stitching,ptcloud",
+    [string]$BuildList = "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud",
     [string]$ExtraCMakeArgs = "",
     [string]$EigenIncludePath = "",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
@@ -346,11 +346,23 @@ if ($buildTarget.PlatformFamily -eq "android") {
 }
 
 if ($WithContrib) {
+    $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "ml"
+}
+
+$buildListModules = @($BuildList.Split(",", [System.StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object { $_.Trim() })
+$requiresContribSource = $WithContrib.IsPresent -or $buildListModules -contains "ml"
+
+if ($requiresContribSource) {
     if (-not (Test-Path $contribSource)) {
         if (-not $DescribeOnly) {
-            throw "OpenCV contrib source directory was not found: $contribSource"
+            throw "OpenCV contrib source directory required by the selected build list was not found: $contribSource"
         }
     }
+
+    $cmakeArgs += "-DOPENCV_EXTRA_MODULES_PATH=$(Join-Path $contribSource "modules")"
+}
+
+if ($WithContrib) {
 
     if ([string]::IsNullOrWhiteSpace($EigenIncludePath)) {
         $eigenCandidates = @(
@@ -385,7 +397,6 @@ if ($WithContrib) {
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "xobjdetect"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "quality"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "xphoto"
-    $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "ml"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "img_hash"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "ximgproc"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "optflow"
@@ -407,7 +418,6 @@ if ($WithContrib) {
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "alphamat"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "bioinspired"
     $BuildList = Add-BuildListModule -CurrentBuildList $BuildList -ModuleName "xstereo"
-    $cmakeArgs += "-DOPENCV_EXTRA_MODULES_PATH=$(Join-Path $contribSource "modules")"
 }
 
 $cmakeArgs += "-DBUILD_LIST=$BuildList"

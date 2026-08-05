@@ -336,6 +336,17 @@ foreach ($ridSpec in @($matrix.rids)) {
             Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Build-OpenCV -DescribeOnly must preserve selected runtime profile build list" -Text "$rid/$profile"
         }
 
+        $contribModuleArguments = @($plan.CMakeArgs | Where-Object { [string]$_ -like "-DOPENCV_EXTRA_MODULES_PATH=*" })
+        if ($profile -eq "full") {
+            if ($contribModuleArguments.Count -ne 1 -or
+                -not ((ConvertTo-NormalizedPathText $contribModuleArguments[0]).EndsWith("/opencv_contrib-$openCvVersion/modules", [StringComparison]::OrdinalIgnoreCase))) {
+                Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Full build plans must use the matching OpenCV contrib source required by ml" -Text "$rid :: $($contribModuleArguments -join ',')"
+            }
+        }
+        elseif ($contribModuleArguments.Count -ne 0) {
+            Add-Violation -Violations $violations -Path "scripts/Build-OpenCV.ps1" -Issue "Mini build plans must not load contrib modules" -Text "$rid :: $($contribModuleArguments -join ',')"
+        }
+
         if ($platformFamily -eq "windows") {
             $expectedPlatform = Get-WindowsPlatform -Rid $rid
             $expectedArchFolder = Get-WindowsArchFolder -Rid $rid

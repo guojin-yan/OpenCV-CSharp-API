@@ -161,6 +161,7 @@ if ([string]::IsNullOrWhiteSpace($OpenCvInstallRoot)) {
 }
 
 $openCvSourceDir = Join-Path ([IO.Path]::GetFullPath($OpenCvSourceRoot)) "opencv-$OpenCvVersion"
+$openCvContribSourceDir = if ($RuntimeProfile -eq "full") { Join-Path ([IO.Path]::GetFullPath($OpenCvSourceRoot)) "opencv_contrib-$OpenCvVersion" } else { "" }
 $openCvInstallDir = Join-Path ([IO.Path]::GetFullPath($OpenCvInstallRoot)) "opencv-$OpenCvVersion-$Rid"
 $openCvConfigDir = Join-Path $openCvInstallDir "sdk/native/jni"
 $openCvRuntimeDir = Join-Path $openCvInstallDir "sdk/native/libs/$abi"
@@ -196,6 +197,7 @@ $plan = [ordered]@{
     AndroidNdkRoot = $AndroidNdkRoot
     BuildList = [string]$profile.buildList
     OpenCvSourceDir = $openCvSourceDir
+    OpenCvContribSourceDir = $openCvContribSourceDir
     OpenCvInstallDir = $openCvInstallDir
     OpenCvConfigDir = $openCvConfigDir
     OpenCvRuntimeDir = $openCvRuntimeDir
@@ -334,6 +336,7 @@ Write-Host $elfEvidence
     -NativeRuntimeDir $nativeRuntimeDir `
     -OpenCvRuntimeDir $openCvRuntimeDir `
     -OpenCvSourceDir $openCvSourceDir `
+    -OpenCvContribSourceDir $openCvContribSourceDir `
     -OpenCvInstallDir $openCvInstallDir `
     -HostedRunner "ubuntu-24.04" `
     -RunnerImage $env:ImageOS `

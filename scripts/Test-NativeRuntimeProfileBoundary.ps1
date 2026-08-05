@@ -103,6 +103,7 @@ if ($miniProfile.Count -ne 1 -or $fullProfile.Count -ne 1) {
 }
 else {
     $expectedMiniModules = @("core", "imgproc", "imgcodecs", "videoio", "geometry", "flann")
+    $expectedFullModules = @("core", "imgcodecs", "imgproc", "videoio", "flann", "geometry", "calib", "stereo", "dnn", "ml", "objdetect", "photo", "features", "video", "highgui", "stitching", "ptcloud")
     if ([string]$miniProfile[0].buildList -cne ($expectedMiniModules -join ",")) {
         Add-Violation "Mini runtime buildList must be exactly $($expectedMiniModules -join ',')."
     }
@@ -111,6 +112,15 @@ else {
     }
     if (@($miniProfile[0].optionalModules).Count -ne 0) {
         Add-Violation "Mini runtime profile must not declare optional full-only modules."
+    }
+    if ([string]$fullProfile[0].buildList -cne "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud") {
+        Add-Violation "Full runtime buildList must require the OpenCV 5 contrib ml module."
+    }
+    if ((Compare-Object -ReferenceObject $expectedFullModules -DifferenceObject @($fullProfile[0].modules) -SyncWindow 0)) {
+        Add-Violation "Full runtime required modules must include ml in the audited order."
+    }
+    if (@($fullProfile[0].optionalModules) -contains "ml") {
+        Add-Violation "Full runtime must not retain ml in optionalModules."
     }
 }
 
@@ -149,8 +159,9 @@ Assert-Contains -Text $imgprocSourceText -Needle 'cv::_InputArray input_or_no_ar
 Assert-Contains -Text $imgprocSourceText -Needle 'cv::_OutputArray output_or_no_array' -Description "Optional output helpers must return a concrete OpenCV proxy value"
 Assert-Contains -Text $nativeSmokeText -Needle 'run_mini_excluded_features_smoke' -Description "Native smoke must verify the mini excluded-features boundary"
 Assert-Contains -Text $nativeSmokeText -Needle 'status != OPENCV_CSHARP_STATUS_NOT_LINKED' -Description "Mini smoke must require NOT_LINKED for excluded features APIs"
-Assert-Contains -Text $nativeSmokeText -Needle 'int run_ml_optional_module_smoke()' -Description "Full native smoke must model ML as an optional OpenCV module"
-Assert-Contains -Text $nativeSmokeText -Needle 'int ml_optional_module_status = run_ml_optional_module_smoke();' -Description "Full native smoke must execute the ML optional-module boundary"
+Assert-Contains -Text $nativeSmokeText -Needle 'int run_ml_required_module_smoke()' -Description "Full native smoke must model ML as a required OpenCV module"
+Assert-Contains -Text $nativeSmokeText -Needle 'int ml_required_module_status = run_ml_required_module_smoke();' -Description "Full native smoke must execute the required ML behavior boundary"
+Assert-Contains -Text $nativeSmokeText -Needle 'probe_status != OPENCV_CSHARP_STATUS_OK || probe.value == nullptr' -Description "Full native smoke must fail when the required ML module is not linked"
 Assert-Contains -Text $nativeSmokeText -Needle 'int run_tracking_optional_module_smoke()' -Description "Full native smoke must model tracking as an optional OpenCV module"
 Assert-Contains -Text $nativeSmokeText -Needle 'int tracking_optional_module_status = run_tracking_optional_module_smoke();' -Description "Full native smoke must execute the tracking optional-module boundary"
 if ($imgprocSourceText.Contains('__has_include(<opencv2/features.hpp>)')) {

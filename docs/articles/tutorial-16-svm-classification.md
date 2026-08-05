@@ -8,7 +8,7 @@ This example trains an RBF support-vector classifier on two small feature cluste
 dotnet run --project .\samples\MachineLearning\02.SvmClassification\SvmClassification.csproj -c Release -- .\artifacts\tutorial-16
 ```
 
-OpenCV ML is an optional native module in some runtime profiles. A `NOT_LINKED` runtime produces a diagnostic image and summary so capability discovery is explicit and automation-friendly.
+OpenCV ML is required by Full and excluded by Mini. A Mini or older runtime without the corrected Full/ML boundary produces a diagnostic image and summary so capability discovery remains explicit and automation-friendly.
 
 ## Pipeline / 流程
 

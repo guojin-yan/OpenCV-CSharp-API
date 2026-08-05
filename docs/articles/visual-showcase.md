@@ -97,9 +97,9 @@ The template case uses `CCoeffNormed`, reads the best location with `MinMaxLoc`,
 
 ### KNN classification / KNN 分类
 
-When the optional ML module is linked, the ML case trains a `KNearest` classifier, classifies a batch matrix of 3,600 samples in one native call, converts the result matrix to managed data, and renders the decision surface. When it is not linked, the same panel records `NOT_LINKED` and keeps the other five workflows inspectable. This makes the showcase honest about runtime capabilities while remaining headless and CI-friendly.
+With the Full runtime, the ML case trains a `KNearest` classifier, classifies a batch matrix of 3,600 samples in one native call, converts the result matrix to managed data, and renders the decision surface. Mini and older packages without the corrected Full/ML boundary record `NOT_LINKED` in the same panel while keeping the other five workflows inspectable. This makes the showcase honest about runtime capabilities while remaining headless and CI-friendly.
 
-链接可选 ML 模块时，ML 案例训练 `KNearest` 分类器，在一次 native 调用中批量分类 3,600 个样本，将结果矩阵转回 managed 数据，并绘制 decision surface。未链接时，同一面板会记录 `NOT_LINKED`，其余五个工作流仍可检查。这样既保持无头和 CI 友好，也如实反映 runtime 能力。
+使用 Full runtime 时，ML 案例训练 `KNearest` 分类器，在一次 native 调用中批量分类 3,600 个样本，将结果矩阵转回 managed 数据，并绘制 decision surface。Mini 和尚未修正 Full/ML 边界的旧包会在同一面板记录 `NOT_LINKED`，其余五个工作流仍可检查。这样既保持无头和 CI 友好，也如实反映 runtime 能力。
 
 ## Headless And CI Friendly / 适合无头与 CI 环境
 

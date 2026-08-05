@@ -4262,14 +4262,10 @@ namespace
         return 0;
     }
 
-    int run_ml_optional_module_smoke()
+    int run_ml_required_module_smoke()
     {
         NativeMlModelHandle probe;
         const int probe_status = jyppx_ocv_ml_ann_mlp_create(&probe.value);
-        if (probe_status == OPENCV_CSHARP_STATUS_NOT_LINKED)
-        {
-            return probe.value == nullptr ? 0 : 965;
-        }
         if (probe_status != OPENCV_CSHARP_STATUS_OK || probe.value == nullptr)
         {
             return 966;
@@ -5290,11 +5286,11 @@ int main()
             return photo_final_callables_status;
         }
 
-        int ml_optional_module_status = run_ml_optional_module_smoke();
-        if (ml_optional_module_status != 0)
+        int ml_required_module_status = run_ml_required_module_smoke();
+        if (ml_required_module_status != 0)
         {
             jyppx_ocv_mat_release(mat);
-            return ml_optional_module_status;
+            return ml_required_module_status;
         }
 
         int tracking_optional_module_status = run_tracking_optional_module_smoke();

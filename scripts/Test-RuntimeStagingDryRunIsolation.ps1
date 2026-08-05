@@ -27,6 +27,7 @@ $requiredOpenCvModules = @(
     "calib",
     "stereo",
     "dnn",
+    "ml",
     "objdetect",
     "photo",
     "features",
@@ -164,6 +165,7 @@ try {
     }
 
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "LICENSE"), "Synthetic OpenCV source license")
+    [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "opencv_contrib-LICENSE"), "Synthetic OpenCV contrib source license")
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "3rdparty/ippicv/readme.htm"), "Synthetic IPPICV license")
     [System.IO.File]::WriteAllText((Join-Path $openCvInstallDir "etc/licenses/synthetic-3rdparty.txt"), "Synthetic third-party license")
 
@@ -201,6 +203,7 @@ try {
 
     $runtimeProjectLicenseDir = Join-Path $runtimeProjectDir "licenses"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "LICENSE") -Issue "Runtime project license layout did not include LICENSE"
+    Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "opencv_contrib-LICENSE") -Issue "Runtime project license layout did not include the matching OpenCV contrib license"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "readme.htm") -Issue "Runtime project license layout did not include OpenCV 3rdparty readme.htm"
     Assert-FileExists -Violations $violations -Path (Join-Path $runtimeProjectLicenseDir "opencv-3rdparty/synthetic-3rdparty.txt") -Issue "Runtime project license layout did not include OpenCV install third-party license"
 

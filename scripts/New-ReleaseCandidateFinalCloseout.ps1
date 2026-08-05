@@ -233,6 +233,7 @@ function Get-Record {
         "docs/articles/photo-tvl1-chromatic-aberration-guide.md",
         "docs/articles/point-set-marshalling-guide.md",
         "docs/articles/release-candidate-closeout.md",
+        "docs/articles/sample-model-assets-guide.md",
         "docs/articles/support-lifecycle-policy.md",
         "docs/articles/tutorial-series.md",
         "docs/articles/tutorial-01-image-pipeline.md",
@@ -260,8 +261,10 @@ function Get-Record {
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
         "samples/AndroidSmoke/MainActivity.cs",
+        "samples/Common/ModelAssetSupport.cs",
         "samples/ConsoleSamples/Program.cs",
         "samples/ConsoleSamples/ShowcaseRunner.cs",
+        "samples/assets/models/model-assets.json",
         "scripts/Generate-Calib3DUpstreamMap.ps1",
         "scripts/Generate-CoreUpstreamMap.ps1",
         "scripts/Generate-DnnUpstreamMap.ps1",
@@ -280,6 +283,7 @@ function Get-Record {
         "scripts/Generate-PhotoUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
         "scripts/Build-AndroidRuntimeInput.ps1",
+        "scripts/Get-SampleModelAssets.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
         "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/Test-NuGetPublicationManifest.ps1",
@@ -308,6 +312,7 @@ function Get-Record {
         "scripts/Test-ReleasePackageSbom.ps1",
         "scripts/Test-ReleaseReadinessContract.ps1",
         "scripts/Test-ReleaseSigningBoundary.ps1",
+        "scripts/Test-SampleModelAssetContract.ps1",
         "scripts/Test-NuGetRepositorySignedPackage.ps1",
         "scripts/Test-NuGetRepositorySigningBoundary.ps1",
         "scripts/Test-PackageMetadataNeutrality.ps1",
@@ -825,7 +830,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 76
+            InvariantGuardCount = 77
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false

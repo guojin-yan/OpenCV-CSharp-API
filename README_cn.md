@@ -37,7 +37,7 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 - 一个 managed 包，以及面向 14 个已验证 Windows、Linux 和 Android 模拟器 RID 的 full 与 mini native runtime profile。
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
 - 向 NuGet.org 与 GitHub Packages 发布确定性包，并提供 SPDX 2.3 SBOM、受保护的发布审批和经过验证的 GitHub Release 产物。
-- 提供可直接执行的无头示例，无需相机、模型下载或桌面 GUI，即可生成可检查的 PNG 结果。
+- 提供 23 个按功能分组的无头完整案例并生成可检查 PNG；模型 DNN 案例使用一次性哈希校验资产包，其余案例完全离线运行。
 - 兼容性基线覆盖 611 个 public managed type、6,300 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
 
 ## 30 秒快速开始
@@ -105,7 +105,7 @@ Full runtime 使用版本中立规则 `JYPPX.OpenCV.runtime.<rid>`；mini runtim
 
 请根据 target RID 和所需 profile 选择对应的 runtime 包。
 
-full profile 保证包含矩阵要求的模块，包括 DNN、标定、Features、Photo、Video、HighGui 和 Stitching。ML、Tracking 和部分 contrib 模块属于按实际构建暂存的可选模块：managed API 保持稳定，native 功能不可用时返回 `NOT_LINKED`。mini profile 聚焦 `core`、`imgproc`、`imgcodecs`、`videoio`，并包含必需的 `geometry` 与 `flann` 依赖。
+full profile 保证包含矩阵要求的模块，包括 DNN、ML、标定、Features、Photo、Video、HighGui 和 Stitching。Tracking 和部分 contrib 模块属于按实际构建暂存的可选模块：managed API 保持稳定，native 功能不可用时返回 `NOT_LINKED`。mini profile 聚焦 `core`、`imgproc`、`imgcodecs`、`videoio`，并包含必需的 `geometry` 与 `flann` 依赖。修正 Full/ML 边界之前发布的旧包可能对 ML 返回 `NOT_LINKED`，ML 工作负载应使用最新 Full runtime。
 
 不要同时引用 full 与 mini runtime 包。managed 和 runtime 包必须使用同一个 NuGet 规范版本。
 
@@ -145,7 +145,8 @@ Android x64/x86 的 Full 与 Mini 已通过正式单加载器 NDK 构建、包�
 | Geometry 与 FLANN runtime 依赖 | 支持 | 支持 |
 | DNN、目标检测、标定、特征 | 支持 | 不支持 |
 | Photo、Video、HighGui、Stitching | 支持 | 不支持 |
-| ML、Tracking、部分 contrib 模块 | 取决于 runtime | 不支持 |
+| ML | 支持 | 不支持 |
+| Tracking、部分 contrib 模块 | 取决于 runtime | 不支持 |
 | 模块不可用时的稳定响应 | `NOT_LINKED` | `NOT_LINKED` |
 
 ## 系列教程与可视化结果
@@ -165,7 +166,7 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 
 建议从[系列教程](docs/articles/tutorial-series.md)开始。每个输出都对应一篇技术文章，其中包含可运行命令、核心代码、runtime profile 以及深入模块指南的链接。原 `showcase` 命令继续作为兼容别名。
 
-[`samples`](samples) 是可持续扩展的分组案例目录。图像处理、特征、几何、视频、传统机器学习和深度学习分别使用独立的编号子目录；完整案例、命令、输出和文章映射见 [`samples/README.md`](samples/README.md)。
+[`samples`](samples) 是包含 23 个完整工作流的可持续扩展案例目录。图像处理、特征、几何、视频、跟踪、拼接、传统机器学习和深度学习分别使用独立编号子目录；完整案例、命令、输出和文章映射见 [`samples/README.md`](samples/README.md)，模型来源和校验下载见[案例模型资产](docs/articles/sample-model-assets-guide.md)。
 
 学习时只运行当前功能对应的项目。每个案例都会恢复公开 managed API 和匹配的 runtime 夹具，完成一套功能流程，输出聚焦结果并打印包/native 构建信息。用于可复现验证的版本只维护在 `samples/SamplePackages.props`，普通安装命令不写死版本。
 
@@ -177,6 +178,7 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 | [快速开始](docs/articles/quick-start.md) | 安装并编写第一个程序 |
 | [系列教程](docs/articles/tutorial-series.md) | 按功能分组的可执行案例及同步技术文章 |
 | [案例目录](docs/articles/example-catalog.md) | 按功能分组运行 package-backed 案例 |
+| [案例模型资产](docs/articles/sample-model-assets-guide.md) | 按固定来源、哈希和许可证下载模型 |
 | [OpenCV 中文写字](docs/articles/tutorial-02-chinese-puttext.md) | 通过 OpenCV 5 `putText` 把 UTF-8 中文直接写入 `Mat` |
 | [可视化案例](docs/articles/visual-showcase.md) | 输出图集与兼容命令 |
 | [场景配方](docs/articles/scenario-recipes.md) | 面向任务的使用流程 |
@@ -219,8 +221,10 @@ OpenCV-CSharp-API/
 |-- samples/Features/                   特征检测与匹配案例
 |-- samples/Geometry/                   投影几何案例
 |-- samples/Video/                      运动与时序案例
+|-- samples/Tracking/                   有状态目标跟踪案例
+|-- samples/Stitching/                  多图全景拼接案例
 |-- samples/MachineLearning/            KNN 与 SVM 案例
-|-- samples/DeepLearning/               ONNX/DNN 案例
+|-- samples/DeepLearning/               ONNX 分类、检测与分割案例
 |-- samples/Common/                     案例共享基础设施
 |-- packaging/runtime/                  RID/profile runtime package 模板
 |-- compatibility/                      API、ABI 与 upstream map

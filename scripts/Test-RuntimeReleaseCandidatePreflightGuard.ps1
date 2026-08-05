@@ -233,6 +233,7 @@ try {
     }
 
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "LICENSE"), "Synthetic OpenCV source license")
+    [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "opencv_contrib-LICENSE"), "Synthetic OpenCV contrib source license")
     [System.IO.File]::WriteAllText((Join-Path $openCvSourceDir "3rdparty/ippicv/readme.htm"), "Synthetic IPPICV license")
     [System.IO.File]::WriteAllText((Join-Path $openCvInstallDir "etc/licenses/synthetic-3rdparty.txt"), "Synthetic third-party license")
 
@@ -361,6 +362,7 @@ try {
             Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry "runtimes/$rid/native/$primaryNativeLoader" -PackagePath $releasePackagePath -Issue "Release-preflight pack integration package did not contain the primary native loader"
             foreach ($licenseEntry in @(
                     "licenses/LICENSE",
+                    "licenses/opencv_contrib-LICENSE",
                     "licenses/readme.htm",
                     "licenses/opencv-3rdparty/synthetic-3rdparty.txt")) {
                 Assert-ZipEntry -Violations $violations -Entries $entryNames -Entry $licenseEntry -PackagePath $releasePackagePath -Issue "Release-preflight pack integration package did not contain staged license file"

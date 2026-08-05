@@ -100,6 +100,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Sample model asset contract"
+        Script = Join-Path $repo "scripts/Test-SampleModelAssetContract.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = ".NET SDK toolchain reproducibility"
         Script = Join-Path $repo "scripts/Test-DotNetSdkToolchainReproducibility.ps1"
         Arguments = @("-RepositoryRoot", $repo)
