@@ -1,19 +1,19 @@
 # Package Publication And Repository Signing Guide
 
-OpenCV CSharp API `5.0.0-preview.1` publishes the same reviewed, support-contract-derived candidate to NuGet.org and GitHub Packages. The intended final set is 29 packages after Android single-loader revalidation. The signing model matches TensorRtSharp: the local package is deterministically normalized and intentionally unsigned, NuGet.org adds a Repository primary signature after upload, and both public registries are downloaded and verified before the release is accepted.
+OpenCV CSharp API `5.0.0-preview.2` publishes the same reviewed, support-contract-derived candidate to NuGet.org and GitHub Packages. The intended final set is 29 packages after Android single-loader revalidation. The signing model matches TensorRtSharp: the local package is deterministically normalized and intentionally unsigned, NuGet.org adds a Repository primary signature after upload, and both public registries are downloaded and verified before the release is accepted.
 
-OpenCV CSharp API `5.0.0-preview.1` 将同一份审核通过的 29 包 candidate 发布到 NuGet.org 和 GitHub Packages。签名模型与 TensorRtSharp 相同：本地包经过确定性规范化并有意保持未签名，上传后由 NuGet.org 添加 Repository primary signature；只有两个公开 registry 均重新下载并验证通过后，发布才可被接受。
+OpenCV CSharp API `5.0.0-preview.2` 将同一份审核通过的 29 包 candidate 发布到 NuGet.org 和 GitHub Packages。签名模型与 TensorRtSharp 相同：本地包经过确定性规范化并有意保持未签名，上传后由 NuGet.org 添加 Repository primary signature；只有两个公开 registry 均重新下载并验证通过后，发布才可被接受。
 
 ## Security Model / 安全模型
 
-The model separates three identities:
+The model separates four identities:
 
 1. The Git source commit and normalized unsigned package hashes identify what the project approved for upload.
 2. The NuGet.org Repository signature proves that the downloaded bytes came through the official NuGet.org repository and package-owner route.
 3. The GitHub Packages SHA256, public visibility, and repository link prove that the second registry exposes the exact reviewed bytes from `guojin-yan/OpenCV-CSharp-API`.
 4. The publication authorization and protected GitHub Environment prove who approved and executed the upload.
 
-该模型分离三种身份：
+该模型分离四种身份：
 
 1. Git source commit 与规范化未签名包 hash 标识项目批准上传的内容。
 2. NuGet.org Repository signature 证明下载字节经过官方 NuGet.org repository 与 package-owner 路径。
@@ -26,7 +26,7 @@ Repository signing 不是 author certificate。本项目不会声称本地自签
 
 ## Prepublication State / 发布前状态
 
-The first-preview set remains `repository-signing-pending`: one managed package plus every runtime package in `runtime-support-contract.json` `realSupport`, for 29 packages after Android x64/x86 promotion. The normalized publication manifest binds every authoritative pack run ID and package SHA256 to the package-bound SPDX documents and durable change-control record. Generate the final publication bundle only from the final source commit:
+The current preview set remains `repository-signing-pending`: one managed package plus every runtime package in `runtime-support-contract.json` `realSupport`, for 29 packages after Android x64/x86 promotion. The normalized publication manifest binds every authoritative pack run ID and package SHA256 to the package-bound SPDX documents and durable change-control record. Generate the final publication bundle only from the final source commit:
 
 29 个 package 在发布前保持 `repository-signing-pending`：一个 managed 包，加上 `runtime-support-contract.json` 中 28 个 `realSupport` runtime 包。规范化 publication manifest 将每个正式 pack run ID 和 SHA256 绑定到 package-bound SPDX 与 durable change-control。只能从最终 source commit 生成 publication bundle：
 
@@ -34,14 +34,14 @@ The first-preview set remains `repository-signing-pending`: one managed package 
 pwsh -NoProfile -File ./scripts/Test-NuGetPublicationManifest.ps1 `
   -ManifestPath <input-manifest.json> `
   -SourceCommit <40-hex-commit> `
-  -PackageVersion 5.0.0-preview.1 `
+  -PackageVersion 5.0.0-preview.2 `
   -OutputPath <publication-manifest.json>
 pwsh -NoProfile -File ./scripts/New-NuGetPublicationBundle.ps1 `
   -PackageRoot <package-root> `
   -SbomRoot <sbom-root> `
   -ChangeControlPath <release-change-control.json> `
   -SourceCommit <40-hex-commit> `
-  -PackageVersion 5.0.0-preview.1 `
+  -PackageVersion 5.0.0-preview.2 `
   -Created <factual-UTC> `
   -PublicationManifestPath <publication-manifest.json> `
   -OutputPath <nuget-publication-bundle.json>
@@ -56,16 +56,16 @@ The output contains `publish-nuget:sha256:<candidate-hash>`. This is a public au
 Run `.github/workflows/publish-nuget.yml` only in `guojin-yan/OpenCV-CSharp-API`.
 
 1. Dry run: set `publish=false`, provide the exact source run IDs and package hashes, and leave `publish_authorization` empty. Review the uploaded `nuget-publication-candidate` artifact and emitted token.
-2. Upload run: use the same source, run IDs, hashes, version, and UTC creation time; set `publish=true`, `verify_publication=false`, and `create_github_release=false`; provide the exact token. The normal path names a designated publisher and a different independent approver. For `5.0.0-preview.1` only, when no independent reviewer exists, set `single_maintainer_exception=true`, `designated_publisher=Guojin Yan`, and `independent_approver=not-available`; the run must be dispatched by `guojin-yan` and records the absence of independent review explicitly.
-3. GitHub pauses both upload jobs at the protected `nuget-production` Environment. That Environment must hold `NUGET_API_KEY`; require its configured reviewer on the normal path, while the first-preview exception deliberately has no reviewer. The jobs recheck the bundle byte-for-byte, then upload the exact support-contract-derived package set to NuGet.org and `https://nuget.pkg.github.com/guojin-yan/index.json`. Duplicate identity is an error; `--skip-duplicate` is forbidden.
+2. Upload run: use the same source, run IDs, hashes, version, and UTC creation time; set `publish=true`, `verify_publication=false`, and `create_github_release=false`; provide the exact token. The normal path names a designated publisher and a different independent approver. For post-first-preview `5.0.0-preview.N` versions only, when no independent reviewer exists, set `single_maintainer_exception=true`, `designated_publisher=Guojin Yan`, and `independent_approver=not-available`; the run must be dispatched by `guojin-yan` and records the absence of independent review explicitly. This exception does not authorize a stable release or another version line.
+3. GitHub pauses both upload jobs at the protected `nuget-production` Environment. That Environment must hold `NUGET_API_KEY`; require its configured reviewer on the normal path, while the preview-channel exception deliberately has no invented reviewer. The jobs recheck the bundle byte-for-byte, then upload the exact support-contract-derived package set to NuGet.org and `https://nuget.pkg.github.com/guojin-yan/index.json`. Duplicate identity is an error; `--skip-duplicate` is forbidden.
 4. GitHub Packages initially creates user-scoped packages with private visibility. Set every candidate package page to Public and confirm that each is linked to `guojin-yan/OpenCV-CSharp-API` before verification. Public visibility is irreversible on GitHub.
 5. Verification/release run: keep `publish=false`, set `verify_publication=true`, and optionally set `create_github_release=true`. Reuse the exact token and identities. The workflow verifies every candidate package on both registries before it may create the prerelease.
 
 `.github/workflows/publish-nuget.yml` 只能在 `guojin-yan/OpenCV-CSharp-API` 执行。
 
 1. Dry run：设置 `publish=false`，提供精确 source run IDs 与 package hashes，保持 `publish_authorization` 为空；审核 `nuget-publication-candidate` artifact 和输出 token。
-2. 上传 run：保持 source、run IDs、hashes、version、UTC creation time 完全相同，设置 `publish=true`、`verify_publication=false`、`create_github_release=false` 并回填精确 token。常规路径必须指定不同的 publisher 与 independent approver。仅 `5.0.0-preview.1` 在确实没有独立审核人时，可设置 `single_maintainer_exception=true`、`designated_publisher=Guojin Yan`、`independent_approver=not-available`；该 run 必须由 `guojin-yan` 发起，并明确记录没有独立审核。
-3. 两个上传 job 均受 `nuget-production` Environment 保护。该 Environment 必须保存 `NUGET_API_KEY`；常规路径要求配置 reviewer，首版例外则明确不配置伪审核人。job 逐字节复核 bundle 后，分别向 NuGet.org 与 `https://nuget.pkg.github.com/guojin-yan/index.json` 上传 support contract 精确确定的全部候选包。重复身份必须失败，禁止 `--skip-duplicate`。
+2. 上传 run：保持 source、run IDs、hashes、version、UTC creation time 完全相同，设置 `publish=true`、`verify_publication=false`、`create_github_release=false` 并回填精确 token。常规路径必须指定不同的 publisher 与 independent approver。仅后续 `5.0.0-preview.N` 版本在确实没有独立审核人时，可设置 `single_maintainer_exception=true`、`designated_publisher=Guojin Yan`、`independent_approver=not-available`；该 run 必须由 `guojin-yan` 发起，并明确记录没有独立审核。该例外不授权稳定版或其他版本线。
+3. 两个上传 job 均受 `nuget-production` Environment 保护。该 Environment 必须保存 `NUGET_API_KEY`；常规路径要求配置 reviewer，preview 通道例外则明确不虚构审核人。job 逐字节复核 bundle 后，分别向 NuGet.org 与 `https://nuget.pkg.github.com/guojin-yan/index.json` 上传 support contract 精确确定的全部候选包。重复身份必须失败，禁止 `--skip-duplicate`。
 4. GitHub Packages 初次创建 user-scoped package 时默认为 private。验证前必须在 29 个 package 页面中逐项设为 Public，并确认关联 `guojin-yan/OpenCV-CSharp-API`。GitHub 的 Public 可见性不可逆。
 5. 验证/Release run：保持 `publish=false`，设置 `verify_publication=true`，按需设置 `create_github_release=true`，复用精确 token 与身份。只有两个 registry 均达到 29/29 验证通过后才能创建 prerelease。
 
@@ -96,7 +96,7 @@ pwsh -NoProfile -File ./scripts/Test-NuGetRepositorySignedPackage.ps1 `
   -UnsignedPackagePath <reviewed-unsigned.nupkg> `
   -RepositorySignedPackagePath <downloaded-from-nuget-org.nupkg> `
   -PackageId JYPPX.OpenCV.CSharp.API `
-  -PackageVersion 5.0.0-preview.1 `
+  -PackageVersion 5.0.0-preview.2 `
   -ExpectedOwner GuojinYan `
   -VerifiedAt <factual-UTC> `
   -OutputPath <repository-signature-report.json>
@@ -113,7 +113,7 @@ Consumers can verify a downloaded package directly:
 使用者可以直接验证下载包：
 
 ```powershell
-dotnet nuget verify --all JYPPX.OpenCV.CSharp.API.5.0.0-preview.1.nupkg
+dotnet nuget verify --all JYPPX.OpenCV.CSharp.API.5.0.0-preview.2.nupkg
 ```
 
 The expected signature type is `Repository`, and the signer subject contains `NuGet.org Repository by Microsoft`. A missing signature, Author-only signature, wrong repository, wrong owner, failed timestamp, or trust-chain error is a stop condition.

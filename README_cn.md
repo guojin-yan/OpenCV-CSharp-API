@@ -111,7 +111,7 @@ full profile 保证包含矩阵要求的模块，包括 DNN、ML、标定、Feat
 
 ## Native Runtime 包
 
-首个 preview 发布 managed 包，以及 [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json) 中全部归类为 `realSupport` 的 runtime 包。每个包都从同一份审核通过的 candidate 发布到两个公开 registry；正式发布产物与验证证据同时发布在 [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases)。
+每个 preview 都发布 managed 包，以及 [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json) 中全部归类为 `realSupport` 的 runtime 包。每个包都从同一份审核通过的 candidate 推送到两个公开 registry；正式发布产物与验证证据同时发布在 [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases)。
 
 | 平台 | 架构 | Full runtime | Mini runtime |
 | --- | --- | --- | --- |

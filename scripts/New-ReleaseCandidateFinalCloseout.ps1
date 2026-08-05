@@ -415,9 +415,8 @@ function Get-Record {
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
         [ordered]@{ Id = "hosted-win-x86-full"; Status = "quota-blocked"; Evidence = "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
-        [ordered]@{ Id = "nuget-production-environment"; Status = "not-configured"; Evidence = "The authoritative nuget-production Environment and NUGET_API_KEY secret are not configured. The first preview may use only the workflow's explicit single-maintainer exception instead of a protected reviewer." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
-        [ordered]@{ Id = "release-approval"; Status = "not-approved"; Evidence = "No exact candidate has been approved by either an independent reviewer or the explicit, version-bounded first-preview single-maintainer exception." },
+        [ordered]@{ Id = "release-approval"; Status = "not-approved"; Evidence = "No exact candidate has been approved by either an independent reviewer or the explicit, version-bounded preview-channel single-maintainer exception." },
         [ordered]@{ Id = "repository-signing-verification"; Status = "post-publication-required"; Evidence = "NuGet.org must add a Repository primary signature and pass exact payload comparison; GitHub Packages must be public, repository-linked, and byte-identical to the reviewed candidate." },
         [ordered]@{ Id = "sbom-inputs"; Status = "candidate-refresh-required"; Evidence = "The deterministic SPDX-2.3 generator and guard are provisioned; final package-bound documents must be regenerated from the final source commit and approved." }
     )
@@ -871,7 +870,7 @@ function Get-Record {
             GitHubPackagesRepository = "guojin-yan/OpenCV-CSharp-API"
             RequiredPublicVisibility = "public"
             RequiredFeedCount = 2
-            CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg"
+            CandidatePackage = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.2/jyppx.opencv.csharp.api.5.0.0-preview.2.nupkg"
             Methods = @("GET", "HEAD")
             Mutable = $false
             CandidateStatus = "not-published"

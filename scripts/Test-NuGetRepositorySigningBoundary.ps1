@@ -157,21 +157,29 @@ try {
         $suffix = if ($profile -eq 'mini') { '.mini' } else { '' }
         $manifestPackages.Add([ordered]@{ Kind = 'runtime'; Rid = $rid; RuntimeProfile = $profile; PackageId = "JYPPX.OpenCV.runtime.$rid$suffix"; ArtifactName = "nupkg-$rid-$profile"; RunId = '123'; Sha256 = ('1' * 64) })
     }
-    $manifestRecord = [ordered]@{ SchemaVersion = 1; SourceRevision = ('a' * 40); PackageVersion = '5.0.0-preview.1'; Packages = @($manifestPackages) }
+    $manifestRecord = [ordered]@{ SchemaVersion = 1; SourceRevision = ('a' * 40); PackageVersion = '5.0.0-preview.2'; Packages = @($manifestPackages) }
     $manifestFixture = Join-Path $temporaryRoot 'publication-manifest.input.json'
     $normalizedManifest = Join-Path $temporaryRoot 'publication-manifest.json'
     [IO.File]::WriteAllText($manifestFixture, (($manifestRecord | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    $manifestArguments = @('-ManifestPath', $manifestFixture, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1', '-OutputPath', $normalizedManifest)
+    $manifestArguments = @('-ManifestPath', $manifestFixture, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.2', '-OutputPath', $normalizedManifest)
     & pwsh -NoProfile -File $publicationManifest @manifestArguments
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Path $publicationManifest -Issue 'Valid all-real-supported publication manifest was rejected'
-    & pwsh -NoProfile -File $publicationManifest -ManifestPath $normalizedManifest -SourceCommit ('a' * 40) -PackageVersion '5.0.0-preview.1' -OutputPath $normalizedManifest -Check
+    & pwsh -NoProfile -File $publicationManifest -ManifestPath $normalizedManifest -SourceCommit ('a' * 40) -PackageVersion '5.0.0-preview.2' -OutputPath $normalizedManifest -Check
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Path $publicationManifest -Issue 'Normalized publication manifest check failed'
+
+    foreach ($invalidVersion in @('5.0.0-preview.1', '5.0.0', '5.0.0-preview.02')) {
+        Invoke-PowerShellExpectedFailure `
+            -Name "publication-version-$invalidVersion" `
+            -Script $publicationManifest `
+            -Arguments @('-ManifestPath', $manifestFixture, '-SourceCommit', ('a' * 40), '-PackageVersion', $invalidVersion) `
+            -ExpectedText 'N >= 2'
+    }
 
     $badArtifact = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
     $badArtifact.Packages[1].ArtifactName = 'nupkg-win-x86-full'
     $badArtifactPath = Join-Path $temporaryRoot 'bad-artifact.json'
     [IO.File]::WriteAllText($badArtifactPath, (($badArtifact | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $badArtifactPath -Script $publicationManifest -Arguments @('-ManifestPath', $badArtifactPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'metadata mismatch'
+    Invoke-PowerShellExpectedFailure -Name $badArtifactPath -Script $publicationManifest -Arguments @('-ManifestPath', $badArtifactPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.2') -ExpectedText 'metadata mismatch'
 
     $pendingTarget = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
     $pendingTarget.Packages[1].Rid = 'win-x86'
@@ -180,7 +188,7 @@ try {
     $pendingTarget.Packages[1].ArtifactName = 'nupkg-win-x86-full'
     $pendingTargetPath = Join-Path $temporaryRoot 'pending-target.json'
     [IO.File]::WriteAllText($pendingTargetPath, (($pendingTarget | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $pendingTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $pendingTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'missing exact package'
+    Invoke-PowerShellExpectedFailure -Name $pendingTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $pendingTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.2') -ExpectedText 'missing exact package'
 
     $excludedTarget = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
     $excludedTarget.Packages[1].Rid = 'android-arm64'
@@ -189,19 +197,19 @@ try {
     $excludedTarget.Packages[1].ArtifactName = 'nupkg-android-arm64-full'
     $excludedTargetPath = Join-Path $temporaryRoot 'excluded-target.json'
     [IO.File]::WriteAllText($excludedTargetPath, (($excludedTarget | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $excludedTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $excludedTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'missing exact package'
+    Invoke-PowerShellExpectedFailure -Name $excludedTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $excludedTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.2') -ExpectedText 'missing exact package'
 
     $uppercaseHash = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
     $uppercaseHash.Packages[1].Sha256 = ('A' * 64)
     $uppercaseHashPath = Join-Path $temporaryRoot 'uppercase-hash.json'
     [IO.File]::WriteAllText($uppercaseHashPath, (($uppercaseHash | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $uppercaseHashPath -Script $publicationManifest -Arguments @('-ManifestPath', $uppercaseHashPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'lowercase package SHA256'
+    Invoke-PowerShellExpectedFailure -Name $uppercaseHashPath -Script $publicationManifest -Arguments @('-ManifestPath', $uppercaseHashPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.2') -ExpectedText 'lowercase package SHA256'
 
     $missingPackage = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
     $missingPackage.Packages = @($missingPackage.Packages | Select-Object -Skip 1)
     $missingPackagePath = Join-Path $temporaryRoot 'missing-package.json'
     [IO.File]::WriteAllText($missingPackagePath, (($missingPackage | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.1') -ExpectedText 'exactly 29 packages'
+    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0-preview.2') -ExpectedText 'exactly 29 packages'
 
     $fixtureProject = Join-Path $temporaryRoot "fixture/Fixture.csproj"
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $fixtureProject) | Out-Null
@@ -280,9 +288,9 @@ try {
                 "scripts/Test-NuGetPublicationManifest.ps1",
                 "publish_authorization",
                 "single_maintainer_exception",
-                "single-maintainer-first-preview-exception",
+                "single-maintainer-preview-channel-exception",
                 "explicit-owner-authorization-no-independent-reviewer-available",
-                "The single-maintainer exception is restricted to 5.0.0-preview.1.",
+                "The single-maintainer exception is restricted to the post-first-preview 5.0.0 preview channel.",
                 "The single-maintainer exception must be dispatched by guojin-yan.",
                 "The single-maintainer exception requires designated_publisher=Guojin Yan.",
                 "The single-maintainer exception requires independent_approver=not-available.",

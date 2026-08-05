@@ -59,9 +59,9 @@ The source is intentionally split into a dedicated [`ShowcaseRunner.cs`](https:/
 
 源码有意拆分到独立的 [`ShowcaseRunner.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ConsoleSamples/ShowcaseRunner.cs)，原有 [`Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ConsoleSamples/Program.cs) 继续承担广覆盖模块 smoke。`showcase` 继续作为 `tutorial` 的兼容别名。
 
-For a release-post check, use the grouped [`samples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples) fixture. It restores the public `5.0.0-preview.1` managed and Windows x64 runtime packages and runs each case without a project reference. See [Example Catalog](example-catalog.md) for the complete command and evidence interpretation.
+For a post-release check, use the grouped [`samples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples) fixture. It restores the latest public prerelease managed and Windows x64 runtime packages and runs each case without a project reference. See [Example Catalog](example-catalog.md) for the complete command and evidence interpretation.
 
-发布后验证请使用分组后的 [`samples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples) 夹具。它从公开源恢复 `5.0.0-preview.1` managed 包和 Windows x64 runtime 包，不使用项目引用即可逐个运行案例。完整命令和证据解释见[案例目录](example-catalog.md)。
+发布后验证请使用分组后的 [`samples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples) 夹具。它从公开源恢复最新 prerelease managed 包和 Windows x64 runtime 包，不使用项目引用即可逐个运行案例。完整命令和证据解释见[案例目录](example-catalog.md)。
 
 ## What Each Case Proves / 每个案例证明什么
 

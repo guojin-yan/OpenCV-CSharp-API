@@ -12,7 +12,7 @@ $feedIndex = 'https://api.nuget.org/v3/index.json'
 $githubPackagesIndex = 'https://nuget.pkg.github.com/guojin-yan/index.json'
 $authoritativeRepository = 'guojin-yan/OpenCV-CSharp-API'
 $packageId = 'JYPPX.OpenCV.CSharp.API'
-$packageVersion = '5.0.0-preview.1'
+$packageVersion = '5.0.0-preview.2'
 $packageFlatContainerUrl = "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/$packageVersion/jyppx.opencv.csharp.api.$packageVersion.nupkg"
 
 function Add-Violation {
@@ -85,7 +85,7 @@ try {
     Assert-True -List $violations -Condition (Test-Path -LiteralPath $publishWorkflowPath -PathType Leaf) -Path '.github/workflows/publish-nuget.yml' -Issue 'Dedicated NuGet.org publication workflow is missing'
     if (Test-Path -LiteralPath $publishWorkflowPath -PathType Leaf) {
         $publishText = [IO.File]::ReadAllText($publishWorkflowPath)
-        foreach ($token in @('https://api.nuget.org/v3/index.json','https://nuget.pkg.github.com/guojin-yan/index.json','environment: nuget-production','publish_authorization','single_maintainer_exception','single-maintainer-first-preview-exception','explicit-owner-authorization-no-independent-reviewer-available','verify_publication','secrets.NUGET_API_KEY','GITHUB_PACKAGES_TOKEN: ${{ github.token }}','scripts/Test-NuGetRepositorySignedPackage.ps1','github-packages-publication-proof.json','RequiredVisibility = ''public''','github.repository == ''guojin-yan/OpenCV-CSharp-API''')) {
+        foreach ($token in @('https://api.nuget.org/v3/index.json','https://nuget.pkg.github.com/guojin-yan/index.json','environment: nuget-production','publish_authorization','single_maintainer_exception','single-maintainer-preview-channel-exception','explicit-owner-authorization-no-independent-reviewer-available','verify_publication','secrets.NUGET_API_KEY','GITHUB_PACKAGES_TOKEN: ${{ github.token }}','scripts/Test-NuGetRepositorySignedPackage.ps1','github-packages-publication-proof.json','RequiredVisibility = ''public''','github.repository == ''guojin-yan/OpenCV-CSharp-API''')) {
             Assert-True -List $violations -Condition ($publishText.Contains($token, [StringComparison]::Ordinal)) -Path '.github/workflows/publish-nuget.yml' -Issue 'Dual-feed publication workflow lost a required trust boundary' -Text $token
         }
         Assert-True -List $violations -Condition (-not $publishText.Contains('--skip-duplicate', [StringComparison]::OrdinalIgnoreCase)) -Path '.github/workflows/publish-nuget.yml' -Issue 'First publication must fail on duplicate package identity rather than hiding it'

@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/a584ba685972720e",
-  "SourceIdentity": "sha256:a584ba685972720e30613ad2ce73e5bf0ceaf71fa89c8f228b01a690b7429c56",
+  "CandidateId": "local-closeout/sha256/b5240649ea9d9402",
+  "SourceIdentity": "sha256:b5240649ea9d9402693cf9efd2a4c5fc642a0db7cb3d9b60595250bf2c81a9a0",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
     "FileCount": 1636,
-    "Sha256": "a584ba685972720e30613ad2ce73e5bf0ceaf71fa89c8f228b01a690b7429c56",
+    "Sha256": "b5240649ea9d9402693cf9efd2a4c5fc642a0db7cb3d9b60595250bf2c81a9a0",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -406,13 +406,13 @@
   "EvidenceReferences": [
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "9f11c1b42c502cd312565980e06f769f30dff4bc2c0af4bcf4a6748e3207d410",
+      "Sha256": "3587ed2f6b9eda8ced1df5e6c08d97b0b7717ab332080b3c1bf25fb02205847a",
       "Length": 262076
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
-      "Sha256": "c8a352875a9a0a7b22b4eab1110e00caa97841e9be9becfd29f85bc6760bd7c5",
-      "Length": 36432
+      "Sha256": "2b15d22df9469c9c5085ebc6fe9795ec02b30e20b527e140f6e38f1022d7ae3b",
+      "Length": 36809
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
@@ -896,8 +896,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "1acb4b586b03cfce2b3ab6a44e83ace18831af0c3d3fa9cfa53f5ed5a94ca500",
-      "Length": 10796
+      "Sha256": "94d29d5aa5160504116841c60a77903311b5091f3bd1bfaea13813d760079f1e",
+      "Length": 11328
     },
     {
       "Path": "docs/articles/sample-model-assets-guide.md",
@@ -1011,12 +1011,12 @@
     },
     {
       "Path": "docs/index.md",
-      "Sha256": "1d3c12c5b3885539a03be9ba3217c66a252431298d5747fd984e25d08a0f28c6",
+      "Sha256": "72df1fb08e126efe8b899c4a8d2eab62ce207e765db02f5cf1a92b6c9cc5ec96",
       "Length": 6404
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "8a9e7059ae191cd5e34690a8fd1e8e2bf91beb363a7c20ccfb4810ad62caf323",
+      "Sha256": "c4dc5fb6643bd7d6ec923fb855779142812dde1cfce9201eeb6513da56025408",
       "Length": 14074
     },
     {
@@ -1166,8 +1166,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "cd5b09c6e0dae378103cef12ad50413522a1e0d919daca33d2a2f714d6359137",
-      "Length": 60886
+      "Sha256": "af95b95c9fbd4e963fb25d6c4a4524d6f37a22b5996e278cb365d3e1052d7a94",
+      "Length": 60580
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1246,8 +1246,8 @@
     },
     {
       "Path": "scripts/Test-NuGetPublicationManifest.ps1",
-      "Sha256": "c89a6ba6ba51ff532dda6a8f5973f710ef4d9d0aa100e23039724d584e189611",
-      "Length": 7821
+      "Sha256": "0ab94c60b78a9fea98d4a9612d68799bef169d3d658196fc6f9200b76ae23c83",
+      "Length": 8066
     },
     {
       "Path": "scripts/Test-NuGetRepositorySignedPackage.ps1",
@@ -1256,8 +1256,8 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "b61f5e3ba1fa99296148e7d11d5186227411cfc7387549999fe1c029625323b9",
-      "Length": 20784
+      "Sha256": "d036f369ab0d4664be94bd2a0300b24003af0468ae7f359e3a6a4c67f937424d",
+      "Length": 21213
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1276,8 +1276,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "6a132d38c6e3348d704b8de131c98160de19c4b0158ce7eee0f2e63ffa2e3ede",
-      "Length": 56339
+      "Sha256": "222e9b9a484d1a0e5e18a7b7e6906d493be7c7ff7db93efc0ace23cf028a7c0a",
+      "Length": 56308
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1286,8 +1286,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "d49dc19c167e99500a1a070cc20793b6695ec033fcdceac13edd87532ba7114e",
-      "Length": 43762
+      "Sha256": "9445aa4fe1a8dbd71c8b41e9342813e8b7728e847999f2f6aebcfa6ef82c9ae2",
+      "Length": 43766
     },
     {
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
@@ -1346,8 +1346,8 @@
     },
     {
       "Path": "scripts/Test-WorkflowInvariantCoverage.ps1",
-      "Sha256": "902eb3c5dbbcf940701dd2ca70b724fee224d0bf3e0161adec0ba4b6c5727427",
-      "Length": 14862
+      "Sha256": "238945837a8590619373c22fd2394d302e9086c6c31b9b5ea025b9b99cde4d6b",
+      "Length": 14864
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
@@ -1831,7 +1831,7 @@
     "GitHubPackagesRepository": "guojin-yan/OpenCV-CSharp-API",
     "RequiredPublicVisibility": "public",
     "RequiredFeedCount": 2,
-    "CandidatePackage": "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg",
+    "CandidatePackage": "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.2/jyppx.opencv.csharp.api.5.0.0-preview.2.nupkg",
     "Methods": [
       "GET",
       "HEAD"
@@ -1872,11 +1872,6 @@
       "Evidence": "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist."
     },
     {
-      "Id": "nuget-production-environment",
-      "Status": "not-configured",
-      "Evidence": "The authoritative nuget-production Environment and NUGET_API_KEY secret are not configured. The first preview may use only the workflow's explicit single-maintainer exception instead of a protected reviewer."
-    },
-    {
       "Id": "publication-authorization",
       "Status": "not-authorized",
       "Evidence": "No publish, tag, release, or mutable feed operation is authorized in the current quota state."
@@ -1884,7 +1879,7 @@
     {
       "Id": "release-approval",
       "Status": "not-approved",
-      "Evidence": "No exact candidate has been approved by either an independent reviewer or the explicit, version-bounded first-preview single-maintainer exception."
+      "Evidence": "No exact candidate has been approved by either an independent reviewer or the explicit, version-bounded preview-channel single-maintainer exception."
     },
     {
       "Id": "repository-signing-verification",

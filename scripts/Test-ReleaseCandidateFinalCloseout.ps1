@@ -458,13 +458,13 @@ function Test-Record {
 
     $expectedMethods = @("GET", "HEAD")
     Assert-True -List $List -Condition ($Record.PublicFeed.Mode -eq "read-only" -and $Record.PublicFeed.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.PublicFeed.GitHubPackagesServiceIndex -eq "https://nuget.pkg.github.com/guojin-yan/index.json" -and $Record.PublicFeed.GitHubPackagesRepository -eq "guojin-yan/OpenCV-CSharp-API" -and $Record.PublicFeed.RequiredPublicVisibility -eq "public" -and [int]$Record.PublicFeed.RequiredFeedCount -eq 2) -Issue "Final closeout dual public-feed boundary drifted"
-    Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.1/jyppx.opencv.csharp.api.5.0.0-preview.1.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
+    Assert-True -List $List -Condition ($Record.PublicFeed.CandidatePackage -eq "https://api.nuget.org/v3-flatcontainer/jyppx.opencv.csharp.api/5.0.0-preview.2/jyppx.opencv.csharp.api.5.0.0-preview.2.nupkg") -Issue "Final closeout public-feed candidate URL drifted" -Text $Record.PublicFeed.CandidatePackage
     Assert-True -List $List -Condition ((@($Record.PublicFeed.Methods) -join ",") -eq ($expectedMethods -join ",")) -Issue "Final closeout public-feed method list drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PublicFeed.Mutable -and $Record.PublicFeed.CandidateStatus -eq "not-published" -and -not [bool]$Record.PublicFeed.UploadAttempted) -Issue "Final closeout public-feed state is not immutable and not-published"
     Assert-True -List $List -Condition ($Record.Rollback.Status -eq "not-published" -and -not [bool]$Record.Rollback.PackageRemovalRequired -and $Record.ReleaseApproval.Status -eq "not-approved" -and -not [bool]$Record.ReleaseApproval.ReleaseReady -and $Record.ReleaseApproval.PublicationDecision -eq "do-not-publish") -Issue "Final closeout rollback or publication decision drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PrivateKeyMaterialPresent -and -not [bool]$Record.SecretMaterialPresent -and [bool]$Record.Deterministic) -Issue "Final closeout must exclude secrets and remain deterministic"
 
-    $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","hosted-win-x86-full","macos-support-decision","nuget-production-environment","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
+    $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","hosted-win-x86-full","macos-support-decision","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
     $actualBlockers = @($Record.ExternalBlockers | ForEach-Object { [string]$_.Id })
     Assert-True -List $List -Condition (($actualBlockers -join ",") -eq ($expectedBlockers -join ",")) -Issue "Final closeout blocker ledger is missing, reordered, or incomplete"
     foreach ($blocker in $Record.ExternalBlockers) {

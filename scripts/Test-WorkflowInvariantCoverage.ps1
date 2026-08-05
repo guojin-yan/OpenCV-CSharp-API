@@ -238,7 +238,7 @@ foreach ($token in @(
         "environment: nuget-production",
         "publish_authorization",
         "single_maintainer_exception",
-        "single-maintainer-first-preview-exception",
+        "single-maintainer-preview-channel-exception",
         "explicit-owner-authorization-no-independent-reviewer-available",
         "scripts/New-NuGetPublicationBundle.ps1",
         "scripts/Test-NuGetRepositorySignedPackage.ps1",

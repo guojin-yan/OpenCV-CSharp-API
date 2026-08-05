@@ -111,7 +111,7 @@ Do not reference full and mini runtime packages together. Keep the managed and r
 
 ## Native Runtime Packages
 
-The first preview publishes the managed package and every runtime package classified as `realSupport` in [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json). Each package is published to both public registries from the same reviewed candidate; the formal assets and evidence are published on [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases).
+Each preview publishes the managed package and every runtime package classified as `realSupport` in [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json). Every package is promoted to both public registries from the same reviewed candidate; the formal assets and verification evidence are published on [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases).
 
 | Platform | Architecture | Full runtime | Mini runtime |
 | --- | --- | --- | --- |

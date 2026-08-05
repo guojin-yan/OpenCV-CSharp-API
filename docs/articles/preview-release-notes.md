@@ -1,30 +1,32 @@
-# 5.0.0-preview.1 Release Notes / 5.0.0-preview.1 发布说明
+# 5.0.0-preview.2 Release Notes / 5.0.0-preview.2 发布说明
 
-`5.0.0-preview.1` is the first planned public preview of OpenCV CSharp API. It binds OpenCV 5.0.0 through the version-neutral `JYPPX.OpenCvSharp.*` managed API, `JYPPX.OpenCV.CSharp.API` package, and stable `jyppx_ocv_*` native C ABI. Public availability must be confirmed on NuGet.org, GitHub Packages, and the GitHub Release page; these notes do not treat a local candidate as published.
+`5.0.0-preview.2` is the corrected second public preview of OpenCV CSharp API. It binds OpenCV 5.0.0 through the version-neutral `JYPPX.OpenCvSharp.*` managed API, `JYPPX.OpenCV.CSharp.API` package, and stable `jyppx_ocv_*` native C ABI. Public availability must be confirmed on NuGet.org, GitHub Packages, and the GitHub Release page; these notes do not treat a local candidate as published.
 
-`5.0.0-preview.1` 是 OpenCV CSharp API 计划发布的首个公开预览版。它通过版本中立的 `JYPPX.OpenCvSharp.*` managed API、`JYPPX.OpenCV.CSharp.API` 包和稳定的 `jyppx_ocv_*` native C ABI 绑定 OpenCV 5.0.0。是否已经公开可用必须以 NuGet.org、GitHub Packages 和 GitHub Release 页面为准；本文不会把本地候选误称为已发布版本。
+`5.0.0-preview.2` 是 OpenCV CSharp API 修正后的第二个公开预览版。它通过版本中立的 `JYPPX.OpenCvSharp.*` managed API、`JYPPX.OpenCV.CSharp.API` 包和稳定的 `jyppx_ocv_*` native C ABI 绑定 OpenCV 5.0.0。是否已经公开可用必须以 NuGet.org、GitHub Packages 和 GitHub Release 页面为准；本文不会把本地候选误称为已发布版本。
 
 ## Highlights / 主要内容
 
 - 611 public managed types, 6,300 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp` under a checked compatibility baseline.
 - 2,656 full-profile and 526 mini-profile native ABI functions, with complete native-to-managed binding coverage for the declared ABI.
 - Image decode/encode, processing, geometry, calibration, video, DNN, object detection, Photo, machine learning, Tracking, Stitching, and selected contrib workflows.
+- Corrected Full runtimes make OpenCV `ml` mandatory, ship one neutral loader plus 17 required OpenCV modules, and verify both DNN inference and trained KNN prediction.
 - Deterministic normalized NuGet packages, package-owned full/mini native smoke, package provenance, SPDX-2.3 SBOM generation, and fail-closed release review.
 - The exact support-contract-derived candidate is published to NuGet.org and GitHub Packages, then attached to a verified GitHub prerelease with both registry proofs; the intended final set is 29 packages after Android single-loader revalidation.
-- A seven-part [Tutorial Series](tutorial-series.md), eight generated images, direct Chinese rendering through OpenCV 5 `putText`, Android package consumption, compatibility `showcase` commands, and task-oriented [Scenario Recipes](scenario-recipes.md).
+- A 24-part [Tutorial Series](tutorial-series.md) and grouped standalone projects covering image processing, Chinese text, geometry, features, ML, DNN classification/detection/segmentation, document scanning, panorama stitching, motion analysis, tracking, and Android package loading.
 
 - 611 个 public managed type、6,300 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
 - full profile 2,656 个、mini profile 526 个 native ABI function，并对声明 ABI 保持完整 native-to-managed binding coverage。
 - 覆盖图像编解码、处理、几何、标定、视频、DNN、目标检测、Photo、机器学习、Tracking、Stitching 和部分 contrib 工作流。
+- 修正 Full runtime 契约，将 OpenCV `ml` 设为必需模块，交付一个中性 loader 加 17 个必需 OpenCV 模块，并同时验证 DNN 推理和真实训练后的 KNN 预测。
 - 提供确定性规范化 NuGet 包、包内 full/mini native smoke、package provenance、SPDX-2.3 SBOM 和 fail-closed 发布审核。
 - 同一份精确的 29 包 candidate 发布到 NuGet.org 和 GitHub Packages，并在两个 registry 验证通过后附加到 GitHub prerelease。
-- 提供 7 个案例的[系列教程](tutorial-series.md)、8 张生成图片、通过 OpenCV 5 `putText` 直接绘制中文、Android 包消费、兼容 `showcase` 命令和面向任务的 [Scenario Recipes](scenario-recipes.md)。
+- 提供 24 篇[系列教程](tutorial-series.md)和分组独立项目，覆盖图像处理、中文写字、几何、特征、机器学习、DNN 分类/检测/分割、文档扫描、全景拼接、运动分析、跟踪和 Android 包加载。
 
 ## Package Selection / 包选择
 
-Install the managed package and exactly one runtime package at the same normalized version. The first candidate contains the managed package plus every RID/profile pair classified as `realSupport` in the checked-in support contract.
+Install the managed package and exactly one runtime package at the same normalized version. The current candidate contains the managed package plus every RID/profile pair classified as `realSupport` in the checked-in support contract.
 
-managed 包与一个 runtime 包必须使用相同的 NuGet 规范版本。首个候选包含 managed 包，以及仓库 support contract 中全部 `realSupport` RID/profile runtime 包。
+managed 包与一个 runtime 包必须使用相同的 NuGet 规范版本。当前候选包含 managed 包，以及仓库 support contract 中全部 `realSupport` RID/profile runtime 包。
 
 | Profile | Package | Use it for |
 | --- | --- | --- |
@@ -71,9 +73,9 @@ dotnet restore
 
 ## Rollback And Uninstall / 回滚与卸载
 
-This is the first public-preview version, so there is no earlier published OpenCV CSharp API package version that these notes can promise as a rollback target. Before adoption, retain the application's prior source/lock-file state and any internally approved package archive. A future rollback must pin one exact known-good managed/runtime pair rather than selecting `latest`.
+`5.0.0-preview.1` is the previous published preview and may be used only as an explicit rollback pair when its older Full runtime boundary is acceptable. It predates the required `ml` module and corrected Full payload, so ML-dependent applications must not treat it as equivalent to this release. Pin the managed package and exactly one runtime package to the same known-good version rather than selecting `latest`.
 
-这是首个公开预览版本，因此本文不能承诺一个更早的已发布 OpenCV CSharp API 包作为降级目标。采用本预览版前，请保留应用此前的 source/lock-file 状态以及内部批准的 package archive。后续回滚必须固定到一组精确的 known-good managed/runtime 包，不能选择 `latest`。
+`5.0.0-preview.1` 是上一个已发布预览版；仅当应用可以接受旧 Full runtime 边界时，才可把它作为精确的 managed/runtime 回滚组合。该版本早于必需 `ml` 模块和修正后的 Full payload，依赖 ML 的应用不能把它视为与本版本等价。回滚时必须把 managed 包和唯一一个 runtime 包固定到相同的 known-good 版本，不能选择 `latest`。
 
 To remove the preview completely:
 
