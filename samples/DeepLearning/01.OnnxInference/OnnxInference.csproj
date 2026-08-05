@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>false</ImplicitUsings>
+  </PropertyGroup>
+  <Import Project="..\..\SamplePackages.props" />
+  <ItemGroup>
+    <Compile Include="..\..\Common\SampleSupport.cs" Link="SampleSupport.cs" />
+    <None Include="..\..\..\tests\OpenCvSharp.Tests\Dnn\Fixtures\identity-opset13.onnx.base64"
+          Link="Model\identity-opset13.onnx.base64"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">
+    <ItemGroup>
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(OpenCvNativeRuntimeFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
+  </Target>
+</Project>

@@ -39,19 +39,11 @@ The font environment variable is optional when a known Windows, Linux, or macOS 
 
 `showcase` 继续作为 `tutorial` 的兼容别名；不带这两个前缀的默认命令仍是广覆盖 API smoke 程序。
 
-## Run The Published-Package Cases / 运行已发布包案例
+## Run The Grouped Examples / 运行分组案例
 
-The six projects under [`PublishedPackageSamples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples/PublishedPackageSamples) are the package-backed implementations of Tutorials 01-06. Each project restores the managed API and matching runtime fixture, implements one complete module workflow in its own `Program.cs`, and writes one focused PNG. Run the project that matches the feature you need; the exact commands and article map are in [Published Package Samples](published-package-samples.md).
+The complete package-backed catalog now lives directly under [`samples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples). Cases are grouped by capability and numbered inside each group; the catalog, outputs, commands, and article mapping are maintained in [Example Catalog](example-catalog.md) and the [samples README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/README.md).
 
-[`PublishedPackageSamples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples/PublishedPackageSamples) 下的 6 个项目是教程 01-06 对应的已发布包实现。每个项目恢复 managed API 和匹配的 runtime 夹具，在自己的 `Program.cs` 中实现一套完整模块流程，并输出一张聚焦 PNG。按需运行对应功能；完整命令和文章映射见[已发布包案例](published-package-samples.md)。
-
-The root `PublishedPackageSamples` project remains an optional all-in-one gallery for release regression checks. Its ML panel records `NOT_LINKED` when the selected runtime does not include the optional native ML module; this is a supported capability result, not a failed image pipeline.
-
-根目录 `PublishedPackageSamples` 项目仅作为发布回归时的一次性聚合图集入口。当所选 runtime 未包含可选 native ML 模块时，ML 面板记录 `NOT_LINKED`；这是受支持的能力结果，不会使整个图像流水线失败。
-
-```powershell
-dotnet run --project .\samples\PublishedPackageSamples\PublishedPackageSamples.csproj -c Release -- tutorial all .\artifacts\published-package-tutorials C:\Windows\Fonts\Deng.ttf
-```
+完整的 package-backed 案例现在直接位于 [`samples`](https://github.com/guojin-yan/OpenCV-CSharp-API/tree/opencv5.x/samples) 下。案例按功能分组并在组内编号；目录、输出、命令和文章映射维护在[案例目录](example-catalog.md)和 [samples README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/README.md) 中。
 
 ## From Tutorials To Reference Guides / 从教程进入专题指南
 

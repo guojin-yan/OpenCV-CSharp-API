@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <!-- The pin is limited to this reproducible post-publication validation fixture. -->
+    <OpenCvSamplePackageVersion>5.0.0-preview.1</OpenCvSamplePackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JYPPX.OpenCV.CSharp.API" Version="$(OpenCvSamplePackageVersion)" />
+    <PackageReference Include="JYPPX.OpenCV.runtime.win-x64" Version="$(OpenCvSamplePackageVersion)" />
+    <AssemblyMetadata Include="OpenCvSamplePackageVersion" Value="$(OpenCvSamplePackageVersion)" />
+  </ItemGroup>
+</Project>

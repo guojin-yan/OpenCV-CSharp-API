@@ -54,9 +54,9 @@ mini profile 面向常用 `core,imgproc,imgcodecs,videoio` 工作流，以及 Op
 
 ## Start With Evidence / 从可执行案例开始
 
-Run the six-part [Tutorial Series](tutorial-series.md) to generate eight PNG files from synthetic, redistributable inputs plus an application-selected CJK font. It includes direct Chinese rendering through OpenCV 5 `putText`. Then select a product route from [Scenario Recipes](scenario-recipes.md). The default `ConsoleSamples` path remains the broad smoke program; `tutorial` is the presentation-ready entry point and `showcase` remains its compatibility alias.
+Run the original six-part [Tutorial Series](tutorial-series.md) or choose a capability from the expanded [Example Catalog](example-catalog.md). The grouped cases generate deterministic PNG files from redistributable inputs plus an application-selected CJK font where needed. They include direct Chinese rendering through OpenCV 5 `putText`. Then select a product route from [Scenario Recipes](scenario-recipes.md). The default `ConsoleSamples` path remains the broad smoke program; `tutorial` is the presentation-ready entry point and `showcase` remains its compatibility alias.
 
-先运行包含 6 个案例的[系列教程](tutorial-series.md)，使用可再分发的合成输入和应用选择的中文字体生成 8 个 PNG 文件，其中包含通过 OpenCV 5 `putText` 直接绘制中文。再从 [Scenario Recipes](scenario-recipes.md) 选择产品路线。默认 `ConsoleSamples` 仍是广覆盖 smoke 程序；`tutorial` 是适合展示的入口，`showcase` 继续作为兼容别名。
+可以先运行包含 6 个案例的[系列教程](tutorial-series.md)，也可以从扩展后的[案例目录](example-catalog.md)按能力选择案例。分组案例使用可再分发的确定性输入，并在需要时使用应用选择的中文字体生成 PNG，其中包含通过 OpenCV 5 `putText` 直接绘制中文。再从 [Scenario Recipes](scenario-recipes.md) 选择产品路线。默认 `ConsoleSamples` 仍是广覆盖 smoke 程序；`tutorial` 是适合展示的入口，`showcase` 继续作为兼容别名。
 
 ## Release Boundaries / 首版边界
 

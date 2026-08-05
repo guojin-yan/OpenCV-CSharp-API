@@ -8,12 +8,12 @@ This first case connects the operations used by many image services: BGR input, 
 
 ## Run / 运行
 
-The complete implementation lives in [`Case01.ImagePipeline/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case01.ImagePipeline/Program.cs). It owns the generated input, processing chain, statistics, visualization, and file output while consuming the published NuGet packages.
+The complete implementation lives in [`ImageProcessing/01.ImagePipeline/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ImageProcessing/01.ImagePipeline/Program.cs). It owns the generated input, processing chain, statistics, visualization, and file output while consuming the package fixture.
 
-完整实现位于 [`Case01.ImagePipeline/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case01.ImagePipeline/Program.cs)，由该项目自行完成输入生成、处理链、统计、可视化和文件输出，并直接使用已发布 NuGet 包。
+完整实现位于 [`ImageProcessing/01.ImagePipeline/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ImageProcessing/01.ImagePipeline/Program.cs)，由该项目自行完成输入生成、处理链、统计、可视化和文件输出，并直接使用 package 夹具。
 
 ```powershell
-dotnet run --project .\samples\PublishedPackageSamples\Case01.ImagePipeline\Case01.ImagePipeline.csproj -c Release -- .\artifacts\tutorial-01
+dotnet run --project .\samples\ImageProcessing\01.ImagePipeline\ImagePipeline.csproj -c Release -- .\artifacts\tutorial-01
 ```
 
 ## Core Flow / 核心流程

@@ -8,12 +8,12 @@ This case turns a processed binary image into object boundaries. It demonstrates
 
 ## Run / 运行
 
-[`Case03.Contours/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case03.Contours/Program.cs) is a complete threshold-to-object workflow: it creates input, produces a binary mask, marshals contour arrays, draws the result, and writes its own report.
+[`ImageProcessing/03.Contours/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ImageProcessing/03.Contours/Program.cs) is a complete threshold-to-object workflow: it creates input, produces a binary mask, marshals contour arrays, draws the result, and writes its own report.
 
-[`Case03.Contours/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case03.Contours/Program.cs) 是完整的“阈值到目标”流程：自行创建输入、生成二值图、编组轮廓数组、绘制结果并输出报告。
+[`ImageProcessing/03.Contours/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/ImageProcessing/03.Contours/Program.cs) 是完整的“阈值到目标”流程：自行创建输入、生成二值图、编组轮廓数组、绘制结果并输出报告。
 
 ```powershell
-dotnet run --project .\samples\PublishedPackageSamples\Case03.Contours\Case03.Contours.csproj -c Release -- .\artifacts\tutorial-03
+dotnet run --project .\samples\ImageProcessing\03.Contours\Contours.csproj -c Release -- .\artifacts\tutorial-03
 ```
 
 ## Core Flow / 核心流程

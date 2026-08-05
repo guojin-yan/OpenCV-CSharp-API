@@ -150,7 +150,7 @@ Android x64/x86 的 Full 与 Mini 已通过正式单加载器 NDK 构建、包�
 
 ## 系列教程与可视化结果
 
-[`samples/ConsoleSamples`](samples/ConsoleSamples) 包含广覆盖 smoke 和 6 个可在无头环境运行的编号教程。设置中文字体路径后可运行完整系列，其中包含通过 OpenCV `putText` 绘制中文：
+[`samples/ConsoleSamples`](samples/ConsoleSamples) 包含广覆盖 smoke 和原有 6 个可在无头环境运行的展示流程；扩展后的分组案例见 [`samples/README.md`](samples/README.md)。设置中文字体路径后可运行完整展示，其中包含通过 OpenCV `putText` 绘制中文：
 
 ```powershell
 $env:OPENCV_CSHARP_CJK_FONT = "C:\path\to\a-cjk-font.ttf"
@@ -165,18 +165,9 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 
 建议从[系列教程](docs/articles/tutorial-series.md)开始。每个输出都对应一篇技术文章，其中包含可运行命令、核心代码、runtime profile 以及深入模块指南的链接。原 `showcase` 命令继续作为兼容别名。
 
-[已发布包案例](samples/PublishedPackageSamples)已经按功能拆分为多个独立项目。每个项目只从公开源恢复 managed API 和 `win-x64` runtime、运行一个模块，并对应一篇聚焦的技术文章：
+[`samples`](samples) 是可持续扩展的分组案例目录。图像处理、特征、几何、视频、传统机器学习和深度学习分别使用独立的编号子目录；完整案例、命令、输出和文章映射见 [`samples/README.md`](samples/README.md)。
 
-| 功能模块 | 独立案例项目 | 技术文章 |
-| --- | --- | --- |
-| 图像处理流水线 | [`Case01.ImagePipeline`](samples/PublishedPackageSamples/Case01.ImagePipeline) | [教程 01](docs/articles/tutorial-01-image-pipeline.md) |
-| OpenCV 中文 `putText` | [`Case02.ChinesePutText`](samples/PublishedPackageSamples/Case02.ChinesePutText) | [教程 02](docs/articles/tutorial-02-chinese-puttext.md) |
-| 阈值与轮廓 | [`Case03.Contours`](samples/PublishedPackageSamples/Case03.Contours) | [教程 03](docs/articles/tutorial-03-contours.md) |
-| ORB 特征 | [`Case04.OrbFeatures`](samples/PublishedPackageSamples/Case04.OrbFeatures) | [教程 04](docs/articles/tutorial-04-orb-features.md) |
-| 模板匹配 | [`Case05.TemplateMatching`](samples/PublishedPackageSamples/Case05.TemplateMatching) | [教程 05](docs/articles/tutorial-05-template-matching.md) |
-| KNN 分类 | [`Case06.KnnClassification`](samples/PublishedPackageSamples/Case06.KnnClassification) | [教程 06](docs/articles/tutorial-06-knn-classification.md) |
-
-学习时只运行当前功能对应的项目。根目录聚合项目仅保留给发布回归检查；用于复现的包版本统一维护在 `PublishedPackageSamples.props`，不会写进普通安装命令。
+学习时只运行当前功能对应的项目。每个案例都会恢复公开 managed API 和匹配的 runtime 夹具，完成一套功能流程，输出聚焦结果并打印包/native 构建信息。用于可复现验证的版本只维护在 `samples/SamplePackages.props`，普通安装命令不写死版本。
 
 ## 文档
 
@@ -184,8 +175,8 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 | --- | --- |
 | [在线文档](https://guojin-yan.github.io/OpenCV-CSharp-API/) | API reference 和专题文章 |
 | [快速开始](docs/articles/quick-start.md) | 安装并编写第一个程序 |
-| [系列教程](docs/articles/tutorial-series.md) | 6 个可执行案例及同步技术文章 |
-| [已发布包案例](docs/articles/published-package-samples.md) | 使用当前已发布包夹具逐个运行 6 个独立模块项目 |
+| [系列教程](docs/articles/tutorial-series.md) | 按功能分组的可执行案例及同步技术文章 |
+| [案例目录](docs/articles/example-catalog.md) | 按功能分组运行 package-backed 案例 |
 | [OpenCV 中文写字](docs/articles/tutorial-02-chinese-puttext.md) | 通过 OpenCV 5 `putText` 把 UTF-8 中文直接写入 `Mat` |
 | [可视化案例](docs/articles/visual-showcase.md) | 输出图集与兼容命令 |
 | [场景配方](docs/articles/scenario-recipes.md) | 面向任务的使用流程 |
@@ -223,8 +214,14 @@ native 和 package 构建请使用 [Linked Runtime 构建指南](docs/articles/l
 OpenCV-CSharp-API/
 |-- src/OpenCvSharp/                    Managed API
 |-- src/OpenCvSharp.Native/             稳定 native C ABI
-|-- samples/ConsoleSamples/             Smoke 与可视化示例
-|-- samples/PublishedPackageSamples/    已发布 NuGet 包验证夹具
+|-- samples/ConsoleSamples/             广覆盖 API smoke 与可视化图集
+|-- samples/ImageProcessing/            图像处理案例（01..06）
+|-- samples/Features/                   特征检测与匹配案例
+|-- samples/Geometry/                   投影几何案例
+|-- samples/Video/                      运动与时序案例
+|-- samples/MachineLearning/            KNN 与 SVM 案例
+|-- samples/DeepLearning/               ONNX/DNN 案例
+|-- samples/Common/                     案例共享基础设施
 |-- packaging/runtime/                  RID/profile runtime package 模板
 |-- compatibility/                      API、ABI 与 upstream map
 |-- docs/                               DocFX 配置与文章

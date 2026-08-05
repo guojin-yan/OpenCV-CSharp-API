@@ -8,12 +8,12 @@ The final case combines OpenCV ML with image visualization when the selected run
 
 ## Run / 运行
 
-[`Case06.KnnClassification/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case06.KnnClassification/Program.cs) owns training data preparation, batch query generation, model training, prediction, decision-surface rendering, and explicit runtime capability handling.
+[`MachineLearning/01.KnnClassification/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/MachineLearning/01.KnnClassification/Program.cs) owns training data preparation, batch query generation, model training, prediction, decision-surface rendering, and explicit runtime capability handling.
 
-[`Case06.KnnClassification/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case06.KnnClassification/Program.cs) 自行完成训练数据准备、批量查询生成、模型训练、预测、决策面绘制和明确的 runtime 能力处理。
+[`MachineLearning/01.KnnClassification/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/MachineLearning/01.KnnClassification/Program.cs) 自行完成训练数据准备、批量查询生成、模型训练、预测、决策面绘制和明确的 runtime 能力处理。
 
 ```powershell
-dotnet run --project .\samples\PublishedPackageSamples\Case06.KnnClassification\Case06.KnnClassification.csproj -c Release -- .\artifacts\tutorial-06
+dotnet run --project .\samples\MachineLearning\01.KnnClassification\KnnClassification.csproj -c Release -- .\artifacts\tutorial-06
 ```
 
 ## Core Flow / 核心流程

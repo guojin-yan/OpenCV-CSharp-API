@@ -8,12 +8,12 @@ Template matching is a compact localization workflow for fixed-scale visual targ
 
 ## Run / 运行
 
-[`Case05.TemplateMatching/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case05.TemplateMatching/Program.cs) owns template extraction, normalized response calculation, peak selection, result annotation, and confidence reporting.
+[`Features/02.TemplateMatching/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/Features/02.TemplateMatching/Program.cs) owns template extraction, normalized response calculation, peak selection, result annotation, and confidence reporting.
 
-[`Case05.TemplateMatching/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/PublishedPackageSamples/Case05.TemplateMatching/Program.cs) 自行完成模板提取、归一化响应计算、峰值选择、结果标注和置信度报告。
+[`Features/02.TemplateMatching/Program.cs`](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/samples/Features/02.TemplateMatching/Program.cs) 自行完成模板提取、归一化响应计算、峰值选择、结果标注和置信度报告。
 
 ```powershell
-dotnet run --project .\samples\PublishedPackageSamples\Case05.TemplateMatching\Case05.TemplateMatching.csproj -c Release -- .\artifacts\tutorial-05
+dotnet run --project .\samples\Features\02.TemplateMatching\TemplateMatching.csproj -c Release -- .\artifacts\tutorial-05
 ```
 
 ## Core Flow / 核心流程
