@@ -125,6 +125,25 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void TypeSafeEncodingParametersRoundTripPngWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat source = new Mat(2, 2, MatType.CV_8UC1))
+            {
+                source.CopyFrom(new byte[] { 1, 2, 3, 4 });
+                var parameters = new[] { new ImageEncodingParam(ImwriteFlags.PngCompression, 0) };
+                byte[] encoded = ImgCodecsCv2.ImEncode(".png", source, parameters);
+                using (Mat decoded = ImgCodecsCv2.ImDecode(encoded, ImreadModes.Grayscale))
+                {
+                    Assert.Equal(new byte[] { 1, 2, 3, 4 }, decoded.ToBytes());
+                }
+            }
+
+            Assert.Throws<ArgumentNullException>(() => ImgCodecsCv2.ImEncode(".png", null!, (ImageEncodingParam[])null!));
+        }
+
+        [Fact]
         public void ImEncodeRejectsOddParameterCount()
         {
             Assert.Throws<ArgumentException>(() => ImgCodecsCv2.ImEncode(".png", null!, new int[]

@@ -1,5 +1,6 @@
 param(
-    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
+    [string]$DotNetPath = ""
 )
 
 Set-StrictMode -Version Latest
@@ -11,10 +12,21 @@ if ($null -eq $pwsh) {
     throw "pwsh was not found. Standalone managed package consumer validation requires PowerShell 7+."
 }
 
-$dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
-if ($null -eq $dotnet) {
+$userDotNet = Join-Path $env:USERPROFILE ".dotnet/dotnet.exe"
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -and (Test-Path -LiteralPath $userDotNet -PathType Leaf)) {
+    $DotNetPath = $userDotNet
+}
+if ([string]::IsNullOrWhiteSpace($DotNetPath)) {
+    $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
+    if ($null -ne $dotnet) {
+        $DotNetPath = $dotnet.Source
+    }
+}
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -or -not (Test-Path -LiteralPath $DotNetPath -PathType Leaf)) {
     throw "dotnet was not found. Standalone managed package consumer validation requires dotnet restore/build."
 }
+$DotNetPath = (Resolve-Path -LiteralPath $DotNetPath).Path
+$dotnetDirectory = Split-Path -Parent $DotNetPath
 
 $packManagedPath = Join-Path $repo "scripts/Pack-Managed.ps1"
 if (-not (Test-Path -LiteralPath $packManagedPath -PathType Leaf)) {
@@ -488,8 +500,11 @@ $oldNuGetPackages = $env:NUGET_PACKAGES
 $oldNuGetHttpCache = $env:NUGET_HTTP_CACHE_PATH
 $oldNuGetScratch = $env:NUGET_SCRATCH
 $oldNuGetPluginsCache = $env:NUGET_PLUGINS_CACHE_PATH
+$oldPath = $env:PATH
 
 try {
+    $env:PATH = $dotnetDirectory + [System.IO.Path]::PathSeparator + $oldPath
+
     foreach ($directory in @(
             $packageSourceDir,
             $managedBuildOutputRoot,
@@ -560,7 +575,7 @@ try {
         "--no-cache",
         "-v:minimal"
     )
-    $restoreOutput = & $dotnet.Source @restoreArguments 2>&1
+    $restoreOutput = & $DotNetPath @restoreArguments 2>&1
     $restoreOutputText = ($restoreOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
     if ($LASTEXITCODE -ne 0) {
         Add-Violation -Violations $violations -Path "consumer/StandaloneManagedConsumer.csproj" -Issue "Temporary standalone managed consumer restore failed" -Text $restoreOutputText
@@ -574,7 +589,7 @@ try {
         "-p:RestorePackagesPath=$consumerPackagesDir",
         "-v:minimal"
     )
-    $buildOutput = & $dotnet.Source @buildArguments 2>&1
+    $buildOutput = & $DotNetPath @buildArguments 2>&1
     $buildOutputText = ($buildOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
     if ($LASTEXITCODE -ne 0) {
         Add-Violation -Violations $violations -Path "consumer/StandaloneManagedConsumer.csproj" -Issue "Temporary standalone managed consumer build failed" -Text $buildOutputText
@@ -669,6 +684,7 @@ try {
     }
 }
 finally {
+    $env:PATH = $oldPath
     $env:NUGET_PACKAGES = $oldNuGetPackages
     $env:NUGET_HTTP_CACHE_PATH = $oldNuGetHttpCache
     $env:NUGET_SCRATCH = $oldNuGetScratch

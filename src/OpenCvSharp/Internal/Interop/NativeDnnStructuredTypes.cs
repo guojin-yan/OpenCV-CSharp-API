@@ -13,6 +13,25 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
     }
 
     [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeDnnRect2d
+    {
+        internal double X;
+        internal double Y;
+        internal double Width;
+        internal double Height;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct NativeDnnRotatedRect
+    {
+        internal float CenterX;
+        internal float CenterY;
+        internal float Width;
+        internal float Height;
+        internal float Angle;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     internal struct NativeDnnImage2BlobParams
     {
         internal double ScaleV0;

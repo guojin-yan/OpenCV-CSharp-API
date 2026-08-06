@@ -6,6 +6,7 @@
 #include "dnn_handles.h"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdint>
 #include <cstring>
 #include <limits>
@@ -154,6 +155,35 @@ namespace
             return opencv_csharp_native::set_invalid_argument(api_name, argument_name);
         }
 
+        return OPENCV_CSHARP_STATUS_OK;
+    }
+
+    template <typename TBox>
+    int validate_nms_arguments(
+        const char* api_name,
+        const TBox* boxes,
+        int box_count,
+        const float* scores,
+        int score_count,
+        float score_threshold,
+        float nms_threshold,
+        float eta,
+        int top_k,
+        int* indices,
+        int index_capacity,
+        int* index_count)
+    {
+        if (box_count < 0 || score_count != box_count || index_capacity < box_count ||
+            (box_count > 0 && (boxes == nullptr || scores == nullptr || indices == nullptr)) ||
+            index_count == nullptr)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "boxes_scores_or_indices");
+        }
+        if (!std::isfinite(score_threshold) || !std::isfinite(nms_threshold) || !std::isfinite(eta) ||
+            nms_threshold < 0.0F || eta <= 0.0F || top_k < 0)
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "thresholds_eta_or_top_k");
+        }
         return OPENCV_CSHARP_STATUS_OK;
     }
 
@@ -385,6 +415,109 @@ namespace
     jyppx_ocv_dnn_rect from_rect(const cv::Rect& value)
     {
         return { value.x, value.y, value.width, value.height };
+    }
+
+    cv::Rect2d to_rect2d(const jyppx_ocv_dnn_rect2d& value)
+    {
+        return cv::Rect2d(value.x, value.y, value.width, value.height);
+    }
+
+    cv::RotatedRect to_rotated_rect(const jyppx_ocv_dnn_rotated_rect& value)
+    {
+        return cv::RotatedRect(
+            cv::Point2f(value.center_x, value.center_y),
+            cv::Size2f(value.width, value.height),
+            value.angle);
+    }
+
+    template <typename TNativeBox, typename TOpenCvBox, typename TConverter>
+    int nms_boxes(
+        const char* api_name,
+        const TNativeBox* boxes,
+        int box_count,
+        const float* scores,
+        int score_count,
+        float score_threshold,
+        float nms_threshold,
+        float eta,
+        int top_k,
+        int* indices,
+        int index_capacity,
+        int* index_count,
+        TConverter converter)
+    {
+        const int status = validate_nms_arguments(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<TOpenCvBox> native_boxes;
+        native_boxes.reserve(static_cast<size_t>(box_count));
+        for (int index = 0; index < box_count; ++index) native_boxes.push_back(converter(boxes[index]));
+        const std::vector<float> native_scores = score_count == 0
+            ? std::vector<float>()
+            : std::vector<float>(scores, scores + score_count);
+        std::vector<int> selected;
+        cv::dnn::NMSBoxes(native_boxes, native_scores, score_threshold, nms_threshold, selected, eta, top_k);
+        if (selected.size() > static_cast<size_t>(index_capacity))
+            return opencv_csharp_native::set_invalid_argument(api_name, "index_capacity");
+        *index_count = static_cast<int>(selected.size());
+        std::copy(selected.begin(), selected.end(), indices);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)converter;
+        *index_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+
+    template <typename TNativeBox, typename TOpenCvBox, typename TConverter>
+    int nms_boxes_batched(
+        const char* api_name,
+        const TNativeBox* boxes,
+        int box_count,
+        const float* scores,
+        int score_count,
+        const int* class_ids,
+        int class_id_count,
+        float score_threshold,
+        float nms_threshold,
+        float eta,
+        int top_k,
+        int* indices,
+        int index_capacity,
+        int* index_count,
+        TConverter converter)
+    {
+        int status = validate_nms_arguments(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_int_array(api_name, class_ids, class_id_count, "class_ids");
+        if (status != OPENCV_CSHARP_STATUS_OK || class_id_count != box_count)
+            return status != OPENCV_CSHARP_STATUS_OK ? status : opencv_csharp_native::set_invalid_argument(api_name, "class_id_count");
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<TOpenCvBox> native_boxes;
+        native_boxes.reserve(static_cast<size_t>(box_count));
+        for (int index = 0; index < box_count; ++index) native_boxes.push_back(converter(boxes[index]));
+        const std::vector<float> native_scores = score_count == 0
+            ? std::vector<float>()
+            : std::vector<float>(scores, scores + score_count);
+        const std::vector<int> native_class_ids = class_id_count == 0
+            ? std::vector<int>()
+            : std::vector<int>(class_ids, class_ids + class_id_count);
+        std::vector<int> selected;
+        cv::dnn::NMSBoxesBatched(native_boxes, native_scores, native_class_ids, score_threshold, nms_threshold, selected, eta, top_k);
+        if (selected.size() > static_cast<size_t>(index_capacity))
+            return opencv_csharp_native::set_invalid_argument(api_name, "index_capacity");
+        *index_count = static_cast<int>(selected.size());
+        std::copy(selected.begin(), selected.end(), indices);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        (void)converter;
+        *index_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
     }
 
     int create_net_handle(const char* api_name, const cv::dnn::Net& native, jyppx_ocv_dnn_net** net)
@@ -2904,6 +3037,146 @@ int jyppx_ocv_dnn_blob_rects_to_image_rects(
         return OPENCV_CSHARP_STATUS_OK;
 #else
         *image_rect_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+#endif
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_dnn_nms_boxes_rect(
+    const jyppx_ocv_dnn_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_dnn_nms_boxes_rect";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return nms_boxes<jyppx_ocv_dnn_rect, cv::Rect>(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count, to_rect);
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_dnn_nms_boxes_rect2d(
+    const jyppx_ocv_dnn_rect2d* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_dnn_nms_boxes_rect2d";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return nms_boxes<jyppx_ocv_dnn_rect2d, cv::Rect2d>(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count, to_rect2d);
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_dnn_nms_boxes_rotated_rect(
+    const jyppx_ocv_dnn_rotated_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_dnn_nms_boxes_rotated_rect";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return nms_boxes<jyppx_ocv_dnn_rotated_rect, cv::RotatedRect>(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count, to_rotated_rect);
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_dnn_nms_boxes_batched_rect(
+    const jyppx_ocv_dnn_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    const int* class_ids, int class_id_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_dnn_nms_boxes_batched_rect";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return nms_boxes_batched<jyppx_ocv_dnn_rect, cv::Rect>(
+            api_name, boxes, box_count, scores, score_count, class_ids, class_id_count,
+            score_threshold, nms_threshold, eta, top_k, indices, index_capacity, index_count, to_rect);
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_dnn_nms_boxes_batched_rect2d(
+    const jyppx_ocv_dnn_rect2d* boxes, int box_count,
+    const float* scores, int score_count,
+    const int* class_ids, int class_id_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count)
+{
+    constexpr const char* api_name = "jyppx_ocv_dnn_nms_boxes_batched_rect2d";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        return nms_boxes_batched<jyppx_ocv_dnn_rect2d, cv::Rect2d>(
+            api_name, boxes, box_count, scores, score_count, class_ids, class_id_count,
+            score_threshold, nms_threshold, eta, top_k, indices, index_capacity, index_count, to_rect2d);
+    }
+    catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
+}
+
+int jyppx_ocv_dnn_soft_nms_boxes_rect(
+    const jyppx_ocv_dnn_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold,
+    float* updated_scores, int updated_score_capacity, int* updated_score_count,
+    int* indices, int index_capacity, int* index_count,
+    int top_k, float sigma, int method)
+{
+    constexpr const char* api_name = "jyppx_ocv_dnn_soft_nms_boxes_rect";
+    try
+    {
+        opencv_csharp_native::clear_last_error();
+        int status = validate_nms_arguments(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            1.0F, top_k, indices, index_capacity, index_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        if (updated_score_count == nullptr || updated_score_capacity < box_count ||
+            (box_count > 0 && updated_scores == nullptr) || !std::isfinite(sigma) || sigma < 0.0F ||
+            (method != 1 && method != 2))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "updated_scores_sigma_or_method");
+        }
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
+        std::vector<cv::Rect> native_boxes;
+        native_boxes.reserve(static_cast<size_t>(box_count));
+        for (int index = 0; index < box_count; ++index) native_boxes.push_back(to_rect(boxes[index]));
+        const std::vector<float> native_scores = score_count == 0
+            ? std::vector<float>()
+            : std::vector<float>(scores, scores + score_count);
+        std::vector<float> adjusted_scores;
+        std::vector<int> selected;
+        cv::dnn::softNMSBoxes(
+            native_boxes, native_scores, adjusted_scores, score_threshold, nms_threshold, selected,
+            static_cast<size_t>(top_k), sigma, static_cast<cv::dnn::SoftNMSMethod>(method));
+        if (selected.size() > static_cast<size_t>(index_capacity) ||
+            adjusted_scores.size() > static_cast<size_t>(updated_score_capacity))
+        {
+            return opencv_csharp_native::set_invalid_argument(api_name, "output_capacity");
+        }
+        *index_count = static_cast<int>(selected.size());
+        *updated_score_count = static_cast<int>(adjusted_scores.size());
+        std::copy(selected.begin(), selected.end(), indices);
+        std::copy(adjusted_scores.begin(), adjusted_scores.end(), updated_scores);
+        return OPENCV_CSHARP_STATUS_OK;
+#else
+        *index_count = 0;
+        *updated_score_count = 0;
         return opencv_csharp_native::set_not_linked(api_name);
 #endif
     }

@@ -139,10 +139,11 @@ internal static class ProgramEntry
                 $"Repository signature service index mismatch: actual={actualServiceIndex} expected={serviceIndex}");
         }
 
-        if (!repositorySignature.PackageOwners.Contains(expectedOwner, StringComparer.OrdinalIgnoreCase))
+        var packageOwners = repositorySignature.PackageOwners ?? Array.Empty<string>();
+        if (!packageOwners.Contains(expectedOwner, StringComparer.OrdinalIgnoreCase))
         {
             throw new InvalidOperationException(
-                $"Repository signature owners do not contain '{expectedOwner}': {string.Join(",", repositorySignature.PackageOwners)}");
+                $"Repository signature owners do not contain '{expectedOwner}': {string.Join(",", packageOwners)}");
         }
 
         if (!string.Equals(primarySignature.SignatureContent.HashAlgorithm.ToString(), "SHA256", StringComparison.Ordinal))
@@ -181,7 +182,7 @@ internal static class ProgramEntry
             RepositorySignature: new RepositorySignatureFact(
                 Type: primarySignature.Type.ToString(),
                 ServiceIndex: actualServiceIndex,
-                Owners: repositorySignature.PackageOwners.OrderBy(value => value, StringComparer.Ordinal).ToArray(),
+                Owners: packageOwners.OrderBy(value => value, StringComparer.Ordinal).ToArray(),
                 ContentHashAlgorithm: primarySignature.SignatureContent.HashAlgorithm.ToString(),
                 ContentHash: primarySignature.SignatureContent.HashValue,
                 CertificateSubject: certificate.Subject,

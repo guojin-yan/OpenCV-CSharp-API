@@ -1,5 +1,6 @@
 param(
-    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
+    [string]$DotNetPath = ""
 )
 
 Set-StrictMode -Version Latest
@@ -11,10 +12,20 @@ if ($null -eq $pwsh) {
     throw "pwsh was not found. Managed package isolated artifact validation requires PowerShell 7+."
 }
 
-$dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
-if ($null -eq $dotnet) {
+$userDotNet = Join-Path $env:USERPROFILE ".dotnet/dotnet.exe"
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -and (Test-Path -LiteralPath $userDotNet -PathType Leaf)) {
+    $DotNetPath = $userDotNet
+}
+if ([string]::IsNullOrWhiteSpace($DotNetPath)) {
+    $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
+    if ($null -ne $dotnet) {
+        $DotNetPath = $dotnet.Source
+    }
+}
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -or -not (Test-Path -LiteralPath $DotNetPath -PathType Leaf)) {
     throw "dotnet was not found. Managed package isolated artifact validation requires dotnet pack."
 }
+$dotnetDirectory = Split-Path -Parent (Resolve-Path -LiteralPath $DotNetPath).Path
 
 $packManagedPath = Join-Path $repo "scripts/Pack-Managed.ps1"
 if (-not (Test-Path -LiteralPath $packManagedPath -PathType Leaf)) {
@@ -232,6 +243,7 @@ $oldNuGetPackages = $env:NUGET_PACKAGES
 $oldNuGetHttpCache = $env:NUGET_HTTP_CACHE_PATH
 $oldNuGetScratch = $env:NUGET_SCRATCH
 $oldNuGetPluginsCache = $env:NUGET_PLUGINS_CACHE_PATH
+$oldPath = $env:PATH
 
 try {
     foreach ($directory in @(
@@ -249,6 +261,7 @@ try {
     $env:NUGET_HTTP_CACHE_PATH = $nugetHttpCacheDir
     $env:NUGET_SCRATCH = $nugetScratchDir
     $env:NUGET_PLUGINS_CACHE_PATH = $nugetPluginsCacheDir
+    $env:PATH = $dotnetDirectory + [System.IO.Path]::PathSeparator + $oldPath
 
     $managedPackArguments = @(
         "-NoProfile",
@@ -399,6 +412,7 @@ finally {
     $env:NUGET_HTTP_CACHE_PATH = $oldNuGetHttpCache
     $env:NUGET_SCRATCH = $oldNuGetScratch
     $env:NUGET_PLUGINS_CACHE_PATH = $oldNuGetPluginsCache
+    $env:PATH = $oldPath
 
     foreach ($directory in $repoSensitiveDirectories) {
         $existsAfter = Test-Path -LiteralPath $directory -PathType Container

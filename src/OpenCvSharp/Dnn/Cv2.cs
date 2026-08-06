@@ -8,7 +8,7 @@ namespace JYPPX.OpenCvSharp.Dnn
     /// OpenCV DNN helper functions.
     /// OpenCV DNN 辅助函数。
     /// </summary>
-    public static class Cv2
+    public static partial class Cv2
     {
         /// <summary>
         /// Creates a blob from one image.

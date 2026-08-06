@@ -97,7 +97,7 @@ try {
     $parseErrors = $null
     [Management.Automation.Language.Parser]::ParseFile($publicationManifest, [ref]$tokens, [ref]$parseErrors) | Out-Null
     Assert-True -Condition ($parseErrors.Count -eq 0) -Path $publicationManifest -Issue "NuGet publication manifest script must parse without errors" -Text (($parseErrors | ForEach-Object Message) -join "`n")
-    Assert-True -Condition ($projectText.Contains('<PackageReference Include="NuGet.Packaging" Version="6.14.0" />', [StringComparison]::Ordinal)) -Path $toolProject -Issue "NuGet.Packaging dependency must remain exactly pinned"
+    Assert-True -Condition ($projectText.Contains('<PackageReference Include="NuGet.Packaging" Version="7.6.0" />', [StringComparison]::Ordinal)) -Path $toolProject -Issue "NuGet.Packaging dependency must remain exactly pinned to the audited version"
     foreach ($token in @(
             "RepositoryPrimarySignature",
             "SignatureType.Repository",

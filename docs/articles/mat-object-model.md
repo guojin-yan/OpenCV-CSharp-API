@@ -117,6 +117,36 @@ using (Mat roi = source.SubMat(new Rect(1, 0, 2, 3)))
 }
 ```
 
+Color and multi-channel matrices can use OpenCV-compatible pixel vectors. A row span represents only the logical row, so it works for a non-contiguous ROI while preserving the parent matrix stride:
+
+```csharp
+using Mat image = new Mat(480, 640, MatType.CV_8UC3);
+using Mat roi = image.SubMat(new Rect(20, 30, 100, 50));
+
+Span<Vec3b> row = roi.AsRowSpan<Vec3b>(0);
+row[0] = new Vec3b(255, 0, 0); // B, G, R
+Vec3b pixel = roi.GetValue<Vec3b>(0, 0);
+```
+
+`AsRowByteSpan`, `AsRowSpan<T>`, `GetValue<T>(row, column)`, and `SetValue<T>(row, column, value)` do not require a continuous matrix. `GetValue` and `SetValue` require `sizeof(T)` to match one complete matrix element, which prevents a three-channel pixel from being accidentally treated as one byte.
+
+For full image loops, `AsRows<T>()` validates the element type once and returns a stack-only `MatRowAccessor<T>`. Its indexer honors the matrix step, so the same loop works for continuous images and non-contiguous ROIs:
+
+```csharp
+MatRowAccessor<Vec3b> rows = image.AsRows<Vec3b>();
+for (int y = 0; y < rows.Count; y++)
+{
+    Span<Vec3b> row = rows[y];
+    for (int x = 0; x < row.Length; x++)
+    {
+        Vec3b pixel = row[x];
+        row[x] = new Vec3b(pixel.V0, pixel.V1, 255);
+    }
+}
+```
+
+For native, camera, or UI buffers with their own pitch, use `CopyPixelsTo(pointer, destinationStep)` or `CopyPixelsFrom(pointer, sourceStep)`. They copy `RowByteLength` bytes per row and leave external padding untouched. The caller owns the pointer and must keep the complete strided buffer valid for the call.
+
 On `netcoreapp3.1` and newer targets, `Mat` also exposes modern low-copy access through `Span<T>`:
 
 在 `netcoreapp3.1` 及更新目标框架上，`Mat` 还通过 `Span<T>` 提供现代少拷贝访问路径：

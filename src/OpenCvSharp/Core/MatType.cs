@@ -29,6 +29,33 @@ namespace JYPPX.OpenCvSharp.Core
             return Depth(type: depth) + ((channels - 1) << ChannelShift);
         }
 
+        /// <summary>Creates an unsigned 8-bit matrix type with the requested channel count.</summary>
+        public static int CV_8UC(int channels) { return MakeType(CV_8U, channels); }
+        /// <summary>Creates a signed 8-bit matrix type with the requested channel count.</summary>
+        public static int CV_8SC(int channels) { return MakeType(CV_8S, channels); }
+        /// <summary>Creates an unsigned 16-bit matrix type with the requested channel count.</summary>
+        public static int CV_16UC(int channels) { return MakeType(CV_16U, channels); }
+        /// <summary>Creates a signed 16-bit matrix type with the requested channel count.</summary>
+        public static int CV_16SC(int channels) { return MakeType(CV_16S, channels); }
+        /// <summary>Creates a signed 32-bit matrix type with the requested channel count.</summary>
+        public static int CV_32SC(int channels) { return MakeType(CV_32S, channels); }
+        /// <summary>Creates a 32-bit floating-point matrix type with the requested channel count.</summary>
+        public static int CV_32FC(int channels) { return MakeType(CV_32F, channels); }
+        /// <summary>Creates a 64-bit floating-point matrix type with the requested channel count.</summary>
+        public static int CV_64FC(int channels) { return MakeType(CV_64F, channels); }
+        /// <summary>Creates an IEEE 16-bit floating-point matrix type with the requested channel count.</summary>
+        public static int CV_16FC(int channels) { return MakeType(CV_16F, channels); }
+        /// <summary>Creates a bfloat16 matrix type with the requested channel count.</summary>
+        public static int CV_16BFC(int channels) { return MakeType(CV_16BF, channels); }
+        /// <summary>Creates a Boolean matrix type with the requested channel count.</summary>
+        public static int CV_BoolC(int channels) { return MakeType(CV_Bool, channels); }
+        /// <summary>Creates an unsigned 64-bit matrix type with the requested channel count.</summary>
+        public static int CV_64UC(int channels) { return MakeType(CV_64U, channels); }
+        /// <summary>Creates a signed 64-bit matrix type with the requested channel count.</summary>
+        public static int CV_64SC(int channels) { return MakeType(CV_64S, channels); }
+        /// <summary>Creates an unsigned 32-bit matrix type with the requested channel count.</summary>
+        public static int CV_32UC(int channels) { return MakeType(CV_32U, channels); }
+
         /// <summary>
         /// Gets the element depth from an encoded OpenCV matrix type.
         /// 从编码后的 OpenCV 矩阵类型中获取元素深度。

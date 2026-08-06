@@ -757,6 +757,30 @@ namespace JYPPX.OpenCvSharp.Core
         }
 
         /// <summary>
+        /// Copies logical pixel rows to an unmanaged buffer with an independent row step.
+        /// This supports padded and bottom-up UI bitmap buffers without exposing matrix pointer arithmetic.
+        /// </summary>
+        /// <param name="destination">Pointer to the first byte of logical row zero.</param>
+        /// <param name="destinationStep">Bytes between destination rows; may be negative for a bottom-up buffer.</param>
+        public void CopyPixelsTo(IntPtr destination, long destinationStep)
+        {
+            ThrowIfDisposed();
+            MatViewAdapter.CopyPixelsTo(this, destination, destinationStep);
+        }
+
+        /// <summary>
+        /// Copies logical pixel rows from an unmanaged buffer with an independent row step.
+        /// This supports padded and bottom-up UI bitmap buffers without exposing matrix pointer arithmetic.
+        /// </summary>
+        /// <param name="source">Pointer to the first byte of logical row zero.</param>
+        /// <param name="sourceStep">Bytes between source rows; may be negative for a bottom-up buffer.</param>
+        public void CopyPixelsFrom(IntPtr source, long sourceStep)
+        {
+            ThrowIfDisposed();
+            MatViewAdapter.CopyPixelsFrom(this, source, sourceStep);
+        }
+
+        /// <summary>
         /// Copies bytes into a newly allocated managed array.
         /// 将矩阵字节复制到新分配的 managed 数组。
         /// </summary>
@@ -803,6 +827,47 @@ namespace JYPPX.OpenCvSharp.Core
         {
             ThrowIfDisposed();
             MatViewAdapter.CopyRowFrom(this, row, source);
+        }
+
+        /// <summary>Gets a writable byte span over one logical row, excluding row padding.</summary>
+        public Span<byte> AsRowByteSpan(int row)
+        {
+            ThrowIfDisposed();
+            return MatViewAdapter.AsRowByteSpan(this, row);
+        }
+
+        /// <summary>Gets a read-only byte span over one logical row, excluding row padding.</summary>
+        public ReadOnlySpan<byte> AsReadOnlyRowByteSpan(int row)
+        {
+            ThrowIfDisposed();
+            return MatViewAdapter.AsRowByteSpan(this, row);
+        }
+
+        /// <summary>
+        /// Gets a writable typed span over one logical row. The requested type must divide the logical row byte length.
+        /// For example, use <see cref="Vec3b"/> with a <c>CV_8UC3</c> matrix.
+        /// </summary>
+        public Span<T> AsRowSpan<T>(int row) where T : unmanaged
+        {
+            ThrowIfDisposed();
+            return MatViewAdapter.AsRowSpan<T>(this, row);
+        }
+
+        /// <summary>Gets a read-only typed span over one logical row.</summary>
+        public ReadOnlySpan<T> AsReadOnlyRowSpan<T>(int row) where T : unmanaged
+        {
+            ThrowIfDisposed();
+            return MatViewAdapter.AsRowSpan<T>(this, row);
+        }
+
+        /// <summary>
+        /// Gets a zero-allocation typed row accessor for a two-dimensional matrix.
+        /// The requested type must exactly match one matrix element, such as <see cref="Vec3b"/> for <c>CV_8UC3</c>.
+        /// </summary>
+        public MatRowAccessor<T> AsRows<T>() where T : unmanaged
+        {
+            ThrowIfDisposed();
+            return MatViewAdapter.AsRows<T>(this);
         }
 
         /// <summary>
@@ -935,6 +1000,15 @@ namespace JYPPX.OpenCvSharp.Core
         }
 
         /// <summary>
+        /// Gets a two-dimensional matrix element. The unmanaged type size must exactly match <see cref="ElemSize"/>.
+        /// </summary>
+        public T GetValue<T>(int row, int column) where T : unmanaged
+        {
+            ThrowIfDisposed();
+            return MatViewAdapter.GetValue<T>(this, row, column);
+        }
+
+        /// <summary>
         /// Sets a typed value in a continuous matrix.
         /// 在连续矩阵中设置类型化值。
         /// </summary>
@@ -947,6 +1021,15 @@ namespace JYPPX.OpenCvSharp.Core
         }
 
         /// <summary>
+        /// Sets a two-dimensional matrix element. The unmanaged type size must exactly match <see cref="ElemSize"/>.
+        /// </summary>
+        public void SetValue<T>(int row, int column, T value) where T : unmanaged
+        {
+            ThrowIfDisposed();
+            MatViewAdapter.SetValue(this, row, column, value);
+        }
+
+        /// <summary>
         /// Copies typed matrix values into a new managed array.
         /// 将类型化矩阵值复制到新的 managed 数组。
         /// </summary>
@@ -954,7 +1037,15 @@ namespace JYPPX.OpenCvSharp.Core
         /// <returns>A new array containing matrix values. 包含矩阵值的新数组。</returns>
         public T[] ToArray<T>() where T : unmanaged
         {
-            return AsReadOnlySpan<T>().ToArray();
+            int elementSize = Marshal.SizeOf<T>();
+            if (ByteLength % elementSize != 0)
+            {
+                throw new OpenCvException("Matrix element size does not match the requested array type.");
+            }
+
+            var result = new T[ByteLength / elementSize];
+            CopyTo(result.AsSpan());
+            return result;
         }
 #endif
 

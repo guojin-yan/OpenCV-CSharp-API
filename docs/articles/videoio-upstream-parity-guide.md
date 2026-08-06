@@ -43,6 +43,23 @@ pwsh -NoProfile -File scripts/Test-VideoIORegistrySurface.ps1 -RepositoryRoot .
 
 Routine verification should omit `-RegenerateRaw`; the guard then checks the reviewed extraction, hashes, negative fixtures, classification partition, native manifest, managed baseline, and registry source hash without rewriting files.
 
+## End-Of-Stream-Friendly Reads
+
+`TryRead(out Mat? frame)` and `TryRetrieve(out Mat? frame, int flag = 0)` return `false` with a `null` output when no frame is available. On success, the returned matrix is independently owned and must be disposed. This keeps end-of-stream handling explicit and avoids allocating a destination `Mat` at every call site.
+
+```csharp
+using var capture = new VideoCapture(path);
+while (capture.TryRead(out Mat? frame))
+{
+    using (frame)
+    {
+        Process(frame);
+    }
+}
+```
+
+The existing `Read(Mat)` and `Retrieve(Mat, flag)` overloads remain available for allocation-sensitive loops that reuse a destination matrix.
+
 日常验证应省略 `-RegenerateRaw`；此时 guard 会在不重写文件的情况下检查已复核提取、哈希、负向夹具、分类分区、native manifest、托管基线和 registry 源文件哈希。
 
 ## Runtime Verification / 运行时验证

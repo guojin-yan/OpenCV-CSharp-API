@@ -158,6 +158,58 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
             }
         }
 
+        internal static unsafe void CopyPixelsTo(Mat mat, IntPtr destination, long destinationStep)
+        {
+            int rowByteLength = ValidatePixelCopy(mat, destination, destinationStep, nameof(destination), nameof(destinationStep));
+            byte* destinationPointer = (byte*)destination.ToPointer();
+            for (int row = 0; row < mat.Rows; row++)
+            {
+                Buffer.MemoryCopy(
+                    GetRowPointer(mat, row).ToPointer(),
+                    destinationPointer + checked(row * destinationStep),
+                    rowByteLength,
+                    rowByteLength);
+            }
+        }
+
+        internal static unsafe void CopyPixelsFrom(Mat mat, IntPtr source, long sourceStep)
+        {
+            int rowByteLength = ValidatePixelCopy(mat, source, sourceStep, nameof(source), nameof(sourceStep));
+            byte* sourcePointer = (byte*)source.ToPointer();
+            for (int row = 0; row < mat.Rows; row++)
+            {
+                Buffer.MemoryCopy(
+                    sourcePointer + checked(row * sourceStep),
+                    GetRowPointer(mat, row).ToPointer(),
+                    rowByteLength,
+                    rowByteLength);
+            }
+        }
+
+        private static int ValidatePixelCopy(Mat mat, IntPtr buffer, long bufferStep, string bufferName, string stepName)
+        {
+            if (buffer == IntPtr.Zero)
+            {
+                throw new ArgumentException("Pixel buffer pointer cannot be zero.", bufferName);
+            }
+
+            int rowByteLength = GetRowByteLength(mat);
+            if (bufferStep == long.MinValue || Math.Abs(bufferStep) < rowByteLength)
+            {
+                throw new ArgumentOutOfRangeException(stepName, "Pixel buffer step is smaller than the logical matrix row.");
+            }
+
+            if (mat.Rows > 1)
+            {
+                checked
+                {
+                    _ = (mat.Rows - 1) * bufferStep;
+                }
+            }
+
+            return rowByteLength;
+        }
+
         private static int ValidateRowCopy(Mat mat, int row, int bufferLength, string parameterName)
         {
             int rowByteLength = GetRowByteLength(mat);
@@ -270,6 +322,71 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
             int rowByteLength = ValidateRowCopy(mat, row, source.Length, nameof(source));
             Span<byte> destination = new Span<byte>(GetRowPointer(mat, row).ToPointer(), rowByteLength);
             source.Slice(0, rowByteLength).CopyTo(destination);
+        }
+
+        internal static unsafe Span<byte> AsRowByteSpan(Mat mat, int row)
+        {
+            int rowByteLength = ValidateRowCopy(mat, row, int.MaxValue, nameof(row));
+            if (rowByteLength == 0)
+            {
+                return Span<byte>.Empty;
+            }
+
+            return new Span<byte>(GetRowPointer(mat, row).ToPointer(), rowByteLength);
+        }
+
+        internal static Span<T> AsRowSpan<T>(Mat mat, int row) where T : unmanaged
+        {
+            Span<byte> bytes = AsRowByteSpan(mat, row);
+            int elementSize = Marshal.SizeOf<T>();
+            if (bytes.Length % elementSize != 0)
+            {
+                throw new OpenCvException("Matrix row byte length does not match the requested span type.");
+            }
+
+            return MemoryMarshal.Cast<byte, T>(bytes);
+        }
+
+        internal static MatRowAccessor<T> AsRows<T>(Mat mat) where T : unmanaged
+        {
+            _ = GetRowByteLength(mat);
+            ValidateMatrixElementType<T>(mat);
+            if (mat.Rows > 0 && mat.Cols > 0 && mat.Data == IntPtr.Zero)
+            {
+                throw new OpenCvException("Matrix data pointer is null.");
+            }
+
+            return new MatRowAccessor<T>(mat.Data, mat.Step.ToUInt64(), mat.Rows, mat.Cols);
+        }
+
+        internal static T GetValue<T>(Mat mat, int row, int column) where T : unmanaged
+        {
+            ValidateMatrixElementType<T>(mat);
+            if ((uint)column >= (uint)mat.Cols)
+            {
+                throw new ArgumentOutOfRangeException(nameof(column));
+            }
+
+            return AsRowSpan<T>(mat, row)[column];
+        }
+
+        internal static void SetValue<T>(Mat mat, int row, int column, T value) where T : unmanaged
+        {
+            ValidateMatrixElementType<T>(mat);
+            if ((uint)column >= (uint)mat.Cols)
+            {
+                throw new ArgumentOutOfRangeException(nameof(column));
+            }
+
+            AsRowSpan<T>(mat, row)[column] = value;
+        }
+
+        private static void ValidateMatrixElementType<T>(Mat mat) where T : unmanaged
+        {
+            if (mat.ElemSize.ToUInt64() != (ulong)Marshal.SizeOf<T>())
+            {
+                throw new OpenCvException("The requested value type size does not match the matrix element size.");
+            }
         }
 
         internal static unsafe Span<byte> AsByteSpan(Mat mat)

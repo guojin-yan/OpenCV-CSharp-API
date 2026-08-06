@@ -16,7 +16,8 @@ internal static class Program
         15, 20, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 36, 37, 38, 39, 40,
         42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
         60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 74, 75, 76, 77, 78, 79,
-        80, 81, 82, 83, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97
+        80, 81, 82, 83, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97,
+        99, 100, 101, 103
     });
 
     private static readonly HashSet<int> ConditionalCallables = new(Enumerable.Range(176, 6));
@@ -135,7 +136,7 @@ internal static class Program
         public string FamilyInventorySha256 { get; init; } = "";
         public int SelectedFamilyCount { get; init; }
         public int SelectedDeclarationCount { get; init; }
-        public int ManagedPublicTypeAdditionCount { get; init; } = 10;
+        public int ManagedPublicTypeAdditionCount { get; init; } = 12;
         public int ManagedPublicMemberAdditionCount { get; init; }
         public bool RepositoryWideUpstreamParityClaimed { get; init; }
     }
@@ -145,7 +146,7 @@ internal static class Program
         public int SchemaVersion { get; init; } = 1;
         public string UpstreamOpenCvVersion { get; init; } = "5.0.0";
         public string Status { get; init; } = "implemented-verified";
-        public int ManagedPublicTypeAdditionCount { get; init; } = 10;
+        public int ManagedPublicTypeAdditionCount { get; init; } = 12;
         public int ManagedPublicMemberAdditionCount { get; init; }
         public List<FamilyRow> Families { get; init; } = new();
     }
@@ -408,6 +409,10 @@ internal static class Program
         92 => N("jyppx_ocv_dnn_blob_rects_to_image_rects"),
         95 or 96 => N("jyppx_ocv_dnn_blob_from_images_with_params"),
         97 => N("jyppx_ocv_dnn_images_from_blob_count", "jyppx_ocv_dnn_images_from_blob_fill"),
+        99 => N("jyppx_ocv_dnn_nms_boxes_rect2d"),
+        100 => N("jyppx_ocv_dnn_nms_boxes_rotated_rect"),
+        101 => N("jyppx_ocv_dnn_nms_boxes_batched_rect2d"),
+        103 => N("jyppx_ocv_dnn_soft_nms_boxes_rect"),
         _ => Array.Empty<string>()
     };
 
@@ -495,6 +500,10 @@ internal static class Program
         93 or 94 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " BlobFromImage(", "JYPPX.OpenCvSharp.Dnn.Image2BlobParams"),
         95 or 96 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " BlobFromImages(", "JYPPX.OpenCvSharp.Dnn.Image2BlobParams"),
         97 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " ImagesFromBlob("),
+        99 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " NMSBoxes(", "Core.Rect2d> boxes"),
+        100 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " NMSBoxes(", "Core.RotatedRect> boxes"),
+        101 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " NMSBoxesBatched(", "Core.Rect2d> boxes"),
+        103 => Q("JYPPX.OpenCvSharp.Dnn.Cv2", " SoftNMSBoxes("),
         _ => Array.Empty<ManagedQuery>()
     };
 
@@ -567,7 +576,8 @@ internal static class Program
             (Id: "runtime-backend-and-model-loading", Rationale: "Correlate backend/target/engine metadata, deterministic availability, owned Net construction, and path/buffer model readers.", Ordinals: new HashSet<int>(new[] { 10, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84 })),
             (Id: "net-forward-introspection-and-controls", Rationale: "Close the adjacent Net dump, graph connection, forward, parameter, shape, memory, optimization, cache, and profiling surface.", Ordinals: new HashSet<int>(SelectedCallables.Where(value => value is >= 26 and <= 71 && value is not 33 and not 34))),
             (Id: "owned-layer-reference", Rationale: "Expose ref-counted Layer lookup and output-name indexing without leaking cv::Ptr or parent Net lifetime.", Ordinals: new HashSet<int>(new[] { 17, 20, 33, 34 })),
-            (Id: "image-to-blob-parameter-workflow", Rationale: "Preserve legacy blob helpers and complete Image2BlobParams layout, padding, border, and rectangle projection semantics.", Ordinals: new HashSet<int>(Enumerable.Range(85, 13)))
+            (Id: "image-to-blob-parameter-workflow", Rationale: "Preserve legacy blob helpers and complete Image2BlobParams layout, padding, border, and rectangle projection semantics.", Ordinals: new HashSet<int>(Enumerable.Range(85, 13))),
+            (Id: "nms-postprocessing", Rationale: "Expose standard, class-aware, rotated, and score-decaying OpenCV NMS with owned result arrays and deterministic validation.", Ordinals: new HashSet<int>(new[] { 99, 100, 101, 102, 103 }))
         };
         int memberAdditions = managed.Count(value => value.StartsWith("MEMBER|JYPPX.OpenCvSharp.Dnn.", StringComparison.Ordinal)) - 69;
         Require(memberAdditions >= 0, "DNN managed member baseline regressed below the pre-round 69-member surface.");
@@ -585,7 +595,10 @@ internal static class Program
                     UpstreamIdentity = declaration.Identity,
                     UpstreamClassification = classification.Classification,
                     NativeEntrypoints = classification.NativeEntrypoints.ToList(),
-                    ManagedMembers = classification.ManagedMembers.ToList()
+                    ManagedMembers = classification.ManagedMembers.ToList(),
+                    FocusedTest = definition.Id == "nms-postprocessing"
+                        ? "tests/OpenCvSharp.Tests/Dnn/DnnNmsTests.cs"
+                        : "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs"
                 });
             }
             result.Families.Add(family);

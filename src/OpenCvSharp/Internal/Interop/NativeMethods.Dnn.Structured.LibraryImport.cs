@@ -146,6 +146,24 @@ namespace JYPPX.OpenCvSharp.Internal.Interop
 
         [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_blob_rects_to_image_rects")]
         internal static partial int DnnBlobRectsToImageRects(in NativeDnnImage2BlobParams parameters, NativeDnnRect[] blobRects, int blobRectCount, int imageWidth, int imageHeight, NativeDnnRect[] imageRects, int imageRectCapacity, out int imageRectCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_nms_boxes_rect")]
+        internal static partial int DnnNmsBoxesRect(NativeDnnRect[] boxes, int boxCount, float[] scores, int scoreCount, float scoreThreshold, float nmsThreshold, float eta, int topK, int[] indices, int indexCapacity, out int indexCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_nms_boxes_rect2d")]
+        internal static partial int DnnNmsBoxesRect2d(NativeDnnRect2d[] boxes, int boxCount, float[] scores, int scoreCount, float scoreThreshold, float nmsThreshold, float eta, int topK, int[] indices, int indexCapacity, out int indexCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_nms_boxes_rotated_rect")]
+        internal static partial int DnnNmsBoxesRotatedRect(NativeDnnRotatedRect[] boxes, int boxCount, float[] scores, int scoreCount, float scoreThreshold, float nmsThreshold, float eta, int topK, int[] indices, int indexCapacity, out int indexCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_nms_boxes_batched_rect")]
+        internal static partial int DnnNmsBoxesBatchedRect(NativeDnnRect[] boxes, int boxCount, float[] scores, int scoreCount, int[] classIds, int classIdCount, float scoreThreshold, float nmsThreshold, float eta, int topK, int[] indices, int indexCapacity, out int indexCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_nms_boxes_batched_rect2d")]
+        internal static partial int DnnNmsBoxesBatchedRect2d(NativeDnnRect2d[] boxes, int boxCount, float[] scores, int scoreCount, int[] classIds, int classIdCount, float scoreThreshold, float nmsThreshold, float eta, int topK, int[] indices, int indexCapacity, out int indexCount);
+
+        [LibraryImport(NativeLibraryNames.CurrentNativeLibrary, EntryPoint = "jyppx_ocv_dnn_soft_nms_boxes_rect")]
+        internal static partial int DnnSoftNmsBoxesRect(NativeDnnRect[] boxes, int boxCount, float[] scores, int scoreCount, float scoreThreshold, float nmsThreshold, float[] updatedScores, int updatedScoreCapacity, out int updatedScoreCount, int[] indices, int indexCapacity, out int indexCount, int topK, float sigma, int method);
     }
 }
 #endif

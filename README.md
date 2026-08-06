@@ -38,7 +38,15 @@ The current public version is reported by the live NuGet badges below. The previ
 - .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
 - Deterministic packages on NuGet.org and GitHub Packages, SPDX 2.3 SBOMs, protected release approval, and verified GitHub Release assets.
 - Twenty-three grouped, headless workflows with inspectable PNG output; model-backed DNN cases use one-time, hash-verified asset bundles while the remaining cases stay fully offline.
-- Checked compatibility baselines covering 611 public managed types, 6,561 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
+- Checked compatibility baselines covering 632 public managed types, 6,817 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
+
+## What's New In 5.0.0-preview.2
+
+- Added package-version diagnostics, broader color conversions, safe non-contiguous `Mat` row/stride access, typed pixel vectors, and type-safe image encoder parameters.
+- Added `VideoCapture.TryRead`/`TryRetrieve` and OpenCV-backed standard, batched, rotated-box, and Soft-NMS detection postprocessing.
+- Expanded the verified runtime/package pipeline, grouped examples, tutorials, and repository-signing checks for NuGet.org, GitHub Packages, and GitHub Releases.
+
+See the [detailed 5.0.0-preview.2 notes](docs/releases/5.0.0-preview.2.md) or browse the complete [changelog](CHANGELOG.md). The version remains an unreleased candidate until all public channels are verified.
 
 ## Get Started In 30 Seconds
 

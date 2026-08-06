@@ -505,6 +505,31 @@ namespace JYPPX.OpenCvSharp.VideoIO
         }
 
         /// <summary>
+        /// Tries to retrieve the previously grabbed frame and returns <c>null</c> when no frame is available.
+        /// </summary>
+        public bool TryRetrieve(out Mat? image, int flag = 0)
+        {
+            var candidate = new Mat();
+            try
+            {
+                if (Retrieve(candidate, flag))
+                {
+                    image = candidate;
+                    return true;
+                }
+
+                candidate.Dispose();
+                image = null;
+                return false;
+            }
+            catch
+            {
+                candidate.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Grabs, decodes, and returns the next frame.
         /// 抓取、解码并返回下一帧。
         /// </summary>
@@ -534,6 +559,31 @@ namespace JYPPX.OpenCvSharp.VideoIO
             catch
             {
                 image.Dispose();
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to read the next frame and returns <c>null</c> at end of stream or when no frame is available.
+        /// </summary>
+        public bool TryRead(out Mat? image)
+        {
+            var candidate = new Mat();
+            try
+            {
+                if (Read(candidate))
+                {
+                    image = candidate;
+                    return true;
+                }
+
+                candidate.Dispose();
+                image = null;
+                return false;
+            }
+            catch
+            {
+                candidate.Dispose();
                 throw;
             }
         }

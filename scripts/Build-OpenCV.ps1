@@ -464,6 +464,17 @@ if (-not (Test-Path $opencvSource)) {
     throw "OpenCV source directory was not found: $opencvSource"
 }
 
+# OpenCV 5.0.0 photo::ccm stores the model color space by reference. Apply the
+# repository-owned fix before every native build so changing one model cannot
+# mutate the process-wide sRGB color-space object.
+$sourcePatchEvidence = & (Join-Path $PSScriptRoot "Apply-OpenCvSourcePatches.ps1") `
+    -OpenCvSourceDir $opencvSource `
+    -OpenCvVersion $OpenCvVersion | Select-Object -Last 1
+if ([string]::IsNullOrWhiteSpace([string]$sourcePatchEvidence)) {
+    throw "OpenCV source patch evidence was not produced."
+}
+Write-Host "OpenCV source patch evidence: $sourcePatchEvidence"
+
 New-Item -ItemType Directory -Force $buildDir | Out-Null
 New-Item -ItemType Directory -Force $installRoot | Out-Null
 

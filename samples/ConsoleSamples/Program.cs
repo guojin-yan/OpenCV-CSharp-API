@@ -2398,6 +2398,18 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
 
         private static string RunDnnStructuredDefaultSummary()
         {
+            Rect[] candidateBoxes =
+            {
+                new Rect(0, 0, 10, 10),
+                new Rect(1, 1, 10, 10),
+                new Rect(30, 30, 5, 5)
+            };
+            int[] nmsIndices = DnnCv2.NMSBoxesBatched(
+                candidateBoxes,
+                new[] { 0.9F, 0.8F, 0.7F },
+                new[] { 0, 0, 1 },
+                0.1F,
+                0.5F);
             string fixturePath = Path.Combine(AppContext.BaseDirectory, "Dnn", "Fixtures", "identity-opset13.onnx.base64");
             byte[] model = Convert.FromBase64String(File.ReadAllText(fixturePath).Trim());
             using (DnnNetObject net = DnnNetObject.ReadNetFromOnnx(model, JYPPX.OpenCvSharp.Dnn.DnnEngine.Classic))
@@ -2434,6 +2446,7 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
                                 + ", outputDims=" + output.Dims
                                 + ", outputValues=" + string.Join(",", output.ToArray<float>())
                                 + ", nestedMats=" + nestedCount
+                                + ", nms=" + string.Join(",", nmsIndices)
                                 + ", flops=" + flops
                                 + ", memory=" + memory.WeightsBytes + "/" + memory.BlobBytes
                                 + ", profileRows=" + detailed.Count;

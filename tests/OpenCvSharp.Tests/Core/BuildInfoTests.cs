@@ -94,6 +94,12 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             Assert.Equal(MatType.CV_32FC1, MatType.MakeType(5, 1));
             Assert.Equal(MatType.CV_64FC4, MatType.MakeType(MatType.CV_64F, 4));
             Assert.Equal(MatType.CV_32UC4, MatType.MakeType(MatType.CV_32U, 4));
+            Assert.Equal(MatType.CV_8UC3, MatType.CV_8UC(3));
+            Assert.Equal(MatType.CV_16SC4, MatType.CV_16SC(4));
+            Assert.Equal(MatType.CV_32FC2, MatType.CV_32FC(2));
+            Assert.Equal(MatType.CV_16BFC3, MatType.CV_16BFC(3));
+            Assert.Equal(MatType.CV_BoolC4, MatType.CV_BoolC(4));
+            Assert.Equal(MatType.CV_64UC2, MatType.CV_64UC(2));
         }
 
         [Fact]

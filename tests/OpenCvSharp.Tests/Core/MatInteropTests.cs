@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using JYPPX.OpenCvSharp.Core;
 
 namespace JYPPX.OpenCvSharp.Tests.Core
@@ -273,7 +274,91 @@ namespace JYPPX.OpenCvSharp.Tests.Core
                 Assert.Throws<OpenCvException>(() => roi.AsByteSpan());
             }
         }
+
+        [Fact]
+        public void RowSpansAndPixelVectorsSupportNonContinuousColorRoisWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat source = new Mat(3, 4, MatType.CV_8UC3))
+            using (Mat roi = source.SubMat(new Rect(1, 1, 2, 2)))
+            {
+                byte[] pixels = new byte[source.ByteLength];
+                for (int index = 0; index < pixels.Length; index++) pixels[index] = (byte)(index + 1);
+                source.CopyFrom(pixels);
+
+                Assert.False(roi.IsContinuous);
+                Span<Vec3b> firstRow = roi.AsRowSpan<Vec3b>(0);
+                Assert.Equal(2, firstRow.Length);
+                Assert.Equal(new Vec3b(16, 17, 18), firstRow[0]);
+                Assert.Equal(new Vec3b(19, 20, 21), roi.GetValue<Vec3b>(0, 1));
+
+                MatRowAccessor<Vec3b> rows = roi.AsRows<Vec3b>();
+                Assert.Equal(2, rows.Count);
+                Assert.Equal(2, rows.Columns);
+                Assert.Equal(new Vec3b(28, 29, 30), rows[1][0]);
+                rows[0][1] = new Vec3b(40, 41, 42);
+                Assert.Equal(new Vec3b(40, 41, 42), roi.GetValue<Vec3b>(0, 1));
+
+                roi.SetValue(1, 1, new Vec3b(200, 201, 202));
+                Assert.Equal(new Vec3b(200, 201, 202), roi.AsReadOnlyRowSpan<Vec3b>(1)[1]);
+                Assert.Equal(
+                    new[] { new Vec3b(16, 17, 18), new Vec3b(40, 41, 42), new Vec3b(28, 29, 30), new Vec3b(200, 201, 202) },
+                    roi.ToArray<Vec3b>());
+
+                Assert.Throws<OpenCvException>(() => roi.GetValue<byte>(0, 0));
+                Assert.Throws<OpenCvException>(() => { _ = roi.AsRows<byte>().Count; });
+                Assert.Throws<ArgumentOutOfRangeException>(() => roi.AsRowByteSpan(2));
+            }
+        }
 #endif
+
+        [Fact]
+        public void PixelBufferCopiesHonorExternalStrideWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            IntPtr buffer = Marshal.AllocHGlobal(8);
+            try
+            {
+                using (Mat mat = new Mat(2, 2, MatType.CV_8UC1))
+                {
+                    mat.CopyFrom(new byte[] { 1, 2, 3, 4 });
+                    Marshal.Copy(new byte[] { 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC, 0xCC }, 0, buffer, 8);
+                    mat.CopyPixelsTo(buffer, 4);
+
+                    var copied = new byte[8];
+                    Marshal.Copy(buffer, copied, 0, copied.Length);
+                    Assert.Equal(new byte[] { 1, 2, 0xCC, 0xCC, 3, 4, 0xCC, 0xCC }, copied);
+
+                    Marshal.Copy(new byte[] { 9, 8, 0, 0, 7, 6, 0, 0 }, 0, buffer, 8);
+                    mat.CopyPixelsFrom(buffer, 4);
+                    Assert.Equal(new byte[] { 9, 8, 7, 6 }, mat.ToBytes());
+
+                    Assert.Throws<ArgumentOutOfRangeException>(() => mat.CopyPixelsTo(buffer, 1));
+                    Assert.Throws<ArgumentException>(() => mat.CopyPixelsFrom(IntPtr.Zero, 2));
+                }
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(buffer);
+            }
+        }
+
+        [Fact]
+        public void PixelVectorLayoutsMatchOpenCvElementWidths()
+        {
+            Assert.Equal(3, Marshal.SizeOf<Vec3b>());
+            Assert.Equal(4, Marshal.SizeOf<Vec4b>());
+            Assert.Equal(12, Marshal.SizeOf<Vec3f>());
+            Assert.Equal(32, Marshal.SizeOf<Vec4d>());
+            Assert.Equal(12, Marshal.SizeOf<Vec3i>());
+            Assert.Equal(6, Marshal.SizeOf<Vec3s>());
+            Assert.Equal(8, Marshal.SizeOf<Vec4w>());
+            Assert.Equal(24, Marshal.SizeOf<Point3d>());
+            Assert.Equal(new Point3d(1.25, 2.5, 5.0), new Point3d(1.25, 2.5, 5.0));
+            Assert.Throws<IndexOutOfRangeException>(() => _ = new Vec3b(1, 2, 3)[3]);
+        }
 
         [Fact]
         public void InvalidRangesAndDisposedMatThrowStableManagedExceptionsWhenNativeRuntimeIsAvailable()

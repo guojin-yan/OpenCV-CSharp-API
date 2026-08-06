@@ -7,6 +7,9 @@ $ErrorActionPreference = "Stop"
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $producerWorkflowPath = ".github/workflows/runtime-input.yml"
+$buildOpenCvPath = "scripts/Build-OpenCV.ps1"
+$sourcePatchScriptPath = "scripts/Apply-OpenCvSourcePatches.ps1"
+$photoCcmPatchPath = "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch"
 $runtimeInputScriptPath = "scripts/New-RuntimeInputArtifact.ps1"
 $windowsPeAuditPath = "scripts/Test-WindowsRuntimePeClosure.ps1"
 $packWorkflowPath = ".github/workflows/pack.yml"
@@ -408,6 +411,9 @@ function Assert-RealProducerTargets {
 $violations = [System.Collections.Generic.List[object]]::new()
 
 $producerWorkflowText = Read-RequiredText -RelativePath $producerWorkflowPath
+$buildOpenCvText = Read-RequiredText -RelativePath $buildOpenCvPath
+$sourcePatchScriptText = Read-RequiredText -RelativePath $sourcePatchScriptPath
+$photoCcmPatchText = Read-RequiredText -RelativePath $photoCcmPatchPath
 $runtimeInputScriptText = Read-RequiredText -RelativePath $runtimeInputScriptPath
 $windowsPeAuditText = Read-RequiredText -RelativePath $windowsPeAuditPath
 $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowPath
@@ -415,6 +421,12 @@ $runtimeMatrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
 $readmeText = Read-RequiredText -RelativePath $readmePath
 $linkedRuntimeBuildGuideText = Read-RequiredText -RelativePath $linkedRuntimeBuildGuidePath
 $versionNeutralGuideText = Read-RequiredText -RelativePath $versionNeutralGuidePath
+
+Assert-Contains -Violations $violations -Path $buildOpenCvPath -Text $buildOpenCvText -Needle "Apply-OpenCvSourcePatches.ps1" -Issue "Every OpenCV build must apply the repository-owned audited source patches"
+Assert-Contains -Violations $violations -Path $sourcePatchScriptPath -Text $sourcePatchScriptText -Needle "RGBBase_& cs;" -Issue "The photo CCM patch applicator must verify the exact unsafe upstream declaration"
+Assert-Contains -Violations $violations -Path $sourcePatchScriptPath -Text $sourcePatchScriptText -Needle "RGBBase_ cs;" -Issue "The photo CCM patch applicator must verify per-instance color-space storage"
+Assert-Contains -Violations $violations -Path $photoCcmPatchPath -Text $photoCcmPatchText -Needle "-    RGBBase_& cs;" -Issue "The audited photo CCM patch must remove reference-backed global color-space mutation"
+Assert-Contains -Violations $violations -Path $photoCcmPatchPath -Text $photoCcmPatchText -Needle "+    RGBBase_ cs;" -Issue "The audited photo CCM patch must retain model-owned color-space state"
 
 foreach ($required in @(
         [pscustomobject]@{ Needle = "name: runtime-input"; Issue = "Producer workflow must have a neutral runtime-input name" },
@@ -459,7 +471,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_OPENCV_BUILD_EVIDENCE"; Issue = "Windows producer must record architecture-specific generator, SDK, build list, and CPU configuration" },
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_NATIVE_PROFILE_EVIDENCE"; Issue = "Windows producer must record profile-specific wrapper source and ABI counts" },
         [pscustomobject]@{ Needle = "expectedSourceCount = if (`$profileName -eq 'mini') { 9 } else { 49 }"; Issue = "Windows producer must lock exact mini/full wrapper source counts" },
-        [pscustomobject]@{ Needle = "expectedAbiFunctionCount = if (`$profileName -eq 'mini') { 527 } else { 2657 }"; Issue = "Windows producer must lock exact mini/full ABI counts" },
+        [pscustomobject]@{ Needle = "expectedAbiFunctionCount = if (`$profileName -eq 'mini') { 527 } else { 2663 }"; Issue = "Windows producer must lock exact mini/full ABI counts" },
         [pscustomobject]@{ Needle = "Windows mini OpenCV build unexpectedly configured full-only DNN MLAS"; Issue = "Windows mini producer must reject full-only DNN MLAS configuration" },
         [pscustomobject]@{ Needle = "Windows mini OpenCV build unexpectedly generated the full-only DNN project"; Issue = "Windows mini producer must reject a generated DNN project" },
         [pscustomobject]@{ Needle = "100% tests passed(?:, 0 tests failed)? out of 3"; Issue = "Windows producer must accept the audited three-test success summary" },
@@ -793,6 +805,8 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "PowerShellArchiveSha256 = `$PowerShellArchiveSha256"; Issue = "Runtime input artifact provenance must record an explicitly verified PowerShell archive hash" },
         [pscustomobject]@{ Needle = "OpenCvExtraCMakeArgs = `$OpenCvExtraCMakeArgs"; Issue = "Runtime input artifact provenance must record distro-specific OpenCV CMake arguments" },
         [pscustomobject]@{ Needle = "OpenCvSourcePatchEvidence = `$OpenCvSourcePatchEvidence"; Issue = "Runtime input artifact provenance must record audited OpenCV source patch evidence" },
+        [pscustomobject]@{ Needle = "OpenCvSourcePatches = @(`$auditedSourcePatches)"; Issue = "Runtime input artifact provenance must retain the cross-platform audited source-patch set" },
+        [pscustomobject]@{ Needle = "opencv-5.0.0-photo-ccm-instance-color-space.patch"; Issue = "Runtime input artifact provenance must bind the OpenCV 5.0.0 photo CCM fix" },
         [pscustomobject]@{ Needle = "BuildList = Get-OptionalStringProperty"; Issue = "Runtime input artifact provenance must record the profile build list from the runtime matrix" },
         [pscustomobject]@{ Needle = '[string]$OpenCvContribSourceDir = ""'; Issue = "Runtime input artifact script must accept the profile-scoped OpenCV contrib source root" },
         [pscustomobject]@{ Needle = "OpenCvContribSourceDir is required because runtime profile"; Issue = "Runtime input artifact script must require contrib source whenever the selected profile requires ML" },
@@ -874,6 +888,7 @@ if ($violations.Count -eq 0) {
         Write-FixtureFile -Path (Join-Path $fixtureNativeDir "libJYPPX.OpenCV.Native.so")
         Write-FixtureFile -Path (Join-Path $fixtureNativeDir "JYPPX.OpenCV.Native.dll")
         Write-FixtureFile -Path (Join-Path $fixtureSourceDir "LICENSE") -Text "OpenCV license fixture"
+        Write-FixtureFile -Path (Join-Path $fixtureSourceDir "modules/photo/src/ccm/ccm.cpp") -Text "    RGBBase_ cs;"
         Write-FixtureFile -Path (Join-Path $fixtureContribSourceDir "LICENSE") -Text "OpenCV contrib license fixture"
         Write-FixtureFile -Path (Join-Path (Join-Path (Join-Path $fixtureSourceDir "3rdparty") "ippicv") "readme.htm") -Text "ippicv fixture"
         Write-FixtureFile -Path (Join-Path (Join-Path $fixtureInstallDir "etc/licenses") "opencv-license.txt") -Text "install license fixture"
@@ -975,7 +990,7 @@ if ($violations.Count -eq 0) {
             $hasFullProfileEvidence = ($isWindowsTarget -and -not $isWindowsMini) -or (($isAndroidTarget -or $isDirectUbuntuArm64 -or $isUbuntu2204Arm64 -or $isDebian1204Arm64 -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) -and $producerTarget.Profile -eq "full")
             $nativeWrapperSources = if ($hasMiniProfileEvidence) { '["src/error_state.cpp","src/version.cpp","src/core/mat.cpp","src/core/decomp.cpp","src/core/operations.cpp","src/core/persistence.cpp","src/videoio/videoio.cpp","src/imgcodecs.cpp","src/imgproc.cpp"]' } elseif ($hasFullProfileEvidence) { '["full-source-fixture"]' } else { "" }
             $nativeWrapperSourceCount = if ($hasMiniProfileEvidence) { "9" } elseif ($hasFullProfileEvidence) { "49" } else { "" }
-            $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "527" } elseif ($hasFullProfileEvidence) { "2657" } else { "" }
+            $nativeAbiFunctionCount = if ($hasMiniProfileEvidence) { "527" } elseif ($hasFullProfileEvidence) { "2663" } else { "" }
             $containerImageId = if ($isArm64Container -or $isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "sha256:fixture" } else { "" }
             $containerImageDigest = if ($isUbuntu2204Arm64) { "ubuntu@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982" } elseif ($isDebian1204Arm64) { "debian@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc" } elseif ($isDebian1204X64) { "debian@sha256:fixture" } elseif ($isFedora40X64) { "fedora@sha256:fixture" } elseif ($isRhel9X64) { "registry.access.redhat.com/ubi9/ubi@sha256:fixture" } else { "" }
             $containerArchitecture = if ($isArm64Container) { "aarch64" } elseif ($isDebian1204X64 -or $isFedora40X64 -or $isRhel9X64) { "x86_64" } else { "" }
@@ -1250,6 +1265,13 @@ if ($violations.Count -eq 0) {
             }
             if (-not ([string]$manifest.OpenCvSourcePatchEvidence).Equals($openCvSourcePatchEvidence, [System.StringComparison]::Ordinal)) {
                 throw "Fixture provenance OpenCvSourcePatchEvidence did not match producer source patch evidence for $($producerTarget.Rid)/$($producerTarget.Profile)."
+            }
+            $sourcePatches = @($manifest.OpenCvSourcePatches)
+            if ($sourcePatches.Count -ne 1 -or
+                -not ([string]$sourcePatches[0].Path).Equals("packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch", [System.StringComparison]::Ordinal) -or
+                -not ([string]$sourcePatches[0].Target).Equals("modules/photo/src/ccm/ccm.cpp", [System.StringComparison]::Ordinal) -or
+                [string]::IsNullOrWhiteSpace([string]$sourcePatches[0].Sha256)) {
+                throw "Fixture provenance did not retain the audited OpenCV photo CCM source patch."
             }
 
             if ([string]::IsNullOrWhiteSpace([string]$producerTarget.ContainerImage)) {

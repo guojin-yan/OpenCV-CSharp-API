@@ -6,6 +6,9 @@ Thanks for helping build OpenCV CSharp API.
 
 ## Development Rules / 开发规则
 
+- Every package-visible iteration must update `CHANGELOG.md`, add one immutable detailed file under `docs/releases/<version>.md`, update `docs/releases/README.md`, and refresh the short current-update sections in both `README.md` and `README_cn.md`.
+- Release notes are part of the source contract: state the version, publication status, managed API changes, native ABI/runtime changes, compatibility or migration impact, and validation evidence. Do not call a candidate published before NuGet.org, GitHub Packages, and the matching GitHub Release are verified.
+- Keep the newest version first in the changelog and release index. A version bump without a matching release note is incomplete and must fail the local invariant suite.
 - Keep all public managed APIs under the `JYPPX.OpenCvSharp` namespace.
 - Keep samples, docs, and snippets on `JYPPX.OpenCvSharp.*`, `JYPPX.OpenCV.*`, and `OPENCV_CSHARP_*`; fixed-major project names must not appear in consumer-facing files.
 - Keep install commands neutral-first: `dotnet add package JYPPX.OpenCV.CSharp.API --version <four-part-version>` plus the matching `JYPPX.OpenCV.runtime.<rid>` runtime package on the same four-part package version metadata.

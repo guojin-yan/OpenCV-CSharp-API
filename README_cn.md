@@ -38,7 +38,15 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
 - 向 NuGet.org 与 GitHub Packages 发布确定性包，并提供 SPDX 2.3 SBOM、受保护的发布审批和经过验证的 GitHub Release 产物。
 - 提供 23 个按功能分组的无头完整案例并生成可检查 PNG；模型 DNN 案例使用一次性哈希校验资产包，其余案例完全离线运行。
-- 兼容性基线覆盖 611 个 public managed type、6,561 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
+- 兼容性基线覆盖 632 个 public managed type、6,817 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
+
+## 5.0.0-preview.2 本次更新
+
+- 新增精确包版本诊断、更完整的颜色转换、非连续 `Mat` 行/stride 安全访问、类型化像素向量和类型安全的图像编码参数。
+- 新增 `VideoCapture.TryRead`/`TryRetrieve`，以及由 OpenCV 原生实现的普通、按类别批量、旋转框和 Soft-NMS 检测后处理。
+- 完善 runtime/package 验证流程、分组案例、系列教程，以及 NuGet.org、GitHub Packages 和 GitHub Release 的 Repository signing 核验。
+
+参见 [5.0.0-preview.2 详细说明](docs/releases/5.0.0-preview.2.md)或完整的[版本变更总览](CHANGELOG.md)。在全部公共发布渠道核验完成前，该版本仍是待发布候选。
 
 ## 30 秒快速开始
 

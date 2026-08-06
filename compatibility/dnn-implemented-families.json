@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "upstreamOpenCvVersion": "5.0.0",
   "status": "implemented-verified",
-  "managedPublicTypeAdditionCount": 10,
-  "managedPublicMemberAdditionCount": 94,
+  "managedPublicTypeAdditionCount": 12,
+  "managedPublicMemberAdditionCount": 106,
   "families": [
     {
       "id": "runtime-backend-and-model-loading",
@@ -1227,6 +1227,83 @@
             "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat[] ImagesFromBlob(JYPPX.OpenCvSharp.Core.Mat blob)"
           ],
           "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnStructuredParityTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        }
+      ]
+    },
+    {
+      "id": "nms-postprocessing",
+      "rationale": "Expose standard, class-aware, rotated, and score-decaying OpenCV NMS with owned result arrays and deterministic validation.",
+      "declarations": [
+        {
+          "ordinal": 99,
+          "upstreamIdentity": "cv.dnn.NMSBoxes(vector_Rect2d bboxes[/C,/Ref];vector_float scores[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_nms_boxes_rect2d"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Rect2d\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnNmsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 100,
+          "upstreamIdentity": "cv.dnn.NMSBoxes(vector_RotatedRect bboxes[/C,/Ref];vector_float scores[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_nms_boxes_rotated_rect"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.RotatedRect\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnNmsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 101,
+          "upstreamIdentity": "cv.dnn.NMSBoxesBatched(vector_Rect2d bboxes[/C,/Ref];vector_float scores[/C,/Ref];vector_int class_ids[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_nms_boxes_batched_rect2d"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxesBatched(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Rect2d\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Collections.Generic.IReadOnlyList\u003CSystem.Int32\u003E classIds,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnNmsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 102,
+          "upstreamIdentity": "enum class cv.dnn.SoftNMSMethod[const cv.dnn.SoftNMSMethod.SOFTNMS_LINEAR=1;const cv.dnn.SoftNMSMethod.SOFTNMS_GAUSSIAN=2]",
+          "upstreamClassification": "non-callable-metadata",
+          "nativeEntrypoints": [],
+          "managedMembers": [],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnNmsTests.cs",
+          "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
+          "sample": "samples/ConsoleSamples/Program.cs",
+          "guide": "docs/articles/dnn-structured-parity-guide.md"
+        },
+        {
+          "ordinal": 103,
+          "upstreamIdentity": "cv.dnn.softNMSBoxes(vector_Rect bboxes[/C,/Ref];vector_float scores[/C,/Ref];vector_float updated_scores[/O,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];size_t top_k=0;float sigma=0.5[/C];SoftNMSMethod method=SoftNMSMethod::SOFTNMS_GAUSSIAN)-\u003Evoid",
+          "upstreamClassification": "implemented",
+          "nativeEntrypoints": [
+            "jyppx_ocv_dnn_soft_nms_boxes_rect"
+          ],
+          "managedMembers": [
+            "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Dnn.SoftNmsResult SoftNMSBoxes(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Rect\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Int32 topK=0,System.Single sigma=0.5,JYPPX.OpenCvSharp.Dnn.SoftNMSMethod method=Gaussian)"
+          ],
+          "focusedTest": "tests/OpenCvSharp.Tests/Dnn/DnnNmsTests.cs",
           "nativeSmoke": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
           "sample": "samples/ConsoleSamples/Program.cs",
           "guide": "docs/articles/dnn-structured-parity-guide.md"

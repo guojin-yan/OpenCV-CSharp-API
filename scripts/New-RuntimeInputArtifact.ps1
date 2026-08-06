@@ -297,6 +297,31 @@ if ($requiresContribSource -and [string]::IsNullOrWhiteSpace($OpenCvContribSourc
 $openCvContribSourcePath = if ([string]::IsNullOrWhiteSpace($OpenCvContribSourceDir)) { "" } else { Resolve-InputDirectory -Name "OpenCvContribSourceDir" -Value $OpenCvContribSourceDir }
 $openCvInstallPath = if ([string]::IsNullOrWhiteSpace($OpenCvInstallDir)) { "" } else { Resolve-InputDirectory -Name "OpenCvInstallDir" -Value $OpenCvInstallDir }
 
+$auditedSourcePatches = [System.Collections.Generic.List[object]]::new()
+if ($OpenCvVersion -eq "5.0.0") {
+    $patchRelativePath = "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch"
+    $patchPath = Join-Path $repoRoot $patchRelativePath
+    $targetRelativePath = "modules/photo/src/ccm/ccm.cpp"
+    $targetPath = Join-Path $openCvSourcePath $targetRelativePath
+    if (-not (Test-Path -LiteralPath $patchPath -PathType Leaf) -or
+        -not (Test-Path -LiteralPath $targetPath -PathType Leaf)) {
+        throw "Audited OpenCV photo CCM source patch evidence was not found."
+    }
+
+    $targetText = [System.IO.File]::ReadAllText($targetPath)
+    if ($targetText.Contains("    RGBBase_& cs;", [System.StringComparison]::Ordinal) -or
+        -not $targetText.Contains("    RGBBase_ cs;", [System.StringComparison]::Ordinal)) {
+        throw "OpenCV photo CCM per-instance color-space patch was not applied to the runtime source."
+    }
+
+    $auditedSourcePatches.Add([ordered]@{
+        Path = $patchRelativePath
+        Sha256 = (Get-FileHash -LiteralPath $patchPath -Algorithm SHA256).Hash
+        Target = $targetRelativePath
+        Reason = "keep ColorCorrectionModel color-space state per instance"
+    })
+}
+
 $outputRootCandidate = if ([System.IO.Path]::IsPathRooted($OutputRoot)) {
     $OutputRoot
 }
@@ -481,6 +506,7 @@ $manifest = [ordered]@{
     PowerShellArchiveSha256 = $PowerShellArchiveSha256
     OpenCvExtraCMakeArgs = $OpenCvExtraCMakeArgs
     OpenCvSourcePatchEvidence = $OpenCvSourcePatchEvidence
+    OpenCvSourcePatches = @($auditedSourcePatches)
     RuntimeProfile = $RuntimeProfile
     RuntimeProfilePackageIdSuffix = Get-OptionalStringProperty -InputObject $profileDefinition -Name "packageIdSuffix"
     BuildList = Get-OptionalStringProperty -InputObject $profileDefinition -Name "buildList"

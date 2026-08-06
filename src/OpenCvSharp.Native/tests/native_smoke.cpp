@@ -3191,6 +3191,40 @@ namespace
             return 708;
         }
 
+        const jyppx_ocv_dnn_rect boxes[] = { { 0, 0, 10, 10 }, { 1, 1, 10, 10 }, { 30, 30, 5, 5 } };
+        const float scores[] = { 0.9F, 0.8F, 0.7F };
+        int selected[3] = { -1, -1, -1 };
+        int selected_count = 0;
+        if (jyppx_ocv_dnn_nms_boxes_rect(boxes, 3, scores, 3, 0.1F, 0.5F, 1.0F, 0, selected, 3, &selected_count) != OPENCV_CSHARP_STATUS_OK ||
+            selected_count != 2 || selected[0] != 0 || selected[1] != 2)
+        {
+            jyppx_ocv_dnn_net_release_handle(net);
+            return 710;
+        }
+
+        const int class_ids[] = { 0, 1, 0 };
+        if (jyppx_ocv_dnn_nms_boxes_batched_rect(boxes, 3, scores, 3, class_ids, 3, 0.1F, 0.5F, 1.0F, 0, selected, 3, &selected_count) != OPENCV_CSHARP_STATUS_OK ||
+            selected_count != 3)
+        {
+            jyppx_ocv_dnn_net_release_handle(net);
+            return 711;
+        }
+
+        float updated_scores[3] = { 0.0F, 0.0F, 0.0F };
+        int updated_score_count = 0;
+        if (jyppx_ocv_dnn_soft_nms_boxes_rect(boxes, 3, scores, 3, 0.1F, 0.5F, updated_scores, 3, &updated_score_count, selected, 3, &selected_count, 0, 0.5F, 2) != OPENCV_CSHARP_STATUS_OK ||
+            selected_count == 0 || updated_score_count != selected_count || selected[0] != 0 || updated_scores[0] != scores[0])
+        {
+            jyppx_ocv_dnn_net_release_handle(net);
+            return 712;
+        }
+
+        if (jyppx_ocv_dnn_nms_boxes_rect(boxes, 3, scores, 2, 0.1F, 0.5F, 1.0F, 0, selected, 3, &selected_count) != OPENCV_CSHARP_STATUS_INVALID_ARGUMENT)
+        {
+            jyppx_ocv_dnn_net_release_handle(net);
+            return 713;
+        }
+
         jyppx_ocv_dnn_net_release_handle(net);
         return 0;
     }

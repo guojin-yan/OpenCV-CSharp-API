@@ -1,5 +1,6 @@
 param(
-    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+    [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
+    [string]$DotNetPath = ""
 )
 
 Set-StrictMode -Version Latest
@@ -10,6 +11,22 @@ $pwsh = Get-Command pwsh -ErrorAction SilentlyContinue
 if ($null -eq $pwsh) {
     throw "pwsh was not found. Project invariant checks require PowerShell 7+."
 }
+
+$userDotNet = Join-Path $env:USERPROFILE ".dotnet/dotnet.exe"
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -and (Test-Path -LiteralPath $userDotNet -PathType Leaf)) {
+    $DotNetPath = $userDotNet
+}
+if ([string]::IsNullOrWhiteSpace($DotNetPath)) {
+    $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
+    if ($null -ne $dotnet) {
+        $DotNetPath = $dotnet.Source
+    }
+}
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -or -not (Test-Path -LiteralPath $DotNetPath -PathType Leaf)) {
+    throw "dotnet was not found. Project invariant checks require the repository-pinned .NET SDK."
+}
+$DotNetPath = (Resolve-Path -LiteralPath $DotNetPath).Path
+$dotnetDirectory = Split-Path -Parent $DotNetPath
 
 function Invoke-InvariantGuard {
     param(
@@ -92,6 +109,11 @@ $guards = @(
     [pscustomobject]@{
         Name = "Documentation surface neutrality"
         Script = Join-Path $repo "scripts/Test-DocumentationSurfaceNeutrality.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Release notes and changelog contract"
+        Script = Join-Path $repo "scripts/Test-ReleaseNotesContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
@@ -421,11 +443,19 @@ $guards = @(
     }
 )
 
-foreach ($guard in $guards) {
-    Invoke-InvariantGuard `
-        -Name $guard.Name `
-        -ScriptPath $guard.Script `
-        -Arguments @($guard.Arguments)
+$oldPath = $env:PATH
+try {
+    $env:PATH = $dotnetDirectory + [System.IO.Path]::PathSeparator + $oldPath
+
+    foreach ($guard in $guards) {
+        Invoke-InvariantGuard `
+            -Name $guard.Name `
+            -ScriptPath $guard.Script `
+            -Arguments @($guard.Arguments)
+    }
+}
+finally {
+    $env:PATH = $oldPath
 }
 
 Write-Host "Project invariant guard suite passed. Guards run: $($guards.Count)."

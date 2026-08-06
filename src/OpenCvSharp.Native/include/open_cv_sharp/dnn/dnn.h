@@ -19,6 +19,23 @@ typedef struct jyppx_ocv_dnn_rect
     int height;
 } jyppx_ocv_dnn_rect;
 
+typedef struct jyppx_ocv_dnn_rect2d
+{
+    double x;
+    double y;
+    double width;
+    double height;
+} jyppx_ocv_dnn_rect2d;
+
+typedef struct jyppx_ocv_dnn_rotated_rect
+{
+    float center_x;
+    float center_y;
+    float width;
+    float height;
+    float angle;
+} jyppx_ocv_dnn_rotated_rect;
+
 typedef struct jyppx_ocv_dnn_image2blob_params
 {
     double scale_v0;
@@ -493,3 +510,38 @@ OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_blob_rects_to_image_r
     jyppx_ocv_dnn_rect* image_rects,
     int image_rect_capacity,
     int* image_rect_count);
+
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_nms_boxes_rect(
+    const jyppx_ocv_dnn_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_nms_boxes_rect2d(
+    const jyppx_ocv_dnn_rect2d* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_nms_boxes_rotated_rect(
+    const jyppx_ocv_dnn_rotated_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_nms_boxes_batched_rect(
+    const jyppx_ocv_dnn_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    const int* class_ids, int class_id_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_nms_boxes_batched_rect2d(
+    const jyppx_ocv_dnn_rect2d* boxes, int box_count,
+    const float* scores, int score_count,
+    const int* class_ids, int class_id_count,
+    float score_threshold, float nms_threshold, float eta, int top_k,
+    int* indices, int index_capacity, int* index_count);
+OPENCV_CSHARP_EXTERN_C OPENCV_CSHARP_API int jyppx_ocv_dnn_soft_nms_boxes_rect(
+    const jyppx_ocv_dnn_rect* boxes, int box_count,
+    const float* scores, int score_count,
+    float score_threshold, float nms_threshold,
+    float* updated_scores, int updated_score_capacity, int* updated_score_count,
+    int* indices, int index_capacity, int* index_count,
+    int top_k, float sigma, int method);

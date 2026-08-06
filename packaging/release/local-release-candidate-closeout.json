@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/115948541ed64136",
-  "SourceIdentity": "sha256:115948541ed641360fca1fe6057a56eef78a03ce0f10b235ade56cbbad563a78",
+  "CandidateId": "local-closeout/sha256/f90d32c205f46d0e",
+  "SourceIdentity": "sha256:f90d32c205f46d0ea5b8ed57491276e334a65df44f043afd84f4d7547d19cb5a",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1636,
-    "Sha256": "115948541ed641360fca1fe6057a56eef78a03ce0f10b235ade56cbbad563a78",
+    "FileCount": 1649,
+    "Sha256": "f90d32c205f46d0ea5b8ed57491276e334a65df44f043afd84f4d7547d19cb5a",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -32,16 +32,16 @@
     "Managed": {
       "Path": "compatibility/managed-public-api.txt",
       "SummaryPath": "compatibility/managed-public-api-summary.json",
-      "Sha256": "448c1fb7e636ba89d271d53c87e39f252cbd38586b0da3f6b8267c2b63a4b038",
-      "TypeCount": 611,
-      "MemberCount": 6561,
+      "Sha256": "efa74df10be5ea4d91848b288a86ea26e32f620e6d750e92921ed6a35242bce0",
+      "TypeCount": 632,
+      "MemberCount": 6817,
       "NamespaceCount": 41,
       "TargetFramework": "net8.0"
     },
     "NativeFull": {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
-      "Sha256": "01a387c6d0608b3c261dd9bee96c37cd73a87ff252178d8420807490e7f0c426",
-      "FunctionCount": 2657
+      "Sha256": "9def0a4e7ff2aac6b38b2681dbf8c2f5ad4eef513a563877c938938cffa3c7b9",
+      "FunctionCount": 2663
     },
     "NativeMini": {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
@@ -51,9 +51,9 @@
     "NativeManagedBindingMap": {
       "Path": "compatibility/native-managed-binding-map.txt",
       "SummaryPath": "compatibility/native-managed-binding-summary.json",
-      "Sha256": "8a2834971e6af1cab9d4edb991eca0d9ed89c99db51ccc9f6441176891d81d1e",
-      "NativeFunctionCount": 2657,
-      "ManagedBoundCount": 2657,
+      "Sha256": "72b869355dfdcea61cdd960bea8d8284e11efb50df601fb77d3ef86b01ffd9bc",
+      "NativeFunctionCount": 2663,
+      "ManagedBoundCount": 2663,
       "UnboundCount": 0,
       "ManagedOnlyCount": 0
     },
@@ -146,19 +146,19 @@
       "SummaryPath": "compatibility/dnn-upstream-summary.json",
       "ClassificationPath": "compatibility/dnn-upstream-classifications.json",
       "FamilyInventoryPath": "compatibility/dnn-implemented-families.json",
-      "Sha256": "4c482153942cbb32a6fc5b6382a06acdbc2329c177af4f78378e09d15f0f517d",
+      "Sha256": "2c7674703c8a5104839e0bc80e610e2a7939e6b8842b0df742ad226de05a0d19",
       "DeclarationCount": 182,
       "CallableCount": 159,
-      "ImplementedCount": 70,
+      "ImplementedCount": 74,
       "MissingCount": 0,
-      "IntentionallyOmittedCount": 81,
+      "IntentionallyOmittedCount": 77,
       "UnsupportedCount": 2,
       "UpstreamConditionalCount": 6,
       "SourceHeaderCount": 3,
-      "SelectedFamilyCount": 4,
-      "SelectedDeclarationCount": 80,
-      "ManagedPublicTypeAdditionCount": 10,
-      "ManagedPublicMemberAdditionCount": 94,
+      "SelectedFamilyCount": 5,
+      "SelectedDeclarationCount": 85,
+      "ManagedPublicTypeAdditionCount": 12,
+      "ManagedPublicMemberAdditionCount": 106,
       "RepositoryWideParityClaimed": false
     },
     "FeaturesUpstreamMap": {
@@ -406,7 +406,7 @@
   "EvidenceReferences": [
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "8fab2846ae1f9928da4b4dddf14c634bcd4c811222a1458e4e52743e11dff666",
+      "Sha256": "3927128849ff94040107463563ba8d9ab69d3e0d9b923b92461a01a0b728fea5",
       "Length": 262526
     },
     {
@@ -416,12 +416,32 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "2254d675f9a964b646dc12b10f0b59da204307d3195256c03bb77296c25dcb33",
+      "Sha256": "d9eb1ddaf0c80b65795ee063583179b04024895bb7132ff6b8668e66088d8d80",
       "Length": 195868
     },
     {
+      "Path": "CHANGELOG.md",
+      "Sha256": "aaab315f038db9251e067226df5cab16ea42812c65343a85bfb252c0a1feaf7a",
+      "Length": 1715
+    },
+    {
+      "Path": "CONTRIBUTING.md",
+      "Sha256": "39767b85b46a165a3d4689cc98df53b55fb94aed3816ade7a4049d1274901d4a",
+      "Length": 9081
+    },
+    {
+      "Path": "README.md",
+      "Sha256": "9e42ef44b8d954896675710aabf45b14f6d93b37955b90bb87e23c138bce6a0f",
+      "Length": 34224
+    },
+    {
+      "Path": "README_cn.md",
+      "Sha256": "dd3908bfb6343ef1a539937215479eeac2c22cc734933ce5048cdf7b8ad76434",
+      "Length": 31421
+    },
+    {
       "Path": "compatibility/api-gap-inventory.json",
-      "Sha256": "5df2e17b714607d9298d3d9fa36d98778b91bb9d1e2efbc95755ea3a04690cbd",
+      "Sha256": "a2f18260d7b3fdb9828eb0c22bf982b36066471ce0d377ecbb4aad5003ba7a9d",
       "Length": 22299
     },
     {
@@ -476,18 +496,18 @@
     },
     {
       "Path": "compatibility/dnn-implemented-families.json",
-      "Sha256": "1de5ffa6c74cb1def5c1626dc48c71344bb7df14ef219f65865c6140e410854c",
-      "Length": 68497
+      "Sha256": "483934cbbaa91a1d04366fa625c49ffd6a8dce0a7a76cda722ae18e5c29a58e8",
+      "Length": 73965
     },
     {
       "Path": "compatibility/dnn-upstream-classifications.json",
-      "Sha256": "3af386ffb416f34d4fffecd549518a19ec6ed6a3561768d526c0021c047faa6d",
-      "Length": 104263
+      "Sha256": "64fec89890aba7733af902139cde29f3547cb07c99ecb1cd6f7f81228a85156c",
+      "Length": 105983
     },
     {
       "Path": "compatibility/dnn-upstream-map.txt",
-      "Sha256": "4c482153942cbb32a6fc5b6382a06acdbc2329c177af4f78378e09d15f0f517d",
-      "Length": 76287
+      "Sha256": "2c7674703c8a5104839e0bc80e610e2a7939e6b8842b0df742ad226de05a0d19",
+      "Length": 77685
     },
     {
       "Path": "compatibility/dnn-upstream-raw.json",
@@ -496,8 +516,8 @@
     },
     {
       "Path": "compatibility/dnn-upstream-summary.json",
-      "Sha256": "faf938feac955aa6ce14d3c28fda2853a5c42b70bcc3a0bd25d66a9483e47262",
-      "Length": 1547
+      "Sha256": "5a10023a0f5381ce6452b883613f6451f354d9b6ea9fb53d64e68e0e49d23c2a",
+      "Length": 1548
     },
     {
       "Path": "compatibility/features-implemented-families.json",
@@ -616,13 +636,13 @@
     },
     {
       "Path": "compatibility/managed-public-api-summary.json",
-      "Sha256": "5c61998bcebc9e60c59e36cdb2c0cbd6b368b27bec66c1fab98c42c119221583",
-      "Length": 4652
+      "Sha256": "1c82027a0fcb6fb64d8ac2420ed55eba93242a1a95b37f2f159dbe142d816110",
+      "Length": 4653
     },
     {
       "Path": "compatibility/managed-public-api.txt",
-      "Sha256": "448c1fb7e636ba89d271d53c87e39f252cbd38586b0da3f6b8267c2b63a4b038",
-      "Length": 1082872
+      "Sha256": "efa74df10be5ea4d91848b288a86ea26e32f620e6d750e92921ed6a35242bce0",
+      "Length": 1117453
     },
     {
       "Path": "compatibility/ml-implemented-families.json",
@@ -651,12 +671,12 @@
     },
     {
       "Path": "compatibility/native-managed-binding-map.txt",
-      "Sha256": "8a2834971e6af1cab9d4edb991eca0d9ed89c99db51ccc9f6441176891d81d1e",
-      "Length": 923366
+      "Sha256": "72b869355dfdcea61cdd960bea8d8284e11efb50df601fb77d3ef86b01ffd9bc",
+      "Length": 926317
     },
     {
       "Path": "compatibility/native-managed-binding-summary.json",
-      "Sha256": "3d22dbff0f35f513491bb4b9a406e559966a02b2e16934780acab8951638e5b4",
+      "Sha256": "1e96c3a94edb48a91741fda75d7fdba6bdcc6ee9beaed8cc8b3bd753b4cd9663",
       "Length": 745
     },
     {
@@ -816,7 +836,7 @@
     },
     {
       "Path": "docs/articles/api-abi-compatibility-policy.md",
-      "Sha256": "93fde7605121dac65a102d217e429da4944f3940edbcf1b96907f6c93d74ff36",
+      "Sha256": "fe36ef1c0259b050e13d6f1c15aec29afa4fc6d9f3d33c978f06cf7ebae001ce",
       "Length": 14143
     },
     {
@@ -831,8 +851,8 @@
     },
     {
       "Path": "docs/articles/dnn-structured-parity-guide.md",
-      "Sha256": "fe471da95ee9217cc287249b2769cd0f7a9327110304df537a9eb131f4f5e6a3",
-      "Length": 9693
+      "Sha256": "97110bafc972fd61f23adc643afaf66e2b924c624d78e10f80a86cc7b31254c3",
+      "Length": 11043
     },
     {
       "Path": "docs/articles/features-upstream-parity-guide.md",
@@ -846,8 +866,8 @@
     },
     {
       "Path": "docs/articles/imgcodecs-upstream-parity-guide.md",
-      "Sha256": "67c04752afd655acdaa4095152946b85bc73bf500f775ba5999ccbc6af84f276",
-      "Length": 5146
+      "Sha256": "dbbb7ff14cc0d4c13c1040a7ea09650680e20097220009f641f5b658d848088d",
+      "Length": 5816
     },
     {
       "Path": "docs/articles/imgproc-geometry-guide.md",
@@ -966,8 +986,8 @@
     },
     {
       "Path": "docs/articles/videoio-upstream-parity-guide.md",
-      "Sha256": "3ccf13d3dde2f2b4d96fe993a970d19b7a1ceeac28328ee953b490bd7fa85f1d",
-      "Length": 3901
+      "Sha256": "3bf71be7c1c7d0cd61430e677b6421d2084fa26a6176302e01e1e181b701f1a2",
+      "Length": 4555
     },
     {
       "Path": "docs/images/showcase/chinese-text.png",
@@ -1011,13 +1031,28 @@
     },
     {
       "Path": "docs/index.md",
-      "Sha256": "72df1fb08e126efe8b899c4a8d2eab62ce207e765db02f5cf1a92b6c9cc5ec96",
-      "Length": 6404
+      "Sha256": "d4a62d8584b62d6058fcc6113e50ef56845b8300cc2ee384564fd79ff874c066",
+      "Length": 6546
+    },
+    {
+      "Path": "docs/releases/5.0.0-preview.1.md",
+      "Sha256": "7464c1eb83a5b8fdc44477572e1a9fe2d0ce9a737fe62b1eb554f76355e72bbc",
+      "Length": 1080
+    },
+    {
+      "Path": "docs/releases/5.0.0-preview.2.md",
+      "Sha256": "5050bcb67ad2e0591785a714a25f088516943ca5ca744364038812d92ef30b1e",
+      "Length": 3014
+    },
+    {
+      "Path": "docs/releases/README.md",
+      "Sha256": "ec5cca0bbad3746e492fd421427b4b13542c5e664be8c649b00d16b796d0fa09",
+      "Length": 1684
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "c4dc5fb6643bd7d6ec923fb855779142812dde1cfce9201eeb6513da56025408",
-      "Length": 14074
+      "Sha256": "4dcc88b30dbf87b2468bb5e153b342f1d4d056ab33c76542364fe24f0be79cad",
+      "Length": 14303
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1033,6 +1068,11 @@
       "Path": "packaging/runtime/android-runtime-evidence.json",
       "Sha256": "40fba275f4ddec2ccc343242188a9a69016a09dbfe7fe5584c2285ed31d7b398",
       "Length": 6616
+    },
+    {
+      "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
+      "Sha256": "f0512bdb79e16e49595362e702159b5e3ca7445baa157bb19e6974b6b2928ba1",
+      "Length": 333
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
@@ -1056,8 +1096,8 @@
     },
     {
       "Path": "samples/ConsoleSamples/Program.cs",
-      "Sha256": "4754afae3a95715903394f9771c93b6b7edf894d2d56b3350cdf66405d7d17b0",
-      "Length": 269421
+      "Sha256": "41b42d8314789407f465d70abcabaa06129bd0ace5e5797eaa69f9739af9d7fd",
+      "Length": 269890
     },
     {
       "Path": "samples/ConsoleSamples/ShowcaseRunner.cs",
@@ -1070,9 +1110,19 @@
       "Length": 6149
     },
     {
+      "Path": "scripts/Apply-OpenCvSourcePatches.ps1",
+      "Sha256": "c136ede2397e25764b084e4934736b98d835dc8a2de083e843c516487dd8120d",
+      "Length": 2445
+    },
+    {
       "Path": "scripts/Build-AndroidRuntimeInput.ps1",
       "Sha256": "d5ef3927c15af4e8bcb1a9d9ee730830654b85f83db63af5e326de06088f3a19",
       "Length": 16423
+    },
+    {
+      "Path": "scripts/Build-OpenCV.ps1",
+      "Sha256": "1c9804a91060490f326ad836e0cf8f753faf0f0d1c1fa9cb248f6258a890665c",
+      "Length": 19127
     },
     {
       "Path": "scripts/Generate-Calib3DUpstreamMap.ps1",
@@ -1166,8 +1216,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "5d67213216a96e3f645771e4ea6a4727089aff6f54171702794949f62303dcb0",
-      "Length": 60580
+      "Sha256": "31f4aa12a6e168ec7128fe154b634ed24ed259a8c30d808ab955f32bd276f9e7",
+      "Length": 61078
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1175,8 +1225,13 @@
       "Length": 20243
     },
     {
+      "Path": "scripts/New-RuntimeInputArtifact.ps1",
+      "Sha256": "ae60cadd2a0452a107676951f13c6cbb549c18609ab45b0e360622c309ff5b1b",
+      "Length": 21528
+    },
+    {
       "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
-      "Sha256": "35d858b86791e1722ae63c7bb09e7e1878bfac65c6ecb9654833b6ffc57f479d",
+      "Sha256": "924f54b3765fc48edf3c1953bb56731c7d4ca3b19ba9bf345c6ab9fbd3dbb938",
       "Length": 104061
     },
     {
@@ -1221,13 +1276,13 @@
     },
     {
       "Path": "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
-      "Sha256": "33acdbc9cf0cd95507f1ccaaf36eea50c0472e85dfe404aeba53b800b980f515",
-      "Length": 18180
+      "Sha256": "1260121228dc57383a269c75bcabf6a2b02085e21265156bfa9aa3d805a8d62c",
+      "Length": 18829
     },
     {
       "Path": "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
-      "Sha256": "69e1d710e9fc26cbbc9f3bafba321de9ecfc11f78aa2cf3458f50c41b25faac0",
-      "Length": 34834
+      "Sha256": "c00d156842dbb10c5f890c28e86ebb11117f9053e8ff42b9dcb3946bf564752a",
+      "Length": 35504
     },
     {
       "Path": "scripts/Test-MlUpstreamMap.ps1",
@@ -1236,7 +1291,7 @@
     },
     {
       "Path": "scripts/Test-NativeManagedBindingMap.ps1",
-      "Sha256": "462cd988630c18cded26eba8082355c1c123c5627d94202b342082810e207d2f",
+      "Sha256": "7ab578b8b161335c5c010627d78757e499f71d026008fe3ca656c5e5b4225545",
       "Length": 16021
     },
     {
@@ -1256,8 +1311,8 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "d036f369ab0d4664be94bd2a0300b24003af0468ae7f359e3a6a4c67f937424d",
-      "Length": 21213
+      "Sha256": "7a1408546b7609a23bbdd93e9773360ddb8a0e345616a13cd070f67359ef1605",
+      "Length": 21235
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1276,8 +1331,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e48a0ef20727341ff016dae2f3abf4c566cbd08396866c2b455b841eacfba844",
-      "Length": 56308
+      "Sha256": "5ae91e77e9c50ff138f8701a1679eb9a5d6685272d09805a203a24250d08bbe1",
+      "Length": 56807
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1286,8 +1341,13 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "9445aa4fe1a8dbd71c8b41e9342813e8b7728e847999f2f6aebcfa6ef82c9ae2",
+      "Sha256": "13ee06cde19cdfd7256805c3f7e2a76e6235066268a8bd42b4ae4b86c29d6aa7",
       "Length": 43766
+    },
+    {
+      "Path": "scripts/Test-ReleaseNotesContract.ps1",
+      "Sha256": "892961fd7036280352274a0e60e4d0bd3f16901e74366e8e91138d6a394b0574",
+      "Length": 4242
     },
     {
       "Path": "scripts/Test-ReleasePackageReproducibility.ps1",
@@ -1351,8 +1411,8 @@
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
-      "Sha256": "01a387c6d0608b3c261dd9bee96c37cd73a87ff252178d8420807490e7f0c426",
-      "Length": 173840
+      "Sha256": "9def0a4e7ff2aac6b38b2681dbf8c2f5ad4eef513a563877c938938cffa3c7b9",
+      "Length": 174149
     },
     {
       "Path": "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
@@ -1391,8 +1451,8 @@
     },
     {
       "Path": "src/OpenCvSharp.Native/tests/native_smoke.cpp",
-      "Sha256": "b651a8c06047cfef8ec6a05026096a0ad33c8f2fcc83bb61f03a3b5d0938cced",
-      "Length": 306914
+      "Sha256": "4fb6ab5db1751f98df1032eb4d02bb4c5c5a9c158f65bcb0f70878688b13e8d7",
+      "Length": 308553
     },
     {
       "Path": "src/OpenCvSharp/HighGui/Cv2.cs",
@@ -1601,8 +1661,8 @@
     },
     {
       "Path": "tools/DnnUpstreamMap/Program.cs",
-      "Sha256": "51c32b2f0a46a7067b6ef545c1c694bb71f442e6839e8cab975749f0232bc310",
-      "Length": 46567
+      "Sha256": "a1322d78c112c53b45abd53ca00a6c56c042652e93659dcd74eecec175ea20b5",
+      "Length": 47611
     },
     {
       "Path": "tools/DnnUpstreamMap/extract_dnn.py",
@@ -1696,13 +1756,13 @@
     },
     {
       "Path": "tools/NuGetRepositorySignatureVerifier/NuGetRepositorySignatureVerifier.csproj",
-      "Sha256": "217bb49664c7c0c139fc4d76dfdf54cf4923e8879533c9c3e59431c3268f43fe",
-      "Length": 370
+      "Sha256": "2142289ec3599dd0c4539b2e7861918e287616f47c045d02d5ae4c5361feb143",
+      "Length": 369
     },
     {
       "Path": "tools/NuGetRepositorySignatureVerifier/Program.cs",
-      "Sha256": "f176df724e37ab6596ff87ecd16d0e88d701b9d0394fe5cabbc7ede69c6e6b04",
-      "Length": 17658
+      "Sha256": "8e86d6d4f22716f89e485fb9443ba2a7c6b628c807abc3f0e640b5221a0b5c05",
+      "Length": 17686
     },
     {
       "Path": "tools/ObjDetectUpstreamMap/ObjDetectUpstreamMap.csproj",
@@ -1782,7 +1842,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 77,
+    "InvariantGuardCount": 78,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

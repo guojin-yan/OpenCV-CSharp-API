@@ -6,17 +6,17 @@
     "managed": {
       "path": "compatibility/managed-public-api.txt",
       "summaryPath": "compatibility/managed-public-api-summary.json",
-      "sha256": "448c1fb7e636ba89d271d53c87e39f252cbd38586b0da3f6b8267c2b63a4b038",
-      "typeCount": 611,
-      "memberCount": 6561,
+      "sha256": "efa74df10be5ea4d91848b288a86ea26e32f620e6d750e92921ed6a35242bce0",
+      "typeCount": 632,
+      "memberCount": 6817,
       "namespaceCount": 41,
       "targetFramework": "net8.0",
       "nullableShape": "included"
     },
     "nativeFull": {
       "path": "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
-      "sha256": "01a387c6d0608b3c261dd9bee96c37cd73a87ff252178d8420807490e7f0c426",
-      "functionCount": 2657,
+      "sha256": "9def0a4e7ff2aac6b38b2681dbf8c2f5ad4eef513a563877c938938cffa3c7b9",
+      "functionCount": 2663,
       "primaryPrefix": "jyppx_ocv_"
     },
     "nativeMini": {
@@ -28,9 +28,9 @@
     "nativeManagedBindingMap": {
       "path": "compatibility/native-managed-binding-map.txt",
       "summaryPath": "compatibility/native-managed-binding-summary.json",
-      "sha256": "8a2834971e6af1cab9d4edb991eca0d9ed89c99db51ccc9f6441176891d81d1e",
-      "nativeFunctionCount": 2657,
-      "managedBoundCount": 2657,
+      "sha256": "72b869355dfdcea61cdd960bea8d8284e11efb50df601fb77d3ef86b01ffd9bc",
+      "nativeFunctionCount": 2663,
+      "managedBoundCount": 2663,
       "unboundCount": 0,
       "managedOnlyCount": 0
     },
@@ -118,16 +118,16 @@
       "summaryPath": "compatibility/dnn-upstream-summary.json",
       "classificationPath": "compatibility/dnn-upstream-classifications.json",
       "familyInventoryPath": "compatibility/dnn-implemented-families.json",
-      "sha256": "4c482153942cbb32a6fc5b6382a06acdbc2329c177af4f78378e09d15f0f517d",
+      "sha256": "2c7674703c8a5104839e0bc80e610e2a7939e6b8842b0df742ad226de05a0d19",
       "declarationCount": 182,
       "callableCount": 159,
-      "implementedCount": 70,
+      "implementedCount": 74,
       "missingCount": 0,
-      "intentionallyOmittedCount": 81,
+      "intentionallyOmittedCount": 77,
       "unsupportedCount": 2,
       "upstreamConditionalCount": 6,
-      "selectedFamilyCount": 4,
-      "selectedDeclarationCount": 80,
+      "selectedFamilyCount": 5,
+      "selectedDeclarationCount": 85,
       "sourceHeaderCount": 3
     },
     "featuresUpstreamMap": {
@@ -398,7 +398,7 @@
       "id": "native-to-managed-binding-map",
       "status": "closed",
       "evidence": "compatibility/native-managed-binding-summary.json",
-      "result": "All 2,657 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
+      "result": "All 2,663 primary native ABI entrypoints are mapped to managed declarations; unbound and managed-only counts are zero."
     },
     {
       "id": "ownership-error-marshalling-audit",

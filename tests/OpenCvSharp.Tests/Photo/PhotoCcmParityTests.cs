@@ -189,6 +189,13 @@ namespace JYPPX.OpenCvSharp.Tests.Photo
             {
                 Assert.False(custom.IsDisposed);
             }
+
+            using (var source = CreateMacbethSamples())
+            using (var srgbModel = ColorCorrectionModel.Create(source, ColorCheckerType.Macbeth))
+            using (Mat srgb = srgbModel.Compute())
+            {
+                AssertNear(ExpectedLinearCcm, srgb.ToArray<double>(), 1.0e-4);
+            }
         }
 
         [Fact]

@@ -1223,29 +1223,41 @@
     {
       "ordinal": 99,
       "identity": "cv.dnn.NMSBoxes(vector_Rect2d bboxes[/C,/Ref];vector_float scores[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
-      "classification": "intentionally-omitted",
-      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
-      "buildCondition": "unconditional-parser-surface",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "classification": "implemented",
+      "reason": "The NMS utility family is exposed through owned managed arrays with native OpenCV selection semantics and focused overlap tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_nms_boxes_rect2d"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Rect2d\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)"
+      ]
     },
     {
       "ordinal": 100,
       "identity": "cv.dnn.NMSBoxes(vector_RotatedRect bboxes[/C,/Ref];vector_float scores[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
-      "classification": "intentionally-omitted",
-      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
-      "buildCondition": "unconditional-parser-surface",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "classification": "implemented",
+      "reason": "Rotated-rectangle NMS preserves OpenCV geometry semantics through an explicit blittable bridge and focused selection tests.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_nms_boxes_rotated_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.RotatedRect\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)"
+      ]
     },
     {
       "ordinal": 101,
       "identity": "cv.dnn.NMSBoxesBatched(vector_Rect2d bboxes[/C,/Ref];vector_float scores[/C,/Ref];vector_int class_ids[/C,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];float eta=1.f[/C];int top_k=0[/C])-\u003Evoid",
-      "classification": "intentionally-omitted",
-      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
-      "buildCondition": "unconditional-parser-surface",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "classification": "implemented",
+      "reason": "Class-aware NMS validates parallel collection lengths and delegates suppression to OpenCV instead of reproducing it in managed code.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_nms_boxes_batched_rect2d"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxesBatched(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Rect2d\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Collections.Generic.IReadOnlyList\u003CSystem.Int32\u003E classIds,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)"
+      ]
     },
     {
       "ordinal": 102,
@@ -1259,11 +1271,15 @@
     {
       "ordinal": 103,
       "identity": "cv.dnn.softNMSBoxes(vector_Rect bboxes[/C,/Ref];vector_float scores[/C,/Ref];vector_float updated_scores[/O,/Ref];float score_threshold[/C];float nms_threshold[/C];vector_int indices[/O,/Ref];size_t top_k=0;float sigma=0.5[/C];SoftNMSMethod method=SoftNMSMethod::SOFTNMS_GAUSSIAN)-\u003Evoid",
-      "classification": "intentionally-omitted",
-      "reason": "The NMS utility family is stable but separate from this round\u0027s selected network/inference/layer closure and remains an explicit next DNN utility priority.",
-      "buildCondition": "unconditional-parser-surface",
-      "nativeEntrypoints": [],
-      "managedMembers": []
+      "classification": "implemented",
+      "reason": "Soft-NMS returns independently owned selected indices and updated scores while preserving OpenCV linear and Gaussian decay methods.",
+      "buildCondition": "OPENCV_CSHARP_HAS_OPENCV; full-profile; mini-excluded",
+      "nativeEntrypoints": [
+        "jyppx_ocv_dnn_soft_nms_boxes_rect"
+      ],
+      "managedMembers": [
+        "MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Dnn.SoftNmsResult SoftNMSBoxes(System.Collections.Generic.IReadOnlyList\u003CJYPPX.OpenCvSharp.Core.Rect\u003E boxes,System.Collections.Generic.IReadOnlyList\u003CSystem.Single\u003E scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Int32 topK=0,System.Single sigma=0.5,JYPPX.OpenCvSharp.Dnn.SoftNMSMethod method=Gaussian)"
+      ]
     },
     {
       "ordinal": 104,

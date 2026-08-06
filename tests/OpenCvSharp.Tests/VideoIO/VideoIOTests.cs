@@ -96,6 +96,10 @@ namespace JYPPX.OpenCvSharp.Tests.VideoIO
                 Assert.False(capture.IsDisposed);
                 Assert.False(capture.IsOpened);
                 Assert.False(capture.Open(-1));
+                Assert.False(capture.TryRead(out Mat? image));
+                Assert.Null(image);
+                Assert.False(capture.TryRetrieve(out Mat? retrieved));
+                Assert.Null(retrieved);
             }
         }
 

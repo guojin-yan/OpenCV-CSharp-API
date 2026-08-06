@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=611
-member-count=6561
+type-count=632
+member-count=6817
 namespace-count=41
 nullable-shape=included
 
@@ -380,6 +380,7 @@ TYPE|enum|public|JYPPX.OpenCvSharp.Dnn.DnnModelFormat|base=|interfaces=System.IC
 TYPE|enum|public|JYPPX.OpenCvSharp.Dnn.DnnProfilingMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Dnn.DnnTarget|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Dnn.DnnTracingMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|JYPPX.OpenCvSharp.Dnn.SoftNMSMethod|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Features2D.ANNIndexDistance|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Features2D.AkazeDescriptorType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Features2D.DescriptorMatcherType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -525,6 +526,7 @@ TYPE|enum|public|JYPPX.OpenCvSharp.XStereo.StereoBinaryBMPreFilterType|base=|int
 TYPE|enum|public|JYPPX.OpenCvSharp.XStereo.StereoBinarySGBMMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XStereo.StereoSpeckleRemovalAlgorithm|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.XStereo.StereoSubPixelInterpolationMethod|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|struct|public;readonly;ref-like|JYPPX.OpenCvSharp.Core.MatRowAccessor<T>|base=|interfaces=|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.BioInspired.RetinaMagnoParameters|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.BioInspired.RetinaMagnoParameters>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.BioInspired.RetinaParameters|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.BioInspired.RetinaParameters>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.BioInspired.RetinaParvoParameters|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.BioInspired.RetinaParvoParameters>
@@ -560,6 +562,7 @@ TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.MeanStdDevResult|base=|interf
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.MinMaxLocResult|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.MinMaxLocResult>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point2d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point2d>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point2f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point2f>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point3d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point3d>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point3f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point3f>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point3i|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point3i>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point>
@@ -572,16 +575,34 @@ TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Size2d|base=|interfaces=Syste
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Size2f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Size2f>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Size|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Size>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.TermCriteria|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.TermCriteria>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec2b|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec2b>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec2d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec2d>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec2f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec2f>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec2i|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec2i>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec2s|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec2s>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec2w|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec2w>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec3b|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec3b>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec3d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec3d>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec3f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec3f>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec3i|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec3i>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec3s|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec3s>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec3w|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec3w>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec4b|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec4b>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec4d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec4d>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec4f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec4f>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec4i|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec4i>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec4s|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec4s>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec4w|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec4w>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Vec6f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Vec6f>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Dnn.DnnMemoryConsumption|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Dnn.DnnMemoryConsumption>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Dnn.DnnPerfProfile|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Dnn.DnnPerfProfile>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Dnn.SoftNmsResult|base=|interfaces=
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Face.FacePredictionResult|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Face.FacePredictionResult>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Face.FacePrediction|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Face.FacePrediction>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Features2D.DMatch|base=|interfaces=System.IComparable<JYPPX.OpenCvSharp.Features2D.DMatch>,System.IEquatable<JYPPX.OpenCvSharp.Features2D.DMatch>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Features2D.KeyPoint|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Features2D.KeyPoint>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Hfs.HfsSegmentParams|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Hfs.HfsSegmentParams>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.ImgProc.HoughCircle|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.ImgProc.HoughCircle>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.ImgProc.HoughLinePointSet|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.ImgProc.HoughLinePointSet>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.ImgProc.HoughLine|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.ImgProc.HoughLine>
@@ -1719,6 +1740,9 @@ MEMBER|JYPPX.OpenCvSharp.Core.KMeansFlags|field|public;const|JYPPX.OpenCvSharp.C
 MEMBER|JYPPX.OpenCvSharp.Core.KMeansFlags|field|public;const|JYPPX.OpenCvSharp.Core.KMeansFlags RandomCenters=0
 MEMBER|JYPPX.OpenCvSharp.Core.KMeansFlags|field|public;const|JYPPX.OpenCvSharp.Core.KMeansFlags UseInitialLabels=1
 MEMBER|JYPPX.OpenCvSharp.Core.KMeansFlags|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.Core.MatRowAccessor<T>|property|instance;get:public|System.Int32 Columns
+MEMBER|JYPPX.OpenCvSharp.Core.MatRowAccessor<T>|property|instance;get:public|System.Int32 Count
+MEMBER|JYPPX.OpenCvSharp.Core.MatRowAccessor<T>|property|instance;get:public|System.Span<T> Item[System.Int32 row]
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 CV_16BF=8
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 CV_16BFC1=8
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 CV_16BFC2=40
@@ -1790,6 +1814,19 @@ MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 ChannelShi
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 DepthMask=31
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 DepthMax=32
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|field|public;const|System.Int32 MatrixTypeMask=4095
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_16BFC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_16FC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_16SC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_16UC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_32FC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_32SC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_32UC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_64FC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_64SC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_64UC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_8SC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_8UC(System.Int32 channels)
+MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 CV_BoolC(System.Int32 channels)
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 Channels(System.Int32 type)
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 Depth(System.Int32 type)
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 MakeType(System.Int32 depth,System.Int32 channels)
@@ -1810,16 +1847,23 @@ MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.Mat RowRange(System.Int32 startRow,System.Int32 endRow)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.Mat SubMat(JYPPX.OpenCvSharp.Core.Rect roi)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ToMat()
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.MatRowAccessor<T> AsRows<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Boolean TryGetByteSpan(out System.Span<System.Byte> span)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Boolean TryGetSpan<T>(out System.Span<T> span)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Byte[] ToBytes()
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.ReadOnlySpan<System.Byte> AsReadOnlyRowByteSpan(System.Int32 row)
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.ReadOnlySpan<T> AsReadOnlyRowSpan<T>(System.Int32 row)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.ReadOnlySpan<T> AsReadOnlySpan<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Span<System.Byte> AsByteSpan()
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Span<System.Byte> AsRowByteSpan(System.Int32 row)
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Span<T> AsRowSpan<T>(System.Int32 row)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Span<T> AsSpan<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void ConvertTo(JYPPX.OpenCvSharp.Core.Mat destination,System.Int32 rtype,System.Double alpha=1,System.Double beta=0)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyFrom(System.Byte[] source)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyFrom(System.ReadOnlySpan<System.Byte> source)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyFrom<T>(System.ReadOnlySpan<T> source)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyPixelsFrom(System.IntPtr source,System.Int64 sourceStep)
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyPixelsTo(System.IntPtr destination,System.Int64 destinationStep)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyRowFrom(System.Int32 row,System.Byte[] source)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyRowFrom(System.Int32 row,System.ReadOnlySpan<System.Byte> source)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void CopyRowTo(System.Int32 row,System.Byte[] destination)
@@ -1832,7 +1876,9 @@ MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void Create(JYPP
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void Create(System.Int32 rows,System.Int32 cols,System.Int32 type)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void SetTo(JYPPX.OpenCvSharp.Core.Scalar value)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void SetValue<T>(System.Int32 index,T value)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Void SetValue<T>(System.Int32 row,System.Int32 column,T value)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|T GetValue<T>(System.Int32 index)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|T GetValue<T>(System.Int32 row,System.Int32 column)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|T[] ToArray<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;static|JYPPX.OpenCvSharp.Core.Mat Eye(JYPPX.OpenCvSharp.Core.Size size,System.Int32 type)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;static|JYPPX.OpenCvSharp.Core.Mat Eye(System.Int32 rows,System.Int32 cols,System.Int32 type)
@@ -1917,6 +1963,16 @@ MEMBER|JYPPX.OpenCvSharp.Core.Point2f|method|public;static|System.Boolean op_Equ
 MEMBER|JYPPX.OpenCvSharp.Core.Point2f|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Point2f left,JYPPX.OpenCvSharp.Core.Point2f right)
 MEMBER|JYPPX.OpenCvSharp.Core.Point2f|property|instance;get:public|System.Single X
 MEMBER|JYPPX.OpenCvSharp.Core.Point2f|property|instance;get:public|System.Single Y
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|constructor|public;instance|.ctor(System.Double x,System.Double y,System.Double z)
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Point3d other)
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Point3d left,JYPPX.OpenCvSharp.Core.Point3d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Point3d left,JYPPX.OpenCvSharp.Core.Point3d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|property|instance;get:public|System.Double X
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|property|instance;get:public|System.Double Y
+MEMBER|JYPPX.OpenCvSharp.Core.Point3d|property|instance;get:public|System.Double Z
 MEMBER|JYPPX.OpenCvSharp.Core.Point3f|constructor|public;instance|.ctor(System.Single x,System.Single y,System.Single z)
 MEMBER|JYPPX.OpenCvSharp.Core.Point3f|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|JYPPX.OpenCvSharp.Core.Point3f|method|public;instance;override|System.Int32 GetHashCode()
@@ -2158,6 +2214,170 @@ MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Doub
 MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 Counter
 MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 LastTimeTicks
 MEMBER|JYPPX.OpenCvSharp.Core.TickMeter|property|instance;get:public|System.Int64 TimeTicks
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|constructor|public;instance|.ctor(System.Byte v0,System.Byte v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec2b other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;instance|System.Void Deconstruct(out System.Byte v0,out System.Byte v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec2b left,JYPPX.OpenCvSharp.Core.Vec2b right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec2b left,JYPPX.OpenCvSharp.Core.Vec2b right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|property|instance;get:public|System.Byte Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|property|instance;get:public|System.Byte V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2b|property|instance;get:public|System.Byte V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|constructor|public;instance|.ctor(System.Double v0,System.Double v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec2d other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;instance|System.Void Deconstruct(out System.Double v0,out System.Double v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec2d left,JYPPX.OpenCvSharp.Core.Vec2d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec2d left,JYPPX.OpenCvSharp.Core.Vec2d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|property|instance;get:public|System.Double Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|property|instance;get:public|System.Double V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2d|property|instance;get:public|System.Double V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|constructor|public;instance|.ctor(System.Single v0,System.Single v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec2f other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;instance|System.Void Deconstruct(out System.Single v0,out System.Single v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec2f left,JYPPX.OpenCvSharp.Core.Vec2f right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec2f left,JYPPX.OpenCvSharp.Core.Vec2f right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|property|instance;get:public|System.Single Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|property|instance;get:public|System.Single V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2f|property|instance;get:public|System.Single V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|constructor|public;instance|.ctor(System.Int32 v0,System.Int32 v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec2i other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;instance|System.Void Deconstruct(out System.Int32 v0,out System.Int32 v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec2i left,JYPPX.OpenCvSharp.Core.Vec2i right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec2i left,JYPPX.OpenCvSharp.Core.Vec2i right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|property|instance;get:public|System.Int32 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|property|instance;get:public|System.Int32 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2i|property|instance;get:public|System.Int32 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|constructor|public;instance|.ctor(System.Int16 v0,System.Int16 v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec2s other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;instance|System.Void Deconstruct(out System.Int16 v0,out System.Int16 v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec2s left,JYPPX.OpenCvSharp.Core.Vec2s right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec2s left,JYPPX.OpenCvSharp.Core.Vec2s right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|property|instance;get:public|System.Int16 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|property|instance;get:public|System.Int16 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2s|property|instance;get:public|System.Int16 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|constructor|public;instance|.ctor(System.UInt16 v0,System.UInt16 v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec2w other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;instance|System.Void Deconstruct(out System.UInt16 v0,out System.UInt16 v1)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec2w left,JYPPX.OpenCvSharp.Core.Vec2w right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec2w left,JYPPX.OpenCvSharp.Core.Vec2w right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|property|instance;get:public|System.UInt16 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|property|instance;get:public|System.UInt16 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec2w|property|instance;get:public|System.UInt16 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|constructor|public;instance|.ctor(System.Byte v0,System.Byte v1,System.Byte v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec3b other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;instance|System.Void Deconstruct(out System.Byte v0,out System.Byte v1,out System.Byte v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec3b left,JYPPX.OpenCvSharp.Core.Vec3b right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec3b left,JYPPX.OpenCvSharp.Core.Vec3b right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|property|instance;get:public|System.Byte Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|property|instance;get:public|System.Byte V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|property|instance;get:public|System.Byte V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3b|property|instance;get:public|System.Byte V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|constructor|public;instance|.ctor(System.Double v0,System.Double v1,System.Double v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec3d other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;instance|System.Void Deconstruct(out System.Double v0,out System.Double v1,out System.Double v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec3d left,JYPPX.OpenCvSharp.Core.Vec3d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec3d left,JYPPX.OpenCvSharp.Core.Vec3d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|property|instance;get:public|System.Double Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|property|instance;get:public|System.Double V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|property|instance;get:public|System.Double V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3d|property|instance;get:public|System.Double V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|constructor|public;instance|.ctor(System.Single v0,System.Single v1,System.Single v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec3f other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;instance|System.Void Deconstruct(out System.Single v0,out System.Single v1,out System.Single v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec3f left,JYPPX.OpenCvSharp.Core.Vec3f right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec3f left,JYPPX.OpenCvSharp.Core.Vec3f right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|property|instance;get:public|System.Single Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|property|instance;get:public|System.Single V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|property|instance;get:public|System.Single V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3f|property|instance;get:public|System.Single V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|constructor|public;instance|.ctor(System.Int32 v0,System.Int32 v1,System.Int32 v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec3i other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;instance|System.Void Deconstruct(out System.Int32 v0,out System.Int32 v1,out System.Int32 v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec3i left,JYPPX.OpenCvSharp.Core.Vec3i right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec3i left,JYPPX.OpenCvSharp.Core.Vec3i right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|property|instance;get:public|System.Int32 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|property|instance;get:public|System.Int32 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|property|instance;get:public|System.Int32 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3i|property|instance;get:public|System.Int32 V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|constructor|public;instance|.ctor(System.Int16 v0,System.Int16 v1,System.Int16 v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec3s other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;instance|System.Void Deconstruct(out System.Int16 v0,out System.Int16 v1,out System.Int16 v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec3s left,JYPPX.OpenCvSharp.Core.Vec3s right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec3s left,JYPPX.OpenCvSharp.Core.Vec3s right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|property|instance;get:public|System.Int16 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|property|instance;get:public|System.Int16 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|property|instance;get:public|System.Int16 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3s|property|instance;get:public|System.Int16 V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|constructor|public;instance|.ctor(System.UInt16 v0,System.UInt16 v1,System.UInt16 v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec3w other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;instance|System.Void Deconstruct(out System.UInt16 v0,out System.UInt16 v1,out System.UInt16 v2)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec3w left,JYPPX.OpenCvSharp.Core.Vec3w right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec3w left,JYPPX.OpenCvSharp.Core.Vec3w right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|property|instance;get:public|System.UInt16 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|property|instance;get:public|System.UInt16 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|property|instance;get:public|System.UInt16 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec3w|property|instance;get:public|System.UInt16 V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|constructor|public;instance|.ctor(System.Byte v0,System.Byte v1,System.Byte v2,System.Byte v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec4b other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;instance|System.Void Deconstruct(out System.Byte v0,out System.Byte v1,out System.Byte v2,out System.Byte v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec4b left,JYPPX.OpenCvSharp.Core.Vec4b right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec4b left,JYPPX.OpenCvSharp.Core.Vec4b right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|property|instance;get:public|System.Byte Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|property|instance;get:public|System.Byte V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|property|instance;get:public|System.Byte V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|property|instance;get:public|System.Byte V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4b|property|instance;get:public|System.Byte V3
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|constructor|public;instance|.ctor(System.Double v0,System.Double v1,System.Double v2,System.Double v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec4d other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;instance|System.Void Deconstruct(out System.Double v0,out System.Double v1,out System.Double v2,out System.Double v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec4d left,JYPPX.OpenCvSharp.Core.Vec4d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec4d left,JYPPX.OpenCvSharp.Core.Vec4d right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|property|instance;get:public|System.Double Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|property|instance;get:public|System.Double V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|property|instance;get:public|System.Double V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|property|instance;get:public|System.Double V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4d|property|instance;get:public|System.Double V3
 MEMBER|JYPPX.OpenCvSharp.Core.Vec4f|constructor|public;instance|.ctor(System.Single v0,System.Single v1,System.Single v2,System.Single v3)
 MEMBER|JYPPX.OpenCvSharp.Core.Vec4f|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|JYPPX.OpenCvSharp.Core.Vec4f|method|public;instance;override|System.Int32 GetHashCode()
@@ -2182,6 +2402,32 @@ MEMBER|JYPPX.OpenCvSharp.Core.Vec4i|property|instance;get:public|System.Int32 V0
 MEMBER|JYPPX.OpenCvSharp.Core.Vec4i|property|instance;get:public|System.Int32 V1
 MEMBER|JYPPX.OpenCvSharp.Core.Vec4i|property|instance;get:public|System.Int32 V2
 MEMBER|JYPPX.OpenCvSharp.Core.Vec4i|property|instance;get:public|System.Int32 V3
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|constructor|public;instance|.ctor(System.Int16 v0,System.Int16 v1,System.Int16 v2,System.Int16 v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec4s other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;instance|System.Void Deconstruct(out System.Int16 v0,out System.Int16 v1,out System.Int16 v2,out System.Int16 v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec4s left,JYPPX.OpenCvSharp.Core.Vec4s right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec4s left,JYPPX.OpenCvSharp.Core.Vec4s right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|property|instance;get:public|System.Int16 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|property|instance;get:public|System.Int16 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|property|instance;get:public|System.Int16 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|property|instance;get:public|System.Int16 V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4s|property|instance;get:public|System.Int16 V3
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|constructor|public;instance|.ctor(System.UInt16 v0,System.UInt16 v1,System.UInt16 v2,System.UInt16 v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.Vec4w other)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;instance|System.Void Deconstruct(out System.UInt16 v0,out System.UInt16 v1,out System.UInt16 v2,out System.UInt16 v3)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.Vec4w left,JYPPX.OpenCvSharp.Core.Vec4w right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Vec4w left,JYPPX.OpenCvSharp.Core.Vec4w right)
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|property|instance;get:public|System.UInt16 Item[System.Int32 index]
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|property|instance;get:public|System.UInt16 V0
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|property|instance;get:public|System.UInt16 V1
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|property|instance;get:public|System.UInt16 V2
+MEMBER|JYPPX.OpenCvSharp.Core.Vec4w|property|instance;get:public|System.UInt16 V3
 MEMBER|JYPPX.OpenCvSharp.Core.Vec6f|constructor|public;instance|.ctor(System.Single v0,System.Single v1,System.Single v2,System.Single v3,System.Single v4,System.Single v5)
 MEMBER|JYPPX.OpenCvSharp.Core.Vec6f|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|JYPPX.OpenCvSharp.Core.Vec6f|method|public;instance;override|System.Int32 GetHashCode()
@@ -2203,6 +2449,12 @@ MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat
 MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ReadTensorFromOnnx(System.String path)
 MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat[] ImagesFromBlob(JYPPX.OpenCvSharp.Core.Mat blob)
 MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Dnn.DnnTarget[] GetAvailableTargets(JYPPX.OpenCvSharp.Dnn.DnnBackend backend)
+MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|JYPPX.OpenCvSharp.Dnn.SoftNmsResult SoftNMSBoxes(System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Rect> boxes,System.Collections.Generic.IReadOnlyList<System.Single> scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Int32 topK=0,System.Single sigma=0.5,JYPPX.OpenCvSharp.Dnn.SoftNMSMethod method=Gaussian)
+MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Rect2d> boxes,System.Collections.Generic.IReadOnlyList<System.Single> scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)
+MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Rect> boxes,System.Collections.Generic.IReadOnlyList<System.Single> scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)
+MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxes(System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.RotatedRect> boxes,System.Collections.Generic.IReadOnlyList<System.Single> scores,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)
+MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxesBatched(System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Rect2d> boxes,System.Collections.Generic.IReadOnlyList<System.Single> scores,System.Collections.Generic.IReadOnlyList<System.Int32> classIds,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)
+MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Int32[] NMSBoxesBatched(System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Rect> boxes,System.Collections.Generic.IReadOnlyList<System.Single> scores,System.Collections.Generic.IReadOnlyList<System.Int32> classIds,System.Single scoreThreshold,System.Single nmsThreshold,System.Single eta=1,System.Int32 topK=0)
 MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat blob,JYPPX.OpenCvSharp.Dnn.Image2BlobParams parameters)
 MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImage(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat blob,System.Double scaleFactor=1,JYPPX.OpenCvSharp.Core.Size? size=null,JYPPX.OpenCvSharp.Core.Scalar? mean=null,System.Boolean swapRB=false,System.Boolean crop=false,System.Int32 ddepth=5)
 MEMBER|JYPPX.OpenCvSharp.Dnn.Cv2|method|public;static|System.Void BlobFromImages(JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.Core.Mat blob,JYPPX.OpenCvSharp.Dnn.Image2BlobParams parameters)
@@ -2359,6 +2611,12 @@ MEMBER|JYPPX.OpenCvSharp.Dnn.Net|method|public;static|JYPPX.OpenCvSharp.Dnn.Net 
 MEMBER|JYPPX.OpenCvSharp.Dnn.Net|property|instance;get:public|JYPPX.OpenCvSharp.Dnn.DnnModelFormat ModelFormat
 MEMBER|JYPPX.OpenCvSharp.Dnn.Net|property|instance;get:public|System.Boolean Empty
 MEMBER|JYPPX.OpenCvSharp.Dnn.Net|property|instance;get:public|System.Boolean IsDisposed
+MEMBER|JYPPX.OpenCvSharp.Dnn.SoftNMSMethod|field|public;const|JYPPX.OpenCvSharp.Dnn.SoftNMSMethod Gaussian=2
+MEMBER|JYPPX.OpenCvSharp.Dnn.SoftNMSMethod|field|public;const|JYPPX.OpenCvSharp.Dnn.SoftNMSMethod Linear=1
+MEMBER|JYPPX.OpenCvSharp.Dnn.SoftNMSMethod|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.Dnn.SoftNmsResult|constructor|public;instance|.ctor(System.Int32[] indices,System.Single[] updatedScores)
+MEMBER|JYPPX.OpenCvSharp.Dnn.SoftNmsResult|property|instance;get:public|System.Int32[] Indices
+MEMBER|JYPPX.OpenCvSharp.Dnn.SoftNmsResult|property|instance;get:public|System.Single[] UpdatedScores
 MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Compute(JYPPX.OpenCvSharp.Core.Mat image)
 MEMBER|JYPPX.OpenCvSharp.Face.BIF|method|public;instance|System.Void Compute(JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.Core.Mat features)
@@ -3141,14 +3399,22 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImRea
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,System.Int32 start,System.Int32 count,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=AnyColor)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImReadMulti(System.String filename,out JYPPX.OpenCvSharp.Core.Mat[] images,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,JYPPX.OpenCvSharp.Core.Mat image)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWrite(System.String filename,JYPPX.OpenCvSharp.Core.Mat image,System.Int32[] parameters)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteAnimation(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteAnimation(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteMulti(System.String filename,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Mat> images,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteMulti(System.String filename,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Mat> images,System.Int32[]? parameters=null)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteWithMetadata(System.String filename,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk> metadata,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean ImWriteWithMetadata(System.String filename,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk> metadata,System.Int32[]? parameters=null)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,JYPPX.OpenCvSharp.Core.Mat image)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncode(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Int32[] parameters)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeAnimation(System.String ext,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeAnimation(System.String ext,JYPPX.OpenCvSharp.ImgCodecs.Animation animation,System.Int32[]? parameters=null)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeMulti(System.String ext,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Mat> images,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeMulti(System.String ext,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Core.Mat> images,System.Int32[]? parameters=null)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk> metadata,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk> metadata,System.Int32[]? parameters=null)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Int32 ImCount(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
@@ -3160,6 +3426,15 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|method|public;instance|System
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|property|instance;get:public|JYPPX.OpenCvSharp.Core.Mat Item[System.Int32 index]
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|property|instance;get:public|System.Int32 Count
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.ImgCodecs.ImwriteFlags encodingId,System.Int32 value)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam other)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam left,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam right)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam left,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam right)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|property|instance;get:public|JYPPX.OpenCvSharp.ImgCodecs.ImwriteFlags EncodingId
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|property|instance;get:public|System.Int32 Value
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataType type,JYPPX.OpenCvSharp.Core.Mat data)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|property|instance;get:public|JYPPX.OpenCvSharp.Core.Mat Data
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|property|instance;get:public|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataType Type
@@ -6482,6 +6757,8 @@ MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Bool
 MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Read(JYPPX.OpenCvSharp.Core.Mat image)
 MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Retrieve(JYPPX.OpenCvSharp.Core.Mat image,System.Int32 flag=0)
 MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean Set(JYPPX.OpenCvSharp.VideoIO.VideoCaptureProperties propertyId,System.Double value)
+MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean TryRead(out JYPPX.OpenCvSharp.Core.Mat? image)
+MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Boolean TryRetrieve(out JYPPX.OpenCvSharp.Core.Mat? image,System.Int32 flag=0)
 MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Double Get(JYPPX.OpenCvSharp.VideoIO.VideoCaptureProperties propertyId)
 MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.String GetBackendName()
 MEMBER|JYPPX.OpenCvSharp.VideoIO.VideoCapture|method|public;instance|System.Void Release()

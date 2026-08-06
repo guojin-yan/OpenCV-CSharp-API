@@ -26,6 +26,36 @@ Paths and names use strict UTF-8. Null strings, embedded null characters, and in
 
 `BlobRectToImageRect` and `BlobRectsToImageRects` use the configured blob size to project coordinates back to the original image. OpenCV 5 only performs the conversion branch when blob size differs from image size; callers should not use a same-size call to infer an identity transform.
 
+## Detection Postprocessing / 目标检测后处理
+
+The DNN helper delegates suppression to OpenCV instead of requiring every application to reproduce IoU and score-decay logic:
+
+```csharp
+Rect[] boxes =
+{
+    new Rect(0, 0, 100, 100),
+    new Rect(5, 5, 100, 100),
+    new Rect(240, 80, 60, 60)
+};
+float[] scores = { 0.95F, 0.88F, 0.76F };
+int[] classes = { 0, 0, 1 };
+
+int[] selected = DnnCv2.NMSBoxesBatched(
+    boxes, scores, classes,
+    scoreThreshold: 0.25F,
+    nmsThreshold: 0.45F);
+
+SoftNmsResult soft = DnnCv2.SoftNMSBoxes(
+    boxes, scores,
+    scoreThreshold: 0.25F,
+    nmsThreshold: 0.45F,
+    method: SoftNMSMethod.Gaussian);
+```
+
+`NMSBoxes` supports `Rect`, `Rect2d`, and `RotatedRect`. `NMSBoxesBatched` supports `Rect` and `Rect2d` with parallel class IDs, so overlapping boxes from different classes are not suppressed against each other. `SoftNMSBoxes` returns independently owned selected indices and updated scores. All collection lengths and numeric controls are validated before entering native code.
+
+`NMSBoxes` 支持整数矩形、双精度矩形和旋转矩形；`NMSBoxesBatched` 按类别执行抑制，避免不同类别互相误删；`SoftNMSBoxes` 返回独立拥有的索引和更新后置信度。所有并行数组长度、阈值、`eta`、`topK`、`sigma` 和衰减方法都会在进入原生层前校验。
+
 `BlobRectToImageRect` 和 `BlobRectsToImageRects` 使用参数中的 blob size 将坐标映射回原图。OpenCV 5 只有在 blob size 与图像尺寸不同时才进入转换分支，因此不能用同尺寸调用推断恒等映射。
 
 ## Network Workflow / 网络流程

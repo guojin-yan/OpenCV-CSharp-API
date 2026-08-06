@@ -30,6 +30,23 @@ Normal checks do not require Python:
 pwsh -NoProfile -File ./scripts/Test-ImgCodecsUpstreamMap.ps1
 ```
 
+## Type-Safe Encoder Parameters
+
+Use `ImageEncodingParam` when building encoder options so parameter keys and values stay paired. All encoding APIs continue to accept the original flat integer form, while the typed overload prevents odd-length lists and makes mixed PNG, JPEG, TIFF, or WebP settings easier to review.
+
+```csharp
+byte[] png = Cv2.ImEncode(
+    ".png",
+    image,
+    new[]
+    {
+        new ImageEncodingParam(ImwriteFlags.PngCompression, 6),
+        new ImageEncodingParam(ImwriteFlags.PngStrategy, 3),
+    });
+```
+
+The wrapper validates null entries and converts the collection to OpenCV's key/value representation immediately before the native call.
+
 ## Multi-Page Images
 
 `ImReadMulti` and `ImDecodeMulti` return arrays of independently owned `Mat` clones. Dispose every returned matrix. The ranged file overload uses `start, count`; the memory overload uses the half-open range `[start, end)`. `ImWriteMulti` and `ImEncodeMulti` require at least one non-null image and encoder parameters in key/value pairs.

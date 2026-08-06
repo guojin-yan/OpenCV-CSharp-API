@@ -135,6 +135,10 @@ function Get-Record {
         ".github/workflows/pack.yml",
         ".github/workflows/publish-nuget.yml",
         ".github/workflows/runtime-input.yml",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md",
+        "README.md",
+        "README_cn.md",
         "compatibility/api-gap-inventory.json",
         "compatibility/calib3d-implemented-families.json",
         "compatibility/calib3d-upstream-classifications.json",
@@ -282,7 +286,11 @@ function Get-Record {
         "scripts/Generate-ObjDetectUpstreamMap.ps1",
         "scripts/Generate-PhotoUpstreamMap.ps1",
         "scripts/Generate-VideoUpstreamMap.ps1",
-        "scripts/Build-AndroidRuntimeInput.ps1",
+          "scripts/Build-AndroidRuntimeInput.ps1",
+          "scripts/Build-OpenCV.ps1",
+          "scripts/Apply-OpenCvSourcePatches.ps1",
+          "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
+          "scripts/New-RuntimeInputArtifact.ps1",
         "scripts/Get-SampleModelAssets.ps1",
         "scripts/New-ReleaseCandidateFinalCloseout.ps1",
         "scripts/New-NuGetPublicationBundle.ps1",
@@ -311,6 +319,7 @@ function Get-Record {
         "scripts/Test-ReleasePackageReproducibility.ps1",
         "scripts/Test-ReleasePackageSbom.ps1",
         "scripts/Test-ReleaseReadinessContract.ps1",
+        "scripts/Test-ReleaseNotesContract.ps1",
         "scripts/Test-ReleaseSigningBoundary.ps1",
         "scripts/Test-SampleModelAssetContract.ps1",
         "scripts/Test-NuGetRepositorySignedPackage.ps1",
@@ -321,6 +330,9 @@ function Get-Record {
         "scripts/Test-VideoIOUpstreamMap.ps1",
         "scripts/Test-VideoUpstreamMap.ps1",
         "scripts/Test-WorkflowInvariantCoverage.ps1",
+        "docs/releases/README.md",
+        "docs/releases/5.0.0-preview.1.md",
+        "docs/releases/5.0.0-preview.2.md",
         "src/OpenCvSharp.Native/generated/native_abi_manifest.txt",
         "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt",
         "src/OpenCvSharp.Native/include/open_cv_sharp/highgui/highgui.h",
@@ -464,7 +476,7 @@ function Get-Record {
             NativeFull = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/native_abi_manifest.txt"
                 Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "src/OpenCvSharp.Native/generated/native_abi_manifest.txt") -Algorithm SHA256).Hash.ToLowerInvariant()
-                FunctionCount = 2657
+                FunctionCount = 2663
             }
             NativeMini = [ordered]@{
                 Path = "src/OpenCvSharp.Native/generated/native_abi_mini_manifest.txt"
@@ -829,7 +841,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 77
+            InvariantGuardCount = 78
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             ExactSdk = "10.0.302"
             PublicationAllowed = $false
