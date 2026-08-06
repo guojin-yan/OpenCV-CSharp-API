@@ -33,8 +33,11 @@ function Invoke-PowerShellExpectedFailure {
     param([string]$Name,[string]$Script,[string[]]$Arguments,[string]$ExpectedText)
     $output = @(& pwsh -NoProfile -File $Script @Arguments 2>&1)
     $exitCode = $LASTEXITCODE
+    $normalizedOutput = ($output | ForEach-Object { $_ | Out-String }) -join "`n"
+    $normalizedOutput = $normalizedOutput.Replace("`r", "")
+    $normalizedOutput = [regex]::Replace($normalizedOutput, '\x1B\[[0-?]*[ -/]*[@-~]', '')
     Assert-True -Condition ($exitCode -ne 0) -Path $Name -Issue "Publication-manifest negative fixture was accepted"
-    Assert-True -Condition (($output -join "`n").Contains($ExpectedText, [StringComparison]::OrdinalIgnoreCase)) -Path $Name -Issue "Publication-manifest negative fixture failed for the wrong reason" -Text ($output -join "`n")
+    Assert-True -Condition ($normalizedOutput.IndexOf($ExpectedText, [StringComparison]::OrdinalIgnoreCase) -ge 0) -Path $Name -Issue "Publication-manifest negative fixture failed for the wrong reason" -Text $normalizedOutput
 }
 
 function Add-FakeSignature {
