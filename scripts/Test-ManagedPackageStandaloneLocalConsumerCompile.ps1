@@ -12,8 +12,12 @@ if ($null -eq $pwsh) {
     throw "pwsh was not found. Standalone managed package consumer validation requires PowerShell 7+."
 }
 
-$userDotNet = Join-Path $env:USERPROFILE ".dotnet/dotnet.exe"
-if ([string]::IsNullOrWhiteSpace($DotNetPath) -and (Test-Path -LiteralPath $userDotNet -PathType Leaf)) {
+$userHome = [Environment]::GetFolderPath([Environment+SpecialFolder]::UserProfile)
+$dotnetExecutableName = if ($IsWindows) { "dotnet.exe" } else { "dotnet" }
+$userDotNet = if ([string]::IsNullOrWhiteSpace($userHome)) { "" } else { Join-Path $userHome ".dotnet/$dotnetExecutableName" }
+if ([string]::IsNullOrWhiteSpace($DotNetPath) -and
+    -not [string]::IsNullOrWhiteSpace($userDotNet) -and
+    (Test-Path -LiteralPath $userDotNet -PathType Leaf)) {
     $DotNetPath = $userDotNet
 }
 if ([string]::IsNullOrWhiteSpace($DotNetPath)) {
