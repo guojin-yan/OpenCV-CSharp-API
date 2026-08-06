@@ -21,7 +21,7 @@ function Assert-ExactPropertySet {
 }
 
 if ($PackageVersion -cne '5.0.0') {
-    throw "The stable publication manifest requires exact normalized package version 5.0.0. Actual: $PackageVersion"
+    throw "NUGET_PUBLICATION_MANIFEST_VERSION_MISMATCH expected=5.0.0 actual=$PackageVersion. Stable publication manifests require the exact normalized package version."
 }
 
 $resolvedManifest = (Resolve-Path -LiteralPath $ManifestPath).Path

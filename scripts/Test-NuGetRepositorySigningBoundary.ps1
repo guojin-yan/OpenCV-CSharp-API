@@ -177,7 +177,7 @@ try {
             -Name "publication-version-$invalidVersion" `
             -Script $publicationManifest `
             -Arguments @('-ManifestPath', $manifestFixture, '-SourceCommit', ('a' * 40), '-PackageVersion', $invalidVersion) `
-            -ExpectedText 'requires exact normalized package version 5.0.0'
+            -ExpectedText 'NUGET_PUBLICATION_MANIFEST_VERSION_MISMATCH'
     }
 
     $badArtifact = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
