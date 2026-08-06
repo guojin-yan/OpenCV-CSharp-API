@@ -6,7 +6,7 @@ Every package iteration has one immutable detailed note in this directory. The n
 
 | Version / 版本 | Status / 状态 | Detailed notes / 详细说明 |
 | --- | --- | --- |
-| `5.0.0-preview.2` | Unreleased / 待发布 | [5.0.0-preview.2](5.0.0-preview.2.md) |
+| `5.0.0` | Stable / 稳定版 | [5.0.0](5.0.0.md) |
 | `5.0.0-preview.1` | Published / 已发布 | [5.0.0-preview.1](5.0.0-preview.1.md) |
 
 ## Maintenance Rule / 维护规则

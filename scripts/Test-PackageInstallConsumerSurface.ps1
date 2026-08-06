@@ -9,7 +9,7 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $exampleRuntimePackageId = "$runtimePackagePrefix.win-x64"
-$examplePackageVersion = "5.0.0-preview.1"
+$examplePackageVersion = "5.0.0"
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
 $fixedMajorManagedIdentity = "Open" + "Cv5Sharp"
 $fixedMajorRuntimeIdentity = $fixedMajorManagedIdentity + "\.runtime"
@@ -134,17 +134,17 @@ $featureTemplateText = Read-RequiredText -RelativePath $featureTemplatePath
 $sampleProjectText = Read-RequiredText -RelativePath $sampleProjectPath
 $testProjectText = Read-RequiredText -RelativePath $testProjectPath
 
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --prerelease" -Issue "Quick Start must install the neutral managed preview package without a hardcoded version"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $exampleRuntimePackageId --prerelease" -Issue "Quick Start must install the matching neutral runtime preview package without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId" -Issue "Quick Start must install the neutral managed stable package without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $exampleRuntimePackageId" -Issue "Quick Start must install the matching neutral runtime stable package without a hardcoded version"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same resolved NuGet version" -Issue "Quick Start must explain managed/runtime package version alignment"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "package IDs and public namespace stay version-neutral" -Issue "Quick Start must state package IDs and namespace stay version-neutral"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
-    "^\s*dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--prerelease(?:\s+#.*)?\s*$",
+    "^\s*dotnet\s+add\s+package\s+(?<PackageId>\S+)(?:\s+#.*)?\s*$",
     [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Multiline)
 $installMatches = @($installRegex.Matches($quickStartText))
 if ($installMatches.Count -ne 2) {
-    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start must contain exactly two version-free prerelease install commands: managed and runtime"
+    Add-Violation -Violations $violations -Path $quickStartPath -Issue "Quick Start must contain exactly two version-free stable install commands: managed and runtime"
 }
 else {
     $packageIds = @($installMatches | ForEach-Object { $_.Groups["PackageId"].Value })

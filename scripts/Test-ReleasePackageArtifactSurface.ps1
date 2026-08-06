@@ -171,7 +171,7 @@ $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
 $apiAbiPolicyPath = "docs/articles/api-abi-compatibility-policy.md"
 $supportLifecyclePolicyPath = "docs/articles/support-lifecycle-policy.md"
 $releaseCloseoutDocPath = "docs/articles/release-candidate-closeout.md"
-$previewReleaseNotesPath = "docs/articles/preview-release-notes.md"
+$releaseNotesPath = "docs/articles/release-notes.md"
 $nugetRepositorySigningGuidePath = "docs/articles/nuget-repository-signing-guide.md"
 $runtimeLicensesPath = "docs/articles/runtime-licenses.md"
 $consoleSampleProgramPath = "samples/ConsoleSamples/Program.cs"
@@ -250,7 +250,7 @@ $linkedRuntimeGuideText = Read-RequiredText -RelativePath $linkedRuntimeGuidePat
 $apiAbiPolicyText = Read-RequiredText -RelativePath $apiAbiPolicyPath
 $supportLifecyclePolicyText = Read-RequiredText -RelativePath $supportLifecyclePolicyPath
 $releaseCloseoutDocText = Read-RequiredText -RelativePath $releaseCloseoutDocPath
-$previewReleaseNotesText = Read-RequiredText -RelativePath $previewReleaseNotesPath
+$releaseNotesText = Read-RequiredText -RelativePath $releaseNotesPath
 $nugetRepositorySigningGuideText = Read-RequiredText -RelativePath $nugetRepositorySigningGuidePath
 $runtimeLicensesText = Read-RequiredText -RelativePath $runtimeLicensesPath
 $consoleSampleProgramText = Read-RequiredText -RelativePath $consoleSampleProgramPath
@@ -288,10 +288,13 @@ Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $p
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'scripts/New-NuGetPublicationBundle.ps1' -Issue "NuGet.org publication must generate and recheck the exact reviewed bundle"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'scripts/Test-NuGetRepositorySignedPackage.ps1' -Issue "NuGet.org publication must verify public Repository signatures and payload equality"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'publish_authorization' -Issue "NuGet.org publication must require the exact dry-run authorization token"
-Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'single_maintainer_exception' -Issue "Preview-channel publication must expose the explicit single-maintainer exception input"
-Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'single-maintainer-preview-channel-exception' -Issue "Preview-channel publication must record its single-maintainer approval mode"
-Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'explicit-owner-authorization-no-independent-reviewer-available' -Issue "Preview-channel publication must record explicit owner risk acceptance"
-Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'The single-maintainer exception is restricted to the post-first-preview 5.0.0 preview channel.' -Issue "Single-maintainer exception must remain bounded to the post-first-preview channel"
+Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle 'ValidateStableApiCompatibility' -Issue "Stable managed packaging must expose the package API compatibility gate"
+Assert-Contains -Violations $violations -Path $packManagedPath -Text $packManagedText -Needle 'PackageValidationBaselineVersion=5.0.0-preview.1' -Issue "Stable managed packaging must compare against the published preview.1 API baseline"
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle '-ValidateStableApiCompatibility' -Issue "The formal stable pack workflow must enable managed package API compatibility validation"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'single_maintainer_exception' -Issue "Stable publication must expose the explicit single-maintainer exception input"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'single-maintainer-stable-5.0.0-exception' -Issue "Stable publication must record its version-bounded single-maintainer approval mode"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'explicit-owner-authorized-stable-5.0.0-no-independent-reviewer' -Issue "Stable publication must record explicit owner risk acceptance"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'The single-maintainer exception is restricted to the exact stable 5.0.0 release.' -Issue "Single-maintainer exception must remain bounded to exact stable 5.0.0"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'The single-maintainer exception must be dispatched by guojin-yan.' -Issue "Single-maintainer exception must be owner-dispatched"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'The single-maintainer exception requires designated_publisher=Guojin Yan.' -Issue "Single-maintainer exception must preserve the declared publisher identity"
 Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle 'The single-maintainer exception requires independent_approver=not-available.' -Issue "Single-maintainer exception must not invent an independent approver"
@@ -356,11 +359,13 @@ Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $rel
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'repository-signing-pending' -Issue "Release closeout documentation must expose the confirmed NuGet.org signing strategy"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'Test-NuGetRepositorySignedPackage.ps1' -Issue "Release closeout documentation must register post-publication signature verification"
-Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle '5.0.0-preview.2' -Issue "Preview release notes must identify the exact normalized public candidate version"
-Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'dotnet remove package JYPPX.OpenCV.CSharp.API' -Issue "Preview release notes must provide managed package uninstall guidance"
-Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'Known Limitations' -Issue "Preview release notes must expose known limitations"
-Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle '5.0.0-preview.1' -Issue "Preview.2 rollback guidance must name the previous public package explicitly"
-Assert-Contains -Violations $violations -Path $previewReleaseNotesPath -Text $previewReleaseNotesText -Needle 'Do not reference full and mini runtime packages together' -Issue "Preview release notes must prevent ambiguous full/mini runtime selection"
+Assert-Contains -Violations $violations -Path $releaseNotesPath -Text $releaseNotesText -Needle '5.0.0' -Issue "Stable release notes must identify the exact normalized public candidate version"
+Assert-Contains -Violations $violations -Path $releaseNotesPath -Text $releaseNotesText -Needle 'dotnet remove package JYPPX.OpenCV.CSharp.API' -Issue "Stable release notes must provide managed package uninstall guidance"
+Assert-Contains -Violations $violations -Path $releaseNotesPath -Text $releaseNotesText -Needle 'Known Limitations' -Issue "Stable release notes must expose known limitations"
+Assert-Contains -Violations $violations -Path $releaseNotesPath -Text $releaseNotesText -Needle '5.0.0-preview.1' -Issue "Stable rollback guidance must name the previous public package explicitly"
+Assert-Contains -Violations $violations -Path $releaseNotesPath -Text $releaseNotesText -Needle 'Do not reference full and mini runtime packages together' -Issue "Stable release notes must prevent ambiguous full/mini runtime selection"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle '--latest' -Issue "Stable GitHub Release creation must mark 5.0.0 as latest"
+Assert-Contains -Violations $violations -Path $publishNugetWorkflowPath -Text $publishNugetWorkflowText -Needle '--notes-file ./docs/articles/release-notes.md' -Issue "Stable GitHub Release must use the stable release notes"
 Assert-Contains -Violations $violations -Path $nugetRepositorySigningGuidePath -Text $nugetRepositorySigningGuideText -Needle 'RepositoryPrimarySignature' -Issue "Repository-signing guide must explain the structured NuGet signature type"
 Assert-Contains -Violations $violations -Path $nugetRepositorySigningGuidePath -Text $nugetRepositorySigningGuideText -Needle 'publish-nuget:sha256:' -Issue "Repository-signing guide must explain the dry-run authorization token"
 Assert-Contains -Violations $violations -Path $nugetRepositorySigningGuidePath -Text $nugetRepositorySigningGuideText -Needle 'dotnet nuget verify --all' -Issue "Repository-signing guide must expose the consumer verification command"
@@ -398,7 +403,7 @@ foreach ($needle in @(
 foreach ($needle in @('OpenCV 5 adds a `FontFace` overload of `putText`', 'does not use GDI, Skia', 'ImgProcCv2.PutText(', 'OPENCV_CSHARP_CJK_FONT')) {
     Assert-Contains -Violations $violations -Path $chinesePutTextTutorialPath -Text $chinesePutTextTutorialText -Needle $needle -Issue "Chinese tutorial must document and demonstrate the direct OpenCV putText path"
 }
-foreach ($needle in @('JYPPX.OpenCV.runtime.android-x64.mini --prerelease', 'Cv2.Sum(image)', 'PASS version=5.0.0 sum=448', 'Android ARM/ARM64 remain `android-evidence-pending`')) {
+foreach ($needle in @('dotnet add package JYPPX.OpenCV.runtime.android-x64.mini', 'Cv2.Sum(image)', 'PASS version=5.0.0 sum=448', 'Android ARM/ARM64 remain `android-evidence-pending`')) {
     Assert-Contains -Violations $violations -Path $androidTutorialPath -Text $androidTutorialText -Needle $needle -Issue "Android tutorial must retain version-neutral package installation, native loading, and truthful support boundaries"
 }
 foreach ($readme in @(
@@ -439,16 +444,16 @@ foreach ($readme in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
         [pscustomobject]@{ Path = $chineseReadmePath; Text = $chineseReadmeText })) {
     foreach ($needle in @(
-            'https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg?label=version',
+            'https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg?label=version',
             'https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/',
             'https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API',
             'https://github.com/guojin-yan/OpenCV-CSharp-API/releases')) {
         Assert-Contains -Violations $violations -Path $readme.Path -Text $readme.Text -Needle $needle -Issue "$($readme.Path) must expose the live managed package version badge and formal public release surfaces"
     }
     foreach ($needle in @(
-            'dotnet add package JYPPX.OpenCV.CSharp.API --prerelease',
-            'dotnet add package JYPPX.OpenCV.runtime.win-x64 --prerelease')) {
-        Assert-Contains -Violations $violations -Path $readme.Path -Text $readme.Text -Needle $needle -Issue "$($readme.Path) install examples must follow the current preview channel without a fixed version"
+            'dotnet add package JYPPX.OpenCV.CSharp.API',
+            'dotnet add package JYPPX.OpenCV.runtime.win-x64')) {
+        Assert-Contains -Violations $violations -Path $readme.Path -Text $readme.Text -Needle $needle -Issue "$($readme.Path) install examples must follow the stable channel without a fixed version"
     }
     if ($readme.Text -match '(?im)^\s*dotnet\s+add\s+package\b[^\r\n]*\s--version\s') {
         Add-Violation -Violations $violations -Path $readme.Path -Issue "README install examples must not pin a version"
@@ -460,7 +465,7 @@ foreach ($readme in @(
         $parts = ([string]$target).Split('/')
         $packageId = "$runtimePackagePrefix.$($parts[0])$(if ($parts[1] -eq 'mini') { '.mini' } else { '' })"
         foreach ($needle in @(
-                "https://img.shields.io/nuget/vpre/$packageId.svg?label=version",
+                "https://img.shields.io/nuget/v/$packageId.svg?label=version",
                 "https://www.nuget.org/packages/$packageId/",
                 "https://github.com/users/guojin-yan/packages/nuget/package/$packageId")) {
             Assert-Contains -Violations $violations -Path $readme.Path -Text $readme.Text -Needle $needle -Issue "$($readme.Path) must list every real-supported runtime package, live NuGet version badge, and both registry links"
@@ -585,7 +590,7 @@ Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPat
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'https_only=true' -Issue "Public feed contract must require HTTPS-only verification"
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'upload_attempted=false' -Issue "Public feed contract must reject upload during verification"
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'api.nuget.org/v3-flatcontainer' -Issue "Public feed contract must use the exact NuGet flat-container path"
-Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle "`$packageVersion = '5.0.0-preview.2'" -Issue "Public feed contract must verify the exact current preview candidate version"
+Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle "`$packageVersion = '5.0.0'" -Issue "Public feed contract must verify the exact stable candidate version"
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'SigningHandoff' -Issue "Release provenance must carry the signing handoff contract"
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle 'SbomHandoff' -Issue "Release provenance must carry the SBOM handoff contract"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'RELEASE_CHANGE_CONTROL_OK' -Issue "Release change-control guard must emit deterministic review evidence"
@@ -700,7 +705,7 @@ $releaseSurfaceFiles = @(
     $apiAbiPolicyPath,
     $supportLifecyclePolicyPath,
     $releaseCloseoutDocPath,
-    $previewReleaseNotesPath
+    $releaseNotesPath
 )
 
 foreach ($relativePath in $releaseSurfaceFiles) {

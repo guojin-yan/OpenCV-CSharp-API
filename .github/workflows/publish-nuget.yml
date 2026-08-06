@@ -10,7 +10,7 @@ on:
       package_version:
         description: Exact normalized NuGet version
         required: true
-        default: 5.0.0-preview.2
+        default: 5.0.0
         type: string
       candidate_created:
         description: Factual whole-second UTC timestamp shared by SBOM and review records
@@ -21,17 +21,17 @@ on:
         required: true
         type: string
       designated_publisher:
-        description: Named publisher; distinct from approver on the normal path and exact Guojin Yan on the preview-channel exception path
+        description: Named publisher; distinct from approver on the normal path and exact Guojin Yan on the version-bounded stable exception path
         required: true
         default: unassigned
         type: string
       independent_approver:
-        description: Named independent approver, or exact not-available when the preview-channel single-maintainer exception is enabled
+        description: Named independent approver, or exact not-available when the version-bounded stable single-maintainer exception is enabled
         required: true
         default: unassigned
         type: string
       single_maintainer_exception:
-        description: Explicit preview-channel owner exception when no independent reviewer is available
+        description: Explicit owner exception restricted to stable 5.0.0 when no independent reviewer is available
         required: true
         default: false
         type: boolean
@@ -51,14 +51,14 @@ on:
         default: false
         type: boolean
       create_github_release:
-        description: After both-feed verification, create the formal GitHub prerelease
+        description: After both-feed verification, create the formal stable GitHub Release
         required: true
         default: false
         type: boolean
       release_tag:
         description: Exact release tag used only when create_github_release is true
         required: true
-        default: v5.0.0-preview.2
+        default: v5.0.0
         type: string
 
 permissions:
@@ -94,13 +94,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if ($env:SOURCE_COMMIT -notmatch '^[0-9a-f]{40}$') { throw 'source_commit must be exact lowercase 40-hex.' }
-          $previewMatch = [regex]::Match($env:PACKAGE_VERSION, '^5\.0\.0-preview\.(?<number>[1-9][0-9]*)$')
-          $previewNumber = 0
-          if (-not $previewMatch.Success -or
-              -not [int]::TryParse($previewMatch.Groups['number'].Value, [ref]$previewNumber) -or
-              $previewNumber -lt 2) {
-            throw 'The post-first-preview workflow requires normalized package_version=5.0.0-preview.N with N >= 2.'
-          }
+          if ($env:PACKAGE_VERSION -cne '5.0.0') { throw 'This workflow is restricted to the exact stable package_version=5.0.0.' }
+          if ($env:RELEASE_TAG -cne 'v5.0.0') { throw 'This workflow is restricted to the exact stable release_tag=v5.0.0.' }
           if ($env:CANDIDATE_CREATED -notmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$') { throw 'candidate_created must be whole-second UTC.' }
           if ((git rev-parse HEAD) -ne $env:SOURCE_COMMIT) { throw 'Checkout does not match source_commit.' }
           if ([string]::IsNullOrWhiteSpace($env:PUBLICATION_MANIFEST_JSON)) { throw 'publication_manifest_json is required.' }
@@ -205,7 +200,7 @@ jobs:
             throw 'GitHub Release creation requires verify_publication=true.'
           }
           if ($singleMaintainerException) {
-            if ($env:PACKAGE_VERSION -cnotmatch '^5\.0\.0-preview\.(?:[2-9]|[1-9][0-9]+)$') { throw 'The single-maintainer exception is restricted to the post-first-preview 5.0.0 preview channel.' }
+            if ($env:PACKAGE_VERSION -cne '5.0.0') { throw 'The single-maintainer exception is restricted to the exact stable 5.0.0 release.' }
             if ($env:GITHUB_REPOSITORY -cne 'guojin-yan/OpenCV-CSharp-API') { throw 'The single-maintainer exception is restricted to the authoritative repository.' }
             if ($env:GITHUB_ACTOR -cne 'guojin-yan') { throw 'The single-maintainer exception must be dispatched by guojin-yan.' }
             if ($env:DESIGNATED_PUBLISHER -cne 'Guojin Yan') { throw 'The single-maintainer exception requires designated_publisher=Guojin Yan.' }
@@ -214,7 +209,7 @@ jobs:
           if ($protectedPhaseRequested) {
             if ($env:PUBLISH_AUTHORIZATION -cne $record.AuthorizationToken) { throw 'publish_authorization does not match the exact dry-run candidate token.' }
             if (-not $singleMaintainerException) {
-              if ($env:DESIGNATED_PUBLISHER -in @('', 'unassigned') -or $env:INDEPENDENT_APPROVER -in @('', 'unassigned', 'not-available')) { throw 'Protected publication phases require named publisher and independent approver unless the explicit preview-channel exception is enabled.' }
+              if ($env:DESIGNATED_PUBLISHER -in @('', 'unassigned') -or $env:INDEPENDENT_APPROVER -in @('', 'unassigned', 'not-available')) { throw 'Protected publication phases require named publisher and independent approver unless the explicit stable 5.0.0 exception is enabled.' }
               if ($env:DESIGNATED_PUBLISHER -eq $env:INDEPENDENT_APPROVER) { throw 'Publisher and independent approver must be different identities.' }
             }
           }
@@ -229,9 +224,9 @@ jobs:
             Publisher = $env:DESIGNATED_PUBLISHER
             PublisherGitHubAccount = $env:GITHUB_ACTOR
             IndependentApprover = $env:INDEPENDENT_APPROVER
-            ApprovalMode = if ($singleMaintainerException) { 'single-maintainer-preview-channel-exception' } else { 'independent-review' }
+            ApprovalMode = if ($singleMaintainerException) { 'single-maintainer-stable-5.0.0-exception' } else { 'independent-review' }
             SingleMaintainerException = $singleMaintainerException
-            RiskAcceptance = if ($singleMaintainerException) { 'explicit-owner-authorization-no-independent-reviewer-available' } else { '' }
+            RiskAcceptance = if ($singleMaintainerException) { 'explicit-owner-authorized-stable-5.0.0-no-independent-reviewer' } else { '' }
             PublishRequested = $env:PUBLISH_REQUESTED -eq 'true'
             VerificationRequested = $env:VERIFICATION_REQUESTED -eq 'true'
             ReleaseRequested = $env:RELEASE_REQUESTED -eq 'true'
@@ -635,11 +630,11 @@ jobs:
           @(Get-ChildItem ./artifacts/nuget-repository-proof/reports -Filter *.json -File) | ForEach-Object { $assets.Add($_) }
           gh release create $env:RELEASE_TAG @($assets.FullName) `
             --repo guojin-yan/OpenCV-CSharp-API --target $env:SOURCE_COMMIT `
-            --title $env:RELEASE_TAG --prerelease `
-            --notes-file ./docs/articles/preview-release-notes.md
+            --title $env:RELEASE_TAG --latest `
+            --notes-file ./docs/articles/release-notes.md
           if ($LASTEXITCODE -ne 0) { throw 'GitHub Release creation failed.' }
           $release = gh release view $env:RELEASE_TAG --repo guojin-yan/OpenCV-CSharp-API --json tagName,isDraft,isPrerelease,targetCommitish,assets | ConvertFrom-Json
-          if ($release.tagName -ne $env:RELEASE_TAG -or $release.isDraft -or -not $release.isPrerelease) { throw 'GitHub Release state verification failed.' }
+          if ($release.tagName -ne $env:RELEASE_TAG -or $release.isDraft -or $release.isPrerelease) { throw 'Stable GitHub Release state verification failed.' }
           $actualNames = @($release.assets | ForEach-Object name | Sort-Object)
           $expectedNames = @($assets | ForEach-Object Name | Sort-Object)
           if (($actualNames -join "`n") -cne ($expectedNames -join "`n")) { throw 'GitHub Release asset closure mismatch.' }

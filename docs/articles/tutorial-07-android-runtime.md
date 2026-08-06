@@ -32,15 +32,15 @@ Use an x86_64 emulator for `android-x64` or an x86 emulator for `android-x86`. T
 
 ## 2. Create The Project And Install Packages / 创建项目并安装包
 
-The public installation commands intentionally do not pin a version. Live NuGet badges in the repository README show the current preview, and `--prerelease` selects the available preview without making this tutorial stale after an update.
+The public installation commands intentionally do not pin a version. Live NuGet badges in the repository README show the current stable release, so this tutorial does not become stale after an update.
 
-公开安装命令有意不固定版本。仓库 README 的 NuGet 实时徽章会显示当前 preview；`--prerelease` 能选择可用预览版，后续更新时无需改写教程。
+公开安装命令有意不固定版本。仓库 README 的 NuGet 实时徽章会显示当前稳定版，后续更新时无需改写教程。
 
 ```powershell
 dotnet new android -n OpenCvAndroidDemo
 Set-Location OpenCvAndroidDemo
-dotnet add package JYPPX.OpenCV.CSharp.API --prerelease
-dotnet add package JYPPX.OpenCV.runtime.android-x64.mini --prerelease
+dotnet add package JYPPX.OpenCV.CSharp.API
+dotnet add package JYPPX.OpenCV.runtime.android-x64.mini
 dotnet list package
 ```
 
@@ -144,7 +144,7 @@ Remove the x64 runtime, install the x86 package without pinning a version, and c
 
 ```powershell
 dotnet remove package JYPPX.OpenCV.runtime.android-x64.mini
-dotnet add package JYPPX.OpenCV.runtime.android-x86.mini --prerelease
+dotnet add package JYPPX.OpenCV.runtime.android-x86.mini
 dotnet list package
 dotnet build -c Release -f net10.0-android -p:RuntimeIdentifier=android-x86
 ```

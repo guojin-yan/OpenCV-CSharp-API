@@ -11,7 +11,7 @@ $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $runtimePackageShape = "$runtimePackagePrefix.<rid>"
 $runtimeMiniPackageShape = "$runtimePackagePrefix.<rid>.mini"
 $currentWindowsRuntimePackage = "$runtimePackagePrefix.win-x64"
-$examplePackageVersion = "5.0.0-preview.1"
+$examplePackageVersion = "5.0.0"
 $preferredRuntimeProperty = "OpenCvNativeRuntimeDir"
 
 function Add-Violation {
@@ -126,8 +126,8 @@ $runtimeReadmeText = Read-RequiredText -RelativePath $runtimeReadmePath
 $sampleProjectText = Read-RequiredText -RelativePath $sampleProjectPath
 $testProjectText = Read-RequiredText -RelativePath $testProjectPath
 
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId --prerelease" -Issue "Quick Start must install the neutral managed package without a hardcoded version"
-Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $currentWindowsRuntimePackage --prerelease" -Issue "Quick Start may keep win-x64 only as the current Windows x64 runtime package example without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $managedPackageId" -Issue "Quick Start must install the neutral stable managed package without a hardcoded version"
+Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "dotnet add package $currentWindowsRuntimePackage" -Issue "Quick Start may keep win-x64 only as the current stable Windows x64 runtime package example without a hardcoded version"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle $runtimePackageShape -Issue "Quick Start must describe generic runtime package selection as JYPPX.OpenCV.runtime.<rid>"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle $runtimeMiniPackageShape -Issue "Quick Start must describe mini runtime package selection as JYPPX.OpenCV.runtime.<rid>.mini"
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "target RID" -Issue "Quick Start must tell consumers to choose the runtime package for their target RID"
@@ -136,7 +136,7 @@ Assert-Matches -Violations $violations -Path $quickStartPath -Text $quickStartTe
 Assert-Contains -Violations $violations -Path $quickStartPath -Text $quickStartText -Needle "same resolved NuGet version" -Issue "Quick Start must explain managed/runtime package version alignment"
 
 $installRegex = [System.Text.RegularExpressions.Regex]::new(
-    "^\s*dotnet\s+add\s+package\s+(?<PackageId>\S+)\s+--prerelease(?:\s+#.*)?\s*$",
+    "^\s*dotnet\s+add\s+package\s+(?<PackageId>\S+)(?:\s+#.*)?\s*$",
     [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Multiline)
 $installMatches = @($installRegex.Matches($quickStartText))
 if ($installMatches.Count -ne 2) {

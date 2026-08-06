@@ -20,12 +20,8 @@ function Assert-ExactPropertySet {
     }
 }
 
-$previewMatch = [regex]::Match($PackageVersion, '^5\.0\.0-preview\.(?<number>[1-9][0-9]*)$')
-$previewNumber = 0
-if (-not $previewMatch.Success -or
-    -not [int]::TryParse($previewMatch.Groups['number'].Value, [ref]$previewNumber) -or
-    $previewNumber -lt 2) {
-    throw "The post-first-preview publication manifest requires normalized package version 5.0.0-preview.N with N >= 2. Actual: $PackageVersion"
+if ($PackageVersion -cne '5.0.0') {
+    throw "The stable publication manifest requires exact normalized package version 5.0.0. Actual: $PackageVersion"
 }
 
 $resolvedManifest = (Resolve-Path -LiteralPath $ManifestPath).Path

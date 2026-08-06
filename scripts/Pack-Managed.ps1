@@ -8,6 +8,7 @@ param(
     [string]$TargetFrameworks = "",
     [string]$BuildOutputRoot = "",
     [string]$RestorePackagesPath = "",
+    [switch]$ValidateStableApiCompatibility,
     [switch]$NoBuild,
     [switch]$NoRestore
 )
@@ -176,6 +177,15 @@ $packageVersionRecord = Assert-OpenCvCSharpPackageVersion `
     -OpenCvVersion $OpenCvVersion `
     -PackageRevision $PackageRevision
 
+if ($ValidateStableApiCompatibility) {
+    if ($packageVersionRecord.NuGetVersion -cne "5.0.0") {
+        throw "Stable API compatibility validation is restricted to normalized package version 5.0.0. Actual: $($packageVersionRecord.NuGetVersion)"
+    }
+    if ($NoRestore) {
+        throw "Stable API compatibility validation requires restore so the public 5.0.0-preview.1 baseline can be resolved."
+    }
+}
+
 New-Item -ItemType Directory -Force $outputFullPath | Out-Null
 
 $packagePath = Join-Path $outputFullPath "$managedPackageId.$($packageVersionRecord.NuGetVersion).nupkg"
@@ -212,6 +222,12 @@ if (-not [string]::IsNullOrWhiteSpace($buildOutputRootFullPath)) {
 
 if (-not [string]::IsNullOrWhiteSpace($restorePackagesFullPath)) {
     $arguments += "-p:RestorePackagesPath=$restorePackagesFullPath"
+}
+
+if ($ValidateStableApiCompatibility) {
+    $arguments += "-p:EnablePackageValidation=true"
+    $arguments += "-p:PackageValidationBaselineName=$managedPackageId"
+    $arguments += "-p:PackageValidationBaselineVersion=5.0.0-preview.1"
 }
 
 if ($NoBuild) {

@@ -241,7 +241,7 @@ function New-ReviewRecord {
             'nuget-production-environment',
             'nuget-api-key-custody-owner',
             'designated-publisher',
-            'independent-approver-or-explicit-single-maintainer-preview-channel-exception',
+            'independent-approver-or-explicit-single-maintainer-stable-5.0.0-exception',
             'explicit-publication-authorization',
             'post-publish-repository-signature-verification',
             'github-packages-public-visibility',
@@ -341,7 +341,7 @@ function Test-ReviewRecord {
         })
     Assert-True -List $List -Condition ([string]::Join("`n", $actualSboms) -eq [string]::Join("`n", $recordSboms)) -Path $Path -Issue 'Release review SBOM hashes or package bindings do not match actual documents'
 
-    $requiredApprovalInputs = @('designated-publisher','explicit-publication-authorization','github-packages-public-visibility','github-packages-verification','independent-approver-or-explicit-single-maintainer-preview-channel-exception','nuget-api-key-custody-owner','nuget-production-environment','post-publish-repository-signature-verification')
+    $requiredApprovalInputs = @('designated-publisher','explicit-publication-authorization','github-packages-public-visibility','github-packages-verification','independent-approver-or-explicit-single-maintainer-stable-5.0.0-exception','nuget-api-key-custody-owner','nuget-production-environment','post-publish-repository-signature-verification')
     Assert-True -List $List -Condition ((@($Record.RequiredApprovalInputs | Sort-Object) -join ',') -eq ($requiredApprovalInputs -join ',')) -Path $Path -Issue 'Release review approval input checklist drifted'
 
     $expectedAreas = @('abi-api','feed-trust','hosted-x86','package-metadata','package-sbom','public-feed','release-scripts','repository-signing','runtime-matrix','signing-sbom','support-contract','toolchain-pins','workflow-permissions')

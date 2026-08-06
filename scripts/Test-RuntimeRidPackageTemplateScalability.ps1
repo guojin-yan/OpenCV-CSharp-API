@@ -519,7 +519,7 @@ foreach ($relativePath in $fixedMajorContextFiles) {
         $isRuntimePackageTableRow = (
             $relativePath -eq $readmePath -and
             $line.TrimStart().StartsWith("|", [System.StringComparison]::Ordinal) -and
-            $line.Contains("img.shields.io/nuget/vpre/", [System.StringComparison]::Ordinal) -and
+            $line.Contains("img.shields.io/nuget/v/", [System.StringComparison]::Ordinal) -and
             $line.Contains("[NuGet.org]", [System.StringComparison]::Ordinal) -and
             $line.Contains("[GitHub]", [System.StringComparison]::Ordinal))
         if ($winRuntimePackagePattern.IsMatch($line) -and

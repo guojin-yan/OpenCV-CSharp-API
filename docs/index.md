@@ -66,9 +66,9 @@ The navigation sidebar contains the complete module-by-module article catalog. E
 
 ## Release And Packaging / 发布与打包
 
-- [5.0.0-preview.2 Release Notes](articles/preview-release-notes.md)
+- [5.0.0 Release Notes](articles/release-notes.md)
 - [Version History / 版本说明索引](releases/README.md)
-- [5.0.0-preview.2 Detailed Changes / 详细变更](releases/5.0.0-preview.2.md)
+- [5.0.0 Detailed Changes / 详细变更](releases/5.0.0.md)
 - [Support And Lifecycle Policy](articles/support-lifecycle-policy.md)
 - [API And ABI Compatibility Policy](articles/api-abi-compatibility-policy.md)
 - [Linked Runtime Build Guide](articles/linked-runtime-build-guide.md)

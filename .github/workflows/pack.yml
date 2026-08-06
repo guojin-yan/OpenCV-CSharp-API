@@ -14,7 +14,7 @@ on:
       package_version:
         description: Exact four-part package version with optional lowercase prerelease suffix
         required: true
-        default: 5.0.0.0-preview.2
+        default: 5.0.0.0
       rid:
         description: Runtime identifier to pack; use all for the configured matrix
         required: true
@@ -141,12 +141,24 @@ jobs:
           PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
         run: |
           $packageRevision = [int]'${{ inputs.package_revision }}'
-          pwsh -NoProfile -File ./scripts/Pack-Managed.ps1 `
-            -OpenCvVersion '${{ inputs.opencv_version }}' `
-            -PackageRevision $packageRevision `
-            -PackageVersion $env:PACKAGE_VERSION_INPUT `
-            -NoBuild `
-            -NoRestore
+          . ./scripts/PackageVersion.ps1
+          $version = ConvertTo-OpenCvCSharpPackageVersion -Version $env:PACKAGE_VERSION_INPUT
+          $packArguments = @(
+            '-NoProfile',
+            '-File', './scripts/Pack-Managed.ps1',
+            '-OpenCvVersion', '${{ inputs.opencv_version }}',
+            '-PackageRevision', [string]$packageRevision,
+            '-PackageVersion', $env:PACKAGE_VERSION_INPUT,
+            '-NoBuild'
+          )
+          if ($version.NuGetVersion -ceq '5.0.0') {
+            $packArguments += '-ValidateStableApiCompatibility'
+          }
+          else {
+            $packArguments += '-NoRestore'
+          }
+          & pwsh @packArguments
+          if ($LASTEXITCODE -ne 0) { throw "Managed package generation failed with exit code $LASTEXITCODE." }
       - name: Upload managed package
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
