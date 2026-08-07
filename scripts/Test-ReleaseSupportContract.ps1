@@ -161,13 +161,22 @@ try {
 
     $runtimeInputPath = Join-Path $repo '.github/workflows/runtime-input.yml'
     $runtimeInputText = [IO.File]::ReadAllText($runtimeInputPath)
-    $selectedTargetMatch = [regex]::Match($runtimeInputText, '(?ms)\$supportedTargets\s*=\s*@\((.*?)\)')
-    Assert-True -Condition $selectedTargetMatch.Success -Path '.github/workflows/runtime-input.yml' -Issue 'runtime-input.yml supported-target allowlist is missing'
-    if ($selectedTargetMatch.Success) {
-        $producerTargets = @([regex]::Matches($selectedTargetMatch.Groups[1].Value, "'([^']+)'" ) | ForEach-Object { $_.Groups[1].Value } | Sort-Object)
-        Assert-ExactSet -Path '.github/workflows/runtime-input.yml' -Issue 'Real producer allowlist must equal real support plus the one pending hosted target' -Expected @($realTargets + $pendingTargets) -Actual $producerTargets
-        Assert-True -Condition (@($producerTargets | Where-Object { $excludedTargets -contains $_ }).Count -eq 0) -Path '.github/workflows/runtime-input.yml' -Issue 'Producer allowlist must not include excluded targets'
+    foreach ($selectionToken in @(
+            'Get-Content -LiteralPath ./packaging/runtime/runtime-support-contract.json -Raw | ConvertFrom-Json',
+            '$supportedTargets = @($supportContract.realSupport) + @($supportContract.pending | ForEach-Object { [string]$_.target })',
+            '$selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"',
+            'if ($supportedTargets -notcontains $selectedTarget)')) {
+        Assert-True -Condition $runtimeInputText.Contains($selectionToken, [StringComparison]::Ordinal) -Path '.github/workflows/runtime-input.yml' -Issue 'runtime-input.yml must select supported targets from the structured release support contract' -Text $selectionToken
     }
+
+    $producerTargets = @($m.rids | ForEach-Object {
+            $rid = [string]$_.rid
+            foreach ($profile in @($_.producer.profiles)) {
+                "$rid/$([string]$profile)"
+            }
+        } | Sort-Object)
+    Assert-ExactSet -Path $matrix.RelativePath -Issue 'Runtime producer metadata must equal real support plus pending evidence targets' -Expected @($realTargets + $pendingTargets) -Actual $producerTargets
+    Assert-True -Condition (@($producerTargets | Where-Object { $excludedTargets -contains $_ }).Count -eq 0) -Path $matrix.RelativePath -Issue 'Runtime producer metadata must not include excluded targets'
 
     $packWorkflowPath = Join-Path $repo '.github/workflows/pack.yml'
     $packWorkflowText = [IO.File]::ReadAllText($packWorkflowPath)

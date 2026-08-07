@@ -168,10 +168,54 @@ function Convert-YamlScalar {
 function Get-RuntimeInputProducerTargets {
     param(
         [Parameter(Mandatory = $true)]
-        [string]$Text
+        [string]$Text,
+        [string]$RuntimeMatrixText = ""
     )
 
     $targets = [System.Collections.Generic.List[object]]::new()
+
+    # Producer rows are selected from the structured runtime matrix at dispatch time.
+    # Keep the YAML parser below only as a compatibility fallback for older fixtures.
+    if ($Text.Contains('matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}', [System.StringComparison]::Ordinal)) {
+        if ([string]::IsNullOrWhiteSpace($RuntimeMatrixText)) {
+            throw "A structured runtime matrix is required for the dynamic producer workflow."
+        }
+
+        $matrix = $RuntimeMatrixText | ConvertFrom-Json
+        foreach ($ridSpec in @($matrix.rids)) {
+            $producerProperty = $ridSpec.PSObject.Properties["producer"]
+            if ($null -eq $producerProperty -or $null -eq $producerProperty.Value) {
+                continue
+            }
+
+            $producer = $producerProperty.Value
+            $containerImageProperty = $producer.PSObject.Properties["containerImage"]
+            $containerImage = if ($null -eq $containerImageProperty) { "" } else { [string]$containerImageProperty.Value }
+            $extraArgsByProfileProperty = $producer.PSObject.Properties["openCvExtraCMakeArgs"]
+            $extraArgsByProfile = if ($null -eq $extraArgsByProfileProperty) { $null } else { $extraArgsByProfileProperty.Value }
+
+            foreach ($profile in @($producer.profiles)) {
+                $extraArgs = ""
+                if ($null -ne $extraArgsByProfile) {
+                    $profileProperty = $extraArgsByProfile.PSObject.Properties[[string]$profile]
+                    if ($null -ne $profileProperty) {
+                        $extraArgs = [string]$profileProperty.Value
+                    }
+                }
+
+                $targets.Add([pscustomobject]@{
+                    Rid = [string]$ridSpec.rid
+                    Profile = [string]$profile
+                    Runner = [string]$ridSpec.runner
+                    ContainerImage = $containerImage
+                    OpenCvExtraCMakeArgs = $extraArgs
+                })
+            }
+        }
+
+        return @($targets)
+    }
+
     $lines = [System.Text.RegularExpressions.Regex]::Split($Text, "\r?\n")
     $inProduceJob = $false
     $current = $null
@@ -294,7 +338,7 @@ function Assert-RealProducerTargets {
         $expectedByKey["$($target.Rid)|$($target.Profile)"] = $target
     }
 
-    $workflowTargets = @(Get-RuntimeInputProducerTargets -Text $ProducerWorkflowText)
+    $workflowTargets = @(Get-RuntimeInputProducerTargets -Text $ProducerWorkflowText -RuntimeMatrixText $RuntimeMatrixText)
     if ($workflowTargets.Count -eq 0) {
         Add-Violation -Violations $Violations -Path $ProducerWorkflowPath -Issue "Runtime input workflow must declare explicit real producer target matrix entries"
         return
@@ -406,6 +450,82 @@ function Assert-RealProducerTargets {
             Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Approved real producer target profile is missing from runtime package matrix" -Text $target.Profile
         }
     }
+
+    $expectedWindowsMetadata = @{
+        "win-x64" = [ordered]@{
+            kind = "windows"; processorArchitecture = "AMD64"; runtimeArchitecture = "X64"; packageArchitecture = "AMD64"; platform = "x64"
+            toolComponent = "Microsoft.VisualStudio.Component.VC.Tools.x86.x64"; toolHost = "Hostx64"; toolTarget = "x64"; opencvArchFolder = "x64"; evidencePrefix = "WINDOWS_X64"
+        }
+        "win-x86" = [ordered]@{
+            kind = "windows"; processorArchitecture = "AMD64"; runtimeArchitecture = "X64"; packageArchitecture = "x86"; platform = "Win32"
+            toolComponent = "Microsoft.VisualStudio.Component.VC.Tools.x86.x64"; toolHost = "Hostx64"; toolTarget = "x86"; opencvArchFolder = "x86"; evidencePrefix = "WINDOWS_X86"
+        }
+        "win-arm64" = [ordered]@{
+            kind = "windows"; processorArchitecture = "ARM64"; runtimeArchitecture = "Arm64"; packageArchitecture = "ARM64"; platform = "ARM64"
+            toolComponent = "Microsoft.VisualStudio.Component.VC.Tools.ARM64"; toolHost = "Hostarm64"; toolTarget = "arm64"; opencvArchFolder = "ARM64"; evidencePrefix = "WINDOWS_ARM64"
+        }
+    }
+    $expectedAndroidAbis = @{
+        "android-arm64" = "arm64-v8a"
+        "android-arm" = "armeabi-v7a"
+        "android-x64" = "x86_64"
+        "android-x86" = "x86"
+    }
+
+    foreach ($ridGroup in @($expectedTargets | Group-Object -Property Rid)) {
+        $rid = [string]$ridGroup.Name
+        $ridSpec = @($matrix.rids | Where-Object { [string]$_.rid -ceq $rid })
+        if ($ridSpec.Count -ne 1) {
+            continue
+        }
+
+        $producer = $ridSpec[0].producer
+        $expectedProfiles = @($ridGroup.Group.Profile | Sort-Object)
+        $actualProfiles = @($producer.profiles | ForEach-Object { [string]$_ } | Sort-Object)
+        if (($actualProfiles -join "|") -cne ($expectedProfiles -join "|")) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime producer profiles must match the exact approved target set" -Text "$rid actual=$($actualProfiles -join ','); expected=$($expectedProfiles -join ',')"
+        }
+
+        $hasContainer = -not [string]::IsNullOrWhiteSpace([string]$ridGroup.Group[0].ContainerImage)
+        $expectedKind = if ($expectedWindowsMetadata.ContainsKey($rid)) {
+            "windows"
+        }
+        elseif ($expectedAndroidAbis.ContainsKey($rid)) {
+            "android"
+        }
+        elseif ($hasContainer) {
+            "container"
+        }
+        else {
+            "linux"
+        }
+        if (-not ([string]$producer.kind).Equals($expectedKind, [System.StringComparison]::Ordinal)) {
+            Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime producer kind must route the RID to the audited producer job" -Text "$rid actual=$($producer.kind); expected=$expectedKind"
+        }
+
+        if ($expectedWindowsMetadata.ContainsKey($rid)) {
+            foreach ($entry in $expectedWindowsMetadata[$rid].GetEnumerator()) {
+                $actualProperty = $producer.PSObject.Properties[[string]$entry.Key]
+                $actualValue = if ($null -eq $actualProperty) { "" } else { [string]$actualProperty.Value }
+                if (-not $actualValue.Equals([string]$entry.Value, [System.StringComparison]::Ordinal)) {
+                    Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Windows producer metadata must match the audited architecture boundary" -Text "$rid.$($entry.Key) actual=$actualValue; expected=$($entry.Value)"
+                }
+            }
+        }
+        elseif ($expectedAndroidAbis.ContainsKey($rid)) {
+            if (-not ([string]$producer.abi).Equals([string]$expectedAndroidAbis[$rid], [System.StringComparison]::Ordinal)) {
+                Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Android producer ABI must match the runtime RID" -Text "$rid actual=$($producer.abi); expected=$($expectedAndroidAbis[$rid])"
+            }
+        }
+        elseif ($hasContainer) {
+            $extraArgsProperty = $producer.PSObject.Properties["openCvExtraCMakeArgs"]
+            foreach ($profile in $expectedProfiles) {
+                if ($null -eq $extraArgsProperty -or $null -eq $extraArgsProperty.Value.PSObject.Properties[$profile]) {
+                    Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Container producer must explicitly bind OpenCV CMake arguments for every approved profile" -Text "$rid/$profile"
+                }
+            }
+        }
+    }
 }
 
 $violations = [System.Collections.Generic.List[object]]::new()
@@ -434,9 +554,14 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "default: ubuntu.24.04-x64"; Issue = "Producer workflow must start with the first real Ubuntu 24.04 x64 target" },
         [pscustomobject]@{ Needle = "default: full"; Issue = "Producer workflow must keep full as the default while mini remains an explicit target" },
         [pscustomobject]@{ Needle = "validate-target:"; Issue = "Producer workflow must reject unsupported real producer targets before matrix work starts" },
+        [pscustomobject]@{ Needle = 'target_matrix: ${{ steps.selection.outputs.target_matrix }}'; Issue = "Producer validation must expose exactly one selected target row" },
+        [pscustomobject]@{ Needle = 'matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}'; Issue = "Producer jobs must consume only the selected dynamic target row" },
+        [pscustomobject]@{ Needle = "if: needs.validate-target.outputs.producer_kind == 'linux'"; Issue = "Hosted Linux production must be skipped before matrix expansion for other producer kinds" },
+        [pscustomobject]@{ Needle = "if: needs.validate-target.outputs.producer_kind == 'android'"; Issue = "Android production must be skipped before matrix expansion for other producer kinds" },
+        [pscustomobject]@{ Needle = "if: needs.validate-target.outputs.producer_kind == 'windows'"; Issue = "Windows production must be skipped before matrix expansion for other producer kinds" },
+        [pscustomobject]@{ Needle = "if: needs.validate-target.outputs.producer_kind == 'container'"; Issue = "Container production must be skipped before matrix expansion for other producer kinds" },
+        [pscustomobject]@{ Needle = 'RUNTIME_INPUT_TARGET_SELECTION_OK'; Issue = "Producer validation must record its exact structured target selection" },
         [pscustomobject]@{ Needle = "runs-on: `${{ matrix.os }}"; Issue = "Producer workflow must run real target builds on the target matrix runner" },
-        [pscustomobject]@{ Needle = "Skip unmatched producer target"; Issue = "Producer workflow matrix must skip unmatched target rows explicitly" },
-        [pscustomobject]@{ Needle = "Skip unmatched container producer target"; Issue = "Producer workflow must skip unmatched container target rows explicitly" },
         [pscustomobject]@{ Needle = "Check project invariants"; Issue = "Producer workflow must run project invariants before building runtime inputs" },
         [pscustomobject]@{ Needle = "produce-android:"; Issue = "Android production must remain in a separate NDK-hosted job" },
         [pscustomobject]@{ Needle = "Build-AndroidRuntimeInput.ps1"; Issue = "Android producer must use the audited NDK build and ELF evidence script" },
@@ -452,8 +577,6 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'cat "$emulator_log"'; Issue = "Android emulator failures must expose the emulator log" },
         [pscustomobject]@{ Needle = "ANDROID_EMULATOR_LOADING_OK"; Issue = "Android x64 and x86 producers must execute a native loading smoke in an emulator" },
         [pscustomobject]@{ Needle = "produce-windows:"; Issue = "Native Windows production must remain in a separate hosted Windows job" },
-        [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_X64"; Issue = "Windows producer matrix must retain the x64 evidence branch" },
-        [pscustomobject]@{ Needle = "evidence_prefix: WINDOWS_ARM64"; Issue = "Windows producer matrix must retain the ARM64 evidence branch" },
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_PRODUCER_HOST_EVIDENCE"; Issue = "Windows producer must record actual host, process, CPU, memory, and disk evidence" },
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_PRODUCER_TOOLCHAIN_EVIDENCE"; Issue = "Windows producer must record the architecture-specific VS/MSVC/CMake toolchain" },
         [pscustomobject]@{ Needle = "`${{ matrix.evidence_prefix }}_OPENCV_PATH_SANITIZED"; Issue = "Windows producer must record its build-scoped foreign tool PATH exclusions" },
@@ -492,8 +615,6 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "-NativeWrapperSources"; Issue = "Windows producer provenance must retain the exact wrapper source list" },
         [pscustomobject]@{ Needle = "-NativeWrapperSourceCount"; Issue = "Windows producer provenance must retain the wrapper source count" },
         [pscustomobject]@{ Needle = "-NativeAbiFunctionCount"; Issue = "Windows producer provenance must retain the ABI function count" },
-        [pscustomobject]@{ Needle = "os: ubuntu-24.04-arm"; Issue = "Ubuntu 24.04 ARM64 producer must use the native GitHub-hosted ARM64 runner" },
-        [pscustomobject]@{ Needle = "container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982"; Issue = "Ubuntu 22.04 ARM64 producer must pin the audited official multi-architecture image digest" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_HOST_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record the native AArch64 Docker host" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_IMAGE_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record the official image identity and digest" },
         [pscustomobject]@{ Needle = "UBUNTU_22_04_ARM64_PRODUCER_CONTAINER_EVIDENCE"; Issue = "Ubuntu 22.04 ARM64 producer must record factual target userspace identity" },
@@ -517,7 +638,6 @@ foreach ($required in @(
          [pscustomobject]@{ Needle = "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE rid=`$PRODUCER_RID"; Issue = "Fedora, Rocky, and RHEL producers must emit exact package-installed PowerShell evidence" },
          [pscustomobject]@{ Needle = "POWERSHELL_APK_TOOLCHAIN_EVIDENCE rid=`$PRODUCER_RID"; Issue = "Alpine producer must emit exact package-installed PowerShell evidence" },
          [pscustomobject]@{ Needle = "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft"; Issue = "RPM producers must use only the verified local Microsoft signing key" },
-         [pscustomobject]@{ Needle = "container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc"; Issue = "Debian 12 ARM64 producer must pin the audited official multi-architecture image digest" },
          [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_HOST_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record the native AArch64 Docker host" },
          [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_IMAGE_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record the official image identity and digest" },
          [pscustomobject]@{ Needle = "DEBIAN_12_ARM64_PRODUCER_CONTAINER_EVIDENCE"; Issue = "Debian 12 ARM64 producer must record factual target userspace identity" },
@@ -556,8 +676,6 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = 'LINUX_NATIVE_PROFILE_EVIDENCE rid=${{ matrix.rid }} profile=$profileName sources=$($nativeSources.Count) abi_functions=$abiFunctionCount'; Issue = "Linux producer must record exact wrapper source and ABI evidence" },
         [pscustomobject]@{ Needle = 'readelf -h "$elf" | grep -q ''Machine:.*AArch64'''; Issue = "Ubuntu ARM64 producer must inspect every canonical ELF machine type" },
         [pscustomobject]@{ Needle = 'missing="$(ldd "$elf" | grep ''not found'' || true)"'; Issue = "Ubuntu ARM64 producer must reject unresolved native dependencies without an environment override" },
-        [pscustomobject]@{ Needle = "container_image: debian:12"; Issue = "Producer workflow must declare the Debian 12 container-native boundary" },
-        [pscustomobject]@{ Needle = "container_image: fedora:40"; Issue = "Producer workflow must declare the Fedora 40 container-native boundary" },
         [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_HOST_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record its Ubuntu 24.04 x64 Docker host" },
         [pscustomobject]@{ Needle = "FEDORA_40_X64_PRODUCER_IMAGE_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "Fedora producer must record the resolved Fedora image identity and digest" },
         [pscustomobject]@{ Needle = 'test "${SUPPORT_END:-}" = "2025-05-13"'; Issue = "Fedora producer must lock the ended-support compatibility boundary" },
@@ -585,9 +703,6 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "RHEL_9_X64_OPENCV_CPU_EVIDENCE profile=`$RUNTIME_PROFILE"; Issue = "RHEL producer must record factual SSE or AVX OpenCV CPU evidence" },
         [pscustomobject]@{ Needle = "RHEL_9_X64_LINKED_CTEST_EVIDENCE profile=`$RUNTIME_PROFILE passed=3 total=3"; Issue = "RHEL producer must require profile-specific linked CTest 3/3" },
         [pscustomobject]@{ Needle = "RHEL_9_X64_PRODUCER_ELF_EVIDENCE profile=`$RUNTIME_PROFILE files=`$expected_canonical_count runtime_files=`$expected_runtime_file_count machine=X86-64 origin=`$expected_canonical_count producer_paths=0 direct_opencv=`$expected_direct_opencv missing_dependencies=0"; Issue = "RHEL producer must audit the exact profile-derived x86-64 ELF closure" },
-        [pscustomobject]@{ Needle = "container_image: registry.access.redhat.com/ubi9/ubi:9.8"; Issue = "Producer workflow must declare the official RHEL UBI 9.8 container-native boundary" },
-        [pscustomobject]@{ Needle = "container_image: rockylinux:9"; Issue = "Producer workflow must declare the Rocky Linux 9 container-native boundary" },
-        [pscustomobject]@{ Needle = "container_image: alpine:3.20"; Issue = "Producer workflow must declare the exact Alpine 3.20 musl boundary" },
         [pscustomobject]@{ Needle = 'container_shell="sh"'; Issue = "Alpine producer must bootstrap with the base image's available POSIX shell" },
         [pscustomobject]@{ Needle = "ALPINE_3_20_REPOSITORY_EVIDENCE"; Issue = "Alpine producer must require factual v3.20 main/community repository evidence" },
         [pscustomobject]@{ Needle = 'musl_banner="$("$musl_loader" 2>&1)" || musl_status=$?'; Issue = "Alpine producer must tolerate only the musl loader's expected version-banner exit path" },
@@ -611,7 +726,6 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "ubi-9-codeready-builder-rpms"; Issue = "RHEL producer must retain the factual UBI CodeReady Builder repository boundary for ninja-build" },
         [pscustomobject]@{ Needle = 'curl_package="curl-minimal"'; Issue = "Producer workflow must preserve the audited Rocky and RHEL non-conflicting curl package" },
         [pscustomobject]@{ Needle = "as --version"; Issue = "Producer workflow must install and report the distro assembler used for OpenCV CPU-dispatch code" },
-        [pscustomobject]@{ Needle = 'opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"'; Issue = "Producer workflow must disable only independently audited unsupported GCC 11 AVX-VNNI DNN paths" },
         [pscustomobject]@{ Needle = '-ExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS"'; Issue = "Producer workflow must pass distro-specific OpenCV CMake arguments into the real build" },
         [pscustomobject]@{ Needle = "docker run --rm"; Issue = "Producer workflow must execute non-Ubuntu producer work inside the distro container" },
         [pscustomobject]@{ Needle = "EXPECTED_DISTRO_VERSION"; Issue = "Producer workflow must carry runtime matrix distro version into the container boundary" },
@@ -670,20 +784,11 @@ Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $pr
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "dotnet nuget push" -Issue "Producer workflow must not push packages"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "https://packages.microsoft.com/config/rhel/9/prod.repo" -Issue "Producer workflow must not download mutable Microsoft repository configuration"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "rpm --import https://" -Issue "Producer workflow must not import package signing keys directly from a network URL"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.24.04-arm64/mini'" -Issue "Ubuntu 24.04 ARM64 mini must be present in the exact real producer allowlist"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-x64/mini'" -Issue "Ubuntu 22.04 x64 mini must be present in the exact real producer allowlist"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'ubuntu.22.04-arm64/mini'" -Issue "Ubuntu 22.04 ARM64 mini must be present in the exact real producer allowlist"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'fedora.40-x64/mini'" -Issue "Fedora 40 x64 mini must be present in the exact real producer allowlist"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'rocky.9-x64/mini'" -Issue "Rocky 9 x64 mini must be present in the exact real producer allowlist"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'rhel.9-x64/mini'" -Issue "RHEL 9 x64 mini must be present in the exact real producer allowlist"
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/full'" -Issue "Windows x86 full must be present in the exact real producer allowlist"
-Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-x86/mini'" -Issue "Windows x86 mini must remain outside the real producer allowlist until independently proven"
+Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "Skip unmatched" -Issue "Producer workflow must select one target before runner allocation instead of expanding and skipping unrelated rows"
+if ([regex]::Matches($producerWorkflowText, [regex]::Escape('matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}')).Count -ne 4) {
+    Add-Violation -Violations $violations -Path $producerWorkflowPath -Issue "Exactly four producer jobs must consume the single-row dynamic target matrix" -Text 'matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}'
+}
 foreach ($windowsX86Needle in @(
-        "platform: Win32",
-        "tool_host: Hostx64",
-        "tool_target: x86",
-        "package_architecture: x86",
-        "evidence_prefix: WINDOWS_X86",
         "-T host=x64",
         "CMAKE_C_COMPILER_ARCHITECTURE_ID `"X86`"",
         "0x014c",
@@ -695,7 +800,6 @@ foreach ($windowsX86Needle in @(
         "-WindowsTargetExecutionEvidence '`${{ steps.windows.outputs.target_execution_evidence }}'")) {
     Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle $windowsX86Needle -Issue "Windows x86 producer must retain factual Win32/Hostx64-x86/I386/WoW64 evidence: $windowsX86Needle"
 }
-Assert-Contains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "'win-arm64/mini'" -Issue "Windows ARM64 mini must be present in the exact real producer allowlist"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "LD_LIBRARY_PATH" -Issue "Ubuntu ARM64 producer closure audit must not use an environment override"
 Assert-NotContains -Violations $violations -Path $producerWorkflowPath -Text $producerWorkflowText -Needle "modules=(" -Issue "Shared container producer script must not retain Bash-only module arrays that Alpine sh cannot parse"
 
@@ -894,7 +998,7 @@ if ($violations.Count -eq 0) {
         Write-FixtureFile -Path (Join-Path (Join-Path $fixtureInstallDir "etc/licenses") "opencv-license.txt") -Text "install license fixture"
 
         $matrix = Get-Content -LiteralPath (Join-Path $repo "packaging/runtime/runtime-package-matrix.json") -Raw | ConvertFrom-Json
-        foreach ($producerTarget in @(Get-RuntimeInputProducerTargets -Text $producerWorkflowText)) {
+        foreach ($producerTarget in @(Get-RuntimeInputProducerTargets -Text $producerWorkflowText -RuntimeMatrixText $runtimeMatrixText)) {
             $ridSpec = @($matrix.rids | Where-Object { $_.rid -eq $producerTarget.Rid } | Select-Object -First 1)
             if ($ridSpec.Count -eq 0) {
                 throw "Fixture producer target RID was not found in runtime matrix: $($producerTarget.Rid)"

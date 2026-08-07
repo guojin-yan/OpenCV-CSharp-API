@@ -7,6 +7,19 @@
       "runner": "windows-latest",
       "opencvRid": "windows-x64",
       "nativeExtension": ".dll",
+      "producer": {
+        "kind": "windows",
+        "profiles": [ "full", "mini" ],
+        "processorArchitecture": "AMD64",
+        "runtimeArchitecture": "X64",
+        "packageArchitecture": "AMD64",
+        "platform": "x64",
+        "toolComponent": "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+        "toolHost": "Hostx64",
+        "toolTarget": "x64",
+        "opencvArchFolder": "x64",
+        "evidencePrefix": "WINDOWS_X64"
+      },
       "notes": "Windows 10/11 x64 and compatible Windows x64 hosts."
     },
     {
@@ -15,6 +28,19 @@
       "runner": "windows-latest",
       "opencvRid": "windows-x86",
       "nativeExtension": ".dll",
+      "producer": {
+        "kind": "windows",
+        "profiles": [ "full" ],
+        "processorArchitecture": "AMD64",
+        "runtimeArchitecture": "X64",
+        "packageArchitecture": "x86",
+        "platform": "Win32",
+        "toolComponent": "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+        "toolHost": "Hostx64",
+        "toolTarget": "x86",
+        "opencvArchFolder": "x86",
+        "evidencePrefix": "WINDOWS_X86"
+      },
       "notes": "Windows x86, covering the requested x86 surface."
     },
     {
@@ -23,6 +49,19 @@
       "runner": "windows-11-vs2026-arm",
       "opencvRid": "windows-arm64",
       "nativeExtension": ".dll",
+      "producer": {
+        "kind": "windows",
+        "profiles": [ "full", "mini" ],
+        "processorArchitecture": "ARM64",
+        "runtimeArchitecture": "Arm64",
+        "packageArchitecture": "ARM64",
+        "platform": "ARM64",
+        "toolComponent": "Microsoft.VisualStudio.Component.VC.Tools.ARM64",
+        "toolHost": "Hostarm64",
+        "toolTarget": "arm64",
+        "opencvArchFolder": "ARM64",
+        "evidencePrefix": "WINDOWS_ARM64"
+      },
       "notes": "Windows ARM64 package surface; full and mini real production and consumption use the native Windows 11 ARM64 runner."
     },
     {
@@ -33,6 +72,10 @@
       "runner": "ubuntu-22.04",
       "opencvRid": "ubuntu.22.04-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "linux",
+        "profiles": [ "full", "mini" ]
+      },
       "notes": "Ubuntu 22.04 x64 glibc runtime package surface; full and mini real production and consumption use the matching Ubuntu 22.04 x64 native runtime. Mini is independently proven with six OpenCV modules, 8 wrapper sources, 398 ABI functions, and a 20-file SONAME payload."
     },
     {
@@ -43,6 +86,15 @@
       "runner": "ubuntu-24.04-arm",
       "opencvRid": "ubuntu.22.04-arm64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
       "notes": "Ubuntu 22.04 ARM64 glibc runtime package surface; full and mini production/consumption use official digest-pinned Ubuntu 22.04 ARM64 userspace through Docker on the native AArch64 ubuntu-24.04-arm host. Both profiles are separately proven and retain distinct module, source, ABI, payload, and smoke contracts."
     },
     {
@@ -53,6 +105,10 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "ubuntu.24.04-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "linux",
+        "profiles": [ "full", "mini" ]
+      },
       "notes": "Ubuntu 24.04 x64 glibc runtime package surface; build and publish from an Ubuntu 24.04 x64 native runtime."
     },
     {
@@ -63,6 +119,10 @@
       "runner": "ubuntu-24.04-arm",
       "opencvRid": "ubuntu.24.04-arm64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "linux",
+        "profiles": [ "full", "mini" ]
+      },
       "notes": "Ubuntu 24.04 ARM64 glibc runtime package surface; full and mini runtime production and consumption use the native AArch64 ubuntu-24.04-arm runner with exact profile-specific provenance, payload, ELF closure, and native smoke evidence."
     },
     {
@@ -73,6 +133,15 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "debian.12-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
       "notes": "Debian 12 x64 glibc runtime package surface; full and mini production/consumption use official Debian 12 x86-64 userspace through Docker on the Ubuntu x64 host. Both profiles are separately proven and retain distinct module, source, ABI, payload, ELF-closure, and smoke contracts."
     },
     {
@@ -83,6 +152,15 @@
       "runner": "ubuntu-24.04-arm",
       "opencvRid": "debian.12-arm64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
       "notes": "Debian 12 ARM64 glibc runtime package surface; full and mini production/consumption use official digest-pinned Debian 12 ARM64 userspace through Docker on the native AArch64 ubuntu-24.04-arm host. Both profiles are separately proven and retain distinct module, source, ABI, payload, and smoke contracts."
     },
     {
@@ -93,6 +171,15 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "fedora.40-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
       "notes": "Fedora 40 x64 glibc compatibility runtime package surface; full and mini production/consumption are separately proven inside exact Fedora 40 x64 userspace with archived release/update repository evidence."
     },
     {
@@ -103,6 +190,15 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "rhel.9-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "registry.access.redhat.com/ubi9/ubi:9.8@sha256:50701171b9917ed51048b614924598d45b00bce9a64b73860c057922fc13bec2",
+        "openCvExtraCMakeArgs": {
+          "full": "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0",
+          "mini": ""
+        }
+      },
       "notes": "RHEL 9 x64 glibc runtime package surface; full and mini production/consumption are separately proven inside official Red Hat UBI 9.8 x86-64 userspace. Full retains its independently audited DNN AVX-VNNI workaround, while mini keeps empty extra OpenCV CMake arguments and a distinct six-module, 8-source, 398-function, 20-file contract."
     },
     {
@@ -113,6 +209,15 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "rocky.9-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6",
+        "openCvExtraCMakeArgs": {
+          "full": "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0",
+          "mini": ""
+        }
+      },
       "notes": "Rocky Linux 9 x64 glibc runtime package surface; full and mini production/consumption are separately proven inside exact Rocky Linux 9 x64 userspace."
     },
     {
@@ -123,6 +228,15 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "alpine.3.20-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
       "notes": "Alpine 3.20 x64 musl runtime package surface for exact compatibility; full and mini production/consumption use digest-pinned official Alpine 3.20 x86_64/musl userspace through Docker on the Ubuntu x64 host. Both profiles are separately proven and retain distinct module, source, ABI, payload, and smoke contracts. Alpine 3.20 standard support ended on 2026-04-01 and fixes are now on request."
     },
     {
@@ -131,6 +245,11 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "android-arm64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "android",
+        "profiles": [ "full", "mini" ],
+        "abi": "arm64-v8a"
+      },
       "notes": "Android arm64-v8a package surface."
     },
     {
@@ -139,6 +258,11 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "android-arm",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "android",
+        "profiles": [ "full", "mini" ],
+        "abi": "armeabi-v7a"
+      },
       "notes": "Android armeabi-v7a package surface."
     },
     {
@@ -147,6 +271,11 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "android-x64",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "android",
+        "profiles": [ "full", "mini" ],
+        "abi": "x86_64"
+      },
       "notes": "Android x64 emulator package surface."
     },
     {
@@ -155,6 +284,11 @@
       "runner": "ubuntu-24.04",
       "opencvRid": "android-x86",
       "nativeExtension": ".so",
+      "producer": {
+        "kind": "android",
+        "profiles": [ "full", "mini" ],
+        "abi": "x86"
+      },
       "notes": "Android x86 emulator package surface."
     }
   ],

@@ -23,79 +23,93 @@ jobs:
   validate-target:
     if: github.repository == 'guojin-yan/OpenCV-CSharp-API'
     runs-on: ubuntu-24.04
+    outputs:
+      producer_kind: ${{ steps.selection.outputs.producer_kind }}
+      target_matrix: ${{ steps.selection.outputs.target_matrix }}
     steps:
-      - name: Validate real producer target
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Validate and select one real producer target
+        id: selection
         shell: pwsh
+        env:
+          RID_INPUT: ${{ inputs.rid }}
+          RUNTIME_PROFILE_INPUT: ${{ inputs.runtime_profile }}
         run: |
-          $supportedTargets = @(
-            'win-x64/full',
-            'win-x64/mini',
-            'win-x86/full',
-            'win-arm64/full',
-            'win-arm64/mini',
-            'ubuntu.24.04-x64/full',
-            'ubuntu.24.04-x64/mini',
-            'ubuntu.24.04-arm64/full',
-            'ubuntu.24.04-arm64/mini',
-            'ubuntu.22.04-x64/full',
-            'ubuntu.22.04-x64/mini',
-            'ubuntu.22.04-arm64/full',
-            'ubuntu.22.04-arm64/mini',
-            'debian.12-x64/full',
-            'debian.12-x64/mini',
-            'debian.12-arm64/full',
-            'debian.12-arm64/mini',
-            'fedora.40-x64/full',
-            'fedora.40-x64/mini',
-            'rhel.9-x64/full',
-            'rhel.9-x64/mini',
-            'rocky.9-x64/full',
-            'rocky.9-x64/mini',
-            'alpine.3.20-x64/full',
-            'alpine.3.20-x64/mini',
-            'android-arm64/full',
-            'android-arm64/mini',
-            'android-arm/full',
-            'android-arm/mini',
-            'android-x64/full',
-            'android-x64/mini',
-            'android-x86/full',
-            'android-x86/mini'
-          )
-          $selectedTarget = '${{ inputs.rid }}/${{ inputs.runtime_profile }}'
+          $runtimeMatrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $supportContract = Get-Content -LiteralPath ./packaging/runtime/runtime-support-contract.json -Raw | ConvertFrom-Json
+          $supportedTargets = @($supportContract.realSupport) + @($supportContract.pending | ForEach-Object { [string]$_.target })
+          $selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"
           if ($supportedTargets -notcontains $selectedTarget) {
             throw "runtime-input.yml currently produces the real-supported Windows/Linux targets, pending win-x86/full, and pending Android full/mini targets for arm64-v8a, armeabi-v7a, x86_64, and x86. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
           }
 
+          $ridSpec = @($runtimeMatrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })
+          if ($ridSpec.Count -ne 1 -or $null -eq $ridSpec[0].producer) {
+            throw "Runtime producer metadata is missing or ambiguous for $($env:RID_INPUT)."
+          }
+
+          $producer = $ridSpec[0].producer
+          if (@($producer.profiles) -notcontains $env:RUNTIME_PROFILE_INPUT) {
+            throw "Runtime producer profile is not approved: $selectedTarget"
+          }
+
+          $row = [ordered]@{
+            rid = [string]$ridSpec[0].rid
+            profile = [string]$env:RUNTIME_PROFILE_INPUT
+            os = [string]$ridSpec[0].runner
+          }
+
+          switch ([string]$producer.kind) {
+            'windows' {
+              foreach ($property in @('processorArchitecture', 'runtimeArchitecture', 'packageArchitecture', 'platform', 'toolComponent', 'toolHost', 'toolTarget', 'opencvArchFolder', 'evidencePrefix')) {
+                if ($null -eq $producer.PSObject.Properties[$property] -or [string]::IsNullOrWhiteSpace([string]$producer.$property)) {
+                  throw "Windows producer metadata is missing $property for $($env:RID_INPUT)."
+                }
+              }
+              $row.processor_architecture = [string]$producer.processorArchitecture
+              $row.runtime_architecture = [string]$producer.runtimeArchitecture
+              $row.package_architecture = [string]$producer.packageArchitecture
+              $row.platform = [string]$producer.platform
+              $row.tool_component = [string]$producer.toolComponent
+              $row.tool_host = [string]$producer.toolHost
+              $row.tool_target = [string]$producer.toolTarget
+              $row.opencv_arch_folder = [string]$producer.opencvArchFolder
+              $row.evidence_prefix = [string]$producer.evidencePrefix
+            }
+            'android' {
+              if ($null -eq $producer.PSObject.Properties['abi'] -or [string]::IsNullOrWhiteSpace([string]$producer.abi)) {
+                throw "Android producer metadata is missing ABI for $($env:RID_INPUT)."
+              }
+              $row.abi = [string]$producer.abi
+            }
+            'container' {
+              if ($null -eq $producer.PSObject.Properties['containerImage'] -or [string]::IsNullOrWhiteSpace([string]$producer.containerImage)) {
+                throw "Container producer metadata is missing image for $($env:RID_INPUT)."
+              }
+              if ($null -eq $producer.PSObject.Properties['openCvExtraCMakeArgs'] -or $null -eq $producer.openCvExtraCMakeArgs.PSObject.Properties[$env:RUNTIME_PROFILE_INPUT]) {
+                throw "Container producer metadata is missing OpenCV CMake arguments for $selectedTarget."
+              }
+              $row.container_image = [string]$producer.containerImage
+              $profileArgument = $producer.openCvExtraCMakeArgs.PSObject.Properties[$env:RUNTIME_PROFILE_INPUT]
+              $row.opencv_extra_cmake_args = if ($null -eq $profileArgument) { "" } else { [string]$profileArgument.Value }
+            }
+            'linux' { }
+            default { throw "Unsupported runtime producer kind '$($producer.kind)' for $($env:RID_INPUT)." }
+          }
+
+          $targetMatrix = @{ include = @([pscustomobject]$row) } | ConvertTo-Json -Compress -Depth 8
+          "producer_kind=$($producer.kind)" >> $env:GITHUB_OUTPUT
+          "target_matrix=$targetMatrix" >> $env:GITHUB_OUTPUT
+          Write-Host "RUNTIME_INPUT_TARGET_SELECTION_OK target=$selectedTarget kind=$($producer.kind) runner=$($row.os)"
+
   produce:
     needs: validate-target
+    if: needs.validate-target.outputs.producer_kind == 'linux'
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - rid: ubuntu.24.04-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: ubuntu.24.04-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: ubuntu.24.04-arm64
-            profile: full
-            os: ubuntu-24.04-arm
-          - rid: ubuntu.24.04-arm64
-            profile: mini
-            os: ubuntu-24.04-arm
-          - rid: ubuntu.22.04-x64
-            profile: full
-            os: ubuntu-22.04
-          - rid: ubuntu.22.04-x64
-            profile: mini
-            os: ubuntu-22.04
+      matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Skip unmatched producer target
-        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
-        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
@@ -763,47 +777,12 @@ jobs:
 
   produce-android:
     needs: validate-target
+    if: needs.validate-target.outputs.producer_kind == 'android'
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - rid: android-arm64
-            profile: full
-            abi: arm64-v8a
-            os: ubuntu-24.04
-          - rid: android-arm64
-            profile: mini
-            abi: arm64-v8a
-            os: ubuntu-24.04
-          - rid: android-arm
-            profile: full
-            abi: armeabi-v7a
-            os: ubuntu-24.04
-          - rid: android-arm
-            profile: mini
-            abi: armeabi-v7a
-            os: ubuntu-24.04
-          - rid: android-x64
-            profile: full
-            abi: x86_64
-            os: ubuntu-24.04
-          - rid: android-x64
-            profile: mini
-            abi: x86_64
-            os: ubuntu-24.04
-          - rid: android-x86
-            profile: full
-            abi: x86
-            os: ubuntu-24.04
-          - rid: android-x86
-            profile: mini
-            abi: x86
-            os: ubuntu-24.04
+      matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Skip unmatched Android producer target
-        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
-        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
@@ -1109,75 +1088,12 @@ jobs:
 
   produce-windows:
     needs: validate-target
+    if: needs.validate-target.outputs.producer_kind == 'windows'
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - rid: win-x86
-            profile: full
-            os: windows-latest
-            processor_architecture: AMD64
-            runtime_architecture: X64
-            package_architecture: x86
-            platform: Win32
-            tool_component: Microsoft.VisualStudio.Component.VC.Tools.x86.x64
-            tool_host: Hostx64
-            tool_target: x86
-            opencv_arch_folder: x86
-            evidence_prefix: WINDOWS_X86
-          - rid: win-x64
-            profile: full
-            os: windows-latest
-            processor_architecture: AMD64
-            runtime_architecture: X64
-            package_architecture: AMD64
-            platform: x64
-            tool_component: Microsoft.VisualStudio.Component.VC.Tools.x86.x64
-            tool_host: Hostx64
-            tool_target: x64
-            opencv_arch_folder: x64
-            evidence_prefix: WINDOWS_X64
-          - rid: win-x64
-            profile: mini
-            os: windows-latest
-            processor_architecture: AMD64
-            runtime_architecture: X64
-            package_architecture: AMD64
-            platform: x64
-            tool_component: Microsoft.VisualStudio.Component.VC.Tools.x86.x64
-            tool_host: Hostx64
-            tool_target: x64
-            opencv_arch_folder: x64
-            evidence_prefix: WINDOWS_X64
-          - rid: win-arm64
-            profile: full
-            os: windows-11-vs2026-arm
-            processor_architecture: ARM64
-            runtime_architecture: Arm64
-            package_architecture: ARM64
-            platform: ARM64
-            tool_component: Microsoft.VisualStudio.Component.VC.Tools.ARM64
-            tool_host: Hostarm64
-            tool_target: arm64
-            opencv_arch_folder: ARM64
-            evidence_prefix: WINDOWS_ARM64
-          - rid: win-arm64
-            profile: mini
-            os: windows-11-vs2026-arm
-            processor_architecture: ARM64
-            runtime_architecture: Arm64
-            package_architecture: ARM64
-            platform: ARM64
-            tool_component: Microsoft.VisualStudio.Component.VC.Tools.ARM64
-            tool_host: Hostarm64
-            tool_target: arm64
-            opencv_arch_folder: ARM64
-            evidence_prefix: WINDOWS_ARM64
+      matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Skip unmatched Windows producer target
-        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
-        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
@@ -1894,85 +1810,12 @@ jobs:
 
   produce-container:
     needs: validate-target
+    if: needs.validate-target.outputs.producer_kind == 'container'
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - rid: ubuntu.22.04-arm64
-            profile: full
-            os: ubuntu-24.04-arm
-            container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
-            opencv_extra_cmake_args: ""
-          - rid: ubuntu.22.04-arm64
-            profile: mini
-            os: ubuntu-24.04-arm
-            container_image: ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
-            opencv_extra_cmake_args: ""
-          - rid: debian.12-arm64
-            profile: full
-            os: ubuntu-24.04-arm
-            container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
-            opencv_extra_cmake_args: ""
-          - rid: debian.12-arm64
-            profile: mini
-            os: ubuntu-24.04-arm
-            container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
-            opencv_extra_cmake_args: ""
-          - rid: debian.12-x64
-            profile: full
-            os: ubuntu-24.04
-            container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
-            opencv_extra_cmake_args: ""
-          - rid: debian.12-x64
-            profile: mini
-            os: ubuntu-24.04
-            container_image: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
-            opencv_extra_cmake_args: ""
-          - rid: fedora.40-x64
-            profile: full
-            os: ubuntu-24.04
-            container_image: fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed
-            opencv_extra_cmake_args: ""
-          - rid: fedora.40-x64
-            profile: mini
-            os: ubuntu-24.04
-            container_image: fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed
-            opencv_extra_cmake_args: ""
-          - rid: rhel.9-x64
-            profile: full
-            os: ubuntu-24.04
-            container_image: registry.access.redhat.com/ubi9/ubi:9.8@sha256:50701171b9917ed51048b614924598d45b00bce9a64b73860c057922fc13bec2
-            opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
-          - rid: rhel.9-x64
-            profile: mini
-            os: ubuntu-24.04
-            container_image: registry.access.redhat.com/ubi9/ubi:9.8@sha256:50701171b9917ed51048b614924598d45b00bce9a64b73860c057922fc13bec2
-            opencv_extra_cmake_args: ""
-          - rid: rocky.9-x64
-            profile: full
-            os: ubuntu-24.04
-            container_image: rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6
-            opencv_extra_cmake_args: "-DCMAKE_CXX_FLAGS=-DCV_AVXVNNI_AVAILABLE=0"
-          - rid: rocky.9-x64
-            profile: mini
-            os: ubuntu-24.04
-            container_image: rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6
-            opencv_extra_cmake_args: ""
-          - rid: alpine.3.20-x64
-            profile: full
-            os: ubuntu-24.04
-            container_image: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
-            opencv_extra_cmake_args: ""
-          - rid: alpine.3.20-x64
-            profile: mini
-            os: ubuntu-24.04
-            container_image: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
-            opencv_extra_cmake_args: ""
+      matrix: ${{ fromJSON(needs.validate-target.outputs.target_matrix) }}
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Skip unmatched container producer target
-        if: ${{ inputs.rid != matrix.rid || inputs.runtime_profile != matrix.profile }}
-        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6

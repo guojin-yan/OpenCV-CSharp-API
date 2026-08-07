@@ -363,16 +363,19 @@ function Test-ReviewRecord {
 
     $runtimeInputWorkflowPath = Join-Path $repo $gate.ProducerWorkflow
     $packWorkflowPath = Join-Path $repo $gate.PackWorkflow
+    $runtimeMatrixPath = Join-Path $repo 'packaging/runtime/runtime-package-matrix.json'
     $runtimeInputWorkflowText = [IO.File]::ReadAllText($runtimeInputWorkflowPath)
+    $runtimeMatrixText = [IO.File]::ReadAllText($runtimeMatrixPath)
     $packWorkflowText = [IO.File]::ReadAllText($packWorkflowPath)
     foreach ($requirement in @(
-        [pscustomobject]@{ Text = 'processor_architecture: AMD64'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = 'runtime_architecture: X64'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = 'package_architecture: x86'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = 'platform: Win32'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = 'tool_host: Hostx64'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = 'tool_target: x86'; Path = $runtimeInputWorkflowPath },
-        [pscustomobject]@{ Text = "'win-x86/full'"; Path = $runtimeInputWorkflowPath },
+        [pscustomobject]@{ Text = '"processorArchitecture": "AMD64"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = '"runtimeArchitecture": "X64"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = '"packageArchitecture": "x86"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = '"platform": "Win32"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = '"toolHost": "Hostx64"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = '"toolTarget": "x86"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = '"rid": "win-x86"'; Path = $runtimeMatrixPath },
+        [pscustomobject]@{ Text = 'target_matrix: ${{ steps.selection.outputs.target_matrix }}'; Path = $runtimeInputWorkflowPath },
         [pscustomobject]@{ Text = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Path = $runtimeInputWorkflowPath },
         [pscustomobject]@{ Text = "real_runtime_artifact_run_id"; Path = $packWorkflowPath },
         [pscustomobject]@{ Text = 'runtime-input-${{ matrix.rid }}-${{ matrix.profile }}'; Path = $packWorkflowPath },
@@ -381,7 +384,7 @@ function Test-ReviewRecord {
         [pscustomobject]@{ Text = 'Test-WindowsRuntimePeClosure.ps1'; Path = $packWorkflowPath },
         [pscustomobject]@{ Text = '-NativeExecutionHost'; Path = $packWorkflowPath }
     )) {
-        $workflowText = if ($requirement.Path -eq $runtimeInputWorkflowPath) { $runtimeInputWorkflowText } else { $packWorkflowText }
+        $workflowText = if ($requirement.Path -eq $runtimeInputWorkflowPath) { $runtimeInputWorkflowText } elseif ($requirement.Path -eq $runtimeMatrixPath) { $runtimeMatrixText } else { $packWorkflowText }
         Assert-True -List $List -Condition $workflowText.Contains($requirement.Text) -Path $requirement.Path -Issue 'Hosted x86 gate workflow requirement is missing' -Text $requirement.Text
     }
     $x86VerifierMatch = [regex]::Match($packWorkflowText, '(?ms)^  verify-targeted-real-windows-x86:\r?\n.*?(?=^  verify-targeted-real-windows-x64:)')

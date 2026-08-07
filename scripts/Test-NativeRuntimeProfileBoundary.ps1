@@ -146,8 +146,8 @@ foreach ($expectation in @(
         @($generatorText, 'generated/native_abi_mini_manifest.txt', "ABI generator must own the mini manifest"),
         @($buildNativeText, '[ValidateSet("full", "mini")]', "Build-Native must expose full/mini profiles"),
         @($buildNativeText, '"-DOPENCV_CSHARP_RUNTIME_PROFILE=$RuntimeProfile"', "Build-Native must pass runtime profile to CMake"),
-        @($workflowText, "'ubuntu.24.04-x64/mini'", "Runtime producer must explicitly allow the first mini target"),
-        @($workflowText, 'profile: mini', "Runtime producer matrix must include a mini row"),
+        @($workflowText, 'target_matrix: ${{ steps.selection.outputs.target_matrix }}', "Runtime producer must select an exact validated target matrix"),
+        @($workflowText, '$producer.profiles', "Runtime producer selection must retain full/mini profile metadata"),
         @($workflowText, '"-DOPENCV_CSHARP_RUNTIME_PROFILE=${{ matrix.profile }}"', "Hosted producer must pass runtime profile to CMake"),
         @($workflowText, '"-DOPENCV_CSHARP_RUNTIME_PROFILE=$RUNTIME_PROFILE"', "Container producer must pass runtime profile to CMake"))) {
     Assert-Contains -Text $expectation[0] -Needle $expectation[1] -Description $expectation[2]

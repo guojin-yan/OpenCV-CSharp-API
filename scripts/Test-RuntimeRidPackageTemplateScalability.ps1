@@ -204,8 +204,6 @@ function Assert-PackWorkflowRuntimeMatrixMatchesJson {
 
     $matrix = $RuntimeMatrixText | ConvertFrom-Json
     $expectedByKey = [System.Collections.Generic.Dictionary[string, object]]::new([System.StringComparer]::Ordinal)
-    $seenByKey = [System.Collections.Generic.Dictionary[string, object]]::new([System.StringComparer]::Ordinal)
-
     foreach ($ridSpec in @($matrix.rids)) {
         $rid = [string]$ridSpec.rid
         $runner = [string]$ridSpec.runner
@@ -241,72 +239,32 @@ function Assert-PackWorkflowRuntimeMatrixMatchesJson {
         }
     }
 
-    $workflowEntries = @(Get-PackWorkflowRuntimeMatrixEntries -Text $PackWorkflowText)
-    if ($workflowEntries.Count -eq 0) {
-        Add-Violation -Violations $Violations -Path $PackWorkflowPath -Issue "Pack workflow must declare pack-runtime strategy.matrix.include entries"
-        return
+    if (-not (Test-ContainsText -Text $PackWorkflowText -Needle 'matrix: ${{ fromJSON(needs.validate.outputs.runtime_matrix) }}')) {
+        Add-Violation -Violations $Violations -Path $PackWorkflowPath -Issue "Pack workflow must derive its runtime matrix from the validated input selection"
     }
-
-    foreach ($entry in $workflowEntries) {
-        $rid = [string]$entry.Rid
-        $profile = [string]$entry.Profile
-        $runner = [string]$entry.Runner
-
-        if ([string]::IsNullOrWhiteSpace($rid) -or
-            [string]::IsNullOrWhiteSpace($profile) -or
-            [string]::IsNullOrWhiteSpace($runner)) {
-            Add-Violation `
-                -Violations $Violations `
-                -Path $PackWorkflowPath `
-                -Line ([int]$entry.Line) `
-                -Issue "Each pack-runtime workflow matrix entry must declare rid, profile, and os" `
-                -Text "rid=$rid; profile=$profile; os=$runner"
-            continue
-        }
-
-        $key = "$rid|$profile"
-        if ($seenByKey.ContainsKey($key)) {
-            Add-Violation `
-                -Violations $Violations `
-                -Path $PackWorkflowPath `
-                -Line ([int]$entry.Line) `
-                -Issue "Pack workflow matrix contains duplicate RID/profile pair $key" `
-                -Text "os=$runner"
-            continue
-        }
-
-        $seenByKey.Add($key, $entry)
-
-        if (-not $expectedByKey.ContainsKey($key)) {
-            Add-Violation `
-                -Violations $Violations `
-                -Path $PackWorkflowPath `
-                -Line ([int]$entry.Line) `
-                -Issue "Pack workflow matrix contains RID/profile pair not present in runtime-package-matrix.json" `
-                -Text "$key on $runner"
-            continue
-        }
-
-        $expected = $expectedByKey[$key]
-        if (-not $runner.Equals([string]$expected.Runner, [System.StringComparison]::Ordinal)) {
-            Add-Violation `
-                -Violations $Violations `
-                -Path $PackWorkflowPath `
-                -Line ([int]$entry.Line) `
-                -Issue "Pack workflow runner must match runtime-package-matrix.json for RID/profile pair $key" `
-                -Text "workflow=$runner; matrix=$($expected.Runner)"
+    foreach ($needle in @(
+            'outputs:',
+            'runtime_matrix: ${{ steps.runtime_selection.outputs.runtime_matrix }}',
+            'id: runtime_selection',
+            '$selectedRids = if ($env:RID_INPUT -eq ''all'') { @($matrix.rids) }',
+            '$selectedProfiles = if ($env:RUNTIME_PROFILE_INPUT -eq ''all'') { @($matrix.profiles) }',
+            'rid = [string]$rid.rid',
+            'profile = [string]$profile.name',
+            'os = [string]$rid.runner',
+            '[ordered]@{ include = @($rows) }',
+            'Runtime matrix selection produced no rows',
+            'PACK_RUNTIME_MATRIX_SELECTION_OK')) {
+        if (-not (Test-ContainsText -Text $PackWorkflowText -Needle $needle)) {
+            Add-Violation -Violations $Violations -Path $PackWorkflowPath -Issue "Pack workflow lost validated dynamic matrix selection boundary" -Text $needle
         }
     }
+    if (Test-ContainsText -Text $PackWorkflowText -Needle 'Skip unmatched matrix entry') {
+        Add-Violation -Violations $Violations -Path $PackWorkflowPath -Issue "Pack workflow must not allocate unmatched matrix runners and skip them at step level"
+    }
 
-    foreach ($expectedKey in ($expectedByKey.Keys | Sort-Object)) {
-        if (-not $seenByKey.ContainsKey($expectedKey)) {
-            $expected = $expectedByKey[$expectedKey]
-            Add-Violation `
-                -Violations $Violations `
-                -Path $PackWorkflowPath `
-                -Issue "Pack workflow matrix is missing RID/profile pair from runtime-package-matrix.json" `
-                -Text "$expectedKey on $($expected.Runner)"
-        }
+    $expectedRowCount = @($matrix.rids).Count * @($matrix.profiles).Count
+    if ($expectedByKey.Count -ne $expectedRowCount) {
+        Add-Violation -Violations $Violations -Path $RuntimeMatrixPath -Issue "Runtime package matrix must expand to one unique row per RID/profile pair" -Text "unique=$($expectedByKey.Count); expected=$expectedRowCount"
     }
 }
 
@@ -415,7 +373,6 @@ foreach ($disallowedPublishableLinuxRid in @("linux-x64", "linux-arm64")) {
 
 foreach ($requiredRid in $requiredRuntimeRids) {
     Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "`"rid`": `"$requiredRid`"" -Issue "Runtime package matrix must include RID $requiredRid"
-    Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "rid: $requiredRid" -Issue "Pack workflow matrix must include RID $requiredRid"
 }
 
 foreach ($requiredLinuxRid in @("ubuntu.22.04-x64", "ubuntu.24.04-x64", "debian.12-x64", "fedora.40-x64", "rhel.9-x64", "rocky.9-x64", "alpine.3.20-x64")) {
@@ -424,7 +381,6 @@ foreach ($requiredLinuxRid in @("ubuntu.22.04-x64", "ubuntu.24.04-x64", "debian.
 
 foreach ($requiredProfile in @("full", "mini")) {
     Assert-Contains -Violations $violations -Path $runtimeMatrixPath -Text $runtimeMatrixText -Needle "`"name`": `"$requiredProfile`"" -Issue "Runtime package matrix must include profile $requiredProfile"
-    Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "profile: $requiredProfile" -Issue "Pack workflow matrix must include profile $requiredProfile"
 }
 
 Assert-Matches -Violations $violations -Path $runtimeProjectPath -Text $runtimeProjectText -Pattern "<RuntimePackageRid\b[^>]*>\s*$currentExampleRid\s*</RuntimePackageRid>" -Issue "Runtime package project may keep win-x64 only as its current default RuntimePackageRid"
@@ -545,4 +501,4 @@ if ($violations.Count -gt 0) {
 
 Write-Host "Runtime RID package template scalability guard passed."
 Write-Host "RID/package files checked: $($ridSurfaceFiles.Count)."
-Write-Host "Runtime package matrix checked: full and mini profiles across configured RIDs; pack.yml RID/profile/runner entries match JSON exactly."
+Write-Host "Runtime package matrix checked: full and mini profiles across configured RIDs; pack.yml selects exact JSON-derived rows before runner allocation."

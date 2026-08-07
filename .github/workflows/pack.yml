@@ -55,6 +55,8 @@ jobs:
   validate:
     if: github.repository == 'guojin-yan/OpenCV-CSharp-API'
     runs-on: windows-latest
+    outputs:
+      runtime_matrix: ${{ steps.runtime_selection.outputs.runtime_matrix }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
@@ -81,6 +83,7 @@ jobs:
             -OpenCvVersion $env:OPENCV_VERSION_INPUT `
             -PackageRevision $packageRevision | Out-Null
       - name: Validate runtime selection
+        id: runtime_selection
         shell: pwsh
         env:
           RID_INPUT: ${{ inputs.rid }}
@@ -102,6 +105,24 @@ jobs:
               $env:VALIDATE_SYNTHETIC_RUNTIME_INPUT -ne 'true') {
             throw "win-x86/mini has no approved real runtime producer or target-execution evidence and cannot be packed as a real candidate."
           }
+
+          $selectedRids = if ($env:RID_INPUT -eq 'all') { @($matrix.rids) } else { @($matrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT }) }
+          $selectedProfiles = if ($env:RUNTIME_PROFILE_INPUT -eq 'all') { @($matrix.profiles) } else { @($matrix.profiles | Where-Object { [string]$_.name -ceq $env:RUNTIME_PROFILE_INPUT }) }
+          $rows = foreach ($rid in $selectedRids) {
+            foreach ($profile in $selectedProfiles) {
+              [ordered]@{
+                rid = [string]$rid.rid
+                profile = [string]$profile.name
+                os = [string]$rid.runner
+              }
+            }
+          }
+          if (@($rows).Count -eq 0) {
+            throw "Runtime matrix selection produced no rows for rid=$($env:RID_INPUT), profile=$($env:RUNTIME_PROFILE_INPUT)."
+          }
+          $runtimeMatrix = [ordered]@{ include = @($rows) } | ConvertTo-Json -Compress -Depth 8
+          "runtime_matrix=$runtimeMatrix" >> $env:GITHUB_OUTPUT
+          Write-Host "PACK_RUNTIME_MATRIX_SELECTION_OK rows=$(@($rows).Count) rid=$($env:RID_INPUT) profile=$($env:RUNTIME_PROFILE_INPUT)"
       - name: Check project invariants
         shell: pwsh
         run: |
@@ -178,110 +199,7 @@ jobs:
     needs: validate
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - rid: win-x64
-            profile: full
-            os: windows-latest
-          - rid: win-x64
-            profile: mini
-            os: windows-latest
-          - rid: win-x86
-            profile: full
-            os: windows-latest
-          - rid: win-x86
-            profile: mini
-            os: windows-latest
-          - rid: win-arm64
-            profile: full
-            os: windows-11-vs2026-arm
-          - rid: win-arm64
-            profile: mini
-            os: windows-11-vs2026-arm
-          - rid: ubuntu.22.04-x64
-            profile: full
-            os: ubuntu-22.04
-          - rid: ubuntu.22.04-x64
-            profile: mini
-            os: ubuntu-22.04
-          - rid: ubuntu.22.04-arm64
-            profile: full
-            os: ubuntu-24.04-arm
-          - rid: ubuntu.22.04-arm64
-            profile: mini
-            os: ubuntu-24.04-arm
-          - rid: ubuntu.24.04-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: ubuntu.24.04-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: ubuntu.24.04-arm64
-            profile: full
-            os: ubuntu-24.04-arm
-          - rid: ubuntu.24.04-arm64
-            profile: mini
-            os: ubuntu-24.04-arm
-          - rid: debian.12-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: debian.12-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: debian.12-arm64
-            profile: full
-            os: ubuntu-24.04-arm
-          - rid: debian.12-arm64
-            profile: mini
-            os: ubuntu-24.04-arm
-          - rid: fedora.40-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: fedora.40-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: rhel.9-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: rhel.9-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: rocky.9-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: rocky.9-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: alpine.3.20-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: alpine.3.20-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: android-arm64
-            profile: full
-            os: ubuntu-24.04
-          - rid: android-arm64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: android-arm
-            profile: full
-            os: ubuntu-24.04
-          - rid: android-arm
-            profile: mini
-            os: ubuntu-24.04
-          - rid: android-x64
-            profile: full
-            os: ubuntu-24.04
-          - rid: android-x64
-            profile: mini
-            os: ubuntu-24.04
-          - rid: android-x86
-            profile: full
-            os: ubuntu-24.04
-          - rid: android-x86
-            profile: mini
-            os: ubuntu-24.04
+      matrix: ${{ fromJSON(needs.validate.outputs.runtime_matrix) }}
     runs-on: ${{ matrix.os }}
     permissions:
       actions: read
@@ -299,9 +217,6 @@ jobs:
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
         shell: pwsh
         run: throw "Synthetic runtime inputs validate package shape only and must not be published."
-      - name: Skip unmatched matrix entry
-        if: ${{ !((inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile)) }}
-        run: echo "Skipping ${{ matrix.rid }} / ${{ matrix.profile }} for selected workflow inputs."
       - name: Create synthetic runtime inputs
         id: synthetic
         if: ${{ (inputs.rid == 'all' || inputs.rid == matrix.rid) && (inputs.runtime_profile == 'all' || inputs.runtime_profile == matrix.profile) && inputs.validate_synthetic_runtime == 'true' }}

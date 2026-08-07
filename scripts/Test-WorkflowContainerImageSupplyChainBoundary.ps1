@@ -130,6 +130,8 @@ $runtimeLines = [System.IO.File]::ReadAllLines($runtimePath)
 $packLines = [System.IO.File]::ReadAllLines($packPath)
 $runtimeText = [System.IO.File]::ReadAllText($runtimePath)
 $packText = [System.IO.File]::ReadAllText($packPath)
+$runtimeMatrixPath = Join-Path $repo "packaging/runtime/runtime-package-matrix.json"
+$runtimeMatrix = Get-Content -LiteralPath $runtimeMatrixPath -Raw | ConvertFrom-Json
 $allWorkflowText = ($workflowFiles | ForEach-Object { [System.IO.File]::ReadAllText($_.FullName) }) -join "`n"
 
 $approvedByRid = [ordered]@{
@@ -155,36 +157,16 @@ if ($null -eq $producerBounds) {
 }
 else {
     $producerRows = [System.Collections.Generic.List[object]]::new()
-    $current = $null
-    for ($index = $producerBounds.Start; $index -lt $producerBounds.End; $index++) {
-        $line = $runtimeLines[$index]
-        if ($line -match '^\s{10}- rid:\s*(\S+)\s*$') {
-            if ($null -ne $current) {
-                $producerRows.Add($current)
-            }
-            $current = [pscustomobject]@{
-                Rid = Convert-YamlScalar -Value $Matches[1]
-                Profile = ""
-                Image = ""
-                RidLine = $index + 1
+    foreach ($ridSpec in @($runtimeMatrix.rids | Where-Object { $_.producer.kind -eq 'container' })) {
+        foreach ($profile in @($ridSpec.producer.profiles)) {
+            $producerRows.Add([pscustomobject]@{
+                Rid = [string]$ridSpec.rid
+                Profile = [string]$profile
+                Image = [string]$ridSpec.producer.containerImage
+                RidLine = 0
                 ImageLine = 0
-            }
-            continue
+            })
         }
-
-        if ($null -eq $current) {
-            continue
-        }
-        if ($line -match '^\s{12}profile:\s*(\S+)\s*$') {
-            $current.Profile = Convert-YamlScalar -Value $Matches[1]
-        }
-        elseif ($line -match '^\s{12}container_image:\s*(\S+)\s*$') {
-            $current.Image = Convert-YamlScalar -Value $Matches[1]
-            $current.ImageLine = $index + 1
-        }
-    }
-    if ($null -ne $current) {
-        $producerRows.Add($current)
     }
 
     if ($producerRows.Count -ne 14) {
