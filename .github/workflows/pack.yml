@@ -1270,7 +1270,7 @@ jobs:
           $actualModules = @($provenance.RequiredModules)
           $actualRuntimeNames = @($provenance.RuntimeFiles | ForEach-Object { [string]$_.FileName })
           $actualLoaderNames = @($provenance.NativeLoaderFiles | ForEach-Object { [string]$_.FileName })
-          if ($expectedModules.Count -ne 16 -or
+          if ($expectedModules.Count -ne 17 -or
               $provenance.Rid -ne 'win-x86' -or
               $provenance.OpenCvRid -ne 'windows-x86' -or
               $provenance.PlatformFamily -ne 'windows' -or
@@ -1278,16 +1278,16 @@ jobs:
               $provenance.RuntimeProfilePackageIdSuffix -ne '' -or
               $provenance.BuildList -ne [string]$profile[0].buildList -or
               [bool]$provenance.SyntheticRuntimeInputs -or
-              $actualModules.Count -ne 16 -or
+              $actualModules.Count -ne 17 -or
               @($expectedModules | Where-Object { $actualModules -notcontains $_ }).Count -ne 0 -or
               @($actualModules | Where-Object { $expectedModules -notcontains $_ }).Count -ne 0 -or
-              $actualRuntimeNames.Count -ne 16 -or
+              $actualRuntimeNames.Count -ne 17 -or
               @($expectedRuntimeNames | Where-Object { $actualRuntimeNames -notcontains $_ }).Count -ne 0 -or
               @($actualRuntimeNames | Where-Object { $expectedRuntimeNames -notcontains $_ }).Count -ne 0 -or
               $actualLoaderNames.Count -ne 1 -or
               $actualLoaderNames -notcontains 'JYPPX.OpenCV.Native.dll'
           ) {
-            throw "Windows x86 runtime-input provenance does not match the exact 17-I386-DLL full producer contract."
+            throw "Windows x86 runtime-input provenance does not match the exact 18-file/17-OpenCV-DLL I386 full producer contract."
           }
 
           foreach ($requiredValue in @(
