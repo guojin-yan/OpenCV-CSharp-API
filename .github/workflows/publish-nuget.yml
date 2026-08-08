@@ -373,7 +373,7 @@ jobs:
               --api-key $env:GITHUB_PACKAGES_TOKEN
             if ($LASTEXITCODE -ne 0) { throw "GitHub Packages upload failed: $($package.Name)" }
           }
-          Write-Host 'GitHub Packages uploads default to private visibility. Make all 29 current candidate packages public before running verify_publication.'
+          Write-Host 'GitHub Packages uploads default to private visibility. Make all 30 current candidate packages public before running verify_publication.'
 
   verify-nuget:
     needs: prepare
