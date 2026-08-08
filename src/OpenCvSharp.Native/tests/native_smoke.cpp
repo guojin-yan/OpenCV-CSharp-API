@@ -6843,6 +6843,22 @@ int main()
     if (status == OPENCV_CSHARP_STATUS_NOT_LINKED)
     {
 #if !defined(OPENCV_CSHARP_RUNTIME_PROFILE_MINI)
+        const jyppx_ocv_dnn_rect nms_rects[] = { { 0, 0, 4, 4 } };
+        const jyppx_ocv_dnn_rect2d nms_rects2d[] = { { 0, 0, 4, 4 } };
+        const jyppx_ocv_dnn_rotated_rect nms_rotated_rects[] = { { 2, 2, 4, 4, 0 } };
+        const float nms_scores[] = { 0.9F };
+        const int nms_class_ids[] = { 0 };
+        int nms_indices[] = { -1 };
+        int nms_index_count = -1;
+        if (jyppx_ocv_dnn_nms_boxes_rect(nms_rects, 1, nms_scores, 1, 0.1F, 0.5F, 1.0F, 0, nms_indices, 1, &nms_index_count) != OPENCV_CSHARP_STATUS_NOT_LINKED || nms_index_count != 0) return 968;
+        nms_index_count = -1;
+        if (jyppx_ocv_dnn_nms_boxes_rect2d(nms_rects2d, 1, nms_scores, 1, 0.1F, 0.5F, 1.0F, 0, nms_indices, 1, &nms_index_count) != OPENCV_CSHARP_STATUS_NOT_LINKED || nms_index_count != 0) return 968;
+        nms_index_count = -1;
+        if (jyppx_ocv_dnn_nms_boxes_rotated_rect(nms_rotated_rects, 1, nms_scores, 1, 0.1F, 0.5F, 1.0F, 0, nms_indices, 1, &nms_index_count) != OPENCV_CSHARP_STATUS_NOT_LINKED || nms_index_count != 0) return 968;
+        nms_index_count = -1;
+        if (jyppx_ocv_dnn_nms_boxes_batched_rect(nms_rects, 1, nms_scores, 1, nms_class_ids, 1, 0.1F, 0.5F, 1.0F, 0, nms_indices, 1, &nms_index_count) != OPENCV_CSHARP_STATUS_NOT_LINKED || nms_index_count != 0) return 968;
+        nms_index_count = -1;
+        if (jyppx_ocv_dnn_nms_boxes_batched_rect2d(nms_rects2d, 1, nms_scores, 1, nms_class_ids, 1, 0.1F, 0.5F, 1.0F, 0, nms_indices, 1, &nms_index_count) != OPENCV_CSHARP_STATUS_NOT_LINKED || nms_index_count != 0) return 968;
         jyppx_ocv_ml_model* ann = nullptr;
         if (jyppx_ocv_ml_ann_mlp_create(&ann) != OPENCV_CSHARP_STATUS_NOT_LINKED || ann != nullptr)
         {

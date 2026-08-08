@@ -187,6 +187,57 @@ namespace
         return OPENCV_CSHARP_STATUS_OK;
     }
 
+    template <typename TBox>
+    int nms_boxes_not_linked(
+        const char* api_name,
+        const TBox* boxes,
+        int box_count,
+        const float* scores,
+        int score_count,
+        float score_threshold,
+        float nms_threshold,
+        float eta,
+        int top_k,
+        int* indices,
+        int index_capacity,
+        int* index_count)
+    {
+        const int status = validate_nms_arguments(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        *index_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+    }
+
+    template <typename TBox>
+    int nms_boxes_batched_not_linked(
+        const char* api_name,
+        const TBox* boxes,
+        int box_count,
+        const float* scores,
+        int score_count,
+        const int* class_ids,
+        int class_id_count,
+        float score_threshold,
+        float nms_threshold,
+        float eta,
+        int top_k,
+        int* indices,
+        int index_capacity,
+        int* index_count)
+    {
+        int status = validate_nms_arguments(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+        if (status != OPENCV_CSHARP_STATUS_OK) return status;
+        status = validate_int_array(api_name, class_ids, class_id_count, "class_ids");
+        if (status != OPENCV_CSHARP_STATUS_OK || class_id_count != box_count)
+            return status != OPENCV_CSHARP_STATUS_OK ? status : opencv_csharp_native::set_invalid_argument(api_name, "class_id_count");
+        *index_count = 0;
+        return opencv_csharp_native::set_not_linked(api_name);
+    }
+
     int validate_mat_shape_array(const char* api_name, const int* values, int value_count, const char* argument_name)
     {
         const int status = validate_int_array(api_name, values, value_count, argument_name);
@@ -3053,9 +3104,15 @@ int jyppx_ocv_dnn_nms_boxes_rect(
     try
     {
         opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
         return nms_boxes<jyppx_ocv_dnn_rect, cv::Rect>(
             api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
             eta, top_k, indices, index_capacity, index_count, to_rect);
+#else
+        return nms_boxes_not_linked(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+#endif
     }
     catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
@@ -3070,9 +3127,15 @@ int jyppx_ocv_dnn_nms_boxes_rect2d(
     try
     {
         opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
         return nms_boxes<jyppx_ocv_dnn_rect2d, cv::Rect2d>(
             api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
             eta, top_k, indices, index_capacity, index_count, to_rect2d);
+#else
+        return nms_boxes_not_linked(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+#endif
     }
     catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
@@ -3087,9 +3150,15 @@ int jyppx_ocv_dnn_nms_boxes_rotated_rect(
     try
     {
         opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
         return nms_boxes<jyppx_ocv_dnn_rotated_rect, cv::RotatedRect>(
             api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
             eta, top_k, indices, index_capacity, index_count, to_rotated_rect);
+#else
+        return nms_boxes_not_linked(
+            api_name, boxes, box_count, scores, score_count, score_threshold, nms_threshold,
+            eta, top_k, indices, index_capacity, index_count);
+#endif
     }
     catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
@@ -3105,9 +3174,15 @@ int jyppx_ocv_dnn_nms_boxes_batched_rect(
     try
     {
         opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
         return nms_boxes_batched<jyppx_ocv_dnn_rect, cv::Rect>(
             api_name, boxes, box_count, scores, score_count, class_ids, class_id_count,
             score_threshold, nms_threshold, eta, top_k, indices, index_capacity, index_count, to_rect);
+#else
+        return nms_boxes_batched_not_linked(
+            api_name, boxes, box_count, scores, score_count, class_ids, class_id_count,
+            score_threshold, nms_threshold, eta, top_k, indices, index_capacity, index_count);
+#endif
     }
     catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
@@ -3123,9 +3198,15 @@ int jyppx_ocv_dnn_nms_boxes_batched_rect2d(
     try
     {
         opencv_csharp_native::clear_last_error();
+#if defined(OPENCV_CSHARP_HAS_OPENCV)
         return nms_boxes_batched<jyppx_ocv_dnn_rect2d, cv::Rect2d>(
             api_name, boxes, box_count, scores, score_count, class_ids, class_id_count,
             score_threshold, nms_threshold, eta, top_k, indices, index_capacity, index_count, to_rect2d);
+#else
+        return nms_boxes_batched_not_linked(
+            api_name, boxes, box_count, scores, score_count, class_ids, class_id_count,
+            score_threshold, nms_threshold, eta, top_k, indices, index_capacity, index_count);
+#endif
     }
     catch (...) { return opencv_csharp_native::translate_current_exception(api_name); }
 }
