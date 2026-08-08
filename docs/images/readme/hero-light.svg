@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">OpenCV CSharp API</title>
+  <desc id="desc">OpenCV 5 bindings for C# and .NET, illustrated as C# bringing a pixel image into focus.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#233044" flood-opacity="0.14"/>
+    </filter>
+    <clipPath id="pixels">
+      <rect x="698" y="82" width="116" height="138" rx="6"/>
+    </clipPath>
+    <clipPath id="result">
+      <rect x="912" y="65" width="232" height="170" rx="6"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="300" fill="#F7FAFC"/>
+  <rect x="0" y="0" width="8" height="300" fill="#5B48B7"/>
+
+  <text x="54" y="86" fill="#172033" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="46" font-weight="750">OpenCV <tspan fill="#5B48B7">CSharp API</tspan></text>
+  <text x="56" y="128" fill="#4A586B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="19" font-weight="500">OpenCV 5 bindings for C# and .NET</text>
+
+  <g filter="url(#shadow)">
+    <rect x="54" y="151" width="536" height="52" rx="8" fill="#172033"/>
+  </g>
+  <circle cx="76" cy="177" r="4" fill="#FF6673"/>
+  <text x="91" y="183" fill="#F3F7FB" font-family="ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace" font-size="15" font-weight="600">dotnet add package JYPPX.OpenCV.CSharp.API</text>
+
+  <circle cx="61" cy="239" r="5" fill="#16A6D9"/>
+  <text x="75" y="245" fill="#526174" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700">COMPUTER VISION</text>
+  <circle cx="225" cy="239" r="5" fill="#63C74D"/>
+  <text x="239" y="245" fill="#526174" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13" font-weight="700">MANAGED + NATIVE</text>
+
+  <path d="M797 151H935" fill="none" stroke="#CBD6E2" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="818" cy="151" r="7" fill="#16A6D9"/>
+  <circle cx="845" cy="151" r="7" fill="#63C74D"/>
+  <circle cx="872" cy="151" r="7" fill="#FF6673"/>
+
+  <g filter="url(#shadow)">
+    <rect x="688" y="72" width="136" height="158" rx="8" fill="#FFFFFF" stroke="#D7E0EA" stroke-width="2"/>
+  </g>
+  <g clip-path="url(#pixels)">
+    <rect x="698" y="82" width="116" height="138" fill="#D9F1FA"/>
+    <rect x="698" y="82" width="29" height="28" fill="#A6DFF2"/>
+    <rect x="727" y="82" width="29" height="28" fill="#BDE8F6"/>
+    <rect x="756" y="82" width="29" height="28" fill="#8FD4EC"/>
+    <rect x="785" y="82" width="29" height="28" fill="#BDE8F6"/>
+    <rect x="698" y="110" width="29" height="28" fill="#BDE8F6"/>
+    <rect x="727" y="110" width="29" height="28" fill="#8FD4EC"/>
+    <rect x="756" y="110" width="29" height="28" fill="#BDE8F6"/>
+    <rect x="785" y="110" width="29" height="28" fill="#A6DFF2"/>
+    <rect x="698" y="138" width="29" height="28" fill="#63C74D"/>
+    <rect x="727" y="138" width="29" height="28" fill="#A6DFF2"/>
+    <rect x="756" y="138" width="29" height="28" fill="#63C74D"/>
+    <rect x="785" y="138" width="29" height="28" fill="#8FD4EC"/>
+    <rect x="698" y="166" width="29" height="27" fill="#8ACF58"/>
+    <rect x="727" y="166" width="29" height="27" fill="#63C74D"/>
+    <rect x="756" y="166" width="29" height="27" fill="#FF8790"/>
+    <rect x="785" y="166" width="29" height="27" fill="#63C74D"/>
+    <rect x="698" y="193" width="29" height="27" fill="#63C74D"/>
+    <rect x="727" y="193" width="29" height="27" fill="#8ACF58"/>
+    <rect x="756" y="193" width="29" height="27" fill="#63C74D"/>
+    <rect x="785" y="193" width="29" height="27" fill="#8ACF58"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <polygon points="856,106 895,128 895,174 856,196 817,174 817,128" fill="#6D50C8"/>
+  </g>
+  <polygon points="856,116 886,133 886,169 856,186 826,169 826,133" fill="none" stroke="#BFB0F3" stroke-width="2"/>
+  <text x="856" y="160" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="25" font-weight="800">C#</text>
+
+  <g filter="url(#shadow)">
+    <rect x="902" y="55" width="252" height="190" rx="8" fill="#FFFFFF" stroke="#D7E0EA" stroke-width="2"/>
+  </g>
+  <g clip-path="url(#result)">
+    <rect x="912" y="65" width="232" height="170" fill="#C9ECF8"/>
+    <circle cx="1106" cy="93" r="19" fill="#FFE06A"/>
+    <path d="M912 153L958 111L1001 151L1031 125L1083 166L1144 126V235H912Z" fill="#72C9E8"/>
+    <path d="M912 177L959 141L998 169L1036 137L1097 180L1144 154V235H912Z" fill="#63C74D"/>
+    <path d="M912 205C953 186 979 193 1014 207C1050 221 1083 191 1144 185V235H912Z" fill="#3DA66D"/>
+    <rect x="1022" y="155" width="49" height="56" rx="8" fill="#FF6673"/>
+    <path d="M1068 166H1080C1093 166 1093 190 1080 190H1069" fill="none" stroke="#D84C5D" stroke-width="7"/>
+    <path d="M1014 148H1028M1014 148V162M1078 148H1064M1078 148V162M1014 218H1028M1014 218V204M1078 218H1064M1078 218V204" fill="none" stroke="#5B48B7" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="1046" cy="181" r="4" fill="#FFFFFF"/>
+    <circle cx="1032" cy="169" r="4" fill="#16A6D9"/>
+    <circle cx="1060" cy="198" r="4" fill="#FFE06A"/>
+  </g>
+  <rect x="917" y="70" width="222" height="160" rx="4" fill="none" stroke="#FFFFFF" stroke-opacity="0.72" stroke-width="2"/>
+</svg>

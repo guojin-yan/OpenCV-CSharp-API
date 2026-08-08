@@ -271,13 +271,20 @@ function New-DeterministicManifest {
         }
         HostedPromotion = [ordered]@{
             Target = 'win-x86/full'
-            Status = 'pending-hosted-evidence'
-            ProducerRunId = ''
-            PackRunId = ''
-            ConsumerRunId = ''
+            Status = 'verified-hosted-evidence'
+            SourceCommit = '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8'
+            ProducerRunId = 31162854992
+            ProducerArtifactId = 8988306107
             ProducerArtifactName = 'runtime-input-win-x86-full'
+            ProducerArtifactDigest = 'sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8'
+            PackRunId = 31171822232
+            PackageArtifactId = 8991471168
             PackageArtifactName = 'nupkg-win-x86-full'
+            PackageArtifactDigest = 'sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe'
+            ConsumerRunId = 31171822232
             ConsumerProcessArchitecture = 'X86'
+            HostedCloseoutSha256 = '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81'
+            ArtifactDigestAuditSha256 = 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded'
         }
         Rollback = [ordered]@{
             CandidateId = "$($Package.PackageId)/$($Package.PackageVersion)/$Rid/$RuntimeProfile"
@@ -337,8 +344,11 @@ function Test-Manifest {
     Assert-True -Violations $Violations -Condition ($null -ne $Manifest.SbomHandoff -and $Manifest.SbomHandoff.Status -eq 'not-ready') -Path $ManifestPath -Issue "SBOM handoff must remain not-ready without generator inputs"
     Assert-True -Violations $Violations -Condition ($Manifest.SbomHandoff.PackageSha256 -eq $Package.PackageSha256) -Path $ManifestPath -Issue "SBOM handoff package hash must match package"
     Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.SbomHandoff.DocumentSha256)) -Path $ManifestPath -Issue "Not-ready SBOM handoff must not claim a document hash"
-    Assert-True -Violations $Violations -Condition ($null -ne $Manifest.HostedPromotion -and $Manifest.HostedPromotion.Target -eq 'win-x86/full' -and $Manifest.HostedPromotion.Status -eq 'pending-hosted-evidence') -Path $ManifestPath -Issue "Windows x86 promotion must remain hosted-evidence-pending"
-    Assert-True -Violations $Violations -Condition ([string]::IsNullOrWhiteSpace([string]$Manifest.HostedPromotion.ProducerRunId) -and [string]::IsNullOrWhiteSpace([string]$Manifest.HostedPromotion.PackRunId) -and [string]::IsNullOrWhiteSpace([string]$Manifest.HostedPromotion.ConsumerRunId)) -Path $ManifestPath -Issue "Pending Windows x86 promotion must not claim hosted run IDs"
+    $promotion = $Manifest.HostedPromotion
+    Assert-True -Violations $Violations -Condition ($null -ne $promotion -and $promotion.Target -eq 'win-x86/full' -and $promotion.Status -eq 'verified-hosted-evidence' -and $promotion.SourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8') -Path $ManifestPath -Issue "Windows x86 promotion must bind verified hosted evidence"
+    Assert-True -Violations $Violations -Condition ([long]$promotion.ProducerRunId -eq 31162854992 -and [long]$promotion.ProducerArtifactId -eq 8988306107 -and $promotion.ProducerArtifactName -eq 'runtime-input-win-x86-full' -and $promotion.ProducerArtifactDigest -eq 'sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8') -Path $ManifestPath -Issue "Windows x86 producer evidence drifted"
+    Assert-True -Violations $Violations -Condition ([long]$promotion.PackRunId -eq 31171822232 -and [long]$promotion.PackageArtifactId -eq 8991471168 -and $promotion.PackageArtifactName -eq 'nupkg-win-x86-full' -and $promotion.PackageArtifactDigest -eq 'sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe' -and [long]$promotion.ConsumerRunId -eq 31171822232 -and $promotion.ConsumerProcessArchitecture -eq 'X86') -Path $ManifestPath -Issue "Windows x86 pack and consumer evidence drifted"
+    Assert-True -Violations $Violations -Condition ($promotion.HostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $promotion.ArtifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded') -Path $ManifestPath -Issue "Windows x86 hosted audit hash binding drifted"
 
     $actualEntries = @($Package.Entries | ForEach-Object { "$($_.Path)|$($_.Length)|$($_.Sha256)" })
     $manifestEntries = @($Manifest.Entries | ForEach-Object { "$($_.Path)|$($_.Length)|$($_.Sha256)" })

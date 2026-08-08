@@ -1,6 +1,8 @@
-<p align="center">
-  <img src="https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light" alt="OpenCV CSharp API" width="100%" />
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/readme/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/readme/hero-light.svg">
+  <img alt="OpenCV CSharp API - 面向 C# 与 .NET 的 OpenCV 5 封装" src="docs/images/readme/hero-light.svg" width="100%">
+</picture>
 
 <h1 align="center">OpenCV CSharp API</h1>
 
@@ -9,13 +11,11 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0 License" /></a>
-  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg?label=version" alt="NuGet 稳定版本" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg?label=nuget" alt="最新 NuGet 版本" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet 下载量" /></a>
-  <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-package%20feed-24292f" alt="GitHub Packages 源" /></a>
-  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/releases"><img src="https://img.shields.io/github/v/release/guojin-yan/OpenCV-CSharp-API?label=Release" alt="GitHub Release" /></a>
-  <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4" alt="支持的 .NET 版本" /></a>
-  <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8" alt="上游 Upstream OpenCV 5.0.0" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/releases"><img src="https://img.shields.io/github/v/release/guojin-yan/OpenCV-CSharp-API?include_prereleases&amp;label=release" alt="最新 GitHub Release" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/stargazers"><img src="https://img.shields.io/github/stars/guojin-yan/OpenCV-CSharp-API?style=flat&amp;label=stars" alt="GitHub Stars" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0 许可证" /></a>
 </p>
 
 <p align="center">
@@ -126,6 +126,7 @@ full profile 保证包含矩阵要求的模块，包括 DNN、ML、标定、Feat
 | 平台 | 架构 | Full runtime | Mini runtime |
 | --- | --- | --- | --- |
 | Windows 10/11 | x64 | `JYPPX.OpenCV.runtime.win-x64`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64) | `JYPPX.OpenCV.runtime.win-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64.mini) |
+| Windows 10/11 (WoW64) | x86 | `JYPPX.OpenCV.runtime.win-x86`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-x86.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x86/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x86/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x86) | 已排除（`win-x86/mini`） |
 | Windows 11 | ARM64 | `JYPPX.OpenCV.runtime.win-arm64`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64) | `JYPPX.OpenCV.runtime.win-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64.mini) |
 | Android 7.0+ 模拟器 | x86_64 | `JYPPX.OpenCV.runtime.android-x64`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x64) | `JYPPX.OpenCV.runtime.android-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x64.mini) |
 | Android 7.0+ 模拟器 | x86 | `JYPPX.OpenCV.runtime.android-x86`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x86.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x86) | `JYPPX.OpenCV.runtime.android-x86.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x86.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86.mini/) / [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x86.mini) |
@@ -142,7 +143,7 @@ full profile 保证包含矩阵要求的模块，包括 DNN、ML、标定、Feat
 
 Linux runtime 包使用 distro-specific Linux RID，不使用模糊的通用 `linux-x64` 身份。如果 .NET SDK 无法识别项目定义的 RID，请将 `RuntimeIdentifierGraphPath` 指向 [`packaging/runtime/runtime-distro-rid-graph.json`](packaging/runtime/runtime-distro-rid-graph.json)，或在 restore 前把该文件复制到 consumer 项目。
 
-Android x64/x86 的 Full 与 Mini 已通过正式单加载器 NDK 构建、包与 APK 审计，以及模拟器内 `Mat` 加 `Cv2.Sum` 原生加载，现已归类为 `realSupport`；已淘汰的双加载器运行记录保留在 [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json) 的 `superseded` 区域。Android ARM/ARM64 的 Full 与 Mini 仍为 `android-evidence-pending`：其托管生产和包证据已经通过，但在晋升前仍需 ABI 匹配的真机加载证据。`win-x86/full` 仍为 `hosted-evidence-pending`，`win-x86/mini` 被排除，macOS 位于声明的 runtime package matrix 之外。矩阵中存在某一行，不等于项目对该平台作出正式支持承诺。
+Windows x86 Full 已通过正式 hosted WoW64 producer、artifact、package、PE/I386 闭包与 X86 consumer 证据并归类为 `realSupport`；Windows x86 Mini 仍被排除。Android x64/x86 的 Full 与 Mini 已通过正式单加载器 NDK 构建、包与 APK 审计，以及模拟器内 `Mat` 加 `Cv2.Sum` 原生加载，现已归类为 `realSupport`；已淘汰的双加载器运行记录保留在 [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json) 的 `superseded` 区域。Android ARM/ARM64 的 Full 与 Mini 仍为 `android-evidence-pending`：其托管生产和包证据已经通过，但在晋升前仍需 ABI 匹配的真机加载证据。macOS 位于声明的 runtime package matrix 之外。矩阵中存在某一行，不等于项目对该平台作出正式支持承诺。
 
 如果 no matching runtime package，请使用 `scripts/Build-OpenCV.ps1` 构建 local native runtime，再通过 `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>` 暂存，并用 `OpenCvNativeRuntimeDir` 将本地示例或测试指向该目录。对应 package fallback 命令为 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`。完整流程见 [Linked Runtime 构建指南](docs/articles/linked-runtime-build-guide.md)。
 

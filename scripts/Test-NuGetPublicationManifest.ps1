@@ -44,11 +44,11 @@ if ([int]$input.SchemaVersion -ne 1 -or [string]$input.SourceRevision -cne $Sour
 }
 
 $realTargets = @($support.realSupport | ForEach-Object { [string]$_ } | Sort-Object)
-if ($realTargets.Count -ne 28 -or @($realTargets | Sort-Object -Unique).Count -ne 28) {
-    throw "Runtime support contract must contain exactly 28 unique real-supported targets after Android x64/x86 promotion. Actual: $($realTargets.Count)"
+if ($realTargets.Count -ne 29 -or @($realTargets | Sort-Object -Unique).Count -ne 29) {
+    throw "Runtime support contract must contain exactly 29 unique real-supported targets after Windows x86 full promotion. Actual: $($realTargets.Count)"
 }
 $supportHash = (Get-FileHash -LiteralPath $resolvedSupport -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($isNormalized -and ([string]$input.SupportContractSha256 -cne $supportHash -or [int]$input.PackageCount -ne 29 -or [int]$input.RuntimePackageCount -ne 28)) {
+if ($isNormalized -and ([string]$input.SupportContractSha256 -cne $supportHash -or [int]$input.PackageCount -ne 30 -or [int]$input.RuntimePackageCount -ne 29)) {
     throw 'Normalized publication manifest support binding or package counts drifted.'
 }
 

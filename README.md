@@ -1,6 +1,8 @@
-<p align="center">
-  <img src="https://socialify.git.ci/guojin-yan/OpenCV-CSharp-API/image?description=1&descriptionEditable=OpenCV%205.0%20bindings%20for%20C%23%20and%20.NET&forks=1&issues=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Light" alt="OpenCV CSharp API" width="100%" />
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/readme/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/readme/hero-light.svg">
+  <img alt="OpenCV CSharp API - OpenCV 5 bindings for C# and .NET" src="docs/images/readme/hero-light.svg" width="100%">
+</picture>
 
 <h1 align="center">OpenCV CSharp API</h1>
 
@@ -9,13 +11,11 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0 License" /></a>
-  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/v/JYPPX.OpenCV.CSharp.API.svg?label=version" alt="NuGet stable version" /></a>
+  <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/vpre/JYPPX.OpenCV.CSharp.API.svg?label=nuget" alt="Latest NuGet version" /></a>
   <a href="https://www.nuget.org/packages/JYPPX.OpenCV.CSharp.API/"><img src="https://img.shields.io/nuget/dt/JYPPX.OpenCV.CSharp.API.svg" alt="NuGet downloads" /></a>
-  <a href="https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.CSharp.API"><img src="https://img.shields.io/badge/GitHub%20Packages-package%20feed-24292f" alt="GitHub Packages feed" /></a>
-  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/releases"><img src="https://img.shields.io/github/v/release/guojin-yan/OpenCV-CSharp-API?label=Release" alt="GitHub Release" /></a>
-  <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-Framework%204.6--4.8.1%20%7C%20Core%203.1%20%7C%205--10-512BD4" alt="Supported .NET versions" /></a>
-  <a href="https://opencv.org/"><img src="https://img.shields.io/badge/OpenCV-5.0.0-5C3EE8" alt="Upstream OpenCV 5.0.0" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/releases"><img src="https://img.shields.io/github/v/release/guojin-yan/OpenCV-CSharp-API?include_prereleases&amp;label=release" alt="Latest GitHub release" /></a>
+  <a href="https://github.com/guojin-yan/OpenCV-CSharp-API/stargazers"><img src="https://img.shields.io/github/stars/guojin-yan/OpenCV-CSharp-API?style=flat&amp;label=stars" alt="GitHub stars" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="Apache-2.0 license" /></a>
 </p>
 
 <p align="center">
@@ -126,6 +126,7 @@ Each release publishes the managed package and every runtime package classified 
 | Platform | Architecture | Full runtime | Mini runtime |
 | --- | --- | --- | --- |
 | Windows 10/11 | x64 | `JYPPX.OpenCV.runtime.win-x64`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64) | `JYPPX.OpenCV.runtime.win-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x64.mini) |
+| Windows 10/11 (WoW64) | x86 | `JYPPX.OpenCV.runtime.win-x86`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-x86.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x86/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-x86/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-x86) | Excluded (`win-x86/mini`) |
 | Windows 11 | ARM64 | `JYPPX.OpenCV.runtime.win-arm64`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-arm64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64) | `JYPPX.OpenCV.runtime.win-arm64.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.win-arm64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.win-arm64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.win-arm64.mini) |
 | Android 7.0+ emulator | x86_64 | `JYPPX.OpenCV.runtime.android-x64`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x64.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x64) | `JYPPX.OpenCV.runtime.android-x64.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x64.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x64.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x64.mini) |
 | Android 7.0+ emulator | x86 | `JYPPX.OpenCV.runtime.android-x86`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x86.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x86) | `JYPPX.OpenCV.runtime.android-x86.mini`<br>[![NuGet version](https://img.shields.io/nuget/v/JYPPX.OpenCV.runtime.android-x86.mini.svg?label=version)](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86.mini/)<br>[NuGet.org](https://www.nuget.org/packages/JYPPX.OpenCV.runtime.android-x86.mini/) · [GitHub](https://github.com/users/guojin-yan/packages/nuget/package/JYPPX.OpenCV.runtime.android-x86.mini) |
@@ -142,7 +143,7 @@ Each release publishes the managed package and every runtime package classified 
 
 Linux packages use a distro-specific Linux RID rather than a generic `linux-x64` identity. If the .NET SDK does not recognize a project-defined RID, set `RuntimeIdentifierGraphPath` to [`packaging/runtime/runtime-distro-rid-graph.json`](packaging/runtime/runtime-distro-rid-graph.json) or copy that graph into the consuming project before restore.
 
-Android x64/x86 Full and Mini are real-supported after authoritative single-loader NDK builds, package/APK audits, and emulator-native `Mat` plus `Cv2.Sum` loading; the retired dual-loader records remain under `superseded` in [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json). Android ARM/ARM64 remain `android-evidence-pending`: their hosted production and package evidence has passed, but ABI-matched physical-device loading is still required before promotion. `win-x86/full` remains `hosted-evidence-pending`, `win-x86/mini` is excluded, and macOS is outside the declared runtime package matrix. Package-matrix presence is not a production-support claim.
+Windows x86 Full is real-supported after verified hosted WoW64 producer, artifact, package, PE/I386 closure, and X86 consumer evidence; Windows x86 Mini remains excluded. Android x64/x86 Full and Mini are real-supported after authoritative single-loader NDK builds, package/APK audits, and emulator-native `Mat` plus `Cv2.Sum` loading; the retired dual-loader records remain under `superseded` in [`android-runtime-evidence.json`](packaging/runtime/android-runtime-evidence.json). Android ARM/ARM64 remain `android-evidence-pending`: their hosted production and package evidence has passed, but ABI-matched physical-device loading is still required before promotion. macOS is outside the declared runtime package matrix. Package-matrix presence is not a production-support claim.
 
 If there is no matching runtime package, build a local native runtime with `scripts/Build-OpenCV.ps1`, stage it with `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>`, and point local samples or tests at it with `OpenCvNativeRuntimeDir`. The corresponding package fallback is `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`. See the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) for the supported local native runtime workflow.
 

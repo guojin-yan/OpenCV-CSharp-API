@@ -6,13 +6,12 @@ This document is the authoritative support classification for runtime packages. 
 
 | Classification | Count | Meaning |
 | --- | ---: | --- |
-| `real-supported` | 28 | Non-synthetic native producer, package handoff, and package consumer evidence exists for the exact RID/profile. |
-| `hosted-evidence-pending` | 1 | `win-x86/full` is locally feasible, but hosted producer, same-run pack, independent artifact audit, and X86 consumer evidence are still missing. |
+| `real-supported` | 29 | Non-synthetic native producer, package handoff, and package consumer evidence exists for the exact RID/profile. |
 | `android-evidence-pending` | 4 | Android ARM/ARM64 still require ABI-matched physical-device loading evidence. |
 | `excluded` | 1 | `win-x86/mini` is not production support. |
 | outside matrix | 1 | macOS is intentionally not declared. |
 
-The 28 real-supported entries comprise twelve full and twelve mini desktop/server targets plus Android x64/x86 Full and Mini. Fedora 40 and Alpine 3.20 are retained as explicit compatibility targets: their historical userspace, image identity, lifecycle state, and exact native/package evidence must remain recorded. An ended distro is never silently represented as a current-lifecycle promise.
+The 29 real-supported entries comprise thirteen full and twelve mini desktop/server targets plus Android x64/x86 Full and Mini. Fedora 40 and Alpine 3.20 are retained as explicit compatibility targets: their historical userspace, image identity, lifecycle state, and exact native/package evidence must remain recorded. An ended distro is never silently represented as a current-lifecycle promise.
 
 ## Promotion Evidence
 
@@ -29,7 +28,7 @@ Synthetic runtime inputs, unaudited cross-builds, relabeled binaries, PE/ELF hea
 
 ## Pending And Excluded Targets
 
-`win-x86/full` requires one quota-authorized hosted chain in this order: hosted producer, neutral artifact handoff, same-run non-synthetic pack, independent artifact/PE audit, and an actual X86 consumer process. Until then it remains pending. `win-x86/mini` is excluded and must not be inferred from the full profile.
+`win-x86/full` is real-supported after its hosted producer, neutral artifact handoff, same-run non-synthetic pack, independent artifact/PE audit, WoW64 probe, and actual X86 consumer process all passed. The exact source commit, run IDs, artifact identities and digests, and hosted audit hashes are retained in `runtime-support-contract.json`. `win-x86/mini` remains excluded and must not be inferred from the full profile.
 
 Android x64/x86 Full and Mini are real-supported after the single neutral loader was rebuilt, packaged, consumed by an APK, and loaded on authoritative hosted emulators. The current evidence is under `verified`, while retired dual-loader records remain under `superseded` in `packaging/runtime/android-runtime-evidence.json`. Android ARM/ARM64 remain android-evidence-pending until the same APK consumer succeeds on ABI-matched physical devices. macOS requires an explicit matrix decision followed by native build and package-consumer evidence; it is currently outside the matrix.
 

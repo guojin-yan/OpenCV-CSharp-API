@@ -18,7 +18,7 @@
 - Deterministic normalized NuGet packages, package-owned full/mini native smoke, package provenance, SPDX-2.3 SBOM generation, and fail-closed release review.
 - The stable managed package is checked by .NET package validation against the published `5.0.0-preview.1` API baseline before it can enter the candidate set.
 - Until the stable packages are public, repository-only sample package fixtures continue to pin the existing public `5.0.0-preview.1`; normal installation commands remain version-free and resolve the current stable package.
-- The exact support-contract-derived candidate is published to NuGet.org and GitHub Packages, then attached to a verified stable GitHub Release with both registry proofs; the intended final set is 29 packages after Android single-loader revalidation.
+- The exact support-contract-derived candidate is published to NuGet.org and GitHub Packages, then attached to a verified stable GitHub Release with both registry proofs; the intended final set is 30 packages after Windows x86 Full hosted promotion.
 - A 24-part [Tutorial Series](tutorial-series.md) and grouped standalone projects covering image processing, Chinese text, geometry, features, ML, DNN classification/detection/segmentation, document scanning, panorama stitching, motion analysis, tracking, and Android package loading.
 
 - 632 个 public managed type、6,817 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
@@ -108,24 +108,24 @@ dotnet restore
 
 - This is the first stable release. Semantic-versioning compatibility applies to the declared managed API and native ABI; additional APIs and runtime packages may be added compatibly in later releases.
 - Measured module partitions have explicit zero-gap evidence, but this is not repository-wide or all-OpenCV parity.
-- The current fail-closed candidate contains 29 packages: one managed package plus 28 real-supported runtime packages across Android x64/x86, Windows x64/ARM64, and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. Android x64/x86 Full/Mini have authoritative single-loader emulator evidence; Android ARM/ARM64 Full/Mini remain `android-evidence-pending` until physical-device loading passes; `win-x86/full` remains hosted-evidence-pending, `win-x86/mini` is excluded, and macOS is outside the declared matrix.
+- The current fail-closed candidate contains 30 packages: one managed package plus 29 real-supported runtime packages across Android x64/x86, Windows x86/x64/ARM64, and the declared Ubuntu, Debian, Fedora, RHEL, Rocky, and Alpine targets. Windows x86 Full has verified hosted WoW64 producer, package, PE/I386 closure, and X86 consumer evidence; Windows x86 Mini remains excluded. Android x64/x86 Full/Mini have authoritative single-loader emulator evidence; Android ARM/ARM64 Full/Mini remain `android-evidence-pending` until physical-device loading passes, and macOS is outside the declared matrix.
 - Mini excludes DNN, calibration, features, Photo, HighGui, ML, Tracking, Stitching, and other full-only modules.
 - Some algorithms require user-supplied models, training data, codecs, GUI backends, or optional OpenCV build features. The library does not silently download them.
 - HighGui requires a compatible desktop UI backend and event-thread model. Server, container, and unattended workflows should prefer file or memory encoding.
 - Fedora 40 and Alpine 3.20 are exact compatibility targets with ended standard lifecycle; they are not current-lifecycle distribution promises.
 - The normalized candidate is intentionally unsigned before upload. NuGet.org must add a `Repository` primary signature owned by `GuojinYan`; the downloaded public package must pass `dotnet nuget verify --all` and exact payload comparison before the release is accepted.
-- GitHub Packages initially creates the 29 user-scoped packages as private. Each must be made Public, linked to `guojin-yan/OpenCV-CSharp-API`, and verified byte-for-byte against the reviewed candidate before the Release is created.
+- GitHub Packages initially creates the 30 user-scoped packages as private. Each must be made Public, linked to `guojin-yan/OpenCV-CSharp-API`, and verified byte-for-byte against the reviewed candidate before the Release is created.
 - The explicitly authorized, version-bounded single-maintainer stable-release exception, both public package registries, repository-signature evidence, exact GitHub package hashes, and support status must be verified from the published artifacts, not inferred from local candidates or mirror CI.
 
 - 本版本是首个稳定版。声明的 managed API 与 native ABI 遵循语义化版本兼容规则；后续版本仍可兼容性地增加 API 与 runtime 包。
 - 已测量模块分区具有明确的 zero-gap 证据，但不代表整个仓库或全部 OpenCV 已达到 parity。
-- 当前 fail-closed 候选包含 29 个包：一个 managed 包，加上 Android x64/x86、Windows x64/ARM64 以及声明的 Ubuntu、Debian、Fedora、RHEL、Rocky、Alpine 目标共 28 个真实支持 runtime 包。Android x64/x86 的 Full/Mini 已有正式单加载器模拟器证据；Android ARM/ARM64 的 Full/Mini 在真机加载通过前仍为 `android-evidence-pending`；`win-x86/full` 仍为 hosted-evidence-pending，`win-x86/mini` 被排除，macOS 位于声明矩阵之外。
+- 当前 fail-closed 候选包含 30 个包：一个 managed 包，加上 Android x64/x86、Windows x86/x64/ARM64 以及声明的 Ubuntu、Debian、Fedora、RHEL、Rocky、Alpine 目标共 29 个真实支持 runtime 包。Windows x86 Full 已有正式 hosted WoW64 producer、package、PE/I386 闭包与 X86 consumer 证据，Windows x86 Mini 仍被排除。Android x64/x86 的 Full/Mini 已有正式单加载器模拟器证据；Android ARM/ARM64 的 Full/Mini 在真机加载通过前仍为 `android-evidence-pending`，macOS 位于声明矩阵之外。
 - mini 排除 DNN、标定、Features、Photo、HighGui、ML、Tracking、Stitching 和其他 full-only 模块。
 - 部分算法需要用户提供模型、训练数据、codec、GUI backend 或 OpenCV 可选构建能力；库不会静默下载这些输入。
 - HighGui 需要兼容的桌面 UI backend 和事件线程模型。服务器、容器和无人值守流程应优先使用文件或内存编码。
 - Fedora 40 与 Alpine 3.20 是标准生命周期已结束的精确兼容目标，不代表当前生命周期发行版承诺。
 - 规范化候选在上传前有意保持未签名；NuGet.org 必须为公开下载包添加 owner 为 `GuojinYan` 的 `Repository` primary signature，并通过 `dotnet nuget verify --all` 与精确 payload 对比。
-- GitHub Packages 初次创建 29 个 user-scoped 包时默认为 private；每个包都必须设为 Public、关联 `guojin-yan/OpenCV-CSharp-API`，并与审核 candidate 逐字节验证后才能创建 Release。
+- GitHub Packages 初次创建 30 个 user-scoped 包时默认为 private；每个包都必须设为 Public、关联 `guojin-yan/OpenCV-CSharp-API`，并与审核 candidate 逐字节验证后才能创建 Release。
 - 经明确授权且仅限本次版本的单维护者稳定版例外、两个公开 package registry、repository-signature 证据、GitHub package 精确 hash 和支持状态必须以发布产物为准，不能从本地候选或 mirror CI 推断。
 
 ## Verification / 验证

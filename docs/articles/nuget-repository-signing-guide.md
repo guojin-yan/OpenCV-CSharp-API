@@ -1,8 +1,8 @@
 # Package Publication And Repository Signing Guide
 
-OpenCV CSharp API `5.0.0` publishes the same reviewed, support-contract-derived candidate to NuGet.org and GitHub Packages. The intended final set is 29 packages after Android single-loader revalidation. The signing model matches TensorRtSharp: the local package is deterministically normalized and intentionally unsigned, NuGet.org adds a Repository primary signature after upload, and both public registries are downloaded and verified before the release is accepted.
+OpenCV CSharp API `5.0.0` publishes the same reviewed, support-contract-derived candidate to NuGet.org and GitHub Packages. The intended final set is 30 packages after Windows x86 Full hosted promotion. The signing model matches TensorRtSharp: the local package is deterministically normalized and intentionally unsigned, NuGet.org adds a Repository primary signature after upload, and both public registries are downloaded and verified before the release is accepted.
 
-OpenCV CSharp API `5.0.0` 将同一份审核通过的 29 包 candidate 发布到 NuGet.org 和 GitHub Packages。签名模型与 TensorRtSharp 相同：本地包经过确定性规范化并有意保持未签名，上传后由 NuGet.org 添加 Repository primary signature；只有两个公开 registry 均重新下载并验证通过后，发布才可被接受。
+OpenCV CSharp API `5.0.0` 将同一份审核通过的 30 包 candidate 发布到 NuGet.org 和 GitHub Packages。签名模型与 TensorRtSharp 相同：本地包经过确定性规范化并有意保持未签名，上传后由 NuGet.org 添加 Repository primary signature；只有两个公开 registry 均重新下载并验证通过后，发布才可被接受。
 
 ## Security Model / 安全模型
 
@@ -26,9 +26,9 @@ Repository signing 不是 author certificate。本项目不会声称本地自签
 
 ## Prepublication State / 发布前状态
 
-The current stable candidate set remains `repository-signing-pending`: one managed package plus every runtime package in `runtime-support-contract.json` `realSupport`, for 29 packages after Android x64/x86 promotion. The normalized publication manifest binds every authoritative pack run ID and package SHA256 to the package-bound SPDX documents and durable change-control record. Generate the final publication bundle only from the final source commit:
+The current stable candidate set remains `repository-signing-pending`: one managed package plus every runtime package in `runtime-support-contract.json` `realSupport`, for 30 packages after Windows x86 Full hosted promotion. The normalized publication manifest binds every authoritative pack run ID and package SHA256 to the package-bound SPDX documents and durable change-control record. Generate the final publication bundle only from the final source commit:
 
-29 个 package 在发布前保持 `repository-signing-pending`：一个 managed 包，加上 `runtime-support-contract.json` 中 28 个 `realSupport` runtime 包。规范化 publication manifest 将每个正式 pack run ID 和 SHA256 绑定到 package-bound SPDX 与 durable change-control。只能从最终 source commit 生成 publication bundle：
+30 个 package 在发布前保持 `repository-signing-pending`：一个 managed 包，加上 `runtime-support-contract.json` 中 29 个 `realSupport` runtime 包。规范化 publication manifest 将每个正式 pack run ID 和 SHA256 绑定到 package-bound SPDX 与 durable change-control。只能从最终 source commit 生成 publication bundle：
 
 ```powershell
 pwsh -NoProfile -File ./scripts/Test-NuGetPublicationManifest.ps1 `
@@ -58,7 +58,7 @@ Run `.github/workflows/publish-nuget.yml` only in `guojin-yan/OpenCV-CSharp-API`
 1. Dry run: set `publish=false`, provide the exact source run IDs and package hashes, and leave `publish_authorization` empty. Review the uploaded `nuget-publication-candidate` artifact and emitted token.
 2. Upload run: use the same source, run IDs, hashes, version, and UTC creation time; set `publish=true`, `verify_publication=false`, and `create_github_release=false`; provide the exact token. The normal path names a designated publisher and a different independent approver. For the explicitly authorized stable `5.0.0` release only, when no independent reviewer exists, set `single_maintainer_exception=true`, `designated_publisher=Guojin Yan`, and `independent_approver=not-available`; the run must be dispatched by `guojin-yan` and records the absence of independent review explicitly. This exception cannot authorize another version.
 3. GitHub pauses both upload jobs at the protected `nuget-production` Environment. That Environment must hold `NUGET_API_KEY`; require its configured reviewer on the normal path, while the version-bounded stable exception deliberately has no invented reviewer. The jobs recheck the bundle byte-for-byte, then upload the exact support-contract-derived package set to NuGet.org and `https://nuget.pkg.github.com/guojin-yan/index.json`. Duplicate identity is an error; `--skip-duplicate` is forbidden.
-4. GitHub Packages initially creates user-scoped packages with private visibility. Set every candidate package page to Public and confirm that each is linked to `guojin-yan/OpenCV-CSharp-API` before verification. Public visibility is irreversible on GitHub.
+4. GitHub Packages initially creates user-scoped packages with private visibility. Set all 30 candidate package pages to Public and confirm that each is linked to `guojin-yan/OpenCV-CSharp-API` before verification. Public visibility is irreversible on GitHub.
 5. Verification/release run: keep `publish=false`, set `verify_publication=true`, and optionally set `create_github_release=true`. Reuse the exact token and identities. The workflow verifies every candidate package on both registries before it may create the stable Release.
 
 `.github/workflows/publish-nuget.yml` 只能在 `guojin-yan/OpenCV-CSharp-API` 执行。
@@ -66,8 +66,8 @@ Run `.github/workflows/publish-nuget.yml` only in `guojin-yan/OpenCV-CSharp-API`
 1. Dry run：设置 `publish=false`，提供精确 source run IDs 与 package hashes，保持 `publish_authorization` 为空；审核 `nuget-publication-candidate` artifact 和输出 token。
 2. 上传 run：保持 source、run IDs、hashes、version、UTC creation time 完全相同，设置 `publish=true`、`verify_publication=false`、`create_github_release=false` 并回填精确 token。常规路径必须指定不同的 publisher 与 independent approver。仅本次已明确授权且受版本约束的稳定版 `5.0.0` 在确实没有独立审核人时，可设置 `single_maintainer_exception=true`、`designated_publisher=Guojin Yan`、`independent_approver=not-available`；该 run 必须由 `guojin-yan` 发起，并明确记录没有独立审核。该例外不授权其他版本。
 3. 两个上传 job 均受 `nuget-production` Environment 保护。该 Environment 必须保存 `NUGET_API_KEY`；常规路径要求配置 reviewer，稳定版 `5.0.0` 的版本限定例外则明确不虚构审核人。job 逐字节复核 bundle 后，分别向 NuGet.org 与 `https://nuget.pkg.github.com/guojin-yan/index.json` 上传 support contract 精确确定的全部候选包。重复身份必须失败，禁止 `--skip-duplicate`。
-4. GitHub Packages 初次创建 user-scoped package 时默认为 private。验证前必须在 29 个 package 页面中逐项设为 Public，并确认关联 `guojin-yan/OpenCV-CSharp-API`。GitHub 的 Public 可见性不可逆。
-5. 验证/Release run：保持 `publish=false`，设置 `verify_publication=true`，按需设置 `create_github_release=true`，复用精确 token 与身份。只有两个 registry 均达到 29/29 验证通过后才能创建稳定版 Release。
+4. GitHub Packages 初次创建 user-scoped package 时默认为 private。验证前必须在 30 个 package 页面中逐项设为 Public，并确认关联 `guojin-yan/OpenCV-CSharp-API`。GitHub 的 Public 可见性不可逆。
+5. 验证/Release run：保持 `publish=false`，设置 `verify_publication=true`，按需设置 `create_github_release=true`，复用精确 token 与身份。只有两个 registry 均达到 30/30 验证通过后才能创建稳定版 Release。
 
 The compilation mirror `grape-yan/OpenCV-CSharp-API` cannot enter this workflow. A green mirror build is never publication authorization.
 
@@ -102,9 +102,9 @@ pwsh -NoProfile -File ./scripts/Test-NuGetRepositorySignedPackage.ps1 `
   -OutputPath <repository-signature-report.json>
 ```
 
-GitHub Packages must also expose every package as Public, link it to `guojin-yan/OpenCV-CSharp-API`, contain the exact requested version once, and return bytes whose SHA256 equals the reviewed unsigned candidate. The stable GitHub Release may be created only after both registries pass 29/29 verification. Its `.nupkg` assets are the NuGet.org repository-signed public bytes; SPDX documents remain bound to the reviewed unsigned payload, while both verification summaries are attached to the Release.
+GitHub Packages must also expose every package as Public, link it to `guojin-yan/OpenCV-CSharp-API`, contain the exact requested version once, and return bytes whose SHA256 equals the reviewed unsigned candidate. The stable GitHub Release may be created only after both registries pass 30/30 verification. Its `.nupkg` assets are the NuGet.org repository-signed public bytes; SPDX documents remain bound to the reviewed unsigned payload, while both verification summaries are attached to the Release.
 
-GitHub Packages 还必须将每个包设为 Public、关联 `guojin-yan/OpenCV-CSharp-API`、只包含一个精确目标版本，并返回 SHA256 与审核 unsigned candidate 相同的字节。两个 registry 均达到 29/29 后才允许创建稳定版 GitHub Release。Release 中的 `.nupkg` 是 NuGet.org repository-signed 公开字节；SPDX 继续绑定已审核的 unsigned payload，两份 verification summary 同时附加到 Release。
+GitHub Packages 还必须将每个包设为 Public、关联 `guojin-yan/OpenCV-CSharp-API`、只包含一个精确目标版本，并返回 SHA256 与审核 unsigned candidate 相同的字节。两个 registry 均达到 30/30 后才允许创建稳定版 GitHub Release。Release 中的 `.nupkg` 是 NuGet.org repository-signed 公开字节；SPDX 继续绑定已审核的 unsigned payload，两份 verification summary 同时附加到 Release。
 
 ## Consumer Check / 使用者检查
 

@@ -166,10 +166,10 @@ function New-ReviewRecord {
             Sha256 = $MatrixSha256
             EntryCount = $MatrixEntryCount
             SupportContractSha256 = $SupportContractSha256
-            RealSupportCount = 28
-            PendingSupportCount = 5
+            RealSupportCount = 29
+            PendingSupportCount = 4
             ExcludedSupportCount = 1
-            WinX86FullStatus = 'hosted-evidence-pending'
+            WinX86FullStatus = 'real-supported'
             WinX86MiniStatus = 'excluded'
         }
         EvidenceReferences = @(
@@ -212,17 +212,27 @@ function New-ReviewRecord {
         )
         HostedGate = [ordered]@{
             Target = 'win-x86/full'
-            Status = 'hosted-evidence-pending'
+            Status = 'verified-hosted-evidence'
+            SourceCommit = '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8'
             ProducerWorkflow = '.github/workflows/runtime-input.yml'
             ProducerRunner = 'windows-latest'
+            ProducerRunId = 31162854992
+            ProducerArtifactId = 8988306107
             ProducerArtifact = 'runtime-input-win-x86-full'
+            ProducerArtifactDigest = 'sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8'
             PackWorkflow = '.github/workflows/pack.yml'
+            PackRunId = 31171822232
+            PackageArtifactId = 8991471168
             PackageArtifact = 'nupkg-win-x86-full'
+            PackageArtifactDigest = 'sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe'
+            ConsumerRunId = 31171822232
             HostArchitecture = 'AMD64'
             TargetArchitecture = 'X86'
             PeMachine = 'I386'
-            Wow64Probe = 'required'
+            Wow64Probe = 'passed'
             ConsumerProcessArchitecture = 'X86'
+            HostedCloseoutSha256 = '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81'
+            ArtifactDigestAuditSha256 = 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded'
             Sequence = @('hosted-producer', 'artifact-handoff', 'same-run-pack', 'independent-artifact-audit', 'x86-consumer')
             StopConditions = @('missing-artifact', 'hash-mismatch', 'wrong-pe-machine', 'wrong-consumer-architecture', 'synthetic-input', 'path-or-loader-override', 'incomplete-provenance', 'failed-signing-or-sbom-handoff', 'publication-attempt')
         }
@@ -283,8 +293,8 @@ function Test-ReviewRecord {
     Assert-True -List $List -Condition ($Record.PackageEvidenceKind -eq $expectedPackageEvidenceKind) -Path $Path -Issue 'Release review package evidence classification drifted'
     $expectedChangeSummary = if ($ExternalPackages) { 'first-preview-publication-handoff' } else { 'deterministic-release-guard-fixture' }
     Assert-True -List $List -Condition ($Record.ChangeSummary -eq $expectedChangeSummary) -Path $Path -Issue 'Release review change summary drifted'
-    Assert-True -List $List -Condition ($Record.SupportMatrix.Sha256 -eq $MatrixSha256 -and [int]$Record.SupportMatrix.EntryCount -eq $MatrixEntryCount -and $Record.SupportMatrix.SupportContractSha256 -eq $SupportContractSha256 -and [int]$Record.SupportMatrix.RealSupportCount -eq 28 -and [int]$Record.SupportMatrix.PendingSupportCount -eq 5 -and [int]$Record.SupportMatrix.ExcludedSupportCount -eq 1) -Path $Path -Issue 'Release review support matrix or support contract drifted'
-    Assert-True -List $List -Condition ($Record.SupportMatrix.WinX86FullStatus -eq 'hosted-evidence-pending' -and $Record.SupportMatrix.WinX86MiniStatus -eq 'excluded') -Path $Path -Issue 'Windows x86 support status changed without hosted evidence'
+    Assert-True -List $List -Condition ($Record.SupportMatrix.Sha256 -eq $MatrixSha256 -and [int]$Record.SupportMatrix.EntryCount -eq $MatrixEntryCount -and $Record.SupportMatrix.SupportContractSha256 -eq $SupportContractSha256 -and [int]$Record.SupportMatrix.RealSupportCount -eq 29 -and [int]$Record.SupportMatrix.PendingSupportCount -eq 4 -and [int]$Record.SupportMatrix.ExcludedSupportCount -eq 1) -Path $Path -Issue 'Release review support matrix or support contract drifted'
+    Assert-True -List $List -Condition ($Record.SupportMatrix.WinX86FullStatus -eq 'real-supported' -and $Record.SupportMatrix.WinX86MiniStatus -eq 'excluded') -Path $Path -Issue 'Windows x86 support status drifted'
     $expectedCloseoutValues = "$($ExpectedCloseout.Path)|$($ExpectedCloseout.Sha256)|$($ExpectedCloseout.CandidateId)|$($ExpectedCloseout.SourceSetSha256)|$($ExpectedCloseout.Status)|$($ExpectedCloseout.InvariantGuardCount)|$($ExpectedCloseout.SigningStatus)|$($ExpectedCloseout.SbomStatus)|$($ExpectedCloseout.ApprovalStatus)|$($ExpectedCloseout.PublicationAllowed)"
     $recordCloseoutValues = "$($Record.Closeout.Path)|$($Record.Closeout.Sha256)|$($Record.Closeout.CandidateId)|$($Record.Closeout.SourceSetSha256)|$($Record.Closeout.Status)|$($Record.Closeout.InvariantGuardCount)|$($Record.Closeout.SigningStatus)|$($Record.Closeout.SbomStatus)|$($Record.Closeout.ApprovalStatus)|$($Record.Closeout.PublicationAllowed)"
     Assert-True -List $List -Condition ($recordCloseoutValues -ceq $expectedCloseoutValues -and $Record.Closeout.Status -eq 'locally-validated' -and [int]$Record.Closeout.InvariantGuardCount -eq 78 -and $Record.Closeout.SigningStatus -eq 'repository-signing-pending' -and $Record.Closeout.ApprovalStatus -eq 'not-approved' -and -not [bool]$Record.Closeout.PublicationAllowed -and $Record.Closeout.Sha256 -match '^[0-9a-f]{64}$') -Path $Path -Issue 'Release review closeout binding drifted'
@@ -352,10 +362,11 @@ function Test-ReviewRecord {
     }
 
     $gate = $Record.HostedGate
-    Assert-True -List $List -Condition ($gate.Target -eq 'win-x86/full' -and $gate.Status -eq 'hosted-evidence-pending') -Path $Path -Issue 'Hosted x86 gate must remain pending until hosted evidence exists'
-    Assert-True -List $List -Condition ($gate.ProducerWorkflow -eq '.github/workflows/runtime-input.yml' -and $gate.ProducerRunner -eq 'windows-latest' -and $gate.ProducerArtifact -eq 'runtime-input-win-x86-full') -Path $Path -Issue 'Hosted x86 producer handoff changed'
-    Assert-True -List $List -Condition ($gate.PackWorkflow -eq '.github/workflows/pack.yml' -and $gate.PackageArtifact -eq 'nupkg-win-x86-full') -Path $Path -Issue 'Hosted x86 package handoff changed'
-    Assert-True -List $List -Condition ($gate.HostArchitecture -eq 'AMD64' -and $gate.TargetArchitecture -eq 'X86' -and $gate.PeMachine -eq 'I386' -and $gate.Wow64Probe -eq 'required' -and $gate.ConsumerProcessArchitecture -eq 'X86') -Path $Path -Issue 'Hosted x86 architecture gate is incomplete'
+    Assert-True -List $List -Condition ($gate.Target -eq 'win-x86/full' -and $gate.Status -eq 'verified-hosted-evidence' -and $gate.SourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8') -Path $Path -Issue 'Hosted x86 evidence identity drifted'
+    Assert-True -List $List -Condition ($gate.ProducerWorkflow -eq '.github/workflows/runtime-input.yml' -and $gate.ProducerRunner -eq 'windows-latest' -and [long]$gate.ProducerRunId -eq 31162854992 -and [long]$gate.ProducerArtifactId -eq 8988306107 -and $gate.ProducerArtifact -eq 'runtime-input-win-x86-full' -and $gate.ProducerArtifactDigest -eq 'sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8') -Path $Path -Issue 'Hosted x86 producer handoff changed'
+    Assert-True -List $List -Condition ($gate.PackWorkflow -eq '.github/workflows/pack.yml' -and [long]$gate.PackRunId -eq 31171822232 -and [long]$gate.PackageArtifactId -eq 8991471168 -and $gate.PackageArtifact -eq 'nupkg-win-x86-full' -and $gate.PackageArtifactDigest -eq 'sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe' -and [long]$gate.ConsumerRunId -eq 31171822232) -Path $Path -Issue 'Hosted x86 package handoff changed'
+    Assert-True -List $List -Condition ($gate.HostArchitecture -eq 'AMD64' -and $gate.TargetArchitecture -eq 'X86' -and $gate.PeMachine -eq 'I386' -and $gate.Wow64Probe -eq 'passed' -and $gate.ConsumerProcessArchitecture -eq 'X86') -Path $Path -Issue 'Hosted x86 architecture evidence is incomplete'
+    Assert-True -List $List -Condition ($gate.HostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $gate.ArtifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded') -Path $Path -Issue 'Hosted x86 audit hash binding drifted'
     $expectedSequence = @('hosted-producer', 'artifact-handoff', 'same-run-pack', 'independent-artifact-audit', 'x86-consumer')
     Assert-True -List $List -Condition ((@($gate.Sequence) -join ',') -eq ($expectedSequence -join ',')) -Path $Path -Issue 'Hosted x86 evidence sequence changed'
     $expectedStopConditions = @('missing-artifact', 'hash-mismatch', 'wrong-pe-machine', 'wrong-consumer-architecture', 'synthetic-input', 'path-or-loader-override', 'incomplete-provenance', 'failed-signing-or-sbom-handoff', 'publication-attempt')

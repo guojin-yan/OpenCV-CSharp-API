@@ -145,20 +145,27 @@ function New-ReadinessManifest {
         }
         HostedPromotion = [ordered]@{
             Target = 'win-x86/full'
-            Status = 'pending-hosted-evidence'
-            ProducerRunId = ''
-            PackRunId = ''
-            ConsumerRunId = ''
+            Status = 'verified-hosted-evidence'
+            SourceCommit = '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8'
+            ProducerRunId = 31162854992
+            ProducerArtifactId = 8988306107
             ProducerArtifactName = 'runtime-input-win-x86-full'
+            ProducerArtifactDigest = 'sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8'
+            PackRunId = 31171822232
+            PackageArtifactId = 8991471168
             PackageArtifactName = 'nupkg-win-x86-full'
+            PackageArtifactDigest = 'sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe'
+            ConsumerRunId = 31171822232
             HostArchitecture = 'AMD64'
             TargetArchitecture = 'X86'
             PeMachine = 'I386'
-            Wow64Probe = 'required'
+            Wow64Probe = 'passed'
             ConsumerProcessArchitecture = 'X86'
             ProducerPathOverrides = 'forbidden'
             LoaderOverrides = 'forbidden'
             PromotionRequires = @('hosted-producer', 'independent-artifact-audit', 'same-run-pack', 'x86-consumer')
+            HostedCloseoutSha256 = '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81'
+            ArtifactDigestAuditSha256 = 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded'
         }
     }
 }
@@ -216,11 +223,13 @@ function Test-ReadinessManifest {
     Assert-True -List $List -Condition (-not [bool]$Manifest.FeedVerification.UploadAttempted) -Path $Path -Issue 'Readiness must reject feed upload attempts'
 
     $promotion = $Manifest.HostedPromotion
-    Assert-True -List $List -Condition ($promotion.Target -eq 'win-x86/full' -and $promotion.Status -eq 'pending-hosted-evidence') -Path $Path -Issue 'win-x86/full must remain hosted-evidence-pending'
+    Assert-True -List $List -Condition ($promotion.Target -eq 'win-x86/full' -and $promotion.Status -eq 'verified-hosted-evidence' -and $promotion.SourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8') -Path $Path -Issue 'win-x86/full must bind verified hosted evidence'
     Assert-True -List $List -Condition ($promotion.HostArchitecture -eq 'AMD64' -and $promotion.TargetArchitecture -eq 'X86' -and $promotion.PeMachine -eq 'I386') -Path $Path -Issue 'Hosted x86 architecture checklist is incomplete'
-    Assert-True -List $List -Condition ($promotion.Wow64Probe -eq 'required' -and $promotion.ConsumerProcessArchitecture -eq 'X86') -Path $Path -Issue 'Hosted x86 WoW64/consumer checklist is incomplete'
+    Assert-True -List $List -Condition ($promotion.Wow64Probe -eq 'passed' -and $promotion.ConsumerProcessArchitecture -eq 'X86') -Path $Path -Issue 'Hosted x86 WoW64/consumer evidence is incomplete'
     Assert-True -List $List -Condition ($promotion.ProducerPathOverrides -eq 'forbidden' -and $promotion.LoaderOverrides -eq 'forbidden') -Path $Path -Issue 'Hosted x86 package consumer must forbid producer path overrides'
-    Assert-True -List $List -Condition ([string]::IsNullOrWhiteSpace([string]$promotion.ProducerRunId) -and [string]::IsNullOrWhiteSpace([string]$promotion.PackRunId) -and [string]::IsNullOrWhiteSpace([string]$promotion.ConsumerRunId)) -Path $Path -Issue 'Pending hosted promotion must not claim run IDs'
+    Assert-True -List $List -Condition ([long]$promotion.ProducerRunId -eq 31162854992 -and [long]$promotion.ProducerArtifactId -eq 8988306107 -and $promotion.ProducerArtifactName -eq 'runtime-input-win-x86-full' -and $promotion.ProducerArtifactDigest -eq 'sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8') -Path $Path -Issue 'Hosted x86 producer evidence drifted'
+    Assert-True -List $List -Condition ([long]$promotion.PackRunId -eq 31171822232 -and [long]$promotion.PackageArtifactId -eq 8991471168 -and $promotion.PackageArtifactName -eq 'nupkg-win-x86-full' -and $promotion.PackageArtifactDigest -eq 'sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe' -and [long]$promotion.ConsumerRunId -eq 31171822232) -Path $Path -Issue 'Hosted x86 pack and consumer evidence drifted'
+    Assert-True -List $List -Condition ($promotion.HostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $promotion.ArtifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded') -Path $Path -Issue 'Hosted x86 audit hash binding drifted'
     Assert-True -List $List -Condition (@($promotion.PromotionRequires | Sort-Object) -join ',' -eq 'hosted-producer,independent-artifact-audit,same-run-pack,x86-consumer') -Path $Path -Issue 'Hosted x86 promotion criteria changed'
 }
 

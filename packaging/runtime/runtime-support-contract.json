@@ -2,6 +2,33 @@
   "schemaVersion": 1,
   "packageMatrix": "packaging/runtime/runtime-package-matrix.json",
   "androidRuntimeEvidence": "packaging/runtime/android-runtime-evidence.json",
+  "hostedPromotionEvidence": {
+    "target": "win-x86/full",
+    "status": "verified-hosted-evidence",
+    "sourceCommit": "7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8",
+    "runtimeInputRunId": 31162854992,
+    "runtimeArtifact": {
+      "id": 8988306107,
+      "name": "runtime-input-win-x86-full",
+      "digest": "sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8"
+    },
+    "packRunId": 31171822232,
+    "packageArtifact": {
+      "id": 8991471168,
+      "name": "nupkg-win-x86-full",
+      "digest": "sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe"
+    },
+    "consumerRunId": 31171822232,
+    "hostArchitecture": "AMD64",
+    "targetArchitecture": "X86",
+    "peMachine": "I386",
+    "wow64Probe": "passed",
+    "consumerProcessArchitecture": "X86",
+    "hostedCloseoutSha256": "61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81",
+    "artifactDigestAuditSha256": "c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded",
+    "hostedPackageManifestSha256": "eedb212724a7f176bc913cc92b09ca086a4d7129f069a964c3195a3b8557c353",
+    "hostedChangeControlSha256": "69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332"
+  },
   "realSupport": [
     "alpine.3.20-x64/full",
     "alpine.3.20-x64/mini",
@@ -27,24 +54,13 @@
     "win-arm64/mini",
     "win-x64/full",
     "win-x64/mini",
+    "win-x86/full",
     "android-x64/full",
     "android-x64/mini",
     "android-x86/full",
     "android-x86/mini"
   ],
   "pending": [
-    {
-      "target": "win-x86/full",
-      "status": "hosted-evidence-pending",
-      "reason": "Local Win32/I386 feasibility exists, but hosted producer, same-run pack, independent artifact audit, and X86 consumer evidence are still required.",
-      "requires": [
-        "hosted-producer",
-        "artifact-handoff",
-        "same-run-pack",
-        "independent-artifact-audit",
-        "x86-consumer"
-      ]
-    },
     {
       "target": "android-arm/full",
       "status": "android-evidence-pending",

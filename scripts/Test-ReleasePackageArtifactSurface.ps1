@@ -306,7 +306,7 @@ Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text 
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'PublicationManifestPath' -Issue "Publication bundle must bind the normalized package manifest"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'Where-Object { [string]$_.PackageId -ceq [string]$package.Id }' -Issue "Publication bundle must compare change-control package identities without relying on culture-sensitive sorting"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'Change-control package hash mismatch' -Issue "Publication bundle must compare each exact package hash with actionable diagnostics"
-Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 28' -Issue "Publication manifest must require all 28 currently real-supported runtime targets"
+Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 29' -Issue "Publication manifest must require all 29 currently real-supported runtime targets"
 Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle 'Publication manifest must contain exactly' -Issue "Publication manifest must reject incomplete package closure"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProjectPath -Text $nugetRepositoryVerifierProjectText -Needle '<PackageReference Include="NuGet.Packaging" Version="7.6.0" />' -Issue "Structured repository-signature verifier must pin the audited NuGet.Packaging version"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProgramPath -Text $nugetRepositoryVerifierProgramText -Needle 'RepositoryPrimarySignature' -Issue "Structured verifier must require a repository primary signature"
@@ -354,7 +354,7 @@ Assert-Contains -Violations $violations -Path $highGuiFamilyPath -Text $highGuiF
 Assert-Contains -Violations $violations -Path $finalCloseoutPath -Text $finalCloseoutText -Needle 'local-release-candidate-closeout.json' -Issue "Release artifact surface must register the final closeout record"
 Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $finalCloseoutRecordText -Needle 'local-release-candidate-closeout' -Issue "Final closeout record must identify its record kind"
 Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"
-Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 28 |' -Issue "Support lifecycle policy must expose the real-support count"
+Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 29 |' -Issue "Support lifecycle policy must expose the real-support count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'repository-signing-pending' -Issue "Release closeout documentation must expose the confirmed NuGet.org signing strategy"
@@ -437,8 +437,8 @@ foreach ($imageName in $requiredTutorialImages) {
 }
 
 $runtimeTargets = @($runtimeSupportContract.realSupport)
-if ($runtimeTargets.Count -ne 28) {
-    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 28 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
+if ($runtimeTargets.Count -ne 29) {
+    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 29 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
 }
 foreach ($readme in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -564,7 +564,7 @@ Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -T
 Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -Text $releaseCandidateProvenanceText -Needle "local-preflight-only; no remote mutation" -Issue "Release candidate provenance guard must record rollback abort metadata"
 Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'repository-signature/SBOM state machine' -Issue "Release readiness contract must validate repository signing and SBOM state transitions"
 Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'Private key material must never be present' -Issue "Release readiness contract must reject private key material"
-Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'pending-hosted-evidence' -Issue "Release readiness contract must keep hosted Windows x86 promotion pending"
+Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'verified-hosted-evidence' -Issue "Release readiness contract must bind verified hosted Windows x86 promotion evidence"
 Assert-Contains -Violations $violations -Path $releaseReadinessContractPath -Text $releaseReadinessContractText -Needle 'read-only-fixture' -Issue "Release readiness contract must keep public feed verification read-only"
 Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'RELEASE_SIGNING_BOUNDARY_OK' -Issue "Release signing boundary must emit normalized-input evidence"
 Assert-Contains -Violations $violations -Path $releaseSigningBoundaryPath -Text $releaseSigningBoundaryText -Needle 'PostSigningPackageSha256' -Issue "Release signing boundary must bind post-signing package bytes"
@@ -596,7 +596,7 @@ Assert-Contains -Violations $violations -Path $releaseCandidateProvenancePath -T
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'RELEASE_CHANGE_CONTROL_OK' -Issue "Release change-control guard must emit deterministic review evidence"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle "Decision = 'do-not-publish'" -Issue "Release change-control guard must default to non-publishing"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle "Status = 'not-approved'" -Issue "Release change-control guard must require explicit approval"
-Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'hosted-evidence-pending' -Issue "Release change-control guard must keep win-x86/full pending"
+Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle 'verified-hosted-evidence' -Issue "Release change-control guard must bind verified win-x86/full evidence"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[string]$SbomRoot = ""' -Issue "Release change-control guard must accept package-bound SBOM inputs"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[string]$OutputPath = ""' -Issue "Release change-control guard must support durable output"
 Assert-Contains -Violations $violations -Path $releaseChangeControlPath -Text $releaseChangeControlText -Needle '[switch]$Check' -Issue "Release change-control guard must support byte-for-byte output checks"

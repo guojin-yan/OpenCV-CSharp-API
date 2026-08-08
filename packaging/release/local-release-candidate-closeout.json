@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/67aa178092e73a5e",
-  "SourceIdentity": "sha256:67aa178092e73a5e91e2f4f948a95011fd45825d0a23cb1126422c1fcdf79da2",
+  "CandidateId": "local-closeout/sha256/0a0d84b5186593d5",
+  "SourceIdentity": "sha256:0a0d84b5186593d58e4bf036bf171ff41c9881d497d7235a80228baaffdfe49e",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1649,
-    "Sha256": "67aa178092e73a5e91e2f4f948a95011fd45825d0a23cb1126422c1fcdf79da2",
+    "FileCount": 1651,
+    "Sha256": "0a0d84b5186593d58e4bf036bf171ff41c9881d497d7235a80228baaffdfe49e",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -18,15 +18,42 @@
   },
   "SupportContract": {
     "Path": "packaging/runtime/runtime-support-contract.json",
-    "Sha256": "e38cabc06fcfcae90e275bbc467ee48bd4d8a37446c5612b6d509e273726a301",
+    "Sha256": "7495ecd2c0620c20b0f3032b744e1cd39dc1c44ef743acc033e599afdbcb84bc",
     "MatrixEntryCount": 34,
-    "RealSupportCount": 28,
-    "PendingSupportCount": 5,
+    "RealSupportCount": 29,
+    "PendingSupportCount": 4,
     "ExcludedSupportCount": 1,
     "OutsideMatrixCount": 1,
-    "WinX86FullStatus": "hosted-evidence-pending",
+    "WinX86FullStatus": "real-supported",
     "WinX86MiniStatus": "excluded",
-    "PackageSurfaceDefinesSupport": false
+    "PackageSurfaceDefinesSupport": false,
+    "HostedPromotionEvidence": {
+      "target": "win-x86/full",
+      "status": "verified-hosted-evidence",
+      "sourceCommit": "7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8",
+      "runtimeInputRunId": 31162854992,
+      "runtimeArtifact": {
+        "id": 8988306107,
+        "name": "runtime-input-win-x86-full",
+        "digest": "sha256:9e73da169b3d30d3602bc77516a4db571be4af4728637b89c6e8563311afa4b8"
+      },
+      "packRunId": 31171822232,
+      "packageArtifact": {
+        "id": 8991471168,
+        "name": "nupkg-win-x86-full",
+        "digest": "sha256:0cedaef44f1bef7059763c22dd95d2bd722d0e083ccffeb814e7034143dfacbe"
+      },
+      "consumerRunId": 31171822232,
+      "hostArchitecture": "AMD64",
+      "targetArchitecture": "X86",
+      "peMachine": "I386",
+      "wow64Probe": "passed",
+      "consumerProcessArchitecture": "X86",
+      "hostedCloseoutSha256": "61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81",
+      "artifactDigestAuditSha256": "c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded",
+      "hostedPackageManifestSha256": "eedb212724a7f176bc913cc92b09ca086a4d7129f069a964c3195a3b8557c353",
+      "hostedChangeControlSha256": "69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332"
+    }
   },
   "ApiAbiBaseline": {
     "Managed": {
@@ -416,8 +443,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "0bd06d6d04453b76b86db9c16c27d9918c3644e6af1536caf67f0702426f7917",
-      "Length": 191335
+      "Sha256": "ac33af04c47b5bc9eace1fad0f2c8df2b9b0202a67dd0e23b533088ab7757544",
+      "Length": 191285
     },
     {
       "Path": "CHANGELOG.md",
@@ -431,13 +458,13 @@
     },
     {
       "Path": "README.md",
-      "Sha256": "89d240c69f6a64654798a72729850c5273900df6f267b78bab239b0b214e5b83",
-      "Length": 34190
+      "Sha256": "e646b3eac40583083b55fa8904c2a704d0cb472f78e71b9d44c9ff3ab9e5f272",
+      "Length": 34436
     },
     {
       "Path": "README_cn.md",
-      "Sha256": "9bac94bf1c34384795f198d28ed9334a0dff1b7716802a8a6dd0ccbd36a4bfac",
-      "Length": 31381
+      "Sha256": "06cce3b0305ebe0353295a7d92380a09f8bc26b43cd6e83a1d4058b7393e1bc6",
+      "Length": 31644
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
@@ -916,8 +943,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "aa31d3d3b9aa53ad2dfff7330f7510996e50b037841521fb8f1bc2dd29822407",
-      "Length": 11431
+      "Sha256": "b8bafad7ea0d3b8d166782fdc41af50c085186b8c08c4d98915dbb149a024f9c",
+      "Length": 11457
     },
     {
       "Path": "docs/articles/sample-model-assets-guide.md",
@@ -931,8 +958,8 @@
     },
     {
       "Path": "docs/articles/support-lifecycle-policy.md",
-      "Sha256": "897221216f9c290a7bb150b56dbcb22a052109dc16f00045234a71352018ee3e",
-      "Length": 3974
+      "Sha256": "5b98c4d29e23f40c664ec0c63a60773136d2ed0b131d7323cc0015e2ea669706",
+      "Length": 3900
     },
     {
       "Path": "docs/articles/tracking-guide.md",
@@ -1076,8 +1103,8 @@
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
-      "Sha256": "e38cabc06fcfcae90e275bbc467ee48bd4d8a37446c5612b6d509e273726a301",
-      "Length": 3374
+      "Sha256": "7495ecd2c0620c20b0f3032b744e1cd39dc1c44ef743acc033e599afdbcb84bc",
+      "Length": 4178
     },
     {
       "Path": "samples/AndroidSmoke/AndroidSmoke.csproj",
@@ -1216,8 +1243,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e3cf0219e9687301f8a7ea91c94c633969c58ed84e00f011e8630f6b29f1e993",
-      "Length": 61066
+      "Sha256": "58aee81e92684f6ed7f29483b999175945d2d1d9f2db9e5679d8edc509e1c6c3",
+      "Length": 61120
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1301,8 +1328,8 @@
     },
     {
       "Path": "scripts/Test-NuGetPublicationManifest.ps1",
-      "Sha256": "ccbad4c5d3f323ea603dc27aff1fca59542719a99eca04f9cc01ea39aea16f8d",
-      "Length": 7864
+      "Sha256": "3a336c0a092da6cf19ea3fea8d8a68df1918a295dbef2eff0cbd307d0fa9f046",
+      "Length": 7865
     },
     {
       "Path": "scripts/Test-NuGetRepositorySignedPackage.ps1",
@@ -1311,8 +1338,8 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "fb432cc90b52831aff337cf84055e1e0a448fd36268947ebb4c5907e678691cd",
-      "Length": 21553
+      "Sha256": "c4d3a91a017ebbb5178d3e3c28a92d2243cfb6bcd696bcce23774923a9d2e4a8",
+      "Length": 21558
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1331,18 +1358,18 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "1000a81e62a9a4a7e781693c94ad08e1321fd3563f92b512453eddad80fcbb8b",
-      "Length": 56777
+      "Sha256": "e250ecb653c354a27e53737bf3de5d80985c83ef021cacbff9c6a7e2f759f8a8",
+      "Length": 57902
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
-      "Sha256": "ccb5163e6aef55164589c1f5801897ab78952c292dc6241214de379d55503265",
-      "Length": 27440
+      "Sha256": "92b944835fa708e24d91990b966309292e9d5b182a0047726f07b901c31eb6f8",
+      "Length": 29011
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "d17a31ab0f749885b352f4540484ac6c124be5282a7a7ae696f00c14b5e3a65c",
-      "Length": 44095
+      "Sha256": "86a871d93d0b6e773d2d32021e96757ea82aa67661bea84f4d069e9cf64a66e9",
+      "Length": 45568
     },
     {
       "Path": "scripts/Test-ReleaseNotesContract.ps1",
@@ -1361,8 +1388,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseReadinessContract.ps1",
-      "Sha256": "6e463592bd5cac600ed6a45ed270891bb3dd888e6d6ad7cd28f721f258d37077",
-      "Length": 18320
+      "Sha256": "7e64c21901aeb99f54a9e2d4f389d460180edfbffd7d9f90b67139b49b46e9f1",
+      "Length": 19841
     },
     {
       "Path": "scripts/Test-ReleaseSigningBoundary.ps1",
@@ -1371,8 +1398,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
-      "Sha256": "987454c501f737ed33fb8c3c107deddf550212c3f7a1d9c1d365d205c29c64c2",
-      "Length": 16187
+      "Sha256": "19ae4e9bf7ce66760b6e50c450d024541906ed7e8b4a3178927d15d0b6ed80d6",
+      "Length": 18307
     },
     {
       "Path": "scripts/Test-SampleModelAssetContract.ps1",
@@ -1920,11 +1947,6 @@
       "Id": "api-gap-implementation",
       "Status": "open-local-follow-up",
       "Evidence": "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open."
-    },
-    {
-      "Id": "hosted-win-x86-full",
-      "Status": "quota-blocked",
-      "Evidence": "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent."
     },
     {
       "Id": "macos-support-decision",

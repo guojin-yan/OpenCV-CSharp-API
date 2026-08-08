@@ -1260,7 +1260,7 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Targeted real pack consumer verification surface guard passed."
-Write-Host "Pending factual target: win-x86/full has a dedicated full-only Windows WoW64 verifier and is not proven until that workflow executes successfully."
+Write-Host "Verified factual target: win-x86/full has successful hosted full-only Windows WoW64 producer, package, PE closure, and X86 consumer evidence."
 Write-Host "Hosted targets: win-x64/full and win-x64/mini on actual Windows x64; win-arm64/full and win-arm64/mini in their separate native Windows ARM64 verifier; ubuntu.24.04-x64/full, ubuntu.24.04-x64/mini, ubuntu.22.04-x64/full, ubuntu.22.04-x64/mini; ubuntu.24.04-arm64/full and ubuntu.24.04-arm64/mini run in their separate native ARM64 verifier."
 Write-Host "Container targets: ubuntu.22.04-arm64/full and ubuntu.22.04-arm64/mini through host-orchestrated official Ubuntu 22.04 on native AArch64; debian.12-arm64/full and debian.12-arm64/mini through host-orchestrated official Debian 12 on native AArch64; debian.12-x64/full and debian.12-x64/mini in debian:12; fedora.40-x64/full and fedora.40-x64/mini in fedora:40; rocky.9-x64/full and rocky.9-x64/mini in rockylinux:9; rhel.9-x64/full and rhel.9-x64/mini in official Red Hat UBI 9.8; alpine.3.20-x64/full and alpine.3.20-x64/mini through host-orchestrated alpine:3.20."
 Write-Host "All targeted execution is non-synthetic and non-publishing."

@@ -40,7 +40,7 @@ jobs:
           $supportedTargets = @($supportContract.realSupport) + @($supportContract.pending | ForEach-Object { [string]$_.target })
           $selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces the real-supported Windows/Linux targets, pending win-x86/full, and pending Android full/mini targets for arm64-v8a, armeabi-v7a, x86_64, and x86. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
+            throw "runtime-input.yml currently produces all real-supported targets plus pending Android full/mini targets for arm64-v8a and armeabi-v7a. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
           }
 
           $ridSpec = @($runtimeMatrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })

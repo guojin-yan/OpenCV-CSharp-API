@@ -142,7 +142,7 @@ try {
     }
     foreach ($token in @(
             'runtime-support-contract.json',
-            '$realTargets.Count -ne 28',
+            '$realTargets.Count -ne 29',
             'Publication manifest must contain exactly',
             'JYPPX.OpenCV.CSharp.API',
             'nupkg-$rid-$profile',
@@ -187,19 +187,19 @@ try {
     Invoke-PowerShellExpectedFailure -Name $badArtifactPath -Script $publicationManifest -Arguments @('-ManifestPath', $badArtifactPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'metadata mismatch'
 
     $pendingTarget = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
-    $pendingTarget.Packages[1].Rid = 'win-x86'
+    $pendingTarget.Packages[1].Rid = 'android-arm64'
     $pendingTarget.Packages[1].RuntimeProfile = 'full'
-    $pendingTarget.Packages[1].PackageId = 'JYPPX.OpenCV.runtime.win-x86'
-    $pendingTarget.Packages[1].ArtifactName = 'nupkg-win-x86-full'
+    $pendingTarget.Packages[1].PackageId = 'JYPPX.OpenCV.runtime.android-arm64'
+    $pendingTarget.Packages[1].ArtifactName = 'nupkg-android-arm64-full'
     $pendingTargetPath = Join-Path $temporaryRoot 'pending-target.json'
     [IO.File]::WriteAllText($pendingTargetPath, (($pendingTarget | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
     Invoke-PowerShellExpectedFailure -Name $pendingTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $pendingTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'missing exact package'
 
     $excludedTarget = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
-    $excludedTarget.Packages[1].Rid = 'android-arm64'
-    $excludedTarget.Packages[1].RuntimeProfile = 'full'
-    $excludedTarget.Packages[1].PackageId = 'JYPPX.OpenCV.runtime.android-arm64'
-    $excludedTarget.Packages[1].ArtifactName = 'nupkg-android-arm64-full'
+    $excludedTarget.Packages[1].Rid = 'win-x86'
+    $excludedTarget.Packages[1].RuntimeProfile = 'mini'
+    $excludedTarget.Packages[1].PackageId = 'JYPPX.OpenCV.runtime.win-x86.mini'
+    $excludedTarget.Packages[1].ArtifactName = 'nupkg-win-x86-mini'
     $excludedTargetPath = Join-Path $temporaryRoot 'excluded-target.json'
     [IO.File]::WriteAllText($excludedTargetPath, (($excludedTarget | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
     Invoke-PowerShellExpectedFailure -Name $excludedTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $excludedTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'missing exact package'
@@ -214,7 +214,7 @@ try {
     $missingPackage.Packages = @($missingPackage.Packages | Select-Object -Skip 1)
     $missingPackagePath = Join-Path $temporaryRoot 'missing-package.json'
     [IO.File]::WriteAllText($missingPackagePath, (($missingPackage | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'exactly 29 packages'
+    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'exactly 30 packages'
 
     $fixtureProject = Join-Path $temporaryRoot "fixture/Fixture.csproj"
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $fixtureProject) | Out-Null

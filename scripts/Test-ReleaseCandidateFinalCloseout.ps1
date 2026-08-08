@@ -379,7 +379,10 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.SourceSet.Sha256 -eq $ExpectedSourceHash) -Issue "Final closeout source-set digest drifted" -Text "expected=$ExpectedSourceHash actual=$($Record.SourceSet.Sha256)"
 
     Assert-True -List $List -Condition ([int]$Record.PackageMatrix.RidCount -gt 0 -and [int]$Record.PackageMatrix.ProfileCount -eq 2 -and [int]$Record.PackageMatrix.EntryCount -eq 34 -and $Record.PackageMatrix.Sha256 -match "^[0-9a-f]{64}$") -Issue "Final closeout package matrix evidence drifted"
-    Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 28 -and $Record.SupportContract.PendingSupportCount -eq 5 -and $Record.SupportContract.ExcludedSupportCount -eq 1 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "hosted-evidence-pending" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
+    Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 29 -and $Record.SupportContract.PendingSupportCount -eq 4 -and $Record.SupportContract.ExcludedSupportCount -eq 1 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "real-supported" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
+    $hostedEvidence = $Record.SupportContract.HostedPromotionEvidence
+    Assert-True -List $List -Condition ($null -ne $hostedEvidence -and $hostedEvidence.target -eq 'win-x86/full' -and $hostedEvidence.status -eq 'verified-hosted-evidence' -and $hostedEvidence.sourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8' -and [long]$hostedEvidence.runtimeInputRunId -eq 31162854992 -and [long]$hostedEvidence.packRunId -eq 31171822232 -and [long]$hostedEvidence.consumerRunId -eq 31171822232) -Issue 'Final closeout Windows x86 hosted promotion evidence drifted'
+    Assert-True -List $List -Condition ($hostedEvidence.hostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $hostedEvidence.artifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded' -and $hostedEvidence.hostedPackageManifestSha256 -eq 'eedb212724a7f176bc913cc92b09ca086a4d7129f069a964c3195a3b8557c353' -and $hostedEvidence.hostedChangeControlSha256 -eq '69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332') -Issue 'Final closeout Windows x86 hosted audit hashes drifted'
 
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.Managed.Sha256 -eq "efa74df10be5ea4d91848b288a86ea26e32f620e6d750e92921ed6a35242bce0" -and $Record.ApiAbiBaseline.Managed.TypeCount -eq 632 -and $Record.ApiAbiBaseline.Managed.MemberCount -eq 6817 -and $Record.ApiAbiBaseline.Managed.NamespaceCount -eq 41 -and $Record.ApiAbiBaseline.Managed.TargetFramework -eq "net8.0") -Issue "Final closeout managed API baseline evidence drifted"
     Assert-True -List $List -Condition ($Record.ApiAbiBaseline.NativeFull.Sha256 -eq "9def0a4e7ff2aac6b38b2681dbf8c2f5ad4eef513a563877c938938cffa3c7b9" -and $Record.ApiAbiBaseline.NativeFull.FunctionCount -eq 2663 -and $Record.ApiAbiBaseline.NativeMini.Sha256 -eq "aac22280e4b88aa45bbc3710ecf0633ba0658e0ba40a0c80a031bb1cf287a9ec" -and $Record.ApiAbiBaseline.NativeMini.FunctionCount -eq 527) -Issue "Final closeout native ABI baseline evidence drifted"
@@ -476,7 +479,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.Rollback.Status -eq "not-published" -and -not [bool]$Record.Rollback.PackageRemovalRequired -and $Record.ReleaseApproval.Status -eq "not-approved" -and -not [bool]$Record.ReleaseApproval.ReleaseReady -and $Record.ReleaseApproval.PublicationDecision -eq "do-not-publish") -Issue "Final closeout rollback or publication decision drifted"
     Assert-True -List $List -Condition (-not [bool]$Record.PrivateKeyMaterialPresent -and -not [bool]$Record.SecretMaterialPresent -and [bool]$Record.Deterministic) -Issue "Final closeout must exclude secrets and remain deterministic"
 
-    $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","hosted-win-x86-full","macos-support-decision","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
+    $expectedBlockers = @("android-arm-device-evidence","api-gap-implementation","macos-support-decision","publication-authorization","release-approval","repository-signing-verification","sbom-inputs")
     $actualBlockers = @($Record.ExternalBlockers | ForEach-Object { [string]$_.Id })
     Assert-True -List $List -Condition (($actualBlockers -join ",") -eq ($expectedBlockers -join ",")) -Issue "Final closeout blocker ledger is missing, reordered, or incomplete"
     foreach ($blocker in $Record.ExternalBlockers) {
@@ -532,13 +535,13 @@ Assert-FixtureRejected -Name "source identity drift" -ExpectedIssue "candidate i
 Assert-FixtureRejected -Name "support count drift" -ExpectedIssue "support partition" -Action {
     param($list)
     $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
-    $fixture.SupportContract.RealSupportCount = 29
+    $fixture.SupportContract.RealSupportCount = 28
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
-Assert-FixtureRejected -Name "false hosted promotion" -ExpectedIssue "support partition" -Action {
+Assert-FixtureRejected -Name "false hosted promotion" -ExpectedIssue "hosted promotion" -Action {
     param($list)
     $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
-    $fixture.SupportContract.WinX86FullStatus = "real-supported"
+    $fixture.SupportContract.HostedPromotionEvidence.status = "pending-hosted-evidence"
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
 Assert-FixtureRejected -Name "false signing readiness" -ExpectedIssue "signing state" -Action {

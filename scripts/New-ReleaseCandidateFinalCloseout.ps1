@@ -421,11 +421,11 @@ function Get-Record {
         "tools/VideoUpstreamMap/extract_video.py"
     )
     $evidence = @(Get-OrdinalSortedObjects -Values @($evidencePaths | ForEach-Object { Get-FileEvidence -RelativePath $_ }) -Property "Path")
+    $winX86FullStatus = if (@($support.realSupport) -contains 'win-x86/full') { 'real-supported' } else { [string](@($support.pending | Where-Object target -eq 'win-x86/full')[0].status) }
 
     $blockers = @(
         [ordered]@{ Id = "android-arm-device-evidence"; Status = "android-evidence-pending"; Evidence = "Android x64/x86 Full and Mini have authoritative single-loader emulator loading evidence. Android ARM/ARM64 NDK, ELF, same-run package, and APK evidence has passed; matching device loading evidence remains required before promotion." },
         [ordered]@{ Id = "api-gap-implementation"; Status = "open-local-follow-up"; Evidence = "The structured ImgProc, ImgCodecs, VideoIO, Calib3D, Core, DNN, Features, ObjDetect, main CPU Photo, and main Video slices are closed at zero missing callable declarations. Repository-wide upstream parity and prioritized ownership/marshalling work remain open." },
-        [ordered]@{ Id = "hosted-win-x86-full"; Status = "quota-blocked"; Evidence = "Hosted producer, artifact handoff, same-run pack, independent audit, and X86 consumer evidence are absent." },
         [ordered]@{ Id = "macos-support-decision"; Status = "decision-deferred"; Evidence = "macOS is outside the declared matrix until an explicit decision and native/consumer evidence exist." },
         [ordered]@{ Id = "publication-authorization"; Status = "not-authorized"; Evidence = "No publish, tag, release, or mutable feed operation is authorized in the current quota state." },
         [ordered]@{ Id = "release-approval"; Status = "candidate-token-required"; Evidence = "The owner accepted the version-bounded stable 5.0.0 single-maintainer risk exception; exact candidate bytes still require the dry-run authorization token." },
@@ -459,9 +459,10 @@ function Get-Record {
             PendingSupportCount = @($support.pending).Count
             ExcludedSupportCount = @($support.excluded).Count
             OutsideMatrixCount = @($support.outsideMatrix).Count
-            WinX86FullStatus = $support.pending[0].status
+            WinX86FullStatus = $winX86FullStatus
             WinX86MiniStatus = ($support.excluded | Where-Object { $_.target -eq "win-x86/mini" }).status
             PackageSurfaceDefinesSupport = [bool]$support.policy.packageSurfaceIsSupport
+            HostedPromotionEvidence = $support.hostedPromotionEvidence
         }
         ApiAbiBaseline = [ordered]@{
             Managed = [ordered]@{
