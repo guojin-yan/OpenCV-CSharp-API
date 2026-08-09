@@ -90,6 +90,7 @@ jobs:
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           PACKAGE_VERSION: ${{ inputs.package_version }}
           CANDIDATE_CREATED: ${{ inputs.candidate_created }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
           PUBLICATION_MANIFEST_JSON: ${{ inputs.publication_manifest_json }}
           GH_TOKEN: ${{ github.token }}
         run: |
