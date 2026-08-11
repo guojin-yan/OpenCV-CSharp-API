@@ -4,7 +4,7 @@
   <img alt="OpenCV CSharp API - 面向 C# 与 .NET 的 OpenCV 5 封装" src="docs/images/readme/hero-light.svg" width="100%">
 </picture>
 
-<h1 align="center">OpenCV CSharp API</h1>
+<h1 align="center">📷 OpenCV CSharp API</h1>
 
 <p align="center">
   面向 C# 与 .NET 的版本中立 OpenCV 5.0 封装，提供 managed API 和经过验证的 native runtime 包。
@@ -25,13 +25,13 @@
 
 <p align="center"><a href="README.md">English</a> | <strong>简体中文</strong></p>
 
-## 项目简介
+## 📖 项目简介
 
 OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [OpenCV 5.0](https://opencv.org/) 引入 C#。项目提供符合 .NET 使用习惯的 managed API、稳定的 native C ABI、明确的 native 资源所有权，以及面向已验证 Windows、Linux 和 Android 模拟器目标的 runtime NuGet 包。
 
 当前公开版本由下方 NuGet 实时徽章显示。稳定版按照语义化版本规则维护已声明 managed API 与 native ABI 的兼容性，并持续增加兼容的计算机视觉能力。
 
-## 版本亮点
+## ✨ 版本亮点
 
 - 广泛覆盖 Core、ImgProc、ImgCodecs、VideoIO、Calib3D、DNN、Features、ObjDetect、Photo、Video、HighGui、Stitching、ML、Tracking 和部分 contrib API。
 - 一个 managed 包，以及面向 14 个已验证 Windows、Linux 和 Android 模拟器 RID 的 full 与 mini native runtime profile。
@@ -40,7 +40,7 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 - 提供 23 个按功能分组的无头完整案例并生成可检查 PNG；模型 DNN 案例使用一次性哈希校验资产包，其余案例完全离线运行。
 - 兼容性基线覆盖 632 个 public managed type、6,817 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
 
-## 5.0.0 本次更新
+## 📢 5.0.0 本次更新
 
 - 新增精确包版本诊断、更完整的颜色转换、非连续 `Mat` 行/stride 安全访问、类型化像素向量和类型安全的图像编码参数。
 - 新增 `VideoCapture.TryRead`/`TryRetrieve`，以及由 OpenCV 原生实现的普通、按类别批量、旋转框和 Soft-NMS 检测后处理。
@@ -48,7 +48,7 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 
 参见 [5.0.0 详细说明](docs/releases/5.0.0.md)或完整的[版本变更总览](CHANGELOG.md)。公开可用状态以 NuGet 实时徽章、GitHub Packages 页面和对应 GitHub Release 为准。
 
-## 30 秒快速开始
+## 🚀 30 秒快速开始
 
 ### 1. 安装 NuGet 包
 
@@ -93,7 +93,7 @@ dotnet run
 
 完整的[快速开始](docs/articles/quick-start.md)包含 package 选择、Mat、图像编解码、几何运算和确定性资源释放说明。
 
-## NuGet 包
+## 📦 NuGet 包
 
 ### Managed API
 
@@ -119,7 +119,7 @@ full profile 保证包含矩阵要求的模块，包括 DNN、ML、标定、Feat
 
 启动诊断时，`OpenCvSharpBuildInfo.NuGetPackageVersion` 返回包含 `preview.N` 在内的精确规范包版本；`OpenCvSharpBuildInfo.NativeAbiVersion` 与 `GetLoadedNativeAbiVersion()` 用于确认 managed/native ABI 组合。runtime 加载后调用 `VerifyNativeRuntimeCompatibility()`，可以在 managed 包、native ABI 或 OpenCV 版本不匹配时立即失败。
 
-## Native Runtime 包
+## 🧩 Native Runtime 包
 
 每个版本都发布 managed 包，以及 [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json) 中全部归类为 `realSupport` 的 runtime 包。每个包都从同一份审核通过的 candidate 推送到两个公开 registry；正式发布产物与验证证据同时发布在 [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases)。
 
@@ -147,7 +147,7 @@ Windows x86 Full 已通过正式 hosted WoW64 producer、artifact、package、PE
 
 如果 no matching runtime package，请使用 `scripts/Build-OpenCV.ps1` 构建 local native runtime，再通过 `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>` 暂存，并用 `OpenCvNativeRuntimeDir` 将本地示例或测试指向该目录。对应 package fallback 命令为 `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`。完整流程见 [Linked Runtime 构建指南](docs/articles/linked-runtime-build-guide.md)。
 
-## 选择 Full 或 Mini
+## ⚖️ 选择 Full 或 Mini
 
 | 能力 | Full | Mini |
 | --- | :---: | :---: |
@@ -160,7 +160,7 @@ Windows x86 Full 已通过正式 hosted WoW64 producer、artifact、package、PE
 | Tracking、部分 contrib 模块 | 取决于 runtime | 不支持 |
 | 模块不可用时的稳定响应 | `NOT_LINKED` | `NOT_LINKED` |
 
-## 系列教程与可视化结果
+## 🧪 系列教程与可视化结果
 
 [`samples/ConsoleSamples`](samples/ConsoleSamples) 包含广覆盖 smoke 和原有 6 个可在无头环境运行的展示流程；扩展后的分组案例见 [`samples/README.md`](samples/README.md)。设置中文字体路径后可运行完整展示，其中包含通过 OpenCV `putText` 绘制中文：
 
@@ -181,7 +181,7 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 
 学习时只运行当前功能对应的项目。每个案例都会恢复公开 managed API 和匹配的 runtime 夹具，完成一套功能流程，输出聚焦结果并打印包/native 构建信息。用于可复现验证的版本只维护在 `samples/SamplePackages.props`，普通安装命令不写死版本。
 
-## 文档
+## 📚 文档
 
 | 资源 | 说明 |
 | --- | --- |
@@ -202,7 +202,7 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 | [支持与生命周期策略](docs/articles/support-lifecycle-policy.md) | real、pending 与 excluded 目标 |
 | [NuGet Repository Signing 指南](docs/articles/nuget-repository-signing-guide.md) | 发布信任和验证流程 |
 
-## 从源码构建
+## 🔧 从源码构建
 
 环境要求：
 
@@ -221,7 +221,7 @@ dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
 
 native 和 package 构建请使用 [Linked Runtime 构建指南](docs/articles/linked-runtime-build-guide.md)。synthetic runtime input 只用于验证 package shape，禁止发布。
 
-## 项目结构
+## 🏗️ 项目结构
 
 ```text
 OpenCV-CSharp-API/
@@ -244,21 +244,21 @@ OpenCV-CSharp-API/
 `-- .github/workflows/                  CI、runtime 生产、打包与发布
 ```
 
-## 参与贡献
+## 🤝 参与贡献
 
 欢迎提交 Issue 和 Pull Request。修改 public API、native ABI、package identity、所有权或 runtime 行为之前，请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [API/ABI 兼容策略](docs/articles/api-abi-compatibility-policy.md)。
 
 请提供聚焦测试，保持 public identity 版本中立，并明确记录无法支持的 upstream 行为。
 
-## 致谢
+## 🙏 致谢
 
 本项目建立在 [OpenCV](https://opencv.org/) 及其社区贡献之上。算法行为和 native runtime 许可证以 OpenCV 上游内容为准。
 
-## 许可证
+## 📄 许可证
 
 managed API、native wrapper 与 OpenCV runtime 均使用 [Apache License 2.0](LICENSE)，因此 managed 和 runtime NuGet 包统一使用 SPDX expression `Apache-2.0`；包内第三方 notice 对相应组件具有最终效力。
 
-## 技术支持与联系方式
+## 📮 技术支持与联系方式
 
 - 通过 [GitHub Issues](https://github.com/guojin-yan/OpenCV-CSharp-API/issues) 报告 Bug 或提出功能建议。
 - 通过 [GitHub Discussions](https://github.com/guojin-yan/OpenCV-CSharp-API/discussions) 交流使用问题。
@@ -266,9 +266,36 @@ managed API、native wrapper 与 OpenCV runtime 均使用 [Apache License 2.0](L
 
 `5.0.0` 是首个稳定版。用于生产、工业或关键任务系统前，请针对实际业务流程完成严格测试，尤其要关注与已发布证据矩阵不同的平台和 runtime 组合。
 
-## 软件声明
+<p align="center">
+  <img src="docs/images/readme/contact-sponsor-zh.png" alt="作者联系与赞助二维码" width="100%">
+</p>
 
-本项目在开发过程中使用了 AI 辅助，尚未在所有设备、工作负载和边缘场景下完成穷尽测试。源码中不包含任何有意引入的恶意功能。使用前请阅读许可证和第三方 notice，根据自身需求审查代码，并在生产或安全关键场景中完成严格验证。
+## 📢 软件声明
+
+**1. 开源协议声明**
+
+作者所有开源项目代码均遵循 **Apache License 2.0** 开源协议。
+
+*特别说明：本项目集成了若干第三方库。若任何第三方库的许可协议与 Apache 2.0 协议存在冲突或不一致，均以该第三方库的原始许可协议为准。本项目不包含也不代表这些第三方库的授权声明，使用前请务必阅读并遵守第三方库的相关许可。*
+
+**2. 代码开发与质量说明**
+
+- **AI 辅助开发**：本代码在开发过程中使用了人工智能（AI）辅助生成与优化，并非完全由人工逐行编写。
+- **安全性承诺**：**作者郑重声明，本代码中绝无任何有意设置的后门、病毒、木马或旨在破坏用户设备、窃取数据的恶意代码。**
+- **技术局限性**：受限于作者个人的技术水平与能力，代码中可能存在因逻辑不严谨、优化不足或经验欠缺导致的低级问题（例如但不限于内存泄漏、偶发崩溃、资源未释放等）。这些问题纯属能力不足所致，并非主观故意。
+- **测试范围**：由于作者精力有限，未对本软件进行全方位、覆盖所有边缘场景的完整测试。
+
+**3. 免责声明（重要）**
+
+**请在将本代码应用于任何实际项目（特别是商业、工业或关键任务环境）之前，务必进行详尽、严格的自行测试与验证。** 鉴于上述可能存在的代码缺陷及测试覆盖不足，**因使用本代码而导致的任何直接或间接损失（包括但不限于设备故障、数据丢失、系统瘫痪或利润损失等），本作者概不负责。** 一旦您开始使用本代码，即表示您已知晓上述风险并同意自行承担一切后果，相关问题与本作者无关。
+
+**4. 代码开源范围**
+
+本项目承诺核心逻辑代码完全开源，但上述提到的“第三方库”的二进制文件、源代码或相关资源不在本项目的开源义务范围内，请根据其各自的指引获取。
+
+**5. 社区与反馈**
+
+尽管存在上述不足，我们仍欢迎大家下载使用、提交 Issue 或参与测试，共同完善项目。如果您在使用过程中发现 Bug、内存溢出或有改进建议，欢迎通过项目主页提供的联系方式与作者取得联系，我们将尽力在有限的时间内提供协助。
 
 <details>
 <summary>维护者构建与兼容边界</summary>

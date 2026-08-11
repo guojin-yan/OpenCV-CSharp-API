@@ -4,7 +4,7 @@
   <img alt="OpenCV CSharp API - OpenCV 5 bindings for C# and .NET" src="docs/images/readme/hero-light.svg" width="100%">
 </picture>
 
-<h1 align="center">OpenCV CSharp API</h1>
+<h1 align="center">📷 OpenCV CSharp API</h1>
 
 <p align="center">
   Version-neutral OpenCV 5.0 bindings for C# and .NET, with managed APIs and verified native runtime packages.
@@ -25,13 +25,13 @@
 
 <p align="center"><strong>English</strong> | <a href="README_cn.md">简体中文</a></p>
 
-## Introduction
+## 📖 Introduction
 
 OpenCV CSharp API brings [OpenCV 5.0](https://opencv.org/) to C# through the familiar `JYPPX.OpenCvSharp.*` namespace family. It combines an idiomatic managed API, a stable native C ABI, explicit native-resource ownership, and runtime NuGet packages for verified Windows, Linux, and Android emulator targets.
 
 The current public version is reported by the live NuGet badges below. Stable releases preserve the declared managed API and native ABI under semantic versioning while continuing to add compatible computer-vision capabilities.
 
-## Release Highlights
+## ✨ Release Highlights
 
 - Broad coverage of Core, ImgProc, ImgCodecs, VideoIO, Calib3D, DNN, Features, ObjDetect, Photo, Video, HighGui, Stitching, ML, Tracking, and selected contrib APIs.
 - One managed package plus full and mini native runtime profiles for 14 verified Windows, Linux, and Android emulator RIDs.
@@ -40,7 +40,7 @@ The current public version is reported by the live NuGet badges below. Stable re
 - Twenty-three grouped, headless workflows with inspectable PNG output; model-backed DNN cases use one-time, hash-verified asset bundles while the remaining cases stay fully offline.
 - Checked compatibility baselines covering 632 public managed types, 6,817 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
 
-## What's New In 5.0.0
+## 📢 What's New In 5.0.0
 
 - Added package-version diagnostics, broader color conversions, safe non-contiguous `Mat` row/stride access, typed pixel vectors, and type-safe image encoder parameters.
 - Added `VideoCapture.TryRead`/`TryRetrieve` and OpenCV-backed standard, batched, rotated-box, and Soft-NMS detection postprocessing.
@@ -48,7 +48,7 @@ The current public version is reported by the live NuGet badges below. Stable re
 
 See the [detailed 5.0.0 notes](docs/releases/5.0.0.md) or browse the complete [changelog](CHANGELOG.md). Public availability is confirmed by the live NuGet badges, GitHub Packages pages, and the matching GitHub Release.
 
-## Get Started In 30 Seconds
+## 🚀 Get Started In 30 Seconds
 
 ### 1. Install The Packages
 
@@ -93,7 +93,7 @@ Expected output:
 
 The complete [Quick Start](docs/articles/quick-start.md) covers package selection, matrices, image codecs, geometry, and deterministic disposal.
 
-## NuGet Packages
+## 📦 NuGet Packages
 
 ### Managed API
 
@@ -119,7 +119,7 @@ Do not reference full and mini runtime packages together. Keep the managed and r
 
 For startup diagnostics, `OpenCvSharpBuildInfo.NuGetPackageVersion` reports the exact normalized package version (including `preview.N`), while `OpenCvSharpBuildInfo.NativeAbiVersion` and `GetLoadedNativeAbiVersion()` identify the managed/native ABI pair. Call `VerifyNativeRuntimeCompatibility()` after the runtime is loaded to fail fast when the managed package, native ABI, or OpenCV runtime version do not match.
 
-## Native Runtime Packages
+## 🧩 Native Runtime Packages
 
 Each release publishes the managed package and every runtime package classified as `realSupport` in [`runtime-support-contract.json`](packaging/runtime/runtime-support-contract.json). Every package is promoted to both public registries from the same reviewed candidate; the formal assets and verification evidence are published on [GitHub Releases](https://github.com/guojin-yan/OpenCV-CSharp-API/releases).
 
@@ -147,7 +147,7 @@ Windows x86 Full is real-supported after verified hosted WoW64 producer, artifac
 
 If there is no matching runtime package, build a local native runtime with `scripts/Build-OpenCV.ps1`, stage it with `scripts/Stage-Runtime.ps1 -OpenCvNativeRuntimeDir <path>`, and point local samples or tests at it with `OpenCvNativeRuntimeDir`. The corresponding package fallback is `Pack-Runtime.ps1 -StageRuntime -OpenCvNativeRuntimeDir <runtime-native-dir>`. See the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md) for the supported local native runtime workflow.
 
-## Choose Full Or Mini
+## ⚖️ Choose Full Or Mini
 
 | Capability | Full | Mini |
 | --- | :---: | :---: |
@@ -160,7 +160,7 @@ If there is no matching runtime package, build a local native runtime with `scri
 | Tracking, additional contrib modules | Runtime-dependent | No |
 | Stable response for an unavailable module | `NOT_LINKED` | `NOT_LINKED` |
 
-## Tutorial Series And Visual Results
+## 🧪 Tutorial Series And Visual Results
 
 The [`samples/ConsoleSamples`](samples/ConsoleSamples) project includes broad smoke coverage and the original six-part, headless showcase. The expanded grouped catalog is listed in [`samples/README.md`](samples/README.md). Set a CJK font path to run the complete showcase, including OpenCV `putText` with Chinese:
 
@@ -181,7 +181,7 @@ The [`samples`](samples) directory is a scalable catalog of 23 complete examples
 
 Run only the project for the feature you are learning. Each case restores the public managed API and the matching runtime fixture, performs a complete workflow, writes a focused result, and prints package/native build metadata. The reproducible fixture pin lives in `samples/SamplePackages.props`; normal installation commands remain version-neutral.
 
-## Documentation
+## 📚 Documentation
 
 | Resource | Description |
 | --- | --- |
@@ -202,7 +202,7 @@ Run only the project for the feature you are learning. Each case restores the pu
 | [Support and Lifecycle Policy](docs/articles/support-lifecycle-policy.md) | Real support, pending, and excluded targets |
 | [NuGet Repository Signing Guide](docs/articles/nuget-repository-signing-guide.md) | Publication trust and verification |
 
-## Build From Source
+## 🔧 Build From Source
 
 Requirements:
 
@@ -221,7 +221,7 @@ dotnet build .\OpenCV-CSharp-API.slnx -c Release --no-restore
 
 Native and package instructions are intentionally kept in the [Linked Runtime Build Guide](docs/articles/linked-runtime-build-guide.md). Synthetic runtime inputs validate package shape only and must never be published.
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```text
 OpenCV-CSharp-API/
@@ -244,21 +244,21 @@ OpenCV-CSharp-API/
 `-- .github/workflows/                  CI, runtime production, pack, and publication
 ```
 
-## Contributing
+## 🤝 Contributing
 
 Issues and pull requests are welcome. Before changing public API, native ABI, package identity, ownership, or runtime behavior, read [CONTRIBUTING.md](CONTRIBUTING.md) and the [API/ABI Compatibility Policy](docs/articles/api-abi-compatibility-policy.md).
 
 Please include focused tests, preserve version-neutral public identities, and document any unsupported upstream behavior explicitly.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 This project builds on [OpenCV](https://opencv.org/) and its contributors. OpenCV remains the authoritative source for algorithm behavior and native runtime licensing.
 
-## License
+## 📄 License
 
 The managed API, native wrapper, and OpenCV runtime are licensed under the [Apache License 2.0](LICENSE), so managed and runtime NuGet packages use the SPDX expression `Apache-2.0`. Packaged third-party notices remain authoritative for their respective components.
 
-## Support And Contact
+## 📮 Support And Contact
 
 - [GitHub Issues](https://github.com/guojin-yan/OpenCV-CSharp-API/issues) for bugs and feature requests.
 - [GitHub Discussions](https://github.com/guojin-yan/OpenCV-CSharp-API/discussions) for usage questions.
@@ -266,9 +266,36 @@ The managed API, native wrapper, and OpenCV runtime are licensed under the [Apac
 
 `5.0.0` is the first stable release. Test representative workflows before using it in production, industrial, or mission-critical systems, especially on platform/runtime combinations that differ from the published evidence matrix.
 
-## Software Notice
+<p align="center">
+  <img src="docs/images/readme/contact-sponsor-en.png" alt="Author contact and sponsorship QR codes" width="100%">
+</p>
 
-This project uses AI-assisted development and has not been exhaustively tested across every device, workload, and edge case. The source contains no intentionally introduced malicious functionality. Review the license and third-party notices, validate the library against your own requirements, and perform rigorous testing before production or safety-critical use.
+## 📢 Software Notice
+
+**1. Open-Source License Statement**
+
+All open-source project code released by the author is licensed under the **Apache License 2.0**.
+
+*Special note: This project integrates several third-party libraries. If the license of any third-party library conflicts with or differs from the Apache License 2.0, that third-party library's original license shall prevail. This project's license statement neither covers nor represents the licensing terms of those third-party libraries. Before use, be sure to read and comply with the applicable license of each third-party library.*
+
+**2. Code Development And Quality Statement**
+
+- **AI-Assisted Development**: Artificial intelligence (AI) was used to assist in generating and optimizing this code during development; it was not written entirely by hand, line by line.
+- **Security Commitment**: **The author solemnly declares that this code contains no intentionally embedded backdoors, viruses, Trojan horses, or other malicious code intended to damage user devices or steal data.**
+- **Technical Limitations**: Due to limitations in the author's individual technical knowledge and capabilities, the code may contain basic issues caused by insufficiently rigorous logic, inadequate optimization, or limited experience, including but not limited to memory leaks, intermittent crashes, or unreleased resources. Such issues result solely from limited capability and are not intentional.
+- **Scope Of Testing**: Due to the author's limited time and energy, the software has not undergone comprehensive testing covering every edge case.
+
+**3. Disclaimer (Important)**
+
+**Before applying this code to any real-world project, especially in commercial, industrial, or mission-critical environments, you must conduct thorough and rigorous testing and validation yourself.** Given the possible code defects and limited test coverage described above, **the author assumes no responsibility for any direct or indirect loss arising from the use of this code, including but not limited to equipment failure, data loss, system outages, or loss of profit.** By using this code, you acknowledge these risks and agree to bear all resulting consequences; the author shall not be held responsible for related issues.
+
+**4. Scope Of Open-Source Code**
+
+This project commits to keeping its core logic fully open source. However, the binary files, source code, and related resources of the third-party libraries mentioned above are outside the scope of this project's open-source obligations. Obtain them according to their respective instructions.
+
+**5. Community And Feedback**
+
+Despite the limitations described above, everyone is welcome to download and use the project, submit Issues, or participate in testing to help improve it. If you discover bugs, memory overflows, or opportunities for improvement, please contact the author through the channels provided on the project homepage. The author will make a reasonable effort to assist within the time available.
 
 <details>
 <summary>Maintainer build and compatibility boundaries</summary>
