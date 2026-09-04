@@ -12,6 +12,7 @@ namespace JYPPX.OpenCvSharp.Core
     {
         private NativeMatHandle handle;
         private bool disposed;
+        private long viewRevision;
 
         /// <summary>
         /// Initializes an empty managed matrix placeholder.
@@ -422,6 +423,15 @@ namespace JYPPX.OpenCvSharp.Core
             }
         }
 
+        internal long ViewRevision
+        {
+            get
+            {
+                ThrowIfDisposed();
+                return viewRevision;
+            }
+        }
+
         /// <summary>
         /// Creates a zero-filled matrix.
         /// 创建填充为零的矩阵。
@@ -511,6 +521,7 @@ namespace JYPPX.OpenCvSharp.Core
         {
             ThrowIfDisposed();
             NativeException.ThrowIfError(NativeMethods.MatCreateInPlace(NativeHandle, rows, cols, type));
+            viewRevision = checked(viewRevision + 1);
         }
 
         /// <summary>
@@ -868,6 +879,17 @@ namespace JYPPX.OpenCvSharp.Core
         {
             ThrowIfDisposed();
             return MatViewAdapter.AsRows<T>(this);
+        }
+
+        /// <summary>
+        /// Creates a type-checked borrowed pixel view. This API is a preview and is available on Span-capable target frameworks.
+        /// </summary>
+        /// <typeparam name="TPixel">A pixel type registered by <see cref="PixelTypeTraits"/>.</typeparam>
+        /// <returns>A typed view that does not own or dispose this matrix.</returns>
+        public MatView<TPixel> AsView<TPixel>() where TPixel : unmanaged
+        {
+            ThrowIfDisposed();
+            return new MatView<TPixel>(this);
         }
 
         /// <summary>

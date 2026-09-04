@@ -6,7 +6,7 @@
 
 ## Highlights / 主要内容
 
-- 632 public managed types, 6,817 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp` under a checked compatibility baseline.
+- 643 public managed types, 6,940 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp` under a checked compatibility baseline.
 - 2,663 full-profile and 527 mini-profile native ABI functions, with complete native-to-managed binding coverage for the declared ABI.
 - `OpenCvSharpBuildInfo.NuGetPackageVersion` reports the exact `5.0.0` package identity; native ABI version `1` is exported and verified before runtime use.
 - `ColorConversionCodes` mirrors the OpenCV 5.0.0 conversion table, including BGR/RGB, BGRA/RGBA, grayscale, HSV, Lab, YUV, and Bayer families.
@@ -16,12 +16,15 @@
 - Image decode/encode, processing, geometry, calibration, video, DNN, object detection, Photo, machine learning, Tracking, Stitching, and selected contrib workflows.
 - Corrected Full runtimes make OpenCV `ml` mandatory, ship one neutral loader plus 17 required OpenCV modules, and verify both DNN inference and trained KNN prediction.
 - Deterministic normalized NuGet packages, package-owned full/mini native smoke, package provenance, SPDX-2.3 SBOM generation, and fail-closed release review.
+- Managed codec preflight now exposes header identification plus explicit input, dimension, pixel, frame, metadata, and ICC payload admission budgets before native decode.
+- Complete GIF, APNG, and animated WebP containers now contribute proven animation frame counts to the preflight frame and cumulative-pixel budgets; inconsistent or truncated containers remain unknown.
+- Classic TIFF version-42 files now contribute a proven first-IFD size and bounded next-IFD page count when the directory chain is complete; BigTIFF, cyclic/out-of-range directories, and heterogeneous page sizes remain fail-closed/unknown.
 - The stable managed package is checked by .NET package validation against the published `5.0.0-preview.1` API baseline before it can enter the candidate set.
 - Until the stable packages are public, repository-only sample package fixtures continue to pin the existing public `5.0.0-preview.1`; normal installation commands remain version-free and resolve the current stable package.
 - The exact support-contract-derived candidate is published to NuGet.org and GitHub Packages, then attached to a verified stable GitHub Release with both registry proofs; the intended final set is 30 packages after Windows x86 Full hosted promotion.
 - A 24-part [Tutorial Series](tutorial-series.md) and grouped standalone projects covering image processing, Chinese text, geometry, features, ML, DNN classification/detection/segmentation, document scanning, panorama stitching, motion analysis, tracking, and Android package loading.
 
-- 632 个 public managed type、6,817 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
+- 643 个 public managed type、6,940 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
 - full profile 2,663 个、mini profile 527 个 native ABI function，并对声明 ABI 保持完整 native-to-managed binding coverage。
 - `OpenCvSharpBuildInfo.NuGetPackageVersion` 返回精确的 `5.0.0` 包身份；native ABI 版本 `1` 已导出并在 runtime 使用前校验。
 - `ColorConversionCodes` 对齐 OpenCV 5.0.0 转换表，覆盖 BGR/RGB、BGRA/RGBA、灰度、HSV、Lab、YUV 和 Bayer 系列。
@@ -31,6 +34,9 @@
 - 覆盖图像编解码、处理、几何、标定、视频、DNN、目标检测、Photo、机器学习、Tracking、Stitching 和部分 contrib 工作流。
 - 修正 Full runtime 契约，将 OpenCV `ml` 设为必需模块，交付一个中性 loader 加 17 个必需 OpenCV 模块，并同时验证 DNN 推理和真实训练后的 KNN 预测。
 - 提供确定性规范化 NuGet 包、包内 full/mini native smoke、package provenance、SPDX-2.3 SBOM 和 fail-closed 发布审核。
+- managed codec 预检新增头部识别，以及 native 解码前的输入、尺寸、像素数、帧数、metadata 和 ICC 负载准入预算。
+- 结构完整的 GIF、APNG 和动画 WebP 现在会把可证明的动画帧数纳入预检的帧数与累计像素预算；不一致或截断的容器保持未知。
+- 经典 TIFF 版本 42 文件在目录链完整时，现在会提供可证明的首个 IFD 尺寸和有界 next-IFD 页数；BigTIFF、循环/越界目录以及页尺寸不一致的情况仍保持失败关闭/未知。
 - 稳定版 managed 包进入候选集合前，必须通过 .NET package validation 与已发布 `5.0.0-preview.1` API 基线的兼容性比较。
 - 在稳定版包正式公开前，仓库内部案例的 package fixture 继续固定现有公开的 `5.0.0-preview.1`；普通安装命令不写死版本并解析当前稳定包。
 - 同一份精确的 29 包 candidate 发布到 NuGet.org 和 GitHub Packages，并在两个 registry 验证通过后附加到稳定版 GitHub Release。

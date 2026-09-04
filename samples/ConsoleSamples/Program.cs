@@ -141,6 +141,27 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             }
 
             Console.WriteLine(OpenCvSharpBuildInfo.GetDisplayString());
+            OpenCvCapabilities capabilities = OpenCvCapabilities.GetCurrent();
+            Console.WriteLine("Runtime platform: os=" + capabilities.OperatingSystemDescription
+                + ", arch=" + capabilities.ProcessArchitecture
+                + ", rid=" + (string.IsNullOrEmpty(capabilities.RuntimeIdentifier) ? "n/a" : capabilities.RuntimeIdentifier)
+                + ", framework=" + capabilities.RuntimeFrameworkDescription);
+            Console.WriteLine("Runtime capability: native=" + capabilities.NativeRuntime.State
+                + ", videoio=" + capabilities.VideoIOBackends.Count
+                + ", dnn=" + string.Join(",", capabilities.DnnBackends.Select(value => value.Backend + ":" + value.State))
+                + ", accelerators=" + string.Join(",", capabilities.Accelerators.Select(value => value.Name + ":" + value.State)));
+            PixelTypeDescriptor pixelType = PixelTypeDescriptor.Get<Vec3b>();
+            Console.WriteLine("Pixel traits: type=" + pixelType.ElementType.Name
+                + ", mat=" + pixelType.MatType
+                + ", elementBytes=" + pixelType.ElementSizeBytes
+                + ", channelOrder=" + pixelType.ChannelOrder);
+            byte[] preflightPng = new byte[24];
+            preflightPng[0] = 0x89; preflightPng[1] = 0x50; preflightPng[2] = 0x4E; preflightPng[3] = 0x47;
+            preflightPng[4] = 0x0D; preflightPng[5] = 0x0A; preflightPng[6] = 0x1A; preflightPng[7] = 0x0A;
+            preflightPng[12] = (byte)'I'; preflightPng[13] = (byte)'H'; preflightPng[14] = (byte)'D'; preflightPng[15] = (byte)'R';
+            preflightPng[19] = 0x02; preflightPng[23] = 0x02;
+            ImageIdentifyResult preflight = ImgCodecsCv2.Identify(preflightPng);
+            Console.WriteLine("Codec preflight: " + preflight);
 
             Point point = new Point(10, 20);
             Size size = new Size(640, 480);

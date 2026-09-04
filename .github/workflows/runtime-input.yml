@@ -116,7 +116,7 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Check project invariants
@@ -789,7 +789,7 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Check project invariants
@@ -1100,7 +1100,7 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Check project invariants
@@ -1822,7 +1822,7 @@ jobs:
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Check project invariants

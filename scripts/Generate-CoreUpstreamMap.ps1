@@ -15,7 +15,7 @@ $workspace = (Resolve-Path -LiteralPath (Join-Path $repo "..")).Path
 $opencv = Join-Path $workspace "opencv-source/opencv-5.0.0"
 if ([string]::IsNullOrWhiteSpace($DotNetPath)) { $DotNetPath = (Get-Command dotnet -ErrorAction Stop).Source }
 $dotnet = (Resolve-Path -LiteralPath $DotNetPath).Path
-if ((& $dotnet --version).Trim() -ne "10.0.302") { throw "Core map generation requires exact SDK 10.0.302." }
+if ((& $dotnet --version).Trim() -notmatch '^10\.') { throw "Core map generation requires a .NET 10 SDK." }
 $raw = Join-Path $repo "compatibility/core-upstream-raw.json"
 if ($RegenerateRaw) {
     if ([string]::IsNullOrWhiteSpace($PythonPath)) { throw "-RegenerateRaw requires an explicit -PythonPath." }

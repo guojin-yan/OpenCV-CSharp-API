@@ -2,7 +2,7 @@
 
 The project maintains two reviewable baselines for the current packaged OpenCV revision `5.0.0`:
 
-- Managed API: `compatibility/managed-public-api.txt` and its summary JSON. The exact `net8.0` assembly currently contains 632 public types, 6,817 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp`. The baseline includes generic constraints and nullable metadata shape.
+- Managed API: `compatibility/managed-public-api.txt` and its summary JSON. The exact `net8.0` assembly currently contains 644 public types, 6,958 public/protected members, and 41 namespaces rooted at `JYPPX.OpenCvSharp`. The baseline includes generic constraints and nullable metadata shape; the conditional `MatView<TPixel>` preview is part of this development baseline.
 - Native-to-managed binding map: `compatibility/native-managed-binding-map.txt` and its summary correlate all 2,663 primary native entrypoints with reflected `net10.0` import metadata and checked-in source locations. All 2,663 are required to remain managed-bound; unbound and managed-only counts must remain zero. The exported `jyppx_ocv_get_native_abi_version` probe is part of this declared ABI.
 - ImgProc upstream map: `compatibility/imgproc-upstream-map.txt`, its structured raw extraction, reviewed classification manifest, summary, and selected-family inventory cover exactly the 203 declarations emitted from OpenCV 5.0.0 `opencv2/imgproc.hpp`. They classify 167 callable declarations without claiming repository-wide upstream parity.
 - ImgCodecs upstream map: `compatibility/imgcodecs-upstream-map.txt`, its structured raw extraction, reviewed classification manifest, summary, selected-family inventory, and source-reviewed extension record cover exactly the 39 declarations emitted from OpenCV 5.0.0 `opencv2/imgcodecs.hpp` plus the separately reviewed `ImageCollection` source extension. They classify 22 callable declarations without claiming repository-wide upstream parity.
@@ -19,7 +19,7 @@ The project maintains two reviewable baselines for the current packaged OpenCV r
 - Stitching upstream map: `compatibility/stitching-upstream-map.txt` and its raw, classification, summary, and family artifacts cover 207 declarations across 14 installed public main Stitching headers. The 158 callable rows are classified as 156 implemented and 2 unsupported rows, with zero missing or intentionally omitted rows. The two LightGlue rows remain unsupported because this repository does not own the required `cv::LightGlueMatcher` lifecycle and external ONNX model contract. CUDA blender execution is not claimed; the current non-CUDA build preserves upstream `StsNotImplemented` behavior for GPU-named pyramid helpers. Repository-wide parity is not claimed.
 - Video upstream map: `compatibility/video-upstream-map.txt`, its official-parser raw extraction, reviewed classification manifest, summary, and selected-family inventory cover 168 declarations reached through the two main Video compatibility headers and two OpenCV 5.0.0 public source headers. The 145 callable identities are classified as 138 implemented, none missing, and 7 intentionally omitted. VideoIO, contrib tracking, private detail headers, and legacy C metadata remain outside this measured slice, which does not claim repository-wide parity.
 
-Regenerate and check the baselines with exact SDK `10.0.302`:
+Regenerate and check the baselines with any installed .NET 10 SDK (the root `global.json` keeps resolution within .NET 10):
 
 ```powershell
 pwsh -NoProfile -File ./scripts/Generate-ManagedPublicApiBaseline.ps1

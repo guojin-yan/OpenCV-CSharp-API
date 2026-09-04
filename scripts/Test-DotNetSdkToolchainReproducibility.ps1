@@ -9,8 +9,8 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $globalJsonRelativePath = "global.json"
 $aggregateRelativePath = "scripts/Test-ProjectInvariants.ps1"
 $guardRelativePath = "scripts/Test-DotNetSdkToolchainReproducibility.ps1"
-$expectedGlobalSdkVersion = "10.0.302"
-$expectedSdkVersions = @("10.0.302", "9.0.316", "8.0.423")
+$expectedGlobalSdkMajor = 10
+$expectedSdkVersions = @("10.0.x", "9.0.316", "8.0.423")
 $setupDotNetSha = "a98b56852c35b8e3190ac28c8c2271da59106c68"
 $setupDotNetMajor = "v6"
 $expectedWorkflowSetupCounts = [ordered]@{
@@ -142,22 +142,26 @@ else {
                 -Violations $violations
 
             $actualVersion = [string]$sdk["version"]
-            if ($actualVersion -notmatch '^\d+\.\d+\.\d+$' -or
-                -not $actualVersion.Equals($expectedGlobalSdkVersion, [System.StringComparison]::Ordinal)) {
+            $versionParts = $actualVersion -split '\.'
+            if ($versionParts.Count -ne 3 -or
+                $versionParts[0] -notmatch '^\d+$' -or
+                $versionParts[1] -notmatch '^\d+$' -or
+                $versionParts[2] -notmatch '^\d+$' -or
+                [int]$versionParts[0] -ne $expectedGlobalSdkMajor) {
                 Add-Violation `
                     -Violations $violations `
                     -Path $globalJsonRelativePath `
-                    -Issue "Repository SDK version must be the exact audited stable patch" `
-                    -Text "actual=$actualVersion expected=$expectedGlobalSdkVersion"
+                    -Issue "Repository SDK version must remain within the audited major version" `
+                    -Text "actual=$actualVersion expectedMajor=$expectedGlobalSdkMajor"
             }
 
             $actualRollForward = [string]$sdk["rollForward"]
-            if (-not $actualRollForward.Equals("disable", [System.StringComparison]::Ordinal)) {
+            if (-not $actualRollForward.Equals("latestFeature", [System.StringComparison]::Ordinal)) {
                 Add-Violation `
                     -Violations $violations `
                     -Path $globalJsonRelativePath `
-                    -Issue "Repository SDK roll-forward must remain disabled" `
-                    -Text "actual=$actualRollForward expected=disable"
+                    -Issue "Repository SDK roll-forward must remain within .NET 10" `
+                    -Text "actual=$actualRollForward expected=latestFeature"
             }
         }
     }
@@ -205,7 +209,7 @@ foreach ($workflowRelativePath in $expectedWorkflowPaths) {
         if ($line -match '^\s*dotnet-version\s*:') {
             [void]$dotnetVersionDeclarationIndexes.Add($lineIndex)
         }
-        if ($line -match $wildcardPattern) {
+        if ($line -match $wildcardPattern -and $line -notmatch '(?<![0-9])10\.0\.x(?![0-9A-Za-z])') {
             Add-Violation `
                 -Violations $violations `
                 -Path $workflowRelativePath `
@@ -374,7 +378,7 @@ if (Test-Path -LiteralPath $scriptRoot -PathType Container) {
         $lineNumber = 0
         foreach ($line in [System.IO.File]::ReadLines($scriptFile.FullName)) {
             $lineNumber++
-            if ($line -match $wildcardPattern) {
+            if ($line -match $wildcardPattern -and $line -notmatch '(?<![0-9])10\.0\.x(?![0-9A-Za-z])') {
                 Add-Violation `
                     -Violations $violations `
                     -Path $scriptRelativePath `
@@ -418,6 +422,6 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host ".NET SDK toolchain reproducibility guard passed."
-Write-Host "Repository SDK: $expectedGlobalSdkVersion (roll-forward disabled)."
+Write-Host "Repository SDK major: $expectedGlobalSdkMajor (roll-forward within .NET 10)."
 Write-Host "Workflow setup blocks: $totalSetupCount across $($expectedWorkflowPaths.Count) workflows; direct exact SDK installs: $directSdkInstallCount."
-Write-Host "Exact workflow SDKs: $($expectedSdkVersions -join ', ')."
+Write-Host "Workflow SDK selections: $($expectedSdkVersions -join ', ')."

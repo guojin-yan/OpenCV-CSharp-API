@@ -21,14 +21,14 @@ if (-not (Test-Path -LiteralPath $opencvRoot -PathType Container)) {
 if ([string]::IsNullOrWhiteSpace($DotNetPath)) {
     $dotnetCommand = Get-Command dotnet -ErrorAction SilentlyContinue
     if ($null -eq $dotnetCommand) {
-        throw "dotnet was not found. ImgCodecs upstream-map generation requires SDK 10.0.302."
+        throw "dotnet was not found. ImgCodecs upstream-map generation requires a .NET 10 SDK."
     }
     $DotNetPath = $dotnetCommand.Source
 }
 $resolvedDotNet = (Resolve-Path -LiteralPath $DotNetPath).Path
 $sdkVersion = (& $resolvedDotNet --version).Trim()
-if ($LASTEXITCODE -ne 0 -or $sdkVersion -ne "10.0.302") {
-    throw "ImgCodecs upstream-map generation requires exact SDK 10.0.302; resolved '$sdkVersion' from $resolvedDotNet."
+if ($LASTEXITCODE -ne 0 -or $sdkVersion -notmatch '^10\.') {
+    throw "ImgCodecs upstream-map generation requires a .NET 10 SDK; resolved '$sdkVersion' from $resolvedDotNet."
 }
 
 $rawPath = Join-Path $repo "compatibility/imgcodecs-upstream-raw.json"

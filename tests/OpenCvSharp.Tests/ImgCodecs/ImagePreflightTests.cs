@@ -1,0 +1,563 @@
+using System;
+using System.IO;
+using JYPPX.OpenCvSharp.ImgCodecs;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
+
+namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
+{
+    public class ImagePreflightTests
+    {
+        [Fact]
+        public void IdentifyReadsPngDimensionsWithoutNativeRuntime()
+        {
+            byte[] png = new byte[24];
+            png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47;
+            png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
+            png[12] = (byte)'I'; png[13] = (byte)'H'; png[14] = (byte)'D'; png[15] = (byte)'R';
+            png[16] = 0x00; png[17] = 0x00; png[18] = 0x04; png[19] = 0x00;
+            png[20] = 0x00; png[21] = 0x00; png[22] = 0x02; png[23] = 0x00;
+
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(png);
+
+            Assert.Equal("png", result.Format);
+            Assert.True(result.IsFormatKnown);
+            Assert.True(result.IsSizeKnown);
+            Assert.Equal(1024, result.Width);
+            Assert.Equal(512, result.Height);
+            Assert.Equal(0, result.FrameCount);
+            Assert.False(result.IsFrameCountKnown);
+        }
+
+        [Fact]
+        public void IdentifyReadsJpegAndWebpHeaders()
+        {
+            byte[] jpeg = new byte[] { 0xFF, 0xD8, 0xFF, 0xC0, 0x00, 0x0B, 0x08, 0x01, 0x20, 0x02, 0x80, 0x01, 0x01, 0x11, 0x00, 0xFF, 0xD9 };
+            ImageIdentifyResult jpegResult = ImgCodecsCv2.Identify(jpeg);
+            Assert.Equal("jpeg", jpegResult.Format);
+            Assert.Equal(640, jpegResult.Width);
+            Assert.Equal(288, jpegResult.Height);
+
+            byte[] webp = new byte[30];
+            webp[0] = (byte)'R'; webp[1] = (byte)'I'; webp[2] = (byte)'F'; webp[3] = (byte)'F';
+            webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
+            webp[12] = (byte)'V'; webp[13] = (byte)'P'; webp[14] = (byte)'8'; webp[15] = (byte)'X';
+            webp[16] = 10; webp[24] = 99; webp[25] = 0; webp[26] = 0; webp[27] = 49; webp[28] = 0; webp[29] = 0;
+            ImageIdentifyResult webpResult = ImgCodecsCv2.Identify(webp);
+            Assert.Equal("webp", webpResult.Format);
+            Assert.Equal(100, webpResult.Width);
+            Assert.Equal(50, webpResult.Height);
+            Assert.True(jpegResult.IsPixelFormatKnown);
+            Assert.Equal(8, jpegResult.BitDepth);
+            Assert.Equal(1, jpegResult.ChannelCount);
+            Assert.True(jpegResult.IsFrameCountKnown);
+            Assert.Equal(1, jpegResult.FrameCount);
+
+            byte[] incompleteJpeg = new byte[jpeg.Length - 2];
+            Array.Copy(jpeg, incompleteJpeg, incompleteJpeg.Length);
+            Assert.False(ImgCodecsCv2.Identify(incompleteJpeg).IsFrameCountKnown);
+
+            byte[] jpegWithTrailingBytes = new byte[jpeg.Length + 1];
+            Array.Copy(jpeg, jpegWithTrailingBytes, jpeg.Length);
+            jpegWithTrailingBytes[jpegWithTrailingBytes.Length - 1] = 0x01;
+            Assert.False(ImgCodecsCv2.Identify(jpegWithTrailingBytes).IsFrameCountKnown);
+        }
+
+        [Fact]
+        public void IdentifyReadsPngEncodedDepthAndChannels()
+        {
+            byte[] png = CreateCompletePng(2, 3, 16, 6);
+
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(png);
+
+            Assert.True(result.IsPixelFormatKnown);
+            Assert.Equal(16, result.BitDepth);
+            Assert.Equal(4, result.ChannelCount);
+        }
+
+        [Fact]
+        public void IdentifyReadsClassicTiffDimensionsAndPageCount()
+        {
+            ImageIdentifyResult littleEndian = ImgCodecsCv2.Identify(CreateTiff(false, 2));
+            Assert.True(littleEndian.IsSizeKnown);
+            Assert.Equal(320, littleEndian.Width);
+            Assert.Equal(240, littleEndian.Height);
+            Assert.True(littleEndian.IsFrameCountKnown);
+            Assert.Equal(2, littleEndian.FrameCount);
+
+            ImageIdentifyResult bigEndian = ImgCodecsCv2.Identify(CreateTiff(true, 1));
+            Assert.True(bigEndian.IsSizeKnown);
+            Assert.Equal(320, bigEndian.Width);
+            Assert.Equal(240, bigEndian.Height);
+            Assert.Equal(1, bigEndian.FrameCount);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimMalformedTiffFacts()
+        {
+            byte[] tiff = CreateTiff(false, 2);
+            tiff[8] = 0xFF;
+            tiff[9] = 0xFF;
+            tiff[10] = 0xFF;
+            tiff[11] = 0x7F;
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(tiff);
+            Assert.False(result.IsSizeKnown);
+            Assert.False(result.IsFrameCountKnown);
+        }
+
+        [Fact]
+        public void IdentifyKeepsHeterogeneousTiffSizeUnknownWhileCountingPages()
+        {
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(CreateTiff(false, 2, true));
+
+            Assert.False(result.IsSizeKnown);
+            Assert.True(result.IsFrameCountKnown);
+            Assert.Equal(2, result.FrameCount);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownTiffPageBudgetBeforeNativeCall()
+        {
+            byte[] tiff = CreateTiff(false, 2);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(tiff,
+                new ImageDecodeOptions(4096, 1000, 1000, 1000000, 1, true, true)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(tiff,
+                new ImageDecodeOptions(4096, 1000, 1000, 1000000, 2, true, true,
+                    long.MaxValue, long.MaxValue, false, false, 100000, int.MaxValue, int.MaxValue, false)));
+        }
+
+        [Fact]
+        public void IdentifyCountsCompleteGifApngAndWebpAnimations()
+        {
+            ImageIdentifyResult gif = ImgCodecsCv2.Identify(CreateAnimatedGif(2));
+            Assert.True(gif.IsFrameCountKnown);
+            Assert.Equal(2, gif.FrameCount);
+
+            ImageIdentifyResult png = ImgCodecsCv2.Identify(CreateApng(3));
+            Assert.True(png.IsFrameCountKnown);
+            Assert.Equal(3, png.FrameCount);
+
+            ImageIdentifyResult webp = ImgCodecsCv2.Identify(CreateAnimatedWebp(4));
+            Assert.True(webp.IsFrameCountKnown);
+            Assert.Equal(4, webp.FrameCount);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompleteAnimationFrameCounts()
+        {
+            byte[] apng = CreateApng(2);
+            Array.Resize(ref apng, apng.Length - 12);
+            Assert.False(ImgCodecsCv2.Identify(apng).IsFrameCountKnown);
+
+            byte[] webp = CreateAnimatedWebp(2);
+            webp[4]--;
+            Assert.False(ImgCodecsCv2.Identify(webp).IsFrameCountKnown);
+
+            byte[] gif = CreateAnimatedGif(2);
+            Array.Resize(ref gif, gif.Length - 1);
+            Assert.False(ImgCodecsCv2.Identify(gif).IsFrameCountKnown);
+
+            byte[] incompletePng = CreatePngHeader(2, 3, 8, 2);
+            Assert.False(ImgCodecsCv2.Identify(incompletePng).IsFrameCountKnown);
+
+            byte[] incompleteWebp = new byte[30];
+            incompleteWebp[0] = (byte)'R'; incompleteWebp[1] = (byte)'I'; incompleteWebp[2] = (byte)'F'; incompleteWebp[3] = (byte)'F';
+            incompleteWebp[8] = (byte)'W'; incompleteWebp[9] = (byte)'E'; incompleteWebp[10] = (byte)'B'; incompleteWebp[11] = (byte)'P';
+            incompleteWebp[12] = (byte)'V'; incompleteWebp[13] = (byte)'P'; incompleteWebp[14] = (byte)'8'; incompleteWebp[15] = (byte)'X';
+            incompleteWebp[16] = 10;
+            Assert.False(ImgCodecsCv2.Identify(incompleteWebp).IsFrameCountKnown);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimStaticContainerFrameWithoutImageData()
+        {
+            Assert.False(ImgCodecsCv2.Identify(CreatePngWithIccProfile(new byte[] { 1, 2, 3 })).IsFrameCountKnown);
+            Assert.False(ImgCodecsCv2.Identify(CreateWebpWithMetadataAndIccProfile()).IsFrameCountKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectOversizedInputBeforeNativeCall()
+        {
+            byte[] input = new byte[32];
+            ImageDecodeOptions options = new ImageDecodeOptions(16, 4096, 4096, 1000000, 4, false, false);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(input, options));
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownDimensionsAndUnknownFormats()
+        {
+            byte[] png = new byte[24];
+            png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47; png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
+            png[12] = (byte)'I'; png[13] = (byte)'H'; png[14] = (byte)'D'; png[15] = (byte)'R';
+            png[19] = 100; png[23] = 100;
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png, new ImageDecodeOptions(1024, 10, 1000, 1000000, 4, false, false)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(new byte[] { 1, 2, 3 }, new ImageDecodeOptions(1024, 10, 10, 100, 1, true, false)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new ImageDecodeOptions(0, 1, 1, 1, 1, false, false));
+        }
+
+        [Fact]
+        public void IdentifyReportsPngMetadataAndIccPayloadSizes()
+        {
+            byte[] png = CreatePngWithIccProfile(new byte[] { 1, 2, 3 });
+
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(png);
+
+            Assert.True(result.IsMetadataSizeKnown);
+            Assert.Equal(9, result.MetadataBytes);
+            Assert.True(result.IsIccProfileSizeKnown);
+            Assert.Equal(3, result.IccProfileBytes);
+        }
+
+        [Fact]
+        public void IdentifyReportsJpegAndWebpMetadataAndIccPayloadSizes()
+        {
+            ImageIdentifyResult jpeg = ImgCodecsCv2.Identify(CreateJpegWithMetadataAndIccProfile());
+            Assert.True(jpeg.IsMetadataSizeKnown);
+            Assert.Equal(19, jpeg.MetadataBytes);
+            Assert.True(jpeg.IsIccProfileSizeKnown);
+            Assert.Equal(2, jpeg.IccProfileBytes);
+
+            ImageIdentifyResult webp = ImgCodecsCv2.Identify(CreateWebpWithMetadataAndIccProfile());
+            Assert.True(webp.IsMetadataSizeKnown);
+            Assert.Equal(5, webp.MetadataBytes);
+            Assert.True(webp.IsIccProfileSizeKnown);
+            Assert.Equal(3, webp.IccProfileBytes);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimMetadataFactsForIncompleteContainers()
+        {
+            byte[] png = new byte[24];
+            png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47;
+            png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
+            ImageIdentifyResult pngResult = ImgCodecsCv2.Identify(png);
+            Assert.False(pngResult.IsMetadataSizeKnown);
+            Assert.False(pngResult.IsIccProfileSizeKnown);
+
+            byte[] jpeg = CreateJpegWithMetadataAndIccProfile();
+            Array.Resize(ref jpeg, jpeg.Length - 2);
+            ImageIdentifyResult jpegResult = ImgCodecsCv2.Identify(jpeg);
+            Assert.False(jpegResult.IsMetadataSizeKnown);
+            Assert.False(jpegResult.IsIccProfileSizeKnown);
+
+            byte[] webp = CreateWebpWithMetadataAndIccProfile();
+            webp[4]--;
+            ImageIdentifyResult webpResult = ImgCodecsCv2.Identify(webp);
+            Assert.False(webpResult.IsMetadataSizeKnown);
+            Assert.False(webpResult.IsIccProfileSizeKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownMetadataAndIccPayloadLimitsBeforeNativeCall()
+        {
+            byte[] png = CreatePngWithIccProfile(new byte[] { 1, 2, 3 });
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, true, 8, 4)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, true, 10, 2)));
+        }
+
+        [Fact]
+        public void DecodeOptionsCanRequireKnownMetadataFacts()
+        {
+            byte[] tiff = new byte[] { (byte)'I', (byte)'I', 42, 0 };
+            ImageDecodeOptions options = new ImageDecodeOptions(
+                1024, 100, 100, 10000, 1, true, false, 1024, 1024, true, true);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(tiff, options));
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectPixelDepthChannelsAndCumulativePixels()
+        {
+            byte[] png = CreateCompletePng(2, 3, 16, 6);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, false, 1024, 1024, false, false,
+                    long.MaxValue, 8, 4, false)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, false, 1024, 1024, false, false,
+                    long.MaxValue, 16, 3, false)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, false, 1024, 1024, false, false,
+                    5, 16, 4, false)));
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownAnimationFrameAndCumulativePixelLimits()
+        {
+            byte[] apng = CreateApng(3);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(apng,
+                new ImageDecodeOptions(4096, 100, 100, 100, 2, true, true)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(apng,
+                new ImageDecodeOptions(4096, 100, 100, 100, 3, true, true,
+                    long.MaxValue, long.MaxValue, false, false, 12, int.MaxValue, int.MaxValue, false)));
+        }
+
+        [Fact]
+        public void DecodeOptionsCanRejectUnknownPixelFacts()
+        {
+            byte[] tiff = new byte[] { (byte)'I', (byte)'I', 42, 0 };
+            ImageDecodeOptions options = new ImageDecodeOptions(
+                1024, 100, 100, 10000, 1, true, false, 1024, 1024, false, false,
+                long.MaxValue, 16, 4, true);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(tiff, options));
+        }
+
+#if NETCOREAPP3_1_OR_GREATER
+        [Fact]
+        public void SpanIdentifyUsesTheSameManagedContract()
+        {
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(new byte[] { (byte)'B', (byte)'M', 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0 }.AsSpan());
+            Assert.Equal("bmp", result.Format);
+            Assert.Equal(2, result.Width);
+            Assert.Equal(3, result.Height);
+        }
+#endif
+
+        private static byte[] CreatePngWithIccProfile(byte[] profile)
+        {
+            byte[] header = new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+            byte[] ihdr = new byte[] { 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 0, 0, 0 };
+            byte[] iccp = new byte[6 + profile.Length];
+            iccp[0] = (byte)'s'; iccp[1] = (byte)'R'; iccp[2] = (byte)'G'; iccp[3] = (byte)'B';
+            Array.Copy(profile, 0, iccp, 6, profile.Length);
+
+            byte[] png = new byte[header.Length + 12 + ihdr.Length + 12 + iccp.Length + 12];
+            Array.Copy(header, png, header.Length);
+            int offset = header.Length;
+            offset = WritePngChunk(png, offset, "IHDR", ihdr);
+            offset = WritePngChunk(png, offset, "iCCP", iccp);
+            offset = WritePngChunk(png, offset, "IEND", Array.Empty<byte>());
+            Assert.Equal(png.Length, offset);
+            return png;
+        }
+
+        private static byte[] CreatePngHeader(int width, int height, byte bitDepth, byte colorType)
+        {
+            byte[] png = new byte[26];
+            png[0] = 0x89; png[1] = 0x50; png[2] = 0x4E; png[3] = 0x47;
+            png[4] = 0x0D; png[5] = 0x0A; png[6] = 0x1A; png[7] = 0x0A;
+            png[11] = 13;
+            png[12] = (byte)'I'; png[13] = (byte)'H'; png[14] = (byte)'D'; png[15] = (byte)'R';
+            png[16] = (byte)(width >> 24); png[17] = (byte)(width >> 16); png[18] = (byte)(width >> 8); png[19] = (byte)width;
+            png[20] = (byte)(height >> 24); png[21] = (byte)(height >> 16); png[22] = (byte)(height >> 8); png[23] = (byte)height;
+            png[24] = bitDepth;
+            png[25] = colorType;
+            return png;
+        }
+
+        private static byte[] CreateCompletePng(int width, int height, byte bitDepth, byte colorType)
+        {
+            byte[] header = new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+            byte[] ihdr = new byte[]
+            {
+                (byte)(width >> 24), (byte)(width >> 16), (byte)(width >> 8), (byte)width,
+                (byte)(height >> 24), (byte)(height >> 16), (byte)(height >> 8), (byte)height,
+                bitDepth, colorType, 0, 0, 0
+            };
+            byte[] png = new byte[header.Length + 12 + ihdr.Length + 13 + 12];
+            Array.Copy(header, png, header.Length);
+            int offset = header.Length;
+            offset = WritePngChunk(png, offset, "IHDR", ihdr);
+            offset = WritePngChunk(png, offset, "IDAT", new byte[] { 0 });
+            offset = WritePngChunk(png, offset, "IEND", Array.Empty<byte>());
+            Assert.Equal(png.Length, offset);
+            return png;
+        }
+
+        private static byte[] CreateTiff(bool bigEndian, int pageCount, bool varyingPageSizes = false)
+        {
+            const int firstIfdOffset = 8;
+            const int entriesPerIfd = 2;
+            int ifdSize = 2 + entriesPerIfd * 12 + 4;
+            byte[] tiff = new byte[firstIfdOffset + pageCount * ifdSize];
+            tiff[0] = (byte)(bigEndian ? 'M' : 'I');
+            tiff[1] = tiff[0];
+            WriteTiff16(tiff, 2, 42, bigEndian);
+            WriteTiff32(tiff, 4, firstIfdOffset, bigEndian);
+            for (int page = 0; page < pageCount; ++page)
+            {
+                int offset = firstIfdOffset + page * ifdSize;
+                WriteTiff16(tiff, offset, entriesPerIfd, bigEndian);
+                int entry = offset + 2;
+                WriteTiff16(tiff, entry, 256, bigEndian);
+                WriteTiff16(tiff, entry + 2, 4, bigEndian);
+                WriteTiff32(tiff, entry + 4, 1, bigEndian);
+                WriteTiff32(tiff, entry + 8, varyingPageSizes && page > 0 ? 160 : 320, bigEndian);
+                entry += 12;
+                WriteTiff16(tiff, entry, 257, bigEndian);
+                WriteTiff16(tiff, entry + 2, 4, bigEndian);
+                WriteTiff32(tiff, entry + 4, 1, bigEndian);
+                WriteTiff32(tiff, entry + 8, varyingPageSizes && page > 0 ? 120 : 240, bigEndian);
+                WriteTiff32(tiff, offset + 2 + entriesPerIfd * 12, page + 1 < pageCount ? offset + ifdSize : 0, bigEndian);
+            }
+            return tiff;
+        }
+
+        private static void WriteTiff16(byte[] destination, int offset, int value, bool bigEndian)
+        {
+            if (bigEndian)
+            {
+                destination[offset] = (byte)(value >> 8);
+                destination[offset + 1] = (byte)value;
+            }
+            else
+            {
+                destination[offset] = (byte)value;
+                destination[offset + 1] = (byte)(value >> 8);
+            }
+        }
+
+        private static void WriteTiff32(byte[] destination, int offset, int value, bool bigEndian)
+        {
+            if (bigEndian)
+            {
+                destination[offset] = (byte)(value >> 24);
+                destination[offset + 1] = (byte)(value >> 16);
+                destination[offset + 2] = (byte)(value >> 8);
+                destination[offset + 3] = (byte)value;
+            }
+            else
+            {
+                destination[offset] = (byte)value;
+                destination[offset + 1] = (byte)(value >> 8);
+                destination[offset + 2] = (byte)(value >> 16);
+                destination[offset + 3] = (byte)(value >> 24);
+            }
+        }
+
+        private static byte[] CreateApng(int frameCount)
+        {
+            byte[] header = new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+            byte[] ihdr = new byte[] { 0, 0, 0, 2, 0, 0, 0, 3, 8, 2, 0, 0, 0 };
+            byte[] png = new byte[header.Length + 12 + ihdr.Length + 20 + 38 + 13 + (frameCount - 1) * (38 + 17) + 12];
+            Array.Copy(header, png, header.Length);
+            int offset = header.Length;
+            offset = WritePngChunk(png, offset, "IHDR", ihdr);
+            offset = WritePngChunk(png, offset, "acTL", new byte[] { 0, 0, 0, (byte)frameCount, 0, 0, 0, 0 });
+            offset = WritePngChunk(png, offset, "fcTL", CreateApngFrameControl(0));
+            offset = WritePngChunk(png, offset, "IDAT", new byte[] { 1 });
+            for (int frame = 1; frame < frameCount; ++frame)
+            {
+                offset = WritePngChunk(png, offset, "fcTL", CreateApngFrameControl(frame * 2 - 1));
+                offset = WritePngChunk(png, offset, "fdAT", new byte[] { 0, 0, 0, (byte)(frame * 2), 1 });
+            }
+            offset = WritePngChunk(png, offset, "IEND", Array.Empty<byte>());
+            Assert.Equal(png.Length, offset);
+            return png;
+        }
+
+        private static byte[] CreateApngFrameControl(int sequence)
+        {
+            byte[] control = new byte[26];
+            control[3] = (byte)sequence;
+            control[7] = 2;
+            control[11] = 3;
+            return control;
+        }
+
+        private static byte[] CreateAnimatedGif(int frameCount)
+        {
+            byte[] gif = new byte[6 + 7 + 6 + 15 + frameCount * 22 + 1];
+            gif[0] = (byte)'G'; gif[1] = (byte)'I'; gif[2] = (byte)'F'; gif[3] = (byte)'8'; gif[4] = (byte)'9'; gif[5] = (byte)'a';
+            gif[6] = 2; gif[8] = 3; gif[10] = 0x80;
+            int offset = 13 + 6;
+            gif[offset++] = 0x21; gif[offset++] = 0xFF; gif[offset++] = 11;
+            byte[] application = new byte[] { (byte)'N', (byte)'E', (byte)'T', (byte)'S', (byte)'C', (byte)'A', (byte)'P', (byte)'E', (byte)'2', (byte)'.', (byte)'0' };
+            Array.Copy(application, 0, gif, offset, application.Length);
+            offset += application.Length;
+            gif[offset++] = 0;
+            for (int frame = 0; frame < frameCount; ++frame)
+            {
+                gif[offset++] = 0x21; gif[offset++] = 0xF9; gif[offset++] = 4;
+                gif[offset++] = 0; gif[offset++] = 10; gif[offset++] = 0; gif[offset++] = 0; gif[offset++] = 0;
+                gif[offset++] = 0x2C;
+                offset += 4;
+                gif[offset++] = 2;
+                gif[offset++] = 0;
+                gif[offset++] = 3;
+                gif[offset++] = 0;
+                gif[offset++] = 0;
+                gif[offset++] = 2;
+                gif[offset++] = 1;
+                gif[offset++] = 0;
+                gif[offset++] = 0;
+            }
+            gif[offset++] = 0x3B;
+            Assert.Equal(gif.Length, offset);
+            return gif;
+        }
+
+        private static byte[] CreateAnimatedWebp(int frameCount)
+        {
+            byte[] webp = new byte[12 + 18 + 14 + frameCount * 24];
+            webp[0] = (byte)'R'; webp[1] = (byte)'I'; webp[2] = (byte)'F'; webp[3] = (byte)'F';
+            int declaredLength = webp.Length - 8;
+            webp[4] = (byte)declaredLength;
+            webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
+            int offset = 12;
+            offset = WriteWebpChunk(webp, offset, "VP8X", new byte[] { 0x02, 0, 0, 0, 1, 0, 0, 2, 0, 0 });
+            offset = WriteWebpChunk(webp, offset, "ANIM", new byte[6]);
+            for (int frame = 0; frame < frameCount; ++frame)
+            {
+                offset = WriteWebpChunk(webp, offset, "ANMF", new byte[16]);
+            }
+            Assert.Equal(webp.Length, offset);
+            return webp;
+        }
+
+        private static int WritePngChunk(byte[] destination, int offset, string type, byte[] payload)
+        {
+            destination[offset + 3] = (byte)payload.Length;
+            destination[offset + 4] = (byte)type[0];
+            destination[offset + 5] = (byte)type[1];
+            destination[offset + 6] = (byte)type[2];
+            destination[offset + 7] = (byte)type[3];
+            Array.Copy(payload, 0, destination, offset + 8, payload.Length);
+            return offset + 12 + payload.Length;
+        }
+
+        private static byte[] CreateJpegWithMetadataAndIccProfile()
+        {
+            return new byte[]
+            {
+                0xFF, 0xD8,
+                0xFF, 0xE1, 0x00, 0x05, 1, 2, 3,
+                0xFF, 0xE2, 0x00, 0x12,
+                (byte)'I', (byte)'C', (byte)'C', (byte)'_', (byte)'P', (byte)'R', (byte)'O', (byte)'F',
+                (byte)'I', (byte)'L', (byte)'E', 0, 1, 1, 7, 8,
+                0xFF, 0xD9
+            };
+        }
+
+        private static byte[] CreateWebpWithMetadataAndIccProfile()
+        {
+            byte[] webp = new byte[34];
+            webp[0] = (byte)'R'; webp[1] = (byte)'I'; webp[2] = (byte)'F'; webp[3] = (byte)'F';
+            webp[4] = 26;
+            webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
+            int offset = 12;
+            offset = WriteWebpChunk(webp, offset, "EXIF", new byte[] { 1, 2 });
+            offset = WriteWebpChunk(webp, offset, "ICCP", new byte[] { 3, 4, 5 });
+            Assert.Equal(webp.Length, offset);
+            return webp;
+        }
+
+        private static int WriteWebpChunk(byte[] destination, int offset, string type, byte[] payload)
+        {
+            destination[offset] = (byte)type[0];
+            destination[offset + 1] = (byte)type[1];
+            destination[offset + 2] = (byte)type[2];
+            destination[offset + 3] = (byte)type[3];
+            destination[offset + 4] = (byte)payload.Length;
+            Array.Copy(payload, 0, destination, offset + 8, payload.Length);
+            return offset + 8 + payload.Length + (payload.Length & 1);
+        }
+    }
+}

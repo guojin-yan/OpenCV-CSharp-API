@@ -15,6 +15,7 @@ OpenCV CSharp API 通过版本中立的 managed API 和稳定的 native C ABI，
 | [Example Catalog](articles/example-catalog.md) | Run the package-backed examples by capability group / 按功能分组运行 package-backed 案例 |
 | [OpenCV PutText With Chinese](articles/tutorial-02-chinese-puttext.md) | Draw UTF-8 Chinese directly into `Mat` / 把 UTF-8 中文直接写入 `Mat` |
 | [Scenario Recipes](articles/scenario-recipes.md) | Choose a product-oriented documentation route / 选择面向产品场景的文档路线 |
+| [Runtime Capability And Platform Guide](articles/runtime-capability-and-platform-guide.md) | Inspect runtime capabilities and evaluate new .NET platforms / 检查运行时能力并评估新的 .NET 平台 |
 | [First Release Overview](articles/first-release-overview.md) | Understand scope, compatibility, and boundaries / 了解首版范围、兼容性与边界 |
 
 ## Tutorial Series / 系列教程
@@ -52,13 +53,14 @@ Each tutorial has a deterministic command, generated input, inspectable PNG outp
 
 | Area / 领域 | Entry guides / 入口指南 |
 |---|---|
-| Mat and core / Mat 与 Core | [Mat Object Model](articles/mat-object-model.md), [Mat Data Access](articles/mat-data-access.md), [Core Array Operations](articles/core-array-ops-guide.md) |
-| Image IO and processing / 图像编解码与处理 | [ImgCodecs Boundary](articles/imgcodecs-boundary.md), [ImgProc Filter Transform](articles/imgproc-filter-transform-guide.md), [Segmentation And Contours](articles/imgproc-segmentation-contours-features-guide.md) |
+| Mat and core / Mat 与 Core | [Mat Object Model](articles/mat-object-model.md), [Mat Data Access](articles/mat-data-access.md), [Typed Mat Views And Pixel Traits](articles/typed-mat-view-and-pixel-traits.md), [Core Array Operations](articles/core-array-ops-guide.md) |
+| Image IO and processing / 图像编解码与处理 | [ImgCodecs Boundary](articles/imgcodecs-boundary.md), [Codec Preflight And Limits](articles/codec-preflight-and-limits.md), [ImgProc Filter Transform](articles/imgproc-filter-transform-guide.md), [Segmentation And Contours](articles/imgproc-segmentation-contours-features-guide.md) |
 | Features and matching / 特征与匹配 | [Features2D ORB](articles/features2d-orb-guide.md), [Detectors](articles/features2d-detectors-guide.md), [Matcher](articles/features2d-matcher-guide.md) |
 | Calibration and geometry / 标定与几何 | [Calib3D Geometry](articles/calib3d-geometry-guide.md), [Calibration](articles/calib3d-calibration-guide.md), [Stereo](articles/calib3d-stereo-guide.md) |
 | Video / 视频 | [VideoIO](articles/videoio-guide.md), [Motion](articles/video-motion-guide.md), [Optical Flow](articles/optflow-guide.md) |
 | DNN and ML / DNN 与 ML | [DNN Net](articles/dnn-net-guide.md), [DNN Advanced](articles/dnn-net-advanced-guide.md), [Sample Model Assets](articles/sample-model-assets-guide.md), [ML](articles/ml-guide.md) |
 | Detection and composition / 检测与合成 | [ObjDetect](articles/objdetect-guide.md), [Tracking](articles/tracking-guide.md), [Stitching](articles/stitching-stitcher-guide.md) |
+| Runtime and platform diagnostics / 运行时与平台诊断 | [Runtime Capability And Platform Guide](articles/runtime-capability-and-platform-guide.md), [Typed Mat Views And Pixel Traits](articles/typed-mat-view-and-pixel-traits.md), [Support And Lifecycle Policy](articles/support-lifecycle-policy.md) |
 
 The navigation sidebar contains the complete module-by-module article catalog. Existing article URLs remain stable; the tutorial series provides the primary path through them.
 
@@ -74,5 +76,8 @@ The navigation sidebar contains the complete module-by-module article catalog. E
 - [Linked Runtime Build Guide](articles/linked-runtime-build-guide.md)
 - [Linked Runtime Smoke Guide](articles/linked-runtime-smoke-guide.md)
 - [Runtime Licenses](articles/runtime-licenses.md)
+- [Typed Mat Views And Pixel Traits](articles/typed-mat-view-and-pixel-traits.md)
+- [Typed Mat View ADR](articles/typed-mat-view-adr.md)
+- [Codec Preflight And Limits](articles/codec-preflight-and-limits.md)
 - [Package Publication And Repository Signing Guide](articles/nuget-repository-signing-guide.md)
 - [Release Candidate Closeout](articles/release-candidate-closeout.md)

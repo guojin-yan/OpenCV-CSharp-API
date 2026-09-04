@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=632
-member-count=6817
+type-count=644
+member-count=6958
 namespace-count=41
 nullable-shape=included
 
@@ -50,6 +50,7 @@ TYPE|class|public;sealed|JYPPX.OpenCvSharp.Calib3D.StereoSGBM|base=|interfaces=S
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Calib3D.UsacParams|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.FileNode|base=|interfaces=System.Collections.Generic.IEnumerable<JYPPX.OpenCvSharp.Core.FileNode>,System.Collections.IEnumerable,System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.FileStorage|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.MatView<TPixel>|base=|interfaces=System.IDisposable|generic=TPixel:non-nullable-value-type&System.ValueType&default-constructor
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.Mat|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.Rng|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.Svd|base=|interfaces=System.IDisposable
@@ -90,6 +91,8 @@ TYPE|class|public;sealed|JYPPX.OpenCvSharp.HighGui.HighGuiTrackbar|base=|interfa
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.AnimationFrame|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.Animation|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|base=|interfaces=
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ImgHash.AverageHash|base=JYPPX.OpenCvSharp.ImgHash.ImgHashBase|interfaces=System.IDisposable
@@ -142,6 +145,10 @@ TYPE|class|public;sealed|JYPPX.OpenCvSharp.ObjDetect.QRCodeDetector|base=|interf
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoder|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult|base=|interfaces=
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvCapabilities|base=|interfaces=
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|base=|interfaces=
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|base=|interfaces=
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|base=JYPPX.OpenCvSharp.OptFlow.DenseOpticalFlow|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OptFlow.DualTVL1OpticalFlow|base=JYPPX.OpenCvSharp.OptFlow.DenseOpticalFlow|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OptFlow.RLOFOpticalFlowParameter|base=|interfaces=System.IDisposable
@@ -281,6 +288,7 @@ TYPE|class|public;static|JYPPX.OpenCvSharp.Calib3D.Cv2|base=|interfaces=
 TYPE|class|public;static|JYPPX.OpenCvSharp.Core.Cv2|base=|interfaces=
 TYPE|class|public;static|JYPPX.OpenCvSharp.Core.CvBuffer|base=|interfaces=
 TYPE|class|public;static|JYPPX.OpenCvSharp.Core.MatType|base=|interfaces=
+TYPE|class|public;static|JYPPX.OpenCvSharp.Core.PixelTypeTraits|base=|interfaces=
 TYPE|class|public;static|JYPPX.OpenCvSharp.Dnn.Cv2|base=|interfaces=
 TYPE|class|public;static|JYPPX.OpenCvSharp.Features2D.Cv2|base=|interfaces=
 TYPE|class|public;static|JYPPX.OpenCvSharp.Features2D.DescriptorConvert|base=|interfaces=
@@ -365,6 +373,8 @@ TYPE|enum|public|JYPPX.OpenCvSharp.Core.GemmFlags|base=|interfaces=System.ICompa
 TYPE|enum|public|JYPPX.OpenCvSharp.Core.KMeansFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Core.MulSpectrumsFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Core.NormTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|JYPPX.OpenCvSharp.Core.PixelAlphaMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|JYPPX.OpenCvSharp.Core.PixelChannelOrder|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Core.ReduceTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Core.RngDistributionTypes|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.Core.RotateFlags|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -472,6 +482,7 @@ TYPE|enum|public|JYPPX.OpenCvSharp.ObjDetect.PredefinedDictionaryType|base=|inte
 TYPE|enum|public|JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoderCorrectionLevel|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoderECIEncodings|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.ObjDetect.QRCodeEncoderEncodeMode|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
+TYPE|enum|public|JYPPX.OpenCvSharp.OpenCvCapabilityState|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.OptFlow.OptFlowInterpolationType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.OptFlow.OptFlowSolverType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
 TYPE|enum|public|JYPPX.OpenCvSharp.OptFlow.OptFlowSupportRegionType|base=|interfaces=System.IComparable,System.IConvertible,System.IFormattable,System.ISpanFormattable
@@ -560,6 +571,7 @@ TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Calib3D.UndistortRectifyMapResult|
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.CheckRangeResult|base=|interfaces=
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.MeanStdDevResult|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.MeanStdDevResult>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.MinMaxLocResult|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.MinMaxLocResult>
+TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.PixelTypeDescriptor>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point2d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point2d>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point2f|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point2f>
 TYPE|struct|public;readonly|JYPPX.OpenCvSharp.Core.Point3d|base=|interfaces=System.IEquatable<JYPPX.OpenCvSharp.Core.Point3d>
@@ -1831,6 +1843,23 @@ MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 Channels
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 Depth(System.Int32 type)
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 MakeType(System.Int32 depth,System.Int32 channels)
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 TypeMask(System.Int32 flags)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Mat mat)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|JYPPX.OpenCvSharp.Core.MatRowAccessor<TPixel> AsRows()
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Boolean TryGetSpan(out System.Span<TPixel> span)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.ReadOnlySpan<TPixel> AsReadOnlyRowSpan(System.Int32 row)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.ReadOnlySpan<TPixel> AsReadOnlySpan()
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Span<TPixel> AsRowSpan(System.Int32 row)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Span<TPixel> AsSpan()
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void CopyFrom(System.ReadOnlySpan<TPixel> source)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void CopyTo(System.Span<TPixel> destination)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void SetValue(System.Int32 row,System.Int32 column,TPixel value)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|TPixel GetValue(System.Int32 row,System.Int32 column)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|TPixel[] ToArray()
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|property|instance;get:public|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor Descriptor
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|property|instance;get:public|System.Boolean IsContinuous
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|property|instance;get:public|System.Int32 Columns
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|property|instance;get:public|System.Int32 Rows
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|constructor|public;instance|.ctor()
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Size size,System.Int32 type)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Size size,System.Int32 type,JYPPX.OpenCvSharp.Core.Scalar value)
@@ -1848,6 +1877,7 @@ MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.Mat SubMat(JYPPX.OpenCvSharp.Core.Rect roi)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ToMat()
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.MatRowAccessor<T> AsRows<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.MatView<TPixel> AsView<TPixel>()|generic=TPixel:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Boolean TryGetByteSpan(out System.Span<System.Byte> span)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Boolean TryGetSpan<T>(out System.Span<T> span)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Byte[] ToBytes()
@@ -1945,6 +1975,42 @@ MEMBER|JYPPX.OpenCvSharp.Core.NormTypes|field|public;const|JYPPX.OpenCvSharp.Cor
 MEMBER|JYPPX.OpenCvSharp.Core.NormTypes|field|public;const|JYPPX.OpenCvSharp.Core.NormTypes MinMax=32
 MEMBER|JYPPX.OpenCvSharp.Core.NormTypes|field|public;const|JYPPX.OpenCvSharp.Core.NormTypes Relative=8
 MEMBER|JYPPX.OpenCvSharp.Core.NormTypes|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.Core.PixelAlphaMode|field|public;const|JYPPX.OpenCvSharp.Core.PixelAlphaMode None=0
+MEMBER|JYPPX.OpenCvSharp.Core.PixelAlphaMode|field|public;const|JYPPX.OpenCvSharp.Core.PixelAlphaMode Premultiplied=3
+MEMBER|JYPPX.OpenCvSharp.Core.PixelAlphaMode|field|public;const|JYPPX.OpenCvSharp.Core.PixelAlphaMode Straight=2
+MEMBER|JYPPX.OpenCvSharp.Core.PixelAlphaMode|field|public;const|JYPPX.OpenCvSharp.Core.PixelAlphaMode Unknown=1
+MEMBER|JYPPX.OpenCvSharp.Core.PixelAlphaMode|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;const|JYPPX.OpenCvSharp.Core.PixelChannelOrder Bgr=2
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;const|JYPPX.OpenCvSharp.Core.PixelChannelOrder Bgra=4
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;const|JYPPX.OpenCvSharp.Core.PixelChannelOrder Gray=1
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;const|JYPPX.OpenCvSharp.Core.PixelChannelOrder Rgb=3
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;const|JYPPX.OpenCvSharp.Core.PixelChannelOrder Rgba=5
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;const|JYPPX.OpenCvSharp.Core.PixelChannelOrder Unknown=0
+MEMBER|JYPPX.OpenCvSharp.Core.PixelChannelOrder|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;instance;override|System.Boolean Equals(System.Object? obj)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;instance;override|System.Int32 GetHashCode()
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;instance;sealed-override|System.Boolean Equals(JYPPX.OpenCvSharp.Core.PixelTypeDescriptor other)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;instance|System.Boolean MatchesMatType(System.Int32 type)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;static|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor Get<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;static|System.Boolean IsRegistered<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;static|System.Boolean TryGet(System.Type type,out JYPPX.OpenCvSharp.Core.PixelTypeDescriptor descriptor)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;static|System.Boolean op_Equality(JYPPX.OpenCvSharp.Core.PixelTypeDescriptor left,JYPPX.OpenCvSharp.Core.PixelTypeDescriptor right)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.PixelTypeDescriptor left,JYPPX.OpenCvSharp.Core.PixelTypeDescriptor right)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|JYPPX.OpenCvSharp.Core.PixelAlphaMode AlphaMode
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|JYPPX.OpenCvSharp.Core.PixelChannelOrder ChannelOrder
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Boolean CanWrite
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Int32 AlignmentBytes
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Int32 Channels
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Int32 Depth
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Int32 ElementSizeBytes
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Int32 MatType
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor|property|instance;get:public|System.Type ElementType
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeTraits|method|public;static|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor Get<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeTraits|method|public;static|System.Boolean TryGet(System.Type type,out JYPPX.OpenCvSharp.Core.PixelTypeDescriptor descriptor)
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeTraits|method|public;static|System.Boolean TryGet<T>(out JYPPX.OpenCvSharp.Core.PixelTypeDescriptor descriptor)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeTraits|property|static;get:public|System.Collections.Generic.IEnumerable<JYPPX.OpenCvSharp.Core.PixelTypeDescriptor> RegisteredTypes
+MEMBER|JYPPX.OpenCvSharp.Core.PixelTypeTraits|property|static;get:public|System.Int32 RegisteredTypeCount
 MEMBER|JYPPX.OpenCvSharp.Core.Point2d|constructor|public;instance|.ctor(System.Double x,System.Double y)
 MEMBER|JYPPX.OpenCvSharp.Core.Point2d|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|JYPPX.OpenCvSharp.Core.Point2d|method|public;instance;override|System.Int32 GetHashCode()
@@ -3385,9 +3451,13 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|property|instance;get:public;set:pu
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|property|instance;get:public;set:public|System.Int32 LoopCount
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|property|instance;get:public|System.Int32 FrameCount
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions options,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan<System.Byte> buffer,JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions options,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan<System.Byte> buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImRead(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult Identify(System.Byte[] buffer)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult Identify(System.ReadOnlySpan<System.Byte> buffer)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult ImDecodeWithMetadata(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult ImReadWithMetadata(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Boolean HaveImageReader(System.String filename)
@@ -3426,6 +3496,26 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|method|public;instance|System
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|property|instance;get:public|JYPPX.OpenCvSharp.Core.Mat Item[System.Int32 index]
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|property|instance;get:public|System.Boolean IsDisposed
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|property|instance;get:public|System.Int32 Count
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor()
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes,System.Boolean requireKnownMetadataSize,System.Boolean requireKnownIccProfileSize)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes,System.Boolean requireKnownMetadataSize,System.Boolean requireKnownIccProfileSize,System.Int64 maxCumulativePixels,System.Int32 maxBitDepth,System.Int32 maxChannels,System.Boolean rejectUnknownPixelFormat)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RejectUnknownFormat
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RejectUnknownPixelFormat
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RequireKnownIccProfileSize
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RequireKnownMetadataSize
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RequireKnownSize
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxBitDepth
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxChannels
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxFrames
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxHeight
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxWidth
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxCumulativePixels
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxIccProfileBytes
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxInputBytes
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxMetadataBytes
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxPixels
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.ImgCodecs.ImwriteFlags encodingId,System.Int32 value)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;instance;override|System.Boolean Equals(System.Object? obj)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;instance;override|System.Int32 GetHashCode()
@@ -3435,6 +3525,25 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;static|Syste
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam left,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam right)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|property|instance;get:public|JYPPX.OpenCvSharp.ImgCodecs.ImwriteFlags EncodingId
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam|property|instance;get:public|System.Int32 Value
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsBitDepthKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsChannelCountKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsFormatKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsFrameCountKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsIccProfileSizeKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsMetadataSizeKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsPixelFormatKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Boolean IsSizeKnown
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int32 BitDepth
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int32 BytesInspected
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int32 ChannelCount
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int32 FrameCount
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int32 Height
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int32 Width
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int64 IccProfileBytes
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int64 InputBytes
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.Int64 MetadataBytes
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult|property|instance;get:public|System.String Format
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataType type,JYPPX.OpenCvSharp.Core.Mat data)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|property|instance;get:public|JYPPX.OpenCvSharp.Core.Mat Data
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk|property|instance;get:public|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataType Type
@@ -5306,6 +5415,44 @@ MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult|property|instance;get
 MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult|property|instance;get:public|System.Boolean Success
 MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult|property|instance;get:public|System.Int32 DecodedInfoCount
 MEMBER|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult|property|instance;get:public|System.String[] DecodedInfo
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|method|public;static|JYPPX.OpenCvSharp.OpenCvCapabilities GetCurrent()
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityProbe NativeRuntime
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Boolean? UseOptimized
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvCapabilityProbe> Accelerators
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvDnnBackendCapability> DnnBackends
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvVideoBackendCapability> VideoIOBackends
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<System.String> Warnings
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Int32 NativeAbiVersion
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Int32 ProcessBitness
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Int32? LoadedNativeAbiVersion
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Int32? LogicalCpuCount
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String CpuFeaturesLine
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String ManagedPackageVersion
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String NativeOpenCvVersion
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String OpenCvVersion
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String OperatingSystem
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String OperatingSystemDescription
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String ProcessArchitecture
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String RuntimeFrameworkDescription
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String RuntimeIdentifier
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.String TargetFramework
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|constructor|public;instance|.ctor(System.String name,JYPPX.OpenCvSharp.OpenCvCapabilityState state,System.String reason)
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|method|public;instance;override|System.String ToString()
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityState State
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|property|instance;get:public|System.Boolean IsAvailable
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|property|instance;get:public|System.String Name
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|property|instance;get:public|System.String Reason
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Available=2
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Declared=1
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Unavailable=4
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Unknown=0
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Verified=3
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|JYPPX.OpenCvSharp.Dnn.DnnBackend Backend
+MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityState State
+MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|System.Boolean IsAvailable
+MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.Dnn.DnnTarget> Targets
+MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|System.String Reason
 MEMBER|JYPPX.OpenCvSharp.OpenCvException|constructor|public;instance|.ctor()
 MEMBER|JYPPX.OpenCvSharp.OpenCvException|constructor|public;instance|.ctor(System.String message)
 MEMBER|JYPPX.OpenCvSharp.OpenCvException|constructor|public;instance|.ctor(System.String message,System.Exception innerException)
@@ -5329,6 +5476,12 @@ MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|method|public;static|System.Void V
 MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|property|static;get:public|System.String NuGetPackageVersion
 MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|property|static;get:public|System.String PackageVersion
 MEMBER|JYPPX.OpenCvSharp.OpenCvSharpBuildInfo|property|static;get:public|System.String TargetFramework
+MEMBER|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityState State
+MEMBER|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|property|instance;get:public|JYPPX.OpenCvSharp.VideoIO.VideoCaptureAPIs Api
+MEMBER|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|property|instance;get:public|System.Boolean IsAvailable
+MEMBER|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|property|instance;get:public|System.Boolean IsBuiltIn
+MEMBER|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|property|instance;get:public|System.String Name
+MEMBER|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|property|instance;get:public|System.String Reason
 MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseOpticalFlow|method|protected;instance|System.Void ThrowIfDisposed()
 MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseOpticalFlow|method|public;instance;sealed-override|System.Void Dispose()
 MEMBER|JYPPX.OpenCvSharp.OptFlow.DenseOpticalFlow|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Calc(JYPPX.OpenCvSharp.Core.Mat i0,JYPPX.OpenCvSharp.Core.Mat i1)

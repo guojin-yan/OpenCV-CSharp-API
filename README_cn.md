@@ -37,8 +37,9 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 - 一个 managed 包，以及面向 14 个已验证 Windows、Linux 和 Android 模拟器 RID 的 full 与 mini native runtime profile。
 - 支持 .NET Framework 4.6 至 4.8.1、.NET Core 3.1，以及 .NET 5 至 .NET 10。
 - 向 NuGet.org 与 GitHub Packages 发布确定性包，并提供 SPDX 2.3 SBOM、受保护的发布审批和经过验证的 GitHub Release 产物。
+- managed codec 预检可识别常见图像头，并在 native 解码前应用输入、尺寸、像素数和帧数预算。
 - 提供 23 个按功能分组的无头完整案例并生成可检查 PNG；模型 DNN 案例使用一次性哈希校验资产包，其余案例完全离线运行。
-- 兼容性基线覆盖 632 个 public managed type、6,817 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
+- 兼容性基线覆盖 644 个 public managed type、6,958 个 public/protected member、`JYPPX.OpenCvSharp` 根下的 41 个 namespace 和已声明的 native ABI。
 
 ## 📢 5.0.0 本次更新
 
@@ -206,7 +207,7 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release `
 
 环境要求：
 
-- 仓库精确验证路径使用 .NET SDK 10.0.302。
+- 仓库验证路径使用任意 .NET 10 SDK；根目录 `global.json` 允许在 .NET 10 内滚动选择。
 - native 构建需要 CMake 和受支持的 C/C++ toolchain。
 - linked native 构建需要 OpenCV 5.0.0 源码或已安装的 OpenCV 5.0.0 runtime。
 

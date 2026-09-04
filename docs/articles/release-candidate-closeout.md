@@ -15,7 +15,7 @@ The current candidate is a local, deterministic preflight only. The generated re
 - [x] Android x64/x86 Full and Mini single-loader payloads execute package-owned native calls in ABI-matched hosted emulators; retired dual-loader runs are retained only as superseded history.
 - [x] Deterministic SPDX-2.3 generation and byte-for-byte check mode are guarded with 17 negative fixtures.
 - [x] Provenance, license, runtime payload, change-control, rollback, and read-only public-feed evidence are locally validated.
-- [x] Exact SDK `10.0.302`, DocFX `2.78.5`, workflow syntax, actionlint, and aggregate invariant checks are local gates.
+- [x] .NET 10 SDK resolution, DocFX `2.78.5`, workflow syntax, actionlint, and aggregate invariant checks are local gates.
 - [x] Stable managed package validation compares `5.0.0` against the published `5.0.0-preview.1` package API baseline.
 - [x] Main Video ECC and TrackerMIL callables are closed, with 138 implemented callables, zero measured gaps, and 7 intentional omissions in the bounded Video partition.
 - [x] Hosted `win-x86/full` producer-to-X86-consumer evidence, including artifact digests, PE/I386 closure, and the WoW64 probe.

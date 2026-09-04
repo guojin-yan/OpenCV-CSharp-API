@@ -844,7 +844,7 @@ function Get-Record {
             Status = "locally-validated"
             InvariantGuardCount = 78
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
-            ExactSdk = "10.0.302"
+            SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false
         }
         Signing = [ordered]@{

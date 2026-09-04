@@ -62,7 +62,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Reject synthetic publish inputs
@@ -140,7 +140,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Restore
@@ -210,7 +210,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Reject synthetic publish
@@ -2328,7 +2328,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Download package artifacts
@@ -2354,7 +2354,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Record hosted Ubuntu x64 consumer evidence
@@ -2438,7 +2438,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Require AMD64 Windows host and install factual x86 .NET runtime
@@ -2596,7 +2596,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Require actual Windows x64 package consumer
@@ -2687,7 +2687,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Require actual Windows ARM64 package consumer
@@ -2780,7 +2780,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Verify native Ubuntu ARM64 consumer boundary
@@ -3177,7 +3177,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Download managed package artifact
@@ -3589,7 +3589,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Download managed package artifact
@@ -3816,7 +3816,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Download managed package artifact
@@ -4047,7 +4047,7 @@ jobs:
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
         with:
           dotnet-version: |
-            10.0.302
+            10.0.x
             9.0.316
             8.0.423
       - name: Download managed package artifact

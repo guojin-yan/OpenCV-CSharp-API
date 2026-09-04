@@ -18,7 +18,11 @@ Linux runtime package 使用 distro-specific Linux RID package ID，例如 `JYPP
 
 For deeper runtime setup, fallback, smoke, and license details, see the [Linked Runtime Build Guide](linked-runtime-build-guide.md), [Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md), [Smoke Profiles Guide](smoke-profiles-guide.md), [Runtime Licenses](runtime-licenses.md), and the [runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md).
 
+Before selecting a platform-specific deployment path, capture `OpenCvCapabilities.GetCurrent()` as described in the [Runtime Capability And Platform Guide](runtime-capability-and-platform-guide.md).
+
 更深入的 runtime 设置、fallback、smoke 和 license 细节见 [Linked Runtime Build Guide](linked-runtime-build-guide.md)、[Linked Runtime Smoke Guide](linked-runtime-smoke-guide.md)、[Smoke Profiles Guide](smoke-profiles-guide.md)、[Runtime Licenses](runtime-licenses.md) 以及[runtime package README](https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/JYPPX.OpenCV.runtime/README.md)。
+
+在选择平台专用部署路径前，请按[运行时能力与平台指南](runtime-capability-and-platform-guide.md)采集 `OpenCvCapabilities.GetCurrent()`。
 
 ```powershell
 dotnet add package JYPPX.OpenCV.CSharp.API

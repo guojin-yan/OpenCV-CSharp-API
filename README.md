@@ -37,8 +37,9 @@ The current public version is reported by the live NuGet badges below. Stable re
 - One managed package plus full and mini native runtime profiles for 14 verified Windows, Linux, and Android emulator RIDs.
 - .NET Framework 4.6 through 4.8.1, .NET Core 3.1, and .NET 5 through .NET 10.
 - Deterministic packages on NuGet.org and GitHub Packages, SPDX 2.3 SBOMs, protected release approval, and verified GitHub Release assets.
+- Managed codec preflight identifies common image headers and applies explicit input, dimension, pixel, and frame budgets before native decoding.
 - Twenty-three grouped, headless workflows with inspectable PNG output; model-backed DNN cases use one-time, hash-verified asset bundles while the remaining cases stay fully offline.
-- Checked compatibility baselines covering 632 public managed types, 6,817 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
+- Checked compatibility baselines covering 644 public managed types, 6,958 public/protected members, 41 namespaces under `JYPPX.OpenCvSharp`, and the declared native ABI.
 
 ## 📢 What's New In 5.0.0
 
@@ -206,7 +207,7 @@ Run only the project for the feature you are learning. Each case restores the pu
 
 Requirements:
 
-- .NET SDK 10.0.302 for the repository's exact validation path.
+- Any .NET 10 SDK for the repository validation path. The root `global.json` permits roll-forward within .NET 10.
 - CMake and a supported C/C++ toolchain for native builds.
 - OpenCV 5.0.0 source or an installed OpenCV 5.0.0 runtime for linked native builds.
 

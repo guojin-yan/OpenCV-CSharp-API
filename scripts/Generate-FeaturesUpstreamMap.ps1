@@ -23,8 +23,8 @@ if ([string]::IsNullOrWhiteSpace($DotNetPath)) {
 }
 $dotnet = (Resolve-Path -LiteralPath $DotNetPath).Path
 $sdkVersion = (& $dotnet --version).Trim()
-if ($LASTEXITCODE -ne 0 -or $sdkVersion -ne "10.0.302") {
-    throw "Features map generation requires exact SDK 10.0.302; resolved '$sdkVersion' from $dotnet."
+if ($LASTEXITCODE -ne 0 -or $sdkVersion -notmatch '^10\.') {
+    throw "Features map generation requires a .NET 10 SDK; resolved '$sdkVersion' from $dotnet."
 }
 
 $raw = Join-Path $repo "compatibility/features-upstream-raw.json"

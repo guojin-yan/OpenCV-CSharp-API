@@ -18,7 +18,7 @@ if (-not (Test-Path -LiteralPath $opencv -PathType Container)) { throw "OpenCV 5
 if ([string]::IsNullOrWhiteSpace($DotNetPath)) { $DotNetPath = (Get-Command dotnet -ErrorAction Stop).Source }
 $dotnet = (Resolve-Path -LiteralPath $DotNetPath).Path
 $sdkVersion = (& $dotnet --version).Trim()
-if ($LASTEXITCODE -ne 0 -or $sdkVersion -ne "10.0.302") { throw "Stitching map generation requires exact SDK 10.0.302; resolved '$sdkVersion' from $dotnet." }
+if ($LASTEXITCODE -ne 0 -or $sdkVersion -notmatch '^10\.') { throw "Stitching map generation requires a .NET 10 SDK; resolved '$sdkVersion' from $dotnet." }
 
 $raw = Join-Path $repo "compatibility/stitching-upstream-raw.json"
 if ($RegenerateRaw) {

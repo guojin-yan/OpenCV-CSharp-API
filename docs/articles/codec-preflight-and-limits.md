@@ -1,0 +1,80 @@
+# Codec Preflight And Limits / 编解码预检与限制
+
+Cv2.Identify performs a managed header inspection before native decoding. It recognizes common PNG, JPEG, GIF, WebP, BMP, TIFF, and PNM signatures, reports dimensions when the header proves them, and never opens the native runtime. It is intended for admission control and diagnostics, not for claiming that a file is valid or that every codec feature is available.
+
+Cv2.Identify 会在 native 解码前执行 managed 头检查。它识别常见的 PNG、JPEG、GIF、WebP、BMP、TIFF 和 PNM 签名，在头部能够证明时报告尺寸，并且不会加载 native runtime。它用于输入准入和诊断，不代表文件一定完整有效，也不代表所有 codec 功能都可用。
+
+## Identify First / 先识别
+
+~~~csharp
+ImageIdentifyResult identified = Cv2.Identify(encodedBytes);
+if (identified.IsSizeKnown && (long)identified.Width * identified.Height > 100000000)
+{
+    throw new InvalidDataException("Image is larger than the application budget.");
+}
+~~~
+
+ImageIdentifyResult distinguishes an unknown format, unknown dimensions, and a proven single-frame header. Classic TIFF (version 42, little- or big-endian) now reports dimensions from the first IFD and page count from a complete, bounded next-IFD chain when those facts are provable. BigTIFF, cyclic/out-of-range directories, heterogeneous page sizes, and incomplete directories keep the affected fact unknown; an unknown fact must not be treated as zero-sized input.
+
+ImageIdentifyResult 区分未知格式、未知尺寸和已证明的单帧头部。经典 TIFF（版本 42，支持小端/大端）现在会在事实可证明时，从首个 IFD 报告尺寸，并沿完整且有界的 next-IFD 链报告页数。BigTIFF、循环/越界目录、页尺寸不一致或目录不完整时，受影响事实保持未知；未知事实不能被当作零尺寸输入。
+
+For structurally complete GIF, APNG, and animated WebP containers, `FrameCount` is counted from the parsed frame/image records. APNG sequence numbers, declared frame count, WebP animation chunks, GIF image descriptors/extensions, and the final container terminator must all be consistent; truncation, trailing bytes, or an incomplete frame leave `IsFrameCountKnown` false. JPEG is treated as a known single frame only when a valid EOI marker terminates the input. Static PNG/WebP/GIF inputs report one frame when their single-image boundary is proven.
+
+对于结构完整的 GIF、APNG 和动画 WebP 容器，`FrameCount` 根据已解析的帧/图像记录统计。APNG 序列号与声明帧数、WebP 动画块、GIF 图像描述符/扩展块以及容器结束标记必须一致；截断、尾部多余字节或未完成帧都会使 `IsFrameCountKnown` 保持为 false。JPEG 只有在合法 EOI 标记位于输入末尾时才报告已知单帧。能够证明单图边界的静态 PNG/WebP/GIF 报告一帧。
+
+## Decode With A Budget / 带预算解码
+
+~~~csharp
+var options = new ImageDecodeOptions(
+    maxInputBytes: 64L * 1024 * 1024,
+    maxWidth: 16384,
+    maxHeight: 16384,
+    maxPixels: 100000000,
+    maxFrames: 64,
+    rejectUnknownFormat: true,
+    requireKnownSize: true,
+    maxMetadataBytes: 8L * 1024 * 1024,
+    maxIccProfileBytes: 2L * 1024 * 1024,
+    requireKnownMetadataSize: true,
+    requireKnownIccProfileSize: true);
+
+using (Mat image = Cv2.ImDecode(encodedBytes, options, ImreadModes.Color))
+{
+    // Native decoding starts only after the managed budget checks pass.
+}
+~~~
+
+The overload checks encoded byte length, recognized format, known dimensions, checked width-times-height arithmetic, known frame/page count, cumulative width-times-height budget, encoded depth/channel limits when proven, and known metadata/ICC payload limits before calling the existing native ImDecode. The original overloads remain unchanged for applications that already enforce their own input policy. A preflight pass does not replace sandboxing, codec patching, timeout controls, or post-decode validation.
+
+该重载会在调用现有 native ImDecode 前检查编码字节长度、可识别格式、已知尺寸、checked 的宽高乘法、累计宽高像素预算、已证明的编码精度/通道上限以及已知 metadata/ICC 负载上限。原有重载保持不变，已经有自有输入策略的应用可以继续使用。预检不能替代沙箱、codec 更新、超时控制或解码后的结果校验。
+
+## Metadata And ICC Facts / Metadata 与 ICC 事实
+
+For structurally complete PNG, JPEG, and WebP containers, `ImageIdentifyResult` reports `MetadataBytes` and `IccProfileBytes` when the managed parser can prove their serialized payload lengths. The selected metadata count includes PNG `tEXt`/`zTXt`/`iTXt`/`eXIf`/`iCCP`, JPEG APPn and COM segments, and WebP EXIF/XMP/ICCP chunks. It is a stored-byte admission fact, not an estimate of expanded EXIF, XMP, compressed PNG `iCCP`, or native decoder allocation. For other formats, truncated containers, or unsupported container details, the corresponding fact is unknown.
+
+对于结构完整的 PNG、JPEG 和 WebP 容器，若 managed 解析器能够证明序列化负载长度，`ImageIdentifyResult` 会报告 `MetadataBytes` 和 `IccProfileBytes`。选定的 metadata 统计包括 PNG 的 `tEXt`/`zTXt`/`iTXt`/`eXIf`/`iCCP`、JPEG APPn/COM 段，以及 WebP EXIF/XMP/ICCP 块。该数值是存储字节的准入事实，不是展开后的 EXIF、XMP、压缩 PNG `iCCP` 或 native 解码分配量的估算。对于其他格式、截断容器或尚未支持的容器细节，相应事实为未知。
+
+`MaxMetadataBytes` and `MaxIccProfileBytes` reject only known facts. Set `RequireKnownMetadataSize` and `RequireKnownIccProfileSize` for a fail-closed boundary; otherwise an unknown metadata fact remains admissible, like an unknown image size when `RequireKnownSize` is disabled.
+
+`MaxMetadataBytes` 和 `MaxIccProfileBytes` 只拒绝已知事实。设置 `RequireKnownMetadataSize` 和 `RequireKnownIccProfileSize` 可形成失败关闭边界；否则未知 metadata 事实仍会被允许，这与未启用 `RequireKnownSize` 时的未知图像尺寸一致。
+
+## Policy Boundaries / 策略边界
+
+- ImageDecodeOptions is an admission budget, not a promise of peak native allocation.
+- Unknown dimensions or frame counts are accepted by default unless RequireKnownSize is enabled; applications handling untrusted input should choose an explicit policy.
+- A recognized signature can still be truncated, malformed, or hostile. Native failure remains possible and must be handled.
+- BigTIFF and other format-specific multi-frame parsers, heterogeneous-page cumulative accounting, native peak-allocation accounting, decoded color/final precision facts, and IBufferWriter output remain separate follow-up contracts.
+
+- ImageDecodeOptions 是输入准入预算，不是 native 峰值内存承诺。
+- 默认允许未知尺寸或帧数；处理不可信输入时应显式设置策略，例如启用 RequireKnownSize。
+- 已识别的签名仍可能被截断、损坏或恶意构造，native 失败仍然可能发生，调用方必须处理。
+- BigTIFF 与其他格式专用多帧解析器、异构页的累计预算核算、native 峰值分配核算、解码后颜色/最终精度事实和 IBufferWriter 输出仍属于后续独立契约。
+## Pixel Format And Multi-Frame Budgets / 像素格式与多帧预算
+
+For PNG, the parser reports `BitDepth` and channel count from a valid IHDR color type. For JPEG, it reports sample precision and component count from the first SOF marker. These are encoded-header facts; they do not promise the final `Mat` depth or channel layout after `ImreadModes` conversion. Other formats remain unknown until their headers can be proven without guessing.
+
+对于 PNG，解析器从合法 IHDR 色彩类型报告 `BitDepth` 和通道数；对于 JPEG，解析器从第一个 SOF 标记报告样本精度和组件数。这些是编码头事实，不承诺 `ImreadModes` 转换后的最终 `Mat` 深度或通道布局。其他格式只有在无需猜测且头部可证明时才会报告，否则保持未知。
+
+`MaxBitDepth` and `MaxChannels` reject only known encoded facts. Set `RejectUnknownPixelFormat` when the admission boundary must fail closed. `MaxCumulativePixels` multiplies the proven width-times-height by the proven frame/page count with checked arithmetic; it is an admission budget, not a peak native allocation guarantee. If either size or frame count is unknown, the cumulative fact remains unknown unless a future format-specific parser supplies it.
+
+`MaxBitDepth` 和 `MaxChannels` 只拒绝已知的编码事实；需要失败关闭时设置 `RejectUnknownPixelFormat`。`MaxCumulativePixels` 使用 checked 算术将已证明的宽高像素数乘以已证明的帧/页数，是输入准入预算，不是 native 峰值分配保证。如果尺寸或帧数任一未知，累计事实仍为未知，除非后续格式专用解析器能够补充证明。

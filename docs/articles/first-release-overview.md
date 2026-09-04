@@ -15,9 +15,9 @@ OpenCV CSharp API 通过版本中立的 `JYPPX.OpenCvSharp.*` 对象模型和稳
 | AI and ML / AI 与机器学习 | `Dnn`, `ML`, `ObjDetect`, `Face` | ONNX inference, SVM/KNN/tree models, QR/barcode/HOG/face workflows |
 | Composition / 合成 | `Stitching`, `AlphaMat`, `XImgProc`, `XPhoto` | Panorama, blending, matting, edge-aware filters |
 
-The managed surface currently has 632 public types and 6,817 public/protected members across 41 namespaces rooted at `JYPPX.OpenCvSharp`. The full native profile exposes 2,663 stable C ABI functions, and every current native function is bound by managed interop. Those numbers describe the current release baseline, not a claim that every OpenCV module is complete.
+The managed surface currently has 643 public types and 6,940 public/protected members across 41 namespaces rooted at `JYPPX.OpenCvSharp`. The full native profile exposes 2,663 stable C ABI functions, and every current native function is bound by managed interop. Those numbers describe the current release baseline, not a claim that every OpenCV module is complete.
 
-当前托管层包含 632 个公共类型、6,817 个 public/protected 成员和 `JYPPX.OpenCvSharp` 根下的 41 个命名空间。full native profile 暴露 2,663 个稳定 C ABI 函数，当前每个 native 函数均已有 managed interop 绑定。这些数字描述当前发布基线，不代表所有 OpenCV 模块都已完整封装。
+当前托管层包含 643 个公共类型、6,940 个 public/protected 成员和 `JYPPX.OpenCvSharp` 根下的 41 个命名空间。full native profile 暴露 2,663 个稳定 C ABI 函数，当前每个 native 函数均已有 managed interop 绑定。这些数字描述当前发布基线，不代表所有 OpenCV 模块都已完整封装。
 
 ## Compatibility Promise / 兼容性承诺
 
