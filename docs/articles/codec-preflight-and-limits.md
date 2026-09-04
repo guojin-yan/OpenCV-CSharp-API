@@ -18,6 +18,10 @@ ImageIdentifyResult distinguishes an unknown format, unknown dimensions, and a p
 
 ImageIdentifyResult 区分未知格式、未知尺寸和已证明的单帧头部。经典 TIFF（版本 42，支持小端/大端）现在会在事实可证明时，从首个 IFD 报告尺寸，并沿完整且有界的 next-IFD 链报告页数。BigTIFF、循环/越界目录、页尺寸不一致或目录不完整时，受影响事实保持未知；未知事实不能被当作零尺寸输入。
 
+`Identify(Stream, ImageDecodeOptions)` applies the same admission policy while reading from the stream's current position. It reads no more than `MaxInputBytes + 1` bytes, restores the original position for seekable streams even when validation fails, and consumes non-seekable streams. This is deliberately a whole-input preflight rather than an incremental decoder: callers that need to preserve a non-seekable source must provide their own replayable buffering boundary.
+
+`Identify(Stream, ImageDecodeOptions)` 会从流的当前位置读取并应用同一准入策略。它最多读取 `MaxInputBytes + 1` 字节；对于可 seek 流，即使验证失败也会恢复原位置；对于不可 seek 流则会消费输入。这是有意设计为完整输入预检，而非增量解码器：需要保留不可 seek 源的调用方必须自行提供可重放的缓冲边界。
+
 For structurally complete GIF, APNG, and animated WebP containers, `FrameCount` is counted from the parsed frame/image records. APNG sequence numbers, declared frame count, WebP animation chunks, GIF image descriptors/extensions, and the final container terminator must all be consistent; truncation, trailing bytes, or an incomplete frame leave `IsFrameCountKnown` false. JPEG is treated as a known single frame only when a valid EOI marker terminates the input. Static PNG/WebP/GIF inputs report one frame when their single-image boundary is proven.
 
 对于结构完整的 GIF、APNG 和动画 WebP 容器，`FrameCount` 根据已解析的帧/图像记录统计。APNG 序列号与声明帧数、WebP 动画块、GIF 图像描述符/扩展块以及容器结束标记必须一致；截断、尾部多余字节或未完成帧都会使 `IsFrameCountKnown` 保持为 false。JPEG 只有在合法 EOI 标记位于输入末尾时才报告已知单帧。能够证明单图边界的静态 PNG/WebP/GIF 报告一帧。
@@ -44,6 +48,17 @@ using (Mat image = Cv2.ImDecode(encodedBytes, options, ImreadModes.Color))
 }
 ~~~
 
+The same policy is available for a stream. Its seek/consumption behavior is identical to `Identify(Stream, ImageDecodeOptions)`.
+
+对于流也可以使用同一策略，其 seek/消费语义与 `Identify(Stream, ImageDecodeOptions)` 完全相同。
+
+~~~csharp
+using (Mat image = Cv2.ImDecode(uploadStream, options, ImreadModes.Color))
+{
+    // A seekable uploadStream remains at its original position after this call.
+}
+~~~
+
 The overload checks encoded byte length, recognized format, known dimensions, checked width-times-height arithmetic, known frame/page count, cumulative width-times-height budget, encoded depth/channel limits when proven, and known metadata/ICC payload limits before calling the existing native ImDecode. The original overloads remain unchanged for applications that already enforce their own input policy. A preflight pass does not replace sandboxing, codec patching, timeout controls, or post-decode validation.
 
 该重载会在调用现有 native ImDecode 前检查编码字节长度、可识别格式、已知尺寸、checked 的宽高乘法、累计宽高像素预算、已证明的编码精度/通道上限以及已知 metadata/ICC 负载上限。原有重载保持不变，已经有自有输入策略的应用可以继续使用。预检不能替代沙箱、codec 更新、超时控制或解码后的结果校验。
@@ -61,11 +76,13 @@ For structurally complete PNG, JPEG, and WebP containers, `ImageIdentifyResult` 
 ## Policy Boundaries / 策略边界
 
 - ImageDecodeOptions is an admission budget, not a promise of peak native allocation.
+- Stream preflight buffers the complete admitted input in managed memory; MaxInputBytes limits that buffer but does not bound native peak allocation.
 - Unknown dimensions or frame counts are accepted by default unless RequireKnownSize is enabled; applications handling untrusted input should choose an explicit policy.
 - A recognized signature can still be truncated, malformed, or hostile. Native failure remains possible and must be handled.
 - BigTIFF and other format-specific multi-frame parsers, heterogeneous-page cumulative accounting, native peak-allocation accounting, decoded color/final precision facts, and IBufferWriter output remain separate follow-up contracts.
 
 - ImageDecodeOptions 是输入准入预算，不是 native 峰值内存承诺。
+- 流预检会将已准入的完整输入缓冲到 managed 内存中；MaxInputBytes 限制该缓冲，但不限制 native 峰值分配。
 - 默认允许未知尺寸或帧数；处理不可信输入时应显式设置策略，例如启用 RequireKnownSize。
 - 已识别的签名仍可能被截断、损坏或恶意构造，native 失败仍然可能发生，调用方必须处理。
 - BigTIFF 与其他格式专用多帧解析器、异构页的累计预算核算、native 峰值分配核算、解码后颜色/最终精度事实和 IBufferWriter 输出仍属于后续独立契约。

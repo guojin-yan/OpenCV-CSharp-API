@@ -3,7 +3,7 @@ schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
 type-count=644
-member-count=6958
+member-count=6961
 namespace-count=41
 nullable-shape=included
 
@@ -3453,10 +3453,13 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|property|instance;get:public|System
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Animation|property|instance;get:public|System.Int32 FrameCount
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions options,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.IO.Stream stream,JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions options,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan<System.Byte> buffer,JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions options,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImDecode(System.ReadOnlySpan<System.Byte> buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.Core.Mat ImRead(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult Identify(System.Byte[] buffer)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult Identify(System.IO.Stream stream)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult Identify(System.IO.Stream stream,JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions options)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageIdentifyResult Identify(System.ReadOnlySpan<System.Byte> buffer)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult ImDecodeWithMetadata(System.Byte[] buffer,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataResult ImReadWithMetadata(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Unchanged)

@@ -29,6 +29,66 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyStreamRestoresSeekablePosition()
+        {
+            byte[] png = CreateCompletePng(2, 3, 8, 2);
+            using (var stream = new MemoryStream())
+            {
+                stream.WriteByte(0x7F);
+                stream.Write(png, 0, png.Length);
+                stream.Position = 1;
+                ImageDecodeOptions options = new ImageDecodeOptions(maxInputBytes: png.Length, maxWidth: 10, maxHeight: 10,
+                    maxPixels: 100, maxFrames: 1, rejectUnknownFormat: true, requireKnownSize: true);
+
+                ImageIdentifyResult result = ImgCodecsCv2.Identify(stream, options);
+
+                Assert.Equal("png", result.Format);
+                Assert.Equal(1, stream.Position);
+            }
+        }
+
+        [Fact]
+        public void IdentifyStreamConsumesNonSeekableInputAndSupportsShortReads()
+        {
+            byte[] png = CreateCompletePng(2, 3, 8, 2);
+            using (var stream = new NonSeekableReadStream(png, 2))
+            {
+                ImageIdentifyResult result = ImgCodecsCv2.Identify(stream, new ImageDecodeOptions());
+
+                Assert.Equal("png", result.Format);
+                Assert.Equal(png.Length, stream.BytesRead);
+                Assert.True(stream.ReadCalls > 1);
+            }
+        }
+
+        [Fact]
+        public void IdentifyStreamRejectsInputLimitAndRestoresSeekablePosition()
+        {
+            byte[] png = CreateCompletePng(2, 3, 8, 2);
+            using (var stream = new MemoryStream(png))
+            {
+                ImageDecodeOptions options = new ImageDecodeOptions(maxInputBytes: png.Length - 1, maxWidth: 10, maxHeight: 10,
+                    maxPixels: 100, maxFrames: 1, rejectUnknownFormat: true, requireKnownSize: true);
+
+                Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.Identify(stream, options));
+                Assert.Equal(0, stream.Position);
+            }
+        }
+
+        [Fact]
+        public void ImDecodeStreamAppliesPreflightBeforeNativeCall()
+        {
+            using (var stream = new MemoryStream(new byte[] { 1, 2, 3 }))
+            {
+                ImageDecodeOptions options = new ImageDecodeOptions(maxInputBytes: 32, maxWidth: 10, maxHeight: 10,
+                    maxPixels: 100, maxFrames: 1, rejectUnknownFormat: true, requireKnownSize: false);
+
+                Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(stream, options));
+                Assert.Equal(0, stream.Position);
+            }
+        }
+
+        [Fact]
         public void IdentifyReadsJpegAndWebpHeaders()
         {
             byte[] jpeg = new byte[] { 0xFF, 0xD8, 0xFF, 0xC0, 0x00, 0x0B, 0x08, 0x01, 0x20, 0x02, 0x80, 0x01, 0x01, 0x11, 0x00, 0xFF, 0xD9 };
@@ -558,6 +618,47 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             destination[offset + 4] = (byte)payload.Length;
             Array.Copy(payload, 0, destination, offset + 8, payload.Length);
             return offset + 8 + payload.Length + (payload.Length & 1);
+        }
+
+        private sealed class NonSeekableReadStream : Stream
+        {
+            private readonly byte[] data;
+            private readonly int maxRead;
+            private int position;
+
+            public NonSeekableReadStream(byte[] data, int maxRead)
+            {
+                this.data = data;
+                this.maxRead = maxRead;
+            }
+
+            public int BytesRead { get { return position; } }
+            public int ReadCalls { get; private set; }
+            public override bool CanRead { get { return true; } }
+            public override bool CanSeek { get { return false; } }
+            public override bool CanWrite { get { return false; } }
+            public override long Length { get { throw new NotSupportedException(); } }
+            public override long Position
+            {
+                get { throw new NotSupportedException(); }
+                set { throw new NotSupportedException(); }
+            }
+
+            public override int Read(byte[] buffer, int offset, int count)
+            {
+                ++ReadCalls;
+                int available = data.Length - position;
+                if (available <= 0) return 0;
+                int read = Math.Min(Math.Min(count, maxRead), available);
+                Array.Copy(data, position, buffer, offset, read);
+                position += read;
+                return read;
+            }
+
+            public override void Flush() { }
+            public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
+            public override void SetLength(long value) { throw new NotSupportedException(); }
+            public override void Write(byte[] buffer, int offset, int count) { throw new NotSupportedException(); }
         }
     }
 }
