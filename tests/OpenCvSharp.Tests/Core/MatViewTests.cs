@@ -103,6 +103,43 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             }
         }
 
+        [Fact]
+        public void TypedViewCloneAndMatCopyPreserveTheViewedRoiWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat source = new Mat(4, 5, MatType.CV_8UC3))
+            using (Mat roi = source.SubMat(new Rect(1, 1, 3, 2)))
+            using (MatView<Vec3b> view = roi.AsView<Vec3b>())
+            using (Mat cloned = view.Clone())
+            using (Mat copied = new Mat())
+            {
+                Assert.Equal(2, cloned.Rows);
+                Assert.Equal(3, cloned.Cols);
+                Assert.Equal(MatType.CV_8UC3, cloned.Type);
+
+                view.CopyTo(copied);
+
+                Assert.Equal(2, copied.Rows);
+                Assert.Equal(3, copied.Cols);
+                Assert.Equal(MatType.CV_8UC3, copied.Type);
+                Assert.Equal(view.ToArray(), cloned.ToArray<Vec3b>());
+                Assert.Equal(view.ToArray(), copied.ToArray<Vec3b>());
+            }
+        }
+
+        [Fact]
+        public void TypedViewCopyToValidatesDestinationBeforeNativeRuntimeWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat mat = new Mat(1, 1, MatType.CV_8UC1))
+            using (MatView<byte> view = mat.AsView<byte>())
+            {
+                Assert.Throws<ArgumentNullException>(() => view.CopyTo((Mat)null!));
+            }
+        }
+
         private struct UnknownPixel
         {
             public int Value { get; set; }

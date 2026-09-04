@@ -3,7 +3,7 @@ schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
 type-count=644
-member-count=6961
+member-count=6963
 namespace-count=41
 nullable-shape=included
 
@@ -1845,6 +1845,7 @@ MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 MakeType
 MEMBER|JYPPX.OpenCvSharp.Core.MatType|method|public;static|System.Int32 TypeMask(System.Int32 flags)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Mat mat)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Clone()
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|JYPPX.OpenCvSharp.Core.MatRowAccessor<TPixel> AsRows()
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Boolean TryGetSpan(out System.Span<TPixel> span)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.ReadOnlySpan<TPixel> AsReadOnlyRowSpan(System.Int32 row)
@@ -1852,6 +1853,7 @@ MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Read
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Span<TPixel> AsRowSpan(System.Int32 row)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Span<TPixel> AsSpan()
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void CopyFrom(System.ReadOnlySpan<TPixel> source)
+MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void CopyTo(JYPPX.OpenCvSharp.Core.Mat destination)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void CopyTo(System.Span<TPixel> destination)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|System.Void SetValue(System.Int32 row,System.Int32 column,TPixel value)
 MEMBER|JYPPX.OpenCvSharp.Core.MatView<TPixel>|method|public;instance|TPixel GetValue(System.Int32 row,System.Int32 column)

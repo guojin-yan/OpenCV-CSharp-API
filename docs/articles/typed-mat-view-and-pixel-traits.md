@@ -37,6 +37,10 @@ if (view.TryGetSpan(out Span<Vec3b> pixels))
 
 `MatView<TPixel>` rejects unregistered types, mismatched depth/channel encodings, and N-D matrices. A span returned by the view is borrowed native memory: do not use it after disposing the view or its Mat, and do not retain it across `Mat.Create` or another native header-changing operation. Use `ToArray`, `CopyTo`, or `CopyFrom` when a managed lifetime is required.
 
+`Clone()` returns an owning deep copy of the viewed matrix or ROI, while `CopyTo(Mat)` reuses the existing destination-matrix copy contract. Both operations revalidate the borrowed header before entering native code; a disposed or changed owner is rejected.
+
+`Clone()` 返回当前矩阵或 ROI 的独立深拷贝；`CopyTo(Mat)` 复用现有目标矩阵复制契约。两者在进入 native 代码前都会重新验证 borrowed header；owner 已释放或发生变化时会拒绝访问。
+
 Unknown unmanaged structs are rejected by PixelTypeDescriptor.Get<T>(); use the existing raw byte/typed span APIs only when the binary layout is intentionally managed by the caller.
 
 ## Cross-target behavior

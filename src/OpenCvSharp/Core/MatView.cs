@@ -186,6 +186,26 @@ namespace JYPPX.OpenCvSharp.Core
             return owner.ToArray<TPixel>();
         }
 
+        /// <summary>Creates an owning deep copy of the viewed matrix or ROI.</summary>
+        public Mat Clone()
+        {
+            EnsureUsable();
+            return owner.Clone();
+        }
+
+        /// <summary>Copies the viewed matrix or ROI into an owning destination matrix.</summary>
+        /// <param name="destination">The destination matrix. 目标矩阵。</param>
+        public void CopyTo(Mat destination)
+        {
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
+
+            EnsureUsable();
+            owner.CopyTo(destination);
+        }
+
         /// <summary>
         /// Invalidates this view. The borrowed <see cref="Mat"/> is not disposed.
         /// Spans obtained before disposal must not be used after this view or its matrix is disposed.
