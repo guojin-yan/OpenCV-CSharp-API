@@ -14,6 +14,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             public bool PageCountKnown;
             public long CumulativePixelCount;
             public bool CumulativePixelCountKnown;
+            public int BitDepth;
+            public bool BitDepthKnown;
+            public int Channels;
+            public bool ChannelsKnown;
         }
 
         private static TiffFacts ReadTiffFacts(byte[] data)
@@ -38,6 +42,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             bool uniformPageSize = true;
             long cumulativePixelCount = 0;
             bool cumulativePixelCountKnown = true;
+            int commonBitDepth = 0;
+            int commonChannels = 0;
+            bool commonBitDepthKnown = true;
+            bool commonChannelsKnown = true;
             while (ifdOffset != 0)
             {
                 if (pageCount == maxDirectoriesInspected || !visited.Add(ifdOffset) || ifdOffset < 8 || ifdOffset > int.MaxValue) return new TiffFacts();
@@ -52,6 +60,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 bool heightKnown = false;
                 int width = 0;
                 int height = 0;
+                int bitDepth = 0;
+                int channels = 0;
+                bool bitDepthKnown = false;
+                bool channelsKnown = false;
                 int entryOffset = offset + 2;
                 for (int index = 0; index < entryCount; ++index, entryOffset += 12)
                 {
@@ -77,6 +89,15 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     {
                         height = (int)scalar;
                         heightKnown = true;
+                    }
+                    else if (tag == 258)
+                    {
+                        bitDepthKnown = TryReadTiffBitsPerSample(data, entryOffset, type, count, littleEndian, out bitDepth);
+                    }
+                    else if (tag == 277 && TryReadTiffScalar(data, entryOffset, type, count, littleEndian, out scalar) && scalar > 0 && scalar <= int.MaxValue)
+                    {
+                        channels = (int)scalar;
+                        channelsKnown = true;
                     }
                 }
 
@@ -106,6 +127,18 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                         cumulativePixelCountKnown = false;
                     }
                 }
+                if (pageCount == 0)
+                {
+                    commonBitDepth = bitDepth;
+                    commonChannels = channels;
+                    commonBitDepthKnown = bitDepthKnown;
+                    commonChannelsKnown = channelsKnown;
+                }
+                else
+                {
+                    if (!bitDepthKnown || !commonBitDepthKnown || bitDepth != commonBitDepth) commonBitDepthKnown = false;
+                    if (!channelsKnown || !commonChannelsKnown || channels != commonChannels) commonChannelsKnown = false;
+                }
                 ++pageCount;
                 ifdOffset = ReadTiff32(data, offset + 2 + entryCount * 12, littleEndian);
             }
@@ -121,6 +154,16 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     facts.Width = commonWidth;
                     facts.Height = commonHeight;
                     facts.SizeKnown = true;
+                }
+                if (commonBitDepthKnown)
+                {
+                    facts.BitDepth = commonBitDepth;
+                    facts.BitDepthKnown = true;
+                }
+                if (commonChannelsKnown)
+                {
+                    facts.Channels = commonChannels;
+                    facts.ChannelsKnown = true;
                 }
             }
             return facts;
@@ -149,6 +192,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             bool uniformPageSize = true;
             long cumulativePixelCount = 0;
             bool cumulativePixelCountKnown = true;
+            int commonBitDepth = 0;
+            int commonChannels = 0;
+            bool commonBitDepthKnown = true;
+            bool commonChannelsKnown = true;
             while (ifdOffset != 0)
             {
                 if (pageCount == maxDirectoriesInspected || !visited.Add(ifdOffset) || ifdOffset < 16 || ifdOffset > int.MaxValue)
@@ -174,6 +221,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 bool heightKnown = false;
                 int width = 0;
                 int height = 0;
+                int bitDepth = 0;
+                int channels = 0;
+                bool bitDepthKnown = false;
+                bool channelsKnown = false;
                 for (ulong index = 0; index < entryCount; ++index)
                 {
                     int entryOffset = (int)((ulong)offset + 8UL + index * 20UL);
@@ -213,6 +264,16 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                         height = (int)scalar;
                         heightKnown = true;
                     }
+                    else if (tag == 258)
+                    {
+                        bitDepthKnown = TryReadBigTiffBitsPerSample(data, entryOffset, type, count, littleEndian, out bitDepth);
+                    }
+                    else if (tag == 277 && TryReadBigTiffScalar(data, entryOffset, type, count, littleEndian, out scalar) &&
+                        scalar > 0 && scalar <= int.MaxValue)
+                    {
+                        channels = (int)scalar;
+                        channelsKnown = true;
+                    }
                 }
 
                 if (!widthKnown || !heightKnown)
@@ -241,6 +302,18 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                         cumulativePixelCountKnown = false;
                     }
                 }
+                if (pageCount == 0)
+                {
+                    commonBitDepth = bitDepth;
+                    commonChannels = channels;
+                    commonBitDepthKnown = bitDepthKnown;
+                    commonChannelsKnown = channelsKnown;
+                }
+                else
+                {
+                    if (!bitDepthKnown || !commonBitDepthKnown || bitDepth != commonBitDepth) commonBitDepthKnown = false;
+                    if (!channelsKnown || !commonChannelsKnown || channels != commonChannels) commonChannelsKnown = false;
+                }
 
                 ++pageCount;
                 ifdOffset = ReadTiff64(data, (int)(entriesEnd - 8UL), littleEndian);
@@ -257,6 +330,16 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     facts.Width = commonWidth;
                     facts.Height = commonHeight;
                     facts.SizeKnown = true;
+                }
+                if (commonBitDepthKnown)
+                {
+                    facts.BitDepth = commonBitDepth;
+                    facts.BitDepthKnown = true;
+                }
+                if (commonChannelsKnown)
+                {
+                    facts.Channels = commonChannels;
+                    facts.ChannelsKnown = true;
                 }
             }
             return facts;
@@ -278,6 +361,30 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 return true;
             }
             return false;
+        }
+
+        private static bool TryReadTiffBitsPerSample(byte[] data, int entryOffset, ushort type, uint count, bool littleEndian, out int value)
+        {
+            value = 0;
+            if (type != 3 || count == 0 || count > 16) return false;
+            ulong payloadBytes = (ulong)count * 2UL;
+            int valueOffset = entryOffset + 8;
+            if (payloadBytes > 4)
+            {
+                uint offset = ReadTiff32(data, entryOffset + 8, littleEndian);
+                if (offset > int.MaxValue || offset > data.Length || payloadBytes > (ulong)data.Length - offset) return false;
+                valueOffset = (int)offset;
+            }
+            if (valueOffset < 0 || (ulong)valueOffset + payloadBytes > (ulong)data.Length) return false;
+
+            ushort first = ReadTiff16(data, valueOffset, littleEndian);
+            if (first == 0 || first > 64) return false;
+            for (uint index = 1; index < count; ++index)
+            {
+                if (ReadTiff16(data, valueOffset + (int)(index * 2U), littleEndian) != first) return false;
+            }
+            value = first;
+            return true;
         }
 
         private static bool TryGetTiffTypeSize(ushort type, out int size)
@@ -310,12 +417,12 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             if (count != 1) return false;
             if (type == 3)
             {
-                value = ReadTiff16(data, entryOffset + 8, littleEndian);
+                value = ReadTiff16(data, entryOffset + 12, littleEndian);
                 return true;
             }
             if (type == 4)
             {
-                value = ReadTiff32(data, entryOffset + 8, littleEndian);
+                value = ReadTiff32(data, entryOffset + 12, littleEndian);
                 return true;
             }
             if (type == 16 || type == 18)
@@ -324,6 +431,49 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 return true;
             }
             return false;
+        }
+
+        private static bool TryReadBigTiffBitsPerSample(byte[] data, int entryOffset, ushort type, ulong count, bool littleEndian, out int value)
+        {
+            value = 0;
+            if (type != 3 || count == 0 || count > 16) return false;
+            ulong payloadBytes;
+            try
+            {
+                payloadBytes = checked(count * 2UL);
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
+
+            int valueOffset = entryOffset + 12;
+            if (payloadBytes > 8)
+            {
+                ulong offset = ReadTiff64(data, entryOffset + 12, littleEndian);
+                if (offset > (ulong)data.Length || payloadBytes > (ulong)data.Length - offset) return false;
+                valueOffset = (int)offset;
+            }
+            if ((ulong)valueOffset + payloadBytes > (ulong)data.Length) return false;
+
+            ushort first = ReadTiff16(data, valueOffset, littleEndian);
+            if (first == 0 || first > 64) return false;
+            for (ulong index = 1; index < count; ++index)
+            {
+                if (ReadTiff16(data, valueOffset + (int)(index * 2UL), littleEndian) != first) return false;
+            }
+            value = first;
+            return true;
+        }
+
+        private static PixelFacts ToPixelFacts(TiffFacts facts)
+        {
+            PixelFacts pixels = new PixelFacts();
+            pixels.BitDepth = facts.BitDepth;
+            pixels.BitDepthKnown = facts.BitDepthKnown;
+            pixels.Channels = facts.Channels;
+            pixels.ChannelsKnown = facts.ChannelsKnown;
+            return pixels;
         }
 
         private static ushort ReadTiff16(byte[] data, int offset, bool littleEndian)

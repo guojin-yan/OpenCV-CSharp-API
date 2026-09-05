@@ -223,7 +223,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             {
                 TiffFacts facts = ReadTiffFacts(data);
                 return Result("tiff", facts.Width, facts.Height, facts.SizeKnown, facts.PageCount, facts.PageCountKnown, data.Length,
-                    default(MetadataFacts), default(PixelFacts), facts.CumulativePixelCount, facts.CumulativePixelCountKnown);
+                    default(MetadataFacts), ToPixelFacts(facts), facts.CumulativePixelCount, facts.CumulativePixelCountKnown);
             }
 
             if (data.Length >= 4 && ((data[0] == (byte)'I' && data[1] == (byte)'I' && data[2] == 43 && data[3] == 0) ||
@@ -231,7 +231,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             {
                 TiffFacts facts = ReadBigTiffFacts(data);
                 return Result("bigtiff", facts.Width, facts.Height, facts.SizeKnown, facts.PageCount, facts.PageCountKnown, data.Length,
-                    default(MetadataFacts), default(PixelFacts), facts.CumulativePixelCount, facts.CumulativePixelCountKnown);
+                    default(MetadataFacts), ToPixelFacts(facts), facts.CumulativePixelCount, facts.CumulativePixelCountKnown);
             }
 
             if (data.Length >= 2 && data[0] == (byte)'P' && data[1] >= (byte)'1' && data[1] <= (byte)'6')

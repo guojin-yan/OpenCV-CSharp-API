@@ -163,6 +163,9 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.Equal(2, littleEndian.FrameCount);
             Assert.True(littleEndian.IsCumulativePixelCountKnown);
             Assert.Equal(153600, littleEndian.CumulativePixelCount);
+            Assert.True(littleEndian.IsPixelFormatKnown);
+            Assert.Equal(8, littleEndian.BitDepth);
+            Assert.Equal(3, littleEndian.ChannelCount);
 
             ImageIdentifyResult bigEndian = ImgCodecsCv2.Identify(CreateBigTiff(true, 1));
             Assert.Equal("bigtiff", bigEndian.Format);
@@ -183,6 +186,19 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.Equal(2, result.FrameCount);
             Assert.True(result.IsCumulativePixelCountKnown);
             Assert.Equal(96000, result.CumulativePixelCount);
+            Assert.True(result.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void IdentifyKeepsInconsistentBigTiffPixelFactsUnknown()
+        {
+            ImageIdentifyResult result = ImgCodecsCv2.Identify(CreateBigTiff(false, 2, false, true));
+
+            Assert.True(result.IsFrameCountKnown);
+            Assert.Equal(2, result.FrameCount);
+            Assert.False(result.IsPixelFormatKnown);
+            Assert.False(result.IsBitDepthKnown);
+            Assert.False(result.IsChannelCountKnown);
         }
 
         [Fact]
@@ -199,7 +215,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         public void IdentifyDoesNotClaimMalformedBigTiffFacts()
         {
             byte[] cyclic = CreateBigTiff(false, 2);
-            WriteTiff64(cyclic, 64, 16, false);
+            WriteTiff64(cyclic, 104, 16, false);
             ImageIdentifyResult cyclicResult = ImgCodecsCv2.Identify(cyclic);
             Assert.Equal("bigtiff", cyclicResult.Format);
             Assert.False(cyclicResult.IsSizeKnown);
@@ -537,10 +553,10 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             return tiff;
         }
 
-        private static byte[] CreateBigTiff(bool bigEndian, int pageCount, bool varyingPageSizes = false)
+        private static byte[] CreateBigTiff(bool bigEndian, int pageCount, bool varyingPageSizes = false, bool varyingPixelFormats = false)
         {
             const int firstIfdOffset = 16;
-            const int entriesPerIfd = 2;
+            const int entriesPerIfd = 4;
             const int ifdSize = 8 + entriesPerIfd * 20 + 8;
             byte[] tiff = new byte[firstIfdOffset + pageCount * ifdSize];
             tiff[0] = (byte)(bigEndian ? 'M' : 'I');
@@ -563,6 +579,19 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 WriteTiff16(tiff, entry + 2, 16, bigEndian);
                 WriteTiff64(tiff, entry + 4, 1, bigEndian);
                 WriteTiff64(tiff, entry + 12, varyingPageSizes && page > 0 ? 120 : 240, bigEndian);
+                entry += 20;
+                WriteTiff16(tiff, entry, 258, bigEndian);
+                WriteTiff16(tiff, entry + 2, 3, bigEndian);
+                WriteTiff64(tiff, entry + 4, 3, bigEndian);
+                int bitsPerSample = varyingPixelFormats && page > 0 ? 16 : 8;
+                WriteTiff16(tiff, entry + 12, bitsPerSample, bigEndian);
+                WriteTiff16(tiff, entry + 14, bitsPerSample, bigEndian);
+                WriteTiff16(tiff, entry + 16, bitsPerSample, bigEndian);
+                entry += 20;
+                WriteTiff16(tiff, entry, 277, bigEndian);
+                WriteTiff16(tiff, entry + 2, 3, bigEndian);
+                WriteTiff64(tiff, entry + 4, 1, bigEndian);
+                WriteTiff16(tiff, entry + 12, varyingPixelFormats && page > 0 ? 4 : 3, bigEndian);
                 WriteTiff64(tiff, offset + 8 + entriesPerIfd * 20, page + 1 < pageCount ? offset + ifdSize : 0, bigEndian);
             }
             return tiff;
