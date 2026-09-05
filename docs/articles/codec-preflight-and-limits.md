@@ -14,9 +14,9 @@ if (identified.IsSizeKnown && (long)identified.Width * identified.Height > 10000
 }
 ~~~
 
-ImageIdentifyResult distinguishes an unknown format, unknown dimensions, and a proven single-frame header. Classic TIFF (version 42, little- or big-endian) now reports dimensions from the first IFD and page count from a complete, bounded next-IFD chain when those facts are provable. Heterogeneous page sizes keep the overall width/height fact unknown, but the parser can still prove `CumulativePixelCount` by summing every page when all page dimensions are known. BigTIFF, cyclic/out-of-range directories, and incomplete directories keep the affected facts unknown; an unknown fact must not be treated as zero-sized input.
+ImageIdentifyResult distinguishes an unknown format, unknown dimensions, and a proven single-frame header. Classic TIFF (version 42, little- or big-endian) and BigTIFF (version 43 with 64-bit IFD offsets) report dimensions, page count, and cumulative pixels from a complete, bounded next-IFD chain when those facts are provable. Heterogeneous page sizes keep the overall width/height fact unknown, but the parser can still prove `CumulativePixelCount` by summing every page when all page dimensions are known. Cyclic/out-of-range directories and incomplete directories keep the affected facts unknown; an unknown fact must not be treated as zero-sized input. BigTIFF facts are managed preflight facts and do not imply that the native codec is available.
 
-ImageIdentifyResult 区分未知格式、未知尺寸和已证明的单帧头部。经典 TIFF（版本 42，支持小端/大端）现在会在事实可证明时，从首个 IFD 报告尺寸，并沿完整且有界的 next-IFD 链报告页数。页尺寸不一致时，整体宽高事实保持未知；但只要每一页的尺寸都已知，解析器仍可通过逐页求和证明 `CumulativePixelCount`。BigTIFF、循环/越界目录或目录不完整时，受影响事实保持未知；未知事实不能被当作零尺寸输入。
+ImageIdentifyResult 区分未知格式、未知尺寸和已证明的单帧头部。经典 TIFF（版本 42，支持小端/大端）和 BigTIFF（版本 43、64 位 IFD 偏移）会在事实可证明时，从完整且有界的 next-IFD 链报告尺寸、页数和累计像素。页尺寸不一致时，整体宽高事实保持未知；但只要每一页的尺寸都已知，解析器仍可通过逐页求和证明 `CumulativePixelCount`。循环/越界目录或目录不完整时，受影响事实保持未知；未知事实不能被当作零尺寸输入。BigTIFF 事实属于托管层预检事实，并不代表 native codec 一定可用。
 
 `Identify(Stream, ImageDecodeOptions)` applies the same admission policy while reading from the stream's current position. It reads no more than `MaxInputBytes + 1` bytes, restores the original position for seekable streams even when validation fails, and consumes non-seekable streams. This is deliberately a whole-input preflight rather than an incremental decoder: callers that need to preserve a non-seekable source must provide their own replayable buffering boundary.
 
@@ -79,19 +79,19 @@ For structurally complete PNG, JPEG, and WebP containers, `ImageIdentifyResult` 
 - Stream preflight buffers the complete admitted input in managed memory; MaxInputBytes limits that buffer but does not bound native peak allocation.
 - Unknown dimensions or frame counts are accepted by default unless RequireKnownSize is enabled; applications handling untrusted input should choose an explicit policy.
 - A recognized signature can still be truncated, malformed, or hostile. Native failure remains possible and must be handled.
-- BigTIFF and other format-specific multi-frame parsers, native peak-allocation accounting, decoded color/final precision facts, and IBufferWriter output remain separate follow-up contracts. Classic TIFF cumulative accounting is available only when every inspected page dimension is proven.
+- Other format-specific multi-frame parsers, native peak-allocation accounting, decoded color/final precision facts, and IBufferWriter output remain separate follow-up contracts. Classic TIFF and BigTIFF cumulative accounting is available only when every inspected page dimension is proven.
 
 - ImageDecodeOptions 是输入准入预算，不是 native 峰值内存承诺。
 - 流预检会将已准入的完整输入缓冲到 managed 内存中；MaxInputBytes 限制该缓冲，但不限制 native 峰值分配。
 - 默认允许未知尺寸或帧数；处理不可信输入时应显式设置策略，例如启用 RequireKnownSize。
 - 已识别的签名仍可能被截断、损坏或恶意构造，native 失败仍然可能发生，调用方必须处理。
-- BigTIFF 与其他格式专用多帧解析器、native 峰值分配核算、解码后颜色/最终精度事实和 IBufferWriter 输出仍属于后续独立契约。经典 TIFF 的累计核算仅在每个已检查页面尺寸均可证明时生效。
+- 其他格式专用多帧解析器、native 峰值分配核算、解码后颜色/最终精度事实和 IBufferWriter 输出仍属于后续独立契约。经典 TIFF 与 BigTIFF 的累计核算仅在每个已检查页面尺寸均可证明时生效。
 ## Pixel Format And Multi-Frame Budgets / 像素格式与多帧预算
 
 For PNG, the parser reports `BitDepth` and channel count from a valid IHDR color type. For JPEG, it reports sample precision and component count from the first SOF marker. These are encoded-header facts; they do not promise the final `Mat` depth or channel layout after `ImreadModes` conversion. Other formats remain unknown until their headers can be proven without guessing.
 
 对于 PNG，解析器从合法 IHDR 色彩类型报告 `BitDepth` 和通道数；对于 JPEG，解析器从第一个 SOF 标记报告样本精度和组件数。这些是编码头事实，不承诺 `ImreadModes` 转换后的最终 `Mat` 深度或通道布局。其他格式只有在无需猜测且头部可证明时才会报告，否则保持未知。
 
-`MaxBitDepth` and `MaxChannels` reject only known encoded facts. Set `RejectUnknownPixelFormat` when the admission boundary must fail closed. `MaxCumulativePixels` first uses a format parser's proven cumulative frame/page pixel count (including heterogeneous classic TIFF pages); otherwise it multiplies the proven width-times-height by the proven frame/page count with checked arithmetic. It is an admission budget, not a peak native allocation guarantee. If no complete cumulative fact can be proven, the budget check remains non-blocking unless a separate strict policy rejects the unknown dimensions or frame count.
+`MaxBitDepth` and `MaxChannels` reject only known encoded facts. Set `RejectUnknownPixelFormat` when the admission boundary must fail closed. `MaxCumulativePixels` first uses a format parser's proven cumulative frame/page pixel count (including heterogeneous classic TIFF and BigTIFF pages); otherwise it multiplies the proven width-times-height by the proven frame/page count with checked arithmetic. It is an admission budget, not a peak native allocation guarantee. If no complete cumulative fact can be proven, the budget check remains non-blocking unless a separate strict policy rejects the unknown dimensions or frame count.
 
-`MaxBitDepth` 和 `MaxChannels` 只拒绝已知的编码事实；需要失败关闭时设置 `RejectUnknownPixelFormat`。`MaxCumulativePixels` 会优先使用格式解析器已证明的帧/页累计像素数（包括页尺寸不一致的经典 TIFF）；否则使用 checked 算术将已证明的宽高像素数乘以已证明的帧/页数。它是输入准入预算，不是 native 峰值分配保证。如果无法证明完整累计事实，预算检查不会单独阻断输入，除非另有严格策略拒绝未知尺寸或帧数。
+`MaxBitDepth` 和 `MaxChannels` 只拒绝已知的编码事实；需要失败关闭时设置 `RejectUnknownPixelFormat`。`MaxCumulativePixels` 会优先使用格式解析器已证明的帧/页累计像素数（包括页尺寸不一致的经典 TIFF 与 BigTIFF）；否则使用 checked 算术将已证明的宽高像素数乘以已证明的帧/页数。它是输入准入预算，不是 native 峰值分配保证。如果无法证明完整累计事实，预算检查不会单独阻断输入，除非另有严格策略拒绝未知尺寸或帧数。
