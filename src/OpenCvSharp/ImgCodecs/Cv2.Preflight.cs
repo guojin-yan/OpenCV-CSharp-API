@@ -217,7 +217,10 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 long absoluteHeight = signedHeight == int.MinValue ? (long)int.MaxValue + 1 : Math.Abs(signedHeight);
                 int width = signedWidth > 0 && signedWidth <= int.MaxValue ? (int)signedWidth : 0;
                 int height = absoluteHeight > 0 && absoluteHeight <= int.MaxValue ? (int)absoluteHeight : 0;
-                return Result("bmp", width, height, width > 0 && height > 0, 1, true, data.Length);
+                PixelFacts pixelFacts = ReadBmpPixelFacts(data);
+                bool frameKnown = IsBmpHeaderComplete(data);
+                return Result("bmp", width, height, width > 0 && height > 0, 1, frameKnown, data.Length,
+                    default(MetadataFacts), pixelFacts);
             }
 
             if (data.Length >= 4 && ((data[0] == (byte)'I' && data[1] == (byte)'I' && data[2] == 42 && data[3] == 0) ||
@@ -387,6 +390,68 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             facts.Channels = hasAlpha ? 4 : 3;
             facts.ChannelsKnown = true;
             return facts;
+        }
+
+        private static PixelFacts ReadBmpPixelFacts(byte[] data)
+        {
+            PixelFacts facts = new PixelFacts();
+            if (!IsBmpHeaderComplete(data) || data.Length < 26) return facts;
+
+            int dibSize = ReadSignedLe32(data, 14);
+            int bitCount;
+            int compression = 0;
+            if (dibSize == 12)
+            {
+                bitCount = ReadLe16(data, 24);
+            }
+            else
+            {
+                if (dibSize < 40 || data.Length < 34) return facts;
+                bitCount = ReadLe16(data, 28);
+                compression = ReadSignedLe32(data, 30);
+            }
+
+            if (compression != 0) return facts;
+            switch (bitCount)
+            {
+                case 1:
+                case 4:
+                case 8:
+                    facts.BitDepth = bitCount;
+                    facts.BitDepthKnown = true;
+                    facts.Channels = 1;
+                    facts.ChannelsKnown = true;
+                    break;
+                case 24:
+                case 32:
+                    facts.BitDepth = 8;
+                    facts.BitDepthKnown = true;
+                    facts.Channels = 3;
+                    facts.ChannelsKnown = true;
+                    break;
+            }
+            return facts;
+        }
+
+        private static bool IsBmpHeaderComplete(byte[] data)
+        {
+            if (data.Length < 26 || data[0] != (byte)'B' || data[1] != (byte)'M') return false;
+            int dibSize = ReadSignedLe32(data, 14);
+            long dibEnd;
+            if (dibSize == 12)
+            {
+                dibEnd = 26;
+            }
+            else
+            {
+                if (dibSize < 40) return false;
+                dibEnd = 14L + dibSize;
+                if (dibEnd > data.Length) return false;
+            }
+
+            int fileSize = ReadSignedLe32(data, 2);
+            int pixelOffset = ReadSignedLe32(data, 10);
+            return fileSize > pixelOffset && pixelOffset >= dibEnd && fileSize <= data.Length;
         }
 
         private static bool StartsWith(byte[] data, byte[] prefix)

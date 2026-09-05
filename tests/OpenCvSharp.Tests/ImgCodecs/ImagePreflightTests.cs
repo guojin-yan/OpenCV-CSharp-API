@@ -200,6 +200,56 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsBmpEncodedDepthAndChannels()
+        {
+            ImageIdentifyResult indexed = ImgCodecsCv2.Identify(CreateBmpFixture(8, 0));
+            Assert.True(indexed.IsSizeKnown);
+            Assert.True(indexed.IsFrameCountKnown);
+            Assert.True(indexed.IsPixelFormatKnown);
+            Assert.Equal(8, indexed.BitDepth);
+            Assert.Equal(1, indexed.ChannelCount);
+
+            ImageIdentifyResult bgr = ImgCodecsCv2.Identify(CreateBmpFixture(24, 0));
+            Assert.True(bgr.IsPixelFormatKnown);
+            Assert.Equal(8, bgr.BitDepth);
+            Assert.Equal(3, bgr.ChannelCount);
+
+            ImageIdentifyResult bgrx = ImgCodecsCv2.Identify(CreateBmpFixture(32, 0));
+            Assert.True(bgrx.IsPixelFormatKnown);
+            Assert.Equal(8, bgrx.BitDepth);
+            Assert.Equal(3, bgrx.ChannelCount);
+
+            ImageIdentifyResult core = ImgCodecsCv2.Identify(CreateBmpCoreFixture(24));
+            Assert.True(core.IsPixelFormatKnown);
+            Assert.Equal(8, core.BitDepth);
+            Assert.Equal(3, core.ChannelCount);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompleteOrCompressedBmpFacts()
+        {
+            byte[] truncated = CreateBmpFixture(24, 0);
+            Array.Resize(ref truncated, 26);
+            ImageIdentifyResult truncatedResult = ImgCodecsCv2.Identify(truncated);
+            Assert.False(truncatedResult.IsFrameCountKnown);
+            Assert.False(truncatedResult.IsPixelFormatKnown);
+
+            ImageIdentifyResult compressed = ImgCodecsCv2.Identify(CreateBmpFixture(8, 1));
+            Assert.True(compressed.IsFrameCountKnown);
+            Assert.False(compressed.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownBmpPixelFormatLimitsBeforeNativeCall()
+        {
+            byte[] bmp = CreateBmpFixture(24, 0);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(bmp,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 8, 2, false)));
+        }
+
+        [Fact]
         public void IdentifyDoesNotClaimIncompletePnmHeaderFacts()
         {
             ImageIdentifyResult missingMaxValue = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n"));
@@ -443,6 +493,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "gif", Bytes = CreateAnimatedGif(2) },
                 new { Name = "apng", Bytes = CreateApng(3) },
                 new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
+                new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
                 new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) }
             };
@@ -473,13 +524,16 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             byte[] webp = CreateAnimatedWebp(2);
             webp[4] = 0xFF; webp[5] = 0xFF; webp[6] = 0xFF; webp[7] = 0xFF;
 
+            byte[] bmp = CreateBmpFixture(24, 0);
+            WriteBmp32(bmp, 2, int.MaxValue);
+
             byte[] tiff = CreateTiff(false, 2);
             WriteTiff32(tiff, 4, int.MaxValue, false);
 
             byte[] bigTiff = CreateBigTiff(false, 2);
             WriteTiff64(bigTiff, 8, long.MaxValue, false);
 
-            var malformed = new[] { png, jpeg, webp, tiff, bigTiff };
+            var malformed = new[] { png, jpeg, webp, bmp, tiff, bigTiff };
             foreach (byte[] input in malformed)
             {
                 ImageIdentifyResult result = ImgCodecsCv2.Identify(input);
@@ -907,6 +961,61 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
             WriteWebpChunk(webp, 12, imageType, payload);
             return webp;
+        }
+
+        private static byte[] CreateBmpFixture(int bitCount, int compression)
+        {
+            const int width = 2;
+            const int height = 3;
+            const int pixelOffset = 54;
+            int rowStride = ((width * bitCount + 31) / 32) * 4;
+            int fileSize = pixelOffset + rowStride * height;
+            byte[] bmp = new byte[fileSize];
+            bmp[0] = (byte)'B';
+            bmp[1] = (byte)'M';
+            WriteBmp32(bmp, 2, fileSize);
+            WriteBmp32(bmp, 10, pixelOffset);
+            WriteBmp32(bmp, 14, 40);
+            WriteBmp32(bmp, 18, width);
+            WriteBmp32(bmp, 22, height);
+            WriteBmp16(bmp, 26, 1);
+            WriteBmp16(bmp, 28, bitCount);
+            WriteBmp32(bmp, 30, compression);
+            return bmp;
+        }
+
+        private static byte[] CreateBmpCoreFixture(int bitCount)
+        {
+            const int width = 2;
+            const int height = 3;
+            const int pixelOffset = 26;
+            int rowStride = ((width * bitCount + 31) / 32) * 4;
+            int fileSize = pixelOffset + rowStride * height;
+            byte[] bmp = new byte[fileSize];
+            bmp[0] = (byte)'B';
+            bmp[1] = (byte)'M';
+            WriteBmp32(bmp, 2, fileSize);
+            WriteBmp32(bmp, 10, pixelOffset);
+            WriteBmp32(bmp, 14, 12);
+            WriteBmp16(bmp, 18, width);
+            WriteBmp16(bmp, 20, height);
+            WriteBmp16(bmp, 22, 1);
+            WriteBmp16(bmp, 24, bitCount);
+            return bmp;
+        }
+
+        private static void WriteBmp16(byte[] destination, int offset, int value)
+        {
+            destination[offset] = (byte)value;
+            destination[offset + 1] = (byte)(value >> 8);
+        }
+
+        private static void WriteBmp32(byte[] destination, int offset, int value)
+        {
+            destination[offset] = (byte)value;
+            destination[offset + 1] = (byte)(value >> 8);
+            destination[offset + 2] = (byte)(value >> 16);
+            destination[offset + 3] = (byte)(value >> 24);
         }
 
         private static int WritePngChunk(byte[] destination, int offset, string type, byte[] payload)
