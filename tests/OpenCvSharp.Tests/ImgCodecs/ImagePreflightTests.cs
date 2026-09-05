@@ -172,6 +172,57 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsPamAndPfmEncodedDepthAndChannels()
+        {
+            byte[] pamBytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nTUPLTYPE RGB_ALPHA\nENDHDR\n");
+            ImageIdentifyResult pam = ImgCodecsCv2.Identify(pamBytes);
+            Assert.True(pam.IsSizeKnown);
+            Assert.True(pam.IsFrameCountKnown);
+            Assert.True(pam.IsPixelFormatKnown);
+            Assert.Equal(8, pam.BitDepth);
+            Assert.Equal(4, pam.ChannelCount);
+
+            ImageIdentifyResult pfm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("PF\n2 3\n-1.0\n"));
+            Assert.True(pfm.IsPixelFormatKnown);
+            Assert.Equal(32, pfm.BitDepth);
+            Assert.Equal(3, pfm.ChannelCount);
+
+            ImageIdentifyResult pf = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("Pf\n2 3\n1.0\n"));
+            Assert.True(pf.IsPixelFormatKnown);
+            Assert.Equal(32, pf.BitDepth);
+            Assert.Equal(1, pf.ChannelCount);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompletePamOrInvalidPfmFacts()
+        {
+            ImageIdentifyResult missingEnd = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\n"));
+            Assert.False(missingEnd.IsSizeKnown);
+            Assert.False(missingEnd.IsFrameCountKnown);
+            Assert.False(missingEnd.IsPixelFormatKnown);
+
+            ImageIdentifyResult zeroScale = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("PF\n2 3\n0\n"));
+            Assert.False(zeroScale.IsSizeKnown);
+            Assert.False(zeroScale.IsFrameCountKnown);
+            Assert.False(zeroScale.IsPixelFormatKnown);
+
+            ImageIdentifyResult invalidScale = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("Pf\n2 3\nnot-a-scale\n"));
+            Assert.False(invalidScale.IsSizeKnown);
+            Assert.False(invalidScale.IsFrameCountKnown);
+            Assert.False(invalidScale.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownPfmPixelFormatLimitsBeforeNativeCall()
+        {
+            byte[] pfm = Encoding.ASCII.GetBytes("PF\n2 3\n-1.0\n");
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(pfm,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 16, 3, false)));
+        }
+
+        [Fact]
         public void IdentifyReadsWebpEncodedDepthAndChannels()
         {
             byte[] vp8Payload = new byte[6];
@@ -518,6 +569,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "apng", Bytes = CreateApng(3) },
                 new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
                 new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
+                new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
                 new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) }
             };

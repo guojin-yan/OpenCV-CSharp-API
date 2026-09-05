@@ -241,7 +241,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     default(MetadataFacts), ToPixelFacts(facts), facts.CumulativePixelCount, facts.CumulativePixelCountKnown);
             }
 
-            if (data.Length >= 2 && data[0] == (byte)'P' && data[1] >= (byte)'1' && data[1] <= (byte)'6')
+            if (data.Length >= 2 && data[0] == (byte)'P' &&
+                ((data[1] >= (byte)'1' && data[1] <= (byte)'7') || data[1] == (byte)'F' || data[1] == (byte)'f'))
             {
                 int width;
                 int height;
@@ -672,14 +673,32 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             width = 0;
             height = 0;
             pixelFacts = new PixelFacts();
-            if (data.Length < 3 || data[0] != (byte)'P' || data[1] < (byte)'1' || data[1] > (byte)'6' ||
+            if (data.Length < 3 || data[0] != (byte)'P' ||
+                !((data[1] >= (byte)'1' && data[1] <= (byte)'7') || data[1] == (byte)'F' || data[1] == (byte)'f') ||
                 !IsPnmWhitespace(data[2])) return false;
 
-            int kind = data[1] - (byte)'0';
+            int kind = data[1] >= (byte)'1' && data[1] <= (byte)'7' ? data[1] - (byte)'0' : data[1] == (byte)'F' ? 8 : 9;
             int offset = 2;
+            if (kind == 7) return TryReadPamHeader(data, ref offset, out width, out height, out pixelFacts);
+
             int maxValue;
             if (!TryReadPnmInteger(data, ref offset, out width) || !TryReadPnmInteger(data, ref offset, out height) ||
                 width <= 0 || height <= 0) return false;
+
+            if (kind == 8 || kind == 9)
+            {
+                if (!TryReadPfmScale(data, ref offset))
+                {
+                    width = 0;
+                    height = 0;
+                    return false;
+                }
+                pixelFacts.BitDepth = 32;
+                pixelFacts.BitDepthKnown = true;
+                pixelFacts.Channels = kind == 8 ? 3 : 1;
+                pixelFacts.ChannelsKnown = true;
+                return true;
+            }
 
             if (kind == 1 || kind == 4)
             {
@@ -708,6 +727,165 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             pixelFacts.BitDepthKnown = true;
             pixelFacts.Channels = kind == 3 || kind == 6 ? 3 : 1;
             pixelFacts.ChannelsKnown = true;
+            return true;
+        }
+
+        private static bool TryReadPamHeader(byte[] data, ref int offset, out int width, out int height, out PixelFacts pixelFacts)
+        {
+            width = 0;
+            height = 0;
+            pixelFacts = new PixelFacts();
+            int depth = 0;
+            int maxValue = 0;
+            bool widthKnown = false;
+            bool heightKnown = false;
+            bool depthKnown = false;
+            bool maxValueKnown = false;
+
+            while (offset < data.Length)
+            {
+                int lineEnd = offset;
+                while (lineEnd < data.Length && data[lineEnd] != 10) ++lineEnd;
+                if (lineEnd >= data.Length) return false;
+
+                int tokenStart = offset;
+                while (tokenStart < lineEnd && IsPnmWhitespace(data[tokenStart])) ++tokenStart;
+                if (tokenStart == lineEnd || data[tokenStart] == (byte)'#')
+                {
+                    offset = lineEnd + 1;
+                    continue;
+                }
+
+                int tokenEnd = tokenStart;
+                while (tokenEnd < lineEnd && !IsPnmWhitespace(data[tokenEnd])) ++tokenEnd;
+                if (TokenEquals(data, tokenStart, tokenEnd, "ENDHDR"))
+                {
+                    if (tokenEnd != lineEnd && data[tokenEnd] != (byte)'#') return false;
+                    if (!widthKnown || !heightKnown || !depthKnown || !maxValueKnown || width <= 0 || height <= 0 || depth <= 0 || depth > 4 || maxValue < 1 || maxValue > 65535)
+                    {
+                        return false;
+                    }
+                    pixelFacts.BitDepth = maxValue <= 255 ? 8 : 16;
+                    pixelFacts.BitDepthKnown = true;
+                    pixelFacts.Channels = depth;
+                    pixelFacts.ChannelsKnown = true;
+                    offset = lineEnd + 1;
+                    return true;
+                }
+
+                bool isWidth = TokenEquals(data, tokenStart, tokenEnd, "WIDTH");
+                bool isHeight = TokenEquals(data, tokenStart, tokenEnd, "HEIGHT");
+                bool isDepth = TokenEquals(data, tokenStart, tokenEnd, "DEPTH");
+                bool isMaxValue = TokenEquals(data, tokenStart, tokenEnd, "MAXVAL");
+                if (!isWidth && !isHeight && !isDepth && !isMaxValue)
+                {
+                    offset = lineEnd + 1;
+                    continue;
+                }
+
+                int valueOffset = tokenEnd;
+                while (valueOffset < lineEnd && IsPnmWhitespace(data[valueOffset])) ++valueOffset;
+                int value;
+                if (!TryReadPnmIntegerBounded(data, ref valueOffset, lineEnd, out value) ||
+                    (valueOffset < lineEnd && data[valueOffset] != (byte)'#')) return false;
+                if (isWidth)
+                {
+                    width = value;
+                    widthKnown = true;
+                }
+                else if (isHeight)
+                {
+                    height = value;
+                    heightKnown = true;
+                }
+                else if (isDepth)
+                {
+                    depth = value;
+                    depthKnown = true;
+                }
+                else if (isMaxValue)
+                {
+                    maxValue = value;
+                    maxValueKnown = true;
+                }
+                offset = lineEnd + 1;
+            }
+            return false;
+        }
+
+        private static bool TryReadPfmScale(byte[] data, ref int offset)
+        {
+            while (offset < data.Length && (IsPnmWhitespace(data[offset]) || data[offset] == (byte)'#'))
+            {
+                if (data[offset] == (byte)'#')
+                {
+                    while (offset < data.Length && data[offset] != 10) ++offset;
+                }
+                else
+                {
+                    ++offset;
+                }
+            }
+            int start = offset;
+            while (offset < data.Length && !IsPnmWhitespace(data[offset])) ++offset;
+            if (start == offset || !HasPnmTokenSeparator(data, offset)) return false;
+            bool digit = false;
+            bool decimalPoint = false;
+            bool exponent = false;
+            bool exponentDigit = false;
+            for (int index = start; index < offset; ++index)
+            {
+                byte value = data[index];
+                if (value >= (byte)'0' && value <= (byte)'9')
+                {
+                    digit = true;
+                    if (exponent) exponentDigit = true;
+                }
+                else if ((value == (byte)'+' || value == (byte)'-') && (index == start || data[index - 1] == (byte)'e' || data[index - 1] == (byte)'E'))
+                {
+                }
+                else if (value == (byte)'.' && !decimalPoint && !exponent)
+                {
+                    decimalPoint = true;
+                }
+                else if ((value == (byte)'e' || value == (byte)'E') && !exponent && digit)
+                {
+                    exponent = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (!digit || exponent && !exponentDigit) return false;
+            string token = System.Text.Encoding.ASCII.GetString(data, start, offset - start);
+            double scale;
+            if (!double.TryParse(token, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out scale)) return false;
+            return scale != 0 && !double.IsNaN(scale) && !double.IsInfinity(scale);
+        }
+
+        private static bool TryReadPnmIntegerBounded(byte[] data, ref int offset, int end, out int value)
+        {
+            value = 0;
+            if (offset >= end || data[offset] < (byte)'0' || data[offset] > (byte)'9') return false;
+            long parsed = 0;
+            while (offset < end && data[offset] >= (byte)'0' && data[offset] <= (byte)'9')
+            {
+                parsed = parsed * 10 + data[offset] - (byte)'0';
+                if (parsed > int.MaxValue) return false;
+                ++offset;
+            }
+            value = (int)parsed;
+            return true;
+        }
+
+        private static bool TokenEquals(byte[] data, int start, int end, string token)
+        {
+            if (end - start != token.Length) return false;
+            for (int index = 0; index < token.Length; ++index)
+            {
+                if (data[start + index] != (byte)token[index]) return false;
+            }
             return true;
         }
 
