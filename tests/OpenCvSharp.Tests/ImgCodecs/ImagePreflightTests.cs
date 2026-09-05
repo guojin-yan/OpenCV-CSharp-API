@@ -322,6 +322,61 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyTruncatedContainerCorpusFailsClosed()
+        {
+            var fixtures = new[]
+            {
+                new { Name = "png", Bytes = CreateCompletePng(2, 3, 8, 2) },
+                new { Name = "jpeg", Bytes = new byte[] { 0xFF, 0xD8, 0xFF, 0xC0, 0x00, 0x0B, 0x08, 0x01, 0x20, 0x02, 0x80, 0x01, 0x01, 0x11, 0x00, 0xFF, 0xD9 } },
+                new { Name = "gif", Bytes = CreateAnimatedGif(2) },
+                new { Name = "apng", Bytes = CreateApng(3) },
+                new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
+                new { Name = "tiff", Bytes = CreateTiff(false, 2) },
+                new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) }
+            };
+
+            foreach (var fixture in fixtures)
+            {
+                Assert.True(ImgCodecsCv2.Identify(fixture.Bytes).IsFrameCountKnown, fixture.Name + " fixture must be complete");
+                for (int length = 1; length < fixture.Bytes.Length; ++length)
+                {
+                    byte[] truncated = new byte[length];
+                    Array.Copy(fixture.Bytes, truncated, length);
+                    ImageIdentifyResult result = ImgCodecsCv2.Identify(truncated);
+
+                    Assert.False(result.IsFrameCountKnown, fixture.Name + " prefix " + length + " claimed a complete frame chain");
+                    Assert.False(result.IsCumulativePixelCountKnown, fixture.Name + " prefix " + length + " claimed cumulative pixels");
+                }
+            }
+        }
+
+        [Fact]
+        public void IdentifyMalformedLengthAndDirectoryCorpusFailsClosed()
+        {
+            byte[] png = CreateCompletePng(2, 3, 8, 2);
+            png[8] = 0x7F; png[9] = 0xFF; png[10] = 0xFF; png[11] = 0xFF;
+
+            byte[] jpeg = new byte[] { 0xFF, 0xD8, 0xFF, 0xC0, 0xFF, 0xFF, 0x08, 0x01, 0x20, 0x02, 0x80, 0x01, 0x01, 0x11, 0x00, 0xFF, 0xD9 };
+
+            byte[] webp = CreateAnimatedWebp(2);
+            webp[4] = 0xFF; webp[5] = 0xFF; webp[6] = 0xFF; webp[7] = 0xFF;
+
+            byte[] tiff = CreateTiff(false, 2);
+            WriteTiff32(tiff, 4, int.MaxValue, false);
+
+            byte[] bigTiff = CreateBigTiff(false, 2);
+            WriteTiff64(bigTiff, 8, long.MaxValue, false);
+
+            var malformed = new[] { png, jpeg, webp, tiff, bigTiff };
+            foreach (byte[] input in malformed)
+            {
+                ImageIdentifyResult result = ImgCodecsCv2.Identify(input);
+                Assert.False(result.IsFrameCountKnown);
+                Assert.False(result.IsCumulativePixelCountKnown);
+            }
+        }
+
+        [Fact]
         public void IdentifyDoesNotClaimStaticContainerFrameWithoutImageData()
         {
             Assert.False(ImgCodecsCv2.Identify(CreatePngWithIccProfile(new byte[] { 1, 2, 3 })).IsFrameCountKnown);
