@@ -250,6 +250,30 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsGifIndexedDepthAndChannels()
+        {
+            ImageIdentifyResult oneBit = ImgCodecsCv2.Identify(CreateAnimatedGif(2));
+            Assert.True(oneBit.IsPixelFormatKnown);
+            Assert.Equal(1, oneBit.BitDepth);
+            Assert.Equal(1, oneBit.ChannelCount);
+
+            ImageIdentifyResult eightBit = ImgCodecsCv2.Identify(CreateAnimatedGif(1, 8));
+            Assert.True(eightBit.IsPixelFormatKnown);
+            Assert.Equal(8, eightBit.BitDepth);
+            Assert.Equal(1, eightBit.ChannelCount);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownGifPixelFormatLimitsBeforeNativeCall()
+        {
+            byte[] gif = CreateAnimatedGif(1, 8);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(gif,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 4, 1, false)));
+        }
+
+        [Fact]
         public void IdentifyDoesNotClaimIncompletePnmHeaderFacts()
         {
             ImageIdentifyResult missingMaxValue = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n"));
@@ -527,13 +551,16 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             byte[] bmp = CreateBmpFixture(24, 0);
             WriteBmp32(bmp, 2, int.MaxValue);
 
+            byte[] gif = CreateAnimatedGif(1, 8);
+            Array.Resize(ref gif, gif.Length - 1);
+
             byte[] tiff = CreateTiff(false, 2);
             WriteTiff32(tiff, 4, int.MaxValue, false);
 
             byte[] bigTiff = CreateBigTiff(false, 2);
             WriteTiff64(bigTiff, 8, long.MaxValue, false);
 
-            var malformed = new[] { png, jpeg, webp, bmp, tiff, bigTiff };
+            var malformed = new[] { png, jpeg, webp, bmp, gif, tiff, bigTiff };
             foreach (byte[] input in malformed)
             {
                 ImageIdentifyResult result = ImgCodecsCv2.Identify(input);
@@ -899,12 +926,13 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             return control;
         }
 
-        private static byte[] CreateAnimatedGif(int frameCount)
+        private static byte[] CreateAnimatedGif(int frameCount, int globalDepth = 1)
         {
-            byte[] gif = new byte[6 + 7 + 6 + 15 + frameCount * 22 + 1];
+            int globalColorTableBytes = 3 * (1 << globalDepth);
+            byte[] gif = new byte[6 + 7 + globalColorTableBytes + 15 + frameCount * 22 + 1];
             gif[0] = (byte)'G'; gif[1] = (byte)'I'; gif[2] = (byte)'F'; gif[3] = (byte)'8'; gif[4] = (byte)'9'; gif[5] = (byte)'a';
-            gif[6] = 2; gif[8] = 3; gif[10] = 0x80;
-            int offset = 13 + 6;
+            gif[6] = 2; gif[8] = 3; gif[10] = (byte)(0x80 | (globalDepth - 1));
+            int offset = 13 + globalColorTableBytes;
             gif[offset++] = 0x21; gif[offset++] = 0xFF; gif[offset++] = 11;
             byte[] application = new byte[] { (byte)'N', (byte)'E', (byte)'T', (byte)'S', (byte)'C', (byte)'A', (byte)'P', (byte)'E', (byte)'2', (byte)'.', (byte)'0' };
             Array.Copy(application, 0, gif, offset, application.Length);

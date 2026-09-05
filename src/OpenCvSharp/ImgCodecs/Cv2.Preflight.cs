@@ -185,7 +185,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 int height = data.Length >= 10 ? ReadLe16(data, 8) : 0;
                 int frameCount;
                 bool countKnown = TryCountGifFrames(data, out frameCount);
-                return Result("gif", width, height, width > 0 && height > 0, frameCount, countKnown, data.Length);
+                PixelFacts pixelFacts = ReadGifPixelFacts(data);
+                return Result("gif", width, height, width > 0 && height > 0, frameCount, countKnown, data.Length,
+                    default(MetadataFacts), pixelFacts);
             }
 
             if (data.Length >= 2 && data[0] == 0xFF && data[1] == 0xD8)
@@ -324,6 +326,101 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             facts.BitDepthKnown = true;
             facts.Channels = channels;
             facts.ChannelsKnown = true;
+            return facts;
+        }
+
+        private static PixelFacts ReadGifPixelFacts(byte[] data)
+        {
+            PixelFacts facts = new PixelFacts();
+            if (data.Length < 13 || data[0] != (byte)'G' || data[1] != (byte)'I' || data[2] != (byte)'F') return facts;
+
+            int offset = 13;
+            int globalDepth = 0;
+            byte logicalScreenPacked = data[10];
+            if ((logicalScreenPacked & 0x80) != 0)
+            {
+                globalDepth = (logicalScreenPacked & 7) + 1;
+                int tableBytes = 3 * (1 << globalDepth);
+                if (offset + tableBytes > data.Length) return facts;
+                offset += tableBytes;
+            }
+
+            int bitDepth = 0;
+            bool sawFrame = false;
+            while (offset < data.Length)
+            {
+                byte marker = data[offset++];
+                if (marker == 0x3B)
+                {
+                    if (!sawFrame || offset != data.Length) return new PixelFacts();
+                    facts.BitDepth = bitDepth;
+                    facts.BitDepthKnown = bitDepth > 0;
+                    facts.Channels = 1;
+                    facts.ChannelsKnown = true;
+                    return facts;
+                }
+
+                if (marker == 0x2C)
+                {
+                    if (offset + 9 > data.Length) return new PixelFacts();
+                    byte imagePacked = data[offset + 8];
+                    offset += 9;
+                    int frameDepth;
+                    if ((imagePacked & 0x80) != 0)
+                    {
+                        frameDepth = (imagePacked & 7) + 1;
+                        int tableBytes = 3 * (1 << frameDepth);
+                        if (offset + tableBytes > data.Length) return new PixelFacts();
+                        offset += tableBytes;
+                    }
+                    else
+                    {
+                        frameDepth = globalDepth;
+                    }
+
+                    if (frameDepth == 0) return new PixelFacts();
+                    if (!sawFrame)
+                    {
+                        bitDepth = frameDepth;
+                        sawFrame = true;
+                    }
+                    else if (bitDepth != frameDepth)
+                    {
+                        bitDepth = 0;
+                    }
+
+                    if (offset >= data.Length) return new PixelFacts();
+                    ++offset;
+                    if (!SkipGifSubBlocks(data, ref offset)) return new PixelFacts();
+                    continue;
+                }
+
+                if (marker == 0x21)
+                {
+                    if (offset >= data.Length) return new PixelFacts();
+                    byte extensionLabel = data[offset++];
+                    if (extensionLabel == 0xF9)
+                    {
+                        if (offset + 5 >= data.Length || data[offset] != 4 || data[offset + 5] != 0) return new PixelFacts();
+                        offset += 6;
+                    }
+                    else if (extensionLabel == 0xFF || extensionLabel == 0x01)
+                    {
+                        int fixedBlockLength = extensionLabel == 0xFF ? 11 : 12;
+                        if (offset >= data.Length || data[offset] != fixedBlockLength || offset + 1 + fixedBlockLength > data.Length) return new PixelFacts();
+                        offset += 1 + fixedBlockLength;
+                        if (!SkipGifSubBlocks(data, ref offset)) return new PixelFacts();
+                    }
+                    else if (!SkipGifSubBlocks(data, ref offset))
+                    {
+                        return new PixelFacts();
+                    }
+                    continue;
+                }
+
+                return new PixelFacts();
+            }
+
             return facts;
         }
 
