@@ -225,6 +225,17 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     default(MetadataFacts), pixelFacts);
             }
 
+            if (data.Length >= 4 && ReadBe32(data, 0) == 0x59A66A95)
+            {
+                int width;
+                int height;
+                bool frameKnown;
+                PixelFacts pixelFacts;
+                bool headerKnown = TryReadSunRasterHeader(data, out width, out height, out frameKnown, out pixelFacts);
+                return Result("sunraster", width, height, headerKnown, 1, frameKnown, data.Length,
+                    default(MetadataFacts), pixelFacts);
+            }
+
             if (data.Length >= 4 && ((data[0] == (byte)'I' && data[1] == (byte)'I' && data[2] == 42 && data[3] == 0) ||
                 (data[0] == (byte)'M' && data[1] == (byte)'M' && data[2] == 0 && data[3] == 42)))
             {
@@ -550,6 +561,58 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             int fileSize = ReadSignedLe32(data, 2);
             int pixelOffset = ReadSignedLe32(data, 10);
             return fileSize > pixelOffset && pixelOffset >= dibEnd && fileSize <= data.Length;
+        }
+
+        private static bool TryReadSunRasterHeader(byte[] data, out int width, out int height, out bool frameKnown, out PixelFacts pixelFacts)
+        {
+            width = 0;
+            height = 0;
+            frameKnown = false;
+            pixelFacts = new PixelFacts();
+            if (data.Length < 32 || ReadBe32(data, 0) != 0x59A66A95) return false;
+
+            uint unsignedWidth = ReadBe32(data, 4);
+            uint unsignedHeight = ReadBe32(data, 8);
+            uint depth = ReadBe32(data, 12);
+            uint payloadLength = ReadBe32(data, 16);
+            uint type = ReadBe32(data, 20);
+            uint mapType = ReadBe32(data, 24);
+            uint mapLength = ReadBe32(data, 28);
+            if (unsignedWidth == 0 || unsignedHeight == 0 || unsignedWidth > int.MaxValue || unsignedHeight > int.MaxValue)
+            {
+                return false;
+            }
+
+            width = (int)unsignedWidth;
+            height = (int)unsignedHeight;
+            long payloadEnd = 32L + mapLength + payloadLength;
+            bool mapKnown = mapType <= 2 && (mapType != 0 || mapLength == 0) && (mapType != 1 || mapLength % 3 == 0);
+            frameKnown = payloadLength > 0 && payloadEnd <= data.Length && type <= 3 && mapKnown;
+            if (!frameKnown) return true;
+
+            switch (depth)
+            {
+                case 1:
+                case 8:
+                    pixelFacts.BitDepth = (int)depth;
+                    pixelFacts.BitDepthKnown = true;
+                    pixelFacts.Channels = 1;
+                    pixelFacts.ChannelsKnown = true;
+                    break;
+                case 24:
+                    pixelFacts.BitDepth = 8;
+                    pixelFacts.BitDepthKnown = true;
+                    pixelFacts.Channels = 3;
+                    pixelFacts.ChannelsKnown = true;
+                    break;
+                case 32:
+                    pixelFacts.BitDepth = 8;
+                    pixelFacts.BitDepthKnown = true;
+                    pixelFacts.Channels = 4;
+                    pixelFacts.ChannelsKnown = true;
+                    break;
+            }
+            return true;
         }
 
         private static bool StartsWith(byte[] data, byte[] prefix)

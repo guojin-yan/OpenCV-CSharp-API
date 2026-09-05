@@ -223,6 +223,51 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsSunRasterEncodedDepthAndChannels()
+        {
+            ImageIdentifyResult indexed = ImgCodecsCv2.Identify(CreateSunRaster(8));
+            Assert.True(indexed.IsSizeKnown);
+            Assert.True(indexed.IsFrameCountKnown);
+            Assert.True(indexed.IsPixelFormatKnown);
+            Assert.Equal(8, indexed.BitDepth);
+            Assert.Equal(1, indexed.ChannelCount);
+
+            ImageIdentifyResult bgr = ImgCodecsCv2.Identify(CreateSunRaster(24));
+            Assert.Equal(8, bgr.BitDepth);
+            Assert.Equal(3, bgr.ChannelCount);
+
+            ImageIdentifyResult rgbaStorage = ImgCodecsCv2.Identify(CreateSunRaster(32));
+            Assert.Equal(8, rgbaStorage.BitDepth);
+            Assert.Equal(4, rgbaStorage.ChannelCount);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompleteSunRasterFacts()
+        {
+            byte[] raster = CreateSunRaster(24);
+            WriteBe32(raster, 16, uint.MaxValue);
+            ImageIdentifyResult oversized = ImgCodecsCv2.Identify(raster);
+            Assert.True(oversized.IsSizeKnown);
+            Assert.False(oversized.IsFrameCountKnown);
+            Assert.False(oversized.IsPixelFormatKnown);
+
+            byte[] truncatedMap = CreateSunRaster(24);
+            WriteBe32(truncatedMap, 24, 1);
+            WriteBe32(truncatedMap, 28, 3);
+            Assert.False(ImgCodecsCv2.Identify(truncatedMap).IsFrameCountKnown);
+
+            byte[] emptyPayload = CreateSunRaster(24);
+            WriteBe32(emptyPayload, 16, 0);
+            Assert.False(ImgCodecsCv2.Identify(emptyPayload).IsFrameCountKnown);
+
+            Array.Resize(ref raster, 31);
+            ImageIdentifyResult truncated = ImgCodecsCv2.Identify(raster);
+            Assert.False(truncated.IsSizeKnown);
+            Assert.False(truncated.IsFrameCountKnown);
+            Assert.False(truncated.IsPixelFormatKnown);
+        }
+
+        [Fact]
         public void IdentifyReadsWebpEncodedDepthAndChannels()
         {
             byte[] vp8Payload = new byte[6];
@@ -570,6 +615,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
                 new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
                 new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
+                new { Name = "sunraster", Bytes = CreateSunRaster(24) },
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
                 new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) }
             };
@@ -1096,6 +1142,30 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             destination[offset + 1] = (byte)(value >> 8);
             destination[offset + 2] = (byte)(value >> 16);
             destination[offset + 3] = (byte)(value >> 24);
+        }
+
+        private static byte[] CreateSunRaster(int depth)
+        {
+            const int width = 2;
+            const int height = 3;
+            int rowStride = ((width * depth + 15) / 16) * 2;
+            int payloadLength = rowStride * height;
+            byte[] raster = new byte[32 + payloadLength];
+            WriteBe32(raster, 0, 0x59A66A95);
+            WriteBe32(raster, 4, (uint)width);
+            WriteBe32(raster, 8, (uint)height);
+            WriteBe32(raster, 12, (uint)depth);
+            WriteBe32(raster, 16, (uint)payloadLength);
+            WriteBe32(raster, 20, 1);
+            return raster;
+        }
+
+        private static void WriteBe32(byte[] destination, int offset, uint value)
+        {
+            destination[offset] = (byte)(value >> 24);
+            destination[offset + 1] = (byte)(value >> 16);
+            destination[offset + 2] = (byte)(value >> 8);
+            destination[offset + 3] = (byte)value;
         }
 
         private static int WritePngChunk(byte[] destination, int offset, string type, byte[] payload)
