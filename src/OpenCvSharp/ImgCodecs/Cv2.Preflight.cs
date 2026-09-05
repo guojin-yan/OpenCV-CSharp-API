@@ -125,7 +125,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     throw new InvalidDataException("Encoded image pixel count exceeds the configured limit.");
                 }
 
-                if (result.IsFrameCountKnown)
+                if (result.IsFrameCountKnown && !result.IsCumulativePixelCountKnown)
                 {
                     long cumulativePixels;
                     try
@@ -142,6 +142,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                         throw new InvalidDataException("Encoded image cumulative pixel count exceeds the configured limit.");
                     }
                 }
+            }
+
+            if (result.IsCumulativePixelCountKnown && result.CumulativePixelCount > options.MaxCumulativePixels)
+            {
+                throw new InvalidDataException("Encoded image cumulative pixel count exceeds the configured limit.");
             }
 
             if (result.IsFrameCountKnown && result.FrameCount > options.MaxFrames)
@@ -217,7 +222,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 (data[0] == (byte)'M' && data[1] == (byte)'M' && data[2] == 0 && data[3] == 42)))
             {
                 TiffFacts facts = ReadTiffFacts(data);
-                return Result("tiff", facts.Width, facts.Height, facts.SizeKnown, facts.PageCount, facts.PageCountKnown, data.Length);
+                return Result("tiff", facts.Width, facts.Height, facts.SizeKnown, facts.PageCount, facts.PageCountKnown, data.Length,
+                    default(MetadataFacts), default(PixelFacts), facts.CumulativePixelCount, facts.CumulativePixelCountKnown);
             }
 
             if (data.Length >= 2 && data[0] == (byte)'P' && data[1] >= (byte)'1' && data[1] <= (byte)'6')
@@ -243,9 +249,31 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
         private static ImageIdentifyResult Result(string format, int width, int height, bool sizeKnown, int frames, bool frameCountKnown, int inputLength, MetadataFacts metadata, PixelFacts pixels)
         {
+            long cumulativePixelCount = 0;
+            bool cumulativePixelCountKnown = false;
+            if (sizeKnown && frameCountKnown && width > 0 && height > 0 && frames > 0)
+            {
+                try
+                {
+                    cumulativePixelCount = checked((long)width * height * frames);
+                    cumulativePixelCountKnown = true;
+                }
+                catch (OverflowException)
+                {
+                    cumulativePixelCountKnown = false;
+                }
+            }
+            return Result(format, width, height, sizeKnown, frames, frameCountKnown, inputLength, metadata, pixels,
+                cumulativePixelCount, cumulativePixelCountKnown);
+        }
+
+        private static ImageIdentifyResult Result(string format, int width, int height, bool sizeKnown, int frames, bool frameCountKnown,
+            int inputLength, MetadataFacts metadata, PixelFacts pixels, long cumulativePixelCount, bool cumulativePixelCountKnown)
+        {
             return new ImageIdentifyResult(format, width, height, sizeKnown, frames, frameCountKnown, inputLength, inputLength,
                 metadata.MetadataBytes, metadata.MetadataSizeKnown, metadata.IccProfileBytes, metadata.IccProfileSizeKnown,
-                pixels.BitDepth, pixels.BitDepthKnown, pixels.Channels, pixels.ChannelsKnown);
+                pixels.BitDepth, pixels.BitDepthKnown, pixels.Channels, pixels.ChannelsKnown,
+                cumulativePixelCount, cumulativePixelCountKnown);
         }
 
         private struct PixelFacts

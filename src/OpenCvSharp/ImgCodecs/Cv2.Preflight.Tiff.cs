@@ -12,6 +12,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             public bool SizeKnown;
             public int PageCount;
             public bool PageCountKnown;
+            public long CumulativePixelCount;
+            public bool CumulativePixelCountKnown;
         }
 
         private static TiffFacts ReadTiffFacts(byte[] data)
@@ -34,6 +36,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             int commonWidth = 0;
             int commonHeight = 0;
             bool uniformPageSize = true;
+            long cumulativePixelCount = 0;
+            bool cumulativePixelCountKnown = true;
             while (ifdOffset != 0)
             {
                 if (pageCount == maxDirectoriesInspected || !visited.Add(ifdOffset) || ifdOffset < 8 || ifdOffset > int.MaxValue) return new TiffFacts();
@@ -79,6 +83,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 if (!widthKnown || !heightKnown)
                 {
                     uniformPageSize = false;
+                    cumulativePixelCountKnown = false;
                 }
                 else if (pageCount == 0)
                 {
@@ -89,6 +94,18 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 {
                     uniformPageSize = false;
                 }
+                if (widthKnown && heightKnown && cumulativePixelCountKnown)
+                {
+                    try
+                    {
+                        cumulativePixelCount = checked(cumulativePixelCount + checked((long)width * height));
+                    }
+                    catch (OverflowException)
+                    {
+                        cumulativePixelCount = 0;
+                        cumulativePixelCountKnown = false;
+                    }
+                }
                 ++pageCount;
                 ifdOffset = ReadTiff32(data, offset + 2 + entryCount * 12, littleEndian);
             }
@@ -97,6 +114,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             {
                 facts.PageCount = pageCount;
                 facts.PageCountKnown = true;
+                facts.CumulativePixelCount = cumulativePixelCount;
+                facts.CumulativePixelCountKnown = cumulativePixelCountKnown;
                 if (uniformPageSize)
                 {
                     facts.Width = commonWidth;

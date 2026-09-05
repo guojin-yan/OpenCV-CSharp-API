@@ -172,6 +172,18 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.False(result.IsSizeKnown);
             Assert.True(result.IsFrameCountKnown);
             Assert.Equal(2, result.FrameCount);
+            Assert.True(result.IsCumulativePixelCountKnown);
+            Assert.Equal(96000, result.CumulativePixelCount);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownHeterogeneousTiffCumulativePixelBudgetBeforeNativeCall()
+        {
+            byte[] tiff = CreateTiff(false, 2, true);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(tiff,
+                new ImageDecodeOptions(4096, 1000, 1000, long.MaxValue, 2, true, false,
+                    long.MaxValue, long.MaxValue, false, false, 95999, int.MaxValue, int.MaxValue, false)));
         }
 
         [Fact]
@@ -196,6 +208,8 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             ImageIdentifyResult png = ImgCodecsCv2.Identify(CreateApng(3));
             Assert.True(png.IsFrameCountKnown);
             Assert.Equal(3, png.FrameCount);
+            Assert.True(png.IsCumulativePixelCountKnown);
+            Assert.Equal(18, png.CumulativePixelCount);
 
             ImageIdentifyResult webp = ImgCodecsCv2.Identify(CreateAnimatedWebp(4));
             Assert.True(webp.IsFrameCountKnown);

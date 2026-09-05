@@ -24,7 +24,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             int bitDepth,
             bool bitDepthKnown,
             int channelCount,
-            bool channelCountKnown)
+            bool channelCountKnown,
+            long cumulativePixelCount,
+            bool cumulativePixelCountKnown)
         {
             Format = format ?? string.Empty;
             Width = width;
@@ -42,6 +44,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             IsBitDepthKnown = bitDepthKnown;
             ChannelCount = channelCount;
             IsChannelCountKnown = channelCountKnown;
+            CumulativePixelCount = cumulativePixelCount;
+            IsCumulativePixelCountKnown = cumulativePixelCountKnown;
         }
 
         /// <summary>Gets a lowercase format name, or <c>unknown</c>.</summary>
@@ -97,6 +101,12 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
         /// <summary>Gets whether both encoded depth and channel count are known.</summary>
         public bool IsPixelFormatKnown { get { return IsBitDepthKnown && IsChannelCountKnown; } }
+
+        /// <summary>Gets the proven sum of width-times-height across known frames or pages.</summary>
+        public long CumulativePixelCount { get; }
+
+        /// <summary>Gets whether the cumulative frame/page pixel count was proven by the header.</summary>
+        public bool IsCumulativePixelCountKnown { get; }
 
         /// <inheritdoc />
         public override string ToString()

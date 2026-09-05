@@ -106,7 +106,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         /// <param name="maxIccProfileBytes">Maximum inspected ICC profile payload size when the header proves it.</param>
         /// <param name="requireKnownMetadataSize">Whether a proven metadata payload size is required.</param>
         /// <param name="requireKnownIccProfileSize">Whether a proven ICC profile payload size is required.</param>
-        /// <param name="maxCumulativePixels">Maximum width-times-height budget across known frames.</param>
+        /// <param name="maxCumulativePixels">Maximum width-times-height budget across known frames or pages.</param>
         /// <param name="maxBitDepth">Maximum encoded sample depth in bits when known.</param>
         /// <param name="maxChannels">Maximum encoded channel count when known.</param>
         /// <param name="rejectUnknownPixelFormat">Whether unknown encoded depth or channel count must be rejected.</param>
@@ -188,7 +188,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         /// <summary>Gets whether a proven ICC profile payload size is required.</summary>
         public bool RequireKnownIccProfileSize { get; }
 
-        /// <summary>Gets the maximum cumulative width-times-height budget across known frames.</summary>
+        /// <summary>Gets the maximum cumulative width-times-height budget across known frames or pages.</summary>
         public long MaxCumulativePixels { get; }
 
         /// <summary>Gets the maximum encoded sample depth in bits.</summary>
