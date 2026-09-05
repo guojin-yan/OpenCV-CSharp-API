@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 using JYPPX.OpenCvSharp.ImgCodecs;
 using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 
@@ -132,6 +133,89 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.True(result.IsPixelFormatKnown);
             Assert.Equal(16, result.BitDepth);
             Assert.Equal(4, result.ChannelCount);
+        }
+
+        [Fact]
+        public void IdentifyReadsPnmEncodedDepthAndChannels()
+        {
+            ImageIdentifyResult pbm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P1\n2 3\n"));
+            Assert.True(pbm.IsSizeKnown);
+            Assert.True(pbm.IsFrameCountKnown);
+            Assert.True(pbm.IsPixelFormatKnown);
+            Assert.Equal(1, pbm.BitDepth);
+            Assert.Equal(1, pbm.ChannelCount);
+
+            ImageIdentifyResult pbmBinary = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P4\n2 3\n"));
+            Assert.True(pbmBinary.IsPixelFormatKnown);
+            Assert.Equal(1, pbmBinary.BitDepth);
+            Assert.Equal(1, pbmBinary.ChannelCount);
+
+            ImageIdentifyResult pgmAscii = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P2\n4 2\n15\n"));
+            Assert.True(pgmAscii.IsPixelFormatKnown);
+            Assert.Equal(8, pgmAscii.BitDepth);
+            Assert.Equal(1, pgmAscii.ChannelCount);
+
+            ImageIdentifyResult pgm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P5\n# dimensions\n4 2\n255\n"));
+            Assert.True(pgm.IsPixelFormatKnown);
+            Assert.Equal(8, pgm.BitDepth);
+            Assert.Equal(1, pgm.ChannelCount);
+
+            ImageIdentifyResult ppmAscii = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P3\n4 2\n255\n"));
+            Assert.True(ppmAscii.IsPixelFormatKnown);
+            Assert.Equal(8, ppmAscii.BitDepth);
+            Assert.Equal(3, ppmAscii.ChannelCount);
+
+            ImageIdentifyResult ppm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n65535\n"));
+            Assert.True(ppm.IsPixelFormatKnown);
+            Assert.Equal(16, ppm.BitDepth);
+            Assert.Equal(3, ppm.ChannelCount);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompletePnmHeaderFacts()
+        {
+            ImageIdentifyResult missingMaxValue = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n"));
+            Assert.False(missingMaxValue.IsSizeKnown);
+            Assert.False(missingMaxValue.IsFrameCountKnown);
+            Assert.False(missingMaxValue.IsPixelFormatKnown);
+
+            ImageIdentifyResult invalidMaxValue = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P5\n4 2\n0\n"));
+            Assert.False(invalidMaxValue.IsSizeKnown);
+            Assert.False(invalidMaxValue.IsFrameCountKnown);
+            Assert.False(invalidMaxValue.IsPixelFormatKnown);
+
+            ImageIdentifyResult oversizedInteger = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n999999999999999999999 2\n255\n"));
+            Assert.False(oversizedInteger.IsSizeKnown);
+            Assert.False(oversizedInteger.IsFrameCountKnown);
+            Assert.False(oversizedInteger.IsPixelFormatKnown);
+
+            ImageIdentifyResult gluedToken = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4x 2\n255\n"));
+            Assert.False(gluedToken.IsSizeKnown);
+            Assert.False(gluedToken.IsFrameCountKnown);
+            Assert.False(gluedToken.IsPixelFormatKnown);
+
+            ImageIdentifyResult truncatedPpmSeparator = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n255"));
+            Assert.False(truncatedPpmSeparator.IsSizeKnown);
+            Assert.False(truncatedPpmSeparator.IsFrameCountKnown);
+            Assert.False(truncatedPpmSeparator.IsPixelFormatKnown);
+
+            ImageIdentifyResult truncatedPbmSeparator = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P1\n2 3"));
+            Assert.False(truncatedPbmSeparator.IsSizeKnown);
+            Assert.False(truncatedPbmSeparator.IsFrameCountKnown);
+            Assert.False(truncatedPbmSeparator.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownPnmPixelFormatLimitsBeforeNativeCall()
+        {
+            byte[] pnm = Encoding.ASCII.GetBytes("P6\n4 2\n65535\n");
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(pnm,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 8, 4, false)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(pnm,
+                new ImageDecodeOptions(1024, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 16, 2, false)));
         }
 
         [Fact]

@@ -238,8 +238,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             {
                 int width;
                 int height;
-                bool found = TryReadPnmSize(data, out width, out height);
-                return Result("pnm", width, height, found, 1, true, data.Length);
+                PixelFacts pixelFacts;
+                bool found = TryReadPnmHeader(data, out width, out height, out pixelFacts);
+                return Result("pnm", width, height, found, 1, found, data.Length, default(MetadataFacts), pixelFacts);
             }
 
             return Result("unknown", 0, 0, false, 0, false, data.Length);
@@ -437,34 +438,85 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             return false;
         }
 
-        private static bool TryReadPnmSize(byte[] data, out int width, out int height)
+        private static bool TryReadPnmHeader(byte[] data, out int width, out int height, out PixelFacts pixelFacts)
         {
             width = 0;
             height = 0;
+            pixelFacts = new PixelFacts();
+            if (data.Length < 3 || data[0] != (byte)'P' || data[1] < (byte)'1' || data[1] > (byte)'6' ||
+                !IsPnmWhitespace(data[2])) return false;
+
+            int kind = data[1] - (byte)'0';
             int offset = 2;
-            string[] values = new string[2];
-            int count = 0;
-            while (offset < data.Length && count < 2)
+            int maxValue;
+            if (!TryReadPnmInteger(data, ref offset, out width) || !TryReadPnmInteger(data, ref offset, out height) ||
+                width <= 0 || height <= 0) return false;
+
+            if (kind == 1 || kind == 4)
             {
-                while (offset < data.Length && (data[offset] == 32 || data[offset] == 9 || data[offset] == 10 || data[offset] == 13)) ++offset;
-                if (offset >= data.Length) break;
-                if (data[offset] == (byte)'#')
-                {
-                    while (offset < data.Length && data[offset] != 10) ++offset;
-                    continue;
-                }
-                int start = offset;
-                while (offset < data.Length && data[offset] >= (byte)'0' && data[offset] <= (byte)'9') ++offset;
-                if (start == offset) break;
-                values[count++] = System.Text.Encoding.ASCII.GetString(data, start, offset - start);
+                if (!HasPnmTokenSeparator(data, offset)) return false;
+                pixelFacts.BitDepth = 1;
+                pixelFacts.BitDepthKnown = true;
+                pixelFacts.Channels = 1;
+                pixelFacts.ChannelsKnown = true;
+                return true;
             }
-            if (count != 2 || !int.TryParse(values[0], out width) || !int.TryParse(values[1], out height))
+
+            if (!TryReadPnmInteger(data, ref offset, out maxValue) || maxValue < 1 || maxValue > 65535)
             {
                 width = 0;
                 height = 0;
                 return false;
             }
-            return width > 0 && height > 0;
+            if (!HasPnmTokenSeparator(data, offset))
+            {
+                width = 0;
+                height = 0;
+                return false;
+            }
+
+            pixelFacts.BitDepth = maxValue <= 255 ? 8 : 16;
+            pixelFacts.BitDepthKnown = true;
+            pixelFacts.Channels = kind == 3 || kind == 6 ? 3 : 1;
+            pixelFacts.ChannelsKnown = true;
+            return true;
+        }
+
+        private static bool TryReadPnmInteger(byte[] data, ref int offset, out int value)
+        {
+            value = 0;
+            while (offset < data.Length)
+            {
+                if (IsPnmWhitespace(data[offset]))
+                {
+                    ++offset;
+                    continue;
+                }
+                if (data[offset] != (byte)'#') break;
+                while (offset < data.Length && data[offset] != 10) ++offset;
+            }
+            if (offset >= data.Length || data[offset] < (byte)'0' || data[offset] > (byte)'9') return false;
+
+            long parsed = 0;
+            while (offset < data.Length && data[offset] >= (byte)'0' && data[offset] <= (byte)'9')
+            {
+                parsed = parsed * 10 + data[offset] - (byte)'0';
+                if (parsed > int.MaxValue) return false;
+                ++offset;
+            }
+            if (offset < data.Length && !IsPnmWhitespace(data[offset]) && data[offset] != (byte)'#') return false;
+            value = (int)parsed;
+            return true;
+        }
+
+        private static bool IsPnmWhitespace(byte value)
+        {
+            return value == 32 || value == 9 || value == 10 || value == 11 || value == 12 || value == 13;
+        }
+
+        private static bool HasPnmTokenSeparator(byte[] data, int offset)
+        {
+            return offset < data.Length && (IsPnmWhitespace(data[offset]) || data[offset] == (byte)'#');
         }
 
         private static bool TryCountGifFrames(byte[] data, out int frameCount)
