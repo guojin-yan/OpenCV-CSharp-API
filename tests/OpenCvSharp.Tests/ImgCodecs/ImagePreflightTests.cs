@@ -172,6 +172,34 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsWebpEncodedDepthAndChannels()
+        {
+            byte[] vp8Payload = new byte[6];
+            vp8Payload[3] = 0x9D; vp8Payload[4] = 0x01; vp8Payload[5] = 0x2A;
+            ImageIdentifyResult vp8 = ImgCodecsCv2.Identify(CreateStaticWebp("VP8 ", vp8Payload));
+            Assert.True(vp8.IsPixelFormatKnown);
+            Assert.Equal(8, vp8.BitDepth);
+            Assert.Equal(3, vp8.ChannelCount);
+
+            byte[] vp8lPayload = new byte[] { 0x2F, 0, 0, 0, 0 };
+            ImageIdentifyResult vp8l = ImgCodecsCv2.Identify(CreateStaticWebp("VP8L", vp8lPayload));
+            Assert.True(vp8l.IsPixelFormatKnown);
+            Assert.Equal(8, vp8l.BitDepth);
+            Assert.Equal(3, vp8l.ChannelCount);
+
+            vp8lPayload[4] = 0x10;
+            ImageIdentifyResult vp8lAlpha = ImgCodecsCv2.Identify(CreateStaticWebp("VP8L", vp8lPayload));
+            Assert.True(vp8lAlpha.IsPixelFormatKnown);
+            Assert.Equal(8, vp8lAlpha.BitDepth);
+            Assert.Equal(4, vp8lAlpha.ChannelCount);
+
+            ImageIdentifyResult animatedAlpha = ImgCodecsCv2.Identify(CreateAnimatedWebp(2, true));
+            Assert.True(animatedAlpha.IsPixelFormatKnown);
+            Assert.Equal(8, animatedAlpha.BitDepth);
+            Assert.Equal(4, animatedAlpha.ChannelCount);
+        }
+
+        [Fact]
         public void IdentifyDoesNotClaimIncompletePnmHeaderFacts()
         {
             ImageIdentifyResult missingMaxValue = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P6\n4 2\n"));
@@ -849,7 +877,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             return gif;
         }
 
-        private static byte[] CreateAnimatedWebp(int frameCount)
+        private static byte[] CreateAnimatedWebp(int frameCount, bool alpha = false)
         {
             byte[] webp = new byte[12 + 18 + 14 + frameCount * 24];
             webp[0] = (byte)'R'; webp[1] = (byte)'I'; webp[2] = (byte)'F'; webp[3] = (byte)'F';
@@ -857,13 +885,27 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             webp[4] = (byte)declaredLength;
             webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
             int offset = 12;
-            offset = WriteWebpChunk(webp, offset, "VP8X", new byte[] { 0x02, 0, 0, 0, 1, 0, 0, 2, 0, 0 });
+            offset = WriteWebpChunk(webp, offset, "VP8X", new byte[] { (byte)(0x02 | (alpha ? 0x10 : 0)), 0, 0, 0, 1, 0, 0, 2, 0, 0 });
             offset = WriteWebpChunk(webp, offset, "ANIM", new byte[6]);
             for (int frame = 0; frame < frameCount; ++frame)
             {
                 offset = WriteWebpChunk(webp, offset, "ANMF", new byte[16]);
             }
             Assert.Equal(webp.Length, offset);
+            return webp;
+        }
+
+        private static byte[] CreateStaticWebp(string imageType, byte[] payload)
+        {
+            byte[] webp = new byte[12 + 8 + payload.Length + (payload.Length & 1)];
+            webp[0] = (byte)'R'; webp[1] = (byte)'I'; webp[2] = (byte)'F'; webp[3] = (byte)'F';
+            int declaredLength = webp.Length - 8;
+            webp[4] = (byte)declaredLength;
+            webp[5] = (byte)(declaredLength >> 8);
+            webp[6] = (byte)(declaredLength >> 16);
+            webp[7] = (byte)(declaredLength >> 24);
+            webp[8] = (byte)'W'; webp[9] = (byte)'E'; webp[10] = (byte)'B'; webp[11] = (byte)'P';
+            WriteWebpChunk(webp, 12, imageType, payload);
             return webp;
         }
 

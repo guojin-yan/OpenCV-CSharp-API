@@ -205,7 +205,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 int height;
                 bool found = TryReadWebpSize(data, out width, out height);
                 FrameFacts frameFacts = ReadWebpFrameFacts(data);
-                return Result("webp", width, height, found, frameFacts.FrameCount, frameFacts.FrameCountKnown, data.Length, ReadMetadataFacts(data, "webp"));
+                PixelFacts pixelFacts = ReadWebpPixelFacts(data);
+                return Result("webp", width, height, found, frameFacts.FrameCount, frameFacts.FrameCountKnown, data.Length,
+                    ReadMetadataFacts(data, "webp"), pixelFacts);
             }
 
             if (data.Length >= 2 && data[0] == (byte)'B' && data[1] == (byte)'M')
@@ -318,6 +320,71 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             facts.BitDepth = bitDepth;
             facts.BitDepthKnown = true;
             facts.Channels = channels;
+            facts.ChannelsKnown = true;
+            return facts;
+        }
+
+        private static PixelFacts ReadWebpPixelFacts(byte[] data)
+        {
+            PixelFacts facts = new PixelFacts();
+            if (data.Length < 12 || data[0] != (byte)'R' || data[1] != (byte)'I' || data[2] != (byte)'F' || data[3] != (byte)'F' ||
+                data[8] != (byte)'W' || data[9] != (byte)'E' || data[10] != (byte)'B' || data[11] != (byte)'P') return facts;
+
+            uint declaredLength = (uint)(data[4] | (data[5] << 8) | (data[6] << 16) | (data[7] << 24));
+            if (declaredLength != data.Length - 8) return facts;
+
+            bool sawVp8x = false;
+            bool sawImage = false;
+            bool alphaKnown = false;
+            bool hasAlpha = false;
+            int offset = 12;
+            while (offset + 8 <= data.Length)
+            {
+                int chunkLength = ReadSignedLe32(data, offset + 4);
+                if (chunkLength < 0 || offset + 8L + chunkLength > data.Length) return new PixelFacts();
+
+                bool isVp8x = IsWebpChunkType(data, offset, 'V', 'P', '8', 'X');
+                bool isVp8 = IsWebpChunkType(data, offset, 'V', 'P', '8', ' ');
+                bool isVp8l = IsWebpChunkType(data, offset, 'V', 'P', '8', 'L');
+                bool isAnmf = IsWebpChunkType(data, offset, 'A', 'N', 'M', 'F');
+                if (isVp8x)
+                {
+                    if (sawVp8x || chunkLength != 10) return new PixelFacts();
+                    sawVp8x = true;
+                    hasAlpha = (data[offset + 8] & 0x10) != 0;
+                    alphaKnown = true;
+                }
+                else if (isVp8)
+                {
+                    if (chunkLength < 6 || data[offset + 11] != 0x9D || data[offset + 12] != 0x01 || data[offset + 13] != 0x2A)
+                    {
+                        return new PixelFacts();
+                    }
+                    sawImage = true;
+                }
+                else if (isVp8l)
+                {
+                    if (chunkLength < 5 || data[offset + 8] != 0x2F) return new PixelFacts();
+                    bool losslessAlpha = (data[offset + 12] & 0x10) != 0;
+                    if (alphaKnown && hasAlpha != losslessAlpha && sawVp8x) return new PixelFacts();
+                    hasAlpha = losslessAlpha;
+                    alphaKnown = true;
+                    sawImage = true;
+                }
+                else if (isAnmf)
+                {
+                    if (chunkLength < 16) return new PixelFacts();
+                    sawImage = true;
+                }
+
+                offset += 8 + chunkLength + (chunkLength & 1);
+            }
+
+            if (offset != data.Length || !sawImage) return facts;
+            if (!alphaKnown) hasAlpha = false;
+            facts.BitDepth = 8;
+            facts.BitDepthKnown = true;
+            facts.Channels = hasAlpha ? 4 : 3;
             facts.ChannelsKnown = true;
             return facts;
         }
