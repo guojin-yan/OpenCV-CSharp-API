@@ -236,6 +236,19 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     default(MetadataFacts), pixelFacts);
             }
 
+            if (StartsWith(data, new byte[] { (byte)'#', (byte)'?', (byte)'R', (byte)'G', (byte)'B', (byte)'E' }) ||
+                StartsWith(data, new byte[] { (byte)'#', (byte)'?', (byte)'R', (byte)'A', (byte)'D', (byte)'I', (byte)'A', (byte)'N', (byte)'C', (byte)'E' }))
+            {
+                int width;
+                int height;
+                int pixelDataOffset;
+                PixelFacts pixelFacts;
+                bool headerKnown = TryReadRadianceHdrHeader(data, out width, out height, out pixelDataOffset, out pixelFacts);
+                bool frameKnown = headerKnown && IsRadianceHdrPayloadComplete(data, pixelDataOffset, width, height);
+                return Result("hdr", width, height, headerKnown, 1, frameKnown, data.Length,
+                    default(MetadataFacts), pixelFacts);
+            }
+
             if (data.Length >= 4 && ((data[0] == (byte)'I' && data[1] == (byte)'I' && data[2] == 42 && data[3] == 0) ||
                 (data[0] == (byte)'M' && data[1] == (byte)'M' && data[2] == 0 && data[3] == 42)))
             {
@@ -613,6 +626,175 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     break;
             }
             return true;
+        }
+
+        private static bool TryReadRadianceHdrHeader(byte[] data, out int width, out int height, out int pixelDataOffset, out PixelFacts pixelFacts)
+        {
+            width = 0;
+            height = 0;
+            pixelDataOffset = 0;
+            pixelFacts = new PixelFacts();
+
+            int offset = 0;
+            int lineStart;
+            int lineEnd;
+            if (!TryReadRadianceHdrLine(data, ref offset, out lineStart, out lineEnd)) return false;
+
+            bool hasFormat = false;
+            bool foundHeaderEnd = false;
+            while (TryReadRadianceHdrLine(data, ref offset, out lineStart, out lineEnd))
+            {
+                if (lineStart == lineEnd)
+                {
+                    foundHeaderEnd = true;
+                    break;
+                }
+                if (TokenEquals(data, lineStart, lineEnd, "FORMAT=32-bit_rle_rgbe")) hasFormat = true;
+            }
+            if (!hasFormat || !foundHeaderEnd ||
+                !TryReadRadianceHdrLine(data, ref offset, out lineStart, out lineEnd) ||
+                !TryReadRadianceResolution(data, lineStart, lineEnd, out width, out height))
+            {
+                width = 0;
+                height = 0;
+                return false;
+            }
+
+            pixelDataOffset = offset;
+            pixelFacts.BitDepth = 8;
+            pixelFacts.BitDepthKnown = true;
+            pixelFacts.Channels = 4;
+            pixelFacts.ChannelsKnown = true;
+            return true;
+        }
+
+        private static bool TryReadRadianceHdrLine(byte[] data, ref int offset, out int lineStart, out int lineEnd)
+        {
+            lineStart = offset;
+            lineEnd = offset;
+            while (lineEnd < data.Length && data[lineEnd] != 10) ++lineEnd;
+            if (lineEnd >= data.Length || lineEnd - lineStart + 1 > 127) return false;
+            offset = lineEnd + 1;
+            return true;
+        }
+
+        private static bool TryReadRadianceResolution(byte[] data, int start, int end, out int width, out int height)
+        {
+            width = 0;
+            height = 0;
+            int offset = start;
+            if (offset + 2 > end || data[offset] != (byte)'-' || data[offset + 1] != (byte)'Y') return false;
+            offset += 2;
+            if (!SkipRadianceWhitespace(data, ref offset, end) ||
+                !TryReadPositiveAsciiInteger(data, ref offset, end, out height) ||
+                !SkipRadianceWhitespace(data, ref offset, end) || offset + 2 > end ||
+                data[offset] != (byte)'+' || data[offset + 1] != (byte)'X')
+            {
+                width = 0;
+                height = 0;
+                return false;
+            }
+            offset += 2;
+            if (!SkipRadianceWhitespace(data, ref offset, end) ||
+                !TryReadPositiveAsciiInteger(data, ref offset, end, out width))
+            {
+                width = 0;
+                height = 0;
+                return false;
+            }
+            while (offset < end && IsRadianceWhitespace(data[offset])) ++offset;
+            return offset == end;
+        }
+
+        private static bool SkipRadianceWhitespace(byte[] data, ref int offset, int end)
+        {
+            int start = offset;
+            while (offset < end && IsRadianceWhitespace(data[offset])) ++offset;
+            return offset > start;
+        }
+
+        private static bool IsRadianceWhitespace(byte value)
+        {
+            return value == 9 || value == 11 || value == 12 || value == 13 || value == 32;
+        }
+
+        private static bool TryReadPositiveAsciiInteger(byte[] data, ref int offset, int end, out int value)
+        {
+            value = 0;
+            if (offset < end && data[offset] == (byte)'+') ++offset;
+            if (offset >= end || data[offset] < (byte)'0' || data[offset] > (byte)'9') return false;
+
+            long parsed = 0;
+            while (offset < end && data[offset] >= (byte)'0' && data[offset] <= (byte)'9')
+            {
+                parsed = parsed * 10 + data[offset] - (byte)'0';
+                if (parsed > int.MaxValue) return false;
+                ++offset;
+            }
+            if (parsed == 0) return false;
+            value = (int)parsed;
+            return true;
+        }
+
+        private static bool IsRadianceHdrPayloadComplete(byte[] data, int offset, int width, int height)
+        {
+            if (offset < 0 || offset > data.Length || width <= 0 || height <= 0) return false;
+
+            if (width < 8 || width > 0x7FFF)
+            {
+                return HasExactRadianceFlatPayload(data, offset, width, height);
+            }
+
+            int remainingScanlines = height;
+            while (remainingScanlines > 0)
+            {
+                if (offset + 4 > data.Length) return false;
+                bool isRleScanline = data[offset] == 2 && data[offset + 1] == 2 && (data[offset + 2] & 0x80) == 0;
+                if (!isRleScanline)
+                {
+                    return HasExactRadianceFlatPayload(data, offset, width, remainingScanlines);
+                }
+                if ((data[offset + 2] << 8 | data[offset + 3]) != width) return false;
+                offset += 4;
+
+                for (int channel = 0; channel < 4; ++channel)
+                {
+                    int decoded = 0;
+                    while (decoded < width)
+                    {
+                        if (offset >= data.Length) return false;
+                        int count = data[offset++];
+                        if (count > 128)
+                        {
+                            count -= 128;
+                            if (count > width - decoded || offset >= data.Length) return false;
+                            ++offset;
+                        }
+                        else
+                        {
+                            if (count == 0 || count > width - decoded || offset + count > data.Length) return false;
+                            offset += count;
+                        }
+                        decoded += count;
+                    }
+                }
+                --remainingScanlines;
+            }
+            return offset == data.Length;
+        }
+
+        private static bool HasExactRadianceFlatPayload(byte[] data, int offset, int width, int scanlines)
+        {
+            long expectedBytes;
+            try
+            {
+                expectedBytes = checked((long)width * scanlines * 4);
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
+            return (long)data.Length - offset == expectedBytes;
         }
 
         private static bool StartsWith(byte[] data, byte[] prefix)

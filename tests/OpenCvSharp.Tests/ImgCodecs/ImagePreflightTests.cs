@@ -268,6 +268,84 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsFlatAndRleRadianceHdrFacts()
+        {
+            ImageIdentifyResult flat = ImgCodecsCv2.Identify(CreateRadianceHdr(2, 3, false));
+            Assert.Equal("hdr", flat.Format);
+            Assert.True(flat.IsSizeKnown);
+            Assert.Equal(2, flat.Width);
+            Assert.Equal(3, flat.Height);
+            Assert.True(flat.IsFrameCountKnown);
+            Assert.Equal(1, flat.FrameCount);
+            Assert.True(flat.IsPixelFormatKnown);
+            Assert.Equal(8, flat.BitDepth);
+            Assert.Equal(4, flat.ChannelCount);
+            Assert.True(flat.IsCumulativePixelCountKnown);
+            Assert.Equal(6, flat.CumulativePixelCount);
+
+            ImageIdentifyResult rle = ImgCodecsCv2.Identify(CreateRadianceHdr(8, 2, true));
+            Assert.True(rle.IsSizeKnown);
+            Assert.Equal(8, rle.Width);
+            Assert.Equal(2, rle.Height);
+            Assert.True(rle.IsFrameCountKnown);
+            Assert.True(rle.IsPixelFormatKnown);
+
+            ImageIdentifyResult shortSignature = ImgCodecsCv2.Identify(CreateRadianceHdr(2, 3, false, "#?RGBE"));
+            Assert.Equal("hdr", shortSignature.Format);
+            Assert.True(shortSignature.IsSizeKnown);
+            Assert.True(shortSignature.IsFrameCountKnown);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimMalformedRadianceHdrFacts()
+        {
+            byte[] complete = CreateRadianceHdr(8, 2, true);
+            int headerLength = GetRadianceHdrHeaderLength(8, 2);
+
+            byte[] headerOnly = new byte[headerLength];
+            Array.Copy(complete, headerOnly, headerLength);
+            ImageIdentifyResult incomplete = ImgCodecsCv2.Identify(headerOnly);
+            Assert.True(incomplete.IsSizeKnown);
+            Assert.True(incomplete.IsPixelFormatKnown);
+            Assert.False(incomplete.IsFrameCountKnown);
+            Assert.False(incomplete.IsCumulativePixelCountKnown);
+
+            byte[] zeroRun = (byte[])complete.Clone();
+            zeroRun[headerLength + 4] = 0;
+            Assert.False(ImgCodecsCv2.Identify(zeroRun).IsFrameCountKnown);
+
+            byte[] wrongWidth = (byte[])complete.Clone();
+            wrongWidth[headerLength + 3] = 7;
+            Assert.False(ImgCodecsCv2.Identify(wrongWidth).IsFrameCountKnown);
+
+            ImageIdentifyResult missingFormat = ImgCodecsCv2.Identify(
+                Encoding.ASCII.GetBytes("#?RGBE\n\n-Y 2 +X 8\n"));
+            Assert.True(missingFormat.IsFormatKnown);
+            Assert.False(missingFormat.IsSizeKnown);
+            Assert.False(missingFormat.IsPixelFormatKnown);
+
+            ImageIdentifyResult oversized = ImgCodecsCv2.Identify(
+                Encoding.ASCII.GetBytes("#?RADIANCE\nFORMAT=32-bit_rle_rgbe\n\n-Y 2147483648 +X 8\n"));
+            Assert.False(oversized.IsSizeKnown);
+
+            ImageIdentifyResult multiplicationOverflow = ImgCodecsCv2.Identify(
+                Encoding.ASCII.GetBytes("#?RADIANCE\nFORMAT=32-bit_rle_rgbe\n\n-Y 2147483647 +X 2147483647\n"));
+            Assert.True(multiplicationOverflow.IsSizeKnown);
+            Assert.False(multiplicationOverflow.IsFrameCountKnown);
+            Assert.False(multiplicationOverflow.IsCumulativePixelCountKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownRadianceHdrStorageLimitsBeforeNativeCall()
+        {
+            byte[] hdr = CreateRadianceHdr(2, 3, false);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(hdr,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 8, 3, false)));
+        }
+
+        [Fact]
         public void IdentifyReadsWebpEncodedDepthAndChannels()
         {
             byte[] vp8Payload = new byte[6];
@@ -616,6 +694,7 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
                 new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
                 new { Name = "sunraster", Bytes = CreateSunRaster(24) },
+                new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
                 new { Name = "tiff", Bytes = CreateTiff(false, 2) },
                 new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) }
             };
@@ -1166,6 +1245,43 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             destination[offset + 1] = (byte)(value >> 16);
             destination[offset + 2] = (byte)(value >> 8);
             destination[offset + 3] = (byte)value;
+        }
+
+        private static byte[] CreateRadianceHdr(int width, int height, bool rle, string signature = "#?RADIANCE")
+        {
+            byte[] header = Encoding.ASCII.GetBytes(
+                signature + "\nFORMAT=32-bit_rle_rgbe\n\n-Y " + height + " +X " + width + "\n");
+            using (var stream = new MemoryStream())
+            {
+                stream.Write(header, 0, header.Length);
+                if (!rle)
+                {
+                    stream.Write(new byte[checked(width * height * 4)], 0, checked(width * height * 4));
+                }
+                else
+                {
+                    Assert.InRange(width, 8, 127);
+                    for (int row = 0; row < height; ++row)
+                    {
+                        stream.WriteByte(2);
+                        stream.WriteByte(2);
+                        stream.WriteByte((byte)(width >> 8));
+                        stream.WriteByte((byte)width);
+                        for (int channel = 0; channel < 4; ++channel)
+                        {
+                            stream.WriteByte((byte)(128 + width));
+                            stream.WriteByte((byte)(row + channel));
+                        }
+                    }
+                }
+                return stream.ToArray();
+            }
+        }
+
+        private static int GetRadianceHdrHeaderLength(int width, int height)
+        {
+            return Encoding.ASCII.GetByteCount(
+                "#?RADIANCE\nFORMAT=32-bit_rle_rgbe\n\n-Y " + height + " +X " + width + "\n");
         }
 
         private static int WritePngChunk(byte[] destination, int offset, string type, byte[] payload)
