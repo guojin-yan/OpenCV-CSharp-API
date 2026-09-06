@@ -249,6 +249,16 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     default(MetadataFacts), pixelFacts);
             }
 
+            if (data.Length >= 4 && data[0] == 0x76 && data[1] == 0x2F && data[2] == 0x31 && data[3] == 0x01)
+            {
+                int width;
+                int height;
+                PixelFacts pixelFacts;
+                bool headerKnown = TryReadOpenExrHeader(data, out width, out height, out pixelFacts);
+                return Result("exr", width, height, headerKnown, 1, false, data.Length,
+                    default(MetadataFacts), pixelFacts);
+            }
+
             if (data.Length >= 4 && ((data[0] == (byte)'I' && data[1] == (byte)'I' && data[2] == 42 && data[3] == 0) ||
                 (data[0] == (byte)'M' && data[1] == (byte)'M' && data[2] == 0 && data[3] == 42)))
             {
@@ -795,6 +805,130 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 return false;
             }
             return (long)data.Length - offset == expectedBytes;
+        }
+
+        private static bool TryReadOpenExrHeader(byte[] data, out int width, out int height, out PixelFacts pixelFacts)
+        {
+            width = 0;
+            height = 0;
+            pixelFacts = new PixelFacts();
+            if (data.Length < 8) return false;
+
+            int version = ReadSignedLe32(data, 4);
+            int versionNumber = version & 0xFF;
+            if (versionNumber != 1 && versionNumber != 2) return false;
+
+            int offset = 8;
+            bool dataWindowKnown = false;
+            bool channelsKnown = false;
+            int channelCount = 0;
+            int channelBitDepth = 0;
+            bool channelDepthUniform = true;
+            while (offset < data.Length)
+            {
+                if (data[offset] == 0)
+                {
+                    ++offset;
+                    if (!dataWindowKnown) return false;
+                    if (channelsKnown && channelCount > 0)
+                    {
+                        pixelFacts.Channels = channelCount;
+                        pixelFacts.ChannelsKnown = true;
+                        if (channelDepthUniform)
+                        {
+                            pixelFacts.BitDepth = channelBitDepth;
+                            pixelFacts.BitDepthKnown = true;
+                        }
+                    }
+                    return true;
+                }
+
+                int nameStart;
+                int nameEnd;
+                if (!TryReadOpenExrCString(data, ref offset, out nameStart, out nameEnd)) return false;
+                int typeStart;
+                int typeEnd;
+                if (!TryReadOpenExrCString(data, ref offset, out typeStart, out typeEnd) || offset + 4 > data.Length) return false;
+
+                uint attributeSize = (uint)ReadSignedLe32(data, offset);
+                offset += 4;
+                if (attributeSize > data.Length - offset) return false;
+                int valueStart = offset;
+                int valueEnd = offset + (int)attributeSize;
+
+                if (TokenEquals(data, nameStart, nameEnd, "dataWindow"))
+                {
+                    if (dataWindowKnown || !TokenEquals(data, typeStart, typeEnd, "box2i") || attributeSize != 16) return false;
+                    long minX = ReadSignedLe32(data, valueStart);
+                    long minY = ReadSignedLe32(data, valueStart + 4);
+                    long maxX = ReadSignedLe32(data, valueStart + 8);
+                    long maxY = ReadSignedLe32(data, valueStart + 12);
+                    long candidateWidth = maxX - minX + 1;
+                    long candidateHeight = maxY - minY + 1;
+                    if (candidateWidth <= 0 || candidateHeight <= 0 || candidateWidth > int.MaxValue || candidateHeight > int.MaxValue)
+                    {
+                        return false;
+                    }
+                    width = (int)candidateWidth;
+                    height = (int)candidateHeight;
+                    dataWindowKnown = true;
+                }
+                else if (TokenEquals(data, nameStart, nameEnd, "channels") &&
+                    TokenEquals(data, typeStart, typeEnd, "chlist"))
+                {
+                    if (channelsKnown || !TryReadOpenExrChannels(data, valueStart, valueEnd, out channelCount, out channelBitDepth, out channelDepthUniform)) return false;
+                    channelsKnown = true;
+                }
+
+                offset = valueEnd;
+            }
+            return false;
+        }
+
+        private static bool TryReadOpenExrCString(byte[] data, ref int offset, out int start, out int end)
+        {
+            start = offset;
+            end = offset;
+            while (end < data.Length && data[end] != 0) ++end;
+            if (end >= data.Length || end == start || end - start > 255) return false;
+            offset = end + 1;
+            return true;
+        }
+
+        private static bool TryReadOpenExrChannels(byte[] data, int start, int end, out int channelCount, out int bitDepth, out bool depthUniform)
+        {
+            channelCount = 0;
+            bitDepth = 0;
+            depthUniform = true;
+            int offset = start;
+            while (offset < end)
+            {
+                int nameStart = offset;
+                int nameEnd = offset;
+                while (nameEnd < end && data[nameEnd] != 0) ++nameEnd;
+                if (nameEnd >= end || nameEnd - nameStart > 255) return false;
+                offset = nameEnd + 1;
+                if (nameStart == nameEnd) return offset == end && channelCount > 0;
+                if (offset + 16 > end) return false;
+
+                int pixelType = ReadSignedLe32(data, offset);
+                int xSampling = ReadSignedLe32(data, offset + 8);
+                int ySampling = ReadSignedLe32(data, offset + 12);
+                if (pixelType < 0 || pixelType > 2 || xSampling <= 0 || ySampling <= 0) return false;
+                int currentBitDepth = pixelType == 1 ? 16 : 32;
+                if (channelCount == 0)
+                {
+                    bitDepth = currentBitDepth;
+                }
+                else if (bitDepth != currentBitDepth)
+                {
+                    depthUniform = false;
+                }
+                ++channelCount;
+                if (channelCount > 65535) return false;
+                offset += 16;
+            }
+            return false;
         }
 
         private static bool StartsWith(byte[] data, byte[] prefix)

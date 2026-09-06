@@ -346,6 +346,64 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsOpenExrDataWindowAndChannels()
+        {
+            ImageIdentifyResult exr = ImgCodecsCv2.Identify(CreateOpenExrHeader(640, 480, 4, 1));
+            Assert.Equal("exr", exr.Format);
+            Assert.True(exr.IsSizeKnown);
+            Assert.Equal(640, exr.Width);
+            Assert.Equal(480, exr.Height);
+            Assert.False(exr.IsFrameCountKnown);
+            Assert.True(exr.IsPixelFormatKnown);
+            Assert.Equal(16, exr.BitDepth);
+            Assert.Equal(4, exr.ChannelCount);
+
+            ImageIdentifyResult mixed = ImgCodecsCv2.Identify(CreateOpenExrHeader(3, 2, 3, 2, 1));
+            Assert.True(mixed.IsSizeKnown);
+            Assert.True(mixed.IsChannelCountKnown);
+            Assert.Equal(3, mixed.ChannelCount);
+            Assert.False(mixed.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompleteOpenExrHeaderFacts()
+        {
+            byte[] complete = CreateOpenExrHeader(8, 6, 3, 2);
+            ImageIdentifyResult completeResult = ImgCodecsCv2.Identify(complete);
+            Assert.True(completeResult.IsSizeKnown);
+            Assert.False(completeResult.IsFrameCountKnown);
+
+            for (int length = 1; length < complete.Length; ++length)
+            {
+                byte[] prefix = new byte[length];
+                Array.Copy(complete, prefix, length);
+                ImageIdentifyResult result = ImgCodecsCv2.Identify(prefix);
+                Assert.False(result.IsSizeKnown, "OpenEXR prefix " + length + " claimed a complete header");
+                Assert.False(result.IsFrameCountKnown, "OpenEXR prefix " + length + " claimed a frame");
+            }
+
+            byte[] invalidWindow = (byte[])complete.Clone();
+            int dataWindowValue = FindOpenExrAttributeValue(invalidWindow, "dataWindow");
+            WriteLe32(invalidWindow, dataWindowValue + 8, -1);
+            WriteLe32(invalidWindow, dataWindowValue + 12, -1);
+            Assert.False(ImgCodecsCv2.Identify(invalidWindow).IsSizeKnown);
+
+            byte[] invalidChannels = (byte[])complete.Clone();
+            int channelsValue = FindOpenExrAttributeValue(invalidChannels, "channels");
+            WriteLe32(invalidChannels, channelsValue + 2, 3);
+            Assert.False(ImgCodecsCv2.Identify(invalidChannels).IsSizeKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownOpenExrChannelLimitsBeforeNativeCall()
+        {
+            byte[] exr = CreateOpenExrHeader(2, 2, 4, 2);
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(exr,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 16, 3, false)));
+        }
+
+        [Fact]
         public void IdentifyReadsWebpEncodedDepthAndChannels()
         {
             byte[] vp8Payload = new byte[6];
@@ -1282,6 +1340,92 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         {
             return Encoding.ASCII.GetByteCount(
                 "#?RADIANCE\nFORMAT=32-bit_rle_rgbe\n\n-Y " + height + " +X " + width + "\n");
+        }
+
+        private static byte[] CreateOpenExrHeader(int width, int height, int channelCount, int pixelType, int secondPixelType = -1)
+        {
+            using (var stream = new MemoryStream())
+            {
+                stream.WriteByte(0x76); stream.WriteByte(0x2F); stream.WriteByte(0x31); stream.WriteByte(0x01);
+                WriteLe32(stream, 2);
+                WriteOpenExrAttribute(stream, "dataWindow", "box2i", new byte[]
+                {
+                    0, 0, 0, 0,
+                    0, 0, 0, 0,
+                    (byte)((width - 1) & 0xFF), (byte)((width - 1) >> 8), (byte)((width - 1) >> 16), (byte)((width - 1) >> 24),
+                    (byte)((height - 1) & 0xFF), (byte)((height - 1) >> 8), (byte)((height - 1) >> 16), (byte)((height - 1) >> 24),
+                });
+
+                using (var channels = new MemoryStream())
+                {
+                    for (int channel = 0; channel < channelCount; ++channel)
+                    {
+                        string name = channel == 0 ? "R" : channel == 1 ? "G" : channel == 2 ? "B" : "A";
+                        byte[] nameBytes = Encoding.ASCII.GetBytes(name);
+                        channels.Write(nameBytes, 0, nameBytes.Length);
+                        channels.WriteByte(0);
+                        WriteLe32(channels, channel == 1 && secondPixelType >= 0 ? secondPixelType : pixelType);
+                        channels.WriteByte(0);
+                        channels.WriteByte(0); channels.WriteByte(0); channels.WriteByte(0);
+                        WriteLe32(channels, 1);
+                        WriteLe32(channels, 1);
+                    }
+                    channels.WriteByte(0);
+                    WriteOpenExrAttribute(stream, "channels", "chlist", channels.ToArray());
+                }
+                stream.WriteByte(0);
+                return stream.ToArray();
+            }
+        }
+
+        private static void WriteOpenExrAttribute(Stream stream, string name, string type, byte[] value)
+        {
+            byte[] nameBytes = Encoding.ASCII.GetBytes(name);
+            byte[] typeBytes = Encoding.ASCII.GetBytes(type);
+            stream.Write(nameBytes, 0, nameBytes.Length); stream.WriteByte(0);
+            stream.Write(typeBytes, 0, typeBytes.Length); stream.WriteByte(0);
+            WriteLe32(stream, value.Length);
+            stream.Write(value, 0, value.Length);
+        }
+
+        private static int FindOpenExrAttributeValue(byte[] data, string attributeName)
+        {
+            int offset = 8;
+            while (offset < data.Length && data[offset] != 0)
+            {
+                int nameStart = offset;
+                while (offset < data.Length && data[offset] != 0) ++offset;
+                string name = Encoding.ASCII.GetString(data, nameStart, offset - nameStart);
+                ++offset;
+                while (offset < data.Length && data[offset] != 0) ++offset;
+                ++offset;
+                int size = ReadLe32ForTest(data, offset);
+                offset += 4;
+                if (name == attributeName) return offset;
+                offset += size;
+            }
+            throw new InvalidOperationException("EXR attribute not found: " + attributeName);
+        }
+
+        private static void WriteLe32(Stream stream, int value)
+        {
+            stream.WriteByte((byte)value);
+            stream.WriteByte((byte)(value >> 8));
+            stream.WriteByte((byte)(value >> 16));
+            stream.WriteByte((byte)(value >> 24));
+        }
+
+        private static void WriteLe32(byte[] destination, int offset, int value)
+        {
+            destination[offset] = (byte)value;
+            destination[offset + 1] = (byte)(value >> 8);
+            destination[offset + 2] = (byte)(value >> 16);
+            destination[offset + 3] = (byte)(value >> 24);
+        }
+
+        private static int ReadLe32ForTest(byte[] data, int offset)
+        {
+            return data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16) | (data[offset + 3] << 24);
         }
 
         private static int WritePngChunk(byte[] destination, int offset, string type, byte[] payload)
