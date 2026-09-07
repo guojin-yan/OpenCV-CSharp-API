@@ -404,6 +404,96 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyReadsRawAndContainerJpeg2000Facts()
+        {
+            ImageIdentifyResult raw = ImgCodecsCv2.Identify(CreateJpeg2000Codestream(640, 480, 8, 8, 8));
+            Assert.Equal("j2k", raw.Format);
+            Assert.True(raw.IsSizeKnown);
+            Assert.Equal(640, raw.Width);
+            Assert.Equal(480, raw.Height);
+            Assert.False(raw.IsFrameCountKnown);
+            Assert.True(raw.IsPixelFormatKnown);
+            Assert.Equal(8, raw.BitDepth);
+            Assert.Equal(3, raw.ChannelCount);
+
+            byte[] uniformCodestream = CreateJpeg2000Codestream(17, 9, 12, 12, 12, 12);
+            ImageIdentifyResult jp2 = ImgCodecsCv2.Identify(CreateJp2(uniformCodestream, true));
+            Assert.Equal("jp2", jp2.Format);
+            Assert.True(jp2.IsSizeKnown);
+            Assert.Equal(17, jp2.Width);
+            Assert.Equal(9, jp2.Height);
+            Assert.True(jp2.IsPixelFormatKnown);
+            Assert.Equal(12, jp2.BitDepth);
+            Assert.Equal(4, jp2.ChannelCount);
+
+            ImageIdentifyResult mixed = ImgCodecsCv2.Identify(
+                CreateJp2(CreateJpeg2000Codestream(3, 2, 8, 12, 8), false));
+            Assert.True(mixed.IsSizeKnown);
+            Assert.True(mixed.IsChannelCountKnown);
+            Assert.Equal(3, mixed.ChannelCount);
+            Assert.False(mixed.IsBitDepthKnown);
+            Assert.False(mixed.IsPixelFormatKnown);
+        }
+
+        [Fact]
+        public void IdentifyDoesNotClaimIncompleteOrMalformedJpeg2000Facts()
+        {
+            byte[] raw = CreateJpeg2000Codestream(8, 6, 8, 8, 8);
+            byte[] jp2 = CreateJp2(raw, false);
+            foreach (byte[] complete in new[] { raw, jp2 })
+            {
+                Assert.True(ImgCodecsCv2.Identify(complete).IsSizeKnown);
+                for (int length = 1; length < complete.Length; ++length)
+                {
+                    byte[] prefix = new byte[length];
+                    Array.Copy(complete, prefix, length);
+                    ImageIdentifyResult result = ImgCodecsCv2.Identify(prefix);
+                    Assert.False(result.IsSizeKnown, "JPEG 2000 prefix " + length + " claimed a complete SIZ segment");
+                    Assert.False(result.IsPixelFormatKnown, "JPEG 2000 prefix " + length + " claimed pixel facts");
+                }
+            }
+
+            byte[] wrongSizLength = (byte[])raw.Clone();
+            WriteBe16(wrongSizLength, 4, 38);
+            Assert.False(ImgCodecsCv2.Identify(wrongSizLength).IsSizeKnown);
+
+            byte[] zeroSampling = (byte[])raw.Clone();
+            zeroSampling[43] = 0;
+            Assert.False(ImgCodecsCv2.Identify(zeroSampling).IsSizeKnown);
+
+            byte[] invalidOrigin = (byte[])raw.Clone();
+            WriteBe32(invalidOrigin, 16, 8);
+            Assert.False(ImgCodecsCv2.Identify(invalidOrigin).IsSizeKnown);
+
+            byte[] invalidBox = (byte[])jp2.Clone();
+            int codestreamBox = invalidBox.Length - raw.Length - 8;
+            WriteBe32(invalidBox, codestreamBox, uint.MaxValue);
+            Assert.False(ImgCodecsCv2.Identify(invalidBox).IsSizeKnown);
+
+            byte[] invalidExtendedBox = CreateJp2(raw, true);
+            int extendedCodestreamBox = invalidExtendedBox.Length - raw.Length - 16;
+            WriteBe64(invalidExtendedBox, extendedCodestreamBox + 8, ulong.MaxValue);
+            Assert.False(ImgCodecsCv2.Identify(invalidExtendedBox).IsSizeKnown);
+        }
+
+        [Fact]
+        public void DecodeOptionsRejectKnownJpeg2000PixelLimitsBeforeNativeCall()
+        {
+            byte[] jp2 = CreateJp2(CreateJpeg2000Codestream(2, 3, 12, 12, 12, 12), false);
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(jp2,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 8, 4, false)));
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(jp2,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 16, 3, false)));
+
+            byte[] mixed = CreateJpeg2000Codestream(2, 3, 8, 12, 8);
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(mixed,
+                new ImageDecodeOptions(4096, 100, 100, 10000, 1, true, true,
+                    long.MaxValue, long.MaxValue, false, false, long.MaxValue, 16, 4, true)));
+        }
+
+        [Fact]
         public void IdentifyReadsWebpEncodedDepthAndChannels()
         {
             byte[] vp8Payload = new byte[6];
@@ -1386,6 +1476,110 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             stream.Write(typeBytes, 0, typeBytes.Length); stream.WriteByte(0);
             WriteLe32(stream, value.Length);
             stream.Write(value, 0, value.Length);
+        }
+
+        private static byte[] CreateJpeg2000Codestream(int width, int height, params int[] bitDepths)
+        {
+            using (var stream = new MemoryStream())
+            {
+                stream.WriteByte(0xFF); stream.WriteByte(0x4F);
+                stream.WriteByte(0xFF); stream.WriteByte(0x51);
+                WriteBe16(stream, 38 + 3 * bitDepths.Length);
+                WriteBe16(stream, 0);
+                WriteBe32(stream, (uint)width);
+                WriteBe32(stream, (uint)height);
+                WriteBe32(stream, 0);
+                WriteBe32(stream, 0);
+                WriteBe32(stream, (uint)width);
+                WriteBe32(stream, (uint)height);
+                WriteBe32(stream, 0);
+                WriteBe32(stream, 0);
+                WriteBe16(stream, bitDepths.Length);
+                foreach (int bitDepth in bitDepths)
+                {
+                    stream.WriteByte((byte)(bitDepth - 1));
+                    stream.WriteByte(1);
+                    stream.WriteByte(1);
+                }
+                return stream.ToArray();
+            }
+        }
+
+        private static byte[] CreateJp2(byte[] codestream, bool extendedCodestreamBox)
+        {
+            using (var stream = new MemoryStream())
+            {
+                WriteBe32(stream, 12);
+                WriteAscii(stream, "jP  ");
+                stream.WriteByte(0x0D); stream.WriteByte(0x0A); stream.WriteByte(0x87); stream.WriteByte(0x0A);
+
+                WriteBe32(stream, 20);
+                WriteAscii(stream, "ftyp");
+                WriteAscii(stream, "jp2 ");
+                WriteBe32(stream, 0);
+                WriteAscii(stream, "jp2 ");
+
+                WriteBe32(stream, 30);
+                WriteAscii(stream, "jp2h");
+                WriteBe32(stream, 22);
+                WriteAscii(stream, "ihdr");
+                WriteBe32(stream, 1);
+                WriteBe32(stream, 1);
+                WriteBe16(stream, 1);
+                stream.WriteByte(0xFF); stream.WriteByte(7); stream.WriteByte(0); stream.WriteByte(0);
+
+                if (extendedCodestreamBox)
+                {
+                    WriteBe32(stream, 1);
+                    WriteAscii(stream, "jp2c");
+                    WriteBe64(stream, (ulong)codestream.Length + 16);
+                }
+                else
+                {
+                    WriteBe32(stream, (uint)codestream.Length + 8);
+                    WriteAscii(stream, "jp2c");
+                }
+                stream.Write(codestream, 0, codestream.Length);
+                return stream.ToArray();
+            }
+        }
+
+        private static void WriteAscii(Stream stream, string value)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(value);
+            stream.Write(bytes, 0, bytes.Length);
+        }
+
+        private static void WriteBe16(Stream stream, int value)
+        {
+            stream.WriteByte((byte)(value >> 8));
+            stream.WriteByte((byte)value);
+        }
+
+        private static void WriteBe16(byte[] destination, int offset, int value)
+        {
+            destination[offset] = (byte)(value >> 8);
+            destination[offset + 1] = (byte)value;
+        }
+
+        private static void WriteBe32(Stream stream, uint value)
+        {
+            stream.WriteByte((byte)(value >> 24));
+            stream.WriteByte((byte)(value >> 16));
+            stream.WriteByte((byte)(value >> 8));
+            stream.WriteByte((byte)value);
+        }
+
+        private static void WriteBe64(Stream stream, ulong value)
+        {
+            WriteBe32(stream, (uint)(value >> 32));
+            WriteBe32(stream, (uint)value);
+        }
+
+        private static void WriteBe64(byte[] destination, int offset, ulong value)
+        {
+            WriteBe32(destination, offset, (uint)(value >> 32));
+            WriteBe32(destination, offset + 4, (uint)value);
         }
 
         private static int FindOpenExrAttributeValue(byte[] data, string attributeName)

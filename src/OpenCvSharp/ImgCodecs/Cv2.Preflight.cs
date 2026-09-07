@@ -259,6 +259,17 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                     default(MetadataFacts), pixelFacts);
             }
 
+            if (IsJpeg2000Codestream(data) || IsJp2Container(data))
+            {
+                int width;
+                int height;
+                PixelFacts pixelFacts;
+                bool isJp2 = IsJp2Container(data);
+                bool headerKnown = TryReadJpeg2000Facts(data, isJp2, out width, out height, out pixelFacts);
+                return Result(isJp2 ? "jp2" : "j2k", width, height, headerKnown, 1, false, data.Length,
+                    default(MetadataFacts), pixelFacts);
+            }
+
             if (data.Length >= 4 && ((data[0] == (byte)'I' && data[1] == (byte)'I' && data[2] == 42 && data[3] == 0) ||
                 (data[0] == (byte)'M' && data[1] == (byte)'M' && data[2] == 0 && data[3] == 42)))
             {
