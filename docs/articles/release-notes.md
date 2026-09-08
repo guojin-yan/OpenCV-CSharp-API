@@ -23,6 +23,7 @@
 - Until the stable packages are public, repository-only sample package fixtures continue to pin the existing public `5.0.0-preview.1`; normal installation commands remain version-free and resolve the current stable package.
 - The exact support-contract-derived candidate is published to NuGet.org and GitHub Packages, then attached to a verified stable GitHub Release with both registry proofs; schema v2 limits the intended final set to 26 packages after compatibility-only targets are removed from publication.
 - Fedora 44 and Alpine 3.23 are recorded as digest-pinned lifecycle-refresh candidates only. They remain outside the active package matrix and publication set until fresh Full/Mini producer, package, and independent-consumer evidence passes; Fedora 40 and Alpine 3.20 retain historical compatibility-only identities.
+- A candidate-only lifecycle refresh matrix now carries the Fedora 44 and Alpine 3.23 producer inputs, enforces exact Full/Mini profile parity with the active matrix, and is guarded against use by package publication workflows.
 - A 24-part [Tutorial Series](tutorial-series.md) and grouped standalone projects covering image processing, Chinese text, geometry, features, ML, DNN classification/detection/segmentation, document scanning, panorama stitching, motion analysis, tracking, and Android package loading.
 
 - 643 个 public managed type、6,940 个 public/protected member 和 `JYPPX.OpenCvSharp` 根下的 41 个 namespace，全部受兼容性基线约束。
@@ -42,6 +43,7 @@
 - 在稳定版包正式公开前，仓库内部案例的 package fixture 继续固定现有公开的 `5.0.0-preview.1`；普通安装命令不写死版本并解析当前稳定包。
 - 同一份精确的 26 包 candidate 发布到 NuGet.org 和 GitHub Packages，并在两个 registry 验证通过后附加到稳定版 GitHub Release；compatibility-only 目标不进入候选集合。
 - Fedora 44 与 Alpine 3.23 只登记为固定官方 digest 的生命周期刷新候选；在新的 Full/Mini producer、package 与独立 consumer 证据通过前，不进入活动 package matrix 和发布集合。Fedora 40 与 Alpine 3.20 继续保留历史 compatibility-only 身份。
+- 新增 candidate-only 生命周期刷新矩阵，用于承载 Fedora 44 与 Alpine 3.23 的 producer inputs；它强制与活动矩阵的 Full/Mini profile 完全一致，并禁止 package publication workflow 引用。
 - 提供 24 篇[系列教程](tutorial-series.md)和分组独立项目，覆盖图像处理、中文写字、几何、特征、机器学习、DNN 分类/检测/分割、文档扫描、全景拼接、运动分析、跟踪和 Android 包加载。
 
 ## Package Selection / 包选择

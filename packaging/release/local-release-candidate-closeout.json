@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/836af693b7daa79a",
-  "SourceIdentity": "sha256:836af693b7daa79a87d34c40d1e13a4158393e83da0032d049d947d8350efa4e",
+  "CandidateId": "local-closeout/sha256/1e855d0f8f47cc07",
+  "SourceIdentity": "sha256:1e855d0f8f47cc07ecc81b9ce06e8b7614c0b3091ff6d89c6fad3c171f289e46",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1673,
-    "Sha256": "836af693b7daa79a87d34c40d1e13a4158393e83da0032d049d947d8350efa4e",
+    "FileCount": 1675,
+    "Sha256": "1e855d0f8f47cc07ecc81b9ce06e8b7614c0b3091ff6d89c6fad3c171f289e46",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -15,6 +15,15 @@
     "RidCount": 17,
     "ProfileCount": 2,
     "EntryCount": 34
+  },
+  "LifecycleRefreshMatrix": {
+    "Path": "packaging/runtime/runtime-lifecycle-refresh-matrix.json",
+    "Sha256": "3a6a448b558be7dad474eca7dc764202889f0910c0e6194faa2cdf051864f0ae",
+    "Status": "candidate-only",
+    "RidCount": 2,
+    "ProfileCount": 2,
+    "TargetCount": 4.0,
+    "PublicationAllowed": false
   },
   "SupportContract": {
     "Path": "packaging/runtime/runtime-support-contract.json",
@@ -994,8 +1003,8 @@
     },
     {
       "Path": "docs/articles/support-lifecycle-policy.md",
-      "Sha256": "2eb63ff7cb874c1c8b3aaf381cd2b1dbe11cc4805fde3276f14864d1a6981d27",
-      "Length": 6163
+      "Sha256": "89c752c03cbc61f585c15e6bb3d365a7812360f526994b04aab15df9de7d389d",
+      "Length": 6478
     },
     {
       "Path": "docs/articles/tracking-guide.md",
@@ -1284,8 +1293,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "8224ab8e70511930d07522472fbcfb395bdc5f9e0e93c437429ab34ed147c716",
-      "Length": 61514
+      "Sha256": "874ac41c8ad5f3becc82f86858e28077fd4d30a7c970fd3a000a8963f248b9c2",
+      "Length": 62445
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1341,6 +1350,11 @@
       "Path": "scripts/Test-ImgProcUpstreamMap.ps1",
       "Sha256": "ce1e1fd97cd3df883cd7feb120d1254d9f67f9b8f95e0968552af139a54aff07",
       "Length": 1256
+    },
+    {
+      "Path": "scripts/Test-LifecycleRefreshRuntimeMatrix.ps1",
+      "Sha256": "aad189b676e36844830793ae5e1fe8ce0f6d028efc2096a54b319443ced686ad",
+      "Length": 12537
     },
     {
       "Path": "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
@@ -1399,8 +1413,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "4e9e999d819b9630a67dc3ad29f4738cb6bbdc5ce15f1bcd078c2e300d6bcfdc",
-      "Length": 59028
+      "Sha256": "58db28bb2e102af1aebecf02482f6714747c3b0334beb42ecc06fb4640f7d550",
+      "Length": 60047
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1409,7 +1423,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "22f847fc1038725bd94aed4295dace65e5bf83c492f9b83496adf054b00720c3",
+      "Sha256": "7902220fe8bdad631b3f511e8ecb178fded8b3deb1e92b77a2d5b73a4bcb795e",
       "Length": 45784
     },
     {
@@ -1910,7 +1924,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 78,
+    "InvariantGuardCount": 79,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

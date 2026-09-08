@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "description": "Candidate-only runtime validation overlay for current-lifecycle Linux distributions. It is not an active package, support, RID-graph, or publication matrix.",
+  "status": "candidate-only",
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "supportContract": "packaging/runtime/runtime-support-contract.json",
+  "publicationAllowed": false,
+  "rids": [
+    {
+      "rid": "alpine.3.23-x64",
+      "platformFamily": "linux",
+      "distro": "alpine",
+      "distroVersion": "3.23",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "alpine.3.23-x64",
+      "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "alpine:3.23@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
+      "notes": "Alpine 3.23 x64/musl lifecycle-refresh candidate. Validation output is temporary evidence and cannot be published until promotion closes both profile-specific producer/package/consumer chains."
+    },
+    {
+      "rid": "fedora.44-x64",
+      "platformFamily": "linux",
+      "distro": "fedora",
+      "distroVersion": "44",
+      "runner": "ubuntu-24.04",
+      "opencvRid": "fedora.44-x64",
+      "nativeExtension": ".so",
+      "producer": {
+        "kind": "container",
+        "profiles": [ "full", "mini" ],
+        "containerImage": "fedora:44@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+        "openCvExtraCMakeArgs": {
+          "full": "",
+          "mini": ""
+        }
+      },
+      "notes": "Fedora 44 x64/glibc lifecycle-refresh candidate. Validation output is temporary evidence and cannot be published until promotion closes both profile-specific producer/package/consumer chains."
+    }
+  ],
+  "profiles": [
+    {
+      "name": "full",
+      "packageIdSuffix": "",
+      "buildList": "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud",
+      "modules": [
+        "core",
+        "imgcodecs",
+        "imgproc",
+        "videoio",
+        "flann",
+        "geometry",
+        "calib",
+        "stereo",
+        "dnn",
+        "ml",
+        "objdetect",
+        "photo",
+        "features",
+        "video",
+        "highgui",
+        "stitching",
+        "ptcloud"
+      ],
+      "optionalModules": [
+        "xfeatures2d",
+        "xobjdetect",
+        "quality",
+        "xphoto",
+        "img_hash",
+        "ximgproc",
+        "optflow",
+        "bgsegm",
+        "tracking",
+        "face",
+        "saliency",
+        "plot",
+        "shape",
+        "line_descriptor",
+        "phase_unwrapping",
+        "structured_light",
+        "intensity_transform",
+        "fuzzy",
+        "hfs",
+        "reg",
+        "surface_matching",
+        "rapid",
+        "alphamat",
+        "bioinspired",
+        "xstereo"
+      ]
+    },
+    {
+      "name": "mini",
+      "packageIdSuffix": ".mini",
+      "buildList": "core,imgproc,imgcodecs,videoio,geometry,flann",
+      "modules": [
+        "core",
+        "imgproc",
+        "imgcodecs",
+        "videoio",
+        "geometry",
+        "flann"
+      ],
+      "optionalModules": []
+    }
+  ]
+}

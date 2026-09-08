@@ -112,6 +112,8 @@ function Get-Record {
     $support = Get-Content -LiteralPath (Join-Path $repo "packaging/runtime/runtime-support-contract.json") -Raw | ConvertFrom-Json
     $matrixPath = Join-Path $repo "packaging/runtime/runtime-package-matrix.json"
     $matrix = Get-Content -LiteralPath $matrixPath -Raw | ConvertFrom-Json
+    $lifecycleRefreshMatrixPath = Join-Path $repo "packaging/runtime/runtime-lifecycle-refresh-matrix.json"
+    $lifecycleRefreshMatrix = Get-Content -LiteralPath $lifecycleRefreshMatrixPath -Raw | ConvertFrom-Json
     $summary = Get-Content -LiteralPath (Join-Path $repo "compatibility/managed-public-api-summary.json") -Raw | ConvertFrom-Json
     $gapInventory = Get-Content -LiteralPath (Join-Path $repo "compatibility/api-gap-inventory.json") -Raw | ConvertFrom-Json
     $bindingSummary = Get-Content -LiteralPath (Join-Path $repo "compatibility/native-managed-binding-summary.json") -Raw | ConvertFrom-Json
@@ -304,6 +306,7 @@ function Get-Record {
         "scripts/Test-FeaturesUpstreamMap.ps1",
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
+        "scripts/Test-LifecycleRefreshRuntimeMatrix.ps1",
         "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
         "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
         "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
@@ -451,6 +454,15 @@ function Get-Record {
             RidCount = @($matrix.rids).Count
             ProfileCount = @($matrix.profiles).Count
             EntryCount = @($matrix.rids).Count * @($matrix.profiles).Count
+        }
+        LifecycleRefreshMatrix = [ordered]@{
+            Path = "packaging/runtime/runtime-lifecycle-refresh-matrix.json"
+            Sha256 = (Get-FileHash -LiteralPath $lifecycleRefreshMatrixPath -Algorithm SHA256).Hash.ToLowerInvariant()
+            Status = [string]$lifecycleRefreshMatrix.status
+            RidCount = @($lifecycleRefreshMatrix.rids).Count
+            ProfileCount = @($lifecycleRefreshMatrix.profiles).Count
+            TargetCount = @($lifecycleRefreshMatrix.rids | ForEach-Object { @($_.producer.profiles).Count } | Measure-Object -Sum).Sum
+            PublicationAllowed = [bool]$lifecycleRefreshMatrix.publicationAllowed
         }
         SupportContract = [ordered]@{
             Path = "packaging/runtime/runtime-support-contract.json"
@@ -846,7 +858,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 78
+            InvariantGuardCount = 79
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

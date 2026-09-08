@@ -240,6 +240,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-HighGuiUpstreamMap.ps1",
         "scripts/Test-ImgCodecsUpstreamMap.ps1",
         "scripts/Test-ImgProcUpstreamMap.ps1",
+        "scripts/Test-LifecycleRefreshRuntimeMatrix.ps1",
         "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
         "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
         "scripts/Test-ManagedPackageStandaloneLocalConsumerCompile.ps1",
@@ -366,11 +367,11 @@ function Test-Record {
         [Parameter(Mandatory)][string]$ExpectedSourceHash
     )
 
-    $required = @("SchemaVersion","RecordKind","CandidateId","SourceIdentity","OpenCvRevision","SourceSet","PackageMatrix","SupportContract","ApiAbiBaseline","EvidenceReferences","LocalValidation","Signing","Sbom","Approval","PublicFeed","Rollback","ReleaseApproval","ExternalBlockers","PrivateKeyMaterialPresent","SecretMaterialPresent","Deterministic")
+    $required = @("SchemaVersion","RecordKind","CandidateId","SourceIdentity","OpenCvRevision","SourceSet","PackageMatrix","LifecycleRefreshMatrix","SupportContract","ApiAbiBaseline","EvidenceReferences","LocalValidation","Signing","Sbom","Approval","PublicFeed","Rollback","ReleaseApproval","ExternalBlockers","PrivateKeyMaterialPresent","SecretMaterialPresent","Deterministic")
     foreach ($field in $required) {
         Assert-True -List $List -Condition ($null -ne $Record.PSObject.Properties[$field]) -Issue "Final closeout record is missing required field" -Text $field
     }
-    if ($null -eq $Record.SourceSet -or $null -eq $Record.SupportContract -or $null -eq $Record.ApiAbiBaseline -or $null -eq $Record.LocalValidation) { return }
+    if ($null -eq $Record.SourceSet -or $null -eq $Record.LifecycleRefreshMatrix -or $null -eq $Record.SupportContract -or $null -eq $Record.ApiAbiBaseline -or $null -eq $Record.LocalValidation) { return }
 
     Assert-True -List $List -Condition ($Record.SchemaVersion -eq 2 -and $Record.RecordKind -eq "local-release-candidate-closeout" -and $Record.OpenCvRevision -eq "5.0.0") -Issue "Final closeout record identity drifted"
     $expectedCandidateId = "local-closeout/sha256/$(([string]$Record.SourceSet.Sha256).Substring(0, 16))"
@@ -380,6 +381,17 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.SourceSet.Sha256 -eq $ExpectedSourceHash) -Issue "Final closeout source-set digest drifted" -Text "expected=$ExpectedSourceHash actual=$($Record.SourceSet.Sha256)"
 
     Assert-True -List $List -Condition ([int]$Record.PackageMatrix.RidCount -gt 0 -and [int]$Record.PackageMatrix.ProfileCount -eq 2 -and [int]$Record.PackageMatrix.EntryCount -eq 34 -and $Record.PackageMatrix.Sha256 -match "^[0-9a-f]{64}$") -Issue "Final closeout package matrix evidence drifted"
+    $lifecycleRefreshMatrixPath = Join-Path $repo 'packaging/runtime/runtime-lifecycle-refresh-matrix.json'
+    $lifecycleRefreshMatrixSha256 = (Get-FileHash -LiteralPath $lifecycleRefreshMatrixPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    Assert-True -List $List -Condition (
+        $Record.LifecycleRefreshMatrix.Path -eq 'packaging/runtime/runtime-lifecycle-refresh-matrix.json' -and
+        $Record.LifecycleRefreshMatrix.Sha256 -eq $lifecycleRefreshMatrixSha256 -and
+        $Record.LifecycleRefreshMatrix.Status -eq 'candidate-only' -and
+        [int]$Record.LifecycleRefreshMatrix.RidCount -eq 2 -and
+        [int]$Record.LifecycleRefreshMatrix.ProfileCount -eq 2 -and
+        [int]$Record.LifecycleRefreshMatrix.TargetCount -eq 4 -and
+        -not [bool]$Record.LifecycleRefreshMatrix.PublicationAllowed
+    ) -Issue 'Final closeout lifecycle refresh matrix evidence drifted'
     Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 25 -and $Record.SupportContract.CompatibilityOnlyCount -eq 4 -and $Record.SupportContract.PendingSupportCount -eq 4 -and $Record.SupportContract.ExcludedSupportCount -eq 1 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.LifecycleRefreshCandidateCount -eq 2 -and $Record.SupportContract.WinX86FullStatus -eq "real-supported" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
     $lifecycleCandidates = @($Record.SupportContract.LifecycleRefreshCandidates)
     $expectedLifecycleCandidateDigests = @{
@@ -477,7 +489,7 @@ function Test-Record {
 
     $expectedChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
     $sdkPolicyValid = ($Record.LocalValidation.SdkPolicy -eq ".NET 10 (any installed feature band)") -or ($Record.LocalValidation.ExactSdk -match '^10\.0\.\d+$')
-    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 78 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
+    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 79 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
     Assert-True -List $List -Condition ($Record.Signing.Status -eq "repository-signing-pending" -and $Record.Signing.Strategy -eq "nuget.org-repository-signing" -and $Record.Signing.NormalizedInputRequired -and -not [bool]$Record.Signing.AuthorCertificateRequired -and -not [bool]$Record.Signing.PrivateKeyRequired -and -not [bool]$Record.Signing.PrivateKeyMaterialPresent -and $Record.Signing.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.Signing.ExpectedSignatureType -eq "Repository" -and $Record.Signing.ExpectedOwner -eq "GuojinYan" -and $Record.Signing.VerificationScript -eq "scripts/Test-NuGetRepositorySignedPackage.ps1" -and $Record.Signing.Verification -eq "post-publication-required") -Issue "Final closeout repository-signing state drifted"
     Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3" -and $Record.Sbom.Generator -eq "scripts/New-ReleasePackageSbom.ps1" -and $Record.Sbom.Guard -eq "scripts/Test-ReleasePackageSbom.ps1" -and [bool]$Record.Sbom.Deterministic -and -not [bool]$Record.Sbom.FinalCandidateDocumentGenerated -and $Record.Sbom.Verification -eq "generator-verified-final-candidate-not-generated") -Issue "Final closeout SBOM state must retain a verified generator without claiming final-candidate output"
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"
