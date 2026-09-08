@@ -3,6 +3,40 @@
   "schemaVersion": 2,
   "packageMatrix": "packaging/runtime/runtime-package-matrix.json",
   "androidRuntimeEvidence": "packaging/runtime/android-runtime-evidence.json",
+  "lifecycleRefreshCandidates": [
+    {
+      "rid": "alpine.3.23-x64",
+      "distro": "alpine",
+      "distroVersion": "3.23",
+      "containerImage": "alpine:3.23@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40",
+      "containerRepoDigest": "alpine@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40",
+      "architecture": "x86_64",
+      "status": "lifecycle-refresh-pending",
+      "observedAtUtc": "2026-09-08T04:38:21Z",
+      "reason": "Alpine 3.23 is in the current .NET supported-OS table and has an official digest-pinned image, but this repository has no fresh OpenCV producer, package, and independent consumer evidence for the new RID yet.",
+      "sources": {
+        "dotnetSupportedOs": "https://raw.githubusercontent.com/dotnet/core/20e72eb1b769d71b4dd208419d66d8a0ef3b1961/release-notes/10.0/supported-os.md",
+        "dotnetDockerSdk": "https://raw.githubusercontent.com/dotnet/dotnet-docker/a84faedde9e3070d05dc992569ca1b466e24300a/README.sdk.md",
+        "dockerHubManifest": "https://hub.docker.com/v2/repositories/library/alpine/tags/3.23"
+      }
+    },
+    {
+      "rid": "fedora.44-x64",
+      "distro": "fedora",
+      "distroVersion": "44",
+      "containerImage": "fedora:44@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+      "containerRepoDigest": "fedora@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+      "architecture": "x86_64",
+      "status": "lifecycle-refresh-pending",
+      "observedAtUtc": "2026-09-08T04:38:21Z",
+      "reason": "Fedora 44 is in the current .NET supported-OS table and has an official digest-pinned image, but this repository has no fresh OpenCV producer, package, and independent consumer evidence for the new RID yet.",
+      "sources": {
+        "dotnetSupportedOs": "https://raw.githubusercontent.com/dotnet/core/20e72eb1b769d71b4dd208419d66d8a0ef3b1961/release-notes/10.0/supported-os.md",
+        "dotnetDockerSdk": "https://raw.githubusercontent.com/dotnet/dotnet-docker/a84faedde9e3070d05dc992569ca1b466e24300a/README.sdk.md",
+        "dockerHubManifest": "https://hub.docker.com/v2/repositories/library/fedora/tags/44"
+      }
+    }
+  ],
   "packageSurface": [
     "alpine.3.20-x64/full",
     "alpine.3.20-x64/mini",
@@ -169,7 +203,7 @@
   ],
   "policy": {
     "packageSurfaceIsSupport": false,
-    "releaseCandidate": "real-supported only; compatibility-only, pending, and excluded targets are not published",
+    "releaseCandidate": "real-supported only; compatibility-only, pending, excluded, and lifecycle-refresh candidate targets are not published",
     "compatibilityOnlyPublication": "excluded from the current release candidate; historical package identity and reproducible evidence are retained",
     "syntheticRuntimeInputs": "package-shape-only; never real support",
     "publication": "blocked until real support, provenance, signing, SBOM, approval, and rollback gates pass"

@@ -63,16 +63,19 @@ try {
     $c = $contract.Value
     $m = $matrix.Value
     $a = $androidEvidence.Value
+    $lifecycleCandidates = @($c.lifecycleRefreshCandidates)
 
     $contractSchemaPath = Join-Path $repo $contractSchemaRelativePath
     if (-not (Test-Path -LiteralPath $contractSchemaPath -PathType Leaf)) { throw "Required support contract schema was not found: $contractSchemaRelativePath" }
     Assert-True -Condition (Test-Json -LiteralPath $contract.Path -SchemaFile $contractSchemaPath -ErrorAction Stop) -Path $contract.RelativePath -Issue 'Support contract must validate against its JSON Schema'
-    foreach ($fixtureName in @('schema-v1', 'unknown-root-field', 'compatibility-status')) {
+    foreach ($fixtureName in @('schema-v1', 'unknown-root-field', 'compatibility-status', 'lifecycle-candidate-status', 'lifecycle-candidate-extra-field')) {
         $fixture = ([IO.File]::ReadAllText($contract.Path) | ConvertFrom-Json)
         switch ($fixtureName) {
             'schema-v1' { $fixture.schemaVersion = 1 }
             'unknown-root-field' { $fixture | Add-Member -NotePropertyName legacyRealSupport -NotePropertyValue @() }
             'compatibility-status' { $fixture.compatibilityOnly[0].status = 'real-supported' }
+            'lifecycle-candidate-status' { $fixture.lifecycleRefreshCandidates[0].status = 'real-supported' }
+            'lifecycle-candidate-extra-field' { $fixture.lifecycleRefreshCandidates[0] | Add-Member -NotePropertyName promoted -NotePropertyValue $true }
         }
         $fixtureJson = $fixture | ConvertTo-Json -Depth 20
         $schemaAccepted = Test-Json -Json $fixtureJson -SchemaFile $contractSchemaPath -ErrorAction SilentlyContinue
@@ -84,6 +87,7 @@ try {
         'schemaVersion',
         'packageMatrix',
         'androidRuntimeEvidence',
+        'lifecycleRefreshCandidates',
         'packageSurface',
         'hostedPromotionEvidence',
         'realSupport',
@@ -104,8 +108,39 @@ try {
     Assert-True -Condition ([int]$c.schemaVersion -eq 2) -Path $contract.RelativePath -Issue 'Support contract schema version must be 2'
     Assert-True -Condition ([string]$c.packageMatrix -eq $matrixRelativePath) -Path $contract.RelativePath -Issue 'Support contract must identify the package matrix'
     Assert-True -Condition ([string]$c.androidRuntimeEvidence -eq $androidEvidenceRelativePath) -Path $contract.RelativePath -Issue 'Support contract must identify the Android runtime evidence record'
+    Assert-True -Condition ($lifecycleCandidates.Count -eq 2) -Path $contract.RelativePath -Issue 'Support contract must retain exactly two lifecycle refresh candidates'
+    $expectedLifecycleCandidates = @(
+        [pscustomobject]@{
+            Rid = 'alpine.3.23-x64'
+            Distro = 'alpine'
+            DistroVersion = '3.23'
+            ContainerImage = 'alpine:3.23@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40'
+            ContainerRepoDigest = 'alpine@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40'
+        },
+        [pscustomobject]@{
+            Rid = 'fedora.44-x64'
+            Distro = 'fedora'
+            DistroVersion = '44'
+            ContainerImage = 'fedora:44@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80'
+            ContainerRepoDigest = 'fedora@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80'
+        }
+    )
+    $expectedDotnetSupportedOs = 'https://raw.githubusercontent.com/dotnet/core/20e72eb1b769d71b4dd208419d66d8a0ef3b1961/release-notes/10.0/supported-os.md'
+    $expectedDotnetDockerSdk = 'https://raw.githubusercontent.com/dotnet/dotnet-docker/a84faedde9e3070d05dc992569ca1b466e24300a/README.sdk.md'
+    foreach ($expected in $expectedLifecycleCandidates) {
+        $matches = @($lifecycleCandidates | Where-Object { [string]$_.rid -ceq $expected.Rid })
+        Assert-True -Condition ($matches.Count -eq 1) -Path $contract.RelativePath -Issue 'Lifecycle refresh candidate must appear exactly once' -Text $expected.Rid
+        if ($matches.Count -eq 1) {
+            $entry = $matches[0]
+            Assert-ExactPropertySet -Value $entry -Path $contract.RelativePath -Context "Lifecycle refresh candidate $($expected.Rid)" -Expected @('rid','distro','distroVersion','containerImage','containerRepoDigest','architecture','status','observedAtUtc','reason','sources')
+            Assert-ExactPropertySet -Value $entry.sources -Path $contract.RelativePath -Context "Lifecycle refresh candidate sources $($expected.Rid)" -Expected @('dotnetSupportedOs','dotnetDockerSdk','dockerHubManifest')
+            Assert-True -Condition ([string]$entry.distro -ceq $expected.Distro -and [string]$entry.distroVersion -ceq $expected.DistroVersion -and [string]$entry.containerImage -ceq $expected.ContainerImage -and [string]$entry.containerRepoDigest -ceq $expected.ContainerRepoDigest -and [string]$entry.architecture -ceq 'x86_64' -and [string]$entry.status -ceq 'lifecycle-refresh-pending' -and -not [string]::IsNullOrWhiteSpace([string]$entry.reason) -and [datetime]$entry.observedAtUtc -le [datetime]::UtcNow) -Path $contract.RelativePath -Issue 'Lifecycle refresh candidate facts or pending status drifted' -Text $expected.Rid
+            $expectedManifest = if ($expected.Distro -eq 'alpine') { 'https://hub.docker.com/v2/repositories/library/alpine/tags/3.23' } else { 'https://hub.docker.com/v2/repositories/library/fedora/tags/44' }
+            Assert-True -Condition ([string]$entry.sources.dotnetSupportedOs -ceq $expectedDotnetSupportedOs -and [string]$entry.sources.dotnetDockerSdk -ceq $expectedDotnetDockerSdk -and [string]$entry.sources.dockerHubManifest -ceq $expectedManifest) -Path $contract.RelativePath -Issue 'Lifecycle refresh candidate source pin drifted' -Text $expected.Rid
+        }
+    }
     Assert-True -Condition ($c.policy.packageSurfaceIsSupport -eq $false) -Path $contract.RelativePath -Issue 'Package surface must not be treated as real support'
-    Assert-True -Condition ([string]$c.policy.releaseCandidate -eq 'real-supported only; compatibility-only, pending, and excluded targets are not published') -Path $contract.RelativePath -Issue 'Release candidate classification policy drifted'
+    Assert-True -Condition ([string]$c.policy.releaseCandidate -eq 'real-supported only; compatibility-only, pending, excluded, and lifecycle-refresh candidate targets are not published') -Path $contract.RelativePath -Issue 'Release candidate classification policy drifted'
     Assert-True -Condition ([string]$c.policy.compatibilityOnlyPublication -eq 'excluded from the current release candidate; historical package identity and reproducible evidence are retained') -Path $contract.RelativePath -Issue 'Compatibility-only publication policy drifted'
     Assert-True -Condition ([string]$c.policy.syntheticRuntimeInputs -eq 'package-shape-only; never real support') -Path $contract.RelativePath -Issue 'Synthetic runtime policy drifted'
     Assert-True -Condition ([string]$c.policy.publication -match 'blocked until') -Path $contract.RelativePath -Issue 'Support contract must keep publication blocked until all release gates pass'
@@ -119,6 +154,7 @@ try {
     $classifiedTargets = @($realTargets + $compatibilityTargets + $pendingTargets + $excludedTargets | Sort-Object)
 
     Assert-ExactSet -Path $contract.RelativePath -Issue 'Schema v2 package surface must match every package matrix RID/profile pair' -Expected $matrixTargets -Actual $packageSurfaceTargets
+    Assert-True -Condition (@($matrixTargets | Where-Object { $_ -like 'alpine.3.23-x64/*' -or $_ -like 'fedora.44-x64/*' }).Count -eq 0 -and @($packageSurfaceTargets | Where-Object { $_ -like 'alpine.3.23-x64/*' -or $_ -like 'fedora.44-x64/*' }).Count -eq 0) -Path $contract.RelativePath -Issue 'Lifecycle refresh candidates must remain outside the active package matrix and package surface'
     Assert-ExactSet -Path $contract.RelativePath -Issue 'Support contract must partition every package-surface target exactly once' -Expected $packageSurfaceTargets -Actual $classifiedTargets
     Assert-True -Condition (@($realTargets).Count -eq 25) -Path $contract.RelativePath -Issue 'Real support target count must be 25 after lifecycle migration'
     $expectedCompatibilityTargets = @(
@@ -232,7 +268,8 @@ try {
             'Get-Content -LiteralPath ./packaging/runtime/runtime-support-contract.json -Raw | ConvertFrom-Json',
             '$supportedTargets = @($supportContract.realSupport) + @($supportContract.compatibilityOnly | ForEach-Object { [string]$_.target }) + @($supportContract.pending | ForEach-Object { [string]$_.target })',
             '$selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"',
-            'if ($supportedTargets -notcontains $selectedTarget)')) {
+            'if ($supportedTargets -notcontains $selectedTarget)',
+            'Lifecycle-refresh candidates are catalogued but not active until producer/package/consumer evidence is promoted.')) {
         Assert-True -Condition $runtimeInputText.Contains($selectionToken, [StringComparison]::Ordinal) -Path '.github/workflows/runtime-input.yml' -Issue 'runtime-input.yml must select supported targets from the structured release support contract' -Text $selectionToken
     }
 
@@ -263,7 +300,7 @@ try {
     Assert-True -Condition ($guideText.Contains('runtime-support-contract.json')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must link the support contract'
     Assert-True -Condition ($guideText.Contains('Windows x86 Full is real-supported after verified hosted WoW64 evidence') -and $guideText.Contains('Android x64/x86 Full and Mini are real-supported after authoritative single-loader emulator loading') -and $guideText.Contains('Android ARM/ARM64 remain android-evidence-pending')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must preserve x86 and Android support wording'
 
-    Write-Host "RELEASE_SUPPORT_CONTRACT_OK schema=2 package_surface=$($packageSurfaceTargets.Count) real=$($realTargets.Count) compatibility_only=$($compatibilityTargets.Count) pending=$($pendingTargets.Count) excluded=$($excludedTargets.Count) outside_matrix=macOS package_surface_support=false"
+    Write-Host "RELEASE_SUPPORT_CONTRACT_OK schema=2 package_surface=$($packageSurfaceTargets.Count) real=$($realTargets.Count) compatibility_only=$($compatibilityTargets.Count) pending=$($pendingTargets.Count) excluded=$($excludedTargets.Count) lifecycle_refresh_candidates=$($lifecycleCandidates.Count) outside_matrix=macOS package_surface_support=false"
 }
 catch {
     Add-Violation -Path $contractRelativePath -Issue 'Release support contract execution failed' -Text $_.Exception.Message
@@ -276,5 +313,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host 'Release support contract passed.'
-    Write-Host 'Package surface is explicitly separated from real support; Fedora 40 and Alpine 3.20 are compatibility-only, Windows x86 Full has verified hosted WoW64 evidence, Android x64/x86 Full/Mini have authoritative single-loader emulator evidence, Android ARM/ARM64 remain device-evidence-pending, Windows x86 mini remains excluded, and macOS remains outside the matrix.'
-    Write-Host 'Schema migration fixtures rejected: schema v1, unknown root field, and compatibility status promotion.'
+    Write-Host 'Package surface is explicitly separated from real support; Fedora 40 and Alpine 3.20 are compatibility-only, Fedora 44 and Alpine 3.23 are lifecycle-refresh candidates outside the active matrix, Windows x86 Full has verified hosted WoW64 evidence, Android x64/x86 Full/Mini have authoritative single-loader emulator evidence, Android ARM/ARM64 remain device-evidence-pending, Windows x86 mini remains excluded, and macOS remains outside the matrix.'
+    Write-Host 'Schema migration fixtures rejected: schema v1, unknown root field, compatibility status promotion, lifecycle candidate status promotion, and lifecycle candidate field expansion.'

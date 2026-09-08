@@ -9,6 +9,7 @@
     "schemaVersion",
     "packageMatrix",
     "androidRuntimeEvidence",
+    "lifecycleRefreshCandidates",
     "packageSurface",
     "hostedPromotionEvidence",
     "realSupport",
@@ -30,6 +31,14 @@
     },
     "androidRuntimeEvidence": {
       "const": "packaging/runtime/android-runtime-evidence.json"
+    },
+    "lifecycleRefreshCandidates": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/lifecycleRefreshCandidate"
+      }
     },
     "packageSurface": {
       "$ref": "#/definitions/targetArray"
@@ -151,7 +160,7 @@
           "const": false
         },
         "releaseCandidate": {
-          "const": "real-supported only; compatibility-only, pending, and excluded targets are not published"
+          "const": "real-supported only; compatibility-only, pending, excluded, and lifecycle-refresh candidate targets are not published"
         },
         "compatibilityOnlyPublication": {
           "const": "excluded from the current release candidate; historical package identity and reproducible evidence are retained"
@@ -166,6 +175,67 @@
     }
   },
   "definitions": {
+    "lifecycleRefreshCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rid",
+        "distro",
+        "distroVersion",
+        "containerImage",
+        "containerRepoDigest",
+        "architecture",
+        "status",
+        "observedAtUtc",
+        "reason",
+        "sources"
+      ],
+      "properties": {
+        "rid": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9.-]+-x64$"
+        },
+        "distro": {
+          "type": "string",
+          "enum": [ "alpine", "fedora" ]
+        },
+        "distroVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?$"
+        },
+        "containerImage": {
+          "type": "string",
+          "pattern": "^[a-z0-9./-]+:[0-9.]+@sha256:[0-9a-f]{64}$"
+        },
+        "containerRepoDigest": {
+          "type": "string",
+          "pattern": "^[a-z0-9./-]+@sha256:[0-9a-f]{64}$"
+        },
+        "architecture": {
+          "const": "x86_64"
+        },
+        "status": {
+          "const": "lifecycle-refresh-pending"
+        },
+        "observedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [ "dotnetSupportedOs", "dotnetDockerSdk", "dockerHubManifest" ],
+          "properties": {
+            "dotnetSupportedOs": { "format": "uri", "type": "string" },
+            "dotnetDockerSdk": { "format": "uri", "type": "string" },
+            "dockerHubManifest": { "format": "uri", "type": "string" }
+          }
+        }
+      }
+    },
     "target": {
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9.-]*/(full|mini)$"

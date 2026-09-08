@@ -11,9 +11,16 @@ This document is the authoritative support classification for runtime packages. 
 | `compatibility-only` | 4 | Fedora 40 and Alpine 3.20 Full/Mini retain exact reproducible historical evidence for existing users but are excluded from the current release candidate. |
 | `android-evidence-pending` | 4 | Android ARM/ARM64 still require ABI-matched physical-device loading evidence. |
 | `excluded` | 1 | `win-x86/mini` is not production support. |
+| lifecycle refresh candidate | 2 RIDs | Fedora 44 and Alpine 3.23 are current-lifecycle validation targets, not package-surface or support entries. |
 | outside matrix | 1 | macOS is intentionally not declared. |
 
 Schema v2 records all 34 package-surface entries independently from their support classification. The 25 real-supported entries comprise eleven full and ten mini desktop/server targets plus Android x64/x86 Full and Mini. Fedora 40 and Alpine 3.20 Full/Mini are the four explicit compatibility-only entries: their historical userspace, pinned image identity, lifecycle state, and exact native/package evidence remain reproducible, but they are not included in the current release candidate. An ended distro is never silently represented as a current-lifecycle promise.
+
+## Lifecycle Refresh Candidates
+
+The support contract catalogs `fedora.44-x64` and `alpine.3.23-x64` as `lifecycle-refresh-pending`. The .NET 10 supported-OS table includes Fedora 44 and Alpine 3.23, and the official container manifests are pinned as `fedora:44@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80` and `alpine:3.23@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40`. The sources are commit-pinned in `runtime-support-contract.json` so a later lifecycle review cannot silently change the basis of this decision.
+
+These RIDs are deliberately absent from `runtime-package-matrix.json`, the custom RID graph, workflow selection, publication manifests, and package documentation. Each Full and Mini profile must complete a fresh native producer, same-run package, independent consumer, loader/dependency audit, and profile-specific smoke before the old Fedora 40 or Alpine 3.20 package identity can be superseded. Until then, the old targets remain compatibility-only and the new targets are not published packages.
 
 ## Promotion Evidence
 

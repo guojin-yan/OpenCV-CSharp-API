@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/0a130c76106205db",
-  "SourceIdentity": "sha256:0a130c76106205db68d137b442aeb87ed502165802d655133a5e06def02f28f5",
+  "CandidateId": "local-closeout/sha256/836af693b7daa79a",
+  "SourceIdentity": "sha256:836af693b7daa79a87d34c40d1e13a4158393e83da0032d049d947d8350efa4e",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
     "FileCount": 1673,
-    "Sha256": "0a130c76106205db68d137b442aeb87ed502165802d655133a5e06def02f28f5",
+    "Sha256": "836af693b7daa79a87d34c40d1e13a4158393e83da0032d049d947d8350efa4e",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -18,13 +18,48 @@
   },
   "SupportContract": {
     "Path": "packaging/runtime/runtime-support-contract.json",
-    "Sha256": "4ff1fe210ce8ec20e3d568ef9d70fb151dac0d13a48d378631f6d5109cf37b6b",
+    "Sha256": "3973e2a4d85580eec5ff3a540d0eafdb7a802c4f2e10058400d2b68db97d0726",
     "MatrixEntryCount": 34,
     "RealSupportCount": 25,
     "CompatibilityOnlyCount": 4,
     "PendingSupportCount": 4,
     "ExcludedSupportCount": 1,
     "OutsideMatrixCount": 1,
+    "LifecycleRefreshCandidateCount": 2,
+    "LifecycleRefreshCandidates": [
+      {
+        "rid": "alpine.3.23-x64",
+        "distro": "alpine",
+        "distroVersion": "3.23",
+        "containerImage": "alpine:3.23@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40",
+        "containerRepoDigest": "alpine@sha256:fd791d74b68913cbb027c6546007b3f0d3bc45125f797758156952bc2d6daf40",
+        "architecture": "x86_64",
+        "status": "lifecycle-refresh-pending",
+        "observedAtUtc": "2026-09-08T04:38:21Z",
+        "reason": "Alpine 3.23 is in the current .NET supported-OS table and has an official digest-pinned image, but this repository has no fresh OpenCV producer, package, and independent consumer evidence for the new RID yet.",
+        "sources": {
+          "dotnetSupportedOs": "https://raw.githubusercontent.com/dotnet/core/20e72eb1b769d71b4dd208419d66d8a0ef3b1961/release-notes/10.0/supported-os.md",
+          "dotnetDockerSdk": "https://raw.githubusercontent.com/dotnet/dotnet-docker/a84faedde9e3070d05dc992569ca1b466e24300a/README.sdk.md",
+          "dockerHubManifest": "https://hub.docker.com/v2/repositories/library/alpine/tags/3.23"
+        }
+      },
+      {
+        "rid": "fedora.44-x64",
+        "distro": "fedora",
+        "distroVersion": "44",
+        "containerImage": "fedora:44@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+        "containerRepoDigest": "fedora@sha256:43b29f65a41eb9c35e1cd5323e3bdf3b655c2357a9f4f1ff2f9c2798e5045d80",
+        "architecture": "x86_64",
+        "status": "lifecycle-refresh-pending",
+        "observedAtUtc": "2026-09-08T04:38:21Z",
+        "reason": "Fedora 44 is in the current .NET supported-OS table and has an official digest-pinned image, but this repository has no fresh OpenCV producer, package, and independent consumer evidence for the new RID yet.",
+        "sources": {
+          "dotnetSupportedOs": "https://raw.githubusercontent.com/dotnet/core/20e72eb1b769d71b4dd208419d66d8a0ef3b1961/release-notes/10.0/supported-os.md",
+          "dotnetDockerSdk": "https://raw.githubusercontent.com/dotnet/dotnet-docker/a84faedde9e3070d05dc992569ca1b466e24300a/README.sdk.md",
+          "dockerHubManifest": "https://hub.docker.com/v2/repositories/library/fedora/tags/44"
+        }
+      }
+    ],
     "WinX86FullStatus": "real-supported",
     "WinX86MiniStatus": "excluded",
     "PackageSurfaceDefinesSupport": false,
@@ -444,8 +479,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "30c1651a40f087814bc8d3a211bec579ae45c4dafdf071f93b48ab7f7d5ff964",
-      "Length": 191324
+      "Sha256": "5c4a19822166a6744a25baaa599ff02affaa0077982d4f514aba366a6626a552",
+      "Length": 191437
     },
     {
       "Path": "CHANGELOG.md",
@@ -459,13 +494,13 @@
     },
     {
       "Path": "README.md",
-      "Sha256": "7b13415a6ac6d1cf658c22f7c9b432bd43c6ab4a0bf41e41d9ef55b0070d2bd9",
-      "Length": 37875
+      "Sha256": "933a8553a94fbc77e26de4de167a9aa5f3c0bb876639e120c878ea08086cd3b2",
+      "Length": 38100
     },
     {
       "Path": "README_cn.md",
-      "Sha256": "a4336cd803c85408579d58c46f9b426555552310b814337a62008b90c6b8728d",
-      "Length": 34394
+      "Sha256": "acda2a5bf8cfad24cc65343b0f4892f54f1bd214bb00f3d5d8b59e091d5a3dc2",
+      "Length": 34610
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
@@ -944,8 +979,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "f481bd034ba833a82bf478b12aba3651a32bc8f487b790dc072813a483b6cee1",
-      "Length": 11541
+      "Sha256": "e35f6ab6eb36ccdc2f860d9b6889ffd72ba953e9c39abbd2a5b4194a78c55317",
+      "Length": 11830
     },
     {
       "Path": "docs/articles/sample-model-assets-guide.md",
@@ -959,8 +994,8 @@
     },
     {
       "Path": "docs/articles/support-lifecycle-policy.md",
-      "Sha256": "183bdbf7ee4dd32baa65951960bca10ede9577dac0ed949c18114c6c05d3d9b9",
-      "Length": 4941
+      "Sha256": "2eb63ff7cb874c1c8b3aaf381cd2b1dbe11cc4805fde3276f14864d1a6981d27",
+      "Length": 6163
     },
     {
       "Path": "docs/articles/tracking-guide.md",
@@ -1104,13 +1139,13 @@
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
-      "Sha256": "4ff1fe210ce8ec20e3d568ef9d70fb151dac0d13a48d378631f6d5109cf37b6b",
-      "Length": 7065
+      "Sha256": "3973e2a4d85580eec5ff3a540d0eafdb7a802c4f2e10058400d2b68db97d0726",
+      "Length": 9306
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.schema.json",
-      "Sha256": "0fed5b668dc28682c39f0c71c30bc2094a23196f738fab6e8b0e5fc718f0e0c2",
-      "Length": 7443
+      "Sha256": "109197bfe56f5453ce013d8937290e06785c2d3a52f6edc0d7f40da20df342d1",
+      "Length": 9417
     },
     {
       "Path": "samples/AndroidSmoke/AndroidSmoke.csproj",
@@ -1249,8 +1284,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "ecc7123c9b9df0aa072e1e04b2e2320e41733f5dc042fe144e6c2387863dd3b2",
-      "Length": 61326
+      "Sha256": "8224ab8e70511930d07522472fbcfb395bdc5f9e0e93c437429ab34ed147c716",
+      "Length": 61514
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1364,8 +1399,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f62e052ff41242f624c2d60a55e899efbbc529aba93de74b22bf5a1993f90f2f",
-      "Length": 58156
+      "Sha256": "4e9e999d819b9630a67dc3ad29f4738cb6bbdc5ce15f1bcd078c2e300d6bcfdc",
+      "Length": 59028
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1374,8 +1409,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "8f8e18cb12ac481d55b21ee0c3a95fc3093d29478c7871de9b6359ce632f1e02",
-      "Length": 45668
+      "Sha256": "22f847fc1038725bd94aed4295dace65e5bf83c492f9b83496adf054b00720c3",
+      "Length": 45784
     },
     {
       "Path": "scripts/Test-ReleaseNotesContract.ps1",
@@ -1404,8 +1439,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
-      "Sha256": "9ed86b98cb25fc5e9ad1f7ac824835255e769acb35fbdb3d90488f330ddedbca",
-      "Length": 23291
+      "Sha256": "c48d99fcbe7d45c68c5c1cdf9f11f23aeb1f4b14c7a8b2d4280153bbcfe42df3",
+      "Length": 27834
     },
     {
       "Path": "scripts/Test-SampleModelAssetContract.ps1",

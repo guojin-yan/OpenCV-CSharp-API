@@ -461,6 +461,8 @@ function Get-Record {
             PendingSupportCount = @($support.pending).Count
             ExcludedSupportCount = @($support.excluded).Count
             OutsideMatrixCount = @($support.outsideMatrix).Count
+            LifecycleRefreshCandidateCount = @($support.lifecycleRefreshCandidates).Count
+            LifecycleRefreshCandidates = @($support.lifecycleRefreshCandidates | Sort-Object rid)
             WinX86FullStatus = $winX86FullStatus
             WinX86MiniStatus = ($support.excluded | Where-Object { $_.target -eq "win-x86/mini" }).status
             PackageSurfaceDefinesSupport = [bool]$support.policy.packageSurfaceIsSupport

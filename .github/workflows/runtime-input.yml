@@ -40,7 +40,7 @@ jobs:
           $supportedTargets = @($supportContract.realSupport) + @($supportContract.compatibilityOnly | ForEach-Object { [string]$_.target }) + @($supportContract.pending | ForEach-Object { [string]$_.target })
           $selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"
           if ($supportedTargets -notcontains $selectedTarget) {
-            throw "runtime-input.yml currently produces real-supported, compatibility-only, and pending Android targets. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
+            throw "runtime-input.yml currently produces real-supported, compatibility-only, and pending Android targets. Lifecycle-refresh candidates are catalogued but not active until producer/package/consumer evidence is promoted. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
           }
 
           $ridSpec = @($runtimeMatrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })
