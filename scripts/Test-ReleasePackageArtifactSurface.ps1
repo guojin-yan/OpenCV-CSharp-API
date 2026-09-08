@@ -167,6 +167,7 @@ $runtimeReadmePath = "packaging/runtime/JYPPX.OpenCV.runtime/README.md"
 $readmePath = "README.md"
 $chineseReadmePath = "README_cn.md"
 $runtimeSupportContractPath = "packaging/runtime/runtime-support-contract.json"
+$runtimeSupportContractSchemaPath = "packaging/runtime/runtime-support-contract.schema.json"
 $linkedRuntimeGuidePath = "docs/articles/linked-runtime-build-guide.md"
 $apiAbiPolicyPath = "docs/articles/api-abi-compatibility-policy.md"
 $supportLifecyclePolicyPath = "docs/articles/support-lifecycle-policy.md"
@@ -246,6 +247,7 @@ $runtimeReadmeText = Read-RequiredText -RelativePath $runtimeReadmePath
 $readmeText = Read-RequiredText -RelativePath $readmePath
 $chineseReadmeText = Read-RequiredText -RelativePath $chineseReadmePath
 $runtimeSupportContract = Read-RequiredText -RelativePath $runtimeSupportContractPath | ConvertFrom-Json
+$runtimeSupportContractSchemaText = Read-RequiredText -RelativePath $runtimeSupportContractSchemaPath
 $linkedRuntimeGuideText = Read-RequiredText -RelativePath $linkedRuntimeGuidePath
 $apiAbiPolicyText = Read-RequiredText -RelativePath $apiAbiPolicyPath
 $supportLifecyclePolicyText = Read-RequiredText -RelativePath $supportLifecyclePolicyPath
@@ -306,7 +308,7 @@ Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text 
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'PublicationManifestPath' -Issue "Publication bundle must bind the normalized package manifest"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'Where-Object { [string]$_.PackageId -ceq [string]$package.Id }' -Issue "Publication bundle must compare change-control package identities without relying on culture-sensitive sorting"
 Assert-Contains -Violations $violations -Path $nugetPublicationBundlePath -Text $nugetPublicationBundleText -Needle 'Change-control package hash mismatch' -Issue "Publication bundle must compare each exact package hash with actionable diagnostics"
-Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 29' -Issue "Publication manifest must require all 29 currently real-supported runtime targets"
+Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle '$realTargets.Count -ne 25' -Issue "Publication manifest must require all 25 currently real-supported runtime targets"
 Assert-Contains -Violations $violations -Path $nugetPublicationManifestPath -Text $nugetPublicationManifestText -Needle 'Publication manifest must contain exactly' -Issue "Publication manifest must reject incomplete package closure"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProjectPath -Text $nugetRepositoryVerifierProjectText -Needle '<PackageReference Include="NuGet.Packaging" Version="7.6.0" />' -Issue "Structured repository-signature verifier must pin the audited NuGet.Packaging version"
 Assert-Contains -Violations $violations -Path $nugetRepositoryVerifierProgramPath -Text $nugetRepositoryVerifierProgramText -Needle 'RepositoryPrimarySignature' -Issue "Structured verifier must require a repository primary signature"
@@ -354,7 +356,8 @@ Assert-Contains -Violations $violations -Path $highGuiFamilyPath -Text $highGuiF
 Assert-Contains -Violations $violations -Path $finalCloseoutPath -Text $finalCloseoutText -Needle 'local-release-candidate-closeout.json' -Issue "Release artifact surface must register the final closeout record"
 Assert-Contains -Violations $violations -Path $finalCloseoutRecordPath -Text $finalCloseoutRecordText -Needle 'local-release-candidate-closeout' -Issue "Final closeout record must identify its record kind"
 Assert-Contains -Violations $violations -Path $apiAbiPolicyPath -Text $apiAbiPolicyText -Needle 'compatibility/api-gap-inventory.json' -Issue "API/ABI policy must expose the gap inventory"
-Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 29 |' -Issue "Support lifecycle policy must expose the real-support count"
+Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `real-supported` | 25 |' -Issue "Support lifecycle policy must expose the real-support count"
+Assert-Contains -Violations $violations -Path $supportLifecyclePolicyPath -Text $supportLifecyclePolicyText -Needle '| `compatibility-only` | 4 |' -Issue "Support lifecycle policy must expose the compatibility-only count"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'locally-validated' -Issue "Release closeout documentation must expose local validation state"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'New-ReleasePackageSbom.ps1' -Issue "Release closeout documentation must register deterministic SPDX generation"
 Assert-Contains -Violations $violations -Path $releaseCloseoutDocPath -Text $releaseCloseoutDocText -Needle 'repository-signing-pending' -Issue "Release closeout documentation must expose the confirmed NuGet.org signing strategy"
@@ -437,8 +440,8 @@ foreach ($imageName in $requiredTutorialImages) {
 }
 
 $runtimeTargets = @($runtimeSupportContract.realSupport)
-if ($runtimeTargets.Count -ne 29) {
-    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 29 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
+if ($runtimeTargets.Count -ne 25) {
+    Add-Violation -Violations $violations -Path $runtimeSupportContractPath -Issue "README package table guard requires exactly 25 currently real-supported runtime targets" -Text "actual=$($runtimeTargets.Count)"
 }
 foreach ($readme in @(
         [pscustomobject]@{ Path = $readmePath; Text = $readmeText },
@@ -586,6 +589,9 @@ if ($actualSbomNegativeFixtureCount -ne 17) {
 }
 Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'RELEASE_SUPPORT_CONTRACT_OK' -Issue "Release support contract must emit explicit matrix/support classification"
 Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'packageSurfaceIsSupport' -Issue "Release support contract must separate package surface from real support"
+Assert-Contains -Violations $violations -Path $releaseSupportContractPath -Text $releaseSupportContractText -Needle 'Test-Json -LiteralPath $contract.Path -SchemaFile $contractSchemaPath' -Issue "Release support contract must validate schema v2 with the standard JSON Schema"
+Assert-Contains -Violations $violations -Path $runtimeSupportContractSchemaPath -Text $runtimeSupportContractSchemaText -Needle '"additionalProperties": false' -Issue "Runtime support contract schema must reject undeclared fields"
+Assert-Contains -Violations $violations -Path $runtimeSupportContractSchemaPath -Text $runtimeSupportContractSchemaText -Needle '"const": "compatibility-only"' -Issue "Runtime support contract schema must fix the compatibility-only status identity"
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'NUGET_PUBLIC_FEED_READ_ONLY_OK' -Issue "Public feed contract must emit read-only verification evidence"
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'https_only=true' -Issue "Public feed contract must require HTTPS-only verification"
 Assert-Contains -Violations $violations -Path $publicFeedVerificationContractPath -Text $publicFeedVerificationContractText -Needle 'upload_attempted=false' -Issue "Public feed contract must reject upload during verification"
@@ -698,6 +704,7 @@ $releaseSurfaceFiles = @(
     $bindingMapToolProgramPath,
     $finalCloseoutPath,
     $finalCloseoutRecordPath,
+    $runtimeSupportContractSchemaPath,
     $githubPackArtifactGuardPath,
     $githubPackConsumerGuardPath,
     $linkedRuntimeGuidePath,

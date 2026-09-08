@@ -1,7 +1,44 @@
 {
-  "schemaVersion": 1,
+  "$schema": "runtime-support-contract.schema.json",
+  "schemaVersion": 2,
   "packageMatrix": "packaging/runtime/runtime-package-matrix.json",
   "androidRuntimeEvidence": "packaging/runtime/android-runtime-evidence.json",
+  "packageSurface": [
+    "alpine.3.20-x64/full",
+    "alpine.3.20-x64/mini",
+    "android-arm/full",
+    "android-arm/mini",
+    "android-arm64/full",
+    "android-arm64/mini",
+    "android-x64/full",
+    "android-x64/mini",
+    "android-x86/full",
+    "android-x86/mini",
+    "debian.12-arm64/full",
+    "debian.12-arm64/mini",
+    "debian.12-x64/full",
+    "debian.12-x64/mini",
+    "fedora.40-x64/full",
+    "fedora.40-x64/mini",
+    "rhel.9-x64/full",
+    "rhel.9-x64/mini",
+    "rocky.9-x64/full",
+    "rocky.9-x64/mini",
+    "ubuntu.22.04-arm64/full",
+    "ubuntu.22.04-arm64/mini",
+    "ubuntu.22.04-x64/full",
+    "ubuntu.22.04-x64/mini",
+    "ubuntu.24.04-arm64/full",
+    "ubuntu.24.04-arm64/mini",
+    "ubuntu.24.04-x64/full",
+    "ubuntu.24.04-x64/mini",
+    "win-arm64/full",
+    "win-arm64/mini",
+    "win-x64/full",
+    "win-x64/mini",
+    "win-x86/full",
+    "win-x86/mini"
+  ],
   "hostedPromotionEvidence": {
     "target": "win-x86/full",
     "status": "verified-hosted-evidence",
@@ -30,14 +67,10 @@
     "hostedChangeControlSha256": "69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332"
   },
   "realSupport": [
-    "alpine.3.20-x64/full",
-    "alpine.3.20-x64/mini",
     "debian.12-arm64/full",
     "debian.12-arm64/mini",
     "debian.12-x64/full",
     "debian.12-x64/mini",
-    "fedora.40-x64/full",
-    "fedora.40-x64/mini",
     "rhel.9-x64/full",
     "rhel.9-x64/mini",
     "rocky.9-x64/full",
@@ -59,6 +92,32 @@
     "android-x64/mini",
     "android-x86/full",
     "android-x86/mini"
+  ],
+  "compatibilityOnly": [
+    {
+      "target": "alpine.3.20-x64/full",
+      "status": "compatibility-only",
+      "reason": "Alpine 3.20 has ended its standard lifecycle. Exact digest-pinned producer, package, and consumer evidence is retained for existing users, but this target is not a current release support promise.",
+      "migration": "Move to a current Alpine target or a future generic linux-musl-x64 package after its evidence is promoted."
+    },
+    {
+      "target": "alpine.3.20-x64/mini",
+      "status": "compatibility-only",
+      "reason": "Alpine 3.20 has ended its standard lifecycle. Exact digest-pinned producer, package, and consumer evidence is retained for existing users, but this target is not a current release support promise.",
+      "migration": "Move to a current Alpine target or a future generic linux-musl-x64 package after its evidence is promoted."
+    },
+    {
+      "target": "fedora.40-x64/full",
+      "status": "compatibility-only",
+      "reason": "Fedora 40 has ended its standard lifecycle. Exact digest-pinned producer, package, and consumer evidence is retained for existing users, but this target is not a current release support promise.",
+      "migration": "Move to a current real-supported glibc target or a future generic linux-x64 package after its evidence is promoted."
+    },
+    {
+      "target": "fedora.40-x64/mini",
+      "status": "compatibility-only",
+      "reason": "Fedora 40 has ended its standard lifecycle. Exact digest-pinned producer, package, and consumer evidence is retained for existing users, but this target is not a current release support promise.",
+      "migration": "Move to a current real-supported glibc target or a future generic linux-x64 package after its evidence is promoted."
+    }
   ],
   "pending": [
     {
@@ -110,6 +169,8 @@
   ],
   "policy": {
     "packageSurfaceIsSupport": false,
+    "releaseCandidate": "real-supported only; compatibility-only, pending, and excluded targets are not published",
+    "compatibilityOnlyPublication": "excluded from the current release candidate; historical package identity and reproducible evidence are retained",
     "syntheticRuntimeInputs": "package-shape-only; never real support",
     "publication": "blocked until real support, provenance, signing, SBOM, approval, and rollback gates pass"
   }

@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/runtime-support-contract.schema.json",
+  "title": "OpenCV CSharp API runtime support contract v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "packageMatrix",
+    "androidRuntimeEvidence",
+    "packageSurface",
+    "hostedPromotionEvidence",
+    "realSupport",
+    "compatibilityOnly",
+    "pending",
+    "excluded",
+    "outsideMatrix",
+    "policy"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "runtime-support-contract.schema.json"
+    },
+    "schemaVersion": {
+      "const": 2
+    },
+    "packageMatrix": {
+      "const": "packaging/runtime/runtime-package-matrix.json"
+    },
+    "androidRuntimeEvidence": {
+      "const": "packaging/runtime/android-runtime-evidence.json"
+    },
+    "packageSurface": {
+      "$ref": "#/definitions/targetArray"
+    },
+    "hostedPromotionEvidence": {
+      "$ref": "#/definitions/hostedPromotionEvidence"
+    },
+    "realSupport": {
+      "$ref": "#/definitions/targetArray"
+    },
+    "compatibilityOnly": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "target", "status", "reason", "migration" ],
+        "properties": {
+          "target": {
+            "$ref": "#/definitions/target"
+          },
+          "status": {
+            "const": "compatibility-only"
+          },
+          "reason": {
+            "$ref": "#/definitions/nonEmptyString"
+          },
+          "migration": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        }
+      }
+    },
+    "pending": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "target", "status", "reason", "requires" ],
+        "properties": {
+          "target": {
+            "$ref": "#/definitions/target"
+          },
+          "status": {
+            "const": "android-evidence-pending"
+          },
+          "reason": {
+            "$ref": "#/definitions/nonEmptyString"
+          },
+          "requires": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "const": "device-or-emulator-loader"
+            }
+          }
+        }
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "target", "status", "reason" ],
+        "properties": {
+          "target": {
+            "$ref": "#/definitions/target"
+          },
+          "status": {
+            "const": "excluded"
+          },
+          "reason": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        }
+      }
+    },
+    "outsideMatrix": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "platform", "status", "reason" ],
+        "properties": {
+          "platform": {
+            "$ref": "#/definitions/nonEmptyString"
+          },
+          "status": {
+            "const": "not-supported"
+          },
+          "reason": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageSurfaceIsSupport",
+        "releaseCandidate",
+        "compatibilityOnlyPublication",
+        "syntheticRuntimeInputs",
+        "publication"
+      ],
+      "properties": {
+        "packageSurfaceIsSupport": {
+          "const": false
+        },
+        "releaseCandidate": {
+          "const": "real-supported only; compatibility-only, pending, and excluded targets are not published"
+        },
+        "compatibilityOnlyPublication": {
+          "const": "excluded from the current release candidate; historical package identity and reproducible evidence are retained"
+        },
+        "syntheticRuntimeInputs": {
+          "const": "package-shape-only; never real support"
+        },
+        "publication": {
+          "const": "blocked until real support, provenance, signing, SBOM, approval, and rollback gates pass"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "target": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*/(full|mini)$"
+    },
+    "targetArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/target"
+      }
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifactEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "id", "name", "digest" ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "hostedPromotionEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target",
+        "status",
+        "sourceCommit",
+        "runtimeInputRunId",
+        "runtimeArtifact",
+        "packRunId",
+        "packageArtifact",
+        "consumerRunId",
+        "hostArchitecture",
+        "targetArchitecture",
+        "peMachine",
+        "wow64Probe",
+        "consumerProcessArchitecture",
+        "hostedCloseoutSha256",
+        "artifactDigestAuditSha256",
+        "hostedPackageManifestSha256",
+        "hostedChangeControlSha256"
+      ],
+      "properties": {
+        "target": {
+          "const": "win-x86/full"
+        },
+        "status": {
+          "const": "verified-hosted-evidence"
+        },
+        "sourceCommit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "runtimeInputRunId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "runtimeArtifact": {
+          "$ref": "#/definitions/artifactEvidence"
+        },
+        "packRunId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "packageArtifact": {
+          "$ref": "#/definitions/artifactEvidence"
+        },
+        "consumerRunId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "hostArchitecture": {
+          "const": "AMD64"
+        },
+        "targetArchitecture": {
+          "const": "X86"
+        },
+        "peMachine": {
+          "const": "I386"
+        },
+        "wow64Probe": {
+          "const": "passed"
+        },
+        "consumerProcessArchitecture": {
+          "const": "X86"
+        },
+        "hostedCloseoutSha256": {
+          "$ref": "#/definitions/sha256"
+        },
+        "artifactDigestAuditSha256": {
+          "$ref": "#/definitions/sha256"
+        },
+        "hostedPackageManifestSha256": {
+          "$ref": "#/definitions/sha256"
+        },
+        "hostedChangeControlSha256": {
+          "$ref": "#/definitions/sha256"
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

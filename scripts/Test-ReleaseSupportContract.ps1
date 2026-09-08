@@ -8,6 +8,7 @@ $ErrorActionPreference = "Stop"
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $violations = [System.Collections.Generic.List[object]]::new()
 $contractRelativePath = 'packaging/runtime/runtime-support-contract.json'
+$contractSchemaRelativePath = 'packaging/runtime/runtime-support-contract.schema.json'
 $matrixRelativePath = 'packaging/runtime/runtime-package-matrix.json'
 $androidEvidenceRelativePath = 'packaging/runtime/android-runtime-evidence.json'
 
@@ -40,6 +41,13 @@ function Assert-ExactSet {
     Assert-True -Condition ($expectedText -eq $actualText) -Path $Path -Issue $Issue -Text "expected=$expectedText actual=$actualText"
 }
 
+function Assert-ExactPropertySet {
+    param([Parameter(Mandatory = $true)][object]$Value,[Parameter(Mandatory = $true)][string]$Path,[Parameter(Mandatory = $true)][string]$Context,[Parameter(Mandatory = $true)][string[]]$Expected)
+    $actual = @($Value.PSObject.Properties.Name | Sort-Object)
+    $wanted = @($Expected | Sort-Object)
+    Assert-ExactSet -Path $Path -Issue "$Context property set drifted" -Expected $wanted -Actual $actual
+}
+
 function Get-WorkflowJobText {
     param([Parameter(Mandatory = $true)][string]$Text,[Parameter(Mandatory = $true)][string]$JobName)
     $pattern = "(?ms)^  $([regex]::Escape($JobName)):\r?\n.*?(?=^  [A-Za-z0-9_-]+:\r?\n|\z)"
@@ -56,21 +64,70 @@ try {
     $m = $matrix.Value
     $a = $androidEvidence.Value
 
-    Assert-True -Condition ([int]$c.schemaVersion -eq 1) -Path $contract.RelativePath -Issue 'Support contract schema version must be 1'
+    $contractSchemaPath = Join-Path $repo $contractSchemaRelativePath
+    if (-not (Test-Path -LiteralPath $contractSchemaPath -PathType Leaf)) { throw "Required support contract schema was not found: $contractSchemaRelativePath" }
+    Assert-True -Condition (Test-Json -LiteralPath $contract.Path -SchemaFile $contractSchemaPath -ErrorAction Stop) -Path $contract.RelativePath -Issue 'Support contract must validate against its JSON Schema'
+    foreach ($fixtureName in @('schema-v1', 'unknown-root-field', 'compatibility-status')) {
+        $fixture = ([IO.File]::ReadAllText($contract.Path) | ConvertFrom-Json)
+        switch ($fixtureName) {
+            'schema-v1' { $fixture.schemaVersion = 1 }
+            'unknown-root-field' { $fixture | Add-Member -NotePropertyName legacyRealSupport -NotePropertyValue @() }
+            'compatibility-status' { $fixture.compatibilityOnly[0].status = 'real-supported' }
+        }
+        $fixtureJson = $fixture | ConvertTo-Json -Depth 20
+        $schemaAccepted = Test-Json -Json $fixtureJson -SchemaFile $contractSchemaPath -ErrorAction SilentlyContinue
+        Assert-True -Condition (-not $schemaAccepted) -Path "$($contract.RelativePath)/$fixtureName" -Issue 'Support contract JSON Schema accepted an invalid migration fixture'
+    }
+
+    Assert-ExactPropertySet -Value $c -Path $contract.RelativePath -Context 'Support contract schema v2' -Expected @(
+        '$schema',
+        'schemaVersion',
+        'packageMatrix',
+        'androidRuntimeEvidence',
+        'packageSurface',
+        'hostedPromotionEvidence',
+        'realSupport',
+        'compatibilityOnly',
+        'pending',
+        'excluded',
+        'outsideMatrix',
+        'policy'
+    )
+    Assert-True -Condition ([string]$c.'$schema' -eq 'runtime-support-contract.schema.json') -Path $contract.RelativePath -Issue 'Support contract must identify its schema file'
+    Assert-ExactPropertySet -Value $c.policy -Path $contract.RelativePath -Context 'Support contract policy' -Expected @(
+        'packageSurfaceIsSupport',
+        'releaseCandidate',
+        'compatibilityOnlyPublication',
+        'syntheticRuntimeInputs',
+        'publication'
+    )
+    Assert-True -Condition ([int]$c.schemaVersion -eq 2) -Path $contract.RelativePath -Issue 'Support contract schema version must be 2'
     Assert-True -Condition ([string]$c.packageMatrix -eq $matrixRelativePath) -Path $contract.RelativePath -Issue 'Support contract must identify the package matrix'
     Assert-True -Condition ([string]$c.androidRuntimeEvidence -eq $androidEvidenceRelativePath) -Path $contract.RelativePath -Issue 'Support contract must identify the Android runtime evidence record'
     Assert-True -Condition ($c.policy.packageSurfaceIsSupport -eq $false) -Path $contract.RelativePath -Issue 'Package surface must not be treated as real support'
+    Assert-True -Condition ([string]$c.policy.releaseCandidate -eq 'real-supported only; compatibility-only, pending, and excluded targets are not published') -Path $contract.RelativePath -Issue 'Release candidate classification policy drifted'
+    Assert-True -Condition ([string]$c.policy.compatibilityOnlyPublication -eq 'excluded from the current release candidate; historical package identity and reproducible evidence are retained') -Path $contract.RelativePath -Issue 'Compatibility-only publication policy drifted'
     Assert-True -Condition ([string]$c.policy.syntheticRuntimeInputs -eq 'package-shape-only; never real support') -Path $contract.RelativePath -Issue 'Synthetic runtime policy drifted'
     Assert-True -Condition ([string]$c.policy.publication -match 'blocked until') -Path $contract.RelativePath -Issue 'Support contract must keep publication blocked until all release gates pass'
 
     $matrixTargets = @($m.rids | ForEach-Object { $rid = [string]$_.rid; foreach ($profile in @($m.profiles)) { "$rid/$([string]$profile.name)" } } | Sort-Object)
+    $packageSurfaceTargets = @($c.packageSurface | ForEach-Object { [string]$_ } | Sort-Object)
     $realTargets = @($c.realSupport | ForEach-Object { [string]$_ } | Sort-Object)
+    $compatibilityTargets = @(Get-TargetSet -Items @($c.compatibilityOnly) -Property 'target')
     $pendingTargets = @(Get-TargetSet -Items @($c.pending) -Property 'target')
     $excludedTargets = @(Get-TargetSet -Items @($c.excluded) -Property 'target')
-    $classifiedTargets = @($realTargets + $pendingTargets + $excludedTargets | Sort-Object)
+    $classifiedTargets = @($realTargets + $compatibilityTargets + $pendingTargets + $excludedTargets | Sort-Object)
 
-    Assert-ExactSet -Path $contract.RelativePath -Issue 'Support contract must partition every package matrix RID/profile pair exactly once' -Expected $matrixTargets -Actual $classifiedTargets
-    Assert-True -Condition (@($realTargets).Count -eq 29) -Path $contract.RelativePath -Issue 'Real support target count must be 29 after Windows x86 full hosted evidence promotion'
+    Assert-ExactSet -Path $contract.RelativePath -Issue 'Schema v2 package surface must match every package matrix RID/profile pair' -Expected $matrixTargets -Actual $packageSurfaceTargets
+    Assert-ExactSet -Path $contract.RelativePath -Issue 'Support contract must partition every package-surface target exactly once' -Expected $packageSurfaceTargets -Actual $classifiedTargets
+    Assert-True -Condition (@($realTargets).Count -eq 25) -Path $contract.RelativePath -Issue 'Real support target count must be 25 after lifecycle migration'
+    $expectedCompatibilityTargets = @(
+        'alpine.3.20-x64/full',
+        'alpine.3.20-x64/mini',
+        'fedora.40-x64/full',
+        'fedora.40-x64/mini'
+    )
+    Assert-ExactSet -Path $contract.RelativePath -Issue 'Compatibility-only targets must contain the ended Fedora 40 and Alpine 3.20 profiles' -Expected $expectedCompatibilityTargets -Actual $compatibilityTargets
     $expectedAndroidPendingTargets = @(
         'android-arm/full',
         'android-arm/mini',
@@ -99,6 +156,14 @@ try {
         $target = [string]$entry.target
         Assert-True -Condition ($target.StartsWith('android-', [StringComparison]::Ordinal) -and [string]$entry.status -eq 'android-evidence-pending') -Path $contract.RelativePath -Issue 'Android pending target must remain android-evidence-pending' -Text $target
         Assert-ExactSet -Path $contract.RelativePath -Issue "Pending target requirements drifted for $target" -Expected @('device-or-emulator-loader') -Actual @($entry.requires)
+    }
+    foreach ($entry in @($c.compatibilityOnly)) {
+        Assert-ExactPropertySet -Value $entry -Path $contract.RelativePath -Context "Compatibility-only target $([string]$entry.target)" -Expected @('target', 'status', 'reason', 'migration')
+        Assert-True -Condition (
+            [string]$entry.status -eq 'compatibility-only' -and
+            -not [string]::IsNullOrWhiteSpace([string]$entry.reason) -and
+            -not [string]::IsNullOrWhiteSpace([string]$entry.migration)
+        ) -Path $contract.RelativePath -Issue 'Compatibility-only target must carry status, lifecycle reason, and migration guidance' -Text $entry.target
     }
     $hostedEvidence = $c.hostedPromotionEvidence
     Assert-True -Condition ($null -ne $hostedEvidence -and [string]$hostedEvidence.target -eq 'win-x86/full' -and [string]$hostedEvidence.status -eq 'verified-hosted-evidence') -Path $contract.RelativePath -Issue 'Windows x86 hosted promotion evidence identity drifted'
@@ -165,7 +230,7 @@ try {
     $runtimeInputText = [IO.File]::ReadAllText($runtimeInputPath)
     foreach ($selectionToken in @(
             'Get-Content -LiteralPath ./packaging/runtime/runtime-support-contract.json -Raw | ConvertFrom-Json',
-            '$supportedTargets = @($supportContract.realSupport) + @($supportContract.pending | ForEach-Object { [string]$_.target })',
+            '$supportedTargets = @($supportContract.realSupport) + @($supportContract.compatibilityOnly | ForEach-Object { [string]$_.target }) + @($supportContract.pending | ForEach-Object { [string]$_.target })',
             '$selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"',
             'if ($supportedTargets -notcontains $selectedTarget)')) {
         Assert-True -Condition $runtimeInputText.Contains($selectionToken, [StringComparison]::Ordinal) -Path '.github/workflows/runtime-input.yml' -Issue 'runtime-input.yml must select supported targets from the structured release support contract' -Text $selectionToken
@@ -177,7 +242,7 @@ try {
                 "$rid/$([string]$profile)"
             }
         } | Sort-Object)
-    Assert-ExactSet -Path $matrix.RelativePath -Issue 'Runtime producer metadata must equal real support plus pending evidence targets' -Expected @($realTargets + $pendingTargets) -Actual $producerTargets
+    Assert-ExactSet -Path $matrix.RelativePath -Issue 'Runtime producer metadata must equal real support, compatibility-only, and pending evidence targets' -Expected @($realTargets + $compatibilityTargets + $pendingTargets) -Actual $producerTargets
     Assert-True -Condition (@($producerTargets | Where-Object { $excludedTargets -contains $_ }).Count -eq 0) -Path $matrix.RelativePath -Issue 'Runtime producer metadata must not include excluded targets'
 
     $packWorkflowPath = Join-Path $repo '.github/workflows/pack.yml'
@@ -198,7 +263,7 @@ try {
     Assert-True -Condition ($guideText.Contains('runtime-support-contract.json')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must link the support contract'
     Assert-True -Condition ($guideText.Contains('Windows x86 Full is real-supported after verified hosted WoW64 evidence') -and $guideText.Contains('Android x64/x86 Full and Mini are real-supported after authoritative single-loader emulator loading') -and $guideText.Contains('Android ARM/ARM64 remain android-evidence-pending')) -Path 'docs/articles/linked-runtime-build-guide.md' -Issue 'Linked runtime guide must preserve x86 and Android support wording'
 
-    Write-Host "RELEASE_SUPPORT_CONTRACT_OK matrix_entries=$($matrixTargets.Count) real=$($realTargets.Count) pending=$($pendingTargets.Count) excluded=$($excludedTargets.Count) outside_matrix=macOS package_surface_support=false"
+    Write-Host "RELEASE_SUPPORT_CONTRACT_OK schema=2 package_surface=$($packageSurfaceTargets.Count) real=$($realTargets.Count) compatibility_only=$($compatibilityTargets.Count) pending=$($pendingTargets.Count) excluded=$($excludedTargets.Count) outside_matrix=macOS package_surface_support=false"
 }
 catch {
     Add-Violation -Path $contractRelativePath -Issue 'Release support contract execution failed' -Text $_.Exception.Message
@@ -211,4 +276,5 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host 'Release support contract passed.'
-    Write-Host 'Package-matrix surface is explicitly separated from real support; Windows x86 Full has verified hosted WoW64 evidence, Android x64/x86 Full/Mini have authoritative single-loader emulator evidence, Android ARM/ARM64 remain device-evidence-pending, Windows x86 mini remains excluded, and macOS remains outside the matrix.'
+    Write-Host 'Package surface is explicitly separated from real support; Fedora 40 and Alpine 3.20 are compatibility-only, Windows x86 Full has verified hosted WoW64 evidence, Android x64/x86 Full/Mini have authoritative single-loader emulator evidence, Android ARM/ARM64 remain device-evidence-pending, Windows x86 mini remains excluded, and macOS remains outside the matrix.'
+    Write-Host 'Schema migration fixtures rejected: schema v1, unknown root field, and compatibility status promotion.'

@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/8d7f8741760d4355",
-  "SourceIdentity": "sha256:8d7f8741760d4355b57fb9bd15ea6351d9f177dc8135593522dea08db1447c20",
+  "CandidateId": "local-closeout/sha256/0a130c76106205db",
+  "SourceIdentity": "sha256:0a130c76106205db68d137b442aeb87ed502165802d655133a5e06def02f28f5",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1672,
-    "Sha256": "8d7f8741760d4355b57fb9bd15ea6351d9f177dc8135593522dea08db1447c20",
+    "FileCount": 1673,
+    "Sha256": "0a130c76106205db68d137b442aeb87ed502165802d655133a5e06def02f28f5",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -18,9 +18,10 @@
   },
   "SupportContract": {
     "Path": "packaging/runtime/runtime-support-contract.json",
-    "Sha256": "7495ecd2c0620c20b0f3032b744e1cd39dc1c44ef743acc033e599afdbcb84bc",
+    "Sha256": "4ff1fe210ce8ec20e3d568ef9d70fb151dac0d13a48d378631f6d5109cf37b6b",
     "MatrixEntryCount": 34,
-    "RealSupportCount": 29,
+    "RealSupportCount": 25,
+    "CompatibilityOnlyCount": 4,
     "PendingSupportCount": 4,
     "ExcludedSupportCount": 1,
     "OutsideMatrixCount": 1,
@@ -443,8 +444,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "fd654286aaff68d41f1827b84a912cc22841e7ad53b36a8002c0f66f7491bae7",
-      "Length": 191277
+      "Sha256": "30c1651a40f087814bc8d3a211bec579ae45c4dafdf071f93b48ab7f7d5ff964",
+      "Length": 191324
     },
     {
       "Path": "CHANGELOG.md",
@@ -458,13 +459,13 @@
     },
     {
       "Path": "README.md",
-      "Sha256": "f099e817b44b480baa39627a68a3a2da61af465e20b5a6cf74bc5bab3ffed199",
-      "Length": 37487
+      "Sha256": "7b13415a6ac6d1cf658c22f7c9b432bd43c6ab4a0bf41e41d9ef55b0070d2bd9",
+      "Length": 37875
     },
     {
       "Path": "README_cn.md",
-      "Sha256": "996209ec75d0b9b8e1a3a86b5073addc4c8d534105fd4bb76c5e9e02f18501fc",
-      "Length": 34065
+      "Sha256": "a4336cd803c85408579d58c46f9b426555552310b814337a62008b90c6b8728d",
+      "Length": 34394
     },
     {
       "Path": "compatibility/api-gap-inventory.json",
@@ -943,8 +944,8 @@
     },
     {
       "Path": "docs/articles/release-candidate-closeout.md",
-      "Sha256": "ae8c079d5d9f3ef35075abcaad3dd43657711809778506f3d38d853405855fae",
-      "Length": 11459
+      "Sha256": "f481bd034ba833a82bf478b12aba3651a32bc8f487b790dc072813a483b6cee1",
+      "Length": 11541
     },
     {
       "Path": "docs/articles/sample-model-assets-guide.md",
@@ -958,8 +959,8 @@
     },
     {
       "Path": "docs/articles/support-lifecycle-policy.md",
-      "Sha256": "5b98c4d29e23f40c664ec0c63a60773136d2ed0b131d7323cc0015e2ea669706",
-      "Length": 3900
+      "Sha256": "183bdbf7ee4dd32baa65951960bca10ede9577dac0ed949c18114c6c05d3d9b9",
+      "Length": 4941
     },
     {
       "Path": "docs/articles/tracking-guide.md",
@@ -1103,8 +1104,13 @@
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
-      "Sha256": "7495ecd2c0620c20b0f3032b744e1cd39dc1c44ef743acc033e599afdbcb84bc",
-      "Length": 4178
+      "Sha256": "4ff1fe210ce8ec20e3d568ef9d70fb151dac0d13a48d378631f6d5109cf37b6b",
+      "Length": 7065
+    },
+    {
+      "Path": "packaging/runtime/runtime-support-contract.schema.json",
+      "Sha256": "0fed5b668dc28682c39f0c71c30bc2094a23196f738fab6e8b0e5fc718f0e0c2",
+      "Length": 7443
     },
     {
       "Path": "samples/AndroidSmoke/AndroidSmoke.csproj",
@@ -1243,8 +1249,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f455c1a836676c814fbb522ecf7fdf60bb075fb44229c4b2b61865b5ace716fe",
-      "Length": 61149
+      "Sha256": "ecc7123c9b9df0aa072e1e04b2e2320e41733f5dc042fe144e6c2387863dd3b2",
+      "Length": 61326
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1328,8 +1334,8 @@
     },
     {
       "Path": "scripts/Test-NuGetPublicationManifest.ps1",
-      "Sha256": "3a336c0a092da6cf19ea3fea8d8a68df1918a295dbef2eff0cbd307d0fa9f046",
-      "Length": 7865
+      "Sha256": "17e78ee21d6111b03eddc3caad5daf00abe59d48ec4617903f5e4e16a9939b66",
+      "Length": 7858
     },
     {
       "Path": "scripts/Test-NuGetRepositorySignedPackage.ps1",
@@ -1338,8 +1344,8 @@
     },
     {
       "Path": "scripts/Test-NuGetRepositorySigningBoundary.ps1",
-      "Sha256": "c4d3a91a017ebbb5178d3e3c28a92d2243cfb6bcd696bcce23774923a9d2e4a8",
-      "Length": 21558
+      "Sha256": "f0a6bfdcfb4c1ff228ae845c21e56c0f0e62201c9f132192dba70613b6e48404",
+      "Length": 22432
     },
     {
       "Path": "scripts/Test-ObjDetectUpstreamMap.ps1",
@@ -1358,8 +1364,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "c9f94edd37684b7d03156cc0f0b87b6aae5e071a031c58ae8ea0f88d12d2f917",
-      "Length": 58032
+      "Sha256": "f62e052ff41242f624c2d60a55e899efbbc529aba93de74b22bf5a1993f90f2f",
+      "Length": 58156
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1368,8 +1374,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "86a871d93d0b6e773d2d32021e96757ea82aa67661bea84f4d069e9cf64a66e9",
-      "Length": 45568
+      "Sha256": "8f8e18cb12ac481d55b21ee0c3a95fc3093d29478c7871de9b6359ce632f1e02",
+      "Length": 45668
     },
     {
       "Path": "scripts/Test-ReleaseNotesContract.ps1",
@@ -1398,8 +1404,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseSupportContract.ps1",
-      "Sha256": "19ae4e9bf7ce66760b6e50c450d024541906ed7e8b4a3178927d15d0b6ed80d6",
-      "Length": 18307
+      "Sha256": "9ed86b98cb25fc5e9ad1f7ac824835255e769acb35fbdb3d90488f330ddedbca",
+      "Length": 23291
     },
     {
       "Path": "scripts/Test-SampleModelAssetContract.ps1",

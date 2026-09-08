@@ -196,6 +196,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/videoio-upstream-parity-guide.md",
         "nuget/logo.jpg",
         "packaging/runtime/android-runtime-evidence.json",
+        "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
         "samples/AndroidSmoke/MainActivity.cs",
@@ -379,7 +380,7 @@ function Test-Record {
     Assert-True -List $List -Condition ($Record.SourceSet.Sha256 -eq $ExpectedSourceHash) -Issue "Final closeout source-set digest drifted" -Text "expected=$ExpectedSourceHash actual=$($Record.SourceSet.Sha256)"
 
     Assert-True -List $List -Condition ([int]$Record.PackageMatrix.RidCount -gt 0 -and [int]$Record.PackageMatrix.ProfileCount -eq 2 -and [int]$Record.PackageMatrix.EntryCount -eq 34 -and $Record.PackageMatrix.Sha256 -match "^[0-9a-f]{64}$") -Issue "Final closeout package matrix evidence drifted"
-    Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 29 -and $Record.SupportContract.PendingSupportCount -eq 4 -and $Record.SupportContract.ExcludedSupportCount -eq 1 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "real-supported" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
+    Assert-True -List $List -Condition ($Record.SupportContract.MatrixEntryCount -eq 34 -and $Record.SupportContract.RealSupportCount -eq 25 -and $Record.SupportContract.CompatibilityOnlyCount -eq 4 -and $Record.SupportContract.PendingSupportCount -eq 4 -and $Record.SupportContract.ExcludedSupportCount -eq 1 -and $Record.SupportContract.OutsideMatrixCount -eq 1 -and $Record.SupportContract.WinX86FullStatus -eq "real-supported" -and $Record.SupportContract.WinX86MiniStatus -eq "excluded" -and -not [bool]$Record.SupportContract.PackageSurfaceDefinesSupport) -Issue "Final closeout support partition or policy drifted"
     $hostedEvidence = $Record.SupportContract.HostedPromotionEvidence
     Assert-True -List $List -Condition ($null -ne $hostedEvidence -and $hostedEvidence.target -eq 'win-x86/full' -and $hostedEvidence.status -eq 'verified-hosted-evidence' -and $hostedEvidence.sourceCommit -eq '7f53e03e7d6ad5839711ba5ea32a0fcc02d8d5b8' -and [long]$hostedEvidence.runtimeInputRunId -eq 31162854992 -and [long]$hostedEvidence.packRunId -eq 31171822232 -and [long]$hostedEvidence.consumerRunId -eq 31171822232) -Issue 'Final closeout Windows x86 hosted promotion evidence drifted'
     Assert-True -List $List -Condition ($hostedEvidence.hostedCloseoutSha256 -eq '61f3ce0263fa41126c7ac857cde56ce6096147f0a1f9a3f3fa499fab1478bd81' -and $hostedEvidence.artifactDigestAuditSha256 -eq 'c0bf6886787fbbc105390ec8861acd6d608b60e9b86c63aef2c7456d436d9ded' -and $hostedEvidence.hostedPackageManifestSha256 -eq 'eedb212724a7f176bc913cc92b09ca086a4d7129f069a964c3195a3b8557c353' -and $hostedEvidence.hostedChangeControlSha256 -eq '69b1444692d389bb3452575a494035faddf5eb4c2f111bf3b60a686986841332') -Issue 'Final closeout Windows x86 hosted audit hashes drifted'
@@ -536,7 +537,7 @@ Assert-FixtureRejected -Name "source identity drift" -ExpectedIssue "candidate i
 Assert-FixtureRejected -Name "support count drift" -ExpectedIssue "support partition" -Action {
     param($list)
     $fixture = $record | ConvertTo-Json -Depth 30 | ConvertFrom-Json
-    $fixture.SupportContract.RealSupportCount = 28
+    $fixture.SupportContract.RealSupportCount = 24
     Test-Record -Record $fixture -List $list -ExpectedSourceHash $expectedSourceHash
 }
 Assert-FixtureRejected -Name "false hosted promotion" -ExpectedIssue "hosted promotion" -Action {

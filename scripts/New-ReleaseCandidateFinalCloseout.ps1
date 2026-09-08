@@ -262,6 +262,7 @@ function Get-Record {
         "nuget/logo.jpg",
         "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
         "packaging/runtime/android-runtime-evidence.json",
+        "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
         "samples/AndroidSmoke/MainActivity.cs",
@@ -454,8 +455,9 @@ function Get-Record {
         SupportContract = [ordered]@{
             Path = "packaging/runtime/runtime-support-contract.json"
             Sha256 = (Get-FileHash -LiteralPath (Join-Path $repo "packaging/runtime/runtime-support-contract.json") -Algorithm SHA256).Hash.ToLowerInvariant()
-            MatrixEntryCount = @($support.realSupport).Count + @($support.pending).Count + @($support.excluded).Count
+            MatrixEntryCount = @($support.realSupport).Count + @($support.compatibilityOnly).Count + @($support.pending).Count + @($support.excluded).Count
             RealSupportCount = @($support.realSupport).Count
+            CompatibilityOnlyCount = @($support.compatibilityOnly).Count
             PendingSupportCount = @($support.pending).Count
             ExcludedSupportCount = @($support.excluded).Count
             OutsideMatrixCount = @($support.outsideMatrix).Count

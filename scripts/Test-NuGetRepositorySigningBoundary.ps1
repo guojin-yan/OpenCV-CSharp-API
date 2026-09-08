@@ -142,7 +142,7 @@ try {
     }
     foreach ($token in @(
             'runtime-support-contract.json',
-            '$realTargets.Count -ne 29',
+            '$realTargets.Count -ne 25',
             'Publication manifest must contain exactly',
             'JYPPX.OpenCV.CSharp.API',
             'nupkg-$rid-$profile',
@@ -195,6 +195,15 @@ try {
     [IO.File]::WriteAllText($pendingTargetPath, (($pendingTarget | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
     Invoke-PowerShellExpectedFailure -Name $pendingTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $pendingTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'missing exact package'
 
+    $compatibilityTarget = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
+    $compatibilityTarget.Packages[1].Rid = 'fedora.40-x64'
+    $compatibilityTarget.Packages[1].RuntimeProfile = 'full'
+    $compatibilityTarget.Packages[1].PackageId = 'JYPPX.OpenCV.runtime.fedora.40-x64'
+    $compatibilityTarget.Packages[1].ArtifactName = 'nupkg-fedora.40-x64-full'
+    $compatibilityTargetPath = Join-Path $temporaryRoot 'compatibility-target.json'
+    [IO.File]::WriteAllText($compatibilityTargetPath, (($compatibilityTarget | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
+    Invoke-PowerShellExpectedFailure -Name $compatibilityTargetPath -Script $publicationManifest -Arguments @('-ManifestPath', $compatibilityTargetPath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'missing exact package'
+
     $excludedTarget = ($manifestRecord | ConvertTo-Json -Depth 8 | ConvertFrom-Json)
     $excludedTarget.Packages[1].Rid = 'win-x86'
     $excludedTarget.Packages[1].RuntimeProfile = 'mini'
@@ -214,7 +223,7 @@ try {
     $missingPackage.Packages = @($missingPackage.Packages | Select-Object -Skip 1)
     $missingPackagePath = Join-Path $temporaryRoot 'missing-package.json'
     [IO.File]::WriteAllText($missingPackagePath, (($missingPackage | ConvertTo-Json -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))
-    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'exactly 30 packages'
+    Invoke-PowerShellExpectedFailure -Name $missingPackagePath -Script $publicationManifest -Arguments @('-ManifestPath', $missingPackagePath, '-SourceCommit', ('a' * 40), '-PackageVersion', '5.0.0') -ExpectedText 'exactly 26 packages'
 
     $fixtureProject = Join-Path $temporaryRoot "fixture/Fixture.csproj"
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $fixtureProject) | Out-Null
@@ -329,4 +338,4 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "NUGET_REPOSITORY_SIGNING_BOUNDARY_OK strategy=nuget.org-repository-signing owner=GuojinYan public_key_required=false private_key_present=false live_reference=$($LiveReferenceVerification.IsPresent.ToString().ToLowerInvariant())"
-Write-Host "Negative fixtures rejected: unsigned package, fake signature, payload drift, verifier bypass surface, pending/excluded runtime targets, artifact drift, hash casing, package-count drift."
+Write-Host "Negative fixtures rejected: unsigned package, fake signature, payload drift, verifier bypass surface, compatibility-only/pending/excluded runtime targets, artifact drift, hash casing, package-count drift."
