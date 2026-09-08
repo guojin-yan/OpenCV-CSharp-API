@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/1e855d0f8f47cc07",
-  "SourceIdentity": "sha256:1e855d0f8f47cc07ecc81b9ce06e8b7614c0b3091ff6d89c6fad3c171f289e46",
+  "CandidateId": "local-closeout/sha256/121f8ceaacc33aef",
+  "SourceIdentity": "sha256:121f8ceaacc33aefde6471612cb81c6e5c3bfec0d1c5d197856990aa81712080",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1675,
-    "Sha256": "1e855d0f8f47cc07ecc81b9ce06e8b7614c0b3091ff6d89c6fad3c171f289e46",
+    "FileCount": 1679,
+    "Sha256": "121f8ceaacc33aefde6471612cb81c6e5c3bfec0d1c5d197856990aa81712080",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -488,8 +488,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "5c4a19822166a6744a25baaa599ff02affaa0077982d4f514aba366a6626a552",
-      "Length": 191437
+      "Sha256": "af07cf5bcd24565d96ad1c84a714bf1bcd9900e001c463c72e46a6e5dd72d7a0",
+      "Length": 197379
     },
     {
       "Path": "CHANGELOG.md",
@@ -1282,9 +1282,24 @@
       "Length": 2897
     },
     {
+      "Path": "scripts/Get-NativeRuntimeProfileEvidence.ps1",
+      "Sha256": "4abb3cde9d9837411e5af136e0874f448e7eb9dfe312f908771b5a7cb31e7b4d",
+      "Length": 3083
+    },
+    {
       "Path": "scripts/Get-SampleModelAssets.ps1",
       "Sha256": "76857593666525b74ca24342b0c5863a311684263f4ed231541ccc4924d1049b",
       "Length": 4877
+    },
+    {
+      "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
+      "Sha256": "292445e82a2dcb945bac0f0d9884154c7cf780005284ace9dc90468bb15b72cc",
+      "Length": 9107
+    },
+    {
+      "Path": "scripts/Invoke-LifecycleRefreshContainerProducer.sh",
+      "Sha256": "b424f090aa3789456f9456a02a489267ce85347296ad343c1f6ba54849c3dc00",
+      "Length": 15717
     },
     {
       "Path": "scripts/New-NuGetPublicationBundle.ps1",
@@ -1293,8 +1308,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "874ac41c8ad5f3becc82f86858e28077fd4d30a7c970fd3a000a8963f248b9c2",
-      "Length": 62445
+      "Sha256": "4985871bae4430800dd5f1d9bd5beb90f3b8fb39d9ca1f1e13abf4c6c90d616c",
+      "Length": 62705
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1350,6 +1365,11 @@
       "Path": "scripts/Test-ImgProcUpstreamMap.ps1",
       "Sha256": "ce1e1fd97cd3df883cd7feb120d1254d9f67f9b8f95e0968552af139a54aff07",
       "Length": 1256
+    },
+    {
+      "Path": "scripts/Test-LifecycleRefreshCandidateProducerSurface.ps1",
+      "Sha256": "dcc37d8dada209ed335a2e2239d2e8350a23067fbf020d7d7238b0d18478882d",
+      "Length": 5511
     },
     {
       "Path": "scripts/Test-LifecycleRefreshRuntimeMatrix.ps1",
@@ -1413,8 +1433,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "58db28bb2e102af1aebecf02482f6714747c3b0334beb42ecc06fb4640f7d550",
-      "Length": 60047
+      "Sha256": "5158b48f6acdebb7b95cc4095a364ed6305e5091b0f0368b3a452bd5eef69737",
+      "Length": 60307
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1423,7 +1443,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "7902220fe8bdad631b3f511e8ecb178fded8b3deb1e92b77a2d5b73a4bcb795e",
+      "Sha256": "de39de8113cee991ef282e7b0cc94d1c93a4a063299670a84d5af8ad7602f967",
       "Length": 45784
     },
     {
@@ -1488,7 +1508,7 @@
     },
     {
       "Path": "scripts/Test-WorkflowInvariantCoverage.ps1",
-      "Sha256": "735ea83570477cf87fc37e01e99bd254d25212c66d1ca0d1a7ebdd89408f4866",
+      "Sha256": "a17d61dc2ccbf66e806f2a44deeb0df2b8cced65e259c5fbe545ddcb79d8dec5",
       "Length": 14861
     },
     {
@@ -1924,7 +1944,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 79,
+    "InvariantGuardCount": 80,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

@@ -19,7 +19,7 @@ $expectedWorkflowSetupCounts = [ordered]@{
     ".github/workflows/docs.yml" = 1
     ".github/workflows/pack.yml" = 13
     ".github/workflows/publish-nuget.yml" = 5
-    ".github/workflows/runtime-input.yml" = 4
+    ".github/workflows/runtime-input.yml" = 5
 }
 
 function Get-RelativePath {
@@ -353,11 +353,11 @@ foreach ($workflowRelativePath in $expectedWorkflowPaths) {
     }
 }
 
-if ($totalSetupCount -ne 25 -or $totalDotnetVersionDeclarationCount -ne 25) {
+if ($totalSetupCount -ne 26 -or $totalDotnetVersionDeclarationCount -ne 26) {
     Add-Violation `
         -Violations $violations `
         -Path ".github/workflows" `
-        -Issue "Repository workflow SDK setup surface must remain exactly 25 bound blocks" `
+        -Issue "Repository workflow SDK setup surface must remain exactly 26 bound blocks" `
         -Text "setups=$totalSetupCount declarations=$totalDotnetVersionDeclarationCount"
 }
 if ($directSdkInstallCount -ne 2) {

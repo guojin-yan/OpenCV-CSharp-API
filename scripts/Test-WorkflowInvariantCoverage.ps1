@@ -152,7 +152,7 @@ $sourceEvidenceCounts = [ordered]@{
     ".github/workflows/docs.yml" = 1
     ".github/workflows/pack.yml" = 1
     ".github/workflows/publish-nuget.yml" = 1
-    ".github/workflows/runtime-input.yml" = 4
+    ".github/workflows/runtime-input.yml" = 5
 }
 foreach ($entry in $sourceEvidenceCounts.GetEnumerator()) {
     $text = Normalize-CiText -Text (Read-RequiredText -RelativePath $entry.Key)

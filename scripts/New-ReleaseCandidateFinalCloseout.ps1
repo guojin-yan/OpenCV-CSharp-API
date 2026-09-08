@@ -292,6 +292,10 @@ function Get-Record {
           "scripts/Build-AndroidRuntimeInput.ps1",
           "scripts/Build-OpenCV.ps1",
           "scripts/Apply-OpenCvSourcePatches.ps1",
+          "scripts/Get-NativeRuntimeProfileEvidence.ps1",
+          "scripts/Invoke-LifecycleRefreshContainerProducer.ps1",
+          "scripts/Invoke-LifecycleRefreshContainerProducer.sh",
+          "scripts/Test-LifecycleRefreshCandidateProducerSurface.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
         "scripts/Get-SampleModelAssets.ps1",
@@ -858,7 +862,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 79
+            InvariantGuardCount = 80
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

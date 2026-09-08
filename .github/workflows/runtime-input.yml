@@ -15,6 +15,19 @@ on:
         description: Real producer profile; full for all targets, mini only for explicitly approved linked/platform boundaries
         required: true
         default: full
+      lifecycle_refresh_candidate:
+        description: Run one candidate-only lifecycle refresh producer; no package or publication workflow is invoked
+        required: true
+        type: boolean
+        default: false
+      lifecycle_refresh_rid:
+        description: Candidate-only RID; Fedora 44 or Alpine 3.23 x64
+        required: true
+        default: fedora.44-x64
+      lifecycle_refresh_profile:
+        description: Candidate-only native profile; full or mini
+        required: true
+        default: full
 
 permissions:
   contents: read
@@ -28,8 +41,10 @@ jobs:
       target_matrix: ${{ steps.selection.outputs.target_matrix }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        if: ${{ !inputs.lifecycle_refresh_candidate }}
       - name: Validate and select one real producer target
         id: selection
+        if: ${{ !inputs.lifecycle_refresh_candidate }}
         shell: pwsh
         env:
           RID_INPUT: ${{ inputs.rid }}
@@ -101,6 +116,93 @@ jobs:
           "producer_kind=$($producer.kind)" >> $env:GITHUB_OUTPUT
           "target_matrix=$targetMatrix" >> $env:GITHUB_OUTPUT
           Write-Host "RUNTIME_INPUT_TARGET_SELECTION_OK target=$selectedTarget kind=$($producer.kind) runner=$($row.os)"
+
+  validate-lifecycle-refresh-candidate:
+    if: ${{ github.repository == 'guojin-yan/OpenCV-CSharp-API' && inputs.lifecycle_refresh_candidate == true }}
+    runs-on: ubuntu-24.04
+    outputs:
+      producer_kind: ${{ steps.selection.outputs.producer_kind }}
+      target_matrix: ${{ steps.selection.outputs.target_matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Validate one lifecycle-refresh candidate target
+        id: selection
+        shell: pwsh
+        env:
+          RID_INPUT: ${{ inputs.lifecycle_refresh_rid }}
+          RUNTIME_PROFILE_INPUT: ${{ inputs.lifecycle_refresh_profile }}
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-LifecycleRefreshRuntimeMatrix.ps1
+          $candidateMatrix = Get-Content -LiteralPath ./packaging/runtime/runtime-lifecycle-refresh-matrix.json -Raw | ConvertFrom-Json
+          $activeMatrix = Get-Content -LiteralPath ./packaging/runtime/runtime-package-matrix.json -Raw | ConvertFrom-Json
+          $supportContract = Get-Content -LiteralPath ./packaging/runtime/runtime-support-contract.json -Raw | ConvertFrom-Json
+          if ([string]$candidateMatrix.status -cne 'candidate-only' -or [bool]$candidateMatrix.publicationAllowed) {
+            throw 'Lifecycle-refresh candidate matrix is not explicitly non-publishable.'
+          }
+          if (@($activeMatrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT }).Count -ne 0) {
+            throw "Lifecycle-refresh candidate RID entered the active package matrix: $($env:RID_INPUT)"
+          }
+          $candidateRow = @($candidateMatrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })
+          if ($candidateRow.Count -ne 1 -or [string]$candidateRow[0].producer.kind -cne 'container') {
+            throw "Lifecycle-refresh candidate RID is missing or is not a container target: $($env:RID_INPUT)"
+          }
+          $candidateProfile = @($candidateMatrix.profiles | Where-Object { [string]$_.name -ceq $env:RUNTIME_PROFILE_INPUT })
+          if ($candidateProfile.Count -ne 1 -or @($candidateRow[0].producer.profiles) -notcontains $env:RUNTIME_PROFILE_INPUT) {
+            throw "Lifecycle-refresh candidate profile is not approved: $($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"
+          }
+          $supportRow = @($supportContract.lifecycleRefreshCandidates | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })
+          if ($supportRow.Count -ne 1 -or [string]$supportRow[0].status -cne 'lifecycle-refresh-pending' -or [string]$supportRow[0].containerImage -cne [string]$candidateRow[0].producer.containerImage) {
+            throw "Lifecycle-refresh support contract does not match the candidate row: $($env:RID_INPUT)"
+          }
+          $row = [ordered]@{
+            rid = [string]$candidateRow[0].rid
+            profile = [string]$env:RUNTIME_PROFILE_INPUT
+            os = [string]$candidateRow[0].runner
+            container_image = [string]$candidateRow[0].producer.containerImage
+            opencv_extra_cmake_args = [string]$candidateRow[0].producer.openCvExtraCMakeArgs.PSObject.Properties[$env:RUNTIME_PROFILE_INPUT].Value
+          }
+          $targetMatrix = @{ include = @([pscustomobject]$row) } | ConvertTo-Json -Compress -Depth 8
+          'producer_kind=lifecycle-refresh-container' >> $env:GITHUB_OUTPUT
+          "target_matrix=$targetMatrix" >> $env:GITHUB_OUTPUT
+          Write-Host "LIFECYCLE_REFRESH_TARGET_SELECTION_OK target=$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT) image=$($row.container_image) publication_allowed=false"
+
+  produce-lifecycle-refresh-container:
+    needs: validate-lifecycle-refresh-candidate
+    if: ${{ needs.validate-lifecycle-refresh-candidate.outputs.producer_kind == 'lifecycle-refresh-container' }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate-lifecycle-refresh-candidate.outputs.target_matrix) }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Check project invariants
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
+          pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
+      - name: Produce lifecycle-refresh candidate runtime input
+        shell: pwsh
+        run: |
+          & ./scripts/Invoke-LifecycleRefreshContainerProducer.ps1 `
+            -Rid '${{ matrix.rid }}' `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -ContainerImage '${{ matrix.container_image }}'
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Lifecycle-refresh candidate producer failed.'
+          }
+      - name: Upload lifecycle-refresh candidate evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: lifecycle-refresh-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/lifecycle-refresh-runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
+          if-no-files-found: error
 
   produce:
     needs: validate-target
