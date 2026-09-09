@@ -59,6 +59,13 @@ $expectations = [ordered]@{
                 contents = "read"
                 packages = "write"
             }
+            "pack-lifecycle-refresh-managed" = New-PermissionMap @{
+                contents = "read"
+            }
+            "pack-lifecycle-refresh-runtime" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
         }
         RequiredJobMarkers = [ordered]@{
             "pack-managed" = @(

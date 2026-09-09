@@ -5,7 +5,8 @@ param(
     [string]$ExpectedPackageVersion = "",
     [string]$ExpectedSyntheticRuntimeInputs = "true",
     [string]$SelectedRid = "",
-    [string]$SelectedRuntimeProfile = ""
+    [string]$SelectedRuntimeProfile = "",
+    [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json"
 )
 
 Set-StrictMode -Version Latest
@@ -16,7 +17,7 @@ $artifactRootFullPath = (Resolve-Path -LiteralPath $ArtifactRoot).Path
 . (Join-Path $repo "scripts/PackageVersion.ps1")
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
-$runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
+$runtimeMatrixPath = $RuntimePackageMatrix
 $directoryBuildPropsPath = "Directory.Build.props"
 $runtimeProvenanceManifestEntry = "build/JYPPX.OpenCV.runtime.provenance.json"
 

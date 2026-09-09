@@ -43,6 +43,23 @@ on:
         description: Optional workflow run id containing runtime-input-<rid>-<profile> artifact handoffs when synthetic validation is false
         required: false
         default: ""
+      lifecycle_refresh_candidate:
+        description: Run one candidate-only lifecycle refresh package and consumer chain; publication is always disabled
+        required: true
+        type: boolean
+        default: false
+      lifecycle_refresh_rid:
+        description: Candidate-only RID; Fedora 44 or Alpine 3.23 x64
+        required: true
+        default: fedora.44-x64
+      lifecycle_refresh_profile:
+        description: Candidate-only native profile; full or mini
+        required: true
+        default: full
+      lifecycle_refresh_artifact_run_id:
+        description: Required producer workflow run id containing lifecycle-refresh-runtime-input-<rid>-<profile>
+        required: false
+        default: ""
       publish_github_packages:
         description: Publish packages to GitHub Packages; requires real runtime inputs
         required: true
@@ -66,10 +83,11 @@ jobs:
             9.0.316
             8.0.423
       - name: Reject synthetic publish inputs
-        if: ${{ inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
+        if: ${{ !inputs.lifecycle_refresh_candidate && inputs.publish_github_packages == 'true' && inputs.validate_synthetic_runtime == 'true' }}
         shell: pwsh
         run: throw "Publishing packages requires real native runtime inputs; synthetic runtime inputs validate package shape only."
       - name: Validate package version
+        if: ${{ !inputs.lifecycle_refresh_candidate }}
         shell: pwsh
         env:
           PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
@@ -84,6 +102,7 @@ jobs:
             -PackageRevision $packageRevision | Out-Null
       - name: Validate runtime selection
         id: runtime_selection
+        if: ${{ !inputs.lifecycle_refresh_candidate }}
         shell: pwsh
         env:
           RID_INPUT: ${{ inputs.rid }}
@@ -124,13 +143,59 @@ jobs:
           "runtime_matrix=$runtimeMatrix" >> $env:GITHUB_OUTPUT
           Write-Host "PACK_RUNTIME_MATRIX_SELECTION_OK rows=$(@($rows).Count) rid=$($env:RID_INPUT) profile=$($env:RUNTIME_PROFILE_INPUT)"
       - name: Check project invariants
+        if: ${{ !inputs.lifecycle_refresh_candidate }}
         shell: pwsh
         run: |
           pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1
           pwsh -NoProfile -File ./scripts/Test-ProjectInvariants.ps1
 
+  validate-lifecycle-refresh-candidate:
+    if: ${{ github.repository == 'guojin-yan/OpenCV-CSharp-API' && inputs.lifecycle_refresh_candidate == true }}
+    runs-on: ubuntu-24.04
+    outputs:
+      target_matrix: ${{ steps.selection.outputs.target_matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Validate one lifecycle-refresh package target
+        id: selection
+        shell: pwsh
+        env:
+          RID_INPUT: ${{ inputs.lifecycle_refresh_rid }}
+          RUNTIME_PROFILE_INPUT: ${{ inputs.lifecycle_refresh_profile }}
+          PRODUCER_RUN_ID: ${{ inputs.lifecycle_refresh_artifact_run_id }}
+        run: |
+          if ($env:PRODUCER_RUN_ID -notmatch '^[0-9]+$') {
+            throw 'Candidate package validation requires a numeric lifecycle_refresh_artifact_run_id from a successful producer workflow run.'
+          }
+          pwsh -NoProfile -File ./scripts/Test-LifecycleRefreshRuntimeMatrix.ps1
+          $candidateMatrix = Get-Content -LiteralPath ./packaging/runtime/runtime-lifecycle-refresh-matrix.json -Raw | ConvertFrom-Json
+          $supportContract = Get-Content -LiteralPath ./packaging/runtime/runtime-support-contract.json -Raw | ConvertFrom-Json
+          if ([string]$candidateMatrix.status -cne 'candidate-only' -or [bool]$candidateMatrix.publicationAllowed) {
+            throw 'Candidate package validation requires publicationAllowed=false.'
+          }
+          $ridRow = @($candidateMatrix.rids | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })
+          $profileRow = @($candidateMatrix.profiles | Where-Object { [string]$_.name -ceq $env:RUNTIME_PROFILE_INPUT })
+          $supportRow = @($supportContract.lifecycleRefreshCandidates | Where-Object { [string]$_.rid -ceq $env:RID_INPUT })
+          if ($ridRow.Count -ne 1 -or $profileRow.Count -ne 1 -or $supportRow.Count -ne 1 -or
+              @($ridRow[0].producer.profiles) -notcontains $env:RUNTIME_PROFILE_INPUT -or
+              [string]$ridRow[0].producer.kind -cne 'container' -or
+              [string]$supportRow[0].status -cne 'lifecycle-refresh-pending' -or
+              [string]$supportRow[0].containerImage -cne [string]$ridRow[0].producer.containerImage) {
+            throw "Candidate package target is not approved by the immutable overlay/support contract: $($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"
+          }
+          $row = [ordered]@{
+            rid = [string]$ridRow[0].rid
+            profile = [string]$profileRow[0].name
+            os = 'ubuntu-24.04'
+            container_image = [string]$ridRow[0].producer.containerImage
+          }
+          $targetMatrix = @{ include = @([pscustomobject]$row) } | ConvertTo-Json -Compress -Depth 8
+          "target_matrix=$targetMatrix" >> $env:GITHUB_OUTPUT
+          Write-Host "LIFECYCLE_REFRESH_PACKAGE_TARGET_SELECTION_OK target=$($row.rid)/$($row.profile) producer_run_id=$env:PRODUCER_RUN_ID publication_allowed=false"
+
   pack-managed:
     needs: validate
+    if: ${{ !inputs.lifecycle_refresh_candidate }}
     runs-on: windows-latest
     permissions:
       contents: read
@@ -197,6 +262,7 @@ jobs:
 
   pack-runtime:
     needs: validate
+    if: ${{ !inputs.lifecycle_refresh_candidate }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.validate.outputs.runtime_matrix) }}
@@ -2295,6 +2361,181 @@ jobs:
             --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
             --api-key "${{ secrets.GITHUB_TOKEN }}" `
             --skip-duplicate
+
+  pack-lifecycle-refresh-managed:
+    needs: validate-lifecycle-refresh-candidate
+    if: ${{ needs.validate-lifecycle-refresh-candidate.result == 'success' }}
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Pack candidate managed API without publication
+        shell: pwsh
+        run: |
+          $packArguments = @(
+            '-NoProfile',
+            '-File', './scripts/Pack-Managed.ps1',
+            '-OpenCvVersion', '${{ inputs.opencv_version }}',
+            '-PackageRevision', '${{ inputs.package_revision }}',
+            '-PackageVersion', '${{ inputs.package_version }}',
+            '-OutputDir', 'artifacts/lifecycle-refresh-packages/nupkg-managed'
+          )
+          & pwsh @packArguments
+          if ($LASTEXITCODE -ne 0) { throw "Candidate managed package generation failed with exit code $LASTEXITCODE." }
+      - name: Upload candidate managed package
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: lifecycle-refresh-nupkg-managed-${{ inputs.lifecycle_refresh_rid }}-${{ inputs.lifecycle_refresh_profile }}
+          path: artifacts/lifecycle-refresh-packages/nupkg-managed
+          if-no-files-found: error
+
+  pack-lifecycle-refresh-runtime:
+    needs: validate-lifecycle-refresh-candidate
+    if: ${{ needs.validate-lifecycle-refresh-candidate.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate-lifecycle-refresh-candidate.outputs.target_matrix) }}
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Download candidate producer runtime input
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          run-id: ${{ inputs.lifecycle_refresh_artifact_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: lifecycle-refresh-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/lifecycle-refresh-input
+      - name: Validate candidate producer artifact
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-LifecycleRefreshRuntimeInputArtifact.ps1 `
+            -ArtifactRoot ./artifacts/lifecycle-refresh-input `
+            -Rid '${{ matrix.rid }}' `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}'
+      - name: Pack candidate runtime without publication
+        shell: pwsh
+        run: |
+          $inputRoot = (Resolve-Path -LiteralPath './artifacts/lifecycle-refresh-input').Path
+          $outputRoot = "artifacts/lifecycle-refresh-packages/nupkg-${{ matrix.rid }}-${{ matrix.profile }}"
+          $openCvInstallDir = Join-Path $inputRoot 'opencv-install'
+          $packArguments = @(
+            '-NoProfile',
+            '-File', './scripts/Pack-Runtime.ps1',
+            '-Rid', '${{ matrix.rid }}',
+            '-RuntimeProfile', '${{ matrix.profile }}',
+            '-OpenCvVersion', '${{ inputs.opencv_version }}',
+            '-PackageRevision', '${{ inputs.package_revision }}',
+            '-PackageVersion', '${{ inputs.package_version }}',
+            '-OutputDir', $outputRoot,
+            '-StageOutputRoot', "artifacts/lifecycle-refresh-stage/${{ matrix.rid }}-${{ matrix.profile }}",
+            '-RuntimePackageMatrix', './packaging/runtime/runtime-lifecycle-refresh-matrix.json',
+            '-StageRuntime',
+            '-OpenCvNativeRuntimeDir', (Join-Path $inputRoot 'native-wrapper'),
+            '-OpenCvRuntimeDir', (Join-Path $inputRoot 'opencv-runtime'),
+            '-OpenCvSourceDir', (Join-Path $inputRoot 'opencv-source')
+          )
+          if (Test-Path -LiteralPath $openCvInstallDir -PathType Container) {
+            $packArguments += @('-OpenCvInstallDir', $openCvInstallDir)
+          }
+          & pwsh @packArguments
+          if ($LASTEXITCODE -ne 0) { throw "Candidate runtime package generation failed with exit code $LASTEXITCODE." }
+      - name: Upload candidate runtime package
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: lifecycle-refresh-nupkg-runtime-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/lifecycle-refresh-packages/nupkg-${{ matrix.rid }}-${{ matrix.profile }}
+          if-no-files-found: error
+
+  verify-lifecycle-refresh-candidate:
+    needs:
+      - validate-lifecycle-refresh-candidate
+      - pack-lifecycle-refresh-managed
+      - pack-lifecycle-refresh-runtime
+    if: ${{ needs.validate-lifecycle-refresh-candidate.result == 'success' && needs.pack-lifecycle-refresh-managed.result == 'success' && needs.pack-lifecycle-refresh-runtime.result == 'success' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Download candidate managed package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: lifecycle-refresh-nupkg-managed-${{ inputs.lifecycle_refresh_rid }}-${{ inputs.lifecycle_refresh_profile }}
+          path: artifacts/lifecycle-refresh-consumer/nupkg-managed
+      - name: Download candidate runtime package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: lifecycle-refresh-nupkg-runtime-${{ inputs.lifecycle_refresh_rid }}-${{ inputs.lifecycle_refresh_profile }}
+          path: artifacts/lifecycle-refresh-consumer/nupkg-${{ inputs.lifecycle_refresh_rid }}-${{ inputs.lifecycle_refresh_profile }}
+      - name: Verify candidate package artifact and C# consumer restore/build
+        shell: pwsh
+        run: |
+          $artifactRoot = './artifacts/lifecycle-refresh-consumer'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackArtifactMatrixSurface.ps1 `
+            -ArtifactRoot $artifactRoot `
+            -ExpectedPackageVersion '${{ inputs.package_version }}' `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid '${{ inputs.lifecycle_refresh_rid }}' `
+            -SelectedRuntimeProfile '${{ inputs.lifecycle_refresh_profile }}' `
+            -RuntimePackageMatrix './packaging/runtime/runtime-lifecycle-refresh-matrix.json'
+          pwsh -NoProfile -File ./scripts/Test-GitHubPackConsumerRestoreSurface.ps1 `
+            -ArtifactRoot $artifactRoot `
+            -ExpectedPackageVersion '${{ inputs.package_version }}' `
+            -ExpectedSyntheticRuntimeInputs false `
+            -SelectedRid '${{ inputs.lifecycle_refresh_rid }}' `
+            -SelectedRuntimeProfile '${{ inputs.lifecycle_refresh_profile }}' `
+            -RuntimePackageMatrix './packaging/runtime/runtime-lifecycle-refresh-matrix.json' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -CompileNativeSmoke
+      - name: Write candidate package-consumer evidence
+        shell: pwsh
+        run: |
+          $root = './artifacts/lifecycle-refresh-consumer'
+          $managed = Get-ChildItem -LiteralPath (Join-Path $root 'nupkg-managed') -Filter '*.nupkg' -File
+          $runtime = Get-ChildItem -LiteralPath (Join-Path $root 'nupkg-${{ inputs.lifecycle_refresh_rid }}-${{ inputs.lifecycle_refresh_profile }}') -Filter '*.nupkg' -File
+          if ($managed.Count -ne 1 -or $runtime.Count -ne 1) { throw 'Candidate package evidence requires exactly one managed and one runtime package.' }
+          [ordered]@{
+            SchemaVersion = 1
+            EvidenceKind = 'lifecycle-refresh-package-consumer-restore-build'
+            Rid = '${{ inputs.lifecycle_refresh_rid }}'
+            RuntimeProfile = '${{ inputs.lifecycle_refresh_profile }}'
+            OpenCvVersion = '${{ inputs.opencv_version }}'
+            PackageVersion = '${{ inputs.package_version }}'
+            ProducerRunId = '${{ inputs.lifecycle_refresh_artifact_run_id }}'
+            ManagedPackageSha256 = (Get-FileHash -LiteralPath $managed.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            RuntimePackageSha256 = (Get-FileHash -LiteralPath $runtime.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            NativeSmokeCompiled = $true
+            NativeSmokeExecuted = $false
+            PublicationAllowed = $false
+            RecordedAtUtc = [DateTimeOffset]::UtcNow.ToString('O')
+          } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $root 'lifecycle-refresh-package-consumer-evidence.json') -Encoding utf8NoBOM
+      - name: Upload candidate package-consumer evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: lifecycle-refresh-package-consumer-evidence-${{ inputs.lifecycle_refresh_rid }}-${{ inputs.lifecycle_refresh_profile }}
+          path: artifacts/lifecycle-refresh-consumer/lifecycle-refresh-package-consumer-evidence.json
+          if-no-files-found: error
 
   verify-artifacts:
     needs:

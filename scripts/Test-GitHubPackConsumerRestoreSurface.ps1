@@ -8,7 +8,9 @@ param(
     [string]$SelectedRuntimeProfile = "",
     [switch]$CompileNativeSmoke,
     [switch]$RunNativeSmoke,
-    [string]$NativeExecutionHost = ""
+    [string]$NativeExecutionHost = "",
+    [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
+    [string]$OpenCvVersion = ""
 )
 
 Set-StrictMode -Version Latest
@@ -20,7 +22,7 @@ $artifactRootFullPath = (Resolve-Path -LiteralPath $ArtifactRoot).Path
 $managedPackageId = "JYPPX.OpenCV.CSharp.API"
 $runtimePackagePrefix = "JYPPX.OpenCV.runtime"
 $managedAssemblyName = "$managedPackageId.dll"
-$runtimeMatrixPath = "packaging/runtime/runtime-package-matrix.json"
+$runtimeMatrixPath = $RuntimePackageMatrix
 $directoryBuildPropsPath = "Directory.Build.props"
 $runtimeProvenanceManifestEntry = "build/JYPPX.OpenCV.runtime.provenance.json"
 
@@ -617,7 +619,12 @@ $propertyMap = Get-DirectoryBuildPropertyMap
 if ([string]::IsNullOrWhiteSpace($ExpectedPackageVersion)) {
     $ExpectedPackageVersion = Resolve-DirectoryBuildProperty -PropertyMap $propertyMap -Name "OpenCvCSharpPackageVersion"
 }
-$openCvVersion = Resolve-DirectoryBuildProperty -PropertyMap $propertyMap -Name "OpenCvCSharpOpenCvVersion"
+$openCvVersion = if ([string]::IsNullOrWhiteSpace($OpenCvVersion)) {
+    Resolve-DirectoryBuildProperty -PropertyMap $propertyMap -Name "OpenCvCSharpOpenCvVersion"
+}
+else {
+    $OpenCvVersion
+}
 $normalizedPackageVersion = Get-NormalizedPackageFileVersion -VersionText $ExpectedPackageVersion
 $openCvBinarySuffix = Get-OpenCvBinarySuffix -OpenCvVersion $openCvVersion
 $matrixText = Read-RequiredText -RelativePath $runtimeMatrixPath
@@ -694,7 +701,29 @@ try {
         New-Item -ItemType Directory -Force -Path $directory | Out-Null
     }
 
-    Copy-Item -LiteralPath (Join-Path $repo "packaging/runtime/runtime-distro-rid-graph.json") -Destination $runtimeIdentifierGraphPath -Force
+    $baseRuntimeGraphPath = Join-Path $repo "packaging/runtime/runtime-distro-rid-graph.json"
+    if ($runtimeMatrixPath -ceq "packaging/runtime/runtime-package-matrix.json") {
+        Copy-Item -LiteralPath $baseRuntimeGraphPath -Destination $runtimeIdentifierGraphPath -Force
+    }
+    else {
+        # Candidate overlays are deliberately materialized into the temporary graph only;
+        # the active RID graph remains unchanged and cannot be promoted implicitly.
+        $runtimeGraph = Get-Content -LiteralPath $baseRuntimeGraphPath -Raw | ConvertFrom-Json
+        foreach ($candidateRid in @($matrix.rids)) {
+            $ridName = [string]$candidateRid.rid
+            if ($null -ne $runtimeGraph.runtimes.PSObject.Properties[$ridName]) {
+                continue
+            }
+
+            $importRid = if ([string]$candidateRid.distro -ceq "alpine") { "linux-musl-x64" } else { "linux-x64" }
+            $runtimeGraph.runtimes | Add-Member -NotePropertyName $ridName -NotePropertyValue ([pscustomobject]@{
+                    '#import' = @($importRid)
+                })
+        }
+
+        $graphJson = $runtimeGraph | ConvertTo-Json -Depth 8
+        [System.IO.File]::WriteAllText($runtimeIdentifierGraphPath, $graphJson + [Environment]::NewLine)
+    }
 
     $artifactPackages = @(Get-ChildItem -LiteralPath $artifactRootFullPath -Recurse -Filter "*.nupkg" -File)
     if ($artifactPackages.Count -eq 0) {

@@ -216,11 +216,23 @@ try {
     )
     Assert-True -Condition (@($candidateTargets | Where-Object { $activeSupportTargets -contains $_ }).Count -eq 0) -Path $supportRecord.RelativePath -Issue 'Lifecycle refresh validation targets must remain outside every active support/package partition'
 
-    foreach ($workflowRelativePath in @('.github/workflows/pack.yml', '.github/workflows/publish-nuget.yml')) {
-        $workflowPath = Join-Path $repo ($workflowRelativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
-        $workflowText = [IO.File]::ReadAllText($workflowPath)
-        Assert-True -Condition (-not $workflowText.Contains($candidateMatrixRelativePath, [StringComparison]::Ordinal)) -Path $workflowRelativePath -Issue 'Publication workflow must not consume the lifecycle refresh candidate matrix'
-    }
+    $packWorkflowPath = Join-Path $repo ('.github/workflows/pack.yml' -replace '/', [IO.Path]::DirectorySeparatorChar)
+    $packWorkflowText = [IO.File]::ReadAllText($packWorkflowPath)
+    $candidateJobText = [regex]::Match(
+        $packWorkflowText,
+        '(?ms)(?:^  (?:validate-lifecycle-refresh-candidate|pack-lifecycle-refresh-managed|pack-lifecycle-refresh-runtime|verify-lifecycle-refresh-candidate):.*?)(?=^  [A-Za-z0-9_-]+:|\z)'
+    ).Value
+    $activePackWorkflowText = [regex]::Replace(
+        $packWorkflowText,
+        '(?ms)^  (?:validate-lifecycle-refresh-candidate|pack-lifecycle-refresh-managed|pack-lifecycle-refresh-runtime|verify-lifecycle-refresh-candidate):.*?(?=^  [A-Za-z0-9_-]+:|\z)',
+        ''
+    )
+    Assert-True -Condition ($candidateJobText.Contains($candidateMatrixRelativePath, [StringComparison]::Ordinal)) -Path '.github/workflows/pack.yml' -Issue 'Candidate package workflow must consume the lifecycle refresh candidate matrix only inside candidate jobs'
+    Assert-True -Condition (-not $activePackWorkflowText.Contains($candidateMatrixRelativePath, [StringComparison]::Ordinal)) -Path '.github/workflows/pack.yml' -Issue 'Active package workflow must not consume the lifecycle refresh candidate matrix'
+
+    $publishWorkflowPath = Join-Path $repo ('.github/workflows/publish-nuget.yml' -replace '/', [IO.Path]::DirectorySeparatorChar)
+    $publishWorkflowText = [IO.File]::ReadAllText($publishWorkflowPath)
+    Assert-True -Condition (-not $publishWorkflowText.Contains($candidateMatrixRelativePath, [StringComparison]::Ordinal)) -Path '.github/workflows/publish-nuget.yml' -Issue 'Publication workflow must not consume the lifecycle refresh candidate matrix'
 
     Write-Host "LIFECYCLE_REFRESH_RUNTIME_MATRIX_OK candidates=$($candidateRows.Count) targets=$($candidateTargets.Count) profiles=$($candidateProfiles.Count) publication_allowed=false"
 }

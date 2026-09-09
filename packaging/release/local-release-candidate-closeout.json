@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/121f8ceaacc33aef",
-  "SourceIdentity": "sha256:121f8ceaacc33aefde6471612cb81c6e5c3bfec0d1c5d197856990aa81712080",
+  "CandidateId": "local-closeout/sha256/5ad82901ec4e296f",
+  "SourceIdentity": "sha256:5ad82901ec4e296f6b26a8f9ce9a7ff22bc81f856e44bf05712ac680035dbfd4",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1679,
-    "Sha256": "121f8ceaacc33aefde6471612cb81c6e5c3bfec0d1c5d197856990aa81712080",
+    "FileCount": 1681,
+    "Sha256": "5ad82901ec4e296f6b26a8f9ce9a7ff22bc81f856e44bf05712ac680035dbfd4",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -478,8 +478,8 @@
   "EvidenceReferences": [
     {
       "Path": ".github/workflows/pack.yml",
-      "Sha256": "39e172b9f83f3c2c1d16b5f141c980000700bd6db3122ca754376a5f10380037",
-      "Length": 261060
+      "Sha256": "12353a69e27c11c1c7a2ccd72f975356928f06e72964487e12f8a1219cbe7d03",
+      "Length": 274682
     },
     {
       "Path": ".github/workflows/publish-nuget.yml",
@@ -1308,8 +1308,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "4985871bae4430800dd5f1d9bd5beb90f3b8fb39d9ca1f1e13abf4c6c90d616c",
-      "Length": 62705
+      "Sha256": "a03e5cc18a1c779678b3df4a5f2dda06682e287ca6fb39471ea7f43b8ee0c271",
+      "Length": 62842
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1348,8 +1348,8 @@
     },
     {
       "Path": "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
-      "Sha256": "1028a61e6d54877fd8ee9ab418ddd2f606e450a927e5dc08048039acf0091840",
-      "Length": 26899
+      "Sha256": "deb630df3f9c127ea23be077e733390cdaf4209819e8d785efe9b1079609abe1",
+      "Length": 26958
     },
     {
       "Path": "scripts/Test-HighGuiUpstreamMap.ps1",
@@ -1367,14 +1367,24 @@
       "Length": 1256
     },
     {
+      "Path": "scripts/Test-LifecycleRefreshCandidatePackageSurface.ps1",
+      "Sha256": "b3ac8fe0ecdf7f75f900475746a518e2a2e3b553931f450b4d48c399217fad45",
+      "Length": 4297
+    },
+    {
       "Path": "scripts/Test-LifecycleRefreshCandidateProducerSurface.ps1",
-      "Sha256": "dcc37d8dada209ed335a2e2239d2e8350a23067fbf020d7d7238b0d18478882d",
-      "Length": 5511
+      "Sha256": "660a8e0cc6b14f59f4d9ee258471d0e2b05ffe26ae1a24f3b5f9cb2a71fd7b2a",
+      "Length": 6618
+    },
+    {
+      "Path": "scripts/Test-LifecycleRefreshRuntimeInputArtifact.ps1",
+      "Sha256": "5a869c530bc3a3d0e26a8cb308f46c1459a1c0e2666f6bd7c792db4bd90de2f1",
+      "Length": 5489
     },
     {
       "Path": "scripts/Test-LifecycleRefreshRuntimeMatrix.ps1",
-      "Sha256": "aad189b676e36844830793ae5e1fe8ce0f6d028efc2096a54b319443ced686ad",
-      "Length": 12537
+      "Sha256": "41ce621fce6ac582d3d3fa9fe9ecf034d161a998072b6025234d38b4b4a3db41",
+      "Length": 13714
     },
     {
       "Path": "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1",
@@ -1433,8 +1443,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "5158b48f6acdebb7b95cc4095a364ed6305e5091b0f0368b3a452bd5eef69737",
-      "Length": 60307
+      "Sha256": "dd24dd02faa813875b68ee519fd52a60ec9791e874ed88a84fbdd9d54b77de20",
+      "Length": 60444
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1443,7 +1453,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "de39de8113cee991ef282e7b0cc94d1c93a4a063299670a84d5af8ad7602f967",
+      "Sha256": "919a71726642e2e13b3b31157c7eb01ac571e662afff61a2750b4c112a23f0a3",
       "Length": 45784
     },
     {
@@ -1944,7 +1954,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 80,
+    "InvariantGuardCount": 81,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

@@ -132,14 +132,18 @@ else {
         "opencv_runtime_dir",
         "opencv_source_dir",
         "real_runtime_artifact_run_id",
+        "lifecycle_refresh_candidate",
+        "lifecycle_refresh_rid",
+        "lifecycle_refresh_profile",
+        "lifecycle_refresh_artifact_run_id",
         "publish_github_packages"
     )
-    if ($dispatchInputNames.Count -ne 11 -or
+    if ($dispatchInputNames.Count -ne 15 -or
         (Compare-Object -ReferenceObject $expectedDispatchInputNames -DifferenceObject $dispatchInputNames)) {
         Add-Violation `
             -Violations $violations `
             -Path $packWorkflowPath `
-            -Issue "pack.yml workflow_dispatch must retain exactly the eleven supported inputs allowed by GitHub" `
+            -Issue "pack.yml workflow_dispatch must retain exactly the fifteen supported inputs allowed by GitHub" `
             -Text ($dispatchInputNames -join ", ")
     }
 }

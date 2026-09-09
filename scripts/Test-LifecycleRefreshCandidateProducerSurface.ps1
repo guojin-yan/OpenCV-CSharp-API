@@ -87,11 +87,28 @@ foreach ($token in @(
     Assert-Contains -Text $shell -Needle $token -Path $shellRelativePath
 }
 
-foreach ($workflowRelative in @('.github/workflows/pack.yml', '.github/workflows/publish-nuget.yml')) {
-    $text = Read-RequiredText -RelativePath $workflowRelative
-    if ($text.Contains($matrixRelativePath, [StringComparison]::Ordinal)) {
-        throw "$workflowRelative must not consume the lifecycle-refresh candidate matrix."
-    }
+$packWorkflowPath = Join-Path $repo ('.github/workflows/pack.yml' -replace '/', [IO.Path]::DirectorySeparatorChar)
+$packWorkflowText = Read-RequiredText -RelativePath '.github/workflows/pack.yml'
+$candidateJobText = [regex]::Match(
+    $packWorkflowText,
+    '(?ms)(?:^  (?:validate-lifecycle-refresh-candidate|pack-lifecycle-refresh-managed|pack-lifecycle-refresh-runtime|verify-lifecycle-refresh-candidate):.*?)(?=^  [A-Za-z0-9_-]+:|\z)'
+).Value
+$activePackWorkflowText = [regex]::Replace(
+    $packWorkflowText,
+    '(?ms)^  (?:validate-lifecycle-refresh-candidate|pack-lifecycle-refresh-managed|pack-lifecycle-refresh-runtime|verify-lifecycle-refresh-candidate):.*?(?=^  [A-Za-z0-9_-]+:|\z)',
+    ''
+)
+if ([string]::IsNullOrWhiteSpace($candidateJobText) -or
+    -not $candidateJobText.Contains($matrixRelativePath, [StringComparison]::Ordinal)) {
+    throw '.github/workflows/pack.yml candidate jobs must consume the lifecycle-refresh candidate matrix.'
+}
+if ($activePackWorkflowText.Contains($matrixRelativePath, [StringComparison]::Ordinal)) {
+    throw '.github/workflows/pack.yml active jobs must not consume the lifecycle-refresh candidate matrix.'
+}
+
+$publishWorkflowText = Read-RequiredText -RelativePath '.github/workflows/publish-nuget.yml'
+if ($publishWorkflowText.Contains($matrixRelativePath, [StringComparison]::Ordinal)) {
+    throw '.github/workflows/publish-nuget.yml must not consume the lifecycle-refresh candidate matrix.'
 }
 if ($producer -match '(?i)pack\.yml|publish-nuget|dotnet\s+nuget\s+push|gh\s+release') {
     throw "$scriptRelativePath contains a publication workflow or publication command."
