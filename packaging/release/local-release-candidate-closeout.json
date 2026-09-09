@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/5ad82901ec4e296f",
-  "SourceIdentity": "sha256:5ad82901ec4e296f6b26a8f9ce9a7ff22bc81f856e44bf05712ac680035dbfd4",
+  "CandidateId": "local-closeout/sha256/6272318aa81cf091",
+  "SourceIdentity": "sha256:6272318aa81cf091d5fe7b5718a8335c5a68370432e237ba3fca318a62ed323f",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1681,
-    "Sha256": "5ad82901ec4e296f6b26a8f9ce9a7ff22bc81f856e44bf05712ac680035dbfd4",
+    "FileCount": 1685,
+    "Sha256": "6272318aa81cf091d5fe7b5718a8335c5a68370432e237ba3fca318a62ed323f",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -932,6 +932,11 @@
       "Length": 4172
     },
     {
+      "Path": "docs/articles/generic-linux-rid-adr.md",
+      "Sha256": "6043f9e1564886e83b4b7398bb1095d8c24ae71a020981ba0c89c32d9e0b5b2d",
+      "Length": 5852
+    },
+    {
       "Path": "docs/articles/highgui-interaction-guide.md",
       "Sha256": "2bb1137f963ff441a2a35f6fcab84b5f525f993ee60b23d2c1c46190b028af51",
       "Length": 7270
@@ -1103,8 +1108,8 @@
     },
     {
       "Path": "docs/index.md",
-      "Sha256": "5f9f033ecdab42b996d09847da7e2461ea53ec434bc1b4251e987c185ddced2e",
-      "Length": 7384
+      "Sha256": "11f18df695fc039efa7d40c2ce844ca59cbc15c96f358ad37f6c70ad8258a5be",
+      "Length": 7537
     },
     {
       "Path": "docs/releases/5.0.0-preview.1.md",
@@ -1123,8 +1128,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "c0a9f3b7733ad8e430c506e1a3ba7e58cf6c505d973c30e6e8acb2ff36cdc3ce",
-      "Length": 14642
+      "Sha256": "dea06c1aedbe69e30b8b7d9e7edea6b60d3e81da21d176f85afb7f000030faa4",
+      "Length": 14738
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1145,6 +1150,16 @@
       "Path": "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
       "Sha256": "f0512bdb79e16e49595362e702159b5e3ca7445baa157bb19e6974b6b2928ba1",
       "Length": 333
+    },
+    {
+      "Path": "packaging/runtime/runtime-generic-linux-feasibility.json",
+      "Sha256": "85a1f6ea36f3d1b0950fc2ed1c02925556fb1424e7c9ee202751ec98002ee0db",
+      "Length": 3403
+    },
+    {
+      "Path": "packaging/runtime/runtime-generic-linux-feasibility.schema.json",
+      "Sha256": "309a4a2c94148d442f339d694cfdd9758c599fcc0a30854ca0173805b75dddac",
+      "Length": 4967
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
@@ -1308,8 +1323,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "a03e5cc18a1c779678b3df4a5f2dda06682e287ca6fb39471ea7f43b8ee0c271",
-      "Length": 62842
+      "Sha256": "acadc1ec060ee36f6ce29d0993aab970d0ea33624f80123ecbdfad684ff3f942",
+      "Length": 63093
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1345,6 +1360,11 @@
       "Path": "scripts/Test-FeaturesUpstreamMap.ps1",
       "Sha256": "fc6dfec6dd7c484276d92d049e924f0531b01b4d74a9cae22245f44cc2e3a66a",
       "Length": 1894
+    },
+    {
+      "Path": "scripts/Test-GenericLinuxFeasibilityContract.ps1",
+      "Sha256": "270becd140d3feac5391b828bf6cfb00931500689b84f44ab139db65b7a66877",
+      "Length": 7075
     },
     {
       "Path": "scripts/Test-GitHubPackArtifactMatrixSurface.ps1",
@@ -1443,8 +1463,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "dd24dd02faa813875b68ee519fd52a60ec9791e874ed88a84fbdd9d54b77de20",
-      "Length": 60444
+      "Sha256": "19ea485ffd976758614c68ffa1ab20503eb43c18c71cfb891012024f1b3759fd",
+      "Length": 60695
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1453,7 +1473,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "919a71726642e2e13b3b31157c7eb01ac571e662afff61a2750b4c112a23f0a3",
+      "Sha256": "527b22849dc80f7e5bf4b6378cdd1c5e31bf8305cc37811c62541cabbee929da",
       "Length": 45784
     },
     {
@@ -1954,7 +1974,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 81,
+    "InvariantGuardCount": 82,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",

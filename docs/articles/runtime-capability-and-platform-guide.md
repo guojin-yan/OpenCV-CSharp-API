@@ -77,6 +77,10 @@ The C# prerequisite is a gate, not a checkbox. A platform enters `runtime-packag
 
 在以上证据齐备前，国产平台只能通过本地 native 构建和 `OpenCvNativeRuntimeDir` 验证，不应发布为正式 RID 包，也不应把 generic Linux 包当作兼容性证明。
 
+The generic `linux-x64` boundary is documented in the [Generic linux-x64 RID Feasibility ADR](generic-linux-rid-adr.md). It is preview-only: the active matrix remains distro-specific, and a C#/.NET platform is not promoted by architecture alone.
+
+generic `linux-x64` 的边界见 [Generic linux-x64 RID Feasibility ADR](generic-linux-rid-adr.md)。它当前仅用于预览验证：active matrix 仍保持发行版专用，不能仅凭 CPU 架构或 C# 可运行就晋升平台支持。
+
 ## Local Probe Workflow / 本地验证流程
 
 ```powershell

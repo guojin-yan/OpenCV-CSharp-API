@@ -246,6 +246,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Generic Linux RID feasibility contract"
+        Script = Join-Path $repo "scripts/Test-GenericLinuxFeasibilityContract.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "API/ABI baseline contract"
         Script = Join-Path $repo "scripts/Test-ApiAbiBaselineContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)

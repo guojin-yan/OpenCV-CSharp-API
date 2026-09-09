@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/runtime-generic-linux-feasibility.schema.json",
+  "title": "Generic linux-x64 runtime feasibility contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "targetRid",
+    "status",
+    "packageIdentityAllowed",
+    "activePackageMatrix",
+    "proposedGlibcBaseline",
+    "ridSelection",
+    "referenceTargets",
+    "requiredEvidence",
+    "promotionGates",
+    "rollback",
+    "references"
+  ],
+  "properties": {
+    "$schema": { "const": "runtime-generic-linux-feasibility.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "targetRid": { "const": "linux-x64" },
+    "status": { "const": "preview-only" },
+    "packageIdentityAllowed": { "const": false },
+    "activePackageMatrix": { "const": "packaging/runtime/runtime-package-matrix.json" },
+    "proposedGlibcBaseline": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "ridSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "graphDirection", "exactAssetPriority", "packageReferencePolicy", "previewPolicy" ],
+      "properties": {
+        "graphDirection": { "const": "distro-specific RIDs import linux-x64; linux-x64 imports linux" },
+        "exactAssetPriority": { "const": "exact RID assets are preferred before imported fallback assets" },
+        "packageReferencePolicy": { "const": "package IDs are explicit; managed package does not auto-select a runtime package" },
+        "previewPolicy": { "const": "linux-x64 preview may be referenced only by explicit preview consumers" }
+      }
+    },
+    "referenceTargets": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "rid", "distro", "distroVersion", "profiles", "role" ],
+        "properties": {
+          "rid": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]+-x64$" },
+          "distro": { "type": "string", "minLength": 1 },
+          "distroVersion": { "type": "string", "pattern": "^[0-9]+(\\.[0-9]+)?$" },
+          "profiles": {
+            "type": "array",
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": { "enum": [ "full", "mini" ] }
+          },
+          "role": { "enum": [ "baseline", "cross-distro", "compatibility" ] }
+        }
+      }
+    },
+    "requiredEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetUserspace",
+        "glibcSymbolFloor",
+        "nativeExportClosure",
+        "profileParity",
+        "packageConsumer",
+        "nativeSmoke",
+        "dependencyClosure",
+        "provenance"
+      ],
+      "properties": {
+        "targetUserspace": { "const": "exact distro/version image or host identity" },
+        "glibcSymbolFloor": { "const": "measured GLIBC symbol versions from every shipped ELF" },
+        "nativeExportClosure": { "const": "2663 Full and 527 Mini wrapper ABI functions with export/dependency audit" },
+        "profileParity": { "const": "Full and Mini module, payload, and consumer contracts remain distinct and complete" },
+        "packageConsumer": { "const": "same-run managed/runtime packages restored by an independent linux-x64 consumer" },
+        "nativeSmoke": { "const": "loader call and representative core/imgproc/imgcodecs/videoio smoke without LD_LIBRARY_PATH" },
+        "dependencyClosure": { "const": "glibc, libstdc++, codec, and optional-module dependencies resolved without producer paths" },
+        "provenance": { "const": "source commit, SDK/toolchain, package hashes, artifact hashes, and runner identity" }
+      }
+    },
+    "promotionGates": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "onFailure", "activeIdentity", "noImplicitPromotion" ],
+      "properties": {
+        "onFailure": { "const": "retain distro-specific package identities and mark linux-x64 preview evidence failed" },
+        "activeIdentity": { "const": "packaging/runtime/runtime-package-matrix.json" },
+        "noImplicitPromotion": { "const": true }
+      }
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "dotnetRidCatalog", "dotnetRidGraphGuidance", "repositoryRidGraph", "ubuntu2204Glibc" ],
+      "properties": {
+        "dotnetRidCatalog": { "type": "string", "format": "uri" },
+        "dotnetRidGraphGuidance": { "type": "string", "format": "uri" },
+        "repositoryRidGraph": { "const": "packaging/runtime/runtime-distro-rid-graph.json" },
+        "ubuntu2204Glibc": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "runtime-generic-linux-feasibility.schema.json",
+  "schemaVersion": 1,
+  "targetRid": "linux-x64",
+  "status": "preview-only",
+  "packageIdentityAllowed": false,
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "proposedGlibcBaseline": "2.35",
+  "ridSelection": {
+    "graphDirection": "distro-specific RIDs import linux-x64; linux-x64 imports linux",
+    "exactAssetPriority": "exact RID assets are preferred before imported fallback assets",
+    "packageReferencePolicy": "package IDs are explicit; managed package does not auto-select a runtime package",
+    "previewPolicy": "linux-x64 preview may be referenced only by explicit preview consumers"
+  },
+  "referenceTargets": [
+    {
+      "rid": "debian.12-x64",
+      "distro": "debian",
+      "distroVersion": "12",
+      "profiles": [ "full", "mini" ],
+      "role": "cross-distro"
+    },
+    {
+      "rid": "fedora.40-x64",
+      "distro": "fedora",
+      "distroVersion": "40",
+      "profiles": [ "full", "mini" ],
+      "role": "cross-distro"
+    },
+    {
+      "rid": "ubuntu.22.04-x64",
+      "distro": "ubuntu",
+      "distroVersion": "22.04",
+      "profiles": [ "full", "mini" ],
+      "role": "baseline"
+    }
+  ],
+  "requiredEvidence": {
+    "targetUserspace": "exact distro/version image or host identity",
+    "glibcSymbolFloor": "measured GLIBC symbol versions from every shipped ELF",
+    "nativeExportClosure": "2663 Full and 527 Mini wrapper ABI functions with export/dependency audit",
+    "profileParity": "Full and Mini module, payload, and consumer contracts remain distinct and complete",
+    "packageConsumer": "same-run managed/runtime packages restored by an independent linux-x64 consumer",
+    "nativeSmoke": "loader call and representative core/imgproc/imgcodecs/videoio smoke without LD_LIBRARY_PATH",
+    "dependencyClosure": "glibc, libstdc++, codec, and optional-module dependencies resolved without producer paths",
+    "provenance": "source commit, SDK/toolchain, package hashes, artifact hashes, and runner identity"
+  },
+  "promotionGates": [
+    "Do not add linux-x64 to the active package matrix before all three reference distributions pass.",
+    "Measure the lowest GLIBC symbol version in every shipped ELF and compare it with the proposed baseline.",
+    "Build and consume Full and Mini separately; a Full result cannot promote Mini.",
+    "Restore only the same-run managed/runtime packages in an independent consumer process.",
+    "Execute native smoke through the packaged loader without LD_LIBRARY_PATH, producer PATH, or runtime-root overrides.",
+    "Record dependency closure, source/toolchain identity, package hashes, and runner/userspace facts.",
+    "Keep distro-specific package identities as the rollback path until a later release review approves promotion."
+  ],
+  "rollback": {
+    "onFailure": "retain distro-specific package identities and mark linux-x64 preview evidence failed",
+    "activeIdentity": "packaging/runtime/runtime-package-matrix.json",
+    "noImplicitPromotion": true
+  },
+  "references": {
+    "dotnetRidCatalog": "https://learn.microsoft.com/en-us/dotnet/core/rid-catalog",
+    "dotnetRidGraphGuidance": "https://learn.microsoft.com/en-us/dotnet/core/rid-catalog#rid-graph",
+    "repositoryRidGraph": "packaging/runtime/runtime-distro-rid-graph.json",
+    "ubuntu2204Glibc": "https://packages.ubuntu.com/jammy/libc6"
+  }
+}

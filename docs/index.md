@@ -60,7 +60,7 @@ Each tutorial has a deterministic command, generated input, inspectable PNG outp
 | Video / 视频 | [VideoIO](articles/videoio-guide.md), [Motion](articles/video-motion-guide.md), [Optical Flow](articles/optflow-guide.md) |
 | DNN and ML / DNN 与 ML | [DNN Net](articles/dnn-net-guide.md), [DNN Advanced](articles/dnn-net-advanced-guide.md), [Sample Model Assets](articles/sample-model-assets-guide.md), [ML](articles/ml-guide.md) |
 | Detection and composition / 检测与合成 | [ObjDetect](articles/objdetect-guide.md), [Tracking](articles/tracking-guide.md), [Stitching](articles/stitching-stitcher-guide.md) |
-| Runtime and platform diagnostics / 运行时与平台诊断 | [Runtime Capability And Platform Guide](articles/runtime-capability-and-platform-guide.md), [Typed Mat Views And Pixel Traits](articles/typed-mat-view-and-pixel-traits.md), [Support And Lifecycle Policy](articles/support-lifecycle-policy.md) |
+| Runtime and platform diagnostics / 运行时与平台诊断 | [Runtime Capability And Platform Guide](articles/runtime-capability-and-platform-guide.md), [Generic linux-x64 RID Feasibility ADR](articles/generic-linux-rid-adr.md), [Typed Mat Views And Pixel Traits](articles/typed-mat-view-and-pixel-traits.md), [Support And Lifecycle Policy](articles/support-lifecycle-policy.md) |
 
 The navigation sidebar contains the complete module-by-module article catalog. Existing article URLs remain stable; the tutorial series provides the primary path through them.
 
@@ -72,6 +72,7 @@ The navigation sidebar contains the complete module-by-module article catalog. E
 - [Version History / 版本说明索引](releases/README.md)
 - [5.0.0 Detailed Changes / 详细变更](releases/5.0.0.md)
 - [Support And Lifecycle Policy](articles/support-lifecycle-policy.md)
+- [Generic linux-x64 RID Feasibility ADR](articles/generic-linux-rid-adr.md)
 - [API And ABI Compatibility Policy](articles/api-abi-compatibility-policy.md)
 - [Linked Runtime Build Guide](articles/linked-runtime-build-guide.md)
 - [Linked Runtime Smoke Guide](articles/linked-runtime-smoke-guide.md)

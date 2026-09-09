@@ -225,6 +225,7 @@ function Get-Record {
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
         "docs/articles/features-upstream-parity-guide.md",
+        "docs/articles/generic-linux-rid-adr.md",
         "docs/articles/highgui-interaction-guide.md",
         "docs/articles/imgcodecs-upstream-parity-guide.md",
         "docs/articles/imgproc-geometry-guide.md",
@@ -264,6 +265,8 @@ function Get-Record {
         "nuget/logo.jpg",
         "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
         "packaging/runtime/android-runtime-evidence.json",
+        "packaging/runtime/runtime-generic-linux-feasibility.json",
+        "packaging/runtime/runtime-generic-linux-feasibility.schema.json",
         "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
@@ -297,7 +300,8 @@ function Get-Record {
           "scripts/Invoke-LifecycleRefreshContainerProducer.sh",
           "scripts/Test-LifecycleRefreshCandidateProducerSurface.ps1",
           "scripts/Test-LifecycleRefreshCandidatePackageSurface.ps1",
-          "scripts/Test-LifecycleRefreshRuntimeInputArtifact.ps1",
+        "scripts/Test-LifecycleRefreshRuntimeInputArtifact.ps1",
+        "scripts/Test-GenericLinuxFeasibilityContract.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
         "scripts/Get-SampleModelAssets.ps1",
@@ -864,7 +868,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 81
+            InvariantGuardCount = 82
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false
