@@ -23,7 +23,8 @@ $packageVersionScript = Join-Path $repo 'scripts/PackageVersion.ps1'
 $matrixRelativePath = 'packaging/runtime/runtime-generic-linux-preview-matrix.json'
 $matrixPath = Join-Path $repo ($matrixRelativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
 $inputRoot = (Resolve-Path -LiteralPath $RuntimeInputRoot).Path
-$outputRoot = [IO.Path]::GetFullPath((Join-Path $repo $OutputDir))
+$outputRootCandidate = if ([IO.Path]::IsPathRooted($OutputDir)) { $OutputDir } else { Join-Path $repo $OutputDir }
+$outputRoot = [IO.Path]::GetFullPath($outputRootCandidate)
 $pwsh = Get-Command pwsh -ErrorAction SilentlyContinue
 $dotnet = Get-Command dotnet -ErrorAction SilentlyContinue
 if ($null -eq $dotnet) {
@@ -121,9 +122,6 @@ try {
         -RuntimePackageId $previewPackageId `
         -PackageVersion $PackageVersion `
         -OutputRoot $stageRoot
-    if ($LASTEXITCODE -ne 0) {
-        throw 'Stage-Runtime failed while creating the generic Linux preview staging tree.'
-    }
 
     New-Item -ItemType Directory -Force -Path $packageOutput, $outputRoot | Out-Null
     & $dotnet.Source pack (Join-Path $runtimeProject 'JYPPX.OpenCV.runtime.csproj') `

@@ -42,8 +42,9 @@ foreach ($token in @(
         'previewArtifactIdentityAllowed',
         'publicationAllowed',
         'runtime-generic-linux-preview-matrix.json',
-    'runtime-input.provenance.json',
-    'Directory.Build.props',
+        'runtime-input.provenance.json',
+        'Directory.Build.props',
+        '[IO.Path]::IsPathRooted($OutputDir)',
         'SyntheticRuntimeInputs',
         'Test-RuntimeReleaseCandidatePreflight.ps1',
         'Normalize-NuGetPackageDeterminism.ps1',
@@ -57,6 +58,10 @@ foreach ($forbidden in @('dotnet nuget push', 'gh release', 'publish_github_pack
     if ($packageText.IndexOf($forbidden, [StringComparison]::OrdinalIgnoreCase) -ge 0) {
         throw "$packageScriptRelativePath contains forbidden publication surface: $forbidden"
     }
+}
+
+if ([regex]::Matches($packageText, '\$LASTEXITCODE\s+-ne\s+0').Count -ne 2) {
+    throw "$packageScriptRelativePath must inspect LASTEXITCODE only after its dotnet and child-pwsh process calls; in-process PowerShell staging propagates terminating errors directly."
 }
 
 foreach ($token in @(
