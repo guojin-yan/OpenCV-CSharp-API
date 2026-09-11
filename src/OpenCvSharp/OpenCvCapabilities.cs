@@ -488,7 +488,7 @@ namespace JYPPX.OpenCvSharp
 
         private static string GetRuntimeIdentifier()
         {
-#if NETCOREAPP3_0_OR_GREATER || NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
 #else
             return string.Empty;

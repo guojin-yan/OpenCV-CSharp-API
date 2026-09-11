@@ -93,7 +93,9 @@ jobs:
       runtime_matrix: ${{ steps.runtime_selection.outputs.runtime_matrix }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
       - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
         with:
           dotnet-version: |
             10.0.x
@@ -104,7 +106,7 @@ jobs:
         shell: pwsh
         run: throw "Publishing packages requires real native runtime inputs; synthetic runtime inputs validate package shape only."
       - name: Validate package version
-        if: ${{ !inputs.lifecycle_refresh_candidate }}
+        if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
         shell: pwsh
         env:
           PACKAGE_VERSION_INPUT: ${{ inputs.package_version }}
@@ -119,7 +121,7 @@ jobs:
             -PackageRevision $packageRevision | Out-Null
       - name: Validate runtime selection
         id: runtime_selection
-        if: ${{ !inputs.lifecycle_refresh_candidate }}
+        if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
         shell: pwsh
         env:
           RID_INPUT: ${{ inputs.rid }}
@@ -160,7 +162,7 @@ jobs:
           "runtime_matrix=$runtimeMatrix" >> $env:GITHUB_OUTPUT
           Write-Host "PACK_RUNTIME_MATRIX_SELECTION_OK rows=$(@($rows).Count) rid=$($env:RID_INPUT) profile=$($env:RUNTIME_PROFILE_INPUT)"
       - name: Check project invariants
-        if: ${{ !inputs.lifecycle_refresh_candidate }}
+        if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
         shell: pwsh
         run: |
           pwsh -NoProfile -File ./scripts/Initialize-UpstreamMapSourceEvidence.ps1

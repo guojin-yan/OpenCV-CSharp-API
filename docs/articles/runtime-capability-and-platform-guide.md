@@ -39,7 +39,7 @@ The platform fields are diagnostic inputs, not support claims:
 | --- | --- |
 | `OperatingSystemDescription` | Runtime-provided OS description; useful for evidence logs. |
 | `ProcessArchitecture` | Architecture of the current .NET process, not the host kernel. |
-| `RuntimeIdentifier` | SDK/runtime RID when available; it may be empty on .NET Framework. |
+| `RuntimeIdentifier` | SDK/runtime RID when available; it is empty on .NET Framework and .NET Core 3.1, whose reference APIs do not expose `RuntimeInformation.RuntimeIdentifier`. |
 | `ProcessBitness` | 32 or 64 bit process size. |
 
 Use the exact runtime package RID that matches the native artifact. Do not infer `linux-x64` from an x64 process when the package is distro-specific, and do not infer `arm64` support from a successful cross-build.
@@ -50,7 +50,7 @@ Use the exact runtime package RID that matches the native artifact. Do not infer
 | --- | --- |
 | `OperatingSystemDescription` | runtime 提供的 OS 描述，用于证据日志。 |
 | `ProcessArchitecture` | 当前 .NET 进程架构，不是 host kernel 架构。 |
-| `RuntimeIdentifier` | runtime 可提供的 SDK/RID；.NET Framework 上可能为空。 |
+| `RuntimeIdentifier` | runtime 可提供的 SDK/RID；.NET Framework 与 .NET Core 3.1 的 reference API 不公开 `RuntimeInformation.RuntimeIdentifier`，因此该字段为空。 |
 | `ProcessBitness` | 进程位数，32 或 64。 |
 
 应使用与 native artifact 完全匹配的 runtime package RID。不能因为进程是 x64 就推断为 `linux-x64`，也不能因为交叉编译成功就推断 ARM64 已支持。
