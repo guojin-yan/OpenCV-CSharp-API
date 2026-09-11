@@ -174,6 +174,45 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "artifacts/pack-download" -Issue "Pack workflow must download package artifacts into an isolated generated directory"
 Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "inputs.rid == 'all' && inputs.runtime_profile == 'all'" -Issue "Pack workflow artifact self-validation must run only for full RID/profile matrix inputs"
 
+foreach ($token in @(
+        'generic_linux_preview:',
+        'generic_linux_preview_artifact_run_id:',
+        'generic_linux_preview_profile:',
+        'validate-generic-linux-preview:',
+        'pack-generic-linux-preview:',
+        'verify-generic-linux-preview-ubuntu:',
+        'verify-generic-linux-preview-debian:',
+        'verify-generic-linux-preview-fedora:',
+        'fromJSON(needs.validate-generic-linux-preview.outputs.profile_matrix)',
+        'scripts/New-GenericLinuxPreviewPackage.ps1',
+        'scripts/Test-GenericLinuxPreviewConsumer.ps1',
+        'runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}',
+        'generic-linux-preview-runtime-${{ matrix.profile }}')) {
+    Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle $token -Issue "Pack workflow generic linux-x64 preview surface is missing required token"
+}
+
+foreach ($jobName in @(
+        'validate-generic-linux-preview',
+        'pack-generic-linux-preview',
+        'verify-generic-linux-preview-ubuntu',
+        'verify-generic-linux-preview-debian',
+        'verify-generic-linux-preview-fedora')) {
+    $jobMatch = [regex]::Match($packWorkflowText, "(?ms)^  $([regex]::Escape($jobName)):(?<body>.*?)(?=^  [A-Za-z0-9_-]+:|\z)")
+    if (-not $jobMatch.Success) {
+        Add-Violation -Violations $violations -Path $packWorkflowPath -Issue "Generic linux-x64 preview job is missing" -Text $jobName
+        continue
+    }
+
+    $jobBody = $jobMatch.Groups['body'].Value
+    foreach ($forbidden in @('dotnet nuget push', 'gh release', 'publish_github_packages')) {
+        if ($jobName -eq 'validate-generic-linux-preview' -and $forbidden -eq 'publish_github_packages') {
+            continue
+        }
+        Assert-NotContains -Violations $violations -Path $packWorkflowPath -Text $jobBody -Needle $forbidden -Issue "Generic linux-x64 preview job must not publish artifacts"
+    }
+}
+Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle "!inputs.generic_linux_preview" -Issue "Active pack jobs must be skipped during generic linux-x64 preview dispatch"
+
 foreach ($workflow in @(
         [pscustomobject]@{ Path = $buildNativeWorkflowPath; Text = $buildNativeWorkflowText },
         [pscustomobject]@{ Path = $buildManagedWorkflowPath; Text = $buildManagedWorkflowText },

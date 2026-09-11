@@ -228,6 +228,8 @@ $packContexts = [ordered]@{
     "pack/fedora.40-x64" = Get-JobContext -Lines $packLines -JobName "verify-targeted-real-fedora" -Path $packRelativePath
     "pack/rocky.9-x64" = Get-JobContext -Lines $packLines -JobName "verify-targeted-real-rocky" -Path $packRelativePath
     "pack/rhel.9-x64" = Get-JobContext -Lines $packLines -JobName "verify-targeted-real-rhel" -Path $packRelativePath
+    "pack/generic-linux-preview-debian" = Get-JobContext -Lines $packLines -JobName "verify-generic-linux-preview-debian" -Path $packRelativePath
+    "pack/generic-linux-preview-fedora" = Get-JobContext -Lines $packLines -JobName "verify-generic-linux-preview-fedora" -Path $packRelativePath
 }
 foreach ($name in @($packContexts.Keys)) {
     if ($null -ne $packContexts[$name]) {
@@ -248,6 +250,12 @@ if ($null -eq $packContexts["pack/debian.12-x64"]) {
 else {
     $aptContexts.Add($packContexts["pack/debian.12-x64"])
 }
+if ($null -eq $packContexts["pack/generic-linux-preview-debian"]) {
+    Add-Violation -Violations $violations -Path $packRelativePath -Issue "Generic Debian preview trust context was not found"
+}
+else {
+    $aptContexts.Add($packContexts["pack/generic-linux-preview-debian"])
+}
 
 $rpmContexts = [System.Collections.Generic.List[object]]::new()
 if ($null -eq $runtimeRpm) {
@@ -263,6 +271,12 @@ foreach ($name in @("pack/fedora.40-x64", "pack/rocky.9-x64", "pack/rhel.9-x64")
     else {
         $rpmContexts.Add($packContexts[$name])
     }
+}
+if ($null -eq $packContexts["pack/generic-linux-preview-fedora"]) {
+    Add-Violation -Violations $violations -Path $packRelativePath -Issue "Generic Fedora preview trust context was not found"
+}
+else {
+    $rpmContexts.Add($packContexts["pack/generic-linux-preview-fedora"])
 }
 
 $allContexts = @($aptContexts) + @($rpmContexts)
@@ -355,16 +369,16 @@ foreach ($context in $rpmContexts) {
 }
 
 $globalExpectedCounts = [ordered]@{
-    $expectedKeyUrl = 6
-    'microsoft_key="/tmp/microsoft-packages-key.asc"' = 6
-    'curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"' = 6
-    'echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -' = 6
-    'gpg --batch --yes --dearmor --output /etc/apt/keyrings/packages.microsoft.gpg "$microsoft_key"' = 2
-    'rpm --import "$microsoft_local_key"' = 4
-    'gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft' = 4
-    'dnf -y makecache --disablerepo="*" --enablerepo="packages-microsoft-com-prod"' = 4
-    'MICROSOFT_APT_TRUST_EVIDENCE' = 2
-    'MICROSOFT_RPM_TRUST_EVIDENCE' = 4
+    $expectedKeyUrl = 8
+    'microsoft_key="/tmp/microsoft-packages-key.asc"' = 8
+    'curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"' = 8
+    'echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -' = 8
+    'gpg --batch --yes --dearmor --output /etc/apt/keyrings/packages.microsoft.gpg "$microsoft_key"' = 3
+    'rpm --import "$microsoft_local_key"' = 5
+    'gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft' = 5
+    'dnf -y makecache --disablerepo="*" --enablerepo="packages-microsoft-com-prod"' = 5
+    'MICROSOFT_APT_TRUST_EVIDENCE' = 3
+    'MICROSOFT_RPM_TRUST_EVIDENCE' = 5
 }
 foreach ($needle in $globalExpectedCounts.Keys) {
     $count = Get-TextCount -Text $controlledText -Needle $needle
@@ -372,9 +386,9 @@ foreach ($needle in $globalExpectedCounts.Keys) {
         Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Microsoft feed trust token count must match the exact classified surface" -Text "'$needle' actual=$count expected=$($globalExpectedCounts[$needle])"
     }
 }
-if ((Get-TextCount -Text $controlledText -Needle $expectedKeySha256) -ne 5 -or
-    (Get-TextCount -Text $controlledText -Needle $expectedKeyFingerprint) -ne 5) {
-    Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Exact key hash and fingerprint must be bound once in the runtime producer and four verifier jobs"
+if ((Get-TextCount -Text $controlledText -Needle $expectedKeySha256) -ne 7 -or
+    (Get-TextCount -Text $controlledText -Needle $expectedKeyFingerprint) -ne 7) {
+    Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Exact key hash and fingerprint must be bound once in the runtime producer and six verifier jobs"
 }
 
 $forbiddenPatterns = [ordered]@{
@@ -427,6 +441,6 @@ if ($violations.Count -gt 0) {
 }
 
 Write-Host "Microsoft package-feed trust boundary passed."
-Write-Host "Key acquisitions: 6; APT scoped dearmor paths: $($aptContexts.Count); RPM verified local imports: $($rpmContexts.Count); local RHEL 9 repo configurations: $($rpmContexts.Count)."
+Write-Host "Key acquisitions: 8; APT scoped dearmor paths: $($aptContexts.Count); RPM verified local imports: $($rpmContexts.Count); local RHEL 9 repo configurations: $($rpmContexts.Count)."
 Write-Host "Key SHA256: $($expectedKeySha256.ToUpperInvariant()); full fingerprint: $expectedKeyFingerprint."
 Write-Host "All trust actions occur after payload and full-fingerprint verification; remote prod.repo and remote gpgkey paths: 0."

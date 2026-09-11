@@ -60,6 +60,19 @@ on:
         description: Required producer workflow run id containing lifecycle-refresh-runtime-input-<rid>-<profile>
         required: false
         default: ""
+      generic_linux_preview:
+        description: Run the generic linux-x64 preview producer and Ubuntu/Debian/Fedora consumer chain; publication is always disabled
+        required: true
+        type: boolean
+        default: false
+      generic_linux_preview_artifact_run_id:
+        description: Required producer workflow run id containing runtime-input-ubuntu.22.04-x64-<profile> artifacts
+        required: false
+        default: ""
+      generic_linux_preview_profile:
+        description: Generic linux-x64 preview profile; use all, full, or mini
+        required: true
+        default: all
       publish_github_packages:
         description: Publish packages to GitHub Packages; requires real runtime inputs
         required: true
@@ -195,7 +208,7 @@ jobs:
 
   pack-managed:
     needs: validate
-    if: ${{ !inputs.lifecycle_refresh_candidate }}
+    if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
     runs-on: windows-latest
     permissions:
       contents: read
@@ -262,7 +275,7 @@ jobs:
 
   pack-runtime:
     needs: validate
-    if: ${{ !inputs.lifecycle_refresh_candidate }}
+    if: ${{ !inputs.lifecycle_refresh_candidate && !inputs.generic_linux_preview }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.validate.outputs.runtime_matrix) }}
@@ -2361,6 +2374,332 @@ jobs:
             --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
             --api-key "${{ secrets.GITHUB_TOKEN }}" `
             --skip-duplicate
+
+  validate-generic-linux-preview:
+    if: ${{ github.repository == 'guojin-yan/OpenCV-CSharp-API' && inputs.generic_linux_preview == true && !inputs.lifecycle_refresh_candidate }}
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    outputs:
+      profile_matrix: ${{ steps.selection.outputs.profile_matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Validate generic linux-x64 preview matrix and package surface
+        id: selection
+        shell: pwsh
+        env:
+          PREVIEW_PROFILE: ${{ inputs.generic_linux_preview_profile }}
+          PRODUCER_RUN_ID: ${{ inputs.generic_linux_preview_artifact_run_id }}
+        run: |
+          if ($env:PRODUCER_RUN_ID -notmatch '^[0-9]+$') {
+            throw 'Generic linux-x64 preview requires a numeric generic_linux_preview_artifact_run_id from a successful Ubuntu 22.04 x64 runtime-input workflow run.'
+          }
+          if ('${{ inputs.publish_github_packages }}' -eq 'true') {
+            throw 'Generic linux-x64 preview is never publishable; set publish_github_packages=false.'
+          }
+          if ($env:PREVIEW_PROFILE -notin @('all', 'full', 'mini')) {
+            throw "Unsupported generic_linux_preview_profile: $env:PREVIEW_PROFILE"
+          }
+          $profiles = if ($env:PREVIEW_PROFILE -ceq 'all') { @('full', 'mini') } else { @($env:PREVIEW_PROFILE) }
+          $rows = @($profiles | ForEach-Object { [ordered]@{ profile = $_ } })
+          "profile_matrix=$(@{ include = $rows } | ConvertTo-Json -Compress -Depth 4)" >> $env:GITHUB_OUTPUT
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewMatrix.ps1
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewPackageSurface.ps1
+          Write-Host "GENERIC_LINUX_PREVIEW_DISPATCH_INPUTS_OK profile=$env:PREVIEW_PROFILE producer_run_id=$env:PRODUCER_RUN_ID publication_allowed=false"
+
+  pack-generic-linux-preview:
+    needs: validate-generic-linux-preview
+    if: ${{ needs.validate-generic-linux-preview.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate-generic-linux-preview.outputs.profile_matrix) }}
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Download Ubuntu 22.04 x64 baseline runtime input
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          run-id: ${{ inputs.generic_linux_preview_artifact_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview-input/${{ matrix.profile }}
+      - name: Restore managed solution
+        run: dotnet restore ./OpenCV-CSharp-API.slnx
+      - name: Build managed solution at exact package version
+        shell: pwsh
+        run: |
+          . ./scripts/PackageVersion.ps1
+          $packageVersion = '${{ inputs.package_version }}'
+          $version = ConvertTo-OpenCvCSharpPackageVersion -Version $packageVersion
+          dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore `
+            -p:Version=$packageVersion `
+            -p:PackageVersion=$packageVersion `
+            -p:OpenCvCSharpNuGetPackageVersion=$($version.NuGetVersion)
+      - name: Pack managed API for preview consumer
+        shell: pwsh
+        run: |
+          $packArguments = @(
+            '-NoProfile',
+            '-File', './scripts/Pack-Managed.ps1',
+            '-OpenCvVersion', '${{ inputs.opencv_version }}',
+            '-PackageRevision', '${{ inputs.package_revision }}',
+            '-PackageVersion', '${{ inputs.package_version }}',
+            '-NoBuild',
+            '-NoRestore'
+          )
+          & pwsh @packArguments
+          if ($LASTEXITCODE -ne 0) { throw "Managed preview consumer package generation failed with exit code $LASTEXITCODE." }
+      - name: Create isolated generic linux-x64 preview runtime package
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/New-GenericLinuxPreviewPackage.ps1 `
+            -RuntimeInputRoot ./artifacts/generic-linux-preview-input/${{ matrix.profile }} `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -PackageRevision '${{ inputs.package_revision }}' `
+            -PackageVersion '${{ inputs.package_version }}' `
+            -OutputDir ./artifacts/generic-linux-preview
+      - name: Upload preview managed package
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-preview-managed-${{ matrix.profile }}
+          path: artifacts/packages/*.nupkg
+          if-no-files-found: error
+      - name: Upload preview runtime package and evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/*
+          if-no-files-found: error
+
+  verify-generic-linux-preview-ubuntu:
+    needs:
+      - validate-generic-linux-preview
+      - pack-generic-linux-preview
+    if: ${{ needs.validate-generic-linux-preview.result == 'success' && needs.pack-generic-linux-preview.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate-generic-linux-preview.outputs.profile_matrix) }}
+    runs-on: ubuntu-22.04
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Download preview managed package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-preview-managed-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/nupkg-managed
+      - name: Download preview runtime package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/nupkg-linux-x64-preview-${{ matrix.profile }}
+      - name: Restore, build, and run Ubuntu 22.04 preview consumer
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewConsumer.ps1 `
+            -ArtifactRoot ./artifacts/generic-linux-preview `
+            -ConsumerRid ubuntu.22.04-x64 `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -ExpectedPackageVersion '${{ inputs.package_version }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -RunNativeSmoke
+
+  verify-generic-linux-preview-debian:
+    needs:
+      - validate-generic-linux-preview
+      - pack-generic-linux-preview
+    if: ${{ needs.validate-generic-linux-preview.result == 'success' && needs.pack-generic-linux-preview.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate-generic-linux-preview.outputs.profile_matrix) }}
+    runs-on: ubuntu-24.04
+    container: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Install PowerShell and Debian preview consumer tooling
+        shell: bash
+        env:
+          MICROSOFT_SIGNING_KEY_SHA256: 2fa9c05d591a1582a9aba276272478c262e95ad00acf60eaee1644d93941e3c6
+          MICROSOFT_SIGNING_KEY_FINGERPRINT: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          POWERSHELL_DEBIAN_PACKAGE_VERSION: 7.6.4-1.deb
+          POWERSHELL_PACKAGE_SEMANTIC_VERSION: 7.6.4
+        run: |
+          set -euo pipefail
+          . /etc/os-release
+          test "${ID:-}" = debian
+          case "${VERSION_ID:-}" in 12|12.*) ;; *) exit 1 ;; esac
+          test "$(uname -m)" = x86_64
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update
+          apt-get install -y --no-install-recommends apt-transport-https ca-certificates curl git gnupg gzip libicu72 libssl3 libunwind8 tar unzip zlib1g
+          install -d -m 0755 /etc/apt/keyrings
+          microsoft_key_url="https://packages.microsoft.com/keys/microsoft.asc"
+          microsoft_key="/tmp/microsoft-packages-key.asc"
+          curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"
+          echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -
+          microsoft_key_metadata="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_key")"
+          microsoft_key_fingerprints="$(printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$microsoft_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "uid" { print $10 }' | grep -Fqx "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+          gpg --batch --yes --dearmor --output /etc/apt/keyrings/packages.microsoft.gpg "$microsoft_key"
+          installed_key_fingerprints="$(gpg --batch --show-keys --with-colons --fingerprint /etc/apt/keyrings/packages.microsoft.gpg | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$installed_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          chmod go+r /etc/apt/keyrings/packages.microsoft.gpg
+          echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft-prod.list
+          echo "MICROSOFT_APT_TRUST_EVIDENCE generic_preview=true key_sha256=$MICROSOFT_SIGNING_KEY_SHA256 key_fingerprint=$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          rm -f "$microsoft_key"
+          apt-get update
+          apt-get install -y --no-install-recommends "powershell=$POWERSHELL_DEBIAN_PACKAGE_VERSION"
+          installed_powershell_package_version="$(dpkg-query -W -f='${Version}' powershell)"
+          installed_powershell_package_architecture="$(dpkg-query -W -f='${Architecture}' powershell)"
+          test "$installed_powershell_package_version" = "$POWERSHELL_DEBIAN_PACKAGE_VERSION"
+          test "$installed_powershell_package_architecture" = "amd64"
+          installed_powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
+          process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$installed_powershell_version" = "$POWERSHELL_PACKAGE_SEMANTIC_VERSION"
+          test "$process_architecture" = "X64"
+          echo "POWERSHELL_APT_TOOLCHAIN_EVIDENCE generic_preview=true package_version=$installed_powershell_package_version semantic_version=$installed_powershell_version package_arch=$installed_powershell_package_architecture process_arch=$process_architecture"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Download preview managed package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-preview-managed-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/nupkg-managed
+      - name: Download preview runtime package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/nupkg-linux-x64-preview-${{ matrix.profile }}
+      - name: Restore, build, and run Debian 12 preview consumer
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewConsumer.ps1 `
+            -ArtifactRoot ./artifacts/generic-linux-preview `
+            -ConsumerRid debian.12-x64 `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -ExpectedPackageVersion '${{ inputs.package_version }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -RunNativeSmoke
+
+  verify-generic-linux-preview-fedora:
+    needs:
+      - validate-generic-linux-preview
+      - pack-generic-linux-preview
+    if: ${{ needs.validate-generic-linux-preview.result == 'success' && needs.pack-generic-linux-preview.result == 'success' }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate-generic-linux-preview.outputs.profile_matrix) }}
+    runs-on: ubuntu-24.04
+    container: fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Install PowerShell and Fedora preview consumer tooling
+        shell: bash
+        env:
+          MICROSOFT_SIGNING_KEY_SHA256: 2fa9c05d591a1582a9aba276272478c262e95ad00acf60eaee1644d93941e3c6
+          MICROSOFT_SIGNING_KEY_FINGERPRINT: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+          POWERSHELL_RPM_PACKAGE_NEVRA: powershell-7.6.4-1.rh.x86_64
+          POWERSHELL_PACKAGE_SEMANTIC_VERSION: 7.6.4
+        run: |
+          set -euo pipefail
+          . /etc/os-release
+          test "${ID:-}" = fedora
+          case "${VERSION_ID:-}" in 40|40.*) ;; *) exit 1 ;; esac
+          test "$(uname -m)" = x86_64
+          dnf install -y ca-certificates curl dnf-plugins-core git gnupg2 gzip libicu libstdc++ libunwind openssl-libs tar unzip zlib
+          microsoft_key_url="https://packages.microsoft.com/keys/microsoft.asc"
+          microsoft_key="/tmp/microsoft-packages-key.asc"
+          microsoft_local_key="/etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft"
+          curl --proto "=https" --tlsv1.2 -fsSL "$microsoft_key_url" -o "$microsoft_key"
+          echo "$MICROSOFT_SIGNING_KEY_SHA256  $microsoft_key" | sha256sum -c -
+          microsoft_key_metadata="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_key")"
+          microsoft_key_fingerprints="$(printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$microsoft_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          printf '%s\n' "$microsoft_key_metadata" | awk -F: '$1 == "uid" { print $10 }' | grep -Fqx "Microsoft (Release signing) <gpgsecurity@microsoft.com>"
+          install -d -m 0755 /etc/pki/rpm-gpg
+          install -o root -g root -m 0644 "$microsoft_key" "$microsoft_local_key"
+          installed_key_fingerprints="$(gpg --batch --show-keys --with-colons --fingerprint "$microsoft_local_key" | awk -F: '$1 == "fpr" { print $10 }')"
+          test "$installed_key_fingerprints" = "$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          rpm --import "$microsoft_local_key"
+          rpm -q gpg-pubkey-be1229cf-5631588c
+          rm -f "$microsoft_key"
+          printf '%s\n' \
+            "[packages-microsoft-com-prod]" \
+            "name=Microsoft Production" \
+            "baseurl=https://packages.microsoft.com/rhel/9/prod/" \
+            "enabled=1" \
+            "gpgcheck=1" \
+            "repo_gpgcheck=1" \
+            "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Microsoft" \
+            "sslverify=1" \
+            > /etc/yum.repos.d/microsoft-prod.repo
+          dnf -y makecache --disablerepo="*" --enablerepo="packages-microsoft-com-prod"
+          echo "MICROSOFT_RPM_TRUST_EVIDENCE generic_preview=true key_sha256=$MICROSOFT_SIGNING_KEY_SHA256 key_fingerprint=$MICROSOFT_SIGNING_KEY_FINGERPRINT"
+          repoquery_result="$(dnf repoquery --disablerepo="*" --enablerepo="packages-microsoft-com-prod" --qf "%{name}-%{evr}.%{arch}|%{repoid}" "$POWERSHELL_RPM_PACKAGE_NEVRA")"
+          printf '%s\n' "$repoquery_result" | grep -Fqx "$POWERSHELL_RPM_PACKAGE_NEVRA|packages-microsoft-com-prod"
+          dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"
+          installed_powershell_package_identity="$(rpm -q --qf '%{NAME}|%{EVR}|%{ARCH}|%{VENDOR}' powershell)"
+          test "$installed_powershell_package_identity" = "powershell|7.6.4-1.rh|x86_64|(none)"
+          installed_powershell_version="$(pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' | tr -d '\r')"
+          process_architecture="$(pwsh -NoProfile -Command '[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()' | tr -d '\r')"
+          test "$installed_powershell_version" = "$POWERSHELL_PACKAGE_SEMANTIC_VERSION"
+          test "$process_architecture" = "X64"
+          echo "POWERSHELL_RPM_TOOLCHAIN_EVIDENCE generic_preview=true package_identity=$installed_powershell_package_identity semantic_version=$installed_powershell_version process_arch=$process_architecture"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - name: Download preview managed package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-preview-managed-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/nupkg-managed
+      - name: Download preview runtime package
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/nupkg-linux-x64-preview-${{ matrix.profile }}
+      - name: Restore, build, and run Fedora 40 preview consumer
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewConsumer.ps1 `
+            -ArtifactRoot ./artifacts/generic-linux-preview `
+            -ConsumerRid fedora.40-x64 `
+            -RuntimeProfile '${{ matrix.profile }}' `
+            -ExpectedPackageVersion '${{ inputs.package_version }}' `
+            -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -RunNativeSmoke
 
   pack-lifecycle-refresh-managed:
     needs: validate-lifecycle-refresh-candidate

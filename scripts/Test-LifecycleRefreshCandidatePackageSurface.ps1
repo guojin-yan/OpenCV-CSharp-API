@@ -75,8 +75,8 @@ foreach ($jobName in @(
     Assert-NotContains -Text $body -Needle 'gh release' -Issue 'Candidate package jobs must never create a GitHub release'
 }
 
-Assert-Matches -Pattern '(?m)^  pack-managed:\s+needs: validate\s+if: \$\{\{ !inputs\.lifecycle_refresh_candidate \}\}' -Issue 'Active managed packaging must be skipped in candidate mode'
-Assert-Matches -Pattern '(?m)^  pack-runtime:\s+needs: validate\s+if: \$\{\{ !inputs\.lifecycle_refresh_candidate \}\}' -Issue 'Active runtime packaging must be skipped in candidate mode'
+Assert-Matches -Pattern '(?m)^  pack-managed:\s+needs: validate\s+if: \$\{\{ !inputs\.lifecycle_refresh_candidate && !inputs\.generic_linux_preview \}\}' -Issue 'Active managed packaging must be skipped in candidate and generic preview modes'
+Assert-Matches -Pattern '(?m)^  pack-runtime:\s+needs: validate\s+if: \$\{\{ !inputs\.lifecycle_refresh_candidate && !inputs\.generic_linux_preview \}\}' -Issue 'Active runtime packaging must be skipped in candidate and generic preview modes'
 Assert-Contains -Needle 'actions: read' -Issue 'Candidate cross-run artifact consumers must request only Actions read permission'
 
 if ($violations.Count -gt 0) {

@@ -1,0 +1,84 @@
+{
+  "$schema": "runtime-generic-linux-preview-matrix.schema.json",
+  "schemaVersion": 1,
+  "status": "preview-only",
+  "targetRid": "linux-x64",
+  "activePackageIdentityAllowed": false,
+  "previewArtifactIdentityAllowed": true,
+  "publicationAllowed": false,
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "feasibilityContract": "packaging/runtime/runtime-generic-linux-feasibility.json",
+  "producer": {
+    "rid": "linux-x64",
+    "sourceRid": "ubuntu.22.04-x64",
+    "distro": "ubuntu",
+    "distroVersion": "22.04",
+    "runner": "ubuntu-22.04",
+    "profiles": [ "full", "mini" ],
+    "glibcBaseline": "2.35",
+    "artifactPrefix": "generic-linux-preview-runtime-input"
+  },
+  "consumers": [
+    {
+      "rid": "ubuntu.22.04-x64",
+      "distro": "ubuntu",
+      "distroVersion": "22.04",
+      "runner": "ubuntu-22.04",
+      "role": "baseline",
+      "execution": "hosted-runner",
+      "profiles": [ "full", "mini" ]
+    },
+    {
+      "rid": "debian.12-x64",
+      "distro": "debian",
+      "distroVersion": "12",
+      "runner": "ubuntu-24.04",
+      "role": "cross-distro",
+      "execution": "container",
+      "containerImage": "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc",
+      "profiles": [ "full", "mini" ]
+    },
+    {
+      "rid": "fedora.40-x64",
+      "distro": "fedora",
+      "distroVersion": "40",
+      "runner": "ubuntu-24.04",
+      "role": "cross-distro",
+      "execution": "container",
+      "containerImage": "fedora:40@sha256:3c86d25fef9d2001712bc3d9b091fc40cf04be4767e48f1aa3b785bf58d300ed",
+      "profiles": [ "full", "mini" ]
+    }
+  ],
+  "rids": [
+    {
+      "rid": "linux-x64",
+      "platformFamily": "linux",
+      "opencvRid": "ubuntu.22.04-x64",
+      "nativeExtension": ".so",
+      "producer": {
+        "kind": "linux",
+        "profiles": [ "full", "mini" ]
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "name": "full",
+      "packageIdSuffix": ".preview",
+      "buildList": "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud",
+      "modules": [ "core", "imgcodecs", "imgproc", "videoio", "flann", "geometry", "calib", "stereo", "dnn", "ml", "objdetect", "photo", "features", "video", "highgui", "stitching", "ptcloud" ],
+      "optionalModules": [ "xfeatures2d", "xobjdetect", "quality", "xphoto", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo" ],
+      "packageId": "JYPPX.OpenCV.runtime.linux-x64.preview",
+      "artifactName": "nupkg-linux-x64-preview-full"
+    },
+    {
+      "name": "mini",
+      "packageIdSuffix": ".preview.mini",
+      "buildList": "core,imgproc,imgcodecs,videoio,geometry,flann",
+      "modules": [ "core", "imgproc", "imgcodecs", "videoio", "geometry", "flann" ],
+      "optionalModules": [],
+      "packageId": "JYPPX.OpenCV.runtime.linux-x64.preview.mini",
+      "artifactName": "nupkg-linux-x64-preview-mini"
+    }
+  ]
+}

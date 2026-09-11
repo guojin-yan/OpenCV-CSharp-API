@@ -267,6 +267,8 @@ function Get-Record {
         "packaging/runtime/android-runtime-evidence.json",
         "packaging/runtime/runtime-generic-linux-feasibility.json",
         "packaging/runtime/runtime-generic-linux-feasibility.schema.json",
+        "packaging/runtime/runtime-generic-linux-preview-matrix.json",
+        "packaging/runtime/runtime-generic-linux-preview-matrix.schema.json",
         "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
@@ -302,6 +304,11 @@ function Get-Record {
           "scripts/Test-LifecycleRefreshCandidatePackageSurface.ps1",
         "scripts/Test-LifecycleRefreshRuntimeInputArtifact.ps1",
         "scripts/Test-GenericLinuxFeasibilityContract.ps1",
+        "scripts/Test-GenericLinuxPreviewMatrix.ps1",
+        "scripts/New-GenericLinuxPreviewPackage.ps1",
+        "scripts/Test-GenericLinuxPreviewPackageSurface.ps1",
+        "scripts/Test-GenericLinuxPreviewConsumer.ps1",
+        "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
           "packaging/runtime/patches/opencv-5.0.0-photo-ccm-instance-color-space.patch",
           "scripts/New-RuntimeInputArtifact.ps1",
         "scripts/Get-SampleModelAssets.ps1",
@@ -868,7 +875,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 82
+            InvariantGuardCount = 84
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

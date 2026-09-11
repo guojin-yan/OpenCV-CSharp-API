@@ -206,6 +206,8 @@ $expectedJobImages = [ordered]@{
     "verify-targeted-real-fedora" = $approvedByRid["fedora.40-x64"]
     "verify-targeted-real-rocky" = $approvedByRid["rocky.9-x64"]
     "verify-targeted-real-rhel" = $approvedByRid["rhel.9-x64"]
+    "verify-generic-linux-preview-debian" = $approvedByRid["debian.12-x64"]
+    "verify-generic-linux-preview-fedora" = $approvedByRid["fedora.40-x64"]
 }
 $jobContainers = [System.Collections.Generic.List[object]]::new()
 foreach ($workflowFile in $workflowFiles) {
@@ -227,8 +229,8 @@ foreach ($workflowFile in $workflowFiles) {
     }
 }
 
-if ($jobContainers.Count -ne 4) {
-    Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Workflows must contain exactly four job-level container selectors" -Text "actual=$($jobContainers.Count)"
+if ($jobContainers.Count -ne 6) {
+    Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Workflows must contain exactly six job-level container selectors" -Text "actual=$($jobContainers.Count)"
 }
 $seenJobs = @{}
 foreach ($container in $jobContainers) {

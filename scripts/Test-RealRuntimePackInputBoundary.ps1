@@ -136,14 +136,17 @@ else {
         "lifecycle_refresh_rid",
         "lifecycle_refresh_profile",
         "lifecycle_refresh_artifact_run_id",
-        "publish_github_packages"
+        "publish_github_packages",
+        "generic_linux_preview",
+        "generic_linux_preview_artifact_run_id",
+        "generic_linux_preview_profile"
     )
-    if ($dispatchInputNames.Count -ne 15 -or
+    if ($dispatchInputNames.Count -ne 18 -or
         (Compare-Object -ReferenceObject $expectedDispatchInputNames -DifferenceObject $dispatchInputNames)) {
         Add-Violation `
             -Violations $violations `
             -Path $packWorkflowPath `
-            -Issue "pack.yml workflow_dispatch must retain exactly the fifteen supported inputs allowed by GitHub" `
+            -Issue "pack.yml workflow_dispatch must retain exactly the eighteen supported inputs allowed by GitHub" `
             -Text ($dispatchInputNames -join ", ")
     }
 }

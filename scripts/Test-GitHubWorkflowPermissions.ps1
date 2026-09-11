@@ -66,6 +66,25 @@ $expectations = [ordered]@{
                 actions = "read"
                 contents = "read"
             }
+            "validate-generic-linux-preview" = New-PermissionMap @{
+                contents = "read"
+            }
+            "pack-generic-linux-preview" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+            "verify-generic-linux-preview-ubuntu" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+            "verify-generic-linux-preview-debian" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+            "verify-generic-linux-preview-fedora" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
         }
         RequiredJobMarkers = [ordered]@{
             "pack-managed" = @(
@@ -77,6 +96,11 @@ $expectations = [ordered]@{
                 'secrets.GITHUB_TOKEN',
                 "run-id:",
                 "github-token:"
+            )
+            "pack-generic-linux-preview" = @(
+                "run-id:",
+                "github-token:",
+                "New-GenericLinuxPreviewPackage.ps1"
             )
         }
     }

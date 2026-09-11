@@ -252,12 +252,14 @@ $runtimeArm64Archive = Get-DelimitedContext -Text $runtimeText -StartNeedle '   
 $aptContexts = [System.Collections.Generic.List[object]]::new()
 Add-Context -Contexts $aptContexts -Context $runtimeApt -Path $runtimeRelativePath -Issue "Runtime Debian APT PowerShell toolchain context was not found"
 Add-Context -Contexts $aptContexts -Context (Get-JobContext -Lines $packLines -JobName "verify-targeted-real-debian" -Path $packRelativePath) -Path $packRelativePath -Issue "Pack Debian APT PowerShell toolchain context was not found"
+Add-Context -Contexts $aptContexts -Context (Get-JobContext -Lines $packLines -JobName "verify-generic-linux-preview-debian" -Path $packRelativePath) -Path $packRelativePath -Issue "Generic Debian preview APT PowerShell toolchain context was not found"
 
 $rpmContexts = [System.Collections.Generic.List[object]]::new()
 Add-Context -Contexts $rpmContexts -Context $runtimeRpm -Path $runtimeRelativePath -Issue "Runtime RPM PowerShell toolchain context was not found"
 foreach ($jobName in @("verify-targeted-real-fedora", "verify-targeted-real-rocky", "verify-targeted-real-rhel")) {
     Add-Context -Contexts $rpmContexts -Context (Get-JobContext -Lines $packLines -JobName $jobName -Path $packRelativePath) -Path $packRelativePath -Issue "Pack RPM PowerShell toolchain context was not found"
 }
+Add-Context -Contexts $rpmContexts -Context (Get-JobContext -Lines $packLines -JobName "verify-generic-linux-preview-fedora" -Path $packRelativePath) -Path $packRelativePath -Issue "Generic Fedora preview RPM PowerShell toolchain context was not found"
 
 $apkContexts = [System.Collections.Generic.List[object]]::new()
 Add-Context -Contexts $apkContexts -Context $runtimeApk -Path $runtimeRelativePath -Issue "Runtime Alpine APK PowerShell toolchain context was not found"
@@ -268,11 +270,11 @@ Add-Context -Contexts $arm64ArchiveContexts -Context $runtimeArm64Archive -Path 
 Add-Context -Contexts $arm64ArchiveContexts -Context (Get-JobContext -Lines $packLines -JobName "verify-targeted-real-ubuntu2204-arm64" -Path $packRelativePath) -Path $packRelativePath -Issue "Pack Ubuntu 22.04 ARM64 archive PowerShell context was not found"
 Add-Context -Contexts $arm64ArchiveContexts -Context (Get-JobContext -Lines $packLines -JobName "verify-targeted-real-debian-arm64" -Path $packRelativePath) -Path $packRelativePath -Issue "Pack Debian 12 ARM64 archive PowerShell context was not found"
 
-if ($aptContexts.Count -ne 2) {
-    Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell APT package-manager contexts must be classified exactly" -Text "actual=$($aptContexts.Count) expected=2"
+if ($aptContexts.Count -ne 3) {
+    Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell APT package-manager contexts must be classified exactly" -Text "actual=$($aptContexts.Count) expected=3"
 }
-if ($rpmContexts.Count -ne 4) {
-    Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell RPM package-manager contexts must be classified exactly" -Text "actual=$($rpmContexts.Count) expected=4"
+if ($rpmContexts.Count -ne 5) {
+    Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell RPM package-manager contexts must be classified exactly" -Text "actual=$($rpmContexts.Count) expected=5"
 }
 if ($apkContexts.Count -ne 2) {
     Add-Violation -Violations $script:violations -Path ".github/workflows" -Issue "PowerShell APK package-manager contexts must be classified exactly" -Text "actual=$($apkContexts.Count) expected=2"
@@ -351,20 +353,20 @@ foreach ($workflowRecord in $workflowRecords) {
     }
 }
 
-Assert-GlobalCount -Needle "POWERSHELL_DEBIAN_PACKAGE_VERSION: $expectedDebianPackageVersion" -ExpectedCount 2 -Issue "Debian package-manager pin must appear once in the producer and once in the verifier"
-Assert-GlobalCount -Needle "POWERSHELL_RPM_PACKAGE_NEVRA: $expectedRpmPackageNevra" -ExpectedCount 4 -Issue "RPM package-manager pin must appear once in the producer and once per RPM verifier"
-Assert-GlobalCount -Needle "POWERSHELL_PACKAGE_SEMANTIC_VERSION: $expectedPackageSemanticVersion" -ExpectedCount 5 -Issue "Debian/RPM semantic pwsh pin must appear once in the producer and once per verifier"
+Assert-GlobalCount -Needle "POWERSHELL_DEBIAN_PACKAGE_VERSION: $expectedDebianPackageVersion" -ExpectedCount 3 -Issue "Debian package-manager pin must appear once in the producer and once per classified verifier"
+Assert-GlobalCount -Needle "POWERSHELL_RPM_PACKAGE_NEVRA: $expectedRpmPackageNevra" -ExpectedCount 5 -Issue "RPM package-manager pin must appear once in the producer and once per classified verifier"
+Assert-GlobalCount -Needle "POWERSHELL_PACKAGE_SEMANTIC_VERSION: $expectedPackageSemanticVersion" -ExpectedCount 7 -Issue "Debian/RPM semantic pwsh pin assignments must remain exact"
 Assert-GlobalCount -Needle "POWERSHELL_ALPINE_PACKAGE_VERSION: $expectedAlpinePackageVersion" -ExpectedCount 2 -Issue "Alpine package-manager pin must appear once in the producer and once in the verifier"
 Assert-GlobalCount -Needle "POWERSHELL_ALPINE_SEMANTIC_VERSION: $expectedAlpineSemanticVersion" -ExpectedCount 2 -Issue "Alpine semantic pwsh pin must appear once in the producer and once in the verifier"
 Assert-GlobalCount -Needle "POWERSHELL_VERSION: $expectedArm64ArchiveVersion" -ExpectedCount 3 -Issue "ARM64 archive version pin must remain exact in the producer and two ARM64 verifiers"
 Assert-GlobalCount -Needle "POWERSHELL_SHA256: $expectedArm64ArchiveSha256" -ExpectedCount 3 -Issue "ARM64 archive SHA256 pin must remain exact in the producer and two ARM64 verifiers"
-Assert-GlobalCount -Needle 'apt-get install -y --no-install-recommends "powershell=$POWERSHELL_DEBIAN_PACKAGE_VERSION"' -ExpectedCount 2 -Issue "Only the two classified APT contexts may install PowerShell"
-Assert-GlobalCount -Needle 'dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"' -ExpectedCount 4 -Issue "Only the four classified RPM contexts may install PowerShell"
+Assert-GlobalCount -Needle 'apt-get install -y --no-install-recommends "powershell=$POWERSHELL_DEBIAN_PACKAGE_VERSION"' -ExpectedCount 3 -Issue "Only the three classified APT contexts may install PowerShell"
+Assert-GlobalCount -Needle 'dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"' -ExpectedCount 5 -Issue "Only the five classified RPM contexts may install PowerShell"
 Assert-GlobalCount -Needle 'powershell=$POWERSHELL_ALPINE_PACKAGE_VERSION' -ExpectedCount 2 -Issue "Only the two classified APK contexts may install PowerShell"
 Assert-GlobalCount -Needle 'PowerShell/PowerShell/releases/download/v$POWERSHELL_VERSION/powershell-$POWERSHELL_VERSION-linux-arm64.tar.gz' -ExpectedCount 3 -Issue "Only the three classified ARM64 archive contexts may download PowerShell"
 Assert-GlobalCount -Needle 'echo "$POWERSHELL_SHA256  $powershell_archive" | sha256sum -c -' -ExpectedCount 3 -Issue "Every ARM64 archive download must keep SHA256 verification"
-Assert-GlobalCount -Needle 'POWERSHELL_APT_TOOLCHAIN_EVIDENCE' -ExpectedCount 2 -Issue "APT toolchain evidence count must match the classified surface"
-Assert-GlobalCount -Needle 'POWERSHELL_RPM_TOOLCHAIN_EVIDENCE' -ExpectedCount 4 -Issue "RPM toolchain evidence count must match the classified surface"
+Assert-GlobalCount -Needle 'POWERSHELL_APT_TOOLCHAIN_EVIDENCE' -ExpectedCount 3 -Issue "APT toolchain evidence count must match the classified surface"
+Assert-GlobalCount -Needle 'POWERSHELL_RPM_TOOLCHAIN_EVIDENCE' -ExpectedCount 5 -Issue "RPM toolchain evidence count must match the classified surface"
 Assert-GlobalCount -Needle 'POWERSHELL_APK_TOOLCHAIN_EVIDENCE' -ExpectedCount 2 -Issue "APK toolchain evidence count must match the classified surface"
 
 $forbiddenLinePatterns = [ordered]@{

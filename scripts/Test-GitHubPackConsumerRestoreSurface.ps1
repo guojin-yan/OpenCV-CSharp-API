@@ -6,6 +6,9 @@ param(
     [string]$ExpectedSyntheticRuntimeInputs = "true",
     [string]$SelectedRid = "",
     [string]$SelectedRuntimeProfile = "",
+    [string]$RuntimePackageIdOverride = "",
+    [string]$RuntimeAssetRidOverride = "",
+    [string]$ConsumerRuntimeRidOverride = "",
     [switch]$CompileNativeSmoke,
     [switch]$RunNativeSmoke,
     [string]$NativeExecutionHost = "",
@@ -642,6 +645,21 @@ $selectedProfileSpecs = @($matrix.profiles | Where-Object { $_.name -eq $Selecte
 if ($selectedMode -and ($selectedRidSpecs.Count -ne 1 -or $selectedProfileSpecs.Count -ne 1)) {
     throw "Selected RID/profile was not found exactly once in the runtime matrix: $SelectedRid / $SelectedRuntimeProfile"
 }
+if (-not [string]::IsNullOrWhiteSpace($RuntimePackageIdOverride) -and -not $selectedMode) {
+    throw "RuntimePackageIdOverride requires one selected RID/profile package pair."
+}
+if (-not [string]::IsNullOrWhiteSpace($RuntimePackageIdOverride) -and
+    $selectedProfileSpecs.Count -eq 1 -and
+    $null -ne $selectedProfileSpecs[0].PSObject.Properties['packageId'] -and
+    [string]$selectedProfileSpecs[0].packageId -cne $RuntimePackageIdOverride) {
+    throw "RuntimePackageIdOverride does not match the selected preview matrix profile: $RuntimePackageIdOverride"
+}
+if (-not [string]::IsNullOrWhiteSpace($RuntimeAssetRidOverride) -and -not $selectedMode) {
+    throw "RuntimeAssetRidOverride requires one selected RID/profile package pair."
+}
+if (-not [string]::IsNullOrWhiteSpace($ConsumerRuntimeRidOverride) -and -not $selectedMode) {
+    throw "ConsumerRuntimeRidOverride requires one selected RID/profile package pair."
+}
 
 if ($CompileNativeSmoke -and -not $selectedMode) {
     throw "CompileNativeSmoke requires one selected RID/profile package pair."
@@ -761,8 +779,30 @@ try {
 
             $requiredModules = @($profileSpec.modules | ForEach-Object { [string]$_ })
             $expectedOptionalModules = @($profileSpec.optionalModules | ForEach-Object { [string]$_ })
-            $runtimePackageId = Get-RuntimePackageId -Rid $rid -Profile $profile
-            $artifactName = "nupkg-$rid-$profile"
+            $runtimePackageId = if (-not [string]::IsNullOrWhiteSpace($RuntimePackageIdOverride)) {
+                $RuntimePackageIdOverride
+            }
+            else {
+                Get-RuntimePackageId -Rid $rid -Profile $profile
+            }
+            $runtimeAssetRid = if (-not [string]::IsNullOrWhiteSpace($RuntimeAssetRidOverride)) {
+                $RuntimeAssetRidOverride
+            }
+            else {
+                $rid
+            }
+            $consumerRuntimeRid = if (-not [string]::IsNullOrWhiteSpace($ConsumerRuntimeRidOverride)) {
+                $ConsumerRuntimeRidOverride
+            }
+            else {
+                $rid
+            }
+            $artifactName = if (-not [string]::IsNullOrWhiteSpace($RuntimePackageIdOverride)) {
+                "nupkg-linux-x64-preview-$profile"
+            }
+            else {
+                "nupkg-$rid-$profile"
+            }
             $artifactDir = Join-Path $artifactRootFullPath $artifactName
             $runtimePackagePath = Join-Path $artifactDir "$runtimePackageId.$normalizedPackageVersion.nupkg"
             Assert-FileExists -Violations $violations -Path $runtimePackagePath -Issue "Downloaded artifacts must include the selected runtime package before consumer restore validation"
@@ -783,11 +823,11 @@ try {
 
             $modules = @($requiredModules) + @($optionalModulesStaged)
 
-            $consumerName = "$rid-$profile"
+            $consumerName = "$consumerRuntimeRid-$profile"
             $consumerDir = Join-Path $consumerRoot $consumerName
             $consumerProjectPath = New-TemporaryConsumerProject `
                 -ConsumerDirectory $consumerDir `
-                -Rid $rid `
+                -Rid $consumerRuntimeRid `
                 -RuntimePackageId $runtimePackageId `
                 -PackageVersion $ExpectedPackageVersion `
                 -RuntimeIdentifierGraphPath $runtimeIdentifierGraphPath `
@@ -807,7 +847,7 @@ try {
                 "--configfile", $nugetConfigPath,
                 "--packages", $nugetPackagesDir,
                 "--no-cache",
-                "-p:RuntimeIdentifier=$rid",
+                "-p:RuntimeIdentifier=$consumerRuntimeRid",
                 "-v:minimal"
             )
             $restoreSucceeded = Invoke-CheckedCommand `
@@ -824,7 +864,7 @@ try {
                     $consumerProjectPath,
                     "-c", "Release",
                     "--no-restore",
-                    "-p:RuntimeIdentifier=$rid",
+                    "-p:RuntimeIdentifier=$consumerRuntimeRid",
                     "-p:RestorePackagesPath=$nugetPackagesDir",
                     "-v:minimal"
                 )
@@ -843,7 +883,7 @@ try {
                     "run",
                     "--project", $consumerProjectPath,
                     "-c", "Release",
-                    "-r", $rid,
+                    "-r", $consumerRuntimeRid,
                     "--no-build",
                     "--no-restore",
                     "-p:RestorePackagesPath=$nugetPackagesDir"
@@ -878,7 +918,7 @@ try {
                 Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "lib/net8.0/$managedAssemblyName" -Issue "Consumer assets file must include the managed compile asset"
                 Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle '"runtimeTargets"' -Issue "Consumer assets file must include runtimeTargets for native runtime assets"
                 foreach ($runtimeFile in @($nativeNames.All)) {
-                    Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "runtimes/$rid/native/$runtimeFile" -Issue "Consumer assets file did not select expected RID native asset"
+                    Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "runtimes/$runtimeAssetRid/native/$runtimeFile" -Issue "Consumer assets file did not select expected RID native asset"
                 }
 
                 if (Test-ContainsDisallowedFixedMajorIdentity -Text $assetsText) {
@@ -892,11 +932,11 @@ try {
             foreach ($runtimeFile in @($nativeNames.All)) {
                 Assert-FileExists `
                     -Violations $violations `
-                    -Path (Join-Path $runtimePackageInstallRoot "runtimes/$rid/native/$runtimeFile") `
+                    -Path (Join-Path $runtimePackageInstallRoot "runtimes/$runtimeAssetRid/native/$runtimeFile") `
                     -Issue "Isolated NuGet package cache did not contain expected RID native asset"
             }
 
-            $nativeCacheDirectory = Join-Path $runtimePackageInstallRoot "runtimes/$rid/native"
+            $nativeCacheDirectory = Join-Path $runtimePackageInstallRoot "runtimes/$runtimeAssetRid/native"
             if (Test-Path -LiteralPath $nativeCacheDirectory -PathType Container) {
                 $restoredModuleFiles = @(Get-ChildItem -LiteralPath $nativeCacheDirectory -File | Where-Object {
                         $_.Name -match "^(opencv_|libopencv_)"
@@ -953,7 +993,7 @@ try {
             }
 
             $consumerResults.Add([pscustomobject]@{
-                Rid = $rid
+                Rid = $consumerRuntimeRid
                 Profile = $profile
                 RuntimePackage = $runtimePackageId
                 RestoreSucceeded = $restoreSucceeded
