@@ -94,7 +94,8 @@ if ($schemaText.IndexOf('JYPPX\\.OpenCV\\.runtime\\.linux-x64\\.preview', [Strin
 
 foreach ($token in @(
         'generic_linux_preview:',
-        'generic_linux_preview_artifact_run_id:',
+        'generic_linux_preview_full_artifact_run_id:',
+        'generic_linux_preview_mini_artifact_run_id:',
         'generic_linux_preview_profile:',
         'validate-generic-linux-preview:',
         'pack-generic-linux-preview:',
@@ -102,6 +103,7 @@ foreach ($token in @(
         'verify-generic-linux-preview-debian:',
         'verify-generic-linux-preview-fedora:',
         'runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}',
+        'run-id: ${{ matrix.run_id }}',
         'scripts/New-GenericLinuxPreviewPackage.ps1',
         'scripts/Test-GenericLinuxPreviewConsumer.ps1')) {
     if ($packWorkflowText.IndexOf($token, [StringComparison]::Ordinal) -lt 0) {

@@ -65,8 +65,12 @@ on:
         required: true
         type: boolean
         default: false
-      generic_linux_preview_artifact_run_id:
-        description: Required producer workflow run id containing runtime-input-ubuntu.22.04-x64-<profile> artifacts
+      generic_linux_preview_full_artifact_run_id:
+        description: Producer workflow run id containing runtime-input-ubuntu.22.04-x64-full when full is selected
+        required: false
+        default: ""
+      generic_linux_preview_mini_artifact_run_id:
+        description: Producer workflow run id containing runtime-input-ubuntu.22.04-x64-mini when mini is selected
         required: false
         default: ""
       generic_linux_preview_profile:
@@ -2389,11 +2393,9 @@ jobs:
         shell: pwsh
         env:
           PREVIEW_PROFILE: ${{ inputs.generic_linux_preview_profile }}
-          PRODUCER_RUN_ID: ${{ inputs.generic_linux_preview_artifact_run_id }}
+          FULL_PRODUCER_RUN_ID: ${{ inputs.generic_linux_preview_full_artifact_run_id }}
+          MINI_PRODUCER_RUN_ID: ${{ inputs.generic_linux_preview_mini_artifact_run_id }}
         run: |
-          if ($env:PRODUCER_RUN_ID -notmatch '^[0-9]+$') {
-            throw 'Generic linux-x64 preview requires a numeric generic_linux_preview_artifact_run_id from a successful Ubuntu 22.04 x64 runtime-input workflow run.'
-          }
           if ('${{ inputs.publish_github_packages }}' -eq 'true') {
             throw 'Generic linux-x64 preview is never publishable; set publish_github_packages=false.'
           }
@@ -2401,11 +2403,21 @@ jobs:
             throw "Unsupported generic_linux_preview_profile: $env:PREVIEW_PROFILE"
           }
           $profiles = if ($env:PREVIEW_PROFILE -ceq 'all') { @('full', 'mini') } else { @($env:PREVIEW_PROFILE) }
-          $rows = @($profiles | ForEach-Object { [ordered]@{ profile = $_ } })
+          $runIds = @{
+            full = $env:FULL_PRODUCER_RUN_ID
+            mini = $env:MINI_PRODUCER_RUN_ID
+          }
+          $rows = @($profiles | ForEach-Object {
+            $runId = [string]$runIds[$_]
+            if ($runId -notmatch '^[0-9]+$') {
+              throw "Generic linux-x64 preview requires a numeric $_ producer run id from a successful Ubuntu 22.04 x64 runtime-input workflow run."
+            }
+            [ordered]@{ profile = $_; run_id = $runId }
+          })
           "profile_matrix=$(@{ include = $rows } | ConvertTo-Json -Compress -Depth 4)" >> $env:GITHUB_OUTPUT
           pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewMatrix.ps1
           pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewPackageSurface.ps1
-          Write-Host "GENERIC_LINUX_PREVIEW_DISPATCH_INPUTS_OK profile=$env:PREVIEW_PROFILE producer_run_id=$env:PRODUCER_RUN_ID publication_allowed=false"
+          Write-Host "GENERIC_LINUX_PREVIEW_DISPATCH_INPUTS_OK profile=$env:PREVIEW_PROFILE full_producer_run_id=$env:FULL_PRODUCER_RUN_ID mini_producer_run_id=$env:MINI_PRODUCER_RUN_ID publication_allowed=false"
 
   pack-generic-linux-preview:
     needs: validate-generic-linux-preview
@@ -2428,7 +2440,7 @@ jobs:
       - name: Download Ubuntu 22.04 x64 baseline runtime input
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
-          run-id: ${{ inputs.generic_linux_preview_artifact_run_id }}
+          run-id: ${{ matrix.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           name: runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}
           path: artifacts/generic-linux-preview-input/${{ matrix.profile }}

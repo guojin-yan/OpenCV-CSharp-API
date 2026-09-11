@@ -176,7 +176,8 @@ Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkf
 
 foreach ($token in @(
         'generic_linux_preview:',
-        'generic_linux_preview_artifact_run_id:',
+        'generic_linux_preview_full_artifact_run_id:',
+        'generic_linux_preview_mini_artifact_run_id:',
         'generic_linux_preview_profile:',
         'validate-generic-linux-preview:',
         'pack-generic-linux-preview:',
@@ -187,6 +188,7 @@ foreach ($token in @(
         'scripts/New-GenericLinuxPreviewPackage.ps1',
         'scripts/Test-GenericLinuxPreviewConsumer.ps1',
         'runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}',
+        'run-id: ${{ matrix.run_id }}',
         'generic-linux-preview-runtime-${{ matrix.profile }}')) {
     Assert-Contains -Violations $violations -Path $packWorkflowPath -Text $packWorkflowText -Needle $token -Issue "Pack workflow generic linux-x64 preview surface is missing required token"
 }
