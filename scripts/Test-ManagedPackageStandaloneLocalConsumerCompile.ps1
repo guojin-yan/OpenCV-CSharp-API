@@ -481,9 +481,10 @@ $packRestorePackagesDir = Join-Path $temporaryRoot "pack-restore-packages"
 $consumerDir = Join-Path $temporaryRoot "consumer"
 $consumerPackagesDir = Join-Path $temporaryRoot "consumer-packages"
 $nugetHttpCacheDir = Join-Path $temporaryRoot "nuget-http-cache"
-$nugetScratchDir = Join-Path $temporaryRoot "nuget-scratch"
-$nugetPluginsCacheDir = Join-Path $temporaryRoot "nuget-plugin-cache"
-$nugetConfigPath = Join-Path $temporaryRoot "NuGet.config"
+    $nugetScratchDir = Join-Path $temporaryRoot "nuget-scratch"
+    $nugetPluginsCacheDir = Join-Path $temporaryRoot "nuget-plugin-cache"
+    $nugetConfigPath = Join-Path $temporaryRoot "NuGet.config"
+    $consumerGlobalJsonPath = Join-Path $temporaryRoot "global.json"
 
 $repoSensitiveDirectories = @(
     (Join-Path $repo "src/OpenCvSharp/bin"),
@@ -579,12 +580,6 @@ try {
         "--no-cache",
         "-v:minimal"
     )
-    $restoreOutput = & $DotNetPath @restoreArguments 2>&1
-    $restoreOutputText = ($restoreOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
-    if ($LASTEXITCODE -ne 0) {
-        Add-Violation -Violations $violations -Path "consumer/StandaloneManagedConsumer.csproj" -Issue "Temporary standalone managed consumer restore failed" -Text $restoreOutputText
-    }
-
     $buildArguments = @(
         "build",
         $consumerProjectPath,
@@ -593,10 +588,41 @@ try {
         "-p:RestorePackagesPath=$consumerPackagesDir",
         "-v:minimal"
     )
-    $buildOutput = & $DotNetPath @buildArguments 2>&1
-    $buildOutputText = ($buildOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
-    if ($LASTEXITCODE -ne 0) {
-        Add-Violation -Violations $violations -Path "consumer/StandaloneManagedConsumer.csproj" -Issue "Temporary standalone managed consumer build failed" -Text $buildOutputText
+    $sdkLines = @(& $DotNetPath --list-sdks 2>&1)
+    $hasNet8Sdk = @($sdkLines | Where-Object { $_ -match '(?m)^\s*8\.\d+\.\d+\s+\[' }).Count -gt 0
+    $consumerWorkingDirectory = $repo
+    if ($hasNet8Sdk) {
+        # The consumer targets net8.0. Prefer the installed 8.x SDK without
+        # pinning a servicing patch, even when the host default is .NET 10.
+        $globalJson = @'
+{
+  "sdk": {
+    "version": "8.0.0",
+    "rollForward": "latestFeature",
+    "allowPrerelease": false
+  }
+}
+'@
+        [System.IO.File]::WriteAllText($consumerGlobalJsonPath, $globalJson)
+        $consumerWorkingDirectory = $temporaryRoot
+    }
+
+    try {
+        Push-Location -LiteralPath $consumerWorkingDirectory
+        $restoreOutput = & $DotNetPath @restoreArguments 2>&1
+        $restoreOutputText = ($restoreOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
+        if ($LASTEXITCODE -ne 0) {
+            Add-Violation -Violations $violations -Path "consumer/StandaloneManagedConsumer.csproj" -Issue "Temporary standalone managed consumer restore failed" -Text $restoreOutputText
+        }
+
+        $buildOutput = & $DotNetPath @buildArguments 2>&1
+        $buildOutputText = ($buildOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
+        if ($LASTEXITCODE -ne 0) {
+            Add-Violation -Violations $violations -Path "consumer/StandaloneManagedConsumer.csproj" -Issue "Temporary standalone managed consumer build failed" -Text $buildOutputText
+        }
+    }
+    finally {
+        Pop-Location
     }
 
     $consumerProjectText = [System.IO.File]::ReadAllText($consumerProjectPath)
