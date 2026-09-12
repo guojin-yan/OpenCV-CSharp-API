@@ -249,6 +249,7 @@ $nugetHttpCacheDir = Join-Path $temporaryRoot "nuget-http-cache"
 $nugetScratchDir = Join-Path $temporaryRoot "nuget-scratch"
 $nugetPluginsCacheDir = Join-Path $temporaryRoot "nuget-plugin-cache"
 $nugetConfigPath = Join-Path $temporaryRoot "NuGet.config"
+$consumerGlobalJsonPath = Join-Path $temporaryRoot "global.json"
 
 $repoRuntimeOutputRoot = Join-Path $repo "artifacts/runtime"
 $repoPackageOutputRoot = Join-Path $repo "artifacts/packages"
@@ -353,12 +354,6 @@ try {
         "-p:RuntimeIdentifier=$rid",
         "-v:minimal"
     )
-    $restoreOutput = & $dotnet.Source @restoreArguments 2>&1
-    $restoreOutputText = ($restoreOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
-    if ($LASTEXITCODE -ne 0) {
-        Add-Violation -Violations $violations -Path "consumer/RuntimeConsumer.csproj" -Issue "Temporary consumer restore failed" -Text $restoreOutputText
-    }
-
     $buildArguments = @(
         "build",
         $consumerProjectPath,
@@ -368,10 +363,41 @@ try {
         "-p:RestorePackagesPath=$nugetPackagesDir",
         "-v:minimal"
     )
-    $buildOutput = & $dotnet.Source @buildArguments 2>&1
-    $buildOutputText = ($buildOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
-    if ($LASTEXITCODE -ne 0) {
-        Add-Violation -Violations $violations -Path "consumer/RuntimeConsumer.csproj" -Issue "Temporary consumer build failed" -Text $buildOutputText
+    $sdkLines = @(& $dotnet.Source --list-sdks 2>&1)
+    $hasNet8Sdk = @($sdkLines | Where-Object { $_ -match '(?m)^\s*8\.\d+\.\d+\s+\[' }).Count -gt 0
+    $consumerWorkingDirectory = $repo
+    if ($hasNet8Sdk) {
+        # The consumer targets net8.0. Prefer the installed 8.x SDK without
+        # pinning a servicing patch, even when the host default is .NET 10.
+        $globalJson = @'
+{
+  "sdk": {
+    "version": "8.0.0",
+    "rollForward": "latestFeature",
+    "allowPrerelease": false
+  }
+}
+'@
+        [System.IO.File]::WriteAllText($consumerGlobalJsonPath, $globalJson)
+        $consumerWorkingDirectory = $temporaryRoot
+    }
+
+    try {
+        Push-Location -LiteralPath $consumerWorkingDirectory
+        $restoreOutput = & $dotnet.Source @restoreArguments 2>&1
+        $restoreOutputText = ($restoreOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
+        if ($LASTEXITCODE -ne 0) {
+            Add-Violation -Violations $violations -Path "consumer/RuntimeConsumer.csproj" -Issue "Temporary consumer restore failed" -Text $restoreOutputText
+        }
+
+        $buildOutput = & $dotnet.Source @buildArguments 2>&1
+        $buildOutputText = ($buildOutput | ForEach-Object { $_.ToString() }) -join [System.Environment]::NewLine
+        if ($LASTEXITCODE -ne 0) {
+            Add-Violation -Violations $violations -Path "consumer/RuntimeConsumer.csproj" -Issue "Temporary consumer build failed" -Text $buildOutputText
+        }
+    }
+    finally {
+        Pop-Location
     }
 
     $expectedRuntimeFiles = @($primaryNativeLoader)
