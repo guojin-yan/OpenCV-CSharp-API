@@ -14,6 +14,7 @@ param(
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
     [string]$AndroidNdkRoot = "",
     [string]$AndroidApiLevel = "24",
+    [switch]$GenericLinuxPreview,
     [switch]$WithContrib,
     [switch]$Build,
     [switch]$DescribeOnly
@@ -302,6 +303,39 @@ if ($buildTarget.PlatformFamily -eq "linux") {
     $cmakeArgs += '-DCMAKE_INSTALL_RPATH=$ORIGIN'
 }
 
+if ($GenericLinuxPreview) {
+    if ($buildTarget.PlatformFamily -ne "linux" -or $Rid -ne "ubuntu.22.04-x64") {
+        throw "Generic Linux preview builds require the Ubuntu 22.04 x64 source RID. Actual RID: $Rid"
+    }
+
+    # A generic glibc package may only rely on the host C/C++ runtime.  Force
+    # OpenCV's bundled codec implementations and disable distro-specific I/O
+    # and acceleration backends whose SONAMEs are not stable across distros.
+    $cmakeArgs += @(
+        "-DBUILD_ZLIB=ON",
+        "-DBUILD_TIFF=ON",
+        "-DBUILD_OPENJPEG=ON",
+        "-DBUILD_JASPER=ON",
+        "-DBUILD_JPEG=ON",
+        "-DBUILD_PNG=ON",
+        "-DBUILD_WEBP=ON",
+        "-DWITH_AVIF=OFF",
+        "-DWITH_JPEGXL=OFF",
+        "-DWITH_OPENEXR=OFF",
+        "-DWITH_GSTREAMER=OFF",
+        "-DWITH_GTK=OFF",
+        "-DWITH_V4L=OFF",
+        "-DWITH_GDAL=OFF",
+        "-DWITH_LAPACK=OFF",
+        "-DWITH_TBB=OFF",
+        "-DWITH_PROTOBUF=OFF",
+        "-DWITH_OBSENSOR=OFF",
+        "-DWITH_ITT=OFF",
+        "-DWITH_VA=OFF",
+        "-DWITH_VA_INTEL=OFF"
+    )
+}
+
 if (-not [string]::IsNullOrWhiteSpace($Platform)) {
     $cmakeArgs += @("-A", $Platform)
 }
@@ -448,6 +482,8 @@ if ($DescribeOnly) {
         AndroidApiLevel = if ($buildTarget.PlatformFamily -eq "android") { $AndroidApiLevel } else { "" }
         OpenCvVersion = $OpenCvVersion
         RuntimeVersionSuffix = $OpenCvRuntimeVersionSuffix
+        GenericLinuxPreview = [bool]$GenericLinuxPreview
+        GenericLinuxDependencyPolicy = if ($GenericLinuxPreview) { "bundled-codecs-glibc-cxx-system-only-v1" } else { "" }
         BuildList = $BuildList
         Source = $opencvSource
         ContribSource = $contribSource

@@ -12,6 +12,8 @@ $packageScriptRelativePath = 'scripts/New-GenericLinuxPreviewPackage.ps1'
 $consumerScriptRelativePath = 'scripts/Test-GenericLinuxPreviewConsumer.ps1'
 $managedConsumerScriptRelativePath = 'scripts/Test-GitHubPackConsumerRestoreSurface.ps1'
 $packWorkflowRelativePath = '.github/workflows/pack.yml'
+$producerWorkflowRelativePath = '.github/workflows/runtime-input.yml'
+$buildScriptRelativePath = 'scripts/Build-OpenCV.ps1'
 
 function Read-RequiredText {
     param([Parameter(Mandatory = $true)][string]$RelativePath)
@@ -29,6 +31,8 @@ $packageText = Read-RequiredText -RelativePath $packageScriptRelativePath
 $consumerText = Read-RequiredText -RelativePath $consumerScriptRelativePath
 $managedConsumerText = Read-RequiredText -RelativePath $managedConsumerScriptRelativePath
 $packWorkflowText = Read-RequiredText -RelativePath $packWorkflowRelativePath
+$producerWorkflowText = Read-RequiredText -RelativePath $producerWorkflowRelativePath
+$buildScriptText = Read-RequiredText -RelativePath $buildScriptRelativePath
 $matrix = $matrixText | ConvertFrom-Json
 
 if ($matrix.status -cne 'preview-only' -or [bool]$matrix.publicationAllowed -or [bool]$matrix.activePackageIdentityAllowed -or
@@ -51,6 +55,34 @@ foreach ($token in @(
         'GENERIC_LINUX_PREVIEW_PACKAGE_OK')) {
     if ($packageText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
         throw "$packageScriptRelativePath is missing required preview package boundary: $token"
+    }
+}
+
+foreach ($token in @(
+        'generic_linux_preview:',
+        '-GenericLinuxPreview:${{ inputs.generic_linux_preview }}',
+        'generic-linux-preview-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}',
+        'GENERIC_LINUX_PREVIEW_ELF_EVIDENCE')) {
+    if ($producerWorkflowText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
+        throw "$producerWorkflowRelativePath is missing generic-compatible producer boundary: $token"
+    }
+}
+
+foreach ($token in @(
+        'bundled-codecs-glibc-cxx-system-only-v1',
+        'GenericLinuxDependencyPolicy',
+        '-DBUILD_ZLIB=ON',
+        '-DBUILD_JPEG=ON',
+        '-DBUILD_PNG=ON',
+        '-DBUILD_TIFF=ON',
+        '-DBUILD_WEBP=ON',
+        '-DWITH_OPENEXR=OFF',
+        '-DWITH_GSTREAMER=OFF',
+        '-DWITH_GTK=OFF',
+        '-DWITH_V4L=OFF',
+        '-DWITH_PROTOBUF=OFF')) {
+    if ($buildScriptText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
+        throw "$buildScriptRelativePath is missing generic dependency policy: $token"
     }
 }
 
@@ -107,7 +139,7 @@ foreach ($token in @(
         'verify-generic-linux-preview-ubuntu:',
         'verify-generic-linux-preview-debian:',
         'verify-generic-linux-preview-fedora:',
-        'runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}',
+        'generic-linux-preview-runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}',
         'run-id: ${{ matrix.run_id }}',
         'scripts/New-GenericLinuxPreviewPackage.ps1',
         'scripts/Test-GenericLinuxPreviewConsumer.ps1',

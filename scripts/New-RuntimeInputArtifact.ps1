@@ -59,6 +59,7 @@ param(
     [string]$PowerShellArchiveSha256 = "",
     [string]$OpenCvExtraCMakeArgs = "",
     [string]$OpenCvSourcePatchEvidence = "",
+    [switch]$GenericLinuxPreview,
     [string]$OutputRoot = "artifacts/runtime-inputs",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json"
 )
@@ -67,6 +68,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
+
+if ($GenericLinuxPreview -and ($Rid -ne "ubuntu.22.04-x64" -or $RuntimeProfile -notin @("full", "mini"))) {
+    throw "Generic Linux preview runtime-input artifacts require ubuntu.22.04-x64 Full or Mini. Actual: $Rid/$RuntimeProfile"
+}
 
 function Resolve-InputDirectory {
     param(
@@ -511,6 +516,8 @@ $manifest = [ordered]@{
     RuntimeProfilePackageIdSuffix = Get-OptionalStringProperty -InputObject $profileDefinition -Name "packageIdSuffix"
     BuildList = Get-OptionalStringProperty -InputObject $profileDefinition -Name "buildList"
     OpenCvVersion = $OpenCvVersion
+    GenericLinuxPreview = [bool]$GenericLinuxPreview
+    GenericLinuxDependencyPolicy = if ($GenericLinuxPreview) { "bundled-codecs-glibc-cxx-system-only-v1" } else { "" }
     SyntheticRuntimeInputs = $false
     ArtifactLayout = [ordered]@{
         NativeWrapper = "native-wrapper"
