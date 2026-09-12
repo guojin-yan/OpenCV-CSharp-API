@@ -13,7 +13,9 @@ param(
     [switch]$RunNativeSmoke,
     [string]$NativeExecutionHost = "",
     [string]$RuntimePackageMatrix = "packaging/runtime/runtime-package-matrix.json",
-    [string]$OpenCvVersion = ""
+    [string]$OpenCvVersion = "",
+    [ValidatePattern('^net[0-9]+(\.[0-9]+)?$')]
+    [string]$ConsumerTargetFramework = "net8.0"
 )
 
 Set-StrictMode -Version Latest
@@ -351,6 +353,8 @@ function New-TemporaryConsumerProject {
         [string]$RuntimeIdentifierGraphPath,
         [Parameter(Mandatory = $true)]
         [string]$RuntimeProfile,
+        [Parameter(Mandatory = $true)]
+        [string]$TargetFramework,
         [switch]$RunNativeSmoke
     )
 
@@ -361,7 +365,7 @@ function New-TemporaryConsumerProject {
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>$TargetFramework</TargetFramework>
     <RuntimeIdentifier>$Rid</RuntimeIdentifier>
     <RuntimeIdentifierGraphPath>$RuntimeIdentifierGraphPath</RuntimeIdentifierGraphPath>
     <SelfContained>false</SelfContained>
@@ -832,6 +836,7 @@ try {
                 -PackageVersion $ExpectedPackageVersion `
                 -RuntimeIdentifierGraphPath $runtimeIdentifierGraphPath `
                 -RuntimeProfile $profile `
+                -TargetFramework $ConsumerTargetFramework `
                 -RunNativeSmoke:($CompileNativeSmoke -or $RunNativeSmoke)
             $nativeNames = Get-NativeFileNames `
                 -Rid $rid `
@@ -890,7 +895,7 @@ try {
                 )
                 if ($rid -eq "win-x86") {
                     $consumerAssemblyCandidates = @(
-                        Get-ChildItem -LiteralPath (Join-Path $consumerDir "bin/Release/net8.0/win-x86") -File -Filter "PackageConsumer.dll"
+                        Get-ChildItem -LiteralPath (Join-Path $consumerDir "bin/Release/$ConsumerTargetFramework/win-x86") -File -Filter "PackageConsumer.dll"
                     )
                     if ($consumerAssemblyCandidates.Count -ne 1) {
                         Add-Violation -Violations $violations -Path $consumerDir -Issue "win-x86 consumer build must produce exactly one executable managed assembly for the x86 runtime host" -Text "Found $($consumerAssemblyCandidates.Count)"
@@ -915,7 +920,7 @@ try {
                 $assetsText = [System.IO.File]::ReadAllText($assetsPath)
                 Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "$managedPackageId/$normalizedPackageVersion" -Issue "Consumer assets file must reference the neutral managed package"
                 Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "$runtimePackageId/$normalizedPackageVersion" -Issue "Consumer assets file must reference the selected neutral runtime package"
-                Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "lib/net8.0/$managedAssemblyName" -Issue "Consumer assets file must include the managed compile asset"
+                Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "lib/$ConsumerTargetFramework/$managedAssemblyName" -Issue "Consumer assets file must include the managed compile asset for the selected consumer target framework"
                 Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle '"runtimeTargets"' -Issue "Consumer assets file must include runtimeTargets for native runtime assets"
                 foreach ($runtimeFile in @($nativeNames.All)) {
                     Assert-TextContains -Violations $violations -Path $assetsPath -Text $assetsText -Needle "runtimes/$runtimeAssetRid/native/$runtimeFile" -Issue "Consumer assets file did not select expected RID native asset"
@@ -928,7 +933,7 @@ try {
 
             $managedPackageInstallRoot = Join-Path $nugetPackagesDir "$($managedPackageId.ToLowerInvariant())/$normalizedPackageVersion"
             $runtimePackageInstallRoot = Join-Path $nugetPackagesDir "$($runtimePackageId.ToLowerInvariant())/$normalizedPackageVersion"
-            Assert-FileExists -Violations $violations -Path (Join-Path $managedPackageInstallRoot "lib/net8.0/$managedAssemblyName") -Issue "Isolated NuGet package cache did not contain managed compile/runtime assembly"
+            Assert-FileExists -Violations $violations -Path (Join-Path $managedPackageInstallRoot "lib/$ConsumerTargetFramework/$managedAssemblyName") -Issue "Isolated NuGet package cache did not contain managed compile/runtime assembly for the selected consumer target framework"
             foreach ($runtimeFile in @($nativeNames.All)) {
                 Assert-FileExists `
                     -Violations $violations `

@@ -110,7 +110,11 @@ foreach ($token in @(
         'runtime-input-ubuntu.22.04-x64-${{ matrix.profile }}',
         'run-id: ${{ matrix.run_id }}',
         'scripts/New-GenericLinuxPreviewPackage.ps1',
-        'scripts/Test-GenericLinuxPreviewConsumer.ps1')) {
+        'scripts/Test-GenericLinuxPreviewConsumer.ps1',
+        'generic-linux-preview-consumer-ubuntu-${{ matrix.profile }}',
+        'generic-linux-preview-consumer-debian-${{ matrix.profile }}',
+        'generic-linux-preview-consumer-fedora-${{ matrix.profile }}',
+        'generic-linux-preview-consumer-evidence-*.json')) {
     if ($packWorkflowText.IndexOf($token, [StringComparison]::Ordinal) -lt 0) {
         throw "$packWorkflowRelativePath is missing required generic Linux preview dispatch boundary: $token"
     }

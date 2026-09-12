@@ -55,7 +55,8 @@ $consumerArgs = @(
     '-RuntimePackageIdOverride', [string]$profile[0].packageId,
     '-RuntimeAssetRidOverride', 'linux-x64',
     '-RuntimePackageMatrix', 'packaging/runtime/runtime-generic-linux-preview-matrix.json',
-    '-OpenCvVersion', $OpenCvVersion
+    '-OpenCvVersion', $OpenCvVersion,
+    '-ConsumerTargetFramework', 'net10.0'
 )
 if ($RunNativeSmoke) {
     $consumerArgs += '-RunNativeSmoke'

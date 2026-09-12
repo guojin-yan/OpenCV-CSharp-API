@@ -2535,6 +2535,13 @@ jobs:
             -ExpectedPackageVersion '${{ inputs.package_version }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -RunNativeSmoke
+      - name: Upload Ubuntu preview consumer evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-preview-consumer-ubuntu-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/generic-linux-preview-consumer-evidence-*.json
+          if-no-files-found: error
 
   verify-generic-linux-preview-debian:
     needs:
@@ -2620,6 +2627,13 @@ jobs:
             -ExpectedPackageVersion '${{ inputs.package_version }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -RunNativeSmoke
+      - name: Upload Debian preview consumer evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-preview-consumer-debian-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/generic-linux-preview-consumer-evidence-*.json
+          if-no-files-found: error
 
   verify-generic-linux-preview-fedora:
     needs:
@@ -2714,6 +2728,13 @@ jobs:
             -ExpectedPackageVersion '${{ inputs.package_version }}' `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -RunNativeSmoke
+      - name: Upload Fedora preview consumer evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-preview-consumer-fedora-${{ matrix.profile }}
+          path: artifacts/generic-linux-preview/generic-linux-preview-consumer-evidence-*.json
+          if-no-files-found: error
 
   pack-lifecycle-refresh-managed:
     needs: validate-lifecycle-refresh-candidate
