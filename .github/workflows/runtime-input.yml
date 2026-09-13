@@ -989,7 +989,7 @@ jobs:
           test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
           test "$missing_dependency_count" -eq 0
           test "$external_distro_dependency_count" -eq 0
-          audit_evidence="GENERIC_LINUX_PREVIEW_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 external_distro_dependencies=0 policy=bundled-codecs-glibc-cxx-system-only-v1"
+          audit_evidence="GENERIC_LINUX_PREVIEW_ELF_EVIDENCE profile=$profile files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=X86-64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 external_distro_dependencies=0 policy=bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2"
           echo "$audit_evidence"
           echo "elf_audit_evidence=$audit_evidence" >> "$GITHUB_OUTPUT"
       - name: Create runtime input artifact layout
