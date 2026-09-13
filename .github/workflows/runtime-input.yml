@@ -511,12 +511,16 @@ jobs:
           if ('${{ inputs.generic_linux_preview }}' -eq 'true') {
             $genericLinuxPreviewArguments += '-GenericLinuxPreview'
           }
-          $plan = & ./scripts/Build-OpenCV.ps1 `
-            -OpenCvVersion '${{ inputs.opencv_version }}' `
-            -Rid '${{ matrix.rid }}' `
-            -BuildList ([string]$profile[0].buildList) `
-            @genericLinuxPreviewArguments `
-            -DescribeOnly | ConvertFrom-Json
+          $buildPlanParameters = @{
+            OpenCvVersion = '${{ inputs.opencv_version }}'
+            Rid = '${{ matrix.rid }}'
+            BuildList = [string]$profile[0].buildList
+            DescribeOnly = $true
+          }
+          if ($genericLinuxPreviewArguments.Count -gt 0) {
+            $buildPlanParameters.GenericLinuxPreview = $true
+          }
+          $plan = & ./scripts/Build-OpenCV.ps1 @buildPlanParameters | ConvertFrom-Json
           if ($plan.Generator -ne 'Ninja' -or
               $plan.BuildSystem -ne 'single-config' -or
               $plan.InstallTarget -ne 'install') {
@@ -617,13 +621,17 @@ jobs:
           if ('${{ inputs.generic_linux_preview }}' -eq 'true') {
             $genericLinuxPreviewArguments += '-GenericLinuxPreview'
           }
-          pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
-            -OpenCvVersion '${{ inputs.opencv_version }}' `
-            -WorkspaceRoot $workspaceRoot `
-            -Rid '${{ matrix.rid }}' `
-            -BuildList '${{ steps.profile.outputs.build_list }}' `
-            @genericLinuxPreviewArguments `
-            -Build
+          $buildParameters = @{
+            OpenCvVersion = '${{ inputs.opencv_version }}'
+            WorkspaceRoot = $workspaceRoot
+            Rid = '${{ matrix.rid }}'
+            BuildList = '${{ steps.profile.outputs.build_list }}'
+            Build = $true
+          }
+          if ($genericLinuxPreviewArguments.Count -gt 0) {
+            $buildParameters.GenericLinuxPreview = $true
+          }
+          & ./scripts/Build-OpenCV.ps1 @buildParameters
       - name: Record OpenCV ARM64 CPU configuration
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' }}
         id: arm64_opencv
@@ -1043,45 +1051,49 @@ jobs:
             $genericLinuxPreviewArguments += '-GenericLinuxPreview'
           }
 
-          & ./scripts/New-RuntimeInputArtifact.ps1 `
-            -Rid '${{ matrix.rid }}' `
-            -RuntimeProfile '${{ matrix.profile }}' `
-            -OpenCvVersion '${{ inputs.opencv_version }}' `
-            -NativeRuntimeDir ./build/native-linked `
-            -OpenCvRuntimeDir $openCvRuntimeDir `
-            -OpenCvSourceDir $openCvSourceDir `
-            -OpenCvContribSourceDir $openCvContribSourceDir `
-            -OpenCvInstallDir $openCvInstallDir `
-            -HostedRunner '${{ matrix.os }}' `
-            -RunnerImage $env:PRODUCER_RUNNER_IMAGE `
-            -RunnerImageVersion $env:PRODUCER_RUNNER_IMAGE_VERSION `
-            -HostedDistro $env:PRODUCER_HOSTED_DISTRO `
-            -HostedDistroVersion $env:PRODUCER_HOSTED_DISTRO_VERSION `
-            -HostedArchitecture $env:PRODUCER_HOSTED_ARCHITECTURE `
-            -HostedPackageArchitecture $env:PRODUCER_HOSTED_PACKAGE_ARCHITECTURE `
-            -HostedLibc $env:PRODUCER_HOSTED_LIBC `
-            -HostedCpuModel $env:PRODUCER_HOSTED_CPU_MODEL `
-            -HostedMemoryBytes $env:PRODUCER_HOSTED_MEMORY_BYTES `
-            -HostedDiskAvailableBytes $env:PRODUCER_HOSTED_DISK_AVAILABLE_BYTES `
-            -HostedProcessArchitecture $env:PRODUCER_HOSTED_PROCESS_ARCHITECTURE `
-            -CMakeVersion $env:PRODUCER_CMAKE_VERSION `
-            -CMakeGenerator $env:PRODUCER_CMAKE_GENERATOR `
-            -BuildConfiguration $env:PRODUCER_BUILD_CONFIGURATION `
-            -CompilerPath $env:PRODUCER_COMPILER_PATH `
-            -CompilerVersion $env:PRODUCER_COMPILER_VERSION `
-            -AssemblerVersion $env:PRODUCER_ASSEMBLER_VERSION `
-            -NinjaVersion $env:PRODUCER_NINJA_VERSION `
-            -DotNetVersion $env:PRODUCER_DOTNET_VERSION `
-            -PowerShellVersion $env:PRODUCER_POWERSHELL_VERSION `
-            -OpenCvCMakeArguments $env:PRODUCER_OPENCV_CMAKE_ARGUMENTS `
-            -ElfAuditEvidence $env:PRODUCER_ELF_AUDIT_EVIDENCE `
-            -OpenCvCpuConfiguration $env:PRODUCER_OPENCV_CPU_CONFIGURATION `
-            -NativeWrapperSources $env:PRODUCER_NATIVE_WRAPPER_SOURCES `
-            -NativeWrapperSourceCount $env:PRODUCER_NATIVE_WRAPPER_SOURCE_COUNT `
-            -NativeAbiFunctionCount $env:PRODUCER_NATIVE_ABI_FUNCTION_COUNT `
-            -OpenCvExtraCMakeArgs $env:PRODUCER_OPENCV_EXTRA_CMAKE_ARGS `
-            @genericLinuxPreviewArguments `
-            -OutputRoot ./artifacts/runtime-inputs
+          $artifactParameters = @{
+            Rid = '${{ matrix.rid }}'
+            RuntimeProfile = '${{ matrix.profile }}'
+            OpenCvVersion = '${{ inputs.opencv_version }}'
+            NativeRuntimeDir = './build/native-linked'
+            OpenCvRuntimeDir = $openCvRuntimeDir
+            OpenCvSourceDir = $openCvSourceDir
+            OpenCvContribSourceDir = $openCvContribSourceDir
+            OpenCvInstallDir = $openCvInstallDir
+            HostedRunner = '${{ matrix.os }}'
+            RunnerImage = $env:PRODUCER_RUNNER_IMAGE
+            RunnerImageVersion = $env:PRODUCER_RUNNER_IMAGE_VERSION
+            HostedDistro = $env:PRODUCER_HOSTED_DISTRO
+            HostedDistroVersion = $env:PRODUCER_HOSTED_DISTRO_VERSION
+            HostedArchitecture = $env:PRODUCER_HOSTED_ARCHITECTURE
+            HostedPackageArchitecture = $env:PRODUCER_HOSTED_PACKAGE_ARCHITECTURE
+            HostedLibc = $env:PRODUCER_HOSTED_LIBC
+            HostedCpuModel = $env:PRODUCER_HOSTED_CPU_MODEL
+            HostedMemoryBytes = $env:PRODUCER_HOSTED_MEMORY_BYTES
+            HostedDiskAvailableBytes = $env:PRODUCER_HOSTED_DISK_AVAILABLE_BYTES
+            HostedProcessArchitecture = $env:PRODUCER_HOSTED_PROCESS_ARCHITECTURE
+            CMakeVersion = $env:PRODUCER_CMAKE_VERSION
+            CMakeGenerator = $env:PRODUCER_CMAKE_GENERATOR
+            BuildConfiguration = $env:PRODUCER_BUILD_CONFIGURATION
+            CompilerPath = $env:PRODUCER_COMPILER_PATH
+            CompilerVersion = $env:PRODUCER_COMPILER_VERSION
+            AssemblerVersion = $env:PRODUCER_ASSEMBLER_VERSION
+            NinjaVersion = $env:PRODUCER_NINJA_VERSION
+            DotNetVersion = $env:PRODUCER_DOTNET_VERSION
+            PowerShellVersion = $env:PRODUCER_POWERSHELL_VERSION
+            OpenCvCMakeArguments = $env:PRODUCER_OPENCV_CMAKE_ARGUMENTS
+            ElfAuditEvidence = $env:PRODUCER_ELF_AUDIT_EVIDENCE
+            OpenCvCpuConfiguration = $env:PRODUCER_OPENCV_CPU_CONFIGURATION
+            NativeWrapperSources = $env:PRODUCER_NATIVE_WRAPPER_SOURCES
+            NativeWrapperSourceCount = $env:PRODUCER_NATIVE_WRAPPER_SOURCE_COUNT
+            NativeAbiFunctionCount = $env:PRODUCER_NATIVE_ABI_FUNCTION_COUNT
+            OpenCvExtraCMakeArgs = $env:PRODUCER_OPENCV_EXTRA_CMAKE_ARGS
+            OutputRoot = './artifacts/runtime-inputs'
+          }
+          if ($genericLinuxPreviewArguments.Count -gt 0) {
+            $artifactParameters.GenericLinuxPreview = $true
+          }
+          & ./scripts/New-RuntimeInputArtifact.ps1 @artifactParameters
       - name: Upload runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && inputs.generic_linux_preview != true }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

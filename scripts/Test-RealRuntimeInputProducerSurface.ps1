@@ -657,7 +657,7 @@ foreach ($required in @(
         [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_RUNNER_EVIDENCE"; Issue = "Ubuntu ARM64 producer must emit actual runner image, distro, architecture, libc, CPU, and disk evidence" },
         [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_TOOLCHAIN_EVIDENCE"; Issue = "Ubuntu ARM64 producer must emit native compiler, assembler, CMake, Ninja, PowerShell, and .NET evidence" },
         [pscustomobject]@{ Needle = 'PRODUCER_ASSEMBLER_VERSION: ${{ steps.generic_linux_preview_runner.outputs.assembler_version || steps.ubuntu2204_x64_runner.outputs.assembler_version || steps.arm64_runner.outputs.assembler_version }}'; Issue = "Hosted Ubuntu producers must transport factual assembler evidence without interpolating tool output into PowerShell source" },
-        [pscustomobject]@{ Needle = '-AssemblerVersion $env:PRODUCER_ASSEMBLER_VERSION'; Issue = "Ubuntu ARM64 artifact creation must bind assembler evidence through the step environment" },
+        [pscustomobject]@{ Needle = 'AssemblerVersion = $env:PRODUCER_ASSEMBLER_VERSION'; Issue = "Ubuntu ARM64 artifact creation must bind assembler evidence through the step environment" },
         [pscustomobject]@{ Needle = 'test "$(uname -m)" = "aarch64"'; Issue = "Ubuntu ARM64 producer must reject non-AArch64 execution" },
         [pscustomobject]@{ Needle = 'test "$(dpkg --print-architecture)" = "arm64"'; Issue = "Ubuntu ARM64 producer must require the native Debian arm64 architecture" },
         [pscustomobject]@{ Needle = "UBUNTU_24_04_ARM64_NEON_EVIDENCE machine=AArch64 neon_compile=success"; Issue = "Ubuntu ARM64 producer must compile and audit an actual NEON AArch64 object" },

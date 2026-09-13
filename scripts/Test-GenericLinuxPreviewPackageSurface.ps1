@@ -62,6 +62,12 @@ foreach ($token in @(
         'generic_linux_preview:',
         '$genericLinuxPreviewArguments = @()',
         "`$genericLinuxPreviewArguments += '-GenericLinuxPreview'",
+        '$buildPlanParameters = @{',
+        '& ./scripts/Build-OpenCV.ps1 @buildPlanParameters',
+        '$buildParameters = @{',
+        '& ./scripts/Build-OpenCV.ps1 @buildParameters',
+        '$artifactParameters = @{',
+        '& ./scripts/New-RuntimeInputArtifact.ps1 @artifactParameters',
         'generic-linux-preview-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}',
         'GENERIC_LINUX_PREVIEW_ELF_EVIDENCE',
         "grep -Fq '`$ORIGIN'")) {
