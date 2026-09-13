@@ -61,7 +61,7 @@ if ([string]$provenance.Rid -cne $expectedSourceRid -or
     [string]$provenance.RuntimeProfile -cne $RuntimeProfile -or
     [string]$provenance.OpenCvVersion -cne $OpenCvVersion -or
     -not [bool]$provenance.GenericLinuxPreview -or
-    [string]$provenance.GenericLinuxDependencyPolicy -cne 'bundled-codecs-glibc-cxx-system-only-v1' -or
+    [string]$provenance.GenericLinuxDependencyPolicy -cne 'bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2' -or
     [bool]$provenance.SyntheticRuntimeInputs) {
     throw 'Generic Linux preview packaging requires a generic-compatible Ubuntu 22.04 x64 runtime-input with matching profile/version and dependency policy.'
 }

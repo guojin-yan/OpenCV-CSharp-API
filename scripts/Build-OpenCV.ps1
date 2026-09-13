@@ -328,7 +328,8 @@ if ($GenericLinuxPreview) {
         "-DWITH_GDAL=OFF",
         "-DWITH_LAPACK=OFF",
         "-DWITH_TBB=OFF",
-        "-DWITH_PROTOBUF=OFF",
+        "-DWITH_PROTOBUF=ON",
+        "-DBUILD_PROTOBUF=ON",
         "-DWITH_OBSENSOR=OFF",
         "-DWITH_ITT=OFF",
         "-DWITH_VA=OFF",
@@ -483,7 +484,7 @@ if ($DescribeOnly) {
         OpenCvVersion = $OpenCvVersion
         RuntimeVersionSuffix = $OpenCvRuntimeVersionSuffix
         GenericLinuxPreview = [bool]$GenericLinuxPreview
-        GenericLinuxDependencyPolicy = if ($GenericLinuxPreview) { "bundled-codecs-glibc-cxx-system-only-v1" } else { "" }
+        GenericLinuxDependencyPolicy = if ($GenericLinuxPreview) { "bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2" } else { "" }
         BuildList = $BuildList
         Source = $opencvSource
         ContribSource = $contribSource

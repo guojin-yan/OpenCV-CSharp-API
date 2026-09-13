@@ -70,7 +70,7 @@ foreach ($token in @(
 }
 
 foreach ($token in @(
-        'bundled-codecs-glibc-cxx-system-only-v1',
+        'bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2',
         'GenericLinuxDependencyPolicy',
         '-DBUILD_ZLIB=ON',
         '-DBUILD_JPEG=ON',
@@ -81,7 +81,7 @@ foreach ($token in @(
         '-DWITH_GSTREAMER=OFF',
         '-DWITH_GTK=OFF',
         '-DWITH_V4L=OFF',
-        '-DWITH_PROTOBUF=OFF')) {
+        '-DBUILD_PROTOBUF=ON')) {
     if ($buildScriptText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
         throw "$buildScriptRelativePath is missing generic dependency policy: $token"
     }
