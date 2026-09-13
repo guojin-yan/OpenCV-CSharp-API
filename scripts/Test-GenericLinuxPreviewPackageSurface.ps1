@@ -63,7 +63,8 @@ foreach ($token in @(
         '$genericLinuxPreviewArguments = @()',
         "`$genericLinuxPreviewArguments += '-GenericLinuxPreview'",
         'generic-linux-preview-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}',
-        'GENERIC_LINUX_PREVIEW_ELF_EVIDENCE')) {
+        'GENERIC_LINUX_PREVIEW_ELF_EVIDENCE',
+        "grep -Fq '`$ORIGIN'")) {
     if ($producerWorkflowText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) {
         throw "$producerWorkflowRelativePath is missing generic-compatible producer boundary: $token"
     }

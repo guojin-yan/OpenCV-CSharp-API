@@ -964,7 +964,7 @@ jobs:
             machine_count=$((machine_count + 1))
             dynamic_paths="$(readelf -d "$elf" | grep -E '\((RPATH|RUNPATH)\)' || true)"
             printf '%s\n' "$dynamic_paths"
-            printf '%s\n' "$dynamic_paths" | grep -Fq '\$ORIGIN'
+            printf '%s\n' "$dynamic_paths" | grep -Fq '$ORIGIN'
             origin_count=$((origin_count + 1))
             if printf '%s\n' "$dynamic_paths" | grep -Eq '(\[|:)(/[A-Za-z0-9]|[A-Za-z]:)'; then
               producer_path_count=$((producer_path_count + 1))
