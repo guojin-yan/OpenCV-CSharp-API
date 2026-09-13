@@ -60,7 +60,8 @@ foreach ($token in @(
 
 foreach ($token in @(
         'generic_linux_preview:',
-        '-GenericLinuxPreview:${{ inputs.generic_linux_preview }}',
+        '$genericLinuxPreviewArguments = @()',
+        "`$genericLinuxPreviewArguments += '-GenericLinuxPreview'",
         'generic-linux-preview-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}',
         'GENERIC_LINUX_PREVIEW_ELF_EVIDENCE')) {
     if ($producerWorkflowText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) {

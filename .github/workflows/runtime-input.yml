@@ -507,11 +507,15 @@ jobs:
           }
 
           $profileName = '${{ matrix.profile }}'
+          $genericLinuxPreviewArguments = @()
+          if ('${{ inputs.generic_linux_preview }}' -eq 'true') {
+            $genericLinuxPreviewArguments += '-GenericLinuxPreview'
+          }
           $plan = & ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -Rid '${{ matrix.rid }}' `
             -BuildList ([string]$profile[0].buildList) `
-            -GenericLinuxPreview:${{ inputs.generic_linux_preview }} `
+            @genericLinuxPreviewArguments `
             -DescribeOnly | ConvertFrom-Json
           if ($plan.Generator -ne 'Ninja' -or
               $plan.BuildSystem -ne 'single-config' -or
@@ -609,12 +613,16 @@ jobs:
           CMAKE_BUILD_PARALLEL_LEVEL: 2
         run: |
           $workspaceRoot = Split-Path $env:GITHUB_WORKSPACE -Parent
+          $genericLinuxPreviewArguments = @()
+          if ('${{ inputs.generic_linux_preview }}' -eq 'true') {
+            $genericLinuxPreviewArguments += '-GenericLinuxPreview'
+          }
           pwsh -NoProfile -File ./scripts/Build-OpenCV.ps1 `
             -OpenCvVersion '${{ inputs.opencv_version }}' `
             -WorkspaceRoot $workspaceRoot `
             -Rid '${{ matrix.rid }}' `
             -BuildList '${{ steps.profile.outputs.build_list }}' `
-            -GenericLinuxPreview:${{ inputs.generic_linux_preview }} `
+            @genericLinuxPreviewArguments `
             -Build
       - name: Record OpenCV ARM64 CPU configuration
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && matrix.rid == 'ubuntu.24.04-arm64' }}
@@ -1030,6 +1038,10 @@ jobs:
           $openCvRuntimeDir = [string]$openCvRuntimeDirMatches[0]
           $openCvSourceDir = Join-Path $workspaceRoot "opencv-source/opencv-${{ inputs.opencv_version }}"
           $openCvContribSourceDir = if ('${{ matrix.profile }}' -eq 'full') { Join-Path $workspaceRoot "opencv-source/opencv_contrib-${{ inputs.opencv_version }}" } else { '' }
+          $genericLinuxPreviewArguments = @()
+          if ('${{ inputs.generic_linux_preview }}' -eq 'true') {
+            $genericLinuxPreviewArguments += '-GenericLinuxPreview'
+          }
 
           & ./scripts/New-RuntimeInputArtifact.ps1 `
             -Rid '${{ matrix.rid }}' `
@@ -1068,7 +1080,7 @@ jobs:
             -NativeWrapperSourceCount $env:PRODUCER_NATIVE_WRAPPER_SOURCE_COUNT `
             -NativeAbiFunctionCount $env:PRODUCER_NATIVE_ABI_FUNCTION_COUNT `
             -OpenCvExtraCMakeArgs $env:PRODUCER_OPENCV_EXTRA_CMAKE_ARGS `
-            -GenericLinuxPreview:${{ inputs.generic_linux_preview }} `
+            @genericLinuxPreviewArguments `
             -OutputRoot ./artifacts/runtime-inputs
       - name: Upload runtime input artifact
         if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && inputs.generic_linux_preview != true }}
