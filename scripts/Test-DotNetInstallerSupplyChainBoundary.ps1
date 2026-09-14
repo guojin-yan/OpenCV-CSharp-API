@@ -20,7 +20,8 @@ $expectedWorkflowPaths = @(
     ".github/workflows/docs.yml",
     ".github/workflows/pack.yml",
     ".github/workflows/publish-nuget.yml",
-    ".github/workflows/runtime-input.yml"
+    ".github/workflows/runtime-input.yml",
+    ".github/workflows/generic-linux-arm64-preview.yml"
 )
 
 function Get-RelativePath {

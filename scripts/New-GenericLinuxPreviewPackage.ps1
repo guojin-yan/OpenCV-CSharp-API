@@ -10,6 +10,9 @@ param(
     [int]$PackageRevision,
     [Parameter(Mandatory = $true)]
     [string]$PackageVersion,
+    [ValidateSet('linux-x64', 'linux-arm64')]
+    [string]$TargetRid = 'linux-x64',
+    [string]$PreviewMatrixPath = 'packaging/runtime/runtime-generic-linux-preview-matrix.json',
     [string]$OutputDir = 'artifacts/generic-linux-preview',
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 )
@@ -20,8 +23,8 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $packageVersionScript = Join-Path $repo 'scripts/PackageVersion.ps1'
 . $packageVersionScript
-$matrixRelativePath = 'packaging/runtime/runtime-generic-linux-preview-matrix.json'
-$matrixPath = Join-Path $repo ($matrixRelativePath -replace '/', [IO.Path]::DirectorySeparatorChar)
+$matrixRelativePath = $PreviewMatrixPath.Replace('\\', '/')
+$matrixPath = if ([IO.Path]::IsPathRooted($PreviewMatrixPath)) { $PreviewMatrixPath } else { Join-Path $repo ($matrixRelativePath -replace '/', [IO.Path]::DirectorySeparatorChar) }
 $inputRoot = (Resolve-Path -LiteralPath $RuntimeInputRoot).Path
 $outputRootCandidate = if ([IO.Path]::IsPathRooted($OutputDir)) { $OutputDir } else { Join-Path $repo $OutputDir }
 $outputRoot = [IO.Path]::GetFullPath($outputRootCandidate)
@@ -39,7 +42,7 @@ if ([string]$matrix.status -cne 'preview-only' -or
     [bool]$matrix.activePackageIdentityAllowed -or
     -not [bool]$matrix.previewArtifactIdentityAllowed -or
     [bool]$matrix.publicationAllowed -or
-    [string]$matrix.targetRid -cne 'linux-x64') {
+    [string]$matrix.targetRid -cne $TargetRid) {
     throw 'Generic Linux preview package creation requires an isolated, non-publishable preview matrix.'
 }
 
@@ -110,7 +113,7 @@ try {
     Copy-Item -LiteralPath (Join-Path $repo 'packaging/runtime/runtime-distro-rid-graph.json') -Destination (Join-Path $temporaryWorkspace 'packaging/runtime/runtime-distro-rid-graph.json') -Force
 
     & (Join-Path $repo 'scripts/Stage-Runtime.ps1') `
-        -Rid 'linux-x64' `
+        -Rid $TargetRid `
         -Configuration 'Release' `
         -OpenCvNativeRuntimeDir (Join-Path $inputRoot 'native-wrapper') `
         -OpenCvVersion $OpenCvVersion `
@@ -128,7 +131,7 @@ try {
     New-Item -ItemType Directory -Force -Path $packageOutput, $outputRoot | Out-Null
     & $dotnet.Source pack (Join-Path $runtimeProject 'JYPPX.OpenCV.runtime.csproj') `
         -c Release -o $packageOutput `
-        -p:RuntimePackageRid=linux-x64 `
+        -p:RuntimePackageRid=$TargetRid `
         -p:RuntimePackageProfile=$RuntimeProfile `
         -p:Version=$PackageVersion `
         -p:PackageVersion=$PackageVersion `
@@ -151,7 +154,7 @@ try {
         -RepositoryRoot $repo `
         -RuntimeProject $runtimeProject `
         -RuntimePackageMatrix $matrixPath `
-        -Rid 'linux-x64' `
+        -Rid $TargetRid `
         -RuntimeProfile $RuntimeProfile `
         -RuntimePackageId $previewPackageId `
         -PackageVersion $PackageVersion `
@@ -165,7 +168,7 @@ try {
         SchemaVersion = 1
         Status = 'preview-only'
         PublicationAllowed = $false
-        TargetRid = 'linux-x64'
+        TargetRid = $TargetRid
         RuntimeProfile = $RuntimeProfile
         PackageId = $previewPackageId
         PackageVersion = $PackageVersion
@@ -181,7 +184,7 @@ try {
     $evidencePath = Join-Path $outputRoot "generic-linux-preview-package-evidence-$RuntimeProfile.json"
     [IO.File]::WriteAllText($evidencePath, (($evidence | ConvertTo-Json -Depth 8) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
-    Write-Host "GENERIC_LINUX_PREVIEW_PACKAGE_OK target=linux-x64 profile=$RuntimeProfile package=$previewPackageId version=$PackageVersion bytes=$($evidence.PackageBytes) publication_allowed=false native_smoke_executed=false"
+    Write-Host "GENERIC_LINUX_PREVIEW_PACKAGE_OK target=$TargetRid profile=$RuntimeProfile package=$previewPackageId version=$PackageVersion bytes=$($evidence.PackageBytes) publication_allowed=false native_smoke_executed=false"
     Write-Host "Generic Linux preview package: $packagePath"
     Write-Host "Generic Linux preview evidence: $evidencePath"
 }

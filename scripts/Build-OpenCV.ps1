@@ -304,8 +304,8 @@ if ($buildTarget.PlatformFamily -eq "linux") {
 }
 
 if ($GenericLinuxPreview) {
-    if ($buildTarget.PlatformFamily -ne "linux" -or $Rid -ne "ubuntu.22.04-x64") {
-        throw "Generic Linux preview builds require the Ubuntu 22.04 x64 source RID. Actual RID: $Rid"
+    if ($buildTarget.PlatformFamily -ne "linux" -or $Rid -notin @("ubuntu.22.04-x64", "ubuntu.22.04-arm64")) {
+        throw "Generic Linux preview builds require the Ubuntu 22.04 x64 or ARM64 source RID. Actual RID: $Rid"
     }
 
     # A generic glibc package may only rely on the host C/C++ runtime.  Force

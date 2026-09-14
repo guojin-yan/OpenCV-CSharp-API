@@ -1,0 +1,86 @@
+{
+  "$schema": "runtime-generic-linux-arm64-preview-matrix.schema.json",
+  "schemaVersion": 1,
+  "status": "preview-only",
+  "targetRid": "linux-arm64",
+  "activePackageIdentityAllowed": false,
+  "previewArtifactIdentityAllowed": true,
+  "publicationAllowed": false,
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "designReference": "docs/articles/generic-linux-rid-adr.md",
+  "producer": {
+    "rid": "linux-arm64",
+    "sourceRid": "ubuntu.22.04-arm64",
+    "distro": "ubuntu",
+    "distroVersion": "22.04",
+    "runner": "ubuntu-24.04-arm",
+    "execution": "container-on-native-aarch64",
+    "containerImage": "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+    "profiles": [ "full", "mini" ],
+    "glibcBaseline": "2.35",
+    "artifactPrefix": "generic-linux-arm64-preview-runtime-input"
+  },
+  "consumers": [
+    {
+      "rid": "ubuntu.22.04-arm64",
+      "distro": "ubuntu",
+      "distroVersion": "22.04",
+      "runner": "ubuntu-24.04-arm",
+      "role": "baseline",
+      "execution": "container-on-native-aarch64",
+      "containerImage": "ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982",
+      "profiles": [ "full", "mini" ]
+    },
+    {
+      "rid": "ubuntu.24.04-arm64",
+      "distro": "ubuntu",
+      "distroVersion": "24.04",
+      "runner": "ubuntu-24.04-arm",
+      "role": "forward-distro",
+      "execution": "hosted-native-aarch64",
+      "profiles": [ "full", "mini" ]
+    },
+    {
+      "rid": "debian.12-arm64",
+      "distro": "debian",
+      "distroVersion": "12",
+      "runner": "ubuntu-24.04-arm",
+      "role": "cross-distro",
+      "execution": "container-on-native-aarch64",
+      "containerImage": "debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc",
+      "profiles": [ "full", "mini" ]
+    }
+  ],
+  "rids": [
+    {
+      "rid": "linux-arm64",
+      "platformFamily": "linux",
+      "opencvRid": "ubuntu.22.04-arm64",
+      "nativeExtension": ".so",
+      "producer": {
+        "kind": "container-on-native-aarch64",
+        "profiles": [ "full", "mini" ]
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "name": "full",
+      "packageIdSuffix": ".preview",
+      "buildList": "core,imgproc,imgcodecs,videoio,flann,geometry,calib,stereo,dnn,ml,objdetect,photo,features,video,highgui,stitching,ptcloud",
+      "modules": [ "core", "imgcodecs", "imgproc", "videoio", "flann", "geometry", "calib", "stereo", "dnn", "ml", "objdetect", "photo", "features", "video", "highgui", "stitching", "ptcloud" ],
+      "optionalModules": [ "xfeatures2d", "xobjdetect", "quality", "xphoto", "img_hash", "ximgproc", "optflow", "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor", "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg", "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo" ],
+      "packageId": "JYPPX.OpenCV.runtime.linux-arm64.preview",
+      "artifactName": "nupkg-linux-arm64-preview-full"
+    },
+    {
+      "name": "mini",
+      "packageIdSuffix": ".preview.mini",
+      "buildList": "core,imgproc,imgcodecs,videoio,geometry,flann",
+      "modules": [ "core", "imgproc", "imgcodecs", "videoio", "geometry", "flann" ],
+      "optionalModules": [],
+      "packageId": "JYPPX.OpenCV.runtime.linux-arm64.preview.mini",
+      "artifactName": "nupkg-linux-arm64-preview-mini"
+    }
+  ]
+}

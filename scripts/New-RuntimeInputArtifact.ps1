@@ -69,8 +69,8 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 
-if ($GenericLinuxPreview -and ($Rid -ne "ubuntu.22.04-x64" -or $RuntimeProfile -notin @("full", "mini"))) {
-    throw "Generic Linux preview runtime-input artifacts require ubuntu.22.04-x64 Full or Mini. Actual: $Rid/$RuntimeProfile"
+if ($GenericLinuxPreview -and ($Rid -notin @("ubuntu.22.04-x64", "ubuntu.22.04-arm64") -or $RuntimeProfile -notin @("full", "mini"))) {
+    throw "Generic Linux preview runtime-input artifacts require Ubuntu 22.04 x64 or ARM64 Full or Mini. Actual: $Rid/$RuntimeProfile"
 }
 
 function Resolve-InputDirectory {

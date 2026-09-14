@@ -2,7 +2,6 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ArtifactRoot,
     [Parameter(Mandatory = $true)]
-    [ValidateSet('ubuntu.22.04-x64', 'debian.12-x64', 'fedora.40-x64')]
     [string]$ConsumerRid,
     [Parameter(Mandatory = $true)]
     [ValidateSet('full', 'mini')]
@@ -11,6 +10,7 @@ param(
     [string]$ExpectedPackageVersion,
     [Parameter(Mandatory = $true)]
     [string]$OpenCvVersion,
+    [string]$PreviewMatrixPath = 'packaging/runtime/runtime-generic-linux-preview-matrix.json',
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [switch]$RunNativeSmoke
 )
@@ -20,8 +20,9 @@ $ErrorActionPreference = 'Stop'
 
 $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $artifact = (Resolve-Path -LiteralPath $ArtifactRoot).Path
-$matrixPath = Join-Path $repo 'packaging/runtime/runtime-generic-linux-preview-matrix.json'
+$matrixPath = if ([IO.Path]::IsPathRooted($PreviewMatrixPath)) { $PreviewMatrixPath } else { Join-Path $repo ($PreviewMatrixPath.Replace('\\', '/') -replace '/', [IO.Path]::DirectorySeparatorChar) }
 $matrix = Get-Content -LiteralPath $matrixPath -Raw | ConvertFrom-Json
+$targetRid = [string]$matrix.targetRid
 $profile = @($matrix.profiles | Where-Object { [string]$_.name -ceq $RuntimeProfile })
 $consumer = @($matrix.consumers | Where-Object { [string]$_.rid -ceq $ConsumerRid })
 if ($profile.Count -ne 1 -or $consumer.Count -ne 1) {
@@ -49,12 +50,12 @@ $consumerArgs = @(
     '-ArtifactRoot', $artifact,
     '-ExpectedPackageVersion', $ExpectedPackageVersion,
     '-ExpectedSyntheticRuntimeInputs', 'false',
-    '-SelectedRid', 'linux-x64',
+    '-SelectedRid', $targetRid,
     '-SelectedRuntimeProfile', $RuntimeProfile,
     '-ConsumerRuntimeRidOverride', $ConsumerRid,
     '-RuntimePackageIdOverride', [string]$profile[0].packageId,
-    '-RuntimeAssetRidOverride', 'linux-x64',
-    '-RuntimePackageMatrix', 'packaging/runtime/runtime-generic-linux-preview-matrix.json',
+    '-RuntimeAssetRidOverride', $targetRid,
+    '-RuntimePackageMatrix', $PreviewMatrixPath,
     '-OpenCvVersion', $OpenCvVersion,
     '-ConsumerTargetFramework', 'net10.0'
 )
@@ -84,11 +85,11 @@ $evidence = [ordered]@{
     PreviewPackageSha256 = (Get-FileHash -LiteralPath $previewPackage[0].FullName -Algorithm SHA256).Hash.ToLowerInvariant()
     ManagedPackageSha256 = (Get-FileHash -LiteralPath $managedPackage[0].FullName -Algorithm SHA256).Hash.ToLowerInvariant()
     NativeSmokeExecuted = [bool]$RunNativeSmoke
-    RuntimeAssetRid = 'linux-x64'
+    RuntimeAssetRid = $targetRid
     RecordedAtUtc = [DateTimeOffset]::UtcNow.ToString('O')
 }
 $evidencePath = Join-Path $artifact "generic-linux-preview-consumer-evidence-$ConsumerRid-$RuntimeProfile.json"
 [IO.File]::WriteAllText($evidencePath, (($evidence | ConvertTo-Json -Depth 8) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
-Write-Host "GENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=$ConsumerRid profile=$RuntimeProfile package=$($profile[0].packageId) runtime_asset_rid=linux-x64 native_smoke_executed=$([bool]$RunNativeSmoke) publication_allowed=false"
+Write-Host "GENERIC_LINUX_PREVIEW_CONSUMER_OK consumer=$ConsumerRid profile=$RuntimeProfile package=$($profile[0].packageId) runtime_asset_rid=$targetRid native_smoke_executed=$([bool]$RunNativeSmoke) publication_allowed=false"
 Write-Host "Generic Linux preview consumer evidence: $evidencePath"

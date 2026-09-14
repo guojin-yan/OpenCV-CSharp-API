@@ -61,8 +61,8 @@ jobs:
           $supportedTargets = @($supportContract.realSupport) + @($supportContract.compatibilityOnly | ForEach-Object { [string]$_.target }) + @($supportContract.pending | ForEach-Object { [string]$_.target })
           $selectedTarget = "$($env:RID_INPUT)/$($env:RUNTIME_PROFILE_INPUT)"
           if ($env:GENERIC_LINUX_PREVIEW_INPUT -eq 'true' -and
-              ($env:RID_INPUT -ne 'ubuntu.22.04-x64' -or $env:RUNTIME_PROFILE_INPUT -notin @('full', 'mini'))) {
-            throw "Generic Linux preview producer requires ubuntu.22.04-x64 Full or Mini. Actual: $selectedTarget"
+              ($env:RID_INPUT -notin @('ubuntu.22.04-x64', 'ubuntu.22.04-arm64') -or $env:RUNTIME_PROFILE_INPUT -notin @('full', 'mini'))) {
+            throw "Generic Linux preview producer requires Ubuntu 22.04 x64 or ARM64 Full or Mini. Actual: $selectedTarget"
           }
           if ($supportedTargets -notcontains $selectedTarget) {
             throw "runtime-input.yml currently produces real-supported, compatibility-only, and pending Android targets. Lifecycle-refresh candidates are catalogued but not active until producer/package/consumer evidence is promoted. Windows x86 mini and platforms outside the declared matrix need separate producer and consumer evidence."
@@ -2260,6 +2260,7 @@ jobs:
           NATIVE_ABI_FUNCTION_COUNT: ${{ steps.profile.outputs.native_abi_function_count }}
           EXPECTED_DISTRO: ${{ steps.profile.outputs.distro }}
           EXPECTED_DISTRO_VERSION: ${{ steps.profile.outputs.distro_version }}
+          GENERIC_LINUX_PREVIEW: ${{ inputs.generic_linux_preview }}
           POWERSHELL_VERSION: 7.4.17
           POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
           POWERSHELL_DEBIAN_PACKAGE_VERSION: 7.6.4-1.deb
@@ -2555,11 +2556,16 @@ jobs:
             -e NATIVE_ABI_FUNCTION_COUNT="$NATIVE_ABI_FUNCTION_COUNT" \
             -e EXPECTED_DISTRO="$EXPECTED_DISTRO" \
             -e EXPECTED_DISTRO_VERSION="$EXPECTED_DISTRO_VERSION" \
+            -e GENERIC_LINUX_PREVIEW="$GENERIC_LINUX_PREVIEW" \
             -v "$workspace_root:/workspace" \
             -w "/workspace/$repo_name" \
             "$CONTAINER_IMAGE" \
             "$container_shell" -lc '
               set -euo pipefail
+              generic_preview_arg=""
+              if [ "$GENERIC_LINUX_PREVIEW" = "true" ]; then
+                generic_preview_arg="-GenericLinuxPreview"
+              fi
               . /etc/os-release
               musl_version=""
               case "${ID:-}" in
@@ -3069,6 +3075,7 @@ jobs:
                 -Rid "$PRODUCER_RID" \
                 -BuildList "$BUILD_LIST" \
                 -ExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS" \
+                $generic_preview_arg \
                 -Build
 
                opencv_cpu_configuration=""
@@ -3298,6 +3305,7 @@ jobs:
                 origin_count=0
                 producer_path_count=0
                 missing_dependency_count=0
+                external_distro_dependency_count=0
                 for elf in \
                   "$audit_dir/libJYPPX.OpenCV.Native.so" \
                   "$audit_dir"/libopencv_*.so."$OPENCV_VERSION"; do
@@ -3318,6 +3326,14 @@ jobs:
                     printf "%s\n" "$missing" >&2
                     missing_dependency_count=$((missing_dependency_count + 1))
                   fi
+                  if [ "$GENERIC_LINUX_PREVIEW" = "true" ]; then
+                    needed="$(readelf -d "$elf" | sed -n "s/.*Shared library: \[\([^]]*\)\].*/\1/p")"
+                    forbidden="$(printf "%s\n" "$needed" | grep -Ei "(^|lib)(jpeg|png|tiff|webp|openjp2|jasper|openexr|iex|imath|ilm|gstreamer|gtk|v4l|protobuf|z|avif|aom|va|opencl|tbb|lapack|blas)" || true)"
+                    if [ -n "$forbidden" ]; then
+                      printf "GENERIC_LINUX_ARM64_PREVIEW_EXTERNAL_DEPENDENCY file=%s\n%s\n" "$elf" "$forbidden" >&2
+                      external_distro_dependency_count=$((external_distro_dependency_count + 1))
+                    fi
+                  fi
                 done
 
                 direct_opencv_dependencies="$(readelf -d "$audit_dir/libJYPPX.OpenCV.Native.so" | grep NEEDED | grep -c "libopencv_.*so.500")"
@@ -3326,8 +3342,15 @@ jobs:
                 test "$producer_path_count" -eq 0
                 test "$direct_opencv_dependencies" -eq "$expected_direct_opencv"
                 test "$missing_dependency_count" -eq 0
+                if [ "$GENERIC_LINUX_PREVIEW" = "true" ]; then
+                  test "$external_distro_dependency_count" -eq 0
+                fi
                 if [ "$PRODUCER_RID" = "ubuntu.22.04-arm64" ]; then
-                  elf_audit_evidence="UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
+                  if [ "$GENERIC_LINUX_PREVIEW" = "true" ]; then
+                    elf_audit_evidence="GENERIC_LINUX_ARM64_PREVIEW_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0 external_distro_dependencies=0 policy=bundled-codecs-bundled-protobuf-glibc-cxx-system-only-v2"
+                  else
+                    elf_audit_evidence="UBUNTU_22_04_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
+                  fi
                   echo "$elf_audit_evidence"
                 elif [ "$PRODUCER_RID" = "debian.12-arm64" ]; then
                   elf_audit_evidence="DEBIAN_12_ARM64_PRODUCER_ELF_EVIDENCE profile=$RUNTIME_PROFILE files=$expected_canonical_count runtime_files=$expected_runtime_file_count machine=AArch64 origin=$expected_canonical_count producer_paths=0 direct_opencv=$expected_direct_opencv missing_dependencies=0"
@@ -3408,12 +3431,20 @@ jobs:
                 -PowerShellVersion "$provenance_powershell_version" \
                 -PowerShellArchiveSha256 "$provenance_powershell_sha256" \
                 -OpenCvExtraCMakeArgs "$OPENCV_EXTRA_CMAKE_ARGS" \
+                $generic_preview_arg \
                 -OutputRoot ./artifacts/runtime-inputs
             '
       - name: Upload runtime input artifact
-        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile }}
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && inputs.generic_linux_preview != true }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
+          path: artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
+          if-no-files-found: error
+      - name: Upload generic Linux ARM64 preview runtime input artifact
+        if: ${{ inputs.rid == matrix.rid && inputs.runtime_profile == matrix.profile && inputs.generic_linux_preview == true }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-arm64-preview-runtime-input-${{ matrix.rid }}-${{ matrix.profile }}
           path: artifacts/runtime-inputs/${{ matrix.rid }}-${{ matrix.profile }}
           if-no-files-found: error

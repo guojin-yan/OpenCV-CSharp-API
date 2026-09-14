@@ -160,7 +160,8 @@ $expectedWorkflowNames = @(
     "docs.yml",
     "pack.yml",
     "publish-nuget.yml",
-    "runtime-input.yml"
+    "runtime-input.yml",
+    "generic-linux-arm64-preview.yml"
 )
 $workflowFiles = @(
     Get-ChildItem -LiteralPath $workflowRoot -File |
@@ -171,7 +172,7 @@ $workflowDifference = @(
     Compare-Object -ReferenceObject $expectedWorkflowNames -DifferenceObject @($workflowFiles.Name)
 )
 if ($workflowDifference.Count -gt 0) {
-    Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Microsoft feed trust guard requires the exact six-workflow set" -Text (($workflowDifference | ForEach-Object { "$($_.SideIndicator)$($_.InputObject)" }) -join ", ")
+    Add-Violation -Violations $violations -Path ".github/workflows" -Issue "Microsoft feed trust guard requires the exact seven-workflow set" -Text (($workflowDifference | ForEach-Object { "$($_.SideIndicator)$($_.InputObject)" }) -join ", ")
 }
 
 $runtimePath = Join-Path $workflowRoot "runtime-input.yml"

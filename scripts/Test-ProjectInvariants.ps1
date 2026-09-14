@@ -261,6 +261,16 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Generic Linux ARM64 preview matrix"
+        Script = Join-Path $repo "scripts/Test-GenericLinuxArm64PreviewMatrix.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Generic Linux ARM64 preview package surface"
+        Script = Join-Path $repo "scripts/Test-GenericLinuxArm64PreviewPackageSurface.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "API/ABI baseline contract"
         Script = Join-Path $repo "scripts/Test-ApiAbiBaselineContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)

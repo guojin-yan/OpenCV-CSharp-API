@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ec0cd66961e338dd",
-  "SourceIdentity": "sha256:ec0cd66961e338ddda8880b10d7071aca7aecb3f1581e410533135dd9f3fed8e",
+  "CandidateId": "local-closeout/sha256/8a4174e32334a3d6",
+  "SourceIdentity": "sha256:8a4174e32334a3d6633c70ff558bb832cdfd59908af20e371d4d9752df530d54",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1691,
-    "Sha256": "ec0cd66961e338ddda8880b10d7071aca7aecb3f1581e410533135dd9f3fed8e",
+    "FileCount": 1696,
+    "Sha256": "8a4174e32334a3d6633c70ff558bb832cdfd59908af20e371d4d9752df530d54",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -477,6 +477,11 @@
   },
   "EvidenceReferences": [
     {
+      "Path": ".github/workflows/generic-linux-arm64-preview.yml",
+      "Sha256": "d20a92af2180b50b27eb99a13de67c7b1b2f5eb6dd82b4acab18dd6ccc1cb37b",
+      "Length": 9329
+    },
+    {
       "Path": ".github/workflows/pack.yml",
       "Sha256": "23cc7341619606b9a50283c34b4a776d0ba9dbed328c571f4d7f20577eadf861",
       "Length": 295931
@@ -488,8 +493,8 @@
     },
     {
       "Path": ".github/workflows/runtime-input.yml",
-      "Sha256": "198848349aeb9d74f42ad50b0931b9af006e99474f4b30f24c2b5ef0b4122542",
-      "Length": 211181
+      "Sha256": "d7543614be716158acff208d2dc48833ba0bb02168ebdb9449cce8e85a285ac3",
+      "Length": 213551
     },
     {
       "Path": "CHANGELOG.md",
@@ -933,8 +938,8 @@
     },
     {
       "Path": "docs/articles/generic-linux-rid-adr.md",
-      "Sha256": "2d1f58c3424aa1b87bc6cfd2a64235e50b49fb5e27793c8dab97d5f272d66084",
-      "Length": 9007
+      "Sha256": "aa4f63c9f549ec17f9ca37fb371161f538a6ba861adf2768d2dc52518632bb6a",
+      "Length": 9545
     },
     {
       "Path": "docs/articles/highgui-interaction-guide.md",
@@ -1152,6 +1157,16 @@
       "Length": 333
     },
     {
+      "Path": "packaging/runtime/runtime-generic-linux-arm64-preview-matrix.json",
+      "Sha256": "bc723126356e1af8c445c9f5bdf97c61e7ca0124fdff4816f02907f09a326eb2",
+      "Length": 3427
+    },
+    {
+      "Path": "packaging/runtime/runtime-generic-linux-arm64-preview-matrix.schema.json",
+      "Sha256": "8bc8629167c3991b5c3f7b987ada02411df285d103d9c431eb85cf490da3c0bb",
+      "Length": 4883
+    },
+    {
       "Path": "packaging/runtime/runtime-generic-linux-feasibility.json",
       "Sha256": "85a1f6ea36f3d1b0950fc2ed1c02925556fb1424e7c9ee202751ec98002ee0db",
       "Length": 3403
@@ -1223,8 +1238,8 @@
     },
     {
       "Path": "scripts/Build-OpenCV.ps1",
-      "Sha256": "f2cf2d0f31bed3f6e25d8516af624a4df1196d3ecee1808df620b2f298e10310",
-      "Length": 20460
+      "Sha256": "dba403df713f8873da3bf3d21cbb6ae4b216f3b274c245755c94cc8e4c964d61",
+      "Length": 20497
     },
     {
       "Path": "scripts/Generate-Calib3DUpstreamMap.ps1",
@@ -1328,8 +1343,8 @@
     },
     {
       "Path": "scripts/New-GenericLinuxPreviewPackage.ps1",
-      "Sha256": "590b60714c0d31b23ecfa6eec30bf257968fb5f0bd3d977270bd98db5c524649",
-      "Length": 9999
+      "Sha256": "13e3a23633b2b5c266745a0b6af989f26e32a6f7e8deda4cd9b38dd4da3deae4",
+      "Length": 10234
     },
     {
       "Path": "scripts/New-NuGetPublicationBundle.ps1",
@@ -1338,8 +1353,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "0012b357c5ccb95cbbb07ba087dd54e09c556c15a44657806a9cc3df21adfcd3",
-      "Length": 63529
+      "Sha256": "08cdfb9294ef5fae5571dfd99d29034fd776bd6648d3171a14d2c09bf936fe61",
+      "Length": 63877
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1348,8 +1363,8 @@
     },
     {
       "Path": "scripts/New-RuntimeInputArtifact.ps1",
-      "Sha256": "de32abcc4683158fe2cfe0a320e2fd05f779f728cf8e2aab3c5471d91690fbb5",
-      "Length": 21988
+      "Sha256": "a143a1a53b6a271a34d45134c8a14579975fba7af74b6ed6c91b5d7e9666b1b3",
+      "Length": 22025
     },
     {
       "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
@@ -1377,14 +1392,24 @@
       "Length": 1894
     },
     {
+      "Path": "scripts/Test-GenericLinuxArm64PreviewMatrix.ps1",
+      "Sha256": "23d9f6843dab25c30864c9cacfd50591a4738128611ef55b94430fd4f084ccb9",
+      "Length": 4230
+    },
+    {
+      "Path": "scripts/Test-GenericLinuxArm64PreviewPackageSurface.ps1",
+      "Sha256": "4a7c36dd18801f72d276b3ac3e68c55a067916a9f1331012834b2771fbbf2625",
+      "Length": 3454
+    },
+    {
       "Path": "scripts/Test-GenericLinuxFeasibilityContract.ps1",
       "Sha256": "270becd140d3feac5391b828bf6cfb00931500689b84f44ab139db65b7a66877",
       "Length": 7075
     },
     {
       "Path": "scripts/Test-GenericLinuxPreviewConsumer.ps1",
-      "Sha256": "24a8ffad51cc93c336abb2a968d8e7d41fd46b9d3b3be632f6c2155f2be9aa26",
-      "Length": 4602
+      "Sha256": "d87ede696b8ae76c078ecd45e46ca336ed067542f5cf51c9e5a26d815c72701f",
+      "Length": 4727
     },
     {
       "Path": "scripts/Test-GenericLinuxPreviewMatrix.ps1",
@@ -1403,8 +1428,8 @@
     },
     {
       "Path": "scripts/Test-GitHubPackConsumerRestoreSurface.ps1",
-      "Sha256": "8a20e00698333aa57b6a5c591d374796744a253e2f457e8a0bffa1d759469f06",
-      "Length": 45629
+      "Sha256": "23e5323f10cb67c88bd41cb4e9e6db023fad6e1c7661e3aaee2a0d4d0a076317",
+      "Length": 45720
     },
     {
       "Path": "scripts/Test-HighGuiUpstreamMap.ps1",
@@ -1498,8 +1523,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "5bf8787aaacd7a9f6a2cc3b8766024ad30920acb553bd542b301e38f49df84c6",
-      "Length": 61131
+      "Sha256": "1626ff097a5c28500d2b98887d2f7d6aa623badaf28b38fdc35f905cbbf5d58c",
+      "Length": 61479
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",

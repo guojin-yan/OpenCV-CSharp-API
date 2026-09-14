@@ -216,7 +216,8 @@ $expectedWorkflowNames = @(
     "docs.yml",
     "pack.yml",
     "publish-nuget.yml",
-    "runtime-input.yml"
+    "runtime-input.yml",
+    "generic-linux-arm64-preview.yml"
 )
 
 $workflowFiles = @(Get-ChildItem -LiteralPath $workflowRoot -File | Where-Object { $_.Extension -in @(".yml", ".yaml") } | Sort-Object Name)
@@ -359,7 +360,7 @@ Assert-GlobalCount -Needle "POWERSHELL_PACKAGE_SEMANTIC_VERSION: $expectedPackag
 Assert-GlobalCount -Needle "POWERSHELL_ALPINE_PACKAGE_VERSION: $expectedAlpinePackageVersion" -ExpectedCount 2 -Issue "Alpine package-manager pin must appear once in the producer and once in the verifier"
 Assert-GlobalCount -Needle "POWERSHELL_ALPINE_SEMANTIC_VERSION: $expectedAlpineSemanticVersion" -ExpectedCount 2 -Issue "Alpine semantic pwsh pin must appear once in the producer and once in the verifier"
 Assert-GlobalCount -Needle "POWERSHELL_VERSION: $expectedArm64ArchiveVersion" -ExpectedCount 3 -Issue "ARM64 archive version pin must remain exact in the producer and two ARM64 verifiers"
-Assert-GlobalCount -Needle "POWERSHELL_SHA256: $expectedArm64ArchiveSha256" -ExpectedCount 3 -Issue "ARM64 archive SHA256 pin must remain exact in the producer and two ARM64 verifiers"
+Assert-GlobalCount -Needle "POWERSHELL_SHA256: $expectedArm64ArchiveSha256" -ExpectedCount 4 -Issue "ARM64 archive SHA256 pin must remain exact in the producer and three ARM64 verifiers"
 Assert-GlobalCount -Needle 'apt-get install -y --no-install-recommends "powershell=$POWERSHELL_DEBIAN_PACKAGE_VERSION"' -ExpectedCount 3 -Issue "Only the three classified APT contexts may install PowerShell"
 Assert-GlobalCount -Needle 'dnf install -y "$POWERSHELL_RPM_PACKAGE_NEVRA"' -ExpectedCount 5 -Issue "Only the five classified RPM contexts may install PowerShell"
 Assert-GlobalCount -Needle 'powershell=$POWERSHELL_ALPINE_PACKAGE_VERSION' -ExpectedCount 2 -Issue "Only the two classified APK contexts may install PowerShell"

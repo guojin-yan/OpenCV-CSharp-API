@@ -1,0 +1,184 @@
+name: generic-linux-arm64-preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      opencv_version:
+        required: true
+        default: 5.0.0
+      package_revision:
+        required: true
+        default: "0"
+      package_version:
+        required: true
+        default: 5.0.0.0
+      full_producer_run_id:
+        description: Successful runtime-input.yml run containing the Ubuntu 22.04 ARM64 Full preview artifact
+        required: true
+      mini_producer_run_id:
+        description: Successful runtime-input.yml run containing the Ubuntu 22.04 ARM64 Mini preview artifact
+        required: true
+      profile:
+        required: true
+        default: all
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.repository == 'guojin-yan/OpenCV-CSharp-API'
+    runs-on: ubuntu-24.04
+    outputs:
+      profile_matrix: ${{ steps.selection.outputs.profile_matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Validate arm64 preview contracts
+        id: selection
+        shell: pwsh
+        env:
+          PREVIEW_PROFILE: ${{ inputs.profile }}
+          FULL_RUN_ID: ${{ inputs.full_producer_run_id }}
+          MINI_RUN_ID: ${{ inputs.mini_producer_run_id }}
+        run: |
+          if ($env:PREVIEW_PROFILE -notin @('all', 'full', 'mini')) { throw "Unsupported arm64 preview profile: $env:PREVIEW_PROFILE" }
+          foreach ($runId in @($env:FULL_RUN_ID, $env:MINI_RUN_ID)) { if ($runId -notmatch '^[0-9]+$') { throw 'Arm64 preview producer run IDs must be numeric.' } }
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxArm64PreviewMatrix.ps1
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxArm64PreviewPackageSurface.ps1
+          $profiles = if ($env:PREVIEW_PROFILE -eq 'all') { @('full', 'mini') } else { @($env:PREVIEW_PROFILE) }
+          $rows = @($profiles | ForEach-Object { [ordered]@{ profile = $_; run_id = if ($_ -eq 'full') { $env:FULL_RUN_ID } else { $env:MINI_RUN_ID } } })
+          "profile_matrix=$(@{ include = $rows } | ConvertTo-Json -Compress -Depth 4)" >> $env:GITHUB_OUTPUT
+
+  pack:
+    needs: validate
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate.outputs.profile_matrix) }}
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          run-id: ${{ matrix.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: generic-linux-arm64-preview-runtime-input-ubuntu.22.04-arm64-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview-input/${{ matrix.profile }}
+      - name: Restore and pack managed API
+        shell: pwsh
+        run: |
+          dotnet restore ./OpenCV-CSharp-API.slnx
+          dotnet build ./OpenCV-CSharp-API.slnx -c Release --no-restore -p:Version='${{ inputs.package_version }}' -p:PackageVersion='${{ inputs.package_version }}'
+          pwsh -NoProfile -File ./scripts/Pack-Managed.ps1 -OpenCvVersion '${{ inputs.opencv_version }}' -PackageRevision '${{ inputs.package_revision }}' -PackageVersion '${{ inputs.package_version }}' -NoBuild -NoRestore
+      - name: Create isolated linux-arm64 preview runtime package
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/New-GenericLinuxPreviewPackage.ps1 `
+            -RuntimeInputRoot ./artifacts/generic-linux-arm64-preview-input/${{ matrix.profile }} `
+            -RuntimeProfile '${{ matrix.profile }}' -OpenCvVersion '${{ inputs.opencv_version }}' `
+            -PackageRevision '${{ inputs.package_revision }}' -PackageVersion '${{ inputs.package_version }}' `
+            -TargetRid linux-arm64 -PreviewMatrixPath packaging/runtime/runtime-generic-linux-arm64-preview-matrix.json `
+            -OutputDir ./artifacts/generic-linux-arm64-preview
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-arm64-preview-managed-${{ matrix.profile }}
+          path: artifacts/packages/*.nupkg
+          if-no-files-found: error
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-arm64-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/*
+          if-no-files-found: error
+
+  verify-ubuntu:
+    needs: [validate, pack]
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate.outputs.profile_matrix) }}
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-arm64-preview-managed-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/nupkg-managed
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-arm64-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/nupkg-linux-arm64-preview-${{ matrix.profile }}
+      - name: Restore build and native smoke on Ubuntu ARM64
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewConsumer.ps1 -ArtifactRoot ./artifacts/generic-linux-arm64-preview -ConsumerRid ubuntu.24.04-arm64 -RuntimeProfile '${{ matrix.profile }}' -ExpectedPackageVersion '${{ inputs.package_version }}' -OpenCvVersion '${{ inputs.opencv_version }}' -PreviewMatrixPath packaging/runtime/runtime-generic-linux-arm64-preview-matrix.json -RunNativeSmoke
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-arm64-preview-consumer-ubuntu-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/generic-linux-preview-consumer-evidence-*.json
+          if-no-files-found: error
+
+  verify-debian:
+    needs: [validate, pack]
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.validate.outputs.profile_matrix) }}
+    runs-on: ubuntu-24.04-arm
+    container: debian:12@sha256:9344f8b8992482f80cba753f323adeaf17690076c095ccff6cc9536be98185dc
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Install Debian ARM64 consumer tooling
+        shell: bash
+        env:
+          POWERSHELL_SHA256: 68f3874cdb6cd564acf404103dfc410ee85435b02f0ad648e73a958853175d6c
+        run: |
+          set -euo pipefail
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates curl git gzip libicu72 libssl3 libunwind8 tar unzip zlib1g
+          curl --proto '=https' --tlsv1.2 -fsSL https://github.com/PowerShell/PowerShell/releases/download/v7.4.17/powershell-7.4.17-linux-arm64.tar.gz -o /tmp/powershell.tar.gz
+          echo "$POWERSHELL_SHA256  /tmp/powershell.tar.gz" | sha256sum -c -
+          mkdir -p /opt/microsoft/powershell/7
+          tar -xzf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7
+          chmod +x /opt/microsoft/powershell/7/pwsh
+          ln -s /opt/microsoft/powershell/7/pwsh /usr/local/bin/pwsh
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.316
+            8.0.423
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-arm64-preview-managed-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/nupkg-managed
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: generic-linux-arm64-preview-runtime-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/nupkg-linux-arm64-preview-${{ matrix.profile }}
+      - name: Restore build and native smoke on Debian ARM64
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File ./scripts/Test-GenericLinuxPreviewConsumer.ps1 -ArtifactRoot ./artifacts/generic-linux-arm64-preview -ConsumerRid debian.12-arm64 -RuntimeProfile '${{ matrix.profile }}' -ExpectedPackageVersion '${{ inputs.package_version }}' -OpenCvVersion '${{ inputs.opencv_version }}' -PreviewMatrixPath packaging/runtime/runtime-generic-linux-arm64-preview-matrix.json -RunNativeSmoke
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: generic-linux-arm64-preview-consumer-debian-${{ matrix.profile }}
+          path: artifacts/generic-linux-arm64-preview/generic-linux-preview-consumer-evidence-*.json
+          if-no-files-found: error

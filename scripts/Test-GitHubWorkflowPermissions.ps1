@@ -165,6 +165,37 @@ $expectations = [ordered]@{
         JobPermissions = [ordered]@{}
         RequiredJobMarkers = [ordered]@{}
     }
+    ".github/workflows/generic-linux-arm64-preview.yml" = [pscustomobject]@{
+        WorkflowPermissions = New-PermissionMap @{ contents = "read" }
+        JobPermissions = [ordered]@{
+            "pack" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+            "verify-ubuntu" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+            "verify-debian" = New-PermissionMap @{
+                actions = "read"
+                contents = "read"
+            }
+        }
+        RequiredJobMarkers = [ordered]@{
+            "pack" = @(
+                "New-GenericLinuxPreviewPackage.ps1",
+                "actions/download-artifact@"
+            )
+            "verify-ubuntu" = @(
+                "Test-GenericLinuxPreviewConsumer.ps1",
+                "actions/upload-artifact@"
+            )
+            "verify-debian" = @(
+                "Test-GenericLinuxPreviewConsumer.ps1",
+                "actions/upload-artifact@"
+            )
+        }
+    }
 }
 
 function Get-RelativePath {

@@ -737,7 +737,7 @@ try {
                 continue
             }
 
-            $importRid = if ([string]$candidateRid.distro -ceq "alpine") { "linux-musl-x64" } else { "linux-x64" }
+            $importRid = if ([string]$candidateRid.distro -ceq "alpine") { "linux-musl-x64" } elseif ([string]$matrix.targetRid -ceq "linux-arm64") { "linux-arm64" } else { "linux-x64" }
             $runtimeGraph.runtimes | Add-Member -NotePropertyName $ridName -NotePropertyValue ([pscustomobject]@{
                     '#import' = @($importRid)
                 })
@@ -802,7 +802,7 @@ try {
                 $rid
             }
             $artifactName = if (-not [string]::IsNullOrWhiteSpace($RuntimePackageIdOverride)) {
-                "nupkg-linux-x64-preview-$profile"
+                "nupkg-$([string]$matrix.targetRid)-preview-$profile"
             }
             else {
                 "nupkg-$rid-$profile"
