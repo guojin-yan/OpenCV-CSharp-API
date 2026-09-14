@@ -22,7 +22,7 @@ The candidate must be usable on a machine with no X11 display and no GTK, Qt, Co
 
 ## Required negative behaviour
 
-The candidate consumer must run with `DISPLAY` and `WAYLAND_DISPLAY` unset and with no GUI packages installed. It must prove all of the following:
+The candidate consumer must run with `DISPLAY` and `WAYLAND_DISPLAY` unset and with no GUI packages installed. It must also run without `LD_LIBRARY_PATH` or `OPENCV_CSHARP_OPENCV_RUNTIME_ROOT`; those variables are useful for local linked-runtime development but are forbidden as evidence shortcuts for the headless package. It must prove all of the following:
 
 - `Cv2.ImShow`, `NamedWindow`, `DestroyWindow`, and trackbar/window APIs take the deterministic `NOT_LINKED`/unsupported path and do not hang.
 - Image codec operations still execute and preserve the existing codec preflight/size-limit policy.
@@ -51,4 +51,3 @@ Rollback is deletion of the candidate artifact and its evidence plus removal of 
 ## Consequences
 
 Consumers can target servers without installing a GUI stack while retaining the existing managed API shape. The cost is an additional profile-specific ABI, dependency, and VideoIO evidence chain. Until that chain is automated and independently reproduced, the repository intentionally documents the profile without publishing it.
-

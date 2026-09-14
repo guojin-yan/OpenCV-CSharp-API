@@ -1,0 +1,90 @@
+{
+  "$schema": "runtime-headless-profile-contract.schema.json",
+  "schemaVersion": 1,
+  "status": "candidate-only",
+  "packageIdentityAllowed": false,
+  "candidatePackageSuffix": ".headless",
+  "runtimePackagePrefix": "JYPPX.OpenCV.runtime",
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "baseProfile": "full",
+  "omittedModules": [ "highgui" ],
+  "requiredModules": [
+    "core",
+    "imgproc",
+    "imgcodecs",
+    "videoio",
+    "flann",
+    "geometry",
+    "calib",
+    "stereo",
+    "dnn",
+    "ml",
+    "objdetect",
+    "photo",
+    "features",
+    "video",
+    "stitching",
+    "ptcloud"
+  ],
+  "profiles": [ "full", "mini" ],
+  "targetRids": [
+    {
+      "rid": "ubuntu.22.04-x64",
+      "distro": "ubuntu",
+      "distroVersion": "22.04",
+      "role": "baseline",
+      "execution": "native-x64"
+    },
+    {
+      "rid": "ubuntu.24.04-x64",
+      "distro": "ubuntu",
+      "distroVersion": "24.04",
+      "role": "forward-distro",
+      "execution": "native-x64"
+    },
+    {
+      "rid": "debian.12-x64",
+      "distro": "debian",
+      "distroVersion": "12",
+      "role": "cross-distro",
+      "execution": "container-on-native-x64"
+    }
+  ],
+  "dependencyPolicy": {
+    "allowedClasses": [ "selected-opencv-modules", "neutral-loader", "glibc", "libstdcxx", "libgcc", "bundled-codecs", "bundled-protobuf", "approved-system-runtime" ],
+    "forbiddenSonamePatterns": [ "libgtk*", "libgdk*", "libQt*", "libX11*", "libXext*", "libwayland*" ],
+    "forbiddenEnvironmentVariables": [ "DISPLAY", "WAYLAND_DISPLAY" ],
+    "forbiddenRuntimeRoots": [ "LD_LIBRARY_PATH", "OPENCV_CSHARP_OPENCV_RUNTIME_ROOT" ],
+    "backendPolicy": "videoio backend availability must be recorded per target; headless does not imply every camera or GUI backend is available"
+  },
+  "abiPolicy": {
+    "managedApiChange": false,
+    "newNativeEntrypoints": false,
+    "loaderCount": 1,
+    "manifestPolicy": "profile-specific generated ABI manifest; do not reuse the full-profile manifest by assertion",
+    "highguiBehavior": "existing managed HighGui entrypoints remain visible and take the deterministic NOT_LINKED or unsupported path"
+  },
+  "negativeSmoke": [
+    "DISPLAY and WAYLAND_DISPLAY are unset",
+    "ImShow/NamedWindow/DestroyWindow/trackbar calls fail deterministically without hanging",
+    "codec read/write succeeds under the existing preflight and size-limit policy",
+    "VideoIO backend result is explicit and completes within the configured timeout",
+    "DNN representative call succeeds when the selected profile contains dnn",
+    "a second native call remains usable after a failed GUI call",
+    "no worker, socket, or native handle remains after a timed-out backend attempt"
+  ],
+  "promotionGates": [
+    "Full and Mini producers use the same OpenCV source/version and profile-specific provenance",
+    "Every shipped ELF has a matching producer hash and no forbidden GUI SONAME",
+    "Ubuntu 22.04, Ubuntu 24.04, and Debian 12 consumer evidence passes for both profiles",
+    "Independent consumer restores only the headless candidate and records package/loader/OS/libc facts",
+    "Native smoke covers codec, DNN, and the documented VideoIO backend result without a display server",
+    "Support contract, SBOM, closeout, and rollback fixtures classify the package as candidate-only until every row is complete"
+  ],
+  "rollback": {
+    "onFailure": "delete candidate artifacts and evidence, remove candidate-only rows, and retain existing distro-specific identities",
+    "activeIdentity": "packaging/runtime/runtime-package-matrix.json",
+    "fallbackPrecedenceChanged": false,
+    "noImplicitPromotion": true
+  }
+}
