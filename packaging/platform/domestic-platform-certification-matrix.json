@@ -1,0 +1,117 @@
+{
+  "$schema": "domestic-platform-certification-matrix.schema.json",
+  "schemaVersion": 1,
+  "status": "research-and-certification",
+  "packageIdentityPolicy": "reuse generic linux RID only after evidence; do not create distro-specific NuGet identity during certification",
+  "baselineRequirements": {
+    "dotnet": "A supported .NET 8 or .NET 10 runtime/SDK must execute C# consumer code on the target OS; Mono-only or vendor-patched runtime evidence is insufficient",
+    "native": "The native loader, OpenCV shared libraries, and C++ runtime must execute on real target architecture with measured ELF closure",
+    "evidence": "Record OS release, kernel, CPU, libc, OpenSSL/ICU, .NET --info, SDK source/hash, compiler/toolchain, package hashes, and native smoke output",
+    "runner": "QEMU-only evidence is research evidence and cannot promote a platform or package"
+  },
+  "platforms": [
+    {
+      "id": "openEuler-22.03-LTS-SP3",
+      "vendor": "openEuler",
+      "osFamily": "Linux-glibc",
+      "releases": [ "22.03-LTS-SP3" ],
+      "architectures": [ "x86_64", "aarch64" ],
+      "csharpRuntime": { "required": true, "minimum": ".NET 8", "preferred": ".NET 10", "source": "vendor package or Microsoft-compatible portable runtime, independently hash-recorded" },
+      "genericRids": [ "linux-x64", "linux-arm64" ],
+      "evidenceLevel": "certification-candidate",
+      "realHardwareRequired": true,
+      "guiRisk": "headless first; desktop GUI backend and Wayland/X11 availability are separate results",
+      "driverRisk": "OpenCL/Vulkan/VA-API and camera backends require device-specific evidence",
+      "stopConditions": [ "No supported .NET runtime on the exact release/architecture", "native loader or libc symbol closure is not reproducible", "only QEMU evidence is available" ],
+      "officialReferences": [ "https://www.openeuler.org/en/", "https://www.openeuler.org/en/docs/" ]
+    },
+    {
+      "id": "openEuler-24.03-LTS",
+      "vendor": "openEuler",
+      "osFamily": "Linux-glibc",
+      "releases": [ "24.03-LTS" ],
+      "architectures": [ "x86_64", "aarch64" ],
+      "csharpRuntime": { "required": true, "minimum": ".NET 8", "preferred": ".NET 10", "source": "vendor package or Microsoft-compatible portable runtime, independently hash-recorded" },
+      "genericRids": [ "linux-x64", "linux-arm64" ],
+      "evidenceLevel": "research-only",
+      "realHardwareRequired": true,
+      "guiRisk": "headless first; desktop GUI backend and Wayland/X11 availability are separate results",
+      "driverRisk": "OpenCL/Vulkan/VA-API and camera backends require device-specific evidence",
+      "stopConditions": [ "No supported .NET runtime on the exact release/architecture", "native loader or libc symbol closure is not reproducible", "only QEMU evidence is available" ],
+      "officialReferences": [ "https://www.openeuler.org/en/", "https://www.openeuler.org/en/docs/" ]
+    },
+    {
+      "id": "kylin-V10-SP1",
+      "vendor": "银河麒麟/Kylin",
+      "osFamily": "Linux-glibc",
+      "releases": [ "V10-SP1" ],
+      "architectures": [ "x86_64", "aarch64" ],
+      "csharpRuntime": { "required": true, "minimum": ".NET 8", "preferred": ".NET 10", "source": "must be verified on the exact vendor image; do not infer from Debian/Ubuntu compatibility" },
+      "genericRids": [ "linux-x64", "linux-arm64" ],
+      "evidenceLevel": "research-only",
+      "realHardwareRequired": true,
+      "guiRisk": "GTK/Qt/X11/Wayland packages and display server are vendor-image variables; headless evidence is independent",
+      "driverRisk": "国产 GPU, camera, V4L2 and codec backends require device and driver records",
+      "stopConditions": [ "Only Mono or an unsupported vendor-patched CLR is available", "vendor image cannot install or run the audited .NET SDK", "native dependencies require untracked vendor packages" ],
+      "officialReferences": [ "https://www.kylinos.cn/", "https://www.kylinos.cn/support/" ]
+    },
+    {
+      "id": "UOS-20",
+      "vendor": "统信/UOS",
+      "osFamily": "Linux-glibc",
+      "releases": [ "20" ],
+      "architectures": [ "x86_64", "aarch64" ],
+      "csharpRuntime": { "required": true, "minimum": ".NET 8", "preferred": ".NET 10", "source": "must be verified on the exact UOS edition and architecture" },
+      "genericRids": [ "linux-x64", "linux-arm64" ],
+      "evidenceLevel": "research-only",
+      "realHardwareRequired": true,
+      "guiRisk": "desktop image GUI stack is not part of headless certification; screen capture and HighGui are separate",
+      "driverRisk": "Hygon/Zhaoxin/Phytium/Kunpeng driver and codec availability must be recorded separately",
+      "stopConditions": [ "Only a container or QEMU image is available for the target architecture", "portable .NET runtime fails on the vendor libc/OpenSSL/ICU set", "package installation changes system GUI/backend dependencies implicitly" ],
+      "officialReferences": [ "https://www.chinauos.com/", "https://www.chinauos.com/support" ]
+    },
+    {
+      "id": "openKylin-2.0",
+      "vendor": "openKylin",
+      "osFamily": "Linux-glibc",
+      "releases": [ "2.0" ],
+      "architectures": [ "x86_64", "aarch64" ],
+      "csharpRuntime": { "required": true, "minimum": ".NET 8", "preferred": ".NET 10", "source": "must be verified on the exact release; community package alone is not release evidence" },
+      "genericRids": [ "linux-x64", "linux-arm64" ],
+      "evidenceLevel": "research-only",
+      "realHardwareRequired": true,
+      "guiRisk": "desktop and display-server support is optional and cannot be inferred from server/headless success",
+      "driverRisk": "GPU, V4L2, FFmpeg/GStreamer and font packages need per-image classification",
+      "stopConditions": [ "No reproducible supported .NET SDK/runtime", "native ABI or libc closure differs across vendor images", "only emulated ARM64 evidence is available" ],
+      "officialReferences": [ "https://openkylin.top/", "https://docs.openkylin.top/" ]
+    },
+    {
+      "id": "Loongnix-LoongArch64",
+      "vendor": "龙芯/Loongnix",
+      "osFamily": "Linux-architecture-specific",
+      "releases": [ "vendor-selected" ],
+      "architectures": [ "loongarch64" ],
+      "csharpRuntime": { "required": true, "minimum": ".NET 8", "preferred": ".NET 10", "source": "official upstream or vendor runtime with C ABI and JIT/AOT provenance" },
+      "genericRids": [],
+      "evidenceLevel": "blocked-research",
+      "realHardwareRequired": true,
+      "guiRisk": "not assessed until the runtime and native ABI are closed",
+      "driverRisk": "not assessed until a supported .NET runtime and OpenCV toolchain exist",
+      "stopConditions": [ "No supported .NET runtime/JIT/AOT for LoongArch64", "OpenCV C++ toolchain cannot produce a compatible shared library", "QEMU is the only execution environment" ],
+      "officialReferences": [ "https://www.loongnix.cn/" ]
+    }
+  ],
+  "certificationStages": [
+    { "stage": "runtime", "required": [ "dotnet --info", "hello-world C# process", "SDK restore/build" ] },
+    { "stage": "native", "required": [ "loader load", "core/imgproc/imgcodecs smoke", "ELF interpreter/symbol/dependency closure" ] },
+    { "stage": "headless", "required": [ "DISPLAY and WAYLAND_DISPLAY unset", "HighGui deterministic negative path", "codec and DNN smoke", "VideoIO backend result and cleanup" ] },
+    { "stage": "desktop", "required": [ "GUI framework and display-server identity", "HighGui interaction smoke", "font/camera/codec dependency record" ] },
+    { "stage": "performance", "required": [ "CPU model and feature flags", "fixed-input benchmark", "peak RSS and backend notes" ] }
+  ],
+  "promotionPolicy": [
+    "A certification result may reuse linux-x64 or linux-arm64 only after the matching generic RID preview gate is complete.",
+    "Do not add a domestic distro RID or package ID solely because a portable .NET runtime starts.",
+    "A platform is real-supported only when runtime, native, headless/desktop scope, and rollback evidence are all classified.",
+    "Vendor CPU names do not create a new package architecture; ISA and measured runtime behaviour determine reuse."
+  ]
+}

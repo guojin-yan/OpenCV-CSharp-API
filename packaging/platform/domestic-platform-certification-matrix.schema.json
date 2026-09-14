@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/domestic-platform-certification-matrix.schema.json",
+  "title": "Domestic C# platform certification matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "packageIdentityPolicy", "baselineRequirements", "platforms", "certificationStages", "promotionPolicy" ],
+  "properties": {
+    "$schema": { "const": "domestic-platform-certification-matrix.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "research-and-certification" },
+    "packageIdentityPolicy": { "type": "string", "pattern": "reuse generic linux RID" },
+    "baselineRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "dotnet", "native", "evidence", "runner" ],
+      "properties": {
+        "dotnet": { "type": "string", "pattern": "supported .NET 8 or .NET 10" },
+        "native": { "type": "string", "minLength": 30 },
+        "evidence": { "type": "string", "minLength": 30 },
+        "runner": { "type": "string", "pattern": "QEMU-only" }
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "id", "vendor", "osFamily", "releases", "architectures", "csharpRuntime", "genericRids", "evidenceLevel", "realHardwareRequired", "guiRisk", "driverRisk", "stopConditions", "officialReferences" ],
+        "properties": {
+          "id": { "type": "string", "minLength": 3 },
+          "vendor": { "type": "string", "minLength": 2 },
+          "osFamily": { "type": "string", "minLength": 3 },
+          "releases": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "architectures": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [ "x86_64", "aarch64", "loongarch64" ] } },
+          "csharpRuntime": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [ "required", "minimum", "preferred", "source" ],
+            "properties": {
+              "required": { "const": true },
+              "minimum": { "const": ".NET 8" },
+              "preferred": { "const": ".NET 10" },
+              "source": { "type": "string", "minLength": 20 }
+            }
+          },
+          "genericRids": { "type": "array", "uniqueItems": true, "items": { "enum": [ "linux-x64", "linux-arm64" ] } },
+          "evidenceLevel": { "enum": [ "certification-candidate", "research-only", "blocked-research" ] },
+          "realHardwareRequired": { "const": true },
+          "guiRisk": { "type": "string", "minLength": 20 },
+          "driverRisk": { "type": "string", "minLength": 20 },
+          "stopConditions": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "type": "string", "minLength": 20 } },
+          "officialReferences": { "type": "array", "minItems": 1, "items": { "type": "string", "format": "uri" } }
+        }
+      }
+    },
+    "certificationStages": {
+      "type": "array",
+      "const": [
+        { "stage": "runtime", "required": [ "dotnet --info", "hello-world C# process", "SDK restore/build" ] },
+        { "stage": "native", "required": [ "loader load", "core/imgproc/imgcodecs smoke", "ELF interpreter/symbol/dependency closure" ] },
+        { "stage": "headless", "required": [ "DISPLAY and WAYLAND_DISPLAY unset", "HighGui deterministic negative path", "codec and DNN smoke", "VideoIO backend result and cleanup" ] },
+        { "stage": "desktop", "required": [ "GUI framework and display-server identity", "HighGui interaction smoke", "font/camera/codec dependency record" ] },
+        { "stage": "performance", "required": [ "CPU model and feature flags", "fixed-input benchmark", "peak RSS and backend notes" ] }
+      ]
+    },
+    "promotionPolicy": { "type": "array", "minItems": 4, "uniqueItems": true, "items": { "type": "string", "minLength": 30 } }
+  }
+}
