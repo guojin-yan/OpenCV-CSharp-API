@@ -226,6 +226,7 @@ function Get-Record {
         "docs/articles/dnn-structured-parity-guide.md",
         "docs/articles/features-upstream-parity-guide.md",
         "docs/articles/generic-linux-rid-adr.md",
+        "docs/articles/headless-runtime-profile-adr.md",
         "docs/articles/highgui-interaction-guide.md",
         "docs/articles/imgcodecs-upstream-parity-guide.md",
         "docs/articles/imgproc-geometry-guide.md",
