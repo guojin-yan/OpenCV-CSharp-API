@@ -1,0 +1,69 @@
+{
+  "$schema": "runtime-generic-linux-musl-feasibility.schema.json",
+  "schemaVersion": 1,
+  "status": "research-only",
+  "packageIdentityAllowed": false,
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "targetRids": [ "linux-musl-x64", "linux-musl-arm64" ],
+  "ridSelection": {
+    "x64Graph": "linux-musl-x64 imports linux-musl; linux-musl imports linux",
+    "arm64Graph": "linux-musl-arm64 is not promoted until a native AArch64 graph and producer are verified",
+    "exactAssetPriority": "exact musl RID assets are preferred before linux-musl and linux fallback assets",
+    "glibcFallback": "glibc runtime assets are rejected as musl candidates",
+    "packageReferencePolicy": "package IDs are explicit; managed package does not auto-select a musl runtime package"
+  },
+  "referenceTargets": [
+    {
+      "rid": "alpine.3.20-x64",
+      "distro": "alpine",
+      "distroVersion": "3.20",
+      "architecture": "x64",
+      "role": "compatibility-reference",
+      "execution": "container-on-native-x64",
+      "status": "compatibility-only"
+    },
+    {
+      "rid": "alpine.3.20-arm64",
+      "distro": "alpine",
+      "distroVersion": "3.20",
+      "architecture": "arm64",
+      "role": "research-reference",
+      "execution": "native-aarch64-required",
+      "status": "research-only"
+    }
+  ],
+  "dependencyPolicy": {
+    "libc": "musl-only; no glibc loader or glibc-only symbol may enter a candidate payload",
+    "allowedClasses": [ "musl-libc", "libstdcxx", "libgcc", "selected-opencv-modules", "neutral-loader", "bundled-codecs", "bundled-protobuf", "approved-system-runtime" ],
+    "forbiddenClasses": [ "glibc", "unreviewed-gui-backend", "unbounded-camera-backend" ],
+    "backendPolicy": "FFmpeg/GStreamer/GTK/Qt/X11/Wayland/font/camera backends require per-target available, unavailable, or disabled evidence",
+    "guiPolicy": "GUI and display-server dependencies are never implicit generic musl dependencies"
+  },
+  "requiredEvidence": [
+    "native x64 producer and independent consumer with digest-pinned Alpine userspace",
+    "native AArch64 producer and consumer or an explicit research-only stop decision",
+    "Full and Mini profile parity with distinct ABI manifests",
+    "musl interpreter, symbol, dependency, and producer-to-package hash closure",
+    "codec, DNN, and explicit VideoIO backend smoke with timeout and cleanup",
+    "RID exact-asset precedence and glibc-candidate rejection tests"
+  ],
+  "promotionGates": [
+    "Do not create a generic musl package identity during feasibility",
+    "QEMU-only ARM64 evidence cannot promote a package",
+    "At least two independently consumed musl userspaces are required",
+    "Every architecture-specific identity needs native producer and consumer evidence",
+    "Release SBOM, rollback, support contract, and deterministic package hashes must be updated together"
+  ],
+  "stopConditions": [
+    "No native AArch64 runner",
+    "Musl-specific toolchain or OpenCV source provenance is not reproducible",
+    "Required backend depends on an unbounded external system package",
+    "ELF closure contains glibc loader/symbol, producer path, or undeclared GUI/backend SONAME"
+  ],
+  "rollback": {
+    "onFailure": "retain alpine.3.20-x64 compatibility-only and existing glibc distro package identities",
+    "activeIdentity": "packaging/runtime/runtime-package-matrix.json",
+    "fallbackPrecedenceChanged": false,
+    "noImplicitPromotion": true
+  }
+}

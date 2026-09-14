@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/88388ff6ef5fd064",
-  "SourceIdentity": "sha256:88388ff6ef5fd064a05737bc1f6f97a08b85653af6cf250f46aa96f6c5ba38f9",
+  "CandidateId": "local-closeout/sha256/fd84c2a3b81206d6",
+  "SourceIdentity": "sha256:fd84c2a3b81206d6ff12c0b06607324043e919479dbb836c8c18194cf4fd8b4f",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1700,
-    "Sha256": "88388ff6ef5fd064a05737bc1f6f97a08b85653af6cf250f46aa96f6c5ba38f9",
+    "FileCount": 1704,
+    "Sha256": "fd84c2a3b81206d6ff12c0b06607324043e919479dbb836c8c18194cf4fd8b4f",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -937,6 +937,11 @@
       "Length": 4172
     },
     {
+      "Path": "docs/articles/generic-linux-musl-feasibility-adr.md",
+      "Sha256": "e7f00f438c6fc067bc04152c4df879650cbf798b439d931398457a0e13aad256",
+      "Length": 3968
+    },
+    {
       "Path": "docs/articles/generic-linux-rid-adr.md",
       "Sha256": "aa4f63c9f549ec17f9ca37fb371161f538a6ba861adf2768d2dc52518632bb6a",
       "Length": 9545
@@ -1138,8 +1143,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "58428e060e20aedf7dd6378df4dbb27217c2a91691864355f3c07be308049f29",
-      "Length": 14832
+      "Sha256": "9b8bda4b534b4529799ef7ed3d7d5e7db8ffb467101447ed8b9b6322d78192d9",
+      "Length": 14938
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1162,6 +1167,11 @@
       "Length": 333
     },
     {
+      "Path": "packaging/runtime/runtime-distro-rid-graph.json",
+      "Sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de",
+      "Length": 1282
+    },
+    {
       "Path": "packaging/runtime/runtime-generic-linux-arm64-preview-matrix.json",
       "Sha256": "bc723126356e1af8c445c9f5bdf97c61e7ca0124fdff4816f02907f09a326eb2",
       "Length": 3427
@@ -1180,6 +1190,16 @@
       "Path": "packaging/runtime/runtime-generic-linux-feasibility.schema.json",
       "Sha256": "309a4a2c94148d442f339d694cfdd9758c599fcc0a30854ca0173805b75dddac",
       "Length": 4967
+    },
+    {
+      "Path": "packaging/runtime/runtime-generic-linux-musl-feasibility.json",
+      "Sha256": "b5132e4d22d9c83692b1ae811fd2c38bc301c0958d1e741bc7b369e890f3ea93",
+      "Length": 3464
+    },
+    {
+      "Path": "packaging/runtime/runtime-generic-linux-musl-feasibility.schema.json",
+      "Sha256": "65e06782538247edd6e81423113a60833175b75938ba577befcb8d1b798d9342",
+      "Length": 3964
     },
     {
       "Path": "packaging/runtime/runtime-generic-linux-preview-matrix.json",
@@ -1368,8 +1388,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "cae1f0869c09d63c130712fb60eb77fab192386f5c32a35b02c9322bd941b367",
-      "Length": 64136
+      "Sha256": "fe6b1d57d7bc28c2c66eff9593b745d5bdc0702ec18a6c6559120ecb3a5659f7",
+      "Length": 64475
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1420,6 +1440,11 @@
       "Path": "scripts/Test-GenericLinuxFeasibilityContract.ps1",
       "Sha256": "270becd140d3feac5391b828bf6cfb00931500689b84f44ab139db65b7a66877",
       "Length": 7075
+    },
+    {
+      "Path": "scripts/Test-GenericLinuxMuslFeasibilityContract.ps1",
+      "Sha256": "c0d9d91fe66ce28c6dfcd356aac2be1bf12e330bc9b692ba178b4c7db5ac33cb",
+      "Length": 4743
     },
     {
       "Path": "scripts/Test-GenericLinuxPreviewConsumer.ps1",
@@ -1543,8 +1568,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b3f123f6a3eb9f1d8e89f597f053abd8f3c75e103ecaf37a10bd271b5c08ec15",
-      "Length": 61738
+      "Sha256": "42fa6552835c36dca4642573cf1a2fc1ee1bd8c2637c9a7051d16beae8106d52",
+      "Length": 62077
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
