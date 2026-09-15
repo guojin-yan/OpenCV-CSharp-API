@@ -1,0 +1,91 @@
+{
+  "$schema": "runtime-opencl-tapi-umat-contract.schema.json",
+  "schemaVersion": 1,
+  "status": "research-only",
+  "runtimePolicy": "cpu-only",
+  "openclExecutionClaimed": false,
+  "gpuAccelerationClaimed": false,
+  "cudaExecutionClaimed": false,
+  "packageIdentityAllowed": false,
+  "activePackageMatrix": "packaging/runtime/runtime-package-matrix.json",
+  "managedApiPolicy": "No public UMat/Ocl/GpuMat execution surface is promoted in 5.0.1",
+  "capabilityModel": {
+    "states": [ "Declared", "Available", "Verified" ],
+    "opencl": {
+      "declaredEvidence": [ "native build flag", "OpenCL symbol", "DNN target enum" ],
+      "availableEvidence": [ "context initialization", "device enumeration", "operation probe" ],
+      "verifiedEvidence": [ "fixed end-to-end pipeline", "correctness and synchronization", "independent consumer", "benchmark record" ],
+      "promotionRule": "Do not collapse Declared or Available into Verified"
+    },
+    "cuda": {
+      "relationship": "separate backend; CUDA/GpuMat is not implied by OpenCL or T-API",
+      "status": "not-claimed"
+    }
+  },
+  "contextPolicy": {
+    "scope": "thread-local or explicitly owned scoped context",
+    "globalMutableContext": "forbidden",
+    "ownership": [ "borrowed-or-owned must be explicit", "idempotent disposal", "use-after-dispose rejected" ],
+    "parallelism": "queues are not implicitly shared across managed contexts",
+    "initializationFailure": "leave CPU path usable and report backend failure"
+  },
+  "fallbackPolicy": {
+    "default": "explicit CPU fallback; current published package is CPU-only",
+    "outcomes": [ "Unavailable", "Unsupported", "Failed", "CpuFallback" ],
+    "silentFallbackClaim": "forbidden",
+    "performanceClaim": "CPU fallback cannot be reported as GPU execution or speed-up"
+  },
+  "synchronizationPolicy": {
+    "finishBoundary": "explicit wait/Finish and disposal semantics are required before publication",
+    "readback": "Mat/read/span/native-pointer borrow is a synchronization point unless explicitly documented",
+    "lifetime": "storage cannot be disposed while a queued command references it",
+    "timeout": "timeout, cleanup, and driver-reset behavior must be recorded"
+  },
+  "conversionPolicy": {
+    "matUmat": "borrow, copy, or device transfer must be observable",
+    "preserve": [ "depth", "channels", "stride", "ROI", "continuity", "alignment" ],
+    "borrowedHandle": "cannot outlive its owner",
+    "unsupportedFormat": "report Unsupported; do not silently change format"
+  },
+  "benchmarkProtocol": {
+    "required": true,
+    "includes": [ "OpenCV revision", "runtime package hash", "OS and libc", "driver and ICD versions", "device identity", "input corpus hash", "operation graph", "warm-up and iteration counts", "sync points", "timeout", "peak RSS", "CPU baseline", "device time", "transfer time", "numerical tolerance", "fallback outcome" ],
+    "runs": [ "cold", "warm", "independent consumer" ],
+    "claimRule": "kernel-only timing cannot promote an end-to-end GPU claim"
+  },
+  "requiredEvidence": [
+    "native producer and independent consumer on a pinned OpenCL ICD/device",
+    "explicit context ownership and thread-affinity evidence",
+    "Mat/UMat conversion, Finish, readback, timeout, and disposal smoke",
+    "CPU fallback and unavailable/unsupported/failed outcome smoke",
+    "correctness tolerance and end-to-end benchmark including transfer cost",
+    "driver/ICD dependency manifest, package hash, and rollback record"
+  ],
+  "promotionGates": [
+    "candidate package identity is separate and cannot be selected by the CPU package",
+    "Declared, Available, and Verified states are independently reported",
+    "OpenCL and CUDA evidence are separate; one backend cannot satisfy the other",
+    "at least one native producer and one independent consumer reproduce the same pipeline",
+    "support contract, SBOM, closeout, and rollback classify the candidate together"
+  ],
+  "stopConditions": [
+    "context or queue lifetime is nondeterministic",
+    "required driver or ICD dependency is unbounded",
+    "pipeline mixes CPU and device work without observable synchronization",
+    "numerical tolerance or cleanup behavior is not reproducible",
+    "consumer cannot reproduce the producer result or package hash"
+  ],
+  "rollback": {
+    "onFailure": "remove the research profile and retain the CPU-only package matrix",
+    "activeIdentity": "packaging/runtime/runtime-package-matrix.json",
+    "fallbackPrecedenceChanged": false,
+    "noImplicitPromotion": true
+  },
+  "forbiddenClaims": [
+    "WITH_OPENCL or an OpenCL header proves GPU acceleration",
+    "UMat or a DNN OpenCL target enum proves execution on a device",
+    "a CPU fallback or kernel-only benchmark proves an end-to-end GPU speed-up",
+    "CUDA/GpuMat support is implied by OpenCL/T-API support",
+    "QEMU, cross-compilation, or a single developer workstation promotes support"
+  ]
+}

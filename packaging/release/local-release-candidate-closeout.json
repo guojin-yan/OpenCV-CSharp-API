@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/d2156cfcf018d3cd",
-  "SourceIdentity": "sha256:d2156cfcf018d3cda55d670e86cfec0f2192c529931c632e6022d3327eea3574",
+  "CandidateId": "local-closeout/sha256/b2d8b02ebcc94913",
+  "SourceIdentity": "sha256:b2d8b02ebcc94913c68a69d986c5c4e588dbcc276a24a4bf4c01a144dcd12fce",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1708,
-    "Sha256": "d2156cfcf018d3cda55d670e86cfec0f2192c529931c632e6022d3327eea3574",
+    "FileCount": 1712,
+    "Sha256": "b2d8b02ebcc94913c68a69d986c5c4e588dbcc276a24a4bf4c01a144dcd12fce",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -987,6 +987,11 @@
       "Length": 5272
     },
     {
+      "Path": "docs/articles/opencl-tapi-umat-adr.md",
+      "Sha256": "43db28867828e2f044858bcbc18ba76b086469e2f20f8e562a5deb5f3b830bd2",
+      "Length": 7352
+    },
+    {
       "Path": "docs/articles/photo-ccm-guide.md",
       "Sha256": "225cd075ac85937c91c4b54b4a9330c78887af2888e0fb4128d1147191c77a27",
       "Length": 6980
@@ -1148,8 +1153,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "e886b1bd52d7204f0b074cea268bdf1d2b4242c4335beaa03bc23b80f1139cea",
-      "Length": 15046
+      "Sha256": "e8343a14ac94911f4c3eeb0095c59343f32eb69b1aafd048fed74c1d81a23c59",
+      "Length": 15134
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1235,6 +1240,16 @@
       "Path": "packaging/runtime/runtime-headless-profile-contract.schema.json",
       "Sha256": "e93ac9f058e80391fdab565fcb99b1ee4eecd44c5dc976e0fecece777a8508a9",
       "Length": 4051
+    },
+    {
+      "Path": "packaging/runtime/runtime-opencl-tapi-umat-contract.json",
+      "Sha256": "cea7f43b1ce8edd6ecc96c187493c270b732375a0e970726bafcc37eb901a618",
+      "Length": 4928
+    },
+    {
+      "Path": "packaging/runtime/runtime-opencl-tapi-umat-contract.schema.json",
+      "Sha256": "517ee73bf8546fa34dd694ce339967e9891a271936c9ba3bacbcc009eece9fca",
+      "Length": 6861
     },
     {
       "Path": "packaging/runtime/runtime-support-contract.json",
@@ -1403,8 +1418,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "42b41d263fc5bca624b0ffcbfd9a3bbfa1d0a65ec7b1dddfe26bf5d36a02f25b",
-      "Length": 64758
+      "Sha256": "68057302b38afafe8292fd4a2d8eb684ac56b98f54b84ab8e2bbef26d53ff97e",
+      "Length": 65001
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1577,6 +1592,11 @@
       "Length": 1996
     },
     {
+      "Path": "scripts/Test-OpenClTapiUmatContract.ps1",
+      "Sha256": "b83e170b7fc347fee741741a7c2103e8464249e52dd119cd5f6bbe2a10d60189",
+      "Length": 5420
+    },
+    {
       "Path": "scripts/Test-PackageMetadataNeutrality.ps1",
       "Sha256": "7470edc8081f7289566983ecbf5505f16d7da683244cfc222de078fe739979a5",
       "Length": 25794
@@ -1588,8 +1608,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "0fd98aa5c6bbf083e6a04139b65da0cc1f06e7b44a0f06840db12c36c475750f",
-      "Length": 62360
+      "Sha256": "da71f3a22793c84a799b13a41ca106791e66de94918f2ca47dc3c7ab68919e88",
+      "Length": 62603
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",

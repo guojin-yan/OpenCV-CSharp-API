@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/runtime-opencl-tapi-umat-contract.schema.json",
+  "title": "OpenCL T-API UMat boundary contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "runtimePolicy", "openclExecutionClaimed", "gpuAccelerationClaimed", "cudaExecutionClaimed", "packageIdentityAllowed", "activePackageMatrix", "managedApiPolicy", "capabilityModel", "contextPolicy", "fallbackPolicy", "synchronizationPolicy", "conversionPolicy", "benchmarkProtocol", "requiredEvidence", "promotionGates", "stopConditions", "rollback", "forbiddenClaims" ],
+  "properties": {
+    "$schema": { "const": "runtime-opencl-tapi-umat-contract.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "research-only" },
+    "runtimePolicy": { "const": "cpu-only" },
+    "openclExecutionClaimed": { "const": false },
+    "gpuAccelerationClaimed": { "const": false },
+    "cudaExecutionClaimed": { "const": false },
+    "packageIdentityAllowed": { "const": false },
+    "activePackageMatrix": { "const": "packaging/runtime/runtime-package-matrix.json" },
+    "managedApiPolicy": { "type": "string", "pattern": "No public UMat/Ocl/GpuMat execution surface is promoted" },
+    "capabilityModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "states", "opencl", "cuda" ],
+      "properties": {
+        "states": { "const": [ "Declared", "Available", "Verified" ] },
+        "opencl": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [ "declaredEvidence", "availableEvidence", "verifiedEvidence", "promotionRule" ],
+          "properties": {
+            "declaredEvidence": { "type": "array", "minItems": 3, "uniqueItems": true, "items": { "type": "string" } },
+            "availableEvidence": { "type": "array", "minItems": 3, "uniqueItems": true, "items": { "type": "string" } },
+            "verifiedEvidence": { "type": "array", "minItems": 4, "uniqueItems": true, "items": { "type": "string" } },
+            "promotionRule": { "type": "string", "pattern": "Do not collapse Declared or Available into Verified" }
+          }
+        },
+        "cuda": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [ "relationship", "status" ],
+          "properties": {
+            "relationship": { "type": "string", "pattern": "separate backend" },
+            "status": { "const": "not-claimed" }
+          }
+        }
+      }
+    },
+    "contextPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "scope", "globalMutableContext", "ownership", "parallelism", "initializationFailure" ],
+      "properties": {
+        "scope": { "type": "string", "pattern": "thread-local" },
+        "globalMutableContext": { "const": "forbidden" },
+        "ownership": { "type": "array", "minItems": 3, "uniqueItems": true, "items": { "type": "string" } },
+        "parallelism": { "type": "string", "minLength": 20 },
+        "initializationFailure": { "type": "string", "pattern": "CPU path usable" }
+      }
+    },
+    "fallbackPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "default", "outcomes", "silentFallbackClaim", "performanceClaim" ],
+      "properties": {
+        "default": { "type": "string", "pattern": "CPU-only" },
+        "outcomes": { "const": [ "Unavailable", "Unsupported", "Failed", "CpuFallback" ] },
+        "silentFallbackClaim": { "const": "forbidden" },
+        "performanceClaim": { "type": "string", "pattern": "cannot be reported as GPU execution" }
+      }
+    },
+    "synchronizationPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "finishBoundary", "readback", "lifetime", "timeout" ],
+      "properties": {
+        "finishBoundary": { "type": "string", "pattern": "Finish" },
+        "readback": { "type": "string", "pattern": "synchronization point" },
+        "lifetime": { "type": "string", "pattern": "cannot be disposed" },
+        "timeout": { "type": "string", "pattern": "cleanup" }
+      }
+    },
+    "conversionPolicy": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "matUmat", "preserve", "borrowedHandle", "unsupportedFormat" ],
+      "properties": {
+        "matUmat": { "type": "string", "pattern": "borrow, copy, or device transfer" },
+        "preserve": { "const": [ "depth", "channels", "stride", "ROI", "continuity", "alignment" ] },
+        "borrowedHandle": { "type": "string", "pattern": "outlive its owner" },
+        "unsupportedFormat": { "type": "string", "pattern": "Unsupported" }
+      }
+    },
+    "benchmarkProtocol": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "required", "includes", "runs", "claimRule" ],
+      "properties": {
+        "required": { "const": true },
+        "includes": { "type": "array", "minItems": 16, "uniqueItems": true, "items": { "type": "string" } },
+        "runs": { "const": [ "cold", "warm", "independent consumer" ] },
+        "claimRule": { "type": "string", "pattern": "kernel-only timing cannot promote" }
+      }
+    },
+    "requiredEvidence": { "type": "array", "const": [ "native producer and independent consumer on a pinned OpenCL ICD/device", "explicit context ownership and thread-affinity evidence", "Mat/UMat conversion, Finish, readback, timeout, and disposal smoke", "CPU fallback and unavailable/unsupported/failed outcome smoke", "correctness tolerance and end-to-end benchmark including transfer cost", "driver/ICD dependency manifest, package hash, and rollback record" ] },
+    "promotionGates": { "type": "array", "minItems": 5, "uniqueItems": true, "items": { "type": "string", "minLength": 20 } },
+    "stopConditions": { "type": "array", "minItems": 5, "uniqueItems": true, "items": { "type": "string", "minLength": 15 } },
+    "rollback": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "onFailure", "activeIdentity", "fallbackPrecedenceChanged", "noImplicitPromotion" ],
+      "properties": {
+        "onFailure": { "type": "string", "pattern": "CPU-only package matrix" },
+        "activeIdentity": { "const": "packaging/runtime/runtime-package-matrix.json" },
+        "fallbackPrecedenceChanged": { "const": false },
+        "noImplicitPromotion": { "const": true }
+      }
+    },
+    "forbiddenClaims": { "type": "array", "const": [ "WITH_OPENCL or an OpenCL header proves GPU acceleration", "UMat or a DNN OpenCL target enum proves execution on a device", "a CPU fallback or kernel-only benchmark proves an end-to-end GPU speed-up", "CUDA/GpuMat support is implied by OpenCL/T-API support", "QEMU, cross-compilation, or a single developer workstation promotes support" ] }
+  }
+}
