@@ -132,6 +132,12 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
 
         private static void Main(string[] args)
         {
+            if (args.Length > 0 && string.Equals(args[0], "capabilities-json", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine(OpenCvCapabilities.GetCurrent().ToJson());
+                return;
+            }
+
             if (args.Length > 0 &&
                 (string.Equals(args[0], "tutorial", StringComparison.OrdinalIgnoreCase) ||
                  string.Equals(args[0], "showcase", StringComparison.OrdinalIgnoreCase)))

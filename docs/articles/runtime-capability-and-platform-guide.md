@@ -23,6 +23,17 @@ foreach (OpenCvDnnBackendCapability backend in capabilities.DnnBackends.Where(va
 }
 ```
 
+For an evidence-friendly machine-readable snapshot, run the sample with the
+`capabilities-json` argument. The output has stable property order and excludes
+runtime paths and environment variables:
+
+```powershell
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- capabilities-json
+```
+
+`OpenCvCapabilities.ToJson()` uses only the base class library, so the same
+format is available on the legacy target frameworks as well as modern .NET.
+
 `NativeRuntime.State == Verified` means that both the wrapper ABI and the OpenCV version probes matched. `VideoIOBackends` describes registry entries and built-in status; it is not proof that a camera, codec, or device can be opened. DNN `Verified` means that the backend returned a target list; a model execution probe is still required for a production claim.
 
 `NativeRuntime.State == Verified` 表示 wrapper ABI 和 OpenCV 版本探针都匹配。`VideoIOBackends` 描述 registry 条目和 built-in 状态，不代表摄像头、编解码器或设备一定可以打开。DNN 的 `Verified` 表示 backend 返回了 target 列表；生产支持声明仍需模型执行探针。
@@ -30,6 +41,10 @@ foreach (OpenCvDnnBackendCapability backend in capabilities.DnnBackends.Where(va
 `Accelerators` deliberately reports `opencl-tapi` and `cuda` as `Unknown` until the library owns a public, side-effect-free execution probe. A DNN target enum, a CUDA-named stitching helper, or a build flag is not GPU execution evidence. The current CPU runtime therefore remains honest about the GPU/OpenCL boundary.
 
 `Accelerators` 会在库拥有公开、无副作用的执行探针之前，刻意将 `opencl-tapi` 和 `cuda` 报告为 `Unknown`。DNN target 枚举、CUDA 命名的 stitching helper 或构建开关都不是 GPU 执行证据。因此当前 CPU runtime 对 GPU/OpenCL 边界保持明确。
+
+如需便于归档的机器可读快照，可使用 `capabilities-json` 参数运行样例。
+输出字段顺序稳定，并且不会包含运行时路径或环境变量；`ToJson()` 只依赖
+基础类库，因此旧 TFM 与现代 .NET 都可使用同一格式。
 
 ## Platform Identity
 

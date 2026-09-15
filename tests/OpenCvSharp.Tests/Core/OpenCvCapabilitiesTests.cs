@@ -54,6 +54,22 @@ namespace JYPPX.OpenCvSharp.Tests.Core
         }
 
         [Fact]
+        public void SnapshotJsonIsDeterministicAndOmitsMachinePaths()
+        {
+            OpenCvCapabilities capabilities = OpenCvCapabilities.GetCurrent();
+
+            string first = capabilities.ToJson();
+            string second = capabilities.ToJson();
+
+            Assert.Equal(first, second);
+            Assert.StartsWith("{\"managedPackageVersion\":", first, StringComparison.Ordinal);
+            Assert.Contains("\"accelerators\":[", first, StringComparison.Ordinal);
+            Assert.Contains("\"warnings\":[", first, StringComparison.Ordinal);
+            Assert.DoesNotContain(Environment.CurrentDirectory, first, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("LD_LIBRARY_PATH", first, StringComparison.Ordinal);
+        }
+
+        [Fact]
         public void NativeSmokeSnapshotVerifiesExistingProbes()
         {
             if (!TestEnvironment.IsNativeSmokeEnabled())

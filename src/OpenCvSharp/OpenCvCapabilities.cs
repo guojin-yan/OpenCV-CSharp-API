@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Text;
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.Dnn;
 using JYPPX.OpenCvSharp.VideoIO;
@@ -368,6 +370,173 @@ namespace JYPPX.OpenCvSharp
 
         /// <summary>Gets non-sensitive warnings collected while building the snapshot.</summary>
         public IReadOnlyList<string> Warnings { get; }
+
+        /// <summary>
+        /// Serializes this snapshot as deterministic, non-sensitive JSON.
+        /// 将此快照序列化为确定性的、非敏感的 JSON。
+        /// </summary>
+        /// <remarks>
+        /// The property order is stable so applications can archive the output
+        /// as evidence without taking a dependency on a JSON package. Runtime
+        /// paths and environment variables are intentionally not included.
+        /// </remarks>
+        public string ToJson()
+        {
+            var builder = new StringBuilder(4096);
+            builder.Append('{');
+            AppendJsonProperty(builder, "managedPackageVersion", ManagedPackageVersion, false);
+            AppendJsonProperty(builder, "openCvVersion", OpenCvVersion, true);
+            AppendJsonProperty(builder, "nativeAbiVersion", NativeAbiVersion.ToString(CultureInfo.InvariantCulture), true, false);
+            AppendJsonProperty(builder, "targetFramework", TargetFramework, true);
+            AppendJsonProperty(builder, "processBitness", ProcessBitness.ToString(CultureInfo.InvariantCulture), true, false);
+            AppendJsonProperty(builder, "operatingSystem", OperatingSystem, true);
+            AppendJsonProperty(builder, "operatingSystemDescription", OperatingSystemDescription, true);
+            AppendJsonProperty(builder, "runtimeFrameworkDescription", RuntimeFrameworkDescription, true);
+            AppendJsonProperty(builder, "processArchitecture", ProcessArchitecture, true);
+            AppendJsonProperty(builder, "runtimeIdentifier", RuntimeIdentifier, true);
+            AppendJsonProbeProperty(builder, "nativeRuntime", NativeRuntime, true);
+            AppendJsonProperty(builder, "nativeOpenCvVersion", NativeOpenCvVersion, true);
+            AppendJsonProperty(builder, "loadedNativeAbiVersion", LoadedNativeAbiVersion, true);
+            AppendJsonProperty(builder, "cpuFeaturesLine", CpuFeaturesLine, true);
+            AppendJsonProperty(builder, "logicalCpuCount", LogicalCpuCount, true);
+            AppendJsonProperty(builder, "useOptimized", UseOptimized, true);
+
+            AppendJsonArrayStart(builder, "videoIoBackends", true);
+            for (int i = 0; i < VideoIOBackends.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                OpenCvVideoBackendCapability backend = VideoIOBackends[i];
+                builder.Append('{');
+                AppendJsonProperty(builder, "api", backend.Api.ToString(), false);
+                AppendJsonProperty(builder, "name", backend.Name, true);
+                AppendJsonProperty(builder, "state", backend.State.ToString(), true);
+                AppendJsonProperty(builder, "isBuiltIn", backend.IsBuiltIn, true);
+                AppendJsonProperty(builder, "reason", backend.Reason, true);
+                builder.Append('}');
+            }
+            builder.Append(']');
+
+            AppendJsonArrayStart(builder, "dnnBackends", true);
+            for (int i = 0; i < DnnBackends.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                OpenCvDnnBackendCapability backend = DnnBackends[i];
+                builder.Append('{');
+                AppendJsonProperty(builder, "backend", backend.Backend.ToString(), false);
+                AppendJsonProperty(builder, "state", backend.State.ToString(), true);
+                AppendJsonArrayStart(builder, "targets", true);
+                for (int targetIndex = 0; targetIndex < backend.Targets.Count; targetIndex++)
+                {
+                    if (targetIndex > 0) builder.Append(',');
+                    AppendJsonString(builder, backend.Targets[targetIndex].ToString());
+                }
+                builder.Append(']');
+                AppendJsonProperty(builder, "reason", backend.Reason, true);
+                builder.Append('}');
+            }
+            builder.Append(']');
+
+            AppendJsonArrayStart(builder, "accelerators", true);
+            for (int i = 0; i < Accelerators.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                AppendJsonProbe(builder, Accelerators[i]);
+            }
+            builder.Append(']');
+
+            AppendJsonArrayStart(builder, "warnings", true);
+            for (int i = 0; i < Warnings.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                AppendJsonString(builder, Warnings[i]);
+            }
+            builder.Append(']');
+            builder.Append('}');
+            return builder.ToString();
+        }
+
+        private static void AppendJsonProbe(StringBuilder builder, OpenCvCapabilityProbe probe)
+        {
+            builder.Append('{');
+            AppendJsonProperty(builder, "name", probe.Name, false);
+            AppendJsonProperty(builder, "state", probe.State.ToString(), true);
+            AppendJsonProperty(builder, "reason", probe.Reason, true);
+            builder.Append('}');
+        }
+
+        private static void AppendJsonProbeProperty(StringBuilder builder, string name, OpenCvCapabilityProbe probe, bool comma)
+        {
+            if (comma) builder.Append(',');
+            AppendJsonString(builder, name);
+            builder.Append(':');
+            AppendJsonProbe(builder, probe);
+        }
+
+        private static void AppendJsonArrayStart(StringBuilder builder, string name, bool comma)
+        {
+            if (comma) builder.Append(',');
+            AppendJsonString(builder, name);
+            builder.Append(':').Append('[');
+        }
+
+        private static void AppendJsonProperty(StringBuilder builder, string name, object? value, bool comma)
+        {
+            AppendJsonProperty(builder, name, value, comma, true);
+        }
+
+        private static void AppendJsonProperty(StringBuilder builder, string name, object? value, bool comma, bool quote)
+        {
+            if (comma) builder.Append(',');
+            AppendJsonString(builder, name);
+            builder.Append(':');
+            if (value == null)
+            {
+                builder.Append("null");
+            }
+            else if (value is bool boolean)
+            {
+                builder.Append(boolean ? "true" : "false");
+            }
+            else if (!quote)
+            {
+                builder.Append(value.ToString());
+            }
+            else
+            {
+                AppendJsonString(builder, value.ToString());
+            }
+        }
+
+        private static void AppendJsonString(StringBuilder builder, string? value)
+        {
+            builder.Append('"');
+            string text = value ?? string.Empty;
+            for (int i = 0; i < text.Length; i++)
+            {
+                char character = text[i];
+                switch (character)
+                {
+                    case '"': builder.Append("\\\""); break;
+                    case '\\': builder.Append("\\\\"); break;
+                    case '\b': builder.Append("\\b"); break;
+                    case '\f': builder.Append("\\f"); break;
+                    case '\n': builder.Append("\\n"); break;
+                    case '\r': builder.Append("\\r"); break;
+                    case '\t': builder.Append("\\t"); break;
+                    default:
+                        if (character < 0x20)
+                        {
+                            builder.Append("\\u").Append(((int)character).ToString("x4", CultureInfo.InvariantCulture));
+                        }
+                        else
+                        {
+                            builder.Append(character);
+                        }
+                        break;
+                }
+            }
+            builder.Append('"');
+        }
 
         private static IReadOnlyList<OpenCvVideoBackendCapability> ProbeVideoIo(List<string> warnings)
         {

@@ -357,7 +357,7 @@ try {
         Invoke-SbomGenerator -Package $tamperedPackage -Output $tamperedOutput -Check
     }
 
-    Assert-Rejected -Name 'invalid creation timestamp' -ExpectedText 'Cannot validate argument' -Action {
+    Assert-Rejected -Name 'invalid creation timestamp' -ExpectedText '2026-08-02T04:01:42+00:00' -Action {
         Invoke-SbomGenerator -Package $validPackage -Output (Join-Path $temporaryRoot 'negative/created.spdx.json') -CreatedValue '2026-08-02T04:01:42+00:00'
     }
 
