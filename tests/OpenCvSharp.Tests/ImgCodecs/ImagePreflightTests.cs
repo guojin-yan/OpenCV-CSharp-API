@@ -165,6 +165,25 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void DecodePreflightRejectsEncodedPixelStorageEstimateOverflow()
+        {
+            byte[] png = CreateCompletePng(int.MaxValue, int.MaxValue, 16, 6);
+            ImageIdentifyResult identified = ImgCodecsCv2.Identify(png);
+            Assert.True(identified.IsSizeKnown);
+            Assert.True(identified.IsFrameCountKnown);
+            Assert.True(identified.IsCumulativePixelCountKnown);
+            Assert.True(identified.IsPixelFormatKnown);
+            Assert.False(identified.IsEstimatedPixelBytesKnown);
+
+            ImageDecodeOptions options = new ImageDecodeOptions(
+                png.Length, int.MaxValue, int.MaxValue, long.MaxValue, 1, true, true,
+                long.MaxValue, long.MaxValue, false, false,
+                long.MaxValue, 16, 4, true, long.MaxValue);
+
+            Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.ImDecode(png, options));
+        }
+
+        [Fact]
         public void IdentifyReadsPnmEncodedDepthAndChannels()
         {
             ImageIdentifyResult pbm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P1\n2 3\n"));
