@@ -69,6 +69,61 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             }
         }
 
+#if NETCOREAPP3_1_OR_GREATER
+        [Fact]
+        public void ImEncodeToWriterAdvancesOnceAndDoesNotRetryWriterFaultsWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat source = new Mat(2, 2, MatType.CV_8UC1))
+            {
+                source.CopyFrom(new byte[] { 1, 2, 3, 4 });
+                var successful = new TrackingWriter();
+                ImgCodecsCv2.ImEncodeTo(".png", source, successful);
+                Assert.Equal(1, successful.GetSpanCalls);
+                Assert.Equal(1, successful.AdvanceCalls);
+                Assert.NotEmpty(successful.Written.ToArray());
+
+                var getSpanFailure = new TrackingWriter { ThrowFromGetSpan = true };
+                Assert.Throws<InvalidOperationException>(() => ImgCodecsCv2.ImEncodeTo(".png", source, getSpanFailure));
+                Assert.Equal(1, getSpanFailure.GetSpanCalls);
+                Assert.Equal(0, getSpanFailure.AdvanceCalls);
+
+                var advanceFailure = new TrackingWriter { ThrowFromAdvance = true };
+                Assert.Throws<InvalidOperationException>(() => ImgCodecsCv2.ImEncodeTo(".png", source, advanceFailure));
+                Assert.Equal(1, advanceFailure.GetSpanCalls);
+                Assert.Equal(1, advanceFailure.AdvanceCalls);
+            }
+        }
+
+        private sealed class TrackingWriter : IBufferWriter<byte>
+        {
+            private readonly ArrayBufferWriter<byte> inner = new ArrayBufferWriter<byte>();
+
+            public bool ThrowFromGetSpan { get; set; }
+            public bool ThrowFromAdvance { get; set; }
+            public int GetSpanCalls { get; private set; }
+            public int AdvanceCalls { get; private set; }
+            public ReadOnlySpan<byte> Written { get { return inner.WrittenSpan; } }
+
+            public void Advance(int count)
+            {
+                AdvanceCalls++;
+                if (ThrowFromAdvance) throw new InvalidOperationException("advance failure");
+                inner.Advance(count);
+            }
+
+            public Memory<byte> GetMemory(int sizeHint = 0) { return inner.GetMemory(sizeHint); }
+
+            public Span<byte> GetSpan(int sizeHint = 0)
+            {
+                GetSpanCalls++;
+                if (ThrowFromGetSpan) throw new InvalidOperationException("get span failure");
+                return inner.GetSpan(sizeHint);
+            }
+        }
+#endif
+
         [Fact]
         public void ImEncodeAcceptsPngAndJpegParametersWhenNativeRuntimeIsAvailable()
         {
