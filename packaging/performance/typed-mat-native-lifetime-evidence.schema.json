@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/typed-mat-native-lifetime-evidence.schema.json",
+  "title": "Typed Mat native lifetime evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "runner", "runtime", "test", "limitations" ],
+  "properties": {
+    "$schema": { "const": "typed-mat-native-lifetime-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "verified" },
+    "runner": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "os", "dotnetSdk", "architecture", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "runtimePackage", "runtimePackageSha256", "producerCommit" ],
+      "properties": {
+        "os": { "type": "string" }, "dotnetSdk": { "type": "string" }, "architecture": { "const": "x64" },
+        "nativeRuntimeArtifact": { "type": "string" }, "nativeRuntimeArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "runtimePackage": { "type": "string" }, "runtimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "producerCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "runtime": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "openCvVersion", "nativeAbiVersion", "nativeModuleFiles", "wrapperLoaderSha256", "opencvCoreSha256", "opencvImgProcSha256", "opencvImgCodecsSha256" ],
+      "properties": {
+        "openCvVersion": { "const": "5.0.0" }, "nativeAbiVersion": { "const": 1 }, "nativeModuleFiles": { "const": 17 },
+        "wrapperLoaderSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "opencvCoreSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "opencvImgProcSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "opencvImgCodecsSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "test": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "class", "filter", "nativeSmokeEnabled", "targetFrameworks", "verifiedCases" ],
+      "properties": {
+        "class": { "const": "JYPPX.OpenCvSharp.Tests.Core.MatViewTests" }, "filter": { "type": "string" }, "nativeSmokeEnabled": { "const": true },
+        "targetFrameworks": {
+          "type": "array", "minItems": 2,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": [ "framework", "passed", "failed", "skipped" ],
+            "properties": { "framework": { "enum": [ "net8.0", "net10.0" ] }, "passed": { "const": 9 }, "failed": { "const": 0 }, "skipped": { "const": 0 } }
+          }
+        },
+        "verifiedCases": { "type": "array", "minItems": 7, "items": { "type": "string" } }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  }
+}

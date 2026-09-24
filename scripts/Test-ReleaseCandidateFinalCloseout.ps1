@@ -235,6 +235,8 @@ function Get-ExpectedEvidencePaths {
         "packaging/performance/codec-typed-mat-benchmark-evidence.schema.json",
         "packaging/performance/native-aot-smoke-evidence.json",
         "packaging/performance/native-aot-smoke-evidence.schema.json",
+        "packaging/performance/typed-mat-native-lifetime-evidence.json",
+        "packaging/performance/typed-mat-native-lifetime-evidence.schema.json",
         "packaging/video/runtime-async-video-contract.json",
         "packaging/video/runtime-async-video-contract.schema.json",
         "packaging/dnn/runtime-dnn-diagnostics-contract.json",

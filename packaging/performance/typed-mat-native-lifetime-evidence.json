@@ -1,0 +1,46 @@
+{
+  "$schema": "typed-mat-native-lifetime-evidence.schema.json",
+  "schemaVersion": 1,
+  "status": "verified",
+  "runner": {
+    "os": "Windows 11 x64",
+    "dotnetSdk": "10.0.401",
+    "architecture": "x64",
+    "nativeRuntimeArtifact": "github-actions-artifact:9031536537",
+    "nativeRuntimeArtifactSha256": "898c746ac2a7c3eb3161a6348808c6a21ff5bddc4b5afa6a1a4be4335506897b",
+    "runtimePackage": "JYPPX.OpenCV.runtime.win-x64.5.0.0",
+    "runtimePackageSha256": "8ed434d462e876937f75aedbbb3eec4a958fd56730f5a65b0653958dab42c55a",
+    "producerCommit": "07729af7822e3d2698e6bde49165f8328d02f1f7"
+  },
+  "runtime": {
+    "openCvVersion": "5.0.0",
+    "nativeAbiVersion": 1,
+    "nativeModuleFiles": 17,
+    "wrapperLoaderSha256": "522e5ca18591bc510661a69cd1b1d9f1b937b266bcbe9230a6dd00e720581d59",
+    "opencvCoreSha256": "3b8709f4dc4478cb2fa1af97b14e50a5756c601e8623f426fe3478330b50b68a",
+    "opencvImgProcSha256": "72e542fb4fcba81e75a30eefa708966b3168a144424416092c507a37e666ea1b",
+    "opencvImgCodecsSha256": "82460749076373cf81073c2a374854a6d78362a0c52a0886c8291bcf4973422f"
+  },
+  "test": {
+    "class": "JYPPX.OpenCvSharp.Tests.Core.MatViewTests",
+    "filter": "FullyQualifiedName~JYPPX.OpenCvSharp.Tests.Core.MatViewTests",
+    "nativeSmokeEnabled": true,
+    "targetFrameworks": [
+      { "framework": "net8.0", "passed": 9, "failed": 0, "skipped": 0 },
+      { "framework": "net10.0", "passed": 9, "failed": 0, "skipped": 0 }
+    ],
+    "verifiedCases": [
+      "continuous registered pixel read/write and copy",
+      "non-contiguous ROI row access and bounds",
+      "unregistered and mismatched type rejection",
+      "view disposal and owner disposal invalidation",
+      "native header mutation rejection",
+      "clone and destination copy ownership",
+      "read-only surface and disposal/header behavior"
+    ]
+  },
+  "limitations": [
+    "The factual runtime artifact was produced by an earlier source commit; it validates managed view semantics against matching OpenCV 5.0.0/native ABI 1 runtime bytes, not current release-candidate package bytes.",
+    "The evidence is Windows x64 only and does not promote MatView from preview to stable API."
+  ]
+}
