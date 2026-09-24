@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/d7348c0423396894",
-  "SourceIdentity": "sha256:d7348c0423396894ae8f28a2b1295aad67532053e1465a8b9e5a8369ababeb0c",
+  "CandidateId": "local-closeout/sha256/a6a0c9d962dfd663",
+  "SourceIdentity": "sha256:a6a0c9d962dfd6639372d2e372797e6a5576099e8ac202108ea4f3cff6290bc7",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1713,
-    "Sha256": "d7348c0423396894ae8f28a2b1295aad67532053e1465a8b9e5a8369ababeb0c",
+    "FileCount": 1715,
+    "Sha256": "a6a0c9d962dfd6639372d2e372797e6a5576099e8ac202108ea4f3cff6290bc7",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1187,6 +1187,11 @@
       "Length": 333
     },
     {
+      "Path": "packaging/runtime/runtime-capabilities-json.schema.json",
+      "Sha256": "a6aa9774b1dd0ce684519fd9222870c6d6a411c256366755eef2dc375ea9a985",
+      "Length": 3627
+    },
+    {
       "Path": "packaging/runtime/runtime-distro-rid-graph.json",
       "Sha256": "9dfc32941de2daebdee2f8a9bdebd9723627aaec07960bd82fd85939650af8de",
       "Length": 1282
@@ -1418,8 +1423,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "68057302b38afafe8292fd4a2d8eb684ac56b98f54b84ab8e2bbef26d53ff97e",
-      "Length": 65001
+      "Sha256": "2af4444d44e08b9bd12d7938e42e4812db43b8cad03db852deb4b111096ede50",
+      "Length": 65121
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1440,6 +1445,11 @@
       "Path": "scripts/Test-Calib3DUpstreamMap.ps1",
       "Sha256": "7d52f0104afe93d1b01f13e57bd81216be5cc00b23b14235070c9e37fd3932df",
       "Length": 1256
+    },
+    {
+      "Path": "scripts/Test-CapabilitiesJsonContract.ps1",
+      "Sha256": "fc0d4fe850f88e0a83d3c478e78233eab85cb1f92ea0fee98d7dd9c4d720f99d",
+      "Length": 2344
     },
     {
       "Path": "scripts/Test-CoreUpstreamMap.ps1",
@@ -1608,8 +1618,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "80f437206c9e529a2ff101542b61f935ce6c6d0cc96d65450f21acce37d80941",
-      "Length": 62603
+      "Sha256": "ddd4c8c681d715a21917107f229913ad4d18e84049f3df7397b016b42d35cb79",
+      "Length": 62723
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
