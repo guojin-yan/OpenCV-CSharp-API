@@ -34,9 +34,14 @@ The ConsoleSamples preview commands provide runnable, machine-readable examples:
 ```powershell
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- typed-mat
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- buffered-codec
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- platform-probe
 ```
 
 With no native runtime they return `status=skipped` and `reason=native-runtime-required`. With a factual runtime directory, `typed-mat` reports a non-contiguous ROI and an owned clone, while `buffered-codec` reports the encoded byte count and the single-`GetSpan`/single-`Advance` writer boundary.
+
+`platform-probe` emits only OS/process/RID/framework/native-state fields and warnings. It intentionally excludes absolute paths and runtime environment variables so the JSON can be attached to platform certification evidence.
+
+This command is the `PlatformProbe` sample boundary for 5.0.1 certification evidence.
 
 ## Bounded codec paths / 有界编解码
 

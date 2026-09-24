@@ -8,7 +8,7 @@ $projectPath = Join-Path $repo 'samples/ConsoleSamples/ConsoleSamples.csproj'
 foreach ($path in @($programPath,$guidePath,$projectPath)) { if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Modern preview sample file missing: $path" } }
 $program = [IO.File]::ReadAllText($programPath)
 $guide = [IO.File]::ReadAllText($guidePath)
-foreach ($token in @('typed-mat','buffered-codec','RunTypedMatPreview','RunBufferedCodecPreview','native-runtime-required','single-getspan-single-advance')) {
+foreach ($token in @('typed-mat','buffered-codec','platform-probe','RunTypedMatPreview','RunBufferedCodecPreview','RunPlatformProbe','native-runtime-required','single-getspan-single-advance')) {
     if ($program.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "ConsoleSamples is missing preview sample token: $token" }
 }
 foreach ($token in @('typed-mat','buffered-codec','skip','ROI','IBufferWriter')) {

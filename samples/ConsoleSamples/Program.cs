@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using JYPPX.OpenCvSharp;
 using JYPPX.OpenCvSharp.AlphaMat;
 using JYPPX.OpenCvSharp.BgSegm;
@@ -142,6 +143,12 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             if (args.Length > 0 && string.Equals(args[0], "buffered-codec", StringComparison.OrdinalIgnoreCase))
             {
                 RunBufferedCodecPreview();
+                return;
+            }
+
+            if (args.Length > 0 && string.Equals(args[0], "platform-probe", StringComparison.OrdinalIgnoreCase))
+            {
+                RunPlatformProbe();
                 return;
             }
 
@@ -2087,6 +2094,25 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             {
                 Console.WriteLine("{\"status\":\"skipped\",\"command\":\"buffered-codec\",\"reason\":\"native-entrypoint-required\"}");
             }
+        }
+
+        private static void RunPlatformProbe()
+        {
+            OpenCvCapabilities capabilities = OpenCvCapabilities.GetCurrent();
+            var probe = new
+            {
+                status = "measured",
+                command = "platform-probe",
+                operatingSystem = capabilities.OperatingSystem,
+                operatingSystemDescription = capabilities.OperatingSystemDescription,
+                processArchitecture = capabilities.ProcessArchitecture,
+                processBitness = capabilities.ProcessBitness,
+                runtimeIdentifier = capabilities.RuntimeIdentifier,
+                runtimeFrameworkDescription = capabilities.RuntimeFrameworkDescription,
+                nativeRuntimeState = capabilities.NativeRuntime.State.ToString(),
+                warnings = capabilities.Warnings
+            };
+            Console.WriteLine(JsonSerializer.Serialize(probe));
         }
 
         private static string RunImgProcUpstreamParitySummary()
