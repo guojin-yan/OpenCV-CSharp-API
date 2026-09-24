@@ -306,6 +306,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Video/DNN scenario benchmark harness"
+        Script = Join-Path $repo "scripts/Test-ScenarioBenchmarkHarness.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Image preflight mutation corpus"
         Script = Join-Path $repo "scripts/Test-ImagePreflightMutationCorpus.ps1"
         Arguments = @("-RepositoryRoot", $repo)
@@ -323,6 +328,11 @@ $guards = @(
     [pscustomobject]@{
         Name = "Performance benchmark evidence"
         Script = Join-Path $repo "scripts/Test-PerformanceBenchmarkEvidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
+        Name = "Video/DNN benchmark evidence"
+        Script = Join-Path $repo "scripts/Test-VideoDnnBenchmarkEvidence.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{

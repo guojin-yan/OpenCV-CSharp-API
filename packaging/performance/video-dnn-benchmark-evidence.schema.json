@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/video-dnn-benchmark-evidence.schema.json",
+  "title": "Video and DNN benchmark evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "video", "dnn", "limitations" ],
+  "properties": {
+    "$schema": { "const": "video-dnn-benchmark-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "measured" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "architecture", "dotnet", "configuration", "managedAssemblySha256", "nativeRuntimePackage", "nativeRuntimePackageSha256", "nativePayload" ],
+      "properties": {
+        "os": { "type": "string" },
+        "architecture": { "const": "x64" },
+        "dotnet": { "type": "string" },
+        "configuration": { "const": "Release" },
+        "managedAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "nativeRuntimePackage": { "type": "string" },
+        "nativeRuntimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "nativePayload": {
+          "type": "array",
+          "minItems": 17,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [ "name", "bytes", "sha256" ],
+            "properties": {
+              "name": { "type": "string" },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        }
+      }
+    },
+    "video": { "$ref": "#/$defs/scenario" },
+    "dnn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "targetFramework", "iterations", "modelBytes", "modelSha256", "outputName", "outputChecksum", "profileTickCount", "profileLayerCount", "weightsBytes", "blobBytes", "metric" ],
+      "properties": {
+        "targetFramework": { "const": "net10.0" },
+        "iterations": { "const": 100 },
+        "modelBytes": { "const": 147 },
+        "modelSha256": { "const": "326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744" },
+        "outputName": { "type": "string", "minLength": 1 },
+        "outputChecksum": { "type": "integer", "minimum": 1 },
+        "profileTickCount": { "type": "integer", "minimum": 0 },
+        "profileLayerCount": { "type": "integer", "minimum": 1 },
+        "weightsBytes": { "type": "integer", "minimum": 0 },
+        "blobBytes": { "type": "integer", "minimum": 0 },
+        "metric": { "$ref": "#/$defs/metric" }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  },
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "managedAllocatedBytes", "elapsedTicks", "checksum", "baselineWorkingSetBytes", "peakWorkingSetBytes" ],
+      "properties": {
+        "managedAllocatedBytes": { "type": "integer", "minimum": 0 },
+        "elapsedTicks": { "type": "integer", "minimum": 0 },
+        "checksum": { "type": "integer", "minimum": 1 },
+        "baselineWorkingSetBytes": { "type": "integer", "minimum": 0 },
+        "peakWorkingSetBytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "targetFramework", "iterations", "frameCount", "rows", "columns", "codec", "fileBytes", "fileSha256", "metric" ],
+      "properties": {
+        "targetFramework": { "const": "net10.0" },
+        "iterations": { "const": 100 },
+        "frameCount": { "const": 3 },
+        "rows": { "const": 24 },
+        "columns": { "const": 32 },
+        "codec": { "const": "MJPG" },
+        "fileBytes": { "type": "integer", "minimum": 1 },
+        "fileSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "metric": { "$ref": "#/$defs/metric" }
+      }
+    }
+  }
+}
