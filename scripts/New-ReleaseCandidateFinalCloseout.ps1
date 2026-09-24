@@ -470,7 +470,10 @@ function Get-Record {
         "tools/VideoUpstreamMap/extract_video.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
-        "scripts/Test-CodecBenchmarkHarness.ps1"
+        "scripts/Test-CodecBenchmarkHarness.ps1",
+        "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
+        "tools/TypedMatBenchmark/Program.cs",
+        "scripts/Test-TypedMatBenchmarkHarness.ps1"
     )
     $evidence = @(Get-OrdinalSortedObjects -Values @($evidencePaths | ForEach-Object { Get-FileEvidence -RelativePath $_ }) -Property "Path")
     $winX86FullStatus = if (@($support.realSupport) -contains 'win-x86/full') { 'real-supported' } else { [string](@($support.pending | Where-Object target -eq 'win-x86/full')[0].status) }

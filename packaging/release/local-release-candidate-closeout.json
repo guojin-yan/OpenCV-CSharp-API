@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/e10f5a1f2caedcf5",
-  "SourceIdentity": "sha256:e10f5a1f2caedcf59bb6a718708071093d99c664e17b772cbdf0b1b5895e0403",
+  "CandidateId": "local-closeout/sha256/6bac98e01798b1f6",
+  "SourceIdentity": "sha256:6bac98e01798b1f680e3e9d55b0439a47af773295f7d427f48dff34bc076eb7b",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1721,
-    "Sha256": "e10f5a1f2caedcf59bb6a718708071093d99c664e17b772cbdf0b1b5895e0403",
+    "FileCount": 1725,
+    "Sha256": "6bac98e01798b1f680e3e9d55b0439a47af773295f7d427f48dff34bc076eb7b",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1173,8 +1173,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "c67ed7163cffa955b32e10a4b02a7692cf79b8f1b45b7812f7a349d6f4ed7e12",
-      "Length": 15392
+      "Sha256": "904c967c9157169b31cadbe278a520bd8e43d60ba1070c9d9a5c3cd4bd1a3ee8",
+      "Length": 15486
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1443,8 +1443,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f4df270caa32f2e86f0a7d286d86f42ab0706365b751720820aad2b12e335db7",
-      "Length": 65482
+      "Sha256": "5d3bd9b992941b6ee54a56fa933db95412ac59c09e8b752a4e9670d5893145a3",
+      "Length": 65641
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1643,8 +1643,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b86784c939951db7da7728856f26b88ce3596865c78188931a4e5cb6f893523c",
-      "Length": 63084
+      "Sha256": "1ef6e821ec2185315c1db46d63f4eebd3f426c609ab163fc63853fef965bcd0c",
+      "Length": 63243
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1700,6 +1700,11 @@
       "Path": "scripts/Test-TrackingUpstreamMap.ps1",
       "Sha256": "2e5b8d58c464295f815c41d0c7fb8a58e6b4541ca463a49d7bc6bbb98a2bb293",
       "Length": 2283
+    },
+    {
+      "Path": "scripts/Test-TypedMatBenchmarkHarness.ps1",
+      "Sha256": "4a1b177821294f0e7157d986f7261e3e1e7a4e222d81e6c38e9d2e4eeb4d72c7",
+      "Length": 1670
     },
     {
       "Path": "scripts/Test-VideoIORegistrySurface.ps1",
@@ -2145,6 +2150,16 @@
       "Path": "tools/TrackingUpstreamMap/extract_tracking.py",
       "Sha256": "2f9f409b2164a7b78e5032767bc364b782d9db8c819b80a49a53de04962bf430",
       "Length": 7225
+    },
+    {
+      "Path": "tools/TypedMatBenchmark/Program.cs",
+      "Sha256": "9d0853ed5d13d8b368500d095c8221b23fc1f18e01edff6291cf311a4638cfee",
+      "Length": 5248
+    },
+    {
+      "Path": "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
+      "Sha256": "78cb7db027d5a8144f45534f2d069ed580800367531bd9e49f54009c725f1897",
+      "Length": 737
     },
     {
       "Path": "tools/VideoUpstreamMap/Program.cs",

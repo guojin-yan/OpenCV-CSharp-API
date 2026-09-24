@@ -403,7 +403,10 @@ function Get-ExpectedEvidencePaths {
         "tools/VideoUpstreamMap/extract_video.py",
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
-        "scripts/Test-CodecBenchmarkHarness.ps1"
+        "scripts/Test-CodecBenchmarkHarness.ps1",
+        "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
+        "tools/TypedMatBenchmark/Program.cs",
+        "scripts/Test-TypedMatBenchmarkHarness.ps1"
     )
     return @(Get-OrdinalSorted -Values $paths)
 }
