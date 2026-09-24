@@ -8,13 +8,39 @@ $projectPath = Join-Path $repo 'samples/ConsoleSamples/ConsoleSamples.csproj'
 foreach ($path in @($programPath,$guidePath,$projectPath)) { if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Modern preview sample file missing: $path" } }
 $program = [IO.File]::ReadAllText($programPath)
 $guide = [IO.File]::ReadAllText($guidePath)
-foreach ($token in @('typed-mat','buffered-codec','platform-probe','RunTypedMatPreview','RunBufferedCodecPreview','RunPlatformProbe','native-runtime-required','single-getspan-single-advance')) {
+foreach ($token in @('typed-mat','buffered-codec','platform-probe','headless-smoke','HeadlessServer','RunTypedMatPreview','RunBufferedCodecPreview','RunPlatformProbe','RunHeadlessSmoke','native-runtime-required','single-getspan-single-advance')) {
     if ($program.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "ConsoleSamples is missing preview sample token: $token" }
 }
-foreach ($token in @('typed-mat','buffered-codec','skip','ROI','IBufferWriter')) {
+foreach ($token in @('typed-mat','buffered-codec','headless-smoke','HeadlessServer','skip','ROI','IBufferWriter','DISPLAY','WAYLAND_DISPLAY')) {
     if ($guide.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "Preview guide is missing sample token: $token" }
 }
 $dotnet = Get-Command dotnet -ErrorAction Stop
 & $dotnet.Source build $projectPath -c Release --no-restore
 if ($LASTEXITCODE -ne 0) { throw "ConsoleSamples build failed with exit code $LASTEXITCODE." }
-Write-Host 'MODERN_API_PREVIEW_SAMPLES_OK commands=typed-mat,buffered-codec native_runtime_optional=true'
+$displayValue = $env:DISPLAY
+$waylandValue = $env:WAYLAND_DISPLAY
+try {
+    Remove-Item Env:DISPLAY -ErrorAction SilentlyContinue
+    Remove-Item Env:WAYLAND_DISPLAY -ErrorAction SilentlyContinue
+    $headlessOutput = @(& $dotnet.Source run --project $projectPath -c Release --no-build -- headless-smoke 2>&1)
+    $headlessExitCode = $LASTEXITCODE
+}
+finally {
+    if ($null -eq $displayValue) { Remove-Item Env:DISPLAY -ErrorAction SilentlyContinue } else { $env:DISPLAY = $displayValue }
+    if ($null -eq $waylandValue) { Remove-Item Env:WAYLAND_DISPLAY -ErrorAction SilentlyContinue } else { $env:WAYLAND_DISPLAY = $waylandValue }
+}
+if ($headlessExitCode -ne 0) { throw "Headless smoke sample failed with exit code $headlessExitCode." }
+$headlessJsonLines = @($headlessOutput | ForEach-Object { [string]$_ } | Where-Object { $_.TrimStart().StartsWith('{') -and $_.TrimEnd().EndsWith('}') })
+if ($headlessJsonLines.Count -ne 1) { throw "Headless smoke must emit exactly one JSON object; found $($headlessJsonLines.Count)." }
+$headless = $headlessJsonLines[0] | ConvertFrom-Json
+foreach ($property in @('status','command','sample')) { if ($null -eq $headless.PSObject.Properties[$property]) { throw "Headless smoke is missing property: $property" } }
+if ([string]$headless.command -cne 'headless-smoke' -or [string]$headless.sample -cne 'HeadlessServer' -or [string]$headless.status -notin @('measured','skipped')) { throw 'Headless smoke identity or status is invalid.' }
+if ([string]$headless.status -ceq 'measured') {
+    foreach ($property in @('displayUnset','waylandUnset','guiBackendState','encodedBytes','decodedRows','decodedColumns','highGuiCalls')) {
+        if ($null -eq $headless.PSObject.Properties[$property]) { throw "Measured headless smoke is missing property: $property" }
+    }
+    if (-not [bool]$headless.displayUnset -or -not [bool]$headless.waylandUnset -or [bool]$headless.highGuiCalls -or [int]$headless.encodedBytes -le 0 -or [int]$headless.decodedRows -ne 2 -or [int]$headless.decodedColumns -ne 2) {
+        throw 'Measured headless smoke did not prove the no-display codec boundary.'
+    }
+}
+Write-Host "MODERN_API_PREVIEW_SAMPLES_OK commands=typed-mat,buffered-codec,platform-probe,headless-smoke headless_status=$($headless.status) native_runtime_optional=true"

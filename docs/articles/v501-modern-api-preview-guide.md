@@ -35,13 +35,16 @@ The ConsoleSamples preview commands provide runnable, machine-readable examples:
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- typed-mat
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- buffered-codec
 dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- platform-probe
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- headless-smoke
 ```
 
 With no native runtime they return `status=skipped` and `reason=native-runtime-required`. With a factual runtime directory, `typed-mat` reports a non-contiguous ROI and an owned clone, while `buffered-codec` reports the encoded byte count and the single-`GetSpan`/single-`Advance` writer boundary.
 
 `platform-probe` emits only OS/process/RID/framework/native-state fields and warnings. It intentionally excludes absolute paths and runtime environment variables so the JSON can be attached to platform certification evidence.
 
-This command is the `PlatformProbe` sample boundary for 5.0.1 certification evidence.
+`headless-smoke` is the `HeadlessServer` sample boundary. It performs a file-based Mat encode/decode pipeline without calling HighGUI and reports whether `DISPLAY`/`WAYLAND_DISPLAY` are unset. It is an application smoke example; it does not promote the candidate-only headless runtime profile or create a `.headless` package identity.
+
+The `platform-probe` command is the `PlatformProbe` sample boundary for 5.0.1 certification evidence.
 
 ## Bounded codec paths / 有界编解码
 

@@ -152,6 +152,12 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
                 return;
             }
 
+            if (args.Length > 0 && string.Equals(args[0], "headless-smoke", StringComparison.OrdinalIgnoreCase))
+            {
+                RunHeadlessSmoke();
+                return;
+            }
+
             if (args.Length > 0 && string.Equals(args[0], "capabilities-json", StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine(OpenCvCapabilities.GetCurrent().ToJson());
@@ -2113,6 +2119,40 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
                 warnings = capabilities.Warnings
             };
             Console.WriteLine(JsonSerializer.Serialize(probe));
+        }
+
+        private static void RunHeadlessSmoke()
+        {
+            try
+            {
+                OpenCvSharpBuildInfo.VerifyNativeRuntimeCompatibility();
+                bool displayUnset = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"));
+                bool waylandUnset = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WAYLAND_DISPLAY"));
+                using (Mat source = new Mat(2, 2, MatType.CV_8UC1, new Scalar(7)))
+                {
+                    byte[] encoded = ImgCodecsCv2.ImEncode(".png", source);
+                    using (Mat decoded = ImgCodecsCv2.ImDecode(encoded, ImreadModes.Unchanged))
+                    {
+                        OpenCvCapabilities capabilities = OpenCvCapabilities.GetCurrent();
+                        Console.WriteLine("{\"status\":\"measured\",\"command\":\"headless-smoke\",\"sample\":\"HeadlessServer\",\"displayUnset\":"
+                            + displayUnset.ToString().ToLowerInvariant()
+                            + ",\"waylandUnset\":" + waylandUnset.ToString().ToLowerInvariant()
+                            + ",\"guiBackendState\":\"" + capabilities.GuiBackend.State
+                            + "\",\"encodedBytes\":" + encoded.Length
+                            + ",\"decodedRows\":" + decoded.Rows
+                            + ",\"decodedColumns\":" + decoded.Cols
+                            + ",\"highGuiCalls\":false}");
+                    }
+                }
+            }
+            catch (DllNotFoundException)
+            {
+                Console.WriteLine("{\"status\":\"skipped\",\"command\":\"headless-smoke\",\"sample\":\"HeadlessServer\",\"reason\":\"native-runtime-required\"}");
+            }
+            catch (EntryPointNotFoundException)
+            {
+                Console.WriteLine("{\"status\":\"skipped\",\"command\":\"headless-smoke\",\"sample\":\"HeadlessServer\",\"reason\":\"native-entrypoint-required\"}");
+            }
         }
 
         private static string RunImgProcUpstreamParitySummary()
