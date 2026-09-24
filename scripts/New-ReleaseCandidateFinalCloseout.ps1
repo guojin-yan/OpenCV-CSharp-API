@@ -232,6 +232,9 @@ function Get-Record {
         "docs/articles/opencl-tapi-umat-adr.md",
         "docs/articles/highgui-interaction-guide.md",
         "docs/articles/imgcodecs-upstream-parity-guide.md",
+        "docs/articles/codec-buffer-and-owner-adr.md",
+        "docs/articles/codec-benchmark-baseline.md",
+        "docs/articles/codec-preflight-and-limits.md",
         "docs/articles/imgproc-geometry-guide.md",
         "docs/articles/imgproc-upstream-parity-guide.md",
         "docs/articles/ml-guide.md",
@@ -463,7 +466,10 @@ function Get-Record {
         "tools/NuGetRepositorySignatureVerifier/NuGetRepositorySignatureVerifier.csproj",
         "tools/NuGetRepositorySignatureVerifier/Program.cs",
         "tools/VideoUpstreamMap/Program.cs",
-        "tools/VideoUpstreamMap/extract_video.py"
+        "tools/VideoUpstreamMap/extract_video.py",
+        "tools/CodecBenchmark/CodecBenchmark.csproj",
+        "tools/CodecBenchmark/Program.cs",
+        "scripts/Test-CodecBenchmarkHarness.ps1"
     )
     $evidence = @(Get-OrdinalSortedObjects -Values @($evidencePaths | ForEach-Object { Get-FileEvidence -RelativePath $_ }) -Property "Path")
     $winX86FullStatus = if (@($support.realSupport) -contains 'win-x86/full') { 'real-supported' } else { [string](@($support.pending | Where-Object target -eq 'win-x86/full')[0].status) }
