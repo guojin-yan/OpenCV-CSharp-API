@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted as an internal/P1 prototype boundary for 5.0.1. No stable public `MatBufferLease` type is added by this record.
+Accepted as an internal/P1 prototype boundary for 5.0.1. The checked `CodecBufferLease` prototype is internal only; no stable public `MatBufferLease` type is added by this record.
 
 ## Problem
 
@@ -26,6 +26,12 @@ OpenCV 可以在不复制的情况下消费指针、行 stride 和字节长度�
 - A native-call harness proves the owner remains alive during the operation and that access after disposal is rejected.
 - ROI and external stride cases validate the final row boundary without exposing padding as image pixels.
 - A stress loop covers pin/unpin and callback release under exceptions.
+
+## Current prototype evidence
+
+`src/OpenCvSharp/Internal/CodecBufferLease.cs` implements the pinned-array path. It validates the owner, byte offset, rows, stride, row payload, checked final-row boundary, and pointer arithmetic before pinning. `EnterOperation()` increments a short native-call guard; `Dispose()` defers unpinning until all guards exit, and repeated disposal is harmless. `tests/OpenCvSharp.Tests/Core/CodecBufferLeaseTests.cs` covers layout rejection, ROI-style offsets, row pointers, deferred release, callback exception capture, and 256 pin/unpin iterations on both `net8.0` and `net10.0`. The prototype does not create a Mat header or native ABI entry.
+
+当前 prototype 已落地到 `src/OpenCvSharp/Internal/CodecBufferLease.cs`。它在 pin 之前校验 owner、offset、rows、stride、row payload、末行边界和 checked 指针算术；`EnterOperation()` 提供短 native-call guard，`Dispose()` 等待 guard 退出后再 unpin，重复释放安全。测试覆盖布局拒绝、ROI 风格 offset、行指针、延迟释放、callback 异常隔离以及 256 次 pin/unpin，并在 `net8.0` 与 `net10.0` 通过。prototype 不创建 Mat header 或 native ABI。
 
 ## Stop and rollback
 

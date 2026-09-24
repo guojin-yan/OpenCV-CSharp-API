@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/7a453037e35b8547",
-  "SourceIdentity": "sha256:7a453037e35b8547d8edfcae7dce1241f8327a80422fd623f1b5411378aafb60",
+  "CandidateId": "local-closeout/sha256/1e1a71fa36f2119c",
+  "SourceIdentity": "sha256:1e1a71fa36f2119cda1be51841c25f369b8fbe426ab4f304c9f94bd0f04042fa",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1732,
-    "Sha256": "7a453037e35b8547d8edfcae7dce1241f8327a80422fd623f1b5411378aafb60",
+    "FileCount": 1735,
+    "Sha256": "1e1a71fa36f2119cda1be51841c25f369b8fbe426ab4f304c9f94bd0f04042fa",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -938,8 +938,8 @@
     },
     {
       "Path": "docs/articles/codec-buffer-lease-adr.md",
-      "Sha256": "a5ec9013f9fdbeeb6d95252ef7a02c68413440602bb9baed57907fb470ef9f3f",
-      "Length": 3395
+      "Sha256": "fbbc2726ae2cf66aa4e83be4072e4bbe70fba60f51deba3295d248043398ea32",
+      "Length": 4643
     },
     {
       "Path": "docs/articles/codec-preflight-and-limits.md",
@@ -1473,8 +1473,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "91af092bc419444f63747b3c43fa7eed3f0941d2c5de7b218ee8882cfb8f5869",
-      "Length": 66028
+      "Sha256": "be9f13dc4c4a21da8ae14ff870abad9684bf66cd451edee77ac4fe74c119f1bd",
+      "Length": 66209
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1678,8 +1678,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "9ffe6c65312a1355d5f8d0ec93337adf9f88cda5c90a560ba6301a319f76ac10",
-      "Length": 63630
+      "Sha256": "0f8d98dca2dc2c96bdeaa9d5af3029981bd34e727aed21421885bc18932c7d6b",
+      "Length": 63811
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1832,6 +1832,11 @@
       "Length": 7843
     },
     {
+      "Path": "src/OpenCvSharp/Internal/CodecBufferLease.cs",
+      "Sha256": "2c52956cc39c0f87484d2e4b0e7d92a9d051d0fde119d60b944399e1bb8c5a60",
+      "Length": 8773
+    },
+    {
       "Path": "src/OpenCvSharp/Internal/Interop/NativeBlenderHandle.cs",
       "Sha256": "5f7fcc04c27ab8e27fe4abd284dded5af5718dfa6948fbe66c84cfe05c569da5",
       "Length": 916
@@ -1880,6 +1885,11 @@
       "Path": "src/OpenCvSharp/Internal/Interop/NativeMethods.Stitching.LibraryImport.cs",
       "Sha256": "4c8473b0c632ea20ab36eebf5880271cb8ba86d68e02d2ce44d10f789680bc6c",
       "Length": 37539
+    },
+    {
+      "Path": "src/OpenCvSharp/Properties/InternalsVisibleTo.cs",
+      "Sha256": "076f7f4e7f819e1c24ba32a8907fbc7a8211ee19a8bd87a3f47484fbbfc49678",
+      "Length": 92
     },
     {
       "Path": "src/OpenCvSharp/Stitching/AffineBestOf2NearestMatcher.cs",
@@ -1945,6 +1955,11 @@
       "Path": "src/OpenCvSharp/Stitching/StitchingMotion.cs",
       "Sha256": "bd16c65ec973ad2f4684d4b7e412f9c4be69b2c1ed32053a6d14dda6b02af659",
       "Length": 20232
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/Core/CodecBufferLeaseTests.cs",
+      "Sha256": "a7b1273dcf9f00a7fb9f33da9c7058ad605e328b05b315e433ed588eebb51659",
+      "Length": 4335
     },
     {
       "Path": "tests/OpenCvSharp.Tests/HighGui/HighGuiInteractionTests.cs",
