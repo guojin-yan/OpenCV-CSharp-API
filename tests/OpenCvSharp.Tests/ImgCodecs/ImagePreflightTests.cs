@@ -985,6 +985,61 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams()
+        {
+            var fixtures = new[]
+            {
+                new { Name = "png", Bytes = CreateCompletePng(2, 3, 8, 2) },
+                new { Name = "jpeg", Bytes = new byte[] { 0xFF, 0xD8, 0xFF, 0xC0, 0x00, 0x0B, 0x08, 0x01, 0x20, 0x02, 0x80, 0x01, 0x01, 0x11, 0x00, 0xFF, 0xD9 } },
+                new { Name = "gif", Bytes = CreateAnimatedGif(2) },
+                new { Name = "apng", Bytes = CreateApng(3) },
+                new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
+                new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
+                new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
+                new { Name = "sunraster", Bytes = CreateSunRaster(24) },
+                new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
+                new { Name = "exr", Bytes = CreateOpenExrHeader(2, 3, 3, 1) },
+                new { Name = "tiff", Bytes = CreateTiff(false, 2) },
+                new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) },
+                new { Name = "j2k", Bytes = CreateJpeg2000Codestream(2, 3, 8) },
+                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) }
+            };
+            byte[] mutationValues = { 0x00, 0xFF };
+            int streamCases = 0;
+
+            foreach (var fixture in fixtures)
+            {
+                int[] offsets = { 0, fixture.Bytes.Length / 2, fixture.Bytes.Length - 1 };
+                foreach (int offset in offsets)
+                {
+                    foreach (byte replacement in mutationValues)
+                    {
+                        if (fixture.Bytes[offset] == replacement) continue;
+                        byte[] mutated = (byte[])fixture.Bytes.Clone();
+                        mutated[offset] = replacement;
+
+                        using (var seekable = new MemoryStream(mutated))
+                        {
+                            ImageIdentifyResult result = ImgCodecsCv2.Identify(seekable, new ImageDecodeOptions());
+                            Assert.Equal(0, seekable.Position);
+                            Assert.Equal(mutated.Length, result.InputBytes);
+                        }
+
+                        using (var nonSeekable = new NonSeekableReadStream(mutated, 3))
+                        {
+                            ImageIdentifyResult result = ImgCodecsCv2.Identify(nonSeekable, new ImageDecodeOptions());
+                            Assert.Equal(mutated.Length, nonSeekable.BytesRead);
+                            Assert.Equal(mutated.Length, result.InputBytes);
+                        }
+                        streamCases++;
+                    }
+                }
+            }
+
+            Assert.True(streamCases >= 50, "The stream mutation corpus must exercise both stream kinds across all fixtures.");
+        }
+
+        [Fact]
         public void IdentifyMalformedLengthAndDirectoryCorpusFailsClosed()
         {
             byte[] png = CreateCompletePng(2, 3, 8, 2);

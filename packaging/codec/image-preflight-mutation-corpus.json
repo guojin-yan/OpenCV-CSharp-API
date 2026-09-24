@@ -3,10 +3,12 @@
   "schemaVersion": 1,
   "status": "deterministic-managed-corpus",
   "test": "tests/OpenCvSharp.Tests/ImgCodecs/ImagePreflightTests.cs::IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts",
+  "streamTest": "tests/OpenCvSharp.Tests/ImgCodecs/ImagePreflightTests.cs::IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams",
   "frameworks": [ "net8.0", "net10.0" ],
   "timeoutSeconds": 120,
   "replacementBytes": [ 0, 1, 127, 128, 255 ],
   "fixtures": [ "png", "jpeg", "gif", "apng", "webp", "bmp", "pam", "sunraster", "hdr", "exr", "tiff", "bigtiff", "j2k", "jp2" ],
   "expectedMinimumMutations": 1000,
+  "expectedMinimumStreamCases": 50,
   "nativeRuntimeRequired": false
 }

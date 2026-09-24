@@ -20,6 +20,7 @@ $testText = Get-Content -LiteralPath (Join-Path $repo 'tests/OpenCvSharp.Tests/I
 foreach ($fixture in @($manifest.fixtures)) {
     if ($testText.IndexOf('Name = "' + [string]$fixture + '"', [StringComparison]::Ordinal) -lt 0) { throw "Mutation fixture is missing from the focused test: $fixture" }
 }
+if ($testText.IndexOf('IdentifyDeterministicMutationCorpusPreservesSeekAndConsumesNonSeekStreams', [StringComparison]::Ordinal) -lt 0) { throw 'Stream mutation test is missing from the focused test.' }
 if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
@@ -55,4 +56,4 @@ foreach ($framework in $frameworks) {
     $process.Dispose()
 }
 
-Write-Host "IMAGE_PREFLIGHT_MUTATION_CORPUS_OK fixtures=$(@($manifest.fixtures).Count) replacements=$(@($manifest.replacementBytes).Count) frameworks=$(@($manifest.frameworks).Count) minimum_mutations=$($manifest.expectedMinimumMutations) native_runtime_required=false"
+Write-Host "IMAGE_PREFLIGHT_MUTATION_CORPUS_OK fixtures=$(@($manifest.fixtures).Count) replacements=$(@($manifest.replacementBytes).Count) frameworks=$(@($manifest.frameworks).Count) minimum_mutations=$($manifest.expectedMinimumMutations) minimum_stream_cases=$($manifest.expectedMinimumStreamCases) native_runtime_required=false"
