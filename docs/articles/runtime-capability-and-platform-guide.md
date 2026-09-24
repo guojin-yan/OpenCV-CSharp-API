@@ -36,7 +36,11 @@ format is available on the legacy target frameworks as well as modern .NET.
 
 `NativeRuntime.State == Verified` means that both the wrapper ABI and the OpenCV version probes matched. `VideoIOBackends` describes registry entries and built-in status; it is not proof that a camera, codec, or device can be opened. DNN `Verified` means that the backend returned a target list; a model execution probe is still required for a production claim.
 
+`Modules` contains the four native modules required by the current wrapper boundary: `core`, `imgproc`, `imgcodecs`, and `videoio`. Their state is derived only from the native ABI and OpenCV version probes, so `Verified` means the required runtime identity was verified; it does not infer optional contrib modules, full/mini promotion, codec availability, or GPU execution.
+
 `NativeRuntime.State == Verified` 表示 wrapper ABI 和 OpenCV 版本探针都匹配。`VideoIOBackends` 描述 registry 条目和 built-in 状态，不代表摄像头、编解码器或设备一定可以打开。DNN 的 `Verified` 表示 backend 返回了 target 列表；生产支持声明仍需模型执行探针。
+
+`Modules` 包含当前 wrapper 边界必需的四个 native 模块：`core`、`imgproc`、`imgcodecs` 和 `videoio`。它们的状态只由 native ABI 与 OpenCV 版本探针推导，因此 `Verified` 表示 runtime 身份已验证；不会推断可选 contrib 模块、full/mini 晋升、编解码器可用性或 GPU 执行。
 
 `Accelerators` deliberately reports `opencl-tapi` and `cuda` as `Unknown` until the library owns a public, side-effect-free execution probe. A DNN target enum, a CUDA-named stitching helper, or a build flag is not GPU execution evidence. The current CPU runtime therefore remains honest about the GPU/OpenCL boundary.
 

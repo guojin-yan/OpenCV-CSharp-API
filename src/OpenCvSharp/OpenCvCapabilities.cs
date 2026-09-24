@@ -177,6 +177,7 @@ namespace JYPPX.OpenCvSharp
             string runtimeFrameworkDescription,
             string processArchitecture,
             string runtimeIdentifier,
+            IReadOnlyList<OpenCvCapabilityProbe> modules,
             IReadOnlyList<OpenCvVideoBackendCapability> videoIoBackends,
             IReadOnlyList<OpenCvDnnBackendCapability> dnnBackends,
             IReadOnlyList<OpenCvCapabilityProbe> accelerators,
@@ -193,6 +194,7 @@ namespace JYPPX.OpenCvSharp
             RuntimeFrameworkDescription = runtimeFrameworkDescription ?? string.Empty;
             ProcessArchitecture = processArchitecture ?? string.Empty;
             RuntimeIdentifier = runtimeIdentifier ?? string.Empty;
+            Modules = modules ?? new ReadOnlyCollection<OpenCvCapabilityProbe>(Array.Empty<OpenCvCapabilityProbe>());
             NativeOpenCvVersion = nativeOpenCvVersion ?? string.Empty;
             LoadedNativeAbiVersion = loadedNativeAbiVersion;
             CpuFeaturesLine = cpuFeaturesLine ?? string.Empty;
@@ -293,6 +295,13 @@ namespace JYPPX.OpenCvSharp
                 new OpenCvCapabilityProbe("opencl-tapi", OpenCvCapabilityState.Unknown, "No public UMat/OpenCL execution probe is currently exposed."),
                 new OpenCvCapabilityProbe("cuda", OpenCvCapabilityState.Unknown, "No public CUDA execution probe is currently exposed.")
             });
+            var modules = new ReadOnlyCollection<OpenCvCapabilityProbe>(new[]
+            {
+                CreateRequiredModuleProbe("core", nativeState),
+                CreateRequiredModuleProbe("imgproc", nativeState),
+                CreateRequiredModuleProbe("imgcodecs", nativeState),
+                CreateRequiredModuleProbe("videoio", nativeState)
+            });
 
             return new OpenCvCapabilities(
                 nativeRuntime,
@@ -305,6 +314,7 @@ namespace JYPPX.OpenCvSharp
                 GetRuntimeFrameworkDescription(),
                 GetProcessArchitecture(),
                 GetRuntimeIdentifier(),
+                modules,
                 videoBackends,
                 dnnBackends,
                 accelerators,
@@ -340,6 +350,9 @@ namespace JYPPX.OpenCvSharp
 
         /// <summary>Gets the runtime identifier when the target framework provides one.</summary>
         public string RuntimeIdentifier { get; }
+
+        /// <summary>Gets the required native module probes represented by this wrapper.</summary>
+        public IReadOnlyList<OpenCvCapabilityProbe> Modules { get; }
 
         /// <summary>Gets the native runtime verification result.</summary>
         public OpenCvCapabilityProbe NativeRuntime { get; }
@@ -400,6 +413,14 @@ namespace JYPPX.OpenCvSharp
             AppendJsonProperty(builder, "cpuFeaturesLine", CpuFeaturesLine, true);
             AppendJsonProperty(builder, "logicalCpuCount", LogicalCpuCount, true);
             AppendJsonProperty(builder, "useOptimized", UseOptimized, true);
+
+            AppendJsonArrayStart(builder, "modules", true);
+            for (int i = 0; i < Modules.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                AppendJsonProbe(builder, Modules[i]);
+            }
+            builder.Append(']');
 
             AppendJsonArrayStart(builder, "videoIoBackends", true);
             for (int i = 0; i < VideoIOBackends.Count; i++)
@@ -536,6 +557,29 @@ namespace JYPPX.OpenCvSharp
                 }
             }
             builder.Append('"');
+        }
+
+        private static OpenCvCapabilityProbe CreateRequiredModuleProbe(string name, OpenCvCapabilityState nativeState)
+        {
+            OpenCvCapabilityState state = nativeState;
+            string reason;
+            switch (nativeState)
+            {
+                case OpenCvCapabilityState.Verified:
+                    reason = "Required module is covered by the verified native ABI and OpenCV version probes.";
+                    break;
+                case OpenCvCapabilityState.Available:
+                    reason = "Required module is covered by the available native ABI probe.";
+                    break;
+                case OpenCvCapabilityState.Unavailable:
+                    reason = "Required module cannot be used because native ABI/version verification failed.";
+                    break;
+                default:
+                    reason = "Required module state is unknown because native ABI/version verification did not complete.";
+                    break;
+            }
+
+            return new OpenCvCapabilityProbe(name, state, reason);
         }
 
         private static IReadOnlyList<OpenCvVideoBackendCapability> ProbeVideoIo(List<string> warnings)
