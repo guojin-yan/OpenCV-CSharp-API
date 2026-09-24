@@ -55,6 +55,15 @@ try {
     }
     $hostArchitecture = 'x64'
     $targetArchitecture = if ($RuntimeIdentifier -eq 'win-arm64') { 'arm64' } else { 'x64' }
+    $toolProbeCommand = (Quote-CmdArgument -Value $vsDevCmd) + " -arch=$targetArchitecture -host_arch=$hostArchitecture && where link.exe"
+    $toolProbe = @(& cmd.exe /d /s /c $toolProbeCommand 2>&1)
+    if ($LASTEXITCODE -ne 0) {
+        if ($RuntimeIdentifier -eq 'win-arm64') {
+            throw 'NativeAOT ARM64 smoke requires the Visual Studio C++ ARM64 build tools; VsDevCmd could not initialize the ARM64 linker environment.'
+        }
+        throw 'NativeAOT x64 smoke could not initialize the Visual Studio linker environment.'
+    }
+    $toolProbe | ForEach-Object { Write-Host ([string]$_) }
     $publishCommand = 'dotnet ' + (($publishArgs | ForEach-Object { Quote-CmdArgument -Value ([string]$_) }) -join ' ')
     $developerCommand = (Quote-CmdArgument -Value $vsDevCmd) + " -arch=$targetArchitecture -host_arch=$hostArchitecture && " + $publishCommand
     $build = @(& cmd.exe /d /s /c $developerCommand 2>&1)

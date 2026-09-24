@@ -11,6 +11,16 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $dotnetCommand = Get-Command dotnet -ErrorAction Stop
 $project = Join-Path $repo 'tests/OpenCvSharp.Tests/OpenCvSharp.Tests.csproj'
 if (-not (Test-Path -LiteralPath $project -PathType Leaf)) { throw "Test project was not found: $project" }
+$manifestPath = Join-Path $repo 'packaging/codec/image-preflight-mutation-corpus.json'
+$schemaPath = Join-Path $repo 'packaging/codec/image-preflight-mutation-corpus.schema.json'
+if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf) -or -not (Test-Path -LiteralPath $schemaPath -PathType Leaf)) { throw 'Image preflight mutation corpus manifest/schema is missing.' }
+if (-not (Test-Json -LiteralPath $manifestPath -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Image preflight mutation corpus manifest failed JSON Schema validation.' }
+$manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+$testText = Get-Content -LiteralPath (Join-Path $repo 'tests/OpenCvSharp.Tests/ImgCodecs/ImagePreflightTests.cs') -Raw
+foreach ($fixture in @($manifest.fixtures)) {
+    if ($testText.IndexOf('Name = "' + [string]$fixture + '"', [StringComparison]::Ordinal) -lt 0) { throw "Mutation fixture is missing from the focused test: $fixture" }
+}
+if (@($manifest.frameworks).Count -ne 2 -or @($manifest.replacementBytes).Count -ne 5 -or @($manifest.fixtures).Count -lt 13) { throw 'Mutation corpus manifest dimensions drifted.' }
 
 $frameworks = @('net8.0', 'net10.0')
 foreach ($framework in $frameworks) {
@@ -45,4 +55,4 @@ foreach ($framework in $frameworks) {
     $process.Dispose()
 }
 
-Write-Host 'IMAGE_PREFLIGHT_MUTATION_CORPUS_OK fixtures=13 replacements=5 frameworks=2 native_runtime_required=false'
+Write-Host "IMAGE_PREFLIGHT_MUTATION_CORPUS_OK fixtures=$(@($manifest.fixtures).Count) replacements=$(@($manifest.replacementBytes).Count) frameworks=$(@($manifest.frameworks).Count) minimum_mutations=$($manifest.expectedMinimumMutations) native_runtime_required=false"

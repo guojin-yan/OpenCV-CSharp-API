@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/codec/image-preflight-mutation-corpus.schema.json",
+  "title": "Managed image preflight deterministic mutation corpus",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "test", "frameworks", "timeoutSeconds", "replacementBytes", "fixtures", "expectedMinimumMutations", "nativeRuntimeRequired" ],
+  "properties": {
+    "$schema": { "const": "image-preflight-mutation-corpus.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "deterministic-managed-corpus" },
+    "test": { "const": "tests/OpenCvSharp.Tests/ImgCodecs/ImagePreflightTests.cs::IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts" },
+    "frameworks": { "type": "array", "const": [ "net8.0", "net10.0" ] },
+    "timeoutSeconds": { "type": "integer", "minimum": 10, "maximum": 600 },
+    "replacementBytes": { "type": "array", "const": [ 0, 1, 127, 128, 255 ] },
+    "fixtures": { "type": "array", "minItems": 13, "uniqueItems": true, "items": { "type": "string" } },
+    "expectedMinimumMutations": { "type": "integer", "minimum": 1000 },
+    "nativeRuntimeRequired": { "const": false }
+  }
+}

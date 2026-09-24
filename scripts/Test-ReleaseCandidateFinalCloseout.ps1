@@ -229,6 +229,8 @@ function Get-ExpectedEvidencePaths {
         "packaging/runtime/runtime-opencl-tapi-umat-contract.json",
         "packaging/runtime/runtime-opencl-tapi-umat-contract.schema.json",
         "packaging/runtime/runtime-capabilities-json.schema.json",
+        "packaging/codec/image-preflight-mutation-corpus.json",
+        "packaging/codec/image-preflight-mutation-corpus.schema.json",
         "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",

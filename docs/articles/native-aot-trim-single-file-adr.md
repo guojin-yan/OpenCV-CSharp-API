@@ -23,6 +23,7 @@ The guard first builds the managed `net10.0` assembly, enters the Visual Studio 
 - The managed package reported OpenCV `5.0.0`, ABI `1`, and package version `5.0.0` before the native probe.
 - The native probe was explicitly skipped because this checkout has no factual `JYPPX.OpenCV.Native` runtime directory.
 - The AOT analysis warning from `Marshal.SizeOf(typeof(T))` in the pixel traits registry was removed by using the generic `Marshal.SizeOf<T>()` path. Subsequent publish produced no IL3050 warning for that code path.
+- A local `win-arm64` attempt stopped before publish because `VsDevCmd.bat -arch=arm64 -host_arch=x64` returned 255; the machine does not have the Visual Studio C++ ARM64 build tools. The guard reports this as an explicit toolchain failure rather than treating a cross-build as ARM64 evidence.
 - This record does not claim native runtime execution, ARM64 execution, or stable package-wide AOT/trim compatibility. Those require a matching runtime payload and an independent consumer on each promoted RID/profile.
 
 ## Boundaries
