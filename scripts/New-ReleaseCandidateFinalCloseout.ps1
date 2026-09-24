@@ -239,6 +239,7 @@ function Get-Record {
         "docs/articles/codec-buffer-lease-adr.md",
         "docs/articles/codec-buffer-and-owner-adr.md",
         "docs/articles/codec-benchmark-baseline.md",
+        "docs/articles/image-adapter-selection-adr.md",
         "docs/articles/codec-preflight-and-limits.md",
         "docs/articles/imgproc-geometry-guide.md",
         "docs/articles/imgproc-upstream-parity-guide.md",
