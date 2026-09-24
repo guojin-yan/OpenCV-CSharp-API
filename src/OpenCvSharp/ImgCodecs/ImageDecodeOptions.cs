@@ -12,7 +12,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         public ImageDecodeOptions()
             : this(256L * 1024L * 1024L, 65536, 65536, 1073741824L, 1024, false, false,
                 64L * 1024L * 1024L, 4L * 1024L * 1024L, false, false,
-                long.MaxValue, int.MaxValue, int.MaxValue, false)
+                long.MaxValue, int.MaxValue, int.MaxValue, false, long.MaxValue)
         {
         }
 
@@ -34,7 +34,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             bool requireKnownSize)
             : this(maxInputBytes, maxWidth, maxHeight, maxPixels, maxFrames, rejectUnknownFormat, requireKnownSize,
                 long.MaxValue, long.MaxValue, false, false,
-                long.MaxValue, int.MaxValue, int.MaxValue, false)
+                long.MaxValue, int.MaxValue, int.MaxValue, false, long.MaxValue)
         {
         }
 
@@ -60,7 +60,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             long maxIccProfileBytes)
             : this(maxInputBytes, maxWidth, maxHeight, maxPixels, maxFrames, rejectUnknownFormat, requireKnownSize,
                 maxMetadataBytes, maxIccProfileBytes, false, false,
-                long.MaxValue, int.MaxValue, int.MaxValue, false)
+                long.MaxValue, int.MaxValue, int.MaxValue, false, long.MaxValue)
         {
         }
 
@@ -90,26 +90,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             bool requireKnownIccProfileSize)
             : this(maxInputBytes, maxWidth, maxHeight, maxPixels, maxFrames, rejectUnknownFormat, requireKnownSize,
                 maxMetadataBytes, maxIccProfileBytes, requireKnownMetadataSize, requireKnownIccProfileSize,
-                long.MaxValue, int.MaxValue, int.MaxValue, false)
+                long.MaxValue, int.MaxValue, int.MaxValue, false, long.MaxValue)
         {
         }
 
         /// <summary>Creates explicit image, metadata, and ICC payload limits with strict-known-fact controls.</summary>
-        /// <param name="maxInputBytes">Maximum encoded input size.</param>
-        /// <param name="maxWidth">Maximum decoded width.</param>
-        /// <param name="maxHeight">Maximum decoded height.</param>
-        /// <param name="maxPixels">Maximum decoded width multiplied by height.</param>
-        /// <param name="maxFrames">Maximum frame/page count when the header proves it.</param>
-        /// <param name="rejectUnknownFormat">Whether an unrecognized format must be rejected.</param>
-        /// <param name="requireKnownSize">Whether dimensions must be available from the header.</param>
-        /// <param name="maxMetadataBytes">Maximum inspected metadata payload size when the header proves it.</param>
-        /// <param name="maxIccProfileBytes">Maximum inspected ICC profile payload size when the header proves it.</param>
-        /// <param name="requireKnownMetadataSize">Whether a proven metadata payload size is required.</param>
-        /// <param name="requireKnownIccProfileSize">Whether a proven ICC profile payload size is required.</param>
-        /// <param name="maxCumulativePixels">Maximum width-times-height budget across known frames or pages.</param>
-        /// <param name="maxBitDepth">Maximum encoded sample depth in bits when known.</param>
-        /// <param name="maxChannels">Maximum encoded channel count when known.</param>
-        /// <param name="rejectUnknownPixelFormat">Whether unknown encoded depth or channel count must be rejected.</param>
         public ImageDecodeOptions(
             long maxInputBytes,
             int maxWidth,
@@ -126,6 +111,46 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             int maxBitDepth,
             int maxChannels,
             bool rejectUnknownPixelFormat)
+            : this(maxInputBytes, maxWidth, maxHeight, maxPixels, maxFrames, rejectUnknownFormat, requireKnownSize,
+                maxMetadataBytes, maxIccProfileBytes, requireKnownMetadataSize, requireKnownIccProfileSize,
+                maxCumulativePixels, maxBitDepth, maxChannels, rejectUnknownPixelFormat, long.MaxValue)
+        {
+        }
+
+        /// <summary>Creates explicit image, metadata, ICC, pixel storage, and strict-known-fact limits.</summary>
+        /// <param name="maxInputBytes">Maximum encoded input size.</param>
+        /// <param name="maxWidth">Maximum decoded width.</param>
+        /// <param name="maxHeight">Maximum decoded height.</param>
+        /// <param name="maxPixels">Maximum decoded width multiplied by height.</param>
+        /// <param name="maxFrames">Maximum frame/page count when the header proves it.</param>
+        /// <param name="rejectUnknownFormat">Whether an unrecognized format must be rejected.</param>
+        /// <param name="requireKnownSize">Whether dimensions must be available from the header.</param>
+        /// <param name="maxMetadataBytes">Maximum inspected metadata payload size when the header proves it.</param>
+        /// <param name="maxIccProfileBytes">Maximum inspected ICC profile payload size when the header proves it.</param>
+        /// <param name="requireKnownMetadataSize">Whether a proven metadata payload size is required.</param>
+        /// <param name="requireKnownIccProfileSize">Whether a proven ICC profile payload size is required.</param>
+        /// <param name="maxCumulativePixels">Maximum width-times-height budget across known frames or pages.</param>
+        /// <param name="maxBitDepth">Maximum encoded sample depth in bits when known.</param>
+        /// <param name="maxChannels">Maximum encoded channel count when known.</param>
+        /// <param name="rejectUnknownPixelFormat">Whether unknown encoded depth or channel count must be rejected.</param>
+        /// <param name="maxEstimatedPixelBytes">Maximum encoded pixel storage estimate when all required facts are known.</param>
+        public ImageDecodeOptions(
+            long maxInputBytes,
+            int maxWidth,
+            int maxHeight,
+            long maxPixels,
+            int maxFrames,
+            bool rejectUnknownFormat,
+            bool requireKnownSize,
+            long maxMetadataBytes,
+            long maxIccProfileBytes,
+            bool requireKnownMetadataSize,
+            bool requireKnownIccProfileSize,
+            long maxCumulativePixels,
+            int maxBitDepth,
+            int maxChannels,
+            bool rejectUnknownPixelFormat,
+            long maxEstimatedPixelBytes)
         {
             if (maxInputBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxInputBytes));
             if (maxWidth <= 0) throw new ArgumentOutOfRangeException(nameof(maxWidth));
@@ -137,6 +162,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             if (maxCumulativePixels <= 0) throw new ArgumentOutOfRangeException(nameof(maxCumulativePixels));
             if (maxBitDepth <= 0) throw new ArgumentOutOfRangeException(nameof(maxBitDepth));
             if (maxChannels <= 0) throw new ArgumentOutOfRangeException(nameof(maxChannels));
+            if (maxEstimatedPixelBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxEstimatedPixelBytes));
 
             MaxInputBytes = maxInputBytes;
             MaxWidth = maxWidth;
@@ -153,6 +179,7 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             MaxBitDepth = maxBitDepth;
             MaxChannels = maxChannels;
             RejectUnknownPixelFormat = rejectUnknownPixelFormat;
+            MaxEstimatedPixelBytes = maxEstimatedPixelBytes;
         }
 
         /// <summary>Gets the maximum encoded input size in bytes.</summary>
@@ -199,5 +226,11 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
         /// <summary>Gets whether unknown encoded depth or channel facts are rejected before native decoding.</summary>
         public bool RejectUnknownPixelFormat { get; }
+
+        /// <summary>
+        /// Gets the maximum encoded pixel storage estimate when dimensions, frames, depth, and channels are known.
+        /// This is an admission estimate and does not promise a native peak allocation bound.
+        /// </summary>
+        public long MaxEstimatedPixelBytes { get; }
     }
 }

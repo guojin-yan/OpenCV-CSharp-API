@@ -149,6 +149,24 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
                 throw new InvalidDataException("Encoded image cumulative pixel count exceeds the configured limit.");
             }
 
+            if (result.IsCumulativePixelCountKnown && result.IsPixelFormatKnown)
+            {
+                long bytesPerSample = (result.BitDepth + 7L) / 8L;
+                try
+                {
+                    long estimatedPixelBytes = checked(
+                        checked(result.CumulativePixelCount * bytesPerSample) * result.ChannelCount);
+                    if (estimatedPixelBytes > options.MaxEstimatedPixelBytes)
+                    {
+                        throw new InvalidDataException("Estimated encoded pixel storage exceeds the configured limit.");
+                    }
+                }
+                catch (OverflowException)
+                {
+                    throw new InvalidDataException("Estimated encoded pixel storage exceeds the supported range.");
+                }
+            }
+
             if (result.IsFrameCountKnown && result.FrameCount > options.MaxFrames)
             {
                 throw new InvalidDataException("Encoded image frame count exceeds the configured limit.");

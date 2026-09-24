@@ -136,6 +136,33 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyStreamRejectsKnownEncodedPixelStorageBudget()
+        {
+            byte[] png = CreateCompletePng(2, 3, 16, 6);
+            ImageDecodeOptions options = new ImageDecodeOptions(
+                png.Length, 10, 10, 100, 1, true, true,
+                long.MaxValue, long.MaxValue, false, false,
+                long.MaxValue, 16, 4, true, 47);
+
+            using (var stream = new MemoryStream(png))
+            {
+                Assert.Throws<InvalidDataException>(() => ImgCodecsCv2.Identify(stream, options));
+                Assert.Equal(0, stream.Position);
+            }
+
+            ImageDecodeOptions exactBudget = new ImageDecodeOptions(
+                png.Length, 10, 10, 100, 1, true, true,
+                long.MaxValue, long.MaxValue, false, false,
+                long.MaxValue, 16, 4, true, 48);
+            using (var stream = new MemoryStream(png))
+            {
+                ImageIdentifyResult result = ImgCodecsCv2.Identify(stream, exactBudget);
+                Assert.True(result.IsPixelFormatKnown);
+                Assert.Equal(48, result.CumulativePixelCount * 2L * result.ChannelCount);
+            }
+        }
+
+        [Fact]
         public void IdentifyReadsPnmEncodedDepthAndChannels()
         {
             ImageIdentifyResult pbm = ImgCodecsCv2.Identify(Encoding.ASCII.GetBytes("P1\n2 3\n"));

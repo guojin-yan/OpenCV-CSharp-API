@@ -3,7 +3,7 @@ schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
 type-count=645
-member-count=6981
+member-count=6983
 namespace-count=41
 nullable-shape=included
 
@@ -3522,6 +3522,7 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instanc
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes,System.Boolean requireKnownMetadataSize,System.Boolean requireKnownIccProfileSize)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes,System.Boolean requireKnownMetadataSize,System.Boolean requireKnownIccProfileSize,System.Int64 maxCumulativePixels,System.Int32 maxBitDepth,System.Int32 maxChannels,System.Boolean rejectUnknownPixelFormat)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|constructor|public;instance|.ctor(System.Int64 maxInputBytes,System.Int32 maxWidth,System.Int32 maxHeight,System.Int64 maxPixels,System.Int32 maxFrames,System.Boolean rejectUnknownFormat,System.Boolean requireKnownSize,System.Int64 maxMetadataBytes,System.Int64 maxIccProfileBytes,System.Boolean requireKnownMetadataSize,System.Boolean requireKnownIccProfileSize,System.Int64 maxCumulativePixels,System.Int32 maxBitDepth,System.Int32 maxChannels,System.Boolean rejectUnknownPixelFormat,System.Int64 maxEstimatedPixelBytes)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RejectUnknownFormat
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RejectUnknownPixelFormat
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Boolean RequireKnownIccProfileSize
@@ -3533,6 +3534,7 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:publ
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxHeight
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int32 MaxWidth
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxCumulativePixels
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxEstimatedPixelBytes
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxIccProfileBytes
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxInputBytes
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageDecodeOptions|property|instance;get:public|System.Int64 MaxMetadataBytes

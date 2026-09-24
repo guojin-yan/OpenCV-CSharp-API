@@ -59,9 +59,9 @@ using (Mat image = Cv2.ImDecode(uploadStream, options, ImreadModes.Color))
 }
 ~~~
 
-The overload checks encoded byte length, recognized format, known dimensions, checked width-times-height arithmetic, known frame/page count, cumulative width-times-height budget, encoded depth/channel limits when proven, and known metadata/ICC payload limits before calling the existing native ImDecode. The original overloads remain unchanged for applications that already enforce their own input policy. A preflight pass does not replace sandboxing, codec patching, timeout controls, or post-decode validation.
+The overload checks encoded byte length, recognized format, known dimensions, checked width-times-height arithmetic, known frame/page count, cumulative width-times-height budget, encoded depth/channel limits when proven, an optional `MaxEstimatedPixelBytes` budget, and known metadata/ICC payload limits before calling the existing native ImDecode. The byte estimate uses proven cumulative pixels multiplied by encoded sample storage and channel count; it is an admission estimate, not a native peak allocation guarantee. The original overloads remain unchanged for applications that already enforce their own input policy. A preflight pass does not replace sandboxing, codec patching, timeout controls, or post-decode validation.
 
-该重载会在调用现有 native ImDecode 前检查编码字节长度、可识别格式、已知尺寸、checked 的宽高乘法、累计宽高像素预算、已证明的编码精度/通道上限以及已知 metadata/ICC 负载上限。原有重载保持不变，已经有自有输入策略的应用可以继续使用。预检不能替代沙箱、codec 更新、超时控制或解码后的结果校验。
+该重载会在调用现有 native ImDecode 前检查编码字节长度、可识别格式、已知尺寸、checked 的宽高乘法、累计宽高像素预算、已证明的编码精度/通道上限、可选的 `MaxEstimatedPixelBytes` 预算以及已知 metadata/ICC 负载上限。字节估算使用已证明的累计像素数乘以编码样本存储宽度和通道数；它是输入准入估算，不是 native 峰值分配保证。原有重载保持不变，已经有自有输入策略的应用可以继续使用。预检不能替代沙箱、codec 更新、超时控制或解码后的结果校验。
 
 ## Metadata And ICC Facts / Metadata 与 ICC 事实
 
