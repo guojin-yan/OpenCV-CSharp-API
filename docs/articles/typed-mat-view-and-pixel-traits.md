@@ -4,11 +4,11 @@
 
 5.0.1 adds the managed PixelTypeDescriptor and PixelTypeTraits registry as the first stage of the typed-matrix-view plan. The registry is an explicit allow-list for the scalar types and published Vec2*, Vec3*, and Vec4* types already present in the package. It records the OpenCV depth, channel count, complete element size, alignment, channel-order evidence, alpha mode, and writable-view eligibility without loading the native library.
 
-The registry does not change the existing Mat.AsSpan<T>, AsRowSpan<T>, AsRows<T>, GetValue<T>, or SetValue<T> contracts. Those APIs continue to validate the native element size and are useful for generic binary views. On Span-capable target frameworks, the opt-in `MatView<TPixel>` preview uses the registry for exact depth/channel checks, two-dimensional shape, stride, and owner/header lifetime validation. It is a borrowed view: disposing it does not dispose the Mat. The design record is available in [Typed Mat View ADR](typed-mat-view-adr.md).
+The registry does not change the existing Mat.AsSpan<T>, AsRowSpan<T>, AsRows<T>, GetValue<T>, or SetValue<T> contracts. Those APIs continue to validate the native element size and are useful for generic binary views. Scalar registrations carry the proven `Gray` channel order; vector registrations keep `Unknown` because storage alone does not prove BGR, RGB, or alpha semantics. `RegisteredTypes` is returned in stable ordinal type-name order across target frameworks. On Span-capable target frameworks, the opt-in `MatView<TPixel>` preview uses the registry for exact depth/channel checks, two-dimensional shape, stride, and owner/header lifetime validation. It is a borrowed view: disposing it does not dispose the Mat. The design record is available in [Typed Mat View ADR](typed-mat-view-adr.md).
 
 ## Channel semantics
 
-An OpenCV depth/channel encoding describes storage, not the meaning of application data. A CV_8UC3 matrix may contain BGR, RGB, a three-component feature vector, or another layout. For that reason the built-in traits deliberately report PixelChannelOrder.Unknown for existing C# scalar and vector storage types. Adapters that know the source convention must make the BGR/RGB/alpha decision explicitly; a C# type name is not evidence of color order.
+An OpenCV depth/channel encoding describes storage, not the meaning of application data. A CV_8UC3 matrix may contain BGR, RGB, a three-component feature vector, or another layout. Single-channel scalar storage is unambiguously `Gray`; vector storage deliberately remains `Unknown` because it does not prove BGR, RGB, or alpha semantics. Adapters that know the source convention must make the BGR/RGB/alpha decision explicitly; a C# type name is not evidence of color order.
 
 ## Usage
 

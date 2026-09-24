@@ -177,11 +177,12 @@ namespace JYPPX.OpenCvSharp.Core
     public static class PixelTypeTraits
     {
         private static readonly IReadOnlyDictionary<Type, PixelTypeDescriptor> Registry = CreateRegistry();
+        private static readonly PixelTypeDescriptor[] OrderedDescriptors = CreateOrderedDescriptors();
 
         /// <summary>Gets all registered descriptors.</summary>
         public static IEnumerable<PixelTypeDescriptor> RegisteredTypes
         {
-            get { return Registry.Values; }
+            get { return OrderedDescriptors; }
         }
 
         /// <summary>Gets the number of explicitly registered managed element types.</summary>
@@ -256,11 +257,21 @@ namespace JYPPX.OpenCvSharp.Core
             return descriptors;
         }
 
+        private static PixelTypeDescriptor[] CreateOrderedDescriptors()
+        {
+            var descriptors = new List<PixelTypeDescriptor>(Registry.Values);
+            descriptors.Sort((left, right) => string.CompareOrdinal(
+                left.ElementType.FullName,
+                right.ElementType.FullName));
+            return descriptors.ToArray();
+        }
+
         private static void Add<T>(Dictionary<Type, PixelTypeDescriptor> descriptors, int depth, int channels, int alignment) where T : struct
         {
             int size = Marshal.SizeOf(typeof(T));
             descriptors.Add(typeof(T), new PixelTypeDescriptor(
-                typeof(T), depth, channels, size, alignment, PixelChannelOrder.Unknown,
+                typeof(T), depth, channels, size, alignment,
+                channels == 1 ? PixelChannelOrder.Gray : PixelChannelOrder.Unknown,
                 channels == 1 ? PixelAlphaMode.None : PixelAlphaMode.Unknown, true));
         }
     }
