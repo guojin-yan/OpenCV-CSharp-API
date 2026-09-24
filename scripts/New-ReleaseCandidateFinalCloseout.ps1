@@ -277,6 +277,7 @@ function Get-Record {
         "docs/articles/videoio-upstream-parity-guide.md",
         "docs/articles/async-video-owner-adr.md",
         "docs/articles/v501-modern-api-preview-guide.md",
+        "docs/articles/native-aot-trim-single-file-adr.md",
         "nuget/logo.jpg",
         "packaging/runtime/JYPPX.OpenCV.runtime/buildTransitive/JYPPX.OpenCV.runtime.targets",
         "packaging/runtime/android-runtime-evidence.json",
@@ -484,9 +485,12 @@ function Get-Record {
         "tools/CodecBenchmark/Program.cs",
         "scripts/Test-CodecBenchmarkHarness.ps1",
         "scripts/Test-ImagePreflightMutationCorpus.ps1",
+        "scripts/Test-NativeAotSmoke.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
-        "scripts/Test-TypedMatBenchmarkHarness.ps1"
+        "scripts/Test-TypedMatBenchmarkHarness.ps1",
+        "tools/AotSmoke/AotSmoke.csproj",
+        "tools/AotSmoke/Program.cs"
     )
     $evidence = @(Get-OrdinalSortedObjects -Values @($evidencePaths | ForEach-Object { Get-FileEvidence -RelativePath $_ }) -Property "Path")
     $winX86FullStatus = if (@($support.realSupport) -contains 'win-x86/full') { 'real-supported' } else { [string](@($support.pending | Where-Object target -eq 'win-x86/full')[0].status) }

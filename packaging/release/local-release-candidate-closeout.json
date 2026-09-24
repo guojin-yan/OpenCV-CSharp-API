@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ab7ee67b09b1f977",
-  "SourceIdentity": "sha256:ab7ee67b09b1f977a8b9b31843da02f65991728be8a361a8c3ba5d70b3f796bb",
+  "CandidateId": "local-closeout/sha256/954ccafdc581dd25",
+  "SourceIdentity": "sha256:954ccafdc581dd25b4335401b0a18c23544135a39da333a168b1632ad5da010e",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1737,
-    "Sha256": "ab7ee67b09b1f977a8b9b31843da02f65991728be8a361a8c3ba5d70b3f796bb",
+    "FileCount": 1741,
+    "Sha256": "954ccafdc581dd25b4335401b0a18c23544135a39da333a168b1632ad5da010e",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1032,6 +1032,11 @@
       "Length": 12404
     },
     {
+      "Path": "docs/articles/native-aot-trim-single-file-adr.md",
+      "Sha256": "e7283c8bdf85477a472156d21b569631c10e671f9ed9f293d5c0cdd93758b201",
+      "Length": 3026
+    },
+    {
       "Path": "docs/articles/objdetect-structured-parity-guide.md",
       "Sha256": "2df6e193f555dc42dde30a699ecb138affd5bc229c513606c380171215a093f0",
       "Length": 5272
@@ -1208,8 +1213,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "139180fda0e3d76210fbdfb6363a3d1ac125608ee30982205bb021512e503bc7",
-      "Length": 16159
+      "Sha256": "3ba3e7e62f7ac7825773dfcca8857d7dd3c13d173682e68ddb08c7d625bc6b6a",
+      "Length": 16264
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1478,8 +1483,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "63b7be2886ed089670685bb087602ee4b7d6b097615a1977ad2ee9e1fe290f10",
-      "Length": 66388
+      "Sha256": "a8eaad215ec55d1532c1d922631a754780dcabb71005179c64d9487acddf916e",
+      "Length": 66570
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1642,6 +1647,11 @@
       "Length": 2161
     },
     {
+      "Path": "scripts/Test-NativeAotSmoke.ps1",
+      "Sha256": "90528453d64353c8c6894042985118c926a95d14c97851719fbaaaf2482b8aee",
+      "Length": 4273
+    },
+    {
       "Path": "scripts/Test-NativeManagedBindingMap.ps1",
       "Sha256": "7ab578b8b161335c5c010627d78757e499f71d026008fe3ca656c5e5b4225545",
       "Length": 16021
@@ -1688,8 +1698,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "e8889ac34bec17bf034bb3e235701d3f7da98b8d8fc67da49a4dec51c7cfd3d7",
-      "Length": 63990
+      "Sha256": "851c85b559742ea474014a9166cf8296a64957f36b28e16b0c7b3e483007db27",
+      "Length": 64172
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -2005,6 +2015,16 @@
       "Path": "tests/OpenCvSharp.Tests/Stitching/MotionEstimatorTests.cs",
       "Sha256": "4b678c85ba0069b4b8ecf7f59acd847f224b4ac667efbefd6e536ec8ef478dfe",
       "Length": 19642
+    },
+    {
+      "Path": "tools/AotSmoke/AotSmoke.csproj",
+      "Sha256": "da77c8ff7c947426a6560607bbdf476b560711ecef14eaa9e96672d2b8062354",
+      "Length": 1443
+    },
+    {
+      "Path": "tools/AotSmoke/Program.cs",
+      "Sha256": "7aade539a69ade73d4ec0222367ac032a7cd4c3076586c41fe882e5854812bfa",
+      "Length": 1589
     },
     {
       "Path": "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",

@@ -210,6 +210,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/videoio-upstream-parity-guide.md",
         "docs/articles/async-video-owner-adr.md",
         "docs/articles/v501-modern-api-preview-guide.md",
+        "docs/articles/native-aot-trim-single-file-adr.md",
         "nuget/logo.jpg",
         "packaging/runtime/android-runtime-evidence.json",
         "packaging/runtime/runtime-generic-linux-feasibility.json",
@@ -417,9 +418,12 @@ function Get-ExpectedEvidencePaths {
         "tools/CodecBenchmark/Program.cs",
         "scripts/Test-CodecBenchmarkHarness.ps1",
         "scripts/Test-ImagePreflightMutationCorpus.ps1",
+        "scripts/Test-NativeAotSmoke.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
-        "scripts/Test-TypedMatBenchmarkHarness.ps1"
+        "scripts/Test-TypedMatBenchmarkHarness.ps1",
+        "tools/AotSmoke/AotSmoke.csproj",
+        "tools/AotSmoke/Program.cs"
     )
     return @(Get-OrdinalSorted -Values $paths)
 }

@@ -268,7 +268,7 @@ namespace JYPPX.OpenCvSharp.Core
 
         private static void Add<T>(Dictionary<Type, PixelTypeDescriptor> descriptors, int depth, int channels, int alignment) where T : struct
         {
-            int size = Marshal.SizeOf(typeof(T));
+            int size = Marshal.SizeOf<T>();
             descriptors.Add(typeof(T), new PixelTypeDescriptor(
                 typeof(T), depth, channels, size, alignment,
                 channels == 1 ? PixelChannelOrder.Gray : PixelChannelOrder.Unknown,
