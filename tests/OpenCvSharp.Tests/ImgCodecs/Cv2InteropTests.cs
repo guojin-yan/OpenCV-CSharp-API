@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.ImgCodecs;
 using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
@@ -49,6 +50,15 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 }
 
 #if NETCOREAPP3_1_OR_GREATER
+                var writer = new ArrayBufferWriter<byte>();
+                ImgCodecsCv2.ImEncodeTo(".png", source, writer);
+                Assert.Equal(encoded, writer.WrittenSpan.ToArray());
+
+                var parameterWriter = new ArrayBufferWriter<byte>();
+                ImgCodecsCv2.ImEncodeTo(".png", source, parameterWriter, new[] { (int)ImwriteFlags.PngCompression, 0 });
+                Assert.NotEmpty(parameterWriter.WrittenSpan.ToArray());
+                Assert.Equal(0x89, parameterWriter.WrittenSpan[0]);
+
                 using (Mat decodedFromSpan = ImgCodecsCv2.ImDecode(encoded.AsSpan(), ImreadModes.Color))
                 {
                     Assert.Equal(2, decodedFromSpan.Rows);
@@ -159,6 +169,11 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             Assert.Throws<ArgumentException>(() => ImgCodecsCv2.ImEncode(" ", null!));
             Assert.Throws<ArgumentNullException>(() => ImgCodecsCv2.ImEncode(".png", null!));
             Assert.Throws<ArgumentNullException>(() => ImgCodecsCv2.ImEncode(".png", null!, Array.Empty<int>()));
+#if NETCOREAPP3_1_OR_GREATER
+            Assert.Throws<ArgumentNullException>(() => ImgCodecsCv2.ImEncodeTo(".png", null!, new ArrayBufferWriter<byte>()));
+            Assert.Throws<ArgumentNullException>(() => ImgCodecsCv2.ImEncodeTo(".png", null!, (IBufferWriter<byte>)null!));
+            Assert.Throws<ArgumentException>(() => ImgCodecsCv2.ImEncodeTo(".png", null!, new ArrayBufferWriter<byte>(), new[] { 1 }));
+#endif
         }
 
         [Fact]

@@ -4,6 +4,16 @@ The buffer and owner decisions for a future writer API are recorded in the [Code
 
 未来 writer API 的缓冲区和 owner 决策记录在[编解码缓冲区与所有权 ADR](codec-buffer-and-owner-adr.md)中。当前公开编码路径仍是现有 `byte[]` 契约。
 
+On Span-capable target frameworks, the preview writer overload writes the native encoded result into an `IBufferWriter<byte>` and advances it once. It does not retain the writer or its memory:
+
+```csharp
+var destination = new System.Buffers.ArrayBufferWriter<byte>();
+Cv2.ImEncodeTo(".png", image, destination);
+ReadOnlySpan<byte> encoded = destination.WrittenSpan;
+```
+
+在支持 Span 的目标框架上，preview writer overload 将 native 编码结果写入 `IBufferWriter<byte>`，并只调用一次 `Advance`；不会保留 writer 或其内存。
+
 Cv2.Identify performs a managed header inspection before native decoding. It recognizes common PNG, JPEG, JPEG 2000 (raw J2K and JP2), GIF, WebP, BMP, Sun Raster, Radiance HDR, OpenEXR, TIFF, and PNM signatures, reports dimensions when the header proves them, and never opens the native runtime. It is intended for admission control and diagnostics, not for claiming that a file is valid or that every codec feature is available.
 
 Cv2.Identify 会在 native 解码前执行 managed 头检查。它识别常见的 PNG、JPEG、JPEG 2000（原始 J2K 与 JP2）、GIF、WebP、BMP、Sun Raster、Radiance HDR、OpenEXR、TIFF 和 PNM 签名，在头部能够证明时报告尺寸，并且不会加载 native runtime。它用于输入准入和诊断，不代表文件一定完整有效，也不代表所有 codec 功能都可用。

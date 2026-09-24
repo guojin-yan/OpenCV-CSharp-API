@@ -1,6 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+#if NETCOREAPP3_1_OR_GREATER
+using System.Buffers;
+#endif
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.Internal.Interop;
 
@@ -76,6 +79,61 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
             return ImEncodeCore(ext, image, parameters);
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        /// <summary>
+        /// Encodes an image into a caller-owned buffer writer.
+        /// The writer is advanced once after the complete native result has been copied.
+        /// </summary>
+        /// <param name="ext">The image file extension.</param>
+        /// <param name="image">The image to encode.</param>
+        /// <param name="destination">The destination writer. The writer owns the written bytes.</param>
+        /// <remarks>This is a preview API. It still uses the existing native encoded buffer and performs one copy into the writer.</remarks>
+        public static void ImEncodeTo(string ext, Mat image, IBufferWriter<byte> destination)
+        {
+            ValidateEncodeDestination(ext, destination);
+            ValidateEncodeImage(image);
+            NativeException.ThrowIfError(NativeMethods.ImgCodecsImEncode(ext, image.NativeHandle, out IntPtr nativeBuffer));
+            using (NativeEncodedBufferHandle buffer = NativeEncodedBufferHandle.FromNativePointer(nativeBuffer))
+            {
+                CopyEncodedBufferToWriter(buffer, destination);
+            }
+        }
+
+        /// <summary>Encodes an image into a caller-owned buffer writer with encoder parameters.</summary>
+        /// <param name="ext">The image file extension.</param>
+        /// <param name="image">The image to encode.</param>
+        /// <param name="parameters">Encoder parameters as key-value pairs.</param>
+        /// <param name="destination">The destination writer. The writer owns the written bytes.</param>
+        public static void ImEncodeTo(string ext, Mat image, IBufferWriter<byte> destination, int[] parameters)
+        {
+            if (parameters == null)
+            {
+                ImEncodeTo(ext, image, destination);
+                return;
+            }
+
+            ValidateEncodeDestination(ext, destination);
+            if ((parameters.Length % 2) != 0)
+            {
+                throw new ArgumentException("Encoder parameters must contain key-value pairs.", nameof(parameters));
+            }
+            ValidateEncodeImage(image);
+
+            unsafe
+            {
+                fixed (int* parametersPointer = parameters)
+                {
+                    NativeException.ThrowIfError(NativeMethods.ImgCodecsImEncodeWithParams(
+                        ext, image.NativeHandle, parametersPointer, ToUIntPtr(parameters.Length), out IntPtr nativeBuffer));
+                    using (NativeEncodedBufferHandle buffer = NativeEncodedBufferHandle.FromNativePointer(nativeBuffer))
+                    {
+                        CopyEncodedBufferToWriter(buffer, destination);
+                    }
+                }
+            }
+        }
+#endif
 
         /// <summary>
         /// Decodes an image from an in-memory compressed image buffer.
@@ -264,6 +322,57 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             Marshal.Copy(data, managedBuffer, 0, managedBuffer.Length);
             return managedBuffer;
         }
+
+#if NETCOREAPP3_1_OR_GREATER
+        private static void ValidateEncodeDestination(string ext, IBufferWriter<byte> destination)
+        {
+            if (string.IsNullOrWhiteSpace(ext))
+            {
+                throw new ArgumentException("Image extension cannot be null or whitespace.", nameof(ext));
+            }
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
+        }
+
+        private static void ValidateEncodeImage(Mat image)
+        {
+            if (image == null)
+            {
+                throw new ArgumentNullException(nameof(image));
+            }
+        }
+
+        private static unsafe void CopyEncodedBufferToWriter(NativeEncodedBufferHandle buffer, IBufferWriter<byte> destination)
+        {
+            IntPtr bufferHandle = buffer.DangerousGetHandle();
+            NativeException.ThrowIfError(NativeMethods.EncodedBufferSize(bufferHandle, out UIntPtr size));
+            NativeException.ThrowIfError(NativeMethods.EncodedBufferData(bufferHandle, out IntPtr data));
+
+            ulong byteLength = size.ToUInt64();
+            if (byteLength > int.MaxValue)
+            {
+                throw new OpenCvException("Encoded image byte length is larger than Int32.MaxValue.");
+            }
+
+            int length = (int)byteLength;
+            Span<byte> target = destination.GetSpan(length);
+            if (target.Length < length)
+            {
+                throw new InvalidOperationException("The buffer writer returned fewer bytes than requested.");
+            }
+            if (length > 0)
+            {
+                if (data == IntPtr.Zero)
+                {
+                    throw new OpenCvException("Native encoded buffer data is null.");
+                }
+                new ReadOnlySpan<byte>(data.ToPointer(), length).CopyTo(target);
+            }
+            destination.Advance(length);
+        }
+#endif
 
         private static byte[] ImEncodeCore(string ext, Mat image, int[] parameters)
         {

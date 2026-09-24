@@ -3,7 +3,7 @@ schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
 type-count=646
-member-count=6991
+member-count=6993
 namespace-count=41
 nullable-shape=included
 
@@ -3509,6 +3509,8 @@ MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEnco
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk> metadata,JYPPX.OpenCvSharp.ImgCodecs.ImageEncodingParam[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Byte[] ImEncodeWithMetadata(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.ImgCodecs.ImageMetadataChunk> metadata,System.Int32[]? parameters=null)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Int32 ImCount(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImEncodeTo(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Buffers.IBufferWriter<System.Byte> destination)
+MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImEncodeTo(System.String ext,JYPPX.OpenCvSharp.Core.Mat image,System.Buffers.IBufferWriter<System.Byte> destination,System.Int32[] parameters)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.Cv2|method|public;static|System.Void ImRead(System.String filename,JYPPX.OpenCvSharp.Core.Mat destination,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|constructor|public;instance|.ctor()
 MEMBER|JYPPX.OpenCvSharp.ImgCodecs.ImageCollection|constructor|public;instance|.ctor(System.String filename,JYPPX.OpenCvSharp.ImgCodecs.ImreadModes flags=Color)
