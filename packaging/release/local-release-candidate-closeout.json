@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/9d5d1a0c25c61c15",
-  "SourceIdentity": "sha256:9d5d1a0c25c61c1536fb8257df2a5878beec25807039deab15ebc3bef8fca03e",
+  "CandidateId": "local-closeout/sha256/b555601efa30a950",
+  "SourceIdentity": "sha256:b555601efa30a95091010f07751d7485171524ebd0060b52aee12e283f1ebf2b",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1759,
-    "Sha256": "9d5d1a0c25c61c1536fb8257df2a5878beec25807039deab15ebc3bef8fca03e",
+    "FileCount": 1762,
+    "Sha256": "b555601efa30a95091010f07751d7485171524ebd0060b52aee12e283f1ebf2b",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1222,6 +1222,16 @@
       "Length": 77499
     },
     {
+      "Path": "packaging/codec/image-format-policy.json",
+      "Sha256": "991c5f130de370cc8c4507772ae8b5f1e2c55dae65b090642f079216c76ebf32",
+      "Length": 4604
+    },
+    {
+      "Path": "packaging/codec/image-format-policy.schema.json",
+      "Sha256": "c38e6b35ca0c49ebbb7c403ff99e549b3410185558383ba52761841384345167",
+      "Length": 1663
+    },
+    {
       "Path": "packaging/codec/image-preflight-mutation-corpus.json",
       "Sha256": "eb3037e4bcb665a0ca08e79688affa3ed273b4200a20f0ed522b552903c4eb9f",
       "Length": 777
@@ -1553,8 +1563,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "f39672e9b6cc9eeb21ed7aed4f99e0efd9812c8a0f1224b0a1f0c0dded1c5597",
-      "Length": 67776
+      "Sha256": "5d391742664808174543ef3ad94d2bea94d21750c3b3d9d4c14b0435cbcec00f",
+      "Length": 67933
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1677,6 +1687,11 @@
       "Length": 2886
     },
     {
+      "Path": "scripts/Test-ImageFormatPolicy.ps1",
+      "Sha256": "b593e6671437e0e9e2aec9e0947cfbb8e9fcb6814853714bc908e4045317f53c",
+      "Length": 1734
+    },
+    {
       "Path": "scripts/Test-ImagePreflightMutationCorpus.ps1",
       "Sha256": "a0f86844a70aff22d7d4d93aab146ef4d2c13bf36a28ad722567b18e80d347c5",
       "Length": 4012
@@ -1783,8 +1798,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "2eeb27611356d1c4c506aedd31212c3054aff06c46bea68d0f4aca0d9d8af9b9",
-      "Length": 65378
+      "Sha256": "8093b5b2112f8c1821316440932f37fd41a10ad731f1af97e10813e60b7410d8",
+      "Length": 65535
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",

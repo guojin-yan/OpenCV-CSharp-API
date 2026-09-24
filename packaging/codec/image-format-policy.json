@@ -1,0 +1,27 @@
+{
+  "$schema": "image-format-policy.schema.json",
+  "schemaVersion": 1,
+  "status": "managed-preflight-policy",
+  "nativeDecodeClaim": "separate-runtime-dependent",
+  "finalMatPrecisionClaim": "unknown-until-decode",
+  "unknownFactPolicy": "preserve-unknown-unless-strict-option-rejects",
+  "formats": [
+    { "name": "png", "headerFacts": [ "format", "dimensions", "bitDepth", "channels", "metadataBytes", "iccBytes" ], "frameFacts": [ "static-boundary", "apng-frame-count-when-complete" ], "encodedPrecision": "bitDepth-and-channel-count", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "jpeg", "headerFacts": [ "format", "dimensions", "samplePrecision", "components", "metadataBytes", "iccBytes" ], "frameFacts": [ "single-frame-when-eoi-at-input-end" ], "encodedPrecision": "samplePrecision-and-component-count", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "j2k", "headerFacts": [ "format", "dimensions", "componentCount", "uniformComponentPrecision" ], "frameFacts": [ "unknown" ], "encodedPrecision": "uniform-component-precision-when-proven", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "jp2", "headerFacts": [ "format", "dimensions", "componentCount", "uniformComponentPrecision" ], "frameFacts": [ "unknown" ], "encodedPrecision": "uniform-component-precision-when-proven", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "pnm", "headerFacts": [ "format", "dimensions", "bitDepth", "channels" ], "frameFacts": [ "single-frame-when-payload-boundary-proven" ], "encodedPrecision": "maxval-derived", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "pam", "headerFacts": [ "format", "dimensions", "bitDepth", "channels" ], "frameFacts": [ "single-frame-when-header-and-payload-proven" ], "encodedPrecision": "maxval-derived", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "pfm", "headerFacts": [ "format", "dimensions", "float32", "channels" ], "frameFacts": [ "single-frame-when-header-proven" ], "encodedPrecision": "float32", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "webp", "headerFacts": [ "format", "dimensions", "rgb-or-rgba8" ], "frameFacts": [ "static-boundary", "animation-frame-count-when-complete" ], "encodedPrecision": "8-bit-rgb-or-rgba", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "bmp", "headerFacts": [ "format", "dimensions", "indexed-or-bgr8" ], "frameFacts": [ "single-frame-when-payload-boundary-proven" ], "encodedPrecision": "header-layout-dependent", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "gif", "headerFacts": [ "format", "dimensions", "indexed-depth-when-consistent" ], "frameFacts": [ "animation-frame-count-when-complete" ], "encodedPrecision": "indexed", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "sunraster", "headerFacts": [ "format", "dimensions", "supported-depth-and-layout" ], "frameFacts": [ "single-frame-when-payload-boundary-proven" ], "encodedPrecision": "header-layout-dependent", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "radiance-hdr", "headerFacts": [ "format", "dimensions", "rgbe8" ], "frameFacts": [ "single-frame-when-flat-or-rle-boundary-proven" ], "encodedPrecision": "rgbE8-not-alpha", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "openexr", "headerFacts": [ "format", "dataWindow", "channelCount", "uniform-channel-depth-when-complete" ], "frameFacts": [ "unknown" ], "encodedPrecision": "half-or-float-channel-storage", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "tiff", "headerFacts": [ "format", "dimensions", "pageCount", "cumulativePixels", "uniform-bits-and-samples-when-proven" ], "frameFacts": [ "page-count-when-ifd-chain-complete" ], "encodedPrecision": "bits-per-sample-and-samples-per-pixel", "finalMatPrecision": "unknown-until-decode" },
+    { "name": "bigtiff", "headerFacts": [ "format", "dimensions", "pageCount", "cumulativePixels", "uniform-bits-and-samples-when-proven" ], "frameFacts": [ "page-count-when-ifd-chain-complete" ], "encodedPrecision": "bits-per-sample-and-samples-per-pixel", "finalMatPrecision": "unknown-until-decode" }
+  ],
+  "limits": [ "maxInputBytes", "maxWidth", "maxHeight", "maxPixels", "maxCumulativePixels", "maxFrames", "maxMetadataBytes", "maxIccProfileBytes", "maxBitDepth", "maxChannels", "maxEstimatedPixelBytes" ],
+  "forbiddenInferences": [ "header-bit-depth-is-final-Mat-depth", "channel-count-is-color-order", "recognized-signature-is-valid-complete-image", "frame-count-is-known-before-container-completion", "codec-reader-extension-query-proves-reader-execution" ]
+}
