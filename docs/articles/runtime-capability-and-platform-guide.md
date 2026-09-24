@@ -40,11 +40,15 @@ format is available on the legacy target frameworks as well as modern .NET.
 
 `GuiBackend` performs the side-effect-free `HighGUI.GetCurrentUIFramework` probe. `Verified` records an active backend name, `Available` records that the HighGUI probe ran but reported no active backend, and `Unavailable` records a missing or unusable HighGUI runtime such as a mini package.
 
+`Codecs` reports deterministic writer probes for common extensions. Reader entries remain `Declared` until sample bytes are supplied because a reader probe cannot be proven from an extension alone; writer entries use OpenCV's extension capability query and may be `Verified` or `Unavailable`.
+
 `NativeRuntime.State == Verified` 表示 wrapper ABI 和 OpenCV 版本探针都匹配。`VideoIOBackends` 描述 registry 条目和 built-in 状态，不代表摄像头、编解码器或设备一定可以打开。DNN 的 `Verified` 表示 backend 返回了 target 列表；生产支持声明仍需模型执行探针。
 
 `Modules` 包含当前 wrapper 边界必需的四个 native 模块：`core`、`imgproc`、`imgcodecs` 和 `videoio`。它们的状态只由 native ABI 与 OpenCV 版本探针推导，因此 `Verified` 表示 runtime 身份已验证；不会推断可选 contrib 模块、full/mini 晋升、编解码器可用性或 GPU 执行。
 
 `GuiBackend` 执行无副作用的 `HighGUI.GetCurrentUIFramework` 探针。`Verified` 表示返回了活动 backend 名称，`Available` 表示探针成功但没有活动 backend，`Unavailable` 表示 HighGUI runtime 缺失或不可用，例如 mini 包。
+
+`Codecs` 报告常见扩展名的确定性 writer probe。Reader 条目在提供样例字节前保持 `Declared`，因为仅凭扩展名不能证明 reader；writer 条目使用 OpenCV 的扩展名能力查询，可能为 `Verified` 或 `Unavailable`。
 
 `Accelerators` deliberately reports `opencl-tapi` and `cuda` as `Unknown` until the library owns a public, side-effect-free execution probe. A DNN target enum, a CUDA-named stitching helper, or a build flag is not GPU execution evidence. The current CPU runtime therefore remains honest about the GPU/OpenCL boundary.
 

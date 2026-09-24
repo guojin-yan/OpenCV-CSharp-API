@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=645
-member-count=6987
+type-count=646
+member-count=6991
 namespace-count=41
 nullable-shape=included
 
@@ -148,6 +148,7 @@ TYPE|class|public;sealed|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiByteDecodeResult
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.ObjDetect.QRCodeMultiDecodeResult|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvCapabilities|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvCapabilityProbe|base=|interfaces=
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvCodecCapability|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OpenCvVideoBackendCapability|base=|interfaces=
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.OptFlow.DenseRLOFOpticalFlow|base=JYPPX.OpenCvSharp.OptFlow.DenseOpticalFlow|interfaces=System.IDisposable
@@ -5449,6 +5450,7 @@ MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|JYPPX.O
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Boolean? UseOptimized
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvCapabilityProbe> Accelerators
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvCapabilityProbe> Modules
+MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvCodecCapability> Codecs
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvDnnBackendCapability> DnnBackends
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<JYPPX.OpenCvSharp.OpenCvVideoBackendCapability> VideoIOBackends
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilities|property|instance;get:public|System.Collections.Generic.IReadOnlyList<System.String> Warnings
@@ -5478,6 +5480,9 @@ MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSh
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Unknown=0
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;const|JYPPX.OpenCvSharp.OpenCvCapabilityState Verified=3
 MEMBER|JYPPX.OpenCvSharp.OpenCvCapabilityState|field|public;instance|System.Int32 value__
+MEMBER|JYPPX.OpenCvSharp.OpenCvCodecCapability|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityProbe Reader
+MEMBER|JYPPX.OpenCvSharp.OpenCvCodecCapability|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityProbe Writer
+MEMBER|JYPPX.OpenCvSharp.OpenCvCodecCapability|property|instance;get:public|System.String Extension
 MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|JYPPX.OpenCvSharp.Dnn.DnnBackend Backend
 MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|JYPPX.OpenCvSharp.OpenCvCapabilityState State
 MEMBER|JYPPX.OpenCvSharp.OpenCvDnnBackendCapability|property|instance;get:public|System.Boolean IsAvailable

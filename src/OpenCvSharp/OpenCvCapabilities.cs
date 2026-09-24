@@ -7,6 +7,7 @@ using System.Text;
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.Dnn;
 using JYPPX.OpenCvSharp.HighGui;
+using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
 using JYPPX.OpenCvSharp.VideoIO;
 using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
@@ -149,6 +150,26 @@ namespace JYPPX.OpenCvSharp
         }
     }
 
+    /// <summary>Describes managed codec capability facts for one common extension.</summary>
+    public sealed class OpenCvCodecCapability
+    {
+        internal OpenCvCodecCapability(string extension, OpenCvCapabilityProbe reader, OpenCvCapabilityProbe writer)
+        {
+            Extension = extension ?? string.Empty;
+            Reader = reader;
+            Writer = writer;
+        }
+
+        /// <summary>Gets the normalized extension, including the leading dot.</summary>
+        public string Extension { get; }
+
+        /// <summary>Gets the reader probe. Reader support remains declared until sample bytes are supplied.</summary>
+        public OpenCvCapabilityProbe Reader { get; }
+
+        /// <summary>Gets the writer probe obtained from the linked runtime.</summary>
+        public OpenCvCapabilityProbe Writer { get; }
+    }
+
     /// <summary>
     /// A side-effect-free snapshot assembled from the existing managed runtime probes.
     /// 由现有 managed 运行时探针组合出的无副作用快照。
@@ -167,6 +188,11 @@ namespace JYPPX.OpenCvSharp
             DnnBackend.Cann
         };
 
+        private static readonly string[] KnownCodecExtensions =
+        {
+            ".png", ".jpg", ".webp", ".tiff", ".bmp", ".gif", ".exr", ".jp2"
+        };
+
         private OpenCvCapabilities(
             OpenCvCapabilityProbe nativeRuntime,
             string nativeOpenCvVersion,
@@ -180,6 +206,7 @@ namespace JYPPX.OpenCvSharp
             string runtimeIdentifier,
             IReadOnlyList<OpenCvCapabilityProbe> modules,
             OpenCvCapabilityProbe guiBackend,
+            IReadOnlyList<OpenCvCodecCapability> codecs,
             IReadOnlyList<OpenCvVideoBackendCapability> videoIoBackends,
             IReadOnlyList<OpenCvDnnBackendCapability> dnnBackends,
             IReadOnlyList<OpenCvCapabilityProbe> accelerators,
@@ -198,6 +225,7 @@ namespace JYPPX.OpenCvSharp
             RuntimeIdentifier = runtimeIdentifier ?? string.Empty;
             Modules = modules ?? new ReadOnlyCollection<OpenCvCapabilityProbe>(Array.Empty<OpenCvCapabilityProbe>());
             GuiBackend = guiBackend;
+            Codecs = codecs ?? new ReadOnlyCollection<OpenCvCodecCapability>(Array.Empty<OpenCvCodecCapability>());
             NativeOpenCvVersion = nativeOpenCvVersion ?? string.Empty;
             LoadedNativeAbiVersion = loadedNativeAbiVersion;
             CpuFeaturesLine = cpuFeaturesLine ?? string.Empty;
@@ -306,6 +334,7 @@ namespace JYPPX.OpenCvSharp
                 CreateRequiredModuleProbe("videoio", nativeState)
             });
             OpenCvCapabilityProbe guiBackend = ProbeGuiBackend(warnings);
+            IReadOnlyList<OpenCvCodecCapability> codecs = ProbeCodecs(warnings);
 
             return new OpenCvCapabilities(
                 nativeRuntime,
@@ -320,6 +349,7 @@ namespace JYPPX.OpenCvSharp
                 GetRuntimeIdentifier(),
                 modules,
                 guiBackend,
+                codecs,
                 videoBackends,
                 dnnBackends,
                 accelerators,
@@ -361,6 +391,9 @@ namespace JYPPX.OpenCvSharp
 
         /// <summary>Gets the side-effect-free HighGUI backend probe.</summary>
         public OpenCvCapabilityProbe GuiBackend { get; }
+
+        /// <summary>Gets deterministic codec probes for the common image extensions.</summary>
+        public IReadOnlyList<OpenCvCodecCapability> Codecs { get; }
 
         /// <summary>Gets the native runtime verification result.</summary>
         public OpenCvCapabilityProbe NativeRuntime { get; }
@@ -430,6 +463,19 @@ namespace JYPPX.OpenCvSharp
             }
             builder.Append(']');
             AppendJsonProbeProperty(builder, "guiBackend", GuiBackend, true);
+
+            AppendJsonArrayStart(builder, "codecs", true);
+            for (int i = 0; i < Codecs.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                OpenCvCodecCapability codec = Codecs[i];
+                builder.Append('{');
+                AppendJsonProperty(builder, "extension", codec.Extension, false);
+                AppendJsonProbeProperty(builder, "reader", codec.Reader, true);
+                AppendJsonProbeProperty(builder, "writer", codec.Writer, true);
+                builder.Append('}');
+            }
+            builder.Append(']');
 
             AppendJsonArrayStart(builder, "videoIoBackends", true);
             for (int i = 0; i < VideoIOBackends.Count; i++)
@@ -615,6 +661,38 @@ namespace JYPPX.OpenCvSharp
                 warnings.Add("HighGUI backend probe unavailable: " + reason);
                 return new OpenCvCapabilityProbe("highgui-ui", OpenCvCapabilityState.Unavailable, reason);
             }
+        }
+
+        private static IReadOnlyList<OpenCvCodecCapability> ProbeCodecs(List<string> warnings)
+        {
+            var result = new List<OpenCvCodecCapability>(KnownCodecExtensions.Length);
+            for (int i = 0; i < KnownCodecExtensions.Length; i++)
+            {
+                string extension = KnownCodecExtensions[i];
+                OpenCvCapabilityProbe reader = new OpenCvCapabilityProbe(
+                    "reader",
+                    OpenCvCapabilityState.Declared,
+                    "Reader support requires sample bytes and is not inferred from an extension alone.");
+                OpenCvCapabilityProbe writer;
+                try
+                {
+                    bool available = ImgCodecsCv2.HaveImageWriter(extension);
+                    writer = new OpenCvCapabilityProbe(
+                        "writer",
+                        available ? OpenCvCapabilityState.Verified : OpenCvCapabilityState.Unavailable,
+                        available ? "Linked runtime reports a writer for this extension." : "Linked runtime reports no writer for this extension.");
+                }
+                catch (Exception exception) when (IsRuntimeProbeFailure(exception))
+                {
+                    string reason = GetExceptionReason(exception);
+                    warnings.Add("Codec writer probe failed for " + extension + ": " + reason);
+                    writer = new OpenCvCapabilityProbe("writer", OpenCvCapabilityState.Unavailable, reason);
+                }
+
+                result.Add(new OpenCvCodecCapability(extension, reader, writer));
+            }
+
+            return new ReadOnlyCollection<OpenCvCodecCapability>(result.ToArray());
         }
 
         private static IReadOnlyList<OpenCvVideoBackendCapability> ProbeVideoIo(List<string> warnings)
