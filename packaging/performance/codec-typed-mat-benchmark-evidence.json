@@ -1,0 +1,56 @@
+{
+  "$schema": "codec-typed-mat-benchmark-evidence.schema.json",
+  "schemaVersion": 1,
+  "status": "measured",
+  "runner": {
+    "os": "Windows 11 x64",
+    "dotnet": "10.0.401",
+    "configuration": "Release",
+    "nativeRuntimeArtifact": "github-actions-artifact:9031536537",
+    "nativeRuntimeArtifactSha256": "898c746ac2a7c3eb3161a6348808c6a21ff5bddc4b5afa6a1a4be4335506897b",
+    "nativeRuntimePackage": "JYPPX.OpenCV.runtime.win-x64.5.0.0.nupkg",
+    "nativeRuntimePackageSha256": "8ed434d462e876937f75aedbbb3eec4a958fd56730f5a65b0653958dab42c55a"
+  },
+  "codec": {
+    "targetFramework": "net8.0",
+    "iterations": 100,
+    "rows": 64,
+    "columns": 64,
+    "inputBytes": 12288,
+    "inputSha256": "518f05b99bd5822f768487e0c9c969b3f6b5ba24f1b1531df4231f674413a0af",
+    "encodedBytes": 320,
+    "encodedSha256": "6b6e6ecadaaf63226bc2c438ecd4c97aee334bce425ddee6e5185766646c2779",
+    "encodeByteArray": { "managedAllocatedBytes": 37640, "encodedBytes": 320, "elapsedTicks": 66071 },
+    "encodeBufferWriter": { "managedAllocatedBytes": 40840, "encodedBytes": 320, "elapsedTicks": 67876 },
+    "decodeByteArray": { "managedAllocatedBytes": 7240, "decodedBytes": 12288, "checksum": 156672000, "elapsedTicks": 70713 },
+    "decodeSpanWithPreflight": { "managedAllocatedBytes": 60840, "decodedBytes": 12288, "checksum": 156672000, "elapsedTicks": 49736 },
+    "decodeStreamWithPreflight": { "managedAllocatedBytes": 8296040, "decodedBytes": 12288, "checksum": 156672000, "elapsedTicks": 74017 }
+  },
+  "typedMat": [
+    {
+      "targetFramework": "net8.0",
+      "iterations": 100,
+      "rows": 118,
+      "columns": 122,
+      "inputSha256": "70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275",
+      "rowAccessor": { "managedAllocatedBytes": 40, "elapsedTicks": 12308, "checksum": 10077200 },
+      "matView": { "managedAllocatedBytes": 10440, "elapsedTicks": 64319, "checksum": 10077200 },
+      "readOnlyMatView": { "managedAllocatedBytes": 12840, "elapsedTicks": 68807, "checksum": 10077200 }
+    },
+    {
+      "targetFramework": "net10.0",
+      "iterations": 100,
+      "rows": 118,
+      "columns": 122,
+      "inputSha256": "70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275",
+      "rowAccessor": { "managedAllocatedBytes": 40, "elapsedTicks": 11737, "checksum": 10077200 },
+      "matView": { "managedAllocatedBytes": 10440, "elapsedTicks": 69613, "checksum": 10077200 },
+      "readOnlyMatView": { "managedAllocatedBytes": 12840, "elapsedTicks": 69228, "checksum": 10077200 }
+    }
+  ],
+  "limitations": [
+    "Elapsed ticks are runner-specific regression evidence.",
+    "The runtime artifact predates the current source commit; it proves the benchmark harness against a factual OpenCV 5.0.0 runtime, not release-candidate byte identity.",
+    "The stream path intentionally includes full managed preflight buffering and therefore has higher managed allocation than byte-array and span paths."
+  ]
+}

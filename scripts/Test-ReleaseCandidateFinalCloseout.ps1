@@ -231,6 +231,8 @@ function Get-ExpectedEvidencePaths {
         "packaging/runtime/runtime-capabilities-json.schema.json",
         "packaging/codec/image-preflight-mutation-corpus.json",
         "packaging/codec/image-preflight-mutation-corpus.schema.json",
+        "packaging/performance/codec-typed-mat-benchmark-evidence.json",
+        "packaging/performance/codec-typed-mat-benchmark-evidence.schema.json",
         "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",

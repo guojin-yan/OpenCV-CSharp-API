@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/codec-typed-mat-benchmark-evidence.schema.json",
+  "title": "Codec and typed Mat benchmark evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "runner", "codec", "typedMat", "limitations" ],
+  "properties": {
+    "$schema": { "const": "codec-typed-mat-benchmark-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "measured" },
+    "runner": { "type": "object", "additionalProperties": false, "required": [ "os", "dotnet", "configuration", "nativeRuntimeArtifact", "nativeRuntimeArtifactSha256", "nativeRuntimePackage", "nativeRuntimePackageSha256" ], "properties": { "os": { "type": "string" }, "dotnet": { "type": "string" }, "configuration": { "const": "Release" }, "nativeRuntimeArtifact": { "type": "string" }, "nativeRuntimeArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "nativeRuntimePackage": { "type": "string" }, "nativeRuntimePackageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } } },
+    "codec": { "type": "object", "required": [ "targetFramework", "iterations", "inputSha256", "encodedSha256", "decodeByteArray", "decodeSpanWithPreflight", "decodeStreamWithPreflight" ], "properties": { "targetFramework": { "const": "net8.0" }, "iterations": { "const": 100 }, "inputSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "encodedSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "decodeByteArray": { "$ref": "#/$defs/metric" }, "decodeSpanWithPreflight": { "$ref": "#/$defs/metric" }, "decodeStreamWithPreflight": { "$ref": "#/$defs/metric" } } },
+    "typedMat": { "type": "array", "minItems": 2, "items": { "type": "object", "required": [ "targetFramework", "iterations", "inputSha256", "rowAccessor", "matView", "readOnlyMatView" ], "properties": { "targetFramework": { "enum": [ "net8.0", "net10.0" ] }, "iterations": { "const": 100 }, "inputSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "rowAccessor": { "$ref": "#/$defs/metric" }, "matView": { "$ref": "#/$defs/metric" }, "readOnlyMatView": { "$ref": "#/$defs/metric" } } } },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  },
+  "$defs": { "metric": { "type": "object", "required": [ "managedAllocatedBytes", "elapsedTicks", "checksum" ], "properties": { "managedAllocatedBytes": { "type": "integer", "minimum": 0 }, "elapsedTicks": { "type": "integer", "minimum": 0 }, "checksum": { "type": "integer" }, "decodedBytes": { "type": "integer", "minimum": 0 } } } }
+}

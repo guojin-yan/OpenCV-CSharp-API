@@ -20,10 +20,13 @@ $result = $jsonLines[0] | ConvertFrom-Json
 if ([string]$result.status -eq 'skipped') {
     if ([string]$result.reason -cne 'native-runtime-required') { throw 'Codec benchmark skipped for an undocumented reason.' }
 } elseif ([string]$result.status -eq 'measured') {
-    foreach ($property in @('iterations', 'inputBytes', 'inputSha256', 'byteArray', 'bufferWriter')) {
+    foreach ($property in @('iterations', 'inputBytes', 'inputSha256', 'encodedBytes', 'encodedSha256', 'encodeByteArray', 'encodeBufferWriter', 'decodeByteArray', 'decodeSpanWithPreflight', 'decodeStreamWithPreflight')) {
         if ($null -eq $result.$property) { throw "Measured codec benchmark is missing property: $property" }
     }
-    if ([int]$result.iterations -ne 100 -or [string]$result.inputSha256 -notmatch '^[0-9a-f]{64}$') { throw 'Measured codec benchmark identity drifted.' }
+    if ([int]$result.iterations -ne 100 -or [string]$result.inputSha256 -notmatch '^[0-9a-f]{64}$' -or [string]$result.encodedSha256 -notmatch '^[0-9a-f]{64}$') { throw 'Measured codec benchmark identity drifted.' }
+    foreach ($path in @('decodeByteArray', 'decodeSpanWithPreflight', 'decodeStreamWithPreflight')) {
+        if ($null -eq $result.$path.decodedBytes -or $null -eq $result.$path.checksum -or $null -eq $result.$path.managedAllocatedBytes) { throw "Measured codec benchmark decode path is incomplete: $path" }
+    }
 } else {
     throw "Codec benchmark returned an unknown status: $($result.status)"
 }
