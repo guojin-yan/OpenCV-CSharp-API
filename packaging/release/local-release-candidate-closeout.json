@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/2aeb20b3548e5564",
-  "SourceIdentity": "sha256:2aeb20b3548e5564ca30e0c191bb642c70c3d3f6cdea57d3d89fb275e3c7cfbf",
+  "CandidateId": "local-closeout/sha256/44ee8e0c54c854d5",
+  "SourceIdentity": "sha256:44ee8e0c54c854d5447a7e314ae469e7f13f1c11fae26b7f14a16e5b3174b35c",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1716,
-    "Sha256": "2aeb20b3548e5564ca30e0c191bb642c70c3d3f6cdea57d3d89fb275e3c7cfbf",
+    "FileCount": 1720,
+    "Sha256": "44ee8e0c54c854d5447a7e314ae469e7f13f1c11fae26b7f14a16e5b3174b35c",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -922,6 +922,21 @@
       "Length": 4062
     },
     {
+      "Path": "docs/articles/codec-benchmark-baseline.md",
+      "Sha256": "210b79dc7ad4b15e08ac2907b570cc141c40d11a02f72f5577695fc7849e2980",
+      "Length": 1499
+    },
+    {
+      "Path": "docs/articles/codec-buffer-and-owner-adr.md",
+      "Sha256": "d557d73669665e91e29baad6da0c34024bc161adaa4e2fb4bcbc09f28aeb1f87",
+      "Length": 4476
+    },
+    {
+      "Path": "docs/articles/codec-preflight-and-limits.md",
+      "Sha256": "0642efbaaf3d0d19658082a33283dddbd8c7bad29283c1e16a4e2294a441b6ac",
+      "Length": 18873
+    },
+    {
       "Path": "docs/articles/core-upstream-parity-guide.md",
       "Sha256": "45a4ee22cf1c856c6f8e97dd51b694c2ecbc0538ba54105211178eb13330a6bc",
       "Length": 15945
@@ -1153,8 +1168,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "0be13d0fe049bdd9039106411914cf0ec899e7630585213c52ce3fd0791155ad",
-      "Length": 15224
+      "Sha256": "ac9ce593a63af6b8515e5f19e40493a219d248a4c1a4e165d821089ebcea57b9",
+      "Length": 15310
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1423,8 +1438,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "2af4444d44e08b9bd12d7938e42e4812db43b8cad03db852deb4b111096ede50",
-      "Length": 65121
+      "Sha256": "e80817c14e25c781ebe8285728290136178e35630551fe1883cfca1e5b2ca195",
+      "Length": 65431
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1450,6 +1465,11 @@
       "Path": "scripts/Test-CapabilitiesJsonContract.ps1",
       "Sha256": "fc0d4fe850f88e0a83d3c478e78233eab85cb1f92ea0fee98d7dd9c4d720f99d",
       "Length": 2344
+    },
+    {
+      "Path": "scripts/Test-CodecBenchmarkHarness.ps1",
+      "Sha256": "e594cc692eb792844b92f0e105329e3c003b87181a723dd447d6f050b81c1361",
+      "Length": 1999
     },
     {
       "Path": "scripts/Test-CoreUpstreamMap.ps1",
@@ -1618,8 +1638,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "096e52c3e87bfd60e343a5ddec3f8dd8c4fa499106bbf894c171fbb1dee0bebb",
-      "Length": 62723
+      "Sha256": "d022ebc3f809d9c011017815146fd456ad13d37576cef9d49fd0009de22412e7",
+      "Length": 63033
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1925,6 +1945,16 @@
       "Path": "tools/Calib3DUpstreamMap/extract_calib3d.py",
       "Sha256": "57ad23663e5d3a30ce514d52954b1ce8f14981422cef350eb82899e8b0bf4a77",
       "Length": 5852
+    },
+    {
+      "Path": "tools/CodecBenchmark/CodecBenchmark.csproj",
+      "Sha256": "b54c10d1f3fb169bd6333d2531d806aff0a61eac84e9a2395230aa82f6699a8e",
+      "Length": 797
+    },
+    {
+      "Path": "tools/CodecBenchmark/Program.cs",
+      "Sha256": "4c4a81b3d91e7b9a8ffd22a3b88d166c90cf94f14c7db3ba93b2430ee54d2311",
+      "Length": 4735
     },
     {
       "Path": "tools/CoreUpstreamMap/CoreUpstreamMap.csproj",
