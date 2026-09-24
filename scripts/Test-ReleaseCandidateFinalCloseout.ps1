@@ -416,6 +416,7 @@ function Get-ExpectedEvidencePaths {
         "tools/CodecBenchmark/CodecBenchmark.csproj",
         "tools/CodecBenchmark/Program.cs",
         "scripts/Test-CodecBenchmarkHarness.ps1",
+        "scripts/Test-ImagePreflightMutationCorpus.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
         "scripts/Test-TypedMatBenchmarkHarness.ps1"

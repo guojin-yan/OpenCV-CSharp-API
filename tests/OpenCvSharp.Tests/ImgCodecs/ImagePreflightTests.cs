@@ -911,6 +911,80 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
         }
 
         [Fact]
+        public void IdentifyDeterministicMutationCorpusNeverEscapesParserOrPublishesInvalidFacts()
+        {
+            var fixtures = new[]
+            {
+                new { Name = "png", Bytes = CreateCompletePng(2, 3, 8, 2) },
+                new { Name = "jpeg", Bytes = new byte[] { 0xFF, 0xD8, 0xFF, 0xC0, 0x00, 0x0B, 0x08, 0x01, 0x20, 0x02, 0x80, 0x01, 0x01, 0x11, 0x00, 0xFF, 0xD9 } },
+                new { Name = "gif", Bytes = CreateAnimatedGif(2) },
+                new { Name = "apng", Bytes = CreateApng(3) },
+                new { Name = "webp", Bytes = CreateAnimatedWebp(4) },
+                new { Name = "bmp", Bytes = CreateBmpFixture(24, 0) },
+                new { Name = "pam", Bytes = Encoding.ASCII.GetBytes("P7\nWIDTH 2\nHEIGHT 3\nDEPTH 4\nMAXVAL 255\nENDHDR\n") },
+                new { Name = "sunraster", Bytes = CreateSunRaster(24) },
+                new { Name = "hdr", Bytes = CreateRadianceHdr(8, 2, true) },
+                new { Name = "exr", Bytes = CreateOpenExrHeader(2, 3, 3, 1) },
+                new { Name = "tiff", Bytes = CreateTiff(false, 2) },
+                new { Name = "bigtiff", Bytes = CreateBigTiff(false, 2) },
+                new { Name = "j2k", Bytes = CreateJpeg2000Codestream(2, 3, 8) },
+                new { Name = "jp2", Bytes = CreateJp2(CreateJpeg2000Codestream(2, 3, 8), true) }
+            };
+            byte[] mutationValues = { 0x00, 0x01, 0x7F, 0x80, 0xFF };
+            int mutationCount = 0;
+
+            foreach (var fixture in fixtures)
+            {
+                for (int offset = 0; offset < fixture.Bytes.Length; offset++)
+                {
+                    byte original = fixture.Bytes[offset];
+                    foreach (byte replacement in mutationValues)
+                    {
+                        if (original == replacement) continue;
+                        byte[] mutated = (byte[])fixture.Bytes.Clone();
+                        mutated[offset] = replacement;
+
+                        ImageIdentifyResult result;
+                        try
+                        {
+                            result = ImgCodecsCv2.Identify(mutated);
+                        }
+                        catch (Exception exception)
+                        {
+                            throw new InvalidDataException(
+                                fixture.Name + " mutation at offset " + offset + " escaped the managed preflight parser.",
+                                exception);
+                        }
+
+                        Assert.Equal(mutated.Length, result.InputBytes);
+                        Assert.InRange(result.BytesInspected, 0, mutated.Length);
+                        if (result.IsSizeKnown)
+                        {
+                            Assert.True(result.Width > 0, fixture.Name + " mutation at " + offset + " reported non-positive width");
+                            Assert.True(result.Height > 0, fixture.Name + " mutation at " + offset + " reported non-positive height");
+                        }
+                        if (result.IsFrameCountKnown) Assert.True(result.FrameCount > 0, fixture.Name + " mutation at " + offset + " reported non-positive frame count");
+                        if (result.IsMetadataSizeKnown) Assert.True(result.MetadataBytes >= 0, fixture.Name + " mutation at " + offset + " reported negative metadata bytes");
+                        if (result.IsIccProfileSizeKnown) Assert.True(result.IccProfileBytes >= 0, fixture.Name + " mutation at " + offset + " reported negative ICC bytes");
+                        if (result.IsBitDepthKnown) Assert.True(result.BitDepth > 0, fixture.Name + " mutation at " + offset + " reported non-positive bit depth");
+                        if (result.IsChannelCountKnown) Assert.True(result.ChannelCount > 0, fixture.Name + " mutation at " + offset + " reported non-positive channel count");
+                        if (result.IsCumulativePixelCountKnown) Assert.True(result.CumulativePixelCount > 0, fixture.Name + " mutation at " + offset + " reported non-positive cumulative pixels");
+                        if (result.IsEstimatedPixelBytesKnown)
+                        {
+                            Assert.True(result.IsCumulativePixelCountKnown && result.IsPixelFormatKnown,
+                                fixture.Name + " mutation at " + offset + " estimated storage without complete dimensions/format facts");
+                            Assert.True(result.EstimatedPixelBytes > 0, fixture.Name + " mutation at " + offset + " reported non-positive pixel storage");
+                        }
+
+                        mutationCount++;
+                    }
+                }
+            }
+
+            Assert.True(mutationCount > 1000, "The deterministic mutation corpus must exercise more than a thousand parser inputs.");
+        }
+
+        [Fact]
         public void IdentifyMalformedLengthAndDirectoryCorpusFailsClosed()
         {
             byte[] png = CreateCompletePng(2, 3, 8, 2);

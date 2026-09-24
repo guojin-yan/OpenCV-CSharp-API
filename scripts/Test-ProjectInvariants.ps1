@@ -306,6 +306,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Image preflight mutation corpus"
+        Script = Join-Path $repo "scripts/Test-ImagePreflightMutationCorpus.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Typed Mat benchmark harness"
         Script = Join-Path $repo "scripts/Test-TypedMatBenchmarkHarness.ps1"
         Arguments = @("-RepositoryRoot", $repo)
