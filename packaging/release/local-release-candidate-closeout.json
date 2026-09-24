@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ab4b3f963d0833b1",
-  "SourceIdentity": "sha256:ab4b3f963d0833b1dffc74cce500f84b1de06a7ed676d34857d5d362613f107f",
+  "CandidateId": "local-closeout/sha256/1b33270d2a3a02de",
+  "SourceIdentity": "sha256:1b33270d2a3a02dee7a34620e6abb3c60a2e31fc123a80860fb1c503c39427a9",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1764,
-    "Sha256": "ab4b3f963d0833b1dffc74cce500f84b1de06a7ed676d34857d5d362613f107f",
+    "FileCount": 1767,
+    "Sha256": "1b33270d2a3a02dee7a34620e6abb3c60a2e31fc123a80860fb1c503c39427a9",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -857,6 +857,16 @@
       "Length": 1929
     },
     {
+      "Path": "compatibility/v5.0.1-change-ledger.json",
+      "Sha256": "bffd4fa880bf7d28cee33d96e67cb18b192460606a71f1080d933434e9d96880",
+      "Length": 3569
+    },
+    {
+      "Path": "compatibility/v5.0.1-change-ledger.schema.json",
+      "Sha256": "00bbfde6cfa04bf91df305415b6c63c6e70e1b2a51c348fa7b0b43becef458e4",
+      "Length": 1862
+    },
+    {
       "Path": "compatibility/video-implemented-families.json",
       "Sha256": "b4e0daa9fc178393f250a4360e4e5b95871b6d61c1de3bce4cc31f1c5ac0dea7",
       "Length": 63575
@@ -1563,8 +1573,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "432507d6c1f115cb67583d0201acdd2f7d4618c2244c1fda02bb0fbe935d427f",
-      "Length": 68033
+      "Sha256": "40f57ed133ce8a3709f545b61d938990ca005da057f94642e4f17a11811435b6",
+      "Length": 68187
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1808,8 +1818,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "a45593d67d3021ecc7f9ff388db7be7d617c9961501a0c199ac78ef0ebe33b01",
-      "Length": 65635
+      "Sha256": "2279253462558a1e998681edca99cb28018ceef3fce874d51a01b22cb5d6669c",
+      "Length": 65789
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1875,6 +1885,11 @@
       "Path": "scripts/Test-TypedMatTargetFrameworks.ps1",
       "Sha256": "dabfadd0134efb689f9171a8cd2c2931f5d60e87dd3e05f438eb85435adde666",
       "Length": 1334
+    },
+    {
+      "Path": "scripts/Test-V501ChangeLedger.ps1",
+      "Sha256": "17645659c41a1becb07c778a7fbcc4f833a102e890f2b6e116528599cf361afb",
+      "Length": 1729
     },
     {
       "Path": "scripts/Test-VideoIORegistrySurface.ps1",

@@ -356,6 +356,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "v5.0.1 compatibility change ledger"
+        Script = Join-Path $repo "scripts/Test-V501ChangeLedger.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "API/ABI baseline contract"
         Script = Join-Path $repo "scripts/Test-ApiAbiBaselineContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)
