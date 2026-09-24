@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/8e88f60420de300a",
-  "SourceIdentity": "sha256:8e88f60420de300a1ea7f1538ed0eb6e94fd872903d57d57c38c073c6f0a020f",
+  "CandidateId": "local-closeout/sha256/356e04f03ac0bd5c",
+  "SourceIdentity": "sha256:356e04f03ac0bd5c64779bfcc5af0690bfdb6b414fd26cb45bb0d0a6dd50c75a",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1750,
-    "Sha256": "8e88f60420de300a1ea7f1538ed0eb6e94fd872903d57d57c38c073c6f0a020f",
+    "FileCount": 1753,
+    "Sha256": "356e04f03ac0bd5c64779bfcc5af0690bfdb6b414fd26cb45bb0d0a6dd50c75a",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -1232,6 +1232,16 @@
       "Length": 1593
     },
     {
+      "Path": "packaging/dnn/runtime-dnn-diagnostics-contract.json",
+      "Sha256": "bad88006507b1017ce1519fa6c34c0550222952d55a036f5939d3ed5b6b1b8a1",
+      "Length": 1663
+    },
+    {
+      "Path": "packaging/dnn/runtime-dnn-diagnostics-contract.schema.json",
+      "Sha256": "ae847be2c0fc45ad6244320eb68796bb806c264ff2b4149dd536de27988e505f",
+      "Length": 2991
+    },
+    {
       "Path": "packaging/performance/codec-typed-mat-benchmark-evidence.json",
       "Sha256": "f3bc2f33974bccef4c7c027b97ec248734d8a55f5d6ad03b46ddebbfbbfb7abd",
       "Length": 2950
@@ -1523,8 +1533,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "be1c11ed301bb0b7d1951284ba8ee9a7664db0a115efb97e3133ab09750533d4",
-      "Length": 67174
+      "Sha256": "205615246a2ae40d0ba7c95c8693b74fefea9b2af267af97198d5a9742d94ab7",
+      "Length": 67358
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1565,6 +1575,11 @@
       "Path": "scripts/Test-CoreUpstreamMap.ps1",
       "Sha256": "c0ef1815deb3e4dea561dd3b2777976a3e86b5bbd6b7b90415a84b5c1fa7e477",
       "Length": 1009
+    },
+    {
+      "Path": "scripts/Test-DnnDiagnosticsContract.ps1",
+      "Sha256": "787321642c1cc284ae3475f8c9fe3cfe08b1ab7aedf3fc0d16da2163e47e26ce",
+      "Length": 2316
     },
     {
       "Path": "scripts/Test-DnnUpstreamMap.ps1",
@@ -1743,8 +1758,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "7e37a48d7321e0c877db64468666cda15bf1201c12f400ee2c2d85c952461076",
-      "Length": 64776
+      "Sha256": "fc316bc94673cc76369db01812afd9102002393390d82dc4fafd366a992dbb49",
+      "Length": 64960
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",

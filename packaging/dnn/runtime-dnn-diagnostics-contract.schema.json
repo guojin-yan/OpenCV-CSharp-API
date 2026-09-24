@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/dnn/runtime-dnn-diagnostics-contract.schema.json",
+  "title": "DNN quantization and backend diagnostics contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "packageIdentityAllowed", "publicApiPromoted", "currentSurface", "states", "executionClaims", "quantizationFacts", "modelFailure", "ownership", "promotionGates", "rollback" ],
+  "properties": {
+    "$schema": { "const": "runtime-dnn-diagnostics-contract.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "design-only" },
+    "packageIdentityAllowed": { "const": false },
+    "publicApiPromoted": { "const": false },
+    "currentSurface": { "type": "string", "pattern": "OpenCvCapabilities.DnnBackends" },
+    "states": { "const": [ "Declared", "Available", "Verified", "ModelFailure" ] },
+    "executionClaims": { "type": "object", "additionalProperties": false, "required": [ "targetEnum", "backendTargetList", "modelExecution", "cpuFallback", "silentFallback" ], "properties": { "targetEnum": { "const": "request-only" }, "backendTargetList": { "const": "Available-only" }, "modelExecution": { "type": "string", "pattern": "Verified-only" }, "cpuFallback": { "const": "separate-outcome" }, "silentFallback": { "const": "forbidden" } } },
+    "quantizationFacts": { "type": "object", "additionalProperties": false, "required": [ "fields", "unknownAllowed", "inventedDefaults", "sourceAttribution", "perChannelRule", "mismatch" ], "properties": { "fields": { "const": [ "dtype", "scale", "zeroPoint", "signedness", "axis" ] }, "unknownAllowed": { "const": true }, "inventedDefaults": { "const": "forbidden" }, "sourceAttribution": { "const": [ "model", "preprocessing", "absent" ] }, "perChannelRule": { "type": "string", "pattern": "axis-and-length-check" }, "mismatch": { "type": "string", "pattern": "fail-closed" } } },
+    "modelFailure": { "type": "object", "additionalProperties": false, "required": [ "fields", "stages", "pathsAndEnvironment", "modelBytes" ], "properties": { "fields": { "const": [ "layerName", "layerId", "operationType", "stage", "reason" ] }, "stages": { "const": [ "load", "finalize", "forward" ] }, "pathsAndEnvironment": { "const": "excluded-from-default-report" }, "modelBytes": { "const": "excluded-from-default-report" } } },
+    "ownership": { "type": "object", "additionalProperties": false, "required": [ "stringsAndArrays", "retainedNativeObjects", "fixture" ], "properties": { "stringsAndArrays": { "type": "string", "pattern": "copied-owned" }, "retainedNativeObjects": { "const": "forbidden" }, "fixture": { "type": "string", "pattern": "pinned" } } },
+    "promotionGates": { "type": "array", "minItems": 6, "uniqueItems": true, "items": { "type": "string" } },
+    "rollback": { "type": "string", "pattern": "retain Net and OpenCvCapabilities" }
+  }
+}

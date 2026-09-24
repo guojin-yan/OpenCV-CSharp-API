@@ -1,0 +1,44 @@
+{
+  "$schema": "runtime-dnn-diagnostics-contract.schema.json",
+  "schemaVersion": 1,
+  "status": "design-only",
+  "packageIdentityAllowed": false,
+  "publicApiPromoted": false,
+  "currentSurface": "OpenCvCapabilities.DnnBackends and Net",
+  "states": [ "Declared", "Available", "Verified", "ModelFailure" ],
+  "executionClaims": {
+    "targetEnum": "request-only",
+    "backendTargetList": "Available-only",
+    "modelExecution": "Verified-only-with-fixed-fixture",
+    "cpuFallback": "separate-outcome",
+    "silentFallback": "forbidden"
+  },
+  "quantizationFacts": {
+    "fields": [ "dtype", "scale", "zeroPoint", "signedness", "axis" ],
+    "unknownAllowed": true,
+    "inventedDefaults": "forbidden",
+    "sourceAttribution": [ "model", "preprocessing", "absent" ],
+    "perChannelRule": "axis-and-length-check-required",
+    "mismatch": "fail-closed-before-result"
+  },
+  "modelFailure": {
+    "fields": [ "layerName", "layerId", "operationType", "stage", "reason" ],
+    "stages": [ "load", "finalize", "forward" ],
+    "pathsAndEnvironment": "excluded-from-default-report",
+    "modelBytes": "excluded-from-default-report"
+  },
+  "ownership": {
+    "stringsAndArrays": "copied-owned-results",
+    "retainedNativeObjects": "forbidden",
+    "fixture": "model-bytes-license-source-preprocessing-output-shape-and-hash-pinned"
+  },
+  "promotionGates": [
+    "CPU fixture",
+    "backend failure fixture",
+    "known quantized fixture with scale and zero-point",
+    "malformed metadata rejection",
+    "output ownership tests",
+    "every supported modern TFM evidence"
+  ],
+  "rollback": "retain Net and OpenCvCapabilities.DnnBackends; remove preview report"
+}
