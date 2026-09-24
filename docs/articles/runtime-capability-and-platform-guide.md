@@ -41,13 +41,19 @@ The field and state contract is published at
 
 `Modules` contains the four native modules required by the current wrapper boundary: `core`, `imgproc`, `imgcodecs`, and `videoio`. Their state is derived only from the native ABI and OpenCV version probes, so `Verified` means the required runtime identity was verified; it does not infer optional contrib modules, full/mini promotion, codec availability, or GPU execution.
 
+`OptionalModules` is a separate declared-only list of optional contrib/module names exposed by the managed wrapper. Every entry is `Declared`; this is an API discoverability list, not evidence that the selected full/mini/headless native profile contains the module. Availability and execution must come from profile-specific package and smoke evidence.
+
 `GuiBackend` performs the side-effect-free `HighGUI.GetCurrentUIFramework` probe. `Verified` records an active backend name, `Available` records that the HighGUI probe ran but reported no active backend, and `Unavailable` records a missing or unusable HighGUI runtime such as a mini package.
 
 `Codecs` reports deterministic writer probes for common extensions. Reader entries remain `Declared` until sample bytes are supplied because a reader probe cannot be proven from an extension alone; writer entries use OpenCV's extension capability query and may be `Verified` or `Unavailable`.
 
+`OptionalModules` is separate from `Modules`: it contains 25 managed wrapper/module names with `Declared` state only. It is useful for feature discovery, but it does not infer that a runtime profile contains the module or that the native implementation can execute.
+
 `NativeRuntime.State == Verified` 表示 wrapper ABI 和 OpenCV 版本探针都匹配。`VideoIOBackends` 描述 registry 条目和 built-in 状态，不代表摄像头、编解码器或设备一定可以打开。DNN 的 `Verified` 表示 backend 返回了 target 列表；生产支持声明仍需模型执行探针。
 
 `Modules` 包含当前 wrapper 边界必需的四个 native 模块：`core`、`imgproc`、`imgcodecs` 和 `videoio`。它们的状态只由 native ABI 与 OpenCV 版本探针推导，因此 `Verified` 表示 runtime 身份已验证；不会推断可选 contrib 模块、full/mini 晋升、编解码器可用性或 GPU 执行。
+
+`OptionalModules` 是 managed wrapper 暴露的可选 contrib/module 名称的独立声明列表。每个条目都保持 `Declared`；这只是能力可发现性列表，不是当前 full/mini/headless native profile 已包含该模块的证据。可用性和执行能力必须来自 profile-specific package 与 smoke evidence。
 
 `GuiBackend` 执行无副作用的 `HighGUI.GetCurrentUIFramework` 探针。`Verified` 表示返回了活动 backend 名称，`Available` 表示探针成功但没有活动 backend，`Unavailable` 表示 HighGUI runtime 缺失或不可用，例如 mini 包。
 

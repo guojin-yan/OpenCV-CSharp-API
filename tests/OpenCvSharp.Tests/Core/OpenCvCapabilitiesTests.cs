@@ -43,6 +43,9 @@ namespace JYPPX.OpenCvSharp.Tests.Core
                 capabilities.Codecs.Select(value => value.Extension).ToArray());
             Assert.Equal(new[] { "core", "imgproc", "imgcodecs", "videoio" },
                 capabilities.Modules.Select(value => value.Name).ToArray());
+            Assert.Equal(25, capabilities.OptionalModules.Count);
+            Assert.All(capabilities.OptionalModules, value => Assert.Equal(OpenCvCapabilityState.Declared, value.State));
+            Assert.Contains(capabilities.OptionalModules, value => value.Name == "ximgproc");
             Assert.Equal(capabilities.NativeRuntime.State, capabilities.Modules[0].State);
             Assert.Contains(capabilities.Accelerators, value => value.Name == "opencl-tapi" && value.State == OpenCvCapabilityState.Unknown);
             Assert.Contains(capabilities.Accelerators, value => value.Name == "cuda" && value.State == OpenCvCapabilityState.Unknown);
@@ -72,6 +75,7 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             Assert.StartsWith("{\"managedPackageVersion\":", first, StringComparison.Ordinal);
             Assert.Contains("\"accelerators\":[", first, StringComparison.Ordinal);
             Assert.Contains("\"modules\":[", first, StringComparison.Ordinal);
+            Assert.Contains("\"optionalModules\":[", first, StringComparison.Ordinal);
             Assert.Contains("\"guiBackend\":", first, StringComparison.Ordinal);
             Assert.Contains("\"codecs\":[", first, StringComparison.Ordinal);
             Assert.Contains("\"warnings\":[", first, StringComparison.Ordinal);

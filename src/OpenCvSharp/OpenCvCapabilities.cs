@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using JYPPX.OpenCvSharp.Core;
@@ -193,6 +194,14 @@ namespace JYPPX.OpenCvSharp
             ".png", ".jpg", ".webp", ".tiff", ".bmp", ".gif", ".exr", ".jp2"
         };
 
+        private static readonly string[] KnownOptionalModuleNames =
+        {
+            "xfeatures2d", "xobjdetect", "quality", "xphoto", "img_hash", "ximgproc", "optflow",
+            "bgsegm", "tracking", "face", "saliency", "plot", "shape", "line_descriptor",
+            "phase_unwrapping", "structured_light", "intensity_transform", "fuzzy", "hfs", "reg",
+            "surface_matching", "rapid", "alphamat", "bioinspired", "xstereo"
+        };
+
         private OpenCvCapabilities(
             OpenCvCapabilityProbe nativeRuntime,
             string nativeOpenCvVersion,
@@ -205,6 +214,7 @@ namespace JYPPX.OpenCvSharp
             string processArchitecture,
             string runtimeIdentifier,
             IReadOnlyList<OpenCvCapabilityProbe> modules,
+            IReadOnlyList<OpenCvCapabilityProbe> optionalModules,
             OpenCvCapabilityProbe guiBackend,
             IReadOnlyList<OpenCvCodecCapability> codecs,
             IReadOnlyList<OpenCvVideoBackendCapability> videoIoBackends,
@@ -224,6 +234,7 @@ namespace JYPPX.OpenCvSharp
             ProcessArchitecture = processArchitecture ?? string.Empty;
             RuntimeIdentifier = runtimeIdentifier ?? string.Empty;
             Modules = modules ?? new ReadOnlyCollection<OpenCvCapabilityProbe>(Array.Empty<OpenCvCapabilityProbe>());
+            OptionalModules = optionalModules ?? new ReadOnlyCollection<OpenCvCapabilityProbe>(Array.Empty<OpenCvCapabilityProbe>());
             GuiBackend = guiBackend;
             Codecs = codecs ?? new ReadOnlyCollection<OpenCvCodecCapability>(Array.Empty<OpenCvCodecCapability>());
             NativeOpenCvVersion = nativeOpenCvVersion ?? string.Empty;
@@ -333,6 +344,7 @@ namespace JYPPX.OpenCvSharp
                 CreateRequiredModuleProbe("imgcodecs", nativeState),
                 CreateRequiredModuleProbe("videoio", nativeState)
             });
+            var optionalModules = new ReadOnlyCollection<OpenCvCapabilityProbe>(CreateOptionalModuleProbes().ToArray());
             OpenCvCapabilityProbe guiBackend = ProbeGuiBackend(warnings);
             IReadOnlyList<OpenCvCodecCapability> codecs = ProbeCodecs(warnings);
 
@@ -348,6 +360,7 @@ namespace JYPPX.OpenCvSharp
                 GetProcessArchitecture(),
                 GetRuntimeIdentifier(),
                 modules,
+                optionalModules,
                 guiBackend,
                 codecs,
                 videoBackends,
@@ -388,6 +401,12 @@ namespace JYPPX.OpenCvSharp
 
         /// <summary>Gets the required native module probes represented by this wrapper.</summary>
         public IReadOnlyList<OpenCvCapabilityProbe> Modules { get; }
+
+        /// <summary>
+        /// Gets optional contrib/module names declared by the managed wrapper surface.
+        /// Declared does not imply that the selected native profile contains or can execute the module.
+        /// </summary>
+        public IReadOnlyList<OpenCvCapabilityProbe> OptionalModules { get; }
 
         /// <summary>Gets the side-effect-free HighGUI backend probe.</summary>
         public OpenCvCapabilityProbe GuiBackend { get; }
@@ -450,9 +469,9 @@ namespace JYPPX.OpenCvSharp
             AppendJsonProperty(builder, "runtimeIdentifier", RuntimeIdentifier, true);
             AppendJsonProbeProperty(builder, "nativeRuntime", NativeRuntime, true);
             AppendJsonProperty(builder, "nativeOpenCvVersion", NativeOpenCvVersion, true);
-            AppendJsonProperty(builder, "loadedNativeAbiVersion", LoadedNativeAbiVersion, true);
+            AppendJsonProperty(builder, "loadedNativeAbiVersion", LoadedNativeAbiVersion, true, false);
             AppendJsonProperty(builder, "cpuFeaturesLine", CpuFeaturesLine, true);
-            AppendJsonProperty(builder, "logicalCpuCount", LogicalCpuCount, true);
+            AppendJsonProperty(builder, "logicalCpuCount", LogicalCpuCount, true, false);
             AppendJsonProperty(builder, "useOptimized", UseOptimized, true);
 
             AppendJsonArrayStart(builder, "modules", true);
@@ -460,6 +479,14 @@ namespace JYPPX.OpenCvSharp
             {
                 if (i > 0) builder.Append(',');
                 AppendJsonProbe(builder, Modules[i]);
+            }
+            builder.Append(']');
+
+            AppendJsonArrayStart(builder, "optionalModules", true);
+            for (int i = 0; i < OptionalModules.Count; i++)
+            {
+                if (i > 0) builder.Append(',');
+                AppendJsonProbe(builder, OptionalModules[i]);
             }
             builder.Append(']');
             AppendJsonProbeProperty(builder, "guiBackend", GuiBackend, true);
@@ -635,6 +662,17 @@ namespace JYPPX.OpenCvSharp
             }
 
             return new OpenCvCapabilityProbe(name, state, reason);
+        }
+
+        private static IEnumerable<OpenCvCapabilityProbe> CreateOptionalModuleProbes()
+        {
+            for (int i = 0; i < KnownOptionalModuleNames.Length; i++)
+            {
+                yield return new OpenCvCapabilityProbe(
+                    KnownOptionalModuleNames[i],
+                    OpenCvCapabilityState.Declared,
+                    "Managed wrapper surface declares this optional module; native profile availability is not inferred.");
+            }
         }
 
         private static OpenCvCapabilityProbe ProbeGuiBackend(List<string> warnings)

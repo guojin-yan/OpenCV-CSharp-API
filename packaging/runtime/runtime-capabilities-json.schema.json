@@ -4,7 +4,7 @@
   "title": "OpenCvCapabilities deterministic JSON snapshot",
   "type": "object",
   "additionalProperties": false,
-  "required": [ "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "targetFramework", "processBitness", "operatingSystem", "operatingSystemDescription", "runtimeFrameworkDescription", "processArchitecture", "runtimeIdentifier", "nativeRuntime", "nativeOpenCvVersion", "loadedNativeAbiVersion", "cpuFeaturesLine", "logicalCpuCount", "useOptimized", "modules", "guiBackend", "codecs", "videoIoBackends", "dnnBackends", "accelerators", "warnings" ],
+  "required": [ "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "targetFramework", "processBitness", "operatingSystem", "operatingSystemDescription", "runtimeFrameworkDescription", "processArchitecture", "runtimeIdentifier", "nativeRuntime", "nativeOpenCvVersion", "loadedNativeAbiVersion", "cpuFeaturesLine", "logicalCpuCount", "useOptimized", "modules", "optionalModules", "guiBackend", "codecs", "videoIoBackends", "dnnBackends", "accelerators", "warnings" ],
   "properties": {
     "managedPackageVersion": { "type": "string" },
     "openCvVersion": { "type": "string" },
@@ -23,6 +23,7 @@
     "logicalCpuCount": { "type": [ "integer", "null" ] },
     "useOptimized": { "type": [ "boolean", "null" ] },
     "modules": { "type": "array", "minItems": 4, "items": { "$ref": "#/$defs/probe" } },
+    "optionalModules": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/probe" } },
     "guiBackend": { "$ref": "#/$defs/probe" },
     "codecs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/codec" } },
     "videoIoBackends": { "type": "array", "items": { "$ref": "#/$defs/videoIo" } },
