@@ -1,5 +1,6 @@
 using System;
 using System.Buffers;
+using System.Collections.Generic;
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.ImgCodecs;
 using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
@@ -101,6 +102,26 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             }
         }
 
+        [Fact]
+        public void ImEncodeToWritesOneExactCallerOwnedSegmentWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat source = new Mat(2, 2, MatType.CV_8UC1))
+            {
+                source.CopyFrom(new byte[] { 1, 2, 3, 4 });
+                byte[] expected = ImgCodecsCv2.ImEncode(".png", source);
+                var writer = new ExactSegmentWriter();
+
+                ImgCodecsCv2.ImEncodeTo(".png", source, writer);
+
+                Assert.Equal(1, writer.GetSpanCalls);
+                Assert.Equal(1, writer.AdvanceCalls);
+                Assert.Equal(expected, writer.ToArray());
+                Assert.Equal(expected.Length, writer.LastRequestedLength);
+            }
+        }
+
         private sealed class TrackingWriter : IBufferWriter<byte>
         {
             private readonly ArrayBufferWriter<byte> inner = new ArrayBufferWriter<byte>();
@@ -140,6 +161,70 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             {
                 GetSpanCalls++;
                 return storage.AsSpan();
+            }
+        }
+
+        private sealed class ExactSegmentWriter : IBufferWriter<byte>
+        {
+            private readonly List<byte[]> segments = new List<byte[]>();
+            private byte[] current = Array.Empty<byte>();
+
+            public int GetSpanCalls { get; private set; }
+            public int AdvanceCalls { get; private set; }
+            public int LastRequestedLength { get; private set; }
+
+            public void Advance(int count)
+            {
+                AdvanceCalls++;
+                if (count < 0 || count > current.Length)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(count));
+                }
+
+                if (count != current.Length)
+                {
+                    var committed = new byte[count];
+                    Buffer.BlockCopy(current, 0, committed, 0, count);
+                    segments.Add(committed);
+                }
+                else
+                {
+                    segments.Add(current);
+                }
+            }
+
+            public Memory<byte> GetMemory(int sizeHint = 0)
+            {
+                GetSpanCalls++;
+                LastRequestedLength = sizeHint;
+                current = new byte[Math.Max(1, sizeHint)];
+                return current;
+            }
+
+            public Span<byte> GetSpan(int sizeHint = 0)
+            {
+                GetSpanCalls++;
+                LastRequestedLength = sizeHint;
+                current = new byte[Math.Max(1, sizeHint)];
+                return current;
+            }
+
+            public byte[] ToArray()
+            {
+                int length = 0;
+                for (int index = 0; index < segments.Count; index++)
+                {
+                    length += segments[index].Length;
+                }
+
+                var result = new byte[length];
+                int offset = 0;
+                for (int index = 0; index < segments.Count; index++)
+                {
+                    Buffer.BlockCopy(segments[index], 0, result, offset, segments[index].Length);
+                    offset += segments[index].Length;
+                }
+                return result;
             }
         }
 #endif

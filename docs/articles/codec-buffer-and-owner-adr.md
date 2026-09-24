@@ -29,6 +29,12 @@ This record defines the boundary for encoded bytes, streams, `IBufferWriter<byte
 - Decode tests cover unknown format, unknown dimensions, malformed headers, cumulative pixel overflow, metadata/ICC limits, and encoded pixel storage overflow.
 - Every native buffer and partially constructed managed result is released on success and failure.
 
+## Current preview evidence
+
+`tests/OpenCvSharp.Tests/ImgCodecs/Cv2InteropTests.cs` now includes an exact caller-owned segment writer. It verifies one `GetSpan`/`Advance` pair, the requested payload length, and byte-for-byte equality with the compatibility `byte[]` encoder on both `net8.0` and `net10.0`. The writer remains preview-only; the allocation comparison and full native runtime evidence are still required for promotion.
+
+当前 preview 已加入 exact caller-owned segment writer 测试：验证一次 `GetSpan`/`Advance`、请求长度以及与兼容 `byte[]` encoder 的逐字节一致性，并在 `net8.0` 与 `net10.0` 通过。writer 仍保持 preview；晋升前还需要 allocation 对比和完整 native runtime evidence。
+
 ## Promotion gate
 
 The writer overload remains preview or internal until it has focused tests on every supported modern TFM, a fixed-input allocation comparison against `byte[]`, and owner/lifetime review. No stable API claim is made from a benchmark on one runner. The existing byte-array API remains the rollback path.

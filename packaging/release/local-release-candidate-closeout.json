@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/1e1a71fa36f2119c",
-  "SourceIdentity": "sha256:1e1a71fa36f2119cda1be51841c25f369b8fbe426ab4f304c9f94bd0f04042fa",
+  "CandidateId": "local-closeout/sha256/cd60d2ed291ebc33",
+  "SourceIdentity": "sha256:cd60d2ed291ebc33aa3e7c0728d0e47bd84f673e1cbf6c62fe60b1501b1acab2",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
     "FileCount": 1735,
-    "Sha256": "1e1a71fa36f2119cda1be51841c25f369b8fbe426ab4f304c9f94bd0f04042fa",
+    "Sha256": "cd60d2ed291ebc33aa3e7c0728d0e47bd84f673e1cbf6c62fe60b1501b1acab2",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -933,8 +933,8 @@
     },
     {
       "Path": "docs/articles/codec-buffer-and-owner-adr.md",
-      "Sha256": "d557d73669665e91e29baad6da0c34024bc161adaa4e2fb4bcbc09f28aeb1f87",
-      "Length": 4476
+      "Sha256": "8bb790ac7471f7288bdca874cc05a0fbec35fa19a35f7d4203de56efed63f175",
+      "Length": 5221
     },
     {
       "Path": "docs/articles/codec-buffer-lease-adr.md",
@@ -1473,8 +1473,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "be9f13dc4c4a21da8ae14ff870abad9684bf66cd451edee77ac4fe74c119f1bd",
-      "Length": 66209
+      "Sha256": "818d349c9b2508d3985197287dc7deecbb9662a5919cfa6ea05924bc6741f247",
+      "Length": 66273
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1678,8 +1678,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "0f8d98dca2dc2c96bdeaa9d5af3029981bd34e727aed21421885bc18932c7d6b",
-      "Length": 63811
+      "Sha256": "c071018198e1f8a1515bc4ab7ac3a12f048aedac02951ceab132082516851c51",
+      "Length": 63875
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1970,6 +1970,11 @@
       "Path": "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
       "Sha256": "ee01db35cf9ad36f1a79a2682b14deb2c03f1f8832256a97f057e0796b6ddb88",
       "Length": 2689
+    },
+    {
+      "Path": "tests/OpenCvSharp.Tests/ImgCodecs/Cv2InteropTests.cs",
+      "Sha256": "013398154313b4b051002bc0f4901fcef4e45b457279bde11a2154f3d7575e06",
+      "Length": 14089
     },
     {
       "Path": "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",

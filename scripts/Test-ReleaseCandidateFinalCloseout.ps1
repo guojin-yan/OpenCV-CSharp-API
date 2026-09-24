@@ -368,6 +368,7 @@ function Get-ExpectedEvidencePaths {
         "tests/OpenCvSharp.Tests/HighGui/HighGuiTests.cs",
         "tests/OpenCvSharp.Tests/ImgProc/ImgProcRemainingParityTests.cs",
         "tests/OpenCvSharp.Tests/Core/CodecBufferLeaseTests.cs",
+        "tests/OpenCvSharp.Tests/ImgCodecs/Cv2InteropTests.cs",
         "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
         "tools/Calib3DUpstreamMap/Program.cs",
         "tools/Calib3DUpstreamMap/extract_calib3d.py",
