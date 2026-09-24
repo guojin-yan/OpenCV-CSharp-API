@@ -158,6 +158,8 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
             {
                 ImageIdentifyResult result = ImgCodecsCv2.Identify(stream, exactBudget);
                 Assert.True(result.IsPixelFormatKnown);
+                Assert.True(result.IsEstimatedPixelBytesKnown);
+                Assert.Equal(48, result.EstimatedPixelBytes);
                 Assert.Equal(48, result.CumulativePixelCount * 2L * result.ChannelCount);
             }
         }

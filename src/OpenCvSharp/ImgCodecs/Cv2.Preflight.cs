@@ -151,19 +151,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
             if (result.IsCumulativePixelCountKnown && result.IsPixelFormatKnown)
             {
-                long bytesPerSample = (result.BitDepth + 7L) / 8L;
-                try
+                if (!result.IsEstimatedPixelBytesKnown || result.EstimatedPixelBytes > options.MaxEstimatedPixelBytes)
                 {
-                    long estimatedPixelBytes = checked(
-                        checked(result.CumulativePixelCount * bytesPerSample) * result.ChannelCount);
-                    if (estimatedPixelBytes > options.MaxEstimatedPixelBytes)
-                    {
-                        throw new InvalidDataException("Estimated encoded pixel storage exceeds the configured limit.");
-                    }
-                }
-                catch (OverflowException)
-                {
-                    throw new InvalidDataException("Estimated encoded pixel storage exceeds the supported range.");
+                    throw new InvalidDataException("Estimated encoded pixel storage exceeds the configured limit or supported range.");
                 }
             }
 
@@ -350,10 +340,37 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
         private static ImageIdentifyResult Result(string format, int width, int height, bool sizeKnown, int frames, bool frameCountKnown,
             int inputLength, MetadataFacts metadata, PixelFacts pixels, long cumulativePixelCount, bool cumulativePixelCountKnown)
         {
+            EstimatedPixelBytesFacts estimatedPixelBytes = GetEstimatedPixelBytes(cumulativePixelCount, cumulativePixelCountKnown, pixels);
             return new ImageIdentifyResult(format, width, height, sizeKnown, frames, frameCountKnown, inputLength, inputLength,
                 metadata.MetadataBytes, metadata.MetadataSizeKnown, metadata.IccProfileBytes, metadata.IccProfileSizeKnown,
                 pixels.BitDepth, pixels.BitDepthKnown, pixels.Channels, pixels.ChannelsKnown,
-                cumulativePixelCount, cumulativePixelCountKnown);
+                cumulativePixelCount, cumulativePixelCountKnown,
+                estimatedPixelBytes.Value, estimatedPixelBytes.Known);
+        }
+
+        private static EstimatedPixelBytesFacts GetEstimatedPixelBytes(long cumulativePixelCount, bool cumulativePixelCountKnown, PixelFacts pixels)
+        {
+            if (!cumulativePixelCountKnown || !pixels.BitDepthKnown || !pixels.ChannelsKnown)
+            {
+                return new EstimatedPixelBytesFacts();
+            }
+
+            try
+            {
+                long bytesPerSample = (pixels.BitDepth + 7L) / 8L;
+                long estimated = checked(checked(cumulativePixelCount * bytesPerSample) * pixels.Channels);
+                return new EstimatedPixelBytesFacts { Value = estimated, Known = true };
+            }
+            catch (OverflowException)
+            {
+                return new EstimatedPixelBytesFacts();
+            }
+        }
+
+        private struct EstimatedPixelBytesFacts
+        {
+            public long Value;
+            public bool Known;
         }
 
         private struct PixelFacts

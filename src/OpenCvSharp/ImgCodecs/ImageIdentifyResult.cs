@@ -26,7 +26,9 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             int channelCount,
             bool channelCountKnown,
             long cumulativePixelCount,
-            bool cumulativePixelCountKnown)
+            bool cumulativePixelCountKnown,
+            long estimatedPixelBytes,
+            bool estimatedPixelBytesKnown)
         {
             Format = format ?? string.Empty;
             Width = width;
@@ -46,6 +48,8 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
             IsChannelCountKnown = channelCountKnown;
             CumulativePixelCount = cumulativePixelCount;
             IsCumulativePixelCountKnown = cumulativePixelCountKnown;
+            EstimatedPixelBytes = estimatedPixelBytes;
+            IsEstimatedPixelBytesKnown = estimatedPixelBytesKnown;
         }
 
         /// <summary>Gets a lowercase format name, or <c>unknown</c>.</summary>
@@ -107,6 +111,12 @@ namespace JYPPX.OpenCvSharp.ImgCodecs
 
         /// <summary>Gets whether the cumulative frame/page pixel count was proven by the header.</summary>
         public bool IsCumulativePixelCountKnown { get; }
+
+        /// <summary>Gets the proven encoded pixel storage estimate in bytes.</summary>
+        public long EstimatedPixelBytes { get; }
+
+        /// <summary>Gets whether encoded pixel storage was proven from dimensions, frames, depth, and channels.</summary>
+        public bool IsEstimatedPixelBytesKnown { get; }
 
         /// <inheritdoc />
         public override string ToString()
