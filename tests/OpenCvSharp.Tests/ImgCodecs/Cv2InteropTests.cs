@@ -93,6 +93,11 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 Assert.Throws<InvalidOperationException>(() => ImgCodecsCv2.ImEncodeTo(".png", source, advanceFailure));
                 Assert.Equal(1, advanceFailure.GetSpanCalls);
                 Assert.Equal(1, advanceFailure.AdvanceCalls);
+
+                var undersized = new UndersizedWriter();
+                Assert.Throws<InvalidOperationException>(() => ImgCodecsCv2.ImEncodeTo(".png", source, undersized));
+                Assert.Equal(1, undersized.GetSpanCalls);
+                Assert.Equal(0, undersized.AdvanceCalls);
             }
         }
 
@@ -120,6 +125,21 @@ namespace JYPPX.OpenCvSharp.Tests.ImgCodecs
                 GetSpanCalls++;
                 if (ThrowFromGetSpan) throw new InvalidOperationException("get span failure");
                 return inner.GetSpan(sizeHint);
+            }
+        }
+
+        private sealed class UndersizedWriter : IBufferWriter<byte>
+        {
+            private readonly byte[] storage = new byte[1];
+            public int GetSpanCalls { get; private set; }
+            public int AdvanceCalls { get; private set; }
+
+            public void Advance(int count) { AdvanceCalls++; }
+            public Memory<byte> GetMemory(int sizeHint = 0) { return storage.AsMemory(); }
+            public Span<byte> GetSpan(int sizeHint = 0)
+            {
+                GetSpanCalls++;
+                return storage.AsSpan();
             }
         }
 #endif
