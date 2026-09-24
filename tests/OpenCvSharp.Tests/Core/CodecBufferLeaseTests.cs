@@ -85,6 +85,29 @@ namespace JYPPX.OpenCvSharp.Tests.Core
         }
 
         [Fact]
+        public void NativePointerLeaseRequiresOwnerCallbackAndReleasesOnce()
+        {
+            int releaseCount = 0;
+            CodecBufferLease lease = CodecBufferLease.FromNativePointer(
+                new IntPtr(1),
+                16,
+                2,
+                8,
+                4,
+                () => releaseCount++);
+
+            Assert.Equal(new IntPtr(1), lease.Data);
+            Assert.Equal(16, lease.LengthBytes);
+            lease.Dispose();
+            lease.Dispose();
+            Assert.Equal(1, releaseCount);
+
+            Assert.Throws<ArgumentNullException>(() => CodecBufferLease.FromNativePointer(IntPtr.Zero, 16, 1, 4, 4, () => { }));
+            Assert.Throws<ArgumentNullException>(() => CodecBufferLease.FromNativePointer(new IntPtr(1), 16, 1, 4, 4, null!));
+            Assert.Throws<ArgumentException>(() => CodecBufferLease.FromNativePointer(new IntPtr(1), 4, 2, 4, 4, () => { }));
+        }
+
+        [Fact]
         public void PinAndReleaseStressKeepsExactlyOneCallbackPerLease()
         {
             const int iterations = 256;

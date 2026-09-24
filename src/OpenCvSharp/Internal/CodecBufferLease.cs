@@ -10,7 +10,7 @@ namespace JYPPX.OpenCvSharp.Internal
     internal sealed class CodecBufferLease : IDisposable
     {
         private readonly object sync = new object();
-        private readonly GCHandle pinnedOwner;
+        private readonly GCHandle? pinnedOwner;
         private readonly Action? releaseCallback;
         private readonly IntPtr data;
         private readonly long lengthBytes;
@@ -23,7 +23,7 @@ namespace JYPPX.OpenCvSharp.Internal
         private Exception? releaseException;
 
         private CodecBufferLease(
-            GCHandle pinnedOwner,
+            GCHandle? pinnedOwner,
             IntPtr data,
             long lengthBytes,
             long stepBytes,
@@ -75,6 +75,31 @@ namespace JYPPX.OpenCvSharp.Internal
                 }
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Wraps an explicitly owned native pointer for a bounded operation.
+        /// The release callback owns the native memory and is invoked once.
+        /// </summary>
+        internal static CodecBufferLease FromNativePointer(
+            IntPtr nativePointer,
+            long lengthBytes,
+            int rows,
+            long stepBytes,
+            long rowPayloadBytes,
+            Action releaseCallback)
+        {
+            if (nativePointer == IntPtr.Zero)
+            {
+                throw new ArgumentNullException(nameof(nativePointer));
+            }
+            if (releaseCallback == null)
+            {
+                throw new ArgumentNullException(nameof(releaseCallback));
+            }
+
+            ValidateLayout(lengthBytes, rows, stepBytes, rowPayloadBytes, nameof(lengthBytes));
+            return new CodecBufferLease(null, nativePointer, lengthBytes, stepBytes, rows, rowPayloadBytes, releaseCallback);
         }
 
         /// <summary>Gets the first row pointer while the lease is usable.</summary>
@@ -220,10 +245,37 @@ namespace JYPPX.OpenCvSharp.Internal
             }
 
             long availableBytes = checked((long)owner.LongLength - byteOffset);
+            ValidateLayout(availableBytes, rows, stepBytes, rowPayloadBytes, nameof(owner));
+        }
+
+        private static void ValidateLayout(
+            long availableBytes,
+            int rows,
+            long stepBytes,
+            long rowPayloadBytes,
+            string ownerParameterName)
+        {
+            if (availableBytes <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(availableBytes));
+            }
+            if (rows <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rows));
+            }
+            if (rowPayloadBytes <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rowPayloadBytes));
+            }
+            if (stepBytes < rowPayloadBytes)
+            {
+                throw new ArgumentOutOfRangeException(nameof(stepBytes), "The row stride cannot be smaller than the logical row payload.");
+            }
+
             long finalRowEnd = checked(checked((long)(rows - 1) * stepBytes) + rowPayloadBytes);
             if (finalRowEnd > availableBytes)
             {
-                throw new ArgumentException("The pinned owner is shorter than the requested rows and stride.", nameof(owner));
+                throw new ArgumentException("The owner is shorter than the requested rows and stride.", ownerParameterName);
             }
         }
 
@@ -263,9 +315,10 @@ namespace JYPPX.OpenCvSharp.Internal
             }
 
             released = true;
-            if (pinnedOwner.IsAllocated)
+            if (pinnedOwner.HasValue && pinnedOwner.Value.IsAllocated)
             {
-                pinnedOwner.Free();
+                GCHandle handle = pinnedOwner.Value;
+                handle.Free();
             }
 
             if (releaseCallback != null)
