@@ -212,6 +212,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/videoio-upstream-parity-guide.md",
         "docs/articles/async-video-owner-adr.md",
         "docs/articles/v501-modern-api-preview-guide.md",
+        "docs/articles/video-dnn-benchmark-baseline.md",
         "docs/articles/native-aot-trim-single-file-adr.md",
         "nuget/logo.jpg",
         "packaging/runtime/android-runtime-evidence.json",

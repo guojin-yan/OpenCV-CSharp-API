@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ab676a3c438eded7",
-  "SourceIdentity": "sha256:ab676a3c438eded7d5c6a914090cf7de485a7996c876de320c6b926ebf5147ed",
+  "CandidateId": "local-closeout/sha256/0f7172a06b015c8b",
+  "SourceIdentity": "sha256:0f7172a06b015c8bfe08bb4b116f7b9ce98d09421d91028dad98a5ee9f794e9d",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1767,
-    "Sha256": "ab676a3c438eded7d5c6a914090cf7de485a7996c876de320c6b926ebf5147ed",
+    "FileCount": 1774,
+    "Sha256": "0f7172a06b015c8bfe08bb4b116f7b9ce98d09421d91028dad98a5ee9f794e9d",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "b913ffd151060032660d4459bbba447844248bc4c47f555c51f6a604f3befa46",
-      "Length": 3635
+      "Sha256": "d353eb07e68aaa207c0dc832f7dd145d7aaa2c85a77427344e8022f361239c5f",
+      "Length": 4260
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1152,6 +1152,11 @@
       "Length": 7496
     },
     {
+      "Path": "docs/articles/video-dnn-benchmark-baseline.md",
+      "Sha256": "a57d5f4bc6eb3e4a93755a7c3a434e940e8b8aed9bf4478f4fcd7f35186c46d8",
+      "Length": 1515
+    },
+    {
       "Path": "docs/articles/video-upstream-parity-guide.md",
       "Sha256": "ea3b415a4df91ddeb6b1335c5d02753045b891efe28d46fb8716d85047207255",
       "Length": 7402
@@ -1223,8 +1228,8 @@
     },
     {
       "Path": "docs/toc.yml",
-      "Sha256": "3ba3e7e62f7ac7825773dfcca8857d7dd3c13d173682e68ddb08c7d625bc6b6a",
-      "Length": 16264
+      "Sha256": "b70e2967ca3db3b05ecaaa23d62a25007c47524218c0edaae9ce395a5b45b53f",
+      "Length": 16362
     },
     {
       "Path": "nuget/logo.jpg",
@@ -1300,6 +1305,16 @@
       "Path": "packaging/performance/typed-mat-target-framework-evidence.schema.json",
       "Sha256": "a279d07dc64c37052fa360070ad30df84d2dcebb781f687b69765d537fc799b0",
       "Length": 1284
+    },
+    {
+      "Path": "packaging/performance/video-dnn-benchmark-evidence.json",
+      "Sha256": "d725cece6e15e7349782691f35021c77a5a863badc1c6c51d67506b0918f18ab",
+      "Length": 4533
+    },
+    {
+      "Path": "packaging/performance/video-dnn-benchmark-evidence.schema.json",
+      "Sha256": "66bbbad35f55467bc24be103713b461b5bcaa6a24ad070cafa750ad1dbfe8fcf",
+      "Length": 4144
     },
     {
       "Path": "packaging/platform/domestic-platform-certification-matrix.json",
@@ -1573,8 +1588,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "40f57ed133ce8a3709f545b61d938990ca005da057f94642e4f17a11811435b6",
-      "Length": 68187
+      "Sha256": "a299496dc24e4bb09c84bb359dbd41fe7bc2bf3bba2b8db91247d96b6b448951",
+      "Length": 68598
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1818,8 +1833,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b11e7dff8db4070caa7a75fa8e8f1717a11a57eb418616b8e8750ad565af0429",
-      "Length": 65789
+      "Sha256": "faa6d6a2bc36610535acc09b64bc35bd0bd2e94f8f78344c47c98d15bc6a361b",
+      "Length": 66200
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1867,6 +1882,11 @@
       "Length": 9121
     },
     {
+      "Path": "scripts/Test-ScenarioBenchmarkHarness.ps1",
+      "Sha256": "738e41f4bc5109d59c0a598f7b3ade1e00537848d5fafd065ee6e6a9e3853219",
+      "Length": 3279
+    },
+    {
       "Path": "scripts/Test-StitchingUpstreamMap.ps1",
       "Sha256": "811b58855beb765f1311f1b141df4d490fef526869334fa2bb0903dd33b92ead",
       "Length": 20042
@@ -1890,6 +1910,11 @@
       "Path": "scripts/Test-V501ChangeLedger.ps1",
       "Sha256": "17645659c41a1becb07c778a7fbcc4f833a102e890f2b6e116528599cf361afb",
       "Length": 1729
+    },
+    {
+      "Path": "scripts/Test-VideoDnnBenchmarkEvidence.ps1",
+      "Sha256": "71204010c60626973a7909e29f16d4d42a14571b81406d096c87be87f66bdc1f",
+      "Length": 2383
     },
     {
       "Path": "scripts/Test-VideoIORegistrySurface.ps1",
@@ -2335,6 +2360,16 @@
       "Path": "tools/PhotoUpstreamMap/extract_photo.py",
       "Sha256": "e9209717d8da17d60949ee8e2188a065e8d0bc39450feed2e0de7bbfff2458aa",
       "Length": 6200
+    },
+    {
+      "Path": "tools/ScenarioBenchmark/Program.cs",
+      "Sha256": "10260a6bc009aa1076a1b78848a67dc592ec88225ff1a78aa2ffd042863159c6",
+      "Length": 12697
+    },
+    {
+      "Path": "tools/ScenarioBenchmark/ScenarioBenchmark.csproj",
+      "Sha256": "a197ca7b8f2d8862876420728b7fc53d7e554e398f0359162b715de52fbf4983",
+      "Length": 994
     },
     {
       "Path": "tools/StitchingUpstreamMap/Program.cs",
