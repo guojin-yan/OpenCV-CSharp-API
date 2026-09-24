@@ -29,6 +29,15 @@ ReadOnlySpan<Vec3b> row = view.AsReadOnlyRowSpan(0);
 
 Do not retain a span across `Dispose`, `Mat.Create`, or another native header change. Use `Clone`, `CopyTo`, or `ToArray` when an independent lifetime is required. See [Typed Mat Views And Pixel Traits](typed-mat-view-and-pixel-traits.md) and [Typed Mat View ADR](typed-mat-view-adr.md).
 
+The ConsoleSamples preview commands provide runnable, machine-readable examples:
+
+```powershell
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- typed-mat
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- buffered-codec
+```
+
+With no native runtime they return `status=skipped` and `reason=native-runtime-required`. With a factual runtime directory, `typed-mat` reports a non-contiguous ROI and an owned clone, while `buffered-codec` reports the encoded byte count and the single-`GetSpan`/single-`Advance` writer boundary.
+
 ## Bounded codec paths / 有界编解码
 
 Use `ImageIdentifyResult` and `ImageDecodeOptions` before decoding untrusted bytes. Limits cover input bytes, dimensions, pixels, cumulative pixels, frames, metadata, ICC, encoded pixel storage, depth, and channels. Unknown facts remain unknown unless a strict option rejects them. Seekable stream positions are restored by preflight; non-seekable streams are consumed.
@@ -38,6 +47,8 @@ The existing `byte[]` APIs remain the compatibility baseline. On modern target f
 Untrusted decode policy is documented in [Codec Preflight And Limits](codec-preflight-and-limits.md). Buffer ownership and rollback are in [Codec Buffer And Owner ADR](codec-buffer-and-owner-adr.md) and [Codec Buffer Lease ADR](codec-buffer-lease-adr.md).
 
 对于不可信输入，先使用 `ImageIdentifyResult` 与 `ImageDecodeOptions` 做预检。限制覆盖输入字节、尺寸、像素、累计像素、帧数、metadata、ICC、编码像素存储、深度和通道。现有 `byte[]` API 仍是兼容基线；`IBufferWriter<byte>` 与 pinned lease 仍是 preview/internal，未进入稳定 ABI。
+
+`ConsoleSamples` 的 `typed-mat` 与 `buffered-codec` 命令提供可运行的机器可读示例；没有 native runtime 时明确 skipped，不能把 skipped 当作能力已验证。
 
 ## Platform and headless boundaries / 平台与 headless 边界
 

@@ -346,6 +346,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Modern API preview samples"
+        Script = Join-Path $repo "scripts/Test-ModernApiPreviewSamples.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "API/ABI baseline contract"
         Script = Join-Path $repo "scripts/Test-ApiAbiBaselineContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)

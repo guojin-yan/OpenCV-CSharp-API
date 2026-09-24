@@ -440,6 +440,7 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-AsyncVideoOwnerContract.ps1",
         "scripts/Test-DnnDiagnosticsContract.ps1",
         "scripts/Test-ImageFormatPolicy.ps1",
+        "scripts/Test-ModernApiPreviewSamples.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
         "scripts/Test-TypedMatBenchmarkHarness.ps1",

@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -132,6 +133,18 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
 
         private static void Main(string[] args)
         {
+            if (args.Length > 0 && string.Equals(args[0], "typed-mat", StringComparison.OrdinalIgnoreCase))
+            {
+                RunTypedMatPreview();
+                return;
+            }
+
+            if (args.Length > 0 && string.Equals(args[0], "buffered-codec", StringComparison.OrdinalIgnoreCase))
+            {
+                RunBufferedCodecPreview();
+                return;
+            }
+
             if (args.Length > 0 && string.Equals(args[0], "capabilities-json", StringComparison.OrdinalIgnoreCase))
             {
                 Console.WriteLine(OpenCvCapabilities.GetCurrent().ToJson());
@@ -2022,6 +2035,57 @@ namespace JYPPX.OpenCvSharp.Samples.ConsoleSamples
             catch (OpenCvException ex)
             {
                 Console.WriteLine("Native runtime is not available or OpenCV returned an error: " + ex.Message);
+            }
+        }
+
+        private static void RunTypedMatPreview()
+        {
+            try
+            {
+                OpenCvSharpBuildInfo.VerifyNativeRuntimeCompatibility();
+                using (Mat source = new Mat(4, 6, MatType.CV_8UC1, new Scalar(7)))
+                using (Mat roi = source.SubMat(new Rect(1, 1, 4, 2)))
+                using (ReadOnlyMatView<byte> view = roi.AsReadOnlyView<byte>())
+                using (Mat clone = view.Clone())
+                {
+                    Console.WriteLine("{\"status\":\"measured\",\"command\":\"typed-mat\",\"rows\":" + view.Rows
+                        + ",\"columns\":" + view.Columns
+                        + ",\"continuous\":" + view.IsContinuous.ToString().ToLowerInvariant()
+                        + ",\"cloneRows\":" + clone.Rows
+                        + ",\"cloneColumns\":" + clone.Cols
+                        + ",\"lifetime\":\"borrowed-view-clone-owned\"}");
+                }
+            }
+            catch (DllNotFoundException)
+            {
+                Console.WriteLine("{\"status\":\"skipped\",\"command\":\"typed-mat\",\"reason\":\"native-runtime-required\"}");
+            }
+            catch (EntryPointNotFoundException)
+            {
+                Console.WriteLine("{\"status\":\"skipped\",\"command\":\"typed-mat\",\"reason\":\"native-entrypoint-required\"}");
+            }
+        }
+
+        private static void RunBufferedCodecPreview()
+        {
+            try
+            {
+                OpenCvSharpBuildInfo.VerifyNativeRuntimeCompatibility();
+                using (Mat source = new Mat(2, 2, MatType.CV_8UC1, new Scalar(7)))
+                {
+                    var destination = new ArrayBufferWriter<byte>();
+                    ImgCodecsCv2.ImEncodeTo(".png", source, destination);
+                    Console.WriteLine("{\"status\":\"measured\",\"command\":\"buffered-codec\",\"encodedBytes\":"
+                        + destination.WrittenCount + ",\"writer\":\"single-getspan-single-advance\"}");
+                }
+            }
+            catch (DllNotFoundException)
+            {
+                Console.WriteLine("{\"status\":\"skipped\",\"command\":\"buffered-codec\",\"reason\":\"native-runtime-required\"}");
+            }
+            catch (EntryPointNotFoundException)
+            {
+                Console.WriteLine("{\"status\":\"skipped\",\"command\":\"buffered-codec\",\"reason\":\"native-entrypoint-required\"}");
             }
         }
 
