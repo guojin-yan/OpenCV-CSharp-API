@@ -165,7 +165,7 @@ namespace JYPPX.OpenCvSharp.Internal
         }
 
         /// <summary>Gets a checked pointer to a logical row while the lease is usable.</summary>
-        internal IntPtr GetRowPointer(int row)
+        internal unsafe IntPtr GetRowPointer(int row)
         {
             EnsureUsable();
             if (row < 0 || row >= rows)
@@ -173,7 +173,8 @@ namespace JYPPX.OpenCvSharp.Internal
                 throw new ArgumentOutOfRangeException(nameof(row));
             }
 
-            return IntPtr.Add(data, checked((int)checked((long)row * stepBytes)));
+            long offset = checked((long)row * stepBytes);
+            return new IntPtr((byte*)data.ToPointer() + offset);
         }
 
         /// <summary>
