@@ -228,6 +228,10 @@ if ($ValidateStableApiCompatibility) {
     $arguments += "-p:EnablePackageValidation=true"
     $arguments += "-p:PackageValidationBaselineName=$managedPackageId"
     $arguments += "-p:PackageValidationBaselineVersion=5.0.0-preview.1"
+    # .NET 10 ApiCompat reports PKV006 for framework folders that the current SDK no longer evaluates
+    # (net46-net7 and netcoreapp3.1). Keep the package TFMs unchanged, suppress only that SDK diagnostic,
+    # and continue to fail on API compatibility diagnostics for the supported comparison set.
+    $arguments += "-p:NoWarn=PKV006"
 }
 
 if ($NoBuild) {
