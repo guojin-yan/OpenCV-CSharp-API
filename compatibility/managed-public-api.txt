@@ -2,8 +2,8 @@
 schema-version=1
 assembly=JYPPX.OpenCV.CSharp.API
 target-framework=net8.0
-type-count=644
-member-count=6966
+type-count=645
+member-count=6981
 namespace-count=41
 nullable-shape=included
 
@@ -52,6 +52,7 @@ TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.FileNode|base=|interfaces=System
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.FileStorage|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.MatView<TPixel>|base=|interfaces=System.IDisposable|generic=TPixel:non-nullable-value-type&System.ValueType&default-constructor
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.Mat|base=|interfaces=System.IDisposable
+TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|base=|interfaces=System.IDisposable|generic=TPixel:non-nullable-value-type&System.ValueType&default-constructor
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.Rng|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.Svd|base=|interfaces=System.IDisposable
 TYPE|class|public;sealed|JYPPX.OpenCvSharp.Core.TickMeter|base=|interfaces=System.IDisposable
@@ -1880,6 +1881,7 @@ MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.Mat ToMat()
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.MatRowAccessor<T> AsRows<T>()|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.MatView<TPixel> AsView<TPixel>()|generic=TPixel:non-nullable-value-type&System.ValueType&default-constructor
+MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel> AsReadOnlyView<TPixel>()|generic=TPixel:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Boolean TryGetByteSpan(out System.Span<System.Byte> span)
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Boolean TryGetSpan<T>(out System.Span<T> span)|generic=T:non-nullable-value-type&System.ValueType&default-constructor
 MEMBER|JYPPX.OpenCvSharp.Core.Mat|method|public;instance|System.Byte[] ToBytes()
@@ -2070,6 +2072,20 @@ MEMBER|JYPPX.OpenCvSharp.Core.Point|method|public;static|System.Boolean op_Equal
 MEMBER|JYPPX.OpenCvSharp.Core.Point|method|public;static|System.Boolean op_Inequality(JYPPX.OpenCvSharp.Core.Point left,JYPPX.OpenCvSharp.Core.Point right)
 MEMBER|JYPPX.OpenCvSharp.Core.Point|property|instance;get:public|System.Int32 X
 MEMBER|JYPPX.OpenCvSharp.Core.Point|property|instance;get:public|System.Int32 Y
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Mat mat)
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance;sealed-override|System.Void Dispose()
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|JYPPX.OpenCvSharp.Core.Mat Clone()
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|System.Boolean TryGetSpan(out System.ReadOnlySpan<TPixel> span)
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|System.ReadOnlySpan<TPixel> AsReadOnlyRowSpan(System.Int32 row)
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|System.ReadOnlySpan<TPixel> AsReadOnlySpan()
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|System.Void CopyTo(JYPPX.OpenCvSharp.Core.Mat destination)
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|System.Void CopyTo(System.Span<TPixel> destination)
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|TPixel GetValue(System.Int32 row,System.Int32 column)
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|method|public;instance|TPixel[] ToArray()
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|property|instance;get:public|JYPPX.OpenCvSharp.Core.PixelTypeDescriptor Descriptor
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|property|instance;get:public|System.Boolean IsContinuous
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|property|instance;get:public|System.Int32 Columns
+MEMBER|JYPPX.OpenCvSharp.Core.ReadOnlyMatView<TPixel>|property|instance;get:public|System.Int32 Rows
 MEMBER|JYPPX.OpenCvSharp.Core.Rect2d|constructor|public;instance|.ctor(JYPPX.OpenCvSharp.Core.Point2d location,JYPPX.OpenCvSharp.Core.Size2d size)
 MEMBER|JYPPX.OpenCvSharp.Core.Rect2d|constructor|public;instance|.ctor(System.Double x,System.Double y,System.Double width,System.Double height)
 MEMBER|JYPPX.OpenCvSharp.Core.Rect2d|method|public;instance;override|System.Boolean Equals(System.Object? obj)

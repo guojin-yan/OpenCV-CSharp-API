@@ -4,7 +4,7 @@
 
 5.0.1 adds the managed PixelTypeDescriptor and PixelTypeTraits registry as the first stage of the typed-matrix-view plan. The registry is an explicit allow-list for the scalar types and published Vec2*, Vec3*, and Vec4* types already present in the package. It records the OpenCV depth, channel count, complete element size, alignment, channel-order evidence, alpha mode, and writable-view eligibility without loading the native library.
 
-The registry does not change the existing Mat.AsSpan<T>, AsRowSpan<T>, AsRows<T>, GetValue<T>, or SetValue<T> contracts. Those APIs continue to validate the native element size and are useful for generic binary views. Scalar registrations carry the proven `Gray` channel order; vector registrations keep `Unknown` because storage alone does not prove BGR, RGB, or alpha semantics. `RegisteredTypes` is returned in stable ordinal type-name order across target frameworks. On Span-capable target frameworks, the opt-in `MatView<TPixel>` preview uses the registry for exact depth/channel checks, two-dimensional shape, stride, and owner/header lifetime validation. It is a borrowed view: disposing it does not dispose the Mat. The design record is available in [Typed Mat View ADR](typed-mat-view-adr.md).
+The registry does not change the existing Mat.AsSpan<T>, AsRowSpan<T>, AsRows<T>, GetValue<T>, or SetValue<T> contracts. Those APIs continue to validate the native element size and are useful for generic binary views. Scalar registrations carry the proven `Gray` channel order; vector registrations keep `Unknown` because storage alone does not prove BGR, RGB, or alpha semantics. `RegisteredTypes` is returned in stable ordinal type-name order across target frameworks. On Span-capable target frameworks, the opt-in `MatView<TPixel>` and `ReadOnlyMatView<TPixel>` previews use the registry for exact depth/channel checks, two-dimensional shape, stride, and owner/header lifetime validation. The read-only view exposes no write methods; both views are borrowed and disposing either view does not dispose the Mat. The design record is available in [Typed Mat View ADR](typed-mat-view-adr.md).
 
 ## Channel semantics
 
@@ -22,6 +22,13 @@ if (!descriptor.MatchesMatType(mat.Type))
 Span<Vec3b> row = mat.AsRowSpan<Vec3b>(0);
 ~~~
 
+When the consumer must not receive write-capable methods, use the read-only preview:
+
+~~~csharp
+using ReadOnlyMatView<Vec3b> view = mat.AsReadOnlyView<Vec3b>();
+ReadOnlySpan<Vec3b> firstRow = view.AsReadOnlyRowSpan(0);
+~~~
+
 For the stronger preview contract, create a view from the matrix. Continuous matrices expose one flat typed span; non-continuous ROIs expose row spans only:
 
 ~~~csharp
@@ -35,7 +42,7 @@ if (view.TryGetSpan(out Span<Vec3b> pixels))
 }
 ~~~
 
-`MatView<TPixel>` rejects unregistered types, mismatched depth/channel encodings, and N-D matrices. A span returned by the view is borrowed native memory: do not use it after disposing the view or its Mat, and do not retain it across `Mat.Create` or another native header-changing operation. Use `ToArray`, `CopyTo`, or `CopyFrom` when a managed lifetime is required.
+`MatView<TPixel>` and `ReadOnlyMatView<TPixel>` reject unregistered types, mismatched depth/channel encodings, and N-D matrices. A span returned by either view is borrowed native memory: do not use it after disposing the view or its Mat, and do not retain it across `Mat.Create` or another native header-changing operation. Use `ToArray`, `CopyTo`, `Clone`, or `CopyFrom` on the writable view when a managed lifetime is required.
 
 `Clone()` returns an owning deep copy of the viewed matrix or ROI, while `CopyTo(Mat)` reuses the existing destination-matrix copy contract. Both operations revalidate the borrowed header before entering native code; a disposed or changed owner is rejected.
 
@@ -45,4 +52,4 @@ Unknown unmanaged structs are rejected by PixelTypeDescriptor.Get<T>(); use the 
 
 ## Cross-target behavior
 
-The descriptor and registry are pure managed code and compile for all package target frameworks, including .NET Framework. `MatView<TPixel>` and its Span-returning members are compiled only for `NETCOREAPP3_1_OR_GREATER`; older target frameworks continue to use the existing byte/typed array APIs. Neither layer depends on GPU/OpenCL or a platform-specific image backend.
+The descriptor and registry are pure managed code and compile for all package target frameworks, including .NET Framework. `MatView<TPixel>`, `ReadOnlyMatView<TPixel>`, and their Span-returning members are compiled only for `NETCOREAPP3_1_OR_GREATER`; older target frameworks continue to use the existing byte/typed array APIs. Neither layer depends on GPU/OpenCL or a platform-specific image backend.

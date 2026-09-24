@@ -893,6 +893,17 @@ namespace JYPPX.OpenCvSharp.Core
         }
 
         /// <summary>
+        /// Creates a type-checked borrowed read-only pixel view. This API is a preview and is available on Span-capable target frameworks.
+        /// </summary>
+        /// <typeparam name="TPixel">A pixel type registered by <see cref="PixelTypeTraits"/>.</typeparam>
+        /// <returns>A read-only typed view that does not own or dispose this matrix.</returns>
+        public ReadOnlyMatView<TPixel> AsReadOnlyView<TPixel>() where TPixel : unmanaged
+        {
+            ThrowIfDisposed();
+            return new ReadOnlyMatView<TPixel>(this);
+        }
+
+        /// <summary>
         /// Copies typed values from a span into the logical matrix payload, honoring row stride.
         /// 将类型化 Span 中的值按逻辑行复制到矩阵，并正确处理行步长。
         /// </summary>

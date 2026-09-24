@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted for the 5.0.1 P0 boundary. The stable public deliverable is the explicit PixelTypeDescriptor and PixelTypeTraits registry. A conditional Span-capable `MatView<TPixel>` reference preview is now implemented; it is not yet a stable cross-target contract.
+Accepted for the 5.0.1 P0 boundary. The stable public deliverable is the explicit PixelTypeDescriptor and PixelTypeTraits registry. Conditional Span-capable `MatView<TPixel>` and `ReadOnlyMatView<TPixel>` reference previews are implemented; they are not yet stable cross-target contracts.
 
 ## Context
 
@@ -15,7 +15,7 @@ Mat owns a native OpenCV allocation. Current typed APIs expose spans and row acc
 - The built-in vector types describe storage. Their traits therefore report PixelChannelOrder.Unknown; a CV_8UC3 matrix is not automatically BGR or RGB. An adapter that owns source-format knowledge must state the color and alpha convention itself.
 - A public ref struct view is rejected for a stable cross-target API: it cannot be stored, boxed, or used from older target-framework surfaces, and it would split the package contract.
 - A public value struct view is rejected for the first release because default values and copies obscure owner/disposal guarantees.
-- The preview is a sealed reference view that retains the Mat owner and checks its disposed state and native header identity on each memory-exposing operation. Its construction may allocate once; row and pixel operations do not allocate beyond the returned span. The view is borrowed: disposing it never disposes the Mat.
+- The preview uses sealed reference views that retain the Mat owner and check its disposed state and native header identity on each memory-exposing operation. `MatView<TPixel>` exposes writes; `ReadOnlyMatView<TPixel>` exposes only reads and owning clone/copy escape hatches. Construction may allocate once; row and pixel operations do not allocate beyond the returned span. Both views are borrowed: disposing a view never disposes the Mat.
 
 ## Preconditions for a MatView preview
 
