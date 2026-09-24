@@ -1,0 +1,28 @@
+{
+  "$schema": "native-aot-smoke-evidence.schema.json",
+  "schemaVersion": 1,
+  "status": "verified",
+  "runtimeIdentifier": "win-x64",
+  "targetFramework": "net10.0",
+  "sdk": "10.0.401",
+  "configuration": "Release",
+  "publishAot": true,
+  "publishTrimmed": true,
+  "trimMode": "partial",
+  "publishSingleFile": true,
+  "nativeRuntimeArtifact": "github-actions-artifact:9031536537",
+  "nativeRuntimeArtifactSha256": "898c746ac2a7c3eb3161a6348808c6a21ff5bddc4b5afa6a1a4be4335506897b",
+  "nativeRuntimePackageSha256": "8ed434d462e876937f75aedbbb3eec4a958fd56730f5a65b0653958dab42c55a",
+  "managedPackageVersion": "5.0.0",
+  "openCvVersion": "5.0.0",
+  "nativeAbiVersion": 1,
+  "publishedFileCount": 21,
+  "nativePayloadFileCount": 18,
+  "nativeSmoke": "verified",
+  "encodedBytes": 71,
+  "limitations": [
+    "The runtime artifact predates the current source commit and is used as factual OpenCV 5.0.0 execution evidence.",
+    "win-arm64 publish remains blocked by missing local Visual Studio C++ ARM64 build tools.",
+    "This smoke does not promote package-wide IsAotCompatible or IsTrimmable metadata."
+  ]
+}

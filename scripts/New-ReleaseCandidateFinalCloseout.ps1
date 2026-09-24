@@ -301,6 +301,8 @@ function Get-Record {
         "packaging/codec/image-preflight-mutation-corpus.schema.json",
         "packaging/performance/codec-typed-mat-benchmark-evidence.json",
         "packaging/performance/codec-typed-mat-benchmark-evidence.schema.json",
+        "packaging/performance/native-aot-smoke-evidence.json",
+        "packaging/performance/native-aot-smoke-evidence.schema.json",
         "packaging/runtime/runtime-support-contract.schema.json",
         "packaging/runtime/runtime-support-contract.json",
         "samples/AndroidSmoke/AndroidSmoke.csproj",
