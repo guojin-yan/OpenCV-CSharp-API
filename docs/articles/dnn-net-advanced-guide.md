@@ -2,9 +2,13 @@
 
 The current structured network, nested-output, layer ownership, preprocessing, control, and deterministic fixture contract is documented in [DNN Structured Parity Guide](dnn-structured-parity-guide.md).
 
+The owner, shape, named I/O, and dynamic-shape preview decisions are frozen in [DNN Named I/O And Dynamic Shape ADR](dnn-named-io-dynamic-shape-adr.md). The deterministic identity ONNX fixture and `DnnStructuredParityTests` provide executable evidence; backend execution remains runtime-dependent.
+
 `JYPPX.OpenCvSharp.Dnn.Net` now includes the second DNN batch: multi-output `Forward`, layer and net metadata, performance profile timings, FLOPS helpers, input-shape helpers, and convenience model readers for selected OpenCV loaders.
 
 `JYPPX.OpenCvSharp.Dnn.Net` 现在包含 DNN 第二批能力：多输出 `Forward`、layer/net 元数据、性能剖析耗时、FLOPS helper、输入形状 helper，以及部分 OpenCV loader 的便捷读取入口。
+
+命名 I/O、owner、shape 和 dynamic-shape preview 决策已冻结在 [DNN Named I/O And Dynamic Shape ADR](dnn-named-io-dynamic-shape-adr.md)。确定性的 identity ONNX fixture 与 `DnnStructuredParityTests` 提供可执行证据；backend 执行仍由 runtime 决定。
 
 ## Covered APIs / 已覆盖接口
 
