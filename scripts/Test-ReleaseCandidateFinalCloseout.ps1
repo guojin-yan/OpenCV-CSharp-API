@@ -157,6 +157,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
+        "docs/articles/dnn-named-io-dynamic-shape-adr.md",
         "docs/articles/features-upstream-parity-guide.md",
         "docs/articles/generic-linux-rid-adr.md",
         "docs/articles/headless-runtime-profile-adr.md",
