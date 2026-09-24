@@ -38,6 +38,7 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             Assert.NotNull(capabilities.VideoIOBackends);
             Assert.NotNull(capabilities.DnnBackends);
             Assert.NotNull(capabilities.Accelerators);
+            Assert.NotNull(capabilities.GuiBackend);
             Assert.Equal(new[] { "core", "imgproc", "imgcodecs", "videoio" },
                 capabilities.Modules.Select(value => value.Name).ToArray());
             Assert.Equal(capabilities.NativeRuntime.State, capabilities.Modules[0].State);
@@ -69,6 +70,7 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             Assert.StartsWith("{\"managedPackageVersion\":", first, StringComparison.Ordinal);
             Assert.Contains("\"accelerators\":[", first, StringComparison.Ordinal);
             Assert.Contains("\"modules\":[", first, StringComparison.Ordinal);
+            Assert.Contains("\"guiBackend\":", first, StringComparison.Ordinal);
             Assert.Contains("\"warnings\":[", first, StringComparison.Ordinal);
             Assert.DoesNotContain(Environment.CurrentDirectory, first, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("LD_LIBRARY_PATH", first, StringComparison.Ordinal);

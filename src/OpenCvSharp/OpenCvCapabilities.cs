@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.Dnn;
+using JYPPX.OpenCvSharp.HighGui;
 using JYPPX.OpenCvSharp.VideoIO;
 using CoreCv2 = JYPPX.OpenCvSharp.Core.Cv2;
 
@@ -178,6 +179,7 @@ namespace JYPPX.OpenCvSharp
             string processArchitecture,
             string runtimeIdentifier,
             IReadOnlyList<OpenCvCapabilityProbe> modules,
+            OpenCvCapabilityProbe guiBackend,
             IReadOnlyList<OpenCvVideoBackendCapability> videoIoBackends,
             IReadOnlyList<OpenCvDnnBackendCapability> dnnBackends,
             IReadOnlyList<OpenCvCapabilityProbe> accelerators,
@@ -195,6 +197,7 @@ namespace JYPPX.OpenCvSharp
             ProcessArchitecture = processArchitecture ?? string.Empty;
             RuntimeIdentifier = runtimeIdentifier ?? string.Empty;
             Modules = modules ?? new ReadOnlyCollection<OpenCvCapabilityProbe>(Array.Empty<OpenCvCapabilityProbe>());
+            GuiBackend = guiBackend;
             NativeOpenCvVersion = nativeOpenCvVersion ?? string.Empty;
             LoadedNativeAbiVersion = loadedNativeAbiVersion;
             CpuFeaturesLine = cpuFeaturesLine ?? string.Empty;
@@ -302,6 +305,7 @@ namespace JYPPX.OpenCvSharp
                 CreateRequiredModuleProbe("imgcodecs", nativeState),
                 CreateRequiredModuleProbe("videoio", nativeState)
             });
+            OpenCvCapabilityProbe guiBackend = ProbeGuiBackend(warnings);
 
             return new OpenCvCapabilities(
                 nativeRuntime,
@@ -315,6 +319,7 @@ namespace JYPPX.OpenCvSharp
                 GetProcessArchitecture(),
                 GetRuntimeIdentifier(),
                 modules,
+                guiBackend,
                 videoBackends,
                 dnnBackends,
                 accelerators,
@@ -353,6 +358,9 @@ namespace JYPPX.OpenCvSharp
 
         /// <summary>Gets the required native module probes represented by this wrapper.</summary>
         public IReadOnlyList<OpenCvCapabilityProbe> Modules { get; }
+
+        /// <summary>Gets the side-effect-free HighGUI backend probe.</summary>
+        public OpenCvCapabilityProbe GuiBackend { get; }
 
         /// <summary>Gets the native runtime verification result.</summary>
         public OpenCvCapabilityProbe NativeRuntime { get; }
@@ -421,6 +429,7 @@ namespace JYPPX.OpenCvSharp
                 AppendJsonProbe(builder, Modules[i]);
             }
             builder.Append(']');
+            AppendJsonProbeProperty(builder, "guiBackend", GuiBackend, true);
 
             AppendJsonArrayStart(builder, "videoIoBackends", true);
             for (int i = 0; i < VideoIOBackends.Count; i++)
@@ -580,6 +589,32 @@ namespace JYPPX.OpenCvSharp
             }
 
             return new OpenCvCapabilityProbe(name, state, reason);
+        }
+
+        private static OpenCvCapabilityProbe ProbeGuiBackend(List<string> warnings)
+        {
+            try
+            {
+                string backend = HighGui.Cv2.GetCurrentUIFramework();
+                if (string.IsNullOrEmpty(backend))
+                {
+                    return new OpenCvCapabilityProbe(
+                        "highgui-ui",
+                        OpenCvCapabilityState.Available,
+                        "HighGUI probe succeeded; no active UI backend was reported.");
+                }
+
+                return new OpenCvCapabilityProbe(
+                    "highgui-ui",
+                    OpenCvCapabilityState.Verified,
+                    "Active HighGUI backend reported: " + backend + ".");
+            }
+            catch (Exception exception) when (IsRuntimeProbeFailure(exception))
+            {
+                string reason = GetExceptionReason(exception);
+                warnings.Add("HighGUI backend probe unavailable: " + reason);
+                return new OpenCvCapabilityProbe("highgui-ui", OpenCvCapabilityState.Unavailable, reason);
+            }
         }
 
         private static IReadOnlyList<OpenCvVideoBackendCapability> ProbeVideoIo(List<string> warnings)
