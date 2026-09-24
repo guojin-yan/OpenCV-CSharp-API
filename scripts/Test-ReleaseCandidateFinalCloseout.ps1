@@ -206,6 +206,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/tracking-guide.md",
         "docs/articles/video-upstream-parity-guide.md",
         "docs/articles/videoio-upstream-parity-guide.md",
+        "docs/articles/async-video-owner-adr.md",
         "nuget/logo.jpg",
         "packaging/runtime/android-runtime-evidence.json",
         "packaging/runtime/runtime-generic-linux-feasibility.json",
