@@ -326,6 +326,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Typed Mat target-framework matrix"
+        Script = Join-Path $repo "scripts/Test-TypedMatTargetFrameworks.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Async video owner contract"
         Script = Join-Path $repo "scripts/Test-AsyncVideoOwnerContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)

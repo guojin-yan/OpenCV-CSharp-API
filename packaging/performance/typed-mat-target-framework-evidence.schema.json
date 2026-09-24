@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/typed-mat-target-framework-evidence.schema.json",
+  "title": "Typed Mat target-framework compilation evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "project", "frameworks", "spanPreviewMinimum", "oldFrameworkPolicy", "buildConfiguration", "nativeRuntimeRequired", "limitations" ],
+  "properties": {
+    "$schema": { "const": "typed-mat-target-framework-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "compiled" },
+    "project": { "const": "src/OpenCvSharp/OpenCvSharp.csproj" },
+    "frameworks": { "const": [ "net46", "net461", "net462", "net47", "net471", "net472", "net48", "net481", "netcoreapp3.1", "net5.0", "net6.0", "net7.0", "net8.0", "net9.0", "net10.0" ] },
+    "spanPreviewMinimum": { "const": "netcoreapp3.1" },
+    "oldFrameworkPolicy": { "type": "string", "pattern": "excluded by NETCOREAPP3_1_OR_GREATER" },
+    "buildConfiguration": { "const": "Release" },
+    "nativeRuntimeRequired": { "const": false },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  }
+}
