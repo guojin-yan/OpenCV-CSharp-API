@@ -33,6 +33,9 @@ dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -
 
 `OpenCvCapabilities.ToJson()` uses only the base class library, so the same
 format is available on the legacy target frameworks as well as modern .NET.
+The field and state contract is published at
+`packaging/runtime/runtime-capabilities-json.schema.json` and is checked by
+`scripts/Test-CapabilitiesJsonContract.ps1`.
 
 `NativeRuntime.State == Verified` means that both the wrapper ABI and the OpenCV version probes matched. `VideoIOBackends` describes registry entries and built-in status; it is not proof that a camera, codec, or device can be opened. DNN `Verified` means that the backend returned a target list; a model execution probe is still required for a production claim.
 
@@ -57,6 +60,9 @@ format is available on the legacy target frameworks as well as modern .NET.
 如需便于归档的机器可读快照，可使用 `capabilities-json` 参数运行样例。
 输出字段顺序稳定，并且不会包含运行时路径或环境变量；`ToJson()` 只依赖
 基础类库，因此旧 TFM 与现代 .NET 都可使用同一格式。
+字段和状态契约位于
+`packaging/runtime/runtime-capabilities-json.schema.json`，并由
+`scripts/Test-CapabilitiesJsonContract.ps1` 自动校验。
 
 ## Platform Identity
 

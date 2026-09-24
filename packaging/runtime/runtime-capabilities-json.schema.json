@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/runtime-capabilities-json.schema.json",
+  "title": "OpenCvCapabilities deterministic JSON snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "managedPackageVersion", "openCvVersion", "nativeAbiVersion", "targetFramework", "processBitness", "operatingSystem", "operatingSystemDescription", "runtimeFrameworkDescription", "processArchitecture", "runtimeIdentifier", "nativeRuntime", "nativeOpenCvVersion", "loadedNativeAbiVersion", "cpuFeaturesLine", "logicalCpuCount", "useOptimized", "modules", "guiBackend", "codecs", "videoIoBackends", "dnnBackends", "accelerators", "warnings" ],
+  "properties": {
+    "managedPackageVersion": { "type": "string" },
+    "openCvVersion": { "type": "string" },
+    "nativeAbiVersion": { "type": "integer", "minimum": 0 },
+    "targetFramework": { "type": "string", "minLength": 1 },
+    "processBitness": { "enum": [ 32, 64 ] },
+    "operatingSystem": { "type": "string" },
+    "operatingSystemDescription": { "type": "string" },
+    "runtimeFrameworkDescription": { "type": "string" },
+    "processArchitecture": { "type": "string" },
+    "runtimeIdentifier": { "type": "string" },
+    "nativeRuntime": { "$ref": "#/$defs/probe" },
+    "nativeOpenCvVersion": { "type": "string" },
+    "loadedNativeAbiVersion": { "type": [ "integer", "null" ] },
+    "cpuFeaturesLine": { "type": "string" },
+    "logicalCpuCount": { "type": [ "integer", "null" ] },
+    "useOptimized": { "type": [ "boolean", "null" ] },
+    "modules": { "type": "array", "minItems": 4, "items": { "$ref": "#/$defs/probe" } },
+    "guiBackend": { "$ref": "#/$defs/probe" },
+    "codecs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/codec" } },
+    "videoIoBackends": { "type": "array", "items": { "$ref": "#/$defs/videoIo" } },
+    "dnnBackends": { "type": "array", "items": { "$ref": "#/$defs/dnn" } },
+    "accelerators": { "type": "array", "items": { "$ref": "#/$defs/probe" } },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "state": { "enum": [ "Unknown", "Declared", "Available", "Verified", "Unavailable" ] },
+    "probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "name", "state", "reason" ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "state": { "$ref": "#/$defs/state" },
+        "reason": { "type": "string" }
+      }
+    },
+    "codec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "extension", "reader", "writer" ],
+      "properties": {
+        "extension": { "type": "string", "pattern": "^\\.[a-z0-9]+$" },
+        "reader": { "$ref": "#/$defs/probe" },
+        "writer": { "$ref": "#/$defs/probe" }
+      }
+    },
+    "videoIo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "api", "name", "state", "isBuiltIn", "reason" ],
+      "properties": {
+        "api": { "type": "string" },
+        "name": { "type": "string" },
+        "state": { "$ref": "#/$defs/state" },
+        "isBuiltIn": { "type": "boolean" },
+        "reason": { "type": "string" }
+      }
+    },
+    "dnn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "backend", "state", "targets", "reason" ],
+      "properties": {
+        "backend": { "type": "string" },
+        "state": { "$ref": "#/$defs/state" },
+        "targets": { "type": "array", "items": { "type": "string" } },
+        "reason": { "type": "string" }
+      }
+    }
+  }
+}
