@@ -160,6 +160,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/dnn-named-io-dynamic-shape-adr.md",
         "docs/articles/dnn-model-wrapper-adr.md",
         "docs/articles/dnn-quantization-backend-diagnostics-adr.md",
+        "docs/articles/dnn-tokenizer-text-adr.md",
         "docs/articles/features-upstream-parity-guide.md",
         "docs/articles/generic-linux-rid-adr.md",
         "docs/articles/headless-runtime-profile-adr.md",
