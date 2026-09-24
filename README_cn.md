@@ -49,6 +49,22 @@ OpenCV CSharp API 通过熟悉的 `JYPPX.OpenCvSharp.*` 命名空间，将 [Open
 
 参见 [5.0.0 详细说明](docs/releases/5.0.0.md)或完整的[版本变更总览](CHANGELOG.md)。公开可用状态以 NuGet 实时徽章、GitHub Packages 页面和对应 GitHub Release 为准。
 
+## 🔬 5.0.1 预览入口
+
+5.0.1 preview 在保留现有 managed API 和 package identity 的同时，让 capability、typed pixel、有界 codec、平台和 headless 边界可检查。完整命令契约与证据边界见 [5.0.1 现代 API 与平台预览指南](docs/articles/v501-modern-api-preview-guide.md)。
+
+在 checkout 的仓库中运行以下机器可读 `ConsoleSamples` 命令：
+
+```powershell
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- capabilities-json
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- typed-mat
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- buffered-codec
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- headless-smoke
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- platform-probe
+```
+
+没有真实 native runtime 时，依赖 native 的命令会返回 `status=skipped`；这不代表支持声明。headless profile 及相关 runtime package identity 仍是 candidate-only，必须先完成 profile-specific ABI、依赖、独立 consumer、loader 和无显示证据后才能晋升。
+
 ## 🚀 30 秒快速开始
 
 ### 1. 安装 NuGet 包

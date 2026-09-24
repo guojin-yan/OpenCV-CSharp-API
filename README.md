@@ -49,6 +49,22 @@ The current public version is reported by the live NuGet badges below. Stable re
 
 See the [detailed 5.0.0 notes](docs/releases/5.0.0.md) or browse the complete [changelog](CHANGELOG.md). Public availability is confirmed by the live NuGet badges, GitHub Packages pages, and the matching GitHub Release.
 
+## 🔬 5.0.1 Preview Surface
+
+The 5.0.1 preview keeps the existing managed API and package identities while making capability, typed-pixel, bounded-codec, platform, and headless boundaries inspectable. The complete command contracts and evidence limits are documented in the [5.0.1 Modern API And Platform Preview Guide](docs/articles/v501-modern-api-preview-guide.md).
+
+Run these machine-readable ConsoleSamples commands from a checked-out repository:
+
+```powershell
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- capabilities-json
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- typed-mat
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- buffered-codec
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- headless-smoke
+dotnet run --project .\samples\ConsoleSamples\ConsoleSamples.csproj -c Release -- platform-probe
+```
+
+Without a factual native runtime, native-dependent commands report `status=skipped`; that result is not a support claim. The headless profile and related runtime package identities remain candidate-only until profile-specific ABI, dependency, independent consumer, loader, and no-display evidence is complete.
+
 ## 🚀 Get Started In 30 Seconds
 
 ### 1. Install The Packages

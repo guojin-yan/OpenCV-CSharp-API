@@ -5,14 +5,24 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $programPath = Join-Path $repo 'samples/ConsoleSamples/Program.cs'
 $guidePath = Join-Path $repo 'docs/articles/v501-modern-api-preview-guide.md'
 $projectPath = Join-Path $repo 'samples/ConsoleSamples/ConsoleSamples.csproj'
-foreach ($path in @($programPath,$guidePath,$projectPath)) { if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Modern preview sample file missing: $path" } }
+$readmePath = Join-Path $repo 'README.md'
+$readmeCnPath = Join-Path $repo 'README_cn.md'
+foreach ($path in @($programPath,$guidePath,$projectPath,$readmePath,$readmeCnPath)) { if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Modern preview sample file missing: $path" } }
 $program = [IO.File]::ReadAllText($programPath)
 $guide = [IO.File]::ReadAllText($guidePath)
+$readme = [IO.File]::ReadAllText($readmePath)
+$readmeCn = [IO.File]::ReadAllText($readmeCnPath)
 foreach ($token in @('typed-mat','buffered-codec','platform-probe','headless-smoke','HeadlessServer','RunTypedMatPreview','RunBufferedCodecPreview','RunPlatformProbe','RunHeadlessSmoke','native-runtime-required','single-getspan-single-advance')) {
     if ($program.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "ConsoleSamples is missing preview sample token: $token" }
 }
 foreach ($token in @('typed-mat','buffered-codec','headless-smoke','HeadlessServer','skip','ROI','IBufferWriter','DISPLAY','WAYLAND_DISPLAY')) {
     if ($guide.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "Preview guide is missing sample token: $token" }
+}
+foreach ($readmeName in @('README.md','README_cn.md')) {
+    $readmeText = if ($readmeName -ceq 'README.md') { $readme } else { $readmeCn }
+    foreach ($token in @('docs/articles/v501-modern-api-preview-guide.md','capabilities-json','typed-mat','buffered-codec','headless-smoke','platform-probe','candidate-only')) {
+        if ($readmeText.IndexOf($token, [StringComparison]::OrdinalIgnoreCase) -lt 0) { throw "$readmeName is missing 5.0.1 preview token: $token" }
+    }
 }
 $dotnet = Get-Command dotnet -ErrorAction Stop
 & $dotnet.Source build $projectPath -c Release --no-restore
