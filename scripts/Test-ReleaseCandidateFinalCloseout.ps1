@@ -165,6 +165,7 @@ function Get-ExpectedEvidencePaths {
         "docs/articles/opencl-tapi-umat-adr.md",
         "docs/articles/highgui-interaction-guide.md",
         "docs/articles/imgcodecs-upstream-parity-guide.md",
+        "docs/articles/codec-buffer-lease-adr.md",
         "docs/articles/codec-buffer-and-owner-adr.md",
         "docs/articles/codec-benchmark-baseline.md",
         "docs/articles/codec-preflight-and-limits.md",
