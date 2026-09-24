@@ -91,6 +91,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Image adapter license gate"
+        Script = Join-Path $repo "scripts/Test-ImageAdapterLicenseGate.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Managed package isolated artifact surface"
         Script = Join-Path $repo "scripts/Test-ManagedPackageIsolatedArtifactSurface.ps1"
         Arguments = @("-RepositoryRoot", $repo)

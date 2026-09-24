@@ -379,6 +379,7 @@ function Get-Record {
         "scripts/Test-SampleModelAssetContract.ps1",
         "scripts/Test-NuGetRepositorySignedPackage.ps1",
         "scripts/Test-NuGetRepositorySigningBoundary.ps1",
+        "scripts/Test-ImageAdapterLicenseGate.ps1",
         "scripts/Test-PackageMetadataNeutrality.ps1",
         "scripts/Test-ReleaseSupportContract.ps1",
         "scripts/Test-VideoIORegistrySurface.ps1",
