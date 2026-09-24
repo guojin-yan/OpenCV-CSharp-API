@@ -12,7 +12,7 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             Assert.Equal(MatType.CV_8UC1, gray.MatType);
             Assert.Equal(1, gray.Channels);
             Assert.Equal(1, gray.ElementSizeBytes);
-            Assert.Equal(PixelChannelOrder.Unknown, gray.ChannelOrder);
+            Assert.Equal(PixelChannelOrder.Gray, gray.ChannelOrder);
             Assert.True(gray.MatchesMatType(MatType.CV_8UC1));
 
             PixelTypeDescriptor color = PixelTypeDescriptor.Get<Vec3b>();
@@ -56,6 +56,21 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             Assert.Equal(left, right);
             Assert.Equal(left.GetHashCode(), right.GetHashCode());
             Assert.NotEqual(PixelTypeDescriptor.Get<Vec3b>(), PixelTypeDescriptor.Get<Vec4b>());
+        }
+
+        [Fact]
+        public void RegisteredDescriptorsHaveStableOrdinalTypeNameOrder()
+        {
+            string[] names = new string[PixelTypeTraits.RegisteredTypeCount];
+            int index = 0;
+            foreach (PixelTypeDescriptor descriptor in PixelTypeTraits.RegisteredTypes)
+            {
+                names[index++] = descriptor.ElementType.FullName!;
+            }
+
+            string[] sorted = (string[])names.Clone();
+            Array.Sort(sorted, StringComparer.Ordinal);
+            Assert.Equal(sorted, names);
         }
     }
 }

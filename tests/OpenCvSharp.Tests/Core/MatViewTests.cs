@@ -140,6 +140,49 @@ namespace JYPPX.OpenCvSharp.Tests.Core
             }
         }
 
+        [Fact]
+        public void ReadOnlyTypedViewReadsAndCopiesWithoutWriteSurfaceWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            using (Mat mat = new Mat(2, 2, MatType.CV_8UC1))
+            using (ReadOnlyMatView<byte> view = mat.AsReadOnlyView<byte>())
+            {
+                mat.CopyFrom(new byte[] { 1, 2, 3, 4 });
+                Assert.Equal(2, view.Rows);
+                Assert.Equal(2, view.Columns);
+                Assert.Equal((byte)3, view.GetValue(1, 0));
+                Assert.Equal(new byte[] { 1, 2 }, view.AsReadOnlyRowSpan(0).ToArray());
+                Assert.True(view.TryGetSpan(out ReadOnlySpan<byte> span));
+                Assert.Equal(new byte[] { 1, 2, 3, 4 }, span.ToArray());
+                Assert.Equal(new byte[] { 1, 2, 3, 4 }, view.ToArray());
+
+                using (Mat clone = view.Clone())
+                {
+                    Assert.Equal(new byte[] { 1, 2, 3, 4 }, clone.ToArray<byte>());
+                }
+            }
+        }
+
+        [Fact]
+        public void ReadOnlyTypedViewRejectsDisposedOwnerAndHeaderChangesWhenNativeRuntimeIsAvailable()
+        {
+            if (!TestEnvironment.IsNativeSmokeEnabled()) return;
+
+            Mat ownerDisposed = new Mat(1, 1, MatType.CV_8UC1);
+            ReadOnlyMatView<byte> borrowed = ownerDisposed.AsReadOnlyView<byte>();
+            ownerDisposed.Dispose();
+            Assert.Throws<ObjectDisposedException>(() => borrowed.GetValue(0, 0));
+            borrowed.Dispose();
+
+            using (Mat mat = new Mat(1, 1, MatType.CV_8UC1))
+            using (ReadOnlyMatView<byte> view = mat.AsReadOnlyView<byte>())
+            {
+                mat.Create(2, 2, MatType.CV_8UC1);
+                Assert.Throws<InvalidOperationException>(() => view.AsReadOnlyRowSpan(0));
+            }
+        }
+
         private struct UnknownPixel
         {
             public int Value { get; set; }
