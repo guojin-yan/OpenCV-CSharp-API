@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/47e71b68df5fa136",
-  "SourceIdentity": "sha256:47e71b68df5fa136a3d33dd82a5f69268cce8d0aadef68f69d0a061dbe019bc5",
+  "CandidateId": "local-closeout/sha256/8e88f60420de300a",
+  "SourceIdentity": "sha256:8e88f60420de300a1ea7f1538ed0eb6e94fd872903d57d57c38c073c6f0a020f",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1747,
-    "Sha256": "47e71b68df5fa136a3d33dd82a5f69268cce8d0aadef68f69d0a061dbe019bc5",
+    "FileCount": 1750,
+    "Sha256": "8e88f60420de300a1ea7f1538ed0eb6e94fd872903d57d57c38c073c6f0a020f",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -918,8 +918,8 @@
     },
     {
       "Path": "docs/articles/async-video-owner-adr.md",
-      "Sha256": "aba0ac92a897fb3e222e71682941399c16f1db29bf605a983dafc3a898b15aef",
-      "Length": 3174
+      "Sha256": "9148f4fe3873cea18c70025ca1ff47ca9f969249435ca321852ee9e382e21356",
+      "Length": 3177
     },
     {
       "Path": "docs/articles/calib3d-upstream-parity-guide.md",
@@ -1357,6 +1357,16 @@
       "Length": 9417
     },
     {
+      "Path": "packaging/video/runtime-async-video-contract.json",
+      "Sha256": "2a951edb2b1e3376398e8dde086e6a382d2f58f97a3cbcdb04ad1695654b57ef",
+      "Length": 1887
+    },
+    {
+      "Path": "packaging/video/runtime-async-video-contract.schema.json",
+      "Sha256": "65949e8a96e251b4f5e1e8887552cef9a2866fb0d08eb4fb9513ffa3d9c2d71a",
+      "Length": 2786
+    },
+    {
       "Path": "samples/AndroidSmoke/AndroidSmoke.csproj",
       "Sha256": "5cd8e5b127085432f7d952e456ccb8aead3547717a66dba719ad6670642de7c7",
       "Length": 1757
@@ -1513,8 +1523,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "b3145c6d3a33adf853478ce5375feeb57c325698bcb5e48848b29c50e9481acb",
-      "Length": 66993
+      "Sha256": "be1c11ed301bb0b7d1951284ba8ee9a7664db0a115efb97e3133ab09750533d4",
+      "Length": 67174
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1530,6 +1540,11 @@
       "Path": "scripts/Test-ApiAbiBaselineContract.ps1",
       "Sha256": "924f54b3765fc48edf3c1953bb56731c7d4ca3b19ba9bf345c6ab9fbd3dbb938",
       "Length": 104061
+    },
+    {
+      "Path": "scripts/Test-AsyncVideoOwnerContract.ps1",
+      "Sha256": "6be166bd16ba324b8528a58ee6ae37593caca4e6c18ac7c14682c31e5a204a79",
+      "Length": 2317
     },
     {
       "Path": "scripts/Test-Calib3DUpstreamMap.ps1",
@@ -1728,8 +1743,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "7c083b91cc05075191c91d470447445771424319f7510fe7f26fc8a092841a48",
-      "Length": 64595
+      "Sha256": "7e37a48d7321e0c877db64468666cda15bf1201c12f400ee2c2d85c952461076",
+      "Length": 64776
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",

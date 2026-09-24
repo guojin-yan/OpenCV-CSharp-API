@@ -25,7 +25,7 @@ Cancellation stops the managed producer and drains the queue. It cannot promise 
 
 ## End-of-stream and failure states
 
-The contract distinguishes successful frame, ordinary EOF, timeout, cancellation, backend disconnect, and decode/backend error. `Read()` returning false is not converted into a generic exception. Producer failure completes the async sequence after queued frames are disposed and exposes the original bounded exception.
+The contract distinguishes successful frame, ordinary EOF, timeout, cancellation, `BackendDisconnected`, and decode/backend error. `Read()` returning false is not converted into a generic exception. Producer failure completes the async sequence after queued frames are disposed and exposes the original bounded exception.
 
 ## Promotion gate
 

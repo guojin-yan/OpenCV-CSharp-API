@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/video/runtime-async-video-contract.schema.json",
+  "title": "Async video owner contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "packageIdentityAllowed", "publicApiPromoted", "stableSurface", "proposedSurface", "frameOwnership", "queuePolicy", "cancellationPolicy", "outcomes", "promotionGates", "forbiddenClaims", "rollback" ],
+  "properties": {
+    "$schema": { "const": "runtime-async-video-contract.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "design-only" },
+    "packageIdentityAllowed": { "const": false },
+    "publicApiPromoted": { "const": false },
+    "stableSurface": { "const": [ "VideoCapture", "TryRead", "TryRetrieve", "WaitAny", "VideoStreamReader" ] },
+    "proposedSurface": { "type": "string", "pattern": "IAsyncEnumerable<VideoFrame>" },
+    "frameOwnership": { "type": "object", "additionalProperties": false, "required": [ "producer", "consumer", "reuseAfterYield", "pooling" ], "properties": { "producer": { "type": "string", "pattern": "independent Mat" }, "consumer": { "type": "string", "pattern": "disposes" }, "reuseAfterYield": { "const": "forbidden" }, "pooling": { "type": "string", "pattern": "not in first" } } },
+    "queuePolicy": { "type": "object", "additionalProperties": false, "required": [ "capacity", "allowed", "fileDefault", "dropDisposal", "cancellation" ], "properties": { "capacity": { "const": "bounded-required" }, "allowed": { "const": [ "Block", "DropOldest", "DropNewest" ] }, "fileDefault": { "const": "Block" }, "dropDisposal": { "type": "string", "pattern": "disposes" }, "cancellation": { "type": "string", "pattern": "drain-and-dispose" } } },
+    "cancellationPolicy": { "type": "object", "additionalProperties": false, "required": [ "managedProducer", "nativeBlockingRead", "concurrentSyncAsyncUse", "callbackException" ], "properties": { "managedProducer": { "type": "string", "pattern": "stops-and-drains" }, "nativeBlockingRead": { "type": "string", "pattern": "backend-specific" }, "concurrentSyncAsyncUse": { "const": "forbidden-on-one-VideoCapture" }, "callbackException": { "type": "string", "pattern": "never-crosses-C-ABI" } } },
+    "outcomes": { "const": [ "Frame", "Eof", "Timeout", "Cancelled", "BackendDisconnected", "DecodeError", "BackendError" ] },
+    "promotionGates": { "type": "array", "minItems": 6, "uniqueItems": true, "items": { "type": "string" } },
+    "forbiddenClaims": { "type": "array", "minItems": 5, "uniqueItems": true, "items": { "type": "string" } },
+    "rollback": { "type": "string", "pattern": "synchronous Read/TryRead/WaitAny" }
+  }
+}

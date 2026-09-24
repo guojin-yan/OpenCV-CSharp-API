@@ -1,0 +1,45 @@
+{
+  "$schema": "runtime-async-video-contract.schema.json",
+  "schemaVersion": 1,
+  "status": "design-only",
+  "packageIdentityAllowed": false,
+  "publicApiPromoted": false,
+  "stableSurface": [ "VideoCapture", "TryRead", "TryRetrieve", "WaitAny", "VideoStreamReader" ],
+  "proposedSurface": "IAsyncEnumerable<VideoFrame> with independent Mat ownership",
+  "frameOwnership": {
+    "producer": "allocates or clones an independent Mat before yield",
+    "consumer": "disposes each yielded VideoFrame",
+    "reuseAfterYield": "forbidden",
+    "pooling": "not in first public contract"
+  },
+  "queuePolicy": {
+    "capacity": "bounded-required",
+    "allowed": [ "Block", "DropOldest", "DropNewest" ],
+    "fileDefault": "Block",
+    "dropDisposal": "queue-owner-disposes-before-removal",
+    "cancellation": "drain-and-dispose-all-queued-frames"
+  },
+  "cancellationPolicy": {
+    "managedProducer": "stops-and-drains",
+    "nativeBlockingRead": "backend-specific-latency-and-cleanup-deadline-required",
+    "concurrentSyncAsyncUse": "forbidden-on-one-VideoCapture",
+    "callbackException": "pending-managed-exception-never-crosses-C-ABI"
+  },
+  "outcomes": [ "Frame", "Eof", "Timeout", "Cancelled", "BackendDisconnected", "DecodeError", "BackendError" ],
+  "promotionGates": [
+    "deterministic file fixture",
+    "cancellable fake/test backend",
+    "queue cleanup and disposal stress",
+    "EOF/error/cancellation separation",
+    "one real backend evidence record",
+    "cross-target owner and cancellation review"
+  ],
+  "forbiddenClaims": [
+    "Task.Run is a native async implementation",
+    "unbounded queue is lossless backpressure",
+    "false Read means a generic exception",
+    "camera/network cancellation is identical to file cancellation",
+    "a demo proves public async ownership"
+  ],
+  "rollback": "keep synchronous Read/TryRead/WaitAny and remove preview artifact"
+}
