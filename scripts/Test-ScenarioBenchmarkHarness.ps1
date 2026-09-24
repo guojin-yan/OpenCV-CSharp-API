@@ -9,6 +9,14 @@ $repo = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $project = Join-Path $repo 'tools/ScenarioBenchmark/ScenarioBenchmark.csproj'
 if (-not (Test-Path -LiteralPath $project -PathType Leaf)) { throw "Scenario benchmark project was not found: $project" }
 
+# Keep skip results independent from a previous measured run or repository-level DLLs.
+$outputDirectory = Join-Path $repo 'tools/ScenarioBenchmark/bin/Release/net10.0'
+if (Test-Path -LiteralPath $outputDirectory -PathType Container) {
+    Get-ChildItem -LiteralPath $outputDirectory -File |
+        Where-Object { $_.Name -match '^(JYPPX\.OpenCV\.Native|opencv_.+)\.dll$' } |
+        Remove-Item -Force
+}
+
 $dotnet = Get-Command dotnet -ErrorAction Stop
 $buildArguments = @('build', $project, '-c', 'Release')
 if (-not [string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
@@ -19,7 +27,12 @@ if (-not [string]::IsNullOrWhiteSpace($OpenCvNativeRuntimeDir)) {
 if ($LASTEXITCODE -ne 0) { throw "Scenario benchmark harness build failed with exit code $LASTEXITCODE." }
 
 $runArguments = @('run', '--project', $project, '-c', 'Release', '--no-build')
-$output = @(& $dotnet.Source @runArguments 2>&1)
+Push-Location $outputDirectory
+try {
+    $output = @(& $dotnet.Source @runArguments 2>&1)
+} finally {
+    Pop-Location
+}
 if ($LASTEXITCODE -ne 0) { throw "Scenario benchmark harness run failed with exit code $LASTEXITCODE." }
 $jsonLines = @($output | ForEach-Object { [string]$_ } | Where-Object { $_.TrimStart().StartsWith('{') -and $_.TrimEnd().EndsWith('}') })
 if ($jsonLines.Count -ne 1) { throw "Scenario benchmark harness must emit exactly one JSON object; found $($jsonLines.Count)." }
