@@ -12,7 +12,7 @@ if (-not (Test-Json -LiteralPath $evidencePath -SchemaFile $schemaPath -ErrorAct
 $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
 if ([string]$evidence.status -cne 'measured' -or [string]$evidence.sourceCommit -notmatch '^[0-9a-f]{40}$') { throw 'Video/DNN benchmark evidence identity is invalid.' }
 if ([string]$evidence.runner.architecture -cne 'x64' -or [string]$evidence.runner.configuration -cne 'Release') { throw 'Video/DNN runner identity drifted.' }
-if (@($evidence.runner.nativePayload).Count -lt 17) { throw 'Video/DNN evidence must bind the complete 17-file full runtime payload.' }
+if (@($evidence.runner.nativePayload).Count -lt 18) { throw 'Video/DNN evidence must bind the complete 18-file full runtime payload including the wrapper loader.' }
 foreach ($scenarioName in @('video','dnn')) {
     $metric = $evidence.$scenarioName.metric
     if ([int64]$metric.peakWorkingSetBytes -lt [int64]$metric.baselineWorkingSetBytes) { throw "Scenario peak working set is below baseline: $scenarioName" }

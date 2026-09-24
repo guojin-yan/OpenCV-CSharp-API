@@ -1,0 +1,77 @@
+{
+  "$schema": "video-dnn-benchmark-evidence.schema.json",
+  "schemaVersion": 1,
+  "status": "measured",
+  "sourceCommit": "09dd52ffdce2b4ab69a05b6633d1840d06c04c4c",
+  "runner": {
+    "os": "Windows 11",
+    "architecture": "x64",
+    "dotnet": "10.0.401",
+    "configuration": "Release",
+    "managedAssemblySha256": "680ab4b7d161d39d3b63d302dbc3d0918a68db2b275c3d10edc99e900a3198ef",
+    "nativeRuntimePackage": "JYPPX.OpenCV.runtime.win-x64.5.0.0.nupkg",
+    "nativeRuntimePackageSha256": "07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e",
+    "nativePayload": [
+      { "name": "JYPPX.OpenCV.Native.dll", "bytes": 1646080, "sha256": "522e5ca18591bc510661a69cd1b1d9f1b937b266bcbe9230a6dd00e720581d59" },
+      { "name": "opencv_calib500.dll", "bytes": 1099776, "sha256": "966f6c8ecfd0659f2a5ff28a0280958413ea3fb0dad59461d8e161666ee8c472" },
+      { "name": "opencv_core500.dll", "bytes": 5803520, "sha256": "3b8709f4dc4478cb2fa1af97b14e50a5756c601e8623f426fe3478330b50b68a" },
+      { "name": "opencv_dnn500.dll", "bytes": 17764352, "sha256": "c8467204f81dd7e8e5ad29123b5d01273f509a7331d55bdde6e0a05dbc3a7c51" },
+      { "name": "opencv_features500.dll", "bytes": 1371136, "sha256": "724a6dd07b09ffbce5f384d21eea30b62f8c53d5f5b729234b7ad92e663e1de3" },
+      { "name": "opencv_flann500.dll", "bytes": 809984, "sha256": "1cadc60f1bedec53245665663768209a67feb3bfc49ce84691fb1672a9ef7ce4" },
+      { "name": "opencv_geometry500.dll", "bytes": 3350016, "sha256": "642679ea6260e7a11560b2c532c72aa932e0eeb55de717e773731ee669b44f8b" },
+      { "name": "opencv_highgui500.dll", "bytes": 679936, "sha256": "11d07e5b8d86c6d1aa3dea5490c80f7714159be7ea18f17406312e984abc10d3" },
+      { "name": "opencv_imgcodecs500.dll", "bytes": 3500032, "sha256": "82460749076373cf81073c2a374854a6d78362a0c52a0886c8291bcf4973422f" },
+      { "name": "opencv_imgproc500.dll", "bytes": 11042304, "sha256": "72e542fb4fcba81e75a30eefa708966b3168a144424416092c507a37e666ea1b" },
+      { "name": "opencv_ml500.dll", "bytes": 1054208, "sha256": "a2962b72333b039ca48875106b3b839f8ecdcf9a8e6b2b036307225c7e585095" },
+      { "name": "opencv_objdetect500.dll", "bytes": 2651648, "sha256": "7af553b712e163e09dd7b17b714293cee4fb68da32d318735b05415079873432" },
+      { "name": "opencv_photo500.dll", "bytes": 1441792, "sha256": "43c94da5c28d1b92c10cabd867c41334d06685c65aea183542a2f7125051259d" },
+      { "name": "opencv_ptcloud500.dll", "bytes": 1358848, "sha256": "31268ee2f8e42b751ad114573fb9ad04a4346462e9de71e0b280241b95786487" },
+      { "name": "opencv_stereo500.dll", "bytes": 329216, "sha256": "b2f31140874101bb96a7185a61ed997418975770936483cdc20fbe21de61dd48" },
+      { "name": "opencv_stitching500.dll", "bytes": 1558016, "sha256": "e383b3433597a7dee121f1ada6944be5b3036535c27cbd778839019f5f5b41f8" },
+      { "name": "opencv_video500.dll", "bytes": 1244160, "sha256": "ca6bdf798a8c425183ed119544fcd4278e7b0aab37c21b82ef0eb7e6e17c7ec8" },
+      { "name": "opencv_videoio500.dll", "bytes": 989184, "sha256": "438fa0e7fe474ee435afaafab46ef63852073625f4c1e4c4aac1ddc0c8b6564e" }
+    ]
+  },
+  "video": {
+    "targetFramework": "net10.0",
+    "iterations": 100,
+    "frameCount": 3,
+    "rows": 24,
+    "columns": 32,
+    "codec": "MJPG",
+    "fileBytes": 6288,
+    "fileSha256": "3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56",
+    "metric": {
+      "managedAllocatedBytes": 1312912,
+      "elapsedTicks": 26228311,
+      "checksum": 46555200,
+      "baselineWorkingSetBytes": 38494208,
+      "peakWorkingSetBytes": 40951808
+    }
+  },
+  "dnn": {
+    "targetFramework": "net10.0",
+    "iterations": 100,
+    "modelBytes": 147,
+    "modelSha256": "326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744",
+    "outputName": "output",
+    "outputChecksum": 1000000,
+    "profileTickCount": 4200,
+    "profileLayerCount": 2,
+    "weightsBytes": 0,
+    "blobBytes": 48,
+    "metric": {
+      "managedAllocatedBytes": 384864,
+      "elapsedTicks": 6373706,
+      "checksum": 1000000,
+      "baselineWorkingSetBytes": 42573824,
+      "peakWorkingSetBytes": 42844160
+    }
+  },
+  "limitations": [
+    "Elapsed ticks and process working-set values are runner-specific regression evidence.",
+    "WorkingSet64 is the Windows process RSS-equivalent used by this benchmark; it is sampled between operations.",
+    "The video path uses a temporary MJPG AVI and exercises file-backed VideoIO, not camera or network backends.",
+    "The DNN path uses the fixed 147-byte identity ONNX fixture and the OpenCV CPU backend."
+  ]
+}
