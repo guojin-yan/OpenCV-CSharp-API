@@ -496,6 +496,7 @@ function Get-Record {
         "scripts/Test-CodecBenchmarkHarness.ps1",
         "scripts/Test-ImagePreflightMutationCorpus.ps1",
         "scripts/Test-NativeAotSmoke.ps1",
+        "scripts/Test-PerformanceBenchmarkEvidence.ps1",
         "scripts/Test-AsyncVideoOwnerContract.ps1",
         "scripts/Test-DnnDiagnosticsContract.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",

@@ -321,6 +321,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Performance benchmark evidence"
+        Script = Join-Path $repo "scripts/Test-PerformanceBenchmarkEvidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Async video owner contract"
         Script = Join-Path $repo "scripts/Test-AsyncVideoOwnerContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)
