@@ -2,13 +2,13 @@
   "$schema": "video-dnn-benchmark-evidence.schema.json",
   "schemaVersion": 1,
   "status": "measured",
-  "sourceCommit": "09dd52ffdce2b4ab69a05b6633d1840d06c04c4c",
+  "sourceCommit": "8d4f8c77c8242a93dbb4e42796b1e6f90d460375",
   "runner": {
     "os": "Windows 11",
     "architecture": "x64",
     "dotnet": "10.0.401",
     "configuration": "Release",
-    "managedAssemblySha256": "680ab4b7d161d39d3b63d302dbc3d0918a68db2b275c3d10edc99e900a3198ef",
+    "managedAssemblySha256": "478ecceae75cf4ffd027dcd4c9ee2418db9679ca5747b44916af62ad98fee9dd",
     "nativeRuntimePackage": "JYPPX.OpenCV.runtime.win-x64.5.0.0.nupkg",
     "nativeRuntimePackageSha256": "07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e",
     "nativePayload": [
@@ -43,10 +43,10 @@
     "fileSha256": "3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56",
     "metric": {
       "managedAllocatedBytes": 1312912,
-      "elapsedTicks": 26228311,
+      "elapsedTicks": 29613344,
       "checksum": 46555200,
-      "baselineWorkingSetBytes": 38494208,
-      "peakWorkingSetBytes": 40951808
+      "baselineWorkingSetBytes": 39260160,
+      "peakWorkingSetBytes": 41631744
     }
   },
   "dnn": {
@@ -56,16 +56,16 @@
     "modelSha256": "326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744",
     "outputName": "output",
     "outputChecksum": 1000000,
-    "profileTickCount": 4200,
+    "profileTickCount": 6300,
     "profileLayerCount": 2,
     "weightsBytes": 0,
     "blobBytes": 48,
     "metric": {
-      "managedAllocatedBytes": 384864,
-      "elapsedTicks": 6373706,
+      "managedAllocatedBytes": 384224,
+      "elapsedTicks": 7143706,
       "checksum": 1000000,
-      "baselineWorkingSetBytes": 42573824,
-      "peakWorkingSetBytes": 42844160
+      "baselineWorkingSetBytes": 43167744,
+      "peakWorkingSetBytes": 43421696
     }
   },
   "limitations": [
