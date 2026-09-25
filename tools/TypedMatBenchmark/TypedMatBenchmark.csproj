@@ -10,7 +10,10 @@
     <ProjectReference Include="..\..\src\OpenCvSharp\OpenCvSharp.csproj" />
   </ItemGroup>
   <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">
-    <ItemGroup><OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\*.dll" /></ItemGroup>
+    <ItemGroup>
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\JYPPX.OpenCV.Native.dll" />
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\opencv_*.dll" />
+    </ItemGroup>
     <Copy SourceFiles="@(OpenCvNativeRuntimeFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
   </Target>
 </Project>

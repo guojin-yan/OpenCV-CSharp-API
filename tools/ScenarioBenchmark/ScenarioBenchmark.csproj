@@ -15,7 +15,8 @@
   </ItemGroup>
   <Target Name="CopyOpenCvNativeRuntime" AfterTargets="Build" Condition="'$(OpenCvNativeRuntimeDir)' != '' and '$(TargetDir)' != ''">
     <ItemGroup>
-      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\*.dll" />
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\JYPPX.OpenCV.Native.dll" />
+      <OpenCvNativeRuntimeFiles Include="$(OpenCvNativeRuntimeDir)\opencv_*.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(OpenCvNativeRuntimeFiles)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="false" />
   </Target>
