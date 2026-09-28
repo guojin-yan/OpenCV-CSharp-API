@@ -23,6 +23,13 @@ foreach ($path in @($project, $runtimePath, $packagePath)) {
     }
 }
 if (-not (Test-Path -LiteralPath $packagePath -PathType Leaf)) { throw "Native runtime package path is not a file: $packagePath" }
+$gitStatus = @(& git -C $repo status --porcelain 2>$null)
+if ($LASTEXITCODE -ne 0) { throw 'Could not inspect repository status before Video/DNN benchmark measurement.' }
+if ($gitStatus.Count -ne 0) { throw 'Commit source changes before measuring PERF-001 evidence; the working tree must be clean so sourceCommit is accurate.' }
+if ([Runtime.InteropServices.RuntimeInformation]::OSArchitecture -ne [Runtime.InteropServices.Architecture]::X64 -or
+    -not [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows)) {
+    throw 'PERF-001 Video/DNN evidence requires a Windows x64 runner.'
+}
 
 $nativePayload = @(Get-ChildItem -LiteralPath $runtimePath -File | Where-Object { $_.Name -match '^JYPPX\.OpenCV\.Native\.dll$|^opencv_.+\.dll$' } | Sort-Object Name)
 if ($nativePayload.Count -ne 18) { throw "Video/DNN benchmark requires exactly 18 full native payload files; found $($nativePayload.Count)." }
@@ -107,7 +114,7 @@ $evidence = [ordered]@{
     status = 'measured'
     sourceCommit = $sourceCommit
     runner = [ordered]@{
-        os = [Environment]::OSVersion.VersionString
+        os = [Runtime.InteropServices.RuntimeInformation]::OSDescription
         architecture = 'x64'
         dotnet = ((& $dotnet.Source --version 2>$null) | Select-Object -First 1).Trim()
         configuration = 'Release'

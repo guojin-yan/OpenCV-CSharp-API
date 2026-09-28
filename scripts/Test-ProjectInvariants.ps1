@@ -346,6 +346,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "PERF-001 relative regression baseline"
+        Script = Join-Path $repo "scripts/Test-PerformanceRegressionBaseline.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Typed Mat target-framework matrix"
         Script = Join-Path $repo "scripts/Test-TypedMatTargetFrameworks.ps1"
         Arguments = @("-RepositoryRoot", $repo)
