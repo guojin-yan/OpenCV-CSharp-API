@@ -68,13 +68,14 @@ foreach ($name in @('video','dnn')) {
     $row = $video.$name.metric
     $current["$name/net10.0"] = [ordered]@{ managedAllocatedBytes = [decimal]$row.managedAllocatedBytes; elapsedTicks = [decimal]$row.elapsedTicks; peakWorkingSetBytes = [decimal]$row.peakWorkingSetBytes }
 }
-if ($current.Count -ne $baseline.metrics.PSObject.Properties.Count) { throw "PERF-001 metric set drifted: current=$($current.Count) baseline=$($baseline.metrics.PSObject.Properties.Count)." }
+if (@($current.Keys).Count -ne @($baseline.metrics.PSObject.Properties).Count) { throw "PERF-001 metric set drifted: current=$(@($current.Keys).Count) baseline=$(@($baseline.metrics.PSObject.Properties).Count)." }
 $failures = [System.Collections.Generic.List[string]]::new()
 foreach ($property in $baseline.metrics.PSObject.Properties) {
     $name = [string]$property.Name
     if (-not $current.Contains($name)) { $failures.Add("missing metric $name"); continue }
     foreach ($metricName in @('managedAllocatedBytes','elapsedTicks','peakWorkingSetBytes')) {
-        $baselineValue = $property.Value.$metricName
+        $baselineProperty = $property.Value.PSObject.Properties[$metricName]
+        $baselineValue = if ($null -eq $baselineProperty) { $null } else { $baselineProperty.Value }
         $currentValue = $current[$name][$metricName]
         if ($null -eq $baselineValue -and $null -eq $currentValue) { continue }
         if ($null -eq $baselineValue -or $null -eq $currentValue) { $failures.Add("$name/$metricName metric shape changed"); continue }

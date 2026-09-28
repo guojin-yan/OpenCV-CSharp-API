@@ -1,14 +1,13 @@
 {
-  "$schema": "video-dnn-benchmark-evidence.schema.json",
+  "$schema": "perf-001-regression-baseline.schema.json",
   "schemaVersion": 1,
-  "status": "measured",
-  "sourceCommit": "e3af4cff024fe4d7d6928266d2541c24cedd054d",
+  "status": "measured-baseline",
+  "createdFromCommit": "e3af4cff024fe4d7d6928266d2541c24cedd054d",
   "runner": {
     "os": "Microsoft Windows 10.0.26200",
     "architecture": "x64",
     "dotnet": "10.0.401",
     "configuration": "Release",
-    "managedAssemblySha256": "6eff8fa7ad82bfd9633ab591935f8717d606f88a9c0af9252ec5a1f47fa02bc7",
     "nativeRuntimePackage": "jyppx.opencv.runtime.win-x64.5.0.0.nupkg",
     "nativeRuntimePackageSha256": "07de65af0ec14420d84d49caa4663d08393880a1bae402c789177d2dfff2544e",
     "nativePayload": [
@@ -104,47 +103,77 @@
       }
     ]
   },
-  "video": {
-    "targetFramework": "net10.0",
-    "iterations": 100,
-    "frameCount": 3,
-    "rows": 24,
-    "columns": 32,
-    "codec": "MJPG",
-    "fileBytes": 6288,
-    "fileSha256": "3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56",
-    "metric": {
+  "workloads": {
+    "codecInputSha256": "518f05b99bd5822f768487e0c9c969b3f6b5ba24f1b1531df4231f674413a0af",
+    "typedMatInputSha256": "70986737435b5f89e119558ba7d29e5bb8768dd18c16beaaaa09298bf586b275",
+    "videoFileSha256": "3137a5dc45d1dadf29aee22d2eb140a55c31fe240a80fe66dd4cc069fe27fd56",
+    "dnnModelSha256": "326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744",
+    "iterations": 100
+  },
+  "thresholds": {
+    "elapsedTicksPercent": 20,
+    "managedAllocatedBytesPercent": 10,
+    "peakWorkingSetBytesPercent": 10
+  },
+  "metrics": {
+    "codec/encodeByteArray": {
+      "managedAllocatedBytes": 37640,
+      "elapsedTicks": 30004
+    },
+    "codec/encodeBufferWriter": {
+      "managedAllocatedBytes": 40840,
+      "elapsedTicks": 27195
+    },
+    "codec/decodeByteArray": {
+      "managedAllocatedBytes": 7240,
+      "elapsedTicks": 70468
+    },
+    "codec/decodeSpanWithPreflight": {
+      "managedAllocatedBytes": 60840,
+      "elapsedTicks": 54857
+    },
+    "codec/decodeStreamWithPreflight": {
+      "managedAllocatedBytes": 8296040,
+      "elapsedTicks": 77685
+    },
+    "typedMat/net10.0/rowAccessor": {
+      "managedAllocatedBytes": 40,
+      "elapsedTicks": 10506
+    },
+    "typedMat/net10.0/matView": {
+      "managedAllocatedBytes": 10440,
+      "elapsedTicks": 58978
+    },
+    "typedMat/net10.0/readOnlyMatView": {
+      "managedAllocatedBytes": 12840,
+      "elapsedTicks": 64255
+    },
+    "typedMat/net8.0/rowAccessor": {
+      "managedAllocatedBytes": 40,
+      "elapsedTicks": 11842
+    },
+    "typedMat/net8.0/matView": {
+      "managedAllocatedBytes": 10440,
+      "elapsedTicks": 65899
+    },
+    "typedMat/net8.0/readOnlyMatView": {
+      "managedAllocatedBytes": 12840,
+      "elapsedTicks": 65953
+    },
+    "video/net10.0": {
       "managedAllocatedBytes": 1312912,
       "elapsedTicks": 18803963,
-      "checksum": 46555200,
-      "baselineWorkingSetBytes": 40579072,
       "peakWorkingSetBytes": 43188224
-    }
-  },
-  "dnn": {
-    "targetFramework": "net10.0",
-    "iterations": 100,
-    "modelBytes": 147,
-    "modelSha256": "326793cdb2fc2da739a715c3f3ff71d09779b389ad29e56bbfccc4313e900744",
-    "outputName": "output",
-    "outputChecksum": 1000000,
-    "profileTickCount": 5200,
-    "profileLayerCount": 2,
-    "weightsBytes": 0,
-    "blobBytes": 48,
-    "metric": {
+    },
+    "dnn/net10.0": {
       "managedAllocatedBytes": 386144,
       "elapsedTicks": 4617051,
-      "checksum": 1000000,
-      "baselineWorkingSetBytes": 44707840,
       "peakWorkingSetBytes": 44900352
     }
   },
   "limitations": [
-    "Elapsed ticks and process working-set values are runner-specific regression evidence.",
-    "WorkingSet64 is the Windows process RSS-equivalent used by this benchmark; it is sampled between operations.",
-    "The video path uses a temporary MJPG AVI and exercises file-backed VideoIO, not camera or network backends.",
-    "The DNN path uses the fixed 147-byte identity ONNX fixture and the OpenCV CPU backend.",
-    "The native runtime package and payload hashes identify the factual full win-x64 runtime consumed by this measurement."
+    "Thresholds are per metric relative to the immutable measured baseline: elapsed ticks +20%, managed allocations +10%, and sampled peak working set +10%.",
+    "Comparisons require the same Windows x64 OS identity, .NET SDK, fixed workloads, exact native NuGet package hash, and all 18 native payload hashes.",
+    "Elapsed ticks and sampled working set are runner-specific signals, not cross-machine performance claims. Refreshing this baseline requires an explicit reviewed change."
   ]
 }
