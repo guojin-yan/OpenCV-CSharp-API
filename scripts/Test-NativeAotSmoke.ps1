@@ -71,7 +71,7 @@ try {
         foreach ($line in $Lines) {
             $text = [string]$line
             Write-Host $text
-            if ($text -match '(?i)\bwarning\s+(?<code>[A-Z][A-Z0-9]{2,8})\s*:\s*(?<message>.*)$') {
+            if ($text -match '(?i)(?:\bwarning|警告)\s+(?<code>[A-Z][A-Z0-9]{2,8})\s*:\s*(?<message>.*)$') {
                 $key = "$Phase|$($Matches.code)|$($Matches.message.Trim())"
                 if ($warningKeys.Add($key)) {
                     [void]$warningRecords.Add([ordered]@{
