@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/9ee75ffb1c941318",
-  "SourceIdentity": "sha256:9ee75ffb1c9413185231033e5adb8aadb6da7678c2c5e3ea182c94467362a206",
+  "CandidateId": "local-closeout/sha256/fb968dbb36c598e9",
+  "SourceIdentity": "sha256:fb968dbb36c598e961c9220ecbe12b0467f2df94f2d5c739b71f6a6e04992211",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1778,
-    "Sha256": "9ee75ffb1c9413185231033e5adb8aadb6da7678c2c5e3ea182c94467362a206",
+    "FileCount": 1781,
+    "Sha256": "fb968dbb36c598e961c9220ecbe12b0467f2df94f2d5c739b71f6a6e04992211",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "9a2d7705b164d3f9efc3b6bb93ffe927bea9875513a5ab05f1fb329a5b2a8577",
-      "Length": 4464
+      "Sha256": "90ea0df39d107c423ff7ce5bd274203e85605d6d069d17813877c543515ca4c4",
+      "Length": 4572
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1043,8 +1043,8 @@
     },
     {
       "Path": "docs/articles/native-aot-trim-single-file-adr.md",
-      "Sha256": "1868ece9f471b0a056eb775c18502e70cf3bf13fe45d028c94a7bbea13d9d68f",
-      "Length": 3642
+      "Sha256": "5b91ef021a70bc03f9d399a97072a48215e7e2119122ccc5bae5349870d1a5a1",
+      "Length": 4477
     },
     {
       "Path": "docs/articles/objdetect-structured-parity-guide.md",
@@ -1295,6 +1295,16 @@
       "Path": "packaging/performance/native-aot-smoke-evidence.schema.json",
       "Sha256": "f9db9eefbb34b509717d248be51e9b153010f4a7827d86ddcdebeb58f0c77cd4",
       "Length": 1911
+    },
+    {
+      "Path": "packaging/performance/native-aot-trim-warning-ledger.json",
+      "Sha256": "3763ab76ff36fea0943d7553d97b6d9387f04f36dfa4d8e3dfc3545fb38d23c7",
+      "Length": 1353
+    },
+    {
+      "Path": "packaging/performance/native-aot-trim-warning-ledger.schema.json",
+      "Sha256": "53da8931948c8934e49f8562a4b9e59ebb649771b99314c7296f797fafe18e7a",
+      "Length": 2796
     },
     {
       "Path": "packaging/performance/typed-mat-native-lifetime-evidence.json",
@@ -1603,8 +1613,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "fd823e65361264735badd8d67d8b4cd6681b3a8edf6791cc87762d45326fd03b",
-      "Length": 68834
+      "Sha256": "3932179f723324ed0710f40f6154078e6252c617647acb12c80a12790f9ad0ac",
+      "Length": 69034
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1793,8 +1803,13 @@
     },
     {
       "Path": "scripts/Test-NativeAotSmoke.ps1",
-      "Sha256": "659ad4f783d225d2fdc99f03a45b72e9a33cf32d51d13bc99e61eadeb8195cb3",
-      "Length": 4878
+      "Sha256": "4d15513981e21d76fdd601f8f927933be9f0f2b0fe108c0e9b1dad0229e20e23",
+      "Length": 10017
+    },
+    {
+      "Path": "scripts/Test-NativeAotTrimWarningLedger.ps1",
+      "Sha256": "8a272b1e5f7224a0b14e17c2d51dd37464903fe8f1743df01a01a7b49e1cdd60",
+      "Length": 2683
     },
     {
       "Path": "scripts/Test-NativeManagedBindingMap.ps1",
@@ -1853,8 +1868,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "931b39a649090959c4bc894a1050251d74308393f0ba6ec39ee44add84e688cd",
-      "Length": 66436
+      "Sha256": "4b83c497949daf5dc177af92ce8d46e36150f65cecc1076174838e125a7d7fbc",
+      "Length": 66636
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
