@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/461444ca80e28a63",
-  "SourceIdentity": "sha256:461444ca80e28a63c86caa4f4db3dc67fadf6d2b443689d1827f90f3e14633f3",
+  "CandidateId": "local-closeout/sha256/9ee75ffb1c941318",
+  "SourceIdentity": "sha256:9ee75ffb1c9413185231033e5adb8aadb6da7678c2c5e3ea182c94467362a206",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1774,
-    "Sha256": "461444ca80e28a63c86caa4f4db3dc67fadf6d2b443689d1827f90f3e14633f3",
+    "FileCount": 1778,
+    "Sha256": "9ee75ffb1c9413185231033e5adb8aadb6da7678c2c5e3ea182c94467362a206",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "d353eb07e68aaa207c0dc832f7dd145d7aaa2c85a77427344e8022f361239c5f",
-      "Length": 4260
+      "Sha256": "9a2d7705b164d3f9efc3b6bb93ffe927bea9875513a5ab05f1fb329a5b2a8577",
+      "Length": 4464
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -953,8 +953,8 @@
     },
     {
       "Path": "docs/articles/codec-preflight-and-limits.md",
-      "Sha256": "b411841f92eb9135ed5ea9820f0073a753a431e36926ab157a7321ca62c9f1ac",
-      "Length": 20634
+      "Sha256": "b426c2655d82adf323aacc62afa23d90a8016c225a7fff81fe996b626f64a9ad",
+      "Length": 22073
     },
     {
       "Path": "docs/articles/core-upstream-parity-guide.md",
@@ -1245,6 +1245,16 @@
       "Path": "packaging/codec/image-format-policy.schema.json",
       "Sha256": "c38e6b35ca0c49ebbb7c403ff99e549b3410185558383ba52761841384345167",
       "Length": 1663
+    },
+    {
+      "Path": "packaging/codec/image-preflight-fuzz-evidence.json",
+      "Sha256": "5deeaf95d2f85160c2195f3d24b29e3a28d1ad2bbfdd3931f05e12dba0875bd7",
+      "Length": 2384
+    },
+    {
+      "Path": "packaging/codec/image-preflight-fuzz-evidence.schema.json",
+      "Sha256": "2b9dc81f2819e0da8e5159eca51f8c808c4f5ab511764d973b763a11e9c34765",
+      "Length": 4104
     },
     {
       "Path": "packaging/codec/image-preflight-mutation-corpus.json",
@@ -1577,6 +1587,11 @@
       "Length": 15717
     },
     {
+      "Path": "scripts/Measure-ImagePreflightFuzz.ps1",
+      "Sha256": "fddc61119bf0a98a1b63bc52e6fdd1988c29dbdd177371061adaf77d932142c5",
+      "Length": 9610
+    },
+    {
       "Path": "scripts/New-GenericLinuxPreviewPackage.ps1",
       "Sha256": "13e3a23633b2b5c266745a0b6af989f26e32a6f7e8deda4cd9b38dd4da3deae4",
       "Length": 10234
@@ -1588,8 +1603,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "a299496dc24e4bb09c84bb359dbd41fe7bc2bf3bba2b8db91247d96b6b448951",
-      "Length": 68598
+      "Sha256": "fd823e65361264735badd8d67d8b4cd6681b3a8edf6791cc87762d45326fd03b",
+      "Length": 68834
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1717,6 +1732,11 @@
       "Length": 1734
     },
     {
+      "Path": "scripts/Test-ImagePreflightFuzzEvidence.ps1",
+      "Sha256": "1b457432e32cab6b6e1e232522b88221925fbde4dff54f0b5e72d92639cb1ff9",
+      "Length": 5028
+    },
+    {
       "Path": "scripts/Test-ImagePreflightMutationCorpus.ps1",
       "Sha256": "a0f86844a70aff22d7d4d93aab146ef4d2c13bf36a28ad722567b18e80d347c5",
       "Length": 4012
@@ -1833,8 +1853,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "faa6d6a2bc36610535acc09b64bc35bd0bd2e94f8f78344c47c98d15bc6a361b",
-      "Length": 66200
+      "Sha256": "931b39a649090959c4bc894a1050251d74308393f0ba6ec39ee44add84e688cd",
+      "Length": 66436
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
