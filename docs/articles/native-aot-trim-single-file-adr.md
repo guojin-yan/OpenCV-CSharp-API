@@ -24,6 +24,7 @@ The guard first builds the managed `net10.0` assembly, enters the Visual Studio 
 - The native probe was explicitly skipped because this checkout has no factual `JYPPX.OpenCV.Native` runtime directory.
 - With the factual Windows x64 runtime artifact supplied, the same smoke produced 21 published files (18 native payload files), verified the ABI/OpenCV probes, and encoded a 2x2 image to 71 PNG bytes. The structured record is [`native-aot-smoke-evidence.json`](../../packaging/performance/native-aot-smoke-evidence.json).
 - The AOT analysis warning from `Marshal.SizeOf(typeof(T))` in the pixel traits registry was removed by using the generic `Marshal.SizeOf<T>()` path. Subsequent publish produced no IL3050 warning for that code path.
+- The current managed-only `win-x64` consumer run records its compiler and NativeAOT publish diagnostics in [`native-aot-trim-warning-ledger.json`](../../packaging/performance/native-aot-trim-warning-ledger.json). The ledger is generated with `Test-NativeAotSmoke.ps1 -WarningLedgerPath ...`, requires zero unclassified warnings, and is checked by `Test-NativeAotTrimWarningLedger.ps1`.
 - A local `win-arm64` attempt stopped before publish because `VsDevCmd.bat -arch=arm64 -host_arch=x64` returned 255; the machine does not have the Visual Studio C++ ARM64 build tools. The guard reports this as an explicit toolchain failure rather than treating a cross-build as ARM64 evidence.
 - This record does not claim native runtime execution, ARM64 execution, or stable package-wide AOT/trim compatibility. Those require a matching runtime payload and an independent consumer on each promoted RID/profile.
 
@@ -32,3 +33,5 @@ The guard first builds the managed `net10.0` assembly, enters the Visual Studio 
 NativeAOT does not change the C ABI or managed API. Native loader search, runtime version mismatch, optional module availability, and single-file extraction with a factual native payload remain deployment evidence. A future `win-arm64` run may reuse the same consumer but must record its own SDK, linker, runtime payload, and executable result.
 
 NativeAOT 不改变 C ABI 或 managed API。native loader 查找、runtime 版本不匹配、可选模块可用性以及带真实 native payload 的单文件解压仍需独立部署证据。未来 `win-arm64` 运行必须记录自己的 SDK、linker、runtime payload 和可执行结果。
+
+当前 managed-only `win-x64` consumer 运行会把编译和 NativeAOT publish diagnostics 写入 [`native-aot-trim-warning-ledger.json`](../../packaging/performance/native-aot-trim-warning-ledger.json)。该 ledger 由 `Test-NativeAotSmoke.ps1 -WarningLedgerPath ...` 生成，并由 `Test-NativeAotTrimWarningLedger.ps1` 校验；当前记录要求没有未分类 warning。它不能替代真实 native runtime payload 或 ARM64 硬件证据。

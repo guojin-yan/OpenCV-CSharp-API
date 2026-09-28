@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/native-aot-trim-warning-ledger.schema.json",
+  "title": "NativeAOT trim warning ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "publish", "warnings", "warningCount", "limitations" ],
+  "properties": {
+    "$schema": { "const": "native-aot-trim-warning-ledger.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "enum": [ "verified", "warnings-observed" ] },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "architecture", "dotnet", "configuration" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "enum": [ "x64", "arm64", "x86" ] },
+        "dotnet": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "configuration": { "const": "Release" }
+      }
+    },
+    "publish": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "targetFramework", "runtimeIdentifier", "publishAot", "publishTrimmed", "trimMode", "publishSingleFile", "managedAssemblySha256", "publishedFileCount", "executableName", "nativePayloadFileCount", "nativeRuntimeSupplied", "nativeSmoke" ],
+      "properties": {
+        "targetFramework": { "const": "net10.0" },
+        "runtimeIdentifier": { "enum": [ "win-x64", "win-arm64" ] },
+        "publishAot": { "const": true },
+        "publishTrimmed": { "const": true },
+        "trimMode": { "const": "partial" },
+        "publishSingleFile": { "const": true },
+        "managedAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "publishedFileCount": { "type": "integer", "minimum": 1 },
+        "executableName": { "const": "AotSmoke.exe" },
+        "nativePayloadFileCount": { "type": "integer", "minimum": 0 },
+        "nativeRuntimeSupplied": { "type": "boolean" },
+        "nativeSmoke": { "enum": [ "verified", "skipped-native-runtime-missing" ] }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "phase", "code", "message" ],
+        "properties": {
+          "phase": { "enum": [ "managed-build", "native-publish" ] },
+          "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9]{2,8}$" },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "warningCount": { "type": "integer", "minimum": 0 },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

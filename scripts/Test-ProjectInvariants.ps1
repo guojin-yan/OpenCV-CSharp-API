@@ -331,6 +331,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "NativeAOT trim warning ledger"
+        Script = Join-Path $repo "scripts/Test-NativeAotTrimWarningLedger.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Performance benchmark evidence"
         Script = Join-Path $repo "scripts/Test-PerformanceBenchmarkEvidence.ps1"
         Arguments = @("-RepositoryRoot", $repo)
