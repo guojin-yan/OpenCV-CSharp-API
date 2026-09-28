@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/codec/image-preflight-fuzz-evidence.schema.json",
+  "title": "Image preflight process-isolated fuzz classification evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "corpusManifestSha256", "testFilter", "timeoutSeconds", "maxWorkingSetGrowthBytes", "nativeRuntimeRequired", "runner", "frameworks", "classifications", "limitations" ],
+  "properties": {
+    "$schema": { "const": "image-preflight-fuzz-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "enum": [ "verified", "failed" ] },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "corpusManifestSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "testFilter": { "const": "FullyQualifiedName~IdentifyDeterministicMutationCorpus" },
+    "timeoutSeconds": { "type": "integer", "minimum": 10, "maximum": 600 },
+    "maxWorkingSetGrowthBytes": { "type": "integer", "minimum": 1 },
+    "nativeRuntimeRequired": { "const": false },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "architecture", "dotnet", "configuration" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "const": "x64" },
+        "dotnet": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "configuration": { "const": "Release" }
+      }
+    },
+    "frameworks": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "targetFramework", "status", "failureClass", "exitCode", "durationMilliseconds", "fixtureCount", "expectedMinimumMutations", "baselineWorkingSetBytes", "peakWorkingSetBytes", "workingSetGrowthBytes", "resourceLeakObserved", "managedUnhandledExceptionCount", "managedTestFailureCount", "oomCount", "crashCount", "hangCount", "failureSummary" ],
+        "properties": {
+          "targetFramework": { "enum": [ "net8.0", "net10.0" ] },
+          "status": { "enum": [ "clean", "failed" ] },
+          "failureClass": { "enum": [ "clean", "managed-unhandled-exception", "managed-test-failure", "oom", "crash", "hang", "resource-leak" ] },
+          "exitCode": { "type": "integer" },
+          "durationMilliseconds": { "type": "integer", "minimum": 0 },
+          "fixtureCount": { "type": "integer", "minimum": 1 },
+          "expectedMinimumMutations": { "type": "integer", "minimum": 1 },
+          "baselineWorkingSetBytes": { "type": "integer", "minimum": 0 },
+          "peakWorkingSetBytes": { "type": "integer", "minimum": 0 },
+          "workingSetGrowthBytes": { "type": "integer", "minimum": 0 },
+          "resourceLeakObserved": { "type": "boolean" },
+          "managedUnhandledExceptionCount": { "type": "integer", "minimum": 0 },
+          "managedTestFailureCount": { "type": "integer", "minimum": 0 },
+          "oomCount": { "type": "integer", "minimum": 0 },
+          "crashCount": { "type": "integer", "minimum": 0 },
+          "hangCount": { "type": "integer", "minimum": 0 },
+          "failureSummary": { "type": "string" }
+        }
+      }
+    },
+    "classifications": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "clean", "managedUnhandledException", "managedTestFailure", "oom", "crash", "hang", "resourceLeak" ],
+      "properties": {
+        "clean": { "type": "integer", "minimum": 0 },
+        "managedUnhandledException": { "type": "integer", "minimum": 0 },
+        "managedTestFailure": { "type": "integer", "minimum": 0 },
+        "oom": { "type": "integer", "minimum": 0 },
+        "crash": { "type": "integer", "minimum": 0 },
+        "hang": { "type": "integer", "minimum": 0 },
+        "resourceLeak": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  }
+}
