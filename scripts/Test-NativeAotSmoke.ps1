@@ -54,7 +54,7 @@ function Get-SourceCommit {
 }
 
 function Resolve-OptionalOutputPath {
-    param([Parameter(Mandatory)][string]$Path)
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Path)
     if ([string]::IsNullOrWhiteSpace($Path)) { return '' }
     if ([IO.Path]::IsPathRooted($Path)) { return [IO.Path]::GetFullPath($Path) }
     return [IO.Path]::GetFullPath((Join-Path $repo ($Path -replace '/', [IO.Path]::DirectorySeparatorChar)))
@@ -164,6 +164,7 @@ try {
             warningCount = $warningRecords.Count
             limitations = @(
                 'The ledger records compiler and NativeAOT publish diagnostics for this exact consumer and runner.',
+                'The managed assembly hash identifies the assembly used by this measured publish; ordinary local rebuilds can change compiler output bytes.',
                 'The current record has no trim or AOT warnings; it does not promote package-wide IsAotCompatible or IsTrimmable metadata.',
                 'The managed-only run does not replace native runtime payload execution or ARM64 hardware evidence.'
             )
