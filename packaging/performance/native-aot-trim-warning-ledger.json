@@ -1,0 +1,33 @@
+{
+  "$schema": "native-aot-trim-warning-ledger.schema.json",
+  "schemaVersion": 1,
+  "status": "verified",
+  "sourceCommit": "499c75622d970dcf25681301919ced53e7b09970",
+  "runner": {
+    "os": "Microsoft Windows NT 10.0.26200.0",
+    "architecture": "x64",
+    "dotnet": "10.0.401",
+    "configuration": "Release"
+  },
+  "publish": {
+    "targetFramework": "net10.0",
+    "runtimeIdentifier": "win-x64",
+    "publishAot": true,
+    "publishTrimmed": true,
+    "trimMode": "partial",
+    "publishSingleFile": true,
+    "managedAssemblySha256": "2f8f999504f09219d91af885c0601164a781845e15ff0469ca2a23be4c8c3010",
+    "publishedFileCount": 3,
+    "executableName": "AotSmoke.exe",
+    "nativePayloadFileCount": 0,
+    "nativeRuntimeSupplied": false,
+    "nativeSmoke": "skipped-native-runtime-missing"
+  },
+  "warnings": [],
+  "warningCount": 0,
+  "limitations": [
+    "The ledger records compiler and NativeAOT publish diagnostics for this exact consumer and runner.",
+    "The current record has no trim or AOT warnings; it does not promote package-wide IsAotCompatible or IsTrimmable metadata.",
+    "The managed-only run does not replace native runtime payload execution or ARM64 hardware evidence."
+  ]
+}
