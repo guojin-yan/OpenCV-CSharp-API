@@ -445,6 +445,7 @@ function Get-ExpectedEvidencePaths {
         "tools/ScenarioBenchmark/ScenarioBenchmark.csproj",
         "tools/ScenarioBenchmark/Program.cs",
         "scripts/Test-ScenarioBenchmarkHarness.ps1",
+        "scripts/Measure-VideoDnnBenchmark.ps1",
         "scripts/Test-ImagePreflightMutationCorpus.ps1",
         "scripts/Measure-ImagePreflightFuzz.ps1",
         "scripts/Test-ImagePreflightFuzzEvidence.ps1",

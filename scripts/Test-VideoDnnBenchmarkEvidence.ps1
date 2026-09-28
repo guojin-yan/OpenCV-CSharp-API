@@ -11,8 +11,15 @@ foreach ($path in @($evidencePath, $schemaPath)) { if (-not (Test-Path -LiteralP
 if (-not (Test-Json -LiteralPath $evidencePath -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Video/DNN benchmark evidence failed JSON Schema validation.' }
 $evidence = Get-Content -LiteralPath $evidencePath -Raw | ConvertFrom-Json
 if ([string]$evidence.status -cne 'measured' -or [string]$evidence.sourceCommit -notmatch '^[0-9a-f]{40}$') { throw 'Video/DNN benchmark evidence identity is invalid.' }
+$commitType = ((& git -C $repo cat-file -t ([string]$evidence.sourceCommit) 2>$null) | Select-Object -First 1).Trim()
+if ($LASTEXITCODE -ne 0 -or $commitType -cne 'commit') { throw 'Video/DNN benchmark source commit is not present in the repository.' }
+& git -C $repo merge-base --is-ancestor ([string]$evidence.sourceCommit) HEAD 2>$null
+if ($LASTEXITCODE -ne 0) { throw 'Video/DNN benchmark source commit is not an ancestor of HEAD.' }
 if ([string]$evidence.runner.architecture -cne 'x64' -or [string]$evidence.runner.configuration -cne 'Release') { throw 'Video/DNN runner identity drifted.' }
 if (@($evidence.runner.nativePayload).Count -lt 18) { throw 'Video/DNN evidence must bind the complete 18-file full runtime payload including the wrapper loader.' }
+$payloadNames = @($evidence.runner.nativePayload | ForEach-Object { [string]$_.name })
+if (@($payloadNames | Select-Object -Unique).Count -ne 18 -or $payloadNames -notcontains 'JYPPX.OpenCV.Native.dll' -or $payloadNames -notcontains 'opencv_dnn500.dll' -or $payloadNames -notcontains 'opencv_videoio500.dll') { throw 'Video/DNN native payload identity is incomplete or duplicated.' }
+if ([string]$evidence.runner.managedAssemblySha256 -notmatch '^[0-9a-f]{64}$' -or [string]$evidence.runner.nativeRuntimePackageSha256 -notmatch '^[0-9a-f]{64}$') { throw 'Video/DNN artifact hashes are malformed.' }
 foreach ($scenarioName in @('video','dnn')) {
     $metric = $evidence.$scenarioName.metric
     if ([int64]$metric.peakWorkingSetBytes -lt [int64]$metric.baselineWorkingSetBytes) { throw "Scenario peak working set is below baseline: $scenarioName" }

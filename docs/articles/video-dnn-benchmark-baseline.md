@@ -11,4 +11,14 @@ dotnet run --project .\tools\ScenarioBenchmark\ScenarioBenchmark.csproj -c Relea
   -p:OpenCvNativeRuntimeDir=C:\path\to\native-runtime
 ```
 
+生成绑定 source commit、managed assembly、runtime package 和 18 个 native payload 文件 hash 的结构化证据：
+
+```powershell
+pwsh -NoProfile -File .\scripts\Measure-VideoDnnBenchmark.ps1 `
+  -OpenCvNativeRuntimeDir C:\path\to\runtimes\win-x64\native `
+  -NativeRuntimePackagePath C:\path\to\jyppx.opencv.runtime.win-x64.5.0.0.nupkg
+```
+
+测量脚本会逐项比较 runtime 目录与 `.nupkg` 中 `runtimes/win-x64/native` 的 18 个 DLL 名称、长度与 SHA-256；两者不一致时拒绝生成证据。`sourceCommit` 绑定当前 managed source，runtime package/payload hash 绑定本次实际消费的事实性 OpenCV 5.0.0 full runtime；该记录不声称 native payload 由同一 source commit 重建。
+
 没有匹配的 native runtime 时，工具只输出 `status=skipped`；有 runtime 但 VideoIO 或 DNN 场景不能执行时，工具失败，不会生成部分测量。结构化证据见 [`video-dnn-benchmark-evidence.json`](../../packaging/performance/video-dnn-benchmark-evidence.json)，由 [`Test-VideoDnnBenchmarkEvidence.ps1`](../../scripts/Test-VideoDnnBenchmarkEvidence.ps1) 校验。
