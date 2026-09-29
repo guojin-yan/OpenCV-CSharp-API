@@ -1,0 +1,110 @@
+{
+  "$schema": "runtime-headless-candidate-evidence.schema.json",
+  "schemaVersion": 1,
+  "status": "candidate-partial",
+  "sourceCommit": "e218612596cff554cde74e071196074239b19368",
+  "candidateProfile": "mini-headless-candidate",
+  "candidatePackageIdentityAllowed": false,
+  "runner": {
+    "os": "Microsoft Windows 10.0.26200",
+    "architecture": "x64",
+    "dotnet": "10.0.401",
+    "configuration": "Release"
+  },
+  "timeoutSeconds": 60,
+  "runtimePackage": {
+    "packageFileName": "jyppx.opencv.runtime.win-x64.mini.5.0.0.nupkg",
+    "packageSha256": "c4712ed62f34f31eacaaa4c51f84ee6003bf5bab3cfcca850d39c3b812628918",
+    "nativeDllCount": 7,
+    "payload": [
+      {
+        "name": "JYPPX.OpenCV.Native.dll",
+        "bytes": 425984,
+        "sha256": "f71b88644086af816cf607383d486411c581dd122d6f70d2b9ee5f8699e49eca"
+      },
+      {
+        "name": "opencv_core500.dll",
+        "bytes": 5802496,
+        "sha256": "aa26697bae8f5581b64b3faf3da01a8c04c4e5c4618c7b15417d1a83c3a64c8e"
+      },
+      {
+        "name": "opencv_flann500.dll",
+        "bytes": 809984,
+        "sha256": "abbd5fb7f128ca7a928a667239e76b626dbc377b4c719c9dd81d5861882c3776"
+      },
+      {
+        "name": "opencv_geometry500.dll",
+        "bytes": 3350016,
+        "sha256": "f1e50f89952856756db42629a9b1b025705107540e61a7a131836c4fc447dd54"
+      },
+      {
+        "name": "opencv_imgcodecs500.dll",
+        "bytes": 3500032,
+        "sha256": "e35f3c160518b26d48348030d38fd996c27decec0741fce20f967fc81f756cb0"
+      },
+      {
+        "name": "opencv_imgproc500.dll",
+        "bytes": 11042304,
+        "sha256": "157d52d62ee0c240874d6e97c8f5498e608533911c40cc070ad59a5fddb6a0e1"
+      },
+      {
+        "name": "opencv_videoio500.dll",
+        "bytes": 989184,
+        "sha256": "2c857b3ebb6bff41acff39ce4789bf97001557d2339de165f3ce3423c70f8023"
+      }
+    ]
+  },
+  "environment": {
+    "displayUnset": true,
+    "waylandDisplayUnset": true,
+    "ldLibraryPathUnset": true,
+    "runtimeRootUnset": true
+  },
+  "frameworks": [
+    {
+      "targetFramework": "net8.0",
+      "total": 1,
+      "executed": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "timedOut": false,
+      "failureClass": "clean",
+      "durationMilliseconds": 3090
+    },
+    {
+      "targetFramework": "net10.0",
+      "total": 1,
+      "executed": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "timedOut": false,
+      "failureClass": "clean",
+      "durationMilliseconds": 2866
+    }
+  ],
+  "videoio": {
+    "backends": "1900:FFMPEG:plugin|1800:GSTREAMER:plugin|2300:INTEL_MFX:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2000:CV_IMAGES:built-in|2200:CV_MJPEG:built-in|2500:UEYE:plugin|2600:OBSENSOR:built-in||1900:FFMPEG:plugin|1800:GSTREAMER:plugin|2300:INTEL_MFX:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2000:CV_IMAGES:built-in|2200:CV_MJPEG:built-in|2500:UEYE:plugin|2600:OBSENSOR:built-in",
+    "cameraBackends": "1800:GSTREAMER:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2500:UEYE:plugin|2600:OBSENSOR:built-in||1800:GSTREAMER:plugin|1400:MSMF:plugin|1900:FFMPEG:plugin|2500:UEYE:plugin|2600:OBSENSOR:built-in",
+    "missingFileOpen": "returned-false"
+  },
+  "dnn": {
+    "status": "omitted-deterministic-unavailable"
+  },
+  "verifiedCases": [
+    "HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path",
+    "HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path",
+    "HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path",
+    "HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path",
+    "HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path",
+    "codec PNG encode remains usable after failed HighGui calls",
+    "VideoIO missing-file open returns explicit false and disposes cleanly",
+    "DNN target query is deterministically unavailable because Mini omits dnn"
+  ],
+  "limitations": [
+    "This candidate evidence covers the existing Mini runtime payload, whose native wrapper omits HighGui entrypoints; it does not create a new headless package identity.",
+    "Full headless requires a separately rebuilt wrapper/profile without HighGui and is intentionally pending.",
+    "The VideoIO result is a bounded missing-file negative case; camera/network backend availability and multi-distro consumer gates remain pending."
+  ]
+}
