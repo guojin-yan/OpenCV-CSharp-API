@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/compatibility/upstream-map-catalog.schema.json",
+  "title": "OpenCV upstream map catalog and shared policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "upstreamOpenCvVersion", "parser", "classificationPolicy", "moduleCount", "maps", "limitations" ],
+  "properties": {
+    "$schema": { "const": "upstream-map-catalog.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "active" },
+    "upstreamOpenCvVersion": { "const": "5.0.0" },
+    "parser": { "$ref": "#/$defs/sourceFile" },
+    "classificationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "allowed", "requiredFields", "implementedRequiresNativeAndManagedEvidence", "unexplainedMissingAllowed" ],
+      "properties": {
+        "allowed": { "const": [ "implemented", "missing", "intentionally-omitted", "upstream-conditional", "unsupported", "non-callable-metadata" ] },
+        "requiredFields": { "const": [ "ordinal", "identity", "classification", "reason", "nativeEntrypoints", "managedMembers" ] },
+        "implementedRequiresNativeAndManagedEvidence": { "const": true },
+        "unexplainedMissingAllowed": { "const": false }
+      }
+    },
+    "moduleCount": { "const": 14 },
+    "maps": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "id", "repository", "generatorProject", "extractorScript", "generationScript", "semanticGuard", "scope", "artifacts", "evidenceContract" ],
+        "properties": {
+          "id": { "enum": [ "calib3d", "core", "dnn", "features", "highgui", "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "tracking", "video", "videoio" ] },
+          "repository": { "enum": [ "opencv", "opencv_contrib" ] },
+          "generatorProject": { "type": "string", "pattern": "^tools/[A-Za-z0-9]+UpstreamMap$" },
+          "extractorScript": { "$ref": "#/$defs/repositoryPath" },
+          "generationScript": { "$ref": "#/$defs/repositoryPath" },
+          "semanticGuard": { "$ref": "#/$defs/repositoryPath" },
+          "scope": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [ "claimedSlice", "primaryHeader", "parser", "sourceHeaders", "compatibilityHeaders", "excludedPublicHeaders" ],
+            "properties": {
+              "claimedSlice": { "type": "string", "minLength": 10 },
+              "primaryHeader": { "$ref": "#/$defs/sourceFile" },
+              "parser": { "$ref": "#/$defs/sourceFile" },
+              "sourceHeaders": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sourceFile" } },
+              "compatibilityHeaders": { "type": "array", "items": { "$ref": "#/$defs/sourceFile" } },
+              "excludedPublicHeaders": { "type": "array", "items": { "$ref": "#/$defs/sourceFile" } }
+            }
+          },
+          "artifacts": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [ "raw", "classifications", "mapping", "summary", "familyInventory", "sourceReviewedExtensions" ],
+            "properties": {
+              "raw": { "$ref": "#/$defs/repositoryPath" },
+              "classifications": { "$ref": "#/$defs/repositoryPath" },
+              "mapping": { "$ref": "#/$defs/repositoryPath" },
+              "summary": { "$ref": "#/$defs/repositoryPath" },
+              "familyInventory": { "$ref": "#/$defs/repositoryPath" },
+              "sourceReviewedExtensions": { "oneOf": [ { "$ref": "#/$defs/repositoryPath" }, { "const": "" } ] }
+            }
+          },
+          "evidenceContract": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [ "declarations", "negativeFixturesMinimum", "mappingSha256", "familyInventorySha256", "sourceReviewedExtensionSha256", "zeroMissing", "repositoryWideParityClaimed" ],
+            "properties": {
+              "declarations": { "type": "integer", "minimum": 1 },
+              "negativeFixturesMinimum": { "type": "integer", "minimum": 1 },
+              "mappingSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "familyInventorySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "sourceReviewedExtensionSha256": { "type": "string" },
+              "zeroMissing": { "const": true },
+              "repositoryWideParityClaimed": { "const": false }
+            }
+          }
+        }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "repositoryPath": { "type": "string", "pattern": "^(?!/)(?!.*\\.\\.)(?![A-Za-z]:)[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*$" },
+    "sourceFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "path", "sha256" ],
+      "properties": {
+        "path": { "type": "string", "pattern": "^opencv-source/(opencv-5\\.0\\.0|opencv_contrib-5\\.0\\.0)/" },
+        "sha256": { "type": "string" },
+        "reason": { "type": "string" },
+        "includes": { "type": "string" },
+        "startOrdinal": { "type": "integer", "minimum": 0 },
+        "declarationCount": { "type": "integer", "minimum": 0 }
+      },
+      "allOf": [
+        { "if": { "properties": { "sha256": { "const": "" } } }, "then": { "required": [ "reason" ] } }
+      ]
+    }
+  }
+}

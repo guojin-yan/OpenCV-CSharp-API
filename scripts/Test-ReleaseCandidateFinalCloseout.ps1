@@ -75,6 +75,8 @@ function Get-ExpectedEvidencePaths {
         "README.md",
         "README_cn.md",
         "compatibility/api-gap-inventory.json",
+        "compatibility/upstream-map-catalog.json",
+        "compatibility/upstream-map-catalog.schema.json",
         "compatibility/calib3d-implemented-families.json",
         "compatibility/calib3d-upstream-classifications.json",
         "compatibility/calib3d-upstream-map.txt",
@@ -156,6 +158,7 @@ function Get-ExpectedEvidencePaths {
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
+        "docs/articles/upstream-map-toolchain.md",
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
@@ -492,6 +495,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-ModernApiPreviewSamples.ps1",
         "scripts/Test-PlatformProbeSample.ps1",
         "scripts/Test-V501ChangeLedger.ps1",
+        "scripts/New-UpstreamMapCatalog.ps1",
+        "scripts/Test-UpstreamMapCatalog.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
         "scripts/Test-TypedMatBenchmarkHarness.ps1",
@@ -630,7 +635,7 @@ function Test-Record {
 
     $expectedChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
     $sdkPolicyValid = ($Record.LocalValidation.SdkPolicy -eq ".NET 10 (any installed feature band)") -or ($Record.LocalValidation.ExactSdk -match '^10\.0\.\d+$')
-    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 90 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
+    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 91 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
     Assert-True -List $List -Condition ($Record.Signing.Status -eq "repository-signing-pending" -and $Record.Signing.Strategy -eq "nuget.org-repository-signing" -and $Record.Signing.NormalizedInputRequired -and -not [bool]$Record.Signing.AuthorCertificateRequired -and -not [bool]$Record.Signing.PrivateKeyRequired -and -not [bool]$Record.Signing.PrivateKeyMaterialPresent -and $Record.Signing.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.Signing.ExpectedSignatureType -eq "Repository" -and $Record.Signing.ExpectedOwner -eq "GuojinYan" -and $Record.Signing.VerificationScript -eq "scripts/Test-NuGetRepositorySignedPackage.ps1" -and $Record.Signing.Verification -eq "post-publication-required") -Issue "Final closeout repository-signing state drifted"
     Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3" -and $Record.Sbom.Generator -eq "scripts/New-ReleasePackageSbom.ps1" -and $Record.Sbom.Guard -eq "scripts/Test-ReleasePackageSbom.ps1" -and [bool]$Record.Sbom.Deterministic -and -not [bool]$Record.Sbom.FinalCandidateDocumentGenerated -and $Record.Sbom.Verification -eq "generator-verified-final-candidate-not-generated") -Issue "Final closeout SBOM state must retain a verified generator without claiming final-candidate output"
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"

@@ -436,78 +436,13 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
-        Name = "ImgProc upstream map"
-        Script = Join-Path $repo "scripts/Test-ImgProcUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "ImgCodecs upstream map"
-        Script = Join-Path $repo "scripts/Test-ImgCodecsUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "VideoIO upstream map"
-        Script = Join-Path $repo "scripts/Test-VideoIOUpstreamMap.ps1"
+        Name = "Configured upstream map suite"
+        Script = Join-Path $repo "scripts/Test-UpstreamMapCatalog.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
         Name = "VideoIO registry surface"
         Script = Join-Path $repo "scripts/Test-VideoIORegistrySurface.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Calib3D upstream map"
-        Script = Join-Path $repo "scripts/Test-Calib3DUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Core upstream map"
-        Script = Join-Path $repo "scripts/Test-CoreUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "DNN upstream map"
-        Script = Join-Path $repo "scripts/Test-DnnUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Features upstream map"
-        Script = Join-Path $repo "scripts/Test-FeaturesUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "HighGui upstream map"
-        Script = Join-Path $repo "scripts/Test-HighGuiUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "ObjDetect upstream map"
-        Script = Join-Path $repo "scripts/Test-ObjDetectUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Photo upstream map"
-        Script = Join-Path $repo "scripts/Test-PhotoUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "ML upstream map"
-        Script = Join-Path $repo "scripts/Test-MlUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Tracking upstream map"
-        Script = Join-Path $repo "scripts/Test-TrackingUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Stitching upstream map"
-        Script = Join-Path $repo "scripts/Test-StitchingUpstreamMap.ps1"
-        Arguments = @("-RepositoryRoot", $repo)
-    },
-    [pscustomobject]@{
-        Name = "Video upstream map"
-        Script = Join-Path $repo "scripts/Test-VideoUpstreamMap.ps1"
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{

@@ -142,6 +142,8 @@ function Get-Record {
         "README.md",
         "README_cn.md",
         "compatibility/api-gap-inventory.json",
+        "compatibility/upstream-map-catalog.json",
+        "compatibility/upstream-map-catalog.schema.json",
         "compatibility/calib3d-implemented-families.json",
         "compatibility/calib3d-upstream-classifications.json",
         "compatibility/calib3d-upstream-map.txt",
@@ -223,6 +225,7 @@ function Get-Record {
         "compatibility/v5.0.1-change-ledger.json",
         "compatibility/v5.0.1-change-ledger.schema.json",
         "docs/articles/api-abi-compatibility-policy.md",
+        "docs/articles/upstream-map-toolchain.md",
         "docs/articles/calib3d-upstream-parity-guide.md",
         "docs/articles/core-upstream-parity-guide.md",
         "docs/articles/dnn-structured-parity-guide.md",
@@ -559,6 +562,8 @@ function Get-Record {
         "scripts/Test-ModernApiPreviewSamples.ps1",
         "scripts/Test-PlatformProbeSample.ps1",
         "scripts/Test-V501ChangeLedger.ps1",
+        "scripts/New-UpstreamMapCatalog.ps1",
+        "scripts/Test-UpstreamMapCatalog.ps1",
         "tools/TypedMatBenchmark/TypedMatBenchmark.csproj",
         "tools/TypedMatBenchmark/Program.cs",
         "scripts/Test-TypedMatBenchmarkHarness.ps1",
@@ -999,7 +1004,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 90
+            InvariantGuardCount = 91
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false
