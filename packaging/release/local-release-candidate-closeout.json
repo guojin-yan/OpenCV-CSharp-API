@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/390c9be0cc89e152",
-  "SourceIdentity": "sha256:390c9be0cc89e15206abf7e03e8ceb1453167a94edcaf8852ed66613be448935",
+  "CandidateId": "local-closeout/sha256/18203ac65a0253a7",
+  "SourceIdentity": "sha256:18203ac65a0253a757fa5099045325c967eecf8b7b14fc748b053e0d72ea34d9",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1794,
-    "Sha256": "390c9be0cc89e15206abf7e03e8ceb1453167a94edcaf8852ed66613be448935",
+    "FileCount": 1798,
+    "Sha256": "18203ac65a0253a757fa5099045325c967eecf8b7b14fc748b053e0d72ea34d9",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "19276f0826784a4f2a9379925beb6174c342b98adba2ddd711e2c2f97e563fc5",
-      "Length": 5853
+      "Sha256": "d5436270f1621ad2e2c783f9ca5443733125504275836e0bf40f2e3aa3136e1b",
+      "Length": 6073
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -938,13 +938,13 @@
     },
     {
       "Path": "docs/articles/codec-benchmark-baseline.md",
-      "Sha256": "6d5e735644bd3b02d29d5f40f439f018d45e0b50489d2436e26810441193b776",
-      "Length": 2910
+      "Sha256": "bb60026a0a634d466fbea59be5949444fd06ad9766b13828adb5b070a78a57bd",
+      "Length": 3305
     },
     {
       "Path": "docs/articles/codec-buffer-and-owner-adr.md",
-      "Sha256": "8bb790ac7471f7288bdca874cc05a0fbec35fa19a35f7d4203de56efed63f175",
-      "Length": 5221
+      "Sha256": "7dcf64c71f7a642ecce3421f33ac7c83bff9cac4398c3ec71a8853a405ff6510",
+      "Length": 5806
     },
     {
       "Path": "docs/articles/codec-buffer-lease-adr.md",
@@ -1292,6 +1292,16 @@
       "Length": 5019
     },
     {
+      "Path": "packaging/performance/codec-writer-native-evidence.json",
+      "Sha256": "2b9168b734b04dc91fb013e4c6e92697ba36b67ca94995e203fc0772ab365c0d",
+      "Length": 8650
+    },
+    {
+      "Path": "packaging/performance/codec-writer-native-evidence.schema.json",
+      "Sha256": "870c66b4d32098c60d2b57cbd1ff3e208a28d6f8264f0e4117ee4046702e8c86",
+      "Length": 3904
+    },
+    {
       "Path": "packaging/performance/native-aot-smoke-evidence.json",
       "Sha256": "05ca0d86ae26a728fa817d47feeb701807549c081d36d5bb69d760456ce06fc3",
       "Length": 1114
@@ -1632,6 +1642,11 @@
       "Length": 9395
     },
     {
+      "Path": "scripts/Measure-CodecWriterNativeEvidence.ps1",
+      "Sha256": "663d4d714e668b14e00d5be904bfd0288790471672fe4b8bb0ee6b54cb194583",
+      "Length": 12617
+    },
+    {
       "Path": "scripts/Measure-ImagePreflightFuzz.ps1",
       "Sha256": "fddc61119bf0a98a1b63bc52e6fdd1988c29dbdd177371061adaf77d932142c5",
       "Length": 9610
@@ -1663,8 +1678,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "55f052f5496f10bfd1d5021139b5c531939d11442ad6e3c1495c58c5c32e0996",
-      "Length": 69805
+      "Sha256": "f28d4ac9bc56e7fe737e3f9a8d7b227425e9e01b26c183dc40dd2e9c6a31a21f",
+      "Length": 70057
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1705,6 +1720,11 @@
       "Path": "scripts/Test-CodecBenchmarkHarness.ps1",
       "Sha256": "c45ff40c0362a8bb9e319c67d3b47a2bccbcfb8e856ad45a311debd2c813f841",
       "Length": 3309
+    },
+    {
+      "Path": "scripts/Test-CodecWriterNativeEvidence.ps1",
+      "Sha256": "5147da132b19dd4bc33c3112af54c0811acc7a3d2666eff54a7cd5c78448c9be",
+      "Length": 6351
     },
     {
       "Path": "scripts/Test-CoreUpstreamMap.ps1",
@@ -1928,8 +1948,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "fc4728728c34ae3c87484b708554e96b6cc1373ee6ef832bd1b07db96059889e",
-      "Length": 67407
+      "Sha256": "333a5a245903f466735bb14aae16edea8d37d72efbe65f2528a5ddbe471a7fa2",
+      "Length": 67659
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1938,7 +1958,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "cd2aed04d9be268851f10b10ce80c8ca2917baaf6e7e58a692fa81c54484893a",
+      "Sha256": "ae3a688181536e674fea612f57e1ece1567efa429140533285836ddf4654f6ba",
       "Length": 45784
     },
     {
@@ -2529,7 +2549,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 84,
+    "InvariantGuardCount": 85,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
