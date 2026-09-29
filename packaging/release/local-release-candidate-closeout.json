@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/e0d8051c5642e644",
-  "SourceIdentity": "sha256:e0d8051c5642e6449827181010e7d8ebd6facd37839d711589b4ed1eb7ac6119",
+  "CandidateId": "local-closeout/sha256/a44b196deddabae0",
+  "SourceIdentity": "sha256:a44b196deddabae053e130c8119937899e9e802b3e80f8be525141b0e5d9a73d",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1805,
-    "Sha256": "e0d8051c5642e6449827181010e7d8ebd6facd37839d711589b4ed1eb7ac6119",
+    "FileCount": 1809,
+    "Sha256": "a44b196deddabae053e130c8119937899e9e802b3e80f8be525141b0e5d9a73d",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "6056b8730867a3b8ece22ab4a71559ab718c7b0de4d289837fba7b95de5bf04d",
-      "Length": 6465
+      "Sha256": "f8596b9b9d08eca89be4575a03c755ebe5b123b5b3d3944f6ea35fd67d11ffa7",
+      "Length": 6695
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1352,6 +1352,16 @@
       "Length": 4022
     },
     {
+      "Path": "packaging/performance/typed-mat-owner-lifetime-matrix.json",
+      "Sha256": "f1ea8f9983d2c2b061e0e41d8eb5da9d0046a49b73b9b2e996eb97569f085caa",
+      "Length": 6826
+    },
+    {
+      "Path": "packaging/performance/typed-mat-owner-lifetime-matrix.schema.json",
+      "Sha256": "779baacc1849280c78838d6e442101a7b6d9af4c24866240a647b88e1c63b077",
+      "Length": 3514
+    },
+    {
       "Path": "packaging/performance/typed-mat-target-framework-evidence.json",
       "Sha256": "a3e1dc76b3e3e1c8ce14c03e3eba0b8db37420228b743dd7e492169f736c0acb",
       "Length": 745
@@ -1672,6 +1682,11 @@
       "Length": 10357
     },
     {
+      "Path": "scripts/Measure-TypedMatOwnerLifetimeMatrix.ps1",
+      "Sha256": "34c93cd559203dc55e1b2b701ef1e568b166a79b2f3e2e5506acbeefcc1e2a7d",
+      "Length": 5596
+    },
+    {
       "Path": "scripts/Measure-VideoDnnBenchmark.ps1",
       "Sha256": "34cc18df9fef516d1e4b5525d5d9e984ba6ed24d17b6772fe7d52d6e8a10a069",
       "Length": 8047
@@ -1693,8 +1708,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "aa627c92b4958a91614381373c8e560ab3f43df551e7e093a37938ca34085a13",
-      "Length": 70311
+      "Sha256": "24604748b5c8dc830c042610740ba6c04ef58f05356828230e0c515a61d32c91",
+      "Length": 70573
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1968,8 +1983,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "5d08d3ee437b0e1e57b94c087981e51854e390aab425b43c66f5e175a521041b",
-      "Length": 67913
+      "Sha256": "c63289aa3f74f125fdb637a8db5368a191300fbc38c5798f05896f7724566508",
+      "Length": 68175
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1978,7 +1993,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "ce46eaac77cab09bd839d04696e935ccce833b1e635c9dff0c35980fe33a4ddb",
+      "Sha256": "a73151012b3b25d6e8a1e2e1707119c008eca702471d89b50769db48d4cf059f",
       "Length": 45784
     },
     {
@@ -2042,9 +2057,14 @@
       "Length": 4150
     },
     {
+      "Path": "scripts/Test-TypedMatOwnerLifetimeMatrix.ps1",
+      "Sha256": "d9e2d9ff257dd8d6eb309b12d8828437eb830e737f944d2ae0592a81a6a96b90",
+      "Length": 3642
+    },
+    {
       "Path": "scripts/Test-TypedMatTargetFrameworks.ps1",
-      "Sha256": "dabfadd0134efb689f9171a8cd2c2931f5d60e87dd3e05f438eb85435adde666",
-      "Length": 1334
+      "Sha256": "0a9423257988080d1d4321fdbae3a268e161ef185bdcce1107f99def79751319",
+      "Length": 1284
     },
     {
       "Path": "scripts/Test-V501ChangeLedger.ps1",
@@ -2569,7 +2589,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 87,
+    "InvariantGuardCount": 88,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
