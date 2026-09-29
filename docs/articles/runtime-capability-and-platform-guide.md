@@ -37,6 +37,17 @@ The field and state contract is published at
 `packaging/runtime/runtime-capabilities-json.schema.json` and is checked by
 `scripts/Test-CapabilitiesJsonContract.ps1`.
 
+The profile boundary is measured separately on Windows x64 with the same
+managed build against no native runtime, the full runtime package, and the
+mini runtime package. `scripts/Measure-CapabilityProfileEvidence.ps1` records
+the exact package and native DLL hashes in
+`packaging/runtime/capability-profile-evidence.json`; the committed record is
+validated by `scripts/Test-CapabilityProfileEvidence.ps1`. The evidence proves
+the four required modules in both full and mini, the HighGUI/DNN negative path
+in mini, and the no-runtime negative path. Optional contrib names remain
+`Declared` and GPU/OpenCL remains `Unknown` until a profile-specific execution
+probe exists.
+
 `NativeRuntime.State == Verified` means that both the wrapper ABI and the OpenCV version probes matched. `VideoIOBackends` describes registry entries and built-in status; it is not proof that a camera, codec, or device can be opened. DNN `Verified` means that the backend returned a target list; a model execution probe is still required for a production claim.
 
 `Modules` contains the four native modules required by the current wrapper boundary: `core`, `imgproc`, `imgcodecs`, and `videoio`. Their state is derived only from the native ABI and OpenCV version probes, so `Verified` means the required runtime identity was verified; it does not infer optional contrib modules, full/mini promotion, codec availability, or GPU execution.
@@ -69,6 +80,15 @@ The field and state contract is published at
 字段和状态契约位于
 `packaging/runtime/runtime-capabilities-json.schema.json`，并由
 `scripts/Test-CapabilitiesJsonContract.ps1` 自动校验。
+
+profile 边界在 Windows x64 上用同一 managed build 分别对无 native runtime、
+full runtime package 和 mini runtime package 测量。`scripts/Measure-CapabilityProfileEvidence.ps1`
+把 exact package 与 native DLL hash 记录到
+`packaging/runtime/capability-profile-evidence.json`，并由
+`scripts/Test-CapabilityProfileEvidence.ps1` 校验提交的证据。该证据证明
+full 和 mini 都有四个必需模块，mini 的 HighGUI/DNN 负路径，以及无 runtime
+负路径。可选 contrib 名称继续保持 `Declared`，GPU/OpenCL 在出现 profile-specific
+执行探针前继续保持 `Unknown`。
 
 ## Platform Identity
 

@@ -301,6 +301,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Capability profile evidence"
+        Script = Join-Path $repo "scripts/Test-CapabilityProfileEvidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Codec benchmark harness"
         Script = Join-Path $repo "scripts/Test-CodecBenchmarkHarness.ps1"
         Arguments = @("-RepositoryRoot", $repo)
