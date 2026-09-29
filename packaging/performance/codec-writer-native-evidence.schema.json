@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/codec-writer-native-evidence.schema.json",
+  "title": "Codec writer native evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "runner", "runtimePackages", "test", "limitations" ],
+  "properties": {
+    "$schema": { "const": "codec-writer-native-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "verified" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "runner": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "os", "dotnetSdk", "architecture", "configuration" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "dotnetSdk": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+" },
+        "architecture": { "const": "x64" },
+        "configuration": { "const": "Release" }
+      }
+    },
+    "runtimePackages": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": [ "profile", "package" ],
+        "properties": {
+          "profile": { "enum": [ "full", "mini" ] },
+          "package": {
+            "type": "object", "additionalProperties": false,
+            "required": [ "packageFileName", "packageSha256", "payload" ],
+            "properties": {
+              "packageFileName": { "type": "string", "minLength": 1 },
+              "packageSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "payload": {
+                "type": "array", "minItems": 1,
+                "items": {
+                  "type": "object", "additionalProperties": false,
+                  "required": [ "name", "bytes", "sha256" ],
+                  "properties": {
+                    "name": { "type": "string", "minLength": 1 },
+                    "bytes": { "type": "integer", "minimum": 1 },
+                    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "test": {
+      "type": "object", "additionalProperties": false,
+      "required": [ "class", "filter", "nativeSmokeEnabled", "targetFrameworks", "verifiedCases" ],
+      "properties": {
+        "class": { "const": "JYPPX.OpenCvSharp.Tests.ImgCodecs.Cv2InteropTests" },
+        "filter": { "type": "string", "minLength": 1 },
+        "nativeSmokeEnabled": { "const": true },
+        "targetFrameworks": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": [ "profile", "targetFramework", "total", "executed", "passed", "failed", "skipped", "error", "timeout", "aborted", "nativeSmokeEnabled", "testAssemblySha256", "apiAssemblySha256" ],
+            "properties": {
+              "profile": { "enum": [ "full", "mini" ] },
+              "targetFramework": { "enum": [ "net8.0", "net10.0" ] },
+              "total": { "const": 8 }, "executed": { "const": 8 }, "passed": { "const": 8 },
+              "failed": { "const": 0 }, "skipped": { "const": 0 }, "error": { "const": 0 },
+              "timeout": { "const": 0 }, "aborted": { "const": 0 }, "nativeSmokeEnabled": { "const": true },
+              "testAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "apiAssemblySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        },
+        "verifiedCases": { "type": "array", "minItems": 8, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}
