@@ -31,9 +31,9 @@ This record defines the boundary for encoded bytes, streams, `IBufferWriter<byte
 
 ## Current preview evidence
 
-`tests/OpenCvSharp.Tests/ImgCodecs/Cv2InteropTests.cs` now includes an exact caller-owned segment writer. It verifies one `GetSpan`/`Advance` pair, the requested payload length, and byte-for-byte equality with the compatibility `byte[]` encoder on both `net8.0` and `net10.0`. The writer remains preview-only; the allocation comparison and full native runtime evidence are still required for promotion.
+`tests/OpenCvSharp.Tests/ImgCodecs/Cv2InteropTests.cs` now includes an exact caller-owned segment writer. It verifies one `GetSpan`/`Advance` pair, the requested payload length, and byte-for-byte equality with the compatibility `byte[]` encoder on both `net8.0` and `net10.0`. [`codec-writer-native-evidence.json`](../../packaging/performance/codec-writer-native-evidence.json) records the focused native run for full and mini Windows x64 runtime packages: four rows (full/mini x net8.0/net10.0), 32/32 passed, native smoke enabled, and exact package/payload hashes. The writer remains preview-only; the allocation comparison and owner/lifetime stabilization review are still required for promotion.
 
-当前 preview 已加入 exact caller-owned segment writer 测试：验证一次 `GetSpan`/`Advance`、请求长度以及与兼容 `byte[]` encoder 的逐字节一致性，并在 `net8.0` 与 `net10.0` 通过。writer 仍保持 preview；晋升前还需要 allocation 对比和完整 native runtime evidence。
+当前 preview 已加入 exact caller-owned segment writer 测试：验证一次 `GetSpan`/`Advance`、请求长度以及与兼容 `byte[]` encoder 的逐字节一致性，并在 `net8.0` 与 `net10.0` 通过。[`codec-writer-native-evidence.json`](../../packaging/performance/codec-writer-native-evidence.json) 记录 Windows x64 full/mini runtime 的 focused native 矩阵：full/mini x net8.0/net10.0 共四行、32/32 passed、native smoke 已启用，并绑定准确的 package/payload hash。writer 仍保持 preview；晋升前还需要 allocation 对比和 owner/lifetime 稳定化评审。
 
 ## Promotion gate
 

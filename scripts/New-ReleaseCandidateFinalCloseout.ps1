@@ -309,6 +309,8 @@ function Get-Record {
         "packaging/codec/image-preflight-fuzz-evidence.schema.json",
         "packaging/performance/codec-typed-mat-benchmark-evidence.json",
         "packaging/performance/codec-typed-mat-benchmark-evidence.schema.json",
+        "packaging/performance/codec-writer-native-evidence.json",
+        "packaging/performance/codec-writer-native-evidence.schema.json",
         "packaging/performance/video-dnn-benchmark-evidence.json",
         "packaging/performance/video-dnn-benchmark-evidence.schema.json",
         "packaging/performance/perf-001-regression-baseline.json",
@@ -517,6 +519,8 @@ function Get-Record {
         "tools/CodecBenchmark/Program.cs",
         "scripts/Measure-CodecTypedMatBenchmark.ps1",
         "scripts/Test-CodecBenchmarkHarness.ps1",
+        "scripts/Measure-CodecWriterNativeEvidence.ps1",
+        "scripts/Test-CodecWriterNativeEvidence.ps1",
         "tools/ScenarioBenchmark/ScenarioBenchmark.csproj",
         "tools/ScenarioBenchmark/Program.cs",
         "scripts/Test-ScenarioBenchmarkHarness.ps1",
@@ -979,7 +983,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 84
+            InvariantGuardCount = 85
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false
