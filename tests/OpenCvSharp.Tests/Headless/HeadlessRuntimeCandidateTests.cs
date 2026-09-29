@@ -3,6 +3,8 @@ using JYPPX.OpenCvSharp.Core;
 using JYPPX.OpenCvSharp.HighGui;
 using JYPPX.OpenCvSharp.ImgCodecs;
 using JYPPX.OpenCvSharp.VideoIO;
+using JYPPX.OpenCvSharp.Dnn;
+using DnnCv2 = JYPPX.OpenCvSharp.Dnn.Cv2;
 using Xunit.Abstractions;
 using HighGuiCv2 = JYPPX.OpenCvSharp.HighGui.Cv2;
 using ImgCodecsCv2 = JYPPX.OpenCvSharp.ImgCodecs.Cv2;
@@ -47,6 +49,9 @@ namespace JYPPX.OpenCvSharp.Tests.Headless
                     Assert.False(capture.Open("JYPPX-headless-missing-input.avi", VideoCaptureAPIs.Any));
                     Assert.False(capture.IsOpened);
                 }
+
+                AssertDeterministicUnavailable(() => DnnCv2.GetAvailableTargets(DnnBackend.OpenCV));
+                output.WriteLine("HEADLESS_DNN_STATUS=omitted-deterministic-unavailable");
 
                 output.WriteLine("HEADLESS_VIDEOIO_BACKENDS=" + DescribeBackends(VideoIORegistry.GetBackends()));
                 output.WriteLine("HEADLESS_VIDEOIO_CAMERA_BACKENDS=" + DescribeBackends(VideoIORegistry.GetCameraBackends()));

@@ -28,6 +28,7 @@ $project = Join-Path $repo 'tests/OpenCvSharp.Tests/OpenCvSharp.Tests.csproj'
 $results = [System.Collections.Generic.List[object]]::new()
 $videoioBackends = [System.Collections.Generic.List[string]]::new()
 $videoioCameraBackends = [System.Collections.Generic.List[string]]::new()
+$dnnStatuses = [System.Collections.Generic.List[string]]::new()
 $environmentNames = @('OPENCV_CSHARP_NATIVE_SMOKE','OPENCV_CSHARP_HEADLESS_SMOKE','DISPLAY','WAYLAND_DISPLAY','LD_LIBRARY_PATH','OPENCV_CSHARP_OPENCV_RUNTIME_ROOT')
 $savedEnvironment = @{}
 foreach ($name in $environmentNames) { $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
@@ -89,6 +90,7 @@ try {
         $results.Add($run.row)
         if ($run.output -match '(?m)^HEADLESS_VIDEOIO_BACKENDS=(.*)$') { $videoioBackends.Add($Matches[1].Trim()) }
         if ($run.output -match '(?m)^HEADLESS_VIDEOIO_CAMERA_BACKENDS=(.*)$') { $videoioCameraBackends.Add($Matches[1].Trim()) }
+        if ($run.output -match '(?m)^HEADLESS_DNN_STATUS=(.*)$') { $dnnStatuses.Add($Matches[1].Trim()) }
     }
 }
 finally {
@@ -110,7 +112,8 @@ $evidence = [ordered]@{
     environment = [ordered]@{ displayUnset = $true; waylandDisplayUnset = $true; ldLibraryPathUnset = $true; runtimeRootUnset = $true }
     frameworks = @($results)
     videoio = [ordered]@{ backends = [string]($videoioBackends -join '||'); cameraBackends = [string]($videoioCameraBackends -join '||'); missingFileOpen = 'returned-false' }
-    verifiedCases = @('HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path','HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path','HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path','codec PNG encode remains usable after failed HighGui calls','VideoIO missing-file open returns explicit false and disposes cleanly')
+    dnn = [ordered]@{ status = if (@($dnnStatuses | Where-Object { $_ -ceq 'omitted-deterministic-unavailable' }).Count -eq 2) { 'omitted-deterministic-unavailable' } else { 'unexpected' } }
+    verifiedCases = @('HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path','HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path','HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path','HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path','codec PNG encode remains usable after failed HighGui calls','VideoIO missing-file open returns explicit false and disposes cleanly','DNN target query is deterministically unavailable because Mini omits dnn')
     limitations = @('This candidate evidence covers the existing Mini runtime payload, whose native wrapper omits HighGui entrypoints; it does not create a new headless package identity.', 'Full headless requires a separately rebuilt wrapper/profile without HighGui and is intentionally pending.', 'The VideoIO result is a bounded missing-file negative case; camera/network backend availability and multi-distro consumer gates remain pending.')
 }
 $outputFullPath = if ([IO.Path]::IsPathRooted($OutputPath)) { [IO.Path]::GetFullPath($OutputPath) } else { [IO.Path]::GetFullPath((Join-Path $repo ($OutputPath -replace '/', [IO.Path]::DirectorySeparatorChar))) }
