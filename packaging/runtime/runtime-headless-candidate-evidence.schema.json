@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/runtime/runtime-headless-candidate-evidence.schema.json",
+  "title": "Headless runtime candidate negative smoke evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "candidateProfile", "candidatePackageIdentityAllowed", "runner", "runtimePackage", "environment", "frameworks", "verifiedCases", "limitations" ],
+  "properties": {
+    "$schema": { "const": "runtime-headless-candidate-evidence.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "candidate-partial" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "candidateProfile": { "const": "mini-headless-candidate" },
+    "candidatePackageIdentityAllowed": { "const": false },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "os", "architecture", "dotnet", "configuration" ],
+      "properties": {
+        "os": { "type": "string", "minLength": 1 },
+        "architecture": { "const": "x64" },
+        "dotnet": { "type": "string", "pattern": "^10\\.0\\.\\d+$" },
+        "configuration": { "const": "Release" }
+      }
+    },
+    "runtimePackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "packageFileName", "packageSha256", "nativeDllCount", "payload" ],
+      "properties": {
+        "packageFileName": { "const": "jyppx.opencv.runtime.win-x64.mini.5.0.0.nupkg" },
+        "packageSha256": { "const": "c4712ed62f34f31eacaaa4c51f84ee6003bf5bab3cfcca850d39c3b812628918" },
+        "nativeDllCount": { "const": 7 },
+        "payload": { "type": "array", "minItems": 7, "maxItems": 7 }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "displayUnset", "waylandDisplayUnset", "ldLibraryPathUnset", "runtimeRootUnset" ],
+      "properties": {
+        "displayUnset": { "const": true },
+        "waylandDisplayUnset": { "const": true },
+        "ldLibraryPathUnset": { "const": true },
+        "runtimeRootUnset": { "const": true }
+      }
+    },
+    "frameworks": {
+      "type": "array",
+      "const": [
+        { "targetFramework": "net8.0", "total": 1, "executed": 1, "passed": 1, "failed": 0, "skipped": 0 },
+        { "targetFramework": "net10.0", "total": 1, "executed": 1, "passed": 1, "failed": 0, "skipped": 0 }
+      ]
+    },
+    "verifiedCases": { "type": "array", "const": [ "HighGui NamedWindow deterministic missing-entrypoint or NOT_LINKED path", "HighGui DestroyWindow deterministic missing-entrypoint or NOT_LINKED path", "HighGui ImShow deterministic missing-entrypoint or NOT_LINKED path", "HighGui CreateTrackbar deterministic missing-entrypoint or NOT_LINKED path", "HighGui current UI framework deterministic missing-entrypoint or NOT_LINKED path", "codec PNG encode remains usable after failed HighGui calls" ] },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

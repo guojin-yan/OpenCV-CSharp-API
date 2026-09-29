@@ -293,6 +293,8 @@ function Get-Record {
         "packaging/runtime/runtime-generic-linux-arm64-preview-matrix.schema.json",
         "packaging/runtime/runtime-headless-profile-contract.json",
         "packaging/runtime/runtime-headless-profile-contract.schema.json",
+        "packaging/runtime/runtime-headless-candidate-evidence.json",
+        "packaging/runtime/runtime-headless-candidate-evidence.schema.json",
         "packaging/runtime/runtime-generic-linux-musl-feasibility.json",
         "packaging/runtime/runtime-generic-linux-musl-feasibility.schema.json",
         "packaging/runtime/runtime-distro-rid-graph.json",
@@ -377,6 +379,8 @@ function Get-Record {
         "scripts/Test-GenericLinuxArm64PreviewMatrix.ps1",
         "scripts/Test-GenericLinuxArm64PreviewPackageSurface.ps1",
         "scripts/Test-HeadlessRuntimeProfileContract.ps1",
+        "scripts/Measure-HeadlessCandidateEvidence.ps1",
+        "scripts/Test-HeadlessCandidateEvidence.ps1",
         "scripts/Test-GenericLinuxMuslFeasibilityContract.ps1",
         "scripts/Test-DomesticPlatformCertificationMatrix.ps1",
         "scripts/Test-OpenClTapiUmatContract.ps1",
@@ -995,7 +999,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 89
+            InvariantGuardCount = 90
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false

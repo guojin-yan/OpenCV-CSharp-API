@@ -225,6 +225,8 @@ function Get-ExpectedEvidencePaths {
         "packaging/runtime/runtime-generic-linux-arm64-preview-matrix.schema.json",
         "packaging/runtime/runtime-headless-profile-contract.json",
         "packaging/runtime/runtime-headless-profile-contract.schema.json",
+        "packaging/runtime/runtime-headless-candidate-evidence.json",
+        "packaging/runtime/runtime-headless-candidate-evidence.schema.json",
         "packaging/runtime/runtime-generic-linux-musl-feasibility.json",
         "packaging/runtime/runtime-generic-linux-musl-feasibility.schema.json",
         "packaging/runtime/runtime-distro-rid-graph.json",
@@ -310,6 +312,8 @@ function Get-ExpectedEvidencePaths {
         "scripts/Test-GenericLinuxArm64PreviewMatrix.ps1",
         "scripts/Test-GenericLinuxArm64PreviewPackageSurface.ps1",
         "scripts/Test-HeadlessRuntimeProfileContract.ps1",
+        "scripts/Measure-HeadlessCandidateEvidence.ps1",
+        "scripts/Test-HeadlessCandidateEvidence.ps1",
         "scripts/Test-GenericLinuxMuslFeasibilityContract.ps1",
         "scripts/Test-DomesticPlatformCertificationMatrix.ps1",
         "scripts/Test-OpenClTapiUmatContract.ps1",
@@ -626,7 +630,7 @@ function Test-Record {
 
     $expectedChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
     $sdkPolicyValid = ($Record.LocalValidation.SdkPolicy -eq ".NET 10 (any installed feature band)") -or ($Record.LocalValidation.ExactSdk -match '^10\.0\.\d+$')
-    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 89 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
+    Assert-True -List $List -Condition ($Record.LocalValidation.Status -eq "locally-validated" -and $Record.LocalValidation.InvariantGuardCount -eq 90 -and $sdkPolicyValid -and -not [bool]$Record.LocalValidation.PublicationAllowed -and (@($Record.LocalValidation.RequiredChecks) -join ",") -eq ($expectedChecks -join ",")) -Issue "Final closeout local validation state or check list drifted"
     Assert-True -List $List -Condition ($Record.Signing.Status -eq "repository-signing-pending" -and $Record.Signing.Strategy -eq "nuget.org-repository-signing" -and $Record.Signing.NormalizedInputRequired -and -not [bool]$Record.Signing.AuthorCertificateRequired -and -not [bool]$Record.Signing.PrivateKeyRequired -and -not [bool]$Record.Signing.PrivateKeyMaterialPresent -and $Record.Signing.ServiceIndex -eq "https://api.nuget.org/v3/index.json" -and $Record.Signing.ExpectedSignatureType -eq "Repository" -and $Record.Signing.ExpectedOwner -eq "GuojinYan" -and $Record.Signing.VerificationScript -eq "scripts/Test-NuGetRepositorySignedPackage.ps1" -and $Record.Signing.Verification -eq "post-publication-required") -Issue "Final closeout repository-signing state drifted"
     Assert-True -List $List -Condition ($Record.Sbom.Status -eq "not-ready" -and $Record.Sbom.Format -eq "SPDX-2.3" -and $Record.Sbom.Generator -eq "scripts/New-ReleasePackageSbom.ps1" -and $Record.Sbom.Guard -eq "scripts/Test-ReleasePackageSbom.ps1" -and [bool]$Record.Sbom.Deterministic -and -not [bool]$Record.Sbom.FinalCandidateDocumentGenerated -and $Record.Sbom.Verification -eq "generator-verified-final-candidate-not-generated") -Issue "Final closeout SBOM state must retain a verified generator without claiming final-candidate output"
     Assert-True -List $List -Condition ($Record.Approval.Status -eq "not-approved" -and $Record.Approval.Reviewer -eq "automated-local-preflight" -and $Record.Approval.Approver -eq "unassigned" -and $Record.Approval.EvidenceKind -eq "local-source-and-offline-fixture" -and -not [bool]$Record.Approval.RemoteMutationAllowed) -Issue "Final closeout approval state drifted"

@@ -51,3 +51,5 @@ Rollback is deletion of the candidate artifact and its evidence plus removal of 
 ## Consequences
 
 Consumers can target servers without installing a GUI stack while retaining the existing managed API shape. The cost is an additional profile-specific ABI, dependency, and VideoIO evidence chain. Until that chain is automated and independently reproduced, the repository intentionally documents the profile without publishing it.
+
+The existing Mini runtime provides a bounded candidate negative smoke on Windows x64: with `DISPLAY`, `WAYLAND_DISPLAY`, `LD_LIBRARY_PATH`, and the repository runtime-root variable unset, HighGui `NamedWindow`, `DestroyWindow`, `ImShow`, trackbar creation, and backend-query calls take the deterministic missing-entrypoint/`NOT_LINKED` path, and PNG encode remains usable afterward on net8.0 and net10.0. The evidence is recorded in [`runtime-headless-candidate-evidence.json`](../../packaging/runtime/runtime-headless-candidate-evidence.json). It is partial evidence only; a Full headless candidate requires a wrapper rebuilt without HighGui and still needs VideoIO, DNN, package, and multi-distro consumer gates.

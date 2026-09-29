@@ -5,6 +5,7 @@ namespace JYPPX.OpenCvSharp.Tests
     internal static class TestEnvironment
     {
         internal const string NativeSmokeVariable = "OPENCV_CSHARP_NATIVE_SMOKE";
+        internal const string HeadlessSmokeVariable = "OPENCV_CSHARP_HEADLESS_SMOKE";
         internal const string UnstableNativeSmokeVariable = "OPENCV_CSHARP_UNSTABLE_NATIVE_SMOKE";
         internal const string HighGuiSmokeVariable = "OPENCV_CSHARP_HIGHGUI_SMOKE";
         internal const string FaceCascadeVariable = "OPENCV_CSHARP_FACE_CASCADE";
@@ -22,6 +23,11 @@ namespace JYPPX.OpenCvSharp.Tests
         internal static bool IsNativeSmokeEnabled()
         {
             return IsFlagValueEnabled(GetNativeSmokeVariable());
+        }
+
+        internal static bool IsHeadlessSmokeEnabled()
+        {
+            return IsFlagValueEnabled(GetVariable(HeadlessSmokeVariable));
         }
 
         internal static string? GetUnstableNativeSmokeVariable()

@@ -281,6 +281,11 @@ $guards = @(
         Arguments = @("-RepositoryRoot", $repo)
     },
     [pscustomobject]@{
+        Name = "Headless candidate evidence"
+        Script = Join-Path $repo "scripts/Test-HeadlessCandidateEvidence.ps1"
+        Arguments = @("-RepositoryRoot", $repo)
+    },
+    [pscustomobject]@{
         Name = "Generic Linux musl feasibility contract"
         Script = Join-Path $repo "scripts/Test-GenericLinuxMuslFeasibilityContract.ps1"
         Arguments = @("-RepositoryRoot", $repo)
