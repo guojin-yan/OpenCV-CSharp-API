@@ -1,12 +1,12 @@
 {
   "SchemaVersion": 2,
   "RecordKind": "local-release-candidate-closeout",
-  "CandidateId": "local-closeout/sha256/ada60fe1dcb530f9",
-  "SourceIdentity": "sha256:ada60fe1dcb530f9905394c5b259cf7a389c352d760f3034e2ea51349f44ce01",
+  "CandidateId": "local-closeout/sha256/e0d8051c5642e644",
+  "SourceIdentity": "sha256:e0d8051c5642e6449827181010e7d8ebd6facd37839d711589b4ed1eb7ac6119",
   "OpenCvRevision": "5.0.0",
   "SourceSet": {
-    "FileCount": 1803,
-    "Sha256": "ada60fe1dcb530f9905394c5b259cf7a389c352d760f3034e2ea51349f44ce01",
+    "FileCount": 1805,
+    "Sha256": "e0d8051c5642e6449827181010e7d8ebd6facd37839d711589b4ed1eb7ac6119",
     "HashPolicy": "UTF-8 text normalized to LF; non-text bytes hashed raw; closeout record excluded"
   },
   "PackageMatrix": {
@@ -858,8 +858,8 @@
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.json",
-      "Sha256": "a5ea76fb31955432c04a19ab1954c2aa0f7bc51c2deafcbb94248ce4a06e8eb7",
-      "Length": 6376
+      "Sha256": "6056b8730867a3b8ece22ab4a71559ab718c7b0de4d289837fba7b95de5bf04d",
+      "Length": 6465
     },
     {
       "Path": "compatibility/v5.0.1-change-ledger.schema.json",
@@ -1043,8 +1043,8 @@
     },
     {
       "Path": "docs/articles/native-aot-trim-single-file-adr.md",
-      "Sha256": "5b91ef021a70bc03f9d399a97072a48215e7e2119122ccc5bae5349870d1a5a1",
-      "Length": 4477
+      "Sha256": "48dac8fe19e1771f3be4474c29a9a84cae1ea7f037a8a8271cc045dc64a8118e",
+      "Length": 5167
     },
     {
       "Path": "docs/articles/objdetect-structured-parity-guide.md",
@@ -1313,17 +1313,17 @@
     },
     {
       "Path": "packaging/performance/native-aot-smoke-evidence.json",
-      "Sha256": "05ca0d86ae26a728fa817d47feeb701807549c081d36d5bb69d760456ce06fc3",
-      "Length": 1114
+      "Sha256": "644f857e1dc8837cd072a5a0112940a290566fddefc95ba58e889efe3990a911",
+      "Length": 4524
     },
     {
       "Path": "packaging/performance/native-aot-smoke-evidence.schema.json",
-      "Sha256": "f9db9eefbb34b509717d248be51e9b153010f4a7827d86ddcdebeb58f0c77cd4",
-      "Length": 1911
+      "Sha256": "3d32896f0c54aa123ec39082f46542f5c8e013f6adf0f296b6d3782f2e3bc3b2",
+      "Length": 3207
     },
     {
       "Path": "packaging/performance/native-aot-trim-warning-ledger.json",
-      "Sha256": "e81027baa9f35f12a08df3a571f07a779255e841ebe5b947f72f3653b10faaa9",
+      "Sha256": "fccd15b4b7e1bb19e0078f1f4387177d8e76e9290f0b7b8e2d1f8dc7f8fbf4f3",
       "Length": 1353
     },
     {
@@ -1662,6 +1662,11 @@
       "Length": 9610
     },
     {
+      "Path": "scripts/Measure-NativeAotSmokeEvidence.ps1",
+      "Sha256": "a648cc0dd7d57beacbe0374de652d5afefd7e9c4c4f8091bcddc9f741c48b3d8",
+      "Length": 8879
+    },
+    {
       "Path": "scripts/Measure-TypedMatNativeLifetime.ps1",
       "Sha256": "aaac73f605bd2be2e8afc30259dafb4ac553302b876aba13d95faeb50bf25918",
       "Length": 10357
@@ -1688,8 +1693,8 @@
     },
     {
       "Path": "scripts/New-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "58cb8e3bbb4a28fd7687bfcb1fcc747323aefe6785be8f8ffc870e6cee12a39b",
-      "Length": 70206
+      "Sha256": "aa627c92b4958a91614381373c8e560ab3f43df551e7e093a37938ca34085a13",
+      "Length": 70311
     },
     {
       "Path": "scripts/New-ReleasePackageSbom.ps1",
@@ -1888,8 +1893,13 @@
     },
     {
       "Path": "scripts/Test-NativeAotSmoke.ps1",
-      "Sha256": "41fa6b14dbe06c220668fbced2bcbe9af6b3e75e18509b18d0121c5d15b31053",
-      "Length": 10028
+      "Sha256": "7280d568a3d91c97048268f6d7c810b36ee034903ded957d966076b603c4edaf",
+      "Length": 11307
+    },
+    {
+      "Path": "scripts/Test-NativeAotSmokeEvidence.ps1",
+      "Sha256": "06d00f7ac261e02a6ebc000f21d3c45b48ceccf1e97fd7268e1eed941b73bbb0",
+      "Length": 4608
     },
     {
       "Path": "scripts/Test-NativeAotTrimWarningLedger.ps1",
@@ -1958,8 +1968,8 @@
     },
     {
       "Path": "scripts/Test-ReleaseCandidateFinalCloseout.ps1",
-      "Sha256": "6186f6559ac574fc45e245c29a36730448a4a1dbede3828c708f620d5a56bd6b",
-      "Length": 67808
+      "Sha256": "5d08d3ee437b0e1e57b94c087981e51854e390aab425b43c66f5e175a521041b",
+      "Length": 67913
     },
     {
       "Path": "scripts/Test-ReleaseCandidateProvenance.ps1",
@@ -1968,7 +1978,7 @@
     },
     {
       "Path": "scripts/Test-ReleaseChangeControlRecord.ps1",
-      "Sha256": "20ec63a4c6293fd9f2b7321ad0a83c466a89c76fd927c90283ce56802b60fdff",
+      "Sha256": "ce46eaac77cab09bd839d04696e935ccce833b1e635c9dff0c35980fe33a4ddb",
       "Length": 45784
     },
     {
@@ -2308,8 +2318,8 @@
     },
     {
       "Path": "tools/AotSmoke/Program.cs",
-      "Sha256": "7aade539a69ade73d4ec0222367ac032a7cd4c3076586c41fe882e5854812bfa",
-      "Length": 1589
+      "Sha256": "cde3001bfd51d1dc26ef3b721c38e2ec7061f972be2363b74f038874cb7b8e52",
+      "Length": 2398
     },
     {
       "Path": "tools/Calib3DUpstreamMap/Calib3DUpstreamMap.csproj",
@@ -2559,7 +2569,7 @@
   ],
   "LocalValidation": {
     "Status": "locally-validated",
-    "InvariantGuardCount": 86,
+    "InvariantGuardCount": 87,
     "RequiredChecks": [
       "actionlint-1.7.12",
       "api-abi-baseline",
