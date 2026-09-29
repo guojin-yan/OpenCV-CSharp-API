@@ -1,0 +1,171 @@
+{
+  "$schema": "typed-mat-owner-lifetime-matrix.schema.json",
+  "schemaVersion": 1,
+  "status": "reviewed",
+  "sourceCommit": "a27d0e01ac807e83e67f1527d5dc0627b2eb6b0a",
+  "policy": {
+    "previewStatus": "conditional-preview",
+    "stablePromotionAllowed": false,
+    "ownerModel": "borrowed-view-retains-mat-owner",
+    "nativeLifetimeEvidenceFrameworks": [
+      "net8.0",
+      "net10.0"
+    ],
+    "compileOnlyFrameworks": [
+      "netcoreapp3.1",
+      "net5.0",
+      "net6.0",
+      "net7.0",
+      "net9.0"
+    ],
+    "legacyExcludedFrameworks": [
+      "net46",
+      "net461",
+      "net462",
+      "net47",
+      "net471",
+      "net472",
+      "net48",
+      "net481"
+    ]
+  },
+  "frameworks": [
+    {
+      "framework": "net46",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net461",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net462",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net47",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net471",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net472",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net48",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "net481",
+      "surface": "legacy-excluded",
+      "compileEvidence": "release-build",
+      "ownerReview": "not-applicable",
+      "lifetimeEvidence": "not-applicable",
+      "rationale": "MatView and ReadOnlyMatView are excluded by NETCOREAPP3_1_OR_GREATER; existing byte and typed row APIs remain available."
+    },
+    {
+      "framework": "netcoreapp3.1",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "reviewed",
+      "lifetimeEvidence": "compile-only",
+      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+    },
+    {
+      "framework": "net5.0",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "reviewed",
+      "lifetimeEvidence": "compile-only",
+      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+    },
+    {
+      "framework": "net6.0",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "reviewed",
+      "lifetimeEvidence": "compile-only",
+      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+    },
+    {
+      "framework": "net7.0",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "reviewed",
+      "lifetimeEvidence": "compile-only",
+      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+    },
+    {
+      "framework": "net8.0",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "native-verified",
+      "lifetimeEvidence": "native-verified",
+      "rationale": "Conditional Span preview with native owner/header lifetime cases verified by MatViewTests on the exact full runtime package."
+    },
+    {
+      "framework": "net9.0",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "reviewed",
+      "lifetimeEvidence": "compile-only",
+      "rationale": "Conditional Span preview compiles on this TFM; native owner/lifetime execution remains unmeasured and cannot promote the preview."
+    },
+    {
+      "framework": "net10.0",
+      "surface": "span-preview",
+      "compileEvidence": "release-build",
+      "ownerReview": "native-verified",
+      "lifetimeEvidence": "native-verified",
+      "rationale": "Conditional Span preview with native owner/header lifetime cases verified by MatViewTests on the exact full runtime package."
+    }
+  ],
+  "summary": {
+    "frameworkCount": 15,
+    "legacyExcludedCount": 8,
+    "compileOnlyCount": 5,
+    "nativeVerifiedCount": 2,
+    "stablePromotionAllowed": false
+  },
+  "evidence": {
+    "targetFrameworkCompilation": "packaging/performance/typed-mat-target-framework-evidence.json",
+    "nativeLifetime": "packaging/performance/typed-mat-native-lifetime-evidence.json",
+    "benchmark": "packaging/performance/codec-typed-mat-benchmark-evidence.json"
+  },
+  "limitations": [
+    "All 15 package target frameworks have Release compilation evidence; legacy frameworks intentionally exclude the Span preview surface.",
+    "Native owner/lifetime execution is verified only on Windows x64 net8.0 and net10.0 with the exact full runtime package.",
+    "The matrix keeps MatView and ReadOnlyMatView conditional preview contracts; stable promotion remains false until the unmeasured preview TFMs and broader runner review are closed."
+  ]
+}
