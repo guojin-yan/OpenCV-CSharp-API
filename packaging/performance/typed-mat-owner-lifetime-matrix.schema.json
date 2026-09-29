@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/guojin-yan/OpenCV-CSharp-API/blob/opencv5.x/packaging/performance/typed-mat-owner-lifetime-matrix.schema.json",
+  "title": "Typed Mat owner and lifetime target-framework review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [ "$schema", "schemaVersion", "status", "sourceCommit", "policy", "frameworks", "summary", "evidence", "limitations" ],
+  "properties": {
+    "$schema": { "const": "typed-mat-owner-lifetime-matrix.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "status": { "const": "reviewed" },
+    "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "previewStatus", "stablePromotionAllowed", "ownerModel", "nativeLifetimeEvidenceFrameworks", "compileOnlyFrameworks", "legacyExcludedFrameworks" ],
+      "properties": {
+        "previewStatus": { "const": "conditional-preview" },
+        "stablePromotionAllowed": { "const": false },
+        "ownerModel": { "const": "borrowed-view-retains-mat-owner" },
+        "nativeLifetimeEvidenceFrameworks": { "const": [ "net8.0", "net10.0" ] },
+        "compileOnlyFrameworks": { "const": [ "netcoreapp3.1", "net5.0", "net6.0", "net7.0", "net9.0" ] },
+        "legacyExcludedFrameworks": { "const": [ "net46", "net461", "net462", "net47", "net471", "net472", "net48", "net481" ] }
+      }
+    },
+    "frameworks": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [ "framework", "surface", "compileEvidence", "ownerReview", "lifetimeEvidence", "rationale" ],
+        "properties": {
+          "framework": { "type": "string", "enum": [ "net46", "net461", "net462", "net47", "net471", "net472", "net48", "net481", "netcoreapp3.1", "net5.0", "net6.0", "net7.0", "net8.0", "net9.0", "net10.0" ] },
+          "surface": { "enum": [ "legacy-excluded", "span-preview" ] },
+          "compileEvidence": { "const": "release-build" },
+          "ownerReview": { "enum": [ "not-applicable", "reviewed", "native-verified" ] },
+          "lifetimeEvidence": { "enum": [ "not-applicable", "compile-only", "native-verified" ] },
+          "rationale": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "frameworkCount", "legacyExcludedCount", "compileOnlyCount", "nativeVerifiedCount", "stablePromotionAllowed" ],
+      "properties": {
+        "frameworkCount": { "const": 15 },
+        "legacyExcludedCount": { "const": 8 },
+        "compileOnlyCount": { "const": 5 },
+        "nativeVerifiedCount": { "const": 2 },
+        "stablePromotionAllowed": { "const": false }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [ "targetFrameworkCompilation", "nativeLifetime", "benchmark" ],
+      "properties": {
+        "targetFrameworkCompilation": { "const": "packaging/performance/typed-mat-target-framework-evidence.json" },
+        "nativeLifetime": { "const": "packaging/performance/typed-mat-native-lifetime-evidence.json" },
+        "benchmark": { "const": "packaging/performance/codec-typed-mat-benchmark-evidence.json" }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

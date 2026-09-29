@@ -323,6 +323,8 @@ function Get-Record {
         "packaging/performance/native-aot-trim-warning-ledger.schema.json",
         "packaging/performance/typed-mat-native-lifetime-evidence.json",
         "packaging/performance/typed-mat-native-lifetime-evidence.schema.json",
+        "packaging/performance/typed-mat-owner-lifetime-matrix.json",
+        "packaging/performance/typed-mat-owner-lifetime-matrix.schema.json",
         "packaging/performance/typed-mat-target-framework-evidence.json",
         "packaging/performance/typed-mat-target-framework-evidence.schema.json",
         "packaging/video/runtime-async-video-contract.json",
@@ -541,6 +543,8 @@ function Get-Record {
         "scripts/Test-TypedMatTargetFrameworks.ps1",
         "scripts/Measure-TypedMatNativeLifetime.ps1",
         "scripts/Test-TypedMatNativeLifetimeEvidence.ps1",
+        "scripts/Measure-TypedMatOwnerLifetimeMatrix.ps1",
+        "scripts/Test-TypedMatOwnerLifetimeMatrix.ps1",
         "scripts/Test-AsyncVideoOwnerContract.ps1",
         "scripts/Test-DnnDiagnosticsContract.ps1",
         "scripts/Test-ImageFormatPolicy.ps1",
@@ -987,7 +991,7 @@ function Get-Record {
         EvidenceReferences = $evidence
         LocalValidation = [ordered]@{
             Status = "locally-validated"
-            InvariantGuardCount = 87
+            InvariantGuardCount = 88
             RequiredChecks = @("actionlint-1.7.12", "api-abi-baseline", "docfx-2.78.5", "git-diff-check", "repository-powershell-ast", "workflow-bash-syntax", "workflow-powershell-syntax")
             SdkPolicy = ".NET 10 (any installed feature band)"
             PublicationAllowed = $false
